@@ -1,0 +1,20 @@
+{
+  "base_sha": "85fd9a4544fd8813184a0c667867e85e51e27ddf",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T13:54:00.066207+00:00",
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does the parameterized kernel with bind-time prefix extraction save total cost per successful task in an end-to-end product economics measurement (C-PRODUCT-ECON gate), or does the leaf-path URL-as-string heuristic fail to generalize to structurally different URL patterns (query strings, multi-segment variation) requiring a more robust parameter induction approach?",
+  "lane": "product",
+  "origin_github_run_id": "34485517221",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34420092879",
+    "path": "research/experiments/EXP-PRODUCT-34420092879/handoff.json",
+    "sha256": "76e5e988f76f1184f72b33b0793d2adfaf03dcd129b2a270c76cee055ae403cd"
+  },
+  "reason": "pulse",
+  "request_hash": "cc0ecd54a14e22368c95024e8d5a50ca46618c222461faa5e5c2a9e5779981fe",
+  "request_id": "87db1e32d59a01803f557bbe",
+  "schema_version": 1
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Falsified for DOM structural features (discretized element_count, tree_depth, interactive_density) as state representation on TodoMVC React/Vue degenerate demos: DOM-feature PMI is significantly >0 (p=0.001) but -0.073 and -0.006 bits worse than URL-only on the two sites tested. This specific structural representation does not improve predictive state beyond URL on these sites. However, the broader C-WEB-DYNAMICS hypothesis remains open: the experiment does not test production SPAs with richer DOM evolution, accessibility tree representations, visual layout, or learned state abstractions. Protocol violations (site representativeness, leakage misclassification, in-sample discretization) limit generalization; the hypothesis about DOM features on genuine production SPAs is untested, not rejected."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the accessibility tree—a semantically richer structural representation capturing element roles, relationships, and interaction affordances rather than raw DOM counts—provide predictive state information beyond URL on genuine SPA/form-heavy sites where URL structure is ambiguous?",
+  "reason": "Decision grounded in frozen spec decision_rule: condition 1 (DOM > URL by >=0.1 bits on >=2/3 sites) fails on 0/2 sites (React -0.073, Vue -0.006 bits). Conditions 2-5 pass (DOM PMI sig >0 on 2/2, positive control PMI=1.271 p=0.001, null control p=0.631, data sufficiency 76/78 non-leakage). Audit REVISE finding accepted: site representativeness (TodoMVC is degenerate), leakage misclassification (33-38% on hash-SPA vs parent established 100%), in-sample discretization, and invalid entropy rates compromise generalization. Claim ceiling bounded to TodoMVC degenerate demos only per audit claim_ceiling. Product consequence negative: DOM structural features should not replace URL-based state identity. C-WEB-DYNAMICS remains HYPOTHESIS — a bounded falsification on one representation on degenerate demos does not close the domain. Next question targets a materially orthogonal level of description (accessibility tree) rather than repeating DOM features on different sites.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34524411213/spec.json decision_rule falsifier",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.decision_condition_1_dom_gt_url=false metrics.decision_condition_1_sites_passing=0 metrics.decision_survives=false",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_vs_url_improvement_bits_react=-0.0728 metrics.dom_vs_url_improvement_bits_vue=-0.0055",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_pmi_react=0.5975 metrics.url_pmi_react=0.6703 metrics.dom_pmi_vue=0.7453 metrics.url_pmi_vue=0.7508",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.dom_perm_p_react=0.001 metrics.dom_perm_p_vue=0.001",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json controls.positive_control_synthetic_spa.result=PASS controls.null_control_shuffled_synthetic.result=PASS",
+    "research/experiments/EXP-PHYSICS-34524411213/result.json metrics.data_sufficient_react=true metrics.data_sufficient_vue=true metrics.n_non_leakage_react=76 metrics.n_non_leakage_vue=78",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json status=REVISE producer_claim_supported=false claim_ceiling",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json validity_findings site_representativeness leakage_misclassification discretization_train_leakage",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json required_fixes site_selection leakage_classification discretization entropy positive_control",
+    "research/experiments/EXP-PHYSICS-34524411213/audit.json recomputed_metrics dom_vs_url_improvement_bits_react=-0.0728 dom_vs_url_improvement_bits_vue=-0.0055",
+    "research/experiments/EXP-PHYSICS-34524411213/provenance.json data_sources TodoMVC React Vue",
+    "research/experiments/EXP-PHYSICS-34524411213/report.md decision_table scope_limitations",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results.todomvc_react.pmi dom_vs_url permutation",
+    "research/experiments/EXP-PHYSICS-34524411213/raw_results.json site_results.todomvc_vue.pmi dom_vs_url permutation",
+    "research/claims/registry.json C-WEB-DYNAMICS status=HYPOTHESIS owner_lanes=physics,frontier"
+  ]
+}

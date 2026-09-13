@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34485517221",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "What combination of kernel fixes (suffix extraction guard, similarity threshold, multi-slot decomposition) is required to achieve binding correctness across all URL classes tested here, and can these fixes be validated against actual kernel.py distill_parameterized and _bind with prefixes before proceeding to C-PRODUCT-ECON measurement?",
+  "why_next": "The rfind('/') leaf-path URL-as-string heuristic is falsified for structurally different URL patterns in this synthetic setting. Three bounded failure modes require targeted kernel fixes before any product economics measurement can proceed: (1) suffix extraction corruption on query-string patterns where training values share trailing characters, (2) over-parameterization of distinct URLs sharing short prefixes (no similarity threshold), and (3) single-leaf architectural limitation preventing multi-slot URL decomposition. Each failure mode has a clear fix path. The next experiment should implement and validate these fixes against actual src/spider/kernel.py, then re-run the 7 conditions to confirm they pass, before committing to C-PRODUCT-ECON economics measurement.",
+  "carry_forward": {
+    "established": [
+      "C2 RESOLVED WITHOUT REGRESSIONS: Bind-time slot-level prefix extraction works for path-prefix patterns in synthetic settings. Template retains full prefix, slot_prefixes stored, full-value triggers prefix stripping at bind-time. binding_accuracy=1.0 on established patterns. Evidence: EXP-PRODUCT-34420092879 raw_evidence.json, audit.json recomputed 34/34",
+      "SINGLE-SLOT SYNTHETIC CORRECTNESS for 4 URL classes: path-prefix (P1), multi-param query with distinct training values (G2), deep path (G3), path+query hybrid (G5). Binding_accuracy=1.0 on unseen values when training values share no common suffix. Evidence: EXP-PRODUCT-34485517221 raw_evidence.json P1/G2/G3/G5",
+      "NULL CONTROLS PASS from parent: E1 (pattern absence, slot_count=0), E2 (single observation, slot_count=0). No parameterization hallucination on well-formed negative cases. Evidence: EXP-PRODUCT-34420092879 raw_evidence.json controls.E1/E2",
+      "LITERAL BASELINE CONFIRMED: B_LITERAL fail_rate=1.0 confirms parameterized induction is necessary. Evidence: EXP-PRODUCT-34420092879 raw_evidence.json baselines.B_LITERAL"
+    ],
+    "rejected": [
+      "Hypothesis that rfind('/') generalizes to all structurally different URL patterns: FALSIFIED-IN-SETTING (EXP-PRODUCT-34485517221). Three failure modes: suffix corruption (G1), multi-slot limitation (G4), over-parameterization (N1). Evidence: verdict.json, audit.json falsifier_triggered=true",
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED (parent EXP-PRODUCT-34282620394, 4/9 regressions). Evidence: parent handoff carry_forward.rejected",
+      "_bind() prefix-strip with full template prefix: FALSIFIED (parent EXP-PRODUCT-34195008089). Evidence: parent handoff carry_forward.rejected",
+      "C-PARAM-INHERIT is product-ready: NOT ACHIEVED. Kernel integration remains EXPERIMENTAL; this experiment falsifies generalization to structurally different URLs. Evidence: verdict.json claim_updates, audit.json claim_ceiling"
+    ],
+    "unknown": [
+      "Whether fixing suffix extraction (excluding spurious common suffixes) would restore G1 without breaking VALUE CONTRACT from EXP-PRODUCT-34282620394. Evidence: audit.json unresolved, result.json unresolved",
+      "Whether a Jaccard/similarity threshold or host-aware guard can prevent N1-type over-parameterization while preserving P1/G2/G3/G5. Evidence: audit.json unresolved",
+      "Whether leaf-path model can be extended to multi-slot URL induction via URL parsing without breaking single-leaf abstraction, or whether C-PARAM-INHERIT must remain single-slot. Evidence: audit.json unresolved, result.json unresolved",
+      "Whether empty slot_prefixes for P1/G3/G5 (observed '' vs expected 'users/'/'repos/main/issues/') is a correctness failure or representational artifact (binding succeeds via template prefix). Evidence: audit.json V1_DECISION_RULE_MASKS_SLOT_PREFIX_ERROR",
+      "End-to-end product economics (C-PRODUCT-ECON): does the parameterized kernel save total cost per successful task? Still unmeasured. Evidence: parent handoff carry_forward.unknown",
+      "Real-browser external validity: all measurements are deterministic synthetic with zero model/browser/network calls. Evidence: provenance.json environment.model_calls=0",
+      "Actual kernel.py behavior vs reimplementation: run_experiment.py is standalone copy, not product kernel; models.py lacks slot_prefixes field in production. Evidence: audit.json V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL, provenance.json code_version",
+      "Real-world prevalence of G1-type suffix collisions in API query values. Evidence: result.json unresolved"
+    ],
+    "do_not_assume": [
+      "C-PARAM-INHERIT is product-ready or deployable — kernel correctness on 4/7 synthetic conditions does not imply product viability. Real-browser validation and economics measurement are required gates. Evidence: verdict.json promote_to_product=false, audit.json claim_ceiling",
+      "The 4 passing conditions represent comprehensive coverage — they test single-slot patterns only, with deterministic data, no browser noise, and favorable training value distributions. Evidence: result.json validity_notes, provenance.json environment",
+      "Binding via template prefix is equivalent to correct slot_prefix semantics — P1/G3/G5 produce empty slot_prefixes ('') but bind correctly because the full template contains the prefix. This masks V3_REPRESENTATION_LOSS. Evidence: audit.json V1_DECISION_RULE_MASKS_SLOT_PREFIX_ERROR",
+      "run_experiment.py results transfer to actual kernel.py — the reimplementation ignores the prefixes dict that kernel.py _bind uses for VALUE CONTRACT stripping. Evidence: audit.json V2_SUBSTRATE_REIMPLEMENTATION_NOT_KERNEL, provenance.json code_version",
+      "N1 failure represents algorithmic over-parameterization — N1 training URLs share 'https://api.' prefix; the control is misdesigned (does not test truly disjoint URLs). Evidence: audit.json V4_NULL_CONTROL_MISDESIGNED",
+      "G4 failure is a suffix bug rather than architectural limitation — leaf-path model by design treats URL as single leaf, cannot split into >2 parameter slots. Evidence: audit.json V5_G4_CONTRIVED_UNSEEN_VALUES"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34485517221/result.json (producer: MIXED, 4/7 pass, G1/G4/N1 failed)",
+    "research/experiments/EXP-PRODUCT-34485517221/audit.json (REVISE, producer_claim_supported=false, V1-V6, falsifier_triggered=true, claim_ceiling MIXED-BOUNDED)",
+    "research/experiments/EXP-PRODUCT-34485517221/raw_evidence.json (7 conditions, per-condition metrics, slot_prefixes, templates, binding results)",
+    "research/experiments/EXP-PRODUCT-34485517221/run_experiment.py (standalone reimplementation, _find_common_prefix_suffix, _bind without prefixes)",
+    "research/experiments/EXP-PRODUCT-34485517221/provenance.json (code_version divergence, environment model_calls=0)",
+    "src/spider/kernel.py (distill_parameterized, _bind with prefixes dict — must be used for fix validation)",
+    "src/spider/models.py (Mechanism model, slot_prefixes field — production code diverges from reimplementation)",
+    "research/experiments/EXP-PRODUCT-34420092879/handoff.json (parent: V3_REPRESENTATION_LOSS, C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON unmeasured)",
+    "research/claims/registry.json (C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34485517221/verdict.json (FALSIFIED-IN-SETTING, claim_updates C-PARAM-INHERIT FALSIFIED-IN-SETTING / C-PRODUCT-ECON BLOCKED)",
+    "research/experiments/EXP-PRODUCT-34485517221/spec.json (hypothesis, falsifier 3 clauses, decision_rule, 7 conditions)",
+    "research/experiments/EXP-PRODUCT-34485517221/result.json (MIXED, 4/7 pass, slot_prefixes empty for P1/G3/G5, G1 suffix corruption, G4 single-leaf, N1 over-parameterize)",
+    "research/experiments/EXP-PRODUCT-34485517221/audit.json (REVISE, V1-V6, recomputed metrics, falsifier_triggered=true, claim_ceiling MIXED-BOUNDED synthetic only)",
+    "research/experiments/EXP-PRODUCT-34485517221/raw_evidence.json (per-condition raw data: P1/G2/G3/G5 pass, G1/G4/N1 fail, slot_prefixes, templates, binding results)",
+    "research/experiments/EXP-PRODUCT-34485517221/provenance.json (standalone reimplementation, no kernel.py execution, models.py divergence)",
+    "research/experiments/EXP-PRODUCT-34420092879/handoff.json (parent established: C2 resolved, 10/10, mixed conventions; rejected: distill-time stripping, _bind prefix-strip; unknown: C-PRODUCT-ECON, real-browser validity)"
+  ],
+  "recommended_action": "Product lane: implement three bounded kernel fixes against actual src/spider/kernel.py: (1) suffix extraction guard — exclude single-character or non-structural common suffixes from template construction to prevent G1-type corruption; (2) similarity/Jaccard threshold or host-awareness gate — prevent parameterization of URLs sharing short prefixes from different hosts to prevent N1-type over-parameterization; (3) decide on multi-slot support — either extend leaf-path model via URL path-segment parsing to support >1 varying slot, or document single-slot as bounded scope and redesign multi-segment test expectations. After fixes, re-run the 7 conditions from EXP-PRODUCT-34485517221 against actual kernel.py distill_parameterized and _bind with prefixes to validate binding correctness. Do not proceed to C-PRODUCT-ECON economics measurement until at least fixes (1) and (2) pass re-validation and slot_prefixes are non-empty where expected (P1: 'users/', G3: 'repos/main/issues/', G5: 'users/')."
+}

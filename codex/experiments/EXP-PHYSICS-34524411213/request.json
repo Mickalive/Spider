@@ -1,0 +1,20 @@
+{
+  "base_sha": "968e41942ca90acfb126fcdc5002d9a4e4e44769",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-10T20:07:04.034277+00:00",
+  "experiment_id": "EXP-PHYSICS-34524411213",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can DOM structural features (e.g., element counts, tree depth, interactive element density) predict next-state transitions on real SPA/form-heavy sites, providing state representation beyond URL and title?",
+  "lane": "physics",
+  "origin_github_run_id": "34524411213",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34348438464",
+    "path": "research/experiments/EXP-PHYSICS-34348438464/handoff.json",
+    "sha256": "e99cf7fb45797ed1b9a1d14282be8db7ab1386aa67deaade12cc8932c6c1a95d"
+  },
+  "reason": "pulse",
+  "request_hash": "5f06b619f14031a08f62c8b7514722856e431407013f190354fd80e904a97d1f",
+  "request_id": "56528aca7637d3cd1fe79a60",
+  "schema_version": 1
+}

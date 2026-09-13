@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34377576886",
+  "lane": "intel",
+  "decision": "REVISE",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "BLOCKED",
+      "reason": "Yield calibration remains unresolved. Heuristic 0.65 is falsified (60.7pp CDP, 27pp locatable), but denominator ambiguity (CDP 2296 vs locatable 258) makes it impossible to determine whether the fragment model itself is broken or whether the heuristic used a different element-counting convention. Mind2Web fails S4 diversity (73 < 100 websites). N=2 pilot on identical Magento review pages cannot generalize to 192 shopping tasks or 6 site types. Requires: (a) resolve denominator ambiguity, (b) measure 8-10 randomized tasks across page types, (c) measure additional site types."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "BLOCKED",
+      "reason": "Same denominator ambiguity and sample-size limitation as C-CROSSSITE. The CDP-vs-locatable denominator determines whether the observation pipeline preserves enough interactive elements for LLM inheritance testing. Under locatable denominator (0.38), the yield may be sufficient; under CDP (0.0427), it is not. This must be resolved before C-LLM-INHERIT can be evaluated."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "BLOCKED",
+      "reason": "Product economics depend on fragment yield. The 0.0427 CDP yield would imply catastrophic fragment loss; the 0.38 locatable yield may be workable. Until denominator is resolved and yield is measured across site types, product economics cannot be assessed."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "What is the correct yield denominator for SPIDER fragment model — CDP accessibility tree node count (2296) or Playwright locatable element count (258)? This must be resolved by (a) mapping heuristic Method1's 150-element shopping model to either denominator, and (b) measuring yield across 8-10 randomized shopping tasks (product-listing, detail, cart, checkout) with both denominators reported, plus scrolling yield.",
+  "reason": "The audit correctly identified the central interpretive error: the producer's FALSIFIES claim for Method 1 (0.365) is denominator-dependent and not justified as stated. Under the locatable denominator (98/258=0.38), Method 1 is SUPPORTED within 1.5pp — the most apples-to-apples comparison since Method 1 modeled ~150 interactive elements, not 2296 AX nodes. The heuristic 0.65 remains genuinely falsified under both denominators (27-60pp), so the core finding holds but must be bounded to this denominator. The audit's required_fixes are all warranted: (1) report both denominators, (2) fix truncated_8192 bug, (3) complete raw artifacts, (4) disclose N=2 pilot limitations, (5) resolve CDP-locator coverage, (6) verify dataset task selection, (7) disclose Mind2Web substitution, (8) test scrolling. The experiment successfully unblocked Docker deployment (first across 3 Intel experiments) and implemented geometry-faithful viewport filtering, but the measurement validity is compromised by the denominator ambiguity and insufficient sampling. REVISE is appropriate: core infrastructure works, measurement pipeline works, but interpretation requires correction and expansion before a bounded verdict on C-CROSSSITE/C-LLM-INHERIT can be issued.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34377576886/result.json:metrics.shopping_task_21_actual_yield=0.0427",
+    "research/experiments/EXP-INTEL-34377576886/result.json:metrics.shopping_task_21_locator_elements=258",
+    "research/experiments/EXP-INTEL-34377576886/result.json:controls.heuristic_baseline.pass=false evidence yield_delta=0.6073",
+    "research/experiments/EXP-INTEL-34377576886/result.json:controls.method1_baseline.pass=false evidence yield_delta=0.3223",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:status=REVISE",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:validity_findings[0] VF-DENOMINATOR-AMBIGUITY severity=critical",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:recomputed_metrics.shopping_task_21_yield_locatable=0.3798",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:recomputed_metrics.shopping_yield_delta_method1_locatable_task21=0.0148",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:baseline_findings[1] Method1 falsification NOT robust under locatable denominator",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:claim_ceiling — bounds yield to Magento review pages, initial viewport, N=2 pilot",
+    "research/experiments/EXP-INTEL-34377576886/audit.json:required_fixes — 8 items including denominator, truncation bug, artifacts, sampling, scrolling",
+    "research/experiments/EXP-INTEL-34377576886/provenance.json:infrastructure.docker.image_sha256 a5b6fb47ee9f",
+    "research/experiments/EXP-INTEL-34377576886/result.json:observations[0] OBS-DOCKER-HUB-PULL-SUCCESS — first Docker deployment",
+    "research/experiments/EXP-INTEL-34377576886/result.json:observations[5] OBS-CDP-LOCATOR-MISMATCH match_rate=0.1124",
+    "/tmp/opencode/measure_yield_geo_v2.py sha256 15a2ad056dea51a4e907ceece1d176007122f3b9dec415ea87234061167f1d4e"
+  ]
+}

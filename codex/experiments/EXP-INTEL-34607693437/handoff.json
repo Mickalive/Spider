@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
+  "why_next": "The viewport intersection measurement approach (threshold 0.5, 1280x720) is structurally broken for yield measurement — it captures only fixed Magento 2 navigation chrome (constant 108 DOM / 8 interactive elements, stdev 0.0 across all page types), not page content. This is not a data problem solvable by more tasks; it is a measurement design failure. The runtime lane must develop a content-aware element enumeration method (full-page AX tree, scroll-cumulative viewport, or content-aware selectors) before any yield_locatable claim can be made. The frozen definition DEF-FALLBACK-INTERACTIVE is preserved and reusable, but the measurement substrate must change.",
+  "carry_forward": {
+    "established": [
+      "Forensic analysis of Method1 150-element estimate: INCONCLUSIVE — the 150 is a pre-computed heuristic INPUT (round numbers: 150,120,60 for different page types) with no DOM/AX traversal code. Cannot trace to any element-counting algorithm. Definition UNKNOWN. (method1_trace.json: trace_result INCONCLUSIVE)",
+      "Functional fallback definition DEF-FALLBACK-INTERACTIVE frozen: interactive elements with non-null bbox AND (role in button/link/textbox/etc. OR onclick/onsubmit handler OR form membership OR aria-label/aria-describedby). Maps to Definition 2 (interactive-only). (frozen_definition.json)",
+      "Heuristic estimate 0.65 remains FALSIFIED robustly (>23pp under any denominator, confirmed across parent and this experiment). (audit.json: baseline_findings heuristic FALSIFIED_ROBUST)",
+      "Viewport intersection (Playwright, threshold 0.5, 1280x720) captures only fixed Magento 2 navigation chrome, not page content. Both datasets (108 DOM elements, 8 interactive) show constant stdev=0.0 across listing/detail/cart/checkout_proxy with identical header element samples. H6 falsified. (result.json: viewport_anomaly, audit.json: VF-VIEWPORT-CONSTANT-PERSISTS critical)",
+      "yield_locatable = viewport_elements(all DOM) / locatable_elements(interactive) produces values >1.0 (1.31-5.14) — mathematically meaningless. The counting bug uses different element definitions for numerator and denominator. (result.json: yield_locatable_counting_bug)",
+      "Checkout page (http://localhost:8080/checkout/) redirects to port 7770 (internal). Checkout tasks labeled checkout_cart_1/2 use checkout/cart/ URL, identical to cart page (DOM 1136, locatable 21). True checkout yield unknown. (result.json: checkout_proxy)",
+      "CDP yield ~0.02-0.08 is stable (CV<0.2) but measures chrome ratio (viewport/total DOM), not interactive content yield. Value sensitive to DOM counting method. (audit.json: VF-CDP-YIELD-REPLICATION-BUT-DEFINITION-DEPENDENT)",
+      "GitLab and Reddit yields were measured in artifacts (gitlab_001 yield_locatable 1.0, reddit_001 yield 0.888 on ports 8081/8082) but excluded from result.json metrics. Cross-site claim unverified with n=1 each. (audit.json: VF-SITE-TYPE-BLOCKED-UNINCORPORATED)"
+    ],
+    "rejected": [
+      "Viewport intersection with threshold 0.5 as a method to measure page-content yield — REJECTED (captures only fixed navigation chrome across all page types, both 108 and 8 datasets)",
+      "yield_locatable = viewport_elements(all DOM) / locatable_elements(interactive) as a valid metric — REJECTED (mixed element definitions, values >1.0 meaningless)",
+      "Checkout cart proxy (checkout/cart/) as true checkout measurement — REJECTED (identical to cart page, same DOM, same locatable count)",
+      "Heuristic 0.65 as a yield estimate — REJECTED (falsified >23pp under any denominator, robustly across experiments)"
+    ],
+    "unknown": [
+      "What fraction of page elements does the SPIDER fragment model actually capture? (denominator unknown, viewport measurement broken)",
+      "Can full-page DOM enumeration, scroll-cumulative viewport, or content-aware selectors produce stable yield?",
+      "What is the true checkout page yield when accessible (port 7770 redirect resolution)?",
+      "What is the canonical element definition for the 812-task corpus? (forensic inconclusive, fallback frozen but untestable)",
+      "Does the fragment model perform differently on GitLab/Reddit vs shopping sites? (artifacts show 0.888-1.0 but n=1, excluded from metrics)",
+      "Which raw result dataset (108 vs 8) is canonical? What script version produced the 108 dataset? (script_exit_code 66, artifact duality unresolved)",
+      "Does Docker image digest drift affect DOM structure? (digest not_recorded, DOM counts 370-1696 vary across datasets)"
+    ],
+    "do_not_assume": [
+      "Do NOT assume yield_locatable values (1.3-5.14 or 0.24-0.57) represent actual page content yield — counting bug and viewport chrome invalidate both",
+      "Do NOT assume CDP yield (0.02-0.08) represents interactive element yield — it measures chrome ratio (viewport/total DOM)",
+      "Do NOT assume the 812-task corpus is viable for C-CROSSSITE/C-LLM-INHERIT yield claims — measurement substrate must be fixed first",
+      "Do NOT assume Method1 0.365 estimate is valid or invalid — definition unknown, measurement invalid",
+      "Do NOT assume the viewport measurement failure is specific to this Docker image — may be structural to Playwright viewport intersection with threshold 0.5",
+      "Do NOT assume the 108 dataset or 8 dataset is canonical — artifact duality unresolved, both show constant viewport",
+      "Do NOT assume sampling met the spec — 7 tasks not 8, cart n=1, no true checkout, 404 page included, randomization log not evidenced",
+      "Do NOT assume GitLab/Reddit yields (0.888-1.0) are representative — n=1 each, excluded from metrics, different viewport behavior observed",
+      "Do NOT assume frozen script (ee76fc9a) reproduces the canonical metrics — it produces 8 dataset, not 108"
+    ]
+  },
+  "dependencies": [
+    "runtime lane must develop content-aware element enumeration (full-page AX tree, scroll-cumulative, or content-aware selectors) before yield_locatable can be re-measured",
+    "Resolve artifact duality: determine which script version produced 108 dataset, hash both scripts, reconcile or discard one",
+    "Resolve checkout port 7770 redirect to enable true checkout measurement",
+    "Pull GitLab/Reddit Docker images (am1n3e/webarena-verified-gitlab, am1n3e/webarena-verified-reddit) for cross-site comparison",
+    "Record Docker image digest before measurement for drift bounding"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34607693437/result.json",
+    "research/experiments/EXP-INTEL-34607693437/audit.json",
+    "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json",
+    "research/experiments/EXP-INTEL-34607693437/method1_trace.json",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json",
+    "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py",
+    "research/experiments/EXP-INTEL-34607693437/spec.json",
+    "research/experiments/EXP-INTEL-34607693437/provenance.json",
+    "research/experiments/EXP-INTEL-34607693437/viewport_sample_*.json",
+    "research/experiments/EXP-INTEL-34546944360/handoff.json"
+  ],
+  "recommended_action": "Route to RUNTIME lane: develop a content-aware element enumeration method that captures page-specific elements (not just fixed navigation chrome). Candidates: (1) full-page accessibility tree walk without viewport filtering, (2) scroll-cumulative viewport measurement with intersection observer, (3) content-aware CSS selectors targeting main content area. Once a content-capturing method is validated (viewport stdev > 0 across page types), re-run yield_locatable measurement with frozen DEF-FALLBACK-INTERACTIVE definition on stratified shopping tasks. Simultaneously resolve artifact duality (which script version is canonical) and checkout port 7770 access."
+}
