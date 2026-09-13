@@ -75,6 +75,14 @@
         "reason": "KDE with cross-validated bandwidth partially detects scaling-type dynamics (Spearman rho=0.714, p=0.023 > Bonferroni threshold 0.0167) but fails rotation-type dynamics (rho=0.286, p=0.246), demonstrating complementary blind spots with kNN TV (which fails scaling rho=-0.12 but detects rotation rho=0.93). Experiment is MEASUREMENT_INVALID per frozen decision_rule: rotation JS CV=0.981 > 0.5 at lambda=1 (result.json:controls.js_cv_lambda1.cv_per_function.42). Even without the CV trigger, function invariance fails (ANOVA interaction p~5e-8, R2=0.56) and per-function Spearman fails for rotation and scaling after Bonferroni correction. Aggregate rho=0.833 p=0.005 is driven by translation/scaling, masking heterogeneity. No single density-divergence estimator (kNN TV or KDE) works uniformly across all function families in this 10D non-Gaussian DGP \u2014 they have complementary blind spots (kNN fails scaling, KDE fails rotation). C-WEB-DYNAMICS claim ceiling bounded to: action-dependent structure detectable by at least one estimator only for translation-like dynamics; scaling and rotation detection remain estimator-dependent and unstable. Synthetic-to-real gap persists; no inference to real Web transitions."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34729238832",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "PCA projection to 2D-3D subspaces before binned TV divergence does NOT simultaneously detect scaling-type and rotation-type action-dependent structure in 10D non-Gaussian DGP. Scaling fails in 2D (rho=0.6429<0.65, p=0.043>0.0167 Bonferroni) and all three functions fail in 3D (all rho=0.6429). ANOVA function x lambda interaction decisively fails (2D p~3e-11, 3D p=0.007). The curse-of-dimensionality hypothesis \u2014 that per-function heterogeneity is a high-dimensional artifact recoverable by dimensionality reduction \u2014 is FALSIFIED in this linear PCA + binned TV setting. Claim ceiling remains narrowed to synthetic 10D; C-WEB-DYNAMICS continues as HYPOTHESIS with claim domain restricted to translation-like dynamics in synthetic DGP. No product promotion warranted."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",

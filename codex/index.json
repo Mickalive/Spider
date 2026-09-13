@@ -226,6 +226,31 @@
         "handoff.json": "e7e2e6522b96e34f222f93289976136f59713667d835b2e8b0125c82c94c46a6"
       }
     },
+    "EXP-FRONTIER-34729238832": {
+      "lane": "frontier",
+      "request_id": "9346be479c5a083dac1bffb0",
+      "created_at": "2026-09-13T00:56:17.473796+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP \u2014 or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
+        "spec.json": "181f89e10a4606e8d68b09df89ac6e8914206f9f6d28e0603e47792430215841",
+        "prereg.md": "640a85d78cc651b006863884aed9f9cbcdd56529128e82c65393ddd4b80ba2d6",
+        "freeze.json": "160e348f5e0838649e498c1728ad0fecf9987f8f1e31982f5c5249aa39c49195",
+        "result.json": "d709b0798faf983f57720be8a57330c468dde5fd2353816d61b73f264ef00049",
+        "report.md": "ab105f5186251f5ff72e0652383e9568f2ee9c8eb5d49be08409cbd36e25d88d",
+        "provenance.json": "8b4aea8832850296cdb5ab1ab56792f5542b72ed71c66cbfbad901eddb863228",
+        "audit.json": "74b3fb77f5b3095d019f137508fbb0d09c640cfd59ce4186f5c68851ac8120bd",
+        "verdict.json": "13f9867776ce0ec1c23be7810e2ce5d194d3801d8572751e041b376e7061d260",
+        "handoff.json": "27ca8bd75164d93b763fe3861e36aeb6c6ef353693b5aa08a2c231a07dcdae01"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
