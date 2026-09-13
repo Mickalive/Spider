@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "On locally-hosted deterministic Express SPAs, DOM visible_text_hash adds conditional PMI beyond truncated action-history (K=1: 0.939/0.960 bits on multistep_form/wizard, p<0.0167) but adds zero PMI when history is sufficient to determine FSM state (K=3: 0.0 bits on all 3 sites, p=1.0, action-history accuracy 100%). Dashboard adds zero at all K. C-WEB-DYNAMICS requires 'predictive dynamical structure beyond memory and ordinary similarity'; DOM becomes fully redundant with sufficient history (K=3), so beyond-memory dynamics is not demonstrated on these SPAs. The effect is state-labeling / memory compression via DOM hash, not persistent environmental dynamics. Falsification is bounded to deterministic Express SPAs with limited action vocabularies and hash-based DOM representation."
+    }
+  ],
+  "product_action": "No product action. DOM integration as non-trivial physics is not warranted on deterministic SPAs. The effect is tautological with action-history memory when history is sufficient. Product consequence negative: DOM visible_text_hash does not demonstrate predictive state variation beyond what action labels determine on deterministic FSMs.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation that persists even with K>=3 sufficient action history? Specifically: (1) on production SPAs where the same action can lead to different DOM states depending on external factors (user data, API responses, time), does conditional PMI I(S_next; DOM | URL, ActionHistory_K=3) exceed zero with Bonferroni-corrected permutation p < 0.0167? (2) does a richer DOM representation (accessibility tree, computed styles, or multi-feature hash) capture variation invisible to visible_text_hash on production SPAs?",
+  "reason": "The producer declared SURVIVES_CURRENT_TEST based on K=1 truncated history (2/3 sites >0.1 bits), but the preregistration and C-WEB-DYNAMICS claim require 'beyond memory'. The audit correctly identified that K=3 is the discriminating test: at K=3, action-history alone achieves 100% prediction accuracy on all sites, and conditional PMI is 0.0 bits (0/3 sites survive). The K-dependence pattern (0.94->0.34->0.0 and 0.96->0.41->0.0) confirms DOM information is entirely subsumed by longer histories. Dashboard has zero PMI at all K (action alone predicts perfectly at K=1). The positive control failed (synthetic SPA used deterministic FSM-coupled DOM labels, not independent random labels), meaning pipeline discriminant validity was untested. Determinism control passes (100% accuracy all sites). Null control passes (shuffled labels yield 0.0). Independent audit recomputation matches all metrics. The correct ceiling is narrow: DOM provides conditional PMI only when action-history is truncated, not when history is sufficient, so the beyond-memory claim is FALSIFIED-IN-SETTING on these deterministic SPAs. Per AGENTS.md physics discipline, a bounded negative result does not close the Physics domain; the lane should move to materially orthogonal questions on production SPAs.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34724244876/spec.json#decision_rule #question #hypothesis #falsifier",
+    "research/experiments/EXP-PHYSICS-34724244876/result.json#metrics.site_results dashboard/multistep_form/wizard conditional_pmi K1/K2/K3 permutation_p_bonferroni action_history_prediction_accuracy determinism_accuracy",
+    "research/experiments/EXP-PHYSICS-34724244876/raw_analysis_results.json#site_results conditional_pmi stratum_details weighted_transitions permutation_tests action_history_prediction",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json#status FAIL #producer_claim_supported false #claim_ceiling #validity_findings V1_selective_conditioning_on_K V3_positive_control_misspecified #recomputed_metrics overall n_sites_surviving_K3 0",
+    "research/experiments/EXP-PHYSICS-34724244876/analyze.py#compute_conditional_pmi MIN_STRATUM_COUNT 5 HISTORY_LENGTHS [1,2,3]",
+    "research/experiments/EXP-PHYSICS-34724244876/provenance.json#datasets raw_dom_captures 804 transitions #code analysis_script #environment seed 42",
+    "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json sha256 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1",
+    "research/claims/registry.json C-WEB-DYNAMICS status HYPOTHESIS requires beyond memory/similarity"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "On locally-hosted deterministic SPAs, does DOM representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what conditional PMI I(S_next; DOM | URL, ActionHistory) achieves, and does it exceed zero? (2) does action-history memory alone predict next state perfectly on these deterministic SPAs?",
+  "hypothesis": "Conditional PMI I(S_next; DOM | URL, ActionHistory) is zero on all 3 deterministic SPAs: DOM provides no predictive value beyond action-history memory. The previously observed unconditional DOM PMI is entirely explained by action->DOM causality (deterministic FSM state transition).",
+  "falsifier": "Conditional PMI > 0.1 bits on >= 2/3 sites with Bonferroni-corrected permutation p < 0.0167 (0.05/3). This would indicate DOM encodes predictive state variation beyond what action history alone determines.",
+  "baselines": [
+    "Action-history memory baseline: empirical P(S_next | ActionHistory) where ActionHistory is the sequence of last K actions (K=1,2,3). Predict next state from most frequent next state given action history.",
+    "URL-only baseline: structural zero (single path per SPA).",
+    "Unconditional DOM PMI: parent experiment metric I(S_next; DOM | URL) for comparison.",
+    "Current-state memory baseline: P(S_next | S_current, Action) — deterministic FSM mapping (should be perfect)."
+  ],
+  "positive_control": "Synthetic SPA where DOM representation is independent of action history (random DOM labels). Conditional PMI should be zero, verifying pipeline correctly detects independence.",
+  "null_control": "Shuffled DOM labels on real SPA data (preserve action history, permute DOM). Conditional PMI should be zero.",
+  "measurement_validity": [
+    "Reuse existing raw_dom_captures.json from EXP-PHYSICS-34719136202 (804 transitions across 3 SPAs). No new data collection required.",
+    "Action history constructed from trajectory indices in raw data (each trajectory is a sequence of state-action transitions).",
+    "Conditional PMI computed via empirical conditional probability tables P(DOM, S_next | ActionHistory).",
+    "Permutation test: shuffle DOM labels within action-history strata to preserve action-history distribution.",
+    "Bonferroni correction for 3 sites (alpha 0.05/3 = 0.0167).",
+    "Deterministic seed 42 and PYTHONHASHSEED 0 preserved for reproducibility."
+  ],
+  "decision_rule": "If conditional PMI > 0.1 bits on >= 2/3 sites with Bonferroni p < 0.0167, verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS (DOM adds predictive value beyond action history). If conditional PMI <= 0.1 bits OR fails significance on < 2/3 sites, verdict = FALSIFIED-IN-SETTING (DOM PMI is tautological with action history). If sample sizes insufficient or pipeline errors, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If DOM adds predictive value beyond action history, it suggests DOM captures environmental state variation that action labels alone do not determine. This supports DOM as a non-trivial state representation for SPIDER observation layer, even on deterministic SPAs.",
+  "product_consequence_negative": "If DOM adds no predictive value beyond action history, it confirms the tautology: observed DOM PMI is entirely due to action->DOM causality on deterministic FSMs. DOM integration as non-trivial physics is not warranted on these SPAs. Physics lane should focus on production SPAs where deterministic server logic is absent.",
+  "estimated_cost": "Very low: pure computational re-analysis of existing raw data. No browser/network/model calls. ~804 transitions, conditional probability tables, permutation tests.",
+  "expected_information_gain": "High: resolves the identifiability gap (audit B4) that has blocked Physics lane for 3+ experiments. Determines whether DOM PMI is tautological or genuinely predictive. Minimal cost, maximum information."
+}

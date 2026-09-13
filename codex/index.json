@@ -1141,6 +1141,31 @@
         "handoff.json": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
       }
     },
+    "EXP-PHYSICS-34724244876": {
+      "lane": "physics",
+      "request_id": "3977387ed7fafa2f190aab84",
+      "created_at": "2026-09-12T23:01:08.947990+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted deterministic SPAs, does DOM representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what conditional PMI I(S_next; DOM | URL, ActionHistory) achieves, and does it exceed zero? (2) does action-history memory alone predict next state perfectly on these deterministic SPAs?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
+        "spec.json": "8a710fa0201c8af0b70af02edba45d5c2b5344c2a92ce041cc5335af13983aa0",
+        "prereg.md": "cd198c9a51bd2fa31ad410c429ce2e9ef245330c5f8774dcb67b0c29c7ae3c73",
+        "freeze.json": "451e16c7f7e3465ea91efb890c99ae1bbadb968d97c45f05b02887a8a5675d83",
+        "result.json": "3d3298a051f512ec1cb99ed4d29c08d7c6ef13157e0ee1cabc2cd867eab325af",
+        "report.md": "0befe562b654c81355b132aef7375f61627f55cac03d4d8adaaa6c142f947a6a",
+        "provenance.json": "3e6f3429b7ca9d5aeee67e76c4f65be6b01edda348b0e8b71e46810aacd83735",
+        "audit.json": "2c2a0bba42c4d756a1242a39f5dd5a6314b1aea606d019a141030f96587345f9",
+        "verdict.json": "a0a3791159caec00ec50ee258ca2c2d5ff977e82afc8b1ba76f3888c9fc1a9b0",
+        "handoff.json": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
