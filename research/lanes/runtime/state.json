@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-34654566605",
-  "last_experiment_id": "EXP-RUNTIME-34509593940",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-34654566605",
   "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
-  "next_question": "Does body-only HTTP fingerprint discrimination survive CDN compression (Content-Encoding gzip/br) where response bodies are non-deterministically compressed, causing body hash to vary per request even for identical logical responses?",
+  "next_question": "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-12T23:02:04.144749+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "040d3011db257cc13abf273a424b0537bf4113aba40b9b844c66aa6215605047"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-13T00:57:57.075755+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
 }
