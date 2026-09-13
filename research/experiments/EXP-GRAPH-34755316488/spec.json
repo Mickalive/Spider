@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-GRAPH-34755316488",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does Jaccard (field_path,type) freshness detection survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds the parent threshold 0.85, and does an adaptive schema-size-adjusted threshold restore detection without inflating false positives on stochastic response variation?",
+  "hypothesis": "Jaccard (field_path,type) detection rate for single-field structural drift degrades monotonically with schema size at fixed threshold 0.85, reaching <50% at n>=20 fields. A schema-size-adjusted threshold T(n) = 1 - 2.5/(n+1) restores detection to >=80% TP while maintaining FP rate <=15% on stochastic variation that preserves schema structure.",
+  "falsifier": " EITHER (a) detection rate at threshold 0.85 does not degrade with schema size (contradicting the analytical scaling attack from parent audit), OR (b) the adaptive threshold T(n) = 1 - 2.5/(n+1) does NOT achieve TP >= 0.8 at any schema size n >= 10, OR (c) the adaptive threshold produces FP rate > 0.15 on stochastic variation, OR (d) the mock server or real-API component fails for >20% of requests.",
+  "baselines": [
+    "Fixed threshold 0.85 (parent experiment baseline): expected to fail at n>=10 fields",
+    "Naive fixed threshold 0.95: expected to catch single-field drift at n<=19 but miss n>=20",
+    "No detection (always fresh): TP=0%, FP=0% (trivial)",
+    "Field-set equality (exact match): TP=100% for any drift, FP=0% for exact match but FP=100% for any stochastic variation — the degenerate extreme"
+  ],
+  "positive_control": "Add-field drift on n=5 schema: Jaccard similarity = 5/6 = 0.833 < 0.85, detected at fixed threshold. Verifies pipeline correctly computes Jaccard and applies threshold.",
+  "null_control": "Stable endpoint (no drift) at each schema size: Jaccard similarity = 1.0, 0 false positives at any threshold. Verifies no spurious detection on identical responses.",
+  "measurement_validity": [
+    "Mock server with controlled drift injection: add_field, remove_field, change_type patterns at each schema size",
+    "Schema sizes tested: n=5 (parent baseline), 10, 15, 20, 30, 50 fields",
+    "20 requests per schema-size per drift-pattern: 5 pre-drift fresh + 5 post-drift stale per pattern, 3 patterns = 30 stale + 15 fresh per size",
+    "Stochastic variation control: responses include randomized field values (not just structure) to test FP on natural variation",
+    "Real-API component: 3 public REST APIs (GitHub /repos/{owner}/{repo}, JSONPlaceholder /posts/{id}, httpbin /response-headers) with 10 fresh requests each to measure FP on real response variation",
+    "Adaptive threshold T(n) = 1 - 2.5/(n+1) derived from analytical change_type Jaccard = (n-1)/(n+1), providing safety margin below the tightest drift similarity",
+    "No authentication, no rate-limited endpoints, deterministic mock for controlled component"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Mock component: TP rate at fixed threshold 0.85 decreases monotonically with schema size (Spearman rho >= 0.8, p < 0.05); (2) Mock component: adaptive threshold T(n) achieves TP >= 0.8 at each schema size n >= 10; (3) Mock component: adaptive threshold FP rate <= 0.15 on stochastic variation across all sizes; (4) Null control passes at all sizes (FP = 0 on stable endpoint); (5) Positive control passes at n=5 (TP = 1.0); (6) Real-API component: FP rate <= 0.20 on fresh responses. FALSIFIED-IN-SETTING if ANY of: (1) TP at threshold 0.85 does NOT degrade with schema size; (2) Adaptive threshold TP < 0.8 at any n >= 10; (3) Adaptive threshold FP > 0.15 on stochastic variation; (4) Null control fails. MEASUREMENT_INVALID if >20% request failures or mock server errors.",
+  "product_consequence_positive": "Adaptive threshold calibration enables Jaccard freshness scoring to scale to realistic API schemas, making C-FRESHNESS viable for product kernel integration. Provides a concrete threshold formula T(n) that can be implemented in the freshness guard.",
+  "product_consequence_negative": "If Jaccard (field_path,type) cannot detect single-field drift at realistic schema sizes even with adaptive thresholding, the representation is insufficient for product use. Product lane should pursue alternative staleness signals (session token validation, DOM structure, response-time profiling, or semantic embedding similarity). Does NOT falsify C-FRESHNESS entirely — only this specific representation and metric.",
+  "estimated_cost": "Low: mock server with controlled schema sizes, no real network except 3 public API endpoints for FP measurement. ~540 mock requests (6 sizes x 3 patterns x 30 requests) + 30 real-API requests = ~570 total. No browser, no model calls.",
+  "expected_information_gain": "High: directly tests the critical scaling vulnerability identified in parent audit. A positive result validates adaptive thresholding as a product-viable fix; a negative result closes this specific detection pathway and redirects freshness research. Both outcomes materially change the C-FRESHNESS claim decision."
 }
