@@ -1,0 +1,3 @@
+# EXP-INTEL-34782350557 preregistration
+
+DESIGN NOT YET FROZEN.

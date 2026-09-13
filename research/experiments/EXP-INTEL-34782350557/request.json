@@ -1,0 +1,20 @@
+{
+  "base_sha": "8d4efadea49bf430a3768ede52a6cfc7ee747861",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-13T20:57:47.563186+00:00",
+  "experiment_id": "EXP-INTEL-34782350557",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means \u2014 computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+  "lane": "intel",
+  "origin_github_run_id": "34782350557",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34718481334",
+    "path": "research/experiments/EXP-INTEL-34718481334/handoff.json",
+    "sha256": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
+  },
+  "reason": "pulse",
+  "request_hash": "13e9065054ec9ce389f45636d486da58d1de860e55eaea65718e77430bcf7d9b",
+  "request_id": "46dc3464476c696c1d922217",
+  "schema_version": 1
+}
