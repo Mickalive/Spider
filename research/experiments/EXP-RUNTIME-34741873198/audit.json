@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34741873198",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow 'realistic CDN negotiation' and 'production CDN' language to 'synthetic deterministic CDN proxy on Keycloak 25.0 start-dev (Python HTTPServer on :18081, gzip mtime=0 level 9 and brotli quality 6, 0-189 byte /userinfo and 16-729 byte /introspect bodies, N=10 per state per client profile, seed 44) where the same Accept-Encoding deterministically maps to the same algorithm (br>gzip>identity) via server-side class variable, not per-request header negotiation with a real CDN' — current report.md Section 5.3 and product consequence overgeneralize synthetic determinism to all production CDNs; evidence is Python gzip/brotli deterministic functions, not an operational CDN measurement (spec.json measurement_validity, provenance.json proxy.negotiation_logic, run_experiment.py:349,393,433-443).",
+    "Correct measurement_validity description 'Proxy reads client's Accept-Encoding header and deterministically selects...' (spec.json measurement_validity[6], validity_notes, provenance.json cdn_negotiation_model): implementation uses CDNNegotiationProxyHandler.client_accept_encoding class variable set once per profile in start_proxy() (run_experiment.py:433-443) and never reads self.headers.get('Accept-Encoding') per request; make_request() (run_experiment.py:458-505) sends no Accept-Encoding header. Amend to 'proxy is configured per client profile to apply a fixed algorithm' and note that proxy restart per profile models stable-client determinism, not simultaneous header-content negotiation.",
+    "Disclose that body-only and status-only discrimination are identical (0.5) on /userinfo across all client profiles (result.json /userinfo_A_br_gzip status_only 0.5, /userinfo_B_gzip_only 0.5, /userinfo_C_identity 0.5; M_STATUS_ONLY_INVARIANCE). Body hash adds zero incremental discrimination beyond HTTP status on /userinfo for this 4-state construction because no_auth/expired_token/invalid_token collapse to one body group and valid_token is the only distinct body+status group. Amend report.md Section 5.3 claim 'body-only as default production fingerprint strategy' to note status-only is compression-immune and equally discriminating on /userinfo; body-only advantage is specific to /introspect where status-only=0.0 and body-only=0.5.",
+    "Disclose within-state determinism is guaranteed by construction: Python gzip with mtime=0 and brotli at fixed quality are pure deterministic functions (verified independent recomputation: gzip level 9 mtime=0 same input->same bytes, brotli quality 6 same input->same bytes; raw_observations.json body_hash unique_count 1/10 for all 12 statexprofile cells, result.json C_WITHIN_STATE_DETERMINISTIC observed True). Observation 'all_states_deterministic=True' (result.json M_WITHIN_STATE_VARIATION) therefore confirms implementation determinism, not an empirical discovery about real CDN non-determinism sources (load-balancing, varied compression levels, chunking, timestamp/metadata, caching). Add to validity_notes and claim_ceiling that determinism guarantee excludes those sources.",
+    "Retain mixed-client interpretation bound: B-MIXED-CLIENT-BODY-ONLY computed post-hoc by pooling A_br_gzip and C_identity fingerprints (run_experiment.py:884-895, not alternating requests to a single concurrent proxy as spec phrasing suggests). Reported value 0.22368 (result.json M_MIXED_CLIENT_DISCRIMINATION) shows substantial degradation vs 0.5 but remains >0; report should state this is pooled discrimination, threshold '< identity' is weak (any epsilon passes), and floor not zero consistent with parent floor ~0.09-0.13."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_RECOMPUTATION_MATCH",
+      "severity": "pass",
+      "finding": "All material metrics recomputed from raw_observations.json match producer result.json exactly within floating tolerance. /userinfo body-only 0.5 at A_br_gzip, B_gzip_only, C_identity; /introspect body-only 0.5 at all three profiles; status-only 0.5 on /userinfo invariant, 0.0 on /introspect invariant; B-RANDOM 0.0; M_DETERMINISTIC_DISCRIMINATION identity=0.5 br=0.5 gzip=0.5; M_MIXED_CLIENT_DISCRIMINATION 0.2236842105 recomputed identical via pooled fingerprints; within-state body_hash unique_count 1/10 all cells (12/12), total_unique 4/40 per profile, all_states_deterministic True. Fingerprint SHA256(repr((status,body_sha256,''))) and discrimination intra_match - inter_match (4 states: 180 intra pairs, 600 inter pairs; 300 of 600 inter matches due to 3 collapsed error states) verified independently.",
+      "evidence": "result.json metrics /userinfo_A_br_gzip, /userinfo_B_gzip_only, /userinfo_C_identity and M_* controls; raw_observations.json 240 observations (3 profiles x2 endpoints x4 states x10 reps) sha256 58c2937267f4d2948907664d5ca8835f27fb50e556c91ee49b4421568da2d331 verified vs provenance.json; run_experiment.py fingerprint_body_only, compute_discrimination_score, make_request stream raw.read(decode_content=False); independent recomputation script"
+    },
+    {
+      "id": "V2_DETERMINISM_BY_CONSTRUCTION_TAUTOLOGY",
+      "severity": "medium",
+      "finding": "Within-state variation=0 is tautological given frozen implementation: gzip uses mtime=0 (run_experiment.py:290-292) eliminating timestamp non-determinism, level fixed 9; brotli quality fixed 6 (run_experiment.py:297). Python gzip/brotli are deterministic functions of input+level (independent verification: same input repeated yields identical bytes and sha). The CDN simulation therefore cannot produce non-determinism even if real CDN would. The experiment tests 'does deterministic compression preserve hash stability' where both premise and implementation enforce determinism; passing is expected, falsification would require proxy bug not CDN behavior. This is not measurement invalid per spec (C_WITHIN_STATE_DETERMINISTIC would correctly flag non-determinism), but ceiling must note observation confirms code determinism, not real CDN determinism.",
+      "evidence": "run_experiment.py compress_gzip mtime=0, compress_brotli quality 6, select_algorithm_for_client br>gzip>identity; raw_observations.json compression_verification Content-Encoding br/gzip/none per profile, body_sizes 1 vs 128 vs 155 vs 189 etc confirming compressed sizes; validity_notes 'Python gzip is deterministic: same input + same level = same output (mtime=0)'; independent gzip/brotli determinism check"
+    },
+    {
+      "id": "V3_HEADER_NEGOTIATION_REPRESENTATION_GAP",
+      "severity": "low",
+      "finding": "Spec and provenance claim proxy 'reads client's Accept-Encoding header and deterministically selects' (spec.json measurement_validity[6], provenance.json cdn_negotiation_model description). Implementation does not read per-request Accept-Encoding: proxy handler stores client_accept_encoding as class variable set in start_proxy() (run_experiment.py:349,392-393,433-443), and make_request never sends Accept-Encoding header. Sequential profile blocks with proxy restart simulate stable-client behavior but do not test header parsing, header variation, or concurrent mixed clients on one proxy instance. Scientific hypothesis (stable client sees deterministic algorithm) is still modeled, but mechanism fidelity is lower than described. Fix is documentation, not re-measurement.",
+      "evidence": "run_experiment.py:349 client_accept_encoding class var, 393 algorithm=select_algorithm_for_client(self.client_accept_encoding), 433-443 start_proxy, 458-505 make_request headers only Authorization/Content-Type no Accept-Encoding, 691 direct request with identity, 750 accept_encoding stored from profile_config; spec.json measurement_validity lines 24-26"
+    },
+    {
+      "id": "V4_BODY_REDUNDANT_TO_STATUS_ON_USERINFO",
+      "severity": "info",
+      "finding": "On /userinfo, body-only offers no advantage over status-only: both achieve discrimination 0.5 in every profile (result.json /userinfo_* status_only 0.5 body_only 0.5). This reflects inherited state construction where no_auth, expired_token, invalid_token have identical bodies (0 bytes identity, 1 byte br, 20 bytes gzip) and identical status 401; only valid_token (200 + 189/128/155 bytes) is distinct. Discrimination ceiling 0.5 is therefore driven by 200 vs 401 plus collapsed triple, not body content beyond status. On /introspect body-only 0.5 is informative because status-only=0.0 (all states 200). Report correctly notes status-only invariance but does not emphasize body redundancy on /userinfo; product consequence should not favor body-only over status-only on status-discriminating endpoints.",
+      "evidence": "result.json /userinfo_C_identity body_sizes 0 vs 189, /userinfo_A_br_gzip 1 vs 128, /userinfo_B_gzip_only 20 vs 155; raw_observations.json body_hash e3b0... vs c562... etc collapsed for 3 states; result.json M_STATUS_ONLY_INVARIANCE values 0.5 each; parent handoff established 'Body-only /userinfo 0.5 (3 body groups)' and 'expired_token and invalid_token remain indistinguishable by ANY observable'"
+    },
+    {
+      "id": "V5_SYNTHETIC_CEILING_NOT_REAL_CDN",
+      "severity": "medium",
+      "finding": "Claim ceiling is bounded to synthetic deterministic proxy on Keycloak 25.0 start-dev with tiny JSON/plain bodies (0,1,20,128,155,189 bytes on /userinfo; 16,20,36,426-729 bytes on /introspect). Real CDN variation sources not tested: dynamic compression level/quality selection, varying Accept-Encoding quality values, recompression, chunked transfer, ETag/Vary interaction, load-balanced heterogeneous compressors, caching stale bodies. Parent audit V5 correctly bounded synthetic random model; this experiment fills deterministic-per-client gap but remains synthetic. Body sizes are small for breakeven on compression ratio; generalization to KB-scale JSON not supported. N=10 per cell detects only non-determinism >0, not rare stochastic variation.",
+      "evidence": "spec.json baselines expected 0.5 (3 groups) reflects 0-byte error bodies; result.json body_sizes; prereg.md Validity Threats 9.1-9.6; provenance.json proxy type Python HTTPServer reverse proxy; report.md Section 6.1 scope boundaries correctly note synthetic simulation"
+    },
+    {
+      "id": "V6_CROSS_CLIENT_DIVERGENCE_VERIFIED",
+      "severity": "pass",
+      "finding": "Cross-client hash divergence verified: same logical body yields different compressed body_hash across profiles (raw_observations.json: no_auth hash 41b8... br vs 9cef... gzip vs e3b0... identity; valid_token d3af... br vs c69f... gzip vs c562... identity). Mixed-client pooled discrimination 0.22368 < 0.5 confirms hash divergence degrades discrimination when clients mixed, but floor remains >0. This matches expected behavior: compressed wire bytes differ per algorithm, so cross-client body-hash comparison without normalization is not stable.",
+      "evidence": "result.json M_CROSS_CLIENT_DIVERGENCE divergent True all states, M_MIXED_CLIENT_DISCRIMINATION 0.22368; raw_observations.json per-profile body_hash sets; recomputation pooled mixed disc 0.22368"
+    },
+    {
+      "id": "V7_EXPIRED_TOKEN_CONSTRUCTION_LEAKAGE",
+      "severity": "info",
+      "finding": "expired_token is locally-signed HS256 (run_experiment.py:130-141, validity_notes), not Keycloak-issued. This is inherited V6 leakage from parent experiments (spec validity_notes, provenance). It does not affect compression determinism question because expired vs invalid bodies identical in all profiles (all 401 collapsed), so discrimination ceiling 0.5 is robust to this construction. Record as inherited limitation, not new falsification.",
+      "evidence": "run_experiment.py make_expired_token, make_invalid_token; result.json validity_notes 'expired_token is locally-signed HS256, not Keycloak-issued (V6 leakage)'; parent handoff do_not_assume 'Do not assume expired_token represents true Keycloak-issued expired tokens'"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-IDENTITY-BODY-ONLY",
+      "finding": "Baseline B-IDENTITY-BODY-ONLY (C_identity) observed 0.5 meets positive control threshold >=0.35 (spec positive_control, result.json M_IDENTITY_CONTROL, controls C_POSITIVE_CONTROL PASS). Recomputed 0.5 matches. Confirms measurement pipeline functional without compression. Ceiling 0.5 limited by collapsed 3-state error group, not compression.",
+      "strength": "strong",
+      "evidence": "result.json /userinfo_C_identity body_only 0.5, M_IDENTITY_CONTROL value 0.5 threshold 0.35; raw_observations.json C_identity /userinfo 40 requests body_hash 2 distinct (e3b0... collapsed vs c562... valid)"
+    },
+    {
+      "id": "B-DETERMINISTIC-BR-BODY-ONLY",
+      "finding": "Baseline B-DETERMINISTIC-BR-BODY-ONLY (A_br_gzip) observed 0.5 satisfies >= identity-0.15 (0.5 >=0.35) (result.json M_DETERMINISTIC_BR_CONTROL, C_DETERMINISTIC_BR_PRESERVES PASS). Recomputed 0.5 matches. Within-state variation 0/10 per state confirms brotli determinism at fixed quality 6. Strong baseline but tautological per V2.",
+      "strength": "strong",
+      "evidence": "result.json /userinfo_A_br_gzip body_only 0.5, compression_verification all br, body_hash 41b8... collapsed vs d3af... valid, M_WITHIN_STATE_VARIATION A_br_gzip all_states_deterministic True"
+    },
+    {
+      "id": "B-DETERMINISTIC-GZIP-BODY-ONLY",
+      "finding": "Baseline B-DETERMINISTIC-GZIP-BODY-ONLY (B_gzip_only) observed 0.5 satisfies >= identity-0.15 (result.json M_DETERMINISTIC_GZIP_CONTROL, C_DETERMINISTIC_GZIP_PRESERVES PASS). Recomputed 0.5 matches. Gzip level 9 mtime=0 deterministic. Strong baseline but tautological per V2.",
+      "strength": "strong",
+      "evidence": "result.json /userinfo_B_gzip_only body_only 0.5, compression_verification all gzip, body_hash 9cef... collapsed vs c69f... valid, body_sizes 20 vs 155"
+    },
+    {
+      "id": "B-MIXED-CLIENT-BODY-ONLY",
+      "finding": "Baseline B-MIXED-CLIENT (A+C pooled) observed 0.22368 < identity 0.5 (result.json M_MIXED_CLIENT_DISCRIMINATION, C_MIXED_CLIENT_DEGRADES PASS). Recomputed 0.22368 identical. Threshold '< identity' is weak; any degradation passes. Demonstrates cross-client compressed-byte divergence is real and reduces discrimination but does not collapse to zero, consistent with parent floor ~0.09-0.13 under random compression.",
+      "strength": "moderate",
+      "evidence": "result.json M_MIXED_CLIENT_DISCRIMINATION value 0.22368421052631576 threshold '< identity body-only'; recomputation pooled 20 per state mixed fingerprints disc 0.22368; M_CROSS_CLIENT_DIVERGENCE divergent True"
+    },
+    {
+      "id": "B-RANDOM",
+      "finding": "Null baseline B-RANDOM ~0.0 observed 0.0 at all profiles (result.json metrics per profile baselines B-RANDOM 0.0, M_NULL_CONTROL 0.0, C_NULL_CONTROL PASS). Random fingerprints from getrandbits(256) correctly yield near-zero discrimination; trivial null. No spurious structure from compression artifacts.",
+      "strength": "weak",
+      "evidence": "result.json per-profile baselines B-RANDOM 0.0, M_NULL_CONTROL; run_experiment.py baseline_random seed 99"
+    },
+    {
+      "id": "B-STATUS-ONLY",
+      "finding": "Baseline B-STATUS-ONLY observed 0.5 invariant across A_br_gzip, B_gzip_only, C_identity on /userinfo (result.json M_STATUS_ONLY_INVARIANCE values 0.5 each, C_STATUS_ONLY_INVARIANT PASS). Recomputed status-only 0.5 each, /introspect 0.0 each. Status is compression-immune as expected (proxy preserves status code, spec Auth related headers unchanged). On /userinfo status-only equals body-only, indicating body adds no incremental value there; on /introspect body-only outperforms status-only (0.5 vs 0.0) showing complementarity.",
+      "strength": "strong",
+      "evidence": "result.json /userinfo_* status_only 0.5 each, /introspect_* status_only 0.0 each; raw_observations.json status 200 vs 401 /userinfo, 200 all /introspect; run_experiment.py fingerprint_status_only"
+    }
+  ],
+  "recomputed_metrics": {
+    "B-IDENTITY-BODY-ONLY": 0.5,
+    "B-DETERMINISTIC-BR-BODY-ONLY": 0.5,
+    "B-DETERMINISTIC-GZIP-BODY-ONLY": 0.5,
+    "B-MIXED-CLIENT-BODY-ONLY": 0.22368421052631576,
+    "B-RANDOM": 0.0,
+    "B-STATUS-ONLY": {
+      "A_br_gzip": 0.5,
+      "B_gzip_only": 0.5,
+      "C_identity": 0.5,
+      "/introspect_all_profiles": 0.0
+    },
+    "M_DETERMINISTIC_DISCRIMINATION_identity": 0.5,
+    "M_DETERMINISTIC_DISCRIMINATION_br": 0.5,
+    "M_DETERMINISTIC_DISCRIMINATION_gzip": 0.5,
+    "M_WITHIN_STATE_VARIATION": {
+      "A_br_gzip_total_unique": 4,
+      "A_br_gzip_total_requests": 40,
+      "A_br_gzip_all_states_deterministic": true,
+      "B_gzip_only_total_unique": 4,
+      "B_gzip_only_total_requests": 40,
+      "B_gzip_only_all_states_deterministic": true,
+      "C_identity_total_unique": 4,
+      "C_identity_total_requests": 40,
+      "per_state_unique_each": 1
+    },
+    "M_CROSS_CLIENT_DIVERGENCE": "divergent True all 4 states (A br hash 41b805ea vs C identity e3b0c4... collapsed; valid d3af87... vs c562... distinct)",
+    "discrimination_formula": "intra_match_rate - inter_match_rate (intra 180 pairs at 1.0, inter 600 pairs at 0.5 when 3 states collapsed, yields 0.5 ceiling)",
+    "raw_total_observations_verified": 240,
+    "raw_sha256": "58c2937267f4d2948907664d5ca8835f27fb50e556c91ee49b4421568da2d331"
+  },
+  "claim_ceiling": "Body-only discrimination (status+compressed-body hash, SHA256(repr((status,body_sha256,''))) on wire bytes) is preserved at 0.5 on /userinfo and 0.5 on /introspect for a single stable client within this synthetic deterministic CDN simulation: Keycloak 25.0 start-dev, Python HTTPServer proxy on :18081 applying fixed- algorithm compression per client profile (A: br quality6 -> 1/128 bytes, B: gzip level9 mtime0 ->20/155 bytes, C: identity ->0/189 bytes), N=10 per auth state per profile per endpoint (240 total, seed44, jitter 50-150ms), within-state compressed body hash variation 0/10, brotli and gzip outputs deterministic, cross-client (different Accept-Encoding -> different algorithm) pooled discrimination drops to 0.2237 but remains >0. No evidence for real CDN, larger/diverse bodies, varying compression levels, concurrent header negotiation, load-balanced or caching CDNs, or production Keycloak; status-only equals body-only on /userinfo (0.5) so body adds no incremental value there; comparison to filtered full-vector or decompressed-body baselines untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34741873198/spec.json (frozen decision_rule 8 conditions, measurement_validity, baselines, claim_ids C-MEAS-VALID)",
+    "research/experiments/EXP-RUNTIME-34741873198/prereg.md (H1-H4, Validity Threats 9.1-9.6)",
+    "research/experiments/EXP-RUNTIME-34741873198/freeze.json (hashes prereg 726086..., spec f20fa9..., request 839a29...)",
+    "research/experiments/EXP-RUNTIME-34741873198/result.json (metrics /userinfo_A_br_gzip etc, M_DETERMINISTIC_DISCRIMINATION, M_MIXED_CLIENT_DISCRIMINATION, controls C_POSITIVE_CONTROL etc, observations, validity_notes)",
+    "research/experiments/EXP-RUNTIME-34741873198/report.md (Sections 3.1-3.6, 4 controls, 5 interpretation, 6 scope boundaries)",
+    "research/experiments/EXP-RUNTIME-34741873198/provenance.json (proxy negotiation_logic br>gzip>identity, brotli_available true, artifacts sha 58c293..., run_experiment sha 634115...)",
+    "research/experiments/EXP-RUNTIME-34741873198/raw_observations.json sha256 58c2937267f4d2948907664d5ca8835f27fb50e556c91ee49b4421568da2d331 (240 obs, per-state body_hash, Content-Encoding, body_size, fingerprint_body/status, accept_encoding, content_encoding)",
+    "research/experiments/EXP-RUNTIME-34741873198/run_experiment.py (compress_gzip mtime0, compress_brotli quality6, CDNNegotiationProxyHandler.client_accept_encoding class var, start_proxy, make_request stream decode_content False, get_auth_header, compute_discrimination_score)",
+    "research/experiments/EXP-RUNTIME-34741873198/analyze.py (independent discrimination recomputation)",
+    "research/experiments/EXP-RUNTIME-34654566605/handoff.json (parent carry_forward established/rejected/unknown/do_not_assume, next_question, why_next)"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, varying quality/compression levels, and caching, not just synthetic Python proxy with fixed level?",
+    "Does the result generalize to larger/more diverse body content-types and sizes beyond Keycloak /userinfo 0-189 bytes and /introspect 16-729 bytes (KB-scale JSON, HTML)?",
+    "Would filtered full-vector baseline or decompressed-body hashing (Content-Encoding normalization layer) outperform body-only and survive mixed-client and random-compression conditions?",
+    "What is minimal compression entropy required to collapse body-only below usable threshold, and does that entropy occur in real CDN operation vs synthetic random?",
+    "Does discrimination hold under concurrent multi-client load, live Keycloak with real sessions, load-balancer, or rate-limiting not tested in start-dev?",
+    "Does body-only add value beyond status-only on endpoints where status alone discriminates (e.g., /userinfo status 200 vs 401 =0.5)?"
+  ]
+}
