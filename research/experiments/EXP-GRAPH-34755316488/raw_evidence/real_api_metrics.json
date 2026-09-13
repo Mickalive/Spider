@@ -1,0 +1,65 @@
+{
+  "fp_count": 0,
+  "total_valid": 30,
+  "fp_rate": 0.0,
+  "fp_rate_95ci": [
+    0,
+    0.1135
+  ],
+  "per_endpoint": {
+    "github_repos": {
+      "fp_count": 0,
+      "total": 10,
+      "fp_rate": 0.0,
+      "similarities": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0
+    },
+    "jsonplaceholder_posts": {
+      "fp_count": 0,
+      "total": 10,
+      "fp_rate": 0.0,
+      "similarities": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0
+    },
+    "httpbin_response_headers": {
+      "fp_count": 0,
+      "total": 10,
+      "fp_rate": 0.0,
+      "similarities": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean_jaccard": 1.0
+    }
+  }
+}

@@ -1,0 +1,272 @@
+[
+  {
+    "endpoint": "github_repos",
+    "request_number": 1,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 2,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 3,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 4,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 5,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 6,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 7,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 8,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 9,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "github_repos",
+    "request_number": 10,
+    "similarity": 1.0,
+    "schema_size": 102,
+    "adaptive_threshold": 0.9922,
+    "detected_stale": false,
+    "field_count": 102
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 1,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 2,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 3,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 4,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 5,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 6,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 7,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 8,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 9,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "jsonplaceholder_posts",
+    "request_number": 10,
+    "similarity": 1.0,
+    "schema_size": 4,
+    "adaptive_threshold": 0.84,
+    "detected_stale": false,
+    "field_count": 4
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 1,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 2,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 3,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 4,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 5,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 6,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 7,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 8,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 9,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  },
+  {
+    "endpoint": "httpbin_response_headers",
+    "request_number": 10,
+    "similarity": 1.0,
+    "schema_size": 3,
+    "adaptive_threshold": 0.8,
+    "detected_stale": false,
+    "field_count": 3
+  }
+]
