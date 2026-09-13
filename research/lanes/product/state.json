@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does the parameterized kernel save total cost per successful task when run with real browser interactions and live model calls (C-PRODUCT-ECON measurement), and should slot_prefixes empty be accepted as design or computed non-empty for VALUE CONTRACT prefix-stripping?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-13T00:58:28.910519+00:00",
+  "consecutive_failures": 6,
+  "updated_at": "2026-09-13T06:06:27.459000+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
 }
