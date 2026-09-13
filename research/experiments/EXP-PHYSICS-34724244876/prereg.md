@@ -12,7 +12,7 @@
 
 ## 2. Scientific Question
 
-On locally-hosted deterministic SPAs, does any state representation achieve predictive PMI beyond what action labels alone determine? Specifically: (1) what PMI does an action-label baseline MI(S_next; A) achieve, (2) does DOM or network representation exceed it, and (3) does conditional mutual information MI(S_next; DOM | A) indicate DOM encodes predictive state variation not already captured by the action label?
+On locally-hosted deterministic SPAs, does any state representation achieve predictive PMI beyond what action (type+target) alone determines? Specifically: (1) what PMI does an action-type+target baseline MI(S_next; A) achieve, (2) does DOM or network representation exceed it, and (3) does conditional mutual information MI(S_next; DOM | A) indicate DOM encodes predictive state variation not already captured by the action (type+target)?
 
 ## 3. Motivation
 
@@ -22,7 +22,7 @@ On locally-hosted deterministic SPAs, does any state representation achieve pred
 - dashboard +1.006 bits, multistep_form +0.286 bits, wizard +0.438 bits
 - All Bonferroni p=0.003, n_test 40/40/31
 
-**But the effect is entirely tautological with action label:**
+**But the effect is entirely tautological with action (type+target) label:**
 - MI(action; DOM_state) = 1.989 bits (dashboard), 0.467 bits (multistep), 0.468 bits (wizard)
 - Fraction tautological: dashboard 198%, multistep 163%, wizard 107%
 - All sites: MI(action; DOM) > DOM PMI — gain is action->DOM causality
@@ -42,7 +42,7 @@ On locally-hosted deterministic SPAs, does any state representation achieve pred
 
 ### Why this experiment is different
 
-The parent experiment measured DOM PMI against URL-only (structural zero). This experiment measures DOM PMI against action-label PMI — the natural baseline on deterministic servers where next state = f(current state, action).
+The parent experiment measured DOM PMI against URL-only (structural zero). This experiment measures DOM PMI against action-type+target PMI — the natural baseline on deterministic servers where next state = f(current state, action).
 
 If action labels already fully determine next state, then DOM features merely recover the FSM state label that action labels encode. PMI over URL-only is guaranteed if DOM varies, but does not demonstrate predictive structure beyond memory.
 
@@ -84,7 +84,7 @@ This experiment directly tests the 'beyond memory' requirement by comparing repr
 ## 4. Hypotheses
 
 ### H1: Action-Label Dominance
-On deterministic SPAs, action-label PMI MI(S_next; A) equals or exceeds DOM PMI MI(S_next; DOM) on >= 2/3 of tested sites. Action labels are a sufficient statistic for next-state prediction when the server state machine is deterministic.
+On deterministic SPAs, action-type+target PMI MI(S_next; A) equals or exceeds DOM PMI MI(S_next; DOM) on >= 2/3 of tested sites. Action (type+target) labels are a sufficient statistic for next-state prediction when the server state machine is deterministic.
 
 ### H2: DOM Adds Nothing Beyond Action
 Conditional mutual information MI(S_next; DOM | A) is negligible (< 0.1 bits) on >= 2/3 of tested sites. DOM features do not encode predictive state variation not already captured by the action label.
@@ -102,11 +102,12 @@ On real SPA data with shuffled action labels, MI(S_next; DOM | A_shuffled) is no
 Reuse raw_dom_captures.json from EXP-PHYSICS-34719136202:
 - 804 transitions across 3 SPAs + synthetic
 - sha256: 85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1
-- Includes per-transition: DOM features (visible_text_hash, numeric features), URL, action type
+- Includes per-transition: DOM features (visible_text_hash, numeric features), URL, action type and target
 
 Action labels extracted from trajectory metadata:
 - action_type: one of {click, fill, submit, navigate}
-- action target NOT included in action label (action type only)
+- action_target: target_href (specific element identifier)
+- action label = action_type:action_target combined as categorical
 
 ### 5.2 Synthetic Positive Control (New Collection)
 
@@ -131,7 +132,7 @@ All are deterministic Express servers on localhost with session-cookie state.
 
 ### 6.1 Primary Metrics
 
-- **mi_action_next**: MI(S_next; A) — action-label PMI. How much does the action type alone predict the next state?
+- **mi_action_next**: MI(S_next; A) — action-type+target PMI. How much does the action (type+target) predict the next state?
 - **mi_dom_next**: MI(S_next; DOM) — DOM-feature PMI. How much does the DOM representation predict the next state?
 - **mi_action_dom_next**: MI(S_next; A, DOM) — combined PMI. How much do action + DOM together predict the next state?
 - **mi_dom_given_action**: MI(S_next; DOM | A) = MI(S_next; A, DOM) - MI(S_next; A) — conditional MI. How much does DOM add beyond action label?
@@ -238,7 +239,7 @@ This confirms DOM PMI is tautological FSM state recovery on deterministic SPAs. 
 
 ### 11.2 SURVIVES_CURRENT_TEST
 If ANY of:
-1. DOM exceeds action-label PMI on >= 1/3 sites (MI(S_next; DOM) > MI(S_next; A) by >= 0.05 bits)
+1. DOM exceeds action-type+target PMI on >= 1/3 sites (MI(S_next; DOM) > MI(S_next; A) by >= 0.05 bits)
 2. MI(S_next; DOM | A) > 0.1 bits on >= 1/3 sites (DOM adds substantial predictive power beyond action)
 
 This would indicate hidden session dynamics or non-trivial environmental structure on deterministic SPAs.
@@ -254,14 +255,14 @@ If:
 
 ### 12.1 FALSIFIED-IN-SETTING (Expected)
 - Action-label PMI dominates on all 3 deterministic SPAs
-- DOM PMI does not exceed action-label PMI
+- DOM PMI does not exceed action-type+target PMI
 - MI(S_next; DOM | A) is negligible
 - Confirms that DOM visible_text_hash PMI is tautological FSM state recovery
 - C-WEB-DYNAMICS 'beyond memory' is not supported on deterministic SPAs
 - **Consequence**: Physics lane must investigate production SPAs with non-deterministic rendering where action labels may not be sufficient statistics
 
 ### 12.2 SURVIVES_CURRENT_TEST (Surprising)
-- DOM exceeds action-label PMI on some sites
+- DOM exceeds action-type+target PMI on some sites
 - MI(S_next; DOM | A) is substantial
 - Would indicate hidden session dynamics not captured by action labels
 - Would justify DOM integration as non-trivial physics
@@ -274,7 +275,7 @@ If:
 ## 13. Analysis Plan
 
 1. **Load existing data**: Read raw_dom_captures.json from EXP-PHYSICS-34719136202
-2. **Extract action labels**: From trajectory metadata, extract action_type (click/fill/submit/navigate)
+2. **Extract action labels**: From trajectory metadata, extract action_type (click/fill/submit/navigate) and action_target (target_href), combine as categorical label
 3. **Compute MI(S_next; A)**: Action-label PMI using same framework as parent (quantile bins, alpha smoothing, 80/20 temporal split)
 4. **Compute MI(S_next; DOM)**: DOM-feature PMI (reuse parent DOM PMI values as regression check)
 5. **Compute MI(S_next; A, DOM)**: Combined PMI
@@ -301,7 +302,7 @@ From prior work:
 - DOM visible_text_hash PMI: dashboard 1.006, multistep 0.286, wizard 0.438 (parent)
 - MI(action; DOM): dashboard 1.989, multistep 0.467, wizard 0.468 (parent audit recomputation)
 - Action-label PMI MI(S_next; A) is expected to be high on deterministic SPAs (action type determines next state)
-- DOM PMI MI(S_next; DOM) is expected to be similar to or lower than action-label PMI
+- DOM PMI MI(S_next; DOM) is expected to be similar to or lower than action-type+target PMI
 - MI(S_next; DOM | A) is expected to be near zero (DOM adds nothing beyond action)
 - This would confirm the tautology finding from parent audit
 
