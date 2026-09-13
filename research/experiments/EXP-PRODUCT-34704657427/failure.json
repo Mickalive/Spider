@@ -1,9 +1,9 @@
 {
   "stage": "execute",
-  "category": "VALIDATION_FAILURE",
-  "message": "execute missing result.json",
+  "category": "EXECUTION_FAILURE",
+  "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-13T11:53:48.732599+00:00",
-  "github_run_id": "34755318193",
+  "recorded_at": "2026-09-13T15:23:13.989819+00:00",
+  "github_run_id": "34764604174",
   "github_run_attempt": "1"
 }
