@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-34724244876",
-  "last_experiment_id": "EXP-PHYSICS-34719136202",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-34724244876",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "On locally-hosted SPAs with deterministic server logic, does any representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) on production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation beyond what action labels cause?",
+  "next_question": "On production SPAs with non-deterministic rendering (React/Vue virtual DOM, auth-dependent content, external data), do DOM structural features encode predictive state variation that persists even with K>=3 sufficient action history? Specifically: (1) on production SPAs where the same action can lead to different DOM states depending on external factors (user data, API responses, time), does conditional PMI I(S_next; DOM | URL, ActionHistory_K=3) exceed zero with Bonferroni-corrected permutation p < 0.0167? (2) does a richer DOM representation (accessibility tree, computed styles, or multi-feature hash) capture variation invisible to visible_text_hash on production SPAs?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-13T06:08:31.586505+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-13T12:00:14.238781+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4"
 }
