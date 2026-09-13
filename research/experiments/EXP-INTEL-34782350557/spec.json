@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-INTEL-34782350557",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means — computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+  "hypothesis": "The interactive fraction metric remains stable within page types (CV < 0.3) and discriminates between page types (between-type variance > within-type variance) under the tightened definition. Per-type means shift downward but maintain ordering (listing > detail > cart). The shift is due to removal of form-descendant DIV/SPAN/LABEL that are counted under the original definition but lack interactive roles.",
+  "falsifier": "ANY of: (1) Within-type CV > 0.3 for all page types under tightened definition; (2) Between-type variance ≤ within-type variance; (3) Per-type means ordering reverses (e.g., detail > listing); (4) Tightened definition yields zero locatable elements on any page type (definition too restrictive); (5) Raw measurement data missing role or inForm fields on any task.",
+  "baselines": [
+    "Original definition metrics from EXP-INTEL-34718481334: listing mean 0.048, detail mean 0.024, cart 0.0185, within-type CV listing 0.0048, detail 0.037, discrimination ratio 582",
+    "Original definition locatable counts: listing ~82, detail ~32, cart 21",
+    "Viewport-based yield: constant 12 elements (REJECTED)",
+    "Heuristic 0.65: FALSIFIED",
+    "Method1 0.365: INCONCLUSIVE"
+  ],
+  "positive_control": "Tightened definition locatable count > 0 on all tasks (role button/link/etc. exist on all page types). This verifies the tightened definition is not overly restrictive.",
+  "null_control": "Tightened definition locatable count ≤ original definition locatable count on all tasks (since we remove elements). If tightened count equals original count, the form-membership clause added no elements (unlikely given audit finding of 17-19/20 inForm true with role div/span).",
+  "measurement_validity": [
+    "Raw measurement data from EXP-INTEL-34718481334 (exp347_raw_results.json) contains locatable_sample entries with role and inForm fields for all 7 successful tasks",
+    "Tightened definition computed as: element counted if role in ['button', 'link', 'textbox', 'checkbox', 'radio', 'combobox', 'listbox', 'menuitem', 'tab', 'slider', 'spinbutton', 'searchbox', 'switch'] (excluding inForm condition)",
+    "Total DOM elements per task unchanged from original measurement",
+    "No Docker execution or network calls required",
+    "Analysis performed using Python script on local filesystem",
+    "All tasks with error=null and http_status=200 included; checkout tasks (connection refused) excluded",
+    "Per-task raw measurements preserved with sha256 for auditability"
+  ],
+  "decision_rule": "If ALL of: (1) tightened_locatable_count > 0 on all tasks, AND (2) within-type CV < 0.3 for at least 2 page types with n>=2, AND (3) between-type variance > within-type variance, AND (4) per-type means ordering listing > detail > cart (non-reversed), THEN verdict = SURVIVES_CURRENT_TEST. If any condition fails, verdict = FALSIFIED-IN-SETTING. If raw data missing role/inForm fields on any task, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "The metric is robust to definition tightening, increasing confidence in its construct validity for yield estimation. Product can use this metric for yield monitoring across page types. The metric captures interactive elements beyond form scaffolding.",
+  "product_consequence_negative": "The metric is an artifact of form scaffolding; the approach is closed for this definition family. Intel lane should pivot to alternative yield approaches (e.g., fragment-model-direct measurement, or accept page-type-dependent yields). Product cannot rely on this metric for yield estimation.",
+  "estimated_cost": "Very low: pure Python analysis of existing JSON data, no Docker/network calls. Estimated < 5 minutes of compute time.",
+  "expected_information_gain": "High: directly addresses the most serious construct validity concern (audit VF-DEFINITION-OVERCOUNT). Determines if the metric captures interactivity or merely form nesting. A positive result validates the metric for further use; a negative result closes this approach and redirects effort."
 }
