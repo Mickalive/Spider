@@ -5,14 +5,14 @@
 - **Experiment ID**: EXP-PHYSICS-34724244876
 - **Lane**: Physics
 - **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
-- **Date**: 2026-09-12
+- **Date**: 2026-09-13
 - **Status**: DESIGN — NOT YET FROZEN
 - **Parent Experiment**: EXP-PHYSICS-34719136202 (FALSIFIED-IN-SETTING, audit REVISE)
 - **Request Reason**: pulse (inherited next_question from parent handoff)
 
 ## 2. Scientific Question
 
-On locally-hosted deterministic SPAs, does any state representation achieve predictive PMI beyond what action (type+target) alone determines? Specifically: (1) what PMI does an action-type+target baseline MI(S_next; A) achieve, (2) does DOM or network representation exceed it, and (3) does conditional mutual information MI(S_next; DOM | A) indicate DOM encodes predictive state variation not already captured by the action (type+target)?
+On locally-hosted deterministic SPAs, does any state representation achieve predictive PMI beyond what action-history memory alone determines? Specifically: (1) what PMI does a history-conditioned baseline P(s'|action_history) achieve, and does DOM or network representation exceed it? (2) does conditional mutual information MI(S_next; DOM | action_history) indicate DOM encodes predictive state variation not already captured by the action history?
 
 ## 3. Motivation
 
