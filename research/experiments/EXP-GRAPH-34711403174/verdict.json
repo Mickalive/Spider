@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34711403174",
+  "lane": "graph",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Proof-of-concept support: structural add/remove/change-type drift on 3-4 field flat schemas detected by Jaccard (field_path,type) at threshold 0.85 with TP=1.0, FP=0.0 in deterministic mock. Does NOT support general staleness detection, real Web endpoints, nested/optional/value/semantic drift, schemas with >=10 fields, or calibrated FP rate <0.10 at confidence (CI includes 0.27 on n=10, 0.13 on n=25)."
+    }
+  ],
+  "product_action": "No product promotion. Freshness scoring is validated only on deterministic mock with 3-4 field flat schemas. Real-world integration requires scaling validation to realistic schema sizes (10-50 fields), adaptive threshold learning, and real-API testing with stochastic drift patterns.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does freshness detection with Jaccard (field_path,type) survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds threshold 0.85, and does it detect drift on real Web endpoints with stochastic patterns?",
+  "reason": "Frozen decision_rule point thresholds met (TP=1.0 >= 0.8, FP=0.0 <= 0.1, per-family TP=1.0 > 0.7, 0 failures). Audit narrows claim ceiling to proof-of-concept in deterministic mock with 3-4 flat fields only. Threshold 0.85 is well-calibrated for small schemas but analytically fails for schemas with >=10 fields where single-field drift similarity 0.91-0.98 exceeds threshold. False-positive denominator ambiguous (n=10 control vs n=25 all fresh). Wilson CIs too wide to confidently assert FP <=0.10. Experiment validates structural drift detection mechanism but does not support general staleness detection claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34711403174/spec.json: claim_ids C-FRESHNESS, hypothesis >80% TP <5% FP, decision_rule TP>=0.8 FP<=0.1",
+    "research/experiments/EXP-GRAPH-34711403174/prereg.md: H1-H4, design 10 per family drift at 6, threshold 0.85, Jaccard (field_path,type)",
+    "research/experiments/EXP-GRAPH-34711403174/freeze.json: frozen hashes prereg 35d1a5e7..., spec d4f818f2...",
+    "research/experiments/EXP-GRAPH-34711403174/result.json: metrics true_positive_rate 1.0 false_positive_rate 0.0 tp_rate_95ci [0.7961,1.0] fp_rate_95ci [0.0,0.2775] confusion_matrix tp15 fn0 fp0 tn10",
+    "research/experiments/EXP-GRAPH-34711403174/audit.json: status REVISE producer_claim_supported false claim_ceiling 'Within this deterministic mock... does NOT support: reliable staleness detection across resource families in general'",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/execution_results.json: sha256 06bcc81ead733fa6e32091a7acac8b448401580cc3d8563fe2c66df1e2e603e7 40 records",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/metrics.json: sha256 db83e53cbd81c034664cd164bce7e4905054a4aa6dbba50c905e959944d3e84b",
+    "research/experiments/EXP-GRAPH-34711403174/provenance.json: commit 96d0f470..., execution total_requests 40 failed 0",
+    "research/graph/freshness_detection/execute.py: sha256 83e2bef5df91fc06d6b16be451e98ef0a5a0be0842115c4b63523a36d0a429b8 threshold 0.85 DRIFT_POINT 6",
+    "research/claims/registry.json: C-FRESHNESS status HYPOTHESIS"
+  ]
+}
