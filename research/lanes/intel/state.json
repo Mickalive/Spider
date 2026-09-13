@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-13T01:34:24.949837+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-13T06:11:07.284413+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
 }
