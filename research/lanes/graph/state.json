@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) survive a confirmatory preregistration with structural-noise FP stress (optional field churn, null-valued fields, nested object variation) that replaces the degenerate stochastic-variation control, and does it maintain TP>=0.8 on schemas with 10-50 fields under realistic drift patterns?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-13T23:14:20.595332+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-14T01:12:32.050117+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
 }
