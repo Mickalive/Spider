@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34718481334",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means — computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+  "why_next": "The current experiment's scientific signal (within-type CV <0.04, discrimination ratio 582+, parent replication <2%) is genuinely informative but the metric's construct validity is threatened by DEF-FALLBACK-INTERACTIVE overcounting form-descendant DIV/SPAN/LABEL (audit VF-DEFINITION-OVERCOUNT: locatable_sample shows 17-19/20 inForm true with role div/span). Whether the stability and discrimination properties survive a tighter role-only definition is computable from existing raw data (locatable_sample entries have role and inForm fields) and directly determines if the metric captures interactivity or merely form nesting structure. This is the highest-information low-cost next step: it addresses the most serious construct validity concern without requiring new Docker infrastructure, and either confirms the metric is robust to definition tightening or reveals it is an artifact of form scaffolding. If the tighter definition destabilizes the metric, the approach is closed; if it stabilizes, the metric becomes more semantically meaningful for product use.",
+  "carry_forward": {
+    "established": [
+      "Full-page interactive fraction (locatable/total_dom under DEF-FALLBACK-INTERACTIVE) on am1n3e/webarena-verified-shopping:latest (digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb) is stable within page types: listing CV 0.0048 (n=3, values 0.0481/0.0480/0.0479), detail CV 0.037 (n=3, values 0.0229/0.0244/0.0245), cart CV 0.0 (n=1 distinct). Between-type discrimination ratio 582 (deduped). Per-type means: listing ~0.048, detail ~0.024, cart ~0.0185. (exp347_raw_results.json, audit.json recomputed_metrics)",
+      "Total DOM element counts vary across page types (stdev 237-248 > 0): listing ~1705, detail ~1336, cart 1136. Content-dependent, not fixed chrome. (exp347_raw_results.json, result.json metrics)",
+      "Viewport intersection measurement (threshold 0.5, 1280x720) produces constant 12 elements across all page types, confirming parent finding that viewport-based yield captures only fixed navigation chrome. Viewport approach remains REJECTED. (exp347_raw_results.json: viewport_elements 12 all tasks, audit.json VF-VIEWPORT-CONSTANT-CONFIRMED)",
+      "Parent replication successful: locatable elements per page type exactly match parent values (listing 82 delta 0, detail 32 delta 0, cart 21 delta 0); total DOM within 2% (listing 0.018, detail -0.012, cart 0.0). Strong replication on this Docker digest. (result.json metrics.parent_replication_delta, audit.json BF-PARENT-LOCATABLE-TOTALDOM REPLICATED)",
+      "Heuristic 0.65 remains FALSIFIED robustly (>23pp under any denominator). Method1 0.365 remains INCONCLUSIVE (definition unknown). (audit.json baseline_findings, parent handoff established)",
+      "DEF-FALLBACK-INTERACTIVE frozen definition preserved: interactive elements with non-null bbox AND (role in button/link/textbox/etc. OR onclick/onsubmit handler OR form membership OR aria-label/aria-describedby). Frozen definition sha256: 9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5. (EXP-INTEL-34607693437/frozen_definition.json)",
+      "CDP yield (viewport/total_dom) is order-of-magnitude sensitive to viewport counting method: 0.00865 with viewport=12 vs parent 0.082 with viewport=108. Not a stable primary metric; measures chrome ratio not interactive content. (audit.json BF-CDP-YIELD REPLICATED_BUT_DEFINITION_DEPENDENT)"
+    ],
+    "rejected": [
+      "Viewport intersection with threshold 0.5 as a method to measure page-content yield — REJECTED (constant 12 elements across all page types, captures only fixed navigation chrome, confirmed across parent and this experiment)",
+      "yield_locatable = viewport_elements(all DOM) / locatable_elements(interactive) as a valid metric — REJECTED (mixed element definitions, values >1.0 mathematically meaningless, from parent)",
+      "Heuristic 0.65 as a yield estimate — REJECTED (falsified >23pp under any denominator, robustly across experiments)",
+      "Checkout cart proxy (checkout/cart/) as true checkout measurement — REJECTED (identical to cart page, same DOM 1136, same locatable 21, same interactive_fraction 0.0185)"
+    ],
+    "unknown": [
+      "Does the interactive fraction metric maintain stability and discrimination when form-descendant DIV/SPAN/LABEL are excluded from the definition (role-only counting)? This is the highest-information computable question from existing raw data.",
+      "What is the true checkout page yield when port 7770 is accessible? Both checkout tasks failed with net::ERR_CONNECTION_REFUSED across parent and this experiment.",
+      "Does the metric generalize beyond the Magento shopping site to GitLab, Reddit, or other WebArena-Verified environments? Cross-site measurement not performed.",
+      "Does Docker image digest drift change DOM structure and interactive fraction values? Digest recorded but not tested across digests.",
+      "Is the Playwright accessibility tree viable for element enumeration in headless Chromium? API absent (AttributeError), not degenerate tree — infrastructure limitation, not scientific finding.",
+      "What is the canonical element definition and denominator (total_dom vs elements_with_bbox) for the 812-task corpus? Current metric is definition-dependent (0.018-0.048 vs 0.019-0.053 with bbox denominator).",
+      "Does the 812-task WebArena-Verified corpus sampling reproduce these shopping-site stability properties? Sampling from actual dataset not performed (hard-coded URLs used)."
+    ],
+    "do_not_assume": [
+      "Do NOT assume the 812-task corpus is viable for C-CROSSSITE or C-LLM-INHERIT yield claims — the experiment measured metric properties on 7 unique shopping site pages, not the corpus, and the verdict is MEASUREMENT_INVALID",
+      "Do NOT assume the interactive fraction (0.018-0.048) represents actual SPIDER fragment model capture — this measures DOM structural fraction under DEF-FALLBACK-INTERACTIVE, not what the fragment model retains",
+      "Do NOT assume cross-site (GitLab/Reddit) yield values from shopping site data — only shopping site was measured; cross-site claim requires separate measurement on those environments",
+      "Do NOT assume the metric is definition-independent — alternative denominator (elements_with_bbox) yields different values (0.019-0.053), and form-membership overcounting may inflate the numerator",
+      "Do NOT assume cart within-type variance is truly 0.0 — the 0.0 value is an artifact of pseudoreplication (two identical measurements of the same URL), not independent replication of distinct cart pages",
+      "Do NOT assume the discrimination ratio of 582-874 is precise — it is sensitive to the cart pseudoreplication artifact and small sample sizes (n=3 per type, n=1 distinct cart)",
+      "Do NOT assume the parent's 108-element viewport dataset is canonical or reproducible — the parent's viewport counting used different threshold/implementation, and this experiment found 12 viewport elements consistently",
+      "Do NOT assume positive_control failure means the measurement pipeline is broken — the a11y API absence is an infrastructure limitation (Playwright version/environment), not a pipeline error; DOM enumeration worked correctly on all 8 attempted tasks"
+    ]
+  },
+  "dependencies": [
+    "Analysis of EXP-INTEL-34718481334 raw measurement data with tightened role-only definition (no form-membership clause) — computable from exp347_raw_results.json locatable_sample fields without new Docker execution",
+    "If tightened definition is stable: re-run with proper sampling from WebArena-Verified dataset (random.Random(seed=N).sample, distinct cart pages, at least 8 unique tasks) to meet frozen decision_rule threshold",
+    "Resolve checkout port 7770 redirect to enable true checkout yield measurement",
+    "Pull GitLab/Reddit Docker images (am1n3e/webarena-verified-gitlab, am1n3e/webarena-verified-reddit) for cross-site generalization testing",
+    "Resolve Playwright accessibility API availability (version/environment) to enable H4 evaluation",
+    "Record Docker image digest before each measurement session for drift bounding"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34718481334/result.json",
+    "research/experiments/EXP-INTEL-34718481334/audit.json",
+    "research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py sha256:085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_cart_1.json sha256:5c0ebfd1a1db7a7a8b2876f786e8701150e77a022498e633c73def4a6180c73c",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_electronics.json sha256:d7a41043dc16547729b05dc4a4f8c8d9da2eff9442a5147718d2e1cd9d414775",
+    "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_camera.json sha256:04120318141685f40974a92628dfc10ade36075342b20db3f86dc95179731fc3",
+    "research/experiments/EXP-INTEL-34718481334/provenance.json",
+    "research/experiments/EXP-INTEL-34718481334/spec.json",
+    "research/experiments/EXP-INTEL-34718481334/prereg.md",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json sha256:9c6bb9a03b6cbcdf206ce9192f5fcf60c79d6df8f65850027aeee50b61f503d5",
+    "research/experiments/EXP-INTEL-34607693437/handoff.json"
+  ],
+  "recommended_action": "First: compute tightened definition (role-only, no form-membership) interactive fractions from existing exp347_raw_results.json locatable_sample data to determine if stability and discrimination survive definition tightening. This is zero-cost analysis from existing artifacts. If tightened definition is stable: design a follow-up experiment with proper sampling from WebArena-Verified dataset (distinct pages per task, random.Random(seed=N).sample, >=8 unique tasks across >=3 page types) to meet frozen decision_rule and achieve SURVIVES_CURRENT_TEST. If tightened definition destabilizes: the metric approach is closed for this definition family and the lane should pivot to alternative yield approaches (e.g., fragment-model-direct measurement, or accept page-type-dependent yields). Route to RUNTIME lane for measurement substrate implementation only after a valid metric is established. Do NOT promote to Product Core — metric is definition-dependent, single-site bounded, and MEASUREMENT_INVALID."
+}
