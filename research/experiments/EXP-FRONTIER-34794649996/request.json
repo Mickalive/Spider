@@ -1,0 +1,20 @@
+{
+  "base_sha": "c990e219a2fdf05cd37cb33f2f7134704108f80b",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-14T01:03:46.154250+00:00",
+  "experiment_id": "EXP-FRONTIER-34794649996",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does per-page-type binned TV estimation with per-type bias correction recover absolute signal strength lost to pooled heterogeneous averaging, or is the 94.6% attenuation a fundamental property of action-dependent structure in non-stationary DGPs?",
+  "lane": "frontier",
+  "origin_github_run_id": "34794649996",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34773875458",
+    "path": "research/experiments/EXP-FRONTIER-34773875458/handoff.json",
+    "sha256": "8e7d9b6afc77584d4575415d596134b542c4e0233cd29c6d0c31e64cdd174b4e"
+  },
+  "reason": "pulse",
+  "request_hash": "52255b335dc9f1c5c784cc81c8c870a8049c1411fc505d290ac3f7c3e7bca8b3",
+  "request_id": "71821275a15d165e5fcc6c22",
+  "schema_version": 1
+}
