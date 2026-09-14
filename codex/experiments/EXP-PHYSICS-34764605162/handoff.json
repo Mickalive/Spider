@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34764605162",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "On locally-hosted Express SPAs with correlated non-determinism (session-dependent DOM variants where DOM_before correlates with latent session state that determines S_next), does DOM structural features exhibit conditional PMI I(S_next; DOM_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00208? Correlated non-determinism is the key gap: the current experiment tested independent per-step observation noise where E[I]=0 by construction (audit V1). Correlated non-determinism (e.g., server session state where before-variant predicts after-variant) is the only remaining locally-hosted DOM test that could yield positive PMI. If this also yields PMI <= 0, the DOM-hash path is closed across all non-deterministic regimes testable without production infrastructure, and the Physics lane should move to network-response information theory (API payload structure as an alternative observation level).",
+  "why_next": "Two bounded falsifications now exist for DOM-hash features as predictive state beyond action-history memory: (1) deterministic Express SPAs — PMI=0 at K=3, 100% action-history accuracy, DOM fully redundant (parent EXP-PHYSICS-34724244876); (2) independent per-step observation noise on non-deterministic Express SPAs — PMI 0.004-0.025 bits at K=3, Bonferroni p=1.0, E[I]=0 by construction (audit V1). The audit ceiling explicitly carves out correlated non-determinism as the one remaining locally-hosted setting where DOM_before could predict S_next. Testing correlated non-determinism is the discriminating test: if session-dependent DOM variants where DOM_before encodes latent state that determines S_next also yield PMI<=0, the DOM-hash path is closed across all locally-hosted regimes and the lane should move to an orthogonal observation level (network payloads, API response structure) rather than repeat DOM-hash testing. If correlated non-determinism yields PMI>0, it identifies the specific condition under which DOM encodes predictive dynamics.",
+  "carry_forward": {
+    "established": [
+      "DOM visible_text_hash, accessibility_tree_hash, and multi_feature_hash add conditional PMI only when action-history is truncated (K=1,2) on deterministic Express SPAs, but PMI=0 at K=3 when action-history is sufficient (parent EXP-PHYSICS-34724244876)",
+      "On locally-hosted 5-state linear Express SPAs with independent per-step DOM observation noise, conditional PMI I(S_next; DOM_before | URL, H_K=3) is not significant after Bonferroni correction (0/2 non-deterministic types surviving, all p_bonf=1.0)",
+      "Hash-based DOM representations (visible_text_hash, accessibility_tree_hash, multi_feature_hash) are isomorphic in this FSM design — effectively one representation tested, not four (audit V4)",
+      "Numeric structural features (element_count, tree_depth, interactive_density, form_count) are invariant per FSM state regardless of DOM variant — PMI=0.0 across all settings",
+      "Action-history prediction accuracy at K=3 is 100% on deterministic SPAs and 28-36% on non-deterministic SPAs, confirming non-determinism was introduced but DOM still adds no significant PMI",
+      "Positive control (random labels) passes correctly (PMI=0.0), resolving the parent's positive control failure",
+      "Null control (shuffled labels) passes correctly (mean PMI=0.0)",
+      "Determinism check confirms observation noise was introduced: deterministic SPA accuracy=1.0, random_API=0.361, timing_dependent=0.308"
+    ],
+    "rejected": [
+      "DOM hash-based state labeling as predictive dynamics beyond action-history memory on deterministic Express SPAs (FALSIFIED, parent EXP-PHYSICS-34724244876)",
+      "DOM hash-based state labeling as predictive dynamics beyond action-history memory when non-determinism is independent per-step DOM observation noise on Express SPAs (FALSIFIED, this experiment)"
+    ],
+    "unknown": [
+      "Whether DOM structural features exhibit conditional PMI > 0 at K=3 on SPAs with correlated non-determinism (session state, user-dependent content, external data where DOM_before correlates with latent state that determines S_next)",
+      "Whether production SPAs with client-side virtual DOM (React/Vue concurrent mode, suspense, hydration timing) exhibit conditional PMI > 0 at K=3 — different rendering pipeline from server-side non-determinism",
+      "Whether network response payload structure (API response bodies, headers, timing signatures) exhibits conditional PMI > 0 at K=3 on non-deterministic SPAs — alternative observation level not yet tested",
+      "Whether richer DOM representations (computed CSS styles, visual layout, ARIA roles, element geometry, interaction event sequences) capture predictive variation invisible to hash-based representations",
+      "Whether state-transition non-determinism (same FSM state + action -> different next FSM state, as opposed to same FSM state -> different DOM observation of same state) produces DOM predictive variation",
+      "Whether larger sample sizes (10000+ transitions) or longer action histories (K>3) would reveal statistically significant PMI effects"
+    ],
+    "do_not_assume": [
+      "Do not assume DOM hash is universally non-predictive — two falsifications are bounded to (1) deterministic FSMs and (2) independent observation noise. Correlated non-determinism is untested.",
+      "Do not assume the small positive PMI on timing-dependent SPAs (0.025 bits) reflects real signal — it is within permutation null distribution (z=0.41, p_raw=0.32) and dominated by finite-sample noise",
+      "Do not assume action-history prediction accuracy of 28-36% on non-deterministic SPAs means action-history is weak — it is well above chance (20% for 5 states) and still sufficient to make DOM redundant",
+      "Do not generalize to production SPAs, client-side virtual DOM, React/Vue concurrent mode, auth-dependent content, or external data feeds — the audit explicitly excludes these from the claim ceiling",
+      "Do not assume numeric structural features are universally invariant — invariance is specific to this FSM design where variant encoding is in text content, not element counts",
+      "Do not assume the positive/null control passes demonstrate pipeline discriminant validity on non-deterministic strata — controls are degenerate on deterministic data (audit V3)",
+      "Do not confuse observation non-determinism (different DOM for same FSM state) with transition non-determinism (different FSM state from same FSM state + action) — the experiment tests the former"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json (this handoff, sha256 of this file)",
+    "research/experiments/EXP-PHYSICS-34724244876/handoff.json sha256 3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4 (parent handoff)",
+    "research/experiments/EXP-PHYSICS-34764605162/raw_dom_captures.json sha256 a211b0d4f8765f648bcf003058a62b919d96cfe48c0fe2165822c44787090fd3",
+    "research/experiments/EXP-PHYSICS-34764605162/analyze.py sha256 a53330f83b5b233164994fcc33db7fcad7e56d472b7ff092899ebea04ac4a57d",
+    "research/experiments/EXP-PHYSICS-34764605162/generate_data.py sha256 1e55c7b5a0da68c83c764527ea3a7e9c74f165d1a0ab328d5cb6e75bd10f0b2d",
+    "research/claims/registry.json C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34764605162/audit.json claim_ceiling validity_findings V1_independent_noise_bakes_in_null V3_controls_degenerate_on_deterministic",
+    "research/experiments/EXP-PHYSICS-34764605162/result.json metrics.conditional_pmi metrics.permutation_test_bonferroni_p controls",
+    "research/experiments/EXP-PHYSICS-34764605162/raw_analysis_results.json",
+    "research/experiments/EXP-PHYSICS-34764605162/prereg.md §12 decision rules §12.2.1 falsification criterion",
+    "research/experiments/EXP-PHYSICS-34724244876/verdict.json FALSIFIED-IN-SETTING on deterministic SPAs",
+    "research/claims/registry.json C-WEB-DYNAMICS"
+  ],
+  "recommended_action": "Next experiment should test correlated non-determinism on locally-hosted Express SPAs: modify generate_data.py so that DOM_before variant correlates with a latent session state variable that determines which DOM_after variant occurs (e.g., session_id determines which notification count appears, and the same session_id predicts the next-state variant). This is the discriminating test for DOM hash under the one remaining condition where E[I(S_next; DOM_before)] could be positive. If correlated non-determinism also yields PMI<=0, move to network-response information theory (API payload structure) as an orthogonal observation level for C-WEB-DYNAMICS. Do not repeat independent-noise non-determinism testing or DOM-hash testing on deterministic SPAs."
+}

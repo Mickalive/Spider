@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34794649996",
+  "lane": "frontier",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Decision-mapping inconsistency: result.json outcome FALSIFIES with controls.null_control.pass=false and controls.paired_comparison.pass=false correctly yields FALSIFIED-IN-SETTING under spec.json falsifier and decision_rule, but run_execute.py lines 487-489 maps ANY null/positive failure to MEASUREMENT_INVALID before the falsified branch; producer overrode to FALSIFIES/status COMPLETE. Clarify and align code path with spec: null_control failure is a falsifier per spec, not a pipeline error, and report the override explicitly.",
+    "Pooled permutation N deviates from prereg: prereg.md 6.2 and spec.json baselines specify pooled perm N=2000 for direct parent comparison, but run_execute.py:296 calls permutation_test_tv_pooled with N_PERMUTATIONS_PER_TYPE=200. Recompute pooled_bc_tv with N=2000 or amend prereg to 200 and quantify Monte Carlo SE impact; pooled BC 0.051 replicates parent 0.051 with 200 but perm_mean variance is larger (~SE 0.07 vs 0.022) and not reported.",
+    "Paired comparison implementation deviates from prereg: spec.md 7.1 and prereg.md 7.1 specify paired t-test across 8 page types at lambda=1 (per_type_bc[8] vs pooled_bc), but run_execute.py:385-388 tests mean_per_type_bc_lambda1_reps[5] vs pooled_bc_lambda1_reps[5] paired across 5 replications. Both are one-sided per_type>pooled and both fail (recomputed p_one 0.888 across types, producer p_one 0.989 across reps), so conclusion unchanged, but the frozen test must be executed as preregistered and both results reported.",
+    "Sparse-binning confound must be disclosed as alternative explanation for 'fundamental' attenuation: 20x20 grid (400 bins) with 250 transitions per type gives 0.625 expected counts/bin per type vs 5.0/bin pooled. Per-type raw TV 0.90-0.95 and per-type perm_mean 0.37-0.61 at lambda0 (vs pooled BC raw ~0.545) are inflated by sampling variance, not just heterogeneity. Per-type BC (0.034) vs pooled BC (0.051) confounds sample size with estimator type. Do not claim attenuation is fundamentally irrecoverable; bound claim to this sparse n=250/type regime and test n=500-1000/type sensitivity before closing density-divergence.",
+    "Null control failure and CV instability require bounded interpretation: 4/8 types exceed 0.01 at lambda0 (max 0.028, result.json:controls.null_control) and 6/8 types have CV>0.5 at lambda1 (max 1.594, controls.cv_check) indicate per-type bias-corrected TV is noisy and produces false positives. Product consequence 'density-divergence unsuitable for real Web data' overgeneralizes from a noise-dominated regime; report that instrument does not achieve false-positive control at n=250/type.",
+    "Claim ceiling must remain synthetic-only: all evidence is synthetic 2D [0,1]^2 with deterministic block-cycling (i//250 mod 8), toy affine families, heteroscedastic Gaussian noise clipped to [0,1]. No inference to high-dimensional Web DOM transitions, non-Gaussian multimodal noise, temporal correlation, or state-dependent switching is justified. Prereg 9.4 synthetic-to-real gap persists.",
+    "Frequency baseline comparison must report the larger gap: producer reports 6x (pooled 0.051 vs 0.335) but per-type BC 0.034 is 9.8x smaller than frequency baseline 0.335; both are near noise floor. State that absolute magnitude remains far below marginal structure."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Primary per-type BC and pooled BC means recompute exactly from result.json",
+      "severity": "none",
+      "details": "Mean per-type BC at lambda1 0.03426889280835377 (sum 0.274051/8), pooled BC 0.05101851949850601, ratio 0.6716951637406349, Cohen d -1.6426573606833852, aggregate Spearman rho for mean per-type BC 0.7619047619047621 (p=0.0280049) verify via numpy/scipy. Parent replication 0.051 within 0.02 of expected passes. Positive control min 0.006804>=0.001 passes. No pipeline errors.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.primary_comparison_lambda1, metrics.per_type_bc_tv.mean_across_types_by_lambda, metrics.pooled_bc_tv.means_by_lambda, controls.parent_replication"
+    },
+    {
+      "finding": "Null control fails and CV indicates instability: instrument noise-dominated at n=250/type",
+      "severity": "high",
+      "details": "Per-type BC at lambda0: [0.0282265,0.0,0.0117293,0.0097634,0.0155806,0.0144464,0.0067751,0.0069495]; 4/8 >0.01 max 0.0282 fails spec null_control. Per-type CV at lambda1: [0.815,0.735,1.374,1.029,1.075,1.594,0.425,0.517] max 1.594 >0.5 fails 6/8. With 0.625 counts/bin, sampling variance dominates; per-type perm_mean at lambda0 0.37-0.39 low-noise vs 0.596-0.609 high-noise inflates bias floor. Falsified outcome is numerically decisive (>0.2 threshold missed by 6x) but false-positive rate undermines claim that absence of recovery is purely substantive rather than noise-driven.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:controls.null_control, controls.cv_check, metrics.per_type_perm_mean_at_lambda0, validity_notes"
+    },
+    {
+      "finding": "Per-type BC significantly lower than pooled BC opposite to hypothesis",
+      "severity": "none",
+      "details": "Hypothesis per-type BC >0.2 and >pooled: observed mean 0.034 <0.1 and < pooled 0.051. Producer paired test across 5 reps t=-3.6731 p_one=0.989333 (per_type not > pooled); recomputed paired across 8 types t=-1.3335 p_one=0.88794 p_two=0.224. Both correctly indicate no significant improvement; Cohen d -1.64 negative. Decision FALSIFIED-IN-SETTING valid per spec thresholds 1 and 2.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:controls.paired_comparison, metrics.primary_comparison_lambda1, run_execute.py:385-392"
+    },
+    {
+      "finding": "Pooled permutation N and paired-test unit deviate from prereg but do not alter conclusion",
+      "severity": "medium",
+      "details": "Spec prereg requires pooled N=2000 and paired across 8 types; code uses N=200 and paired across 5 reps. Both deviations favor more stable pooled estimate if corrected, which would increase pooled advantage, not create spurious per-type advantage. Recomputed cross-type test still strongly fails (p_one 0.888). Pooled BC 0.051 still matches parent 0.051 within SE, but Monte Carlo SE for pooled perm_mean at N=200 is ~0.07 vs ~0.022 at N=2000, widening uncertainty not disclosed.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/run_execute.py:296, prereg.md:6.2, spec.json:measurement_validity"
+    },
+    {
+      "finding": "Sparse binning confound: per-type vs pooled comparison confounds n with estimator",
+      "severity": "high",
+      "details": "Expected counts/bin 0.625 (250/400) per type vs 5.0 (2000/400) pooled explains inflated per-type raw TV (0.90-0.95 at lambda1) and perm means (0.37-0.61 at lambda0). Bias-corrected TV subtraction leaves residual variance inflated per type. Producers validity_notes and report.md 5.1 acknowledge sparsity but product_consequence_negative treats result as fundamental heterogeneity barrier. Without equal-n comparison (e.g., subsample pooled to 250/type) or n-sensitivity, the 67% per-type/pooled ratio cannot isolate estimator contamination vs sample-size bias.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.per_type_raw_tv_at_lambda1, metrics.per_type_perm_mean_at_lambda0, metrics.pooled_bc_tv.means_by_lambda, validity_notes"
+    },
+    {
+      "finding": "Per-type Spearman scaling collapses except one type; aggregate rho driven by outlier",
+      "severity": "medium",
+      "details": "Spearman rho(per_type_BC, lambda) 8 types: -0.38,0.33,0.26,0.26,0.31,0.00,0.76(p=0.028),0.48. Only type 6 (rotation_low_shifted 0.118 at lambda1) significant. Mean per-type rho 0.76 p=0.028 is driven by that outlier; removing type6 mean lambda1 drops to 0.022. Pooled BC rho recomputed 0.928 (p=0.00086) is monotonic but per-type is not. This contradicts report.md claim that per-type and pooled both show detection; per-type detection is largely absent post-correction.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.per_type_bc_tv.spearman_rho_by_type, mean_across_types_by_lambda"
+    },
+    {
+      "finding": "Bias floor verification passes but magnitude reveals misspecification",
+      "severity": "medium",
+      "details": "bias_floor_verification std 0.109>0.02 passes, low-noise perm 0.37-0.39 vs high-noise 0.596-0.609 correctly varies by noise. However prereg predicted 0.10-0.15 low /0.35-0.38 high (from parent audit). Observed floors are 2-3x larger due to sparsity (0.625 counts/bin). This confirms measurement regime shifted far into sparse bias, not captured by prereg expectations; the 'per-type contamination' motivation is dwarfed by sparse inflation.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:controls.bias_floor_verification, prereg.md:8.4"
+    },
+    {
+      "finding": "No target leakage; seed independence holds but formula offset deviates",
+      "severity": "low",
+      "details": "Per-type TV computed within-type only from empirical P(S|A) binned, permutation shuffles action labels within type correctly. No next-state leakage. Seed formula uses BASE_SEED*100000 + l_idx*1000 + rep_idx*10 + 999 vs spec func_seed*100000+..., but still independent per cell and no overlap with parent (different +999 offset). Minor deviation immaterial.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/run_execute.py:generate_transitions_nonstationary, permutation_test_tv_per_type, spec.json:measurement_validity"
+    },
+    {
+      "finding": "Frequency baseline recomputes and underscores absolute magnitude gap",
+      "severity": "low",
+      "details": "Frequency baseline mean_TV 0.3350107551482074 recomputes from reported per-action 0.314-0.346. Ratio to pooled BC 6.56x, to per-type BC 9.77x confirms absolute signal is an order of magnitude below marginal structure. Report understates per-type gap (reports 6x pooled only).",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.frequency_baseline, run_execute.py:427-443"
+    },
+    {
+      "finding": "Synthetic-to-real gap and non-stationarity operationalization weak",
+      "severity": "high",
+      "details": "All 80000 transitions synthetic 2D [0,1]^2 with 3 affine families clipped Gaussian; non-stationarity is deterministic block cycling every 250. Real Web has high-dimensional DOM, non-Gaussian multimodal noise, state-dependent switching, temporal correlation, missing data. Prereg 9.4 acknowledges but product implications generalize beyond justified regime.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/run_execute.py:PAGE_TYPES, generate_transitions_nonstationary, prereg.md:9.4"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "Pooled BC TV from parent EXP-FRONTIER-34773875458 (0.051 at lambda=1)",
+      "strength": "strong",
+      "finding": "Replicates within 0.00002 with N=200 perms (vs parent N=2000). Provides valid pooled comparator and confirms 94.6% absolute attenuation (stationary 0.952 vs pooled 0.051) persists. Pooled Spearman rho 0.929 strongly monotonic; addresses audit concern that pooled rank detection survives. Baseline is strong for pooled but uses 8x more data per lambda than per-type, confounding direct magnitude comparison.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.pooled_bc_tv, controls.parent_replication, request.json:parent_handoff"
+    },
+    {
+      "baseline": "Per-type raw TV (0.901-0.947 at lambda=1)",
+      "strength": "moderate",
+      "finding": "Uncorrected per-type TV is 0.90-0.95 inflated by sparsity; after subtracting perm_mean 0.37-0.61 leaves BC 0.006-0.118. Baseline shows signal exists before correction but bias subtraction removes most. Heterogeneity across types visible (type6 0.118 outlier 3x mean). Baseline demonstrates estimator, not data, drives collapse.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.per_type_raw_tv_at_lambda1, metrics.per_type_bc_tv.means_by_lambda"
+    },
+    {
+      "baseline": "Per-type bias floor predictions (0.10-0.15 low, 0.35-0.38 high)",
+      "strength": "weak",
+      "finding": "Predictions from parent audit underestimate observed floors by 2x due to sparsity. Baseline correctly anticipated heterogeneity direction (low < high) but misspecified magnitude, indicating baseline was calibrated for denser regime. Updated baseline should be ~0.37 low /0.60 high at 250/type on 400 bins.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/spec.json:baselines, result.json:controls.bias_floor_verification"
+    },
+    {
+      "baseline": "Frequency baseline marginal vs action-conditional TV 0.335",
+      "strength": "moderate",
+      "finding": "Mean 0.335 (per-action 0.314-0.346) correctly recomputes. At 6.5x pooled and 9.8x per-type BC, baseline shows absolute BC signal is far below marginal structure, indicating poor absolute separability. Baseline is appropriately stringent but was used only descriptively; should anchor product thresholding discussion.",
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.frequency_baseline"
+    }
+  ],
+  "recomputed_metrics": {
+    "mean_per_type_bc_lambda1": 0.03426889280835377,
+    "pooled_bc_lambda1": 0.05101851949850601,
+    "ratio_per_type_div_pooled_lambda1": 0.6716951637406349,
+    "per_type_bc_lambda1_by_type": [0.025318024745331937, 0.025989160616001473, 0.006804432050503339, 0.023924064151891366, 0.017129173327898806, 0.013513382728087598, 0.11803165150156716, 0.04344125334554849],
+    "per_type_bc_lambda0_by_type": [0.028226509253943977, 0.0, 0.011729357453257216, 0.009763443922109972, 0.015580652074991708, 0.01444644673607669, 0.006775142844244952, 0.00694958577976702],
+    "null_control_fail_count": 4,
+    "null_control_max_bc": 0.028226509253943977,
+    "positive_control_min_bc": 0.006804432050503339,
+    "pooled_paired_t_across_types_t": -1.333518013242632,
+    "pooled_paired_t_across_types_p_one_sided": 0.887941039133474,
+    "pooled_paired_t_across_types_p_two_sided": 0.22411792173305206,
+    "producer_paired_t_across_reps_t": -3.6730935222284393,
+    "producer_paired_t_across_reps_p_one_sided": 0.9893334847770274,
+    "producer_cohens_d": -1.6426573606833852,
+    "mean_per_type_bc_by_lambda": [0.011683892258048941, 0.011394198196553736, 0.01321169218590108, 0.012829754166087061, 0.01318335478354307, 0.012090611934232894, 0.016298129447454554, 0.03426889280835377],
+    "pooled_bc_by_lambda": [0.003748225711573261, 0.005309046081259395, 0.01085619821912851, 0.005684529154817442, 0.007941908135621945, 0.017160075796678033, 0.028278006487917638, 0.05101851949850601],
+    "aggregate_spearman_rho_mean_per_type_bc": 0.7619047619047621,
+    "aggregate_spearman_p_mean_per_type_bc": 0.028004939153071805,
+    "per_type_spearman_rho": {"0": -0.38095238095238104, "1": 0.3333333333333334, "2": 0.261904761904762, "3": 0.261904761904762, "4": 0.30952380952380953, "5": 0.0, "6": 0.7619047619047621, "7": 0.4761904761904762},
+    "per_type_spearman_p": {"0": 0.35181255311756476, "1": 0.4197530864197532, "2": 0.530922861565801, "3": 0.530922861565801, "4": 0.4556448907375822, "5": 1.0, "6": 0.028004939153071805, "7": 0.23293553465009798},
+    "pooled_bc_spearman_rho": 0.9285714285714286,
+    "pooled_bc_spearman_p": 0.0008629681828999767,
+    "per_type_raw_tv_lambda1": {"0": 0.9336134453781513, "1": 0.9328700307065496, "2": 0.9019736828093599, "3": 0.9170594285512659, "4": 0.9192462474088401, "5": 0.911143333018333, "6": 0.9458380288436903, "7": 0.9473653035666766},
+    "per_type_perm_mean_lambda0": {"0": 0.37706500600612924, "1": 0.3895548730131635, "2": 0.38486371365336725, "3": 0.5968278980339907, "4": 0.6094016940017042, "5": 0.6058225277153321, "6": 0.3732160792485694, "7": 0.3710827729449644},
+    "per_type_cv_lambda1": [0.8152686108532438, 0.7357586984398383, 1.37434021263227, 1.029353769452497, 1.0755608249922815, 1.5943726865836452, 0.4258038891630622, 0.517463248499068],
+    "max_cv_lambda1": 1.5943726865836452,
+    "frequency_baseline_mean": 0.3350107551482074,
+    "expected_counts_per_bin_per_type": 0.625,
+    "expected_counts_per_bin_pooled": 5.0,
+    "absolute_attenuation_vs_stationary": 0.9464688007162547,
+    "recompute_method": "numpy mean, scipy.stats.ttest_1samp and ttest_rel, scipy.stats.spearmanr, manual ratio"
+  },
+  "claim_ceiling": "Under frozen design synthetic 2D [0,1]^2 with 8 heterogeneous page types, deterministic block-cycling (250 transitions/type, 2000 pooled per lambda, 5 reps, 20x20 grid), per-type bias correction with N=200 per-type permutations does NOT recover absolute signal: mean per-type BC TV at lambda=1 =0.034 (threshold >0.2) is 0.67x pooled BC 0.051 and not significantly greater (recomputed paired p_one 0.888 across 8 types; producer p_one 0.989 across 5 reps). Hypothesis per-type BC >0.2 is falsified in this sparse regime. Broader claim that 94.6% attenuation is a fundamental property of heterogeneous DGPs and that density-divergence is unsuitable for real Web data is NOT justified: per-type instrument at 0.625 counts/bin is noise-dominated (null 4/8 >0.01 max 0.028, CV up to 1.59, perm floor 0.37-0.61 inflated 2x over predictions) and confounds sample size (n=250) with estimator type (n=2000 pooled). Ceiling remains synthetic-only, sparse-sample falsification of the specific per-type recovery mechanism; no inference to larger-n per-type, adaptive binning, or real Web DOM dynamics. Do not promote to product or to real-data collection decision on this basis alone.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34794649996/spec.json:claim_ids, question, hypothesis, falsifier, decision_rule, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-34794649996/prereg.md:3-10 decision rules, 6.2 per-type permutation N=200, 8.1-8.4 controls",
+    "research/experiments/EXP-FRONTIER-34794649996/freeze.json:hashes",
+    "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.per_type_bc_tv, metrics.pooled_bc_tv, metrics.primary_comparison_lambda1, metrics.effect_size, metrics.per_type_raw_tv_at_lambda1, metrics.per_type_perm_mean_at_lambda0, metrics.frequency_baseline, controls",
+    "research/experiments/EXP-FRONTIER-34794649996/report.md:Executive Summary, Controls, Null Control Failure Analysis, Per-Type Scaling Analysis",
+    "research/experiments/EXP-FRONTIER-34794649996/run_execute.py:296 pooled N=200, 385-392 paired test across reps, 487-496 decision mapping, generate_transitions_nonstationary, permutation_test_tv_per_type, GRID_SIZE",
+    "research/experiments/EXP-FRONTIER-34794649996/provenance.json:execution_time_seconds, total_transitions, environment, key_methodological_change",
+    "research/experiments/EXP-FRONTIER-34773875458/handoff.json:carry_forward unknown/do_not_assume/dependencies, next_question, why_next",
+    "research/experiments/EXP-FRONTIER-34773875458/audit.json:validity_findings on sparse binning and bias floor contamination"
+  ],
+  "unresolved": [
+    "Whether per-type BC with equal sample size (e.g., 2000 per type or pooled subsampled to 250/type) would show recovery; required to disentangle estimator contamination from sparsity bias",
+    "Whether increasing transitions per type to 500-1000 (1.25-2.5 counts/bin) stabilizes per-type TV and eliminates null false positives (4/8 >0.01) and CV>0.5",
+    "Whether alternative divergence measures (adaptive binning, KDE, kNN) or causal factorization would recover magnitude where binned TV fails at this sparsity",
+    "Whether stochastic or state-dependent page-type switching (vs deterministic block-cycling) changes per-type vs pooled ordering",
+    "Whether any per-type BC magnitude would exceed frequency baseline 0.335 threshold for practical downstream agent exploration utility",
+    "Whether real Web DOM transitions exhibit action-conditional structure detectable by any per-type estimator — no real Web data in this lane"
+  ]
+}
