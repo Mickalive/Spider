@@ -1,0 +1,114 @@
+{
+  "per_task": [
+    {
+      "task_id": "listing_clothing-shoes-jewelry",
+      "page_type": "product_listing",
+      "tightened_locatable_count": 8,
+      "total_dom_elements": 1696,
+      "tightened_interactive_fraction": 0.0047169811320754715,
+      "original_locatable_elements": 82,
+      "original_interactive_fraction": 0.04834905660377359
+    },
+    {
+      "task_id": "listing_beauty-personal-care",
+      "page_type": "product_listing",
+      "tightened_locatable_count": 8,
+      "total_dom_elements": 1707,
+      "tightened_interactive_fraction": 0.0046865846514352666,
+      "original_locatable_elements": 82,
+      "original_interactive_fraction": 0.04803749267721148
+    },
+    {
+      "task_id": "listing_electronics",
+      "page_type": "product_listing",
+      "tightened_locatable_count": 8,
+      "total_dom_elements": 1712,
+      "tightened_interactive_fraction": 0.004672897196261682,
+      "original_locatable_elements": 82,
+      "original_interactive_fraction": 0.04789719626168224
+    },
+    {
+      "task_id": "detail_camera",
+      "page_type": "detail",
+      "tightened_locatable_count": 5,
+      "total_dom_elements": 1395,
+      "tightened_interactive_fraction": 0.0035842293906810036,
+      "original_locatable_elements": 32,
+      "original_interactive_fraction": 0.022939068100358423
+    },
+    {
+      "task_id": "detail_vr_bag",
+      "page_type": "detail",
+      "tightened_locatable_count": 5,
+      "total_dom_elements": 1310,
+      "tightened_interactive_fraction": 0.003816793893129771,
+      "original_locatable_elements": 32,
+      "original_interactive_fraction": 0.024427480916030534
+    },
+    {
+      "task_id": "detail_pet_camera",
+      "page_type": "detail",
+      "tightened_locatable_count": 5,
+      "total_dom_elements": 1304,
+      "tightened_interactive_fraction": 0.003834355828220859,
+      "original_locatable_elements": 32,
+      "original_interactive_fraction": 0.024539877300613498
+    },
+    {
+      "task_id": "cart_1",
+      "page_type": "cart",
+      "tightened_locatable_count": 6,
+      "total_dom_elements": 1136,
+      "tightened_interactive_fraction": 0.00528169014084507,
+      "original_locatable_elements": 21,
+      "original_interactive_fraction": 0.018485915492957746
+    },
+    {
+      "task_id": "cart_1",
+      "page_type": "cart",
+      "tightened_locatable_count": 6,
+      "total_dom_elements": 1136,
+      "tightened_interactive_fraction": 0.00528169014084507,
+      "original_locatable_elements": 21,
+      "original_interactive_fraction": 0.018485915492957746
+    }
+  ],
+  "per_type": {
+    "product_listing": {
+      "n": 3,
+      "mean": 0.004692154326590807,
+      "cv": 0.004808785045881535,
+      "values": [
+        0.0047169811320754715,
+        0.0046865846514352666,
+        0.004672897196261682
+      ]
+    },
+    "detail": {
+      "n": 3,
+      "mean": 0.0037451263706772112,
+      "cv": 0.03727972386526172,
+      "values": [
+        0.0035842293906810036,
+        0.003816793893129771,
+        0.003834355828220859
+      ]
+    },
+    "cart": {
+      "n": 2,
+      "mean": 0.00528169014084507,
+      "cv": 0.0,
+      "values": [
+        0.00528169014084507,
+        0.00528169014084507
+      ]
+    }
+  },
+  "between_type_variance": 6.009071075604643e-07,
+  "within_type_variance": 8.000839332069265e-09,
+  "type_means": {
+    "product_listing": 0.004692154326590807,
+    "detail": 0.0037451263706772112,
+    "cart": 0.00528169014084507
+  }
+}
