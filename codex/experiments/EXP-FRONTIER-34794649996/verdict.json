@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34794649996",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "The specific hypothesis that per-type bias correction with N=200 per-type permutations recovers absolute signal strength (per-type BC TV >0.2 at lambda=1) is falsified in this sparse regime: mean per-type BC TV =0.034 (6x below threshold), per-type BC is 0.67x pooled BC (opposite of hypothesis), paired t-test p=0.989 (not significant), null control fails (4/8 types >0.01 at lambda=0). However, the broader C-WEB-DYNAMICS claim (interactive Web transformations contain predictive dynamical structure) remains a HYPOTHESIS: all evidence is synthetic 2D [0,1]^2, the sparse binning regime (0.625 expected counts/bin per type vs 5.0 pooled) confounds sample size with estimator type, and the audit explicitly finds the broader 'fundamental attenuation' conclusion is NOT justified from this data alone. Claim ceiling remains synthetic-only; no inference to real Web DOM dynamics."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does per-type estimation with equal sample size (e.g., 2000 per type or subsampled pooled to 250 per type) show recovery of signal strength, or does the 67% per-type/pooled ratio persist when the n=250 vs n=2000 confound is removed?",
+  "reason": "FALSIFIED-IN-SETTING per frozen decision rule: (1) mean per-type BC TV at lambda=1 =0.034 ≤0.1 threshold; (2) paired t-test p=0.989 >0.05 threshold (per-type not significantly better than pooled); (3) null control fails (4/8 types exceed 0.01 at lambda=0, max 0.028). Positive control passes (min 0.0068 ≥0.001) and parent replication passes (0.051 matches). The audit confirms numerical results recompute correctly but finds the sparse binning regime (0.625 expected counts/bin per type on 20x20 grid) inflates per-type perm means (0.37-0.61 vs predicted 0.10-0.15/0.35-0.38) and creates noise-dominated estimates (CV up to 1.59, null false positives). The per-type vs pooled comparison confounds estimator type (per-type N=250 vs pooled N=2000). Broader conclusion that attenuation is fundamental and density-divergence is unsuitable for real Web data is NOT justified per audit ceiling. The per-type Spearman scaling collapses post-correction (only 1/8 types significant, aggregate rho=0.76 driven by type 6 outlier). This is a bounded falsification of a specific estimator in a sparse regime, not a global closure of the density-divergence approach.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34794649996/spec.json:decision_rule, falsifier, hypothesis, claim_ids",
+    "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.primary_comparison_lambda1 (mean_per_type_bc 0.034, pooled_bc 0.051, ratio 0.67), controls.null_control (4/8 fail, max 0.028), controls.paired_comparison (p_one 0.989), controls.cv_check (max 1.594), controls.positive_control (pass), controls.parent_replication (pass 0.051)",
+    "research/experiments/EXP-FRONTIER-34794649996/audit.json:status REVISE, producer_claim_supported false, claim_ceiling (synthetic-only sparse-sample falsification), required_fixes (sparse binning confound, null failure interpretation), validity_findings (null control high severity, sparse binning high severity, Spearman collapse medium severity, bias floor misspecification medium severity)",
+    "research/experiments/EXP-FRONTIER-34794649996/audit.json:recomputed_metrics (mean_per_type_bc_lambda1 0.03427, pooled_bc_lambda1 0.05102, null_control_fail_count 4, max_cv_lambda1 1.594, expected_counts_per_bin_per_type 0.625)",
+    "research/experiments/EXP-FRONTIER-34794649996/prereg.md:sections 7.1 (paired comparison across 8 types), 8.1-8.2 (positive/null controls), 10.1-10.2 (decision rules), 9.1 (sparse binning threat)",
+    "research/experiments/EXP-FRONTIER-34794649996/report.md:sections 3 (null control failure analysis), 4 (per-type scaling: only 1/8 significant), 5.1 (sparse binning root cause)",
+    "research/experiments/EXP-FRONTIER-34794649996/run_execute.py:296 (pooled N=200 vs prereg N=2000), 385-392 (paired test across reps vs prereg across types), 487-496 (decision mapping override)",
+    "research/experiments/EXP-FRONTIER-34773875458/handoff.json:carry_forward (parent 94.6% attenuation, pooled rho=0.929, frequency baseline 0.335)"
+  ]
+}

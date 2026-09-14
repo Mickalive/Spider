@@ -91,6 +91,14 @@
         "reason": "Frozen decision rule yields FALSIFIED-IN-SETTING: page_type x lambda ANOVA interaction p=0.0 (F=7.51) violates criterion 5 of SURVIVES_CURRENT_TEST. However, the claim concerns real Web dynamics and ALL evidence remains synthetic (2D [0,1]^2 with 8 deterministic page types, heteroscedastic Gaussian noise, block-cycling). The claim ceiling is narrowed: pooled binned TV (20x20) on synthetic non-stationary DGP shows rank-monotonic detection (BC Spearman rho=0.929, p=0.0004) with very large effect size (Cohen d=4.66) but ~95% absolute magnitude loss (BC 0.051 vs stationary 0.952 at lambda=1) and significant per-type heterogeneity (all per-type rho 0.74-1.0). Auditor finds the ANOVA interaction criterion tautological for deliberately heterogeneous page types and per-type BC TV uses contaminated bias floor. Survival is exploratory, not confirmatory. Real Web data remains untested. (audit.json:claim_ceiling; result.json:controls.function_invariance; spec.json:decision_rule criterion 5)"
       },
       {
+        "experiment_id": "EXP-FRONTIER-34794649996",
+        "lane": "frontier",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "The specific hypothesis that per-type bias correction with N=200 per-type permutations recovers absolute signal strength (per-type BC TV >0.2 at lambda=1) is falsified in this sparse regime: mean per-type BC TV =0.034 (6x below threshold), per-type BC is 0.67x pooled BC (opposite of hypothesis), paired t-test p=0.989 (not significant), null control fails (4/8 types >0.01 at lambda=0). However, the broader C-WEB-DYNAMICS claim (interactive Web transformations contain predictive dynamical structure) remains a HYPOTHESIS: all evidence is synthetic 2D [0,1]^2, the sparse binning regime (0.625 expected counts/bin per type vs 5.0 pooled) confounds sample size with estimator type, and the audit explicitly finds the broader 'fundamental attenuation' conclusion is NOT justified from this data alone. Claim ceiling remains synthetic-only; no inference to real Web DOM dynamics."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
