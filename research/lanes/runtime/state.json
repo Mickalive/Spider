@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-34741873198",
-  "last_experiment_id": "EXP-RUNTIME-34654566605",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-34741873198",
   "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
-  "next_question": "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+  "next_question": "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy increases and may cause non-deterministic output or hash instability beyond the 0-729 byte Keycloak responses tested here?",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-14T13:05:53.631285+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-14T18:40:10.552671+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
 }
