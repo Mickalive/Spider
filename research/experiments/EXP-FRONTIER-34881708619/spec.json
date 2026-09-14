@@ -1,17 +1,31 @@
 {
   "experiment_id": "EXP-FRONTIER-34881708619",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does pooled binned TV estimation maintain a fundamental advantage over per-type estimation when both use equal sample size (250 transitions per type), or does the 67% per-type/pooled ratio from the parent experiment reflect a sample-size confound rather than an estimator difference?",
+  "hypothesis": "Pooled BC TV computed on subsampled data (250 per type, same as per-type n) will remain substantially higher than per-type BC TV (pooled BC TV > per-type BC TV by at least 0.01 absolute, one-sided paired t-test p<0.05 across 8 page types at lambda=1). This would demonstrate that the pooled estimator has a fundamental advantage beyond sample size: by pooling across heterogeneous types, it borrows statistical strength that per-type estimation cannot access, even at equal per-type data volume. Conversely, if pooled subsampled BC TV ≈ per-type BC TV at equal n, the original 67% ratio was driven by the sample size confound (n=250/type vs n=2000 pooled), not by an intrinsic estimator difference.",
+  "falsifier": "Pooled subsampled BC TV at lambda=1 is NOT significantly higher than per-type BC TV (one-sided paired t-test p>0.05 across 8 page types) OR pooled subsampled BC TV < per-type BC TV (negative effect), demonstrating that the pooled estimator's advantage was entirely due to having 8x more data. This would mean the 67% ratio is a sparsity artifact addressable by increasing per-type sample size, not a fundamental limitation of per-type estimation.",
+  "baselines": [
+    "Parent per-type BC TV at lambda=1: mean 0.034 across 8 types (EXP-FRONTIER-34794649996 result.json:metrics.primary_comparison_lambda1.mean_per_type_bc)",
+    "Parent pooled BC TV at lambda=1: 0.051 (EXP-FRONTIER-34794649996 result.json:metrics.pooled_bc_tv.means_by_lambda.1.0)",
+    "Parent ratio per-type/pooled: 0.67x (EXP-FRONTIER-34794649996 result.json:metrics.primary_comparison_lambda1.ratio)",
+    "Frequency baseline marginal TV: 0.335 (EXP-FRONTIER-34794649996 result.json:metrics.frequency_baseline.mean_tv_marginal_vs_action)"
+  ],
+  "positive_control": "Pooled BC TV computed on FULL data (2000 transitions, 250 per type × 8 types) at lambda=1 must replicate parent finding within 0.01 (expected ~0.051). This verifies the data generation and pooled estimation pipeline are correct and comparable to parent.",
+  "null_control": "Per-type BC TV at lambda=0 must be <=0.01 across all 8 page types (same threshold as parent per-type null control, EXP-FRONTIER-34794649996). This verifies the per-type estimator does not produce false positives in the null regime. Additionally, pooled subsampled BC TV at lambda=0 must be <=0.01 (verifies subsampling does not introduce false positives in the pooled estimator).",
+  "measurement_validity": [
+    "Data generation uses identical frozen seeds and DGP as parent EXP-FRONTIER-34794649996 (BASE_SEED=42, PAGE_TYPES, FUNCTION_MAP, generate_transitions_nonstationary)",
+    "Subsampling uses deterministic random state (seed = parent cell_seed + offset) to ensure reproducibility",
+    "Per-type BC TV is recomputed on the SAME subsampled data as pooled subsampled BC TV to eliminate data-level confounds (both estimators see identical transitions)",
+    "Pooled permutation null uses N=200 permutations (matching parent pooled perm N) on the subsampled data",
+    "Per-type permutation null uses N=200 permutations per type (matching parent per-type perm N) on the subsampled data",
+    "20×20 grid binning (400 bins) matches parent; expected counts/bin at 250/type: 0.625 (sparse regime)",
+    "5 replications per lambda level match parent; 8 lambda levels [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0] match parent",
+    "Total transitions per lambda: 2000 (250 per type × 8 types), matching parent"
+  ],
+  "decision_rule": "If BOTH conditions hold: (1) pooled subsampled BC TV at lambda=1 > per-type BC TV at lambda=1 across 8 page types (one-sided paired t-test p<0.05), AND (2) Cohen's d > 0.5 for the pooled-vs-per-type difference at lambda=1, verdict = SURVIVES_CURRENT_TEST. If EITHER condition fails: pooled subsampled BC TV ≤ per-type BC TV or effect is small (d≤0.5), verdict = FALSIFIED-IN-SETTING. If pipeline errors, sample size <250 per type, positive control fails (|pooled_full_bc - 0.051| ≥ 0.01), or null control fails (per-type BC TV >0.01 at lambda=0 in any type OR pooled subsampled BC TV >0.01 at lambda=0), verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If pooled maintains advantage at equal n, the density-divergence approach using binned TV has a fundamental estimator limitation: per-type estimation cannot recover signal that pooled estimation captures, even with identical data volume. The 94.6% attenuation is partially estimator-dependent but per-type cannot close the gap. Product should use pooled estimation for heterogeneous data and not invest in per-type refinement for binned TV.",
+  "product_consequence_negative": "If pooled and per-type are equivalent at equal n, the 67% ratio was a sample-size artifact. Per-type estimation at 250/type is noise-dominated but not fundamentally worse. Increasing per-type sample size to 2000/type (5.0 counts/bin) may recover signal. The density-divergence approach may still be viable with sufficient per-type data, and the 94.6% attenuation reflects sparsity, not estimator failure.",
+  "estimated_cost": "Very low: reuses parent DGP (no new data generation beyond parent seeds), adds only subsampled pooled estimation (N=200 permutations × 8 lambda × 5 reps = 8000 permutations total, ~30 minutes compute). No browser/network/model calls.",
+  "expected_information_gain": "High: directly resolves the critical confound identified by audit (required_fixes[3]) that blocked inference from the prior two experiments. A clean answer here determines whether (a) density-divergence is fundamentally bounded for heterogeneous data, or (b) the approach is viable with sufficient per-type data. This is the minimum disambiguating step before either closing the density-divergence line or investing in denser per-type estimation."
 }
