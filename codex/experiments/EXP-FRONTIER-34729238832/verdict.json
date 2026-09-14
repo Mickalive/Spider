@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34729238832",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "PCA projection to 2D-3D subspaces before binned TV divergence does NOT simultaneously detect scaling-type and rotation-type action-dependent structure in 10D non-Gaussian DGP. Scaling fails in 2D (rho=0.6429<0.65, p=0.043>0.0167 Bonferroni) and all three functions fail in 3D (all rho=0.6429). ANOVA function x lambda interaction decisively fails (2D p~3e-11, 3D p=0.007). The curse-of-dimensionality hypothesis — that per-function heterogeneity is a high-dimensional artifact recoverable by dimensionality reduction — is FALSIFIED in this linear PCA + binned TV setting. Claim ceiling remains narrowed to synthetic 10D; C-WEB-DYNAMICS continues as HYPOTHESIS with claim domain restricted to translation-like dynamics in synthetic DGP. No product promotion warranted."
+    }
+  ],
+  "product_action": "NONE — no product-relevant code or mechanism survives this experiment. PCA-binned TV pipeline is experimental-only; bias floor, ANOVA failure, and synthetic-to-real gap preclude any product consideration.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does real Web DOM transition data exhibit translation-like action-dependent structure detectable by any tested estimator, or does the synthetic-to-real gap render all five Frontier synthetic experiments (2D affine, 10D kNN raw, 10D kNN bias-corrected, 10D KDE, 10D PCA+binned TV) irrelevant to C-WEB-DYNAMICS?",
+  "reason": "Five consecutive Frontier experiments converge on the same meta-finding: no single density-divergence estimator achieves simultaneous detection of scaling, rotation, and translation in 10D non-Gaussian synthetic data. kNN TV fails scaling (rho=-0.12) but detects rotation (rho=0.93). KDE partially detects scaling (rho=0.71) but fails rotation (rho=0.29). PCA+binned TV fails scaling in 2D (rho=0.643) and fails all three in 3D (rho=0.643). Function invariance decisively fails across all estimation principles (ANOVA interaction p<0.05 in all high-dimensional tests). Translation is the only consistently detectable signal. The hypothesis that this heterogeneity is a curse-of-dimensionality artifact recoverable by linear PCA is now falsified. However, ALL evidence remains synthetic (10D [0,1]^10 with mixture-of-3-Gaussians noise, 3 toy affine families). The synthetic-to-real gap is the dominant unknown. Continuing to refine estimators on the same synthetic DGP yields near-zero marginal information gain. The minimum next step is to test whether real Web transitions contain any detectable structure at all — a materially orthogonal question that could close or open the C-WEB-DYNAMICS domain. This is a bounded negative result for linear PCA + binned TV on synthetic data; it does not close the Frontier lane or the broader search for Web dynamical structure.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34729238832/result.json:status COMPLETE outcome FALSIFIES, metrics.2D.per_function scaling rho=0.6429 FAIL, metrics.3D.all rho=0.6429 FAIL, controls.function_invariance 2D p~0 and 3D p=0.007",
+    "research/experiments/EXP-FRONTIER-34729238832/audit.json:status REVISE producer_claim_supported true, claim_ceiling 'per-function heterogeneity is not cured by linear PCA', validity_findings V1-V8, required_fixes 6 items, recomputed_metrics match producer",
+    "research/experiments/EXP-FRONTIER-34729238832/spec.json:question hypothesis falsifier decision_rule claim_ids C-WEB-DYNAMICS",
+    "research/experiments/EXP-FRONTIER-34729238832/freeze.json:frozen_at 2026-09-13T06:07:34",
+    "research/experiments/EXP-FRONTIER-34729238832/provenance.json:total_transitions 120000 execution_seconds 10.18 pca_parameters projection_dims [2,3]",
+    "research/experiments/EXP-FRONTIER-34729238832/report.md:Status COMPLETE Outcome FALSIFIES, per-function tables",
+    "research/experiments/EXP-FRONTIER-34538185726/handoff.json:carry_forward established complementary blind spots, unknown PCA rescue question",
+    "research/experiments/EXP-FRONTIER-34065969836/handoff.json:full-space kNN TV baseline scaling -0.12 rotation 0.93",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ]
+}

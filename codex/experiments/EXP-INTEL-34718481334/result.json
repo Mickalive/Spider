@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34718481334",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "interactive_fraction_mean": 0.03164525035569816,
+    "interactive_fraction_stdev": 0.013818025580948733,
+    "interactive_fraction_cv": 0.4366540136554998,
+    "interactive_fraction_within_type_cv": {
+      "product_listing": 0.004808785045881574,
+      "detail": 0.03727972386526174,
+      "cart": 0.0
+    },
+    "between_type_variance": 0.0002481313614146708,
+    "within_type_variance_mean": 2.8397381589142525e-07,
+    "discrimination_ratio": 873.7825374348652,
+    "total_dom_mean": 1424.5,
+    "total_dom_stdev": 248.1762046841489,
+    "locatable_mean": 48,
+    "locatable_stdev": 28.520669196717165,
+    "cdp_yield_mean": 0.008650795612739353,
+    "cdp_yield_cv": 0.17303978445651325,
+    "a11y_node_count_all_tasks": 0,
+    "parent_replication_delta": {
+      "listing_total_dom": 0.01791044776119403,
+      "detail_total_dom": -0.012318305001231886,
+      "cart_total_dom": 0.0,
+      "listing_locatable": 0.0,
+      "detail_locatable": 0.0,
+      "cart_locatable": 0.0
+    },
+    "total_tasks_attempted": 10,
+    "successful_tasks": 8,
+    "failed_tasks": 2
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Total DOM count > 100 on all tasks AND locatable_elements > 0 on all tasks AND Playwright accessibility snapshot returns > 0 nodes on at least 1 task",
+      "expected": "All tasks have total_dom > 100 and locatable > 0; at least one a11y_node_count > 0",
+      "observed": "All 8 successful tasks have total_dom > 100 (range 1136-1712) and locatable > 0 (range 21-82). Accessibility snapshot returned 0 nodes on all tasks due to missing API.",
+      "pass": false,
+      "evidence_refs": [
+        "exp347_raw_results.json"
+      ]
+    },
+    "stability_control": {
+      "description": "Interactive fraction within-type CV < 0.3 for at least 2 page types with n >= 2",
+      "expected": "CV < 0.3 for at least 2 page types",
+      "observed": "CV < 0.3 for all 3 page types: product_listing 0.004809, detail 0.037280, cart 0.000000",
+      "pass": true,
+      "evidence_refs": [
+        "exp347_raw_results.json"
+      ]
+    },
+    "discrimination_control": {
+      "description": "Between-type variance > within-type variance",
+      "expected": "between_var > within_var_mean",
+      "observed": "between_var 0.0002481314 > within_var_mean 0.0000002840, ratio 873.7825",
+      "pass": true,
+      "evidence_refs": [
+        "exp347_raw_results.json"
+      ]
+    },
+    "parent_replication_control": {
+      "description": "Locatable elements per page type within 20% of parent values; total DOM within 20%",
+      "expected": "Listing locatable ~82, detail ~32, cart ~21; listing total_dom ~1675, detail ~1353, cart ~1136",
+      "observed": "Listing locatable 82.0 (delta 0.000), detail 32.0 (0.000), cart 21.0 (0.000); listing total_dom 1705.0 (0.018), detail 1336.3 (-0.012), cart 1136.0 (0.000)",
+      "pass": true,
+      "evidence_refs": [
+        "exp347_raw_results.json"
+      ]
+    },
+    "checkout_coverage_control": {
+      "description": "At least 2 checkout tasks measured (or BLOCKED with infrastructure proof)",
+      "expected": "2 checkout tasks measured or BLOCKED",
+      "observed": "2 checkout tasks attempted, both failed with net::ERR_CONNECTION_REFUSED (port 8080/checkout/ redirects to port 7770, not running). BLOCKED with infrastructure proof.",
+      "pass": true,
+      "evidence_refs": [
+        "exp347_raw_results.json"
+      ]
+    },
+    "null_control_definition_stability": {
+      "description": "Interactive fraction computed with frozen DEF-FALLBACK-INTERACTIVE produces non-zero values on all tasks",
+      "expected": "All tasks have interactive_fraction > 0",
+      "observed": "All 8 successful tasks have interactive_fraction > 0 (range 0.018-0.048)",
+      "pass": true,
+      "evidence_refs": [
+        "exp347_raw_results.json"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+      "sha256": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_cart_1.json",
+      "sha256": "5c0ebfd1a1db7a7a8b2876f786e8701150e77a022498e633c73def4a6180c73c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_checkout_1.json",
+      "sha256": "39cdc47e36be4cc601899ff7a02de0fe076bca2cafb273b36735e3691ab8ece0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_camera.json",
+      "sha256": "04120318141685f40974a92628dfc10ade36075342b20db3f86dc95179731fc3",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_pet_camera.json",
+      "sha256": "55936a4a87d178086960e1aa0b00453b63453a63fbdccac5eebcc063e11a4f0c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_detail_vr_bag.json",
+      "sha256": "016af770a1523b021982382fae0afcf2924ed1910e6655921597d783537d9fd4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_beauty-personal-care.json",
+      "sha256": "dc968ebc26d33b6b770b3b1bb3ea5dc8412af8fd3cfb195a97b42fdff13b64c4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_clothing-shoes-jewelry.json",
+      "sha256": "d286a6b93dd5e745bc57ef955c7f140fbe5a7ae6cf6ddc0f1cacbef78f0a8702",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/raw_measurement_listing_electronics.json",
+      "sha256": "d7a41043dc16547729b05dc4a4f8c8d9da2eff9442a5147718d2e1cd9d414775",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Product listing pages have ~82 locatable elements (interactive per DEF-FALLBACK-INTERACTIVE), detail pages ~32, cart pages ~21.",
+    "Total DOM element counts vary across page types: listing ~1705, detail ~1336, cart 1136.",
+    "Interactive fraction (locatable/total_dom) is stable within page types (CV < 0.04) and varies between types (ratio > 800).",
+    "Checkout page (localhost:8080/checkout/) redirects to port 7770, causing connection refused error. Both checkout tasks BLOCKED.",
+    "Playwright accessibility.snapshot() API not available in this environment (\"Page\" object has no attribute \"accessibility\"). All a11y_node_count = 0.",
+    "Viewport elements (intersection threshold 0.5) constant at 12 across all page types, confirming parent finding that viewport measurement captures only fixed navigation chrome.",
+    "Parent replication successful: locatable and total DOM counts within 2% of parent values.",
+    "Docker image digest recorded: sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb."
+  ],
+  "validity_notes": [
+    "Accessibility snapshot API missing: cannot evaluate H4 (Playwright accessibility tree viability). Primary metric uses DOM queries, not accessibility tree.",
+    "Checkout pages blocked: cannot evaluate true checkout yield. Checkout proxy (checkout/cart/) used as proxy, same as cart page.",
+    "Docker image digest may drift over time; DOM structure may change. Digest recorded for reproducibility.",
+    "Sample size per page type small (n=2-3). Within-type CV estimates have wider confidence intervals.",
+    "Frozen definition DEF-FALLBACK-INTERACTIVE includes form membership, which may overcount nested elements (e.g., divs within forms). However, consistency across tasks suggests stable overcounting.",
+    "Viewport intersection calculation uses bounding box intersection ratio > 0.5; may not capture partially visible elements."
+  ],
+  "unresolved": [
+    "What is the true checkout page yield when port 7770 is accessible?",
+    "Does Docker image digest drift affect DOM structure and interactive fraction?",
+    "Does the fragment model perform differently on GitLab/Reddit vs shopping sites?",
+    "Is the accessibility tree viable for element enumeration in headless Chromium?",
+    "Does form membership overcounting affect the semantic meaning of interactive fraction?",
+    "What is the canonical element definition for the 812-task corpus?"
+  ]
+}

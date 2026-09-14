@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34755316488",
+  "lane": "graph",
+  "github_run_id": "34755316488",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-13T19:00:00+00:00",
+  "pre_execute_sha": "a0ed584632d7cbf855cf674e8270fa7dd19d57df",
+  "post_execute_sha": "02fe996ed463e49debf217a492494533d8037811",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["json", "http.server", "threading", "urllib.request", "math", "random", "scipy.stats"],
+    "network": "mock server (localhost) + 3 public API endpoints"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-GRAPH-34755316488/request.json",
+    "spec.json": "research/experiments/EXP-GRAPH-34755316488/spec.json",
+    "prereg.md": "research/experiments/EXP-GRAPH-34755316488/prereg.md",
+    "freeze.json": "research/experiments/EXP-GRAPH-34755316488/freeze.json"
+  },
+  "code": {
+    "execute_scaling.py": "research/graph/freshness_detection/execute_scaling.py",
+    "sha256": null,
+    "description": "Python script implementing mock server, Jaccard computation, real-API requests, and decision rule evaluation"
+  },
+  "datasets_and_fixtures": {
+    "mock_server": "In-process HTTP server with controlled schema sizes (5, 10, 15, 20, 30, 50 fields) and drift families (add, remove, change_type, stochastic, stable)",
+    "real_api_endpoints": [
+      "https://api.github.com/repos/octocat/Hello-World",
+      "https://jsonplaceholder.typicode.com/posts/1",
+      "https://httpbin.org/response-headers?foo=bar"
+    ],
+    "random_seed": 42
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_results.json", "role": "raw", "n_records": 360},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_metrics.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/raw_evidence/real_api_results.json", "role": "raw", "n_records": 30},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/raw_evidence/real_api_metrics.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/raw_evidence/request_logs.json", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/raw_evidence/decision.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/result.json", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/report.md", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-34755316488/provenance.json", "role": "derived"}
+  ],
+  "execution_commands": {
+    "mock_experiment": "python3 research/graph/freshness_detection/execute_scaling.py",
+    "mock_requests": "360 total (6 sizes x 3 drift patterns x 10 requests + 6 sizes x 20 stochastic + 6 sizes x 10 stable)",
+    "real_api_requests": "30 total (3 endpoints x 10 requests each, 0.5s inter-request delay)"
+  },
+  "deviation_from_prereg": {
+    "adaptive_threshold_formula": {
+      "preregistered": "T(n) = 1 - 2.5/(n+1)",
+      "executed": "T(n) = 1 - 0.8/(n+1)",
+      "impact": "Executed formula is stricter (higher threshold). Both satisfy detection condition T < n/(n+1). Results are EXPLORATORY under original prereg.",
+      "analytical_verification": "Spec formula also achieves TP=1.0 for all drift patterns at all sizes"
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-34711403174",
+    "handoff_path": "research/experiments/EXP-GRAPH-34711403174/handoff.json",
+    "handoff_sha256": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
+  },
+  "dependencies": [
+    "research/graph/freshness_detection/execute_scaling.py",
+    "research/experiments/EXP-GRAPH-34711403174/handoff.json"
+  ]
+}

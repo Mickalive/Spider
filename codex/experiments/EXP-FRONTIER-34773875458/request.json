@@ -1,0 +1,20 @@
+{
+  "base_sha": "74aed791fe0fab4faef72b624cf2ab185d71f363",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-13T18:11:56.994798+00:00",
+  "experiment_id": "EXP-FRONTIER-34773875458",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does real Web DOM transition data exhibit translation-like action-dependent structure detectable by any tested estimator, or does the synthetic-to-real gap render all five Frontier synthetic experiments (2D affine, 10D kNN raw, 10D kNN bias-corrected, 10D KDE, 10D PCA+binned TV) irrelevant to C-WEB-DYNAMICS?",
+  "lane": "frontier",
+  "origin_github_run_id": "34773875458",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34729238832",
+    "path": "research/experiments/EXP-FRONTIER-34729238832/handoff.json",
+    "sha256": "27ca8bd75164d93b763fe3861e36aeb6c6ef353693b5aa08a2c231a07dcdae01"
+  },
+  "reason": "pulse",
+  "request_hash": "7953f04fa71631eb94ee8eefae88e5b5dbdf2d823dbe1258ae0cc233f6d9aa83",
+  "request_id": "7a702efffc6b438533371585",
+  "schema_version": 1
+}

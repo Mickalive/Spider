@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-FRONTIER-34729238832",
+  "execution_timestamp": "2026-09-13T11:48:10Z",
+  "analyzer_script": "run_execute.py",
+  "script_hashes": {
+    "prereg.md": "640a85d78cc651b006863884aed9f9cbcdd56529128e82c65393ddd4b80ba2d6",
+    "spec.json": "181f89e10a4606e8d68b09df89ac6e8914206f9f6d28e0603e47792430215841",
+    "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
+    "freeze.json": "160e348f5e0838649e498c1728ad0fecf9987f8f1e31982f5c5249aa39c49195",
+    "result.json": "d709b0798faf983f57720be8a57330c468dde5fd2353816d61b73f264ef00049",
+    "raw_tables.json": "48268a562c0f124dea7b8db92c37a2f832f9a1e1b223f4a5519d5c32041eb7f3"
+  },
+  "result_hash": "d709b0798faf983f57720be8a57330c468dde5fd2353816d61b73f264ef00049",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "unknown",
+    "sklearn_version": "1.9.1"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "640a85d78cc651b006863884aed9f9cbcdd56529128e82c65393ddd4b80ba2d6",
+    "request_hash": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
+    "spec_hash": "181f89e10a4606e8d68b09df89ac6e8914206f9f6d28e0603e47792430215841"
+  },
+  "total_transitions": 120000,
+  "pca_parameters": {
+    "projection_dims": [
+      2,
+      3
+    ],
+    "n_bins_per_dim": 10,
+    "n_permutations_null": 50
+  },
+  "execution_seconds": 10.17991590499878
+}

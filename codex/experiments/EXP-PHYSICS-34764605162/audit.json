@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34764605162",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Bound claim ceiling to independent per-step DOM observation noise: spec.json question claims testing 'random API payloads, timing-dependent rendering' as predictive non-determinism, but generate_data.py implements independent per-step draws (random_API: rng.randint(0,2) for current_dom and independently for next_dom; timing: rng.randint(0,3) similarly). Contingency analysis shows DOM_before variant distribution uniform over DOM_after variants within each FSM state (random_API landing: 40/37/40 vs 48/47/44 uniform). By construction E[I(S_next; DOM_before | URL,H_K)]=0. This tests whether independent observation noise is predictive (tautologically no), not whether non-deterministic state-transition dynamics are predictable from DOM. Producer interpretation 'DOM hash not predictive dynamics in any tested regime' must be narrowed to 'not predictive when non-determinism is independent per-step DOM rendering noise'.",
+    "Clarify control scope and degeneracy: controls.positive_control_random_labels and controls.null_control_shuffled_labels in result.json and raw_analysis_results.json are computed only on deterministic SPA (2000 transitions, perm_mean=0.0 perm_std=0.0). Deterministic strata have single S_next per history, so PMI degenerately 0 for any label. This vacuous pass does not test pipeline discriminant validity on non-deterministic null distributions where perm_mean ~0.007-0.023 and perm_std ~0.002-0.004. Run controls on non-deterministic strata or report as not applicable to non-deterministic inference.",
+    "Disclose isomorphism of representations: result.json metrics.conditional_pmi shows visible_text_hash == accessibility_tree_hash == multi_feature_hash exactly (random_API K3 0.004026, timing K3 0.024656) and numeric_structural 0.0 across all. Producer notes this in observations/validity_notes but claim 'richer DOM representation captures variation invisible to visible_text_hash' (prereg H3) is not a distinct test—hashes are 1-1 mapping (unique_vis 15/20 equals unique_a11y 15/20, vis->a11y 1-1 verified). Bound H3 conclusion to this FSM design; richer representations (computed styles, layout) untested.",
+    "Correct product consequence scope: report.md §4.3 'DOM integration path for C-WEB-DYNAMICS is closed across all tested settings (deterministic + non-deterministic)' overstates. Justified ceiling is FALSIFIED-IN-SETTING for locally-hosted 5-state linear FSM with independent per-step DOM variant noise and hash-based representations. Do not generalize to production SPAs with client-side virtual DOM (React/Vue concurrent mode, suspense), auth-dependent external data, or state-transition non-determinism where DOM_before and S_next are correlated via environment.",
+    "Report determinism metric nuance: result.json metrics.determinism_accuracy (1.0 / 0.361 / 0.308) uses P(S_next | S_current_hash, Action) where S_current_hash includes variant, not FSM state. Value reflects variant multiplicity not state-transition non-determinism. Deterministic FSM transition (landing->form_s1 always) is still deterministic; non-determinism is observation-level. Label as observation non-determinism, not transition non-determinism."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_independent_noise_bakes_in_null",
+      "severity": "major",
+      "finding": "Data generation makes DOM_before and DOM_after variants independent draws. generate_data.py: make_random_api_dom uses rng.randint(0,2) separately for current and next; make_timing_dependent_dom uses rng.randint(0,3) separately. Recomputed contingency tables show uniform distribution (e.g., random_API landing before b3266b8e -> after 40/37/40 vs 065d924b -> 44/48/47, nearly uniform). Therefore conditional PMI expectation is 0 by construction; environment could not express predictive effect even if hypothesis were true for correlated non-determinism. Negative result is valid for this noise model but uninformative about correlated state dynamics.",
+      "evidence": "generate_data.py lines 153-168 make_random_api_dom/make_timing_dependent_dom; generate_trajectory lines 180-194 two independent calls; raw_dom_captures.json contingency recomputed; raw_analysis_results.json conditional_pmi K3 0.004/0.024 with p_bonf 1.0"
+    },
+    {
+      "id": "V2_recomputed_pmi_matches",
+      "severity": "info",
+      "finding": "Independent recomputation with identical build_strata/compute_pmi_from_strata logic (MIN_STRATUM_COUNT=5, History K=1,2,3, weighted PMI) reproduces producer metrics exactly: deterministic 0.0 all K/reps; random_API visible_text_hash K1 0.0037169 K2 0.0036719 K3 0.0040255; timing K1 0.018955 K2 0.022734 K3 0.024656; numeric_structural 0.0 all. Permutation p-values recomputed match (random_API K3 p_raw 0.998 perm_mean 0.01031, timing K3 p_raw 0.324 perm_mean 0.02302). Arithmetic correct.",
+      "evidence": "raw_analysis_results.json site_results.*.conditional_pmi and permutation_tests; analyze.py compute_pmi_from_strata; result.json metrics.conditional_pmi"
+    },
+    {
+      "id": "V3_controls_degenerate_on_deterministic",
+      "severity": "major",
+      "finding": "Positive/null controls pass with 0.0 exactly because computed on deterministic data where each (URL,H_K) stratum has single S_next value, so joint (r,s) has p_rs/(p_r p_s)=1 => PMI=0 for any r. analyze.py compute_positive_control and compute_null_control both use deterministic transitions only, with perm_mean 0 perm_std 0. Not representative of non-deterministic strata where null perm_mean is 0.007-0.023 with std 0.002-0.004. Control passes vacuously; pipeline ability to detect independence in non-deterministic regime untested. Null shuffled control on deterministic also not the prereg within-strata shuffle on non-deterministic data.",
+      "evidence": "analyze.py lines 225-265 compute_positive_control/compute_null_control use det_transitions; raw_analysis_results.json controls.positive_control_random_labels perm_mean 0 perm_std 0; controls.null_control_shuffled null_mean 0; recomputed positive control on deterministic stratum unique r 200 unique s 1 => PMI 0"
+    },
+    {
+      "id": "V4_representation_isomorphism",
+      "severity": "moderate",
+      "finding": "visible_text_hash, accessibility_tree_hash, multi_feature_hash are 1-1 mappings in this FSM (unique_vis 5/15/20 equals unique_a11y 5/15/20, vis->a11y 1-1 true; recomputed). Multi_feature_hash = SHA256(visible_text_hash + numeric) is deterministic of visible_text_hash because numeric_structural invariant per FSM state (element_count/tree_depth/interactive_density/form_count constant, 3 unique sets). Effectively one representation tested, not four. numeric_structural invariant (PMI 0.0) confirms variant encoding in text only.",
+      "evidence": "raw_dom_captures.json n unique counts; generate_data.py make_dom_features multi_feature_hash deterministic; result.json conditional_pmi identical across three hash reps; validity_notes acknowledges"
+    },
+    {
+      "id": "V5_determinism_check_mislabeled",
+      "severity": "moderate",
+      "finding": "determinism_accuracy uses P(S_next_hash | S_current_hash, Action) where hashes include variant. Value 0.361/0.308 reflects number of variants, not FSM transition stochasticity. FSM mapping is deterministic (5 states linear). True transition non-determinism (same FSM state + action -> different FSM state) is 0. Reported as non-determinism confirmation but actually confirms observation noise introduced. Still passes spec threshold <1.0 technically but misrepresents nature.",
+      "evidence": "analyze.py compute_determinism_check; generate_data.py FSM linear deterministic; result.json metrics.determinism_accuracy 1.0/0.361/0.308"
+    },
+    {
+      "id": "V6_permutation_correct_within_strata",
+      "severity": "info",
+      "finding": "Permutation test correctly shuffles DOM labels within (URL, ActionHistory_K) strata per spec, 1000 perms, Bonferroni p_bonf = min(p_raw*24,1.0) with alpha 0.002083. For non-deterministic strata perm distribution non-degenerate (means 0.007-0.023, std 0.002-0.004) and correctly shows observed below or near mean (random_API K3 z=-2.23 obs<mean, timing K3 z=+0.41). No leakage: history built from trajectory step ordering with <START> padding before PMI; no future info.",
+      "evidence": "analyze.py permutation_test; raw_analysis_results.json permutation_tests perm_mean/perm_std/n_exceed; build_strata"
+    },
+    {
+      "id": "V7_data_quality_exceeds_threshold",
+      "severity": "info",
+      "finding": "n_transitions 2000 per SPA type (6000 total) exceeds spec threshold 300 (spec §12 requires >=300). Provenance 200 trajectories *10 steps vs prereg 50*10. Strata coverage dense: deterministic 5/6/7 strata, non-deterministic same counts, weighted_transitions 2000 all K. No filtering loss. Deterministic baseline PMI K3 0.0 replicates parent EXP-PHYSICS-34724244876.",
+      "evidence": "result.json controls.data_quality min 2000 threshold 300 pass true; raw_analysis_results.json n_transitions 2000 each; provenance.json datasets.raw_dom_captures n_transitions 6000"
+    },
+    {
+      "id": "V8_action_history_accuracy_confirms_noise",
+      "severity": "info",
+      "finding": "Action-history prediction accuracy K3 0.3585 random_API and 0.2775 timing vs 1.0 deterministic confirms observation noise reduces predictability. However linear FSM has only one possible action per state, so history carries little information beyond position in cycle; low accuracy expected even with deterministic transitions given hash collisions across variants. Consistent with finite variant sets.",
+      "evidence": "result.json metrics.action_history_prediction_accuracy; spec baselines"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_action_history_strong_baseline",
+      "finding": "Action-history-only prediction P(S_next | URL,H_K) is correct strong Physics null. At K=3 accuracy 1.0 deterministic vs 0.36/0.28 non-deterministic shows history alone insufficient when observation noise present, but DOM still adds no significant PMI beyond history. Baseline correctly defeats DOM claim; PMI at K=3 is proper discriminating test.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B2_deterministic_baseline",
+      "finding": "Deterministic SPA Level 0 replicates parent: conditional PMI 0.0 all K/reps, determinism 1.0, AH accuracy 1.0. Within-experiment comparison valid; shows pipeline would return 0 when observation noise absent. Pass.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B3_random_label_positive_control",
+      "finding": "Positive control intended to test independence detection but implemented on degenerate deterministic strata (see V3). Observed 0.0 matches expected 0.0 but trivially. Not a strong baseline for non-deterministic regime. Would need random labels on non-deterministic strata distribution to be informative.",
+      "verdict": "FAIL_DEGENERATE"
+    },
+    {
+      "id": "B4_shuffled_null_control",
+      "finding": "Null shuffled within-strata control same degeneracy (deterministic only, mean 0 std 0). True null on non-deterministic data is permutation distribution itself (mean 0.01-0.023) which is the primary inference; separate null control adds no information.",
+      "verdict": "FAIL_DEGENERATE"
+    },
+    {
+      "id": "B5_frequency_and_NN_baselines",
+      "finding": "Frequency baseline P(S_next) implicit via PMI (marginal vs conditional) not separately reported but history baseline is strictly stronger. Nearest-neighbor on action-history not reported in this experiment; spec mentions WP-002B baseline but not computed. Not required for falsification decision.",
+      "verdict": "NOT_REPORTED"
+    }
+  ],
+  "recomputed_metrics": {
+    "conditional_pmi_visible_text_hash_K3": {
+      "deterministic": 0.0,
+      "random_API": 0.004025539923891856,
+      "timing_dependent": 0.024656406783264653
+    },
+    "conditional_pmi_numeric_structural_K3": {
+      "deterministic": 0.0,
+      "random_API": 0.0,
+      "timing_dependent": 0.0
+    },
+    "permutation_test_K3_visible_text_hash": {
+      "random_API": {"observed_pmi": 0.004025539923891856, "perm_mean": 0.010311086125985336, "perm_std": 0.0028128154847030197, "p_raw": 0.998, "p_bonferroni": 1.0, "z": -2.23},
+      "timing_dependent": {"observed_pmi": 0.024656406783264653, "perm_mean": 0.023022287439745544, "perm_std": 0.0040128410617955535, "p_raw": 0.324, "p_bonferroni": 1.0, "z": 0.41}
+    },
+    "action_history_prediction_accuracy_K3": {
+      "deterministic": 1.0,
+      "random_API": 0.3585,
+      "timing_dependent": 0.2775
+    },
+    "determinism_accuracy": {
+      "deterministic": 1.0,
+      "random_API": 0.361,
+      "timing_dependent": 0.308
+    },
+    "n_transitions": {
+      "deterministic": 2000,
+      "random_API": 2000,
+      "timing_dependent": 2000
+    },
+    "primary_metric_mean_K3_nondet": 0.014341,
+    "n_nondet_surviving": 0,
+    "n_comparisons": 24,
+    "bonferroni_alpha": 0.0020833333333333333,
+    "isomorphism_check": {
+      "unique_vis_before": {"deterministic": 5, "random_API": 15, "timing_dependent": 20},
+      "vis_to_a11y_one_to_one": true,
+      "numeric_structural_unique": 3
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for locally-hosted 5-state linear Express SPAs where non-determinism is independent per-step DOM observation noise (3 variants for random_API, 4 for timing_dependent, each step independent draw) and DOM representations are hash-based (visible_text_hash / accessibility_tree_hash / multi_feature_hash isomorphic). Within this setting, conditional PMI I(S_next; DOM_before | URL, H_K=3) = 0.004 bits (random_API) and 0.025 bits (timing) with Bonferroni p=1.0 (n=24, alpha=0.00208), indistinguishable from within-strata permutation null (z=-2.23 and +0.41). No evidence that DOM_BEFORE predicts next DOM variant beyond action-history when variants are independent. Claim does NOT generalize to: production SPAs with client-side virtual DOM (React/Vue concurrent mode, suspense), auth/external-data-driven non-determinism where DOM_before correlates with environment state that determines S_next, state-transition non-determinism (same FSM state+action -> different next FSM state), or richer visual/computed-style representations.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34764605162/result.json metrics.conditional_pmi, metrics.permutation_test_bonferroni_p, metrics.determinism_accuracy, metrics.n_transitions",
+    "research/experiments/EXP-PHYSICS-34764605162/raw_analysis_results.json site_results.*.conditional_pmi, permutation_tests (K3 perm_mean 0.0103/0.0230), controls",
+    "research/experiments/EXP-PHYSICS-34764605162/raw_dom_captures.json (6000 transitions, sha256 a211b0d4f8765f648bcf003058a62b919d96cfe48c0fe2165822c44787090fd3)",
+    "research/experiments/EXP-PHYSICS-34764605162/generate_data.py sha256 1e55c7b5a0da68c83c764527ea3a7e9c74f165d1a0ab328d5cb6e75bd10f0b2d (independent rng per DOM)",
+    "research/experiments/EXP-PHYSICS-34764605162/analyze.py sha256 a53330f83b5b233164994fcc33db7fcad7e56d472b7ff092899ebea04ac4a57d (within-strata shuffle, Bonferroni 24)",
+    "research/experiments/EXP-PHYSICS-34764605162/spec.json claim_ids C-WEB-DYNAMICS, decision_rule, measurement_validity",
+    "research/experiments/EXP-PHYSICS-34764605162/prereg.md frozen prereg 0817c1d8583922ffb31022cad990434cfaca168f8f0339fc9663e92bc543a366",
+    "research/experiments/EXP-PHYSICS-34764605162/report.md §2-4 (FALSIFIED-IN-SETTING verdict)",
+    "research/experiments/EXP-PHYSICS-34764605162/provenance.json github_run_id 34788722217, commit 7242d3c"
+  ],
+  "unresolved": [
+    "Whether production SPAs with correlated non-determinism (user data, API responses, time) where external environment state persists and DOM_before encodes that state would show I(S_next; DOM | URL,H_3)>0. This requires state-transition non-determinism, not independent per-step observation noise.",
+    "Whether correlated variant generation (e.g., server session state where before variant predicts after variant) would yield significant PMI at K=3 with same pipeline; testable by modifying generate_data.py to make next variant depend on current variant or latent state.",
+    "Whether richer DOM representations (computed CSS, visual layout, ARIA roles, element geometry) capture predictive variation invisible to hash-based representations on production SPAs.",
+    "Whether client-side virtual DOM non-determinism (React concurrent mode, suspense, hydration timing) produces different DOM-before->S_next correlation structure than server-side independent noise.",
+    "Whether larger N (10000+ transitions) or less conservative correction (FDR) would change significance for observed 0.025-bit effect on timing_dependent (currently z=0.41, p_raw 0.32). Power analysis not performed.",
+    "Whether determinism metric should be redefined as P(FSM_state_next | FSM_state_current, Action) vs P(DOM_hash_next | DOM_hash_current, Action) to distinguish transition vs observation non-determinism."
+  ]
+}
