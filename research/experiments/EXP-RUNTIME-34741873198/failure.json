@@ -1,9 +1,9 @@
 {
   "stage": "director",
   "category": "VALIDATION_FAILURE",
-  "message": "invalid claim update status: PARTIAL",
+  "message": "invalid claim update status: ESTABLISHED_CEILING_NARROWED",
   "retryable": false,
-  "recorded_at": "2026-09-14T06:15:01.419111+00:00",
-  "github_run_id": "34812514193",
+  "recorded_at": "2026-09-14T13:05:53.631036+00:00",
+  "github_run_id": "34846931798",
   "github_run_attempt": "1"
 }
