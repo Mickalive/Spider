@@ -251,6 +251,31 @@
         "handoff.json": "27ca8bd75164d93b763fe3861e36aeb6c6ef353693b5aa08a2c231a07dcdae01"
       }
     },
+    "EXP-FRONTIER-34773875458": {
+      "lane": "frontier",
+      "request_id": "7a702efffc6b438533371585",
+      "created_at": "2026-09-13T18:11:56.994798+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV detection of translation-like action-dependent structure survive non-stationary dynamics where different page types have different transition functions \u2014 the defining property of real Web data that all five prior synthetic Frontier experiments lack?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
+        "spec.json": "fb9e8dc5198ad746a0b754cf8d405ac1bb2b5f39ad7a3a08ecaf2f8c74f2f1fb",
+        "prereg.md": "dc41ffba95d311f922be15cf8c172082b399d236b368ef24b8c9a2c8979647c4",
+        "freeze.json": "e6838fef3650839f6d3bde506a6e95d7949abf2004f96a72a60a23d73585a475",
+        "result.json": "27f8ca3767e866d86a80484db409ae336f826505c94b956ddc5c42351c86fef1",
+        "report.md": "602c114e3b687a4395f387012b4de4daaf5bd889a9838eeb83216ca48718c212",
+        "provenance.json": "7c4a77f865a5177611b042ffa5941e8ef7a4ef483b43381075cfc94c6b7cd9c9",
+        "audit.json": "29ae7efe94c6172b1b0d5c0277db7055102c8b01e6c9962d2a24b8e40c103fb2",
+        "verdict.json": "dbc41b5bd2617c09365400256c371b52aad19dcafa853175e27e4a7666e9ec00",
+        "handoff.json": "8e7d9b6afc77584d4575415d596134b542c4e0233cd29c6d0c31e64cdd174b4e"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -626,6 +651,31 @@
         "handoff.json": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
       }
     },
+    "EXP-GRAPH-34755316488": {
+      "lane": "graph",
+      "request_id": "9f2f10d6b94928533c592d31",
+      "created_at": "2026-09-13T11:46:53.278013+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does Jaccard (field_path,type) freshness detection survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds the parent threshold 0.85, and does an adaptive schema-size-adjusted threshold restore detection without inflating false positives on stochastic response variation?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
+        "spec.json": "0ddf87d631e3836dc9382eeae6ffefeeef3769e6e153421c1581d04c3c7bae40",
+        "prereg.md": "075cc5c672f7353230908b93b369e229a46e7979709f36c4013df3ab156e12b8",
+        "freeze.json": "1b0083b52e4041f688200b276cfc59013be47bb5e9c11fabdbead0a15ca88d0c",
+        "result.json": "bb8c08696844b714dbf101eda6aa5a52574b7c6b0847cde74b79584f223502fc",
+        "report.md": "cbfb140311557ea49620ec7ebefa1e761ad76b0b565436b49f7cd8ee13bb2c9c",
+        "provenance.json": "784f53e4045c2d7db394f214708dbba804d6b15bf777e51a6f716b86853445d7",
+        "audit.json": "98cd34a38f291789f411e6483496ed1748a15693ce94a0ee20095292c2edf28f",
+        "verdict.json": "edcf2d3c99d12874a501b4721a3ead657df3eb79a11ee411a783a9bb19989dbd",
+        "handoff.json": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -836,6 +886,32 @@
         "audit.json": "e7ef1196cd19a44f6dbc5dbe018da398a9d866970a69f66d8afdb2f732b9cac2",
         "verdict.json": "4d628206300c75990ae1122061b50b12bcda5be2aab5d44c4001a6a97da6adcf",
         "handoff.json": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
+      }
+    },
+    "EXP-INTEL-34718481334": {
+      "lane": "intel",
+      "request_id": "c65b596371e64773477a4ed7",
+      "created_at": "2026-09-12T20:55:32.257312+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does full-page DOM element enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment capture, and what fraction of page elements does the fragment model actually retain?",
+      "audit_status": "REVISE",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
+        "spec.json": "c5c3d021321e29b2e0becde038d720a4898632c38b76398d33ef3f9780a7e572",
+        "prereg.md": "f437634b780b57a36327a73258dd281c19cb7e85c964cbce5be0d87ea2c52dff",
+        "freeze.json": "ad84fd74eba88399753cad192b872946457870310a4df697f30f03ae2c9189d0",
+        "result.json": "3c1358cc23f860177477cdaeaa0e35f98d681a8dd20c0f6da21cf7043a150a7b",
+        "report.md": "633bf9713cd8c37a5a3d16b5e0c28d6eeb3e32488a24cfb9d51cf02fc0185f69",
+        "provenance.json": "ee8616bbdcf2d478b263468d7edb3024c5f35757b6906a300cbf32a3cd3c8bbc",
+        "audit.json": "7597c59fa45db55faf490d06a0ceb76a6eff2f965dacc8eb0abc6cf55d6cf432",
+        "verdict.json": "0f5032ba9d018c58b99606c3b761a089bf64b6e143ae0f47d9581eb148533d70",
+        "handoff.json": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
       }
     },
     "EXP-PHYSICS-33528829431": {
