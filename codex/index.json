@@ -1267,6 +1267,31 @@
         "handoff.json": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4"
       }
     },
+    "EXP-PHYSICS-34764605162": {
+      "lane": "physics",
+      "request_id": "17cbe467fb2355b9af406cda",
+      "created_at": "2026-09-13T15:06:39.726293+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with controlled non-deterministic server responses (random API payloads, timing-dependent rendering), do DOM structural features encode predictive state variation that persists even with K>=3 sufficient action history? Specifically: (1) does conditional PMI I(S_next; DOM | URL, ActionHistory_K=3) exceed zero with Bonferroni-corrected permutation p < 0.00208 on non-deterministic SPAs (24 comparisons: 2 non-deterministic types x 4 representations x 3 K values)? (2) does the non-determinism level (deterministic vs random-API vs timing-dependent) modulate the PMI pattern? (3) does a richer DOM representation (accessibility tree hash, multi-feature hash) capture variation invisible to visible_text_hash?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
+        "spec.json": "370c2879dd0314064f03ecb006884906e93dfd98859b84b995269f71eab407df",
+        "prereg.md": "0817c1d8583922ffb31022cad990434cfaca168f8f0339fc9663e92bc543a366",
+        "freeze.json": "ef936e823ad2bb5feb1d400ed4ce18449886c4e6844b6c76d6ca733986e52f7f",
+        "result.json": "724197fb532cc75f0477524205d26761ef0ff9610a6d85ae410da092365d47a7",
+        "report.md": "89ac7f75f7f97a0e582ef0ff6ce847f3b491b8274804ce9d8cf73e8261d29702",
+        "provenance.json": "448f5f695bb739b410fefce5f18a8a0ab8c0eac86af736ee228c40f1c8c926a5",
+        "audit.json": "f7a7fca0642b927b2968de16d9ab5b33332df378ba22bb8f9c0e2de2c84a3aac",
+        "verdict.json": "eb647ae22a7b0bcb3ece08671ff70dd62f50d9bfff88b520f619fe19832812ba",
+        "handoff.json": "11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
