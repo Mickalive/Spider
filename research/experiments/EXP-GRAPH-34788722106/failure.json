@@ -1,9 +1,9 @@
 {
   "stage": "director",
-  "category": "DIRECTOR_FAILURE",
-  "message": "stage exited with code 66",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: FALSIFIED-IN-SETTING",
   "retryable": false,
-  "recorded_at": "2026-09-14T06:17:46.114485+00:00",
-  "github_run_id": "34812514690",
+  "recorded_at": "2026-09-14T13:06:14.406357+00:00",
+  "github_run_id": "34846931870",
   "github_run_attempt": "1"
 }
