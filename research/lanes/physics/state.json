@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PHYSICS-34846934524",
   "last_experiment_id": "EXP-PHYSICS-34764605162",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
   "next_question": "On locally-hosted Express SPAs with correlated non-determinism (session-dependent DOM variants where DOM_before correlates with latent session state that determines S_next), does DOM structural features exhibit conditional PMI I(S_next; DOM_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00208? Correlated non-determinism is the key gap: the current experiment tested independent per-step observation noise where E[I]=0 by construction (audit V1). Correlated non-determinism (e.g., server session state where before-variant predicts after-variant) is the only remaining locally-hosted DOM test that could yield positive PMI. If this also yields PMI <= 0, the DOM-hash path is closed across all non-deterministic regimes testable without production infrastructure, and the Physics lane should move to network-response information theory (API payload structure as an alternative observation level).",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-14T06:16:23.532539+00:00",
+  "updated_at": "2026-09-14T13:04:07.512760+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f"
 }
