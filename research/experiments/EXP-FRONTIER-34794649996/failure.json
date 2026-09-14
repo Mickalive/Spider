@@ -1,0 +1,9 @@
+{
+  "stage": "director",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid claim update status: CEILING_NARROWED",
+  "retryable": false,
+  "recorded_at": "2026-09-14T01:23:08.179384+00:00",
+  "github_run_id": "34794649996",
+  "github_run_attempt": "1"
+}

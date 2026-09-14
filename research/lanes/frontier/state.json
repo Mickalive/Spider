@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does per-page-type binned TV estimation with per-type bias correction recover absolute signal strength lost to pooled heterogeneous averaging, or is the 94.6% attenuation a fundamental property of action-dependent structure in non-stationary DGPs?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-14T01:03:46.154582+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-14T01:23:08.179627+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "8e7d9b6afc77584d4575415d596134b542c4e0233cd29c6d0c31e64cdd174b4e"
 }
