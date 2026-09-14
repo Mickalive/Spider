@@ -1,14 +1,14 @@
 {
   "lane": "frontier",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-FRONTIER-34881708619",
   "last_experiment_id": "EXP-FRONTIER-34794649996",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
   "next_question": "Does per-type estimation with equal sample size (e.g., 2000 per type or subsampled pooled to 250 per type) show recovery of signal strength, or does the 67% per-type/pooled ratio persist when the n=250 vs n=2000 confound is removed?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-14T13:06:48.121625+00:00",
+  "updated_at": "2026-09-14T18:35:28.257098+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "2b1985aa624d23028cfedb73ccb5747667571e927351f3b8314ff2000071bbbf"
 }
