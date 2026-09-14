@@ -99,6 +99,14 @@
         "reason": "The specific hypothesis that per-type bias correction with N=200 per-type permutations recovers absolute signal strength (per-type BC TV >0.2 at lambda=1) is falsified in this sparse regime: mean per-type BC TV =0.034 (6x below threshold), per-type BC is 0.67x pooled BC (opposite of hypothesis), paired t-test p=0.989 (not significant), null control fails (4/8 types >0.01 at lambda=0). However, the broader C-WEB-DYNAMICS claim (interactive Web transformations contain predictive dynamical structure) remains a HYPOTHESIS: all evidence is synthetic 2D [0,1]^2, the sparse binning regime (0.625 expected counts/bin per type vs 5.0 pooled) confounds sample size with estimator type, and the audit explicitly finds the broader 'fundamental attenuation' conclusion is NOT justified from this data alone. Claim ceiling remains synthetic-only; no inference to real Web DOM dynamics."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34881708619",
+        "lane": "frontier",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "MEASUREMENT_INVALID: null control per-type fails (4/8 types >0.01 at lambda=0, max 0.0282), subsampling consistency violated (1/5 reps sub>full), CV max 1.59 >0.5. Preregistered primary comparison across 8 page types FAILS (t=1.33 p_one=0.113 d=0.47 <0.5 thresholds). Producer's significant result (t=3.98 p=0.008 d=1.78) uses non-preregistered rep-level pairing unit. No valid inference about pooled vs per-type estimator advantage at equal n is justified. The 1.49x pooled/sub ratio at 250/type confounds 5.0 vs 0.625 expected counts/bin density. All evidence remains synthetic 2D [0,1]^2; no inference to real Web DOM dynamics. C-WEB-DYNAMICS remains HYPOTHESIS."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
