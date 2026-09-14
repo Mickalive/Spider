@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-FRONTIER-34794649996",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does per-page-type binned TV estimation with per-type bias correction recover absolute signal strength lost to pooled heterogeneous averaging, or is the 94.6% attenuation a fundamental property of action-dependent structure in non-stationary DGPs?",
+  "hypothesis": "Per-type bias correction recovers absolute signal strength because pooled bias correction contaminates per-type estimates with heterogeneous bias floors. Per-type BC TV at lambda=1 will be >0.2 (vs pooled BC TV 0.051), demonstrating attenuation is estimator-dependent and addressable.",
+  "falsifier": "Per-type BC TV at lambda=1 <=0.1 (near noise floor) across all page types, OR per-type BC TV not significantly higher than pooled BC TV (paired t-test p>0.05 across 8 page types), OR positive control fails (per-type BC TV <0.001 at lambda=1 in any page type), OR null control fails (per-type BC TV >0.01 at lambda=0 in any page type).",
+  "baselines": [
+    "Pooled BC TV from parent experiment EXP-FRONTIER-34773875458 (0.051 at lambda=1)",
+    "Per-type raw TV from parent experiment (0.408-0.453 at lambda=1)",
+    "Per-type bias floor estimates from parent audit (0.10-0.15 low-noise, 0.35-0.38 high-noise)",
+    "Frequency baseline (marginal vs action-conditional TV = 0.335)"
+  ],
+  "positive_control": "At lambda=1, per-type bias_corrected_TV >=0.001 across all 8 page types. This verifies per-type bias correction does not destroy detection when signal is present.",
+  "null_control": "At lambda=0, per-type bias_corrected_TV <=0.01 across all 8 page types. This verifies per-type bias correction does not create false positives.",
+  "measurement_validity": [
+    "Same 8 heterogeneous page types from EXP-FRONTIER-34773875458 (rotation/scaling/translation, low/high noise, shifted centers)",
+    "Same DGP parameters and seed structure (func_seed * 100000 + lambda_idx * 1000 + rep_idx * 10 + BASE_SEED)",
+    "N>=200 permutations per page type per lambda level (not pooled) for per-type bias floor estimation",
+    "20x20 grid binning for TV on continuous 2D state space",
+    "5 replications per page type per lambda level",
+    "Independent seeds per cell ensuring no overlap with parent experiment",
+    "No target leakage: per-type TV computed from empirical action-conditional distributions within each page type"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Mean per-type BC TV at lambda=1 > 0.2 across 8 page types; (2) Per-type BC TV significantly higher than pooled BC TV (paired t-test p<0.05 across 8 page types); (3) Positive control passes (per-type BC TV >=0.001 at lambda=1 in all page types); (4) Null control passes (per-type BC TV <=0.01 at lambda=0 in all page types); (5) No pipeline errors. FALSIFIED-IN-SETTING if ANY of: (1) Mean per-type BC TV <=0.1 at lambda=1; (2) Paired t-test p>0.05 (no significant improvement over pooled); (3) Positive control fails; (4) Null control fails. MEASUREMENT_INVALID if pipeline errors or per-type permutation null computation fails.",
+  "product_consequence_positive": "Attenuation is estimator-dependent; per-type bias correction enables practical detection on heterogeneous data. SPIDER should use per-type estimation for real Web data where page types have different dynamics. The absolute magnitude gap is fixable, justifying further investment in density-divergence approach.",
+  "product_consequence_negative": "Attenuation is fundamental; pooled heterogeneous averaging irrecoverably destroys signal. Per-type estimation does not recover absolute strength. Density-divergence approach unsuitable for real Web data; Frontier should pivot to orthogonal mechanisms (causal factorization, information-theoretic measures).",
+  "estimated_cost": "Low: reuse same synthetic data generation from parent experiment; additional computation: per-type permutation nulls (8 types * 200 perms * 8 lambda levels * 5 reps = 64,000 extra permutations). Estimated 5-10 minutes wall-clock. No browser/network/model calls.",
+  "expected_information_gain": "High: resolves whether absolute magnitude gap is estimator-dependent (addressable) or fundamental (closing density-divergence approach). Either outcome is decisive for C-WEB-DYNAMICS claim ceiling and for real-data investment decision. Directly addresses auditor's primary concern (contaminated per-type bias floor)."
 }
