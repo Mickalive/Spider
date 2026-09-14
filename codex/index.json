@@ -1891,6 +1891,31 @@
         "verdict.json": "123f67ce319db14357ac3a158acba729ea70ee9973142b8b4261daedf701ec67",
         "handoff.json": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
       }
+    },
+    "EXP-RUNTIME-34741873198": {
+      "lane": "runtime",
+      "request_id": "3bc0c3eb9fb4c42b5c1d1068",
+      "created_at": "2026-09-13T06:05:07.305668+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from the client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "839a29f8e0fb8c6c6b11ff1737229b0bcc9d4a0aaf4ca1b8a813f38e63c9645a",
+        "spec.json": "f20fa9b611eacc2c3e6c787369c38dd769139776176cffaa1cec253fb5bc672d",
+        "prereg.md": "7260867d2b5a3b7650328ef467d83bb5228b6a2cbbb223b5f927335820eeb316",
+        "freeze.json": "0a53e81a699433cd56295b322beb3d40c1091760057c8eeedd919c88a5d2d417",
+        "result.json": "027b611be1fb0dd9c08a2fa5eef4711baaba2109ef2ba7f4cf026f6602044288",
+        "report.md": "ecb34a5687fe71e9acc6e48debdc534196d13e29f468bbd987b263d6be9f94c4",
+        "provenance.json": "a47706db4c90dc21258d66f0238798b30f66fb0b1aa15cb26dba1a4169958f9d",
+        "audit.json": "ada5b6aeb971d4884e2637c920c0a82df49c19b6b8e59290b2c906864bba17ce",
+        "verdict.json": "a3180f2cd038b702fea77f1d9293013b8777ec18238e2b34fca9d0c6fbf830ff",
+        "handoff.json": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
+      }
     }
   }
 }
