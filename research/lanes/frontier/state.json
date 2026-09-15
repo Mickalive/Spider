@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Do alternative divergence measures (KDE with adaptive bandwidth, kNN mutual information, or kernel-based divergence) maintain pooled-vs-per-type ordering at equal per-type n (250/type) where binned TV fails due to sparse binning (0.625 expected counts/bin), or does the estimator limitation dissolve when the binning artifact is removed?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-15T00:34:39.262063+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-15T01:04:32.937496+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa"
 }
