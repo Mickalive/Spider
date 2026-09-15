@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can alternative staleness signals (session token validation, semantic embedding similarity, response-time profiling) distinguish true drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard-based freshness detection?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-15T18:59:18.970758+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-15T19:12:43.161753+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
 }
