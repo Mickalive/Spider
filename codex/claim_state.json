@@ -487,6 +487,14 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "Stochastic variation FP control is degenerate: structure-only Jaccard (field_path,type) produces Jaccard=1.0 on value-only changes by construction, so FP=0 at any threshold <1.0 is a tautology, not an empirical measurement of real-world noise resilience. The FP question remains open for structural noise (optional fields, null values, encoding variations)."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-34788722106",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Adaptive Jaccard threshold T(n)=1-0.8/(n+1) achieves TP=1.0 on true drift (add/remove/change_type) but produces FP=1.0 on structural noise (optional field churn, null-valued fields, nested object variation) at all schema sizes 10-50 fields. Under frozen decision rule condition (2), FP upper CI 1.0 > 0.15, thus FALSIFIED-IN-SETTING. Claim remains HYPOTHESIS; the bounded negative result does not close the broader C-FRESHNESS domain but falsifies the specific adaptive threshold formula under structural noise at tested magnitudes."
       }
     ],
     "C-CROSSSITE": [

@@ -726,6 +726,31 @@
         "handoff.json": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
       }
     },
+    "EXP-GRAPH-34788722106": {
+      "lane": "graph",
+      "request_id": "315bd598c1f1029b64a58ce1",
+      "created_at": "2026-09-13T23:06:28.757282+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) achieve TP>=0.8 and FP<=0.15 under structural noise (optional field churn, null-valued fields, nested object variation) on schemas with 10-50 fields, and does it maintain detection margin across realistic drift patterns?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "69878143db1e72811812a43265fed81f84ccfdfc8d2409438562d0bf254aeb8e",
+        "spec.json": "baac0c5eb373cbf37dacd96ee0ec2a882cf280e03314b2c759307a6de75ee951",
+        "prereg.md": "79f2aebb3c75ee3ca3cba839e6ab7ad05645d09a7cd06b5d07d1b7abfd4767a1",
+        "freeze.json": "01b24fad850fdd6c54e5c63e8467c126c5234ea1cb325facf0928af3ebd1ca0a",
+        "result.json": "eee45ce80082aec44d7a6c978a7c8a7922681ff62dd7038c2f7db15e8723dc9b",
+        "report.md": "69204b54f7043c319ee4e8177ae1c4825582d358b91a78fa16c166c0bc4a35ce",
+        "provenance.json": "2137fb39a7d61ec7bb6bea003688131f7388df363d2052d55b506b2e1c3377cd",
+        "audit.json": "18e419f4721fdc179aaa80942271a35b715df900d12511a10a82efa3eca1b480",
+        "verdict.json": "a76e55815fa7f629982d779deb27fa87eb4ccac97b66bbb252a865b154ad672d",
+        "handoff.json": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
