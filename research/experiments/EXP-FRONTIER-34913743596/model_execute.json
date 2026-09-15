@@ -1,10 +1,10 @@
 {
   "status": "success",
-  "model": "opencode/big-pickle",
-  "attempt": 5,
+  "model": "opencode/muse-spark-1.2-contributor-free",
+  "attempt": 2,
   "exit_code": 0,
   "category": "ok",
-  "github_run_id": "34956992974",
+  "github_run_id": "34986155875",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-15T12:29:54.327997+00:00"
+  "recorded_at": "2026-09-15T15:51:16.073085+00:00"
 }
