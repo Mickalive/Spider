@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34741873198",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Body-only (status+compressed-body hash) discrimination is preserved at 0.5 on /userinfo and 0.5 on /introspect under a synthetic deterministic CDN proxy on Keycloak 25.0 start-dev with deterministic brotli (quality 6) and gzip (level 9 mtime=0) compression per client profile, N=10 per auth state per profile per endpoint (240 total), seed=44. Within-state compressed body hash variation 0/10 confirms code-level determinism (gzip/brotli are pure functions at fixed level). Cross-client (different Accept-Encoding -> different algorithm) pooled discrimination drops to 0.2237 but remains >0. Status-only equals body-only on /userinfo (0.5 both) so body adds no incremental discrimination there; body-only advantage specific to /introspect where status-only=0.0. Ceiling narrowed from producer's 'realistic CDN negotiation' and 'production CDN' language to synthetic deterministic proxy; no evidence for real CDNs, larger/diverse bodies, varying compression levels, concurrent header negotiation, load-balanced or caching CDNs, or production Keycloak (audit V2, V3, V5). Audit REVISE required documentation fixes only (V1-V7), not re-measurement; all metrics independently recomputed and match."
+    }
+  ],
+  "product_action": "Body-only (status+compressed-body hash) is viable for production fingerprinting where client Accept-Encoding is stable and compression is deterministic per client. On endpoints where status-only achieves equal discrimination (e.g., /userinfo where status 200 vs 401 = 0.5), status-only is preferred for simplicity and compression-immunity. On endpoints where status-only fails (/introspect, all states 200, status-only=0.0), body-only is the only discriminating signal. No compression-normalization layer is needed for deterministic CDN environments. Cross-client divergence (different Accept-Encoding) is a known limitation: body hashes differ across clients, reducing mixed-client discrimination to ~0.22 but not zero.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy increases and may cause non-deterministic output or hash instability beyond the 0-729 byte Keycloak responses tested here?",
+  "reason": "All 8 frozen decision conditions pass: (1) positive control B-IDENTITY-BODY-ONLY=0.5>=0.35 PASS, (2) null control B-RANDOM=0.0~0.0 PASS, (3) B-DETERMINISTIC-BR-BODY-ONLY=0.5>=0.5-0.15 PASS, (4) B-DETERMINISTIC-GZIP-BODY-ONLY=0.5>=0.5-0.15 PASS, (5) within-state hash variation=0 PASS, (6) B-MIXED-CLIENT-BODY-ONLY=0.2237<0.5 PASS, (7) B-STATUS-ONLY=0.5 invariant PASS, (8) no pipeline errors PASS. Producer status=COMPLETE outcome=SUPPORTS confirmed. Audit status=REVISE requires documentation fixes only (narrow CDN language, disclose proxy implementation uses class variable not per-request header parsing, note body-only=status-only on /userinfo, note determinism is by construction not empirical discovery, clarify mixed-client is pooled post-hoc not alternating requests). All 5 audit validity findings are documentation/scope corrections, not measurement disputes. Claim ceiling narrowed per audit V5: evidence bounded to synthetic deterministic proxy on Keycloak 25.0 start-dev with tiny bodies. Previous parent (EXP-RUNTIME-34654566605) established body-only degrades under per-request random compression; this experiment fills the critical gap by showing deterministic per-client compression preserves body-only. The body-only architecture is viable for deterministic CDN environments but ceiling does not extend to real CDNs, variable compression, or large bodies.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34741873198/spec.json (frozen decision_rule 8 conditions, claim_ids C-MEAS-VALID, baselines, measurement_validity)",
+    "research/experiments/EXP-RUNTIME-34741873198/prereg.md (H1-H4, Validity Threats 9.1-9.6, Decision Rules 8.1-8.3)",
+    "research/experiments/EXP-RUNTIME-34741873198/freeze.json (frozen hashes)",
+    "research/experiments/EXP-RUNTIME-34741873198/result.json (metrics, controls all PASS, observations, validity_notes, status=COMPLETE outcome=SUPPORTS)",
+    "research/experiments/EXP-RUNTIME-34741873198/report.md (Sections 3-8, interpretation narrowed per audit)",
+    "research/experiments/EXP-RUNTIME-34741873198/audit.json (REVISE, producer_claim_supported=false, V1-V7 validity findings, recomputed_metrics match, claim_ceiling narrowed)",
+    "research/experiments/EXP-RUNTIME-34741873198/provenance.json (Keycloak 25.0 Docker, proxy on 18081, brotli available, 240 observations)",
+    "research/experiments/EXP-RUNTIME-34741873198/raw_observations.json (240 observations sha256 58c293..., per-state body_hash, Content-Encoding, body_size)",
+    "research/experiments/EXP-RUNTIME-34741873198/run_experiment.py (compress_gzip mtime0, compress_brotli quality6, CDNNegotiationProxyHandler, start_proxy, make_request)",
+    "research/experiments/EXP-RUNTIME-34654566605/handoff.json (parent carry_forward establishing random-compression degradation, next_question prompting this experiment)"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-FRONTIER-34773875458",
+  "execution_timestamp": null,
+  "analyzer_script": "run_execute.py",
+  "script_hashes": {
+    "prereg.md": "dc41ffba95d311f922be15cf8c172082b399d236b368ef24b8c9a2c8979647c4",
+    "spec.json": "fb9e8dc5198ad746a0b754cf8d405ac1bb2b5f39ad7a3a08ecaf2f8c74f2f1fb",
+    "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
+    "freeze.json": "e6838fef3650839f6d3bde506a6e95d7949abf2004f96a72a60a23d73585a475",
+    "result.json": "27f8ca3767e866d86a80484db409ae336f826505c94b956ddc5c42351c86fef1",
+    "raw_tables.json": "63df8aceac3b16bd7ca855fe65613e14cfa6e7dbb7ec1666cd486047e55cd5a8"
+  },
+  "result_hash": "27f8ca3767e866d86a80484db409ae336f826505c94b956ddc5c42351c86fef1",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "execution_time_seconds": 19.682729244232178,
+  "total_transitions": {
+    "stationary": 24000,
+    "nonstationary": 80000
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "dc41ffba95d311f922be15cf8c172082b399d236b368ef24b8c9a2c8979647c4",
+    "request_hash": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
+    "spec_hash": "fb9e8dc5198ad746a0b754cf8d405ac1bb2b5f39ad7a3a08ecaf2f8c74f2f1fb"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34794649996",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does per-type estimation with equal sample size (e.g., 2000 per type or subsampled pooled to 250 per type) show recovery of signal strength, or does the 67% per-type/pooled ratio persist when the n=250 vs n=2000 confound is removed?",
+  "why_next": "The experiment falsified per-type BC TV recovery in a sparse regime (0.625 counts/bin per type), but the audit identifies a critical confound: per-type uses N=250/type while pooled uses N=2000 pooled, so the 67% ratio confounds estimator type with sample size. This is the minimum disambiguating step before either closing the density-divergence approach or continuing with denser estimation. Testing equal-n (subsample pooled to 250/type or generate 2000/type) resolves whether attenuation is estimator-dependent (addressable by per-type with sufficient data) or persists at equal n (fundamental to heterogeneity). This is materially orthogonal to the sparse-regime test: it changes the data regime, not the estimator architecture.",
+  "carry_forward": {
+    "established": [
+      "Pooled binned TV (20x20 grid) on synthetic 2D [0,1]^2 with 8 heterogeneous page types (deterministic block-cycling, 250 transitions/type, 2000 pooled/lambda, 5 reps) shows rank-monotonic detection: BC Spearman rho=0.929 (p_one_sided=0.00043) in non-stationary condition. (parent result.json:metrics.nonstationary.aggregate_bc_tv; replicated in this experiment controls.parent_replication 0.051)",
+      "~94.6% absolute magnitude attenuation persists: pooled BC TV at lambda=1 =0.051 vs stationary 0.952. Frequency baseline mean TV=0.335 is 6.5x pooled BC and 9.8x per-type BC, confirming absolute signal is far below marginal structure. (result.json:metrics.pooled_bc_tv.means_by_lambda.1.0, metrics.frequency_baseline.mean_tv_marginal_vs_action)",
+      "Per-type bias correction with N=200 per-type permutations on 250 transitions/type (0.625 counts/bin) does NOT recover absolute signal: mean per-type BC TV at lambda=1 =0.034, which is 0.67x pooled BC 0.051 and 6x below the >0.2 threshold. Per-type BC is LOWER than pooled BC, opposite of hypothesis. (result.json:metrics.primary_comparison_lambda1, audit.json:recomputed_metrics)",
+      "Null control fails: 4/8 page types have per-type BC TV >0.01 at lambda=0 (max 0.028). Per-type CV at lambda=1: max 1.59 >0.5 threshold (6/8 types exceed). Instrument is noise-dominated at n=250/type. (result.json:controls.null_control, controls.cv_check)",
+      "Parent replication passes: pooled BC TV at lambda=1 =0.0510 matches parent 0.051 within 0.00002. Positive control passes: min per-type BC TV at lambda=1 =0.0068 ≥0.001. (result.json:controls.parent_replication, controls.positive_control)",
+      "Per-type perm means at lambda=0: 0.37-0.39 low-noise types, 0.596-0.609 high-noise types (predicted 0.10-0.15/0.35-0.38). Observed floors 2-3x predictions due to sparse binning. Bias floor varies by noise level as expected but magnitude is misspecified. (result.json:controls.bias_floor_verification, audit.json:validity_findings[6])",
+      "Per-type Spearman scaling collapses post-correction: only 1/8 types (type 6, rho=0.76 p=0.028) shows significant lambda-scaling. Aggregate rho=0.76 driven by type 6 outlier; removing type 6 drops mean lambda=1 BC to 0.022. Pooled BC rho=0.929 remains strongly monotonic. (result.json:metrics.per_type_bc_tv.spearman_rho_by_type, audit.json:validity_findings[5])"
+    ],
+    "rejected": [
+      "Hypothesis that per-type bias correction with N=200 per-type permutations recovers absolute signal strength in sparse regime (per-type BC TV >0.2 at lambda=1, per-type > pooled): falsified. Mean per-type BC 0.034 <0.1, ratio 0.67x pooled, paired p=0.989. (result.json:metrics.primary_comparison_lambda1, controls.paired_comparison)",
+      "Hypothesis that 94.6% attenuation is estimator-dependent (addressable by per-type estimation) in this sparse regime: per-type performs WORSE than pooled (0.67x), not better. (result.json:metrics.primary_comparison_lambda1.ratio)"
+    ],
+    "unknown": [
+      "Whether per-type estimation with equal sample size (2000 per type or subsampled pooled to 250 per type) shows recovery — current comparison confounds estimator type (per-type N=250) with sample size (pooled N=2000). Audit required_fixes[3] identifies this as critical. (audit.json:required_fixes[3], unresolved[0])",
+      "Whether increasing transitions per type to 500-1000 (1.25-2.5 expected counts/bin) stabilizes per-type TV and eliminates null false positives (4/8 >0.01) and CV>0.5. (audit.json:unresolved[1])",
+      "Whether alternative divergence measures (adaptive binning, KDE, kNN) or causal factorization would recover magnitude where binned TV fails at this sparsity. (audit.json:unresolved[2])",
+      "Whether stochastic or state-dependent page-type switching (vs deterministic block-cycling) changes per-type vs pooled ordering. (audit.json:unresolved[3])",
+      "Whether real Web DOM transitions exhibit action-conditional structure detectable by any per-type estimator — ALL evidence across seven Frontier experiments remains synthetic 2D [0,1]^2. (audit.json:unresolved[5]; parent handoff.json:unknown[4])",
+      "Whether any per-type BC magnitude would exceed frequency baseline 0.335 for practical downstream agent exploration utility. (audit.json:unresolved[4])"
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is globally falsified — the claim concerns real Web dynamics; ALL evidence across seven Frontier experiments is synthetic (2D [0,1]^2 with toy affine families, heteroscedastic Gaussian noise, deterministic block-cycling). The frozen FALSIFIED-IN-SETTING applies to the per-type recovery decision rule in this sparse regime, not to the scientific claim. Synthetic-to-real gap persists. (audit.json:claim_ceiling; parent handoff.json:do_not_assume[0])",
+      "Do not assume the 94.6% attenuation is fundamental to heterogeneous DGPs — audit explicitly finds this conclusion is NOT justified because the per-type vs pooled comparison confounds sample size (n=250/type vs n=2000 pooled). The 67% ratio may reflect sparsity bias, not estimator failure. (audit.json:required_fixes[3], validity_findings[4])",
+      "Do not assume density-divergence is unsuitable for real Web data based on this experiment alone — per-type BC at 0.625 counts/bin is noise-dominated; denser estimation or alternative divergence measures may yield different results. (audit.json:required_fixes[5], claim_ceiling)",
+      "Do not assume sparse binning results (0.625 expected counts/bin per type) generalize to denser regimes — the sparse bias floor (0.37-0.61) inflates permutation nulls 2-3x over predictions calibrated for denser data. (audit.json:validity_findings[4], validity_findings[6])",
+      "Do not assume per-type BC TV instrument achieves false-positive control at n=250/type — null control fails (4/8 types >0.01) and CV up to 1.59 indicates noise-dominated estimates. (result.json:controls.null_control, controls.cv_check)",
+      "Do not assume product deployment readiness or real-data collection justification from rank correlation alone — auditor explicitly warns 'Do not promote to product or to real-data collection solely on rho.' (audit.json:claim_ceiling; parent handoff.json:do_not_assume[4])",
+      "Do not assume non-stationarity operationalization (deterministic block-cycling every 250 i.i.d. draws) is representative of real Web page-type switching — real Web has continuous high-dimensional state, non-Gaussian multimodal noise, temporal correlation, and state-dependent transitions. (audit.json:validity_findings[8]; prereg.md:9.4)",
+      "Do not assume the report.md conclusion that 'attenuation is fundamental' is warranted by the evidence — the audit explicitly flags this as overgeneralization from a noise-dominated sparse regime. (audit.json:required_fixes[5], claim_ceiling)"
+    ]
+  },
+  "dependencies": [
+    "Equal-sample-size comparison: subsample pooled data to 250 per type, or generate 2000 per type, to disentangle estimator contamination from sparsity bias. Required before any claim about fundamental vs estimator-dependent attenuation. (audit.json:required_fixes[3], unresolved[0])",
+    "Increased per-type sample size: 500-1000 transitions per type (1.25-2.5 expected counts/bin) to test whether per-type TV stabilizes and null control passes. (audit.json:unresolved[1])",
+    "Alternative divergence measures: adaptive binning, KDE, or kNN estimators that may be robust to sparse binning where grid-based TV fails. (audit.json:unresolved[2])",
+    "Real Web transition data with known action-structure remains the dominant substrate dependency for C-WEB-DYNAMICS — all seven Frontier experiments are synthetic. (parent handoff.json:dependencies[2])",
+    "Pooled BC Spearman rho=0.929 rank detection is established and replicated; any new experiment should preserve this as a baseline comparator. (result.json:controls.parent_replication; parent result.json:metrics.nonstationary)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34794649996/spec.json:decision_rule, falsifier, hypothesis, baselines, claim_ids, question",
+    "research/experiments/EXP-FRONTIER-34794649996/result.json:metrics.primary_comparison_lambda1, metrics.per_type_bc_tv, metrics.pooled_bc_tv, metrics.per_type_raw_tv_at_lambda1, metrics.per_type_perm_mean_at_lambda0, metrics.frequency_baseline, metrics.effect_size, controls",
+    "research/experiments/EXP-FRONTIER-34794649996/audit.json:status REVISE, producer_claim_supported false, claim_ceiling, required_fixes, validity_findings, baseline_findings, recomputed_metrics, unresolved",
+    "research/experiments/EXP-FRONTIER-34794649996/report.md:Executive Summary, sections 3-5 (null control failure, scaling, interpretation)",
+    "research/experiments/EXP-FRONTIER-34794649996/prereg.md:sections 7.1, 8.1-8.2, 9.1, 10.1-10.2",
+    "research/experiments/EXP-FRONTIER-34794649996/run_execute.py:296 (pooled N=200), 385-392 (paired test), 487-496 (decision mapping)",
+    "research/experiments/EXP-FRONTIER-34794649996/provenance.json:execution_time_seconds, total_transitions, key_methodological_change",
+    "research/experiments/EXP-FRONTIER-34773875458/handoff.json:carry_forward established/rejected/unknown/do_not_assume, next_question, recommended_action",
+    "research/experiments/EXP-FRONTIER-34773875458/audit.json:validity_findings on sparse binning and bias floor contamination"
+  ],
+  "recommended_action": "Design a Frontier experiment testing per-type vs pooled binned TV with EQUAL sample size to disentangle estimator contamination from sparsity bias. Two options: (A) subsample pooled transitions to 250 per type (matching per-type n) and recompute pooled BC TV for a fair comparison; (B) generate 2000 transitions per type (16,000 total per lambda) and recompute per-type BC TV at 5.0 expected counts/bin. Either resolves whether the 67% per-type/pooled ratio is estimator-driven or sample-size-driven. If per-type BC TV at equal n remains ≤0.1 and below pooled, the attenuation is more likely estimator-dependent and the density-divergence approach using binned TV is bounded as insufficient for heterogeneous data. If per-type BC TV at equal n exceeds pooled or exceeds 0.2, the sparse regime was the confound and denser per-type estimation should be tested further. Also consider testing alternative divergence measures (adaptive binning, KDE) that may be robust to the sparse binning failure mode. Do NOT repeat pooled-only estimation (tested twice) or per-type at n=250 (tested here). Do NOT move to real Web data until the equal-n question is resolved synthetically."
+}

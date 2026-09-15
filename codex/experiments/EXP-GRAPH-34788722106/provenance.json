@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34788722106",
+  "lane": "graph",
+  "github_run_id": "34788722106",
+  "github_run_attempt": "1",
+  "origin_github_run_id": "34788722106",
+  "commits": {
+    "pre_execute_sha": "5c2bf87d042090b0cfe2496b91651a7fd7008dfd",
+    "post_execute_sha": "1c9f05b531135277f7c6ea94e17f95d70f6d97e3"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "architecture": "x86_64",
+    "dependencies": ["numpy (not used)", "scipy (not used)", "standard library only"],
+    "seed": 20260913
+  },
+  "datasets": {
+    "mock_schemas": {
+      "description": "Synthetic schemas with 10, 20, 30, 50 fields, each with (field_path, type) pairs",
+      "generation_method": "Deterministic random generation with seed=20260913",
+      "schema_sizes": [10, 20, 30, 50],
+      "field_types": ["string", "integer", "boolean", "array", "object"],
+      "samples_per_group": 30
+    },
+    "drift_patterns": {
+      "true_drift": ["add_field", "remove_field", "change_type"],
+      "structural_noise": ["optional_field_churn", "null_valued_fields", "nested_object_variation"]
+    }
+  },
+  "code": {
+    "experiment_code": "research/graph/freshness_detection/execute_structural_noise.py",
+    "code_hash": null,
+    "execution_command": "python3 research/graph/freshness_detection/execute_structural_noise.py"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "mock_schemas.json": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+        "sha256": "343ead30c1bd8effa57f4a9b9651e31681bd29b17825937bd812b5bc3be337a1",
+        "role": "raw"
+      },
+      "derived_measurements.json": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json",
+        "sha256": "20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173",
+        "role": "derived"
+      },
+      "decision_evaluation.json": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/decision_evaluation.json",
+        "sha256": "bcabad8df8ba0d56e545c08a3cb43914e6ce1b2361235cdbb741bdeb23d9c137",
+        "role": "derived"
+      },
+      "hashes.json": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/hashes.json",
+        "sha256": "c9f763d4fa8d7accf49e99832c0883d336680c7e53f9b96abdb3776e981fb74f",
+        "role": "metadata"
+      }
+    },
+    "result_files": {
+      "result.json": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/result.json",
+        "role": "handoff"
+      },
+      "report.md": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/report.md",
+        "role": "interpretation"
+      },
+      "provenance.json": {
+        "path": "research/experiments/EXP-GRAPH-34788722106/provenance.json",
+        "role": "provenance"
+      }
+    }
+  },
+  "execution": {
+    "executed_at": "2026-09-14T00:00:00.000000+00:00",
+    "execution_duration_seconds": null,
+    "exit_code": 0,
+    "pipeline_errors": 0,
+    "total_requests": 1440,
+    "breakdown": {
+      "fresh_requests": 120,
+      "stale_requests": 1320,
+      "requests_per_schema_size": 360
+    }
+  },
+  "reproducibility": {
+    "deterministic_seed": true,
+    "seed_value": 20260913,
+    "identical_results_on_rerun": true,
+    "notes": "All 30 samples per group per drift pattern produce identical Jaccard values due to deterministic generation"
+  },
+  "frozen_inputs": {
+    "request_hash": "e22bffc4296229b538c16e20e5459dbaff32dc34f72dd6481a02aed62be8c54f",
+    "spec_hash": "baac0c5eb373cbf37dacd96ee0ec2a882cf280e03314b2c759307a6de75ee951",
+    "prereg_hash": "79f2aebb3c75ee3ca3cba839e6ab7ad05645d09a7cd06b5d07d1b7abfd4767a1",
+    "frozen_at": "2026-09-13T23:09:17.962885+00:00"
+  }
+}

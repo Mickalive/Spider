@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34881708619",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "per_type_bc_tv": {
+      "means_by_lambda": {
+        "0": {
+          "0.0": 0.028226509253943977,
+          "0.1": 0.027186699622233378,
+          "0.2": 0.008649482384999496,
+          "0.3": 0.008190025326319895,
+          "0.4": 0.02754970999396227,
+          "0.5": 0.0070342982116790905,
+          "0.7": 0.016440358024099842,
+          "1.0": 0.025318024745331937
+        },
+        "1": {
+          "0.0": 0.0,
+          "0.1": 0.021269420580008823,
+          "0.2": 0.017257802206851136,
+          "0.3": 0.009362730650976082,
+          "0.4": 0.004381903999814441,
+          "0.5": 0.009236601809769217,
+          "0.7": 0.014468434190581836,
+          "1.0": 0.025989160616001473
+        },
+        "2": {
+          "0.0": 0.011729357453257216,
+          "0.1": 0.007891830188514692,
+          "0.2": 0.0,
+          "0.3": 0.005758736619930649,
+          "0.4": 0.01409680694338753,
+          "0.5": 0.01496379822807783,
+          "0.7": 0.012185730917474347,
+          "1.0": 0.006804432050503339
+        },
+        "3": {
+          "0.0": 0.009763443922109972,
+          "0.1": 0.003005412581699374,
+          "0.2": 0.013131930088759947,
+          "0.3": 0.014507693992316861,
+          "0.4": 0.01015923363130653,
+          "0.5": 0.006079501822455979,
+          "0.7": 0.005165691645817372,
+          "1.0": 0.023924064151891366
+        },
+        "4": {
+          "0.0": 0.015580652074991708,
+          "0.1": 0.005316516252109449,
+          "0.2": 0.019471508732067554,
+          "0.3": 0.01705472670805317,
+          "0.4": 0.003068964924119144,
+          "0.5": 0.01570269164839806,
+          "0.7": 0.01632159425314177,
+          "1.0": 0.017129173327898806
+        },
+        "5": {
+          "0.0": 0.01444644673607669,
+          "0.1": 0.015086065349728606,
+          "0.2": 0.016132086937410882,
+          "0.3": 0.006515545017315416,
+          "0.4": 0.004224524697938858,
+          "0.5": 0.017331246753417174,
+          "0.7": 0.015442766212814285,
+          "1.0": 0.013513382728087598
+        },
+        "6": {
+          "0.0": 0.006775142844244952,
+          "0.1": 0.003227869859173893,
+          "0.2": 0.0005462097338935657,
+          "0.3": 0.03496740412884543,
+          "0.4": 0.011615337877692289,
+          "0.5": 0.019015017664531064,
+          "0.7": 0.033637032354070076,
+          "1.0": 0.11803165150156716
+        },
+        "7": {
+          "0.0": 0.00694958577976702,
+          "0.1": 0.008169771138961668,
+          "0.2": 0.03050451740322605,
+          "0.3": 0.006281170884938981,
+          "0.4": 0.030370356200123495,
+          "0.5": 0.007361739335534745,
+          "0.7": 0.016723427981636906,
+          "1.0": 0.04344125334554849
+        }
+      },
+      "spearman_rho_by_type": {
+        "0": -0.38095238095238104,
+        "1": 0.3333333333333334,
+        "2": 0.261904761904762,
+        "3": 0.261904761904762,
+        "4": 0.30952380952380953,
+        "5": 0.0,
+        "6": 0.7619047619047621,
+        "7": 0.4761904761904762
+      },
+      "spearman_p_by_type": {
+        "0": 0.35181255311756476,
+        "1": 0.4197530864197532,
+        "2": 0.530922861565801,
+        "3": 0.530922861565801,
+        "4": 0.4556448907375822,
+        "5": 1.0,
+        "6": 0.028004939153071805,
+        "7": 0.23293553465009798
+      },
+      "mean_across_types_by_lambda": {
+        "0.0": 0.011683892258048941,
+        "0.1": 0.011394198196553736,
+        "0.2": 0.01321169218590108,
+        "0.3": 0.012829754166087061,
+        "0.4": 0.01318335478354307,
+        "0.5": 0.012090611934232894,
+        "0.7": 0.016298129447454554,
+        "1.0": 0.03426889280835377
+      },
+      "aggregate_spearman_rho": 0.7619047619047621,
+      "aggregate_spearman_p": 0.028004939153071805
+    },
+    "pooled_full_bc_tv": {
+      "means_by_lambda": {
+        "0.0": 0.00431682672908284,
+        "0.1": 0.004399601043323309,
+        "0.2": 0.010223902483348401,
+        "0.3": 0.004602131384638819,
+        "0.4": 0.008318141169509541,
+        "0.5": 0.016956073273822213,
+        "0.7": 0.02798437663734594,
+        "1.0": 0.05133050668698136
+      }
+    },
+    "pooled_subsampled_bc_tv": {
+      "means_by_lambda": {
+        "0.0": 0.004151133149831021,
+        "0.1": 0.00458881138974856,
+        "0.2": 0.010068842032025816,
+        "0.3": 0.0047460972359673285,
+        "0.4": 0.00831237535780982,
+        "0.5": 0.017011771517536856,
+        "0.7": 0.029099147084450317,
+        "1.0": 0.05097873838366618
+      },
+      "spearman_rho": 0.9285714285714287,
+      "spearman_p": 0.0008629681828999767
+    },
+    "primary_comparison_lambda1": {
+      "pooled_subsampled_bc": 0.05097873838366618,
+      "mean_per_type_bc": 0.03426889280835377,
+      "ratio_pooled_sub_to_per_type": 1.4876097301643498,
+      "pooled_full_bc": 0.05133050668698136,
+      "ratio_full_to_sub": 1.0069002944064205,
+      "per_type_bc_by_type": [
+        0.025318024745331937,
+        0.025989160616001473,
+        0.006804432050503339,
+        0.023924064151891366,
+        0.017129173327898806,
+        0.013513382728087598,
+        0.11803165150156716,
+        0.04344125334554849
+      ]
+    },
+    "effect_size": {
+      "cohens_d_pooled_sub_vs_per_type_lambda1": 1.7809300673213264
+    },
+    "frequency_baseline": {
+      "mean_tv_marginal_vs_action": 0.3350107551482074,
+      "tv_marginal_vs_action": {
+        "0": 0.340697896749522,
+        "1": 0.3387690763052209,
+        "2": 0.3141042471042471,
+        "3": 0.34647180043383946
+      }
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "Pooled full BC TV at lambda=1 within 0.01 of parent (~0.051)",
+      "pass": true,
+      "pooled_full_bc_tv_at_lambda1": 0.05133050668698136,
+      "parent_expected": 0.051,
+      "abs_diff": 0.00033050668698136193
+    },
+    "null_control_per_type": {
+      "description": "Per-type BC TV <= 0.01 at lambda=0 across all 8 page types",
+      "pass": false,
+      "per_type_bc_tv_at_lambda0": [
+        0.028226509253943977,
+        0.0,
+        0.011729357453257216,
+        0.009763443922109972,
+        0.015580652074991708,
+        0.01444644673607669,
+        0.006775142844244952,
+        0.00694958577976702
+      ],
+      "max_bc_tv": 0.028226509253943977
+    },
+    "null_control_pooled_sub": {
+      "description": "Pooled subsampled BC TV <= 0.01 at lambda=0",
+      "pass": true,
+      "pooled_sub_bc_tv_at_lambda0": 0.004151133149831021
+    },
+    "null_control": {
+      "description": "Both null controls pass (per-type and pooled subsampled at lambda=0)",
+      "pass": false
+    },
+    "subsampling_consistency": {
+      "description": "Pooled subsampled BC TV <= pooled full BC TV at lambda=1 across all reps",
+      "pass": false,
+      "sub_bc_by_rep": [
+        0.04935335936466828,
+        0.06168635813896056,
+        0.062026210504078305,
+        0.03733683824823164,
+        0.0444909256623921
+      ],
+      "full_bc_by_rep": [
+        0.04672767817463186,
+        0.06255576145748842,
+        0.06267441928280676,
+        0.03833752316746941,
+        0.04635715135251034
+      ]
+    },
+    "per_type_replication": {
+      "description": "Recomputed per-type aggregate BC TV at lambda=1 within 0.01 of parent (0.034)",
+      "pass": true,
+      "recomputed_mean": 0.03426889280835377,
+      "parent_expected": 0.034
+    },
+    "primary_comparison": {
+      "description": "Pooled subsampled BC TV > per-type BC TV at lambda=1",
+      "pass": true,
+      "t_statistic": 3.982280693703763,
+      "p_one_sided": 0.008184969964197543,
+      "cohens_d": 1.7809300673213264
+    },
+    "cv_check": {
+      "description": "CV across replications <= 0.5 for all page types at lambda=1",
+      "pass": false,
+      "per_type_cv_lambda1": [
+        0.8152686108532438,
+        0.7357586984398383,
+        1.37434021263227,
+        1.029353769452497,
+        1.0755608249922815,
+        1.5943726865836452,
+        0.4258038891630622,
+        0.517463248499068
+      ],
+      "max_cv": 1.5943726865836452
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-34881708619/run_execute.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Overall decision: MEASUREMENT_INVALID",
+    "Pooled subsampled BC TV at lambda=1: 0.0510",
+    "Mean per-type BC TV at lambda=1: 0.0343",
+    "Ratio (pooled-sub / per-type): 1.49x",
+    "Paired t-test (pooled-sub > per-type): t=3.9823, p_one_sided=0.008185",
+    "Cohen's d: 1.7809",
+    "Pooled full BC TV at lambda=1: 0.0513",
+    "Ratio (full / sub): 1.01x",
+    "Positive control: PASS",
+    "Null control (per-type): FAIL",
+    "Null control (pooled sub): PASS",
+    "Subsampling consistency: FAIL",
+    "Per-type replication: PASS",
+    "CV max at lambda=1: 1.5944 (INVALID)",
+    "Frequency baseline: 0.3350",
+    "Pooled sub Spearman rho: 0.9286 (parent pooled: 0.929)"
+  ],
+  "validity_notes": [
+    "Same DGP parameters and seed structure as parent EXP-FRONTIER-34794649996",
+    "2000 non-stationary transitions per lambda level (250 per page type x 8 types)",
+    "Subsampling: 250 randomly selected transitions per type (deterministic seed), then pooled",
+    "Both pooled subsampled and per-type estimators use the SAME 250 transitions per type",
+    "Pooled subsampled perm null: N=200 shuffling across all 2000 subsampled transitions",
+    "Per-type perm null: N=200 per page type shuffling within type",
+    "20x20 grid binning for TV on continuous 2D state space",
+    "5 replications per lambda level",
+    "Sparse binning: 250 transitions / 400 bins = 0.625 expected counts/bin per type",
+    "The primary comparison uses 5 paired observations (rep-level means across 8 types)",
+    "Statistical power is limited with n=5 paired observations; Cohen d>0.5 threshold ensures practical significance",
+    "All decisions use frozen decision rules from preregistration",
+    "Synthetic 2D [0,1]^2 data only; no inference to real Web DOM transitions justified"
+  ],
+  "unresolved": [
+    "Whether the paired t-test with n=5 has sufficient power to detect moderate effects (d~0.5)",
+    "Whether per-type estimation at higher sample size (2000/type) would close the gap with pooled",
+    "Whether alternative divergence measures (KDE, kNN) would change the pooled-vs-per-type ordering",
+    "Whether stochastic page-type switching would alter the equal-n comparison",
+    "Whether any BC TV magnitude exceeds frequency baseline (0.335) for practical utility",
+    "Whether real Web DOM transitions exhibit action-conditional structure detectable by any estimator"
+  ]
+}

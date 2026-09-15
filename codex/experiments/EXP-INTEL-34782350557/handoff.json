@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34782350557",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Can element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+  "why_next": "The audit (VF-DENOMINATOR-SENSITIVITY) identified total_dom variation as the primary confound driving the ordering reversal. Alternative denominator elements_with_bbox is available in the raw data (1550-1564 listing, 1143-1215 detail per audit VF-DENOMINATOR-SENSITIVITY) and can be recomputed for tightened definition without new Docker execution. If element-density-normalized ordering listing>detail>cart holds, it would resolve the denominator confound and advance metric validation. This is the highest-information question answerable from existing data.",
+  "carry_forward": {
+    "established": [
+      "Original DEF-FALLBACK-INTERACTIVE definition overcounted interactive elements by ~10x: listing 82->8 (tightened, with role mapping), detail 32->5, cart 21->6 under role-only counting. Confirms parent audit VF-DEFINITION-OVERCOUNT (audit BF-DEFINITION-OVERCOUNT-DRAMATIC-REDUCTION).",
+      "Within-type stability of tightened interactive fraction is preserved for listing (CV 0.0048, n=3) and detail (CV 0.037, n=3). Cart CV undefined (n=1 distinct after deduplication).",
+      "Between-type discrimination holds under tightened definition (ratio 60 deduped, 75 with duplicate) but magnitude is reduced from parent 582 and is definition- and denominator-sensitive.",
+      "Tightened locatable count > 0 on all tasks (positive control passes): definition is not overly restrictive.",
+      "Tightened count <= original count on all tasks (null control passes): form-membership clause removal reduces counts as expected."
+    ],
+    "rejected": [
+      "Hypothesis that ordering reversal (cart > listing > detail) under tightened definition proves the interactive fraction metric is an artifact of form scaffolding. Audit VF-SAMPLE-TRUNCATION-CRITICAL demonstrates reversal is artifact of differential sample truncation (locatable_sample capped at 20 of 82/32/21 elements) combined with total_dom denominator variation. Extrapolation to full DOM restores listing 0.019 > detail 0.006 > cart 0.0055 ordering (audit BF-ORDERING-REVERSAL-ARTIFACT).",
+      "Producer's FALSIFIED-IN-SETTING verdict as a general claim about metric robustness. The ordering reversal is bounded to truncated-first-20-sample + total_dom denominator scope only."
+    ],
+    "unknown": [
+      "True role-only tightened interactive fraction when full DOM is enumerated (not truncated to 20). Extrapolated estimates (listing ~0.019, detail ~0.006, cart ~0.0055) preserve ordering but are proportional approximations, not measurements.",
+      "Canonical role mapping: does <a> with implicit link role count as tightened 'link'? Producer mapped 'a'->'link' (audit VF-ROLE-MAPPING-DEVIATION); without mapping counts drop 33-150%. Frozen spec does not resolve this.",
+      "Does element-density (locatable/elements_with_bbox) instead of fraction (locatable/total_dom) resolve denominator sensitivity? elements_with_bbox values available in raw data but not yet recomputed for tightened definition.",
+      "Cross-site generalization of interactive fraction metric beyond single Magento shopping site.",
+      "Checkout page interactive fraction when port 7770 is accessible.",
+      "Does Docker digest drift alter DOM counts and tightened fractions across measurement sessions?"
+    ],
+    "do_not_assume": [
+      "Do not assume ordering reversal is a robust scientific finding — it is an artifact of truncated sampling and denominator variation (audit VF-SAMPLE-TRUNCATION-CRITICAL, VF-DENOMINATOR-SENSITIVITY).",
+      "Do not assume discrimination ratio 60-75 is stable — it is definition- and denominator-sensitive, and drops from parent 582 under tightening.",
+      "Do not assume the metric is ready for product yield estimation — full DOM enumeration and denominator-controlled testing are prerequisites.",
+      "Do not assume cart n=2 identical measurements provide independent replication — they are the same URL measured twice (audit VF-CART-PSEUDOREPLICATION-REPEAT). Cart n=1 distinct, CV undefined.",
+      "Do not assume the ROLE_MAP ('a'->'link', 'input'->'textbox') is correct — it is an undocumented deviation from the frozen spec that inflates counts (audit VF-ROLE-MAPPING-DEVIATION).",
+      "Do not extrapolate truncated-sample findings to general metric properties without acknowledging the 4.1x (listing), 1.6x (detail), 1.05x (cart) undercount factors.",
+      "Do not treat this experiment as closing the interactive fraction metric approach — it is INCONCLUSIVE due to infrastructure limitations, not a definitive falsification."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-34718481334/raw_evidence/exp347_raw_results.json (raw measurement data with locatable_sample, total_dom_elements, locatable_elements fields)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json (derived tightened counts per task)",
+    "research/experiments/EXP-INTEL-34782350557/audit.json (extrapolated estimates and denominator analysis)",
+    "elements_with_bbox values per task (available in raw data, not yet extracted for tightened definition)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34782350557/verdict.json",
+    "research/experiments/EXP-INTEL-34782350557/result.json",
+    "research/experiments/EXP-INTEL-34782350557/audit.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json sha256:b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py sha256:84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+    "research/experiments/EXP-INTEL-34718481334/audit.json: VF-DEFINITION-OVERCOUNT, VF-CART-PSEUDOREPLICATION",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: MEASURE_JS locatableSample.length <20"
+  ],
+  "recommended_action": "Compute tightened element density (tightened_locatable_count / elements_with_bbox) for all 7 tasks from existing raw data. If ordering listing > detail > cart holds under this denominator, it resolves the denominator confound and provides stronger evidence for metric validity. Then proceed to cross-site measurement with full DOM enumeration (not truncated sampling) to test generalization. The runtime lane may need to address the locatableSample truncation (cap at 20) in MEASURE_JS before cross-site measurement can produce valid results."
+}

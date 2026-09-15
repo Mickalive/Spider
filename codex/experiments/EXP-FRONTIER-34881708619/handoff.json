@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34881708619",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Do alternative divergence measures (KDE with adaptive bandwidth, kNN mutual information, or kernel-based divergence) maintain pooled-vs-per-type ordering at equal per-type n (250/type) where binned TV fails due to sparse binning (0.625 expected counts/bin), or does the estimator limitation dissolve when the binning artifact is removed?",
+  "why_next": "The binned TV estimator family has a fundamental sparse-binning limitation at 0.625 expected counts/bin per type that invalidates per-type false-positive control (4/8 types >0.01 at lambda=0, CV up to 1.59). The equal-n design still confounds total density (pooled 5.0 counts/bin vs per-type 0.625 counts/bin), so the 1.49x ratio cannot isolate borrowing-strength from denser bin occupancy. KDE and kNN estimators do not depend on fixed grid binning and may be robust to the sparse-regime failure mode. Testing these materially orthogonal measures determines whether the per-type limitation is specific to binned TV or generalizes across divergence estimators. This is the minimum disambiguating step before either closing the density-divergence approach entirely or identifying an estimator family that works at realistic per-type sample sizes.",
+  "carry_forward": {
+    "established": [
+      "Pooled binned TV pipeline replicates parent: pooled full BC TV at lambda=1 =0.0513 matches parent 0.051 within 0.00033 (positive_control pass). Pooled_sub Spearman rho=0.9286 replicates parent rho=0.929. (result.json:controls.positive_control, metrics.pooled_subsampled_bc_tv.spearman_rho)",
+      "Per-type binned TV at 250/type (0.625 expected counts/bin) is noise-dominated and does not recover absolute signal: mean per-type BC TV at lambda=1 =0.0343, which is 9.8x below frequency baseline 0.335 and far below the >0.2 threshold. Null control fails (4/8 types >0.01 at lambda=0, max 0.0282). CV at lambda=1 max 1.59 (6/8 >0.5). (result.json:controls.null_control_per_type, controls.cv_check, metrics.frequency_baseline)",
+      "Per-type BC Spearman scaling is type6-outlier-driven: aggregate rho=0.762 driven by type6 (rho=0.76 p=0.028); other types rho -0.38 to 0.47, all p>0.05 except type6. Without type6, preregistered test flips from p=0.113 to p=0.0003. (result.json:metrics.per_type_bc_tv.spearman_rho_by_type, audit.json:recomputed_metrics.preregistered_test_without_type6_outlier)",
+      "Pooled subsampled BC TV at equal per-type n (250/type) is 0.0510, ratio 1.49x per-type 0.0343. Preregistered paired t-test across 8 types: t=1.33 p_one=0.113 d=0.47 FAILS both p<0.05 and d>0.5. Producer's rep-level test (t=3.98 p=0.008 d=1.78) is exploratory, not preregistered. (audit.json:recomputed_metrics.preregistered_paired_t_across_8_types, validity_findings[1])",
+      "Frequency baseline mean TV=0.335 is 6.5x pooled BC and 9.8x per-type BC, confirming absolute signal remains far below marginal structure regardless of estimator. (result.json:metrics.frequency_baseline)"
+    ],
+    "rejected": [
+      "Hypothesis that per-type bias correction with N=200 per-type permutations recovers absolute signal strength in sparse regime (per-type BC TV >0.2 at lambda=1, per-type > pooled): falsified across two experiments. Mean per-type BC 0.034 <0.1, ratio 0.67x-1.49x pooled, null control fails 4/8. (result.json:metrics.primary_comparison_lambda1, controls.null_control_per_type)",
+      "Hypothesis that the 67% per-type/pooled ratio is solely a sample-size artifact addressable by equal-n design: the 1.49x ratio at equal per-type n persists but confounds 5.0 vs 0.625 counts/bin density, so the question is not resolved — the ratio may reflect denser bin occupancy, not cross-type borrowing. (audit.json:validity_findings[4], required_fixes[2])"
+    ],
+    "unknown": [
+      "Whether alternative divergence measures (KDE, kNN, kernel-based) that do not depend on fixed grid binning maintain pooled-vs-per-type ordering at equal per-type n, or whether the per-type limitation dissolves when the binning artifact is removed. (audit.json:unresolved[3])",
+      "Whether per-type estimation at higher density (500-2000 per type, 1.25-5.0 expected counts/bin) would achieve null control (<=0.01) and CV<=0.5 and change pooled vs per-type ordering. (audit.json:unresolved[0])",
+      "Whether pooled vs per-type at equal TOTAL n (250 pooled vs 250 per-type) or equal density would eliminate 8x density confound and show true estimator difference. (audit.json:unresolved[1])",
+      "Whether stochastic or state-dependent page-type switching (vs deterministic block-cycling) changes per-type vs pooled ordering. (audit.json:unresolved[5])",
+      "Whether real Web DOM transitions exhibit action-conditional structure detectable by any per-type estimator — ALL evidence across Frontier experiments remains synthetic 2D [0,1]^2. (audit.json:unresolved[6])",
+      "Whether any BC TV magnitude would exceed frequency baseline 0.335 for practical downstream agent exploration utility. (audit.json:unresolved[4])"
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is globally falsified — the claim concerns real Web dynamics; ALL evidence across Frontier experiments is synthetic (2D [0,1]^2 with toy affine families, heteroscedastic Gaussian noise, deterministic block-cycling). The frozen MEASUREMENT_INVALID applies to the binned TV estimator in this sparse regime, not to the scientific claim. Synthetic-to-real gap persists. (audit.json:claim_ceiling)",
+      "Do not assume the 1.49x pooled/sub ratio at equal per-type n demonstrates cross-type borrowing strength — the comparison still confounds 5.0 vs 0.625 expected counts/bin total density. Pooled estimator bins 2000 points (5.0/bin) while per-type bins 250 points (0.625/bin). The ratio may reflect denser histogram estimation, not estimator advantage. (audit.json:validity_findings[4], required_fixes[2])",
+      "Do not assume per-type BC TV instrument achieves false-positive control at n=250/type — null control fails (4/8 types >0.01) and CV up to 1.59 indicates noise-dominated estimates at 0.625 counts/bin. (result.json:controls.null_control_per_type, controls.cv_check)",
+      "Do not assume the report.md conclusion that 'pooled has a fundamental advantage' is warranted — the audit explicitly flags this as overgeneralization from an invalid measurement and a non-preregistered test. (audit.json:required_fixes[1], claim_ceiling)",
+      "Do not assume sparse binning results (0.625 expected counts/bin per type) generalize to denser regimes — the sparse bias floor inflates permutation nulls 2-3x over predictions calibrated for denser data. (audit.json:validity_findings[2])",
+      "Do not assume product deployment readiness or real-data collection justification from rank correlation alone — absolute BC TV magnitudes (0.051 pooled, 0.034 per-type) are 6.5-9.8x below frequency baseline 0.335. (audit.json:validity_findings[7], claim_ceiling)",
+      "Do not assume non-stationarity operationalization (deterministic block-cycling every 250 i.i.d. draws) is representative of real Web page-type switching. (audit.json:validity_findings[5]; prereg.md:9.4)"
+    ]
+  },
+  "dependencies": [
+    "Alternative divergence measures (KDE with cross-validated bandwidth, kNN mutual information, or kernel-based divergence) that do not depend on fixed grid binning and may be robust to 0.625 expected counts/bin per type. (audit.json:unresolved[3], parent handoff.json:dependencies[2])",
+    "Per-type sample size increase to 500-2000 per type (1.25-5.0 expected counts/bin) to test whether per-type TV stabilizes and null control passes — orthogonal alternative to divergence measure change. (audit.json:unresolved[0], parent handoff.json:dependencies[1])",
+    "Pooled BC Spearman rho=0.929 rank detection is established and replicated; any new experiment should preserve this as a baseline comparator. (result.json:metrics.pooled_subsampled_bc_tv.spearman_rho)",
+    "Real Web transition data with known action-structure remains the dominant substrate dependency for C-WEB-DYNAMICS — all Frontier experiments are synthetic. (parent handoff.json:dependencies[3])"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34881708619/spec.json:question, hypothesis, falsifier, decision_rule, baselines, positive_control, null_control, measurement_validity",
+    "research/experiments/EXP-FRONTIER-34881708619/prereg.md:7.1 primary paired test across 8 types, 8.1-8.4 controls, 10.3 MEASUREMENT_INVALID rule",
+    "research/experiments/EXP-FRONTIER-34881708619/freeze.json:hashes",
+    "research/experiments/EXP-FRONTIER-34881708619/result.json:metrics.per_type_bc_tv, metrics.pooled_full_bc_tv, metrics.pooled_subsampled_bc_tv, metrics.primary_comparison_lambda1, metrics.effect_size, metrics.frequency_baseline, controls",
+    "research/experiments/EXP-FRONTIER-34881708619/audit.json:status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling, required_fixes[0-6], validity_findings, recomputed_metrics.preregistered_paired_t_across_8_types, unresolved",
+    "research/experiments/EXP-FRONTIER-34881708619/report.md:Executive Summary, 2.1 primary comparison, 3.1 interpretation",
+    "research/experiments/EXP-FRONTIER-34881708619/run_execute.py:294-309 subsampling, 395-401 rep-level t-test",
+    "research/experiments/EXP-FRONTIER-34881708619/provenance.json:parent_experiment, execution_time_seconds",
+    "research/experiments/EXP-FRONTIER-34794649996/handoff.json:carry_forward established/rejected/unknown/do_not_assume, next_question, recommended_action",
+    "research/experiments/EXP-FRONTIER-34794649996/audit.json:required_fixes[3] equal-n confound, validity_findings sparse binning"
+  ],
+  "recommended_action": "Design a Frontier experiment testing alternative divergence measures (KDE with cross-validated bandwidth, kNN mutual information, or kernel-based divergence) on the same synthetic 2D [0,1]^2 DGP with 8 heterogeneous page types at equal per-type n (250/type). The experiment should: (1) compute per-type and pooled-subsampled divergence using the alternative measure at lambda=0 and lambda=1; (2) apply the same paired comparison framework (one-sided paired t-test across 8 types, Cohen's d>0.5); (3) verify null control (per-type divergence <= threshold at lambda=0); (4) compare with binned TV results to determine whether the per-type limitation is estimator-specific or general. If alternative measures show per-type null control passing and pooled-vs-per-type ordering changes, the binned TV sparse-binning artifact is confirmed as the limiting factor. If alternative measures also fail per-type null control, the limitation is more fundamental to per-type estimation at 250/type. Do NOT repeat binned TV (tested three times across parent chain). Do NOT move to real Web data until an estimator family achieves per-type null control synthetically."
+}
