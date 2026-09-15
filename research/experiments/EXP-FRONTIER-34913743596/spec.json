@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-FRONTIER-34913743596",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Do alternative divergence measures (KDE with cross-validated bandwidth, kNN mutual information) maintain per-type null control and low CV at equal per-type n (250/type) where binned TV fails due to sparse binning (0.625 expected counts/bin)?",
+  "hypothesis": "KDE and kNN measures, which do not depend on fixed grid binning, will achieve per-type null control (divergence <= permutation-based threshold at lambda=0) and lower CV (<=0.5) at lambda=1 compared to binned TV. This would demonstrate that the per-type limitation is specific to the binned TV estimator in sparse regimes, not a fundamental limitation of per-type divergence estimation.",
+  "falsifier": "Either KDE or kNN measures fail per-type null control (divergence > threshold at lambda=0 in any type) OR CV >0.5 at lambda=1 for any type, indicating that alternative estimators also cannot achieve stable per-type estimation at 250/type.",
+  "baselines": [
+    "Binned TV per-type BC TV at lambda=1: mean 0.034, CV max 1.59 (EXP-FRONTIER-34881708619 result.json)",
+    "Binned TV pooled subsampled BC TV at lambda=1: 0.051 (EXP-FRONTIER-34881708619 result.json)",
+    "Frequency baseline marginal TV: 0.335 (EXP-FRONTIER-34881708619 result.json)"
+  ],
+  "positive_control": "Pooled subsampled divergence (KDE and kNN) at lambda=1 must be > pooled subsampled divergence at lambda=0 (i.e., detectable signal). This verifies each measure can detect action-conditioned structure in the DGP.",
+  "null_control": "Per-type divergence (KDE and kNN) at lambda=0 must be <= permutation-based threshold (95th percentile of null distribution) across all 8 page types. Additionally, pooled subsampled divergence at lambda=0 must be <= threshold.",
+  "measurement_validity": [
+    "Reuse identical transitions from parent EXP-FRONTIER-34881708619 (same DGP, seeds, page types, lambda levels)",
+    "Per-type divergence computed on the SAME 250 transitions per type as parent binned TV",
+    "KDE uses Gaussian kernel with cross-validated bandwidth (scipy.stats.gaussian_kde with bw_method='scott')",
+    "kNN mutual information uses k=5 neighbors (Kraskov et al. estimator via sklearn.neighbors.KNeighborsRegressor or custom implementation)",
+    "Permutation null: N=200 permutations per type for threshold estimation (matching parent)",
+    "Compute divergence measures on continuous 2D state space without binning",
+    "5 replications per lambda level match parent",
+    "Total transitions per lambda: 2000 (250 per type × 8 types)"
+  ],
+  "decision_rule": "If BOTH conditions hold for BOTH KDE and kNN: (1) per-type divergence at lambda=0 <= permutation threshold for all 8 types (null control passes), AND (2) CV across 5 replications <=0.5 for all 8 types at lambda=1, verdict = SURVIVES_CURRENT_TEST. If EITHER measure fails null control OR CV >0.5, verdict = FALSIFIED-IN-SETTING. If pipeline errors, sample size <250 per type, or positive control fails (pooled divergence at lambda=1 <= pooled divergence at lambda=0), verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If KDE/kNN achieve per-type null control and low CV, the per-type limitation is specific to binned TV sparse binning. Product can use KDE or kNN for per-type divergence estimation at realistic sample sizes (250/type). The density-divergence approach may be viable for heterogeneous data with appropriate estimators.",
+  "product_consequence_negative": "If KDE/kNN also fail per-type null control or CV >0.5, the limitation is more fundamental to per-type estimation at 250/type. The density-divergence approach may be fundamentally limited for heterogeneous data, and pooled estimation may be required even with alternative estimators.",
+  "estimated_cost": "Low: reuse parent transitions (no new data generation), compute KDE/kNN divergence (moderate compute, ~1-2 hours total). No browser/network/model calls.",
+  "expected_information_gain": "High: directly tests whether the per-type limitation is estimator-specific or general. Determines whether alternative estimators can salvage the density-divergence approach for heterogeneous data. This is the minimum disambiguating step before closing the density-divergence line or identifying a viable estimator family."
 }
