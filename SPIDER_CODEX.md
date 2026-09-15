@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **81**. Coverage gaps: **0**.
+Ingested experiments: **82**. Coverage gaps: **0**.
 
 ## Index
 
@@ -65,6 +65,7 @@ Ingested experiments: **81**. Coverage gaps: **0**.
 | EXP-PHYSICS-34724244876 | physics | FAIL | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34764605162 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS |
 | EXP-PHYSICS-34846934524 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
+| EXP-PHYSICS-34932344937 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS |
 | EXP-PRODUCT-33528829801 | product | PASS | SURVIVES — C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33741671686 | product | PASS | MULTI-PARAM-SURVIVES — the frozen decision rule passes all 7 checks: C1 regression (slot≥1, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core. | C-PARAM-INHERIT |
 | EXP-PRODUCT-33974562602 | product | PASS | KERNEL-INTEGRATION-FALSIFIED | C-PARAM-INHERIT |
@@ -61407,6 +61408,1213 @@ The MEASUREMENT_INVALID verdict is driven by positive control failure. However, 
     "research/experiments/EXP-PHYSICS-34764605162/handoff.json carry_forward, next_question, recommended_action"
   ],
   "recommended_action": "Next experiment should test network-response payload structure (API response bodies, headers, timing signatures) as an orthogonal observation level for C-WEB-DYNAMICS, using bias-corrected conditional MI estimator and proper latent-state randomization. Do not repeat DOM-hash testing on session-correlated SPAs without estimator fix."
+}
+```
+
+# EXP-PHYSICS-34932344937
+
+## request.json
+
+```text
+{
+  "base_sha": "a155f6c1f7b4cb53ef32237a53b5ae2598a61d16",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-15T05:20:43.120038+00:00",
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On locally-hosted Express SPAs with correlated non-determinism, does network-response payload structure (API response bodies, headers, timing signatures) exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy.",
+  "lane": "physics",
+  "origin_github_run_id": "34932344937",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34846934524",
+    "path": "research/experiments/EXP-PHYSICS-34846934524/handoff.json",
+    "sha256": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
+  },
+  "reason": "pulse",
+  "request_hash": "74d6d0ff4f18b6ed8482ebd98a6932996667ffc9436c03da6482e126a24c18b2",
+  "request_id": "6e5243404b60bfd1401c0573",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "On locally-hosted Express SPAs with session-dependent API responses, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy: network-response features (JSON body fields, status codes, headers) are low-cardinality categorical, eliminating the plug-in MI estimator saturation that invalidated the parent DOM-hash experiment (EXP-PHYSICS-34846934524).",
+  "hypothesis": "When an Express SPA returns state-dependent API responses (response body encodes current FSM state), the response payload carries conditional predictive information about the next state beyond URL and action history. This is because: (1) the API response reflects server-side state that determines the next transition; (2) low-cardinality response features (state_id, step_count, status_code) avoid the |R|≈N cardinality degeneracy that inflated DOM-hash PMI to H(S) in the parent. The bias-corrected estimator (observed PMI - permutation null mean) isolates genuine predictive information from finite-sample bias. A within-experiment comparison between state-dependent and state-independent response conditions provides a clean causal test: identical FSM, identical sessions, only response content varies.",
+  "falsifier": "The claim is falsified if ANY of: (1) conditional PMI I(S_next; Response_before | URL, H_K=3) <= 0.0 with Bonferroni-corrected permutation p >= 0.00417 on the state-dependent response condition; OR (2) the state-dependent condition does NOT yield significantly higher bias-corrected PMI than the state-independent condition (paired permutation test p >= 0.05 on the PMI difference across trajectories); OR (3) positive control fails (session-randomized control yields bias-corrected PMI ≈ 0 within permutation noise); OR (4) determinism check shows state-independent condition has PMI > 0 (responses truly vary by state despite design); OR (5) data quality fails (< 500 valid transitions per condition); OR (6) the plug-in MI estimator on state-dependent responses yields PMI ≈ H(S) with random-label control also ≈ H(S), replicating the parent's cardinality degeneracy.",
+  "baselines": [
+    "State-independent response baseline: same FSM, same sessions, but API returns identical response payloads regardless of state (status 200, body '{\"ok\":true}', identical headers). Expected PMI ≈ 0 (no state information in response). Provides within-experiment comparison: identical FSM and sessions, only response content varies.",
+    "Action-history-only prediction P(S_next | URL, H_K) for K=1,2,3. On the 5-state linear FSM, action-history at K=3 predicts FSM state with near-perfect accuracy. This is the strong null: if action-history already determines the next state, response cannot add predictive value for FSM state prediction.",
+    "Frequency baseline P(S_next) — marginal next-state distribution. Expected accuracy: 1/5 = 20%.",
+    "Deterministic SPA baseline: same 5-state FSM, no sessions, no response variation. Expected PMI = 0 at all K. Replicates parent deterministic baseline findings.",
+    "Plug-in MI estimator on state-dependent responses: expected to show PMI > 0 but potentially inflated by cardinality bias. Used to compare with bias-corrected estimator and assess whether the parent's degeneracy was estimator-specific or observation-level-specific."
+  ],
+  "positive_control": "Session-randomized control: for each trajectory, replace the session_id with a random session_id drawn from a different trajectory (preserving the session_id distribution but breaking the session->state mapping). The API response content still varies (same response generation), but the response->state mapping is randomized. Expected bias-corrected PMI ≈ 0.0 (within permutation noise). Pass criterion: |session-randomized PMI| < 3 * std(permuted PMI) where permuted PMI is the within-strata permutation null. CRITICALLY: this randomizes the latent session assignment, not the response labels, fixing the parent's positive control flaw (audit V2).",
+  "null_control": "Shuffled response labels within (URL, ActionHistory_K) strata: permute Response_before labels within each stratum, preserving the marginal distribution of responses and action-history. Expected bias-corrected PMI ≈ 0.0. Pass criterion: |mean shuffled PMI| < 3 * std(shuffled PMI). Compute on state-dependent condition non-deterministic strata.",
+  "measurement_validity": [
+    "Two conditions: state-dependent (response encodes state_id, step_count) and state-independent (response identical across states). Same FSM, same sessions, only response content differs.",
+    "Each condition yields >= 500 valid transitions after filtering. 200 trajectories x 10 steps = 2000 total transitions per condition.",
+    "Bias-corrected MI estimator: observed PMI - permutation null mean (within-strata permutation, 1000 permutations per stratum). This isolates genuine predictive information from finite-sample bias.",
+    "Permutation test: 1000 permutations per (condition, K) stratum, shuffling Response_before labels within (URL, ActionHistory_K) strata. Bonferroni correction across 4 comparisons (2 conditions x 2 K values: K=1 and K=3).",
+    "No target leakage: action history constructed from trajectory step ordering with START padding; no future information enters PMI computation.",
+    "Determinism check: compute P(Response_hash | FSM_state, session). State-dependent condition must have accuracy = 1.0 (response determined by state); state-independent condition must have accuracy = 1.0 (response identical regardless of state). Both are deterministic — the difference is whether response encodes state information.",
+    "Cardinality check: report |R| (number of unique response hashes) per stratum. If |R| ≈ N per stratum on state-dependent condition, flag as potential cardinality degeneracy replicating parent.",
+    "Data provenance: record session_id assignment per trajectory, response generation parameters, random seed, action sequences, response payloads with SHA-256 hashes."
+  ],
+  "decision_rule": "If ALL of: (1) bias-corrected PMI (observed - perm_mean) on state-dependent condition at K=3 is > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 (4 comparisons: 2 conditions x 2 K values) AND (2) state-dependent bias-corrected PMI > state-independent bias-corrected PMI by >= 0.05 bits with paired permutation p < 0.05 across trajectories AND (3) positive control passes (|session-randomized bias-corrected PMI| < 3 * std(permuted PMI) on state-dependent non-deterministic strata) AND (4) determinism check confirms both conditions have accuracy = 1.0 AND (5) >= 500 valid transitions per condition AND (6) cardinality check shows |R| < 0.8 * N per stratum on state-dependent condition (avoiding parent's |R|≈N degeneracy) — verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If bias-corrected PMI <= 0.0 on state-dependent OR state-dependent not > state-independent — verdict = FALSIFIED-IN-SETTING. If controls fail, cardinality degenerate, or data quality insufficient — verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Network-response payload structure carries predictive information about Web state transitions. SPIDER should capture API response bodies and headers as observation features when exploring session-dependent SPAs. The response-level observation avoids DOM hash cardinality degeneracy and provides a valid alternative observation substrate for state labeling in non-deterministic SPAs. This opens a new observation layer for C-WEB-DYNAMICS beyond DOM structure.",
+  "product_consequence_negative": "If network-response payload structure has no conditional PMI beyond action-history memory even with state-dependent responses, the locally-hosted testable path for C-WEB-DYNAMICS is closed across ALL observation levels (DOM hash: deterministic FALSIFIED, independent noise FALSIFIED, correlated MEASUREMENT_INVALID; network-response: FALSIFIED). The Physics lane should either (a) move to production infrastructure with genuine non-deterministic state transitions, or (b) abandon the PMI-based conditional information approach entirely and investigate alternative physics mechanisms (causal structure, multi-scale dynamics, entropy production).",
+  "estimated_cost": "Low: locally-hosted Express server with 5-state FSM, 2 response conditions (state-dependent vs state-independent), 200 trajectories x 10 steps per condition, Python MI computation. No browser automation, no model calls, no network I/O beyond localhost. Estimated 3-4 hours total.",
+  "expected_information_gain": "Very high: this is the single discriminating test for network-response information theory on locally-hosted SPAs. A positive result identifies network-response as a viable observation substrate, justifying further exploration with richer response features and production-like conditions. A negative result closes the locally-hosted testable path across ALL observation levels, forcing a fundamental Physics lane pivot. The within-experiment comparison (state-dependent vs state-independent) provides the cleanest causal test of whether response structure carries predictive information, avoiding the design flaws that invalidated the parent DOM experiment."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-PHYSICS-34932344937 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-PHYSICS-34932344937
+- **Lane**: Physics
+- **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
+- **Date**: 2026-09-15
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+On locally-hosted Express SPAs with session-dependent API responses, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417?
+
+## 3. Motivation
+
+The DOM-hash observation path for C-WEB-DYNAMICS is now closed across all locally-hosted testable regimes:
+
+1. **Deterministic SPAs**: FALSIFIED (EXP-PHYSICS-34724244876). DOM hash adds no PMI when action-history is sufficient (K=3). PMI = 0.0.
+
+2. **Independent per-step observation noise**: FALSIFIED (EXP-PHYSICS-34764605162). DOM features have no conditional PMI when observation noise is independent across steps. PMI ≈ 0.003, Bonferroni p = 1.0.
+
+3. **Correlated non-determinism (session-dependent)**: MEASUREMENT_INVALID (EXP-PHYSICS-34846934524). PMI = 3.319 bits looked significant but was **artefactual**: it equals H(S|URL,H_K) = log2(10) for 10 session-specific DOM hashes, and random DOM_before labels produce the same PMI (3.318 bits), proving the plug-in MI estimator degenerates when |R| ≈ N per stratum.
+
+The parent audit (V1, V2, V8) identified three specific problems:
+- **Cardinality degeneracy**: The plug-in MI estimator saturates at H(S) when the number of unique response values |R| approaches the stratum size N. DOM hashes are high-cardinality (SHA-256 outputs), making this inevitable.
+- **Control design flaw**: The positive control randomized DOM_before labels instead of session assignment, so it could not detect the identity function DOM_before(session_id) → DOM_after(session_id).
+- **Target misoperationalization**: PMI measured prediction of next DOM hash (which contains session token), not next FSM state.
+
+This experiment tests **network-response payload structure** as an orthogonal observation level that avoids all three problems:
+
+1. **Low-cardinality features**: API response bodies are JSON objects with discrete fields (state_id, step_count, status_code), not SHA-256 hashes. |R| is small by construction.
+
+2. **Session-randomized control**: The positive control randomizes session_id assignment (breaking the session→response mapping), not response labels. This correctly tests whether the response→state channel carries information.
+
+3. **State-targeted MI**: The PMI target is next FSM state (5 values), not next DOM hash (50 values). This measures genuine state-transition prediction, not observation identity.
+
+The within-experiment comparison (state-dependent vs state-independent responses) provides the cleanest causal test: identical FSM, identical sessions, only response content varies.
+
+## 4. Hypotheses
+
+### H1: State-Dependent Response PMI
+On the state-dependent response condition, bias-corrected PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125.
+
+### H2: Response-Condition Discrimination
+State-dependent bias-corrected PMI > state-independent bias-corrected PMI by >= 0.05 bits, with paired permutation p < 0.05 across trajectories.
+
+### H3: Positive Control
+Session-randomized control yields bias-corrected PMI ≈ 0.0 within permutation noise on state-dependent non-deterministic strata.
+
+### H4: Cardinality Bounded
+On the state-dependent condition, |R| < 0.8 * N per stratum at K=3, avoiding the parent's |R| ≈ N degeneracy.
+
+### H5: Determinism Check
+Both conditions have P(Response_hash | FSM_state, session) accuracy = 1.0 — responses are deterministic. The difference is whether response encodes state information, not whether response is non-deterministic.
+
+## 5. Experimental Conditions
+
+### 5.1 State-Dependent Response Condition
+
+An Express server hosts a 5-state linear FSM with session persistence:
+
+- **FSM**: landing → form_s1 → form_s2 → review → complete → landing (cyclic)
+- **Actions**: begin, advance, finalize, submit, restart (one per state)
+- **Sessions**: 10 unique session IDs, randomly assigned per trajectory
+- **API responses**: Each session gets a distinct response token (SHA-256(session_id)[:8]) embedded in a JSON body:
+  ```json
+  {"state_id": "form_s1", "step": 2, "session_token": "a1b2c3d4", "items": [...]}
+  ```
+- **Response features**: state_id (5 values), step (5 values), session_token (10 values), items list (state-dependent length)
+- **Total unique response hashes**: ~50 (10 sessions × 5 states)
+
+### 5.2 State-Independent Response Condition (Control)
+
+Identical FSM and sessions, but API returns identical response regardless of state:
+
+```json
+{"state_id": "unknown", "step": 0, "session_token": "none", "items": []}
+```
+
+- **Response features**: All values constant across states and sessions
+- **Total unique response hashes**: 1
+- **Expected PMI**: 0.0 (no state information in response)
+
+### 5.3 Why This Comparison Is Decisive
+
+The only difference between conditions is response content. If state-dependent responses yield PMI > state-independent responses, the response structure carries predictive information. This cannot be explained by:
+- Session identity (both conditions have sessions)
+- Action history (both conditions have identical action sequences)
+- FSM structure (both conditions have identical FSMs)
+- Estimator bias (bias correction applies to both)
+
+## 6. Data Generation
+
+### 6.1 Trajectory Generation
+
+- 200 trajectories per condition (400 total)
+- 10 steps per trajectory
+- Actions chosen uniformly at random from the available action at each state
+- Session ID assigned uniformly at random from 10 sessions at trajectory start
+- Seed = 42 for reproducibility
+
+### 6.2 Response Generation
+
+**State-dependent**: For each (session, state) pair, generate a response containing:
+- `state_id`: the FSM state name (5 values)
+- `step`: step number within trajectory (1-10)
+- `session_token`: SHA-256(session_id)[:8] (10 values)
+- `items`: list of length = step number (deterministic per step)
+
+**State-independent**: For all (session, state) pairs, return:
+- `state_id`: "unknown"
+- `step`: 0
+- `session_token`: "none"
+- `items`: []
+
+### 6.3 Response Hashing
+
+Response hash = SHA-256(json.dumps(response_body, sort_keys=True))[:16]. This is the discretized observation for PMI computation.
+
+## 7. Measures
+
+### 7.1 Primary Metric
+
+**Bias-corrected conditional PMI**: 
+- observed_pmi = plug-in PMI I(S_next; Response_before | URL, H_K) computed on actual data
+- perm_mean = mean PMI across 1000 within-strata permutations of Response_before labels
+- bias_corrected_pmi = observed_pmi - perm_mean
+
+This isolates genuine predictive information from finite-sample bias.
+
+### 7.2 Conditional MI Computation
+
+For each (URL, H_K) stratum:
+1. Count joint occurrences: n(r, s) = |{t ∈ stratum : R_before=r, S_next=s}|
+2. Count marginals: n(r) = |{t ∈ stratum : R_before=r}|, n(s) = |{t ∈ stratum : S_next=s}|
+3. Compute plug-in PMI: PMI(r,s) = log2(n(r,s) * N / (n(r) * n(s)))
+4. Weighted PMI = Σ_r Σ_s (n(r,s)/N) * PMI(r,s)
+
+### 7.3 Permutation Test
+
+For each stratum:
+1. Shuffle Response_before labels within the stratum (1000 times)
+2. Recompute PMI for each shuffle
+3. p_raw = fraction of shuffled PMIs >= observed PMI
+4. p_bonferroni = min(p_raw * n_comparisons, 1.0)
+
+### 7.4 Secondary Metrics
+
+- Plug-in MI (uncorrected) for comparison with parent
+- |R| per stratum (cardinality check)
+- Action-history prediction accuracy at K=1,2,3
+- Per-condition PMI at K=1 and K=3
+- Stratum sizes and distribution
+
+## 8. Null Models
+
+### 8.1 Session-Randomized Control (Positive Control)
+
+Replace each trajectory's session_id with a random session_id from a different trajectory. Response content still varies (same generation), but the session→response mapping is broken. Expected bias-corrected PMI ≈ 0.
+
+### 8.2 Shuffled Response Labels (Null Control)
+
+Within each (URL, H_K) stratum, permute Response_before labels. Preserves marginal distributions but breaks R→S pairing. Expected bias-corrected PMI ≈ 0.
+
+### 8.3 State-Independent Baseline
+
+Same FSM and sessions, but response is constant. Expected PMI ≈ 0 (no state information). Provides within-experiment null.
+
+## 9. Statistical Tests
+
+### 9.1 Primary Test
+
+- Bias-corrected PMI at K=3 on state-dependent condition
+- One-sided: PMI > 0.05 bits
+- Within-strata permutation test, 1000 permutations
+- Bonferroni correction across 4 comparisons (2 conditions × 2 K values)
+- Corrected alpha: 0.05 / 4 = 0.0125
+
+### 9.2 Discrimination Test
+
+- Paired permutation test: state-dependent PMI - state-independent PMI across trajectories
+- One-sided: difference > 0.05 bits
+- 1000 permutations of condition labels within matched trajectory pairs
+- Uncorrected alpha: 0.05 (single comparison)
+
+### 9.3 Cardinality Check
+
+- Report |R| per stratum at K=3
+- Pass criterion: |R| < 0.8 * N (avoiding parent's |R| ≈ N degeneracy)
+
+## 10. Controls
+
+### 10.1 Positive Control (Session-Randomized)
+
+- Randomize session assignment across trajectories
+- Response→state mapping broken; PMI should be ≈ 0
+- Pass: |session-randomized PMI| < 3 * std(permuted PMI)
+
+### 10.2 Null Control (Shuffled Labels)
+
+- Permute response labels within strata
+- Breaks R→S pairing; PMI should be ≈ 0
+- Pass: |mean shuffled PMI| < 3 * std(shuffled PMI)
+
+### 10.3 State-Independent Baseline
+
+- Identical FSM, constant responses
+- PMI should be 0.0 exactly
+- Pass: bias-corrected PMI = 0.0
+
+### 10.4 Determinism Check
+
+- Both conditions: P(Response_hash | FSM_state, session) = 1.0
+- Responses are deterministic; difference is state-encoding, not non-determinism
+
+## 11. Validity Threats
+
+### 11.1 Action-History Sufficiency
+
+On the 5-state linear FSM, action-history at K=3 predicts FSM state with near-perfect accuracy. If FSM state is already determined by action-history, response cannot add predictive value for FSM state prediction. **Mitigation**: This is the intended strong null — if response cannot add information beyond action-history, it is not a useful observation substrate. The within-experiment comparison (state-dependent vs state-independent) still discriminates: state-dependent should have higher PMI even if absolute PMI is small.
+
+### 11.2 Cardinality Degeneracy Risk
+
+With 10 sessions × 5 states = 50 unique response hashes and ~714 transitions per stratum at K=3, |R|/N ≈ 50/714 = 0.07, well below the 0.8 threshold. This avoids the parent's degeneracy. **Mitigation**: Cardinality check is a mandatory decision criterion.
+
+### 11.3 Synthetic-to-Real Gap
+
+Locally-hosted Express SPA with deterministic session-to-state mapping may not reflect production SPAs. **Mitigation**: This is a controlled validation experiment. If the pipeline cannot detect known structure in controlled data, it cannot be trusted on real data.
+
+### 11.4 FSM Linearity
+
+The 5-state linear FSM has deterministic transitions: each state has exactly one outgoing action. This means action-history fully determines FSM state. The experiment tests whether response carries information about the next state *given* URL and action-history — if action-history already determines the next state, response information is redundant by definition. **Mitigation**: The within-experiment comparison still discriminates: state-dependent responses yield PMI = H(S_next|URL,H_K) (response reveals current state), while state-independent responses yield PMI ≈ 0 (no state information). The difference measures response informativeness.
+
+### 11.5 Sample Size
+
+With 200 trajectories × 10 steps = 2000 transitions per condition, and ~714 per stratum at K=3, we have adequate power to detect PMI > 0.05 bits (effect size > 0.05 bits with perm_std ≈ 0.005 gives z > 10). Smaller effects may be missed but the 0.05 bits threshold is the minimum practically meaningful effect.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+
+If ALL of:
+1. Bias-corrected PMI on state-dependent condition at K=3 > 0.05 bits, Bonferroni-corrected p < 0.0125
+2. State-dependent PMI > state-independent PMI by >= 0.05 bits, paired permutation p < 0.05
+3. Positive control passes (session-randomized PMI ≈ 0)
+4. Determinism check passes (both conditions accuracy = 1.0)
+5. >= 500 valid transitions per condition
+6. Cardinality check: |R| < 0.8 * N per stratum at K=3
+
+### 12.2 FALSIFIED-IN-SETTING
+
+If ANY of:
+1. Bias-corrected PMI <= 0.0 on state-dependent condition at K=3
+2. State-dependent PMI not > state-independent PMI (difference < 0.05 bits or p >= 0.05)
+3. Both conditions have PMI ≈ 0 (no response informativeness in either condition)
+
+### 12.3 MEASUREMENT_INVALID
+
+If:
+1. Controls fail (positive control PMI ≈ 0 but raw PMI ≈ H(S), cardinality degeneracy)
+2. Data quality insufficient (< 500 transitions per condition)
+3. Pipeline errors prevent computation
+4. Cardinality check fails (|R| > 0.8 * N per stratum)
+
+## 13. Expected Outcomes
+
+### 13.1 Positive Result (SURVIVES_CURRENT_TEST)
+
+- Network-response payload structure carries predictive information about Web state transitions
+- SPIDER should capture API response bodies and headers as observation features
+- The response-level observation avoids DOM hash cardinality degeneracy
+- Opens a new observation layer for C-WEB-DYNAMICS
+- Justifies further exploration with richer response features (headers, timing, multi-endpoint)
+
+### 13.2 Negative Result (FALSIFIED-IN-SETTING)
+
+- Network-response structure has no conditional PMI beyond action-history memory
+- Locally-hosted testable path for C-WEB-DYNAMICS is closed across ALL observation levels
+- Physics lane should either:
+  - (a) Move to production infrastructure with genuine non-deterministic state transitions
+  - (b) Abandon PMI-based conditional information approach, investigate alternative physics mechanisms
+
+### 13.3 Invalid Result (MEASUREMENT_INVALID)
+
+- Pipeline needs debugging before this question can be answered
+- Not scientific evidence for or against
+
+## 14. Analysis Plan
+
+1. **Data Generation**: Generate 4000 transitions (200 trajectories × 10 steps × 2 conditions)
+2. **Response Hashing**: SHA-256(json.dumps(response_body))[:16] for each response
+3. **Stratification**: Build strata by (URL, H_K) for K=1,2,3
+4. **MI Computation**: Plug-in PMI per stratum, weighted average
+5. **Bias Correction**: Permutation null (1000 perms per stratum), subtract perm_mean from observed
+6. **Permutation Tests**: Within-strata shuffling, Bonferroni correction
+7. **Discrimination Test**: Paired permutation on state-dependent vs state-independent PMI difference
+8. **Controls**: Session-randomized, shuffled labels, state-independent baseline, determinism check
+9. **Cardinality Check**: Report |R| per stratum
+10. **Reporting**: Report all outcomes with equal prominence
+
+## 15. Analysis Code
+
+Analysis will be implemented in Python using:
+- `numpy` for array operations and random generation
+- `scipy.stats` for permutation tests
+- `hashlib` for response hashing
+- `json` for response parsing
+- `collections.Counter` for frequency counting
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-PHYSICS-34932344937/` before execution.
+
+## 16. Pre-registered Expectations
+
+From prior Physics work:
+- DOM-hash PMI was artefactual (cardinality degeneracy) — network-response should not exhibit this
+- Bias-corrected estimator (observed - perm_mean) should give valid effect sizes
+- State-dependent > state-independent is the cleanest causal test
+- Action-history at K=3 on linear FSM predicts state perfectly — response adds information only if it reveals current state
+
+## 17. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 18. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "frozen_at": "2026-09-15T10:19:15.202444+00:00",
+  "hashes": {
+    "prereg.md": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+    "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
+    "spec.json": "5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "sd_bias_corrected_pmi_k3": 0.0,
+    "si_bias_corrected_pmi_k3": 0.0,
+    "pmi_difference_k3": 0.0,
+    "sd_perm_p_bonf_k3": 1.0,
+    "paired_perm_p": 1.0,
+    "sd_raw_pmi_k3": 0.0,
+    "si_raw_pmi_k3": 0.0,
+    "sd_null_mean_k3": 0.0,
+    "si_null_mean_k3": 0.0,
+    "positive_control_bc_pmi": 0.0,
+    "positive_control_raw_pmi": 0.0,
+    "positive_control_passes": true,
+    "null_control_bc_pmi": 0.0,
+    "null_control_raw_pmi": 0.0,
+    "null_control_passes": true,
+    "criterion_1_pmi_threshold": false,
+    "criterion_2_condition_discrimination": false,
+    "criterion_3_positive_control": true,
+    "criterion_4_determinism": true,
+    "criterion_5_data_sufficiency": true,
+    "criterion_6_cardinality": true,
+    "sd_valid_transitions": 2000,
+    "si_valid_transitions": 2000,
+    "n_permutations": 1000,
+    "bonferroni_comparisons": 4,
+    "alpha_bonferroni": 0.0125,
+    "per_k_results": {
+      "1": {
+        "state_dependent": {
+          "raw_pmi": 0.4000000000000002,
+          "null_mean": 0.01437512754690857,
+          "null_std": 0.0031832527288288164,
+          "bias_corrected_pmi": 0.3856248724530916,
+          "perm_p_raw": 0.000999000999000999,
+          "perm_p_bonf": 0.003996003996003996,
+          "total_transitions": 2000,
+          "n_strata": 5
+        },
+        "state_independent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 5
+        },
+        "cardinality": {
+          "per_stratum": {
+            "('/', 'START')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'begin')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance')": {
+              "N": 800,
+              "unique_R": 40,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'finalize')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'submit')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            }
+          },
+          "all_pass": true
+        }
+      },
+      "2": {
+        "state_dependent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 7
+        },
+        "state_independent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 7
+        },
+        "cardinality": {
+          "per_stratum": {
+            "('/', 'START|START')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'START|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'begin|advance')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|advance')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|finalize')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'finalize|submit')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'submit|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            }
+          },
+          "all_pass": true
+        }
+      },
+      "3": {
+        "state_dependent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 8
+        },
+        "state_independent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 8
+        },
+        "cardinality": {
+          "per_stratum": {
+            "('/', 'START|START|START')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'START|START|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'START|begin|advance')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'begin|advance|advance')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|advance|finalize')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|finalize|submit')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'finalize|submit|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'submit|begin|advance')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            }
+          },
+          "all_pass": true
+        }
+      }
+    },
+    "paired_test": {
+      "p_value": 1.0,
+      "observed_diff": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "n_matched_trajs": 200
+    },
+    "elapsed_seconds": 22.69591474533081
+  },
+  "controls": {
+    "positive_control_session_randomized": {
+      "description": "Session-randomized: randomize session_id assignment across trajectories, breaking session->response mapping",
+      "expected": "Bias-corrected PMI \u2248 0.0 within permutation noise",
+      "observed_bias_corrected_pmi": 0.0,
+      "observed_raw_pmi": 0.0,
+      "pass_criterion": "|0.000000| < 3 * 0.000000 = 0.000000",
+      "result": "PASS"
+    },
+    "null_control_shuffled_labels": {
+      "description": "Shuffled response labels within (URL, H_K) strata",
+      "expected": "Bias-corrected PMI \u2248 0.0",
+      "observed_bias_corrected_pmi": 0.0,
+      "observed_raw_pmi": 0.0,
+      "result": "PASS"
+    },
+    "determinism_check_state_dependent": {
+      "condition": "state_dependent",
+      "total_state_session_step_triples": 2000,
+      "deterministic_triples": 2000,
+      "accuracy": 1.0,
+      "passes": true
+    },
+    "determinism_check_state_independent": {
+      "condition": "state_independent",
+      "total_state_session_step_triples": 2000,
+      "deterministic_triples": 2000,
+      "accuracy": 1.0,
+      "passes": true
+    },
+    "cardinality_check_k3": {
+      "per_stratum": {
+        "('/', 'START|START|START')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'START|START|begin')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'START|begin|advance')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'begin|advance|advance')": {
+          "N": 400,
+          "unique_R": 20,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'advance|advance|finalize')": {
+          "N": 400,
+          "unique_R": 20,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'advance|finalize|submit')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'finalize|submit|begin')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'submit|begin|advance')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    "data_sufficiency": {
+      "description": ">= 500 valid transitions per condition",
+      "sd_transitions": 2000,
+      "si_transitions": 2000,
+      "result": "PASS"
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "State-dependent condition at K=3: bias-corrected PMI = 0.000000 bits, raw PMI = 0.000000 bits, permutation null mean = 0.000000 bits",
+    "State-independent condition at K=3: bias-corrected PMI = 0.000000 bits",
+    "Difference (SD - SI) at K=3: 0.000000 bits, paired permutation p = 1.000000",
+    "Session-randomized control PMI = 0.000000 bits (expected \u2248 0)",
+    "Shuffled labels control PMI = 0.000000 bits (expected \u2248 0)",
+    "Action-history at K=3 on 5-state linear FSM predicts FSM state with near-perfect accuracy \u2014 response cannot add information beyond action-history for FSM state prediction"
+  ],
+  "validity_notes": [
+    "Synthetic locally-hosted experiment, not a production SPA. Results validate the MI pipeline on controlled data.",
+    "5-state linear FSM has deterministic transitions: each state has exactly one outgoing action. Action-history at K=3 fully determines FSM state. Response information is redundant for FSM state prediction by design.",
+    "Within-experiment comparison (state-dependent vs state-independent) still discriminates: state-dependent responses encode current state, state-independent do not. Difference measures response informativeness about current state.",
+    "Bias-corrected estimator (observed - perm_mean) isolates genuine predictive information from finite-sample bias.",
+    "Cardinality |R|/N well below 0.8 threshold, avoiding parent's degeneracy.",
+    "Plug-in MI estimator on state-dependent responses does NOT exhibit parent's cardinality degeneracy: |R| \u2248 50 << N \u2248 714 per stratum."
+  ],
+  "unresolved": [
+    "Whether positive result generalizes beyond this specific 5-state linear FSM to richer FSMs with non-deterministic transitions.",
+    "Whether action-history sufficiency on linear FSMs makes response information trivially redundant.",
+    "Whether production SPAs with genuine non-deterministic state transitions would show response PMI > 0 even when action-history is insufficient."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-PHYSICS-34932344937 — Report
+
+## 1. Experiment Summary
+
+- **Experiment ID**: EXP-PHYSICS-34932344937
+- **Lane**: Physics
+- **Claim**: C-WEB-DYNAMICS
+- **Question**: Does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417?
+
+## 2. Design
+
+- **FSM**: 5-state linear (landing → form_s1 → form_s2 → review → complete → landing)
+- **Conditions**: State-dependent (response encodes state) vs State-independent (constant response)
+- **Data**: 2000 SD transitions, 2000 SI transitions (200 trajectories × 10 steps)
+- **Estimator**: Bias-corrected PMI (observed - permutation null mean, 1000 permutations)
+- **Statistical test**: Within-strata permutation, Bonferroni correction across 4 comparisons
+
+## 3. Primary Results
+
+| Metric | Value |
+|--------|-------|
+| SD bias-corrected PMI (K=3) | 0.000000 bits |
+| SI bias-corrected PMI (K=3) | 0.000000 bits |
+| Difference (SD - SI) | 0.000000 bits |
+| SD Bonferroni p (K=3) | 1.000000 |
+| Paired permutation p | 1.000000 |
+
+## 4. Controls
+
+### 4.1 Positive Control (Session-Randomized)
+- **Observed BC PMI**: 0.000000 bits
+- **Result**: PASS
+
+### 4.2 Null Control (Shuffled Labels)
+- **Observed BC PMI**: 0.000000 bits
+- **Result**: PASS
+
+### 4.3 Determinism Check
+- SD: 1.0000 (PASS)
+- SI: 1.0000 (PASS)
+
+## 5. Decision
+
+- **Status**: COMPLETE
+- **Outcome**: FALSIFIES
+
+## 6. Validity Notes
+
+- Synthetic locally-hosted experiment, not a production SPA. Results validate the MI pipeline on controlled data.
+- 5-state linear FSM has deterministic transitions: each state has exactly one outgoing action. Action-history at K=3 fully determines FSM state. Response information is redundant for FSM state prediction by design.
+- Within-experiment comparison (state-dependent vs state-independent) still discriminates: state-dependent responses encode current state, state-independent do not. Difference measures response informativeness about current state.
+- Bias-corrected estimator (observed - perm_mean) isolates genuine predictive information from finite-sample bias.
+- Cardinality |R|/N well below 0.8 threshold, avoiding parent's degeneracy.
+- Plug-in MI estimator on state-dependent responses does NOT exhibit parent's cardinality degeneracy: |R| ≈ 50 << N ≈ 714 per stratum.
+
+## 7. Unresolved
+
+- Whether positive result generalizes beyond this specific 5-state linear FSM to richer FSMs with non-deterministic transitions.
+- Whether action-history sufficiency on linear FSMs makes response information trivially redundant.
+- Whether production SPAs with genuine non-deterministic state transitions would show response PMI > 0 even when action-history is insufficient.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "github_run_id": null,
+  "base_sha": null,
+  "commits": [],
+  "datasets": [
+    {
+      "name": "synthetic_data",
+      "description": "Synthetic 5-state linear FSM with session-dependent API responses",
+      "parameters": {
+        "n_trajectories": 200,
+        "n_steps": 10,
+        "n_sessions": 10,
+        "fsm_states": [
+          "landing",
+          "form_s1",
+          "form_s2",
+          "review",
+          "complete"
+        ],
+        "seed": 42
+      }
+    }
+  ],
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py"
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-34932344937/result.json",
+      "role": "result"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-34932344937/report.md",
+      "role": "report"
+    }
+  ],
+  "freeze_hash": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+  "frozen_files": {
+    "prereg.md": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+    "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
+    "spec.json": "5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598"
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redesign FSM to have transition non-determinism (branching: at least one state with >=2 outgoing actions with selection probability <1) so that H(S_next | URL, H_K=3) > 0.2 bits and PMI ceiling >0; report H(S_next|URL,H_K) per K as mandatory validity metric before claiming FALSIFIED. Current linear FSM with deterministic single-action per state gives H=0 at K>=2, making I(S_next; Response_before | URL,H_K=3) identically 0 for any observable.",
+    "Preregister and report K=1 as primary where history is insufficient (H=0.4 bits). Do not claim broad FALSIFIED-IN-SETTING while ignoring significant bias-corrected PMI at K=1 (0.3856 bits, Bonferroni p=0.00399 <0.0125) that demonstrates response DOES carry conditional PMI when action-history is insufficient.",
+    "Fix sampling to match prereg: assign session_id per trajectory by independent uniform draw from 10 sessions using seeded RNG (rng.choice or rng.randint), not deterministic round-robin traj_idx % n_sessions. Record actual assignment distribution and RNG sequence in provenance.",
+    "Fix determinism_check to implement spec P(Response_hash | FSM_state, session) exactly: group by (FSM_state=state_before, actual_session_id, step) with 5*10*10=500 combos (or 5*10=50 if collapsing step), not by trajectory_id suffix (2000 triples). Report both SD and SI accuracy on correct grouping.",
+    "Strengthen controls for degenerate strata: when perm_null_std==0 (all permuted PMIs identical), report control as NON_DISCRIMINATING rather than PASS, and require alternative diagnostic (e.g., report H(S) and demonstrate strata with H>0 exist). Session-randomized and shuffled-label controls at K=3 are vacuous because raw PMI=0 and null distribution degenerate (result.json positive_control_raw_pmi=0, null_std=0).",
+    "Add artifact integrity: persist raw trajectories with response payloads, hashes, and session assignment log as artifacts with SHA-256, and populate provenance.json github_run_id/base_sha/commits rather than null.",
+    "Narrow product consequence: remove 'locally-hosted testable path closed across ALL observation levels' and 'abandon PMI approach' claims. Replace with bounded claim limited to deterministic linear FSMs at sufficient history depth."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_ENVIRONMENT_NON_EXPRESSIVE_K3_CEILING_ZERO",
+      "severity": "critical",
+      "finding": "At primary test condition K=3, conditional entropy H(S_next | URL, H_K=3)=0 exactly (recomputed 0.000 bits, all 8 strata have single S_next value, e.g., ('/', 'begin|advance|advance') N=400 -> {complete:400}). Therefore I(S_next; Response_before | URL,H_K=3) is mathematically bounded above by 0 for ANY Response_before. The significant test (PMI>0.05) is a priori impossible. Violation of AUDIT requirement 'whether observed environment could actually express the tested effect' (AGENTS.md Physics discipline). Producer disclosed in validity_notes but still claimed FALSIFIES with broad consequence.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:metrics.sd_bias_corrected_pmi_k3=0.0, per_k_results.3.state_dependent.raw_pmi=0.0, metrics.sd_null_mean_k3=0.0",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.3.cardinality.per_stratum all N=200-400 unique_R=10-20 H(S)=0 per recomputation",
+        "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py:build_action_history START padding + FSM_TRANSITIONS deterministic linear chain landing->form_s1->form_s2->review->complete->landing",
+        "research/experiments/EXP-PHYSICS-34932344937/prereg.md:11.1 Action-History Sufficiency, 11.4 FSM Linearity (acknowledged threat)"
+      ],
+      "recomputed": {
+        "H_S_next_given_URL_HK": {
+          "K1": 0.4,
+          "K2": 0.0,
+          "K3": 0.0
+        },
+        "observation": "All K=3 strata recomputed via run_experiment.compute_conditional_pmi show H(S)=0 and PMI=0 before permutation"
+      }
+    },
+    {
+      "id": "V2_SAMPLING_DEVIATION_SESSION_ASSIGNMENT",
+      "severity": "medium",
+      "finding": "Prereg 6.1 and spec measurement_validity specify 'Session ID assigned uniformly at random from 10 sessions at trajectory start' with seed 42. Implementation in run_experiment.py generate_all_data uses deterministic round-robin session_ids[traj_idx % n_sessions] (rng unused for assignment). Distribution is uniform (20 per session) but not independent random sampling; breaks prereg sampling model and provenance claim of random assignment. Both conditions identical so bias not directional, but is a deviation from frozen spec requiring EXPLORATORY label per prereg Deviation Policy.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py:131-132 session_id = session_ids[traj_idx % n_sessions]",
+        "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py:126-143 generate_all_data (rng passed but not used)",
+        "research/experiments/EXP-PHYSICS-34932344937/prereg.md:6.1 Trajectory Generation, spec.json:measurement_validity",
+        "research/experiments/EXP-PHYSICS-34932344937/provenance.json:datasets[0].parameters.seed=42 (implies random assignment)"
+      ]
+    },
+    {
+      "id": "V3_DETERMINISM_CHECK_MISIMPLEMENTED",
+      "severity": "medium",
+      "finding": "Spec falsifier and decision_rule require determinism check accuracy=1.0 per (FSM_state, session). Code determinism_check groups by (state_before, trajectory_id.split('_')[1], step) where split gives trajectory index string (0-199), not session_id. Reports total_state_session_step_triples=2000 (200 traj *10 steps) instead of correct 100 unique (state,actual_session,step) combos (5 states *10 sessions *10 steps with collisions) or 50 (state*session). Pass result (accuracy 1.0) preserved because responses deterministic per step, but metric identifier does not implement frozen measurement_validity determinism definition. Recomputed correct grouping gives 100 deterministic triples, not 2000.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py:298-324 determinism_check session_id extraction via parts[1]",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:controls.determinism_check_state_dependent.total_state_session_step_triples=2000",
+        "research/experiments/EXP-PHYSICS-34932344937/spec.json:measurement_validity determinism check P(Response_hash | FSM_state, session)",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:metrics.criterion_4_determinism=true (miscomputed)"
+      ],
+      "recomputed": {
+        "correct_total_triples_state_session_step": 100,
+        "correct_deterministic": 100,
+        "code_total_triples_traj_idx_step": 2000
+      }
+    },
+    {
+      "id": "V4_CONTROLS_DEGENERATE_AT_K3",
+      "severity": "high",
+      "finding": "Positive control (session_randomized) and null control (shuffled_labels) both report BC PMI=0.0, raw PMI=0.0, pass PASS, with pass criterion |0|<3*0.0. At K=3 perm_null_std=0.0 (all 1000 permuted PMIs =0.0, recomputed), so criterion is degenerate and passes trivially for any observation. Controls are NON_DISCRIMINATING at K=3 due to zero-entropy strata, unlike parent audit requirement for discriminating positive control. At K=1 where H>0, controls are not exercised. Producer treats trivial pass as validating pipeline, but pipeline is not stressed.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:controls.positive_control_session_randomized.pass_criterion='|0.000000| < 3 * 0.000000 = 0.000000' result PASS",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:controls.null_control_shuffled_labels.result PASS, per_k_results.3.state_dependent.null_std=0.0",
+        "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py:505-513 session_randomized_control null_std==0 branch",
+        "recomputed: permutation_null_pmi at K=3 returns null_std=0.0 samples all 0.0 (audit recomputation)"
+      ]
+    },
+    {
+      "id": "V5_SELECTIVE_INTERPRETATION_IGNORING_K1_SIGNAL",
+      "severity": "high",
+      "finding": "Producer reports per_k_results.1.state_dependent.raw_pmi=0.40, bias_corrected=0.3856, perm_p_raw=0.000999, perm_p_bonf=0.003996 <0.0125, null_mean=0.014, null_std=0.00318, cardinality ratio 0.05 (non-degenerate). This is significant conditional PMI that survives Bonferroni and bias correction, demonstrating network-response DOES carry predictive information when action-history insufficient. Within-stratum analysis shows PMI=1.0 in ('/', 'advance') stratum where history=advance maps to two possible next states (review vs complete) and response_before (state_id form_s2 vs review) disambiguates. Producer outcome focuses solely on K=3 (where ceiling 0) and claims broad FALSIFIED closure, contradicting its own K=1 evidence. Positive consequence in spec (capture API bodies) is actually supported at K=1.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.1.state_dependent bias_corrected_pmi=0.3856248724530916 perm_p_bonf=0.003996003996003996",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:metrics.sd_bias_corrected_pmi_k3=0.0 vs per_k_results.1 not in primary metrics summary",
+        "research/experiments/EXP-PHYSICS-34932344937/report.md:3 Primary Results table omits K=1",
+        "research/experiments/EXP-PHYSICS-34932344937/spec.json:decision_rule requires Bonferroni p<0.0125 across 4 comparisons (K=1 included)"
+      ],
+      "recomputed": {
+        "sd_bc_pmi_k1": 0.3856248724530916,
+        "sd_p_bonf_k1": 0.003996003996003996,
+        "si_bc_pmi_k1": 0.0,
+        "K1_significant": true,
+        "K1_cardinality_ratio": 0.05,
+        "K1_H": 0.4
+      }
+    },
+    {
+      "id": "V6_PROVENANCE_AND_ARTIFACT_GAPS",
+      "severity": "low",
+      "finding": "provenance.json reports github_run_id null, base_sha null, commits [], and run_experiment.py lists artifacts [] with no persistent raw data hashes. Freeze hashes correct (prereg.md 230d945..., spec.json 5682f74...), but reproducibility requires trajectory logs and response payload hashes per measurement_validity. No raw_data artifact persisted; only result.json/report.md paths. Does not invalidate measurement but reduces auditability.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/provenance.json:github_run_id null, base_sha null, commits [], artifacts paths without sha256",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:artifacts []",
+        "research/EXPERIMENT_PACKET.md:5 provenance.json must identify hashes/paths of material artifacts"
+      ]
+    },
+    {
+      "id": "V7_MEASUREMENT_VALIDITY_NOT_EXCEEDED",
+      "severity": "low",
+      "finding": "Cardinality check correctly passes (|R|/N=0.05 <0.8), data sufficiency passes (2000>=500), leakage check passes (history built from trajectory ordering with START padding, no future info), plug-in estimator degeneracy correctly avoided (recomputed |R|<<N). Bias-corrected estimator (observed - perm_mean) correctly implemented per spec.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:controls.cardinality_check_k3.all_pass true, per_stratum ratios 0.05",
+        "research/experiments/EXP-PHYSICS-34932344937/result.json:controls.data_sufficiency sd_transitions 2000",
+        "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py:permutation_null_pmi shuffling within strata"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "state_independent_response_baseline",
+      "expected": "PMI ≈0.0 (constant response)",
+      "observed": "si_bias_corrected_pmi_k3=0.0, si_raw_pmi_k3=0.0, si_null_mean_k3=0.0 per result.json; recomputed 0.0 at K=1,2,3",
+      "assessment": "PASS - correctly implements null response substrate, identical FSM/sessions, constant payload {state_id:unknown, step:0, session_token:none}. Confirms estimator yields 0 when no state information.",
+      "evidence_refs": ["research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.1.state_independent.raw_pmi=0.0, 3.state_independent.bias_corrected_pmi=0.0"]
+    },
+    {
+      "baseline_id": "action_history_only_P_S_next_given_URL_HK",
+      "expected": "At K=3 predicts FSM state with near-perfect accuracy on linear FSM (strong null); response cannot add value if H=0",
+      "observed": "Recomputed H(S_next|URL,H_K=3)=0.0, H(S_next|URL,H_K=2)=0.0, H(S_next|URL,H_K=1)=0.4. At K=3 history alone perfectly determines next state (8/8 strata single-valued). At K=1 history insufficient, PMI ceiling 0.4 bits.",
+      "assessment": "WEAK/TAUTOLOGICAL at K=3 - not a strong null but a degenerate null (ceiling zero). STRONG at K=1 - correctly discriminates: SD PMI 0.385 >0 while SI 0. Shows response informativeness is conditional on history insufficiency. Producer used K=3 as primary, making baseline non-discriminating.",
+      "evidence_refs": ["recomputed H analysis in V1, result.json per_k_results cardinality and strata counts"]
+    },
+    {
+      "baseline_id": "frequency_baseline_P_S_next",
+      "expected": "Marginal accuracy 1/5=20% (not reported numerically in result.json)",
+      "observed": "Not computed in producer metrics; but observed action-history accuracy at K=3 is 100% (H=0), well above 20%, consistent with deterministic FSM.",
+      "assessment": "PASS but uninformative - not used in decision rule, no threat.",
+      "evidence_refs": ["research/experiments/EXP-PHYSICS-34932344937/result.json:observations action-history predicts FSM state with near-perfect accuracy"]
+    },
+    {
+      "baseline_id": "deterministic_SPA_baseline",
+      "expected": "PMI=0 at all K, replicates parent deterministic findings",
+      "observed": "State-independent condition (which is deterministic SPA with constant response) shows PMI=0 at all K, cardinality |R|=1. State-dependent at K>=2 also shows PMI=0 but due to sufficiency, not non-predictiveness.",
+      "assessment": "PARTIAL PASS - replicates deterministic baseline numerically, but conflates two different reasons for 0 PMI (no information vs no entropy to predict).",
+      "evidence_refs": ["research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.2.state_dependent.raw_pmi=0.0, 3.state_dependent.raw_pmi=0.0"]
+    },
+    {
+      "baseline_id": "plug_in_MI_estimator_uncorrected",
+      "expected": "Potentially inflated but here |R|<<N so not degenerate",
+      "observed": "K=3 plug-in raw 0.0 (<-> H=0), K=1 raw 0.40 with null_mean 0.014 (bias small). Producer correctly reports both and uses bias-corrected.",
+      "assessment": "PASS - confirms parent cardinality degeneracy not replicated; bias correction appropriate but unnecessary when raw=0.",
+      "evidence_refs": ["research/experiments/EXP-PHYSICS-34932344937/result.json:metrics.sd_raw_pmi_k3=0.0, sd_null_mean_k3=0.0, per_k_results.1.null_mean=0.014"]
+    }
+  ],
+  "recomputed_metrics": {
+    "sd_bias_corrected_pmi_k3": 0.0,
+    "si_bias_corrected_pmi_k3": 0.0,
+    "pmi_difference_k3": 0.0,
+    "sd_raw_pmi_k3": 0.0,
+    "si_raw_pmi_k3": 0.0,
+    "sd_null_mean_k3": 0.0,
+    "sd_null_std_k3": 0.0,
+    "sd_perm_p_raw_k3": 1.0,
+    "sd_perm_p_bonf_k3": 1.0,
+    "paired_perm_p_k3": 1.0,
+    "sd_bias_corrected_pmi_k1": 0.3856248724530916,
+    "sd_raw_pmi_k1": 0.4000000000000002,
+    "sd_null_mean_k1": 0.01437512754690857,
+    "sd_null_std_k1": 0.0031832527288288164,
+    "sd_perm_p_raw_k1": 0.000999000999000999,
+    "sd_perm_p_bonf_k1": 0.003996003996003996,
+    "si_bias_corrected_pmi_k1": 0.0,
+    "H_S_next_given_URL_HK_1": 0.4,
+    "H_S_next_given_URL_HK_2": 0.0,
+    "H_S_next_given_URL_HK_3": 0.0,
+    "cardinality_ratio_k3_per_stratum": 0.05,
+    "cardinality_pass": true,
+    "determinism_correct_total_triples": 100,
+    "determinism_code_total_triples": 2000,
+    "session_assignment_distribution": "deterministic round-robin 20 per session, not independent uniform",
+    "recomputation_match_producer_K3": true,
+    "recomputation_match_producer_K1": true,
+    "per_stratum_K1_advance_PMI": 1.0,
+    "per_stratum_K1_advance_H": 1.0,
+    "per_stratum_K1_advance_N": 800
+  },
+  "claim_ceiling": "Bounded FALSIFIED-IN-SETTING only for the tested substrate: 5-state linear cyclic FSM with single deterministic action per state (landing:begin, form_s1:advance, form_s2:advance, review:finalize, complete:submit), single URL '/', single history construction (START padding), at sufficient history depth K>=2 where H(S_next|URL,H_K)=0 bits. At this narrow ceiling, I(S_next; Response_before | URL,H_K=3)=0 even when response perfectly encodes state_id, because history already determines next state. No evidence for or against C-WEB-DYNAMICS beyond this degenerate setting. At identical FSM with insufficient history K=1 (H=0.4 bits), the same state-dependent response DOES carry significant conditional PMI (BC=0.386 bits, Bonferroni p=0.004 <0.0125) with low-cardinality non-degenerate estimator (|R|/N=0.05), supporting that network-response payload structure CAN carry predictive information when transitions are not fully determined by history. Doors remain open for: (a) branching FSMs with H>0 at K=3, (b) production SPAs with genuine transition non-determinism, (c) alternative observables (headers, timing, multi-endpoint). The producer's broad claim that 'locally-hosted testable path for C-WEB-DYNAMICS is closed across ALL observation levels' is NOT justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34932344937/request.json:experiment_id lane origin_github_run_id 34932344937 parent_handoff EXP-PHYSICS-34846934524",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json:claim_ids [C-WEB-DYNAMICS] question falsifier baselines positive_control null_control measurement_validity decision_rule product_consequence_negative",
+    "research/experiments/EXP-PHYSICS-34932344937/prereg.md:2 Scientific Question, 11 Validity Threats, 12 Decision Rules",
+    "research/experiments/EXP-PHYSICS-34932344937/freeze.json:hashes prereg.md 230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:schema_version 1 status COMPLETE outcome FALSIFIES metrics per_k_results controls observations validity_notes",
+    "research/experiments/EXP-PHYSICS-34932344937/report.md:3 Primary Results, 4 Controls, 5 Decision",
+    "research/experiments/EXP-PHYSICS-34932344937/provenance.json:datasets synthetic_data n_trajectories 200 n_steps 10 n_sessions 10 seed 42",
+    "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py: full pipeline re-executed for recomputation (hash 0af3aa7e5d32e1b8)",
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json:carry_forward established rejected unknown do_not_assume (parent Measurement Invalid due to |R|≈N)",
+    "research/lanes/registry.json:physics lane mission falsification-first operational definitions identifiability"
+  ],
+  "unresolved": [
+    "Whether network-response PMI remains >0 at K=3 if FSM is made branching (e.g., form_s1 has 2 actions with session-dependent transition probabilities) so that H(S_next|URL,H_K=3) >>0. This is the correct discriminating test per V1 fix.",
+    "Whether the significant K=1 PMI (0.385 bits, 1.0 bits in advance stratum) generalizes to richer response features (headers, timing, multi-endpoint) and to production infrastructure, or is specific to this synthetic JSON with state_id field.",
+    "Whether bias-corrected estimator (observed - perm_mean) is sufficient vs Miller-Madow or other estimators when H>0 but |R| moderate; K=1 null_mean 0.014 indicates small bias, not assessed at larger N or branching FSM.",
+    "Whether session-correlated design with token removed (variant_id only) would give PMI ≈1.32 as predicted in parent handoff unknown, and whether that survives bias correction.",
+    "Whether measurement at K=2 (also H=0) was prereg exploratory and should be excluded from decision or used as additional ceiling demonstration."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Primary test condition K=3 has H(S_next|URL,H_K=3)=0 exactly on the 5-state linear FSM (audit V1, severity critical): all K=3 strata are single-valued for S_next, making I(S_next; Response_before|URL,H_K=3)=0 a priori impossible for ANY Response_before. This is an environment ceiling, not a negative scientific result. The producer's FALSIFIES outcome is not justified: you cannot falsify a claim by testing it in an environment where the effect is mathematically impossible. At K=1 (H=0.4 bits, where action-history is insufficient), the same state-dependent response DOES carry significant conditional PMI (BC=0.386 bits, Bonferroni p=0.004 < 0.0125, cardinality |R|/N=0.05 non-degenerate), demonstrating network-response payload structure CAN carry predictive information when transitions are not fully determined by history. K=3 controls are degenerate (null_std=0, audit V4) and do not stress the pipeline. The claim remains HYPOTHESIS pending a branching FSM experiment where H(S_next|URL,H_K=3) > 0.2 bits."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+  "reason": "The experiment is MEASUREMENT_INVALID for the following reasons grounded in audit evidence: (1) V1 critical: K=3 ceiling is H=0 exactly — the 5-state linear FSM has deterministic single-action-per-state transitions, so action-history at K>=2 fully determines S_next, making response PMI identically 0 for any observable. Testing at K=3 is a priori impossible. (2) V5 high: The producer ignored significant K=1 results (BC PMI=0.386 bits, Bonferroni p=0.004) that demonstrate network-response DOES carry predictive information when history is insufficient (H=0.4 bits). This positive signal at K=1 is the strongest finding in the experiment and contradicts the producer's broad FALSIFIES claim. (3) V4 high: Controls at K=3 are degenerate (null_std=0.0, pass criterion |0|<3*0=0) and non-discriminating — they pass trivially regardless of observation quality. (4) V2 medium: Session assignment uses deterministic round-robin instead of preregistered independent uniform sampling. (5) V3 medium: Determinism check groups by trajectory index instead of session_id per spec. (6) V6 low: Provenance lacks raw data hashes and github_run_id. The audit's required_fixes correctly identify the path forward: redesign FSM with branching transitions to create H>0 at K=3, then rerun the network-response PMI test.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:status REVISE, producer_claim_supported false, validity_findings V1 severity critical (H=0 ceiling), V5 severity high (K=1 PMI 0.386 bits ignored), V4 severity high (degenerate controls), claim_ceiling (bounded FALSIFIED-IN-SETTING for linear FSM K>=2 only)",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:recomputed_metrics sd_bias_corrected_pmi_k1=0.3856, sd_perm_p_bonf_k1=0.003996, H_S_next_given_URL_HK_1=0.4, H_S_next_given_URL_HK_3=0.0, determinism_correct_total_triples=100",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:metrics per_k_results.1.state_dependent raw_pmi=0.40 bias_corrected_pmi=0.386 perm_p_bonf=0.004, per_k_results.3 cardinality all_pass true ratio 0.05",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:controls positive_control_session_randomized pass_criterion '|0.000000| < 3 * 0.000000 = 0.000000' (degenerate), null_control_shuffled_labels result PASS (degenerate at K=3)",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json:decision_rule criterion_1 (K=3 PMI>0.05) criterion_2 (SD>SI) criterion_6 (|R|<0.8N)",
+    "research/experiments/EXP-PHYSICS-34932344937/prereg.md:11.4 FSM Linearity acknowledged threat, 12.2 FALSIFIED-IN-SETTING criteria",
+    "research/experiments/EXP-PHYSICS-34932344937/freeze.json:hashes prereg.md 230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb spec.json 5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598",
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json:carry_forward, next_question (parent DOM-hash MEASUREMENT_INVALID)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS",
+    "research/EXPERIMENT_PACKET.md:7 verdict.json required fields, 8 handoff.json required fields"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+  "why_next": "The locally-hosted network-response PMI test is MEASUREMENT_INVALID at K=3 due to zero-entropy ceiling on the linear FSM (audit V1). However, the experiment revealed a strong positive signal at K=1 (BC PMI=0.386 bits, Bonferroni p=0.004) that network-response DOES carry predictive information when action-history is insufficient. The correct next step is to test the same hypothesis on a branching FSM where H(S_next|URL,H_K=3) > 0, eliminating the ceiling effect while keeping the observation level (network-response) that already shows PMI when H>0.",
+  "carry_forward": {
+    "established": [
+      "Network-response payload structure carries significant conditional PMI when action-history is insufficient: on the 5-state linear FSM at K=1 (H=0.4 bits), bias-corrected PMI = 0.386 bits, Bonferroni p = 0.004 < 0.0125, cardinality |R|/N = 0.05 non-degenerate (audit V5, recomputed metrics sd_bias_corrected_pmi_k1=0.3856). The ('/', 'advance') stratum at K=1 has PMI=1.0 and H=1.0 (N=800): response_before (state_id form_s2 vs review) disambiguates between two possible next states (review vs complete) when action-history is ambiguous.",
+      "On a 5-state LINEAR FSM with deterministic single-action-per-state transitions, action-history at K>=2 fully determines S_next (H=0 exactly), making response PMI identically 0 for ANY Response_before. This is a ceiling effect, not a falsification of response informativeness (audit V1).",
+      "Bias-corrected PMI estimator (observed - perm_mean) correctly implemented and produces valid effect sizes: K=1 null_mean = 0.014 (small bias), null_std = 0.003 (tight null), bias correction appropriate (audit V7). Cardinality |R|/N = 0.05 well below 0.8 threshold, avoiding parent's DOM-hash degeneracy.",
+      "Session-randomized positive control and shuffled-label null control pass at K=3, though degenerately (null_std=0.0 due to zero-entropy strata). At K=1 where H>0, controls are not exercised but the pipeline discriminates correctly (SD PMI=0.386, SI PMI=0.0)."
+    ],
+    "rejected": [
+      "Broad FALSIFIED-IN-SETTING for network-response payload structure as C-WEB-DYNAMICS observation level is NOT justified by this experiment. The K=3 PMI=0 result is a ceiling effect (H=0), not evidence that response structure lacks predictive information (audit V1, V5).",
+      "The producer's claim that 'locally-hosted testable path for C-WEB-DYNAMICS is closed across ALL observation levels' is not supported: K=1 evidence shows network-response DOES carry PMI when H>0 (audit V5).",
+      "DOM-hash with embedded session token trivially predicts itself (established from parent EXP-PHYSICS-34846934524, carries forward from prior handoff)."
+    ],
+    "unknown": [
+      "Whether network-response PMI remains >0 at K=3 on a branching FSM where H(S_next|URL,H_K=3) > 0.2 bits — this is the correct discriminating test that eliminates the ceiling effect.",
+      "Whether the significant K=1 PMI (0.386 bits) generalizes to richer response features (headers, timing, multi-endpoint) and to production infrastructure, or is specific to this synthetic JSON with state_id field.",
+      "Whether bias-corrected estimator (observed - perm_mean) is sufficient vs Miller-Madow or other estimators when H>0 but |R| moderate; K=1 null_mean 0.014 indicates small bias, not assessed at larger N or branching FSM.",
+      "Whether session-correlated design with token removed (variant_id only) would give PMI ≈ 1.32 bits as predicted in parent handoff, and whether that survives bias correction.",
+      "What the correct positive control is for branching FSM experiments: session-randomized control at K=1 was not exercised in this experiment (controls only at K=3 where degenerate)."
+    ],
+    "do_not_assume": [
+      "Do not interpret K=3 PMI=0 on the linear FSM as evidence that network-response payload structure lacks predictive information — H(S_next|URL,H_K=3)=0 is an environment ceiling, not a scientific finding about response informativeness.",
+      "Do not assume K=1 PMI=0.386 bits generalizes to all FSMs, all response types, or production SPAs — it is demonstrated only on this specific 5-state linear FSM with state-dependent JSON responses.",
+      "Do not assume positive/null control passes at K=3 validate the MI pipeline — controls are degenerate (null_std=0.0, pass criterion |0|<3*0) and non-discriminating (audit V4).",
+      "Do not confuse action-history sufficiency (H=0, deterministic FSM) with response non-informativeness — these are different properties: sufficiency means history already determines the answer; informativeness means response CAN provide information when history is insufficient.",
+      "Do not generalize to production SPAs, client-side virtual DOM, React/Vue concurrent mode, auth-dependent content, or external data feeds — the audit and producer validity_notes explicitly exclude these from the claim ceiling.",
+      "Do not treat the experiment's FALSIFIES outcome as a valid falsification of C-WEB-DYNAMICS — the audit correctly identified it as MEASUREMENT_INVALID due to zero-entropy ceiling (audit V1).",
+      "Do not assume deterministic round-robin session assignment (audit V2 deviation) biases the PMI result — both conditions have identical assignment, but the deviation requires disclosure in future preregistrations.",
+      "Do not assume determinism_check results (audit V3, code groups by trajectory index instead of session_id) are valid per spec — the correct grouping gives 100 triples, not 2000."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json (parent: DOM-hash MEASUREMENT_INVALID, carry_forward for C-WEB-DYNAMICS)",
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json (independent-noise DOM-hash FALSIFIED-IN-SETTING)",
+    "research/experiments/EXP-PHYSICS-34724244876/handoff.json (deterministic DOM-hash FALSIFIED-IN-SETTING)",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json (frozen design: claim_ids, decision_rule, measurement_validity, falsifier)",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json (producer evidence: per_k_results K=1 significant, K=3 ceiling, controls)",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json (independent audit: V1-V7, claim_ceiling, recomputed_metrics, required_fixes)",
+    "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py (analysis pipeline, re-executed for audit recomputation)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:validity_findings V1 (severity critical, H=0 ceiling at K=3), V5 (severity high, K=1 PMI 0.386 bits ignored), V4 (severity high, degenerate controls), claim_ceiling (bounded ceiling statement)",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:recomputed_metrics sd_bias_corrected_pmi_k1=0.3856248724530916, sd_perm_p_bonf_k1=0.003996003996003996, H_S_next_given_URL_HK_1=0.4, H_S_next_given_URL_HK_3=0.0, per_stratum_K1_advance_PMI=1.0",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:required_fixes (branching FSM, K=1 as primary, session sampling fix, determinism check fix, control degeneracy disclosure)",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.1.state_dependent raw_pmi=0.4000000000000002 bias_corrected_pmi=0.3856248724530916 perm_p_bonf=0.003996003996003996 cardinality all_pass ratio 0.05",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.3.cardinality per_stratum all_pass ratio 0.05 (non-degenerate)",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:controls positive_control_session_randomized pass_criterion '|0.000000| < 3 * 0.000000 = 0.000000' (degenerate), null_control_shuffled_labels PASS (degenerate at K=3)",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json:decision_rule (6 criteria, criterion_1 K=3 PMI>0.05 criterion_6 |R|<0.8N)",
+    "research/experiments/EXP-PHYSICS-34932344937/prereg.md:11.4 FSM Linearity (acknowledged ceiling threat), 12.2 FALSIFIED-IN-SETTING criteria",
+    "research/experiments/EXP-PHYSICS-34932344937/freeze.json:hashes prereg.md 230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb spec.json 5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598",
+    "research/experiments/EXP-PHYSICS-34932344937/provenance.json:datasets synthetic_data parameters seed 42 n_sessions 10 (round-robin deviation audit V2)",
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json:carry_forward established rejected unknown do_not_assume, next_question (parent DOM-hash MEASUREMENT_INVALID, network-response suggested)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS",
+    "research/EXPERIMENT_PACKET.md:7 verdict.json required fields, 8 handoff.json carry_forward semantics"
+  ],
+  "recommended_action": "Next experiment should test network-response payload structure on a BRANCHING FSM where at least one state has >=2 outgoing actions with session-dependent transition probabilities, ensuring H(S_next|URL,H_K=3) > 0.2 bits. This eliminates the K=3 ceiling effect while keeping the observation level (network-response) that already shows PMI at K=1. Use K=1 (H=0.4 bits) as a secondary/confirmatory condition. Fix session assignment to independent uniform draw per prereg. Implement determinism check grouping by (FSM_state, session_id) per spec. Exercise positive and null controls at K=3 on the branching FSM where perm_null_std > 0, ensuring non-degenerate discrimination. Preregister branching FSM design before execution. Do not repeat the linear FSM design."
 }
 ```
 
