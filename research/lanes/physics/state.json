@@ -1,14 +1,14 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-PHYSICS-34932344937",
   "last_experiment_id": "EXP-PHYSICS-34846934524",
   "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
   "next_question": "On locally-hosted Express SPAs with correlated non-determinism, does network-response payload structure (API response bodies, headers, timing signatures) exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy.",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-15T00:43:08.939040+00:00",
+  "updated_at": "2026-09-15T05:20:43.120358+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
 }
