@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-15T19:07:45.058171+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-15T22:13:28.378650+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
 }
