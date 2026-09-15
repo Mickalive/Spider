@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34741873198",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy increases and may cause non-deterministic output or hash instability beyond the 0-729 byte Keycloak responses tested here?",
+  "why_next": "This experiment established body-only discrimination at 0.5 under deterministic CDN simulation with small bodies (0-729 bytes). The ceiling is bounded to tiny Keycloak /userinfo (0-189 bytes) and /introspect (16-729 bytes) responses. Compression behavior changes with body size: larger JSON responses have higher entropy, may trigger different compression levels or chunking, and may produce non-deterministic output under real CDN conditions. Testing KB-scale JSON is the smallest materially orthogonal question that extends the substrate ceiling. A negative result (body-only fails at larger sizes) would force architecture change; a positive result would extend body-only viability to more realistic endpoint responses. This is distinct from retesting real CDNs (which requires infrastructure not currently available) and from testing filtered full-vector (which is a different fingerprint strategy, not a substrate ceiling extension).",
+  "carry_forward": {
+    "established": [
+      "Body-only (status+compressed-body hash) discrimination is preserved at 0.5 on /userinfo and 0.5 on /introspect under synthetic deterministic CDN proxy on Keycloak 25.0 start-dev with deterministic brotli (quality 6) and gzip (level 9 mtime=0) compression per client profile (N=10 per auth state per profile per endpoint, 240 total, seed=44) — this experiment, result.json, audit.json V1_V2 verified",
+      "Within-state compressed body hash variation is 0/10 across all 12 state×profile cells, confirming code-level determinism of gzip (mtime=0 level 9) and brotli (quality 6) — this experiment, result.json M_WITHIN_STATE_VARIATION, audit V2 confirms determinism by construction",
+      "Cross-client pooled discrimination (Client A brotli + Client C identity alternating) drops to 0.2237 from 0.5 single-client, confirming different Accept-Encoding produces different compressed bytes causing hash divergence — this experiment, result.json M_MIXED_CLIENT_DISCRIMINATION, audit V6",
+      "Status-only discrimination equals body-only on /userinfo (0.5 both, all profiles); body-only adds no incremental discrimination over status-only on status-discriminating endpoints — this experiment, result.json M_STATUS_ONLY_INVARIANCE, audit V4",
+      "Body-only discrimination outperforms status-only on /introspect (body-only 0.5 vs status-only 0.0) where all states return HTTP 200 — this experiment, result.json /introspect_* metrics",
+      "Body-only discrimination degrades monotonically under synthetic per-request random compression (Spearman rho -0.948, n=4) but is preserved at 0.5 under deterministic per-client compression — parent EXP-RUNTIME-34654566605 established, this experiment confirms preservation",
+      "expired_token and invalid_token remain indistinguishable by ANY observable on /userinfo and /introspect — parent EXP-RUNTIME-34439061845, carried through EXP-RUNTIME-34654566605",
+      "Unfiltered full-vector (status+headers+body_hash) discrimination collapses to 0.0 under synthetic header noise — parent EXP-RUNTIME-34509593940"
+    ],
+    "rejected": [
+      "Unfiltered full-vector as reliable production fingerprint under infrastructure header noise — collapses to 0.0 at noise>=2 (parent EXP-RUNTIME-34509593940)",
+      "WWW-Authenticate as general-purpose Keycloak-level auth-state signal — endpoint-specific (parent EXP-RUNTIME-34439061845)",
+      "Cache-Control error-type variation as discriminating signal — confirmed falsified (parent EXP-RUNTIME-34509593940)",
+      "Body-only discrimination does NOT degrade under non-deterministic compression — falsified (degrades rho -0.948 under per-request random compression, parent EXP-RUNTIME-34654566605)",
+      "Body-only architecture is universally superior to full-vector — narrowed (body-only fails under random compression; status-only is compression-immune and equal on /userinfo)"
+    ],
+    "unknown": [
+      "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy may cause non-deterministic output or hash instability?",
+      "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, varying quality/compression levels, caching, and load-balancing?",
+      "Does body-only degradation generalize to larger/more diverse body content-types and sizes beyond Keycloak /userinfo 0-189 bytes and /introspect 16-729 bytes?",
+      "What discrimination floor remains when hashing decompressed bodies (normalization layer that decompresses via Content-Encoding before hashing)?",
+      "Would a filtered full-vector baseline (status+WWW-Authenticate+Cache-Control+body_hash excluding infrastructure headers) retain higher discrimination than body-only and survive compression?",
+      "What is minimal compression entropy required to collapse body-only below usable threshold, and does that entropy occur in real CDN operation vs synthetic?",
+      "Does result generalize to non-Keycloak OAuth/OIDC providers (Auth0, Okta) or production Keycloak with real CDN and load-balancer?"
+    ],
+    "do_not_assume": [
+      "Do not assume this experiment's result applies to real CDNs — evidence bounded to synthetic deterministic Python HTTPServer proxy on Keycloak 25.0 start-dev (audit V5)",
+      "Do not assume within-state determinism is an empirical discovery about real CDN behavior — it is guaranteed by construction (Python gzip mtime=0, brotli fixed quality are deterministic functions, audit V2)",
+      "Do not assume the proxy reads per-request Accept-Encoding headers — implementation uses a class variable set once per client profile in start_proxy(), not per-request header parsing (audit V3)",
+      "Do not assume body-only provides incremental discrimination over status-only on endpoints where status codes discriminate (e.g., /userinfo 200 vs 401) — body-only=status-only=0.5 on /userinfo (audit V4)",
+      "Do not assume the mixed-client result (0.2237) represents alternating requests to a single concurrent proxy — it is computed post-hoc by pooling fingerprints from sequential profile blocks (audit required_fixes 5)",
+      "Do not assume body-only discrimination holds for body sizes beyond 729 bytes — Keycloak /userinfo and /introspect return tiny responses (0-729 bytes); generalization to KB-scale JSON unsupported",
+      "Do not assume the 4-state auth construction (no_auth, valid_token, expired_token, invalid_token) with 3 collapsed error states represents general endpoint discrimination — ceiling 0.5 reflects collapsed triple, not body content",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — locally-signed HS256 construction (parent V6 leakage)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34741873198/result.json",
+    "research/experiments/EXP-RUNTIME-34741873198/audit.json",
+    "research/experiments/EXP-RUNTIME-34741873198/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34741873198/spec.json",
+    "research/experiments/EXP-RUNTIME-34741873198/prereg.md",
+    "research/experiments/EXP-RUNTIME-34741873198/provenance.json",
+    "research/experiments/EXP-RUNTIME-34654566605/handoff.json",
+    "research/experiments/EXP-RUNTIME-34509593940/handoff.json",
+    "research/experiments/EXP-RUNTIME-34439061845/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34741873198/result.json — metrics /userinfo_A_br_gzip body_only 0.5, status_only 0.5; M_DETERMINISTIC_DISCRIMINATION identity=0.5 br=0.5 gzip=0.5; M_MIXED_CLIENT_DISCRIMINATION 0.2237; M_WITHIN_STATE_VARIATION all_states_deterministic True; controls C_POSITIVE_CONTROL through C_NO_PIPELINE_ERRORS all PASS; status=COMPLETE outcome=SUPPORTS",
+    "research/experiments/EXP-RUNTIME-34741873198/audit.json — REVISE, producer_claim_supported=false, V1-V7 validity findings, recomputed_metrics identical to producer, claim_ceiling narrowed to synthetic deterministic proxy",
+    "research/experiments/EXP-RUNTIME-34741873198/raw_observations.json sha256 58c2937267f4d2948907664d5ca8835f27fb50e556c91ee49b4421568da2d331 — 240 observations, per-state body_hash, Content-Encoding br/gzip/none, body_size",
+    "research/experiments/EXP-RUNTIME-34741873198/provenance.json — Keycloak 25.0 Docker, proxy 18081, brotli available, compression conditions gzip mtime0 level9 brotli quality6",
+    "research/experiments/EXP-RUNTIME-34741873198/run_experiment.py — compress_gzip mtime0, compress_brotli quality6, CDNNegotiationProxyHandler.client_accept_encoding class variable, start_proxy, make_request stream decode_content False",
+    "research/experiments/EXP-RUNTIME-34654566605/handoff.json — parent carry_forward: body-only degrades under random compression rho -0.948, floor ~0.09-0.13, status-only invariant 0.5, hash variation grows 4/40->15/40"
+  ],
+  "recommended_action": "Design an experiment testing body-only discrimination with larger JSON response bodies (1KB, 10KB, 100KB) served by Keycloak or a mock endpoint through the same CDN negotiation proxy. This extends the substrate ceiling from 0-729 bytes to realistic API response sizes. If body-only survives at larger sizes, the claim ceiling extends to realistic endpoint responses. If body-only fails at larger sizes (non-deterministic compression output or hash instability), it forces a compression-normalization architecture. Use the same frozen fingerprint algorithm and discrimination metric. Separately, consider testing body-only on a non-Keycloak IdP (e.g., mock OAuth2 server returning larger JSON) to test generalization beyond Keycloak 25.0 start-dev."
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34881708619",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID: null control per-type fails (4/8 types >0.01 at lambda=0, max 0.0282), subsampling consistency violated (1/5 reps sub>full), CV max 1.59 >0.5. Preregistered primary comparison across 8 page types FAILS (t=1.33 p_one=0.113 d=0.47 <0.5 thresholds). Producer's significant result (t=3.98 p=0.008 d=1.78) uses non-preregistered rep-level pairing unit. No valid inference about pooled vs per-type estimator advantage at equal n is justified. The 1.49x pooled/sub ratio at 250/type confounds 5.0 vs 0.625 expected counts/bin density. All evidence remains synthetic 2D [0,1]^2; no inference to real Web DOM dynamics. C-WEB-DYNAMICS remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Do alternative divergence measures (KDE with adaptive bandwidth, kNN mutual information, or kernel-based divergence) maintain pooled-vs-per-type ordering at equal per-type n (250/type) where binned TV fails due to sparse binning (0.625 expected counts/bin), or does the estimator limitation dissolve when the binning artifact is removed?",
+  "reason": "The frozen decision rule triggers MEASUREMENT_INVALID: null control per-type fails 4/8 at lambda=0 (max 0.0282 >0.01), subsampling consistency violated 1/5 reps, CV max 1.59 >0.5. The preregistered primary comparison across 8 page types FAILS (t=1.33 p_one=0.113 d=0.47), opposite to producer's exploratory rep-level test. The audit further identifies that equal-n design still confounds total density (pooled 5.0 counts/bin vs per-type 0.625 counts/bin), so the 1.49x ratio cannot isolate borrowing-strength from denser bin occupancy. Established: pooled pipeline replicates parent (0.0513), pooled_sub preserves rank detection (rho 0.929), per-type at 250/type is noise-dominated (null fails, CV >0.5). The binned TV estimator family has a fundamental sparse-binning limitation at 0.625 counts/bin per type that invalidates per-type false-positive control. Frontier should test materially orthogonal divergence measures robust to sparse binning rather than continuing parameter sweeps within binned TV.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34881708619/spec.json:question, hypothesis, falsifier, decision_rule, baselines, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-34881708619/prereg.md:7.1 primary paired test across 8 types, 10.3 MEASUREMENT_INVALID rule",
+    "research/experiments/EXP-FRONTIER-34881708619/freeze.json:hashes",
+    "research/experiments/EXP-FRONTIER-34881708619/result.json:metrics.per_type_bc_tv, metrics.pooled_full_bc_tv, metrics.pooled_subsampled_bc_tv, metrics.primary_comparison_lambda1, metrics.effect_size, metrics.frequency_baseline, controls",
+    "research/experiments/EXP-FRONTIER-34881708619/audit.json:status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling, required_fixes[0-6], validity_findings, recomputed_metrics.preregistered_paired_t_across_8_types",
+    "research/experiments/EXP-FRONTIER-34881708619/report.md:Executive Summary, 2.1 primary comparison, 3.1 interpretation",
+    "research/experiments/EXP-FRONTIER-34881708619/run_execute.py:294-309 subsampling, 395-401 rep-level t-test",
+    "research/experiments/EXP-FRONTIER-34881708619/provenance.json:parent_experiment, execution_time_seconds",
+    "research/experiments/EXP-FRONTIER-34794649996/handoff.json:carry_forward established/rejected/unknown/do_not_assume",
+    "research/experiments/EXP-FRONTIER-34794649996/audit.json:required_fixes[3] equal-n confound"
+  ]
+}
