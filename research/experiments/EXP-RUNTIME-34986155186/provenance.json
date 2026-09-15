@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34986155186",
+  "lane": "runtime",
+  "recorded_at": "2026-09-15T19:10:36.000000+00:00",
+  "github_run_id": "35010858679",
+  "base_sha": "f313104fd5d0d69b62ed304e8cc45662a950ae23",
+  "execution_sha": "adf84e73b50b183f52c09aff20f4636ce15b0894",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux 6.17.0-1022-azure",
+    "brotli_version": "1.2.0",
+    "pyjwt_version": "2.14.0",
+    "requests_version": "2.34.2",
+    "numpy_version": "2.5.3",
+    "mock_server_port": 5000,
+    "proxy_port": 5001
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "hash": "5c640867203f74c9a26232bf007716dbd7284906df70b21f58d8a80823bec8ff"
+    },
+    "spec.json": {
+      "hash": "95e3d7b2f71c70f43e59bfc88c28238243bcd440166b7ec6dc0df461340f2ebe"
+    },
+    "prereg.md": {
+      "hash": "4707ee21ed88ac396c9941763039189e249b7230dcdae36645b93c81afc96093"
+    }
+  },
+  "artifacts": {
+    "raw_observations.json": {
+      "hash": "8e1a4ed8805e1ad73dccb43458330cc6007bdf3dafb50c2de631fa22945a62d8",
+      "role": "raw",
+      "description": "800 HTTP observations across 5 conditions x 4 states x 20 reps x 2 endpoints"
+    },
+    "result.json": {
+      "hash": "050792119112028a60b2f0fe0e4c3faf16256bab6a831fb31a2401ca2f6f0f99",
+      "role": "derived",
+      "description": "Computed metrics, controls and discrimination scores"
+    },
+    "run_experiment.py": {
+      "hash": "6b869f4da34800454279c3ee0cad85af9495d03acb57df153ee456c95df22b8e",
+      "role": "code",
+      "description": "Frozen experiment execution script"
+    }
+  },
+  "compression_parameters": {
+    "brotli": {
+      "fixed_quality": 6,
+      "varying_range": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "module": "brotli",
+      "deterministic_at_fixed_quality": true
+    }
+  },
+  "experiment_design": {
+    "seed": 44,
+    "reps_per_state": 20,
+    "conditions": [
+      "COMPRESSED-FIXED",
+      "COMPRESSED-VARYING",
+      "DECOMPRESSED-FIXED",
+      "DECOMPRESSED-VARYING",
+      "IDENTITY"
+    ],
+    "endpoints": [
+      "/userinfo",
+      "/introspect"
+    ],
+    "auth_states": [
+      "no_auth",
+      "valid_token",
+      "expired_token",
+      "invalid_token"
+    ],
+    "total_requests": 800
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34902094115",
+    "path": "research/experiments/EXP-RUNTIME-34902094115/handoff.json",
+    "sha256": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
+  }
+}
