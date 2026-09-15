@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "sd_bias_corrected_pmi_k3": 0.0,
+    "si_bias_corrected_pmi_k3": 0.0,
+    "pmi_difference_k3": 0.0,
+    "sd_perm_p_bonf_k3": 1.0,
+    "paired_perm_p": 1.0,
+    "sd_raw_pmi_k3": 0.0,
+    "si_raw_pmi_k3": 0.0,
+    "sd_null_mean_k3": 0.0,
+    "si_null_mean_k3": 0.0,
+    "positive_control_bc_pmi": 0.0,
+    "positive_control_raw_pmi": 0.0,
+    "positive_control_passes": true,
+    "null_control_bc_pmi": 0.0,
+    "null_control_raw_pmi": 0.0,
+    "null_control_passes": true,
+    "criterion_1_pmi_threshold": false,
+    "criterion_2_condition_discrimination": false,
+    "criterion_3_positive_control": true,
+    "criterion_4_determinism": true,
+    "criterion_5_data_sufficiency": true,
+    "criterion_6_cardinality": true,
+    "sd_valid_transitions": 2000,
+    "si_valid_transitions": 2000,
+    "n_permutations": 1000,
+    "bonferroni_comparisons": 4,
+    "alpha_bonferroni": 0.0125,
+    "per_k_results": {
+      "1": {
+        "state_dependent": {
+          "raw_pmi": 0.4000000000000002,
+          "null_mean": 0.01437512754690857,
+          "null_std": 0.0031832527288288164,
+          "bias_corrected_pmi": 0.3856248724530916,
+          "perm_p_raw": 0.000999000999000999,
+          "perm_p_bonf": 0.003996003996003996,
+          "total_transitions": 2000,
+          "n_strata": 5
+        },
+        "state_independent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 5
+        },
+        "cardinality": {
+          "per_stratum": {
+            "('/', 'START')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'begin')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance')": {
+              "N": 800,
+              "unique_R": 40,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'finalize')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'submit')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            }
+          },
+          "all_pass": true
+        }
+      },
+      "2": {
+        "state_dependent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 7
+        },
+        "state_independent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 7
+        },
+        "cardinality": {
+          "per_stratum": {
+            "('/', 'START|START')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'START|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'begin|advance')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|advance')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|finalize')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'finalize|submit')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'submit|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            }
+          },
+          "all_pass": true
+        }
+      },
+      "3": {
+        "state_dependent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 8
+        },
+        "state_independent": {
+          "raw_pmi": 0.0,
+          "null_mean": 0.0,
+          "null_std": 0.0,
+          "bias_corrected_pmi": 0.0,
+          "perm_p_raw": 1.0,
+          "perm_p_bonf": 1.0,
+          "total_transitions": 2000,
+          "n_strata": 8
+        },
+        "cardinality": {
+          "per_stratum": {
+            "('/', 'START|START|START')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'START|START|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'START|begin|advance')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'begin|advance|advance')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|advance|finalize')": {
+              "N": 400,
+              "unique_R": 20,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'advance|finalize|submit')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'finalize|submit|begin')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            },
+            "('/', 'submit|begin|advance')": {
+              "N": 200,
+              "unique_R": 10,
+              "ratio": 0.05,
+              "passes": true
+            }
+          },
+          "all_pass": true
+        }
+      }
+    },
+    "paired_test": {
+      "p_value": 1.0,
+      "observed_diff": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0,
+      "n_matched_trajs": 200
+    },
+    "elapsed_seconds": 22.69591474533081
+  },
+  "controls": {
+    "positive_control_session_randomized": {
+      "description": "Session-randomized: randomize session_id assignment across trajectories, breaking session->response mapping",
+      "expected": "Bias-corrected PMI \u2248 0.0 within permutation noise",
+      "observed_bias_corrected_pmi": 0.0,
+      "observed_raw_pmi": 0.0,
+      "pass_criterion": "|0.000000| < 3 * 0.000000 = 0.000000",
+      "result": "PASS"
+    },
+    "null_control_shuffled_labels": {
+      "description": "Shuffled response labels within (URL, H_K) strata",
+      "expected": "Bias-corrected PMI \u2248 0.0",
+      "observed_bias_corrected_pmi": 0.0,
+      "observed_raw_pmi": 0.0,
+      "result": "PASS"
+    },
+    "determinism_check_state_dependent": {
+      "condition": "state_dependent",
+      "total_state_session_step_triples": 2000,
+      "deterministic_triples": 2000,
+      "accuracy": 1.0,
+      "passes": true
+    },
+    "determinism_check_state_independent": {
+      "condition": "state_independent",
+      "total_state_session_step_triples": 2000,
+      "deterministic_triples": 2000,
+      "accuracy": 1.0,
+      "passes": true
+    },
+    "cardinality_check_k3": {
+      "per_stratum": {
+        "('/', 'START|START|START')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'START|START|begin')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'START|begin|advance')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'begin|advance|advance')": {
+          "N": 400,
+          "unique_R": 20,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'advance|advance|finalize')": {
+          "N": 400,
+          "unique_R": 20,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'advance|finalize|submit')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'finalize|submit|begin')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        },
+        "('/', 'submit|begin|advance')": {
+          "N": 200,
+          "unique_R": 10,
+          "ratio": 0.05,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    "data_sufficiency": {
+      "description": ">= 500 valid transitions per condition",
+      "sd_transitions": 2000,
+      "si_transitions": 2000,
+      "result": "PASS"
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "State-dependent condition at K=3: bias-corrected PMI = 0.000000 bits, raw PMI = 0.000000 bits, permutation null mean = 0.000000 bits",
+    "State-independent condition at K=3: bias-corrected PMI = 0.000000 bits",
+    "Difference (SD - SI) at K=3: 0.000000 bits, paired permutation p = 1.000000",
+    "Session-randomized control PMI = 0.000000 bits (expected \u2248 0)",
+    "Shuffled labels control PMI = 0.000000 bits (expected \u2248 0)",
+    "Action-history at K=3 on 5-state linear FSM predicts FSM state with near-perfect accuracy \u2014 response cannot add information beyond action-history for FSM state prediction"
+  ],
+  "validity_notes": [
+    "Synthetic locally-hosted experiment, not a production SPA. Results validate the MI pipeline on controlled data.",
+    "5-state linear FSM has deterministic transitions: each state has exactly one outgoing action. Action-history at K=3 fully determines FSM state. Response information is redundant for FSM state prediction by design.",
+    "Within-experiment comparison (state-dependent vs state-independent) still discriminates: state-dependent responses encode current state, state-independent do not. Difference measures response informativeness about current state.",
+    "Bias-corrected estimator (observed - perm_mean) isolates genuine predictive information from finite-sample bias.",
+    "Cardinality |R|/N well below 0.8 threshold, avoiding parent's degeneracy.",
+    "Plug-in MI estimator on state-dependent responses does NOT exhibit parent's cardinality degeneracy: |R| \u2248 50 << N \u2248 714 per stratum."
+  ],
+  "unresolved": [
+    "Whether positive result generalizes beyond this specific 5-state linear FSM to richer FSMs with non-deterministic transitions.",
+    "Whether action-history sufficiency on linear FSMs makes response information trivially redundant.",
+    "Whether production SPAs with genuine non-deterministic state transitions would show response PMI > 0 even when action-history is insufficient."
+  ]
+}
