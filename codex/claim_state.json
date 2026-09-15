@@ -561,6 +561,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Experiment measured yield metric viability on a single Magento shopping site only. Cross-site transfer (GitLab/Reddit) was not tested. MEASUREMENT_INVALID verdict due to pseudoreplication (7 unique tasks < 8 threshold) and missing accessibility API prevents claim advancement. Bounded shopping-site diagnostic does not establish cross-site metric generalizability."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34782350557",
+        "lane": "intel",
+        "decision": "INCONCLUSIVE",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested in this experiment. Single-site (Magento) measurement only. Cross-site generalization remains a hypothesis."
       }
     ],
     "C-LLM-INHERIT": [
@@ -635,6 +643,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Experiment measured DOM-based yield metric properties, not LLM agent inheritance from SPIDER. No LLM agents were involved. MEASUREMENT_INVALID verdict prevents even the prerequisite metric claim from advancing. C-LLM-INHERIT remains at HYPOTHESIS pending both a valid yield metric and an LLM agent experiment."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34782350557",
+        "lane": "intel",
+        "decision": "INCONCLUSIVE",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested in this experiment. LLM inheritance claim is orthogonal to metric validation."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -688,6 +704,14 @@
       }
     ],
     "C-MEAS-VALID": [
+      {
+        "experiment_id": "EXP-INTEL-34782350557",
+        "lane": "intel",
+        "decision": "INCONCLUSIVE",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Bounded diagnostic: under truncated-first-20 sampling of DEF-FALLBACK-INTERACTIVE locatable set, role-only counting yields ordering cart>listing>detail (reversal), but audit extrapolation to full DOM restores listing 0.019 > detail 0.006 > cart 0.0055. The reversal is an artifact of differential sample truncation and total_dom denominator variation, not evidence that the tightened definition per se destroys ordering. Original definition overcount confirmed (~10x reduction). Within-type stability preserved (listing CV 0.005, detail CV 0.037). Between-type discrimination holds but magnitude is definition- and denominator-sensitive (ratio 60 deduped vs parent 582). Full DOM enumeration required for definitive construct validity test. C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements beyond form scaffolding, but ordering robustness and denominator choice are unresolved."
+      },
       {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",

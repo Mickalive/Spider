@@ -964,6 +964,33 @@
         "handoff.json": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
       }
     },
+    "EXP-INTEL-34782350557": {
+      "lane": "intel",
+      "request_id": "46dc3464476c696c1d922217",
+      "created_at": "2026-09-13T20:57:47.563186+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means \u2014 computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+      "audit_status": "REVISE",
+      "decision": "INCONCLUSIVE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
+        "spec.json": "9f9445cd403fabbb68fd5b5091b7b1e29f12ffe71ac1d325168ce087d3e41b94",
+        "prereg.md": "d0af3ba509f3835b7e9bbe894a45d5db3fb4e2739e403bdedc793b482464d41e",
+        "freeze.json": "d85a1a22ccbeb1d06b4898ae4abc5a886fcad8bae18548d49381afc196917b25",
+        "result.json": "8b21e2308574e36dd22440b662654404cd2699b7609270dadad899fbc89c5efb",
+        "report.md": "15e4d42fc95db0d24bb936a0c9fa5e175d1d19389eea6bb8b19e790b5023bb5b",
+        "provenance.json": "fb6c06e73ef8b09c7b4bb758b89513ed3dc19a66507081efe44e07db78dd7343",
+        "audit.json": "4ac7dd2fe071b513ad3da4d5c233d982074ec23063a55e831b69dacc0e07d318",
+        "verdict.json": "ecd7d4e46841f1dbf764288f124cce43bb7f3dea360bb3ea19b26f986e2a5bc3",
+        "handoff.json": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
