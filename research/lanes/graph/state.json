@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-34788722106",
-  "last_experiment_id": "EXP-GRAPH-34755316488",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-34788722106",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) survive a confirmatory preregistration with structural-noise FP stress (optional field churn, null-valued fields, nested object variation) that replaces the degenerate stochastic-variation control, and does it maintain TP>=0.8 on schemas with 10-50 fields under realistic drift patterns?",
+  "next_question": "Can alternative staleness signals (session token validation, semantic embedding similarity, response-time profiling) distinguish true drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard-based freshness detection?",
   "promotion_ready": false,
-  "consecutive_failures": 9,
-  "updated_at": "2026-09-15T10:17:56.445826+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-15T15:08:51.778598+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
 }
