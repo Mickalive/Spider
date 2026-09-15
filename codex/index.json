@@ -276,6 +276,56 @@
         "handoff.json": "8e7d9b6afc77584d4575415d596134b542c4e0233cd29c6d0c31e64cdd174b4e"
       }
     },
+    "EXP-FRONTIER-34794649996": {
+      "lane": "frontier",
+      "request_id": "71821275a15d165e5fcc6c22",
+      "created_at": "2026-09-14T01:03:46.154250+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does per-page-type binned TV estimation with per-type bias correction recover absolute signal strength lost to pooled heterogeneous averaging, or is the 94.6% attenuation a fundamental property of action-dependent structure in non-stationary DGPs?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
+        "spec.json": "4784d231118e4986e3e20e1d03c457210e32918755677485ef5b987ee43dd95a",
+        "prereg.md": "235a160a124f161ce7bceb48795206fc2c487ac25999af5f035e2c4b93cf4a70",
+        "freeze.json": "ccea28a1d24596f4a867aef5c56b5fc7f9079e0a3d90b5e24219c89c0a8fd441",
+        "result.json": "e9a31824f82dfb5957772f903d1a1378b852f2d50b68a9f08ef4becc6fd312f0",
+        "report.md": "eed625595511a93d1cc509a550b31ba3b046fd31c15dc18a4a9a7ca9e9e91b5b",
+        "provenance.json": "ae232adefb3ead78b78d5cf320845348ce69a33ef9a15d32d182f1dd9a94326f",
+        "audit.json": "ab5663f269dd561e270c6a1c4d088e330d3fc4840e21c03df8a7bf680d8f6028",
+        "verdict.json": "b3f90495f4748ca29d4dccb7265c7395d7784b3852dbd055bec1f379975f5cfc",
+        "handoff.json": "2b1985aa624d23028cfedb73ccb5747667571e927351f3b8314ff2000071bbbf"
+      }
+    },
+    "EXP-FRONTIER-34881708619": {
+      "lane": "frontier",
+      "request_id": "6f567904a8ee565878f7c412",
+      "created_at": "2026-09-14T18:35:28.256789+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does pooled binned TV estimation maintain a fundamental advantage over per-type estimation when both use equal sample size (250 transitions per type), or does the 67% per-type/pooled ratio from the parent experiment reflect a sample-size confound rather than an estimator difference?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
+        "spec.json": "ac487a7f9b0cd6cc3c0c454e7b390c9d07b70f826dc991e92de38887356ed5ab",
+        "prereg.md": "37ff28f570b92a2d418ff448db0ccabc9973687c475a75a9418b13b0d7627931",
+        "freeze.json": "97927f814c7bf06bc420be1d559f7a2e0fa98413116fa98b1daeb8dfca3d2a79",
+        "result.json": "e3a3a45a47e19056690f33090989a21550eb442ad6f434d9b4e6476ff931ef45",
+        "report.md": "30763215fab2183820e400fd776dad6175c71e890d1c48dc10d1ec7c35e9eb53",
+        "provenance.json": "5f53d5fce05c747915359cf4e77270e4a2924a00a1cba7ce32610f09025a90c7",
+        "audit.json": "33bf5c93dca854ece51135a5a39baaec811430ceed2131ad5df73ec93991bc07",
+        "verdict.json": "8bb3868fd4abebd8f7b99df2dde909a8c2723a77000153119232532f085c7264",
+        "handoff.json": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -1292,6 +1342,31 @@
         "handoff.json": "11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f"
       }
     },
+    "EXP-PHYSICS-34846934524": {
+      "lane": "physics",
+      "request_id": "124e5ed3be43807f22b76852",
+      "created_at": "2026-09-14T13:04:07.512576+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with correlated non-determinism (persistent session_id that determines DOM variant at each FSM state, so DOM_before encodes session which determines DOM_after), does DOM structural features exhibit conditional PMI I(S_next; DOM_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is the discriminating test identified by parent audit V1: the parent tested independent per-step DOM observation noise where E[I]=0 by construction. Correlated non-determinism via persistent sessions is the only remaining locally-hosted DOM test where DOM_before could predict DOM_after through latent session state.",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
+        "spec.json": "b6573d94aac64894f9119e94a21b7a226beda34b4ce533a5165110540d0261db",
+        "prereg.md": "7f493f9b3803e293fba49fe8a0d72f3e4d6b753fbb4019f2f4f5e7e181ee3593",
+        "freeze.json": "b99097dfcf649ae8515dbf4d701937a439889880fc266fd25a03da86bc97ccae",
+        "result.json": "9d4b94800719ec9c4234b15a08d3b9de8adb9288d6dd656420a72e35bb6c702f",
+        "report.md": "dd4c9b3d82a582159aaee4e7421000f26cb055618775856d0cf9ee06d5d9ee73",
+        "provenance.json": "4b47ff6ca73b560a55acdc0256000ded0e0b10b9741950748b4b738be0e45149",
+        "audit.json": "12eb498a4fb606e5b63761faa41cb86a6f031167dc4cb1d77b77f1f7cf1eaa3b",
+        "verdict.json": "9601903a2734006b60dc6859b98ace1e8af1a7144220d1cd711cea3b9cdffd23",
+        "handoff.json": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -1865,6 +1940,31 @@
         "audit.json": "6b4dc0b3e2e5d6e88131c3de1ee2ea873cfcca1eeb14a47bd24648ff31f70b1c",
         "verdict.json": "123f67ce319db14357ac3a158acba729ea70ee9973142b8b4261daedf701ec67",
         "handoff.json": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
+      }
+    },
+    "EXP-RUNTIME-34741873198": {
+      "lane": "runtime",
+      "request_id": "3bc0c3eb9fb4c42b5c1d1068",
+      "created_at": "2026-09-13T06:05:07.305668+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from the client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "839a29f8e0fb8c6c6b11ff1737229b0bcc9d4a0aaf4ca1b8a813f38e63c9645a",
+        "spec.json": "f20fa9b611eacc2c3e6c787369c38dd769139776176cffaa1cec253fb5bc672d",
+        "prereg.md": "7260867d2b5a3b7650328ef467d83bb5228b6a2cbbb223b5f927335820eeb316",
+        "freeze.json": "0a53e81a699433cd56295b322beb3d40c1091760057c8eeedd919c88a5d2d417",
+        "result.json": "027b611be1fb0dd9c08a2fa5eef4711baaba2109ef2ba7f4cf026f6602044288",
+        "report.md": "ecb34a5687fe71e9acc6e48debdc534196d13e29f468bbd987b263d6be9f94c4",
+        "provenance.json": "a47706db4c90dc21258d66f0238798b30f66fb0b1aa15cb26dba1a4169958f9d",
+        "audit.json": "ada5b6aeb971d4884e2637c920c0a82df49c19b6b8e59290b2c906864bba17ce",
+        "verdict.json": "a3180f2cd038b702fea77f1d9293013b8777ec18238e2b34fca9d0c6fbf830ff",
+        "handoff.json": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
       }
     }
   }

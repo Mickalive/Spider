@@ -1,0 +1,20 @@
+{
+  "base_sha": "f96912acd91c39c50c88a274e84a66030bf45afa",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-13T06:05:07.305668+00:00",
+  "experiment_id": "EXP-RUNTIME-34741873198",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+  "lane": "runtime",
+  "origin_github_run_id": "34741873198",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34654566605",
+    "path": "research/experiments/EXP-RUNTIME-34654566605/handoff.json",
+    "sha256": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
+  },
+  "reason": "pulse",
+  "request_hash": "453793c9a2430c2752ee3ef3e8a6a8188c53e00e8de5176b78a03d7ead0fd447",
+  "request_id": "3bc0c3eb9fb4c42b5c1d1068",
+  "schema_version": 1
+}
