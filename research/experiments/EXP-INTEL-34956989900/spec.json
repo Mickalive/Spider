@@ -1,17 +1,27 @@
 {
   "experiment_id": "EXP-INTEL-34956989900",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "Does element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+  "hypothesis": "Element density (tightened_locatable_count / elements_with_bbox) is invariant to page-type denominator variation, whereas fraction (tightened_locatable_count / total_dom) is not. Specifically: (1) element density ordering listing > detail > cart holds under elements_with_bbox denominator; (2) element density variance across page types is reduced relative to fraction variance; (3) the ordering is stable across both ROLE_MAP variants (with and without 'a'->'link' mapping).",
+  "falsifier": "The ordering listing > detail > cart does NOT hold under elements_with_bbox denominator in either ROLE_MAP variant, OR the between-type discrimination ratio drops below 1.0 (within-type variance >= between-type variance), OR the density variance across page types increases relative to fraction variance under elements_with_bbox.",
+  "baselines": [
+    "Tightened interactive fraction with total_dom denominator (parent result, ordering reversed)",
+    "Original interactive fraction with total_dom denominator (pre-tightening baseline)",
+    "Extrapolated full-locatable-set density (parent audit BF-ORDERING-REVERSAL-ARTIFACT)"
+  ],
+  "positive_control": "All 7 tasks have tightened_locatable_count > 0 (identical to parent: reuses parent tightened counts from truncated first-20 sample)",
+  "null_control": "tightened_locatable_count <= original_locatable_elements on all tasks (identical to parent: reuses parent tightened counts)",
+  "measurement_validity": [
+    "Reuses existing raw measurement data from EXP-INTEL-34718481334 (no new Docker execution required)",
+    "elements_with_bbox values extracted from same raw DOM snapshot as total_dom_elements",
+    "Tightened counts are from truncated first-20 sample (same limitation as parent); density values are proportional estimates, not full-DOM measurements",
+    "Cart pseudoreplication (2 identical entries) retained from parent data; deduped statistics reported separately",
+    "Two ROLE_MAP variants tested: with mapping ('a'->'link', 'input'->'textbox') and without (raw role values)"
+  ],
+  "decision_rule": "If ALL of: (1) element density ordering listing > detail > cart holds under elements_with_bbox denominator in at least one ROLE_MAP variant (with or without mapping), (2) between-type variance > within-type variance (discrimination ratio > 1.0) under elements_with_bbox denominator in at least one ROLE_MAP variant, (3) positive_control pass (all tightened > 0), (4) null_control pass (tightened <= original), then verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID (denominator sensitivity partially resolved). If ordering does not hold under elements_with_bbox in any variant, or discrimination fails, verdict = FALSIFIED-IN-SETTING. If data extraction fails or elements_with_bbox values are missing, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Resolves the denominator sensitivity confound from EXP-INTEL-34782350557. Validates elements_with_bbox as a more appropriate normalizer for interactive element density, advancing the metric toward product-ready yield estimation. Provides a denominator-controlled basis for cross-site comparison.",
+  "product_consequence_negative": "If elements_with_bbox does not resolve sensitivity, the interactive fraction metric remains denominator-confounded and cannot be used for yield estimation without further refinement. Product lane must seek alternative normalization or abandon fraction-based yield metrics.",
+  "estimated_cost": "Very low: offline computation only, no Docker/model/browser calls. 7 tasks x 4 density computations (2 denominators x 2 ROLE_MAPs) plus variance/ratio statistics.",
+  "expected_information_gain": "High: directly resolves the denominator sensitivity confound that was the primary unresolved issue from EXP-INTEL-34782350557. A positive result advances metric validation; a negative result constrains the normalization approach. Both outcomes change the next-step decision for the metric validation program."
 }
