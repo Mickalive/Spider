@@ -1,0 +1,408 @@
+{
+  "per_schema_size": {
+    "10": {
+      "threshold": 0.998107,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 0.9778,
+      "overall_tp_ci_true_drift": [
+        0.9226,
+        0.9939
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.893511,
+          "detection_margin": 0.104596,
+          "threshold": 0.998107
+        },
+        "remove_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.955982,
+          "detection_margin": 0.042125,
+          "threshold": 0.998107
+        },
+        "change_type": {
+          "detected_count": 28,
+          "total": 30,
+          "detection_rate": 0.9333,
+          "ci_lower": 0.7868,
+          "ci_upper": 0.9815,
+          "mean_semantic_similarity": 0.995451,
+          "detection_margin": 0.002656,
+          "threshold": 0.998107
+        },
+        "optional_field_churn": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.846501,
+          "detection_margin": 0.151606,
+          "threshold": 0.998107
+        },
+        "null_valued_fields": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.89397,
+          "detection_margin": 0.104137,
+          "threshold": 0.998107
+        },
+        "nested_object_variation": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.950496,
+          "detection_margin": 0.047611,
+          "threshold": 0.998107
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      }
+    },
+    "20": {
+      "threshold": 0.999825,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 0.9556,
+      "overall_tp_ci_true_drift": [
+        0.9292,
+        0.9846
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.956913,
+          "detection_margin": 0.042912,
+          "threshold": 0.999825
+        },
+        "remove_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.988458,
+          "detection_margin": 0.011367,
+          "threshold": 0.999825
+        },
+        "change_type": {
+          "detected_count": 26,
+          "total": 30,
+          "detection_rate": 0.8667,
+          "ci_lower": 0.7032,
+          "ci_upper": 0.9469,
+          "mean_semantic_similarity": 0.99927,
+          "detection_margin": 0.000555,
+          "threshold": 0.999825
+        },
+        "optional_field_churn": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.892052,
+          "detection_margin": 0.107773,
+          "threshold": 0.999825
+        },
+        "null_valued_fields": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.909351,
+          "detection_margin": 0.090474,
+          "threshold": 0.999825
+        },
+        "nested_object_variation": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.983378,
+          "detection_margin": 0.016447,
+          "threshold": 0.999825
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      }
+    },
+    "30": {
+      "threshold": 0.999932,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 0.9889,
+      "overall_tp_ci_true_drift": [
+        0.9475,
+        0.9874
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.965749,
+          "detection_margin": 0.034183,
+          "threshold": 0.999932
+        },
+        "remove_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.990544,
+          "detection_margin": 0.009388,
+          "threshold": 0.999932
+        },
+        "change_type": {
+          "detected_count": 29,
+          "total": 30,
+          "detection_rate": 0.9667,
+          "ci_lower": 0.8333,
+          "ci_upper": 0.9941,
+          "mean_semantic_similarity": 0.999801,
+          "detection_margin": 0.000131,
+          "threshold": 0.999932
+        },
+        "optional_field_churn": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.871611,
+          "detection_margin": 0.128321,
+          "threshold": 0.999932
+        },
+        "null_valued_fields": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.890304,
+          "detection_margin": 0.109628,
+          "threshold": 0.999932
+        },
+        "nested_object_variation": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.986837,
+          "detection_margin": 0.013095,
+          "threshold": 0.999932
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      }
+    },
+    "50": {
+      "threshold": 0.999979,
+      "fp_rate_fresh": 0.0,
+      "fp_ci_fresh": [
+        0.0,
+        0.1135
+      ],
+      "overall_tp_rate_true_drift": 0.9667,
+      "overall_tp_ci_true_drift": [
+        0.9496,
+        0.9848
+      ],
+      "overall_noise_fp_rate": 1.0,
+      "overall_noise_fp_ci": [
+        0.9591,
+        1.0
+      ],
+      "per_pattern": {
+        "add_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.978945,
+          "detection_margin": 0.021034,
+          "threshold": 0.999979
+        },
+        "remove_field": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.994372,
+          "detection_margin": 0.005607,
+          "threshold": 0.999979
+        },
+        "change_type": {
+          "detected_count": 27,
+          "total": 30,
+          "detection_rate": 0.9,
+          "ci_lower": 0.7438,
+          "ci_upper": 0.9654,
+          "mean_semantic_similarity": 0.999971,
+          "detection_margin": 8e-06,
+          "threshold": 0.999979
+        },
+        "optional_field_churn": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.871544,
+          "detection_margin": 0.128435,
+          "threshold": 0.999979
+        },
+        "null_valued_fields": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.895956,
+          "detection_margin": 0.104023,
+          "threshold": 0.999979
+        },
+        "nested_object_variation": {
+          "detected_count": 30,
+          "total": 30,
+          "detection_rate": 1.0,
+          "ci_lower": 0.8865,
+          "ci_upper": 1.0,
+          "mean_semantic_similarity": 0.992128,
+          "detection_margin": 0.007851,
+          "threshold": 0.999979
+        }
+      },
+      "noise_pattern_details": {
+        "optional_field_churn": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "null_valued_fields": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        },
+        "nested_object_variation": {
+          "fp_count": 30,
+          "fp_total": 30,
+          "fp_rate": 1.0
+        }
+      }
+    }
+  },
+  "overall": {
+    "total_true_stale_samples": 360,
+    "total_true_detected": 350,
+    "overall_tp_rate": 0.9722,
+    "overall_tp_ci": [
+      0.9496,
+      0.9848
+    ],
+    "total_fresh_samples": 480,
+    "total_fresh_fp": 360,
+    "overall_fp_rate_fresh": 0.75,
+    "overall_fp_ci_fresh": [
+      0.7094,
+      0.7866
+    ]
+  }
+}

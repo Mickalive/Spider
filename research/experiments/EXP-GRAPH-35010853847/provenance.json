@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35010853847",
+  "lane": "graph",
+  "github_run_id": "35010853847",
+  "github_run_attempt": "1",
+  "executed_at": "2026-09-15T19:05:05.911927+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1"
+    },
+    "embedding_method": "TF-IDF (sentence-transformers unavailable)",
+    "note": "sentence-transformers requires torch (~2GB), not installed in this environment. TF-IDF was the preregistered fallback."
+  },
+  "commits": {
+    "pre_execute_sha": "19f72e75f0cb900380e535a0ef48ca54ea125c97",
+    "base_sha": "126d4a2ddbd3be82b34567cecaab49b26f0f1c21",
+    "execution_checkpoint": "research/experiments/EXP-GRAPH-35010853847/execution_checkpoint.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-34788722106",
+    "handoff_path": "research/experiments/EXP-GRAPH-34788722106/handoff.json",
+    "handoff_sha256": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
+  },
+  "frozen_inputs": {
+    "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
+    "spec.json": "95fe42e7359c38d83433a4ca62c624b05e93c90417227126fa5e93022a3ae365",
+    "prereg.md": "2258952559c42b5f00204b02d05602cb923f45b55ab6693242aa74df99c94f79"
+  },
+  "fixtures": {
+    "mock_schemas.json": {
+      "path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+      "sha256": "343ead30c1bd8effa57f4a9b9651e31681bd29b17825937bd812b5bc3be337a1",
+      "role": "fixture",
+      "note": "Parent experiment's mock schemas, reused for direct comparability. Baselines verified against regenerated schemas (all 720 Jaccard similarities match within 1e-6)."
+    }
+  },
+  "code": {
+    "execute_semantic_embedding.py": {
+      "path": "research/graph/freshness_detection/execute_semantic_embedding.py",
+      "sha256": "9750a1c75f19ea4195d4b181975aa1ea3e26c0dc7ac22ad180d5805ab13ba274",
+      "role": "code",
+      "note": "Experiment execution script. Generates schemas from parent baselines, computes TF-IDF semantic similarity, optimizes threshold, evaluates decision rule."
+    }
+  },
+  "artifacts": {
+    "semantic_raw_evidence.json": {
+      "path": "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_raw_evidence.json",
+      "sha256": "4e2ba216e4381a8eb479dc7f755caf8ce63600c6e19b6b98a7aacf6b8f1ecfe5",
+      "role": "raw"
+    },
+    "semantic_derived_measurements.json": {
+      "path": "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_derived_measurements.json",
+      "sha256": "9893f59871a056932d1755bf58f77aef54676ad028aafd1999835ac3f575ebba",
+      "role": "derived"
+    },
+    "semantic_decision_evaluation.json": {
+      "path": "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_decision_evaluation.json",
+      "sha256": "fbf86281acfabcfdfe130f4da78d257f034776aa8386f1d033868f97f6c9f792",
+      "role": "derived"
+    }
+  },
+  "execution_details": {
+    "seed": 20260913,
+    "schema_sizes": [10, 20, 30, 50],
+    "samples_per_group": 30,
+    "total_schema_pairs": 2280,
+    "drift_patterns_true": ["add_field", "remove_field", "change_type"],
+    "drift_patterns_noise": ["optional_field_churn", "null_valued_fields", "nested_object_variation"],
+    "tfidf_params": {
+      "analyzer": "word",
+      "token_pattern": "[a-zA-Z0-9_]+",
+      "lowercase": true,
+      "sublinear_tf": true,
+      "vocab_size": 551
+    },
+    "threshold_optimization": "80/20 calibration/test split, F1-optimal threshold",
+    "statistical_tests": [
+      "Wilson 95% CI for TP and FP at each schema size",
+      "Mann-Whitney U test (one-sided, H1: true drift < noise)",
+      "Bonferroni correction for 4 schema sizes (alpha = 0.0125)",
+      "Cohen's d effect size"
+    ],
+    "ensemble_optimization": "10-fold CV on alpha ∈ [0, 1] for alpha × Jaccard + (1-alpha) × Semantic"
+  },
+  "reproduction_command": "python3 research/graph/freshness_detection/execute_semantic_embedding.py",
+  "reproduction_notes": [
+    "Requires numpy, scipy, scikit-learn (pip install numpy scipy scikit-learn)",
+    "Requires access to parent experiment mock_schemas.json at research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+    "Deterministic: same seed (20260913) produces identical results",
+    "Schema generation verified against parent Jaccard similarities (all 720 match within 1e-6)"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "decision": "FALSIFIED-IN-SETTING",
+  "violations": [
+    "n=10 pattern=change_type: TP CI lower bound 0.7868 < 0.8",
+    "n=10 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=10 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=10 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=10: Mann-Whitney p=1.000000 >= 0.0125",
+    "n=20 pattern=change_type: TP CI lower bound 0.7032 < 0.8",
+    "n=20 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=20 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=20 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=20: Mann-Whitney p=1.000000 >= 0.0125",
+    "n=30 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=30 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=30 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=30: Mann-Whitney p=1.000000 >= 0.0125",
+    "n=50 pattern=change_type: TP CI lower bound 0.7438 < 0.8",
+    "n=50 pattern=optional_field_churn: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=50 pattern=null_valued_fields: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=50 pattern=nested_object_variation: Noise FP CI upper bound 1.0000 > 0.15",
+    "n=50: Mann-Whitney p=1.000000 >= 0.0125"
+  ],
+  "evaluated_at": "2026-09-15T19:05:05.911927+00:00"
+}
