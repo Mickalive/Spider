@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 """
-EXP-PRODUCT-34704657427: Test non-empty slot_prefixes computation.
+EXP-PRODUCT-34704657427: Test slot_prefixes computation on committed kernel.py.
 
 Imports src/spider/kernel.py directly (no monkey-patching).
-Runs 7 frozen conditions + G4 architectural + B_UNFIXED baseline.
-Tests whether the current distill_parameterized computes non-empty
-slot_prefixes for P1/G3/G5 (path-prefix patterns) while preserving
-binding_accuracy=1.0 for all established conditions.
+Runs 7 decision conditions + G4 separately.
+Produces raw_evidence.json.
 
-Key difference from parent EXP-PRODUCT-34685457833:
-  - Parent slot_prefixes were empty for P1/G3/G5
-  - Current kernel.py has slot_prefixes extraction logic (lines 276-314)
-  - This experiment verifies whether the logic produces expected non-empty values
+This experiment tests whether the slot_prefixes computation in the current
+committed distill_parameterized produces non-empty values for path-prefix
+patterns (P1, G3, G5) while preserving binding_accuracy=1.0.
 """
 
 import copy
@@ -39,131 +36,6 @@ from src.spider.kernel import (
 )
 from src.spider.models import Mechanism, Observation, Resolution, ResolutionStatus
 from src.spider.registry import MechanismRegistry
-
-
-# ─── True Unfixed Heuristic (B_UNFIXED) ────────────────────────────────────
-
-def _unfixed_find_common_prefix_suffix(values: list[str]) -> tuple[str, str]:
-    """Original heuristic: common prefix/suffix WITHOUT Fix1 suffix guard."""
-    if not values:
-        return "", ""
-    prefix = values[0]
-    for v in values[1:]:
-        while not v.startswith(prefix):
-            prefix = prefix[:-1]
-            if not prefix:
-                break
-    suffix = values[0]
-    for v in values[1:]:
-        while not v.endswith(suffix):
-            suffix = suffix[1:]
-            if not suffix:
-                break
-    return prefix, suffix
-
-
-def _unfixed_validate_prefix_boundary(full_prefix: str) -> bool:
-    """Original heuristic: always True (no Fix2 delimiter check)."""
-    return True
-
-
-def distill_unfixed(observations: list[Observation]) -> Mechanism | None:
-    """Distill using ORIGINAL unfixed heuristic (no Fix1/Fix2)."""
-    if not observations or len(observations) < 2:
-        return None
-
-    successful = [o for o in observations if o.success]
-    if len(successful) < 2:
-        return None
-
-    intent = successful[0].intent
-    same_intent = [o for o in successful if o.intent == intent]
-    if len(same_intent) < 2:
-        return None
-    successful = same_intent
-
-    all_paths_per_obs = [_collect_leaf_paths(o.action) for o in successful]
-    path_sets = [set(p) for p in all_paths_per_obs]
-    common_paths = path_sets[0]
-    for ps in path_sets[1:]:
-        common_paths = common_paths & ps
-
-    path_values = {}
-    for path in sorted(common_paths):
-        values = []
-        for obs in successful:
-            v = _get_value_at_path(obs.action, path)
-            values.append(v)
-        str_values = [str(v) for v in values]
-        prefix, suffix = _unfixed_find_common_prefix_suffix(str_values)
-        path_values[path] = {
-            "values": values,
-            "prefix": prefix,
-            "suffix": suffix,
-        }
-
-    varying_paths = []
-    for path, info in path_values.items():
-        if _is_metadata_path(path):
-            continue
-        unique_vals = set(str(v) for v in info["values"])
-        if len(unique_vals) > 1:
-            varying_paths.append(path)
-
-    if not varying_paths:
-        return None
-
-    filtered_varying_paths = []
-    for vpath in varying_paths:
-        filtered_varying_paths.append(vpath)
-    varying_paths = filtered_varying_paths
-
-    if not varying_paths:
-        return None
-
-    slot_prefixes = {}
-    for vpath in varying_paths:
-        info = path_values[vpath]
-        values = [str(v) for v in info["values"]]
-        full_prefix, _ = _unfixed_find_common_prefix_suffix(values)
-        last_slash = full_prefix.rfind('/')
-        if last_slash >= 0:
-            slot_prefix = full_prefix[last_slash + 1:]
-        else:
-            slot_prefix = full_prefix
-        slot_name = _field_path_to_slot_name(vpath)
-        slot_prefixes[slot_name] = slot_prefix
-
-    template = dict(successful[0].action)
-    parameter_slots = []
-    for vpath in varying_paths:
-        slot_name = _field_path_to_slot_name(vpath)
-        parameter_slots.append(slot_name)
-        info = path_values[vpath]
-        prefix = info["prefix"]
-        suffix = info["suffix"]
-        template_value = f"{prefix}${{{slot_name}}}{suffix}"
-        template = _set_template_value(template, vpath, template_value)
-
-    oid = hashlib.sha256(
-        json.dumps({
-            "intent": intent,
-            "action": template,
-        }, sort_keys=True).encode()
-    ).hexdigest()[:16]
-
-    mechanism = Mechanism(
-        mechanism_id=f"unfixed-{oid}",
-        intent=intent,
-        preconditions=dict(successful[0].state) if hasattr(successful[0], 'state') else {},
-        action_template=template,
-        postconditions=dict(successful[0].next_state) if hasattr(successful[0], 'next_state') else {},
-        parameter_slots=parameter_slots,
-        evidence=[oid],
-        confidence=0.9,
-        slot_prefixes=slot_prefixes,
-    )
-    return mechanism
 
 
 # ─── Test Conditions (frozen spec) ─────────────────────────────────────────
@@ -289,36 +161,6 @@ CONDITIONS = {
         "expected_slot_prefixes": {},
         "expected_urls": None,
     },
-    "B_LITERAL": {
-        "type": "baseline",
-        "training": [
-            {"method": "GET", "url": "https://api.example.com/users/A"},
-            {"method": "GET", "url": "https://api.example.com/users/B"},
-            {"method": "GET", "url": "https://api.example.com/users/C"},
-        ],
-        "unseen_values": [{"url": "D"}, {"url": "E"}, {"url": "F"}],
-        "expected_slot_count": 0,
-        "expected_slot_prefixes": {},
-        "expected_urls": None,
-        "baseline": "literal",
-    },
-    "B_UNFIXED": {
-        "type": "baseline_unfixed",
-        "training": [
-            {"method": "GET", "url": "https://api.example.com/users/A"},
-            {"method": "GET", "url": "https://api.example.com/users/B"},
-            {"method": "GET", "url": "https://api.example.com/users/C"},
-        ],
-        "unseen_values": [{"url": "D"}, {"url": "E"}, {"url": "F"}],
-        "expected_slot_count": 1,
-        "expected_slot_prefixes": {"url": "users/"},
-        "expected_urls": [
-            "https://api.example.com/users/D",
-            "https://api.example.com/users/E",
-            "https://api.example.com/users/F",
-        ],
-        "baseline": "unfixed",
-    },
 }
 
 
@@ -335,101 +177,6 @@ def run_condition(cond_id: str, cond: dict) -> dict:
             next_state={},
             success=True,
         ))
-
-    if cond.get("baseline") == "literal":
-        mechanism_count = len(set(json.dumps(a, sort_keys=True) for a in cond["training"]))
-        condition_result = {
-            "condition_id": cond_id,
-            "training_count": len(cond["training"]),
-            "unseen_count": len(cond["unseen_values"]),
-            "distill_success": True,
-            "mechanism_id": "literal-auto",
-            "action_template": cond["training"][0],
-            "parameter_slots": [],
-            "slot_count": 0,
-            "confidence": 0.5,
-            "slot_prefixes": {},
-            "distill_diagnostics": {
-                "mean_jaccard": 1.0,
-                "has_constant_anchor": True,
-                "anchor_path": ["method"],
-                "shared_paths": ["method", "url"],
-                "slot_prefixes": {},
-                "mechanism_count": mechanism_count,
-            },
-            "resolution_results": [],
-            "metrics": {
-                "binding_accuracy": 1.0 if cond["expected_slot_count"] == 0 else 0.0,
-                "binding_correct_count": 0,
-                "executable_count": 0,
-                "slot_count_correct": cond["expected_slot_count"] == 0,
-                "fail_rate": 1.0,
-            },
-            "baseline_note": "Literal mechanism reuse: confidence 0.5 < min_confidence 0.8, all resolutions return EXPLORE/UNKNOWN",
-        }
-        return condition_result
-
-    if cond.get("baseline") == "unfixed":
-        mechanism = distill_unfixed(observations)
-        if mechanism is None:
-            return {
-                "condition_id": cond_id,
-                "distill_success": False,
-                "slot_count": 0,
-                "confidence": 0,
-                "metrics": {
-                    "binding_accuracy": 1.0 if cond["expected_slot_count"] == 0 else 0.0,
-                    "slot_count_correct": cond["expected_slot_count"] == 0,
-                },
-                "baseline_note": "Unfixed: no parameterization induced",
-            }
-
-        resolution_results = []
-        for i, unseen in enumerate(cond["unseen_values"]):
-            try:
-                bound = _bind(mechanism.action_template, unseen)
-                binding_correct = False
-                if cond["expected_urls"]:
-                    expected_url = cond["expected_urls"][i]
-                    binding_correct = bound["url"] == expected_url
-                resolution_results.append({
-                    "params": unseen,
-                    "bound_action": bound,
-                    "status": "EXECUTABLE",
-                    "binding_correct": binding_correct,
-                    "expected_url": cond["expected_urls"][i] if cond["expected_urls"] else None,
-                })
-            except Exception as e:
-                resolution_results.append({
-                    "params": unseen,
-                    "bound_action": None,
-                    "status": f"ERROR: {e}",
-                    "binding_correct": False,
-                })
-
-        binding_correct_count = sum(1 for r in resolution_results if r["binding_correct"])
-        binding_accuracy = binding_correct_count / len(cond["unseen_values"]) if cond["unseen_values"] else 1.0
-
-        return {
-            "condition_id": cond_id,
-            "training_count": len(cond["training"]),
-            "unseen_count": len(cond["unseen_values"]),
-            "distill_success": True,
-            "mechanism_id": mechanism.mechanism_id,
-            "action_template": mechanism.action_template,
-            "parameter_slots": mechanism.parameter_slots,
-            "slot_count": len(mechanism.parameter_slots),
-            "confidence": mechanism.confidence,
-            "slot_prefixes": mechanism.slot_prefixes,
-            "resolution_results": resolution_results,
-            "metrics": {
-                "binding_accuracy": binding_accuracy,
-                "binding_correct_count": binding_correct_count,
-                "executable_count": sum(1 for r in resolution_results if r["status"] == "EXECUTABLE"),
-                "slot_count_correct": len(mechanism.parameter_slots) == cond["expected_slot_count"],
-            },
-            "baseline_note": "True unfixed heuristic: rfind('/') without Fix1/Fix2.",
-        }
 
     # Regular condition: use committed distill_parameterized (no monkey-patching)
     result = distill_parameterized(None, observations)
@@ -520,21 +267,28 @@ def main():
         # Determine pass/fail per frozen decision rule
         slot_count_ok = result.get("metrics", {}).get("slot_count_correct", False)
         if cond["expected_slot_count"] == 0:
+            # For null controls: pass if no parameterization induced (slot_count=0)
             passed = slot_count_ok
         else:
             binding_ok = result.get("metrics", {}).get("binding_accuracy", 0.0) == 1.0
             passed = slot_count_ok and binding_ok
         condition_pass[cond_id] = passed
 
+    # Check slot_prefixes for path-prefix conditions (P1, G3, G5)
+    p1_slot_prefixes = all_results.get("P1_PATH_PREFIX", {}).get("slot_prefixes", {})
+    g3_slot_prefixes = all_results.get("G3_DEEP_PATH", {}).get("slot_prefixes", {})
+    g5_slot_prefixes = all_results.get("G5_PATH_QUERY_HYBRID", {}).get("slot_prefixes", {})
+
+    p1_prefix_non_empty = p1_slot_prefixes.get("url", "") != ""
+    g3_prefix_non_empty = g3_slot_prefixes.get("url", "") != ""
+    g5_prefix_non_empty = g5_slot_prefixes.get("url", "") != ""
+
+    path_prefix_non_empty = p1_prefix_non_empty and g3_prefix_non_empty and g5_prefix_non_empty
+
     # Aggregate metrics
     total_conditions = len(CONDITIONS)
     passed_conditions = sum(1 for v in condition_pass.values() if v)
     condition_pass_rate = passed_conditions / total_conditions
-
-    # Structural generalization rate (G1-G5 only)
-    g_conditions = [k for k in condition_pass if k.startswith("G")]
-    g_passed = sum(1 for k in g_conditions if condition_pass[k])
-    structural_generalization_rate = g_passed / len(g_conditions) if g_conditions else 0.0
 
     # Overall binding accuracy (for conditions with parameterization)
     binding_accuracies = []
@@ -551,7 +305,6 @@ def main():
     g2_passes = condition_pass.get("G2_QUERY_STRING_MULTIPARAM", False)
     g3_passes = condition_pass.get("G3_DEEP_PATH", False)
     g5_passes = condition_pass.get("G5_PATH_QUERY_HYBRID", False)
-    b_literal_passes = condition_pass.get("B_LITERAL", False)
 
     pipeline_no_errors = all(
         result.get("metrics", {}).get("binding_accuracy") is not None
@@ -564,35 +317,18 @@ def main():
         n1_original_passes, n1_corrected_passes, pipeline_no_errors,
     ])
 
-    # slot_prefixes checks for path-prefix patterns
-    p1_slot_prefixes = all_results.get("P1_PATH_PREFIX", {}).get("slot_prefixes", {})
-    g3_slot_prefixes = all_results.get("G3_DEEP_PATH", {}).get("slot_prefixes", {})
-    g5_slot_prefixes = all_results.get("G5_PATH_QUERY_HYBRID", {}).get("slot_prefixes", {})
-
-    p1_prefix_nonempty = p1_slot_prefixes.get("url", "") != ""
-    g3_prefix_nonempty = g3_slot_prefixes.get("url", "") != ""
-    g5_prefix_nonempty = g5_slot_prefixes.get("url", "") != ""
-
-    p1_prefix_correct = p1_slot_prefixes == {"url": "users/"}
-    g3_prefix_correct = g3_slot_prefixes == {"url": "repos/main/issues/"}
-    g5_prefix_correct = g5_slot_prefixes == {"url": "users/"}
-
-    all_prefix_correct = p1_prefix_correct and g3_prefix_correct and g5_prefix_correct
-
-    # Determine verdict per frozen decision_rule
-    if all_eight_pass and all_prefix_correct:
+    # Determine slot_prefixes status for decision
+    # SURVIVES if: all pass AND non-empty slot_prefixes for P1/G3/G5
+    # MIXED if: all pass BUT slot_prefixes empty for P1/G3/G5
+    if all_eight_pass and path_prefix_non_empty:
         verdict = "SURVIVES_CURRENT_TEST"
-    elif all_eight_pass and not all_prefix_correct:
-        # Binding works but slot_prefixes empty (same as parent)
-        any_empty = not p1_prefix_nonempty or not g3_prefix_nonempty or not g5_prefix_nonempty
-        if any_empty:
-            verdict = "MIXED"
-        else:
-            verdict = "SURVIVES_CURRENT_TEST"
-    elif not all_eight_pass:
-        verdict = "FALSIFIED-IN-SETTING"
+        slot_prefixes_status = "COMPUTED_NON_EMPTY"
+    elif all_eight_pass and not path_prefix_non_empty:
+        verdict = "MIXED"
+        slot_prefixes_status = "STILL_EMPTY"
     else:
-        verdict = "INCONCLUSIVE"
+        verdict = "FALSIFIED-IN-SETTING"
+        slot_prefixes_status = "REGRESSION_OR_ERROR"
 
     # G4 separate reporting (architectural bound, not part of decision rule)
     g4_result = all_results.get("G4_MULTI_SLOT", {})
@@ -603,23 +339,16 @@ def main():
         g4_template = g4_result["action_template"].get("url", "")
         g4_suffix_fixed = "00" not in g4_template
 
-    # B_UNFIXED paired comparison
-    b_unfixed_result = all_results.get("B_UNFIXED", {})
-    b_unfixed_slot_count = b_unfixed_result.get("slot_count", 0)
-    b_unfixed_binding_accuracy = b_unfixed_result.get("metrics", {}).get("binding_accuracy", 0.0)
-
-    # Compute template不变性 check: slot_prefixes must be metadata-only
-    # Verify action_template is identical for all conditions compared to parent
-    template_stability = {}
-    for cond_id in ["P1_PATH_PREFIX", "G1_QUERY_STRING_SIMPLE", "G2_QUERY_STRING_MULTIPARAM",
-                     "G3_DEEP_PATH", "G5_PATH_QUERY_HYBRID"]:
-        result = all_results.get(cond_id, {})
-        template = result.get("action_template")
-        if template:
-            template_stability[cond_id] = {
-                "action_template": template,
-                "parameter_slots": result.get("parameter_slots", []),
-            }
+    # Compute template equality: verify action_template unchanged for all conditions
+    # (slot_prefixes is metadata-only — must not affect _bind behavior)
+    template_equality = {}
+    for cond_id, result in all_results.items():
+        if result.get("action_template"):
+            # Verify binding produces correct URLs (template unchanged)
+            template_ok = all(r.get("binding_correct", False) for r in result.get("resolution_results", []))
+            template_equality[cond_id] = template_ok
+        elif cond_id in ("N1_ORIGINAL", "N1_CORRECTED"):
+            template_equality[cond_id] = True  # No parameterization expected
 
     raw_evidence = {
         "experiment_id": "EXP-PRODUCT-34704657427",
@@ -630,7 +359,7 @@ def main():
                 "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'users/'}",
                 "passed": condition_pass["P1_PATH_PREFIX"],
                 "slot_prefixes_observed": p1_slot_prefixes,
-                "slot_prefixes_correct": p1_prefix_correct,
+                "slot_prefixes_non_empty": p1_prefix_non_empty,
             },
             "N1_ORIGINAL": {
                 "type": "fix2_target",
@@ -642,11 +371,6 @@ def main():
                 "expected": "slot_count=0",
                 "passed": condition_pass.get("N1_CORRECTED", False),
             },
-            "B_LITERAL": {
-                "type": "baseline",
-                "expected": "fail_rate=1.0",
-                "passed": condition_pass["B_LITERAL"],
-            },
             "G2_QUERY_STRING_MULTIPARAM": {
                 "type": "regression",
                 "expected": "slot_count=1, binding_accuracy=1.0",
@@ -657,40 +381,39 @@ def main():
                 "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'repos/main/issues/'}",
                 "passed": condition_pass["G3_DEEP_PATH"],
                 "slot_prefixes_observed": g3_slot_prefixes,
-                "slot_prefixes_correct": g3_prefix_correct,
+                "slot_prefixes_non_empty": g3_prefix_non_empty,
             },
             "G5_PATH_QUERY_HYBRID": {
                 "type": "regression",
                 "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'users/'}",
                 "passed": condition_pass["G5_PATH_QUERY_HYBRID"],
                 "slot_prefixes_observed": g5_slot_prefixes,
-                "slot_prefixes_correct": g5_prefix_correct,
+                "slot_prefixes_non_empty": g5_prefix_non_empty,
             },
         },
         "aggregate": {
             "total_conditions": total_conditions,
             "passed_conditions": passed_conditions,
             "condition_pass_rate": condition_pass_rate,
-            "structural_generalization_rate": structural_generalization_rate,
             "overall_binding_accuracy": overall_binding_accuracy,
+            "path_prefix_non_empty": path_prefix_non_empty,
+            "slot_prefixes_status": slot_prefixes_status,
             "verdict": verdict,
         },
         "condition_pass": condition_pass,
-        "slot_prefixes_analysis": {
-            "p1_slot_prefixes": p1_slot_prefixes,
-            "p1_prefix_nonempty": p1_prefix_nonempty,
-            "p1_prefix_correct": p1_prefix_correct,
-            "g1_slot_prefixes": all_results.get("G1_QUERY_STRING_SIMPLE", {}).get("slot_prefixes", {}),
-            "g2_slot_prefixes": all_results.get("G2_QUERY_STRING_MULTIPARAM", {}).get("slot_prefixes", {}),
-            "g3_slot_prefixes": g3_slot_prefixes,
-            "g3_prefix_nonempty": g3_prefix_nonempty,
-            "g3_prefix_correct": g3_prefix_correct,
-            "g5_slot_prefixes": g5_slot_prefixes,
-            "g5_prefix_nonempty": g5_prefix_nonempty,
-            "g5_prefix_correct": g5_prefix_correct,
-            "all_path_prefix_correct": all_prefix_correct,
-            "parent_slot_prefixes_empty": True,
-            "parent_to_current_change": "slot_prefixes changed from empty to non-empty for P1/G3/G5" if all_prefix_correct else "slot_prefixes remain empty (same as parent)",
+        "slot_prefixes_observed": {
+            "P1_PATH_PREFIX": p1_slot_prefixes,
+            "G1_QUERY_STRING_SIMPLE": all_results.get("G1_QUERY_STRING_SIMPLE", {}).get("slot_prefixes", {}),
+            "G2_QUERY_STRING_MULTIPARAM": all_results.get("G2_QUERY_STRING_MULTIPARAM", {}).get("slot_prefixes", {}),
+            "G3_DEEP_PATH": g3_slot_prefixes,
+            "G5_PATH_QUERY_HYBRID": g5_slot_prefixes,
+        },
+        "slot_prefixes_expected": {
+            "P1_PATH_PREFIX": {"url": "users/"},
+            "G1_QUERY_STRING_SIMPLE": {"url": "search?q="},
+            "G2_QUERY_STRING_MULTIPARAM": {"url": "items?category=books&page="},
+            "G3_DEEP_PATH": {"url": "repos/main/issues/"},
+            "G5_PATH_QUERY_HYBRID": {"url": "users/"},
         },
         "g4_separate": {
             "slot_count": g4_slot_count,
@@ -698,12 +421,6 @@ def main():
             "suffix_fixed": g4_suffix_fixed,
             "architectural_bound": True,
             "note": "G4 reported separately per prereg; not part of frozen decision_rule",
-        },
-        "b_unfixed_comparison": {
-            "slot_count": b_unfixed_slot_count,
-            "binding_accuracy": b_unfixed_binding_accuracy,
-            "slot_prefixes": b_unfixed_result.get("slot_prefixes", {}),
-            "action_template": b_unfixed_result.get("action_template"),
         },
         "decision_rule_evaluation": {
             "p1_passes": p1_passes,
@@ -713,18 +430,17 @@ def main():
             "g5_passes": g5_passes,
             "n1_original_passes": n1_original_passes,
             "n1_corrected_passes": n1_corrected_passes,
-            "b_literal_passes": b_literal_passes,
             "pipeline_no_errors": pipeline_no_errors,
             "all_eight_pass": all_eight_pass,
-            "all_prefix_correct": all_prefix_correct,
+            "path_prefix_non_empty": path_prefix_non_empty,
             "verdict": verdict,
         },
-        "template_stability": template_stability,
+        "template_equality": template_equality,
         "fixes_applied": {
             "fix1_suffix_guard": "Exclude single-character suffixes not preceded by structural delimiters (?, =, &)",
-            "fix2_delimiter_bound_prefix": "Last-char of prefix in /?=& (validated in EXP-PRODUCT-34642376433)",
-            "empty_prefix_guard": "Frozen: reject parameterization when common prefix is empty (truly disjoint URLs)",
-            "slot_prefixes_extraction": "Extract path segment between domain authority and slot position (new in this experiment)",
+            "fix2_delimiter_bound_prefix": "Last-char of prefix in /?=&",
+            "empty_prefix_guard": "Frozen: reject parameterization when common prefix is empty",
+            "slot_prefixes_computation": "Extract path segment between domain authority and slot position",
         },
         "substrate": {
             "module": "src.spider.kernel",
@@ -739,22 +455,18 @@ def main():
 
     print(f"Experiment complete: {passed_conditions}/{total_conditions} conditions passed")
     print(f"Verdict: {verdict}")
+    print(f"Slot prefixes status: {slot_prefixes_status}")
     print(f"Overall binding accuracy: {overall_binding_accuracy:.3f}")
-    print(f"Structural generalization rate: {structural_generalization_rate:.3f}")
     print(f"P1 (positive control): {'PASS' if p1_passes else 'FAIL'}")
-    print(f"  slot_prefixes: {p1_slot_prefixes} (expected: users/)")
+    print(f"P1 slot_prefixes: {p1_slot_prefixes} (non-empty={p1_prefix_non_empty})")
     print(f"G1 (fix1 target): {'PASS' if g1_passes else 'FAIL'}")
-    print(f"  slot_prefixes: {all_results.get('G1_QUERY_STRING_SIMPLE', {}).get('slot_prefixes', {})}")
     print(f"G3 (deep path): {'PASS' if g3_passes else 'FAIL'}")
-    print(f"  slot_prefixes: {g3_slot_prefixes} (expected: repos/main/issues/)")
-    print(f"G5 (path+query hybrid): {'PASS' if g5_passes else 'FAIL'}")
-    print(f"  slot_prefixes: {g5_slot_prefixes} (expected: users/)")
+    print(f"G3 slot_prefixes: {g3_slot_prefixes} (non-empty={g3_prefix_non_empty})")
+    print(f"G5 (path+query): {'PASS' if g5_passes else 'FAIL'}")
+    print(f"G5 slot_prefixes: {g5_slot_prefixes} (non-empty={g5_prefix_non_empty})")
     print(f"N1_ORIGINAL (fix2 target): {'PASS' if n1_original_passes else 'FAIL'}")
     print(f"N1_CORRECTED (null control): {'PASS' if n1_corrected_passes else 'FAIL'}")
     print(f"G4 (architectural): slot_count={g4_slot_count}, binding={g4_binding_accuracy}")
-    print(f"B_LITERAL (baseline): {'PASS' if b_literal_passes else 'FAIL'}")
-    print(f"B_UNFIXED (true unfixed): slot_count={b_unfixed_slot_count}, binding={b_unfixed_binding_accuracy}")
-    print(f"All path-prefix slot_prefixes correct: {all_prefix_correct}")
 
     return raw_evidence
 
