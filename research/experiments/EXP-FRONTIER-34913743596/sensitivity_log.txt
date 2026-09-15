@@ -1,0 +1,27 @@
+
+=== Sensitivity: knn_k3 ===
+  Lambda 0.0 pooled BC 0.0041  elapsed 83.3s
+  Lambda 1.0 pooled BC 0.0666  elapsed 165.8s
+  Null control: True (8/8)
+  CV check: False (max 0.6115)
+  Pooled BC lambda0=0.0041 lambda1=0.0666
+
+=== Sensitivity: knn_k10 ===
+  Lambda 0.0 pooled BC 0.0016  elapsed 257.9s
+  Lambda 1.0 pooled BC 0.0579  elapsed 349.9s
+  Null control: True (8/8)
+  CV check: True (max 0.4699)
+  Pooled BC lambda0=0.0016 lambda1=0.0579
+
+=== Sensitivity: kde_loocv ===
+  Lambda 0.0 pooled BC 0.0016  elapsed 436.2s
+  Lambda 1.0 pooled BC 0.0635  elapsed 523.7s
+  Null control: True (8/8)
+  CV check: False (max 0.8005)
+  Pooled BC lambda0=0.0016 lambda1=0.0635
+
+=== Sensitivity analysis complete: 523.7s ===
+knn_k3 null=True cv=False max_cv=0.6115
+knn_k10 null=True cv=True max_cv=0.4699
+kde_loocv null=True cv=False max_cv=0.8005
+Wrote /home/runner/work/Spider/Spider/research/experiments/EXP-FRONTIER-34913743596/sensitivity_exploratory.json

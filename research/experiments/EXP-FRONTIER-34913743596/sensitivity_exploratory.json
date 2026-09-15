@@ -1,0 +1,301 @@
+{
+  "experiment_id": "EXP-FRONTIER-34913743596",
+  "analysis_type": "EXPLORATORY sensitivity (prereg \u00a79.1-9.2)",
+  "labeled_as": "EXPLORATORY per prereg \u00a714 - cannot support confirmatory claims",
+  "frozen_knn_k": 5,
+  "frozen_kde_bw": "scott",
+  "sensitivities": {
+    "knn_k3": {
+      "description": "EXPLORATORY sensitivity: knn_k3",
+      "null_control": {
+        "pass": true,
+        "n_types_passing": 8,
+        "per_type": [
+          {
+            "observed_raw": 0.014486944068128694,
+            "threshold_95th": 0.06515353102573505,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.00779567384996902,
+            "threshold_95th": 0.06388227785388258,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.014015676380472542,
+            "threshold_95th": 0.06809714792322491,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.009646597222009667,
+            "threshold_95th": 0.06516851580980208,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.014407316143659265,
+            "threshold_95th": 0.0683929947580571,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.0035732996110693803,
+            "threshold_95th": 0.06661302880966777,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.005877782789967689,
+            "threshold_95th": 0.06101373066793654,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.0012144059617295254,
+            "threshold_95th": 0.06548153038053223,
+            "pass": true
+          }
+        ]
+      },
+      "cv_check": {
+        "pass": false,
+        "max_cv": 0.6115259767111548,
+        "per_type": [
+          {
+            "mean_bc": 0.12265402114771899,
+            "cv": 0.27530695661513244,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.14998097339954497,
+            "cv": 0.6115259767111548,
+            "pass": false
+          },
+          {
+            "mean_bc": 0.19827413934641752,
+            "cv": 0.054562992670818586,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.08998654921047514,
+            "cv": 0.19648815495542968,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.09697773845601089,
+            "cv": 0.44482552992295027,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.13166542860747482,
+            "cv": 0.28887179850226063,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.2554890633860461,
+            "cv": 0.2949710609968797,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.1668002233124836,
+            "cv": 0.26200960006209373,
+            "pass": true
+          }
+        ]
+      },
+      "pooled_bc_lambda0": 0.004091511782818287,
+      "pooled_bc_lambda1": 0.06660601296954466
+    },
+    "knn_k10": {
+      "description": "EXPLORATORY sensitivity: knn_k10",
+      "null_control": {
+        "pass": true,
+        "n_types_passing": 8,
+        "per_type": [
+          {
+            "observed_raw": 0.014448513570135013,
+            "threshold_95th": 0.037593317213340915,
+            "pass": true
+          },
+          {
+            "observed_raw": 3.115328442024889e-05,
+            "threshold_95th": 0.03578343053728981,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.010362763457768232,
+            "threshold_95th": 0.034021550439600076,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.007711030919418072,
+            "threshold_95th": 0.03206641405067947,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.002906899667449814,
+            "threshold_95th": 0.03692924772632752,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.0,
+            "threshold_95th": 0.032795472416518166,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.005413827165825324,
+            "threshold_95th": 0.036306289642204295,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.005722053680535489,
+            "threshold_95th": 0.034875572090016044,
+            "pass": true
+          }
+        ]
+      },
+      "cv_check": {
+        "pass": true,
+        "max_cv": 0.46990401494684647,
+        "per_type": [
+          {
+            "mean_bc": 0.047693435040768,
+            "cv": 0.33465472326130885,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.1262934674514769,
+            "cv": 0.46990401494684647,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.1630189404156785,
+            "cv": 0.3057389572205634,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.05217999772556601,
+            "cv": 0.3334560696988067,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.08618970612418245,
+            "cv": 0.39818567442739455,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.11339554172552921,
+            "cv": 0.28244927892134997,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.17533412027276618,
+            "cv": 0.21749448540230623,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.11529025335048419,
+            "cv": 0.12162630612406804,
+            "pass": true
+          }
+        ]
+      },
+      "pooled_bc_lambda0": 0.001643957293564533,
+      "pooled_bc_lambda1": 0.057898490453114904
+    },
+    "kde_loocv": {
+      "description": "EXPLORATORY sensitivity: kde_loocv",
+      "null_control": {
+        "pass": true,
+        "n_types_passing": 8,
+        "per_type": [
+          {
+            "observed_raw": 0.130478629667888,
+            "threshold_95th": 0.16218606948884648,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.1028956785233254,
+            "threshold_95th": 0.1820762782225071,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.13540252916214385,
+            "threshold_95th": 0.17411723306716215,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.17670553380674997,
+            "threshold_95th": 0.2204594892987521,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.1834886973613835,
+            "threshold_95th": 0.23132354521929127,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.17746556918812245,
+            "threshold_95th": 0.23569265109825716,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.08983490968726535,
+            "threshold_95th": 0.1610628792037246,
+            "pass": true
+          },
+          {
+            "observed_raw": 0.12377263950711226,
+            "threshold_95th": 0.1615633529661394,
+            "pass": true
+          }
+        ]
+      },
+      "cv_check": {
+        "pass": false,
+        "max_cv": 0.8004592882129946,
+        "per_type": [
+          {
+            "mean_bc": 0.06990783118322051,
+            "cv": 0.3540363262885304,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.14024632771000847,
+            "cv": 0.4899043787065006,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.1617232054298526,
+            "cv": 0.17501311770568764,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.05471275111757425,
+            "cv": 0.8004592882129946,
+            "pass": false
+          },
+          {
+            "mean_bc": 0.0927239388382513,
+            "cv": 0.19648374959088882,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.11181435299424988,
+            "cv": 0.32612801564288685,
+            "pass": true
+          },
+          {
+            "mean_bc": 0.20652145206037814,
+            "cv": 0.5221900704388726,
+            "pass": false
+          },
+          {
+            "mean_bc": 0.1140007869393838,
+            "cv": 0.5332695391519885,
+            "pass": false
+          }
+        ]
+      },
+      "pooled_bc_lambda0": 0.0016258096815493493,
+      "pooled_bc_lambda1": 0.06353119559475709
+    }
+  },
+  "execution_time_seconds": 523.7162983417511
+}
