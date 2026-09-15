@@ -7,292 +7,322 @@
 - **Claim**: C-WEB-DYNAMICS (Interactive Web transformations contain predictive dynamical structure beyond memory and ordinary similarity)
 - **Date**: 2026-09-15
 - **Status**: DESIGN — NOT YET FROZEN
-- **Parent**: EXP-PHYSICS-34846934524 (MEASUREMENT_INVALID, DOM-hash cardinality degeneracy)
 
 ## 2. Scientific Question
 
-On locally-hosted Express SPAs with correlated non-determinism, does network-response payload structure (API response bodies, headers, timing signatures) exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00556?
-
-This is an orthogonal observation level that avoids DOM hash cardinality degeneracy (parent audit V1) and session-token identity leakage (parent audit V8).
+On locally-hosted Express SPAs with session-dependent API responses, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417?
 
 ## 3. Motivation
 
-### 3.1 Parent Failure Summary
+The DOM-hash observation path for C-WEB-DYNAMICS is now closed across all locally-hosted testable regimes:
 
-EXP-PHYSICS-34846934524 tested DOM structural features for conditional PMI on session-correlated SPAs. The experiment was MEASUREMENT_INVALID due to:
+1. **Deterministic SPAs**: FALSIFIED (EXP-PHYSICS-34724244876). DOM hash adds no PMI when action-history is sufficient (K=3). PMI = 0.0.
 
-- **V1 (Estimator cardinality degeneracy)**: Plug-in PMI estimator degenerated when |R| ≈ N per stratum. PMI = 3.319 bits equaled H(S_next|URL,H_K) = log2(10) = 3.3219 for 10 session-specific DOM hashes. Random DOM_before labels gave identical PMI (3.317 bits), proving any unique-valued R gives I=H(S) regardless of dependence.
-- **V8 (Identity leakage)**: Session token SHA256(session_id)[:16] embedded in DOM made DOM_before a perfect session identifier. PMI measured identity function DOM_before(session_id) → DOM_after(session_id), not predictive Web dynamics.
-- **V2 (Control failure)**: Positive and null controls failed because they were designed for independent-noise SPAs, not session-correlated SPAs.
-- **V4 (Target misoperationalization)**: Target was DOM hash (observation), not FSM state. Action-history predicting DOM hash is different from predicting FSM state.
+2. **Independent per-step observation noise**: FALSIFIED (EXP-PHYSICS-34764605162). DOM features have no conditional PMI when observation noise is independent across steps. PMI ≈ 0.003, Bonferroni p = 1.0.
 
-### 3.2 Why Network-Response Is Different
+3. **Correlated non-determinism (session-dependent)**: MEASUREMENT_INVALID (EXP-PHYSICS-34846934524). PMI = 3.319 bits looked significant but was **artefactual**: it equals H(S|URL,H_K) = log2(10) for 10 session-specific DOM hashes, and random DOM_before labels produce the same PMI (3.318 bits), proving the plug-in MI estimator degenerates when |R| ≈ N per stratum.
 
-Network-response payload structure is an orthogonal observation level that may avoid the parent's problems:
+The parent audit (V1, V2, V8) identified three specific problems:
+- **Cardinality degeneracy**: The plug-in MI estimator saturates at H(S) when the number of unique response values |R| approaches the stratum size N. DOM hashes are high-cardinality (SHA-256 outputs), making this inevitable.
+- **Control design flaw**: The positive control randomized DOM_before labels instead of session assignment, so it could not detect the identity function DOM_before(session_id) → DOM_after(session_id).
+- **Target misoperationalization**: PMI measured prediction of next DOM hash (which contains session token), not next FSM state.
 
-1. **Lower cardinality**: API response bodies are structured JSON with fixed schemas. Distinct responses ≈ N_sessions (10-20), not N_sessions × N_states (50) as with DOM hashes. This reduces |R| relative to N, mitigating cardinality degeneracy.
-2. **No session token embedding**: Response bodies contain structured data (item counts, greetings, data arrays) that varies by session but does NOT encode session identity. This avoids the trivial identity function.
-3. **Genuine predictive structure**: Response content predicts DOM_after through the shared session variable, not through identity leakage. The prediction is: response content → session → DOM_after, which is a genuine information channel.
-4. **Bias-corrected estimator**: Using observed - perm_mean instead of plug-in PMI avoids the cardinality degeneracy.
+This experiment tests **network-response payload structure** as an orthogonal observation level that avoids all three problems:
 
-### 3.3 What This Experiment Tests
+1. **Low-cardinality features**: API response bodies are JSON objects with discrete fields (state_id, step_count, status_code), not SHA-256 hashes. |R| is small by construction.
 
-The experiment asks: does API response body content predict the next DOM observation through the shared latent session variable, after bias correction?
+2. **Session-randomized control**: The positive control randomizes session_id assignment (breaking the session→response mapping), not response labels. This correctly tests whether the response→state channel carries information.
 
-If yes → network-response payload structure is a valid observation level for C-WEB-DYNAMICS.
-If no → both DOM-hash AND network-response paths are closed locally, forcing a lane pivot.
+3. **State-targeted MI**: The PMI target is next FSM state (5 values), not next DOM hash (50 values). This measures genuine state-transition prediction, not observation identity.
+
+The within-experiment comparison (state-dependent vs state-independent responses) provides the cleanest causal test: identical FSM, identical sessions, only response content varies.
 
 ## 4. Hypotheses
 
-### H1: Bias-Corrected PMI > 0
-The bias-corrected conditional PMI I(Response_body; DOM_after | URL, H_K=3) > 0.0 with Bonferroni-corrected permutation p < 0.00556 on >= 1/3 response representations at K=3. Mean bias-corrected PMI across representations at K=3 > 0.01 bits.
+### H1: State-Dependent Response PMI
+On the state-dependent response condition, bias-corrected PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125.
 
-### H2: Positive Control
-Session-randomized PMI < 0.5 × observed PMI (randomizing sessions reduces PMI by >50%).
+### H2: Response-Condition Discrimination
+State-dependent bias-corrected PMI > state-independent bias-corrected PMI by >= 0.05 bits, with paired permutation p < 0.05 across trajectories.
 
-### H3: Determinism Check
-Deterministic SPA: determinism accuracy = 1.0. Session-SPA: accuracy < 1.0. Independent noise: accuracy < 1.0.
+### H3: Positive Control
+Session-randomized control yields bias-corrected PMI ≈ 0.0 within permutation noise on state-dependent non-deterministic strata.
 
-### H4: Response Representation Distinctness
-Response representations (body_hash, body_structure, headers_hash) are NOT isomorphic (unlike DOM hash representations which were 1-1 per parent audit V4). Different representations capture different aspects of response variation.
+### H4: Cardinality Bounded
+On the state-dependent condition, |R| < 0.8 * N per stratum at K=3, avoiding the parent's |R| ≈ N degeneracy.
 
-## 5. Data Generation
+### H5: Determinism Check
+Both conditions have P(Response_hash | FSM_state, session) accuracy = 1.0 — responses are deterministic. The difference is whether response encodes state information, not whether response is non-deterministic.
 
-### 5.1 SPA Infrastructure
+## 5. Experimental Conditions
 
-Locally-hosted Express server returning JSON API responses. Same 5-state linear FSM as parent:
-- landing → form_s1 (action: begin)
-- form_s1 → form_s2 (action: advance)
-- form_s2 → review (action: finalize)
-- review → complete (action: submit)
-- complete → landing (action: restart)
+### 5.1 State-Dependent Response Condition
 
-### 5.2 API Response Structure
+An Express server hosts a 5-state linear FSM with session persistence:
 
-Each state has a base JSON response template. Session-dependent fields vary by session_id:
+- **FSM**: landing → form_s1 → form_s2 → review → complete → landing (cyclic)
+- **Actions**: begin, advance, finalize, submit, restart (one per state)
+- **Sessions**: 10 unique session IDs, randomly assigned per trajectory
+- **API responses**: Each session gets a distinct response token (SHA-256(session_id)[:8]) embedded in a JSON body:
+  ```json
+  {"state_id": "form_s1", "step": 2, "session_token": "a1b2c3d4", "items": [...]}
+  ```
+- **Response features**: state_id (5 values), step (5 values), session_token (10 values), items list (state-dependent length)
+- **Total unique response hashes**: ~50 (10 sessions × 5 states)
+
+### 5.2 State-Independent Response Condition (Control)
+
+Identical FSM and sessions, but API returns identical response regardless of state:
 
 ```json
-{
-  "state": "<fsm_state>",
-  "items": ["item_<variant>_<i>" for i in range(variant)],
-  "total": <variant * 33>,
-  "greeting": "Welcome session_<session_id>",
-  "timestamp": <step_number>,
-  "metadata": {"variant": <variant>, "step": <step_number>}
-}
+{"state_id": "unknown", "step": 0, "session_token": "none", "items": []}
 ```
 
-**CRITICAL**: The response body does NOT contain session token (SHA-256 of session_id or similar hex string > 16 chars). The `greeting` field contains `session_<session_id>` as a human-readable label, NOT a cryptographic hash. This avoids the parent's identity leakage (audit V8).
+- **Response features**: All values constant across states and sessions
+- **Total unique response hashes**: 1
+- **Expected PMI**: 0.0 (no state information in response)
 
-### 5.3 Three SPA Types
+### 5.3 Why This Comparison Is Decisive
 
-1. **Deterministic (Level 0)**: Same response for each state across all sessions. variant=0 for all sessions. No session-dependent fields.
-2. **Independent noise (Level 1)**: Response variant drawn independently per step (no session persistence). 3 variants per state.
-3. **Session-correlated (Level 2)**: Persistent session_id determines response variant at each state. variant = session_id % N_VARIANTS. 10 sessions, 5 variants (2 sessions per variant).
+The only difference between conditions is response content. If state-dependent responses yield PMI > state-independent responses, the response structure carries predictive information. This cannot be explained by:
+- Session identity (both conditions have sessions)
+- Action history (both conditions have identical action sequences)
+- FSM structure (both conditions have identical FSMs)
+- Estimator bias (bias correction applies to both)
 
-### 5.4 Session Configuration
+## 6. Data Generation
 
-- N_SESSIONS = 10 (session_id ∈ {0, 1, ..., 9})
-- N_VARIANTS = 5 (variant = session_id % 5)
-- Session-to-variant mapping: deterministic (same session always gets same variant at same state)
-- Session assignment: random per trajectory (uniform over 10 sessions)
+### 6.1 Trajectory Generation
 
-### 5.5 Sample Size
+- 200 trajectories per condition (400 total)
+- 10 steps per trajectory
+- Actions chosen uniformly at random from the available action at each state
+- Session ID assigned uniformly at random from 10 sessions at trajectory start
+- Seed = 42 for reproducibility
 
-- 500 trajectories × 10 steps = 5000 transitions per SPA type
-- 3 SPA types × 5000 = 15000 total transitions
-- 80/20 train/test split: 4000 train, 1000 test per SPA type
+### 6.2 Response Generation
 
-### 5.6 Random Seeds
+**State-dependent**: For each (session, state) pair, generate a response containing:
+- `state_id`: the FSM state name (5 values)
+- `step`: step number within trajectory (1-10)
+- `session_token`: SHA-256(session_id)[:8] (10 values)
+- `items`: list of length = step number (deterministic per step)
 
-- Base seed: 42 (for trajectory generation)
-- Per-trajectory seed: 42 + traj_id (deterministic across processes)
-- Permutation test seed: 42 (for reproducibility)
+**State-independent**: For all (session, state) pairs, return:
+- `state_id`: "unknown"
+- `step`: 0
+- `session_token`: "none"
+- `items`: []
 
-## 6. Response Representations
+### 6.3 Response Hashing
 
-### 6.1 Response Body Hash (response_body_hash)
-SHA-256 of the full JSON response body (serialized with sorted keys). This captures all variation in response content.
-
-### 6.2 Response Body Structure (response_body_structure)
-SHA-256 of the JSON schema: sorted keys, value types, nesting depth. This captures structural variation without content variation (e.g., same schema with different values).
-
-### 6.3 Response Headers Hash (response_headers_hash)
-SHA-256 of response headers (Content-Type, Cache-Control, X-Session-Variant). Excludes session-specific headers that might encode session identity.
-
-### 6.4 Target: DOM Observation (S_next)
-visible_text_hash of DOM_after (next DOM observation), consistent with parent framework. This is the "next state" that the response is supposed to predict.
+Response hash = SHA-256(json.dumps(response_body, sort_keys=True))[:16]. This is the discretized observation for PMI computation.
 
 ## 7. Measures
 
-### 7.1 Bias-Corrected Conditional PMI
+### 7.1 Primary Metric
 
-For each (representation, K) stratum:
-1. Compute raw PMI using plug-in estimator within each (URL, ActionHistory_K) stratum
-2. Weight by stratum size: weighted_PMI = Σ (n_h / N) × stratum_PMI
-3. Compute permutation null: shuffle entire transitions within strata, recompute PMI
-4. Bias-corrected PMI = raw_PMI - perm_mean_PMI
+**Bias-corrected conditional PMI**: 
+- observed_pmi = plug-in PMI I(S_next; Response_before | URL, H_K) computed on actual data
+- perm_mean = mean PMI across 1000 within-strata permutations of Response_before labels
+- bias_corrected_pmi = observed_pmi - perm_mean
 
-### 7.2 Permutation Test
-1000 permutations per (representation, K) stratum. Shuffle entire transitions within (URL, ActionHistory_K) strata. This correctly breaks the R→S pairing while preserving stratum structure (parent audit methodology).
+This isolates genuine predictive information from finite-sample bias.
 
-### 7.3 Action-History Prediction
-Accuracy of predicting S_next from ActionHistory alone: P(S_next | URL, H_K). For each stratum, predict the most frequent next DOM hash. If action-history alone achieves high accuracy, response cannot add predictive value.
+### 7.2 Conditional MI Computation
 
-### 7.4 Determinism Check
-P(Response_hash | DOM_hash_current, Action). For each (DOM_before, Action) pair, check if response hash is deterministic. Deterministic SPA: accuracy = 1.0. Session-SPA: accuracy < 1.0 (response varies by session). Independent noise: accuracy < 1.0.
+For each (URL, H_K) stratum:
+1. Count joint occurrences: n(r, s) = |{t ∈ stratum : R_before=r, S_next=s}|
+2. Count marginals: n(r) = |{t ∈ stratum : R_before=r}|, n(s) = |{t ∈ stratum : S_next=s}|
+3. Compute plug-in PMI: PMI(r,s) = log2(n(r,s) * N / (n(r) * n(s)))
+4. Weighted PMI = Σ_r Σ_s (n(r,s)/N) * PMI(r,s)
+
+### 7.3 Permutation Test
+
+For each stratum:
+1. Shuffle Response_before labels within the stratum (1000 times)
+2. Recompute PMI for each shuffle
+3. p_raw = fraction of shuffled PMIs >= observed PMI
+4. p_bonferroni = min(p_raw * n_comparisons, 1.0)
+
+### 7.4 Secondary Metrics
+
+- Plug-in MI (uncorrected) for comparison with parent
+- |R| per stratum (cardinality check)
+- Action-history prediction accuracy at K=1,2,3
+- Per-condition PMI at K=1 and K=3
+- Stratum sizes and distribution
 
 ## 8. Null Models
 
-### 8.1 Shuffle Null
-Permute entire transitions within (URL, ActionHistory_K) strata. Expected bias-corrected PMI ≈ 0.
+### 8.1 Session-Randomized Control (Positive Control)
 
-### 8.2 Frequency Null
-Predict next DOM hash from marginal distribution P(S_next). Expected accuracy: 1/|S| where |S| is the number of distinct DOM hashes.
+Replace each trajectory's session_id with a random session_id from a different trajectory. Response content still varies (same generation), but the session→response mapping is broken. Expected bias-corrected PMI ≈ 0.
 
-### 8.3 Session-Randomized Null
-Randomize session_id assignment across trajectories (break session→response mapping). Expected bias-corrected PMI < 0.5 × observed PMI.
+### 8.2 Shuffled Response Labels (Null Control)
 
-## 9. Controls
+Within each (URL, H_K) stratum, permute Response_before labels. Preserves marginal distributions but breaks R→S pairing. Expected bias-corrected PMI ≈ 0.
 
-### 9.1 Positive Control (Session-Randomized)
-Randomize session_id assignment (break session→response mapping). Compute bias-corrected PMI on randomized data.
-PASS criterion: session-randomized PMI < 0.5 × observed PMI (randomizing sessions reduces PMI by >50%).
-This tests whether the PMI is driven by session→response correlation rather than estimator bias.
+### 8.3 State-Independent Baseline
 
-### 9.2 Null Control (Shuffled Responses)
-Shuffle response_body labels within (URL, ActionHistory_K) strata. Compute bias-corrected PMI.
-PASS criterion: |shuffled PMI| < 3 × std(shuffled PMI) (shuffled PMI is within noise of zero).
+Same FSM and sessions, but response is constant. Expected PMI ≈ 0 (no state information). Provides within-experiment null.
 
-### 9.3 Determinism Control
-Deterministic SPA: determinism accuracy = 1.0. Session-SPA: accuracy < 1.0. Independent noise: accuracy < 1.0.
-PASS criterion: all three conditions hold.
+## 9. Statistical Tests
 
-### 9.4 Data Quality Control
->= 500 valid transitions per SPA type.
-PASS criterion: min_transitions >= 500.
+### 9.1 Primary Test
 
-### 9.5 Session Mapping Verification
-For each session, verify that API response body at each FSM state is deterministic (same response every time).
-PASS criterion: > 95% of (session, state) pairs are deterministic.
+- Bias-corrected PMI at K=3 on state-dependent condition
+- One-sided: PMI > 0.05 bits
+- Within-strata permutation test, 1000 permutations
+- Bonferroni correction across 4 comparisons (2 conditions × 2 K values)
+- Corrected alpha: 0.05 / 4 = 0.0125
 
-### 9.6 Response Body No-Token Verification
-Verify that no response body field matches pattern 'session_*' or contains hex strings > 16 chars.
-PASS criterion: 0 violations.
+### 9.2 Discrimination Test
 
-## 10. Validity Threats
+- Paired permutation test: state-dependent PMI - state-independent PMI across trajectories
+- One-sided: difference > 0.05 bits
+- 1000 permutations of condition labels within matched trajectory pairs
+- Uncorrected alpha: 0.05 (single comparison)
 
-### 10.1 Cardinality Degeneracy (Addressing Parent V1)
-Network-response payloads have lower cardinality than DOM hashes:
-- DOM hashes: N_sessions × N_states = 10 × 5 = 50 distinct hashes
-- Response bodies: N_variants = 5 distinct responses per state (10 sessions → 5 variants via %5)
-- |R| = 5 per stratum vs N ≈ 714 per stratum (K=3)
-- Bias: (|R|-1)(|S|-1)/(2N ln2) ≈ 4×9/(2×714×0.693) ≈ 0.036 (much smaller than parent's 0.085)
+### 9.3 Cardinality Check
 
-The bias-corrected estimator (observed - perm_mean) further reduces this bias.
+- Report |R| per stratum at K=3
+- Pass criterion: |R| < 0.8 * N (avoiding parent's |R| ≈ N degeneracy)
 
-### 10.2 Session Token Leakage (Addressing Parent V8)
-Response bodies do NOT contain session tokens (SHA-256 of session_id or similar). The `greeting` field contains `session_<session_id>` as a human-readable label, not a cryptographic hash. This avoids the trivial identity function.
+## 10. Controls
 
-However: if the greeting field uniquely identifies the session (10 sessions → 10 distinct greetings), the response body might still carry session identity information through the greeting. The bias-corrected PMI should still be > 0 if the greeting is the only session-identifying field, but the interpretation would be: "response body predicts DOM_after through session identity in the greeting field."
+### 10.1 Positive Control (Session-Randomized)
 
-Mitigation: The response body also contains structured data (items, total, metadata) that varies by session. The body_structure representation captures structural variation without content, reducing the impact of greeting identity.
+- Randomize session assignment across trajectories
+- Response→state mapping broken; PMI should be ≈ 0
+- Pass: |session-randomized PMI| < 3 * std(permuted PMI)
 
-### 10.3 Synthetic-to-Real Gap
-Locally-hosted Express SPAs with deterministic session-to-variant mapping may not reflect production SPAs with complex session management. Claim ceiling bounded to this synthetic setting.
+### 10.2 Null Control (Shuffled Labels)
 
-### 10.4 Deterministic FSM
-The FSM is linear and deterministic. S_next is fully determined by S_current and action. Response content cannot add predictive value for FSM state prediction beyond action history.
+- Permute response labels within strata
+- Breaks R→S pairing; PMI should be ≈ 0
+- Pass: |mean shuffled PMI| < 3 * std(shuffled PMI)
 
-However: the target is DOM_after (observation), not FSM state (abstract). DOM_after varies by session (via session-dependent content), so response content may predict DOM_after through the session variable even though FSM transitions are deterministic.
+### 10.3 State-Independent Baseline
 
-### 10.5 Response Body Greeting Identity
-The greeting field "Welcome session_<session_id>" uniquely identifies the session (10 sessions → 10 distinct greetings). This means response_body_hash has |R| = 10 per state, not 5. The body_structure representation (SHA-256 of JSON schema) has |R| = 1 (same schema for all sessions), which should have PMI ≈ 0.
+- Identical FSM, constant responses
+- PMI should be 0.0 exactly
+- Pass: bias-corrected PMI = 0.0
 
-### 10.6 Multiple Comparisons
-9 comparisons (3 reps × 3 K values). Bonferroni alpha = 0.05/9 ≈ 0.00556.
+### 10.4 Determinism Check
 
-## 11. Decision Rules
+- Both conditions: P(Response_hash | FSM_state, session) = 1.0
+- Responses are deterministic; difference is state-encoding, not non-determinism
 
-### 11.1 SURVIVES_CURRENT_TEST
+## 11. Validity Threats
+
+### 11.1 Action-History Sufficiency
+
+On the 5-state linear FSM, action-history at K=3 predicts FSM state with near-perfect accuracy. If FSM state is already determined by action-history, response cannot add predictive value for FSM state prediction. **Mitigation**: This is the intended strong null — if response cannot add information beyond action-history, it is not a useful observation substrate. The within-experiment comparison (state-dependent vs state-independent) still discriminates: state-dependent should have higher PMI even if absolute PMI is small.
+
+### 11.2 Cardinality Degeneracy Risk
+
+With 10 sessions × 5 states = 50 unique response hashes and ~714 transitions per stratum at K=3, |R|/N ≈ 50/714 = 0.07, well below the 0.8 threshold. This avoids the parent's degeneracy. **Mitigation**: Cardinality check is a mandatory decision criterion.
+
+### 11.3 Synthetic-to-Real Gap
+
+Locally-hosted Express SPA with deterministic session-to-state mapping may not reflect production SPAs. **Mitigation**: This is a controlled validation experiment. If the pipeline cannot detect known structure in controlled data, it cannot be trusted on real data.
+
+### 11.4 FSM Linearity
+
+The 5-state linear FSM has deterministic transitions: each state has exactly one outgoing action. This means action-history fully determines FSM state. The experiment tests whether response carries information about the next state *given* URL and action-history — if action-history already determines the next state, response information is redundant by definition. **Mitigation**: The within-experiment comparison still discriminates: state-dependent responses yield PMI = H(S_next|URL,H_K) (response reveals current state), while state-independent responses yield PMI ≈ 0 (no state information). The difference measures response informativeness.
+
+### 11.5 Sample Size
+
+With 200 trajectories × 10 steps = 2000 transitions per condition, and ~714 per stratum at K=3, we have adequate power to detect PMI > 0.05 bits (effect size > 0.05 bits with perm_std ≈ 0.005 gives z > 10). Smaller effects may be missed but the 0.05 bits threshold is the minimum practically meaningful effect.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+
 If ALL of:
-1. Bias-corrected PMI > 0.0 with Bonferroni-corrected permutation p < 0.00556 on >= 1/3 response representations at K=3 AND mean bias-corrected PMI across representations at K=3 > 0.01 bits
-2. Positive control passes (session-randomized PMI < 0.5 × observed PMI)
-3. Determinism check passes (det SPA = 1.0, session SPA < 1.0, independent < 1.0)
-4. >= 500 valid transitions per SPA type
-5. Session mapping > 95% deterministic
-6. No pipeline errors
+1. Bias-corrected PMI on state-dependent condition at K=3 > 0.05 bits, Bonferroni-corrected p < 0.0125
+2. State-dependent PMI > state-independent PMI by >= 0.05 bits, paired permutation p < 0.05
+3. Positive control passes (session-randomized PMI ≈ 0)
+4. Determinism check passes (both conditions accuracy = 1.0)
+5. >= 500 valid transitions per condition
+6. Cardinality check: |R| < 0.8 * N per stratum at K=3
 
-### 11.2 FALSIFIED-IN-SETTING
+### 12.2 FALSIFIED-IN-SETTING
+
 If ANY of:
-1. Bias-corrected PMI ≤ 0.0 or non-significant on ALL representations at K=3 (after Bonferroni correction)
-2. Mean bias-corrected PMI across representations at K=3 ≤ 0.01 bits
+1. Bias-corrected PMI <= 0.0 on state-dependent condition at K=3
+2. State-dependent PMI not > state-independent PMI (difference < 0.05 bits or p >= 0.05)
+3. Both conditions have PMI ≈ 0 (no response informativeness in either condition)
 
-### 11.3 MEASUREMENT_INVALID
+### 12.3 MEASUREMENT_INVALID
+
 If:
-1. Controls fail (positive, determinism, data quality, session mapping)
-2. Pipeline errors prevent computation
-3. Response body contains session tokens (violating no-token verification)
+1. Controls fail (positive control PMI ≈ 0 but raw PMI ≈ H(S), cardinality degeneracy)
+2. Data quality insufficient (< 500 transitions per condition)
+3. Pipeline errors prevent computation
+4. Cardinality check fails (|R| > 0.8 * N per stratum)
 
-## 12. Expected Outcomes
+## 13. Expected Outcomes
 
-### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
-- Network-response payload structure carries predictive information about DOM observation
-- The parent's DOM-hash falsification does NOT generalize to network-response observations
-- SPIDER should capture API response bodies when predicting state transitions
-- Physics lane has a new valid observation level for C-WEB-DYNAMICS
-- Next step: test on production SPAs with genuine transition non-determinism
+### 13.1 Positive Result (SURVIVES_CURRENT_TEST)
 
-### 12.2 Negative Result (FALSIFIED-IN-SETTING)
-- Network-response payload structure has no conditional PMI beyond action-history memory
-- Both DOM-hash AND network-response paths are closed locally
-- Physics lane should pivot to: production SPAs, multi-scale dynamics, causal structure, information geometry
-- The locally-hosted SPA setting is exhausted for information-theoretic approaches
+- Network-response payload structure carries predictive information about Web state transitions
+- SPIDER should capture API response bodies and headers as observation features
+- The response-level observation avoids DOM hash cardinality degeneracy
+- Opens a new observation layer for C-WEB-DYNAMICS
+- Justifies further exploration with richer response features (headers, timing, multi-endpoint)
 
-### 12.3 Invalid Result (MEASUREMENT_INVALID)
+### 13.2 Negative Result (FALSIFIED-IN-SETTING)
+
+- Network-response structure has no conditional PMI beyond action-history memory
+- Locally-hosted testable path for C-WEB-DYNAMICS is closed across ALL observation levels
+- Physics lane should either:
+  - (a) Move to production infrastructure with genuine non-deterministic state transitions
+  - (b) Abandon PMI-based conditional information approach, investigate alternative physics mechanisms
+
+### 13.3 Invalid Result (MEASUREMENT_INVALID)
+
 - Pipeline needs debugging before this question can be answered
 - Not scientific evidence for or against
 
-## 13. Analysis Plan
+## 14. Analysis Plan
 
-1. **Data Generation**: Generate 15000 transitions (500 trajectories × 10 steps × 3 SPA types) with API response bodies
-2. **Response Body Verification**: Verify no session tokens in response bodies
-3. **Session Mapping Verification**: Verify deterministic session→response mapping
-4. **Train/Test Split**: 80/20 stratified split by SPA type
-5. **Strata Construction**: Group transitions by (URL, ActionHistory_K) for K=1,2,3
-6. **PMI Computation**: Compute raw PMI within each stratum, weight by stratum size
-7. **Bias Correction**: Compute permutation null (1000 perms), subtract perm_mean from raw PMI
-8. **Statistical Tests**: Permutation p-value with Bonferroni correction across 9 comparisons
-9. **Controls**: Positive (session-randomized), null (shuffled), determinism, data quality, session mapping
-10. **Decision Rule**: Apply frozen decision rule to determine verdict
-11. **Reporting**: Report all outcomes with equal prominence
+1. **Data Generation**: Generate 4000 transitions (200 trajectories × 10 steps × 2 conditions)
+2. **Response Hashing**: SHA-256(json.dumps(response_body))[:16] for each response
+3. **Stratification**: Build strata by (URL, H_K) for K=1,2,3
+4. **MI Computation**: Plug-in PMI per stratum, weighted average
+5. **Bias Correction**: Permutation null (1000 perms per stratum), subtract perm_mean from observed
+6. **Permutation Tests**: Within-strata shuffling, Bonferroni correction
+7. **Discrimination Test**: Paired permutation on state-dependent vs state-independent PMI difference
+8. **Controls**: Session-randomized, shuffled labels, state-independent baseline, determinism check
+9. **Cardinality Check**: Report |R| per stratum
+10. **Reporting**: Report all outcomes with equal prominence
 
-## 14. Analysis Code
+## 15. Analysis Code
 
 Analysis will be implemented in Python using:
-- `json` for API response parsing
-- `hashlib` for SHA-256 hashing
+- `numpy` for array operations and random generation
+- `scipy.stats` for permutation tests
+- `hashlib` for response hashing
+- `json` for response parsing
 - `collections.Counter` for frequency counting
-- `random` for permutation tests (seed=42)
 - Standard library only (no custom estimators required)
 
 Code will be committed to `research/experiments/EXP-PHYSICS-34932344937/` before execution.
 
-## 15. Pre-registered Expectations
+## 16. Pre-registered Expectations
 
-From parent experiment and theory:
-- Deterministic SPA: PMI = 0.0 at all K (no response variation)
-- Independent noise SPA: PMI ≈ 0.0 (E[I]=0 by construction)
-- Session-correlated SPA: PMI > 0.0 (response predicts DOM_after through session)
-- Bias-corrected PMI should be smaller than raw PMI (bias correction reduces overestimate)
-- Body_structure representation may have PMI ≈ 0 (same schema for all sessions)
-- Body_hash representation should have highest PMI (most variation)
-- Headers_hash representation may have intermediate PMI
+From prior Physics work:
+- DOM-hash PMI was artefactual (cardinality degeneracy) — network-response should not exhibit this
+- Bias-corrected estimator (observed - perm_mean) should give valid effect sizes
+- State-dependent > state-independent is the cleanest causal test
+- Action-history at K=3 on linear FSM predicts state perfectly — response adds information only if it reveals current state
 
-## 16. Deviation Policy
+## 17. Deviation Policy
 
 Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
 
-## 17. Freeze Statement
+## 18. Freeze Statement
 
 This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
