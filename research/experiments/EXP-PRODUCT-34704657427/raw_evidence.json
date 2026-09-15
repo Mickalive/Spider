@@ -19,10 +19,6 @@
       "slot_prefixes": {
         "url": "users/"
       },
-      "slot_prefixes_expected": {
-        "url": "users/"
-      },
-      "slot_prefixes_match": true,
       "resolution_results": [
         {
           "params": {
@@ -66,7 +62,10 @@
         "binding_correct_count": 3,
         "executable_count": 3,
         "slot_count_correct": true
-      }
+      },
+      "template_matches_parent": true,
+      "slot_prefixes_match_expected": true,
+      "slot_prefixes_non_empty": true
     },
     "G1_QUERY_STRING_SIMPLE": {
       "condition_id": "G1_QUERY_STRING_SIMPLE",
@@ -86,10 +85,6 @@
       "slot_prefixes": {
         "url": "search?q="
       },
-      "slot_prefixes_expected": {
-        "url": "search?q="
-      },
-      "slot_prefixes_match": true,
       "resolution_results": [
         {
           "params": {
@@ -133,7 +128,10 @@
         "binding_correct_count": 3,
         "executable_count": 3,
         "slot_count_correct": true
-      }
+      },
+      "template_matches_parent": true,
+      "slot_prefixes_match_expected": true,
+      "slot_prefixes_non_empty": true
     },
     "G2_QUERY_STRING_MULTIPARAM": {
       "condition_id": "G2_QUERY_STRING_MULTIPARAM",
@@ -153,10 +151,6 @@
       "slot_prefixes": {
         "url": "items?category=books&page="
       },
-      "slot_prefixes_expected": {
-        "url": "items?category=books&page="
-      },
-      "slot_prefixes_match": true,
       "resolution_results": [
         {
           "params": {
@@ -200,7 +194,10 @@
         "binding_correct_count": 3,
         "executable_count": 3,
         "slot_count_correct": true
-      }
+      },
+      "template_matches_parent": true,
+      "slot_prefixes_match_expected": true,
+      "slot_prefixes_non_empty": true
     },
     "G3_DEEP_PATH": {
       "condition_id": "G3_DEEP_PATH",
@@ -220,10 +217,6 @@
       "slot_prefixes": {
         "url": "orgs/acme/repos/main/issues/"
       },
-      "slot_prefixes_expected": {
-        "url": "repos/main/issues/"
-      },
-      "slot_prefixes_match": false,
       "resolution_results": [
         {
           "params": {
@@ -267,7 +260,76 @@
         "binding_correct_count": 3,
         "executable_count": 3,
         "slot_count_correct": true
-      }
+      },
+      "template_matches_parent": true,
+      "slot_prefixes_match_expected": false,
+      "slot_prefixes_non_empty": true
+    },
+    "G4_MULTI_SLOT": {
+      "condition_id": "G4_MULTI_SLOT",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "obs-312a50400ce1d1dc",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}00"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "users/"
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "dave/orders/400"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/dave/orders/40000"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/users/dave/orders/400"
+        },
+        {
+          "params": {
+            "url": "eve/orders/500"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/eve/orders/50000"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/users/eve/orders/500"
+        },
+        {
+          "params": {
+            "url": "frank/orders/600"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/frank/orders/60000"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/users/frank/orders/600"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "template_matches_parent": true,
+      "slot_prefixes_match_expected": false,
+      "slot_prefixes_non_empty": true
     },
     "G5_PATH_QUERY_HYBRID": {
       "condition_id": "G5_PATH_QUERY_HYBRID",
@@ -287,10 +349,6 @@
       "slot_prefixes": {
         "url": "users/"
       },
-      "slot_prefixes_expected": {
-        "url": "users/"
-      },
-      "slot_prefixes_match": true,
       "resolution_results": [
         {
           "params": {
@@ -334,7 +392,10 @@
         "binding_correct_count": 3,
         "executable_count": 3,
         "slot_count_correct": true
-      }
+      },
+      "template_matches_parent": true,
+      "slot_prefixes_match_expected": true,
+      "slot_prefixes_non_empty": true
     },
     "N1_ORIGINAL": {
       "condition_id": "N1_ORIGINAL",
@@ -347,6 +408,7 @@
       "slot_count": 0,
       "confidence": 0,
       "slot_prefixes": {},
+      "distill_diagnostics": null,
       "resolution_results": [],
       "metrics": {
         "binding_accuracy": 1.0,
@@ -364,11 +426,113 @@
       "slot_count": 0,
       "confidence": 0,
       "slot_prefixes": {},
+      "distill_diagnostics": null,
       "resolution_results": [],
       "metrics": {
         "binding_accuracy": 1.0,
         "slot_count_correct": true
       }
+    },
+    "B_LITERAL": {
+      "condition_id": "B_LITERAL",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "literal-auto",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/A"
+      },
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0.5,
+      "slot_prefixes": {},
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {},
+        "mechanism_count": 3
+      },
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 0,
+        "executable_count": 0,
+        "slot_count_correct": true,
+        "fail_rate": 1.0
+      },
+      "baseline_note": "Literal mechanism reuse: confidence 0.5 < min_confidence 0.8"
+    },
+    "B_UNFIXED": {
+      "condition_id": "B_UNFIXED",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "unfixed-e61444153216eeea",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "D"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/D"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/D"
+        },
+        {
+          "params": {
+            "url": "E"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/E"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/E"
+        },
+        {
+          "params": {
+            "url": "F"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/F"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/F"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "baseline_note": "True unfixed heuristic: rfind('/') without Fix1/Fix2."
     }
   },
   "controls": {
@@ -387,6 +551,11 @@
       "expected": "slot_count=0",
       "passed": true
     },
+    "B_LITERAL": {
+      "type": "baseline",
+      "expected": "fail_rate=1.0",
+      "passed": true
+    },
     "G2_QUERY_STRING_MULTIPARAM": {
       "type": "regression",
       "expected": "slot_count=1, binding_accuracy=1.0",
@@ -394,8 +563,8 @@
     },
     "G3_DEEP_PATH": {
       "type": "regression",
-      "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'repos/main/issues/'}",
-      "passed": false
+      "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes non-empty",
+      "passed": true
     },
     "G5_PATH_QUERY_HYBRID": {
       "type": "regression",
@@ -404,64 +573,197 @@
     }
   },
   "aggregate": {
-    "total_conditions": 7,
-    "passed_conditions": 6,
-    "condition_pass_rate": 0.8571428571428571,
-    "structural_generalization_rate": 0.75,
-    "overall_binding_accuracy": 1.0,
-    "verdict": "FALSIFIED-IN-SETTING"
+    "total_conditions": 10,
+    "passed_conditions": 9,
+    "condition_pass_rate": 0.9,
+    "structural_generalization_rate": 0.8,
+    "overall_binding_accuracy": 0.8571428571428571,
+    "verdict": "MIXED"
   },
   "condition_pass": {
     "P1_PATH_PREFIX": true,
     "G1_QUERY_STRING_SIMPLE": true,
     "G2_QUERY_STRING_MULTIPARAM": true,
-    "G3_DEEP_PATH": false,
+    "G3_DEEP_PATH": true,
+    "G4_MULTI_SLOT": false,
     "G5_PATH_QUERY_HYBRID": true,
     "N1_ORIGINAL": true,
-    "N1_CORRECTED": true
+    "N1_CORRECTED": true,
+    "B_LITERAL": true,
+    "B_UNFIXED": true
   },
-  "slot_prefixes_verification": {
-    "p1_slot_prefixes": {
+  "slot_prefixes_summary": {
+    "P1_PATH_PREFIX": {
+      "actual": {
+        "url": "users/"
+      },
+      "expected": {
+        "url": "users/"
+      },
+      "match": true,
+      "non_empty": true
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "actual": {
+        "url": "search?q="
+      },
+      "expected": {
+        "url": "search?q="
+      },
+      "match": true,
+      "non_empty": true
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "actual": {
+        "url": "items?category=books&page="
+      },
+      "expected": {
+        "url": "items?category=books&page="
+      },
+      "match": true,
+      "non_empty": true
+    },
+    "G3_DEEP_PATH": {
+      "actual": {
+        "url": "orgs/acme/repos/main/issues/"
+      },
+      "expected": {
+        "url": "repos/main/issues/"
+      },
+      "match": false,
+      "non_empty": true
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "actual": {
+        "url": "users/"
+      },
+      "expected": {
+        "url": "users/"
+      },
+      "match": true,
+      "non_empty": true
+    }
+  },
+  "g4_separate": {
+    "slot_count": 1,
+    "binding_accuracy": 0.0,
+    "slot_prefixes": {
       "url": "users/"
     },
-    "p1_expected": {
-      "url": "users/"
+    "architectural_bound": true,
+    "note": "G4 reported separately per prereg; not part of frozen decision_rule. slot_prefixes now non-empty ('users/') due to path-segment extraction \u2014 differs from parent (empty)."
+  },
+  "b_unfixed_comparison": {
+    "slot_count": 1,
+    "binding_accuracy": 1.0,
+    "slot_prefixes": {
+      "url": ""
     },
-    "p1_nonempty": true,
-    "g3_slot_prefixes": {
-      "url": "orgs/acme/repos/main/issues/"
+    "action_template": {
+      "method": "GET",
+      "url": "https://api.example.com/users/${url}"
     },
-    "g3_expected": {
-      "url": "repos/main/issues/"
-    },
-    "g3_nonempty": true,
-    "g5_slot_prefixes": {
-      "url": "users/"
-    },
-    "g5_expected": {
-      "url": "users/"
-    },
-    "g5_nonempty": true,
-    "computation_works": true
+    "note": "True unfixed heuristic: rfind('/') without Fix1/Fix2."
   },
   "decision_rule_evaluation": {
     "p1_passes": true,
+    "p1_slot_prefixes": {
+      "url": "users/"
+    },
     "g1_passes": true,
     "g2_passes": true,
-    "g3_passes": false,
+    "g3_passes_exact": false,
+    "g3_passes_binding": true,
+    "g3_slot_prefixes_actual": {
+      "url": "orgs/acme/repos/main/issues/"
+    },
+    "g3_slot_prefixes_expected": {
+      "url": "repos/main/issues/"
+    },
     "g5_passes": true,
+    "g5_slot_prefixes": {
+      "url": "users/"
+    },
     "n1_original_passes": true,
     "n1_corrected_passes": true,
+    "b_literal_passes": true,
     "pipeline_no_errors": true,
-    "all_eight_pass": false,
-    "slot_prefixes_computation_works": true,
-    "verdict": "FALSIFIED-IN-SETTING"
+    "all_nine_pass": false,
+    "verdict": "MIXED"
   },
-  "fixes_inherited": {
+  "template_invariance": {
+    "P1_PATH_PREFIX": {
+      "matches_parent": true,
+      "actual": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}"
+      },
+      "parent": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}"
+      }
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "matches_parent": true,
+      "actual": {
+        "method": "GET",
+        "url": "https://api.example.com/search?q=${url}"
+      },
+      "parent": {
+        "method": "GET",
+        "url": "https://api.example.com/search?q=${url}"
+      }
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "matches_parent": true,
+      "actual": {
+        "method": "GET",
+        "url": "https://api.example.com/items?category=books&page=${url}"
+      },
+      "parent": {
+        "method": "GET",
+        "url": "https://api.example.com/items?category=books&page=${url}"
+      }
+    },
+    "G3_DEEP_PATH": {
+      "matches_parent": true,
+      "actual": {
+        "method": "GET",
+        "url": "https://api.example.com/orgs/acme/repos/main/issues/${url}"
+      },
+      "parent": {
+        "method": "GET",
+        "url": "https://api.example.com/orgs/acme/repos/main/issues/${url}"
+      }
+    },
+    "G4_MULTI_SLOT": {
+      "matches_parent": true,
+      "actual": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}00"
+      },
+      "parent": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}00"
+      }
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "matches_parent": true,
+      "actual": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}/items?page=1"
+      },
+      "parent": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}/items?page=1"
+      }
+    }
+  },
+  "fixes_applied": {
     "fix1_suffix_guard": "Exclude single-character suffixes not preceded by structural delimiters (?, =, &)",
     "fix2_delimiter_bound_prefix": "Last-char of prefix in /?=& (validated in EXP-PRODUCT-34642376433)",
     "empty_prefix_guard": "Frozen: reject parameterization when common prefix is empty (truly disjoint URLs)",
-    "slot_prefixes_extraction": "New: extract path segment between domain authority and slot position (kernel.py lines 276-314)"
+    "slot_prefixes_extraction": "Path segment from domain authority end to slot position (committed in current kernel.py)"
   },
   "substrate": {
     "module": "src.spider.kernel",
