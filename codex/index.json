@@ -1993,6 +1993,31 @@
         "verdict.json": "a3180f2cd038b702fea77f1d9293013b8777ec18238e2b34fca9d0c6fbf830ff",
         "handoff.json": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
       }
+    },
+    "EXP-RUNTIME-34902094115": {
+      "lane": "runtime",
+      "request_id": "6aa973161cb4fccb074203c4",
+      "created_at": "2026-09-14T22:03:11.096208+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive deterministic CDN compression when response body sizes increase from 0-729 bytes to KB-scale JSON (1KB, 10KB, 100KB), where higher entropy may cause non-deterministic compression output or hash instability?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5",
+        "spec.json": "9f23d4f7b9489ac64e5cf7637e91d75bfbca9a3d8c63d3a30b2202fcc71d3059",
+        "prereg.md": "a816d69ffa35ed0f57a0c0819759b453ffe079f40ca857a2d851af47d70df563",
+        "freeze.json": "c4347c484ee6b198225a0cd9f80b710871ae2cb2bc42153601e3bff584de92de",
+        "result.json": "d4873919ed389369915cfe0d8a9f3b479428a9d570a15ec34d414d5a974fc1e6",
+        "report.md": "eb845ebf9b40bee9bd9d2d4b573ce10b55ffb5f8889871a9432a7ed6cdca3c29",
+        "provenance.json": "612678c04ef4ee53c9b04a3714124c495ed96e134bac0b09be0f69ad2fca406a",
+        "audit.json": "0dc690628ce9357c14614829b476e559cfb3db4f012c6f6491183bef04b5cabc",
+        "verdict.json": "4b5715e8914b8a9938dc138b5d6b0275bdd1ea0afde208449197972a5eab1f07",
+        "handoff.json": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
+      }
     }
   }
 }

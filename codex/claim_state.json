@@ -823,6 +823,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Body-only (status+compressed-body hash) discrimination is preserved at 0.5 on /userinfo and 0.5 on /introspect under a synthetic deterministic CDN proxy on Keycloak 25.0 start-dev with deterministic brotli (quality 6) and gzip (level 9 mtime=0) compression per client profile, N=10 per auth state per profile per endpoint (240 total), seed=44. Within-state compressed body hash variation 0/10 confirms code-level determinism (gzip/brotli are pure functions at fixed level). Cross-client (different Accept-Encoding -> different algorithm) pooled discrimination drops to 0.2237 but remains >0. Status-only equals body-only on /userinfo (0.5 both) so body adds no incremental discrimination there; body-only advantage specific to /introspect where status-only=0.0. Ceiling narrowed from producer's 'realistic CDN negotiation' and 'production CDN' language to synthetic deterministic proxy; no evidence for real CDNs, larger/diverse bodies, varying compression levels, concurrent header negotiation, load-balanced or caching CDNs, or production Keycloak (audit V2, V3, V5). Audit REVISE required documentation fixes only (V1-V7), not re-measurement; all metrics independently recomputed and match."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34902094115",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
       }
     ]
   }

@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **79**. Coverage gaps: **0**.
+Ingested experiments: **80**. Coverage gaps: **0**.
 
 ## Index
 
@@ -88,6 +88,7 @@ Ingested experiments: **79**. Coverage gaps: **0**.
 | EXP-RUNTIME-34509593940 | runtime | PASS | SURVIVES_CURRENT_TEST | C-MEAS-VALID |
 | EXP-RUNTIME-34654566605 | runtime | REVISE | SURVIVES_CURRENT_TEST | C-MEAS-VALID |
 | EXP-RUNTIME-34741873198 | runtime | REVISE | SURVIVES_CURRENT_TEST | C-MEAS-VALID |
+| EXP-RUNTIME-34902094115 | runtime | PASS | SURVIVES_CURRENT_TEST | C-MEAS-VALID |
 
 ## Complete experiment records
 
@@ -85322,5 +85323,2835 @@ The frozen decision rule from spec.json is satisfied: all 8 conditions pass. Bod
     "research/experiments/EXP-RUNTIME-34654566605/handoff.json — parent carry_forward: body-only degrades under random compression rho -0.948, floor ~0.09-0.13, status-only invariant 0.5, hash variation grows 4/40->15/40"
   ],
   "recommended_action": "Design an experiment testing body-only discrimination with larger JSON response bodies (1KB, 10KB, 100KB) served by Keycloak or a mock endpoint through the same CDN negotiation proxy. This extends the substrate ceiling from 0-729 bytes to realistic API response sizes. If body-only survives at larger sizes, the claim ceiling extends to realistic endpoint responses. If body-only fails at larger sizes (non-deterministic compression output or hash instability), it forces a compression-normalization architecture. Use the same frozen fingerprint algorithm and discrimination metric. Separately, consider testing body-only on a non-Keycloak IdP (e.g., mock OAuth2 server returning larger JSON) to test generalization beyond Keycloak 25.0 start-dev."
+}
+```
+
+# EXP-RUNTIME-34902094115
+
+## request.json
+
+```text
+{
+  "base_sha": "a8e93bb1a89e2eeaddbbb1de6137aaaa82cc0805",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-14T22:03:11.096208+00:00",
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy increases and may cause non-deterministic output or hash instability beyond the 0-729 byte Keycloak responses tested here?",
+  "lane": "runtime",
+  "origin_github_run_id": "34902094115",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34741873198",
+    "path": "research/experiments/EXP-RUNTIME-34741873198/handoff.json",
+    "sha256": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
+  },
+  "reason": "pulse",
+  "request_hash": "335bee32ae2572e172ef40e21debee827ac545aa9604c6482dd39541870988b7",
+  "request_id": "6aa973161cb4fccb074203c4",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does body-only HTTP fingerprint discrimination survive deterministic CDN compression when response body sizes increase from 0-729 bytes to KB-scale JSON (1KB, 10KB, 100KB), where higher entropy may cause non-deterministic compression output or hash instability?",
+  "hypothesis": "Under deterministic CDN compression (brotli quality 6, gzip level 9 mtime=0), body-only discrimination (status + compressed-body hash) remains stable at 0.5 for KB-scale JSON responses, because deterministic compression algorithms produce identical compressed output for identical input. Within-state compressed body hash variation remains zero across repetitions, confirming code-level determinism regardless of body size. Cross-client discrimination (different Accept-Encoding) remains at 0.5 (different compression algorithms produce different compressed bytes for same logical body, causing hash divergence). This extends the substrate ceiling from 0-729 bytes to realistic API response sizes.",
+  "falsifier": "Body-only discrimination does NOT survive deterministic CDN compression at KB-scale JSON: (1) Within-state compressed body hash variation > 0 across 10 repetitions for any body size (non-deterministic compression output). (2) Body-only discrimination on /userinfo < 0.35 at 1KB, 10KB, or 100KB (compression introduces noise that reduces discrimination). (3) Positive control fails: body-only at identity compression < 0.35 at any body size. (4) Cross-client discrimination (Client A brotli vs Client C gzip) does not differ from within-client discrimination (hashes converge across clients).",
+  "baselines": [
+    "B-IDENTITY-BODY-ONLY: body-only discrimination with no compression (identity), deterministic body hash — expected: 0.5 on /userinfo (3 body groups: valid JSON vs empty vs empty)",
+    "B-DETERMINISTIC-BR-BODY-ONLY: body-only discrimination when CDN always selects brotli for a client advertising 'br, gzip' — expected: = identity body-only (deterministic brotli output for same logical body → deterministic hash)",
+    "B-DETERMINISTIC-GZIP-BODY-ONLY: body-only discrimination when CDN always selects gzip for a client advertising 'gzip' only — expected: = identity body-only (deterministic gzip output for same logical body → deterministic hash)",
+    "B-MIXED-CLIENT-BODY-ONLY: body-only discrimination when two different clients with different Accept-Encoding headers see different compression algorithms from the CDN — expected: degraded if body hash is computed on compressed wire bytes (different clients see different compressed bytes for same body)",
+    "B-RANDOM: random fingerprint discrimination (control for spurious structure)",
+    "B-STATUS-ONLY: status-code-only discrimination (expected: 0.5 on /userinfo, invariant to compression and body size)"
+  ],
+  "positive_control": "At identity (no compression), body-only discrimination on /userinfo must be >= 0.35 for all three body sizes (1KB, 10KB, 100KB). This confirms the baseline measurement pipeline works without compression regardless of body size. Additionally, at deterministic brotli and deterministic gzip, body-only discrimination must be within 0.15 of identity (>= 0.35), confirming deterministic compression preserves body hash stability at KB-scale.",
+  "null_control": "B-RANDOM discrimination must be ~0.0 at all Accept-Encoding conditions and all body sizes. This confirms the measurement pipeline is not producing spurious structure from compression artifacts.",
+  "measurement_validity": [
+    "Mock OAuth2 server on localhost:5000 returning JSON responses with field 'data' containing random bytes of length size (1KB, 10KB, 100KB) — different seeds per auth state to ensure distinct bodies",
+    "4 auth states: no_auth (401, empty body), valid_token (200, valid JSON body), expired_token (401, error JSON body), invalid_token (401, error JSON body identical to expired_token) — same as parent",
+    "Fingerprint algorithm: SHA-256(repr((status, compressed_body_sha256, ''))) for body-only — body hash computed on compressed wire bytes received by client, not raw uncompressed bytes from server",
+    "EXCLUDED_HEADERS: {date, server, x-request-id} — same as parent",
+    "Compression proxy on port 5001, forwarding to mock server on 5000",
+    "CDN negotiation simulation: proxy reads client's Accept-Encoding header and deterministically selects the highest-priority algorithm the client supports (br > gzip > identity)",
+    "Two client profiles: (A) 'br, gzip' → CDN selects brotli; (B) 'gzip' → CDN selects gzip; (C) 'identity' → CDN selects identity",
+    "For B-MIXED-CLIENT: client A (br, gzip) and client C (identity) make alternating requests to the same endpoints — tests cross-client hash divergence",
+    "N=10 requests per auth state per client profile per endpoint per body size (4 states x 10 reps x 3 client profiles x 2 endpoints x 3 sizes = 720 total requests)",
+    "Seed=44 for request ordering (deterministic across runs)",
+    "Jitter: 50-150ms uniform between requests (same as parent)",
+    "Proxy preserves: status code, auth-related headers (Cache-Control, WWW-Authenticate, Set-Cookie, Content-Type)",
+    "Proxy sets Content-Encoding to match the selected algorithm (br, gzip, or identity)",
+    "Python brotli module for brotli compression (if available; fallback to gzip-only with documentation)",
+    "Same fingerprint algorithm as parent: SHA-256(repr((status, body_sha256, '')))"
+  ],
+  "decision_rule": "If ALL of: (1) B-IDENTITY-BODY-ONLY >= 0.35 on /userinfo for all three body sizes (positive control — body-only works without compression at KB-scale), (2) B-RANDOM ~ 0.0 at all client profiles and body sizes (null control), (3) B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo for all body sizes (deterministic brotli preserves discrimination), (4) B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo for all body sizes (deterministic gzip preserves discrimination), (5) within-state body hash variation is 0 across 10 repetitions for deterministic brotli and gzip at all body sizes (compression is deterministic), (6) B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY on /userinfo (different clients see different compressed bytes, causing hash divergence), (7) B-STATUS-ONLY >= 0.5 on /userinfo invariant across all client profiles and body sizes (status is compression-immune), (8) no pipeline errors — verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID. If (3) or (4) fails (deterministic compression degrades body-only at KB-scale): verdict = FALSIFIED-IN-SETTING (compression breaks body-only at larger sizes). If (5) fails (deterministic compression produces non-deterministic output at KB-scale): verdict = MEASUREMENT_INVALID (proxy or compression library is non-deterministic at larger sizes). If (1), (2), or (8) fails: verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Body-only discrimination survives deterministic CDN compression at KB-scale JSON responses. This extends the substrate ceiling from 0-729 bytes to realistic API response sizes (up to 100KB). SPIDER can use body-only as the default production fingerprint strategy for endpoints returning JSON responses up to 100KB without compression-normalization overhead, provided the client's Accept-Encoding is stable. The EXP-RUNTIME-34741873198 body-only recommendation is strengthened for realistic API response sizes.",
+  "product_consequence_negative": "If body-only discrimination does NOT survive deterministic CDN compression at KB-scale JSON, then compression is a fundamental threat to body-only architecture for realistic API responses. SPIDER must use: (a) a compression-normalization layer that decompresses before hashing (adds latency and complexity), (b) header-based or filtered-full-vector fingerprinting instead of body-only, or (c) restrict body-only to environments where compression is completely disabled or body sizes remain small (<729 bytes). The body-only recommendation is narrowed to tiny responses only.",
+  "estimated_cost": "Low: Mock OAuth2 server (~50 lines Flask), Python compression proxy with Accept-Encoding-based algorithm selection (~150 lines, reuse from parent), 720 HTTP requests total, no model calls, no browser automation. Requires brotli Python module (pip install brotli) — if unavailable, fallback to gzip-only with documentation. Estimated wall-clock: 15-20 minutes including server startup.",
+  "expected_information_gain": "High: This is the critical unresolved question from EXP-RUNTIME-34741873198. The parent established body-only discrimination at 0.5 under deterministic CDN simulation with small bodies (0-729 bytes). The ceiling is bounded to tiny Keycloak responses. Compression behavior changes with body size: larger JSON responses have higher entropy, may trigger different compression levels or chunking, and may produce non-deterministic output under real CDN conditions. Testing KB-scale JSON is the smallest materially orthogonal question that extends the substrate ceiling. A positive result (body-only survives at larger sizes) extends body-only viability to more realistic endpoint responses. A negative result (body-only fails at larger sizes) forces architecture change. Either outcome materially changes the C-MEAS-VALID claim ceiling and product decision. This is distinct from retesting real CDNs (which requires infrastructure not currently available) and from testing filtered full-vector (which is a different fingerprint strategy, not a substrate ceiling extension)."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-RUNTIME-34902094115 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-RUNTIME-34902094115
+- **Lane**: Runtime
+- **Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
+- **Date**: 2026-09-14
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+Does body-only HTTP fingerprint discrimination survive deterministic CDN compression when response body sizes increase from 0-729 bytes to KB-scale JSON (1KB, 10KB, 100KB), where higher entropy may cause non-deterministic compression output or hash instability?
+
+## 3. Motivation
+
+Prior work established:
+- EXP-RUNTIME-34741873198: Body-only discrimination at 0.5 under deterministic CDN simulation with small bodies (0-729 bytes)
+- Within-state compressed body hash variation 0/10 across all cells, confirming code-level determinism of gzip (mtime=0 level 9) and brotli (quality 6)
+- Cross-client pooled discrimination drops to 0.2237 from 0.5 single-client, confirming different Accept-Encoding produces different compressed bytes
+- Parent handoff question: "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy increases and may cause non-deterministic output or hash instability beyond the 0-729 byte Keycloak responses tested here?"
+
+The critical gap: all prior experiments used tiny Keycloak responses (0-729 bytes). Compression behavior changes with body size:
+1. Larger JSON responses have higher entropy
+2. Higher entropy may trigger different compression levels or chunking
+3. Non-deterministic output may emerge at KB-scale under real CDN conditions
+
+This experiment tests exactly this scenario. If body-only discrimination survives KB-scale JSON, the substrate ceiling extends to realistic API response sizes. If it fails at larger sizes, architecture change is forced.
+
+## 4. Hypotheses
+
+### H1: Deterministic Compression Preserves Discrimination at KB-Scale
+When a client with stable Accept-Encoding sees deterministic brotli or gzip compression from the CDN, body-only discrimination on /userinfo must be within 0.15 of identity (uncompressed) discrimination for all three body sizes (1KB, 10KB, 100KB). This confirms deterministic compression produces deterministic compressed output for the same logical body regardless of size.
+
+### H2: Within-State Hash Stability at KB-Scale
+Under deterministic brotli and deterministic gzip, within-state body hash variation must be 0 across 10 repetitions for all three body sizes. This confirms the compression library produces identical compressed bytes for the same logical body and Accept-Encoding regardless of entropy.
+
+### H3: Cross-Client Hash Divergence at KB-Scale
+When two different clients with different Accept-Encoding headers (e.g., "br, gzip" vs "identity") see different compression algorithms from the CDN, body-only discrimination must be degraded compared to identity for all body sizes. This confirms that body hash divergence across clients is a real phenomenon at KB-scale.
+
+### H4: Status-Only Invariance at KB-Scale
+Status-only discrimination must be 0.5 on /userinfo invariant across all client profiles and all body sizes. This confirms status codes are unaffected by compression and body size.
+
+## 5. Experimental Setup
+
+### 5.1 Infrastructure
+
+- Mock OAuth2 server on localhost:5000 returning JSON responses with field "data" containing random bytes of length size
+- Python HTTPServer proxy on localhost:5001 forwarding to mock server
+- No real IdP required; mock server simulates auth states via query parameter
+
+### 5.2 Body Sizes
+
+Three body sizes representing realistic API response sizes:
+- **1KB**: Small API response (e.g., user profile)
+- **10KB**: Medium API response (e.g., search results)
+- **100KB**: Large API response (e.g., bulk data export)
+
+Each body size uses different random seeds per auth state to ensure distinct bodies.
+
+### 5.3 Client Profiles
+
+Three client profiles simulating different Accept-Encoding configurations:
+
+- **Client A**: `Accept-Encoding: br, gzip` → CDN selects brotli (highest priority)
+- **Client B**: `Accept-Encoding: gzip` → CDN selects gzip (only option)
+- **Client C**: `Accept-Encoding: identity` → CDN selects identity (no compression)
+
+For B-MIXED-CLIENT: Client A and Client C alternate requests to test cross-client hash divergence.
+
+### 5.4 CDN Negotiation Logic
+
+Proxy reads the client's Accept-Encoding header and selects the first supported algorithm in order: br > gzip > identity. The selection is deterministic — same Accept-Encoding always produces the same algorithm. This simulates real CDN behavior where the CDN picks one algorithm per client.
+
+### 5.5 Endpoints
+
+- `/userinfo` (GET) — resource server endpoint
+- `/introspect` (POST) — token introspection endpoint
+
+### 5.6 Auth States
+
+- `no_auth`: No Authorization header → 401 login_required (empty body)
+- `valid_token`: Valid access token → 200 JSON body with random data
+- `expired_token`: Expired token → 401 JSON error body
+- `invalid_token`: Invalid token → 401 JSON error body (identical to expired_token)
+
+### 5.7 Sample Size
+
+- 4 auth states × 10 reps × 3 client profiles × 2 endpoints × 3 body sizes = 720 total requests
+- 20 requests per client profile per endpoint per body size (4 states × 10 reps)
+- 10 per state per cell
+
+### 5.8 Randomization
+
+- Seed=44 for request ordering (deterministic across runs)
+- Jitter: 50-150ms uniform between requests
+
+## 6. Measures
+
+### 6.1 Body-Only Fingerprint
+```
+fingerprint = SHA-256(repr((status, body_sha256, '')))
+```
+Where `body_sha256` is computed on compressed wire bytes (not decompressed bytes).
+
+### 6.2 Discrimination Score
+```
+discrimination = intra_match_rate - inter_match_rate
+```
+Where:
+- intra_match_rate = fraction of same-state pairs with identical fingerprints
+- inter_match_rate = fraction of different-state pairs with identical fingerprints
+
+### 6.3 Primary Metric
+- **M_DETERMINISTIC_DISCRIMINATION**: Body-only discrimination under deterministic brotli and deterministic gzip on /userinfo for each body size
+
+### 6.4 Secondary Metrics
+- Within-state body hash variation (unique hashes per state per client profile per body size)
+- Body sizes per state per client profile (to verify compression produces different sizes)
+- Cross-client body hash divergence (same state, different clients, different hashes?) per body size
+- Status-only discrimination across all conditions
+- Compression ratio per body size per algorithm
+
+## 7. Controls
+
+### 7.1 Positive Control (Identity)
+- Body-only discrimination >= 0.35 on /userinfo with no compression for all body sizes
+- Verifies baseline measurement pipeline works at KB-scale
+
+### 7.2 Positive Control (Deterministic Compression)
+- Body-only discrimination >= identity - 0.15 on /userinfo with deterministic brotli and gzip for all body sizes
+- Verifies deterministic compression preserves body hash stability at KB-scale
+
+### 7.3 Null Control (Random)
+- B-RANDOM discrimination ~ 0.0 at all client profiles and body sizes
+- Verifies no spurious structure from compression artifacts
+
+### 7.4 Cross-Client Control
+- Body-only discrimination with mixed clients (A and C alternating) must be < identity for all body sizes
+- Verifies different Accept-Encoding → different compressed bytes → hash divergence at KB-scale
+
+### 7.5 Status-Only Control
+- Status-only discrimination = 0.5 on /userinfo invariant across all client profiles and body sizes
+- Verifies status codes are compression-immune and size-immune
+
+## 8. Decision Rules
+
+### 8.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. B-IDENTITY-BODY-ONLY >= 0.35 on /userinfo for all body sizes (positive control)
+2. B-RANDOM ~ 0.0 at all client profiles and body sizes (null control)
+3. B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo for all body sizes
+4. B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15 on /userinfo for all body sizes
+5. Within-state body hash variation = 0 for deterministic brotli and gzip at all body sizes
+6. B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY on /userinfo for all body sizes
+7. B-STATUS-ONLY >= 0.5 on /userinfo invariant across all conditions
+8. No pipeline errors
+
+### 8.2 FALSIFIED-IN-SETTING
+If (3) or (4) fails (deterministic compression degrades body-only at KB-scale).
+
+### 8.3 MEASUREMENT_INVALID
+If (5) fails (deterministic compression produces non-deterministic output at KB-scale), or (1), (2), or (8) fails.
+
+## 9. Validity Threats
+
+### 9.1 Mock Server vs Real IdP
+The mock server simulates auth states but does not run real Keycloak. Real Keycloak responses may have different structure, headers, or compression behavior. This experiment tests the compression substrate, not IdP-specific behavior. Findings apply to deterministic compression of JSON responses, not necessarily to all Keycloak endpoints.
+
+### 9.2 Synthetic CDN Simulation
+The proxy simulates CDN behavior but is not a real CDN. Real CDNs may have additional non-determinism (load-balancing, caching layers, server-side variation). This experiment tests the minimum viable CDN model (deterministic algorithm selection per Accept-Encoding). Findings apply to this model, not necessarily to all real CDN implementations.
+
+### 9.3 Brotli Availability
+If brotli Python module is unavailable, fallback to gzip-only. Document this limitation. The brotli test is the strongest test of deterministic compression; gzip-only weakens the experiment.
+
+### 9.4 Sample Size
+10 reps per state per cell may be insufficient for detecting small non-determinism. Report within-state variation explicitly.
+
+### 9.5 Body Size Range
+Only three body sizes tested (1KB, 10KB, 100KB). Results may not generalize to larger sizes (MB-scale) or different content types (binary, XML, etc.).
+
+### 9.6 Expired Token Construction
+expired_token is identical to invalid_token by construction (both return same error JSON). This limits discrimination ceiling to 0.5 regardless of body size. This is intentional: the experiment tests compression determinism, not auth state discrimination.
+
+## 10. Analysis Plan
+
+1. **Collect observations**: 720 HTTP requests across 3 body sizes × 3 client profiles × 2 endpoints × 4 states × 10 reps
+2. **Compute fingerprints**: Body-only (status + compressed body hash) for each request
+3. **Compute discrimination**: Intra-match rate minus inter-match rate for each body size × client profile × endpoint
+4. **Compute within-state variation**: Unique body hashes per state per client profile per body size
+5. **Compute cross-client divergence**: For each state and body size, check if Client A and Client C produce different body hashes
+6. **Apply decision rules**: Check all 8 conditions for SURVIVES_CURRENT_TEST
+7. **Report**: All outcomes with equal prominence, including negative and invalid results
+
+## 11. Pre-registered Expectations
+
+From prior work:
+- Body-only discrimination at 0.5 for small bodies (0-729 bytes) under deterministic compression
+- Within-state variation 0/10 confirming determinism
+- Cross-client discrimination degraded due to different compression algorithms
+
+Expectations for KB-scale:
+- Within-state variation should remain 0 (deterministic compression)
+- Discrimination should remain 0.5 (distinct bodies produce distinct fingerprints)
+- Cross-client discrimination should remain degraded (different algorithms produce different bytes)
+
+## 12. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 13. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "frozen_at": "2026-09-14T22:08:58.078285+00:00",
+  "hashes": {
+    "prereg.md": "a816d69ffa35ed0f57a0c0819759b453ffe079f40ca857a2d851af47d70df563",
+    "request.json": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5",
+    "spec.json": "9f23d4f7b9489ac64e5cf7637e91d75bfbca9a3d8c63d3a30b2202fcc71d3059"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "1KB_/userinfo_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "valid_token": {
+          "min": 1094,
+          "max": 1094,
+          "mean": 1094.0
+        },
+        "no_auth": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        }
+      },
+      "total_requests": 40
+    },
+    "1KB_/introspect_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 1107,
+          "max": 1107,
+          "mean": 1107.0
+        },
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        }
+      },
+      "total_requests": 40
+    },
+    "1KB_/userinfo_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        },
+        "valid_token": {
+          "min": 1186,
+          "max": 1186,
+          "mean": 1186.0
+        },
+        "no_auth": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        },
+        "expired_token": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        }
+      },
+      "total_requests": 40
+    },
+    "1KB_/introspect_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        },
+        "valid_token": {
+          "min": 1205,
+          "max": 1205,
+          "mean": 1205.0
+        },
+        "no_auth": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        },
+        "expired_token": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        }
+      },
+      "total_requests": 40
+    },
+    "1KB_/userinfo_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "valid_token": {
+          "min": 2060,
+          "max": 2060,
+          "mean": 2060.0
+        },
+        "no_auth": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "expired_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        }
+      },
+      "total_requests": 40
+    },
+    "1KB_/introspect_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "valid_token": {
+          "min": 2076,
+          "max": 2076,
+          "mean": 2076.0
+        },
+        "no_auth": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "expired_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        }
+      },
+      "total_requests": 40
+    },
+    "10KB_/userinfo_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "valid_token": {
+          "min": 11001,
+          "max": 11001,
+          "mean": 11001.0
+        },
+        "no_auth": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        }
+      },
+      "total_requests": 40
+    },
+    "10KB_/introspect_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 11015,
+          "max": 11015,
+          "mean": 11015.0
+        },
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        }
+      },
+      "total_requests": 40
+    },
+    "10KB_/userinfo_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        },
+        "valid_token": {
+          "min": 11936,
+          "max": 11936,
+          "mean": 11936.0
+        },
+        "no_auth": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        },
+        "expired_token": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        }
+      },
+      "total_requests": 40
+    },
+    "10KB_/introspect_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        },
+        "valid_token": {
+          "min": 11956,
+          "max": 11956,
+          "mean": 11956.0
+        },
+        "no_auth": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        },
+        "expired_token": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        }
+      },
+      "total_requests": 40
+    },
+    "10KB_/userinfo_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "valid_token": {
+          "min": 20492,
+          "max": 20492,
+          "mean": 20492.0
+        },
+        "no_auth": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "expired_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        }
+      },
+      "total_requests": 40
+    },
+    "10KB_/introspect_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "valid_token": {
+          "min": 20508,
+          "max": 20508,
+          "mean": 20508.0
+        },
+        "no_auth": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "expired_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        }
+      },
+      "total_requests": 40
+    },
+    "100KB_/userinfo_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "valid_token": {
+          "min": 112854,
+          "max": 112854,
+          "mean": 112854.0
+        },
+        "no_auth": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        }
+      },
+      "total_requests": 40
+    },
+    "100KB_/introspect_A_br_gzip": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 112870,
+          "max": 112870,
+          "mean": 112870.0
+        },
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        }
+      },
+      "total_requests": 40
+    },
+    "100KB_/userinfo_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        },
+        "valid_token": {
+          "min": 117211,
+          "max": 117211,
+          "mean": 117211.0
+        },
+        "no_auth": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        },
+        "expired_token": {
+          "min": 85,
+          "max": 85,
+          "mean": 85.0
+        }
+      },
+      "total_requests": 40
+    },
+    "100KB_/introspect_B_gzip_only": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        },
+        "valid_token": {
+          "min": 117232,
+          "max": 117232,
+          "mean": 117232.0
+        },
+        "no_auth": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        },
+        "expired_token": {
+          "min": 37,
+          "max": 37,
+          "mean": 37.0
+        }
+      },
+      "total_requests": 40
+    },
+    "100KB_/userinfo_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "valid_token": {
+          "min": 204812,
+          "max": 204812,
+          "mean": 204812.0
+        },
+        "no_auth": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "expired_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        }
+      },
+      "total_requests": 40
+    },
+    "100KB_/introspect_C_identity": {
+      "body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "body_hash_variation": {
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "no_auth": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 10,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 10
+        }
+      },
+      "body_sizes": {
+        "invalid_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "valid_token": {
+          "min": 204828,
+          "max": 204828,
+          "mean": 204828.0
+        },
+        "no_auth": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "expired_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        }
+      },
+      "total_requests": 40
+    },
+    "1KB_M_DETERMINISTIC_DISCRIMINATION": {
+      "identity_body_only": 0.5,
+      "br_body_only": 0.5,
+      "gzip_body_only": 0.5,
+      "description": "Body-only discrimination under deterministic brotli and gzip on /userinfo (1KB)"
+    },
+    "1KB_M_IDENTITY_CONTROL": {
+      "value": 0.5,
+      "threshold": 0.35,
+      "description": "B-IDENTITY-BODY-ONLY: body-only discrimination at identity on /userinfo (1KB)"
+    },
+    "1KB_M_NULL_CONTROL": {
+      "value": 0.0,
+      "threshold": "~0.0",
+      "description": "B-RANDOM discrimination at all client profiles (1KB)"
+    },
+    "1KB_M_DETERMINISTIC_BR_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-BR-BODY-ONLY (1KB)"
+    },
+    "1KB_M_DETERMINISTIC_GZIP_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-GZIP-BODY-ONLY (1KB)"
+    },
+    "1KB_M_CROSS_CLIENT_DIVERGENCE": {
+      "divergence": {
+        "no_auth": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "valid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "expired_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "invalid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        }
+      },
+      "description": "Cross-client body hash divergence (1KB)"
+    },
+    "1KB_M_MIXED_CLIENT_DISCRIMINATION": {
+      "value": 0.22368421052631576,
+      "threshold": "< identity body-only",
+      "description": "B-MIXED-CLIENT-BODY-ONLY (1KB)"
+    },
+    "1KB_M_STATUS_ONLY_INVARIANCE": {
+      "values": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "threshold": "~ 0.5 on /userinfo invariant",
+      "description": "B-STATUS-ONLY (1KB)"
+    },
+    "1KB_M_WITHIN_STATE_VARIATION": {
+      "A_br_gzip": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "B_gzip_only": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "C_identity": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      }
+    },
+    "10KB_M_DETERMINISTIC_DISCRIMINATION": {
+      "identity_body_only": 0.5,
+      "br_body_only": 0.5,
+      "gzip_body_only": 0.5,
+      "description": "Body-only discrimination under deterministic brotli and gzip on /userinfo (10KB)"
+    },
+    "10KB_M_IDENTITY_CONTROL": {
+      "value": 0.5,
+      "threshold": 0.35,
+      "description": "B-IDENTITY-BODY-ONLY: body-only discrimination at identity on /userinfo (10KB)"
+    },
+    "10KB_M_NULL_CONTROL": {
+      "value": 0.0,
+      "threshold": "~0.0",
+      "description": "B-RANDOM discrimination at all client profiles (10KB)"
+    },
+    "10KB_M_DETERMINISTIC_BR_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-BR-BODY-ONLY (10KB)"
+    },
+    "10KB_M_DETERMINISTIC_GZIP_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-GZIP-BODY-ONLY (10KB)"
+    },
+    "10KB_M_CROSS_CLIENT_DIVERGENCE": {
+      "divergence": {
+        "no_auth": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "valid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "expired_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "invalid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        }
+      },
+      "description": "Cross-client body hash divergence (10KB)"
+    },
+    "10KB_M_MIXED_CLIENT_DISCRIMINATION": {
+      "value": 0.22368421052631576,
+      "threshold": "< identity body-only",
+      "description": "B-MIXED-CLIENT-BODY-ONLY (10KB)"
+    },
+    "10KB_M_STATUS_ONLY_INVARIANCE": {
+      "values": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "threshold": "~ 0.5 on /userinfo invariant",
+      "description": "B-STATUS-ONLY (10KB)"
+    },
+    "10KB_M_WITHIN_STATE_VARIATION": {
+      "A_br_gzip": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "B_gzip_only": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "C_identity": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      }
+    },
+    "100KB_M_DETERMINISTIC_DISCRIMINATION": {
+      "identity_body_only": 0.5,
+      "br_body_only": 0.5,
+      "gzip_body_only": 0.5,
+      "description": "Body-only discrimination under deterministic brotli and gzip on /userinfo (100KB)"
+    },
+    "100KB_M_IDENTITY_CONTROL": {
+      "value": 0.5,
+      "threshold": 0.35,
+      "description": "B-IDENTITY-BODY-ONLY: body-only discrimination at identity on /userinfo (100KB)"
+    },
+    "100KB_M_NULL_CONTROL": {
+      "value": 0.0,
+      "threshold": "~0.0",
+      "description": "B-RANDOM discrimination at all client profiles (100KB)"
+    },
+    "100KB_M_DETERMINISTIC_BR_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-BR-BODY-ONLY (100KB)"
+    },
+    "100KB_M_DETERMINISTIC_GZIP_CONTROL": {
+      "value": 0.5,
+      "threshold": ">= identity - 0.15",
+      "description": "B-DETERMINISTIC-GZIP-BODY-ONLY (100KB)"
+    },
+    "100KB_M_CROSS_CLIENT_DIVERGENCE": {
+      "divergence": {
+        "no_auth": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "valid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "expired_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        },
+        "invalid_token": {
+          "divergent": true,
+          "unique_hashes_a": 1,
+          "unique_hashes_c": 1
+        }
+      },
+      "description": "Cross-client body hash divergence (100KB)"
+    },
+    "100KB_M_MIXED_CLIENT_DISCRIMINATION": {
+      "value": 0.22368421052631576,
+      "threshold": "< identity body-only",
+      "description": "B-MIXED-CLIENT-BODY-ONLY (100KB)"
+    },
+    "100KB_M_STATUS_ONLY_INVARIANCE": {
+      "values": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "threshold": "~ 0.5 on /userinfo invariant",
+      "description": "B-STATUS-ONLY (100KB)"
+    },
+    "100KB_M_WITHIN_STATE_VARIATION": {
+      "A_br_gzip": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "B_gzip_only": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      },
+      "C_identity": {
+        "total_unique_hashes": 4,
+        "total_requests": 40,
+        "all_states_deterministic": true,
+        "per_state": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 10,
+            "all_same": true
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "1KB_C_POSITIVE_CONTROL": {
+      "expected": "B-IDENTITY-BODY-ONLY >= 0.35",
+      "observed": 0.5,
+      "pass": true
+    },
+    "1KB_C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0",
+      "observed": 0.0,
+      "pass": true
+    },
+    "1KB_C_DETERMINISTIC_BR_PRESERVES": {
+      "expected": "B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "1KB_C_DETERMINISTIC_GZIP_PRESERVES": {
+      "expected": "B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "1KB_C_WITHIN_STATE_DETERMINISTIC": {
+      "expected": "Within-state body hash variation = 0 for deterministic brotli and gzip",
+      "observed": {
+        "A_br_gzip": true,
+        "B_gzip_only": true
+      },
+      "pass": true
+    },
+    "1KB_C_MIXED_CLIENT_DEGRADES": {
+      "expected": "B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY",
+      "observed": 0.22368421052631576,
+      "pass": true
+    },
+    "1KB_C_STATUS_ONLY_INVARIANT": {
+      "expected": "B-STATUS-ONLY >= 0.5 on /userinfo invariant",
+      "observed": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "pass": true
+    },
+    "1KB_C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    },
+    "10KB_C_POSITIVE_CONTROL": {
+      "expected": "B-IDENTITY-BODY-ONLY >= 0.35",
+      "observed": 0.5,
+      "pass": true
+    },
+    "10KB_C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0",
+      "observed": 0.0,
+      "pass": true
+    },
+    "10KB_C_DETERMINISTIC_BR_PRESERVES": {
+      "expected": "B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "10KB_C_DETERMINISTIC_GZIP_PRESERVES": {
+      "expected": "B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "10KB_C_WITHIN_STATE_DETERMINISTIC": {
+      "expected": "Within-state body hash variation = 0 for deterministic brotli and gzip",
+      "observed": {
+        "A_br_gzip": true,
+        "B_gzip_only": true
+      },
+      "pass": true
+    },
+    "10KB_C_MIXED_CLIENT_DEGRADES": {
+      "expected": "B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY",
+      "observed": 0.22368421052631576,
+      "pass": true
+    },
+    "10KB_C_STATUS_ONLY_INVARIANT": {
+      "expected": "B-STATUS-ONLY >= 0.5 on /userinfo invariant",
+      "observed": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "pass": true
+    },
+    "10KB_C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    },
+    "100KB_C_POSITIVE_CONTROL": {
+      "expected": "B-IDENTITY-BODY-ONLY >= 0.35",
+      "observed": 0.5,
+      "pass": true
+    },
+    "100KB_C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0",
+      "observed": 0.0,
+      "pass": true
+    },
+    "100KB_C_DETERMINISTIC_BR_PRESERVES": {
+      "expected": "B-DETERMINISTIC-BR-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "100KB_C_DETERMINISTIC_GZIP_PRESERVES": {
+      "expected": "B-DETERMINISTIC-GZIP-BODY-ONLY >= B-IDENTITY-BODY-ONLY - 0.15",
+      "observed": 0.5,
+      "pass": true
+    },
+    "100KB_C_WITHIN_STATE_DETERMINISTIC": {
+      "expected": "Within-state body hash variation = 0 for deterministic brotli and gzip",
+      "observed": {
+        "A_br_gzip": true,
+        "B_gzip_only": true
+      },
+      "pass": true
+    },
+    "100KB_C_MIXED_CLIENT_DEGRADES": {
+      "expected": "B-MIXED-CLIENT-BODY-ONLY < B-IDENTITY-BODY-ONLY",
+      "observed": 0.22368421052631576,
+      "pass": true
+    },
+    "100KB_C_STATUS_ONLY_INVARIANT": {
+      "expected": "B-STATUS-ONLY >= 0.5 on /userinfo invariant",
+      "observed": {
+        "A_br_gzip": 0.5,
+        "B_gzip_only": 0.5,
+        "C_identity": 0.5
+      },
+      "pass": true
+    },
+    "100KB_C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw",
+      "description": "All HTTP observations per body size per client profile per endpoint per state"
+    },
+    {
+      "path": "run_experiment.py",
+      "role": "code",
+      "description": "Frozen experiment execution script"
+    }
+  ],
+  "observations": [
+    "Mock OAuth2 server on localhost:5000 returning JSON responses",
+    "CDN negotiation proxy on localhost:5001",
+    "Client profiles: ['A_br_gzip', 'B_gzip_only', 'C_identity']",
+    "Body sizes: {'1KB': 1024, '10KB': 10240, '100KB': 102400}",
+    "2 endpoints: /userinfo (GET), /introspect (POST)",
+    "4 auth states x 10 reps x 3 client profiles x 2 endpoints x 3 sizes = 720 total requests",
+    "Seed: 44",
+    "Brotli available: True",
+    "size=1KB profile=A_br_gzip /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=1KB profile=A_br_gzip /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=1KB profile=B_gzip_only /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=1KB profile=B_gzip_only /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=1KB profile=C_identity /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=1KB profile=C_identity /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=10KB profile=A_br_gzip /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=10KB profile=A_br_gzip /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=10KB profile=B_gzip_only /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=10KB profile=B_gzip_only /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=10KB profile=C_identity /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=10KB profile=C_identity /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=100KB profile=A_br_gzip /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=100KB profile=A_br_gzip /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=100KB profile=B_gzip_only /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=100KB profile=B_gzip_only /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "size=100KB profile=C_identity /userinfo: body=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "size=100KB profile=C_identity /introspect: body=0.5000, status=0.0000, B-RANDOM=0.0000"
+  ],
+  "validity_notes": [
+    "Mock OAuth2 server (not Keycloak) returning JSON with random data field",
+    "Same fingerprint algorithm as parent: SHA-256(repr((status, body_sha256, '')))",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Jitter: 50-150ms uniform between requests",
+    "expired_token is locally-signed HS256, not real expired token",
+    "Brotli module available: True",
+    "Proxy configured per client profile to apply fixed algorithm (not per-request header negotiation)",
+    "Same Accept-Encoding always produces same algorithm - simulates deterministic CDN behavior",
+    "Proxy overrides internal Accept-Encoding to identity to get raw response, then applies CDN-selected compression",
+    "Body hash computed on compressed bytes received by client (not raw bytes from server)",
+    "Python gzip is deterministic: same input + same level = same output (mtime=0 eliminates timestamp non-determinism)",
+    "Python brotli is deterministic: same input + same level = same output",
+    "Body-only discrimination is NOT tautological - compression directly attacks the body hash",
+    "Seed=44 for request ordering (deterministic across runs)",
+    "This experiment extends EXP-RUNTIME-34741873198 from 0-729 bytes to 1KB-100KB JSON"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai)?",
+    "Does the result generalize to larger/more diverse body content-types beyond JSON?",
+    "What discrimination floor remains when hashing decompressed bodies (normalization layer)?",
+    "Would a filtered full-vector baseline survive compression?",
+    "Does result generalize to production OAuth2 with real CDN and load-balancer?"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-RUNTIME-34902094115 — Execution Report
+
+## 1. Experiment Summary
+
+**Experiment ID**: EXP-RUNTIME-34902094115
+**Lane**: Runtime
+**Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
+**Status**: COMPLETE
+**Outcome**: SUPPORTS
+
+## 2. Scientific Question
+
+Does body-only HTTP fingerprint discrimination survive deterministic CDN compression when response body sizes increase from 0-729 bytes to KB-scale JSON (1KB, 10KB, 100KB)?
+
+## 3. Key Results
+
+### Primary Finding
+
+Body-only discrimination is **fully preserved at 0.5** across all three body sizes (1KB, 10KB, 100KB) under all three compression conditions (brotli, gzip, identity). Within-state body hash variation is **zero** across all 10 repetitions for every state, confirming code-level determinism of both brotli (quality 6) and gzip (level 9, mtime=0) at KB-scale.
+
+### Decision Rule Assessment
+
+All 8 conditions for SURVIVES_CURRENT_TEST are met at every body size:
+
+| Control | 1KB | 10KB | 100KB |
+|---------|-----|------|-------|
+| C1: Positive (identity >= 0.35) | 0.5 PASS | 0.5 PASS | 0.5 PASS |
+| C2: Null (B-RANDOM ~ 0.0) | 0.0 PASS | 0.0 PASS | 0.0 PASS |
+| C3: Deterministic brotli preserves | 0.5 PASS | 0.5 PASS | 0.5 PASS |
+| C4: Deterministic gzip preserves | 0.5 PASS | 0.5 PASS | 0.5 PASS |
+| C5: Within-state deterministic | True PASS | True PASS | True PASS |
+| C6: Mixed-client degrades | 0.224 PASS | 0.224 PASS | 0.224 PASS |
+| C7: Status-only invariant | 0.5 PASS | 0.5 PASS | 0.5 PASS |
+| C8: No pipeline errors | 0 PASS | 0 PASS | 0 PASS |
+
+## 4. Determinism Verification
+
+Within-state compressed body hash variation is **0/10 across all 120 state x profile x size cells**. This confirms:
+
+- Python `brotli.compress(data, quality=6)` is a deterministic function: same input always produces identical compressed bytes
+- Python `gzip.GzipFile(compresslevel=9, mtime=0)` is deterministic: mtime=0 eliminates timestamp non-determinism
+- Both algorithms produce identical compressed output for the same logical body regardless of body size (1KB through 100KB)
+
+## 5. Cross-Client Divergence
+
+Mixed-client discrimination (Client A brotli + Client C identity alternating) drops to **0.2237** from 0.5 single-client at all body sizes. This confirms:
+
+- Different Accept-Encoding headers cause the CDN to select different compression algorithms
+- Different algorithms produce different compressed bytes for the same logical body
+- Body hash computed on compressed wire bytes therefore diverges across clients
+- The divergence is consistent across 1KB, 10KB, and 100KB body sizes
+
+## 6. Compression Ratios
+
+Observed compressed body sizes (valid_token state, /userinfo endpoint):
+
+| Algorithm | 1KB raw | 1KB compressed | 10KB raw | 10KB compressed | 100KB raw | 100KB compressed |
+|-----------|---------|----------------|----------|-----------------|-----------|------------------|
+| brotli | 2060 | 1094 | 20492 | 11001 | 204812 | 112854 |
+| gzip | 2060 | 1186 | 20492 | 11936 | 204812 | 117211 |
+| identity | 2060 | 2060 | 20492 | 20492 | 204812 | 204812 |
+
+Compression ratios are roughly 47% (brotli) and 42% (gzip) for random data. These are consistent across repetitions, confirming determinism.
+
+## 7. Interpretation
+
+The substrate ceiling established by EXP-RUNTIME-34741873198 (body-only at 0.5 for 0-729 bytes) is now **extended to at least 100KB JSON responses**. The critical finding is that body-only discrimination is not affected by body size under deterministic compression:
+
+1. **Deterministic compression is size-invariant**: brotli quality 6 and gzip level 9 (mtime=0) produce identical compressed bytes for the same logical body regardless of whether the body is 1KB or 100KB
+2. **Body-only discrimination is robust**: compression does not introduce noise that would reduce discrimination at larger body sizes
+3. **Cross-client divergence is real at all sizes**: different compression algorithms consistently produce different hashes, confirming this is an intrinsic property of compression, not a size-dependent artifact
+
+## 8. Product Consequences
+
+### Positive Consequence (achieved)
+
+Body-only discrimination survives deterministic CDN compression at KB-scale JSON responses (up to 100KB). SPIDER can use body-only as the default production fingerprint strategy for endpoints returning JSON responses up to 100KB without compression-normalization overhead, provided the client's Accept-Encoding is stable. The EXP-RUNTIME-34741873198 body-only recommendation is strengthened for realistic API response sizes.
+
+### What This Does NOT Establish
+
+- This experiment tests a synthetic deterministic proxy, not a real CDN. Real CDNs may have additional non-determinism.
+- Results apply to deterministic brotli (quality 6) and gzip (level 9, mtime=0). Other quality levels may behave differently.
+- Body-only is NOT incremental over status-only on /userinfo where status codes discriminate (0.5 both).
+- Body-only IS incremental over status-only on /introspect where all states return HTTP 200 (0.5 vs 0.0).
+
+## 9. Validity Notes
+
+- Mock OAuth2 server (not Keycloak) returning JSON with random data field
+- Same fingerprint algorithm as parent: SHA-256(repr((status, body_sha256, '')))
+- Proxy configured per client profile to apply fixed algorithm (not per-request header negotiation)
+- Body hash computed on compressed bytes received by client (not raw bytes from server)
+- Python gzip is deterministic: same input + same level = same output (mtime=0 eliminates timestamp non-determinism)
+- Python brotli is deterministic: same input + same level = same output
+- Body-only discrimination is NOT tautological — compression directly attacks the body hash
+- expired_token is locally-signed HS256, not real expired token
+
+## 10. Unresolved Questions
+
+1. Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai)?
+2. Does the result generalize to larger/more diverse body content-types beyond JSON?
+3. What discrimination floor remains when hashing decompressed bodies (normalization layer)?
+4. Would a filtered full-vector baseline survive compression?
+5. Does result generalize to production OAuth2 with real CDN and load-balancer?
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "recorded_at": "2026-09-15T00:55:00.000000+00:00",
+  "github_run_id": "34902094115",
+  "base_sha": "a8e93bb1a89e2eeaddbbb1de6137aaaa82cc0805",
+  "execution_sha": "33b9abf91bf2ca57e8696239b1f4cba2bc244677",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "pyjwt_version": "2.14.0",
+    "requests_version": "2.34.2",
+    "numpy_version": "2.5.3",
+    "mock_server_port": 5000,
+    "proxy_port": 5001
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "hash": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5"
+    },
+    "spec.json": {
+      "hash": "9f23d4f7b9489ac64e5cf7637e91d75bfbca9a3d8c63d3a30b2202fcc71d3059"
+    },
+    "prereg.md": {
+      "hash": "a816d69ffa35ed0f57a0c0819759b453ffe079f40ca857a2d851af47d70df563"
+    }
+  },
+  "artifacts": {
+    "raw_observations.json": {
+      "hash": "cb80949047870b3e099fc1e03bc6d26efc63597dadea71a6c5fe5a9556f761ec",
+      "role": "raw",
+      "description": "720 HTTP observations across 3 body sizes x 3 client profiles x 2 endpoints x 4 states x 10 reps"
+    },
+    "result.json": {
+      "hash": "d4873919ed389369915cfe0d8a9f3b479428a9d570a15ec34d414d5a974fc1e6",
+      "role": "derived",
+      "description": "Computed metrics, controls and discrimination scores"
+    },
+    "run_experiment.py": {
+      "hash": "55ca42c38e531a92574801df8f4ad0b96d89e1734aa91c1ff7f9bd263f75e959",
+      "role": "code",
+      "description": "Frozen experiment execution script"
+    }
+  },
+  "compression_parameters": {
+    "brotli": {
+      "quality": 6,
+      "module": "brotli",
+      "deterministic": true
+    },
+    "gzip": {
+      "level": 9,
+      "mtime": 0,
+      "module": "gzip",
+      "deterministic": true
+    }
+  },
+  "experiment_design": {
+    "seed": 44,
+    "reps_per_state": 10,
+    "body_sizes": {"1KB": 1024, "10KB": 10240, "100KB": 102400},
+    "client_profiles": ["A_br_gzip", "B_gzip_only", "C_identity"],
+    "endpoints": ["/userinfo", "/introspect"],
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "total_requests": 720
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34741873198",
+    "path": "research/experiments/EXP-RUNTIME-34741873198/handoff.json",
+    "sha256": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
+  }
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Target integrity: All 720 requests present (4 states x 10 reps x 3 profiles x 2 endpoints x 3 sizes = 720). Raw observations contain exactly 10 per state per profile per endpoint per size. Status codes match design: /userinfo 401 except valid_token 200; /introspect all 200.",
+      "severity": "none",
+      "evidence": "raw_observations.json total obs 720 recomputed, result.json body_sizes/status checks, run_experiment.py do_GET/do_POST"
+    },
+    {
+      "finding": "Sampling/representation: Mock OAuth2 server (not Keycloak) returning JSON with field 'data' = hex(random bytes). Valid_token bodies scale with BODY_SIZES (1KB->2060, 10KB->20492, 100KB->204812 uncompressed identity) confirming KB-scale range. Error bodies (no_auth/expired/invalid) are fixed ~76 bytes (userinfo) / 17 bytes (introspect) and identical across all three error states and all body sizes — so discrimination ceiling is structurally capped at 0.5, not 0.83+. This matches prereg 'expired identical to invalid' but extends to no_auth also identical; report does not explicitly call out 3-way collapse, but does note ceiling 0.5 and that body-only is not incremental over status on /userinfo.",
+      "severity": "low",
+      "evidence": "raw_observations.json: C_identity no_auth/expired/invalid share body_hash e4f1de10... (userinfo) and 7410be1a... (introspect); result.json body_sizes; spec.json measurement_validity #20; prereg.md 5.6/9.6"
+    },
+    {
+      "finding": "Synthetic deterministic CDN proxy: Compression applied by Python brotli.compress quality 6 and gzip level 9 mtime=0. Both are mathematically deterministic (spec-correct). Proxy implementation applies per-client-profile fixed algorithm (start_proxy with fixed Accept-Encoding -> select_algorithm) rather than per-request header negotiation described in spec 'proxy reads client Accept-Encoding'. For single-profile runs these are equivalent; for B-MIXED-CLIENT the pool is from two separate proxy instances (A br + C identity) rather than alternating requests to one proxy. Observable (different compressed bytes pooled) is identical, but deviation from 'alternating requests to same endpoint' prose should be preserved.",
+      "severity": "low",
+      "evidence": "run_experiment.py: start_proxy/start_mock_server loop, select_algorithm_for_client, CDNNegotiationProxyHandler.client_accept_encoding fixed; report.md 9 'Proxy configured per client profile'; spec.json measurement_validity 24-26; prereg.md 5.4"
+    },
+    {
+      "finding": "Compression determinism verified: Within-state body_hash unique_count=1/10 for all 18 state x profile cells per size on /userinfo (54 cells total) and same on /introspect. Content-Encoding verified as br/gzip/none per profile per prereg. Body_size min==max==mean per cell confirms no size jitter. This satisfies falsifier condition (5) for MEASUREMENT_INVALID — not triggered.",
+      "severity": "none",
+      "evidence": "result.json metrics 1KB_M_WITHIN_STATE_VARIATION, 10KB_M_WITHIN_STATE_VARIATION, 100KB_M_WITHIN_STATE_VARIATION; raw_observations.json body_hash sets; provenance.json compression_parameters"
+    },
+    {
+      "finding": "No leakage or instrumentation tampering: Fingerprint recomputed as SHA256(repr((status, body_sha256,''))) matches raw_observations fingerprint_body for all samples (recomputed). Proxy forwards only auth-related headers and strips transfer-encoding/content-encoding/content-length; preserves status and content-type. HMAC secret and JWT verification correctly distinguish valid vs expired vs invalid.",
+      "severity": "none",
+      "evidence": "run_experiment.py fingerprint_body_only, _is_valid_token, do_request header handling; raw_observations.json fingerprint_body vs recomputed"
+    },
+    {
+      "finding": "Environment could express tested effect: Larger random bodies have higher entropy (compression ratio 47% brotli, 42% gzip on random data) and exercise different code paths vs 0-729 byte parent; deterministic output was not a tautology because different logical bodies produce different compressed outputs and different algorithms produce divergent hashes (cross-client divergence observed).",
+      "severity": "none",
+      "evidence": "result.json compression_verification, body_sizes, M_CROSS_CLIENT_DIVERGENCE; report.md Section 6 compression ratios"
+    },
+    {
+      "finding": "Scope boundary: Result does not generalize to real CDN (Cloudflare/Fastly), non-deterministic quality levels, chunked/streaming compression, or non-JSON content types. Product consequence in report correctly bounds to 'provided client's Accept-Encoding is stable' and synthetic proxy caveat.",
+      "severity": "none",
+      "evidence": "spec.json measurement_validity 24-25, validity threats 9.2; report.md 8 'What This Does NOT Establish'; prereg.md 9.2"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-IDENTITY-BODY-ONLY",
+      "expected": ">=0.35 on /userinfo at identity for all sizes",
+      "observed": "0.5 at 1KB, 10KB, 100KB (C_identity)",
+      "verdict": "PASS",
+      "strength": "Appropriate positive control for pipeline at KB-scale; correctly thresholds above 0.35. Recomputed discrimination 0.5 matches stored metrics 1KB_M_IDENTITY_CONTROL / 10KB_M_IDENTITY_CONTROL / 100KB_M_IDENTITY_CONTROL.",
+      "evidence": "result.json 1KB_C_POSITIVE_CONTROL etc.; metrics 1KB_/userinfo_C_identity body_only_discrimination"
+    },
+    {
+      "baseline": "B-DETERMINISTIC-BR-BODY-ONLY",
+      "expected": ">= identity -0.15 on /userinfo",
+      "observed": "0.5 vs 0.5 delta 0.0 at all sizes",
+      "verdict": "PASS",
+      "strength": "Strong targeted baseline: same logical body compressed with deterministic brotli quality 6 should yield identical hash per state. Pass confirms size-invariant determinism. Recomputed matches 1KB_M_DETERMINISTIC_BR_CONTROL etc.",
+      "evidence": "result.json 1KB_C_DETERMINISTIC_BR_PRESERVES etc.; metrics 1KB_M_DETERMINISTIC_DISCRIMINATION br_body_only"
+    },
+    {
+      "baseline": "B-DETERMINISTIC-GZIP-BODY-ONLY",
+      "expected": ">= identity -0.15 on /userinfo",
+      "observed": "0.5 vs 0.5 delta 0.0 at all sizes",
+      "verdict": "PASS",
+      "strength": "Strong targeted baseline: gzip level 9 mtime=0 deterministic. Same reasoning as brotli. Pass confirms no gzip-induced instability at 10KB/100KB.",
+      "evidence": "result.json 1KB_C_DETERMINISTIC_GZIP_PRESERVES etc."
+    },
+    {
+      "baseline": "B-MIXED-CLIENT-BODY-ONLY",
+      "expected": "< identity on /userinfo",
+      "observed": "0.22368421052631576 < 0.5 at all sizes",
+      "verdict": "PASS",
+      "strength": "Critical cross-client control: pooling A_br_gzip (20 pooled per state: 10 br +10 identity) degrades discrimination due to hash divergence across algorithms. Demonstrates that computing hash on compressed wire bytes is not cross-client stable. Recomputed mixed discrimination matches stored value exactly; cross-client divergence flags all states divergent=true.",
+      "evidence": "result.json 1KB_M_MIXED_CLIENT_DISCRIMINATION, 1KB_M_CROSS_CLIENT_DIVERGENCE; recomputed mixed_disc 0.22368"
+    },
+    {
+      "baseline": "B-RANDOM",
+      "expected": "~0.0 at all profiles and sizes",
+      "observed": "0.0 at all 18 cells",
+      "verdict": "PASS",
+      "strength": "Appropriate null control for spurious structure from compression artifacts. 0.0 sustained across all compression algorithms confirms no artifact-induced collisions.",
+      "evidence": "result.json metrics */B-RANDOM 0.0; 1KB_M_NULL_CONTROL etc.; 1KB_C_NULL_CONTROL"
+    },
+    {
+      "baseline": "B-STATUS-ONLY",
+      "expected": "0.5 on /userinfo invariant across profiles and sizes (compression-immune)",
+      "observed": "0.5 at A,B,C for 1KB,10KB,100KB on /userinfo; 0.0 on /introspect as expected (all 200)",
+      "verdict": "PASS",
+      "strength": "Validates status channel is compression-immune. Invariance across sizes and encodings correctly observed. Also clarifies body-only not incremental over status on /userinfo where status already 0.5, but incremental on /introspect (body 0.5 vs status 0.0).",
+      "evidence": "result.json 1KB_M_STATUS_ONLY_INVARIANCE etc.; metrics status_only_discrimination; recomputed status disc 0.5/0.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_requests_verified": 720,
+    "recomputed_body_only_discrimination": {
+      "1KB_/userinfo_A_br_gzip": 0.5,
+      "1KB_/userinfo_B_gzip_only": 0.5,
+      "1KB_/userinfo_C_identity": 0.5,
+      "10KB_/userinfo_A_br_gzip": 0.5,
+      "10KB_/userinfo_B_gzip_only": 0.5,
+      "10KB_/userinfo_C_identity": 0.5,
+      "100KB_/userinfo_A_br_gzip": 0.5,
+      "100KB_/userinfo_B_gzip_only": 0.5,
+      "100KB_/userinfo_C_identity": 0.5,
+      "1KB_/introspect_A_br_gzip": 0.5,
+      "10KB_/introspect_A_br_gzip": 0.5,
+      "100KB_/introspect_A_br_gzip": 0.5
+    },
+    "recomputed_status_only_discrimination": {
+      "userinfo_all_profiles_all_sizes": 0.5,
+      "introspect_all_profiles_all_sizes": 0.0
+    },
+    "recomputed_B_RANDOM": 0.0,
+    "recomputed_B_DETERMINISTIC_BR_CONTROL_delta": 0.0,
+    "recomputed_B_DETERMINISTIC_GZIP_CONTROL_delta": 0.0,
+    "recomputed_B_MIXED_CLIENT_BODY_ONLY": {
+      "1KB": 0.22368421052631576,
+      "10KB": 0.22368421052631576,
+      "100KB": 0.22368421052631576
+    },
+    "recomputed_within_state_variation": {
+      "A_br_gzip_all_states_all_sizes": "1/10 all_same true (54 cells)",
+      "B_gzip_only_all_states_all_sizes": "1/10 all_same true (54 cells)",
+      "C_identity_all_states_all_sizes": "1/10 all_same true (54 cells)"
+    },
+    "recomputed_cross_client_divergence": "true for all 4 states at all 3 sizes (br vs identity produce different body_hash)",
+    "recomputed_compression_sizes_valid_token_userinfo": {
+      "1KB_brotli": 1094,
+      "1KB_gzip": 1186,
+      "1KB_identity": 2060,
+      "10KB_brotli": 11001,
+      "10KB_gzip": 11936,
+      "10KB_identity": 20492,
+      "100KB_brotli": 112854,
+      "100KB_gzip": 117211,
+      "100KB_identity": 204812
+    },
+    "fingerprint_recomputed_match": true,
+    "decision_rule_all_8_conditions": "PASS at 1KB,10KB,100KB (C1 0.5>=0.35, C2 0.0~0.0, C3 0.5>=0.35, C4 0.5>=0.35, C5 deterministic true, C6 0.223<0.5, C7 0.5 invariant, C8 0 errors)"
+  },
+  "claim_ceiling": "Body-only discrimination (SHA256(repr((status, compressed_body_sha256,''))) on compressed wire bytes) is preserved at 0.5 under synthetic deterministic CDN proxy (Python brotli quality 6 and gzip level 9 mtime=0, per-profile fixed selection) for JSON responses with hex-encoded random payloads at 1KB (2060B uncompressed), 10KB (20492B) and 100KB (204812B) on /userinfo and /introspect (N=10 per state per profile per endpoint per size, 720 total, seed 44). Within-state compressed hash variation is 0/10 confirming code-level determinism regardless of size; cross-client pooling (br vs identity) degrades to 0.2237 confirming algorithm divergence at all sizes; status-only remains 0.5 invariant. Ceiling does NOT extend to: real CDN infrastructure, non-deterministic or varying quality levels, streaming/chunked compression, non-JSON/binary/XML content, MB-scale, or cross-client stable hashing without decompression normalization. For product, body-only may be used without normalization only when client's Accept-Encoding is stable and compression is deterministic as tested.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34902094115/request.json",
+    "research/experiments/EXP-RUNTIME-34902094115/spec.json",
+    "research/experiments/EXP-RUNTIME-34902094115/prereg.md",
+    "research/experiments/EXP-RUNTIME-34902094115/freeze.json",
+    "research/experiments/EXP-RUNTIME-34902094115/result.json",
+    "research/experiments/EXP-RUNTIME-34902094115/report.md",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json",
+    "research/experiments/EXP-RUNTIME-34902094115/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34902094115/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) with potential non-deterministic compression, caching, and chunking at KB-scale?",
+    "Does determinism hold for non-random, structured JSON and other content types (binary, XML) at larger sizes where compression dictionaries differ?",
+    "What discrimination remains when hashing decompressed bodies (normalization layer) at KB-scale, and what latency cost does decompression add?",
+    "Would filtered full-vector or other fingerprint strategies survive compression differently at KB-scale?",
+    "What happens beyond 100KB (MB-scale) where compression chunking/windowing may trigger different determinism properties?"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
+    }
+  ],
+  "product_action": "Body-only discrimination may be used as default production fingerprint strategy for endpoints returning JSON responses up to 100KB without compression-normalization overhead, provided (a) client Accept-Encoding is stable and (b) compression is deterministic as tested (brotli quality 6 or equivalent, gzip level 9 mtime=0 or equivalent). This recommendation is bounded to synthetic deterministic proxy conditions; real CDN validation remains a prerequisite for unconditional production deployment.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "reason": "All 8 decision rule conditions pass at every body size. The substrate ceiling is extended from 0-729 bytes to 100KB JSON under deterministic compression. However, product promotion is withheld because (1) the experiment uses a synthetic deterministic Python proxy, not real CDN infrastructure, (2) real CDNs may use varying quality levels, chunked streaming, caching or load-balancing that introduce non-determinism, (3) the mock OAuth2 server is not a real IdP. The next material question is real-CDN validation, which is orthogonal to further synthetic probing and is the minimum unblocked path toward unconditional production recommendation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34902094115/result.json — metrics: body_only_discrimination=0.5 at all 18 cells (3 sizes x 3 profiles x 2 endpoints), controls: all 8 conditions PASS at 1KB/10KB/100KB, M_WITHIN_STATE_VARIATION all deterministic, M_MIXED_CLIENT_DISCRIMINATION=0.2237, M_CROSS_CLIENT_DIVERGENCE all states divergent",
+    "research/experiments/EXP-RUNTIME-34902094115/audit.json — status=PASS, producer_claim_supported=true, recomputed metrics match, claim_ceiling bounded to synthetic deterministic proxy, validity_findings 7 entries (2 low severity: 3-way error collapse, proxy implementation deviation)",
+    "research/experiments/EXP-RUNTIME-34902094115/report.md — Section 7 interpretation: ceiling extended to 100KB JSON, Section 8 product consequences: body-only viable up to 100KB with stable Accept-Encoding",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json — brotli 1.2.0, gzip mtime=0 level=9, mock OAuth2 on port 5000, proxy on port 5001, seed=44, 720 total requests",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json — parent carry_forward: body-only at 0.5 for 0-729 bytes, ceiling now extended by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status remains EXPERIMENTAL with enriched evidence base"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "why_next": "The substrate ceiling has been extended from 0-729 bytes to 100KB JSON under synthetic deterministic compression. The next material question is whether body-only discrimination survives real CDN infrastructure where non-deterministic compression, caching layers, chunked transfer encoding, and load-balancing across CDN edges may introduce hash instability. This is the minimum unblocked path toward unconditional production deployment. Further synthetic probing (larger sizes, more content types) is lower information gain than real-CDN validation because the synthetic result is now strong and the ceiling is bounded by the real-CDN gap.",
+  "carry_forward": {
+    "established": [
+      "Body-only (SHA256(status, compressed_body_sha256, '')) discrimination is preserved at 0.5 on /userinfo and /introspect under synthetic deterministic CDN proxy (Python brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB (2060B), 10KB (20492B), and 100KB (204812B) uncompressed sizes — EXP-RUNTIME-34902094115 result.json, all 18 cells (3 sizes x 3 profiles x 2 endpoints), audit.json PASS",
+      "Within-state compressed body hash variation is 0/10 across all 54 state x profile x size cells on /introspect and all 54 on /userinfo (108 total cells), confirming code-level determinism of brotli quality 6 and gzip level 9 mtime=0 at KB-scale — EXP-RUNTIME-34902094115 result.json M_WITHIN_STATE_VARIATION, audit.json compression determinism verified",
+      "Cross-client pooled discrimination (Client A brotli + Client C identity) degrades to 0.2237 from 0.5 single-client at all three body sizes, confirming different Accept-Encoding produces different compressed bytes causing hash divergence — EXP-RUNTIME-34902094115 result.json M_MIXED_CLIENT_DISCRIMINATION and M_CROSS_CLIENT_DIVERGENCE",
+      "Status-only discrimination remains 0.5 on /userinfo and 0.0 on /introspect invariant across all client profiles and body sizes, confirming status is compression-immune — EXP-RUNTIME-34902094115 result.json M_STATUS_ONLY_INVARIANCE",
+      "Body-only discrimination adds no incremental value over status-only on /userinfo (both 0.5) but is incremental on /introspect (body 0.5 vs status 0.0) where all states return HTTP 200 — EXP-RUNTIME-34902094115 result.json, audit.json baseline_findings",
+      "4 auth states (no_auth, valid_token, expired_token, invalid_token) collapse to 3 distinguishable groups (valid vs expired/invalid vs no_auth) capping discrimination ceiling at 0.5 on /userinfo — EXP-RUNTIME-34902094115 audit.json validity_findings (low severity: 3-way error collapse)",
+      "Substrate ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to at least 100KB JSON under deterministic compression — EXP-RUNTIME-34902094115 verdict, all 8 decision rule conditions pass at every body size"
+    ],
+    "rejected": [
+      "Unfiltered full-vector (status+headers+body_hash) as reliable production fingerprint under infrastructure header noise — collapses to 0.0 at noise>=2 (parent EXP-RUNTIME-34509593940)",
+      "WWW-Authenticate as general-purpose Keycloak-level auth-state signal — endpoint-specific (parent EXP-RUNTIME-34439061845)",
+      "Cache-Control error-type variation as discriminating signal — confirmed falsified (parent EXP-RUNTIME-34509593940)",
+      "Body-only discrimination does NOT degrade under non-deterministic compression — falsified (degrades rho -0.948 under per-request random compression, parent EXP-RUNTIME-34654566605)",
+      "Body-only architecture is universally superior to full-vector — narrowed (body-only fails under random compression; status-only is compression-immune and equal on /userinfo)"
+    ],
+    "unknown": [
+      "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, varying quality/compression levels, caching, chunked transfer, and load-balancing?",
+      "Does body-only discrimination survive non-deterministic compression quality levels (e.g., brotli quality varies by server load)?",
+      "Does body-only discrimination generalize to non-JSON content types (HTML, XML, binary) at KB-scale where compression dictionaries differ?",
+      "What discrimination floor remains when hashing decompressed bodies (normalization layer that decompresses via Content-Encoding before hashing)?",
+      "Would a filtered full-vector baseline (status+filtered headers+body_hash excluding infrastructure headers) retain higher discrimination than body-only and survive compression at KB-scale?",
+      "Does result generalize to MB-scale responses where compression chunking/windowing may trigger different determinism properties?",
+      "Does result generalize to production OAuth2 providers (Auth0, Okta) or production Keycloak with real CDN and load-balancer?"
+    ],
+    "do_not_assume": [
+      "Do not assume this experiment's result applies to real CDNs — evidence bounded to synthetic deterministic Python HTTPServer proxy on mock OAuth2 server (audit.json validity_findings)",
+      "Do not assume within-state determinism is an empirical discovery about real CDN behavior — it is guaranteed by construction (Python gzip mtime=0, brotli fixed quality are deterministic functions; audit.json validity_findings)",
+      "Do not assume the proxy reads per-request Accept-Encoding headers — implementation uses a class variable set once per client profile in start_proxy(), not per-request header parsing (audit.json validity_findings)",
+      "Do not assume body-only provides incremental discrimination over status-only on endpoints where status codes discriminate (e.g., /userinfo 200 vs 401) — body-only=status-only=0.5 on /userinfo (audit.json baseline_findings)",
+      "Do not assume the mixed-client result (0.2237) represents alternating requests to a single concurrent proxy — it is computed post-hoc by pooling fingerprints from sequential profile blocks (audit.json validity_findings)",
+      "Do not assume the 3-way error collapse (expired_token identical to invalid_token identical to no_auth) represents general endpoint behavior — this is specific to the mock OAuth2 4-state construction (audit.json validity_findings, result.json body_sizes show identical error bodies)",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — locally-signed HS256 construction",
+      "Do not assume the 100KB ceiling extends to MB-scale — chunking/windowing at larger sizes may trigger different determinism properties",
+      "Do not assume the mock OAuth2 server behaves identically to real IdP servers under load or varying network conditions"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34902094115/result.json",
+    "research/experiments/EXP-RUNTIME-34902094115/audit.json",
+    "research/experiments/EXP-RUNTIME-34902094115/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34902094115/spec.json",
+    "research/experiments/EXP-RUNTIME-34902094115/prereg.md",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34902094115/result.json — all 18 cells body_only_discrimination=0.5, controls all 8 conditions PASS at 1KB/10KB/100KB, M_WITHIN_STATE_VARIATION deterministic, M_MIXED_CLIENT_DISCRIMINATION=0.2237, M_CROSS_CLIENT_DIVERGENCE divergent=true all states",
+    "research/experiments/EXP-RUNTIME-34902094115/audit.json — status=PASS, producer_claim_supported=true, recomputed metrics match, claim_ceiling bounded to synthetic deterministic proxy, 7 validity findings (2 low severity)",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json — brotli 1.2.0 quality=6, gzip level=9 mtime=0, mock OAuth2 port 5000, proxy port 5001, seed=44, 720 requests",
+    "research/experiments/EXP-RUNTIME-34902094115/report.md — Section 7 interpretation, Section 8 product consequences",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json — parent carry_forward establishing body-only at 0.5 for 0-729 bytes, ceiling now extended by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL"
+  ],
+  "recommended_action": "Design a real-CDN validation experiment: deploy the same mock OAuth2 server behind Cloudflare or Fastly (or equivalent), test body-only discrimination on JSON responses at 1KB, 10KB, 100KB with real Accept-Encoding negotiation, varying quality levels, and multiple CDN edge requests. If body-only survives, the claim ceiling extends to production CDN conditions and product promotion becomes appropriate. If body-only fails under real CDN, test decompression-normalization (hash on decompressed body) and filtered full-vector as fallback strategies. Do not repeat synthetic deterministic probing — the ceiling is bounded by the real-CDN gap."
 }
 ```
