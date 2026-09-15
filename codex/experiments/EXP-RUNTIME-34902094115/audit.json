@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Target integrity: All 720 requests present (4 states x 10 reps x 3 profiles x 2 endpoints x 3 sizes = 720). Raw observations contain exactly 10 per state per profile per endpoint per size. Status codes match design: /userinfo 401 except valid_token 200; /introspect all 200.",
+      "severity": "none",
+      "evidence": "raw_observations.json total obs 720 recomputed, result.json body_sizes/status checks, run_experiment.py do_GET/do_POST"
+    },
+    {
+      "finding": "Sampling/representation: Mock OAuth2 server (not Keycloak) returning JSON with field 'data' = hex(random bytes). Valid_token bodies scale with BODY_SIZES (1KB->2060, 10KB->20492, 100KB->204812 uncompressed identity) confirming KB-scale range. Error bodies (no_auth/expired/invalid) are fixed ~76 bytes (userinfo) / 17 bytes (introspect) and identical across all three error states and all body sizes — so discrimination ceiling is structurally capped at 0.5, not 0.83+. This matches prereg 'expired identical to invalid' but extends to no_auth also identical; report does not explicitly call out 3-way collapse, but does note ceiling 0.5 and that body-only is not incremental over status on /userinfo.",
+      "severity": "low",
+      "evidence": "raw_observations.json: C_identity no_auth/expired/invalid share body_hash e4f1de10... (userinfo) and 7410be1a... (introspect); result.json body_sizes; spec.json measurement_validity #20; prereg.md 5.6/9.6"
+    },
+    {
+      "finding": "Synthetic deterministic CDN proxy: Compression applied by Python brotli.compress quality 6 and gzip level 9 mtime=0. Both are mathematically deterministic (spec-correct). Proxy implementation applies per-client-profile fixed algorithm (start_proxy with fixed Accept-Encoding -> select_algorithm) rather than per-request header negotiation described in spec 'proxy reads client Accept-Encoding'. For single-profile runs these are equivalent; for B-MIXED-CLIENT the pool is from two separate proxy instances (A br + C identity) rather than alternating requests to one proxy. Observable (different compressed bytes pooled) is identical, but deviation from 'alternating requests to same endpoint' prose should be preserved.",
+      "severity": "low",
+      "evidence": "run_experiment.py: start_proxy/start_mock_server loop, select_algorithm_for_client, CDNNegotiationProxyHandler.client_accept_encoding fixed; report.md 9 'Proxy configured per client profile'; spec.json measurement_validity 24-26; prereg.md 5.4"
+    },
+    {
+      "finding": "Compression determinism verified: Within-state body_hash unique_count=1/10 for all 18 state x profile cells per size on /userinfo (54 cells total) and same on /introspect. Content-Encoding verified as br/gzip/none per profile per prereg. Body_size min==max==mean per cell confirms no size jitter. This satisfies falsifier condition (5) for MEASUREMENT_INVALID — not triggered.",
+      "severity": "none",
+      "evidence": "result.json metrics 1KB_M_WITHIN_STATE_VARIATION, 10KB_M_WITHIN_STATE_VARIATION, 100KB_M_WITHIN_STATE_VARIATION; raw_observations.json body_hash sets; provenance.json compression_parameters"
+    },
+    {
+      "finding": "No leakage or instrumentation tampering: Fingerprint recomputed as SHA256(repr((status, body_sha256,''))) matches raw_observations fingerprint_body for all samples (recomputed). Proxy forwards only auth-related headers and strips transfer-encoding/content-encoding/content-length; preserves status and content-type. HMAC secret and JWT verification correctly distinguish valid vs expired vs invalid.",
+      "severity": "none",
+      "evidence": "run_experiment.py fingerprint_body_only, _is_valid_token, do_request header handling; raw_observations.json fingerprint_body vs recomputed"
+    },
+    {
+      "finding": "Environment could express tested effect: Larger random bodies have higher entropy (compression ratio 47% brotli, 42% gzip on random data) and exercise different code paths vs 0-729 byte parent; deterministic output was not a tautology because different logical bodies produce different compressed outputs and different algorithms produce divergent hashes (cross-client divergence observed).",
+      "severity": "none",
+      "evidence": "result.json compression_verification, body_sizes, M_CROSS_CLIENT_DIVERGENCE; report.md Section 6 compression ratios"
+    },
+    {
+      "finding": "Scope boundary: Result does not generalize to real CDN (Cloudflare/Fastly), non-deterministic quality levels, chunked/streaming compression, or non-JSON content types. Product consequence in report correctly bounds to 'provided client's Accept-Encoding is stable' and synthetic proxy caveat.",
+      "severity": "none",
+      "evidence": "spec.json measurement_validity 24-25, validity threats 9.2; report.md 8 'What This Does NOT Establish'; prereg.md 9.2"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-IDENTITY-BODY-ONLY",
+      "expected": ">=0.35 on /userinfo at identity for all sizes",
+      "observed": "0.5 at 1KB, 10KB, 100KB (C_identity)",
+      "verdict": "PASS",
+      "strength": "Appropriate positive control for pipeline at KB-scale; correctly thresholds above 0.35. Recomputed discrimination 0.5 matches stored metrics 1KB_M_IDENTITY_CONTROL / 10KB_M_IDENTITY_CONTROL / 100KB_M_IDENTITY_CONTROL.",
+      "evidence": "result.json 1KB_C_POSITIVE_CONTROL etc.; metrics 1KB_/userinfo_C_identity body_only_discrimination"
+    },
+    {
+      "baseline": "B-DETERMINISTIC-BR-BODY-ONLY",
+      "expected": ">= identity -0.15 on /userinfo",
+      "observed": "0.5 vs 0.5 delta 0.0 at all sizes",
+      "verdict": "PASS",
+      "strength": "Strong targeted baseline: same logical body compressed with deterministic brotli quality 6 should yield identical hash per state. Pass confirms size-invariant determinism. Recomputed matches 1KB_M_DETERMINISTIC_BR_CONTROL etc.",
+      "evidence": "result.json 1KB_C_DETERMINISTIC_BR_PRESERVES etc.; metrics 1KB_M_DETERMINISTIC_DISCRIMINATION br_body_only"
+    },
+    {
+      "baseline": "B-DETERMINISTIC-GZIP-BODY-ONLY",
+      "expected": ">= identity -0.15 on /userinfo",
+      "observed": "0.5 vs 0.5 delta 0.0 at all sizes",
+      "verdict": "PASS",
+      "strength": "Strong targeted baseline: gzip level 9 mtime=0 deterministic. Same reasoning as brotli. Pass confirms no gzip-induced instability at 10KB/100KB.",
+      "evidence": "result.json 1KB_C_DETERMINISTIC_GZIP_PRESERVES etc."
+    },
+    {
+      "baseline": "B-MIXED-CLIENT-BODY-ONLY",
+      "expected": "< identity on /userinfo",
+      "observed": "0.22368421052631576 < 0.5 at all sizes",
+      "verdict": "PASS",
+      "strength": "Critical cross-client control: pooling A_br_gzip (20 pooled per state: 10 br +10 identity) degrades discrimination due to hash divergence across algorithms. Demonstrates that computing hash on compressed wire bytes is not cross-client stable. Recomputed mixed discrimination matches stored value exactly; cross-client divergence flags all states divergent=true.",
+      "evidence": "result.json 1KB_M_MIXED_CLIENT_DISCRIMINATION, 1KB_M_CROSS_CLIENT_DIVERGENCE; recomputed mixed_disc 0.22368"
+    },
+    {
+      "baseline": "B-RANDOM",
+      "expected": "~0.0 at all profiles and sizes",
+      "observed": "0.0 at all 18 cells",
+      "verdict": "PASS",
+      "strength": "Appropriate null control for spurious structure from compression artifacts. 0.0 sustained across all compression algorithms confirms no artifact-induced collisions.",
+      "evidence": "result.json metrics */B-RANDOM 0.0; 1KB_M_NULL_CONTROL etc.; 1KB_C_NULL_CONTROL"
+    },
+    {
+      "baseline": "B-STATUS-ONLY",
+      "expected": "0.5 on /userinfo invariant across profiles and sizes (compression-immune)",
+      "observed": "0.5 at A,B,C for 1KB,10KB,100KB on /userinfo; 0.0 on /introspect as expected (all 200)",
+      "verdict": "PASS",
+      "strength": "Validates status channel is compression-immune. Invariance across sizes and encodings correctly observed. Also clarifies body-only not incremental over status on /userinfo where status already 0.5, but incremental on /introspect (body 0.5 vs status 0.0).",
+      "evidence": "result.json 1KB_M_STATUS_ONLY_INVARIANCE etc.; metrics status_only_discrimination; recomputed status disc 0.5/0.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_requests_verified": 720,
+    "recomputed_body_only_discrimination": {
+      "1KB_/userinfo_A_br_gzip": 0.5,
+      "1KB_/userinfo_B_gzip_only": 0.5,
+      "1KB_/userinfo_C_identity": 0.5,
+      "10KB_/userinfo_A_br_gzip": 0.5,
+      "10KB_/userinfo_B_gzip_only": 0.5,
+      "10KB_/userinfo_C_identity": 0.5,
+      "100KB_/userinfo_A_br_gzip": 0.5,
+      "100KB_/userinfo_B_gzip_only": 0.5,
+      "100KB_/userinfo_C_identity": 0.5,
+      "1KB_/introspect_A_br_gzip": 0.5,
+      "10KB_/introspect_A_br_gzip": 0.5,
+      "100KB_/introspect_A_br_gzip": 0.5
+    },
+    "recomputed_status_only_discrimination": {
+      "userinfo_all_profiles_all_sizes": 0.5,
+      "introspect_all_profiles_all_sizes": 0.0
+    },
+    "recomputed_B_RANDOM": 0.0,
+    "recomputed_B_DETERMINISTIC_BR_CONTROL_delta": 0.0,
+    "recomputed_B_DETERMINISTIC_GZIP_CONTROL_delta": 0.0,
+    "recomputed_B_MIXED_CLIENT_BODY_ONLY": {
+      "1KB": 0.22368421052631576,
+      "10KB": 0.22368421052631576,
+      "100KB": 0.22368421052631576
+    },
+    "recomputed_within_state_variation": {
+      "A_br_gzip_all_states_all_sizes": "1/10 all_same true (54 cells)",
+      "B_gzip_only_all_states_all_sizes": "1/10 all_same true (54 cells)",
+      "C_identity_all_states_all_sizes": "1/10 all_same true (54 cells)"
+    },
+    "recomputed_cross_client_divergence": "true for all 4 states at all 3 sizes (br vs identity produce different body_hash)",
+    "recomputed_compression_sizes_valid_token_userinfo": {
+      "1KB_brotli": 1094,
+      "1KB_gzip": 1186,
+      "1KB_identity": 2060,
+      "10KB_brotli": 11001,
+      "10KB_gzip": 11936,
+      "10KB_identity": 20492,
+      "100KB_brotli": 112854,
+      "100KB_gzip": 117211,
+      "100KB_identity": 204812
+    },
+    "fingerprint_recomputed_match": true,
+    "decision_rule_all_8_conditions": "PASS at 1KB,10KB,100KB (C1 0.5>=0.35, C2 0.0~0.0, C3 0.5>=0.35, C4 0.5>=0.35, C5 deterministic true, C6 0.223<0.5, C7 0.5 invariant, C8 0 errors)"
+  },
+  "claim_ceiling": "Body-only discrimination (SHA256(repr((status, compressed_body_sha256,''))) on compressed wire bytes) is preserved at 0.5 under synthetic deterministic CDN proxy (Python brotli quality 6 and gzip level 9 mtime=0, per-profile fixed selection) for JSON responses with hex-encoded random payloads at 1KB (2060B uncompressed), 10KB (20492B) and 100KB (204812B) on /userinfo and /introspect (N=10 per state per profile per endpoint per size, 720 total, seed 44). Within-state compressed hash variation is 0/10 confirming code-level determinism regardless of size; cross-client pooling (br vs identity) degrades to 0.2237 confirming algorithm divergence at all sizes; status-only remains 0.5 invariant. Ceiling does NOT extend to: real CDN infrastructure, non-deterministic or varying quality levels, streaming/chunked compression, non-JSON/binary/XML content, MB-scale, or cross-client stable hashing without decompression normalization. For product, body-only may be used without normalization only when client's Accept-Encoding is stable and compression is deterministic as tested.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34902094115/request.json",
+    "research/experiments/EXP-RUNTIME-34902094115/spec.json",
+    "research/experiments/EXP-RUNTIME-34902094115/prereg.md",
+    "research/experiments/EXP-RUNTIME-34902094115/freeze.json",
+    "research/experiments/EXP-RUNTIME-34902094115/result.json",
+    "research/experiments/EXP-RUNTIME-34902094115/report.md",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json",
+    "research/experiments/EXP-RUNTIME-34902094115/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34902094115/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json"
+  ],
+  "unresolved": [
+    "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) with potential non-deterministic compression, caching, and chunking at KB-scale?",
+    "Does determinism hold for non-random, structured JSON and other content types (binary, XML) at larger sizes where compression dictionaries differ?",
+    "What discrimination remains when hashing decompressed bodies (normalization layer) at KB-scale, and what latency cost does decompression add?",
+    "Would filtered full-vector or other fingerprint strategies survive compression differently at KB-scale?",
+    "What happens beyond 100KB (MB-scale) where compression chunking/windowing may trigger different determinism properties?"
+  ]
+}

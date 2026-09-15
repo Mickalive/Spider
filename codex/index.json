@@ -301,6 +301,31 @@
         "handoff.json": "2b1985aa624d23028cfedb73ccb5747667571e927351f3b8314ff2000071bbbf"
       }
     },
+    "EXP-FRONTIER-34881708619": {
+      "lane": "frontier",
+      "request_id": "6f567904a8ee565878f7c412",
+      "created_at": "2026-09-14T18:35:28.256789+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does pooled binned TV estimation maintain a fundamental advantage over per-type estimation when both use equal sample size (250 transitions per type), or does the 67% per-type/pooled ratio from the parent experiment reflect a sample-size confound rather than an estimator difference?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
+        "spec.json": "ac487a7f9b0cd6cc3c0c454e7b390c9d07b70f826dc991e92de38887356ed5ab",
+        "prereg.md": "37ff28f570b92a2d418ff448db0ccabc9973687c475a75a9418b13b0d7627931",
+        "freeze.json": "97927f814c7bf06bc420be1d559f7a2e0fa98413116fa98b1daeb8dfca3d2a79",
+        "result.json": "e3a3a45a47e19056690f33090989a21550eb442ad6f434d9b4e6476ff931ef45",
+        "report.md": "30763215fab2183820e400fd776dad6175c71e890d1c48dc10d1ec7c35e9eb53",
+        "provenance.json": "5f53d5fce05c747915359cf4e77270e4a2924a00a1cba7ce32610f09025a90c7",
+        "audit.json": "33bf5c93dca854ece51135a5a39baaec811430ceed2131ad5df73ec93991bc07",
+        "verdict.json": "8bb3868fd4abebd8f7b99df2dde909a8c2723a77000153119232532f085c7264",
+        "handoff.json": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -939,6 +964,33 @@
         "handoff.json": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
       }
     },
+    "EXP-INTEL-34782350557": {
+      "lane": "intel",
+      "request_id": "46dc3464476c696c1d922217",
+      "created_at": "2026-09-13T20:57:47.563186+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means \u2014 computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+      "audit_status": "REVISE",
+      "decision": "INCONCLUSIVE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
+        "spec.json": "9f9445cd403fabbb68fd5b5091b7b1e29f12ffe71ac1d325168ce087d3e41b94",
+        "prereg.md": "d0af3ba509f3835b7e9bbe894a45d5db3fb4e2739e403bdedc793b482464d41e",
+        "freeze.json": "d85a1a22ccbeb1d06b4898ae4abc5a886fcad8bae18548d49381afc196917b25",
+        "result.json": "8b21e2308574e36dd22440b662654404cd2699b7609270dadad899fbc89c5efb",
+        "report.md": "15e4d42fc95db0d24bb936a0c9fa5e175d1d19389eea6bb8b19e790b5023bb5b",
+        "provenance.json": "fb6c06e73ef8b09c7b4bb758b89513ed3dc19a66507081efe44e07db78dd7343",
+        "audit.json": "4ac7dd2fe071b513ad3da4d5c233d982074ec23063a55e831b69dacc0e07d318",
+        "verdict.json": "ecd7d4e46841f1dbf764288f124cce43bb7f3dea360bb3ea19b26f986e2a5bc3",
+        "handoff.json": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
@@ -1315,6 +1367,31 @@
         "audit.json": "f7a7fca0642b927b2968de16d9ab5b33332df378ba22bb8f9c0e2de2c84a3aac",
         "verdict.json": "eb647ae22a7b0bcb3ece08671ff70dd62f50d9bfff88b520f619fe19832812ba",
         "handoff.json": "11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f"
+      }
+    },
+    "EXP-PHYSICS-34846934524": {
+      "lane": "physics",
+      "request_id": "124e5ed3be43807f22b76852",
+      "created_at": "2026-09-14T13:04:07.512576+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with correlated non-determinism (persistent session_id that determines DOM variant at each FSM state, so DOM_before encodes session which determines DOM_after), does DOM structural features exhibit conditional PMI I(S_next; DOM_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is the discriminating test identified by parent audit V1: the parent tested independent per-step DOM observation noise where E[I]=0 by construction. Correlated non-determinism via persistent sessions is the only remaining locally-hosted DOM test where DOM_before could predict DOM_after through latent session state.",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
+        "spec.json": "b6573d94aac64894f9119e94a21b7a226beda34b4ce533a5165110540d0261db",
+        "prereg.md": "7f493f9b3803e293fba49fe8a0d72f3e4d6b753fbb4019f2f4f5e7e181ee3593",
+        "freeze.json": "b99097dfcf649ae8515dbf4d701937a439889880fc266fd25a03da86bc97ccae",
+        "result.json": "9d4b94800719ec9c4234b15a08d3b9de8adb9288d6dd656420a72e35bb6c702f",
+        "report.md": "dd4c9b3d82a582159aaee4e7421000f26cb055618775856d0cf9ee06d5d9ee73",
+        "provenance.json": "4b47ff6ca73b560a55acdc0256000ded0e0b10b9741950748b4b738be0e45149",
+        "audit.json": "12eb498a4fb606e5b63761faa41cb86a6f031167dc4cb1d77b77f1f7cf1eaa3b",
+        "verdict.json": "9601903a2734006b60dc6859b98ace1e8af1a7144220d1cd711cea3b9cdffd23",
+        "handoff.json": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
       }
     },
     "EXP-PRODUCT-33528829801": {
@@ -1915,6 +1992,31 @@
         "audit.json": "ada5b6aeb971d4884e2637c920c0a82df49c19b6b8e59290b2c906864bba17ce",
         "verdict.json": "a3180f2cd038b702fea77f1d9293013b8777ec18238e2b34fca9d0c6fbf830ff",
         "handoff.json": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
+      }
+    },
+    "EXP-RUNTIME-34902094115": {
+      "lane": "runtime",
+      "request_id": "6aa973161cb4fccb074203c4",
+      "created_at": "2026-09-14T22:03:11.096208+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive deterministic CDN compression when response body sizes increase from 0-729 bytes to KB-scale JSON (1KB, 10KB, 100KB), where higher entropy may cause non-deterministic compression output or hash instability?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5",
+        "spec.json": "9f23d4f7b9489ac64e5cf7637e91d75bfbca9a3d8c63d3a30b2202fcc71d3059",
+        "prereg.md": "a816d69ffa35ed0f57a0c0819759b453ffe079f40ca857a2d851af47d70df563",
+        "freeze.json": "c4347c484ee6b198225a0cd9f80b710871ae2cb2bc42153601e3bff584de92de",
+        "result.json": "d4873919ed389369915cfe0d8a9f3b479428a9d570a15ec34d414d5a974fc1e6",
+        "report.md": "eb845ebf9b40bee9bd9d2d4b573ce10b55ffb5f8889871a9432a7ed6cdca3c29",
+        "provenance.json": "612678c04ef4ee53c9b04a3714124c495ed96e134bac0b09be0f69ad2fca406a",
+        "audit.json": "0dc690628ce9357c14614829b476e559cfb3db4f012c6f6491183bef04b5cabc",
+        "verdict.json": "4b5715e8914b8a9938dc138b5d6b0275bdd1ea0afde208449197972a5eab1f07",
+        "handoff.json": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
       }
     }
   }

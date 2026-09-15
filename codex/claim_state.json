@@ -99,6 +99,14 @@
         "reason": "The specific hypothesis that per-type bias correction with N=200 per-type permutations recovers absolute signal strength (per-type BC TV >0.2 at lambda=1) is falsified in this sparse regime: mean per-type BC TV =0.034 (6x below threshold), per-type BC is 0.67x pooled BC (opposite of hypothesis), paired t-test p=0.989 (not significant), null control fails (4/8 types >0.01 at lambda=0). However, the broader C-WEB-DYNAMICS claim (interactive Web transformations contain predictive dynamical structure) remains a HYPOTHESIS: all evidence is synthetic 2D [0,1]^2, the sparse binning regime (0.625 expected counts/bin per type vs 5.0 pooled) confounds sample size with estimator type, and the audit explicitly finds the broader 'fundamental attenuation' conclusion is NOT justified from this data alone. Claim ceiling remains synthetic-only; no inference to real Web DOM dynamics."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34881708619",
+        "lane": "frontier",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "MEASUREMENT_INVALID: null control per-type fails (4/8 types >0.01 at lambda=0, max 0.0282), subsampling consistency violated (1/5 reps sub>full), CV max 1.59 >0.5. Preregistered primary comparison across 8 page types FAILS (t=1.33 p_one=0.113 d=0.47 <0.5 thresholds). Producer's significant result (t=3.98 p=0.008 d=1.78) uses non-preregistered rep-level pairing unit. No valid inference about pooled vs per-type estimator advantage at equal n is justified. The 1.49x pooled/sub ratio at 250/type confounds 5.0 vs 0.625 expected counts/bin density. All evidence remains synthetic 2D [0,1]^2; no inference to real Web DOM dynamics. C-WEB-DYNAMICS remains HYPOTHESIS."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
@@ -553,6 +561,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Experiment measured yield metric viability on a single Magento shopping site only. Cross-site transfer (GitLab/Reddit) was not tested. MEASUREMENT_INVALID verdict due to pseudoreplication (7 unique tasks < 8 threshold) and missing accessibility API prevents claim advancement. Bounded shopping-site diagnostic does not establish cross-site metric generalizability."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34782350557",
+        "lane": "intel",
+        "decision": "INCONCLUSIVE",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested in this experiment. Single-site (Magento) measurement only. Cross-site generalization remains a hypothesis."
       }
     ],
     "C-LLM-INHERIT": [
@@ -627,6 +643,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Experiment measured DOM-based yield metric properties, not LLM agent inheritance from SPIDER. No LLM agents were involved. MEASUREMENT_INVALID verdict prevents even the prerequisite metric claim from advancing. C-LLM-INHERIT remains at HYPOTHESIS pending both a valid yield metric and an LLM agent experiment."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34782350557",
+        "lane": "intel",
+        "decision": "INCONCLUSIVE",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested in this experiment. LLM inheritance claim is orthogonal to metric validation."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -680,6 +704,14 @@
       }
     ],
     "C-MEAS-VALID": [
+      {
+        "experiment_id": "EXP-INTEL-34782350557",
+        "lane": "intel",
+        "decision": "INCONCLUSIVE",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Bounded diagnostic: under truncated-first-20 sampling of DEF-FALLBACK-INTERACTIVE locatable set, role-only counting yields ordering cart>listing>detail (reversal), but audit extrapolation to full DOM restores listing 0.019 > detail 0.006 > cart 0.0055. The reversal is an artifact of differential sample truncation and total_dom denominator variation, not evidence that the tightened definition per se destroys ordering. Original definition overcount confirmed (~10x reduction). Within-type stability preserved (listing CV 0.005, detail CV 0.037). Between-type discrimination holds but magnitude is definition- and denominator-sensitive (ratio 60 deduped vs parent 582). Full DOM enumeration required for definitive construct validity test. C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements beyond form scaffolding, but ordering robustness and denominator choice are unresolved."
+      },
       {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
@@ -791,6 +823,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Body-only (status+compressed-body hash) discrimination is preserved at 0.5 on /userinfo and 0.5 on /introspect under a synthetic deterministic CDN proxy on Keycloak 25.0 start-dev with deterministic brotli (quality 6) and gzip (level 9 mtime=0) compression per client profile, N=10 per auth state per profile per endpoint (240 total), seed=44. Within-state compressed body hash variation 0/10 confirms code-level determinism (gzip/brotli are pure functions at fixed level). Cross-client (different Accept-Encoding -> different algorithm) pooled discrimination drops to 0.2237 but remains >0. Status-only equals body-only on /userinfo (0.5 both) so body adds no incremental discrimination there; body-only advantage specific to /introspect where status-only=0.0. Ceiling narrowed from producer's 'realistic CDN negotiation' and 'production CDN' language to synthetic deterministic proxy; no evidence for real CDNs, larger/diverse bodies, varying compression levels, concurrent header negotiation, load-balanced or caching CDNs, or production Keycloak (audit V2, V3, V5). Audit REVISE required documentation fixes only (V1-V7), not re-measurement; all metrics independently recomputed and match."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34902094115",
+        "lane": "runtime",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
       }
     ]
   }

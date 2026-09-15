@@ -1,0 +1,36 @@
+{
+  "experiment_id": "EXP-FRONTIER-34881708619",
+  "execution_timestamp": null,
+  "analyzer_script": "run_execute.py",
+  "script_hashes": {
+    "prereg.md": "37ff28f570b92a2d418ff448db0ccabc9973687c475a75a9418b13b0d7627931",
+    "spec.json": "ac487a7f9b0cd6cc3c0c454e7b390c9d07b70f826dc991e92de38887356ed5ab",
+    "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
+    "freeze.json": "97927f814c7bf06bc420be1d559f7a2e0fa98413116fa98b1daeb8dfca3d2a79",
+    "result.json": "e3a3a45a47e19056690f33090989a21550eb442ad6f434d9b4e6476ff931ef45"
+  },
+  "result_hash": "e3a3a45a47e19056690f33090989a21550eb442ad6f434d9b4e6476ff931ef45",
+  "status": "COMPLETE",
+  "outcome": "NOT_APPLICABLE",
+  "claim": "C-WEB-DYNAMICS",
+  "lane": "frontier",
+  "execution_time_seconds": 46.734248638153076,
+  "total_transitions": {
+    "nonstationary": 80000
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "unknown"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "37ff28f570b92a2d418ff448db0ccabc9973687c475a75a9418b13b0d7627931",
+    "request_hash": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
+    "spec_hash": "ac487a7f9b0cd6cc3c0c454e7b390c9d07b70f826dc991e92de38887356ed5ab"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-34794649996",
+    "parent_handoff_sha256": "2b1985aa624d23028cfedb73ccb5747667571e927351f3b8314ff2000071bbbf"
+  },
+  "key_methodological_change": "Subsample pooled data to 250 per type for equal-n comparison with per-type estimation"
+}

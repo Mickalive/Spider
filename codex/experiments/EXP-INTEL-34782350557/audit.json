@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34782350557",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Deduplicate cart pseudoreplication (repeat of parent VF-CART-PSEUDOREPLICATION): raw_evidence/tightened_results.json contains two identical cart_1 entries (total_dom 1136, tightened 6, fraction 0.00528169014084507). Within-type variance calculation includes duplicate zero-variance. Must report deduped n=7 (listing n=3, detail n=3, cart n=1 distinct) with cart CV undefined, and recompute within_type_variance and discrimination ratio on deduped set (ratio 60.08 not 75.11). Do not count rng.choices duplicate as independent sample — parent audit BF required same fix.",
+    "Disclose and bound sample-truncation representation loss: parent raw measurement caps locatable_sample at 20 entries (MEASURE_JS: if locatableSample.length <20) while locatable_elements is 82 (listing), 32 (detail), 21 (cart). Producer tightened_locatable_count (8/5/6) counts only within truncated first-20, not full locatable set. True tightened count is subset of full locatable set (all tightened roles satisfy original definition via role match), so systematic undercount by factor 4.1x (listing), 1.6x (detail), 1.05x (cart). Report extrapolated estimates (listing 32.8/1696=0.0193, detail 8.5/1336~0.006, cart 6.3/1136=0.0055) which preserve ordering listing > detail > cart, showing producer's ordering_reversal is artifact of differential truncation, not robust tightened-definition effect. Bound claim to 'truncated-first-20-sample' observation, not general tightened definition. Future measurement must enumerate full DOM, not sample.",
+    "Correct or document ROLE_MAP deviation: tightened_analysis.py maps role 'a'->'link' and 'input'->'textbox' (lines 12-16), counting <a> anchors and generic <input> as tightened. Frozen spec measurement_validity and prereg 6.2 define interactive set as button/link/textbox/... without mapping; parent MEASURE_JS uses role = getAttribute('role')||tagName.toLowerCase() so '<a>' stored as 'a' not 'link' and would not count via role. Mapping inflates tightened counts from 6 to 8 (listing), 2 to 5 (detail), 3 to 6 (cart). Either remove mapping and report per spec (fractions even lower: listing 0.00352, detail 0.00150, cart 0.00264, ordering still cart middle but values shift), or explicitly justify mapping as intended interpretation of implicit link role and label as deviation. Current report.md/metrics do not disclose mapping.",
+    "Amend decision_rule interpretation for low-n and denominator sensitivity: spec decision_rule clause (4) ordering listing>detail>cart assumes fraction = tightened/total_dom. Ordering reversal (cart 0.00528 > listing 0.00469 > detail 0.00374) is driven by denominator total_dom variation (listing ~1705 vs cart 1136) combined with differential truncation, not interactive density. Producer validity_notes acknowledge denominator issue but still reports verdict FALSIFIED-IN-SETTING as if ordering reversal proves metric not robust. Must bound falsification to 'fraction with total_dom denominator and truncated sampling' and report alternative denominator sensitivity (elements_with_bbox) or density per locatable set. Do not generalize to yield estimation failure without denominator-controlled test.",
+    "Restore artifact hash provenance for recomputed_metrics: report both with_duplicate and deduped variances and CIs; disclose cart n=1 distinct makes CV meaningless and between-type variance estimate has only 2 df (3 means). State that stability claim (CV <0.3) holds only for listing/detail (n=3 each) and discrimination ratio 582->60 interval is definition- and sampling-sensitive."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-SAMPLE-TRUNCATION-CRITICAL",
+      "severity": "critical",
+      "category": "representation_loss",
+      "description": "locatable_sample truncated to first 20 matching original DEF-FALLBACK-INTERACTIVE (measure_fullpage_yield.py MEASURE_JS: if locatableSample.length <20). locatable_elements is 82 listing, 32 detail, 21 cart. Producer tightened_interactive_fraction = tightened_count_in_sample / total_dom undercounts true tightened density by 4.1x for listing (8 in sample implies ~32.8 in full set => 0.0193 not 0.0047), 1.6x for detail (~8.5 implied => 0.006 not 0.0037), 1.05x for cart. Differential undercount reverses ordering artifactually: truncated ordering cart>listing>detail, extrapolated proportional estimate yields listing 0.01924 > detail 0.00599 > cart 0.00555 (original ordering preserved). Metric as computed does not measure tightened definition over DOM, only over truncated prefix.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json: locatable_elements 82/32/21 vs locatable_sample length 20 all tasks", "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: MEASURE_JS locatableSample.length <20", "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py: sum(1 for e in sample if is_interactive(e))", "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json: per_task tightened_locatable_count 8/5/6"],
+      "impact": "Producer outcome FALSIFIES (ordering_reversed true) is not a valid test of hypothesis H3 (ordering under tightened definition). It is a test of ordering under 'first-20 truncated plus total_dom denominator'. Claim ceiling cannot extend to tightened definition robustness. Infrastructure limitation of raw data prevents full test without new DOM enumeration."
+    },
+    {
+      "id": "VF-CART-PSEUDOREPLICATION-REPEAT",
+      "severity": "major",
+      "category": "sampling_integrity",
+      "description": "tightened_results.json per_task length 8 includes duplicate cart_1 x2 (identical total_dom 1136, tightened 6, fraction 0.00528169014084507). Same rng.choices artifact flagged as VF-CART-PSEUDOREPLICATION in parent audit. Producer reports per_type_cv cart 0.0, within_type_variance 8.00e-09 and discrimination_ratio 75.11 including duplicate zero variance. Deduped (n=7 unique pages) yields within_type_variance 1.00e-08 and ratio 60.08. Unique successful tasks are 7 not 8.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json: per_task cart_1 x2 identical", "research/experiments/EXP-INTEL-34718481334/audit.json: VF-CART-PSEUDOREPLICATION, original exp347_raw_results.json cart_1 x2", "research/experiments/EXP-INTEL-34782350557/result.json: metrics.tightened_locatable_count_per_task cart_1 and cart_1_duplicate both 6"],
+      "impact": "Inflates sample size, forces within_type_variance denominator to include spurious zero, inflates discrimination ratio by ~25%. Cart CV 0.0 is meaningless artifact, not replication. Decision_rule counting as 8 overstates evidence."
+    },
+    {
+      "id": "VF-ROLE-MAPPING-DEVIATION",
+      "severity": "major",
+      "category": "measurement_validity",
+      "description": "tightened_analysis.py ROLE_MAP maps 'a'->'link' and 'input'->'textbox', counting anchors and generic inputs as tightened. Frozen spec tightened definition (spec.json measurement_validity, prereg 6.2) lists role in ['button','link','textbox', ...] without mapping; parent raw stores role as 'a' for <a> without explicit role attribute (measure_fullpage_yield.py: el.getAttribute('role')||tagName.toLowerCase()). Without mapping, tightened counts drop to listing 6 (not 8), detail 2 (not 5), cart 3 (not 6); fractions become listing 0.00352, detail 0.00150, cart 0.00264, ordering listing>cart>detail (still not listing>detail>cart but different). Mapping is undocumented deviation that inflates numerator by 33-150%.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py: ROLE_MAP {'a':'link','input':'textbox'}", "research/experiments/EXP-INTEL-34782350557/spec.json: measurement_validity tightened definition role list", "research/experiments/EXP-INTEL-34782350557/prereg.md: 6.2 ROLE-ONLY definition", "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json: locatable_sample role 'a' on A tags"],
+      "impact": "Numerical metrics in result.json (tightened_interactive_fraction_per_task, per_type_mean_fraction, between_type_variance etc.) depend on undocumented mapping. Reproduction without mapping yields different absolute values (40% lower). Construct validity of 'role-only' ambiguous for implicit ARIA roles."
+    },
+    {
+      "id": "VF-DENOMINATOR-SENSITIVITY",
+      "severity": "major",
+      "category": "construct_validity",
+      "description": "tightened_interactive_fraction uses total_dom denominator (1696-1712 listing, 1304-1395 detail, 1136 cart). Variation in denominator drives ordering: cart smaller DOM inflates its fraction despite fewer tightened elements (6 vs 8). Producer validity_notes note denominator variation but decision_rule still treats ordering reversal as hypothesis falsification. Alternative denominator elements_with_bbox (1550-1564 listing, 1143-1215 detail, not yet recomputed for tightened) would change ordering thresholds. Ordering reversal therefore not evidence that metric fails to capture interactivity, only that total_dom normalization is confounded.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/result.json: metrics.tightened_interactive_fraction_per_task, validity_notes denominator variation", "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json: total_dom_elements per task", "research/experiments/EXP-INTEL-34718481334/audit.json: VF-DEFINITION-OVERCOUNT denominator-sensitive"],
+      "impact": "Falsification bounded to total_dom denominator choice. Cannot claim 'metric is artifact of form scaffolding' generally; artifact may be denominator choice."
+    },
+    {
+      "id": "VF-SMALL-N-AND-CART-UNDEFINED",
+      "severity": "minor",
+      "category": "sampling_integrity",
+      "description": "Within-type stability assessed on n=3 listing, n=3 detail, n=1 distinct cart. Cart CV undefined (producer reports 0.0 via duplicate), detail CV 0.037 stable but based on only 3 points. Between-type variance computed from 3 means (2 df). Confidence intervals would be wide; ratio 60-75 highly sensitive to one page change.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/result.json: metrics.per_type_cv", "research/experiments/EXP-INTEL-34782350557/report.md: Stability H1 n=3"],
+      "impact": "Stability/discrimination claims are weak generalization, not robust result. Prereg acknowledges low sample sizes."
+    },
+    {
+      "id": "VF-ROLE-INFORM-COMPLETENESS-PASS",
+      "severity": "info",
+      "category": "measurement_validity",
+      "description": "Raw data locatable_sample entries contain role and inForm on all measured tasks (7 unique +1 duplicate). No missing fields, so MEASUREMENT_INVALID falsifier (5) correctly not triggered. Producer check passes.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json: locatable_sample role/inForm present on all 8 measured entries", "research/experiments/EXP-INTEL-34782350557/result.json: metrics per_task"],
+      "impact": "Data completeness holds; measurement transaction is technically COMPLETE for truncated sample scope."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF-DEFINITION-OVERCOUNT-DRAMATIC-REDUCTION",
+      "baseline": "Original definition locatable 82 listing, 32 detail, 21 cart; interactive fraction listing 0.048, detail 0.024, cart 0.0185",
+      "verdict": "CONFIRMED_OVERCOUNT",
+      "details": "Tightened (with mapping) reduces listing 82->8 (90% reduction) detail 32->5 (84%) cart 21->6 (71%); fractions drop 0.048->0.0047, 0.024->0.0037, 0.0185->0.00528 (10x). Without mapping reduction even larger (82->6, 32->2, 21->3). Confirms parent audit VF-DEFINITION-OVERCOUNT: original counted structural DIV/SPAN/LABEL inForm true (17/20 inForm true with role div/span). Even truncated counts show massive inflation.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json: per_task tightened 8/5/6 vs original 82/32/21", "research/experiments/EXP-INTEL-34782350557/result.json: metrics.per_type_mean_fraction vs original_baseline", "research/experiments/EXP-INTEL-34718481334/audit.json: VF-DEFINITION-OVERCOUNT"]
+    },
+    {
+      "id": "BF-STABILITY-PRESERVED",
+      "baseline": "Original within-type CV listing 0.0048, detail 0.037, cart 0.0 pseudoreplicated",
+      "verdict": "REPLICATED",
+      "details": "Tightened with mapping yields listing CV 0.004808, detail 0.03728, cart 0.0 (duplicate). Without mapping listing CV 0.00508, detail 0.03728, cart 0.0. Values essentially identical to original, preserving stability within truncated sample. At least 2 page types CV<0.3 holds.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/result.json: metrics.per_type_cv", "research/experiments/EXP-INTEL-34718481334/audit.json: recomputed_metrics interactive_fraction_within_type_cv"]
+    },
+    {
+      "id": "BF-DISCRIMINATION-STILL-GT1-BUT-REDUCED",
+      "baseline": "Original discrimination ratio 582 deduped (873 with duplicate)",
+      "verdict": "REPLICATED_DIRECTION_REDUCED_MAGNITUDE",
+      "details": "Recomputed between 6.009e-07 within 8.00e-09 ratio 75.11 with duplicate; deduped ratio 60.08. Without mapping between 3.39e-07 within 4.24e-09 ratio 80.0 deduped. Still between>within but order magnitude lower than parent 582, showing discrimination sensitive to definition and denominator. Not evidence of stable ratio.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/result.json: metrics.between_type_variance 6.009e-07 within 8.0e-09", "recomputed deduped 60.08"]
+    },
+    {
+      "id": "BF-ORDERING-REVERSAL-ARTIFACT",
+      "baseline": "Original ordering listing (0.048) > detail (0.024) > cart (0.0185)",
+      "verdict": "REVERSAL_IN_TRUNCATED_SAMPLE_ONLY",
+      "details": "Truncated tightened ordering cart 0.00528 > listing 0.00469 > detail 0.00374 reverses. Without mapping ordering listing 0.00352 > cart 0.00264 > detail 0.00150 also not preserving original. However extrapolated to full locatable set (proportional estimate) ordering listing 0.0192 > detail 0.00599 > cart 0.00555 preserves original. So reversal is not robust to sampling correction. Baseline comparison must be qualified.",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/result.json: metrics.ordering_actual [cart, product_listing, detail] vs ordering_expected", "extrapolated compute listing 0.01924 detail 0.00599 cart 0.00555"]
+    },
+    {
+      "id": "BF-ORIGINAL-BASELINE-CONTROL-PASS",
+      "baseline": "Original positive_control tightened >0 and null_control tightened <= original",
+      "verdict": "PASS",
+      "details": "Both hold with and without mapping: min tightened 5 (or 2 without) >0; max tightened 8 <= original 82. Replication control also passes (downward shift order magnitude).",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/result.json: controls.positive_control pass true, null_control pass true"]
+    }
+  ],
+  "recomputed_metrics": {
+    "producer_tightened_locatable_count_per_task_with_mapping": {
+      "listing_clothing-shoes-jewelry": 8,
+      "listing_beauty-personal-care": 8,
+      "listing_electronics": 8,
+      "detail_camera": 5,
+      "detail_vr_bag": 5,
+      "detail_pet_camera": 5,
+      "cart_1": 6,
+      "cart_1_duplicate": 6
+    },
+    "producer_tightened_interactive_fraction_per_task_with_mapping": {
+      "listing_clothing-shoes-jewelry": 0.0047169811320754715,
+      "listing_beauty-personal-care": 0.0046865846514352666,
+      "listing_electronics": 0.004672897196261682,
+      "detail_camera": 0.0035842293906810036,
+      "detail_vr_bag": 0.003816793893129771,
+      "detail_pet_camera": 0.003834355828220859,
+      "cart_1": 0.00528169014084507,
+      "cart_1_duplicate": 0.00528169014084507
+    },
+    "recomputed_per_type_mean_with_mapping_with_duplicate": {
+      "product_listing": 0.004692154326590807,
+      "detail": 0.0037451263706772112,
+      "cart": 0.00528169014084507
+    },
+    "recomputed_per_type_mean_with_mapping_deduped": {
+      "product_listing": 0.004692154326590807,
+      "detail": 0.0037451263706772112,
+      "cart": 0.00528169014084507
+    },
+    "recomputed_per_type_cv_with_mapping": {
+      "product_listing": 0.004808785045881535,
+      "detail": 0.03727972386526172,
+      "cart": 0.0,
+      "cart_note": "duplicate zero artifact; deduped n=1 distinct CV undefined"
+    },
+    "recomputed_between_type_variance_with_mapping": 6.009071075604643e-07,
+    "recomputed_within_type_variance_with_mapping_with_duplicate": 8.000839332069265e-09,
+    "recomputed_within_type_variance_with_mapping_deduped": 1.000104916508658e-08,
+    "recomputed_discrimination_ratio_with_mapping_with_duplicate": 75.11,
+    "recomputed_discrimination_ratio_with_mapping_deduped": 60.08,
+    "recomputed_match_producer": true,
+    "recomputed_without_mapping_counts": {
+      "listing_clothing-shoes-jewelry": 6,
+      "listing_beauty-personal-care": 6,
+      "listing_electronics": 6,
+      "detail_camera": 2,
+      "detail_vr_bag": 2,
+      "detail_pet_camera": 2,
+      "cart_1": 3,
+      "cart_1_duplicate": 3
+    },
+    "recomputed_without_mapping_fractions": {
+      "listing_clothing-shoes-jewelry": 0.0035377358490566035,
+      "listing_beauty-personal-care": 0.0035149384881676876,
+      "listing_electronics": 0.0035046728971962615,
+      "detail_camera": 0.0014336917562724014,
+      "detail_vr_bag": 0.0015267175572519084,
+      "detail_pet_camera": 0.0015337423312883436,
+      "cart_1": 0.0026408450704225354,
+      "cart_1_duplicate": 0.0026408450704225354
+    },
+    "recomputed_per_type_mean_without_mapping": {
+      "product_listing": 0.003519115744806851,
+      "detail": 0.0014980505482708844,
+      "cart": 0.0026408450704225354
+    },
+    "extrapolated_full_locatable_estimate_with_mapping": {
+      "listing_clothing-shoes-jewelry": 0.01934433962264151,
+      "listing_beauty-personal-care": 0.019213983465429456,
+      "listing_electronics": 0.019158878504672898,
+      "detail_camera": 0.005734966722689606,
+      "detail_vr_bag": 0.006106870228007634,
+      "detail_pet_camera": 0.006134969132723375,
+      "cart_1": 0.005545774647887324,
+      "method": "tightened_in_sample/20 * original_locatable_elements / total_dom"
+    },
+    "extrapolated_per_type_mean": {
+      "product_listing": 0.01923906719758129,
+      "detail": 0.005992268694473538,
+      "cart": 0.005545774647887324,
+      "ordering_extrapolated": ["product_listing", "detail", "cart"],
+      "ordering_preserved": true
+    },
+    "ordering_actual_truncated_with_mapping": ["cart", "product_listing", "detail"],
+    "ordering_reversed_truncated": true,
+    "original_baseline": {
+      "listing_mean": 0.048,
+      "detail_mean": 0.024,
+      "cart_mean": 0.0185
+    },
+    "positive_control_pass_recomputed": true,
+    "null_control_pass_recomputed": true,
+    "role_and_inForm_present_on_all_tasks": true,
+    "sample_truncation_factor": {
+      "listing": 4.1,
+      "detail": 1.6,
+      "cart": 1.05
+    }
+  },
+  "claim_ceiling": "Within the truncated first-20 of the original DEF-FALLBACK-INTERACTIVE locatable set on am1n3e/webarena-verified-shopping:latest (7 unique pages: 3 listing, 3 detail, 1 cart), role-only counting with 'a'->'link' mapping yields per-type tightened/total_dom means listing 0.00469, detail 0.00375, cart 0.00528 (CV 0.0048 listing, 0.037 detail), between-type variance > within-type variance (ratio 60 deduped, 75 with duplicate). Ordering cart>listing>detail reverses original listing>detail>cart under this truncated sampling and total_dom denominator. This does NOT establish that the tightened definition per se reverses ordering over the full DOM: proportional extrapolation to full locatable set (32.8 listing, 8.5 detail, 6.3 cart) restores ordering listing 0.019 > detail 0.006 > cart 0.0055. Maximum justified is a bounded diagnostic of truncated-sample fraction, not a general claim that the interactive fraction metric loses ordering robustness or that the approach is closed. Cross-site, corpus-wide, checkout, and fragment-model capture claims remain unsupported.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34782350557/request.json",
+    "research/experiments/EXP-INTEL-34782350557/spec.json",
+    "research/experiments/EXP-INTEL-34782350557/prereg.md",
+    "research/experiments/EXP-INTEL-34782350557/freeze.json",
+    "research/experiments/EXP-INTEL-34782350557/result.json",
+    "research/experiments/EXP-INTEL-34782350557/report.md",
+    "research/experiments/EXP-INTEL-34782350557/provenance.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json sha256:b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py sha256:84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: MEASURE_JS locatableSample.length <20",
+    "research/experiments/EXP-INTEL-34718481334/audit.json: VF-CART-PSEUDOREPLICATION, VF-DEFINITION-OVERCOUNT",
+    "research/experiments/EXP-INTEL-34718481334/handoff.json"
+  ],
+  "unresolved": [
+    "What is true role-only tightened interactive fraction when full DOM enumerated (not truncated to 20)? Does ordering listing>detail>cart hold on full enumeration?",
+    "Does 'a' (anchor) with implicit link role count as tightened 'link' — what is canonical mapping for tightened definition?",
+    "Does ordering stabilize under alternative denominator elements_with_bbox or locatable/total_locatable density?",
+    "What is tightened yield on independent distinct cart pages (n>=3 distinct URLs) — does cart mean 0.00528 replicate?",
+    "Does metric generalize beyond Magento shopping to GitLab/Reddit or 812-task WebArena-Verified corpus?",
+    "What is checkout yield when port 7770 accessible?",
+    "Would Docker digest drift alter DOM counts and tightened fractions?"
+  ]
+}
