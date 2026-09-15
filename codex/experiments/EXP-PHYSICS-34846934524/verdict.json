@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34846934524",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On locally-hosted Express SPAs with correlated non-determinism, does network-response payload structure (API response bodies, headers, timing signatures) exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy.",
+  "reason": "MEASUREMENT_INVALID due to positive control failure and determinism control deviation from frozen spec. The primary test result (PMI=3.319 bits) is artefactual: it equals H(S_next|URL,H_K) for 10 session-specific DOM hashes and equals the same value obtained with random DOM_before labels, proving plug-in estimator degeneracy when |R|≈N. After bias correction, PMI≈3.23 bits still reflects trivial identity function via embedded SHA256(session_id) token, not predictive Web-dynamical structure beyond memory. Deterministic and independent-noise baselines remain FALSIFIED-IN-SETTING as per parents. No valid claim for C-WEB-DYNAMICS survives this measurement.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34846934524/result.json metrics.controls.positive_control_random_labels pass false, controls.determinism_control pass true but session_correlated_accuracy=1.0 violates frozen spec condition (3)",
+    "research/experiments/EXP-PHYSICS-34846934524/audit.json status MEASUREMENT_INVALID, producer_claim_supported false, validity_findings V1_estimator_cardinality_degeneracy, V2_positive_null_control_failure_structural, V3_determinism_control_spec_violation, V4_target_misoperationalization, V8_no_leakage_but_identity_leak",
+    "research/experiments/EXP-PHYSICS-34846934524/audit.json claim_ceiling 'No valid claim for C-WEB-DYNAMICS survives this measurement'",
+    "research/experiments/EXP-PHYSICS-34846934524/spec.json decision_rule conditions 1-5, falsifier (3) determinism check",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_analysis_results.json session_correlated conditional_pmi K3 3.319465, perm_mean 0.085, controls positive_control_random_labels observed_pmi 3.317865 perm_mean 3.318017",
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json carry_forward established/rejected/unknown/do_not_assume, next_question correlated non-determinism"
+  ]
+}

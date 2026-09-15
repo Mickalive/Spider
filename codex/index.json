@@ -1342,6 +1342,31 @@
         "handoff.json": "11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f"
       }
     },
+    "EXP-PHYSICS-34846934524": {
+      "lane": "physics",
+      "request_id": "124e5ed3be43807f22b76852",
+      "created_at": "2026-09-14T13:04:07.512576+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with correlated non-determinism (persistent session_id that determines DOM variant at each FSM state, so DOM_before encodes session which determines DOM_after), does DOM structural features exhibit conditional PMI I(S_next; DOM_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is the discriminating test identified by parent audit V1: the parent tested independent per-step DOM observation noise where E[I]=0 by construction. Correlated non-determinism via persistent sessions is the only remaining locally-hosted DOM test where DOM_before could predict DOM_after through latent session state.",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
+        "spec.json": "b6573d94aac64894f9119e94a21b7a226beda34b4ce533a5165110540d0261db",
+        "prereg.md": "7f493f9b3803e293fba49fe8a0d72f3e4d6b753fbb4019f2f4f5e7e181ee3593",
+        "freeze.json": "b99097dfcf649ae8515dbf4d701937a439889880fc266fd25a03da86bc97ccae",
+        "result.json": "9d4b94800719ec9c4234b15a08d3b9de8adb9288d6dd656420a72e35bb6c702f",
+        "report.md": "dd4c9b3d82a582159aaee4e7421000f26cb055618775856d0cf9ee06d5d9ee73",
+        "provenance.json": "4b47ff6ca73b560a55acdc0256000ded0e0b10b9741950748b4b738be0e45149",
+        "audit.json": "12eb498a4fb606e5b63761faa41cb86a6f031167dc4cb1d77b77f1f7cf1eaa3b",
+        "verdict.json": "9601903a2734006b60dc6859b98ace1e8af1a7144220d1cd711cea3b9cdffd23",
+        "handoff.json": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34846934524",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "On locally-hosted Express SPAs with correlated non-determinism, does network-response payload structure (API response bodies, headers, timing signatures) exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy.",
+  "why_next": "DOM-hash path closed pending bias-corrected estimator and session-randomized control; next discriminating test should use orthogonal observation level (network-response information theory) to avoid DOM hash cardinality degeneracy.",
+  "carry_forward": {
+    "established": [
+      "DOM hash with embedded session token trivially predicts itself: PMI equals H(S_next|URL,H_K) for 10 session-specific DOM hashes (audit V1, V8).",
+      "Deterministic and independent-noise DOM-hash baselines remain FALSIFIED-IN-SETTING as per parent experiments (EXP-PHYSICS-34724244876, EXP-PHYSICS-34764605162)."
+    ],
+    "rejected": [
+      "DOM structural features encode session state in a generalizable way beyond trivial identity function via embedded session token (MEASUREMENT_INVALID, audit V1, V8)."
+    ],
+    "unknown": [
+      "Whether bias-corrected conditional PMI (observed - perm_mean or Miller-Madow) on same session-correlated data would still be >0 with proper significance after accounting for |R|=10 bias (~0.085).",
+      "What valid positive control should be: randomizing session_id assignment while preserving DOM generation vs randomizing DOM_before labels.",
+      "Whether session-correlated design with token removed (variant_id only, 5 variants, 2 sessions per variant) would give PMI ≈1.32 bits as predicted.",
+      "Whether target should be next FSM state (5 values) vs next DOM hash (50 values) changes conclusion.",
+      "Whether richer FSM where action choice correlates with session would create non-trivial K-dependence.",
+      "Whether network-response payload structure (API bodies) as alternative observation level would avoid DOM hash cardinality degeneracy and provide valid conditional PMI test for C-WEB-DYNAMICS."
+    ],
+    "do_not_assume": [
+      "Do not assume DOM hash is universally non-predictive across all non-deterministic regimes — two falsifications are bounded to deterministic FSMs and independent observation noise; correlated non-determinism test is measurement-invalid, not negative.",
+      "Do not assume the small positive PMI on timing-dependent SPAs (0.025 bits) reflects real signal — it is within permutation null distribution (z=0.41, p_raw=0.32) and dominated by finite-sample noise.",
+      "Do not assume action-history prediction accuracy of 28-36% on non-deterministic SPAs means action-history is weak — it is well above chance (20% for 5 states) and still sufficient to make DOM redundant.",
+      "Do not generalize to production SPAs, client-side virtual DOM, React/Vue concurrent mode, auth-dependent content, or external data feeds — the audit explicitly excludes these from the claim ceiling.",
+      "Do not assume numeric structural features are universally invariant — invariance is specific to this FSM design where variant encoding is in text content, not element counts.",
+      "Do not assume the positive/null control passes demonstrate pipeline discriminant validity on non-deterministic strata — controls are degenerate on deterministic data (audit V3).",
+      "Do not confuse observation non-determinism (different DOM for same FSM state) with transition non-determinism (different FSM state from same FSM state + action) — the experiment tests the former.",
+      "Do not interpret PMI=3.319 bits as evidence for predictive dynamical structure beyond memory — it equals marginal entropy due to embedded session token identity function."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json sha256 11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f",
+    "research/experiments/EXP-PHYSICS-34724244876/handoff.json sha256 3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4",
+    "research/experiments/EXP-PHYSICS-34846934524/spec.json frozen design",
+    "research/experiments/EXP-PHYSICS-34846934524/result.json producer evidence",
+    "research/experiments/EXP-PHYSICS-34846934524/audit.json independent audit",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_dom_captures.json sha256 8c44acfc1e093aa9473d56ec8916bdea38ec4018e26759d97c457581cceae11b",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_analysis_results.json sha256 d2b8aee60f3f888146122ca9a5f15b4ab40f096b60cc6f972edaba709531e991",
+    "research/claims/registry.json C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34846934524/audit.json claim_ceiling, validity_findings V1-V8, required_fixes, unresolved",
+    "research/experiments/EXP-PHYSICS-34846934524/result.json metrics, controls, observations, validity_notes",
+    "research/experiments/EXP-PHYSICS-34846934524/report.md primary test results, controls, interpretation",
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json carry_forward, next_question, recommended_action"
+  ],
+  "recommended_action": "Next experiment should test network-response payload structure (API response bodies, headers, timing signatures) as an orthogonal observation level for C-WEB-DYNAMICS, using bias-corrected conditional MI estimator and proper latent-state randomization. Do not repeat DOM-hash testing on session-correlated SPAs without estimator fix."
+}
