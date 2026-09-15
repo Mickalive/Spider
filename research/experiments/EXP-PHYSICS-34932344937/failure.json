@@ -3,7 +3,7 @@
   "category": "EXECUTION_FAILURE",
   "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-15T10:28:01.599683+00:00",
-  "github_run_id": "34956990262",
+  "recorded_at": "2026-09-15T15:09:26.257683+00:00",
+  "github_run_id": "34986148940",
   "github_run_attempt": "1"
 }
