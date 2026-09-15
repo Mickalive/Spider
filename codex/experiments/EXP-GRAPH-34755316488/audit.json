@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34755316488",
+  "lane": "graph",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen adaptive threshold T(n)=1-2.5/(n+1) was not empirically tested: execution substituted T(n)=1-0.8/(n+1) (provenance.json deviation_from_prereg, result.json adaptive_threshold_used, execute_scaling.py ADAPTIVE_C=0.8). A new confirmatory preregistration with the empirically successful formula T(n)=1-0.8/(n+1) (or parametric T(n)=1-c/(n+1), c<1) must be frozen and re-executed before any SURVIVES claim is justified. Analytical 'verification' in result.json adaptive_threshold_spec_formula is mathematically inverted (claims T<sim implies detection when detection requires sim<T) and is not an empirical measurement.",
+    "Recompute frozen metric: at spec T(n)=1-2.5/(n+1) empirical TP=0/15 at every n>=5 (recomputed from raw_evidence/mock_results.json: 0.833,0.909,0.938,0.952,0.968,0.980 all > spec thresholds 0.583,0.773,0.844,0.881,0.919,0.951), so decision_rule condition (2) TP>=0.8 fails at every n>=10. Under frozen decision_rule the experiment is FALSIFIED-IN-SETTING, not SURVIVES_CURRENT_TEST.",
+    "Stochastic variation FP control is degenerate by construction (structure-only Jaccard; result.json validity_notes and report.md 3.1 acknowledge Jaccard=1.0 guaranteed at any threshold <1.0). Replace with structural-noise FP stress: random optional-field add/remove (e.g., 10% churn), null-valued fields, nested/object variations, to test whether adaptive threshold approaching 1.0 inflates FP on realistic variation. Decision_rule condition (3) FP<=0.15 is currently vacuous.",
+    "Report Wilson 95% CIs as primary uncertainty, not point estimates: per-size TP at executed threshold is 15/15 -> CI [0.796,1.0] (recomputed), fixed-threshold overall TP 20/90 -> CI [0.1487,0.3185]; real-API FP 0/30 -> CI [0.0,0.1135]. Claims of '100% TP' must be bounded by these intervals.",
+    "Expand validity boundary: current evidence limited to flat schemas, deterministic mock, 3 structural drifts (add_field=n/(n+1), remove_field=(n-1)/n, change_type=(n-1)/(n+1)), and 3 static public APIs (GitHub 102-field, JSONPlaceholder 4-field, httpbin 3-field, all Jaccard=1.0 on re-request). No empirical test of nested structures, optional fields, semantic drift, or drift detection on live endpoints."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Preregistration deviation invalidates confirmatory status of H2/H3",
+      "severity": "critical",
+      "details": "spec.json and prereg.md freeze T(n)=1-2.5/(n+1). execute_scaling.py line 36 uses ADAPTIVE_C=0.8 => T(n)=1-0.8/(n+1). result.json adaptive_threshold_used documents deviation; provenance.json deviation_from_prereg confirms. Decision was evaluated against executed threshold, not frozen threshold. Analytical verification in result.json adaptive_threshold_spec_formula incorrectly claims all_detected=true when stale similarities exceed spec thresholds (e.g., n=10 add 0.909 > 0.773 not <). Recomputation from mock_results.json shows spec TP=0 at all sizes.",
+      "evidence_ref": "spec.json:measurement_validity, prereg.md 5.4, research/graph/freshness_detection/execute_scaling.py:36, result.json:adaptive_threshold_used, result.json:adaptive_threshold_spec_formula, provenance.json:deviation_from_prereg, raw_evidence/mock_results.json"
+    },
+    {
+      "finding": "Spearman scaling degradation confirmed but n=6 limits inference",
+      "severity": "low",
+      "details": "add_field Jaccards 5:0.8333,10:0.9091,15:0.9375,20:0.9524,30:0.9677,50:0.9804 are strictly monotonic matching analytical n/(n+1). Spearman rho=1.0 recomputed vs producer rho=1.0, p~0.0. With n=6 sizes, perfect rank correlation has exact two-tailed p=0.0028 (not 0.0 approximation), but monotonicity is robust. Measurement is deterministic by construction, not noisy Web measurement.",
+      "evidence_ref": "result.json:scaling_degradation, raw_evidence/mock_metrics.json:scaling_test, raw_evidence/mock_results.json drift_add families"
+    },
+    {
+      "finding": "Adaptive FP control is non-discriminating by construction",
+      "severity": "high",
+      "details": "Stochastic family preserves (field_path,type) pairs; generate_random_values varies values only, so extracted Jaccard is 1.0 on all 120 requests. FP=0 at any threshold <1.0 (validity_notes acknowledges degenerate). Real-API FP similarly 0/30 with Jaccard=1.0 on all re-requests because endpoints are static over 10 sequential fetches (0.5s delay). No test of structural variation (optional fields, nulls, pagination, auth-dependent fields) that would stress a high threshold near 1.0. High threshold T=0.984 at n=50 leaves only 0.016 margin to fresh=1.0; any real structural noise >1.6% would be FP.",
+      "evidence_ref": "result.json:adaptive_threshold_executed per_size_fp_rate 0.0, raw_evidence/mock_metrics.json per_size fp_rate_adaptive 0.0, raw_evidence/mock_results.json stochastic families similarity 1.0, raw_evidence/real_api_results.json similarities 1.0, report.md 3.1, result.json validity_notes"
+    },
+    {
+      "finding": "Controls are tautological as noted in parent audit",
+      "severity": "medium",
+      "details": "positive_control_n5_add_field (Jaccard 0.833 <0.85) and null_control_stable (Jaccard 1.0) are direct restatements of Jaccard computation, not independent instrumentation of freshness detection. They verify pipeline arithmetic, not detection validity on noisy data. Parent audit REVISE flagged this; remains unaddressed.",
+      "evidence_ref": "spec.json:positive_control, spec.json:null_control, result.json:controls, result.json:metrics:positive_control, result.json:metrics:null_control"
+    },
+    {
+      "finding": "Mock-to-real and representation gaps bound claim ceiling",
+      "severity": "medium",
+      "details": "Schemas are flat field_{i} sets with cycling types; no nested objects, arrays, or type coercion (int vs number). Drift patterns are single-field add/remove/change only. Sample per pattern per size is 5 stale -> Wilson CI [0.565,1.0] for 5/5, pooled 15/15 -> [0.796,1.0]. Real-API sizes (102,4,3) do not span 10-50 range and measure stability not drift detection.",
+      "evidence_ref": "spec.json:measurement_validity, prereg.md 5.2-5.8, raw_evidence/mock_metrics.json per_size n_stale_drift 15, provenance.json datasets_and_fixtures"
+    },
+    {
+      "finding": "Sensitivity analysis correctly shows no fixed threshold works, supporting need for adaptive threshold",
+      "severity": "info",
+      "details": "Recomputed TP at fixed 0.85: n5 1.0, n10 0.333, n>=15 0.0; at 0.95: n5 1.0, n10 1.0, n15 1.0, n20 0.333, n30 0.333, n50 0.0. Confirms spec expectation that single fixed threshold cannot cover 5-50 fields. This finding is valid and supports revised adaptive-threshold hypothesis.",
+      "evidence_ref": "result.json:sensitivity_analysis_by_size, raw_evidence/mock_metrics.json:sensitivity_analysis_by_size"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "baseline_fixed_threshold_085",
+      "expected": "TP=1.0 at n=5, degrades to 0 at n>=15 (parent scaling attack)",
+      "observed": "TP n5 1.0, n10 0.333, n15 0.0, n20 0.0, n30 0.0, n50 0.0; overall TP 0.222 CI [0.1487,0.3185]. Perfectly monotonic degradation rho=1.0. Recomputed matches producer. Baseline correctly shows fixed threshold non-viable.",
+      "verdict": "PASS",
+      "evidence_ref": "result.json:fixed_threshold_085, raw_evidence/mock_metrics.json:overall_fixed_threshold, raw_evidence/mock_results.json"
+    },
+    {
+      "baseline_id": "baseline_no_detection",
+      "expected": "TP=0%, FP=0% trivial",
+      "observed": "Not empirically measured; trivial bound. No discriminative value.",
+      "verdict": "PASS (trivial)",
+      "evidence_ref": "spec.json:baselines[2], result.json:controls:baseline_no_detection"
+    },
+    {
+      "baseline_id": "baseline_field_equality",
+      "expected": "TP=100% for any drift, FP=100% for any stochastic variation",
+      "observed": "Not measured; listed as degenerate extreme N/A in result.json controls. Would be FP=1 on stochastic variation if threshold=1.0, but stochastic Jaccard is 1.0 so equality (require Jaccard=1.0) would be FP=0 here - baseline definition does not match structure-only representation.",
+      "verdict": "WEAK (not measured, definition inconsistent with Jaccard semantics)",
+      "evidence_ref": "spec.json:baselines[3], result.json:controls:baseline_field_equality"
+    },
+    {
+      "baseline_id": "naive_fixed_threshold_095",
+      "expected": "Catch single-field drift at n<=19 but miss n>=20 (spec baselines)",
+      "observed": "Sensitivity surface shows 0.95 catches all patterns at n=10 (TP 1.0) and n=15 (1.0), partial at n20 (0.333) and n30 (0.333), none at n50 (0.0). So 0.95 fails earlier than spec expectation (fails at n20, not 20+). Validates that no single high fixed threshold scales to n=50.",
+      "verdict": "PASS (observed slightly worse than expected, reinforces scaling claim)",
+      "evidence_ref": "raw_evidence/mock_metrics.json:sensitivity_analysis_by_size, result.json:sensitivity_analysis_by_size"
+    }
+  ],
+  "recomputed_metrics": {
+    "scaling_degradation_spearman_rho": 1.0,
+    "scaling_degradation_p_approx": 0.0,
+    "add_field_jaccards_by_size": {
+      "5": 0.8333,
+      "10": 0.9091,
+      "15": 0.9375,
+      "20": 0.9524,
+      "30": 0.9677,
+      "50": 0.9804
+    },
+    "fixed_threshold_085_per_size_tp": {
+      "5": 1.0,
+      "10": 0.3333,
+      "15": 0.0,
+      "20": 0.0,
+      "30": 0.0,
+      "50": 0.0
+    },
+    "fixed_threshold_085_overall_tp": 0.2222,
+    "fixed_threshold_085_overall_tp_95ci": [0.1487, 0.3185],
+    "adaptive_spec_Tn_1_minus_2_5_over_nplus1_thresholds": {
+      "5": 0.5833,
+      "10": 0.7727,
+      "15": 0.8438,
+      "20": 0.881,
+      "30": 0.9194,
+      "50": 0.951
+    },
+    "adaptive_spec_empirical_TP_at_spec_threshold": {
+      "5": 0.0,
+      "10": 0.0,
+      "15": 0.0,
+      "20": 0.0,
+      "30": 0.0,
+      "50": 0.0,
+      "note": "All stale similarities exceed spec T; detection requires sim<T, so TP=0. Producer analytical table claiming all_detected true is inverted."
+    },
+    "adaptive_executed_Tn_1_minus_0_8_over_nplus1_thresholds": {
+      "5": 0.8667,
+      "10": 0.9273,
+      "15": 0.95,
+      "20": 0.9619,
+      "30": 0.9742,
+      "50": 0.9843
+    },
+    "adaptive_executed_empirical_TP": {
+      "5": 1.0,
+      "10": 1.0,
+      "15": 1.0,
+      "20": 1.0,
+      "30": 1.0,
+      "50": 1.0,
+      "per_size_95ci": [0.7961, 1.0],
+      "n_stale_per_size": 15
+    },
+    "adaptive_FP_stochastic_per_size": {
+      "5": 0.0,
+      "10": 0.0,
+      "15": 0.0,
+      "20": 0.0,
+      "30": 0.0,
+      "50": 0.0,
+      "n_fresh_non_drift_per_size": 30,
+      "95ci": [0.0, 0.1135],
+      "note": "Degenerate: Jaccard=1.0 by construction at any threshold <1.0"
+    },
+    "null_control_FP": 0,
+    "null_control_n": 60,
+    "positive_control_n5_add_TP": 1.0,
+    "positive_control_similarities": [0.8333, 0.8333, 0.8333, 0.8333, 0.8333],
+    "real_api_FP": 0,
+    "real_api_n": 30,
+    "real_api_FP_95ci": [0.0, 0.1135],
+    "per_pattern_stale_jaccard": {
+      "5": {"drift_add": 0.8333, "drift_remove": 0.8, "drift_change": 0.6667},
+      "10": {"drift_add": 0.9091, "drift_remove": 0.9, "drift_change": 0.8182},
+      "15": {"drift_add": 0.9375, "drift_remove": 0.9333, "drift_change": 0.875},
+      "20": {"drift_add": 0.9524, "drift_remove": 0.95, "drift_change": 0.9048},
+      "30": {"drift_add": 0.9677, "drift_remove": 0.9667, "drift_change": 0.9355},
+      "50": {"drift_add": 0.9804, "drift_remove": 0.98, "drift_change": 0.9608}
+    },
+    "request_failure_rate": 0.0,
+    "failed_requests": 0,
+    "total_mock_requests": 360
+  },
+  "claim_ceiling": "CEILING (exploratory only, not confirmatory): Jaccard (field_path,type) with fixed threshold 0.85 degrades monotonically (rho=1.0) from TP=1.0 at n=5 to TP=0 at n>=15, confirming parent scaling attack. An adaptive threshold of the form T(n)=1-0.8/(n+1) (threshold above max drift Jaccard n/(n+1)) empirically restores TP=15/15 per size (Wilson CI [0.796,1.0]) with FP=0/30 per size (CI [0.0,0.1135]) on flat mock schemas (5-50 fields) for three single-field structural drifts (add/remove/change_type) and structure-preserving stochastic variation, and FP=0/30 (CI [0.0,0.1135]) on 3 static public APIs on immediate re-request. The preregistered T(n)=1-2.5/(n+1) is FALSIFIED (empirical TP=0/15 at all n). No confirmatory claim supported for real drift detection, nested schemas, optional-field churn, or FP under structural noise. A revised preregistration with T(n)=1-c/(n+1), c<1 (e.g., 0.8) is required for product consideration.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34755316488/spec.json",
+    "research/experiments/EXP-GRAPH-34755316488/prereg.md",
+    "research/experiments/EXP-GRAPH-34755316488/freeze.json",
+    "research/experiments/EXP-GRAPH-34755316488/result.json",
+    "research/experiments/EXP-GRAPH-34755316488/report.md",
+    "research/experiments/EXP-GRAPH-34755316488/provenance.json",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_results.json",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_metrics.json",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/real_api_results.json",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/real_api_metrics.json",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/request_logs.json",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/decision.json",
+    "research/graph/freshness_detection/execute_scaling.py"
+  ],
+  "unresolved": [
+    "Whether T(n)=1-0.8/(n+1) generalizes to schemas >50 fields, nested objects, arrays, or deeply nested paths (not tested)",
+    "Whether threshold holds under structural noise: optional fields, null-valued fields, sparse responses, pagination-dependent fields, auth-dependent fields that cause Jaccard <1.0 on fresh re-requests",
+    "True FP rate on live Web traffic with authentication, rate limiting, and temporal drift between requests (current real-API test is 10 immediate re-requests of static endpoints)",
+    "Whether add_field/remove_field/change_type cover realistic drift distribution in production APIs; no measurement of drift frequency or drift-type prevalence",
+    "Optimal constant c in T(n)=1-c/(n+1): executed c=0.8 has margin 0.2/(n+1) above tightest drift; margin trades TP vs FP under noise and needs calibration on noisy data",
+    "Whether semantic drift (same (field_path,type) set but changed meaning/range) is detectable at all with this representation"
+  ]
+}

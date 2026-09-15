@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34846934524",
+  "lane": "physics",
+  "github_run_id": "34881712766",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-14T22:14:17+00:00",
+  "base_sha": "64cb4bddabf4c5766d5a138bd479f4b5cfb92c7d",
+  "pre_execute_sha": "da32724b3d610a3dd3a870c6e8a65691d7b6c903",
+  "analysis_version": "v3",
+  "analysis_iterations": 1,
+  "code_paths": {
+    "generate_data": "research/experiments/EXP-PHYSICS-34846934524/generate_data.py",
+    "analyze": "research/experiments/EXP-PHYSICS-34846934524/analyze.py"
+  },
+  "datasets": {
+    "raw_dom_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34846934524/raw_dom_captures.json",
+      "sha256": "8c44acfc1e093aa9473d56ec8916bdea38ec4018e26759d97c457581cceae11b",
+      "size_bytes": 20483786,
+      "description": "Generated SPA transition data: 500 trajectories x 10 steps x 3 SPA types"
+    },
+    "raw_analysis_results": {
+      "path": "research/experiments/EXP-PHYSICS-34846934524/raw_analysis_results.json",
+      "sha256": "d2b8aee60f3f888146122ca9a5f15b4ab40f096b60cc6f972edaba709531e991",
+      "size_bytes": 41073,
+      "description": "Computed PMI, permutation tests, controls, decision rule"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "standard library only (hashlib, json, math, random, collections, time)",
+    "random_seed": 42,
+    "n_permutations": 1000
+  },
+  "parameters": {
+    "n_trajectories": 500,
+    "steps_per_trajectory": 10,
+    "n_sessions": 10,
+    "n_variants": 5,
+    "session_variant_mapping": "session_id % 5",
+    "history_lengths": [1, 2, 3],
+    "representations": ["visible_text_hash", "accessibility_tree_hash", "multi_feature_hash", "numeric_structural"],
+    "bonferroni_alpha": 0.004166666666666667,
+    "n_comparisons": 12,
+    "min_stratum_count": 5
+  },
+  "evidence_chain": [
+    "research/experiments/EXP-PHYSICS-34724244876/handoff.json — deterministic SPA PMI=0",
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json — independent noise PMI≈0",
+    "research/experiments/EXP-PHYSICS-34764605162/audit.json — ceiling carve-out for correlated non-determinism",
+    "research/experiments/EXP-PHYSICS-34846934524/request.json — parent handoff reference",
+    "research/experiments/EXP-PHYSICS-34846934524/freeze.json — frozen design",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_dom_captures.json — raw evidence",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_analysis_results.json — derived measurements"
+  ],
+  "frozen_inputs": {
+    "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
+    "spec.json": "b6573d94aac64894f9119e94a21b7a226beda34b4ce533a5165110540d0261db",
+    "prereg.md": "7f493f9b3803e293fba49fe8a0d72f3e4d6b753fbb4019f2f4f5e7e181ee3593"
+  },
+  "analysis_log": [
+    "2026-09-14T18:38:58Z: Design frozen",
+    "2026-09-14T19:05:55Z: First execution attempt failed (exit code 66)",
+    "2026-09-14T22:14:17Z: Analysis v3 executed successfully (309.9s, 1000 permutations)"
+  ]
+}

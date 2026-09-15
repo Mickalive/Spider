@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34764605162",
+  "lane": "physics",
+  "github_run_id": "34788722217",
+  "github_run_attempt": 1,
+  "commit_sha": "7242d3c11371c3966c08965564b157e41e2d24f7",
+  "commit_message": "R2 physics: execute EXP-PHYSICS-34764605162",
+  "base_sha": "26b9294f137a5f1957aacada4d888df93e5ca2dd",
+  "frozen_at": "2026-09-13T21:05:11.000152+00:00",
+  "executed_at": "2026-09-13T23:15:35.354606+00:00",
+  "re_executed_at": "2026-09-14T00:00:00.000000+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["hashlib", "json", "math", "random", "collections", "scipy.stats (effect sizes, not core)"],
+    "no_model_calls": true,
+    "no_browser_automation": true,
+    "no_network_io": true
+  },
+  "datasets": {
+    "raw_dom_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34764605162/raw_dom_captures.json",
+      "sha256": "a211b0d4f8765f648bcf003058a62b919d96cfe48c0fe2165822c44787090fd3",
+      "n_transitions": 6000,
+      "spa_types": ["deterministic", "random_API", "timing_dependent"],
+      "n_transitions_per_type": 2000,
+      "random_seed": 42,
+      "fsm_states": 5,
+      "fsm_structure": "linear (landing → form_s1 → form_s2 → review → complete → landing)"
+    }
+  },
+  "code": {
+    "generate_data": {
+      "path": "research/experiments/EXP-PHYSICS-34764605162/generate_data.py",
+      "sha256": "1e55c7b5a0da68c83c764527ea3a7e9c74f165d1a0ab328d5cb6e75bd10f0b2d",
+      "description": "Generates 3 SPA types with controlled non-determinism. Random API: 3 DOM variants per state. Timing-dependent: 4 DOM variants per state. Seed=42."
+    },
+    "analyze": {
+      "path": "research/experiments/EXP-PHYSICS-34764605162/analyze.py",
+      "sha256": "a53330f83b5b233164994fcc33db7fcad7e56d472b7ff092899ebea04ac4a57d",
+      "description": "Conditional PMI analysis with permutation tests (1000 perms), Bonferroni correction across 24 comparisons, determinism check, action-history prediction, positive/null controls."
+    }
+  },
+  "artifacts": {
+    "raw_analysis_results": {
+      "path": "research/experiments/EXP-PHYSICS-34764605162/raw_analysis_results.json",
+      "sha256": "64ccf4253146709270a3dbebcfd8d88f3a772ef71f31e4e3d738bc41e8ffbfd4",
+      "description": "Complete analysis output including conditional PMI, permutation tests, action-history prediction, determinism checks, controls, and decision rule."
+    },
+    "result": {
+      "path": "research/experiments/EXP-PHYSICS-34764605162/result.json",
+      "description": "Producer handoff with all mandatory packet fields."
+    },
+    "report": {
+      "path": "research/experiments/EXP-PHYSICS-34764605162/report.md",
+      "description": "Human-readable interpretation of results."
+    }
+  },
+  "reproduction": {
+    "commands": [
+      "python3 research/experiments/EXP-PHYSICS-34764605162/generate_data.py",
+      "python3 research/experiments/EXP-PHYSICS-34764605162/analyze.py"
+    ],
+    "expected_outputs": [
+      "research/experiments/EXP-PHYSICS-34764605162/raw_dom_captures.json",
+      "research/experiments/EXP-PHYSICS-34764605162/raw_analysis_results.json"
+    ],
+    "deterministic": true,
+    "notes": "Both scripts use random.seed(42). Data generation uses per-trajectory RNG seeded with 42+traj_id. Analysis is deterministic given the same input data."
+  },
+  "frozen_inputs": {
+    "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
+    "spec.json": "370c2879dd0314064f03ecb006884906e93dfd98859b84b995269f71eab407df",
+    "prereg.md": "0817c1d8583922ffb31022cad990434cfaca168f8f0339fc9663e92bc543a366"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-34724244876",
+    "path": "research/experiments/EXP-PHYSICS-34724244876/handoff.json",
+    "sha256": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4",
+    "verdict": "FALSIFIED-IN-SETTING"
+  },
+  "previous_execution_failure": {
+    "stage": "execute",
+    "category": "EXECUTION_FAILURE",
+    "message": "stage exited with code 66",
+    "github_run_id": "34788722217",
+    "retryable": false,
+    "recorded_at": "2026-09-13T23:15:36.450748+00:00",
+    "resolution": "Re-executed analysis in this run. Data and analysis code were already present and correct. Results confirmed reproducible."
+  }
+}
