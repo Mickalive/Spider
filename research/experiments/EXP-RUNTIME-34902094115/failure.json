@@ -1,9 +1,0 @@
-{
-  "stage": "design",
-  "category": "OPENCODE_INSTALL_FAILURE",
-  "message": "stage exited with code 75",
-  "retryable": true,
-  "recorded_at": "2026-09-15T00:35:45.223795+00:00",
-  "github_run_id": "34913745393",
-  "github_run_attempt": "1"
-}
