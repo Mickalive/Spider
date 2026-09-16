@@ -36,6 +36,7 @@ class Mechanism:
     verification_rule: dict[str, Any] = field(default_factory=dict)
     failure_boundary: dict[str, Any] = field(default_factory=dict)
     repair_scope: dict[str, Any] = field(default_factory=dict)
+    slot_prefixes: dict[str, str] = field(default_factory=dict)
     evidence: list[str] = field(default_factory=list)
     confidence: float = 0.0
     invalidated: bool = False
