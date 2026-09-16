@@ -58,6 +58,26 @@ restore_agent_commits(){
   return 0
 }
 
+# Every fallback attempt must start from the exact durable stage checkpoint.
+# Otherwise provider B can inherit provider A's partial files/code, making the
+# fallback scientifically non-independent and potentially contaminating Product.
+restore_attempt_baseline(){
+  local branch
+  branch=$(git branch --show-current 2>/dev/null || true)
+  if [[ "$branch" != "$START_BRANCH" ]]; then
+    echo "::error::Cannot restore retry baseline: branch changed from $START_BRANCH to $branch" >&2
+    return 68
+  fi
+  git reset --hard "$START_HEAD" >/dev/null || return 68
+  # .spider-runtime contains mounted frozen memory; all other untracked files
+  # created by the failed model attempt are attempt-local and must be discarded.
+  git clean -fd -e .spider-runtime/ >/dev/null || return 68
+  if [[ -n "${SPIDER_CONTROL_HELPER:-}" && -f "${SPIDER_CONTROL_HELPER}" ]]; then
+    python "$SPIDER_CONTROL_HELPER" stage --root "${GITHUB_WORKSPACE:-$PWD}" >/dev/null || return 68
+  fi
+  return 0
+}
+
 required_outputs_ok(){
   [[ -z "${SPIDER_REQUIRED_OUTPUTS:-}" ]] && return 0
   local p missing=0
@@ -68,12 +88,6 @@ required_outputs_ok(){
     fi
   done
   [[ "$missing" -eq 0 ]]
-}
-
-clear_required_outputs(){
-  [[ -z "${SPIDER_REQUIRED_OUTPUTS:-}" ]] && return 0
-  local p
-  for p in $SPIDER_REQUIRED_OUTPUTS; do rm -f -- "$p"; done
 }
 
 run_once(){
@@ -106,6 +120,18 @@ run_once(){
   return "$rc"
 }
 
+retry_from_clean_baseline(){
+  local model="$1" attempt_no="$2" rc="$3" category="$4"
+  restore_attempt_baseline
+  local reset_rc=$?
+  if [[ "$reset_rc" -ne 0 ]]; then
+    write_receipt failure "$model" "$attempt_no" "$reset_rc" retry-baseline-restore
+    echo "::error::SPIDER_RETRY_BASELINE_RESTORE_FAILED model=$model" >&2
+    exit "$reset_rc"
+  fi
+  write_receipt retry "$model" "$attempt_no" "$rc" "$category"
+}
+
 attempt=1; index=0; last_kind=""
 while (( attempt <= MAX_ATTEMPTS )); do
   model="${MODELS[$index]}"
@@ -122,15 +148,14 @@ while (( attempt <= MAX_ATTEMPTS )); do
 
   if [[ "$rc" -eq 0 ]]; then
     last_kind="output-missing"
-    write_receipt retry "$model" "$attempt" 76 output-missing
-    clear_required_outputs
+    retry_from_clean_baseline "$model" "$attempt" 76 output-missing
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
   fi
 
   if [[ "$rc" -eq 75 || "$rc" -eq 124 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
     last_kind="transient"
-    write_receipt retry "$model" "$attempt" "$rc" transient
+    retry_from_clean_baseline "$model" "$attempt" "$rc" transient
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
   fi
