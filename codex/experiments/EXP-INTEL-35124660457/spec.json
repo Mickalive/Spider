@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-INTEL-35124660457",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the first-20 locatable_sample truncation systematically bias role counts and density-based page-type orderings, and can the direction and magnitude of this bias be estimated from existing raw data without re-crawling?",
+  "hypothesis": "The first-20 truncation introduces page-type-dependent bias because: (1) it samples locatable elements in document order, not randomly; (2) different page types have different DOM structures (listing pages have many product links deep in DOM, cart pages have fewer total elements); (3) the truncation discards a large fraction of interactive elements (e.g., 393 <a> tags in DOM vs 16 in sample for listing pages); (4) the bias direction is page-type-dependent: listing pages lose more <a> (link) elements than cart/detail pages, causing the truncated sample to undercount links relative to other roles on listing pages. This means the full-DOM corrected ordering may differ from the truncated-sample ordering.",
+  "falsifier": "If the full-DOM estimated ordering is identical to the truncated-sample ordering for all page types AND the bias magnitude (relative density difference between truncated and full-DOM estimates) is <10% for all page types, then the truncation is not a significant validity threat and the current results stand without substrate fix.",
+  "baselines": [
+    "Truncated-sample ordering (current): uses only first-20 locatable_sample elements for role counts and density computation",
+    "Full-DOM corrected ordering (new): uses dom_stats tag counts for <a>, <button>, <form>, <input> to correct role counts, combined with truncated-sample counts for roles without DOM equivalents (combobox, div, label, span)",
+    "Random-sample baseline: simulates 1000 random 20-element draws from the reported locatable_elements count to estimate the expected sampling variance under random (non-biased) truncation"
+  ],
+  "positive_control": "The a→link reversal (cart>product_listing>detail) must be preserved in the full-DOM corrected ordering if the bias is truly driving the ordering change. If full-DOM correction reverses the ordering to product_listing>cart>detail, this confirms the truncation drives the a→link effect.",
+  "null_control": "Random 20-element samples from the locatable_elements pool should show lower bias than the first-20 truncation, confirming the bias is due to document-order selection, not small sample size per se.",
+  "measurement_validity": [
+    "All data comes from existing raw evidence (EXP-INTEL-34782350557), no re-crawling required",
+    "dom_stats provides full DOM tag counts for <a>, <button>, <form>, <input> across all 7 tasks",
+    "locatable_sample provides first-20 element roles for all 7 tasks",
+    "locatable_elements count (82 per task) enables random-sample simulation bounds",
+    "Page types: 3 product_listing, 3 detail, 1 cart — small N but sufficient for bias characterization",
+    "Analysis is purely computational, no browser/network/model calls"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) full-DOM corrected ordering differs from truncated-sample ordering for >=2/7 tasks (at least one page type changes); (2) bias magnitude (max relative density difference across roles between truncated and full-DOM) exceeds 20% for >=2/7 tasks; (3) random-sample baseline shows lower mean absolute bias than first-20 truncation across all tasks. FALSIFIED-IN-SETTING if ANY condition fails. MEASUREMENT_INVALID if dom_stats fields are missing or locatable_elements count is unavailable.",
+  "product_consequence_positive": "Quantifies the exact truncation bias, enabling the runtime lane to target the substrate fix precisely. If bias is large and page-type-dependent, the first-20 cap must be removed before any density-based ordering metric is interpretable. Provides concrete correction factors for existing truncated data.",
+  "product_consequence_negative": "If truncation bias is small and uniform, the existing results (0.3 agreement, FALSIFIED-IN-SETTING on null model) are interpretable as-is, and the runtime substrate fix can be deprioritized in favor of cross-site generalization.",
+  "estimated_cost": "Very low: pure computational analysis of existing raw data, no browser/network/model calls. ~7 tasks, 3 ordering definitions, 1000 random samples.",
+  "expected_information_gain": "Medium-high: resolves whether the FALSIFIED-IN-SETTING verdict from EXP-INTEL-35112013458 is an artifact of truncation or a genuine null result. If truncation drives the result, the null model question is deferred to runtime. If truncation is negligible, the null result stands and cross-site testing becomes the priority."
+}

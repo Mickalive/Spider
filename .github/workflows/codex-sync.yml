@@ -39,7 +39,9 @@ jobs:
           git add -- SPIDER_CODEX.md codex
           if git diff --cached --quiet; then
             echo "Codex already current."
+            bash scripts/main_safety_anchor.sh || echo "::warning::Main safety anchor failed; Codex remains unblocked and the previous rescue pointer is preserved."
             exit 0
           fi
           git commit -m "codex: sync Research 2.0 evidence"
           git push origin HEAD:main
+          bash scripts/main_safety_anchor.sh || echo "::warning::Main safety anchor failed after Codex push; Codex remains accepted and the previous rescue pointer is preserved."
