@@ -677,6 +677,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted direction at sizes 20, 50 \u2014 noise more detectable than drift). 3 of 5 frozen decision conditions fail. This is the third orthogonal signal family tested (after Jaccard structural and TF-IDF semantic) and the third to fail. C-FRESHNESS remains HYPOTHESIS \u2014 the claim is not globally closed; only the specific setting (KS test on client-side response-time distributions, N=30, uniform 0-50ms jitter, mock CPU-bound server, schema sizes 10-50) is falsified."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35130682058",
+        "lane": "graph",
+        "created_at": "2026-09-16T17:50:59.231519+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "a605af55689dd0341a87ed8e07da1e9b1ef5f63e",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Linear Fisher LDA ensemble of (1-Jaccard) and KS D fails all three frozen decision conditions on held-out test split (TP=0.5, FP=0.0, AUC=0.625). Positive control fails (TP=0.25 on training). Ensemble weights are inverted: both features inversely predict drift because noise patterns (nested_object_variation adding 2 fields) produce larger structural/temporal divergence than true drift (add_field adding 1 field). This confirms the parent's finding that the inverted direction is a confound of magnitude (2-field noise vs 1-field drift), not a property of the signal families per se. Bounded falsification ceiling: aggregated per-condition mean features on synthetic CPU-bound mock server, 4 sizes x 6 patterns, N=24 conditions (16 train/8 test). Does NOT close: nonlinear ensembles (SVM/RF), per-sample ROC, other signal families (session tokens, field-usage profiling, schema access patterns), real APIs with DB/cache/CDN, or direct schema comparison. Four single-signal families now tested and falsified (Jaccard, TF-IDF, response-time KS, linear ensemble); broader C-FRESHNESS remains HYPOTHESIS."
       }
     ],
     "C-CROSSSITE": [
@@ -1220,14 +1230,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35083040517",
+      "experiment_id": "EXP-GRAPH-35130682058",
       "lane": "graph",
-      "created_at": "2026-09-16T10:05:21.918859+00:00",
+      "created_at": "2026-09-16T17:50:59.231519+00:00",
       "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "8310a3a35cd4792a93d6a4d946536af217cce033",
+      "source_commit": "a605af55689dd0341a87ed8e07da1e9b1ef5f63e",
       "claim_id": "C-FRESHNESS",
       "status": "HYPOTHESIS",
-      "reason": "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted direction at sizes 20, 50 \u2014 noise more detectable than drift). 3 of 5 frozen decision conditions fail. This is the third orthogonal signal family tested (after Jaccard structural and TF-IDF semantic) and the third to fail. C-FRESHNESS remains HYPOTHESIS \u2014 the claim is not globally closed; only the specific setting (KS test on client-side response-time distributions, N=30, uniform 0-50ms jitter, mock CPU-bound server, schema sizes 10-50) is falsified."
+      "reason": "Linear Fisher LDA ensemble of (1-Jaccard) and KS D fails all three frozen decision conditions on held-out test split (TP=0.5, FP=0.0, AUC=0.625). Positive control fails (TP=0.25 on training). Ensemble weights are inverted: both features inversely predict drift because noise patterns (nested_object_variation adding 2 fields) produce larger structural/temporal divergence than true drift (add_field adding 1 field). This confirms the parent's finding that the inverted direction is a confound of magnitude (2-field noise vs 1-field drift), not a property of the signal families per se. Bounded falsification ceiling: aggregated per-condition mean features on synthetic CPU-bound mock server, 4 sizes x 6 patterns, N=24 conditions (16 train/8 test). Does NOT close: nonlinear ensembles (SVM/RF), per-sample ROC, other signal families (session tokens, field-usage profiling, schema access patterns), real APIs with DB/cache/CDN, or direct schema comparison. Four single-signal families now tested and falsified (Jaccard, TF-IDF, response-time KS, linear ensemble); broader C-FRESHNESS remains HYPOTHESIS."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-34956989900",
