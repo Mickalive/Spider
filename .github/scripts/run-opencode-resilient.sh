@@ -56,6 +56,24 @@ restore_agent_commits(){
   return 0
 }
 
+required_outputs_ok(){
+  [[ -z "${SPIDER_REQUIRED_OUTPUTS:-}" ]] && return 0
+  local p missing=0
+  for p in $SPIDER_REQUIRED_OUTPUTS; do
+    if [[ ! -f "$p" ]]; then
+      echo "SPIDER_MODEL_MISSING_OUTPUT path=$p" >&2
+      missing=1
+    fi
+  done
+  [[ "$missing" -eq 0 ]]
+}
+
+clear_required_outputs(){
+  [[ -z "${SPIDER_REQUIRED_OUTPUTS:-}" ]] && return 0
+  local p
+  for p in $SPIDER_REQUIRED_OUTPUTS; do rm -f -- "$p"; done
+}
+
 run_once(){
   local model="$1"; shift
   : > "$LOG"; rm -f "$STALL_FLAG"
@@ -88,7 +106,23 @@ while (( attempt <= MAX_ATTEMPTS )); do
   run_once "$model" "$@"; rc=$?
   restore_agent_commits; git_rc=$?
   if [[ "$git_rc" -ne 0 ]]; then write_receipt failure "$model" "$attempt" "$git_rc" control; exit "$git_rc"; fi
-  if [[ "$rc" -eq 0 ]]; then write_receipt success "$model" "$attempt" 0 ok; echo "SPIDER_MODEL_SUCCESS model=$model"; exit 0; fi
+
+  if [[ "$rc" -eq 0 ]] && required_outputs_ok; then
+    write_receipt success "$model" "$attempt" 0 ok
+    echo "SPIDER_MODEL_SUCCESS model=$model"
+    exit 0
+  fi
+
+  if [[ "$rc" -eq 0 ]]; then
+    # Process success without the required contract is a provider/model attempt
+    # failure. Remove any partial mandatory packet before rotating providers so
+    # a later attempt cannot accidentally inherit a mixed-producer packet.
+    write_receipt retry "$model" "$attempt" 76 output-missing
+    clear_required_outputs
+    if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
+    attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
+  fi
+
   if [[ "$rc" -eq 75 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
     write_receipt retry "$model" "$attempt" "$rc" transient
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
