@@ -1068,6 +1068,31 @@
         "handoff.json": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
       }
     },
+    "EXP-INTEL-35083033552": {
+      "lane": "intel",
+      "request_id": "f7cb84facf9cb781d819dd3e",
+      "created_at": "2026-09-16T10:05:15.318350+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
+        "spec.json": "a8c33a1fa3d6bb88dff8b805ee0bbccd39930d183915a73f00b891b9f9a0e832",
+        "prereg.md": "0ee7f4282dc50a2aa555bae29f4f600907af94066ec0298bef963e2be08dae3b",
+        "freeze.json": "3d9f2b208003624e213210b710a09d8cc357172ba55b014d79aee3ac32662be6",
+        "result.json": "3ae0a63265699c9b636b0ebbe00999211f367683b5675fe1490450152d419119",
+        "report.md": "8046fb8668ed34cd6c09edee918894fce39ef1d6bc692ddd7a5d793f2090fc5f",
+        "provenance.json": "5e6c0eec4f796070318ca74c9e7c85dd7151f07aaab818a9ba3a8ee5d5457f05",
+        "audit.json": "5c02309cc95eca8d92bf4c425dedf82adf82a3dd0c2e84e9be1a2f84de0dfb08",
+        "verdict.json": "ee64183fbfa36de46cd716825ec8b7679cf54a0e34ebb9ff5f49e8128ad0bdb5",
+        "handoff.json": "d190f98f9f5837c55bb037e0ee13c241fabaac2fa12761129949987e8d047c1b"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",
