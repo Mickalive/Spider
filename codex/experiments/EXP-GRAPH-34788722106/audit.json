@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34788722106",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Complete baseline coverage in future preregistrations: spec.json baselines include Fixed threshold 0.9 and Static threshold equal to mean stale Jaccard across all drift patterns, both unmeasured (result.json fixed_threshold_085_baseline and random_classifier_baseline only, with expected values not empirical). Either measure these baselines empirically or explicitly preregister them as analytical/hypothetical and justify omission; current omission weakens comparative claim but does not rescue the adaptive threshold.",
+    "Report effective sample diversity alongside nominal n=30: all 30 samples per group per pattern produce identical Jaccard values (mock_schemas.json stale_similarities arrays constant per pattern per size, derived_measurements.json per_pattern). Wilson CIs based on 30 independent Bernoulli trials overstate independent information when the generative model is deterministic in Jaccard given n. Future designs should either (a) introduce per-sample stochasticity in structural noise that varies Jaccard (e.g., random churn magnitude 5-15%, varied null field selection without dedup, varied nested conversion) or (b) report that effective N for Jaccard distribution is 1 and use analytical Jaccard formulas as primary evidence.",
+    "Address Jaccard (field_path,type) representation loss and deduplication artifact in null_valued_fields: execute_structural_noise.py generate_stale_null_fields maps all nulled fields to identical tuple ('field_null','null') producing deduped set size n-churn+1 and Jaccard (n-churn)/(n+1). This is consistent with set semantics but collapses multiple nulls into one; alternative representation (e.g., preserving path with null type per field) would lower Jaccard further (e.g., n=50 would be 45/55=0.818 not 45/51=0.882). Sensitivity to this modeling choice should be bounded. No fix required for current falsification because both interpretations remain below threshold, but document the choice."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Jaccard and threshold recomputation fully verified",
+      "severity": "info",
+      "details": "Independent recomputation of T(n)=1-0.8/(n+1) yields 10:0.927273, 20:0.961905, 30:0.974194, 50:0.984314 matching derived_measurements.json to 6 decimals. Jaccard formulas analytically verified: add_field n/(n+1) => 0.909091,0.952381,0.967742,0.980392; remove_field (n-1)/n => 0.9,0.95,0.966667,0.98; change_type (n-1)/(n+1) => 0.818182,0.904762,0.935484,0.960784; optional_field_churn intersection  n-round(0.1n) union n+round(0.1n) => constant 0.818182 at all sizes; null_valued_fields (n-churn)/(n+1) with dedup => 0.818182,0.857143,0.870968,0.882353; nested_object (n-1)/(n+1) => values above. All match mock_schemas.json stale_similarities exactly. Wilson 95% CIs recomputed: 30/30 => [0.8865,1.0], 0/30 => [0.0,0.1135], 90/90 true drift per size => [0.9591,1.0], 360/360 => [0.9894,1.0], 0/120 => [0.0,0.0310] matching result.json and derived_measurements.json within rounding.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json per_schema_size.*.stale_similarities, research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json per_schema_size.*.per_pattern, result.json metrics.per_schema_size, research/graph/freshness_detection/execute_structural_noise.py:36-46,38-123"
+    },
+    {
+      "finding": "Zero within-group variance — nominal n=30 but effective Jaccard diversity =1",
+      "severity": "medium",
+      "details": "All 30 samples per group per pattern per size are byte-identical (mock_schemas.json stale_similarities arrays constant). This is mathematically expected because Jaccard depends only on set cardinalities for these generators, not on which field is chosen. Wilson CIs assuming 30 independent Bernoulli trials therefore overstate evidential precision for the underlying Jaccard distribution, but the noise FP inference remains conservatively falsifying: even with n=1, FP=1/1 => Wilson upper 0.975 still >0.15. For TP, 1/1 upper also passes. The tautology does not create a false falsification, but future experiments should vary churn magnitude or field selection to produce a non-degenerate Jaccard distribution if variance estimation is desired. Producer correctly discloses identical results and deterministic seed in provenance.json and report.md 7.3.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json per_schema_size.*.stale_similarities, research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json per_schema_size.*.per_pattern.tp_count/tp_total, provenance.json reproducibility, report.md section 7.3-7.4"
+    },
+    {
+      "finding": "Synthetic-to-real gap bounds claim ceiling",
+      "severity": "medium",
+      "details": "Mock schemas are flat field sets with random names and 20% nested paths; real APIs may have deeper nesting, authentication-dependent fields, pagination, arrays with varying cardinality, and semantic drift without structural change. Structural noise patterns (10% churn, nulls, nested conversion) are plausible but fixed at 10% magnitude and applied in isolation; real noise may co-occur, have different frequencies, or be smaller (e.g., single optional field toggling). Jaccard (field_path,type) ignores relationships, cardinality, and semantics (validity_notes acknowledged). The observed FP=1.0 is robust to this gap at the tested magnitude, but a smaller or less frequent noise could produce lower FP. Ceiling must remain bounded to the synthetic (field_path,type) setting at the tested magnitudes.",
+      "evidence_ref": "spec.json measurement_validity, prereg.md 5.1-5.6,10.1, result.json validity_notes[2][3], report.md section 7.1-7.2, provenance.json datasets.mock_schemas"
+    },
+    {
+      "finding": "Fresh null control degenerate by construction but correctly applied",
+      "severity": "low",
+      "details": "Fresh schemas are identical copies of baseline (generate_fresh_schema returns list(baseline)), guaranteeing Jaccard=1.0 and FP=0 at any threshold <1.0. This is valid per prereg as a null control for structure-only Jaccard, but it is a tautology, not an empirical measurement of FP on real stable endpoints. Producer explicitly notes this in validity_notes and provenance. It verifies pipeline arithmetic, not robustness to real temporal stability. Does not threaten falsification because structural noise FP already provides the discriminating test that parent experiment lacked.",
+      "evidence_ref": "research/graph/freshness_detection/execute_structural_noise.py:68-70, result.json controls.null_control_fresh, result.json validity_notes[0], prereg.md 5.2, report.md 2.2"
+    },
+    {
+      "finding": "Detection margin metric non-discriminating as defined",
+      "severity": "low",
+      "details": "Spec falsifier includes detection margin negative for any drift pattern (threshold - stale Jaccard). All margins are positive (0.0039 to 0.166) even for structural noise patterns, which are also labeled as stale in derived_measurements.json detection_margins. A positive margin for noise means false detection, not correct detection. The metric therefore cannot discriminate true drift from noise, and the spec condition passes vacuously while FP condition fails. Report correctly notes this misinterpretation (report.md 3.3, observations[4]). No correction needed for decision, but future specs should define separate margins or abandon the margin falsifier when noise is tested as FP.",
+      "evidence_ref": "spec.json falsifier, spec.json decision_rule condition 3, derived_measurements.json per_schema_size.*.detection_margins, result.json observations[4], report.md 3.3"
+    },
+    {
+      "finding": "No target/split leakage and correct threshold timing",
+      "severity": "info",
+      "details": "Threshold T(n) is a closed-form function of schema size n only, computed before or independent of Jaccard similarity. No stale information or post-hoc calibration is used. No train/test split or sampling bias relevant; all schema sizes 10,20,30,50 tested equally with 30 fresh and 30 per drift pattern per size as preregistered (total 120 fresh + 360 true stale + 360 noise). Seeds deterministic (20260913). No browser/network/model calls per estimated_cost.",
+      "evidence_ref": "spec.json measurement_validity 27, prereg.md 5.5,6, research/graph/freshness_detection/execute_structural_noise.py:36-38,161-205, provenance.json frozen_inputs, execution.breakdown"
+    },
+    {
+      "finding": "Provenance and hash integrity verified",
+      "severity": "info",
+      "details": "Artifact SHA256 hashes for mock_schemas.json (343ead30...), derived_measurements.json (20d392c...), decision_evaluation.json (bcabad8d.../e05d6fa0... ) recomputed and match provenance.json and result.json artifacts. No evidence of post-hoc editing. Execution code at research/graph/freshness_detection/execute_structural_noise.py matches prereg generation logic. Commits pre_execute_sha 5c2bf87d and post_execute_sha 1c9f05b recorded.",
+      "evidence_ref": "research/experiments/EXP-GRAPH-34788722106/provenance.json artifacts.raw_evidence, result.json artifacts, research/experiments/EXP-GRAPH-34788722106/raw_evidence/hashes.json"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Fixed threshold 0.85 (parent scaling attack: fails at n>=10)",
+      "expected": "TP degrades with n, fails at n>=10 per parent EXP-GRAPH-34711403174 and EXP-GRAPH-34755316488",
+      "observed": "Not empirically re-measured in this execution; producer reports expected TP 0.333 at n=10 and 0.0 at n>=15 from prior experiments (result.json fixed_threshold_085_baseline). Analytical add_field Jaccard n/(n+1) exceeds 0.85 for n>=6, confirming expectation. No new measurement, but prior empirical and analytical evidence is strong and audit recomputation confirms the scaling logic.",
+      "verdict": "WEAK (not re-measured; relies on prior/analytic, but consistent)",
+      "evidence_ref": "spec.json baselines[0], result.json metrics.fixed_threshold_085_baseline, prior handoff research/experiments/EXP-GRAPH-34755316488/handoff.json carry_forward.established[0]"
+    },
+    {
+      "baseline_id": "Fixed threshold 0.9",
+      "expected": "Should be compared as alternative fixed threshold per spec",
+      "observed": "No measurement or expected value reported in result.json. Missing baseline. Can be analytically bounded: at n=50 add_field 0.9804 >0.9 so TP=0 at high n; still fails scaling. Omission does not affect falsification but violates spec measurement_validity completeness.",
+      "verdict": "MISSING",
+      "evidence_ref": "spec.json baselines[1], result.json metrics (absent), report.md 4.1"
+    },
+    {
+      "baseline_id": "Static threshold equal to mean stale Jaccard across all drift patterns",
+      "expected": "Mean stale Jaccard static threshold to test if adaptive threshold outperforms simple empirical threshold",
+      "observed": "No measurement, no mean stale value, no TP/FP computed at this threshold. Spec requires this baseline to justify adaptivity; its absence means adaptive threshold's advantage over a data-driven static threshold is untested. Reported only as note that static threshold would give TP=50% in report.md 4.3 without empirical evaluation.",
+      "verdict": "MISSING",
+      "evidence_ref": "spec.json baselines[2], result.json metrics (absent), report.md 4.3"
+    },
+    {
+      "baseline_id": "Random classifier (50% detection, 50% false positive)",
+      "expected": "TP 0.5, FP 0.5, fails both TP>=0.8 and FP<=0.15 criteria",
+      "observed": "Not empirically simulated; producer reports expected values 0.5/0.5 as hypothetical (result.json random_classifier_baseline). Trivially fails criteria. No discriminative value beyond sanity check. Acceptable as null model without measurement.",
+      "verdict": "PASS (trivial/hypothetical, consistent)",
+      "evidence_ref": "spec.json baselines[3], result.json metrics.random_classifier_baseline, report.md 4.2"
+    }
+  ],
+  "recomputed_metrics": {
+    "adaptive_threshold_T_n": {
+      "10": 0.927273,
+      "20": 0.961905,
+      "30": 0.974194,
+      "50": 0.984314,
+      "formula": "T(n)=1-0.8/(n+1)",
+      "recomputed_match": true
+    },
+    "overall_tp_rate_true_drift": {
+      "value": 1.0,
+      "n": 360,
+      "k": 360,
+      "wilson_95ci": [0.9894, 1.0],
+      "producer_value": 1.0,
+      "producer_ci": [0.9894, 1.0],
+      "match": true
+    },
+    "overall_fp_rate_fresh_null_control": {
+      "value": 0.0,
+      "n": 120,
+      "k": 0,
+      "wilson_95ci": [0.0, 0.031],
+      "producer_value": 0.0,
+      "producer_ci": [0.0, 0.031],
+      "match": true
+    },
+    "overall_noise_fp_rate": {
+      "value": 1.0,
+      "n": 360,
+      "k": 360,
+      "wilson_95ci": [0.9894, 1.0],
+      "producer_value": 1.0,
+      "producer_ci": [0.9591, 1.0],
+      "note": "Producer per-size CI [0.9591,1.0] for 90/90; overall 360/360 CI lower 0.9894 recomputed; minor presentation difference but effect size identical (FP=100%)",
+      "match": true
+    },
+    "per_schema_per_pattern_FP_noise": {
+      "10_optional_field_churn": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.818182, "threshold": 0.927273, "margin": 0.109091},
+      "10_null_valued_fields": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.818182, "threshold": 0.927273, "margin": 0.109091},
+      "10_nested_object_variation": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.818182, "threshold": 0.927273, "margin": 0.109091},
+      "20_optional_field_churn": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.818182, "threshold": 0.961905, "margin": 0.143723},
+      "20_null_valued_fields": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.857143, "threshold": 0.961905, "margin": 0.104762},
+      "20_nested_object_variation": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.904762, "threshold": 0.961905, "margin": 0.057143},
+      "30_optional_field_churn": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.818182, "threshold": 0.974194, "margin": 0.156012},
+      "30_null_valued_fields": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.870968, "threshold": 0.974194, "margin": 0.103226},
+      "30_nested_object_variation": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.935484, "threshold": 0.974194, "margin": 0.03871},
+      "50_optional_field_churn": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.818182, "threshold": 0.984314, "margin": 0.166132},
+      "50_null_valued_fields": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.882353, "threshold": 0.984314, "margin": 0.101961},
+      "50_nested_object_variation": {"fp": 30, "n": 30, "rate": 1.0, "wilson_upper": 1.0, "mean_jaccard": 0.960784, "threshold": 0.984314, "margin": 0.02353}
+    },
+    "per_schema_per_pattern_TP_true_drift": {
+      "10_add_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.909091, "threshold": 0.927273, "margin": 0.018182},
+      "10_remove_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.9, "threshold": 0.927273, "margin": 0.027273},
+      "10_change_type": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.818182, "threshold": 0.927273, "margin": 0.109091},
+      "20_add_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.952381, "threshold": 0.961905, "margin": 0.009524},
+      "20_remove_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.95, "threshold": 0.961905, "margin": 0.011905},
+      "20_change_type": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.904762, "threshold": 0.961905, "margin": 0.057143},
+      "30_add_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.967742, "threshold": 0.974194, "margin": 0.006452},
+      "30_remove_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.966667, "threshold": 0.974194, "margin": 0.007527},
+      "30_change_type": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.935484, "threshold": 0.974194, "margin": 0.03871},
+      "50_add_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.980392, "threshold": 0.984314, "margin": 0.003922},
+      "50_remove_field": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.98, "threshold": 0.984314, "margin": 0.004314},
+      "50_change_type": {"tp": 30, "n": 30, "rate": 1.0, "wilson_lower": 0.8865, "mean_jaccard": 0.960784, "threshold": 0.984314, "margin": 0.02353}
+    },
+    "fp_fresh_per_size": {
+      "10": {"fp": 0, "n": 30, "rate": 0.0, "wilson_ci": [0.0, 0.1135]},
+      "20": {"fp": 0, "n": 30, "rate": 0.0, "wilson_ci": [0.0, 0.1135]},
+      "30": {"fp": 0, "n": 30, "rate": 0.0, "wilson_ci": [0.0, 0.1135]},
+      "50": {"fp": 0, "n": 30, "rate": 0.0, "wilson_ci": [0.0, 0.1135]}
+    },
+    "decision_rule_recomputed": "FALSIFIED-IN-SETTING: 12 violations of condition (2) FP upper CI <=0.15 (all noise patterns at all sizes: FP 30/30 rate 1.0 CI [0.8865,1.0] upper 1.0 >>0.15). All other conditions pass: TP lower bounds 0.8865-0.9894 >=0.8, margins positive, positive control TP 1.0 >=0.8, null control FP 0, no pipeline errors. Matches decision_evaluation.json and result.json outcome FALSIFIES.",
+    "hash_verification": {
+      "mock_schemas.json": "343ead30c1bd8effa57f4a9b9651e31681bd29b17825937bd812b5bc3be337a1 verified",
+      "derived_measurements.json": "20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173 verified",
+      "decision_evaluation.json": "e05d6fa03de85842c58ba846952ace37f69a7bcee30d840ac750d5530e70772e / bcabad8df8ba0d56e545c08a3cb43914e6ce1b2361235cdbb741bdeb23d9c137 verified"
+    }
+  },
+  "claim_ceiling": "CEILING: Adaptive Jaccard threshold T(n)=1-0.8/(n+1) on (field_path,type) Jaccard achieves TP=360/360=1.0 (Wilson 95% CI [0.9894,1.0]) for single-field drift (add/remove/change_type) at n=10,20,30,50 with detection margins 0.0039-0.109, and null-control FP=0/120=0.0 (CI [0.0,0.031]) on identical fresh copies, but is FALSIFIED-IN-SETTING under the preregistered FP<=0.15 rule because structural-noise FP=360/360=1.0 (CI [0.9894,1.0]; per pattern 30/30 CI [0.8865,1.0]) for optional_field_churn (10% churn => Jaccard 0.8182), null_valued_fields (Jaccard 0.8182-0.8824), and nested_object_variation (Jaccard 0.8182-0.9608) at all sizes—12 violations of condition (2). The falsification is bounded to synthetic (field_path,type) Jaccard on schemas 10-50 fields with the tested 10% churn magnitude and deterministic deduplicated nulls; it does not close the broader C-FRESHNESS domain, does not test other constants c in T(n)=1-c/(n+1), does not test smaller noise magnitudes, and does not generalize to real APIs, nested structures beyond the tested variation, or alternative similarity measures.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34788722106/request.json",
+    "research/experiments/EXP-GRAPH-34788722106/spec.json",
+    "research/experiments/EXP-GRAPH-34788722106/prereg.md",
+    "research/experiments/EXP-GRAPH-34788722106/freeze.json",
+    "research/experiments/EXP-GRAPH-34788722106/result.json",
+    "research/experiments/EXP-GRAPH-34788722106/report.md",
+    "research/experiments/EXP-GRAPH-34788722106/provenance.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/decision_evaluation.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/hashes.json",
+    "research/graph/freshness_detection/execute_structural_noise.py",
+    "research/experiments/EXP-GRAPH-34755316488/handoff.json"
+  ],
+  "unresolved": [
+    "Whether any constant c <1 in T(n)=1-c/(n+1) (e.g., c=0.2 or 0.5 lowering threshold to 0.96 at n=50) can achieve TP>=0.8 while keeping FP<=0.15 on the same structural noise patterns; the current falsification only tests c=0.8 which yields the highest threshold and thus worst-case FP.",
+    "Whether smaller or less frequent structural noise (e.g., 1-2% churn, single optional field toggling, sporadic nulls) would reduce FP below 0.15 while still triggering detection for true drift; noise magnitude was fixed at ~10% (20% set change for churn).",
+    "Whether alternative Jaccard representations (e.g., preserving field identity across nulls, weighting optional fields, tree-edit distance for nested objects, or combining (field_path,type) with value distributions) would discriminate true drift from noise.",
+    "Whether combining Jaccard with orthogonal staleness signals (session token validation, semantic embedding similarity, response-time profiling) as suggested in spec product_consequence_negative would rescue freshness detection.",
+    "Whether the synthetic noise patterns (10% churn, deduped nulls, single nested conversion) are representative of real-world API structural variation in frequency, magnitude, and co-occurrence.",
+    "Optimal operating point and ROC tradeoff for Jaccard threshold under realistic drift prevalence; no calibration of TP/FP tradeoff or cost model was performed.",
+    "Generalization beyond n=10-50 to larger schemas (e.g., 100+ fields) or deeply nested structures where T(n) approaches 1.0 even more tightly (tolerance 0.8/(n+1) shrinks)."
+  ]
+}
