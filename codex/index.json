@@ -1571,6 +1571,31 @@
         "handoff.json": "b219878ec01bcd49b77ecf23be62639e72120edaf37f4d448ab74e0125e48706"
       }
     },
+    "EXP-PHYSICS-35040401992": {
+      "lane": "physics",
+      "request_id": "bab84686792166a9d54a5db2",
+      "created_at": "2026-09-16T00:32:15.965489+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
+        "spec.json": "43dfad3d2e5c70d2d326c83202e6718ee890268a1ce6ac2044691da92bd7a732",
+        "prereg.md": "d186a401ec62ec0c72197393530337e49f4a6b74b7330ac3512cdd4a4dd03c8e",
+        "freeze.json": "4495e0ec576ce6e47c65a66a7a0e2c5fd5dd2b2bce3cd7fb4780d24038f3abc9",
+        "result.json": "cac13675a846bcbd61c09df6890894f1874ba400d8903c27a754e8526039f7ae",
+        "report.md": "1631283715aec256e285daf95f20ddf5155b0d4f0f502dc55c58f932ee641d62",
+        "provenance.json": "34bcc00d15e494133b70cc15bc7136ff30c4af2b73e5b73e8ab436a0cf13ba37",
+        "audit.json": "81ca3d6e0413c417c9179012b10de07b49308c0544e293691a4a7a732231f32d",
+        "verdict.json": "3ff35ec24f3135c34aa8f46232cbf5be6c75f66d68c089a3e45d01c043ddd656",
+        "handoff.json": "4e6d9a3af4b902c483b5a5526222f260596876867117ca68964613ef83b32246"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",

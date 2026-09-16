@@ -233,6 +233,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Primary test condition K=3 has H(S_next|URL,H_K=3)=0 exactly on the 5-state linear FSM (audit V1, severity critical): all K=3 strata are single-valued for S_next, making I(S_next; Response_before|URL,H_K=3)=0 a priori impossible for ANY Response_before. This is an environment ceiling, not a negative scientific result. The producer's FALSIFIES outcome is not justified: you cannot falsify a claim by testing it in an environment where the effect is mathematically impossible. At K=1 (H=0.4 bits, where action-history is insufficient), the same state-dependent response DOES carry significant conditional PMI (BC=0.386 bits, Bonferroni p=0.004 < 0.0125, cardinality |R|/N=0.05 non-degenerate), demonstrating network-response payload structure CAN carry predictive information when transitions are not fully determined by history. K=3 controls are degenerate (null_std=0, audit V4) and do not stress the pipeline. The claim remains HYPOTHESIS pending a branching FSM experiment where H(S_next|URL,H_K=3) > 0.2 bits."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35040401992",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen control criteria C4 (positive_control_pass=false, perm_null_std=0.0 degenerate) and C5 (determinism_pass=false, SD accuracy=0.0 by construction due to step field in response design) fail per frozen decision_rule. Raw BC PMI at K=3 = 0.369 bits exceeds 0.05 threshold but Bonferroni p = 0.322 (raw 0.0805) fails p < 0.0125. No confirmatory claim supported. Descriptive observation preserved: ceiling eliminated (H=1.346 bits), state-independent BC PMI=0.0, raw discrimination SD-SI=0.369 bits. Synthetic state_id injection is the only demonstrated PMI source; no identifiability argument separates injected label from emergent web dynamics (audit V10). Measurement cannot support or falsify C-WEB-DYNAMICS."
       }
     ],
     "C-PARAM-INHERIT": [
