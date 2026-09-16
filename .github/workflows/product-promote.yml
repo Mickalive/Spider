@@ -45,13 +45,31 @@ jobs:
           [[ -n "$EXP" ]] || { echo "::error::promotion_ready without last_experiment_id"; exit 1; }
           DIR="research/experiments/$EXP"
 
-          git show "origin/lab2/product:$DIR/audit.json" > /tmp/spider-product-audit.json
-          git show "origin/lab2/product:$DIR/verdict.json" > /tmp/spider-product-verdict.json
-          git show "origin/lab2/product:$DIR/handoff.json" > /tmp/spider-product-handoff.json
-          git show "origin/lab2/product:$DIR/execution_checkpoint.json" > /tmp/spider-product-checkpoint.json
+          # Pin to the commit that CREATED the verdict. Using the most recent commit
+          # touching verdict.json would silently bless a post-finalization mutation.
+          SOURCE_SHA=$(git log --diff-filter=A -1 --format=%H origin/lab2/product -- "$DIR/verdict.json")
+          [[ -n "$SOURCE_SHA" ]] || { echo "::error::cannot locate original director checkpoint commit"; exit 1; }
+
+          # Promotion authorization and checkpoint are read from the immutable source
+          # commit, never from the mutable lane head. Reject any later packet mutation.
+          for name in audit.json verdict.json handoff.json execution_checkpoint.json; do
+            SOURCE_BLOB=$(git rev-parse "$SOURCE_SHA:$DIR/$name" 2>/dev/null || true)
+            CURRENT_BLOB=$(git rev-parse "origin/lab2/product:$DIR/$name" 2>/dev/null || true)
+            [[ -n "$SOURCE_BLOB" && "$SOURCE_BLOB" == "$CURRENT_BLOB" ]] || {
+              echo "::error::post-finalization Product packet mutation detected: $name"
+              exit 1
+            }
+          done
+
+          git show "$SOURCE_SHA:$DIR/audit.json" > /tmp/spider-product-audit.json
+          git show "$SOURCE_SHA:$DIR/verdict.json" > /tmp/spider-product-verdict.json
+          git show "$SOURCE_SHA:$DIR/handoff.json" > /tmp/spider-product-handoff.json
+          git show "$SOURCE_SHA:$DIR/execution_checkpoint.json" > /tmp/spider-product-checkpoint.json
 
           [[ "$(jq -r '.experiment_id' /tmp/spider-product-verdict.json)" == "$EXP" ]] || { echo "::error::verdict experiment mismatch"; exit 1; }
           [[ "$(jq -r '.lane' /tmp/spider-product-verdict.json)" == product ]] || { echo "::error::verdict lane mismatch"; exit 1; }
+          [[ "$(jq -r '.experiment_id' /tmp/spider-product-handoff.json)" == "$EXP" ]] || { echo "::error::handoff experiment mismatch"; exit 1; }
+          [[ "$(jq -r '.lane' /tmp/spider-product-handoff.json)" == product ]] || { echo "::error::handoff lane mismatch"; exit 1; }
           [[ "$(jq -r '.status' /tmp/spider-product-audit.json)" == PASS ]] || { echo "::error::promotion requires PASS audit"; exit 1; }
           [[ "$(jq -r '.promote_to_product // false' /tmp/spider-product-verdict.json)" == true ]] || { echo "::error::verdict does not authorize promotion"; exit 1; }
 
@@ -59,17 +77,19 @@ jobs:
           [[ -n "$BASE" ]] || { echo "::error::missing pre_execute_sha"; exit 1; }
           git cat-file -e "$BASE^{commit}"
 
-          # The director checkpoint commits verdict + audited Product code together.
-          # Pin promotion to that exact commit, never to a later mutable lane head.
-          SOURCE_SHA=$(git log -1 --format=%H origin/lab2/product -- "$DIR/verdict.json")
-          [[ -n "$SOURCE_SHA" ]] || { echo "::error::cannot locate director checkpoint commit"; exit 1; }
-
           mapfile -t ROOTS < <(jq -r '.lanes.product.allowed_code_roots[]?' research/lanes/registry.json)
           (( ${#ROOTS[@]} > 0 )) || { echo "::error::Product has no allowed_code_roots"; exit 1; }
 
           git diff --binary --full-index "$BASE" "$SOURCE_SHA" -- "${ROOTS[@]}" > /tmp/spider-product.patch
+          promoted=false
           if [[ ! -s /tmp/spider-product.patch ]]; then
             echo "SPIDER_PRODUCT_PROMOTION_NOOP experiment=$EXP source=$SOURCE_SHA"
+            promoted=true
+          elif git apply --reverse --check /tmp/spider-product.patch >/dev/null 2>&1; then
+            # Main already contains this exact delta (for example a previous run
+            # pushed main successfully but failed before clearing the lane latch).
+            echo "SPIDER_PRODUCT_ALREADY_PROMOTED experiment=$EXP source=$SOURCE_SHA"
+            promoted=true
           else
             # Apply only the experiment delta to current main. A conflict is a hard
             # stop; never merge the whole research branch or silently take lane state.
@@ -80,11 +100,14 @@ jobs:
             git commit -m "product: promote audited $EXP"
             git push origin HEAD:main
             echo "SPIDER_PRODUCT_PROMOTED experiment=$EXP source=$SOURCE_SHA"
+            promoted=true
           fi
 
+          [[ "$promoted" == true ]] || { echo "::error::promotion did not reach a durable accepted state"; exit 1; }
+
           # Clear the durable promotion latch on the lane only after main accepted
-          # the audited delta (or it was a verified no-op). This prevents a new
-          # Product experiment from racing a pending promotion.
+          # the audited delta (or the exact delta was already present). This makes
+          # promotion idempotent across a failure between the two repository writes.
           git switch -C lab2/product origin/lab2/product
           python - "$EXP" "$SOURCE_SHA" <<'PY'
           import json, sys
