@@ -459,6 +459,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Revision required before claim ceiling can advance. The computation works (non-empty slot_prefixes for P1/G3/G5, binding_accuracy=1.0 on all 5 established conditions, template invariant holds). However the frozen decision rule criterion 5 fails as written: G3 slot_prefixes observed 'orgs/acme/repos/main/issues/' vs frozen expected 'repos/main/issues/'. Spec amendment required to reconcile. Additionally B_UNFIXED baseline was run against P1 (non-discriminating for Fix1) instead of G1 as frozen spec required \u2014 baseline strength unverified. Fix2 protocol-only gap ('https://' over-parameterization) disclosed but not resolved. Claim ceiling bounded to revision-bounded committed-code synthetic single-slot with non-empty prefix metadata; cannot advance until revision clears."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35124662913",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "All 8 frozen decision-rule conditions pass with binding_accuracy=1.0. G3 slot_prefixes amended expected value validated. Fix1 necessity delta=1.0 (maximum) confirmed on discriminating G1 condition. Fix2 necessity confirmed on discriminating N1_ORIGINAL condition. Three parent required_fixes cleared (spec-vs-implementation mismatch, B_UNFIXED wrong condition, disclosure). Claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2 necessity quantified'. Remains EXPERIMENTAL (not VALIDATED/SHIPPED) because: (1) all conditions deterministic synthetic with zero model/browser/network calls; (2) end-to-end product economics C-PRODUCT-ECON unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) protocol-only gap documented but unresolved. Material change from parent: previously unmeasured Fix1/Fix2 necessity now quantified; parent required_fixes resolved."
       }
     ],
     "C-SEMANTIC-RESOLVE": [

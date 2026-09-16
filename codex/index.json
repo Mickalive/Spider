@@ -1946,6 +1946,31 @@
         "handoff.json": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11"
       }
     },
+    "EXP-PRODUCT-35124662913": {
+      "lane": "product",
+      "request_id": "52f7ccf2a33eb3b24783c34d",
+      "created_at": "2026-09-16T16:52:50.049598+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After amending the G3 slot_prefixes expected value to the full path segment and rerunning B_UNFIXED against G1 query-string training data, does the parameterized distillation kernel with Fix1+Fix2+slot_prefixes pass the amended decision rule, and how large is the Fix1 necessity delta on discriminating conditions?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "09566c08deef4d2b39cf6d8f743ef382841406889557ad122cceb20cdb9d04d9",
+        "spec.json": "b3f9c0d8043e3038159b8413b742a616a655c7a9b73a01e97bf0a8cea8f2988a",
+        "prereg.md": "45ac8ee03c0b2b49cad482409cbae72ed109844570b807834439f5547764625c",
+        "freeze.json": "fe58ea24e1528b9802fd1677454d4a3b94b7ba44417eade586506785e2d5441b",
+        "result.json": "dc743f29979283eea85752ea30448057bf4c39b160a481c2cab110301055e5a2",
+        "report.md": "689705f9a30b2fefad66b607245165ecc3e131fc774e7c567862580eb43556dd",
+        "provenance.json": "346f55d54ed5c4f7117374fc24d265892bed33016d2605e97bfd038a7063be8a",
+        "audit.json": "fcde092ccdd335a261e16a9a14b7e8f239f29a5ef7dc5478dc6a8c51897f3a48",
+        "verdict.json": "2c1fc9ae354ba13340bb75148ebcd1be469de7b4337ea1247999bfc3d9047637",
+        "handoff.json": "7a18259524e10192be19268385f7dc728e4fdf568c0c0c5b0c871ffd21631f0f"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
