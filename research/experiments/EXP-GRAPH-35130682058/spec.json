@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-GRAPH-35130682058",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can a multi-signal ensemble combining structural similarity (Jaccard) and temporal response-time (KS statistic) discriminate true schema drift from structural noise with TP>=0.8 and FP<=0.15 on a controlled mock server, when each individual signal family alone fails?",
+  "hypothesis": "A linear discriminant ensemble of (1 - Jaccard) and KS D, with frozen weights learned on a training split of existing raw data, will achieve TP>=0.8 and FP<=0.15 on a held-out test split, demonstrating that orthogonal signals provide complementary discriminative power that no single signal achieves alone.",
+  "falsifier": "No operating point of the ensemble ROC curve achieves both TP>=0.8 and FP<=0.15 on the held-out test split, or the ensemble fails to exceed the best single-signal performance (Jaccard FP=1.0, KS FP=0.1875).",
+  "baselines": [
+    "Single-signal Jaccard (field_path,type) with adaptive threshold T(n)=1-0.8/(n+1) — FP=1.0 at all sizes (EXP-GRAPH-34788722106)",
+    "Single-signal KS two-sample test on response-time distributions — TP=0.0, FP=0.1875 (EXP-GRAPH-35083040517)",
+    "Majority-vote ensemble of Jaccard and KS (both must agree) — expected FP reduction but TP may drop",
+    "Weighted linear discriminant with frozen coefficients learned on training split"
+  ],
+  "positive_control": "Ensemble must correctly classify all true drift patterns (add_field, remove_field, change_type) as stale on the training split (TP=1.0).",
+  "null_control": "Ensemble must correctly classify all fresh copies (identical schemas) as fresh on the training split (FP=0.0).",
+  "measurement_validity": [
+    "Raw data from EXP-GRAPH-34788722106 (Jaccard) and EXP-GRAPH-35083040517 (response-time) are from the same mock server with computation-dependent timing (R²=0.9999, +9.3ms/field)",
+    "Schema sizes 10,20,50 are common to both datasets",
+    "Drift patterns are identical across experiments (add_field, remove_field, change_type, optional_field_churn, null_valued_fields, nested_object_variation)",
+    "N=30 per condition per size in both experiments",
+    "Deterministic seed for train/test split (seed=20260916)"
+  ],
+  "decision_rule": "Condition (1): ensemble ROC curve on held-out test split contains an operating point with TP>=0.8 and FP<=0.15. Condition (2): ensemble TP at that operating point exceeds max(TP_Jaccard, TP_KS) at matching FP. Condition (3): ensemble FP at that operating point is less than min(FP_Jaccard, FP_KS) at matching TP. All three conditions must hold for SURVIVES_CURRENT_TEST.",
+  "product_consequence_positive": "Multi-signal ensemble becomes a candidate freshness detection mechanism for Product Core; triggers end-to-end economics measurement (C-PRODUCT-ECON).",
+  "product_consequence_negative": "Orthogonal signal combination does not rescue discrimination; C-FRESHNESS remains HYPOTHESIS pending fundamentally different signal families (e.g., session token validation, field-usage profiling) or direct schema comparison.",
+  "estimated_cost": "Low: reanalysis of existing raw data (no new data collection). Compute: O(N * n_signals) where N ~ 900 conditions (3 sizes * 6 patterns * 30 samples).",
+  "expected_information_gain": "High: if ensemble succeeds, changes product decision (freshness detection becomes viable). If ensemble fails, rules out simple combination of tested signals and redirects to orthogonal approaches."
 }
