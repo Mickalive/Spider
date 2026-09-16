@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34788722106",
+  "lane": "graph",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Adaptive Jaccard threshold T(n)=1-0.8/(n+1) achieves TP=1.0 on true drift (add/remove/change_type) but produces FP=1.0 on structural noise (optional field churn, null-valued fields, nested object variation) at all schema sizes 10-50 fields. Under frozen decision rule condition (2), FP upper CI 1.0 > 0.15, thus FALSIFIED-IN-SETTING. Claim remains HYPOTHESIS; the bounded negative result does not close the broader C-FRESHNESS domain but falsifies the specific adaptive threshold formula under structural noise at tested magnitudes."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can alternative staleness signals (session token validation, semantic embedding similarity, response-time profiling) distinguish true drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard-based freshness detection?",
+  "reason": "The frozen decision_rule unambiguously requires FALSIFIED-IN-SETTING when FP upper CI > 0.15 at any schema size for any structural noise pattern. Observed FP=360/360=1.0 across all noise patterns and sizes, with Wilson CI upper bound 1.0 (audit.json recomputed_metrics.per_schema_per_pattern_FP_noise). The adaptive threshold formula T(n)=1-0.8/(n+1) achieves perfect true-drift detection (TP=360/360) and null-control FP=0/120, but structural noise causes Jaccard < threshold at all sizes, yielding 12 violations of condition (2). The falsification is bounded to synthetic (field_path,type) Jaccard on schemas 10-50 fields with 10% churn magnitude and deterministic deduplicated nulls; it does not close the broader C-FRESHNESS domain, does not test other constants c, does not test smaller noise magnitudes, and does not generalize to real APIs or alternative similarity measures. The parent handoff recommended abandoning adaptive-threshold direction if FP under structural noise exceeds 0.15; the next question targets orthogonal staleness signals that can discriminate true drift from structural noise.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34788722106/request.json",
+    "research/experiments/EXP-GRAPH-34788722106/spec.json",
+    "research/experiments/EXP-GRAPH-34788722106/prereg.md",
+    "research/experiments/EXP-GRAPH-34788722106/freeze.json",
+    "research/experiments/EXP-GRAPH-34788722106/result.json",
+    "research/experiments/EXP-GRAPH-34788722106/report.md",
+    "research/experiments/EXP-GRAPH-34788722106/provenance.json",
+    "research/experiments/EXP-GRAPH-34788722106/audit.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/decision_evaluation.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/hashes.json",
+    "research/graph/freshness_detection/execute_structural_noise.py",
+    "research/experiments/EXP-GRAPH-34755316488/handoff.json"
+  ]
+}

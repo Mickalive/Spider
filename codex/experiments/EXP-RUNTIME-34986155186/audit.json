@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34986155186",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Synthetic proxy gap: brotli quality variation {4,5,6,7,8} via synthetic Python proxy does not exercise real CDN non-determinism sources cited in inherited question (caching, chunked transfer, load-balancing across edges, Accept-Encoding negotiation per-request). Result is bounded to synthetic determinism model.",
+      "severity": "high",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/run_experiment.py:ConditionProxyHandler, research/experiments/EXP-RUNTIME-34986155186/provenance.json:compression_parameters, research/experiments/EXP-RUNTIME-34902094115/handoff.json:next_question"
+    },
+    {
+      "finding": "Within-state compressed variation only 2 unique hashes per state on /userinfo under 5-level quality range {4-8}; quality levels collapse to 2 distinct compressed outputs for this 1KB JSON payload. Degradation measurement (0.347) underestimates potential real-CDN diversity where more distinct outputs are likely.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./userinfo_COMPRESSED-VARYING.compressed_hash_variation (2 uniques/20), raw_observations.json COMPRESSED-VARYING /userinfo comp hashes def78... vs d24a..., run_experiment.py:BROTLI_QUALITY_RANGE"
+    },
+    {
+      "finding": "Quality variation insensitive for small bodies: /introspect error bodies (17B uncompressed, 21B compressed) show 1 unique compressed hash across 20 reps under varying quality, vs 2 for valid_token large body. Test has no power to detect compression non-determinism for small payloads.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./introspect_COMPRESSED-VARYING.compressed_hash_variation (no_auth/invalid/expired 1 unique, valid_token 2 uniques), metrics.body_sizes"
+    },
+    {
+      "finding": "Threshold brittleness: B-COMPRESSED-VARYING discrimination 0.3475 on /userinfo is only 0.0025 below 0.35 MIXED threshold. With N=20 per state (760 intra pairs, 2400 inter pairs), estimate variance is non-negligible; MIXED vs SURVIVES classification is seed-sensitive and should not be treated as hard categorical failure.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./userinfo_COMPRESSED-VARYING.compressed_body_only_discrimination=0.3475438596491228, spec.json:decision_rule, prereg.md:Decision Rules"
+    },
+    {
+      "finding": "Status-conflation on /userinfo: status_only_discrimination is 0.5 invariant, equal to body-only 0.5, so /userinfo decompressed_body_only 0.5 does not isolate body contribution. Proof of body discrimination must rely on /introspect where status_only is 0.0 and decompressed_body_only remains 0.5. Producer correctly reports both endpoints; naive reading of /userinfo alone overstates body evidence.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./userinfo_* status_only 0.5 vs ./introspect_* status_only 0.0, decompressed 0.5 both endpoints"
+    },
+    {
+      "finding": "Single frozen seed=44 and single body size 1KB (1024B -> 2060B JSON uncompressed) and single content-type JSON and single algorithm brotli. No gzip variation, no HTML/XML/binary, no MB-scale chunking. Generalization beyond these strata is untested.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/spec.json:measurement_validity seed=44, prereg.md:Body size 1KB, provenance.json:experiment_design seed 44"
+    },
+    {
+      "finding": "Decision-rule priority not frozen: spec defines SURVIVES if all three conditions and MIXED if decompressed>=0.5 but compressed-varying<0.35; both hold in this run. Producer code prioritizes MIXED over SURVIVES. No silent rewrite, but priority ordering was not preregistered; downstream should treat MIXED as informative narrowing rather than strict falsification of SURVIVES.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/spec.json:decision_rule, run_experiment.py:826-843 (if measurement_invalid -> elif mixed -> elif survives)"
+    },
+    {
+      "finding": "Mock OAuth2 server uses deterministic hex(random bytes) body via random.Random(42) and locally-signed HS256 expired_token, not real IdP. Discrimination ceiling 0.5 is artifact of 3-way error collapse (no_auth/expired/invalid identical bodies). Construction is valid for intervention test but not representative of production IdP diversity.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/run_experiment.py:MockOAuth2Handler._generate_body, spec.json:measurement_validity error bodies identical"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-COMPRESSED-FIXED",
+      "expected": ">=0.35 on /userinfo, replicates parent EXP-RUNTIME-34902094115 at 0.5",
+      "observed": 0.5,
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./userinfo_COMPRESSED-FIXED.compressed_body_only_discrimination=0.5, controls.C_POSITIVE_CONTROL",
+      "strength": "strong - exact replication with 20 reps vs parent 10 reps, recomputed inter/intra matches verification"
+    },
+    {
+      "baseline_id": "B-RANDOM",
+      "expected": "~0.0 at all conditions",
+      "observed": "0.0 across all 10 cells (5 conditions x 2 endpoints)",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics.*.baselines.B-RANDOM all 0.0, controls.C_NULL_CONTROL, report.md Table 3.1",
+      "strength": "strong - deterministic random fingerprint baseline computed per condition, null structure confirmed"
+    },
+    {
+      "baseline_id": "B-STATUS-ONLY",
+      "expected": "0.5 on /userinfo (401 vs 200), 0.0 on /introspect (all 200)",
+      "observed": "0.5 on /userinfo all conditions, 0.0 on /introspect all conditions",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics.*.status_only_discrimination",
+      "strength": "strong - compression-immune baseline invariant as predicted, isolates body incremental value on /introspect"
+    },
+    {
+      "baseline_id": "B-COMPRESSED-VARYING",
+      "expected": "<0.5 but >0.0 (bounded degradation)",
+      "observed": "0.3475 /userinfo COMPRESSED-VARYING, 0.3295 /userinfo DECOMPRESSED-VARYING, 0.4526 and 0.3895 /introspect varying",
+      "verdict": "PASS - degraded as hypothesized, but threshold crossing is marginal (see validity brittleness)",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./userinfo_COMPRESSED-VARYING and /introspect_COMPRESSED-VARYING",
+      "strength": "moderate - 2 unique hashes not 5, small-body insensitivity limits inference for tiny payloads"
+    },
+    {
+      "baseline_id": "B-DECOMPRESSED-FIXED",
+      "expected": ">=0.5 on /userinfo",
+      "observed": 0.5,
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics./userinfo_DECOMPRESSED-FIXED.decompressed_body_only_discrimination=0.5, controls.C_DECOMPRESSED_FIXED_PRESERVES",
+      "strength": "strong - verified on both /userinfo and /introspect (0.5 even where status=0)"
+    },
+    {
+      "baseline_id": "B-DECOMPRESSED-VARYING",
+      "expected": ">=0.5 under quality variation, and > B-COMPRESSED-VARYING",
+      "observed": "0.5 at all conditions, delta +0.1525 on /userinfo (0.5 vs 0.3475) and +0.0474 on /introspect (0.5 vs 0.4526) and +0.1705 vs 0.3295 and +0.1105 vs 0.3895",
+      "verdict": "PASS - strictly higher than compressed-varying in all 4 varying cells, H3 supported",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics.*_VARYING decompressed_body_only discrimination",
+      "strength": "strong - within-state decompressed variation 0/20 all states, deterministic decompress confirmed"
+    },
+    {
+      "baseline_id": "B-IDENTITY",
+      "expected": "0.5 body discrimination without compression (sanity)",
+      "observed": "0.5 compressed and decompressed on both endpoints",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-34986155186/result.json:metrics.*_IDENTITY",
+      "strength": "strong"
+    }
+  ],
+  "recomputed_metrics": {
+    "recomputed_from": "research/experiments/EXP-RUNTIME-34986155186/raw_observations.json (800 observations, 5 conditions x 4 states x 20 reps x 2 endpoints) using discrimination = intra_match_rate - inter_match_rate per run_experiment.py:compute_discrimination_score",
+    "match_reported": true,
+    "max_abs_diff": 0.0,
+    "per_cell": {
+      "/userinfo_COMPRESSED-FIXED": {
+        "compressed_body_only_discrimination": 0.5,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_compressed": 0.5,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.5
+      },
+      "/introspect_COMPRESSED-FIXED": {
+        "compressed_body_only_discrimination": 0.5,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.0,
+        "recomputed_compressed": 0.5,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.0
+      },
+      "/userinfo_COMPRESSED-VARYING": {
+        "compressed_body_only_discrimination": 0.3475438596491228,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_compressed": 0.3475438596491228,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.5
+      },
+      "/introspect_COMPRESSED-VARYING": {
+        "compressed_body_only_discrimination": 0.4526315789473684,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.0,
+        "recomputed_compressed": 0.4526315789473684,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.0
+      },
+      "/userinfo_DECOMPRESSED-FIXED": {
+        "compressed_body_only_discrimination": 0.5,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_compressed": 0.5,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.5
+      },
+      "/introspect_DECOMPRESSED-FIXED": {
+        "compressed_body_only_discrimination": 0.5,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.0,
+        "recomputed_compressed": 0.5,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.0
+      },
+      "/userinfo_DECOMPRESSED-VARYING": {
+        "compressed_body_only_discrimination": 0.32951754385964915,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_compressed": 0.32951754385964915,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.5
+      },
+      "/introspect_DECOMPRESSED-VARYING": {
+        "compressed_body_only_discrimination": 0.3894736842105263,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.0,
+        "recomputed_compressed": 0.3894736842105263,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.0
+      },
+      "/userinfo_IDENTITY": {
+        "compressed_body_only_discrimination": 0.5,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_compressed": 0.5,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.5
+      },
+      "/introspect_IDENTITY": {
+        "compressed_body_only_discrimination": 0.5,
+        "decompressed_body_only_discrimination": 0.5,
+        "status_only_discrimination": 0.0,
+        "recomputed_compressed": 0.5,
+        "recomputed_decompressed": 0.5,
+        "recomputed_status": 0.0
+      }
+    },
+    "controls_recomputed": {
+      "C_POSITIVE_CONTROL": {
+        "expected": "B-COMPRESSED-FIXED >=0.35 on /userinfo",
+        "observed": 0.5,
+        "pass": true
+      },
+      "C_NULL_CONTROL": {
+        "expected": "B-RANDOM ~0.0",
+        "observed": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pass": true
+      },
+      "C_DECOMPRESSED_FIXED_PRESERVES": {
+        "expected": "B-DECOMPRESSED-FIXED >=0.5",
+        "observed": 0.5,
+        "pass": true
+      },
+      "C_DECOMPRESSION_DETERMINISM": {
+        "expected": "within-state decompressed variation 0",
+        "observed": {
+          "no_auth": true,
+          "invalid_token": true,
+          "expired_token": true,
+          "valid_token": true
+        },
+        "pass": true,
+        "note": "1 unique decompressed hash/20 per state all conditions"
+      },
+      "C_QUALITY_VARIATION_ACTIVE": {
+        "expected": "compressed variation >0 on /userinfo",
+        "observed": {
+          "no_auth": 2,
+          "invalid_token": 2,
+          "expired_token": 2,
+          "valid_token": 2
+        },
+        "pass": true,
+        "note": "But /introspect error states 1 unique - variation inactive for small bodies"
+      },
+      "C_NO_PIPELINE_ERRORS": {
+        "expected": 0,
+        "observed": 0,
+        "pass": true
+      }
+    },
+    "within_state_variation_verified": {
+      "DECOMPRESSED-FIXED_decompressed_unique_per_state": 1,
+      "DECOMPRESSED-VARYING_decompressed_unique_per_state": 1,
+      "COMPRESSED-VARYING_compressed_unique_userinfo": 2,
+      "COMPRESSED-VARYING_compressed_unique_introspect_error": 1,
+      "COMPRESSED-VARYING_compressed_unique_introspect_valid": 2
+    }
+  },
+  "claim_ceiling": "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} per request for JSON responses at 1KB uncompressed (2060B valid / 76B error) on mock OAuth2 server via synthetic Python proxy (B-DECOMPRESSED-VARYING=0.5 vs B-COMPRESSED-VARYING=0.3295-0.3475 /userinfo and 0.389-0.452 /introspect, N=20 reps, seed=44). Strongest isolation is on /introspect where status=0 and body alone is 0.5. Claim is BOUNDED to: synthetic proxy, deterministic mock server, brotli-only, 1KB JSON, seed 44, quality range {4-8}. NOT justified to claim real-CDN (Cloudflare/Fastly/Akamai) universal fallback, nor gzip/general Content-Encoding, nor other content-types/sizes, nor MB-scale chunking, nor production IdP. Compressed-byte hashing degradation is real but threshold <0.35 is marginal; claim ceiling for compressed failure should be stated as degraded to ~0.33-0.35 not as categorical failure.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34986155186/spec.json - frozen claim/design/basalines/decision_rule",
+    "research/experiments/EXP-RUNTIME-34986155186/prereg.md - hashes 4707ee21...",
+    "research/experiments/EXP-RUNTIME-34986155186/freeze.json - frozen_at 2026-09-15T19:01:35",
+    "research/experiments/EXP-RUNTIME-34986155186/result.json - metrics 10 cells, controls 6, observations 800",
+    "research/experiments/EXP-RUNTIME-34986155186/raw_observations.json - hash 8e1a4ed88..., 800 observations with fingerprint_compressed/decompressed verification recomputed exactly",
+    "research/experiments/EXP-RUNTIME-34986155186/run_experiment.py - hash 6b869f4d..., deterministic decompression via brotli.decompress, quality RNG per condition seed+hash(condition)",
+    "research/experiments/EXP-RUNTIME-34986155186/provenance.json - brotli 1.2.0 quality 6 fixed, range 4-8, seed 44, 800 requests",
+    "research/experiments/EXP-RUNTIME-34986155186/report.md - report MIXED outcome and scope limitations section 8.3",
+    "research/experiments/EXP-RUNTIME-34902094115/handoff.json - parent synthetic deterministic ceiling 1KB-100KB, next_question real CDN"
+  ],
+  "unresolved": [
+    "Does decompression-normalization survive real CDN infrastructure with per-edge quality variation, caching, chunked transfer-encoding, and load-balancing - the inherited next_question remains untested.",
+    "Does normalized fingerprint survive with gzip (and mixed Accept-Encoding) in addition to brotli; product must handle both.",
+    "Does result generalize to non-JSON content types (HTML, XML, binary) and to MB-scale where compression windowing/chunking differs.",
+    "What is latency cost of per-response brotli/gzip decompression before hashing at production scale (1KB ~1ms, 100KB unknown).",
+    "What is behavior when Content-Encoding is missing, incorrect, or double-encoded - decompression fallback path not stress-tested.",
+    "Is compressed-varying threshold <0.35 robust across seeds and body sizes or seed 44 specific - needs multi-seed replication to establish distribution not point estimate.",
+    "Does 2-unique-hashes vs 5-level quality range indicate saturation or would wider range 0-11 produce larger degradation."
+  ]
+}

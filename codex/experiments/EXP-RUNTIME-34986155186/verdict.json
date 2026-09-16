@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34986155186",
+  "lane": "runtime",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} per request for JSON 1KB on mock OAuth2 server (B-DECOMPRESSED-VARYING=0.5 vs B-COMPRESSED-VARYING=0.3295-0.3475). All 6 controls pass. However, claim ceiling is bounded to: synthetic Python proxy, deterministic mock server, brotli-only, 1KB JSON, seed 44, quality range {4-8}. NOT justified to claim real-CDN universal fallback, gzip support, other content-types/sizes, or production IdP. C-MEAS-VALID remains EXPERIMENTAL because the setting is synthetic and the claim ceiling does not reach production deployment conditions."
+    }
+  ],
+  "product_action": "Update product recommendation from 'body-only with stable Accept-Encoding' to 'use decompression-normalization as universal fallback behind CDNs' as a design guideline, not a production-certified claim. Decompression-normalization eliminates dependency on compression stability in synthetic setting. Product must not deploy without real-CDN validation.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does decompression-normalization survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "reason": "MIXED per frozen decision rule: (1) B-DECOMPRESSED-FIXED=0.5 >= 0.5 on /userinfo (decompression-normalization preserves discrimination under fixed quality) — PASS; (2) B-RANDOM=0.0 at all conditions (null control) — PASS; (3) B-COMPRESSED-VARYING=0.3475 < 0.35 on /userinfo (body-only fails under quality variation) — FAIL. The MIXED outcome indicates that compressed-byte-only hashing is insufficient under brotli quality variation, but decompression-normalization provides a viable normalization fallback at 0.5 discrimination in this synthetic setting. Auditor confirms producer metrics recomputed exactly (max_abs_diff=0.0), all controls pass, and claim ceiling is properly bounded. Bounded to synthetic proxy, brotli-only, 1KB JSON, seed 44, quality {4-8}. Not generalizable to real CDNs, gzip, other content types, or production IdPs. The compressed-varying threshold breach (0.3475 vs 0.35) is marginal and seed-sensitive per auditor finding; not a categorical failure.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34986155186/spec.json - frozen decision_rule, baselines, claim_ids",
+    "research/experiments/EXP-RUNTIME-34986155186/result.json - metrics (10 cells), controls (6 pass), 800 observations",
+    "research/experiments/EXP-RUNTIME-34986155186/audit.json - PASS, producer_claim_supported=true, claim_ceiling bounded, recomputed_metrics max_abs_diff=0.0",
+    "research/experiments/EXP-RUNTIME-34986155186/raw_observations.json - 800 raw HTTP observations",
+    "research/experiments/EXP-RUNTIME-34986155186/provenance.json - brotli 1.2.0, quality 6 fixed / range 4-8, seed 44, 800 requests",
+    "research/experiments/EXP-RUNTIME-34986155186/run_experiment.py - frozen execution script",
+    "research/experiments/EXP-RUNTIME-34986155186/report.md - MIXED outcome, controls table, interpretation",
+    "research/experiments/EXP-RUNTIME-34902094115/handoff.json - parent: synthetic deterministic ceiling 1KB-100KB",
+    "research/claims/registry.json - C-MEAS-VALID status EXPERIMENTAL, owner runtime+physics"
+  ]
+}

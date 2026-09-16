@@ -1,0 +1,20 @@
+{
+  "base_sha": "3b9e889e5647ec637080a58db50043d8cc36f2b5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-13T23:06:28.757282+00:00",
+  "experiment_id": "EXP-GRAPH-34788722106",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) survive a confirmatory preregistration with structural-noise FP stress (optional field churn, null-valued fields, nested object variation) that replaces the degenerate stochastic-variation control, and does it maintain TP>=0.8 on schemas with 10-50 fields under realistic drift patterns?",
+  "lane": "graph",
+  "origin_github_run_id": "34788722106",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34755316488",
+    "path": "research/experiments/EXP-GRAPH-34755316488/handoff.json",
+    "sha256": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
+  },
+  "reason": "pulse",
+  "request_hash": "e22bffc4296229b538c16e20e5459dbaff32dc34f72dd6481a02aed62be8c54f",
+  "request_id": "315bd598c1f1029b64a58ce1",
+  "schema_version": 1
+}
