@@ -1,17 +1,34 @@
 {
   "experiment_id": "EXP-PHYSICS-35137030850",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can a non-deterministic branching FSM with session-dependent transitions and many-to-one content mapping (where response does NOT uniquely identify state for a subset of states) yield conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125, thereby testing whether the parent's PMI was trivially constructed from content-state aliasing?",
+  "hypothesis": "If PMI persists with many-to-one content mapping (same content hash for multiple states), this demonstrates predictive dynamics beyond content-state aliasing: the response carries conditional information about the next state that cannot be explained by the response uniquely determining the current state. If PMI drops to zero in the many-to-one condition while remaining positive in the unique-content condition, the parent's signal was trivially constructed from deterministic content-state mapping. The parent's NT K3 BC PMI=0.766 bits was measurement-invalid (C2 Bonferroni p=0.076, C4 positive control by construction, V10 content uniquely determines state with 3 hashes for 3 states). The critical unknown from the parent handoff is whether PMI persists when content does NOT uniquely determine state.",
+  "falsifier": "The claim is falsified if ANY of: (1) conditional PMI on many-to-one condition at K=3 <= 0.05 bits OR Bonferroni p >= 0.0125; OR (2) many-to-one BC PMI < unique-content BC PMI - 0.1 bits (content-state aliasing was the sole PMI source); OR (3) positive control fails (|content-shuffled BC PMI| >= 3 * std(permuted PMI) OR perm_null_std == 0 on H>0 strata); OR (4) determinism check fails (P(Response_hash | FSM_state, session, step) < 1.0 on either condition); OR (5) ceiling not eliminated (H(S_next|URL, H_K=3) <= 0.2 bits); OR (6) data quality insufficient (< 500 valid transitions per condition); OR (7) cardinality degenerate (|R| >= 0.8 * N per stratum on many-to-one condition).",
+  "baselines": [
+    "Unique-content baseline: same FSM, same sessions, but each state has unique content (S0≠S1≠S2). Expected BC PMI > 0. Provides within-experiment comparison: identical FSM and sessions, only content mapping strategy differs. Directly tests whether many-to-one mapping eliminates PMI.",
+    "State-independent baseline: same FSM, same sessions, but response is constant regardless of state. Expected BC PMI = 0. Provides estimator validation.",
+    "Action-history-only prediction P(S_next | URL, H_K) for K=1,2,3. On branching FSM with stochastic transitions, H(S_next|URL,H_K=3) > 0.2 bits, so action-history is insufficient.",
+    "Frequency baseline P(S_next) — marginal next-state distribution. Expected accuracy ~33%."
+  ],
+  "positive_control": "Content-shuffled control on many-to-one condition: replace each trajectory's response content with content from a random state (preserving the many-to-one mapping structure but breaking state→content pairing). Expected BC PMI ≈ 0. CRITICAL DESIGN: this randomizes state→content mapping (not session assignment), which the parent handoff identified as the correct control design for deterministic content encodings. Pass criterion: |content-shuffled BC PMI| < 3 * std(permuted PMI) AND perm_null_std > 0 (computed on H>0 strata only).",
+  "null_control": "Shuffled response labels within (URL, ActionHistory_K, step) strata on many-to-one condition: permute Response_before labels within each stratum, preserving marginal distributions. Expected BC PMI ≈ 0. Pass criterion: |mean shuffled BC PMI| < 3 * std(shuffled BC PMI). Compute bias-corrected shuffled PMI (shuffled - perm_mean) to remove finite-sample bias.",
+  "measurement_validity": [
+    "Two conditions: many-to-one content (S0 and S1 share content hash, S2 unique) and unique-content (S0≠S1≠S2). Same FSM, same sessions, same session assignment, only content mapping strategy differs.",
+    "Session assignment identical across conditions: generate session_directions once with seed=42, use identically for both conditions.",
+    "Each condition yields >= 500 valid transitions after filtering. 200 trajectories x 10 steps = 2000 total transitions per condition.",
+    "Stochastic transitions: from each state, each action leads to two possible next states with probabilities p=0.7 and 1-p=0.3 depending on session direction. Same (state, action) yields different next states across sessions.",
+    "Bias-corrected MI estimator: observed PMI - permutation null mean (within-strata permutation, 1000 permutations per stratum).",
+    "Permutation test: 1000 permutations per (condition, K) stratum, shuffling Response_before labels within (URL, ActionHistory_K, step) strata. Bonferroni correction across 4 comparisons (2 conditions x 2 K values).",
+    "No target leakage: action history constructed from trajectory step ordering with START padding.",
+    "Determinism check: P(Response_hash | FSM_state, session, step) = 1.0 for both conditions. Grouping includes step. Both conditions must have accuracy = 1.0.",
+    "Cardinality check: |R| per stratum at K=3. Many-to-one condition expected to have ~2 unique hashes (shared S0/S1 + unique S2) vs unique-content's ~3.",
+    "Conditional entropy check: H(S_next|URL, H_K=3) > 0.2 bits.",
+    "Data provenance: record session_id assignment, response generation, random seed, action sequences, response payloads with SHA-256 hashes."
+  ],
+  "decision_rule": "If ALL of: (1) H(S_next|URL, H_K=3) > 0.2 bits AND (2) BC PMI on many-to-one condition at K=3 > 0.05 bits with Bonferroni p < 0.0125 AND (3) many-to-one BC PMI > unique-content BC PMI - 0.1 bits (not substantially worse) AND (4) positive control passes (|content-shuffled BC PMI| < 3 * std(permuted PMI) on H>0 strata AND perm_null_std > 0) AND (5) determinism check passes (both conditions accuracy = 1.0 on state,session,step grouping) AND (6) >= 500 valid transitions per condition AND (7) cardinality check |R| < 0.8 * N per stratum on many-to-one condition — verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If many-to-one BC PMI <= 0.05 bits OR many-to-one < unique-content - 0.1 bits (content-state aliasing was sole source) — verdict = FALSIFIED-IN-SETTING. If controls fail, ceiling not eliminated, or data quality insufficient — verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Response content carries predictive information about state transitions even when content does NOT uniquely determine state. This demonstrates genuine predictive dynamics beyond content-state aliasing. SPIDER should capture page content as observation features for state prediction, and the V10 identifiability concern is resolved: PMI persists with many-to-one content mapping.",
+  "product_consequence_negative": "PMI drops to zero when content is many-to-one. The parent's signal was trivially constructed from deterministic content-state mapping. Response-level observation does not carry predictive information beyond action-history memory on this class of SPA. The locally-hosted testable path for C-WEB-DYNAMICS across ALL observation levels is closed.",
+  "estimated_cost": "Low: locally-hosted Express server with 3-state branching FSM (stochastic transitions), 2 content conditions (many-to-one vs unique), 200 trajectories x 10 steps per condition, Python MI computation. No browser automation, no model calls. Estimated 2-3 hours total.",
+  "expected_information_gain": "Very high: directly tests the parent handoff's dominant unknown — whether PMI persists when content does NOT uniquely determine state. A positive result (PMI survives many-to-one mapping) demonstrates genuine predictive dynamics beyond content-state aliasing, resolving V10 and advancing C-WEB-DYNAMICS. A negative result (PMI drops to zero) falsifies the parent's signal as trivially constructed, closing the locally-hosted deterministic FSM pathway. Either outcome resolves the dominant unknown and enables a go/no-go decision on response-level observation for C-WEB-DYNAMICS."
 }
