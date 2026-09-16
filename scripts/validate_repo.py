@@ -88,10 +88,18 @@ def main():
     require("from control_plane import CONTROL_ROOTS" in scope, "check_scope must use canonical CONTROL_ROOTS")
     require("--untracked-files=all" in scope and "SPIDER_SCOPE_REPAIRED" in scope, "scope checker lacks complete repair/revalidation path")
 
+    resilient = text(".github/scripts/run-opencode-resilient.sh")
+    require("restore_attempt_baseline" in resilient, "model fallback must restore a clean stage baseline between providers")
+    require("git reset --hard \"$START_HEAD\"" in resilient and "git clean -fd -e .spider-runtime/" in resilient, "fallback retry baseline is incomplete")
+    require("SPIDER_RETRY_BASELINE_RESTORE_FAILED" in resilient, "retry-baseline restoration failure must be explicit")
+
     lane_wf = text(".github/workflows/spider-lane.yml")
     require("SPIDER_REQUIRED_OUTPUTS" in lane_wf, "lane workflow must validate mandatory model outputs")
     require("SPIDER_WAKE_DEFERRED_UNPERSISTED_PACKET" in lane_wf, "wake must verify remote packet durability")
     require(lane_wf.count('exit "$rc"') >= 4, "stage workflow must propagate stage failure exit codes")
+
+    prepare = text("scripts/prepare_lane.py")
+    require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
 
     pulse = text(".github/workflows/factory-pulse.yml")
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
@@ -100,10 +108,16 @@ def main():
     promote = text(".github/workflows/product-promote.yml")
     require("git merge --no-commit --no-ff origin/lab2/product" not in promote, "Product workflow must never merge the whole research branch")
     require("git diff --binary --full-index" in promote and "SOURCE_SHA" in promote, "Product promotion must apply a pinned experiment delta")
+    require("--diff-filter=A" in promote, "Product promotion must pin the original verdict creation commit")
+    require("post-finalization Product packet mutation" in promote, "Product promotion must reject mutated finalized packets")
+    require("git apply --reverse --check" in promote and "SPIDER_PRODUCT_ALREADY_PROMOTED" in promote, "Product promotion must be idempotent across latch-write failures")
 
     codex = text("scripts/sync_codex.py")
     require("post-finalization mutation detected" in codex and "quarantine.json" in codex, "Codex sync lacks packet integrity quarantine")
     require("source_commit" in codex and "freeze hash mismatch" in codex, "Codex sync must pin and validate finalized packets")
+    require('"--diff-filter=A"' in codex, "Codex must pin the original verdict creation commit")
+    require("parent_handoff sha256 mismatch" in codex, "Codex must validate inherited handoff hashes")
+    require("DIRECTOR_CLAIM_STATUSES" in codex, "Codex must reject Director-emitted post-promotion-only claim states")
 
     director = text(".opencode/agents/spider_lane_director.md")
     for status in sorted(CLAIM_STATUSES - {"SHIPPED"}):
