@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Does decompression-normalization survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-16T05:22:07.215468+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-16T10:16:26.764939+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
 }
