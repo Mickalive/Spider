@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-GRAPH-35137034388",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does field-usage profiling (tracking which fields different client profiles actually access across response samples) provide orthogonal discrimination that structural Jaccard similarity cannot, specifically by separating structural noise (which adds unused fields) from true drift (which removes or changes required fields)?",
+  "hypothesis": "Structural noise patterns (optional_field_churn, null_valued_fields, nested_object_variation) add fields that no client profile uses, so field-usage similarity remains high (>=0.95) while Jaccard drops. True drift patterns (remove_field, change_type) remove or alter fields that client profiles depend on, so field-usage similarity drops (<0.90) alongside Jaccard. This creates a separable region in (Jaccard, usage-similarity) space that the magnitude confound in Jaccard alone cannot achieve.",
+  "falsifier": "No operating point in (Jaccard, usage-similarity) space achieves both: (a) noise usage-similarity >= 0.95 and drift usage-similarity < 0.90, OR (b) the usage-similarity gap between noise and drift is < 0.05 (insufficient discrimination), OR (c) usage-similarity is perfectly correlated with Jaccard (Pearson r > 0.95) across all conditions, demonstrating no independent information.",
+  "baselines": [
+    "Single-signal Jaccard (field_path,type) with adaptive threshold — FP=1.0 at all sizes under structural noise (EXP-GRAPH-34788722106)",
+    "TF-IDF bag-of-words semantic similarity — FP=1.0, inverted direction (EXP-GRAPH-35010853847)",
+    "Response-time KS two-sample test — TP=0.0, FP=0.1875, inverted direction (EXP-GRAPH-35083040517)",
+    "Linear Fisher LDA ensemble of (1-Jaccard) and KS D — AUC=0.625, all conditions fail (EXP-GRAPH-35130682058)"
+  ],
+  "positive_control": "Fresh copies (identical schemas, all fields present) must have usage-similarity = 1.0 and Jaccard = 1.0 across all client profiles.",
+  "null_control": "Structural noise patterns must NOT reduce usage-similarity below 0.95 — if noise causes usage-similarity < 0.95, the signal is not orthogonal to Jaccard.",
+  "measurement_validity": [
+    "Mock API server returns deterministic responses per (field_set, resource_id) — no timing or network confounds",
+    "3 client profiles access different field subsets: A={id,name}, B={id,name,email}, C={id,name,email,phone} — covering light/medium/heavy usage",
+    "10 requests per client profile per condition — sufficient for stable usage frequency estimation",
+    "Schema sizes 10, 20, 30, 50 fields — matching prior experiments for cross-experiment comparability",
+    "N=30 fresh + 30 stale samples per drift pattern per schema size — matching prior experiment power",
+    "Deterministic seed (20260916) for schema generation and client-profile field selection",
+    "Usage similarity computed as mean per-profile Jaccard(field_used_fresh, field_used_stale) — not global field-set Jaccard"
+  ],
+  "decision_rule": "Condition (1): drift usage-similarity < 0.90 for ALL three drift patterns (remove_field, change_type, optional_reorder) at ALL schema sizes — drift consistently reduces usage similarity. Condition (2): noise usage-similarity >= 0.95 for ALL three noise patterns (optional_field_churn, null_valued_fields, nested_object_variation) at ALL schema sizes — noise does not reduce usage similarity. Condition (3): Pearson correlation between Jaccard and usage-similarity across all 24 conditions (4 sizes x 6 patterns) is r < 0.90 — usage-similarity provides information beyond Jaccard. All three conditions must hold for SURVIVES_CURRENT_TEST.",
+  "product_consequence_positive": "Field-usage profiling becomes a candidate behavioral freshness signal for Product Core, potentially combinable with structural signals to resolve the magnitude confound. Triggers composite-signal experiment.",
+  "product_consequence_negative": "Field-usage profiling does not provide orthogonal discrimination — usage-similarity tracks Jaccard too closely, meaning behavioral access patterns are redundant with structural presence. C-FRESHNESS remains HYPOTHESIS pending direct schema comparison or other fundamentally different mechanisms.",
+  "estimated_cost": "Low: mock server with deterministic responses, no real network calls. Compute: O(S * P * R * N) where S=4 sizes, P=6 patterns, R=3 clients, N=30 samples. Total ~2160 API calls, all local.",
+  "expected_information_gain": "High: if usage-similarity separates drift from noise, changes product decision (behavioral signals viable for freshness). If usage-similarity tracks Jaccard, rules out behavioral profiling and redirects to direct schema comparison."
 }
