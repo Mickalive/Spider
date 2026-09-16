@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import subprocess
 from pathlib import Path
@@ -24,6 +25,11 @@ CONTROL_ROOTS = [
     "config/models.json",
     "SPIDER_CODEX.md",
 ]
+
+# Codex evidence changes frequently and must be overlaid, but a pure evidence sync
+# must not cause a permanently failing lane to be retried as if its execution
+# machinery had changed.
+VOLATILE_CONTROL_ROOTS = {"SPIDER_CODEX.md"}
 
 
 def run(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -50,6 +56,29 @@ def local_files(root: Path, path: str) -> set[str]:
 
 def blob(root: Path, ref: str, path: str) -> bytes:
     return run(root, "git", "show", f"{ref}:{path}").stdout
+
+
+def control_revision(root: Path, ref: str) -> str:
+    """Content fingerprint of operational control files at ref.
+
+    This intentionally excludes the generated Codex body: new evidence should not
+    reset a nonretryable-failure circuit breaker, while any script/workflow/agent/
+    contract/config change should.
+    """
+    h = hashlib.sha256()
+    seen: set[str] = set()
+    for control_root in CONTROL_ROOTS:
+        if control_root in VOLATILE_CONTROL_ROOTS:
+            continue
+        for rel in sorted(files_at(root, ref, control_root)):
+            if rel in seen:
+                continue
+            seen.add(rel)
+            h.update(rel.encode("utf-8"))
+            h.update(b"\0")
+            h.update(blob(root, ref, rel))
+            h.update(b"\0")
+    return h.hexdigest()
 
 
 def materialize(root: Path, ref: str) -> None:
@@ -84,7 +113,7 @@ def verify(root: Path, ref: str) -> list[str]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["stage", "restore", "check"])
+    ap.add_argument("mode", choices=["stage", "restore", "check", "revision"])
     ap.add_argument("--root", default=os.environ.get("GITHUB_WORKSPACE", "."))
     args = ap.parse_args()
     root = Path(args.root).resolve()
@@ -94,6 +123,10 @@ def main() -> None:
         ref = "origin/main"
     else:
         ref = "HEAD"
+
+    if args.mode == "revision":
+        print(control_revision(root, ref))
+        return
 
     if args.mode == "check":
         bad = verify(root, ref)
