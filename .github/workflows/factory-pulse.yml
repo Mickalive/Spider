@@ -63,6 +63,12 @@ jobs:
             [[ "$PAUSED" != true ]] || { echo "human-paused: $LANE"; exit 0; }
             ACTIVE_EXP=$(jq -r '.active_experiment_id // empty' <<<"$STATE")
 
+            if [[ "$LANE" == product && "$(jq -r '.promotion_ready // false' <<<"$STATE")" == true ]]; then
+              echo "SPIDER_PRODUCT_PROMOTION_PENDING experiment=$(jq -r '.last_experiment_id // empty' <<<"$STATE")"
+              echo "Product research waits until product-promote clears the durable latch."
+              exit 0
+            fi
+
             RETRYABLE=$(jq -r '.last_failure_retryable // empty' <<<"$STATE")
             SAME_COUNT=$(jq -r '.same_failure_count // 0' <<<"$STATE")
             FAILURE_REV=$(jq -r '.last_failure_control_revision // empty' <<<"$STATE")
