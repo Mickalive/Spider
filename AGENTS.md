@@ -13,6 +13,8 @@ This file is binding for OpenCode sessions in the active Research 2.0 factory.
 
 Never silently rewrite constitutional files.
 
+`SPIDER_CODEX.md` is accepted-evidence output owned by the canonical Codex synchronization step. Lane DESIGN, EXECUTE, AUDIT and DIRECTOR agents may read it but must never edit, regenerate, append to, format, or otherwise mutate it directly.
+
 ## Objective
 
 Optimize for verified inherited work, not activity, run count, pretty reports or route replay.
@@ -75,7 +77,7 @@ Cross-lane inheritance occurs through accepted Codex evidence or exact immutable
 
 You may edit only the paths granted in the exact workflow prompt.
 
-Never edit `.github/`, `.opencode/`, constitutional files, model routing, another lane, or another experiment.
+Never edit `.github/`, `.opencode/`, constitutional files, model routing, `SPIDER_CODEX.md`, another lane, or another experiment.
 
 Do not use `git add -A`, reset shared branches, force-push or erase prior evidence.
 
