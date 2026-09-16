@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Merge only an audited promotion-ready Product branch
+      - name: Promote only the audited experiment code delta
         shell: bash
         run: |
           set -euo pipefail
@@ -41,19 +41,66 @@ jobs:
           STATE=$(git show origin/lab2/product:research/lanes/product/state.json 2>/dev/null || echo '{}')
           [[ "$(jq -r '.promotion_ready // false' <<<"$STATE")" == true ]] || { echo "Product is not promotion-ready."; exit 0; }
 
-          if git merge-base --is-ancestor origin/lab2/product HEAD; then
-            echo "Product branch already integrated."
-            exit 0
+          EXP=$(jq -r '.last_experiment_id // empty' <<<"$STATE")
+          [[ -n "$EXP" ]] || { echo "::error::promotion_ready without last_experiment_id"; exit 1; }
+          DIR="research/experiments/$EXP"
+
+          git show "origin/lab2/product:$DIR/audit.json" > /tmp/spider-product-audit.json
+          git show "origin/lab2/product:$DIR/verdict.json" > /tmp/spider-product-verdict.json
+          git show "origin/lab2/product:$DIR/handoff.json" > /tmp/spider-product-handoff.json
+          git show "origin/lab2/product:$DIR/execution_checkpoint.json" > /tmp/spider-product-checkpoint.json
+
+          [[ "$(jq -r '.experiment_id' /tmp/spider-product-verdict.json)" == "$EXP" ]] || { echo "::error::verdict experiment mismatch"; exit 1; }
+          [[ "$(jq -r '.lane' /tmp/spider-product-verdict.json)" == product ]] || { echo "::error::verdict lane mismatch"; exit 1; }
+          [[ "$(jq -r '.status' /tmp/spider-product-audit.json)" == PASS ]] || { echo "::error::promotion requires PASS audit"; exit 1; }
+          [[ "$(jq -r '.promote_to_product // false' /tmp/spider-product-verdict.json)" == true ]] || { echo "::error::verdict does not authorize promotion"; exit 1; }
+
+          BASE=$(jq -r '.pre_execute_sha // empty' /tmp/spider-product-checkpoint.json)
+          [[ -n "$BASE" ]] || { echo "::error::missing pre_execute_sha"; exit 1; }
+          git cat-file -e "$BASE^{commit}"
+
+          # The director checkpoint commits verdict + audited Product code together.
+          # Pin promotion to that exact commit, never to a later mutable lane head.
+          SOURCE_SHA=$(git log -1 --format=%H origin/lab2/product -- "$DIR/verdict.json")
+          [[ -n "$SOURCE_SHA" ]] || { echo "::error::cannot locate director checkpoint commit"; exit 1; }
+
+          mapfile -t ROOTS < <(jq -r '.lanes.product.allowed_code_roots[]?' research/lanes/registry.json)
+          (( ${#ROOTS[@]} > 0 )) || { echo "::error::Product has no allowed_code_roots"; exit 1; }
+
+          git diff --binary --full-index "$BASE" "$SOURCE_SHA" -- "${ROOTS[@]}" > /tmp/spider-product.patch
+          if [[ ! -s /tmp/spider-product.patch ]]; then
+            echo "SPIDER_PRODUCT_PROMOTION_NOOP experiment=$EXP source=$SOURCE_SHA"
+          else
+            # Apply only the experiment delta to current main. A conflict is a hard
+            # stop; never merge the whole research branch or silently take lane state.
+            git apply --index --3way /tmp/spider-product.patch
+            python -m compileall -q src scripts
+            python scripts/validate_repo.py
+            PYTHONPATH=src python -m unittest discover -s tests -v
+            git commit -m "product: promote audited $EXP"
+            git push origin HEAD:main
+            echo "SPIDER_PRODUCT_PROMOTED experiment=$EXP source=$SOURCE_SHA"
           fi
 
-          if ! git merge --no-commit --no-ff origin/lab2/product; then
-            git merge --abort || true
-            echo "::error::Product promotion conflict; no partial main write performed."
-            exit 1
-          fi
-
-          python -m compileall -q src scripts
-          python scripts/validate_repo.py
-          PYTHONPATH=src python -m unittest discover -s tests -v
-          git commit -m "product: promote audited Research 2.0 capability"
-          git push origin HEAD:main
+          # Clear the durable promotion latch on the lane only after main accepted
+          # the audited delta (or it was a verified no-op). This prevents a new
+          # Product experiment from racing a pending promotion.
+          git switch -C lab2/product origin/lab2/product
+          python - "$EXP" "$SOURCE_SHA" <<'PY'
+          import json, sys
+          from datetime import datetime, timezone
+          from pathlib import Path
+          exp, source = sys.argv[1:]
+          p = Path('research/lanes/product/state.json')
+          s = json.loads(p.read_text())
+          if s.get('last_experiment_id') != exp or not s.get('promotion_ready'):
+              raise SystemExit('Product lane state changed during promotion; refusing to clear latch')
+          s['promotion_ready'] = False
+          s['last_promoted_experiment_id'] = exp
+          s['last_promoted_source_sha'] = source
+          s['last_promoted_at'] = datetime.now(timezone.utc).isoformat()
+          p.write_text(json.dumps(s, indent=2) + '\n')
+          PY
+          git add research/lanes/product/state.json
+          git commit -m "R2 product: record promotion $EXP"
+          git push origin HEAD:refs/heads/lab2/product
