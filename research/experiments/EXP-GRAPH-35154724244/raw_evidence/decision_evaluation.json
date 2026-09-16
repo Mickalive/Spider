@@ -1,0 +1,17 @@
+{
+  "decision": "FALSIFIED-IN-SETTING",
+  "violations": [
+    "C2 FAIL: n=10 pattern=optional_field_addition: mean_diff=1.000000 > 0.5",
+    "C2 FAIL: n=20 pattern=optional_field_addition: mean_diff=2.000000 > 0.5",
+    "C2 FAIL: n=30 pattern=optional_field_addition: mean_diff=3.000000 > 0.5",
+    "C2 FAIL: n=50 pattern=optional_field_addition: mean_diff=5.000000 > 0.5",
+    "C4 FAIL: n=50: change_type C validation rate 0.046667 <= 0.8"
+  ],
+  "condition_pass": {
+    "C1_drift_detection": "PASS",
+    "C2_noise_tolerance": "FAIL",
+    "C3_orthogonality": "PASS",
+    "C4_type_aware": "FAIL"
+  },
+  "evaluated_at": "2026-09-16T21:56:35.808107+00:00"
+}

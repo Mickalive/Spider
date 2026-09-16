@@ -1,0 +1,473 @@
+{
+  "per_schema_size": {
+    "10": {
+      "pattern_metrics": {
+        "add_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.909091,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "remove_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.9,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.093333
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_schema_diff_magnitude": 0.5,
+          "mean_jaccard": 0.818182,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.04
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_schema_diff_magnitude": 0.3,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "rename_field": {
+          "mean_schema_diff_magnitude": 2.0,
+          "mean_jaccard": 0.818182,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "description_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "default_value_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "optional_field_addition": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.909091,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "nested_property_addition": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "enum_expansion": {
+          "mean_schema_diff_magnitude": 0.2,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        }
+      }
+    },
+    "20": {
+      "pattern_metrics": {
+        "add_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.952381,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "remove_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.95,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.046667
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_schema_diff_magnitude": 0.5,
+          "mean_jaccard": 0.904762,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.053333
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_schema_diff_magnitude": 0.3,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "rename_field": {
+          "mean_schema_diff_magnitude": 2.0,
+          "mean_jaccard": 0.904762,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "description_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "default_value_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "optional_field_addition": {
+          "mean_schema_diff_magnitude": 2.0,
+          "mean_jaccard": 0.909091,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "nested_property_addition": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "enum_expansion": {
+          "mean_schema_diff_magnitude": 0.2,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        }
+      }
+    },
+    "30": {
+      "pattern_metrics": {
+        "add_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.967742,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "remove_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.966667,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.04
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_schema_diff_magnitude": 0.5,
+          "mean_jaccard": 0.935484,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.053333
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_schema_diff_magnitude": 0.3,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "rename_field": {
+          "mean_schema_diff_magnitude": 2.0,
+          "mean_jaccard": 0.935484,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "description_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "default_value_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "optional_field_addition": {
+          "mean_schema_diff_magnitude": 3.0,
+          "mean_jaccard": 0.909091,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "nested_property_addition": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "enum_expansion": {
+          "mean_schema_diff_magnitude": 0.2,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        }
+      }
+    },
+    "50": {
+      "pattern_metrics": {
+        "add_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.980392,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "remove_field": {
+          "mean_schema_diff_magnitude": 1.0,
+          "mean_jaccard": 0.98,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.033333
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_schema_diff_magnitude": 0.5,
+          "mean_jaccard": 0.960784,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.046667
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_schema_diff_magnitude": 0.3,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "rename_field": {
+          "mean_schema_diff_magnitude": 2.0,
+          "mean_jaccard": 0.960784,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "description_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "default_value_change": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "optional_field_addition": {
+          "mean_schema_diff_magnitude": 5.0,
+          "mean_jaccard": 0.909091,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "nested_property_addition": {
+          "mean_schema_diff_magnitude": 0.0,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        },
+        "enum_expansion": {
+          "mean_schema_diff_magnitude": 0.2,
+          "mean_jaccard": 1.0,
+          "std_schema_diff_magnitude": 0.0,
+          "mean_validation_rates": {
+            "A": 0.0,
+            "B": 0.0,
+            "C": 0.0
+          },
+          "n_samples": 30
+        }
+      }
+    }
+  },
+  "overall": {
+    "drift_diff_mean": 0.96,
+    "noise_diff_mean": 0.59,
+    "discrimination_gap": 0.37,
+    "pearson_r_diff_vs_jaccard": -0.589579,
+    "n_conditions": 40,
+    "type_aware_detection": {
+      "50": {
+        "change_type_C_validation_rate": 0.046667,
+        "noise_mean_C_validation_rate": 0.0
+      }
+    }
+  }
+}
