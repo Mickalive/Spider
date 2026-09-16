@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = {
+    "design": ["spec.json", "prereg.md", "freeze.json"],
     "execute": ["result.json", "report.md", "provenance.json"],
     "audit": ["audit.json"],
     "director": ["verdict.json", "handoff.json"],
@@ -33,7 +34,6 @@ def restore_path(ref: str, path: str) -> None:
             shutil.rmtree(p, ignore_errors=True)
         elif p.exists() or p.is_symlink():
             p.unlink(missing_ok=True)
-    # Remove files created by the failed attempt that do not exist at the base.
     run("git", "clean", "-fd", "--", path)
 
 
@@ -47,24 +47,15 @@ def clean_failed_execute(exp_id: str, exp: Path) -> None:
     if not base:
         raise RuntimeError("execution checkpoint missing pre_execute_sha")
 
-    # Preserve only the durable diagnostic receipts from the failed attempt.
     preserved: dict[str, bytes] = {}
     for name in ["failure.json", "model_execute.json"]:
         p = exp / name
         if p.exists():
             preserved[name] = p.read_bytes()
 
-    # Scientific/code mutations from an unsuccessful execute must never become
-    # the starting point of its retry. Restore every registry-authorized code
-    # root to the immutable pre-execution commit.
     for root in roots:
         restore_path(base, root)
 
-    # The execute stage is allowed to create arbitrary raw evidence/scripts under
-    # the experiment directory. On failure those are a mixed/partial attempt and
-    # must not contaminate a later provider. Restore the packet to current HEAD
-    # (which contains the frozen inputs + execution checkpoint), then reattach the
-    # two diagnostic receipts above.
     rel_exp = f"research/experiments/{exp_id}"
     restore_path("HEAD", rel_exp)
     for name, data in preserved.items():
