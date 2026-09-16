@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35137030850",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on C3: many-to-one BC PMI (0.226 bits) < unique-content BC PMI (0.493 bits) - 0.1 = 0.393. The 0.268-bit drop (54%) demonstrates content-state aliasing is a significant source of prior PMI. However, the audit V3 correctly identifies this as threshold misalignment — the experiment shows PMI>0 persists with many-to-one mapping (0.226 bits, p_bonf=0.0 < 0.0125, well above 0.05 threshold), not PMI=0. The product_consequence_negative ('locally-hosted testable path for C-WEB-DYNAMICS across ALL observation levels is closed') is not justified as written: PMI>0 persists even with many-to-one mapping. However, the audit V4 identifies a critical partial discrimination confound: the many-to-one condition still has 2 unique hashes (S2 unique, S0/S1 shared), so the residual 0.226 bits cannot distinguish genuine predictive dynamics from partial state aliasing. The claim remains HYPOTHESIS: the experiment is descriptive and inconclusive for the broader claim. No confirmatory evidence accumulated; the frozen gate fails; the partial discrimination confound prevents attribution of the residual PMI to genuine dynamics."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a fully-ambiguous content mapping (all 3 states share 1 content hash, eliminating partial state discrimination) with stochastic branching FSM yield conditional PMI > 0.05 bits at K=3, resolving whether the residual 0.226 bits from EXP-PHYSICS-35137030850 reflects genuine predictive dynamics beyond aliasing or is entirely explained by partial state discrimination?",
+  "reason": "FALSIFIED-IN-SETTING per frozen decision_rule clause C3: many-to-one BC PMI (0.226) < unique-content BC PMI (0.493) - 0.1 = 0.393. All other frozen criteria pass: C1 ceiling eliminated (H=1.533 bits), C2 primary significant (0.226 bits, p_bonf=0.0), C4 positive control passes (content-shuffled BC=0.002 ≈ 0), C5 determinism passes (accuracy=1.0 both conditions), C6 sample size sufficient (2000 per condition), C7 cardinality bounded (max 0.111 per stratum). Audit confirms all recomputed metrics match producer (V2). Audit V3 identifies C3 threshold as conceptually misaligned: the frozen falsifier clause 2 ('content-state aliasing was the sole PMI source') requires mto ≈ 0, but C3 triggers at mto < uniq - 0.1, which fires when aliasing is significant but not sole source. The FALSIFIED label per frozen rule is arithmetically correct but scientifically overbroad — the experiment shows PMI persists (0.226 bits, 45.8% of unique-content signal survives), not that PMI vanishes. Audit V4 identifies the critical unresolved confound: many-to-one still permits partial state discrimination (S2 unique hash vs S0/S1 shared hash), so the residual PMI cannot be attributed to 'genuine predictive dynamics beyond aliasing.' The experiment does NOT close C-WEB-DYNAMICS (PMI>0 persists) and does NOT demonstrate genuine dynamics (partial discrimination uncontrolled). Claim ceiling bounded to: on 3-state stochastic branching FSM with 2-hash many-to-one content mapping, BC PMI=0.226 bits persists (54% reduction from unique-content), demonstrating content-state aliasing is significant but not sole source of PMI. Partial discrimination confound prevents attribution to genuine dynamics. Fully-ambiguous (1-hash) test required to resolve.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35137030850/spec.json (frozen design: many-to-one vs unique-content, 7-criteria decision_rule, C3 threshold)",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json (producer: BC_PMI_MTO_K3=0.226, BC_PMI_UNIQ_K3=0.493, diff=-0.268, all controls pass)",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json (REVISE, V3 C3 misalignment high, V4 partial discrimination high, all metrics recomputed match)",
+    "research/experiments/EXP-PHYSICS-35137030850/raw_result.json (per-stratum PMI, cardinality, conditional entropy, controls)",
+    "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py (frozen analysis pipeline, seed=42, stochastic branching FSM)",
+    "research/experiments/EXP-PHYSICS-35137030850/prereg.md (frozen preregistration, 7-criteria decision_rule, many-to-one vs unique-content)",
+    "research/experiments/EXP-PHYSICS-35130680344/handoff.json (parent: MEASUREMENT_INVALID, V10 content-state aliasing concern, recommended many-to-one test)"
+  ]
+}
