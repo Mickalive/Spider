@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35137030850",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow FALSIFIED-IN-SETTING ceiling: frozen C3 (|diff|>0.1) does not demonstrate aliasing was sole source. Producer's own BC_PMI_MTO_K3=0.226 bits (Bonferroni p=0.0) >0.05 remains significant; product_consequence_negative 'locally-hosted testable path for C-WEB-DYNAMICS across ALL observation levels is closed' is not justified as written. Ceiling must be bounded to partial discrimination only.",
+    "Fix cardinality metric: result.json MTO_max_cardinality_ratio=0.001 uses max|R|/N_total (2/2000) not max|R|/N_stratum. True per-stratum max is 0.111 (2/18) for MTO K3 and 0.20 (3/15) for UNIQ K3; still passes <0.8 but metric miscomputed. Recompute as max_stratum |R|/N_stratum.",
+    "Align trajectory generation with prereg 5.4 intent: spec states 'same FSM, same sessions, same session assignment, same action sequences' differing only in content mapping. Implementation generates session_directions once (seed 42) but advances RNG sequentially across conditions, so action sequences and session_id draws differ between MTO and UNIQ. Regenerate second condition from same RNG checkpoint or replay recorded action/next_state sequences for exact within-experiment control.",
+    "Add fully-ambiguous control (all 3 states share 1 hash) to separate partial state discrimination (S2 vs {S0,S1}) from genuine response-context dynamics; current many-to-one still allows 1-bit state partitioning.",
+    "Report baseline completeness: spec baselines include action-history-only prediction P(S_next|URL,H_K) accuracy and marginal P(S_next) baseline, not reported in result.json. Include them or mark as omitted with justification."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_CEILING_ELIMINATED",
+      "severity": "pass",
+      "finding": "Branching stochastic FSM eliminates ceiling as designed. H(S_next|URL,H_K=3)=1.533 bits (MTO) /1.537 bits (UNIQ) >0.2 bits threshold. Recomputed from raw_result.json:conditional_entropy matches result.json. Strata (63 at K3) have genuine next-state uncertainty.",
+      "evidence_ref": "raw_result.json:conditional_entropy.mto_K3=1.533265; result.json:metrics.H_Snext_given_URL_HK3_MTO=1.533265"
+    },
+    {
+      "id": "V2_PRIMARY_PMI_RECOMPUTED",
+      "severity": "pass",
+      "finding": "BC PMI MTO K3=0.225711 bits (observed 0.27813 - perm_mean 0.052419), Bonferroni p=0.0 (0/1000 perms >= observed, *4 corrections). Recomputed matches producer. Primary threshold C2 (BC>0.05 and p<0.0125) passes independently of C3. Same for UNIQ K3=0.493481 bits.",
+      "evidence_ref": "raw_result.json:pmi_results.mto.3.{observed_pmi,perm_mean,bc_pmi,p_bonf}; run_experiment.py:compute_pmi,permutation_test_pmi"
+    },
+    {
+      "id": "V3_C3_FALSIFIER_MISCALIBRATED",
+      "severity": "high",
+      "finding": "Frozen falsifier clause 2 / decision rule C3 (mto < uniq -0.1 => aliasing was sole source / FALSIFIED-IN-SETTING) is conceptually misaligned. Difference -0.2677 triggers FALSIFIED label, but sole-source would require mto≈0, not just -0.1 drop. Producer correctly reports mto 0.226 bits remains >0.05 and significant; therefore 45.8% of uniq signal persists. FALSIFIED label per frozen rule is arithmetically correct but scientifically overbroad; it quantifies aliasing as SIGNIFICANT not SOLE source.",
+      "evidence_ref": "result.json:metrics.BC_PMI_MTO_K3=0.225711, BC_PMI_UNIQ_K3=0.493481, BC_PMI_diff_K3=-0.26777; spec.json:falsifier clause 2; spec.json:decision_rule C3"
+    },
+    {
+      "id": "V4_PARTIAL_DISCRIMINATION_CONFOUND",
+      "severity": "high",
+      "finding": "Many-to-one still permits partial state discrimination: hash 422fe454bcee4033 maps to {S0,S1}, hash 1d676009ad2c017a maps to {S2} uniquely (verified via hashlib recomputation). Thus I(S_next;Response|URL,H_K) >0 is expected from state partitioning alone (S2 isolation). 0.226 bits cannot be attributed to 'genuine predictive dynamics beyond aliasing' vs 'partial aliasing'. Unresolved in producer unresolved list.",
+      "evidence_ref": "raw_result.json:mto_unique_hashes (2 hashes), uniq_unique_hashes (3 hashes); recomputed hashes S0/S1=422fe454bcee4033 S2=1d676009ad2c017a; prereg section 11.1 validity threat"
+    },
+    {
+      "id": "V5_POSITIVE_CONTROL_PASSES",
+      "severity": "pass",
+      "finding": "Content-shuffled control on MTO H>0 strata (63/63 strata have H>0) yields BC PMI_h0=0.001926, perm_std_h0=0.006422, |BC|<3*std (0.0019<0.0193) and perm_std>0. Recomputed via run_experiment.py:content_shuffled_control (random choice from 2-hash pool) correctly randomizes state→content mapping as parent handoff required. Full BC=0.002004 similar. Pass justified.",
+      "evidence_ref": "raw_result.json:positive_control.{bc_pmi_h0,perm_std_h0,h0_strata_count}; result.json:controls.positive_control_content_shuffled"
+    },
+    {
+      "id": "V6_NULL_CONTROL_PASSES",
+      "severity": "pass",
+      "finding": "Shuffled-label null within (URL,H_K=3,step) strata yields raw shuffled PMI mean 0.051636 (finite-sample bias) and BC mean 0.0 by construction (perm_mean subtraction), std 0.00677. |BC mean|<3*std holds trivially but raw perm_mean quantifies bias correctly. Estimator bias ~0.05 bits at K3 and ~0.107 bits for UNIQ K3 removed correctly.",
+      "evidence_ref": "raw_result.json:null_control, pmi_results.mto.3.perm_mean=0.052419; result.json:controls.null_control_shuffled_labels"
+    },
+    {
+      "id": "V7_DETERMINISM_PASSES",
+      "severity": "pass",
+      "finding": "P(Response_hash|FSM_state,session,step)=1.0 on both conditions (MTO 571 groups 0 violations, UNIQ 582 groups 0 violations). Content deterministic per state as designed; grouping includes step per spec, so passes.",
+      "evidence_ref": "raw_result.json:determinism.{mto,uniq}; result.json:controls.determinism_check_MTO/UNIQ"
+    },
+    {
+      "id": "V8_CARDINALITY_METRIC_MISCOMPUTED",
+      "severity": "low",
+      "finding": "Reported MTO_max_cardinality_ratio=0.001 and UNIQ 0.0015 use |R|_max / N_total (2/2000). Correct per-stratum check is max |R|/N_stratum =0.111 for MTO (2/18 smallest stratum) and 0.20 for UNIQ (3/15). Both still <0.8, so pass verdict unchanged but metric understates concentration.",
+      "evidence_ref": "raw_result.json:pmi_results.mto.3.stratum_details N range 18-200, max_cardinality 2; result.json:metrics.MTO_max_cardinality_ratio"
+    },
+    {
+      "id": "V9_SESSION_ACTION_NONIDENTICAL",
+      "severity": "low",
+      "finding": "Spec measurement_validity #2 requires session assignment identical; code generates session_directions once (seed 42) correctly, but RNG advances through first trajectory generation, so action sequences and session_id draws differ between conditions. Only session_directions table is identical, not full trajectory histories. Difference is stochastic noise (both 2000 transitions) unlikely to shift PMI difference materially but violates 'only content mapping differs' ideal.",
+      "evidence_ref": "run_experiment.py:generate_session_directions, generate_trajectories called sequentially with same rng; provenance.json:seed 42; spec.json:measurement_validity item2 and prereg 5.4"
+    },
+    {
+      "id": "V10_NO_TARGET_LEAKAGE",
+      "severity": "pass",
+      "finding": "Response_before hashed via SHA-256(json dumps sort_keys)[:16] from state content only, independent of next_state draw and session direction. Action history uses START padding and trajectory ordering. Within-strata permutation preserves (URL,H_K,step) marginals. No leakage of next_state into observation.",
+      "evidence_ref": "run_experiment.py:hash_content, build_strata, generate_trajectories"
+    },
+    {
+      "id": "V11_SAMPLE_SIZE_SUFFICIENT",
+      "severity": "pass",
+      "finding": "200 trajectories*10 steps=2000 transitions per condition >500 threshold (C6). K3 yields 63 strata, mean N≈31.7, min 18. Adequate for Bonferroni detection at 0.05/4. Sample size check passes.",
+      "evidence_ref": "raw_result.json:pmi_results.mto.3.n_items=2000, n_strata=63; result.json:metrics.MTO_n_transitions"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_UNIQUE_CONTENT_BASELINE",
+      "finding": "Unique-content baseline (S0≠S1≠S2, 3 hashes) yields BC PMI 0.493 bits at K3 (0.565 at K1) with same FSM/sessions. Recomputed difference -0.268 bits (54% reduction) quantifies aliasing contribution. Baseline is strong within-experiment comparison and correctly implemented with identical session_directions table.",
+      "strength": "strong",
+      "evidence_ref": "raw_result.json:pmi_results.uniq.3.bc_pmi=0.493481; result.json:metrics.BC_PMI_UNIQ_K3"
+    },
+    {
+      "id": "B2_STATE_INDEPENDENT_BASELINE",
+      "finding": "State-independent baseline (constant response) not explicitly computed as separate condition; positive control (randomized state→content) serves as functional equivalent with BC≈0 (0.0019). Spec baseline expectation BC≈0 validated.",
+      "strength": "adequate",
+      "evidence_ref": "raw_result.json:positive_control.bc_pmi_h0"
+    },
+    {
+      "id": "B3_ACTION_HISTORY_CEILING",
+      "finding": "Action-history-only ceiling eliminated via conditional entropy H=1.53 bits. No explicit accuracy baseline P(S_next|URL,H_K) reported, but H>0.2 threshold exceeds spec. Would strengthen to report majority-class accuracy vs 33% frequency baseline.",
+      "strength": "moderate",
+      "evidence_ref": "raw_result.json:conditional_entropy"
+    },
+    {
+      "id": "B4_BIAS_CORRECTED_ESTIMATOR",
+      "finding": "Finite-sample bias demonstrated: permutation null mean 0.052 bits (MTO K3) and 0.107 bits (UNIQ K3). BC correction (obs-perm_mean) used consistently for primary and controls. Null control confirms BC mean ≈0 under permutation. Estimator baseline is valid.",
+      "strength": "strong",
+      "evidence_ref": "raw_result.json:pmi_results.mto.3.perm_mean, uniq.3.perm_mean"
+    }
+  ],
+  "recomputed_metrics": {
+    "BC_PMI_MTO_K3": {
+      "producer": 0.225711,
+      "recomputed": 0.225711,
+      "match": true,
+      "method": "observed 0.27813 - perm_mean 0.052419 from raw_result.json:pmi_results.mto.3"
+    },
+    "BC_PMI_UNIQ_K3": {
+      "producer": 0.493481,
+      "recomputed": 0.493481,
+      "match": true,
+      "method": "observed 0.600723 - perm_mean 0.107242"
+    },
+    "BC_PMI_diff_K3": {
+      "producer": -0.26777,
+      "recomputed": -0.26777,
+      "match": true,
+      "method": "MTO-UNIQ"
+    },
+    "BC_PMI_MTO_K1": {
+      "producer": 0.246787,
+      "recomputed": 0.246787,
+      "match": true,
+      "method": "observed 0.260645 - perm_mean 0.013858"
+    },
+    "H_Snext_given_URL_HK3_MTO": {
+      "producer": 1.533265,
+      "recomputed": 1.533265,
+      "match": true,
+      "method": "weighted conditional entropy from raw_result.json:conditional_entropy.mto_K3"
+    },
+    "MTO_unique_response_hashes": {
+      "producer": 2,
+      "recomputed": 2,
+      "match": true,
+      "method": "hashlib SHA256 of CONTENT_MANY_TO_ONE: S0/S1=422fe454bcee4033 S2=1d676009ad2c017a matches raw_result.json:mto_unique_hashes"
+    },
+    "UNIQ_unique_response_hashes": {
+      "producer": 3,
+      "recomputed": 3,
+      "match": true,
+      "method": "hashlib: e58d93597938a463,c44f00a8232fd1cf,1d676009ad2c017a"
+    },
+    "positive_control_BC_PMI_h0": {
+      "producer": 0.001926,
+      "recomputed": 0.001926,
+      "match": true,
+      "method": "raw_result.json:positive_control.bc_pmi_h0"
+    },
+    "positive_control_perm_std_h0": {
+      "producer": 0.006422,
+      "recomputed": 0.006422,
+      "match": true,
+      "method": "raw_result.json:positive_control.perm_std_h0"
+    },
+    "perm_p_bonf_MTO_K3": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "method": "raw p=0/1000=0.0 *4 Bonferroni =0.0"
+    },
+    "determinism_accuracy_MTO": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "method": "571 groups 0 violations"
+    },
+    "true_per_stratum_max_cardinality_ratio_MTO_K3": {
+      "producer": 0.001,
+      "recomputed": 0.111111,
+      "match": false,
+      "note": "producer uses global ratio 2/2000; recomputed per-stratum max 2/18=0.111 still <0.8 pass"
+    }
+  },
+  "claim_ceiling": "On locally-hosted 3-state stochastic branching FSM (states S0,S1,S2, actions advance/branch, session-direction p_left=0.7/p_right=0.3, URL=/app, N=20 sessions seed 42, 200 trajectories*10 steps=2000 transitions per condition), response-content PMI I(S_next;Response_before|URL,H_K=3) is 0.226 bits (BC, Bonferroni p=0.0 <0.0125, H>0) when S0 and S1 share content (2 hashes) vs 0.493 bits when all states unique (3 hashes). The 0.268-bit drop (54%) demonstrates content-state aliasing is a significant source of prior PMI, but residual 0.226 bits >0.05 shows content retains partial state information (S2 isolated vs {S0,S1} partition) sufficient for significant PMI. This does NOT demonstrate fully content-independent predictive dynamics, does NOT test fully-ambiguous (1 hash) case, and does NOT generalize beyond this synthetic Express SPA with hash-based observation, p=0.7/0.3 independent per-transition stochasticity, and no production DOM/auth/latency. Maximum justified is partial discrimination, not emergent dynamics beyond memory.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35137030850/spec.json",
+    "research/experiments/EXP-PHYSICS-35137030850/prereg.md",
+    "research/experiments/EXP-PHYSICS-35137030850/freeze.json",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json",
+    "research/experiments/EXP-PHYSICS-35137030850/raw_result.json",
+    "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35137030850/provenance.json",
+    "research/experiments/EXP-PHYSICS-35130680344/handoff.json"
+  ],
+  "unresolved": [
+    "Does residual 0.226 bits reflect genuine response-context transition information or solely partial state discrimination (S2 vs {S0,S1})? Requires fully-shared 1-hash condition where Response is invariant to state.",
+    "Would PMI persist with correlated non-deterministic transitions (session state, external data) where Response_before correlates with latent environment state determining S_next, rather than independent per-step observation noise?",
+    "Generalization to production SPAs with client-side rendering, auth-dependent content, and richer DOM/accessibility representations remains untested; synthetic-to-real gap is dominant unknown for C-WEB-DYNAMICS.",
+    "Stability of difference estimate to larger N and alternative history encodings (e.g., learned embeddings vs exact action-sequence strata) not measured.",
+    "Whether action-sequence non-identity across conditions (RNG sequencing) biases difference estimate materially, despite identical session_directions table."
+  ]
+}
