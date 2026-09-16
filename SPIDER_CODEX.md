@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **102**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **103**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -112,6 +112,7 @@ Validated experiments: **102**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35137034388 | graph | PASS | FALSIFIED-IN-SETTING | C-FRESHNESS | `73cf7767c67a` |
 | EXP-PHYSICS-35137030850 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `c87d8226bdc3` |
 | EXP-RUNTIME-35137033384 | runtime | PASS | SURVIVES_CURRENT_TEST — all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality variation, chunked transfer-encoding, CDN headers, Accept-Encoding negotiation, response caching, Content-Length variation). Algorithm-equivalence with gzip holds (|diff| = 0.0 < 0.1). Compressed-byte-only hashing degrades to 0.2789 on /userinfo (< 0.35), confirming H3. Claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. Audit PASS confirms all recomputed metrics match producer (max_abs_diff 0.0). Bounded to: localhost synthetic proxy, 1KB compressible JSON, effective brotli diversity 2 variants (q4 distinct vs q5-8 identical), mock OAuth2 4 states with 3-way error collapse (ceiling 0.5 on /userinfo), seed 44, N=20 per state, chunked decoded by HTTP client before decompression. Do NOT promote to Product Core — real-CDN infrastructure validation remains the critical untested blocker. | C-MEAS-VALID | `3b672238c289` |
+| EXP-GRAPH-35154724244 | graph | PASS | FALSIFIED-IN-SETTING — Frozen decision_rule fails on 2 of 4 conditions: C2 (noise tolerance) fails because optional_field_addition noise at 10% of schema size produces diff magnitude scaling with schema size (1.0 at n=10 to 5.0 at n=50, exceeding threshold 0.5 at all sizes), creating irreconcilable conflict with subtle drift (required_to_optional 0.3); C4 (type-aware validation) fails because mock server always returns data conforming to stale schema types, making type drift invisible to client validation (4.7% vs required 80%). C1 (drift detection) PASS — all 5 drift patterns produce diff 0.3-2.0. C3 (orthogonality) PASS — Pearson r=-0.59, confirming schema diff captures complementary structural information to Jaccard. Audit PASS confirms all recomputed metrics match producer. Audit V_C4_CONFORMANT_MOCK_TAUTOLOGY identifies C4 failure as measurement-invalid (mock conformance, not evidence against type-aware detection). However, C2 failure is genuine and structural: the magnitude confound persists because unbounded optional field additions dominate subtle structural drift by construction. Schema diff is a weak supplementary signal (detects required_to_optional invisible to Jaccard, r=-0.59) but cannot threshold-separate unbounded noise from drift. Does NOT close C-FRESHNESS domain; eliminates direct schema comparison as standalone discriminator. | C-FRESHNESS | `b1e824fdc2b9` |
 
 ## Latest recorded claim events
 
@@ -120,7 +121,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-35137034388 | graph |
+| C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-35154724244 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35137033384 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35132898840 | product |
