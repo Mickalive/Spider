@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35131994346",
+  "github_run_id": "35131994346",
+  "created_at": "2026-09-16T18:03:37.357411+00:00",
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "request_hash": "eee7c2eeae91bbe637aa18983346aabc82cf922427fd13051504cfff83e9071d",
+  "inputs": {
+    "request": {
+      "path": "research/experiments/EXP-INTEL-35131994346/request.json",
+      "sha256": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05"
+    },
+    "spec": {
+      "path": "research/experiments/EXP-INTEL-35131994346/spec.json",
+      "sha256": "14291c029e33d5638e23b5bd6cce0e922419c1238ee780542336309b1e185e27"
+    },
+    "prereg": {
+      "path": "research/experiments/EXP-INTEL-35131994346/prereg.md",
+      "sha256": "e2ecb5216decaf10e154adf8ef53e5bfc97162e1543aa40aec237231aae458f3"
+    },
+    "freeze": {
+      "path": "research/experiments/EXP-INTEL-35131994346/freeze.json",
+      "sha256": "frozen_at_2026-09-16T18:11:58.591708+00:00"
+    }
+  },
+  "raw_evidence": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "description": "Raw measurement data from EXP-INTEL-34782350557 with 8 task measurements"
+    }
+  ],
+  "code": [
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analyze.py",
+      "sha256": "c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+      "role": "code",
+      "description": "Committed analysis script (all-role density, no deduplication)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35131994346/reconstruct.py",
+      "sha256": "b435676812fc9fbc92e78d9ae0c073f98bf19b317e8ac24be85507716b2d433d",
+      "role": "code",
+      "description": "Reconstruction script for 3-definition per-role-filtered analysis"
+    }
+  ],
+  "derived_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analysis_results.json",
+      "sha256": "b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546",
+      "role": "derived",
+      "description": "Stored analysis results from parent experiment (has ISOLATED-A-LINK bug)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json",
+      "sha256": "ceb35ea2a041395540939f467704bb431040205e5b6cf95d9aa579effe230b92",
+      "role": "derived",
+      "description": "Complete reconstruction output with per-definition comparison"
+    }
+  ],
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35124660457",
+    "path": "research/experiments/EXP-INTEL-35124660457/handoff.json",
+    "sha256": "bb975d7af3a448eaf7d3ae40327e1cea38c414ae5edadc1e4a1dd1fb81038a59"
+  },
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "dependencies": ["numpy>=1.24"],
+    "working_directory": "/home/runner/work/Spider/Spider"
+  },
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-INTEL-35131994346/reconstruct.py",
+    "python3 -c \"import sys; sys.path.insert(0, 'research/experiments/EXP-INTEL-35124660457'); import analyze; analyze.main()\""
+  ],
+  "key_findings": [
+    "DEF-FULL-MAP and DEF-FORM-ONLY reconstruct perfectly from raw evidence",
+    "ISOLATED-A-LINK in stored results is identical to DEF-FULL-MAP (bug)",
+    "Committed script uses all-role density; uncommitted script uses per-definition filtering",
+    "Deduplication of cart_1 (8→7 tasks) is a simple but important difference"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Can a minimum prefix length threshold (Fix3) resolve the Fix2 protocol-only gap while preserving all 8 parent decision-rule conditions, and what is the prevalence of protocol-only over-parameterization patterns in a realistic synthetic URL corpus?",
+  "hypothesis": "Adding Fix3 (minimum prefix length threshold of 12 characters after scheme+authority delimiter) to distill_parameterized() rejects protocol-only prefixes like 'https://' (8 chars) and 'http://' (7 chars) while preserving binding_accuracy=1.0 on all 5 parent established conditions (P1/G1/G2/G3/G5) and slot_count=0 on null controls (N1_ORIGINAL/N1_CORRECTED). The realistic URL corpus reveals that protocol-only over-parameterization affects a measurable fraction of real API URL patterns, quantifying the cost impact before C-PRODUCT-ECON measurement.",
+  "falsifier": "Any of: (1) Fix3 causes any parent established condition (P1/G1/G2/G3/G5) to drop below binding_accuracy=1.0; (2) Fix3 fails to reject protocol-only URLs (slot_count > 0 for PROTOCOL_ONLY condition); (3) Fix3 incorrectly rejects legitimate path-prefix patterns (e.g., https://api.example.com/users/ with prefix length > 12); (4) the realistic corpus reveals that protocol-only patterns are the dominant URL class, implying the parameterized kernel is fundamentally misdesigned for real traffic.",
+  "baselines": [
+    "B_UNFIXED_PROTOCOL_ONLY: True unfixed heuristic (rfind('/') without Fix1/Fix2/Fix3) on protocol-only training data. Expected: over-parameterized template, slot_count=1. Documents combined fix necessity.",
+    "B_UNFIXED_G1: True unfixed heuristic (rfind('/') without Fix1/Fix2) on G1 training data (https://api.example.com/search?q={alpha,beta,delta}). Expected: suffix-corrupted template, binding_accuracy=0.0. Inherited from parent, confirms Fix1 necessity.",
+    "B_LITERAL: Literal mechanism confidence 0.5 < min_confidence 0.8, all resolutions EXPLORE/UNKNOWN, fail_rate=1.0. Confirms parameterized induction necessary.",
+    "B_REALISTIC_PROTOCOL_ONLY: Parameterized kernel (with Fix3) on realistic protocol-only patterns. Expected: slot_count=0, no over-parameterization. Quantifies Fix3 effectiveness on realistic data."
+  ],
+  "positive_control": "P1_PATH_PREFIX: 3 training observations of https://api.example.com/users/{A,B,C}. Expected: slot_count=1, binding_accuracy=1.0 for unseen D/E/F. Verifies Fix3 does not regress path-prefix binding.",
+  "null_control": "N1_ORIGINAL: cross-host URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c. Fix2 rejects: slot_count=0. Inherited from parent.\nN1_CORRECTED: truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z. Empty-prefix guard rejects: slot_count=0. Inherited from parent.\nPROTOCOL_ONLY: ['https://a.com/x','https://b.com/y','https://c.com/z']. Fix3 should now reject: slot_count=0 (previously slot_count=1 without Fix3). Primary Fix3 target.",
+  "measurement_validity": [
+    "Fix3 implemented as minimum prefix length threshold (12 characters) after scheme+authority delimiter in distill_parameterized() in src/spider/kernel.py",
+    "All parent conditions (P1/G1/G2/G3/G5/N1_ORIGINAL/N1_CORRECTED/B_LITERAL) tested identically to parent experiment (EXP-PRODUCT-35124662913)",
+    "Realistic URL corpus is synthetic but designed to approximate real API URL patterns (REST endpoints, web page URLs, service URLs, protocol-only patterns)",
+    "All conditions deterministic synthetic, zero model/network/browser calls",
+    "Fresh Python import per condition prevents cross-contamination",
+    "Fix3 is a additive guard: does not modify Fix1, Fix2, or slot_prefixes behavior"
+  ],
+  "decision_rule": "If ALL of: (1) Fix3 does not introduce import/syntax errors; (2) P1 slot_count=1 AND binding_accuracy=1.0; (3) G1 slot_count=1 AND binding_accuracy=1.0; (4) G2 slot_count=1 AND binding_accuracy=1.0; (5) G3 slot_count=1 AND binding_accuracy=1.0; (6) G5 slot_count=1 AND binding_accuracy=1.0; (7) N1_ORIGINAL slot_count=0; (8) N1_CORRECTED slot_count=0; (9) PROTOCOL_ONLY slot_count=0 (Fix3 primary target); (10) B_LITERAL fail_rate=1.0 -- verdict = SURVIVES_CURRENT_TEST. If any condition (2-9) fails: verdict = FALSIFIED-IN-SETTING. B_UNFIXED_PROTOCOL_ONLY and realistic corpus are reported for prevalence quantification but do not gate the decision rule.",
+  "product_consequence_positive": "C-PARAM-INHERIT protocol-only gap resolved. Claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2/Fix3 necessity quantified, protocol-only gap closed'. Path for C-PRODUCT-ECON measurement opens with clear protocol-only boundary. Product lane can proceed to real-browser cost measurement without protocol-only over-parameterization concern.",
+  "product_consequence_negative": "If Fix3 breaks legitimate binding or the realistic corpus reveals fundamental design issues, C-PARAM-INHERIT remains EXPERIMENTAL with unresolved protocol-only gap. Product lane cannot proceed to C-PRODUCT-ECON until the gap is resolved by a different mechanism (domain-aware validation, authority-boundary check, or pattern classification).",
+  "estimated_cost": "Very low: pure synthetic, offline. Fix3 implementation (~10 lines) + 12 parent conditions + 6 realistic corpus conditions = ~18 conditions x 3 training + 3 unseen = ~108 operations. Zero model/network/browser calls.",
+  "expected_information_gain": "High: directly resolves the protocol-only gap identified in parent handoff carry_forward.unknown and audit V6. Quantifies prevalence of protocol-only patterns in realistic URL corpus. Either clears the path for C-PRODUCT-ECON or identifies a fundamental design issue requiring different approach. The prevalence measurement is the missing piece that determines protocol-only gap severity."
+}

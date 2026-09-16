@@ -32,7 +32,9 @@ jobs:
         run: python -m compileall -q src scripts
 
       - name: Validate repository contracts
-        run: python scripts/validate_repo.py
+        run: |
+          python scripts/validate_repo.py
+          python scripts/validate_main_safety.py
 
       - name: Test product kernel
         run: PYTHONPATH=src python -m unittest discover -s tests -v
@@ -84,4 +86,5 @@ jobs:
       - name: Shell syntax
         run: |
           bash -n scripts/checkpoint.sh
+          bash -n scripts/main_safety_anchor.sh
           bash -n .github/scripts/run-opencode-resilient.sh

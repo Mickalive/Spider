@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35131994346",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "After the runtime lane removes the first-20 locatableSample cap, does full DOM enumeration confirm that the a→link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "why_next": "This experiment partially resolves the parent's provenance mismatch (2/3 definitions verified, 1 invalid due to copy-paste bug) but the formal measurement remains blocked: (1) the estimator inflates bias 4-7x by conflating total DOM counts with locatable counts (audit V1); (2) the canonical analysis script is not committed; (3) the ISOLATED-A-LINK stored results are invalid. The blocking substrate fix (locatableSample cap removal in runtime lane) would provide true full DOM enumeration, resolving the estimator validity issue and enabling a reproducible measurement. Additionally, the canonical script must be committed with 3-definition per-role filtering and cart_1 deduplication before re-run.",
+  "carry_forward": {
+    "established": [
+      "The uncommitted 3-definition per-role-filtered analysis is reconstructable from frozen raw evidence for DEF-FULL-MAP and DEF-FORM-ONLY within ±0.001 density tolerance, identical orderings, and identical C3 per definition (reconstruction_complete.json, audit V2_recomputed_metrics per_definition_comparison)",
+      "ISOLATED-A-LINK in stored analysis_results.json is invalid: byte-identical to DEF-FULL-MAP for all 7 tasks (truncated_count 8 vs correct 2, full_count 454.1 vs 393-397, densities 0.00516 vs 0.00128). This is a copy-paste bug, not a valid a-only analysis (audit V3_isolated_copy_paste_invalid)",
+      "Committed analyze.py uses all-role density (a+button+form+input+combobox+div+label+span) producing FALSIFIED-IN-SETTING (8 tasks, C3=false); stored results use per-definition filtering producing SURVIVES_CURRENT_TEST (7 tasks, DEF-FULL-MAP C3=true). The algorithmic difference explains the different verdicts (report.md section 3-4)",
+      "Cart_1 deduplication: raw evidence has 8 valid measurements but only 7 unique task_ids; committed script includes both cart_1 entries (result.json deduplication)",
+      "Directional finding: first-20 document-order truncation introduces page-type-dependent ordering change, robust across both inflated-DOM and locatable-scaled estimators and across committed and stored analysis scripts (parent carry_forward established)"
+    ],
+    "rejected": [
+      "Hypothesis that the provenance gap is irreconcilable — REJECTED: 2/3 definitions reconstruct perfectly from raw evidence (null_control outcome: 0/3 matches did not occur)",
+      "Hypothesis that stored ISOLATED-A-LINK results are valid — REJECTED: byte-identical to DEF-FULL-MAP, cannot be reproduced by a-only filtering (audit V3)",
+      "Hypothesis that committed analyze.py is the canonical 3-definition analysis — REJECTED: committed script uses different algorithm (all-role density) than the 3-definition per-role-filtered approach"
+    ],
+    "unknown": [
+      "Whether full DOM enumeration (locatableSample cap removal) changes density magnitudes, ordering significance, and null distribution shape beyond the tag-count estimator — the estimator inflates bias 4-7x (audit V1); true full enumeration needed via runtime substrate fix",
+      "Whether committed analyze.py should be accepted as canonical (all-role density, 8 tasks) or a new script with 3-definition filtering and deduplication should be committed — until committed, measurement remains non-reproducible from HEAD (audit required_fixes)",
+      "Whether corrected ISOLATED-A-LINK (ordering_changed=False) would alter C3 conclusions — recomputed ordering is cart>detail>product_listing identical to full ordering, failing C1 (result.json observations)",
+      "Whether the product_listing vs detail ordering swap is statistically significant — means within 2% inflated or 0.016 vs 0.008 locatable-scaled, n=3 per type, n=1 distinct cart, no CI reported (audit V4_small_N_single_site)",
+      "Whether menuitem/tab contribute additively when present — 0 counts in this sample, requires sample where those roles appear (parent carry_forward unknown)"
+    ],
+    "do_not_assume": [
+      "Do not assume ISOLATED-A-LINK stored verdict (ordering_changed=True) is valid — it is based on copy-paste data identical to DEF-FULL-MAP; correct computed verdict is ordering_changed=False (audit V3)",
+      "Do not assume the 98% relative bias is a valid locatable-density point estimate — it conflates total DOM counts (393-397 links) with locatable counts (~19 links); proper bound is 14-69% depending on page type (audit V1)",
+      "Do not assume the FALSIFIED verdict from EXP-INTEL-35112013458 is fully explained by truncation — this experiment estimates ordering change but does not re-run the null ROLE_MAP test on full estimates",
+      "Do not assume C3 passes universally — it passes for DEF-FULL-MAP only; DEF-FORM-ONLY fails for all 7 tasks (random samples show higher bias than truncation for form-heavy definitions) (parent carry_forward do_not_assume)",
+      "Do not assume ordering differences between product_listing and detail are statistically significant — means within 2% with n=3 per type and n=1 cart, no CI reported (audit V4)",
+      "Do not assume results generalize to other sites — bounded to n=7 distinct tasks, 1 Magento site, truncated-first-20 vs tag-count-estimated full DOM (audit V4, parent carry_forward)",
+      "Do not assume the random baseline advantage (1% mean for DEF-FULL-MAP) is scientifically meaningful — within simulation noise (1000 draws, fixed seed) and definition-dependent (parent carry_forward do_not_assume)"
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Full DOM enumeration (locatableSample cap removal) in runtime lane to resolve truncation bias and estimator validity",
+      "blocking": true
+    },
+    {
+      "type": "code",
+      "description": "Commit canonical analysis script with 3-definition per-role filtering (DEF-FULL-MAP: a+button+input+combobox, DEF-FORM-ONLY: button+combobox, ISOLATED-A-LINK: a only), cart_1 deduplication, and float scaling — or explicitly accept committed analyze.py as canonical",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Additional site(s) with non-zero menuitem/tab counts to test additivity of a→link + menuitem/tab",
+      "blocking": false
+    },
+    {
+      "type": "data",
+      "description": "More distinct cart pages (current n=1 distinct) to enable within-type variance estimation",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35131994346/result.json (reconstruction_success, per_definition_comparison, controls, deduplication)",
+    "research/experiments/EXP-INTEL-35131994346/audit.json (claim_ceiling PROVENANCE_PARTIAL, V1_estimator_inflation, V3_isolated_copy_paste_invalid, 6 required_fixes)",
+    "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json (DEF-FULL-MAP/DEF-FORM-ONLY exact match, ISOLATED-A-LINK mismatch)",
+    "research/experiments/EXP-INTEL-35131994346/reconstruct.py sha256 b435676812fc9fbc92e78d9ae0c073f98bf19b317e8ac24be85507716b2d433d",
+    "research/experiments/EXP-INTEL-35124660457/analysis_results.json sha256 b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546",
+    "research/experiments/EXP-INTEL-35124660457/analyze.py sha256 c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+    "research/experiments/EXP-INTEL-35124660457/handoff.json (parent carry_forward, blocking substrate+code dependencies)",
+    "research/experiments/EXP-INTEL-35124660457/verdict.json (MEASUREMENT_INVALID, V2_provenance_not_reproducible)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 (dom_stats.linksCount 393-397, locatable_elements 82/32/21)"
+  ],
+  "recommended_action": "Route to runtime lane to implement locatableSample cap removal (blocking substrate dependency). The next intel experiment should re-run null-model tests on full DOM enumeration data (same tasks, same Magento site) to determine whether truncation artifacts drove the FALSIFIED verdict from EXP-INTEL-35112013458. Additionally, commit the canonical analysis script implementing 3-definition per-role filtering with cart_1 deduplication and float scaling, or formally accept the committed analyze.py (all-role density) as canonical with an explicit scope note. Until both substrate fix and canonical script are available, the directional finding (truncation introduces page-type-dependent ordering change) is preserved but the formal measurement is invalid."
+}

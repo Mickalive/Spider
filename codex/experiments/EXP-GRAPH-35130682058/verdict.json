@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35130682058",
+  "lane": "graph",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Linear Fisher LDA ensemble of (1-Jaccard) and KS D fails all three frozen decision conditions on held-out test split (TP=0.5, FP=0.0, AUC=0.625). Positive control fails (TP=0.25 on training). Ensemble weights are inverted: both features inversely predict drift because noise patterns (nested_object_variation adding 2 fields) produce larger structural/temporal divergence than true drift (add_field adding 1 field). This confirms the parent's finding that the inverted direction is a confound of magnitude (2-field noise vs 1-field drift), not a property of the signal families per se. Bounded falsification ceiling: aggregated per-condition mean features on synthetic CPU-bound mock server, 4 sizes x 6 patterns, N=24 conditions (16 train/8 test). Does NOT close: nonlinear ensembles (SVM/RF), per-sample ROC, other signal families (session tokens, field-usage profiling, schema access patterns), real APIs with DB/cache/CDN, or direct schema comparison. Four single-signal families now tested and falsified (Jaccard, TF-IDF, response-time KS, linear ensemble); broader C-FRESHNESS remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "No product action. C-FRESHNESS does not advance; no mechanism passes the freshness gate.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Is direct schema comparison (structural diff of schema definitions, bypassing indirect behavioral/temporal signals entirely) required for reliable drift-vs-noise discrimination, or do fundamentally different signal families (session token validation, field-usage profiling) provide orthogonal discrimination that structural+temporal signals cannot?",
+  "reason": "The linear ensemble falsification is well-grounded: all three frozen decision conditions fail, positive control fails, audit recomputes all metrics exactly, and the inverted direction is confirmed as a magnitude confound (2-field noise vs 1-field drift). The audit's REVISE status reflects provenance hygiene issues (stale raw_evidence, prereg artifact, spec size mismatch) not scientific dispute — the falsification is valid. However, the ceiling is narrow: aggregated per-condition means, linear discriminant, synthetic mock server. The broader question of whether C-FRESHNESS can be achieved with fundamentally different approaches (direct schema comparison, behavioral signals, or nonlinear methods on richer features) remains open. The graph lane has now tested four single-signal families and one linear ensemble, all failing on the same mock server. The recommended next direction is materially orthogonal: direct schema comparison which bypasses indirect signals entirely, or session-level behavioral signals which test a different dimension of staleness.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35130682058/spec.json:question hypothesis falsifier decision_rule",
+    "research/experiments/EXP-GRAPH-35130682058/freeze.json:hashes",
+    "research/experiments/EXP-GRAPH-35130682058/result.json:metrics controls outcome=FALSIFIES",
+    "research/experiments/EXP-GRAPH-35130682058/audit.json:status=REVISE claim_ceiling recomputed_metrics validity_findings",
+    "research/experiments/EXP-GRAPH-35130682058/report.md:tables ROC analysis limitations",
+    "research/experiments/EXP-GRAPH-35130682058/provenance.json:parameters random_seed=20260916",
+    "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json:sha256 a6db4827a3c32663bea41b0506a54629473cf4f962856569518e16eec0b5a104",
+    "research/experiments/EXP-GRAPH-35083040517/handoff.json:carry_forward established rejected unknown do_not_assume",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json:sha256 20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json:sha256 ecf3fa32b6d2b1e70181cb0c2353d7e660b1cfe40a985b3ea45a8b2ba21bbe5e"
+  ]
+}

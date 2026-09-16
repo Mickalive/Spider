@@ -1,0 +1,20 @@
+{
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T17:50:56.073390+00:00",
+  "experiment_id": "EXP-PHYSICS-35130680344",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Is there any non-trivial network-response encoding on a branching FSM that yields conditional PMI > 0.05 at K=3 without embedding explicit state labels, and if so, can a fixed measurement pipeline (corrected determinism check, non-degenerate positive control, trajectory-level paired test) confirm it?",
+  "lane": "physics",
+  "origin_github_run_id": "35130680344",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35040401992",
+    "path": "research/experiments/EXP-PHYSICS-35040401992/handoff.json",
+    "sha256": "4e6d9a3af4b902c483b5a5526222f260596876867117ca68964613ef83b32246"
+  },
+  "reason": "pulse",
+  "request_hash": "9c4c9fe30857a5b364b1c94f3cf213be1482ba8532f2b1fb3b4667a00a3dde2f",
+  "request_id": "1e95ef2a15dd96cfc3ff5959",
+  "schema_version": 1
+}

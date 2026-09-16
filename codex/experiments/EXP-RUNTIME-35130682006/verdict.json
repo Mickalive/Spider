@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35130682006",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress after Content-Encoding:br removal) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under synthetic brotli quality selection from {4,5,6,7,8} via local Python proxy (N=20 per state, seed 44, 1KB compressible JSON). Algorithm-equivalence with gzip holds (diff=0.0). However, audit REVISE narrows claim ceiling: effective brotli diversity is 2 variants (q4 distinct vs q5-8 identical for all tested body types), not 5 distinct; the 5-level range is not a materially stronger stress test than binary {4,8} for these payload sizes. H3 (compressed <0.35) is falsified on /userinfo (0.4329 > 0.35). Producer's SUPPORTS outcome is accepted with narrowed ceiling per audit required_fixes.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization algorithm-equivalence validated for full brotli quality set {4,5,6,7,8} on synthetic proxy (audit.json recomputed_metrics max_abs_diff=0.0, C_ALGORITHM_EQUIVALENCE 0.0 pass true). However, effective brotli diversity is 2 variants (q4 vs q5-8 identical) not 5, so broadening from binary {4,8} to {4,5,6,7,8} is not a materially stronger stress test for 1KB JSON. Claim ceiling bounded to: synthetic Python proxy with mtime=0 deterministic compression, mock OAuth2 4 states with 3-way error collapse, single compressible payload ~1KB, single seed 44 with hash() non-determinism caveat. H3 (compressed <0.35) falsified on /userinfo (0.4329). Critical inherited blocker: real-CDN infrastructure validation remains untested. Do NOT promote to Product Core."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does decompression-normalization (SHA256 on decompressed body + status) preserve body-only discrimination on real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in the synthetic Python proxy?",
+  "reason": "The frozen decision rule SURVIVES_CURRENT_TEST fires: (1) decompressed hash variation=0 all states positive control PASS, (2) B-RANDOM=0.0 null control PASS (parent reference), (3) decompressed discrimination=0.5 on /userinfo >=0.5 PASS, (4) algorithm-equivalence diff=|0.5-0.5|=0.0 <0.1 PASS. ALGORITHM-EQUIVALENT fires. However, audit REVISE status with 4 required_fixes narrows the claim ceiling: (a) effective brotli diversity is 2 variants not 5 for tested payloads (audit validity_findings[0]: local brotli.compress verification shows q5-8 identical hex for all 5 body types); (b) hash()-based seed derivation is non-deterministic across PYTHONHASHSEED values (audit validity_findings[3]); (c) H3 compressed <0.35 is falsified on /userinfo (0.4329 > 0.35) per audit baseline_findings[2]; (d) report Finding 1 phrasing requires correction. All producer metrics independently recomputed and match exactly (audit.json recomputed_metrics max_abs_diff=0.0). The claim broadens from parent's binary {4,8} ceiling to full {4,5,6,7,8} set, but the broadening is weakly informative because intermediate levels collapse to identical output for these payload sizes. The critical inherited blocker — real-CDN infrastructure validation — remains untested and is the highest-information next question for C-MEAS-VALID.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35130682006/spec.json - frozen decision_rule SURVIVES if (1)decompressed variation 0 (2)B-RANDOM~0 (3)decompressed>=0.5 (4)|gzip-brotli|<0.1",
+    "research/experiments/EXP-RUNTIME-35130682006/result.json - DECOMPRESSED-VARYING-BROTLI decompressed 0.5/0.8333, compressed 0.4329/0.5767, controls 6/7 pass (C_QUALITY_VARIATION_ACTIVE fail), B-RANDOM 0.0",
+    "research/experiments/EXP-RUNTIME-35130682006/audit.json - status REVISE, producer_claim_supported false, 4 required_fixes, claim_ceiling bounded to synthetic proxy effective-binary diversity, recomputed_metrics max_abs_diff 0.0",
+    "research/experiments/EXP-RUNTIME-35130682006/raw_observations.json - 160 observations (1x2x4x20), Content-Encoding br 160/160, fingerprint hashes recomputed match",
+    "research/experiments/EXP-RUNTIME-35130682006/run_experiment.py - BROTLI_QUALITY_RANGE=(4,5,6,7,8) corrected from parent (4,8)",
+    "research/experiments/EXP-RUNTIME-35130682006/provenance.json - python 3.12.14 brotli 1.2.0, bug_fix from parent EXP-RUNTIME-35058619700",
+    "research/experiments/EXP-RUNTIME-35058619700/result.json - parent reference: DECOMPRESSED-VARYING-GZIP 0.5, DECOMPRESSED-VARYING-BROTLI binary {4,8} 0.5, compressed 0.2286",
+    "research/experiments/EXP-RUNTIME-35058619700/handoff.json - carry_forward established/rejected/unknown/do_not_assume, inherited real-CDN next_question",
+    "research/experiments/EXP-RUNTIME-35130682006/audit.json validity_findings[0] - brotli 5-level collapse to effective binary: local verification q5-8 identical hex for all body types",
+    "research/experiments/EXP-RUNTIME-35130682006/audit.json validity_findings[3] - hash() seed non-determinism: quality_rng seed = SEED + hash(condition) % 10000 varies across PYTHONHASHSEED"
+  ]
+}
