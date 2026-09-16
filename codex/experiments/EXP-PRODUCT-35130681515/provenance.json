@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "lane": "product",
+  "github_run_id": "35130681515",
+  "created_at": "2026-09-16T17:50:56.070960+00:00",
+  "executed_at": "2026-09-16T18:10:00.000000+00:00",
+  "commits": {
+    "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+    "kernel_py": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+    "models_py": "064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35124662913",
+    "verdict": "SURVIVES_CURRENT_TEST",
+    "handoff_sha256": "7a18259524e10192be19268385f7dc728e4fdf568c0c0c5b0c871ffd21631f0f"
+  },
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61",
+      "functions_added": [
+        "distill_parameterized",
+        "_is_protocol_only_prefix",
+        "_find_common_prefix_suffix",
+        "_validate_prefix_boundary",
+        "_collect_leaf_paths",
+        "_get_value_at_path",
+        "_set_template_value",
+        "_compute_jaccard",
+        "_compute_structure_similarity",
+        "_check_constant_value_anchor",
+        "_field_path_to_slot_name",
+        "_is_metadata_path"
+      ]
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd",
+      "changes": ["Added slot_prefixes: dict[str, str] field to Mechanism dataclass"]
+    },
+    "experiment_script": {
+      "path": "research/experiments/EXP-PRODUCT-35130681515/run_experiment.py",
+      "sha256": "f80127512134384bb10764a009ec8b0543197646050c130630d671e7acf72899"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35130681515/raw_evidence.json",
+      "sha256": "b984c4ebbddaaceac559c37416466ee33ff22f4a3ae06ae56f65b8a17f48e64d"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-35130681515/result.json",
+      "sha256": null
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-35130681515/report.md",
+      "sha256": null
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_calls": 0,
+    "network_calls": 0,
+    "browser_calls": 0,
+    "deterministic": true,
+    "note": "All conditions are deterministic synthetic, zero model/network/browser calls"
+  },
+  "frozen_inputs": {
+    "request_hash": "ad0a2d2c9638c460209a936e2a2b528ac02421851901463920fc17167aa81d82",
+    "spec_hash": "6fa889cbc97d084f8ed6dd761b70a15d760094334d1afd2e7b24d5b0165a9b0b",
+    "prereg_hash": "dbb6b4cffcaafc8dea7d2317e48c8f2e399dd208a7d0c0aa0a971523514ea296",
+    "freeze_hash": "3d10ab9f180af2b51eb5399baa5e93c3cf56f117f5084b2a212cb536475e1bc8"
+  },
+  "reproduction": {
+    "command": "cd research/experiments/EXP-PRODUCT-35130681515 && python run_experiment.py",
+    "expected_outcome": "14/18 conditions passed, verdict SURVIVES_CURRENT_TEST",
+    "prerequisites": ["src/spider/kernel.py with Fix3 implementation", "src/spider/models.py with slot_prefixes field"]
+  }
+}

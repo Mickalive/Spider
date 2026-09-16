@@ -1,0 +1,31 @@
+name: SPIDER Main Safety Anchor
+run-name: Main safety anchor ${{ github.run_id }}
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "13,28,43,58 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-main-writer
+  cancel-in-progress: false
+
+jobs:
+  anchor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Preserve monotonic main history
+        shell: bash
+        run: bash scripts/main_safety_anchor.sh

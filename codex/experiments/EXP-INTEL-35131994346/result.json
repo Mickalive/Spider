@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35131994346",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "reconstruction_success": {
+      "DEF-FULL-MAP": "MATCH",
+      "DEF-FORM-ONLY": "MATCH",
+      "ISOLATED-A-LINK": "MISMATCH"
+    },
+    "committed_script_output": {
+      "decision": "FALSIFIED-IN-SETTING",
+      "n_tasks": 8,
+      "c1_ordering_changed": true,
+      "c2_tasks_gt_20pct": 8,
+      "c3_random_baseline_lower": false
+    },
+    "stored_results_output": {
+      "decision": "SURVIVES_CURRENT_TEST",
+      "n_tasks": 7,
+      "n_definitions": 3,
+      "c1_ordering_changed": true,
+      "c2_tasks_gt_20pct": 7,
+      "c3_random_baseline_lower_def_full_map": true
+    },
+    "per_definition_comparison": {
+      "DEF-FULL-MAP": {
+        "truncated_ordering_match": true,
+        "full_ordering_match": true,
+        "ordering_changed_match": true,
+        "per_task_density_match": "ALL_7_TASKS_MATCH"
+      },
+      "DEF-FORM-ONLY": {
+        "truncated_ordering_match": true,
+        "full_ordering_match": true,
+        "ordering_changed_match": true,
+        "per_task_density_match": "ALL_7_TASKS_MATCH"
+      },
+      "ISOLATED-A-LINK": {
+        "truncated_ordering_match": false,
+        "full_ordering_match": true,
+        "ordering_changed_match": false,
+        "per_task_density_match": "ALL_7_TASKS_MISMATCH",
+        "computed_truncated_ordering": ["cart", "detail", "product_listing"],
+        "stored_truncated_ordering": ["cart", "product_listing", "detail"],
+        "stored_is_identical_to_def_full_map": true
+      }
+    },
+    "deduplication": {
+      "original_tasks": 8,
+      "deduplicated_tasks": 7,
+      "removed_task": "cart_1 (duplicate)"
+    }
+  },
+  "controls": {
+    "B1_COMMITTED_SCRIPT": {
+      "description": "Run committed analyze.py on frozen raw evidence, verify it yields FALSIFIED-IN-SETTING (8 tasks, all-role density, C3=false)",
+      "expected": "FALSIFIED-IN-_SETTING with 8 tasks, all-role density, C3=false",
+      "observed": "FALSIFIED-IN-SETTING with 8 tasks (cart_1 duplicate), all-role density, C3=false",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json"
+    },
+    "B2_STORED_RESULTS": {
+      "description": "Load stored analysis_results.json, verify 3-definition structure and 7-task deduplication",
+      "expected": "3-definition structure (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK), 7 tasks",
+      "observed": "3-definition structure present, 7 tasks, but ISOLATED-A-LINK is identical to DEF-FULL-MAP (bug)",
+      "pass": "PARTIAL",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analysis_results.json"
+    },
+    "B3_RECONSTRUCTION": {
+      "description": "Attempt to reconstruct the analysis pipeline from raw evidence + stored results",
+      "expected": "Reconstruct script that reproduces stored 3-definition results within tolerance",
+      "observed": "DEF-FULL-MAP and DEF-FORM-ONLY reconstruct perfectly. ISOLATED-A-LINK does NOT reconstruct because stored results have a bug (identical to DEF-FULL-MAP)",
+      "pass": "PARTIAL",
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json"
+    },
+    "positive_control": {
+      "description": "The committed analyze.py must reproduce its known output when run on the frozen raw evidence",
+      "expected": "FALSIFIED-IN-SETTING with 8 tasks, all-role density",
+      "observed": "FALSIFIED-IN-SETTING with 8 tasks, all-role density, C3=false",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json"
+    },
+    "null_control": {
+      "description": "If reconstruction produces results matching neither committed script nor stored results, provenance gap is irreconcilable",
+      "expected": "No match for any definition",
+      "observed": "2 of 3 definitions match stored results perfectly, 1 matches committed script behavior",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35131994346/reconstruct.py",
+      "sha256": "b435676812fc9fbc92e78d9ae0c073f98bf19b317e8ac24be85507716b2d433d",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json",
+      "sha256": "ceb35ea2a041395540939f467704bb431040205e5b6cf95d9aa579effe230b92",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analyze.py",
+      "sha256": "c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analysis_results.json",
+      "sha256": "b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "The committed analyze.py and stored analysis_results.json produce fundamentally different outputs: committed yields FALSIFIED-IN-SETTING (8 tasks, all-role density, C3=false) while stored yields SURVIVES_CURRENT_TEST (7 tasks, 3-definition filtered, C3=true per DEF-FULL-MAP)",
+    "The 3-definition analysis was successfully reconstructed for DEF-FULL-MAP and DEF-FORM-ONLY: per-task densities, orderings, and random baselines match the stored results exactly (within floating-point tolerance)",
+    "ISOLATED-A-LINK in the stored results is IDENTICAL to DEF-FULL-MAP (same truncated_count, full_count, densities for all 7 tasks). This is a bug: ISOLATED-A-LINK should count only 'a' elements (truncated_count=2 for listing tasks), but stored results count all DEF-FULL-MAP roles (truncated_count=8)",
+    "The committed script counts ALL roles (a+button+form+input+combobox+div+label+span) for density, while the uncommitted script filtered by definition. This explains the different verdicts: all-role density inflates the denominator, making C3 false",
+    "The uncommitted script deduplicates cart_1 (8→7 tasks), which the committed script does not. This is a simple deduplication that the committed script could easily implement",
+    "The random baseline computation in the stored results uses the full DOM estimates (tag counts) as the probability distribution, matching the committed script's approach. This means the null model draws from the full DOM distribution, not the locatable pool",
+    "The key provenance gap: the uncommitted script that correctly implements per-definition role filtering and deduplication was never committed. The committed script has a different algorithm (all-role density) that yields a different verdict"
+  ],
+  "validity_notes": [
+    "The reconstruction is exact for DEF-FULL-MAP and DEF-FORM-ONLY: per-task densities match within floating-point tolerance (< 0.001). This confirms the uncommitted script used the same DOM tag counts and scaling factor as the committed script",
+    "The ISOLATED-A-LINK bug in the stored results means the stored results cannot be taken at face value for that definition. The bug appears to be a copy-paste error where ISOLATED-A-LINK was filled with DEF-FULL-MAP data",
+    "The committed script's all-role density approach is a valid analysis, but it answers a different question than the 3-definition approach. The committed script asks 'does truncation bias exist across all interactive elements?' while the 3-definition approach asks 'does truncation bias exist for specific role subsets?'",
+    "The deduplication of cart_1 is trivial but important: the raw evidence has 8 measurements but only 7 unique tasks. The committed script includes both cart_1 entries, which inflates the task count and could bias results if cart_1 has different characteristics than other tasks",
+    "The random baseline uses 1000 simulations with seed=42. The results are stable across runs. The baseline draws from the full DOM distribution (tag counts), which is appropriate for testing whether first-20 truncation introduces document-order bias beyond what random sampling would produce"
+  ],
+  "unresolved": [
+    "The ISOLATED-A-LINK bug in the stored results means the verdict for that definition is unreliable. The correct verdict for ISOLATED-A-LINK would be: truncated ordering ['cart', 'detail', 'product_listing'] = full ordering ['cart', 'detail', 'product_listing'], so ordering_changed=False, which would fail C1",
+    "The committed script should be updated to: (1) deduplicate cart_1, (2) implement per-definition role filtering, (3) run all 3 definitions. This would make the committed script canonical and eliminate the provenance mismatch",
+    "The parent experiment's measurement is still blocked by the provenance mismatch until the committed script is updated or the correct uncommitted script is committed",
+    "The ISOLATED-A-LINK definition may not be scientifically meaningful in this sample because it only counts 'a' elements, which dominate the full DOM (393-397 links). The ordering for ISOLATED-A-LINK would be the same as DEF-FULL-MAP if the bug were fixed, because 'a' is the dominant role in both definitions"
+  ]
+}

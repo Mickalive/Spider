@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35130682006",
+  "lane": "runtime",
+  "github_run_id": "35130682006",
+  "execution_timestamp": "2026-09-16T18:00:00.000000+00:00",
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "frozen_sha": {
+    "request.json": "b66a03d98a288ef7e529118918bbab2195638ee9f690c27d3789c3ffaae301d8",
+    "spec.json": "9a19f25b7cd607e03ddfd265e7c085041e8865b6eb7bec4fc8233aa97d6bcb30",
+    "prereg.md": "d5b7a78ef1bba569583dc1d239a5ad5e8191a5501236e7d20fa07eed42c6cf6d"
+  },
+  "artifacts": {
+    "run_experiment.py": "d26c7ec28a10c2d563599b4f464d3ec1112e472683e193fb2f22249e79bc526f",
+    "raw_observations.json": "f706441e1f8e2e6f06d64520f7e1ed1b482d4d132988255aa4ef12babbbc2cff",
+    "result.json": "c089fe9942e0f855b68747c90e121a31da545373c11b2d6934c47355ab47d9af",
+    "report.md": "61162cbe1b2731c926d406ab0ca4328aa20a145db5d854914c7e383a20bae3df",
+    "provenance.json": "e32e9bc941c797dae97499228cee3e20e2de144c396e2b3ae563854e891a9f7d"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "gzip_mtime": 0,
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2",
+    "pyjwt_version": "2.14.0"
+  },
+  "infrastructure": {
+    "mock_server_port": 5000,
+    "proxy_port": 5001,
+    "mock_server": "Custom Python HTTPServer with JWT validation",
+    "proxy": "Custom Python HTTPServer with condition-based brotli compression",
+    "compression": "brotli.compress() with quality parameter from BROTLI_QUALITY_RANGE"
+  },
+  "frozen_parameters": {
+    "SEED": 44,
+    "REPS": 20,
+    "BODY_SIZE": 1024,
+    "CLIENT_SECRET": "spider-secret-12345",
+    "BROTLI_QUALITY_RANGE": [4, 5, 6, 7, 8],
+    "AUTH_STATES": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "CONDITIONS": ["DECOMPRESSED-VARYING-BROTLI"]
+  },
+  "bug_fix": {
+    "description": "BROTLI_QUALITY_RANGE corrected from (4,8) to (4,5,6,7,8)",
+    "parent_experiment": "EXP-RUNTIME-35058619700",
+    "parent_bug_line": "run_experiment.py:64 BROTLI_QUALITY_RANGE=(4,8)",
+    "parent_effect": "randint(0,1) yielded only qualities 4 or 8, not preregistered {4,5,6,7,8}",
+    "fix_applied": "BROTLI_QUALITY_RANGE = (4, 5, 6, 7, 8) with randint(0, len-1) yielding 5 levels"
+  },
+  "parent_reference_data": {
+    "source_experiment": "EXP-RUNTIME-35058619700",
+    "B_DECOMPRESSED_VARYING_GZIP_userinfo": 0.5,
+    "B_DECOMPRESSED_VARYING_GZIP_introspect": 0.5,
+    "B_COMPRESSED_VARYING_GZIP_userinfo": 0.1714473684210526,
+    "B_COMPRESSED_VARYING_GZIP_introspect": 0.19399122807017544,
+    "B_STATUS_ONLY_userinfo": 0.5,
+    "B_STATUS_ONLY_introspect": 0.0,
+    "B_RANDOM_all": 0.0,
+    "audited_max_abs_diff": 0.0,
+    "audited_status": "REVISE"
+  },
+  "execution_commands": [
+    "pip install brotli PyJWT numpy requests",
+    "cd research/experiments/EXP-RUNTIME-35130682006 && python run_experiment.py"
+  ],
+  "total_requests": 160,
+  "conditions_executed": 1,
+  "conditions_referenced_from_parent": 4
+}

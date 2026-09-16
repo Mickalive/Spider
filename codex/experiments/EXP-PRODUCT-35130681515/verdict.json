@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Fix3 (_is_protocol_only_prefix structural '/' check) closes the Fix2 protocol-only gap for scheme+authority-only prefixes (PROTOCOL_ONLY slot_count=0 vs unfixed slot_count=1, delta=1) while preserving all 5 parent established single-slot bindings (P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1) and nulls N1_ORIGINAL/N1_CORRECTED slot_count=0 with B_LITERAL fail_rate=1.0 in committed-code synthetic single-slot setting. Claim ceiling advances to: committed-code synthetic single-slot with prefix metadata, Fix1/Fix2/Fix3 necessity quantified, protocol-only gap closed. Still EXPERIMENTAL because: (1) all 18 conditions deterministic synthetic with zero model/network/browser calls (audit V5); (2) C-PRODUCT-ECON end-to-end cost unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) slot_prefixes extraction is metadata-only, VALUE CONTRACT consumption unexercised (audit V2). Audit PASS with producer_claim_supported=true. Five low/medium severity validity findings disclosed (V1 spec/impl divergence, V2 slot_prefixes unreachable, V3 provenance hash stale, V4 realistic corpus expectations, V5 external validity bound) — none gate the decision rule."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Protocol-only gap resolved by Fix3, unblocking the path to C-PRODUCT-ECON measurement. No economics measurement performed in this experiment (all conditions synthetic, zero model/network/browser calls). Next step: measure end-to-end amortized cost per successful real-browser task against literal/fixed baselines using a real-browser test harness with model/network/browser calls."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Does the parameterized distillation kernel (Fix1+Fix2+Fix3) save total cost per successful real-browser task (C-PRODUCT-ECON), and what is the prevalence of protocol-only over-parameterization patterns in live browser traffic?",
+  "reason": "All 10 frozen decision-rule conditions pass. Fix3 resolves the Fix2 protocol-only gap identified in parent handoff (EXP-PRODUCT-35124662913): PROTOCOL_ONLY condition now produces slot_count=0 (was slot_count=1 without Fix3). All 5 parent established conditions survive with binding_accuracy=1.0 and slot_count=1. Null controls N1_ORIGINAL/N1_CORRECTED maintain slot_count=0. B_LITERAL fail_rate=1.0 confirms parameterized induction necessary. Audit PASS independently recomputes all metrics matching producer. Audit claim_ceiling explicitly bounds claim to committed-code synthetic single-slot setting; does NOT establish real-browser external validity, C-PRODUCT-ECON cost savings, multi-slot induction, or real-world URL prevalence. The protocol-only gap was the blocking dependency for C-PRODUCT-ECON measurement; with it resolved, the product lane can proceed to real-browser cost measurement.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35130681515/result.json: metrics decision_rule_passed=true 10/10, controls P1/G1/G2/G3/G5/N1_ORIGINAL/N1_CORRECTED/PROTOCOL_ONLY/B_LITERAL all passed",
+    "research/experiments/EXP-PRODUCT-35130681515/audit.json: status=PASS producer_claim_supported=true claim_ceiling, V1-V5 validity_findings, B1-B4 baseline_findings",
+    "research/experiments/EXP-PRODUCT-35130681515/raw_evidence.json: conditions P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1, PROTOCOL_ONLY slot_count=0, B_UNFIXED_PROTOCOL_ONLY slot_count=1, B_UNFIXED_G1 binding_accuracy=0.0",
+    "research/experiments/EXP-PRODUCT-35130681515/spec.json: frozen decision_rule 10 conditions",
+    "src/spider/kernel.py sha256=8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb: _is_protocol_only_prefix:278-299, distill_parameterized:302-437",
+    "research/experiments/EXP-PRODUCT-35124662913/handoff.json: parent SURVIVES_CURRENT_TEST, protocol-only gap definition, carry_forward"
+  ]
+}

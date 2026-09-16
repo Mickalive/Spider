@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35124660457",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Measurement invalid: committed analyze.py (sha256 c2a085bb) does not reproduce stored result.json/analysis_results.json — running committed code on frozen raw evidence yields 8 tasks (duplicate cart_1 not deduplicated), all-role density (not per-definition filtering), and verdict FALSIFIED-IN-SETTING with C3=false, contradicting stored SURVIVES_CURRENT_TEST (audit V2_provenance_not_reproducible, severity=high). Additionally, full-DOM estimator conflates total DOM tag counts (e.g., dom_stats.linksCount=393 for listings) with locatable counts (locatable_elements=82), inflating bias magnitudes ~4-7x and making advertised 98% relative bias and 0.29 absolute density unreliable as locatable-density point estimates (audit V1_dom_counts_are_not_locatable, severity=high). C3 decision condition is ambiguous across multi-definition scope: DEF-FULL-MAP random baseline lower for all 7 tasks (mean trunc 0.2921 vs random 0.2888, 1% advantage), but DEF-FORM-ONLY fails for all 7 tasks (mean trunc 0.0048 vs random 0.0066, random higher). Under frozen conjunctive rule (ANY condition fails => FALSIFIED-IN-SETTING), C3 failure for DEF-FORM-ANY triggers falsification. Despite these validity issues, the directional finding that first-20 document-order truncation introduces page-type-dependent bias is robust: ordering changes under both inflated-DOM and locatable-scaled estimators (product_listing vs detail swap for DEF-FULL-MAP; cart vs detail swap for DEF-FORM-ONLY), and all 3 definitions show ordering changes. The measurement is not reproducible from committed artifacts and cannot formally advance C-MEAS-VALID."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "After the runtime lane removes the first-20 locatableSample cap, does full DOM enumeration confirm that the a→link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "reason": "The audit identifies three high-severity validity findings that prevent a formal SURVIVES or FALSIFIED verdict: (1) provenance mismatch — committed analyze.py does not produce stored results, yielding a different verdict when re-run; (2) full-DOM estimator inflation — using total DOM tag counts as locatable counts inflates bias ~4-7x; (3) C3 ambiguity — the frozen decision rule does not specify how to handle multi-definition C3 results (DEF-FULL-MAP passes, DEF-FORM-ONLY fails). The frozen decision rule's MEASUREMENT_INVALID clause applies when the measurement cannot be independently verified from committed artifacts, which is the case here. However, the directional finding (truncation introduces page-type-dependent ordering change) is informative and preserved in carry_forward. The blocking substrate fix (locatableSample cap removal in runtime lane) remains the highest-value next action, as it would provide true full-DOM enumeration that resolves both the estimator validity issue and the original scientific question.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35124660457/audit.json — status=REVISE, producer_claim_supported=false, validity_findings V1_dom_counts_are_not_locatable V2_provenance_not_reproducible, baseline_findings B3_random_baseline, claim_ceiling",
+    "research/experiments/EXP-INTEL-35124660457/result.json — metrics.ordering_comparison (all 3 definitions changed), per_task_bias (98%+ inflated), random_baseline_summary (DEF-FORM-ONLY all_lower=false)",
+    "research/experiments/EXP-INTEL-35124660457/analysis_results.json — 3-definition analysis, DEF-FORM-ONLY random_baseline all_lower=false, DEF-FULL-MAP all_lower=true",
+    "research/experiments/EXP-INTEL-35124660457/analyze.py — committed script that yields FALSIFIED-IN-SETTING (C3=false, 8 tasks, all-role density) when re-run on frozen raw evidence",
+    "research/experiments/EXP-INTEL-35124660457/spec.json — frozen decision_rule 9.1-9.3 (conjunctive SURVIVES, ANY fails => FALSIFIED, MEASUREMENT_INVALID if data incomplete)",
+    "research/experiments/EXP-INTEL-35124660457/prereg.md — sections 6.2 (relative bias definition), 9.1-9.3 (decision rules), 6.4 (random simulation)",
+    "research/experiments/EXP-INTEL-35112013458/handoff.json — parent carry_forward (null mean 0.52 > observed 0.3), blocking substrate dependency, next_question",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json — dom_stats.linksCount 393-397, locatable_elements 82/32/21, total_dom_elements 1696/1395/1304"
+  ]
+}
