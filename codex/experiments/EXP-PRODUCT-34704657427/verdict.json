@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34704657427",
+  "lane": "product",
+  "decision": "REVISE",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Revision required before claim ceiling can advance. The computation works (non-empty slot_prefixes for P1/G3/G5, binding_accuracy=1.0 on all 5 established conditions, template invariant holds). However the frozen decision rule criterion 5 fails as written: G3 slot_prefixes observed 'orgs/acme/repos/main/issues/' vs frozen expected 'repos/main/issues/'. Spec amendment required to reconcile. Additionally B_UNFIXED baseline was run against P1 (non-discriminating for Fix1) instead of G1 as frozen spec required — baseline strength unverified. Fix2 protocol-only gap ('https://' over-parameterization) disclosed but not resolved. Claim ceiling bounded to revision-bounded committed-code synthetic single-slot with non-empty prefix metadata; cannot advance until revision clears."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Amend the G3 slot_prefixes expected value in spec.json to 'orgs/acme/repos/main/issues/' (full path segment from authority end, more correct for VALUE CONTRACT stripping) or trim extraction to 'repos/main/issues/'? Then rerun B_UNFIXED against G1 query-string training data as frozen spec required, and decide whether Fix2 protocol-only 'https://' gap needs minimum prefix length threshold.",
+  "reason": "The frozen decision rule requires all 8 conditions to pass with exact expected values. G3 condition fails strict criterion 5: slot_prefixes observed {'url':'orgs/acme/repos/main/issues/'} vs frozen expected {'url':'repos/main/issues/'}. The intent is achieved (non-empty, functional for VALUE CONTRACT prefix-stripping), but the spec must be amended to match observed behavior. The auditor's required_fixes[0] is upheld: either amend spec expected value or trim extraction. B_UNFIXED baseline ran against P1 (non-discriminating for Fix1) instead of G1 as frozen spec required — auditor required_fixes[1] upheld. Fix2 protocol-only gap (auditor required_fixes[2]) is a pre-existing unresolved issue acknowledged in parent handoff carry_forward.unknown, not introduced by this experiment. No binding regressions: all 5 established conditions binding_accuracy=1.0, null controls pass, template invariant holds, slot_prefixes is metadata-only.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34704657427/spec.json decision_rule criterion 5 (G3 slot_prefixes expected repos/main/issues/)",
+    "research/experiments/EXP-PRODUCT-34704657427/prereg.md Section 5.1 (G3 expected slot_prefixes repos/main/issues/) and Section 9.1 (decision rule 8 conditions)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V1_RECOMPUTED_NON_EMPTY_WITH_G3_VALUE_MISMATCH (severity medium, G3 observed orgs/acme/repos/main/issues/ vs expected repos/main/issues/)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json B2_B_UNFIXED_WRONG_CONDITION_NON_DISCRIMINATING (severity medium, B_UNFIXED ran P1 not G1)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V5_PROTOCOL_ONLY_GAP_STILL_PRESENT (severity medium, https:// passes delimiter check)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json required_fixes[0] (G3 spec mismatch), required_fixes[1] (B_UNFIXED rerun), required_fixes[2] (protocol-only disclosure)",
+    "research/experiments/EXP-PRODUCT-34704657427/result.json metrics p1/g1/g2/g3/g5 binding_accuracy=1.0 slot_count=1, slot_prefixes non-empty, template_invariant_holds=true",
+    "research/experiments/EXP-PRODUCT-34704657427/raw_evidence.json conditions G3_DEEP_PATH slot_prefixes orgs/acme/repos/main/issues/ binding_correct 3/3",
+    "research/experiments/EXP-PRODUCT-34704657427/raw_evidence.json controls G3_DEEP_PATH passed=true slot_prefixes_observed orgs/acme/repos/main/issues/",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V2_BINDING_NO_REGRESSION_VERIFIED (no binding regression after slot_prefixes fix)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V3_NULL_CONTROLS_RECOMPUTED_VALID (N1_ORIGINAL/N1_CORRECTED slot_count=0)",
+    "research/experiments/EXP-PRODUCT-34704657427/provenance.json substrate committed code, kernel.py sha256 1880ef67",
+    "research/experiments/EXP-PRODUCT-34685457833/handoff.json parent handoff with carry_forward and audit V5/V6 findings",
+    "research/claims/registry.json C-PARAM-INHERIT status=EXPERIMENTAL, C-PRODUCT-ECON status=HYPOTHESIS"
+  ]
+}

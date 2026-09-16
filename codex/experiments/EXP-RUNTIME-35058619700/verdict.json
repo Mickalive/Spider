@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35058619700",
+  "lane": "runtime",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization (SHA256 on decompressed body + status via gzip.decompress/brotli.decompress after Content-Encoding removal) preserves body-only discrimination at the structural ceiling of 0.5 under synthetic gzip quality variation {1,3,5,7,9} (collapsing to 3-4 distinct compressed outputs for 1KB JSON) and under binary brotli variation {4,8} on mock OAuth2 server via synthetic Python proxy (N=20 per state, seed 44, 1KB JSON). Strongest isolation is on /introspect where status_only=0.0 and decompressed=0.5 confirms body signal; /userinfo 0.5 conflates status+body. Compressed-byte-only hashing degrades to 0.17-0.19 under gzip varying (vs 0.22/0.38 under tested brotli binary) confirming stronger gzip threat for this payload. Algorithm-equivalence at 0.0 diff is demonstrated ONLY for gzip collapsed 3-4-level vs brotli binary {4,8}, NOT for full brotli {4,5,6,7,8} due to BROTLI_QUALITY_RANGE bug (audit finding 1). Claim BOUNDED to: synthetic proxy with mtime=0 deterministic gzip, mock server, 1KB JSON, seed 44. NOT justified for real-CDN universal deployment, nor for other content-types/sizes, nor for full 5-level brotli range until re-run after fix, nor for missing/incorrect/double Content-Encoding."
+    }
+  ],
+  "product_action": "No promotion. Audit flagged BROTLI_QUALITY_RANGE bug (BROTLI_QUALITY_RANGE=(4,8) yields only {4,8} not preregistered {4,5,6,7,8}) requiring re-run before algorithm-equivalence claim can support product deployment. Decompression-normalization is bounded to synthetic proxy; real-CDN validation remains the critical blocker for production.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing BROTLI_QUALITY_RANGE to (4,5,6,7,8) and re-executing DECOMPRESSED-VARYING-BROTLI with N=20 per state, does |B-DECOMPRESSED-VARYING-GZIP - B-DECOMPRESSED-VARYING-BROTLI| remain <0.1 for the full 5-level brotli range, and does the /introspect compressed variation become >1 for error bodies at larger sizes?",
+  "reason": "Producer outcome is MIXED per frozen decision rules: decompression-normalization preserves discrimination at 0.5 under all tested conditions (all SURVIVES_CURRENT_TEST criteria pass), but compressed-byte hashing degrades to 0.17-0.19 under gzip quality variation (below 0.35 threshold, triggering MIXED). Independent audit confirms all metrics recomputed exactly (max_abs_diff=0.0) but: (1) flags BROTLI_QUALITY_RANGE bug limiting brotli to binary {4,8} not preregistered {4,5,6,7,8}, requiring re-run before algorithm-equivalence claim is justified; (2) sets narrower claim ceiling bounded to synthetic proxy, 1KB JSON, seed 44; (3) notes determinism-by-construction (gzip mtime=0 is deterministic by implementation, passing verifies code correctness not CDN property); (4) identifies synthetic-to-real gap as inherited unresolved blocker. The brotli quality range fix is the smallest actionable step that can change the claim ceiling and unblock product consideration.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35058619700/result.json - metrics 10 cells, controls 7/7 pass, MIXED outcome, decompressed=0.5 all conditions, compressed-varying-gzip 0.1714",
+    "research/experiments/EXP-RUNTIME-35058619700/audit.json - status REVISE, claim_ceiling, validity_findings[0] high-severity BROTLI_QUALITY_RANGE bug, recomputed_metrics max_abs_diff 0.0, baseline_findings all baselines with strength assessments",
+    "research/experiments/EXP-RUNTIME-35058619700/raw_observations.json - 800 observations, compressed/decompressed fingerprint hashes verified, hash 63c477e4...",
+    "research/experiments/EXP-RUNTIME-35058619700/run_experiment.py - BROTLI_QUALITY_RANGE=(4,8) bug line 64, _get_brotli_quality line 249-253",
+    "research/experiments/EXP-RUNTIME-35058619700/spec.json - frozen claim_ids C-MEAS-VALID, decision_rule, baselines, measurement_validity",
+    "research/experiments/EXP-RUNTIME-35058619700/provenance.json - python 3.12.14, brotli 1.2.0, 800 requests, seed 44",
+    "research/experiments/EXP-RUNTIME-34986155186/handoff.json - parent synthetic brotli ceiling 0.5, inherited real-CDN question"
+  ]
+}

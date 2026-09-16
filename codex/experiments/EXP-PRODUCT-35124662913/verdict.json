@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35124662913",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "All 8 frozen decision-rule conditions pass with binding_accuracy=1.0. G3 slot_prefixes amended expected value validated. Fix1 necessity delta=1.0 (maximum) confirmed on discriminating G1 condition. Fix2 necessity confirmed on discriminating N1_ORIGINAL condition. Three parent required_fixes cleared (spec-vs-implementation mismatch, B_UNFIXED wrong condition, disclosure). Claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2 necessity quantified'. Remains EXPERIMENTAL (not VALIDATED/SHIPPED) because: (1) all conditions deterministic synthetic with zero model/browser/network calls; (2) end-to-end product economics C-PRODUCT-ECON unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) protocol-only gap documented but unresolved. Material change from parent: previously unmeasured Fix1/Fix2 necessity now quantified; parent required_fixes resolved."
+    }
+  ],
+  "product_action": "C-PARAM-INHERIT clears synthetic gate. Next product gate is C-PRODUCT-ECON (end-to-end amortized economics on real agents). The protocol-only gap (PROTOCOL_ONLY slot_count=1, https://${url}) must be resolved with a minimum prefix length or domain-aware threshold before C-PRODUCT-ECON to avoid protocol-only over-parameterization inflating false parameter counts in real traffic.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the parameterized distillation kernel (Fix1+Fix2+slot_prefixes) save total cost per successful real-browser task (C-PRODUCT-ECON), and does the Fix2 protocol-only gap produce measurable over-parameterization in live browser traffic?",
+  "reason": "Producer status=COMPLETE outcome=SUPPORTS. Independent audit status=PASS, producer_claim_supported=true, required_fixes empty. All 8 decision-rule conditions pass: P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1; N1_ORIGINAL/N1_CORRECTED slot_count=0; B_LITERAL fail_rate=1.0. G3 slot_prefixes amended expected 'orgs/acme/repos/main/issues/' validated (clears parent required_fix 1). B_UNFIXED_G1 binding_accuracy=0.0 confirms Fix1 necessity (delta=1.0, clears parent required_fix 2). B_UNFIXED_N1 slot_count=1 confirms Fix2 necessity. PROTOCOL_ONLY correctly disclosed as boundary condition (clears parent required_fix 3). Template invariance preserved. G4 architectural bound persists but is not decision-relevant. Claim ceiling bounded to synthetic single-slot; external validity unproven by design.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35124662913/result.json metrics outcome=SUPPORTS decision_rule_passed=8 total_conditions=11",
+    "research/experiments/EXP-PRODUCT-35124662913/audit.json status=PASS producer_claim_supported=true required_fixes=[] claim_ceiling",
+    "research/experiments/EXP-PRODUCT-35124662913/raw_evidence.json conditions P1/G1/G2/G3/G5 binding_accuracy=1.0 N1_ORIGINAL/N1_CORRECTED slot_count=0 B_UNFIXED_G1 binding_accuracy=0.0 B_UNFIXED_N1 slot_count=1 PROTOCOL_ONLY slot_count=1",
+    "research/experiments/EXP-PRODUCT-35124662913/spec.json decision_rule 8 conditions frozen",
+    "research/experiments/EXP-PRODUCT-35124662913/prereg.md Sections 5.1-5.4 conditions and 11 what-not-established",
+    "research/experiments/EXP-PRODUCT-35124662913/freeze.json hashes",
+    "src/spider/kernel.py sha256=1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4",
+    "src/spider/models.py sha256=065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json required_fixes 3 (parent REVISE)"
+  ]
+}
