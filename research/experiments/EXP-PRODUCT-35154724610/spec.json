@@ -1,17 +1,42 @@
 {
   "experiment_id": "EXP-PRODUCT-35154724610",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Do parameterized mechanisms induced by distill_parameterized() execute correctly over real HTTP, producing expected response states for unseen resource IDs — and does parameterized resolution reduce token cost compared to literal mechanism replay?",
+  "hypothesis": "Parameterized mechanisms from Fix1+Fix2+Fix3 distill_parameterized() in src/spider/kernel.py bind correctly to real HTTP endpoints (jsonplaceholder.typicode.com) with binding_accuracy >= 1.0 on 3 parameterized endpoints x 3 unseen IDs each, and parameterized resolution uses fewer tokens than literal mechanism replay.",
+  "falsifier": "Any of: (1) binding_accuracy < 1.0 on real HTTP execution (unexpected status, wrong body, connection failure, query encoding error); (2) parameterized token cost >= literal token cost; (3) any existing kernel regression test fails after HTTP execution path is exercised.",
+  "baselines": [
+    {
+      "id": "B_LITERAL_HTTP_EXECUTION",
+      "description": "Literal mechanism (exact URL template) executed over real HTTP for same unseen IDs; serves as upper-bound cost reference and confirms endpoint reachability",
+      "expected": "All 9 literal HTTP calls succeed with correct status/body; literal token cost >= parameterized token cost"
+    },
+    {
+      "id": "B_UNFIXED_PROTOCOL_ONLY",
+      "description": "Unfixed heuristic (pre-Fix3) on same training observations; confirms Fix3 necessity by showing unfixed produces over-parameterized templates for protocol-only URLs",
+      "expected": "Unfixed heuristic produces slot_count=1 for protocol-only URLs (https://jsonplaceholder.typicode.com/) while fixed produces slot_count=0"
+    }
+  ],
+  "positive_control": {
+    "id": "P1_REAL_HTTP_BINDING",
+    "description": "3 parameterized endpoints (fetch_posts GET, fetch_users GET, fetch_comments GET) executed over real HTTP with 3 unseen IDs each (99, 100, 101); each call must return status 200 and valid JSON matching expected resource type",
+    "expected": "binding_accuracy = 1.0 (9/9 correct), all status=200, all response bodies valid JSON"
+  },
+  "null_control": {
+    "id": "N1_NONEXISTENT_ENDPOINT",
+    "description": "Parameterized mechanism resolved with non-existent resource ID (999999) on each endpoint; HTTP execution must return 404 or empty array, not crash or return unrelated data",
+    "expected": "All 3 calls return status 404 or empty array; no crashes, no incorrect data"
+  },
+  "measurement_validity": [
+    "Real HTTP GET requests executed against jsonplaceholder.typicode.com (or documented equivalent) for binding accuracy validation",
+    "Response status code and body verified against expected resource type (post/user/comment JSON schema)",
+    "Token cost measured by actual tokenization of resolution input/output, not arbitrary arithmetic",
+    "Training observations use same P1_API_ENDPOINTS as parent (fetch_posts 5 obs GET+PUT, fetch_users 3, fetch_comments 3); unseen IDs 99, 100, 101",
+    "Existing kernel regression tests (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention) re-run after HTTP execution to confirm no side effects"
+  ],
+  "decision_rule": "All of: (1) P1_REAL_HTTP_BINDING binding_accuracy >= 1.0 (9/9 correct HTTP executions); (2) N1_NONEXISTENT_ENDPOINT all 3 calls return 404/empty without crash; (3) B_LITERAL_HTTP_EXECUTION all 9 literal calls succeed; (4) B_UNFIXED_PROTOCOL_ONLY confirms Fix3 necessity (unfixed slot_count > fixed for protocol-only URLs); (5) existing_kernel_tests all pass; (6) parameterized_token_cost < literal_token_cost (actual tokenization). If ANY condition fails, the experiment FALSIFIES the claim at the tested scope.",
+  "product_consequence_positive": "C-PARAM-INHERIT advances from EXPERIMENTAL toward PRODUCT_CORE with real HTTP binding correctness established; C-PRODUCT-ECON gains first real cost measurement; product may include parameterized mechanisms in shipping kernel with HTTP execution validated.",
+  "product_consequence_negative": "C-PARAM-INHERIT REJECTED at real HTTP scope; parameterized mechanisms cannot be trusted for real endpoint execution; product must fall back to literal mechanism replay; C-PRODUCT-ECON remains HYPOTHESIS with no cost data.",
+  "estimated_cost": "Low: single Python script with urllib/requests, 12 HTTP calls to free API, no LLM calls, no browser automation, ~2 minutes execution time",
+  "expected_information_gain": "High: closes V2_BINDING_NOT_HTTP (highest-severity audit gap from parent); either validates or falsifies real HTTP binding correctness for parameterized mechanisms; enables or blocks C-PRODUCT-ECON cost measurement"
 }
