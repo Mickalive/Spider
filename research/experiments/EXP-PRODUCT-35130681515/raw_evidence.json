@@ -1,0 +1,1081 @@
+{
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "conditions": {
+    "P1_PATH_PREFIX": {
+      "condition_id": "P1_PATH_PREFIX",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-e61444153216eeea",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "D"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/D"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/D"
+        },
+        {
+          "params": {
+            "url": "E"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/E"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/E"
+        },
+        {
+          "params": {
+            "url": "F"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/F"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/F"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.17380714416503906
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "condition_id": "G1_QUERY_STRING_SIMPLE",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-0e324b30efbbc6a7",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/search?q=${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "search?q="
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "gamma"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=gamma"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/search?q=gamma"
+        },
+        {
+          "params": {
+            "url": "epsilon"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=epsilon"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/search?q=epsilon"
+        },
+        {
+          "params": {
+            "url": "zeta"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=zeta"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/search?q=zeta"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.08535385131835938
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "condition_id": "G2_QUERY_STRING_MULTIPARAM",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-6da9f80eb0be1708",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/items?category=books&page=${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "items?category=books&page="
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items?category=books&page=4"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/items?category=books&page=4"
+        },
+        {
+          "params": {
+            "url": "5"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items?category=books&page=5"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/items?category=books&page=5"
+        },
+        {
+          "params": {
+            "url": "6"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/items?category=books&page=6"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/items?category=books&page=6"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.07414817810058594
+    },
+    "G3_DEEP_PATH": {
+      "condition_id": "G3_DEEP_PATH",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-03c7726c733d5e32",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/orgs/acme/repos/main/issues/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/orgs/acme/repos/main/issues/4"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/orgs/acme/repos/main/issues/4"
+        },
+        {
+          "params": {
+            "url": "5"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/orgs/acme/repos/main/issues/5"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/orgs/acme/repos/main/issues/5"
+        },
+        {
+          "params": {
+            "url": "6"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/orgs/acme/repos/main/issues/6"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/orgs/acme/repos/main/issues/6"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.06103515625
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "condition_id": "G5_PATH_QUERY_HYBRID",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-c8ed49ec7c53b12b",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${url}/items?page=1"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "dave"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/dave/items?page=1"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/dave/items?page=1"
+        },
+        {
+          "params": {
+            "url": "eve"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/eve/items?page=1"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/eve/items?page=1"
+        },
+        {
+          "params": {
+            "url": "frank"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/users/frank/items?page=1"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/users/frank/items?page=1"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.06866455078125
+    },
+    "N1_ORIGINAL": {
+      "condition_id": "N1_ORIGINAL",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": false,
+      "mechanism_id": null,
+      "action_template": null,
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0,
+      "slot_prefixes": {},
+      "distill_diagnostics": null,
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.026464462280273438
+    },
+    "N1_CORRECTED": {
+      "condition_id": "N1_CORRECTED",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": false,
+      "mechanism_id": null,
+      "action_template": null,
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0,
+      "slot_prefixes": {},
+      "distill_diagnostics": null,
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.019550323486328125
+    },
+    "PROTOCOL_ONLY": {
+      "condition_id": "PROTOCOL_ONLY",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": false,
+      "mechanism_id": null,
+      "action_template": null,
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0,
+      "slot_prefixes": {},
+      "distill_diagnostics": null,
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.01811981201171875
+    },
+    "B_LITERAL": {
+      "condition_id": "B_LITERAL",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "literal-auto",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/users/A"
+      },
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0.5,
+      "slot_prefixes": {},
+      "distill_diagnostics": {
+        "mean_jaccard": 1.0,
+        "has_constant_anchor": true,
+        "anchor_path": [
+          "method"
+        ],
+        "shared_paths": [
+          "method",
+          "url"
+        ],
+        "slot_prefixes": {},
+        "mechanism_count": 3
+      },
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 0,
+        "executable_count": 0,
+        "slot_count_correct": true,
+        "fail_rate": 1.0
+      },
+      "baseline_note": "Literal mechanism reuse: confidence 0.5 < min_confidence 0.8, all resolutions return EXPLORE/UNKNOWN"
+    },
+    "B_UNFIXED_PROTOCOL_ONLY": {
+      "condition_id": "B_UNFIXED_PROTOCOL_ONLY",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "unfixed-546c4f07ebc699bf",
+      "action_template": {
+        "method": "GET",
+        "url": "https://${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "x2"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://x2"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://x2"
+        },
+        {
+          "params": {
+            "url": "y2"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://y2"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://y2"
+        },
+        {
+          "params": {
+            "url": "z2"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://z2"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://z2"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "baseline_note": "True unfixed heuristic: rfind('/') without Fix1/Fix2/Fix3. Baseline type: baseline_unfixed"
+    },
+    "B_UNFIXED_G1": {
+      "condition_id": "B_UNFIXED_G1",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "unfixed-8e6c337c6202a487",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/search?q=${url}a"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "search?q="
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "gamma"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=gammaa"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/search?q=gamma"
+        },
+        {
+          "params": {
+            "url": "epsilon"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=epsilona"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/search?q=epsilon"
+        },
+        {
+          "params": {
+            "url": "zeta"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/search?q=zetaa"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://api.example.com/search?q=zeta"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "baseline_note": "True unfixed heuristic: rfind('/') without Fix1/Fix2/Fix3. Baseline type: baseline_unfixed"
+    },
+    "B_REALISTIC_PROTOCOL_ONLY": {
+      "condition_id": "B_REALISTIC_PROTOCOL_ONLY",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": false,
+      "mechanism_id": null,
+      "action_template": null,
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0,
+      "slot_prefixes": {},
+      "distill_diagnostics": null,
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.025272369384765625
+    },
+    "R1_REST_API": {
+      "condition_id": "R1_REST_API",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-5b473c7eabf2bac4",
+      "action_template": {
+        "method": "GET",
+        "url": "https://api.example.com/v1/users/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "4"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/v1/users/4"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/v1/users/4"
+        },
+        {
+          "params": {
+            "url": "5"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/v1/users/5"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/v1/users/5"
+        },
+        {
+          "params": {
+            "url": "6"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://api.example.com/v1/users/6"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://api.example.com/v1/users/6"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.08654594421386719
+    },
+    "R2_QUERY_HEAVY": {
+      "condition_id": "R2_QUERY_HEAVY",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-fd21d01a718d8ea9",
+      "action_template": {
+        "method": "GET",
+        "url": "https://search.example.com/results?q=${url}&limit=10"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": "results?q="
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "fish"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://search.example.com/results?q=fish&limit=10"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://search.example.com/results?q=fish&page=1&limit=10"
+        },
+        {
+          "params": {
+            "url": "snake"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://search.example.com/results?q=snake&limit=10"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://search.example.com/results?q=snake&page=2&limit=10"
+        },
+        {
+          "params": {
+            "url": "lizard"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://search.example.com/results?q=lizard&limit=10"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": "https://search.example.com/results?q=lizard&page=3&limit=10"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.0705718994140625
+    },
+    "R3_PROTOCOL_ONLY_DEEP": {
+      "condition_id": "R3_PROTOCOL_ONLY_DEEP",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-f95bf2da42abf7c8",
+      "action_template": {
+        "method": "GET",
+        "url": "https://cdn.example.com/images/${url}.png"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "hero"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://cdn.example.com/images/hero.png"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://cdn.example.com/images/hero.png"
+        },
+        {
+          "params": {
+            "url": "thumb"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://cdn.example.com/images/thumb.png"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://cdn.example.com/images/thumb.png"
+        },
+        {
+          "params": {
+            "url": "wide"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://cdn.example.com/images/wide.png"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://cdn.example.com/images/wide.png"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.054836273193359375
+    },
+    "R4_CROSS_PROTOCOL": {
+      "condition_id": "R4_CROSS_PROTOCOL",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": false,
+      "mechanism_id": null,
+      "action_template": null,
+      "parameter_slots": [],
+      "slot_count": 0,
+      "confidence": 0,
+      "slot_prefixes": {},
+      "distill_diagnostics": null,
+      "resolution_results": [],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "slot_count_correct": false
+      },
+      "distill_time_ms": 0.022172927856445312
+    },
+    "R5_MINIMAL_PREFIX": {
+      "condition_id": "R5_MINIMAL_PREFIX",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-b0c53495cc4400ad",
+      "action_template": {
+        "method": "GET",
+        "url": "https://example.com/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "d"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://example.com/d"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://example.com/d"
+        },
+        {
+          "params": {
+            "url": "e"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://example.com/e"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://example.com/e"
+        },
+        {
+          "params": {
+            "url": "f"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://example.com/f"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": true,
+          "expected_url": "https://example.com/f"
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 1.0,
+        "binding_correct_count": 3,
+        "executable_count": 3,
+        "slot_count_correct": true
+      },
+      "distill_time_ms": 0.04601478576660156
+    },
+    "R6_PROTOCOL_ONLY_SHALLOW": {
+      "condition_id": "R6_PROTOCOL_ONLY_SHALLOW",
+      "training_count": 3,
+      "unseen_count": 3,
+      "distill_success": true,
+      "mechanism_id": "param-c840c61c1dfbe7df",
+      "action_template": {
+        "method": "GET",
+        "url": "https://a.com/${url}"
+      },
+      "parameter_slots": [
+        "url"
+      ],
+      "slot_count": 1,
+      "confidence": 0.9,
+      "slot_prefixes": {
+        "url": ""
+      },
+      "resolution_results": [
+        {
+          "params": {
+            "url": "p"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://a.com/p"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        },
+        {
+          "params": {
+            "url": "q"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://a.com/q"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        },
+        {
+          "params": {
+            "url": "r"
+          },
+          "bound_action": {
+            "method": "GET",
+            "url": "https://a.com/r"
+          },
+          "status": "EXECUTABLE",
+          "binding_correct": false,
+          "expected_url": null
+        }
+      ],
+      "metrics": {
+        "binding_accuracy": 0.0,
+        "binding_correct_count": 0,
+        "executable_count": 3,
+        "slot_count_correct": false
+      },
+      "distill_time_ms": 0.04935264587402344
+    }
+  },
+  "controls": {
+    "P1_PATH_PREFIX": {
+      "type": "positive_control",
+      "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'users/'}",
+      "passed": true,
+      "slot_prefixes_observed": {
+        "url": ""
+      },
+      "slot_prefixes_expected": {
+        "url": "users/"
+      },
+      "slot_prefixes_match": false
+    },
+    "N1_ORIGINAL": {
+      "type": "fix2_target",
+      "expected": "slot_count=0",
+      "passed": true
+    },
+    "N1_CORRECTED": {
+      "type": "null_control_corrected",
+      "expected": "slot_count=0",
+      "passed": true
+    },
+    "PROTOCOL_ONLY": {
+      "type": "fix3_target",
+      "expected": "slot_count=0 (Fix3 primary target)",
+      "passed": true
+    },
+    "B_LITERAL": {
+      "type": "baseline",
+      "expected": "fail_rate=1.0",
+      "passed": true
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0",
+      "passed": true
+    },
+    "G3_DEEP_PATH": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'orgs/acme/repos/main/issues/'}",
+      "passed": true,
+      "slot_prefixes_observed": {
+        "url": ""
+      },
+      "slot_prefixes_expected": {
+        "url": "orgs/acme/repos/main/issues/"
+      },
+      "slot_prefixes_match": false
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "type": "regression",
+      "expected": "slot_count=1, binding_accuracy=1.0, slot_prefixes={'url': 'users/'}",
+      "passed": true,
+      "slot_prefixes_observed": {
+        "url": ""
+      },
+      "slot_prefixes_expected": {
+        "url": "users/"
+      },
+      "slot_prefixes_match": false
+    }
+  },
+  "aggregate": {
+    "total_conditions": 18,
+    "passed_conditions": 14,
+    "condition_pass_rate": 0.7777777777777778,
+    "overall_binding_accuracy": 0.75,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  },
+  "condition_pass": {
+    "P1_PATH_PREFIX": true,
+    "G1_QUERY_STRING_SIMPLE": true,
+    "G2_QUERY_STRING_MULTIPARAM": true,
+    "G3_DEEP_PATH": true,
+    "G5_PATH_QUERY_HYBRID": true,
+    "N1_ORIGINAL": true,
+    "N1_CORRECTED": true,
+    "PROTOCOL_ONLY": true,
+    "B_LITERAL": true,
+    "B_UNFIXED_PROTOCOL_ONLY": true,
+    "B_UNFIXED_G1": false,
+    "B_REALISTIC_PROTOCOL_ONLY": true,
+    "R1_REST_API": true,
+    "R2_QUERY_HEAVY": false,
+    "R3_PROTOCOL_ONLY_DEEP": true,
+    "R4_CROSS_PROTOCOL": false,
+    "R5_MINIMAL_PREFIX": true,
+    "R6_PROTOCOL_ONLY_SHALLOW": false
+  },
+  "fix3_necessity": {
+    "b_unfixed_protocol_slot_count": 1,
+    "fixed_protocol_slot_count": 0,
+    "fix3_rejects_protocol_only": true,
+    "unfixed_allows_protocol_only": true,
+    "interpretation": "Fix3 successfully rejects protocol-only prefixes that the unfixed heuristic allows."
+  },
+  "fix1_necessity": {
+    "fixed_g1_binding_accuracy": 1.0,
+    "unfixed_g1_binding_accuracy": 0.0,
+    "delta": 1.0
+  },
+  "realistic_corpus": {
+    "slot_counts": {
+      "R1_REST_API": 1,
+      "R2_QUERY_HEAVY": 1,
+      "R3_PROTOCOL_ONLY_DEEP": 1,
+      "R4_CROSS_PROTOCOL": 0,
+      "R5_MINIMAL_PREFIX": 1,
+      "R6_PROTOCOL_ONLY_SHALLOW": 1
+    },
+    "binding_accuracies": {
+      "R1_REST_API": 1.0,
+      "R2_QUERY_HEAVY": 0.0,
+      "R3_PROTOCOL_ONLY_DEEP": 1.0,
+      "R4_CROSS_PROTOCOL": 0.0,
+      "R5_MINIMAL_PREFIX": 1.0,
+      "R6_PROTOCOL_ONLY_SHALLOW": 0.0
+    },
+    "protocol_only_rejected_count": 1,
+    "total_realistic": 6,
+    "prevalence": 0.16666666666666666
+  },
+  "slot_prefixes_assessment": {
+    "p1_observed": {
+      "url": ""
+    },
+    "p1_expected": {
+      "url": "users/"
+    },
+    "p1_matches": false,
+    "g3_observed": {
+      "url": ""
+    },
+    "g3_expected": {
+      "url": "orgs/acme/repos/main/issues/"
+    },
+    "g3_matches": false,
+    "g5_observed": {
+      "url": ""
+    },
+    "g5_expected": {
+      "url": "users/"
+    },
+    "g5_matches": false
+  },
+  "template_invariance": {
+    "slot_prefixes_is_metadata_only": true
+  },
+  "decision_rule_evaluation": {
+    "p1_passes": true,
+    "g1_passes": true,
+    "g2_passes": true,
+    "g3_passes": true,
+    "g5_passes": true,
+    "n1_original_passes": true,
+    "n1_corrected_passes": true,
+    "protocol_only_passes": true,
+    "b_literal_passes": true,
+    "pipeline_no_errors": true,
+    "all_ten_pass": true,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  },
+  "fixes_applied": {
+    "fix1_suffix_guard": "Exclude single-char suffixes not preceded by structural delimiters (?, =, &)",
+    "fix2_delimiter_bound_prefix": "Last-char of prefix in /?=&",
+    "fix3_protocol_only_guard": "_is_protocol_only_prefix: rejects scheme+authority-only prefixes with path < 3 chars after authority",
+    "empty_prefix_guard": "Reject parameterization when common prefix is empty"
+  },
+  "substrate": {
+    "module": "src.spider.kernel",
+    "approach": "committed code (no monkey-patching)",
+    "kernel_sha256": "8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb",
+    "models_sha256": "064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd",
+    "bind_function": "actual kernel._bind (template substitution)"
+  }
+}

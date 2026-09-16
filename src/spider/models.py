@@ -39,6 +39,7 @@ class Mechanism:
     evidence: list[str] = field(default_factory=list)
     confidence: float = 0.0
     invalidated: bool = False
+    slot_prefixes: dict[str, str] = field(default_factory=dict)
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
