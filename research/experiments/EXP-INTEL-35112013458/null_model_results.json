@@ -1,0 +1,394 @@
+{
+  "experiment_id": "EXP-INTEL-35112013458",
+  "parent_baselines": {
+    "DEF_FULL_MAP_ordering": [
+      "cart",
+      "product_listing",
+      "detail"
+    ],
+    "DEF_FULL_MAP_means": {
+      "product_listing": 0.005134861654950757,
+      "detail": 0.004280429875511604,
+      "cart": 0.005607476635514018
+    },
+    "DEF_FORM_ONLY_ordering": [
+      "product_listing",
+      "cart",
+      "detail"
+    ],
+    "DEF_FORM_ONLY_means": {
+      "product_listing": 0.003851146241213068,
+      "detail": 0.0017121719502046417,
+      "cart": 0.002803738317757009
+    }
+  },
+  "raw_role_counts": {
+    "a": 16,
+    "form": 19,
+    "div": 50,
+    "label": 13,
+    "span": 27,
+    "combobox": 8,
+    "button": 22,
+    "input": 5
+  },
+  "test1_random_null": {
+    "n_iterations": 1000,
+    "n_raw_roles": 8,
+    "raw_roles": [
+      "a",
+      "button",
+      "combobox",
+      "div",
+      "form",
+      "input",
+      "label",
+      "span"
+    ],
+    "null_mean_pairwise_agreement": 0.5275,
+    "null_p95_pairwise_agreement": 1,
+    "observed_agreement": 0.3,
+    "exceeds_null_mean": false,
+    "exceeds_null_p95": false,
+    "ordering_distribution": {
+      "('cart', 'detail', 'product_listing')": 702,
+      "('cart', 'product_listing', 'detail')": 156,
+      "('product_listing', 'cart', 'detail')": 88,
+      "('detail', 'cart', 'product_listing')": 49,
+      "('product_listing', 'detail', 'cart')": 5
+    },
+    "unique_orderings_in_null": 5,
+    "top_ordering_fraction": 0.702
+  },
+  "test2_single_role": {
+    "per_role": {
+      "a": {
+        "ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0012837154137376892,
+          "detail": 0.0017121719502046417,
+          "cart": 0.001869158878504673
+        },
+        "total_elements": 16,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 2,
+          "listing_beauty-personal-care": 2,
+          "listing_electronics": 2,
+          "detail_camera": 2,
+          "detail_vr_bag": 2,
+          "detail_pet_camera": 2,
+          "cart_1": 2
+        },
+        "degenerate": false
+      },
+      "button": {
+        "ordering": [
+          "product_listing",
+          "cart",
+          "detail"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0032092885343442228,
+          "detail": 0.0008560859751023209,
+          "cart": 0.001869158878504673
+        },
+        "total_elements": 22,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 5,
+          "listing_beauty-personal-care": 5,
+          "listing_electronics": 5,
+          "detail_camera": 1,
+          "detail_vr_bag": 1,
+          "detail_pet_camera": 1,
+          "cart_1": 2
+        },
+        "degenerate": false
+      },
+      "combobox": {
+        "ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0006418577068688446,
+          "detail": 0.0008560859751023209,
+          "cart": 0.0009345794392523365
+        },
+        "total_elements": 8,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 1,
+          "listing_beauty-personal-care": 1,
+          "listing_electronics": 1,
+          "detail_camera": 1,
+          "detail_vr_bag": 1,
+          "detail_pet_camera": 1,
+          "cart_1": 1
+        },
+        "degenerate": false
+      },
+      "div": {
+        "ordering": [
+          "detail",
+          "cart",
+          "product_listing"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0025674308274753785,
+          "detail": 0.006848687800818567,
+          "cart": 0.0065420560747663555
+        },
+        "total_elements": 50,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 4,
+          "listing_beauty-personal-care": 4,
+          "listing_electronics": 4,
+          "detail_camera": 8,
+          "detail_vr_bag": 8,
+          "detail_pet_camera": 8,
+          "cart_1": 7
+        },
+        "degenerate": false
+      },
+      "form": {
+        "ordering": [
+          "product_listing",
+          "cart",
+          "detail"
+        ],
+        "ordering_values": {
+          "product_listing": 0.001925573120606534,
+          "detail": 0.0017121719502046417,
+          "cart": 0.001869158878504673
+        },
+        "total_elements": 19,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 3,
+          "listing_beauty-personal-care": 3,
+          "listing_electronics": 3,
+          "detail_camera": 2,
+          "detail_vr_bag": 2,
+          "detail_pet_camera": 2,
+          "cart_1": 2
+        },
+        "degenerate": false
+      },
+      "input": {
+        "ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0,
+          "detail": 0.0008560859751023209,
+          "cart": 0.0009345794392523365
+        },
+        "total_elements": 5,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 0,
+          "listing_beauty-personal-care": 0,
+          "listing_electronics": 0,
+          "detail_camera": 1,
+          "detail_vr_bag": 1,
+          "detail_pet_camera": 1,
+          "cart_1": 1
+        },
+        "degenerate": false
+      },
+      "label": {
+        "ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0006418577068688446,
+          "detail": 0.0017121719502046417,
+          "cart": 0.001869158878504673
+        },
+        "total_elements": 13,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 1,
+          "listing_beauty-personal-care": 1,
+          "listing_electronics": 1,
+          "detail_camera": 2,
+          "detail_vr_bag": 2,
+          "detail_pet_camera": 2,
+          "cart_1": 2
+        },
+        "degenerate": false
+      },
+      "link": {
+        "ordering": [
+          "product_listing",
+          "detail",
+          "cart"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        },
+        "total_elements": 0,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 0,
+          "listing_beauty-personal-care": 0,
+          "listing_electronics": 0,
+          "detail_camera": 0,
+          "detail_vr_bag": 0,
+          "detail_pet_camera": 0,
+          "cart_1": 0
+        },
+        "degenerate": true
+      },
+      "menuitem": {
+        "ordering": [
+          "product_listing",
+          "detail",
+          "cart"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        },
+        "total_elements": 0,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 0,
+          "listing_beauty-personal-care": 0,
+          "listing_electronics": 0,
+          "detail_camera": 0,
+          "detail_vr_bag": 0,
+          "detail_pet_camera": 0,
+          "cart_1": 0
+        },
+        "degenerate": true
+      },
+      "span": {
+        "ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0025674308274753785,
+          "detail": 0.0025682579253069626,
+          "cart": 0.002803738317757009
+        },
+        "total_elements": 27,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 4,
+          "listing_beauty-personal-care": 4,
+          "listing_electronics": 4,
+          "detail_camera": 3,
+          "detail_vr_bag": 3,
+          "detail_pet_camera": 3,
+          "cart_1": 3
+        },
+        "degenerate": false
+      },
+      "tab": {
+        "ordering": [
+          "product_listing",
+          "detail",
+          "cart"
+        ],
+        "ordering_values": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        },
+        "total_elements": 0,
+        "per_task_counts": {
+          "listing_clothing-shoes-jewelry": 0,
+          "listing_beauty-personal-care": 0,
+          "listing_electronics": 0,
+          "detail_camera": 0,
+          "detail_vr_bag": 0,
+          "detail_pet_camera": 0,
+          "cart_1": 0
+        },
+        "degenerate": true
+      }
+    },
+    "matches_parent_ordering": {
+      "a": false,
+      "button": true,
+      "combobox": false,
+      "div": false,
+      "form": true,
+      "input": false,
+      "label": false,
+      "link": false,
+      "menuitem": false,
+      "span": false,
+      "tab": false
+    },
+    "n_unique_orderings": 3,
+    "unique_orderings": [
+      [
+        "product_listing",
+        "cart",
+        "detail"
+      ],
+      [
+        "cart",
+        "detail",
+        "product_listing"
+      ],
+      [
+        "detail",
+        "cart",
+        "product_listing"
+      ]
+    ],
+    "n_degenerate": 3,
+    "any_matches_parent": true
+  },
+  "test3_isolated_a_link": {
+    "isolated_a_link_ordering": [
+      "cart",
+      "product_listing",
+      "detail"
+    ],
+    "isolated_a_link_means": {
+      "product_listing": 0.005134861654950757,
+      "detail": 0.004280429875511604,
+      "cart": 0.005607476635514018
+    },
+    "def_full_map_ordering": [
+      "cart",
+      "product_listing",
+      "detail"
+    ],
+    "def_full_map_means": {
+      "product_listing": 0.005134861654950757,
+      "detail": 0.004280429875511604,
+      "cart": 0.005607476635514018
+    },
+    "def_form_only_ordering": [
+      "product_listing",
+      "cart",
+      "detail"
+    ],
+    "def_form_only_means": {
+      "product_listing": 0.003851146241213068,
+      "detail": 0.0017121719502046417,
+      "cart": 0.002803738317757009
+    },
+    "matches_def_full_map": true,
+    "matches_def_form_only": false,
+    "interpretation": "a\u2192link alone drives reversal"
+  },
+  "decision": {
+    "cond1_null_confirms": false,
+    "cond2_no_single_role_invariant": false,
+    "cond3_a_link_matches": true,
+    "verdict": "FALSIFIED-IN-SETTING"
+  }
+}
