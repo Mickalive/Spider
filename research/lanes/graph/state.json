@@ -1,14 +1,14 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35010853847",
-  "last_experiment_id": "EXP-GRAPH-34788722106",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35010853847",
   "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Can alternative staleness signals (session token validation, semantic embedding similarity, response-time profiling) distinguish true drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard-based freshness detection?",
+  "next_question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-16T00:35:20.310695+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-16T05:15:18.175310+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
 }

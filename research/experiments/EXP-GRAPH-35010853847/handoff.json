@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35010853847",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+  "why_next": "TF-IDF bag-of-words semantic similarity is falsified under structural noise (FP=1.0, inverted direction, Mann-Whitney p=1.0). The token-based representational approach has been tested twice now (Jaccard structural, TF-IDF semantic) and fails both times because any token change — whether drift or noise — reduces similarity proportionally. Response-time profiling is a fundamentally different signal dimension (temporal/measurement-based rather than representational) and has not been tested. It could succeed where token-based approaches fail if structural noise produces different response-time signatures than true drift (e.g., field churn changes response size predictably, while new business logic changes latency distribution). This moves the frontier to a materially orthogonal mechanism rather than refining a failed representational approach.",
+  "carry_forward": {
+    "established": [
+      "TF-IDF bag-of-words semantic similarity on (field_name:field_type) text pairs achieves TP=0.972 but FP=1.0 on structural noise at all schema sizes 10–50 fields — falsified in this setting. (result.json metrics.overall_tp_rate_true_drift=0.9722, overall_fp_rate_noise=1.0, audit.json claim_ceiling)",
+      "The separation direction is INVERTED: structural noise produces LOWER semantic similarity (more divergent) than true drift at all sizes, with Cohen's d 1.2–1.9 in the wrong direction and Mann-Whitney one-sided p=1.0 at all 4 sizes. (result.json per_schema_size.*.mann_whitney_p=1.0, cohens_d 1.2062–1.8897)",
+      "Positive control (add_field) passes: 100% detection at all sizes, mean semantic similarity 0.89–0.98 below threshold. Null control (fresh copies) passes: 0% FP, similarities exactly 1.0. Pipeline is not trivially broken. (result.json controls.positive_control_add_field PASS, null_control_fresh PASS)",
+      "Jaccard replication verified: all 720 per-pattern Jaccard similarities match parent EXP-GRAPH-34788722106 within 1e-6; parent results fully replicated. (result.json jaccard_replication, audit.json baseline_findings[0])",
+      "Ensemble of Jaccard + TF-IDF converges to alpha≈0.0–0.12 (pure semantic) at all schema sizes; best F1≈0.65. Jaccard adds no discrimination value because both signals fail equally on structural noise. (result.json ensemble_optimization, audit.json baseline_findings[3])",
+      "change_type is the hardest true drift pattern for TF-IDF: TP CI lower bound <0.8 at n=10 (0.7868), n=20 (0.7032), n=50 (0.7438); passes only at n=30 (0.8333). (result.json per_schema_size.*.per_pattern.change_type)",
+      "optional_field_churn produces the lowest mean semantic similarity of all patterns (0.847–0.892), making it the MOST divergent from baseline — but it is structural noise, not true drift. (result.json per_schema_size.*.per_pattern.optional_field_churn.mean_semantic_similarity)",
+      "Realistic schema test (5 hand-crafted API pairs) shows negligible separation (~0.005) and wrong-direction pair: stripe_charge_churn (noise, 0.9741) has HIGHER similarity than stripe_charge_dispute (true drift, 0.9696). n=5 insufficient for statistical claim. (result.json realistic_schema_test)"
+    ],
+    "rejected": [
+      "TF-IDF bag-of-words semantic similarity on (field_name:field_type) text pairs viable as a staleness signal under structural noise (FP=1.0 at all sizes, audit.json claim_ceiling)",
+      "Ensemble of Jaccard (field_path,type) + TF-IDF semantic rescues discrimination (converges to pure semantic, F1≈0.65, audit.json baseline_findings[3])",
+      "Schema-level mean-pooled TF-IDF cosine similarity can distinguish meaningful token changes from noise token changes (inverted direction, Mann-Whitney p=1.0, audit.json validity_findings[2])",
+      "The specific TF-IDF representation (vocab 551, sublinear_tf, word analyzer on field_name:field_type) achieves both TP>=0.8 AND FP<=0.15 on schemas 10–50 fields with 10% structural noise (result.json per_schema_size noise FP=1.0)"
+    ],
+    "unknown": [
+      "Whether sentence-transformers all-MiniLM-L6-v2 384-dim contextual embeddings succeed where TF-IDF fails — prereg primary method unavailable due to torch; realistic test suggests fundamental problem but n=5 insufficient (audit.json unresolved[0])",
+      "Whether per-field semantic matching (field-by-field alignment + type similarity) rather than schema-level pooled cosine rescues change_type detection (currently hardest pattern, audit.json unresolved[1])",
+      "Whether smaller structural noise magnitudes (1–2% churn, single optional field) lower FP below 0.15 while preserving TP (audit.json unresolved[2])",
+      "Whether response-time profiling can discriminate true drift from structural noise — next orthogonal question (audit.json unresolved[3], parent handoff unknown[3])",
+      "Whether session token validation can discriminate auth-relevant drift from structural noise (parent handoff unknown[3])",
+      "Whether realistic API naming (meaningful field names) changes TF-IDF behavior — 5-pair test insufficient for generalization (audit.json unresolved[4])",
+      "Whether ensemble with contextual embeddings (instead of TF-IDF) achieves complementarity that TF-IDF+Jaccard does not (audit.json unresolved[5])"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is closed or globally rejected — bounded falsification of TF-IDF signal only, does not close the broader domain (audit.json claim_ceiling, verdict.json reason)",
+      "sentence-transformers contextual embeddings would fail where TF-IDF fails — untested; realistic test suggests fundamental problem but n=5 insufficient for generalization (audit.json validity_findings[4])",
+      "Any single token-based staleness signal can detect drift under structural noise — Jaccard and TF-IDF both fail on noise (result.json jaccard_replication FP=1.0, semantic FP=1.0)",
+      "Synthetic noise patterns (10% churn, deduped nulls, single nested conversion) are representative of real-world API variation — they are synthetic and fixed at 10% magnitude (audit.json validity_findings[4])",
+      "The inverted direction (noise more divergent than drift) would reverse with contextual embeddings — speculative; the realistic test shows the same wrong-direction pattern with TF-IDF (result.json realistic_schema_test)",
+      "Ensemble of any two token-based signals can rescue discrimination when both fail equally on structural noise — ensemble converges to pure signal because neither adds value (result.json ensemble_optimization alpha≈0)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35010853847/result.json raw measurements and metrics",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json recomputed metrics, claim_ceiling, and validity findings",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_raw_evidence.json per-pattern similarities and statistical tests",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_derived_measurements.json per-schema-size derived measurements",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_decision_evaluation.json frozen decision rule evaluation",
+    "research/graph/freshness_detection/execute_semantic_embedding.py execution code",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json synthetic schema definitions (parent fixture)",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json parent carry_forward (Jaccard falsification, alternative signals)",
+    "research/claims/registry.json claim status and next gate"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35010853847/request.json",
+    "research/experiments/EXP-GRAPH-35010853847/spec.json",
+    "research/experiments/EXP-GRAPH-35010853847/freeze.json",
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json",
+    "research/experiments/EXP-GRAPH-35010853847/report.md",
+    "research/experiments/EXP-GRAPH-35010853847/provenance.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_raw_evidence.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_decision_evaluation.json",
+    "research/graph/freshness_detection/execute_semantic_embedding.py",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json"
+  ],
+  "recommended_action": "Move graph lane frontier to response-time profiling as the next orthogonal staleness signal. TF-IDF semantic similarity is falsified under structural noise (FP=1.0, inverted direction). Two token-based approaches (Jaccard structural, TF-IDF semantic) have now both failed, suggesting the representational dimension itself may be insufficient for drift-vs-noise discrimination. Response-time profiling tests a fundamentally different hypothesis: that structural noise and true drift produce different temporal signatures (e.g., field churn changes response size, new business logic changes latency distribution). If response-time profiling also fails, the frontier should move to multi-signal ensembles combining orthogonal dimensions (structural + temporal + behavioral) or to requiring schema-specific calibration rather than universal thresholds."
+}
