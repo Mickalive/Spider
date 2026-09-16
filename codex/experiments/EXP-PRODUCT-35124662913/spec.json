@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-PRODUCT-35124662913",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "After amending the G3 slot_prefixes expected value to the full path segment and rerunning B_UNFIXED against G1 query-string training data, does the parameterized distillation kernel with Fix1+Fix2+slot_prefixes pass the amended decision rule, and how large is the Fix1 necessity delta on discriminating conditions?",
+  "hypothesis": "Re-committing Fix1 (suffix guard), Fix2 (delimiter-bound prefix validation), and slot_prefixes extraction to src/spider/kernel.py, with G3 expected amended to 'orgs/acme/repos/main/issues/', produces: (1) all 5 established conditions binding_accuracy=1.0 with correct slot_count; (2) B_UNFIXED against G1 yields binding_accuracy=0.0 (suffix corruption without Fix1); (3) B_UNFIXED against N1_ORIGINAL yields slot_count=1 (over-parameterization without Fix2); (4) protocol-only condition yields slot_count=1 (Fix2 allows https://); (5) all null controls correctly reject or bound. The Fix1 necessity delta is the gap between fixed G1 binding_accuracy=1.0 and unfixed G1 binding_accuracy=0.0.",
+  "falsifier": "Any of: (1) re-committed code introduces import/syntax errors; (2) any established condition (P1/G1/G2/G3/G5) drops below binding_accuracy=1.0; (3) slot_prefixes computation changes action_template or _bind behavior (must be metadata-only); (4) B_UNFIXED against G1 does NOT show suffix corruption (binding_accuracy > 0.0), indicating Fix1 is unnecessary; (5) N1_ORIGINAL slot_count > 0 under fixed kernel (Fix2 regression).",
+  "baselines": [
+    "B_UNFIXED_G1: True unfixed heuristic (rfind('/') without Fix1/Fix2) on G1 training data (https://api.example.com/search?q={alpha,beta,delta}). Expected: suffix-corrupted template, binding_accuracy=0.0. Documents Fix1 necessity.",
+    "B_UNFIXED_N1: True unfixed heuristic on N1_ORIGINAL training data (https://api.example.com/a, https://api.other.com/b, https://api.third.com/c). Expected: over-parameterized template slot_count=1. Documents Fix2 necessity.",
+    "B_LITERAL: Literal mechanism confidence 0.5 < min_confidence 0.8, all resolutions EXPLORE/UNKNOWN, fail_rate=1.0. Documents parameterized induction necessary."
+  ],
+  "positive_control": "P1_PATH_PREFIX: 3 training observations of https://api.example.com/users/{A,B,C}. Expected: slot_count=1, binding_accuracy=1.0 for unseen D/E/F, slot_prefixes={'url': 'users/'}. Verifies binding and slot_prefixes preserved after re-commit.",
+  "null_control": "N1_ORIGINAL: cross-host URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c. Fix2 rejects: slot_count=0. N1_CORRECTED: truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z. Empty-prefix guard rejects: slot_count=0. PROTOCOL_ONLY: ['https://a.com/x','https://b.com/y','https://c.com/z']. Fix2 allows (last_char '/'): slot_count=1, template 'https://${url}'. Documents protocol-only gap boundary.",
+  "measurement_validity": [
+    "Re-commit distill_parameterized from parent execution branch (exact code validated in EXP-PRODUCT-34704657427, kernel.py sha256 1880ef67)",
+    "G3 slot_prefixes expected amended from 'repos/main/issues/' to 'orgs/acme/repos/main/issues/' (full path segment, semantically correct for VALUE CONTRACT prefix-stripping)",
+    "All conditions deterministic synthetic, n=3 training + 3 unseen, zero model/network/browser calls",
+    "Fresh Python import per condition prevents cross-contamination",
+    "B_UNFIXED uses true unfixed rfind('/') logic (no Fix1/Fix2) on G1 and N1_ORIGINAL training data (discriminating conditions)",
+    "slot_prefixes is metadata-only: does not change action_template, _bind, or template construction"
+  ],
+  "decision_rule": "If ALL of: (1) re-commit does not introduce errors; (2) P1 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url':'users/'}; (3) G1 slot_count=1 AND binding_accuracy=1.0; (4) G2 slot_count=1 AND binding_accuracy=1.0; (5) G3 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url':'orgs/acme/repos/main/issues/'}; (6) G5 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url':'users/'}; (7) N1_ORIGINAL slot_count=0; (8) N1_CORRECTED slot_count=0 -- verdict = SURVIVES_CURRENT_TEST. If any established condition drops below binding_accuracy=1.0, verdict = FALSIFIED-IN-SETTING. B_UNFIXED_G1 and B_UNFIXED_N1 are reported for Fix1/Fix2 necessity quantification but do not gate the decision rule (they measure unfixed behavior). PROTOCOL_ONLY reported as boundary condition.",
+  "product_consequence_positive": "C-PARAM-INHERIT claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2 necessity quantified'. Clears the three audit required_fixes from EXP-PRODUCT-34704657427. Path for C-PRODUCT-ECON measurement opens.",
+  "product_consequence_negative": "If re-commit introduces regressions or B_UNFIXED on G1 shows Fix1 unnecessary, C-PARAM-INHERIT remains EXPERIMENTAL with narrowed mechanism scope. Fix1 may be removed if unnecessary.",
+  "estimated_cost": "Very low: pure synthetic, offline. Re-commit validated code (~270 lines) + 10 conditions x 3 training + 3 unseen = ~60 operations. Zero model/network/browser calls.",
+  "expected_information_gain": "High: directly clears the three audit required_fixes from the REVISE verdict. Quantifies Fix1 and Fix2 necessity on discriminating conditions (previously unmeasured). Either advances C-PARAM-INHERIT or narrows the mechanism to only what is necessary. The B_UNFIXED_G1 measurement is the missing piece that prevents claiming Fix1 is necessary."
+}

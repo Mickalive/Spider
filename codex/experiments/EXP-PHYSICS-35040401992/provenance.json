@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35040401992",
+  "lane": "physics",
+  "github_run_id": "35112013064",
+  "github_run_attempt": 1,
+  "commit_sha": "a4c1cee12a9041b4c2e0e24fb5ba50bd75d24b9e",
+  "base_sha": "ecc871e8a87a1ac83f0e6f234da285f2c9bec0f5",
+  "pre_execute_sha": "19ccd0267e2bbe37efeacaedef47741adfdd007d",
+  "datasets": {
+    "synthetic_data": {
+      "description": "200 trajectories x 10 steps x 2 conditions (state-dependent and state-independent) of a 3-state branching FSM with session-dependent transitions",
+      "seed": 42,
+      "n_trajectories_per_condition": 200,
+      "n_steps": 10,
+      "n_sessions": 20,
+      "total_transitions_per_condition": 2000,
+      "session_directions": "uniform random left/right per session",
+      "action_policy": "uniform random advance/branch"
+    }
+  },
+  "code_paths": {
+    "analysis_pipeline": "research/experiments/EXP-PHYSICS-35040401992/run_experiment.py",
+    "analysis_language": "Python 3",
+    "dependencies": ["numpy"],
+    "deterministic": true,
+    "seed": 42,
+    "n_perms": 1000,
+    "n_comparisons_bonferroni": 4,
+    "description": "Implements frozen preregistered analysis plan: FSM definition, trajectory generation, stratification by (URL, H_K), plug-in PMI computation, within-strata permutation test, Bonferroni correction, discrimination test, controls (session-randomized, shuffled labels, state-independent baseline, determinism check), cardinality check, conditional entropy check, and decision rule application"
+  },
+  "frozen_files": {
+    "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
+    "spec.json": "43dfad3d2e5c70d2d326c83202e6718ee890268a1ce6ac2044691da92bd7a732",
+    "prereg.md": "d186a401ec62ec0c72197393530337e49f4a6b74b7330ac3512cdd4a4dd03c8e"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/raw_result.json",
+      "sha256": "63fbfdd9ace8fa90dba6566d1dc88b75f14fb3566348a9a624451a97d692cb46",
+      "role": "raw",
+      "description": "Complete numerical results from frozen analysis pipeline"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/run_experiment.py",
+      "sha256": "3db577babf29153e93903f3263ba58ea140b480fa5b4dcce35446113199081b7",
+      "role": "code",
+      "description": "Frozen analysis pipeline (executable, deterministic, seed=42)"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/raw_result_backup.json",
+      "sha256": "63fbfdd9ace8fa90dba6566d1dc88b75f14fb3566348a9a624451a97d692cb46",
+      "role": "raw",
+      "description": "Backup of raw results before re-execution"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/result.json",
+      "sha256": "ca63ca2d67c9d4c14f319e37f9c5d0725fb3091a987ca68d3ecac27b1117d081",
+      "role": "derived",
+      "description": "Structured result packet per EXPERIMENT_PACKET.md contract"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/report.md",
+      "sha256": "1631283715aec256e285daf95f20ddf5155b0d4f0f502dc55c58f932ee641d62",
+      "role": "derived",
+      "description": "Human-readable report of experimental findings"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/provenance.json",
+      "sha256": "25b378771ec5ae21d30759ef700884a2b4c444b04f07dbef2daada2d4a1341fa",
+      "role": "derived",
+      "description": "Provenance record for reproducibility"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "numpy_version": "2.5.3",
+    "execution_timestamp": "2026-09-16T15:04:26.974097+00:00",
+    "failure_exit_code": 66,
+    "failure_recorded_at": "2026-09-16T15:04:28.008857+00:00"
+  },
+  "execution_notes": [
+    "Previous execution exited with code 66 (failure.json). Experiment was re-executed successfully.",
+    "The raw_result.json from the re-executed run matches the values from the previous failed run, confirming deterministic reproducibility.",
+    "All frozen design files (request.json, spec.json, prereg.md, freeze.json) were not modified during execution.",
+    "The analysis pipeline (run_experiment.py) was not modified between runs."
+  ],
+  "reproduction_instructions": [
+    "Install numpy: pip install numpy",
+    "Run: python3 research/experiments/EXP-PHYSICS-35040401992/run_experiment.py",
+    "Output: raw_result.json with identical values (seed=42, deterministic)"
+  ]
+}

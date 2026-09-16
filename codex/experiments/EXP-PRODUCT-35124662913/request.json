@@ -1,0 +1,20 @@
+{
+  "base_sha": "781ae5bdc3a542cc90d964ef93f82f892cd860ba",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T16:52:50.049598+00:00",
+  "experiment_id": "EXP-PRODUCT-35124662913",
+  "inherited_last_verdict": "REVISE",
+  "inherited_next_question": "Amend the G3 slot_prefixes expected value in spec.json to 'orgs/acme/repos/main/issues/' (full path segment from authority end, more correct for VALUE CONTRACT stripping) or trim extraction to 'repos/main/issues/'? Then rerun B_UNFIXED against G1 query-string training data as frozen spec required, and decide whether Fix2 protocol-only 'https://' gap needs minimum prefix length threshold.",
+  "lane": "product",
+  "origin_github_run_id": "35124662913",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-34704657427",
+    "path": "research/experiments/EXP-PRODUCT-34704657427/handoff.json",
+    "sha256": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11"
+  },
+  "reason": "pulse",
+  "request_hash": "d42876cdc0798f67f36edfbb70f9200e013d0f8b276d81cf805cb243a253f53d",
+  "request_id": "52f7ccf2a33eb3b24783c34d",
+  "schema_version": 1
+}

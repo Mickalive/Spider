@@ -14,8 +14,10 @@ on:
       - "research/EXPERIMENT_PACKET.md"
       - "research/claims/**"
       - "research/lanes/**"
+      - "config/models.json"
       - "AGENTS.md"
       - "SPIDER_ARCHITECTURE_RESEARCH2.md"
+      - "SPIDER_MASTER_PROMPT.md"
   schedule:
     - cron: "7,22,37,52 * * * *"
 
@@ -51,6 +53,7 @@ jobs:
           set -euo pipefail
           ENABLED=$(jq -r --arg lane "$LANE" '.lanes[$lane].enabled // false' research/lanes/registry.json)
           [[ "$ENABLED" == true ]] || { echo "lane disabled: $LANE"; exit 0; }
+          CONTROL_REV=$(python scripts/control_plane.py revision --root .)
 
           ACTIVE_EXP=""
           if git ls-remote --exit-code --heads origin "refs/heads/lab2/$LANE" >/dev/null 2>&1; then
@@ -59,6 +62,21 @@ jobs:
             PAUSED=$(jq -r '.human_paused // false' <<<"$STATE")
             [[ "$PAUSED" != true ]] || { echo "human-paused: $LANE"; exit 0; }
             ACTIVE_EXP=$(jq -r '.active_experiment_id // empty' <<<"$STATE")
+
+            if [[ "$LANE" == product && "$(jq -r '.promotion_ready // false' <<<"$STATE")" == true ]]; then
+              echo "SPIDER_PRODUCT_PROMOTION_PENDING experiment=$(jq -r '.last_experiment_id // empty' <<<"$STATE")"
+              echo "Product research waits until product-promote clears the durable latch."
+              exit 0
+            fi
+
+            RETRYABLE=$(jq -r '.last_failure_retryable // empty' <<<"$STATE")
+            SAME_COUNT=$(jq -r '.same_failure_count // 0' <<<"$STATE")
+            FAILURE_REV=$(jq -r '.last_failure_control_revision // empty' <<<"$STATE")
+            if [[ -n "$ACTIVE_EXP" && "$RETRYABLE" == "false" && "$SAME_COUNT" -ge 3 && "$FAILURE_REV" == "$CONTROL_REV" ]]; then
+              echo "SPIDER_CIRCUIT_OPEN lane=$LANE experiment=$ACTIVE_EXP same_failure_count=$SAME_COUNT control_revision=$CONTROL_REV"
+              echo "Skipping identical nonretryable failure until the operational control plane changes."
+              exit 0
+            fi
           fi
 
           RUNNING=$(gh run list --workflow=spider-lane.yml --limit 100 --json status,displayTitle | jq --arg prefix "R2 lane=$LANE " '[.[] | select((.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending" or .status=="requested") and (.displayTitle|startswith($prefix)))] | length')

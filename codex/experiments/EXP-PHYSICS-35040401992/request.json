@@ -1,0 +1,20 @@
+{
+  "base_sha": "ecc871e8a87a1ac83f0e6f234da285f2c9bec0f5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T00:32:15.965489+00:00",
+  "experiment_id": "EXP-PHYSICS-35040401992",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+  "lane": "physics",
+  "origin_github_run_id": "35040401992",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34932344937",
+    "path": "research/experiments/EXP-PHYSICS-34932344937/handoff.json",
+    "sha256": "b219878ec01bcd49b77ecf23be62639e72120edaf37f4d448ab74e0125e48706"
+  },
+  "reason": "pulse",
+  "request_hash": "e428c4c7e70288be06445fcaf692faeac9b95351b7e651ac559c68353b326b0e",
+  "request_id": "bab84686792166a9d54a5db2",
+  "schema_version": 1
+}

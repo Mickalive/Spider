@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "github_run_id": "35083040517",
+  "github_run_attempt": 1,
+  "execution_github_run_id": "35112016531",
+  "recorded_at": "2026-09-16T15:09:16.954463+00:00",
+  "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+  "pre_execute_sha": "9920b0382ca7b51cd559fbb5878be4c2aba82ec1",
+  "execution_code": "research/graph/freshness_detection/execute_response_time.py",
+  "execution_code_sha256": null,
+  "frozen_prereg_sha256": "9ed035c737b2a40464286a4424d0971f3f19ed762ede13a347f9b0aa983cd7fd",
+  "frozen_request_sha256": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
+  "frozen_spec_sha256": "db9bf8f720f79bff866248ec788394b319e2e789609e1d48a9823ae239cb008c",
+  "frozen_at": "2026-09-16T10:07:56.121500+00:00",
+  "parent_handoff_experiment_id": "EXP-GRAPH-35010853847",
+  "parent_handoff_sha256": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509",
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json",
+    "research/graph/freshness_detection/execute_response_time.py",
+    "research/claims/registry.json"
+  ],
+  "environment": {
+    "python_version": "3.12",
+    "platform": "linux",
+    "dependencies_used": [
+      "scipy.stats (KS two-sample test, Mann-Whitney U)",
+      "numpy (array operations, correlation)",
+      "http.server (mock server)",
+      "urllib.request (HTTP client)",
+      "time.perf_counter (response-time measurement)",
+      "hashlib.sha256 (computation-dependent serialization)",
+      "random (jitter injection, field generation)"
+    ]
+  },
+  "frozen_parameters": {
+    "SEED_FIELDGEN": 20260916,
+    "SEED_PATTERN": 20260917,
+    "SEED_JITTER": 20260918,
+    "N_REPS": 30,
+    "SCHEMA_SIZES": [10, 20, 30, 50],
+    "ALPHA": 0.05,
+    "BONFERRONI_N": 24,
+    "CORRECTED_ALPHA": 0.00208333,
+    "JITTER_MAX_MS": 50,
+    "SERIAL_ITERS_PER_FIELD": 2000
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+      "sha256": null,
+      "role": "raw",
+      "description": "Per-condition before/after response-time measurements (28 conditions × 30 samples each)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Aggregated TP/FP rates, per-pattern and per-schema-size analysis, control evaluations, decision"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "KS test results for each pattern × size combination (28 entries)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+      "sha256": null,
+      "role": "raw",
+      "description": "Server-side log of schema size, response bytes, and jitter per request"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Canonical producer handoff with all metrics, controls, observations, and validity notes"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable experiment report with interpretation and implications"
+    }
+  ],
+  "data_generation": {
+    "method": "Mock HTTP server with controlled computation paths",
+    "server_endpoint": "POST /api/compute",
+    "client_measurement": "time.perf_counter() HTTP round-trip",
+    "total_requests": 1680,
+    "breakdown": "4 sizes × 7 patterns × 30 reps × 2 (before/after) = 1680 client requests"
+  },
+  "reproduction_notes": "Run execute_response_time.py from research/graph/freshness_detection/. Server starts on random port, collects measurements, writes raw evidence to research/experiments/EXP-GRAPH-35083040517/raw_evidence/. Requires scipy, numpy. Frozen seeds ensure deterministic field generation and jitter injection."
+}

@@ -2,23 +2,35 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import subprocess
 from pathlib import Path
 
+# Single source of truth for files that belong to the Research 2.0 control plane.
+# Lane worktrees may carry scientific code and experiment packets, but these roots
+# must always match main before/after a model stage.
 CONTROL_ROOTS = [
     ".gitignore",
     ".github/scripts",
+    ".github/workflows",
     "scripts",
     ".opencode/agents",
     "AGENTS.md",
     "SPIDER_ARCHITECTURE_RESEARCH2.md",
+    "SPIDER_MASTER_PROMPT.md",
     "research/claims/registry.json",
     "research/lanes/registry.json",
     "research/EXPERIMENT_PACKET.md",
     "config/models.json",
     "SPIDER_CODEX.md",
+    "codex",
 ]
+
+# Canonical evidence changes frequently and must be overlaid, but a pure evidence
+# sync must not cause a permanently failing lane to be retried as if its execution
+# machinery had changed.
+VOLATILE_CONTROL_ROOTS = {"SPIDER_CODEX.md", "codex"}
 
 
 def run(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -47,6 +59,29 @@ def blob(root: Path, ref: str, path: str) -> bytes:
     return run(root, "git", "show", f"{ref}:{path}").stdout
 
 
+def control_revision(root: Path, ref: str) -> str:
+    """Content fingerprint of operational control files at ref.
+
+    Generated canonical evidence is excluded: new evidence should not reset a
+    nonretryable-failure circuit breaker, while any script/workflow/agent/
+    contract/config change should.
+    """
+    h = hashlib.sha256()
+    seen: set[str] = set()
+    for control_root in CONTROL_ROOTS:
+        if control_root in VOLATILE_CONTROL_ROOTS:
+            continue
+        for rel in sorted(files_at(root, ref, control_root)):
+            if rel in seen:
+                continue
+            seen.add(rel)
+            h.update(rel.encode("utf-8"))
+            h.update(b"\0")
+            h.update(blob(root, ref, rel))
+            h.update(b"\0")
+    return h.hexdigest()
+
+
 def materialize(root: Path, ref: str) -> None:
     for control_root in CONTROL_ROOTS:
         expected = files_at(root, ref, control_root)
@@ -67,7 +102,7 @@ def verify(root: Path, ref: str) -> list[str]:
         expected = files_at(root, ref, control_root)
         current = local_files(root, control_root)
         if current != expected:
-            bad.extend(sorted((current ^ expected)))
+            bad.extend(sorted(current ^ expected))
             continue
         for rel in sorted(expected):
             expected_sha = git_text(root, "rev-parse", f"{ref}:{rel}").strip()
@@ -79,7 +114,7 @@ def verify(root: Path, ref: str) -> list[str]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["stage", "restore", "check"])
+    ap.add_argument("mode", choices=["stage", "restore", "check", "revision"])
     ap.add_argument("--root", default=os.environ.get("GITHUB_WORKSPACE", "."))
     args = ap.parse_args()
     root = Path(args.root).resolve()
@@ -89,6 +124,10 @@ def main() -> None:
         ref = "origin/main"
     else:
         ref = "HEAD"
+
+    if args.mode == "revision":
+        print(control_revision(root, ref))
+        return
 
     if args.mode == "check":
         bad = verify(root, ref)

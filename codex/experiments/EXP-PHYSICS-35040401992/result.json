@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35040401992",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "H_S_next_given_URL_HK_3_SD": 1.345794204418461,
+    "H_S_next_given_URL_HK_3_SI": 1.3898624772926804,
+    "H_S_next_given_URL_HK_1_SD": 1.5793589896318376,
+    "ceiling_eliminated": true,
+    "BC_PMI_K3_SD": 0.3691281142631674,
+    "BC_PMI_K1_SD": 0.9235201948939259,
+    "BC_PMI_K3_SI": 0.0,
+    "BC_PMI_K1_SI": 0.0,
+    "perm_p_bonf_K3_SD": 0.322,
+    "perm_p_bonf_K1_SD": 0.0,
+    "perm_null_std_K3_SD": 0.03793793636855818,
+    "perm_null_std_K1_SD": 0.020080423305492062,
+    "diff_BC_PMI_K3": 0.3691281142631674,
+    "paired_perm_p_K3": 0.0,
+    "diff_BC_PMI_K1": 0.9235201948939259,
+    "paired_perm_p_K1": 0.261,
+    "positive_control_BC_PMI": 0.1375137375935691,
+    "positive_control_min_perm_null_std": 0.0,
+    "positive_control_pass": false,
+    "null_control_mean_shuffled_pmi": 0.7569544627096019,
+    "null_control_std_shuffled_pmi": 0.5061472412633807,
+    "null_control_pass": true,
+    "determinism_accuracy_SD": 0.0,
+    "determinism_accuracy_SI": 1.0,
+    "determinism_pass_SD": false,
+    "determinism_pass_SI": true,
+    "cardinality_SD_K3_all_pass": true,
+    "cardinality_SI_K3_all_pass": true,
+    "total_transitions_SD": 2000,
+    "total_transitions_SI": 2000,
+    "action_history_accuracy_K1": 0.3685,
+    "action_history_accuracy_K2": 0.413,
+    "action_history_accuracy_K3": 0.486,
+    "frequency_baseline_accuracy": 0.3605,
+    "plug_in_mi_SD_K1": 1.579358989631839,
+    "plug_in_mi_SD_K3": 1.3457942044184616,
+    "plug_in_mi_SI_K1": 0.0,
+    "plug_in_mi_SI_K3": 0.0
+  },
+  "controls": {
+    "positive_control_session_randomized": {
+      "expected": "BC PMI ≈ 0.0, perm_null_std > 0",
+      "observed_bias_corrected_pmi": 0.1375137375935691,
+      "observed_min_perm_null_std": 0.0,
+      "pass": false,
+      "evidence_ref": "raw_result.json:controls.positive_control_session_randomized"
+    },
+    "null_control_shuffled_labels": {
+      "expected": "|mean shuffled PMI| < 3 * std(shuffled PMI)",
+      "observed_mean_shuffled_pmi": 0.7569544627096019,
+      "observed_std_shuffled_pmi": 0.5061472412633807,
+      "pass": true,
+      "evidence_ref": "raw_result.json:controls.null_control_shuffled_labels"
+    },
+    "state_independent_baseline": {
+      "expected": "BC PMI = 0.0 (no state information in response)",
+      "observed_BC_PMI_K3": 0.0,
+      "observed_BC_PMI_K1": 0.0,
+      "pass": true,
+      "evidence_ref": "raw_result.json:controls.state_independent_baseline"
+    },
+    "determinism_check": {
+      "expected": "P(Response_hash | FSM_state, session) accuracy = 1.0 for both conditions",
+      "observed_accuracy_SD": 0.0,
+      "observed_accuracy_SI": 1.0,
+      "pass_SD": false,
+      "pass_SI": true,
+      "evidence_ref": "raw_result.json:controls.determinism_check"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/raw_result.json",
+      "sha256": "63fbfdd9ace8fa90dba6566d1dc88b75f14fb3566348a9a624451a97d692cb46",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/run_experiment.py",
+      "sha256": "3db577babf29153e93903f3263ba58ea140b480fa5b4dcce35446113199081b7",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35040401992/raw_result_backup.json",
+      "sha256": "63fbfdd9ace8fa90dba6566d1dc88b75f14fb3566348a9a624451a97d692cb46",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Ceiling eliminated: H(S_next|URL,H_K=3) = 1.346 bits >> 0.2 threshold. The branching FSM successfully creates non-deterministic next states at K=3.",
+    "BC PMI at K=3 on state-dependent condition = 0.369 bits (observed PMI 1.346 minus perm_mean 0.977). The PMI is positive and substantial but the Bonferroni-corrected permutation p = 0.322 fails the p < 0.0125 threshold (C2 fails).",
+    "BC PMI at K=1 on state-dependent condition = 0.924 bits (observed 1.579 minus perm_mean 0.656), Bonferroni p = 0.0 < 0.0125. The K=1 result is highly significant, replicating the parent's K=1 finding on a different FSM topology.",
+    "State-independent baseline BC PMI = 0.0 at both K=1 and K=3, confirming that the PMI estimator correctly gives zero when responses carry no state information.",
+    "Discrimination test: SD BC PMI - SI BC PMI = 0.369 bits at K=3 with paired permutation p = 0.0 (highly significant). The within-experiment comparison cleanly demonstrates that response structure carries predictive information.",
+    "Determinism check FAILS for state-dependent condition: accuracy = 0.0 (60 groups, 0 deterministic). This is because the response includes a `step` field that varies within each (FSM_state, session_id) group. The spec's P(Response_hash | FSM_state, session) = 1.0 criterion is unachievable when the response design includes a step-varying field. The state-independent condition passes (accuracy = 1.0) because all responses are identical.",
+    "Positive control (session-randomized) FAILS: BC PMI = 0.1375 (not ≈ 0) and min_perm_null_std = 0.0. The perm_null_std = 0.0 indicates the permutation null within non-deterministic strata has zero variance, making the pass criterion degenerate (|0.137| < 3 * 0 = 0 is false). This is a measurement validity issue.",
+    "Null control (shuffled labels within strata) PASSES: mean shuffled PMI = 0.757, std = 0.506, |0.757| < 3 * 0.506 = 1.518. However, the mean is far from zero (0.757), suggesting the shuffled-label null does not fully nullify the PMI in non-deterministic strata.",
+    "Cardinality check passes: max |R|/N ratio across SD K=3 strata is 0.782 (below 0.8 threshold). The branching FSM avoids the parent's cardinality degeneracy."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID due to control failures: (1) determinism check fails because the frozen response design includes a `step` field that varies within (FSM_state, session_id) groups, making P(Response_hash | FSM_state, session) ≠ 1.0 by construction; (2) positive control fails because session-randomized perm_null_std = 0.0, making the pass criterion degenerate.",
+    "The determinism check criterion in the frozen spec is incompatible with the frozen response design: the response explicitly includes step number, which varies across transitions. The spec should have specified P(Response_hash | FSM_state, session, step) = 1.0, or excluded step from the response hash. As frozen, the check must be applied as written, and it fails.",
+    "The positive control's min_perm_null_std = 0.0 is suspicious: the session-randomized condition should still have non-deterministic strata (response varies with step), yet the permutation test reports zero variance. This may indicate a bug in the positive control implementation where the permutation test only exercises deterministic strata after randomization.",
+    "The K=3 Bonferroni p = 0.322 is not significant, but this is partly because the Bonferroni correction across 4 comparisons (2 conditions × 2 K values) is conservative. The state-independent comparisons contribute two comparisons with p = 1.0, diluting the correction. A focused test on the state-dependent K=3 comparison alone would have p_raw = 0.0805, still not significant at α = 0.05.",
+    "Despite control failures, the raw PMI values are informative: BC PMI = 0.369 bits at K=3 and 0.924 bits at K=1 on the state-dependent condition, with SI BC PMI = 0.0 in both cases. The discrimination test (paired permutation p = 0.0) is highly significant. These raw observations are preserved as evidence, but cannot support a confirmatory claim due to control failures.",
+    "The experiment ran successfully (2000 transitions per condition, seed=42, 1000 permutations per stratum). No infrastructure failures occurred."
+  ],
+  "unresolved": [
+    "Is the frozen determinism check criterion (P(Response_hash | FSM_state, session) = 1.0) a design flaw or an intentional test of whether step should be excluded from response hashing? A future design should clarify whether the determinism check conditions on step.",
+    "Why does the session-randomized positive control yield perm_null_std = 0.0? Is the implementation only exercising deterministic strata after randomization, or does the randomization genuinely eliminate all stratum-level variance?",
+    "Does the K=3 BC PMI = 0.369 bits with paired permutation p = 0.0 (discrimination) survive if the experiment is re-run with a corrected determinism check and positive control? The raw signal is strong but unvalidated.",
+    "Should the Bonferroni correction count the state-independent comparisons? The SI comparisons are control baselines, not hypothesis tests. A correction that only counts the SD comparisons (2: K=1 and K=3) would give α = 0.025, making K=1 still significant and K=3 marginal.",
+    "The null control shuffled-label mean = 0.757 (far from zero) suggests that shuffling response labels within strata does not fully nullify PMI. This may indicate that the strata are not fine-grained enough, or that the PMI estimator has bias even under label permutation in high-cardinality strata."
+  ]
+}

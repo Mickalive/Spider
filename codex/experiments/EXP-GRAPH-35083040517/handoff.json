@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a multi-signal ensemble combining structural similarity (Jaccard/TF-IDF) with behavioral signals (e.g., session token validation, schema access pattern changes, or field-usage profiling) achieve TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination when each individual signal family alone fails?",
+  "why_next": "Three orthogonal single-signal families (Jaccard structural, TF-IDF semantic, response-time temporal) have each been tested and falsified in controlled settings. Single-signal approaches appear insufficient for drift-vs-noise discrimination because each signal type is confounded by structural noise in a different way (similarity reduction, inverted direction, timing masking). The natural next step is to test whether combining orthogonal signals provides discriminative power that no single signal achieves alone. Multi-signal ensembles are a materially orthogonal approach — they test complementarity rather than refining a failed signal type.",
+  "carry_forward": {
+    "established": [
+      "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions is falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted). (result.json metrics, audit.json claim_ceiling)",
+      "The mock server produces computation-dependent timing (R²=0.9999, +9.3ms/field), so the failure is signal-to-noise and pattern-indistinguishability, not MEASUREMENT_INVALID. (audit.json validity_findings[0], result.json controls.calibration_control_field_count)",
+      "Three orthogonal signal families tested and falsified in controlled settings: Jaccard (field_path,type) structural similarity — FP=1.0 at all sizes (EXP-GRAPH-34788722106); TF-IDF bag-of-words semantic similarity — TP=0.972, FP=1.0, inverted direction (EXP-GRAPH-35010853847); Response-time KS test — TP=0.0, FP=0.1875, inverted direction (this experiment). (this result.json, parent handoffs)",
+      "The inverted separation direction (noise more detectable/more divergent than drift) is observed across all three signal families. Jaccard/TF-IDF: structural noise produces lower similarity (more divergent). Response-time: nested_object_variation (noise) produces larger KS D than true drift. (result.json per_schema_size, parent handoff carry_forward.established)",
+      "nested_object_variation (structural noise adding 2 fields) produces larger response-time shifts than add_field (true drift, 1 field) at sizes 10, 20, 50 — the noise-vs-drift distinction may depend on magnitude of structural change rather than semantic meaningfulness. (result.json per_pattern_fp.nested_object_variation, report.md)",
+      "Null control (fresh_copy) passes for response-time profiling: 0% FP across all sizes, confirming jitter alone does not produce false drift signals. (result.json controls.null_control_fresh_copy)"
+    ],
+    "rejected": [
+      "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions with N=30, uniform 0-50ms jitter, 2000 serial_iters per field, mock CPU-bound server, schema sizes 10-50 — falsified (TP=0.0, positive control FAIL, separation FAIL inverted)",
+      "Single-signal temporal staleness detection using client-side HTTP response-time distributions — fails because per-field timing delta (~9ms) masked by 0-50ms jitter at N=30",
+      "TF-IDF bag-of-words semantic similarity viable as staleness signal under structural noise (FP=1.0, inverted direction — EXP-GRAPH-35010853847)",
+      "Jaccard (field_path,type) similarity viable as staleness signal under structural noise (FP=1.0 — EXP-GRAPH-34788722106)",
+      "Ensemble of any two token-based signals rescues discrimination when both fail equally (converges to pure signal, F1≈0.65 — EXP-GRAPH-35010853847 ensemble_optimization)"
+    ],
+    "unknown": [
+      "Whether multi-signal ensembles combining structural + temporal + behavioral dimensions achieve discrimination when each single signal fails individually",
+      "Whether N>=100 per condition with reduced jitter (0-10ms) provides sufficient power for KS test detection of true drift (~9ms per-field delta)",
+      "Whether sequential/adaptive tests or per-request variance features outperform distribution-level KS test for temporal signals",
+      "Whether real APIs (DB/cache/CDN effects) produce larger timing differences than CPU-bound mock server",
+      "Whether sentence-transformers contextual embeddings (all-MiniLM-L6-v2 384-dim) succeed where TF-IDF fails — untested due to torch unavailability; realistic test suggests fundamental problem but n=5 insufficient",
+      "Whether per-field semantic matching (field-by-field alignment) rather than schema-level pooled cosine rescues change_type detection",
+      "Whether session token validation can discriminate auth-relevant drift from structural noise",
+      "Whether direct schema comparison (bypassing indirect signals entirely) is required for reliable drift detection"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — only three bounded signal families falsified in specific controlled settings; the broader domain remains open (audit.json claim_ceiling)",
+      "All temporal signals fail — only tested with client-side HTTP timing on localhost with CPU-bound mock; real-API, larger-N, reduced-jitter, or adaptive test variants untested",
+      "nested_object_variation is universally more detectable than true drift — observed in this specific mock server where it adds 2 fields vs add_field's 1 field; the pattern taxonomy may need refinement for real-world API drift detection",
+      "The inverted direction (noise > drift) is a fundamental property of response-time signals — could be an artifact of mock server design (2-field noise addition vs 1-field drift addition) rather than a universal property",
+      "An ensemble of three individually failed signals would necessarily fail — complementarity is untested; individual failure does not preclude ensemble success (audit.json unresolved[5])",
+      "The problem requires fundamentally different approaches — this is an interpretation from three narrow settings, not an established fact; the three tested settings may not represent the full solution space",
+      "Synthetic noise patterns (10% churn, deduped nulls, single nested conversion) are representative of real-world API variation — they are synthetic and fixed at 10% magnitude"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35083040517/result.json — primary metrics and per-pattern analysis",
+    "research/experiments/EXP-GRAPH-35083040517/audit.json — recomputed metrics, claim_ceiling, validity findings",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json — raw timing vectors",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json — KS test results per pattern x size",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json — aggregated derived measurements",
+    "research/experiments/EXP-GRAPH-35010853847/result.json — TF-IDF semantic similarity metrics",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json — TF-IDF recomputed metrics and claim ceiling",
+    "research/experiments/EXP-GRAPH-34788722106/result.json — Jaccard structural similarity metrics",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json — Jaccard carry_forward",
+    "research/claims/registry.json — C-FRESHNESS claim status",
+    "research/graph/freshness_detection/execute_response_time.py — response-time execution code"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35083040517/spec.json",
+    "research/experiments/EXP-GRAPH-35083040517/prereg.md",
+    "research/experiments/EXP-GRAPH-35083040517/freeze.json",
+    "research/experiments/EXP-GRAPH-35083040517/result.json",
+    "research/experiments/EXP-GRAPH-35083040517/audit.json",
+    "research/experiments/EXP-GRAPH-35083040517/report.md",
+    "research/experiments/EXP-GRAPH-35083040517/provenance.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json",
+    "research/experiments/EXP-GRAPH-34788722106/result.json",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json"
+  ],
+  "recommended_action": "Design a multi-signal ensemble experiment for the graph lane that combines two or more of the three tested signal families (structural Jaccard/TF-IDF, temporal response-time, behavioral/access-pattern) and tests whether complementarity achieves TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination. The ensemble must be pre-registered with a frozen combination rule (not post-hoc tuning). If no ensemble succeeds, the frontier should shift to direct schema comparison (diffing schema structures rather than indirect signals) or schema-specific calibration approaches. Three bounded single-signal falsifications constrain but do not close C-FRESHNESS."
+}
