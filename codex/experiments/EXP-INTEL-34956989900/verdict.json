@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34956989900",
+  "lane": "intel",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded: elements_with_bbox denominator does NOT resolve ordering sensitivity. Under tightened role-only definition, ordering listing>detail>cart fails in both ROLE_MAP variants (with_map: cart>listing>detail; no_map: listing>cart>detail). Discrimination ratio remains >1 (42.75 with_map, 632.93 no_map). The ordering sensitivity is two-factor: denominator variation (partially addressed by elements_with_bbox) and ROLE_MAP-dependent count inflation (NOT addressed by denominator choice). C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements but ordering robustness depends on unresolved ROLE_MAP definition and is bounded to truncated-first-20 sample from single Magento site."
+    },
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Not tested. Offline recomputation on existing single-site (Magento) data only. Cross-site generalization unsupported."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Not tested. Offline density computation orthogonal to LLM inheritance claim."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+  "reason": "The experiment conclusively falsifies the hypothesis that elements_with_bbox resolves denominator sensitivity (H1 fails in both ROLE_MAP variants; audit confirms recomputed metrics match). However, the bounded FALSIFICATION-ON-SETTING does not close the interactive metric approach. The audit (VF-ROLE-MAPPING-DEVIATION) and producer observations identify the root cause: differential count inflation from 'a'→'link' mapping (cart +100%, detail +150%, listing +33%) drives ordering reversal irrespective of denominator. The denominator change (elements_with_bbox vs total_dom) produces identical ordering for a given ROLE_MAP (audit VF-DENOMINATOR-NEAR-COLLINEARITY). This means the next high-information question is orthogonal: resolve the ROLE_MAP definition and/or the truncation cap, not explore further denominator variants. Full DOM enumeration (runtime fix to MEASURE_JS locatableSample cap) and a canonical ROLE_MAP decision are prerequisites for any further metric validation.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34956989900/spec.json claim_ids C-MEAS-VALID decision_rule",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.hypothesis_tests.H1_ordering.pass=false",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering=[cart,product_listing,detail]",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_no_map.ordering=[product_listing,cart,detail]",
+    "research/experiments/EXP-INTEL-34956989900/audit.json claim_ceiling",
+    "research/experiments/EXP-INTEL-34956989900/audit.json baseline_findings[0] denominator near-collinearity",
+    "research/experiments/EXP-INTEL-34956989900/audit.json validity_findings[2] VF-ROLE-MAPPING-DEVIATION",
+    "research/experiments/EXP-INTEL-34956989900/report.md Table ordering comparison denominators identical per ROLE_MAP"
+  ]
+}

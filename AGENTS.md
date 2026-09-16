@@ -13,6 +13,8 @@ This file is binding for OpenCode sessions in the active Research 2.0 factory.
 
 Never silently rewrite constitutional files.
 
+`SPIDER_CODEX.md` is accepted-evidence output owned by the canonical Codex synchronization step. Lane DESIGN, EXECUTE, AUDIT and DIRECTOR agents may read it but must never edit, regenerate, append to, format, or otherwise mutate it directly.
+
 ## Objective
 
 Optimize for verified inherited work, not activity, run count, pretty reports or route replay.
@@ -53,6 +55,8 @@ Do not collapse these levels. In particular:
 - material claims should reference exact packet fields or artifacts when possible;
 - `handoff.json` must preserve what is established, rejected, unknown and specifically unsafe to assume.
 
+For `verdict.json.claim_updates[*].status`, DIRECTOR must use one of the canonical registry statuses exactly: `HYPOTHESIS`, `EXPERIMENTAL`, `VALIDATED`, `PRODUCT_CORE`, `SHIPPED`, `REJECTED`, `BLOCKED`, `MEASUREMENT_INVALID`, `SUPERSEDED`. Descriptive words such as `SUPPORTED`, `SUPPORTED_BOUNDED`, `PARTIAL` or `OPEN` belong in the event `reason`, not in `status`.
+
 When `request.json` contains a `parent_handoff` reference, read that exact handoff before DESIGN. Treat its `carry_forward` categories as inherited state, not as suggestions to be blended together. New evidence may supersede inherited state, but the change must be explicit.
 
 Cross-lane inheritance occurs through accepted Codex evidence or exact immutable packet/artifact references. Do not import another lane's unrecorded narrative.
@@ -75,7 +79,7 @@ Cross-lane inheritance occurs through accepted Codex evidence or exact immutable
 
 You may edit only the paths granted in the exact workflow prompt.
 
-Never edit `.github/`, `.opencode/`, constitutional files, model routing, another lane, or another experiment.
+Never edit `.github/`, `.opencode/`, constitutional files, model routing, `SPIDER_CODEX.md`, another lane, or another experiment.
 
 Do not use `git add -A`, reset shared branches, force-push or erase prior evidence.
 

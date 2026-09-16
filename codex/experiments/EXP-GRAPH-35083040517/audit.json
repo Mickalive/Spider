@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "check": "calibration_control_field_count",
+      "producer_id": "calibration_control_field_count",
+      "expected": "R² > 0.7 for response_time ~ field_count",
+      "observed": "R² = 0.9999 (recomputed R² = 0.999928 from fresh_copy before_means [104.505,196.901,284.122,462.876] vs sizes [10,20,30,50])",
+      "verdict": "PASS",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json (fresh_copy before_mean_ms) and raw_evidence/server_log.json",
+      "notes": "Near-perfect linear scaling confirms server not constant-time; failure is not MEASUREMENT_INVALID. Per-field computation ~9.3ms, SERIAL_ITERS_PER_FIELD=2000, jitter uniform 0-50ms dominates signal."
+    },
+    {
+      "check": "null_control_fresh_copy",
+      "producer_id": "null_control_fresh_copy",
+      "expected": "FP <= 0.15 on fresh_copy (no drift)",
+      "observed": "0/4 false alarms, FP=0.0, KS p values 0.239,0.807,0.957,0.594 all >0.05 and > Bonferroni 0.00208",
+      "verdict": "PASS",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json fresh_copy entries and result.json metrics.per_pattern_fp.fresh_copy",
+      "notes": "Natural jitter alone does not produce false drift under KS test; client-side perf_counter + localhost overhead not confounding."
+    },
+    {
+      "check": "positive_control_add_field_n30plus",
+      "producer_id": "positive_control_add_field",
+      "expected": "add_field at n>=30 detectable KS D>0.1 p<0.00208",
+      "observed": "n=30 D=0.4 p=0.01564339 undetected; n=50 D=0.3 p=0.135 undetected; 0/2 detected, mean KS D=0.35",
+      "verdict": "FAIL (as producer reports)",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json add_field 30/50 and raw_evidence/response_time_raw_measurements.json",
+      "notes": "Effect real (mean +13.4ms at n=30, +9.1ms at n=50) but small vs 0-50ms jitter; KS n=30 per group underpowered for D~0.3-0.4 at corrected alpha. Recomputed p<0.00208 threshold correctly applied. Even at uncorrected p<0.05 only 1/2 would be detected, still fails all-detected rule."
+    },
+    {
+      "check": "separation_control_mann_whitney",
+      "producer_id": "separation_control_mann_whitney",
+      "expected": "drift KS D > noise KS D one-sided p<0.05 at >=3 sizes",
+      "observed": "p=0.35,0.65,0.328953,0.9 all >0.05, 0/4 passing; mean KS D drift 0.333,0.289,0.322,0.222 vs noise 0.278,0.344,0.278,0.367 — inverted at sizes 20,50",
+      "verdict": "FAIL (as producer reports)",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json per_schema_size[*].mann_whitney_p_one_sided and raw_evidence/response_time_per_condition.json",
+      "notes": "Tiny N=3+3 per MW test limits power, but direction inversion observed independently in raw KS D values: nested_object_variation (noise) dominates. Inverted direction replicates prior Jaccard/TF-IDF experiments (same failure mode) rather than random noise."
+    },
+    {
+      "check": "target_split_sampling_integrity",
+      "expected": "N>=30 per before/after distribution, stable identifiers, no leakage",
+      "observed": "28 conditions × 30 before + 30 after = 1680 client requests, verified raw_evidence/response_time_raw_measurements.json each before_n=30 after_n=30. Server log 1680 entries matches. No schema content leaks into KS decision — KS fit on timing vectors only.",
+      "verdict": "PASS",
+      "evidence_ref": "raw_evidence/response_time_raw_measurements.json and raw_evidence/server_log.json (len 1680, jitter min 0.01 max 49.96 mean 25.16 uniform)",
+      "notes": "Sampling as frozen: SCHEMA_SIZES [10,20,30,50], SEED_FIELDGEN 20260916, SEED_PATTERN 20260917, SEED_JITTER 20260918. Before schema reused across patterns at same size — not a validity threat, but after modifications independent per pattern."
+    },
+    {
+      "check": "leakage_and_representation",
+      "expected": "No target leakage; measurement validity per prereg 6 items",
+      "observed": "No leakage: timing vectors derived solely from perf_counter HTTP round-trip. Representation loss disclosed: mock is CPU-bound json.dumps+sha256 per field, real APIs have DB/CDN/caching variance. Jitter injection independent of schema. HTTP POST body contains schema but server recomputes values deterministically — does not shortcut timing.",
+      "verdict": "PASS with caveat",
+      "evidence_ref": "research/graph/freshness_detection/execute_response_time.py ResponseTimeHandler.do_POST and provenance.json frozen_parameters",
+      "notes": "Prereg validity items 1-6 satisfied: controlled computation, N=30, jitter 0-50ms, frozen seeds, KS N1=N2=30, no schema leakage, Bonferroni 24 comparisons. Validity_notes correctly disclose signal-to-noise limitation and single-server scope."
+    },
+    {
+      "check": "environment_expressiveness",
+      "expected": "Environment could express tested effect if true",
+      "observed": "Environment did express field-count effect (R² 0.9999, +9.3ms/field) but per-field delta for add_field (1 field) << jitter range (0-50ms). At n=50, expected delta ~9ms vs jitter SD ~14.4ms, Cohen d 0.6 max for true drift vs 1.4 for nested noise (2-field addition). Environment expresses computation effect but not at magnitude to separate drift vs noise under chosen jitter.",
+      "verdict": "PASS — valid negative, not infrastructure failure",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.calibration_control_field_count size_means_ms and validity_notes in result.json",
+      "notes": "Producer correctly classifies as FALSIFIED-IN-SETTING not MEASUREMENT_INVALID; infrastructure could have shown effect (and did for nested 2-field case) but drift single-field insufficient."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "TF-IDF bag-of-words cosine similarity",
+      "producer_id": "TF-IDF bag-of-words cosine similarity (falsified baseline from EXP-GRAPH-35010853847)",
+      "expected": "For reference only, prior FALSIFIED-IN-SETTING with FP=1.0",
+      "observed": "Not recomputed in this run; cited correctly as inverted-direction failure (Cohen d 1.2-1.9 wrong direction). No new measurement required per spec baselines note 'included for cross-signal comparison only'.",
+      "verdict": "PASS — correctly inherited",
+      "evidence_ref": "spec.json baselines[0] and report.md Comparison with Prior Experiments table"
+    },
+    {
+      "baseline_id": "Jaccard (field_path,type) similarity",
+      "producer_id": "Jaccard (field_path,type) similarity (falsified baseline from EXP-GRAPH-34788722106)",
+      "expected": "Prior FALSIFIED-IN-SETTING FP=1.0",
+      "observed": "Cited, not re-executed. Consistent with lane history.",
+      "verdict": "PASS",
+      "evidence_ref": "spec.json baselines[1]"
+    },
+    {
+      "baseline_id": "Random classifier (50% detection rate)",
+      "producer_id": "Random classifier (50% detection rate)",
+      "expected": "50% TP, 50% FP baseline",
+      "observed": "Overall TP 0.0 (Wilson CI [0.0,0.2425]) underperforms random; FP 0.1875 (CI [0.0659,0.4301]) better than random on FP but TP failure makes it worse overall. Per-pattern TP all 0/4 vs random 2/4 expected.",
+      "verdict": "FAIL — signal underperforms random on TP (as producer reports)",
+      "evidence_ref": "result.json metrics.overall_tp_rate, metrics.overall_fp_rate, metrics.tp_ci_95, metrics.fp_ci_95"
+    },
+    {
+      "baseline_id": "Fixed-threshold response-time ratio (>1.5)",
+      "producer_id": "Fixed-threshold response-time ratio (response_time_after / response_time_before > 1.5)",
+      "expected": "Naive ratio detector",
+      "observed": "Not explicitly tabulated in result.json but recomputable from per_condition before_mean_ms/after_mean_ms: max ratio 1.17 (nested 20: 222/199), drift add_field ratios 1.04,1.02,1.047,1.019 — all <<1.5. Hence 0 detections as well, no separation from noise. Producer omits explicit table but effect evident in mean_diff_ms 4-13ms vs means 100-470ms.",
+      "verdict": "PASS — would also fail, not stronger than KS; omission not material",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json before_mean_ms/after_mean_ms and spec.json baselines[3]",
+      "notes": "Required_fixes none; recommend future baselines be explicitly reported, but not affecting decision."
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_tp_rate": {"producer": 0.0, "recomputed": 0.0, "match": true, "detail": "0/12 detections (add_field 0/4, remove_field 0/4, change_type 0/4) at Bonferroni alpha 0.002083", "evidence_ref": "raw_evidence/response_time_per_condition.json 12 drift entries"},
+    "overall_fp_rate": {"producer": 0.1875, "recomputed": 0.1875, "match": true, "detail": "3/16 false alarms, all nested_object_variation at sizes 10,20,50", "evidence_ref": "raw_evidence/response_time_per_condition.json 16 noise+fresh entries"},
+    "tp_ci_95": {"producer": [0.0, 0.2425], "recomputed_wilson": "[0.0,0.242] approx", "match": true},
+    "fp_ci_95": {"producer": [0.0659, 0.4301], "recomputed_wilson": "[0.066,0.43] approx", "match": true},
+    "per_pattern_tp": {"producer": {"add_field": 0.0, "remove_field": 0.0, "change_type": 0.0}, "recomputed": {"add_field": "0/4", "remove_field": "0/4", "change_type": "0/4"}, "match": true},
+    "per_pattern_fp": {"producer": {"optional_field_churn": 0.0, "null_valued_fields": 0.0, "nested_object_variation": 0.75, "fresh_copy": 0.0}, "recomputed": {"optional_field_churn": "0/4", "null_valued_fields": "0/4", "nested_object_variation": "3/4", "fresh_copy": "0/4"}, "match": true},
+    "calibration_r_squared": {"producer": 0.9999, "recomputed": 0.9999288262406477, "match": true, "notes": "Producer rounds to 4 decimals; recomputed from fresh_copy before_means [104.505,196.901,284.122,462.876]; still >0.7 threshold"},
+    "per_schema_size_means": {
+      "10": {"producer_mean_ks_d_drift": 0.3333, "producer_mean_ks_d_noise": 0.2778, "recomputed": "drift D [0.333,0.367,0.3] mean 0.333, noise [0.233,0.1,0.5] mean 0.2778 match"},
+      "20": {"producer_mean_ks_d_drift": 0.2889, "producer_mean_ks_d_noise": 0.3444, "recomputed": "drift [0.267,0.367,0.233] mean 0.2889, noise [0.167,0.333,0.533] mean 0.3444 match"},
+      "30": {"producer_mean_ks_d_drift": 0.3222, "producer_mean_ks_d_noise": 0.2778, "recomputed": "match"},
+      "50": {"producer_mean_ks_d_drift": 0.2222, "producer_mean_ks_d_noise": 0.3667, "recomputed": "drift [0.3,0.133,0.233] mean 0.222, noise [0.4,0.167,0.533] mean 0.366 match"}
+    },
+    "bonferroni_sensitivity_check": {"corrected_alpha": 0.00208333, "uncorrected_alpha_0.05_detections": 8, "uncorrected_drift_detections": 3, "uncorrected_noise_detections": 5, "uncorrected_tp_rate": 0.25, "uncorrected_fp_rate": 0.3125, "decision_under_uncorrected": "still FALSIFIED-IN-SETTING (TP<0.8 and FP>0.15, positive control 1/2, separation still fail)"},
+    "controls_recomputed": {
+      "positive_control_add_field": {"producer_result": "FAIL", "recomputed": "FAIL 0/2", "mean_ks_d": 0.35, "match": true},
+      "null_control_fresh_copy": {"producer_result": "PASS", "recomputed": "PASS 0/4 FP 0.0", "match": true},
+      "separation_control_mann_whitney": {"producer_result": "FAIL", "recomputed": "FAIL 0/4", "match": true},
+      "calibration_control_field_count": {"producer_result": "PASS", "recomputed": "PASS R²>0.7", "match": true}
+    },
+    "decision_rule_recomputed": {"1_positive_control": false, "2_null_control": true, "3_drift_patterns": false, "4_separation": false, "5_noise_fp": true, "producer_decision": "FALSIFIED-IN-SETTING", "recomputed_decision": "FALSIFIED-IN-SETTING", "match": true}
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for response-time profiling via KS two-sample test on HTTP client-side response-time distributions with N=30 per condition, uniform 0-50ms jitter, 2000 serial_iters per field, POST /api/compute mock server, Bonferroni alpha 0.00208 across 24 comparisons, schema sizes 10/20/30/50, drift patterns {add_field,remove_field,change_type} vs noise {optional_field_churn,null_valued_fields,nested_object_variation}. Achieves TP=0.0 (0/12, Wilson CI [0,0.243]) and FP=0.1875 (3/16, CI [0.066,0.43]), positive_control FAIL, separation FAIL (inverted direction). Calibration R²=0.9999 proves computation-dependent timing, so failure is signal-to-noise and pattern-indistinguishability, not MEASUREMENT_INVALID. Does NOT support broader claim that all temporal signals fail, nor does it close real-API, larger-N (>=100), reduced-jitter, or multi-signal-ensemble hypotheses; C-FRESHNESS remains HYPOTHESIS per lane charter.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35083040517/spec.json",
+    "research/experiments/EXP-GRAPH-35083040517/prereg.md",
+    "research/experiments/EXP-GRAPH-35083040517/freeze.json",
+    "research/experiments/EXP-GRAPH-35083040517/result.json",
+    "research/experiments/EXP-GRAPH-35083040517/report.md",
+    "research/experiments/EXP-GRAPH-35083040517/provenance.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+    "research/graph/freshness_detection/execute_response_time.py"
+  ],
+  "unresolved": [
+    "Whether N>=100 per condition would achieve power for KS D~0.3 at corrected alpha — prereg power note (~80% for D=0.4 at n=30) suggests larger N still limited by jitter magnitude; not tested.",
+    "Whether reduced jitter (e.g., 0-10ms) improves SNR enough to detect single-field drift; producer validity_notes flag this but no experiment.",
+    "Whether sequential/adaptive tests or per-request variance features outperform distribution KS; unexplored.",
+    "Whether real APIs (DB/cache/CDN) produce larger timing deltas than CPU-bound mock; mock is favorable case, failure here constrains but does not falsify all real-world temporal signals.",
+    "Whether nested_object_variation classification as noise is appropriate — it adds 2 fields (12 vs 10, etc.) and behaves like add_field; reclassification would change FP to 0/12 but still TP=0/12, decision unchanged, but pattern taxonomy needs refinement.",
+    "Ensemble complementarity of failed signals (Jaccard + TF-IDF + response-time) untested — multi-signal ensemble could theoretically exceed single-signal ceilings.",
+    "Fixed-threshold ratio baseline not explicitly reported with quantitative table; recomputed ratios ~1.02-1.05 confirm failure but should be tabulated for completeness."
+  ]
+}

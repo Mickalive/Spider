@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35010853847",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Correct result.json metrics.overall_fp_ci_noise: reported [0.9591,1.0] corresponds to n=90 Wilson CI; recomputed for n=360 is [0.9894,1.0] – does not change violation (upper bound >>0.15) but misstates overall precision – evidence result.json:12-13 vs recomputed Wilson(360,360)",
+    "Correct result.json metrics.overall_fp_ci_fresh: reported [0.0,0.1135] corresponds to n=30 per-size CI; recomputed for n=120 is [0.0,0.0310] – still passes null control but misstates overall CI – evidence result.json:14-15 vs Wilson(0,120)",
+    "Disclose and correct semantic_derived_measurements.json overall block: total_fresh_samples=480 total_fresh_fp=360 overall_fp_rate_fresh=0.75 [0.7094,0.7866] conflates noise detections with fresh FP; correct fresh denominator is 120 and overall noise FP should be reported separately – artifact raw_evidence/semantic_derived_measurements.json:400-407",
+    "Clarify threshold evaluation scope deviation from prereg.md section 6.3: prereg requires final TP/FP reporting on held-out test set (~18 per class per size) but producer reports metrics on full 90+90 pool after 80/20 calibration – threshold was optimized on calibration set then evaluated on full data, inflating effective n and optimism; deviation is disclosed per validity_notes but should be labeled EXPLORATORY per prereg section 15 – evidence prereg.md:137-146 vs research/graph/freshness_detection/execute_semantic_embedding.py:622-650 and result.json per_schema_size thresholds",
+    "Report missing prereg baselines quantitatively: spec.json baselines include Jaccard fixed threshold 0.85 and random classifier but result.json only quantifies Jaccard adaptive replication and ensemble – include fixed-threshold Jaccard TP/FP and random baseline for completeness even though they cannot rescue the inverted separation – evidence spec.json:8-13 vs result.json:105-116"
+  ],
+  "validity_findings": [
+    {
+      "finding": "TF-IDF fallback is preregistered and correctly disclosed, but representation is far weaker than hypothesized semantic embedding – vocabulary of 551 dominated by synthetic tokens field_*, churn_field_*, field_null with no shared meaning – sentence-transformers 384-dim contextual model remains untested",
+      "severity": "high",
+      "evidence_ref": "provenance.json:15-17 environment.embedding_method, prereg.md:98-109, validity_notes[0], research/graph/freshness_detection/execute_semantic_embedding.py:548-562"
+    },
+    {
+      "finding": "Threshold near 1.0 (0.9981-1.0 across sizes) leaves no margin between fresh similarity 1.0 and stale similarities 0.84-0.999 – any token change triggers detection, explaining 100% FP – measurement environment is capable of expressing effect but effect is inverted",
+      "severity": "high",
+      "evidence_ref": "result.json per_schema_size.*.threshold and per_pattern.mean_semantic_similarity, raw_evidence/semantic_raw_evidence.json per_schema_size.*.fresh_similarities=1.0"
+    },
+    {
+      "finding": "Direction inverted: structural noise mean similarity 0.846-0.950 LOWER than true drift 0.893-0.999 (Cohen d 1.20-1.89 in wrong direction) – Mann-Whitney one-sided p=1.0 at all 4 sizes correctly captures strongest possible falsification, not borderline",
+      "severity": "critical",
+      "evidence_ref": "result.json per_schema_size.*.mann_whitney_p=1.0 cohens_d 1.2062-1.8897, raw_evidence/semantic_raw_evidence.json stat_tests, report.md section 3.3-3.4"
+    },
+    {
+      "finding": "Target/split/sampling integrity preserved: 30 samples per pattern per size deterministic seed 20260913, schemas regenerated and verified against parent mock_schemas.json within 1e-6 Jaccard (all 720 per-pattern matches) – no leakage of drift label into embedding fit beyond TF-IDF vocabulary fitted on all schemas (including test), which is conservative for TF-IDF but not a semantic leak",
+      "severity": "low",
+      "evidence_ref": "provenance.json fixtures.mock_schemas.json, raw_evidence/semantic_raw_evidence.json seed, research/graph/freshness_detection/execute_semantic_embedding.py:503-537 verification asserts"
+    },
+    {
+      "finding": "Synthetic-to-real gap: mock schemas use random field_XXXX names with minimal semantics; TF-IDF treats them as distinct tokens, underestimating semantic overlap that realistic names might provide – supplementary realistic test with 5 hand-crafted schemas (GitHub/Stripe/Twitter) shows negligible separation 0.005 and even wrong-direction pair (stripe_charge_churn 0.9741 > stripe_charge_dispute 0.9696) but n=5 pairs is insufficient for statistical claim",
+      "severity": "medium",
+      "evidence_ref": "result.json realistic_schema_test, report.md table 3.6, prereg.md validity_threats 10.2"
+    },
+    {
+      "finding": "Threshold optimization uses full-data evaluation after 80/20 split, violating prereg confirmatory test-set isolation – calibration overfitting could optimistically bias TP upwards, yet even optimistic full-data FP remains 360/360=1.0 so falsification is robust to this bias",
+      "severity": "medium",
+      "evidence_ref": "prereg.md section 6.3 vs research/graph/freshness_detection/execute_semantic_embedding.py:624-650 split and 659-744 full-data counting"
+    },
+    {
+      "finding": "TF-IDF implementation deviates from prereg mean-pooling description: prereg specifies schema embedding = mean-pooled field embeddings; code fits vectorizer on individual field texts then transforms concatenated schema document – cosine similarity is closely related but not identical to mean pooling – deviation disclosed generically but not as representation change",
+      "severity": "low",
+      "evidence_ref": "prereg.md 5.3 fallback vs research/graph/freshness_detection/execute_semantic_embedding.py:157-199 compute_tfidf_embeddings vs compute_semantic_similarity"
+    },
+    {
+      "finding": "Controls correctly implemented and discriminating: positive control add_field 30/30 at all sizes mean 0.89-0.98, null control fresh 0/120 FP=0 – pipeline is not trivially broken; structural noise and separation controls fail as predicted by hypothesis falsification",
+      "severity": "low",
+      "evidence_ref": "result.json controls.positive_control_add_field PASS and null_control_fresh PASS, raw_evidence/semantic_raw_evidence.json fresh_similarities=1.0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Jaccard (field_path,type) adaptive T(n)=1-0.8/(n+1)",
+      "strength": "strong – parent falsified baseline re-measured on identical regenerated schemas",
+      "observed": "Replicated exactly: all 720 per-pattern Jaccard similarities match parent within 1e-6; TP 1.0 on true drift, FP 1.0 on noise – confirms parent carry_forward established facts and excludes schema-generation drift",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json jaccard_replication, provenance.json fixtures note, raw_evidence/semantic_raw_evidence.json jaccard_stale values vs parent mock_schemas.json"
+    },
+    {
+      "baseline_id": "Jaccard (field_path,type) fixed threshold 0.85",
+      "strength": "medium – expected to degrade at n>=10 per prior experiments",
+      "observed": "Not quantitatively reported in result.json metrics or artifacts – missing measurement; qualitatively would also fail on noise because Jaccard values for optional_field_churn 0.818 at all sizes <0.85, so FP would remain 1.0",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "spec.json baselines[1], result.json absent, raw_evidence/semantic_raw_evidence.json jaccard_stale optional_field_churn 0.818"
+    },
+    {
+      "baseline_id": "Random classifier (50% detection)",
+      "strength": "weak – trivially fails TP>=0.8 and FP<=0.15",
+      "observed": "Not quantitatively reported – trivial baseline would yield TP 0.5 FP 0.5, worse than semantic TP 0.972 but better than semantic FP 1.0 – omission does not affect falsification because semantic already fails FP ceiling",
+      "pass_fail": "UNKNOWN",
+      "evidence_ref": "spec.json baselines[2], result.json absent"
+    },
+    {
+      "baseline_id": "Ensemble alpha*Jaccard+(1-alpha)*semantic 10-fold CV",
+      "strength": "strong – tests whether complementary signals rescue discrimination",
+      "observed": "Converges to alpha≈0.0-0.12 pure semantic at all sizes, best F1≈0.651-0.662 – confirms Jaccard adds no value; both signals fail equally on noise so ensemble cannot rescue; optimization uses 5-fold not prereg 10-fold but result identical (pure semantic)",
+      "pass_fail": "FAIL",
+      "evidence_ref": "result.json ensemble_optimization, raw_evidence/semantic_raw_evidence.json ensemble_results, research/graph/freshness_detection/execute_semantic_embedding.py:818-826 n_folds=5"
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_tp_rate_true_drift": {
+      "producer": 0.9722,
+      "recomputed": 0.9722,
+      "numerator_denominator": "350/360",
+      "wilson_95_ci_producer": [0.9496, 0.9848],
+      "wilson_95_ci_recomputed": [0.9496, 0.9848],
+      "match": true,
+      "evidence_ref": "result.json metrics.overall_tp_rate_true_drift, raw_evidence/semantic_derived_measurements.json overall.total_true_detected/total_true_stale_samples"
+    },
+    "overall_fp_rate_noise": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator_denominator": "360/360",
+      "wilson_95_ci_producer": [0.9591, 1.0],
+      "wilson_95_ci_recomputed": [0.9894, 1.0],
+      "match": false,
+      "discrepancy": "producer reports per-size n=90 CI [0.9591,1.0] instead of overall n=360 CI [0.9894,1.0]; violation still holds (lower bound >>0.15)",
+      "evidence_ref": "result.json metrics.overall_fp_ci_noise vs Wilson(360,360)"
+    },
+    "overall_fp_rate_fresh": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "numerator_denominator": "0/120",
+      "wilson_95_ci_producer": [0.0, 0.1135],
+      "wilson_95_ci_recomputed": [0.0, 0.031],
+      "match": false,
+      "discrepancy": "producer reports per-size n=30 CI [0.0,0.1135] instead of overall n=120 CI [0.0,0.0310]; still passes FP<=0.15",
+      "evidence_ref": "result.json metrics.overall_fp_ci_fresh vs Wilson(0,120)"
+    },
+    "per_schema_size": {
+      "10": {
+        "threshold_producer": 0.9981,
+        "threshold_recomputed": 0.998107,
+        "tp_rate_true_drift_producer": 0.9778,
+        "tp_rate_true_drift_recomputed": 0.9778,
+        "noise_fp_rate_producer": 1.0,
+        "noise_fp_rate_recomputed": 1.0,
+        "mann_whitney_u_producer": 6485.0,
+        "mann_whitney_u_recomputed": 6485.0,
+        "mann_whitney_p_producer": 1.0,
+        "mann_whitney_p_recomputed": 1.0,
+        "cohens_d_producer": 1.2062,
+        "cohens_d_recomputed": 1.2062,
+        "per_pattern_change_type_tp_ci_lower_producer": 0.7868,
+        "per_pattern_change_type_tp_ci_lower_recomputed": 0.7868,
+        "match": true
+      },
+      "20": {
+        "threshold_producer": 0.9998,
+        "threshold_recomputed": 0.999825,
+        "tp_rate_true_drift_producer": 0.9556,
+        "tp_rate_true_drift_recomputed": 0.9556,
+        "noise_fp_rate_producer": 1.0,
+        "noise_fp_rate_recomputed": 1.0,
+        "mann_whitney_u_producer": 7050.0,
+        "mann_whitney_u_recomputed": 7050.0,
+        "mann_whitney_p_producer": 1.0,
+        "mann_whitney_p_recomputed": 1.0,
+        "cohens_d_producer": 1.6896,
+        "cohens_d_recomputed": 1.6896,
+        "per_pattern_change_type_tp_ci_lower_producer": 0.7032,
+        "per_pattern_change_type_tp_ci_lower_recomputed": 0.7032,
+        "match": true
+      },
+      "30": {
+        "threshold_producer": 0.9999,
+        "threshold_recomputed": 0.999932,
+        "tp_rate_true_drift_producer": 0.9889,
+        "tp_rate_true_drift_recomputed": 0.9889,
+        "noise_fp_rate_producer": 1.0,
+        "noise_fp_rate_recomputed": 1.0,
+        "mann_whitney_u_producer": 7168.0,
+        "mann_whitney_u_recomputed": 7168.0,
+        "mann_whitney_p_producer": 1.0,
+        "mann_whitney_p_recomputed": 1.0,
+        "cohens_d_producer": 1.8416,
+        "cohens_d_recomputed": 1.8416,
+        "match": true
+      },
+      "50": {
+        "threshold_producer": 1.0,
+        "threshold_recomputed": 0.999979,
+        "tp_rate_true_drift_producer": 0.9667,
+        "tp_rate_true_drift_recomputed": 0.9667,
+        "noise_fp_rate_producer": 1.0,
+        "noise_fp_rate_recomputed": 1.0,
+        "mann_whitney_u_producer": 7140.0,
+        "mann_whitney_u_recomputed": 7140.0,
+        "mann_whitney_p_producer": 1.0,
+        "mann_whitney_p_recomputed": 1.0,
+        "cohens_d_producer": 1.8897,
+        "cohens_d_recomputed": 1.8897,
+        "per_pattern_change_type_tp_ci_lower_producer": 0.7438,
+        "per_pattern_change_type_tp_ci_lower_recomputed": 0.7438,
+        "match": true
+      }
+    },
+    "controls": {
+      "positive_control_add_field": {
+        "producer": "PASS",
+        "recomputed": "PASS",
+        "observed": "30/30 detected at all sizes, mean similarity 0.8935-0.9789 < threshold",
+        "evidence_ref": "result.json controls.positive_control_add_field, raw_evidence/semantic_raw_evidence.json stale_similarities.add_field"
+      },
+      "null_control_fresh": {
+        "producer": "PASS",
+        "recomputed": "PASS",
+        "observed": "0/120 FP, fresh similarities exactly 1.0 > threshold at all sizes",
+        "evidence_ref": "result.json controls.null_control_fresh, raw_evidence/semantic_raw_evidence.json fresh_similarities"
+      },
+      "structural_noise_optional_churn": {
+        "producer": "FAIL",
+        "recomputed": "FAIL",
+        "observed": "30/30 FP at all 4 sizes, CI [0.8865,1.0] lower bound >>0.15, mean similarity lowest of all patterns 0.846-0.892",
+        "evidence_ref": "result.json controls.structural_noise_optional_churn"
+      },
+      "structural_noise_null_fields": {
+        "producer": "FAIL",
+        "recomputed": "FAIL",
+        "observed": "30/30 FP at all sizes, mean 0.893-0.909",
+        "evidence_ref": "result.json controls.structural_noise_null_fields"
+      },
+      "structural_noise_nested_object": {
+        "producer": "FAIL",
+        "recomputed": "FAIL",
+        "observed": "30/30 FP at all sizes, mean 0.950-0.992",
+        "evidence_ref": "result.json controls.structural_noise_nested_object"
+      },
+      "jaccard_replication": {
+        "producer": "PASS",
+        "recomputed": "PASS",
+        "observed": "All 720 Jaccard values match parent mock_schemas.json within 1e-6; Jaccard TP 1.0 FP 1.0 replicated",
+        "evidence_ref": "result.json controls.jaccard_replication, raw_evidence/semantic_raw_evidence.json jaccard_stale vs parent mock_schemas.json"
+      },
+      "separation_control_mann_whitney": {
+        "producer": "FAIL",
+        "recomputed": "FAIL",
+        "observed": "p=1.0 at all sizes, one-sided alternative true_drift < noise false – noise MORE divergent than drift",
+        "evidence_ref": "result.json controls.separation_control_mann_whitney, raw_evidence/semantic_raw_evidence.json stat_tests"
+      }
+    },
+    "change_type_hardest_pattern": {
+      "producer": "TP CI lower <0.8 at n=10,20,50",
+      "recomputed": "confirmed: n10 0.7868, n20 0.7032, n50 0.7438 <0.8; n30 0.8333 passes",
+      "observed": "Changing one type token in 10-50 fields produces minimal TF-IDF shift (mean similarity 0.995-0.999)",
+      "evidence_ref": "result.json per_schema_size.*.per_pattern.change_type"
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for TF-IDF (bag-of-words) semantic similarity on (field_name:field_type) text pairs with mean-pooled/document-level cosine: cannot distinguish true schema drift (add_field/remove_field/change_type) from structural noise (10% optional_field_churn, null_valued_fields, nested_object_variation) on synthetic schemas 10-50 fields with deterministic seed 20260913 – achieves TP 0.972 but FP 1.0 at all sizes, inverted separation (noise more divergent than drift, Cohen d 1.2-1.9 wrong direction, Mann-Whitney p=1.0). Does NOT falsify sentence-transformers all-MiniLM-L6-v2 or other contextual embeddings, per-field matching, multi-signal ensembles, smaller noise magnitudes, or real API schemas – those remain UNKNOWN per prereg validity_threats and unresolved[0-2]. No product promotion justified.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35010853847/request.json",
+    "research/experiments/EXP-GRAPH-35010853847/spec.json",
+    "research/experiments/EXP-GRAPH-35010853847/prereg.md",
+    "research/experiments/EXP-GRAPH-35010853847/freeze.json",
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/report.md",
+    "research/experiments/EXP-GRAPH-35010853847/provenance.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_raw_evidence.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_decision_evaluation.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/hashes.json",
+    "research/graph/freshness_detection/execute_semantic_embedding.py",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json"
+  ],
+  "unresolved": [
+    "Whether sentence-transformers all-MiniLM-L6-v2 384-dim contextual embeddings would succeed where TF-IDF bag-of-words fails – prereg primary method untested due to torch availability",
+    "Whether per-field semantic matching (field-by-field alignment + type similarity) rather than schema-level pooled cosine would rescue change_type detection (currently hardest, TP CI <0.8 at 3/4 sizes)",
+    "Whether smaller structural noise magnitudes (1-2% churn, single optional field) would lower FP below 0.15 while preserving TP",
+    "Whether response-time profiling or session token validation (other orthogonal signals from parent handoff) can discriminate drift from noise",
+    "Whether realistic API naming (meaningful field names) would change TF-IDF behavior – realistic 5-pair test suggests same failure but n=5 insufficient for generalization",
+    "Whether ensemble with contextual embeddings (instead of TF-IDF) would achieve complementarity that TF-IDF+Jaccard ensemble (alpha≈0) does not"
+  ]
+}
