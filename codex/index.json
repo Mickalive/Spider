@@ -1846,6 +1846,31 @@
         "handoff.json": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
       }
     },
+    "EXP-PRODUCT-34704657427": {
+      "lane": "product",
+      "request_id": "9815dca093d8081fd08d7423",
+      "created_at": "2026-09-12T16:15:22.921158+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Should slot_prefixes be computed non-empty (extracting the path segment before the varying part for VALUE CONTRACT prefix-stripping) or accepted as empty (template-only binding), given that the parent implementation produced empty slot_prefixes for path-prefix patterns despite the design intent of non-empty values?",
+      "audit_status": "REVISE",
+      "decision": "REVISE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "e4249732669660c49afb59ba70b5fa6b1c5fd536c6ba3c6114dd93958da3ea57",
+        "spec.json": "a4866e99043ff4076b543c2d58000809998cd1765957ca72afc7b12323f163cb",
+        "prereg.md": "02f60c7341d0db78fd2f1ff3a9aa72b80ee0391812666dde144e36872113573d",
+        "freeze.json": "ac4ac2252615f3de6ec0481fd43e040ead95798896c2c9dd7073fcc993815b52",
+        "result.json": "1cb42b9d35ef8f760789cf1fd86ebfa6b5823dc2f31f2c081ce822d992167deb",
+        "report.md": "7e70a25634e4e3e43024d253935cad07c698be1bca237eb77b0d3b1bce652c17",
+        "provenance.json": "fdd851e9794a7867fb28a988c939643de20bf031d4de259b3158474b4b610e0c",
+        "audit.json": "bc0c40ae89258d0c81a0e2af56498ae47339179d9497f97f080472fca75d5c66",
+        "verdict.json": "091de482e303affe744b1ef6e3afa6e8f5572454765f9e648ba62d73c66fa127",
+        "handoff.json": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",

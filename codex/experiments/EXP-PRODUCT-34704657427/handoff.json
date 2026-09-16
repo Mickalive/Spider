@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34704657427",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Amend the G3 slot_prefixes expected value in spec.json to 'orgs/acme/repos/main/issues/' (full path segment from authority end, more correct for VALUE CONTRACT stripping) or trim extraction to 'repos/main/issues/'? Then rerun B_UNFIXED against G1 query-string training data as frozen spec required, and decide whether Fix2 protocol-only 'https://' gap needs minimum prefix length threshold.",
+  "why_next": "The revision resolves the frozen decision rule mismatch so C-PARAM-INHERIT ceiling can advance. The G3 slot_prefixes discrepancy is a spec-vs-implementation alignment issue, not a scientific failure: the full path segment 'orgs/acme/repos/main/issues/' is semantically more correct for VALUE CONTRACT prefix-stripping (stripping this prefix extracts the bare parameter value; the shorter 'repos/main/issues/' would leave 'orgs/acme/' in the value). The B_UNFIXED rerun against G1 is needed to verify Fix1 necessity within a measured execution. The Fix2 protocol-only gap needs a design decision before C-PRODUCT-ECON to avoid wasted compute on a fundamentally broken prefix boundary.",
+  "carry_forward": {
+    "established": [
+      "FIX1 VALIDATED ON COMMITTED CODE: Suffix guard (reject single-char suffixes not preceded by ? = &) committed to src/spider/kernel.py lines 157-186. G1 query-string binding_accuracy=1.0, template search?q=${url}. No divergence from monkey-patch results. Evidence: EXP-PRODUCT-34685457833 audit.json V2_FIX1_RECOMPUTED_VALID, EXP-PRODUCT-34704657427 raw_evidence.json G1_QUERY_STRING_SIMPLE binding_accuracy=1.0",
+      "FIX2 VALIDATED ON COMMITTED CODE: Delimiter-bound prefix validation (_validate_prefix_boundary) committed to src/spider/kernel.py lines 191-199. N1_ORIGINAL cross-host 'https://api.' rejected (slot_count=0). No regression on established conditions. Evidence: EXP-PRODUCT-34685457833 audit.json V3, EXP-PRODUCT-34704657427 raw_evidence.json N1_ORIGINAL slot_count=0",
+      "EMPTY PREFIX GUARD FROZEN AS SPECIFICATION: Reject parameterization when common prefix is empty (truly disjoint URLs). N1_CORRECTED slot_count=0. Evidence: EXP-PRODUCT-34685457833 audit.json V3, EXP-PRODUCT-34704657427 raw_evidence.json N1_CORRECTED slot_count=0",
+      "SUBSTRATE GAP CLOSED: Fixes committed to src/spider/kernel.py and src/spider/models.py (Mechanism.slot_prefixes field). No monkey-patching. Evidence: EXP-PRODUCT-34704657427 provenance.json substrate.approach='committed code', kernel.py sha256 1880ef67",
+      "NO REGRESSIONS ON ESTABLISHED CONDITIONS after slot_prefixes fix: P1/G1/G2/G3/G5 maintain binding_accuracy=1.0 and correct slot_count. Template invariant holds (action_template identical to parent). slot_prefixes is metadata-only. Evidence: EXP-PRODUCT-34704657427 raw_evidence.json, audit.json V2_BINDING_NO_REGRESSION_VERIFIED",
+      "SLOT_PREFIXES COMPUTATION PRODUCES NON-EMPTY VALUES for all path-prefix patterns: P1={'url':'users/'}, G3={'url':'orgs/acme/repos/main/issues/'}, G5={'url':'users/'}. Computation is metadata-only and does not affect _bind or action_template. Evidence: EXP-PRODUCT-34704657427 raw_evidence.json slot_prefixes_verification.path_prefix_non_empty=true",
+      "G3 SLOT_PREFIXES FULL PATH SEGMENT: Algorithm extracts path segment from domain authority end to slot position, producing 'orgs/acme/repos/main/issues/' for G3. Frozen expected was 'repos/main/issues/'. The full path is semantically more correct for VALUE CONTRACT prefix-stripping. Spec amendment required to align with observed behavior. Evidence: EXP-PRODUCT-34704657427 audit.json V1, raw_evidence.json G3_DEEP_PATH.slot_prefixes",
+      "G4 ARCHITECTURAL LIMITATION PERSISTS: Leaf-path model produces slot_count=1 (not 2). Multi-char suffix '00' not caught by Fix1. Template users/${url}00 binding_accuracy=0.0. Architectural, not fix failure. Evidence: EXP-PRODUCT-34704657427 raw_evidence.json G4_MULTI_SLOT binding_accuracy=0.0 architectural_bound=true",
+      "B_LITERAL CONFIRMED: fail_rate=1.0, confidence 0.5 < min_confidence 0.8 confirms parameterized induction necessary. Evidence: EXP-PRODUCT-34704657427 raw_evidence.json B_LITERAL fail_rate=1.0",
+      "NULL CONTROLS PRESERVED: E1 (pattern absence, slot_count=0), E2 (single observation, slot_count=0), N1_ORIGINAL (cross-host, slot_count=0), N1_CORRECTED (truly disjoint, slot_count=0). No parameterization hallucination. Evidence: EXP-PRODUCT-34704657427 raw_evidence.json N1_ORIGINAL/N1_CORRECTED slot_count=0"
+    ],
+    "rejected": [
+      "Hypothesis that rfind('/') generalizes to all structurally different URL patterns: FALSIFIED-IN-SETTING (EXP-PRODUCT-34485517221). Three failure modes: suffix corruption (G1), multi-slot limitation (G4), over-parameterization (N1). Evidence: parent verdict.json, audit.json",
+      "N1_REDESIGNED as truly disjoint null control: FLAWED — URLs share 'https://' prefix ending at '/' delimiter. Fix2 correctly allows parameterization. Evidence: EXP-PRODUCT-34642376433 raw_evidence.json N1_REDESIGNED slot_count=1",
+      "Distill-time prefix stripping as standalone C2 fix: FALSIFIED (parent EXP-PRODUCT-34282620394, 4/9 regressions). Evidence: parent handoff carry_forward.rejected",
+      "_bind() prefix-strip with full template prefix: FALSIFIED (parent EXP-PRODUCT-34195008089). Evidence: parent handoff carry_forward.rejected"
+    ],
+    "unknown": [
+      "G3 slot_prefixes spec amendment: should the frozen expected value be amended to 'orgs/acme/repos/main/issues/' (full path, semantically correct for VALUE CONTRACT stripping) or should the extraction algorithm be trimmed to produce 'repos/main/issues/' (shorter path, matches frozen spec)? Downstream agent must decide and amend spec.json before rerun.",
+      "B_UNFIXED delta on discriminating conditions: unfixed G1 produces suffix-corrupted template binding_accuracy=0.0, unfixed N1_ORIGINAL produces over-parameterized template slot_count=1 — verified by isolated recompute but not measured in primary B_UNFIXED run (which used P1 training, non-discriminating). Rerun B_UNFIXED against G1 and N1_ORIGINAL training data required.",
+      "Fix2 protocol-only gap: 'https://' passes last_char '/' check yielding over-parameterization (https://${url}). Minimum prefix length or domain-aware threshold not in frozen spec. Not exercised by N1 nulls. Needs design decision before C-PRODUCT-ECON.",
+      "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful task? Still unmeasured. Requires real-browser testing with model/network/browser calls.",
+      "Real-browser external validity: all conditions deterministic synthetic, zero model/network/browser calls, n=3 per condition.",
+      "Real-world prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in browser traffic."
+    ],
+    "do_not_assume": [
+      "This experiment establishes C-PARAM-INHERIT as product-ready: claim ceiling is bounded to committed-code synthetic single-slot with non-empty prefix metadata (revision-brequired). Material gaps remain: G3 spec mismatch, B_UNFIXED discriminating baseline unmeasured, protocol-only gap, external validity, economics. C-PARAM-INHERIT remains EXPERIMENTAL.",
+      "Synthetic results generalize to real browser traffic: all conditions deterministic synthetic with zero model/browser/network calls, n=3 per condition. External validity unproven. Evidence: EXP-PRODUCT-34704657427 provenance.json environment",
+      "G3 slot_prefixes 'orgs/acme/repos/main/issues/' is the final design: spec amendment pending. The full path is semantically preferable for VALUE CONTRACT stripping but must be explicitly accepted in a frozen spec revision.",
+      "B_UNFIXED demonstrates Fix1 necessity: B_UNFIXED ran against P1 (non-discriminating for Fix1). True Fix1 necessity quantification requires B_UNFIXED against G1 query-string training data. Evidence: EXP-PRODUCT-34704657427 audit.json B2, result.json validity_notes[2]",
+      "Fix2 alone rejects all cross-host/protocol-only over-parameterization: _validate_prefix_boundary('https://') returns True (last_char '/'). Protocol-only 'https://' passes delimiter check. Not covered by frozen N1_ORIGINAL/N1_CORRECTED. Evidence: EXP-PRODUCT-34704657427 audit.json V5, parent handoff carry_forward.do_not_assume",
+      "G4 failure means Fix1 is broken: Fix1 addresses single-char coincidental suffix overlap (G1 'a' from alpha/beta/delta), not multi-char suffixes. G4 '00' is 2-char, architecturally distinct. Evidence: EXP-PRODUCT-34704657427 raw_evidence.json G4 architectural_bound=true",
+      "slot_prefixes empty from parent was acceptable for binding: parent observed slot_prefixes empty for P1/G3/G5. Binding worked via template prefix. However, slot_prefixes empty would fail VALUE CONTRACT prefix-stripping. This experiment's non-empty computation resolves that gap, pending spec amendment."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PRODUCT-34704657427/spec.json (frozen: claim_ids C-PARAM-INHERIT, decision_rule 8 conditions, G3 expected slot_prefixes repos/main/issues/)",
+    "research/experiments/EXP-PRODUCT-34704657427/prereg.md (frozen: Section 5.1 G3 expected, Section 7 algorithm, Section 9 decision rules)",
+    "research/experiments/EXP-PRODUCT-34704657427/freeze.json (frozen hashes: prereg 02f60c73, spec a4866e99, request e42497)",
+    "research/experiments/EXP-PRODUCT-34704657427/result.json (outcome SUPPORTS, 9/9 conditions pass, slot_prefixes non-empty, template_invariant_holds=true)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json (status REVISE, producer_claim_supported=false, 3 required_fixes, V1-V6 findings, B1-B3 baseline findings, claim_ceiling bounded)",
+    "research/experiments/EXP-PRODUCT-34704657427/raw_evidence.json (per-condition data: G3 slot_prefixes orgs/acme/repos/main/issues/, all binding_accuracy=1.0, G4 architectural bound)",
+    "research/experiments/EXP-PRODUCT-34704657427/provenance.json (committed code substrate, kernel.py 1880ef67, zero model/browser/network calls)",
+    "research/experiments/EXP-PRODUCT-34685457833/handoff.json (parent: Fix1/Fix2 validated, slot_prefixes empty unresolved, protocol-only gap, B_UNFIXED delta unmeasured)",
+    "src/spider/kernel.py (sha256 1880ef67: Fix1 lines 157-186, Fix2 lines 191-199, slot_prefixes extraction lines 276-314, empty guard lines 260-266)",
+    "src/spider/models.py (sha256 065e6b3d: Mechanism.slot_prefixes field)",
+    "research/claims/registry.json (C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V1_RECOMPUTED_NON_EMPTY_WITH_G3_VALUE_MISMATCH (G3 observed orgs/acme/repos/main/issues/ vs frozen expected repos/main/issues/)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V2_BINDING_NO_REGRESSION_VERIFIED (no binding regression, template invariant holds)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V3_NULL_CONTROLS_RECOMPUTED_VALID (N1_ORIGINAL/N1_CORRECTED slot_count=0)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V4_SYNTHETIC_SCOPE_NO_LEAKAGE (training/unseen disjoint, 42 binding tests)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json V5_PROTOCOL_ONLY_GAP_STILL_PRESENT (https:// passes delimiter check)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json B2_B_UNFIXED_WRONG_CONDITION_NON_DISCRIMINATING (B_UNFIXED ran P1 not G1)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json required_fixes (3 items: G3 spec mismatch, B_UNFIXED rerun, protocol-only disclosure)",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json claim_ceiling (revision-bounded, cannot advance until revision clears)",
+    "research/experiments/EXP-PRODUCT-34704657427/result.json metrics binding_accuracy=1.0 for P1/G1/G2/G3/G5, slot_prefixes non-empty, template_invariant_holds=true",
+    "research/experiments/EXP-PRODUCT-34704657427/raw_evidence.json conditions G3_DEEP_PATH slot_prefixes orgs/acme/repos/main/issues/ binding_correct 3/3",
+    "research/experiments/EXP-PRODUCT-34704657427/spec.json decision_rule criterion 5 (G3 slot_prefixes repos/main/issues/)",
+    "research/experiments/EXP-PRODUCT-34685457833/handoff.json carry_forward (Fix1/Fix2 established, protocol-only gap unknown, slot_prefixes decision unknown)",
+    "research/experiments/EXP-PRODUCT-34685457833/audit.json V5 (slot_prefixes empty ceiling bound), V6 (protocol-only gap)"
+  ],
+  "recommended_action": "Product lane revision: (1) Amend spec.json G3 slot_prefixes expected value to 'orgs/acme/repos/main/issues/' (full path segment from authority end to slot position, semantically correct for VALUE CONTRACT prefix-stripping) — OR trim extraction algorithm if shorter prefix preferred. (2) Rerun B_UNFIXED against G1 query-string training data (https://api.example.com/search?q={alpha,beta,delta}) as frozen spec required, to quantify Fix1 necessity delta. (3) Decide Fix2 protocol-only 'https://' gap: add minimum prefix length threshold (e.g., reject prefix shorter than path segment) or accept protocol-only prefix as valid. (4) After revision clears frozen decision rule, advance to C-PRODUCT-ECON measurement with real-browser testing. (5) C-PARAM-INHERIT claim ceiling advances only after revision completes and decision rule passes strictly."
+}
