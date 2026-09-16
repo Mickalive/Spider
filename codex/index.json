@@ -68,7 +68,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "0cef5908fade8d636ed40f64f5cd5d64e2a909b8",
       "hashes": {
         "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
@@ -287,7 +287,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "0d00d3abac08d203c6df7314c622969785d6f83e",
       "hashes": {
         "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
@@ -562,7 +562,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "c1a660af636302945d2817697e5470f50efac713",
       "hashes": {
         "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
@@ -778,7 +778,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "1504ba88ec66a9060656c9a3b75c586bc55e9fe9",
       "hashes": {
         "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
@@ -915,7 +915,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "a4c9a3e22d344c9e0bd5d392d81dee1b572ff88d",
       "hashes": {
         "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
@@ -969,7 +969,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "fcec93130c8d7a7d9feed13b142420d179c21b82",
       "hashes": {
         "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
@@ -1131,7 +1131,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "a23db9347a329843bf69f7ffe1066831fcd55004",
       "hashes": {
         "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
@@ -1266,7 +1266,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "e45dabebba74bac4239f93bdff7a6c1a27938156",
       "hashes": {
         "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
@@ -1484,7 +1484,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "ad803c5168c071bf1edc4125404a7a0096dcdee3",
       "hashes": {
         "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
@@ -1621,7 +1621,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "1eae61c57d53569bb75757e3e4114c823f2e7911",
       "hashes": {
         "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
@@ -1729,7 +1729,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "df5a7fd2f905abe14373bfd3ac607f448a688af8",
       "hashes": {
         "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
@@ -1783,7 +1783,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "4ce4954fbfec56bcc79d0de613f8fcf99ea86b94",
       "hashes": {
         "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
@@ -1892,7 +1892,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "6fc96c940178ab198faee313db88403c6e3b777d",
       "hashes": {
         "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
@@ -1919,7 +1919,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "8ae879a69fd5021c8646c42f2d06a4915fe16898",
       "hashes": {
         "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
@@ -2027,7 +2027,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "b8b379afd65beb4b0782d7e4f0c950d04317bfb8",
       "hashes": {
         "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
@@ -2164,7 +2164,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "d2eff3812d50dfe4877e90bb019792f22423ce6c",
       "hashes": {
         "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
@@ -2245,7 +2245,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "894ea2ef394f8f3101c7841ad48264f3752492a8",
       "hashes": {
         "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
@@ -2355,7 +2355,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "108cd9fb47911cf4df33d4b810fb2cbd0db44a86",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "source_commit": "77d4d23236294e10b101bae7a5cd7f9a5a22332d",
       "hashes": {
         "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
@@ -2585,6 +2585,33 @@
         "audit.json": "64c4104c2177dca7145e187fe9bea03eb62f888c53cbce98abdc40d652d382c8",
         "verdict.json": "44020885b021bea1a62c054683bf0ac38fb53f2cfd1319f755b3c628ffe814fb",
         "handoff.json": "28defd31b31a7d340a5cd2905a10ce81d8d05f9229f34ed90cb5d62483622291"
+      }
+    },
+    "EXP-PHYSICS-35130680344": {
+      "lane": "physics",
+      "request_id": "1e95ef2a15dd96cfc3ff5959",
+      "created_at": "2026-09-16T17:50:56.073390+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On a branching FSM with session-dependent transitions (H(S_next|URL,H_K=3) > 0.2 bits), does non-trivial response encoding \u2014 realistic page-content structure (title, items, status) that varies with state but contains NO explicit state_id, session_token, direction, or step fields \u2014 yield conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125, thereby addressing the V10 identifiability concern that the parent's PMI was trivially constructed from explicit state label injection?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "source_ref_head": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
+      "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
+      "hashes": {
+        "request.json": "597e09c2fcef5c326c4374b44a38b1f99af46a23559f05122c50f55b7163ee6b",
+        "spec.json": "8119a5cd679afb31bb60d1d6547d6fd26ae9f4cedfb11483a88a0f52ff258f89",
+        "prereg.md": "32efffee816198eafa41d5b77aff39bfdb334e6d358969ceab1550c4a96c132e",
+        "freeze.json": "dbb5c050366bbea62e93066e28d4210ce8bfb18a3cc7c7dbb2e740420e31a3e9",
+        "result.json": "d52b96aeaaed04f5e0b77c38632279994c29745f3f03ea4e36aeeaffd09d18f2",
+        "report.md": "7bcb97ae19c3544f85bddabe1c0cfb09a22c9eef04672f780e757360e103e03b",
+        "provenance.json": "0c54d99abfe9ca67091b75ce33de6de6b759ce03d39227afbf775aedc9dde333",
+        "audit.json": "842deb3f640fdf21e571a7ceb86984617cadd18981304a7be72449543ce89c56",
+        "verdict.json": "40bf9e0eefc05754bab9e82880f7a208487043fa7d26a4449c4df725a20b6cde",
+        "handoff.json": "1b3cedeede615c4c67b8437fb14e4a872718b022ff6cb5d821090156e05de800"
       }
     },
     "EXP-GRAPH-35130682058": {

@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35130680344",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix positive control design: spec positive_control expects session-randomized BC PMI ≈0 on non-trivial encoding, but NT response is deterministic per state (3 hashes: c44f00a8232fd1cf/e58d93597938a463/1d676009ad2c017a) independent of session. Randomizing session_id does not break R->S mapping, guaranteeing BC PMI ≈0.64 by construction (observed 0.640388 > 3*0.014778). Redesign control to randomize STATE or response-state pairing (e.g., shuffle Response_before within state or replace with random state's content), or preregister positive control only for session-dependent encodings.",
+    "Fix session/ trajectory identity across conditions: spec measurement_validity states 'Same FSM, same sessions, same session assignment, only response content differs' and 'Generate session_directions ONCE, use identically'. Code generates session_directions once but then generates trajectories sequentially with shared RNG (Random(42)) continuing state, causing 0/200 trajectories to have identical (session_id, action sequence) across NT vs TR (recomputed). Prereg must enforce identical action sequences and session assignments via seeded replication or disclose independent sampling and treat comparison as between-subjects with variance.",
+    "Fix paired permutation test to match prereg 9.2: spec requires 'Paired permutation test across trajectories (trajectory-level, fixing parent V6) 1000 perms' on PMI difference. Implementation paired_permutation_test does stratum-level sign-flip on per-stratum PMI differences (diffs across common_keys, mean sign-flip), not trajectory-level label permutation. Replace with trajectory-level permutation or amend prereg and decision_rule C3.",
+    "Fix primary inference: BC PMI NT K3=0.7659 >0.05 passes magnitude threshold but Bonferroni p=0.0759 (raw 0.01897) fails C2 p<0.0125; TR K3 also non-significant (p_bonf 0.409). Both explicit and non-trivial encodings lack significance at K=3 despite H>0, indicating insufficient power or inflated variance (perm_null_std 0.082). Do not claim PMI persists; increase N, report raw and corrected p, or use focused correction (exclude SI-like baselines) with justification.",
+    "Fix cardinality criterion scope disclosure: spec decision_rule C7 requires |R|<0.8*N per stratum but C7 evaluated only on NT (all_pass true, max ratio 0.176). TR fails 17/70 strata (ratio up to 0.94, e.g., ('/ ',('branch','branch','advance'),4) N=17 n_unique 16 ratio 0.941). If C7 applied to both conditions per falsifier (6), measurement would be invalid due to TR degeneracy. Prereg must state whether C7 applies to NT only or both and handle TR degeneracy.",
+    "Fix aggregation/permutation methodology disclosure: permutation p aggregated as weighted average of per-stratum p_raw*N across non-deterministic strata (permutation_test_stratum_agg), not as pooled permutation of aggregate PMI. BC PMI aggregated as weighted observed - weighted perm_mean. Document that this is not the standard pooled null and affects p calibration; report pooled alternative as sensitivity check.",
+    "Fix physics identifiability: NT encoding still has deterministic 1:1 state->response mapping (3 hashes for 3 states) despite containing no explicit state_id/session_token/direction/step fields. I(S_next;Response_before|URL,H_K)=I(S_next;S_before|...) so PMI>0 is constructed by content-state determinism, not emergent web dynamics. Real SPAs have noisy/many-to-one content. Disclose this tautology (prereg 11.1 mitigation) and test with noisy or many-to-one content, or bound claim to deterministic content-as-state-label.",
+    "Fix artifact hash population: result.json artifacts list sha256 null (provenance.json reports raw_result.json d12bc0b918472caec515b2a8bf5b17ccb7ea9ef7cae471c69737d76fe588a369, run_experiment.py ab87868132e28d3aa038285e1c8ddfaa2e92e5130080564d78e8688a1ea20c63). Populate actual hashes in result.json per EXPERIMENT_PACKET.md artifact spec or explain absence in validity_notes."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_POSITIVE_CONTROL_FAILURE_BY_CONSTRUCTION",
+      "severity": "critical",
+      "finding": "Positive control session-randomized on NT encoding fails by design: BC PMI=0.6404 not ≈0, min_perm_null_std=0.01478>0 but |0.640|<0.044 fails. NT response deterministic per state (3 hashes independent of session), so replacing session_id with random from different trajectory and recomputing response via make_non_trivial_response(state) preserves R->S correlation. Expected BC PMI≈0 in spec is false for this encoding. Control is non-diagnostic for NT; failure does not indicate pipeline broken but that spec expectation is wrong. Per frozen decision_rule C4 requires pass AND perm_null_std>0 on H>0 strata; observed fails C4, so MEASUREMENT_INVALID per rule, but root cause is design misspecification, not execution error.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:positive_control Expected BC PMI ≈0 session-randomized on non-trivial encoding",
+        "research/experiments/EXP-PHYSICS-35130680344/prereg.md:8.1 Session-randomized control CORRECTED exclude H=0 strata",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:controls.positive_control_session_randomized bias_corrected_pmi=0.6403878303629178 min_perm_null_std=0.014777601133041099 pass=false",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:controls.positive_control_session_randomized bias_corrected_pmi=0.6403878303629178 min_perm_null_std=0.014777601133041099",
+        "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py:session_randomized_control response deterministic per state make_non_trivial_response",
+        "recomputed_metrics:NT_unique_hashes=3 TR_unique=442 session randomization cannot break deterministic state->hash mapping"
+      ]
+    },
+    {
+      "id": "V2_PRIMARY_CLAIM_NON_SIGNIFICANT_DESPITE_LARGE_BC_PMI",
+      "severity": "critical",
+      "finding": "Primary hypothesis H1 fails Bonferroni test: BC PMI NT K3=0.7659 >0.05 passes magnitude but perm_p_bonf=0.0759 (raw 0.01897)*4 >>0.0125 threshold. TR K3=0.3449 p_bonf=0.409, TR K1=0.791 p_bonf=0.172 also non-significant. Even explicit state label encoding (trivial) is non-significant at K=3, indicating pipeline lacks power at K=3 despite H>0 or variance inflated. Raw p 0.019 also fails uncorrected alpha 0.05 after Bonferroni. Per decision_rule C2 requires BC PMI>0.05 AND p<0.0125; C2 false => cannot SURVIVE. Producer correctly reports C2 false and MEASUREMENT_INVALID, but broad claim that page-content carries predictive information is not supported as confirmatory.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:decision_rule C2 BC PMI>0.05 with Bonferroni p<0.0125",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:metrics.BC_PMI_NT_K3=0.765900785112734 perm_p_bonf_NT_K3=0.07589749847467968 BC_PMI_TR_K3=0.3449301560218977",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:per_k_results.3.non_trivial.bias_corrected_pmi=0.7659 perm_p_raw=0.018974 perm_p_bonf=0.07589 perm_null_std=0.0817",
+        "research/experiments/EXP-PHYSICS-35130680344/prereg.md:9.1 Primary test one-sided PMI>0.05 Bonferroni across 4 comparisons alpha 0.0125"
+      ]
+    },
+    {
+      "id": "V3_SESSION_TRAJECTORY_MISMATCH_ACROSS_CONDITIONS",
+      "severity": "high",
+      "finding": "Within-experiment comparison (NT vs TR) claims identical FSM, sessions, session assignment, only response differs, but trajectories are generated sequentially with shared RNG continuation. Recomputed: 0/200 index-aligned trajectories share identical (session_id + action sequence) between conditions; first NT traj session_0 left actions [advance,branch...], first TR traj session_8 right actions [branch,branch...]. Session_directions generated once (fix of parent V7) but trajectory sampling still diverges. Difference diff_bc_pmi K3=0.421 (NT>TR) is between independent samples, not paired within-session comparison, inflating variance and violating exchangeability for paired test.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:measurement_validity Session assignment identical across conditions: generate session_directions once, use identically for both conditions (fixes parent V7)",
+        "research/experiments/EXP-PHYSICS-35130680344/prereg.md:5.4 Why This Comparison Is Decisive same FSM same sessions same assignment only response differing",
+        "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py:generate_trajectories called twice with shared rng (random.Random(seed)) without reset",
+        "recomputed_metrics:identical_traj_count_0_of_200 session_direction_mismatch_across_trajectories"
+      ]
+    },
+    {
+      "id": "V4_PAIRED_TEST_SPEC_VIOLATION",
+      "severity": "high",
+      "finding": "Encoding comparison test (C3: NT > TR -0.1 bits) reports diff 0.421 passes magnitude but paired_perm_p_K3=1.0 (and K1 1.0) not significant using stratum-level sign-flip on per-stratum raw PMI differences across common_keys (mean sign-flip). Spec 9.2 requires trajectory-level paired permutation test across trajectories (trajectory-level, fixing parent V6) on PMI difference. Current p tests whether mean stratum difference >0 under sign null, not whether trajectory pairing explains PMI difference. Spec violation makes C3 p uninterpretable; NT>TR-0.1 holds descriptively but not via preregistered statistic.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:measurement_validity and decision_rule C3 paired permutation test (trajectory-level) + prereg.md 9.2 Paired permutation across trajectories 1000 perms",
+        "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py:paired_permutation_test stratum-level implementation lines 1019-1055",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:encoding_comparison.K3.diff_bc_pmi=0.42097 paired_perm_p=1.0 nt_gt_tr_minus_01=true"
+      ]
+    },
+    {
+      "id": "V5_DETERMINISM_CHECK_PASSES_BUT_MASKS_TAUTOLOGY",
+      "severity": "medium",
+      "finding": "Determinism check passes both conditions accuracy 1.0 on grouping (FSM_state,session,step) with 436 NT and 433 TR groups, confirming P(Response_hash|state,session,step)=1.0 after parent V1 fix (include step). However NT determinism is 1.0 because only 3 hashes deterministic per state; grouping inflates count but masks that response uniquely identifies state (3 values for 3 states). Check confirms no observation noise, not that encoding is non-trivial. No falsification risk.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:falsifier C3 and measurement_validity determinism check CORRECTED grouping includes step Both conditions must have accuracy=1.0",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:controls.determinism_check non_trivial accuracy 1.0 total_groups 436 trivial 433",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:controls.determinism_check recreated",
+        "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py:determinism_check grouping (state,session,step)"
+      ]
+    },
+    {
+      "id": "V6_CARDINALITY_PARTIAL_FAILURE",
+      "severity": "medium",
+      "finding": "Cardinality passes for NT (all 70+ strata ratio 0.009-0.176 <0.8, max 0.176 NT K3) but fails 17/70 strata for TR (ratio up to 0.941, max fails). Producer validity_notes declares C7 pass based on NT only, while spec falsifier (6) and decision_rule C7 generically state |R|>=0.8*N per stratum degeneracy; ambiguous whether TR failure counts. Large TR degeneracy reflects session-specific fields (state_id, session_token, direction, step items length) inflating |R| ~442 unique hashes, bias perm_mean TR K3=0.817 vs NT 0.094. Degeneracy contributes to TR non-significance and bias.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:falsifier cardinality degenerate |R|>=0.8*N per stratum decision_rule C7 cardinality bounded",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:per_k_results.3.cardinality non_trivial all_pass true trivial all_pass false max ratio 0.941176",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:observations cardinality passes for non-trivial fails for trivial validity_notes",
+        "recomputed_metrics:trivial_fails_17_of_70 non_trivial_max_0.176"
+      ]
+    },
+    {
+      "id": "V7_CEILING_ELIMINATION_VALID",
+      "severity": "info",
+      "finding": "Ceiling eliminated validly: H(S_next|URL,H_K=3)=1.103 bits NT (1.162 TR) >>0.2 threshold, vs parent linear FSM 0 at K>=2 and parent branching 1.346. Action-history accuracy K1 0.556 K2 0.59 K3 0.626 vs frequency 0.360 confirms history insufficient, environment can express effect. This is the sole decision criterion passing alongside determinism and data quality.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:decision_rule C1 H>0.2 bits falsifier (4)",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:metrics.H_S_next_given_URL_HK_3=1.102543547725683 ceiling_eliminated true",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:ceiling_check.H_S_next_given_URL_HK_3_NT=1.102 H_TR=1.161 ceiling_eliminated true",
+        "recomputed_metrics:H recomputed 1.102543 matches producer"
+      ]
+    },
+    {
+      "id": "V8_PHYSICS_IDENTIFIABILITY_STILL_TRIVIAL",
+      "severity": "high",
+      "finding": "Physics discipline requires operational object, observable, falsifier, strong nulls, identifiability argument. I(S_next;Response_before|URL,H_K=3) is defined, but NT encoding content is still deterministically 1:1 with state (page_title Home/Browse/Details, etc. map uniquely to S0/S1/S2). PMI>0 is therefore state alias, not emergent web dynamics beyond memory. Prereg 11.1 acknowledges this and deems it acceptable as realistic content vs state label, but does not provide identifiability separating content variation that happens to encode state from genuine predictive dynamics. Production SPA gap remains: synthetic deterministic FSM with 3 fixed contents does not test noisy, many-to-one, or correlated dynamics.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/prereg.md:5.2 Non-trivial encoding 3 values per field, 11.1 Validity threat State Label Removal May Not Remove Signal 3 unique hashes",
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:hypothesis Page-content structure that varies with FSM state (but is not a state label) carries conditional predictive information",
+        "AGENTS.md:Physics discipline Graph reuse is not Physics. Physics claims require operational mathematical object, observable, falsifier, strong nulls and identifiability argument",
+        "recomputed_metrics:NT_unique_hashes 3 deterministic per state observed - perm_mean small but PMI equals I(S_next;S_before|...)"
+      ]
+    },
+    {
+      "id": "V9_NULL_CONTROL_PASSES_BUT_BC_LARGE",
+      "severity": "low",
+      "finding": "Null control shuffled labels within strata passes: mean_shuffled_bc_pmi=0.0014 std=0.0878 |0.0014|<0.263, confirming bias-corrected null centers at 0 when labels shuffled. This is correctly implemented (bias-corrected shuffled PMI = shuffled - perm_mean). Contrasts with parent V3 where mean 0.757; fix effective. Perm_null_std>0 for NT (0.082) also non-degenerate after H>0 filter. Null control is discriminating for NT.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:controls.null_control_shuffled_labels mean_shuffled_bc_pmi 0.001398 std 0.08787 pass true",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:controls.null_control_shuffled_labels",
+        "research/experiments/EXP-PHYSICS-35130680344/prereg.md:8.2 Shuffled response labels CORRECTED bias-corrected"
+      ]
+    },
+    {
+      "id": "V10_SECONDARY_K1_STRONG_BUT_NOT_PRIMARY",
+      "severity": "info",
+      "finding": "Secondary K=1 shows BC PMI NT 1.035 p_bonf 0.0 and TR 0.791 p_bonf 0.172 (raw 0.043). K=1 NT is highly significant even after Bonferroni, replicating parent K=1 effect with larger effect size (parent 0.924). However K=1 has higher H (1.329 bits) and is secondary per spec; primary test is K=3 where predictive information beyond 3-step history is claimed. K=1 significance does not rescue K=3 failure and does not address V10 at K=3.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:metrics.BC_PMI_NT_K1=1.035 perm_p_bonf_NT_K1=0.0 BC_PMI_TR_K1=0.791 perm_p_bonf_TR_K1=0.172",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:per_k_results.1.non_trivial observed 1.060 perm_mean 0.025 BC 1.035 p_raw 0.0"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "trivial_encoding_baseline_explicit_state_labels",
+      "expected": "BC PMI >0 provides within-experiment comparison: identical FSM and sessions only response differs; directly tests V10 does removing explicit labels eliminate PMI",
+      "observed": "BC PMI TR K3=0.345 p_bonf 0.409 (non-significant), TR K1=0.791 p 0.172, perm_mean 0.575-0.817 large bias, 17 cardinality failures",
+      "strength": "weak",
+      "finding": "Baseline underperforms: explicit state_id/session_token/direction/step encoding should be strong positive control for pipeline sensitivity, but at K=3 it is weaker (0.345) than NT (0.766) and non-significant, suggesting high-cardinality bias and small stratum N inflate variance and reduce power even for trivial encoding. Comparison NT>TR-0.1 holds (diff 0.421) but paired p=1.0 not significant. Baseline does not validate pipeline can detect trivial PMI at K=3, weakening V10 test.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:baselines Trivial encoding baseline same FSM same sessions but response contains explicit state_id session_token direction step fields Expected BC PMI >0",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:metrics.BC_PMI_TR_K3=0.3449 perm_p_bonf 0.408",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:per_k_results.3.trivial"
+      ]
+    },
+    {
+      "baseline_id": "state_independent_baseline_constant_response",
+      "expected": "BC PMI =0 estimator validation (response constant '{\"ok\":true}')",
+      "observed": "Not executed as separate condition; producer labels trivial encoding baseline as state-independent but spec  measurement_validity lists state-independent baseline constant '{\"ok\":true}' separately. No metric reported for constant response; effectively missing.",
+      "strength": "weak",
+      "finding": "Spec lists State-independent baseline constant response Expected 0 as estimator validation, but result.json state_independent_baseline reports TR values (0.344,0.791) not constant response. True constant baseline not measured; estimator validation relies on shuffled null and determinism only. Not a strong null.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:baselines State-independent baseline same FSM same sessions but response is constant '{\"ok\":true}' Expected 0",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:controls.state_independent_baseline description trivial baseline K3 0.344",
+        "research/experiments/EXP-PHYSICS-35130680344/prereg.md:8.3 State-Independent Baseline constant response"
+      ]
+    },
+    {
+      "baseline_id": "action_history_only_prediction_P(S_next|URL,H_K)",
+      "expected": "On branching FSM H(S_next|URL,H_K=3)>0.2 bits so action-history is insufficient",
+      "observed": "H=1.103 NT 1.162 TR >0.2 true, accuracy K1 0.556 K2 0.59 K3 0.626 vs frequency 0.3605, H_K1 1.329",
+      "strength": "strong",
+      "finding": "Strong baseline validated: history accuracy improves with K but remains well below perfect, entropy confirms non-determinism. Environment discriminates response informativeness from memory. Ceiling elimination is genuine, unlike parent linear FSM degenerate case.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:baselines Action-history-only prediction P(S_next|URL,H_K) for K=1,2,3 H>0.2",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:metrics.action_history_accuracy K1 0.556 K2 0.59 K3 0.626 frequency 0.3605 H 1.102",
+        "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:ceiling_check"
+      ]
+    },
+    {
+      "baseline_id": "frequency_baseline_P(S_next)",
+      "expected": "marginal next-state distribution accuracy ~33%",
+      "observed": "frequency_baseline 0.3605 close to uniform 33% given 3 states and branching policy",
+      "strength": "weak",
+      "finding": "Provides floor, correctly ~1/3, confirms uniform action policy balanced FSM. Not discriminating.",
+      "evidence_refs": [
+        "research/experiments/EXP-PHYSICS-35130680344/spec.json:baselines Frequency baseline P(S_next) marginal ~33%",
+        "research/experiments/EXP-PHYSICS-35130680344/result.json:metrics.action_history_accuracy.frequency_baseline 0.3605"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "H_S_next_given_URL_HK3_NT": {
+      "producer": 1.102543547725683,
+      "recomputed": 1.102543547725683,
+      "match": true,
+      "method": "compute_conditional_entropy regenerated trajectories seed 42 strata (URL,H_K=3)"
+    },
+    "BC_PMI_NT_K3": {
+      "producer": 0.765900785112734,
+      "recomputed": 0.765900785112734,
+      "match": true,
+      "detail": "observed 0.8597131356193841 perm_mean 0.09381235050665021 diff 0.7659 perm_null_std 0.08179"
+    },
+    "BC_PMI_TR_K3": {
+      "producer": 0.3449301560218977,
+      "recomputed": 0.3449301560218977,
+      "match": true,
+      "detail": "observed 1.1615846705179325 perm_mean 0.8166545144960348"
+    },
+    "BC_PMI_NT_K1": {
+      "producer": 1.0354395446769051,
+      "recomputed": 1.0354395446769051,
+      "match": true
+    },
+    "BC_PMI_TR_K1": {
+      "producer": 0.7910611475336495,
+      "recomputed": 0.7910611475336495,
+      "match": true
+    },
+    "perm_p_bonf_NT_K3": {
+      "producer": 0.07589749847467968,
+      "recomputed": 0.07589749847467968,
+      "match": true,
+      "method": "raw 0.01897437461866992 *4 Bonferroni min 1.0 fails <0.0125"
+    },
+    "perm_p_bonf_TR_K3": {
+      "producer": 0.408834,
+      "recomputed": 0.408834,
+      "match": true
+    },
+    "perm_p_bonf_NT_K1": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "diff_bc_pmi_K3_NT_minus_TR": {
+      "producer": 0.4209706290908362,
+      "recomputed": 0.4209706290908362,
+      "match": true,
+      "note": "NT 0.7659 - TR 0.3449 =0.421 passes >-0.1 threshold but paired p=1.0 not significant"
+    },
+    "paired_perm_p_K3": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "disputed": true,
+      "reason": "stratum-level sign-flip not trajectory-level per spec"
+    },
+    "positive_control_session_randomized_BC_PMI": {
+      "producer": 0.6403878303629178,
+      "recomputed": 0.6403878303629178,
+      "match": true,
+      "note": "min_perm_null_std 0.01477 >0 but fails |0.640|<0.044"
+    },
+    "null_control_shuffled_mean": {
+      "producer": 0.0013982286402674,
+      "recomputed": 0.0013982286402674,
+      "match": true
+    },
+    "null_control_shuffled_std": {
+      "producer": 0.08787416083061504,
+      "recomputed": 0.08787416083061504,
+      "match": true
+    },
+    "determinism_accuracy_NT": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "groups": 436
+    },
+    "determinism_accuracy_TR": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "groups": 433
+    },
+    "cardinality_NT_K3_all_pass": {
+      "producer": true,
+      "recomputed": true,
+      "match": true,
+      "max_ratio": 0.176
+    },
+    "cardinality_TR_K3_all_pass": {
+      "producer": false,
+      "recomputed": false,
+      "match": true,
+      "fails": 17,
+      "total": 70,
+      "max_ratio": 0.9411764705882353
+    },
+    "total_transitions": {
+      "producer": {
+        "non_trivial": 2000,
+        "trivial": 2000
+      },
+      "recomputed": {
+        "non_trivial": 2000,
+        "trivial": 2000
+      },
+      "match": true
+    },
+    "NT_unique_response_hashes": {
+      "producer": null,
+      "recomputed": 3,
+      "hashes": [
+        "c44f00a8232fd1cf",
+        "e58d93597938a463",
+        "1d676009ad2c017a"
+      ]
+    },
+    "session_trajectory_identity": {
+      "producer": "claimed identical",
+      "recomputed": "0/200 identical (session+actions) due to shared RNG continuation",
+      "match": false
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID: No confirmatory claim for C-WEB-DYNAMICS supported as preregistered. Maximum justified is descriptive and synthetic-only: On 3-state branching FSM with 20 sessions left/right, uniform random actions, 200 trajectories x10 steps per condition, H(S_next|URL,H_K=3)=1.103 bits eliminates ceiling (C1 passes), determinism 1.0 with step, but primary hypothesis at K=3 fails significance (BC PMI NT 0.766 raw p 0.019 bonf 0.076 >0.0125, TR 0.345 p_bonf 0.409). Positive control fails by construction (session-randomized BC 0.64 not ≈0) due to deterministic state->response mapping (3 hashes), invalidating C4 per frozen rule. Encoding comparison diff 0.421 passes magnitude >-0.1 but paired p=1.0 with spec-violating test. Cardinality passes NT but fails 17 strata TR. Secondary K=1 NT 1.035 p=0.0 replicates parent K=1 PMI but is not primary. Physics identifiability not addressed: deterministic content-as-state-label. Real production SPA dynamics not tested.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35130680344/request.json:experiment_id lane parent_handoff EXP-PHYSICS-35040401992 inherited MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35130680344/spec.json:claim_ids C-WEB-DYNAMICS question H>0.2 PMI>0.05 p<0.0125 positive_control null_control measurement_validity decision_rule 7 criteria product_consequence",
+    "research/experiments/EXP-PHYSICS-35130680344/prereg.md:frozen prereg hypotheses H1-H6 FSM branching 3 states 2 actions session direction left/right encodings NT vs TR measures statistical tests decision rules",
+    "research/experiments/EXP-PHYSICS-35130680344/freeze.json:hashes prereg 32efffee spec 8119a5cd request 597e09c2",
+    "research/experiments/EXP-PHYSICS-35130680344/result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics BC_PMI_NT_K3 0.7659 perm_p_bonf 0.0758 controls positive_control 0.640 fail determinism pass cardinality pass/fail",
+    "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:per_k_results K1 K3 NT TR observed perm_mean BC p_raw p_bonf cardinality strata positive_control min_perm_null_std 0.0147",
+    "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py:hash ab87868132e28d3aa038285e1c8ddfaa2e92e5130080564d78e8688a1ea20c63 FSM transition deterministic MAKE responses hashes generate_trajectories shared RNG build_strata compute_pmi permutation tests",
+    "research/experiments/EXP-PHYSICS-35130680344/report.md:MEASUREMENT_INVALID key findings validity threats",
+    "research/experiments/EXP-PHYSICS-35130680344/provenance.json:seed 42 n_trajectories 200 n_steps 10 n_sessions 20 n_perms 1000",
+    "research/experiments/EXP-PHYSICS-35040401992/handoff.json:carry_forward established H=1.346 K1 0.924 baseline SI 0 do_not_assume V10 state_id injection",
+    "research/experiments/EXP-PHYSICS-35130680344/model_audit.json:supplementary check",
+    "recomputed_metrics: H 1.102 match, BC PMI matches, p_bonf 0.0759 calc, trivial fails 17, unique hashes 3, 0/200 identical trajectories, paired test disputed"
+  ],
+  "unresolved": [
+    "Is there any non-trivial network-response encoding (without explicit state_id/session_token/direction/step) that yields significant conditional PMI >0.05 at K=3 on branching FSM where H>0.2 without deterministic 1:1 state->content mapping, and can a corrected session-independent positive control confirm it?",
+    "What positive control correctly diagnoses NT encoding where response depends only on state: should it randomize state-content mapping or inject noise, and what is its null distribution under corrected H>0 filter?",
+    "Does increasing N (e.g., 500+ trajectories) or using pooled permutation of aggregate PMI reduce variance (perm_null_std 0.08) enough for NT K3 0.766 to reach p<0.0125, or is effect size inflated by 3-hash determinism?",
+    "Would identical trajectory generation (same session_id and action sequences across conditions via seeded replication) change diff 0.421 and paired p=1.0 under proper trajectory-level paired test?",
+    "Does deterministic content-as-state-label PMI generalize to production SPAs with noisy, many-to-one, or externally correlated content, or is locally-hosted result synthetic-only with no inference to real Web dynamics?",
+    "Should Bonferroni family exclude SI-like trivial baseline comparisons (2 vs 4) making alpha 0.025, and would NT K3 raw p 0.019 then be marginal but still fail corrected threshold?",
+    "Is trivial encoding cardinality degeneracy (17/70 fails ratio up to 0.94) a fundamental property of explicit state labels that requires different estimator (e.g., Miller-Madow) or larger strata?"
+  ]
+}

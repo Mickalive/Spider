@@ -301,6 +301,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "MEASUREMENT_INVALID",
         "reason": "Frozen control criteria C4 (positive_control_pass=false, perm_null_std=0.0 degenerate) and C5 (determinism_pass=false, SD accuracy=0.0 by construction due to step field in response design) fail per frozen decision_rule. Raw BC PMI at K=3 = 0.369 bits exceeds 0.05 threshold but Bonferroni p = 0.322 (raw 0.0805) fails p < 0.0125. No confirmatory claim supported. Descriptive observation preserved: ceiling eliminated (H=1.346 bits), state-independent BC PMI=0.0, raw discrimination SD-SI=0.369 bits. Synthetic state_id injection is the only demonstrated PMI source; no identifiability argument separates injected label from emergent web dynamics (audit V10). Measurement cannot support or falsify C-WEB-DYNAMICS."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35130680344",
+        "lane": "physics",
+        "created_at": "2026-09-16T17:50:56.073390+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No confirmatory claim supported as preregistered. Frozen decision_rule triggers MEASUREMENT_INVALID on two independent clauses: (1) C2 fails \u2014 non-trivial BC PMI=0.766 bits > 0.05 threshold but Bonferroni p=0.076 (raw 0.019) > 0.0125; (2) C4 fails \u2014 session-randomized positive control BC PMI=0.640 not \u22480 by construction (audit V1: NT response deterministic per state with 3 hashes independent of session, so session randomization cannot break R\u2192S mapping). Determinism check passes (both conditions accuracy=1.0 with step grouping, audit V5), ceiling eliminated (H=1.103 bits), null shuffled-label control passes (mean 0.0014 < 3*std=0.264), cardinality passes NT but fails 17/70 TR strata (audit V6). Audit V8 confirms physics identifiability not addressed: NT encoding uniquely determines state (3 hashes for 3 states) so PMI>0 is state alias not emergent dynamics. Descriptive observation preserved: K=1 NT BC PMI=1.035 p=0.0 replicates parent K=1 effect; K=3 NT BC PMI=0.766 is suggestive but unvalidated. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1250,14 +1260,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35040401992",
+      "experiment_id": "EXP-PHYSICS-35130680344",
       "lane": "physics",
-      "created_at": "2026-09-16T00:32:15.965489+00:00",
+      "created_at": "2026-09-16T17:50:56.073390+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "77d4d23236294e10b101bae7a5cd7f9a5a22332d",
+      "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "claim_id": "C-WEB-DYNAMICS",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "Frozen control criteria C4 (positive_control_pass=false, perm_null_std=0.0 degenerate) and C5 (determinism_pass=false, SD accuracy=0.0 by construction due to step field in response design) fail per frozen decision_rule. Raw BC PMI at K=3 = 0.369 bits exceeds 0.05 threshold but Bonferroni p = 0.322 (raw 0.0805) fails p < 0.0125. No confirmatory claim supported. Descriptive observation preserved: ceiling eliminated (H=1.346 bits), state-independent BC PMI=0.0, raw discrimination SD-SI=0.369 bits. Synthetic state_id injection is the only demonstrated PMI source; no identifiability argument separates injected label from emergent web dynamics (audit V10). Measurement cannot support or falsify C-WEB-DYNAMICS."
+      "status": "HYPOTHESIS",
+      "reason": "No confirmatory claim supported as preregistered. Frozen decision_rule triggers MEASUREMENT_INVALID on two independent clauses: (1) C2 fails \u2014 non-trivial BC PMI=0.766 bits > 0.05 threshold but Bonferroni p=0.076 (raw 0.019) > 0.0125; (2) C4 fails \u2014 session-randomized positive control BC PMI=0.640 not \u22480 by construction (audit V1: NT response deterministic per state with 3 hashes independent of session, so session randomization cannot break R\u2192S mapping). Determinism check passes (both conditions accuracy=1.0 with step grouping, audit V5), ceiling eliminated (H=1.103 bits), null shuffled-label control passes (mean 0.0014 < 3*std=0.264), cardinality passes NT but fails 17/70 TR strata (audit V6). Audit V8 confirms physics identifiability not addressed: NT encoding uniquely determines state (3 hashes for 3 states) so PMI>0 is state alias not emergent dynamics. Descriptive observation preserved: K=1 NT BC PMI=1.035 p=0.0 replicates parent K=1 effect; K=3 NT BC PMI=0.766 is suggestive but unvalidated. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35130681515",
