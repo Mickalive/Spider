@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, hashlib, json, os
+
+import argparse
+import hashlib
+import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -16,9 +20,20 @@ AUDIT_STATUSES = {"PASS", "REVISE", "FAIL", "MEASUREMENT_INVALID", "BLOCKED"}
 RESULT_STATUSES = {"COMPLETE", "BLOCKED", "MEASUREMENT_INVALID"}
 RESULT_OUTCOMES = {"SUPPORTS", "FALSIFIES", "MIXED", "INCONCLUSIVE", "NOT_APPLICABLE"}
 LANES = {"graph", "physics", "runtime", "product", "intel", "frontier"}
+STAGE_OUTPUTS = {
+    "design": ["freeze.json"],
+    "execute": ["result.json", "report.md", "provenance.json"],
+    "audit": ["audit.json"],
+    "director": ["verdict.json", "handoff.json"],
+}
 
 
-def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+class StageOutputMissing(ValueError):
+    pass
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def require_keys(obj, keys, label):
@@ -76,20 +91,40 @@ def normalize_verdict_claim_updates(exp, verdict):
     return verdict
 
 
-def update_failure_state(req, retryable):
+def failure_fingerprint(stage: str, category: str, message: str) -> str:
+    raw = f"{stage}\0{category}\0{message}".encode("utf-8", errors="replace")
+    return hashlib.sha256(raw).hexdigest()[:24]
+
+
+def update_failure_state(req, retryable, fingerprint):
     state_path = ROOT / "research/lanes" / req["lane"] / "state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"lane": req["lane"]}
+    same = fingerprint == state.get("last_failure_fingerprint")
     state["active_experiment_id"] = req["experiment_id"]
     state["consecutive_failures"] = int(state.get("consecutive_failures", 0)) + 1
+    state["same_failure_count"] = int(state.get("same_failure_count", 0)) + 1 if same else 1
+    state["last_failure_fingerprint"] = fingerprint
     state["last_failure_retryable"] = bool(retryable)
+    state["last_failure_main_sha"] = os.environ.get("GITHUB_SHA")
     state["updated_at"] = datetime.now(timezone.utc).isoformat()
     state_path.write_text(json.dumps(state, indent=2) + "\n")
 
 
 def failure(exp, req, stage, category, message, retryable):
-    payload = {"stage": stage, "category": category, "message": message, "retryable": bool(retryable), "recorded_at": datetime.now(timezone.utc).isoformat(), "github_run_id": os.environ.get("GITHUB_RUN_ID"), "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT")}
+    fingerprint = failure_fingerprint(stage, category, message)
+    payload = {
+        "stage": stage,
+        "category": category,
+        "message": message,
+        "retryable": bool(retryable),
+        "fingerprint": fingerprint,
+        "recorded_at": datetime.now(timezone.utc).isoformat(),
+        "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+        "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+        "main_sha": os.environ.get("GITHUB_SHA"),
+    }
     (exp / "failure.json").write_text(json.dumps(payload, indent=2) + "\n")
-    update_failure_state(req, retryable)
+    update_failure_state(req, retryable, fingerprint)
 
 
 def verify_freeze(exp):
@@ -100,11 +135,13 @@ def verify_freeze(exp):
             raise ValueError(f"frozen file changed: {name}")
 
 
-def validate_result(exp, req):
-    for f in ["result.json", "report.md", "provenance.json"]:
-        if not (exp / f).exists():
-            raise ValueError(f"execute missing {f}")
+def require_stage_outputs(exp: Path, stage: str):
+    missing = [name for name in STAGE_OUTPUTS[stage] if not (exp / name).exists()]
+    if missing:
+        raise StageOutputMissing(f"{stage} missing required outputs: {', '.join(missing)}")
 
+
+def validate_result(exp, req):
     result = json.loads((exp / "result.json").read_text())
     require_identity(result, req, "result")
     require_keys(result, ["status", "outcome", "metrics", "controls", "artifacts", "observations", "validity_notes", "unresolved"], "result")
@@ -142,7 +179,7 @@ def validate_audit(exp, req):
     return audit
 
 
-def validate_verdict_and_handoff(exp, req):
+def validate_verdict_and_handoff(exp, req, audit):
     verdict = json.loads((exp / "verdict.json").read_text())
     verdict = normalize_verdict_claim_updates(exp, verdict)
     require_identity(verdict, req, "verdict")
@@ -159,19 +196,29 @@ def validate_verdict_and_handoff(exp, req):
         raise ValueError("verdict reason must be a non-empty string")
     require_list(verdict, "evidence_refs", "verdict")
 
-    known = {c["id"] for c in json.loads((ROOT / "research/claims/registry.json").read_text())["claims"]}
+    registry = json.loads((ROOT / "research/claims/registry.json").read_text())
+    known = {c["id"]: c for c in registry["claims"]}
     for event in verdict["claim_updates"]:
         if not isinstance(event, dict):
             raise ValueError("claim update must be an object")
-        if event.get("claim_id") not in known:
-            raise ValueError(f"unknown claim update id: {event.get('claim_id')}")
-        if event.get("status") not in CLAIM_STATUSES:
-            raise ValueError(f"invalid claim update status: {event.get('status')}")
+        claim_id = event.get("claim_id")
+        status = event.get("status")
+        if claim_id not in known:
+            raise ValueError(f"unknown claim update id: {claim_id}")
+        if status not in CLAIM_STATUSES:
+            raise ValueError(f"invalid claim update status: {status}")
         if not event.get("reason"):
             raise ValueError("claim update requires reason")
+        # Cross-lane evidence is legitimate (Intel is deliberately adversarial),
+        # so owner_lanes are not exclusive. Strong/product lifecycle states are.
+        if status == "VALIDATED" and audit.get("status") != "PASS":
+            raise ValueError("VALIDATED claim update requires PASS audit")
+        if status == "PRODUCT_CORE":
+            if req["lane"] != "product" or audit.get("status") != "PASS" or not verdict["promote_to_product"]:
+                raise ValueError("PRODUCT_CORE requires Product lane, PASS audit, and promotion intent")
+        if status == "SHIPPED":
+            raise ValueError("SHIPPED is a post-promotion state and cannot be set by a lane Director")
 
-    if not (exp / "handoff.json").exists():
-        raise ValueError("director missing handoff.json")
     handoff = json.loads((exp / "handoff.json").read_text())
     require_identity(handoff, req, "handoff")
     require_keys(handoff, ["target_lane", "next_question", "why_next", "carry_forward", "dependencies", "evidence_refs", "recommended_action"], "handoff")
@@ -206,26 +253,24 @@ def main():
     exp = ROOT / "research/experiments" / args.experiment_id
     req = json.loads((exp / "request.json").read_text())
     try:
-        if (exp / "freeze.json").exists(): verify_freeze(exp)
+        if (exp / "freeze.json").exists():
+            verify_freeze(exp)
         if args.exit_code != 0:
             retryable = args.exit_code in (75, 124)
             failure(exp, req, args.stage, args.category or "OPERATIONAL_FAILURE", f"stage exited with code {args.exit_code}", retryable)
             print("SPIDER_STAGE_FAILURE_RECORDED")
             return
 
+        require_stage_outputs(exp, args.stage)
         if args.stage == "design":
-            if not (exp / "freeze.json").exists():
-                raise ValueError("design did not produce freeze.json")
-
+            pass
         elif args.stage == "execute":
             validate_result(exp, req)
-
         elif args.stage == "audit":
             validate_audit(exp, req)
-
         elif args.stage == "director":
-            audit = json.loads((exp / "audit.json").read_text())
-            verdict, handoff = validate_verdict_and_handoff(exp, req)
+            audit = validate_audit(exp, req)
+            verdict, handoff = validate_verdict_and_handoff(exp, req, audit)
             if verdict["promote_to_product"] and req["lane"] != "product":
                 raise ValueError("only Product lane can promote product code")
             if verdict["promote_to_product"] and audit.get("status") != "PASS":
@@ -242,7 +287,10 @@ def main():
                 "next_question": verdict["next_question"],
                 "promotion_ready": bool(verdict["promote_to_product"]) if req["lane"] == "product" else False,
                 "consecutive_failures": 0,
+                "same_failure_count": 0,
+                "last_failure_fingerprint": None,
                 "last_failure_retryable": None,
+                "last_failure_main_sha": None,
                 "updated_at": datetime.now(timezone.utc).isoformat(),
             })
             state_path.write_text(json.dumps(state, indent=2) + "\n")
@@ -250,6 +298,12 @@ def main():
         if (exp / "failure.json").exists():
             (exp / "failure.json").unlink()
         print(f"SPIDER_STAGE_OK stage={args.stage} experiment={args.experiment_id}")
+    except StageOutputMissing as exc:
+        # A model process can exit zero without fulfilling its output contract.
+        # Treat that as a retryable producer fault, not a permanent scientific
+        # validation failure, so another provider/attempt can repair it.
+        failure(exp, req, args.stage, "OUTPUT_MISSING", str(exc), True)
+        raise
     except Exception as exc:
         failure(exp, req, args.stage, "VALIDATION_FAILURE", str(exc), False)
         raise
