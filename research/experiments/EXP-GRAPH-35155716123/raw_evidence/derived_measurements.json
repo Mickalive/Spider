@@ -1,0 +1,143 @@
+{
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "mean_fp_rate": 0.0,
+    "auc": 1.0,
+    "pearson_r": -0.44105427713597695,
+    "pearson_p": 0.0024247553154781096,
+    "pattern_tp_rates": {
+      "token_expiry": 1.0,
+      "session_invalidation": 1.0,
+      "permission_boundary": 1.0,
+      "signing_key_rotation": 1.0,
+      "cookie_clearance": 1.0
+    },
+    "pattern_fp_rates": {
+      "optional_field_addition": 0.0,
+      "description_change": 0.0,
+      "response_time_jitter": 0.0,
+      "field_type_normalization": 0.0
+    },
+    "n_conditions": 45,
+    "n_samples_per_condition": 30,
+    "n_total_samples": 1350
+  },
+  "controls": {
+    "C1_drift_detection": {
+      "threshold": 0.9,
+      "observed": 1.0,
+      "pass": "True",
+      "evidence": "Mean TP rate across 5 drift patterns x 5 schema sizes"
+    },
+    "C2_noise_tolerance": {
+      "threshold": 0.15,
+      "observed": 0.0,
+      "pass": "True",
+      "evidence": "Mean FP rate across 4 noise patterns x 5 schema sizes"
+    },
+    "C3_discrimination": {
+      "threshold": 0.8,
+      "observed": 1.0,
+      "pass": "True",
+      "evidence": "AUC on drift vs noise discrimination"
+    },
+    "C4_orthogonality": {
+      "threshold": 0.3,
+      "observed": 0.44105427713597695,
+      "pass": "False",
+      "evidence": "Pearson correlation between behavioral and best structural signal"
+    },
+    "C5_positive_control": {
+      "threshold": "signal fires",
+      "observed": true,
+      "pass": true,
+      "evidence": "Signing key rotation (D4) behavioral signal fires"
+    },
+    "positive_control_signing_key_rotation": {
+      "pattern": "signing_key_rotation",
+      "expected": "token_validation_rate jumps to 1.0",
+      "observed_behavioral": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "pass": true
+    },
+    "null_control_optional_field_addition": {
+      "pattern": "optional_field_addition",
+      "schema_size": 10,
+      "expected": "no behavioral signal fires",
+      "pass": true
+    }
+  },
+  "drift_tp_rates": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "noise_fp_rates": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pattern_tp": {
+    "token_expiry": 1.0,
+    "session_invalidation": 1.0,
+    "permission_boundary": 1.0,
+    "signing_key_rotation": 1.0,
+    "cookie_clearance": 1.0
+  },
+  "pattern_fp": {
+    "optional_field_addition": 0.0,
+    "description_change": 0.0,
+    "response_time_jitter": 0.0,
+    "field_type_normalization": 0.0
+  },
+  "decision_rules": {
+    "C1_drift_detection": "True",
+    "C2_noise_tolerance": "True",
+    "C3_discrimination": "True",
+    "C4_orthogonality": "False",
+    "C5_positive_control": true,
+    "overall": "False"
+  }
+}

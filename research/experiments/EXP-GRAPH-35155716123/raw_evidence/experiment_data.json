@@ -1,0 +1,970 @@
+{
+  "results": {
+    "0": {
+      "condition_id": "drift_token_expiry_n10",
+      "schema_size": 10,
+      "pattern_type": "drift",
+      "pattern": "token_expiry",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "1": {
+      "condition_id": "drift_session_invalidation_n10",
+      "schema_size": 10,
+      "pattern_type": "drift",
+      "pattern": "session_invalidation",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "2": {
+      "condition_id": "drift_permission_boundary_n10",
+      "schema_size": 10,
+      "pattern_type": "drift",
+      "pattern": "permission_boundary",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 2
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "3": {
+      "condition_id": "drift_signing_key_rotation_n10",
+      "schema_size": 10,
+      "pattern_type": "drift",
+      "pattern": "signing_key_rotation",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "4": {
+      "condition_id": "drift_cookie_clearance_n10",
+      "schema_size": 10,
+      "pattern_type": "drift",
+      "pattern": "cookie_clearance",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "5": {
+      "condition_id": "drift_token_expiry_n20",
+      "schema_size": 20,
+      "pattern_type": "drift",
+      "pattern": "token_expiry",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "6": {
+      "condition_id": "drift_session_invalidation_n20",
+      "schema_size": 20,
+      "pattern_type": "drift",
+      "pattern": "session_invalidation",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "7": {
+      "condition_id": "drift_permission_boundary_n20",
+      "schema_size": 20,
+      "pattern_type": "drift",
+      "pattern": "permission_boundary",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 2
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "8": {
+      "condition_id": "drift_signing_key_rotation_n20",
+      "schema_size": 20,
+      "pattern_type": "drift",
+      "pattern": "signing_key_rotation",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "9": {
+      "condition_id": "drift_cookie_clearance_n20",
+      "schema_size": 20,
+      "pattern_type": "drift",
+      "pattern": "cookie_clearance",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "10": {
+      "condition_id": "drift_token_expiry_n30",
+      "schema_size": 30,
+      "pattern_type": "drift",
+      "pattern": "token_expiry",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "11": {
+      "condition_id": "drift_session_invalidation_n30",
+      "schema_size": 30,
+      "pattern_type": "drift",
+      "pattern": "session_invalidation",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "12": {
+      "condition_id": "drift_permission_boundary_n30",
+      "schema_size": 30,
+      "pattern_type": "drift",
+      "pattern": "permission_boundary",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 2
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "13": {
+      "condition_id": "drift_signing_key_rotation_n30",
+      "schema_size": 30,
+      "pattern_type": "drift",
+      "pattern": "signing_key_rotation",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "14": {
+      "condition_id": "drift_cookie_clearance_n30",
+      "schema_size": 30,
+      "pattern_type": "drift",
+      "pattern": "cookie_clearance",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "15": {
+      "condition_id": "drift_token_expiry_n40",
+      "schema_size": 40,
+      "pattern_type": "drift",
+      "pattern": "token_expiry",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "16": {
+      "condition_id": "drift_session_invalidation_n40",
+      "schema_size": 40,
+      "pattern_type": "drift",
+      "pattern": "session_invalidation",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "17": {
+      "condition_id": "drift_permission_boundary_n40",
+      "schema_size": 40,
+      "pattern_type": "drift",
+      "pattern": "permission_boundary",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 2
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "18": {
+      "condition_id": "drift_signing_key_rotation_n40",
+      "schema_size": 40,
+      "pattern_type": "drift",
+      "pattern": "signing_key_rotation",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "19": {
+      "condition_id": "drift_cookie_clearance_n40",
+      "schema_size": 40,
+      "pattern_type": "drift",
+      "pattern": "cookie_clearance",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "20": {
+      "condition_id": "drift_token_expiry_n50",
+      "schema_size": 50,
+      "pattern_type": "drift",
+      "pattern": "token_expiry",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "21": {
+      "condition_id": "drift_session_invalidation_n50",
+      "schema_size": 50,
+      "pattern_type": "drift",
+      "pattern": "session_invalidation",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "22": {
+      "condition_id": "drift_permission_boundary_n50",
+      "schema_size": 50,
+      "pattern_type": "drift",
+      "pattern": "permission_boundary",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 2
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "23": {
+      "condition_id": "drift_signing_key_rotation_n50",
+      "schema_size": 50,
+      "pattern_type": "drift",
+      "pattern": "signing_key_rotation",
+      "behavioral_signals": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "24": {
+      "condition_id": "drift_cookie_clearance_n50",
+      "schema_size": 50,
+      "pattern_type": "drift",
+      "pattern": "cookie_clearance",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 1,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": null,
+      "status": "OK"
+    },
+    "25": {
+      "condition_id": "noise_optional_field_addition_n10",
+      "schema_size": 10,
+      "pattern_type": "noise",
+      "pattern": "optional_field_addition",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 0.9090909090909091,
+        "schema_diff_magnitude": 1.0
+      },
+      "status": "OK"
+    },
+    "26": {
+      "condition_id": "noise_description_change_n10",
+      "schema_size": 10,
+      "pattern_type": "noise",
+      "pattern": "description_change",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 2.9999999999999996
+      },
+      "status": "OK"
+    },
+    "27": {
+      "condition_id": "noise_response_time_jitter_n10",
+      "schema_size": 10,
+      "pattern_type": "noise",
+      "pattern": "response_time_jitter",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "28": {
+      "condition_id": "noise_field_type_normalization_n10",
+      "schema_size": 10,
+      "pattern_type": "noise",
+      "pattern": "field_type_normalization",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "29": {
+      "condition_id": "noise_optional_field_addition_n20",
+      "schema_size": 20,
+      "pattern_type": "noise",
+      "pattern": "optional_field_addition",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 0.9090909090909091,
+        "schema_diff_magnitude": 2.0
+      },
+      "status": "OK"
+    },
+    "30": {
+      "condition_id": "noise_description_change_n20",
+      "schema_size": 20,
+      "pattern_type": "noise",
+      "pattern": "description_change",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 5.999999999999998
+      },
+      "status": "OK"
+    },
+    "31": {
+      "condition_id": "noise_response_time_jitter_n20",
+      "schema_size": 20,
+      "pattern_type": "noise",
+      "pattern": "response_time_jitter",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "32": {
+      "condition_id": "noise_field_type_normalization_n20",
+      "schema_size": 20,
+      "pattern_type": "noise",
+      "pattern": "field_type_normalization",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "33": {
+      "condition_id": "noise_optional_field_addition_n30",
+      "schema_size": 30,
+      "pattern_type": "noise",
+      "pattern": "optional_field_addition",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 0.9090909090909091,
+        "schema_diff_magnitude": 3.0
+      },
+      "status": "OK"
+    },
+    "34": {
+      "condition_id": "noise_description_change_n30",
+      "schema_size": 30,
+      "pattern_type": "noise",
+      "pattern": "description_change",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 9.0
+      },
+      "status": "OK"
+    },
+    "35": {
+      "condition_id": "noise_response_time_jitter_n30",
+      "schema_size": 30,
+      "pattern_type": "noise",
+      "pattern": "response_time_jitter",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "36": {
+      "condition_id": "noise_field_type_normalization_n30",
+      "schema_size": 30,
+      "pattern_type": "noise",
+      "pattern": "field_type_normalization",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "37": {
+      "condition_id": "noise_optional_field_addition_n40",
+      "schema_size": 40,
+      "pattern_type": "noise",
+      "pattern": "optional_field_addition",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 0.9090909090909091,
+        "schema_diff_magnitude": 4.0
+      },
+      "status": "OK"
+    },
+    "38": {
+      "condition_id": "noise_description_change_n40",
+      "schema_size": 40,
+      "pattern_type": "noise",
+      "pattern": "description_change",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 12.000000000000007
+      },
+      "status": "OK"
+    },
+    "39": {
+      "condition_id": "noise_response_time_jitter_n40",
+      "schema_size": 40,
+      "pattern_type": "noise",
+      "pattern": "response_time_jitter",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "40": {
+      "condition_id": "noise_field_type_normalization_n40",
+      "schema_size": 40,
+      "pattern_type": "noise",
+      "pattern": "field_type_normalization",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "41": {
+      "condition_id": "noise_optional_field_addition_n50",
+      "schema_size": 50,
+      "pattern_type": "noise",
+      "pattern": "optional_field_addition",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 0.9090909090909091,
+        "schema_diff_magnitude": 5.0
+      },
+      "status": "OK"
+    },
+    "42": {
+      "condition_id": "noise_description_change_n50",
+      "schema_size": 50,
+      "pattern_type": "noise",
+      "pattern": "description_change",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 15.000000000000014
+      },
+      "status": "OK"
+    },
+    "43": {
+      "condition_id": "noise_response_time_jitter_n50",
+      "schema_size": 50,
+      "pattern_type": "noise",
+      "pattern": "response_time_jitter",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    },
+    "44": {
+      "condition_id": "noise_field_type_normalization_n50",
+      "schema_size": 50,
+      "pattern_type": "noise",
+      "pattern": "field_type_normalization",
+      "behavioral_signals": {
+        "token_validation_rate": 0.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "structural_signals": {
+        "jaccard_similarity": 1.0,
+        "schema_diff_magnitude": 0.0
+      },
+      "status": "OK"
+    }
+  },
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "mean_fp_rate": 0.0,
+    "auc": 1.0,
+    "pearson_r": -0.44105427713597695,
+    "pearson_p": 0.0024247553154781096,
+    "pattern_tp_rates": {
+      "token_expiry": 1.0,
+      "session_invalidation": 1.0,
+      "permission_boundary": 1.0,
+      "signing_key_rotation": 1.0,
+      "cookie_clearance": 1.0
+    },
+    "pattern_fp_rates": {
+      "optional_field_addition": 0.0,
+      "description_change": 0.0,
+      "response_time_jitter": 0.0,
+      "field_type_normalization": 0.0
+    },
+    "n_conditions": 45,
+    "n_samples_per_condition": 30,
+    "n_total_samples": 1350
+  },
+  "controls": {
+    "C1_drift_detection": {
+      "threshold": 0.9,
+      "observed": 1.0,
+      "pass": "True",
+      "evidence": "Mean TP rate across 5 drift patterns x 5 schema sizes"
+    },
+    "C2_noise_tolerance": {
+      "threshold": 0.15,
+      "observed": 0.0,
+      "pass": "True",
+      "evidence": "Mean FP rate across 4 noise patterns x 5 schema sizes"
+    },
+    "C3_discrimination": {
+      "threshold": 0.8,
+      "observed": 1.0,
+      "pass": "True",
+      "evidence": "AUC on drift vs noise discrimination"
+    },
+    "C4_orthogonality": {
+      "threshold": 0.3,
+      "observed": 0.44105427713597695,
+      "pass": "False",
+      "evidence": "Pearson correlation between behavioral and best structural signal"
+    },
+    "C5_positive_control": {
+      "threshold": "signal fires",
+      "observed": true,
+      "pass": true,
+      "evidence": "Signing key rotation (D4) behavioral signal fires"
+    },
+    "positive_control_signing_key_rotation": {
+      "pattern": "signing_key_rotation",
+      "expected": "token_validation_rate jumps to 1.0",
+      "observed_behavioral": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "pass": true
+    },
+    "null_control_optional_field_addition": {
+      "pattern": "optional_field_addition",
+      "schema_size": 10,
+      "expected": "no behavioral signal fires",
+      "pass": true
+    }
+  },
+  "drift_tp_rates": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "noise_fp_rates": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pattern_tp": {
+    "token_expiry": 1.0,
+    "session_invalidation": 1.0,
+    "permission_boundary": 1.0,
+    "signing_key_rotation": 1.0,
+    "cookie_clearance": 1.0
+  },
+  "pattern_fp": {
+    "optional_field_addition": 0.0,
+    "description_change": 0.0,
+    "response_time_jitter": 0.0,
+    "field_type_normalization": 0.0
+  },
+  "all_behavioral_values": [
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "all_labels_auc": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "all_behavioral_composite": [
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    2.0,
+    3.0,
+    2.0,
+    2.0,
+    3.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "all_structural_best": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    2.9999999999999996,
+    0.0,
+    0.0,
+    2.0,
+    5.999999999999998,
+    0.0,
+    0.0,
+    3.0,
+    9.0,
+    0.0,
+    0.0,
+    4.0,
+    12.000000000000007,
+    0.0,
+    0.0,
+    5.0,
+    15.000000000000014,
+    0.0,
+    0.0
+  ]
+}
