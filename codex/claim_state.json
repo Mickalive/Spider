@@ -283,6 +283,16 @@
         "reason": "MEASUREMENT_INVALID: null control per-type fails (4/8 types >0.01 at lambda=0, max 0.0282), subsampling consistency violated (1/5 reps sub>full), CV max 1.59 >0.5. Preregistered primary comparison across 8 page types FAILS (t=1.33 p_one=0.113 d=0.47 <0.5 thresholds). Producer's significant result (t=3.98 p=0.008 d=1.78) uses non-preregistered rep-level pairing unit. No valid inference about pooled vs per-type estimator advantage at equal n is justified. The 1.49x pooled/sub ratio at 250/type confounds 5.0 vs 0.625 expected counts/bin density. All evidence remains synthetic 2D [0,1]^2; no inference to real Web DOM dynamics. C-WEB-DYNAMICS remains HYPOTHESIS."
       },
       {
+        "experiment_id": "EXP-FRONTIER-34913743596",
+        "lane": "frontier",
+        "created_at": "2026-09-15T00:34:39.261684+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
+        "source_commit": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status. This experiment provides one disambiguation: the binned TV per-type false-positive (4/8 null fail in parent EXP-FRONTIER-34881708619) is estimator-specific, not general to density-divergence estimation \u2014 KDE and kNN both achieve 8/8 null control at 250/type. However, per-type CV stability (\u22640.5 at lambda=1) fails for both KDE (max 0.575 type 4) and kNN (max 0.755 type 0), triggering frozen FALSIFIED-IN-SETTING. The per-type stability limitation generalizes beyond binning to sample-size/heterogeneity at 250/type. All evidence remains synthetic 2D [0,1]^2; no inference to real Web dynamics justified. The exploratory kNN k=10 CV pass (max 0.470, 8/8) is hypothesis-generating only per prereg \u00a714 and cannot support confirmatory claims."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-34932344937",
         "lane": "physics",
         "created_at": "2026-09-15T05:20:43.120038+00:00",

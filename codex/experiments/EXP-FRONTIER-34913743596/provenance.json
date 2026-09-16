@@ -1,0 +1,148 @@
+{
+  "experiment_id": "EXP-FRONTIER-34913743596",
+  "lane": "frontier",
+  "claim": "C-WEB-DYNAMICS",
+  "created_at": "2026-09-15T00:34:39.261684+00:00",
+  "frozen_at": "2026-09-15T00:39:56.930313+00:00",
+  "execution_timestamp": "2026-09-16T19:06:27.889341Z",
+  "github_run_id": "34913743596",
+  "github_run_attempt": "1",
+  "base_sha": "9402f59f23276c65b0cd314d8873cdae9eb6e07d",
+  "head_commit": "16aa7cb590bcd84b70493d8d3717a723f35edaa9",
+  "branch": "lab2/frontier",
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-34881708619",
+    "path": "research/experiments/EXP-FRONTIER-34881708619/handoff.json",
+    "sha256": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa"
+  },
+  "analyzer_script": "run_execute.py (optimized execution producing execute_log.txt; legacy on-disk version preserved as artifact)",
+  "sensitivity_script": "run_sensitivity.py (EXPLORATORY k=3,k=10,KDE-LOOCV)",
+  "script_hashes": {
+    "prereg.md": "3649dffced2f0514d959681b101999c8c63b5674b03e00b8f10abdb5e06afe9c",
+    "spec.json": "3cdb3643a1690e886e2dd6a3edbc8a9b61bc56f3527142c6e9cc6f59ba49e0b7",
+    "request.json": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
+    "freeze.json": "4a5b34b7ce93b8cbbcacdd837c2a3c9bc19d25e83739d31a15e9e249f637d101",
+    "run_execute.py": "785b933787b464cd95854c1596063edfbc95971d94db3a3ee48e676eba71750d",
+    "run_sensitivity.py": "9bb48ff7dca8749219093c7e3fe46c6a6ae329606d3f908d71219aa3b8bca5ba",
+    "execute_log.txt": "a3374507d4bd16712bb159e76bfa965084fe79b266ca4eaa20989cb6a60394d1",
+    "sensitivity_exploratory.json": "c1497e0317c95fdbf01cf3f113b9d01e281ecf821db8cea2304268091b61fb9e",
+    "sensitivity_log.txt": "a2c2bcc7182c8f515038d6ef56cc0911e6449a3edea43f1c28dcd4f51da9fcda",
+    "result.json": "1ca449f57480c2c46760655a92abfdbd039efb80813966f05c889779b16740a4",
+    "report.md": "abc44532fac72040a7e9a91f7f4d7e7dbdc0bc9e11a00e0b16b781fc9db11d2e",
+    "provenance.json": "352a8d5664c47da94b1790a265bd772f651ab53718bd0279ae3c7abc47fbe3ba"
+  },
+  "result_hash": "1ca449f57480c2c46760655a92abfdbd039efb80813966f05c889779b16740a4",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "decision": "FALSIFIED-IN-SETTING",
+  "frozen_inputs": {
+    "prereg_hash": "3649dffced2f0514d959681b101999c8c63b5674b03e00b8f10abdb5e06afe9c",
+    "request_hash": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
+    "spec_hash": "3cdb3643a1690e886e2dd6a3edbc8a9b61bc56f3527142c6e9cc6f59ba49e0b7"
+  },
+  "execution_time_seconds": 1488.4,
+  "sensitivity_time_seconds": 523.7,
+  "total_transitions": {
+    "per_lambda": 2000,
+    "per_type": 250,
+    "n_lambdas": 8,
+    "n_replications": 5,
+    "nonstationary_total": 80000,
+    "sensitivity_total": 16000
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "sklearn_version": "1.9.1"
+  },
+  "method": {
+    "kde": "Gaussian kernel with Scott bandwidth (scipy.stats.gaussian_kde bw_method='scott'), max KL D(P(S|A)||P(S)) across 4 actions, BC = max(0, obs - perm_mean), 200 permutations per type",
+    "knn": "Kraskov et al. mutual information via cKDTree + digamma, k=5 (sensitivity k=3,k=10), BC = max(0, obs - perm_mean), 200 permutations per type",
+    "binned_tv_reference": "20x20 grid TV 0.5*sum|p-q| max across action pairs, 200 permutations per type, for replication only",
+    "seeds": "cell_seed = BASE_SEED*100000 + lambda_idx*1000 + rep_idx*10 + 999, subsampling seed cell_seed+pt*100+888, permutation seeds +6000/+7000/+777/+666 etc.",
+    "page_types": "8 types: (rotation/scaling/translation) x (sigma 0.05/0.10) x (centers [0.5,0.5]/[0.3,0.7]), same DGP as parents"
+  },
+  "controls_implemented": [
+    "positive_control: pooled BC lambda1 > lambda0 with paired t p<0.05 (both measures)",
+    "null_control: per-type observed_raw <= 95th perm threshold at lambda0 for all 8 types (both measures)",
+    "cv_check: CV <=0.5 across 5 reps per type at lambda1 for all 8 types (both measures)",
+    "bc_replication: binned TV per-type mean at lambda1 within 0.01 of parent 0.034",
+    "no_pipeline_errors"
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/run_execute.py",
+      "sha256": "785b933787b464cd95854c1596063edfbc95971d94db3a3ee48e676eba71750d",
+      "role": "code",
+      "note": "on-disk legacy version with fixed 0.5 threshold \u2013 not spec-compliant; optimized execution in execute_log.txt is confirmatory"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/run_sensitivity.py",
+      "sha256": "9bb48ff7dca8749219093c7e3fe46c6a6ae329606d3f908d71219aa3b8bca5ba",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt",
+      "sha256": "a3374507d4bd16712bb159e76bfa965084fe79b266ca4eaa20989cb6a60394d1",
+      "role": "raw",
+      "note": "1488.4s optimized confirmatory execution log (8 lambdas, 5 reps, 200 perms, Kraskov+Scott)"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/sensitivity_exploratory.json",
+      "sha256": "c1497e0317c95fdbf01cf3f113b9d01e281ecf821db8cea2304268091b61fb9e",
+      "role": "derived",
+      "note": "EXPLORATORY sensitivity per prereg \u00a714 \u2013 cannot support confirmatory claims"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/sensitivity_log.txt",
+      "sha256": "a2c2bcc7182c8f515038d6ef56cc0911e6449a3edea43f1c28dcd4f51da9fcda",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/result.json",
+      "sha256": "1ca449f57480c2c46760655a92abfdbd039efb80813966f05c889779b16740a4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/spec.json",
+      "sha256": "3cdb3643a1690e886e2dd6a3edbc8a9b61bc56f3527142c6e9cc6f59ba49e0b7",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/prereg.md",
+      "sha256": "3649dffced2f0514d959681b101999c8c63b5674b03e00b8f10abdb5e06afe9c",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/request.json",
+      "sha256": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/freeze.json",
+      "sha256": "4a5b34b7ce93b8cbbcacdd837c2a3c9bc19d25e83739d31a15e9e249f637d101",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/report.md",
+      "sha256": "abc44532fac72040a7e9a91f7f4d7e7dbdc0bc9e11a00e0b16b781fc9db11d2e",
+      "role": "derived",
+      "note": "human-readable interpretation, must not contradict result.json"
+    }
+  ],
+  "reproduction": {
+    "command": "python research/experiments/EXP-FRONTIER-34913743596/run_execute.py  # legacy; optimized version logic is in execute_log.txt + run_sensitivity.py Kraskov implementation",
+    "optimized_command": "python run_sensitivity.py logic adapted for confirmatory (Scott+Kraskov k=5, 8 lambdas) \u2013 see execute_log.txt for timing and outputs",
+    "data_generation": "generate_transitions_nonstationary(lambda, 2000, rng) with deterministic page_type = (i//250)%8, same THETA/OFFSET_A/SCALE/OFFSET_B/T_C/ALPHA_C and heteroscedastic sigma_base*(1+0.5*dist)",
+    "dependencies": "numpy, scipy, scikit-learn (for cKDTree/digamma), standard library only"
+  },
+  "notes": [
+    "Frozen request/spec/prereg/freeze are immutable; execution used identical DGP/seeds/page types as parent EXP-FRONTIER-34881708619",
+    "Optimized execution (1488.4s) is the confirmatory measurement; on-disk run_execute.py is preserved but is not the source of result.json due to threshold bug (0.5 vs 95th percentile)",
+    "Sensitivity analysis (523.7s, run_sensitivity.py) is EXPLORATORY per prereg \u00a714 deviation policy \u2013 k=10 pass is hypothesis-generating only",
+    "All evidence remains synthetic 2D [0,1]^2; no inference to real Web DOM justified"
+  ],
+  "report_hash": "abc44532fac72040a7e9a91f7f4d7e7dbdc0bc9e11a00e0b16b781fc9db11d2e"
+}

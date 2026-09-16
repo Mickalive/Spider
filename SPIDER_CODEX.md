@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **105**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **106**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -92,6 +92,7 @@ Validated experiments: **105**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-34846934524 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `d2eff3812d50` |
 | EXP-FRONTIER-34881708619 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `57ca23d0c9a4` |
 | EXP-RUNTIME-34902094115 | runtime | PASS | SURVIVES_CURRENT_TEST | C-MEAS-VALID | `651877a2e9e9` |
+| EXP-FRONTIER-34913743596 | frontier | PASS | FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV ≤0.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability ≤0.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted. | C-WEB-DYNAMICS | `5a4e556ee45c` |
 | EXP-PHYSICS-34932344937 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `894ea2ef394f` |
 | EXP-INTEL-34956989900 | intel | PASS | FALSIFIED-IN-SETTING | C-MEAS-VALID, C-CROSSSITE, C-LLM-INHERIT | `ac10541a53a9` |
 | EXP-RUNTIME-34986155186 | runtime | PASS | MIXED | C-MEAS-VALID | `5c54f99d8325` |
