@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from control_plane import CONTROL_ROOTS
+from control_plane import CONTROL_ROOTS, VOLATILE_CONTROL_ROOTS
 from research2_contract import CLAIM_STATUSES, LANES, PACKET_FILES
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,9 +61,11 @@ def main():
         "research/EXPERIMENT_PACKET.md",
         "config/models.json",
         "SPIDER_CODEX.md",
+        "codex",
     }
     require(critical_control <= set(CONTROL_ROOTS), f"control plane missing critical roots: {sorted(critical_control - set(CONTROL_ROOTS))}")
     require(len(CONTROL_ROOTS) == len(set(CONTROL_ROOTS)), "duplicate CONTROL_ROOTS")
+    require({"SPIDER_CODEX.md", "codex"} <= set(VOLATILE_CONTROL_ROOTS), "canonical evidence roots must be volatile control-plane overlays")
 
     required_files = [
         ".github/workflows/spider-lane.yml",
