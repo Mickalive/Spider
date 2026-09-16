@@ -1,0 +1,20 @@
+{
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T17:50:56.070960+00:00",
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does the parameterized distillation kernel (Fix1+Fix2+slot_prefixes) save total cost per successful real-browser task (C-PRODUCT-ECON), and does the Fix2 protocol-only gap produce measurable over-parameterization in live browser traffic?",
+  "lane": "product",
+  "origin_github_run_id": "35130681515",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35124662913",
+    "path": "research/experiments/EXP-PRODUCT-35124662913/handoff.json",
+    "sha256": "7a18259524e10192be19268385f7dc728e4fdf568c0c0c5b0c871ffd21631f0f"
+  },
+  "reason": "pulse",
+  "request_hash": "ad0a2d2c9638c460209a936e2a2b528ac02421851901463920fc17167aa81d82",
+  "request_id": "624cbe0e772cb104be4598be",
+  "schema_version": 1
+}

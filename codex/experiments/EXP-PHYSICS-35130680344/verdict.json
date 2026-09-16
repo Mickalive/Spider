@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35130680344",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No confirmatory claim supported as preregistered. Frozen decision_rule triggers MEASUREMENT_INVALID on two independent clauses: (1) C2 fails — non-trivial BC PMI=0.766 bits > 0.05 threshold but Bonferroni p=0.076 (raw 0.019) > 0.0125; (2) C4 fails — session-randomized positive control BC PMI=0.640 not ≈0 by construction (audit V1: NT response deterministic per state with 3 hashes independent of session, so session randomization cannot break R→S mapping). Determinism check passes (both conditions accuracy=1.0 with step grouping, audit V5), ceiling eliminated (H=1.103 bits), null shuffled-label control passes (mean 0.0014 < 3*std=0.264), cardinality passes NT but fails 17/70 TR strata (audit V6). Audit V8 confirms physics identifiability not addressed: NT encoding uniquely determines state (3 hashes for 3 states) so PMI>0 is state alias not emergent dynamics. Descriptive observation preserved: K=1 NT BC PMI=1.035 p=0.0 replicates parent K=1 effect; K=3 NT BC PMI=0.766 is suggestive but unvalidated. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a non-deterministic branching FSM with session-dependent transitions and noisy/many-to-one content mapping (where response uniquely identifies state for only a subset of states) yield conditional PMI > 0.05 at K=3, and can a positive control that randomizes state→content mapping (not session assignment) correctly diagnose the pipeline?",
+  "reason": "MEASUREMENT_INVALID per frozen decision_rule: C2 fails (Bonferroni p=0.076 > 0.0125 despite large raw BC PMI 0.766) and C4 fails (session-randomized positive control designed for session-dependent encodings does not diagnose deterministic state→response mappings). The parent's V10 identifiability concern (state label injection) is partially addressed: non-trivial BC PMI (0.766) exceeds trivial BC PMI (0.345), suggesting page-content carries additional signal beyond explicit labels. However, audit V8 finds the NT encoding still deterministically maps state→response (3 unique hashes for 3 states), so PMI>0 remains a content-as-state-alias rather than emergent web dynamics. Three design defects require resolution before a re-run: (1) positive control must randomize state→content mapping rather than session assignment for state-deterministic encodings; (2) trajectories must be generated with identical (session_id, action sequences) across conditions via seeded replication or independent sampling disclosed; (3) paired permutation test must use trajectory-level permutation per spec 9.2, not stratum-level sign-flip. The branching FSM ceiling elimination (H=1.103 bits) and K=1 replication (1.035 bits, p=0.0) remain established, confirming the environment can express response informativeness when history is insufficient. The research program has exhausted the locally-hosted deterministic synthetic FSM pathway for C-WEB-DYNAMICS: all encodings tested (explicit state labels, page content, network requests, DOM hashes, response digests) yield PMI>0 on deterministic content-as-state-label mappings, but none demonstrates predictive dynamics beyond memory on genuinely stochastic or many-to-one content. A material pivot is needed.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35130680344/spec.json:decision_rule 7 criteria C1-C7",
+    "research/experiments/EXP-PHYSICS-35130680344/result.json:status=MEASUREMENT_INVALID metrics BC_PMI_NT_K3=0.766 perm_p_bonf=0.076 positive_control BC=0.640 pass=false controls.determinism_check accuracy=1.0 cardinality TR fails 17/70",
+    "research/experiments/EXP-PHYSICS-35130680344/audit.json:status=MEASUREMENT_INVALID producer_claim_supported=false validity_findings V1 (positive control by construction), V2 (primary non-significant), V3 (session mismatch), V4 (paired test violation), V5 (determinism masks tautology), V6 (cardinality partial), V8 (identifiability trivial), V9 (null control passes), V10 (K1 secondary strong) claim_ceiling MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35130680344/audit.json:recomputed_metrics H=1.103 matched, BC_PMI_NT_K3=0.766 matched, p_bonf=0.076 computed, NT_unique_hashes=3, 0/200 identical trajectories, cardinality TR fails 17/70 max_ratio=0.941",
+    "research/experiments/EXP-PHYSICS-35130680344/raw_result.json:per_k_results K1/K3 NT/TR observed perm_mean BC p_raw p_bonf cardinality strata controls session_randomized BC=0.640 min_perm_null_std=0.0148",
+    "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py:FSM transitions deterministic, make_non_trivial_response state-deterministic 3 hashes, generate_trajectories shared RNG",
+    "research/experiments/EXP-PHYSICS-35040401992/handoff.json:carry_forward established H=1.346 K1=0.924 do_not_assume V10 state_id injection synthetic-only",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS, 25 prior events, 6 MEASUREMENT_INVALID, 7 FALSIFIED-IN-SETTING, 1 SURVIVES_CURRENT_TEST, 2 EXPERIMENTAL"
+  ]
+}

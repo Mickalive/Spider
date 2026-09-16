@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the parameterized distillation kernel (Fix1+Fix2+Fix3) save total cost per successful real-browser task (C-PRODUCT-ECON), and what is the prevalence of protocol-only over-parameterization patterns in live browser traffic?",
+  "why_next": "C-PARAM-INHERIT clears the synthetic gate with protocol-only gap resolved. The next product gate is C-PRODUCT-ECON: end-to-end amortized economics on real agents. Fix3 closes the protocol-only gap that blocked C-PRODUCT-ECON measurement in the parent handoff. The path is now open for real-browser testing with model/network/browser calls to measure actual cost savings versus literal/fixed baselines. Prevalence of protocol-only patterns in live traffic should be measured simultaneously to bound the real-world significance of the protocol-only boundary condition.",
+  "carry_forward": {
+    "established": [
+      "Fix3 (_is_protocol_only_prefix structural '/' check) closes Fix2 protocol-only gap: PROTOCOL_ONLY slot_count=0 (was slot_count=1 without Fix3, delta=1). Fix3 correctly rejects scheme+authority-only prefixes (https://, http://, https://a.com) while allowing prefixes with path delimiters (https://a.com/, https://api.example.com/users/)",
+      "All 5 parent established single-slot URL classes preserved with Fix1+Fix2+Fix3: P1 path-prefix binding_accuracy=1.0, G1 query-string binding_accuracy=1.0, G2 multi-param binding_accuracy=1.0, G3 deep-path binding_accuracy=1.0, G5 path+query hybrid binding_accuracy=1.0, all slot_count=1",
+      "Nulls N1_ORIGINAL/N1_CORRECTED slot_count=0 (Fix2 and empty-prefix guard still effective)",
+      "Fix1 necessity delta=1.0 (maximum discriminating power) on G1: fixed binding=1.0 vs unfixed binding=0.0",
+      "Fix2 necessity confirmed on N1_ORIGINAL: fixed slot_count=0 vs unfixed slot_count=1",
+      "Fix3 necessity delta=1 on PROTOCOL_ONLY: fixed slot_count=0 vs unfixed slot_count=1",
+      "B_LITERAL fail_rate=1.0 confirms parameterized induction necessary for all conditions",
+      "Template invariance preserved: slot_prefixes extraction is metadata-only, action_template and _bind unchanged",
+      "Committed-code synthetic single-slot with prefix metadata (Fix1+Fix2+Fix3 necessity quantified) on src/spider/kernel.py sha256=8aed6377"
+    ],
+    "rejected": [
+      "Protocol-only over-parameterization is NOT hidden: unfixed heuristic produces slot_count=1 for protocol-only URLs, correctly documented as boundary condition",
+      "Cross-host parameterization IS rejected by Fix2: N1_ORIGINAL slot_count=0 (prefix ending at '.' fails delimiter check)",
+      "Realistic corpus prevalence measurement is illustrative only (synthetic approximation, 0/6 rejected in realistic corpus but spec expectations were inconsistent with Fix3 definitions — V4)"
+    ],
+    "unknown": [
+      "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful real-browser task? Requires real-browser testing with model/network/browser calls. Currently unmeasured.",
+      "Real-browser external validity: prevalence of protocol-only vs minimal-path URL patterns in live browser traffic unknown",
+      "Real-world URL pattern prevalence: realistic corpus is synthetic approximation. Actual prevalence of protocol-only patterns in live API traffic unknown.",
+      "VALUE CONTRACT slot_prefixes consumption: correctly extracted (non-empty for P1/G3/G5) but not exercised end-to-end via _bind prefix stripping — slot_prefixes observed '' not 'users/' due to rfind logic on delimiter-ending prefixes (audit V2). Consumer behavior untested.",
+      "Fix2 limitation: path-embedded version parameters (e.g., /v1/data vs /v2/data) fail Fix2 boundary check because prefix ends at non-delimiter character (R4_CROSS_PROTOCOL slot_count=0). Requires segment-aware prefix validation not tested.",
+      "Multi-slot induction (G4 architectural bound): single-char suffix guard only, multi-char suffix '00' not caught. Persists from parent."
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is VALIDATED or SHIPPED: it remains EXPERIMENTAL. Claim ceiling is bounded to committed-code synthetic single-slot with prefix metadata. Real-browser external validity unproven.",
+      "Do not assume promote_to_product=true: this is not Product-lane code that survived a frozen gate and independent audit in the sense required for promotion. The code is committed but the claim is not yet measured in real traffic.",
+      "Do not assume Fix3 eliminates all protocol-only over-parameterization: Fix3 rejects scheme+authority-only prefixes without path delimiters, but https://a.com/ (with trailing slash) correctly parameterizes because it has a path delimiter. The boundary is structural, not length-based.",
+      "Do not assume the frozen 12-char threshold was implemented: Fix3 uses structural '/' delimiter check, not the 12-character length threshold described in spec.json. Functional equivalence holds for gated case but the wording diverged (audit V1).",
+      "Do not assume slot_prefixes changes action_template or _bind: it is metadata-only extraction. Verified by template invariance check. Observed '' not 'users/' for P1/G3/G5 due to rfind logic (audit V2).",
+      "Do not assume overall_condition_pass_rate=0.778 represents decision-rule performance: it includes baselines (B_UNFIXED_G1=0.0 binding, B_UNFIXED_PROTOCOL_ONLY=1.0 slot). Decision-rule-only pass rate is 10/10 = 1.0.",
+      "Do not assume n=3+3 per condition establishes statistical significance: it establishes determinism on synthetic data, not generalization to real traffic.",
+      "Do not assume Fix3 threshold is length-based: the spec described 'minimum prefix length threshold of 12 characters' but implementation is structural (split '://', check '/' not in rest). Do not assume any particular length value gates the behavior."
+    ]
+  },
+  "dependencies": [
+    "C-PARAM-INHERIT must remain EXPERIMENTAL until C-PRODUCT-ECON measured on real-browser traffic",
+    "Real-browser test harness needed for C-PRODUCT-ECON (model/network/browser calls)",
+    "src/spider/kernel.py sha256=8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb and src/spider/models.py sha256=064c5f34413266fa4ac232f5e03e536be3bc15ea6ed098253875103a9aad54bd are the committed code basis",
+    "Fix2 path-embedded version limitation (R4_CROSS_PROTOCOL) persists — not blocking C-PRODUCT-ECON but limits claim to non-versioned URL patterns"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35130681515/result.json: metrics decision_rule_passed=true 10/10, controls all passed, realistic_corpus 4/6 parameterizable",
+    "research/experiments/EXP-PRODUCT-35130681515/audit.json: status=PASS producer_claim_supported=true claim_ceiling, V1-V5 validity_findings, B1-B4 baseline_findings, recomputed_metrics",
+    "research/experiments/EXP-PRODUCT-35130681515/raw_evidence.json: conditions P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1, PROTOCOL_ONLY slot_count=0, B_UNFIXED_PROTOCOL_ONLY slot_count=1, B_UNFIXED_G1 binding_accuracy=0.0",
+    "research/experiments/EXP-PRODUCT-35130681515/spec.json: frozen decision_rule 10 conditions, claim_ids C-PARAM-INHERIT and C-PRODUCT-ECON",
+    "src/spider/kernel.py sha256=8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb: _is_protocol_only_prefix:278-299, distill_parameterized:302-437",
+    "research/experiments/EXP-PRODUCT-35124662913/handoff.json: parent SURVIVES_CURRENT_TEST, protocol-only gap definition, carry_forward",
+    "research/experiments/EXP-PRODUCT-35124662913/audit.json: parent PASS, V6 protocol-only gap identification"
+  ],
+  "recommended_action": "Next experiment in product lane should measure C-PRODUCT-ECON: run parameterized distillation kernel (Fix1+Fix2+Fix3) in real-browser test harness with model/network/browser calls, measure end-to-end cost per successful real-browser task against literal/fixed baselines. Simultaneously measure prevalence of protocol-only vs minimal-path URL patterns in live browser traffic to bound real-world significance of the protocol-only boundary condition. Fix2 path-embedded version limitation (R4) and multi-slot induction (G4) are known architectural bounds that do not block C-PRODUCT-ECON but should be documented in claim ceiling."
+}
