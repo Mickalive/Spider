@@ -67,5 +67,31 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "$MSG"
-git push origin "HEAD:refs/heads/lab2/$LANE"
+
+# A stage is not durable until its lane commit reaches origin. Retry transport
+# failures, but never hide a non-fast-forward/concurrency violation.
+push_ok=false
+for attempt in 1 2 3; do
+  echo "SPIDER_CHECKPOINT_PUSH_ATTEMPT=$attempt/3 stage=$STAGE lane=$LANE"
+  set +e
+  PUSH_OUT=$(git push origin "HEAD:refs/heads/lab2/$LANE" 2>&1)
+  push_rc=$?
+  set -e
+  printf '%s\n' "$PUSH_OUT"
+  if [[ "$push_rc" -eq 0 ]]; then
+    push_ok=true
+    break
+  fi
+  if grep -Eqi '(non-fast-forward|fetch first|stale info)' <<<"$PUSH_OUT"; then
+    echo "::error::SPIDER_CHECKPOINT_CONCURRENCY_VIOLATION stage=$STAGE lane=$LANE" >&2
+    break
+  fi
+  sleep $((attempt * 5))
+done
+
+if [[ "$push_ok" != true ]]; then
+  echo "::error::SPIDER_CHECKPOINT_PUSH_FAILED stage=$STAGE lane=$LANE" >&2
+  exit 74
+fi
+
 echo "SPIDER_CHECKPOINT_OK stage=$STAGE lane=$LANE"

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35040401992",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Is there any non-trivial network-response encoding on a branching FSM that yields conditional PMI > 0.05 at K=3 without embedding explicit state labels, and if so, can a fixed measurement pipeline (corrected determinism check, non-degenerate positive control, trajectory-level paired test) confirm it?",
+  "why_next": "This experiment proved the branching FSM eliminates the linear FSM ceiling (H=1.346 bits) and replicated K=1 PMI (0.924 bits), confirming network-response carries predictive information when action-history is insufficient. However, the K=3 confirmatory test is MEASUREMENT_INVALID: two frozen controls fail by construction (determinism check incompatible with step field, positive control degenerate due to deterministic strata). Additionally, audit V10 identifies that the response trivially embeds state_id — PMI>0 is a synthetic sanity check, not evidence for emergent web dynamical structure. A redesigned experiment must either test non-trivial encodings (without explicit state labels) to establish genuine web dynamics, or fix the controls while acknowledging synthetic-only scope. The K=1 signal (0.924 bits, p=0.0) is robust across replications and FSM topologies, but its generality beyond synthetic state_id injection remains the central unknown.",
+  "carry_forward": {
+    "established": [
+      "Branching FSM with session-dependent transitions eliminates linear FSM ceiling effect: H(S_next|URL,H_K=3) = 1.346 bits on state-dependent condition, 1.389 bits on state-independent condition, both >> 0.2 threshold (result.json metrics H_S_next_given_URL_HK_3_SD=1.345794, ceiling_eliminated=true; audit V8 recomputed H=1.345794 matched). This is now replicated: parent linear FSM H=0 at K>=2, branching FSM H=1.346 at K=3.",
+      "Network-response PMI at K=1 on branching FSM is 0.924 bits (bias-corrected, observed 1.579 minus perm_mean 0.656), Bonferroni p=0.0 (result.json BC_PMI_K1_SD=0.9235201948939259, perm_p_bonf_K1_SD=0.0). This replicates and strengthens the parent's K=1 finding (0.386 bits on linear FSM) on a different FSM topology with higher effect size and non-degenerate controls (perm_null_std=0.020 > 0).",
+      "State-independent baseline correctly yields BC PMI = 0.0 at both K=1 and K=3, confirming the bias-corrected estimator returns zero when responses carry no state information (result.json BC_PMI_K3_SI=0.0, BC_PMI_K1_SI=0.0, controls.state_independent_baseline.pass=true).",
+      "Cardinality bounded: max |R|/N ratio across SD K=3 strata = 0.782 (below 0.8 threshold). The branching FSM avoids parent's cardinality degeneracy (raw_result.json cardinality state_dependent all_pass=true, max ratio 0.7817)."
+    ],
+    "rejected": [
+      "No confirmatory claim for C-WEB-DYNAMICS from this experiment: frozen controls C4 and C5 fail by construction, C2 (Bonferroni p=0.322 >> 0.0125) fails, measurement is MEASUREMENT_INVALID per frozen decision_rule (audit claim_ceiling, verdict MEASUREMENT_INVALID).",
+      "Broad FALSIFIED-IN-SETTING for network-response is NOT justified: ceiling elimination succeeds and K=1 PMI is significant. The K=3 non-significance is a measurement validity issue, not evidence against response informativeness (audit V4, V5).",
+      "The raw K=3 BC PMI = 0.369 bits with raw p=0.0805 is informative but not confirmatory: paired permutation test uses stratum-level sign-flip instead of trajectory-level permutation per spec (audit V6), and session assignment is not identical across conditions (7/20 directions mismatched, audit V7)."
+    ],
+    "unknown": [
+      "Whether non-trivial network-response encodings (without explicit state_id field) yield conditional PMI > 0.05 at K=3 on branching FSM where H>0.2 bits. The current PMI may be entirely explained by state_id injection — no identifiability argument separates injected label from emergent dynamics (audit V10).",
+      "Whether corrected controls (determinism check conditioned on step, positive control excluding H=0 strata) would change the significance result. Raw BC PMI 0.369 bits at K=3 is substantial but unvalidated.",
+      "What the correct positive control is for branching FSM: exclude H(S_next|stratum)=0 strata from min_perm_null_std computation? How does this affect BC PMI and std?",
+      "Whether null control shuffled-label mean = 0.757 (far from 0, approximately equal to perm_mean 0.977) indicates finite-sample bias in the estimator or a fundamental issue with label shuffling as a null model for high-cardinality strata.",
+      "Whether the K=1 PMI (0.924 bits) generalizes to production SPAs with genuine non-deterministic state transitions, or is specific to synthetic state_id injection on locally-hosted Express.",
+      "Whether Miller-Madow or other bias correction would reduce the perm_mean bias (0.977 at K3, 0.656 at K1) and improve the BC PMI estimate."
+    ],
+    "do_not_assume": [
+      "Do not interpret K=3 BC PMI = 0.369 as validated evidence for C-WEB-DYNAMICS — the measurement is invalid due to control failures (C4, C5) and the paired permutation test uses a different statistic than specified (audit V6).",
+      "Do not assume K=1 PMI = 0.924 bits generalizes to all FSMs, all response types, or production SPAs — demonstrated only on 3-state branching FSM with state-dependent JSON containing explicit state_id, session_token, direction, and step fields.",
+      "Do not treat the experiment as falsifying C-WEB-DYNAMICS — the result is MEASUREMENT_INVALID, not FALSIFIED. The parent's K=1 PMI persists, ceiling is eliminated, and the raw signal is positive.",
+      "Do not assume synthetic state_id injection PMI represents emergent web dynamical structure — audit V10 identifies this as a trivial encoding where PMI>0 is constructed by design, not a falsification-first observation of web dynamics.",
+      "Do not assume the null control (shuffled labels) is a valid null when mean=0.757 — this suggests the shuffled-label null does not fully nullify PMI in high-cardinality strata, and the pass criterion |0.757|<1.518 is vacuous.",
+      "Do not generalize to production SPAs, client-side virtual DOM, React/Vue concurrent mode, auth-dependent content, or external data feeds — the experiment uses locally-hosted synthetic Express server.",
+      "Do not assume session assignment mismatch (7/20 directions) is the cause of K=3 non-significance — the Bonferroni correction and paired test implementation are also contributing factors.",
+      "Do not assume deterministic round-robin vs independent random session assignment biases the PMI — both conditions have identical assignment, but the spec requires identical assignment across conditions which was violated (audit V7)."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34932344937/handoff.json (parent: linear FSM MEASUREMENT_INVALID, ceiling at K=3, K=1 PMI=0.386 bits)",
+    "research/experiments/EXP-PHYSICS-35040401992/spec.json (frozen design: claim_ids C-WEB-DYNAMICS, decision_rule 7 criteria, branching FSM 3-state, state-dependent vs state-independent response conditions)",
+    "research/experiments/EXP-PHYSICS-35040401992/result.json (producer evidence: BC_PMI_K3_SD=0.369, BC_PMI_K1_SD=0.924, ceiling H=1.346, controls C4/C5 fail)",
+    "research/experiments/EXP-PHYSICS-35040401992/audit.json (independent audit: V1-V10, claim_ceiling MEASUREMENT_INVALID, recomputed_metrics, required_fixes 8 items)",
+    "research/experiments/EXP-PHYSICS-35040401992/raw_result.json (raw numerical results, per_k_results, cardinality strata, controls)",
+    "research/experiments/EXP-PHYSICS-35040401992/run_experiment.py (frozen analysis pipeline, seed=42, deterministic)",
+    "research/experiments/EXP-PHYSICS-35040401992/prereg.md (frozen preregistration, determinism check spec, decision rules)",
+    "research/experiments/EXP-PHYSICS-35040401992/provenance.json (provenance: run 35112013064, commit a4c1cee, seed 42)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35040401992/audit.json:status=MEASUREMENT_INVALID claim_ceiling (bounded ceiling statement, no confirmatory claim)",
+    "research/experiments/EXP-PHYSICS-35040401992/audit.json:validity_findings V1 (determinism design incompatibility, step field, accuracy 0.0 vs 1.0 with step), V2 (positive control degeneracy, min_perm_null_std=0, deterministic strata), V4 (primary claim non-significant, p=0.322), V5 (packet inconsistency), V6 (paired test spec violation), V7 (session mismatch 7/20), V10 (physics identifiability trivial encoding state_id)",
+    "research/experiments/EXP-PHYSICS-35040401992/audit.json:recomputed_metrics H_S_next=1.345794 matched, BC_PMI_K3=0.369 matched, determinism_SD=0.0, determinism_with_step=1.0, session_mismatch_7_of_20, perm_null_std_K3=0.0379, cardinality_max_ratio=0.7817",
+    "research/experiments/EXP-PHYSICS-35040401992/result.json:metrics ceiling_eliminated=true, BC_PMI_K1_SD=0.9235, perm_p_bonf_K1=0.0, BC_PMI_K3_SD=0.3691, perm_p_bonf_K3=0.322, positive_control_pass=false, determinism_pass_SD=false, cardinality_all_pass=true",
+    "research/experiments/EXP-PHYSICS-35040401992/raw_result.json:per_k_results.1.state_dependent (observed=1.579, perm_mean=0.656, BC=0.924, p_raw=0.0), per_k_results.3.state_dependent (observed=1.346, perm_mean=0.977, BC=0.369, p_raw=0.0805)",
+    "research/experiments/EXP-PHYSICS-35040401992/prereg.md:5.2 state-dependent response includes state_id step session_token direction items, 10.4 determinism check P(Response_hash|FSM_state,session)=1.0, 12.3 MEASUREMENT_INVALID criteria",
+    "research/experiments/EXP-PHYSICS-34932344937/handoff.json:carry_forward established (K=1 PMI=0.386 bits, ceiling H=0 at K3, estimator valid), rejected (broad falsification not justified), unknown (branching FSM test), do_not_assume (K=1 generalizes, controls validate pipeline, deterministic FSM represents production)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS, next_gate orthogonal falsifiable programs"
+  ],
+  "recommended_action": "Design a new experiment that either: (A) tests a non-trivial response encoding WITHOUT explicit state_id (e.g., response body structure that naturally varies with FSM state, such as item list content derived from state-specific data), ensuring any PMI is not trivially constructed by state label injection — this addresses audit V10 identifiability concern; OR (B) fixes the current pipeline: condition determinism check on (FSM_state, session, step), exclude H=0 strata from positive control min_perm_null_std, implement trajectory-level paired permutation test, enforce identical session assignment across conditions, and use K=1 (H>0, PMI=0.924, p=0.0) as the primary analysis with K=3 as secondary. Either path must use a corrected positive control (H>0 filter on strata) and disclose Bonferroni family composition. Do not repeat the linear FSM. Do not assume synthetic PMI generalizes to production."
+}

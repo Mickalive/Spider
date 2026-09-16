@@ -776,6 +776,31 @@
         "handoff.json": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
       }
     },
+    "EXP-GRAPH-35083040517": {
+      "lane": "graph",
+      "request_id": "ca21b668ed16180fb3647a3a",
+      "created_at": "2026-09-16T10:05:21.918859+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
+        "spec.json": "db9bf8f720f79bff866248ec788394b319e2e789609e1d48a9823ae239cb008c",
+        "prereg.md": "9ed035c737b2a40464286a4424d0971f3f19ed762ede13a347f9b0aa983cd7fd",
+        "freeze.json": "31b8a6c72a00e0ed5cfdcd13e3a694a2eb598fe701377413efd6e00d0c90f978",
+        "result.json": "66ae8d16cd8be1db9e51e43f1c13684e26e419c7200b8a4d147f442aac9118de",
+        "report.md": "e3d808cbac09848361ef95d520d4263f485e7bf29661c6b22a615340d6400e76",
+        "provenance.json": "6f349587f789a3bb9cca00fa7b7f17d65c43658ba3f1230b81ffa11fc379e51e",
+        "audit.json": "36c88523b0271662686475c405a2b37ca3dcc5d16335b03a481e55d2028c0b6e",
+        "verdict.json": "3c2036bf5dc13a7b28030709b946e2c6f827950fb937371048a680dda744b593",
+        "handoff.json": "71ed289305908a0fedbaa8f90ee4f7e3cedff87bc8fb606dd1e9aa91e672bdc2"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -1546,6 +1571,31 @@
         "handoff.json": "b219878ec01bcd49b77ecf23be62639e72120edaf37f4d448ab74e0125e48706"
       }
     },
+    "EXP-PHYSICS-35040401992": {
+      "lane": "physics",
+      "request_id": "bab84686792166a9d54a5db2",
+      "created_at": "2026-09-16T00:32:15.965489+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
+        "spec.json": "43dfad3d2e5c70d2d326c83202e6718ee890268a1ce6ac2044691da92bd7a732",
+        "prereg.md": "d186a401ec62ec0c72197393530337e49f4a6b74b7330ac3512cdd4a4dd03c8e",
+        "freeze.json": "4495e0ec576ce6e47c65a66a7a0e2c5fd5dd2b2bce3cd7fb4780d24038f3abc9",
+        "result.json": "cac13675a846bcbd61c09df6890894f1874ba400d8903c27a754e8526039f7ae",
+        "report.md": "1631283715aec256e285daf95f20ddf5155b0d4f0f502dc55c58f932ee641d62",
+        "provenance.json": "34bcc00d15e494133b70cc15bc7136ff30c4af2b73e5b73e8ab436a0cf13ba37",
+        "audit.json": "81ca3d6e0413c417c9179012b10de07b49308c0544e293691a4a7a732231f32d",
+        "verdict.json": "3ff35ec24f3135c34aa8f46232cbf5be6c75f66d68c089a3e45d01c043ddd656",
+        "handoff.json": "4e6d9a3af4b902c483b5a5526222f260596876867117ca68964613ef83b32246"
+      }
+    },
     "EXP-PRODUCT-33528829801": {
       "lane": "product",
       "request_id": "2629e8e63e200f05556e37ca",
@@ -1896,6 +1946,31 @@
         "handoff.json": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11"
       }
     },
+    "EXP-PRODUCT-35124662913": {
+      "lane": "product",
+      "request_id": "52f7ccf2a33eb3b24783c34d",
+      "created_at": "2026-09-16T16:52:50.049598+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "After amending the G3 slot_prefixes expected value to the full path segment and rerunning B_UNFIXED against G1 query-string training data, does the parameterized distillation kernel with Fix1+Fix2+slot_prefixes pass the amended decision rule, and how large is the Fix1 necessity delta on discriminating conditions?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "09566c08deef4d2b39cf6d8f743ef382841406889557ad122cceb20cdb9d04d9",
+        "spec.json": "b3f9c0d8043e3038159b8413b742a616a655c7a9b73a01e97bf0a8cea8f2988a",
+        "prereg.md": "45ac8ee03c0b2b49cad482409cbae72ed109844570b807834439f5547764625c",
+        "freeze.json": "fe58ea24e1528b9802fd1677454d4a3b94b7ba44417eade586506785e2d5441b",
+        "result.json": "dc743f29979283eea85752ea30448057bf4c39b160a481c2cab110301055e5a2",
+        "report.md": "689705f9a30b2fefad66b607245165ecc3e131fc774e7c567862580eb43556dd",
+        "provenance.json": "346f55d54ed5c4f7117374fc24d265892bed33016d2605e97bfd038a7063be8a",
+        "audit.json": "fcde092ccdd335a261e16a9a14b7e8f239f29a5ef7dc5478dc6a8c51897f3a48",
+        "verdict.json": "2c1fc9ae354ba13340bb75148ebcd1be469de7b4337ea1247999bfc3d9047637",
+        "handoff.json": "7a18259524e10192be19268385f7dc728e4fdf568c0c0c5b0c871ffd21631f0f"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -2219,6 +2294,31 @@
         "audit.json": "ffdaa1d8fdf329095caa07a58b2f3c253c668a004771eb05c8654b11f5a5f2a7",
         "verdict.json": "739b100d33240f559f4d581d1684590b9e6bc65c6369cf5d2fcb5d9875cdb8c0",
         "handoff.json": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
+      }
+    },
+    "EXP-RUNTIME-35058619700": {
+      "lane": "runtime",
+      "request_id": "355f46b8adf853a44529508e",
+      "created_at": "2026-09-16T05:13:04.868277+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does decompression-normalization preserve body-only discrimination under gzip quality variation, and does it generalize across compression algorithms (brotli vs gzip)?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "348574668ded59beee1d01c493e215df4149d659d50eb713e6968ff706e6e6b6",
+        "spec.json": "be137781ab2f1cd86eb2bead5d76a23072eed38a5cd4d99b1a25e83ed036129a",
+        "prereg.md": "cf754038829803a952067725fd035cdf4042f66cd152c755480057faecfaca9e",
+        "freeze.json": "82243e1f1092f5433ebcc33af93d7050ab21d9d548c87ae2ef7378ba1095931c",
+        "result.json": "0656ad0491899ac45a1f748e692d58210fed3d659cb41309707a23123037e4e5",
+        "report.md": "165873cb7759202e5a92c7812443fdf9bd99109f4c3bc15eeefa8067139504c5",
+        "provenance.json": "d57dec1358da6c7714c15f41a7988d70ad14e4298d49355dcbd383b1d7909dd6",
+        "audit.json": "ec773197008b6cb729b70c1ed720c9b50a7d33dcf6076402682815bcfdc0f0f5",
+        "verdict.json": "c70dc62f788f9772e88122a71c0bdb62477fbdcc073e93eab6a6ee5e0d71e3cd",
+        "handoff.json": "b9bc44c5b40862ad112bfadc5233817a0c8a87ab96fe3a81b6be0b24e7127456"
       }
     }
   }

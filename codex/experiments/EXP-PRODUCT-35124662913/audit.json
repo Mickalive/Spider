@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35124662913",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_G3_AMENDMENT_RECOMPUTED_CORRECT",
+      "severity": "info",
+      "finding": "G3 slot_prefixes amended expected 'orgs/acme/repos/main/issues/' recomputed correct. Direct distill_parameterized on G3 training yields template https://api.example.com/orgs/acme/repos/main/issues/${url} with slot_prefixes {'url':'orgs/acme/repos/main/issues/'} binding_accuracy 1.0 3/3. Matches frozen amended spec.json decision_rule criterion 5 and prereg Table 5.1. Clears parent required_fix 1 (spec-vs-implementation mismatch). Extraction extracts path segment from authority end, semantically correct for VALUE CONTRACT prefix stripping.",
+      "evidence": "raw_evidence.json conditions.G3_DEEP_PATH slot_prefixes {'url':'orgs/acme/repos/main/issues/'} action_template https://api.example.com/orgs/acme/repos/main/issues/${url} binding_correct 3/3 metrics.binding_accuracy 1.0; spec.json decision_rule(5) amended; recompute distill_parameterized G3 prefix 'https://api.example.com/orgs/acme/repos/main/issues/' path_segment 'orgs/acme/repos/main/issues/'"
+    },
+    {
+      "id": "V2_NO_REGRESSION_TEMPLATE_INVARIANCE",
+      "severity": "info",
+      "finding": "No regression after re-commit. All 5 established conditions recomputed binding_accuracy 1.0 slot_count 1: P1_PATH_PREFIX 1.0, G1_QUERY_STRING_SIMPLE 1.0, G2_QUERY_STRING_MULTIPARAM 1.0, G3_DEEP_PATH 1.0, G5_PATH_QUERY_HYBRID 1.0 (3/3 each). Action_template verbatim matches parent templates: P1 users/${url}, G1 search?q=${url}, G2 items?category=books&page=${url}, G3 orgs/acme/repos/main/issues/${url}, G5 users/${url}/items?page=1. slot_prefixes is metadata-only, _bind unchanged.",
+      "evidence": "raw_evidence.json conditions P1/G1/G2/G3/G5 metrics.binding_accuracy 1.0 resolution_results binding_correct 3/3 template_matches_parent true; src/spider/kernel.py _bind lines 36-50 identical; result.json controls P1/G1/G2/G3/G5 pass true"
+    },
+    {
+      "id": "V3_NULL_CONTROLS_RECOMPUTED_VALID",
+      "severity": "info",
+      "finding": "Null controls recomputed valid: N1_ORIGINAL common prefix 'https://api.' last_char '.' not in /?=& => _validate_prefix_boundary false => distill None slot_count 0 PASS. N1_CORRECTED common prefix '' empty => empty-prefix guard rejects => None slot_count 0 PASS. No parameterization hallucination.",
+      "evidence": "raw_evidence.json conditions.N1_ORIGINAL/N1_CORRECTED distill_success false slot_count 0 metrics.binding_accuracy 1.0; src/spider/kernel.py lines 191-199 _validate_prefix_boundary and 260-271 empty guard; recompute _find_common_prefix_suffix N1_ORIGINAL='https://api.' N1_CORRECTED=''"
+    },
+    {
+      "id": "V4_SYNTHETIC_SCOPE_NO_LEAKAGE",
+      "severity": "info",
+      "finding": "No leakage or sampling violation. Training vs unseen disjoint: P1 A,B,C vs D,E,F; G1 alpha,beta,delta vs gamma,epsilon,zeta; G2 page 1,2,3 vs 4,5,6; G3 issues 1,2,3 vs 4,5,6; G5 alice,bob,charlie vs dave,eve,frank. Deterministic synthetic n=3+3 per condition, 42 binding tests, zero model/network/browser calls, fresh Python import per condition, committed code import.",
+      "evidence": "run_experiment.py CONDITIONS training/unseen disjoint; raw_evidence.json resolution_results expected_url matches bound_action; provenance.json environment deterministic_synthetic true model_network_browser_calls 0 training_observations_per_condition 3"
+    },
+    {
+      "id": "V5_PROTOCOL_ONLY_GAP_DISCLOSED_BOUNDED",
+      "severity": "medium",
+      "finding": "Protocol-only over-parameterization still present but correctly disclosed as boundary condition, not hidden. Recompute distill_parameterized on ['https://a.com/x','https://b.com/y','https://c.com/z'] yields template 'https://${url}' slot_count 1 slot_prefixes {'url':'https://'} binding_accuracy 1.0 because _validate_prefix_boundary('https://') true (last_char '/'). Matches raw_evidence PROTOCOL_ONLY. Frozen decision_rule correctly excludes this from gating; producer reports as boundary. Clears parent required_fix 3 disclosure requirement.",
+      "evidence": "raw_evidence.json conditions.PROTOCOL_ONLY action_template https://${url} slot_count 1 binding_accuracy 1.0; result.json controls.PROTOCOL_ONLY pass true; provenance unresolved[1] and validity_notes acknowledge gap; recompute distill_parameterized protocol-only => https://${url}; src/spider/kernel.py lines 191-199 last_char check"
+    },
+    {
+      "id": "V6_TINY_N_SYNTHETIC_EXTERNAL_VALIDITY_UNPROVEN",
+      "severity": "medium",
+      "finding": "External validity unproven by design. All conditions deterministic synthetic with n=3 training +3 unseen per condition, generic synthetic URLs, no real browser traffic, no model tokens. Claim ceiling must remain bounded to synthetic single-slot. Producer correctly discloses in validity_notes and unresolved. Not a measurement failure but scope limit.",
+      "evidence": "provenance.json environment deterministic_synthetic true model_network_browser_calls 0 conditions_total 11; result.json validity_notes[0] 'All conditions are deterministic synthetic...External validity to real browser traffic unproven.'; prereg Section 11 What this does NOT establish"
+    },
+    {
+      "id": "V7_ARTIFACT_HASHES_VERIFIED",
+      "severity": "info",
+      "finding": "Artifact hashes verified match producer and parent committed code: kernel.py 1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4, models.py 065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85, raw_evidence.json 5b665810481dd460288ceb42f0f1136e7a7cbadc30f9618fd744c1509d515718. No post-freeze mutation beyond committed Fix1/Fix2/slot_prefixes.",
+      "evidence": "provenance.json substrate kernel_sha256 1880ef67 models_sha256 065e6b3d; result.json artifacts sha256; recompute sha256 kernel.py 1880ef67..."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_B_LITERAL_VALID",
+      "severity": "info",
+      "finding": "B_LITERAL baseline valid recomputed: literal mechanism confidence 0.5 < min_confidence 0.8 => fail_rate 1.0, slot_count 0, all resolutions EXPLORE/UNKNOWN. Confirms parameterized induction necessary. Matches result.json controls.B_LITERAL pass true.",
+      "evidence": "raw_evidence.json conditions.B_LITERAL confidence 0.5 metrics.fail_rate 1.0 slot_count 0; result.json metrics b_literal_fail_rate 1.0"
+    },
+    {
+      "id": "B2_B_UNFIXED_G1_FIX1_NECESSITY_RECOMPUTED_MAX_DELTA",
+      "severity": "info",
+      "finding": "B_UNFIXED_G1 discriminating baseline now correctly run on G1 query-string training (alpha,beta,delta). Recomputed fixed G1 binding_accuracy 1.0 template search?q=${url} vs unfixed template search?q=${url}a binding_accuracy 0.0 (suffix 'a' corruption). Delta 1.0 maximum discriminating power. Confirms Fix1 suffix guard necessary. Clears parent required_fix 2 (B_UNFIXED wrong condition). Independent recompute via _find_common_prefix_suffix matches producer.",
+      "evidence": "raw_evidence.json conditions.B_UNFIXED_G1 action_template https://api.example.com/search?q=${url}a metrics.binding_accuracy 0.0; raw_evidence.json b_unfixed_g1 slot_prefixes search?q=; recompute unfixed prefix 'https://api.example.com/search?q=' suffix 'a' pos preceding char 'h' not in ?=& => suffix rejected by Fix1; result.json metrics fix1_necessity_delta 1.0"
+    },
+    {
+      "id": "B3_B_UNFIXED_N1_FIX2_NECESSITY_RECOMPUTED",
+      "severity": "info",
+      "finding": "B_UNFIXED_N1 correctly run on N1_ORIGINAL cross-host training. Recomputed fixed N1 slot_count 0 (Fix2 rejects) vs unfixed slot_count 1 template https://api.${url} binding 0.0 (over-parameterization). Confirms Fix2 delimiter-bound prefix validation necessary. Minor template variance (https://api.${url} vs spec example https://${url}) immaterial – slot_count 1 still demonstrates over-parameterization.",
+      "evidence": "raw_evidence.json conditions.B_UNFIXED_N1 action_template https://api.${url} slot_count 1 metrics.binding_accuracy 0.0; raw_evidence.json b_unfixed_n1 slot_count 1; recompute unfixed N1 prefix 'https://api.' validate false vs unfixed skips validation; result.json metrics b_unfixed_n1_slot_count 1 fix2_necessity_confirmed true"
+    },
+    {
+      "id": "B4_B_UNFIXED_G4_ARCHITECTURAL_BOUND",
+      "severity": "info",
+      "finding": "B_UNFIXED_G4 reported separately per prereg as architectural bound, not decision relevant. Multi-char suffix '00' not caught by Fix1 (single-char guard only). Template items/${url}00 vs items/${url} – binding 0.0 expected. Producer correctly separates. Does not indicate Fix1 regression.",
+      "evidence": "raw_evidence.json conditions.B_UNFIXED_G4 action_template https://api.example.com/items/${url} metrics.binding_accuracy 0.0; prereg Section 5.4 B_UNFIXED_G4 architectural bound; src/spider/kernel.py Fix1 lines 181-184 single-char suffix guard"
+    }
+  ],
+  "recomputed_metrics": {
+    "p1_binding_accuracy": 1.0,
+    "p1_slot_count": 1,
+    "p1_slot_prefixes": {"url": "users/"},
+    "p1_binding_correct_count": 3,
+    "p1_template": "https://api.example.com/users/${url}",
+    "g1_binding_accuracy": 1.0,
+    "g1_slot_count": 1,
+    "g1_slot_prefixes": {"url": "search?q="},
+    "g1_template": "https://api.example.com/search?q=${url}",
+    "g2_binding_accuracy": 1.0,
+    "g2_slot_count": 1,
+    "g2_slot_prefixes": {"url": "items?category=books&page="},
+    "g2_template": "https://api.example.com/items?category=books&page=${url}",
+    "g3_binding_accuracy": 1.0,
+    "g3_slot_count": 1,
+    "g3_slot_prefixes": {"url": "orgs/acme/repos/main/issues/"},
+    "g3_template": "https://api.example.com/orgs/acme/repos/main/issues/${url}",
+    "g3_slot_prefixes_match_amended_expected": true,
+    "g5_binding_accuracy": 1.0,
+    "g5_slot_count": 1,
+    "g5_slot_prefixes": {"url": "users/"},
+    "g5_template": "https://api.example.com/users/${url}/items?page=1",
+    "n1_original_slot_count": 0,
+    "n1_corrected_slot_count": 0,
+    "protocol_only_slot_count": 1,
+    "protocol_only_binding_accuracy": 1.0,
+    "protocol_only_template": "https://${url}",
+    "protocol_only_slot_prefixes": {"url": "https://"},
+    "b_literal_fail_rate": 1.0,
+    "b_literal_slot_count": 0,
+    "b_literal_confidence": 0.5,
+    "b_unfixed_g1_binding_accuracy": 0.0,
+    "b_unfixed_g1_slot_count": 1,
+    "b_unfixed_g1_template": "https://api.example.com/search?q=${url}a",
+    "b_unfixed_n1_slot_count": 1,
+    "b_unfixed_n1_binding_accuracy": 0.0,
+    "b_unfixed_n1_template": "https://api.${url}",
+    "fix1_necessity_delta": 1.0,
+    "fix2_necessity_confirmed": true,
+    "overall_binding_accuracy": 0.6666666666666666,
+    "overall_binding_accuracy_decision_rule_only": 1.0,
+    "structural_generalization_rate": 1.0,
+    "condition_pass_rate": 0.8181818181818182,
+    "decision_rule_all_eight_pass": true,
+    "verdict": "SURVIVES_CURRENT_TEST",
+    "template_invariance": true,
+    "slot_prefixes_non_empty_path_prefix": true,
+    "kernel_sha256": "1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4",
+    "models_sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "raw_evidence_sha256": "5b665810481dd460288ceb42f0f1136e7a7cbadc30f9618fd744c1509d515718"
+  },
+  "claim_ceiling": "COMMITTED-CODE SYNTHETIC SINGLE-SLOT WITH PREFIX METADATA (FIX1/FIX2 NECESSITY QUANTIFIED, BOUNDED): distill_parameterized with Fix1 suffix guard (single-char), Fix2 delimiter-bound prefix validation (_validate_prefix_boundary last_char in /?=&), empty-prefix guard, and slot_prefixes extraction (path segment from authority end) committed to src/spider/kernel.py 1880ef67 produces: 5/5 established single-slot URL classes binding_accuracy 1.0 slot_count 1 (P1 users/, G1 search?q=, G2 items?category=books&page=, G3 orgs/acme/repos/main/issues/ [amended expected verified], G5 users//items?page=1 hybrid) with slot_prefixes non-empty and metadata-only template invariance, nulls N1_ORIGINAL/N1_CORRECTED slot_count 0, B_LITERAL fail_rate 1.0, Fix1 necessity delta 1.0 on discriminating G1 (fixed 1.0 vs unfixed suffix-corrupted 0.0), Fix2 necessity confirmed on N1_ORIGINAL (fixed 0 vs unfixed 1). BOUNDED TO: deterministic synthetic n=3+3 per condition zero model/browser/network calls; single-slot only (G4 multi-slot/architectural multi-char suffix 00 bound 0.0 persists); Fix1 covers single-char coincidental suffix only; Fix2 allows protocol-only 'https://' (PROTOCOL_ONLY slot_count 1 https://${url} boundary); no real-browser external validity; no C-PRODUCT-ECON cost savings measured; no cross-site transfer.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35124662913/spec.json decision_rule 8 conditions lane product claim_ids C-PARAM-INHERIT",
+    "research/experiments/EXP-PRODUCT-35124662913/prereg.md Sections 5.1-5.4 conditions and 7 algorithm Fix1/Fix2/slot_prefixes",
+    "research/experiments/EXP-PRODUCT-35124662913/freeze.json hashes spec b3f9c0d8 prereg 45ac8ee0 request 09566c08",
+    "research/experiments/EXP-PRODUCT-35124662913/result.json metrics total_conditions 11 passed 9 decision_rule_passed 8 outcome SUPPORTS",
+    "research/experiments/EXP-PRODUCT-35124662913/raw_evidence.json conditions P1/G1/G2/G3/G5 binding_accuracy 1.0 slot_count 1 plus N1_ORIGINAL/N1_CORRECTED 0, B_UNFIXED_G1 0.0 B_UNFIXED_N1 1 PROTOCOL_ONLY 1",
+    "research/experiments/EXP-PRODUCT-35124662913/raw_evidence.json fix1_necessity_delta delta 1.0 b_unfixed_g1/b_unfixed_n1 protocol_only_boundary",
+    "research/experiments/EXP-PRODUCT-35124662913/provenance.json substrate committed code kernel 1880ef67 models 065e6b3d environment deterministic_synthetic 0 calls",
+    "src/spider/kernel.py sha256 1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4 lines 157-186 Fix1 191-199 Fix2 260-271 empty guard 276-314 slot_prefixes",
+    "src/spider/models.py sha256 065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85 Mechanism.slot_prefixes field",
+    "research/experiments/EXP-PRODUCT-35124662913/run_experiment.py distill_unfixed rfind without Fix1/Fix2 on G1/N1 discriminating data",
+    "recompute independent distill_parameterized calls for G1/G3/N1_ORIGINAL/N1_CORRECTED/PROTOCOL_ONLY verifying templates slot_prefixes binding",
+    "research/experiments/EXP-PRODUCT-34704657427/audit.json required_fixes 3 and handoff.json carry_forward established/rejected/unknown (parent REVISE verdict)"
+  ],
+  "unresolved": [
+    "Fix2 protocol-only gap: _validate_prefix_boundary('https://') true due last_char '/' yields https://${url} slot_count 1. Minimum prefix length or domain-aware threshold not in spec; needs design decision before C-PRODUCT-ECON to avoid protocol-only over-parameterization in real traffic.",
+    "G4 architectural limitation: multi-char suffix '00' not caught by Fix1, leaf-path single-slot model produces slot_count 1 not 2, binding 0.0 architectural bound distinct from Fix1 scope.",
+    "End-to-end product economics C-PRODUCT-ECON: does parameterized kernel save total cost per successful task with real model/network/browser calls, tokens, repair, latency, false accepts – still unmeasured synthetic-only.",
+    "Real-browser external validity and n=3 scale: prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in live browser traffic unknown.",
+    "VALUE CONTRACT slot_prefixes consumption: slot_prefixes correctly extracted but not exercised end-to-end via _bind prefix stripping or cross-observation value extraction in this experiment."
+  ]
+}
