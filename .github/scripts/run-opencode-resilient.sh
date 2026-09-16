@@ -7,15 +7,17 @@ REAL="${OPENCODE_BIN:-$HOME/.opencode/bin/opencode}"
 MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-7}"
 RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-25}"
 STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-600}"
+MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-3600}"
 NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found)|HTTP[^0-9]*403)'
 LOG=$(mktemp)
 STALL_FLAG=$(mktemp)
+TIMEOUT_FLAG=$(mktemp)
 START_HEAD=$(git rev-parse HEAD)
 START_BRANCH=$(git branch --show-current)
 CHILD_PID=""; MONITOR_PID=""
 
 mkdir -p "$(dirname "$RECEIPT")"
-cleanup(){ [[ -z "$MONITOR_PID" ]] || kill "$MONITOR_PID" 2>/dev/null || true; [[ -z "$CHILD_PID" ]] || kill "$CHILD_PID" 2>/dev/null || true; rm -f "$LOG" "$STALL_FLAG"; }
+cleanup(){ [[ -z "$MONITOR_PID" ]] || kill "$MONITOR_PID" 2>/dev/null || true; [[ -z "$CHILD_PID" ]] || kill "$CHILD_PID" 2>/dev/null || true; rm -f "$LOG" "$STALL_FLAG" "$TIMEOUT_FLAG"; }
 trap cleanup EXIT INT TERM
 
 mapfile -t CONFIGURED < <(jq -r --arg role "$ROLE" '.roles[$role][]? // empty' config/models.json)
@@ -76,15 +78,19 @@ clear_required_outputs(){
 
 run_once(){
   local model="$1"; shift
-  : > "$LOG"; rm -f "$STALL_FLAG"
+  : > "$LOG"; rm -f "$STALL_FLAG" "$TIMEOUT_FLAG"
   local -a src=("$@") routed=()
   if [[ "${src[0]:-}" == run ]]; then routed=(run --model "$model" "${src[@]:1}"); else routed=("${src[@]}" --model "$model"); fi
   "$REAL" "${routed[@]}" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) & CHILD_PID=$!
   (
-    last_size=0; last_change=$(date +%s)
+    last_size=0; started=$(date +%s); last_change=$started
     while kill -0 "$CHILD_PID" 2>/dev/null; do
       sleep 15
       size=$(wc -c < "$LOG" 2>/dev/null || echo 0); now=$(date +%s)
+      if (( now-started >= MAX_RUNTIME_SECONDS )); then
+        echo "SPIDER_MODEL_HARD_TIMEOUT model=$model seconds=$MAX_RUNTIME_SECONDS" | tee -a "$LOG" >&2
+        touch "$TIMEOUT_FLAG"; kill "$CHILD_PID" 2>/dev/null || true; sleep 3; kill -9 "$CHILD_PID" 2>/dev/null || true; exit 0
+      fi
       if [[ "$size" -ne "$last_size" ]]; then last_size="$size"; last_change="$now";
       elif (( now-last_change >= STALL_SECONDS )) && grep -Eiq "$NETWORK_RE" "$LOG"; then
         echo "SPIDER_MODEL_NETWORK_STALL model=$model" | tee -a "$LOG" >&2
@@ -95,11 +101,12 @@ run_once(){
   wait "$CHILD_PID"; rc=$?
   kill "$MONITOR_PID" 2>/dev/null || true; wait "$MONITOR_PID" 2>/dev/null || true
   CHILD_PID=""; MONITOR_PID=""
+  [[ -f "$TIMEOUT_FLAG" ]] && return 124
   [[ -f "$STALL_FLAG" ]] && return 75
   return "$rc"
 }
 
-attempt=1; index=0
+attempt=1; index=0; last_kind=""
 while (( attempt <= MAX_ATTEMPTS )); do
   model="${MODELS[$index]}"
   echo "SPIDER_MODEL_ATTEMPT=$attempt/$MAX_ATTEMPTS role=$ROLE model=$model"
@@ -114,16 +121,15 @@ while (( attempt <= MAX_ATTEMPTS )); do
   fi
 
   if [[ "$rc" -eq 0 ]]; then
-    # Process success without the required contract is a provider/model attempt
-    # failure. Remove any partial mandatory packet before rotating providers so
-    # a later attempt cannot accidentally inherit a mixed-producer packet.
+    last_kind="output-missing"
     write_receipt retry "$model" "$attempt" 76 output-missing
     clear_required_outputs
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
   fi
 
-  if [[ "$rc" -eq 75 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
+  if [[ "$rc" -eq 75 || "$rc" -eq 124 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
+    last_kind="transient"
     write_receipt retry "$model" "$attempt" "$rc" transient
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
@@ -132,6 +138,12 @@ while (( attempt <= MAX_ATTEMPTS )); do
   echo "::error::OpenCode failed without retryable provider/network signature rc=$rc model=$model" >&2
   exit "$rc"
 done
+
+if [[ "$last_kind" == output-missing ]]; then
+  write_receipt failure "${MODELS[$index]}" "$attempt" 76 output-missing-pool-exhausted
+  echo "::error::SPIDER_MODEL_OUTPUT_CONTRACT_POOL_EXHAUSTED" >&2
+  exit 76
+fi
 write_receipt failure "${MODELS[$index]}" "$attempt" 75 transient-pool-exhausted
 echo "::error::SPIDER_TRANSIENT_MODEL_POOL_EXHAUSTED" >&2
 exit 75
