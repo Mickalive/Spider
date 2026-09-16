@@ -6,13 +6,18 @@ import os
 import subprocess
 from pathlib import Path
 
+# Single source of truth for files that belong to the Research 2.0 control plane.
+# Lane worktrees may carry scientific code and experiment packets, but these roots
+# must always match main before/after a model stage.
 CONTROL_ROOTS = [
     ".gitignore",
     ".github/scripts",
+    ".github/workflows",
     "scripts",
     ".opencode/agents",
     "AGENTS.md",
     "SPIDER_ARCHITECTURE_RESEARCH2.md",
+    "SPIDER_MASTER_PROMPT.md",
     "research/claims/registry.json",
     "research/lanes/registry.json",
     "research/EXPERIMENT_PACKET.md",
@@ -67,7 +72,7 @@ def verify(root: Path, ref: str) -> list[str]:
         expected = files_at(root, ref, control_root)
         current = local_files(root, control_root)
         if current != expected:
-            bad.extend(sorted((current ^ expected)))
+            bad.extend(sorted(current ^ expected))
             continue
         for rel in sorted(expected):
             expected_sha = git_text(root, "rev-parse", f"{ref}:{rel}").strip()
