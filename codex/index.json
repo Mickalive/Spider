@@ -13,7 +13,7 @@
       "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "fb05ae4d41a0fec34053d42e6fe827e19c624e96",
       "hashes": {
         "request.json": "fd3e6828457739fc3e7094df53ba020c82d12bf513ddddcd7c3bbda070508a35",
@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -205,7 +205,7 @@
       "decision": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "b99b379f508ab3940986efbd32b2f9119b536ced",
       "hashes": {
         "request.json": "4b1917a31ca05e7dd0c4cf6c890445f0c08c444ea0b199b514870af6e8b8c554",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -589,7 +589,7 @@
       "decision": "KERNEL-INTEGRATION-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "bcbc236d4ad4884ac9d439c0262c23a0c3058746",
       "hashes": {
         "request.json": "f3ac6e2ab30480ed7370041882af1fc9ac886489f7fe1668772593145237246f",
@@ -616,7 +616,7 @@
       "decision": "FIXES-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "44d59cfed64d527ca5261503d3c35886d386d93f",
       "hashes": {
         "request.json": "77e2c8039f4cc0dd2813eb3fd231667e388cfca68372b727c979a7172bfa296e",
@@ -670,7 +670,7 @@
       "decision": "FIXES-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "740204b76eccdb1ff004e104d2686ecea01d84ab",
       "hashes": {
         "request.json": "d8aa047873053228069f0ae6f2a40d37a124c6489b58135e0f8a2fe7e7e5c6bb",
@@ -724,7 +724,7 @@
       "decision": "KERNEL-INTEGRATION-PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "74256fb86a510180082f39d7346efa5894c7a070",
       "hashes": {
         "request.json": "8637bf8cae798a7888136c6b2ddde5787bb45a4a3cfda5af414e9e8bcbed25f7",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -1050,7 +1050,7 @@
       "decision": "C2-FIX-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "b6a0886e36754837ded02ab836511b63f0522c14",
       "hashes": {
         "request.json": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
@@ -1158,7 +1158,7 @@
       "decision": "C2-FIX-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "d04d236205ae78814ed604f448585ca9e379333f",
       "hashes": {
         "request.json": "ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1376,7 +1376,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "21e4401730683715d2680684fed56506c9527b7d",
       "hashes": {
         "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
@@ -1430,7 +1430,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "f3fee46cab94ef248b72b034f41f14ac632afd7d",
       "hashes": {
         "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1648,7 +1648,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "44f6659854350c031c5ed54cd415374d2db9277c",
       "hashes": {
         "request.json": "633f9e924564e990435ba30a8f5f48bde4cc725c74046fdc7cb548ba5ed227e9",
@@ -1702,7 +1702,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "60981e36e57022a10d3d5e780cbbc532ce26d4ae",
       "hashes": {
         "request.json": "42e0f10452526e8c0ad0ae84275a10c086ba9bb104b8b696a7cb81e4c0f9a316",
@@ -1756,7 +1756,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "359a1644d1ba75423ab41a20689235331fc62fc7",
       "hashes": {
         "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
@@ -1810,7 +1810,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "569a1573e40b239768c6b75da2c32a1bd2a8780c",
       "hashes": {
         "request.json": "e4249732669660c49afb59ba70b5fa6b1c5fd536c6ba3c6114dd93958da3ea57",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2274,7 +2274,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2409,7 +2409,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2463,7 +2463,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2490,7 +2490,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "6028f77e9704eca2b57274bc7f522fec61e8b9ad",
+      "source_ref_head": "ba393ccc7ff1a238f695fb66621e9799ac07b715",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2517,7 +2517,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "413ae0c8fe5dbfa1ef36ed0f6976270fbfa69b22",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "source_commit": "75062582173d25a6bb1097b6d1d4d574aa44c2ad",
       "hashes": {
         "request.json": "09566c08deef4d2b39cf6d8f743ef382841406889557ad122cceb20cdb9d04d9",
@@ -2530,6 +2530,34 @@
         "audit.json": "fcde092ccdd335a261e16a9a14b7e8f239f29a5ef7dc5478dc6a8c51897f3a48",
         "verdict.json": "2c1fc9ae354ba13340bb75148ebcd1be469de7b4337ea1247999bfc3d9047637",
         "handoff.json": "7a18259524e10192be19268385f7dc728e4fdf568c0c0c5b0c871ffd21631f0f"
+      }
+    },
+    "EXP-PRODUCT-35130681515": {
+      "lane": "product",
+      "request_id": "624cbe0e772cb104be4598be",
+      "created_at": "2026-09-16T17:50:56.070960+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Can a minimum prefix length threshold (Fix3) resolve the Fix2 protocol-only gap while preserving all 8 parent decision-rule conditions, and what is the prevalence of protocol-only over-parameterization patterns in a realistic synthetic URL corpus?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "source_ref_head": "0efda56bec081f965bb543dc494e249eb5865fc9",
+      "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
+      "hashes": {
+        "request.json": "3d10ab9f180af2b51eb5399baa5e93c3cf56f117f5084b2a212cb536475e1bc8",
+        "spec.json": "6fa889cbc97d084f8ed6dd761b70a15d760094334d1afd2e7b24d5b0165a9b0b",
+        "prereg.md": "dbb6b4cffcaafc8dea7d2317e48c8f2e399dd208a7d0c0aa0a971523514ea296",
+        "freeze.json": "c9c0eaba57476cf20c8932d88ac342e1768a0cfa879f063a8cb2e574621d71b0",
+        "result.json": "4c3b9ff0853fc94fdd1033ef61690067123726633e55927ea533fc5a142ad4e0",
+        "report.md": "4b3deb804866932acd1d968cb975b5211c9efaf4cbe9b446f4662da254d4a8cd",
+        "provenance.json": "dece84e3b851b222415d4478cfa8a50ecc659c7a95adadbfb8918a853ef898db",
+        "audit.json": "64c4104c2177dca7145e187fe9bea03eb62f888c53cbce98abdc40d652d382c8",
+        "verdict.json": "44020885b021bea1a62c054683bf0ac38fb53f2cfd1319f755b3c628ffe814fb",
+        "handoff.json": "28defd31b31a7d340a5cd2905a10ce81d8d05f9229f34ed90cb5d62483622291"
       }
     },
     "EXP-GRAPH-35130682058": {

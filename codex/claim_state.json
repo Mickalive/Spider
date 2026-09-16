@@ -583,6 +583,16 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "All 8 frozen decision-rule conditions pass with binding_accuracy=1.0. G3 slot_prefixes amended expected value validated. Fix1 necessity delta=1.0 (maximum) confirmed on discriminating G1 condition. Fix2 necessity confirmed on discriminating N1_ORIGINAL condition. Three parent required_fixes cleared (spec-vs-implementation mismatch, B_UNFIXED wrong condition, disclosure). Claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2 necessity quantified'. Remains EXPERIMENTAL (not VALIDATED/SHIPPED) because: (1) all conditions deterministic synthetic with zero model/browser/network calls; (2) end-to-end product economics C-PRODUCT-ECON unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) protocol-only gap documented but unresolved. Material change from parent: previously unmeasured Fix1/Fix2 necessity now quantified; parent required_fixes resolved."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35130681515",
+        "lane": "product",
+        "created_at": "2026-09-16T17:50:56.070960+00:00",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix3 (_is_protocol_only_prefix structural '/' check) closes the Fix2 protocol-only gap for scheme+authority-only prefixes (PROTOCOL_ONLY slot_count=0 vs unfixed slot_count=1, delta=1) while preserving all 5 parent established single-slot bindings (P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1) and nulls N1_ORIGINAL/N1_CORRECTED slot_count=0 with B_LITERAL fail_rate=1.0 in committed-code synthetic single-slot setting. Claim ceiling advances to: committed-code synthetic single-slot with prefix metadata, Fix1/Fix2/Fix3 necessity quantified, protocol-only gap closed. Still EXPERIMENTAL because: (1) all 18 conditions deterministic synthetic with zero model/network/browser calls (audit V5); (2) C-PRODUCT-ECON end-to-end cost unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) slot_prefixes extraction is metadata-only, VALUE CONTRACT consumption unexercised (audit V2). Audit PASS with producer_claim_supported=true. Five low/medium severity validity findings disclosed (V1 spec/impl divergence, V2 slot_prefixes unreachable, V3 provenance hash stale, V4 realistic corpus expectations, V5 external validity bound) \u2014 none gate the decision rule."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -973,6 +983,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "Kernel.py validation via monkey-patching is necessary but not sufficient for C-PRODUCT-ECON. Real-browser testing, committed patches, end-to-end economics measurement (model tokens, browser work, repair, latency, false accepts) still required. Remains blocked until production integration and real-browser evaluation."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35130681515",
+        "lane": "product",
+        "created_at": "2026-09-16T17:50:56.070960+00:00",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "Protocol-only gap resolved by Fix3, unblocking the path to C-PRODUCT-ECON measurement. No economics measurement performed in this experiment (all conditions synthetic, zero model/network/browser calls). Next step: measure end-to-end amortized cost per successful real-browser task against literal/fixed baselines using a real-browser test harness with model/network/browser calls."
       }
     ],
     "C-MEAS-VALID": [
@@ -1210,14 +1230,14 @@
       "reason": "Frozen control criteria C4 (positive_control_pass=false, perm_null_std=0.0 degenerate) and C5 (determinism_pass=false, SD accuracy=0.0 by construction due to step field in response design) fail per frozen decision_rule. Raw BC PMI at K=3 = 0.369 bits exceeds 0.05 threshold but Bonferroni p = 0.322 (raw 0.0805) fails p < 0.0125. No confirmatory claim supported. Descriptive observation preserved: ceiling eliminated (H=1.346 bits), state-independent BC PMI=0.0, raw discrimination SD-SI=0.369 bits. Synthetic state_id injection is the only demonstrated PMI source; no identifiability argument separates injected label from emergent web dynamics (audit V10). Measurement cannot support or falsify C-WEB-DYNAMICS."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35124662913",
+      "experiment_id": "EXP-PRODUCT-35130681515",
       "lane": "product",
-      "created_at": "2026-09-16T16:52:50.049598+00:00",
+      "created_at": "2026-09-16T17:50:56.070960+00:00",
       "decision": "SURVIVES_CURRENT_TEST",
-      "source_commit": "75062582173d25a6bb1097b6d1d4d574aa44c2ad",
+      "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "claim_id": "C-PARAM-INHERIT",
       "status": "EXPERIMENTAL",
-      "reason": "All 8 frozen decision-rule conditions pass with binding_accuracy=1.0. G3 slot_prefixes amended expected value validated. Fix1 necessity delta=1.0 (maximum) confirmed on discriminating G1 condition. Fix2 necessity confirmed on discriminating N1_ORIGINAL condition. Three parent required_fixes cleared (spec-vs-implementation mismatch, B_UNFIXED wrong condition, disclosure). Claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2 necessity quantified'. Remains EXPERIMENTAL (not VALIDATED/SHIPPED) because: (1) all conditions deterministic synthetic with zero model/browser/network calls; (2) end-to-end product economics C-PRODUCT-ECON unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) protocol-only gap documented but unresolved. Material change from parent: previously unmeasured Fix1/Fix2 necessity now quantified; parent required_fixes resolved."
+      "reason": "Fix3 (_is_protocol_only_prefix structural '/' check) closes the Fix2 protocol-only gap for scheme+authority-only prefixes (PROTOCOL_ONLY slot_count=0 vs unfixed slot_count=1, delta=1) while preserving all 5 parent established single-slot bindings (P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1) and nulls N1_ORIGINAL/N1_CORRECTED slot_count=0 with B_LITERAL fail_rate=1.0 in committed-code synthetic single-slot setting. Claim ceiling advances to: committed-code synthetic single-slot with prefix metadata, Fix1/Fix2/Fix3 necessity quantified, protocol-only gap closed. Still EXPERIMENTAL because: (1) all 18 conditions deterministic synthetic with zero model/network/browser calls (audit V5); (2) C-PRODUCT-ECON end-to-end cost unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) slot_prefixes extraction is metadata-only, VALUE CONTRACT consumption unexercised (audit V2). Audit PASS with producer_claim_supported=true. Five low/medium severity validity findings disclosed (V1 spec/impl divergence, V2 slot_prefixes unreachable, V3 provenance hash stale, V4 realistic corpus expectations, V5 external validity bound) \u2014 none gate the decision rule."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-GRAPH-34586318405",
@@ -1260,14 +1280,14 @@
       "reason": "Not tested. Offline density computation orthogonal to LLM inheritance claim."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-34662221249",
+      "experiment_id": "EXP-PRODUCT-35130681515",
       "lane": "product",
-      "created_at": "2026-09-12T00:37:06.135408+00:00",
+      "created_at": "2026-09-16T17:50:56.070960+00:00",
       "decision": "SURVIVES_CURRENT_TEST",
-      "source_commit": "60981e36e57022a10d3d5e780cbbc532ce26d4ae",
+      "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "Kernel.py validation via monkey-patching is necessary but not sufficient for C-PRODUCT-ECON. Real-browser testing, committed patches, end-to-end economics measurement (model tokens, browser work, repair, latency, false accepts) still required. Remains blocked until production integration and real-browser evaluation."
+      "reason": "Protocol-only gap resolved by Fix3, unblocking the path to C-PRODUCT-ECON measurement. No economics measurement performed in this experiment (all conditions synthetic, zero model/network/browser calls). Next step: measure end-to-end amortized cost per successful real-browser task against literal/fixed baselines using a real-browser test harness with model/network/browser calls."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-INTEL-35124660457",
