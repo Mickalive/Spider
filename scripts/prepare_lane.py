@@ -91,6 +91,14 @@ def main():
         state["updated_at"] = datetime.now(timezone.utc).isoformat()
         print(f"SPIDER_RESUME experiment_id={exp_id} request_id={req['request_id']}")
     else:
+        # Product promotion is a durable transaction boundary. Never allocate a
+        # child experiment until product-promote has acknowledged the accepted
+        # code delta on main and cleared this latch.
+        if args.lane == "product" and state.get("promotion_ready"):
+            raise SystemExit(
+                f"product promotion pending for {state.get('last_experiment_id')}; refusing to allocate a new experiment"
+            )
+
         # Refuse to create a child experiment if the previous handoff has been
         # lost or altered. Silent continuity loss is worse than a loud stop.
         inherited = parent_handoff_from_state(state)
