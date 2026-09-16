@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-INTEL-35112013458",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a→link contribution be separated from menuitem/tab effects in the ordering reversal?",
+  "hypothesis": "Three independent tests: (1) Random ROLE_MAP null: 1000 random role assignments produce pairwise agreement fractions centered below 0.3, indicating the observed 0.3 exceeds chance. (2) Single-role definitions: no individual role (button-only, a-only, input-only, etc.) produces stable ordering across all page types, confirming the metric is not driven by a single role. (3) Isolated a→link definition: a definition with a→link mapping but WITHOUT menuitem/tab produces the same ordering as DEF-FULL-MAP (cart>listing>detail), isolating the a→link effect from menuitem/tab.",
+  "falsifier": "Any of: (1) Random null distribution has mean >= 0.3 pairwise agreement (observed 0.3 does not exceed chance); (2) Any single-role definition produces ordering invariant to other roles (contradicts multi-role metric); (3) Isolated a→link definition produces different ordering than DEF-FULL-MAP, indicating menuitem/tab are necessary for the reversal.",
+  "baselines": [
+    "DEF-FORM-ONLY ordering (product_listing>cart>detail) from parent",
+    "DEF-FULL-MAP ordering (cart>product_listing>detail) from parent",
+    "Random ROLE_MAP null distribution (1000 iterations)",
+    "Single-role definitions (button-only, a-only, input-only, link-only, menuitem-only, tab-only, form-only, div-only, span-only, label-only)",
+    "Isolated a→link definition (a→link without menuitem/tab)"
+  ],
+  "positive_control": "Isolated a→link definition produces ordering cart>product_listing>detail, matching DEF-FULL-MAP. This confirms a→link alone drives the reversal.",
+  "null_control": "Random ROLE_MAP null produces mean pairwise agreement < 0.3 with 95% CI excluding 0.3. This confirms observed agreement exceeds chance.",
+  "measurement_validity": [
+    "All computations use existing raw data from EXP-INTEL-34782350557 (exp347_raw_results.json, sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)",
+    "No Docker/browser execution required; offline computation only",
+    "Random null uses 1000 iterations with frozen seed (seed=42) for reproducibility",
+    "Single-role definitions test all raw roles present in data: {a, button, combobox, div, form, input, label, link, menuitem, span, tab}",
+    "Isolated a→link definition uses same INTERACTIVE_ROLES as DEF-FULL-MAP but excludes menuitem and tab",
+    "All definitions use same data and counting pipeline as parent (elements_with_bbox denominator)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Random null mean pairwise agreement < 0.3 AND observed 0.3 exceeds 95th percentile of null distribution; (2) No single-role definition produces invariant ordering (all single-role orderings differ from each other AND from the 5-definition family); (3) Isolated a→link definition produces same ordering as DEF-FULL-MAP (cart>product_listing>detail). FALSIFIED-IN-SETTING if ANY of: (1) Random null mean >= 0.3 OR observed 0.3 within 95% CI of null; (2) Any single-role definition produces stable ordering; (3) Isolated a→link produces different ordering than DEF-FULL-MAP. MEASUREMENT_INVALID if pipeline errors prevent computation.",
+  "product_consequence_positive": "If null models confirm 0.3 exceeds chance and a→link is isolated as the driver, the truncated-sample ordering under DEF-FORM-ONLY gains statistical rigor. Product lane can adopt DEF-FORM-ONLY as the canonical metric for yield estimation, bounded to this site and sampling method. The isolated a→link finding informs runtime lane about which role mappings are safe to apply.",
+  "product_consequence_negative": "If 0.3 does not exceed chance, the truncated-sample ordering is noise and cannot guide metric choice. The runtime lane must fix the locatableSample cap before further metric validation. If menuitem/tab are necessary for the reversal, the sensitivity analysis is more complex than a→link alone.",
+  "estimated_cost": "Very low: pure offline computation on existing data, no browser/network/model calls. ~1000 random iterations, 11 single-role definitions, 1 isolated a→link definition.",
+  "expected_information_gain": "High: directly answers whether the parent's ordering stability finding is statistically real (exceeds chance) or noise. Separates a→link from menuitem/tab effects, which is the specific gap identified in the audit. All three tests use existing data and require no new execution."
 }
