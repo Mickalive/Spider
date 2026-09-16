@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": null,
+  "active_experiment_id": "EXP-INTEL-35112013458",
   "last_experiment_id": "EXP-INTEL-35083033552",
   "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
   "next_question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a\u2192link contribution be separated from menuitem/tab effects in the ordering reversal?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-16T10:17:29.430147+00:00",
+  "updated_at": "2026-09-16T14:57:18.094042+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "d190f98f9f5837c55bb037e0ee13c241fabaac2fa12761129949987e8d047c1b"
 }
