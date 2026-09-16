@@ -1,0 +1,112 @@
+{
+  "experiment_id": "EXP-PRODUCT-35132898840",
+  "verdict": "SURVIVES_CURRENT_TEST",
+  "metrics": {
+    "condition_1_fix123_importable": true,
+    "condition_2_binding_accuracy_min": 1.0,
+    "condition_2_binding_accuracy_details": {
+      "fetch_posts": 1.0,
+      "fetch_users": 1.0,
+      "fetch_comments": 1.0
+    },
+    "condition_3_mechanism_count_literal": 5,
+    "condition_3_mechanism_count_parameterized": 3,
+    "condition_3_mechanism_reduction_pct": 40.0,
+    "condition_3_parameterized_ratio": 0.6,
+    "condition_4_protocol_only_prevalence": 0.19230769230769232,
+    "condition_4_protocol_only_count": 10,
+    "condition_4_total_urls_sampled": 52,
+    "condition_5_no_task_failures": true,
+    "literal_token_cost_estimate": 50,
+    "parameterized_token_cost_estimate": 35,
+    "token_savings": 15,
+    "verdict": "SURVIVES_CURRENT_TEST",
+    "all_conditions_pass": true
+  },
+  "controls": {
+    "P1_API_ENDPOINTS": {
+      "type": "positive_control",
+      "expected": "binding_accuracy >= 0.8, 3 mechanisms vs 5 literal",
+      "observed": {
+        "fetch_posts": {
+          "distill_success": true,
+          "mechanism_id": "param-bfec59a07240a12f",
+          "action_template": {
+            "method": "GET",
+            "url": "https://jsonplaceholder.typicode.com/posts/${url}"
+          },
+          "parameter_slots": [
+            "url"
+          ],
+          "slot_count": 1,
+          "slot_prefixes": {
+            "url": ""
+          },
+          "confidence": 0.9,
+          "distill_time_ms": 0.17690658569335938
+        },
+        "fetch_users": {
+          "distill_success": true,
+          "mechanism_id": "param-3920ae6a52688013",
+          "action_template": {
+            "method": "GET",
+            "url": "https://jsonplaceholder.typicode.com/users/${url}"
+          },
+          "parameter_slots": [
+            "url"
+          ],
+          "slot_count": 1,
+          "slot_prefixes": {
+            "url": ""
+          },
+          "confidence": 0.9,
+          "distill_time_ms": 0.1361370086669922
+        },
+        "fetch_comments": {
+          "distill_success": true,
+          "mechanism_id": "param-08807ab1b9d22c04",
+          "action_template": {
+            "method": "GET",
+            "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+          },
+          "parameter_slots": [
+            "url"
+          ],
+          "slot_count": 1,
+          "slot_prefixes": {
+            "url": "comments?postId="
+          },
+          "confidence": 0.9,
+          "distill_time_ms": 0.057697296142578125
+        },
+        "create_post": {
+          "distill_success": false
+        }
+      },
+      "passed": true,
+      "mechanisms": [
+        "param-bfec59a07240a12f",
+        "param-3920ae6a52688013",
+        "param-08807ab1b9d22c04"
+      ]
+    },
+    "B_LITERAL_MECHANISM_COUNT": {
+      "type": "baseline",
+      "expected": "5 mechanisms for 5 unique URL patterns",
+      "observed": "5 literal vs 3 parameterized",
+      "passed": true
+    },
+    "B_LITERAL_TOKEN_COST": {
+      "type": "baseline",
+      "expected": "Literal cost > Parameterized cost",
+      "observed": "Literal=50, Param=35",
+      "passed": true
+    },
+    "N1_PROTOCOL_ONLY_LIVE": {
+      "type": "null_control",
+      "expected": "Protocol-only prevalence < 30%",
+      "observed": "0.1923 (10/52)",
+      "passed": true
+    }
+  }
+}
