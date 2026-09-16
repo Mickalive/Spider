@@ -30,7 +30,6 @@ class Mechanism:
     action_template: dict[str, Any]
     postconditions: dict[str, Any]
     parameter_slots: list[str] = field(default_factory=list)
-    slot_prefixes: dict[str, str] = field(default_factory=dict)
     auth_scope: str | None = None
     freshness: dict[str, Any] = field(default_factory=dict)
     applicability_guards: dict[str, Any] = field(default_factory=dict)
