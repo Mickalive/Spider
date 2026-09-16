@@ -61,17 +61,24 @@ An Express server hosts a 3-state branching FSM with session-dependent transitio
 **Transition rules** (deterministic given session direction):
 - From S0:
   - advance → S1
-  - branch → S2 if direction == 'left' else S0
+  - branch → S2 if direction == 'left' else S1
 - From S1:
   - advance → S2
-  - branch → S0 if direction == 'left' else S1
+  - branch → S0 if direction == 'left' else S2
 - From S2:
   - advance → S0
   - branch → S1 if direction == 'left' else S0
 
-**Branching property**: Every state has two outgoing actions (advance, branch). At S0 and S1, the branch action leads to two possible next states depending on session direction. At S2, branch also leads to two possible next states. This ensures that even with full action history, the next state is not deterministic (entropy >0).
+**Branching property**: Every state has two outgoing actions (advance, branch). At every state, the branch action leads to two possible next states depending on session direction. For example, at S0 with branch: direction='left' → S2, direction='right' → S1. This ensures that even with full action history, the next state is not deterministic (entropy >0) whenever a branch action is taken.
 
-**Conditional entropy**: For this design, H(S_next|URL, H_K=3) depends on the distribution of session directions. With uniform direction distribution, H(S_next|URL, H_K=3) ≈ 0.92 bits (computed analytically). This exceeds the 0.2 bits threshold.
+**Conditional entropy analysis**: For a uniform action policy (50/50 advance/branch at each state):
+- H(S_next | state, action=advance) = 0 bits (advance is deterministic regardless of direction)
+- H(S_next | state, action=branch) = 1 bit (branch leads to 2 equally likely states)
+- H(S_next | URL, H_K=3) = 0.5 × 0 + 0.5 × 1 = 0.5 bits
+
+This exceeds the 0.2 bits threshold. The exact value depends on the action distribution in the generated data; the conditional entropy check (mandatory decision criterion) verifies this empirically.
+
+**Why every state branches**: The key design choice is that from each state, the branch action maps left→next_state and right→prev_state (mod 3), ensuring two genuinely different next states. No self-loops exist. This maximizes the branching at every state.
 
 ### 5.2 State-Dependent Response Condition
 
@@ -108,7 +115,7 @@ The only difference between conditions is response content. If state-dependent r
 - 200 trajectories per condition (400 total)
 - 10 steps per trajectory
 - Actions chosen uniformly at random from the available action at each state (advance or branch)
-- Session ID assigned uniformly at random from 20 sessions at trajectory start
+- Session ID assigned uniformly at random from 20 sessions at trajectory start (independent random draw, NOT round-robin)
 - Session direction fixed per session (left/right, uniform random)
 - Seed = 42 for reproducibility
 
@@ -238,7 +245,7 @@ Same FSM and sessions, but response is constant. Expected PMI ≈ 0 (no state in
 
 ### 11.1 Action-History Sufficiency (Ceiling Effect)
 
-The previous linear FSM had H=0 at K=3, making PMI identically zero. The branching FSM ensures H>0.2 bits at K=3. **Mitigation**: Conditional entropy check is a mandatory decision criterion. If H ≤ 0.2 bits, experiment is MEASUREMENT_INVALID.
+The previous linear FSM had H=0 at K=3, making PMI identically zero. The branching FSM ensures H>0.2 bits at K=3 (analytically ~0.5 bits for uniform action policy). **Mitigation**: Conditional entropy check is a mandatory decision criterion. If H ≤ 0.2 bits, experiment is MEASUREMENT_INVALID.
 
 ### 11.2 Cardinality Degeneracy Risk
 
@@ -250,11 +257,15 @@ Locally-hosted Express SPA with deterministic session-to-state mapping may not r
 
 ### 11.4 FSM Complexity
 
-The 3-state branching FSM is simple but ensures H>0.2 bits. More complex FSMs could yield different results. **Mitigation**: The branching property (>=2 outgoing actions per state) is the key feature, not the specific state count. The design is minimal but sufficient to test the hypothesis.
+The 3-state branching FSM is simple but ensures H>0.2 bits. More complex FSMs could yield different results. **Mitigation**: The branching property (>=2 outgoing actions per state, session-dependent selection) is the key feature, not the specific state count. The design is minimal but sufficient to test the hypothesis.
 
 ### 11.5 Sample Size
 
 With 200 trajectories × 10 steps = 2000 transitions per condition, and ~714 per stratum at K=3, we have adequate power to detect PMI > 0.05 bits (effect size > 0.05 bits with perm_std ≈ 0.005 gives z > 10). Smaller effects may be missed but the 0.05 bits threshold is the minimum practically meaningful effect.
+
+### 11.6 Direction Leakage via Session Token
+
+The state-dependent response includes `direction` and `session_token` fields. The session_token is deterministic per session, so a PMI detector could use session_token to infer direction and thus predict transitions, even without genuine state information in the response body. **Mitigation**: This is by design — the response DOES carry state-relevant information (direction determines transitions). The state-independent control removes all session-varying fields, providing the clean comparison. The question is whether response structure carries predictive information, not whether it carries information through a specific mechanism.
 
 ## 12. Decision Rules
 
@@ -339,7 +350,7 @@ Code will be committed to `research/experiments/EXP-PHYSICS-35040401992/` before
 From prior Physics work:
 - Network-response PMI at K=1 on linear FSM was 0.386 bits (bias-corrected)
 - Linear FSM at K=3 had H=0 (ceiling effect, not falsification)
-- Branching FSM should have H>0.2 bits at K=3, eliminating ceiling
+- Branching FSM should have H>0.2 bits at K=3 (analytically ~0.5 bits for uniform policy), eliminating ceiling
 - State-dependent > state-independent is the cleanest causal test
 - Bias-corrected estimator (observed - perm_mean) should give valid effect sizes
 

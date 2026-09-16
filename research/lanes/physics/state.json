@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-16T00:38:40.752704+00:00",
+  "consecutive_failures": 2,
+  "updated_at": "2026-09-16T05:17:14.218705+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "b219878ec01bcd49b77ecf23be62639e72120edaf37f4d448ab74e0125e48706"
 }
