@@ -14,10 +14,27 @@ STALL_FLAG=$(mktemp)
 TIMEOUT_FLAG=$(mktemp)
 START_HEAD=$(git rev-parse HEAD)
 START_BRANCH=$(git branch --show-current)
-CHILD_PID=""; MONITOR_PID=""
+CHILD_PID=""; MODEL_PGID=""; MONITOR_PID=""
 
 mkdir -p "$(dirname "$RECEIPT")"
-cleanup(){ [[ -z "$MONITOR_PID" ]] || kill "$MONITOR_PID" 2>/dev/null || true; [[ -z "$CHILD_PID" ]] || kill "$CHILD_PID" 2>/dev/null || true; rm -f "$LOG" "$STALL_FLAG" "$TIMEOUT_FLAG"; }
+command -v setsid >/dev/null 2>&1 || { echo "::error::setsid is required for model process isolation" >&2; exit 69; }
+
+kill_model_group(){
+  local sig="${1:-TERM}"
+  if [[ -n "$MODEL_PGID" ]] && kill -0 -- "-$MODEL_PGID" 2>/dev/null; then
+    kill -s "$sig" -- "-$MODEL_PGID" 2>/dev/null || true
+  elif [[ -n "$CHILD_PID" ]] && kill -0 "$CHILD_PID" 2>/dev/null; then
+    kill -s "$sig" "$CHILD_PID" 2>/dev/null || true
+  fi
+}
+
+cleanup(){
+  [[ -z "$MONITOR_PID" ]] || kill "$MONITOR_PID" 2>/dev/null || true
+  kill_model_group TERM
+  sleep 0.2
+  kill_model_group KILL
+  rm -f "$LOG" "$STALL_FLAG" "$TIMEOUT_FLAG"
+}
 trap cleanup EXIT INT TERM
 
 mapfile -t CONFIGURED < <(jq -r --arg role "$ROLE" '.roles[$role][]? // empty' config/models.json)
@@ -26,6 +43,11 @@ if [[ -x "$REAL" ]]; then
   while IFS= read -r m; do [[ -n "$m" ]] && DISCOVERED+=("$m"); done < <("$REAL" models opencode 2>/dev/null | grep -Eo 'opencode/[A-Za-z0-9._:-]*free[A-Za-z0-9._:-]*' | sort -u || true)
 fi
 mapfile -t MODELS < <(printf '%s\n' "${CONFIGURED[@]}" "${DISCOVERED[@]}" | awk 'NF && !seen[$0]++')
+
+if [[ "$ROLE" == audit && -z "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
+  echo "::error::Independent audit requires a known producer model to exclude" >&2
+  exit 67
+fi
 if [[ -n "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
   mapfile -t MODELS < <(printf '%s\n' "${MODELS[@]}" | grep -Fxv "$SPIDER_EXCLUDE_MODEL" || true)
 fi
@@ -95,7 +117,14 @@ run_once(){
   : > "$LOG"; rm -f "$STALL_FLAG" "$TIMEOUT_FLAG"
   local -a src=("$@") routed=()
   if [[ "${src[0]:-}" == run ]]; then routed=(run --model "$model" "${src[@]:1}"); else routed=("${src[@]}" --model "$model"); fi
-  "$REAL" "${routed[@]}" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) & CHILD_PID=$!
+
+  # New session/process group per attempt. Killing only the OpenCode parent is not
+  # enough: an agent can spawn children that keep mutating the worktree after a
+  # timeout or provider failover.
+  setsid --wait "$REAL" "${routed[@]}" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) & CHILD_PID=$!
+  MODEL_PGID=$(ps -o pgid= -p "$CHILD_PID" 2>/dev/null | tr -d ' ')
+  [[ -n "$MODEL_PGID" ]] || MODEL_PGID="$CHILD_PID"
+
   (
     last_size=0; started=$(date +%s); last_change=$started
     while kill -0 "$CHILD_PID" 2>/dev/null; do
@@ -103,18 +132,35 @@ run_once(){
       size=$(wc -c < "$LOG" 2>/dev/null || echo 0); now=$(date +%s)
       if (( now-started >= MAX_RUNTIME_SECONDS )); then
         echo "SPIDER_MODEL_HARD_TIMEOUT model=$model seconds=$MAX_RUNTIME_SECONDS" | tee -a "$LOG" >&2
-        touch "$TIMEOUT_FLAG"; kill "$CHILD_PID" 2>/dev/null || true; sleep 3; kill -9 "$CHILD_PID" 2>/dev/null || true; exit 0
+        touch "$TIMEOUT_FLAG"
+        kill -TERM -- "-$MODEL_PGID" 2>/dev/null || true
+        sleep 3
+        kill -KILL -- "-$MODEL_PGID" 2>/dev/null || true
+        exit 0
       fi
       if [[ "$size" -ne "$last_size" ]]; then last_size="$size"; last_change="$now";
       elif (( now-last_change >= STALL_SECONDS )) && grep -Eiq "$NETWORK_RE" "$LOG"; then
         echo "SPIDER_MODEL_NETWORK_STALL model=$model" | tee -a "$LOG" >&2
-        touch "$STALL_FLAG"; kill "$CHILD_PID" 2>/dev/null || true; sleep 3; kill -9 "$CHILD_PID" 2>/dev/null || true; exit 0
+        touch "$STALL_FLAG"
+        kill -TERM -- "-$MODEL_PGID" 2>/dev/null || true
+        sleep 3
+        kill -KILL -- "-$MODEL_PGID" 2>/dev/null || true
+        exit 0
       fi
     done
   ) & MONITOR_PID=$!
+
   wait "$CHILD_PID"; rc=$?
   kill "$MONITOR_PID" 2>/dev/null || true; wait "$MONITOR_PID" 2>/dev/null || true
-  CHILD_PID=""; MONITOR_PID=""
+  MONITOR_PID=""
+
+  # Even after a normal parent exit, terminate any orphan/background descendants
+  # in the attempt session before validating files or resetting for another model.
+  kill_model_group TERM
+  sleep 0.2
+  kill_model_group KILL
+  CHILD_PID=""; MODEL_PGID=""
+
   [[ -f "$TIMEOUT_FLAG" ]] && return 124
   [[ -f "$STALL_FLAG" ]] && return 75
   return "$rc"
