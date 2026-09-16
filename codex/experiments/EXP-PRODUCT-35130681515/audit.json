@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35130681515",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_SPEC_IMPL_DIVERGENCE_FIX3",
+      "severity": "low",
+      "finding": "Frozen spec.json hypothesis and prereg.md Section 7 describe Fix3 as 'minimum prefix length threshold of 12 characters after scheme+authority delimiter' (and Section 8 justification) with example len(path_part) <3. Implemented src/spider/kernel.py _is_protocol_only_prefix (sha 8aed6377) uses pure structural check: split '://', then '/' not in rest => True (protocol-only). No length threshold 12 is applied. Functional equivalence holds for gated PROTOCOL_ONLY case (https:// -> True), disclosed in result.json validity_notes[1] and report.md Section 3, but frozen 12-char wording was not executed as written.",
+      "evidence": "src/spider/kernel.py:278-299 vs spec.json: hypothesis vs prereg.md:7-8; result.json validity_notes[1]; raw_evidence.json fixes_applied.fix3_protocol_only_guard",
+      "impact": "No impact on decision rule (PROTOCOL_ONLY still correctly rejected). Future docs should align threshold language with structural implementation or re-freeze with length logic."
+    },
+    {
+      "id": "V2_SLOT_PREFIXES_UNREACHABLE",
+      "severity": "low",
+      "finding": "CONDITIONS P1/G3/G5 expect slot_prefixes={'url':'users/'} etc, but kernel slot_prefixes extraction (kernel.py:394-405 last_slash rfind('/') on prefix ending in '/') yields '' for all delimiters-ending prefixes. Raw evidence confirms mismatch: P1 observed {url:''} vs expected {url:'users/'}, G3/G5 similarly (raw_evidence.json controls.slot_prefixes_match=false, slot_prefixes_assessment). Producer correctly discloses that slot_prefixes is metadata-only and template invariance preserved (action_template unchanged), and decision rule does not gate on slot_prefixes. Expectation in CONDITIONS is therefore unreachable given current kernel logic.",
+      "evidence": "raw_evidence.json:conditions.P1_PATH_PREFIX.slot_prefixes, controls.P1_PATH_PREFIX.slot_prefixes_match=false, slot_prefixes_assessment; src/spider/kernel.py:394-405; result.json observations[7] template_invariance_preserved=true",
+      "impact": "No decision-rule impact (slot_count/binding_accuracy gate only). Limits claim about non-empty prefix metadata; VALUE CONTRACT slot_prefixes consumption remains unexercised end-to-end (result.json unresolved[5])."
+    },
+    {
+      "id": "V3_PROVENANCE_HASH_STALE",
+      "severity": "low",
+      "finding": "provenance.json commits.kernel_py and code_paths.kernel.sha256 record 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, while working-tree/HEAD src/spider/kernel.py and raw_evidence.json substrate.kernel_sha256 are 8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb. Models hash correct. Provenance hash is stale (pre-experiment commit). Raw evidence substrate hash is correct and reproduces.",
+      "evidence": "provenance.json: commits.kernel_py, code_paths.kernel.sha256 vs raw_evidence.json: substrate.kernel_sha256=8aed... vs sha256sum src/spider/kernel.py=8aed...; git show HEAD:src/spider/kernel.py sha 8aed...",
+      "impact": "Reproducibility documentation error only; does not affect metrics. Should be corrected in handoff/verdict but does not invalidate measurement."
+    },
+    {
+      "id": "V4_REALISTIC_CORPUS_EXPECTATION_ERRORS",
+      "severity": "low",
+      "finding": "Realistic corpus expected values in spec/prereg are inconsistent with Fix1/Fix2/Fix3 definitions: R6_PROTOCOL_ONLY_SHALLOW expected slot_count=0 but correct behavior with Fix3 is slot_count=1 because https://a.com/ contains '/' path delimiter (recomputed prefix https://a.com/ is not protocol-only). R4_CROSS_PROTOCOL expected slot_count=1 but Fix2 correctly rejects prefix https://api.example.com/v (last_char 'v' not in /?=&). R2_QUERY_HEAVY binding_accuracy 0.0 is test-design issue (unseen values omit &page=). Producer accurately reports these as non-gating validity_notes[2-4] and observations[10-11], not as algorithm failures. Prevalence metric therefore illustrative only.",
+      "evidence": "prereg.md:5.5 R6 expected 0 vs raw_evidence.json:conditions.R6_PROTOCOL_ONLY_SHALLOW.slot_count=1; R4 slot_count=0; result.json validity_notes[2-4] observations[10-11]; run_experiment.py CONDITIONS R6/R4",
+      "impact": "No decision-rule gate (realistic corpus excluded from 10-condition rule). Prevalence 1/6 rejected (raw_evidence realistic_corpus prevalence 0.167) is structural artifact, not field measurement of real traffic."
+    },
+    {
+      "id": "V5_EXTERNAL_VALIDITY_BOUND",
+      "severity": "medium",
+      "finding": "All 18 conditions deterministic synthetic with zero model/network/browser calls (provenance.json environment: model_calls=0 etc), n=3 training +3 unseen per condition. Establishes determinism only, not statistical generalization to real browser traffic. No C-PRODUCT-ECON cost measurement.",
+      "evidence": "result.json validity_notes[0]; provenance.json environment; prereg.md:11 what-not-established; spec.json measurement_validity[4]",
+      "impact": "Claim ceiling remains synthetic single-slot committed-code; external validity explicitly not established by design."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_UNFIXED_PROTOCOL_ONLY",
+      "baseline_id": "B_UNFIXED_PROTOCOL_ONLY",
+      "expected": "True unfixed heuristic rfind('/') without Fix1/Fix2/Fix3 on PROTOCOL_ONLY training => slot_count=1 over-parameterized https://${url}",
+      "observed": "Recomputed slot_count=1, template https://${url}, binding_accuracy 1.0 (semantically wrong domain parameterization). Matches producer. Delta fixed 0 vs unfixed 1 => Fix3 necessity delta=1.",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "raw_evidence.json:conditions.B_UNFIXED_PROTOCOL_ONLY.slot_count=1 action_template.url=https://${url}; raw_evidence.json:fix3_necessity; result.json metrics fix3_necessity_delta=1"
+    },
+    {
+      "id": "B2_UNFIXED_G1",
+      "baseline_id": "B_UNFIXED_G1",
+      "expected": "True unfixed heuristic without Fix1 on G1 query-string => suffix-corrupted template https://api.example.com/search?q=${url}a binding_accuracy=0.0",
+      "observed": "Recomputed binding_accuracy=0.0 (0/3 correct, bound gammaa vs gamma). Fixed G1 binding=1.0 delta=1.0 maximum discriminating power, confirms Fix1 necessity inherited.",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "raw_evidence.json:conditions.B_UNFIXED_G1.metrics.binding_accuracy=0.0 resolution_results bound gammaa; result.json metrics regression_G1_binding_accuracy=1.0"
+    },
+    {
+      "id": "B3_LITERAL",
+      "baseline_id": "B_LITERAL",
+      "expected": "Literal mechanism confidence 0.5 < min_confidence 0.8 fail_rate=1.0 EXPLORE/UNKNOWN",
+      "observed": "Recomputed fail_rate=1.0, confidence 0.5, slot_count 0. Confirms parameterized induction necessary for all conditions.",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "raw_evidence.json:conditions.B_LITERAL.metrics.fail_rate=1.0 confidence=0.5; result.json metrics baseline_LITERAL_fail_rate=1.0"
+    },
+    {
+      "id": "B4_REALISTIC_PROTOCOL_ONLY",
+      "baseline_id": "B_REALISTIC_PROTOCOL_ONLY",
+      "expected": "Parameterized kernel with Fix3 on realistic protocol-only patterns => slot_count=0",
+      "observed": "Recomputed slot_count=0 (distill_success false). Confirms Fix3 does not over-reject realistic distinct-host patterns.",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "raw_evidence.json:conditions.B_REALISTIC_PROTOCOL_ONLY.slot_count=0"
+    }
+  ],
+  "recomputed_metrics": {
+    "decision_rule_conditions_total": 10,
+    "decision_rule_conditions_passed": 10,
+    "decision_rule_passed": true,
+    "verdict": "SURVIVES_CURRENT_TEST",
+    "P1_PATH_PREFIX": {
+      "slot_count": 1,
+      "binding_accuracy": 1.0,
+      "binding_correct_count": 3,
+      "passed": true,
+      "slot_prefixes_observed": {
+        "url": ""
+      },
+      "template": "https://api.example.com/users/${url}"
+    },
+    "G1_QUERY_STRING_SIMPLE": {
+      "slot_count": 1,
+      "binding_accuracy": 1.0,
+      "binding_correct_count": 3,
+      "passed": true
+    },
+    "G2_QUERY_STRING_MULTIPARAM": {
+      "slot_count": 1,
+      "binding_accuracy": 1.0,
+      "binding_correct_count": 3,
+      "passed": true
+    },
+    "G3_DEEP_PATH": {
+      "slot_count": 1,
+      "binding_accuracy": 1.0,
+      "binding_correct_count": 3,
+      "passed": true,
+      "slot_prefixes_observed": {
+        "url": ""
+      }
+    },
+    "G5_PATH_QUERY_HYBRID": {
+      "slot_count": 1,
+      "binding_accuracy": 1.0,
+      "binding_correct_count": 3,
+      "passed": true,
+      "slot_prefixes_observed": {
+        "url": ""
+      }
+    },
+    "N1_ORIGINAL": {
+      "slot_count": 0,
+      "passed": true
+    },
+    "N1_CORRECTED": {
+      "slot_count": 0,
+      "passed": true
+    },
+    "PROTOCOL_ONLY": {
+      "slot_count": 0,
+      "passed": true,
+      "fix3_triggered_structural": true,
+      "common_prefix": "https://"
+    },
+    "B_LITERAL": {
+      "fail_rate": 1.0,
+      "confidence": 0.5,
+      "passed": true
+    },
+    "pipeline_no_errors": true,
+    "fix3_necessity_delta": 1,
+    "fix1_necessity_delta": 1.0,
+    "overall_condition_pass_rate": 0.778,
+    "conditions_total": 18,
+    "conditions_passed_recomputed": 14,
+    "realistic_corpus": {
+      "slot_counts": {
+        "R1_REST_API": 1,
+        "R2_QUERY_HEAVY": 1,
+        "R3_PROTOCOL_ONLY_DEEP": 1,
+        "R4_CROSS_PROTOCOL": 0,
+        "R5_MINIMAL_PREFIX": 1,
+        "R6_PROTOCOL_ONLY_SHALLOW": 1
+      },
+      "binding_accuracies": {
+        "R1_REST_API": 1.0,
+        "R2_QUERY_HEAVY": 0.0,
+        "R3_PROTOCOL_ONLY_DEEP": 1.0,
+        "R4_CROSS_PROTOCOL": 0.0,
+        "R5_MINIMAL_PREFIX": 1.0,
+        "R6_PROTOCOL_ONLY_SHALLOW": 0.0
+      },
+      "prevalence_rejected": 0.167
+    },
+    "template_invariance_preserved": true,
+    "recompute_method": "independent read of raw_evidence.json + direct kernel calls _is_protocol_only_prefix/_validate_prefix_boundary/_find_common_prefix_suffix and distill_parameterized replay for P1"
+  },
+  "claim_ceiling": "Fix3 (_is_protocol_only_prefix structural '/' check) closes the Fix2 protocol-only gap for scheme+authority-only prefixes (https:// -> slot_count 0 vs unfixed slot_count 1, delta=1) while preserving all 5 parent established single-slot bindings (P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1) and nulls N1_ORIGINAL/N1_CORRECTED slot_count=0 with B_LITERAL fail_rate=1.0 in committed-code synthetic single-slot setting (n=3+3 deterministic, zero model/browser/network calls, template invariance preserved). Claim remains bounded to committed-code synthetic single-slot with prefix metadata (Fix1+Fix2+Fix3 necessity quantified, slot_prefixes metadata-only but observed '' not 'users/' due to rfind logic). Does NOT establish: real-browser external validity, C-PRODUCT-ECON cost savings, multi-slot induction (G4 persists), Fix2 path-embedded version handling (R4 fails), multi-param query handling (R2 fails), real-world URL prevalence, cross-site transfer, or 12-char threshold behavior.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35130681515/result.json: metrics decision_rule_passed true metrics 10/10, controls P1/G1/G2/G3/G5/N1_ORIGINAL/N1_CORRECTED/PROTOCOL_ONLY/B_LITERAL passed",
+    "research/experiments/EXP-PRODUCT-35130681515/raw_evidence.json: conditions P1/G1/G2/G3/G5 binding_accuracy 1.0 slot_count 1, PROTOCOL_ONLY slot_count 0, B_UNFIXED_PROTOCOL_ONLY slot_count 1, B_UNFIXED_G1 binding 0.0, aggregate verdict SURVIVES_CURRENT_TEST, slot_prefixes_assessment mismatches disclosed",
+    "research/experiments/EXP-PRODUCT-35130681515/run_experiment.py: CONDITIONS definitions and distill_unfixed baseline implementation",
+    "src/spider/kernel.py sha256 8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb: functions _is_protocol_only_prefix:278-299, _validate_prefix_boundary, _find_common_prefix_suffix, distill_parameterized:302-437",
+    "research/experiments/EXP-PRODUCT-35130681515/provenance.json vs raw_evidence.json substrate hash mismatch noted",
+    "research/experiments/EXP-PRODUCT-35130681515/spec.json decision_rule 10 conditions frozen, prereg.md Sections 5.1-5.5,11",
+    "research/experiments/EXP-PRODUCT-35124662913/handoff.json and verdict.json: parent SURVIVES_CURRENT_TEST EXPERIMENTAL ceiling and protocol-only gap definition"
+  ],
+  "unresolved": [
+    "Real-browser external validity: whether Fix3's '/' delimiter rule matches live traffic distribution of protocol-only vs minimal-path URLs; prevalence of protocol-only over-parameterization in real API/browser traffic unknown (realistic corpus synthetic only)",
+    "Fix2 limitation persists: path-embedded version parameters (/v1/data vs /v2/data) fail Fix2 boundary (prefix https://api.example.com/v last_char 'v' not in /?=&) -> slot_count 0 (R4). Requires segment-aware validation not tested.",
+    "Multi-slot induction architectural bound (G4 single-char suffix guard only, multi-char suffix '00' uncovered) persists from parent; R2 multi-param query heavy requires multi-slot or composite values",
+    "slot_prefixes VALUE CONTRACT consumption not exercised end-to-end via _bind prefix stripping; observed '' vs expected 'users/' discrepancy means consumer behavior untested",
+    "C-PRODUCT-ECON end-to-end amortized cost per successful real-browser task remains unmeasured (requires real-browser harness with model/network/browser calls)",
+    "Fix3 threshold semantics: spec's 12-char language vs implemented structural '/' check - does a prefix like https://a.com (no slash) vs https://a.com/ (with slash) correctly partition malicious vs legitimate minimal-path patterns for all schemes/authorities?",
+    "Provenance hash correction: provenance.json kernel sha 469... should be updated to 8aed... to match committed code"
+  ]
+}

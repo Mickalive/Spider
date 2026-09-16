@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35130682058",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "ensemble_weights": [
+      -7.144575437350703,
+      -1.3300541466676765
+    ],
+    "ensemble_intercept": 1.1418179005101181,
+    "ensemble_threshold": 0.46031682858573086,
+    "ensemble_tp_test": 0.5,
+    "ensemble_fp_test": 0.0,
+    "ensemble_auc_test": 0.625,
+    "condition1_tp_ge_08_fp_le_015": false,
+    "condition2_tp_exceeds_best_single": false,
+    "condition3_fp_below_best_single": false,
+    "jaccard_best_tp_test": 0.25,
+    "jaccard_best_fp_test": 0.25,
+    "ks_best_tp_test": 0.75,
+    "ks_best_fp_test": 0.5,
+    "majority_vote_tp_test": 0.0,
+    "majority_vote_fp_test": 0.25,
+    "positive_control_tp_train": 0.25,
+    "null_control_fp_fresh_train": 0.0,
+    "train_size": 16,
+    "test_size": 8,
+    "n_drift_conditions": 12,
+    "n_noise_conditions": 12
+  },
+  "controls": {
+    "positive_control": {
+      "expected": "TP=1.0 on training split for drift patterns",
+      "observed": "TP=0.2500",
+      "pass": false,
+      "evidence": "metrics.positive_control_tp_train"
+    },
+    "null_control": {
+      "expected": "FP=0.0 on training split for fresh copies",
+      "observed": "FP=0.0000",
+      "pass": true,
+      "evidence": "metrics.null_control_fp_fresh_train"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json",
+      "sha256": "20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+      "sha256": "ecf3fa32b6d2b1e70181cb0c2353d7e660b1cfe40a985b3ea45a8b2ba21bbe5e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json",
+      "sha256": "a6db4827a3c32663bea41b0506a54629473cf4f962856569518e16eec0b5a104",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Fisher LDA ensemble of (1-Jaccard) and KS D on training split yields weights w=[-7.14, -1.33] with intercept 1.14, indicating both features inversely predict drift (higher divergence and KS D associated with noise, not drift)",
+    "Ensemble ROC on test split has AUC=0.625, only slightly above random (0.5)",
+    "No operating point on test ROC satisfies TP>=0.8 and FP<=0.15 simultaneously",
+    "Jaccard alone achieves TP=0.25, FP=0.25 at best Youden index on test set",
+    "KS D alone achieves TP=0.75, FP=0.50 at best Youden index on test set",
+    "Majority vote ensemble (both signals >0.5) yields TP=0.0, FP=0.25",
+    "Positive control fails: ensemble correctly classifies 0% of drift patterns on training set",
+    "Null control passes: ensemble correctly classifies 0% of fresh copies as drift on training set",
+    "The overlap between drift and noise conditions in the 2D feature space is substantial: noise patterns (optional_field_churn, null_valued_fields, nested_object_variation) have similar or higher Jaccard divergence and KS D than drift patterns",
+    "nested_object_variation (noise) has higher KS D (0.50-0.53) than most drift patterns, making it indistinguishable from drift in the temporal signal"
+  ],
+  "validity_notes": [
+    "Raw data from EXP-GRAPH-34788722106 (Jaccard) and EXP-GRAPH-35083040517 (response-time) are aggregated per-condition metrics (mean Jaccard, KS D), not per-sample. ROC is computed over 24 conditions (4 sizes x 6 patterns), not over individual samples. This is a severe limitation: the effective sample size is tiny, and variance estimates are unavailable.",
+    "The train/test split is 16/8 conditions, stratified by label. With only 8 test conditions, the ROC curve is coarse and operating points are limited.",
+    "The mock server produces computation-dependent timing (R^2=0.9999, +9.3ms/field), so temporal signals are confounded with structural complexity.",
+    "Fresh copies have Jaccard=1.0 and KS D ~0.13-0.27, making them easily distinguishable from drift and noise. However, fresh copies are not included in the primary discrimination task (drift vs noise).",
+    "The ensemble uses a linear discriminant, which may be insufficient for nonlinear decision boundaries. However, the spec mandates a linear discriminant.",
+    "Deterministic seed for train/test split (seed=20260916) ensures reproducibility."
+  ],
+  "unresolved": [
+    "Whether a nonlinear ensemble (e.g., SVM, random forest) could achieve TP>=0.8 and FP<=0.15 given the feature overlap",
+    "Whether per-sample data (instead of aggregated per-condition metrics) would reveal different discrimination patterns",
+    "Whether additional features (e.g., KS p-value, Jaccard detection margin, schema size) could improve ensemble performance",
+    "Whether the inverted direction (noise more detectable than drift) is a fundamental property of the feature space or an artifact of the mock server design",
+    "Whether a different train/test split (e.g., leave-one-size-out) would yield different results"
+  ]
+}

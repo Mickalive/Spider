@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35130682058",
+  "github_run_id": "35130682058",
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "datasets": [
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json"
+  ],
+  "code_paths": [
+    "research/experiments/EXP-GRAPH-35130682058/spec.json",
+    "research/experiments/EXP-GRAPH-35130682058/prereg.md"
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "platform": "linux"
+  },
+  "parameters": {
+    "train_test_split_ratio": 0.7,
+    "random_seed": 20260916,
+    "ensemble_method": "Fisher LDA",
+    "regularization": 1e-06
+  },
+  "artifacts": {
+    "result.json": "research/experiments/EXP-GRAPH-35130682058/result.json",
+    "report.md": "research/experiments/EXP-GRAPH-35130682058/report.md",
+    "raw_evidence": "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json"
+  },
+  "artifact_hashes": {
+    "result.json": "1bf03825a3db7305c4cac3f536ec3ee0022814c117096f711b63638ee4710d03",
+    "report.md": "9642b5d1785a4f768fed0e2f9e84632f684d9ef8f4ddb3eb625dcbf9ac008988",
+    "provenance.json": "6316720034e8d91f4e7472f747c89e4b86c7b844aa93cae17532dbf7ad7d2e44",
+    "raw_evidence": "a6db4827a3c32663bea41b0506a54629473cf4f962856569518e16eec0b5a104",
+    "derived_measurements.json": "20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173",
+    "response_time_per_condition.json": "ecf3fa32b6d2b1e70181cb0c2353d7e660b1cfe40a985b3ea45a8b2ba21bbe5e"
+  }
+}

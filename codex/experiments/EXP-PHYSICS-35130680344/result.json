@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35130680344",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "ceiling_eliminated": true,
+    "H_S_next_given_URL_HK_3": 1.102543547725683,
+    "BC_PMI_NT_K3": 0.765900785112734,
+    "BC_PMI_TR_K3": 0.3449301560218977,
+    "BC_PMI_NT_K1": 1.0354395446769051,
+    "BC_PMI_TR_K1": 0.7910611475336495,
+    "perm_p_bonf_NT_K3": 0.07589749847467968,
+    "perm_p_bonf_TR_K3": 0.40883400000000003,
+    "perm_p_bonf_NT_K1": 0.0,
+    "perm_p_bonf_TR_K1": 0.172,
+    "diff_bc_pmi_K3": 0.42097062909083627,
+    "paired_perm_p_K3": 1.0,
+    "action_history_accuracy": {
+      "K1": 0.556,
+      "K2": 0.59,
+      "K3": 0.6265,
+      "frequency_baseline": 0.3605
+    },
+    "total_transitions": {
+      "non_trivial": 2000,
+      "trivial": 2000
+    }
+  },
+  "controls": {
+    "positive_control_session_randomized": {
+      "description": "Replace session_id with random from different trajectory; response->state mapping broken",
+      "bias_corrected_pmi": 0.6403878303629178,
+      "min_perm_null_std": 0.014777601133041099,
+      "pass_criterion": "|0.640388| < 3 * 0.014778 = 0.044333",
+      "pass": false
+    },
+    "null_control_shuffled_labels": {
+      "description": "Permute response labels within strata; breaks R->S pairing",
+      "mean_shuffled_bc_pmi": 0.0013982286402674,
+      "std_shuffled_bc_pmi": 0.08787416083061504,
+      "pass_criterion": "|0.001398| < 3 * 0.087874 = 0.263622",
+      "pass": true
+    },
+    "determinism_check": {
+      "non_trivial": {
+        "total_groups": 436,
+        "deterministic_groups": 436,
+        "accuracy": 1.0,
+        "pass": true
+      },
+      "trivial": {
+        "total_groups": 433,
+        "deterministic_groups": 433,
+        "accuracy": 1.0,
+        "pass": true
+      }
+    },
+    "state_independent_baseline": {
+      "description": "Trivial encoding baseline (explicit state labels)",
+      "K3_BC_PMI": 0.3449301560218977,
+      "K1_BC_PMI": 0.7910611475336495
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_result.json",
+      "sha256": "d12bc0b918472caec515b2a8bf5b17ccb7ea9ef7cae471c69737d76fe588a369",
+      "role": "raw"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "ab87868132e28d3aa038285e1c8ddfaa2e92e5130080564d78e8688a1ea20c63",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Conditional entropy H(S_next|URL,H_K=3) = 1.1025 bits > 0.2 bits, ceiling eliminated.",
+    "Non-trivial encoding BC PMI at K=3 = 0.7659 bits > 0.05 bits threshold.",
+    "Bonferroni-corrected p-value for non-trivial K=3 = 0.075897 > 0.0125 threshold.",
+    "Trivial encoding BC PMI at K=3 = 0.3449 bits.",
+    "Determinism check passes for both conditions (accuracy=1.0).",
+    "Session-randomized positive control BC PMI = 0.6404 bits (not close to 0).",
+    "Cardinality check passes for non-trivial condition (all strata |R|/N < 0.8).",
+    "Cardinality check fails for trivial condition (some strata |R|/N >= 0.8)."
+  ],
+  "validity_notes": [
+    "Measurement invalid due to positive control failure (session-randomized BC PMI not close to 0).",
+    "Session randomization does not break response-state correlation for non-trivial encoding because response is deterministic per state.",
+    "Non-trivial BC PMI at K=3 is 0.7659 bits, but Bonferroni p-value 0.0759 > 0.0125, failing criterion C2.",
+    "Trivial encoding cardinality degenerate (some strata have |R|/N >= 0.8), but this is expected due to session-specific response fields.",
+    "Paired permutation test for encoding comparison yields p=1.0, not significant.",
+    "The positive control design may be inappropriate for non-trivial encoding: session randomization does not affect response content."
+  ],
+  "unresolved": [
+    "Is the session-randomized positive control appropriate for non-trivial encoding where response is deterministic per state?",
+    "Should the positive control be redesigned to randomize state assignments rather than session assignments?",
+    "Does the high non-trivial BC PMI (0.7659 bits) reflect genuine predictive information or an artifact of deterministic state-response mapping?",
+    "Would increasing sample size or permutation count change the Bonferroni-corrected p-value below 0.0125?",
+    "Is the cardinality degeneracy in trivial encoding a fundamental property of explicit state labels?"
+  ]
+}

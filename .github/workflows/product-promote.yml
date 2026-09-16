@@ -104,6 +104,7 @@ jobs:
           fi
 
           [[ "$promoted" == true ]] || { echo "::error::promotion did not reach a durable accepted state"; exit 1; }
+          bash scripts/main_safety_anchor.sh || echo "::warning::Main safety anchor failed after Product acceptance; promotion remains unblocked and the previous rescue pointer is preserved."
 
           # Clear the durable promotion latch on the lane only after main accepted
           # the audited delta (or the exact delta was already present). This makes

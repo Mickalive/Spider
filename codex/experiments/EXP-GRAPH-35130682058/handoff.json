@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35130682058",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Is direct schema comparison (structural diff of schema definitions, bypassing indirect behavioral/temporal signals entirely) required for reliable drift-vs-noise discrimination, or do fundamentally different signal families (session token validation, field-usage profiling) provide orthogonal discrimination that structural+temporal signals cannot?",
+  "why_next": "Four single-signal families (Jaccard, TF-IDF, response-time KS, linear ensemble of Jaccard+KS) have now been tested and falsified on the same mock server, all failing for the same root cause: magnitude confound where structural noise patterns produce larger divergence than true drift. The two tested signal families (structural similarity, temporal response) are not complementary — both are confounded by structural complexity magnitude in the same direction. The material next step is to test a fundamentally orthogonal approach: direct schema comparison (schema diff) which measures semantic/structural change directly rather than indirectly via behavioral signals, or session-level behavioral signals (token validation, field-usage profiling) which test a different dimension entirely.",
+  "carry_forward": {
+    "established": [
+      "Linear Fisher LDA ensemble of (1-Jaccard) and KS D fails all three frozen decision conditions on held-out test split: AUC=0.625, best operating point TP=0.5 FP=0.0 (threshold 0.4603), no point satisfies TP>=0.8 + FP<=0.15. Positive control fails (TP=0.25 on training). (result.json metrics, audit.json recomputed_metrics)",
+      "Ensemble weights are inverted: w=[-7.14, -1.33] with intercept 1.14, indicating both features inversely predict drift — higher divergence and KS D associated with noise, not drift. (result.json metrics.ensemble_weights)",
+      "Magnitude confound confirmed as root cause: noise patterns (nested_object_variation, null_valued_fields) add 2 fields vs drift patterns (add_field) add 1 field, causing noise to produce larger structural and temporal divergence than true drift. This is now the fourth independent confirmation of the inverted direction across all tested signal families. (result.json observations[8-9], audit.json V_INVERTED_DIRECTION_CONFOUND)",
+      "Four single-signal families tested and falsified: Jaccard structural similarity FP=1.0 at all sizes (EXP-GRAPH-34788722106); TF-IDF semantic similarity TP=0.972 FP=1.0 inverted (EXP-GRAPH-35010853847); response-time KS test TP=0.0 FP=0.1875 inverted (EXP-GRAPH-35083040517); linear ensemble AUC=0.625 all conditions fail (this experiment). (all parent handoffs, this result.json)",
+      "Fresh copies (identical schemas) have Jaccard=1.0 and KS D ~0.13-0.27, easily distinguishable from both drift and noise. Fresh copy detection is NOT the problem — drift-vs-noise discrimination is. (report.md, parent handoff carry_forward.established)",
+      "Mock server produces computation-dependent timing (R²=0.9999, +9.3ms/field) so temporal signals are confounded with structural complexity. Failure is signal-to-noise, not MEASUREMENT_INVALID. (audit.json validity_findings[0])"
+    ],
+    "rejected": [
+      "Linear Fisher LDA ensemble of (1-Jaccard) and KS D on aggregated per-condition means — falsified (AUC=0.625, all conditions fail, positive control fails)",
+      "Majority-vote ensemble of Jaccard and KS D (both must agree) — TP=0.0 FP=0.25, strict agreement eliminates all detections",
+      "Single-signal Jaccard (field_path,type) structural similarity under structural noise — FP=1.0 at all sizes (EXP-GRAPH-34788722106)",
+      "Single-signal TF-IDF bag-of-words semantic similarity under structural noise — FP=1.0, inverted direction (EXP-GRAPH-35010853847)",
+      "Single-signal response-time KS two-sample test under structural noise — TP=0.0 FP=0.1875, inverted direction (EXP-GRAPH-35083040517)",
+      "Ensemble of any two token-based signals rescues discrimination when both fail equally (converges to pure signal, F1≈0.65 — EXP-GRAPH-35010853847 ensemble_optimization)"
+    ],
+    "unknown": [
+      "Whether nonlinear ensembles (SVM, random forest) on same two features could achieve TP>=0.8 FP<=0.15 despite linear failure — inverted direction suggests fundamental overlap, not just linear boundary",
+      "Whether per-sample data (N=30 actual Jaccard/KS per sample) instead of aggregated means would reveal different discrimination patterns",
+      "Whether direct schema comparison (structural diff of schema definitions) bypasses the indirect signal problem entirely",
+      "Whether session token validation can discriminate auth-relevant drift from structural noise",
+      "Whether field-usage profiling (tracking which fields are accessed in API calls) provides orthogonal discrimination",
+      "Whether real APIs with DB/cache/CDN effects produce larger or smaller timing differences than CPU-bound mock server",
+      "Whether the inverted direction (noise > drift) is a fundamental property or an artifact of magnitude confound (2-field noise vs 1-field drift)",
+      "Whether sentence-transformers contextual embeddings succeed where TF-IDF fails (untested due to torch unavailability)",
+      "Whether N>=100 per condition with reduced jitter (0-10ms) provides sufficient power for temporal detection"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — only four bounded signal families falsified in specific controlled settings; the broader domain remains open (audit.json claim_ceiling)",
+      "All multi-signal ensembles necessarily fail — this experiment tested only linear discriminant of two specific signal families; nonlinear methods and other signal combinations untested",
+      "The inverted direction is a fundamental property of the feature space — could be an artifact of magnitude confound (2-field noise vs 1-field drift) rather than a universal property",
+      "Direct schema comparison is required — this is a recommendation, not an established fact; other signal families may still succeed",
+      "Nonlinear ensembles would necessarily fail on the same features — the audit explicitly flags this as unresolved (audit.json V_LINEAR_ONLY)",
+      "Synthetic noise patterns (10% churn, deduped nulls, single nested conversion) are representative of real-world API variation",
+      "Per-sample ROC would show the same results as aggregated per-condition means — aggregation limits power and may mask discriminative structure"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35130682058/result.json — primary metrics, controls, and observations",
+    "research/experiments/EXP-GRAPH-35130682058/audit.json — recomputed metrics, claim_ceiling, validity_findings, required_fixes",
+    "research/experiments/EXP-GRAPH-35130682058/provenance.json — parameters, datasets, environment",
+    "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json — 24 conditions with features and labels",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json — Jaccard per-condition means",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json — KS D per-condition",
+    "research/experiments/EXP-GRAPH-35083040517/handoff.json — parent carry_forward established rejected unknown do_not_assume",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json — Jaccard carry_forward",
+    "research/claims/registry.json — C-FRESHNESS claim status"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35130682058/spec.json",
+    "research/experiments/EXP-GRAPH-35130682058/prereg.md",
+    "research/experiments/EXP-GRAPH-35130682058/freeze.json",
+    "research/experiments/EXP-GRAPH-35130682058/result.json",
+    "research/experiments/EXP-GRAPH-35130682058/audit.json",
+    "research/experiments/EXP-GRAPH-35130682058/report.md",
+    "research/experiments/EXP-GRAPH-35130682058/provenance.json",
+    "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/handoff.json",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json"
+  ],
+  "recommended_action": "Design a graph lane experiment testing direct schema comparison (structural diff of schema definitions) as a freshness signal, bypassing indirect behavioral/temporal signals entirely. The approach should diff schema structures (field names, types, nesting, required/optional status) and measure whether the diff magnitude or diff type discriminates drift from noise without the magnitude confound. If direct schema comparison fails, pivot to session-level behavioral signals (token validation, field-usage profiling) which test a fundamentally different dimension. The frozen decision rule should use per-sample features (not aggregated means) with N>=30 per condition to ensure adequate power. The magnitude confound (2-field noise vs 1-field drift) must be controlled for in the experimental design — either by matching noise magnitude to drift magnitude or by measuring magnitude-normalized features."
+}
