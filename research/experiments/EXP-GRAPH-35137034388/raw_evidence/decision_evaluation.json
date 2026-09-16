@@ -1,0 +1,10 @@
+{
+  "decision": "FALSIFIED-IN-SETTING",
+  "violations": [
+    "C1 FAIL: n=10 pattern=change_type: mean_usage_similarity=1.000000 >= 0.90",
+    "C1 FAIL: n=20 pattern=change_type: mean_usage_similarity=1.000000 >= 0.90",
+    "C1 FAIL: n=30 pattern=change_type: mean_usage_similarity=1.000000 >= 0.90",
+    "C1 FAIL: n=50 pattern=change_type: mean_usage_similarity=1.000000 >= 0.90"
+  ],
+  "evaluated_at": "2026-09-16T19:34:17.257434+00:00"
+}

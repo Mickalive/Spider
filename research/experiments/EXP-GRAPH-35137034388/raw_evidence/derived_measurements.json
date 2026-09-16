@@ -1,0 +1,463 @@
+{
+  "per_schema_size": {
+    "10": {
+      "pattern_metrics": {
+        "remove_field": {
+          "mean_jaccard": 0.9,
+          "mean_usage_similarity": 0.868519,
+          "std_usage_similarity": 0.055059,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 0.855556,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_jaccard": 0.818182,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_jaccard": 0.818182,
+          "mean_usage_similarity": 0.638889,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 0.5,
+            "B": 0.666667,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "optional_field_churn": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "null_valued_fields": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "nested_object_variation": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        }
+      }
+    },
+    "20": {
+      "pattern_metrics": {
+        "remove_field": {
+          "mean_jaccard": 0.95,
+          "mean_usage_similarity": 0.861112,
+          "std_usage_similarity": 0.055555,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 0.833333,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_jaccard": 0.904762,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_jaccard": 0.904762,
+          "mean_usage_similarity": 0.638889,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 0.5,
+            "B": 0.666667,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "optional_field_churn": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "null_valued_fields": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "nested_object_variation": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        }
+      }
+    },
+    "30": {
+      "pattern_metrics": {
+        "remove_field": {
+          "mean_jaccard": 0.966667,
+          "mean_usage_similarity": 0.868519,
+          "std_usage_similarity": 0.055059,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 0.855556,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_jaccard": 0.935484,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_jaccard": 0.935484,
+          "mean_usage_similarity": 0.638889,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 0.5,
+            "B": 0.666667,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "optional_field_churn": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "null_valued_fields": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "nested_object_variation": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        }
+      }
+    },
+    "50": {
+      "pattern_metrics": {
+        "remove_field": {
+          "mean_jaccard": 0.98,
+          "mean_usage_similarity": 0.861112,
+          "std_usage_similarity": 0.055555,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 0.833333,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "change_type": {
+          "mean_jaccard": 0.960784,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "required_to_optional": {
+          "mean_jaccard": 0.960784,
+          "mean_usage_similarity": 0.638889,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 0.5,
+            "B": 0.666667,
+            "C": 0.75
+          },
+          "n_samples": 30
+        },
+        "optional_field_churn": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "null_valued_fields": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        },
+        "nested_object_variation": {
+          "mean_jaccard": 0.909091,
+          "mean_usage_similarity": 1.0,
+          "std_usage_similarity": 0.0,
+          "per_profile_success_rate": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "per_profile_usage_similarity": {
+            "A": 1.0,
+            "B": 1.0,
+            "C": 1.0
+          },
+          "n_samples": 30
+        }
+      }
+    }
+  },
+  "overall": {
+    "drift_usage_mean": 0.834568,
+    "noise_usage_mean": 1.0,
+    "discrimination_gap": 0.165432,
+    "pearson_r_jaccard_vs_usage": -0.044548,
+    "n_conditions": 24,
+    "all_jaccard_values": [
+      0.9,
+      0.818182,
+      0.818182,
+      0.909091,
+      0.909091,
+      0.909091,
+      0.95,
+      0.904762,
+      0.904762,
+      0.909091,
+      0.909091,
+      0.909091,
+      0.966667,
+      0.935484,
+      0.935484,
+      0.909091,
+      0.909091,
+      0.909091,
+      0.98,
+      0.960784,
+      0.960784,
+      0.909091,
+      0.909091,
+      0.909091
+    ],
+    "all_usage_sim_values": [
+      0.868519,
+      1.0,
+      0.638889,
+      1.0,
+      1.0,
+      1.0,
+      0.861112,
+      1.0,
+      0.638889,
+      1.0,
+      1.0,
+      1.0,
+      0.868519,
+      1.0,
+      0.638889,
+      1.0,
+      1.0,
+      1.0,
+      0.861112,
+      1.0,
+      0.638889,
+      1.0,
+      1.0,
+      1.0
+    ]
+  }
+}
