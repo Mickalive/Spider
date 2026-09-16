@@ -1,0 +1,345 @@
+{
+  "ensemble_weights": [
+    -7.144575437350703,
+    -1.3300541466676765
+  ],
+  "ensemble_intercept": 1.1418179005101181,
+  "ensemble_threshold": null,
+  "ensemble_tp_test": null,
+  "ensemble_fp_test": null,
+  "ensemble_auc_test": 0.625,
+  "jaccard_tp_test": 0.25,
+  "jaccard_fp_test": 0.25,
+  "ks_tp_test": 0.75,
+  "ks_fp_test": 0.5,
+  "majority_tp_test": 0.0,
+  "majority_fp_test": 0.25,
+  "positive_control_tp_train": 0.0,
+  "null_control_fp_fresh_train": 0.0,
+  "per_pattern": {
+    "null_valued_fields": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0
+    },
+    "optional_field_churn": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 1,
+      "fn": 0
+    },
+    "nested_object_variation": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 1,
+      "fn": 0
+    },
+    "remove_field": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 3
+    },
+    "change_type": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 1
+    }
+  },
+  "train_idx": [
+    4,
+    17,
+    3,
+    11,
+    5,
+    9,
+    10,
+    15,
+    8,
+    20,
+    18,
+    6,
+    0,
+    14,
+    12,
+    7
+  ],
+  "test_idx": [
+    16,
+    21,
+    23,
+    22,
+    13,
+    1,
+    2,
+    19
+  ],
+  "conditions": [
+    {
+      "pattern": "add_field",
+      "size": 10,
+      "jaccard": 0.909091,
+      "ks_d": 0.333333,
+      "ks_p": 0.07088799,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.09090900000000002,
+      "feature2": 0.333333
+    },
+    {
+      "pattern": "remove_field",
+      "size": 10,
+      "jaccard": 0.9,
+      "ks_d": 0.366667,
+      "ks_p": 0.03458008,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.09999999999999998,
+      "feature2": 0.366667
+    },
+    {
+      "pattern": "change_type",
+      "size": 10,
+      "jaccard": 0.818182,
+      "ks_d": 0.3,
+      "ks_p": 0.1350035,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.3
+    },
+    {
+      "pattern": "optional_field_churn",
+      "size": 10,
+      "jaccard": 0.818182,
+      "ks_d": 0.233333,
+      "ks_p": 0.39294501,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.233333
+    },
+    {
+      "pattern": "null_valued_fields",
+      "size": 10,
+      "jaccard": 0.818182,
+      "ks_d": 0.1,
+      "ks_p": 0.99883938,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.1
+    },
+    {
+      "pattern": "nested_object_variation",
+      "size": 10,
+      "jaccard": 0.818182,
+      "ks_d": 0.5,
+      "ks_p": 0.00089958,
+      "detected": true,
+      "label": 0,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.5
+    },
+    {
+      "pattern": "add_field",
+      "size": 20,
+      "jaccard": 0.952381,
+      "ks_d": 0.266667,
+      "ks_p": 0.239073,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.04761899999999997,
+      "feature2": 0.266667
+    },
+    {
+      "pattern": "remove_field",
+      "size": 20,
+      "jaccard": 0.95,
+      "ks_d": 0.366667,
+      "ks_p": 0.03458008,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.050000000000000044,
+      "feature2": 0.366667
+    },
+    {
+      "pattern": "change_type",
+      "size": 20,
+      "jaccard": 0.904762,
+      "ks_d": 0.233333,
+      "ks_p": 0.39294501,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.09523800000000004,
+      "feature2": 0.233333
+    },
+    {
+      "pattern": "optional_field_churn",
+      "size": 20,
+      "jaccard": 0.818182,
+      "ks_d": 0.166667,
+      "ks_p": 0.80796315,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.166667
+    },
+    {
+      "pattern": "null_valued_fields",
+      "size": 20,
+      "jaccard": 0.857143,
+      "ks_d": 0.333333,
+      "ks_p": 0.07088799,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.142857,
+      "feature2": 0.333333
+    },
+    {
+      "pattern": "nested_object_variation",
+      "size": 20,
+      "jaccard": 0.904762,
+      "ks_d": 0.533333,
+      "ks_p": 0.00029334,
+      "detected": true,
+      "label": 0,
+      "feature1": 0.09523800000000004,
+      "feature2": 0.533333
+    },
+    {
+      "pattern": "add_field",
+      "size": 30,
+      "jaccard": 0.967742,
+      "ks_d": 0.4,
+      "ks_p": 0.01564339,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.03225800000000001,
+      "feature2": 0.4
+    },
+    {
+      "pattern": "remove_field",
+      "size": 30,
+      "jaccard": 0.966667,
+      "ks_d": 0.333333,
+      "ks_p": 0.07088799,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.033332999999999946,
+      "feature2": 0.333333
+    },
+    {
+      "pattern": "change_type",
+      "size": 30,
+      "jaccard": 0.935484,
+      "ks_d": 0.233333,
+      "ks_p": 0.39294501,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.06451600000000002,
+      "feature2": 0.233333
+    },
+    {
+      "pattern": "optional_field_churn",
+      "size": 30,
+      "jaccard": 0.818182,
+      "ks_d": 0.2,
+      "ks_p": 0.59407063,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.2
+    },
+    {
+      "pattern": "null_valued_fields",
+      "size": 30,
+      "jaccard": 0.870968,
+      "ks_d": 0.2,
+      "ks_p": 0.59407063,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.12903200000000004,
+      "feature2": 0.2
+    },
+    {
+      "pattern": "nested_object_variation",
+      "size": 30,
+      "jaccard": 0.935484,
+      "ks_d": 0.433333,
+      "ks_p": 0.0065484,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.06451600000000002,
+      "feature2": 0.433333
+    },
+    {
+      "pattern": "add_field",
+      "size": 50,
+      "jaccard": 0.980392,
+      "ks_d": 0.3,
+      "ks_p": 0.1350035,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.01960799999999996,
+      "feature2": 0.3
+    },
+    {
+      "pattern": "remove_field",
+      "size": 50,
+      "jaccard": 0.98,
+      "ks_d": 0.133333,
+      "ks_p": 0.95784629,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.020000000000000018,
+      "feature2": 0.133333
+    },
+    {
+      "pattern": "change_type",
+      "size": 50,
+      "jaccard": 0.960784,
+      "ks_d": 0.233333,
+      "ks_p": 0.39294501,
+      "detected": false,
+      "label": 1,
+      "feature1": 0.03921600000000003,
+      "feature2": 0.233333
+    },
+    {
+      "pattern": "optional_field_churn",
+      "size": 50,
+      "jaccard": 0.818182,
+      "ks_d": 0.4,
+      "ks_p": 0.01564339,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.18181800000000004,
+      "feature2": 0.4
+    },
+    {
+      "pattern": "null_valued_fields",
+      "size": 50,
+      "jaccard": 0.882353,
+      "ks_d": 0.166667,
+      "ks_p": 0.80796315,
+      "detected": false,
+      "label": 0,
+      "feature1": 0.11764699999999995,
+      "feature2": 0.166667
+    },
+    {
+      "pattern": "nested_object_variation",
+      "size": 50,
+      "jaccard": 0.960784,
+      "ks_d": 0.533333,
+      "ks_p": 0.00029334,
+      "detected": true,
+      "label": 0,
+      "feature1": 0.03921600000000003,
+      "feature2": 0.533333
+    }
+  ]
+}
