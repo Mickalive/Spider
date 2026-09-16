@@ -1,17 +1,30 @@
 {
   "experiment_id": "EXP-GRAPH-35083040517",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+  "hypothesis": "Structural noise (field churn, null field introduction, nested object variation) and true schema drift (add/remove field, change type) produce different server-side response-time signatures. Specifically: (1) True drift (adding/removing fields, changing types) causes response-time distribution shifts because the server computes a different schema structure — new serialization overhead, different validation paths, different caching behavior; (2) Structural noise (optional field churn, null values) causes minimal response-time change because the same computation path runs with optional branches; (3) Therefore a Kolmogorov-Smirnov two-sample test on response-time distributions can distinguish true drift from noise with TP>=0.8 and FP<=0.15.",
+  "falsifier": "KS two-sample test on response-time distributions fails TP>=0.8 AND FP<=0.15 simultaneously at any schema size (10, 20, 30, 50 fields) on a controlled mock server. Specifically: (a) positive control fails (TP < 0.8 on add_field pattern at n>=30); (b) null control fails (FP > 0.15 on fresh-copy control); (c) Mann-Whitney test for separation direction inverts (noise more divergent than drift, p > 0.05 one-sided); or (d) KS test on response-time distributions is indistinguishable from uniform noise (KS D < 0.05 across all conditions).",
+  "baselines": [
+    "TF-IDF bag-of-words cosine similarity (falsified baseline from EXP-GRAPH-35010853847 — included for cross-signal comparison only)",
+    "Jaccard (field_path,type) similarity (falsified baseline from EXP-GRAPH-34788722106)",
+    "Random classifier (50% detection rate)",
+    "Fixed-threshold response-time ratio (response_time_after / response_time_before > 1.5)"
+  ],
+  "positive_control": "add_field pattern at n>=30 fields: response time must increase measurably (KS D > 0.1, p < 0.05). This tests that the mock server introduces real computation-time variation when the schema genuinely changes. If the mock server returns in constant time regardless of schema, the response-time profiling hypothesis is unfalsifiable.",
+  "null_control": "Fresh copies (same schema, no modification): response-time KS test must not detect a shift (KS p > 0.05, FP rate <= 0.15). This tests that natural server jitter does not produce false drift signals.",
+  "measurement_validity": [
+    "Mock server must have controlled computation paths: different schema sizes produce different response times (computation proportional to field count serialization)",
+    "Response times measured via HTTP client-side stopwatch with N >= 30 requests per condition to capture distribution",
+    "Server-side jitter controlled: artificial jitter 0-50ms uniform injected, server CPU load constant (no background tasks)",
+    "Frozen random seeds for jitter injection and field generation",
+    "KS two-sample test uses N1=N2=30 per condition minimum",
+    "No target leakage: KS test fit on response-time vectors, no schema content leaking into timing decisions",
+    "Per-pattern analysis at 4 schema sizes (10, 20, 30, 50 fields) with Bonferroni correction"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) positive control passes (add_field TP >= 0.8 at n>=30); (2) null control passes (fresh-copy FP <= 0.15); (3) at least 2 of 3 true-drift patterns (add_field, remove_field, change_type) achieve TP >= 0.8 at n>=30; (4) Mann-Whitney one-sided test confirms separation direction (drift response-time variance > noise response-time variance, p < 0.05); (5) at least 1 structural noise pattern (optional_field_churn) achieves FP <= 0.15 at n>=30. FALSIFIED-IN-SETTING if any of (1)-(5) fails. MEASUREMENT_INVALID if mock server fails to produce computation-dependent response times (positive control D < 0.05 across all conditions).",
+  "product_consequence_positive": "Response-time profiling is a viable orthogonal staleness signal. Combined with (failed) token-based signals, it provides a multi-signal ensemble opportunity. Product could deploy response-time monitoring as a lightweight freshness probe without schema parsing. This moves C-FRESHNESS from HYPOTHESIS toward EXPERIMENTAL.",
+  "product_consequence_negative": "Response-time profiling fails as a staleness signal. The Graph lane's freshness frontier must shift to multi-signal ensembles combining structural + temporal + behavioral dimensions, or accept that drift detection requires direct schema comparison (not an indirect signal). C-FRESHNESS remains HYPOTHESIS. The two orthogonal signal families tested (token-based, temporal) both fail, suggesting the problem may require fundamentally different approaches.",
+  "estimated_cost": "Low-moderate: mock HTTP server (Python http.server) with controlled response-time injection, ~4800 client requests (4 sizes x 6 patterns x 30 reps x 2 for before/after), offline KS computation. No browser, model, or network calls beyond localhost.",
+  "expected_information_gain": "High: This tests the first non-representational staleness signal. If response-time profiling succeeds, it opens a new dimension for freshness detection (temporal) orthogonal to the two failed representational approaches (Jaccard structural, TF-IDF semantic). If it fails, the Graph lane knows that two fundamentally different signal families (representational + temporal) both fail, strongly constraining future freshness research toward multi-signal ensembles or direct schema comparison."
 }
