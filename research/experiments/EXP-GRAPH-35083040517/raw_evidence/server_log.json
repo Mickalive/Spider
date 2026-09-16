@@ -1,0 +1,8402 @@
+[
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 44.03
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 43.41
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 30.89
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 49.91
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.79
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 17.6
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 40.18
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 16.27
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 7.84
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 41.37
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.48
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 29.49
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.24
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 10.88
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 43.03
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 16.82
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 9.11
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 42.7
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 14.47
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.77
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 31.4
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 24.87
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.91
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.22
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 27.31
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 49.64
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 3.24
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 7.83
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.45
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.3
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 7.94
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 18.9
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 20.95
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 3.01
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 13.73
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 27.36
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 8.23
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 1.88
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 27.92
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 26.89
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 37.79
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 6.87
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 1.38
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 8.24
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 25.31
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 2.9
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 20.79
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 31.03
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 40.15
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 15.98
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 14.92
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 22.4
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 5.97
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 21.77
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 15.67
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 22.46
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 12.26
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 49.82
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 22.7
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 285,
+    "jitter_ms": 37.76
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 39.06
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 1.92
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 18.17
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.29
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.08
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 36.2
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 34.9
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 18.33
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 25.1
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.75
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 4.9
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 0.42
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.26
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.41
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 16.27
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.85
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 9.4
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 37.95
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 18.8
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 49.36
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 30.21
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 15.47
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 40.13
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.58
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.73
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 39.11
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 28.31
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 34.48
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.77
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 39.72
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 15.74
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 17.82
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 42.48
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 8.37
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 46.59
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 48.67
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 35.6
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 13.87
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 11.2
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 3.86
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 41.46
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 22.15
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 46.77
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 20.24
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 3.18
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 42.55
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 40.45
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 40.69
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 2.24
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 25.03
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 11.16
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 10.95
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 1.56
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 17.34
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 10.29
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 28.64
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 27.39
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 39.48
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 27.76
+  },
+  {
+    "schema_size": 9,
+    "response_bytes": 227,
+    "jitter_ms": 12.42
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 47.02
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.62
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 15.93
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 14.54
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.78
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 26.44
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 14.66
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 30.41
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.38
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.55
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 25.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.35
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.65
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.35
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.85
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 31.04
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.88
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 44.5
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.23
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.11
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.05
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 38.88
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 10.95
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 41.67
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 26.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 2.92
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.71
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.77
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 32.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 36.19
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 33.5
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 27.21
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 12.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 43.06
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 1.67
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 0.77
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 28.72
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 33.29
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 44.25
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 11.47
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 23.45
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 26.36
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 40.39
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 9.28
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 39.47
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 17.37
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 30.68
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 11.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 26.63
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 31.82
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 42.64
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 9.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 3.77
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 41.2
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 31.88
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 43.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 18.07
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 257,
+    "jitter_ms": 47.31
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 9.62
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 25.49
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 40.33
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.98
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.4
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 19.46
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 38.54
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 18.24
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 38.57
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 48.01
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.19
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 28.27
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.63
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 37.29
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.3
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 28.38
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 37.63
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.47
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 25.32
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 42.15
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 14.44
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 17.26
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 43.05
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 4.45
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.94
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.54
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 19.95
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.67
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 34.94
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 17.8
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 5.69
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 35.82
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 29.98
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 10.09
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 18.05
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 24.47
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 38.66
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 33.6
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 44.43
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 26.39
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 22.79
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 19.37
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 3.48
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 28.31
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 31.83
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 16.29
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 24.87
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 33.84
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 17.68
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 23.0
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 30.12
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 26.76
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 35.52
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 34.9
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 9.83
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 25.31
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 39.03
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 1.04
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 27.67
+  },
+  {
+    "schema_size": 11,
+    "response_bytes": 284,
+    "jitter_ms": 7.69
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.7
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 17.07
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 43.21
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.09
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.74
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 46.24
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.31
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 33.62
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 39.94
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 27.78
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 19.33
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 1.54
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.02
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 49.36
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 37.34
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 37.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 4.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.21
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 39.29
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.23
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.2
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.08
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 24.27
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 36.44
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 38.36
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 3.52
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 12.12
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 36.84
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 49.8
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.49
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 35.7
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 39.86
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 4.18
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 30.9
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 37.39
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 18.21
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 21.85
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 27.05
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 9.38
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 3.57
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 8.34
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 37.69
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 39.68
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 47.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 37.56
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 41.08
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 18.31
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 38.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 43.34
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 24.38
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 14.86
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 2.78
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 41.87
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 7.63
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 13.89
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 5.67
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 5.4
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 38.9
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 12.62
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 211,
+    "jitter_ms": 26.97
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 35.43
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.63
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 48.46
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.19
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 31.62
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 42.82
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 34.67
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.83
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 29.93
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 43.58
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 44.76
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 2.04
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.89
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 27.99
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 29.29
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 16.17
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.86
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.2
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.04
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 34.02
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.17
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.07
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 10.14
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 20.7
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.49
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 26.62
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 42.27
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 4.75
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 40.36
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 28.36
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 18.45
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 22.68
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 37.94
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 47.39
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 33.59
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 34.58
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 17.91
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 26.3
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 35.82
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 7.98
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 18.77
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 49.13
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 35.28
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 46.48
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 43.71
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 37.64
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 20.65
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 12.84
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 30.98
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 25.2
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 12.77
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 9.32
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 4.16
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 41.22
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 30.41
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 22.08
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 3.32
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 42.18
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 17.64
+  },
+  {
+    "schema_size": 12,
+    "response_bytes": 332,
+    "jitter_ms": 31.72
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.65
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 24.41
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 31.98
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 1.08
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 13.77
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 14.38
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.22
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.72
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 9.8
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.95
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.92
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 17.11
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.71
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 25.84
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 23.23
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 48.76
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.84
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 0.49
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 38.06
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 3.19
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 29.81
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 1.04
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.71
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 44.1
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 40.78
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 11.07
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.03
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.9
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 38.49
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 28.34
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 10.29
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 31.86
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.79
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 43.35
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 44.52
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.88
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 17.11
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 8.61
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 20.04
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.8
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.74
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.85
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.09
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 5.09
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 25.47
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.38
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 6.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 34.71
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.26
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 9.41
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 21.52
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.04
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 32.09
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 22.96
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 46.7
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 3.57
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 10.59
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 2.98
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 45.63
+  },
+  {
+    "schema_size": 10,
+    "response_bytes": 247,
+    "jitter_ms": 49.43
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.33
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.38
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 22.82
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 42.23
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.29
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.68
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 20.94
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.52
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 14.42
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 35.54
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.5
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 15.52
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.9
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 39.92
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.49
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.99
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 15.63
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 19.33
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 22.34
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.67
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 4.03
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.54
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 19.25
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 36.82
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 7.47
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 31.72
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 37.2
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.82
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 21.38
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.18
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 16.27
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 19.11
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 5.05
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 19.28
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 49.09
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 41.35
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 0.86
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 49.01
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 14.69
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 47.05
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 17.19
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 11.3
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 29.59
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 14.03
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 25.92
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 34.83
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 9.07
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 10.86
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 45.38
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 40.8
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 2.71
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 37.79
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 44.31
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 3.08
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 16.95
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 1.56
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 17.64
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 0.6
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 44.39
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 578,
+    "jitter_ms": 27.7
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.55
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 33.63
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.67
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.54
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 2.82
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 48.14
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 8.64
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 22.75
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 18.3
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.42
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.0
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 19.47
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 20.93
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.94
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 16.55
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 19.12
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.14
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.19
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 13.89
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.4
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 32.06
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 47.85
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 42.29
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 16.37
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 2.41
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.34
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 18.12
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 40.73
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 17.98
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 44.33
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 33.85
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 42.03
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 35.75
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 32.23
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 46.9
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 1.79
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 31.17
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 13.74
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 2.34
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 2.58
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 5.11
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 30.88
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 35.86
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 15.3
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 45.45
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 32.93
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 16.66
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 8.98
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 18.93
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 1.71
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 5.37
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 25.87
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 22.03
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 32.4
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 24.65
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 22.59
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 25.84
+  },
+  {
+    "schema_size": 19,
+    "response_bytes": 537,
+    "jitter_ms": 0.54
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 39.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.66
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.79
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 15.09
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 37.03
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 37.71
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.1
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 47.4
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 5.44
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.52
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 20.52
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.9
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.06
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.95
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.76
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.65
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.52
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 31.4
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.02
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.0
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.1
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 10.11
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.77
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 8.14
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 0.01
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.84
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 39.1
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 18.93
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.42
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 40.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 28.34
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 24.14
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 28.76
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 42.0
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 19.06
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 47.63
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 34.7
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 28.44
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 20.55
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 49.17
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 8.21
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 38.35
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 15.13
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 43.94
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 4.05
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 42.65
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 15.5
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 9.67
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 26.38
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 34.42
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 35.79
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 2.89
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 10.83
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 33.31
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 27.36
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 38.41
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 3.01
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 10.26
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 47.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 551,
+    "jitter_ms": 45.41
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 0.07
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 12.87
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 8.38
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 14.03
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 32.74
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 12.03
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.25
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 40.2
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 43.22
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 33.6
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.59
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 16.19
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 4.48
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 16.45
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.61
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.2
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 13.07
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 36.93
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.01
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 43.39
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 21.37
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.21
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 26.68
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 46.77
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.71
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.24
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.83
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.3
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.04
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 33.61
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 10.69
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 42.43
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 2.58
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 36.71
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 25.39
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 45.95
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 28.8
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 21.07
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 31.75
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 18.94
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 33.17
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 23.03
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 4.2
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 21.21
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 25.7
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 2.91
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 35.56
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 7.75
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 33.85
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 19.67
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 41.2
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 9.95
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 5.04
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 19.99
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 42.07
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 19.95
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 38.27
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 15.47
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 39.08
+  },
+  {
+    "schema_size": 21,
+    "response_bytes": 579,
+    "jitter_ms": 17.32
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 20.46
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 18.69
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.15
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.7
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 47.13
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 48.31
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.92
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 43.4
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.91
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.94
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 32.28
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 10.02
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 31.24
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.14
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.89
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 2.63
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.36
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 13.27
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.68
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.21
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.93
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 10.84
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 33.78
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 12.11
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.09
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 4.77
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.49
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 1.44
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.46
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.92
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 39.68
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 45.93
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 43.28
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 44.81
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 32.15
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 19.02
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 14.27
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 20.4
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 30.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 35.29
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 19.11
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 7.47
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 14.69
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 3.72
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 43.49
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 7.88
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 42.76
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 20.02
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 21.94
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 31.71
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 11.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 35.55
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 17.88
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 38.44
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 37.76
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 34.86
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 38.3
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 12.61
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 42.56
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 424,
+    "jitter_ms": 7.89
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.54
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 47.75
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.41
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 7.69
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 5.49
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 25.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 42.76
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 32.87
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.36
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 31.64
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 2.38
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 13.45
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 19.24
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 48.0
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 44.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.36
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.8
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 22.05
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 1.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 7.76
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 17.64
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 34.85
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.18
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 34.56
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 0.22
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.27
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.66
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.05
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.73
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 42.32
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 11.54
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 7.27
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 10.34
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 13.51
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 23.25
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 22.22
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 45.63
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 49.52
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 17.17
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 36.7
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 48.93
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 40.21
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 8.69
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 47.77
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 35.45
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 41.94
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 14.51
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 36.52
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 19.33
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 27.2
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 48.99
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 32.75
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 41.72
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 44.22
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 32.09
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 42.26
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 26.06
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 25.19
+  },
+  {
+    "schema_size": 22,
+    "response_bytes": 640,
+    "jitter_ms": 39.91
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 41.13
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 21.61
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 40.8
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 25.15
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 1.78
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 47.5
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 28.02
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 9.64
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 31.89
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.93
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 47.29
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 23.79
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 5.78
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 0.13
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 45.25
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 8.51
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 0.77
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 29.08
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 18.53
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.99
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 38.39
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.6
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.23
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 24.1
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.61
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 32.44
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 36.71
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 16.66
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 3.84
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 39.68
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 5.31
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 30.91
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 32.94
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 27.97
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 40.62
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.16
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 16.44
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 48.56
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 8.49
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 13.51
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 0.32
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.99
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 31.73
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 46.28
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 25.58
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 33.24
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 36.51
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 14.23
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 9.52
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 3.41
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 34.02
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 8.68
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 20.2
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 6.19
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 11.79
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 5.29
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 23.04
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 49.96
+  },
+  {
+    "schema_size": 20,
+    "response_bytes": 555,
+    "jitter_ms": 36.52
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 4.11
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.38
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 25.86
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 19.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 32.07
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 46.06
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 0.58
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 13.02
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 10.22
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.09
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 22.71
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.87
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.9
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 6.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 8.73
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 18.34
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 46.74
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 38.28
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.57
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.84
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 40.48
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.49
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 46.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 46.45
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 43.45
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.48
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.73
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 43.57
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 17.24
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 37.48
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 22.41
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 14.55
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 28.27
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 18.78
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 35.85
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 47.01
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 44.77
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 24.24
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 49.27
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 47.24
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 26.6
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 2.26
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 3.38
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 3.95
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 7.95
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 3.53
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 44.24
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 0.67
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 17.54
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 14.9
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 46.44
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 17.59
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 47.63
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 41.02
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 22.52
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 19.45
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 45.39
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 830,
+    "jitter_ms": 43.66
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 25.48
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 4.78
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 0.4
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.06
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.08
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 46.88
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.51
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 18.57
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 9.31
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 32.07
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 6.67
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 20.76
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 40.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 35.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 45.33
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 4.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.62
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 36.51
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 16.8
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.98
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 36.09
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 45.47
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 0.54
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 22.87
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 49.67
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 40.41
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 24.9
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 45.46
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 44.4
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 29.87
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 5.77
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 48.89
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 37.17
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 21.35
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 43.66
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 10.32
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 31.13
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 44.69
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 44.49
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 12.12
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 6.23
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 41.24
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 32.15
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 8.67
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 5.68
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 26.75
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 37.58
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 40.78
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 29.92
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 8.97
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 0.41
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 32.03
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 24.68
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 46.04
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 16.75
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 5.04
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 22.15
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 34.44
+  },
+  {
+    "schema_size": 29,
+    "response_bytes": 770,
+    "jitter_ms": 41.03
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.23
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 29.57
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.07
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 35.45
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 36.94
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 45.11
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 0.03
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 11.29
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.15
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.34
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 30.68
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 18.91
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 43.09
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 38.98
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 43.16
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 21.81
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 8.14
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 16.43
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 23.7
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.98
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.16
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 6.08
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 32.85
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 40.15
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.84
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 19.52
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 24.64
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 41.08
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 25.6
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 21.81
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 47.37
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 5.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 42.53
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 45.16
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 13.69
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 5.55
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 13.26
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 30.09
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 34.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 20.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 16.91
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 21.66
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 18.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 8.6
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 36.3
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 36.22
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 27.18
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 6.44
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 23.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 24.77
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 24.9
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 10.94
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 26.61
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 34.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 12.7
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 18.22
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 782,
+    "jitter_ms": 30.5
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.74
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 1.27
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.75
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 20.95
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 21.47
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 42.83
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 10.31
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.23
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 24.61
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 5.37
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 24.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 30.11
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 49.71
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 6.9
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 23.23
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 16.7
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 9.03
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.64
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 38.61
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 18.31
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 8.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.47
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.75
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 29.17
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 12.42
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 1.15
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 27.29
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 45.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 4.56
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 37.09
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 7.09
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 8.1
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 13.3
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 43.69
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 37.77
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 28.23
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 6.38
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 10.14
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 5.41
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 25.29
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 35.43
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 40.72
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 17.37
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 33.34
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 3.5
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 32.51
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 47.16
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 24.74
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 35.35
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 28.95
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 40.87
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 1.34
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 47.63
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 22.09
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 26.2
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 21.62
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 6.1
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 21.72
+  },
+  {
+    "schema_size": 31,
+    "response_bytes": 827,
+    "jitter_ms": 2.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 16.29
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 12.05
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.89
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.19
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 35.25
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 32.69
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 6.85
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.01
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 0.57
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 15.33
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.9
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 23.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 11.13
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.76
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.7
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 25.62
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.45
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 31.14
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.88
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 25.91
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.26
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.1
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.36
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 25.95
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.74
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 49.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 40.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 38.38
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 46.27
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 1.18
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 23.58
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 36.38
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 22.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 23.46
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 15.02
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 44.05
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 25.19
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 16.89
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 34.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 23.55
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 11.32
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 20.43
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 21.64
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 7.14
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 38.58
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 22.49
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 0.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 43.18
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 27.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 30.88
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 7.73
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 13.44
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 46.14
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 36.04
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 12.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 637,
+    "jitter_ms": 2.29
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.24
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 23.15
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 44.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 44.95
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 8.73
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 43.73
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 25.49
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.78
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.61
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 16.19
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 7.13
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 30.26
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 30.51
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.1
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 2.97
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 32.78
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 5.87
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 23.66
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 35.48
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.09
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 49.96
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 16.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 12.97
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 44.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 37.39
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 27.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 14.3
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 33.19
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 4.05
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 11.94
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 20.35
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 14.23
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 31.0
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 36.4
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 45.28
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 43.61
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 39.08
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 16.73
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 45.7
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 14.08
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 1.76
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 10.72
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 37.51
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 2.13
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 5.84
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 25.81
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 31.86
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 3.01
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 24.79
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 13.83
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 7.52
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 42.26
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 16.14
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 10.76
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 39.81
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 41.3
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 48.79
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 12.35
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 23.99
+  },
+  {
+    "schema_size": 32,
+    "response_bytes": 877,
+    "jitter_ms": 44.97
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.68
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 12.65
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 19.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 42.82
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 42.94
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 15.79
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 4.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.11
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.96
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 9.44
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 33.46
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 23.96
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 46.3
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.54
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 15.89
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 3.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 18.26
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 21.68
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 11.81
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.23
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.07
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 22.49
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 40.25
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 42.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 24.49
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.12
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.87
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 34.82
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 41.13
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 48.08
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 35.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 40.19
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 1.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 17.86
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 7.46
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 47.69
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 20.35
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 22.39
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 31.15
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 30.56
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 31.85
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 0.76
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 42.2
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 38.59
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 21.98
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 38.4
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 8.71
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 22.17
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 36.14
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 26.92
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 13.24
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 18.66
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 33.76
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 5.64
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 5.95
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 45.72
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 32.08
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 11.69
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 37.9
+  },
+  {
+    "schema_size": 30,
+    "response_bytes": 792,
+    "jitter_ms": 39.41
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 16.26
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 41.71
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 27.9
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 4.4
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.01
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 30.84
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 39.81
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.46
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 28.31
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 22.03
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 5.73
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 5.87
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.82
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.32
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 22.22
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 5.83
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 42.81
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.01
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 5.49
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 40.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 36.53
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 28.38
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 49.46
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 11.74
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 1.99
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 43.07
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 15.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 44.07
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 47.15
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 33.01
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 7.46
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 40.57
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 26.42
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 26.73
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 25.2
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 37.22
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 21.85
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 49.06
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 4.1
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 4.5
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 23.44
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 40.62
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 24.74
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 32.15
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 7.03
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 37.09
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 42.03
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 7.56
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 12.86
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 48.11
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 26.94
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 28.47
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 22.2
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 0.34
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 4.28
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 42.45
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 39.16
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1323,
+    "jitter_ms": 37.92
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 11.63
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 15.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.71
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 37.94
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 25.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 3.88
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.39
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.08
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.49
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.47
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.89
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 15.3
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.3
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 5.26
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 11.16
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 41.85
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 4.73
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 23.73
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.41
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 4.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 24.17
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 23.5
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 38.19
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 49.54
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 34.93
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 16.83
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 35.05
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.97
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 13.22
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 20.65
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 1.55
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 17.78
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 32.37
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 18.33
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 8.45
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 22.99
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 40.76
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 25.64
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 20.13
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 38.88
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 31.06
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 14.39
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 9.74
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 10.8
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 23.31
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 46.89
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 38.73
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 43.0
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 10.73
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 17.65
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 2.94
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 19.36
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 27.73
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 37.61
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 11.78
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 6.78
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 31.46
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 42.65
+  },
+  {
+    "schema_size": 49,
+    "response_bytes": 1268,
+    "jitter_ms": 38.2
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.47
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 49.86
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 19.77
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 47.66
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 31.23
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 42.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 37.8
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 34.88
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 41.46
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.03
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.37
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 17.49
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.91
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 15.27
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 46.7
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 35.02
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 34.91
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.17
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.47
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 26.34
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.37
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 44.55
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 46.43
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 30.5
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 12.74
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 16.58
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.81
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.52
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 28.55
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 0.12
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 11.76
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 7.84
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 10.37
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 24.12
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 30.07
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 47.1
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 46.46
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 46.69
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 44.75
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 5.52
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 24.1
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 35.75
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 47.24
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 48.85
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 45.38
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 46.91
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 27.44
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 30.08
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 14.59
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 47.26
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 38.24
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 37.09
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 23.01
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 42.25
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 44.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 48.1
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 12.53
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 6.08
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1310,
+    "jitter_ms": 45.54
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 5.82
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 6.28
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 16.96
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.43
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 46.01
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.77
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 35.31
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 2.53
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 12.45
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 3.5
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 27.47
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.76
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 46.1
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.51
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 17.72
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 26.73
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 9.49
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.45
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 3.82
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 47.13
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 18.13
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 13.13
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 48.66
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.49
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 22.05
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 26.11
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 31.0
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.83
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 22.74
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 31.06
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 31.41
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 27.9
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 27.37
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 23.61
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 43.42
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 13.87
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 14.55
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 13.33
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 45.12
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 24.28
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 32.01
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 4.62
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 36.96
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 32.43
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 48.83
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 37.52
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 46.79
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 10.39
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 33.2
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 42.76
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 13.52
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 37.74
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 19.84
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 20.27
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 36.98
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 39.18
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 49.49
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 49.54
+  },
+  {
+    "schema_size": 51,
+    "response_bytes": 1333,
+    "jitter_ms": 13.4
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 13.2
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 6.48
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 46.59
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.08
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 32.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 25.14
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 36.98
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.68
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 47.48
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 9.21
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.42
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.01
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 25.67
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 19.21
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.22
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 22.61
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 40.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 40.29
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 31.43
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 31.17
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 43.44
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 30.21
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.28
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.82
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 25.08
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.3
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.73
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 32.91
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 3.21
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.0
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 29.87
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 21.95
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 21.88
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 30.95
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 9.02
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 16.35
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 39.89
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 21.16
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 38.75
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 8.85
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 42.93
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 18.27
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 40.92
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 32.63
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 11.92
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 18.45
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 32.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 48.45
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 40.79
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 28.95
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 0.42
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 32.61
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 20.85
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 29.07
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 14.43
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 37.2
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 22.95
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 36.2
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 41.15
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1053,
+    "jitter_ms": 47.34
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.25
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 6.94
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 49.76
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.88
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.94
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 15.93
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 27.24
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 49.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 26.65
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 31.42
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 19.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 47.06
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 27.36
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.23
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 1.84
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 12.51
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 21.83
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 9.97
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.65
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 39.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 20.97
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.26
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.81
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.36
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 13.52
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.87
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 1.97
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.98
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 44.88
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 42.43
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 34.96
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 19.33
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 13.99
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 8.46
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 42.13
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 18.93
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 26.01
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 26.38
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 0.02
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 14.91
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 15.73
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 16.78
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 28.53
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 38.37
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 12.63
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 28.29
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 44.83
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 25.04
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 39.96
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 47.14
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 18.01
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 41.33
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 44.67
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 17.96
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 1.9
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 38.31
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 41.03
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 40.45
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 44.48
+  },
+  {
+    "schema_size": 52,
+    "response_bytes": 1384,
+    "jitter_ms": 4.4
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 41.44
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 27.9
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.22
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 17.35
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 6.13
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.0
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 37.99
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 22.47
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 0.73
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 10.36
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.07
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 34.61
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.21
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 37.56
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 2.75
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 2.52
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 6.07
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 34.1
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 17.38
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 1.37
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.57
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.01
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 25.66
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 37.75
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.65
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 1.51
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 18.55
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 3.32
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 12.2
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 2.33
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.07
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 8.64
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.43
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.86
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 12.36
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 29.89
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.58
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 9.0
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 38.15
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 8.45
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 7.97
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 45.28
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 4.43
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 25.59
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 46.12
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 48.25
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 14.25
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 37.72
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 2.37
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 36.09
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 3.69
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 49.42
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 15.39
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 44.85
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 47.77
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 1.14
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 26.27
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 33.76
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 23.78
+  },
+  {
+    "schema_size": 50,
+    "response_bytes": 1299,
+    "jitter_ms": 48.71
+  }
+]
