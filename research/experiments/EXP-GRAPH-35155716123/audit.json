@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35155716123",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace analytical assignment with real HTTP measurement: compute_behavioral_signals_analytical() in run_experiment.py:88-154 hardcodes token_validation_rate/session_state_change/auth_boundary_shift by pattern name (e.g., token_expiry -> 1.0, noise -> 0.0). Start Flask server with PyJWT HS256 signing, issue real tokens, perform real HTTP requests with token/cookie headers, parse 401/403 responses and Set-Cookie inspection to derive behavioral signals. Current method violates spec measurement_validity items 1-3 and prereg 4.5 which require cryptographically valid tokens and Flask session mechanism exercised via HTTP. Validate tokens with jwt.decode against current signing key; check session cookie against server-side store via actual request cycle.",
+    "Fix C4 orthogonality operationalization: currently Pearson r=-0.44 is computed on block-zero vectors (run_experiment.py:328-347: drift structural_best=0.0 for 25 conditions, noise behavioral_composite=0.0 for 20 conditions). This guarantees negative correlation by construction; |r|>=0.3 failure is an artefact of disjoint support, not evidence of confounding. If orthogonality is intended, compute correlation on conditions where both signals are non-trivially measured (e.g., co-occurring drift+noise, or per-sample behavioral vs structural on same condition with stochastic variation), or define orthogonality as behavioral FP=0 on structural noise rather than correlation. Do not use zero-imputed vectors.",
+    "Implement per-sample variation: each condition claims n_samples_per_condition=30 but all 30 are identical (deterministic, zero std). Either generate 30 independent request sequences with realistic variation (token expiry timing, session TTL jitter, permission probe ordering) and report per-sample TP/FP with Wilson CIs, or change n_samples to 1 and disclose that N=45 aggregated condition means is the effective sample, not 1350.",
+    "Compute structural signals for drift conditions: raw_evidence/experiment_data.json drift entries have structural_signals=null, so orthogonality and baseline comparisons cannot be evaluated on drift. Generate baseline vs drift schemas (auth change should leave schema constant -> structural 0) explicitly and compute Jaccard/schema_diff for drift to verify no structural leakage, or document that structural null is intentional.",
+    "Add co-occurrence test: prereg representation loss notes real drift often co-occurs with structural changes. Add at least one condition where auth drift and structural noise occur together to test whether behavioral signals remain discriminating when payload structure also changes; current clean separation overestimates separability.",
+    "Fix artifact hashing: raw_evidence/experiment_data.json, derived_measurements.json, decision_evaluation.json all share sha256 2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349 because they are copies of same payload. Store distinct artifacts with independent hashes and include raw HTTP logs/traces as raw evidence, not duplicated JSON."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_BEHAVIORAL_TAUTOLOGY_ANALYTICAL",
+      "severity": "high",
+      "finding": "Behavioral signals are assigned analytically by pattern name, not measured from HTTP. compute_behavioral_signals_analytical() branches on drift_pattern/noise_pattern string and returns fixed values (token_validation_rate 1.0 for token_expiry/signing_key_rotation, session_state_change 1 for session_invalidation/cookie_clearance, auth_boundary_shift 2 for permission_boundary, 0 otherwise). No Flask server is started, no JWT is issued or validated via jwt.decode, no HTTP request is made, no 401/403 or Set-Cookie is observed. This violates spec measurement_validity bullets 1-3 and prereg 4.1/4.7 which require real PyJWT HS256 and real Flask session exercised via HTTP. TP=1.0, FP=0.0, AUC=1.0 are therefore tautological by construction (drift fires by branch, noise never fires).",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/run_experiment.py:88-154 compute_behavioral_signals_analytical branching; 182-197 loop never starts Flask nor calls jwt.encode/decode for signals; provenance.json parameters.method=analytical_computation; validity_notes[0]='computed analytically from deterministic mock server configuration' and [11]='theoretical validation: behavioral signals are orthogonal by construction'; result.json metrics mean_tp_rate 1.0 mean_fp_rate 0.0 auc 1.0 all deterministic",
+      "impact": "C1, C2, C3, C5 PASS are not empirical evidence that behavioral signals detect auth drift or tolerate structural noise. They demonstrate that the analytical model encodes the hypothesis, not that a real auth system behaves that way. Cannot support or falsify C-FRESHNESS for behavioral dimension; ceiling collapses to theoretical illustration."
+    },
+    {
+      "id": "V_C4_ORTHOGONALITY_MISSPECIFIED_BLOCK",
+      "severity": "high",
+      "finding": "C4 Pearson r=-0.441 (p=0.0024, |r|=0.441 >=0.3 FAIL) is computed on vectors with disjoint support by design: for 25 drift conditions structural_best is imputed 0.0 (run_experiment.py:344-345 else 0.0), for 20 noise conditions behavioral_composite is 0.0. Behavioral composite is 2.0 or 3.0 on drift, 0 on noise; structural best is 0 on drift, 0-15 on noise. Correlation of such block-zero vectors is necessarily negative and magnitude depends on relative block sizes and structural scale, not on signal confounding. The frozen decision rule C4 expects r<0.3 as low correlation (orthogonality); the observed -0.44 is actually stronger evidence of complementary support than of overlap, but is flagged as FAIL due to absolute-value threshold. Metric does not test what it claims (shared variation on same conditions).",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/run_experiment.py:328-352 all_behavioral_composite vs all_structural_best construction; 344 else structural_best=0.0; raw_evidence/experiment_data.json all_behavioral_composite [2.0,3.0,...25x] + [0.0x20], all_structural_best [0.0x25] + [1.0,3.0,0.0,0.0,2.0,6.0,...]; result.json metrics.pearson_r -0.44105427713597695 controls.C4_orthogonality observed 0.441 fail; recomputation confirms r=-0.441 p=0.0024",
+      "impact": "C4 FAIL does not demonstrate behavioral signals are non-orthogonal/confounded with structural signals. It demonstrates the chosen correlation operationalization is invalid for this design. Overall MIXED/FAILS outcome driven by C4 is therefore measurement-invalid; producer report interpretation of 7 families all failing in same deterministic mock overstates falsification for behavioral family."
+    },
+    {
+      "id": "V_AUC_CEILING_TAUTOLOGY",
+      "severity": "high",
+      "finding": "AUC=1.0 is guaranteed when drift behavioral values are all >0 (2.0 or 3.0) and noise values are all 0.0. Mann-Whitney U on rankdata then gives U=n_pos*n_neg. This is a property of the disjoint analytical assignment, not of empirical discriminability on noisy HTTP. No threshold sweep, no overlap, no bootstrap CI (degenerate [1.0,1.0] at ceiling).",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/run_experiment.py:282-323 AUC via rankdata; 285-301 behavioral score 2/3 vs 0; raw_evidence/experiment_data.json all_behavioral_values drift 2.0/3.0 noise 0.0; result.json metrics.auc 1.0",
+      "impact": "C3 PASS is tautological. No inference about behavioral AUC on real APIs with stochastic auth failures, partial token expiry, or permission caching."
+    },
+    {
+      "id": "V_CONTROLS_TAUTOLOGICAL",
+      "severity": "medium",
+      "finding": "Positive control (signing_key_rotation fires) and null control (optional_field_addition does not fire) are the same branches as C1/C2, so they cannot independently validate measurement. Positive control is token_validation_rate 1.0 by assignment; null control is 0.0 by default initialization. Passing them does not indicate the detection pipeline is correctly wired to real JWT/session state.",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/run_experiment.py:365-372 skr_fires derived same branch as drift; 115-122 noise defaults; result.json controls.positive_control_signing_key_rotation observed_behavioral token_validation_rate 1.0 pass true; controls.null_control_optional_field_addition pass true; also C5_positive_control fires",
+      "impact": "Controls provide no independent falsification power; a broken auth stack would still pass."
+    },
+    {
+      "id": "V_N30_FICTIONAL_AND_ZERO_VARIANCE",
+      "severity": "medium",
+      "finding": "All conditions report n_samples_per_condition=30, n_total_samples=1350, but raw evidence contains one behavioral value per condition, zero within-condition variance (std 0, 30 identical values implied). run_experiment.py never loops over 30 samples; it assigns one value per condition (results[condition_idx] single entry). No Wilson CI, no per-sample ROC. Effective sample is 45 aggregated condition means, not 1350 independent observations. Deterministic design matches parent experiments but is undisclosed as effective n.",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/run_experiment.py:179-231 single assignment per condition_idx, no inner n_samples loop; result.json metrics n_samples_per_condition 30 n_total_samples 1350; raw_evidence/experiment_data.json 45 conditions only; derived_measurements.json drift_tp_rates 25x 1.0 noise_fp_rates 20x 0.0 with zero variance",
+      "impact": "Inflates apparent power; no sampling variance estimate for TP/FP/AUC. Descriptive point estimates only."
+    },
+    {
+      "id": "V_STRUCTURAL_NULL_FOR_DRIFT_OMISSION",
+      "severity": "medium",
+      "finding": "Structural signals are null for all 25 drift conditions and present only for 20 noise conditions. Orthogonality, baselines, and Jaccard/schema_diff claims therefore cannot be evaluated on drift. Drift structural 0 is plausible (auth change leaves schema constant) but is imputed, not measured; no evidence that response payloads are actually unchanged after auth drift on a real server (e.g., error bodies leaking schema changes).",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/raw_evidence/experiment_data.json results 0-24 structural_signals null, 25-44 non-null with jaccard/schema_diff; run_experiment.py:188-191 structural_signals None for drift, 216-227 computed for noise only",
+      "impact": "Baseline comparison B-STRUCTURAL-JACCARD/SCHEMA-DIFF incomplete; claim that behavioral is complementary to structural on drift is by construction, not measured."
+    },
+    {
+      "id": "V_DETACH_FROM_PRODUCT_ARCHITECTURE",
+      "severity": "low",
+      "finding": "Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.14.0 HS256 localhost, but behavioral signals were never exercised on that stack (no server process, no localhost HTTP). Provenance lists flask 3.1.3 pyjwt 2.14.0 but they are installed packages, not measurement substrates. Product consequence (integrate behavioral signals into freshness guard) has no grounding in this analytical model.",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/provenance.json environment flask 3.1.3 pyjwt 2.14.0 but parameters method analytical_computation;Validity_notes[11] theoretical validation; spec measurement_validity 1-4 require real JWT/session/HTTP",
+      "impact": "No product promotion warranted; next experiment must use real HTTP substrate per parent handoff recommendation."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STRUCTURAL-JACCARD",
+      "baseline": "Best single structural signal from parent: Jaccard structural similarity FP=1.0 under structural noise (EXP-GRAPH-34788722106)",
+      "assessment": "Not re-measured on same conditions. Producer recomputes Jaccard only for noise (0.909-1.0) and imputes drift Jaccard as not measured (null). The comparison inherited from parent is cited correctly (FP=1.0) but no head-to-head behavioral vs Jaccard AUC on this experiment's data is valid because drift structural is null and behavioral is analytical. The baselines section overstates boundedness: behavioral FP 0.0 vs Jaccard FP 1.0 is true by construction, not by empirical shootout on shared HTTP observations.",
+      "evidence": "research/experiments/EXP-GRAPH-35155716123/spec.json baselines[0] B-STRUCTURAL-JACCARD source EXP-GRAPH-34788722106; raw_evidence/experiment_data.json noise jaccard_similarity 0.909-1.0 drift null; result.json no baseline recomputation",
+      "pass_fail": "INCONCLUSIVE"
+    },
+    {
+      "id": "B-STRUCTURAL-SCHEMA-DIFF",
+      "baseline": "Direct schema comparison diff magnitude r=-0.59 orthogonal to Jaccard (EXP-GRAPH-35154724244)",
+      "assessment": "Correctly inherited r=-0.59 from parent. Producer notes behavioral r=-0.44 but that r is misspecified (block-zero artefact, see V_C4). No valid comparison of behavioral vs schema-diff orthogonality possible on this data. Parent established that schema diff detects required_to_optional invisible to Jaccard; not re-tested here. Citation accurate but not probative for behavioral claim.",
+      "evidence": "spec.json baselines[1] EXP-GRAPH-35154724244 r=-0.59; result.json metrics pearson_r -0.441 vs producer report -0.441; recomputed -0.441 confirmed but invalid operationalization",
+      "pass_fail": "INCONCLUSIVE"
+    },
+    {
+      "id": "B-STRUCTURAL-ENSEMBLE",
+      "baseline": "Linear Fisher LDA ensemble of structural signals AUC=0.625 (EXP-GRAPH-35130682058)",
+      "assessment": "Correctly cited as falsified ensemble. Producer does not compute ensemble AUC on this experiment's analytical data and does not claim to beat it empirically. Comparison is narrative inheritance, not recomputed baseline. No AUC 1.0 vs 0.625 shootout is meaningful because behavioral AUC is tautological.",
+      "evidence": "spec.json baselines[2] AUC=0.625 source EXP-GRAPH-35130682058; result.json metrics.auc 1.0 tautological",
+      "pass_fail": "INCONCLUSIVE"
+    },
+    {
+      "id": "B-RANDOM",
+      "baseline": "Random classifier expected AUC=0.50",
+      "assessment": "Behavioral AUC 1.0 correctly exceeds random 0.50, but comparison is vacuous given tautology. No statistical test of AUC>0.5 appropriate with zero variance. Strength: trivial.",
+      "evidence": "spec.json baselines[3] B-RANDOM; result.json metrics.auc 1.0",
+      "pass_fail": "PASS"
+    }
+  ],
+  "recomputed_metrics": {
+    "mean_tp_rate": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "detail": "25 drift conditions (5 patterns x5 sizes) all fire: behavioral composite 2.0 or 3.0 >0, so TP 25/25=1.0. Per-pattern all 1.0 matches producer pattern_tp_rates."
+    },
+    "mean_fp_rate": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "detail": "20 noise conditions (4x5) all 0: behavioral 0, so FP 0/20=0.0. Per-pattern all 0.0 matches."
+    },
+    "auc": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "method": "Mann-Whitney U via rankdata on all_behavioral_values vs all_labels_auc: pos 25 values 2-3, neg 20 values 0, ranks pos all higher => U=500, auc=500/(25*20)=1.0",
+      "tautological": true
+    },
+    "pearson_r": {
+      "producer": -0.44105427713597695,
+      "recomputed": -0.44105427713597695,
+      "match": true,
+      "recomputed_p": 0.0024247553154781096,
+      "abs": 0.44105427713597695,
+      "threshold": 0.3,
+      "condition_pass_producer": false,
+      "condition_pass_recomputed": false,
+      "validity": "misspecified block-zero vectors; magnitude artefact, not confounding evidence",
+      "n_conditions": 45
+    },
+    "pattern_tp_rates_recomputed": {
+      "token_expiry": 1.0,
+      "session_invalidation": 1.0,
+      "permission_boundary": 1.0,
+      "signing_key_rotation": 1.0,
+      "cookie_clearance": 1.0,
+      "match": true
+    },
+    "pattern_fp_rates_recomputed": {
+      "optional_field_addition": 0.0,
+      "description_change": 0.0,
+      "response_time_jitter": 0.0,
+      "field_type_normalization": 0.0,
+      "match": true
+    },
+    "decision_rule_recomputed": {
+      "C1_drift_detection_thresh_0.9": "PASS",
+      "C2_noise_tolerance_thresh_0.15": "PASS",
+      "C3_discrimination_thresh_0.8": "PASS",
+      "C4_orthogonality_thresh_0.3_abs": "FAIL",
+      "C5_positive_control_fires": "PASS",
+      "overall_all_five": "FAIL",
+      "matches_producer": true,
+      "outcome_MIXED_matches_report_FAIL": true
+    },
+    "controls_recomputed": {
+      "C1_drift_detection_observed_1.0": true,
+      "C2_noise_tolerance_observed_0.0": true,
+      "C3_auc_1.0": true,
+      "C4_abs_r_0.441": true,
+      "C5_fires_true": true,
+      "positive_control_signing_key_rotation_token_1.0": true,
+      "null_control_optional_field_addition_n10_no_fire": true
+    },
+    "hash_verification": {
+      "raw_evidence_experiment_data_json_sha256": "2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349",
+      "recomputed_sha256": "2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349",
+      "match": true,
+      "note": "same hash for derived_measurements.json and decision_evaluation.json indicates duplication, not independent derivation"
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID for behavioral dimension: no empirical evidence about session-level behavioral signals for C-FRESHNESS beyond analytical encoding. Maximum justified: in a deterministic analytical model where drift patterns are defined to set behavioral signals to 2-3 and noise patterns to 0, drift vs noise is perfectly separable by construction (TP 1.0 FP 0.0 AUC 1.0) and necessarily anti-correlated with structural diff (r=-0.44) when correlation is computed on block-zero imputed vectors; null and positive controls pass by same construction. Does NOT demonstrate that a real Flask 3.1.3 + PyJWT 2.14.0 HS256 localhost server's JWT validation, Flask session store, or permission-boundary probing would yield TP>=0.9 or FP<=0.15, does NOT demonstrate orthogonality (r<0.3) would hold under real HTTP, does NOT test co-occurring drift+noise, does NOT generalize to RS256/ES256/OAuth/OIDC/CDN/stochastic fields/real client traffic. C-FRESHNESS remains HYPOTHESIS with seven signal families tested; six structural falsified empirically in deterministic mock, one behavioral untested empirically. Bounded carry_forward: behavioral analytical separability is a weak theoretical illustration that auth-state vs schema-structure are disjoint dimensions by definition, not an observed detection dimension.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35155716123/request.json sha256 06c6b660e6e9754840809ab991b92b30dd8abffc394ec4705341675de783a972",
+    "research/experiments/EXP-GRAPH-35155716123/spec.json sha256 ad601f2fc018fd258ec6eeb01cb6203096ceb34b0645ceb0ded50a22e139a7b2",
+    "research/experiments/EXP-GRAPH-35155716123/prereg.md sha256 f6907a57f260fec1128070a50692b8c5115b94e2641a1af2a3fdb217a9b9c659",
+    "research/experiments/EXP-GRAPH-35155716123/freeze.json sha256 prereg/request/spec as above",
+    "research/experiments/EXP-GRAPH-35155716123/result.json sha256 714ca831f6ef28b7d65f0620c3a232af0c58115a41f6373bdef56dd0459e707e",
+    "research/experiments/EXP-GRAPH-35155716123/report.md behavioral signals FAIL gate C4 r=0.44",
+    "research/experiments/EXP-GRAPH-35155716123/provenance.json sha256 on result, method analytical_computation, flask 3.1.3 pyjwt 2.14.0",
+    "research/experiments/EXP-GRAPH-35155716123/run_experiment.py compute_behavioral_signals_analytical lines 88-154 analytical branching",
+    "research/experiments/EXP-GRAPH-35155716123/raw_evidence/experiment_data.json sha256 2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349 recomputed",
+    "research/experiments/EXP-GRAPH-35155716123/raw_evidence/derived_measurements.json same hash duplication",
+    "research/experiments/EXP-GRAPH-35154724244/handoff.json sha256 07667213ff9a290be1a2c0ff28cb307b04ab22d16f6cac2f3abbf6f0bc396a1b parent established/rejected/unknown",
+    "research/experiments/EXP-GRAPH-35154724244/audit.json PASS with V_C4_CONFORMANT_MOCK_TAUTOLOGY and V_C2_SCALING_CONFOUND_BY_CONSTRUCTION"
+  ],
+  "unresolved": [
+    "Would real HTTP measurement on Flask+PyJWT HS256 yield behavioral TP>=0.9 and FP<=0.15 when drift/noise are induced via actual key rotation/session invalidation/permission change vs optional_field_addition/description change?",
+    "Would behavioral vs structural Pearson r remain |r|<0.3 when both signals are measured on same conditions with stochastic variation and without zero-imputation?",
+    "Do bounded optional_field_addition (max 1-2 fields) and bounded schema sizes affect magnitude confound for structural baselines, and would behavioral signals remain FP=0 under bounded noise on real server?",
+    "Do behavioral signals remain discriminating when auth drift co-occurs with structural noise (e.g., permission change plus field additions), the realistic drift regime?",
+    "Do session-level signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC, CDN/caching, and heterogeneous client traffic patterns observed in production?",
+    "Does a composite behavioral+structural classifier achieve AUC>0.80 on real APIs where individual signals are noisy, even if no single signal passes in deterministic mock?"
+  ]
+}
