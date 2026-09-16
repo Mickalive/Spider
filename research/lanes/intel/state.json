@@ -1,14 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-35124660457",
-  "last_experiment_id": "EXP-INTEL-35112013458",
-  "last_verdict": "FALSIFIED-IN-SETTING",
-  "continue_immediately": false,
-  "next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-35124660457",
+  "last_verdict": "MEASUREMENT_INVALID",
+  "continue_immediately": true,
+  "next_question": "After the runtime lane removes the first-20 locatableSample cap, does full DOM enumeration confirm that the a\u2192link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-16T17:08:14.479199+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "d9ca2d3296a623c39fbce4c1260aec450531fdda88760082dba60598c6e953d6"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-16T18:03:13.900233+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "bb975d7af3a448eaf7d3ae40327e1cea38c414ae5edadc1e4a1dd1fb81038a59",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
