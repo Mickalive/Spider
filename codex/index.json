@@ -751,6 +751,31 @@
         "handoff.json": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
       }
     },
+    "EXP-GRAPH-35010853847": {
+      "lane": "graph",
+      "request_id": "dfad7c09a2c61d8f000ec1d9",
+      "created_at": "2026-09-15T18:59:18.970408+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Can semantic embedding similarity distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard (field_path,type) as a staleness signal?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
+        "spec.json": "95fe42e7359c38d83433a4ca62c624b05e93c90417227126fa5e93022a3ae365",
+        "prereg.md": "2258952559c42b5f00204b02d05602cb923f45b55ab6693242aa74df99c94f79",
+        "freeze.json": "80096a34a0ad310950893c027192d9c0df9580f60145f764def276658938180e",
+        "result.json": "700beb5c18a9ae965135512ce1a8fc29ae2281a0d7154b49f416cf7d4348ba74",
+        "report.md": "c58b486bb7564ec6fee7461c174a085458247adecbdb5208bb474c52ec198b57",
+        "provenance.json": "86009bd07a2ff0fb6013e055c5725546e743b7d272a652099fffb800f4fb4e3c",
+        "audit.json": "4d7bc18f3778064d561a2fc61e4d63263ff55d32f590081bf5961c5c4795aaa6",
+        "verdict.json": "4e5e1eb65b980c6b0c75ec944347d73b9c8af00d5348b19bb2a8b1690a9b4e8a",
+        "handoff.json": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -1014,6 +1039,33 @@
         "audit.json": "4ac7dd2fe071b513ad3da4d5c233d982074ec23063a55e831b69dacc0e07d318",
         "verdict.json": "ecd7d4e46841f1dbf764288f124cce43bb7f3dea360bb3ea19b26f986e2a5bc3",
         "handoff.json": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+      }
+    },
+    "EXP-INTEL-34956989900": {
+      "lane": "intel",
+      "request_id": "c56194f3d1b8db38e07b8aa3",
+      "created_at": "2026-09-15T10:15:47.435185+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
+        "spec.json": "ad5ddba54e9175021f27dcd89298e3b730c3788c14fef61d31812fc20980be85",
+        "prereg.md": "aef481cd11816dcad39ece1254c60448c705106bc628af0c18d1ea52c0921c7b",
+        "freeze.json": "487ba761be62de278854cfaa275499cf45d8cfaea2bc08394e07a01b18633070",
+        "result.json": "a5733e16b7acb465a4b1486d66c7e59715d3eafaf1afc8c92dcf04a679b27542",
+        "report.md": "9a37df025f8e41aabddeb80b5d181affec23a69ed84b4c9abe8c24880da4c8ae",
+        "provenance.json": "36b4f72967f667a7bcd5116b946e14bdd76220d777c03931d972e4c6ec01c12e",
+        "audit.json": "6b6a5c15dbea3dcbf55752f07d2f32077f174d735d8d1e474357112d6d5009ca",
+        "verdict.json": "07b5aa8361b9e0797faa677fd998b56bc05422bab7018ccdb2e17ea24fd03125",
+        "handoff.json": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
       }
     },
     "EXP-PHYSICS-33528829431": {
