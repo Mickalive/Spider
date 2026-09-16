@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Truncated-first-20 locatable_sample is non-random (header-biased) while denominator elements_with_bbox ~1070-1564 counts all bbox elements; density = count_in_sample_20 / total_bbox underestimates absolute yield and introduces selection bias that varies by page type.",
+      "severity": "high",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json", "result.json validity_notes", "report.md section 6"],
+      "impact": "Ordering differences may be artifact of truncation position, not full interactive density; claim cannot generalize beyond this sampling method."
+    },
+    {
+      "finding": "Small N and single site: 8 measurements dedup to 7 distinct tasks (3 listing, 3 detail, 1 cart with duplicate cart_1 counted twice in producer analysis). Cart within-type variance undefined (n=1 distinct). All data from one Magento shopping site; no cross-site identification.",
+      "severity": "high",
+      "evidence_refs": ["result.json observations[0-2]", "provenance.json datasets[0]", "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json"],
+      "impact": "Low power; cart ordering driven by single page; no generalization to C-CROSSSITE or C-WEB-DYNAMICS."
+    },
+    {
+      "finding": "Cart duplicate counted twice (n=8 in code) vs distinct n=7: producer load_tasks() does not dedupe task_id cart_1. Means unchanged (identical duplicate) but pairwise sample contribution and per-type N are overstated.",
+      "severity": "low",
+      "evidence_refs": ["research/experiments/EXP-INTEL-35112013458/analyze.py:load_tasks", "null_model_results.json parent_baselines"],
+      "impact": "Does not change orderings (recomputed with dedup: identical DEF-FULL-MAP cart>listing>detail and DEF-FORM-ONLY listing>cart>detail), but violates prereg dedup guidance."
+    },
+    {
+      "finding": "Random ROLE_MAP null is non-deterministic despite frozen seed=42: analyze.py iterates over set raw_roles_in_data (hash-random order) when assigning p=0.5 per role. Re-runs vary null mean by ~0.02 (producer reported 0.5275/0.702 top; auditor re-run direct 0.517/0.696, rerun via analyze.py 0.5425/0.712). Verdict stable but exact reproducibility requires sorted iteration.",
+      "severity": "medium",
+      "evidence_refs": ["research/experiments/EXP-INTEL-35112013458/analyze.py:test_random_null", "result.json metrics.null_mean_pairwise_agreement", "null_model_results.json test1_random_null"],
+      "impact": "Does not overturn falsification (all variants >>0.3), but violates measurement_validity promise of frozen seed reproducibility."
+    },
+    {
+      "finding": "Null p95 metric is degenerate: null pairwise agreement distribution is binary (0/1 per pair), so 95th percentile is 1.0 whenever mean >0.05. Comparing observed 0.3 to p95=1.0 is uninformative; direct null mean comparison is the informative test. Producer correctly reports both and fails cond1 on both.",
+      "severity": "medium",
+      "evidence_refs": ["research/experiments/EXP-INTEL-35112013458/analyze.py:160-166", "result.json metrics.null_p95_pairwise_agreement"],
+      "impact": "Decision rule requires observed >p95; with binary pairs this can never be satisfied when null mean >0.5, making cond1 stricter than intended, but producer fails cond1 on mean alone already."
+    },
+    {
+      "finding": "Null null-model framing mismatch: observed 0.3 is agreement across 5 intentionally diverse definitions (3/10 pairs); null tests agreement across 1000 random role subsets (499500 pairs). High null mean 0.52 reflects that most roles (div, span etc.) are weakly differential and random subsets cluster on cart>detail>listing (70% top), not uniform 1/6=0.167 expected in prereg. Producer correctly notes surprise and does not claim uniform null.",
+      "severity": "medium",
+      "evidence_refs": ["prereg.md 6.1 Expected under null 0.167", "result.json observations[6-7]", "null_model_results.json test1_random_null.ordering_distribution"],
+      "impact": "Confirms falsification is robust: even under more diverse random null (p=0.5 independent inclusion, more variable than real definitions), observed is below null, so significance claim fails."
+    },
+    {
+      "finding": "Single-role degeneracy and sparsity: 3 degenerate (link=0, menuitem=0, tab=0) excluded; remaining sparse roles (input=5 total ~0-1 per page, combobox=8) produce orderings from 1-element granularity and integer noise, not stable signals. button-only and form-only both reproduce DEF-FORM-ONLY ordering, violating H2 expectation, but sample too sparse to distinguish single-role driver vs truncation artifact.",
+      "severity": "medium",
+      "evidence_refs": ["result.json metrics.single_role_any_matches_parent", "null_model_results.json test2_single_role.per_role", "result.json observations[3-4]"],
+      "impact": "Supports FALSIFIES for cond2, but cannot establish whether listing>cart>detail is truly driven by button/form or by truncation."
+    },
+    {
+      "finding": "Isolated a->link test is tautologically sufficient in this sample because menuitem=0 and tab=0 counts: DEF-ISOLATED-A-LINK and DEF-FULL-MAP are identical on counts and means (both cart 0.00561, listing 0.00513, detail 0.00428). Producer correctly notes menuitem/tab contribution untestable here.",
+      "severity": "low",
+      "evidence_refs": ["result.json observations[4-5]", "null_model_results.json test3_isolated_a_link", "result.json unresolved[2]"],
+      "impact": "Isolation claim is bounded to this truncated sample; does not demonstrate that menuitem/tab are never relevant on other sites/samples."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "DEF-FORM-ONLY ordering (product_listing>cart>detail)",
+      "expected": "product_listing>cart>detail",
+      "observed": "product_listing>cart>detail",
+      "pass": true,
+      "evidence_refs": ["null_model_results.json parent_baselines.DEF_FORM_ONLY_ordering", "result.json controls.baseline_def_form_only"],
+      "notes": "Recomputed with and without cart dedup: identical ordering. Means listing 0.00385, cart 0.00280, detail 0.00171 match producer."
+    },
+    {
+      "baseline_id": "DEF-FULL-MAP ordering (cart>product_listing>detail)",
+      "expected": "cart>product_listing>detail",
+      "observed": "cart>product_listing>detail",
+      "pass": true,
+      "evidence_refs": ["null_model_results.json parent_baselines.DEF_FULL_MAP_ordering", "result.json controls.baseline_def_full_map"],
+      "notes": "Recomputed identical. Means cart 0.005607, listing 0.005134, detail 0.00428 match producer. Confirms with_map reversal baseline."
+    },
+    {
+      "baseline_id": "Random ROLE_MAP null distribution (1000 iterations, seed=42)",
+      "expected": "mean <0.3, observed 0.3 >p95, centered ~0.167 if orderings uniform",
+      "observed": "mean 0.5275 (producer), recomputed direct 0.517 (set-order) / 0.5425 (rerun analyze.py), 0.511 (sorted roles); p95=1.0 all variants",
+      "pass": false,
+      "evidence_refs": ["result.json metrics.null_mean_pairwise_agreement", "result.json controls.null_control_random_null", "null_model_results.json test1_random_null"],
+      "notes": "Baseline expectation 0.167 (uniform 6 orderings) falsified by empirical null: dominance of cart>detail>product_listing ~70% drives high agreement. Null control correctly FAILs (pass=false) and supports FALSIFIED-IN-SETTING for cond1."
+    },
+    {
+      "baseline_id": "Single-role definitions (11 roles)",
+      "expected": "No single-role ordering matches 5-definition family; diverse orderings",
+      "observed": "8 non-degenerate produce 3 unique orderings; button-only and form-only both match DEF-FORM-ONLY listing>cart>detail",
+      "pass": false,
+      "evidence_refs": ["result.json metrics.single_role_any_matches_parent", "null_model_results.json test2_single_role"],
+      "notes": "Recomputed identical: button 22, form 19, div 50, span 27, etc. ordering table verified. Baseline fails as producer reports (any_matches_parent=true), correctly failing cond2."
+    },
+    {
+      "baseline_id": "Isolated a->link definition (a->link without menuitem/tab)",
+      "expected": "cart>product_listing>detail matching DEF-FULL-MAP, proving a->link alone drives reversal",
+      "observed": "cart>product_listing>detail identical means to DEF-FULL-MAP; matches_form_only=false",
+      "pass": true,
+      "evidence_refs": ["result.json metrics.isolated_a_link_matches_def_full_map", "null_model_results.json test3_isolated_a_link"],
+      "notes": "Recomputed identical ordering and means (0.005607/0.005134/0.00428). Positive control correctly PASSes. Bounded because menuitem=tab=0 in sample so additivity untestable."
+    }
+  ],
+  "recomputed_metrics": {
+    "null_mean_pairwise_agreement": {
+      "producer_reported": 0.5275,
+      "auditor_recomputed_direct": 0.5171531531531531,
+      "auditor_rerun_analyze_py": 0.5425,
+      "auditor_sorted_roles_direct": 0.5115375375375375,
+      "auditor_sorted_roles_sampled": 0.5029,
+      "unit": "fraction",
+      "notes": "All variants computed over same 8 tasks (cart duplicate counted). Direct = exact pairwise agreement across 1000 null orderings (499500 pairs). Sampled = 10000 random pairs as in analyze.py. Variance ~0.02 due to nondeterministic set iteration; all >> observed 0.3, confirming observed does NOT exceed null mean."
+    },
+    "null_p95_pairwise_agreement": {
+      "producer_reported": 1.0,
+      "auditor_recomputed": 1,
+      "notes": "Binary pair outcomes => p95=1 whenever mean>0.05. Confirmed."
+    },
+    "observed_agreement": {
+      "producer_reported": 0.3,
+      "auditor_verified": 0.3,
+      "notes": "3/10 pairs agreeing across 5-definition family from parent EXP-INTEL-35083033552; not recomputed here, taken as frozen input."
+    },
+    "observed_exceeds_null_mean": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "notes": "0.3 < all null means (0.51-0.54)."
+    },
+    "observed_exceeds_null_p95": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "notes": "0.3 < 1.0."
+    },
+    "null_unique_orderings": {
+      "producer_reported": 5,
+      "auditor_recomputed": 5,
+      "notes": "5 of 6 possible orderings with 3 types appear; cart>detail>product_listing dominates (~70%)."
+    },
+    "null_top_ordering": {
+      "producer_reported": "cart>detail>product_listing",
+      "producer_fraction": 0.702,
+      "auditor_direct_fraction": 0.696,
+      "auditor_rerun_fraction": 0.712,
+      "notes": "Top ordering and dominance confirmed."
+    },
+    "single_role_n_unique_orderings": {
+      "producer_reported": 3,
+      "auditor_recomputed": 3,
+      "notes": "Across 8 non-degenerate roles."
+    },
+    "single_role_n_degenerate": {
+      "producer_reported": 3,
+      "auditor_recomputed": 3,
+      "roles": ["link", "menuitem", "tab"],
+      "notes": "Each 0 elements in truncated sample, flagged degenerate (<2)."
+    },
+    "single_role_any_matches_parent": {
+      "producer_reported": true,
+      "auditor_recomputed": true,
+      "matching_roles": ["button", "form"],
+      "notes": "Both produce product_listing>cart>detail = DEF-FORM-ONLY ordering, violating H2."
+    },
+    "isolated_a_link_matches_def_full_map": {
+      "producer_reported": true,
+      "auditor_recomputed": true,
+      "ordering": ["cart", "product_listing", "detail"],
+      "means": {"cart": 0.005607476635514018, "product_listing": 0.005134861654950757, "detail": 0.004280429875511604},
+      "notes": "Identical to DEF-FULL-MAP on this sample; also computable with deduped n=7 same result."
+    },
+    "isolated_a_link_matches_def_form_only": {
+      "producer_reported": false,
+      "auditor_recomputed": false
+    },
+    "cond1_null_confirms": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "decision_rule": "null_mean<0.3 AND observed>p95"
+    },
+    "cond2_no_single_role_invariant": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "decision_rule": "no single-role matches parent"
+    },
+    "cond3_a_link_matches": {
+      "producer_reported": true,
+      "auditor_recomputed": true
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for this site/sample: On single Magento shopping site, truncated-first-20 locatable_sample (n=7 distinct pages; 3 listing, 3 detail, 1 cart duplicated), the 0.3 pairwise ordering agreement across the 5-definition family does NOT exceed chance (random ROLE_MAP null mean ~0.51-0.54, p95=1.0, observed below null). Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering product_listing>cart>detail, so the metric is not multi-role invariant in this sample. Isolated a->link mapping without menuitem/tab is sufficient to reproduce DEF-FULL-MAP ordering cart>product_listing>detail (identical means) on this sample where menuitem=tab=0, but additivity/generalization untested. No claim supports adopting DEF-FORM-ONLY as canonical yield metric, nor cross-site/full-DOM generalization, nor ordering stability under full enumeration until truncation cap is fixed.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35112013458/result.json",
+    "research/experiments/EXP-INTEL-35112013458/report.md",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json sha256:c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py sha256:ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35112013458/provenance.json",
+    "research/experiments/EXP-INTEL-35112013458/spec.json",
+    "research/experiments/EXP-INTEL-35112013458/prereg.md",
+    "research/experiments/EXP-INTEL-35112013458/freeze.json"
+  ],
+  "unresolved": [
+    "Whether full-DOM enumeration (without first-20 cap) changes null distribution shape, per-role densities, and ordering stability; truncated sample bias cannot be corrected from existing data.",
+    "Whether a->link reversal and button/form driver replicate on non-Magento sites or with different DOM structures; single-site bound.",
+    "Whether menuitem/tab contribute additively when present (0 counts here) — requires sample where those roles appear.",
+    "Interpretation of 0.3: producer notes question may need reframing from 'exceeds random ROLE_MAP chance' to 'stable under constrained definition family' — not resolved by this null.",
+    "Sparse-role orderings (input 5, combobox 8) granularity noise vs true signal; requires larger per-page counts.",
+    "Cart variance undefined (n=1 distinct); robust inference requires more distinct cart/detail/listing pages."
+  ]
+}
