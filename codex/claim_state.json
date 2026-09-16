@@ -1307,6 +1307,16 @@
         "reason": "Decompression-normalization algorithm-equivalence validated for full brotli quality set {4,5,6,7,8} on synthetic proxy (audit.json recomputed_metrics max_abs_diff=0.0, C_ALGORITHM_EQUIVALENCE 0.0 pass true). However, effective brotli diversity is 2 variants (q4 vs q5-8 identical) not 5, so broadening from binary {4,8} to {4,5,6,7,8} is not a materially stronger stress test for 1KB JSON. Claim ceiling bounded to: synthetic Python proxy with mtime=0 deterministic compression, mock OAuth2 4 states with 3-way error collapse, single compressible payload ~1KB, single seed 44 with hash() non-determinism caveat. H3 (compressed <0.35) falsified on /userinfo (0.4329). Critical inherited blocker: real-CDN infrastructure validation remains untested. Do NOT promote to Product Core."
       },
       {
+        "experiment_id": "EXP-INTEL-35137036013",
+        "lane": "intel",
+        "created_at": "2026-09-16T18:51:59.151556+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen decision_rule mandates MEASUREMENT_INVALID because both blocking measurement_validity conditions fail: (1) locatableSample cap still present in MEASURE_JS (line 89, research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py) \u2014 all 7 tasks capped at 20 samples vs 21-82 locatable elements; (2) canonical 3-definition analysis script not committed at any repo path. The experiment's central question (full-DOM enumeration) was untestable: no full-DOM data exists. The 'full' side is the same non-locatable tag-count estimator already ruled invalid (audit V1, EXP-INTEL-35124660457). Proxy C1/C2 values (ordering changed, null exceeds observed) are computed on an inflated estimator (4-7x overcount) and on a null model that is not reproducible from committed artifacts (audit V5). The spec.json falsifier/null_control and decision_rule contain a semantic contradiction on C2 direction (audit V4) that is unresolved but immaterial since measurement validity fails first. The ISOLATED-A-LINK stored bug (byte-identical to DEF-FULL-MAP) is confirmed (audit V9) and corrected a-only ordering_changed=False. Infrastructure failure is not a scientific negative; the FALSIFIED verdict from EXP-INTEL-35112013458 is neither confirmed nor overturned."
+      },
+      {
         "experiment_id": "EXP-RUNTIME-35137033384",
         "lane": "runtime",
         "created_at": "2026-09-16T18:52:00.902236+00:00",
