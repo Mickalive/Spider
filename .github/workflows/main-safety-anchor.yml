@@ -1,0 +1,73 @@
+name: SPIDER Main Safety Anchor
+run-name: Main safety anchor ${{ github.run_id }}
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "13 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spider-main-writer
+  cancel-in-progress: false
+
+jobs:
+  anchor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Preserve monotonic main history
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Always reason from the current remote refs. This workflow never writes
+          # main; it only advances the rescue pointer when main is a descendant of
+          # the previous safe point.
+          git fetch origin \
+            '+refs/heads/main:refs/remotes/origin/main' \
+            '+refs/heads/safety/main-lkg:refs/remotes/origin/safety/main-lkg' \
+            --no-tags || true
+
+          MAIN_SHA=$(git rev-parse refs/remotes/origin/main)
+          SAFE_REF=refs/remotes/origin/safety/main-lkg
+
+          if git show-ref --verify --quiet "$SAFE_REF"; then
+            SAFE_SHA=$(git rev-parse "$SAFE_REF")
+
+            if [[ "$SAFE_SHA" == "$MAIN_SHA" ]]; then
+              echo "SPIDER_MAIN_SAFETY_CURRENT main=$MAIN_SHA safe=$SAFE_SHA"
+              exit 0
+            fi
+
+            if git merge-base --is-ancestor "$SAFE_SHA" "$MAIN_SHA"; then
+              # Non-forced update only. GitHub will reject this if anything moved
+              # the safety branch unexpectedly while this job was running.
+              git push origin "$MAIN_SHA:refs/heads/safety/main-lkg"
+              echo "SPIDER_MAIN_SAFETY_ADVANCED from=$SAFE_SHA to=$MAIN_SHA"
+              exit 0
+            fi
+
+            if git merge-base --is-ancestor "$MAIN_SHA" "$SAFE_SHA"; then
+              echo "::error::MAIN HISTORY REGRESSION DETECTED. main=$MAIN_SHA is behind safety/main-lkg=$SAFE_SHA. Safety anchor preserved; refusing to move it backward."
+              exit 1
+            fi
+
+            echo "::error::MAIN HISTORY DIVERGENCE DETECTED. main=$MAIN_SHA safe=$SAFE_SHA. Safety anchor preserved; refusing to follow divergent history."
+            exit 1
+          fi
+
+          # Bootstrap only if the rescue branch was never created. This is also a
+          # non-forced write and does not alter main.
+          git push origin "$MAIN_SHA:refs/heads/safety/main-lkg"
+          echo "SPIDER_MAIN_SAFETY_BOOTSTRAPPED safe=$MAIN_SHA"
