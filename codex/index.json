@@ -40,7 +40,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "9cf80f63bd0f58287bbbf1526ca3432febca9492",
       "hashes": {
         "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -151,7 +151,7 @@
       "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "c72fbcd7da6a20452c55d684a4e7d32fd615eac1",
       "hashes": {
         "request.json": "e21c8ef54aaa8677b1814e8641e8df61b03358ffa51e94287a5de0599a73a0f9",
@@ -178,7 +178,7 @@
       "decision": "COMPETITION-UNSAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "bd318921b4ff04b7d690608708f66548b1a74aba",
       "hashes": {
         "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
@@ -232,7 +232,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "f48d8baf8331e4a081fffa58aa3ad03e810a85d6",
       "hashes": {
         "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
@@ -341,7 +341,7 @@
       "decision": "COMPETITION-SAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "db32eb7948b01908e422a7ec66d465c6db6581a4",
       "hashes": {
         "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -396,7 +396,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "dca0b76bab7b58b4be4a44eea380e811550330b2",
       "hashes": {
         "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -478,7 +478,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "d4353fcba3d3bb06d0f628cc54d9fbc111243db7",
       "hashes": {
         "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -534,7 +534,7 @@
       "decision": "SCOPE-LIMITED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "6c7df8c31f4a41833ea76f81f4543a4cab56d3ea",
       "hashes": {
         "request.json": "4b53acf9a0f23b2434203d8fa79bebc7409de22a560f47020e98c775c0fd3aa0",
@@ -643,7 +643,7 @@
       "decision": "PARTIAL_VALIDATION",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "a208512f89013a0a104157e793349609fd3427cf",
       "hashes": {
         "request.json": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5",
@@ -751,7 +751,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "22ccea04903ae256d363b8968b3c2a4690ef6057",
       "hashes": {
         "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -861,7 +861,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "8ae9ddc8f2025e7f38632b0eea3c02e62160f6a6",
       "hashes": {
         "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
@@ -888,7 +888,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "be11b0bfedbf5382b271084e52a2a36f44de855b",
       "hashes": {
         "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
@@ -942,7 +942,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "111951aeb5f0c770376457836dc23e17b94e32e1",
       "hashes": {
         "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
@@ -996,7 +996,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "b727aee7b0585da3e3670394fa25c20b54a472f8",
       "hashes": {
         "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
@@ -1023,7 +1023,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "ca57376ba74b4524c92be11f7dd9fc545697f9da",
       "hashes": {
         "request.json": "b21878c4933f8f841b0056fd14377a235c35ed93557756b907d387186ddde530",
@@ -1077,7 +1077,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "00bf4dd51b80ec66e60f11cfee757a4b0a0ace3c",
       "hashes": {
         "request.json": "c48613bd90a76990a0622d94b3ead95384fcfa30d05d9df244baf5de268c24f9",
@@ -1104,7 +1104,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "df9af4b6b730b12fa91816fa5fd592499cb781d6",
       "hashes": {
         "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
@@ -1185,7 +1185,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "968991590c035e9ce5821849d206a7ad2ded493f",
       "hashes": {
         "request.json": "2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
@@ -1239,7 +1239,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "d742b1d9d82f1a59a62ed4297c8ce3fa6972d62b",
       "hashes": {
         "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1322,7 +1322,7 @@
       "decision": "BLOCKED_CLOSE_AND_PIVOT",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "34848357b257338eecf73b88b993195d58629860",
       "hashes": {
         "request.json": "3ba94d499c5c79aa09bf1be2163fdc84d99024e38e48261a67ac852e6b6c64fb",
@@ -1349,7 +1349,7 @@
       "decision": "SUPPORTED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "6c64f47170523c09a57a2b51e5dc5b724118324a",
       "hashes": {
         "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
@@ -1511,7 +1511,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "ca9884ed23d6f4d05199f80d093ccab39a3ea420",
       "hashes": {
         "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1566,7 +1566,7 @@
       "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
       "hashes": {
         "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1837,7 +1837,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "d72132df7f2336b3519a2519d0b3bda6d0d2e14e",
       "hashes": {
         "request.json": "655bcac7a22953c68b62d0edb662ff06b176a7881cc372597730f75286990cab",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -1946,7 +1946,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "636109afec367ad29acb94c1584fa6740c062169",
       "hashes": {
         "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
@@ -2000,7 +2000,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "5a2e3b5ab3b60d164a263a252d635333d95e98f3",
       "hashes": {
         "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
@@ -2054,7 +2054,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "858edf9f6a14693e1c85d059c07365c13e1a2315",
       "hashes": {
         "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2110,7 +2110,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "78a2a667be8f291f6a0871b41d9f4c4baea4ddef",
       "hashes": {
         "request.json": "69878143db1e72811812a43265fed81f84ccfdfc8d2409438562d0bf254aeb8e",
@@ -2137,7 +2137,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "2916a7c97b2c2bc9299fe8644e4914dae54f99e9",
       "hashes": {
         "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
@@ -2191,7 +2191,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "db8595a9f2337b3a16f426a943b0409f2708a3f9",
+      "source_ref_head": "df71e35bc881b3acda18156e2809fd990a5ea73d",
       "source_commit": "57ca23d0c9a481288a3e30b836396e9c0880253f",
       "hashes": {
         "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
@@ -2274,7 +2274,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2328,7 +2328,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "39381a4eda531fd7cf3c24f57e52ad934f040310",
       "hashes": {
         "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
@@ -2409,7 +2409,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2436,7 +2436,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "8310a3a35cd4792a93d6a4d946536af217cce033",
       "hashes": {
         "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
@@ -2463,7 +2463,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2490,7 +2490,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2626,7 +2626,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e5293f9031ff888664212931bd136045c7cf437f",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "source_commit": "a605af55689dd0341a87ed8e07da1e9b1ef5f63e",
       "hashes": {
         "request.json": "e45c4c81142891b5bfdd694e1e08283ac3006a491a63100991b483b59c4523bf",
@@ -2654,7 +2654,7 @@
       "decision": "PROVENANCE_PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "e4601a25a2577203285db8a52685718a3914a92f",
+      "source_ref_head": "ccb62bfee04cb1a13d0ff267ecad8f673f859c68",
       "source_commit": "57efaab4f56233946882021b627ad578524c8174",
       "hashes": {
         "request.json": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05",
@@ -2695,6 +2695,33 @@
         "audit.json": "185c0a59a7570c4179916d1ad080e0e1402912a556d27faa7bd4655fbb590551",
         "verdict.json": "7de35000f0cc961b43a792b303a981eebc8ff6f5bafceb3cacfb6d2a81c96604",
         "handoff.json": "192df394422a2ef2ff38ccfa3acbd833ebcc014dc623080072ecf3eef8926a7b"
+      }
+    },
+    "EXP-GRAPH-35137034388": {
+      "lane": "graph",
+      "request_id": "b65f593d628c6d64bf43391e",
+      "created_at": "2026-09-16T18:52:00.074188+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does field-usage profiling (tracking which fields different client profiles actually access across response samples) provide orthogonal discrimination that structural Jaccard similarity cannot, specifically by separating structural noise (which adds unused fields) from true drift (which removes or changes required fields)?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "source_ref_head": "73cf7767c67ae7847187fecad33aaa22ad09404a",
+      "source_commit": "73cf7767c67ae7847187fecad33aaa22ad09404a",
+      "hashes": {
+        "request.json": "ed47b0039a46ad7d79d3c81b07ab6d0131599ade0fa0fe096d922a28d7ee2998",
+        "spec.json": "793b9920e2a16e23730d5fb397f5ae7f0ceaf63c88148910dfc7de346ea80e2c",
+        "prereg.md": "f9f0474c353324b40d11393fc586e6546c44f478301e899dc85477e81fa34280",
+        "freeze.json": "905c2c27e7e3efdcacecdd06f4640744ab269f76c1a5f5faac0434418d23e2d7",
+        "result.json": "b05deb38a71434832ab2ee36813bb6561cfae82b1ddc65a84853c1a56269c625",
+        "report.md": "71c4ae65c9dcb4140502fce2ba23f3655fbb7726e4133852baa7181c73a3a439",
+        "provenance.json": "ee79326b8f2a02d47517a25429a534352aa3826fb394f79228cf28e8ef2784ef",
+        "audit.json": "c8e01b6ee1580e0e03e5dcefc9abb979275d47389dcfee36708c32a563333a09",
+        "verdict.json": "141ee686099658619167d9be380b8a857792679f3ad580848199ef39ed11eaed",
+        "handoff.json": "b8405bee638eee124ca9d2cc39ec93ae543b8ffde4f2d75c518544f05df427cb"
       }
     },
     "EXP-PHYSICS-35137030850": {
