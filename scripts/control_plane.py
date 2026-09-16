@@ -24,12 +24,13 @@ CONTROL_ROOTS = [
     "research/EXPERIMENT_PACKET.md",
     "config/models.json",
     "SPIDER_CODEX.md",
+    "codex",
 ]
 
-# Codex evidence changes frequently and must be overlaid, but a pure evidence sync
-# must not cause a permanently failing lane to be retried as if its execution
+# Canonical evidence changes frequently and must be overlaid, but a pure evidence
+# sync must not cause a permanently failing lane to be retried as if its execution
 # machinery had changed.
-VOLATILE_CONTROL_ROOTS = {"SPIDER_CODEX.md"}
+VOLATILE_CONTROL_ROOTS = {"SPIDER_CODEX.md", "codex"}
 
 
 def run(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -61,8 +62,8 @@ def blob(root: Path, ref: str, path: str) -> bytes:
 def control_revision(root: Path, ref: str) -> str:
     """Content fingerprint of operational control files at ref.
 
-    This intentionally excludes the generated Codex body: new evidence should not
-    reset a nonretryable-failure circuit breaker, while any script/workflow/agent/
+    Generated canonical evidence is excluded: new evidence should not reset a
+    nonretryable-failure circuit breaker, while any script/workflow/agent/
     contract/config change should.
     """
     h = hashlib.sha256()
