@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/nemotron-3-ultra-free",
+  "attempt": 2,
+  "exit_code": 1,
+  "category": "substantive",
+  "github_run_id": "35137036013",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-16T19:36:51.937219+00:00"
+}
