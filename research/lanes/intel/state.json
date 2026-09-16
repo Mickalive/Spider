@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-34956989900",
-  "last_experiment_id": "EXP-INTEL-34782350557",
-  "last_verdict": "INCONCLUSIVE",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-34956989900",
+  "last_verdict": "FALSIFIED-IN-SETTING",
   "continue_immediately": false,
-  "next_question": "Can element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+  "next_question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
   "promotion_ready": false,
-  "consecutive_failures": 5,
-  "updated_at": "2026-09-16T00:34:12.346283+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-16T05:15:07.177412+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
 }
