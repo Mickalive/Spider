@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35137030850",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a fully-ambiguous content mapping (all 3 states share 1 content hash, eliminating partial state discrimination) with stochastic branching FSM yield conditional PMI > 0.05 bits at K=3, resolving whether the residual 0.226 bits from EXP-PHYSICS-35137030850 reflects genuine predictive dynamics beyond aliasing or is entirely explained by partial state discrimination?",
+  "why_next": "EXP-PHYSICS-35137030850 demonstrates BC PMI=0.226 bits persists with many-to-one content mapping (S0/S1 share hash, S2 unique), but audit V4 identifies a critical confound: the 2-hash many-to-one condition still permits partial state discrimination (S2 isolated from {S0,S1}), so the residual PMI cannot distinguish genuine predictive dynamics from partial aliasing. A fully-ambiguous (1-hash) condition where ALL states share the same content hash would eliminate partial discrimination entirely. If PMI>0 persists with 1 hash, it demonstrates genuine response-context dynamics. If PMI→0, the signal was entirely from partial state discrimination. This is the minimal next experiment to resolve the dominant unknown. It is low-cost (same FSM, only content mapping changes) and directly resolves V4. After this, the Physics lane should pivot to production SPA infrastructure where the synthetic-to-real gap is the dominant bottleneck.",
+  "carry_forward": {
+    "established": [
+      "BC PMI persists with many-to-one content mapping: 0.226 bits (Bonferroni p=0.0 < 0.0125, H=1.533 bits) on 3-state stochastic branching FSM where S0 and S1 share content hash (2 unique hashes) and S2 is unique. Content-state aliasing is a significant (54% reduction from unique-content 0.493 bits) but not sole source of PMI.",
+      "Bias-corrected MI estimator validated on stochastic branching FSM: positive control (content-shuffled BC PMI=0.002 ≈ 0 on H>0 strata) and null control (shuffled labels BC mean=0.0, std=0.0068) both pass. Finite-sample bias ~0.05 bits (perm_mean for MTO K3=0.052) correctly removed by BC correction.",
+      "Stochastic branching FSM eliminates ceiling: H(S_next|URL,H_K=3)=1.533 bits (MTO) / 1.537 bits (UNIQ), both >> 0.2 threshold. Session-direction stochasticity (p_left=0.7, p_right=0.3) creates genuine non-determinism verified by transition probability estimates.",
+      "Determinism check passes with step grouping on both conditions: P(Response_hash|FSM_state,session,step)=1.0 (MTO 571 groups, UNIQ 582 groups, 0 violations). Content is deterministic per (state, session, step) as designed.",
+      "Unique-content baseline within-experiment: BC PMI=0.493 bits at K=3 with identical FSM/sessions, 3 unique hashes. The 0.268-bit difference quantifies aliasing contribution."
+    ],
+    "rejected": [
+      "Content-state aliasing as sole source of PMI is rejected: many-to-one BC PMI=0.226 > 0 (not ≈ 0), demonstrating PMI persists when content is ambiguous for 2 of 3 states. Frozen falsifier clause 2 ('aliasing was sole source') is not supported by the evidence.",
+      "The frozen rule's FALSIFIED-IN-SETTING verdict is arithmetically correct (C3: diff -0.268 < -0.1) but the interpretation 'PMI vanishes with many-to-one mapping' is not justified — the evidence shows 45.8% of unique-content signal survives."
+    ],
+    "unknown": [
+      "Whether the residual 0.226 bits reflects genuine response-context dynamics (structural information in ambiguous content about transition probabilities) or entirely from partial state discrimination (S2 unique hash isolates S2 from {S0,S1}). Requires fully-ambiguous 1-hash condition.",
+      "Whether PMI>0 would persist with fully-ambiguous content mapping (all 3 states share 1 hash, 0 partial discrimination). This is the critical test to resolve V4.",
+      "Whether the 54% PMI reduction from unique-to-many-to-one generalizes to other FSM topologies, state counts (5, 10 states), and transition structures (Markov, hidden state).",
+      "Whether the PMI pipeline detects similar structure on production SPAs with stochastic transitions, client-side rendering, auth-dependent content, and external data feeds (synthetic-to-real gap)."
+    ],
+    "do_not_assume": [
+      "Do not assume the FALSIFIED-IN-SETTING verdict means PMI=0 — the evidence shows PMI>0 persists (0.226 bits, p_bonf=0.0). The frozen rule's C3 threshold (diff > -0.1) triggers on significant-but-not-sole aliasing, not on absence of signal.",
+      "Do not interpret residual 0.226 bits as validated evidence for 'genuine predictive dynamics beyond aliasing' — partial discrimination confound (audit V4) means the signal could be entirely from S2 isolation. The 1-hash test is required.",
+      "Do not generalize beyond this synthetic 3-state stochastic branching FSM with hash-based SHA-256 observation on locally-hosted Express server. Production SPAs have client-side rendering, auth-dependent content, stochastic external data, and richer DOM/accessibility representations.",
+      "Do not assume the PMI pipeline is validated for production use — all tests are synthetic with known structure; no experiment has demonstrated PMI detection on genuinely stochastic real-web transitions.",
+      "Do not assume the C3 threshold (diff > -0.1) is scientifically meaningful as a falsifier — audit V3 identifies it as conceptually misaligned with the 'sole source' falsifier clause in spec.json falsifier clause 2.",
+      "Do not assume action-sequence non-identity across conditions (audit V9: RNG advances sequentially, so action sequences differ between MTO and UNIQ despite identical session_directions) biases the difference estimate materially — both conditions have 2000 transitions and stochastic noise unlikely to shift 0.268-bit difference.",
+      "Do not treat this experiment as closing C-WEB-DYNAMICS — the hypothesis concerns real Web dynamics and remains untested on production SPAs with stochastic transitions, client-side rendering, auth-dependent content, or external data feeds."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-35130680344/handoff.json (parent: MEASUREMENT_INVALID, V10 content-state aliasing concern, recommended many-to-one test)",
+    "research/experiments/EXP-PHYSICS-35137030850/spec.json (frozen design: many-to-one vs unique-content, 7-criteria decision_rule, C3 threshold)",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json (producer: BC_PMI_MTO_K3=0.226, BC_PMI_UNIQ_K3=0.493, diff=-0.268, controls pass)",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json (REVISE, V3 C3 misalignment, V4 partial discrimination confound, all metrics recomputed match)",
+    "research/experiments/EXP-PHYSICS-35137030850/raw_result.json (per-stratum PMI, cardinality, conditional entropy, controls)",
+    "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py (frozen analysis pipeline, seed=42, stochastic branching FSM)",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35137030850/result.json:metrics.BC_PMI_MTO_K3=0.225711, BC_PMI_UNIQ_K3=0.493481, BC_PMI_diff_K3=-0.26777, perm_p_bonf_MTO_K3=0.0, H_Snext_given_URL_HK3_MTO=1.533265",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json:status=REVISE, validity_findings V3 (C3 misalignment high), V4 (partial discrimination high), recomputed_metrics BC_PMI_MTO_K3=0.225711 match",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json:claim_ceiling (partial discrimination, not emergent dynamics; 0.226 bits persists with many-to-one; 54% reduction quantifies aliasing contribution)",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json:controls positive_control_BC_PMI_h0=0.001926 pass, null_control_bc_shuffled_pmi_mean=0.0 pass, determinism_accuracy_MTO=1.0 pass",
+    "research/experiments/EXP-PHYSICS-35137030850/raw_result.json:pmi_results.mto.3.bc_pmi=0.225711, obs_pmi=0.27813, perm_mean=0.052419; raw_result.json:mto_unique_hashes=[422fe454bcee4033, 1d676009ad2c017a]",
+    "research/experiments/EXP-PHYSICS-35130680344/handoff.json:carry_forward unknown (PMI with many-to-one mapping), recommended_action (non-deterministic branching FSM, many-to-one content)",
+    "codex/claim_state.json:C-WEB-DYNAMICS 30 prior events across physics/frontier lanes, status HYPOTHESIS"
+  ],
+  "recommended_action": "Design and execute a fully-ambiguous content mapping experiment: same 3-state stochastic branching FSM (seed=42, p=0.7/0.3, 200 trajectories x 10 steps), but ALL 3 states share 1 content hash (1 unique hash, 0 partial discrimination). Frozen decision_rule: if BC PMI at K=3 > 0.05 with Bonferroni p < 0.0125 → SURVIVES (genuine predictive dynamics); if BC PMI ≤ 0.05 → FALSIFIED-IN-SETTING (signal was entirely from partial discrimination). This resolves audit V4 (partial discrimination confound) and the dominant unknown from EXP-PHYSICS-35137030850. After this experiment, regardless of outcome, the Physics lane should pivot to production SPA infrastructure where the synthetic-to-real gap is the dominant bottleneck — do NOT continue locally-hosted synthetic FSM experiments beyond this point."
+}

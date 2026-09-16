@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35132898840",
+  "lane": "product",
+  "github_run_id": 35132898840,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "package": "spider-web-inheritance 0.1.0",
+    "git_commit": "2e607b7a1be1407690174d4691bc0bf0e8d1c5e1",
+    "git_description": "R2 product: execution base EXP-PRODUCT-35132898840"
+  },
+  "commits": {
+    "kernel_py": "30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e",
+    "models_py": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d",
+    "test_kernel_py": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0",
+    "run_experiment_py": "86344473b27adc95b5ebde48dcbf5f1f46e5e58ee1b618513e841a4162a4648d",
+    "experiment_results_json": "74842a3c36f8d50a80cbf287d3825988d3a70c96b4b7ebb67fbbb668ee08427",
+    "head_before_experiment": "2e607b7a1be1407690174d4691bc0bf0e8d1c5e1"
+  },
+  "code_paths": {
+    "kernel.sha256": "30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e",
+    "models.sha256": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d",
+    "kernel_py_contains": [
+      "_is_protocol_only_prefix:347-368",
+      "_validate_prefix_boundary:370-378",
+      "_find_common_prefix_suffix:380-421",
+      "_collect_leaf_paths:424-440",
+      "_get_value_at_path:443-454",
+      "_set_template_value:457-472",
+      "_field_path_to_slot_name:475-484",
+      "_compute_jaccard:487-495",
+      "_compute_structure_similarity:498-505",
+      "_check_constant_value_anchor:508-513",
+      "_is_metadata_path:516-518",
+      "_is_protocol_only_prefix:521-539",
+      "_METADATA_PATHS:516",
+      "distill_parameterized:542-619"
+    ]
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35130681515",
+    "path": "research/experiments/EXP-PRODUCT-35130681515/handoff.json",
+    "sha256": "28defd31b31a7d340a5cd2905a10ce81d8d05f9229f34ed90cb5d6248362229"
+  },
+  "parent_evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35130681515/result.json: metrics decision_rule_passed=true 10/10, controls all passed",
+    "research/experiments/EXP-PRODUCT-35130681515/audit.json: status=PASS producer_claim_supported=true",
+    "research/experiments/EXP-PRODUCT-35130681515/handoff.json: carry_forward established/rejected/unknown/do_not_assume",
+    "src/spider/kernel.py sha256=8aed6377c31629350fc1522d3decb9e41cf49211c72e26bc51bf1c223b040dbb: _is_protocol_only_prefix, distill_parameterized"
+  ],
+  "data_sources": {
+    "training_observations": "P1_TRAINING: 5 intents with 3-5 training observations each",
+    "unseen_values": "P1_UNSEEN: 3 unseen values per parameterized intent",
+    "url_corpus": "52 curated URLs from public datasets and web research, spanning protocol-only (10), minimal-path (4), and full-path (38) categories",
+    "live_traffic_reference": "Based on Cloudflare Radar and URLPattern API research indicating most real API traffic uses URLs with content paths"
+  },
+  "commands": [
+    "python3 research/experiments/EXP-PRODUCT-35132898840/run_experiment.py",
+    "python3 -m unittest tests.test_kernel -v",
+    "pip install -e ."
+  ],
+  "dependencies": [
+    "src/spider/kernel.py (Fix1+Fix2+Fix3 restored)",
+    "src/spider/models.py (slot_prefixes field added)",
+    "src/spider/registry.py (unchanged)",
+    "src/spider/__init__.py (unchanged)"
+  ],
+  "methodology": "Deterministic synthetic test with zero model/network/browser calls. Mechanism count comparison uses identical task sets for parameterized and literal baselines. Protocol-only prevalence measured on curated URL corpus from public datasets and web research. Token cost estimation uses conservative model pricing documentation bounds.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "browser_calls": 0,
+  "total_operations": 20
+}

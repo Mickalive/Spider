@@ -1,0 +1,20 @@
+{
+  "base_sha": "0a99476d7e309c26ebb50eff834e19dc764dfe9d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T18:52:00.281693+00:00",
+  "experiment_id": "EXP-PHYSICS-35137030850",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a non-deterministic branching FSM with session-dependent transitions and noisy/many-to-one content mapping (where response uniquely identifies state for only a subset of states) yield conditional PMI > 0.05 at K=3, and can a positive control that randomizes state\u2192content mapping (not session assignment) correctly diagnose the pipeline?",
+  "lane": "physics",
+  "origin_github_run_id": "35137030850",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35130680344",
+    "path": "research/experiments/EXP-PHYSICS-35130680344/handoff.json",
+    "sha256": "1b3cedeede615c4c67b8437fb14e4a872718b022ff6cb5d821090156e05de800"
+  },
+  "reason": "pulse",
+  "request_hash": "8a7f95a9cf1433d7753dff34d6090d0f1141ee0f2777de9ec92c68b78e18b016",
+  "request_id": "996129ef3b537727dafdc5d0",
+  "schema_version": 1
+}

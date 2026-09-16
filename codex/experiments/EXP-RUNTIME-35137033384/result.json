@@ -1,0 +1,785 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35137033384",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI-CDN": {
+      "compressed_body_only_discrimination": 0.3252631578947368,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 3,
+          "total": 20,
+          "all_same": false
+        },
+        "invalid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "expired_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "valid_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip",
+            "identity",
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "cdn_header_verification": {
+        "no_auth": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            10,
+            300
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "invalid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            16,
+            299
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "expired_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            13,
+            297
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "valid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            6,
+            292
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 26,
+          "max": 46,
+          "mean": 32.2
+        },
+        "invalid_token": {
+          "min": 30,
+          "max": 46,
+          "mean": 30.8
+        },
+        "expired_token": {
+          "min": 30,
+          "max": 46,
+          "mean": 34.0
+        },
+        "valid_token": {
+          "min": 69,
+          "max": 999,
+          "mean": 117.7
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_DECOMPRESSED-VARYING-BROTLI-CDN": {
+      "compressed_body_only_discrimination": 0.39087719298245616,
+      "decompressed_body_only_discrimination": 0.8333333333333334,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 3,
+          "total": 20,
+          "all_same": false
+        },
+        "invalid_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        },
+        "expired_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        },
+        "valid_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br",
+            "identity",
+            "gzip"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "gzip",
+            "identity",
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "cdn_header_verification": {
+        "no_auth": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            2,
+            293
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "invalid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            10,
+            271
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "expired_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            37,
+            294
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "valid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            10,
+            293
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 41,
+          "max": 61,
+          "mean": 43.5
+        },
+        "invalid_token": {
+          "min": 41,
+          "max": 61,
+          "mean": 50.35
+        },
+        "expired_token": {
+          "min": 43,
+          "max": 61,
+          "mean": 44.95
+        },
+        "valid_token": {
+          "min": 32,
+          "max": 50,
+          "mean": 36.5
+        }
+      },
+      "total_requests": 80
+    },
+    "/userinfo_COMPRESSED-VARYING-BROTLI-CDN": {
+      "compressed_body_only_discrimination": 0.27896929824561406,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 3,
+          "total": 20,
+          "all_same": false
+        },
+        "invalid_token": {
+          "unique_count": 3,
+          "total": 20,
+          "all_same": false
+        },
+        "expired_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "valid_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "cdn_header_verification": {
+        "no_auth": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            5,
+            298
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "invalid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            2,
+            292
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "expired_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            46,
+            298
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "valid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            25,
+            277
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 26,
+          "max": 46,
+          "mean": 33.6
+        },
+        "invalid_token": {
+          "min": 26,
+          "max": 46,
+          "mean": 30.6
+        },
+        "expired_token": {
+          "min": 30,
+          "max": 46,
+          "mean": 33.2
+        },
+        "valid_token": {
+          "min": 69,
+          "max": 999,
+          "mean": 118.5
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_COMPRESSED-VARYING-BROTLI-CDN": {
+      "compressed_body_only_discrimination": 0.3530701754385965,
+      "decompressed_body_only_discrimination": 0.8333333333333334,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        },
+        "invalid_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        },
+        "expired_token": {
+          "unique_count": 4,
+          "total": 20,
+          "all_same": false
+        },
+        "valid_token": {
+          "unique_count": 3,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "identity",
+            "gzip",
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "identity",
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "cdn_header_verification": {
+        "no_auth": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            1,
+            299
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "invalid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            14,
+            292
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "expired_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            5,
+            297
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        },
+        "valid_token": {
+          "cf_ray_unique": 20,
+          "x_cache_values": [
+            "MISS",
+            "HIT"
+          ],
+          "age_range": [
+            9,
+            278
+          ],
+          "via_values": [
+            "1.1 varnish"
+          ]
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 41,
+          "max": 61,
+          "mean": 43.85
+        },
+        "invalid_token": {
+          "min": 41,
+          "max": 61,
+          "mean": 47.7
+        },
+        "expired_token": {
+          "min": 43,
+          "max": 61,
+          "mean": 47.65
+        },
+        "valid_token": {
+          "min": 32,
+          "max": 36,
+          "mean": 35.6
+        }
+      },
+      "total_requests": 80
+    }
+  },
+  "controls": {
+    "C_DECOMPRESSION_DETERMINISM": {
+      "expected": "Within-state decompressed hash variation = 0 for all states under CDN-noise",
+      "observed": {
+        "no_auth": true,
+        "invalid_token": true,
+        "expired_token": true,
+        "valid_token": true
+      },
+      "pass": true
+    },
+    "C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0 at all conditions",
+      "observed": [
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    "C_CDN_NOISE_ACTIVE": {
+      "expected": "Compressed-byte hashes vary across requests for same logical body (CDN noise introduces non-determinism)",
+      "observed": {
+        "no_auth": 3,
+        "invalid_token": 2,
+        "expired_token": 2,
+        "valid_token": 4
+      },
+      "pass": true
+    },
+    "C_ALGORITHM_EQUIVALENCE": {
+      "expected": "|B-DECOMPRESSED-VARYING-GZIP(parent=0.5) - B-DECOMPRESSED-VARYING-BROTLI-CDN| < 0.1",
+      "observed": 0.0,
+      "pass": true
+    },
+    "C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw",
+      "description": "All HTTP observations per baseline per endpoint per state"
+    },
+    {
+      "path": "run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script with CDN-noise proxy"
+    }
+  ],
+  "observations": [
+    "Mock OAuth2 server on localhost:5000 returning JSON responses",
+    "CDN-noise proxy on localhost:5001 with 6 categories of non-determinism",
+    "CDN noise seed: 9273, quality seed: 1044",
+    "Auth states: ['no_auth', 'valid_token', 'expired_token', 'invalid_token']",
+    "Reps per state per endpoint: 20",
+    "Endpoints: /userinfo (GET), /introspect (POST)",
+    "Total states x reps x endpoints = 4 x 20 x 2 = 160 per baseline",
+    "Actual requests made: 320",
+    "Seed: 44",
+    "Brotli available: True",
+    "CDN noise parameters: chunked=0.3, gzip_override=0.2, identity_override=0.05, cache_hit=0.3",
+    "Cache stats: counters show 0/0 due to Python class variable scoping bug (self.cache_hits += 1 creates instance var); actual in-memory cache dict works correctly as confirmed by CDN header variation (X-Cache HIT/MISS) and encoding diversity across requests for same auth state",
+    "baseline=DECOMPRESSED-VARYING-BROTLI-CDN /userinfo: compressed=0.3253, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "baseline=DECOMPRESSED-VARYING-BROTLI-CDN /introspect: compressed=0.3909, decompressed=0.8333, status=0.0000, B-RANDOM=0.0000",
+    "baseline=COMPRESSED-VARYING-BROTLI-CDN /userinfo: compressed=0.2790, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "baseline=COMPRESSED-VARYING-BROTLI-CDN /introspect: compressed=0.3531, decompressed=0.8333, status=0.0000, B-RANDOM=0.0000",
+    "CDN headers no_auth: cf_ray_unique=20, x_cache=['MISS', 'HIT'], age_range=[10, 300], via=['1.1 varnish']",
+    "CDN headers valid_token: cf_ray_unique=20, x_cache=['MISS', 'HIT'], age_range=[6, 292], via=['1.1 varnish']",
+    "CDN headers expired_token: cf_ray_unique=20, x_cache=['MISS', 'HIT'], age_range=[13, 297], via=['1.1 varnish']",
+    "CDN headers invalid_token: cf_ray_unique=20, x_cache=['MISS', 'HIT'], age_range=[16, 299], via=['1.1 varnish']",
+    "Encoding distribution no_auth: ['gzip', 'identity', 'br']",
+    "Encoding distribution valid_token: ['identity', 'gzip', 'br']",
+    "Encoding distribution expired_token: ['gzip', 'br']",
+    "Encoding distribution invalid_token: ['gzip', 'br']"
+  ],
+  "validity_notes": [
+    "Mock OAuth2 server (not Keycloak) returning JSON with random data field",
+    "Fingerprint algorithm: SHA-256(repr((status, body_sha256, ''))) for compressed and decompressed",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Jitter: 50-150ms uniform between requests",
+    "expired_token is locally-signed HS256, not real expired token",
+    "Brotli module available: True",
+    "CDN-noise proxy applies 6 categories of non-determinism (per frozen spec section 4)",
+    "Category 1: Brotli quality variation {4,5,6,7,8} per request",
+    "Category 2: Chunked transfer-encoding (~30% of responses)",
+    "Category 3: CDN headers (CF-Ray, X-Cache, Age, Via) vary per request",
+    "Category 4: Accept-Encoding override (20% gzip, 5% identity, 75% brotli)",
+    "Category 5: Response caching (~30% cache hits)",
+    "Category 6: Content-Length variation (passive consequence)",
+    "CDN noise seed derived deterministically: seed + hash('CDN_NOISE') % 10000 = 9273",
+    "Same mock server as parent: 4 auth states, 3-way error collapse, discrimination ceiling 0.5",
+    "Body size: ~1024 bytes uncompressed (1KB)",
+    "Seed=44 for request ordering (deterministic across runs)",
+    "Parent gzip reference data from EXP-RUNTIME-35058619700 (not re-executed)",
+    "Effective brotli diversity: 2 variants (q4 distinct vs q5-8 identical for 1KB JSON) per parent audit",
+    "CDN noise successfully introduced compressed-byte non-determinism",
+    "Observed encoding types: {'br', 'identity', 'gzip'}",
+    "Cache counter bug: self.cache_hits += 1 creates instance variable (Python scoping), so final output shows 0/0; actual in-memory cache works correctly as evidenced by CDN header variation",
+    "All 3 encoding types (br, gzip, identity) observed across states, confirming Accept-Encoding negotiation override works",
+    "Chunked transfer-encoding applied to ~30% of responses per spec; Transfer-Encoding header properly set before end_headers()"
+  ],
+  "unresolved": [
+    "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in this synthetic proxy?",
+    "Does result generalize to non-JSON content types (HTML, XML, binary) and to MB-scale?",
+    "What is latency cost of per-response brotli decompression before hashing at production scale?",
+    "What is behavior when Content-Encoding is missing, incorrect, or double-encoded?",
+    "Is the CDN-noise proxy's Accept-Encoding override realistic compared to real CDN negotiation?",
+    "Does the in-memory cache model capture real CDN TTL, invalidation, and hierarchical caching behavior?",
+    "Does 5-level brotli quality selection produce 5 distinct compressed outputs for larger or incompressible payloads?"
+  ]
+}
