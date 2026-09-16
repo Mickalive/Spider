@@ -311,6 +311,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No confirmatory claim supported as preregistered. Frozen decision_rule triggers MEASUREMENT_INVALID on two independent clauses: (1) C2 fails \u2014 non-trivial BC PMI=0.766 bits > 0.05 threshold but Bonferroni p=0.076 (raw 0.019) > 0.0125; (2) C4 fails \u2014 session-randomized positive control BC PMI=0.640 not \u22480 by construction (audit V1: NT response deterministic per state with 3 hashes independent of session, so session randomization cannot break R\u2192S mapping). Determinism check passes (both conditions accuracy=1.0 with step grouping, audit V5), ceiling eliminated (H=1.103 bits), null shuffled-label control passes (mean 0.0014 < 3*std=0.264), cardinality passes NT but fails 17/70 TR strata (audit V6). Audit V8 confirms physics identifiability not addressed: NT encoding uniquely determines state (3 hashes for 3 states) so PMI>0 is state alias not emergent dynamics. Descriptive observation preserved: K=1 NT BC PMI=1.035 p=0.0 replicates parent K=1 effect; K=3 NT BC PMI=0.766 is suggestive but unvalidated. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35137030850",
+        "lane": "physics",
+        "created_at": "2026-09-16T18:52:00.281693+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "c87d8226bdc357b34fddeacb1e913ebb5d068a52",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on C3: many-to-one BC PMI (0.226 bits) < unique-content BC PMI (0.493 bits) - 0.1 = 0.393. The 0.268-bit drop (54%) demonstrates content-state aliasing is a significant source of prior PMI. However, the audit V3 correctly identifies this as threshold misalignment \u2014 the experiment shows PMI>0 persists with many-to-one mapping (0.226 bits, p_bonf=0.0 < 0.0125, well above 0.05 threshold), not PMI=0. The product_consequence_negative ('locally-hosted testable path for C-WEB-DYNAMICS across ALL observation levels is closed') is not justified as written: PMI>0 persists even with many-to-one mapping. However, the audit V4 identifies a critical partial discrimination confound: the many-to-one condition still has 2 unique hashes (S2 unique, S0/S1 shared), so the residual 0.226 bits cannot distinguish genuine predictive dynamics from partial state aliasing. The claim remains HYPOTHESIS: the experiment is descriptive and inconclusive for the broader claim. No confirmatory evidence accumulated; the frozen gate fails; the partial discrimination confound prevents attribution of the residual PMI to genuine dynamics."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1270,14 +1280,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35130680344",
+      "experiment_id": "EXP-PHYSICS-35137030850",
       "lane": "physics",
-      "created_at": "2026-09-16T17:50:56.073390+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
+      "created_at": "2026-09-16T18:52:00.281693+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "c87d8226bdc357b34fddeacb1e913ebb5d068a52",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No confirmatory claim supported as preregistered. Frozen decision_rule triggers MEASUREMENT_INVALID on two independent clauses: (1) C2 fails \u2014 non-trivial BC PMI=0.766 bits > 0.05 threshold but Bonferroni p=0.076 (raw 0.019) > 0.0125; (2) C4 fails \u2014 session-randomized positive control BC PMI=0.640 not \u22480 by construction (audit V1: NT response deterministic per state with 3 hashes independent of session, so session randomization cannot break R\u2192S mapping). Determinism check passes (both conditions accuracy=1.0 with step grouping, audit V5), ceiling eliminated (H=1.103 bits), null shuffled-label control passes (mean 0.0014 < 3*std=0.264), cardinality passes NT but fails 17/70 TR strata (audit V6). Audit V8 confirms physics identifiability not addressed: NT encoding uniquely determines state (3 hashes for 3 states) so PMI>0 is state alias not emergent dynamics. Descriptive observation preserved: K=1 NT BC PMI=1.035 p=0.0 replicates parent K=1 effect; K=3 NT BC PMI=0.766 is suggestive but unvalidated. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment."
+      "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on C3: many-to-one BC PMI (0.226 bits) < unique-content BC PMI (0.493 bits) - 0.1 = 0.393. The 0.268-bit drop (54%) demonstrates content-state aliasing is a significant source of prior PMI. However, the audit V3 correctly identifies this as threshold misalignment \u2014 the experiment shows PMI>0 persists with many-to-one mapping (0.226 bits, p_bonf=0.0 < 0.0125, well above 0.05 threshold), not PMI=0. The product_consequence_negative ('locally-hosted testable path for C-WEB-DYNAMICS across ALL observation levels is closed') is not justified as written: PMI>0 persists even with many-to-one mapping. However, the audit V4 identifies a critical partial discrimination confound: the many-to-one condition still has 2 unique hashes (S2 unique, S0/S1 shared), so the residual 0.226 bits cannot distinguish genuine predictive dynamics from partial state aliasing. The claim remains HYPOTHESIS: the experiment is descriptive and inconclusive for the broader claim. No confirmatory evidence accumulated; the frozen gate fails; the partial discrimination confound prevents attribution of the residual PMI to genuine dynamics."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35130681515",

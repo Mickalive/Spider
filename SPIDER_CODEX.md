@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **99**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **100**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -108,6 +108,7 @@ Validated experiments: **99**. Coverage gaps: **0**. Quarantined packets: **0**.
 | EXP-PHYSICS-35130680344 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `d35778c4f190` |
 | EXP-GRAPH-35130682058 | graph | REVISE | FALSIFIED-IN-SETTING | C-FRESHNESS | `a605af55689d` |
 | EXP-INTEL-35131994346 | intel | REVISE | PROVENANCE_PARTIAL | C-CROSSSITE, C-LLM-INHERIT | `57efaab4f562` |
+| EXP-PHYSICS-35137030850 | physics | REVISE | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `c87d8226bdc3` |
 | EXP-RUNTIME-35137033384 | runtime | PASS | SURVIVES_CURRENT_TEST — all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality variation, chunked transfer-encoding, CDN headers, Accept-Encoding negotiation, response caching, Content-Length variation). Algorithm-equivalence with gzip holds (|diff| = 0.0 < 0.1). Compressed-byte-only hashing degrades to 0.2789 on /userinfo (< 0.35), confirming H3. Claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. Audit PASS confirms all recomputed metrics match producer (max_abs_diff 0.0). Bounded to: localhost synthetic proxy, 1KB compressible JSON, effective brotli diversity 2 variants (q4 distinct vs q5-8 identical), mock OAuth2 4 states with 3-way error collapse (ceiling 0.5 on /userinfo), seed 44, N=20 per state, chunked decoded by HTTP client before decompression. Do NOT promote to Product Core — real-CDN infrastructure validation remains the critical untested blocker. | C-MEAS-VALID | `3b672238c289` |
 
 ## Latest recorded claim events
@@ -123,4 +124,4 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35130681515 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35130681515 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35130680344 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35137030850 | physics |

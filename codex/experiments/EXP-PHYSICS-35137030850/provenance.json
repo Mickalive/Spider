@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35137030850",
+  "github_run_id": "35137030850",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-16T19:05:00.000000+00:00",
+  "pre_execute_sha": "372e578f2ef98441914521d02849fa9a4878e401",
+  "base_sha": "0a99476d7e309c26ebb50eff834e19dc764dfe9d",
+  "model": "opencode/mimo-v2.5-free",
+  "seed": 42,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3"
+  },
+  "datasets_fixtures": {
+    "content_many_to_one": "Inline JSON: S0/S1 share page_title='Shared Content', S2 unique page_title='Details'",
+    "content_unique": "Inline JSON: S0='Home', S1='Browse', S2='Details' — all unique",
+    "session_directions": "Generated with seed=42, 20 sessions, uniform left/right, used identically for both conditions"
+  },
+  "code_paths": {
+    "experiment_script": "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py",
+    "spec": "research/experiments/EXP-PHYSICS-35137030850/spec.json",
+    "prereg": "research/experiments/EXP-PHYSICS-35137030850/prereg.md",
+    "freeze": "research/experiments/EXP-PHYSICS-35137030850/freeze.json"
+  },
+  "artifacts": {
+    "raw_result": {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/raw_result.json",
+      "sha256": "05db670f44c90b59b0cb993c6c2087e1a33adb53acf7255733d5025b096921cc"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/result.json",
+      "sha256": "b34e770c4e9cc4aac310133904113cb4bdddf0259cebaa3b0a17ae2ba53f266b"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/report.md",
+      "sha256": "106e1453711a5ddc5616a2f68f4dbfe6be0773ffff4d518cfc5f4393f8b341ca"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py",
+      "sha256": "30dffae38c84c8741389d352850e090bdaffe47e5e6f2d551c014e6711a79ab8"
+    },
+    "spec_hash": "2bbce89bdb72f79cfb2ef27e30d840dcb596d0c770c56ff6b9b8f5a1b07aae9f",
+    "prereg_hash": "99ae33775a04cda52bf273a1ec9af445b759ba99f3d7b80d551d02124f1171e6"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-PHYSICS-35130680344",
+    "parent_handoff_sha256": "1b3cedeede615c4c67b8437fb14e4a872718b022ff6cb5d821090156e05de800",
+    "parent_verdict": "MEASUREMENT_INVALID"
+  },
+  "execution_commands": [
+    "pip install numpy",
+    "python3 research/experiments/EXP-PHYSICS-35137030850/run_experiment.py"
+  ],
+  "key_parameters": {
+    "n_trajectories": 200,
+    "steps_per_trajectory": 10,
+    "n_sessions": 20,
+    "n_states": 3,
+    "p_left": 0.7,
+    "p_right": 0.3,
+    "n_permutations": 1000,
+    "bonferroni_comparisons": 4,
+    "k_values": [1, 2, 3]
+  }
+}
