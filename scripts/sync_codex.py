@@ -11,6 +11,7 @@ from pathlib import Path
 from research2_contract import (
     AUDIT_STATUSES,
     CLAIM_STATUSES,
+    DIRECTOR_CLAIM_STATUSES,
     LANES,
     PACKET_FILES,
     RESULT_OUTCOMES,
@@ -53,6 +54,11 @@ def require(obj, keys, label):
         raise ValueError(f"{label} missing keys: {missing}")
 
 
+def require_list(obj, key: str, label: str):
+    if not isinstance(obj.get(key), list):
+        raise ValueError(f"{label} {key} must be a list")
+
+
 def identity(obj, exp_id: str, lane: str, label: str):
     require(obj, ["schema_version", "experiment_id", "lane"], label)
     if obj["schema_version"] != 1 or obj["experiment_id"] != exp_id or obj["lane"] != lane:
@@ -76,16 +82,35 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
     if req["request_hash"] != expected_request_hash:
         raise ValueError("request_hash mismatch")
 
-    base_claims = show(str(req.get("base_sha")), "research/claims/registry.json") if req.get("base_sha") else None
-    if base_claims is not None and sha256(base_claims) != req["claim_registry_sha256"]:
+    base_sha = str(req.get("base_sha") or "")
+    if not base_sha or base_sha == "unknown":
+        raise ValueError("request base_sha is not immutable")
+    base_claims = show(base_sha, "research/claims/registry.json")
+    if base_claims is None:
+        raise ValueError("request base_sha cannot be resolved for claim registry validation")
+    if sha256(base_claims) != req["claim_registry_sha256"]:
         raise ValueError("claim_registry_sha256 does not match request base_sha")
+
+    parent = req.get("parent_handoff")
+    if parent is not None:
+        if not isinstance(parent, dict):
+            raise ValueError("parent_handoff must be an object")
+        require(parent, ["experiment_id", "path", "sha256"], "parent_handoff")
+        parent_raw = show(source_commit, parent["path"])
+        if parent_raw is None:
+            raise ValueError("parent_handoff path is not present at child finalization commit")
+        if sha256(parent_raw) != parent["sha256"]:
+            raise ValueError("parent_handoff sha256 mismatch")
+        parent_obj = parse_json(parent_raw, "parent_handoff artifact")
+        if parent_obj.get("experiment_id") != parent["experiment_id"]:
+            raise ValueError("parent_handoff experiment_id mismatch")
 
     spec = parse_json(raw["spec.json"], "spec")
     require(spec, ["experiment_id", "lane", "claim_ids", "question"], "spec")
     if spec["experiment_id"] != exp_id or spec["lane"] != lane:
         raise ValueError("spec identity mismatch")
-    if not isinstance(spec["claim_ids"], list) or any(c not in known_claims for c in spec["claim_ids"]):
-        raise ValueError("spec contains invalid/unknown claim_ids")
+    if not isinstance(spec["claim_ids"], list) or not spec["claim_ids"] or any(c not in known_claims for c in spec["claim_ids"]):
+        raise ValueError("spec contains empty/invalid/unknown claim_ids")
     if not isinstance(spec["question"], str) or not spec["question"].strip():
         raise ValueError("spec question is empty")
 
@@ -107,6 +132,8 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
         raise ValueError("result status/outcome invalid")
     if not isinstance(result["metrics"], dict) or not isinstance(result["controls"], dict):
         raise ValueError("result metrics/controls must be objects")
+    for key in ("artifacts", "observations", "validity_notes", "unresolved"):
+        require_list(result, key, "result")
 
     provenance = parse_json(raw["provenance.json"], "provenance")
     if provenance.get("experiment_id", exp_id) != exp_id or provenance.get("lane", lane) != lane:
@@ -117,19 +144,30 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
     require(audit, ["status", "producer_claim_supported", "required_fixes", "validity_findings", "baseline_findings", "recomputed_metrics", "claim_ceiling", "evidence_refs", "unresolved"], "audit")
     if audit["status"] not in AUDIT_STATUSES or not isinstance(audit["producer_claim_supported"], bool):
         raise ValueError("audit status/producer_claim_supported invalid")
+    if not isinstance(audit["recomputed_metrics"], dict):
+        raise ValueError("audit recomputed_metrics must be an object")
+    if not isinstance(audit["claim_ceiling"], str) or not audit["claim_ceiling"].strip():
+        raise ValueError("audit claim_ceiling must be non-empty")
+    for key in ("required_fixes", "validity_findings", "baseline_findings", "evidence_refs", "unresolved"):
+        require_list(audit, key, "audit")
 
     verdict = parse_json(raw["verdict.json"], "verdict")
     identity(verdict, exp_id, lane, "verdict")
     require(verdict, ["decision", "claim_updates", "product_action", "promote_to_product", "continue", "next_question", "reason", "evidence_refs"], "verdict")
     if not isinstance(verdict["claim_updates"], list) or not isinstance(verdict["promote_to_product"], bool) or not isinstance(verdict["continue"], bool):
         raise ValueError("verdict shape invalid")
+    if verdict["next_question"] is not None and not isinstance(verdict["next_question"], str):
+        raise ValueError("verdict next_question must be string or null")
+    if not isinstance(verdict["reason"], str) or not verdict["reason"].strip():
+        raise ValueError("verdict reason must be non-empty")
+    require_list(verdict, "evidence_refs", "verdict")
     if verdict["promote_to_product"] and (lane != "product" or audit["status"] != "PASS"):
         raise ValueError("unauthorized product promotion verdict")
     for event in verdict["claim_updates"]:
         if not isinstance(event, dict):
             raise ValueError("claim update must be an object")
-        if event.get("claim_id") not in known_claims or event.get("status") not in CLAIM_STATUSES or not event.get("reason"):
-            raise ValueError("invalid claim update")
+        if event.get("claim_id") not in known_claims or event.get("status") not in DIRECTOR_CLAIM_STATUSES or not event.get("reason"):
+            raise ValueError("invalid Director claim update")
         if event.get("status") == "VALIDATED" and audit["status"] != "PASS":
             raise ValueError("VALIDATED claim without PASS audit")
         if event.get("status") == "PRODUCT_CORE" and (lane != "product" or audit["status"] != "PASS" or not verdict["promote_to_product"]):
@@ -142,9 +180,13 @@ def validate_packet(exp_id: str, lane: str, source_commit: str, raw: dict[str, b
         raise ValueError("invalid handoff target_lane")
     if handoff["next_question"] != verdict["next_question"]:
         raise ValueError("handoff/verdict next_question mismatch")
+    if not isinstance(handoff["why_next"], str) or not isinstance(handoff["recommended_action"], str):
+        raise ValueError("handoff text fields must be strings")
     carry = handoff.get("carry_forward")
     if not isinstance(carry, dict) or any(not isinstance(carry.get(k), list) for k in ("established", "rejected", "unknown", "do_not_assume")):
         raise ValueError("handoff carry_forward invalid")
+    for key in ("dependencies", "evidence_refs"):
+        require_list(handoff, key, "handoff")
 
     return req, spec, audit, verdict
 
@@ -180,9 +222,12 @@ def main():
                 gaps.append({"lane": lane, "experiment_id": exp_id, "ref": ref, "missing": missing})
                 continue
 
-            source_commit = git("log", "-1", "--format=%H", ref, "--", verdict_path, check=False).strip()
+            # Canonical finalization point is the commit that first ADDED verdict.json.
+            # The previous "latest commit touching verdict" rule could bless a later
+            # mutation as if it were the original Director decision.
+            source_commit = git("log", "--diff-filter=A", "-1", "--format=%H", ref, "--", verdict_path, check=False).strip()
             if not source_commit:
-                quarantine.append({"lane": lane, "experiment_id": exp_id, "ref": ref, "error": "cannot pin verdict commit"})
+                quarantine.append({"lane": lane, "experiment_id": exp_id, "ref": ref, "error": "cannot pin original verdict creation commit"})
                 continue
 
             try:
@@ -193,7 +238,7 @@ def main():
                     pinned = show(source_commit, path)
                     current = show(ref, path)
                     if pinned is None:
-                        raise ValueError(f"packet file absent at verdict commit: {name}")
+                        raise ValueError(f"packet file absent at verdict creation commit: {name}")
                     if current != pinned:
                         raise ValueError(f"post-finalization mutation detected: {name}")
                     raw[name] = pinned
@@ -248,8 +293,8 @@ def main():
     (codex_dir / "index.json").write_text(json.dumps({"schema_version": 2, "experiments": entry_order}, indent=2) + "\n")
     (codex_dir / "claim_state.json").write_text(json.dumps({"schema_version": 2, "events_by_claim": claim_events, "latest_event_by_claim": latest_event}, indent=2) + "\n")
 
-    # SPIDER_CODEX.md is an index, not a second 7MB copy of every packet. Full
-    # canonical evidence remains losslessly available under codex/experiments/.
+    # SPIDER_CODEX.md is an index, not a second multi-megabyte copy of every packet.
+    # Full canonical evidence remains losslessly available under codex/experiments/.
     lines = [
         "# SPIDER CODEX — Research 2.0",
         "",
