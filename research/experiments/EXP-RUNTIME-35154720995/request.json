@@ -1,0 +1,20 @@
+{
+  "base_sha": "5753f67b8ddb085a62f130b48c74cced1fdf90c4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T21:52:40.191689+00:00",
+  "experiment_id": "EXP-RUNTIME-35154720995",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality variation, chunked transfer-encoding, CDN headers, Accept-Encoding negotiation, response caching, Content-Length variation). Algorithm-equivalence with gzip holds (|diff| = 0.0 < 0.1). Compressed-byte-only hashing degrades to 0.2789 on /userinfo (< 0.35), confirming H3. Claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. Audit PASS confirms all recomputed metrics match producer (max_abs_diff 0.0). Bounded to: localhost synthetic proxy, 1KB compressible JSON, effective brotli diversity 2 variants (q4 distinct vs q5-8 identical), mock OAuth2 4 states with 3-way error collapse (ceiling 0.5 on /userinfo), seed 44, N=20 per state, chunked decoded by HTTP client before decompression. Do NOT promote to Product Core \u2014 real-CDN infrastructure validation remains the critical untested blocker.",
+  "inherited_next_question": "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in this synthetic proxy? This remains the critical blocker for C-MEAS-VALID product readiness.",
+  "lane": "runtime",
+  "origin_github_run_id": "35154720995",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35137033384",
+    "path": "research/experiments/EXP-RUNTIME-35137033384/handoff.json",
+    "sha256": "21072df7f229e956582ead68a482782adc0f759fca8771071218d63a7731ad36"
+  },
+  "reason": "pulse",
+  "request_hash": "a94c948c018ce61091368558b111a6b32c61844591b4b44efdbfeedfcb69c097",
+  "request_id": "9d8f62b1e2c274706f762117",
+  "schema_version": 1
+}
