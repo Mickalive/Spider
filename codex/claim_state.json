@@ -519,6 +519,14 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "TF-IDF bag-of-words semantic similarity on (field_name:field_type) text pairs is falsified as a staleness signal under structural noise (FP=1.0 at all sizes, Mann-Whitney p=1.0 inverted direction). This is a bounded signal-level falsification; C-FRESHNESS as a domain remains open. The claim ceiling from audit.json is: FALSIFIED-IN-SETTING for TF-IDF specifically \u2014 does NOT falsify sentence-transformers contextual embeddings, per-field matching, multi-signal ensembles, smaller noise magnitudes, or real API schemas."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35083040517",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted direction at sizes 20, 50 \u2014 noise more detectable than drift). 3 of 5 frozen decision conditions fail. This is the third orthogonal signal family tested (after Jaccard structural and TF-IDF semantic) and the third to fail. C-FRESHNESS remains HYPOTHESIS \u2014 the claim is not globally closed; only the specific setting (KS test on client-side response-time distributions, N=30, uniform 0-50ms jitter, mock CPU-bound server, schema sizes 10-50) is falsified."
       }
     ],
     "C-CROSSSITE": [

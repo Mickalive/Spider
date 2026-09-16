@@ -776,6 +776,31 @@
         "handoff.json": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
       }
     },
+    "EXP-GRAPH-35083040517": {
+      "lane": "graph",
+      "request_id": "ca21b668ed16180fb3647a3a",
+      "created_at": "2026-09-16T10:05:21.918859+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
+        "spec.json": "db9bf8f720f79bff866248ec788394b319e2e789609e1d48a9823ae239cb008c",
+        "prereg.md": "9ed035c737b2a40464286a4424d0971f3f19ed762ede13a347f9b0aa983cd7fd",
+        "freeze.json": "31b8a6c72a00e0ed5cfdcd13e3a694a2eb598fe701377413efd6e00d0c90f978",
+        "result.json": "66ae8d16cd8be1db9e51e43f1c13684e26e419c7200b8a4d147f442aac9118de",
+        "report.md": "e3d808cbac09848361ef95d520d4263f485e7bf29661c6b22a615340d6400e76",
+        "provenance.json": "6f349587f789a3bb9cca00fa7b7f17d65c43658ba3f1230b81ffa11fc379e51e",
+        "audit.json": "36c88523b0271662686475c405a2b37ca3dcc5d16335b03a481e55d2028c0b6e",
+        "verdict.json": "3c2036bf5dc13a7b28030709b946e2c6f827950fb937371048a680dda744b593",
+        "handoff.json": "71ed289305908a0fedbaa8f90ee4f7e3cedff87bc8fb606dd1e9aa91e672bdc2"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",

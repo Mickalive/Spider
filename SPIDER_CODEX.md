@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **88**. Coverage gaps: **0**.
+Ingested experiments: **89**. Coverage gaps: **0**.
 
 ## Index
 
@@ -40,6 +40,7 @@ Ingested experiments: **88**. Coverage gaps: **0**.
 | EXP-GRAPH-34755316488 | graph | FAIL | FALSIFIED-IN-SETTING | C-FRESHNESS |
 | EXP-GRAPH-34788722106 | graph | PASS | FALSIFIED-IN-SETTING | C-FRESHNESS |
 | EXP-GRAPH-35010853847 | graph | PASS | FALSIFIED-IN-SETTING | C-FRESHNESS |
+| EXP-GRAPH-35083040517 | graph | PASS | FALSIFIED-IN-SETTING | C-FRESHNESS |
 | EXP-INTEL-33528832113 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON |
 | EXP-INTEL-33842055594 | intel | REVISE | PARTIALLY_COMPATIBLE | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-33925056324 | intel | REVISE | SUPPORTS | C-CROSSSITE, C-LLM-INHERIT |
@@ -34441,6 +34442,1116 @@ TF-IDF semantic embedding similarity on `(field_name:field_type)` text pairs is 
     "research/experiments/EXP-GRAPH-34788722106/handoff.json"
   ],
   "recommended_action": "Move graph lane frontier to response-time profiling as the next orthogonal staleness signal. TF-IDF semantic similarity is falsified under structural noise (FP=1.0, inverted direction). Two token-based approaches (Jaccard structural, TF-IDF semantic) have now both failed, suggesting the representational dimension itself may be insufficient for drift-vs-noise discrimination. Response-time profiling tests a fundamentally different hypothesis: that structural noise and true drift produce different temporal signatures (e.g., field churn changes response size, new business logic changes latency distribution). If response-time profiling also fails, the frontier should move to multi-signal ensembles combining orthogonal dimensions (structural + temporal + behavioral) or to requiring schema-specific calibration rather than universal thresholds."
+}
+```
+
+# EXP-GRAPH-35083040517
+
+## request.json
+
+```text
+{
+  "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T10:05:21.918859+00:00",
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+  "lane": "graph",
+  "origin_github_run_id": "35083040517",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35010853847",
+    "path": "research/experiments/EXP-GRAPH-35010853847/handoff.json",
+    "sha256": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
+  },
+  "reason": "pulse",
+  "request_hash": "ea91b1a9125b07105b5d9b4f0570585ed80e4efee1a626dc2d6443163f0a2365",
+  "request_id": "ca21b668ed16180fb3647a3a",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+  "hypothesis": "Structural noise (field churn, null field introduction, nested object variation) and true schema drift (add/remove field, change type) produce different server-side response-time signatures. Specifically: (1) True drift (adding/removing fields, changing types) causes response-time distribution shifts because the server computes a different schema structure — new serialization overhead, different validation paths, different caching behavior; (2) Structural noise (optional field churn, null values) causes minimal response-time change because the same computation path runs with optional branches; (3) Therefore a Kolmogorov-Smirnov two-sample test on response-time distributions can distinguish true drift from noise with TP>=0.8 and FP<=0.15.",
+  "falsifier": "KS two-sample test on response-time distributions fails TP>=0.8 AND FP<=0.15 simultaneously at any schema size (10, 20, 30, 50 fields) on a controlled mock server. Specifically: (a) positive control fails (TP < 0.8 on add_field pattern at n>=30); (b) null control fails (FP > 0.15 on fresh-copy control); (c) Mann-Whitney test for separation direction inverts (noise more divergent than drift, p > 0.05 one-sided); or (d) KS test on response-time distributions is indistinguishable from uniform noise (KS D < 0.05 across all conditions).",
+  "baselines": [
+    "TF-IDF bag-of-words cosine similarity (falsified baseline from EXP-GRAPH-35010853847 — included for cross-signal comparison only)",
+    "Jaccard (field_path,type) similarity (falsified baseline from EXP-GRAPH-34788722106)",
+    "Random classifier (50% detection rate)",
+    "Fixed-threshold response-time ratio (response_time_after / response_time_before > 1.5)"
+  ],
+  "positive_control": "add_field pattern at n>=30 fields: response time must increase measurably (KS D > 0.1, p < 0.05). This tests that the mock server introduces real computation-time variation when the schema genuinely changes. If the mock server returns in constant time regardless of schema, the response-time profiling hypothesis is unfalsifiable.",
+  "null_control": "Fresh copies (same schema, no modification): response-time KS test must not detect a shift (KS p > 0.05, FP rate <= 0.15). This tests that natural server jitter does not produce false drift signals.",
+  "measurement_validity": [
+    "Mock server must have controlled computation paths: different schema sizes produce different response times (computation proportional to field count serialization)",
+    "Response times measured via HTTP client-side stopwatch with N >= 30 requests per condition to capture distribution",
+    "Server-side jitter controlled: artificial jitter 0-50ms uniform injected, server CPU load constant (no background tasks)",
+    "Frozen random seeds for jitter injection and field generation",
+    "KS two-sample test uses N1=N2=30 per condition minimum",
+    "No target leakage: KS test fit on response-time vectors, no schema content leaking into timing decisions",
+    "Per-pattern analysis at 4 schema sizes (10, 20, 30, 50 fields) with Bonferroni correction"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) positive control passes (add_field TP >= 0.8 at n>=30); (2) null control passes (fresh-copy FP <= 0.15); (3) at least 2 of 3 true-drift patterns (add_field, remove_field, change_type) achieve TP >= 0.8 at n>=30; (4) Mann-Whitney one-sided test confirms separation direction (drift response-time variance > noise response-time variance, p < 0.05); (5) at least 1 structural noise pattern (optional_field_churn) achieves FP <= 0.15 at n>=30. FALSIFIED-IN-SETTING if any of (1)-(5) fails. MEASUREMENT_INVALID if mock server fails to produce computation-dependent response times (positive control D < 0.05 across all conditions).",
+  "product_consequence_positive": "Response-time profiling is a viable orthogonal staleness signal. Combined with (failed) token-based signals, it provides a multi-signal ensemble opportunity. Product could deploy response-time monitoring as a lightweight freshness probe without schema parsing. This moves C-FRESHNESS from HYPOTHESIS toward EXPERIMENTAL.",
+  "product_consequence_negative": "Response-time profiling fails as a staleness signal. The Graph lane's freshness frontier must shift to multi-signal ensembles combining structural + temporal + behavioral dimensions, or accept that drift detection requires direct schema comparison (not an indirect signal). C-FRESHNESS remains HYPOTHESIS. The two orthogonal signal families tested (token-based, temporal) both fail, suggesting the problem may require fundamentally different approaches.",
+  "estimated_cost": "Low-moderate: mock HTTP server (Python http.server) with controlled response-time injection, ~4800 client requests (4 sizes x 6 patterns x 30 reps x 2 for before/after), offline KS computation. No browser, model, or network calls beyond localhost.",
+  "expected_information_gain": "High: This tests the first non-representational staleness signal. If response-time profiling succeeds, it opens a new dimension for freshness detection (temporal) orthogonal to the two failed representational approaches (Jaccard structural, TF-IDF semantic). If it fails, the Graph lane knows that two fundamentally different signal families (representational + temporal) both fail, strongly constraining future freshness research toward multi-signal ensembles or direct schema comparison."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-GRAPH-35083040517 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-GRAPH-35083040517
+- **Lane**: Graph
+- **Claim**: C-FRESHNESS (SPIDER can detect when inherited knowledge is stale)
+- **Parent**: EXP-GRAPH-35010853847 (TF-IDF semantic similarity — FALSIFIED-IN-SETTING)
+- **Date**: 2026-09-16
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15?
+
+## 3. Motivation
+
+Prior C-FRESHNESS work has falsified two token-based staleness signals:
+
+1. **Jaccard (field_path,type) similarity** (EXP-GRAPH-34788722106): FALSIFIED-IN-SETTING. FP=1.0 at all schema sizes. Structural noise produces lower Jaccard than true drift (inverted direction).
+
+2. **TF-IDF bag-of-words semantic similarity** (EXP-GRAPH-35010853847): FALSIFIED-IN-SETTING. FP=1.0 at all sizes. Inverted separation: structural noise more divergent than drift (Cohen's d 1.2–1.9 wrong direction, Mann-Whitney p=1.0).
+
+Both failures share a common structure: **any token change, whether drift or noise, reduces similarity proportionally.** The representational dimension itself appears insufficient for drift-vs-noise discrimination because it cannot distinguish "meaningful" from "meaningless" token changes.
+
+Response-time profiling tests a fundamentally different hypothesis: that the **computation path** on the server differs between true drift (new field = new serialization/validation) and structural noise (optional field churn = same path, optional branches). This is a temporal signal, not a representational one, and is therefore orthogonal to both Jaccard and TF-IDF.
+
+If response-time profiling also fails, the Graph lane will have tested two orthogonal signal families (representational + temporal) and both failed. This would strongly suggest the drift-vs-noise discrimination problem requires either:
+- Multi-signal ensembles combining multiple orthogonal dimensions
+- Direct schema comparison (bypassing indirect signals entirely)
+- Schema-specific calibration rather than universal thresholds
+
+## 4. Hypotheses
+
+### H1: Response-Time Discrimination
+KS two-sample test on response-time distributions can distinguish true drift from structural noise with TP>=0.8 and FP<=0.15 at n>=30 fields.
+
+### H2: Positive Control
+add_field pattern at n>=30: response-time distribution shifts are detectable (KS D > 0.1, p < 0.05). This verifies the mock server produces real computation-dependent timing variation.
+
+### H3: Null Control
+Fresh copies (same schema, no modification): KS test does not detect a shift (FP <= 0.15). This verifies natural jitter does not produce false signals.
+
+### H4: Directional Consistency
+True drift patterns (add_field, remove_field, change_type) produce LARGER response-time shifts than structural noise patterns (optional_field_churn, null_valued_fields, nested_object_variation) at matched schema sizes.
+
+### H5: Noise Irrelevance
+Structural noise patterns produce response-time distributions indistinguishable from fresh copies (KS p > 0.05), because the computation path is unchanged.
+
+## 5. Data Generation
+
+### 5.1 Mock Server Design
+
+A Python `http.server` serves JSON responses with controlled computation paths:
+
+- **Field-count-proportional serialization**: Each field requires an explicit `json.dumps()` call, making response time proportional to field count.
+- **Controlled jitter**: Uniform 0-50ms artificial jitter per request to simulate network noise.
+- **Drift injection**: After DRIFT_POINT requests, the server switches to a modified schema.
+- **Schema size control**: The number of fields is controlled by generating field dictionaries of size n.
+
+### 5.2 Schema Modification Patterns
+
+**True drift patterns** (should change response time):
+1. `add_field`: Add a new field to the response (increases serialization time)
+2. `remove_field`: Remove a field from the response (decreases serialization time)
+3. `change_type`: Change a field type from integer to string (may change serialization time)
+
+**Structural noise patterns** (should NOT change response time meaningfully):
+4. `optional_field_churn`: Randomly add/remove optional nullable fields (same computation path)
+5. `null_valued_fields`: Replace field values with null (same serialization path)
+6. `nested_object_variation`: Add/remove nested object fields (increases complexity but same base path)
+
+**Null control**:
+7. `fresh_copy`: Same schema, no modification (baseline timing)
+
+### 5.3 Schema Sizes
+
+Four conditions: n = 10, 20, 30, 50 fields.
+
+### 5.4 Sample Size
+
+- 30 requests per condition (before drift, after drift) x 6 patterns x 4 sizes = 1440 total requests per before/after pair
+- 30 fresh-copy control requests per size = 120 total control requests
+- Total: ~1560 client requests, each with controlled jitter
+
+### 5.5 Seeds
+
+- `seed=20260916` for field generation and jitter injection
+- `seed=20260917` for pattern variation (which optional fields to churn)
+- Both frozen before execution
+
+## 6. Measures
+
+### 6.1 Primary Metric: KS Two-Sample Test
+- For each pattern at each size: compute KS two-sample test between before-drift and after-drift response-time distributions
+- D statistic and p-value
+- Detection: p < 0.05 (after Bonferroni correction across 4 sizes x 6 patterns = 24 comparisons)
+
+### 6.2 TP/FP Rates
+- **TP**: KS test detects a shift for true drift patterns (add_field, remove_field, change_type)
+- **FP**: KS test detects a shift for structural noise patterns (optional_field_churn, null_valued_fields, nested_object_variation) and fresh copies
+- Wilson 95% confidence intervals
+
+### 6.3 Separation Direction
+- Mann-Whitney U test: is response-time variance larger for true drift than structural noise?
+- One-sided test: drift > noise, p < 0.05
+
+### 6.4 Effect Size
+- KS D statistic (0 = identical distributions, 1 = completely separated)
+- Cohen's d for mean response-time difference
+
+### 6.5 Response Time Calibration
+- Verify that response time is proportional to field count (regression R² > 0.7)
+- Verify jitter distribution matches specification (uniform 0-50ms)
+
+## 7. Null Models
+
+### 7.1 Fresh-Copy Null
+Same schema, no modification. KS test should not detect a shift. FP <= 0.15.
+
+### 7.2 Shuffle Null
+Permute before/after labels. KS test should produce uniform p-values (no systematic detection).
+
+### 7.3 Random Classifier
+50% detection rate. Expected to fail TP >= 0.8 and FP <= 0.15.
+
+## 8. Statistical Tests
+
+### 8.1 Primary: KS Two-Sample Test
+- For each pattern x size: KS D statistic and p-value
+- Bonferroni correction: alpha = 0.05 / 24 = 0.00208
+- One-sided test for direction consistency
+
+### 8.2 Secondary: Mann-Whitney U Test
+- Compare response-time distributions: true drift patterns vs structural noise patterns
+- One-sided alternative: drift variance > noise variance
+
+### 8.3 Calibration Check
+- Linear regression: response_time ~ field_count
+- R² > 0.7 confirms computation-dependent timing
+
+### 8.4 Effect Size
+- Cohen's d for before/after response-time difference at each pattern x size
+
+## 9. Controls
+
+### 9.1 Positive Control (add_field, n>=30)
+- KS D > 0.1, p < 0.05 (after correction)
+- Verifies: mock server produces real timing variation when schema changes
+
+### 9.2 Null Control (fresh_copy, all sizes)
+- KS p > 0.05 (no detection), FP <= 0.15
+- Verifies: jitter alone does not produce false signals
+
+### 9.3 Separation Control (Mann-Whitney)
+- One-sided p < 0.05: drift response-time shifts > noise response-time shifts
+- Verifies: the signal is directional, not random
+
+### 9.4 Calibration Control
+- Response time proportional to field count (R² > 0.7)
+- Verifies: the mock server is not returning in constant time
+
+## 10. Validity Threats
+
+### 10.1 Mock Server Realism
+The mock server is artificial. Real APIs may have response times dominated by network, database, or CDN effects rather than schema computation. Mitigation: this is a controlled validation experiment. If the pipeline cannot detect known timing structure in a controlled environment, it cannot be trusted on real servers.
+
+### 10.2 Computation-Dependent Timing Assumption
+The hypothesis assumes response time depends on schema computation. If the server returns in constant time (e.g., caching, pre-computed responses), the signal is zero by construction. Mitigation: calibration control (R² > 0.7) will detect this.
+
+### 10.3 Jitter Masking
+Artificial jitter 0-50ms may mask real signal if the computation-time difference is smaller than the jitter. Mitigation: computation time is expected to scale linearly with field count, and at n=50 fields the serialization difference should exceed jitter range.
+
+### 10.4 Client-Side Measurement
+Response times are measured client-side (HTTP round-trip), not server-side. Client-side includes network overhead. Mitigation: localhost testing eliminates network variability; jitter is the dominant noise source.
+
+### 10.5 Multiple Comparisons
+24 primary comparisons (4 sizes x 6 patterns). Bonferroni correction is conservative. Mitigation: report both corrected and uncorrected p-values; focus on effect sizes.
+
+### 10.6 Sample Size
+30 requests per condition may be insufficient for stable distribution estimation. Power analysis: KS test with n=30 per group has ~80% power to detect D=0.4 (medium effect). Smaller effects may be missed.
+
+## 11. Decision Rules
+
+### 11.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. Positive control passes (add_field TP >= 0.8 at n>=30)
+2. Null control passes (fresh_copy FP <= 0.15)
+3. At least 2 of 3 true-drift patterns achieve TP >= 0.8 at n>=30
+4. Mann-Whitney one-sided p < 0.05 (drift > noise)
+5. At least 1 structural noise pattern achieves FP <= 0.15 at n>=30
+
+### 11.2 FALSIFIED-IN-SETTING
+If ANY of (1)-(5) fails.
+
+### 11.3 MEASUREMENT_INVALID
+If:
+1. Calibration control fails (R² < 0.7, server returns in constant time)
+2. Pipeline errors prevent computation
+3. Jitter injection fails to produce measurable variance
+
+## 12. Expected Outcomes
+
+### 12.1 Positive Result (SURVIVES_CURRENT_TEST)
+- Response-time profiling is a viable orthogonal staleness signal
+- Opens multi-signal ensemble opportunity (temporal + representational)
+- Product could deploy response-time monitoring as a lightweight freshness probe
+- C-FRESHNESS advances from HYPOTHESIS toward EXPERIMENTAL
+
+### 12.2 Negative Result (FALSIFIED-IN-SETTING)
+- Response-time profiling fails as a staleness signal
+- Two orthogonal signal families (representational + temporal) both fail
+- Graph lane must shift to multi-signal ensembles or direct schema comparison
+- C-FRESHNESS remains HYPOTHESIS
+- Strong constraint on future freshness research direction
+
+### 12.3 Invalid Result (MEASUREMENT_INVALID)
+- Mock server does not produce computation-dependent timing
+- Pipeline needs redesign before this question can be answered
+- Not scientific evidence for or against
+
+## 13. Analysis Plan
+
+1. **Server Setup**: Launch mock server with controlled computation paths and jitter
+2. **Data Collection**: For each pattern x size, collect 30 before-drift and 30 after-drift response times
+3. **Calibration Check**: Verify response time ~ field_count regression R² > 0.7
+4. **KS Tests**: Compute KS two-sample test for each pattern x size
+5. **TP/FP Rates**: Classify detections using Bonferroni-corrected alpha
+6. **Separation Test**: Mann-Whitney U test for drift vs noise direction
+7. **Controls**: Verify positive, null, separation, and calibration controls
+8. **Reporting**: Report all outcomes with equal prominence
+
+## 14. Analysis Code
+
+Analysis will be implemented in Python using:
+- `http.server` for mock server
+- `urllib.request` for client-side HTTP
+- `scipy.stats` for KS test and Mann-Whitney U
+- `numpy` for array operations
+- `time.perf_counter()` for response-time measurement
+- Standard library only (no custom timing libraries)
+
+Code will be committed to `research/graph/freshness_detection/` before execution.
+
+## 15. Pre-registered Expectations
+
+From the hypothesis:
+- add_field and remove_field should produce the largest response-time shifts (schema computation changes)
+- change_type may produce smaller shifts (same field count, different serialization)
+- optional_field_churn should produce negligible shifts (same computation path)
+- null_valued_fields and nested_object_variation should produce small shifts (minor serialization changes)
+- Fresh copies should produce no systematic shift
+
+From the mock server design:
+- Response time should be proportional to field count (R² > 0.7)
+- Jitter should add 0-50ms uniform noise without masking the signal
+- At n=50 fields, the serialization difference should be measurable
+
+## 16. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 17. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "frozen_at": "2026-09-16T10:07:56.121500+00:00",
+  "hashes": {
+    "prereg.md": "9ed035c737b2a40464286a4424d0971f3f19ed762ede13a347f9b0aa983cd7fd",
+    "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
+    "spec.json": "db9bf8f720f79bff866248ec788394b319e2e789609e1d48a9823ae239cb008c"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "overall_tp_rate": 0.0,
+    "overall_fp_rate": 0.1875,
+    "tp_detections": 0,
+    "tp_total": 12,
+    "fp_detections": 3,
+    "fp_total": 16,
+    "tp_ci_95": [0.0, 0.2425],
+    "fp_ci_95": [0.0659, 0.4301],
+    "calibration_r_squared": 0.9999,
+    "per_pattern_tp": {
+      "add_field": {"tp_rate": 0.0, "n_detected": 0, "n_total": 4, "detected_at_sizes": [], "missed_at_sizes": [10, 20, 30, 50]},
+      "remove_field": {"tp_rate": 0.0, "n_detected": 0, "n_total": 4, "detected_at_sizes": [], "missed_at_sizes": [10, 20, 30, 50]},
+      "change_type": {"tp_rate": 0.0, "n_detected": 0, "n_total": 4, "detected_at_sizes": [], "missed_at_sizes": [10, 20, 30, 50]}
+    },
+    "per_pattern_fp": {
+      "optional_field_churn": {"fp_rate": 0.0, "n_detected": 0, "n_total": 4, "false_alarm_at_sizes": [], "correct_reject_at_sizes": [10, 20, 30, 50]},
+      "null_valued_fields": {"fp_rate": 0.0, "n_detected": 0, "n_total": 4, "false_alarm_at_sizes": [], "correct_reject_at_sizes": [10, 20, 30, 50]},
+      "nested_object_variation": {"fp_rate": 0.75, "n_detected": 3, "n_total": 4, "false_alarm_at_sizes": [10, 20, 50], "correct_reject_at_sizes": [30]},
+      "fresh_copy": {"fp_rate": 0.0, "n_detected": 0, "n_total": 4, "false_alarm_at_sizes": [], "correct_reject_at_sizes": [10, 20, 30, 50]}
+    },
+    "per_schema_size": {
+      "10": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 1,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.3333,
+        "mean_ks_d_noise": 0.2778,
+        "mean_cohens_d_drift": -0.0264,
+        "mean_cohens_d_noise": 0.4124,
+        "mann_whitney_p_one_sided": 0.35,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.333333, "ks_p": 0.07088799, "detected": false, "cohens_d": 0.3487, "mean_diff_ms": 4.885},
+          "remove_field": {"ks_d": 0.366667, "ks_p": 0.03458008, "detected": false, "cohens_d": -0.7302, "mean_diff_ms": -10.388},
+          "change_type": {"ks_d": 0.3, "ks_p": 0.1350035, "detected": false, "cohens_d": 0.3023, "mean_diff_ms": 3.88},
+          "optional_field_churn": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": 0.0544, "mean_diff_ms": 0.636},
+          "null_valued_fields": {"ks_d": 0.1, "ks_p": 0.99883938, "detected": false, "cohens_d": 0.0446, "mean_diff_ms": 0.669},
+          "nested_object_variation": {"ks_d": 0.5, "ks_p": 0.00089958, "detected": true, "cohens_d": 1.1382, "mean_diff_ms": 14.729},
+          "fresh_copy": {"ks_d": 0.266667, "ks_p": 0.239073, "detected": false, "cohens_d": 0.4677, "mean_diff_ms": 6.952}
+        }
+      },
+      "20": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 1,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.2889,
+        "mean_ks_d_noise": 0.3444,
+        "mean_cohens_d_drift": -0.3354,
+        "mean_cohens_d_noise": 0.6497,
+        "mann_whitney_p_one_sided": 0.65,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.266667, "ks_p": 0.239073, "detected": false, "cohens_d": 0.2757, "mean_diff_ms": 3.999},
+          "remove_field": {"ks_d": 0.366667, "ks_p": 0.03458008, "detected": false, "cohens_d": -0.944, "mean_diff_ms": -13.047},
+          "change_type": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": -0.3378, "mean_diff_ms": -5.157},
+          "optional_field_churn": {"ks_d": 0.166667, "ks_p": 0.80796315, "detected": false, "cohens_d": -0.0458, "mean_diff_ms": -0.686},
+          "null_valued_fields": {"ks_d": 0.333333, "ks_p": 0.07088799, "detected": false, "cohens_d": 0.5219, "mean_diff_ms": 7.567},
+          "nested_object_variation": {"ks_d": 0.533333, "ks_p": 0.00029334, "detected": true, "cohens_d": 1.473, "mean_diff_ms": 23.29},
+          "fresh_copy": {"ks_d": 0.166667, "ks_p": 0.80796315, "detected": false, "cohens_d": -0.0792, "mean_diff_ms": -1.277}
+        }
+      },
+      "30": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 0,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.3222,
+        "mean_ks_d_noise": 0.2778,
+        "mean_cohens_d_drift": 0.0256,
+        "mean_cohens_d_noise": 0.4787,
+        "mann_whitney_p_one_sided": 0.328953,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.4, "ks_p": 0.01564339, "detected": false, "cohens_d": 0.8355, "mean_diff_ms": 13.438},
+          "remove_field": {"ks_d": 0.333333, "ks_p": 0.07088799, "detected": false, "cohens_d": -0.5967, "mean_diff_ms": -10.473},
+          "change_type": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": -0.162, "mean_diff_ms": -2.377},
+          "optional_field_churn": {"ks_d": 0.2, "ks_p": 0.59407063, "detected": false, "cohens_d": 0.1692, "mean_diff_ms": 2.612},
+          "null_valued_fields": {"ks_d": 0.2, "ks_p": 0.59407063, "detected": false, "cohens_d": 0.2698, "mean_diff_ms": 4.262},
+          "nested_object_variation": {"ks_d": 0.433333, "ks_p": 0.0065484, "detected": false, "cohens_d": 0.9972, "mean_diff_ms": 14.226},
+          "fresh_copy": {"ks_d": 0.133333, "ks_p": 0.95784629, "detected": false, "cohens_d": 0.0009, "mean_diff_ms": 0.013}
+        }
+      },
+      "50": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 1,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.2222,
+        "mean_ks_d_noise": 0.3667,
+        "mean_cohens_d_drift": 0.2422,
+        "mean_cohens_d_noise": 0.7706,
+        "mann_whitney_p_one_sided": 0.9,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.3, "ks_p": 0.1350035, "detected": false, "cohens_d": 0.5964, "mean_diff_ms": 9.124},
+          "remove_field": {"ks_d": 0.133333, "ks_p": 0.95784629, "detected": false, "cohens_d": -0.1693, "mean_diff_ms": -2.174},
+          "change_type": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": 0.2996, "mean_diff_ms": 5.343},
+          "optional_field_churn": {"ks_d": 0.4, "ks_p": 0.01564339, "detected": false, "cohens_d": 0.9311, "mean_diff_ms": 13.656},
+          "null_valued_fields": {"ks_d": 0.166667, "ks_p": 0.80796315, "detected": false, "cohens_d": -0.0858, "mean_diff_ms": -1.411},
+          "nested_object_variation": {"ks_d": 0.533333, "ks_p": 0.00029334, "detected": true, "cohens_d": 1.4665, "mean_diff_ms": 21.847},
+          "fresh_copy": {"ks_d": 0.2, "ks_p": 0.59407063, "detected": false, "cohens_d": 0.3073, "mean_diff_ms": 4.859}
+        }
+      }
+    },
+    "controls": {
+      "positive_control_add_field": {
+        "description": "add_field at n>=30: KS D > 0.1, p < 0.05",
+        "conditions_tested": 2,
+        "detected": 0,
+        "mean_ks_d": 0.35,
+        "all_detected": false,
+        "result": "FAIL"
+      },
+      "null_control_fresh_copy": {
+        "description": "fresh_copy: KS test should not detect shift (FP <= 0.15)",
+        "conditions_tested": 4,
+        "false_alarms": 0,
+        "fp_rate": 0.0,
+        "result": "PASS"
+      },
+      "separation_control_mann_whitney": {
+        "description": "Mann-Whitney one-sided: drift > noise KS D values, p < 0.05",
+        "sizes_tested": 4,
+        "sizes_passing": 0,
+        "p_values": {"10": 0.35, "20": 0.65, "30": 0.328953, "50": 0.9},
+        "result": "FAIL"
+      },
+      "calibration_control_field_count": {
+        "description": "Response time proportional to field count (R² > 0.7)",
+        "size_means_ms": {"10": 104.505, "20": 196.901, "30": 284.122, "50": 462.876},
+        "r_squared": 0.9999,
+        "result": "PASS"
+      }
+    },
+    "decision": "FALSIFIED-IN-SETTING",
+    "decision_reason": "positive_control=FAIL; drift_patterns_passing_0.8=0/3 (need >=2); separation=FAIL",
+    "decision_conditions": {
+      "1_positive_control": false,
+      "2_null_control": true,
+      "3_drift_patterns": false,
+      "4_separation": false,
+      "5_noise_fp": true
+    }
+  },
+  "controls": {
+    "positive_control_add_field": {
+      "expected": "add_field at n>=30 produces detectable response-time shift (KS D > 0.1, p < 0.05 after Bonferroni correction)",
+      "observed": "Not detected at any size. KS D ranges 0.27-0.40, p ranges 0.016-0.239. Even at n=30 (KS D=0.40, p=0.016), fails Bonferroni-corrected alpha=0.00208.",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.positive_control_add_field"
+    },
+    "null_control_fresh_copy": {
+      "expected": "fresh_copy (same schema, no modification) produces no detectable shift (FP <= 0.15)",
+      "observed": "0 false alarms across 4 sizes. KS p-values all > 0.05. FP rate = 0.0.",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.null_control_fresh_copy"
+    },
+    "separation_control_mann_whitney": {
+      "expected": "Mann-Whitney one-sided test confirms drift KS D > noise KS D (p < 0.05)",
+      "observed": "Failed at all 4 sizes. p-values: 0.35, 0.65, 0.33, 0.90. In fact, noise patterns often produce LARGER KS D values than drift patterns (inverted direction at sizes 20 and 50).",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.separation_control_mann_whitney"
+    },
+    "calibration_control_field_count": {
+      "expected": "Response time proportional to field count (R² > 0.7)",
+      "observed": "R² = 0.9999. Fresh-copy mean response times: 104.5ms (10 fields), 196.9ms (20), 284.1ms (30), 462.9ms (50). Near-perfect linear scaling.",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.calibration_control_field_count"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json", "sha256": null, "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json", "sha256": null, "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json", "sha256": null, "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json", "sha256": null, "role": "raw"},
+    {"path": "research/graph/freshness_detection/execute_response_time.py", "sha256": null, "role": "code"}
+  ],
+  "observations": [
+    "The mock server produces computation-dependent response times that scale linearly with field count (R² = 0.9999). The calibration control passes strongly, confirming the server is NOT returning in constant time.",
+    "Response-time differences between before and after drift are small relative to jitter. Mean differences range from -13ms to +23ms across all conditions, while jitter is uniform 0-50ms. The signal-to-noise ratio is insufficient for KS test detection at n=30 per condition.",
+    "nested_object_variation is the only pattern detected by KS test (at sizes 10, 20, 50), but it is STRUCTURAL NOISE, not true drift. This produces a 75% false alarm rate for this pattern, worse than random.",
+    "The separation direction is INVERTED at sizes 20 and 50: structural noise patterns produce LARGER KS D values (mean 0.34, 0.37) than true drift patterns (mean 0.29, 0.22). This is the same inverted-direction failure mode observed in the Jaccard and TF-IDF experiments.",
+    "remove_field produces NEGATIVE mean differences at all sizes (-2ms to -13ms), meaning response time DECREASES after removing a field. This is directionally correct but the magnitude is too small to detect.",
+    "add_field produces positive mean differences (+4ms to +13ms) but these are not statistically significant after Bonferroni correction. The effect is real but small relative to jitter.",
+    "change_type produces inconsistent direction: positive at sizes 10 and 50, negative at sizes 20 and 30. The type change does not produce a reliable response-time signature.",
+    "The Bonferroni-corrected alpha (0.00208) is very conservative. Even the largest KS D values (0.40-0.53 for nested_object_variation) only approach this threshold. The KS test with n=30 per group has insufficient power to detect the small response-time differences produced by true drift."
+  ],
+  "validity_notes": [
+    "The mock server uses controlled computation (2000 iterations of json.dumps + sha256 per field) to produce field-count-proportional timing. This is a VALIDATED computation-dependent server (R² = 0.9999). The failure is NOT due to constant-time server responses.",
+    "Jitter is uniform 0-50ms per request. At n=50 fields, the serialization difference between add_field (51 fields) and base (50 fields) is approximately 1 field × 2000 iterations × ~0.001ms/iteration ≈ 2ms, which is much smaller than the 50ms jitter range. The signal-to-noise ratio is fundamentally limited by the jitter magnitude.",
+    "Client-side measurement includes HTTP round-trip overhead. On localhost this is minimal but adds ~1-2ms baseline noise. This does not materially affect the result since the jitter dominates.",
+    "The KS test with n=30 per group has ~80% power to detect D=0.4 (medium effect). The observed KS D values for true drift range 0.13-0.40, with most below 0.35. The test is underpowered for the actual effect sizes.",
+    "The experiment uses a single mock server implementation. Real APIs may have different timing characteristics (caching, database lookups, CDN effects). However, the controlled validation shows the method fails even under favorable conditions.",
+    "nested_object_variation adds 2 fields (nested object + inner field), effectively increasing field count by 2. This produces a detectable timing shift similar to add_field but is classified as structural noise. The pattern classification may need refinement for real-world API drift detection."
+  ],
+  "unresolved": [
+    "Whether a larger sample size (n>=100 per condition) would provide sufficient power to detect the small response-time differences for true drift patterns. The current n=30 is underpowered.",
+    "Whether reducing jitter range (e.g., 0-10ms instead of 0-50ms) would improve signal detection. The jitter dominates the signal, so tighter jitter control might help.",
+    "Whether per-request timing variance (rather than distribution-level KS test) provides a better discrimination signal. The KS test compares entire distributions; a sequential or adaptive test might be more sensitive.",
+    "Whether response-time profiling on REAL APIs (with database, caching, and network effects) produces larger timing differences than the controlled mock server. The mock server's computation is purely CPU-bound; real APIs may have larger variance from external dependencies.",
+    "Whether the inverted separation direction (noise more detectable than drift) is an artifact of the mock server design or a fundamental property of response-time signals. The nested_object_variation pattern adds fields, making it structurally similar to add_field.",
+    "Whether combining response-time signals with structural signals (Jaccard, TF-IDF) in a multi-signal ensemble improves discrimination. Both individual signal families have failed, but ensemble complementarity is untested."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-GRAPH-35083040517 — Response-Time Profiling Experiment Report
+
+## Executive Summary
+
+**Decision: FALSIFIED-IN-SETTING**
+
+Response-time profiling fails as a staleness signal for schema drift detection. The KS two-sample test on response-time distributions achieves TP=0.0 (no true drift patterns detected) with FP=0.1875 (nested_object_variation false alarms at 3 of 4 sizes). The experiment fails 3 of 5 frozen decision rule conditions: positive control fails, fewer than 2 of 3 true-drift patterns achieve TP>=0.8, and the Mann-Whitney separation test fails at all sizes.
+
+This is a **valid scientific negative**: the calibration control passes (R²=0.9999), confirming the mock server produces computation-dependent timing. The failure is not due to infrastructure issues — the signal-to-noise ratio is fundamentally insufficient.
+
+## Background
+
+Prior C-FRESHNESS work has falsified two token-based staleness signals:
+
+1. **Jaccard (field_path,type) similarity** (EXP-GRAPH-34788722106): FALSIFIED-IN-SETTING. FP=1.0 at all schema sizes.
+2. **TF-IDF bag-of-words semantic similarity** (EXP-GRAPH-35010853847): FALSIFIED-IN-SETTING. FP=1.0 at all sizes, inverted separation direction.
+
+Both failures share a common structure: any token change, whether drift or noise, reduces similarity proportionally. The representational dimension appears insufficient for drift-vs-noise discrimination.
+
+Response-time profiling tests a fundamentally different hypothesis: that the **computation path** on the server differs between true drift (new field = new serialization/validation) and structural noise (optional field churn = same path). This is a temporal signal, orthogonal to both Jaccard and TF-IDF.
+
+## Results
+
+### Calibration Control (PASS)
+
+The mock server produces near-perfect computation-dependent timing:
+
+| Schema Size | Fresh-Copy Mean Response Time |
+|-------------|-------------------------------|
+| 10 fields   | 104.5 ms                      |
+| 20 fields   | 196.9 ms                      |
+| 30 fields   | 284.1 ms                      |
+| 50 fields   | 462.9 ms                      |
+
+R² = 0.9999. The server is NOT returning in constant time. Each field adds approximately 9.3ms of computation (2000 iterations of json.dumps + sha256 per field).
+
+### Positive Control (FAIL)
+
+add_field at n>=30 should produce a detectable response-time shift (KS D > 0.1, p < 0.05 after Bonferroni correction).
+
+- **n=30**: KS D=0.40, p=0.016 (uncorrected) — **FAILS** Bonferroni correction (α=0.00208)
+- **n=50**: KS D=0.30, p=0.135 — **FAILS**
+
+The effect is real (mean difference +9ms to +13ms) but too small relative to jitter (0-50ms uniform) to reach statistical significance at n=30.
+
+### Null Control (PASS)
+
+fresh_copy (same schema, no modification) produces 0 false alarms across all 4 sizes. Natural jitter does not produce false drift signals.
+
+### TP/FP Rates
+
+| Metric | Value | 95% CI |
+|--------|-------|--------|
+| TP rate | 0.000 | [0.000, 0.243] |
+| FP rate | 0.188 | [0.066, 0.430] |
+| TP detections | 0/12 | — |
+| FP detections | 3/16 | — |
+
+All 3 false alarms come from **nested_object_variation** (a structural noise pattern), which adds 2 fields and produces a detectable timing shift at sizes 10, 20, and 50.
+
+### Per-Pattern Results
+
+**True drift patterns (should be detected):**
+
+| Pattern | TP Rate | Detected At Sizes | Mean KS D |
+|---------|---------|-------------------|-----------|
+| add_field | 0.00 | none | 0.33 |
+| remove_field | 0.00 | none | 0.30 |
+| change_type | 0.00 | none | 0.25 |
+
+**Structural noise patterns (should NOT be detected):**
+
+| Pattern | FP Rate | False Alarm Sizes | Mean KS D |
+|---------|---------|-------------------|-----------|
+| optional_field_churn | 0.00 | none | 0.25 |
+| null_valued_fields | 0.00 | none | 0.20 |
+| nested_object_variation | 0.75 | 10, 20, 50 | 0.50 |
+
+### Separation Direction (INVERTED)
+
+The Mann-Whitney one-sided test (drift KS D > noise KS D) fails at all 4 sizes:
+
+| Size | Mann-Whitney p | Direction |
+|------|----------------|-----------|
+| 10 | 0.350 | noise > drift |
+| 20 | 0.650 | noise > drift |
+| 30 | 0.329 | noise > drift |
+| 50 | 0.900 | noise > drift |
+
+At sizes 20 and 50, structural noise patterns produce LARGER KS D values than true drift patterns. This is the **same inverted-direction failure mode** observed in the Jaccard and TF-IDF experiments.
+
+### Effect Sizes
+
+Mean Cohen's d for before/after response-time difference:
+
+| Pattern | Size 10 | Size 20 | Size 30 | Size 50 |
+|---------|---------|---------|---------|---------|
+| add_field | +0.35 | +0.28 | +0.84 | +0.60 |
+| remove_field | -0.73 | -0.94 | -0.60 | -0.17 |
+| change_type | +0.30 | -0.34 | -0.16 | +0.30 |
+| optional_field_churn | +0.05 | -0.05 | +0.17 | +0.93 |
+| null_valued_fields | +0.04 | +0.52 | +0.27 | -0.09 |
+| nested_object_variation | +1.14 | +1.47 | +1.00 | +1.47 |
+| fresh_copy | +0.47 | -0.08 | +0.00 | +0.31 |
+
+The largest effect sizes are for nested_object_variation (Cohen's d 1.0-1.5), which is structural noise. True drift patterns show smaller, inconsistent effects.
+
+## Interpretation
+
+### Why Response-Time Profiling Fails
+
+1. **Signal-to-noise ratio**: The computation-time difference for adding/removing 1 field (~9ms) is much smaller than the jitter range (0-50ms). At n=30 samples, the KS test lacks power to detect this small difference.
+
+2. **Inverted direction**: nested_object_variation adds 2 fields, producing a larger timing shift than add_field (which adds 1 field). This structural noise pattern is MORE detectable than true drift, creating the inverted separation direction.
+
+3. **Conservative correction**: Bonferroni correction (α=0.00208 for 24 comparisons) is very conservative. Even the largest KS D values (0.40-0.53) fail to reach this threshold.
+
+4. **Fundamental limitation**: The hypothesis assumes structural noise uses the "same computation path" while true drift uses a "different computation path." In the mock server, ALL patterns change the schema structure, so ALL patterns change the computation time. The distinction between "same path" and "different path" does not cleanly map to the drift/noise classification.
+
+### Comparison with Prior Experiments
+
+| Experiment | Signal Type | TP | FP | Direction | Verdict |
+|-----------|-------------|-----|-----|-----------|---------|
+| Jaccard (34788722106) | Structural | 0.97 | 1.00 | Inverted | FALSIFIED |
+| TF-IDF (35010853847) | Semantic | 0.97 | 1.00 | Inverted | FALSIFIED |
+| Response-time (35083040517) | Temporal | 0.00 | 0.19 | Inverted | FALSIFIED |
+
+Three orthogonal signal families tested. All three fail. The inverted direction is consistent across representational (Jaccard, TF-IDF) and temporal (response-time) signals.
+
+## Decision Rule Evaluation
+
+| Condition | Required | Observed | Pass/Fail |
+|-----------|----------|----------|-----------|
+| 1. Positive control | PASS | FAIL | FAIL |
+| 2. Null control | PASS | PASS | PASS |
+| 3. Drift patterns TP>=0.8 | >=2 of 3 | 0 of 3 | FAIL |
+| 4. Separation (Mann-Whitney) | PASS | FAIL | FAIL |
+| 5. Noise FP<=0.15 | >=1 of 3 | 2 of 3 | PASS |
+
+**Decision: FALSIFIED-IN-SETTING** (3 of 5 conditions fail)
+
+## Implications for C-FRESHNESS
+
+Two orthogonal signal families have now failed:
+
+1. **Representational signals** (Jaccard, TF-IDF): Fail because any token change reduces similarity proportionally, regardless of whether it is drift or noise.
+2. **Temporal signals** (response-time profiling): Fail because the computation-time difference is too small relative to jitter, and structural noise (nested_object_variation) produces larger timing shifts than true drift.
+
+The Graph lane's freshness frontier must shift to:
+
+- **Multi-signal ensembles** combining orthogonal dimensions (structural + temporal + behavioral)
+- **Direct schema comparison** (bypassing indirect signals entirely)
+- **Schema-specific calibration** rather than universal thresholds
+- **Larger sample sizes** (n>=100) with reduced jitter for temporal signals
+
+C-FRESHNESS remains HYPOTHESIS. The problem may require fundamentally different approaches rather than refining indirect signals.
+
+## Validity Threats
+
+1. **Mock server realism**: The mock server uses CPU-bound computation (json.dumps + sha256). Real APIs may have larger timing variance from database, caching, or CDN effects. However, the controlled validation shows the method fails even under favorable conditions.
+
+2. **Jitter magnitude**: The 0-50ms jitter range dominates the ~9ms per-field computation time. Real network jitter may be smaller (e.g., 1-5ms on localhost), which could improve detection. This is an open question.
+
+3. **Sample size**: n=30 per condition is underpowered for the observed effect sizes. Power analysis suggests n>=100 would be needed to detect KS D=0.2 with 80% power.
+
+4. **Pattern classification**: nested_object_variation adds 2 fields, making it structurally similar to add_field. The classification as "structural noise" may need refinement for real-world API drift detection.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "github_run_id": "35083040517",
+  "github_run_attempt": 1,
+  "execution_github_run_id": "35112016531",
+  "recorded_at": "2026-09-16T15:09:16.954463+00:00",
+  "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+  "pre_execute_sha": "9920b0382ca7b51cd559fbb5878be4c2aba82ec1",
+  "execution_code": "research/graph/freshness_detection/execute_response_time.py",
+  "execution_code_sha256": null,
+  "frozen_prereg_sha256": "9ed035c737b2a40464286a4424d0971f3f19ed762ede13a347f9b0aa983cd7fd",
+  "frozen_request_sha256": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
+  "frozen_spec_sha256": "db9bf8f720f79bff866248ec788394b319e2e789609e1d48a9823ae239cb008c",
+  "frozen_at": "2026-09-16T10:07:56.121500+00:00",
+  "parent_handoff_experiment_id": "EXP-GRAPH-35010853847",
+  "parent_handoff_sha256": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509",
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json",
+    "research/graph/freshness_detection/execute_response_time.py",
+    "research/claims/registry.json"
+  ],
+  "environment": {
+    "python_version": "3.12",
+    "platform": "linux",
+    "dependencies_used": [
+      "scipy.stats (KS two-sample test, Mann-Whitney U)",
+      "numpy (array operations, correlation)",
+      "http.server (mock server)",
+      "urllib.request (HTTP client)",
+      "time.perf_counter (response-time measurement)",
+      "hashlib.sha256 (computation-dependent serialization)",
+      "random (jitter injection, field generation)"
+    ]
+  },
+  "frozen_parameters": {
+    "SEED_FIELDGEN": 20260916,
+    "SEED_PATTERN": 20260917,
+    "SEED_JITTER": 20260918,
+    "N_REPS": 30,
+    "SCHEMA_SIZES": [10, 20, 30, 50],
+    "ALPHA": 0.05,
+    "BONFERRONI_N": 24,
+    "CORRECTED_ALPHA": 0.00208333,
+    "JITTER_MAX_MS": 50,
+    "SERIAL_ITERS_PER_FIELD": 2000
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+      "sha256": null,
+      "role": "raw",
+      "description": "Per-condition before/after response-time measurements (28 conditions × 30 samples each)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Aggregated TP/FP rates, per-pattern and per-schema-size analysis, control evaluations, decision"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "KS test results for each pattern × size combination (28 entries)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+      "sha256": null,
+      "role": "raw",
+      "description": "Server-side log of schema size, response bytes, and jitter per request"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Canonical producer handoff with all metrics, controls, observations, and validity notes"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35083040517/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable experiment report with interpretation and implications"
+    }
+  ],
+  "data_generation": {
+    "method": "Mock HTTP server with controlled computation paths",
+    "server_endpoint": "POST /api/compute",
+    "client_measurement": "time.perf_counter() HTTP round-trip",
+    "total_requests": 1680,
+    "breakdown": "4 sizes × 7 patterns × 30 reps × 2 (before/after) = 1680 client requests"
+  },
+  "reproduction_notes": "Run execute_response_time.py from research/graph/freshness_detection/. Server starts on random port, collects measurements, writes raw evidence to research/experiments/EXP-GRAPH-35083040517/raw_evidence/. Requires scipy, numpy. Frozen seeds ensure deterministic field generation and jitter injection."
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "check": "calibration_control_field_count",
+      "producer_id": "calibration_control_field_count",
+      "expected": "R² > 0.7 for response_time ~ field_count",
+      "observed": "R² = 0.9999 (recomputed R² = 0.999928 from fresh_copy before_means [104.505,196.901,284.122,462.876] vs sizes [10,20,30,50])",
+      "verdict": "PASS",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json (fresh_copy before_mean_ms) and raw_evidence/server_log.json",
+      "notes": "Near-perfect linear scaling confirms server not constant-time; failure is not MEASUREMENT_INVALID. Per-field computation ~9.3ms, SERIAL_ITERS_PER_FIELD=2000, jitter uniform 0-50ms dominates signal."
+    },
+    {
+      "check": "null_control_fresh_copy",
+      "producer_id": "null_control_fresh_copy",
+      "expected": "FP <= 0.15 on fresh_copy (no drift)",
+      "observed": "0/4 false alarms, FP=0.0, KS p values 0.239,0.807,0.957,0.594 all >0.05 and > Bonferroni 0.00208",
+      "verdict": "PASS",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json fresh_copy entries and result.json metrics.per_pattern_fp.fresh_copy",
+      "notes": "Natural jitter alone does not produce false drift under KS test; client-side perf_counter + localhost overhead not confounding."
+    },
+    {
+      "check": "positive_control_add_field_n30plus",
+      "producer_id": "positive_control_add_field",
+      "expected": "add_field at n>=30 detectable KS D>0.1 p<0.00208",
+      "observed": "n=30 D=0.4 p=0.01564339 undetected; n=50 D=0.3 p=0.135 undetected; 0/2 detected, mean KS D=0.35",
+      "verdict": "FAIL (as producer reports)",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json add_field 30/50 and raw_evidence/response_time_raw_measurements.json",
+      "notes": "Effect real (mean +13.4ms at n=30, +9.1ms at n=50) but small vs 0-50ms jitter; KS n=30 per group underpowered for D~0.3-0.4 at corrected alpha. Recomputed p<0.00208 threshold correctly applied. Even at uncorrected p<0.05 only 1/2 would be detected, still fails all-detected rule."
+    },
+    {
+      "check": "separation_control_mann_whitney",
+      "producer_id": "separation_control_mann_whitney",
+      "expected": "drift KS D > noise KS D one-sided p<0.05 at >=3 sizes",
+      "observed": "p=0.35,0.65,0.328953,0.9 all >0.05, 0/4 passing; mean KS D drift 0.333,0.289,0.322,0.222 vs noise 0.278,0.344,0.278,0.367 — inverted at sizes 20,50",
+      "verdict": "FAIL (as producer reports)",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json per_schema_size[*].mann_whitney_p_one_sided and raw_evidence/response_time_per_condition.json",
+      "notes": "Tiny N=3+3 per MW test limits power, but direction inversion observed independently in raw KS D values: nested_object_variation (noise) dominates. Inverted direction replicates prior Jaccard/TF-IDF experiments (same failure mode) rather than random noise."
+    },
+    {
+      "check": "target_split_sampling_integrity",
+      "expected": "N>=30 per before/after distribution, stable identifiers, no leakage",
+      "observed": "28 conditions × 30 before + 30 after = 1680 client requests, verified raw_evidence/response_time_raw_measurements.json each before_n=30 after_n=30. Server log 1680 entries matches. No schema content leaks into KS decision — KS fit on timing vectors only.",
+      "verdict": "PASS",
+      "evidence_ref": "raw_evidence/response_time_raw_measurements.json and raw_evidence/server_log.json (len 1680, jitter min 0.01 max 49.96 mean 25.16 uniform)",
+      "notes": "Sampling as frozen: SCHEMA_SIZES [10,20,30,50], SEED_FIELDGEN 20260916, SEED_PATTERN 20260917, SEED_JITTER 20260918. Before schema reused across patterns at same size — not a validity threat, but after modifications independent per pattern."
+    },
+    {
+      "check": "leakage_and_representation",
+      "expected": "No target leakage; measurement validity per prereg 6 items",
+      "observed": "No leakage: timing vectors derived solely from perf_counter HTTP round-trip. Representation loss disclosed: mock is CPU-bound json.dumps+sha256 per field, real APIs have DB/CDN/caching variance. Jitter injection independent of schema. HTTP POST body contains schema but server recomputes values deterministically — does not shortcut timing.",
+      "verdict": "PASS with caveat",
+      "evidence_ref": "research/graph/freshness_detection/execute_response_time.py ResponseTimeHandler.do_POST and provenance.json frozen_parameters",
+      "notes": "Prereg validity items 1-6 satisfied: controlled computation, N=30, jitter 0-50ms, frozen seeds, KS N1=N2=30, no schema leakage, Bonferroni 24 comparisons. Validity_notes correctly disclose signal-to-noise limitation and single-server scope."
+    },
+    {
+      "check": "environment_expressiveness",
+      "expected": "Environment could express tested effect if true",
+      "observed": "Environment did express field-count effect (R² 0.9999, +9.3ms/field) but per-field delta for add_field (1 field) << jitter range (0-50ms). At n=50, expected delta ~9ms vs jitter SD ~14.4ms, Cohen d 0.6 max for true drift vs 1.4 for nested noise (2-field addition). Environment expresses computation effect but not at magnitude to separate drift vs noise under chosen jitter.",
+      "verdict": "PASS — valid negative, not infrastructure failure",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.calibration_control_field_count size_means_ms and validity_notes in result.json",
+      "notes": "Producer correctly classifies as FALSIFIED-IN-SETTING not MEASUREMENT_INVALID; infrastructure could have shown effect (and did for nested 2-field case) but drift single-field insufficient."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "TF-IDF bag-of-words cosine similarity",
+      "producer_id": "TF-IDF bag-of-words cosine similarity (falsified baseline from EXP-GRAPH-35010853847)",
+      "expected": "For reference only, prior FALSIFIED-IN-SETTING with FP=1.0",
+      "observed": "Not recomputed in this run; cited correctly as inverted-direction failure (Cohen d 1.2-1.9 wrong direction). No new measurement required per spec baselines note 'included for cross-signal comparison only'.",
+      "verdict": "PASS — correctly inherited",
+      "evidence_ref": "spec.json baselines[0] and report.md Comparison with Prior Experiments table"
+    },
+    {
+      "baseline_id": "Jaccard (field_path,type) similarity",
+      "producer_id": "Jaccard (field_path,type) similarity (falsified baseline from EXP-GRAPH-34788722106)",
+      "expected": "Prior FALSIFIED-IN-SETTING FP=1.0",
+      "observed": "Cited, not re-executed. Consistent with lane history.",
+      "verdict": "PASS",
+      "evidence_ref": "spec.json baselines[1]"
+    },
+    {
+      "baseline_id": "Random classifier (50% detection rate)",
+      "producer_id": "Random classifier (50% detection rate)",
+      "expected": "50% TP, 50% FP baseline",
+      "observed": "Overall TP 0.0 (Wilson CI [0.0,0.2425]) underperforms random; FP 0.1875 (CI [0.0659,0.4301]) better than random on FP but TP failure makes it worse overall. Per-pattern TP all 0/4 vs random 2/4 expected.",
+      "verdict": "FAIL — signal underperforms random on TP (as producer reports)",
+      "evidence_ref": "result.json metrics.overall_tp_rate, metrics.overall_fp_rate, metrics.tp_ci_95, metrics.fp_ci_95"
+    },
+    {
+      "baseline_id": "Fixed-threshold response-time ratio (>1.5)",
+      "producer_id": "Fixed-threshold response-time ratio (response_time_after / response_time_before > 1.5)",
+      "expected": "Naive ratio detector",
+      "observed": "Not explicitly tabulated in result.json but recomputable from per_condition before_mean_ms/after_mean_ms: max ratio 1.17 (nested 20: 222/199), drift add_field ratios 1.04,1.02,1.047,1.019 — all <<1.5. Hence 0 detections as well, no separation from noise. Producer omits explicit table but effect evident in mean_diff_ms 4-13ms vs means 100-470ms.",
+      "verdict": "PASS — would also fail, not stronger than KS; omission not material",
+      "evidence_ref": "raw_evidence/response_time_per_condition.json before_mean_ms/after_mean_ms and spec.json baselines[3]",
+      "notes": "Required_fixes none; recommend future baselines be explicitly reported, but not affecting decision."
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_tp_rate": {"producer": 0.0, "recomputed": 0.0, "match": true, "detail": "0/12 detections (add_field 0/4, remove_field 0/4, change_type 0/4) at Bonferroni alpha 0.002083", "evidence_ref": "raw_evidence/response_time_per_condition.json 12 drift entries"},
+    "overall_fp_rate": {"producer": 0.1875, "recomputed": 0.1875, "match": true, "detail": "3/16 false alarms, all nested_object_variation at sizes 10,20,50", "evidence_ref": "raw_evidence/response_time_per_condition.json 16 noise+fresh entries"},
+    "tp_ci_95": {"producer": [0.0, 0.2425], "recomputed_wilson": "[0.0,0.242] approx", "match": true},
+    "fp_ci_95": {"producer": [0.0659, 0.4301], "recomputed_wilson": "[0.066,0.43] approx", "match": true},
+    "per_pattern_tp": {"producer": {"add_field": 0.0, "remove_field": 0.0, "change_type": 0.0}, "recomputed": {"add_field": "0/4", "remove_field": "0/4", "change_type": "0/4"}, "match": true},
+    "per_pattern_fp": {"producer": {"optional_field_churn": 0.0, "null_valued_fields": 0.0, "nested_object_variation": 0.75, "fresh_copy": 0.0}, "recomputed": {"optional_field_churn": "0/4", "null_valued_fields": "0/4", "nested_object_variation": "3/4", "fresh_copy": "0/4"}, "match": true},
+    "calibration_r_squared": {"producer": 0.9999, "recomputed": 0.9999288262406477, "match": true, "notes": "Producer rounds to 4 decimals; recomputed from fresh_copy before_means [104.505,196.901,284.122,462.876]; still >0.7 threshold"},
+    "per_schema_size_means": {
+      "10": {"producer_mean_ks_d_drift": 0.3333, "producer_mean_ks_d_noise": 0.2778, "recomputed": "drift D [0.333,0.367,0.3] mean 0.333, noise [0.233,0.1,0.5] mean 0.2778 match"},
+      "20": {"producer_mean_ks_d_drift": 0.2889, "producer_mean_ks_d_noise": 0.3444, "recomputed": "drift [0.267,0.367,0.233] mean 0.2889, noise [0.167,0.333,0.533] mean 0.3444 match"},
+      "30": {"producer_mean_ks_d_drift": 0.3222, "producer_mean_ks_d_noise": 0.2778, "recomputed": "match"},
+      "50": {"producer_mean_ks_d_drift": 0.2222, "producer_mean_ks_d_noise": 0.3667, "recomputed": "drift [0.3,0.133,0.233] mean 0.222, noise [0.4,0.167,0.533] mean 0.366 match"}
+    },
+    "bonferroni_sensitivity_check": {"corrected_alpha": 0.00208333, "uncorrected_alpha_0.05_detections": 8, "uncorrected_drift_detections": 3, "uncorrected_noise_detections": 5, "uncorrected_tp_rate": 0.25, "uncorrected_fp_rate": 0.3125, "decision_under_uncorrected": "still FALSIFIED-IN-SETTING (TP<0.8 and FP>0.15, positive control 1/2, separation still fail)"},
+    "controls_recomputed": {
+      "positive_control_add_field": {"producer_result": "FAIL", "recomputed": "FAIL 0/2", "mean_ks_d": 0.35, "match": true},
+      "null_control_fresh_copy": {"producer_result": "PASS", "recomputed": "PASS 0/4 FP 0.0", "match": true},
+      "separation_control_mann_whitney": {"producer_result": "FAIL", "recomputed": "FAIL 0/4", "match": true},
+      "calibration_control_field_count": {"producer_result": "PASS", "recomputed": "PASS R²>0.7", "match": true}
+    },
+    "decision_rule_recomputed": {"1_positive_control": false, "2_null_control": true, "3_drift_patterns": false, "4_separation": false, "5_noise_fp": true, "producer_decision": "FALSIFIED-IN-SETTING", "recomputed_decision": "FALSIFIED-IN-SETTING", "match": true}
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for response-time profiling via KS two-sample test on HTTP client-side response-time distributions with N=30 per condition, uniform 0-50ms jitter, 2000 serial_iters per field, POST /api/compute mock server, Bonferroni alpha 0.00208 across 24 comparisons, schema sizes 10/20/30/50, drift patterns {add_field,remove_field,change_type} vs noise {optional_field_churn,null_valued_fields,nested_object_variation}. Achieves TP=0.0 (0/12, Wilson CI [0,0.243]) and FP=0.1875 (3/16, CI [0.066,0.43]), positive_control FAIL, separation FAIL (inverted direction). Calibration R²=0.9999 proves computation-dependent timing, so failure is signal-to-noise and pattern-indistinguishability, not MEASUREMENT_INVALID. Does NOT support broader claim that all temporal signals fail, nor does it close real-API, larger-N (>=100), reduced-jitter, or multi-signal-ensemble hypotheses; C-FRESHNESS remains HYPOTHESIS per lane charter.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35083040517/spec.json",
+    "research/experiments/EXP-GRAPH-35083040517/prereg.md",
+    "research/experiments/EXP-GRAPH-35083040517/freeze.json",
+    "research/experiments/EXP-GRAPH-35083040517/result.json",
+    "research/experiments/EXP-GRAPH-35083040517/report.md",
+    "research/experiments/EXP-GRAPH-35083040517/provenance.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+    "research/graph/freshness_detection/execute_response_time.py"
+  ],
+  "unresolved": [
+    "Whether N>=100 per condition would achieve power for KS D~0.3 at corrected alpha — prereg power note (~80% for D=0.4 at n=30) suggests larger N still limited by jitter magnitude; not tested.",
+    "Whether reduced jitter (e.g., 0-10ms) improves SNR enough to detect single-field drift; producer validity_notes flag this but no experiment.",
+    "Whether sequential/adaptive tests or per-request variance features outperform distribution KS; unexplored.",
+    "Whether real APIs (DB/cache/CDN) produce larger timing deltas than CPU-bound mock; mock is favorable case, failure here constrains but does not falsify all real-world temporal signals.",
+    "Whether nested_object_variation classification as noise is appropriate — it adds 2 fields (12 vs 10, etc.) and behaves like add_field; reclassification would change FP to 0/12 but still TP=0/12, decision unchanged, but pattern taxonomy needs refinement.",
+    "Ensemble complementarity of failed signals (Jaccard + TF-IDF + response-time) untested — multi-signal ensemble could theoretically exceed single-signal ceilings.",
+    "Fixed-threshold ratio baseline not explicitly reported with quantitative table; recomputed ratios ~1.02-1.05 confirm failure but should be tabulated for completeness."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted direction at sizes 20, 50 — noise more detectable than drift). 3 of 5 frozen decision conditions fail. This is the third orthogonal signal family tested (after Jaccard structural and TF-IDF semantic) and the third to fail. C-FRESHNESS remains HYPOTHESIS — the claim is not globally closed; only the specific setting (KS test on client-side response-time distributions, N=30, uniform 0-50ms jitter, mock CPU-bound server, schema sizes 10-50) is falsified."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a multi-signal ensemble combining structural similarity (Jaccard/TF-IDF) with behavioral signals (e.g., session token validation, schema access pattern changes, or field-usage profiling) achieve TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination when each individual signal family alone fails?",
+  "reason": "Auditor confirms producer metrics (all recomputed match). Valid negative: calibration R²=0.9999 proves computation-dependent timing, so failure is signal-to-noise and pattern-indistinguishability, not infrastructure. Positive control fails because the per-field timing delta (~9ms for 2000 json.dumps+sha256 iterations) is masked by 0-50ms uniform jitter at N=30. Separation inverts because nested_object_variation (adds 2 fields, classified as structural noise) produces larger KS D values than true drift patterns — same inverted-direction failure mode observed across all three signal families. Three orthogonal signal families now tested and falsified in their respective controlled settings. The freshness frontier must shift from single-signal approaches to multi-signal ensembles or direct schema comparison. The bounded falsification does NOT close the broader C-FRESHNESS domain: real-API timing characteristics, larger N (>=100), reduced jitter, contextual embeddings, or ensemble methods remain untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35083040517/spec.json",
+    "research/experiments/EXP-GRAPH-35083040517/result.json",
+    "research/experiments/EXP-GRAPH-35083040517/audit.json",
+    "research/experiments/EXP-GRAPH-35083040517/report.md",
+    "research/experiments/EXP-GRAPH-35083040517/provenance.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a multi-signal ensemble combining structural similarity (Jaccard/TF-IDF) with behavioral signals (e.g., session token validation, schema access pattern changes, or field-usage profiling) achieve TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination when each individual signal family alone fails?",
+  "why_next": "Three orthogonal single-signal families (Jaccard structural, TF-IDF semantic, response-time temporal) have each been tested and falsified in controlled settings. Single-signal approaches appear insufficient for drift-vs-noise discrimination because each signal type is confounded by structural noise in a different way (similarity reduction, inverted direction, timing masking). The natural next step is to test whether combining orthogonal signals provides discriminative power that no single signal achieves alone. Multi-signal ensembles are a materially orthogonal approach — they test complementarity rather than refining a failed signal type.",
+  "carry_forward": {
+    "established": [
+      "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions is falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted). (result.json metrics, audit.json claim_ceiling)",
+      "The mock server produces computation-dependent timing (R²=0.9999, +9.3ms/field), so the failure is signal-to-noise and pattern-indistinguishability, not MEASUREMENT_INVALID. (audit.json validity_findings[0], result.json controls.calibration_control_field_count)",
+      "Three orthogonal signal families tested and falsified in controlled settings: Jaccard (field_path,type) structural similarity — FP=1.0 at all sizes (EXP-GRAPH-34788722106); TF-IDF bag-of-words semantic similarity — TP=0.972, FP=1.0, inverted direction (EXP-GRAPH-35010853847); Response-time KS test — TP=0.0, FP=0.1875, inverted direction (this experiment). (this result.json, parent handoffs)",
+      "The inverted separation direction (noise more detectable/more divergent than drift) is observed across all three signal families. Jaccard/TF-IDF: structural noise produces lower similarity (more divergent). Response-time: nested_object_variation (noise) produces larger KS D than true drift. (result.json per_schema_size, parent handoff carry_forward.established)",
+      "nested_object_variation (structural noise adding 2 fields) produces larger response-time shifts than add_field (true drift, 1 field) at sizes 10, 20, 50 — the noise-vs-drift distinction may depend on magnitude of structural change rather than semantic meaningfulness. (result.json per_pattern_fp.nested_object_variation, report.md)",
+      "Null control (fresh_copy) passes for response-time profiling: 0% FP across all sizes, confirming jitter alone does not produce false drift signals. (result.json controls.null_control_fresh_copy)"
+    ],
+    "rejected": [
+      "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions with N=30, uniform 0-50ms jitter, 2000 serial_iters per field, mock CPU-bound server, schema sizes 10-50 — falsified (TP=0.0, positive control FAIL, separation FAIL inverted)",
+      "Single-signal temporal staleness detection using client-side HTTP response-time distributions — fails because per-field timing delta (~9ms) masked by 0-50ms jitter at N=30",
+      "TF-IDF bag-of-words semantic similarity viable as staleness signal under structural noise (FP=1.0, inverted direction — EXP-GRAPH-35010853847)",
+      "Jaccard (field_path,type) similarity viable as staleness signal under structural noise (FP=1.0 — EXP-GRAPH-34788722106)",
+      "Ensemble of any two token-based signals rescues discrimination when both fail equally (converges to pure signal, F1≈0.65 — EXP-GRAPH-35010853847 ensemble_optimization)"
+    ],
+    "unknown": [
+      "Whether multi-signal ensembles combining structural + temporal + behavioral dimensions achieve discrimination when each single signal fails individually",
+      "Whether N>=100 per condition with reduced jitter (0-10ms) provides sufficient power for KS test detection of true drift (~9ms per-field delta)",
+      "Whether sequential/adaptive tests or per-request variance features outperform distribution-level KS test for temporal signals",
+      "Whether real APIs (DB/cache/CDN effects) produce larger timing differences than CPU-bound mock server",
+      "Whether sentence-transformers contextual embeddings (all-MiniLM-L6-v2 384-dim) succeed where TF-IDF fails — untested due to torch unavailability; realistic test suggests fundamental problem but n=5 insufficient",
+      "Whether per-field semantic matching (field-by-field alignment) rather than schema-level pooled cosine rescues change_type detection",
+      "Whether session token validation can discriminate auth-relevant drift from structural noise",
+      "Whether direct schema comparison (bypassing indirect signals entirely) is required for reliable drift detection"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — only three bounded signal families falsified in specific controlled settings; the broader domain remains open (audit.json claim_ceiling)",
+      "All temporal signals fail — only tested with client-side HTTP timing on localhost with CPU-bound mock; real-API, larger-N, reduced-jitter, or adaptive test variants untested",
+      "nested_object_variation is universally more detectable than true drift — observed in this specific mock server where it adds 2 fields vs add_field's 1 field; the pattern taxonomy may need refinement for real-world API drift detection",
+      "The inverted direction (noise > drift) is a fundamental property of response-time signals — could be an artifact of mock server design (2-field noise addition vs 1-field drift addition) rather than a universal property",
+      "An ensemble of three individually failed signals would necessarily fail — complementarity is untested; individual failure does not preclude ensemble success (audit.json unresolved[5])",
+      "The problem requires fundamentally different approaches — this is an interpretation from three narrow settings, not an established fact; the three tested settings may not represent the full solution space",
+      "Synthetic noise patterns (10% churn, deduped nulls, single nested conversion) are representative of real-world API variation — they are synthetic and fixed at 10% magnitude"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35083040517/result.json — primary metrics and per-pattern analysis",
+    "research/experiments/EXP-GRAPH-35083040517/audit.json — recomputed metrics, claim_ceiling, validity findings",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json — raw timing vectors",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json — KS test results per pattern x size",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json — aggregated derived measurements",
+    "research/experiments/EXP-GRAPH-35010853847/result.json — TF-IDF semantic similarity metrics",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json — TF-IDF recomputed metrics and claim ceiling",
+    "research/experiments/EXP-GRAPH-34788722106/result.json — Jaccard structural similarity metrics",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json — Jaccard carry_forward",
+    "research/claims/registry.json — C-FRESHNESS claim status",
+    "research/graph/freshness_detection/execute_response_time.py — response-time execution code"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35083040517/spec.json",
+    "research/experiments/EXP-GRAPH-35083040517/prereg.md",
+    "research/experiments/EXP-GRAPH-35083040517/freeze.json",
+    "research/experiments/EXP-GRAPH-35083040517/result.json",
+    "research/experiments/EXP-GRAPH-35083040517/audit.json",
+    "research/experiments/EXP-GRAPH-35083040517/report.md",
+    "research/experiments/EXP-GRAPH-35083040517/provenance.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json",
+    "research/experiments/EXP-GRAPH-34788722106/result.json",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json"
+  ],
+  "recommended_action": "Design a multi-signal ensemble experiment for the graph lane that combines two or more of the three tested signal families (structural Jaccard/TF-IDF, temporal response-time, behavioral/access-pattern) and tests whether complementarity achieves TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination. The ensemble must be pre-registered with a frozen combination rule (not post-hoc tuning). If no ensemble succeeds, the frontier should shift to direct schema comparison (diffing schema structures rather than indirect signals) or schema-specific calibration approaches. Three bounded single-signal falsifications constrain but do not close C-FRESHNESS."
 }
 ```
 
