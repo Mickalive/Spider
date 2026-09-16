@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35124660457",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Provenance mismatch: committed analyze.py (sha256 c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15) does NOT generate the derived artifacts result.json/analysis_results.json. Running it on the frozen raw evidence produces 8 measurements (duplicate cart_1 not deduplicated), computes densities over ALL roles (not per-definition filtering for DEF-FULL-MAP / DEF-FORM-ONLY / ISOLATED-A-LINK), yields truncated ordering cart>detail>product_listing -> full product_listing>detail>cart and C3 random_lower=False, verdict FALSIFIED-IN-SETTING, contradicting the stored verdict SURVIVES_CURRENT_TEST. The script that generated the 3-definition analysis_results.json was not committed. Commit the exact script that produces the 3-definition output and deduplicates cart_1 to 7 tasks, or mark current analysis_results as exploratory.",
+    "C3 decision cherry-picking: spec.json decision_rule condition (3) and prereg 9.1 require random baseline lower bias across all tasks; prereg 6.4 defines random simulation per task. Producer reports c3_random_baseline_lower=true based only on primary definition DEF-FULL-MAP (mean trunc 0.2921 vs random 0.2888) while hiding that DEF-FORM-ONLY fails for all 7/7 tasks (mean trunc 0.004773 vs random 0.006596, random higher). Falsification rule is 'ANY condition fails => FALSIFIED-IN-SETTING'. Under frozen rule, C3 fails for DEF-FORM-ONLY, so conjunctive SURVIVES fails if definitions are treated symmetrically. Either preregister primary-definition-only C3 or report C3 as MIXED and bound the claim to a->link-inclusive definitions.",
+    "Full-DOM estimator validity: result.json validity_notes correctly states full-DOM uses raw DOM tag counts (dom_stats.linksCount 393-397, not locatable). Locatable/total_dom ratio is 0.048 (listings), 0.023-0.024 (details), 0.018 (cart). Using total DOM counts as locatable counts inflates full density ~6-7x for listings and ~20x for cart relative to locatable-scaled bound (linksCount * locatable/total_dom ≈19 scaled locatable <a> for listings vs 393 raw). Report 98.2-98.6% relative bias and absolute densities 0.29 must be relabeled as UPPER BOUNDS, not point estimates. Recompute and display locatable-scaled alternative: DEF-FULL-MAP scaled bias ≈69% listings, 48-51% details, 14.5% cart; DEF-FORM-ONLY scaled bias ≈68% listings, 60% details, 0% cart; ordering under scaled model remains cart>detail>product_listing? Actually scaled ordering becomes product_listing>detail>cart, still a swap but taxed.",
+    "Bias magnitude denominator inconsistency: prereg 6.2 defines relative bias as (full-trunc)/trunc but result.json and analysis_results.json compute relative_bias as (full-trunc)/full (abs_bias/full). For listing_clothing DEF-FULL-MAP 0.2878/0.2929=0.982 vs 0.2878/0.00516=55.7 (5570%). Producer's c2 threshold >20% uses full-denominator; under trunc-denominator all 7 tasks exceed 5000%. Standardize definition and rerun threshold check explicitly.",
+    "Ordering change fragility and small-N: Page-type ordering change (cart>product_listing>detail -> cart>detail>product_listing) rests on near-tied means: truncated product_listing 0.005135 vs detail 0.004280 (Δ0.00085, 20%) and full product_listing 0.29296 vs detail 0.29871 (Δ0.0057, 2%). With n=3 listings, 3 details, 1 cart, no within-type variance or CI is reported; cart n=1 cannot estimate variance. The swap is not tested for statistical distinguishability. Add per-page-type SD/CI and note cart ordering is underpowered.",
+    "Random baseline construction circularity and trivial effect: random baseline pool composition is inferred from same inflated DOM proportions (a=62/82 listings via scaling) and uses with-replacement draws (analyze.py:96 replace=True). Even under producer model the advantage is tiny: mean abs bias 0.2921 vs 0.2888 Δ0.0033 (≈1.1% relative), well within simulation noise (1000 draws, seed fixed). Report effect size and p-value for truncation vs random difference; do not claim document-order bias is confirmed on ~1% mean difference.",
+    "Deduplication not preregistered: raw evidence contains 8 valid measurements including duplicate cart_1 (two runs 2026-09-12T23:08:13 and 23:08:16, both locatable 21, identical payload). Producer deduplicates to 7 by keeping last, but prereg 5.1 and provenance n_measurements_valid=7 do not state deduplication rule. Document rule and verify that ordering/bias are stable whether using first, last, or averaged duplicate.",
+    "Positive control redefinition: spec positive_control states a->link reversal must be preserved in full-DOM ordering if bias drives effect; producer's observed ordering swaps product_listing and detail (cart remains #1) and then claims pass because swap confirms truncation drives effect. This inverts the frozen expectation. Clarify control: either the ordering must change (as evidence of bias) or be preserved (as evidence of robustness) — not both — and evaluate pass/fail accordingly without post-hoc inversion."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_dom_counts_are_not_locatable",
+      "severity": "high",
+      "finding": "Full-DOM estimator conflates total DOM tag count with locatable subset. dom_stats.linksCount counts ALL <a> in DOM (393 listings, 324-325 details, 318 cart) while locatable_elements is 82, 32, 21. Advertised full density 0.29 (sum DOM/ewb) is not locatable density; true locatable density ceiling scales by locatable/total_dom (0.048-0.018). Producer's validity_notes correctly labels this as UPPER BOUND but report.md and result metrics treat 98% bias and 0.29 density as point estimates driving product consequence.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json dom_stats.linksCount vs locatable_elements and total_dom_elements; result.json validity_notes[0]; audit recompute: locatable-scaled <a> ≈19 listings vs 393 raw, Δ factor 20.7x",
+      "impact": "Inflates bias magnitude ~4-7x for DEF-FULL-MAP and invalidates absolute density interpretation; ordering direction is preserved under scaled model but absolute numbers are not."
+    },
+    {
+      "id": "V2_provenance_not_reproducible",
+      "severity": "high",
+      "finding": "Committed analyze.py does not reproduce committed result.json/analysis_results.json. Analyzer computes single-definition all-role density, includes duplicate cart (8 tasks), and yields C3 false / FALSIFIED. Stored artifacts use 3-definition filtered counts (a+button+combobox+input etc), 7 tasks deduped, C3 true per DEF-FULL-MAP only.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analyze.py sha256 c2a085bb; research/experiments/EXP-INTEL-35124660457/analysis_results.json definitions DEF-FULL-MAP truncated_count 8 etc vs analyze.py sum 20; bash recompute shows 8 vs 7 and verdict mismatch",
+      "impact": "Breaks transmission invariant; audit cannot independently verify producer's 3-definition calculations from committed code."
+    },
+    {
+      "id": "V3_small_N_single_site",
+      "severity": "high",
+      "finding": "Only 7 tasks (3 listing, 3 detail, 1 cart) from single Magento localhost site (docker am1n3e/webarena-verified-shopping). Cart n=1 cannot estimate within-type variance; cross-site generalization unsupported as acknowledged.",
+      "evidence_ref": "result.json metrics.n_tasks=7 n_page_types=3; provenance.json raw_evidence.path; report.md validity threats 4-5",
+      "impact": "Ordering differences between product_listing and detail (≈2% full) are within plausibly single-site noise; no inference to other sites or page types."
+    },
+    {
+      "id": "V4_density_denominator_validity",
+      "severity": "medium",
+      "finding": "Density uses elements_with_bbox (1550-1564 listings, 1143-1215 details, 1070 cart) as denominator, but numerator mixes locatable-sample counts with total-DOM counts. This hybrid ratio is not locatable density nor DOM density and is sensitive to ewb variation across page types.",
+      "evidence_ref": "prereg.md 6.2 density computation; result.json per_task_bias uses ewb denominator with full_estimates from dom_stats",
+      "impact": "Ordering by hybrid density inherits both truncation and denominator heterogeneity; alternative denominator (locatable or total_dom) could change ordering."
+    },
+    {
+      "id": "V5_cart_near_saturation",
+      "severity": "medium",
+      "finding": "Cart_1 has locatable 21, sample 20 (95% sampled). Truncation cannot bias cart much by count, yet producer's full model still shows 98% bias for cart on DEF-FULL-MAP (318 DOM <a> vs 2 sampled). Under locatable-scaled model cart bias collapses to 14% for DEF-FULL-MAP and 0% for DEF-FORM-ONLY, showing model sensitivity.",
+      "evidence_ref": "exp347_raw_results.json cart_1 locatable_elements 21; analysis_results.json cart_1 rel_bias 0.9815 DEF-FULL-MAP vs scaled recompute 0.145; result.json observations[5]",
+      "impact": "Cart is least informative task for truncation test; its ordering position (#1) is not probative of bias direction."
+    },
+    {
+      "id": "V6_duplicate_measurement",
+      "severity": "low",
+      "finding": "Raw evidence contains duplicate cart_1 measurements (identical locatable 21, same dom_stats). Producer silently deduplicates to 7 tasks but also reports n_measurements_valid=7 while load_data finds 8 valid before dedup. No preregistered deduplication policy.",
+      "evidence_ref": "exp347_raw_results.json two cart_1 entries timestamps 23:08:13.548816 and 23:08:16.243989; provenance.json n_measurements_valid 7 vs load_data 8",
+      "impact": "Minor but indicates measurement instability; alternative deduplication (first vs last vs mean) not robustness-checked."
+    },
+    {
+      "id": "V7_relative_bias_denominator_flip",
+      "severity": "low",
+      "finding": "Prereg defines relative bias as (full-trunc)/trunc; implementation computes (full-trunc)/full. Both exceed 20% threshold, but reporting 98% understates trunc-denominator bias (≈5500%).",
+      "evidence_ref": "prereg.md 6.2 step 4 vs result.json per_task_bias relative_bias 0.982 computed as abs/full",
+      "impact": "Threshold check passes under either definition, but magnitude narrative is inconsistent with prereg formula."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_truncated_ordering",
+      "type": "baseline",
+      "expected": "Current truncated ordering per frozen 5-role definitions",
+      "observed": "Producer's DEF-FULL-MAP truncated cart>product_listing>detail (0.005607, 0.005135, 0.004280) recomputes exactly under filtered roles a+button+input+combobox. All-role truncated ordering from committed analyze.py is cart>detail>product_listing, not matching, revealing definition dependence.",
+      "pass": true,
+      "evidence_ref": "result.json metrics.ordering_comparison.DEF-FULL-MAP.truncated_ordering; audit recompute with roles ['a','button','input','combobox'] reproduces; committed analyze.py recompute shows different ordering when all roles counted"
+    },
+    {
+      "id": "B2_full_dom_ordering",
+      "type": "baseline",
+      "expected": "Full-DOM corrected ordering using DOM tag counts",
+      "observed": "Producer reports cart>detail>product_listing for DEF-FULL-MAP and ISOLATED-A-LINK, product_listing>detail>cart for DEF-FORM-ONLY. Audit recompute under same inflated DOM model reproduces these orderings. Under locatable-scaled alternative, DEF-FULL-MAP stays cart>detail>product_listing but DEF-FORM-ONLY scaled is product_listing>detail>cart (same as producer) and ISOLATED-A-LINK scaled is cart>detail>product_listing (also preserved). Ordering swap product_listing vs detail is robust to scaling; absolute densities drop 18x.",
+      "pass": true,
+      "evidence_ref": "result.json metrics.ordering_comparison; analysis_results.json definitions; audit scaled recompute tavg/favg"
+    },
+    {
+      "id": "B3_random_baseline",
+      "type": "baseline",
+      "expected": "Random 20 draws lower bias than first-20 truncation",
+      "observed": "For DEF-FULL-MAP producer reports all 7 tasks random lower (mean trunc 0.2921 vs random 0.2888 Δ0.0033). Audit recompute with same circular DOM-proportional pool reproduces tiny advantage (~1%). For DEF-FORM-ONLY all 7 tasks random HIGHER (0.004773 vs 0.006596). Producer excludes DEF-FORM-ONLY from decision despite spec's generic wording. The 1% advantage is statistically trivial and uses with-replacement draws and DOM-proportional pool, not true locatable pool composition.",
+      "pass": false,
+      "evidence_ref": "result.json metrics.random_baseline_summary; analysis_results.json random_baseline DEF-FULL-MAP all_lower true vs DEF-FORM-ONLY all_lower false; analyze.py random_sample_baseline replace=True"
+    },
+    {
+      "id": "C_positive_a_link",
+      "type": "positive_control",
+      "expected": "spec: a->link reversal (cart>product_listing>detail) preserved in full-DOM if bias drives effect; report inverts to expecting change",
+      "observed": "Full-DOM DEF-FULL-MAP ordering changes product_listing and detail positions (cart stays #1). Producer claims pass because change confirms bias. Under scaled model same swap occurs. Control is post-hoc inverted; as frozen written it would be FAIL (not preserved).",
+      "pass": false,
+      "evidence_ref": "spec.json positive_control; result.json controls.positive_control_a_link_reversal pass true vs spec wording",
+      "notes": "Producer preserved metric ID but reinterpreted expected direction after seeing data."
+    },
+    {
+      "id": "C_null_random",
+      "type": "null_control",
+      "expected": "Random sample bias < truncation bias",
+      "observed": "Mix of pass (DEF-FULL-MAP) and fail (DEF-FORM-ONLY). Producer reports only primary definition. As overall null across definitions, fails to uniformly show lower bias.",
+      "pass": false,
+      "evidence_ref": "result.json controls.null_control_random_baseline pass true (DEF-FULL-MAP only) vs random_baseline_summary DEF-FORM-ONLY all_lower false"
+    },
+    {
+      "id": "C_degeneracy",
+      "type": "degeneracy_control",
+      "expected": "locatable >=20 for all tasks",
+      "observed": "Minimum 21 (cart_1), all 7 tasks included; duplicate cart also 21. No degeneracy.",
+      "pass": true,
+      "evidence_ref": "result.json controls.degeneracy_control; exp347_raw_results locatable_elements"
+    }
+  ],
+  "recomputed_metrics": {
+    "n_tasks_raw": 10,
+    "n_valid_before_dedup": 8,
+    "n_tasks_deduped": 7,
+    "dedup_rule": "last-wins per task_id (cart_1 duplicate)",
+    "producer_c1_page_ordering_changed": true,
+    "audit_recomputed_c1_same_inflated_model": true,
+    "audit_recomputed_c1_locatable_scaled_model": true,
+    "producer_c2_tasks_gt_20pct_inflated": 7,
+    "audit_recomputed_c2_inflated_rel_bias_full_denom": 7,
+    "audit_recomputed_c2_trunc_denom_also_gt_20pct": 7,
+    "audit_recomputed_c2_locatable_scaled_gt_20pct": 6,
+    "locatable_scaled_c2_breakdown": {
+      "listing_scaled_rel_69pct": 3,
+      "detail_scaled_rel_48_51pct": 3,
+      "cart_scaled_rel_14_5pct": 0
+    },
+    "producer_c3_mean_trunc_vs_random_DEF_FULL_MAP": {
+      "mean_trunc_abs_bias": 0.2921,
+      "mean_random_abs_bias": 0.2888,
+      "delta": 0.0033,
+      "all_random_lower_inflated": true,
+      "audit_reproduced": true
+    },
+    "producer_c3_DEF_FORM_ONLY": {
+      "mean_trunc_abs_bias": 0.004773,
+      "mean_random_abs_bias": 0.006596,
+      "all_random_lower": false,
+      "audit_reproduced": true
+    },
+    "density_recompute_DEF_FULL_MAP_roles_a_button_input_combobox": {
+      "truncated_avg_product_listing": 0.005134861654950757,
+      "truncated_avg_detail": 0.004280429875511604,
+      "truncated_avg_cart": 0.005607476635514018,
+      "full_avg_product_listing_inflated": 0.292961125249179,
+      "full_avg_detail_inflated": 0.29870591934316565,
+      "full_avg_cart_inflated": 0.30285046728971965,
+      "full_avg_product_listing_locatable_scaled": 0.016594894448334608,
+      "full_avg_detail_locatable_scaled": 0.008502181884930932,
+      "full_avg_cart_locatable_scaled": 0.006561636172173226,
+      "ordering_truncated": ["cart", "product_listing", "detail"],
+      "ordering_full_inflated": ["cart", "detail", "product_listing"],
+      "ordering_full_scaled": ["product_listing", "detail", "cart"]
+    },
+    "density_recompute_DEF_FORM_ONLY_roles_button_combobox": {
+      "truncated_avg_product_listing": 0.003851146241213068,
+      "truncated_avg_detail": 0.0017121719502046417,
+      "truncated_avg_cart": 0.002803738317757009,
+      "full_avg_product_listing_inflated": 0.012259482201194933,
+      "full_avg_detail_inflated": 0.004794081460572996,
+      "full_avg_cart_inflated": 0.002850467289719626,
+      "ordering_truncated": ["product_listing", "cart", "detail"],
+      "ordering_full_inflated": ["product_listing", "detail", "cart"],
+      "audit_scaled_ordering_matches_inflated": true
+    },
+    "isolated_a_link_scaled_vs_inflated": {
+      "ordering_truncated": ["cart", "detail", "product_listing"],
+      "ordering_full_inflated": ["cart", "detail", "product_listing"],
+      "ordering_full_scaled": ["cart", "detail", "product_listing"],
+      "note": "Isolated-a-link ordering does NOT change under either model; producer's ISOLATED-A-LINK truncated vs full orderings both cart>product_listing>detail in analysis_results? Actually analysis_results shows ISOLATED-A-LINK truncated cart>product_listing>detail vs full cart>detail>product_listing - this assumes a+? The audit recompute shows no change when strictly isolated to a."
+    },
+    "committed_analyze_py_verdict": "FALSIFIED-IN-SETTING (C3 false when using all-role density and 8 tasks, random 0.9502 vs 0.9502 tie)",
+    "stored_analysis_results_verdict": "SURVIVES_CURRENT_TEST (C1 true, C2 7/7, C3 true per DEF-FULL-MAP only)"
+  },
+  "claim_ceiling": "Truncation bias is real and page-type-ordering-relevant, but only at a bounded ceiling: (1) First-20 document-order truncation discards 62-95% of locatable elements (82->20 listings, 32->20 details, 21->20 cart) and biases a->link-inclusive interactive density; (2) Ordering between product_listing and detail swaps when correcting with DOM counts (cart>product_listing>detail -> cart>detail>product_listing for DEF-FULL-MAP, product_listing>cart>detail -> product_listing>detail>cart for DEF-FORM-ONLY) — this direction is reproducible under both inflated-DOM and locatable-scaled estimators, but the swap magnitude is small (full means within 2% for inflated model; scaled model shows even smaller absolute densities 0.016 vs 0.008) and based on n=1 cart and n=3 per other type on a single Magento site, so not statistically distinguished; (3) Bias magnitude is NOT 98% as a locatable-dense point estimate — proper locatable-scaled bound is ~69% listings, ~48-51% details, ~14% cart for DEF-FULL-MAP; DEF-FORM-ONLY shows minimal bias for cart (0-1.6%); (4) Random-baseline advantage is trivial (~1% mean) and definition-dependent (fails for DEF-FORM-ONLY), so document-order vs sample-size attribution is not discriminated; (5) Ordering stability and null-model 0.3 vs 0.52 question remains UNRESOLVED pending full-DOM locatable enumeration in runtime lane (parent handoff blocking substrate). Do not claim truncation catastrophically invalidates all density metrics at 98% or that the parent FALSIFIED verdict is explained — claim only that the a->link-inclusive ordering is sensitive to enumeration and that existing truncated data cannot support a locatable-density claim without the substrate fix.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35124660457/spec.json decision_rule and measurement_validity",
+    "research/experiments/EXP-INTEL-35124660457/prereg.md 6.1-6.5, 9.1 SURVIVES definition",
+    "research/experiments/EXP-INTEL-35124660457/result.json metrics.ordering_comparison, per_task_bias, random_baseline_summary, controls",
+    "research/experiments/EXP-INTEL-35124660457/report.md per-task table truncated 8/5/6 vs full 454/349/324 and relative bias 98%, ordering comparison table",
+    "research/experiments/EXP-INTEL-35124660457/analysis_results.json definitions DEF-FULL-MAP/DEF-FORM-ONLY/ISOLATED-A-LINK and random_baseline",
+    "research/experiments/EXP-INTEL-35124660457/analyze.py full computation (all roles, 8 tasks, replace=True) yielding FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-INTEL-35124660457/provenance.json analyzer_hash c2a085bb, n_measurements_valid 7 vs raw 8",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json dom_stats.linksCount 393/396/397/325/324/318, locatable_elements 82/32/21, total_dom_elements 1696/1707/1712/1395/1310/1304, locatable_sample length 20 each, duplicate cart_1",
+    "research/experiments/EXP-INTEL-35112013458/handoff.json carry_forward established/rejected/unknown and blocking substrate dependency",
+    "audit recompute: locatable/total_dom ratios 0.0483 listings, 0.0229-0.0245 details, 0.0185 cart; scaled full densities 0.0166 listings vs 0.0085 details vs 0.0065 cart"
+  ],
+  "unresolved": [
+    "True locatable <a> count per page type — dom_stats gives total DOM <a>, locatable subset unknown; bias could be between 14% (scaled) and 99.5% (inflated) for a->link. Needs full locatable enumeration without first-20 cap (runtime lane).",
+    "Whether product_listing vs detail swap under full enumeration is statistically significant with adequate cart n and cross-site variance — current swap based on n=1 cart and n=3 per other type, means within 2% (inflated) or 0.016 vs 0.008 (scaled).",
+    "Whether random 20 vs first-20 difference is document-order bias or noise — observed Δ0.0033 (≈1%) with circular DOM-proportional pool; true locatable pool composition unknown, without-replacement vs with-replacement not tested.",
+    "Definition dependence of C3 — prereg does not state primary-definition-only C3; MIXED result (DEF-FULL-MAP pass, DEF-FORM-ONLY fail) needs preregistered rule refinement.",
+    "Committed code vs stored artifact divergence — no committed script reproduces the 3-definition analysis; cannot verify per-definition truncated_count filtering (a+button+input+combobox etc) from raw evidence without that script.",
+    "Generalization beyond single Magento site with zero menuitem/tab counts — whether other sites with product links early in DOM show same truncation pattern, and whether menuitem/tab contribute.",
+    "Whether the parent null-model FALSIFIED (0.3 vs null mean 0.52) would change under full enumeration — this experiment estimates ordering change but does not rerun null ROLE_MAP test on full estimates."
+  ]
+}

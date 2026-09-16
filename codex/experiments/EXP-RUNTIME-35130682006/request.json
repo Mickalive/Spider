@@ -1,0 +1,20 @@
+{
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T17:50:55.736166+00:00",
+  "experiment_id": "EXP-RUNTIME-35130682006",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "After fixing BROTLI_QUALITY_RANGE to (4,5,6,7,8) and re-executing DECOMPRESSED-VARYING-BROTLI with N=20 per state, does |B-DECOMPRESSED-VARYING-GZIP - B-DECOMPRESSED-VARYING-BROTLI| remain <0.1 for the full 5-level brotli range, and does the /introspect compressed variation become >1 for error bodies at larger sizes?",
+  "lane": "runtime",
+  "origin_github_run_id": "35130682006",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35058619700",
+    "path": "research/experiments/EXP-RUNTIME-35058619700/handoff.json",
+    "sha256": "b9bc44c5b40862ad112bfadc5233817a0c8a87ab96fe3a81b6be0b24e7127456"
+  },
+  "reason": "pulse",
+  "request_hash": "9d6f7af57cea2cd4b40fa4a5d133f82f815c4f8d275a7e493c965ae0c720117b",
+  "request_id": "1b32ffa0c6fa878e1c1cafd8",
+  "schema_version": 1
+}

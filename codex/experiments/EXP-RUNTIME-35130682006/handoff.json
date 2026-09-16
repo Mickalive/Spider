@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35130682006",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does decompression-normalization (SHA256 on decompressed body + status) preserve body-only discrimination on real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in the synthetic Python proxy?",
+  "why_next": "Algorithm-equivalence for brotli {4,5,6,7,8} is now validated on synthetic proxy (diff=0.0, audit PASS on recomputed metrics), but the effective brotli diversity for 1KB JSON is 2 variants not 5, making the full-range test weakly informative. The critical blocker for C-MEAS-VALID product readiness is real-CDN infrastructure: no experiment has tested decompression-normalization where compression is non-deterministic (per-edge quality, caching, load-balancing, Accept-Encoding negotiation). This is the highest-information question remaining. A real-CDN experiment requires different infrastructure (production CDN or CDN simulator) and cannot reuse the local Python proxy.",
+  "carry_forward": {
+    "established": [
+      "Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress after Content-Encoding:br removal) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under synthetic brotli quality selection from {4,5,6,7,8} via local Python proxy (N=20 per state, seed 44, 1KB compressible JSON) — result.json DECOMPRESSED-VARYING-BROTLI decompressed 0.5/0.8333, audit.json recomputed max_abs_diff 0.0",
+      "Algorithm-equivalence between gzip and brotli decompression-normalization holds for tested synthetic distribution (diff = 0.0 < 0.1 threshold) — audit.json C_ALGORITHM_EQUIVALENCE pass true",
+      "Decompression via brotli.decompress() is deterministic across full quality range {4,5,6,7,8}: within-state decompressed hash variation = 0 for all 4 states both endpoints (positive control PASS) — result.json C_DECOMPRESSION_DETERMINISM",
+      "B-RANDOM = 0.0 at all conditions — no spurious structure from compression artifacts — audit.json C_NULL_CONTROL",
+      "Status-only discrimination invariant: 0.5 on /userinfo, 0.0 on /introspect (compression-immune) — result.json status_only_discrimination",
+      "All producer metrics independently recomputed and match exactly (max_abs_diff=0.0) from raw_observations.json — audit.json recomputed_metrics",
+      "Compressed-byte-only hashing degrades under brotli quality variation {4,5,6,7,8} to 0.4329 on /userinfo (above 0.35 threshold, so H3 falsified here) and 0.5767 on /introspect — result.json, audit.json baseline_findings[2]"
+    ],
+    "rejected": [
+      "Compressed-byte-only hashing is sufficient under brotli quality variation — FALSIFIED for /userinfo (0.4329 > 0.35) in this synthetic setting; note /introspect 0.5767 also exceeds threshold",
+      "Decompression-normalization fails under full brotli quality variation {4,5,6,7,8} — FALSIFIED (decompressed >= 0.5 on both endpoints)",
+      "Normalization is algorithm-dependent for full brotli range — FALSIFIED (diff=0.0 < 0.1)"
+    ],
+    "unknown": [
+      "Does decompression-normalization survive real CDN infrastructure with per-edge brotli quality variation, caching, chunked transfer-encoding, load-balancing, and Accept-Encoding negotiation (highest-priority inherited blocker, still untested)",
+      "Does 5-level brotli quality selection produce 5 distinct compressed outputs for larger or incompressible payloads (2KB+, random bytes, HTML/XML/binary) where qualities 5,6,7 diverge from 8",
+      "Is compressed-varying threshold <0.35 robust across seeds with proper deterministic seed derivation and across body sizes/content-types",
+      "What is latency cost of per-response brotli decompression before hashing at production scale (1KB ~0.003s in proxy, MB-scale unknown)",
+      "What is behavior when Content-Encoding is missing, incorrect, or double-encoded — fallback not tested",
+      "Does /introspect compressed variation >1 for error bodies generalize beyond 41-46B introspect errors to smaller userinfo error bodies (currently 1 unique/20)",
+      "Does algorithm-equivalence hold when error bodies are not identical (production IdP diversity) vs 3-way collapse that caps /userinfo discrimination at 0.5",
+      "Does hash()-based seed randomization affect quality distribution sampling across CI runs with different PYTHONHASHSEED (audit validity_findings[3])"
+    ],
+    "do_not_assume": [
+      "Decompression-normalization works behind real CDNs — only synthetic Python proxy tested; real CDN non-determinism (caching, chunked transfer, load-balancing, Accept-Encoding negotiation) not exercised",
+      "Full 5-level brotli quality diversity was tested — effective diversity is 2 variants (q4 distinct vs q5-8 identical) for 1KB JSON, not 5 distinct; the broadening from binary {4,8} is weakly informative for these payload sizes",
+      "Algorithm-equivalence holds for real CDN brotli negotiation — synthetic proxy uses fixed quality per request; real CDN may negotiate, cache, or re-compress at different quality levels",
+      "Result generalizes beyond 1KB compressible JSON — single body size (~1024B), single content type (JSON), single seed 44, single mock server",
+      "Compressed-varying degradation threshold <0.35 is universal — 0.4329 observed on /userinfo exceeds threshold, but degradation is body-size and compressibility dependent",
+      "Mock OAuth2 3-way error collapse discrimination ceiling of 0.5 reflects production IdP behavior — structural artifact of identical error bodies, not representative of real error body diversity",
+      "Product can deploy decompression-normalization behind real CDNs without real-CDN validation experiment",
+      "The frozen decision_rule SURVIVES_CURRENT_TEST implies the claim is production-ready — audit status is REVISE with 4 required_fixes including claim-ceiling narrowing and seed non-determinism"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35130682006/result.json — metrics, controls (6/7 pass), DECOMPRESSED-VARYING-BROTLI decomposition results",
+    "research/experiments/EXP-RUNTIME-35130682006/audit.json — independent recomputation (max_abs_diff=0.0), 4 required_fixes, claim_ceiling, validity_findings (brotli 5-level collapse, hash non-determinism)",
+    "research/experiments/EXP-RUNTIME-35130682006/raw_observations.json — 160 observations with fingerprint hashes, Content-Encoding verification",
+    "research/experiments/EXP-RUNTIME-35130682006/run_experiment.py — corrected BROTLI_QUALITY_RANGE (4,5,6,7,8)",
+    "research/experiments/EXP-RUNTIME-35130682006/provenance.json — environment, bug_fix, parent reference data",
+    "research/experiments/EXP-RUNTIME-35058619700/result.json — parent reference: DECOMPRESSED-VARYING-GZIP 0.5, binary brotli 0.5",
+    "research/experiments/EXP-RUNTIME-35058619700/handoff.json — inherited carry_forward, BROTLI_QUALITY_RANGE bug finding, real-CDN next_question",
+    "research/experiments/EXP-RUNTIME-35058619700/audit.json — REVISE status, BROTLI_QUALITY_RANGE=(4,8) bug as high-severity finding",
+    "research/claims/registry.json — C-MEAS-VALID current status (EXPERIMENTAL)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35130682006/result.json — DECOMPRESSED-VARYING-BROTLI decompressed 0.5/0.8333, compressed 0.4329/0.5767, controls C_DECOMPRESSION_DETERMINISM pass, C_QUALITY_VARIATION_ACTIVE fail, C_ALGORITHM_EQUIVALENCE 0.0 pass",
+    "research/experiments/EXP-RUNTIME-35130682006/audit.json — status REVISE, producer_claim_supported false, claim_ceiling bounded to synthetic proxy effective-binary diversity, validity_findings[0] brotli 5-level collapse, validity_findings[3] hash() non-determinism, recomputed_metrics max_abs_diff 0.0",
+    "research/experiments/EXP-RUNTIME-35130682006/raw_observations.json — 160 observations (1x2x4x20), Content-Encoding br 160/160, fingerprint recomputation matches",
+    "research/experiments/EXP-RUNTIME-35130682006/provenance.json — bug_fix BROTLI_QUALITY_RANGE corrected, python 3.12.14 brotli 1.2.0",
+    "research/experiments/EXP-RUNTIME-35058619700/result.json — parent reference DECOMPRESSED-VARYING-GZIP 0.5, binary brotli compressed 0.2286",
+    "research/experiments/EXP-RUNTIME-35058619700/handoff.json — inherited real-CDN question, carry_forward established/rejected/unknown/do_not_assume"
+  ],
+  "recommended_action": "Design a real-CDN or CDN-simulator experiment to test decompression-normalization where compression is non-deterministic. This is the single highest-information question remaining for C-MEAS-VALID. Requires different infrastructure (Cloudflare Workers, Fastly Compute, or a CDN simulator with per-request quality negotiation and caching). If algorithm-equivalence and discrimination survive real-CDN, the claim ceiling advances materially toward product readiness. If they fail, the design space narrows to synthetic-only deployment. Also fix hash()-based seed derivation to use deterministic hashlib before any re-run of the current synthetic experiment."
+}

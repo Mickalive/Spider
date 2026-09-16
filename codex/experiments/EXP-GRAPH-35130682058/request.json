@@ -1,0 +1,20 @@
+{
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T17:50:59.231519+00:00",
+  "experiment_id": "EXP-GRAPH-35130682058",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can a multi-signal ensemble combining structural similarity (Jaccard/TF-IDF) with behavioral signals (e.g., session token validation, schema access pattern changes, or field-usage profiling) achieve TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination when each individual signal family alone fails?",
+  "lane": "graph",
+  "origin_github_run_id": "35130682058",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35083040517",
+    "path": "research/experiments/EXP-GRAPH-35083040517/handoff.json",
+    "sha256": "71ed289305908a0fedbaa8f90ee4f7e3cedff87bc8fb606dd1e9aa91e672bdc2"
+  },
+  "reason": "pulse",
+  "request_hash": "955f70fbdd40d73798c15c83dbe15bb6c387e6aaa221e300d6b9b8a86ea94b8e",
+  "request_id": "50315e9dd782ce3e9b61790f",
+  "schema_version": 1
+}

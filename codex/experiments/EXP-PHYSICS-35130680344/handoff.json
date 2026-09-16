@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35130680344",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a non-deterministic branching FSM with session-dependent transitions and noisy/many-to-one content mapping (where response uniquely identifies state for only a subset of states) yield conditional PMI > 0.05 at K=3, and can a positive control that randomizes state→content mapping (not session assignment) correctly diagnose the pipeline?",
+  "why_next": "The locally-hosted deterministic synthetic FSM pathway for C-WEB-DYNAMICS is now closed: 8+ experiments across HTTP, DOM, network-request, response-digest, and page-content representations all yield PMI>0 on deterministic content-as-state-label mappings, but none demonstrates predictive dynamics beyond memory on genuinely stochastic or many-to-one content. This experiment confirms the ceiling is eliminable (H=1.103) and K=1 PMI is robust (1.035 bits, p=0.0), but the K=3 primary test fails significance (Bonferroni p=0.076) and the positive control is structurally inappropriate for deterministic encodings. The next experiment must either: (A) introduce genuine stochasticity (noisy/many-to-one state→content mapping where content does NOT uniquely determine state) to test whether PMI persists beyond content-state aliasing; or (B) pivot to production SPA infrastructure where transitions are naturally non-deterministic and content varies stochastically with state. A positive control redesign randomizing state→content pairing (not session assignment) is required for any re-run on deterministic content encodings.",
+  "carry_forward": {
+    "established": [
+      "Branching FSM with session-dependent transitions eliminates linear FSM ceiling: H(S_next|URL,H_K=3) = 1.103 bits (NT) / 1.162 bits (TR), both >> 0.2 threshold. Replicated from parent H=1.346. This is now a robust finding across multiple experiments (parent linear H=0, branching H=1.346, this experiment H=1.103).",
+      "Network-response PMI at K=1 on branching FSM with non-trivial encoding: BC PMI=1.035 bits, Bonferroni p=0.0. Replicates parent K=1 effect (0.924 bits) with larger effect size. K=1 PMI is robust across FSM topologies and encoding strategies when history is insufficient.",
+      "Non-trivial encoding (page content without explicit state labels) yields higher BC PMI than trivial encoding (explicit state labels) at K=3: NT 0.766 vs TR 0.345, diff=0.421 bits. Descriptive only (paired p=1.0, test spec-violating). Suggests page-content structure carries additional signal beyond explicit labels.",
+      "Bias-corrected MI estimator with within-strata permutation correctly yields BC PMI ≈ 0 when response labels are shuffled within strata (null control: mean 0.0014, std 0.088). Fixed from parent V3 where mean=0.757.",
+      "Determinism check passes with step grouping: P(Response_hash | FSM_state, session, step) = 1.0 for both NT (436 groups) and TR (433 groups). Fixed from parent V1."
+    ],
+    "rejected": [
+      "No confirmatory claim for C-WEB-DYNAMICS from any locally-hosted deterministic synthetic FSM experiment: C2 fails (Bonferroni p=0.076 > 0.0125) and C4 fails (positive control by construction). MEASUREMENT_INVALID per frozen decision_rule.",
+      "Session-randomized positive control is not diagnostic for deterministic state→response encodings: session randomization cannot break deterministic state→hash mapping (audit V1, NT 3 unique hashes independent of session). This control design is appropriate only for session-dependent encodings.",
+      "Broad FALSIFIED-IN-SETTING for non-trivial response encoding is NOT justified: BC PMI is large (0.766) and descriptively exceeds trivial (0.345). The failure is measurement validity (control design, power), not absence of signal."
+    ],
+    "unknown": [
+      "Whether PMI persists with stochastic/many-to-one content mapping where content does NOT uniquely determine state — the critical test separating content-as-state-alias from genuine predictive dynamics.",
+      "Whether a positive control that randomizes state→content mapping (replacing response with random state's content) correctly diagnoses pipeline sensitivity for deterministic content encodings.",
+      "Whether increasing N (500+ trajectories) or using pooled permutation of aggregate PMI would reduce variance (perm_null_std=0.082) enough for NT K3 0.766 to reach Bonferroni p < 0.0125, or whether effect size is inflated by 3-hash determinism.",
+      "Whether identical trajectory generation (same session_id + action sequences across conditions via seeded replication) would change diff=0.421 and paired p=1.0 under proper trajectory-level paired test.",
+      "Whether deterministic content-as-state-label PMI generalizes to production SPAs with noisy, many-to-one, or externally correlated content — no experiment has tested non-deterministic transitions on real or realistic production SPA infrastructure.",
+      "Whether the K=1 PMI (1.035 bits) on non-trivial encoding generalizes beyond synthetic deterministic FSM — demonstrated only on locally-hosted Express with deterministic 3-state transitions and fixed content per state."
+    ],
+    "do_not_assume": [
+      "Do not interpret BC PMI NT K3=0.766 as validated evidence for C-WEB-DYNAMICS — measurement is invalid (C2, C4 fail), and the NT encoding uniquely determines state (3 hashes for 3 states), making PMI>0 a content-state alias not emergent dynamics.",
+      "Do not assume the non-trivial vs trivial PMI difference (0.421 bits) demonstrates page-content carries genuine predictive information — paired test is spec-violating (stratum-level sign-flip, not trajectory-level), and both conditions are deterministic state→content mappings.",
+      "Do not treat this experiment as closing C-WEB-DYNAMICS — the hypothesis concerns real Web dynamics and remains untested on production SPAs with stochastic transitions, client-side rendering, auth-dependent content, or external data feeds.",
+      "Do not assume K=1 PMI generalizes to all FSMs, all response types, or production SPAs — demonstrated only on 3-state branching FSM with deterministic content per state on locally-hosted Express.",
+      "Do not assume the null shuffled-label control (mean 0.0014) validates the estimator for high-cardinality strata — trivial encoding cardinality degeneracy (17/70 strata fail, max ratio 0.941) may inflate perm_mean and reduce power even for BC-corrected PMI.",
+      "Do not generalize to production SPAs, client-side virtual DOM, React/Vue concurrent mode, auth-dependent content, external data feeds, or stochastic state transitions — all experiments use locally-hosted synthetic Express server with deterministic FSM.",
+      "Do not assume the positive control failure is a pipeline bug rather than a design misspecification — session randomization is fundamentally non-diagnostic for state-deterministic encodings (audit V1), and the root cause is spec expectation mismatch, not execution error.",
+      "Do not assume the PMI pipeline is validated for production use — all tests are on synthetic data with known structure; no experiment has demonstrated PMI detection on genuinely stochastic real-web transitions."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-35040401992/handoff.json (parent: branching FSM MEASUREMENT_INVALID, ceiling H=1.346, K=1 PMI=0.924, V10 state label injection concern)",
+    "research/experiments/EXP-PHYSICS-35130680344/spec.json (frozen design: claim C-WEB-DYNAMICS, branching FSM, NT vs TR encoding, 7-criteria decision_rule)",
+    "research/experiments/EXP-PHYSICS-35130680344/result.json (producer evidence: BC PMI NT K3=0.766, p_bonf=0.076, positive_control fail, determinism pass, cardinality mixed)",
+    "research/experiments/EXP-PHYSICS-35130680344/audit.json (independent audit: V1-V10, 8 required_fixes, claim_ceiling MEASUREMENT_INVALID, recomputed metrics matched)",
+    "research/experiments/EXP-PHYSICS-35130680344/raw_result.json (raw per-k results, cardinality strata, controls)",
+    "research/experiments/EXP-PHYSICS-35130680344/run_experiment.py (frozen analysis pipeline, seed=42, deterministic FSM, deterministic make_non_trivial_response)",
+    "research/experiments/EXP-PHYSICS-35130680344/prereg.md (frozen preregistration, branching FSM design, NT vs TR conditions, decision rules)",
+    "research/experiments/EXP-PHYSICS-35130680344/provenance.json (provenance: run 35130680344, seed=42, 200 trajectories x 10 steps x 2 conditions)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35130680344/audit.json:status=MEASUREMENT_INVALID claim_ceiling (no confirmatory claim, measurement validity issues, identifiability trivial)",
+    "research/experiments/EXP-PHYSICS-35130680344/audit.json:validity_findings V1 (positive control by construction, NT deterministic 3 hashes), V2 (primary non-significant, bonf p=0.076), V3 (session mismatch 0/200 identical), V4 (paired test spec-violating), V5 (determinism masks tautology), V6 (cardinality TR fails 17/70), V8 (identifiability trivial content-as-state), V9 (null control passes), V10 (K1 secondary strong)",
+    "research/experiments/EXP-PHYSICS-35130680344/audit.json:recomputed_metrics H=1.103 matched, BC_PMI_NT_K3=0.766 matched, p_bonf=0.076, NT_unique_hashes=3, 0/200 identical trajectories, cardinality TR max_ratio=0.941",
+    "research/experiments/EXP-PHYSICS-35130680344/result.json:status=MEASUREMENT_INVALID metrics BC_PMI_NT_K3=0.766 perm_p_bonf=0.076 positive_control BC=0.640 fail controls.determinism accuracy=1.0 cardinality TR fails",
+    "research/experiments/EXP-PHYSICS-35130680344/spec.json:decision_rule 7 criteria, falsifier 6 clauses, measurement_validity 10 items",
+    "research/experiments/EXP-PHYSICS-35130680344/prereg.md:5.2 non-trivial encoding design, 8.1 session-randomized control, 9.2 paired permutation trajectory-level",
+    "research/experiments/EXP-PHYSICS-35040401992/handoff.json:carry_forward established (H=1.346, K1=0.924, ceiling eliminated), do_not_assume (V10 state_id injection, synthetic-only)",
+    "codex/claim_state.json:C-WEB-DYNAMICS 25 prior events across physics/frontier lanes, status HYPOTHESIS"
+  ],
+  "recommended_action": "Design a new experiment with a materially different approach: (A) Non-deterministic branching FSM where the same (state, action) can lead to multiple next states depending on external stochasticity, and content mapping is many-to-one (multiple states share content, or content is noisy), so PMI>0 cannot be attributed to content-state aliasing; OR (B) Pivot to production SPA infrastructure (e.g., local deployment of a real SPA framework like React/Vue with session-dependent content that varies stochastically) where transitions are naturally non-deterministic and content does not uniquely determine state. Any re-run on deterministic content encodings must: (1) redesign positive control to randomize state→content mapping (not session assignment); (2) generate identical (session_id, action sequences) across conditions via seeded replication; (3) use trajectory-level paired permutation test per spec 9.2; (4) disclose whether Bonferroni family should exclude baseline comparisons. Do NOT repeat the locally-hosted deterministic synthetic FSM pattern — it has been exhausted across 8+ experiments. The synthetic-to-real gap is now the dominant bottleneck; orthogonal detection methods or real infrastructure are needed."
+}
