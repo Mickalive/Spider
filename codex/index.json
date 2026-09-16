@@ -151,7 +151,7 @@
       "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "c72fbcd7da6a20452c55d684a4e7d32fd615eac1",
       "hashes": {
         "request.json": "e21c8ef54aaa8677b1814e8641e8df61b03358ffa51e94287a5de0599a73a0f9",
@@ -178,7 +178,7 @@
       "decision": "COMPETITION-UNSAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "bd318921b4ff04b7d690608708f66548b1a74aba",
       "hashes": {
         "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
@@ -341,7 +341,7 @@
       "decision": "COMPETITION-SAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "db32eb7948b01908e422a7ec66d465c6db6581a4",
       "hashes": {
         "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
@@ -534,7 +534,7 @@
       "decision": "SCOPE-LIMITED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "6c7df8c31f4a41833ea76f81f4543a4cab56d3ea",
       "hashes": {
         "request.json": "4b53acf9a0f23b2434203d8fa79bebc7409de22a560f47020e98c775c0fd3aa0",
@@ -643,7 +643,7 @@
       "decision": "PARTIAL_VALIDATION",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "a208512f89013a0a104157e793349609fd3427cf",
       "hashes": {
         "request.json": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5",
@@ -996,7 +996,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "b727aee7b0585da3e3670394fa25c20b54a472f8",
       "hashes": {
         "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
@@ -1023,7 +1023,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "ca57376ba74b4524c92be11f7dd9fc545697f9da",
       "hashes": {
         "request.json": "b21878c4933f8f841b0056fd14377a235c35ed93557756b907d387186ddde530",
@@ -1077,7 +1077,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "00bf4dd51b80ec66e60f11cfee757a4b0a0ace3c",
       "hashes": {
         "request.json": "c48613bd90a76990a0622d94b3ead95384fcfa30d05d9df244baf5de268c24f9",
@@ -1104,7 +1104,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "df9af4b6b730b12fa91816fa5fd592499cb781d6",
       "hashes": {
         "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
@@ -1185,7 +1185,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "968991590c035e9ce5821849d206a7ad2ded493f",
       "hashes": {
         "request.json": "2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
@@ -1239,7 +1239,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "d742b1d9d82f1a59a62ed4297c8ce3fa6972d62b",
       "hashes": {
         "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
@@ -1322,7 +1322,7 @@
       "decision": "BLOCKED_CLOSE_AND_PIVOT",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "34848357b257338eecf73b88b993195d58629860",
       "hashes": {
         "request.json": "3ba94d499c5c79aa09bf1be2163fdc84d99024e38e48261a67ac852e6b6c64fb",
@@ -1349,7 +1349,7 @@
       "decision": "SUPPORTED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "6c64f47170523c09a57a2b51e5dc5b724118324a",
       "hashes": {
         "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
@@ -1566,7 +1566,7 @@
       "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
       "hashes": {
         "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
@@ -1837,7 +1837,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "d72132df7f2336b3519a2519d0b3bda6d0d2e14e",
       "hashes": {
         "request.json": "655bcac7a22953c68b62d0edb662ff06b176a7881cc372597730f75286990cab",
@@ -2000,7 +2000,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "5a2e3b5ab3b60d164a263a252d635333d95e98f3",
       "hashes": {
         "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
@@ -2110,7 +2110,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "78a2a667be8f291f6a0871b41d9f4c4baea4ddef",
       "hashes": {
         "request.json": "69878143db1e72811812a43265fed81f84ccfdfc8d2409438562d0bf254aeb8e",
@@ -2355,7 +2355,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "39381a4eda531fd7cf3c24f57e52ad934f040310",
       "hashes": {
         "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
@@ -2463,7 +2463,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "8310a3a35cd4792a93d6a4d946536af217cce033",
       "hashes": {
         "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
@@ -2653,7 +2653,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "a605af55689dd0341a87ed8e07da1e9b1ef5f63e",
       "hashes": {
         "request.json": "e45c4c81142891b5bfdd694e1e08283ac3006a491a63100991b483b59c4523bf",
@@ -2763,7 +2763,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "hashes": {
         "request.json": "ed47b0039a46ad7d79d3c81b07ab6d0131599ade0fa0fe096d922a28d7ee2998",
@@ -2872,7 +2872,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule fails on 2 of 4 conditions: C2 (noise tolerance) fails because optional_field_addition noise at 10% of schema size produces diff magnitude scaling with schema size (1.0 at n=10 to 5.0 at n=50, exceeding threshold 0.5 at all sizes), creating irreconcilable conflict with subtle drift (required_to_optional 0.3); C4 (type-aware validation) fails because mock server always returns data conforming to stale schema types, making type drift invisible to client validation (4.7% vs required 80%). C1 (drift detection) PASS \u2014 all 5 drift patterns produce diff 0.3-2.0. C3 (orthogonality) PASS \u2014 Pearson r=-0.59, confirming schema diff captures complementary structural information to Jaccard. Audit PASS confirms all recomputed metrics match producer. Audit V_C4_CONFORMANT_MOCK_TAUTOLOGY identifies C4 failure as measurement-invalid (mock conformance, not evidence against type-aware detection). However, C2 failure is genuine and structural: the magnitude confound persists because unbounded optional field additions dominate subtle structural drift by construction. Schema diff is a weak supplementary signal (detects required_to_optional invisible to Jaccard, r=-0.59) but cannot threshold-separate unbounded noise from drift. Does NOT close C-FRESHNESS domain; eliminates direct schema comparison as standalone discriminator.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "e0579a29766a020abfeaa04e76bcea394148210e",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "source_commit": "b1e824fdc2b9a81618afc8e9e887da152ed78056",
       "hashes": {
         "request.json": "9dfa5b73f0ceaf721ec7c3f50cd61f72ac291e6c0e5300f6ed5692f464d9d885",
@@ -2885,6 +2885,33 @@
         "audit.json": "924f7608c8f6e76acc56056a94a4619241075e1f9938176a1b60d331f65241c0",
         "verdict.json": "7f616e6de7094402ab287dfe91a96ea81ccf8d7dd26cd1fe43965f778d0d4bd2",
         "handoff.json": "07667213ff9a290be1a2c0ff28cb307b04ab22d16f6cac2f3abbf6f0bc396a1b"
+      }
+    },
+    "EXP-GRAPH-35155716123": {
+      "lane": "graph",
+      "request_id": "e62d92538606b747b929b99c",
+      "created_at": "2026-09-16T22:03:52.601418+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Do session-level behavioral signals (token validation failure detection, cookie state inspection, authentication boundary probing) provide drift-vs-noise discrimination on a fundamentally different dimension from all six tested structural/schema-based signal families, thereby evading the magnitude confound?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_commit": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "hashes": {
+        "request.json": "06c6b660e6e9754840809ab991b92b30dd8abffc394ec4705341675de783a972",
+        "spec.json": "ad601f2fc018fd258ec6eeb01cb6203096ceb34b0645ceb0ded50a22e139a7b2",
+        "prereg.md": "f6907a57f260fec1128070a50692b8c5115b94e2641a1af2a3fdb217a9b9c659",
+        "freeze.json": "cdfb9bcb59d96cd98867d6fb284f9db7c1165711aac93ee36b6f843d1d0c1732",
+        "result.json": "10b4fccff1ccbf1afa997694bf6aad3680522d63d06d80f85651c32cb5bcf2fe",
+        "report.md": "fa8ac6e9f7efe2c710865db47a71a9a72934c9687acd8c55263b54fd9f9959c4",
+        "provenance.json": "94b66054a70d94aa10a6958d6e3a20420373702a70858d2501c7ff7cb3920d88",
+        "audit.json": "f6406ebd2935ea71644eb96f79029e0b6d3878df6ff201a7ba8c7544d6268a6b",
+        "verdict.json": "2f174e3bfb02fd2d1c53d0129eb105316ffb05e9c9d334a738f976c0db13cd59",
+        "handoff.json": "90513f0056827f4ce2cf4aaee5e62d206eaca492948fa2868d2d37030f79edcb"
       }
     }
   }

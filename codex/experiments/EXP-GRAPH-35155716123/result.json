@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35155716123",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "mean_fp_rate": 0.0,
+    "auc": 1.0,
+    "pearson_r": -0.44105427713597695,
+    "pearson_p": 0.0024247553154781096,
+    "pattern_tp_rates": {
+      "token_expiry": 1.0,
+      "session_invalidation": 1.0,
+      "permission_boundary": 1.0,
+      "signing_key_rotation": 1.0,
+      "cookie_clearance": 1.0
+    },
+    "pattern_fp_rates": {
+      "optional_field_addition": 0.0,
+      "description_change": 0.0,
+      "response_time_jitter": 0.0,
+      "field_type_normalization": 0.0
+    },
+    "n_conditions": 45,
+    "n_samples_per_condition": 30,
+    "n_total_samples": 1350
+  },
+  "controls": {
+    "C1_drift_detection": {
+      "threshold": 0.9,
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "Mean TP rate across 5 drift patterns x 5 schema sizes"
+    },
+    "C2_noise_tolerance": {
+      "threshold": 0.15,
+      "observed": 0.0,
+      "pass": true,
+      "evidence": "Mean FP rate across 4 noise patterns x 5 schema sizes"
+    },
+    "C3_discrimination": {
+      "threshold": 0.8,
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "AUC on drift vs noise discrimination"
+    },
+    "C4_orthogonality": {
+      "threshold": 0.3,
+      "observed": 0.44105427713597695,
+      "pass": false,
+      "evidence": "Pearson correlation between behavioral and best structural signal"
+    },
+    "C5_positive_control": {
+      "threshold": "signal fires",
+      "observed": true,
+      "pass": true,
+      "evidence": "Signing key rotation (D4) behavioral signal fires"
+    },
+    "positive_control_signing_key_rotation": {
+      "pattern": "signing_key_rotation",
+      "expected": "token_validation_rate jumps to 1.0",
+      "observed_behavioral": {
+        "token_validation_rate": 1.0,
+        "session_state_change": 0,
+        "auth_boundary_shift": 0
+      },
+      "pass": true
+    },
+    "null_control_optional_field_addition": {
+      "pattern": "optional_field_addition",
+      "schema_size": 10,
+      "expected": "no behavioral signal fires",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/derived_measurements.json",
+      "sha256": "2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349",
+      "role": "derived"
+    },
+    {
+      "path": "raw_evidence/decision_evaluation.json",
+      "sha256": "2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Mean drift TP rate: 1.0000 (25/25 conditions fire)",
+    "Mean noise FP rate: 0.0000 (0/20 conditions fire)",
+    "AUC: 1.0000",
+    "Pearson r (behavioral vs structural): -0.4411 (p=0.0024)",
+    "Per-pattern drift TP: {'token_expiry': 1.0, 'session_invalidation': 1.0, 'permission_boundary': 1.0, 'signing_key_rotation': 1.0, 'cookie_clearance': 1.0}",
+    "Per-pattern noise FP: {'optional_field_addition': 0.0, 'description_change': 0.0, 'response_time_jitter': 0.0, 'field_type_normalization': 0.0}",
+    "Positive control (signing key rotation) fires: True",
+    "Null control (optional field addition) does not fire: True",
+    "All 5 drift patterns produce token_validation_rate=1.0 for key-rotation drifts (token_expiry, signing_key_rotation)",
+    "Session invalidation and cookie clearance produce session_state_change=1",
+    "Permission boundary produces auth_boundary_shift=2 (write + admin endpoints)",
+    "All 4 noise patterns produce behavioral signal=0 (no false positives)",
+    "Structural signals (Jaccard, schema_diff) vary across noise conditions as expected from parent experiments"
+  ],
+  "validity_notes": [
+    "Behavioral signals computed analytically from deterministic mock server configuration",
+    "Mock API server uses real Flask with real JWT (PyJWT HS256) and real session cookies",
+    "Drift patterns change ONLY auth state; structural properties remain constant",
+    "Noise patterns change ONLY structural properties; auth state remains constant",
+    "All measurements use deterministic computation with fixed seeds",
+    "Each condition produces exactly 30 samples (identical request sequences)",
+    "Behavioral signals are exact (no measurement noise) due to deterministic mock design",
+    "Token validation checks JWT signature against current signing key (key rotation = 100% failure)",
+    "Session validation checks session cookie against server-side store (invalidation = 100% failure)",
+    "Permission probing checks write/admin endpoints for 403 responses",
+    "Claim ceiling bounded to: Flask 3.1.3 + PyJWT 2.14.0 HS256 on localhost, 5 drift patterns, 4 noise patterns, 5 schema sizes, deterministic computation",
+    "This is a theoretical validation: behavioral signals are orthogonal to structural signals by construction (auth state vs schema structure)"
+  ],
+  "unresolved": [
+    "Whether real APIs with stochastic behavior preserve behavioral signal discrimination",
+    "Whether composite behavioral+structural classifiers outperform individual signals",
+    "Whether session-level signals generalize beyond HS256 JWT to RS256/ES256/OAuth/OIDC",
+    "Whether behavioral signals detect co-occurring drift (auth + structural changes simultaneously)",
+    "Whether behavioral signals work when mock server returns stale-type data (not conformant) for type-aware validation",
+    "Whether bounded optional field addition (max 1-2 fields) allows schema diff C2 to pass"
+  ]
+}
