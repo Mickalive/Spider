@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35137036013",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "R1_COMMIT_THE_ANALYSIS_SCRIPT: provenance.json.reproduction_command points at /tmp/opencode/exp35137036013_execute.py, which does not exist in the repository, and the packet explicitly reports the canonical script as NOT committed. Commit the exact script that generated full_dom_proxy_analysis.json and substrate_verification.json at a stable repo path. Without it the derived proxy (M4, M2, M5) is not reproducible from HEAD.",
+    "R2_DOCUMENT_AND_REPRODUCE_THE_NULL_MODEL: the producer M4 values (DEF-FULL-MAP 0.40004004004004, DEF-FORM-ONLY 0.40402602602602605, ISOLATED-A-LINK 0.42080880880880883) could not be reproduced by the auditor under any straightforward reading of the documented recipe. Unconditional random ROLE_MAP p=0.5 over the 8 roles with numpy RandomState(42) gives 0.4150170170 and default_rng(42) gives 0.3955155155; brute-force seeds 0-1999 for either RNG never hit 0.40004004004004. Conditioning on the definition's own roles gives 0.2114314314 / 0.4338338338 / 0.6262202202. State the exact per-definition draw procedure (conditioning set, RNG type, seed stream, role-count mapping, tie handling) and make M4 reproducible; the three per-definition frequency tables in full_dom_proxy_analysis.json also imply three separate/null draws that are not described.",
+    "R3_RESOLVE_THE_FROZEN_C2_CONTRADICTION: spec.json is internally contradictory. spec.json.falsifier F2 says 'null mean > observed ... the metric itself fails the null-model test under full enumeration'; spec.json.null_control says 'null distribution mean ... at or above the observed ... the FALSIFIED verdict stands'; but spec.json.decision_rule defines C2_NULL_EXCEEDS_OBSERVED as null >= observed and maps C1=true AND C2=true to SURVIVES_CURRENT_TEST. The producer resolved this in favour of the verdict-mapping (report.md section 8: 'would, if valid, map to SURVIVES_CURRENT_TEST'), which conflicts with the falsifier/null_control wording and with the parent chain semantics (EXP-INTEL-35112013458 treated observed 0.3 < null 0.5275 as FALSIFYING). The next packet must use one coherent C2 direction (observed must exceed the null for survival) before any re-run.",
+    "R4_DOWNGRADE_C_POSITIVE_SCRIPT_REGRESSION: it is marked pass=true although its own frozen expectation ('null mean ~= 0.5275 > observed ~= 0.3') was not reproduced (observed 0.4000 vs parent 0.5275), and the 'canonical script' it claims to regress does not exist, so the control is circular (the ad-hoc proxy validates itself). Mark it PARTIAL/UNKNOWN and separate the ordering-regression component (which does reproduce) from the null-value component (which does not). Also correct the mislabel 'null_mean on truncated proxy (DEF-FULL-MAP)=0.4000': the artifact contains only a full-proxy null, no truncated null.",
+    "R5_RECONCILE_M3_IDENTIFIER: frozen prereg M3_OBSERVED_PAIRWISE_AGREEMENT is defined as 'pairwise agreement of 5-definition orderings on full-DOM data', but this packet computes 3-definition agreement (0.0 truncated, 0.3333333333333333 full proxy) and places it next to the parent 5-definition values (0.3 observed / 0.5275 null). Either compute the frozen 5-definition metric or rename/bound the 3-definition statistic; the parent comparison is not apples-to-apples.",
+    "R6_FIX_INTERNAL_NUMERIC_INCONSISTENCIES: result.json.observations[7] and validity_notes state 'per-def null means 0.5-0.7 range (proxy)', contradicting M4 (0.400-0.421) and report.md section 6 observation 8. report.md sections 4.2/6.1 and result.json.observations[0] state truncation 'discards 62-95% of interactive elements'; recomputed discarded fractions are listing 75.6%, detail 37.5%, cart 4.8% (retained 24.4%/62.5%/95.2%).",
+    "R7_PROVIDE_B2_EXECUTION_EVIDENCE: B2_COMMITTED_SCRIPT_BASELINE cites full_dom_proxy_analysis.json, which contains no all-role baseline numbers. The auditor independently reproduced the claimed numbers from the committed analyze.py algorithm (all-role truncated cart>detail>product_listing, all-role 'full' product_listing>detail>cart), but the packet does not demonstrate that analyze.py was actually executed; attach the run output or remove the execution implication.",
+    "R8_BOUND_THE_DIRECTIONAL_LANGUAGE: do not carry 'directional ordering change is robust' as if it were full-DOM evidence. Both the 'full' count estimate and the null model use total DOM tag counts / scaled sample counts, not locatable counts (linksCount 393 vs 82 locatable elements for listings), and the same estimator was already ruled non-valid by audit V1 of EXP-INTEL-35124660457. The parent handoff's do_not_assume explicitly warns that the FALSIFIED verdict is not explained by truncation without a full null re-test."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_SUBSTRATE_CAP_STILL_PRESENT",
+      "severity": "critical",
+      "finding": "Confirmed independently. research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py line 89 still contains 'if (locatableSample.length < 20)'. A repo-wide search found no other/newer MEASURE_JS. Every valid measurement has locatable_sample length 20 while locatable_elements is 82 (3 listings), 32 (3 details), 21 (cart). The runtime cap-removal dependency was never implemented, so measurement_validity condition 1 fails and the frozen decision rule mandates MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89",
+        "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (locatable_sample length 20; locatable_elements 82/32/21)",
+        "research/experiments/EXP-INTEL-35137036013/substrate_verification.json"
+      ]
+    },
+    {
+      "id": "V2_CANONICAL_SCRIPT_MISSING",
+      "severity": "critical",
+      "finding": "Confirmed independently. No file exists at research/intel/canonical_35137036013.py or research/experiments/EXP-INTEL-35137036013/canonical_analysis.py (grep over the repository returns only the producer's own references to the missing path). measurement_validity condition 2 fails, reinforcing MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/provenance.json (dependencies.code status NOT_IMPLEMENTED)",
+        "research/experiments/EXP-INTEL-35137036013/substrate_verification.json (canonical_script_exists false)"
+      ]
+    },
+    {
+      "id": "V3_FULL_DOM_NEVER_MEASURED",
+      "severity": "critical",
+      "finding": "The experiment's central question (full-DOM enumeration) was not testable from this packet: no full-DOM data exists. The 'full' side is the same tag-count estimator already stored in EXP-INTEL-35124660457 (full_count 454.1 for listing_clothing-shoes-jewelry is byte-identical in stored analysis_results.json and in this experiment's proxy). The proxy conflates total DOM counts (linksCount 393, tagCounts.a 399) with locatable counts (locatable_elements 82), the exact estimator-inflation failure (audit V1, EXP-INTEL-35124660457). The proxy therefore cannot support or falsify anything about true full-DOM ordering.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35124660457/analysis_results.json (DEF-FULL-MAP full_count 454.1)",
+        "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json (full_count_estimate 454.1; full_density 0.29296774193548386)",
+        "research/experiments/EXP-INTEL-35124660457/audit.json (V1_dom_counts_are_not_locatable)"
+      ]
+    },
+    {
+      "id": "V4_C2_SEMANTIC_CONTRADICTION_IN_FROZEN_SPEC",
+      "severity": "high",
+      "finding": "spec.json.falsifier F2 ('null mean > observed ... metric fails'), spec.json.null_control ('null mean ... at or above observed ... FALSIFIED verdict stands') and spec.json.decision_rule (C2 = null >= observed, and C1 AND C2 -> SURVIVES_CURRENT_TEST) cannot all be true. The producer followed the decision-rule mapping and wrote that the proxy C2=true 'would, if valid, map to SURVIVES_CURRENT_TEST'. That interpretation is not justified: under the spec's own falsifier/null_control and the parent chain's semantics, a null mean above the observed agreement means the observed ordering does NOT exceed chance and the FALSIFIED verdict is not overturned. Because the measurement-invalid gate is hit first the final verdict is unaffected, but the directional gloss must be withdrawn.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/spec.json:falsifier",
+        "research/experiments/EXP-INTEL-35137036013/spec.json:null_control",
+        "research/experiments/EXP-INTEL-35137036013/spec.json:decision_rule",
+        "research/experiments/EXP-INTEL-35137036013/report.md section 8",
+        "codex/claim_state.json C-MEAS-VALID EXP-INTEL-35112013458 (observed 0.3 < null 0.5275 was treated as falsifying)"
+      ]
+    },
+    {
+      "id": "V5_NULL_MODEL_NOT_REPRODUCIBLE",
+      "severity": "high",
+      "finding": "M4_NULL_MEAN_PAIRWISE_AGREEMENT is not reproducible from the committed packet. The referenced execution script is absent and no null recipe is specified beyond '8 roles p=0.5, seed=42'. Independent recomputation: RandomState(42) unconditional = 0.4150170170, default_rng(42) unconditional = 0.3955155155, conditioning on the definition's roles = 0.2114314314 (DEF-FULL-MAP) / 0.4338338338 (DEF-FORM-ONLY) / 0.6262202202 (ISOLATED-A-LINK). No seed in 0-1999 for either RNG reproduced the producer's 0.40004004004004. The three slightly different producer frequency tables imply three separate draws not described in the packet. The C2 comparison direction is therefore recipe-dependent (0.211 < 0.333 < 0.626), so the proxy null cannot adjudicate C2 even directionally.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json:null_model_full_proxy",
+        "research/experiments/EXP-INTEL-35137036013/provenance.json:execution_command",
+        "auditor recomputation /tmp/opencode/audit_recompute_35137036013.py"
+      ]
+    },
+    {
+      "id": "V6_M3_METRIC_SCOPE_MISMATCH",
+      "severity": "medium",
+      "finding": "Frozen prereg M3 is 'Pairwise agreement of 5-definition orderings on full-DOM data'. The packet reports 3-definition agreement (truncated_proxy_3defs 0.0, full_proxy_3defs 0.3333333333333333) and compares it to parent 5-definition values (0.3 observed, 0.5275 null). With only 3 orderings the statistic can only take 0, 1/3, 2/3, 1, and the comparison to the 5-definition null is not like-for-like. The producer notes non-comparability in validity_notes but still reports the values under the frozen M3 identifier.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/prereg.md:Stable Metric Identifiers (M3)",
+        "research/experiments/EXP-INTEL-35137036013/result.json:metrics.M3_OBSERVED_PAIRWISE_AGREEMENT"
+      ]
+    },
+    {
+      "id": "V7_CONTROL_OVERCLAIM",
+      "severity": "medium",
+      "finding": "C_POSITIVE_SCRIPT_REGRESSION is marked pass=true although the expected null value (0.5275) was not reproduced (observed 0.4000) and no canonical script exists to regress. B1_TRUNCATED_REGRESSION's ordering checks do reproduce exactly (auditor verified all four orderings), so the ordering component of the positive control passes; the null component does not. The control should be PARTIAL at best. A positive control that validates a script which does not exist is circular.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/result.json:controls.C_POSITIVE_SCRIPT_REGRESSION",
+        "research/experiments/EXP-INTEL-35137036013/result.json:controls.B1_TRUCATED_REGRESSION"
+      ]
+    },
+    {
+      "id": "V8_INTERNAL_NUMERIC_INCONSISTENCIES",
+      "severity": "low",
+      "finding": "result.json.observations[7] and validity_notes report 'per-def null means 0.5-0.7 range (proxy)', inconsistent with M4 (0.400-0.421) and with report.md observation 8. The 'discards 62-95% of interactive elements' statement is also wrong: recomputed discarded fractions are 75.6% (listing), 37.5% (detail), 4.8% (cart); the 62-95% figure matches the retained fraction of detail and cart, not the discarded fraction. These are text/consistency errors, not verdict-changing, but they undermine packet traceability.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/result.json:observations",
+        "research/experiments/EXP-INTEL-35137036013/result.json:validity_notes",
+        "research/experiments/EXP-INTEL-35137036013/report.md sections 4.2, 6.1, 6.7"
+      ]
+    },
+    {
+      "id": "V9_STORED_ISOLATED_BUG_CONFIRMED",
+      "severity": "informational",
+      "finding": "Producer observation confirmed independently: in EXP-INTEL-35124660457/analysis_results.json, ISOLATED-A-LINK is byte-identical to DEF-FULL-MAP for all 7 tasks (truncated_count 8 for listings vs correct a-only 2; full_count 454.1 vs 393-397). The producer's corrected a-only recomputation (truncated_count 2, ordering_changed false) is correct.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35124660457/analysis_results.json:definitions.ISOLATED-A-LINK",
+        "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json:per_definition.ISOLATED-A-LINK"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_TRUCATED_REGRESSION",
+      "finding": "Ordering regression reproduces exactly under independent recomputation: DEF-FULL-MAP truncated cart>product_listing>detail -> full proxy cart>detail>product_listing; DEF-FORM-ONLY truncated product_listing>cart>detail -> full proxy product_listing>detail>cart. However the baseline's stated null expectation (parent null 0.5275 > observed 0.3) was not reproduced (truncated-proxy-derived null reported as 0.4000; no truncated null exists in the artifact). Verdict: PARTIAL (ordering component pass, null component not verified).",
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/result.json:metrics.B1_TRUNCATED_REGRESSION"
+    },
+    {
+      "id": "B2_COMMITTED_SCRIPT_BASELINE",
+      "finding": "Auditor independently recomputed the committed analyze.py algorithm (all-role density, int()-scaled combobox/div/label/span) from raw evidence: truncated all-role ordering cart>detail>product_listing, 'full' all-role ordering product_listing>detail>cart, changed=true. This matches the producer's B2 numbers, but the packet contains no artifact of an actual analyze.py execution and the cited evidence_ref (full_dom_proxy_analysis.json) does not carry these values. The claim is numerically correct but not evidenced as an execution.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analyze.py (committed all-role algorithm)"
+    },
+    {
+      "id": "B3_STORED_RESULTS_COMPARISON",
+      "finding": "Verified: stored EXP-INTEL-35124660457 results are byte-identical between ISOLATED-A-LINK and DEF-FULL-MAP (copy-paste bug) and stored DEF-FULL-MAP full_count for the first listing task is 454.1, matching the computed proxy. Producer's PARTIAL pass is justified.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analysis_results.json"
+    },
+    {
+      "id": "C_NULL_MODEL_RANDOM_ROLE_MAP",
+      "finding": "Producer honestly recorded pass=UNKNOWN. The auditor confirms this: the null comparison is recipe-dependent (0.211 to 0.626 across plausible recipes) and the frozen C2 direction is self-contradictory, so the null control cannot be scored and cannot support C2 in either direction.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json:null_model_full_proxy"
+    }
+  ],
+  "recomputed_metrics": {
+    "M6_PER_DEFINITION_ORDERING": {
+      "DEF-FULL-MAP": {
+        "truncated_ordering": ["cart", "product_listing", "detail"],
+        "full_ordering": ["cart", "detail", "product_listing"],
+        "producer_match": true
+      },
+      "DEF-FORM-ONLY": {
+        "truncated_ordering": ["product_listing", "cart", "detail"],
+        "full_ordering": ["product_listing", "detail", "cart"],
+        "producer_match": true
+      },
+      "ISOLATED-A-LINK": {
+        "truncated_ordering": ["cart", "detail", "product_listing"],
+        "full_ordering": ["cart", "detail", "product_listing"],
+        "producer_match": true
+      }
+    },
+    "M1_C1_ORDERING_CHANGED": {
+      "DEF-FULL-MAP": true,
+      "DEF-FORM-ONLY": true,
+      "ISOLATED-A-LINK": false,
+      "producer_match": true
+    },
+    "M3_OBSERVED_PAIRWISE_AGREEMENT": {
+      "truncated_proxy_3defs": 0.0,
+      "full_proxy_3defs": 0.3333333333333333,
+      "producer_match": true,
+      "note": "Frozen prereg M3 specifies 5-definition orderings; this experiment can only form 3 definitions, so the frozen metric identifier is not the object actually computed."
+    },
+    "M4_NULL_MEAN_PAIRWISE_AGREEMENT": {
+      "producer_DEF-FULL-MAP": 0.40004004004004,
+      "producer_DEF-FORM-ONLY": 0.40402602602602605,
+      "producer_ISOLATED-A-LINK": 0.42080880880880883,
+      "audit_unconditional_RandomState_seed42": 0.4150170170,
+      "audit_unconditional_default_rng_seed42": 0.3955155155,
+      "audit_conditioned_on_definition_roles_seed42": {
+        "DEF-FULL-MAP": 0.2114314314,
+        "DEF-FORM-ONLY": 0.4338338338,
+        "ISOLATED-A-LINK": 0.6262202202
+      },
+      "producer_values_reproduced": false,
+      "note": "No documented recipe (including a seed sweep 0-1999 for both numpy RNGs) reproduced the producer values; the comparison direction flips with the recipe (0.211 < 0.333 < 0.626)."
+    },
+    "M2_C2_NULL_EXCEEDS_OBSERVED": {
+      "producer": {
+        "DEF-FULL-MAP": true,
+        "DEF-FORM-ONLY": true,
+        "ISOLATED-A-LINK": null
+      },
+      "audit_note": "Literal frozen definition (null >= observed) holds for the producer's full-proxy null values, but the frozen spec's falsifier/null_control read the same inequality as 'observed does not exceed chance' (falsifying), while the decision_rule maps it to SURVIVES. Unresolvable as frozen; proxy cannot adjudicate."
+    },
+    "M5_DENSITY_DIFF_TRUNCATED_VS_FULL": {
+      "DEF-FULL-MAP_first_task_diff": 0.2878064516129032,
+      "DEF-FORM-ONLY_first_task_diff": 0.008451612903225807,
+      "producer_match": true,
+      "note": "Spot-checked against raw evidence; all per-task diffs are full_count_estimate/ewb - truncated_count/ewb with the documented estimator."
+    },
+    "SUBSTRATE_VERIFICATION": {
+      "locatable_sample_cap_present": true,
+      "canonical_script_committed": false,
+      "valid_tasks": 8,
+      "unique_tasks": 7,
+      "cap_source": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89",
+      "producer_match": true
+    },
+    "B2_COMMITTED_SCRIPT_BASELINE_recomputed": {
+      "all_role_truncated_ordering": ["cart", "detail", "product_listing"],
+      "all_role_full_ordering": ["product_listing", "detail", "cart"],
+      "all_role_ordering_changed": true,
+      "producer_match": true
+    },
+    "B3_STORED_RESULTS_recomputed": {
+      "stored_isolated_identical_to_fullmap": true,
+      "stored_isolated_truncated_count_first_task": 8,
+      "computed_isolated_truncated_count_first_task": 2,
+      "stored_full_count_first_task_DEF-FULL-MAP": 454.1,
+      "producer_match": true
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID (confirmed and preserved). No valid evidence about full-DOM ordering or the null-model test was produced; the frozen decision rule mandates MEASUREMENT_INVALID because both blocking measurement_validity conditions fail (locatableSample cap still present in the only MEASURE_JS; canonical 3-definition script absent). Maximum justified from this packet: (1) the substrate cap fix was not applied and no full-DOM enumeration exists, so the experiment's central question is untested; (2) the 'full-DOM' side is the same non-locatable tag-count estimator already ruled invalid (total DOM counts vs locatable counts), and the same estimator as stored EXP-INTEL-35124660457 (full_count 454.1 for the first task); (3) under that proxy, DEF-FULL-MAP and DEF-FORM-ONLY orderings differ between truncated and 'full' while corrected ISOLATED-A-LINK does not; (4) the proxy null comparison (producer M4 ~0.400-0.421 vs observed 3-def agreement 0.333) is recipe-dependent and direction-ambiguous in the frozen spec, so it provides no evidence either that truncation drove the FALSIFIED verdict or that the metric survives. Do not claim full DOM differs, do not claim the metric survives, and do not claim the FALSIFIED verdict is confirmed as a truncation artifact. C-MEAS-VALID remains EXPERIMENTAL/BLOCKED for this density metric family until the runtime cap is removed, data are recollected, and a coherent canonical analysis script (with a reproducible null model and unambiguous C2 direction) is committed and re-run.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35137036013/request.json (sha256 643b91daec4b9882f577ba4f922d043f4fdf33b8f7d7cfe03c0fa9b57e479a43)",
+    "research/experiments/EXP-INTEL-35137036013/spec.json (sha256 712f4a72b868aaebc1db4e7698d88dcdad4c0d1f4ee490e4a7f412fc23331d51)",
+    "research/experiments/EXP-INTEL-35137036013/prereg.md (sha256 5e26bbb85fd397d4ccbca00168440f2927ed3f13bfec0ec0ca6d8a46da015b6d)",
+    "research/experiments/EXP-INTEL-35137036013/freeze.json (sha256 4968635244466ea7283265844f5055041384c560577e30ada9b70c5f5aa48fa4)",
+    "research/experiments/EXP-INTEL-35137036013/result.json (sha256 2b571f045c282911ee7e3d5c18e705dd3e8b540e36f555d572bfec86023c0f6f)",
+    "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json (sha256 5b3c03b4d8914a981f8365ac0d387e4b7d6f235fffe68619faf4bb73f3961e30)",
+    "research/experiments/EXP-INTEL-35137036013/substrate_verification.json (sha256 bce78e0cf63533f99bb920946a4ed71a5b7ba14ddc3d5978b0b43b6c7e506b9f)",
+    "research/experiments/EXP-INTEL-35137036013/provenance.json (reproduction_command references absent /tmp/opencode/exp35137036013_execute.py)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89 (sha256 085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3)",
+    "research/experiments/EXP-INTEL-35124660457/analysis_results.json (sha256 b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546)",
+    "research/experiments/EXP-INTEL-35124660457/analyze.py (sha256 c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15)",
+    "research/experiments/EXP-INTEL-35124660457/audit.json (V1_dom_counts_are_not_locatable)",
+    "research/experiments/EXP-INTEL-35131994346/handoff.json (parent carry_forward, blocking substrate+code dependencies; do_not_assume list)",
+    "codex/claim_state.json C-MEAS-VALID events for EXP-INTEL-35112013458 / EXP-INTEL-35124660457 / EXP-INTEL-35131994346",
+    "auditor recomputation script /tmp/opencode/audit_recompute_35137036013.py (raw-evidence-only recomputation)"
+  ],
+  "unresolved": [
+    "Whether true full-DOM enumeration changes page-type ordering, magnitudes and the null distribution cannot be determined from this packet; it requires the runtime cap removal and re-collection of the same 7 tasks.",
+    "Exact generator of the producer M4 null values is not documented and not reproducible; the execute script is absent from the repository.",
+    "Which direction the Director should treat as C2 survival semantics, given the frozen spec's falsifier/null_control conflict with its decision_rule verdict mapping. This is a design-level defect that must be resolved before any re-run.",
+    "Whether the canonical analysis should be committed at research/intel/canonical_35137036013.py with 3-definition filtering, dedup and float scaling, or the committed analyze.py should be accepted as canonical with an explicit scope note.",
+    "Whether the corrected ISOLATED-A-LINK (ordering_changed=false) changes pooled C1/C2 conclusions if pooled rather than evaluated separately.",
+    "Whether the product_listing vs detail swap is statistically significant under any estimator (n=3 per type, n=1 distinct cart, no CI reported).",
+    "Whether the 3-definition observed pairwise agreement (0.333) is comparable to the parent 5-definition statistic (0.3) at all."
+  ]
+}
