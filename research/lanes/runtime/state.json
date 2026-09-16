@@ -1,14 +1,14 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-34986155186",
-  "last_experiment_id": "EXP-RUNTIME-34902094115",
-  "last_verdict": "SURVIVES_CURRENT_TEST",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-34986155186",
+  "last_verdict": "MIXED",
   "continue_immediately": false,
-  "next_question": "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "next_question": "Does decompression-normalization survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-15T22:13:35.205505+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-16T00:34:30.422524+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
 }

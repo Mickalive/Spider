@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34986155186",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does decompression-normalization survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "why_next": "This experiment demonstrated decompression-normalization works under synthetic brotli quality variation (B-DECOMPRESSED-VARYING=0.5) and that compressed-byte hashing degrades (B-COMPRESSED-VARYING=0.3475). However, the auditor explicitly notes the synthetic proxy gap as a high-severity finding: brotli quality variation via Python proxy does not exercise real CDN non-determinism sources (caching, chunked transfer, load-balancing across edges, Accept-Encoding negotiation per-request). The inherited next_question from parent EXP-RUNTIME-34902094115 remains untested. Real-CDN validation is the minimum unblocked path toward production deployment. Alternative orthogonal questions (gzip support, non-JSON content types, latency measurement) are lower priority because real-CDN failure would invalidate all downstream generalizations.",
+  "carry_forward": {
+    "established": [
+      "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} for JSON 1KB on mock OAuth2 server (B-DECOMPRESSED-VARYING=0.5, B-DECOMPRESSED-FIXED=0.5, N=20 reps, seed=44, all controls pass)",
+      "Compressed-byte-only hashing degrades under brotli quality variation {4-8} to ~0.33-0.35 on /userinfo and ~0.39-0.45 on /introspect (B-COMPRESSED-VARYING=0.3475 /userinfo, 0.4526 /introspect)",
+      "Decompression via brotli.decompress() is deterministic: within-state variation = 0 across 20 requests per state (C_DECOMPRESSION_DETERMINISM control pass)",
+      "Quality variation produces 2 unique compressed hashes per state for 1KB JSON, not 5 (quality levels collapse to 2 distinct compressed outputs for this payload size)",
+      "Status-only discrimination is invariant at 0.5 on /userinfo and 0.0 on /introspect across all conditions (compression-immune)",
+      "B-RANDOM = 0.0 at all conditions — no spurious structure from compression artifacts",
+      "Auditor recomputed all metrics exactly (max_abs_diff=0.0) from raw_observations.json; producer metrics confirmed"
+    ],
+    "rejected": [
+      "Compressed-byte-only hashing is sufficient under brotli quality variation — FALSIFIED in synthetic setting (B-COMPRESSED-VARYING=0.3475 < 0.35 on /userinfo)",
+      "Decompression-normalization fails under fixed brotli quality — FALSIFIED (B-DECOMPRESSED-FIXED=0.5)"
+    ],
+    "unknown": [
+      "Does decompression-normalization survive real CDN infrastructure with per-edge quality variation, caching, chunked transfer-encoding, and load-balancing (the inherited next_question)",
+      "Does normalized fingerprint survive with gzip (and mixed Accept-Encoding) in addition to brotli",
+      "Does result generalize to non-JSON content types (HTML, XML, binary) and to MB-scale where compression windowing/chunking differs",
+      "What is latency cost of per-response brotli/gzip decompression before hashing at production scale",
+      "What is behavior when Content-Encoding is missing, incorrect, or double-encoded",
+      "Is compressed-varying threshold <0.35 robust across seeds and body sizes or seed-44 specific",
+      "Does 2-unique-hashes vs 5-level quality range indicate saturation or would wider range 0-11 produce larger degradation"
+    ],
+    "do_not_assume": [
+      "Decompression-normalization works behind real CDNs — tested only with synthetic Python proxy brotli quality variation, not real CDN non-determinism (caching, chunked transfer, load-balancing, Accept-Encoding negotiation)",
+      "Compressed-byte hashing universally fails under quality variation — degradation is bounded (0.33-0.45) and threshold breach (0.3475 vs 0.35) is marginal and seed-sensitive",
+      "Result generalizes beyond 1KB JSON brotli — single body size, single content type, single algorithm, single seed",
+      "B-COMPRESSED-VARYING < 0.35 is a categorical failure — auditor notes threshold brittleness (0.0025 margin) and MIXED vs SURVIVES classification is seed-sensitive",
+      "Decompression-normalization handles gzip, missing Content-Encoding, or incorrect Content-Encoding — only brotli tested, fallback path not stress-tested",
+      "Mock OAuth2 server discrimination ceiling of 0.5 reflects production IdP behavior — 3-way error collapse is structural, not representative",
+      "Product can deploy decompression-normalization behind real CDNs without real-CDN validation experiment"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34986155186/result.json (raw metrics and controls)",
+    "research/experiments/EXP-RUNTIME-34986155186/audit.json (independent recomputation and claim ceiling)",
+    "research/experiments/EXP-RUNTIME-34986155186/raw_observations.json (800 raw HTTP observations)",
+    "research/experiments/EXP-RUNTIME-34986155186/provenance.json (environment and artifact hashes)",
+    "research/experiments/EXP-RUNTIME-34902094115/handoff.json (parent: synthetic deterministic ceiling)",
+    "research/claims/registry.json (C-MEAS-VALID current status)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34986155186/result.json - B-DECOMPRESSED-VARYING=0.5, B-COMPRESSED-VARYING=0.3475 on /userinfo",
+    "research/experiments/EXP-RUNTIME-34986155186/audit.json - claim_ceiling bounded to synthetic proxy, validity_findings[0] high-severity synthetic gap, recomputed_metrics max_abs_diff=0.0",
+    "research/experiments/EXP-RUNTIME-34986155186/raw_observations.json - 800 observations, compressed/decompressed fingerprint verification",
+    "research/experiments/EXP-RUNTIME-34986155186/spec.json - frozen decision_rule, baselines, claim_ids C-MEAS-VALID",
+    "research/experiments/EXP-RUNTIME-34986155186/provenance.json - brotli 1.2.0, quality 6 fixed / range 4-8, seed 44",
+    "research/experiments/EXP-RUNTIME-34986155186/report.md - MIXED outcome interpretation, controls table, scope limitations"
+  ],
+  "recommended_action": "Design real-CDN validation experiment: deploy mock OAuth2 behind Cloudflare or Fastly free tier with varying compression settings, test decompression-normalization discrimination under real CDN non-determinism (caching, chunked transfer, load-balancing, Accept-Encoding negotiation). If real-CDN access is unavailable, test gzip quality variation as a lower-cost orthogonal question to expand algorithm coverage before CDN validation."
+}
