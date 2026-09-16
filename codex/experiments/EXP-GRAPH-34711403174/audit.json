@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34711403174",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claim ceiling to deterministic mock only: product integration of postcondition Jaccard freshness scoring at threshold 0.85 requires scaling validation before kernel adoption — re-test with realistic field counts (e.g., n=10,20,50) where single-field add produces similarity 0.91-0.98 and would be missed at 0.85; report threshold-vs-schema-size calibration or adaptive threshold.",
+    "Tighten false-positive precision: false_positive_rate was defined only on stable control (n=10, Wilson CI [0.0,0.2775]) and reported TN=10 while ignoring 15 pre-drift fresh requests from drift families; re-define FP over all fresh (n=25, 0/25, Wilson CI [0.0,0.133]) and increase control sample to >=50-100 for CI upper bound <0.10 before claiming FP <=0.1.",
+    "Acknowledge per-family power is weak: per-family n=5 stale each gives Wilson CI [0.565,1.0] for 5/5, so 'per_family_tp_rate=1.0' does not confidently exceed 0.7; increase per-family stale requests or report exact CIs and avoid >0.7 claim without qualification.",
+    "Replace trivial statistical baselines with an empirical competitive detector (e.g., field-set equality, bag-of-keys hash, or value-aware comparison) and report head-to-head TP/FP; current baselines 'always-fresh' and 'random 50%' (spec.json baselines[0..1]) are not implemented (controls.baseline_random_detection.pass=true with evidence_ref spec.json baselines[1]) and guarantee superiority.",
+    "Disclose and test metric-drift tautology: Jaccard on (field_path,type) pairs is co-designed with drift patterns (add/remove/change_type) on 3-4 field schemas giving guaranteed similarities 0.75/0.6 (fresh=1.0) — test at least one non-tautological drift that the metric should miss (nested structure change, optional field, value-range drift, semantic drift with identical schema) to establish discriminating power and avoid circular validation.",
+    "Re-run sensitivity analysis including schema-size sweep and report that threshold 0.85 is not robust: demonstrated analytically that n=20 add_field yields similarity 0.952 (>0.85) → FN, n=10 add_field 0.909 (>0.85) → FN; threshold was well-calibrated only because n is small (3-4).",
+    "Correct confusion-matrix reporting in result.json metrics.confusion_matrix: tn=10 counts only users_stable; total fresh=25 (15 drift-family pre-drift +10 control) was 0 FP, so either report overall confusion (TP=15,FN=0,FP=0,TN=25) or explicitly label matrix as drift-vs-control subset to avoid misreading FP rate denominator."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Measurement reproduces arithmetically but has degenerate positive separation by construction",
+      "severity": "high",
+      "detail": "Recomputed from raw_evidence/execution_results.json (40 records): fresh similarity always 1.0 (n=25), stale similarity 0.75 (users add_field, comments remove_field) and 0.6 (posts change_type) (n=15). Jaccard calculation matches execute.py: users 3/4=0.75, posts 3/5=0.6, comments 3/4=0.75. With threshold 0.85 separation is perfect by design; threshold was preregistered but field counts (3-4) make detection guaranteed.",
+      "evidence_ref": "raw_evidence/execution_results.json requests 1-40, execute.py FRESH_POSTCONDITIONS/STALE_POSTCONDITIONS/jaccard_similarity, result.json metrics.similarity_distributions"
+    },
+    {
+      "finding": "Mock server fidelity is non-product and no external variability",
+      "severity": "high",
+      "detail": "Environment localhost http.server threading, 0 failed_requests, no latency/rate-limit/auth/pagination/nested JSON. Validity_notes acknowledge deterministic mock and synthetic drift only (3 patterns). Real-world API drift is stochastic and may be partial; no real APIs tested. Limits claim to proof-of-concept structural drift only.",
+      "evidence_ref": "provenance.json environment/platform=mock_server http.server stdlib, validity_notes, execute.py DriftMockHandler"
+    },
+    {
+      "finding": "Sample size too small for tight claim on thresholds",
+      "severity": "high",
+      "detail": "TP denominator 15 (5 per family), FP denominator 10 per spec (25 if counting all fresh). Wilson 95% CI TP 15/15 = [0.7961,1.0] (producer reports same) lower bound below 0.8 SURVIVES threshold; FP 0/10 CI [0.0,0.2775] includes 0.1; FP 0/25 CI [0.0,0.133] still includes 0.1; per-family 5/5 CI [0.565,1.0]. Point estimates meet frozen decision_rule (TP>=0.8, FP<=0.1, per_family>0.7, 0 failures) but CIs show measurement not precise enough to confidently assert thresholds.",
+      "evidence_ref": "result.json metrics.tp_rate_95ci, fp_rate_95ci, recomputed_metrics wilson_cis"
+    },
+    {
+      "finding": "False-positive definition narrow and undercounts fresh",
+      "severity": "medium",
+      "detail": "Spec prereg defines false_positive_rate on stable control only (users_stable 10 requests). Producer follows spec but confusion_matrix tn=10 omits 15 pre-drift fresh from drift families that were also 0 FP. Recomputed overall FP 0/25 still 0.0 but CI more favorable than reported 0/10. Reporting should clarify denominator.",
+      "evidence_ref": "spec.json measurement_validity, prereg.md Measures, result.json metrics.confusion_matrix tp=15 fn=0 fp=0 tn=10 vs execution_results.json ground_truth fresh n=25"
+    },
+    {
+      "finding": "Threshold not robust to schema size scaling — fails falsification test for realistic schemas",
+      "severity": "high",
+      "detail": "Analytical scaling: Jaccard add_field similarity = n/(n+1), remove = (n-1)/n, change_type = (n-1)/(n+1). For n=3-4 gives 0.6-0.75 (detected at 0.85), for n=10 gives 0.909/0.90/0.818, for n=20 gives 0.952/0.95/0.905, for n=50 gives ~0.98 — all >0.85 so single-field drift would be missed. Real APIs often have 10-50 fields; threshold 0.85 would produce FN. Experiment does not test this, so ceiling cannot assume scalability.",
+      "evidence_ref": "execute.py FRESH_POSTCONDITIONS sizes 3-4, sensitivity_analysis at 0.7/0.8/0.85/0.9/0.95, derived scaling calculation"
+    },
+    {
+      "finding": "Positive and null controls are tautological with main metric, not independent",
+      "severity": "medium",
+      "detail": "positive_control_add_field expects similarity drops below 0.85 at requests 6-10 (observed 0.75) and null_control_stable_endpoint expects 1.0 (observed 1.0). Both are direct consequences of same Jaccard computation on DriftMockHandler STALE_RESPONSES vs FRESH_RESPONSES; they confirm implementation worked, not that detection is non-trivial. No unexpected failure mode could violate them given design.",
+      "evidence_ref": "result.json controls.positive_control_add_field, controls.null_control_stable_endpoint, execute.py DriftMockHandler.request_counts and STALE_RESPONSES dict (no entry for users_stable)"
+    },
+    {
+      "finding": "Representation loss not challenged",
+      "severity": "medium",
+      "detail": "Measurement uses flat (field_path,type) pairs, no nested structures, arrays as generic 'array', no optional fields, no value constraints, no semantic drift. Validity_notes list these limits correctly but experiment tests only drifts that this representation captures. No test of drifts it should miss, so no evidence of where freshness scoring breaks.",
+      "evidence_ref": "spec.json measurement_validity line 'Jaccard similarity of (field_path, type) pairs', validity_notes, execute.py extract_field_types"
+    },
+    {
+      "finding": "Provenance and hashes verified — no hidden deviation from frozen design",
+      "severity": "info",
+      "detail": "All artifact hashes match: execution_results.json 06bcc81e..., metrics.json db83e53c..., request_logs.json bc4304cc..., decision.json 45aafb30..., execute.py 83e2bef5... Matching provenance.json. Code execution matches frozen spec/prereg threshold 0.85, drift point 6, 10 per family.",
+      "evidence_ref": "provenance.json hashes and execution, freeze.json hashes"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "baseline_no_freshness_detection",
+      "expected": "TP 0%, FP 0%",
+      "observed": "TP 0%, FP 0% trivially (no implementation)",
+      "strength": "trivial",
+      "detail": "Statistical null, not empirical control; any detector with TP>0 beats it. Pass=true by definition, not a competitive test.",
+      "evidence_ref": "spec.json baselines[0], result.json controls.baseline_no_freshness_detection"
+    },
+    {
+      "baseline_id": "baseline_random_detection",
+      "expected": "TP ~50%, FP ~50%",
+      "observed": "Not implemented in experiment (statistical baseline only), pass=true",
+      "strength": "trivial",
+      "detail": "Not executed; expected values are theoretical. No variance, no empirical random runs, no comparison to simple alternatives like field-set equality which would also achieve 100% on this mock.",
+      "evidence_ref": "spec.json baselines[1], result.json controls.baseline_random_detection evidence_ref=spec.json baselines[1]"
+    },
+    {
+      "baseline_id": "positive_control_add_field",
+      "expected": "Similarity drops below 0.85, detection 100%",
+      "observed": "Similarity 0.75, detected_stale true 5/5, correct true",
+      "strength": "weak",
+      "detail": "Control is not independent from main TP metric; it is the same add_field drift family subset (users). Shows drift injection worked, not detection strength beyond design.",
+      "evidence_ref": "result.json controls.positive_control_add_field evidence_ref raw_evidence/execution_results.json requests 6-10 users"
+    },
+    {
+      "baseline_id": "null_control_stable_endpoint",
+      "expected": "Similarity 1.0, FP 0%",
+      "observed": "Similarity 1.0 all 10, 0 FP",
+      "strength": "weak",
+      "detail": "Stable endpoint uses separate family users_stable with no entry in STALE_RESPONSES, so drift cannot occur. Confirms no spurious drift but does not test hard negative (e.g., schema-compatible response variation, reordered fields, extra optional null).",
+      "evidence_ref": "result.json controls.null_control_stable_endpoint, execute.py STALE_RESPONSES"
+    }
+  ],
+  "recomputed_metrics": {
+    "true_positive_rate": 1.0,
+    "false_positive_rate_on_control": 0.0,
+    "false_positive_rate_overall_fresh": 0.0,
+    "true_positive_rate_95ci_wilson": [0.7961, 1.0],
+    "false_positive_rate_95ci_wilson_control_n10": [0.0, 0.2775],
+    "false_positive_rate_95ci_wilson_overall_n25": [0.0, 0.1332],
+    "per_family_tp_rate": {
+      "users": 1.0,
+      "posts": 1.0,
+      "comments": 1.0
+    },
+    "per_family_tp_rate_95ci_wilson_each_n5": [0.5655, 1.0],
+    "per_pattern_tp_rate": {
+      "add_field": 1.0,
+      "change_type": 1.0,
+      "remove_field": 1.0
+    },
+    "confusion_matrix_producer_definition": {
+      "tp": 15,
+      "fn": 0,
+      "fp": 0,
+      "tn": 10
+    },
+    "confusion_matrix_overall": {
+      "tp": 15,
+      "fn": 0,
+      "fp": 0,
+      "tn": 25
+    },
+    "fresh_n": 25,
+    "stale_n": 15,
+    "total_requests": 40,
+    "failed_requests": 0,
+    "similarity_fresh_values": [1.0],
+    "similarity_stale_values": [0.6, 0.75],
+    "similarity_fresh_mean": 1.0,
+    "similarity_stale_mean": 0.7,
+    "sensitivity_analysis_recomputed": {
+      "0.7": { "tp_rate": 0.3333, "fp_rate": 0.0 },
+      "0.8": { "tp_rate": 1.0, "fp_rate": 0.0 },
+      "0.85": { "tp_rate": 1.0, "fp_rate": 0.0 },
+      "0.9": { "tp_rate": 1.0, "fp_rate": 0.0 },
+      "0.95": { "tp_rate": 1.0, "fp_rate": 0.0 }
+    },
+    "jaccard_expected": {
+      "users_add_field": 0.75,
+      "posts_change_type": 0.6,
+      "comments_remove_field": 0.75
+    },
+    "scaling_attack": {
+      "n10_add": 0.909,
+      "n20_add": 0.952,
+      "n50_add": 0.98,
+      "threshold": 0.85,
+      "result_at_threshold": "Miss (FN) for realistic n>=10 single-field drift"
+    },
+    "verification": "Recomputed from raw_evidence/execution_results.json and request_logs.json; all producer metrics match arithmetic; hashes verified 06bcc81e..., db83e53c..., bc4304cc..., 45aafb30..., 83e2bef5..."
+  },
+  "claim_ceiling": "Within this deterministic mock (localhost, 3-4 flat fields, drift injected at request 6, Jaccard on (field_path,type) at threshold 0.85), postcondition similarity perfectly separates fresh (1.0) from these three specific structural drifts (0.6/0.75) with point-estimate TP 1.0 and FP 0.0, meeting the frozen decision_rule point thresholds. This does NOT support: reliable staleness detection across resource families in general, on real Web endpoints, for nested/optional/value/semantic drift, for schemas with >=10 fields (where single-field drift similarity 0.91-0.98 exceeds 0.85 and would be missed), or with calibrated false-positive rate <0.10 at confidence (CI includes 0.27 on n=10, 0.13 on n=25). Maximum justified claim is proof-of-concept that structural add/remove/change-type on tiny flat schemas is detectable by Jaccard — not validated C-FRESHNESS for product kernel re-validation without scaling and real-API follow-up.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34711403174/spec.json: claim_ids C-FRESHNESS, hypothesis >80% TP <5% FP, decision_rule TP>=0.8 FP<=0.1",
+    "research/experiments/EXP-GRAPH-34711403174/prereg.md: H1-H4, design 10 per family drift at 6, threshold 0.85, Jaccard (field_path,type)",
+    "research/experiments/EXP-GRAPH-34711403174/freeze.json: frozen hashes prereg 35d1a5e7..., spec d4f818f2...",
+    "research/experiments/EXP-GRAPH-34711403174/result.json: metrics true_positive_rate 1.0 false_positive_rate 0.0 tp_rate_95ci [0.7961,1.0] fp_rate_95ci [0.0,0.2775] confusion_matrix tp15 fn0 fp0 tn10",
+    "research/experiments/EXP-GRAPH-34711403174/report.md: SURVIVES_CURRENT_TEST, sensitivity table",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/execution_results.json: sha256 06bcc81ead733fa6e32091a7acac8b448401580cc3d8563fe2c66df1e2e603e7 40 records",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/metrics.json: sha256 db83e53cbd81c034664cd164bce7e4905054a4aa6dbba50c905e959944d3e84b",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/request_logs.json: sha256 bc4304ccecd7463516ff2c629fff1582fbdb6dc9a3be5226d30706efdff3b079",
+    "research/experiments/EXP-GRAPH-34711403174/raw_evidence/decision.json: sha256 45aafb30d2c562fdb762e6b74598805896e8a8084081918cf545f880fd31bace decision SURVIVES_CURRENT_TEST",
+    "research/graph/freshness_detection/execute.py: sha256 83e2bef5df91fc06d6b16be451e98ef0a5a0be0842115c4b63523a36d0a429b8 threshold 0.85 DRIFT_POINT 6",
+    "research/experiments/EXP-GRAPH-34711403174/provenance.json: commit 96d0f470..., execution total_requests 40 failed 0"
+  ],
+  "unresolved": [
+    "Whether Jaccard (field_path,type) detects drift on nested JSON, optional fields, or schemas with many fields where single-field similarity >>0.85",
+    "Whether real endpoint drift patterns match the three synthetic patterns or include semantic/value drift that this method would miss (same schema, different meaning)",
+    "True false-positive rate on live Web traffic with authentication, pagination, rate limits — mock gives degenerate 1.0 fresh separation",
+    "Learned or adaptive threshold vs fixed 0.85; how to calibrate per resource family without oracle",
+    "Staleness detection latency and economics: cost of live probe vs value of re-validation trigger in product kernel"
+  ]
+}

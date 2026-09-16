@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-34704657427",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct G3 slot_prefixes expected value or algorithm: frozen spec.json/prereg.md Section 5.1 and decision_rule require G3 slot_prefixes={'url':'repos/main/issues/'} but committed kernel.py distill_parameterized lines 276-314 extracts full path segment 'orgs/acme/repos/main/issues/' (full prefix from authority end). Strict decision_rule criterion fails as written. Either amend spec expected to 'orgs/acme/repos/main/issues/' (more complete for VALUE CONTRACT stripping) or trim extraction to last-segment logic. Until amended, SURVIVES_CURRENT_TEST as strictly defined is not met despite non-empty intent achieved.",
+    "Rerun true B_UNFIXED_G1 discriminating baseline: frozen spec.json baselines B_UNFIXED_G1 requires 'True unfixed heuristic (rfind without Fix1/Fix2) on G1 training data (https://api.example.com/search?q={alpha,beta,delta}) Expected: suffix-corrupted template, binding_accuracy=0.0' – producer run_experiment.py B_UNFIXED instead re-tests P1_PATH_PREFIX (https://api.example.com/users/{A,B,C}) where unfixed heuristic happens to succeed (binding 1.0). Fix1 necessity not measured within primary execution. Rerun B_UNFIXED against G1 and N1_ORIGINAL training data as specified.",
+    "Disclose and bound protocol-only over-parameterization: distill_parameterized on ['https://a.com/x','https://b.com/y','https://c.com/z'] (recomputed) yields slot_count=1 template 'https://${url}' slot_prefixes={'url':'https://'} because _validate_prefix_boundary('https://') returns True (last_char '/'). Frozen N1 controls do not cover this class. Claim ceiling must state Fix2 allows protocol-only prefix and needs minimum-length/domain-aware threshold; do not generalize to arbitrary cross-host protocols."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_RECOMPUTED_NON_EMPTY_WITH_G3_VALUE_MISMATCH",
+      "severity": "medium",
+      "finding": "P1/G3/G5 slot_prefixes recomputed non-empty from committed kernel.py: P1 {'url':'users/'} correct, G5 {'url':'users/'} correct, G3 {'url':'orgs/acme/repos/main/issues/'} non-empty but differs from frozen expected 'repos/main/issues/'. Producer report.md correctly notes discrepancy but counts G3 as PASS under relaxed non-empty check. Strict decision_rule criterion (spec.json 'G3 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={url: repos/main/issues/}') fails; relaxed non-empty intent (falsifier clause 4) passes. Recompute from raw_evidence.json and direct distill_parameterized call confirms observed values.",
+      "evidence": "raw_evidence.json conditions.G3_DEEP_PATH.slot_prefixes={'url':'orgs/acme/repos/main/issues/'} metrics.binding_accuracy=1.0 slot_count=1; spec.json decision_rule(5) expects repos/main/issues/; prereg.md 5.1 expects repos/main/issues/; src/spider/kernel.py lines 286-310 extracts path_segment from authority end, producing orgs/...; recompute distill_parameterized G3 template https://api.example.com/orgs/acme/repos/main/issues/${url}"
+    },
+    {
+      "id": "V2_BINDING_NO_REGRESSION_VERIFIED",
+      "severity": "info",
+      "finding": "No binding regression after slot_prefixes fix. All 5 established conditions recomputed binding_accuracy=1.0 (3/3 each): P1, G1, G2, G3, G5 slot_count=1. Template invariant holds verbatim: P1 url https://api.example.com/users/${url}, G3 https://api.example.com/orgs/acme/repos/main/issues/${url}, G5 https://api.example.com/users/${url}/items?page=1 identical to parent and to spec. slot_prefixes is metadata-only as claimed and does not affect action_template or _bind substitution (verified by _bind on unseen values).",
+      "evidence": "raw_evidence.json conditions.P1_PATH_PREFIX/G1_QUERY_STRING_SIMPLE/G2_QUERY_STRING_MULTIPARAM/G3_DEEP_PATH/G5_PATH_QUERY_HYBRID metrics.binding_accuracy=1.0 resolution_results 3/3 binding_correct; slot_prefixes_verification.template_invariant_holds true; src/spider/kernel.py _bind lines 36-50 unchanged"
+    },
+    {
+      "id": "V3_NULL_CONTROLS_RECOMPUTED_VALID",
+      "severity": "info",
+      "finding": "Null controls recomputed valid: N1_ORIGINAL (cross-host https://api.example.com/a etc) common prefix 'https://api.' ends at '.' not in /?=& so _validate_prefix_boundary false => distill None slot_count 0 PASS. N1_CORRECTED (truly disjoint http://a.com/x etc) common prefix '' empty => empty-prefix guard 'if not full_prefix: continue' rejects => None slot_count 0 PASS. Both match frozen expectations and parent empty-guard behavior.",
+      "evidence": "raw_evidence.json conditions.N1_ORIGINAL/N1_CORRECTED distill_success false slot_count 0; src/spider/kernel.py _validate_prefix_boundary lines 191-199 and empty guard lines 260-271; recompute _find_common_prefix_suffix N1_ORIGINAL='https://api.' N1_CORRECTED=''"
+    },
+    {
+      "id": "V4_SYNTHETIC_SCOPE_NO_LEAKAGE",
+      "severity": "info",
+      "finding": "No leakage or sampling integrity violation: training values (A,B,C / alpha,beta,delta / 1,2,3 etc) disjoint from unseen test values (D,E,F / gamma,epsilon,zeta /4,5,6). All conditions deterministic synthetic n=3 training +3 unseen =42 binding tests, zero model/network/browser calls, fresh distill per condition via committed import (no monkey-patch). Confidence 0.9 for parameterized mechanisms, 0.5 literal baseline correctly below min_confidence 0.8.",
+      "evidence": "run_experiment.py CONDITIONS training/unseen_values disjoint; raw_evidence.json per-condition resolution_results expected_url matches bound_action; provenance.json environment.deterministic_synthetic true model_network_browser_calls 0"
+    },
+    {
+      "id": "V5_PROTOCOL_ONLY_GAP_STILL_PRESENT",
+      "severity": "medium",
+      "finding": "Protocol-only over-parameterization not fixed and not exercised by frozen nulls. Recompute distill_parameterized on ['https://a.com/x','https://b.com/y','https://c.com/z'] yields template 'https://${url}' slot_count 1 slot_prefixes {'url':'https://'}; on ['https://a.com/x','https://b.org/y'] variant same. _validate_prefix_boundary('https://') true due to last_char '/' check. Producer correctly lists as unresolved validity_note but claim ceiling advancing to prefix metadata must be bounded to exclude this class.",
+      "evidence": "recompute distill_parameterized protocol-only test => https://${url} slot 1; src/spider/kernel.py _validate_prefix_boundary 197-199; result.json unresolved[2] and validity_notes acknowledge gap; raw_evidence.json does not contain protocol-only condition"
+    },
+    {
+      "id": "V6_ARTIFACT_HASHES_VERIFIED",
+      "severity": "info",
+      "finding": "Artifact hashes recomputed match producer artifacts: src/spider/kernel.py 1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4, src/spider/models.py 065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85, raw_evidence.json 327eaa55f053a45c9d8cdd449b404e4e04510f508f1e55e78263add823b2a948, run_experiment.py 1f291f33112dd... No post-freeze mutation beyond committed slot_prefixes extraction lines 276-314.",
+      "evidence": "sha256 recompute kernel.py 1880ef... models.py 065e6... raw_evidence 327eaa... matches result.json artifacts and provenance.json substrate"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_B_LITERAL_VALID",
+      "severity": "info",
+      "finding": "B_LITERAL baseline valid: literal mechanism confidence 0.5 < min_confidence 0.8 => all resolutions EXPLORE/UNKNOWN fail_rate 1.0 as expected, confirming parameterized induction necessary. Recomputed PASS.",
+      "evidence": "raw_evidence.json conditions.B_LITERAL confidence 0.5 metrics.fail_rate 1.0 slot_count 0; result.json controls.B_LITERAL passed true"
+    },
+    {
+      "id": "B2_B_UNFIXED_WRONG_CONDITION_NON_DISCRIMINATING",
+      "severity": "medium",
+      "finding": "B_UNFIXED baseline as implemented does not satisfy frozen spec. Spec baselines: B_UNFIXED_G1 on G1 query-string training (alpha/beta/delta) expected suffix-corrupted template and binding 0.0. Producer B_UNFIXED tests P1_PATH_PREFIX training (A,B,C) where unfixed rfind('/') heuristic trivially succeeds (slot_prefix '' but template https://api.example.com/users/${url} binding 1.0). P1 is known non-discriminating for Fix1 (query-string suffix guard). Recompute shows true unfixed G1 would produce template 'https://api.example.com/search?q=${url}a' binding 0.0 vs fixed 1.0, and unfixed N1_ORIGINAL would produce 'https://api.${url}' slot 1 vs fixed 0 – delta real but not measured in primary execution. Baseline strength therefore not demonstrated in this run.",
+      "evidence": "spec.json baselines[1] B_UNFIXED_G1 expected suffix-corrupted; run_experiment.py CONDITIONS B_UNFIXED training is P1 (users/A/B/C) with baseline_note 'rfind without Fix1/Fix2'; raw_evidence.json B_UNFIXED slot_count 1 binding 1.0 slot_prefixes {'url':''}; recompute _unfixed_find_common_prefix_suffix G1 => ('https://api.example.com/search?q=','a') template corrupted; result.json validity_notes[2] acknowledges P1 not discriminating"
+    },
+    {
+      "id": "B3_B_EMPTY_SLOT_PREFIXES_REGRESSION_IMPLICIT",
+      "severity": "info",
+      "finding": "B_EMPTY_SLOT_PREFIXES regression baseline (parent empty slot_prefixes despite design intent) is addressed by demonstrating non-empty now and unchanged binding. No explicit side-by-side parent commit compared in this run, but raw evidence shows path_prefix_non_empty true vs parent observed empty, with identical templates. Adequate for regression check.",
+      "evidence": "raw_evidence.json slot_prefixes_verification.path_prefix_non_empty true vs parent handoff unknown slot_prefixes empty; src/spider/kernel.py slot_prefixes fix lines 276-314"
+    }
+  ],
+  "recomputed_metrics": {
+    "p1_slot_count": 1,
+    "p1_binding_accuracy": 1.0,
+    "p1_slot_prefixes": {"url": "users/"},
+    "p1_slot_prefixes_non_empty": true,
+    "p1_template": "https://api.example.com/users/${url}",
+    "g1_slot_count": 1,
+    "g1_binding_accuracy": 1.0,
+    "g1_slot_prefixes": {"url": "search?q="},
+    "g2_slot_count": 1,
+    "g2_binding_accuracy": 1.0,
+    "g2_slot_prefixes": {"url": "items?category=books&page="},
+    "g3_slot_count": 1,
+    "g3_binding_accuracy": 1.0,
+    "g3_slot_prefixes_observed": {"url": "orgs/acme/repos/main/issues/"},
+    "g3_slot_prefixes_expected_frozen": {"url": "repos/main/issues/"},
+    "g3_slot_prefixes_strict_match": false,
+    "g3_slot_prefixes_non_empty": true,
+    "g3_template": "https://api.example.com/orgs/acme/repos/main/issues/${url}",
+    "g5_slot_count": 1,
+    "g5_binding_accuracy": 1.0,
+    "g5_slot_prefixes": {"url": "users/"},
+    "g5_template": "https://api.example.com/users/${url}/items?page=1",
+    "n1_original_slot_count": 0,
+    "n1_corrected_slot_count": 0,
+    "b_literal_slot_count": 0,
+    "b_literal_fail_rate": 1.0,
+    "b_unfixed_p1_slot_count": 1,
+    "b_unfixed_p1_binding_accuracy": 1.0,
+    "b_unfixed_p1_slot_prefixes": {"url": ""},
+    "b_unfixed_g1_not_measured_in_primary_run": true,
+    "b_unfixed_g1_recomputed_binding_accuracy": 0.0,
+    "b_unfixed_n1_recomputed_slot_count": 1,
+    "g4_slot_count": 1,
+    "g4_binding_accuracy": 0.0,
+    "g4_architectural_bound": true,
+    "overall_binding_accuracy": 0.8571428571428571,
+    "structural_generalization_rate": 0.8,
+    "condition_pass_rate": 0.9,
+    "total_conditions": 10,
+    "passed_conditions": 9,
+    "decision_relevant_passed_relaxed": 8,
+    "decision_relevant_passed_strict": 7,
+    "pipeline_no_errors": true,
+    "path_prefix_non_empty": true,
+    "template_invariant_holds": true,
+    "protocol_only_recomputed_slot_count": 1,
+    "protocol_only_recomputed_template": "https://${url}",
+    "artifacts_sha256_verified": {
+      "src/spider/kernel.py": "1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4",
+      "src/spider/models.py": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+      "raw_evidence.json": "327eaa55f053a45c9d8cdd449b404e4e04510f508f1e55e78263add823b2a948"
+    }
+  },
+  "claim_ceiling": "COMMITTED-CODE SYNTHETIC SINGLE-SLOT WITH NON-EMPTY PREFIX METADATA (NARROW, REVISE-BOUNDED): distill_parameterized with Fix1+Fix2+empty-prefix guard plus new slot_prefixes extraction (path segment from authority end to slot) committed to src/spider/kernel.py 1880ef67 produces non-empty slot_prefixes for 3 path-prefix classes (P1 users/, G3 orgs/acme/repos/main/issues/ [frozen expected was repos/main/issues/ – mismatch], G5 users/) and maintains binding_accuracy=1.0 via template substitution for 5 single-slot URL classes (P1, G1 search?q=, G2 multi-param, G3 deep-path, G5 hybrid) at n=3+3 synthetic each, zero model/browser/network calls, nulls N1_ORIGINAL/N1_CORRECTED correctly reject, B_LITERAL fail 1.0. Does NOT demonstrate: exact frozen G3 expected value (strict decision_rule fails), Fix1 necessity via discriminating B_UNFIXED_G1 (not measured), protocol-only 'https://' rejection (still over-parameterizes), multi-slot induction (G4 0.0 architectural), real-browser external validity or C-PRODUCT-ECON cost savings.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-34704657427/spec.json decision_rule 8 conditions lane product claim_ids C-PARAM-INHERIT",
+    "research/experiments/EXP-PRODUCT-34704657427/prereg.md Section 5.1 expected G3 slot_prefixes repos/main/issues/ and Section 7 algorithm description",
+    "research/experiments/EXP-PRODUCT-34704657427/freeze.json hashes prereg 02f60c73 spec a4866e99 request e42497",
+    "research/experiments/EXP-PRODUCT-34704657427/result.json metrics p1/g1/g2/g3/g5 binding 1.0 and controls P1/N1/B_LITERAL passed",
+    "research/experiments/EXP-PRODUCT-34704657427/raw_evidence.json conditions P1_PATH_PREFIX slot_prefixes users/ G3_DEEP_PATH orgs/acme/repos/main/issues/ G5 users/ plus resolution_results binding_correct 3/3",
+    "research/experiments/EXP-PRODUCT-34704657427/run_experiment.py CONDITIONS B_UNFIXED uses P1 training not G1 and distill_unfixed rfind logic",
+    "research/experiments/EXP-PRODUCT-34704657427/provenance.json substrate committed code environment model_network_browser_calls 0 deterministic_synthetic true",
+    "src/spider/kernel.py sha256 1880ef67 lines 157-186 Fix1 191-199 Fix2 260-271 empty guard 276-314 slot_prefixes extraction",
+    "src/spider/models.py sha256 065e6b3d Mechanism slot_prefixes field",
+    "recompute direct distill_parameterized calls for P1/G3/G1/N1_ORIGINAL/protocol-only verifying templates and slot_prefixes",
+    "research/experiments/EXP-PRODUCT-34685457833/handoff.json carry_forward established/rejected/unknown and audit.json V5 slot_prefixes empty prior ceiling"
+  ],
+  "unresolved": [
+    "Whether G3 slot_prefixes should be full path orgs/acme/repos/main/issues/ (observed, more complete for stripping) or truncated repos/main/issues/ (frozen expected) – needs spec amendment and VALUE CONTRACT stripping semantics decision.",
+    "B_UNFIXED delta quantification on discriminating conditions G1 suffix corruption and N1_ORIGINAL over-parameterization – verified by isolated recompute but not by measured primary B_UNFIXED runs on those training sets.",
+    "Fix2 protocol-only gap: 'https://' passes last_char '/' check yielding https://${url} over-parameterization – minimum prefix length or domain-aware threshold undecided.",
+    "End-to-end product economics C-PRODUCT-ECON: does parameterized kernel save total cost per successful task with real browser/model calls, tokens, repair, latency, false accepts – still unmeasured, synthetic-only.",
+    "Real-browser external validity and prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in live traffic."
+  ]
+}

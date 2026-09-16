@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34846934524",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace plug-in PMI estimator that saturates at H(S) when |R| ≈ N: recomputed conditional PMI 3.319465 bits on session_correlated at K=3 equals weighted H(S_next|URL,H_K) (3.319 = log2(10) uniform 10 sessions per stratum). Positive control recomputed with random DOM_before labels (unique per transition, |R|≈714 per stratum) yields identical PMI 3.317865 bits and permutation null mean 3.318017 bits (raw_analysis_results.json controls.positive_control_random_labels). Null shuffled control mean 0.0857 bits is exactly expected finite-sample bias ~(|R|-1)(|S|-1)/(2N ln2) ≈0.08, not true dependence. Fix requires bias-corrected estimator (Miller-Madow, NSB, or permutation-subtracted PMI = observed - perm_mean), or cardinality-controlled discretization, or I estimated via kNN/leave-one-out, and reporting perm-subtracted effect size. The frozen spec decision rule's mean_PMI>0.05 threshold is meaningless under this bias.",
+    "Correct positive/null control design for session-correlated SPA: spec.json positive_control requires random DOM_before hashes on session-SPA non-deterministic strata expecting PMI≈0, and null_control shuffling within strata expecting ≈0. Both fail (observed 3.318 and 0.0857, pass false) not as 'fails by design' salvageable but as proof estimator degenerate (see above). Controls were designed for independent-noise SPAs where |S| small and DOM_after truly random per step. Valid control for session-correlated must randomize latent session_id assignment itself (break session->variant mapping) or permute session labels, not DOM_before labels alone, and null must be permutation of session_id within strata. Update spec measurement_validity and generate_data.py mapping verification to test this.",
+    "Fix determinism control deviation from frozen spec: spec.json falsifier (3) and measurement_validity (7) require determinism check P(DOM_hash_next | DOM_hash_current, Action) to have deterministic SPA accuracy =1.0 AND session-SPA accuracy <1.0 to confirm variants introduced. Recomputed determinism_accuracy_deterministic 1.0, session_correlated 1.0, independent_noise 0.357 (raw_analysis_results.json site_results.*.determinism_accuracy). Session-correlated is deterministic by construction (session_id %5 mapping, FSM linear, 50 unique (S_before, Action) pairs each deterministic). analyze.py v3 line 431-438 silently inverted spec to require session==1.0 to pass, marking determinism_control pass true. This rewrites frozen falsifier/decision rule post hoc. Revert to frozen logic or amend prereg explicitly and treat session-correlated observation non-determinism as across-session, not within-pair, and use distinct metric (e.g., variant multiplicity per FSM state).",
+    "Disambiguate target S_next operationalization: spec.json question/hypothesis claim I(S_next; DOM_before | URL, H_K) implies next FSM state, but analyze.py compute_pmi_from_strata lines 110-114 uses s = state_after.dom_features.visible_text_hash (next DOM hash including session_token SHA256(session_id)[:16]). Recomputed n_unique visible_text_hash per state =10 (session_correlated) vs 3 (independent) vs 1 (deterministic) and weighted H(S) session 3.319 vs independent 1.583 vs deterministic 0.0. Action-history accuracy 0.112 on session_correlated (vs 1.0 deterministic, 0.349 independent) is not 'history weak' but tautology: history predicts FSM state, not which of 10 session-specific DOM hashes appears. Product consequence must not conflate predicting next DOM observation (contains session token) with predicting Web-dynamical state transition.",
+    "Bound claim ceiling to tautological identity and disclose synthetic gap: With session_token = SHA256(session_id)[:16] in visible_text (generate_data.py line 170-171), DOM_before encodes session_id and DOM_after encodes same session_id, so I(R;S|URL,H_K)=H(S|URL,H_K) by identity (recomputed mapping R->S deterministic 50/50 pairs). This is not evidence for C-WEB-DYNAMICS 'predictive dynamical structure beyond memory' but for the data generator's perfect session persistence (constant within trajectory, random across). The expected PMI in prereg Appendix A 1.32 bits (based on 5 variants, H=log2(5)=2.32) understates observed 3.319 by 2× because actual distinct tokens =10 sessions (log2(10)=3.3219), not 5 variants (2 sessions per variant collapse but token distinguishes). Claim ceiling must be at most 'locally-hosted Express SPA where DOM contains SHA-256(session_id) substring shows trivial session-identity PMI' and cannot generalize to production session state (OAuth, DB-backed, concurrent).",
+    "Report representation isomorphism and K-gradient degeneracy explicitly: Recomputed conditional PMI identical across K=1,2,3 (3.319465 at all K, raw_analysis_results.json session_correlated.conditional_pmi visible_text_hash K1/K2/K3) and across visible_text_hash / accessibility_tree_hash / multi_feature_hash (all 3.319, numeric_structural 0.0). Strata counts K=1:5 strata size 1000, K=2:6 strata size ~833, K=3:7 strata size ~714; weighted H(S) identical because session distribution uniform within each stratum regardless of history length. K-gradient hypothesis H5 falsified not by data but by design where history carries no session information (FSM linear, session independent of action). Fix requires FSM where action choice correlates with session or longer history otherwise test vacuous.",
+    "Do not promote primary permutation p_bonf=0.0 as significant: With 1000 perms, 0 exceedances gives one-sided upper bound p_raw <0.001 (p_bonf <0.012), but observed perm_mean 0.085 bits with std 0.005 shows estimator bias, and the same test on random labels would also give p=0.0 (since observed 3.318 equals perm_mean 3.318, actually p≈0.5 if correctly computed on random data; producer computed perm_mean on original not random). Report bias-corrected p and effect size (observed - perm_mean = 3.234 bits) and note it equals H(S)-bias, not incremental predictive information beyond session identity."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_estimator_cardinality_degeneracy",
+      "severity": "major",
+      "finding": "Plug-in mutual information estimator degenerates when |R| ≈ N per stratum. Session_correlated SPA has 10 distinct DOM_before hashes per URL stratum (50 total unique, 10 per state) and 10 distinct DOM_after hashes per stratum, with deterministic R->S mapping via session_id (50/50 deterministic pairs). Weighted I(R;S|URL,H_K)=3.319465 equals weighted H(S|URL,H_K)=3.319465 (recomputed). Positive control with random hashes (unique per transition, ~714 unique R per stratum) yields identical I=3.317865 and perm_mean 3.318017 on that random data, proving any unique-valued R gives I=H(S) regardless of dependence. The reported 3.319 bits is not discriminating evidence for correlated non-determinism but artefact of high-cardinality hashing with N=500-1000 per stratum. Permutation null mean 0.085 on original data matches analytic bias (|R|-1)(|S|-1)/(2N ln2) ≈81/(2*714*0.693)=0.082, not true null of 0.",
+      "evidence": "generate_data.py make_session_correlated_dom lines 163-172 token SHA256(session_id)[:16]; raw_dom_captures.json uniq per state 10/10, total 50/50; raw_analysis_results.json session_correlated conditional_pmi visible_text_hash K3 3.319465, perm_mean 0.085078; controls.positive_control_random_labels 3.317865 perm_mean 3.318017; recomputed PMI random 3.317865 == H(S) 3.319465; analyze.py compute_pmi_from_strata joint/marginal counting"
+    },
+    {
+      "id": "V2_positive_null_control_failure_structural",
+      "severity": "major",
+      "finding": "Both frozen controls fail as predicted by V1, not as 'design limitation' salvageable. spec.json positive_control expects |random-label PMI|<3*std(permuted) ≈0.015 on session-SPA non-deterministic strata; observed 3.317865 >>0.00058 (3*0.00019) fail. Null_control expects |mean shuffled| <3*std (0.015); observed 0.0857 >>0.015 fail. Producer result.json correctly marks pass false but validity_notes reinterpret as 'MEASUREMENT_INVALID driven by control failure but primary test scientifically valid'. This collapses interpretation into observation: the same estimator bias invalidates primary test. Permutation test on original data (shuffling entire transitions within strata) is the correct within-strata shuffle, but its null distribution (mean 0.085) already exposes bias; it does not rescue the point estimate.",
+      "evidence": "spec.json positive_control and null_control definitions; result.json controls positive_control_random_labels observed_pmi 3.317865 pass false note 'FAILS BY DESIGN', null_control_shuffled_labels observed_mean 0.085703 pass false; raw_analysis_results.json controls; recomputed perm_mean original 0.085 vs random 3.318"
+    },
+    {
+      "id": "V3_determinism_control_spec_violation",
+      "severity": "major",
+      "finding": "Frozen spec falsifier (3) and measurement_validity (7) require determinism check to show deterministic SPA accuracy=1.0 and session-SPA accuracy<1.0 to confirm variants introduced. Recomputed determinism_accuracy session_correlated 1.0 (50 deterministic pairs/50) matches deterministic 1.0, independent 0.357. analyze.py v3 lines 430-448 inverts requirement to session >=1.0 and marks pass true, deviating from frozen falsifier without prereg amendment. This hides that session-correlated design introduces no within-pair non-determinism (observation non-determinism across sessions only). Under frozen rule, condition (3) would trigger FALSIFIED (variants not introduced per spec definition).",
+      "evidence": "spec.json falsifier (3) and measurement_validity (7) and decision_rule condition 3; prereg §10.3 and §12.1; result.json determinism_accuracy_session_correlated 1.0 controls.determinism_control note 'session-SPA IS deterministic by design'; analyze.py determinism_control pass logic; raw_analysis_results.json determinism_accuracy"
+    },
+    {
+      "id": "V4_target_misoperationalization",
+      "severity": "moderate",
+      "finding": "Conditional PMI target S_next operationalized as next DOM hash (visible_text_hash of state_after) not next FSM state. Action-history prediction similarly predicts DOM hash, giving AH accuracy 0.112 on session_correlated (worse than chance 0.2 for 5 FSM states) versus 1.0 deterministic and 0.349 independent. This low accuracy is artefactual: history predicts FSM state perfectly (linear FSM), but cannot predict which of 10 session-specific hashes appears. Spec baselines referencing P(S_next | URL,H_K) and frequency baseline 1/5 assume FSM state target. Reporting mixes observation prediction with state-transition prediction, inflating apparent DOM value.",
+      "evidence": "analyze.py compute_pmi_from_strata s = state_after.dom_features.visible_text_hash, compute_action_history_prediction most_frequent DOM hash; result.json action_history_prediction_accuracy_K3_session_correlated 0.112; spec.json baselines and prereg §7 measures; FSM definition generate_data.py 5-state linear"
+    },
+    {
+      "id": "V5_recomputed_metrics_match_but_misinterpreted",
+      "severity": "info",
+      "finding": "Independent recomputation with same build_strata (MIN_STRATUM_COUNT=5, START padding) reproduces producer metrics exactly: session_correlated PMI K1/K2/K3 3.319465 all reps hash, numeric 0.0; deterministic 0.0 all; independent_noise K3 0.002823 p_bonf 1.0; determinism 1.0/1.0/0.357; session_mapping 50 pairs 0 violations 1.0; AH accuracies 1.0/0.349/0.112; perm p_bonf 0.0/1.0/1.0. Arithmetic correct; interpretation invalid due to V1.",
+      "evidence": "raw_analysis_results.json site_results.*.conditional_pmi, permutation_tests, action_history_prediction; result.json metrics; recomputed via build_strata and compute_pmi verification"
+    },
+    {
+      "id": "V6_K_gradient_and_isomorphism_degenerate",
+      "severity": "moderate",
+      "finding": "PMI identical across K=1 (5 strata), K=2 (6 strata), K=3 (7 strata) and across hash representations (visible/accessibility/multi 3.319) is not confirmation of isomorphism (prereg H4) alone but reveals K carries no session information: session assignment independent of action history (random per trajectory). Within each (URL,H_K) stratum, the 10 session hashes are uniformly distributed (H=3.319=log2(10)), so conditioning on longer history does not change distribution. Numeric_structural PMI 0.0 confirms variant encoded only in text/token, not element counts. Test of K-gradient (H5) vacuous given FSM design.",
+      "evidence": "raw_analysis_results.json session_correlated conditional_pmi K1 3.319 K2 3.319 K3 3.319; strata sizes K1 1000 K2 833 K3 714; generate_data.py compute_numeric invariant; prereg H4/H5"
+    },
+    {
+      "id": "V7_data_quality_and_sampling_ok",
+      "severity": "info",
+      "finding": "Data quality exceeds prereg: 5000 transitions per type (3*5000 total) vs threshold 500, 500 trajectories*10 steps, session_id uniform random, mapping 10 sessions ->5 variants via %5 deterministic verified 50/50 pairs. Sampling integrity intact; no missing strata (weighted_transitions 5000 all). Issue is not sample size but estimator cardinality relative to stratum size (~714) causing bias.",
+      "evidence": "result.json n_transitions_per_type 5000 controls.data_quality pass true; provenance.json n_trajectories 500; raw_dom_captures.json 500 trajectories; verify session_mapping 1.0"
+    },
+    {
+      "id": "V8_no_leakage_but_identity_leak",
+      "severity": "moderate",
+      "finding": "No temporal leakage in strata construction (history from trajectory ordering with START padding, analyze.py build_strata). However, identity leakage via session_token SHA256(session_id)[:16] embedded in DOM (generate_data.py line 170) makes DOM_before a perfect session identifier, so PMI measures identity function DOM_before(session_id) -> DOM_after(session_id), not learned Web dynamics. This is the intended correlated mechanism per spec but trivializes claim: any persistent identifier would give I=H(S). Does not demonstrate DOM structural features encode predictive state beyond carrying identifier.",
+      "evidence": "generate_data.py make_session_correlated_dom extra token; make_visible_text/make_a11y_tree include extra; raw_dom_captures visible_text_hash unique 10 per state"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_deterministic_baseline",
+      "finding": "Deterministic SPA Level 0 replicates parent: PMI 0.0 at all K/reps, AH accuracy 1.0, determinism 1.0. Correctly shows pipeline returns 0 when no variants. Strong baseline, PASS.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B2_independent_noise_baseline",
+      "finding": "Independent per-step noise SPA (3 variants per state) shows PMI 0.0028 at K3 p_bonf 1.0, perm_mean 0.00408, determinism 0.357, AH 0.349. Replicates parent EXP-PHYSICS-34764605162 (E[I]=0 by construction, independent draws per DOM generation). Validates pipeline distinguishes independent vs correlated draws when estimator not degenerate (here |R|=3 small so bias 0.004 not degenerate). PASS.",
+      "verdict": "PASS"
+    },
+    {
+      "id": "B3_action_history_strong_null",
+      "finding": "Action-history baseline P(S_next|URL,H_K) is intended strong Physics null. At K=3, history predicts FSM state deterministically in this linear FSM, but predicting DOM hash fails on session_correlated (0.112) because hash includes session token independent of history. Baseline is misapplied to observation target; comparison PMI vs AH accuracy not meaningful for session identifier prediction. Baseline strength compromised by target misoperationalization (V4).",
+      "verdict": "FAIL_MISAPPLIED"
+    },
+    {
+      "id": "B4_positive_control_random_labels",
+      "finding": "Random-label control on session-SPA non-deterministic strata should give PMI≈0 within permutation noise per spec. Observed 3.317865 (≈H(S)) with perm_mean 3.318 on random data proves estimator degenerate when |R| large. Control correctly falsifies measurement validity; producer labels 'FAILS BY DESIGN' but does not fix estimator. Control as designed is valid detector of bias, and it failed, correctly triggering MEASUREMENT_INVALID.",
+      "verdict": "FAIL_VALID_DETECTOR"
+    },
+    {
+      "id": "B5_null_shuffled_control",
+      "finding": "Shuffled within-strata null control (perm_mean 0.0857) shows finite-sample bias of plug-in estimator, not pipeline error. Expected ≈0 under ideal asymptotic, but bias 0.085 matches analytic expectation for |R|=10,|S|=10,N≈714. Control failure signals need for bias correction, not just 'structural issue'. Permutation test itself is the proper null for this estimator and shows observed 3.319 >>0.085, but without bias subtraction effect size overstated.",
+      "verdict": "FAIL_BIAS_NOT_ZERO"
+    },
+    {
+      "id": "B6_frequency_baseline",
+      "finding": "Frequency baseline P(S_next) marginal not separately reported beyond PMI marginals. Implicit via PMI (H(S) 3.319 vs H(S|R)=0). Not required for decision but would highlight that PMI equals marginal entropy, indicating deterministic mapping, not incremental information.",
+      "verdict": "NOT_REPORTED"
+    }
+  ],
+  "recomputed_metrics": {
+    "conditional_pmi_K3_visible_text_hash_session_correlated": 3.3194650128818335,
+    "conditional_pmi_K3_accessibility_tree_hash_session_correlated": 3.3194650128818335,
+    "conditional_pmi_K3_multi_feature_hash_session_correlated": 3.3194650128818335,
+    "conditional_pmi_K3_numeric_structural_session_correlated": 0.0,
+    "mean_pmi_K3_all_representations_session_correlated": 2.489598759661375,
+    "weighted_H_S_given_URL_HK3_session": 3.3194650128818335,
+    "permutation_test_K3_visible_text_hash_session_correlated": {
+      "observed_pmi": 3.3194650128818335,
+      "perm_mean": 0.08507838297672617,
+      "perm_std": 0.005222859955330931,
+      "n_perms": 1000,
+      "n_exceed": 0,
+      "p_raw_upper_bound": 0.001,
+      "p_bonferroni_upper_bound": 0.012,
+      "bias_corrected_pmi": 3.2343866299051073
+    },
+    "positive_control_random_labels_session_K3": {
+      "observed_pmi": 3.3178650128818195,
+      "perm_mean_on_random_data": 3.318017012881821,
+      "perm_std_on_random_data": 0.00019415457759228348,
+      "expected": 0.0,
+      "pass_spec": false
+    },
+    "null_control_shuffled_labels_session_K3": {
+      "perm_mean": 0.08570339876570511,
+      "perm_std": 0.005211561120220258,
+      "expected": 0.0,
+      "pass_spec": false
+    },
+    "conditional_pmi_K3_deterministic_visible_text_hash": 0.0,
+    "conditional_pmi_K3_independent_noise_visible_text_hash": 0.002823602332891627,
+    "permutation_test_K3_independent_noise": {
+      "observed": 0.002823602332891627,
+      "perm_mean": 0.004086882256579136,
+      "perm_std": 0.00110991890836996,
+      "p_bonferroni": 1.0
+    },
+    "determinism_accuracy": {
+      "deterministic": 1.0,
+      "session_correlated": 1.0,
+      "independent_noise": 0.357
+    },
+    "deterministic_pairs_fraction": {
+      "deterministic": 1.0,
+      "session_correlated": 1.0,
+      "independent_noise": 0.0
+    },
+    "action_history_accuracy_K3": {
+      "deterministic": 1.0,
+      "independent_noise": 0.349,
+      "session_correlated": 0.112
+    },
+    "session_mapping_verification": {
+      "fraction_deterministic": 1.0,
+      "violations": 0,
+      "total_pairs": 50
+    },
+    "n_transitions_per_type": 5000,
+    "strata_counts_K3": 7,
+    "stratum_size_mean_K3": 714.3,
+    "unique_hashes_per_state_session": 10,
+    "unique_hashes_total_session": 50
+  },
+  "claim_ceiling": "No valid claim for C-WEB-DYNAMICS survives this measurement. The reported PMI=3.319 bits at K=3 with p_bonf=0.0 is artefactual: it equals H(S_next|URL,H_K)=log2(10)=3.3219 for 10 session-specific DOM hashes and equals the same value obtained with random DOM_before labels (3.317 bits), proving plug-in estimator degeneracy when |R|≈N. After bias correction (observed - perm_mean), PMI≈3.23 bits still reflects trivial identity function DOM_before(session_id)->DOM_after(session_id) via embedded SHA256(session_id) token, not predictive Web-dynamical structure beyond memory. Deterministic and independent-noise baselines remain FALSIFIED-IN-SETTING as per parents, but this correlated test is MEASUREMENT_INVALID and provides no evidence that DOM structural features encode session state in a generalizable way. Justified ceiling: DOM hash with embedded session token trivially predicts itself; no inference about DOM-hash representations, network-response, or production SPA dynamics beyond this synthetic identity mapping. Physics lane should treat DOM-hash path as closed pending bias-corrected estimator and session-randomized control; next discriminating test must use bias-corrected conditional MI and proper latent-state randomization, or move to orthogonal observation level (network-response information theory) as per parent handoff's negative product consequence.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34846934524/spec.json question, hypothesis, falsifier (3), baselines, positive_control, null_control, measurement_validity, decision_rule",
+    "research/experiments/EXP-PHYSICS-34846934524/prereg.md §5 session configuration N_SESSIONS=10 N_VARIANTS=5 mapping session%5, §7 measures, §8 null models, §11 validity threats, §12 decision rules, Appendix A expected 1.32 bits vs observed 3.319",
+    "research/experiments/EXP-PHYSICS-34846934524/freeze.json frozen hashes",
+    "research/experiments/EXP-PHYSICS-34846934524/result.json metrics conditional_pmi_K3_*, permutation_test_bonferroni_p, determinism_accuracy_*, session_mapping_fraction, controls.positive_control_random_labels observed 3.317865 pass false, null_control 0.085703 pass false, determinism_control",
+    "research/experiments/EXP-PHYSICS-34846934524/report.md primary table PMI 3.319 p_bonf 0.000, controls that fail, decision rule table",
+    "research/experiments/EXP-PHYSICS-34846934524/provenance.json n_trajectories 500, n_sessions 10, session_variant_mapping session%5, n_permutations 1000",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_dom_captures.json sha256 8c44acfc1e093aa9473d56ec8916bdea38ec4018e26759d97c457581cceae11b 15000 transitions",
+    "research/experiments/EXP-PHYSICS-34846934524/raw_analysis_results.json sha256 d2b8aee60f3f888146122ca9a5f15b4ab40f096b60cc6f972edaba709531e991 site_results session_correlated conditional_pmi K3 3.319 perm_mean 0.085, controls positive 3.317 perm_mean 3.318, session_mapping violations 0",
+    "research/experiments/EXP-PHYSICS-34846934524/generate_data.py sha256 e29f3a2d9d7ba3902c99c0ec34904652e4f3ea9d1ca7cfb80e9c3ae060763021 make_session_correlated_dom token SHA256(session_id)[:16], make_visible_text, FSM linear",
+    "research/experiments/EXP-PHYSICS-34846934524/analyze.py sha256 cad54a32b14e015e1c1e2f8318f1a7b093fccbe0f62336b45dede1535d46f81d build_strata, compute_pmi_from_strata, permutation_test shuffles transitions, compute_positive_control random labels, determinism_control inverted logic",
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json carry_forward established/rejected/unknown/do_not_assume, next_question correlated non-determinism, recommended_action",
+    "research/experiments/EXP-PHYSICS-34764605162/audit.json V1 independent_noise_bakes_in_null, V3 controls degenerate"
+  ],
+  "unresolved": [
+    "Whether bias-corrected conditional PMI (observed - perm_mean or Miller-Madow) on same session-correlated data would still be >0 with proper significance after accounting for |R|=10 bias (~0.085). Corrected estimate 3.234 bits = H(S)-bias still >>0 but trivial because R is session identifier; question is whether any DOM structural variation beyond token carries information.",
+    "What valid positive control should be: randomizing session_id assignment while preserving DOM generation vs randomizing DOM_before labels, and what its expectation under proper estimator is.",
+    "Whether session-correlated design with token removed (variant_id only, 5 variants, 2 sessions per variant) would give PMI ≈1.32 bits as predicted (H 2.32 -1.0) and whether estimator with |R|=5 would still be biased but less degenerate (~0.036 bias).",
+    "Whether target should be next FSM state (5 values) vs next DOM hash (50 values) changes conclusion: I(FSM_next; DOM_before|URL,H_K) likely 0 because action history already determines FSM state (linear FSM).",
+    "Whether richer FSM where action choice correlates with session would create non-trivial K-dependence and testable I beyond identity, versus current linear FSM where history independent of session.",
+    "Whether network-response payload structure (API bodies) as alternative observation level would avoid DOM hash cardinality degeneracy and provide valid conditional PMI test for C-WEB-DYNAMICS."
+  ]
+}

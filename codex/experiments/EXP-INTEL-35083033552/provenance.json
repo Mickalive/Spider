@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "github_run_id": "35083033552",
+  "origin_github_run_id": "35083033552",
+  "frozen_at": "2026-09-16T10:09:06.606833+00:00",
+  "executed_at": "2026-09-16T10:15:00.000000+00:00",
+  "commits": {
+    "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+    "request_hash": "1c92b7e68e72f9b6b75ff1cd47d998b9469ee3f7e290d41014a00b638e17f4d6",
+    "spec_hash": "a8c33a1fa3d6bb88dff8b805ee0bbccd39930d183915a73f00b891b9f9a0e832",
+    "prereg_hash": "0ee7f4282dc50a2aa555bae29f4f600907af94066ec0298bef963e2be08dae3b"
+  },
+  "datasets": [
+    {
+      "name": "exp347_raw_results.json",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "description": "Raw measurement data from Docker (am1n3e/webarena-verified-shopping:latest) with 7 successful tasks (3 listing, 3 detail, 1 cart) from Magento shopping site",
+      "source_experiment": "EXP-INTEL-34718481334"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/analyze.py",
+      "sha256": "ec559f51039698a8d99af58ec979dc5abacac3492616bb061a4150f9d5c05474",
+      "description": "Analysis script implementing 5 ROLE_MAP definitions and computing density, ordering, pairwise agreement, adjacency agreement, link sensitivity, and discrimination ratios"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/result.json",
+      "sha256": "3ae0a63265699c9b636b0ebbe00999211f367683b5675fe1490450152d419119",
+      "description": "Producer handoff with all metrics, controls, observations, validity notes, and unresolved questions"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/report.md",
+      "sha256": "8046fb8668ed34cd6c09edee918894fce39ef1d6bc692ddd7a5d793f2090fc5f",
+      "description": "Human-readable report with interpretation and product consequences"
+    },
+    {
+      "path": "/tmp/opencode/rolemap_analysis.json",
+      "sha256": "09abb49795f2aedab088d861dacbb0527afed7e264d683e91ab0737e9b25b4d0",
+      "description": "Full analysis output including all definition orderings, pairwise/adjacency agreement, link sensitivity, discrimination ratios, and controls"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["json", "collections", "math", "os", "sys"],
+    "docker_image": "am1n3e/webarena-verified-shopping:latest (reused from EXP-INTEL-34718481334, no new execution)"
+  },
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-INTEL-35083033552/analyze.py"
+  ],
+  "data_source_notes": [
+    "Raw data reused from EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "No new Docker/browser execution required — offline computation only",
+    "7 tasks: 3 product_listing (82 locatable elements each, 20 sampled), 3 detail (32 locatable elements each, 20 sampled), 1 cart (21 locatable elements, 20 sampled, measured twice = pseudoreplication)",
+    "Cart has 2 identical entries (same URL); deduped cart n=1 distinct"
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34586318405",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Relabel http_template_accuracy_body_based (4/4, 1.0) and grounding_event_count_body_based (4) as EXPLORATORY post-hoc metrics: frozen prereg section 7.1 and spec measurement_validity define HTTP success as status 200 AND parseable JSON and HTTP failure as status !=200 OR timeout/error, not body difference. Body-difference was not preregistered as success criterion for H2 and cannot satisfy decision rule condition (4) confirmatorily.",
+    "Correct decision rule evaluation: per frozen spec.json decision_rule, SURVIVES_CURRENT_TEST requires condition (4) 'For asymmetric scenarios (B,C), HTTP execution correctly identifies the valid template in 100% of cases' using frozen status-code definition. Observed status_code_grounding_differ=0/12 and http_template_accuracy_status_code=0/12 => condition (4) fails as written. Report must record FALSIFIED-IN-SETTING for status-code grounding or explicitly qualify that SURVIVES applies only to H1 plus exploratory body-difference, not to preregistered H2.",
+    "Remove or bound claim that HTTP execution provides autonomous grounding signal for template correctness: body-difference measures whether selected and alternative bodies differ (8/12 differ, 4/12 agree), not which is correct. Correctness requires external oracle (knowledge that B should return 5 comments vs [], C should return posts vs users). On this substrate both malformed and correct templates return HTTP 200, so status provides zero autonomous signal; body signal is non-autonomous and produces false positives for functionally equivalent templates (A: list vs dict artifact, F: 100 vs 0 despite both preregistered as both-work).",
+    "Fix scenario expectations vs observations to match raw evidence: B and C expected_b_http=404 but observed 200 (jsonplaceholder returns 200 for /posts?id=1/comments and /users?userId=1/posts); D expected both 200 and bodies agree True (50 photos each) - correct but differs from F where both expected 200 but bodies differ (100 vs 0) indicating broken premise; E expected both 200 (correct) but producer unresolved notes ambiguity (both return 10 albums but different route). Update validity_notes to state substrate cannot express intended 404 effect for B/C.",
+    "Do not claim resolver_execution_agreement=0.33 or grounding_value_ratio_body_based=0.667 as confirmatory product metric: these inherit the same non-autonomous difference definition. Bound product consequence to: on tolerant APIs that ignore query/path syntax, status-code validation is insufficient; body validation requires schema oracle; with proper 404-returning APIs status grounding likely works but not demonstrated here.",
+    "For any future confirmatory claim about HTTP grounding, replace jsonplaceholder with endpoint that returns genuine 4xx for malformed templates or add controlled mock server; preregister body-correctness oracle (expected schema/body predicate) separately from body-difference."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Substrate cannot express intended falsifier for H2 status-code grounding",
+      "severity": "high",
+      "detail": "Frozen scenarios B and C intentionally use malformed templates (/posts?id=1/comments, /users?userId=1/posts) expected to 404, per spec baselines B-HTTP-NEGATIVE validates 404 detection. Raw evidence shows all 12 aliased conditions return HTTP 200 for both selected and alternative (status_code_grounding_differ=0/12, execution_results.json). jsonplaceholder.typicode.com returns 200 with [] or user list for malformed URLs instead of 404. Therefore the observed environment could not produce the preregistered HTTP failure signal even if templates are semantically incorrect. Supports that status-code grounding has zero value on this substrate, but does not support general claim about real strict APIs.",
+      "evidence": "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json: SCENARIO-B-ALIASED_FIRST selected_http.status 200 body [] vs alternative 200 body 5 comments; SCENARIO-C-ALIASED_FIRST selected_http.status 200 body 10 users vs alternative 200 body 10 posts; result.json metrics status_code_grounding_differ 0, status_code_grounding_total 12, http_template_accuracy_status_code 0.0",
+      "affects_claim": "C-SEMANTIC-RESOLVE H2/H4 HTTP grounding as confirmatory"
+    },
+    {
+      "finding": "Body-based grounding metric measures difference, not correctness, and requires oracle",
+      "severity": "high",
+      "detail": "Producer defines http_template_accuracy_body_based=1.0 (4/4) and grounding_event_count_body_based=4 as whether bodies differ, then interprets differs as correctly identifies valid template. Verification shows B: [] vs 5 comments differs, C: 10 users vs 10 posts differs, but determining which is correct requires knowing intent B should return comments and C should return posts. No autonomous HTTP signal distinguishes correct without external expected-body/schema. Same difference metric also fires for A (list [post] vs dict post) and F (100 vs 0) where both templates were preregistered as both-work, yielding false grounding signals for equivalent templates. Therefore body difference is diagnostic, not correctness proof.",
+      "evidence": "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json response_bodies_agree false for A,F,B,C (8 differ) true for D,E (4 agree); execute.py bodies_match uses exact JSON equality, report.md Table 2.2; prereg 5.2 E note bodies differ semantically but status same; validity_notes acknowledge requires knowing correct response",
+      "affects_claim": "H2, grounding_event_count, product_consequence_positive resolve-then-validate"
+    },
+    {
+      "finding": "Resolver measurement for H1 is valid and discriminating",
+      "severity": "info",
+      "detail": "Aliased-first correct selection 0/6, follow_tie_breaking true for all 12, fresh kernel per condition, equal confidence 0.9, mechanism_id ordering a-01 vs z-01 deterministically selects via registry sorted(items) L38 and kernel stable sort by confidence only L112. No exceptions, deterministic no-model-call measurement. Recomputed rate 0.0 matches producer, binomial one-sided p=0.015625 matches (0.5^6). Small n=6 has limited power but result is significant and consistent with parent 0/10. No leakage or representation loss beyond narrow scope.",
+      "evidence": "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json aliased_results 12 entries; src/spider/kernel.py L93-123, src/spider/registry.py L38; result.json metrics aliased_first_correct_selection_rate 0.0, binomial_p_value_one_sided 0.015625",
+      "affects_claim": "H1 No Semantic Template Analysis"
+    },
+    {
+      "finding": "Sampling and generalizability bounds not disclosed as ceiling",
+      "severity": "medium",
+      "detail": "Prereg limits scope to 6 synthetic intent-template pairs, equal confidence, preconditions={}, applicability_guards={}, GET only, single params, single public test API. Report extrapolates to complex aliasing generally and product validate pattern. Also n=6 aliased-first gives fragile significance: 1/6 would be p=0.109 not significant. No test of confidence-differentiated aliasing, guard/context scenarios, or POST/PUT. Claim must be bounded.",
+      "evidence": "research/experiments/EXP-GRAPH-34586318405/spec.json baselines and decision_rule, prereg 5.4 sample size 6, 9.3 small sample mitigation, result.json validity_notes sample size note, provenance.json datasets jsonplaceholder",
+      "affects_claim": "C-SEMANTIC-RESOLVE generalization beyond narrow proof-of-concept"
+    },
+    {
+      "finding": "No leakage or control contamination detected, but baseline not representative of intended failure mode",
+      "severity": "medium",
+      "detail": "All 6 baselines pass recomputed (B-EMPTY-REGISTRY UNKNOWN, B-SINGLE-MECHANISM EXECUTABLE a-01 HTTP 200, B-CONFIDENCE-HIGHER a-high, B-CONFIDENCE-EQUAL-DIFFERENT-INTENT a-01, B-HTTP-POSITIVE 200, B-HTTP-NEGATIVE 404 for /nonexistent-resource/999). However B-HTTP-NEGATIVE uses a path that does 404, while aliased malformed templates reuse valid prefixes (/posts?id=1/comments, /users?userId=1/posts) that on this API return 200, so baseline not representative of scenario failure mode. No cross-contamination: fresh registry file per condition, tmp cleaned.",
+      "evidence": "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json baseline_results[5] status 404; execute.py run_baselines; provenance.json prior failure exit 66 infrastructure not scientific",
+      "affects_claim": "H3 baseline integrity"
+    },
+    {
+      "finding": "Provenance and artifact integrity verified",
+      "severity": "info",
+      "detail": "Artifacts hashes verified: execution_results.json b74b5f75d7361506cc2fa2ee748360ab039ce6df1b5e3d046accae25efeab59a and execute.py 7c6392ff3704f83fdef9558c0ec96ae5a733e10cffa078a739c1260003eb919b match result.json and provenance.json. Deterministic kernel, zero model calls, no browser, timeout 10s retry 1. Prior infra failure recorded as failure.json exit 66, not conflated with scientific result.",
+      "evidence": "research/experiments/EXP-GRAPH-34586318405/provenance.json, result.json artifacts, raw_evidence/execution_results.json",
+      "affects_claim": "reproducibility"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-EMPTY-REGISTRY",
+      "expected": "UNKNOWN status, no mechanism_id",
+      "observed": "UNKNOWN status, mechanism_id=null (recomputed)",
+      "pass": true,
+      "notes": "Confirms kernel does not hallucinate candidates. Verified in execution_results.json baseline_results[0]."
+    },
+    {
+      "control_id": "B-SINGLE-MECHANISM",
+      "expected": "EXECUTABLE, mechanism_id=a-01, HTTP 200",
+      "observed": "EXECUTABLE, mechanism_id=a-01, HTTP 200 with userId=1 (recomputed)",
+      "pass": true,
+      "notes": "Validates resolution plus HTTP pipeline. Single mechanism with template /posts/${postId}."
+    },
+    {
+      "control_id": "B-CONFIDENCE-HIGHER",
+      "expected": "EXECUTABLE, mechanism_id=a-high (confidence 0.95 > 0.8)",
+      "observed": "EXECUTABLE, mechanism_id=a-high confidence 0.95 (recomputed)",
+      "pass": true,
+      "notes": "Confidence ordering works. Two mechanisms different confidences."
+    },
+    {
+      "control_id": "B-CONFIDENCE-EQUAL-DIFFERENT-INTENT",
+      "expected": "EXECUTABLE, mechanism_id=a-01 (exact intent match only)",
+      "observed": "EXECUTABLE, mechanism_id=a-01 (recomputed)",
+      "pass": true,
+      "notes": "Intent filtering exact match only. Validates L97 exact equality."
+    },
+    {
+      "control_id": "B-HTTP-POSITIVE",
+      "expected": "HTTP 200 against /posts/1",
+      "observed": "HTTP 200 with JSON body (recomputed)",
+      "pass": true,
+      "notes": "Known-good endpoint succeeds."
+    },
+    {
+      "control_id": "B-HTTP-NEGATIVE",
+      "expected": "HTTP 4xx or error against /nonexistent-resource/999",
+      "observed": "HTTP 404 Not Found (recomputed)",
+      "pass": true,
+      "notes": "Passes but not representative: malformed aliased URLs still return 200 on this API, so baseline overestimates detection ability for scenarios B/C."
+    }
+  ],
+  "recomputed_metrics": {
+    "aliased_first_correct_selection_rate": 0.0,
+    "aliased_first_correct_selection_count": 0,
+    "aliased_first_total": 6,
+    "binomial_p_value_one_sided": 0.015625,
+    "http_template_accuracy_status_code": 0.0,
+    "http_template_accuracy_status_code_correct": 0,
+    "http_template_accuracy_status_code_total": 12,
+    "status_code_grounding_differ": 0,
+    "status_code_grounding_total": 12,
+    "grounding_event_count_status_code": 0,
+    "response_body_agree_count": 4,
+    "response_body_differ_count": 8,
+    "response_body_both_200_total": 12,
+    "grounding_event_count_body_based_aliased_first_differ": 4,
+    "grounding_event_count_body_based_claimed": 4,
+    "http_template_accuracy_body_based_reported": 1.0,
+    "http_template_accuracy_body_based_recomputed_as_difference_rate_for_asymmetric": 1.0,
+    "http_template_accuracy_body_based_as_correctness": null,
+    "baseline_pass_rate": 1.0,
+    "baseline_pass_count": 6,
+    "baseline_total": 6,
+    "http_failure_rate": 0.0,
+    "http_failures": 0,
+    "http_total": 27,
+    "resolver_status_distribution": {
+      "EXECUTABLE": 12
+    },
+    "resolver_execution_agreement": 0.3333333333333333,
+    "note": "body_based metrics recomputed as difference not correctness; correctness null because requires oracle"
+  },
+  "claim_ceiling": "MAX JUSTIFIED: Kernel resolver is deterministic exact-intent matcher with no URL template analysis for complex aliasing (query-param, path-rewriting, server-side routing) at equal confidence 0.9, synthetic intents, GET only, n=6 per ordering (0/6 aliased-first correct, binomial p=0.016). Extends parent simple-path aliasing falsification to these three aliasing types narrowly but does not generalize beyond tested scaffolding. HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences despite 2 asymmetric scenarios designed to 404) because substrate returns 200 for malformed templates; body difference exists in 4/6 aliased-first (A 1, B 1, C 1, F 1; D/E agree) and 8/12 overall, but is not autonomous correctness - requires schema oracle and yields false positives for equivalent templates. No evidence that resolve-then-validate via HTTP alone autonomously corrects resolver misprediction in this setting. Product may not rely on status alone on tolerant APIs; body validation needs expected schema. Broader claim that HTTP execution grounds template correctness absent from resolver remains unproven and unbounded to strict APIs with mock 404 behavior.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34586318405/spec.json decision_rule and measurement_validity",
+    "research/experiments/EXP-GRAPH-34586318405/prereg.md sections 4,5,7,8,10",
+    "research/experiments/EXP-GRAPH-34586318405/result.json metrics, controls, observations, validity_notes, unresolved",
+    "research/experiments/EXP-GRAPH-34586318405/report.md sections 2.2,3,6",
+    "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json sha256 b74b5f75d7361506cc2fa2ee748360ab039ce6df1b5e3d046accae25efeab59a - 6 baselines + 12 aliased conditions",
+    "research/experiments/EXP-GRAPH-34586318405/execute.py sha256 7c6392ff3704f83fdef9558c0ec96ae5a733e10cffa078a739c1260003eb919b - bodies_match, http_execute, run_baselines, run_aliased_conditions",
+    "research/experiments/EXP-GRAPH-34586318405/provenance.json github_run_id 34629308640 base_sha c4de03975e78155a77f483d11dd4d6399f44fd67",
+    "research/experiments/EXP-GRAPH-34586318405/freeze.json",
+    "src/spider/kernel.py L93-123 resolve, L97 exact intent match, L112 confidence-only sort",
+    "src/spider/registry.py L38 sorted(items)",
+    "research/experiments/EXP-GRAPH-34409639346/handoff.json C-SEMANTIC-RESOLVE parent falsification narrow scope"
+  ],
+  "unresolved": [
+    "Whether strict APIs that return genuine 404 for malformed templates would make status-code grounding work (producer validity_notes hypothesizes yes, not tested).",
+    "Whether body-based correctness with preregistered expected schema would provide autonomous signal and what its false-accept rate would be on equivalent templates (requires oracle).",
+    "Whether scenario E (/users/1/albums vs /albums?userId=1) semantic difference (10 vs 100 albums) would be scored as grounding if oracle checked length/content - raw shows both return 10 identical albums for userId 1, contradicting prereg note that B returns all albums.",
+    "Interaction of scenario F artifact /posts?q vs /posts?_q (100 vs 0) with jsonplaceholder filtering semantics - neither is semantically correct/incorrect under stated both-work premise.",
+    "Generalization beyond equal confidence, preconditions={}, GET only, and single test API to product-relevant auth/session/permission and POST/PUT/DELETE templates.",
+    "Whether larger n (50+) would tighten CI around 0/6 rate or reveal rare semantic analysis path."
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "orderings": {
+      "DEF-FORM-ONLY": ["product_listing", "cart", "detail"],
+      "DEF-FORM-AND-BUTTON-LINK": ["product_listing", "cart", "detail"],
+      "DEF-FORM-AND-A-TEXTBOX": ["product_listing", "cart", "detail"],
+      "DEF-FULL-MAP": ["cart", "product_listing", "detail"],
+      "DEF-ALL-LOCATABLE": ["cart", "detail", "product_listing"]
+    },
+    "ordering_values_per_type": {
+      "DEF-FORM-ONLY": {"product_listing": 0.003851, "detail": 0.001712, "cart": 0.002804},
+      "DEF-FORM-AND-BUTTON-LINK": {"product_listing": 0.003851, "detail": 0.001712, "cart": 0.002804},
+      "DEF-FORM-AND-A-TEXTBOX": {"product_listing": 0.003851, "detail": 0.002568, "cart": 0.003738},
+      "DEF-FULL-MAP": {"product_listing": 0.005135, "detail": 0.004280, "cart": 0.005607},
+      "DEF-ALL-LOCATABLE": {"product_listing": 0.012837, "detail": 0.017122, "cart": 0.018692}
+    },
+    "pairwise_agreement": {
+      "total_pairs": 10,
+      "agreeing_pairs": 3,
+      "agreement_fraction": 0.3
+    },
+    "adjacency_agreement": {
+      "total": 4,
+      "agreeing": 2,
+      "agreement_fraction": 0.5
+    },
+    "max_stable_family": {
+      "size": 3,
+      "members": ["DEF-FORM-ONLY", "DEF-FORM-AND-BUTTON-LINK", "DEF-FORM-AND-A-TEXTBOX"],
+      "ordering": ["product_listing", "cart", "detail"]
+    },
+    "link_sensitivity": {
+      "mean_absolute_difference": 0.000938,
+      "per_type": {
+        "product_listing": 0.000428,
+        "detail": 0.001141,
+        "cart": 0.001246
+      }
+    },
+    "discrimination_ratios": {
+      "DEF-FORM-ONLY": 632.95,
+      "DEF-FORM-AND-BUTTON-LINK": 632.95,
+      "DEF-FORM-AND-A-TEXTBOX": 134.41,
+      "DEF-FULL-MAP": 46.91,
+      "DEF-ALL-LOCATABLE": 59.63
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "All 5 definitions produce tightened_locatable_count > 0 on all 7 tasks",
+      "expected": "All tasks > 0 for all definitions",
+      "observed": "All tasks > 0 for all definitions",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35083033552/result.json metrics.pairwise_agreement"
+    },
+    "null_control": {
+      "description": "DEF-ALL-LOCATABLE yields tightened_count = locatable_sample length on all tasks",
+      "expected": "Count = 20 for all tasks",
+      "observed": "Count = 20 for all tasks",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35083033552/analyze.py"
+    },
+    "baseline_comparison": {
+      "description": "DEF-FULL-MAP ordering matches parent with_map ordering (cart>listing>detail)",
+      "expected": "cart > product_listing > detail",
+      "observed": "cart > product_listing > detail",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering"
+    },
+    "adjacency_family": {
+      "description": "At least 2 semantically adjacent definitions produce the same ordering",
+      "expected": ">= 2 adjacent pairs agree",
+      "observed": "2 adjacent pairs agree (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35083033552/result.json metrics.adjacency_agreement"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/analyze.py",
+      "sha256": "ec559f51039698a8d99af58ec979dc5abacac3492616bb061a4150f9d5c05474",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/rolemap_analysis.json",
+      "sha256": "09abb49795f2aedab088d861dacbb0527afed7e264d683e91ab0737e9b25b4d0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Three semantically adjacent definitions (DEF-FORM-ONLY, DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-A-TEXTBOX) all produce identical ordering: product_listing > cart > detail. These definitions differ by at most 1 role category (adding semantic 'link' role, adding input→textbox mapping) and agree on ordering.",
+    "DEF-FULL-MAP (a→link, input→textbox, includes menuitem, tab) produces reversed ordering: cart > product_listing > detail. The 'a'→'link' mapping is the dominant sensitivity driver, inflating cart density 99.9% relative to DEF-FORM-ONLY (0.005607 vs 0.002804) while listing increases only 33.3% (0.005135 vs 0.003851).",
+    "DEF-ALL-LOCATABLE (all 20 locatable elements) produces ordering: cart > detail > product_listing. Including non-interactive elements (form, div, label, span) further shifts ordering because detail pages have higher proportion of non-interactive locatable elements in their truncated sample.",
+    "The 'input'→'textbox' mapping alone (DEF-FORM-AND-A-TEXTBOX vs DEF-FORM-AND-BUTTON-LINK) does NOT change ordering. Both produce product_listing > cart > detail. The input→textbox mapping inflates detail from 0.001712 to 0.002568 (+50%) and cart from 0.002804 to 0.003738 (+33%), but the relative ordering is preserved.",
+    "The ordering reversal is caused specifically by the 'a'→'link' mapping combined with the inclusion of menuitem/tab roles (DEF-FULL-MAP). Definitions excluding the 'a'→'link' mapping are stable.",
+    "Link sensitivity analysis shows mean absolute density difference of 0.000938 between definitions with and without link inclusion. Cart is most sensitive (0.001246), detail is second (0.001141), listing is least (0.000428).",
+    "Discrimination ratios remain high (>46) for all definitions, confirming the metric distinguishes page types regardless of definition choice. The ordering is what changes, not the discrimination power.",
+    "All 3 listing tasks produce nearly identical counts within each definition (e.g., DEF-FORM-ONLY: 6,6,6; DEF-FULL-MAP: 8,8,8), indicating high within-type consistency despite truncated sampling.",
+    "Cart pseudoreplication (2 identical entries) means cart within-type CV is undefined (0.0). Cart density values are single observations, not statistically validated."
+  ],
+  "validity_notes": [
+    "All measurements use truncated-first-20 locatable_sample data, not full DOM enumeration. Listing pages have 82 total locatable elements (20 sampled = 24.4% coverage), detail pages have 32 total (20 sampled = 62.5% coverage), cart has 21 total (20 sampled = 95.2% coverage). Undercount factors vary by page type.",
+    "The analysis reuses existing raw measurement data from EXP-INTEL-34718481334 via EXP-INTEL-34782350557. No new Docker/browser execution was required.",
+    "Cart has only 1 distinct page (2 identical entries, same URL measured twice). Within-type variance for cart is undefined. Cart density cannot be statistically validated against listing/detail.",
+    "All data from a single Magento shopping site. Cross-site generalization is unsupported.",
+    "The 5 definitions tested span the full range from most restrictive (DEF-FORM-ONLY) to least restrictive (DEF-ALL-LOCATABLE). Other definitions (e.g., including only 'menuitem' or only 'tab') may produce different results.",
+    "The ordering product_listing > cart > detail under DEF-FORM-ONLY does NOT match the parent experiment's expected full-DOM ordering (listing > detail > cart). This is because DEF-FORM-ONLY counts only form elements (button, combobox, input), which are different from the parent's tightened definition (button, combobox, input, link). The parent's no_map variant excluded 'link' but the counting was done differently."
+  ],
+  "unresolved": [
+    "Does the ordering product_listing > cart > detail under the stable 3-definition family match the true full-DOM ordering? Truncated sampling (24.4% for listing, 62.5% for detail) may cause ordering artifacts. Full DOM enumeration is needed for validation.",
+    "Why does DEF-FULL-MAP (a→link, input→textbox, menuitem, tab) reverse ordering relative to DEF-FORM-AND-A-TEXTBOX (input→textbox only)? The 'a'→'link' mapping alone accounts for most of the differential inflation, but the inclusion of menuitem and tab may also contribute. A definition isolating 'a'→'link' without menuitem/tab would test this.",
+    "Does the stable ordering product_listing > cart > detail hold on other sites? Single-site data from Magento cannot answer this question.",
+    "Is the cart pseudoreplication (2 identical entries) masking true within-type variance? Multiple distinct cart pages would be needed to validate cart density.",
+    "Would full DOM enumeration change the ordering? Extrapolated estimates from parent audit suggest listing > detail > cart but this was measured under the original DEF-FALLBACK-INTERACTIVE definition, not under any of the 5 tested definitions."
+  ]
+}

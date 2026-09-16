@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34764605162",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "conditional_pmi": {
+      "deterministic": {
+        "visible_text_hash": {"K1": 0.0, "K2": 0.0, "K3": 0.0},
+        "accessibility_tree_hash": {"K1": 0.0, "K2": 0.0, "K3": 0.0},
+        "multi_feature_hash": {"K1": 0.0, "K2": 0.0, "K3": 0.0},
+        "numeric_structural": {"K1": 0.0, "K2": 0.0, "K3": 0.0}
+      },
+      "random_API": {
+        "visible_text_hash": {"K1": 0.003717, "K2": 0.003672, "K3": 0.004026},
+        "accessibility_tree_hash": {"K1": 0.003717, "K2": 0.003672, "K3": 0.004026},
+        "multi_feature_hash": {"K1": 0.003717, "K2": 0.003672, "K3": 0.004026},
+        "numeric_structural": {"K1": 0.0, "K2": 0.0, "K3": 0.0}
+      },
+      "timing_dependent": {
+        "visible_text_hash": {"K1": 0.018956, "K2": 0.022735, "K3": 0.024656},
+        "accessibility_tree_hash": {"K1": 0.018956, "K2": 0.022735, "K3": 0.024656},
+        "multi_feature_hash": {"K1": 0.018956, "K2": 0.022735, "K3": 0.024656},
+        "numeric_structural": {"K1": 0.0, "K2": 0.0, "K3": 0.0}
+      }
+    },
+    "permutation_test_bonferroni_p": {
+      "random_API": {
+        "visible_text_hash": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+        "accessibility_tree_hash": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+        "multi_feature_hash": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+        "numeric_structural": {"K1": 1.0, "K2": 1.0, "K3": 1.0}
+      },
+      "timing_dependent": {
+        "visible_text_hash": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+        "accessibility_tree_hash": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+        "multi_feature_hash": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+        "numeric_structural": {"K1": 1.0, "K2": 1.0, "K3": 1.0}
+      }
+    },
+    "action_history_prediction_accuracy": {
+      "deterministic": {"K1": 1.0, "K2": 1.0, "K3": 1.0},
+      "random_API": {"K1": 0.348, "K2": 0.355, "K3": 0.3585},
+      "timing_dependent": {"K1": 0.277, "K2": 0.277, "K3": 0.2775}
+    },
+    "determinism_accuracy": {
+      "deterministic": 1.0,
+      "random_API": 0.361,
+      "timing_dependent": 0.308
+    },
+    "n_transitions": {
+      "deterministic": 2000,
+      "random_API": 2000,
+      "timing_dependent": 2000
+    },
+    "primary_metric_conditional_pmi_K3_nondeterministic_mean": 0.014341,
+    "bonferroni_alpha": 0.002083,
+    "n_comparisons": 24,
+    "n_nondet_surviving": 0,
+    "n_nondet_total": 2,
+    "best_pmi_nondet": 0.024656,
+    "best_rep_nondet": "visible_text_hash",
+    "best_type_nondet": "timing_dependent",
+    "permutation_mean_nondet_K3": {
+      "random_API_visible_text_hash": 0.010311,
+      "timing_dependent_visible_text_hash": 0.023022
+    }
+  },
+  "controls": {
+    "positive_control_random_labels": {
+      "expected": 0.0,
+      "observed_pmi": 0.0,
+      "pass": true,
+      "perm_mean": 0.0,
+      "perm_std": 0.0,
+      "evidence": "raw_analysis_results.json controls.positive_control_random_labels"
+    },
+    "null_control_shuffled_labels": {
+      "expected": 0.0,
+      "observed_mean_pmi": 0.0,
+      "pass": true,
+      "perm_mean": 0.0,
+      "perm_std": 0.0,
+      "evidence": "raw_analysis_results.json controls.null_control_shuffled"
+    },
+    "determinism_control": {
+      "deterministic_accuracy": 1.0,
+      "random_API_accuracy": 0.361,
+      "timing_dependent_accuracy": 0.308,
+      "pass": true,
+      "evidence": "raw_analysis_results.json controls.determinism_control"
+    },
+    "data_quality": {
+      "min_transitions_per_type": 2000,
+      "threshold": 300,
+      "pass": true,
+      "evidence": "raw_analysis_results.json controls.data_quality"
+    },
+    "deterministic_baseline": {
+      "deterministic_pmi_K3": 0.0,
+      "pass": true,
+      "evidence": "raw_analysis_results.json site_results.deterministic.conditional_pmi K3"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PHYSICS-34764605162/raw_dom_captures.json", "sha256": "a211b0d4f8765f648bcf003058a62b919d96cfe48c0fe2165822c44787090fd3", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-34764605162/raw_analysis_results.json", "sha256": "64ccf4253146709270a3dbebcfd8d88f3a772ef71f31e4e3d738bc41e8ffbfd4", "role": "derived"},
+    {"path": "research/experiments/EXP-PHYSICS-34764605162/analyze.py", "sha256": "a53330f83b5b233164994fcc33db7fcad7e56d472b7ff092899ebea04ac4a57d", "role": "code"},
+    {"path": "research/experiments/EXP-PHYSICS-34764605162/generate_data.py", "sha256": "1e55c7b5a0da68c83c764527ea3a7e9c74f165d1a0ab328d5cb6e75bd10f0b2d", "role": "code"}
+  ],
+  "observations": [
+    "Deterministic SPA (Level 0): conditional PMI = 0.0 at all K values and all 4 representations. Action-history prediction accuracy = 1.0 at K=1. Determinism accuracy = 1.0. Replicates parent EXP-PHYSICS-34724244876 finding exactly.",
+    "Random API SPA (Level 1): conditional PMI at K=3 ≈ 0.004 bits (visible_text_hash/accessibility_tree_hash/multi_feature_hash). Numerically positive but NOT significant after Bonferroni correction (p_bonf = 1.0, threshold 0.00208). Action-history accuracy at K=3 = 0.3585. Determinism accuracy = 0.361 (< 1.0 confirms non-determinism).",
+    "Timing-dependent SPA (Level 2): conditional PMI at K=3 ≈ 0.025 bits (visible_text_hash/accessibility_tree_hash/multi_feature_hash). Largest effect in experiment but NOT significant after Bonferroni correction (p_bonf = 1.0). Action-history accuracy at K=3 = 0.2775. Determinism accuracy = 0.308 (< 1.0 confirms non-determinism).",
+    "Numeric structural representation yields PMI = 0.0 across all SPA types and K values — element_count, tree_depth, interactive_density, form_count are invariant within each FSM state regardless of DOM variant.",
+    "visible_text_hash, accessibility_tree_hash, and multi_feature_hash produce identical PMI values within each SPA type — the accessibility tree and multi-feature hash add no variation beyond what visible_text_hash captures.",
+    "Permutation test: observed PMI falls within the null distribution for all non-deterministic SPA types and representations (all p_raw > 0.18, all p_bonf = 1.0). The observed positive PMI is indistinguishable from noise.",
+    "Non-determinism modulation: PMI(timing-dependent) > PMI(random_API) > PMI(deterministic) at K=3, consistent with hypothesis H2 direction, but effects are too small to distinguish from zero after correction.",
+    "All 4 controls pass: positive control (random labels → PMI=0), null control (shuffled labels → PMI=0), determinism check (det=1.0, nondet<1.0), data quality (2000 transitions per type ≥ 300 threshold).",
+    "0/2 non-deterministic SPA types survive the primary test (PMI > 0, Bonferroni p < 0.00208). Falsification criterion from spec.json §12.2.1 is met."
+  ],
+  "validity_notes": [
+    "Synthetic-to-real gap: locally-hosted Express SPAs with controlled server-side non-determinism may not reflect production SPAs with client-side virtual DOM (React/Vue), auth-dependent content, or external data feeds. This is a conservative controlled test.",
+    "Server-side non-determinism via seeded RNG produces finite DOM variant sets (3 variants for random_API, 4 for timing-dependent), not continuous variation. Production SPAs may have larger variant spaces.",
+    "visible_text_hash, accessibility_tree_hash, and multi_feature_hash are isomorphic in this FSM design because DOM variant encoding is embedded in the same text/structure. Richer representations (computed CSS styles, visual layout, ARIA roles) were not tested.",
+    "numeric_structural features are invariant per FSM state regardless of DOM variant because variant information is encoded in text content, not element counts or tree depth.",
+    "The PMI effect sizes (0.004-0.025 bits) are non-zero in absolute terms but the null distribution has comparable magnitude, indicating the signal is dominated by finite-sample noise.",
+    "2000 transitions per SPA type (6000 total) exceeds the 300 per-type minimum. Power analysis not performed post-hoc; the experiment may be underpowered for detecting PMI effects < 0.01 bits.",
+    "Action-history prediction accuracy on non-deterministic SPAs (0.28-0.36) is well below 1.0, confirming genuine non-determinism, but this low accuracy means most strata have low counts, reducing PMI estimation power."
+  ],
+  "unresolved": [
+    "Whether production SPAs with client-side virtual DOM (React/Vue), auth-dependent content, or external data feeds exhibit conditional PMI > 0 at K=3 that survives Bonferroni correction. This experiment used server-side non-determinism only.",
+    "Whether finer DOM representations (computed CSS styles, visual layout, ARIA accessibility roles, interaction event sequences) capture predictive variation invisible to hash-based representations.",
+    "Whether larger sample sizes (10000+ transitions) or longer action histories (K>3) would reveal statistically significant PMI on non-deterministic SPAs.",
+    "Whether the small but positive PMI on timing-dependent SPAs (0.025 bits) would become significant with more data or a less conservative correction method.",
+    "Whether client-side non-determinism (React re-renders, concurrent mode, suspense) produces different DOM variation patterns than server-side non-determinism."
+  ]
+}

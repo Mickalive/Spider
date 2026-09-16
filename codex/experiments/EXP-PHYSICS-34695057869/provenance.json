@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34695057869",
+  "lane": "physics",
+  "github_run_id": "34718481728",
+  "github_run_attempt": 1,
+  "github_sha": "ca4a1560fc3cda176e3dc5f521802481128d9918",
+  "recorded_at": "2026-09-12T20:55:00.000000+00:00",
+  "commits": {
+    "freeze": "630b630fb48d134a6df5d7ac789a192ac256c2dc",
+    "execute_base": "b78116b",
+    "execute_commit": "6673fd4d2b488aa20d47c5ab6d35c2bfe99aaaa0"
+  },
+  "datasets": {
+    "raw_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json",
+      "sha256": "e5b8ea8a513a449225ffec1de884e856d725ba3b4b579d8c22b7ba9b2e71550a",
+      "description": "Response-side network captures from 3 locally-hosted SPAs + synthetic positive control via Playwright route interception"
+    },
+    "pmi_results": {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/pmi_results_response_side.json",
+      "sha256": "c055575ddbfc906f8a0eeb96d0f3a66b06ddb997f45853e97ef7b72e44a7b463",
+      "description": "PMI analysis results including per-site metrics, permutation tests, alpha sensitivity, and tautology check"
+    }
+  },
+  "code": {
+    "capture_script": {
+      "path": "research/physics/network_requests/capture_response_side.js",
+      "sha256": "e117cf928b08e3e8d6aff7dfa3246b367edd84e0d953f5117b9201f9e113eaba",
+      "description": "Playwright-based capture script for response-side network data"
+    },
+    "pmi_script": {
+      "path": "research/physics/network_requests/pmi_response_side.py",
+      "sha256": "6b2112d77f29d036c258b75a8bd9795d3722109c7c7b7532521ffe46b779c6bf",
+      "description": "PMI computation with response-side, request-side, and URL-only state discretization"
+    },
+    "servers": {
+      "synthetic": "research/physics/network_requests/synthetic_spa_server.js",
+      "dashboard": "research/physics/network_requests/dashboard_spa_server.js",
+      "multistep_form": "research/physics/network_requests/multistep_form_server.js",
+      "wizard": "research/physics/network_requests/wizard_spa_server.js"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/request.json",
+      "sha256": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/spec.json",
+      "sha256": "eb1008d66ff37c320f1c82ec8d080a2418f6cc73afe49bd645508c3bc1e5003f"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/prereg.md",
+      "sha256": "74a8b916f0beedc2cabaad0fe364bffd18ad79fc4068be0238e2450029b7196c"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/freeze.json",
+      "sha256": "computed_at_freeze_time"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34674671762",
+    "path": "research/experiments/EXP-PHYSICS-34674671762/handoff.json",
+    "sha256": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "node_version": "20.x",
+    "playwright_version": "latest",
+    "numpy_version": "2.5.3",
+    "random_seed": 42,
+    "python_hashseed": "0"
+  },
+  "methods": {
+    "state_discretization": "SHA-256(content_type + response_body_hash[:16] + status_code) per request, sorted tuple per transition, SHA-256 to single string",
+    "pmi_formula": "PMI(s, a, s') = log2[P(s'|s,a) / P(s'|s)] with Laplace smoothing alpha=1.0",
+    "temporal_split": "80/20 by trajectory order within each SPA",
+    "permutation_test": "1000 permutations, shuffle action labels within trajectories",
+    "bonferroni_correction": "3 comparisons, alpha = 0.05/3 = 0.0167"
+  },
+  "execution_log": {
+    "capture": "capture_response_side.js executed, captured 902 transitions across 4 SPAs",
+    "analysis": "pmi_response_side.py executed, produced pmi_results_response_side.json",
+    "verification": "PMI results re-run and verified identical to initial execution"
+  }
+}

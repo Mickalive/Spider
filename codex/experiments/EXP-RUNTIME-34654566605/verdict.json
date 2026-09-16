@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34654566605",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Body-only discrimination degrades monotonically under synthetic per-request random compression (Spearman rho -0.948, n=4, p=0.051). Fixed deterministic gzip preserves discrimination. Claim ceiling narrowed: body-only valid only when compression is deterministic or absent; degrades under per-request random algorithm/level variation on Keycloak 25.0 start-dev /userinfo and /introspect with small bodies (0-729 bytes). Not production-ready for CDN-proxied environments without compression normalization or deterministic compression guarantee. Audit V5 bounded to synthetic random model; real CDN negotiation may differ."
+    }
+  ],
+  "product_action": "Body-only architecture is NOT production-ready for CDN-proxied environments where compression is non-deterministic per request. SPIDER must either: (a) use compression-normalization layer that decompresses before hashing, (b) use header-based or filtered-full-vector fingerprinting instead of body-only, or (c) restrict body-only to environments where compression is deterministic. Status-only baseline remains invariant 0.5 on /userinfo, offering simplest fallback without normalization. Product decision bounded to synthetic random-compression model; real CDN behavior may be more deterministic via Accept-Encoding negotiation.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does body-only discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+  "reason": "All six frozen decision rules pass: (1) positive control body-only 0.5 >= 0.35, (2) null control B-RANDOM 0.0, (3) fixed-gzip preserves discrimination 0.5 >= 0.5-0.15, (4) Spearman rho -0.948 <= -0.3, (5) random-algo 0.094 < fixed-gzip 0.5, (6) no pipeline errors. Audit REVISE findings narrow claim ceiling: discrimination does not collapse to zero (floor ~0.09-0.13), Spearman power low (n=4, p=0.051 >0.05), empty-body gzip variation limited, product consequence overgeneralizes synthetic random model to all CDN environments. Verdict SURVIVES_CURRENT_TEST because frozen decision rule thresholds met; however claim ceiling bounded to synthetic per-request random compression model on Keycloak 25.0 start-dev with small bodies.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34654566605/spec.json — frozen question/hypothesis/falsifier/baselines/controls/decision_rule",
+    "research/experiments/EXP-RUNTIME-34654566605/result.json — metrics per comp per endpoint, derived M_COMPRESSION_DEGRADATION rho -0.948, controls all PASS",
+    "research/experiments/EXP-RUNTIME-34654566605/audit.json — REVISE status, claim_ceiling narrowed, V1-V8 validity findings including V5 scope bound synthetic vs real CDN",
+    "research/experiments/EXP-RUNTIME-34654566605/raw_observations.json — 320 HTTP observations sha b8fd3d870508cbc803ed44c1676b4a88233e6b84e0b7c9d664aa93972810e618",
+    "research/experiments/EXP-RUNTIME-34654566605/run_experiment.py — compression proxy implementation with mtime=0 and wire byte capture",
+    "research/experiments/EXP-RUNTIME-34654566605/provenance.json — Keycloak 25.0 Docker, proxy 18081, brotli available",
+    "research/experiments/EXP-RUNTIME-34509593940/handoff.json — parent established/rejected/unknown/do_not_assume"
+  ]
+}

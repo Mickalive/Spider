@@ -1,0 +1,34 @@
+{
+  "experiment_id": "EXP-RUNTIME-34986155186",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does decompression-normalization (hashing the DECOMPRESSED response body after reversing Content-Encoding) preserve body-only discrimination under varying brotli quality levels, and does it provide a universal fallback when compressed-byte hashing fails?",
+  "hypothesis": "H1: Decompression-normalization preserves discrimination at 0.5 under both fixed and varying brotli quality, because different logical bodies decompress to different bytes regardless of compression quality. H2: Body-only discrimination on compressed bytes degrades under brotli quality variation (quality 4-8 per request) but remains above 0.0 because quality variation is bounded (not full random). H3: Decompression-normalization achieves higher discrimination than compressed-byte hashing under quality variation.",
+  "falsifier": "Decompression-normalization discrimination < 0.35 under fixed quality (positive control fails), OR decompression-normalization within-state variation > 0 (non-deterministic decompression), OR body-only under quality variation achieves 0.0 (indistinguishable from random).",
+  "baselines": [
+    "B-COMPRESSED-FIXED: body-only on compressed bytes at fixed brotli quality 6 (replicates parent, expected 0.5)",
+    "B-COMPRESSED-VARYING: body-only on compressed bytes with brotli quality randomly selected from {4,5,6,7,8} per request",
+    "B-DECOMPRESSED-FIXED: hash decompressed body at fixed brotli quality 6",
+    "B-DECOMPRESSED-VARYING: hash decompressed body with brotli quality randomly selected from {4,5,6,7,8} per request",
+    "B-STATUS-ONLY: status code discrimination (compression-immune, expected 0.5 on /userinfo)",
+    "B-RANDOM: random fingerprint (null, expected 0.0)"
+  ],
+  "positive_control": "B-COMPRESSED-FIXED achieves discrimination >= 0.35 on /userinfo (replicates parent EXP-RUNTIME-34902094115). This verifies the harness produces the same result as the parent under identical conditions.",
+  "null_control": "B-RANDOM achieves discrimination ~ 0.0 at all conditions (no spurious structure from compression artifacts).",
+  "measurement_validity": [
+    "Same mock OAuth2 server as parent (port 5000) returning JSON with field 'data' = hex(random bytes)",
+    "Same 4 auth states: no_auth (401), valid_token (200), expired_token (401), invalid_token (401)",
+    "Error bodies identical across no_auth/expired/invalid, capping discrimination ceiling at 0.5",
+    "Brotli quality variation: quality randomly selected from {4,5,6,7,8} per request using frozen seed",
+    "Decompression via brotli.decompress() after Content-Encoding 'br' removal",
+    "Fingerprint variants: (a) SHA256(repr((status, compressed_body_sha256, ''))) for compressed, (b) SHA256(repr((status, decompressed_body_sha256, ''))) for decompressed",
+    "N=20 per state per condition (4 states x 20 reps x 2 endpoints x 5 conditions = 800 total requests)",
+    "Frozen seed=44 for reproducibility",
+    "Jitter 50-150ms uniform between requests"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) B-COMPRESSED-FIXED >= 0.35 on /userinfo (positive control passes), (2) B-RANDOM ~ 0.0 at all conditions (null control passes), (3) B-DECOMPRESSED-FIXED >= 0.5 on /userinfo (decompression-normalization preserves discrimination under fixed quality). MIXED if B-DECOMPRESSED-FIXED >= 0.5 BUT B-COMPRESSED-VARYING < 0.35 (body-only fails under quality variation but normalization works). FALSIFIED-IN-SETTING if B-DECOMPRESSED-FIXED < 0.35 (normalization fails under fixed quality). MEASUREMENT_INVALID if pipeline errors or sample size insufficient.",
+  "product_consequence_positive": "If decompression-normalization preserves discrimination under quality variation, product recommendation changes from 'body-only with stable Accept-Encoding' to 'use decompression-normalization as universal fallback'. This eliminates the dependency on compression stability and enables deployment behind real CDNs where quality levels may vary.",
+  "product_consequence_negative": "If decompression-normalization fails under fixed quality, body-only on compressed bytes remains the only viable approach, and deployment is constrained to environments with deterministic compression. If both fail under quality variation, neither approach works and a fundamentally different fingerprinting strategy is needed.",
+  "estimated_cost": "Low: same mock OAuth2 server and proxy infrastructure as parent, only adds brotli quality variation and decompression step. ~800 requests, ~5 minutes wall time.",
+  "expected_information_gain": "High: directly tests a fallback mechanism (decompression-normalization) that could enable production deployment behind real CDNs. A positive result changes the product recommendation; a negative result constrains the design space. This is the minimum unblocked path toward production deployment without requiring external CDN infrastructure."
+}

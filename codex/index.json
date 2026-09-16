@@ -201,6 +201,131 @@
         "handoff.json": "657385858ecd333d46456f97eb51251ab5e903e70a6adf8c0a2aaee19a175faf"
       }
     },
+    "EXP-FRONTIER-34538185726": {
+      "lane": "frontier",
+      "request_id": "b51dc441048d49a7cd8adb1b",
+      "created_at": "2026-09-10T22:35:31.557827+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can kernel density estimation (KDE) with cross-validated bandwidth detect scaling-type action-dependent structure that kNN TV misses in the same 10D non-Gaussian DGP \u2014 or does the scaling failure reflect a fundamental information-theoretic limit where multiplicative state modulation is indistinguishable from heteroscedastic noise at finite sample sizes?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
+        "spec.json": "b25d696a82f6f125273f929ba7a49b7fc10248a4b083da76f5828201539e86d1",
+        "prereg.md": "eec9f8af7a4386f07fafbf1d70967234c44a7ad830f0af62a5023223f0db06b8",
+        "freeze.json": "12248483ab56f981f69d1caefc3395e245feef0809803b7e7ea96189be8c893e",
+        "result.json": "aec730346b0bca281782148aa6e7e4d40c19047b0fac8eb75964dc6f563570bd",
+        "report.md": "7480fb6bed6e4b16bbd1b3e4a3080d9fc4e63eb7053e4201966e61e6cf388665",
+        "provenance.json": "7544ca909a85684ef0559aa897e49994e281523e3aba6c4b49b673671fbf3da4",
+        "audit.json": "b0700bd63cc5527a2a1396d392c29caa9f75c77a959abb6c8ba494db2c8b0dc6",
+        "verdict.json": "692d2f9287d4adf0fa1479fe840e6a8b8064595fe7b4244a45a7b7bc7b8a3f2d",
+        "handoff.json": "e7e2e6522b96e34f222f93289976136f59713667d835b2e8b0125c82c94c46a6"
+      }
+    },
+    "EXP-FRONTIER-34729238832": {
+      "lane": "frontier",
+      "request_id": "9346be479c5a083dac1bffb0",
+      "created_at": "2026-09-13T00:56:17.473796+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can binned PCA projection to 2D-3D subspaces before divergence computation detect both scaling-type and rotation-type action-dependent structure simultaneously in the same 10D non-Gaussian DGP \u2014 or does dimensionality reduction destroy the discriminating information that both kNN TV (full-space neighbor ratios) and KDE (full-space kernel smoothing) each partially capture?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
+        "spec.json": "181f89e10a4606e8d68b09df89ac6e8914206f9f6d28e0603e47792430215841",
+        "prereg.md": "640a85d78cc651b006863884aed9f9cbcdd56529128e82c65393ddd4b80ba2d6",
+        "freeze.json": "160e348f5e0838649e498c1728ad0fecf9987f8f1e31982f5c5249aa39c49195",
+        "result.json": "d709b0798faf983f57720be8a57330c468dde5fd2353816d61b73f264ef00049",
+        "report.md": "ab105f5186251f5ff72e0652383e9568f2ee9c8eb5d49be08409cbd36e25d88d",
+        "provenance.json": "8b4aea8832850296cdb5ab1ab56792f5542b72ed71c66cbfbad901eddb863228",
+        "audit.json": "74b3fb77f5b3095d019f137508fbb0d09c640cfd59ce4186f5c68851ac8120bd",
+        "verdict.json": "13f9867776ce0ec1c23be7810e2ce5d194d3801d8572751e041b376e7061d260",
+        "handoff.json": "27ca8bd75164d93b763fe3861e36aeb6c6ef353693b5aa08a2c231a07dcdae01"
+      }
+    },
+    "EXP-FRONTIER-34773875458": {
+      "lane": "frontier",
+      "request_id": "7a702efffc6b438533371585",
+      "created_at": "2026-09-13T18:11:56.994798+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does TV detection of translation-like action-dependent structure survive non-stationary dynamics where different page types have different transition functions \u2014 the defining property of real Web data that all five prior synthetic Frontier experiments lack?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
+        "spec.json": "fb9e8dc5198ad746a0b754cf8d405ac1bb2b5f39ad7a3a08ecaf2f8c74f2f1fb",
+        "prereg.md": "dc41ffba95d311f922be15cf8c172082b399d236b368ef24b8c9a2c8979647c4",
+        "freeze.json": "e6838fef3650839f6d3bde506a6e95d7949abf2004f96a72a60a23d73585a475",
+        "result.json": "27f8ca3767e866d86a80484db409ae336f826505c94b956ddc5c42351c86fef1",
+        "report.md": "602c114e3b687a4395f387012b4de4daaf5bd889a9838eeb83216ca48718c212",
+        "provenance.json": "7c4a77f865a5177611b042ffa5941e8ef7a4ef483b43381075cfc94c6b7cd9c9",
+        "audit.json": "29ae7efe94c6172b1b0d5c0277db7055102c8b01e6c9962d2a24b8e40c103fb2",
+        "verdict.json": "dbc41b5bd2617c09365400256c371b52aad19dcafa853175e27e4a7666e9ec00",
+        "handoff.json": "8e7d9b6afc77584d4575415d596134b542c4e0233cd29c6d0c31e64cdd174b4e"
+      }
+    },
+    "EXP-FRONTIER-34794649996": {
+      "lane": "frontier",
+      "request_id": "71821275a15d165e5fcc6c22",
+      "created_at": "2026-09-14T01:03:46.154250+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does per-page-type binned TV estimation with per-type bias correction recover absolute signal strength lost to pooled heterogeneous averaging, or is the 94.6% attenuation a fundamental property of action-dependent structure in non-stationary DGPs?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
+        "spec.json": "4784d231118e4986e3e20e1d03c457210e32918755677485ef5b987ee43dd95a",
+        "prereg.md": "235a160a124f161ce7bceb48795206fc2c487ac25999af5f035e2c4b93cf4a70",
+        "freeze.json": "ccea28a1d24596f4a867aef5c56b5fc7f9079e0a3d90b5e24219c89c0a8fd441",
+        "result.json": "e9a31824f82dfb5957772f903d1a1378b852f2d50b68a9f08ef4becc6fd312f0",
+        "report.md": "eed625595511a93d1cc509a550b31ba3b046fd31c15dc18a4a9a7ca9e9e91b5b",
+        "provenance.json": "ae232adefb3ead78b78d5cf320845348ce69a33ef9a15d32d182f1dd9a94326f",
+        "audit.json": "ab5663f269dd561e270c6a1c4d088e330d3fc4840e21c03df8a7bf680d8f6028",
+        "verdict.json": "b3f90495f4748ca29d4dccb7265c7395d7784b3852dbd055bec1f379975f5cfc",
+        "handoff.json": "2b1985aa624d23028cfedb73ccb5747667571e927351f3b8314ff2000071bbbf"
+      }
+    },
+    "EXP-FRONTIER-34881708619": {
+      "lane": "frontier",
+      "request_id": "6f567904a8ee565878f7c412",
+      "created_at": "2026-09-14T18:35:28.256789+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Does pooled binned TV estimation maintain a fundamental advantage over per-type estimation when both use equal sample size (250 transitions per type), or does the 67% per-type/pooled ratio from the parent experiment reflect a sample-size confound rather than an estimator difference?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/frontier",
+      "hashes": {
+        "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
+        "spec.json": "ac487a7f9b0cd6cc3c0c454e7b390c9d07b70f826dc991e92de38887356ed5ab",
+        "prereg.md": "37ff28f570b92a2d418ff448db0ccabc9973687c475a75a9418b13b0d7627931",
+        "freeze.json": "97927f814c7bf06bc420be1d559f7a2e0fa98413116fa98b1daeb8dfca3d2a79",
+        "result.json": "e3a3a45a47e19056690f33090989a21550eb442ad6f434d9b4e6476ff931ef45",
+        "report.md": "30763215fab2183820e400fd776dad6175c71e890d1c48dc10d1ec7c35e9eb53",
+        "provenance.json": "5f53d5fce05c747915359cf4e77270e4a2924a00a1cba7ce32610f09025a90c7",
+        "audit.json": "33bf5c93dca854ece51135a5a39baaec811430ceed2131ad5df73ec93991bc07",
+        "verdict.json": "8bb3868fd4abebd8f7b99df2dde909a8c2723a77000153119232532f085c7264",
+        "handoff.json": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa"
+      }
+    },
     "EXP-GRAPH-33528827169": {
       "lane": "graph",
       "request_id": "3e0d81e7790f2f2b7bd8665e",
@@ -526,6 +651,131 @@
         "handoff.json": "fb3bddcf2dcc949d36ee57edcca18f6a986f5643ab4ec9e4534d91e2bf8f668d"
       }
     },
+    "EXP-GRAPH-34586318405": {
+      "lane": "graph",
+      "request_id": "b8f89e1d4975b9880735ac7b",
+      "created_at": "2026-09-11T09:51:45.561325+00:00",
+      "claim_ids": [
+        "C-SEMANTIC-RESOLVE"
+      ],
+      "question": "Can the kernel handle more complex aliasing scenarios \u2014 query parameters, path rewriting, or server-side routing \u2014 and does HTTP execution success against real endpoints provide a grounding signal for template correctness that resolver selection alone cannot?",
+      "audit_status": "REVISE",
+      "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
+        "spec.json": "563a3e1cf8f2475a813803367feb60c340e0c0ff88b2cfc1a7efa50fd2316b09",
+        "prereg.md": "98a1923cdf7f043bf379f82c763d6c341e2ce1e6a95ea99a1eb5603d799d8326",
+        "freeze.json": "1e731c08934da10449de7a38259c1fa7d8718d581682cf1498604c4556522d43",
+        "result.json": "0a170a958bd79469859b41904228e8fa4cdac0b693495cb3efc6548d9a6c6099",
+        "report.md": "b6c1ac92de06238a69e4cce5f4b2db0c445fcbac27d25bec6decb1f95b4c348e",
+        "provenance.json": "0d68d96bc490ac02a54850401b78f49cad3b40162f69b38e04ec7fa93ff2535c",
+        "audit.json": "30d2add94bd8e54e78bf054ae4b6204126544e344bece2719646a31e57acca7a",
+        "verdict.json": "8ed127cc83ff67f206423cfccfafe44c875f7a4d8fdbe6d44fc3a4353d0ef008",
+        "handoff.json": "15904831ae7077bbef0220da9ae38787e731fca84f522af495a0074febbb3550"
+      }
+    },
+    "EXP-GRAPH-34711403174": {
+      "lane": "graph",
+      "request_id": "5850473be5b46b2ca4ccaffc",
+      "created_at": "2026-09-12T18:30:38.740411+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does comparing cached mechanism postconditions against live endpoint responses provide reliable staleness detection across resource families with different drift patterns?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "655bcac7a22953c68b62d0edb662ff06b176a7881cc372597730f75286990cab",
+        "spec.json": "d4f818f2495d4380f8c089878cc1e5c43767bf393fae3de5f6ec5c20d6a579f9",
+        "prereg.md": "35d1a5e74d37f679553fb5fc8db7bff8ccf94201721b1623cf9faf8ec5532a16",
+        "freeze.json": "4a962dfdb205635b2c8d957c6b68525c0f3caaea21a865e21deef0101b75b546",
+        "result.json": "72461440d78e88f7447702474c3776ebc0c5ef70aea6de45a45dc09b7293ebe8",
+        "report.md": "54ea544a5181a2f7dbbfa7ba595f11674ded9419215d2d5f13252b7212edea21",
+        "provenance.json": "c567fe981dbbb6a8fc1fc4d1c9c3e15944953bbb8df0d8915ea036975257a7f1",
+        "audit.json": "6aa9b285f8af90ff556b69eb6dced6d2b1602a603e380764531ce6671cf026e2",
+        "verdict.json": "f7babb15c6ac5bdca52d8397dba7f53262e920ee5f6ea2e020db25189211fb29",
+        "handoff.json": "3f4b5079a1d1381fbfe62607a0c3adf9977c2c4e10805d7f7a077e7b9a39eda2"
+      }
+    },
+    "EXP-GRAPH-34755316488": {
+      "lane": "graph",
+      "request_id": "9f2f10d6b94928533c592d31",
+      "created_at": "2026-09-13T11:46:53.278013+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does Jaccard (field_path,type) freshness detection survive scaling to realistic schema sizes (10-50 fields) where single-field drift similarity exceeds the parent threshold 0.85, and does an adaptive schema-size-adjusted threshold restore detection without inflating false positives on stochastic response variation?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
+        "spec.json": "0ddf87d631e3836dc9382eeae6ffefeeef3769e6e153421c1581d04c3c7bae40",
+        "prereg.md": "075cc5c672f7353230908b93b369e229a46e7979709f36c4013df3ab156e12b8",
+        "freeze.json": "1b0083b52e4041f688200b276cfc59013be47bb5e9c11fabdbead0a15ca88d0c",
+        "result.json": "bb8c08696844b714dbf101eda6aa5a52574b7c6b0847cde74b79584f223502fc",
+        "report.md": "cbfb140311557ea49620ec7ebefa1e761ad76b0b565436b49f7cd8ee13bb2c9c",
+        "provenance.json": "784f53e4045c2d7db394f214708dbba804d6b15bf777e51a6f716b86853445d7",
+        "audit.json": "98cd34a38f291789f411e6483496ed1748a15693ce94a0ee20095292c2edf28f",
+        "verdict.json": "edcf2d3c99d12874a501b4721a3ead657df3eb79a11ee411a783a9bb19989dbd",
+        "handoff.json": "aed5c69ddbd7dbfbe86e4613a1ddbcc1e3004ba008b32f20906a9451db1ac2a8"
+      }
+    },
+    "EXP-GRAPH-34788722106": {
+      "lane": "graph",
+      "request_id": "315bd598c1f1029b64a58ce1",
+      "created_at": "2026-09-13T23:06:28.757282+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) achieve TP>=0.8 and FP<=0.15 under structural noise (optional field churn, null-valued fields, nested object variation) on schemas with 10-50 fields, and does it maintain detection margin across realistic drift patterns?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "69878143db1e72811812a43265fed81f84ccfdfc8d2409438562d0bf254aeb8e",
+        "spec.json": "baac0c5eb373cbf37dacd96ee0ec2a882cf280e03314b2c759307a6de75ee951",
+        "prereg.md": "79f2aebb3c75ee3ca3cba839e6ab7ad05645d09a7cd06b5d07d1b7abfd4767a1",
+        "freeze.json": "01b24fad850fdd6c54e5c63e8467c126c5234ea1cb325facf0928af3ebd1ca0a",
+        "result.json": "eee45ce80082aec44d7a6c978a7c8a7922681ff62dd7038c2f7db15e8723dc9b",
+        "report.md": "69204b54f7043c319ee4e8177ae1c4825582d358b91a78fa16c166c0bc4a35ce",
+        "provenance.json": "2137fb39a7d61ec7bb6bea003688131f7388df363d2052d55b506b2e1c3377cd",
+        "audit.json": "18e419f4721fdc179aaa80942271a35b715df900d12511a10a82efa3eca1b480",
+        "verdict.json": "a76e55815fa7f629982d779deb27fa87eb4ccac97b66bbb252a865b154ad672d",
+        "handoff.json": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
+      }
+    },
+    "EXP-GRAPH-35010853847": {
+      "lane": "graph",
+      "request_id": "dfad7c09a2c61d8f000ec1d9",
+      "created_at": "2026-09-15T18:59:18.970408+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Can semantic embedding similarity distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard (field_path,type) as a staleness signal?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
+        "spec.json": "95fe42e7359c38d83433a4ca62c624b05e93c90417227126fa5e93022a3ae365",
+        "prereg.md": "2258952559c42b5f00204b02d05602cb923f45b55ab6693242aa74df99c94f79",
+        "freeze.json": "80096a34a0ad310950893c027192d9c0df9580f60145f764def276658938180e",
+        "result.json": "700beb5c18a9ae965135512ce1a8fc29ae2281a0d7154b49f416cf7d4348ba74",
+        "report.md": "c58b486bb7564ec6fee7461c174a085458247adecbdb5208bb474c52ec198b57",
+        "provenance.json": "86009bd07a2ff0fb6013e055c5725546e743b7d272a652099fffb800f4fb4e3c",
+        "audit.json": "4d7bc18f3778064d561a2fc61e4d63263ff55d32f590081bf5961c5c4795aaa6",
+        "verdict.json": "4e5e1eb65b980c6b0c75ec944347d73b9c8af00d5348b19bb2a8b1690a9b4e8a",
+        "handoff.json": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -710,6 +960,162 @@
         "audit.json": "ff487df7273789bb598a4e2fb132a190d8a2bc3049301f76c8c324890e4b823b",
         "verdict.json": "a616afd3d4b6b1b7d6d84d92e8822ad694aa0ce312563dd2b3f6ffcdd282f350",
         "handoff.json": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
+      }
+    },
+    "EXP-INTEL-34607693437": {
+      "lane": "intel",
+      "request_id": "fc12583614c0a9b6fc1b8808",
+      "created_at": "2026-09-11T14:01:48.329160+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
+        "spec.json": "4a626f67bd594c96f0cc657d922e76c2c27e89df8c4efab088096fd3b0e3876a",
+        "prereg.md": "bc030f4a69b31b8f89a44552997d6b3e7358cd870e1f07ed3603dba68d5afb09",
+        "freeze.json": "4c693afb1c312baf4e8457e49b69aeffd8eea7f43eff54410e5cbd0e096d7bba",
+        "result.json": "9934abd50347750c8387b951203a3492ded961bf512271ae530d5d63929dd0d3",
+        "report.md": "0406707e81bbc30ac12f6c43f3db8c99d1d2a6847c74a9ccb8f6fcd89da79509",
+        "provenance.json": "df23d06c55058d116836e30768252b950d68d17552e48979c00c8f94e2a5ec7b",
+        "audit.json": "e7ef1196cd19a44f6dbc5dbe018da398a9d866970a69f66d8afdb2f732b9cac2",
+        "verdict.json": "4d628206300c75990ae1122061b50b12bcda5be2aab5d44c4001a6a97da6adcf",
+        "handoff.json": "4b53b6ef5ae2e7dd11588ec6000e51eaf0fcc935e52e3aee26715eb62b73a417"
+      }
+    },
+    "EXP-INTEL-34718481334": {
+      "lane": "intel",
+      "request_id": "c65b596371e64773477a4ed7",
+      "created_at": "2026-09-12T20:55:32.257312+00:00",
+      "claim_ids": [
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does full-page DOM element enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment capture, and what fraction of page elements does the fragment model actually retain?",
+      "audit_status": "REVISE",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
+        "spec.json": "c5c3d021321e29b2e0becde038d720a4898632c38b76398d33ef3f9780a7e572",
+        "prereg.md": "f437634b780b57a36327a73258dd281c19cb7e85c964cbce5be0d87ea2c52dff",
+        "freeze.json": "ad84fd74eba88399753cad192b872946457870310a4df697f30f03ae2c9189d0",
+        "result.json": "3c1358cc23f860177477cdaeaa0e35f98d681a8dd20c0f6da21cf7043a150a7b",
+        "report.md": "633bf9713cd8c37a5a3d16b5e0c28d6eeb3e32488a24cfb9d51cf02fc0185f69",
+        "provenance.json": "ee8616bbdcf2d478b263468d7edb3024c5f35757b6906a300cbf32a3cd3c8bbc",
+        "audit.json": "7597c59fa45db55faf490d06a0ceb76a6eff2f965dacc8eb0abc6cf55d6cf432",
+        "verdict.json": "0f5032ba9d018c58b99606c3b761a089bf64b6e143ae0f47d9581eb148533d70",
+        "handoff.json": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3"
+      }
+    },
+    "EXP-INTEL-34782350557": {
+      "lane": "intel",
+      "request_id": "46dc3464476c696c1d922217",
+      "created_at": "2026-09-13T20:57:47.563186+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does the interactive fraction metric maintain within-type stability and between-type discrimination when the element definition is tightened to exclude form-descendant DIV/SPAN/LABEL (role-only counting: button, link, textbox, combobox, etc. without the form-membership clause), and what are the resulting per-type means \u2014 computable from existing EXP-INTEL-34718481334 raw measurement data without new Docker execution?",
+      "audit_status": "REVISE",
+      "decision": "INCONCLUSIVE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
+        "spec.json": "9f9445cd403fabbb68fd5b5091b7b1e29f12ffe71ac1d325168ce087d3e41b94",
+        "prereg.md": "d0af3ba509f3835b7e9bbe894a45d5db3fb4e2739e403bdedc793b482464d41e",
+        "freeze.json": "d85a1a22ccbeb1d06b4898ae4abc5a886fcad8bae18548d49381afc196917b25",
+        "result.json": "8b21e2308574e36dd22440b662654404cd2699b7609270dadad899fbc89c5efb",
+        "report.md": "15e4d42fc95db0d24bb936a0c9fa5e175d1d19389eea6bb8b19e790b5023bb5b",
+        "provenance.json": "fb6c06e73ef8b09c7b4bb758b89513ed3dc19a66507081efe44e07db78dd7343",
+        "audit.json": "4ac7dd2fe071b513ad3da4d5c233d982074ec23063a55e831b69dacc0e07d318",
+        "verdict.json": "ecd7d4e46841f1dbf764288f124cce43bb7f3dea360bb3ea19b26f986e2a5bc3",
+        "handoff.json": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+      }
+    },
+    "EXP-INTEL-34956989900": {
+      "lane": "intel",
+      "request_id": "c56194f3d1b8db38e07b8aa3",
+      "created_at": "2026-09-15T10:15:47.435185+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
+        "spec.json": "ad5ddba54e9175021f27dcd89298e3b730c3788c14fef61d31812fc20980be85",
+        "prereg.md": "aef481cd11816dcad39ece1254c60448c705106bc628af0c18d1ea52c0921c7b",
+        "freeze.json": "487ba761be62de278854cfaa275499cf45d8cfaea2bc08394e07a01b18633070",
+        "result.json": "a5733e16b7acb465a4b1486d66c7e59715d3eafaf1afc8c92dcf04a679b27542",
+        "report.md": "9a37df025f8e41aabddeb80b5d181affec23a69ed84b4c9abe8c24880da4c8ae",
+        "provenance.json": "36b4f72967f667a7bcd5116b946e14bdd76220d777c03931d972e4c6ec01c12e",
+        "audit.json": "6b6a5c15dbea3dcbf55752f07d2f32077f174d735d8d1e474357112d6d5009ca",
+        "verdict.json": "07b5aa8361b9e0797faa677fd998b56bc05422bab7018ccdb2e17ea24fd03125",
+        "handoff.json": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
+      }
+    },
+    "EXP-INTEL-35083033552": {
+      "lane": "intel",
+      "request_id": "f7cb84facf9cb781d819dd3e",
+      "created_at": "2026-09-16T10:05:15.318350+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
+        "spec.json": "a8c33a1fa3d6bb88dff8b805ee0bbccd39930d183915a73f00b891b9f9a0e832",
+        "prereg.md": "0ee7f4282dc50a2aa555bae29f4f600907af94066ec0298bef963e2be08dae3b",
+        "freeze.json": "3d9f2b208003624e213210b710a09d8cc357172ba55b014d79aee3ac32662be6",
+        "result.json": "3ae0a63265699c9b636b0ebbe00999211f367683b5675fe1490450152d419119",
+        "report.md": "8046fb8668ed34cd6c09edee918894fce39ef1d6bc692ddd7a5d793f2090fc5f",
+        "provenance.json": "5e6c0eec4f796070318ca74c9e7c85dd7151f07aaab818a9ba3a8ee5d5457f05",
+        "audit.json": "5c02309cc95eca8d92bf4c425dedf82adf82a3dd0c2e84e9be1a2f84de0dfb08",
+        "verdict.json": "ee64183fbfa36de46cd716825ec8b7679cf54a0e34ebb9ff5f49e8128ad0bdb5",
+        "handoff.json": "d190f98f9f5837c55bb037e0ee13c241fabaac2fa12761129949987e8d047c1b"
+      }
+    },
+    "EXP-INTEL-35112013458": {
+      "lane": "intel",
+      "request_id": "bd76f392c072c8920261ef76",
+      "created_at": "2026-09-16T14:57:18.093830+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a\u2192link contribution be separated from menuitem/tab effects in the ordering reversal?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
+        "spec.json": "902b7cbf01d9d3dd6aa028537ed2d2c7a7814a00df213855fced3ff71ea080b9",
+        "prereg.md": "d2a4dc10e77846ae9b278174fceafe84278ea53fbccdfd593461a70e4a7c3b3b",
+        "freeze.json": "23b52ba8a6c25cbbce5dbfd364515a15f11778e39a8b8423fa4db78da23a3e43",
+        "result.json": "c7b12de7754ed97dedd262fe14a383de003da8d0e27d0f45588727c344083f43",
+        "report.md": "9ff078ec9d6a8f656937c258ba3285dab3abe23f98a3cab09c01831a2b56495f",
+        "provenance.json": "15411ab23c513113bb22c1561d9cdc3f9dcf95c75f65dc47effee8ca7e24fd56",
+        "audit.json": "ba6ab6fbcb7c4ebbbd6de1d40589b70909e7ae622060fb6fd85b65cda5b3d53a",
+        "verdict.json": "4c7f0e6eaa7119ea29142e21cdeb6e1c8d8714bbb82dd98264ee233df63e2ab7",
+        "handoff.json": "d9ca2d3296a623c39fbce4c1260aec450531fdda88760082dba60598c6e953d6"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -988,6 +1394,156 @@
         "audit.json": "6201c6b90d8a21a9e414c31dead11417d6774032dfcbb96fce3a46755de1a200",
         "verdict.json": "b96e99c285d1241e032067b3c904d4381e9d6fe74310f8f3d72e4572c4b0bd13",
         "handoff.json": "ca491e4b2ac3c6fb4568d3a631261d9e8c6599841d05b02ec1721bd85deef1b1"
+      }
+    },
+    "EXP-PHYSICS-34695057869": {
+      "lane": "physics",
+      "request_id": "b519de9b03520076d4269cdc",
+      "created_at": "2026-09-12T12:57:03.767941+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Do response-side signals (response content-type, response body digest, response timing, response status sequences) captured via Playwright route interception on locally-hosted SPAs with state-dependent server responses provide predictive PMI on within-URL transitions where client-side request signatures are identical across states?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
+        "spec.json": "eb1008d66ff37c320f1c82ec8d080a2418f6cc73afe49bd645508c3bc1e5003f",
+        "prereg.md": "74a8b916f0beedc2cabaad0fe364bffd18ad79fc4068be0238e2450029b7196c",
+        "freeze.json": "269d28ccea40e7b6de29fcd5cec06f1c5ba4c9f06961d763ed908ab0c45cd49c",
+        "result.json": "14f8fcc7e37e4fe394400ad71ed8e7539a8308dccdb71986c7aa7ac2a2928f06",
+        "report.md": "5a4d802a881d530c45d6ed2844b24fcc41db5fdf17a0d9701e67c83e60ba212e",
+        "provenance.json": "f55b84aea7b2e908b417bee19d3a7ec8b4962a70120c53ad53bf4aa9a3df9deb",
+        "audit.json": "50992ba88210cb8b6135cb73ea513ae5a5f847863bcf51a51aa2b67ff4ab297f",
+        "verdict.json": "b1d6f3682979dec1940e5240fd9216c0e07e1cf9d774b03d0d8debff1dd8cff5",
+        "handoff.json": "e0f848d8781c29bbfb534b2da14aa65b6572a43eb6c74c8d741699598a1082f7"
+      }
+    },
+    "EXP-PHYSICS-34719136202": {
+      "lane": "physics",
+      "request_id": "7965e2c627fd1e6e80576bde",
+      "created_at": "2026-09-12T21:09:29.905488+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
+        "spec.json": "2a75ed3fed9f3d58a6b8f155f8c1591027d0c953fbb806a39db2f571721b7937",
+        "prereg.md": "698e906b25703a1e560bbd27f76fccdc5cd6e517aced9f3641704101434b0cd2",
+        "freeze.json": "65a58065c6d7a35231c427a4b3230a15f449626c0e7eec53ebe7afdcf4de5efd",
+        "result.json": "3735874b2d2d54625473e943f2f300d3b89aa7a4c0f181fc8c941933c0366865",
+        "report.md": "d5ecaffd41acdbb4cf27d41082e3411d7d0192eb6fd6d6650472bfc75c807114",
+        "provenance.json": "87da871c24e21fe06c4d8c85dcf92b01b78c7b95f4a5dddce456f3d2111d4249",
+        "audit.json": "c88c1d97cd339e9bfd2be9337c08e558d6d03f33fdfe923d187fdb0666292ba5",
+        "verdict.json": "d8206ce04563d14f5ca66afafb6b6f19ff08522b22785090ee5de8dff4a2f7f4",
+        "handoff.json": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
+      }
+    },
+    "EXP-PHYSICS-34724244876": {
+      "lane": "physics",
+      "request_id": "3977387ed7fafa2f190aab84",
+      "created_at": "2026-09-12T23:01:08.947990+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted deterministic SPAs, does DOM representation achieve predictive PMI beyond what is explained by action-history memory alone? Specifically: (1) what conditional PMI I(S_next; DOM | URL, ActionHistory) achieves, and does it exceed zero? (2) does action-history memory alone predict next state perfectly on these deterministic SPAs?",
+      "audit_status": "FAIL",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
+        "spec.json": "8a710fa0201c8af0b70af02edba45d5c2b5344c2a92ce041cc5335af13983aa0",
+        "prereg.md": "cd198c9a51bd2fa31ad410c429ce2e9ef245330c5f8774dcb67b0c29c7ae3c73",
+        "freeze.json": "451e16c7f7e3465ea91efb890c99ae1bbadb968d97c45f05b02887a8a5675d83",
+        "result.json": "3d3298a051f512ec1cb99ed4d29c08d7c6ef13157e0ee1cabc2cd867eab325af",
+        "report.md": "0befe562b654c81355b132aef7375f61627f55cac03d4d8adaaa6c142f947a6a",
+        "provenance.json": "3e6f3429b7ca9d5aeee67e76c4f65be6b01edda348b0e8b71e46810aacd83735",
+        "audit.json": "2c2a0bba42c4d756a1242a39f5dd5a6314b1aea606d019a141030f96587345f9",
+        "verdict.json": "a0a3791159caec00ec50ee258ca2c2d5ff977e82afc8b1ba76f3888c9fc1a9b0",
+        "handoff.json": "3c0e8d0315f7bd454610547fcdda7e6cbefbd664b0098e6b7468c7925b6110f4"
+      }
+    },
+    "EXP-PHYSICS-34764605162": {
+      "lane": "physics",
+      "request_id": "17cbe467fb2355b9af406cda",
+      "created_at": "2026-09-13T15:06:39.726293+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with controlled non-deterministic server responses (random API payloads, timing-dependent rendering), do DOM structural features encode predictive state variation that persists even with K>=3 sufficient action history? Specifically: (1) does conditional PMI I(S_next; DOM | URL, ActionHistory_K=3) exceed zero with Bonferroni-corrected permutation p < 0.00208 on non-deterministic SPAs (24 comparisons: 2 non-deterministic types x 4 representations x 3 K values)? (2) does the non-determinism level (deterministic vs random-API vs timing-dependent) modulate the PMI pattern? (3) does a richer DOM representation (accessibility tree hash, multi-feature hash) capture variation invisible to visible_text_hash?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
+        "spec.json": "370c2879dd0314064f03ecb006884906e93dfd98859b84b995269f71eab407df",
+        "prereg.md": "0817c1d8583922ffb31022cad990434cfaca168f8f0339fc9663e92bc543a366",
+        "freeze.json": "ef936e823ad2bb5feb1d400ed4ce18449886c4e6844b6c76d6ca733986e52f7f",
+        "result.json": "724197fb532cc75f0477524205d26761ef0ff9610a6d85ae410da092365d47a7",
+        "report.md": "89ac7f75f7f97a0e582ef0ff6ce847f3b491b8274804ce9d8cf73e8261d29702",
+        "provenance.json": "448f5f695bb739b410fefce5f18a8a0ab8c0eac86af736ee228c40f1c8c926a5",
+        "audit.json": "f7a7fca0642b927b2968de16d9ab5b33332df378ba22bb8f9c0e2de2c84a3aac",
+        "verdict.json": "eb647ae22a7b0bcb3ece08671ff70dd62f50d9bfff88b520f619fe19832812ba",
+        "handoff.json": "11780a21d627e1d162f49b7b4c1eceb9413e3453aba51a4204b4d3511963bc0f"
+      }
+    },
+    "EXP-PHYSICS-34846934524": {
+      "lane": "physics",
+      "request_id": "124e5ed3be43807f22b76852",
+      "created_at": "2026-09-14T13:04:07.512576+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with correlated non-determinism (persistent session_id that determines DOM variant at each FSM state, so DOM_before encodes session which determines DOM_after), does DOM structural features exhibit conditional PMI I(S_next; DOM_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is the discriminating test identified by parent audit V1: the parent tested independent per-step DOM observation noise where E[I]=0 by construction. Correlated non-determinism via persistent sessions is the only remaining locally-hosted DOM test where DOM_before could predict DOM_after through latent session state.",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
+        "spec.json": "b6573d94aac64894f9119e94a21b7a226beda34b4ce533a5165110540d0261db",
+        "prereg.md": "7f493f9b3803e293fba49fe8a0d72f3e4d6b753fbb4019f2f4f5e7e181ee3593",
+        "freeze.json": "b99097dfcf649ae8515dbf4d701937a439889880fc266fd25a03da86bc97ccae",
+        "result.json": "9d4b94800719ec9c4234b15a08d3b9de8adb9288d6dd656420a72e35bb6c702f",
+        "report.md": "dd4c9b3d82a582159aaee4e7421000f26cb055618775856d0cf9ee06d5d9ee73",
+        "provenance.json": "4b47ff6ca73b560a55acdc0256000ded0e0b10b9741950748b4b738be0e45149",
+        "audit.json": "12eb498a4fb606e5b63761faa41cb86a6f031167dc4cb1d77b77f1f7cf1eaa3b",
+        "verdict.json": "9601903a2734006b60dc6859b98ace1e8af1a7144220d1cd711cea3b9cdffd23",
+        "handoff.json": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
+      }
+    },
+    "EXP-PHYSICS-34932344937": {
+      "lane": "physics",
+      "request_id": "6e5243404b60bfd1401c0573",
+      "created_at": "2026-09-15T05:20:43.120038+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with session-dependent API responses, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy: network-response features (JSON body fields, status codes, headers) are low-cardinality categorical, eliminating the plug-in MI estimator saturation that invalidated the parent DOM-hash experiment (EXP-PHYSICS-34846934524).",
+      "audit_status": "REVISE",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
+        "spec.json": "5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598",
+        "prereg.md": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+        "freeze.json": "f7551b0497a6cf99ffa8e12b899e1cd25ca6a1b03e747c31f533d5b5eb7e10ba",
+        "result.json": "07425b3f377755292682e219d19f5f170171f939b8a1a8a30fab834198b3a8cb",
+        "report.md": "2bf3782946498fecfa60c9d5430406e7abb9836aa0df179a46f4950736363037",
+        "provenance.json": "b9b1e68a62161944f80de1bedb78bc90ebdc0489d8868168bfd8a0b4642e55dc",
+        "audit.json": "4449595334fae5fae00202de8a82e5169f3c51a87e7e62547646b65ca418c2e6",
+        "verdict.json": "24b4cdf6a1e9021947630e0d31bd59c0309ca3d9d8234f0b75092758f6cb499a",
+        "handoff.json": "b219878ec01bcd49b77ecf23be62639e72120edaf37f4d448ab74e0125e48706"
       }
     },
     "EXP-PRODUCT-33528829801": {
@@ -1315,6 +1871,31 @@
         "handoff.json": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
       }
     },
+    "EXP-PRODUCT-34704657427": {
+      "lane": "product",
+      "request_id": "9815dca093d8081fd08d7423",
+      "created_at": "2026-09-12T16:15:22.921158+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Should slot_prefixes be computed non-empty (extracting the path segment before the varying part for VALUE CONTRACT prefix-stripping) or accepted as empty (template-only binding), given that the parent implementation produced empty slot_prefixes for path-prefix patterns despite the design intent of non-empty values?",
+      "audit_status": "REVISE",
+      "decision": "REVISE",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "hashes": {
+        "request.json": "e4249732669660c49afb59ba70b5fa6b1c5fd536c6ba3c6114dd93958da3ea57",
+        "spec.json": "a4866e99043ff4076b543c2d58000809998cd1765957ca72afc7b12323f163cb",
+        "prereg.md": "02f60c7341d0db78fd2f1ff3a9aa72b80ee0391812666dde144e36872113573d",
+        "freeze.json": "ac4ac2252615f3de6ec0481fd43e040ead95798896c2c9dd7073fcc993815b52",
+        "result.json": "1cb42b9d35ef8f760789cf1fd86ebfa6b5823dc2f31f2c081ce822d992167deb",
+        "report.md": "7e70a25634e4e3e43024d253935cad07c698be1bca237eb77b0d3b1bce652c17",
+        "provenance.json": "fdd851e9794a7867fb28a988c939643de20bf031d4de259b3158474b4b610e0c",
+        "audit.json": "bc0c40ae89258d0c81a0e2af56498ae47339179d9497f97f080472fca75d5c66",
+        "verdict.json": "091de482e303affe744b1ef6e3afa6e8f5572454765f9e648ba62d73c66fa127",
+        "handoff.json": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11"
+      }
+    },
     "EXP-RUNTIME-33528830833": {
       "lane": "runtime",
       "request_id": "cbf791e0cd3fe570d0ff0fd5",
@@ -1538,6 +2119,106 @@
         "audit.json": "fc9398901337dd11c7599c97483512658551041e9d7102656128e052300660d9",
         "verdict.json": "a30b7b7d0605a5c1e94e9590f29355eb0da5eb1f94e7cdf2ab93bdc1d01de4a9",
         "handoff.json": "040d3011db257cc13abf273a424b0537bf4113aba40b9b844c66aa6215605047"
+      }
+    },
+    "EXP-RUNTIME-34654566605": {
+      "lane": "runtime",
+      "request_id": "be44df9f0ace23edb1cb9d63",
+      "created_at": "2026-09-11T22:34:15.341774+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive CDN-style compression where response bodies are recompressed non-deterministically (varying compression algorithm and parameters per request), causing the compressed body hash to differ per request even for identical logical responses?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "80f820e60421b5ff4dee4e7d9c80761021b0193b8e218207b604f7ba58c7ab91",
+        "spec.json": "d5026362f17d3c6e13a0f750025b5896b3164fd9feae75e0f1df5f4a3710e68d",
+        "prereg.md": "2a1c91085ae798c535f6a44521038c01860de8f01184a0c69e44c0d227ea003b",
+        "freeze.json": "75d3a73e4832dddd0a90be5569ae921a6901a3ad69e70050092c82cd85533c78",
+        "result.json": "1dc48127da42f4f8d432e6cd33350b45c6bdfa24790566cdd568e7eae980998b",
+        "report.md": "464b9388c2be349af2d48afb9fe27fe79b218217f606eb5100861dae01a6390f",
+        "provenance.json": "0316b264eec3564edd159f9457855887c5900f139aceae96d1f8dea11399e309",
+        "audit.json": "6b4dc0b3e2e5d6e88131c3de1ee2ea873cfcca1eeb14a47bd24648ff31f70b1c",
+        "verdict.json": "123f67ce319db14357ac3a158acba729ea70ee9973142b8b4261daedf701ec67",
+        "handoff.json": "c50d276a6e62898cf5ab92dec17188e3ba27e7bb094996d3695d0d0efcb21d78"
+      }
+    },
+    "EXP-RUNTIME-34741873198": {
+      "lane": "runtime",
+      "request_id": "3bc0c3eb9fb4c42b5c1d1068",
+      "created_at": "2026-09-13T06:05:07.305668+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive realistic CDN negotiation where Content-Encoding is selected deterministically from the client's advertised Accept-Encoding (not per-request random), and would a client with stable Accept-Encoding see deterministic compressed hashes?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "839a29f8e0fb8c6c6b11ff1737229b0bcc9d4a0aaf4ca1b8a813f38e63c9645a",
+        "spec.json": "f20fa9b611eacc2c3e6c787369c38dd769139776176cffaa1cec253fb5bc672d",
+        "prereg.md": "7260867d2b5a3b7650328ef467d83bb5228b6a2cbbb223b5f927335820eeb316",
+        "freeze.json": "0a53e81a699433cd56295b322beb3d40c1091760057c8eeedd919c88a5d2d417",
+        "result.json": "027b611be1fb0dd9c08a2fa5eef4711baaba2109ef2ba7f4cf026f6602044288",
+        "report.md": "ecb34a5687fe71e9acc6e48debdc534196d13e29f468bbd987b263d6be9f94c4",
+        "provenance.json": "a47706db4c90dc21258d66f0238798b30f66fb0b1aa15cb26dba1a4169958f9d",
+        "audit.json": "ada5b6aeb971d4884e2637c920c0a82df49c19b6b8e59290b2c906864bba17ce",
+        "verdict.json": "a3180f2cd038b702fea77f1d9293013b8777ec18238e2b34fca9d0c6fbf830ff",
+        "handoff.json": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
+      }
+    },
+    "EXP-RUNTIME-34902094115": {
+      "lane": "runtime",
+      "request_id": "6aa973161cb4fccb074203c4",
+      "created_at": "2026-09-14T22:03:11.096208+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does body-only HTTP fingerprint discrimination survive deterministic CDN compression when response body sizes increase from 0-729 bytes to KB-scale JSON (1KB, 10KB, 100KB), where higher entropy may cause non-deterministic compression output or hash instability?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5",
+        "spec.json": "9f23d4f7b9489ac64e5cf7637e91d75bfbca9a3d8c63d3a30b2202fcc71d3059",
+        "prereg.md": "a816d69ffa35ed0f57a0c0819759b453ffe079f40ca857a2d851af47d70df563",
+        "freeze.json": "c4347c484ee6b198225a0cd9f80b710871ae2cb2bc42153601e3bff584de92de",
+        "result.json": "d4873919ed389369915cfe0d8a9f3b479428a9d570a15ec34d414d5a974fc1e6",
+        "report.md": "eb845ebf9b40bee9bd9d2d4b573ce10b55ffb5f8889871a9432a7ed6cdca3c29",
+        "provenance.json": "612678c04ef4ee53c9b04a3714124c495ed96e134bac0b09be0f69ad2fca406a",
+        "audit.json": "0dc690628ce9357c14614829b476e559cfb3db4f012c6f6491183bef04b5cabc",
+        "verdict.json": "4b5715e8914b8a9938dc138b5d6b0275bdd1ea0afde208449197972a5eab1f07",
+        "handoff.json": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
+      }
+    },
+    "EXP-RUNTIME-34986155186": {
+      "lane": "runtime",
+      "request_id": "018b5542dd6adda7bf86edc8",
+      "created_at": "2026-09-15T15:06:23.368449+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does decompression-normalization (hashing the DECOMPRESSED response body after reversing Content-Encoding) preserve body-only discrimination under varying brotli quality levels, and does it provide a universal fallback when compressed-byte hashing fails?",
+      "audit_status": "PASS",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "5c640867203f74c9a26232bf007716dbd7284906df70b21f58d8a80823bec8ff",
+        "spec.json": "95e3d7b2f71c70f43e59bfc88c28238243bcd440166b7ec6dc0df461340f2ebe",
+        "prereg.md": "4707ee21ed88ac396c9941763039189e249b7230dcdae36645b93c81afc96093",
+        "freeze.json": "069ac58eb4a1ae32c679d0ec29549e2f7b0d8be02d979bc5e9520743a7860ef4",
+        "result.json": "050792119112028a60b2f0fe0e4c3faf16256bab6a831fb31a2401ca2f6f0f99",
+        "report.md": "0fea5ac282e12b3d6a303435ced958886cdf03b6f8565a3e3587f464322f4190",
+        "provenance.json": "993d7f52d386a9b0f107f8744c105ff021a36f1d9924e947ee8f2cf00bf18e27",
+        "audit.json": "ffdaa1d8fdf329095caa07a58b2f3c253c668a004771eb05c8654b11f5a5f2a7",
+        "verdict.json": "739b100d33240f559f4d581d1684590b9e6bc65c6369cf5d2fcb5d9875cdb8c0",
+        "handoff.json": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
       }
     }
   }

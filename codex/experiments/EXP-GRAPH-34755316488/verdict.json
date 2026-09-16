@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34755316488",
+  "lane": "graph",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Preregistered adaptive threshold T(n)=1-2.5/(n+1) produces TP=0/15 at all schema sizes (all stale Jaccard similarities exceed spec threshold; detection requires Jaccard < T). By frozen decision_rule condition (2), the experiment is FALSIFIED-IN-SETTING. C-FRESHNESS remains HYPOTHESIS. However, the executed deviation T(n)=1-0.8/(n+1) achieves TP=15/15 empirically on flat mock schemas, indicating the adaptive-threshold direction is viable and warrants a new confirmatory preregistration."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Scaling degradation is established: Spearman rho=1.0 between schema size and add_field Jaccard at fixed threshold 0.85 (n=6 sizes, p<0.01). Fixed threshold 0.85 is confirmed non-viable for schemas >=10 fields. This is a bounded negative result for the fixed-threshold variant, not a global rejection of Jaccard freshness detection."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Stochastic variation FP control is degenerate: structure-only Jaccard (field_path,type) produces Jaccard=1.0 on value-only changes by construction, so FP=0 at any threshold <1.0 is a tautology, not an empirical measurement of real-world noise resilience. The FP question remains open for structural noise (optional fields, null values, encoding variations)."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does adaptive Jaccard freshness threshold T(n)=1-0.8/(n+1) survive a confirmatory preregistration with structural-noise FP stress (optional field churn, null-valued fields, nested object variation) that replaces the degenerate stochastic-variation control, and does it maintain TP>=0.8 on schemas with 10-50 fields under realistic drift patterns?",
+  "reason": "The frozen decision_rule unambiguously requires FALSIFIED-IN-SETTING when adaptive threshold TP < 0.8 at any n >= 10. Under the frozen threshold T(n)=1-2.5/(n+1), recomputation from raw_evidence/mock_results.json shows all stale Jaccard similarities exceed the spec threshold (e.g., n=10 add_field=0.909 > T=0.773, change_type=0.818 > T=0.773), yielding TP=0 at every size. The producer's claim of SURVIVES rests on (a) an executed deviation to T(n)=1-0.8/(n+1) that is EXPLORATORY under the frozen prereg, and (b) an analytically inverted verification table that incorrectly claims stale Jaccard < spec threshold when in fact Jaccard > spec threshold for all drift patterns. The audit correctly identifies both failures. However, the empirical success of T(n)=1-0.8/(n+1) (TP=15/15, FP=0/120 stochastic, FP=0/30 real-API) is a meaningful signal that an adaptive threshold of this form can restore detection. The bounded negative result (fixed threshold fails, spec adaptive formula fails) does NOT close the C-FRESHNESS domain or the adaptive-threshold direction. A new preregistration with the empirically successful formula and a non-degenerate FP control is warranted.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34755316488/spec.json decision_rule condition (2): adaptive threshold TP >= 0.8 at each n >= 10",
+    "research/experiments/EXP-GRAPH-34755316488/freeze.json frozen_at 2026-09-13T11:49:51",
+    "research/experiments/EXP-GRAPH-34755316488/result.json adaptive_threshold_used deviation T(n)=1-0.8/(n+1) vs preregistered T(n)=1-2.5/(n+1)",
+    "research/experiments/EXP-GRAPH-34755316488/result.json adaptive_threshold_spec_formula analytical_verification inverted logic (claims all_detected=true when Jaccard > threshold)",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json recomputed_metrics.adaptive_spec_empirical_TP_at_spec_threshold all 0.0",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json validity_findings[0] preregistration deviation invalidates confirmatory status",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json validity_findings[2] stochastic FP control degenerate by construction",
+    "research/experiments/EXP-GRAPH-34755316488/audit.json claim_ceiling exploratory only not confirmatory",
+    "research/experiments/EXP-GRAPH-34755316488/raw_evidence/mock_results.json raw Jaccard measurements per request",
+    "research/experiments/EXP-GRAPH-34755316488/result.json scaling_degradation spearman_rho 1.0 p_value_approx 0.0",
+    "research/experiments/EXP-GRAPH-34755316488/result.json fixed_threshold_085 per_size_tp degrades 1.0 to 0.0",
+    "research/experiments/EXP-GRAPH-34755316488/result.json adaptive_threshold_executed TP=1.0 at all sizes FP=0.0 at all sizes",
+    "research/experiments/EXP-GRAPH-34755316488/result.json real_api_fp fp_rate 0.0 on 30 requests",
+    "research/experiments/EXP-GRAPH-34755316488/provenance.json deviation_from_prereg",
+    "research/experiments/EXP-GRAPH-34755316488/report.md section 2.1 and 2.2 inverted analytical table",
+    "research/experiments/EXP-GRAPH-34711403174/handoff.json carry_forward established and rejected"
+  ]
+}

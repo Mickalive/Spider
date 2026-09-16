@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34586318405",
+  "lane": "graph",
+  "decision": "MIXED — H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the graph lane detect staleness in inherited mechanism knowledge — does freshness scoring of cached mechanisms against live endpoint responses provide a reliable signal for triggering re-validation, and what is the false-positive and false-negative rate of staleness detection across resource families?",
+  "reason": "The experiment establishes two bounded findings that close the current aliasing sub-program: (1) kernel exact-match behavior extends to complex aliasing types (H1 supported, combined 0/16 across two experiments); (2) HTTP status-code grounding is zero on tolerant APIs (H2 falsified-in-setting). Body-based grounding is exploratory and non-autonomous. The graph lane has run two consecutive experiments on semantic aliasing — further repetition is low-information. The next question should be materially orthogonal: C-FRESHNESS (freshness detection for cached mechanisms) is a priority graph-lane claim, testable with current infrastructure, and product-critical. This moves the frontier to a new capability dimension rather than re-testing an established finding.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-34586318405/spec.json decision_rule and measurement_validity — frozen conditions for SURVIVES_CURRENT_TEST",
+    "research/experiments/EXP-GRAPH-34586318405/result.json metrics: aliased_first_correct_selection_rate 0.0, binomial_p_value_one_sided 0.016, http_template_accuracy_status_code 0.0, grounding_event_count_status_code 0, grounding_event_count_body_based 4, baseline_pass_rate 1.0",
+    "research/experiments/EXP-GRAPH-34586318405/audit.json status REVISE, producer_claim_supported false, claim_ceiling, validity_findings high-severity items 1 and 2",
+    "research/experiments/EXP-GRAPH-34586318405/raw_evidence/execution_results.json sha256 b74b5f75d7361506cc2fa2ee748360ab039ce6df1b5e3d046accae25efeab59a — 6 baselines + 12 aliased conditions with full HTTP response bodies",
+    "research/experiments/EXP-GRAPH-34586318405/provenance.json github_run_id 34629308640, base_sha c4de03975e78155a77f483d11dd4d6399f44fd67",
+    "research/experiments/EXP-GRAPH-34586318405/failure.json records prior director attempt failed with invalid claim update status FALSIFIED",
+    "research/experiments/EXP-GRAPH-34409639346/handoff.json parent carry-forward: C-SEMANTIC-RESOLVE falsified for simple path aliasing 0/10, kernel exact-match confirmed",
+    "src/spider/kernel.py L97 m.intent != intent, L112 confidence-only stable sort",
+    "src/spider/registry.py L38 sorted(items) determines mechanism_id ordering"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "github_run_id": null,
+  "base_sha": null,
+  "commits": [],
+  "datasets": [
+    {
+      "name": "synthetic_data",
+      "description": "Synthetic 5-state linear FSM with session-dependent API responses",
+      "parameters": {
+        "n_trajectories": 200,
+        "n_steps": 10,
+        "n_sessions": 10,
+        "fsm_states": [
+          "landing",
+          "form_s1",
+          "form_s2",
+          "review",
+          "complete"
+        ],
+        "seed": 42
+      }
+    }
+  ],
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py"
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-34932344937/result.json",
+      "role": "result"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PHYSICS-34932344937/report.md",
+      "role": "report"
+    }
+  ],
+  "freeze_hash": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+  "frozen_files": {
+    "prereg.md": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+    "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
+    "spec.json": "5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598"
+  }
+}

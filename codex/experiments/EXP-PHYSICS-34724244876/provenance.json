@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34724244876",
+  "lane": "physics",
+  "github_run_id": "34724244876",
+  "github_sha": "b8e897f23849edf4e7a11875f1f7e5e0008a5630",
+  "request_id": "3977387ed7fafa2f190aab84",
+  "created_at": "2026-09-13T11:50:01.805013+00:00",
+  "executed_at": "2026-09-13",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "python_path": "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python3",
+    "dependencies_used": ["standard library only (json, math, collections, random)"],
+    "numpy_used": false,
+    "scipy_used": false,
+    "seed": 42,
+    "pseudorandom_generator": "Python random module (Mersenne Twister)"
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/request.json",
+      "sha256": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/spec.json",
+      "sha256": "8a710fa0201c8af0b70af02edba45d5c2b5344c2a92ce041cc5335af13983aa0"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/prereg.md",
+      "sha256": "cd198c9a51bd2fa31ad410c429ce2e9ef245330c5f8774dcb67b0c29c7ae3c73"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/freeze.json",
+      "sha256": null
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-34719136202",
+    "handoff_path": "research/experiments/EXP-PHYSICS-34719136202/handoff.json",
+    "handoff_sha256": "ee13a749a6b4bbc888566d5e82a9f56381b8115a2d8a397d71473501c7c32b3f"
+  },
+  "datasets": {
+    "raw_dom_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json",
+      "sha256": "85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1",
+      "n_transitions": 804,
+      "sites": {
+        "dashboard": 200,
+        "multistep_form": 200,
+        "wizard": 154,
+        "synthetic": 250
+      }
+    }
+  },
+  "code": {
+    "analysis_script": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/analyze.py",
+      "sha256": "c20c7b9077e1e23df17c74eeb2566c8366635883d31c0bf607b11551573028fc",
+      "description": "Conditional PMI computation with permutation tests, action-history prediction, determinism checks, and controls"
+    }
+  },
+  "artifacts": {
+    "raw_analysis_results": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/raw_analysis_results.json",
+      "sha256": "14123b5083f9c1470886eace04a13ae9308e2da712c1d9d9bee87dc5a91117fb"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-PHYSICS-34724244876/result.json",
+      "sha256": "9af08ca71e1740c92d0e33b3ffac81722b129a4a3c5eacabdea867e7a19b776f"
+    }
+  },
+  "execution_commands": [
+    "PYTHONHASHSEED=0 python3 research/experiments/EXP-PHYSICS-34724244876/analyze.py"
+  ],
+  "reproduction_notes": [
+    "Analysis uses deterministic seed 42 for random permutation tests",
+    "Standard library only — no external dependencies required",
+    "Raw data reused from parent experiment EXP-PHYSICS-34719136202 — no new data collection",
+    "Permutation tests: 1000 permutations per site per history length (K=1,2,3)",
+    "Bonferroni correction: alpha 0.05 / 3 sites = 0.0167",
+    "Minimum stratum count: 5 transitions (strata below this are excluded from PMI computation)"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
+  "why_next": "The truncation cap (first-20 locatable_sample) is the primary validity threat preventing discriminating inference. Full DOM enumeration would resolve whether: (1) the null distribution shape changes with more elements, (2) button/form single-role match is a truncation artifact or a real driver, (3) cart density ordering is stable under full sampling. This is a substrate fix that unblocks all downstream metric validation. Runtime lane owns the locatableSample implementation.",
+  "carry_forward": {
+    "established": [
+      "On this truncated-first-20 sample (7 distinct tasks, 1 Magento site), the a→link mapping is sufficient to produce cart>product_listing>detail ordering identical to DEF-FULL-MAP (auditor verified, identical means)",
+      "The a→link reversal mechanism is driven by differential density inflation: cart +33% (0.00280→0.00561), listing +33% (0.00385→0.00513), but absolute cart increase exceeds listing, causing the ordering flip",
+      "Random ROLE_MAP null (1000 iterations, seed=42) on this sample produces mean pairwise agreement ~0.52 (auditor recomputed 0.51-0.54), which is ABOVE the observed 0.3, falsifying the hypothesis that 0.3 exceeds chance",
+      "On this truncated sample, menuitem=0 and tab=0, so their contribution to the ordering reversal cannot be tested — isolated a→link test is tautologically identical to DEF-FULL-MAP",
+      "The 5-definition family is intentionally diverse (spanning form-only to full-map) and produces lower pairwise agreement than random ROLE_MAP assignments, because random assignments cluster on cart-heavy orderings (~70% cart>detail>product_listing)"
+    ],
+    "rejected": [
+      "Hypothesis that truncated-sample pairwise ordering agreement (0.3) exceeds chance-level expectation — FALSIFIED on this sample (null mean 0.52 > observed 0.3)",
+      "Hypothesis that no single-role definition produces invariant ordering — FALSIFIED: button-only and form-only both reproduce DEF-FORM-ONLY ordering (product_listing>cart>detail)"
+    ],
+    "unknown": [
+      "Whether full-DOM enumeration (without first-20 cap) changes the null distribution shape, per-role densities, and ordering stability — truncated sample bias cannot be corrected from existing data",
+      "Whether button/form single-role match is a truncation artifact (truncated sample too small to distinguish single-role driver from truncation) or a real driver of the listing>cart>detail ordering",
+      "Whether menuitem/tab contribute additively when present (0 counts in this sample) — requires a sample where those roles appear",
+      "Whether the a→link reversal and ordering stability replicate on non-Magento sites or with different DOM structures (single-site bound)",
+      "Whether the null distribution shape (dominated by cart>detail>product_listing at ~70%) generalizes to other sites with different DOM structures",
+      "The true ordering under full DOM enumeration — all current orderings are based on truncated-first-20 locatable_sample"
+    ],
+    "do_not_assume": [
+      "Do not assume the 0.3 ordering agreement is noise globally — it was not significant on THIS truncated sample from THIS site, but full DOM enumeration on other sites might show different behavior",
+      "Do not assume DEF-FORM-ONLY (product_listing>cart>detail) is unreliable — the ordering might be real but the truncated sample cannot confirm it",
+      "Do not assume the a→link effect generalizes to sites where menuitem/tab have non-zero counts — the isolation claim is bounded to this sample where menuitem=tab=0",
+      "Do not assume the null distribution shape (0.52 mean, cart>detail>product_listing dominant) is universal — it may be specific to this truncated sample and DOM structure",
+      "Do not assume ordering stability is unmeasurable — the current measurement is invalid due to truncation, not because ordering stability is inherently untestable",
+      "Do not assume C-MEAS-VALID is closed — it remains EXPERIMENTAL; the null-model test was valid but the substrate (truncated sample) prevented discriminating inference"
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Full DOM enumeration (locatableSample cap removal) in runtime lane to resolve truncation bias",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Additional site(s) with non-zero menuitem/tab counts to test additivity of a→link + menuitem/tab",
+      "blocking": false
+    },
+    {
+      "type": "data",
+      "description": "More distinct cart pages (current n=1 distinct) to enable within-type variance estimation",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35112013458/result.json — metrics null_mean_pairwise_agreement=0.5275, observed=0.3, cond1=false, cond2=false, cond3=true",
+    "research/experiments/EXP-INTEL-35112013458/audit.json — claim_ceiling=FALSIFIED-IN-SETTING, validity_findings (truncated sample bias severity=high, small N severity=high, cart duplicate severity=low, null nondeterminism severity=medium)",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json sha256:c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c — full analysis results",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py sha256:ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699 — analysis code",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — raw measurement data",
+    "research/experiments/EXP-INTEL-35112013458/provenance.json — provenance chain and frozen inputs"
+  ],
+  "recommended_action": "Route to runtime lane to fix locatableSample truncation cap. The next intel experiment should re-run null-model tests on full-DOM enumeration data (same 8 tasks, same site) to determine whether truncation artifacts drove the observed results. If full enumeration recovers significance, the a→link isolation claim can be strengthened; if not, the null result is confirmed and the metric question moves to cross-site generalization."
+}

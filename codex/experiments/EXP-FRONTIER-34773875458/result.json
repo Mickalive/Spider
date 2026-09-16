@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34773875458",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "stationary": {
+      "aggregate": {
+        "spearman_rho": 1.0,
+        "spearman_p_one_sided": 0.0,
+        "tv_max_means_by_lambda": {
+          "0.0": 0.4181467864197216,
+          "0.1": 0.4931362307552544,
+          "0.2": 0.5622702584729766,
+          "0.3": 0.6254761013000623,
+          "0.4": 0.6982820842115022,
+          "0.5": 0.7559411179500591,
+          "0.7": 0.8520050089878044,
+          "1.0": 0.9520444922830272
+        }
+      },
+      "per_function": {
+        "42": {
+          "func_name": "rotation",
+          "spearman_rho": 1.0,
+          "spearman_p_one_sided": 0.0,
+          "tv_max_means_by_lambda": {
+            "0.0": 0.41728140175839334,
+            "0.1": 0.4996856452626375,
+            "0.2": 0.5430794148204146,
+            "0.3": 0.6554015865343743,
+            "0.4": 0.7258970651941594,
+            "0.5": 0.7466213006226685,
+            "0.7": 0.8741946514454838,
+            "1.0": 0.9486638206195869
+          }
+        },
+        "43": {
+          "func_name": "scaling",
+          "spearman_rho": 1.0,
+          "spearman_p_one_sided": 0.0,
+          "tv_max_means_by_lambda": {
+            "0.0": 0.40303631798859796,
+            "0.1": 0.49016101769477827,
+            "0.2": 0.5715443056910141,
+            "0.3": 0.6103479096793543,
+            "0.4": 0.673009906553487,
+            "0.5": 0.772322907128555,
+            "0.7": 0.8594050719254394,
+            "1.0": 0.9581081964940854
+          }
+        },
+        "44": {
+          "func_name": "translation",
+          "spearman_rho": 1.0,
+          "spearman_p_one_sided": 0.0,
+          "tv_max_means_by_lambda": {
+            "0.0": 0.43412263951217317,
+            "0.1": 0.48956202930834747,
+            "0.2": 0.572187054907501,
+            "0.3": 0.6106788076864582,
+            "0.4": 0.69593928088686,
+            "0.5": 0.7488791460989539,
+            "0.7": 0.8224153035924902,
+            "1.0": 0.9493614597354094
+          }
+        }
+      }
+    },
+    "nonstationary": {
+      "aggregate_bc_tv": {
+        "spearman_rho": 0.9285714285714287,
+        "spearman_p_one_sided": 0.00043148409144998836,
+        "bc_tv_means_by_lambda": {
+          "0.0": 0.003919703483414072,
+          "0.1": 0.004036708805732059,
+          "0.2": 0.010218733577374206,
+          "0.3": 0.005014384131890604,
+          "0.4": 0.008077262077074831,
+          "0.5": 0.017434326795668052,
+          "0.7": 0.028241679931146024,
+          "1.0": 0.05096273385357394
+        }
+      },
+      "aggregate_raw_tv": {
+        "spearman_rho": 1.0,
+        "raw_tv_means_by_lambda": {
+          "0.0": 0.2330039642650925,
+          "0.1": 0.294598079519841,
+          "0.2": 0.3460548778770939,
+          "0.3": 0.37309195525045646,
+          "0.4": 0.41191079661015495,
+          "0.5": 0.4413742389702174,
+          "0.7": 0.49157166665803614,
+          "1.0": 0.5448295883866431
+        }
+      },
+      "per_page_type": {
+        "0": {
+          "name": "rotation_low_0.5,0.5",
+          "spearman_rho": 0.9761904761904763,
+          "spearman_p": 3.314396026200098e-05,
+          "tv_means_by_lambda": {
+            "0.0": 0.14100275436167953,
+            "0.1": 0.1514746059795565,
+            "0.2": 0.18215861757028634,
+            "0.3": 0.20738902223321137,
+            "0.4": 0.29530068068969706,
+            "0.5": 0.2719458365634895,
+            "0.7": 0.3656007253578793,
+            "1.0": 0.439746590845082
+          }
+        },
+        "1": {
+          "name": "scaling_low_0.5,0.5",
+          "spearman_rho": 0.9761904761904763,
+          "spearman_p": 3.314396026200098e-05,
+          "tv_means_by_lambda": {
+            "0.0": 0.09678833739758205,
+            "0.1": 0.2054174978954753,
+            "0.2": 0.1994630765091417,
+            "0.3": 0.21435707851374053,
+            "0.4": 0.23322079959134712,
+            "0.5": 0.29807888467689386,
+            "0.7": 0.3662564138794742,
+            "1.0": 0.4390031761734804
+          }
+        },
+        "2": {
+          "name": "translation_low_0.5,0.5",
+          "spearman_rho": 0.9047619047619048,
+          "spearman_p": 0.002008275505429469,
+          "tv_means_by_lambda": {
+            "0.0": 0.15280307291744025,
+            "0.1": 0.15045207559212154,
+            "0.2": 0.12535637429153343,
+            "0.3": 0.17386111848624938,
+            "0.4": 0.24154487651375733,
+            "0.5": 0.28130446376808943,
+            "0.7": 0.33212481910863184,
+            "1.0": 0.40810682827629086
+          }
+        },
+        "3": {
+          "name": "rotation_high_0.5,0.5",
+          "spearman_rho": 0.9047619047619048,
+          "spearman_p": 0.002008275505429469,
+          "tv_means_by_lambda": {
+            "0.0": 0.351515766286059,
+            "0.1": 0.3270914452309486,
+            "0.2": 0.3718421205427585,
+            "0.3": 0.3933084948478266,
+            "0.4": 0.37228456522763503,
+            "0.5": 0.38746596784888687,
+            "0.7": 0.3945600181441871,
+            "1.0": 0.42319257401819665
+          }
+        },
+        "4": {
+          "name": "scaling_high_0.5,0.5",
+          "spearman_rho": 0.7619047619047621,
+          "spearman_p": 0.028004939153071805,
+          "tv_means_by_lambda": {
+            "0.0": 0.38374046167117404,
+            "0.1": 0.34919353816517396,
+            "0.2": 0.3822289012597469,
+            "0.3": 0.4014830443241736,
+            "0.4": 0.37167798050305384,
+            "0.5": 0.4109391780412829,
+            "0.7": 0.41297435709463864,
+            "1.0": 0.42537939287577087
+          }
+        },
+        "5": {
+          "name": "translation_high_0.5,0.5",
+          "spearman_rho": 0.7380952380952381,
+          "spearman_p": 0.03655276105286081,
+          "tv_means_by_lambda": {
+            "0.0": 0.3636113554987117,
+            "0.1": 0.3652538191367928,
+            "0.2": 0.37254742342207275,
+            "0.3": 0.37135653852971967,
+            "0.4": 0.35211958528290027,
+            "0.5": 0.3924394451761496,
+            "0.7": 0.3962683849064048,
+            "1.0": 0.4172764784852639
+          }
+        },
+        "6": {
+          "name": "rotation_low_0.3,0.7",
+          "spearman_rho": 1.0,
+          "spearman_p": 0.0,
+          "tv_means_by_lambda": {
+            "0.0": 0.10260389024236549,
+            "0.1": 0.16551867778503962,
+            "0.2": 0.16741259905508593,
+            "0.3": 0.22378469733635598,
+            "0.4": 0.2304678238943434,
+            "0.5": 0.2839949351938117,
+            "0.7": 0.3480224566543091,
+            "1.0": 0.45197117431062095
+          }
+        },
+        "7": {
+          "name": "scaling_low_0.3,0.7",
+          "spearman_rho": 1.0,
+          "spearman_p": 0.0,
+          "tv_means_by_lambda": {
+            "0.0": 0.12102062262031221,
+            "0.1": 0.14158132214629973,
+            "0.2": 0.1994415296749156,
+            "0.3": 0.20388548373925347,
+            "0.4": 0.2739022702576471,
+            "0.5": 0.2827440703016886,
+            "0.7": 0.36402048932740805,
+            "1.0": 0.45349844903360736
+          }
+        }
+      }
+    },
+    "degradation": {
+      "stationary_rho": 1.0,
+      "nonstationary_rho": 0.9285714285714287,
+      "rho_degradation": 0.07142857142857129
+    },
+    "effect_size": {
+      "cohens_d_lambda0_vs_1_bc_tv": 4.657771880762967
+    },
+    "permutation_tests": {
+      "lambda0_fisher_combined_p": 0.7568861371597694,
+      "lambda1_fisher_combined_p": 0.0,
+      "lambda0_per_rep_p_values": [
+        0.855,
+        0.86,
+        0.65,
+        0.68,
+        0.11
+      ],
+      "lambda1_per_rep_p_values": [
+        0.005,
+        0.0,
+        0.0,
+        0.02,
+        0.0
+      ]
+    },
+    "frequency_baseline": {
+      "marginal_non_uniformity": 0.224,
+      "tv_marginal_vs_action": {
+        "0": 0.340697896749522,
+        "1": 0.3387690763052209,
+        "2": 0.3141042471042471,
+        "3": 0.34647180043383946
+      },
+      "mean_tv_marginal_vs_action": 0.3350107551482074
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "bias_corrected_TV >= 0.001 at lambda=1 in non-stationary condition across all replications",
+      "pass": true,
+      "bc_tv_at_lambda1": [
+        0.045221553426908034,
+        0.06251951437007991,
+        0.06274183109190135,
+        0.03722938529077441,
+        0.047101385088205994
+      ],
+      "min_bc_tv": 0.03722938529077441
+    },
+    "null_control": {
+      "description": "Fisher combined permutation p > 0.05 at lambda=0 in non-stationary condition",
+      "pass": true,
+      "fisher_combined_p": 0.7568861371597694,
+      "fisher_F": 6.66239401974824,
+      "per_rep_p_values": [
+        0.855,
+        0.86,
+        0.65,
+        0.68,
+        0.11
+      ]
+    },
+    "stationary_replication": {
+      "description": "Stationary condition replicates EXP-FRONTIER-34061241004 baseline (rho >= 0.9)",
+      "pass": true,
+      "spearman_rho": 1.0,
+      "spearman_p_one_sided": 0.0,
+      "tv_means_by_lambda": {
+        "0.0": 0.4181467864197216,
+        "0.1": 0.4931362307552544,
+        "0.2": 0.5622702584729766,
+        "0.3": 0.6254761013000623,
+        "0.4": 0.6982820842115022,
+        "0.5": 0.7559411179500591,
+        "0.7": 0.8520050089878044,
+        "1.0": 0.9520444922830272
+      }
+    },
+    "spearman_test": {
+      "description": "Spearman rho(bias_corrected_TV, lambda) >= 0.5 in non-stationary condition",
+      "pass": true,
+      "rho": 0.9285714285714287,
+      "p_one_sided": 0.00043148409144998836
+    },
+    "degradation_test": {
+      "description": "rho_degradation < 0.4 (stationary rho minus non-stationary rho)",
+      "pass": true,
+      "stationary_rho": 1.0,
+      "nonstationary_rho": 0.9285714285714287,
+      "degradation": 0.07142857142857129
+    },
+    "function_invariance": {
+      "description": "No significant page_type x lambda interaction in non-stationary condition (two-way ANOVA p > 0.05)",
+      "pass": false,
+      "interaction_p": 0.0,
+      "anova_result": {
+        "design": "8 page_types x 8 lambdas x 5 reps = 320 observations",
+        "full_model": {
+          "lambda_effect": {
+            "F": 143.4692,
+            "p_value": 0.0
+          },
+          "page_type_effect": {
+            "F": 125.6312,
+            "p_value": 0.0
+          },
+          "interaction_effect": {
+            "F": 7.5123,
+            "p_value": 0.0
+          },
+          "model_r_squared": 0.8979
+        },
+        "interaction_pass": false
+      }
+    },
+    "cv_check": {
+      "description": "CV across replications <= 0.5 at lambda=1 in non-stationary condition",
+      "pass": true,
+      "cv_lambda1": 0.22130096112405723
+    },
+    "bias_floor_check": {
+      "description": "Bias-corrected TV at lambda=0 <= 0.01 (bias correction sufficient)",
+      "pass": true,
+      "bc_tv_at_lambda0": 0.003919703483414072
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-34773875458/run_execute.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Overall decision: FALSIFIED-IN-SETTING",
+    "Non-stationary Spearman rho(BC_TV, lambda)=0.9286, p_one_sided=0.000431",
+    "Stationary Spearman rho=1.0000",
+    "rho_degradation=0.0714 (threshold: <0.4)",
+    "Positive control (BC_TV >= 0.001 at lambda=1): PASS (min=0.0372)",
+    "Null control (Fisher combined p > 0.05 at lambda=0): PASS (p=0.756886)",
+    "Page-type invariance (ANOVA interaction): FAIL (p=0.0)",
+    "Cohen's d (lambda=0 vs 1, BC TV): 4.6578",
+    "CV at lambda=1 (BC TV): 0.2213 (valid)",
+    "Bias floor (BC TV at lambda=0): 0.0039 (OK)",
+    "Frequency baseline mean TV (marginal vs action-conditional): 0.3350"
+  ],
+  "validity_notes": [
+    "2000 transitions per lambda level in non-stationary condition (~250 per page type x 8 types)",
+    "200 transitions per cell in stationary condition (matching EXP-FRONTIER-34061241004)",
+    "5 replications per cell; Monte Carlo SE ~ sqrt(1/250) ~ 0.02 per page type pooled",
+    "8 page types: 3 primary functions x 2 noise levels + 2 shifted-center variants",
+    "Page types cycle deterministically: type = (transition_index // 250) mod 8",
+    "Independent seeds per cell: func_seed * 100000 + lambda_idx * 1000 + rep_idx * 10 + BASE_SEED",
+    "Bias-corrected TV: observed_TV - perm_mean_TV at lambda=0 (addresses parent audit V2)",
+    "Fisher combined p-values instead of mean-of-p-values (addresses parent audit V8)",
+    "20x20 grid binning for TV on continuous 2D state space",
+    "Heteroscedastic Gaussian noise with state-dependent variance",
+    "Clipping to [0,1] matches parent boundary treatment",
+    "No target leakage: TV computed from empirical action-conditional distributions",
+    "ANOVA uses bias-corrected TV per page type per lambda",
+    "All decisions use frozen decision rules from preregistration"
+  ],
+  "unresolved": [
+    "Whether real Web DOM transitions exhibit translation-like action-dependent structure (this experiment is still synthetic)",
+    "Whether non-stationarity with opposing dynamics (e.g., rotation pushes left, scaling pushes right) would cancel pooled signal",
+    "Whether 250 transitions per page type block is adequate for all page types (some may need more)",
+    "Whether the deterministic cycling regime is representative of real Web page-type switching patterns"
+  ]
+}

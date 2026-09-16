@@ -1,0 +1,20 @@
+{
+  "base_sha": "824c461692ae7ce84e5ffe5627c36c3c494ec71d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T22:34:15.341774+00:00",
+  "experiment_id": "EXP-RUNTIME-34654566605",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does body-only HTTP fingerprint discrimination survive CDN compression (Content-Encoding gzip/br) where response bodies are non-deterministically compressed, causing body hash to vary per request even for identical logical responses?",
+  "lane": "runtime",
+  "origin_github_run_id": "34654566605",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34509593940",
+    "path": "research/experiments/EXP-RUNTIME-34509593940/handoff.json",
+    "sha256": "040d3011db257cc13abf273a424b0537bf4113aba40b9b844c66aa6215605047"
+  },
+  "reason": "pulse",
+  "request_hash": "bb436211b6793a384b900fb8c146a66635fd1491e55734762be0d021844a1d35",
+  "request_id": "be44df9f0ace23edb1cb9d63",
+  "schema_version": 1
+}

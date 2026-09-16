@@ -6,6 +6,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CLAIM_STATUSES = {"HYPOTHESIS", "EXPERIMENTAL", "VALIDATED", "PRODUCT_CORE", "SHIPPED", "REJECTED", "BLOCKED", "MEASUREMENT_INVALID", "SUPERSEDED"}
+CLAIM_STATUS_ALIASES = {
+    "SUPPORTED": "EXPERIMENTAL",
+    "SUPPORTED_BOUNDED": "EXPERIMENTAL",
+}
 AUDIT_STATUSES = {"PASS", "REVISE", "FAIL", "MEASUREMENT_INVALID", "BLOCKED"}
 RESULT_STATUSES = {"COMPLETE", "BLOCKED", "MEASUREMENT_INVALID"}
 RESULT_OUTCOMES = {"SUPPORTS", "FALSIFIES", "MIXED", "INCONCLUSIVE", "NOT_APPLICABLE"}
@@ -41,6 +45,33 @@ def require_list(obj, key, label):
 def require_dict(obj, key, label):
     if not isinstance(obj[key], dict):
         raise ValueError(f"{label} {key} must be an object")
+
+
+def normalize_claim_status(value):
+    if not isinstance(value, str):
+        return value
+    canonical = value.strip().upper().replace("-", "_").replace(" ", "_")
+    if canonical in CLAIM_STATUSES:
+        return canonical
+    return CLAIM_STATUS_ALIASES.get(canonical, value)
+
+
+def normalize_verdict_claim_updates(exp, verdict):
+    changed = False
+    events = verdict.get("claim_updates")
+    if not isinstance(events, list):
+        return verdict
+    for event in events:
+        if not isinstance(event, dict) or "status" not in event:
+            continue
+        normalized = normalize_claim_status(event["status"])
+        if normalized != event["status"]:
+            event["status"] = normalized
+            changed = True
+    if changed:
+        (exp / "verdict.json").write_text(json.dumps(verdict, indent=2) + "\n")
+        print("SPIDER_DIRECTOR_STATUS_NORMALIZED")
+    return verdict
 
 
 def update_failure_state(req, retryable):
@@ -111,6 +142,7 @@ def validate_audit(exp, req):
 
 def validate_verdict_and_handoff(exp, req):
     verdict = json.loads((exp / "verdict.json").read_text())
+    verdict = normalize_verdict_claim_updates(exp, verdict)
     require_identity(verdict, req, "verdict")
     require_keys(verdict, ["decision", "claim_updates", "product_action", "promote_to_product", "continue", "next_question", "reason", "evidence_refs"], "verdict")
     if not isinstance(verdict["claim_updates"], list):

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34956989900",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+  "why_next": "This experiment proved that denominator choice (elements_with_bbox vs total_dom) does NOT resolve ordering sensitivity — the issue is two-factor: denominator variation AND ROLE_MAP-dependent count inflation. The ROLE_MAP ambiguity ('a'→'link') inflates counts differentially (cart +100%, detail +150%, listing +33%) and is the dominant driver of ordering reversal. The denominator change produces identical ordering for a given ROLE_MAP (audit VF-DENOMINATOR-NEAR-COLLINEARITY). Therefore the next orthogonal question must address the root causes: (1) resolve the canonical ROLE_MAP definition, and/or (2) fix the sample truncation (first-20 cap) via runtime substrate repair. Both require addressing the runtime lane's MEASURE_JS locatableSample cap before further metric validation is meaningful.",
+  "carry_forward": {
+    "established": [
+      "elements_with_bbox denominator does NOT resolve ordering sensitivity. Ordering under elements_with_bbox fails listing>detail>cart in both ROLE_MAP variants on this single Magento site (with_map: cart>listing>detail; no_map: listing>cart>detail). H1 decision_rule fails => FALSIFIED-IN-SETTING. Audit recomputed metrics match producer.",
+      "Ordering sensitivity is a two-factor problem: (1) denominator variation (partially addressed by elements_with_bbox) and (2) ROLE_MAP-dependent count inflation (NOT addressed by denominator choice). The 'a'→'link' mapping inflates cart +100%, detail +150%, listing +33%, driving ordering reversal irrespective of denominator.",
+      "Denominator change produces identical ordering for a given ROLE_MAP: with_map ordering is cart>listing>detail for BOTH total_dom and elements_with_bbox; no_map ordering is listing>cart>detail for BOTH. Denominator is not the ordering driver (audit VF-DENOMINATOR-NEAR-COLLINEARITY).",
+      "Discrimination ratio remains >1 under elements_with_bbox (42.75 with_map, 632.93 no_map). The metric still distinguishes page types; the issue is ordering direction, not discrimination power.",
+      "Cart pseudoreplication (2 identical entries, n=1 distinct after dedup) means cart within-type variance is undefined. Cart density cannot be statistically validated against listing/detail.",
+      "Tightened counts from truncated first-20 sample are proportional estimates (listing 4.1x undercount, detail 1.6x, cart 1.05x). Extrapolated full-DOM estimates suggest listing>detail>cart but are unmeasured with elements_with_bbox denominator."
+    ],
+    "rejected": [
+      "Hypothesis that elements_with_bbox resolves denominator sensitivity. Falsified in both ROLE_MAP variants (H1 fails). Denominator choice does not determine ordering; ROLE_MAP variant does.",
+      "Hypothesis that ordering reversal under tightened definition is an artifact of total_dom denominator variation alone. While total_dom variation contributes, the dominant driver is ROLE_MAP-dependent count inflation, which persists regardless of denominator."
+    ],
+    "unknown": [
+      "Canonical ROLE_MAP: does <a> with implicit link role count as tightened 'link'? The mapping 'a'→'link' inflates counts 33-150% differentially. Without mapping, ordering partially matches expectations (listing>cart>detail) but cart remains above detail.",
+      "True tightened interactive density under full DOM enumeration (not truncated to 20). Extrapolated proportional estimates suggest listing>detail>cart but unmeasured; requires runtime fix to MEASURE_JS locatableSample cap.",
+      "Whether any denominator (elements_with_bbox or other) can be invariant to both page-type DOM variation AND ROLE_MAP variant — current data shows no denominator resolves ROLE_MAP sensitivity.",
+      "Cross-site generalization of density metric beyond single Magento site (C-CROSSSITE).",
+      "LLM inheritance claim C-LLM-INHERIT not tested by offline density computation.",
+      "Cart true within-type variance — requires multiple distinct cart pages, not duplicate measurement of same URL."
+    ],
+    "do_not_assume": [
+      "Do not assume elements_with_bbox resolves the denominator sensitivity confound — it does not. The ordering problem is two-factor and denominator choice addresses only one factor.",
+      "Do not assume the ordering is stable across ROLE_MAP variants — it is highly sensitive (with_map reverses ordering relative to no_map).",
+      "Do not assume discrimination ratio >1 implies metric validity — discrimination can coexist with incorrect ordering.",
+      "Do not assume extrapolated full-DOM ordering (listing>detail>cart) is confirmed — it was measured only under the original DEF-FALLBACK-INTERACTIVE definition, not under tightened role-only definition.",
+      "Do not treat this experiment as closing the interactive fraction metric approach — only this specific denominator (elements_with_bbox) is falsified, and only under truncated-first-20 sampling from a single site.",
+      "Do not assume the ROLE_MAP ('a'→'link', 'input'→'textbox') is correct or incorrect — it is an undocumented deviation from frozen spec that must be resolved before further metric validation.",
+      "Do not extrapolate truncated-sample density values to general metric properties without acknowledging the 4.1x (listing), 1.6x (detail), 1.05x (cart) undercount factors."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json sha256:b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py sha256:84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+    "research/experiments/EXP-INTEL-34956989900/result.json",
+    "research/experiments/EXP-INTEL-34956989900/audit.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.hypothesis_tests.H1_ordering.pass=false",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering=[cart,product_listing,detail]",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_no_map.ordering=[product_listing,cart,detail]",
+    "research/experiments/EXP-INTEL-34956989900/audit.json claim_ceiling bounded FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-INTEL-34956989900/audit.json validity_findings[2] VF-ROLE-MAPPING-DEVIATION differential inflation 33-150%",
+    "research/experiments/EXP-INTEL-34956989900/audit.json baseline_findings[0] denominator near-collinearity identical ordering per ROLE_MAP",
+    "research/experiments/EXP-INTEL-34956989900/report.md Table: ordering identical between denominators for given ROLE_MAP",
+    "research/experiments/EXP-INTEL-34956989900/report.md interpretation: two-factor sensitivity"
+  ],
+  "recommended_action": "Two parallel tracks: (1) Runtime lane: fix MEASURE_JS locatableSample cap (currently truncated to 20 of 82/32/21 locatable elements) to enable full DOM enumeration. This eliminates the truncation confound and allows measuring true tightened density. (2) Intel/design: resolve the canonical ROLE_MAP definition — decide whether <a> elements count as 'link' in the tightened interactive definition. This is a frozen spec decision, not a measurement question. Once both are resolved, retest ordering under tightened definition with full DOM enumeration and the canonical ROLE_MAP. Do not test further denominator variants until ROLE_MAP and truncation are resolved — denominator is not the ordering driver."
+}

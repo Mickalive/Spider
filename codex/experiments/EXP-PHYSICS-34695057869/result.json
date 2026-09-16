@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34695057869",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "positive_control_pmi_test": 0.43008151803657524,
+    "positive_control_perm_p": 0.000999000999000999,
+    "positive_control_passes": false,
+    "null_control_perm_p": 0.7622377622377622,
+    "null_control_passes": true,
+    "primary_condition": false,
+    "sites_passing_primary": 0,
+    "sites_total": 3,
+    "primary_threshold": 2,
+    "data_sufficient": true,
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_alpha": 0.016666666666666666,
+    "bonferroni_comparisons": 3,
+    "per_site_results": {
+      "dashboard": {
+        "resp_vs_url_bits": 0.0341596688872338,
+        "perm_p_response_bonf": 1.0,
+        "passes": false
+      },
+      "multistep_form": {
+        "resp_vs_url_bits": 0.0,
+        "perm_p_response_bonf": 1.0,
+        "passes": false
+      },
+      "wizard": {
+        "resp_vs_url_bits": 0.0,
+        "perm_p_response_bonf": 1.0,
+        "passes": false
+      }
+    },
+    "site_results": {
+      "dashboard": {
+        "response_pmi": 0.0341596688872338,
+        "request_pmi": 1.1653013983812563,
+        "url_pmi": 0.0,
+        "resp_vs_url_bits": 0.0341596688872338,
+        "req_vs_url_bits": 1.1653013983812563,
+        "resp_vs_req_bits": -1.1311417294940225,
+        "n_within_url": 320,
+        "n_test": 64,
+        "n_train": 256,
+        "unique_states_resp": 61,
+        "unique_states_req": 5,
+        "unique_states_url": 1,
+        "unique_sa_pairs_resp": 63,
+        "unique_sa_pairs_req": 18,
+        "perm_p_response": 0.6293706293706294,
+        "perm_p_response_bonf": 1.0,
+        "perm_p_request": 0.000999000999000999,
+        "effect_d_response": 0.5295068663766249,
+        "effect_d_request": 16.9938182610553
+      },
+      "multistep_form": {
+        "response_pmi": 0.0,
+        "request_pmi": 0.0,
+        "url_pmi": 0.0,
+        "resp_vs_url_bits": 0.0,
+        "req_vs_url_bits": 0.0,
+        "resp_vs_req_bits": 0.0,
+        "n_within_url": 152,
+        "n_test": 31,
+        "n_train": 121,
+        "unique_states_resp": 11,
+        "unique_states_req": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_resp": 11,
+        "unique_sa_pairs_req": 4,
+        "perm_p_response": 1.0,
+        "perm_p_response_bonf": 1.0,
+        "perm_p_request": 1.0,
+        "effect_d_response": 0.0,
+        "effect_d_request": 0.0
+      },
+      "wizard": {
+        "response_pmi": 0.0,
+        "request_pmi": 0.0,
+        "url_pmi": 0.0,
+        "resp_vs_url_bits": 0.0,
+        "req_vs_url_bits": 0.0,
+        "resp_vs_req_bits": 0.0,
+        "n_within_url": 180,
+        "n_test": 36,
+        "n_train": 144,
+        "unique_states_resp": 10,
+        "unique_states_req": 4,
+        "unique_states_url": 1,
+        "unique_sa_pairs_resp": 10,
+        "unique_sa_pairs_req": 4,
+        "perm_p_response": 1.0,
+        "perm_p_response_bonf": 1.0,
+        "perm_p_request": 1.0,
+        "effect_d_response": 0.0,
+        "effect_d_request": 0.0
+      }
+    },
+    "alpha_sensitivity": {
+      "dashboard": {
+        "alpha_0.0": 0.09375,
+        "alpha_0.5": 0.04953007814753613,
+        "alpha_1.0": 0.0341596688872338,
+        "alpha_2.0": 0.021189747034769925
+      },
+      "multistep_form": {
+        "alpha_0.0": 0.0,
+        "alpha_0.5": 0.0,
+        "alpha_1.0": 0.0,
+        "alpha_2.0": 0.0
+      },
+      "wizard": {
+        "alpha_0.0": 0.0,
+        "alpha_0.5": 0.0,
+        "alpha_1.0": 0.0,
+        "alpha_2.0": 0.0
+      }
+    },
+    "tautology_check": {
+      "dashboard": {
+        "mi_action_response_body": 1.9402087356672444,
+        "response_pmi": 0.0341596688872338,
+        "fraction_tautological": 56.79823016060738
+      }
+    },
+    "quality_stats": {
+      "synthetic": {
+        "total_requests": 250,
+        "with_body": 250,
+        "capture_rate": 1.0
+      },
+      "multistep_form": {
+        "total_requests": 267,
+        "with_body": 181,
+        "capture_rate": 0.6779026217228464
+      },
+      "dashboard": {
+        "total_requests": 320,
+        "with_body": 320,
+        "capture_rate": 1.0
+      },
+      "wizard": {
+        "total_requests": 360,
+        "with_body": 222,
+        "capture_rate": 0.6166666666666667
+      }
+    }
+  },
+  "controls": {
+    "positive_control_synthetic_response_side": {
+      "description": "Synthetic SPA with deterministic response-side variation (8 states, 4 actions, state-specific response bodies)",
+      "expected": "Response-side PMI >= 0.5 bits, permutation p < 0.001 on 80/20 test split",
+      "observed_pmi": 0.43008151803657524,
+      "observed_perm_p": 0.000999000999000999,
+      "result": "FAIL"
+    },
+    "null_control_shuffled_real_labels": {
+      "description": "Shuffled action labels on real SPA response-side data (dashboard, multistep_form, wizard)",
+      "expected": "Permutation p > 0.01",
+      "observed_perm_p": 0.7622377622377622,
+      "result": "PASS"
+    },
+    "data_sufficiency": {
+      "description": "Each site has n_test >= 30 on held-out test set after 80/20 temporal split",
+      "expected": "n_test >= 30 per site",
+      "per_site_n_test": {
+        "dashboard": 64,
+        "multistep_form": 31,
+        "wizard": 36
+      },
+      "result": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/raw_network_captures_response_side.json",
+      "sha256": "e5b8ea8a513a449225ffec1de884e856d725ba3b4b579d8c22b7ba9b2e71550a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-34695057869/pmi_results_response_side.json",
+      "sha256": "c055575ddbfc906f8a0eeb96d0f3a66b06ddb997f45853e97ef7b72e44a7b463",
+      "role": "derived"
+    },
+    {
+      "path": "research/physics/network_requests/capture_response_side.js",
+      "sha256": "e117cf928b08e3e8d6aff7dfa3246b367edd84e0d953f5117b9201f9e113eaba",
+      "role": "code"
+    },
+    {
+      "path": "research/physics/network_requests/pmi_response_side.py",
+      "sha256": "6b2112d77f29d036c258b75a8bd9795d3722109c7c7b7532521ffe46b779c6bf",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Response-side PMI on dashboard: 0.034 bits (vs request-side 1.165 bits). Response-side captures 61 unique states but provides negligible predictive PMI. Dashboard response bodies are strongly determined by action label (I(action; response_body) = 1.94 bits), yet this does not translate into predictive PMI because the response-side state representation (SHA-256 hash aggregation) collapses the distinct response bodies into too few distinguishable bins on the test set.",
+    "Response-side PMI on multistep_form: 0.0 bits. Response bodies DO vary by step (11 unique response-side states captured), but the variation provides zero PMI — the step-specific response information does not predict next-state transitions beyond what URL-only provides. Request-side PMI is also 0.0 bits, confirming both representations fail equally.",
+    "Response-side PMI on wizard: 0.0 bits. Same pattern as multistep_form — 10 unique response-side states captured but zero PMI. Request-side also 0.0 bits.",
+    "Synthetic positive control PMI: 0.430 bits on test split (below 0.5 threshold). 54/250 synthetic transitions (21.6%) have empty response body hashes (SHA-256 of empty string = e3b0c44298fc1c14), indicating Playwright response.body() returned empty buffers for many API responses. This degrades the positive control below threshold. Permutation p=0.001 passes, confirming the pipeline can detect structure in the non-empty subset.",
+    "Null control passes (p=0.762): shuffled action labels on real SPA data produce PMI indistinguishable from observed, confirming no false-positive pipeline bias.",
+    "Alpha sensitivity on dashboard: PMI ranges 0.021-0.094 bits across alpha 0.0-2.0. Even at alpha=0.0 (no smoothing), dashboard response-side PMI is only 0.094 bits — well below the 0.1 threshold. The result is not a smoothing artifact.",
+    "Dashboard tautology check: I(action_label; response_body_hash) = 1.94 bits, far exceeding response-side PMI of 0.034 bits. The fraction_tautological metric (56.8) exceeds 1.0 because MI and PMI measure different quantities — the MI between action and response body is large because response bodies are deterministic functions of action, but the PMI (which measures predictive power of response state for next-state transitions) is small because the state discretization loses the fine-grained response variation.",
+    "Response body capture quality: dashboard 100%, multistep_form 67.8%, wizard 61.7%. The multistep_form and wizard capture rates are below the 90% quality threshold. This is a validity limitation but does not constitute measurement invalidation — the captured subset is sufficient for PMI computation (n_test >= 30 for all sites)."
+  ],
+  "validity_notes": [
+    "POSITIVITY CONTROL FAILURE: Synthetic positive control PMI = 0.43 bits < 0.5 threshold. Root cause: 21.6% of synthetic SPA API responses captured with empty body hashes (Playwright response.body() returned empty buffers). The synthetic SPA server correctly returns JSON bodies per spec, but Playwright route interception fidelity is insufficient for 100% capture on the synthetic server. The non-empty subset still shows significant structure (p=0.001), confirming the pipeline works when data is captured. However, per frozen decision rule (prereg 11.2 item 3), positive control failure independently triggers FALSIFIED-IN-SETTING.",
+    "RESPONSE BODY CAPTURE QUALITY: multistep_form capture rate 67.8%, wizard 61.7% (below 90% quality threshold). Missing captures likely due to streaming responses or timing issues with Playwright response.body(). The captured subset is sufficient for analysis but represents a biased sample of transitions.",
+    "LOCALLY-HOSTED SPAs NOT PRODUCTION: Same 3 Express servers on localhost:3848-3850 as parent. All claims bounded to locally-hosted simulation, not production SPAs (parent audit finding sampling_local_not_production persists).",
+    "RESPONSE-SIDE STATE DISCRETIZATION COARSENESS: SHA-256(content_type + response_body_hash[:16] + status_code) aggregates per-request response hashes into a single transition hash. For dashboard, 61 unique response-side states on test set, but PMI is only 0.034 bits — the discretization loses predictive structure. Finer-grained representation (e.g., retaining individual request hashes) may yield different results.",
+    "TAUTOLOGICAL DASHBOARD GAIN PERSISTS: Dashboard response bodies are deterministic functions of action (I(action; response) = 1.94 bits), yet response-side PMI is only 0.034 bits. The large MI between action and response body does not translate to predictive PMI because response state does not predict next-state transitions — it only confirms the current action was taken.",
+    "WIZARD TEST SIZEadequate (n_test=36 >= 30), unlike parent which violated temporal split. The 80/20 split is valid for wizard in this experiment."
+  ],
+  "unresolved": [
+    "Why does Playwright response.body() return empty buffers for 21.6% of synthetic SPA API responses despite the server correctly returning JSON? Is this a Playwright version-specific bug, a timing issue with route interception, or a response consumption race condition?",
+    "Would finer-grained response-side state discretization (e.g., retaining per-request response hashes as separate state dimensions rather than aggregating into a single hash) reveal predictive PMI that the current SHA-256 aggregation obscures?",
+    "On multistep_form and wizard, response bodies vary by step (11 and 10 unique states captured respectively) but provide 0.0 bits PMI. Does this mean step-specific response content genuinely does not predict transitions, or does the state discretization collapse meaningful variation? The zero PMI with 11 unique states suggests the former.",
+    "Would response-side signals provide predictive PMI on production SPAs with richer, non-deterministic server responses (e.g., API responses that vary by user data, server-side state, or external dependencies)? The locally-hosted SPAs have deterministic server logic.",
+    "The tautology check fraction (56.8) exceeds 1.0 because MI and PMI measure different quantities. A proper tautology metric should compare I(action; response) to the total response-side PMI using compatible units. What fraction of response-side PMI is genuinely attributable to orthogonal environmental dynamics versus action→response causality?",
+    "Does the response-side PMI failure on these SPAs indicate that network-request-level signals (both request-side and response-side) are fundamentally insufficient for state representation on session-tracked SPAs, or is the issue specific to these simple Express servers with minimal API surfaces?"
+  ]
+}

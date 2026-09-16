@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "lane": "physics",
+  "github_run_id": "34719136202",
+  "github_run_url": null,
+  "commits": {
+    "execute_sha": "45789e94b568897536e5d8fb64ca1cdd3ce4aa46",
+    "branch": "lab2/physics",
+    "pre_execute_sha": "78825171f94e9ec870c59ba9c914600988e89fe9",
+    "base_sha": "ca4a1560fc3cda176e3dc5f521802481128d9918"
+  },
+  "frozen_inputs": {
+    "request.json_hash": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
+    "spec.json_hash": "2a75ed3fed9f3d58a6b8f155f8c1591027d0c953fbb806a39db2f571721b7937",
+    "prereg.md_hash": "698e906b25703a1e560bbd27f76fccdc5cd6e517aced9f3641704101434b0cd2"
+  },
+  "code": {
+    "capture_script": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/capture_dom_features.js",
+      "sha256": "c5892c8092ab6e79611c1e86395f5fc405578caca1ddbd3a0a76397f807b79b8",
+      "description": "Playwright DOM feature capture script. Starts 4 SPA servers, navigates to each, performs interactions, extracts DOM features via page.evaluate(domExtractionFn) at each transition point."
+    },
+    "pmi_script": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_dom_features.py",
+      "sha256": "150bd0fd5d6e0bcc3a2a9e8da2bbc50eaf37ada5a28e7df97691e2808637f3ab",
+      "description": "Python PMI computation. Loads raw DOM captures, fits quantile bin edges on train (80%), computes DOM-feature PMI, permutation tests (1000), alpha sensitivity, tautology check, decision evaluation."
+    },
+    "spa_servers": {
+      "synthetic": "research/physics/network_requests/synthetic_spa_server.js (port 3847)",
+      "multistep_form": "research/physics/network_requests/multistep_form_server.js (port 3848)",
+      "dashboard": "research/physics/network_requests/dashboard_spa_server.js (port 3849)",
+      "wizard": "research/physics/network_requests/wizard_spa_server.js (port 3850)"
+    },
+    "parent_experiment_infrastructure": [
+      "research/physics/network_requests/capture_response_side.js (EXP-PHYSICS-34695057869)",
+      "research/physics/network_requests/pmi_response_side.py (EXP-PHYSICS-34695057869)",
+      "research/physics/dom_features/dom_features_experiment.py (EXP-PHYSICS-34524411213)"
+    ]
+  },
+  "datasets": {
+    "raw_captures": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/raw_dom_captures.json",
+      "sha256": "85efd4675f1fcbe841200cbd406338f1b81aaf923e9f2005982f92ee24a7d7a1",
+      "n_transitions": 804,
+      "per_site": {
+        "synthetic": 250,
+        "multistep_form": 200,
+        "dashboard": 200,
+        "wizard": 154
+      }
+    },
+    "pmi_results": {
+      "path": "research/experiments/EXP-PHYSICS-34719136202/pmi_results_dom_features.json",
+      "sha256": "1f4de120dc60e606dec4213718a5beec22368751f7b0abecba4254eb05679b29"
+    }
+  },
+  "environment": {
+    "os": "linux",
+    "node_version": "v22.23.2",
+    "python_version": "3.x",
+    "playwright_version": "1.63.0",
+    "numpy_version": "2.5.3",
+    "chromium_version": "153.0.8010.12 (playwright v1243)",
+    "seed": 42,
+    "python_hashseed": "0",
+    "n_permutations": 1000,
+    "smoothing_alpha": 1.0,
+    "bonferroni_comparisons": 3,
+    "quantile_bins": 5,
+    "temporal_split": "80/20"
+  },
+  "reproduction": {
+    "commands": [
+      "cd research/physics/network_requests && NODE_PATH=node_modules node ../../experiments/EXP-PHYSICS-34719136202/capture_dom_features.js",
+      "cd research/experiments/EXP-PHYSICS-34719136202 && PYTHONHASHSEED=0 python3 pmi_dom_features.py"
+    ],
+    "notes": [
+      "Playwright browsers must be installed: npx playwright install chromium (from research/physics/network_requests/)",
+      "numpy must be installed: pip install numpy",
+      "Servers start automatically in capture_dom_features.js on ports 3847-3850",
+      "Results are deterministic given seed=42 and PYTHONHASHSEED=0"
+    ]
+  }
+}

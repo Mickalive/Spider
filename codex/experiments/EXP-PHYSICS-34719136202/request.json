@@ -1,0 +1,20 @@
+{
+  "base_sha": "ca4a1560fc3cda176e3dc5f521802481128d9918",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-12T21:09:29.905488+00:00",
+  "experiment_id": "EXP-PHYSICS-34719136202",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Do DOM-based state representation (rendered page structural features: element count, tree depth, interactive density, visible text content, attribute patterns) provide predictive PMI on locally-hosted SPAs where both request-side and response-side network-request signals fail (multistep_form, wizard) or are tautological (dashboard)?",
+  "lane": "physics",
+  "origin_github_run_id": "34719136202",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-34695057869",
+    "path": "research/experiments/EXP-PHYSICS-34695057869/handoff.json",
+    "sha256": "e0f848d8781c29bbfb534b2da14aa65b6572a43eb6c74c8d741699598a1082f7"
+  },
+  "reason": "continuation",
+  "request_hash": "4ad0708bc29db5eb29491e170d907d8f5db0b322950da794c5e58e7565f96982",
+  "request_id": "7965e2c627fd1e6e80576bde",
+  "schema_version": 1
+}

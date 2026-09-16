@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34607693437",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement invalid — viewport intersection captures only Magento 2 navigation chrome (constant 108 DOM / 8 interactive across all page types), yield_locatable values meaningless (1.3-5.14 with mixed element definitions), and the frozen script does not reproduce the canonical raw results (artifact duality: 108 vs 8 dataset). No valid shopping locatable yield can be claimed; 812-task corpus viability for C-CROSSSITE remains UNKNOWN."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement invalid — denominator resolution blocked by viewport structural failure. Forensic analysis INCONCLUSIVE (Method1 150 is heuristic INPUT, not traceable to DOM/AX counting). Fallback definition DEF-FALLBACK-INTERACTIVE frozen but untestable with current viewport measurement. No valid yield metric to inform LLM inheritance evaluation."
+    }
+  ],
+  "product_action": "BLOCKED — Do not use 812-task corpus for yield claims. The viewport measurement approach (intersection with threshold 0.5 on 1280x720 viewport) captures only fixed navigation chrome, not page content. Product lane must either (a) redesign the observation pipeline to capture page content elements via full-page DOM enumeration or scroll-cumulative methods, (b) use CDP yield (~4-8%) as a conservative floor with explicit caveat that it measures chrome ratio not interactive yield, or (c) abandon yield_locatable as a metric and define an alternative fragment quality measure.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can full-page accessibility tree enumeration (without viewport chrome filtering) produce a stable and meaningful yield metric for SPIDER fragment model capture, and what fraction of page elements does the fragment model actually retain?",
+  "reason": "The experiment has three structural measurement failures that prevent valid yield claims: (1) Counting bug — yield_locatable = viewport_elements(all DOM 108) / locatable_elements(interactive 21-82) produces values >1.0 on all tasks, which is mathematically meaningless since viewport should be a subset of locatable. (2) Viewport chrome anomaly — exactly 108 DOM elements (then 8 interactive) intersect the viewport across ALL page types (product_listing, detail, cart, checkout_proxy) with stdev=0.0; viewport samples show ONLY Magento 2 header elements (HEADER, DIV, UL, LI, A, SPAN) across all tasks. The measurement captures fixed navigation chrome, not page content. H6 falsified. (3) Artifact duality — two contradictory raw result files exist from the same frozen_seed: exp346_raw_results.json (108 dataset, used in result.json metrics) and artifacts/exp346_raw_results.json (8 dataset, produced by current frozen script). The frozen script does not reproduce the canonical metrics. Additionally: forensic analysis INCONCLUSIVE (Method1 150 is heuristic INPUT), checkout tasks use cart proxy (checkout/cart/ not checkout/ which redirects to port 7770), sampling not as spec (7 tasks not 8, cart n=1, no true checkout, 404 page included), GitLab/Reddit measured in artifacts (yield 0.888-1.0) but excluded from metrics. Per the null control (forensic inconclusive + fallback yield CV 0.48 > 0.2), the scientific outcome is MIXED (definition_ambiguous), but the measurement failures take precedence as MEASUREMENT_INVALID because no valid yield value exists in the packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34607693437/result.json — status MEASUREMENT_INVALID, outcome FALSIFIES, viewport_elements_mean 108.0 stdev 0.0, yield_locatable_raw_mean 3.5447 all_above_one true, counting_bug documented, viewport_anomaly persists",
+    "research/experiments/EXP-INTEL-34607693437/audit.json — status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling no valid shopping locatable yield, 9 required_fixes, VF-COUNTING-BUG-INCONSISTENT-ARTIFACTS critical, VF-VIEWPORT-CONSTANT-PERSISTS critical",
+    "research/experiments/EXP-INTEL-34607693437/exp346_raw_results.json — 108 dataset: viewport 108 constant, yield_locatable 1.31-5.14, all tasks navigation header sample",
+    "research/experiments/EXP-INTEL-34607693437/artifacts/exp346_raw_results.json — 8 dataset: viewport 8 constant, yield_locatable 0.24-0.57, also constant viewport",
+    "research/experiments/EXP-INTEL-34607693437/method1_trace.json — trace_result INCONCLUSIVE, 150 is heuristic INPUT not output of element-counting algorithm",
+    "research/experiments/EXP-INTEL-34607693437/frozen_definition.json — DEF-FALLBACK-INTERACTIVE frozen, Definition 2 interactive-only",
+    "research/experiments/EXP-INTEL-34607693437/measure_yield_exp346.py — frozen script, produces 8 dataset not 108, viewport counts interactive only",
+    "research/experiments/EXP-INTEL-34607693437/viewport_sample_*.json — all tasks show identical Magento 2 navigation header elements",
+    "research/experiments/EXP-INTEL-34607693437/spec.json — claim_ids C-CROSSSITE C-LLM-INHERIT, decision_rule MIXED if inconclusive+unstable",
+    "research/experiments/EXP-INTEL-34607693437/provenance.json — docker_image_digest not_recorded, script_exit_code 66, provenance gaps"
+  ]
+}

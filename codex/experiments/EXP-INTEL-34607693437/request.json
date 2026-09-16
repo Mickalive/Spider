@@ -1,0 +1,20 @@
+{
+  "base_sha": "24630358d6943aa4b5677166f3631e341edd8494",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-11T14:01:48.329160+00:00",
+  "experiment_id": "EXP-INTEL-34607693437",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "What is the canonical definition of 'locatable elements' for SPIDER fragment yield, and does yield_locatable stabilize across randomized shopping page types (including checkout) under that frozen definition?",
+  "lane": "intel",
+  "origin_github_run_id": "34607693437",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34546944360",
+    "path": "research/experiments/EXP-INTEL-34546944360/handoff.json",
+    "sha256": "f7e8d8e37d3fa48c33a23a40cf5b6c7de0f6016fb804cc4aa809d0ea4f492486"
+  },
+  "reason": "pulse",
+  "request_hash": "d1a2a38e05a7cb02c5afcdc30dd8da46d5fe3656fc3747718d66b621ffd47be2",
+  "request_id": "fc12583614c0a9b6fc1b8808",
+  "schema_version": 1
+}
