@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34956989900",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "density_bbox_with_map": {
+      "per_task": {
+        "listing_clothing-shoes-jewelry": {
+          "tightened_locatable_count": 8,
+          "elements_with_bbox": 1550,
+          "total_dom_elements": 1696,
+          "density_bbox": 0.005161290322580645,
+          "fraction_total": 0.0047169811320754715
+        },
+        "listing_beauty-personal-care": {
+          "tightened_locatable_count": 8,
+          "elements_with_bbox": 1560,
+          "total_dom_elements": 1707,
+          "density_bbox": 0.005128205128205128,
+          "fraction_total": 0.0046865846514352666
+        },
+        "listing_electronics": {
+          "tightened_locatable_count": 8,
+          "elements_with_bbox": 1564,
+          "total_dom_elements": 1712,
+          "density_bbox": 0.005115089514066496,
+          "fraction_total": 0.004672897196261682
+        },
+        "detail_camera": {
+          "tightened_locatable_count": 5,
+          "elements_with_bbox": 1215,
+          "total_dom_elements": 1395,
+          "density_bbox": 0.00411522633744856,
+          "fraction_total": 0.0035842293906810036
+        },
+        "detail_vr_bag": {
+          "tightened_locatable_count": 5,
+          "elements_with_bbox": 1149,
+          "total_dom_elements": 1310,
+          "density_bbox": 0.004351610095735422,
+          "fraction_total": 0.003816793893129771
+        },
+        "detail_pet_camera": {
+          "tightened_locatable_count": 5,
+          "elements_with_bbox": 1143,
+          "total_dom_elements": 1304,
+          "density_bbox": 0.004374453193350831,
+          "fraction_total": 0.003834355828220859
+        },
+        "cart_1": {
+          "tightened_locatable_count": 6,
+          "elements_with_bbox": 1070,
+          "total_dom_elements": 1136,
+          "density_bbox": 0.005607476635514018,
+          "fraction_total": 0.00528169014084507
+        }
+      },
+      "per_type": {
+        "product_listing": {
+          "n_dedup": 3,
+          "mean_density_bbox": 0.005134861655017423,
+          "cv_density_bbox": 0.004608785045881535,
+          "values_density_bbox": [0.005161290322580645, 0.005128205128205128, 0.005115089514066496]
+        },
+        "detail": {
+          "n_dedup": 3,
+          "mean_density_bbox": 0.004280430442178271,
+          "cv_density_bbox": 0.03352797238652617,
+          "values_density_bbox": [0.00411522633744856, 0.004351610095735422, 0.004374453193350831]
+        },
+        "cart": {
+          "n_dedup": 1,
+          "mean_density_bbox": 0.005607476635514018,
+          "cv_density_bbox": 0.0,
+          "values_density_bbox": [0.005607476635514018]
+        }
+      },
+      "ordering": ["cart", "product_listing", "detail"],
+      "ordering_values": {
+        "cart": 0.00560748,
+        "product_listing": 0.00513486,
+        "detail": 0.00428043
+      },
+      "between_type_variance": 0.000000452412,
+      "within_type_variance": 0.000000010583,
+      "discrimination_ratio": 42.75
+    },
+    "density_bbox_no_map": {
+      "per_task": {
+        "listing_clothing-shoes-jewelry": {
+          "tightened_locatable_count": 6,
+          "elements_with_bbox": 1550,
+          "total_dom_elements": 1696,
+          "density_bbox": 0.003870967741935484,
+          "fraction_total": 0.0035377358490566037
+        },
+        "listing_beauty-personal-care": {
+          "tightened_locatable_count": 6,
+          "elements_with_bbox": 1560,
+          "total_dom_elements": 1707,
+          "density_bbox": 0.003846153846153846,
+          "fraction_total": 0.003515242949409462
+        },
+        "listing_electronics": {
+          "tightened_locatable_count": 6,
+          "elements_with_bbox": 1564,
+          "total_dom_elements": 1712,
+          "density_bbox": 0.0038363165599098464,
+          "fraction_total": 0.003504673992697458
+        },
+        "detail_camera": {
+          "tightened_locatable_count": 2,
+          "elements_with_bbox": 1215,
+          "total_dom_elements": 1395,
+          "density_bbox": 0.001646090534979424,
+          "fraction_total": 0.0014336917562724014
+        },
+        "detail_vr_bag": {
+          "tightened_locatable_count": 2,
+          "elements_with_bbox": 1149,
+          "total_dom_elements": 1310,
+          "density_bbox": 0.0017406440382941688,
+          "fraction_total": 0.0015267175572519084
+        },
+        "detail_pet_camera": {
+          "tightened_locatable_count": 2,
+          "elements_with_bbox": 1143,
+          "total_dom_elements": 1304,
+          "density_bbox": 0.0017497812773490813,
+          "fraction_total": 0.0015337423312883435
+        },
+        "cart_1": {
+          "tightened_locatable_count": 3,
+          "elements_with_bbox": 1070,
+          "total_dom_elements": 1136,
+          "density_bbox": 0.0028037383177570094,
+          "fraction_total": 0.002640845070422535
+        }
+      },
+      "per_type": {
+        "product_listing": {
+          "n_dedup": 3,
+          "mean_density_bbox": 0.0038511457460000993,
+          "cv_density_bbox": 0.004608785045881535,
+          "values_density_bbox": [0.003870967741935484, 0.003846153846153846, 0.0038363165599098464]
+        },
+        "detail": {
+          "n_dedup": 3,
+          "mean_density_bbox": 0.001712171950207558,
+          "cv_density_bbox": 0.03352797238652617,
+          "values_density_bbox": [0.001646090534979424, 0.0017406440382941688, 0.0017497812773490813]
+        },
+        "cart": {
+          "n_dedup": 1,
+          "mean_density_bbox": 0.0028037383177570094,
+          "cv_density_bbox": 0.0,
+          "values_density_bbox": [0.0028037383177570094]
+        }
+      },
+      "ordering": ["product_listing", "cart", "detail"],
+      "ordering_values": {
+        "product_listing": 0.00385115,
+        "cart": 0.00280374,
+        "detail": 0.00171217
+      },
+      "between_type_variance": 0.000001143965,
+      "within_type_variance": 0.000000001807,
+      "discrimination_ratio": 632.93
+    },
+    "fraction_total_with_map": {
+      "ordering": ["cart", "product_listing", "detail"],
+      "ordering_values": {
+        "cart": 0.00528169,
+        "product_listing": 0.00469215,
+        "detail": 0.00374513
+      },
+      "between_type_variance": 0.000000600907,
+      "within_type_variance": 0.000000010001,
+      "discrimination_ratio": 60.08
+    },
+    "fraction_total_no_map": {
+      "ordering": ["product_listing", "cart", "detail"],
+      "ordering_values": {
+        "product_listing": 0.00351922,
+        "cart": 0.00264085,
+        "detail": 0.00149805
+      },
+      "between_type_variance": 0.000001027007,
+      "within_type_variance": 0.000000001703,
+      "discrimination_ratio": 603.19
+    },
+    "hypothesis_tests": {
+      "H1_ordering": {
+        "description": "Element density ordering listing > detail > cart holds under elements_with_bbox in at least one ROLE_MAP variant",
+        "pass": false,
+        "with_map_ordering": ["cart", "product_listing", "detail"],
+        "no_map_ordering": ["product_listing", "cart", "detail"]
+      },
+      "H2_discrimination": {
+        "description": "Between-type variance > within-type variance (discrimination ratio > 1.0) under elements_with_bbox in at least one ROLE_MAP variant",
+        "pass": true,
+        "with_map_ratio": 42.75,
+        "no_map_ratio": 632.93
+      },
+      "H3_positive_control": {
+        "description": "All tasks have tightened_locatable_count > 0",
+        "pass": true
+      },
+      "H4_null_control": {
+        "description": "Tightened count <= original_locatable_elements on all tasks",
+        "pass": true
+      }
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "All tasks have tightened_locatable_count > 0 (identical to parent: reuses parent tightened counts from truncated first-20 sample)",
+      "expected": "All tasks > 0",
+      "observed": "All tasks > 0 (listing: 8/6, detail: 5/2, cart: 6/3)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json"
+    },
+    "null_control": {
+      "description": "Tightened count <= original_locatable_elements on all tasks (identical to parent: reuses parent tightened counts)",
+      "expected": "Tightened <= original on all tasks",
+      "observed": "Tightened <= original on all tasks",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json"
+    },
+    "denominator_sensitivity": {
+      "description": "elements_with_bbox / total_dom > 0.8 for all tasks (visible elements are most of DOM)",
+      "expected": "Ratio > 0.8 for all tasks",
+      "observed": "All ratios > 0.9 (listing: 0.914, detail: 0.871-0.877, cart: 0.942)",
+      "pass": true,
+      "ratios": {
+        "listing_clothing-shoes-jewelry": 0.9139,
+        "listing_beauty-personal-care": 0.9139,
+        "listing_electronics": 0.9135,
+        "detail_camera": 0.8710,
+        "detail_vr_bag": 0.8771,
+        "detail_pet_camera": 0.8765,
+        "cart_1": 0.9419
+      }
+    },
+    "extrapolation_consistency": {
+      "description": "Element density ordering listing > detail > cart matches parent audit extrapolated ordering (BF-ORDERING-REVERSAL-ARTIFACT)",
+      "expected": "listing > detail > cart",
+      "observed": {
+        "with_map": "cart > listing > detail (REVERSED)",
+        "no_map": "listing > cart > detail (cart in middle)"
+      },
+      "pass": false,
+      "note": "Ordering does not match extrapolated ordering in either variant"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json",
+      "sha256": "b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+      "role": "derived"
+    },
+    {
+      "path": "/tmp/opencode/density_results.json",
+      "sha256": "0dc345a85d860aa6e7f8acf938b69c399f7e4e270910265127864b3e4b681522",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Element density with elements_with_bbox denominator yields ordering cart > listing > detail under ROLE_MAP with mapping (a->link, input->textbox). Cart's density (0.005607) exceeds listing (0.005135) by 9.2%. This ordering reversal is opposite to the expected listing > detail > cart.",
+    "Element density with elements_with_bbox denominator yields ordering listing > cart > detail under ROLE_MAP-free variant. Listing (0.003851) > cart (0.002804) > detail (0.001712). This partially matches expected ordering but cart is not lowest.",
+    "The ordering is highly sensitive to the ROLE_MAP variant: with mapping inflates cart density by 99.9% relative to no-map variant (0.005607 vs 0.002804), while listing density increases by 33.3% (0.005135 vs 0.003851). The differential inflation (cart 99.9% vs listing 33.3%) drives the ordering reversal.",
+    "Discrimination ratio improves under elements_with_bbox: with_map ratio 42.75 vs fraction_total ratio 60.08 (density reduces discrimination slightly), but no_map ratio 632.93 vs fraction_total ratio 603.19 (density increases discrimination slightly). Both remain well above 1.0.",
+    "Denominator sensitivity control passes: elements_with_bbox / total_dom > 0.87 for all tasks, confirming visible elements are most of DOM. However, the ratio varies across page types (listing 0.914, detail 0.871-0.877, cart 0.942), which contributes to ordering sensitivity.",
+    "Extrapolation consistency control fails: ordering under elements_with_bbox does not match parent audit's extrapolated full-locatable-set ordering (listing > detail > cart) in either variant.",
+    "Cart pseudoreplication (2 identical entries) retained from parent data; deduped cart n=1 distinct provides no within-type variance estimate."
+  ],
+  "validity_notes": [
+    "Tightened counts are from truncated first-20 sample, not full DOM enumeration. Listing undercount factor 4.1x, detail 1.6x, cart 1.05x. Density values are proportional estimates, not full-DOM measurements.",
+    "The ROLE_MAP ('a'->'link', 'input'->'textbox') is an undocumented deviation from frozen spec that inflates counts 33-150%. Without mapping, detail drops from 5 to 2 (60% reduction). This is the primary source of ordering sensitivity.",
+    "Cart n=2 identical entries (same URL measured twice). Deduped cart n=1 distinct. Within-type CV for cart is undefined.",
+    "All data from single Magento shopping site. elements_with_bbox behavior on other sites unknown.",
+    "The elements_with_bbox denominator does not resolve the fundamental ordering sensitivity because the issue is not the denominator but the ROLE_MAP-dependent count inflation, which varies differentially across page types."
+  ],
+  "unresolved": [
+    "Why does cart density exceed listing density under ROLE_MAP with mapping? Cart has 6 tightened elements vs listing 8, but cart's elements_with_bbox (1070) is much smaller than listing's (1550). The ratio effect (smaller denominator for cart) overcomes the smaller numerator.",
+    "Is the ROLE_MAP ('a'->'link') mapping appropriate? The audit VF-ROLE-MAPPING-DEVIATION noted this is undocumented. Without mapping, ordering partially matches expectations but cart remains above detail.",
+    "Would full DOM enumeration (not truncated to 20) change the ordering? Extrapolated estimates from parent audit suggest listing > detail > cart, but this was not tested with elements_with_bbox denominator.",
+    "Can a denominator be found that is invariant to both page-type DOM variation AND ROLE_MAP variant? elements_with_bbox reduces DOM variation but does not eliminate ROLE_MAP sensitivity."
+  ]
+}

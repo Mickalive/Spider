@@ -751,6 +751,31 @@
         "handoff.json": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
       }
     },
+    "EXP-GRAPH-35010853847": {
+      "lane": "graph",
+      "request_id": "dfad7c09a2c61d8f000ec1d9",
+      "created_at": "2026-09-15T18:59:18.970408+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Can semantic embedding similarity distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard (field_path,type) as a staleness signal?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "hashes": {
+        "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
+        "spec.json": "95fe42e7359c38d83433a4ca62c624b05e93c90417227126fa5e93022a3ae365",
+        "prereg.md": "2258952559c42b5f00204b02d05602cb923f45b55ab6693242aa74df99c94f79",
+        "freeze.json": "80096a34a0ad310950893c027192d9c0df9580f60145f764def276658938180e",
+        "result.json": "700beb5c18a9ae965135512ce1a8fc29ae2281a0d7154b49f416cf7d4348ba74",
+        "report.md": "c58b486bb7564ec6fee7461c174a085458247adecbdb5208bb474c52ec198b57",
+        "provenance.json": "86009bd07a2ff0fb6013e055c5725546e743b7d272a652099fffb800f4fb4e3c",
+        "audit.json": "4d7bc18f3778064d561a2fc61e4d63263ff55d32f590081bf5961c5c4795aaa6",
+        "verdict.json": "4e5e1eb65b980c6b0c75ec944347d73b9c8af00d5348b19bb2a8b1690a9b4e8a",
+        "handoff.json": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
+      }
+    },
     "EXP-INTEL-33528832113": {
       "lane": "intel",
       "request_id": "46d19fdaf32e996c0ab24bd7",
@@ -1014,6 +1039,33 @@
         "audit.json": "4ac7dd2fe071b513ad3da4d5c233d982074ec23063a55e831b69dacc0e07d318",
         "verdict.json": "ecd7d4e46841f1dbf764288f124cce43bb7f3dea360bb3ea19b26f986e2a5bc3",
         "handoff.json": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+      }
+    },
+    "EXP-INTEL-34956989900": {
+      "lane": "intel",
+      "request_id": "c56194f3d1b8db38e07b8aa3",
+      "created_at": "2026-09-15T10:15:47.435185+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID",
+        "C-CROSSSITE",
+        "C-LLM-INHERIT"
+      ],
+      "question": "Does element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
+        "spec.json": "ad5ddba54e9175021f27dcd89298e3b730c3788c14fef61d31812fc20980be85",
+        "prereg.md": "aef481cd11816dcad39ece1254c60448c705106bc628af0c18d1ea52c0921c7b",
+        "freeze.json": "487ba761be62de278854cfaa275499cf45d8cfaea2bc08394e07a01b18633070",
+        "result.json": "a5733e16b7acb465a4b1486d66c7e59715d3eafaf1afc8c92dcf04a679b27542",
+        "report.md": "9a37df025f8e41aabddeb80b5d181affec23a69ed84b4c9abe8c24880da4c8ae",
+        "provenance.json": "36b4f72967f667a7bcd5116b946e14bdd76220d777c03931d972e4c6ec01c12e",
+        "audit.json": "6b6a5c15dbea3dcbf55752f07d2f32077f174d735d8d1e474357112d6d5009ca",
+        "verdict.json": "07b5aa8361b9e0797faa677fd998b56bc05422bab7018ccdb2e17ea24fd03125",
+        "handoff.json": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
       }
     },
     "EXP-PHYSICS-33528829431": {
@@ -1417,6 +1469,31 @@
         "audit.json": "12eb498a4fb606e5b63761faa41cb86a6f031167dc4cb1d77b77f1f7cf1eaa3b",
         "verdict.json": "9601903a2734006b60dc6859b98ace1e8af1a7144220d1cd711cea3b9cdffd23",
         "handoff.json": "a75c97a0d46918f97b753a2ac64832782926632123d83cce6e5fadc31904c973"
+      }
+    },
+    "EXP-PHYSICS-34932344937": {
+      "lane": "physics",
+      "request_id": "6e5243404b60bfd1401c0573",
+      "created_at": "2026-09-15T05:20:43.120038+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "On locally-hosted Express SPAs with session-dependent API responses, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0 with Bonferroni-corrected permutation p < 0.00417? This is an orthogonal observation level that avoids DOM hash cardinality degeneracy: network-response features (JSON body fields, status codes, headers) are low-cardinality categorical, eliminating the plug-in MI estimator saturation that invalidated the parent DOM-hash experiment (EXP-PHYSICS-34846934524).",
+      "audit_status": "REVISE",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "hashes": {
+        "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
+        "spec.json": "5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598",
+        "prereg.md": "230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb",
+        "freeze.json": "f7551b0497a6cf99ffa8e12b899e1cd25ca6a1b03e747c31f533d5b5eb7e10ba",
+        "result.json": "07425b3f377755292682e219d19f5f170171f939b8a1a8a30fab834198b3a8cb",
+        "report.md": "2bf3782946498fecfa60c9d5430406e7abb9836aa0df179a46f4950736363037",
+        "provenance.json": "b9b1e68a62161944f80de1bedb78bc90ebdc0489d8868168bfd8a0b4642e55dc",
+        "audit.json": "4449595334fae5fae00202de8a82e5169f3c51a87e7e62547646b65ca418c2e6",
+        "verdict.json": "24b4cdf6a1e9021947630e0d31bd59c0309ca3d9d8234f0b75092758f6cb499a",
+        "handoff.json": "b219878ec01bcd49b77ecf23be62639e72120edaf37f4d448ab74e0125e48706"
       }
     },
     "EXP-PRODUCT-33528829801": {
@@ -2042,6 +2119,31 @@
         "audit.json": "0dc690628ce9357c14614829b476e559cfb3db4f012c6f6491183bef04b5cabc",
         "verdict.json": "4b5715e8914b8a9938dc138b5d6b0275bdd1ea0afde208449197972a5eab1f07",
         "handoff.json": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
+      }
+    },
+    "EXP-RUNTIME-34986155186": {
+      "lane": "runtime",
+      "request_id": "018b5542dd6adda7bf86edc8",
+      "created_at": "2026-09-15T15:06:23.368449+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does decompression-normalization (hashing the DECOMPRESSED response body after reversing Content-Encoding) preserve body-only discrimination under varying brotli quality levels, and does it provide a universal fallback when compressed-byte hashing fails?",
+      "audit_status": "PASS",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "5c640867203f74c9a26232bf007716dbd7284906df70b21f58d8a80823bec8ff",
+        "spec.json": "95e3d7b2f71c70f43e59bfc88c28238243bcd440166b7ec6dc0df461340f2ebe",
+        "prereg.md": "4707ee21ed88ac396c9941763039189e249b7230dcdae36645b93c81afc96093",
+        "freeze.json": "069ac58eb4a1ae32c679d0ec29549e2f7b0d8be02d979bc5e9520743a7860ef4",
+        "result.json": "050792119112028a60b2f0fe0e4c3faf16256bab6a831fb31a2401ca2f6f0f99",
+        "report.md": "0fea5ac282e12b3d6a303435ced958886cdf03b6f8565a3e3587f464322f4190",
+        "provenance.json": "993d7f52d386a9b0f107f8744c105ff021a36f1d9924e947ee8f2cf00bf18e27",
+        "audit.json": "ffdaa1d8fdf329095caa07a58b2f3c253c668a004771eb05c8654b11f5a5f2a7",
+        "verdict.json": "739b100d33240f559f4d581d1684590b9e6bc65c6369cf5d2fcb5d9875cdb8c0",
+        "handoff.json": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
       }
     }
   }

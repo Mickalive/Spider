@@ -225,6 +225,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Falsification ceiling (audit V1_independent_noise_bakes_in_null): on locally-hosted 5-state linear Express SPAs where non-determinism is independent per-step DOM observation noise (random_API: 3 variants, timing_dependent: 4 variants, each step independent draw from seeded RNG) and DOM representations are hash-based (visible_text_hash, accessibility_tree_hash, multi_feature_hash \u2014 isomorphic by audit V4), conditional PMI I(S_next; DOM_before | URL, H_K=3) = 0.004 bits (random_API) and 0.025 bits (timing_dependent) with Bonferroni p = 1.0 (n = 24 comparisons, alpha = 0.00208), indistinguishable from within-strata permutation null (z = -2.23 and +0.41 respectively). 0/2 non-deterministic SPA types survive the primary test. Controls pass but are degenerate on deterministic strata (V3): positive/null controls computed only on deterministic SPA where each (URL, H_K) stratum has a single S_next, making PMI = 0 for any label trivially. Determinism check confirms observation noise was introduced (det = 1.0, random_API = 0.361, timing = 0.308) but reflects DOM variant multiplicity, not FSM transition non-determinism (V5). The negative result is valid for this noise model but uninformative about correlated state dynamics where DOM_before and latent environment state are correlated. C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: excluded settings now include (1) deterministic Express SPAs (parent EXP-PHYSICS-34724244876) and (2) independent per-step observation noise on non-deterministic Express SPAs. Open settings include correlated non-determinism (session state, user-dependent content, external data where DOM_before correlates with latent state determining S_next), production SPAs with client-side virtual DOM, state-transition non-determinism, and richer visual/computed-style representations."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-34932344937",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Primary test condition K=3 has H(S_next|URL,H_K=3)=0 exactly on the 5-state linear FSM (audit V1, severity critical): all K=3 strata are single-valued for S_next, making I(S_next; Response_before|URL,H_K=3)=0 a priori impossible for ANY Response_before. This is an environment ceiling, not a negative scientific result. The producer's FALSIFIES outcome is not justified: you cannot falsify a claim by testing it in an environment where the effect is mathematically impossible. At K=1 (H=0.4 bits, where action-history is insufficient), the same state-dependent response DOES carry significant conditional PMI (BC=0.386 bits, Bonferroni p=0.004 < 0.0125, cardinality |R|/N=0.05 non-degenerate), demonstrating network-response payload structure CAN carry predictive information when transitions are not fully determined by history. K=3 controls are degenerate (null_std=0, audit V4) and do not stress the pipeline. The claim remains HYPOTHESIS pending a branching FSM experiment where H(S_next|URL,H_K=3) > 0.2 bits."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -495,6 +503,14 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "Adaptive Jaccard threshold T(n)=1-0.8/(n+1) achieves TP=1.0 on true drift (add/remove/change_type) but produces FP=1.0 on structural noise (optional field churn, null-valued fields, nested object variation) at all schema sizes 10-50 fields. Under frozen decision rule condition (2), FP upper CI 1.0 > 0.15, thus FALSIFIED-IN-SETTING. Claim remains HYPOTHESIS; the bounded negative result does not close the broader C-FRESHNESS domain but falsifies the specific adaptive threshold formula under structural noise at tested magnitudes."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35010853847",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "TF-IDF bag-of-words semantic similarity on (field_name:field_type) text pairs is falsified as a staleness signal under structural noise (FP=1.0 at all sizes, Mann-Whitney p=1.0 inverted direction). This is a bounded signal-level falsification; C-FRESHNESS as a domain remains open. The claim ceiling from audit.json is: FALSIFIED-IN-SETTING for TF-IDF specifically \u2014 does NOT falsify sentence-transformers contextual embeddings, per-field matching, multi-signal ensembles, smaller noise magnitudes, or real API schemas."
       }
     ],
     "C-CROSSSITE": [
@@ -577,6 +593,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Not tested in this experiment. Single-site (Magento) measurement only. Cross-site generalization remains a hypothesis."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34956989900",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested. Offline recomputation on existing single-site (Magento) data only. Cross-site generalization unsupported."
       }
     ],
     "C-LLM-INHERIT": [
@@ -659,6 +683,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Not tested in this experiment. LLM inheritance claim is orthogonal to metric validation."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34956989900",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested. Offline density computation orthogonal to LLM inheritance claim."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -719,6 +751,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Bounded diagnostic: under truncated-first-20 sampling of DEF-FALLBACK-INTERACTIVE locatable set, role-only counting yields ordering cart>listing>detail (reversal), but audit extrapolation to full DOM restores listing 0.019 > detail 0.006 > cart 0.0055. The reversal is an artifact of differential sample truncation and total_dom denominator variation, not evidence that the tightened definition per se destroys ordering. Original definition overcount confirmed (~10x reduction). Within-type stability preserved (listing CV 0.005, detail CV 0.037). Between-type discrimination holds but magnitude is definition- and denominator-sensitive (ratio 60 deduped vs parent 582). Full DOM enumeration required for definitive construct validity test. C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements beyond form scaffolding, but ordering robustness and denominator choice are unresolved."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34956989900",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Bounded: elements_with_bbox denominator does NOT resolve ordering sensitivity. Under tightened role-only definition, ordering listing>detail>cart fails in both ROLE_MAP variants (with_map: cart>listing>detail; no_map: listing>cart>detail). Discrimination ratio remains >1 (42.75 with_map, 632.93 no_map). The ordering sensitivity is two-factor: denominator variation (partially addressed by elements_with_bbox) and ROLE_MAP-dependent count inflation (NOT addressed by denominator choice). C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements but ordering robustness depends on unresolved ROLE_MAP definition and is bounded to truncated-first-20 sample from single Magento site."
       },
       {
         "experiment_id": "EXP-PHYSICS-33528829431",
@@ -839,6 +879,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34986155186",
+        "lane": "runtime",
+        "decision": "MIXED",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} per request for JSON 1KB on mock OAuth2 server (B-DECOMPRESSED-VARYING=0.5 vs B-COMPRESSED-VARYING=0.3295-0.3475). All 6 controls pass. However, claim ceiling is bounded to: synthetic Python proxy, deterministic mock server, brotli-only, 1KB JSON, seed 44, quality range {4-8}. NOT justified to claim real-CDN universal fallback, gzip support, other content-types/sizes, or production IdP. C-MEAS-VALID remains EXPERIMENTAL because the setting is synthetic and the claim ceiling does not reach production deployment conditions."
       }
     ]
   }

@@ -1,0 +1,1124 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34986155186",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "/userinfo_COMPRESSED-FIXED": {
+      "compressed_body_only_discrimination": 0.5,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "invalid_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "valid_token": {
+          "min": 1094,
+          "max": 1094,
+          "mean": 1094.0
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_COMPRESSED-FIXED": {
+      "compressed_body_only_discrimination": 0.5,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 1107,
+          "max": 1107,
+          "mean": 1107.0
+        }
+      },
+      "total_requests": 80
+    },
+    "/userinfo_COMPRESSED-VARYING": {
+      "compressed_body_only_discrimination": 0.3475438596491228,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "invalid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "expired_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "valid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 64,
+          "max": 65,
+          "mean": 64.3
+        },
+        "invalid_token": {
+          "min": 64,
+          "max": 65,
+          "mean": 64.25
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 65,
+          "mean": 64.2
+        },
+        "valid_token": {
+          "min": 1071,
+          "max": 1094,
+          "mean": 1091.7
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_COMPRESSED-VARYING": {
+      "compressed_body_only_discrimination": 0.4526315789473684,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 1088,
+          "max": 1107,
+          "mean": 1105.1
+        }
+      },
+      "total_requests": 80
+    },
+    "/userinfo_DECOMPRESSED-FIXED": {
+      "compressed_body_only_discrimination": 0.5,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "invalid_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 64,
+          "mean": 64.0
+        },
+        "valid_token": {
+          "min": 1094,
+          "max": 1094,
+          "mean": 1094.0
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_DECOMPRESSED-FIXED": {
+      "compressed_body_only_discrimination": 0.5,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 1107,
+          "max": 1107,
+          "mean": 1107.0
+        }
+      },
+      "total_requests": 80
+    },
+    "/userinfo_DECOMPRESSED-VARYING": {
+      "compressed_body_only_discrimination": 0.32951754385964915,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "invalid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "expired_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        },
+        "valid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 64,
+          "max": 65,
+          "mean": 64.25
+        },
+        "invalid_token": {
+          "min": 64,
+          "max": 65,
+          "mean": 64.15
+        },
+        "expired_token": {
+          "min": 64,
+          "max": 65,
+          "mean": 64.05
+        },
+        "valid_token": {
+          "min": 1071,
+          "max": 1094,
+          "mean": 1087.1
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_DECOMPRESSED-VARYING": {
+      "compressed_body_only_discrimination": 0.3894736842105263,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 2,
+          "total": 20,
+          "all_same": false
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "br"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "invalid_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "expired_token": {
+          "min": 21,
+          "max": 21,
+          "mean": 21.0
+        },
+        "valid_token": {
+          "min": 1088,
+          "max": 1107,
+          "mean": 1101.3
+        }
+      },
+      "total_requests": 80
+    },
+    "/userinfo_IDENTITY": {
+      "compressed_body_only_discrimination": 0.5,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.5,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "invalid_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "expired_token": {
+          "min": 76,
+          "max": 76,
+          "mean": 76.0
+        },
+        "valid_token": {
+          "min": 2060,
+          "max": 2060,
+          "mean": 2060.0
+        }
+      },
+      "total_requests": 80
+    },
+    "/introspect_IDENTITY": {
+      "compressed_body_only_discrimination": 0.5,
+      "decompressed_body_only_discrimination": 0.5,
+      "status_only_discrimination": 0.0,
+      "baselines": {
+        "B-RANDOM": 0.0
+      },
+      "compressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "decompressed_hash_variation": {
+        "no_auth": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "invalid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "expired_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        },
+        "valid_token": {
+          "unique_count": 1,
+          "total": 20,
+          "all_same": true
+        }
+      },
+      "compression_verification": {
+        "no_auth": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        },
+        "invalid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        },
+        "expired_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        },
+        "valid_token": {
+          "content_encoding_values": [
+            "none"
+          ],
+          "count": 20
+        }
+      },
+      "body_sizes": {
+        "no_auth": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "invalid_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "expired_token": {
+          "min": 17,
+          "max": 17,
+          "mean": 17.0
+        },
+        "valid_token": {
+          "min": 2076,
+          "max": 2076,
+          "mean": 2076.0
+        }
+      },
+      "total_requests": 80
+    }
+  },
+  "controls": {
+    "C_POSITIVE_CONTROL": {
+      "expected": "B-COMPRESSED-FIXED >= 0.35 on /userinfo",
+      "observed": 0.5,
+      "pass": true
+    },
+    "C_NULL_CONTROL": {
+      "expected": "B-RANDOM ~ 0.0 at all conditions",
+      "observed": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    "C_DECOMPRESSED_FIXED_PRESERVES": {
+      "expected": "B-DECOMPRESSED-FIXED >= 0.5 on /userinfo",
+      "observed": 0.5,
+      "pass": true
+    },
+    "C_DECOMPRESSION_DETERMINISM": {
+      "expected": "Within-state decompressed hash variation = 0 for DECOMPRESSED-FIXED",
+      "observed": {
+        "no_auth": true,
+        "invalid_token": true,
+        "expired_token": true,
+        "valid_token": true
+      },
+      "pass": true
+    },
+    "C_QUALITY_VARIATION_ACTIVE": {
+      "expected": "Within-state compressed hash variation > 0 for COMPRESSED-VARYING",
+      "observed": {
+        "no_auth": 2,
+        "invalid_token": 2,
+        "expired_token": 2,
+        "valid_token": 2
+      },
+      "pass": true
+    },
+    "C_NO_PIPELINE_ERRORS": {
+      "expected": "0 errors",
+      "observed": 0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_observations.json",
+      "role": "raw",
+      "description": "All HTTP observations per condition per endpoint per state"
+    },
+    {
+      "path": "run_experiment.py",
+      "role": "code",
+      "description": "Frozen experiment execution script"
+    }
+  ],
+  "observations": [
+    "Mock OAuth2 server on localhost:5000 returning JSON responses",
+    "CDN proxy on localhost:5001 with condition-based compression",
+    "Conditions: ['COMPRESSED-FIXED', 'COMPRESSED-VARYING', 'DECOMPRESSED-FIXED', 'DECOMPRESSED-VARYING', 'IDENTITY']",
+    "Auth states: ['no_auth', 'valid_token', 'expired_token', 'invalid_token']",
+    "Reps per state per condition per endpoint: 20",
+    "Endpoints: /userinfo (GET), /introspect (POST)",
+    "Total conditions x states x reps x endpoints = 5 x 4 x 20 x 2 = 800",
+    "Actual requests made: 800",
+    "Seed: 44",
+    "Brotli available: True",
+    "Fixed brotli quality: 6",
+    "Brotli quality range for varying: (4, 8)",
+    "condition=COMPRESSED-FIXED /userinfo: compressed=0.5000, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "condition=COMPRESSED-FIXED /introspect: compressed=0.5000, decompressed=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "condition=COMPRESSED-VARYING /userinfo: compressed=0.3475, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "condition=COMPRESSED-VARYING /introspect: compressed=0.4526, decompressed=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "condition=DECOMPRESSED-FIXED /userinfo: compressed=0.5000, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "condition=DECOMPRESSED-FIXED /introspect: compressed=0.5000, decompressed=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "condition=DECOMPRESSED-VARYING /userinfo: compressed=0.3295, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "condition=DECOMPRESSED-VARYING /introspect: compressed=0.3895, decompressed=0.5000, status=0.0000, B-RANDOM=0.0000",
+    "condition=IDENTITY /userinfo: compressed=0.5000, decompressed=0.5000, status=0.5000, B-RANDOM=0.0000",
+    "condition=IDENTITY /introspect: compressed=0.5000, decompressed=0.5000, status=0.0000, B-RANDOM=0.0000"
+  ],
+  "validity_notes": [
+    "Mock OAuth2 server (not Keycloak) returning JSON with random data field",
+    "Fingerprint algorithm: SHA-256(repr((status, body_sha256, ''))) for compressed and decompressed",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Jitter: 50-150ms uniform between requests",
+    "expired_token is locally-signed HS256, not real expired token",
+    "Brotli module available: True",
+    "Proxy compresses all responses with brotli (except IDENTITY condition)",
+    "Quality variation uses random.randint(4,8) with per-condition seed derived from SEED",
+    "Decompression via brotli.decompress() after Content-Encoding 'br' removal",
+    "Same mock server as parent (EXP-RUNTIME-34902094115): 4 auth states, 3-way error collapse, discrimination ceiling 0.5",
+    "Body size: ~1024 bytes uncompressed (1KB)",
+    "Seed=44 for request ordering and quality variation (deterministic across runs)"
+  ],
+  "unresolved": [
+    "Does decompression-normalization survive real CDN infrastructure with non-deterministic compression?",
+    "Does decompression-normalization generalize to non-JSON content types?",
+    "What is the latency cost of decompression-normalization in production?",
+    "Does decompression-normalization work with gzip in addition to brotli?",
+    "What happens when Content-Encoding is missing or incorrect?"
+  ]
+}
