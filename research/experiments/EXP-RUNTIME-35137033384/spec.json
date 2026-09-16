@@ -1,17 +1,35 @@
 {
   "experiment_id": "EXP-RUNTIME-35137033384",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does decompression-normalization (SHA256 on decompressed body + status) preserve body-only discrimination under realistic CDN-like non-determinism (per-request brotli quality variation, chunked transfer-encoding, CDN response headers, Accept-Encoding negotiation, and response caching) simulated via a CDN-noise proxy layer in front of the existing mock OAuth2 server?",
+  "hypothesis": "H1: Decompression-normalization preserves discrimination >= 0.5 on /userinfo under CDN-like non-determinism because brotli.decompress() reverses any valid brotli compression regardless of quality level, chunked encoding, or caching, and the decompressed logical body is invariant under these transformations. H2: Algorithm-equivalence between brotli and gzip decompression-normalization holds (|diff| < 0.1) because both decompress to the same logical body; CDN noise affects compressed bytes but not decompressed bytes. H3: Compressed-byte-only hashing degrades under CDN-like non-determinism to < 0.35 on /userinfo because varying quality + chunked encoding + caching produce different compressed wire bytes for the same logical body.",
+  "falsifier": "Decompression-normalization discrimination < 0.5 on /userinfo under CDN-noise proxy (H1 falsified), OR |B-DECOMPRESSED-VARYING-GZIP(parent) - B-DECOMPRESSED-VARYING-BROTLI-CDN| >= 0.1 (H2 falsified), OR compressed-byte-only CDN discrimination >= 0.35 on /userinfo (H3 falsified — CDN noise does not degrade compressed hashing), OR within-state decompressed hash variation > 0 under CDN-noise (decompression non-deterministic under CDN transformations).",
+  "baselines": [
+    "B-DECOMPRESSED-VARYING-GZIP: decompressed body hash under gzip quality {1,3,5,7,9} — PARENT reference (result.json /userinfo 0.5, /introspect 0.5 from EXP-RUNTIME-35058619700), not re-executed",
+    "B-DECOMPRESSED-VARYING-BROTLI-CDN: decompressed body hash with CDN-noise proxy applying brotli quality {4,5,6,7,8} per request + chunked encoding + CDN headers + caching + Accept-Encoding negotiation — THIS EXPERIMENT primary measurement",
+    "B-COMPRESSED-VARYING-BROTLI-CDN: compressed-byte-only hashing under CDN-noise proxy — THIS EXPERIMENT secondary measurement (tests H3)",
+    "B-STATUS-ONLY: status code discrimination (compression-immune, expected 0.5 on /userinfo, 0.0 on /introspect) — PARENT reference, not re-executed",
+    "B-RANDOM: random fingerprint (null, expected 0.0) — PARENT reference, not re-executed"
+  ],
+  "positive_control": "Within-state decompressed hash variation = 0 for all4 auth states under B-DECOMPRESSED-VARYING-BROTLI-CDN (brotli.decompress is deterministic for fixed input bytes regardless of how they were compressed; CDN noise affects wire bytes not decompressed bytes). This verifies decompression determinism survives CDN transformations.",
+  "null_control": "B-RANDOM ~ 0.0 at all conditions (no spurious structure from CDN noise artifacts). PARENT reference, not re-executed.",
+  "measurement_validity": [
+    "Same mock OAuth2 server infrastructure as parent (Flask + PyJWT, ports 5000/5001)",
+    "Same4 auth states: no_auth (401), valid_token (200), expired_token (401), invalid_token (401)",
+    "Error bodies identical across no_auth/expired/invalid, capping discrimination ceiling at 0.5",
+    "CDN-noise proxy introduces6 categories of realistic CDN non-determinism (see prereg section 4)",
+    "Same frozen seed=44 for reproducibility; CDN noise seed derived deterministically from experiment seed",
+    "Decompression via brotli.decompress() after Content-Encoding 'br' removal (same pipeline as parent)",
+    "N=20 per state per endpoint (4 states x 20 reps x 2 endpoints = 160 requests)",
+    "Jitter 50-150ms uniform between requests",
+    "Parent gzip condition reference data from EXP-RUNTIME-35058619700 (not re-executed)",
+    "Python 3.12.14, brotli 1.2.0 (same versions as parent)",
+    "CDN-noise proxy runs on localhost, does not introduce network non-localhost variability"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) within-state decompressed hash variation = 0 for all states (positive control — decompression deterministic under CDN noise), (2) B-RANDOM ~ 0.0 (null control — PARENT reference, assumed passing), (3) B-DECOMPRESSED-VARYING-BROTLI-CDN decompressed discrimination >= 0.5 on /userinfo (H1 survives), (4) |B-DECOMPRESSED-VARYING-GZIP(parent=0.5) - B-DECOMPRESSED-VARYING-BROTLI-CDN| < 0.1 (H2 survives — algorithm-equivalence under CDN noise). ALGORITHM-EQUIVALENT if (4) holds. ALGORITHM-DEPENDENT if (4) fails (|diff| >= 0.1). FALSIFIED-IN-SETTING if (3) fails (decompression-normalization fails under CDN noise). MEASUREMENT_INVALID if pipeline errors, sample size insufficient, or CDN-noise proxy fails to introduce non-determinism (all responses identical despite noise injection).",
+  "product_consequence_positive": "If decompression-normalization survives CDN-noise proxy, the claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. This is the critical intermediate gate before real-CDN deployment: it demonstrates the mechanism survives the specific non-determinism sources (quality variation, chunked encoding, header injection, caching, Accept-Encoding negotiation) that CDNs actually produce. Product may proceed to real-CDN validation with higher confidence.",
+  "product_consequence_negative": "If decompression-normalization fails under CDN-noise proxy, the mechanism has a concrete, diagnosable failure mode under controlled conditions. The design space narrows to: (a) identify which CDN noise source causes failure, (b) design a fix or alternative normalization, (c) re-test. No real-CDN investment needed until the mechanism survives the simulator. If compressed-byte-only also fails (H3 confirmed), both normalization and raw-compressed approaches are insufficient and a different fingerprint strategy is needed.",
+  "estimated_cost": "Low: reuse existing mock OAuth2 server (EXP-RUNTIME-35130682006), add CDN-noise proxy layer (~200 lines Python), run 160 requests with N=20 per state. ~3 minutes wall time. No external services, API keys, or CDN accounts required.",
+  "expected_information_gain": "High: this is the single highest-information experiment remaining for C-MEAS-VALID that is fully executable in the current environment. The parent handoff identifies real CDN as the critical blocker, and the CDN simulator directly targets the5 specific non-determinism sources that real CDNs produce. A positive result provides strong evidence for product deployment; a negative result identifies the failure mode without wasting real-CDN resources. Both outcomes materially change the C-MEAS-VALID claim ceiling and product decision."
 }
