@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "The truncated-sample pairwise ordering agreement (0.3) does NOT exceed chance-level expectation: random ROLE_MAP null mean = 0.5275 (auditor recomputed 0.51-0.54), observed 0.3 is below null mean and below p95=1.0. Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering, violating the expectation that the metric is multi-role invariant. Only the isolated a→link effect (H3) is confirmed as sufficient on this sample where menuitem=tab=0. The claim ceiling is bounded to this single Magento site, truncated-first-20 sample, n=7 distinct tasks. No part of the ordering stability or metric adoption claim survives the null-model tests."
+    }
+  ],
+  "product_action": "Do not adopt DEF-FORM-ONLY as canonical yield metric based on truncated-sample ordering. The ordering stability finding (0.3) is noise, not signal. Product lane must wait for full-DOM enumeration (truncation cap fix) before fraction-based metric validation can proceed.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
+  "reason": "FALSIFIED-IN-SETTING: Condition 1 (null confirms significance) FAILS — null mean 0.5275 >> observed 0.3. Condition 2 (no single-role invariant) FAILS — button-only and form-only both produce DEF-FORM-ONLY ordering. Condition 3 (isolated a→link) PASSES — a→link alone reproduces DEF-FULL-MAP ordering, but this is tautological when menuitem=tab=0 in sample. The audit confirms producer metrics are sound but documents high-severity validity threats: truncated sample bias, small N, single site, cart pseudoreplication. The null model result is surprising (0.5275 > 0.3) because random role assignments cluster on cart-heavy orderings, while the 5-definition family is intentionally diverse. This does not mean ordering stability is impossible — it means the truncated sample cannot discriminate signal from noise.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35112013458/result.json",
+    "research/experiments/EXP-INTEL-35112013458/audit.json",
+    "research/experiments/EXP-INTEL-35112013458/report.md",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json sha256:c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py sha256:ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050"
+  ]
+}

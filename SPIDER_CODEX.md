@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **87**. Coverage gaps: **0**.
+Ingested experiments: **88**. Coverage gaps: **0**.
 
 ## Index
 
@@ -52,6 +52,7 @@ Ingested experiments: **87**. Coverage gaps: **0**.
 | EXP-INTEL-34782350557 | intel | REVISE | INCONCLUSIVE | C-MEAS-VALID, C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-34956989900 | intel | PASS | FALSIFIED-IN-SETTING | C-MEAS-VALID, C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-35083033552 | intel | REVISE | SURVIVES_CURRENT_TEST | C-MEAS-VALID |
+| EXP-INTEL-35112013458 | intel | PASS | FALSIFIED-IN-SETTING | C-MEAS-VALID |
 | EXP-PHYSICS-33528829431 | physics | REVISE | REVISE | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33788037373 | physics | FAIL | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33965269281 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
@@ -47379,6 +47380,946 @@ Product lane can adopt the stable definition family (DEF-FORM-ONLY through DEF-F
     "research/experiments/EXP-INTEL-35083033552/verdict.json decision SURVIVES_CURRENT_TEST with narrowed ceiling"
   ],
   "recommended_action": "Execute the two missing preregistered null models on existing data: (1) Random ROLE_MAP null (prereg 8.1): randomly assign each raw role to interactive/not with p=0.5, repeat 1000 times, compute distribution of pairwise agreement fractions, test whether observed 0.3 exceeds p<0.05; (2) Single-role definitions (prereg 8.2): test each individual role in isolation (button-only, a-only, input-only, etc.) to determine whether any single role drives the metric. These are offline-only computations using the existing raw data (exp347_raw_results.json). Separately, test an isolated a→link definition (a→link mapping WITHOUT menuitem/tab) to separate a→link from menuitem/tab effects. All three tests use existing data and require no Docker/runtime execution. If null models confirm ordering exceeds chance, the truncated-sample result gains statistical rigor; if not, the result is noise and the truncated-first-20 approach is insufficient for metric validation."
+}
+```
+
+# EXP-INTEL-35112013458
+
+## request.json
+
+```text
+{
+  "base_sha": "4aed7bfa5be214b90dffb26bf283943568261cd6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T14:57:18.093830+00:00",
+  "experiment_id": "EXP-INTEL-35112013458",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a\u2192link contribution be separated from menuitem/tab effects in the ordering reversal?",
+  "lane": "intel",
+  "origin_github_run_id": "35112013458",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35083033552",
+    "path": "research/experiments/EXP-INTEL-35083033552/handoff.json",
+    "sha256": "d190f98f9f5837c55bb037e0ee13c241fabaac2fa12761129949987e8d047c1b"
+  },
+  "reason": "pulse",
+  "request_hash": "40afce7fadd0a302b32fb7431a61779dffb210faa165903271a803fd7b7c6be4",
+  "request_id": "bd76f392c072c8920261ef76",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a→link contribution be separated from menuitem/tab effects in the ordering reversal?",
+  "hypothesis": "Three independent tests: (1) Random ROLE_MAP null: 1000 random role assignments produce pairwise agreement fractions centered below 0.3, indicating the observed 0.3 exceeds chance. (2) Single-role definitions: no individual role (button-only, a-only, input-only, etc.) produces stable ordering across all page types, confirming the metric is not driven by a single role. (3) Isolated a→link definition: a definition with a→link mapping but WITHOUT menuitem/tab produces the same ordering as DEF-FULL-MAP (cart>listing>detail), isolating the a→link effect from menuitem/tab.",
+  "falsifier": "Any of: (1) Random null distribution has mean >= 0.3 pairwise agreement (observed 0.3 does not exceed chance); (2) Any single-role definition produces ordering invariant to other roles (contradicts multi-role metric); (3) Isolated a→link definition produces different ordering than DEF-FULL-MAP, indicating menuitem/tab are necessary for the reversal.",
+  "baselines": [
+    "DEF-FORM-ONLY ordering (product_listing>cart>detail) from parent",
+    "DEF-FULL-MAP ordering (cart>product_listing>detail) from parent",
+    "Random ROLE_MAP null distribution (1000 iterations)",
+    "Single-role definitions (button-only, a-only, input-only, link-only, menuitem-only, tab-only, form-only, div-only, span-only, label-only)",
+    "Isolated a→link definition (a→link without menuitem/tab)"
+  ],
+  "positive_control": "Isolated a→link definition produces ordering cart>product_listing>detail, matching DEF-FULL-MAP. This confirms a→link alone drives the reversal.",
+  "null_control": "Random ROLE_MAP null produces mean pairwise agreement < 0.3 with 95% CI excluding 0.3. This confirms observed agreement exceeds chance.",
+  "measurement_validity": [
+    "All computations use existing raw data from EXP-INTEL-34782350557 (exp347_raw_results.json, sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)",
+    "No Docker/browser execution required; offline computation only",
+    "Random null uses 1000 iterations with frozen seed (seed=42) for reproducibility",
+    "Single-role definitions test all raw roles present in data: {a, button, combobox, div, form, input, label, link, menuitem, span, tab}",
+    "Isolated a→link definition uses same INTERACTIVE_ROLES as DEF-FULL-MAP but excludes menuitem and tab",
+    "All definitions use same data and counting pipeline as parent (elements_with_bbox denominator)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Random null mean pairwise agreement < 0.3 AND observed 0.3 exceeds 95th percentile of null distribution; (2) No single-role definition produces invariant ordering (all single-role orderings differ from each other AND from the 5-definition family); (3) Isolated a→link definition produces same ordering as DEF-FULL-MAP (cart>product_listing>detail). FALSIFIED-IN-SETTING if ANY of: (1) Random null mean >= 0.3 OR observed 0.3 within 95% CI of null; (2) Any single-role definition produces stable ordering; (3) Isolated a→link produces different ordering than DEF-FULL-MAP. MEASUREMENT_INVALID if pipeline errors prevent computation.",
+  "product_consequence_positive": "If null models confirm 0.3 exceeds chance and a→link is isolated as the driver, the truncated-sample ordering under DEF-FORM-ONLY gains statistical rigor. Product lane can adopt DEF-FORM-ONLY as the canonical metric for yield estimation, bounded to this site and sampling method. The isolated a→link finding informs runtime lane about which role mappings are safe to apply.",
+  "product_consequence_negative": "If 0.3 does not exceed chance, the truncated-sample ordering is noise and cannot guide metric choice. The runtime lane must fix the locatableSample cap before further metric validation. If menuitem/tab are necessary for the reversal, the sensitivity analysis is more complex than a→link alone.",
+  "estimated_cost": "Very low: pure offline computation on existing data, no browser/network/model calls. ~1000 random iterations, 11 single-role definitions, 1 isolated a→link definition.",
+  "expected_information_gain": "High: directly answers whether the parent's ordering stability finding is statistically real (exceeds chance) or noise. Separates a→link from menuitem/tab effects, which is the specific gap identified in the audit. All three tests use existing data and require no new execution."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-INTEL-35112013458 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-INTEL-35112013458
+- **Lane**: Intel
+- **Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
+- **Date**: 2026-09-16
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a→link contribution be separated from menuitem/tab effects in the ordering reversal?
+
+## 3. Motivation
+
+Prior Intel work established:
+- EXP-INTEL-35083033552: Three semantically adjacent definitions (DEF-FORM-ONLY, DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-A-TEXTBOX) produce stable ordering: product_listing > cart > detail. DEF-FULL-MAP reverses to cart > product_listing > detail.
+- The pairwise agreement is 0.3 (3/10 pairs agree) and adjacency agreement is 0.5 (2/4 adjacent pairs agree).
+- The audit (VF-MISSING-NULL-MODELS) identified that the null models promised in prereg 8.1 and 8.2 were NOT executed, so the observed 0.3 cannot be assessed against chance.
+- The isolated a→link effect is conflated with menuitem/tab inclusion (VF-LINK-SENSITIVITY-DILUTED): DEF-FULL-MAP bundles a→link with menuitem+tab.
+
+This experiment addresses both gaps: (1) statistical significance of the observed agreement, and (2) isolation of the a→link effect.
+
+## 4. Hypotheses
+
+### H1: Random ROLE_MAP Null
+The observed 0.3 pairwise agreement exceeds chance-level expectation. Specifically: the mean pairwise agreement across 1000 random ROLE_MAP assignments is < 0.3, AND the observed 0.3 exceeds the 95th percentile of the null distribution.
+
+### H2: Single-Role Definitions
+No individual role (button-only, a-only, input-only, etc.) produces stable ordering across all page types. Single-role orderings vary, confirming that the metric is multi-role, not driven by a single dominant role.
+
+### H3: Isolated a→link Effect
+A definition with a→link mapping but WITHOUT menuitem/tab produces the same ordering as DEF-FULL-MAP (cart > product_listing > detail). This isolates the a→link effect from menuitem/tab effects.
+
+## 5. Data Source
+
+Reuses existing raw measurement data:
+- Source: `research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json`
+- SHA256: `da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050`
+- 7 successful tasks from Magento shopping site
+- Truncated-first-20 locatable_sample per task
+
+## 6. Null Models
+
+### 6.1 Random ROLE_MAP Null (Prereg 8.1)
+
+**Procedure:**
+1. For each of 1000 iterations (seed=42):
+   a. For each raw role present in the data {a, button, combobox, div, form, input, label, link, menuitem, span, tab}, randomly assign it to INTERACTIVE_ROLES (included) or not, with probability 0.5 each.
+   b. Apply this random definition to all 7 tasks.
+   c. Compute density = count / elements_with_bbox for each task.
+   d. Compute per-type mean density and ordering.
+   e. Record the ordering tuple.
+
+2. Compute pairwise agreement across all 1000 random orderings (comparing each pair's ordering to every other pair's ordering).
+
+3. Compute the distribution of pairwise agreement fractions.
+
+4. Test whether observed 0.3 exceeds the 95th percentile of this distribution.
+
+**Expected under null:** Random assignments produce diverse orderings with pairwise agreement centered around the base rate of identical random orderings. With 3 page types and 3! = 6 possible orderings, random assignments should produce agreement ~1/6 ≈ 0.167 by chance.
+
+### 6.2 Single-Role Definitions (Prereg 8.2)
+
+**Procedure:**
+1. For each raw role present in the data:
+   - Create a definition that counts ONLY elements with that specific raw role as interactive.
+   - Roles to test: {a, button, combobox, div, form, input, label, link, menuitem, span, tab}
+
+2. For each single-role definition:
+   a. Apply to all 7 tasks.
+   b. Compute density = count / elements_with_bbox for each task.
+   c. Compute per-type mean density and ordering.
+   d. Record the ordering tuple.
+   e. Record whether any tasks have zero count (degenerate definition).
+
+3. Compare orderings across all single-role definitions.
+
+**Expected under null:** Single-role orderings vary. No single role drives the metric. Some roles may be too rare to produce meaningful ordering (e.g., menuitem, tab have very few occurrences).
+
+### 6.3 Isolated a→link Definition
+
+**Procedure:**
+1. Create DEF-ISOLATED-A-LINK:
+   - INTERACTIVE_ROLES: {button, link, textbox, checkbox, radio, combobox, listbox, slider, spinbutton, searchbox, switch} (same as DEF-FORM-AND-A-TEXTBOX but adding a→link)
+   - ROLE_MAP: {"a": "link", "input": "textbox"} (same as DEF-FULL-MAP)
+   - BUT: exclude menuitem and tab from INTERACTIVE_ROLES
+
+2. Apply to all 7 tasks.
+3. Compute density = count / elements_with_bbox for each task.
+4. Compute per-type mean density and ordering.
+5. Record the ordering tuple.
+
+**Expected under null:** If a→link alone drives the reversal, DEF-ISOLATED-A-LINK produces cart > product_listing > detail (same as DEF-FULL-MAP). If menuitem/tab are necessary, ordering differs.
+
+## 7. Statistical Tests
+
+### 7.1 Primary: Random Null Significance
+- **Test:** Is observed 0.3 pairwise agreement > 95th percentile of null distribution?
+- **One-sided:** Observed agreement exceeds chance.
+- **Correction:** Single test (1 comparison), no Bonferroni needed.
+
+### 7.2 Secondary: Single-Role Stability
+- **Test:** How many single-role definitions produce the same ordering as any of the 5-definition family?
+- **Expected:** 0 (no single-role definition matches any family member).
+
+### 7.3 Effect Size: a→link Isolation
+- **Test:** Does DEF-ISOLATED-A-LINK ordering match DEF-FULL-MAP?
+- **Expected:** Yes (cart > product_listing > detail).
+
+## 8. Controls
+
+### 8.1 Positive Control
+The isolated a→link definition (DEF-ISOLATED-A-LINK) produces ordering cart > product_listing > detail, matching DEF-FULL-MAP. This confirms a→link alone drives the reversal.
+
+### 8.2 Null Control
+Random ROLE_MAP null produces mean pairwise agreement < 0.3 with 95% CI excluding 0.3. This confirms observed agreement exceeds chance.
+
+### 8.3 Baseline Comparison
+Random null distribution mean should be approximately 1/6 ≈ 0.167 (base rate of identical random orderings with 3 types).
+
+### 8.4 Single-Role Degeneracy Control
+Single-role definitions with very few elements (count < 2 across all tasks) are flagged as degenerate and excluded from ordering comparison.
+
+## 9. Validity Threats
+
+### 9.1 Small Sample Size
+7 tasks (3 listing, 3 detail, 1 cart). Low statistical power for detecting small ordering differences. Mitigation: focus on large effects (ordering reversals, not minor rank swaps).
+
+### 9.2 Single Site
+All data from one Magento shopping site. Cross-site generalization unsupported. Mitigation: bound claim to this site.
+
+### 9.3 Cart Pseudoreplication
+Cart n=2 identical entries (same URL); deduped n=1 distinct. Within-type CV for cart undefined. Mitigation: report deduped statistics separately.
+
+### 9.4 Random Null Assumptions
+The random null assumes each role is independently included/excluded with p=0.5. Real ROLE_MAP definitions have correlated role choices. Mitigation: this is a conservative null (independent inclusion is more diverse than real definitions).
+
+### 9.5 Single-Role Sparsity
+Some roles (menuitem, tab) may have very few occurrences, making their orderings unstable. Mitigation: report element counts alongside orderings; flag degenerate definitions.
+
+## 10. Decision Rules
+
+### 10.1 SURVIVES_CURRENT_TEST
+If ALL of:
+1. Random null mean pairwise agreement < 0.3 AND observed 0.3 > 95th percentile of null distribution
+2. No single-role definition produces invariant ordering (all single-role orderings differ from each other AND from the 5-definition family)
+3. Isolated a→link definition produces same ordering as DEF-FULL-MAP (cart > product_listing > detail)
+
+### 10.2 FALSIFIED-IN-SETTING
+If ANY of:
+1. Random null mean >= 0.3 OR observed 0.3 within 95% CI of null
+2. Any single-role definition produces stable ordering
+3. Isolated a→link produces different ordering than DEF-FULL-MAP
+
+### 10.3 MEASUREMENT_INVALID
+If:
+1. Raw data extraction fails or locatable_sample is missing for any task
+2. Pipeline errors prevent computation
+3. Random null seed produces degenerate results
+
+## 11. Expected Outcomes
+
+### 11.1 SURVIVES_CURRENT_TEST (Null Models Confirm Significance)
+- The observed 0.3 pairwise agreement is statistically significant (exceeds chance)
+- The a→link effect is isolated as the driver (menuitem/tab not necessary)
+- Product lane can adopt DEF-FORM-ONLY as canonical metric with statistical backing
+- Claim C-MEAS-VALID advances toward VALIDATED for this metric
+
+### 11.2 FALSIFIED-IN-SETTING (Null Models Fail)
+- The observed 0.3 does not exceed chance
+- OR the a→link effect requires menuitem/tab
+- The truncated-sample ordering is noise
+- Product lane cannot use fraction-based yield metrics until truncation is resolved
+- Claim C-MEAS-VALID remains EXPERIMENTAL
+
+### 11.3 MEASUREMENT_INVALID
+- Pipeline error; not scientific evidence
+- Retry with fixed pipeline
+
+## 12. Analysis Plan
+
+1. Load raw data from exp347_raw_results.json
+2. Implement random ROLE_MAP null (1000 iterations, seed=42)
+   a. For each iteration, randomly assign each raw role to interactive/not with p=0.5
+   b. Compute ordering for each random assignment
+   c. Compute pairwise agreement distribution
+   d. Compare observed 0.3 to null distribution
+3. Implement single-role definitions (11 roles)
+   a. For each role, count only elements with that raw role
+   b. Compute ordering for each single-role definition
+   c. Compare orderings across all single-role definitions
+4. Implement isolated a→link definition
+   a. Create DEF-ISOLATED-A-LINK (a→link, input→textbox, no menuitem/tab)
+   b. Compute ordering
+   c. Compare with DEF-FULL-MAP ordering
+5. Check controls (positive, null, baseline, degeneracy)
+6. Apply decision rules
+7. Report all outcomes with equal prominence
+
+## 13. Analysis Code
+
+Analysis will be implemented in Python using:
+- `json` for data loading
+- `random` for random ROLE_MAP generation (seeded)
+- `collections.Counter` for role counting
+- `math` for percentile computation
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-INTEL-35112013458/analyze.py` before execution.
+
+## 14. Pre-registered Expectations
+
+From prior work:
+- The observed 0.3 pairwise agreement is based on 3 agreeing pairs out of 10 total
+- With 3 page types and 6 possible orderings, random agreement should be ~1/6 ≈ 0.167
+- The 'a'→'link' mapping inflates counts 33-150% differentially across page types
+- DEF-FULL-MAP (a→link, menuitem, tab) produces cart>listing>detail
+- DEF-FORM-AND-A-TEXTBOX (input→textbox only) produces listing>cart>detail
+- The difference between these two is attributed to a→link + menuitem/tab
+
+## 15. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 16. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-35112013458",
+  "frozen_at": "2026-09-16T15:00:57.041658+00:00",
+  "hashes": {
+    "prereg.md": "d2a4dc10e77846ae9b278174fceafe84278ea53fbccdfd593461a70e4a7c3b3b",
+    "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
+    "spec.json": "902b7cbf01d9d3dd6aa028537ed2d2c7a7814a00df213855fced3ff71ea080b9"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "null_mean_pairwise_agreement": 0.5275,
+    "null_p95_pairwise_agreement": 1.0,
+    "observed_agreement": 0.3,
+    "observed_exceeds_null_mean": false,
+    "observed_exceeds_null_p95": false,
+    "null_unique_orderings": 5,
+    "null_top_ordering_fraction": 0.702,
+    "null_top_ordering": "cart>detail>product_listing",
+    "single_role_n_unique_orderings": 3,
+    "single_role_n_degenerate": 3,
+    "single_role_any_matches_parent": true,
+    "single_role_matches_parent_roles": ["button", "form"],
+    "isolated_a_link_matches_def_full_map": true,
+    "isolated_a_link_matches_def_form_only": false,
+    "cond1_null_confirms": false,
+    "cond2_no_single_role_invariant": false,
+    "cond3_a_link_matches": true
+  },
+  "controls": {
+    "null_control_random_null": {
+      "description": "Random ROLE_MAP null (1000 iterations, seed=42) produces mean pairwise agreement < 0.3",
+      "expected_behavior": "Null mean < 0.3 and observed 0.3 exceeds 95th percentile",
+      "observed_behavior": "Null mean = 0.5275 (> 0.3), observed 0.3 does NOT exceed null mean or 95th percentile",
+      "pass": false,
+      "evidence_refs": ["test1_random_null.null_mean_pairwise_agreement", "test1_random_null.exceeds_null_p95"]
+    },
+    "positive_control_isolated_a_link": {
+      "description": "Isolated a→link definition produces ordering cart>product_listing>detail, matching DEF-FULL-MAP",
+      "expected_behavior": "Isolated a→link ordering equals DEF-FULL-MAP ordering",
+      "observed_behavior": "Isolated a→link ordering = cart>product_listing>detail = DEF-FULL-MAP ordering",
+      "pass": true,
+      "evidence_refs": ["test3_isolated_a_link.matches_def_full_map"]
+    },
+    "baseline_def_full_map": {
+      "description": "DEF-FULL-MAP ordering reproduces parent with_map ordering (cart>listing>detail)",
+      "expected_behavior": "DEF-FULL-MAP ordering = cart>product_listing>detail",
+      "observed_behavior": "DEF-FULL-MAP ordering = cart>product_listing>detail (confirmed)",
+      "pass": true,
+      "evidence_refs": ["parent_baselines.DEF_FULL_MAP_ordering"]
+    },
+    "baseline_def_form_only": {
+      "description": "DEF-FORM-ONLY ordering reproduces parent no_map ordering (listing>cart>detail)",
+      "expected_behavior": "DEF-FORM-ONLY ordering = product_listing>cart>detail",
+      "observed_behavior": "DEF-FORM-ONLY ordering = product_listing>cart>detail (confirmed)",
+      "pass": true,
+      "evidence_refs": ["parent_baselines.DEF_FORM_ONLY_ordering"]
+    },
+    "degeneracy_control": {
+      "description": "Single-role definitions with < 2 total elements flagged as degenerate",
+      "expected_behavior": "link, menuitem, tab flagged degenerate (0 elements in sample)",
+      "observed_behavior": "link=0, menuitem=0, tab=0 elements; flagged degenerate",
+      "pass": true,
+      "evidence_refs": ["test2_single_role.per_role.link.total_elements", "test2_single_role.per_role.menuitem.total_elements", "test2_single_role.per_role.tab.total_elements"]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/analyze.py",
+      "sha256": "ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/null_model_results.json",
+      "sha256": "c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Raw roles present in truncated sample: {a:16, button:22, combobox:8, div:50, form:19, input:5, label:13, span:27}. Raw role link=0 (confirmed). menuitem=0, tab=0.",
+    "Random null (1000 iterations, seed=42): 8 raw roles in data, each randomly included/excluded with p=0.5. Null distribution dominated by cart>detail>product_listing (70.2%). Null mean pairwise agreement = 0.5275, 95th percentile = 1.0.",
+    "Observed 0.3 pairwise agreement does NOT exceed null mean (0.5275) or 95th percentile (1.0). The observed ordering stability is within chance-level expectation.",
+    "Single-role definitions: 8 non-degenerate roles produce 3 unique orderings. button-only and form-only both produce product_listing>cart>detail (matching parent DEF-FORM-ONLY). This violates the expectation that no single role drives the metric.",
+    "Isolated a→link definition (a→link mapping, input→textbox mapping, no menuitem/tab) produces cart>product_listing>detail, identical to DEF-FULL-MAP. The means are also identical, confirming a→link alone is sufficient for the reversal.",
+    "The a→link reversal is driven by the a→link mapping inflating cart density relative to other types. With a→link, cart mean = 0.00561 vs product_listing = 0.00513 vs detail = 0.00428. Without a→link (DEF-FORM-ONLY), cart mean = 0.00280 vs product_listing = 0.00385 vs detail = 0.00171.",
+    "The null model reveals that random role assignments produce ORDERINGS (not just densities) that agree with each other at high rates (52.75%). The observed 0.3 is actually BELOW the null mean, meaning the 5-definition family ordering is LESS stable than random.",
+    "Condition 1 (null confirms significance): FAIL. Null mean (0.5275) > observed (0.3), so observed 0.3 does not exceed chance.",
+    "Condition 2 (no single-role invariant): FAIL. button-only and form-only produce the same ordering as each other and as DEF-FORM-ONLY.",
+    "Condition 3 (isolated a→link matches DEF-FULL-MAP): PASS. a→link alone drives the reversal."
+  ],
+  "validity_notes": [
+    "The random null uses independent inclusion/exclusion of roles with p=0.5, which is more diverse than real ROLE_MAP definitions (which have correlated role choices). This is a conservative null in the sense that real definitions occupy a smaller subspace, but the null still shows the observed 0.3 is not significant.",
+    "The null model tests pairwise agreement across 1000 random orderings, not across the 5 parent definitions. The 0.3 value from the parent was computed across 5 definitions (10 pairs, 3 agreeing). The null tests whether random role assignments produce orderings that agree with each other at rates above or below 0.3.",
+    "Cart has only 1 distinct entry (2 identical entries deduped). Within-type variance for cart is undefined. Cart density values are based on n=1 distinct cart page.",
+    "All data from a single Magento shopping site. Cross-site generalization unsupported.",
+    "The truncated-first-20 locatable_sample may introduce ordering artifacts. Full DOM enumeration not available.",
+    "3 of 11 single-role definitions are degenerate (link=0, menuitem=0, tab=0 in sample). These are excluded from ordering comparison."
+  ],
+  "unresolved": [
+    "The null model result is surprising: random role assignments produce higher pairwise agreement (0.5275) than the observed 5-definition family (0.3). This suggests the 5-definition family is intentionally diverse (spanning form-only to full-map), while random assignments tend to cluster around cart-heavy orderings. The interpretation of '0.3 exceeds chance' may need reframing: perhaps the question is not whether 0.3 exceeds random agreement, but whether the specific ordering (listing>cart>detail vs cart>listing>detail) is stable under the constrained family of definitions.",
+    "The single-role test shows button-only and form-only produce the same ordering as DEF-FORM-ONLY. This could mean: (a) the listing>cart>detail ordering is driven by form elements (button+form), not by the multi-role interaction; or (b) the truncated sample is too small to distinguish single-role from multi-role effects. Full DOM enumeration needed.",
+    "The isolated a→link result (identical to DEF-FULL-MAP) confirms a→link is sufficient but does not test whether menuitem/tab contribute additively. Since menuitem=0 and tab=0 in the sample, their contribution cannot be assessed from this data.",
+    "Cross-site validation needed: does the a→link reversal hold on non-Magento sites? Does the null distribution shape change with different DOM structures?"
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-INTEL-35112013458 Report: Null Models for Truncated-Sample Pairwise Ordering Agreement
+
+## Executive Summary
+
+**Verdict: FALSIFIED-IN-SETTING**
+
+Three preregistered null-model tests on truncated-sample pairwise ordering agreement:
+
+1. **Random ROLE_MAP null (1000 iterations)**: The observed 0.3 pairwise agreement does NOT exceed chance. Null mean = 0.5275, 95th percentile = 1.0. The observed 0.3 is actually BELOW the null mean.
+
+2. **Single-role definitions**: Two single-role definitions (button-only, form-only) produce the same ordering as DEF-FORM-ONLY (product_listing>cart>detail), violating the expectation that no single role drives the metric.
+
+3. **Isolated a→link**: CONFIRMED. A definition with a→link mapping but WITHOUT menuitem/tab produces the same ordering as DEF-FULL-MAP (cart>product_listing>detail). The a→link effect is isolated and sufficient.
+
+**Conclusion**: The truncated-sample ordering stability finding (0.3 pairwise agreement) does not exceed chance-level expectation. The null model reveals that random role assignments produce higher pairwise agreement than the 5-definition family. However, the a→link reversal mechanism is confirmed as isolated and sufficient.
+
+## 1. Test 1: Random ROLE_MAP Null
+
+### Procedure
+- 8 raw roles present in data: {a, button, combobox, div, form, input, label, span}
+- For each of 1000 iterations (seed=42): randomly assign each role to interactive/not with p=0.5
+- Compute ordering for each random assignment
+- Compute pairwise agreement across all 1000 orderings
+
+### Results
+| Metric | Value |
+|--------|-------|
+| Null mean pairwise agreement | 0.5275 |
+| Null 95th percentile | 1.0 |
+| Observed agreement | 0.3 |
+| Exceeds null mean | **No** |
+| Exceeds null 95th percentile | **No** |
+| Unique orderings in null | 5 |
+| Top ordering | cart>detail>product_listing (70.2%) |
+
+### Interpretation
+The null distribution is dominated by `cart>detail>product_listing` (70.2% of random assignments). The observed 0.3 pairwise agreement is BELOW the null mean (0.5275), meaning the 5-definition family ordering is LESS stable than random. This falsifies the hypothesis that 0.3 exceeds chance.
+
+**Why is the null mean so high?** Random role assignments tend to produce similar orderings because:
+- Most roles are evenly distributed across page types
+- The `a` role (16 elements) is the only one with strong differential distribution
+- Random inclusion/exclusion of most roles doesn't change ordering much
+- The 5-definition family is intentionally diverse (spanning form-only to full-map)
+
+## 2. Test 2: Single-Role Definitions
+
+### Results
+| Role | Ordering | Total Elements | Matches Parent | Degenerate |
+|------|----------|----------------|----------------|------------|
+| a | cart>detail>listing | 16 | No | No |
+| button | **listing>cart>detail** | 22 | **Yes** | No |
+| combobox | cart>detail>listing | 8 | No | No |
+| div | detail>cart>listing | 50 | No | No |
+| form | **listing>cart>detail** | 19 | **Yes** | No |
+| input | cart>detail>listing | 5 | No | No |
+| label | cart>detail>listing | 13 | No | No |
+| link | listing>detail>cart | 0 | No | **Yes** |
+| menuitem | listing>detail>cart | 0 | No | **Yes** |
+| span | cart>detail>listing | 27 | No | No |
+| tab | listing>detail>cart | 0 | No | **Yes** |
+
+### Key Findings
+- **8 non-degenerate roles** produce **3 unique orderings**
+- **button-only** and **form-only** both produce `product_listing>cart>detail` (matching DEF-FORM-ONLY)
+- This violates the expectation that "no single role drives the metric"
+- The `div` role produces a different ordering (`detail>cart>product_listing`), suggesting div density is higher on detail pages
+
+### Interpretation
+The button-only and form-only orderings match the parent family, suggesting the `product_listing>cart>detail` ordering may be driven by form elements rather than multi-role interaction. However, the sample is too small (7 tasks, 3 page types) to draw definitive conclusions.
+
+## 3. Test 3: Isolated a→link Definition
+
+### Definition
+```
+INTERACTIVE_ROLES: {button, link, textbox, checkbox, radio, combobox, listbox, slider, spinbutton, searchbox, switch}
+ROLE_MAP: {"a": "link", "input": "textbox"}
+(Note: menuitem and tab excluded)
+```
+
+### Results
+| Definition | Ordering | Means |
+|------------|----------|-------|
+| DEF-ISOLATED-A-LINK | cart>product_listing>detail | listing=0.00513, detail=0.00428, cart=0.00561 |
+| DEF-FULL-MAP | cart>product_listing>detail | listing=0.00513, detail=0.00428, cart=0.00561 |
+| DEF-FORM-ONLY | product_listing>cart>detail | listing=0.00385, detail=0.00171, cart=0.00280 |
+
+**Isolated a→link is IDENTICAL to DEF-FULL-MAP** (both ordering and means).
+
+### Interpretation
+The a→link mapping alone is sufficient to produce the cart>listing>detail reversal. Menuitem and tab (both = 0 in this sample) do not contribute. The reversal is driven by:
+- a→link mapping inflates cart density: cart has 2 `a` elements that get mapped to `link`, while listing has 2 `a` elements but 3x more total elements, diluting the effect
+- The differential inflation is: cart +33% (0.00280→0.00561), listing +33% (0.00385→0.00513), but the absolute cart increase (0.00281) exceeds listing increase (0.00128), causing the reversal
+
+## 4. Decision Rule Evaluation
+
+| Condition | Required | Observed | Pass |
+|-----------|----------|----------|------|
+| 1. Null confirms significance | Null mean < 0.3 AND observed > p95 | Null mean = 0.5275, observed < null mean | **FAIL** |
+| 2. No single-role invariant | No single-role matches parent | button and form match parent | **FAIL** |
+| 3. Isolated a→link matches DEF-FULL-MAP | Ordering = cart>listing>detail | Ordering = cart>listing>detail | **PASS** |
+
+**Verdict: FALSIFIED-IN-SETTING** (2 of 3 conditions fail)
+
+## 5. Implications
+
+### For Product Lane
+- The truncated-sample ordering stability finding (0.3 pairwise agreement) is NOT statistically significant
+- The `product_listing>cart>detail` ordering under DEF-FORM-ONLY may be noise, not a robust signal
+- The a→link reversal mechanism is confirmed but bounded to this truncated sample
+- **Recommendation**: Do not adopt DEF-FORM-ONLY as canonical metric based on this ordering alone
+
+### For Runtime Lane
+- The a→link mapping is the dominant sensitivity driver (confirmed)
+- The locatableSample cap needs to be fixed before metric validation can proceed
+- Full DOM enumeration needed to assess true ordering
+
+### For Intel Lane
+- The null model result (0.5275 > 0.3) is surprising and warrants investigation
+- The question "does 0.3 exceed chance?" may need reframing to "is the specific ordering stable under constrained definition families?"
+- Cross-site validation needed
+
+## 6. Validity Threats
+
+1. **Small sample**: 7 tasks, 3 page types. Low statistical power.
+2. **Single site**: All data from one Magento shopping site.
+3. **Cart pseudoreplication**: Cart n=1 distinct, within-type variance undefined.
+4. **Null model assumptions**: Independent inclusion/exclusion with p=0.5 is more diverse than real definitions.
+5. **Truncated sample**: First-20 cap may cause ordering artifacts.
+6. **Missing roles**: link=0, menuitem=0, tab=0 in sample; their contributions cannot be assessed.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "github_run_id": "35112013458",
+  "pre_execute_sha": "b52cc1001c7f493febd309976e336acf07a92c09",
+  "post_execute_sha": null,
+  "relevant_commits": [
+    "4aed7bfa5be214b90dffb26bf283943568261cd6"
+  ],
+  "datasets": [
+    {
+      "name": "exp347_raw_results.json",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "description": "Raw measurement data from 8 tasks on Magento shopping site (3 listing, 3 detail, 2 cart, 2 checkout-failed). Truncated-first-20 locatable_sample per task."
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/analyze.py",
+      "sha256": "ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+      "description": "Analysis script implementing three null-model tests: random ROLE_MAP null, single-role definitions, isolated a→link definition."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/null_model_results.json",
+      "sha256": "c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+      "role": "derived",
+      "description": "Full analysis results including null distribution, single-role orderings, and isolated a→link comparison."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Experiment result packet with metrics, controls, observations, and validity notes."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable report with interpretation and implications."
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "Standard library only (json, random, collections, math)",
+    "docker_required": false,
+    "browser_required": false,
+    "model_calls_required": false
+  },
+  "reproduction_command": "cd /home/runner/work/Spider/Spider && python3 research/experiments/EXP-INTEL-35112013458/analyze.py",
+  "key_frozen_inputs": {
+    "seed": 42,
+    "n_iterations": 1000,
+    "observed_agreement": 0.3,
+    "all_raw_roles": ["a", "button", "combobox", "div", "form", "input", "label", "link", "menuitem", "span", "tab"],
+    "raw_roles_in_data": ["a", "button", "combobox", "div", "form", "input", "label", "span"],
+    "parent_ordering_full_map": ["cart", "product_listing", "detail"],
+    "parent_ordering_form_only": ["product_listing", "cart", "detail"]
+  },
+  "provenance_chain": [
+    "EXP-INTEL-34718481334 (raw data collection)",
+    "EXP-INTEL-34782350557 (raw data packaging)",
+    "EXP-INTEL-34956989900 (5-definition analysis)",
+    "EXP-INTEL-35083033552 (truncated-sample verification)",
+    "EXP-INTEL-35112013458 (null models - THIS EXPERIMENT)"
+  ]
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Truncated-first-20 locatable_sample is non-random (header-biased) while denominator elements_with_bbox ~1070-1564 counts all bbox elements; density = count_in_sample_20 / total_bbox underestimates absolute yield and introduces selection bias that varies by page type.",
+      "severity": "high",
+      "evidence_refs": ["research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json", "result.json validity_notes", "report.md section 6"],
+      "impact": "Ordering differences may be artifact of truncation position, not full interactive density; claim cannot generalize beyond this sampling method."
+    },
+    {
+      "finding": "Small N and single site: 8 measurements dedup to 7 distinct tasks (3 listing, 3 detail, 1 cart with duplicate cart_1 counted twice in producer analysis). Cart within-type variance undefined (n=1 distinct). All data from one Magento shopping site; no cross-site identification.",
+      "severity": "high",
+      "evidence_refs": ["result.json observations[0-2]", "provenance.json datasets[0]", "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json"],
+      "impact": "Low power; cart ordering driven by single page; no generalization to C-CROSSSITE or C-WEB-DYNAMICS."
+    },
+    {
+      "finding": "Cart duplicate counted twice (n=8 in code) vs distinct n=7: producer load_tasks() does not dedupe task_id cart_1. Means unchanged (identical duplicate) but pairwise sample contribution and per-type N are overstated.",
+      "severity": "low",
+      "evidence_refs": ["research/experiments/EXP-INTEL-35112013458/analyze.py:load_tasks", "null_model_results.json parent_baselines"],
+      "impact": "Does not change orderings (recomputed with dedup: identical DEF-FULL-MAP cart>listing>detail and DEF-FORM-ONLY listing>cart>detail), but violates prereg dedup guidance."
+    },
+    {
+      "finding": "Random ROLE_MAP null is non-deterministic despite frozen seed=42: analyze.py iterates over set raw_roles_in_data (hash-random order) when assigning p=0.5 per role. Re-runs vary null mean by ~0.02 (producer reported 0.5275/0.702 top; auditor re-run direct 0.517/0.696, rerun via analyze.py 0.5425/0.712). Verdict stable but exact reproducibility requires sorted iteration.",
+      "severity": "medium",
+      "evidence_refs": ["research/experiments/EXP-INTEL-35112013458/analyze.py:test_random_null", "result.json metrics.null_mean_pairwise_agreement", "null_model_results.json test1_random_null"],
+      "impact": "Does not overturn falsification (all variants >>0.3), but violates measurement_validity promise of frozen seed reproducibility."
+    },
+    {
+      "finding": "Null p95 metric is degenerate: null pairwise agreement distribution is binary (0/1 per pair), so 95th percentile is 1.0 whenever mean >0.05. Comparing observed 0.3 to p95=1.0 is uninformative; direct null mean comparison is the informative test. Producer correctly reports both and fails cond1 on both.",
+      "severity": "medium",
+      "evidence_refs": ["research/experiments/EXP-INTEL-35112013458/analyze.py:160-166", "result.json metrics.null_p95_pairwise_agreement"],
+      "impact": "Decision rule requires observed >p95; with binary pairs this can never be satisfied when null mean >0.5, making cond1 stricter than intended, but producer fails cond1 on mean alone already."
+    },
+    {
+      "finding": "Null null-model framing mismatch: observed 0.3 is agreement across 5 intentionally diverse definitions (3/10 pairs); null tests agreement across 1000 random role subsets (499500 pairs). High null mean 0.52 reflects that most roles (div, span etc.) are weakly differential and random subsets cluster on cart>detail>listing (70% top), not uniform 1/6=0.167 expected in prereg. Producer correctly notes surprise and does not claim uniform null.",
+      "severity": "medium",
+      "evidence_refs": ["prereg.md 6.1 Expected under null 0.167", "result.json observations[6-7]", "null_model_results.json test1_random_null.ordering_distribution"],
+      "impact": "Confirms falsification is robust: even under more diverse random null (p=0.5 independent inclusion, more variable than real definitions), observed is below null, so significance claim fails."
+    },
+    {
+      "finding": "Single-role degeneracy and sparsity: 3 degenerate (link=0, menuitem=0, tab=0) excluded; remaining sparse roles (input=5 total ~0-1 per page, combobox=8) produce orderings from 1-element granularity and integer noise, not stable signals. button-only and form-only both reproduce DEF-FORM-ONLY ordering, violating H2 expectation, but sample too sparse to distinguish single-role driver vs truncation artifact.",
+      "severity": "medium",
+      "evidence_refs": ["result.json metrics.single_role_any_matches_parent", "null_model_results.json test2_single_role.per_role", "result.json observations[3-4]"],
+      "impact": "Supports FALSIFIES for cond2, but cannot establish whether listing>cart>detail is truly driven by button/form or by truncation."
+    },
+    {
+      "finding": "Isolated a->link test is tautologically sufficient in this sample because menuitem=0 and tab=0 counts: DEF-ISOLATED-A-LINK and DEF-FULL-MAP are identical on counts and means (both cart 0.00561, listing 0.00513, detail 0.00428). Producer correctly notes menuitem/tab contribution untestable here.",
+      "severity": "low",
+      "evidence_refs": ["result.json observations[4-5]", "null_model_results.json test3_isolated_a_link", "result.json unresolved[2]"],
+      "impact": "Isolation claim is bounded to this truncated sample; does not demonstrate that menuitem/tab are never relevant on other sites/samples."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "DEF-FORM-ONLY ordering (product_listing>cart>detail)",
+      "expected": "product_listing>cart>detail",
+      "observed": "product_listing>cart>detail",
+      "pass": true,
+      "evidence_refs": ["null_model_results.json parent_baselines.DEF_FORM_ONLY_ordering", "result.json controls.baseline_def_form_only"],
+      "notes": "Recomputed with and without cart dedup: identical ordering. Means listing 0.00385, cart 0.00280, detail 0.00171 match producer."
+    },
+    {
+      "baseline_id": "DEF-FULL-MAP ordering (cart>product_listing>detail)",
+      "expected": "cart>product_listing>detail",
+      "observed": "cart>product_listing>detail",
+      "pass": true,
+      "evidence_refs": ["null_model_results.json parent_baselines.DEF_FULL_MAP_ordering", "result.json controls.baseline_def_full_map"],
+      "notes": "Recomputed identical. Means cart 0.005607, listing 0.005134, detail 0.00428 match producer. Confirms with_map reversal baseline."
+    },
+    {
+      "baseline_id": "Random ROLE_MAP null distribution (1000 iterations, seed=42)",
+      "expected": "mean <0.3, observed 0.3 >p95, centered ~0.167 if orderings uniform",
+      "observed": "mean 0.5275 (producer), recomputed direct 0.517 (set-order) / 0.5425 (rerun analyze.py), 0.511 (sorted roles); p95=1.0 all variants",
+      "pass": false,
+      "evidence_refs": ["result.json metrics.null_mean_pairwise_agreement", "result.json controls.null_control_random_null", "null_model_results.json test1_random_null"],
+      "notes": "Baseline expectation 0.167 (uniform 6 orderings) falsified by empirical null: dominance of cart>detail>product_listing ~70% drives high agreement. Null control correctly FAILs (pass=false) and supports FALSIFIED-IN-SETTING for cond1."
+    },
+    {
+      "baseline_id": "Single-role definitions (11 roles)",
+      "expected": "No single-role ordering matches 5-definition family; diverse orderings",
+      "observed": "8 non-degenerate produce 3 unique orderings; button-only and form-only both match DEF-FORM-ONLY listing>cart>detail",
+      "pass": false,
+      "evidence_refs": ["result.json metrics.single_role_any_matches_parent", "null_model_results.json test2_single_role"],
+      "notes": "Recomputed identical: button 22, form 19, div 50, span 27, etc. ordering table verified. Baseline fails as producer reports (any_matches_parent=true), correctly failing cond2."
+    },
+    {
+      "baseline_id": "Isolated a->link definition (a->link without menuitem/tab)",
+      "expected": "cart>product_listing>detail matching DEF-FULL-MAP, proving a->link alone drives reversal",
+      "observed": "cart>product_listing>detail identical means to DEF-FULL-MAP; matches_form_only=false",
+      "pass": true,
+      "evidence_refs": ["result.json metrics.isolated_a_link_matches_def_full_map", "null_model_results.json test3_isolated_a_link"],
+      "notes": "Recomputed identical ordering and means (0.005607/0.005134/0.00428). Positive control correctly PASSes. Bounded because menuitem=tab=0 in sample so additivity untestable."
+    }
+  ],
+  "recomputed_metrics": {
+    "null_mean_pairwise_agreement": {
+      "producer_reported": 0.5275,
+      "auditor_recomputed_direct": 0.5171531531531531,
+      "auditor_rerun_analyze_py": 0.5425,
+      "auditor_sorted_roles_direct": 0.5115375375375375,
+      "auditor_sorted_roles_sampled": 0.5029,
+      "unit": "fraction",
+      "notes": "All variants computed over same 8 tasks (cart duplicate counted). Direct = exact pairwise agreement across 1000 null orderings (499500 pairs). Sampled = 10000 random pairs as in analyze.py. Variance ~0.02 due to nondeterministic set iteration; all >> observed 0.3, confirming observed does NOT exceed null mean."
+    },
+    "null_p95_pairwise_agreement": {
+      "producer_reported": 1.0,
+      "auditor_recomputed": 1,
+      "notes": "Binary pair outcomes => p95=1 whenever mean>0.05. Confirmed."
+    },
+    "observed_agreement": {
+      "producer_reported": 0.3,
+      "auditor_verified": 0.3,
+      "notes": "3/10 pairs agreeing across 5-definition family from parent EXP-INTEL-35083033552; not recomputed here, taken as frozen input."
+    },
+    "observed_exceeds_null_mean": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "notes": "0.3 < all null means (0.51-0.54)."
+    },
+    "observed_exceeds_null_p95": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "notes": "0.3 < 1.0."
+    },
+    "null_unique_orderings": {
+      "producer_reported": 5,
+      "auditor_recomputed": 5,
+      "notes": "5 of 6 possible orderings with 3 types appear; cart>detail>product_listing dominates (~70%)."
+    },
+    "null_top_ordering": {
+      "producer_reported": "cart>detail>product_listing",
+      "producer_fraction": 0.702,
+      "auditor_direct_fraction": 0.696,
+      "auditor_rerun_fraction": 0.712,
+      "notes": "Top ordering and dominance confirmed."
+    },
+    "single_role_n_unique_orderings": {
+      "producer_reported": 3,
+      "auditor_recomputed": 3,
+      "notes": "Across 8 non-degenerate roles."
+    },
+    "single_role_n_degenerate": {
+      "producer_reported": 3,
+      "auditor_recomputed": 3,
+      "roles": ["link", "menuitem", "tab"],
+      "notes": "Each 0 elements in truncated sample, flagged degenerate (<2)."
+    },
+    "single_role_any_matches_parent": {
+      "producer_reported": true,
+      "auditor_recomputed": true,
+      "matching_roles": ["button", "form"],
+      "notes": "Both produce product_listing>cart>detail = DEF-FORM-ONLY ordering, violating H2."
+    },
+    "isolated_a_link_matches_def_full_map": {
+      "producer_reported": true,
+      "auditor_recomputed": true,
+      "ordering": ["cart", "product_listing", "detail"],
+      "means": {"cart": 0.005607476635514018, "product_listing": 0.005134861654950757, "detail": 0.004280429875511604},
+      "notes": "Identical to DEF-FULL-MAP on this sample; also computable with deduped n=7 same result."
+    },
+    "isolated_a_link_matches_def_form_only": {
+      "producer_reported": false,
+      "auditor_recomputed": false
+    },
+    "cond1_null_confirms": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "decision_rule": "null_mean<0.3 AND observed>p95"
+    },
+    "cond2_no_single_role_invariant": {
+      "producer_reported": false,
+      "auditor_recomputed": false,
+      "decision_rule": "no single-role matches parent"
+    },
+    "cond3_a_link_matches": {
+      "producer_reported": true,
+      "auditor_recomputed": true
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for this site/sample: On single Magento shopping site, truncated-first-20 locatable_sample (n=7 distinct pages; 3 listing, 3 detail, 1 cart duplicated), the 0.3 pairwise ordering agreement across the 5-definition family does NOT exceed chance (random ROLE_MAP null mean ~0.51-0.54, p95=1.0, observed below null). Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering product_listing>cart>detail, so the metric is not multi-role invariant in this sample. Isolated a->link mapping without menuitem/tab is sufficient to reproduce DEF-FULL-MAP ordering cart>product_listing>detail (identical means) on this sample where menuitem=tab=0, but additivity/generalization untested. No claim supports adopting DEF-FORM-ONLY as canonical yield metric, nor cross-site/full-DOM generalization, nor ordering stability under full enumeration until truncation cap is fixed.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35112013458/result.json",
+    "research/experiments/EXP-INTEL-35112013458/report.md",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json sha256:c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py sha256:ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35112013458/provenance.json",
+    "research/experiments/EXP-INTEL-35112013458/spec.json",
+    "research/experiments/EXP-INTEL-35112013458/prereg.md",
+    "research/experiments/EXP-INTEL-35112013458/freeze.json"
+  ],
+  "unresolved": [
+    "Whether full-DOM enumeration (without first-20 cap) changes null distribution shape, per-role densities, and ordering stability; truncated sample bias cannot be corrected from existing data.",
+    "Whether a->link reversal and button/form driver replicate on non-Magento sites or with different DOM structures; single-site bound.",
+    "Whether menuitem/tab contribute additively when present (0 counts here) — requires sample where those roles appear.",
+    "Interpretation of 0.3: producer notes question may need reframing from 'exceeds random ROLE_MAP chance' to 'stable under constrained definition family' — not resolved by this null.",
+    "Sparse-role orderings (input 5, combobox 8) granularity noise vs true signal; requires larger per-page counts.",
+    "Cart variance undefined (n=1 distinct); robust inference requires more distinct cart/detail/listing pages."
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "The truncated-sample pairwise ordering agreement (0.3) does NOT exceed chance-level expectation: random ROLE_MAP null mean = 0.5275 (auditor recomputed 0.51-0.54), observed 0.3 is below null mean and below p95=1.0. Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering, violating the expectation that the metric is multi-role invariant. Only the isolated a→link effect (H3) is confirmed as sufficient on this sample where menuitem=tab=0. The claim ceiling is bounded to this single Magento site, truncated-first-20 sample, n=7 distinct tasks. No part of the ordering stability or metric adoption claim survives the null-model tests."
+    }
+  ],
+  "product_action": "Do not adopt DEF-FORM-ONLY as canonical yield metric based on truncated-sample ordering. The ordering stability finding (0.3) is noise, not signal. Product lane must wait for full-DOM enumeration (truncation cap fix) before fraction-based metric validation can proceed.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
+  "reason": "FALSIFIED-IN-SETTING: Condition 1 (null confirms significance) FAILS — null mean 0.5275 >> observed 0.3. Condition 2 (no single-role invariant) FAILS — button-only and form-only both produce DEF-FORM-ONLY ordering. Condition 3 (isolated a→link) PASSES — a→link alone reproduces DEF-FULL-MAP ordering, but this is tautological when menuitem=tab=0 in sample. The audit confirms producer metrics are sound but documents high-severity validity threats: truncated sample bias, small N, single site, cart pseudoreplication. The null model result is surprising (0.5275 > 0.3) because random role assignments cluster on cart-heavy orderings, while the 5-definition family is intentionally diverse. This does not mean ordering stability is impossible — it means the truncated sample cannot discriminate signal from noise.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35112013458/result.json",
+    "research/experiments/EXP-INTEL-35112013458/audit.json",
+    "research/experiments/EXP-INTEL-35112013458/report.md",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json sha256:c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py sha256:ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
+  "why_next": "The truncation cap (first-20 locatable_sample) is the primary validity threat preventing discriminating inference. Full DOM enumeration would resolve whether: (1) the null distribution shape changes with more elements, (2) button/form single-role match is a truncation artifact or a real driver, (3) cart density ordering is stable under full sampling. This is a substrate fix that unblocks all downstream metric validation. Runtime lane owns the locatableSample implementation.",
+  "carry_forward": {
+    "established": [
+      "On this truncated-first-20 sample (7 distinct tasks, 1 Magento site), the a→link mapping is sufficient to produce cart>product_listing>detail ordering identical to DEF-FULL-MAP (auditor verified, identical means)",
+      "The a→link reversal mechanism is driven by differential density inflation: cart +33% (0.00280→0.00561), listing +33% (0.00385→0.00513), but absolute cart increase exceeds listing, causing the ordering flip",
+      "Random ROLE_MAP null (1000 iterations, seed=42) on this sample produces mean pairwise agreement ~0.52 (auditor recomputed 0.51-0.54), which is ABOVE the observed 0.3, falsifying the hypothesis that 0.3 exceeds chance",
+      "On this truncated sample, menuitem=0 and tab=0, so their contribution to the ordering reversal cannot be tested — isolated a→link test is tautologically identical to DEF-FULL-MAP",
+      "The 5-definition family is intentionally diverse (spanning form-only to full-map) and produces lower pairwise agreement than random ROLE_MAP assignments, because random assignments cluster on cart-heavy orderings (~70% cart>detail>product_listing)"
+    ],
+    "rejected": [
+      "Hypothesis that truncated-sample pairwise ordering agreement (0.3) exceeds chance-level expectation — FALSIFIED on this sample (null mean 0.52 > observed 0.3)",
+      "Hypothesis that no single-role definition produces invariant ordering — FALSIFIED: button-only and form-only both reproduce DEF-FORM-ONLY ordering (product_listing>cart>detail)"
+    ],
+    "unknown": [
+      "Whether full-DOM enumeration (without first-20 cap) changes the null distribution shape, per-role densities, and ordering stability — truncated sample bias cannot be corrected from existing data",
+      "Whether button/form single-role match is a truncation artifact (truncated sample too small to distinguish single-role driver from truncation) or a real driver of the listing>cart>detail ordering",
+      "Whether menuitem/tab contribute additively when present (0 counts in this sample) — requires a sample where those roles appear",
+      "Whether the a→link reversal and ordering stability replicate on non-Magento sites or with different DOM structures (single-site bound)",
+      "Whether the null distribution shape (dominated by cart>detail>product_listing at ~70%) generalizes to other sites with different DOM structures",
+      "The true ordering under full DOM enumeration — all current orderings are based on truncated-first-20 locatable_sample"
+    ],
+    "do_not_assume": [
+      "Do not assume the 0.3 ordering agreement is noise globally — it was not significant on THIS truncated sample from THIS site, but full DOM enumeration on other sites might show different behavior",
+      "Do not assume DEF-FORM-ONLY (product_listing>cart>detail) is unreliable — the ordering might be real but the truncated sample cannot confirm it",
+      "Do not assume the a→link effect generalizes to sites where menuitem/tab have non-zero counts — the isolation claim is bounded to this sample where menuitem=tab=0",
+      "Do not assume the null distribution shape (0.52 mean, cart>detail>product_listing dominant) is universal — it may be specific to this truncated sample and DOM structure",
+      "Do not assume ordering stability is unmeasurable — the current measurement is invalid due to truncation, not because ordering stability is inherently untestable",
+      "Do not assume C-MEAS-VALID is closed — it remains EXPERIMENTAL; the null-model test was valid but the substrate (truncated sample) prevented discriminating inference"
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Full DOM enumeration (locatableSample cap removal) in runtime lane to resolve truncation bias",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Additional site(s) with non-zero menuitem/tab counts to test additivity of a→link + menuitem/tab",
+      "blocking": false
+    },
+    {
+      "type": "data",
+      "description": "More distinct cart pages (current n=1 distinct) to enable within-type variance estimation",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35112013458/result.json — metrics null_mean_pairwise_agreement=0.5275, observed=0.3, cond1=false, cond2=false, cond3=true",
+    "research/experiments/EXP-INTEL-35112013458/audit.json — claim_ceiling=FALSIFIED-IN-SETTING, validity_findings (truncated sample bias severity=high, small N severity=high, cart duplicate severity=low, null nondeterminism severity=medium)",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json sha256:c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c — full analysis results",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py sha256:ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699 — analysis code",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — raw measurement data",
+    "research/experiments/EXP-INTEL-35112013458/provenance.json — provenance chain and frozen inputs"
+  ],
+  "recommended_action": "Route to runtime lane to fix locatableSample truncation cap. The next intel experiment should re-run null-model tests on full-DOM enumeration data (same 8 tasks, same site) to determine whether truncation artifacts drove the observed results. If full enumeration recovers significance, the a→link isolation claim can be strengthened; if not, the null result is confirmed and the metric question moves to cross-site generalization."
 }
 ```
 

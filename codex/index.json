@@ -1093,6 +1093,31 @@
         "handoff.json": "d190f98f9f5837c55bb037e0ee13c241fabaac2fa12761129949987e8d047c1b"
       }
     },
+    "EXP-INTEL-35112013458": {
+      "lane": "intel",
+      "request_id": "bd76f392c072c8920261ef76",
+      "created_at": "2026-09-16T14:57:18.093830+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a\u2192link contribution be separated from menuitem/tab effects in the ordering reversal?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "hashes": {
+        "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
+        "spec.json": "902b7cbf01d9d3dd6aa028537ed2d2c7a7814a00df213855fced3ff71ea080b9",
+        "prereg.md": "d2a4dc10e77846ae9b278174fceafe84278ea53fbccdfd593461a70e4a7c3b3b",
+        "freeze.json": "23b52ba8a6c25cbbce5dbfd364515a15f11778e39a8b8423fa4db78da23a3e43",
+        "result.json": "c7b12de7754ed97dedd262fe14a383de003da8d0e27d0f45588727c344083f43",
+        "report.md": "9ff078ec9d6a8f656937c258ba3285dab3abe23f98a3cab09c01831a2b56495f",
+        "provenance.json": "15411ab23c513113bb22c1561d9cdc3f9dcf95c75f65dc47effee8ca7e24fd56",
+        "audit.json": "ba6ab6fbcb7c4ebbbd6de1d40589b70909e7ae622060fb6fd85b65cda5b3d53a",
+        "verdict.json": "4c7f0e6eaa7119ea29142e21cdeb6e1c8d8714bbb82dd98264ee233df63e2ab7",
+        "handoff.json": "d9ca2d3296a623c39fbce4c1260aec450531fdda88760082dba60598c6e953d6"
+      }
+    },
     "EXP-PHYSICS-33528829431": {
       "lane": "physics",
       "request_id": "aefb271e5c3274224c9651fe",

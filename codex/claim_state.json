@@ -777,6 +777,14 @@
         "reason": "SURVIVES_CURRENT_TEST per frozen spec decision_rule (2/4 adjacent pairs agree >= threshold, not ALL 5 orderings differ). However audit ceiling narrows: effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3, because DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical on this data (raw role link=0 in truncated sample, Counter verified). The 30% pairwise agreement and 50% adjacency agreement have not been compared to chance because null models (prereg 8.1 random ROLE_MAP, 8.2 single-role) were not executed. No definition restores the hypothesized full-DOM ordering listing>detail>cart. Claim remains EXPERIMENTAL pending null model execution, full DOM enumeration, and cross-site validation."
       },
       {
+        "experiment_id": "EXP-INTEL-35112013458",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "The truncated-sample pairwise ordering agreement (0.3) does NOT exceed chance-level expectation: random ROLE_MAP null mean = 0.5275 (auditor recomputed 0.51-0.54), observed 0.3 is below null mean and below p95=1.0. Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering, violating the expectation that the metric is multi-role invariant. Only the isolated a\u2192link effect (H3) is confirmed as sufficient on this sample where menuitem=tab=0. The claim ceiling is bounded to this single Magento site, truncated-first-20 sample, n=7 distinct tasks. No part of the ordering stability or metric adoption claim survives the null-model tests."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",
