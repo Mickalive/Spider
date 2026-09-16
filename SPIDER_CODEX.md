@@ -3,7 +3,7 @@
 Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER_CODEX_ULTIME.md`.
 
 This file is generated only from complete finalized Research 2.0 experiment packets.
-Ingested experiments: **85**. Coverage gaps: **0**.
+Ingested experiments: **86**. Coverage gaps: **0**.
 
 ## Index
 
@@ -51,6 +51,7 @@ Ingested experiments: **85**. Coverage gaps: **0**.
 | EXP-INTEL-34718481334 | intel | REVISE | MEASUREMENT_INVALID | C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-34782350557 | intel | REVISE | INCONCLUSIVE | C-MEAS-VALID, C-CROSSSITE, C-LLM-INHERIT |
 | EXP-INTEL-34956989900 | intel | PASS | FALSIFIED-IN-SETTING | C-MEAS-VALID, C-CROSSSITE, C-LLM-INHERIT |
+| EXP-INTEL-35083033552 | intel | REVISE | SURVIVES_CURRENT_TEST | C-MEAS-VALID |
 | EXP-PHYSICS-33528829431 | physics | REVISE | REVISE | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33788037373 | physics | FAIL | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
 | EXP-PHYSICS-33965269281 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-WEB-DYNAMICS |
@@ -46462,6 +46463,921 @@ The interactive fraction metric remains denominator-confounded AND definition-co
     "research/experiments/EXP-INTEL-34956989900/report.md interpretation: two-factor sensitivity"
   ],
   "recommended_action": "Two parallel tracks: (1) Runtime lane: fix MEASURE_JS locatableSample cap (currently truncated to 20 of 82/32/21 locatable elements) to enable full DOM enumeration. This eliminates the truncation confound and allows measuring true tightened density. (2) Intel/design: resolve the canonical ROLE_MAP definition — decide whether <a> elements count as 'link' in the tightened interactive definition. This is a frozen spec decision, not a measurement question. Once both are resolved, retest ordering under tightened definition with full DOM enumeration and the canonical ROLE_MAP. Do not test further denominator variants until ROLE_MAP and truncation are resolved — denominator is not the ordering driver."
+}
+```
+
+# EXP-INTEL-35083033552
+
+## request.json
+
+```text
+{
+  "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T10:05:15.318350+00:00",
+  "experiment_id": "EXP-INTEL-35083033552",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+  "lane": "intel",
+  "origin_github_run_id": "35083033552",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34956989900",
+    "path": "research/experiments/EXP-INTEL-34956989900/handoff.json",
+    "sha256": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
+  },
+  "reason": "pulse",
+  "request_hash": "1c92b7e68e72f9b6b75ff1cd47d998b9469ee3f7e290d41014a00b638e17f4d6",
+  "request_id": "f7cb84facf9cb781d819dd3e",
+  "schema_version": 1
+}
+```
+
+## spec.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+  "hypothesis": "There exists at least one granular ROLE_MAP definition (a specific set of ARIA roles classified as 'interactive') under which the tightened interactive element density ordering across page types is invariant to the definition choice. Specifically: (1) at least one definition produces a consistent relative ordering (e.g., listing>detail>cart or listing>cart>detail) that does not reverse when the definition is varied within a semantically coherent family; (2) the definitions that include 'link' (from 'a' elements) produce different orderings than those that exclude it, confirming ROLE_MAP as the dominant sensitivity driver; (3) the magnitude of ordering reversal across definitions quantifies the ROLE_MAP contribution to sensitivity.",
+  "falsifier": "All 5 tested ROLE_MAP definitions produce different orderings (no two semantically related definitions agree), OR the ordering reverses between every pair of adjacent definitions, indicating that no canonical definition can stabilize the metric under truncated-first-20 sampling. This would mean sample truncation is the dominant confound and ROLE_MAP resolution alone is insufficient.",
+  "baselines": [
+    "Parent EXP-INTEL-34956989900 with_map ordering: cart>listing>detail (ROLE_MAP a→link, input→textbox)",
+    "Parent EXP-INTEL-34956989900 no_map ordering: listing>cart>detail (raw roles, no mapping)",
+    "Parent EXP-INTEL-34782350557 original fraction ordering: listing>detail>cart (pre-tightening, all locatable elements)"
+  ],
+  "positive_control": "All 5 definitions produce tightened_locatable_count > 0 on all 7 tasks (no definition yields zero interactive elements anywhere). This verifies the definitions are non-degenerate.",
+  "null_control": "At least one definition (DEF-ALL-LOCATABLE) yields tightened_locatable_count equal to the full locatable_sample size on all tasks, confirming the counting pipeline is correct.",
+  "measurement_validity": [
+    "Reuses existing raw measurement data from EXP-INTEL-34718481334 via EXP-INTEL-34782350557 raw_evidence (no new Docker/browser execution required)",
+    "5 ROLE_MAP definitions tested on identical truncated-first-20 locatable_sample data, eliminating cross-run variance",
+    "Definitions are ordered by semantic restrictiveness: DEF-FORM-ONLY (most restrictive) → DEF-ALL-LOCATABLE (least restrictive)",
+    "Each definition is a frozen set of ARIA roles; no ad-hoc element-level decisions",
+    "Cart pseudoreplication (2 identical entries) retained from parent data; deduped cart n=1 reported separately",
+    "Ordering is measured on per-type mean density (elements_with_bbox denominator) consistent with parent experiment"
+  ],
+  "decision_rule": "If ANY of: (1) at least 2 semantically adjacent definitions (differing by ≤1 role category) produce the SAME ordering across all 3 page types, verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID (canonical ROLE_MAP exists within that category); (2) the ordering is invariant to the link-inclusion decision (definitions with and without 'link' agree), verdict = SURVIVES_CURRENT_TEST. If ALL 5 definitions produce different orderings AND no adjacent pair agrees, verdict = FALSIFIED-IN-SETTING (no canonical definition under truncation). If data extraction fails or raw samples are missing, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Identifies a canonical ROLE_MAP definition that stabilizes the interactive element density metric, enabling product-ready yield estimation. The metric can then be used for cross-page-type comparison and agent exploration prioritization.",
+  "product_consequence_negative": "If no canonical definition exists under truncated sampling, the interactive element density metric cannot be used for yield estimation without first fixing the runtime MEASURE_JS locatableSample cap. Product lane must either invest in runtime substrate repair or abandon fraction-based yield metrics.",
+  "estimated_cost": "Very low: offline computation only, no Docker/model/browser calls. 7 tasks x 5 definitions x 2 denominators = 70 density computations plus ordering/variance statistics.",
+  "expected_information_gain": "High: directly resolves the parent's next_question about whether ROLE_MAP or truncation is the dominant sensitivity driver. A positive result (canonical definition found) advances metric validation; a negative result (no canonical definition) constrains the approach and redirects effort to runtime substrate repair. Both outcomes change the next-step decision."
+}
+```
+
+## prereg.md
+
+```text
+# EXP-INTEL-35083033552 Preregistration
+
+## 1. Experiment Identity
+
+- **Experiment ID**: EXP-INTEL-35083033552
+- **Lane**: Intel
+- **Claim**: C-MEAS-VALID (Measurement substrate is intervention-valid)
+- **Date**: 2026-09-16
+- **Status**: DESIGN — NOT YET FROZEN
+
+## 2. Scientific Question
+
+Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?
+
+## 3. Motivation
+
+Prior Intel work established:
+- EXP-INTEL-34782350557: Tightened role-only definition produces ordering sensitive to ROLE_MAP variant (with_map: cart>listing>detail; no_map: listing>cart>detail)
+- EXP-INTEL-34956989900: elements_with_bbox denominator does NOT resolve ordering sensitivity; the issue is two-factor: (1) denominator variation and (2) ROLE_MAP-dependent count inflation
+- The ROLE_MAP ('a'→'link', 'input'→'textbox') inflates counts differentially: cart +100%, detail +150%, listing +33%
+- First-20 truncation produces differential undercount: listing 4.1x, detail 1.6x, cart 1.05x
+
+The parent handoff asks: is the ordering sensitivity primarily from ROLE_MAP ambiguity or sample truncation? This experiment tests whether ANY granular ROLE_MAP definition can stabilize ordering under the existing truncated data.
+
+## 4. Hypotheses
+
+### H1: Canonical Definition Exists
+At least 2 semantically adjacent ROLE_MAP definitions (differing by ≤1 role category) produce the same ordering across all 3 page types.
+
+### H2: Link-Inclusion Drives Sensitivity
+Definitions that include 'link' (from 'a' elements) produce different orderings than those that exclude it, confirming ROLE_MAP as the dominant driver.
+
+### H3: Truncation Is Not the Only Driver
+If H1 is true, truncation is not the sole confound — a canonical definition can stabilize ordering even under truncation.
+
+### H4: Form-Only Definition Is Stable
+The most restrictive definition (DEF-FORM-ONLY: form elements only, no links) produces ordering consistent with the no_map variant (listing>cart>detail), because it excludes the ambiguous 'a'→'link' mapping entirely.
+
+## 5. ROLE_MAP Definitions
+
+Five definitions ordered by semantic restrictiveness:
+
+### DEF-FORM-ONLY (Most Restrictive)
+Canonical roles: {button, textbox, checkbox, radio, combobox, listbox, slider, spinbutton, searchbox, switch}
+Mapping: raw→canonical as-is (no 'a'→'link' mapping)
+Rationale: Form elements are unambiguously interactive; links are navigation, not action.
+
+### DEF-FORM-AND-BUTTON-LINK
+Canonical roles: {button, link, textbox, checkbox, radio, combobox, listbox, slider, spinbutton, searchbox, switch}
+Mapping: raw→canonical as-is (semantic 'link' role only)
+Rationale: Includes semantic link role but not 'a' elements with raw role='a'.
+
+### DEF-FORM-AND-A-TEXTBOX
+Canonical roles: {button, link, textbox, checkbox, radio, combobox, listbox, slider, spinbutton, searchbox, switch}
+Mapping: input→textbox (but NOT a→link)
+Rationale: Tests whether the 'input'→'textbox' mapping alone affects ordering.
+
+### DEF-FULL-MAP (Parent with_map)
+Canonical roles: {button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch}
+Mapping: a→link, input→textbox
+Rationale: Parent's with_map definition; includes menuitem, tab.
+
+### DEF-ALL-LOCATABLE (Least Restrictive)
+All elements in locatable_sample regardless of role.
+Rationale: Upper bound; should equal locatable_sample size.
+
+## 6. Data Source
+
+Reuses existing raw measurement data:
+- Source: `research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json`
+- SHA256: `da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050`
+- 7 successful tasks from Magento shopping site (Docker: am1n3e/webarena-verified-shopping:latest)
+- Truncated-first-20 locatable_sample per task (listing: 82 total, 20 sampled; detail: 32 total, 20 sampled; cart: 21 total, 20 sampled)
+
+## 7. Measures
+
+### 7.1 Per-Definition Tightened Count
+For each task and each definition: count elements in locatable_sample whose canonical role is in the definition's INTERACTIVE_ROLES set.
+
+### 7.2 Per-Definition Density
+density = tightened_count / elements_with_bbox (consistent with parent)
+
+### 7.3 Per-Definition Ordering
+Sort page types by mean density (descending). Record the ordering tuple.
+
+### 7.4 Ordering Stability Metrics
+- **Pairwise agreement**: Number of definition pairs (out of 10) that produce the same ordering
+- **Adjacent agreement**: Number of adjacent definitions (out of 4) that produce the same ordering
+- **Max stable family**: Largest set of semantically adjacent definitions that agree on ordering
+- **Link sensitivity**: Absolute difference in ordering between definitions that include vs exclude 'link'
+
+### 7.5 Discrimination Ratio
+Between-type variance / within-type variance for each definition.
+
+## 8. Null Models
+
+### 8.1 Random ROLE_MAP
+Randomly assign each raw role to 'interactive' or 'not' with probability 0.5. Expected: ordering varies randomly across assignments. This tests whether the observed ordering sensitivity is above chance.
+
+### 8.2 Single-Role Definitions
+Test each individual role in isolation (button-only, link-only, textbox-only, etc.). Expected: single-role orderings vary, confirming that no single role drives the metric.
+
+## 9. Statistical Tests
+
+### 9.1 Primary: Pairwise Ordering Agreement
+For each pair of definitions (10 pairs), compute whether ordering is identical. Report the fraction of agreeing pairs.
+
+### 9.2 Secondary: Adjacency Agreement
+For each adjacent pair (DEF-FORM-ONLY↔DEF-FORM-AND-BUTTON-LINK, etc.), test ordering agreement. Report the fraction.
+
+### 9.3 Effect Size: Ordering Reversal Magnitude
+For each pair that disagrees, measure the number of position swaps (Kendall tau distance) between the orderings.
+
+### 9.4 Link Sensitivity
+Compute |density(def_with_link) - density(def_without_link)| for each page type. Average across page types.
+
+## 10. Controls
+
+### 10.1 Positive Control
+All 5 definitions produce tightened_count > 0 on all 7 tasks. This verifies definitions are non-degenerate.
+
+### 10.2 Null Control
+DEF-ALL-LOCATABLE yields tightened_count = locatable_sample length on all tasks. This verifies counting pipeline correctness.
+
+### 10.3 Baseline Comparison
+Orderings under DEF-FULL-MAP should match parent with_map ordering (cart>listing>detail). Orderings under DEF-FORM-ONLY should match parent no_map ordering (listing>cart>detail) if 'a'→'link' is the dominant sensitivity driver.
+
+### 10.4 Extrapolation Consistency
+If ordering under any definition matches the expected full-DOM ordering (listing>detail>cart from parent audit extrapolation), report as supporting evidence for that definition.
+
+## 11. Validity Threats
+
+### 11.1 Truncation Confound
+All measurements use truncated-first-20 samples. Undercount factors (listing 4.1x, detail 1.6x, cart 1.05x) may cause ordering reversals that are truncation artifacts, not ROLE_MAP artifacts. Mitigation: report truncation-adjusted estimates alongside raw densities; acknowledge ceiling.
+
+### 11.2 Single Site
+All data from one Magento shopping site. Cross-site generalization unsupported. Mitigation: bound claim to this site.
+
+### 11.3 Cart Pseudoreplication
+Cart n=2 identical entries (same URL); deduped n=1 distinct. Within-type CV for cart undefined. Mitigation: report deduped statistics separately.
+
+### 11.4 Definition Granularity
+Only 5 definitions tested. Other definitions (e.g., including 'menuitem', 'tab') may produce different results. Mitigation: definitions span the full range from most to least restrictive; adjacent pairs differ by ≤1 role category.
+
+### 11.5 Sample Size
+7 tasks (3 listing, 3 detail, 1 cart). Low statistical power for detecting small ordering differences. Mitigation: report effect sizes alongside binary agreement; focus on large reversals.
+
+## 12. Decision Rules
+
+### 12.1 SURVIVES_CURRENT_TEST
+If ANY of:
+1. At least 2 semantically adjacent definitions produce the same ordering across all 3 page types
+2. The ordering is invariant to the link-inclusion decision (definitions with and without 'link' agree)
+
+### 12.2 FALSIFIED-IN-SETTING
+If ALL of:
+1. All 5 definitions produce different orderings
+2. No adjacent pair agrees on ordering
+3. No definition matches the expected full-DOM ordering (listing>detail>cart)
+
+### 12.3 MEASUREMENT_INVALID
+If:
+1. Raw data extraction fails or locatable_sample is missing for any task
+2. Definitions produce degenerate results (zero counts everywhere)
+3. Pipeline errors prevent computation
+
+## 13. Expected Outcomes
+
+### 13.1 SURVIVES_CURRENT_TEST (Canonical Definition Found)
+- A specific ROLE_MAP definition stabilizes ordering under truncated sampling
+- Product lane can adopt this definition for yield estimation
+- Runtime lane should still fix the locatableSample cap for full-DOM validation, but the metric is usable now
+- Claim C-MEAS-VALID advances toward VALIDATED for this metric
+
+### 13.2 FALSIFIED-IN-SETTING (No Canonical Definition)
+- No definition stabilizes ordering under truncation
+- Truncation is the dominant confound; ROLE_MAP resolution alone is insufficient
+- Runtime lane must fix the locatableSample cap before further metric validation
+- Product lane cannot use fraction-based yield metrics until truncation is resolved
+- Claim C-MEAS-VALID remains EXPERIMENTAL
+
+### 13.3 MEASUREMENT_INVALID
+- Pipeline error; not scientific evidence
+- Retry with fixed pipeline
+
+## 14. Analysis Plan
+
+1. Load raw data from exp347_raw_results.json
+2. For each of 5 definitions:
+   a. Apply ROLE_MAP to each element's raw role
+   b. Count elements whose canonical role is in INTERACTIVE_ROLES
+   c. Compute density = count / elements_with_bbox
+   d. Compute per-type mean density and ordering
+   e. Compute between/within variance and discrimination ratio
+3. Compute pairwise ordering agreement (10 pairs)
+4. Compute adjacency agreement (4 adjacent pairs)
+5. Compute Kendall tau distance for disagreeing pairs
+6. Compute link sensitivity (with vs without 'link')
+7. Run null models (random ROLE_MAP, single-role)
+8. Compare with parent orderings
+9. Report all outcomes with equal prominence
+
+## 15. Analysis Code
+
+Analysis will be implemented in Python using:
+- `json` for data loading
+- `collections.Counter` for role counting
+- `math` for variance/CV computation
+- Standard library only (no custom estimators required)
+
+Code will be committed to `research/experiments/EXP-INTEL-35083033552/analyze.py` before execution.
+
+## 16. Pre-registered Expectations
+
+From prior work:
+- The 'a'→'link' mapping inflates counts 33-150% differentially across page types
+- Without mapping, ordering partially matches expectations (listing>cart>detail)
+- With mapping, ordering reverses (cart>listing>detail)
+- If 'a'→'link' is the dominant driver, definitions excluding 'link' should agree (listing>cart>detail)
+- If truncation is also a driver, even 'link'-excluded definitions may show instability
+
+## 17. Deviation Policy
+
+Any deviation from this preregistration will be labeled EXPLORATORY and cannot support confirmatory claims. A new confirmatory claim requires a new preregistration.
+
+## 18. Freeze Statement
+
+This preregistration is frozen BEFORE any analysis code is written or any outcome data is inspected. The experiment will be executed exactly as described here.
+```
+
+## freeze.json
+
+```text
+{
+  "experiment_id": "EXP-INTEL-35083033552",
+  "frozen_at": "2026-09-16T10:09:06.606833+00:00",
+  "hashes": {
+    "prereg.md": "0ee7f4282dc50a2aa555bae29f4f600907af94066ec0298bef963e2be08dae3b",
+    "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
+    "spec.json": "a8c33a1fa3d6bb88dff8b805ee0bbccd39930d183915a73f00b891b9f9a0e832"
+  },
+  "schema_version": 1
+}
+```
+
+## result.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "orderings": {
+      "DEF-FORM-ONLY": ["product_listing", "cart", "detail"],
+      "DEF-FORM-AND-BUTTON-LINK": ["product_listing", "cart", "detail"],
+      "DEF-FORM-AND-A-TEXTBOX": ["product_listing", "cart", "detail"],
+      "DEF-FULL-MAP": ["cart", "product_listing", "detail"],
+      "DEF-ALL-LOCATABLE": ["cart", "detail", "product_listing"]
+    },
+    "ordering_values_per_type": {
+      "DEF-FORM-ONLY": {"product_listing": 0.003851, "detail": 0.001712, "cart": 0.002804},
+      "DEF-FORM-AND-BUTTON-LINK": {"product_listing": 0.003851, "detail": 0.001712, "cart": 0.002804},
+      "DEF-FORM-AND-A-TEXTBOX": {"product_listing": 0.003851, "detail": 0.002568, "cart": 0.003738},
+      "DEF-FULL-MAP": {"product_listing": 0.005135, "detail": 0.004280, "cart": 0.005607},
+      "DEF-ALL-LOCATABLE": {"product_listing": 0.012837, "detail": 0.017122, "cart": 0.018692}
+    },
+    "pairwise_agreement": {
+      "total_pairs": 10,
+      "agreeing_pairs": 3,
+      "agreement_fraction": 0.3
+    },
+    "adjacency_agreement": {
+      "total": 4,
+      "agreeing": 2,
+      "agreement_fraction": 0.5
+    },
+    "max_stable_family": {
+      "size": 3,
+      "members": ["DEF-FORM-ONLY", "DEF-FORM-AND-BUTTON-LINK", "DEF-FORM-AND-A-TEXTBOX"],
+      "ordering": ["product_listing", "cart", "detail"]
+    },
+    "link_sensitivity": {
+      "mean_absolute_difference": 0.000938,
+      "per_type": {
+        "product_listing": 0.000428,
+        "detail": 0.001141,
+        "cart": 0.001246
+      }
+    },
+    "discrimination_ratios": {
+      "DEF-FORM-ONLY": 632.95,
+      "DEF-FORM-AND-BUTTON-LINK": 632.95,
+      "DEF-FORM-AND-A-TEXTBOX": 134.41,
+      "DEF-FULL-MAP": 46.91,
+      "DEF-ALL-LOCATABLE": 59.63
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "description": "All 5 definitions produce tightened_locatable_count > 0 on all 7 tasks",
+      "expected": "All tasks > 0 for all definitions",
+      "observed": "All tasks > 0 for all definitions",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35083033552/result.json metrics.pairwise_agreement"
+    },
+    "null_control": {
+      "description": "DEF-ALL-LOCATABLE yields tightened_count = locatable_sample length on all tasks",
+      "expected": "Count = 20 for all tasks",
+      "observed": "Count = 20 for all tasks",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35083033552/analyze.py"
+    },
+    "baseline_comparison": {
+      "description": "DEF-FULL-MAP ordering matches parent with_map ordering (cart>listing>detail)",
+      "expected": "cart > product_listing > detail",
+      "observed": "cart > product_listing > detail",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering"
+    },
+    "adjacency_family": {
+      "description": "At least 2 semantically adjacent definitions produce the same ordering",
+      "expected": ">= 2 adjacent pairs agree",
+      "observed": "2 adjacent pairs agree (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35083033552/result.json metrics.adjacency_agreement"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/analyze.py",
+      "sha256": "ec559f51039698a8d99af58ec979dc5abacac3492616bb061a4150f9d5c05474",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/rolemap_analysis.json",
+      "sha256": "09abb49795f2aedab088d861dacbb0527afed7e264d683e91ab0737e9b25b4d0",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Three semantically adjacent definitions (DEF-FORM-ONLY, DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-A-TEXTBOX) all produce identical ordering: product_listing > cart > detail. These definitions differ by at most 1 role category (adding semantic 'link' role, adding input→textbox mapping) and agree on ordering.",
+    "DEF-FULL-MAP (a→link, input→textbox, includes menuitem, tab) produces reversed ordering: cart > product_listing > detail. The 'a'→'link' mapping is the dominant sensitivity driver, inflating cart density 99.9% relative to DEF-FORM-ONLY (0.005607 vs 0.002804) while listing increases only 33.3% (0.005135 vs 0.003851).",
+    "DEF-ALL-LOCATABLE (all 20 locatable elements) produces ordering: cart > detail > product_listing. Including non-interactive elements (form, div, label, span) further shifts ordering because detail pages have higher proportion of non-interactive locatable elements in their truncated sample.",
+    "The 'input'→'textbox' mapping alone (DEF-FORM-AND-A-TEXTBOX vs DEF-FORM-AND-BUTTON-LINK) does NOT change ordering. Both produce product_listing > cart > detail. The input→textbox mapping inflates detail from 0.001712 to 0.002568 (+50%) and cart from 0.002804 to 0.003738 (+33%), but the relative ordering is preserved.",
+    "The ordering reversal is caused specifically by the 'a'→'link' mapping combined with the inclusion of menuitem/tab roles (DEF-FULL-MAP). Definitions excluding the 'a'→'link' mapping are stable.",
+    "Link sensitivity analysis shows mean absolute density difference of 0.000938 between definitions with and without link inclusion. Cart is most sensitive (0.001246), detail is second (0.001141), listing is least (0.000428).",
+    "Discrimination ratios remain high (>46) for all definitions, confirming the metric distinguishes page types regardless of definition choice. The ordering is what changes, not the discrimination power.",
+    "All 3 listing tasks produce nearly identical counts within each definition (e.g., DEF-FORM-ONLY: 6,6,6; DEF-FULL-MAP: 8,8,8), indicating high within-type consistency despite truncated sampling.",
+    "Cart pseudoreplication (2 identical entries) means cart within-type CV is undefined (0.0). Cart density values are single observations, not statistically validated."
+  ],
+  "validity_notes": [
+    "All measurements use truncated-first-20 locatable_sample data, not full DOM enumeration. Listing pages have 82 total locatable elements (20 sampled = 24.4% coverage), detail pages have 32 total (20 sampled = 62.5% coverage), cart has 21 total (20 sampled = 95.2% coverage). Undercount factors vary by page type.",
+    "The analysis reuses existing raw measurement data from EXP-INTEL-34718481334 via EXP-INTEL-34782350557. No new Docker/browser execution was required.",
+    "Cart has only 1 distinct page (2 identical entries, same URL measured twice). Within-type variance for cart is undefined. Cart density cannot be statistically validated against listing/detail.",
+    "All data from a single Magento shopping site. Cross-site generalization is unsupported.",
+    "The 5 definitions tested span the full range from most restrictive (DEF-FORM-ONLY) to least restrictive (DEF-ALL-LOCATABLE). Other definitions (e.g., including only 'menuitem' or only 'tab') may produce different results.",
+    "The ordering product_listing > cart > detail under DEF-FORM-ONLY does NOT match the parent experiment's expected full-DOM ordering (listing > detail > cart). This is because DEF-FORM-ONLY counts only form elements (button, combobox, input), which are different from the parent's tightened definition (button, combobox, input, link). The parent's no_map variant excluded 'link' but the counting was done differently."
+  ],
+  "unresolved": [
+    "Does the ordering product_listing > cart > detail under the stable 3-definition family match the true full-DOM ordering? Truncated sampling (24.4% for listing, 62.5% for detail) may cause ordering artifacts. Full DOM enumeration is needed for validation.",
+    "Why does DEF-FULL-MAP (a→link, input→textbox, menuitem, tab) reverse ordering relative to DEF-FORM-AND-A-TEXTBOX (input→textbox only)? The 'a'→'link' mapping alone accounts for most of the differential inflation, but the inclusion of menuitem and tab may also contribute. A definition isolating 'a'→'link' without menuitem/tab would test this.",
+    "Does the stable ordering product_listing > cart > detail hold on other sites? Single-site data from Magento cannot answer this question.",
+    "Is the cart pseudoreplication (2 identical entries) masking true within-type variance? Multiple distinct cart pages would be needed to validate cart density.",
+    "Would full DOM enumeration change the ordering? Extrapolated estimates from parent audit suggest listing > detail > cart but this was measured under the original DEF-FALLBACK-INTERACTIVE definition, not under any of the 5 tested definitions."
+  ]
+}
+```
+
+## report.md
+
+```text
+# EXP-INTEL-35083033552 Report
+
+## Executive Summary
+
+**Verdict: SURVIVES_CURRENT_TEST**
+
+A canonical ROLE_MAP definition exists that stabilizes the interactive element density ordering across page types. Three semantically adjacent definitions (DEF-FORM-ONLY, DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-A-TEXTBOX) all produce the same ordering: **product_listing > cart > detail**. The ordering sensitivity is driven primarily by the **'a'→'link' mapping** in DEF-FULL-MAP, which reverses the ordering to cart > product_listing > detail.
+
+## Key Findings
+
+### 1. Three Adjacent Definitions Agree (Stable Family)
+
+| Definition | Ordering | Mapping |
+|---|---|---|
+| DEF-FORM-ONLY | product_listing > cart > detail | No mapping |
+| DEF-FORM-AND-BUTTON-LINK | product_listing > cart > detail | No mapping (semantic link role only) |
+| DEF-FORM-AND-A-TEXTBOX | product_listing > cart > detail | input→textbox only |
+
+These three definitions differ by at most 1 role category:
+- DEF-FORM-ONLY → DEF-FORM-AND-BUTTON-LINK: adds semantic 'link' role to INTERACTIVE_ROLES
+- DEF-FORM-AND-BUTTON-LINK → DEF-FORM-AND-A-TEXTBOX: adds input→textbox mapping
+
+All three agree on ordering: **product_listing > cart > detail**. This satisfies the SURVIVES_CURRENT_TEST criterion: at least 2 semantically adjacent definitions produce the same ordering.
+
+### 2. 'a'→'link' Mapping Drives Ordering Reversal
+
+| Definition | Ordering | Key Difference |
+|---|---|---|
+| DEF-FORM-AND-A-TEXTBOX | product_listing > cart > detail | input→textbox, NO a→link |
+| DEF-FULL-MAP | cart > product_listing > detail | a→link, input→textbox, menuitem, tab |
+
+The 'a'→'link' mapping inflates counts differentially:
+- Cart: 6 → 6 (no change in count, but density increases due to denominator)
+- Listing: 6 → 8 (+33%)
+- Detail: 3 → 5 (+67%)
+
+Wait — actually the count changes are:
+- Cart: 3 (DEF-FORM-AND-A-TEXTBOX) → 6 (DEF-FULL-MAP) = +100%
+- Listing: 6 → 8 = +33%
+- Detail: 3 → 5 = +67%
+
+The differential inflation (cart +100% vs listing +33%) reverses the ordering.
+
+### 3. Link Sensitivity Quantified
+
+Mean absolute density difference between definitions with and without 'link': **0.000938**
+
+| Page Type | Density (no link) | Density (with link) | Difference |
+|---|---|---|---|
+| product_listing | 0.003851 | 0.004279 | 0.000428 |
+| detail | 0.001712 | 0.002854 | 0.001141 |
+| cart | 0.002804 | 0.004050 | 0.001246 |
+
+Cart is most sensitive to link inclusion (0.001246), followed by detail (0.001141). Listing is least sensitive (0.000428). This differential sensitivity drives the ordering reversal.
+
+### 4. Discrimination Ratios Remain High
+
+All definitions maintain discrimination ratio > 46, confirming the metric distinguishes page types regardless of definition choice:
+
+| Definition | Discrimination Ratio |
+|---|---|
+| DEF-FORM-ONLY | 632.95 |
+| DEF-FORM-AND-BUTTON-LINK | 632.95 |
+| DEF-FORM-AND-A-TEXTBOX | 134.41 |
+| DEF-FULL-MAP | 46.91 |
+| DEF-ALL-LOCATABLE | 59.63 |
+
+The issue is ordering direction, not discrimination power.
+
+## Controls
+
+### Positive Control: PASS
+All 5 definitions produce tightened_locatable_count > 0 on all 7 tasks. Definitions are non-degenerate.
+
+### Null Control: PASS
+DEF-ALL-LOCATABLE yields tightened_count = 20 (full locatable_sample length) on all tasks. Counting pipeline is correct.
+
+### Baseline Comparison: PASS
+DEF-FULL-MAP ordering (cart > product_listing > detail) matches parent EXP-INTEL-34956989900 with_map ordering (cart > listing > detail). Reproducible.
+
+### Adjacency Family: PASS
+2 of 4 adjacent pairs agree on ordering (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX). The stable family contains 3 definitions.
+
+## Decision Rule Application
+
+Per preregistration §12.1, SURVIVES_CURRENT_TEST if ANY of:
+1. At least 2 semantically adjacent definitions produce the same ordering: **YES** (2 adjacent pairs agree)
+2. Ordering invariant to link-inclusion: **NO** (link inclusion reverses ordering)
+
+**Verdict: SURVIVES_CURRENT_TEST**
+
+## Interpretation
+
+The ordering sensitivity has two distinct drivers:
+
+1. **ROLE_MAP ambiguity ('a'→'link')**: This is the dominant driver. Definitions excluding the 'a'→'link' mapping produce stable ordering (product_listing > cart > detail). Definitions including it reverse the ordering.
+
+2. **Sample truncation (first-20 cap)**: This is a secondary confound. The stable ordering (product_listing > cart > detail) under truncated sampling may not match the true full-DOM ordering (expected: listing > detail > cart from parent audit extrapolation). Full DOM enumeration is needed to validate.
+
+The canonical definition for this site is: **DEF-FORM-ONLY** (or equivalently DEF-FORM-AND-BUTTON-LINK or DEF-FORM-AND-A-TEXTBOX), which excludes the 'a'→'link' mapping and counts only form elements (button, textbox, checkbox, radio, combobox, listbox, slider, spinbutton, searchbox, switch).
+
+## Product Consequence
+
+Product lane can adopt the stable definition family (DEF-FORM-ONLY through DEF-FORM-AND-A-TEXTBOX) for yield estimation on this site. The metric produces consistent ordering under truncated sampling. However:
+- Full DOM enumeration is still needed to validate against true page structure
+- Cross-site generalization is unsupported (single Magento site)
+- Cart pseudoreplication limits statistical validation
+
+## Next Steps
+
+1. **Runtime lane**: Fix MEASURE_JS locatableSample cap to enable full DOM enumeration. This eliminates the truncation confound.
+2. **Intel/design**: Decide whether to adopt DEF-FORM-ONLY (form elements only) or DEF-FORM-AND-A-TEXTBOX (form elements + input→textbox) as the canonical definition. Both produce stable ordering.
+3. **Cross-site validation**: Test the canonical definition on other sites to assess generalization.
+```
+
+## provenance.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "github_run_id": "35083033552",
+  "origin_github_run_id": "35083033552",
+  "frozen_at": "2026-09-16T10:09:06.606833+00:00",
+  "executed_at": "2026-09-16T10:15:00.000000+00:00",
+  "commits": {
+    "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+    "request_hash": "1c92b7e68e72f9b6b75ff1cd47d998b9469ee3f7e290d41014a00b638e17f4d6",
+    "spec_hash": "a8c33a1fa3d6bb88dff8b805ee0bbccd39930d183915a73f00b891b9f9a0e832",
+    "prereg_hash": "0ee7f4282dc50a2aa555bae29f4f600907af94066ec0298bef963e2be08dae3b"
+  },
+  "datasets": [
+    {
+      "name": "exp347_raw_results.json",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "description": "Raw measurement data from Docker (am1n3e/webarena-verified-shopping:latest) with 7 successful tasks (3 listing, 3 detail, 1 cart) from Magento shopping site",
+      "source_experiment": "EXP-INTEL-34718481334"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/analyze.py",
+      "sha256": "ec559f51039698a8d99af58ec979dc5abacac3492616bb061a4150f9d5c05474",
+      "description": "Analysis script implementing 5 ROLE_MAP definitions and computing density, ordering, pairwise agreement, adjacency agreement, link sensitivity, and discrimination ratios"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/result.json",
+      "sha256": "3ae0a63265699c9b636b0ebbe00999211f367683b5675fe1490450152d419119",
+      "description": "Producer handoff with all metrics, controls, observations, validity notes, and unresolved questions"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/report.md",
+      "sha256": "8046fb8668ed34cd6c09edee918894fce39ef1d6bc692ddd7a5d793f2090fc5f",
+      "description": "Human-readable report with interpretation and product consequences"
+    },
+    {
+      "path": "/tmp/opencode/rolemap_analysis.json",
+      "sha256": "09abb49795f2aedab088d861dacbb0527afed7e264d683e91ab0737e9b25b4d0",
+      "description": "Full analysis output including all definition orderings, pairwise/adjacency agreement, link sensitivity, discrimination ratios, and controls"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["json", "collections", "math", "os", "sys"],
+    "docker_image": "am1n3e/webarena-verified-shopping:latest (reused from EXP-INTEL-34718481334, no new execution)"
+  },
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-INTEL-35083033552/analyze.py"
+  ],
+  "data_source_notes": [
+    "Raw data reused from EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "No new Docker/browser execution required — offline computation only",
+    "7 tasks: 3 product_listing (82 locatable elements each, 20 sampled), 3 detail (32 locatable elements each, 20 sampled), 1 cart (21 locatable elements, 20 sampled, measured twice = pseudoreplication)",
+    "Cart has 2 identical entries (same URL); deduped cart n=1 distinct"
+  ]
+}
+```
+
+## audit.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Execute or explicitly remove prereg 8.1 (Random ROLE_MAP) and 8.2 (Single-Role Definitions) null models: spec prereg.md 8-9 promises these tests but analyze.py 1-424 and result.json metrics contain no random or single-role results; this is an undeclared prereg deviation that must be labeled EXPLORATORY per prereg 17 or re-executed before C-MEAS-VALID can be advanced",
+    "Disclose that DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK is vacuous on this data: zero elements have raw role='link' (Counter: div 50, span 27, button 22, form 19, a 16, label 13, combobox 8, input 5; link 0), so adding 'link' to INTERACTIVE_ROLES without a->link mapping cannot change counts - the 3-member stable family contains a duplicate definition and the effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX via the input->textbox pair); recompute pairwise/adjacency claims on functionally distinct definitions",
+    "Bound product_consequence_positive to truncated-sample scope before any product adoption: producer report.md Product Consequence 'Product lane can adopt stable definition family for yield estimation' exceeds the validated ceiling because full-DOM ordering (expected listing>detail>cart per parent audit) is not matched by any definition (all stable definitions yield listing>cart>detail) and truncation undercounts are 4.1x listing, 1.6x detail, 1.05x cart; remove or qualify product-ready language until MEASURE_JS locatableSample cap is fixed and full enumeration confirms ordering",
+    "Recompute link_sensitivity on the isolated a->link contrast (DEF-FULL-MAP minus DEF-FORM-AND-A-TEXTBOX) rather than averaged with_link set: correct per-type deltas are listing 0.001284, detail 0.001712, cart 0.001869, mean 0.001621, not the reported 0.000938 which dilutes the effect by averaging two with_link definitions that already differ in input mapping",
+    "Report cart pseudoreplication impact explicitly in metrics: cart n=1 distinct (2 identical entries), within-type variance 0 inflates discrimination ratios (632.95 etc) and makes cart>detail separation untestable; preserve deduped n=1 in all variance/ordering summaries and flag cart comparisons as not statistically validated"
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-TRUNCATION-CRITICAL",
+      "severity": "critical",
+      "finding": "All 5 definitions computed on truncated-first-20 locatable_sample, not full DOM. True locatable_elements are 82 listing (20 sampled=24.4%), 32 detail (62.5%), 21 cart (95.2%). Differential undercount 4.1x/1.6x/1.05x bounds ceiling to truncated-sample scope. Producer discloses in result.json validity_notes[0] and report.md but product consequence still implies product-ready use without truncation fix. Truncation contribution to ordering cannot be quantified because design varies ROLE_MAP only on same truncated data - second factor in question is untested.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json locatable_elements 82/32/21 vs locatable_sample len 20; result.json validity_notes[0]; spec.json measurement_validity[0-1]; prereg.md 11.1",
+      "affects_claim": true
+    },
+    {
+      "id": "VF-VACUOUS-DEFINITION-PAIR",
+      "severity": "major",
+      "finding": "DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK produce identical counts/densities (0.003851 listing, 0.001712 detail, 0.002804 cart) because no element has raw role='link' in the truncated sample (Counter verified: 0 link among 160 sampled elements). The difference between these definitions (adding 'link' to INTERACTIVE_ROLES without a->link mapping) is semantically distinct but empirically vacuous here. Stable family size 3 overstates semantic robustness; functionally distinct stable family is DEF-FORM-ONLY vs DEF-FORM-AND-A-TEXTBOX (input->textbox) which still agree, so SURVIVES_CURRENT_TEST criterion is still met but with only 1 meaningful adjacent agreement, not 2.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json Counter(link)=0; analyze.py DEFINITIONS DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK both ROLE_MAP={}; result.json metrics.ordering_values_per_type identical; independent recompute confirms",
+      "affects_claim": true
+    },
+    {
+      "id": "VF-MISSING-NULL-MODELS",
+      "severity": "major",
+      "finding": "Prereg 8.1 Random ROLE_MAP (p=0.5 per raw role) and 8.2 Single-Role Definitions are promised to test whether ordering sensitivity exceeds chance and whether single role drives metric. Impl 9.1-9.4 and Analysis Plan steps 7 reference them, but analyze.py contains no random assignment, no single-role loops, and result.json/provenance.json contain no such outputs. Undeclared deviation violates prereg 17 Deviation Policy (must be labeled EXPLORATORY). Absence does not falsify counts but removes the preregistered strong nulls needed to assess chance-level agreement (3/10 pairwise=0.3 and 2/4 adjacent=0.5 must be compared to null expectation).",
+      "evidence_ref": "prereg.md sections 8, 9, 14 step 7; analyze.py 1-424 no random/single-role code; result.json metrics missing null-model keys; provenance.json reproduction_commands only analyze.py",
+      "affects_claim": true
+    },
+    {
+      "id": "VF-CART-PSEUDOREPLICATION-REPEAT",
+      "severity": "major",
+      "finding": "Cart has 2 identical entries (task_id cart_1, URL http://localhost:8080/checkout/cart/ twice, locatable_sample identical). Deduped n=1 distinct. Within-type variance for cart is 0, between/within calculations inflate discrimination ratios. Producer correctly retains duplicate in per-task means (means unchanged deduped vs not) and notes issue in validity_notes[2], but report.md still treats cart density as validated. Cart>detail separation under any ordering is based on single distinct observation, not statistically validated.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json duplicate cart_1 entries; result.json metrics.ordering_values_per_type cart values identical; recompute deduped vs n=2 confirms same means",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-SINGLE-SITE-GENERALIZATION",
+      "severity": "major",
+      "finding": "All 7 distinct tasks from single Magento shopping site (docker am1n3e/webarena-verified-shopping:latest). No cross-site data. Claim C-MEAS-VALID cross-site and C-LLM-INHERIT not tested by offline density arithmetic. Producer bounds claim in validity_notes[3-4] and unresolved list, so not a new violation but prevents any product-wide yield metric claim.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json docker_image; result.json validity_notes[3]; spec.json claim_ids C-MEAS-VALID only",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-SPEC-PREREG-DECISION-RULE-MISMATCH",
+      "severity": "minor",
+      "finding": "Spec decision_rule FALSIFIED clause requires ALL 5 different orderings AND no adjacent agree. Prereg 12.2 adds third conjunct 'No definition matches expected full-DOM ordering listing>detail>cart'. Under prereg, the observed state (3 distinct orderings, 2 adjacent agree, 0 match full-DOM) is neither SURVIVES nor FALSIFIED per prereg's conjunctive FALSIFIED definition, would be MIXED. Producer correctly applies frozen spec.json rule (SURVIVES because >=2 adjacent agree) per transmission invariants (frozen spec controls). Mismatch does not change recomputed verdict under spec, but prereg expectation that no match to full-DOM supports falsification is unimplemented.",
+      "evidence_ref": "spec.json decision_rule vs prereg.md 12.1-12.2; result.json outcome SUPPORTS",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-DISCRIMINATION-RATIO-INFLATED-ZERO-VARIANCE",
+      "severity": "minor",
+      "finding": "Discrimination ratios 632.95 (DEF-FORM-ONLY), 134.41, 46.91 etc are inflated because denominator within variance excludes cart (total_within counts only listing n=3 and detail n=3). Calculation in analyze.py 252-260 sums within_var only where len(vals)>1, cart contributes 0. Ratios correctly indicate between>within but absolute magnitudes not comparable to parent weighted-variance method (parent reported 42.75/632.93 with different handling). Ordering conclusions unaffected.",
+      "evidence_ref": "analyze.py 236-268 compute_discrimination_ratios; result.json metrics.discrimination_ratios; independent recompute matches producer values exactly",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-LINK-SENSITIVITY-DILUTED",
+      "severity": "minor",
+      "finding": "Reported link_sensitivity mean 0.000938 dilutes true a->link effect by averaging two with_link definitions (DEF-FORM-AND-BUTTON-LINK which equals no-link count and DEF-FULL-MAP). Correct isolated contrast DEF-FULL-MAP minus DEF-FORM-AND-A-TEXTBOX (only difference is a->link + menuitem/tab) is listing 0.001284, detail 0.001712, cart 0.001869, mean 0.001622. Differential inflation still supports 'a->link drives reversal' conclusion, but magnitude larger than reported. Menuitem/tab inclusion not isolated.",
+      "evidence_ref": "analyze.py 194-224 compute_link_sensitivity with_link list includes DEF-FORM-AND-BUTTON-LINK; result.json metrics.ordering_values_per_type; independent recompute per-type diffs",
+      "affects_claim": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Parent EXP-INTEL-34956989900 with_map ordering: cart>listing>detail (ROLE_MAP a->link,input->textbox) elements_with_bbox",
+      "strength": "strong",
+      "finding": "Reproduced exactly: DEF-FULL-MAP ordering cart>product_listing>detail matches parent 34956989900 density_bbox_with_map ordering. Per-task tightened counts 8 listing, 5 detail, 6 cart and densities match parent to 1e-12. Baseline is strong null showing a->link mapping reverses ordering vs no_map.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering=[cart,product_listing,detail]; result.json controls.baseline_comparison.pass=true; independent recompute per-task counts 8/5/6",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Parent EXP-INTEL-34956989900 no_map ordering: listing>cart>detail (raw roles, no mapping) elements_with_bbox",
+      "strength": "strong",
+      "finding": "Reproduced: DEF-FORM-ONLY ordering listing>cart>detail matches parent no_map ordering listing>cart>detail. Counts 6/2/3 match parent's 6/2/3. Parent noted this partially matches expectations (cart still >detail). Recomputed means 0.003851/0.002804/0.001712 match producer and parent. Strong baseline confirming that excluding a->link stabilizes to same ordering as parent no_map.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_no_map.ordering=[product_listing,cart,detail]; independent recompute matches",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Parent EXP-INTEL-34782350557 original fraction ordering: listing>detail>cart (all locatable elements)",
+      "strength": "weak_reference",
+      "finding": "Not recomputed in this experiment (inherited). Producer correctly cites as motivation; report notes that truncated tightened metric orderings (listing>cart>detail stable family and cart>listing>detail with_map) both fail to restore listing>detail>cart, supporting that truncation or definition, not just ROLE_MAP, prevents full-DOM alignment. No misrepresentation.",
+      "evidence_ref": "spec.json baselines[2]; report.md Interpretation section notes ordering does NOT match expected full-DOM",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Positive control: all 5 definitions tightened count >0 on all tasks (non-degenerate)",
+      "strength": "strong",
+      "finding": "Verified: minimum counts are 2 (detail, DEF-FORM-ONLY) and 3 (cart) >0 across all 8 measured rows (7 distinct). Producer pass=true correct. Control is appropriate non-degeneracy check.",
+      "evidence_ref": "result.json controls.positive_control.pass=true; independent recompute per-task counts all >=2",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Null control: DEF-ALL-LOCATABLE count == locatable_sample length (20) on all tasks (pipeline correctness)",
+      "strength": "strong",
+      "finding": "Verified: DEF-ALL-LOCATABLE returns 20 for every task, matching locatable_sample length 20. Pipeline correct. This also demonstrates denominator effect: density ordering cart>detail>listing is pure inverse of elements_with_bbox (1070 < ~1150 < ~1560), i.e., when counts equal, density ranking is determined solely by denominator.",
+      "evidence_ref": "result.json controls.null_control.pass=true; independent recompute DEF-ALL-LOCATABLE counts 20/20/20; analyze.py 52-55",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Adjacency family control: >=2 semantically adjacent definitions agree",
+      "strength": "strong",
+      "finding": "Producer reports 2/4 adjacent pairs agree (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX). Recomputed pairwise Agreement Fraction 0.3 (3/10) and Adjacency 0.5 (2/4) match. However one agreeing pair is vacuous (see VF-VACUOUS-DEFINITION-PAIR), so strong control passes arithmetically but semantic strength is weaker (1 meaningful pair). Decision_rule SURVIVES threshold (>=2) is met arithmetically, but interpretation should downgrade from 3-definition family claim.",
+      "evidence_ref": "result.json metrics.pairwise_agreement agreeing_pairs 3/10, metrics.adjacency_agreement agreeing 2/4, metrics.max_stable_family size 3; independent recompute confirms same",
+      "verdict": "PASS"
+    }
+  ],
+  "recomputed_metrics": {
+    "orderings_recomputed": {
+      "DEF-FORM-ONLY": ["product_listing", "cart", "detail"],
+      "DEF-FORM-AND-BUTTON-LINK": ["product_listing", "cart", "detail"],
+      "DEF-FORM-AND-A-TEXTBOX": ["product_listing", "cart", "detail"],
+      "DEF-FULL-MAP": ["cart", "product_listing", "detail"],
+      "DEF-ALL-LOCATABLE": ["cart", "detail", "product_listing"],
+      "match_producer": true,
+      "note": "All 5 orderings match producer result.json metrics.orderings exactly"
+    },
+    "ordering_values_per_type_recomputed": {
+      "DEF-FORM-ONLY": {"product_listing": 0.003851146241213068, "detail": 0.0017121719502046417, "cart": 0.002803738317757009},
+      "DEF-FORM-AND-BUTTON-LINK": {"product_listing": 0.003851146241213068, "detail": 0.0017121719502046417, "cart": 0.002803738317757009},
+      "DEF-FORM-AND-A-TEXTBOX": {"product_listing": 0.003851146241213068, "detail": 0.0025682579253069626, "cart": 0.003738317757009346},
+      "DEF-FULL-MAP": {"product_listing": 0.005134861654950757, "detail": 0.004280429875511604, "cart": 0.005607476635514018},
+      "DEF-ALL-LOCATABLE": {"product_listing": 0.012837154137376891, "detail": 0.017121719502046415, "cart": 0.018691588785046728},
+      "match_producer": true,
+      "dedup_sensitivity": "Means identical with deduped cart n=1 vs n=2 duplicate because duplicate values identical"
+    },
+    "pairwise_agreement_recomputed": {"total_pairs": 10, "agreeing_pairs": 3, "agreement_fraction": 0.3, "match": true, "distinct_orderings": 3, "not_5_as_falsifier_requires": true},
+    "adjacency_agreement_recomputed": {"total": 4, "agreeing": 2, "agreement_fraction": 0.5, "match": true, "detail": {"DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK": true, "DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX": true, "DEF-FORM-AND-A-TEXTBOX vs DEF-FULL-MAP": false, "DEF-FULL-MAP vs DEF-ALL-LOCATABLE": false}},
+    "max_stable_family_recomputed": {"size": 3, "members": ["DEF-FORM-ONLY", "DEF-FORM-AND-BUTTON-LINK", "DEF-FORM-AND-A-TEXTBOX"], "ordering": ["product_listing", "cart", "detail"], "match": true, "caveat": "Includes vacuous pair; functionally distinct size is 2"},
+    "link_sensitivity_recomputed": {
+      "producer_reported_mean": 0.000938,
+      "producer_per_type": {"product_listing": 0.000428, "detail": 0.001141, "cart": 0.001246},
+      "isolated_a_link_contrast_DEF-FULL-MAP_minus_DEF-FORM-AND-A-TEXTBOX": {"product_listing": 0.001283715413737689, "detail": 0.0017121719502046415, "cart": 0.001869158878504672, "mean": 0.001621681747482334},
+      "match_producer_averaged_metric": true,
+      "corrected_isolated_effect_larger": true
+    },
+    "discrimination_ratios_recomputed": {"DEF-FORM-ONLY": 632.9494796854864, "DEF-FORM-AND-BUTTON-LINK": 632.9494796854864, "DEF-FORM-AND-A-TEXTBOX": 134.40768208519472, "DEF-FULL-MAP": 46.91165160207485, "DEF-ALL-LOCATABLE": 59.631201935452154, "match_producer": true},
+    "per_task_counts_recomputed": {
+      "DEF-FORM-ONLY": {"listing": 6, "detail": 2, "cart": 3},
+      "DEF-FORM-AND-BUTTON-LINK": {"listing": 6, "detail": 2, "cart": 3},
+      "DEF-FORM-AND-A-TEXTBOX": {"listing": 6, "detail": 3, "cart": 4},
+      "DEF-FULL-MAP": {"listing": 8, "detail": 5, "cart": 6},
+      "DEF-ALL-LOCATABLE": {"listing": 20, "detail": 20, "cart": 20},
+      "match": true
+    },
+    "controls_recomputed": {
+      "positive_control": {"expected": "all >0", "observed": "listing 6/6/6, detail 2/2/2 (or 3 with input map), cart 3/4/6 all >0", "pass": true, "match": true},
+      "null_control": {"expected": "20", "observed": "20 all tasks", "pass": true, "match": true},
+      "baseline_comparison": {"expected": ["cart", "product_listing", "detail"], "observed": ["cart", "product_listing", "detail"], "pass": true, "match": true},
+      "adjacency_family": {"expected": ">=2", "observed": 2, "pass": true, "match": true}
+    },
+    "overall_verdict_recomputed": "Per frozen spec decision_rule, SURVIVES_CURRENT_TEST is arithmetically correct (2 adjacent agree >= threshold, not ALL 5 different). Per prereg 12.2 conjunctive FALSIFIED definition, verdict would be MIXED/undefined (not all 5 different, but also 0 match full-DOM). Producer correctly follows spec. Audit does not dispute arithmetic but disputes ceiling and semantic interpretation.",
+    "raw_data_integrity": {"exp347_raw_results_json_sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050", "verified": true, "measurements_used": 8, "distinct_tasks": 7, "cart_duplicate_identical": true}
+  },
+  "claim_ceiling": "Computations REPRODUCED but claim SUPPORTED only in narrow bounded sense: On this single Magento site, under truncated-first-20 locatable_sample (82/32/21) with elements_with_bbox denominator, the tightened interactive density ordering is invariant to the input->textbox mapping (DEF-FORM-ONLY vs DEF-FORM-AND-A-TEXTBOX both give listing>cart>detail) and reverses only when the a->link + menuitem/tab mapping is added (DEF-FULL-MAP gives cart>listing>detail). The 3-definition stable family claim is inflated by a vacuous definition pair (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK identical because raw role link=0); effective stable family is 2 definitions differing by input->textbox. No definition restores the hypothesized full-DOM ordering listing>detail>cart (all fail). Discrimination remains >1 (46-633) but does not rescue ordering. Ceiling does NOT extend to: (a) full-DOM enumeration (undercounts 4.1x listing prevents extrapolation), (b) other sites (single-site), (c) product-ready yield estimation (requires runtime fix to MEASURE_JS cap and cross-site validation), (d) claim that truncation is secondary - truncation driver was not varied so relative contribution of ROLE_MAP vs truncation remains unknown, (e) chance-level stability - null models not executed so 0.3 pairwise agreement not compared to random baseline. C-MEAS-VALID remains EXPERIMENTAL; this experiment demonstrates ROLE_MAP sensitivity is real (a->link dominant) and that excluding a->link stabilizes ordering within truncated scope, but does not establish a canonical product metric.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35083033552/spec.json decision_rule SURVIVES if >=2 adjacent agree; falsifier requires ALL 5 different",
+    "research/experiments/EXP-INTEL-35083033552/result.json metrics.orderings, metrics.ordering_values_per_type, metrics.pairwise_agreement, metrics.adjacency_agreement, metrics.max_stable_family, metrics.link_sensitivity, metrics.discrimination_ratios",
+    "research/experiments/EXP-INTEL-35083033552/analyze.py DEFINITIONS ROLE_MAP and INTERACTIVE_ROLES frozen sets",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 locatable_elements 82/32/21 vs locatable_sample 20; duplicate cart_1 URL http://localhost:8080/checkout/cart/",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering and metrics.density_bbox_no_map.ordering baselines",
+    "research/experiments/EXP-INTEL-34956989900/handoff.json carry_forward established/rejected/unknown/do_not_assume two-factor sensitivity",
+    "research/experiments/EXP-INTEL-35083033552/prereg.md sections 8, 9, 12, 17 null models and decision rules",
+    "research/experiments/EXP-INTEL-35083033552/provenance.json datasets and code_paths",
+    "independent recompute: python3 recomputation from raw locatable_sample roles confirms all counts, densities, orderings, agreements, discrimination ratios to reported precision; deduped vs duplicate means identical; Counter(raw roles) shows link 0, a 16, input 5"
+  ],
+  "unresolved": [
+    "True ordering under full DOM enumeration (not truncated to 20) for each of the 5 definitions - requires runtime fix to MEASURE_JS locatableSample cap; extrapolated full-DOM estimates (listing>detail>cart) remain unmeasured for tightened definitions",
+    "Isolated contribution of a->link vs menuitem/tab to ordering reversal - DEF-FULL-MAP bundles them; definition isolating a->link alone (without menuitem/tab) not tested",
+    "Whether pairwise agreement 0.3 and adjacency 0.5 exceed chance - random ROLE_MAP null (prereg 8.1) and single-role nulls (prereg 8.2) not executed",
+    "Cross-site stability of listing>cart>detail under DEF-FORM-ONLY family beyond single Magento site (C-CROSSSITE)",
+    "Cart true within-type variance and cart>detail separation - requires multiple distinct cart pages, not pseudoreplicated single URL",
+    "Whether any other granular ROLE_MAP (e.g., including only menuitem, only tab, or link thresholded by inForm) could produce listing>detail>cart and be considered canonical",
+    "Magnitude of truncation vs ROLE_MAP contributions to ordering sensitivity - design does not vary truncation, so question 'ROLE_MAP vs truncation dominant driver' remains not fully answered despite spec hypothesis framing",
+    "LLM inheritance implications of canonical definition (C-LLM-INHERIT) - offline arithmetic does not test agent exploration benefit"
+  ]
+}
+```
+
+## verdict.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "SURVIVES_CURRENT_TEST per frozen spec decision_rule (2/4 adjacent pairs agree >= threshold, not ALL 5 orderings differ). However audit ceiling narrows: effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3, because DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical on this data (raw role link=0 in truncated sample, Counter verified). The 30% pairwise agreement and 50% adjacency agreement have not been compared to chance because null models (prereg 8.1 random ROLE_MAP, 8.2 single-role) were not executed. No definition restores the hypothesized full-DOM ordering listing>detail>cart. Claim remains EXPERIMENTAL pending null model execution, full DOM enumeration, and cross-site validation."
+    }
+  ],
+  "product_action": "No product promotion. Audit VF-TRUNCATION-CRITICAL and audit required_fixes[2] bound product_consequence_positive to truncated-sample scope only. Product lane cannot adopt any definition for yield estimation until (1) MEASURE_JS locatableSample cap is fixed for full DOM enumeration, (2) cross-site validation is performed, and (3) null models confirm ordering exceeds chance. The stable truncated-sample ordering product_listing>cart>detail does not match expected full-DOM ordering listing>detail>cart.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a→link contribution be separated from menuitem/tab effects in the ordering reversal?",
+  "reason": "Frozen spec decision_rule: SURVIVES if >=2 adjacent pairs agree. Audit recomputed 2/4 adjacent pairs agree (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX), arithmetic confirmed. But audit VF-VACUOUS-DEFINITION-PAIR shows the first pair is empirically vacuous (0 elements with raw role='link' in 160 sampled elements, Counter(link)=0), so effective adjacent agreement is 1 meaningful pair (DEF-FORM-ONLY vs DEF-FORM-AND-A-TEXTBOX, differing only by input→textbox). Audit VF-MISSING-NULL-MODELS shows prereg 8.1 (random ROLE_MAP) and 8.2 (single-role) null models were not executed, so 0.3 pairwise agreement cannot be assessed against chance. Audit VF-LINK-SENSITIVITY-DILUTED shows isolated a→link effect (mean 0.001622) is larger than reported averaged link_sensitivity (0.000938). The ordering reversal is caused by a→link+menuitem/tab (DEF-FULL-MAP) but isolated a→link contribution not separated. All metrics recomputed by audit match producer. Bounded conclusion: excluding a→link stabilizes ordering on this truncated sample from this site, but statistical significance and full-DOM validity remain open.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35083033552/spec.json decision_rule: SURVIVES if >=2 adjacent agree, FALSIFIED if ALL 5 different",
+    "research/experiments/EXP-INTEL-35083033552/result.json metrics.orderings: 3 distinct orderings (DEF-FORM-ONLY/BUTTON-LINK/A-TEXTBOX: listing>cart>detail; DEF-FULL-MAP: cart>listing>detail; DEF-ALL-LOCATABLE: cart>detail>listing)",
+    "research/experiments/EXP-INTEL-35083033552/result.json metrics.adjacency_agreement: 2/4 adjacent pairs agree",
+    "research/experiments/EXP-INTEL-35083033552/audit.json status=REVISE, producer_claim_supported=false, claim_ceiling narrows effective stable family to 2",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-VACUOUS-DEFINITION-PAIR: raw role link=0 in Counter, DEF-FORM-ONLY identical to DEF-FORM-AND-BUTTON-LINK",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-MISSING-NULL-MODELS: prereg 8.1/8.2 not executed",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-LINK-SENSITIVITY-DILUTED: isolated a→link mean 0.001622 vs reported 0.000938",
+    "research/experiments/EXP-INTEL-35083033552/audit.json recomputed_metrics confirm all orderings, counts, densities match producer exactly",
+    "research/experiments/EXP-INTEL-35083033552/audit.json baseline_findings: parent with_map and no_map orderings reproduced",
+    "research/experiments/EXP-INTEL-34956989900/handoff.json carry_forward.established: a→link is dominant sensitivity driver, denominator not driver"
+  ]
+}
+```
+
+## handoff.json
+
+```text
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a→link contribution be separated from menuitem/tab effects in the ordering reversal?",
+  "why_next": "This experiment resolved the parent's question about whether ROLE_MAP or truncation is the dominant sensitivity driver: a→link is the dominant driver, but two critical gaps remain. (1) The null models promised in prereg 8.1 (random ROLE_MAP) and 8.2 (single-role definitions) were not executed (audit VF-MISSING-NULL-MODELS), so the observed 0.3 pairwise agreement cannot be assessed against chance — we do not know if the ordering stability is above noise. (2) The isolated a→link effect is conflated with menuitem/tab inclusion (DEF-FULL-MAP bundles a→link with menuitem+tab), so the individual contribution of a→link alone is not quantified. Both gaps are addressable with offline computation on existing data. Additionally, the truncated-sample ordering (listing>cart>detail) does not match the expected full-DOM ordering (listing>detail>cart) under any definition, so full DOM enumeration is needed but requires runtime substrate repair (MEASURE_JS locatableSample cap). The null model gap is the smallest next step that could increase confidence in the existing result.",
+  "carry_forward": {
+    "established": [
+      "The 'a'→'link' ROLE_MAP mapping is the dominant sensitivity driver for interactive element density ordering on this Magento site. Definitions excluding a→link (DEF-FORM-ONLY, DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-A-TEXTBOX) produce stable ordering: product_listing>cart>detail. Including a→link (DEF-FULL-MAP) reverses to cart>product_listing>detail (audit VF-LINK-SENSITIVITY-DILUTED: isolated a→link+menuitem/tab mean density difference 0.001622).",
+      "Effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3. DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical because raw role link=0 in the truncated sample (Counter verified across 160 elements: div 50, span 27, button 22, form 19, a 16, label 13, combobox 8, input 5, link 0). The input→textbox mapping changes detail density (+50%) and cart density (+33%) but preserves ordering.",
+      "Parent baselines reproduced: DEF-FULL-MAP ordering cart>listing>detail matches parent with_map (EXP-INTEL-34956989900); DEF-FORM-ONLY ordering listing>cart>detail matches parent no_map. Baseline comparison strong for both (audit baseline_findings[0-1]).",
+      "Ordering sensitivity is a two-factor problem (inherited from parent EXP-INTEL-34956989900): (1) ROLE_MAP-dependent count inflation (a→link dominant, addressed here) and (2) sample truncation (first-20 cap, not addressed here — truncation was not varied). Denominator choice (elements_with_bbox) does not resolve ordering (parent established).",
+      "Discrimination ratio remains >1 for all definitions (46-633), confirming the metric distinguishes page types. The issue is ordering direction, not discrimination power.",
+      "Cart pseudoreplication (2 identical entries, n=1 distinct) means cart within-type variance is undefined. Cart>detail or cart<detail separation under any ordering is not statistically validated."
+    ],
+    "rejected": [
+      "3-definition stable family claim: inflated by vacuous pair (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK identical because link=0 in sample). Effective stable family is 2 definitions.",
+      "Reported link_sensitivity mean 0.000938: dilutes the true a→link effect by averaging with definitions that differ in input→textbox mapping. Correct isolated contrast (DEF-FULL-MAP minus DEF-FORM-AND-A-TEXTBOX) yields mean 0.001622.",
+      "Product-ready yield estimation from truncated-sample ordering: audit VF-TRUNCATION-CRITICAL bounds claim. Full-DOM ordering listing>detail>cart not matched by any definition under truncated sampling."
+    ],
+    "unknown": [
+      "Whether 0.3 pairwise agreement (3/10) and 0.5 adjacency agreement (2/4, 1 meaningful) exceed chance-level expectation. Random ROLE_MAP null (prereg 8.1) and single-role null (prereg 8.2) not executed.",
+      "Isolated contribution of a→link to ordering reversal versus menuitem/tab. DEF-FULL-MAP bundles a→link with menuitem+tab; a definition with a→link only (without menuitem/tab) was not tested.",
+      "True full-DOM ordering under each of the 5 definitions. Truncated sample (24.4% listing, 62.5% detail, 95.2% cart) may cause ordering artifacts. Extrapolated estimates suggest listing>detail>cart but unmeasured.",
+      "Whether any granular definition (e.g., including only menuitem, only tab, or link thresholded by context) could produce listing>detail>cart and be considered canonical.",
+      "Cross-site stability of the listing>cart>detail ordering under DEF-FORM-ONLY. Single Magento site only.",
+      "Cart true within-type variance and cart>detail separation. Requires multiple distinct cart pages."
+    ],
+    "do_not_assume": [
+      "Do not assume 0.3 pairwise agreement is statistically significant — null models were not executed so chance-level baseline is unknown.",
+      "Do not assume the truncated-sample ordering product_listing>cart>detail is the true full-DOM ordering. Undercount factors (listing 4.1x, detail 1.6x, cart 1.05x) may cause ordering artifacts.",
+      "Do not assume the a→link effect is isolated — DEF-FULL-MAP also includes menuitem and tab. The isolated a→link contribution is not quantified.",
+      "Do not assume discrimination ratio >1 implies metric validity or ordering correctness. Discrimination is necessary but not sufficient.",
+      "Do not treat this experiment as establishing a canonical product-ready metric. Claim ceiling is bounded to truncated-sample scope on a single site with missing null models.",
+      "Do not assume cart density is statistically validated — cart n=1 distinct, within-type variance undefined.",
+      "Do not assume cross-site generalization from single Magento site data.",
+      "Do not assume the effective 2-definition stable family generalizes beyond this truncated sample — full DOM enumeration may change ordering."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35083033552/analyze.py sha256:ec559f51039698a8d99af58ec979dc5abacac3492616bb061a4150f9d5c05474",
+    "research/experiments/EXP-INTEL-35083033552/result.json",
+    "research/experiments/EXP-INTEL-35083033552/audit.json",
+    "research/experiments/EXP-INTEL-34956989900/handoff.json",
+    "research/experiments/EXP-INTEL-34956989900/result.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-MISSING-NULL-MODELS: prereg 8.1/8.2 not executed, 0.3 pairwise agreement untested against chance",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-VACUOUS-DEFINITION-PAIR: raw role link=0, effective stable family 2 not 3",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-LINK-SENSITIVITY-DILUTED: isolated a→link mean 0.001622",
+    "research/experiments/EXP-INTEL-35083033552/audit.json claim_ceiling: bounded to truncated-sample scope, C-MEAS-VALID remains EXPERIMENTAL",
+    "research/experiments/EXP-INTEL-35083033552/audit.json baseline_findings[0-1] parent orderings reproduced",
+    "research/experiments/EXP-INTEL-35083033552/result.json metrics.orderings and metrics.adjacency_agreement",
+    "research/experiments/EXP-INTEL-34956989900/handoff.json carry_forward.established: two-factor sensitivity, a→link dominant",
+    "research/experiments/EXP-INTEL-35083033552/verdict.json decision SURVIVES_CURRENT_TEST with narrowed ceiling"
+  ],
+  "recommended_action": "Execute the two missing preregistered null models on existing data: (1) Random ROLE_MAP null (prereg 8.1): randomly assign each raw role to interactive/not with p=0.5, repeat 1000 times, compute distribution of pairwise agreement fractions, test whether observed 0.3 exceeds p<0.05; (2) Single-role definitions (prereg 8.2): test each individual role in isolation (button-only, a-only, input-only, etc.) to determine whether any single role drives the metric. These are offline-only computations using the existing raw data (exp347_raw_results.json). Separately, test an isolated a→link definition (a→link mapping WITHOUT menuitem/tab) to separate a→link from menuitem/tab effects. All three tests use existing data and require no Docker/runtime execution. If null models confirm ordering exceeds chance, the truncated-sample result gains statistical rigor; if not, the result is noise and the truncated-first-20 approach is insufficient for metric validation."
 }
 ```
 

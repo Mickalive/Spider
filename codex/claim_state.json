@@ -761,6 +761,14 @@
         "reason": "Bounded: elements_with_bbox denominator does NOT resolve ordering sensitivity. Under tightened role-only definition, ordering listing>detail>cart fails in both ROLE_MAP variants (with_map: cart>listing>detail; no_map: listing>cart>detail). Discrimination ratio remains >1 (42.75 with_map, 632.93 no_map). The ordering sensitivity is two-factor: denominator variation (partially addressed by elements_with_bbox) and ROLE_MAP-dependent count inflation (NOT addressed by denominator choice). C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements but ordering robustness depends on unresolved ROLE_MAP definition and is bounded to truncated-first-20 sample from single Magento site."
       },
       {
+        "experiment_id": "EXP-INTEL-35083033552",
+        "lane": "intel",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "SURVIVES_CURRENT_TEST per frozen spec decision_rule (2/4 adjacent pairs agree >= threshold, not ALL 5 orderings differ). However audit ceiling narrows: effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3, because DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical on this data (raw role link=0 in truncated sample, Counter verified). The 30% pairwise agreement and 50% adjacency agreement have not been compared to chance because null models (prereg 8.1 random ROLE_MAP, 8.2 single-role) were not executed. No definition restores the hypothesized full-DOM ordering listing>detail>cart. Claim remains EXPERIMENTAL pending null model execution, full DOM enumeration, and cross-site validation."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-33528829431",
         "lane": "physics",
         "decision": "REVISE",

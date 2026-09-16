@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+  "hypothesis": "There exists at least one granular ROLE_MAP definition (a specific set of ARIA roles classified as 'interactive') under which the tightened interactive element density ordering across page types is invariant to the definition choice. Specifically: (1) at least one definition produces a consistent relative ordering (e.g., listing>detail>cart or listing>cart>detail) that does not reverse when the definition is varied within a semantically coherent family; (2) the definitions that include 'link' (from 'a' elements) produce different orderings than those that exclude it, confirming ROLE_MAP as the dominant sensitivity driver; (3) the magnitude of ordering reversal across definitions quantifies the ROLE_MAP contribution to sensitivity.",
+  "falsifier": "All 5 tested ROLE_MAP definitions produce different orderings (no two semantically related definitions agree), OR the ordering reverses between every pair of adjacent definitions, indicating that no canonical definition can stabilize the metric under truncated-first-20 sampling. This would mean sample truncation is the dominant confound and ROLE_MAP resolution alone is insufficient.",
+  "baselines": [
+    "Parent EXP-INTEL-34956989900 with_map ordering: cart>listing>detail (ROLE_MAP a→link, input→textbox)",
+    "Parent EXP-INTEL-34956989900 no_map ordering: listing>cart>detail (raw roles, no mapping)",
+    "Parent EXP-INTEL-34782350557 original fraction ordering: listing>detail>cart (pre-tightening, all locatable elements)"
+  ],
+  "positive_control": "All 5 definitions produce tightened_locatable_count > 0 on all 7 tasks (no definition yields zero interactive elements anywhere). This verifies the definitions are non-degenerate.",
+  "null_control": "At least one definition (DEF-ALL-LOCATABLE) yields tightened_locatable_count equal to the full locatable_sample size on all tasks, confirming the counting pipeline is correct.",
+  "measurement_validity": [
+    "Reuses existing raw measurement data from EXP-INTEL-34718481334 via EXP-INTEL-34782350557 raw_evidence (no new Docker/browser execution required)",
+    "5 ROLE_MAP definitions tested on identical truncated-first-20 locatable_sample data, eliminating cross-run variance",
+    "Definitions are ordered by semantic restrictiveness: DEF-FORM-ONLY (most restrictive) → DEF-ALL-LOCATABLE (least restrictive)",
+    "Each definition is a frozen set of ARIA roles; no ad-hoc element-level decisions",
+    "Cart pseudoreplication (2 identical entries) retained from parent data; deduped cart n=1 reported separately",
+    "Ordering is measured on per-type mean density (elements_with_bbox denominator) consistent with parent experiment"
+  ],
+  "decision_rule": "If ANY of: (1) at least 2 semantically adjacent definitions (differing by ≤1 role category) produce the SAME ordering across all 3 page types, verdict = SURVIVES_CURRENT_TEST for C-MEAS-VALID (canonical ROLE_MAP exists within that category); (2) the ordering is invariant to the link-inclusion decision (definitions with and without 'link' agree), verdict = SURVIVES_CURRENT_TEST. If ALL 5 definitions produce different orderings AND no adjacent pair agrees, verdict = FALSIFIED-IN-SETTING (no canonical definition under truncation). If data extraction fails or raw samples are missing, verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Identifies a canonical ROLE_MAP definition that stabilizes the interactive element density metric, enabling product-ready yield estimation. The metric can then be used for cross-page-type comparison and agent exploration prioritization.",
+  "product_consequence_negative": "If no canonical definition exists under truncated sampling, the interactive element density metric cannot be used for yield estimation without first fixing the runtime MEASURE_JS locatableSample cap. Product lane must either invest in runtime substrate repair or abandon fraction-based yield metrics.",
+  "estimated_cost": "Very low: offline computation only, no Docker/model/browser calls. 7 tasks x 5 definitions x 2 denominators = 70 density computations plus ordering/variance statistics.",
+  "expected_information_gain": "High: directly resolves the parent's next_question about whether ROLE_MAP or truncation is the dominant sensitivity driver. A positive result (canonical definition found) advances metric validation; a negative result (no canonical definition) constrains the approach and redirects effort to runtime substrate repair. Both outcomes change the next-step decision."
+}
