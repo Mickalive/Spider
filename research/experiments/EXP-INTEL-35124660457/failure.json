@@ -1,0 +1,9 @@
+{
+  "stage": "audit",
+  "category": "VALIDATION_FAILURE",
+  "message": "[Errno 2] No such file or directory: '/home/runner/work/Spider/Spider/research/experiments/EXP-INTEL-35124660457/audit.json'",
+  "retryable": false,
+  "recorded_at": "2026-09-16T17:08:14.478996+00:00",
+  "github_run_id": "35124660457",
+  "github_run_attempt": "1"
+}

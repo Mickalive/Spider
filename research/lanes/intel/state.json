@@ -7,8 +7,8 @@
   "continue_immediately": false,
   "next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-16T16:52:49.433673+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-16T17:08:14.479199+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "d9ca2d3296a623c39fbce4c1260aec450531fdda88760082dba60598c6e953d6"
 }
