@@ -8,6 +8,8 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 
+from control_plane import control_revision
+
 ROOT = Path(__file__).resolve().parents[1]
 CLAIM_STATUSES = {"HYPOTHESIS", "EXPERIMENTAL", "VALIDATED", "PRODUCT_CORE", "SHIPPED", "REJECTED", "BLOCKED", "MEASUREMENT_INVALID", "SUPERSEDED"}
 CLAIM_STATUS_ALIASES = {
@@ -96,6 +98,13 @@ def failure_fingerprint(stage: str, category: str, message: str) -> str:
     return hashlib.sha256(raw).hexdigest()[:24]
 
 
+def effective_control_revision() -> str:
+    try:
+        return control_revision(ROOT, "origin/main")
+    except Exception:
+        return os.environ.get("GITHUB_SHA") or "unknown"
+
+
 def update_failure_state(req, retryable, fingerprint):
     state_path = ROOT / "research/lanes" / req["lane"] / "state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"lane": req["lane"]}
@@ -105,7 +114,7 @@ def update_failure_state(req, retryable, fingerprint):
     state["same_failure_count"] = int(state.get("same_failure_count", 0)) + 1 if same else 1
     state["last_failure_fingerprint"] = fingerprint
     state["last_failure_retryable"] = bool(retryable)
-    state["last_failure_main_sha"] = os.environ.get("GITHUB_SHA")
+    state["last_failure_control_revision"] = effective_control_revision()
     state["updated_at"] = datetime.now(timezone.utc).isoformat()
     state_path.write_text(json.dumps(state, indent=2) + "\n")
 
@@ -121,7 +130,7 @@ def failure(exp, req, stage, category, message, retryable):
         "recorded_at": datetime.now(timezone.utc).isoformat(),
         "github_run_id": os.environ.get("GITHUB_RUN_ID"),
         "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
-        "main_sha": os.environ.get("GITHUB_SHA"),
+        "control_revision": effective_control_revision(),
     }
     (exp / "failure.json").write_text(json.dumps(payload, indent=2) + "\n")
     update_failure_state(req, retryable, fingerprint)
@@ -290,7 +299,7 @@ def main():
                 "same_failure_count": 0,
                 "last_failure_fingerprint": None,
                 "last_failure_retryable": None,
-                "last_failure_main_sha": None,
+                "last_failure_control_revision": None,
                 "updated_at": datetime.now(timezone.utc).isoformat(),
             })
             state_path.write_text(json.dumps(state, indent=2) + "\n")
