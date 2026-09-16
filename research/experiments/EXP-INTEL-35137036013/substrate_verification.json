@@ -1,0 +1,51 @@
+{
+  "measure_js_path": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+  "cap_string_found": true,
+  "all_samples_capped_at_20": true,
+  "tasks": [
+    {
+      "task_id": "listing_clothing-shoes-jewelry",
+      "locatable_elements": 82,
+      "sample_len": 20
+    },
+    {
+      "task_id": "listing_beauty-personal-care",
+      "locatable_elements": 82,
+      "sample_len": 20
+    },
+    {
+      "task_id": "listing_electronics",
+      "locatable_elements": 82,
+      "sample_len": 20
+    },
+    {
+      "task_id": "detail_camera",
+      "locatable_elements": 32,
+      "sample_len": 20
+    },
+    {
+      "task_id": "detail_vr_bag",
+      "locatable_elements": 32,
+      "sample_len": 20
+    },
+    {
+      "task_id": "detail_pet_camera",
+      "locatable_elements": 32,
+      "sample_len": 20
+    },
+    {
+      "task_id": "cart_1",
+      "locatable_elements": 21,
+      "sample_len": 20
+    },
+    {
+      "task_id": "cart_1",
+      "locatable_elements": 21,
+      "sample_len": 20
+    }
+  ],
+  "raw_path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+  "raw_sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+  "canonical_script_exists": false,
+  "canonical_path": null
+}
