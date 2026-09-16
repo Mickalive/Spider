@@ -1,0 +1,755 @@
+{
+  "definitions": {
+    "DEF-FULL-MAP": {
+      "truncated_ordering": [
+        "cart",
+        "product_listing",
+        "detail"
+      ],
+      "full_ordering": [
+        "cart",
+        "detail",
+        "product_listing"
+      ],
+      "ordering_changed": true,
+      "truncated_avg": {
+        "product_listing": 0.005134861654950757,
+        "detail": 0.004280429875511604,
+        "cart": 0.005607476635514018
+      },
+      "full_avg": {
+        "product_listing": 0.292961125249179,
+        "detail": 0.29870591934316565,
+        "cart": 0.30285046728971965
+      },
+      "tasks": [
+        {
+          "task_id": "listing_clothing-shoes-jewelry",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1550,
+          "truncated_count": 8,
+          "full_count": 454.1,
+          "truncated_density": 0.005161290322580645,
+          "full_density": 0.29296774193548386,
+          "abs_bias": 0.2878064516129032,
+          "rel_bias": 0.9823827350803787
+        },
+        {
+          "task_id": "listing_beauty-personal-care",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1560,
+          "truncated_count": 8,
+          "full_count": 457.1,
+          "truncated_density": 0.005128205128205128,
+          "full_density": 0.2930128205128205,
+          "abs_bias": 0.2878846153846154,
+          "rel_bias": 0.982498359221177
+        },
+        {
+          "task_id": "listing_electronics",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1564,
+          "truncated_count": 8,
+          "full_count": 458.1,
+          "truncated_density": 0.005115089514066497,
+          "full_density": 0.29290281329923273,
+          "abs_bias": 0.28778772378516626,
+          "rel_bias": 0.9825365640689806
+        },
+        {
+          "task_id": "detail_camera",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1215,
+          "truncated_count": 5,
+          "full_count": 349.6,
+          "truncated_density": 0.00411522633744856,
+          "full_density": 0.2877366255144033,
+          "abs_bias": 0.2836213991769548,
+          "rel_bias": 0.9856979405034325
+        },
+        {
+          "task_id": "detail_vr_bag",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1149,
+          "truncated_count": 5,
+          "full_count": 348.6,
+          "truncated_density": 0.004351610095735422,
+          "full_density": 0.30339425587467367,
+          "abs_bias": 0.29904264577893824,
+          "rel_bias": 0.9856569133677567
+        },
+        {
+          "task_id": "detail_pet_camera",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1143,
+          "truncated_count": 5,
+          "full_count": 348.6,
+          "truncated_density": 0.004374453193350831,
+          "full_density": 0.30498687664041996,
+          "abs_bias": 0.3006124234470691,
+          "rel_bias": 0.9856569133677567
+        },
+        {
+          "task_id": "cart_1",
+          "page_type": "cart",
+          "locatable_elements": 21,
+          "ewb": 1070,
+          "truncated_count": 6,
+          "full_count": 324.1,
+          "truncated_density": 0.005607476635514018,
+          "full_density": 0.30285046728971965,
+          "abs_bias": 0.2972429906542056,
+          "rel_bias": 0.9814843388365992
+        }
+      ]
+    },
+    "DEF-FORM-ONLY": {
+      "truncated_ordering": [
+        "product_listing",
+        "cart",
+        "detail"
+      ],
+      "full_ordering": [
+        "product_listing",
+        "detail",
+        "cart"
+      ],
+      "ordering_changed": true,
+      "truncated_avg": {
+        "product_listing": 0.003851146241213068,
+        "detail": 0.0017121719502046417,
+        "cart": 0.002803738317757009
+      },
+      "full_avg": {
+        "product_listing": 0.012259482201194933,
+        "detail": 0.004794081460572996,
+        "cart": 0.002850467289719626
+      },
+      "tasks": [
+        {
+          "task_id": "listing_clothing-shoes-jewelry",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1550,
+          "truncated_count": 6,
+          "full_count": 19.1,
+          "truncated_density": 0.003870967741935484,
+          "full_density": 0.012322580645161292,
+          "abs_bias": 0.008451612903225807,
+          "rel_bias": 0.6858638743455497
+        },
+        {
+          "task_id": "listing_beauty-personal-care",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1560,
+          "truncated_count": 6,
+          "full_count": 19.1,
+          "truncated_density": 0.0038461538461538464,
+          "full_density": 0.012243589743589745,
+          "abs_bias": 0.008397435897435898,
+          "rel_bias": 0.6858638743455497
+        },
+        {
+          "task_id": "listing_electronics",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1564,
+          "truncated_count": 6,
+          "full_count": 19.1,
+          "truncated_density": 0.0038363171355498722,
+          "full_density": 0.012212276214833761,
+          "abs_bias": 0.008375959079283889,
+          "rel_bias": 0.6858638743455497
+        },
+        {
+          "task_id": "detail_camera",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1215,
+          "truncated_count": 2,
+          "full_count": 5.6,
+          "truncated_density": 0.0016460905349794238,
+          "full_density": 0.004609053497942386,
+          "abs_bias": 0.0029629629629629624,
+          "rel_bias": 0.6428571428571428
+        },
+        {
+          "task_id": "detail_vr_bag",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1149,
+          "truncated_count": 2,
+          "full_count": 5.6,
+          "truncated_density": 0.0017406440382941688,
+          "full_density": 0.004873803307223672,
+          "abs_bias": 0.0031331592689295036,
+          "rel_bias": 0.6428571428571429
+        },
+        {
+          "task_id": "detail_pet_camera",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1143,
+          "truncated_count": 2,
+          "full_count": 5.6,
+          "truncated_density": 0.0017497812773403325,
+          "full_density": 0.00489938757655293,
+          "abs_bias": 0.0031496062992125975,
+          "rel_bias": 0.6428571428571428
+        },
+        {
+          "task_id": "cart_1",
+          "page_type": "cart",
+          "locatable_elements": 21,
+          "ewb": 1070,
+          "truncated_count": 3,
+          "full_count": 3.0,
+          "truncated_density": 0.002803738317757009,
+          "full_density": 0.002850467289719626,
+          "abs_bias": 4.672897196261695e-05,
+          "rel_bias": 0.016393442622950866
+        }
+      ]
+    },
+    "ISOLATED-A-LINK": {
+      "truncated_ordering": [
+        "cart",
+        "product_listing",
+        "detail"
+      ],
+      "full_ordering": [
+        "cart",
+        "detail",
+        "product_listing"
+      ],
+      "ordering_changed": true,
+      "truncated_avg": {
+        "product_listing": 0.005134861654950757,
+        "detail": 0.004280429875511604,
+        "cart": 0.005607476635514018
+      },
+      "full_avg": {
+        "product_listing": 0.292961125249179,
+        "detail": 0.29870591934316565,
+        "cart": 0.30285046728971965
+      },
+      "tasks": [
+        {
+          "task_id": "listing_clothing-shoes-jewelry",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1550,
+          "truncated_count": 8,
+          "full_count": 454.1,
+          "truncated_density": 0.005161290322580645,
+          "full_density": 0.29296774193548386,
+          "abs_bias": 0.2878064516129032,
+          "rel_bias": 0.9823827350803787
+        },
+        {
+          "task_id": "listing_beauty-personal-care",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1560,
+          "truncated_count": 8,
+          "full_count": 457.1,
+          "truncated_density": 0.005128205128205128,
+          "full_density": 0.2930128205128205,
+          "abs_bias": 0.2878846153846154,
+          "rel_bias": 0.982498359221177
+        },
+        {
+          "task_id": "listing_electronics",
+          "page_type": "product_listing",
+          "locatable_elements": 82,
+          "ewb": 1564,
+          "truncated_count": 8,
+          "full_count": 458.1,
+          "truncated_density": 0.005115089514066497,
+          "full_density": 0.29290281329923273,
+          "abs_bias": 0.28778772378516626,
+          "rel_bias": 0.9825365640689806
+        },
+        {
+          "task_id": "detail_camera",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1215,
+          "truncated_count": 5,
+          "full_count": 349.6,
+          "truncated_density": 0.00411522633744856,
+          "full_density": 0.2877366255144033,
+          "abs_bias": 0.2836213991769548,
+          "rel_bias": 0.9856979405034325
+        },
+        {
+          "task_id": "detail_vr_bag",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1149,
+          "truncated_count": 5,
+          "full_count": 348.6,
+          "truncated_density": 0.004351610095735422,
+          "full_density": 0.30339425587467367,
+          "abs_bias": 0.29904264577893824,
+          "rel_bias": 0.9856569133677567
+        },
+        {
+          "task_id": "detail_pet_camera",
+          "page_type": "detail",
+          "locatable_elements": 32,
+          "ewb": 1143,
+          "truncated_count": 5,
+          "full_count": 348.6,
+          "truncated_density": 0.004374453193350831,
+          "full_density": 0.30498687664041996,
+          "abs_bias": 0.3006124234470691,
+          "rel_bias": 0.9856569133677567
+        },
+        {
+          "task_id": "cart_1",
+          "page_type": "cart",
+          "locatable_elements": 21,
+          "ewb": 1070,
+          "truncated_count": 6,
+          "full_count": 324.1,
+          "truncated_density": 0.005607476635514018,
+          "full_density": 0.30285046728971965,
+          "abs_bias": 0.2972429906542056,
+          "rel_bias": 0.9814843388365992
+        }
+      ]
+    }
+  },
+  "random_baseline": {
+    "DEF-FULL-MAP": {
+      "tasks": [
+        {
+          "task_id": "listing_clothing-shoes-jewelry",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2878064516129032,
+          "mean_random_abs_bias": 0.28194774193548383,
+          "random_lower": true
+        },
+        {
+          "task_id": "listing_beauty-personal-care",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2878846153846154,
+          "mean_random_abs_bias": 0.2820307692307692,
+          "random_lower": true
+        },
+        {
+          "task_id": "listing_electronics",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.28778772378516626,
+          "mean_random_abs_bias": 0.2819840153452685,
+          "random_lower": true
+        },
+        {
+          "task_id": "detail_camera",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2836213991769548,
+          "mean_random_abs_bias": 0.27894320987654325,
+          "random_lower": true
+        },
+        {
+          "task_id": "detail_vr_bag",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.29904264577893824,
+          "mean_random_abs_bias": 0.2941601392515231,
+          "random_lower": true
+        },
+        {
+          "task_id": "detail_pet_camera",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.3006124234470691,
+          "mean_random_abs_bias": 0.29566929133858266,
+          "random_lower": true
+        },
+        {
+          "task_id": "cart_1",
+          "pool_size": 21,
+          "pool_composition": {
+            "a": 3,
+            "button": 2,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 7,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2972429906542056,
+          "mean_random_abs_bias": 0.2966327102803739,
+          "random_lower": true
+        }
+      ],
+      "all_lower": true
+    },
+    "DEF-FORM-ONLY": {
+      "tasks": [
+        {
+          "task_id": "listing_clothing-shoes-jewelry",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.008451612903225807,
+          "mean_random_abs_bias": 0.011404516129032259,
+          "random_lower": false
+        },
+        {
+          "task_id": "listing_beauty-personal-care",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.008397435897435898,
+          "mean_random_abs_bias": 0.011314102564102568,
+          "random_lower": false
+        },
+        {
+          "task_id": "listing_electronics",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.008375959079283889,
+          "mean_random_abs_bias": 0.011275575447570334,
+          "random_lower": false
+        },
+        {
+          "task_id": "detail_camera",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.0029629629629629624,
+          "mean_random_abs_bias": 0.003599176954732509,
+          "random_lower": false
+        },
+        {
+          "task_id": "detail_vr_bag",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.0031331592689295036,
+          "mean_random_abs_bias": 0.003795474325500434,
+          "random_lower": false
+        },
+        {
+          "task_id": "detail_pet_camera",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.0031496062992125975,
+          "mean_random_abs_bias": 0.003804024496937883,
+          "random_lower": false
+        },
+        {
+          "task_id": "cart_1",
+          "pool_size": 21,
+          "pool_composition": {
+            "a": 3,
+            "button": 2,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 7,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 4.672897196261695e-05,
+          "mean_random_abs_bias": 0.00017570093457943935,
+          "random_lower": false
+        }
+      ],
+      "all_lower": false
+    },
+    "ISOLATED-A-LINK": {
+      "tasks": [
+        {
+          "task_id": "listing_clothing-shoes-jewelry",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2878064516129032,
+          "mean_random_abs_bias": 0.28193806451612896,
+          "random_lower": true
+        },
+        {
+          "task_id": "listing_beauty-personal-care",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2878846153846154,
+          "mean_random_abs_bias": 0.2820576923076923,
+          "random_lower": true
+        },
+        {
+          "task_id": "listing_electronics",
+          "pool_size": 82,
+          "pool_composition": {
+            "a": 62,
+            "button": 5,
+            "form": 3,
+            "input": 2,
+            "combobox": 1,
+            "div": 4,
+            "label": 1,
+            "span": 4,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.28778772378516626,
+          "mean_random_abs_bias": 0.28201470588235295,
+          "random_lower": true
+        },
+        {
+          "task_id": "detail_camera",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2836213991769548,
+          "mean_random_abs_bias": 0.2789942386831276,
+          "random_lower": true
+        },
+        {
+          "task_id": "detail_vr_bag",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.29904264577893824,
+          "mean_random_abs_bias": 0.2941401218450827,
+          "random_lower": true
+        },
+        {
+          "task_id": "detail_pet_camera",
+          "pool_size": 32,
+          "pool_composition": {
+            "a": 14,
+            "button": 1,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 8,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.3006124234470691,
+          "mean_random_abs_bias": 0.2956325459317585,
+          "random_lower": true
+        },
+        {
+          "task_id": "cart_1",
+          "pool_size": 21,
+          "pool_composition": {
+            "a": 3,
+            "button": 2,
+            "form": 2,
+            "input": 1,
+            "combobox": 1,
+            "div": 7,
+            "label": 2,
+            "span": 3,
+            "menuitem": 0,
+            "tab": 0
+          },
+          "trunc_abs_bias": 0.2972429906542056,
+          "mean_random_abs_bias": 0.29662710280373833,
+          "random_lower": true
+        }
+      ],
+      "all_lower": true
+    }
+  },
+  "decision": {
+    "c1": true,
+    "c2": true,
+    "c3": true,
+    "c2_count": 7,
+    "c2_total": 7,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  }
+}
