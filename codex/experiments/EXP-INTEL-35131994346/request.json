@@ -1,0 +1,20 @@
+{
+  "base_sha": "db79994688a44034d8ead108bfb4a802b39fdc83",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T18:03:37.357411+00:00",
+  "experiment_id": "EXP-INTEL-35131994346",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After the runtime lane removes the first-20 locatableSample cap, does full DOM enumeration confirm that the a\u2192link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "lane": "intel",
+  "origin_github_run_id": "35131994346",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35124660457",
+    "path": "research/experiments/EXP-INTEL-35124660457/handoff.json",
+    "sha256": "bb975d7af3a448eaf7d3ae40327e1cea38c414ae5edadc1e4a1dd1fb81038a59"
+  },
+  "reason": "continuation",
+  "request_hash": "eee7c2eeae91bbe637aa18983346aabc82cf922427fd13051504cfff83e9071d",
+  "request_id": "cd4c4a65d4c31e5cbaf1768e",
+  "schema_version": 1
+}

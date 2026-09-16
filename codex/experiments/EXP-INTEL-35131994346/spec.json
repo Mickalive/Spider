@@ -1,0 +1,26 @@
+{
+  "experiment_id": "EXP-INTEL-35131994346",
+  "lane": "intel",
+  "claim_ids": ["C-CROSSSITE", "C-LLM-INHERIT"],
+  "question": "Given the provenance mismatch between committed analyze.py and stored analysis_results.json from EXP-INTEL-35124660457, can the canonical analysis script be identified by reconstructing the 3-definition per-role-filtered analysis from raw evidence, and does this reconstruction match either the committed script or the stored results?",
+  "hypothesis": "The stored analysis_results.json was produced by an uncommitted script that applies per-definition role filtering (DEF-FULL-MAP: a+button+input+combobox, DEF-FORM-ONLY: button+combobox, ISOLATED-A-LINK: a only) and deduplicates cart_1 to 7 tasks. This script can be reconstructed from the raw evidence and the stored results, creating a reproducible canonical analysis.",
+  "falsifier": "If (1) no reconstructed script reproduces the stored 3-definition results within tolerance, OR (2) the reconstructed script requires information not present in the raw evidence, OR (3) the reconstructed script contradicts the frozen preregistration in ways that invalidate the stored verdict, THEN the provenance mismatch is irreconcilable and the stored results must be marked EXPLORATORY.",
+  "baselines": [
+    "B1_COMMITTED_SCRIPT: Run committed analyze.py on frozen raw evidence, verify it yields FALSIFIED-IN-SETTING (8 tasks, all-role density, C3=false)",
+    "B2_STORED_RESULTS: Load stored analysis_results.json, verify 3-definition structure and 7-task deduplication",
+    "B3_RECONSTRUCTION: Attempt to reconstruct the analysis pipeline from raw evidence + stored results to identify the missing script"
+  ],
+  "positive_control": "The committed analyze.py must reproduce its known output (FALSIFIED-IN-SETTING, 8 tasks, all-role density) when run on the frozen raw evidence from EXP-INTEL-34782350557",
+  "null_control": "If the reconstruction attempt produces results that match neither committed script nor stored results, this is a null outcome confirming the provenance gap is irreconcilable",
+  "measurement_validity": [
+    "Raw evidence from EXP-INTEL-34782350557 must be accessible at the frozen path",
+    "Committed analyze.py must be runnable on the raw evidence",
+    "Stored analysis_results.json must be loadable and structurally valid",
+    "The reconstruction attempt must be documented step-by-step with intermediate artifacts"
+  ],
+  "decision_rule": "If reconstruction successfully reproduces stored results within tolerance (±0.001 density, identical ordering, identical C3 pass/fail per definition), verdict = PROVENANCE_RESOLVED. If reconstruction fails but committed script is confirmed as alternative analysis, verdict = PROVENANCE_PARTIAL (committed script is canonical, stored results are exploratory). If both fail, verdict = PROVENANCE_IRRECONCILABLE (stored results cannot be verified, must be marked exploratory).",
+  "product_consequence_positive": "If provenance is resolved, the measurement from EXP-INTEL-35124660457 can be unblocked and the FALSIFIED verdict from EXP-INTEL-35112013458 can be re-evaluated with verified analysis",
+  "product_consequence_negative": "If provenance is irreconcilable, the stored results from EXP-INTEL-35124660457 must be marked exploratory and the measurement must be re-run from scratch with a committed canonical script",
+  "estimated_cost": "Low: pure code analysis and reconstruction, no new data collection, no browser interaction",
+  "expected_information_gain": "High: resolves a blocking provenance mismatch that prevents re-evaluation of a FALSIFIED verdict; either unblocks the measurement or forces a clean re-run with verified code"
+}

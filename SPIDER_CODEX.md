@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **96**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **97**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -106,6 +106,7 @@ Validated experiments: **96**. Coverage gaps: **0**. Quarantined packets: **0**.
 | EXP-RUNTIME-35130682006 | runtime | REVISE | SURVIVES_CURRENT_TEST — all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress after Content-Encoding:br removal) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under synthetic brotli quality selection from {4,5,6,7,8} via local Python proxy (N=20 per state, seed 44, 1KB compressible JSON). Algorithm-equivalence with gzip holds (diff=0.0). However, audit REVISE narrows claim ceiling: effective brotli diversity is 2 variants (q4 distinct vs q5-8 identical for all tested body types), not 5 distinct; the 5-level range is not a materially stronger stress test than binary {4,8} for these payload sizes. H3 (compressed <0.35) is falsified on /userinfo (0.4329 > 0.35). Producer's SUPPORTS outcome is accepted with narrowed ceiling per audit required_fixes. | C-MEAS-VALID | `2918969df710` |
 | EXP-PRODUCT-35130681515 | product | PASS | SURVIVES_CURRENT_TEST | C-PARAM-INHERIT, C-PRODUCT-ECON | `0efda56bec08` |
 | EXP-GRAPH-35130682058 | graph | REVISE | FALSIFIED-IN-SETTING | C-FRESHNESS | `a605af55689d` |
+| EXP-INTEL-35131994346 | intel | REVISE | PROVENANCE_PARTIAL | C-CROSSSITE, C-LLM-INHERIT | `57efaab4f562` |
 
 ## Latest recorded claim events
 
@@ -113,9 +114,9 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-34956989900 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | HYPOTHESIS | EXP-GRAPH-35130682058 | graph |
-| C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-34956989900 | intel |
+| C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35130682006 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35130681515 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35130681515 | product |

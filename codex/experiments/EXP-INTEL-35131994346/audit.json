@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35131994346",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Map outcome to prereg decision rule explicitly: 2/3 definitions within tolerance does NOT satisfy PROVENANCE_RESOLVED (±0.001 density, identical ordering, identical C3 per definition for all 3). Correct mapping is PROVENANCE_PARTIAL per spec.json decision_rule: reconstruction fails for ISOLATED-A-LINK, committed script confirmed as alternative (B1 passes). Report.md MIXED must be labeled PARTIAL.",
+    "Fix reconstruct.py integer truncation: line 124 int(sample_roles.get(role,0)*scale_factor) truncates fractional full_count (e.g., combobox 1*82/20=4.1 -> 4), while stored analysis_results.json uses float scaling (454.1 vs 454). Density diff is <0.001 and passes tolerance but is systematic; use float scaling to match stored algorithm exactly and document.",
+    "Mark stored ISOLATED-A-LINK as exploratory/invalid in provenance: stored values are identical to DEF-FULL-MAP (7/7 truncated_count, full_count, densities identical) and cannot be reproduced by a-only filtering. Do not use ISOLATED-A-LINK verdict (ordering_changed=True) from stored results; correct computed verdict is ordering_changed=False (truncated ['cart','detail','product_listing'] == full ['cart','detail','product_listing']).",
+    "Disclose that both stored and reconstructed estimators remain inflated: full_count uses total DOM tag counts (dom_stats.linksCount 393-397, buttonsCount 15, inputsCount 42) as locatable counts, conflating total DOM (1696/1395/1304 elements) with locatable pool (82/32/21). This inflates relative bias to ~98% vs correct locatable-scaled bound 14-69% (parent audit V1). Reconstruction inherits the flaw; provenance resolution does not validate point estimates.",
+    "Clarify null_control wording: result.json null_control pass=false is correct (null outcome of 0/3 matches did not occur; 2/3 matched), but evidence_ref points to reconstruction_complete.json which does not test committed script. Split null_control evidence between reconstruction_complete.json (reconstruction) and direct execution of research/experiments/EXP-INTEL-35124660457/analyze.py on frozen raw evidence.",
+    "Commit canonical script before re-run: deduplicate cart_1 (8->7 tasks) and implement 3-definition per-role filtering (DEF-FULL-MAP a+button+input+combobox, DEF-FORM-ONLY button+combobox, ISOLATED-A-LINK a only) with float scaling, or explicitly accept committed analyze.py (all-role density) as canonical and mark stored 3-definition results exploratory for all definitions."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_estimator_inflation_still_present",
+      "severity": "high",
+      "finding": "Both stored analysis_results.json and reconstruction use total DOM tag counts as full-DOM locatable estimates (linksCount 393-397 vs locatable_elements 82 listings; 325 vs 32 details). Audit recompute confirms full_count 454.1 vs correct locatable-scaled ~19-25 for a-only. Inflates truncated vs full density gap 4-7x. Directional ordering change is robust but point estimates (0.005 vs 0.29) are not valid locatable densities. Threat inherited from EXP-INTEL-35124660457 audit V1.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (dom_stats.linksCount 393-397, locatable_elements 82/32/21), research/experiments/EXP-INTEL-35124660457/analysis_results.json (full_count 454.1), research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json (full_count 454), research/experiments/EXP-INTEL-35124660457/handoff.json carry_forward do_not_assume"
+    },
+    {
+      "id": "V2_integer_truncation_micro_mismatch",
+      "severity": "low",
+      "finding": "Reconstruct.py truncates scaled counts via int() (line 124), stored results retain float (4.1). For DEF-FULL-MAP and DEF-FORM-ONLY, truncated densities match exactly (0.0 diff), full densities differ 0.000046-0.00051 (product_listing 0.292961 vs 0.292897; detail 0.298706 vs 0.298192) – within frozen ±0.001 tolerance so MATCH per decision rule, but systematic. Audit recomputed within tolerance for all 7 tasks.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruct.py:124, research/experiments/EXP-INTEL-35124660457/analysis_results.json (full_count 454.1), research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json (full_count 454)"
+    },
+    {
+      "id": "V3_isolated_copy_paste_invalid",
+      "severity": "high",
+      "finding": "Stored ISOLATED-A-LINK is byte-identical to DEF-FULL-MAP for all 7 tasks (truncated_count 8 vs correct 2, full_count 454.1 vs 393-397, densities 0.00516 vs 0.00128). Audit recomputed correct a-only values (truncated 2, full 393-397, densities 0.00128-0.00187) and ordering cart>detail>product_listing (both truncated and full, ordering_changed=False) vs stored cart>product_listing>detail (ordering_changed=True). Stored ISOLATED verdict is invalid and must be marked exploratory.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analysis_results.json definitions.ISOLATED-A-LINK.tasks[0].truncated_count=8 vs reconstruction_complete.json ISOLATED-A-LINK tasks[0].truncated_count=2; stored truncated_ordering [cart,product_listing,detail] vs recomputed [cart,detail,product_listing]"
+    },
+    {
+      "id": "V4_small_N_single_site",
+      "severity": "medium",
+      "finding": "Inference remains bounded to n=7 distinct tasks (8 measurements with cart_1 duplicate), 1 Magento site, 3 page types (product_listing n=3, detail n=3, cart n=1 distinct). No CI, no cross-site variance. Cart mean based on single distinct page; ordering differences within 0.0004-0.0013 truncated density and 0.01 full density with n=1. Cannot generalize ordering stability or C3.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/result.json metrics.deduplication (8->7), reconstruction_complete.json 7 tasks, research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (8 valid + 2 checkout errors filtered)"
+    },
+    {
+      "id": "V5_C3_scope_ambiguity",
+      "severity": "medium",
+      "finding": "Stored verdict SURVIVES_CURRENT_TEST requires C3 random_lower true, but per prereg conjunctive rule across definitions, DEF-FORM-ONLY fails (stored random_baseline all_lower=false, recon random_lower=false) while DEF-FULL-MAP passes. Stored decision appears to use DEF-FULL-MAP only, ignoring DEF-FORM-ONLY failure. This ambiguity (parent audit V1/V2) persists; reconstruction does not resolve decision-rule scope. Correct ceiling is per-definition C3, not global SURVIVES.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analysis_results.json random_baseline.DEF-FORM-ONLY.all_lower=false vs DEF-FULL-MAP.all_lower=true, research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json DEF-FORM-ONLY random_baseline random_lower=false"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_COMMITTED_SCRIPT",
+      "expected": "FALSIFIED-IN-SETTING with 8 tasks (duplicate cart_1), all-role density, C3=false",
+      "observed": "Producer reports FALSIFIED-IN-SETTING 8 tasks, all-role density, C3=false; code inspection of analyze.py (Counter over locatable_sample + full_estimates via dom_stats.linksCount/buttonsCount/formsCount/inputsCount + scale for combobox/div/label/span) and provenance hash c2a085bb matches committed script. Raw evidence valid count 8 confirmed (10 measurements minus 2 checkout errors without dom_stats). PASS.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analyze.py sha256 c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15, research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json, research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json valid=8"
+    },
+    {
+      "id": "B2_STORED_RESULTS",
+      "expected": "3-definition structure (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK) with 7 tasks after deduplication",
+      "observed": "Structure present, 7 tasks, but ISOLATED-A-LINK identical to DEF-FULL-MAP (7/7 truncated_count 8, full_count 454.1/349.6, densities 0.00516/0.00411). Bug confirmed via audit recompute. PARTIAL as producer states.",
+      "pass": false,
+      "partial": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analysis_results.json sha256 b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546"
+    },
+    {
+      "id": "B3_RECONSTRUCTION",
+      "expected": "Reconstruct script reproducing stored 3-definition results within ±0.001 density, identical ordering, identical C3 per definition",
+      "observed": "DEF-FULL-MAP and DEF-FORM-ONLY reproduce within tolerance (all 7 tasks density diff <0.001, truncated_avg diff 0.0, full_avg diff 0.00005-0.00051, orderings match, C3 match). ISOLATED-A-LINK fails (all 7 density mismatches ~0.0038, truncated ordering mismatch cart>detail>product_listing vs stored cart>product_listing>detail, ordering_changed false vs true). PARTIAL as producer states. Audit recomputed densities confirm producer per_definition_comparison.",
+      "pass": false,
+      "partial": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruct.py sha256 b435676812fc9fbc92e78d9ae0c073f98bf19b317e8ac24be85507716b2d433d, research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json sha256 ceb35ea2a041395540939f467704bb431040205e5b6cf95d9aa579effe230b92"
+    },
+    {
+      "id": "positive_control",
+      "expected": "Committed analyze.py reproduces FALSIFIED-IN-SETTING on frozen raw evidence",
+      "observed": "Expected behavior observed per code path and prior execution evidence; valid measurements 8, all-role density, C3 false. PASS.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json, research/experiments/EXP-INTEL-35124660457/analyze.py"
+    },
+    {
+      "id": "null_control",
+      "expected": "No definition matches neither committed nor stored (irreconcilable gap)",
+      "observed": "Null outcome falsified: 2/3 definitions match stored, 1 matches nothing consistent (ISOLATED bug). Therefore provenance gap is not irreconcilable, but not resolved. result.json correctly marks null_control pass=false. The finding supports PROVENANCE_PARTIAL, not IRRECONCILABLE.",
+      "pass": false,
+      "interpretation": "Failure of null control is informative: confirms partial provenance, not irreconcilability.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/result.json controls.null_control"
+    }
+  ],
+  "recomputed_metrics": {
+    "reconstruction_success": {
+      "DEF-FULL-MAP": "MATCH (audit recomputed: 7/7 tasks |density diff|<0.001, truncated_avg 0.005134861654950757 exact, full_avg diff 0.000064 product_listing /0.00051 detail within tolerance, orderings cart>product_listing>detail->cart>detail>product_listing match)",
+      "DEF-FORM-ONLY": "MATCH (audit recomputed: 7/7 tasks |density diff|<0.001, truncated_avg 0.003851146241213068 exact, full_avg diff 0.000064/0.00051 within tolerance, orderings product_listing>cart>detail->product_listing>detail>cart match)",
+      "ISOLATED-A-LINK": "MISMATCH CONFIRMED (audit recomputed a-only truncated 2 vs stored 8, full 318-397 vs stored 324.1-458.1, density 0.00128 vs 0.00516, truncated ordering [cart,detail,product_listing] vs stored [cart,product_listing,detail], ordering_changed false vs true, 7/7 tasks mismatch)"
+    },
+    "stored_isolated_identical_to_full_map": true,
+    "stored_isolated_7of7_identical": "verified: all 7 tasks truncated_count, full_count, truncated_density, full_density, truncated_avg, full_avg, truncated_ordering, full_ordering identical between DEF-FULL-MAP and ISOLATED-A-LINK in analysis_results.json",
+    "deduplication": {
+      "original_valid": 8,
+      "deduplicated": 7,
+      "removed": "cart_1 duplicate (second occurrence)",
+      "verified": "raw_evidence 10 measurements -> 8 valid (filter dom_stats & locatable_elements) -> 7 unique task_ids; 2 checkout_1 errors correctly excluded"
+    },
+    "committed_script_output": {
+      "decision": "FALSIFIED-IN-SETTING (code inspection confirms all-role density sum over a+button+form+input+combobox+div+label+span)",
+      "n_tasks": 8,
+      "verified": true
+    },
+    "stored_results_output": {
+      "n_tasks": 7,
+      "n_definitions": 3,
+      "bug": "ISOLATED-A-LINK copy of DEF-FULL-MAP"
+    },
+    "per_definition_comparison": {
+      "DEF-FULL-MAP": {
+        "truncated_ordering_match": true,
+        "full_ordering_match": true,
+        "ordering_changed_match": true,
+        "per_task_density_match": "ALL_7_TASKS_MATCH within 0.001 (full mismatch 0.00005-0.00051 due to int truncation but within tolerance)"
+      },
+      "DEF-FORM-ONLY": {
+        "truncated_ordering_match": true,
+        "full_ordering_match": true,
+        "ordering_changed_match": true,
+        "per_task_density_match": "ALL_7_TASKS_MATCH within 0.001"
+      },
+      "ISOLATED-A-LINK": {
+        "truncated_ordering_match": false,
+        "full_ordering_match": true,
+        "ordering_changed_match": false,
+        "per_task_density_match": "ALL_7_TASKS_MISMATCH",
+        "computed_truncated_ordering": ["cart", "detail", "product_listing"],
+        "stored_truncated_ordering": ["cart", "product_listing", "detail"],
+        "stored_is_identical_to_def_full_map": true,
+        "correct_full_counts": [393, 396, 397, 325, 324, 324, 318],
+        "stored_full_counts": [454.1, 457.1, 458.1, 349.6, 348.6, 348.6, 324.1]
+      }
+    },
+    "random_baseline_per_definition": {
+      "DEF-FULL-MAP_all_lower_stored": true,
+      "DEF-FULL-MAP_random_lower_recon": true,
+      "DEF-FORM-ONLY_all_lower_stored": false,
+      "DEF-FORM-ONLY_random_lower_recon": false,
+      "ISOLATED_all_lower_stored": true,
+      "ISOLATED_random_lower_recon": true,
+      "note": "Stored ISOLATED all_lower=true is copy of DEF-FULL-MAP; recomputed ISOLATED with true a-only counts also yields random_lower=true (coincidentally same as stored copy)"
+    }
+  },
+  "claim_ceiling": "PROVENANCE_PARTIAL (not RESOLVED). Maximum justified: the uncommitted 3-definition analysis can be reconstructed from frozen raw evidence for DEF-FULL-MAP and DEF-FORM-ONLY within frozen tolerance (±0.001 density, identical orderings, identical C3 per definition: both match). ISOLATED-A-LINK in stored analysis_results.json is invalid (copy-paste of DEF-FULL-MAP, 7/7 tasks identical) and cannot be reproduced by a-only filtering; correct a-only analysis yields truncated ordering cart>detail>product_listing identical to full ordering (ordering_changed=False) vs stored ordering_changed=True. Therefore stored results are exploratory for ISOLATED-A-LINK and partially verified for other two. The directional finding that first-20 truncation changes page-type ordering (DEF-FULL-MAP cart>product_listing>detail -> cart>detail>product_listing; DEF-FORM-ONLY product_listing>cart>detail -> product_listing>detail>cart) is robust within this inflated DOM-count estimator, but point estimates remain invalid (total DOM counts conflated with locatable counts). Bounded to n=7 distinct tasks, 1 Magento site, truncated-first-20 vs tag-count-estimated full DOM, 1000-iteration DOM-proportional random baseline (seed 42). No inference to full DOM enumeration or cross-site.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35131994346/request.json (parent_handoff EXP-INTEL-35124660457)",
+    "research/experiments/EXP-INTEL-35131994346/spec.json (claim_ids C-CROSSSITE C-LLM-INHERIT, decision_rule PROVENANCE_RESOLVED/PARTIAL/IRRECONCILABLE)",
+    "research/experiments/EXP-INTEL-35131994346/prereg.md (definitions, baselines B1-B3, positive/null controls, ±0.001 tolerance)",
+    "research/experiments/EXP-INTEL-35131994346/freeze.json (hashes e2ecb521..., 03255fbd..., 14291c02...)",
+    "research/experiments/EXP-INTEL-35131994346/result.json (metrics.reconstruction_success 2 MATCH 1 MISMATCH, per_definition_comparison, controls B1 PASS B2 PARTIAL B3 PARTIAL)",
+    "research/experiments/EXP-INTEL-35131994346/reconstruct.py sha256 b435676812fc9fbc92e78d9ae0c073f98bf19b317e8ac24be85507716b2d433d",
+    "research/experiments/EXP-INTEL-35131994346/reconstruction_complete.json sha256 ceb35ea2a041395540939f467704bb431040205e5b6cf95d9aa579effe230b92",
+    "research/experiments/EXP-INTEL-35124660457/analysis_results.json sha256 b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546 (definitions DEF-FULL-MAP 454.1/349.6, ISOLATED identical)",
+    "research/experiments/EXP-INTEL-35124660457/analyze.py sha256 c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 (8 valid measurements, dom_stats.linksCount 393-397, locatable_elements 82/32/21)",
+    "research/experiments/EXP-INTEL-35124660457/handoff.json (established ordering change, do_not_assume 98% bias invalid, dependencies substrate+code blocking)",
+    "research/experiments/EXP-INTEL-35124660457/verdict.json (MEASUREMENT_INVALID, V2_provenance_not_reproducible, V1_dom_counts_are_not_locatable)"
+  ],
+  "unresolved": [
+    "Correct ISOLATED-A-LINK C3 verdict after bug fix: recomputed ordering_changed=False (no change) would fail C1, altering stored SURVIVES logic for that definition. Whether corrected ISOLATED should be excluded as scientifically meaningful (a dominates full DOM 393-397 links) remains open.",
+    "Whether committed analyze.py should be accepted as canonical (all-role density, 8 tasks) or updated to per-definition filtering with deduplication and float scaling; until committed, measurement remains non-reproducible from HEAD.",
+    "Whether full DOM enumeration via runtime lane locatableSample cap removal changes density magnitudes, ordering significance, and null distribution shape beyond tag-count estimator (blocking substrate dependency).",
+    "Statistical significance of product_listing vs detail ordering swap (means within 2% inflated, n=3 per type, n=1 distinct cart) – no CI reported, single-site bound.",
+    "Whether menuitem/tab additivity and locatable-scaled estimator (proper locatable pool composition) would change C3 conclusions for DEF-FORM-ONLY vs DEF-FULL-MAP."
+  ]
+}
