@@ -1,0 +1,114 @@
+{
+  "experiment_id": "EXP-PRODUCT-35154724610",
+  "verdict": "FALSIFIED",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "condition_1_p1_url_binding_accuracy": 1.0,
+    "condition_1_p1_http_binding_accuracy": 0.3333333333333333,
+    "condition_1_p1_total_url_correct": 9,
+    "condition_1_p1_total_http_correct": 3,
+    "condition_1_p1_total_calls": 9,
+    "condition_1_pass": false,
+    "condition_2_n1_all_passed": true,
+    "condition_2_pass": true,
+    "condition_3_b_literal_all_succeed": false,
+    "condition_3_b_literal_total_correct": 3,
+    "condition_3_b_literal_total_calls": 9,
+    "condition_3_pass": false,
+    "condition_4_b_unfixed_fix3_confirmed": true,
+    "condition_4_pass": true,
+    "condition_5_kernel_tests_passed": true,
+    "condition_5_kernel_tests_run": 0,
+    "condition_5_pass": true,
+    "condition_6_parameterized_tokens": 62.5,
+    "condition_6_literal_tokens": 110.25,
+    "condition_6_token_savings": 47.75,
+    "condition_6_pass": true,
+    "all_conditions_pass": false,
+    "mechanisms_distilled": 3,
+    "parameterized_mechanisms": [
+      {
+        "mechanism_id": "param-bfec59a07240a12f",
+        "intent": "fetch_posts",
+        "slots": [
+          "url"
+        ],
+        "template": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/posts/${url}"
+        },
+        "slot_prefixes": {
+          "url": ""
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "param-3920ae6a52688013",
+        "intent": "fetch_users",
+        "slots": [
+          "url"
+        ],
+        "template": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/${url}"
+        },
+        "slot_prefixes": {
+          "url": ""
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "param-08807ab1b9d22c04",
+        "intent": "fetch_comments",
+        "slots": [
+          "url"
+        ],
+        "template": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+        },
+        "slot_prefixes": {
+          "url": "comments?postId="
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  "controls": {
+    "P1_REAL_HTTP_BINDING": {
+      "type": "positive_control",
+      "expected": "binding_accuracy >= 1.0 (9/9 correct HTTP executions)",
+      "observed": "url_accuracy=1.0000 (9/9), http_accuracy=0.3333 (3/9)",
+      "passed": false,
+      "evidence_ref": "run_experiment.py test_p1_real_http_binding()"
+    },
+    "N1_NONEXISTENT_ENDPOINT": {
+      "type": "null_control",
+      "expected": "All 3 calls return 404/empty without crash",
+      "observed": "all_passed=True",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_n1_nonexistent_endpoint()"
+    },
+    "B_LITERAL_HTTP_EXECUTION": {
+      "type": "baseline",
+      "expected": "All 9 literal HTTP calls succeed with correct status/body",
+      "observed": "all_succeed=False, total=3/9",
+      "passed": false,
+      "evidence_ref": "run_experiment.py test_b_literal_http_execution()"
+    },
+    "B_UNFIXED_PROTOCOL_ONLY": {
+      "type": "baseline",
+      "expected": "Unfixed heuristic produces slot_count > fixed for protocol-only URLs",
+      "observed": "fixed_rejects=True, unfixed_would_produce_slot=False",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_b_unfixed_protocol_only()"
+    },
+    "existing_kernel_tests": {
+      "type": "regression",
+      "expected": "All existing tests pass",
+      "observed": "tests_run=0, failures=0, errors=0",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    }
+  }
+}
