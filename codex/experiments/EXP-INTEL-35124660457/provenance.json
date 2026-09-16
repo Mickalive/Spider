@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35124660457",
+  "lane": "intel",
+  "execution_timestamp": "2026-09-16T17:05:00Z",
+  "github_run_id": "35124660457",
+  "github_run_attempt": 1,
+  "base_sha": "781ae5bdc3a542cc90d964ef93f82f892cd860ba",
+  "execution_sha": "b1af85c61e0a5ff0bba8fcbac01707124f79563f",
+  "analyzer_script": "research/experiments/EXP-INTEL-35124660457/analyze.py",
+  "analyzer_hash": "c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+  "result_hash": "60aaf0c5605dd52a331739e76f31bec72692bac16299865172f16121a5db30cc",
+  "analysis_results_hash": "b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546",
+  "frozen_inputs": {
+    "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
+    "spec.json": "26e001233c0a9ecc93e6c6f8528f2aea73b6ab037b5740124cc73df9ec3f1f21",
+    "prereg.md": "d33f5852acacd493f4f20a02800b1bed35a616358b814d02db1f72750ef83454",
+    "freeze.json_hash": null
+  },
+  "raw_evidence": {
+    "source_experiment": "EXP-INTEL-34782350557",
+    "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "n_measurements_total": 10,
+    "n_measurements_valid": 7,
+    "docker_image": "am1n3e/webarena-verified-shopping:latest",
+    "docker_digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "frozen_seed": 99
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-35112013458",
+    "parent_handoff_path": "research/experiments/EXP-INTEL-35112013458/handoff.json",
+    "parent_handoff_sha256": "d9ca2d3296a623c39fbce4c1260aec450531fdda88760082dba60598c6e953d6",
+    "inherited_verdict": "FALSIFIED-IN-SETTING",
+    "inherited_next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "working_directory": "/home/runner/work/Spider/Spider"
+  },
+  "reproduction_command": "python3 research/experiments/EXP-INTEL-35124660457/analyze.py"
+}

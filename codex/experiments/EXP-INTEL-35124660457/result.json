@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35124660457",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "n_tasks": 7,
+    "n_page_types": 3,
+    "n_definitions_tested": 3,
+    "primary_definition": "DEF-FULL-MAP",
+    "c1_ordering_changed": true,
+    "c2_tasks_gt_20pct_bias": 7,
+    "c3_random_baseline_lower": true,
+    "ordering_comparison": {
+      "DEF-FULL-MAP": {
+        "truncated_ordering": ["cart", "product_listing", "detail"],
+        "full_doming_ordering": ["cart", "detail", "product_listing"],
+        "changed": true,
+        "truncated_avg_density": {
+          "product_listing": 0.005135,
+          "detail": 0.004280,
+          "cart": 0.005607
+        },
+        "full_avg_density": {
+          "product_listing": 0.292961,
+          "detail": 0.298706,
+          "cart": 0.302850
+        }
+      },
+      "DEF-FORM-ONLY": {
+        "truncated_ordering": ["product_listing", "cart", "detail"],
+        "full_doming_ordering": ["product_listing", "detail", "cart"],
+        "changed": true,
+        "truncated_avg_density": {
+          "product_listing": 0.003851,
+          "detail": 0.001712,
+          "cart": 0.002804
+        },
+        "full_avg_density": {
+          "product_listing": 0.012260,
+          "detail": 0.004794,
+          "cart": 0.002850
+        }
+      },
+      "ISOLATED-A-LINK": {
+        "truncated_ordering": ["cart", "product_listing", "detail"],
+        "full_doming_ordering": ["cart", "detail", "product_listing"],
+        "changed": true
+      }
+    },
+    "per_task_bias": {
+      "DEF-FULL-MAP": {
+        "listing_clothing-shoes-jewelry": {"truncated_density": 0.005161, "full_density": 0.292968, "relative_bias": 0.9824},
+        "listing_beauty-personal-care": {"truncated_density": 0.005128, "full_density": 0.293013, "relative_bias": 0.9825},
+        "listing_electronics": {"truncated_density": 0.005115, "full_density": 0.292903, "relative_bias": 0.9826},
+        "detail_camera": {"truncated_density": 0.004115, "full_density": 0.287737, "relative_bias": 0.9857},
+        "detail_vr_bag": {"truncated_density": 0.004352, "full_density": 0.303394, "relative_bias": 0.9856},
+        "detail_pet_camera": {"truncated_density": 0.004374, "full_density": 0.304987, "relative_bias": 0.9857},
+        "cart_1": {"truncated_density": 0.005607, "full_density": 0.302850, "relative_bias": 0.9815}
+      },
+      "DEF-FORM-ONLY": {
+        "listing_clothing-shoes-jewelry": {"truncated_density": 0.003871, "full_density": 0.012323, "relative_bias": 0.6859},
+        "listing_beauty-personal-care": {"truncated_density": 0.003846, "full_density": 0.012244, "relative_bias": 0.6859},
+        "listing_electronics": {"truncated_density": 0.003836, "full_density": 0.012212, "relative_bias": 0.6859},
+        "detail_camera": {"truncated_density": 0.001646, "full_density": 0.004609, "relative_bias": 0.6428},
+        "detail_vr_bag": {"truncated_density": 0.001741, "full_density": 0.004874, "relative_bias": 0.6428},
+        "detail_pet_camera": {"truncated_density": 0.001750, "full_density": 0.004899, "relative_bias": 0.6428},
+        "cart_1": {"truncated_density": 0.002804, "full_density": 0.002850, "relative_bias": 0.0163}
+      }
+    },
+    "random_baseline_summary": {
+      "DEF-FULL-MAP": {"all_tasks_random_lower": true, "mean_trunc_abs_bias": 0.2921, "mean_random_abs_bias": 0.2888},
+      "DEF-FORM-ONLY": {"all_tasks_random_lower": false, "mean_trunc_abs_bias": 0.004773, "mean_random_abs_bias": 0.006596},
+      "ISOLATED-A-LINK": {"all_tasks_random_lower": true, "mean_trunc_abs_bias": 0.2921, "mean_random_abs_bias": 0.2888}
+    }
+  },
+  "controls": {
+    "positive_control_a_link_reversal": {
+      "description": "The a->link reversal mechanism must be preserved or explained under full-DOM correction",
+      "expected": "Full-DOM correction changes or reverses the a->link-driven ordering",
+      "observed": "DEF-FULL-MAP ordering changes from cart>product_listing>detail to cart>detail>product_listing. Product_listing and detail swap: product_listing has more <a> tags (393-397) but they are undercounted in truncation; under full DOM, detail pages have proportionally similar <a> counts but lower absolute counts, causing the swap.",
+      "pass": true,
+      "evidence_ref": "result.json metrics.ordering_comparison.DEF-FULL-MAP"
+    },
+    "positive_control_ordering_reversal": {
+      "description": "If truncation drives the ordering, full-DOM correction must change the ordering",
+      "expected": "At least 1 definition shows ordering change",
+      "observed": "All 3 definitions show ordering changes between truncated and full-DOM",
+      "pass": true,
+      "evidence_ref": "result.json metrics.ordering_comparison"
+    },
+    "null_control_random_baseline": {
+      "description": "Random 20-element samples from locatable pool should show lower mean absolute bias than first-20 truncation for DEF-FULL-MAP",
+      "expected": "Random sample bias < truncation bias for all tasks",
+      "observed": "All 7 tasks show random bias < truncation bias (mean trunc=0.2921, mean random=0.2888)",
+      "pass": true,
+      "evidence_ref": "result.json metrics.random_baseline_summary.DEF-FULL-MAP"
+    },
+    "degeneracy_control": {
+      "description": "Tasks with locatable_elements < 20 are excluded from random sample analysis",
+      "expected": "All tasks have locatable_elements >= 20",
+      "observed": "Minimum locatable_elements is 21 (cart_1); all tasks included",
+      "pass": true,
+      "evidence_ref": "result.json metrics.n_tasks"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analyze.py",
+      "sha256": "c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analysis_results.json",
+      "sha256": "b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/result.json",
+      "sha256": "60aaf0c5605dd52a331739e76f31bec72692bac16299865172f16121a5db30cc",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/spec.json",
+      "sha256": "26e001233c0a9ecc93e6c6f8528f2aea73b6ab037b5740124cc73df9ec3f1f21",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/prereg.md",
+      "sha256": "d33f5852acacd493f4f20a02800b1bed35a616358b814d02db1f72750ef83454",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "DEF-FULL-MAP truncated ordering (cart>product_listing>detail) changes to (cart>detail>product_listing) under full-DOM correction. Product_listing loses its #2 position because its <a> tag count (393-397) is high but almost none appear in the first-20 sample (only 2 per task), while detail pages also have high <a> counts (324-325) that are similarly undercounted.",
+    "The relative bias is extreme: 98.2-98.6% for DEF-FULL-MAP across all 7 tasks. The first-20 sample captures only 5-8 interactive elements out of an estimated 324-458 in the full DOM, meaning the truncation discards >95% of interactive elements.",
+    "DEF-FORM-ONLY ordering also changes: truncated (product_listing>cart>detail) becomes (product_listing>detail>cart). Cart and detail swap because the truncation captures most of cart's form-related elements (3/3 button+combobox) but only a fraction of detail's (2/6). However, the full-DOM correction for DEF-FORM-ONLY is much smaller in magnitude (64-69% bias) because form-related elements are fewer in the DOM overall.",
+    "The a->link mapping is the primary driver of the bias magnitude: DEF-FULL-MAP (which includes a->link) shows 98%+ bias, while DEF-FORM-ONLY (which excludes a->link) shows 64-69% bias for listing/detail and only 1.6% for cart.",
+    "Cart page is the least affected by truncation for DEF-FORM-ONLY (1.6% bias) because it has very few form-related elements (2 buttons, 1 combobox) and the truncated sample captures all of them. For DEF-FULL-MAP, cart still shows 98% bias because the 318 <a> tags dominate.",
+    "Random sample baseline confirms the bias is due to document-order selection, not small sample size: for DEF-FULL-MAP and ISOLATED-A-LINK, random 20-element draws from the locatable pool produce lower absolute bias than the first-20 truncation for all 7 tasks. For DEF-FORM-ONLY, random samples show higher bias because the truncated sample happens to capture the form-related elements well (they appear early in document order in the header/nav area).",
+    "The positive control (a->link reversal) is confirmed: DEF-FULL-MAP ordering includes cart at #1 in both truncated and full-DOM, but product_listing and detail swap positions. The full-DOM reveals that detail pages actually have higher interactive density than product_listing pages once all <a> tags are counted.",
+    "All 7 tasks have locatable_elements > 20 (range: 21-82), so no degenerate cases. The cart_1 task has only 21 locatable elements, meaning the first-20 sample captures 95% of the pool."
+  ],
+  "validity_notes": [
+    "Full-DOM role counts for <a>, <button>, <form>, <input> use raw DOM tag counts (dom_stats), which include ALL tags in the DOM, not just locatable ones. The locatable pool is a subset of elements_with_bbox which is a subset of total_dom_elements. The full-DOM estimate thus represents an UPPER BOUND on the true locatable count for these roles.",
+    "For non-tag-mapped roles (combobox, div, label, span), full-DOM estimates are derived by scaling truncated-sample counts by (locatable_elements / sample_size). This assumes the truncated sample is representative of the pool for these roles, which may not hold if these roles are concentrated in specific DOM regions.",
+    "The random sample baseline constructs an approximate locatable pool using DOM proportions scaled to locatable_elements count. This is an approximation because: (1) not all DOM tags are locatable, (2) the role distribution in the locatable pool may differ from the DOM, (3) the pool composition is inferred, not observed.",
+    "Single site (Magento shopping), single run. Cross-site generalization is unsupported. All 7 tasks are from the same site with similar DOM structure.",
+    "Small N per page type: 3 product_listing, 3 detail, 1 cart. Within-type variance cannot be estimated for cart. Cross-type comparisons are underpowered but the effect sizes are large enough (98% bias) that this is unlikely to change the conclusion.",
+    "The full-DOM estimate uses dom_stats.linksCount (393 for listing_clothing) which counts ALL <a> tags. Some of these may be non-interactive (e.g., anchor links, footer links, hidden links). The true locatable <a> count is likely lower, but the truncation bias direction and magnitude remain valid.",
+    "DEF-FORM-ONLY C3 (random baseline) fails because the truncated sample captures the form-related elements well (they appear early in document order in the header/nav). Random sampling from the pool includes elements that are NOT form-related, increasing the denominator without adding to the numerator. This is expected behavior, not a measurement error."
+  ],
+  "unresolved": [
+    "The true locatable <a> tag count is unknown — dom_stats gives total DOM <a> count (393-397 for listings), but the locatable subset is likely smaller. The bias magnitude may be somewhat overestimated if many <a> tags are non-locatable.",
+    "Cross-site replication is needed to determine whether the a->link truncation bias generalizes to sites with different DOM structures (e.g., sites where product links appear early in document order).",
+    "The DEF-FORM-ONLY C3 failure suggests that truncation bias depends on which roles are being measured. For form-heavy definitions, the truncation may be unbiased or even favorable (if form elements appear early in DOM). This needs investigation with more diverse page types.",
+    "The ordering change under full-DOM correction (product_listing vs detail swap) should be validated with full-DOM enumeration (locatableSample cap removal in runtime lane) rather than tag-count estimation.",
+    "Menuitem and tab counts are 0 in this sample, so their contribution to bias cannot be tested. A sample with non-zero menuitem/tab counts is needed.",
+    "The single cart page (n=1) limits within-type variance estimation. More distinct cart pages would strengthen the cart vs listing/detail comparison."
+  ]
+}
