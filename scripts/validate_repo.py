@@ -94,6 +94,9 @@ def main():
     require("restore_attempt_baseline" in resilient, "model fallback must restore a clean stage baseline between providers")
     require("git reset --hard \"$START_HEAD\"" in resilient and "git clean -fd -e .spider-runtime/" in resilient, "fallback retry baseline is incomplete")
     require("SPIDER_RETRY_BASELINE_RESTORE_FAILED" in resilient, "retry-baseline restoration failure must be explicit")
+    require("setsid --wait" in resilient and "MODEL_PGID" in resilient, "model attempts must run in an isolated process group")
+    require('kill -TERM -- "-$MODEL_PGID"' in resilient and 'kill -KILL -- "-$MODEL_PGID"' in resilient, "timeouts must terminate the entire model process tree")
+    require("Independent audit requires a known producer model to exclude" in resilient, "audit must fail closed when producer-model identity is unknown")
 
     lane_wf = text(".github/workflows/spider-lane.yml")
     require("SPIDER_REQUIRED_OUTPUTS" in lane_wf, "lane workflow must validate mandatory model outputs")
