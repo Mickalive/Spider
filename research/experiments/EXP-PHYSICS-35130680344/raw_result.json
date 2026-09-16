@@ -1,0 +1,1113 @@
+{
+  "experiment_id": "EXP-PHYSICS-35130680344",
+  "lane": "physics",
+  "seed": 42,
+  "n_trajectories_per_condition": 200,
+  "n_steps": 10,
+  "n_sessions": 20,
+  "n_perms": 1000,
+  "ceiling_check": {
+    "H_S_next_given_URL_HK_3_NT": 1.102543547725683,
+    "H_S_next_given_URL_HK_3_TR": 1.1615846705179327,
+    "H_S_next_given_URL_HK_1_NT": 1.3290597508620583,
+    "ceiling_eliminated": true
+  },
+  "per_k_results": {
+    "1": {
+      "non_trivial": {
+        "observed_pmi": 1.0605203709199749,
+        "perm_mean": 0.02508082624306981,
+        "bias_corrected_pmi": 1.0354395446769051,
+        "perm_p_raw": 0.0,
+        "perm_p_bonf": 0.0,
+        "perm_null_std": 0.0207383024665885
+      },
+      "trivial": {
+        "observed_pmi": 1.3658702915956287,
+        "perm_mean": 0.5748091440619791,
+        "bias_corrected_pmi": 0.7910611475336495,
+        "perm_p_raw": 0.043,
+        "perm_p_bonf": 0.172,
+        "perm_null_std": 0.058197852939863494
+      }
+    },
+    "3": {
+      "non_trivial": {
+        "observed_pmi": 0.8597131356193841,
+        "perm_mean": 0.09381235050665021,
+        "bias_corrected_pmi": 0.765900785112734,
+        "perm_p_raw": 0.01897437461866992,
+        "perm_p_bonf": 0.07589749847467968,
+        "perm_null_std": 0.08179537079943508
+      },
+      "trivial": {
+        "observed_pmi": 1.1615846705179325,
+        "perm_mean": 0.8166545144960348,
+        "bias_corrected_pmi": 0.3449301560218977,
+        "perm_p_raw": 0.10220850000000001,
+        "perm_p_bonf": 0.40883400000000003,
+        "perm_null_std": 0.08551215727666199
+      },
+      "cardinality": {
+        "non_trivial": {
+          "all_pass": true,
+          "strata": [
+            {
+              "key": "('/', ('START', 'START', 'advance'), 1)",
+              "N": 109,
+              "n_unique": 1,
+              "ratio": 0.009174311926605505,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'branch'), 2)",
+              "N": 57,
+              "n_unique": 1,
+              "ratio": 0.017543859649122806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 3)",
+              "N": 31,
+              "n_unique": 2,
+              "ratio": 0.06451612903225806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 4)",
+              "N": 31,
+              "n_unique": 2,
+              "ratio": 0.06451612903225806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 5)",
+              "N": 27,
+              "n_unique": 3,
+              "ratio": 0.1111111111111111,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 6)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 7)",
+              "N": 24,
+              "n_unique": 3,
+              "ratio": 0.125,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 8)",
+              "N": 17,
+              "n_unique": 3,
+              "ratio": 0.17647058823529413,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 9)",
+              "N": 19,
+              "n_unique": 3,
+              "ratio": 0.15789473684210525,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 10)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'START', 'branch'), 1)",
+              "N": 91,
+              "n_unique": 1,
+              "ratio": 0.01098901098901099,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'branch'), 2)",
+              "N": 57,
+              "n_unique": 2,
+              "ratio": 0.03508771929824561,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 3)",
+              "N": 31,
+              "n_unique": 2,
+              "ratio": 0.06451612903225806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 4)",
+              "N": 31,
+              "n_unique": 2,
+              "ratio": 0.06451612903225806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 5)",
+              "N": 28,
+              "n_unique": 3,
+              "ratio": 0.10714285714285714,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 6)",
+              "N": 28,
+              "n_unique": 3,
+              "ratio": 0.10714285714285714,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 7)",
+              "N": 20,
+              "n_unique": 3,
+              "ratio": 0.15,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 9)",
+              "N": 29,
+              "n_unique": 3,
+              "ratio": 0.10344827586206896,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 10)",
+              "N": 33,
+              "n_unique": 3,
+              "ratio": 0.09090909090909091,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'advance'), 2)",
+              "N": 52,
+              "n_unique": 1,
+              "ratio": 0.019230769230769232,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 3)",
+              "N": 30,
+              "n_unique": 1,
+              "ratio": 0.03333333333333333,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 4)",
+              "N": 19,
+              "n_unique": 2,
+              "ratio": 0.10526315789473684,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 5)",
+              "N": 22,
+              "n_unique": 3,
+              "ratio": 0.13636363636363635,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 7)",
+              "N": 34,
+              "n_unique": 3,
+              "ratio": 0.08823529411764706,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 8)",
+              "N": 23,
+              "n_unique": 3,
+              "ratio": 0.13043478260869565,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 9)",
+              "N": 24,
+              "n_unique": 3,
+              "ratio": 0.125,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'advance'), 2)",
+              "N": 34,
+              "n_unique": 2,
+              "ratio": 0.058823529411764705,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 3)",
+              "N": 14,
+              "n_unique": 2,
+              "ratio": 0.14285714285714285,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 4)",
+              "N": 14,
+              "n_unique": 3,
+              "ratio": 0.21428571428571427,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 6)",
+              "N": 29,
+              "n_unique": 3,
+              "ratio": 0.10344827586206896,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 7)",
+              "N": 23,
+              "n_unique": 3,
+              "ratio": 0.13043478260869565,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 8)",
+              "N": 24,
+              "n_unique": 3,
+              "ratio": 0.125,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 9)",
+              "N": 23,
+              "n_unique": 3,
+              "ratio": 0.13043478260869565,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 10)",
+              "N": 16,
+              "n_unique": 3,
+              "ratio": 0.1875,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 3)",
+              "N": 26,
+              "n_unique": 2,
+              "ratio": 0.07692307692307693,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 4)",
+              "N": 30,
+              "n_unique": 3,
+              "ratio": 0.1,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 5)",
+              "N": 28,
+              "n_unique": 3,
+              "ratio": 0.10714285714285714,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 7)",
+              "N": 20,
+              "n_unique": 3,
+              "ratio": 0.15,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 8)",
+              "N": 31,
+              "n_unique": 3,
+              "ratio": 0.0967741935483871,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 9)",
+              "N": 18,
+              "n_unique": 3,
+              "ratio": 0.16666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 10)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 3)",
+              "N": 26,
+              "n_unique": 2,
+              "ratio": 0.07692307692307693,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 5)",
+              "N": 33,
+              "n_unique": 3,
+              "ratio": 0.09090909090909091,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 6)",
+              "N": 25,
+              "n_unique": 3,
+              "ratio": 0.12,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 7)",
+              "N": 21,
+              "n_unique": 3,
+              "ratio": 0.14285714285714285,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 8)",
+              "N": 20,
+              "n_unique": 3,
+              "ratio": 0.15,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 9)",
+              "N": 33,
+              "n_unique": 3,
+              "ratio": 0.09090909090909091,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 10)",
+              "N": 32,
+              "n_unique": 3,
+              "ratio": 0.09375,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 7)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 8)",
+              "N": 31,
+              "n_unique": 3,
+              "ratio": 0.0967741935483871,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 3)",
+              "N": 22,
+              "n_unique": 1,
+              "ratio": 0.045454545454545456,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 4)",
+              "N": 22,
+              "n_unique": 3,
+              "ratio": 0.13636363636363635,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 5)",
+              "N": 25,
+              "n_unique": 3,
+              "ratio": 0.12,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 6)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 7)",
+              "N": 32,
+              "n_unique": 3,
+              "ratio": 0.09375,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 5)",
+              "N": 19,
+              "n_unique": 3,
+              "ratio": 0.15789473684210525,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 8)",
+              "N": 27,
+              "n_unique": 3,
+              "ratio": 0.1111111111111111,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 9)",
+              "N": 28,
+              "n_unique": 3,
+              "ratio": 0.10714285714285714,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 4)",
+              "N": 31,
+              "n_unique": 2,
+              "ratio": 0.06451612903225806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 4)",
+              "N": 22,
+              "n_unique": 3,
+              "ratio": 0.13636363636363635,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 10)",
+              "N": 20,
+              "n_unique": 3,
+              "ratio": 0.15,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 5)",
+              "N": 18,
+              "n_unique": 3,
+              "ratio": 0.16666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 6)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 6)",
+              "N": 18,
+              "n_unique": 3,
+              "ratio": 0.16666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 9)",
+              "N": 26,
+              "n_unique": 3,
+              "ratio": 0.11538461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 6)",
+              "N": 22,
+              "n_unique": 3,
+              "ratio": 0.13636363636363635,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 8)",
+              "N": 27,
+              "n_unique": 3,
+              "ratio": 0.1111111111111111,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 10)",
+              "N": 20,
+              "n_unique": 3,
+              "ratio": 0.15,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 10)",
+              "N": 27,
+              "n_unique": 3,
+              "ratio": 0.1111111111111111,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 3)",
+              "N": 20,
+              "n_unique": 2,
+              "ratio": 0.1,
+              "pass": true
+            }
+          ]
+        },
+        "trivial": {
+          "all_pass": false,
+          "strata": [
+            {
+              "key": "('/', ('START', 'START', 'branch'), 1)",
+              "N": 114,
+              "n_unique": 20,
+              "ratio": 0.17543859649122806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'branch'), 2)",
+              "N": 60,
+              "n_unique": 17,
+              "ratio": 0.2833333333333333,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 3)",
+              "N": 34,
+              "n_unique": 16,
+              "ratio": 0.47058823529411764,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 4)",
+              "N": 32,
+              "n_unique": 17,
+              "ratio": 0.53125,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 5)",
+              "N": 33,
+              "n_unique": 19,
+              "ratio": 0.5757575757575758,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 6)",
+              "N": 27,
+              "n_unique": 18,
+              "ratio": 0.6666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 7)",
+              "N": 22,
+              "n_unique": 15,
+              "ratio": 0.6818181818181818,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 8)",
+              "N": 21,
+              "n_unique": 17,
+              "ratio": 0.8095238095238095,
+              "pass": false
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 9)",
+              "N": 18,
+              "n_unique": 14,
+              "ratio": 0.7777777777777778,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 10)",
+              "N": 22,
+              "n_unique": 15,
+              "ratio": 0.6818181818181818,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'START', 'advance'), 1)",
+              "N": 86,
+              "n_unique": 20,
+              "ratio": 0.23255813953488372,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'advance'), 2)",
+              "N": 48,
+              "n_unique": 18,
+              "ratio": 0.375,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 3)",
+              "N": 31,
+              "n_unique": 16,
+              "ratio": 0.5161290322580645,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 4)",
+              "N": 35,
+              "n_unique": 22,
+              "ratio": 0.6285714285714286,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 5)",
+              "N": 19,
+              "n_unique": 15,
+              "ratio": 0.7894736842105263,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 6)",
+              "N": 19,
+              "n_unique": 15,
+              "ratio": 0.7894736842105263,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 7)",
+              "N": 28,
+              "n_unique": 21,
+              "ratio": 0.75,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 8)",
+              "N": 33,
+              "n_unique": 22,
+              "ratio": 0.6666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 9)",
+              "N": 28,
+              "n_unique": 20,
+              "ratio": 0.7142857142857143,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 10)",
+              "N": 31,
+              "n_unique": 24,
+              "ratio": 0.7741935483870968,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'branch'), 2)",
+              "N": 38,
+              "n_unique": 17,
+              "ratio": 0.4473684210526316,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 3)",
+              "N": 18,
+              "n_unique": 12,
+              "ratio": 0.6666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 4)",
+              "N": 27,
+              "n_unique": 15,
+              "ratio": 0.5555555555555556,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 5)",
+              "N": 27,
+              "n_unique": 19,
+              "ratio": 0.7037037037037037,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 6)",
+              "N": 33,
+              "n_unique": 21,
+              "ratio": 0.6363636363636364,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 7)",
+              "N": 24,
+              "n_unique": 18,
+              "ratio": 0.75,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 8)",
+              "N": 28,
+              "n_unique": 22,
+              "ratio": 0.7857142857142857,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 9)",
+              "N": 31,
+              "n_unique": 22,
+              "ratio": 0.7096774193548387,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 10)",
+              "N": 25,
+              "n_unique": 17,
+              "ratio": 0.68,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'advance'), 2)",
+              "N": 54,
+              "n_unique": 19,
+              "ratio": 0.35185185185185186,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 3)",
+              "N": 26,
+              "n_unique": 14,
+              "ratio": 0.5384615384615384,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 4)",
+              "N": 16,
+              "n_unique": 13,
+              "ratio": 0.8125,
+              "pass": false
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 5)",
+              "N": 15,
+              "n_unique": 13,
+              "ratio": 0.8666666666666667,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 9)",
+              "N": 24,
+              "n_unique": 17,
+              "ratio": 0.7083333333333334,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 8)",
+              "N": 23,
+              "n_unique": 18,
+              "ratio": 0.782608695652174,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 9)",
+              "N": 26,
+              "n_unique": 21,
+              "ratio": 0.8076923076923077,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 10)",
+              "N": 23,
+              "n_unique": 16,
+              "ratio": 0.6956521739130435,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 3)",
+              "N": 17,
+              "n_unique": 11,
+              "ratio": 0.6470588235294118,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 4)",
+              "N": 27,
+              "n_unique": 17,
+              "ratio": 0.6296296296296297,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 7)",
+              "N": 20,
+              "n_unique": 16,
+              "ratio": 0.8,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 8)",
+              "N": 19,
+              "n_unique": 17,
+              "ratio": 0.8947368421052632,
+              "pass": false
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 3)",
+              "N": 20,
+              "n_unique": 13,
+              "ratio": 0.65,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 5)",
+              "N": 26,
+              "n_unique": 18,
+              "ratio": 0.6923076923076923,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 6)",
+              "N": 27,
+              "n_unique": 18,
+              "ratio": 0.6666666666666666,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 7)",
+              "N": 29,
+              "n_unique": 20,
+              "ratio": 0.6896551724137931,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 8)",
+              "N": 24,
+              "n_unique": 20,
+              "ratio": 0.8333333333333334,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 9)",
+              "N": 21,
+              "n_unique": 16,
+              "ratio": 0.7619047619047619,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 10)",
+              "N": 21,
+              "n_unique": 18,
+              "ratio": 0.8571428571428571,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'), 3)",
+              "N": 26,
+              "n_unique": 12,
+              "ratio": 0.46153846153846156,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 6)",
+              "N": 23,
+              "n_unique": 19,
+              "ratio": 0.8260869565217391,
+              "pass": false
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 7)",
+              "N": 20,
+              "n_unique": 18,
+              "ratio": 0.9,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 8)",
+              "N": 21,
+              "n_unique": 17,
+              "ratio": 0.8095238095238095,
+              "pass": false
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 7)",
+              "N": 27,
+              "n_unique": 22,
+              "ratio": 0.8148148148148148,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 10)",
+              "N": 20,
+              "n_unique": 13,
+              "ratio": 0.65,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 4)",
+              "N": 17,
+              "n_unique": 16,
+              "ratio": 0.9411764705882353,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 5)",
+              "N": 33,
+              "n_unique": 26,
+              "ratio": 0.7878787878787878,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 6)",
+              "N": 29,
+              "n_unique": 24,
+              "ratio": 0.8275862068965517,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 9)",
+              "N": 24,
+              "n_unique": 21,
+              "ratio": 0.875,
+              "pass": false
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 7)",
+              "N": 30,
+              "n_unique": 21,
+              "ratio": 0.7,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 4)",
+              "N": 24,
+              "n_unique": 18,
+              "ratio": 0.75,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 9)",
+              "N": 28,
+              "n_unique": 21,
+              "ratio": 0.75,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'), 10)",
+              "N": 28,
+              "n_unique": 21,
+              "ratio": 0.75,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'), 5)",
+              "N": 24,
+              "n_unique": 17,
+              "ratio": 0.7083333333333334,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'), 6)",
+              "N": 27,
+              "n_unique": 23,
+              "ratio": 0.8518518518518519,
+              "pass": false
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'), 3)",
+              "N": 28,
+              "n_unique": 16,
+              "ratio": 0.5714285714285714,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 4)",
+              "N": 22,
+              "n_unique": 17,
+              "ratio": 0.7727272727272727,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 10)",
+              "N": 30,
+              "n_unique": 21,
+              "ratio": 0.7,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'), 5)",
+              "N": 23,
+              "n_unique": 18,
+              "ratio": 0.782608695652174,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'), 8)",
+              "N": 31,
+              "n_unique": 21,
+              "ratio": 0.6774193548387096,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'), 6)",
+              "N": 15,
+              "n_unique": 13,
+              "ratio": 0.8666666666666667,
+              "pass": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "encoding_comparison": {
+    "K3": {
+      "diff_bc_pmi": 0.42097062909083627,
+      "paired_perm_p": 1.0,
+      "nt_gt_tr_minus_01": true
+    },
+    "K1": {
+      "diff_bc_pmi": 0.2443783971432556,
+      "paired_perm_p": 1.0,
+      "nt_gt_tr_minus_01": true
+    }
+  },
+  "controls": {
+    "positive_control_session_randomized": {
+      "description": "Replace session_id with random from different trajectory; response->state mapping broken",
+      "bias_corrected_pmi": 0.6403878303629178,
+      "min_perm_null_std": 0.014777601133041099,
+      "pass_criterion": "|0.640388| < 3 * 0.014778 = 0.044333",
+      "pass": false
+    },
+    "null_control_shuffled_labels": {
+      "description": "Permute response labels within strata; breaks R->S pairing",
+      "mean_shuffled_bc_pmi": 0.0013982286402674,
+      "std_shuffled_bc_pmi": 0.08787416083061504,
+      "pass_criterion": "|0.001398| < 3 * 0.087874 = 0.263622",
+      "pass": true
+    },
+    "determinism_check": {
+      "non_trivial": {
+        "total_groups": 436,
+        "deterministic_groups": 436,
+        "accuracy": 1.0,
+        "pass": true
+      },
+      "trivial": {
+        "total_groups": 433,
+        "deterministic_groups": 433,
+        "accuracy": 1.0,
+        "pass": true
+      }
+    }
+  },
+  "action_history_accuracy": {
+    "K1": 0.556,
+    "K2": 0.59,
+    "K3": 0.6265,
+    "frequency_baseline": 0.3605
+  },
+  "plug_in_mi_uncorrected": {
+    "NT_K1": 1.0605203709199749,
+    "NT_K3": 0.8597131356193841,
+    "TR_K1": 1.3658702915956287,
+    "TR_K3": 1.1615846705179325
+  },
+  "total_transitions": {
+    "non_trivial": 2000,
+    "trivial": 2000
+  },
+  "decision": "MEASUREMENT_INVALID",
+  "decision_criteria": {
+    "C1_ceiling_eliminated": true,
+    "C2_NT_BC_PMI_gt_005_bonf_lt_0125": false,
+    "C3_NT_gt_TR_minus_01": true,
+    "C4_positive_control_pass": false,
+    "C5_determinism_pass": true,
+    "C6_data_quality": true,
+    "C7_cardinality_bounded": true
+  }
+}
