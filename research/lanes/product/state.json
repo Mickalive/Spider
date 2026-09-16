@@ -1,14 +1,14 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-34704657427",
-  "last_experiment_id": "EXP-PRODUCT-34685457833",
-  "last_verdict": "SURVIVES_CURRENT_TEST",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-34704657427",
+  "last_verdict": "REVISE",
   "continue_immediately": false,
-  "next_question": "Does the parameterized kernel save total cost per successful task when run with real browser interactions and live model calls (C-PRODUCT-ECON measurement), and should slot_prefixes empty be accepted as design or computed non-empty for VALUE CONTRACT prefix-stripping?",
+  "next_question": "Amend the G3 slot_prefixes expected value in spec.json to 'orgs/acme/repos/main/issues/' (full path segment from authority end, more correct for VALUE CONTRACT stripping) or trim extraction to 'repos/main/issues/'? Then rerun B_UNFIXED against G1 query-string training data as frozen spec required, and decide whether Fix2 protocol-only 'https://' gap needs minimum prefix length threshold.",
   "promotion_ready": false,
-  "consecutive_failures": 25,
-  "updated_at": "2026-09-16T10:18:07.991825+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-16T15:00:35.298295+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11"
 }
