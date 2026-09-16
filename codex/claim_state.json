@@ -443,6 +443,14 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Auditor PASS, all 9/9 decision-relevant conditions pass frozen decision_rule on committed code (kernel.py a1fe75cf, models.py 064c5f). Claim ceiling advances from monkey-patched synthetic to committed-code synthetic (audit V4). However, claim remains EXPERIMENTAL with NARROW ceiling: (1) slot_prefixes empty for P1/G3/G5 limits to template-substitution-only binding with no VALUE CONTRACT prefix-stripping (audit V5); (2) Fix2 allows protocol-only 'https://' over-parameterization not covered by frozen nulls (audit V6); (3) B_UNFIXED delta verified by recompute but not measured in primary run against G1/N1_ORIGINAL training data (audit B2); (4) all conditions synthetic with zero model/browser/network calls (audit V7). C-PRODUCT-ECON next gate requires end-to-end amortized economics on real agents."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34704657427",
+        "lane": "product",
+        "decision": "REVISE",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Revision required before claim ceiling can advance. The computation works (non-empty slot_prefixes for P1/G3/G5, binding_accuracy=1.0 on all 5 established conditions, template invariant holds). However the frozen decision rule criterion 5 fails as written: G3 slot_prefixes observed 'orgs/acme/repos/main/issues/' vs frozen expected 'repos/main/issues/'. Spec amendment required to reconcile. Additionally B_UNFIXED baseline was run against P1 (non-discriminating for Fix1) instead of G1 as frozen spec required \u2014 baseline strength unverified. Fix2 protocol-only gap ('https://' over-parameterization) disclosed but not resolved. Claim ceiling bounded to revision-bounded committed-code synthetic single-slot with non-empty prefix metadata; cannot advance until revision clears."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -767,6 +775,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "SURVIVES_CURRENT_TEST per frozen spec decision_rule (2/4 adjacent pairs agree >= threshold, not ALL 5 orderings differ). However audit ceiling narrows: effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3, because DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical on this data (raw role link=0 in truncated sample, Counter verified). The 30% pairwise agreement and 50% adjacency agreement have not been compared to chance because null models (prereg 8.1 random ROLE_MAP, 8.2 single-role) were not executed. No definition restores the hypothesized full-DOM ordering listing>detail>cart. Claim remains EXPERIMENTAL pending null model execution, full DOM enumeration, and cross-site validation."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35112013458",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "The truncated-sample pairwise ordering agreement (0.3) does NOT exceed chance-level expectation: random ROLE_MAP null mean = 0.5275 (auditor recomputed 0.51-0.54), observed 0.3 is below null mean and below p95=1.0. Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering, violating the expectation that the metric is multi-role invariant. Only the isolated a\u2192link effect (H3) is confirmed as sufficient on this sample where menuitem=tab=0. The claim ceiling is bounded to this single Magento site, truncated-first-20 sample, n=7 distinct tasks. No part of the ordering stability or metric adoption claim survives the null-model tests."
       },
       {
         "experiment_id": "EXP-PHYSICS-33528829431",

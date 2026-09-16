@@ -1,0 +1,27 @@
+{
+  "experiment_id": "EXP-PRODUCT-34704657427",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Should slot_prefixes be computed non-empty (extracting the path segment before the varying part for VALUE CONTRACT prefix-stripping) or accepted as empty (template-only binding), given that the parent implementation produced empty slot_prefixes for path-prefix patterns despite the design intent of non-empty values?",
+  "hypothesis": "Computing non-empty slot_prefixes by extracting the path segment immediately before the varying part (for path-prefix patterns) or the query prefix before the slot (for query-string patterns) produces the expected values from the parent run_experiment.py: P1 slot_prefixes={'url': 'users/'}, G3 slot_prefixes={'url': 'repos/main/issues/'}, G5 slot_prefixes={'url': 'users/'} — without breaking binding_accuracy=1.0 for any established condition. The parent implementation produced empty slot_prefixes because the common prefix of full URLs equaled the template prefix; the fix is to extract only the path segment (not the full URL prefix).",
+  "falsifier": "Any of: (1) computing non-empty slot_prefixes introduces import/syntax errors; (2) any established condition (P1/G1/G2/G3/G5) drops below binding_accuracy=1.0; (3) slot_prefixes computation changes action_template or _bind behavior (must be metadata-only); (4) non-empty slot_prefixes are not produced for P1/G3/G5 (same empty result as parent).",
+  "baselines": [
+    "B_EMPTY_SLOT_PREFIXES: Parent behavior from EXP-PRODUCT-34685457833 — slot_prefixes empty for P1/G3/G5 despite design intent of non-empty. All conditions pass with binding_accuracy=1.0. Regression check.",
+    "B_UNFIXED_G1: True unfixed heuristic (rfind('/') without Fix1/Fix2) on G1 training data (https://api.example.com/search?q={alpha,beta,delta}). Expected: suffix-corrupted template, binding_accuracy=0.0. Documents fix necessity."
+  ],
+  "positive_control": "P1_PATH_PREFIX: 3 training observations of https://api.example.com/users/{A,B,C}. Expected: slot_count=1, binding_accuracy=1.0 for unseen D/E/F, slot_prefixes={'url': 'users/'}. Verifies slot_prefixes computation works and binding is preserved.",
+  "null_control": "N1_ORIGINAL: cross-host URLs https://api.example.com/a, https://api.other.com/b, https://api.third.com/c. Fix2 rejects: slot_count=0. N1_CORRECTED: truly disjoint URLs http://a.com/x, ftp://b.org/y, custom://c.net/z. Empty-prefix guard rejects: slot_count=0.",
+  "measurement_validity": [
+    "Re-commit distill_parameterized from parent execution branch fb7dd83 (exact code validated in EXP-PRODUCT-34685457833)",
+    "slot_prefixes computation is new: extract path segment before varying part, not full URL prefix",
+    "slot_prefixes is metadata-only: does not change action_template, _bind, or template construction",
+    "All conditions deterministic synthetic, n=3 training + 3 unseen, zero model/network/browser calls",
+    "Fresh Python import per condition prevents cross-contamination",
+    "Training values identical to parent run_experiment.py for all conditions"
+  ],
+  "decision_rule": "If ALL of: (1) slot_prefixes computation does not introduce errors; (2) P1 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url': 'users/'}; (3) G1 slot_count=1 AND binding_accuracy=1.0; (4) G2 slot_count=1 AND binding_accuracy=1.0; (5) G3 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url': 'repos/main/issues/'}; (6) G5 slot_count=1 AND binding_accuracy=1.0 AND slot_prefixes={'url': 'users/'}; (7) N1_ORIGINAL slot_count=0; (8) N1_CORRECTED slot_count=0 — verdict = SURVIVES_CURRENT_TEST. If any established condition drops below binding_accuracy=1.0, verdict = FALSIFIED-IN-SETTING. If slot_prefixes computation works but produces empty for P1/G3/G5 (same as parent), verdict = MIXED (computation safe, design intent not achieved). G4 reported separately as architecturally bounded.",
+  "product_consequence_positive": "Non-empty slot_prefixes enable VALUE CONTRACT prefix-stripping: given a concrete URL, the mechanism can extract the parameter value by stripping the known prefix. P1/G3/G5 slot_prefixes match design intent. C-PARAM-INHERIT claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata'. Clears path for C-PRODUCT-ECON.",
+  "product_consequence_negative": "If non-empty slot_prefixes break binding or produce empty for path-prefix patterns (same as parent), slot_prefixes must remain empty (template-only binding). C-PRODUCT-ECON proceeds with empty slot_prefixes. VALUE CONTRACT prefix-stripping deferred. C-PARAM-INHERIT remains at 'committed-code synthetic single-slot template-only'.",
+  "estimated_cost": "Very low: pure synthetic, offline. 8 conditions x 3 training + 3 unseen = ~48 operations. Code: re-commit distill_parameterized (~270 lines) + add slot_prefixes extraction (~15 lines).",
+  "expected_information_gain": "High: resolves the primary design blocker for C-PRODUCT-ECON. The parent identified slot_prefixes as the highest-priority next step. A positive result (non-empty slot_prefixes work) enables richer mechanism semantics. A negative result (breaks things or still empty) narrows design to template-only. Either outcome materially changes the product lane decision."
+}

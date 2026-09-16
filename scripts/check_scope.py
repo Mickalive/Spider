@@ -58,16 +58,40 @@ def restore(path):
             p.unlink(missing_ok=True)
 
 
+def control_check(helper):
+    cmd = ["python", str(helper), "check", "--root", str(ROOT)]
+    return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
 def verify_control_overlay(repair: bool) -> None:
     helper = Path(os.environ.get("SPIDER_CONTROL_HELPER", "/tmp/spider-control-plane.py"))
     if not helper.exists():
         raise SystemExit("SPIDER_CONTROL_HELPER_MISSING")
-    cmd = ["python", str(helper), "check", "--root", str(ROOT)]
-    proc = subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    proc = control_check(helper)
     if proc.returncode == 0:
         return
+
+    original_diagnostic = "\n".join(x for x in [proc.stdout.strip(), proc.stderr.strip()] if x)
     if repair:
-        subprocess.run(["python", str(helper), "stage", "--root", str(ROOT)], cwd=ROOT, check=False)
+        repair_proc = subprocess.run(
+            ["python", str(helper), "stage", "--root", str(ROOT)],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if repair_proc.returncode == 0:
+            verified = control_check(helper)
+            if verified.returncode == 0:
+                print("SPIDER_CONTROL_SCOPE_REPAIRED")
+                if original_diagnostic:
+                    print(original_diagnostic)
+                return
+            proc = verified
+        else:
+            proc = repair_proc
+
     print("SPIDER_CONTROL_SCOPE_VIOLATION")
     print(proc.stdout)
     print(proc.stderr)

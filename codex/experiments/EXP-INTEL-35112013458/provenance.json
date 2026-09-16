@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35112013458",
+  "github_run_id": "35112013458",
+  "pre_execute_sha": "b52cc1001c7f493febd309976e336acf07a92c09",
+  "post_execute_sha": null,
+  "relevant_commits": [
+    "4aed7bfa5be214b90dffb26bf283943568261cd6"
+  ],
+  "datasets": [
+    {
+      "name": "exp347_raw_results.json",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "description": "Raw measurement data from 8 tasks on Magento shopping site (3 listing, 3 detail, 2 cart, 2 checkout-failed). Truncated-first-20 locatable_sample per task."
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/analyze.py",
+      "sha256": "ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+      "description": "Analysis script implementing three null-model tests: random ROLE_MAP null, single-role definitions, isolated a→link definition."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/null_model_results.json",
+      "sha256": "c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+      "role": "derived",
+      "description": "Full analysis results including null distribution, single-role orderings, and isolated a→link comparison."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Experiment result packet with metrics, controls, observations, and validity notes."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable report with interpretation and implications."
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": "Standard library only (json, random, collections, math)",
+    "docker_required": false,
+    "browser_required": false,
+    "model_calls_required": false
+  },
+  "reproduction_command": "cd /home/runner/work/Spider/Spider && python3 research/experiments/EXP-INTEL-35112013458/analyze.py",
+  "key_frozen_inputs": {
+    "seed": 42,
+    "n_iterations": 1000,
+    "observed_agreement": 0.3,
+    "all_raw_roles": ["a", "button", "combobox", "div", "form", "input", "label", "link", "menuitem", "span", "tab"],
+    "raw_roles_in_data": ["a", "button", "combobox", "div", "form", "input", "label", "span"],
+    "parent_ordering_full_map": ["cart", "product_listing", "detail"],
+    "parent_ordering_form_only": ["product_listing", "cart", "detail"]
+  },
+  "provenance_chain": [
+    "EXP-INTEL-34718481334 (raw data collection)",
+    "EXP-INTEL-34782350557 (raw data packaging)",
+    "EXP-INTEL-34956989900 (5-definition analysis)",
+    "EXP-INTEL-35083033552 (truncated-sample verification)",
+    "EXP-INTEL-35112013458 (null models - THIS EXPERIMENT)"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "experiment_id": "EXP-PRODUCT-34704657427",
+  "lane": "product",
+  "github_run_id": "34718479578",
+  "execution_github_run_id": "35058581988",
+  "current_execution_github_run_id": null,
+  "git_branch": "lab2/product",
+  "git_commits": {
+    "pre_execute_sha": "0f3baddff357f10c610973fa1290690bdb682d16",
+    "current_head_sha": "7d35ffbcd27f696ae640c8576875d437075112f1"
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "e4249732669660c49afb59ba70b5fa6b1c5fd536c6ba3c6114dd93958da3ea57",
+    "spec_json_sha256": "a4866e99043ff4076b543c2d58000809998cd1765957ca72afc7b12323f163cb",
+    "prereg_md_sha256": "02f60c7341d0db78fd2f1ff3a9aa72b80ee0391812666dde144e36872113573d",
+    "frozen_at": "2026-09-12T21:01:50.029919+00:00"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-34685457833",
+    "handoff_sha256": "2ac3222a9eb2ae262de7d60c5615f5bfb1d9ae67b0a2b7dce5468a31e14486a6",
+    "verdict": "SURVIVES_CURRENT_TEST"
+  },
+  "substrate": {
+    "approach": "committed code (no monkey-patching)",
+    "kernel_module": "src/spider/kernel.py",
+    "kernel_sha256": "1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4",
+    "models_module": "src/spider/models.py",
+    "models_sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "run_experiment_sha256": "1f291f33112dd07bcc702136f7a6a2aa7a0d42292d1911f3cce4947c6982c31c"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-34704657427/raw_evidence.json",
+      "sha256": "327eaa55f053a45c9d8cdd449b404e4e04510f508f1e55e78263add823b2a948"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-PRODUCT-34704657427/result.json",
+      "sha256": null
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-PRODUCT-34704657427/report.md",
+      "sha256": null
+    }
+  },
+  "environment": {
+    "python_version": "3.12",
+    "os": "linux",
+    "model_network_browser_calls": 0,
+    "deterministic_synthetic": true,
+    "conditions_total": 10,
+    "conditions_decision_rule": 8,
+    "training_observations_per_condition": 3,
+    "unseen_values_per_condition": 3,
+    "total_binding_tests": 42
+  },
+  "execution_commands": [
+    "python research/experiments/EXP-PRODUCT-34704657427/run_experiment.py"
+  ],
+  "code_changes_in_this_experiment": "slot_prefixes extraction algorithm committed to src/spider/kernel.py lines 276-314. Extracts path segment between domain authority end and slot position (not trailing part of full prefix). No changes to models.py (slot_prefixes field already present from parent). No changes to _bind, action_template construction, or template substitution logic.",
+  "recorded_at": "2026-09-16T00:00:00+00:00"
+}
