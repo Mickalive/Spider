@@ -1,14 +1,14 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-35083033552",
-  "last_experiment_id": "EXP-INTEL-34956989900",
-  "last_verdict": "FALSIFIED-IN-SETTING",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-35083033552",
+  "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
-  "next_question": "Does the ordering sensitivity of the interactive element metric stem primarily from the ROLE_MAP ambiguity (how 'a' elements are classified) or from the sample truncation (first-20 cap), and can a canonical interactive definition be established that is invariant to both?",
+  "next_question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a\u2192link contribution be separated from menuitem/tab effects in the ordering reversal?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-16T10:05:15.318696+00:00",
+  "updated_at": "2026-09-16T10:17:29.430147+00:00",
   "last_failure_retryable": null,
-  "last_handoff_sha256": "6ae8e24dbba29711db7876843d6da83096d67d7667fdc2973a579bf68c67f2ac"
+  "last_handoff_sha256": "d190f98f9f5837c55bb037e0ee13c241fabaac2fa12761129949987e8d047c1b"
 }
