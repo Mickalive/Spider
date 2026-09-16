@@ -1,0 +1,20 @@
+{
+  "base_sha": "dc649c25ec2ab3cb11f108dba6a79f03ef67642f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-15T10:15:47.435185+00:00",
+  "experiment_id": "EXP-INTEL-34956989900",
+  "inherited_last_verdict": "INCONCLUSIVE",
+  "inherited_next_question": "Can element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+  "lane": "intel",
+  "origin_github_run_id": "34956989900",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-34782350557",
+    "path": "research/experiments/EXP-INTEL-34782350557/handoff.json",
+    "sha256": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386"
+  },
+  "reason": "pulse",
+  "request_hash": "49821ca2dbfebd8544f337fefbe26d2a7d75a4b08139d9625bc1b01c66f09807",
+  "request_id": "c56194f3d1b8db38e07b8aa3",
+  "schema_version": 1
+}

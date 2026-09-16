@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35058619700",
+  "lane": "runtime",
+  "github_run_id": "35058619700",
+  "github_run_attempt": 1,
+  "executed_at": "2026-09-16T05:30:00+00:00",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "pyjwt_version": "2.14.0",
+    "requests_version": "2.34.2",
+    "numpy_version": "2.5.3"
+  },
+  "commits": {
+    "pre_execute_sha": "a913101e0b634611fe4540f138827aab881936e1",
+    "execution_sha": "f908e2db1cfa72a9c4ff69c3677c87da9b94a215",
+    "base_sha": "39404d4394d71dd5c73384e9d024ef01f5e26cba"
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/result.json",
+      "sha256": "0656ad0491899ac45a1f748e692d58210fed3d659cb41309707a23123037e4e5",
+      "role": "result"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/raw_observations.json",
+      "sha256": "63c477e490a39c4370f05aad0ab396351821cd4fba7af369ab4324d2895a041c",
+      "role": "raw",
+      "description": "800 raw HTTP observations: 5 conditions x 4 states x 20 reps x 2 endpoints"
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/run_experiment.py",
+      "sha256": "9da76ef6f9d2c2fed1cd2f483e22528ce7e0ea8ff266776095de0a8dca6b6f4f",
+      "role": "code",
+      "description": "Frozen experiment execution script (DO NOT MODIFY)"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/report.md",
+      "role": "report",
+      "description": "Human-readable interpretation of results"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/request.json",
+      "sha256": "348574668ded59beee1d01c493e215df4149d659d50eb713e6968ff706e6e6b6"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/spec.json",
+      "sha256": "be137781ab2f1cd86eb2bead5d76a23072eed38a5cd4d99b1a25e83ed036129a"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/prereg.md",
+      "sha256": "cf754038829803a952067725fd035cdf4042f66cd152c755480057faecfaca9e"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-35058619700/freeze.json",
+      "sha256": null,
+      "description": "Freezer output; not re-hashed"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34986155186",
+    "path": "research/experiments/EXP-RUNTIME-34986155186/handoff.json",
+    "sha256": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
+  },
+  "execution_commands": [
+    "cd research/experiments/EXP-RUNTIME-35058619700 && python3 run_experiment.py"
+  ],
+  "reproduction_notes": [
+    "Script writes raw_observations.json and result.json to current working directory",
+    "Mock server binds to 127.0.0.1:5000, proxy to 127.0.0.1:5001",
+    "Requires brotli, PyJWT, requests, numpy Python packages",
+    "Seed=44 ensures deterministic quality variation and request ordering",
+    "Python gzip with mtime=0 eliminates timestamp non-determinism",
+    "Total runtime: ~5 minutes wall time for 800 requests across 5 conditions"
+  ]
+}

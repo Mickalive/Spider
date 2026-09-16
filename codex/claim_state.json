@@ -233,6 +233,14 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Primary test condition K=3 has H(S_next|URL,H_K=3)=0 exactly on the 5-state linear FSM (audit V1, severity critical): all K=3 strata are single-valued for S_next, making I(S_next; Response_before|URL,H_K=3)=0 a priori impossible for ANY Response_before. This is an environment ceiling, not a negative scientific result. The producer's FALSIFIES outcome is not justified: you cannot falsify a claim by testing it in an environment where the effect is mathematically impossible. At K=1 (H=0.4 bits, where action-history is insufficient), the same state-dependent response DOES carry significant conditional PMI (BC=0.386 bits, Bonferroni p=0.004 < 0.0125, cardinality |R|/N=0.05 non-degenerate), demonstrating network-response payload structure CAN carry predictive information when transitions are not fully determined by history. K=3 controls are degenerate (null_std=0, audit V4) and do not stress the pipeline. The claim remains HYPOTHESIS pending a branching FSM experiment where H(S_next|URL,H_K=3) > 0.2 bits."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35040401992",
+        "lane": "physics",
+        "decision": "MEASUREMENT_INVALID",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen control criteria C4 (positive_control_pass=false, perm_null_std=0.0 degenerate) and C5 (determinism_pass=false, SD accuracy=0.0 by construction due to step field in response design) fail per frozen decision_rule. Raw BC PMI at K=3 = 0.369 bits exceeds 0.05 threshold but Bonferroni p = 0.322 (raw 0.0805) fails p < 0.0125. No confirmatory claim supported. Descriptive observation preserved: ceiling eliminated (H=1.346 bits), state-independent BC PMI=0.0, raw discrimination SD-SI=0.369 bits. Synthetic state_id injection is the only demonstrated PMI source; no identifiability argument separates injected label from emergent web dynamics (audit V10). Measurement cannot support or falsify C-WEB-DYNAMICS."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -443,6 +451,22 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Auditor PASS, all 9/9 decision-relevant conditions pass frozen decision_rule on committed code (kernel.py a1fe75cf, models.py 064c5f). Claim ceiling advances from monkey-patched synthetic to committed-code synthetic (audit V4). However, claim remains EXPERIMENTAL with NARROW ceiling: (1) slot_prefixes empty for P1/G3/G5 limits to template-substitution-only binding with no VALUE CONTRACT prefix-stripping (audit V5); (2) Fix2 allows protocol-only 'https://' over-parameterization not covered by frozen nulls (audit V6); (3) B_UNFIXED delta verified by recompute but not measured in primary run against G1/N1_ORIGINAL training data (audit B2); (4) all conditions synthetic with zero model/browser/network calls (audit V7). C-PRODUCT-ECON next gate requires end-to-end amortized economics on real agents."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-34704657427",
+        "lane": "product",
+        "decision": "REVISE",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Revision required before claim ceiling can advance. The computation works (non-empty slot_prefixes for P1/G3/G5, binding_accuracy=1.0 on all 5 established conditions, template invariant holds). However the frozen decision rule criterion 5 fails as written: G3 slot_prefixes observed 'orgs/acme/repos/main/issues/' vs frozen expected 'repos/main/issues/'. Spec amendment required to reconcile. Additionally B_UNFIXED baseline was run against P1 (non-discriminating for Fix1) instead of G1 as frozen spec required \u2014 baseline strength unverified. Fix2 protocol-only gap ('https://' over-parameterization) disclosed but not resolved. Claim ceiling bounded to revision-bounded committed-code synthetic single-slot with non-empty prefix metadata; cannot advance until revision clears."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35124662913",
+        "lane": "product",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "All 8 frozen decision-rule conditions pass with binding_accuracy=1.0. G3 slot_prefixes amended expected value validated. Fix1 necessity delta=1.0 (maximum) confirmed on discriminating G1 condition. Fix2 necessity confirmed on discriminating N1_ORIGINAL condition. Three parent required_fixes cleared (spec-vs-implementation mismatch, B_UNFIXED wrong condition, disclosure). Claim ceiling advances to 'committed-code synthetic single-slot with prefix metadata, Fix1/Fix2 necessity quantified'. Remains EXPERIMENTAL (not VALIDATED/SHIPPED) because: (1) all conditions deterministic synthetic with zero model/browser/network calls; (2) end-to-end product economics C-PRODUCT-ECON unmeasured; (3) single-slot only, G4 multi-char suffix architectural bound persists; (4) protocol-only gap documented but unresolved. Material change from parent: previously unmeasured Fix1/Fix2 necessity now quantified; parent required_fixes resolved."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -503,6 +527,22 @@
         "claim_id": "C-FRESHNESS",
         "status": "HYPOTHESIS",
         "reason": "Adaptive Jaccard threshold T(n)=1-0.8/(n+1) achieves TP=1.0 on true drift (add/remove/change_type) but produces FP=1.0 on structural noise (optional field churn, null-valued fields, nested object variation) at all schema sizes 10-50 fields. Under frozen decision rule condition (2), FP upper CI 1.0 > 0.15, thus FALSIFIED-IN-SETTING. Claim remains HYPOTHESIS; the bounded negative result does not close the broader C-FRESHNESS domain but falsifies the specific adaptive threshold formula under structural noise at tested magnitudes."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35010853847",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "TF-IDF bag-of-words semantic similarity on (field_name:field_type) text pairs is falsified as a staleness signal under structural noise (FP=1.0 at all sizes, Mann-Whitney p=1.0 inverted direction). This is a bounded signal-level falsification; C-FRESHNESS as a domain remains open. The claim ceiling from audit.json is: FALSIFIED-IN-SETTING for TF-IDF specifically \u2014 does NOT falsify sentence-transformers contextual embeddings, per-field matching, multi-signal ensembles, smaller noise magnitudes, or real API schemas."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35083040517",
+        "lane": "graph",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-FRESHNESS",
+        "status": "HYPOTHESIS",
+        "reason": "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted direction at sizes 20, 50 \u2014 noise more detectable than drift). 3 of 5 frozen decision conditions fail. This is the third orthogonal signal family tested (after Jaccard structural and TF-IDF semantic) and the third to fail. C-FRESHNESS remains HYPOTHESIS \u2014 the claim is not globally closed; only the specific setting (KS test on client-side response-time distributions, N=30, uniform 0-50ms jitter, mock CPU-bound server, schema sizes 10-50) is falsified."
       }
     ],
     "C-CROSSSITE": [
@@ -585,6 +625,14 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "Not tested in this experiment. Single-site (Magento) measurement only. Cross-site generalization remains a hypothesis."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34956989900",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested. Offline recomputation on existing single-site (Magento) data only. Cross-site generalization unsupported."
       }
     ],
     "C-LLM-INHERIT": [
@@ -667,6 +715,14 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "Not tested in this experiment. LLM inheritance claim is orthogonal to metric validation."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34956989900",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "HYPOTHESIS",
+        "reason": "Not tested. Offline density computation orthogonal to LLM inheritance claim."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -727,6 +783,30 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Bounded diagnostic: under truncated-first-20 sampling of DEF-FALLBACK-INTERACTIVE locatable set, role-only counting yields ordering cart>listing>detail (reversal), but audit extrapolation to full DOM restores listing 0.019 > detail 0.006 > cart 0.0055. The reversal is an artifact of differential sample truncation and total_dom denominator variation, not evidence that the tightened definition per se destroys ordering. Original definition overcount confirmed (~10x reduction). Within-type stability preserved (listing CV 0.005, detail CV 0.037). Between-type discrimination holds but magnitude is definition- and denominator-sensitive (ratio 60 deduped vs parent 582). Full DOM enumeration required for definitive construct validity test. C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements beyond form scaffolding, but ordering robustness and denominator choice are unresolved."
+      },
+      {
+        "experiment_id": "EXP-INTEL-34956989900",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Bounded: elements_with_bbox denominator does NOT resolve ordering sensitivity. Under tightened role-only definition, ordering listing>detail>cart fails in both ROLE_MAP variants (with_map: cart>listing>detail; no_map: listing>cart>detail). Discrimination ratio remains >1 (42.75 with_map, 632.93 no_map). The ordering sensitivity is two-factor: denominator variation (partially addressed by elements_with_bbox) and ROLE_MAP-dependent count inflation (NOT addressed by denominator choice). C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements but ordering robustness depends on unresolved ROLE_MAP definition and is bounded to truncated-first-20 sample from single Magento site."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35083033552",
+        "lane": "intel",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "SURVIVES_CURRENT_TEST per frozen spec decision_rule (2/4 adjacent pairs agree >= threshold, not ALL 5 orderings differ). However audit ceiling narrows: effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3, because DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical on this data (raw role link=0 in truncated sample, Counter verified). The 30% pairwise agreement and 50% adjacency agreement have not been compared to chance because null models (prereg 8.1 random ROLE_MAP, 8.2 single-role) were not executed. No definition restores the hypothesized full-DOM ordering listing>detail>cart. Claim remains EXPERIMENTAL pending null model execution, full DOM enumeration, and cross-site validation."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35112013458",
+        "lane": "intel",
+        "decision": "FALSIFIED-IN-SETTING",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "The truncated-sample pairwise ordering agreement (0.3) does NOT exceed chance-level expectation: random ROLE_MAP null mean = 0.5275 (auditor recomputed 0.51-0.54), observed 0.3 is below null mean and below p95=1.0. Two single-role definitions (button-only, form-only) reproduce the DEF-FORM-ONLY ordering, violating the expectation that the metric is multi-role invariant. Only the isolated a\u2192link effect (H3) is confirmed as sufficient on this sample where menuitem=tab=0. The claim ceiling is bounded to this single Magento site, truncated-first-20 sample, n=7 distinct tasks. No part of the ordering stability or metric adoption claim survives the null-model tests."
       },
       {
         "experiment_id": "EXP-PHYSICS-33528829431",
@@ -847,6 +927,22 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34986155186",
+        "lane": "runtime",
+        "decision": "MIXED",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} per request for JSON 1KB on mock OAuth2 server (B-DECOMPRESSED-VARYING=0.5 vs B-COMPRESSED-VARYING=0.3295-0.3475). All 6 controls pass. However, claim ceiling is bounded to: synthetic Python proxy, deterministic mock server, brotli-only, 1KB JSON, seed 44, quality range {4-8}. NOT justified to claim real-CDN universal fallback, gzip support, other content-types/sizes, or production IdP. C-MEAS-VALID remains EXPERIMENTAL because the setting is synthetic and the claim ceiling does not reach production deployment conditions."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35058619700",
+        "lane": "runtime",
+        "decision": "MIXED",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression-normalization (SHA256 on decompressed body + status via gzip.decompress/brotli.decompress after Content-Encoding removal) preserves body-only discrimination at the structural ceiling of 0.5 under synthetic gzip quality variation {1,3,5,7,9} (collapsing to 3-4 distinct compressed outputs for 1KB JSON) and under binary brotli variation {4,8} on mock OAuth2 server via synthetic Python proxy (N=20 per state, seed 44, 1KB JSON). Strongest isolation is on /introspect where status_only=0.0 and decompressed=0.5 confirms body signal; /userinfo 0.5 conflates status+body. Compressed-byte-only hashing degrades to 0.17-0.19 under gzip varying (vs 0.22/0.38 under tested brotli binary) confirming stronger gzip threat for this payload. Algorithm-equivalence at 0.0 diff is demonstrated ONLY for gzip collapsed 3-4-level vs brotli binary {4,8}, NOT for full brotli {4,5,6,7,8} due to BROTLI_QUALITY_RANGE bug (audit finding 1). Claim BOUNDED to: synthetic proxy with mtime=0 deterministic gzip, mock server, 1KB JSON, seed 44. NOT justified for real-CDN universal deployment, nor for other content-types/sizes, nor for full 5-level brotli range until re-run after fix, nor for missing/incorrect/double Content-Encoding."
       }
     ]
   }

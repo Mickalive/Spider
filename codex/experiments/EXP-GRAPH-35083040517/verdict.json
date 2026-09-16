@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "Response-time profiling via KS two-sample test on HTTP client-side response-time distributions falsified in this setting: TP=0.0 (0/12, Wilson CI [0.0, 0.243]), FP=0.1875 (3/16, CI [0.066, 0.43]). Positive control FAIL, separation FAIL (inverted direction at sizes 20, 50 — noise more detectable than drift). 3 of 5 frozen decision conditions fail. This is the third orthogonal signal family tested (after Jaccard structural and TF-IDF semantic) and the third to fail. C-FRESHNESS remains HYPOTHESIS — the claim is not globally closed; only the specific setting (KS test on client-side response-time distributions, N=30, uniform 0-50ms jitter, mock CPU-bound server, schema sizes 10-50) is falsified."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a multi-signal ensemble combining structural similarity (Jaccard/TF-IDF) with behavioral signals (e.g., session token validation, schema access pattern changes, or field-usage profiling) achieve TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination when each individual signal family alone fails?",
+  "reason": "Auditor confirms producer metrics (all recomputed match). Valid negative: calibration R²=0.9999 proves computation-dependent timing, so failure is signal-to-noise and pattern-indistinguishability, not infrastructure. Positive control fails because the per-field timing delta (~9ms for 2000 json.dumps+sha256 iterations) is masked by 0-50ms uniform jitter at N=30. Separation inverts because nested_object_variation (adds 2 fields, classified as structural noise) produces larger KS D values than true drift patterns — same inverted-direction failure mode observed across all three signal families. Three orthogonal signal families now tested and falsified in their respective controlled settings. The freshness frontier must shift from single-signal approaches to multi-signal ensembles or direct schema comparison. The bounded falsification does NOT close the broader C-FRESHNESS domain: real-API timing characteristics, larger N (>=100), reduced jitter, contextual embeddings, or ensemble methods remain untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35083040517/spec.json",
+    "research/experiments/EXP-GRAPH-35083040517/result.json",
+    "research/experiments/EXP-GRAPH-35083040517/audit.json",
+    "research/experiments/EXP-GRAPH-35083040517/report.md",
+    "research/experiments/EXP-GRAPH-35083040517/provenance.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json"
+  ]
+}

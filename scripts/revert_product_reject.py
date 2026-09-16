@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, json, shutil, subprocess
+
+import argparse
+import json
+import shutil
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,8 +23,13 @@ def main():
     if verdict.get("promote_to_product"):
         print("SPIDER_PRODUCT_CODE_ACCEPTED")
         return
+
     base = json.loads((exp / "execution_checkpoint.json").read_text())["pre_execute_sha"]
-    roots = ["src", "tests", "sdk", "pyproject.toml"]
+    registry = json.loads((ROOT / "research/lanes/registry.json").read_text())
+    roots = registry["lanes"]["product"].get("allowed_code_roots", [])
+    if not roots:
+        raise SystemExit("Product lane has no allowed_code_roots")
+
     changed = run("git", "diff", "--name-only", base, "HEAD", "--", *roots).stdout.splitlines()
     for path in sorted(set(filter(None, changed))):
         present = run("git", "cat-file", "-e", f"{base}:{path}", check=False).returncode == 0

@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse, json, os, shutil, subprocess
+
+import argparse
+import json
+import os
+import shutil
+import subprocess
 from pathlib import Path
 
+from control_plane import CONTROL_ROOTS
+
 ROOT = Path(__file__).resolve().parents[1]
-CONTROL_ROOTS = [
-    ".gitignore", ".github/scripts", "scripts", ".opencode/agents", "AGENTS.md",
-    "SPIDER_ARCHITECTURE_RESEARCH2.md", "research/claims/registry.json",
-    "research/lanes/registry.json", "research/EXPERIMENT_PACKET.md", "config/models.json",
-    "SPIDER_CODEX.md",
-]
 
 
 def run(*args, check=True):
@@ -17,16 +18,32 @@ def run(*args, check=True):
 
 
 def status_paths():
-    out = run("git", "status", "--porcelain=v1", "-z").stdout
+    """Return every path touched according to porcelain v1 -z.
+
+    With -z, rename/copy records use a second NUL-delimited path and do not use
+    the human-readable `old -> new` syntax. Include both paths so a rename can
+    never smuggle a protected/out-of-scope file past containment.
+    """
+    out = run("git", "status", "--porcelain=v1", "-z", "--untracked-files=all").stdout
     chunks = out.split("\0")
-    paths = []
-    for item in chunks:
+    paths: list[str] = []
+    i = 0
+    while i < len(chunks):
+        item = chunks[i]
+        i += 1
         if not item:
             continue
+        if len(item) < 3:
+            continue
+        xy = item[:2]
         path = item[3:]
-        if " -> " in path:
-            path = path.split(" -> ", 1)[1]
-        paths.append(path)
+        if path:
+            paths.append(path)
+        if ("R" in xy or "C" in xy) and i < len(chunks):
+            other = chunks[i]
+            i += 1
+            if other:
+                paths.append(other)
     return sorted(set(paths))
 
 
@@ -49,7 +66,7 @@ def exists_in_head(path):
 def restore(path):
     run("git", "reset", "-q", "HEAD", "--", path, check=False)
     if exists_in_head(path):
-        run("git", "restore", "--source=HEAD", "--worktree", "--", path, check=False)
+        run("git", "restore", "--source=HEAD", "--staged", "--worktree", "--", path, check=False)
     else:
         p = ROOT / path
         if p.is_dir():
@@ -58,20 +75,74 @@ def restore(path):
             p.unlink(missing_ok=True)
 
 
+def control_check(helper):
+    cmd = ["python", str(helper), "check", "--root", str(ROOT)]
+    return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
 def verify_control_overlay(repair: bool) -> None:
     helper = Path(os.environ.get("SPIDER_CONTROL_HELPER", "/tmp/spider-control-plane.py"))
     if not helper.exists():
         raise SystemExit("SPIDER_CONTROL_HELPER_MISSING")
-    cmd = ["python", str(helper), "check", "--root", str(ROOT)]
-    proc = subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    proc = control_check(helper)
     if proc.returncode == 0:
         return
+
+    original_diagnostic = "\n".join(x for x in [proc.stdout.strip(), proc.stderr.strip()] if x)
     if repair:
-        subprocess.run(["python", str(helper), "stage", "--root", str(ROOT)], cwd=ROOT, check=False)
+        repair_proc = subprocess.run(
+            ["python", str(helper), "stage", "--root", str(ROOT)],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if repair_proc.returncode == 0:
+            verified = control_check(helper)
+            if verified.returncode == 0:
+                print("SPIDER_CONTROL_SCOPE_REPAIRED")
+                if original_diagnostic:
+                    print(original_diagnostic)
+                return
+            proc = verified
+        else:
+            proc = repair_proc
+
     print("SPIDER_CONTROL_SCOPE_VIOLATION")
     print(proc.stdout)
     print(proc.stderr)
     raise SystemExit(2)
+
+
+def stage_policy(lane: str, experiment_id: str, stage: str):
+    lanes = json.loads((ROOT / "research/lanes/registry.json").read_text())
+    cfg = lanes["lanes"][lane]
+    exp = f"research/experiments/{experiment_id}"
+    lane_state = f"research/lanes/{lane}/state.json"
+
+    if stage == "design":
+        prefixes = []
+        exact = [f"{exp}/spec.json", f"{exp}/prereg.md", f"{exp}/failure.json", f"{exp}/model_design.json"]
+        protected = {f"{exp}/request.json", lane_state}
+    elif stage == "execute":
+        prefixes = [exp] + cfg.get("allowed_code_roots", [])
+        exact = []
+        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json"]} | {lane_state}
+    elif stage == "audit":
+        prefixes = []
+        exact = [f"{exp}/audit.json", f"{exp}/failure.json", f"{exp}/model_audit.json"]
+        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json", "result.json", "report.md", "provenance.json", "model_execute.json"]} | {lane_state}
+    else:
+        prefixes = []
+        exact = [f"{exp}/verdict.json", f"{exp}/handoff.json", f"{exp}/failure.json", f"{exp}/model_director.json"]
+        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json", "result.json", "report.md", "provenance.json", "audit.json", "model_execute.json", "model_audit.json"]} | {lane_state}
+    return prefixes, exact, protected
+
+
+def violations(prefixes, exact, protected):
+    changed = [p for p in status_paths() if not is_control(p)]
+    return sorted({p for p in changed if p in protected or not allowed(p, prefixes, exact)})
 
 
 def main():
@@ -83,35 +154,20 @@ def main():
     args = ap.parse_args()
 
     verify_control_overlay(args.repair)
+    prefixes, exact, protected = stage_policy(args.lane, args.experiment_id, args.stage)
+    bad = violations(prefixes, exact, protected)
 
-    lanes = json.loads((ROOT / "research/lanes/registry.json").read_text())
-    cfg = lanes["lanes"][args.lane]
-    exp = f"research/experiments/{args.experiment_id}"
-    lane_state = f"research/lanes/{args.lane}/state.json"
-
-    protected = set()
-    if args.stage == "design":
-        prefixes = []
-        exact = [f"{exp}/spec.json", f"{exp}/prereg.md", f"{exp}/failure.json", f"{exp}/model_design.json"]
-        protected = {f"{exp}/request.json", lane_state}
-    elif args.stage == "execute":
-        prefixes = [exp] + cfg.get("allowed_code_roots", [])
-        exact = []
-        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json"]} | {lane_state}
-    elif args.stage == "audit":
-        prefixes = []
-        exact = [f"{exp}/audit.json", f"{exp}/failure.json", f"{exp}/model_audit.json"]
-        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json", "result.json", "report.md", "provenance.json", "model_execute.json"]} | {lane_state}
-    else:
-        prefixes = []
-        exact = [f"{exp}/verdict.json", f"{exp}/handoff.json", f"{exp}/failure.json", f"{exp}/model_director.json"]
-        protected = {f"{exp}/{x}" for x in ["request.json", "spec.json", "prereg.md", "freeze.json", "execution_checkpoint.json", "result.json", "report.md", "provenance.json", "audit.json", "model_execute.json", "model_audit.json"]} | {lane_state}
-
-    changed = [p for p in status_paths() if not is_control(p)]
-    bad = sorted({p for p in changed if p in protected or not allowed(p, prefixes, exact)})
     if bad and args.repair:
+        original_bad = list(bad)
         for path in bad:
             restore(path)
+        # The old behavior repaired the files but still failed using the stale
+        # pre-repair `bad` list. Always classify the post-repair worktree anew.
+        bad = violations(prefixes, exact, protected)
+        if not bad:
+            print("SPIDER_SCOPE_REPAIRED")
+            print("\n".join(original_bad))
+
     if bad:
         print("SPIDER_SCOPE_VIOLATION")
         print("\n".join(bad))

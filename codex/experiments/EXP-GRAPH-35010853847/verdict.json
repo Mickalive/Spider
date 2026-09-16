@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35010853847",
+  "lane": "graph",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "HYPOTHESIS",
+      "reason": "TF-IDF bag-of-words semantic similarity on (field_name:field_type) text pairs is falsified as a staleness signal under structural noise (FP=1.0 at all sizes, Mann-Whitney p=1.0 inverted direction). This is a bounded signal-level falsification; C-FRESHNESS as a domain remains open. The claim ceiling from audit.json is: FALSIFIED-IN-SETTING for TF-IDF specifically — does NOT falsify sentence-transformers contextual embeddings, per-field matching, multi-signal ensembles, smaller noise magnitudes, or real API schemas."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+  "reason": "Frozen decision rule violated: FP upper bound of 95% Wilson CI on structural noise is 1.0 at all schema sizes (>>0.15 threshold), Mann-Whitney U p=1.0 at all sizes (separation direction inverted — noise more divergent than drift), and change_type TP CI lower bound <0.8 at 3/4 sizes. The falsification is robust: audit confirmed all metrics recomputed identically (except CI precision corrections that do not change violations). TF-IDF operates on surface-level token overlap with no mechanism to distinguish meaningful from noise token changes. The ensemble converges to pure semantic (alpha≈0) because Jaccard adds no discrimination. Positive and null controls pass, confirming the pipeline is not trivially broken — the failure is representational. The result is bounded to TF-IDF on synthetic schemas 10–50 fields; sentence-transformers contextual embeddings remain untested but the realistic schema test (5 hand-crafted pairs, negligible separation ~0.005, wrong-direction pair) suggests the problem may be more fundamental than the embedding model.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35010853847/request.json",
+    "research/experiments/EXP-GRAPH-35010853847/spec.json",
+    "research/experiments/EXP-GRAPH-35010853847/freeze.json",
+    "research/experiments/EXP-GRAPH-35010853847/result.json",
+    "research/experiments/EXP-GRAPH-35010853847/audit.json",
+    "research/experiments/EXP-GRAPH-35010853847/report.md",
+    "research/experiments/EXP-GRAPH-35010853847/provenance.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_raw_evidence.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35010853847/raw_evidence/semantic_decision_evaluation.json",
+    "research/graph/freshness_detection/execute_semantic_embedding.py",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json"
+  ]
+}

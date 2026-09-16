@@ -135,8 +135,11 @@ jobs:
           done
           echo "ready=$ready" >> "$GITHUB_OUTPUT"
           if [[ "$ready" != true ]]; then
-            python scripts/finalize_lane.py "$EXP" --stage design --exit-code 75 --category OPENCODE_INSTALL_FAILURE || true
+            python scripts/finalize_lane.py "$EXP" --stage install --exit-code 75 --category OPENCODE_INSTALL_FAILURE || true
             bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: OpenCode install failure $EXP"
+            checkpoint_rc=$?
+            [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+            exit 75
           fi
           exit 0
 
@@ -149,7 +152,7 @@ jobs:
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           bash .github/scripts/run-opencode-resilient.sh research "$DIR/model_design.json" run --agent spider_lane_researcher \
-            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, SPIDER_CODEX.md, and search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. If request.json contains parent_handoff, read the exact referenced path and preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Choose the smallest high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
+            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, codex/index.json and codex/claim_state.json. Read only relevant codex/experiments packets; do NOT ingest SPIDER_CODEX.md wholesale. Search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. If request.json contains parent_handoff, read the exact referenced path and preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Choose the smallest high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
@@ -166,8 +169,20 @@ jobs:
           else
             python scripts/finalize_lane.py "$EXP" --stage design --exit-code "$rc" --category DESIGN_FAILURE || true
           fi
+          if [[ "$rc" -ne 0 ]]; then
+            python scripts/discard_failed_stage.py "$EXP" --stage design
+            cleanup_rc=$?
+            if [[ "$cleanup_rc" -ne 0 ]]; then
+              bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: design cleanup failure $EXP"
+              checkpoint_rc=$?
+              [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+              exit "$cleanup_rc"
+            fi
+          fi
           bash scripts/checkpoint.sh design "$LANE" "$EXP" "R2 $LANE: freeze $EXP"
-          exit 0
+          checkpoint_rc=$?
+          [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+          exit "$rc"
 
       - name: Record durable pre-execution base
         if: ${{ steps.prep.outputs.executed != 'true' }}
@@ -191,8 +206,9 @@ jobs:
           [[ -f "$DIR/freeze.json" ]] || { echo "No freeze yet; execution deferred."; exit 0; }
           ROLE=research
           [[ "$LANE" == product ]] && ROLE=coding
+          export SPIDER_REQUIRED_OUTPUTS="$DIR/result.json $DIR/report.md $DIR/provenance.json"
           bash .github/scripts/run-opencode-resilient.sh "$ROLE" "$DIR/model_execute.json" run --agent spider_lane_researcher \
-            "EXECUTE ONLY the frozen SPIDER Research 2.0 experiment lane=$LANE id=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md. Read exact $DIR/request.json, spec.json, prereg.md and freeze.json; relevant Codex evidence; and lane charter. Frozen inputs are immutable. Run the actual experiment, controls and strong baselines. Preserve RAW EVIDENCE separately from observations, measurements and interpretations. Write $DIR/result.json, $DIR/report.md and $DIR/provenance.json using the exact required packet shape; NEVER omit mandatory keys. result.json must include schema_version, experiment_id, lane, status, outcome, metrics, controls, artifacts, observations, validity_notes, unresolved. Product lane may modify only its registry-authorized code roots and must test changes. Never git commit/push/switch/reset. Infrastructure failure is not a scientific negative."
+            "EXECUTE ONLY the frozen SPIDER Research 2.0 experiment lane=$LANE id=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md. Read exact $DIR/request.json, spec.json, prereg.md and freeze.json; codex/index.json, codex/claim_state.json and only relevant codex/experiments evidence; and lane charter. Frozen inputs are immutable. Run the actual experiment, controls and strong baselines. Preserve RAW EVIDENCE separately from observations, measurements and interpretations. Write $DIR/result.json, $DIR/report.md and $DIR/provenance.json using the exact required packet shape; NEVER omit mandatory keys. result.json must include schema_version, experiment_id, lane, status, outcome, metrics, controls, artifacts, observations, validity_notes, unresolved. Product lane may modify only its registry-authorized code roots and must test changes. Never git commit/push/switch/reset. Infrastructure failure is not a scientific negative."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage execute
@@ -205,9 +221,20 @@ jobs:
           else
             python scripts/finalize_lane.py "$EXP" --stage execute --exit-code "$rc" --category EXECUTION_FAILURE || true
           fi
-          if [[ "$rc" -ne 0 ]]; then python scripts/discard_failed_stage.py "$EXP" --stage execute; fi
+          if [[ "$rc" -ne 0 ]]; then
+            python scripts/discard_failed_stage.py "$EXP" --stage execute
+            cleanup_rc=$?
+            if [[ "$cleanup_rc" -ne 0 ]]; then
+              bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: execute cleanup failure $EXP"
+              checkpoint_rc=$?
+              [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+              exit "$cleanup_rc"
+            fi
+          fi
           bash scripts/checkpoint.sh execute "$LANE" "$EXP" "R2 $LANE: execute $EXP"
-          exit 0
+          checkpoint_rc=$?
+          [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+          exit "$rc"
 
       - name: AUDIT — independently attack completed measurement
         if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.audited != 'true' }}
@@ -217,11 +244,12 @@ jobs:
           set -uo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
-          [[ -f "$DIR/result.json" ]] || { echo "No result yet; audit deferred."; exit 0; }
+          [[ -f "$DIR/result.json" && -f "$DIR/report.md" && -f "$DIR/provenance.json" ]] || { echo "Execute packet incomplete; audit deferred."; exit 0; }
           EXCLUDE=$(jq -r '.model // empty' "$DIR/model_execute.json" 2>/dev/null || true)
           export SPIDER_EXCLUDE_MODEL="$EXCLUDE"
+          export SPIDER_REQUIRED_OUTPUTS="$DIR/audit.json"
           bash .github/scripts/run-opencode-resilient.sh audit "$DIR/model_audit.json" run --agent spider_lane_auditor \
-            "INDEPENDENT AUDIT for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md. Attack the frozen claim using $DIR/request.json, spec.json, prereg.md, freeze.json, result.json, report.md, provenance.json and relevant raw evidence. Preserve producer metric/control identifiers when recomputing or disputing them. Recompute material metrics where feasible; test controls, leakage, measurement validity, baselines and claim ceiling. Do not help the producer. Write ONLY $DIR/audit.json using the exact required packet shape and never omit mandatory keys. Never git commit/push/switch/reset."
+            "INDEPENDENT AUDIT for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md. Attack the frozen claim using $DIR/request.json, spec.json, prereg.md, freeze.json, result.json, report.md, provenance.json and relevant raw evidence. Use codex/index.json / codex/claim_state.json and only relevant canonical packets when historical comparison is needed. Preserve producer metric/control identifiers when recomputing or disputing them. Recompute material metrics where feasible; test controls, leakage, measurement validity, baselines and claim ceiling. Do not help the producer. Write ONLY $DIR/audit.json using the exact required packet shape and never omit mandatory keys. Never git commit/push/switch/reset."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage audit
@@ -234,9 +262,20 @@ jobs:
           else
             python scripts/finalize_lane.py "$EXP" --stage audit --exit-code "$rc" --category AUDIT_FAILURE || true
           fi
-          if [[ "$rc" -ne 0 ]]; then python scripts/discard_failed_stage.py "$EXP" --stage audit; fi
+          if [[ "$rc" -ne 0 ]]; then
+            python scripts/discard_failed_stage.py "$EXP" --stage audit
+            cleanup_rc=$?
+            if [[ "$cleanup_rc" -ne 0 ]]; then
+              bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: audit cleanup failure $EXP"
+              checkpoint_rc=$?
+              [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+              exit "$cleanup_rc"
+            fi
+          fi
           bash scripts/checkpoint.sh audit "$LANE" "$EXP" "R2 $LANE: audit $EXP"
-          exit 0
+          checkpoint_rc=$?
+          [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+          exit "$rc"
 
       - name: DIRECTOR — bounded verdict and next question
         if: ${{ steps.install.outputs.ready == 'true' && steps.prep.outputs.finalized != 'true' }}
@@ -247,8 +286,9 @@ jobs:
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           [[ -f "$DIR/audit.json" ]] || { echo "No audit yet; director deferred."; exit 0; }
+          export SPIDER_REQUIRED_OUTPUTS="$DIR/verdict.json $DIR/handoff.json"
           bash .github/scripts/run-opencode-resilient.sh director "$DIR/model_director.json" run --agent spider_lane_director \
-            "DIRECTOR VERDICT for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md. Read the exact frozen experiment, producer outputs and independent audit. Write ONLY $DIR/verdict.json and $DIR/handoff.json using the exact required packet shapes; never omit mandatory keys. claim_updates MUST be a JSON list of bounded events with claim_id/status/reason. handoff.json MUST preserve established/rejected/unknown/do_not_assume separately and its next_question MUST equal verdict.json next_question. Ground the handoff in exact evidence refs so a fresh-context next agent can continue without chat memory. The workflow owns lane state. Do not manufacture evidence. Product promotion is allowed only for audited code that passed its gate. Physics/Frontier must keep searching materially orthogonal high-upside questions when a bounded program fails. Never git commit/push/switch/reset."
+            "DIRECTOR VERDICT for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md. Read the exact frozen experiment, producer outputs and independent audit. Use codex/index.json / codex/claim_state.json and only relevant canonical packets for history. Write ONLY $DIR/verdict.json and $DIR/handoff.json using the exact required packet shapes; never omit mandatory keys. claim_updates MUST be a JSON list of bounded events with claim_id/status/reason. Director claim status MUST be one of HYPOTHESIS, EXPERIMENTAL, VALIDATED, PRODUCT_CORE, REJECTED, BLOCKED, MEASUREMENT_INVALID, SUPERSEDED. Never invent synonyms; nuance belongs in reason. SHIPPED is reserved for successful post-audit product promotion and MUST NOT be emitted by the Director. handoff.json MUST preserve established/rejected/unknown/do_not_assume separately and its next_question MUST equal verdict.json next_question. Ground the handoff in exact evidence refs so a fresh-context next agent can continue without chat memory. The workflow owns lane state. Do not manufacture evidence. Product promotion is allowed only for audited code that passed its gate. Physics/Frontier must keep searching materially orthogonal high-upside questions when a bounded program fails. Never git commit/push/switch/reset."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage director
@@ -263,11 +303,22 @@ jobs:
           fi
           if [[ "$rc" -ne 0 ]]; then
             python scripts/discard_failed_stage.py "$EXP" --stage director
+            cleanup_rc=$?
+            if [[ "$cleanup_rc" -ne 0 ]]; then
+              bash scripts/checkpoint.sh failure "$LANE" "$EXP" "R2 $LANE: director cleanup failure $EXP"
+              checkpoint_rc=$?
+              [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+              exit "$cleanup_rc"
+            fi
           elif [[ "$LANE" == product ]]; then
             python scripts/revert_product_reject.py "$EXP"
+            revert_rc=$?
+            [[ "$revert_rc" -eq 0 ]] || rc="$revert_rc"
           fi
           bash scripts/checkpoint.sh director "$LANE" "$EXP" "R2 $LANE: verdict $EXP"
-          exit 0
+          checkpoint_rc=$?
+          [[ "$checkpoint_rc" -eq 0 ]] || exit "$checkpoint_rc"
+          exit "$rc"
 
       - name: Wake canonicalization and bounded continuation
         if: always()
@@ -276,7 +327,19 @@ jobs:
           set -euo pipefail
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
-          [[ -f "$DIR/verdict.json" ]] || exit 0
+          [[ -f "$DIR/verdict.json" && -f "$DIR/handoff.json" ]] || exit 0
+
+          # Never wake Codex/promotion from an unpushed local verdict. A workflow
+          # can have computed a valid packet and still fail durability at checkpoint.
+          git fetch -q origin "refs/heads/lab2/$LANE:refs/remotes/origin/lab2/$LANE" || exit 0
+          REMOTE_VERDICT_SHA=$(git rev-parse "origin/lab2/$LANE:$DIR/verdict.json" 2>/dev/null || true)
+          REMOTE_HANDOFF_SHA=$(git rev-parse "origin/lab2/$LANE:$DIR/handoff.json" 2>/dev/null || true)
+          LOCAL_VERDICT_SHA=$(git hash-object "$DIR/verdict.json")
+          LOCAL_HANDOFF_SHA=$(git hash-object "$DIR/handoff.json")
+          if [[ "$REMOTE_VERDICT_SHA" != "$LOCAL_VERDICT_SHA" || "$REMOTE_HANDOFF_SHA" != "$LOCAL_HANDOFF_SHA" ]]; then
+            echo "SPIDER_WAKE_DEFERRED_UNPERSISTED_PACKET lane=$LANE experiment=$EXP"
+            exit 0
+          fi
 
           CODEX_ACTIVE=$(gh run list --workflow=codex-sync.yml --limit 20 --json status | jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
           [[ "$CODEX_ACTIVE" != 0 ]] || gh workflow run codex-sync.yml --ref main || true

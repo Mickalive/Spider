@@ -7,15 +7,34 @@ REAL="${OPENCODE_BIN:-$HOME/.opencode/bin/opencode}"
 MAX_ATTEMPTS="${SPIDER_MODEL_MAX_ATTEMPTS:-7}"
 RETRY_DELAY="${SPIDER_MODEL_RETRY_DELAY_SECONDS:-25}"
 STALL_SECONDS="${SPIDER_MODEL_STALL_SECONDS:-600}"
+MAX_RUNTIME_SECONDS="${SPIDER_MODEL_MAX_RUNTIME_SECONDS:-3600}"
 NETWORK_RE='(network_error|NetworkError|network error|fetch failed|APIConnectionError|ECONNRESET|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|ENOTFOUND|ETIMEDOUT|timed out|socket hang up|connection (reset|refused|closed|error)|upstream.*(reset|closed|unavailable|error)|HTTP[^0-9]*(429|500|502|503|504)|status[^0-9]*(429|500|502|503|504)|too many requests|rate.?limit|service unavailable|bad gateway|gateway timeout|temporar(y|ily) unavailable|TLS|SSL.*error|internal server error|unexpected server error|UnknownError|FreeUsageLimitError|provider error|model.*(unavailable|not found)|HTTP[^0-9]*403)'
 LOG=$(mktemp)
 STALL_FLAG=$(mktemp)
+TIMEOUT_FLAG=$(mktemp)
 START_HEAD=$(git rev-parse HEAD)
 START_BRANCH=$(git branch --show-current)
-CHILD_PID=""; MONITOR_PID=""
+CHILD_PID=""; MODEL_PGID=""; MONITOR_PID=""
 
 mkdir -p "$(dirname "$RECEIPT")"
-cleanup(){ [[ -z "$MONITOR_PID" ]] || kill "$MONITOR_PID" 2>/dev/null || true; [[ -z "$CHILD_PID" ]] || kill "$CHILD_PID" 2>/dev/null || true; rm -f "$LOG" "$STALL_FLAG"; }
+command -v setsid >/dev/null 2>&1 || { echo "::error::setsid is required for model process isolation" >&2; exit 69; }
+
+kill_model_group(){
+  local sig="${1:-TERM}"
+  if [[ -n "$MODEL_PGID" ]] && kill -0 -- "-$MODEL_PGID" 2>/dev/null; then
+    kill -s "$sig" -- "-$MODEL_PGID" 2>/dev/null || true
+  elif [[ -n "$CHILD_PID" ]] && kill -0 "$CHILD_PID" 2>/dev/null; then
+    kill -s "$sig" "$CHILD_PID" 2>/dev/null || true
+  fi
+}
+
+cleanup(){
+  [[ -z "$MONITOR_PID" ]] || kill "$MONITOR_PID" 2>/dev/null || true
+  kill_model_group TERM
+  sleep 0.2
+  kill_model_group KILL
+  rm -f "$LOG" "$STALL_FLAG" "$TIMEOUT_FLAG"
+}
 trap cleanup EXIT INT TERM
 
 mapfile -t CONFIGURED < <(jq -r --arg role "$ROLE" '.roles[$role][]? // empty' config/models.json)
@@ -24,6 +43,11 @@ if [[ -x "$REAL" ]]; then
   while IFS= read -r m; do [[ -n "$m" ]] && DISCOVERED+=("$m"); done < <("$REAL" models opencode 2>/dev/null | grep -Eo 'opencode/[A-Za-z0-9._:-]*free[A-Za-z0-9._:-]*' | sort -u || true)
 fi
 mapfile -t MODELS < <(printf '%s\n' "${CONFIGURED[@]}" "${DISCOVERED[@]}" | awk 'NF && !seen[$0]++')
+
+if [[ "$ROLE" == audit && -z "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
+  echo "::error::Independent audit requires a known producer model to exclude" >&2
+  exit 67
+fi
 if [[ -n "${SPIDER_EXCLUDE_MODEL:-}" ]]; then
   mapfile -t MODELS < <(printf '%s\n' "${MODELS[@]}" | grep -Fxv "$SPIDER_EXCLUDE_MODEL" || true)
 fi
@@ -56,41 +80,128 @@ restore_agent_commits(){
   return 0
 }
 
+# Every fallback attempt must start from the exact durable stage checkpoint.
+# Otherwise provider B can inherit provider A's partial files/code, making the
+# fallback scientifically non-independent and potentially contaminating Product.
+restore_attempt_baseline(){
+  local branch
+  branch=$(git branch --show-current 2>/dev/null || true)
+  if [[ "$branch" != "$START_BRANCH" ]]; then
+    echo "::error::Cannot restore retry baseline: branch changed from $START_BRANCH to $branch" >&2
+    return 68
+  fi
+  git reset --hard "$START_HEAD" >/dev/null || return 68
+  # .spider-runtime contains mounted frozen memory; all other untracked files
+  # created by the failed model attempt are attempt-local and must be discarded.
+  git clean -fd -e .spider-runtime/ >/dev/null || return 68
+  if [[ -n "${SPIDER_CONTROL_HELPER:-}" && -f "${SPIDER_CONTROL_HELPER}" ]]; then
+    python "$SPIDER_CONTROL_HELPER" stage --root "${GITHUB_WORKSPACE:-$PWD}" >/dev/null || return 68
+  fi
+  return 0
+}
+
+required_outputs_ok(){
+  [[ -z "${SPIDER_REQUIRED_OUTPUTS:-}" ]] && return 0
+  local p missing=0
+  for p in $SPIDER_REQUIRED_OUTPUTS; do
+    if [[ ! -f "$p" ]]; then
+      echo "SPIDER_MODEL_MISSING_OUTPUT path=$p" >&2
+      missing=1
+    fi
+  done
+  [[ "$missing" -eq 0 ]]
+}
+
 run_once(){
   local model="$1"; shift
-  : > "$LOG"; rm -f "$STALL_FLAG"
+  : > "$LOG"; rm -f "$STALL_FLAG" "$TIMEOUT_FLAG"
   local -a src=("$@") routed=()
   if [[ "${src[0]:-}" == run ]]; then routed=(run --model "$model" "${src[@]:1}"); else routed=("${src[@]}" --model "$model"); fi
-  "$REAL" "${routed[@]}" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) & CHILD_PID=$!
+
+  # New session/process group per attempt. Killing only the OpenCode parent is not
+  # enough: an agent can spawn children that keep mutating the worktree after a
+  # timeout or provider failover.
+  setsid --wait "$REAL" "${routed[@]}" > >(tee -a "$LOG") 2> >(tee -a "$LOG" >&2) & CHILD_PID=$!
+  MODEL_PGID=$(ps -o pgid= -p "$CHILD_PID" 2>/dev/null | tr -d ' ')
+  [[ -n "$MODEL_PGID" ]] || MODEL_PGID="$CHILD_PID"
+
   (
-    last_size=0; last_change=$(date +%s)
+    last_size=0; started=$(date +%s); last_change=$started
     while kill -0 "$CHILD_PID" 2>/dev/null; do
       sleep 15
       size=$(wc -c < "$LOG" 2>/dev/null || echo 0); now=$(date +%s)
+      if (( now-started >= MAX_RUNTIME_SECONDS )); then
+        echo "SPIDER_MODEL_HARD_TIMEOUT model=$model seconds=$MAX_RUNTIME_SECONDS" | tee -a "$LOG" >&2
+        touch "$TIMEOUT_FLAG"
+        kill -TERM -- "-$MODEL_PGID" 2>/dev/null || true
+        sleep 3
+        kill -KILL -- "-$MODEL_PGID" 2>/dev/null || true
+        exit 0
+      fi
       if [[ "$size" -ne "$last_size" ]]; then last_size="$size"; last_change="$now";
       elif (( now-last_change >= STALL_SECONDS )) && grep -Eiq "$NETWORK_RE" "$LOG"; then
         echo "SPIDER_MODEL_NETWORK_STALL model=$model" | tee -a "$LOG" >&2
-        touch "$STALL_FLAG"; kill "$CHILD_PID" 2>/dev/null || true; sleep 3; kill -9 "$CHILD_PID" 2>/dev/null || true; exit 0
+        touch "$STALL_FLAG"
+        kill -TERM -- "-$MODEL_PGID" 2>/dev/null || true
+        sleep 3
+        kill -KILL -- "-$MODEL_PGID" 2>/dev/null || true
+        exit 0
       fi
     done
   ) & MONITOR_PID=$!
+
   wait "$CHILD_PID"; rc=$?
   kill "$MONITOR_PID" 2>/dev/null || true; wait "$MONITOR_PID" 2>/dev/null || true
-  CHILD_PID=""; MONITOR_PID=""
+  MONITOR_PID=""
+
+  # Even after a normal parent exit, terminate any orphan/background descendants
+  # in the attempt session before validating files or resetting for another model.
+  kill_model_group TERM
+  sleep 0.2
+  kill_model_group KILL
+  CHILD_PID=""; MODEL_PGID=""
+
+  [[ -f "$TIMEOUT_FLAG" ]] && return 124
   [[ -f "$STALL_FLAG" ]] && return 75
   return "$rc"
 }
 
-attempt=1; index=0
+retry_from_clean_baseline(){
+  local model="$1" attempt_no="$2" rc="$3" category="$4"
+  restore_attempt_baseline
+  local reset_rc=$?
+  if [[ "$reset_rc" -ne 0 ]]; then
+    write_receipt failure "$model" "$attempt_no" "$reset_rc" retry-baseline-restore
+    echo "::error::SPIDER_RETRY_BASELINE_RESTORE_FAILED model=$model" >&2
+    exit "$reset_rc"
+  fi
+  write_receipt retry "$model" "$attempt_no" "$rc" "$category"
+}
+
+attempt=1; index=0; last_kind=""
 while (( attempt <= MAX_ATTEMPTS )); do
   model="${MODELS[$index]}"
   echo "SPIDER_MODEL_ATTEMPT=$attempt/$MAX_ATTEMPTS role=$ROLE model=$model"
   run_once "$model" "$@"; rc=$?
   restore_agent_commits; git_rc=$?
   if [[ "$git_rc" -ne 0 ]]; then write_receipt failure "$model" "$attempt" "$git_rc" control; exit "$git_rc"; fi
-  if [[ "$rc" -eq 0 ]]; then write_receipt success "$model" "$attempt" 0 ok; echo "SPIDER_MODEL_SUCCESS model=$model"; exit 0; fi
-  if [[ "$rc" -eq 75 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
-    write_receipt retry "$model" "$attempt" "$rc" transient
+
+  if [[ "$rc" -eq 0 ]] && required_outputs_ok; then
+    write_receipt success "$model" "$attempt" 0 ok
+    echo "SPIDER_MODEL_SUCCESS model=$model"
+    exit 0
+  fi
+
+  if [[ "$rc" -eq 0 ]]; then
+    last_kind="output-missing"
+    retry_from_clean_baseline "$model" "$attempt" 76 output-missing
+    if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
+    attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
+  fi
+
+  if [[ "$rc" -eq 75 || "$rc" -eq 124 ]] || grep -Eiq "$NETWORK_RE" "$LOG"; then
+    last_kind="transient"
+    retry_from_clean_baseline "$model" "$attempt" "$rc" transient
     if (( index + 1 < ${#MODELS[@]} )); then index=$((index+1)); else index=0; fi
     attempt=$((attempt+1)); sleep "$RETRY_DELAY"; continue
   fi
@@ -98,6 +209,12 @@ while (( attempt <= MAX_ATTEMPTS )); do
   echo "::error::OpenCode failed without retryable provider/network signature rc=$rc model=$model" >&2
   exit "$rc"
 done
+
+if [[ "$last_kind" == output-missing ]]; then
+  write_receipt failure "${MODELS[$index]}" "$attempt" 76 output-missing-pool-exhausted
+  echo "::error::SPIDER_MODEL_OUTPUT_CONTRACT_POOL_EXHAUSTED" >&2
+  exit 76
+fi
 write_receipt failure "${MODELS[$index]}" "$attempt" 75 transient-pool-exhausted
 echo "::error::SPIDER_TRANSIENT_MODEL_POOL_EXHAUSTED" >&2
 exit 75
