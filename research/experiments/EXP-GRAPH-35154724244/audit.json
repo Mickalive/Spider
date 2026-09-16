@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35154724244",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix C4 type-aware validation measurement tautology: research/graph/freshness_detection/execute_schema_diff.py: validate_client_request builds response_data from stale schema via build_response_data (line 490) and then validates against the same stale schema (line 391), guaranteeing type conformance. Server must return stale-type response while client validates against fresh expectation, or validation must compare fresh-schema expectation vs stale response type. Current C4 failure (4.7% vs required 80%) measures mock conformance, not type-drift detectability. Future type-drift test must make server return data matching fresh type after schema change.",
+    "Disclose deterministic zero-variance limitation in statistical reporting: raw_evidence/experiment_data.json shows std_schema_diff_magnitude 0.0 and identical 30/30 values per condition (e.g., add_field 1.0 x30). N=30 provides no variance estimate; Wilson CIs and per-sample ROC collapse. Report that power is bounded by 40 aggregated condition means, not 1200 independent samples, and that discrimination_gap 0.37 has zero empirical sampling variance in this idealization.",
+    "Bound optional_field_addition noise scaling explicitly: execute_schema_diff.py apply_optional_field_addition uses add_count = max(1, round(n*0.1)) producing diff 1.0/2.0/3.0/5.0 at n=10/20/30/50. Spec threshold <=0.5 is size-invariant while noise magnitude scales with size. If bounded noise (e.g., max 1-2 optional fields) is the intended operating regime, freeze that bound and re-test; otherwise acknowledge that unbounded 10% churn structurally dominates subtle drift (required_to_optional 0.3) and makes thresholding impossible by construction.",
+    "Exercise fresh-vs-fresh positive control empirically: spec positive_control requires identical schemas diff=0, but no fresh-vs-fresh condition exists in raw evidence (only drift/noise stale vs fresh). Add explicit fresh-copy condition measured through compute_schema_diff to verify pipeline not inflating diff via generation noise.",
+    "Document schema diff weight sensitivity: weights 1.0/0.5/0.3/0.2 are arbitrary and fixed. Provide sensitivity table (e.g., halving/doubling type and required weights) to show C2 failure persists structurally and is not weight-dependent, as validity_notes claim but do not demonstrate."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_C4_CONFORMANT_MOCK_TAUTOLOGY",
+      "severity": "high",
+      "finding": "C4 type-aware validation failure is measurement-invalid, not evidence that type-aware clients cannot detect type drift. Mock server always returns data matching the stale schema type (build_response_data uses stale field type, validate_client_request checks that same type), so type mismatch never occurs. Observed change_type C validation rate 0.04-0.053 across sizes (overall 0.0467 at n=50) reflects only incidental required-field side effects (remove_field path), not type checking. Real API drift where server returns stale-type data after schema change would be caught by profile C.",
+      "evidence": "research/graph/freshness_detection/execute_schema_diff.py:441-460 build_response_data constructs typed value from stale schema; 379-438 validate_client_request checks same stale type against same response; research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json per_schema_size 10/20/30/50 change_type mean_validation_rates.C 0.04/0.053/0.053/0.0467; research/experiments/EXP-GRAPH-35154724244/result.json metrics.c4_type_aware_validation_rate 0.046667; provenance.json reproduction_notes mock server simulation embedded in validation functions, no HTTP server",
+      "impact": "C4 FAIL does not falsify type-aware detection hypothesis; it falsifies this mock's ability to express the effect. Falsification of overall mechanism remains justified via C2 alone, but ceiling must not claim type-aware validation is inherently ineffective."
+    },
+    {
+      "id": "V_DETERMINISTIC_ZERO_VARIANCE",
+      "severity": "medium",
+      "finding": "All 40 conditions show zero variance (std 0.0, 30 identical diff magnitudes per condition). Experiment is fully deterministic given seed 20260917, so N=30 is nominal, not effective. Statistical tests unnecessary as producer notes, but also no estimate of real-world stochasticity (field availability, schema generation jitter). Discrimination_gap 0.37 and Pearson r are point estimates under idealization with degenerate CIs.",
+      "evidence": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json all per_schema_size.*.pattern_metrics.* std_schema_diff_magnitude 0.0; raw_evidence/experiment_data.json e.g., add_field n=10 schema_diff_magnitudes 30x 1.0; result.json validity_notes[2] 40 conditions with 30 samples variance zero",
+      "impact": "Ceiling limited to deterministic synthetic schemas; real APIs with stochastic field presence would degrade gap and correlation. Not measurement_invalid for this setting, but requires disclosure."
+    },
+    {
+      "id": "V_C2_SCALING_CONFOUND_BY_CONSTRUCTION",
+      "severity": "medium",
+      "finding": "C2 failure is structurally induced by design choice to add 10% of schema size as optional fields. Noise diff scales linearly with n (1.0 at n=10 to 5.0 at n=50) while drift diffs are constant (add_field 1.0, required_to_optional 0.3). Threshold <=0.5 cannot separate required_to_optional drift from optional_field_addition noise at any size by construction, confirming magnitude confound but also reflecting chosen noise magnitude, not universal noise.",
+      "evidence": "research/graph/freshness_detection/execute_schema_diff.py:238-253 apply_optional_field_addition add_count = max(1, round(n*0.1)); derived_measurements.json optional_field_addition 1.0/2.0/3.0/5.0 vs required_to_optional 0.3 constant; result.json metrics.c2_noise_tolerance_mean_diff 0.59 primary_violation",
+      "impact": "Falsification is valid for this unbounded scaling regime; bounded noise (max 1-2 fields) remains untested and could pass C2, so ceiling must be scoped to 10% churn regime."
+    },
+    {
+      "id": "V_AGGREGATED_CORRELATION",
+      "severity": "low",
+      "finding": "Pearson r -0.589579 computed across 40 aggregated condition means (per spec condition 3), not per-sample. With zero within-condition variance, aggregation is equivalent to sample level in this deterministic setting, but design masks any within-condition correlation structure that stochastic data would reveal. Low r correctly indicates schema diff captures different structural aspect than Jaccard (required_to_optional detected only by diff).",
+      "evidence": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json overall pearson_r_diff_vs_jaccard -0.589579 n_conditions 40; result.json metrics.c3_orthogonality_pearson_r -0.589579; spec decision_rule condition 3 across all 40 conditions",
+      "impact": "Orthogonality claim justified at aggregated level, but per-sample correlation untested due to determinism."
+    },
+    {
+      "id": "V_CLIENT_PROFILE_HAND_DESIGNED",
+      "severity": "medium",
+      "finding": "Three hand-designed profiles (A 2 fields no validation, B 3 fields type only, C 5 fields type+required+enum) create asymmetric sensitivity and guarantee that description/default/nested noise is invisible to diff (diff 0.0) while optional_field_addition is visible. Generalization to arbitrary real client field subsets untested; validity_notes disclose limit correctly.",
+      "evidence": "provenance.json client_profiles A/B/C fields id/name/email/phone/status; execute_schema_diff.py CLIENT_PROFILES; derived_measurements.json per noise pattern diffs 0.0 for 3 patterns",
+      "impact": "Ceiling limited to these profiles; different validation logic could shift C4 results if mock were fixed."
+    },
+    {
+      "id": "V_POSITIVE_CONTROL_NOT_EMPIRICAL",
+      "severity": "low",
+      "finding": "Positive control (fresh identical schemas diff=0) passes by construction (generate_fresh_schema deep copy) rather than empirical fresh-vs-fresh measurement. No fresh_copy condition in raw evidence, but logic is tautologically correct for set equality.",
+      "evidence": "research/experiments/EXP-GRAPH-35154724244/result.json controls missing fresh-copy condition; execute_schema_diff.py generate_fresh_schema returns identical copy; derived_measurements no fresh_vs_fresh",
+      "impact": "No impact on falsification; hygiene fix only."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_JACCARD_STRUCTURAL",
+      "baseline": "Jaccard structural similarity (field_path,type) — FP=1.0 at all sizes under structural noise (EXP-GRAPH-34788722106)",
+      "assessment": "Correctly reproduced. Derived measurements show Jaccard drift 0.818-1.0 (change_type lowest, required_to_optional 1.0) and noise 0.909-1.0. Cannot discriminate optional_field_addition (0.909) from add_field (0.909 at n=10, 0.980 at n=50) by threshold. Schema diff uniquely detects required_to_optional (Jaccard 1.0 vs diff 0.3) confirming complementarity, but both fail magnitude confound. Citation accurate.",
+      "evidence": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json per_schema_size.*.pattern_metrics.*mean_jaccard; result.json controls.CTRL-JACCARD-STRUCTURAL observed 0.818-1.0 drift, 0.909-1.0 noise",
+      "pass_fail": "PASS"
+    },
+    {
+      "id": "B_TFIDF_SEMANTIC",
+      "baseline": "TF-IDF bag-of-words semantic similarity — FP=1.0, inverted direction (EXP-GRAPH-35010853847)",
+      "assessment": "Correctly inherited as falsified semantic signal, not re-measured here. No new semantic measurement needed; schema diff tests different signal family. Citation appropriate.",
+      "evidence": "spec.json baselines[1]; prereg.md Motivation; no new TF-IDF in raw evidence",
+      "pass_fail": "PASS"
+    },
+    {
+      "id": "B_RESPONSE_TIME_KS",
+      "baseline": "Response-time KS two-sample test — TP=0.0, FP=0.1875, inverted direction (EXP-GRAPH-35083040517)",
+      "assessment": "Correctly cited as falsified temporal signal. Mock server deterministic zero latency variance makes KS irrelevant in this setting, as producer notes (CTRL-RESPONSE-TIME-KS IRRELEVANT). Not re-tested; appropriate to avoid redundant measurement.",
+      "evidence": "result.json controls.CTRL-RESPONSE-TIME-KS observed Not directly computed, mock deterministic; provenance execution stdlib only",
+      "pass_fail": "PASS"
+    },
+    {
+      "id": "B_LDA_ENSEMBLE",
+      "baseline": "Linear Fisher LDA ensemble of (1-Jaccard) and KS D — AUC=0.625, all conditions fail (EXP-GRAPH-35130682058)",
+      "assessment": "Correctly inherited. Producer does not recompute LDA on schema diff + Jaccard combination, but notes schema diff alone 0.37 gap does not improve over parent 0.625 AUC. Positive that producer acknowledges no rescue; nonlinear ensemble remains untested per parent unresolved.",
+      "evidence": "result.json controls.CTRL-LDA-ENSEMBLE NOT-TESTED; spec baselines[3]",
+      "pass_fail": "PASS"
+    },
+    {
+      "id": "B_FIELD_USAGE_PROFILING",
+      "baseline": "Field-usage profiling — orthogonal (r=-0.045) but fails on change_type (usage_similarity=1.0) (EXP-GRAPH-35137034388)",
+      "assessment": "Correctly reproduced as parent. Current schema diff also orthogonal to Jaccard (r=-0.59) and also struggles with behavioral manifestation (C4 type validation 0.047). Parent V_NOISE_TAUTOLOGICAL and V_CHANGE_TYPE_AVAILABILITY_ONLY fixes are correctly addressed: noise now overlaps client fields (optional_field_addition) and type-aware validation added, though C4 measurement remains tautological.",
+      "evidence": "spec baselines[4]; result.json controls.CTRL-FIELD-USAGE-PROFILING INFORMATIVE parent r=-0.045; current r=-0.589",
+      "pass_fail": "PASS"
+    },
+    {
+      "id": "B_NULL_TAUTOLOGICAL_CONTROL",
+      "baseline": "Null control: noise patterns overlapping client-requested fields must not produce diff >0.5",
+      "assessment": "Control correctly fails empirically due to optional_field_addition 1.0-5.0 >0.5 at all sizes. Producer's CTRL-NOISE-TAUTOLOGICAL-FIX PARTIAL accurately reports 3/5 noise patterns invisible (0.0) and 2 visible (0.2-5.0). Control is discriminating, not tautological, confirming fix of parent V_NOISE_TAUTOLOGICAL.",
+      "evidence": "result.json controls.CTRL-NOISE-TAUTOLOGICAL-FIX PARTIAL; derived_measurements description_change/default_value_change/nested_property_addition 0.0, optional_field_addition 1-5, enum_expansion 0.2",
+      "pass_fail": "PASS"
+    }
+  ],
+  "recomputed_metrics": {
+    "schema_diff_discrimination_gap": {
+      "producer": 0.37,
+      "recomputed": 0.37,
+      "match": true,
+      "detail": "drift_diff_mean 0.96 (5 drifts*4 sizes: (1.0+1.0+0.5+0.3+2.0)/5=0.96 per size) minus noise_diff_mean 0.59 (20 noise conditions sum 11.8/20=0.59) =0.37"
+    },
+    "c1_drift_detection_mean_diff": {
+      "producer": 0.96,
+      "recomputed": 0.96,
+      "match": true,
+      "minimum_pattern_diff": 0.3,
+      "maximum_pattern_diff": 2.0,
+      "per_drift_pattern_diff_recomputed": {
+        "add_field": 1.0,
+        "remove_field": 1.0,
+        "change_type": 0.5,
+        "required_to_optional": 0.3,
+        "rename_field": 2.0
+      }
+    },
+    "c2_noise_tolerance_mean_diff": {
+      "producer": 0.59,
+      "recomputed": 0.59,
+      "match": true,
+      "per_noise_pattern_diff_recomputed": {
+        "description_change": 0.0,
+        "default_value_change": 0.0,
+        "optional_field_addition": {"10": 1.0, "20": 2.0, "30": 3.0, "50": 5.0},
+        "nested_property_addition": 0.0,
+        "enum_expansion": 0.2
+      },
+      "violations_recomputed": ["n=10 optional_field_addition 1.0>0.5", "n=20 optional_field_addition 2.0>0.5", "n=30 optional_field_addition 3.0>0.5", "n=50 optional_field_addition 5.0>0.5"],
+      "condition_pass": "FAIL"
+    },
+    "c3_orthogonality_pearson_r": {
+      "producer": -0.589579,
+      "recomputed": -0.5895790199638392,
+      "match": true,
+      "threshold": 0.9,
+      "condition_pass": "PASS",
+      "n_conditions": 40,
+      "method": "mean per condition (40 pairs diff vs jaccard) Pearson covariance/(std_d*std_j)"
+    },
+    "c4_type_aware_validation_rate": {
+      "producer": 0.046667,
+      "recomputed": 0.04666666666666667,
+      "match": true,
+      "producer_n": 50,
+      "per_size_recomputed": {
+        "10": 0.04,
+        "20": 0.053333,
+        "30": 0.053333,
+        "50": 0.046667
+      },
+      "threshold_required": 0.8,
+      "condition_pass": "FAIL",
+      "noise_mean_C_validation_rate_recomputed": 0.0
+    },
+    "per_jaccard_drift_recomputed": {
+      "add_field": [0.909091, 0.952381, 0.967742, 0.980392],
+      "remove_field": [0.9, 0.95, 0.966667, 0.98],
+      "change_type": [0.818182, 0.904762, 0.935484, 0.960784],
+      "required_to_optional": [1.0, 1.0, 1.0, 1.0],
+      "rename_field": [0.818182, 0.904762, 0.935484, 0.960784]
+    },
+    "decision_rule_recomputed": {
+      "C1_drift_detection": "PASS",
+      "C2_noise_tolerance": "FAIL",
+      "C3_orthogonality": "PASS",
+      "C4_type_aware": "FAIL",
+      "overall": "FALSIFIED-IN-SETTING",
+      "violations_match_producer": true,
+      "n_violations": 5,
+      "violations": ["C2 FAIL n=10 optional_field_addition 1.0>0.5", "C2 FAIL n=20 optional_field_addition 2.0>0.5", "C2 FAIL n=30 optional_field_addition 3.0>0.5", "C2 FAIL n=50 optional_field_addition 5.0>0.5", "C4 FAIL n=50 change_type 0.0467 <=0.8"]
+    },
+    "hash_verification": {
+      "experiment_data.json": "82ad39707b400af6376534f7cbbe42272ddadb541fb3af6de7c5eb4a3a1e8df4",
+      "derived_measurements.json": "a585dc0cd07b2ab64ce0950ce067216e4f03a19b8a54d0e7a7617c4f36a34032",
+      "decision_evaluation.json": "a9a9773dda3c37be7d76d4683118d21ea9d3f5c8530154ef442f001865dbb0eb",
+      "match": true
+    },
+    "recomputation_notes": "Recomputed from raw_evidence/derived_measurements.json and raw_evidence/experiment_data.json; all means, gaps, Pearson r and validation rates match producer within rounding; decision rule correctly applied per spec (all 4 conditions must hold)."
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING: Direct schema comparison (weighted field add/remove 1.0, type change 0.5, required->optional 0.3, enum 0.2) does NOT provide reliable drift-vs-noise discrimination under the frozen decision rule in this synthetic setting. Within deterministic mock (Python stdlib only, seed 20260917, schema sizes 10/20/30/50, N=30 identical samples per condition, 3 hand-designed client profiles), schema diff detects all 5 drift patterns (0.3-2.0) and is orthogonal to Jaccard (r=-0.59, captures required_to_optional where Jaccard=1.0), but fails noise tolerance because optional_field_addition adding 10% optional fields scales with size (1.0-5.0 >0.5 threshold) producing irreconcilable conflict with subtle drift (required_to_optional 0.3), yielding discrimination gap only 0.37. C4 type-aware validation failure (4.7% vs required 80%) is MEASUREMENT INVALID due to conformant mock, not evidence that type-aware clients cannot detect real type drift. Maximum justified ceiling: schema diff is a weak supplementary structural signal (detects required->optional) but cannot threshold-separate unbounded optional churn noise from subtle drift; does not rescue C-FRESHNESS. Does NOT extend to bounded noise (max 1-2 fields), per-sample stochastic schemas, real API server non-conformance, alternative weightings, or session-level behavioral signals which remain UNKNOWN.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35154724244/request.json sha256 9dfa5b73f0ceaf721ec7c3f50cd61f72ac291e6c0e5300f6ed5692f464d9d885",
+    "research/experiments/EXP-GRAPH-35154724244/spec.json sha256 ac88e76f9604e4cd8d6ff7d25ecfa126639d5772565d72404e1e84020d908690",
+    "research/experiments/EXP-GRAPH-35154724244/prereg.md sha256 3d0562ab6b46c66137999fe2e8bf4b432d3b84177321ff3fa85f782e1aaaf72d",
+    "research/experiments/EXP-GRAPH-35154724244/freeze.json sha256 45ecc32825946b7d62876967e5e3062604e06e128d7e6484a4286c1b7b02b8c7",
+    "research/experiments/EXP-GRAPH-35154724244/result.json sha256 826595347234beb292b37bc69b08b36bc9391ecf64785ba050bae40d2d39cba0",
+    "research/experiments/EXP-GRAPH-35154724244/report.md sha256 5b14255f01af49f154dc8b4a324b4ac888fbf35103297dc1f13b62fb9e056085",
+    "research/experiments/EXP-GRAPH-35154724244/provenance.json sha256 b94b5fb315b69faa29c6d164a9e6bceccbf33db4dc5b2cae206a948d4e36cf22",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/experiment_data.json sha256 82ad39707b400af6376534f7cbbe42272ddadb541fb3af6de7c5eb4a3a1e8df4",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json sha256 a585dc0cd07b2ab64ce0950ce067216e4f03a19b8a54d0e7a7617c4f36a34032",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/decision_evaluation.json sha256 a9a9773dda3c37be7d76d4683118d21ea9d3f5c8530154ef442f001865dbb0eb",
+    "research/graph/freshness_detection/execute_schema_diff.py"
+  ],
+  "unresolved": [
+    "Would bounded optional_field_addition (max 1-2 fields, not 10% of schema) allow threshold <=0.5 to pass C2 while still detecting subtle drift 0.3?",
+    "Would type-aware validation detect change_type if server returned stale-type data (e.g., integer vs string) mismatched to schema, rather than conformant mock data?",
+    "Does discrimination_gap 0.37 provide any AUC lift over Jaccard alone if ROC is computed, given r=-0.59 complementarity?",
+    "Do alternative schema diff weightings (e.g., down-weighting optional additions) rescue C2 without losing required_to_optional sensitivity?",
+    "Does schema diff generalize to real API schemas with stochastic field availability, realistic naming, and DB/cache/CDN variation?"
+  ]
+}
