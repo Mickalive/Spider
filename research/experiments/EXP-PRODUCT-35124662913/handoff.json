@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35124662913",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the parameterized distillation kernel (Fix1+Fix2+slot_prefixes) save total cost per successful real-browser task (C-PRODUCT-ECON), and does the Fix2 protocol-only gap produce measurable over-parameterization in live browser traffic?",
+  "why_next": "C-PARAM-INHERIT clears the synthetic gate. The next product gate is C-PRODUCT-ECON: end-to-end amortized economics on real agents. The protocol-only gap (Fix2 allows https:// prefix, yielding slot_count=1 for protocol-only URL sets) must be resolved before C-PRODUCT-ECON to prevent inflated false parameter counts in real traffic. This requires real-browser testing with model/network/browser calls to measure actual cost savings versus literal/fixed baselines.",
+  "carry_forward": {
+    "established": [
+      "distill_parameterized with Fix1 (suffix guard, single-char), Fix2 (delimiter-bound prefix validation via _validate_prefix_boundary last_char in /?=&), empty-prefix guard, and slot_prefixes extraction (path segment from authority end) committed to src/spider/kernel.py sha256=1880ef67 produces: 5/5 established single-slot URL classes binding_accuracy=1.0 slot_count=1 (P1 users/, G1 search?q=, G2 items?category=books&page=, G3 orgs/acme/repos/main/issues/, G5 users//items?page=1 hybrid) with slot_prefixes non-empty and metadata-only template invariance",
+      "Nulls N1_ORIGINAL/N1_CORRECTED slot_count=0; B_LITERAL fail_rate=1.0 confirms parameterized induction necessary",
+      "Fix1 necessity delta=1.0 (maximum discriminating power) on G1 condition: fixed binding=1.0 vs unfixed binding=0.0 (suffix-corrupted template)",
+      "Fix2 necessity confirmed on N1_ORIGINAL: fixed slot_count=0 vs unfixed slot_count=1 (over-parameterized template https://${url} or https://api.${url})",
+      "G3 slot_prefixes amended expected 'orgs/acme/repos/main/issues/' validated as correct for VALUE CONTRACT prefix-stripping (full path segment from authority end)",
+      "Template invariance preserved: slot_prefixes computation is metadata-only, action_template and _bind unchanged",
+      "B_UNFIXED_G4 architectural bound persists: multi-char suffix '00' not caught by Fix1 (single-char only), binding_accuracy=0.0. Architectural limitation, not fix regression."
+    ],
+    "rejected": [
+      "Protocol-only over-parameterization is NOT hidden: PROTOCOL_ONLY slot_count=1, template https://${url}, correctly documented as boundary condition, not gated by decision rule",
+      "Cross-host parameterization IS rejected by Fix2: N1_ORIGINAL slot_count=0 (prefix ending at '.' fails delimiter check)"
+    ],
+    "unknown": [
+      "Fix2 protocol-only gap: https:// prefix passes last_char '/' check yielding slot_count=1. Minimum prefix length or domain-aware threshold not designed. Needs resolution before C-PRODUCT-ECON.",
+      "End-to-end product economics (C-PRODUCT-ECON): does parameterized kernel save total cost per successful real-browser task? Requires real-browser testing with model/network/browser calls. Currently unmeasured.",
+      "Real-browser external validity: prevalence of single-char vs multi-char suffix collisions and cross-host vs protocol-only prefix collisions in live browser traffic unknown",
+      "VALUE CONTRACT slot_prefixes consumption: correctly extracted but not exercised end-to-end via _bind prefix stripping or cross-observation value extraction"
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is VALIDATED or SHIPPED: it remains EXPERIMENTAL. Claim ceiling is bounded to committed-code synthetic single-slot with prefix metadata. Real-browser external validity unproven.",
+      "Do not assume promote_to_product=true: this is not Product-lane code that survived a frozen gate and independent audit in the sense required for promotion. The code is committed but the claim is not yet measured in real traffic.",
+      "Do not assume Fix1 covers multi-char suffixes: Fix1 guards single-char suffixes only. G4 multi-char suffix '00' architectural bound persists.",
+      "Do not assume Fix2 rejects all protocol-only prefixes: https:// passes delimiter check. This is a known gap.",
+      "Do not assume slot_prefixes changes action_template or _bind: it is metadata-only extraction. Verified by template invariance check.",
+      "Do not assume overall_binding_accuracy=0.667 represents decision-rule performance: it includes baselines (B_UNFIXED_G1=0.0, B_UNFIXED_N1=0.0). Decision-rule-only binding_accuracy=1.0.",
+      "Do not assume n=3+3 per condition establishes statistical significance: it establishes determinism on synthetic data, not generalization to real traffic."
+    ]
+  },
+  "dependencies": [
+    "C-PARAM-INHERIT must remain EXPERIMENTAL until C-PRODUCT-ECON measured",
+    "Protocol-only gap (Fix2 https:// prefix) must be resolved before C-PRODUCT-ECON",
+    "src/spider/kernel.py sha256=1880ef67 and src/spider/models.py sha256=065e6b3d are the committed code basis",
+    "Real-browser test harness needed for C-PRODUCT-ECON (model/network/browser calls)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35124662913/result.json metrics decision_rule_passed=8 binding_accuracy decision_rule_only=1.0",
+    "research/experiments/EXP-PRODUCT-35124662913/audit.json status=PASS producer_claim_supported=true claim_ceiling",
+    "research/experiments/EXP-PRODUCT-35124662913/raw_evidence.json conditions P1/G1/G2/G3/G5 binding_accuracy=1.0 slot_count=1 N1_ORIGINAL/N1_CORRECTED slot_count=0 B_UNFIXED_G1 binding_accuracy=0.0 B_UNFIXED_N1 slot_count=1 PROTOCOL_ONLY slot_count=1",
+    "research/experiments/EXP-PRODUCT-35124662913/spec.json decision_rule frozen",
+    "research/experiments/EXP-PRODUCT-35124662913/prereg.md Section 11 what-not-established",
+    "src/spider/kernel.py sha256=1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4",
+    "src/spider/models.py sha256=065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "research/experiments/EXP-PRODUCT-34704657427/handoff.json sha256=db736e23 (parent REVISE, required_fixes=3)",
+    "research/claims/registry.json C-PARAM-INHERIT status=EXPERIMENTAL"
+  ],
+  "recommended_action": "Next experiment in product lane should measure C-PRODUCT-ECON: run parameterized distillation kernel in real-browser test harness with model/network/browser calls, measure end-to-end cost per successful task against literal/fixed baselines. Before that, design resolution for Fix2 protocol-only gap (minimum prefix length threshold or domain-aware validation)."
+}
