@@ -1,17 +1,27 @@
 {
   "experiment_id": "EXP-INTEL-35137036013",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "After the runtime lane removes the first-20 locatableSample cap, does full DOM enumeration confirm that the a→link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "hypothesis": "Full DOM enumeration (without first-20 document-order truncation) resolves the truncation artifact that drove the FALSIFIED verdict in EXP-INTEL-35112013458. Specifically: (H1) the density-based page-type ordering under full DOM differs from truncated-first-20 ordering for at least one definition, and (H2) the null-model pairwise agreement on full-DOM data is at or below chance level (null mean ≥ observed), confirming that the metric is measurement-valid and the FALSIFIED result was a truncation artifact rather than a metric failure.",
+  "falsifier": "If (F1) full DOM enumeration produces identical ordering to truncated-first-20 for ALL definitions (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK-corrected), AND (F2) null-model pairwise agreement on full-DOM data remains below chance (null mean > observed, as on truncated data), THEN truncation did not drive the FALSIFIED verdict and the metric itself fails the null-model test under full enumeration. Additionally, if (F3) the canonical analysis script with per-definition role filtering produces a verdict inconsistent with the frozen decision rule, the measurement is invalid.",
+  "baselines": [
+    "B1_TRUCATED_REGRESSION: Run the canonical analysis script (3-definition per-role filtering, cart_1 deduplication, float scaling) on the truncated-first-20 data from EXP-INTEL-34782350557 raw evidence. Expected: reproduce the known truncated-sample ordering (DEF-FULL-MAP: cart>product_listing>detail truncated, cart>detail>product_listing full; DEF-FORM-ONLY: product_listing>cart>detail truncated, product_listing>detail>cart full) and null-model result (null mean 0.5275 > observed 0.3 on truncated data).",
+    "B2_COMMITTED_SCRIPT_BASELINE: Run committed analyze.py (all-role density, 8 tasks including cart_1 duplicate) on full-DOM data. Expected: reproduce the committed-script behavior pattern (all-role density inflates denominator, may produce different verdict than per-definition filtering). This baseline documents the algorithmic difference under full enumeration.",
+    "B3_STORED_RESULTS_COMPARISON: Load stored analysis_results.json from EXP-INTEL-35124660457, extract the truncated-sample 3-definition results for DEF-FULL-MAP and DEF-FORM-ONLY (excluding invalid ISOLATED-A-LINK). Expected: confirm these are the reference values for truncated-sample ordering and density that the full-DOM comparison targets."
+  ],
+  "positive_control": "The canonical analysis script run on truncated-first-20 data must reproduce the known ordering change (C1=true for DEF-FULL-MAP and DEF-FORM-ONLY) and the known null-model result (null mean ≈ 0.5275, observed ≈ 0.3, null > observed). This confirms the script is correctly implementing the analysis pipeline before it is applied to full-DOM data.",
+  "null_control": "Random ROLE_MAP assignments (1000 iterations, seed=42) on full-DOM per-role density estimates. If the null distribution mean pairwise agreement on full-DOM data is at or above the observed pairwise agreement, the null hypothesis (ordering is at chance) is not rejected and the FALSIFIED verdict stands. This is the primary test: the null must be exceeded by the observed statistic for the metric to survive.",
+  "measurement_validity": [
+    "The runtime lane must have removed the first-20 locatableSample cap, providing full DOM enumeration for all 7 tasks (verified by locatable_elements count matching total interactive elements, not capped at 20)",
+    "The canonical analysis script must be committed with: (a) 3-definition per-role filtering (DEF-FULL-MAP: a+button+input+combobox, DEF-FORM-ONLY: button+combobox, ISOLATED-A-LINK: a only), (b) cart_1 deduplication (8→7 tasks), (c) float scaling (not integer truncation)",
+    "Raw evidence from EXP-INTEL-34782350557 must be accessible and the locatableSample cap removal must be visible in the DOM stats (locatable_elements no longer capped at 20)",
+    "ISOLATED-A-LINK must be computed correctly (a-only filtering, not copy-paste of DEF-FULL-MAP): truncated_count should be ~2 for listing tasks, not 8",
+    "The null model must use the same per-definition role-filtered density estimates as the main analysis, not the all-role inflated counts"
+  ],
+  "decision_rule": "Conjunctive across definitions for ordering change (C1) and null-model test (C2), evaluated per-definition then pooled:\n\nC1_ORDERING_CHANGED: For at least one of {DEF-FULL-MAP, DEF-FORM-ONLY}, the page-type ordering under full-DOM differs from truncated-first-20 ordering (as reconstructed in EXP-INTEL-35131994346). ISOLATED-A-LINK is evaluated separately with corrected a-only counts.\n\nC2_NULL_EXCEEDS_OBSERVED: For at least one definition where C1 is true, the null-model pairwise agreement mean on full-DOM data is ≥ the observed pairwise agreement on full-DOM data (i.e., the observed ordering does not exceed chance). This is the inverse of the truncated-sample result (where null 0.5275 > observed 0.3, which FALSIFIED the metric).\n\nVERDICT RULES:\n- If C1=true AND C2=true for at least one definition: SURVIVES_CURRENT_TEST (truncation drove the FALSIFIED verdict; full DOM recovers a non-chance signal)\n- If C1=true AND C2=false for all definitions where C1 holds: MIXED (ordering changes under full DOM but null still exceeds observed — metric survives truncated-sample FALSIFICATION but remains unvalidated on full DOM)\n- If C1=false for ALL definitions AND C2=false: FALSIFIED (ordering unchanged, null exceeds observed — truncation did not drive the FALSIFIED verdict; metric fails on full DOM)\n- If C1=false AND C2=true: INCONCLUSIVE (ordering unchanged but null does not exceed observed — cannot distinguish signal from noise)\n- If measurement validity conditions fail: MEASUREMENT_INVALID",
+  "product_consequence_positive": "If SURVIVES_CURRENT_TEST: The FALSIFIED verdict from EXP-INTEL-35112013458 is confirmed as a truncation artifact. The a→link-inclusive density metric is measurement-valid under full DOM enumeration. Product lane may adopt DEF-FULL-MAP as canonical yield metric for page-type density analysis, bounded to this single Magento site. C-MEAS-VALID advances toward PRODUCT_CORE for this specific metric.",
+  "product_consequence_negative": "If FALSIFIED: The metric fails the null-model test even under full DOM enumeration. The FALSIFIED verdict from EXP-INTEL-35112013458 is confirmed as a genuine metric failure, not a truncation artifact. Product lane must not adopt the density-based ordering metric. C-MEAS-VALID remains BLOCKED for this metric family. Alternative metrics (e.g., role-invariant structural features) must be explored.",
+  "estimated_cost": "Low: re-analysis of existing raw evidence with updated analysis script and full-DOM data (post-substrate-fix). No new browser interaction, no new data collection. Compute cost dominated by 1000-iteration null model × 3 definitions × 7 tasks.",
+  "expected_information_gain": "High: this is the decisive test that resolves the FALSIFIED verdict chain (EXP-INTEL-35112013458 → EXP-INTEL-35124660457 → EXP-INTEL-35131994346). A clear positive or negative result changes the C-MEAS-VALID claim status and unblocks or closes the density-based metric family for product adoption."
 }
