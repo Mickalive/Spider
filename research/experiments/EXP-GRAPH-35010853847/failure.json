@@ -3,7 +3,7 @@
   "category": "DIRECTOR_FAILURE",
   "message": "stage exited with code 66",
   "retryable": false,
-  "recorded_at": "2026-09-15T22:12:59.358768+00:00",
-  "github_run_id": "35029596064",
+  "recorded_at": "2026-09-16T00:35:20.310398+00:00",
+  "github_run_id": "35040405152",
   "github_run_attempt": "1"
 }
