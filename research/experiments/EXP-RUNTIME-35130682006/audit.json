@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35130682006",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Bound C-MEAS-VALID broadening claim to effective diversity: state explicitly that BROTLI_QUALITY_RANGE (4,5,6,7,8) selection collapses to 2 effective compressed outputs for tested payloads (quality 4 distinct vs qualities 5-8 identical) and to 1 effective output for tiny userinfo error bodies (26B uncompressed -> 30B compressed identical across all 5 qualities). Do not claim 'full 5-level distinct' validation; claim is '5-level selection tested, effective binary/ternary diversity observed for 1KB compressible JSON' - evidence: raw_observations.json unique_count valid_token 2/20 userinfo, 1/20 error, plus local brotli.compress verification 71B vs 69B collapse.",
+    "Disclose per-condition seed derivation via Python hash() (run_experiment.py:509 quality_rng = random.Random(SEED + hash(condition) % 10000)) is non-deterministic across PYTHONHASHSEED values; fix to deterministic stable hash (e.g., hashlib.sha256 or int) or log actual quality distribution per request in raw_observations.json to prove 5-level selection was sampled.",
+    "Correct report Finding 1 phrasing: 'Full 5-level does NOT increase degradation vs binary' is true only because effective diversity is unchanged (2 uniques in both experiments), not because intermediate levels were tested and found irrelevant. Report must state that intermediate levels 5,6,7 produced identical bytes to level 8 for all 5 body types tested (local verification: 5-8 identical hex), so broadening from binary {4,8} to {4,5,6,7,8} is not a stronger stress test for these payload sizes.",
+    "Explicitly gate H3: compressed-varying brotli discrimination 0.4329 on /userinfo exceeds 0.35 threshold, so H3 (compressed <0.35) is falsified on /userinfo in this setting; report correctly notes PARTIALLY SUPPORTED but spec decision_rule MIXED does not fire. Disclose that 0.4329 vs parent 0.2286 difference is inflated by error-body insensitivity (1 unique/20 for 3 error states) and by less-correlated valid_token collisions; do not present as 'less degradation than parent' without noting same effective 2-output diversity."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Brotli 5-level collapse to effective binary: local brotli.compress verification shows for all 5 body types (userinfo valid 999B -> 71B q4 vs 69B q5-8 identical; userinfo error 26B ->30B identical all 5; introspect valid 32B ->36B q4 distinct vs q5-8 identical; introspect invalid 43B ->46B q4 vs 41B q5-8; introspect expired 43B ->46B q4 vs 43B q5-8) only 2 distinct outputs across 5 qualities (1 for tiny error). Raw evidence raw_observations.json confirms: /userinfo valid_token 2/20, error states 1/20; /introspect all states 2/20. Prereg expected 2-5 distinct per state; observed is minimal. Full 5-level selection was executed (code BROTLI_QUALITY_RANGE=(4,5,6,7,8) correct) but did not produce 5 distinct compression artefacts for these sizes.",
+      "severity": "high",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35130682006/run_experiment.py:60 BROTLI_QUALITY_RANGE=(4,5,6,7,8), run_experiment.py:229 randint(0,len-1), raw_observations.json DECOMPRESSED-VARYING-BROTLI /userinfo compressed_hash_variation valid_token 2/20 no_auth/invalid/expired 1/20, /introspect 2/20 all states, result.json body_sizes valid_token 69-71B userinfo 30B error, local brotli verification 5-quality set identical for q5-8"
+    },
+    {
+      "finding": "Synthetic proxy gap unchanged from parent: local Python HTTPServer on 127.0.0.1:5001 with brotli.compress does not exercise real CDN non-determinism (per-edge quality, caching, chunked transfer, Accept-Encoding negotiation, load-balancing). Decompression via brotli.decompress is deterministic by construction (same input+quality -> same bytes), so within-state decompressed unique=1/20 all states verifies code correctness, not CDN property. Inherited blocker for production deployment remains.",
+      "severity": "high",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35130682006/run_experiment.py:220 ConditionProxyHandler compress_brotli, provenance.json infrastructure mock_server_port 5000 proxy_port 5001, prereg.md 9.1 Synthetic-to-Real Gap, validity_notes 'Mock OAuth2 server (not Keycloak)', handoff.json carry_forward do_not_assume real CDN"
+    },
+    {
+      "finding": "Determinism by construction: brotli.decompress deterministic for fixed input+quality. Passing C_DECOMPRESSION_DETERMINISM (decompressed unique 1/20 all 4 states both endpoints) is expected given Python brotli library implementation, not evidence of CDN resilience. Falsification would require proxy bug, not observed CDN behavior. Control verifies pipeline, not hypothesis risk.",
+      "severity": "high",
+      "evidence_ref": "result.json decompressed_hash_variation all_same true 8/8 state-cells, controls C_DECOMPRESSION_DETERMINISM pass true, prereg.md 9.4, run_experiment.py fingerprint_decompressed brotli.decompress"
+    },
+    {
+      "finding": "Hash-randomization threatens reproducibility: quality_rng seed = SEED + hash(condition) % 10000 uses Python hash() which is randomized per process via PYTHONHASHSEED. With single condition DECOMPRESSED-VARYING-BROTLI, actual seed becomes 44+9617=9661 on this run (hash=-2406484116128570383) but varies across CI runs unless PYTHONHASHSEED=0 is set. Provenance reports seed 44 but does not log actual quality sequence per request; raw_observations lack quality field. Reproducibility not guaranteed.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35130682006/run_experiment.py:509 quality_rng = random.Random(SEED + hash(condition) % 10000), provenance.json frozen_parameters SEED 44, raw_observations.json no quality column"
+    },
+    {
+      "finding": "Body-size/content-type/single-seed limitation: single uncompressed size ~999B valid (x*924) highly compressible vs parent random hex, single JSON content-type, single seed 44. Compression collapse and discrimination (compressed 0.4329 vs parent 0.2286) are size/compressibility-dependent. Error bodies 26B (userinfo) and 32-43B (introspect) show size-dependent insensitivity (1 vs 2 uniques). No KB/MB-scale, HTML/XML/binary, or seed-variability test.",
+      "severity": "medium",
+      "evidence_ref": "run_experiment.py MockOAuthHandler body_size 1024 x*924, result.json body_sizes userinfo 30B error 69-71B valid introspect 41-46B error 36B valid, validity_notes 'Body size ~1024 bytes', unresolved list generalizes"
+    },
+    {
+      "finding": "Three-way error collapse caps /userinfo discrimination at 0.5: no_auth/expired/invalid share decompressed fingerprint 1c400c5c... identical across 20 reps, valid_token distinct. Intra_match_rate 1.0, inter_match_rate 0.5 (1200/2400 error-error matches), discrimination 0.5. Report correctly notes ceiling but naive 0.5 reading overstates body discrimination; isolation relies on /introspect where status_only 0.0 vs decompressed 0.8333 proves body signal. Introspect decompressed 0.8333 is correctly computed (intra 1.0 inter 0.1666) due to 2 error states sharing body.",
+      "severity": "medium",
+      "evidence_ref": "result.json /userinfo decompressed 0.5 status 0.5 /introspect decompressed 0.8333 status 0.0, raw_observations fingerprint_decompressed no_auth==expired==invalid, spec.json measurement_validity 'Error bodies identical capping ceiling 0.5'"
+    },
+    {
+      "finding": "Quality-variation control fails on /userinfo error states: C_QUALITY_VARIATION_ACTIVE expects compressed unique >1 for all states, observed no_auth 1/20 invalid 1/20 expired 1/20 valid 2/20 -> pass false. Producer correctly marks control false and discloses body-size insensitivity. For /introspect, all 4 states now show 2/20 (vs parent 1/20 for 3 errors), answering frozen question second clause partially: /introspect compressed variation now >1 for error bodies (41-46B) due to 2 effective brotli outputs, while /userinfo errors remain 1.",
+      "severity": "medium",
+      "evidence_ref": "result.json controls C_QUALITY_VARIATION_ACTIVE observed {no_auth:1,invalid:1,expired:1,valid:2} pass false, /introspect compressed_hash_variation 2/20 all states vs parent 1/20, report.md C_QUALITY_VARIATION_ACTIVE row"
+    },
+    {
+      "finding": "No leakage or instrumentation tampering: recomputed discrimination from raw_observations.json fingerprints matches result.json exactly (max_abs_diff 0.0 for decompressed/status/compressed). Content-Encoding verified 'br' 160/160, 0 pipeline errors, 160/160 requests present (1x4x20x2). Fingerprint functions SHA256(repr((status,body_hash,''))) correctly applied after Content-Encoding removal.",
+      "severity": "none",
+      "evidence_ref": "raw_observations.json 160 observations (2 endpoints x4 states x20), result.json controls C_NO_PIPELINE_ERRORS 0, recomputed_metrics max_abs_diff 0.0, run_experiment.py fingerprint_* functions"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-DECOMPRESSED-VARYING-GZIP",
+      "expected": "0.5 decompressed on /userinfo and /introspect, algorithm-equivalence |0.5 - brotli| <0.1 (PARENT reference not re-executed)",
+      "observed": "0.5 (parent result.json /userinfo_DECOMPRESSED-VARYING-GZIP 0.5, /introspect 0.5)",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35058619700/result.json /userinfo_DECOMPRESSED-VARYING-GZIP decompressed 0.5, /introspect 0.5, audit.json recomputed max_abs_diff 0.0, provenance.json parent_reference_data B_DECOMPRESSED_VARYING_GZIP 0.5",
+      "strength": "strong for reference but weak for live comparison - not re-executed, inherits parent synthetic gzip collapse to 3-4 outputs, seed 44"
+    },
+    {
+      "baseline_id": "B-DECOMPRESSED-VARYING-BROTLI-FIXED",
+      "expected": ">=0.5 decompressed on /userinfo under brotli {4,5,6,7,8} (H1), within-state decompressed unique 1/20",
+      "observed": "0.5 on /userinfo (structural ceiling), 0.8333 on /introspect, decompressed unique 1/20 all 4 states both endpoints",
+      "verdict": "PASS",
+      "evidence_ref": "result.json /userinfo_DECOMPRESSED-VARYING-BROTLI decompressed 0.5, /introspect 0.8333, decompressed_hash_variation all_same true, recomputed 0.5 and 0.8333 match",
+      "strength": "strong for decompression determinism but bounded to synthetic brotli.decompress, 1KB compressible JSON, effective binary diversity not 5 distinct"
+    },
+    {
+      "baseline_id": "B-COMPRESSED-VARYING-BROTLI-FIXED",
+      "expected": "<0.35 on /userinfo (H3) - replicating binary {4,8} 0.2286 with broader spread",
+      "observed": "0.4328947368421052 on /userinfo, 0.576666 on /introspect",
+      "verdict": "FAIL - exceeds 0.35 threshold, less degradation than parent binary (0.4329 vs 0.2286)",
+      "evidence_ref": "result.json /userinfo_DECOMPRESSED-VARYING-BROTLI compressed 0.4329, /introspect 0.5766, parent /userinfo 0.2286, recomputed 0.4328947368421052 matches",
+      "strength": "moderate - quality variation active only 2/20 valid 1/20 error so compressed degradation underestimated; H3 falsified in this compressible-payload setting"
+    },
+    {
+      "baseline_id": "B-STATUS-ONLY",
+      "expected": "0.5 on /userinfo, 0.0 on /introspect, compression-immune (PARENT reference)",
+      "observed": "0.5 on /userinfo, 0.0 on /introspect (both endpoints, this experiment)",
+      "verdict": "PASS",
+      "evidence_ref": "result.json /userinfo status_only 0.5, /introspect 0.0, recomputed 0.5/0.0, parent 0.5/0.0",
+      "strength": "strong - invariant across brotli qualities, isolates body signal"
+    },
+    {
+      "baseline_id": "B-RANDOM",
+      "expected": "~0.0 null (no spurious structure)",
+      "observed": "0.0 on /userinfo and /introspect, controls C_NULL_CONTROL pass true",
+      "verdict": "PASS",
+      "evidence_ref": "result.json baselines B-RANDOM 0.0, controls C_NULL_CONTROL observed [0.0] pass true, recomputed 0.0",
+      "strength": "strong - no leakage"
+    },
+    {
+      "baseline_id": "C_ALGORITHM_EQUIVALENCE",
+      "expected": "|B-DECOMPRESSED-VARYING-GZIP(parent=0.5) - B-DECOMPRESSED-VARYING-BROTLI-FIXED| <0.1",
+      "observed": "0.0",
+      "verdict": "PASS for tested synthetic distribution, but bounded to effective binary brotli not 5 distinct",
+      "evidence_ref": "result.json controls C_ALGORITHM_EQUIVALENCE observed 0.0 pass true, recomputed 0.0, parent 0.5",
+      "strength": "weak for 'full 5-level' claim - passes because decompression is lossless regardless of quality collapse; does not test intermediate levels distinctness"
+    },
+    {
+      "baseline_id": "C_DECOMPRESSION_DETERMINISM",
+      "expected": "within-state decompressed unique 1/20 all states",
+      "observed": "true for all 4 states both endpoints",
+      "verdict": "PASS",
+      "evidence_ref": "result.json decompressed_hash_variation all 1/20, controls C_DECOMPRESSION_DETERMINISM pass true, recomputed unique 1",
+      "strength": "strong as code correctness, none as CDN evidence"
+    },
+    {
+      "baseline_id": "C_QUALITY_VARIATION_ACTIVE",
+      "expected": "compressed unique >1 for all states (5 levels produce different bytes)",
+      "observed": "no_auth 1, invalid 1, expired 1, valid 2 on /userinfo",
+      "verdict": "FAIL",
+      "evidence_ref": "result.json controls C_QUALITY_VARIATION_ACTIVE observed {1,1,1,2} pass false, raw_observations unique_count 1/20 error states",
+      "strength": "strong failure - quality variation inactive for tiny error bodies (26B uncompressed), active only for larger payloads with 2 effective outputs"
+    }
+  ],
+  "recomputed_metrics": {
+    "recomputed_from": "research/experiments/EXP-RUNTIME-35130682006/raw_observations.json (160 observations: 1 condition x2 endpoints x4 states x20 reps) using discrimination = intra_match_rate - inter_match_rate per run_experiment.py compute_discrimination_score; fingerprints via SHA256(repr((status,body_hash,''))) with body_hash = SHA256(compressed_bytes) or SHA256(decompressed_bytes)",
+    "match_reported": true,
+    "max_abs_diff": 0.0,
+    "per_cell": {
+      "/userinfo_DECOMPRESSED-VARYING-BROTLI": {
+        "compressed_body_only_discrimination": 0.4328947368421052,
+        "recomputed_compressed": 0.4328947368421052,
+        "decompressed_body_only_discrimination": 0.5,
+        "recomputed_decompressed": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_status": 0.5,
+        "intra_compressed": 0.9328947368421052,
+        "inter_compressed": 0.5
+      },
+      "/introspect_DECOMPRESSED-VARYING-BROTLI": {
+        "compressed_body_only_discrimination": 0.5766666666666667,
+        "recomputed_compressed": 0.5766666666666667,
+        "decompressed_body_only_discrimination": 0.8333333333333334,
+        "recomputed_decompressed": 0.8333333333333334,
+        "status_only_discrimination": 0.0,
+        "recomputed_status": 0.0,
+        "intra_compressed": 0.7,
+        "inter_compressed": 0.12333333333333334
+      }
+    },
+    "controls_recomputed": {
+      "C_DECOMPRESSION_DETERMINISM": {
+        "expected": "within-state decompressed unique 1/20 all states",
+        "observed": {
+          "no_auth": 1,
+          "invalid_token": 1,
+          "expired_token": 1,
+          "valid_token": 1
+        },
+        "recomputed": {
+          "no_auth": 1,
+          "invalid_token": 1,
+          "expired_token": 1,
+          "valid_token": 1
+        },
+        "pass": true
+      },
+      "C_QUALITY_VARIATION_ACTIVE": {
+        "expected": "compressed unique >1 all states on /userinfo",
+        "observed": {
+          "no_auth": 1,
+          "invalid_token": 1,
+          "expired_token": 1,
+          "valid_token": 2
+        },
+        "recomputed": {
+          "no_auth": 1,
+          "invalid_token": 1,
+          "expired_token": 1,
+          "valid_token": 2
+        },
+        "pass": false,
+        "note": "Fails for 3 error states (tiny payload 26B); introspect all 4 states show 2/20 due to 41-46B bodies yielding 2 effective brotli outputs"
+      },
+      "C_ALGORITHM_EQUIVALENCE": {
+        "expected": "|0.5 - 0.5| <0.1",
+        "observed": 0.0,
+        "recomputed": 0.0,
+        "pass": true
+      },
+      "C_NULL_CONTROL": {
+        "expected": "B-RANDOM ~0.0",
+        "observed": 0.0,
+        "recomputed": 0.0,
+        "pass": true
+      },
+      "C_NO_PIPELINE_ERRORS": {
+        "expected": 0,
+        "observed": 0,
+        "recomputed": "160/160 present, 0 errors, Content-Encoding br 160/160",
+        "pass": true
+      }
+    },
+    "effective_brotli_diversity": {
+      "userinfo_valid_999B": "2 distinct across q4 vs q5-8 (71B vs 69B)",
+      "userinfo_error_26B": "1 distinct across all 5 (30B identical)",
+      "introspect_valid_32B": "2 distinct (36B q4 hex 8b0f vs q5-8 hex 1b1f but same size)",
+      "introspect_invalid_43B": "2 distinct (46B q4 vs 41B q5-8)",
+      "introspect_expired_43B": "2 distinct (46B q4 vs 43B q5-8)",
+      "interpretation": "5-level selection collapses to at most 2 effective compressed variants for tested payloads, not 5"
+    }
+  },
+  "claim_ceiling": "Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress after Content-Encoding:br removal) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under synthetic brotli quality selection from set {4,5,6,7,8} via local Python proxy (N=20 per state, seed 44, 1KB highly compressible JSON valid body ~999B ->69-71B brotli, error 26B->30B) - result.json DECOMPRESSED-VARYING-BROTLI decompressed 0.5/0.8333. Algorithm-equivalence |gzip - brotli| =0.0 holds for this synthetic distribution, but effective brotli diversity is 2 variants (q4 vs q5-8 identical) not 5 distinct; for tiny error bodies only 1 variant. Claim is BOUNDED to: synthetic proxy with mtime=0 deterministic proxy, mock OAuth2 4 states with 3-way error collapse, single compressible payload distribution, single seed 44 with hash() non-determinism caveat. NOT justified for: real-CDN (Cloudflare/Fastly/Akamai) universal deployment, non-JSON or MB-scale, incompressible/random bodies where q5-7 may diverge, missing/incorrect/double Content-Encoding, production latency, or claim of 5 distinct quality-level resistance. Compressed-byte-only hashing degrades to 0.4329 on /userinfo (above 0.35 threshold, so H3 falsified here) and more importantly is body-size dependent.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35130682006/spec.json - frozen claim_ids C-MEAS-VALID, decision_rule SURVIVES if (1)decompressed variation 0 (2)B-RANDOM~0 (3)decompressed>=0.5 (4)|gzip-brotli|<0.1",
+    "research/experiments/EXP-RUNTIME-35130682006/prereg.md - H1 decompression preserves 0.5 under {4,5,6,7,8}, H2 |diff|<0.1 algorithm-agnostic, H3 compressed <0.35, controls determinism=0 null~0, condition N=20 x4x2=160",
+    "research/experiments/EXP-RUNTIME-35130682006/freeze.json - frozen_at 2026-09-16T17:54:28",
+    "research/experiments/EXP-RUNTIME-35130682006/result.json - metrics 0.4329/0.5/0.5 userinfo 0.5766/0.8333/0.0 introspect, controls 7 (C_DECOMPRESSION_DETERMINISM pass true, C_QUALITY_VARIATION_ACTIVE pass false, C_ALGORITHM_EQUIVALENCE 0.0 pass true)",
+    "research/experiments/EXP-RUNTIME-35130682006/raw_observations.json - 160 observations (1x2x4x20) with fingerprint_compressed/decompressed/status, body_hash_compressed, body_size, Content-Encoding br 160/160, recomputed max_abs_diff 0.0",
+    "research/experiments/EXP-RUNTIME-35130682006/run_experiment.py - BROTLI_QUALITY_RANGE=(4,5,6,7,8) line 60, _get_brotli_quality randint(0,len-1) line 229, BODY_SIZE 1024 x*924, quality_rng = random.Random(SEED+hash(condition)%10000) line 509, fingerprint functions",
+    "research/experiments/EXP-RUNTIME-35130682006/provenance.json - python 3.12.14 brotli 1.2.0, 160 requests, SEED 44, BROTLI_QUALITY_RANGE [4,5,6,7,8], bug_fix corrected from (4,8)",
+    "research/experiments/EXP-RUNTIME-35130682006/report.md - SUPPORTS outcome, controls table, H1 SURVIVES H2 SURVIVES H3 PARTIALLY SUPPORTED, claim broadens to full 5-level",
+    "research/experiments/EXP-RUNTIME-35058619700/result.json - parent DECOMPRESSED-VARYING-GZIP 0.5/0.5, DECOMPRESSED-VARYING-BROTLI binary {4,8} 0.5, compressed 0.2286/0.3803, body_sizes valid 1071-1094 vs error 64-65",
+    "research/experiments/EXP-RUNTIME-35058619700/audit.json - REVISE status, BROTLI_QUALITY_RANGE=(4,8) bug high severity, recomputed max_abs_diff 0.0, claim_ceiling bounded to binary",
+    "research/experiments/EXP-RUNTIME-35058619700/handoff.json - next_question fix to (4,5,6,7,8) and re-execute, carry_forward established/rejected/unknown/do_not_assume",
+    "local brotli verification - brotli.compress 5 qualities identical for q5-8: userinfo valid 71 vs 69, error 30 identical, introspect valid 36 q4 distinct vs 36 q5-8, invalid 46 vs 41, expired 46 vs 43 - 2 effective variants not 5"
+  ],
+  "unresolved": [
+    "Does decompression-normalization survive real CDN infrastructure with per-edge quality variation, caching, chunked transfer-encoding, load-balancing and Accept-Encoding negotiation (inherited next_question remains untested)?",
+    "Would 5 distinct brotli outputs emerge for larger or incompressible payloads (2KB+, random bytes, HTML/XML/binary) where qualities 5,6,7 diverge from 8, and would algorithm-equivalence still hold there?",
+    "Is compressed-varying threshold <0.35 robust across seeds with proper deterministic seed derivation and across body sizes/content-types where effective brotli diversity may exceed 2?",
+    "What is latency cost of per-response brotli decompression before hashing at production scale (1KB ~0.003s in proxy, MB-scale unknown)?",
+    "What is behavior when Content-Encoding is missing, incorrect, or double-encoded - fallback not tested?",
+    "Does /introspect compressed variation >1 for error bodies generalize beyond 41-46B introspect errors to userinfo 26B errors (currently 1 unique) at larger error payloads?",
+    "Does hash()-based seed randomization affect quality distribution sampling across CI runs with different PYTHONHASHSEED, and should quality per request be logged explicitly?"
+  ]
+}
