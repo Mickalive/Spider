@@ -1,0 +1,337 @@
+{
+  "experiment_id": "EXP-PHYSICS-35040401992",
+  "lane": "physics",
+  "seed": 42,
+  "n_trajectories_per_condition": 200,
+  "n_steps": 10,
+  "n_sessions": 20,
+  "n_perms": 1000,
+  "ceiling_check": {
+    "H_S_next_given_URL_HK_3_SD": 1.345794204418461,
+    "H_S_next_given_URL_HK_3_SI": 1.3898624772926804,
+    "H_S_next_given_URL_HK_1_SD": 1.5793589896318376,
+    "ceiling_eliminated": true
+  },
+  "per_k_results": {
+    "1": {
+      "state_dependent": {
+        "observed_pmi": 1.579358989631839,
+        "perm_mean": 0.6558387947379131,
+        "bias_corrected_pmi": 0.9235201948939259,
+        "perm_p_raw": 0.0,
+        "perm_p_bonf": 0.0,
+        "perm_null_std": 0.020080423305492062
+      },
+      "state_independent": {
+        "observed_pmi": 0.0,
+        "perm_mean": 0.0,
+        "bias_corrected_pmi": 0.0,
+        "perm_p_raw": 1.0,
+        "perm_p_bonf": 1.0,
+        "perm_null_std": 0.0
+      }
+    },
+    "3": {
+      "state_dependent": {
+        "observed_pmi": 1.3457942044184616,
+        "perm_mean": 0.9766660901552943,
+        "bias_corrected_pmi": 0.3691281142631674,
+        "perm_p_raw": 0.0805,
+        "perm_p_bonf": 0.322,
+        "perm_null_std": 0.03793793636855818
+      },
+      "state_independent": {
+        "observed_pmi": 0.0,
+        "perm_mean": 0.0,
+        "bias_corrected_pmi": 0.0,
+        "perm_p_raw": 1.0,
+        "perm_p_bonf": 1.0,
+        "perm_null_std": 0.0
+      },
+      "cardinality": {
+        "state_dependent": {
+          "all_pass": true,
+          "strata": [
+            {
+              "key": "('/', ('START', 'START', 'advance'))",
+              "N": 109,
+              "n_unique": 20,
+              "ratio": 0.1834862385321101,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'branch'))",
+              "N": 57,
+              "n_unique": 18,
+              "ratio": 0.3157894736842105,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'))",
+              "N": 210,
+              "n_unique": 146,
+              "ratio": 0.6952380952380952,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'))",
+              "N": 212,
+              "n_unique": 157,
+              "ratio": 0.7405660377358491,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'))",
+              "N": 208,
+              "n_unique": 149,
+              "ratio": 0.7163461538461539,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'))",
+              "N": 202,
+              "n_unique": 142,
+              "ratio": 0.7029702970297029,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'))",
+              "N": 206,
+              "n_unique": 146,
+              "ratio": 0.7087378640776699,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'))",
+              "N": 197,
+              "n_unique": 143,
+              "ratio": 0.7258883248730964,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'START', 'branch'))",
+              "N": 91,
+              "n_unique": 20,
+              "ratio": 0.21978021978021978,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'branch'))",
+              "N": 57,
+              "n_unique": 18,
+              "ratio": 0.3157894736842105,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'))",
+              "N": 197,
+              "n_unique": 154,
+              "ratio": 0.7817258883248731,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'advance'))",
+              "N": 52,
+              "n_unique": 18,
+              "ratio": 0.34615384615384615,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'))",
+              "N": 168,
+              "n_unique": 119,
+              "ratio": 0.7083333333333334,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'advance'))",
+              "N": 34,
+              "n_unique": 17,
+              "ratio": 0.5,
+              "pass": true
+            }
+          ]
+        },
+        "state_independent": {
+          "all_pass": true,
+          "strata": [
+            {
+              "key": "('/', ('START', 'START', 'advance'))",
+              "N": 81,
+              "n_unique": 1,
+              "ratio": 0.012345679012345678,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'advance'))",
+              "N": 47,
+              "n_unique": 1,
+              "ratio": 0.02127659574468085,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'advance'))",
+              "N": 204,
+              "n_unique": 1,
+              "ratio": 0.004901960784313725,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'advance', 'branch'))",
+              "N": 204,
+              "n_unique": 1,
+              "ratio": 0.004901960784313725,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'branch'))",
+              "N": 188,
+              "n_unique": 1,
+              "ratio": 0.005319148936170213,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'branch'))",
+              "N": 201,
+              "n_unique": 1,
+              "ratio": 0.004975124378109453,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'branch', 'advance'))",
+              "N": 205,
+              "n_unique": 1,
+              "ratio": 0.004878048780487805,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'advance'))",
+              "N": 210,
+              "n_unique": 1,
+              "ratio": 0.004761904761904762,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'START', 'branch'))",
+              "N": 119,
+              "n_unique": 1,
+              "ratio": 0.008403361344537815,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'branch'))",
+              "N": 62,
+              "n_unique": 1,
+              "ratio": 0.016129032258064516,
+              "pass": true
+            },
+            {
+              "key": "('/', ('advance', 'branch', 'advance'))",
+              "N": 198,
+              "n_unique": 1,
+              "ratio": 0.005050505050505051,
+              "pass": true
+            },
+            {
+              "key": "('/', ('branch', 'advance', 'branch'))",
+              "N": 190,
+              "n_unique": 1,
+              "ratio": 0.005263157894736842,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'branch', 'advance'))",
+              "N": 57,
+              "n_unique": 1,
+              "ratio": 0.017543859649122806,
+              "pass": true
+            },
+            {
+              "key": "('/', ('START', 'advance', 'branch'))",
+              "N": 34,
+              "n_unique": 1,
+              "ratio": 0.029411764705882353,
+              "pass": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "discrimination": {
+    "K3": {
+      "diff_bc_pmi": 0.3691281142631674,
+      "paired_perm_p": 0.0,
+      "diff_ge_005": true,
+      "paired_p_lt_005": true
+    },
+    "K1": {
+      "diff_bc_pmi": 0.9235201948939259,
+      "paired_perm_p": 0.261,
+      "diff_ge_005": true,
+      "paired_p_lt_005": false
+    }
+  },
+  "controls": {
+    "positive_control_session_randomized": {
+      "description": "Replace session_id with random from different trajectory; response->state mapping broken",
+      "bias_corrected_pmi": 0.1375137375935691,
+      "min_perm_null_std": 0.0,
+      "pass_criterion": "|0.137514| < 3 * 0.000000 = 0.000000",
+      "pass": false
+    },
+    "null_control_shuffled_labels": {
+      "description": "Permute response labels within strata; breaks R->S pairing",
+      "mean_shuffled_pmi": 0.7569544627096019,
+      "std_shuffled_pmi": 0.5061472412633807,
+      "pass_criterion": "|0.756954| < 3 * 0.506147 = 1.518442",
+      "pass": true
+    },
+    "state_independent_baseline": {
+      "description": "Same FSM, constant responses; expected BC PMI = 0",
+      "K1_BC_PMI": 0.0,
+      "K3_BC_PMI": 0.0,
+      "pass": true
+    },
+    "determinism_check": {
+      "state_dependent": {
+        "total_groups": 60,
+        "deterministic_groups": 0,
+        "accuracy": 0.0,
+        "pass": false
+      },
+      "state_independent": {
+        "total_groups": 60,
+        "deterministic_groups": 60,
+        "accuracy": 1.0,
+        "pass": true
+      }
+    }
+  },
+  "action_history_accuracy": {
+    "K1": 0.3685,
+    "K2": 0.413,
+    "K3": 0.486,
+    "frequency_baseline": 0.3605
+  },
+  "plug_in_mi_uncorrected": {
+    "SD_K1": 1.579358989631839,
+    "SD_K3": 1.3457942044184616,
+    "SI_K1": 0.0,
+    "SI_K3": 0.0
+  },
+  "total_transitions": {
+    "state_dependent": 2000,
+    "state_independent": 2000
+  },
+  "decision": "FALSIFIED-IN-SETTING",
+  "decision_criteria": {
+    "C1_ceiling_eliminated": true,
+    "C2_BC_PMI_gt_005_bonf_lt_0125": false,
+    "C3_SD_gt_SI_by_005_paired_p_lt_005": true,
+    "C4_positive_control_pass": false,
+    "C5_determinism_pass": false,
+    "C6_data_quality": true,
+    "C7_cardinality_bounded": true
+  }
+}
