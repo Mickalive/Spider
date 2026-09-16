@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "why_next": "The substrate ceiling has been extended from 0-729 bytes to 100KB JSON under synthetic deterministic compression. The next material question is whether body-only discrimination survives real CDN infrastructure where non-deterministic compression, caching layers, chunked transfer encoding, and load-balancing across CDN edges may introduce hash instability. This is the minimum unblocked path toward unconditional production deployment. Further synthetic probing (larger sizes, more content types) is lower information gain than real-CDN validation because the synthetic result is now strong and the ceiling is bounded by the real-CDN gap.",
+  "carry_forward": {
+    "established": [
+      "Body-only (SHA256(status, compressed_body_sha256, '')) discrimination is preserved at 0.5 on /userinfo and /introspect under synthetic deterministic CDN proxy (Python brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB (2060B), 10KB (20492B), and 100KB (204812B) uncompressed sizes — EXP-RUNTIME-34902094115 result.json, all 18 cells (3 sizes x 3 profiles x 2 endpoints), audit.json PASS",
+      "Within-state compressed body hash variation is 0/10 across all 54 state x profile x size cells on /introspect and all 54 on /userinfo (108 total cells), confirming code-level determinism of brotli quality 6 and gzip level 9 mtime=0 at KB-scale — EXP-RUNTIME-34902094115 result.json M_WITHIN_STATE_VARIATION, audit.json compression determinism verified",
+      "Cross-client pooled discrimination (Client A brotli + Client C identity) degrades to 0.2237 from 0.5 single-client at all three body sizes, confirming different Accept-Encoding produces different compressed bytes causing hash divergence — EXP-RUNTIME-34902094115 result.json M_MIXED_CLIENT_DISCRIMINATION and M_CROSS_CLIENT_DIVERGENCE",
+      "Status-only discrimination remains 0.5 on /userinfo and 0.0 on /introspect invariant across all client profiles and body sizes, confirming status is compression-immune — EXP-RUNTIME-34902094115 result.json M_STATUS_ONLY_INVARIANCE",
+      "Body-only discrimination adds no incremental value over status-only on /userinfo (both 0.5) but is incremental on /introspect (body 0.5 vs status 0.0) where all states return HTTP 200 — EXP-RUNTIME-34902094115 result.json, audit.json baseline_findings",
+      "4 auth states (no_auth, valid_token, expired_token, invalid_token) collapse to 3 distinguishable groups (valid vs expired/invalid vs no_auth) capping discrimination ceiling at 0.5 on /userinfo — EXP-RUNTIME-34902094115 audit.json validity_findings (low severity: 3-way error collapse)",
+      "Substrate ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to at least 100KB JSON under deterministic compression — EXP-RUNTIME-34902094115 verdict, all 8 decision rule conditions pass at every body size"
+    ],
+    "rejected": [
+      "Unfiltered full-vector (status+headers+body_hash) as reliable production fingerprint under infrastructure header noise — collapses to 0.0 at noise>=2 (parent EXP-RUNTIME-34509593940)",
+      "WWW-Authenticate as general-purpose Keycloak-level auth-state signal — endpoint-specific (parent EXP-RUNTIME-34439061845)",
+      "Cache-Control error-type variation as discriminating signal — confirmed falsified (parent EXP-RUNTIME-34509593940)",
+      "Body-only discrimination does NOT degrade under non-deterministic compression — falsified (degrades rho -0.948 under per-request random compression, parent EXP-RUNTIME-34654566605)",
+      "Body-only architecture is universally superior to full-vector — narrowed (body-only fails under random compression; status-only is compression-immune and equal on /userinfo)"
+    ],
+    "unknown": [
+      "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, varying quality/compression levels, caching, chunked transfer, and load-balancing?",
+      "Does body-only discrimination survive non-deterministic compression quality levels (e.g., brotli quality varies by server load)?",
+      "Does body-only discrimination generalize to non-JSON content types (HTML, XML, binary) at KB-scale where compression dictionaries differ?",
+      "What discrimination floor remains when hashing decompressed bodies (normalization layer that decompresses via Content-Encoding before hashing)?",
+      "Would a filtered full-vector baseline (status+filtered headers+body_hash excluding infrastructure headers) retain higher discrimination than body-only and survive compression at KB-scale?",
+      "Does result generalize to MB-scale responses where compression chunking/windowing may trigger different determinism properties?",
+      "Does result generalize to production OAuth2 providers (Auth0, Okta) or production Keycloak with real CDN and load-balancer?"
+    ],
+    "do_not_assume": [
+      "Do not assume this experiment's result applies to real CDNs — evidence bounded to synthetic deterministic Python HTTPServer proxy on mock OAuth2 server (audit.json validity_findings)",
+      "Do not assume within-state determinism is an empirical discovery about real CDN behavior — it is guaranteed by construction (Python gzip mtime=0, brotli fixed quality are deterministic functions; audit.json validity_findings)",
+      "Do not assume the proxy reads per-request Accept-Encoding headers — implementation uses a class variable set once per client profile in start_proxy(), not per-request header parsing (audit.json validity_findings)",
+      "Do not assume body-only provides incremental discrimination over status-only on endpoints where status codes discriminate (e.g., /userinfo 200 vs 401) — body-only=status-only=0.5 on /userinfo (audit.json baseline_findings)",
+      "Do not assume the mixed-client result (0.2237) represents alternating requests to a single concurrent proxy — it is computed post-hoc by pooling fingerprints from sequential profile blocks (audit.json validity_findings)",
+      "Do not assume the 3-way error collapse (expired_token identical to invalid_token identical to no_auth) represents general endpoint behavior — this is specific to the mock OAuth2 4-state construction (audit.json validity_findings, result.json body_sizes show identical error bodies)",
+      "Do not assume expired_token represents true Keycloak-issued expired tokens — locally-signed HS256 construction",
+      "Do not assume the 100KB ceiling extends to MB-scale — chunking/windowing at larger sizes may trigger different determinism properties",
+      "Do not assume the mock OAuth2 server behaves identically to real IdP servers under load or varying network conditions"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-34902094115/result.json",
+    "research/experiments/EXP-RUNTIME-34902094115/audit.json",
+    "research/experiments/EXP-RUNTIME-34902094115/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-34902094115/spec.json",
+    "research/experiments/EXP-RUNTIME-34902094115/prereg.md",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json",
+    "research/claims/registry.json"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34902094115/result.json — all 18 cells body_only_discrimination=0.5, controls all 8 conditions PASS at 1KB/10KB/100KB, M_WITHIN_STATE_VARIATION deterministic, M_MIXED_CLIENT_DISCRIMINATION=0.2237, M_CROSS_CLIENT_DIVERGENCE divergent=true all states",
+    "research/experiments/EXP-RUNTIME-34902094115/audit.json — status=PASS, producer_claim_supported=true, recomputed metrics match, claim_ceiling bounded to synthetic deterministic proxy, 7 validity findings (2 low severity)",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json — brotli 1.2.0 quality=6, gzip level=9 mtime=0, mock OAuth2 port 5000, proxy port 5001, seed=44, 720 requests",
+    "research/experiments/EXP-RUNTIME-34902094115/report.md — Section 7 interpretation, Section 8 product consequences",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json — parent carry_forward establishing body-only at 0.5 for 0-729 bytes, ceiling now extended by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status EXPERIMENTAL"
+  ],
+  "recommended_action": "Design a real-CDN validation experiment: deploy the same mock OAuth2 server behind Cloudflare or Fastly (or equivalent), test body-only discrimination on JSON responses at 1KB, 10KB, 100KB with real Accept-Encoding negotiation, varying quality levels, and multiple CDN edge requests. If body-only survives, the claim ceiling extends to production CDN conditions and product promotion becomes appropriate. If body-only fails under real CDN, test decompression-normalization (hash on decompressed body) and filtered full-vector as fallback strategies. Do not repeat synthetic deterministic probing — the ceiling is bounded by the real-CDN gap."
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Primary test condition K=3 has H(S_next|URL,H_K=3)=0 exactly on the 5-state linear FSM (audit V1, severity critical): all K=3 strata are single-valued for S_next, making I(S_next; Response_before|URL,H_K=3)=0 a priori impossible for ANY Response_before. This is an environment ceiling, not a negative scientific result. The producer's FALSIFIES outcome is not justified: you cannot falsify a claim by testing it in an environment where the effect is mathematically impossible. At K=1 (H=0.4 bits, where action-history is insufficient), the same state-dependent response DOES carry significant conditional PMI (BC=0.386 bits, Bonferroni p=0.004 < 0.0125, cardinality |R|/N=0.05 non-degenerate), demonstrating network-response payload structure CAN carry predictive information when transitions are not fully determined by history. K=3 controls are degenerate (null_std=0, audit V4) and do not stress the pipeline. The claim remains HYPOTHESIS pending a branching FSM experiment where H(S_next|URL,H_K=3) > 0.2 bits."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+  "reason": "The experiment is MEASUREMENT_INVALID for the following reasons grounded in audit evidence: (1) V1 critical: K=3 ceiling is H=0 exactly — the 5-state linear FSM has deterministic single-action-per-state transitions, so action-history at K>=2 fully determines S_next, making response PMI identically 0 for any observable. Testing at K=3 is a priori impossible. (2) V5 high: The producer ignored significant K=1 results (BC PMI=0.386 bits, Bonferroni p=0.004) that demonstrate network-response DOES carry predictive information when history is insufficient (H=0.4 bits). This positive signal at K=1 is the strongest finding in the experiment and contradicts the producer's broad FALSIFIES claim. (3) V4 high: Controls at K=3 are degenerate (null_std=0.0, pass criterion |0|<3*0=0) and non-discriminating — they pass trivially regardless of observation quality. (4) V2 medium: Session assignment uses deterministic round-robin instead of preregistered independent uniform sampling. (5) V3 medium: Determinism check groups by trajectory index instead of session_id per spec. (6) V6 low: Provenance lacks raw data hashes and github_run_id. The audit's required_fixes correctly identify the path forward: redesign FSM with branching transitions to create H>0 at K=3, then rerun the network-response PMI test.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:status REVISE, producer_claim_supported false, validity_findings V1 severity critical (H=0 ceiling), V5 severity high (K=1 PMI 0.386 bits ignored), V4 severity high (degenerate controls), claim_ceiling (bounded FALSIFIED-IN-SETTING for linear FSM K>=2 only)",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:recomputed_metrics sd_bias_corrected_pmi_k1=0.3856, sd_perm_p_bonf_k1=0.003996, H_S_next_given_URL_HK_1=0.4, H_S_next_given_URL_HK_3=0.0, determinism_correct_total_triples=100",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:metrics per_k_results.1.state_dependent raw_pmi=0.40 bias_corrected_pmi=0.386 perm_p_bonf=0.004, per_k_results.3 cardinality all_pass true ratio 0.05",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:controls positive_control_session_randomized pass_criterion '|0.000000| < 3 * 0.000000 = 0.000000' (degenerate), null_control_shuffled_labels result PASS (degenerate at K=3)",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json:decision_rule criterion_1 (K=3 PMI>0.05) criterion_2 (SD>SI) criterion_6 (|R|<0.8N)",
+    "research/experiments/EXP-PHYSICS-34932344937/prereg.md:11.4 FSM Linearity acknowledged threat, 12.2 FALSIFIED-IN-SETTING criteria",
+    "research/experiments/EXP-PHYSICS-34932344937/freeze.json:hashes prereg.md 230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb spec.json 5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598",
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json:carry_forward, next_question (parent DOM-hash MEASUREMENT_INVALID)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS",
+    "research/EXPERIMENT_PACKET.md:7 verdict.json required fields, 8 handoff.json required fields"
+  ]
+}

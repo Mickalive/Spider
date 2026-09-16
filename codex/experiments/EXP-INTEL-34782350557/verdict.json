@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34782350557",
+  "lane": "intel",
+  "decision": "INCONCLUSIVE",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded diagnostic: under truncated-first-20 sampling of DEF-FALLBACK-INTERACTIVE locatable set, role-only counting yields ordering cart>listing>detail (reversal), but audit extrapolation to full DOM restores listing 0.019 > detail 0.006 > cart 0.0055. The reversal is an artifact of differential sample truncation and total_dom denominator variation, not evidence that the tightened definition per se destroys ordering. Original definition overcount confirmed (~10x reduction). Within-type stability preserved (listing CV 0.005, detail CV 0.037). Between-type discrimination holds but magnitude is definition- and denominator-sensitive (ratio 60 deduped vs parent 582). Full DOM enumeration required for definitive construct validity test. C-MEAS-VALID remains EXPERIMENTAL: metric captures real interactive elements beyond form scaffolding, but ordering robustness and denominator choice are unresolved."
+    },
+    {
+      "claim_id": "C-CROSSSITE",
+      "status": "HYPOTHESIS",
+      "reason": "Not tested in this experiment. Single-site (Magento) measurement only. Cross-site generalization remains a hypothesis."
+    },
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "HYPOTHESIS",
+      "reason": "Not tested in this experiment. LLM inheritance claim is orthogonal to metric validation."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can element density normalized by elements_with_bbox (rather than total_dom) resolve the denominator sensitivity that confounded the ordering test under tightened role-only definition, using existing EXP-INTEL-34718481334 raw measurement data?",
+  "reason": "The producer's FALSIFIES verdict is not justified as a general claim. The audit (VF-SAMPLE-TRUNCATION-CRITICAL) demonstrates that the ordering reversal is an artifact of differential sample truncation (locatable_sample capped at 20 of 82 listing, 32 detail, 21 cart elements) combined with total_dom denominator variation. Extrapolation to full locatable set restores ordering listing 0.019 > detail 0.006 > cart 0.0055. The audit (VF-DENOMINATOR-SENSITIVITY) shows the reversal is driven by cart's smaller DOM (1136 vs ~1700 listing) inflating its fraction, not by higher interactive density. Within-type stability and between-type discrimination hold but are bounded to truncated-sample scope. The experiment is INCONCLUSIVE for the general hypothesis that the tightened definition preserves ordering: the infrastructure limitation (truncation) prevents a definitive test. The bounded diagnostic confirms original definition overcounted form scaffolding (~10x reduction), which is a genuine finding independent of the ordering question. Product cannot use this metric for yield estimation until full DOM enumeration resolves the denominator and truncation confounds.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34782350557/spec.json",
+    "research/experiments/EXP-INTEL-34782350557/prereg.md",
+    "research/experiments/EXP-INTEL-34782350557/freeze.json",
+    "research/experiments/EXP-INTEL-34782350557/result.json",
+    "research/experiments/EXP-INTEL-34782350557/report.md",
+    "research/experiments/EXP-INTEL-34782350557/audit.json",
+    "research/experiments/EXP-INTEL-34782350557/provenance.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json sha256:b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py sha256:84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+    "research/experiments/EXP-INTEL-34718481334/audit.json: VF-DEFINITION-OVERCOUNT, VF-CART-PSEUDOREPLICATION",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py: MEASURE_JS locatableSample.length <20"
+  ]
+}

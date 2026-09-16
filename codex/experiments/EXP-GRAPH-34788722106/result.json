@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-34788722106",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "overall_tp_rate_true_drift": 1.0,
+    "overall_tp_ci_true_drift": [0.9894, 1.0],
+    "overall_fp_rate_fresh": 0.0,
+    "overall_fp_ci_fresh": [0.0, 0.031],
+    "overall_noise_fp_rate": 1.0,
+    "overall_noise_fp_ci": [0.9591, 1.0],
+    "total_true_stale_samples": 360,
+    "total_true_detected": 360,
+    "total_fresh_samples": 120,
+    "total_fresh_fp": 0,
+    "per_schema_size": {
+      "10": {
+        "threshold": 0.9273,
+        "fp_rate_fresh": 0.0,
+        "fp_ci_fresh": [0.0, 0.1135],
+        "overall_tp_rate_true_drift": 1.0,
+        "overall_tp_ci_true_drift": [0.9591, 1.0],
+        "overall_noise_fp_rate": 1.0,
+        "overall_noise_fp_ci": [0.9591, 1.0],
+        "per_pattern": {
+          "add_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9091, "detection_margin": 0.0182},
+          "remove_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9, "detection_margin": 0.0273},
+          "change_type": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.8182, "detection_margin": 0.1091},
+          "optional_field_churn": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8182},
+          "null_valued_fields": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8182},
+          "nested_object_variation": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8182}
+        }
+      },
+      "20": {
+        "threshold": 0.9619,
+        "fp_rate_fresh": 0.0,
+        "fp_ci_fresh": [0.0, 0.1135],
+        "overall_tp_rate_true_drift": 1.0,
+        "overall_tp_ci_true_drift": [0.9791, 1.0],
+        "overall_noise_fp_rate": 1.0,
+        "overall_noise_fp_ci": [0.9591, 1.0],
+        "per_pattern": {
+          "add_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9524, "detection_margin": 0.0095},
+          "remove_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.95, "detection_margin": 0.0119},
+          "change_type": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9048, "detection_margin": 0.0571},
+          "optional_field_churn": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8182},
+          "null_valued_fields": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8571},
+          "nested_object_variation": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.9048}
+        }
+      },
+      "30": {
+        "threshold": 0.9742,
+        "fp_rate_fresh": 0.0,
+        "fp_ci_fresh": [0.0, 0.1135],
+        "overall_tp_rate_true_drift": 1.0,
+        "overall_tp_ci_true_drift": [0.986, 1.0],
+        "overall_noise_fp_rate": 1.0,
+        "overall_noise_fp_ci": [0.9591, 1.0],
+        "per_pattern": {
+          "add_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9677, "detection_margin": 0.0065},
+          "remove_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9667, "detection_margin": 0.0075},
+          "change_type": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9355, "detection_margin": 0.0387},
+          "optional_field_churn": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8182},
+          "null_valued_fields": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.871},
+          "nested_object_variation": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.9355}
+        }
+      },
+      "50": {
+        "threshold": 0.9843,
+        "fp_rate_fresh": 0.0,
+        "fp_ci_fresh": [0.0, 0.1135],
+        "overall_tp_rate_true_drift": 1.0,
+        "overall_tp_ci_true_drift": [0.9894, 1.0],
+        "overall_noise_fp_rate": 1.0,
+        "overall_noise_fp_ci": [0.9591, 1.0],
+        "per_pattern": {
+          "add_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9804, "detection_margin": 0.0039},
+          "remove_field": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.98, "detection_margin": 0.0043},
+          "change_type": {"tp_rate": 1.0, "tp_ci_lower": 0.8865, "tp_ci_upper": 1.0, "mean_jaccard": 0.9608, "detection_margin": 0.0235},
+          "optional_field_churn": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8182},
+          "null_valued_fields": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.8824},
+          "nested_object_variation": {"fp_rate": 1.0, "fp_ci_lower": 0.8865, "fp_ci_upper": 1.0, "mean_jaccard": 0.9608}
+        }
+      }
+    },
+    "fixed_threshold_085_baseline": {
+      "note": "Fixed threshold 0.85 fails at n>=10 per prior experiments. Not re-measured here.",
+      "expected_tp_at_n10": 0.333,
+      "expected_tp_at_n15_plus": 0.0
+    },
+    "random_classifier_baseline": {
+      "note": "50% detection, 50% false positive. Expected to fail both criteria.",
+      "expected_tp": 0.5,
+      "expected_fp": 0.5
+    }
+  },
+  "controls": {
+    "positive_control_add_field": {
+      "description": "Add-field drift (single new field added) must be detected at all schema sizes: TP >= 0.8",
+      "expected": "TP >= 0.8 across all schema sizes",
+      "observed": "TP = 1.0 across all schema sizes (30/30 detected per size)",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/derived_measurements.json per_schema_size.*.per_pattern.add_field"
+    },
+    "null_control_fresh": {
+      "description": "Fresh response with no structural change must not be detected: FP = 0",
+      "expected": "FP = 0 (Jaccard = 1.0 >= threshold)",
+      "observed": "FP = 0/120 across all schema sizes",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/derived_measurements.json per_schema_size.*.fp_rate_fresh"
+    },
+    "structural_noise_optional_churn": {
+      "description": "Optional field churn (10% add/remove) should not cause FP > 0.15",
+      "expected": "FP upper CI <= 0.15",
+      "observed": "FP = 30/30 = 1.0, CI upper = 1.0 >> 0.15",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/derived_measurements.json per_schema_size.*.noise_pattern_details.optional_field_churn"
+    },
+    "structural_noise_null_fields": {
+      "description": "Null-valued fields should not cause FP > 0.15",
+      "expected": "FP upper CI <= 0.15",
+      "observed": "FP = 30/30 = 1.0, CI upper = 1.0 >> 0.15",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/derived_measurements.json per_schema_size.*.noise_pattern_details.null_valued_fields"
+    },
+    "structural_noise_nested_object": {
+      "description": "Nested object variation should not cause FP > 0.15",
+      "expected": "FP upper CI <= 0.15",
+      "observed": "FP = 30/30 = 1.0, CI upper = 1.0 >> 0.15",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/derived_measurements.json per_schema_size.*.noise_pattern_details.nested_object_variation"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/mock_schemas.json", "sha256": "343ead30c1bd8effa57f4a9b9651e31681bd29b17825937bd812b5bc3be337a1", "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json", "sha256": "20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173", "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-34788722106/raw_evidence/decision_evaluation.json", "sha256": "bcabad8df8ba0d56e545c08a3cb43914e6ce1b2361235cdbb741bdeb23d9c137", "role": "derived"},
+    {"path": "research/graph/freshness_detection/execute_structural_noise.py", "sha256": null, "role": "code"}
+  ],
+  "observations": [
+    "Adaptive threshold T(n)=1-0.8/(n+1) correctly detects all true drift patterns: TP=360/360=100% across all schema sizes (10, 20, 30, 50 fields) with Wilson CI lower bound >= 0.8865",
+    "Fresh responses (null control) correctly not detected: FP=0/120=0% across all schema sizes with Wilson CI upper bound = 0.1135",
+    "All three structural noise patterns (optional_field_churn, null_valued_fields, nested_object_variation) produce 100% false positive rate at ALL schema sizes: FP=360/360=1.0 with Wilson CI upper bound = 1.0",
+    "Structural noise causes Jaccard < threshold because the noise patterns modify the (field_path, type) set, and the adaptive threshold approaches 1.0 at large n, leaving no margin for structural variation",
+    "Detection margin is positive for all patterns at all sizes, but this is misleading: the margin measures threshold - mean_jaccard for stale variants, but the issue is that structural noise also falls below the threshold",
+    "Optional field churn produces the most severe FP: mean Jaccard = 0.8182 at n=10 (below threshold 0.9273) because removing ~1 field and adding ~1 different field changes ~20% of the (field_path, type) set",
+    "The experiment is fully reproducible: identical random seed produces identical results across runs"
+  ],
+  "validity_notes": [
+    "Fresh responses are constructed as identical copies of the baseline schema (Jaccard=1.0 by construction), which is a valid null control for structure-only Jaccard",
+    "Structural noise patterns are applied independently to the baseline schema; in real APIs, these patterns may co-occur with value changes, which would not affect (field_path, type) Jaccard",
+    "The Jaccard representation uses (field_path, type) pairs only; it does not capture field relationships, cardinality, nested depth, or semantic meaning",
+    "Wilson CIs are computed with z=1.96 (95% confidence); point estimates of 100% or 0% detection are bounded by these intervals",
+    "Sample size of 30 per group per schema size is sufficient for Wilson CI computation but may not capture rare edge cases",
+    "The constant 0.8 in T(n)=1-0.8/(n+1) was empirically chosen from prior experiments; other constants may yield different FP/TP tradeoffs",
+    "The experiment tests the exact formula from the parent handoff's recommended action; it does not explore the parameter space of c in T(n)=1-c/(n+1)"
+  ],
+  "unresolved": [
+    "Whether any constant c < 1 in T(n)=1-c/(n+1) can achieve both TP >= 0.8 on true drift AND FP <= 0.15 on structural noise: the fundamental issue is that structural noise causes Jaccard < threshold at high thresholds",
+    "Whether combining Jaccard with other signals (session token validation, semantic embedding, response-time profiling) can distinguish true drift from structural noise",
+    "Whether schema-specific calibration or per-field weighting can reduce structural noise FP without losing true drift detection",
+    "Whether the structural noise patterns tested here (10% churn, null fields, nested objects) are representative of real-world API structural variation",
+    "Whether non-Jaccard similarity measures (e.g., edit distance on field sets, tree edit distance for nested schemas) would be more robust to structural noise",
+    "The optimal tradeoff between TP and FP on structural noise patterns, and whether it can be achieved with a pure threshold-based approach"
+  ]
+}

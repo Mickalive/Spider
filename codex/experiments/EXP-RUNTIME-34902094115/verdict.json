@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
+    }
+  ],
+  "product_action": "Body-only discrimination may be used as default production fingerprint strategy for endpoints returning JSON responses up to 100KB without compression-normalization overhead, provided (a) client Accept-Encoding is stable and (b) compression is deterministic as tested (brotli quality 6 or equivalent, gzip level 9 mtime=0 or equivalent). This recommendation is bounded to synthetic deterministic proxy conditions; real CDN validation remains a prerequisite for unconditional production deployment.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does body-only discrimination survive a real CDN (Cloudflare/Fastly/Akamai) where compression quality levels, caching, chunked transfer, and load-balancing may introduce non-determinism absent from the synthetic proxy?",
+  "reason": "All 8 decision rule conditions pass at every body size. The substrate ceiling is extended from 0-729 bytes to 100KB JSON under deterministic compression. However, product promotion is withheld because (1) the experiment uses a synthetic deterministic Python proxy, not real CDN infrastructure, (2) real CDNs may use varying quality levels, chunked streaming, caching or load-balancing that introduce non-determinism, (3) the mock OAuth2 server is not a real IdP. The next material question is real-CDN validation, which is orthogonal to further synthetic probing and is the minimum unblocked path toward unconditional production recommendation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-34902094115/result.json — metrics: body_only_discrimination=0.5 at all 18 cells (3 sizes x 3 profiles x 2 endpoints), controls: all 8 conditions PASS at 1KB/10KB/100KB, M_WITHIN_STATE_VARIATION all deterministic, M_MIXED_CLIENT_DISCRIMINATION=0.2237, M_CROSS_CLIENT_DIVERGENCE all states divergent",
+    "research/experiments/EXP-RUNTIME-34902094115/audit.json — status=PASS, producer_claim_supported=true, recomputed metrics match, claim_ceiling bounded to synthetic deterministic proxy, validity_findings 7 entries (2 low severity: 3-way error collapse, proxy implementation deviation)",
+    "research/experiments/EXP-RUNTIME-34902094115/report.md — Section 7 interpretation: ceiling extended to 100KB JSON, Section 8 product consequences: body-only viable up to 100KB with stable Accept-Encoding",
+    "research/experiments/EXP-RUNTIME-34902094115/provenance.json — brotli 1.2.0, gzip mtime=0 level=9, mock OAuth2 on port 5000, proxy on port 5001, seed=44, 720 total requests",
+    "research/experiments/EXP-RUNTIME-34741873198/handoff.json — parent carry_forward: body-only at 0.5 for 0-729 bytes, ceiling now extended by this experiment",
+    "research/claims/registry.json — C-MEAS-VALID status remains EXPERIMENTAL with enriched evidence base"
+  ]
+}

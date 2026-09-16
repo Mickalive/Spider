@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34782350557",
+  "lane": "intel",
+  "github_run_id": "34782350557",
+  "base_sha": "8d4efadea49bf430a3768ede52a6cfc7ee747861",
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "frozen_prereg_sha256": "d0af3ba509f3835b7e9bbe894a45d5db3fb4e2739e403bdedc793b482464d41e",
+  "frozen_request_sha256": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
+  "frozen_spec_sha256": "9f9445cd403fabbb68fd5b5091b7b1e29f12ffe71ac1d325168ce087d3e41b94",
+  "parent_experiment_id": "EXP-INTEL-34718481334",
+  "parent_handoff_sha256": "26f6e86ec59114547c854fedfd0cf349d5e69d1fe3712a4c4456f9014399fce3",
+  "raw_data_path": "raw_evidence/exp347_raw_results.json",
+  "raw_data_sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+  "analysis_code_path": "raw_evidence/tightened_analysis.py",
+  "analysis_code_sha256": "84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+  "derived_results_path": "raw_evidence/tightened_results.json",
+  "derived_results_sha256": "b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+  "environment": "Linux runner, Python 3.10, no Docker execution, pure JSON analysis",
+  "execution_timestamp": "2026-09-14T01:10:00Z",
+  "notes": "Analysis performed on existing raw measurement data from parent experiment. No new Docker execution or network calls. Tightened definition: role-only counting (button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch) excluding form-membership clause."
+}
