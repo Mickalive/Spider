@@ -2245,6 +2245,31 @@
         "verdict.json": "739b100d33240f559f4d581d1684590b9e6bc65c6369cf5d2fcb5d9875cdb8c0",
         "handoff.json": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
       }
+    },
+    "EXP-RUNTIME-35058619700": {
+      "lane": "runtime",
+      "request_id": "355f46b8adf853a44529508e",
+      "created_at": "2026-09-16T05:13:04.868277+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does decompression-normalization preserve body-only discrimination under gzip quality variation, and does it generalize across compression algorithms (brotli vs gzip)?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "348574668ded59beee1d01c493e215df4149d659d50eb713e6968ff706e6e6b6",
+        "spec.json": "be137781ab2f1cd86eb2bead5d76a23072eed38a5cd4d99b1a25e83ed036129a",
+        "prereg.md": "cf754038829803a952067725fd035cdf4042f66cd152c755480057faecfaca9e",
+        "freeze.json": "82243e1f1092f5433ebcc33af93d7050ab21d9d548c87ae2ef7378ba1095931c",
+        "result.json": "0656ad0491899ac45a1f748e692d58210fed3d659cb41309707a23123037e4e5",
+        "report.md": "165873cb7759202e5a92c7812443fdf9bd99109f4c3bc15eeefa8067139504c5",
+        "provenance.json": "d57dec1358da6c7714c15f41a7988d70ad14e4298d49355dcbd383b1d7909dd6",
+        "audit.json": "ec773197008b6cb729b70c1ed720c9b50a7d33dcf6076402682815bcfdc0f0f5",
+        "verdict.json": "c70dc62f788f9772e88122a71c0bdb62477fbdcc073e93eab6a6ee5e0d71e3cd",
+        "handoff.json": "b9bc44c5b40862ad112bfadc5233817a0c8a87ab96fe3a81b6be0b24e7127456"
+      }
     }
   }
 }

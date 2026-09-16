@@ -919,6 +919,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} per request for JSON 1KB on mock OAuth2 server (B-DECOMPRESSED-VARYING=0.5 vs B-COMPRESSED-VARYING=0.3295-0.3475). All 6 controls pass. However, claim ceiling is bounded to: synthetic Python proxy, deterministic mock server, brotli-only, 1KB JSON, seed 44, quality range {4-8}. NOT justified to claim real-CDN universal fallback, gzip support, other content-types/sizes, or production IdP. C-MEAS-VALID remains EXPERIMENTAL because the setting is synthetic and the claim ceiling does not reach production deployment conditions."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35058619700",
+        "lane": "runtime",
+        "decision": "MIXED",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression-normalization (SHA256 on decompressed body + status via gzip.decompress/brotli.decompress after Content-Encoding removal) preserves body-only discrimination at the structural ceiling of 0.5 under synthetic gzip quality variation {1,3,5,7,9} (collapsing to 3-4 distinct compressed outputs for 1KB JSON) and under binary brotli variation {4,8} on mock OAuth2 server via synthetic Python proxy (N=20 per state, seed 44, 1KB JSON). Strongest isolation is on /introspect where status_only=0.0 and decompressed=0.5 confirms body signal; /userinfo 0.5 conflates status+body. Compressed-byte-only hashing degrades to 0.17-0.19 under gzip varying (vs 0.22/0.38 under tested brotli binary) confirming stronger gzip threat for this payload. Algorithm-equivalence at 0.0 diff is demonstrated ONLY for gzip collapsed 3-4-level vs brotli binary {4,8}, NOT for full brotli {4,5,6,7,8} due to BROTLI_QUALITY_RANGE bug (audit finding 1). Claim BOUNDED to: synthetic proxy with mtime=0 deterministic gzip, mock server, 1KB JSON, seed 44. NOT justified for real-CDN universal deployment, nor for other content-types/sizes, nor for full 5-level brotli range until re-run after fix, nor for missing/incorrect/double Content-Encoding."
       }
     ]
   }
