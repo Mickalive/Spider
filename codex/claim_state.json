@@ -847,6 +847,14 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Body-only discrimination (SHA256(status, compressed_body_sha256, '')) is preserved at 0.5 under synthetic deterministic CDN proxy (brotli quality 6, gzip level 9 mtime=0) for JSON responses at 1KB, 10KB, and 100KB on /userinfo and /introspect (720 total requests, N=10 per state per profile per endpoint per size). All 8 decision rule conditions pass at every body size: positive control (identity >= 0.35), null control (B-RANDOM ~ 0.0), deterministic brotli preserves, deterministic gzip preserves, within-state deterministic (0/10 variation), mixed-client degrades (< 0.5), status-only invariant (0.5), zero pipeline errors. Audit PASS with producer_claim_supported=true. Claim ceiling extended from 0-729 bytes (EXP-RUNTIME-34741873198) to 100KB JSON. Ceiling does NOT extend to real CDN, non-deterministic compression, streaming/chunked, non-JSON content, MB-scale, or cross-client stable hashing without decompression normalization."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-34986155186",
+        "lane": "runtime",
+        "decision": "MIXED",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression-normalization (SHA256 on brotli-decompressed body + status) preserves body-only discrimination at 0.5 under synthetic brotli quality variation {4,5,6,7,8} per request for JSON 1KB on mock OAuth2 server (B-DECOMPRESSED-VARYING=0.5 vs B-COMPRESSED-VARYING=0.3295-0.3475). All 6 controls pass. However, claim ceiling is bounded to: synthetic Python proxy, deterministic mock server, brotli-only, 1KB JSON, seed 44, quality range {4-8}. NOT justified to claim real-CDN universal fallback, gzip support, other content-types/sizes, or production IdP. C-MEAS-VALID remains EXPERIMENTAL because the setting is synthetic and the claim ceiling does not reach production deployment conditions."
       }
     ]
   }

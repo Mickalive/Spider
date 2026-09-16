@@ -2068,6 +2068,31 @@
         "verdict.json": "4b5715e8914b8a9938dc138b5d6b0275bdd1ea0afde208449197972a5eab1f07",
         "handoff.json": "ab84031a255c48d9ad4c3d9b5bd6b319b6408afa69f871b6ca000064a0ce51c3"
       }
+    },
+    "EXP-RUNTIME-34986155186": {
+      "lane": "runtime",
+      "request_id": "018b5542dd6adda7bf86edc8",
+      "created_at": "2026-09-15T15:06:23.368449+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does decompression-normalization (hashing the DECOMPRESSED response body after reversing Content-Encoding) preserve body-only discrimination under varying brotli quality levels, and does it provide a universal fallback when compressed-byte hashing fails?",
+      "audit_status": "PASS",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "hashes": {
+        "request.json": "5c640867203f74c9a26232bf007716dbd7284906df70b21f58d8a80823bec8ff",
+        "spec.json": "95e3d7b2f71c70f43e59bfc88c28238243bcd440166b7ec6dc0df461340f2ebe",
+        "prereg.md": "4707ee21ed88ac396c9941763039189e249b7230dcdae36645b93c81afc96093",
+        "freeze.json": "069ac58eb4a1ae32c679d0ec29549e2f7b0d8be02d979bc5e9520743a7860ef4",
+        "result.json": "050792119112028a60b2f0fe0e4c3faf16256bab6a831fb31a2401ca2f6f0f99",
+        "report.md": "0fea5ac282e12b3d6a303435ced958886cdf03b6f8565a3e3587f464322f4190",
+        "provenance.json": "993d7f52d386a9b0f107f8744c105ff021a36f1d9924e947ee8f2cf00bf18e27",
+        "audit.json": "ffdaa1d8fdf329095caa07a58b2f3c253c668a004771eb05c8654b11f5a5f2a7",
+        "verdict.json": "739b100d33240f559f4d581d1684590b9e6bc65c6369cf5d2fcb5d9875cdb8c0",
+        "handoff.json": "57668b636ae867dad0597447dd7cccf6c2b4533bdb803660b2a7439eee512b9d"
+      }
     }
   }
 }
