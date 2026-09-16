@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35137033384",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in this synthetic proxy? This remains the critical blocker for C-MEAS-VALID product readiness.",
+  "why_next": "Decompression-normalization has now survived two successive synthetic-scope experiments (parent EXP-RUNTIME-35130682006 synthetic brotli quality, this experiment CDN-noise proxy with 6 realistic categories). The mechanism is validated at the synthetic CDN-simulator level. The only remaining blocker for product-readiness assessment is real-CDN infrastructure. Real-CDN validation is the single highest-information experiment remaining for C-MEAS-VALID that is not blocked by other claims. A positive result would clear the path to Product Core evaluation; a negative result would identify the failure mode without wasting further synthetic-scope investment.",
+  "carry_forward": {
+    "established": [
+      "Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress/gzip.decompress/identity fallback after Content-Encoding inspection) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories of realistic CDN non-determinism (brotli quality variation, chunked transfer-encoding, CDN headers CF-Ray/X-Cache/Age/Via, Accept-Encoding negotiation override, response caching, Content-Length variation). Evidence: result.json /userinfo decompressed 0.5, /introspect decompressed 0.8333, audit.json recomputed max_abs_diff 0.0.",
+      "Algorithm-equivalence between brotli and gzip decompression-normalization holds under CDN noise: |gzip(0.5 parent from EXP-RUNTIME-35058619700) - brotli-CDN(0.5)| = 0.0 < 0.1. CDN noise affects compressed wire bytes but not decompressed logical bodies. Evidence: result.json controls C_ALGORITHM_EQUIVALENCE observed 0.0 pass true.",
+      "Compressed-byte-only hashing degrades under CDN-like non-determinism to 0.2789 on /userinfo (< 0.35 threshold), confirming H3. CDN noise (brotli quality + Accept-Encoding override) produces 2-4 unique compressed hashes per state, making raw compressed fingerprints unreliable. Evidence: result.json /userinfo_COMPRESSED-VARYING-BROTLI-CDN compressed 0.2789.",
+      "Decompression is deterministic under CDN transformations: within-state decompressed hash variation is 0 for all 4 auth states across both endpoints (1/20 unique, all_same true for all 8 cells). Positive control passes. Evidence: result.json decompressed_hash_variation, controls C_DECOMPRESSION_DETERMINISM.",
+      "CDN-noise proxy successfully introduces wire-byte non-determinism: all 3 Content-Encoding types observed (br/gzip/identity), CDN headers vary per request (CF-Ray unique 20/20, X-Cache HIT/MISS, Age 1-300, Via 1.1 varnish), chunked transfer-encoding applied to ~22-35% of responses. Evidence: result.json compression_verification, cdn_header_verification, audit.json chunked_verification.",
+      "B-RANDOM null control is 0.0, confirming no spurious structure from CDN noise artifacts. Evidence: result.json baselines B-RANDOM 0.0, controls C_NULL_CONTROL."
+    ],
+    "rejected": [
+      "Compressed-byte-only hashing as a sufficient fingerprinting strategy under CDN conditions: rejected at both parent (0.4329 with brotli quality only) and this experiment (0.2789 with CDN noise proxy). The degradation is monotonic with noise complexity.",
+      "5-level brotli quality variation as a materially stronger stress test for 1KB JSON: effective diversity is 2 variants (q4 distinct vs q5-8 identical), not 5. The 5-level range does not provide meaningfully more non-determinism than binary {4,8} for this payload size. Evidence: audit.json validity_findings[0], provenance.json known_issues."
+    ],
+    "unknown": [
+      "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, Accept-Encoding negotiation, load-balancing, and geographic routing introduce non-determinism not present in this synthetic proxy? This is the single critical unknown.",
+      "Does result generalize to non-JSON content types (HTML, XML, binary) and to MB-scale payloads where brotli quality 5-7 may diverge from 8?",
+      "What is the latency cost of per-response brotli/gzip decompression before hashing at production scale? 1KB measured ~0.002-0.003s; MB-scale unknown.",
+      "What is behavior when Content-Encoding is missing, incorrect, or double-encoded in production?",
+      "Is the CDN-noise proxy's Bernoulli Accept-Encoding override (20% gzip, 5% identity) realistic compared to real CDN negotiation based on client hints, edge capabilities, and cache state?",
+      "Does the in-memory cache model capture real CDN TTL, invalidation, and hierarchical caching behavior?",
+      "Does 5-level brotli quality selection produce 5 distinct compressed outputs for larger or incompressible payloads (2KB+, random bytes, HTML/XML/binary)?"
+    ],
+    "do_not_assume": [
+      "Do NOT assume decompression-normalization works on real CDN infrastructure — only synthetic CDN-noise proxy has been tested. The proxy simulates specific non-determinism categories but cannot capture edge selection, load balancing, geographic routing, TLS fingerprinting, or real caching TTLs. Evidence: audit.json validity_findings[3] 'Synthetic proxy gap persists'.",
+      "Do NOT assume 5 distinct brotli quality levels are tested — effective diversity is 2 variants for 1KB JSON. The 5-level range does not materially stress the mechanism beyond binary. Evidence: audit.json validity_findings[0], provenance.json known_issues.",
+      "Do NOT assume /userinfo discrimination above 0.5 is achievable — structural ceiling from 3-way error collapse (identical error bodies for no_auth/expired/invalid) caps at 0.5. This is a property of the mock server, not the normalization mechanism. Evidence: result.json /userinfo decompressed 0.5 = status_only 0.5.",
+      "Do NOT assume chunked framing is handled by the decompression pipeline — HTTP client (requests/urllib3) decodes chunked transfer-encoding before the body reaches decompression. The pipeline never sees chunked framing bytes. Evidence: audit.json validity_findings[2].",
+      "Do NOT assume cache hit rate is 30% — the counter bug (self.cache_hits += 1 creates instance variable) prevents quantitative verification; only qualitative cache noise (X-Cache HIT/MISS both present) is confirmed. Evidence: audit.json validity_findings[1], provenance.json known_issues.",
+      "Do NOT assume this experiment or its parent provide evidence for production latency, non-JSON content types, or MB-scale payloads. All tested payloads are ~1KB compressible JSON.",
+      "Do NOT promote C-MEAS-VALID to Product Core or VALIDATED based on this experiment — real-CDN infrastructure validation is the critical untested blocker."
+    ]
+  },
+  "dependencies": [
+    "Real CDN infrastructure access (Cloudflare Workers, Fastly Compute, or Akamai EdgeWorkers) with ability to control brotli quality, caching, Accept-Encoding negotiation, and chunked transfer-encoding",
+    "Production-like OAuth2 IdP endpoint with diverse error bodies and status variation (not 3-way error collapse) to uncap /userinfo discrimination ceiling above 0.5",
+    "Non-JSON payload test corpus (HTML, XML, binary, MB-scale) to test decompression-normalization generality",
+    "Measured brotli decompression latency at production scale (N > 1000 requests, MB-scale payloads) for cost assessment"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35137033384/spec.json",
+    "research/experiments/EXP-RUNTIME-35137033384/result.json",
+    "research/experiments/EXP-RUNTIME-35137033384/audit.json",
+    "research/experiments/EXP-RUNTIME-35137033384/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35137033384/provenance.json",
+    "research/experiments/EXP-RUNTIME-35137033384/report.md",
+    "research/experiments/EXP-RUNTIME-35130682006/handoff.json",
+    "codex/claim_state.json"
+  ],
+  "recommended_action": "Schedule real-CDN validation experiment (Cloudflare Workers or equivalent) as the next Runtime lane pulse. The experiment should: (1) deploy the mock OAuth2 server behind a real CDN with controlled brotli quality and caching; (2) test decompression-normalization discrimination under real per-edge non-determinism; (3) measure decompression latency at production scale; (4) test non-JSON payloads (HTML, XML) to assess generality. If real-CDN infrastructure is unavailable, the next-best orthogonal experiment is testing decompression-normalization on non-JSON content types (HTML/XML/binary) at MB-scale to bound the payload-distribution gap before real-CDN investment."
+}

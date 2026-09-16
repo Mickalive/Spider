@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35137034388",
+  "lane": "graph",
+  "github_run_id": "35137034388",
+  "base_sha": "0a99476d7e309c26ebb50eff834e19dc764dfe9d",
+  "source_commit": null,
+  "executed_at": "2026-09-16T19:34:17.257434+00:00",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "dependencies": "Python stdlib only (http.server, threading, urllib.request, json, math, hashlib, random)"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-GRAPH-35137034388/request.json",
+    "spec.json": "research/experiments/EXP-GRAPH-35137034388/spec.json",
+    "prereg.md": "research/experiments/EXP-GRAPH-35137034388/prereg.md",
+    "freeze.json": "research/experiments/EXP-GRAPH-35137034388/freeze.json"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35130682058",
+    "path": "research/experiments/EXP-GRAPH-35130682058/handoff.json",
+    "sha256": "1fdc4a3302e467e8983c90088e96b0479fc6846c4a5045bd6a00164c5321eeab"
+  },
+  "code_paths": {
+    "execution_script": "research/graph/freshness_detection/execute_usage_profiling.py",
+    "prior_freshness_code": [
+      "research/graph/freshness_detection/execute.py",
+      "research/graph/freshness_detection/execute_structural_noise.py",
+      "research/graph/freshness_detection/execute_response_time.py",
+      "research/graph/freshness_detection/execute_semantic_embedding.py"
+    ]
+  },
+  "parameters": {
+    "schema_sizes": [10, 20, 30, 50],
+    "samples_per_group": 30,
+    "requests_per_client_profile": 10,
+    "seed": 20260916,
+    "n_conditions": 24
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "experiment_data": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/experiment_data.json",
+      "derived_measurements": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/derived_measurements.json",
+      "decision_evaluation": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/decision_evaluation.json",
+      "hashes": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/hashes.json"
+    },
+    "output_files": {
+      "result.json": "research/experiments/EXP-GRAPH-35137034388/result.json",
+      "report.md": "research/experiments/EXP-GRAPH-35137034388/report.md",
+      "provenance.json": "research/experiments/EXP-GRAPH-35137034388/provenance.json"
+    }
+  },
+  "reproduction_command": "python3 research/graph/freshness_detection/execute_usage_profiling.py",
+  "design_notes": {
+    "server_model": "Mock API server returns ALL fields in response. Clients extract their requested subset. This matches real API behavior.",
+    "drift_targets": "remove_field targets email/phone (client-dependent). change_type targets id (all clients). required_to_optional targets name (all clients).",
+    "noise_model": "All noise patterns add fields NOT in any client profile, ensuring noise cannot affect usage-similarity."
+  }
+}

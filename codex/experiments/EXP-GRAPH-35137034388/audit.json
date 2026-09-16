@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35137034388",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix required_to_optional intermittency: provenance.json:design_notes and spec.json describe field present ~50% of time, but research/graph/freshness_detection/execute_usage_profiling.py lines 260-267 unconditionally continue for both even and odd resource_id, making required_to_optional a deterministic removal of 'name' (100% missing) rather than 50% intermittent. Future test of truly intermittent optionality must implement conditional inclusion.",
+    "Empirically measure positive_control_fresh_copies instead of tautological 'by construction' assertion: result.json:controls.positive_control_fresh_copies passes via logic, but no fresh-vs-fresh server measurement exists in raw_evidence/experiment_data.json. Fresh-vs-fresh should be executed as an explicit condition.",
+    "Replace adversarially favorable noise model: spec.json and execute_usage_profiling.py generate_stale_optional_churn/null_valued_fields/nested_object_variation add fields guaranteed not in any CLIENT_PROFILES (A={id,name},B={id,name,email},C={id,name,email,phone}). This makes condition2_noise_tolerance trivially PASS (usage_similarity=1.0 by construction). Future work must test noise that overlaps client-requested fields.",
+    "Add client-side type validation to test change_type detectability: result.json observation that change_type usage_similarity=1.0 reflects measurement definition (execute_usage_profiling.py line 368: if f in data and data[f] is not None) which ignores type mismatch. To claim field-usage cannot detect type drift, must test type-aware client that rejects unexpected types.",
+    "Exercise stable_resource_control per spec or remove it: spec.json positive_control/null_control not fully exercised; result.json:controls.stable_resource_control reports N/A without measurement."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_NOISE_TAUTOLOGICAL",
+      "severity": "high",
+      "finding": "Noise immunity is baked into design: all three noise generators add fields with names churn_opt_*, null_field_*, *.nested_* that no CLIENT_PROFILE requests. Therefore per_pattern_noise_usage_similarity mean=1.0 std=0.0 for all 12 noise conditions (derived_measurements.json per_schema_size 10/20/30/50 noise_all 1.0) is a construction artefact, not empirical robustness. Real-world noise affecting used fields would close discrimination_gap.",
+      "evidence": "research/graph/freshness_detection/execute_usage_profiling.py:139-181 generate_stale_*_churn/null/nested ; research/experiments/EXP-GRAPH-35137034388/raw_evidence/derived_measurements.json: per_schema_size.*.pattern_metrics.optional_field_churn/null_valued_fields/nested_object_variation mean_usage_similarity 1.0"
+    },
+    {
+      "id": "V_CHANGE_TYPE_AVAILABILITY_ONLY",
+      "severity": "high",
+      "finding": "change_type is invisible by measurement definition, not by inherent behavioral signal. Server returns integer vs string for id (execute_usage_profiling.py 269-272), but client counts field as used if present and non-null (line 368). Type mismatch not validated. Thus per_pattern_drift_usage_similarity change_type mean=1.0 is measurement-valid negative for availability-only definition but does not falsify type-aware usage profiling.",
+      "evidence": "research/graph/freshness_detection/execute_usage_profiling.py:103-120 generate_stale_change_type targets id ; 368-369 if f in data and data[f] is not None ; raw_evidence/experiment_data.json per_schema_size 10 change_type usage_similarities 30x 1.0 ; derived_measurements.json per_schema_size.*.pattern_metrics.change_type mean_usage_similarity 1.0"
+    },
+    {
+      "id": "V_REQUIRED_TO_OPTIONAL_DEAD_CODE",
+      "severity": "medium",
+      "finding": "required_to_optional intended as 50% intermittent presence (provenance.json:design_notes, spec preregmd, validity_notes). Code has dead branch: both even and odd paths execute continue (lines 262-267), so field is always absent. Observed per_pattern_drift_usage_similarity required_to_optional mean=0.638889 exactly equals deterministic removal of 'name' (A 0.5,B 0.666667,C 0.75) and shows zero variance, not 50% intermittency.",
+      "evidence": "research/graph/freshness_detection/execute_usage_profiling.py:257-267 ; research/experiments/EXP-GRAPH-35137034388/raw_evidence/derived_measurements.json per_schema_size.*.pattern_metrics.required_to_optional per_profile_usage_similarity A 0.5 B 0.666667 C 0.75 std 0.0"
+    },
+    {
+      "id": "V_POSITIVE_CONTROL_NOT_EMPIRICAL",
+      "severity": "medium",
+      "finding": "positive_control_fresh_copies not executed as server condition; passes by identity (identical schemas by construction). No fresh-vs-fresh measurement in raw_evidence/experiment_data.json. Claim usage_similarity=1.0 Jaccard=1.0 is logically true for set equality but not an empirical discrimination check.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/result.json:controls.positive_control_fresh_copies evidence 'fresh schemas are identical copies' ; raw_evidence/experiment_data.json contains only 6 pattern conditions, no fresh_fresh"
+    },
+    {
+      "id": "V_DETERMINISTIC_SERVER_CEILING",
+      "severity": "medium",
+      "finding": "Mock server deterministic, zero timing jitter, no stochastic field availability, no DB/cache/CDN variation (provenance.json:execution_environment stdlib only). Validity_notes correctly disclose real-world usage-similarity may be noisier. discrimination_gap 0.165 and pearson_r -0.045 are ceiling values under idealization.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/provenance.json:execution_environment ; result.json:validity_notes[0] ; spec.json:measurement_validity[0]"
+    },
+    {
+      "id": "V_CLIENT_PROFILE_HAND_DESIGNED",
+      "severity": "medium",
+      "finding": "Three hand-designed profiles covering email/phone dependency create asymmetric sensitivity: Profile A unaffected by remove_field when email removed (mean per_profile_usage_similarity_remove_field A 1.0 vs C 0.75). Bimodal raw usage_similarities for remove_field (0.805556 and 0.916667) correspond to email vs phone removal. Generalization to arbitrary real client field subsets untested; validity_notes disclose limit.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/experiment_data.json per_schema_size 10 remove_field usage_similarities bimodal ; derived_measurements.json per_schema_size 10 pattern_metrics remove_field per_profile_usage_similarity A 1.0 B 0.855556 C 0.75"
+    },
+    {
+      "id": "V_SINGLETON_JACCARD_VS_USAGE_COMPARISON",
+      "severity": "low",
+      "finding": "Jaccard and usage_similarity are different Jaccards on different objects (structural (field_path,type) vs per-profile field_used sets) with different baselines; Pearson r computed across 24 aggregated condition means (derived_measurements.json overall all_jaccard_values vs all_usage_sim_values) not per-sample. Zero-variance noise conditions anchor correlation near zero. Low r confirms orthogonality within this aggregated design but per-sample correlation untested.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/derived_measurements.json overall pearson_r_jaccard_vs_usage -0.044548 derived from 24 mean pairs ; result.json validity_notes[6]"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_JACCARD_BASELINE",
+      "baseline": "Single-signal Jaccard (field_path,type) with adaptive threshold — FP=1.0 at all sizes under structural noise (EXP-GRAPH-34788722106)",
+      "assessment": "Comparative baseline correctly cited. Current experiment reproduces Jaccard structural values (derived_measurements.json per_schema_size_jaccard via result.json metrics: 0.90-0.98 drift, 0.909 noise) showing same magnitude-confined variation. Usage-similarity provides complementary signal where Jaccard alone conflates drift and noise, but does not rescue type drift.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/result.json:metrics.per_schema_size_jaccard ; derived_measurements.json per_schema_size.*.pattern_metrics.*mean_jaccard"
+    },
+    {
+      "id": "B_TFIDF_BASELINE",
+      "baseline": "TF-IDF bag-of-words semantic similarity — FP=1.0, inverted direction (EXP-GRAPH-35010853847)",
+      "assessment": "Baseline correctly inherited as falsified semantic signal; not directly comparable to field-usage but shares inverted magnitude confound theme. No new TF-IDF measurement in this experiment; citation is appropriate.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/spec.json:baselines[1] ; prereg.md Motivation"
+    },
+    {
+      "id": "B_KS_BASELINE",
+      "baseline": "Response-time KS two-sample test — TP=0.0, FP=0.1875, inverted direction (EXP-GRAPH-35083040517)",
+      "assessment": "Temporal baseline correctly cited as falsified; current deterministic server removes timing confound entirely, isolating behavioral availability. Orthogonality claim (Pearson r -0.045) specifically demonstrates usage-similarity not confounded with structural magnitude in same way as KS.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/spec.json:baselines[2] ; result.json:metrics.pearson_r_jaccard_vs_usage -0.044548"
+    },
+    {
+      "id": "B_LDA_ENSEMBLE_BASELINE",
+      "baseline": "Linear Fisher LDA ensemble of (1-Jaccard) and KS D — AUC=0.625, all conditions fail (EXP-GRAPH-35130682058)",
+      "assessment": "Parent experiment handoff correctly carried forward; current experiment tests fundamentally different signal family (functional access vs structural/temporal) as parent recommended. Partial success (2/3 drift patterns) advances beyond LDA failure but does not achieve full ensemble viability. No nonlinear ensemble tested on new features per parent unknown.",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/handoff.json:carry_forward.rejected ; research/experiments/EXP-GRAPH-35137034388/spec.json:baselines[3] ; request.json:parent_handoff EXP-GRAPH-35130682058"
+    },
+    {
+      "id": "B_NULL_CONTROL",
+      "baseline": "null_control: Structural noise patterns must NOT reduce usage-similarity below 0.95",
+      "assessment": "Null control passes empirically (noise_usage_mean 1.0 >=0.95, all per_pattern_noise_usage_similarity all_sizes_above_0.95 true) but is weak due to V_NOISE_TAUTOLOGICAL. Control does not stress the signal; it verifies construction.",
+      "evidence": "research/experiments/EXP-GRAPH-35137034388/result.json:controls.null_control_noise_no_usage_drop pass true ; derived_measurements.json per_schema_size.*.pattern_metrics noise 1.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "drift_usage_mean": 0.834568,
+    "noise_usage_mean": 1.0,
+    "discrimination_gap": 0.165432,
+    "pearson_r_jaccard_vs_usage": -0.044548,
+    "n_conditions": 24,
+    "condition1_drift_detection": "FAIL",
+    "condition1_failing_patterns": ["change_type"],
+    "condition1_per_pattern_detail": {
+      "remove_field": {"means_by_size": [0.868519, 0.861112, 0.868519, 0.861112], "all_below_0.90": true},
+      "change_type": {"means_by_size": [1.0, 1.0, 1.0, 1.0], "all_below_0.90": false},
+      "required_to_optional": {"means_by_size": [0.638889, 0.638889, 0.638889, 0.638889], "all_below_0.90": true}
+    },
+    "condition2_noise_tolerance": "PASS",
+    "condition2_per_pattern_detail": {
+      "optional_field_churn": {"means_by_size": [1.0, 1.0, 1.0, 1.0], "all_above_0.95": true},
+      "null_valued_fields": {"means_by_size": [1.0, 1.0, 1.0, 1.0], "all_above_0.95": true},
+      "nested_object_variation": {"means_by_size": [1.0, 1.0, 1.0, 1.0], "all_above_0.95": true}
+    },
+    "condition3_orthogonality": "PASS",
+    "condition3_detail": {"pearson_r_threshold": 0.9, "observed_r": -0.044548, "uses_aggregated_means": true},
+    "per_pattern_drift_usage_similarity": {
+      "remove_field": {"mean": 0.864815, "std_across_sizes": 0.0042, "all_sizes_below_0.90": true},
+      "change_type": {"mean": 1.0, "std": 0.0, "all_sizes_below_0.90": false},
+      "required_to_optional": {"mean": 0.638889, "std": 0.0, "all_sizes_below_0.90": true}
+    },
+    "per_pattern_noise_usage_similarity": {
+      "optional_field_churn": {"mean": 1.0, "std": 0.0, "all_sizes_above_0.95": true},
+      "null_valued_fields": {"mean": 1.0, "std": 0.0, "all_sizes_above_0.95": true},
+      "nested_object_variation": {"mean": 1.0, "std": 0.0, "all_sizes_above_0.95": true}
+    },
+    "recomputation_notes": "Recomputed from raw_evidence/derived_measurements.json and raw_evidence/experiment_data.json: drift_usage_mean = mean of 12 drift condition means = 0.834568 matches producer; noise_usage_mean=1.0 exact; discrimination_gap=0.165432 matches; Pearson r from 24 (jaccard, usage) mean pairs = -0.044547 matches producer -0.044548 within rounding; condition evaluations identical to result.json and decision_evaluation.json FALSIFIED-IN-SETTING with 4 violations on change_type.",
+    "hash_verification": "raw_evidence hashes verified: experiment_data.json e948750a6f81bb7ce9f395eb7b5cf6d9155836d4c050850296c0b655c05ad8c5, derived_measurements.json 345907d6d985ae14cc00df2ed5a54e2aa26a09b2058286e328f3ed16476d103b, decision_evaluation.json 73429cde6cacc823f77fe9ef74db19839cd5b6177245a919e0c260c83bfbec73"
+  },
+  "claim_ceiling": "FROZEN HYPOTHESIS FALSIFIED-IN-SETTING: Field-usage profiling as defined (mean per-profile Jaccard(field_used_fresh, field_used_stale) with presence-only counting) does NOT satisfy the frozen decision rule for C-FRESHNESS across all three drift patterns; Condition1 fails on change_type at all 4 sizes. Maximum justified ceiling is narrower: Within deterministic mock server (Python stdlib http.server, seed 20260916, sizes 10/20/30/50, N=30 per condition, 3 hand-designed profiles A/B/C) field-usage availability provides orthogonal discrimination for field-availability drift (remove_field mean 0.865 <0.90 and required_to_optional mean 0.639 <0.90) while remaining immune to synthetic structural noise that adds only unused fields (noise mean 1.0 >=0.95), with near-zero aggregated Pearson correlation r=-0.045 confirming information beyond structural Jaccard. This partial signal does NOT extend to: type-compatibility drift without client type validation, noise that affects fields clients use, intermittent optionality at 50% presence (untested due to dead code making required_to_optional deterministic), per-sample correlation, real APIs with stochastic availability, optimal profile design, or broader C-FRESHNESS. Composite Jaccard+usage ensemble for full drift coverage remains hypothetical.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35137034388/request.json",
+    "research/experiments/EXP-GRAPH-35137034388/spec.json",
+    "research/experiments/EXP-GRAPH-35137034388/prereg.md",
+    "research/experiments/EXP-GRAPH-35137034388/freeze.json",
+    "research/experiments/EXP-GRAPH-35137034388/result.json",
+    "research/experiments/EXP-GRAPH-35137034388/report.md",
+    "research/experiments/EXP-GRAPH-35137034388/provenance.json",
+    "research/experiments/EXP-GRAPH-35137034388/raw_evidence/experiment_data.json sha256 e948750a6f81bb7ce9f395eb7b5cf6d9155836d4c050850296c0b655c05ad8c5",
+    "research/experiments/EXP-GRAPH-35137034388/raw_evidence/derived_measurements.json sha256 345907d6d985ae14cc00df2ed5a54e2aa26a09b2058286e328f3ed16476d103b",
+    "research/experiments/EXP-GRAPH-35137034388/raw_evidence/decision_evaluation.json sha256 73429cde6cacc823f77fe9ef74db19839cd5b6177245a919e0c260c83bfbec73",
+    "research/graph/freshness_detection/execute_usage_profiling.py sha256 cc6165f3216e0d17c54cd5226f08f80c60ef38c8b95f2908115e2835ca4abe4b",
+    "research/experiments/EXP-GRAPH-35130682058/handoff.json sha256 1fdc4a3302e467e8983c90088e96b0479fc6846c4a5045bd6a00164c5321eeab"
+  ],
+  "unresolved": [
+    "Whether type-aware client validation (rejecting fields with unexpected types) would make change_type detectable and close Condition1 gap — requires modeling type schemas and client parsing.",
+    "Whether usage-similarity discrimination survives when noise patterns affect fields actually used by clients (not just unused churn/null/nested fields).",
+    "Whether truly intermittent required_to_optional (field present 50% of responses) yields different usage_similarity than deterministic removal currently measured (0.638889).",
+    "Whether real APIs with DB/cache/CDN, stochastic availability, and heterogeneous production client profiles preserve 0.165 discrimination gap and near-zero Jaccard correlation.",
+    "Whether composite signal (Jaccard + usage_similarity + type-compatibility) could detect all three drift patterns simultaneously despite individual limitations.",
+    "Per-sample (not aggregated mean) Pearson r and per-sample ROC for Jaccard vs usage-similarity — aggregation to 24 mean pairs may mask sample-level structure.",
+    "Optimal number and diversity of client profiles for generalization beyond light/medium/heavy hand-designed sets."
+  ]
+}
