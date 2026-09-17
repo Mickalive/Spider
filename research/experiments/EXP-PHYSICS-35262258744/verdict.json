@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35262258744",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING: C2 fails (normalized PMI 5.8e-05 not exactly 0.0 due to Laplace alpha=1.0 smoothing artifact, audit V1 confirms nosmooth gives 0.0 exactly) and C5 fails (0/5 variants >=5 unique raw URLs; TodoMVC has 3-4 only, audit V3 confirms testbed ceiling misspecification not PMI failure). However, C1 passes decisively: all 5/5 variants achieve raw URL PMI 0.188-0.209 bits with Bonferroni p=0.001 and effect sizes d=6.5-9.0, demonstrating hash-fragment routing encodes Markov-predictive state information detectable by PMI when fragments preserved. Audit V7 finds identifiability not demonstrated: experiment tests I(url_after; action | url_before) without history-conditioned baseline, so beyond-memory dynamics (C-WEB-DYNAMICS core requirement) is untested. Claim ceiling bounded to: fragment-aware URL-level PMI detects state-conditioned predictability on minimal TodoMVC hash-SPAs at 85-93 NL transitions. NOT validated: beyond-memory dynamics, generalization to production SPAs with history routing, title-aware PMI, practical utility for SPIDER exploration (0.19 bits is 12% of max log2(3)=1.585 for 3 states)."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does URL-level PMI remain significantly positive when conditioned on truncated action-history I(url_after; action | url_before, H_K) for K=1,3 on these same TodoMVC hash-SPA testbeds, or is the observed 0.188-0.209 bit signal entirely explained by memoryless Markov dynamics — thereby determining whether fragment-aware URL PMI demonstrates beyond-memory predictive structure required by C-WEB-DYNAMICS?",
+  "reason": "The frozen 5-condition decision rule fails on C2 (Laplace smoothing artifact, not pipeline bug) and C5 (TodoMVC cardinality limit, not PMI estimator failure). Both are testbed/design misspecifications, not evidence against URL-level PMI. The primary scientific finding is positive: raw URL PMI detects predictive dynamical structure on real browser-collected SPA transitions when fragments are preserved, closing the synthetic-to-real gap for URL-level PMI on hash-SPAs (parent EXP-PHYSICS-35209110569 validated infrastructure, this experiment validates the PMI signal). However, the C-WEB-DYNAMICS claim requires 'beyond memory and ordinary similarity' (audit V7): the tested statistic I(url_after; action | url_before) does not condition on history, so the signal could be entirely Markov (deterministic next-state given current URL and action). TodoMVC transitions are largely deterministic (audit V6), making this distinction critical. A history-conditioned experiment on the same testbeds (K=1,3) would directly test whether URL PMI exceeds what action-history alone predicts, resolving the dominant unknown at minimal cost. The Laplace smoothing inconsistency (audit V8) should be fixed (alpha=0 or consistent smoothing) in future preregs. The normalized PMI non-zero residual is an estimator artifact confirmed by independent analytic recomputation (audit V1), not evidence of state information in normalized URLs.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35262258744/result.json:metrics raw_url_pmi_by_variant (0.188-0.209 bits, p=0.001, d=6.5-9.0 on all 5 variants)",
+    "research/experiments/EXP-PHYSICS-35262258744/result.json:metrics norm_url_pmi_by_variant (5.8e-05 bits, unique_states=1, url_entropy=0.0)",
+    "research/experiments/EXP-PHYSICS-35262258744/result.json:controls.POSITIVE_CTRL_SYNTHETIC_SPA (1.578 bits, p=0.001, passes)",
+    "research/experiments/EXP-PHYSICS-35262258744/audit.json:status PASS, producer_claim_supported=false",
+    "research/experiments/EXP-PHYSICS-35262258744/audit.json:validity_findings V1 (Laplace smoothing artifact confirmed), V2 (raw PMI independently recomputed), V3 (state cardinality insufficient for frozen C5, TodoMVC ceiling), V7 (physics identifiability not demonstrated, beyond-memory not tested), V8 (PMI formula inconsistent smoothing)",
+    "research/experiments/EXP-PHYSICS-35262258744/audit.json:claim_ceiling (fragment-aware URL-level PMI detects state-conditioned predictability on TodoMVC hash-SPAs; NOT beyond-memory dynamics)",
+    "research/experiments/EXP-PHYSICS-35262258744/audit.json:baseline_findings B5 (FAIL_AS_DESIGNED for C5, testbed cardinality limit)",
+    "research/experiments/EXP-PHYSICS-35262258744/raw_analysis_results.json (sha256 db4892e73278cfc5a1ab5a39d95e608797de9c156b790ea1480d6b9b33c8d414)",
+    "research/experiments/EXP-PHYSICS-35209110569/handoff.json (parent: TodoMVC hash-SPAs suitable for URL-level non-leakage PMI)",
+    "research/experiments/EXP-PHYSICS-34724244876/audit.json (history-conditioned PMI paradigm reference)"
+  ]
+}
