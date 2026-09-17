@@ -1,17 +1,35 @@
 {
   "experiment_id": "EXP-PHYSICS-35185288822",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can the PMI pipeline detect title-aware conditional PMI I(S_next; Title_before | URL, H_K=3) > 0.05 bits on production server-rendered websites with genuine title variation and navigational density, beyond what URL-only representation provides — thereby bridging the dominant synthetic-to-real gap in the C-WEB-DYNAMICS research program?",
+  "hypothesis": "The parent experiment (EXP-PHYSICS-35154721808) established that on locally-hosted synthetic FSMs with constant-response hash-based observation, PMI = 0.0 exactly — confirming the 0.226-bit residual from EXP-PHYSICS-35137030850 was entirely explained by partial state discrimination. The 3-condition ordered sequence (0.493 → 0.226 → 0.0) quantifies the aliasing contribution. However, all 30+ C-WEB-DYNAMICS experiments remain synthetic or locally-hosted. Production server-rendered websites have genuine title variation (different page titles for different content states), stochastic navigation (user-driven action sequences), and real-world content diversity. If title-aware PMI > 0 on production sites after controlling for URL and action-history, this demonstrates that richer state representations capture predictive dynamical structure on the real Web, bridging the synthetic-to-real gap. If title-aware PMI = 0 on production sites (despite URL-only PMI > 0), title is not a useful state representation and the PMI signal is limited to URL-level structure.",
+  "falsifier": "The claim is falsified if ANY of: (1) title-aware BC PMI at K=3 <= 0.05 bits OR Bonferroni p >= 0.0125 on >= 2/3 sites; OR (2) title variation check fails (document.title has < 2 unique values across collected transitions on >= 2/3 sites); OR (3) positive control fails (synthetic SPA title-aware BC PMI < 0.5 bits); OR (4) negative control fails (title-shuffled BC PMI > 0.05 bits with p < 0.0125); OR (5) URL-only BC PMI <= 0.05 bits on all 3 sites (pipeline cannot detect basic dynamical structure); OR (6) data quality insufficient (< 50 non-leakage transitions per site); OR (7) determinism check fails on synthetic positive control (P(Title | FSM_state, step) < 1.0).",
+  "baselines": [
+    "URL-only baseline: BC PMI I(S_next; URL | URL, H_K=3) on same sites and sessions. Expected > 0.05 bits (prior HTTP fingerprint experiments show URL carries predictive structure). Provides within-experiment comparison: the ONLY difference is state representation (URL vs URL+Title).",
+    "Frequency baseline: P(S_next) marginal next-state distribution from collected trajectories. Expected accuracy varies by site.",
+    "Conditional entropy ceiling: H(S_next | URL, H_K=3) on collected trajectories. Provides upper bound on achievable PMI.",
+    "Synthetic positive control baseline: title-aware PMI on a locally-hosted 8-state linear SPA with unique deterministic titles (PMI pipeline validation). Expected BC PMI > 0.5 bits.",
+    "Title-shuffled negative control baseline: title labels shuffled within (URL, H_K=3, step) strata on production sites. Expected BC PMI ≈ 0."
+  ],
+  "positive_control": "Locally-hosted 8-state linear Express SPA with unique deterministic page titles (title_0 through title_7, one per state). Same pipeline as production sites. Expected title-aware BC PMI > 0.5 bits with Bonferroni p < 0.0125. Pass criterion: BC PMI > 0.5 AND perm_std > 0 AND Bonferroni p < 0.0125. This validates the PMI pipeline on a known-deterministic title mapping before testing production sites.",
+  "null_control": "Title-shuffled control on each production site: within each (URL, H_K=3, step) stratum, permute Title_before labels across transitions (1000 permutations per stratum). Expected title-shuffled BC PMI ≈ 0. Pass criterion: |title-shuffled BC PMI| < 3 * std(permuted PMI) AND perm_null_std > 0. This verifies the permutation test correctly rejects when title labels are randomized.",
+  "measurement_validity": [
+    "Three production server-rendered websites with genuine title variation and navigational density: (1) Wikipedia (en.wikipedia.org) — article pages have unique titles, internal links with click handlers, back-button navigation; (2) MDN Web Docs (developer.mozilla.org) — documentation pages with topic-specific titles, sidebar navigation, search; (3) GitHub (github.com) — repository pages with project-specific titles, file tree navigation, issue/PR pages.",
+    "Browser-based collection: Playwright/Puppeteer headless Chrome, collect per-transition: URL, document.title, DOM visible_text_hash, action target, action primitive, timestamp. Minimum 100 valid transitions per site (20+ unique URLs, 3+ action types).",
+    "Non-leakage filtering: transitions where action.target_href == state_after.url are excluded (URL-level leakage). At least 50% of collected transitions must be non-leakage.",
+    "Title variation check: each site must have >= 2 unique document.title values across collected transitions. Sites with constant title are excluded (degenerate).",
+    "Determinism check on positive control: P(Title | FSM_state, step) = 1.0 on synthetic SPA. Grouping includes step.",
+    "Bias-corrected MI estimator: observed PMI - permutation null mean (within-strata permutation, 1000 permutations per stratum). Identical to parent pipeline.",
+    "Permutation test: 1000 permutations per (site, K) stratum, shuffling Title_before labels within (URL, ActionHistory_K, step) strata. Bonferroni correction across 6 comparisons (3 sites x 2 conditions: title-aware and URL-only). Corrected threshold: p < 0.0125.",
+    "Action history: constructed from trajectory step ordering with START padding. K=1, K=3 history lengths.",
+    "Ceiling check: H(S_next | URL, H_K=3) > 0.2 bits on each site.",
+    "Session diversity: at least 5 distinct browsing sessions per site (different starting points, action sequences).",
+    "No authentication required for data collection (public pages only)."
+  ],
+  "decision_rule": "If ALL of: (1) URL-only BC PMI at K=3 > 0.05 bits with Bonferroni p < 0.0125 on >= 2/3 sites AND (2) title-aware BC PMI at K=3 > 0.05 bits with Bonferroni p < 0.0125 on >= 2/3 sites AND (3) title variation check passes (>= 2 unique titles per site) AND (4) positive control BC PMI > 0.5 bits with Bonferroni p < 0.0125 AND (5) negative control BC PMI < 0.05 bits AND (6) determinism check passes on positive control AND (7) >= 50 non-leakage transitions per site AND (8) H(S_next | URL, H_K=3) > 0.2 bits on >= 2/3 sites — verdict = SURVIVES_CURRENT_TEST for C-WEB-DYNAMICS. If title-aware BC PMI <= 0.05 bits OR Bonferroni p >= 0.0125 on >= 2/3 sites while URL-only passes — verdict = FALSIFIED-IN-SETTING (title not useful; URL-only signal confirmed). If URL-only BC PMI <= 0.05 bits on all 3 sites — verdict = INCONCLUSIVE (pipeline cannot detect structure; broader C-WEB-DYNAMICS question untested). If controls fail, title variation insufficient, or data quality insufficient — verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "Production SPAs with genuine title variation exhibit action-conditioned predictive structure detectable by the PMI pipeline. Title-aware state representation adds marginal information beyond URL. SPIDER should capture page titles as observation features for state prediction on production SPAs. The synthetic-to-real gap is bridged: PMI detection transfers from synthetic FSMs to production server-rendered sites. The testbed path for C-WEB-DYNAMICS on production SPAs remains open with title as validated representation.",
+  "product_consequence_negative": "Title-aware PMI = 0 on production sites despite URL-only PMI > 0. Title is not a useful additional state representation for SPA state prediction on these sites. URL-only representation captures the available dynamical structure. SPIDER should not invest in title-based state representation. However, URL-level PMI > 0 confirms that production sites DO have predictive dynamical structure at the URL level — the broader C-WEB-DYNAMICS claim is not falsified, only title as representation is rejected on these sites.",
+  "estimated_cost": "Medium: 3 production websites, browser-based collection (~3-5 hours total including setup, data collection, and pipeline execution), locally-hosted positive control SPA (~1 hour), Python MI computation (~1 hour). No model calls required. Estimated 5-8 hours total.",
+  "expected_information_gain": "Very high: directly addresses the dominant bottleneck across the entire C-WEB-DYNAMICS research program — the synthetic-to-real gap (30+ experiments, all synthetic). A positive result (title-aware PMI > 0 on production sites) is the first evidence that PMI detection transfers from synthetic FSMs to production Web, materially advancing C-WEB-DYNAMICS. A negative result (title PMI = 0 but URL PMI > 0) narrows the useful representation to URL-only on these sites, which is still informative for SPIDER's observation strategy. Either outcome resolves the dominant unknown and enables a targeted go/no-go decision on title-based state representation for production SPAs."
 }
