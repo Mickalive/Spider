@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **126**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **127**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -134,6 +134,7 @@ Validated experiments: **126**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35262258744 | physics | PASS | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `50764ab2bc9e` |
 | EXP-INTEL-35262261436 | intel | PASS | SURVIVES_CURRENT_TEST — All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach. | C-MEAS-VALID | `46d4ce687f16` |
 | EXP-RUNTIME-35262264593 | runtime | PASS | FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING on multiple independent clauses: (1) decompressed body-only discrimination 0.2911 < 0.3 threshold for JSON, HTML, and XML at all three sizes (conditions 1-3 fail); (2) decompressed hash variation all_same=false with unique_count=2 per state across all 9 conditions (condition 4 fails). Root cause is double-brotli encoding (scenario 4 of 5): single-pass client decompression strips outer brotli layer but leaves inner brotli-compressed data intact, producing a different hash (ddd198...) than the true decompressed body (6fb10...). The other 4 encoding scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) all produce identical decompressed hashes deterministically. Discrimination without double_br is 0.4486 (above 0.3), confirming the failure is caused exclusively by the double-encoding scenario. Audit PASS confirms all recomputed metrics match producer. Claim ceiling does NOT advance from parent EXP-RUNTIME-35237982464: remains bounded to non-deterministic brotli quality variation on localhost only. NOT extended to encoding-layer double-encoding. | C-MEAS-VALID | `1fb0507ea11a` |
+| EXP-PRODUCT-35262262156 | product | REVISE | FALSIFIED-IN-SETTING — Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact. | C-PARAM-INHERIT, C-PRODUCT-ECON | `ddc6bddb4fca` |
 | EXP-INTEL-35264637598 | intel | REVISE | MIXED | C-MEAS-VALID | `ec614d8a01bb` |
 | EXP-INTEL-35280397316 | intel | REVISE | SURVIVES | C-MEAS-VALID | `84a41525644e` |
 
@@ -147,7 +148,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35237975537 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-INTEL-35280397316 | intel |
-| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35209109455 | product |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35209109455 | product |
+| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35262262156 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35262262156 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
 | C-WEB-DYNAMICS | EXPERIMENTAL | EXP-PHYSICS-35262258744 | physics |
