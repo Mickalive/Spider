@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35237975537",
+  "lane": "graph",
+  "decision": "FAIL",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "C1_drift_tp FAIL (mean_tp=0.729 < 0.85, Wilson lower 0.27-0.30 < 0.75) due to 50/50 session validity randomization diluting session_invalidation TP to 0.43-0.47 while achieving C2 variance (8/8 conditions std>0). C3 orthogonality passes in isolation (|r|=0.1387 < 0.3, permutation p=0.031 on pooled n=240) but overall decision FAIL per frozen conjunctive rule. Descriptive: PB-only r=0.051 (p=0.577) replicates parent exactly; SI r=0.189 (p=0.038) confounded by bimodal distribution (0 vs 5.0 composite). Fundamental trade-off identified: inducing behavioral variance via session validity randomization directly sacrifices detection performance (audit V1_C1_FAIL_BY_DESIGN_ARTIFACT). Measurement valid (8/8 conditions, 240 paired samples). C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
+    }
+  ],
+  "product_action": "No product action. C1 FAIL prevents any product consequence. Behavioral signals retain TP=1.0 on permission_boundary conditions but session_invalidation protocol cannot simultaneously achieve variance and detection under current design. Product pipeline cannot integrate behavioral signals as independent channel until C1-C4 pass jointly.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can session_invalidation behavioral variance be designed to preserve TP >= 0.85 (all session_invalidation samples correctly detected as drift) while achieving within-condition std > 0, breaking the TP/variance trade-off identified in this experiment?",
+  "reason": "The experiment resolved the parent's MEASUREMENT_INVALID (now 8/8 conditions have variance, n=240) and produced a valid confirmatory orthogonality test (|r|=0.1387, p=0.031), but the frozen decision_rule FAILs because C1_drift_tp cannot be satisfied: the 50/50 session validity randomization that creates behavioral variance also creates false negatives (valid sessions produce behavioral=0, counted as drift miss). The auditor recomputes all metrics exactly (match=true on all 11 metrics), confirming the FAIL is in the frozen hypothesis, not the measurement. The audit identifies the root cause as a design trade-off (V1): achieving C2 variance via coin-flip mixing directly violates C1 by labeling non-drift samples as drift. The next design must achieve variance without diluting TP, either by varying session_status_check intensity while keeping session_change=1 for all drift samples, or by restricting the confirmatory test to permission_boundary conditions only with wider stochastic variation.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35237975537/spec.json — frozen decision_rule PASS requires C1-C4, FAIL if any fails",
+    "research/experiments/EXP-GRAPH-35237975537/result.json — status COMPLETE outcome FALSIFIES, C1 false C2 true C3 true C4 true, mean_tp 0.729",
+    "research/experiments/EXP-GRAPH-35237975537/audit.json — status FAIL, V1_C1_FAIL_BY_DESIGN_ARTIFACT, claim_ceiling, recomputed_metrics all match",
+    "research/experiments/EXP-GRAPH-35237975537/report.md — Executive Summary Overall FAIL, per-condition TP PB 1.0 SI 0.43-0.47",
+    "research/experiments/EXP-GRAPH-35191029030/handoff.json — parent MEASUREMENT_INVALID, carry_forward behavioral signals TP=1.0, recommended session/status probing fix",
+    "codex/claim_state.json:C-FRESHNESS — prior EXPERIMENTAL status from EXP-GRAPH-35166507358"
+  ]
+}
