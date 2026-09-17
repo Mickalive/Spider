@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35185288822",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Site selection must target genuine SPAs / client-side routed apps with non-leakage density >40% (hash routing, history API, form multi-step flows), not server-rendered MPAs (Wikipedia/MDN/GitHub) where <a href> encodes full destination URL and leakage 78-92% is structural. Current site corpus guarantees C7 failure even at 3-4x current raw N.",
+    "Fix data-collection throughput: resolve Playwright EPIPE on context.close in CI, increase trajectories to >=30 per site x 10-15 steps with spec delays (1.5s polite, 2.0s capture) to reach >=50 NL per site; 15x10 spec was not achieved (91/18/25 raw vs 150 expected per site).",
+    "Repair PMI pipeline conformance: run 1000 within-strata permutations per (URL, H_K=3, step) stratum as frozen; current analyze.py uses max(100, N*10)=100 perms on Wikipedia NL and global title shuffle not within-strata, violating spec measurement_validity 7-8 and null_control definition.",
+    "Repair negative control implementation: title-shuffled control must permute Title_before within (URL, H_K=3, step) strata (1000 per stratum) and pass criterion |BC|<3*std AND std>0; current global shuffle with std=0 makes PASS tautological and unsatisfied strictly (std=0 => fail). Do not report PASS when std=0.",
+    "Correct Bonferroni arithmetic: spec/prereg state 6 comparisons (3 sites x2 K) but threshold 0.0125 =0.05/4, while code uses 0.00833=0.05/6. Re-freeze consistent alpha and report both raw and Bonferroni p.",
+    "Address SA-sparsity degeneracy: with N=8 and 6 unique SA pairs (all singleton except 2 button self-loops), Laplace alpha=1.0 forces PMI=0 for any label; future designs must ensure denser revisits to same (URL, H_K) states or use alternative estimator / alpha sensitivity (0,0.5,2.0) before interpreting BC_PMI=0 as evidence.",
+    "Pre-register leakage handling for MPA vs SPA: exact target_href==state_after.url comparison over-classifies redirect/normalized URLs; add URL normalization (strip query/redirect tokens, decode) and action-type stratification (link_nav vs button_click) or SPA/MPA-specific C7 thresholds."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_C7_correctly_triggers_MEASUREMENT_INVALID",
+      "severity": "info",
+      "category": "decision_rule",
+      "finding": "Producer MEASUREMENT_INVALID is correctly assigned per frozen decision_rule: C7 requires >=50 NL on >=2/3 sites, observed 8/4/2 (0/3 pass). All other decision branches (SURVIVES, FALSIFIED-IN-SETTING, INCONCLUSIVE) correctly not taken. Outcome NOT_APPLICABLE is not falsification.",
+      "evidence": "result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics.sites_nl_above_50=0 wikipedia_n_non_leakage=8 github=4 mdn=2; analysis_results.json:checks.C7_data_sufficiency ok=false; spec.json:decision_rule C7 clause"
+    },
+    {
+      "id": "V2_structural_leakage_78_92_percent",
+      "severity": "high",
+      "category": "sampling",
+      "finding": "High leakage (Wikipedia 91.2% 83/91, GitHub 77.8% 14/18, MDN 92.0% 23/25) is structural for server-rendered MPAs where href encodes destination. Recomputed from raw artifacts matches producer exactly. After filtering, NL subsets too small for PMI by design of site choice, not collection bug. Even with 450 raw transitions at 78% leakage, 50 NL would require ~227 raw at 78% and ~625 at 92%.",
+      "evidence": "wikipedia_transitions.json 91 raw recomputed leak 83; github_transitions.json 18 raw 14 leak; mdn_transitions.json 25 raw 23 leak; result.json leakage fractions 0.912/0.778/0.920"
+    },
+    {
+      "id": "V3_singleton_SA_degeneracy_forces_PMI_zero",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Wikipedia NL PMI=0.0 bits (both title-aware and URL-only) is mathematically forced by sparsity under Laplace alpha=1.0: 6 unique states, 2 actions, 6 SA pairs for N=8 (all singleton). With count_sas_next=1, p_a~1, p_sn~1, p_joint=1 => PMI=log2(1)=0 for every triple. BC_PMI=0, perm_mean=0, perm_std=0 identical. Not evidence for/against title information.",
+      "evidence": "analysis_results.json:wikipedia title_aware_k3.bc_pmi=0 observed=0 perm_mean=0 perm_std=0 unique_sa_pairs=6 N=8; audit recomputation PMI url 0.0 title 0.0 H=0.0"
+    },
+    {
+      "id": "V4_permutation_protocol_deviation",
+      "severity": "medium",
+      "category": "controls",
+      "finding": "Producer reports p=0.009901 (100 perms) but spec requires 1000 perms per (site,K) stratum within (URL,HK,step). analyze.py caps at 100 for N=8 (min(1000,max(100,N*10))) and run_experiment.py uses cross-trajectory shuffle across whole trajectories, while spec requires within-strata Title_before permutation. With singleton SA pairs, null distribution collapses (std=0) so p is (0+1)/(100+1) floor, not discriminating.",
+      "evidence": "analyze.py:80 n_use=min(n_perm,max(100,len*10)) result 100; analysis_results.json:wikipedia n_permutations_used=100 not 1000; spec.json measurement_validity 7-8 Bonferroni 6 comparisons"
+    },
+    {
+      "id": "V5_negative_control_misimplemented_and_trivial",
+      "severity": "medium",
+      "category": "controls",
+      "finding": "NEG_CTRL_TITLE_SHUFFLED reported PASS with PMI=0.0 but implementation shuffles titles globally (title_shuffled_pmi) not within (URL,HK,step) strata, and frozen pass criterion |BC|<3*std AND std>0 is unsatisfiable when std=0. With N=8 and std=0, true criterion fails; PASS is lenient. Report should be FAIL/trivial, not evidence of control validity.",
+      "evidence": "analyze.py:118-125 global shuffle; result.json:controls.NEG_CTRL_TITLE_SHUFFLED pass=PASS observed 0.0 std=0; spec.json null_control pass |BC|<3*std AND perm_null_std>0"
+    },
+    {
+      "id": "V6_Bonferroni_inconsistency",
+      "severity": "low",
+      "category": "decision_rule",
+      "finding": "Spec/prereg state corrected threshold p<0.0125 but claim 6 comparisons (0.05/6=0.00833). Code uses 0.00833. Producer report.md table shows threshold 0.00833 consistent with code but inconsistent with spec text. Does not affect outcome (no BC_PMI>0.05 anyway).",
+      "evidence": "spec.json decision_rule p<0.0125; prereg 11 Bonferroni 0.0125 (α/4) vs 6 comparisons; result.json bonferroni_threshold 0.00833; run_experiment.py ALPHA_BONFERRONI=0.05/6"
+    },
+    {
+      "id": "V7_positive_control_valid",
+      "severity": "info",
+      "category": "controls",
+      "finding": "Synthetic 8-state linear SPA positive control passes strongly (BC 1.841 bits perm_std 0.0228 p=0.001 determinism 1.0) validating pipeline code. However control is not browser-collected; it is in-memory generation, so it validates estimator not browser substrate. No concern for MEASUREMENT_INVALID verdict.",
+      "evidence": "result.json:controls.POS_CTRL_SYNTHETIC_8STATE pass PASS BC 1.841 perm_std 0.022762 p 0.000999 determinism 1.0; run_experiment.py:run_positive_control 25 traj x20 steps"
+    },
+    {
+      "id": "V8_representation_and_provenance",
+      "severity": "low",
+      "category": "representation",
+      "finding": "State is URL and (URL,title) with title truncated to 100 chars; sufficient for this test. Provenance reports Playwright 1.63.0 chromium 153, numpy 2.5.3, Python 3.12.14. Raw artifacts have provenance sha256 but result.json artifacts list sha256 null (minor inconsistency). Wikipedia H(all)=0.647 bits on 91 transitions would pass C8 if computed on all data, but frozen C8 on NL only (H=0.0) fails, correctly reflecting NL regime is ceiling-collapsed.",
+      "evidence": "provenance.json:artifacts sha256 present, platform linux; result.json artifacts sha null; observations: H_Snext|URL all 0.647 vs NL 0.0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_URL_ONLY_BASELINE",
+      "baseline": "BASELINE_URL_ONLY I(S_next;URL|URL,H_K=3)",
+      "expected": "BC PMI >0.05 bits on >=2/3 sites",
+      "observed": "Wikipedia 0.0 bits p=0.0099, GitHub/MDN insufficient data (no PMI). 0/3 pass.",
+      "pass_fail": "FAIL",
+      "evidence_ref": "result.json:controls.BASELINE_URL_ONLY FAIL; analysis_results.json:C1_url_only sites 0 ok false",
+      "notes": "FAIL is degeneracy-driven (singleton SA) not evidence URL carries no structure; full-data H=0.647 suggests structure exists before leakage filtering."
+    },
+    {
+      "id": "B2_POSITIVE_CONTROL",
+      "baseline": "POS_CTRL_SYNTHETIC_8STATE title-aware PMI",
+      "expected": "BC PMI>0.5 perm_std>0 p<0.00833",
+      "observed": "1.841 bits std 0.0228 p 0.001 PASS determinism 1.0",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json:controls.POS_CTRL_SYNTHETIC_8STATE PASS; analysis_results.json checks.C4 ok true",
+      "notes": "Strong pass confirms Laplace BC pipeline detects deterministic titles, but trivially (deterministic FSM). Does not rescue production MEASUREMENT_INVALID."
+    },
+    {
+      "id": "B3_NEGATIVE_CONTROL",
+      "baseline": "NEG_CTRL_TITLE_SHUFFLED within (URL,HK,step)",
+      "expected": "BC PMI~0 |BC|<3*std std>0",
+      "observed": "0.0 bits std=0 globally shuffled => strictly FAIL but producer reports PASS",
+      "pass_fail": "FAIL_STRICT_PASS_LENIENT",
+      "evidence_ref": "result.json:controls.NEG_CTRL_TITLE_SHUFFLED PASS (lenient); audit V5",
+      "notes": "Degenerate null (all SA singleton) gives trivial PASS; spec criterion unsatisfied. Not a discriminating null."
+    },
+    {
+      "id": "B4_FREQUENCY_AND_CEILING",
+      "baseline": "Conditional entropy H(S_next|URL,H_K=3) >0.2 and frequency",
+      "expected": "H>0.2 on >=2/3 sites",
+      "observed": "Wikipedia H all 0.647 pass, NL 0.0 fail; GitHub/MDN too few for H; 0/3 pass on NL",
+      "pass_fail": "FAIL_ON_NL_PASS_ON_ALL",
+      "evidence_ref": "result.json:controls.C8_CEILING PARTIAL H(all)=0.647 H(NL)=0.0; analysis_results.json C8 ok false",
+      "notes": "Ceiling exists on full data but collapses in NL subset because NL are redirects/self-loops with unique next URLs. Transition-level PMI not testable in NL regime."
+    }
+  ],
+  "recomputed_metrics": {
+    "wikipedia_n_raw": {"producer": 91, "recomputed": 91, "match": true},
+    "wikipedia_n_non_leakage": {"producer": 8, "recomputed": 8, "match": true},
+    "wikipedia_n_leakage": {"producer": 83, "recomputed": 83, "match": true},
+    "wikipedia_leakage_fraction": {"producer": 0.912, "recomputed": 0.9120879120879121, "match": true, "tolerance": 0.001},
+    "wikipedia_unique_titles_nl": {"producer": 6, "recomputed": 6, "match": true},
+    "wikipedia_unique_sa_pairs_nl": {"producer": 6, "recomputed": 6, "match": true},
+    "wikipedia_bc_pmi_title_k3": {"producer": 0.0, "recomputed": 0.0, "match": true},
+    "wikipedia_bc_pmi_url_k3": {"producer": 0.0, "recomputed": 0.0, "match": true},
+    "wikipedia_h_entropy_nl": {"producer": 0.0, "recomputed": 0.0, "match": true},
+    "wikipedia_h_entropy_all": {"producer": 0.64682, "recomputed": 0.64682, "match": true, "note": "Value from producer analysis; not recomputed independently but consistent with 91 transitions 72 unique URLs"},
+    "github_n_raw": {"producer": 18, "recomputed": 18, "match": true},
+    "github_n_non_leakage": {"producer": 4, "recomputed": 4, "match": true},
+    "github_leakage_fraction": {"producer": 0.778, "recomputed": 0.7777777777777778, "match": true, "tolerance": 0.001},
+    "mdn_n_raw": {"producer": 25, "recomputed": 25, "match": true},
+    "mdn_n_non_leakage": {"producer": 2, "recomputed": 2, "match": true},
+    "mdn_leakage_fraction": {"producer": 0.92, "recomputed": 0.92, "match": true},
+    "positive_control_bc_pmi": {"producer": 1.840973, "recomputed": null, "match": null, "note": "Not independently recomputed from raw synthetic generation (in-memory RNG); producer value 1.841 with perm_std 0.022762 p 0.000999 determinism 1.0 is internally consistent and passes threshold. No evidence of mismatch."},
+    "permutation_n_used_wikipedia": {"producer": 100, "recomputed": 100, "match": true, "note": "Deviates from frozen 1000; 100 = max(100,N*10) for N=8"},
+    "sites_nl_above_50": {"producer": 0, "recomputed": 0, "match": true},
+    "sites_title_above_2": {"producer": 3, "recomputed": 3, "match": true},
+    "sites_h_above_0.2_nl": {"producer": 0, "recomputed": 0, "match": true},
+    "sites_url_only_pass": {"producer": 0, "recomputed": 0, "match": true},
+    "sites_title_aware_pass": {"producer": 0, "recomputed": 0, "match": true}
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: No evidence for or against C-WEB-DYNAMICS title-aware conditional PMI on production server-rendered sites; MEASUREMENT_INVALID due to structural URL-level leakage (78-92% of link navigations have href==next URL) and SA-sparsity degeneracy (BC PMI 0.0, perm_std 0.0, H(NL)=0.0 on 8/4/2 NL transitions). Synthetic 8-state SPA positive control (BC 1.841 bits p=0.001) validates estimator on deterministic in-memory data only. Claim bounded to: server-rendered MPAs (Wikipedia/MDN/GitHub) with link-dominated Playwright navigation and exact href==URL leakage definition cannot express the tested effect at transition-level PMI with 50 NL threshold. No inference to production SPAs with client-side routing, hash/history navigation, form/button flows, or richer DOM/accessibility/visual state; synthetic-to-real gap remains the dominant unknown (30+ experiments synthetic).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35185288822/request.json:inherit_next_question synthetic-to-real gap",
+    "research/experiments/EXP-PHYSICS-35185288822/spec.json:question, hypothesis, falsifier, decision_rule C1-C8, measurement_validity 1000 perms Bonferroni",
+    "research/experiments/EXP-PHYSICS-35185288822/prereg.md: sections 1-20, decision_rule, metrics registry, validity threats",
+    "research/experiments/EXP-PHYSICS-35185288822/freeze.json:hashes prereg a5cbfc9 etc",
+    "research/experiments/EXP-PHYSICS-35185288822/result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics 91/8/0.912 etc controls POS_CTRL PASS NEG_CTRL PASS BASELINE FAIL",
+    "research/experiments/EXP-PHYSICS-35185288822/report.md:decision table C7 FAIL MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35185288822/provenance.json:Playwright 1.63.0 chromium 153 github_run_id 35185288822 artifacts sha6b7f401...",
+    "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json:wikipedia_title_aware_k3 bc 0 perm 0 std 0 p 0.0099 N8 6 states",
+    "research/experiments/EXP-PHYSICS-35185288822/wikipedia_transitions.json:91 transitions 12 trajectories recomputed 83 leak",
+    "research/experiments/EXP-PHYSICS-35185288822/github_transitions.json:18 transitions 4 NL 77.8% leak",
+    "research/experiments/EXP-PHYSICS-35185288822/mdn_transitions.json:25 transitions 2 NL 92% leak",
+    "research/experiments/EXP-PHYSICS-35185288822/analyze.py:compute_pmi_stats Laplace alpha1.0, cross_trajectory_shuffle, n_use 100",
+    "research/experiments/EXP-PHYSICS-35185288822/run_experiment.py:run_positive_control BC 1.841, leakage classification, browser collection",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS across 30+ physics/frontier, dominant synthetic-to-real gap"
+  ],
+  "unresolved": [
+    "Whether production SPAs with hash/history client-side routing exhibit leakage <40% and yield >=50 NL transitions under same browser protocol (requires SPA corpus survey).",
+    "What action discovery fix (Playwright locator vs query_selector_all button:visible) and URL normalization would achieve action diversity >1 and valid within-strata permutation variance on real sites.",
+    "Whether PMI >0 would be detectable on NL subsets with denser sampling (repeated visits to same (URL,HK) states) or alternative alpha/estimator (Bayesian PMI, trajectory entropy rate) despite current SA-sparsity.",
+    "Whether title-aware PMI adds information beyond URL-only on server-rendered vs SPA sites where titles vary independently of URL (requires per-URL title variance >1, not just global 6 titles).",
+    "Whether Bonferroni threshold 0.0125 vs 0.00833 changes any future SURVIVES decision and whether prereg threshold should be re-frozen consistently."
+  ]
+}
