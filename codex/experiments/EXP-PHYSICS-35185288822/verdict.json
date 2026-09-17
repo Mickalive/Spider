@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35185288822",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID per frozen decision_rule: C7 fails (0/3 sites with >=50 non-leakage transitions; Wikipedia 8, GitHub 4, MDN 2). This is an infrastructure/data-sufficiency failure, not a scientific negative. Structural URL-level leakage (78-92% of link navigations have action.target_href == state_after.url) on server-rendered MPAs (Wikipedia/MDN/GitHub) makes the NL filter remove most transitions by design of these sites. After filtering, Wikipedia's 8 NL transitions have 6 unique SA pairs (all singleton), so Laplace-smoothed BC PMI = 0.0 bits is mathematically forced (I(X;Y)=0 when each (s,a) appears once). Positive control passes strongly (BC PMI = 1.841, p=0.001) validating the estimator on deterministic in-memory data. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. Claim ceiling bounded to: server-rendered MPAs with link-dominated Playwright navigation and exact href==URL leakage definition cannot express the tested effect at transition-level PMI with 50 NL threshold."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the Physics lane pivot to production SPAs with hash-based client-side routing (e.g., TodoMVC hash-SPA variants, React Router history-based SPAs) where multiple client-side states can share the same URL path, reducing URL-level leakage below 40% and enabling >=50 non-leakage transitions for PMI analysis?",
+  "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID on C7 (data sufficiency): 0/3 production server-rendered sites yield >=50 non-leakage transitions. The structural blocker is 78-92% URL-level leakage on Wikipedia/MDN/GitHub where <a href> encodes the full destination URL, making action.target_href == state_after.url by construction for link-based navigation. This is not a measurement artifact but a fundamental property of server-rendered MPAs: links are designed to navigate to their encoded destination. Even with unlimited collection time, 50 NL transitions at 92% leakage (MDN) would require ~625 raw transitions. The audit correctly identifies site selection as the root cause: production SPAs with hash/history client-side routing, form submissions, and button clicks should exhibit lower leakage. The PMI pipeline itself is validated by the positive control (BC 1.841, p=0.001). The next experiment must address the synthetic-to-real gap by testing on genuine SPAs rather than server-rendered MPAs.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35185288822/result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics.sites_nl_above_50=0 wikipedia_n_non_leakage=8 github=4 mdn=2",
+    "research/experiments/EXP-PHYSICS-35185288822/audit.json:status MEASUREMENT_INVALID producer_claim_supported=false claim_ceiling server-rendered MPAs structural leakage V2 V3 V4 V5 V6 required_fixes site_selection SPAs",
+    "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json:checks.C7_data_sufficiency ok=false wikipedia title_aware_k3.bc_pmi=0 perm_std=0 N=8 unique_sa_pairs=6",
+    "research/experiments/EXP-PHYSICS-35185288822/result.json:controls.POS_CTRL_SYNTHETIC_8STATE PASS BC 1.841 perm_std 0.0228 p 0.001 determinism 1.0",
+    "research/experiments/EXP-PHYSICS-35185288822/result.json:observations structural_leakage_78_92_percent singleton_SA_degeneracy PMI_pipeline_valid",
+    "research/experiments/EXP-PHYSICS-35185288822/report.md:C7 FAIL MEASUREMENT_INVALID server-rendered_not_SPAs leakage_structural",
+    "research/experiments/EXP-PHYSICS-35185288822/provenance.json:Playwright 1.63.0 chromium 153 github_run_id 35185288822 artifacts sha256",
+    "research/experiments/EXP-PHYSICS-35154721808/handoff.json:carry_forward established rejected unknown do_not_assume 3-condition ordered sequence pivot to production SPA",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS across 30+ physics/frontier experiments synthetic-to-real gap dominant"
+  ]
+}

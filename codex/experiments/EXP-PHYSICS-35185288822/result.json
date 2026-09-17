@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35185288822",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "wikipedia_n_raw": 91,
+    "wikipedia_n_non_leakage": 8,
+    "wikipedia_n_leakage": 83,
+    "wikipedia_leakage_fraction": 0.912,
+    "wikipedia_unique_titles_nl": 6,
+    "wikipedia_unique_urls_all": 72,
+    "wikipedia_bc_pmi_title_k3": 0.0,
+    "wikipedia_bc_pmi_url_k3": 0.0,
+    "wikipedia_h_entropy_all": 0.64682,
+    "wikipedia_h_entropy_nl": 0.0,
+    "wikipedia_perm_p_title": 0.009901,
+    "wikipedia_perm_p_url": 0.009901,
+    "github_n_raw": 18,
+    "github_n_non_leakage": 4,
+    "github_n_leakage": 14,
+    "github_leakage_fraction": 0.778,
+    "github_unique_titles_nl": 3,
+    "mdn_n_raw": 25,
+    "mdn_n_non_leakage": 2,
+    "mdn_n_leakage": 23,
+    "mdn_leakage_fraction": 0.920,
+    "mdn_unique_titles_nl": 2,
+    "positive_control_bc_pmi": 1.840973,
+    "positive_control_perm_p": 0.000999,
+    "positive_control_perm_std": 0.022762,
+    "positive_control_determinism": 1.0,
+    "bonferroni_threshold": 0.008333,
+    "sites_nl_above_50": 0,
+    "sites_title_above_2": 3,
+    "sites_h_above_0.2": 1,
+    "sites_url_only_pass": 0,
+    "sites_title_aware_pass": 0
+  },
+  "controls": {
+    "POS_CTRL_SYNTHETIC_8STATE": {
+      "description": "8-state linear SPA with unique deterministic titles, 25 trajectories x 20 steps",
+      "expected": "BC PMI > 0.5 bits, perm_std > 0, p < 0.00833",
+      "observed": "BC PMI = 1.841 bits, perm_std = 0.0228, p = 0.001",
+      "pass_fail": "PASS",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json"
+    },
+    "NEG_CTRL_TITLE_SHUFFLED": {
+      "description": "Title labels shuffled on Wikipedia NL transitions",
+      "expected": "PMI approx 0",
+      "observed": "PMI = 0.0 (trivially, because all SA pairs are unique)",
+      "pass_fail": "PASS",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json"
+    },
+    "BASELINE_URL_ONLY": {
+      "description": "URL-only BC PMI at K=3 on production sites",
+      "expected": "BC PMI > 0.05 bits on >= 2/3 sites",
+      "observed": "Wikipedia BC PMI = 0.0 (8 NL, all unique SA pairs); GitHub/MDN too few NL",
+      "pass_fail": "FAIL",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json"
+    },
+    "C7_DATA_SUFFICIENCY": {
+      "description": ">= 50 non-leakage transitions per site",
+      "expected": ">= 2/3 sites with >= 50 NL",
+      "observed": "Wikipedia 8, GitHub 4, MDN 2 (0/3 pass)",
+      "pass_fail": "FAIL",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json"
+    },
+    "C8_CEILING": {
+      "description": "H(S_next | URL, H_K=3) > 0.2 bits on >= 2/3 sites",
+      "expected": ">= 2/3 sites",
+      "observed": "Wikipedia H(all)=0.647 bits, H(NL)=0.0 bits; GitHub/MDN too few NL for H computation",
+      "pass_fail": "PARTIAL - H(all) passes for Wikipedia but H(NL) = 0 due to state fragmentation",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35185288822/wikipedia_transitions.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/wikipedia_transitions.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/github_transitions.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/mdn_transitions.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/analyze.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Production server-rendered websites exhibit extremely high URL-level leakage: Wikipedia 91.2%, GitHub 77.8%, MDN 92.0% of transitions have action.target_href == state_after.url. This means clicking a link on these sites almost always navigates to the exact URL encoded in the href, which is expected behavior for server-rendered sites where links encode full destination URLs.",
+    "After non-leakage filtering, the remaining transitions are extremely sparse: Wikipedia 8 NL (from 91 raw), GitHub 4 NL (from 18 raw), MDN 2 NL (from 25 raw). All three sites fall far below the 50 NL threshold required by the frozen decision rule (C7).",
+    "Wikipedia's 8 NL transitions have 6 unique URLs and 6 unique title-URL pairs, resulting in PMI = 0.0 bits because each (state, action, next_state) triple is unique (singleton SA pairs). The Laplace-smoothed PMI formula gives log2(1/N / (1 * 1)) = 0 when count_sas_next = 1 and distinct_actions_s = distinct_next_s = N.",
+    "Wikipedia H(S_next | URL) = 0.647 bits on all 91 transitions (exceeding 0.2 threshold), but H(S_next | URL) = 0.0 on the 8 NL transitions only. The ceiling exists on the full dataset but vanishes in the NL subset because the NL transitions are the 'surprising' ones where navigation didn't follow the expected path.",
+    "The positive control (8-state linear SPA with unique deterministic titles) passes strongly: BC PMI = 1.841 bits, permutation p = 0.001, determinism accuracy = 1.0. The PMI pipeline correctly detects known deterministic structure.",
+    "Title variation check passes on all 3 sites (>= 2 unique titles), but this is uninformative because the NL subsets are too small for PMI analysis.",
+    "Playwright browser automation encountered persistent EPIPE errors in the CI environment, limiting data collection to small batches (5-15 trajectories per session) with crashes on context close. Despite this, sufficient raw transitions were collected to diagnose the fundamental problem: high URL-level leakage on production server-rendered sites.",
+    "The 91% leakage rate on Wikipedia is a structural property of server-rendered sites: <a href=\"/wiki/Article\"> links encode the full destination URL in the href attribute, so action.target_href == state_after.url by construction for link navigation. Only button clicks, form submissions, and JavaScript-triggered navigation can produce non-leakage transitions."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID because C7 (>= 50 NL per site on >= 2/3 sites) fails: 0/3 sites meet threshold. This is not a scientific negative but an infrastructure/data-sufficiency failure.",
+    "The high leakage rate (78-92%) on production server-rendered sites is a structural property, not a measurement artifact. Link hrefs on these sites encode full destination URLs, making leakage the expected outcome for link-based navigation.",
+    "The PMI pipeline is validated by the positive control (BC PMI = 1.841, p = 0.001) but cannot be meaningfully applied to the NL subsets because they are too small (< 10 transitions per site).",
+    "Playwright EPIPE errors in the CI environment limited data collection but did not cause the MEASUREMENT_INVALID outcome. Even with unlimited collection time, the 78-92% leakage rate means collecting 50 NL transitions would require 250-450 raw transitions per site (50 / (1 - leakage_rate)), which is achievable but was not reached in this run.",
+    "The frozen decision rule's C8 (H(S_next|URL,H_K=3) > 0.2) passes for Wikipedia on ALL transitions (H = 0.647) but fails on NL only (H = 0.0). This reveals that the NL subset is the problematic regime for PMI analysis.",
+    "Server-rendered sites (Wikipedia, MDN, GitHub) are not SPAs. The C-WEB-DYNAMICS claim concerns interactive Web transformations broadly, but this experiment specifically tested server-rendered sites. SPA-form-heavy sites may exhibit lower leakage rates and more title-dependent navigation."
+  ],
+  "unresolved": [
+    "Whether production SPAs (hash-based routing, client-side rendering) exhibit lower URL-level leakage rates than server-rendered sites, enabling more NL transitions for PMI analysis.",
+    "Whether the non-leakage fraction can be increased by targeting form submissions, button clicks, and JavaScript-triggered navigation instead of link clicks.",
+    "Whether the 50 NL threshold is achievable on production sites with browser automation, given the structural leakage property of server-rendered link navigation.",
+    "Whether the title-aware PMI pipeline can detect predictive structure on the small NL subsets if a more powerful estimator is used (e.g., Bayesian PMI, trajectory-level mutual information).",
+    "Whether the synthetic-to-real gap can be bridged by targeting SPA sites where URL routing is ambiguous (multiple states share the same URL path but differ in client-side state), reducing the leakage rate."
+  ]
+}
