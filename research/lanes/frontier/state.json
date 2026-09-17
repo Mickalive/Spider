@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does per-type CV stability (\u22640.5 at lambda=1) achieve at larger per-type n (500-1000/type) with KDE Scott or kNN k=5, or does kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type) survive confirmatory preregistration \u2014 and does the per-type vs pooled ordering reversal (KDE/kNN per-type>pooled vs binned pooled>per-type) persist across DGP families with different noise structures?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-17T15:06:03.748087+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-17T18:04:21.380194+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "27836707c28f5f54763fb28a9a2ba43757591250c51d9fd4a603e7299c2b8dc3",
-  "same_failure_count": 2,
+  "same_failure_count": 3,
   "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
   "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
 }
