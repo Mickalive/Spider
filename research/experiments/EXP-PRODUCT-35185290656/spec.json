@@ -1,17 +1,54 @@
 {
   "experiment_id": "EXP-PRODUCT-35185290656",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PARAM-INHERIT"],
+  "question": "Can Fix3 (_is_protocol_only_prefix) be redesigned to reject only truly protocol-only prefixes (bare scheme+authority with no path, query, or fragment) without blocking valid host?query parameterization, and does a discriminating test corpus demonstrate its independent necessity over Fix2?",
+  "hypothesis": "A redesigned Fix3 that checks for '?' or '/' or '#' in the rest after '://' will: (1) correctly reject bare authority prefixes like 'https://api.example.com' (protocol-only), (2) correctly accept query-parameterized prefixes like 'https://api.example.com?key=' (valid parameterization), (3) not break existing kernel tests or HTTP binding, and (4) be independently necessary for patterns where Fix2 passes but Fix3 should reject (bare authority without trailing delimiter).",
+  "falsifier": "Redesigned Fix3 rejects any valid query-parameterized URL (host?query pattern), OR fails to reject protocol-only bare authority prefix, OR breaks existing kernel regression tests, OR HTTP binding accuracy drops below 1.0 on previously passing endpoints.",
+  "baselines": [
+    {
+      "id": "B_OLD_FIX3_OVERBROAD",
+      "description": "Current Fix3 (if '/' not in rest: return True) applied to query-parameterized prefix 'https://api.example.com?key='. Expected: old Fix3 incorrectly returns True (blocks valid parameterization). Demonstrates the bug being fixed.",
+      "stable_id": "B_OLD_FIX3_OVERBROAD"
+    },
+    {
+      "id": "B_LITERAL_HTTP_REGRESSION",
+      "description": "Literal mechanisms (zero-parameter) with same training data and valid IDs from parent. Expected: 9/9 HTTP execution success. Regression baseline to confirm Fix3 redesign does not break existing capability.",
+      "stable_id": "B_LITERAL_HTTP_REGRESSION"
+    }
+  ],
+  "positive_control": {
+    "id": "P1_QUERY_PARAM_ACCEPTED",
+    "description": "Redesigned Fix3 applied to query-parameterized prefix 'https://api.example.com?key='. Expected: returns False (does NOT reject), allowing distill_parameterized to proceed. This is the primary fix validation.",
+    "stable_id": "P1_QUERY_PARAM_ACCEPTED"
+  },
+  "null_control": {
+    "id": "N1_PROTOCOL_ONLY_REJECTED",
+    "description": "Redesigned Fix3 applied to bare authority prefix 'https://api.example.com'. Expected: returns True (rejects), confirming Fix3 still catches truly protocol-only patterns.",
+    "stable_id": "N1_PROTOCOL_ONLY_REJECTED"
+  },
+  "measurement_validity": [
+    "Fix3 redesign implemented in src/spider/kernel.py as a single function body change to _is_protocol_only_prefix; no other function signatures changed",
+    "URL test corpus covers 10+ patterns across 4 categories: protocol-only, query-parameterized, path-slash, mixed",
+    "Existing kernel regression tests (3/3) run before and after Fix3 change to confirm no regression",
+    "HTTP binding test re-run with query-parameterized endpoint (comments?postId=${url}) to verify end-to-end parameterization works for host?query patterns",
+    "Discriminating test demonstrates Fix3 independently necessary: protocol-only prefix rejected by Fix3 but not by Fix2 alone (Fix2 passes bare authority in some contexts)",
+    "All measurements use committed code (no run_experiment.py harness dependency for Fix3 unit tests)",
+    "GET-only endpoints tested (PUT/POST not in scope)",
+    "Network access to jsonplaceholder.typicode.com required for HTTP binding test"
+  ],
+  "decision_rule": [
+    "C1: Fix3 redesigned function rejects bare authority prefix 'https://api.example.com' (returns True)",
+    "C2: Fix3 redesigned function accepts query-parameterized prefix 'https://api.example.com?key=' (returns False)",
+    "C3: Fix3 redesigned function accepts path-slash prefix 'https://jsonplaceholder.typicode.com/' (returns False, same as current)",
+    "C4: Old Fix3 (before redesign) incorrectly rejects query-parameterized prefix 'https://api.example.com?key=' (returns True) — demonstrates the bug",
+    "C5: Kernel regression tests pass (3/3) after Fix3 redesign",
+    "C6: HTTP binding accuracy >= 1.0 on query-parameterized endpoint (comments?postId=${url} with valid unseen IDs postId 5-7)",
+    "C7: distill_parameterized with Fix3 redesign produces correct Mechanism for query-parameterized observations (slot ['url'], template 'comments?postId=${url}')",
+    "ALL conditions C1-C7 must pass for SURVIVES_CURRENT_TEST; any failure triggers FALSIFIED-IN-SETTING"
+  ],
+  "product_consequence_positive": "C-PARAM-INHERIT expands coverage to include host?query parameterization patterns (previously blocked by overbroad Fix3). Fix3 is demonstrated as non-redundant defense-in-depth for bare authority patterns. Claim ceiling expands from 'path-slash GET only' to 'path-slash and query-parameterized GET'. Product viability signal strengthened for real-world URL patterns.",
+  "product_consequence_negative": "C-PARAM-INHERIT remains limited to path-slash URL patterns only. Fix3 either remains overbroad (blocks valid queries) or is redundant (Fix2 already handles all cases). No product promotion. Consider removing Fix3 entirely if redundancy confirmed.",
+  "estimated_cost": "Low: Fix3 function body change (5 lines), 10+ unit tests for URL corpus, 3 kernel regression tests, 6 HTTP requests to jsonplaceholder (comments endpoint with postId 5-7). No browser automation, no model calls.",
+  "expected_information_gain": "High: directly resolves the primary blocker from parent experiment (V2_FIX3_OVERBROAD_BLOCKS_VALID_QUERY_PARAM). Either Fix3 can be fixed to handle host?query patterns (positive, expands claim ceiling) or Fix3 is fundamentally redundant with Fix2 (negative, simplifies codebase). Either outcome materially changes the C-PARAM-INHERIT claim and product architecture."
 }
