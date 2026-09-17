@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35154721808",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redesign fully-ambiguous condition to retain H(Response)>0 while keeping state-ambiguous: e.g., per-session hash pool where all 3 states share hash_A in left-direction sessions and hash_B in right-direction sessions (or per-step session-varying content) so PMI>0 is theoretically possible and session-direction-correlated genuine dynamics can be expressed. Current CONTENT_FULLY_AMBIGUOUS is constant 62fe3a150495f0b6 across all states/sessions/steps, making SURVIVES impossible by construction and positive/null controls degenerate (perm_std=0).",
+    "Repair positive/null control definitions for |R|=1 degeneracy: specify an alternative validation that is achievable when response is constant (e.g., synthetic injection of known state-ambiguous but session-varying PMI>0, or historical validation via parent MTO condition where perm_std=0.0064) rather than within-experiment permutation of identical labels. Frozen criterion |content-shuffled BC PMI|<3*std AND std>0 is unsatisfiable when std=0.",
+    "Amend frozen decision_rule precedence and falsifier: controls failing due to design degeneracy must trigger MEASUREMENT_INVALID before FALSIFIED; current run_experiment.py elsif chain (FALSIFIED elif not c3 -> MEASUREMENT_INVALID) masks invalid controls. Re-freeze with a discriminating positive control and clarify that cardinality suspension does not suspend control validity.",
+    "Do not interpret BC_PMI_FA_K3=0.0 as isolating partial state discrimination from total response variance: with |R|=1 both partial discrimination and all response variance are eliminated, so the 0.226->0.0 drop conflates elimination of S2 uniqueness with elimination of all information. A 3-condition decomposition (3 hashes, 2 hashes, 1 hash) quantifies monotonic scaling with discrimination capacity, not a clean isolation of partial vs genuine dynamics."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_tautological_target",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Response variable is constant by construction: |R|=1 in all 63 K=3 strata and all 19 K=1 strata (unique_responses=1, max_cardinality=1, H(Response)=0). Therefore conditional PMI I(S_next;Response_before|URL,HK) is identically 0 for any joint distribution (I(X;Y)=0 when Y constant). BC_PMI_FA_K3=0.0, BC_PMI_FA_K1=0.0, perm_std=0.0, p=1.0 are mathematically forced, not empirically measured. Environment cannot express the tested effect (genuine response-context dynamics via session-dependent variation) because implementation has zero response variance.",
+      "evidence": "raw_result.json:pmi_results.3.bc_pmi=0.0 perm_std=0.0 max_cardinality=1 stratum_details[*].unique_responses=1; raw_result.json:pmi_results.1.* same; run_experiment.py:CONTENT_FULLY_AMBIGUOUS identical dict for S0/S1/S2 -> hash 62fe3a150495f0b6 single hash; result.json:metrics fa_unique_hashes=[62fe3a150495f0b6] n_unique_hashes=1"
+    },
+    {
+      "id": "V2_degenerate_controls",
+      "severity": "high",
+      "category": "controls",
+      "finding": "Positive control (content-shuffled BC PMI) and null control (shuffled labels) are degenerate: permutation null has zero variance because shuffling identical labels yields identical data. Producer correctly reports positive_control_pass=false (bc_pmi_h0=0.0 perm_std_h0=0.0) and null_control_pass false (both raw and bc). Frozen pass criterion (|BC|<3*std AND std>0) is unsatisfiable when std=0, making SURVIVES unreachable by design. Producer validity_notes correctly notes degeneracy is expected mathematically, but this means pipeline is not independently validated under the 1-hash condition; validation is inherited from parent MTO where perm_std_h0=0.006422. The frozen spec's replacement criterion (determinism+content-shuffled) fails as well.",
+      "evidence": "result.json:controls.positive_control pass=false degenerate=true perm_std=0.0; controls.null_control pass=false degenerate=true; raw_result.json:positive_control perm_std_h0=0.0 bc_pmi_h0=0.0; null_control raw_shuffled_pmi_std=0.0 bc_shuffled_pmi_std=0.0; spec.json:positive_control expected |BC|<3*std AND std>0, null_control expected BC mean ~0"
+    },
+    {
+      "id": "V3_hypothesis_design_mismatch",
+      "severity": "high",
+      "category": "identifiability",
+      "finding": "Prereg hypothesis states that PMI>0 with 1 hash would demonstrate genuine dynamics via 'session-dependent content variations that correlate with transition direction' while eliminating partial discrimination. Implementation provides no such variation: hash_content(CONTENT_FULLY_AMBIGUOUS[state]) is identical for all states/sessions/steps, with no session-dependent branch. Thus the alternative mechanism the test is intended to detect is not implemented in the observation model; the test cannot distinguish partial discrimination from genuine dynamics because it eliminates all variance, not just discriminative variance.",
+      "evidence": "prereg.md:1.3, 3.1, 6 hypothesis H1; spec.json:hypothesis paragraph; run_experiment.py:CONTENT_FULLY_AMBIGUOUS constant, generate_trajectories resp_hash=hash_content(content_map[state]) no session/step variation; provenance.json:experiment_parameters content_mapping=fully_ambiguous n_unique_hashes=1"
+    },
+    {
+      "id": "V4_decision_rule_precedence",
+      "severity": "medium",
+      "category": "decision_rule",
+      "finding": "Frozen spec falsifier lists positive control failure and determinism failure as falsifiers alongside PMI threshold, but prereg decision_rule and run_experiment.py give FALSIFIED precedence over MEASUREMENT_INVALID (if bc<=0.05 -> FALSIFIED elif not c3 -> MEASUREMENT_INVALID). This masks degenerate controls: producer reports FALSIFIED-IN-SETTING despite C3 and C4-equivalent null control failing. A valid falsification-first design should require controls to pass (or be achievable) before a scientific FALSIFIED is claimed.",
+      "evidence": "spec.json:falsifier clause (2)(3) and decision_rule; prereg.md:14; run_experiment.py:472-488 if all_pass -> SURVIVES elif bc<=0.05 -> FALSIFIED elif not c3 -> MEASUREMENT_INVALID; result.json:controls.positive_control pass=false but outcome=FALSIFIES"
+    },
+    {
+      "id": "V5_sampling_target_integrity",
+      "severity": "low",
+      "category": "sampling",
+      "finding": "Sampling and target computation are otherwise sound: 200 trajectories x10 steps =2000 transitions, seed=42, session_directions identical to parent (20 sessions left/right verified), stochastic branching p_left=0.7 p_right=0.3 verified via transition_verification (p_hat 0.68-0.72 left, 0.24-0.32 right), entropy H(S_next|URL,HK3)=1.533 bits correctly computed (ceiling eliminated >0.2), determinism check 1.0 with 571 groups, no target leakage (action history START padded, step included in strata). Recomputed metrics match producer exactly.",
+      "evidence": "raw_result.json:session_directions identical to parent 35137030850, n_transitions 2000, conditional_entropy fa_K3=1.533265, determinism fa accuracy 1.0 groups 571 violations 0, transition_verification; provenance.json seed 42"
+    },
+    {
+      "id": "V6_representation_loss",
+      "severity": "medium",
+      "category": "representation",
+      "finding": "Observation is SHA-256 hex truncated to 16 chars of JSON response, not DOM/accessibility/visual. With fully-ambiguous mapping this representation loss is total for this condition (all hashes identical), but even with richer content the hash aggregation would conflate distinct DOM states that share JSON. The experiment's negative result does not generalize to richer representations (accessibility tree, visible_text_hash, multi_feature) tested in prior physics experiments where DOM hash gave 0.28-1.0 bits.",
+      "evidence": "spec.json:measurement_validity bullet 1, prereg 17; run_experiment.py:hash_content SHA256 16 hex; report.md:5 Scope and Limitations"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_unique_content_baseline",
+      "baseline": "Unique-content (parent EXP-PHYSICS-35137030850, 3 hashes, BC PMI=0.493 bits)",
+      "finding": "Historical baseline, not concurrently re-executed. Reused from parent with identical FSM/sessions (seed 42, same session_directions). Provides upper bound for discrimination capacity. Audit of parent (REVISE) verified recomputed BC_PMI_UNIQ_K3=0.493481 p_bonf=0.0. Comparison is valid for ordered monotonicity but action sequences differ slightly due to sequential RNG advancement (parent audit V9) – effect size ~0.01 bits negligible relative to 0.268-bit drop.",
+      "strength": "medium",
+      "evidence": "result.json:parent_BC_PMI_UNIQ_K3=0.493; handoff 35137030850:established BC PMI 0.493; raw_result 35137030850"
+    },
+    {
+      "id": "B2_many_to_one_baseline",
+      "baseline": "Many-to-one (parent EXP-PHYSICS-35137030850, 2 hashes S0/S1 shared S2 unique, BC PMI=0.226 bits)",
+      "finding": "Historical baseline with partial discrimination (S2 isolated). Parent BC_PMI_MTO_K3=0.225711 p_bonf=0.0 validated. The 0.226->0.0 drop to fully-ambiguous is descriptively monotonic (0.493>0.226>0.0) but conflates elimination of S2 uniqueness with elimination of all variance. Cannot isolate partial discrimination contribution without a design that preserves H(Response)>0 while keeping state-ambiguous.",
+      "strength": "medium",
+      "evidence": "result.json:parent_BC_PMI_MTO_K3=0.226 metrics.PMI_reduction 0.226; raw_result 35137030850 pmi_results.mto.3"
+    },
+    {
+      "id": "B3_state_independent_baseline",
+      "baseline": "State-independent (constant response)",
+      "finding": "Not separately executed in this run, but fully-ambiguous condition is itself a state-independent response by construction (constant hash). Expected BC PMI=0, observed 0.0 – matches expectation trivially. No independent estimator validation provided beyond tautology.",
+      "strength": "weak",
+      "evidence": "spec.json:baselines bullet 3; result.json:BC_PMI_FA_K3=0.0"
+    },
+    {
+      "id": "B4_action_history_only",
+      "baseline": "Action-history-only prediction P(S_next|URL,HK) K=1,2,3, frequency baseline",
+      "finding": "Implemented via conditional entropy H(S_next|URL,HK3)=1.533 bits (1.566 at K1) >0.2 threshold, confirming action history insufficient to determine transition (ceiling eliminated). Transition verification shows p_hat ~0.7/0.3 as designed. No leakage into Response_before.",
+      "strength": "strong",
+      "evidence": "raw_result.json:conditional_entropy fa_K3=1.533265 fa_K1=1.566265; result.json:metrics H_Snext_given_URL_HK3_FA=1.533265; raw_result:transition_verification"
+    },
+    {
+      "id": "B5_content_shuffled_positive_control",
+      "baseline": "Positive control (content-shuffled on fully-ambiguous)",
+      "finding": "Intended as strong null (break state-content pairing). Degenerate: pool size 1 hash, so shuffled data identical to observed, BC PMI=0.0 perm_std=0.0. Fails frozen pass criterion (std>0 required). Does not provide independent validation; validation inherited from parent MTO where BC=0.0019 std=0.0064 passed.",
+      "strength": "invalid",
+      "evidence": "result.json:controls.positive_control observed BC 0.0 perm_std 0.0 pass false degenerate true; raw_result.json:positive_control"
+    }
+  ],
+  "recomputed_metrics": {
+    "BC_PMI_FA_K3": 0.0,
+    "BC_PMI_FA_K1": 0.0,
+    "observed_PMI_FA_K3": 0.0,
+    "perm_mean_FA_K3": 0.0,
+    "perm_std_FA_K3": 0.0,
+    "p_value_FA_K3": 1.0,
+    "p_bonf_FA_K3": 1.0,
+    "H_Snext_given_URL_HK3_FA": 1.533265,
+    "H_Snext_given_URL_HK1_FA": 1.566265,
+    "determinism_accuracy_FA": 1.0,
+    "determinism_groups_FA": 571,
+    "determinism_violations_FA": 0,
+    "n_transitions_FA": 2000,
+    "n_unique_hashes": 1,
+    "fa_unique_hash": "62fe3a150495f0b6",
+    "positive_control_bc_pmi_h0": 0.0,
+    "positive_control_perm_std_h0": 0.0,
+    "positive_control_pass_recomputed": false,
+    "null_control_bc_mean": 0.0,
+    "null_control_bc_std": 0.0,
+    "null_control_pass_recomputed": false,
+    "parent_BC_PMI_MTO_K3": 0.226,
+    "parent_BC_PMI_UNIQ_K3": 0.493,
+    "recomputed_match": true,
+    "notes": "All primary metrics recomputed via independent reading of raw_result.json and analytic verification (|R|=1 => PMI=0). Values match result.json exactly to 6 decimals. Entropy 1.533265 matches weighted per-stratum calculation; determinism groups 571 matches parent MTO 571; session_directions identical to parent verified by exact dict equality."
+  },
+  "claim_ceiling": "Maximum justified: Conditional PMI I(S_next;Response_before|URL,H_K=3) =0.0 bits exactly (permutation p=1.0, Bonferroni p=1.0) when Response_before is a constant SHA-256 hash (1 unique hash 62fe3a150495f0b6 across all states/sessions/steps, H(Response)=0) on the locally-hosted 3-state stochastic branching FSM (seed 42, p_left=0.7/p_right=0.3, 200 trajectories x10 steps, H(S_next|URL,HK3)=1.533 bits, 2000 transitions). The ordered 3-condition sequence 0.493 bits (unique 3 hashes) >0.226 bits (many-to-one 2 hashes, parent) >0.0 bits (fully-ambiguous 1 hash) demonstrates PMI scales monotonically with content-state discrimination capacity, but the 1-hash condition is tautological (I=0 when Y constant) and eliminates all response variance, not just partial discrimination, so it does not isolate partial discrimination from genuine dynamics and cannot support a discriminating test for session-dependent genuine dynamics. No inference to production SPAs, richer DOM/accessibility/visual representations, or any setting with H(Response)>0 is justified. C-WEB-DYNAMICS remains HYPOTHESIS; locally-hosted hash-constant observation model shows zero predictive information beyond action history, but richer state-ambiguous yet response-varying designs remain untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35154721808/request.json:inherit_next_question fully-ambiguous 1-hash K=3 >0.05 bits",
+    "research/experiments/EXP-PHYSICS-35154721808/spec.json:question, hypothesis, falsifier clause 2, decision_rule SURVIVES requires C1-C5 all pass, cardinality suspended",
+    "research/experiments/EXP-PHYSICS-35154721808/prereg.md:3.1 CONTENT_FULLY_AMBIGUOUS identical, 12-14 Bonferroni 0.0125, falsification rule",
+    "research/experiments/EXP-PHYSICS-35154721808/result.json:metrics BC_PMI_FA_K3=0.0 perm_std=0.0 p_bonf=1.0 H=1.533265 determinism 1.0 n=2000",
+    "research/experiments/EXP-PHYSICS-35154721808/raw_result.json:pmi_results.3.bc_pmi=0.0 perm_std=0.0 n_strata=63 stratum_details[*].unique_responses=1; positive_control bc_pmi_h0=0.0 perm_std_h0=0.0; null_control bc mean 0.0 std 0.0",
+    "research/experiments/EXP-PHYSICS-35154721808/run_experiment.py:CONTENT_FULLY_AMBIGUOUS constant, hash_content SHA256 16 hex, build_strata (URL,HK,step), compute_pmi plug-in, permutation_test_pmi, content_shuffled_control pool size 1",
+    "research/experiments/EXP-PHYSICS-35154721808/provenance.json:seed 42 parent 35137030850 identical session_directions, git_commit b43ccafbc888a35752907637f1de810bba374399 execution 12.1s",
+    "research/experiments/EXP-PHYSICS-35137030850/handoff.json:carry_forward unknown dominates (whether 0.226 bits genuine vs partial), next_question fully-ambiguous 1-hash",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json:BC_PMI_MTO_K3=0.225711 BC_PMI_UNIQ_K3=0.493481 determinism 1.0",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS across 30+ physics/frontier experiments"
+  ],
+  "unresolved": [
+    "Whether a state-ambiguous but response-varying design (e.g., per-session shared hash where hash_A for left sessions and hash_B for right sessions, keeping per-state ambiguity but correlating hash with transition direction) would yield BC PMI>0, which is the actual discriminating test for genuine dynamics hypothesized in prereg 1.3. Current constant-response design cannot answer this.",
+    "Quantitative decomposition of PMI into aliasing vs genuine dynamics remains confounded: 0.493->0.226 drop includes both full>partial discrimination and partial discrimination still present; 0.226->0.0 drop includes both partial discrimination and total variance elimination. No clean isolation.",
+    "Whether richer locally-hosted representations (DOM visible_text_hash, accessibility_tree_hash, multi_feature, network payload) with non-constant hashes would yield PMI>0 under fully-ambiguous content mapping – prior locally-hosted DOM experiments showed 0.0 at K=3 when history sufficient, but those were deterministic FSMs, not stochastic branching.",
+    "Whether stochastic transition PMI>0 would be detectable on production SPAs with client-side rendering, auth-dependent content, external data, and visual representations – synthetic-to-real gap remains dominant unknown per parent handoff recommended_action (pivot to production SPA infrastructure)."
+  ]
+}

@@ -68,7 +68,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "0cef5908fade8d636ed40f64f5cd5d64e2a909b8",
       "hashes": {
         "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
@@ -287,7 +287,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "0d00d3abac08d203c6df7314c622969785d6f83e",
       "hashes": {
         "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
@@ -562,7 +562,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "c1a660af636302945d2817697e5470f50efac713",
       "hashes": {
         "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
@@ -778,7 +778,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "1504ba88ec66a9060656c9a3b75c586bc55e9fe9",
       "hashes": {
         "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
@@ -915,7 +915,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "a4c9a3e22d344c9e0bd5d392d81dee1b572ff88d",
       "hashes": {
         "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
@@ -969,7 +969,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "fcec93130c8d7a7d9feed13b142420d179c21b82",
       "hashes": {
         "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
@@ -1131,7 +1131,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "a23db9347a329843bf69f7ffe1066831fcd55004",
       "hashes": {
         "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
@@ -1266,7 +1266,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "e45dabebba74bac4239f93bdff7a6c1a27938156",
       "hashes": {
         "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
@@ -1484,7 +1484,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "ad803c5168c071bf1edc4125404a7a0096dcdee3",
       "hashes": {
         "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
@@ -1621,7 +1621,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "1eae61c57d53569bb75757e3e4114c823f2e7911",
       "hashes": {
         "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
@@ -1729,7 +1729,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "df5a7fd2f905abe14373bfd3ac607f448a688af8",
       "hashes": {
         "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
@@ -1783,7 +1783,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "4ce4954fbfec56bcc79d0de613f8fcf99ea86b94",
       "hashes": {
         "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
@@ -1892,7 +1892,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "6fc96c940178ab198faee313db88403c6e3b777d",
       "hashes": {
         "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
@@ -1919,7 +1919,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "8ae879a69fd5021c8646c42f2d06a4915fe16898",
       "hashes": {
         "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
@@ -2027,7 +2027,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "b8b379afd65beb4b0782d7e4f0c950d04317bfb8",
       "hashes": {
         "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
@@ -2164,7 +2164,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "d2eff3812d50dfe4877e90bb019792f22423ce6c",
       "hashes": {
         "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
@@ -2272,7 +2272,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "894ea2ef394f8f3101c7841ad48264f3752492a8",
       "hashes": {
         "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
@@ -2382,7 +2382,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "77d4d23236294e10b101bae7a5cd7f9a5a22332d",
       "hashes": {
         "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
@@ -2626,7 +2626,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "hashes": {
         "request.json": "597e09c2fcef5c326c4374b44a38b1f99af46a23559f05122c50f55b7163ee6b",
@@ -2790,7 +2790,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "3905edca7b118c2fd60716906faa87495913199e",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "source_commit": "c87d8226bdc357b34fddeacb1e913ebb5d068a52",
       "hashes": {
         "request.json": "ecfe82543b6c6ae4460768e2b9b8815346dec7d46fb9765838fdfc4fe0d781ed",
@@ -2858,6 +2858,33 @@
         "audit.json": "1af7f18ba5b56b1d52a9d00c2700483be1f9468894f3c6f48015a31f3ae80769",
         "verdict.json": "1e91e7adcdda4ae76ab7e3c11305d14ca15a93cd5c5966c2ce9835d85c9c9dcf",
         "handoff.json": "1e07c379942a2bc21ab714cfdbac54941ca52937f23be59cd47c46f6f4ca4a0e"
+      }
+    },
+    "EXP-PHYSICS-35154721808": {
+      "lane": "physics",
+      "request_id": "832a98023d9af6f0d29ba615",
+      "created_at": "2026-09-16T21:52:29.795273+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can a fully-ambiguous content mapping (all 3 states share 1 content hash, eliminating partial state discrimination) with stochastic branching FSM yield conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125, resolving whether the residual 0.226 bits from EXP-PHYSICS-35137030850 reflects genuine predictive dynamics beyond aliasing or is entirely explained by partial state discrimination?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (2) triggers: BC PMI at K=3 = 0.000000 bits \u2264 0.05 threshold, Bonferroni p = 1.0. The primary measurement is mathematically forced (I(X;Y) = 0 when Y is constant, |R| = 1 by design). The auditor's REVISE recommendation on control degeneracy is accepted: controls failing because |R| = 1 makes permutation null degenerate is a design-consequence, not an execution-failure. However, the primary measurement (BC PMI = 0.0) is unambiguous and independently sufficient for the FALSIFIED-IN-SETTING verdict \u2014 controls are confirmatory, not gating. The frozen rule's precedence (FALSIFIED checked before MEASUREMENT_INVALID) is correctly triggered. Claim ceiling bounded to: conditional PMI = 0.0 bits exactly on constant-response hash-based observation with stochastic branching FSM. No inference to richer representations, production SPAs, or H(Response) > 0 settings.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "source_ref_head": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
+      "source_commit": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
+      "hashes": {
+        "request.json": "038454b1676888d7706ed54a0c9e75012501fcc2877b973db2ce8cdfb7920d1f",
+        "spec.json": "356e64e71c9f160e91046ae27e4b7c21517fd05bd0a2fbf14c6388678d540446",
+        "prereg.md": "6aaa8117f8395804f6bb46a4d1d7d08a1ba1ac300115e417c5563d55181d009e",
+        "freeze.json": "05f4df6b62bc4dcca409413bcae67e59ce6f39284bbbffd20ba1a6d180f34194",
+        "result.json": "feb8966ebf5b30cb2ec37cab41c26e44e18e17560f595fc74af604ec623f0144",
+        "report.md": "76eec90b09f59145a4148fc1c05d0a9a1397b08b3a70231712e9ee7f73f3e201",
+        "provenance.json": "4bfccf10b7ccee2925d527db99b7e702b8efbf152a4a7c7acb5b643a35fc9e11",
+        "audit.json": "ac13749604ed766774bffd9cb4deed42724284b8918880efdb0f6dc852913498",
+        "verdict.json": "8cc1a82d17235075f4cc4d274f1ad6b73b1a2711b19e7827f11cddb4d32f9120",
+        "handoff.json": "b23f5e807bc2e274d9a07aa8cd160bb6745a1f894052a083920059e36d7f94c1"
       }
     },
     "EXP-GRAPH-35154724244": {

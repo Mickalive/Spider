@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35154721808",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "BC_PMI_FA_K3": 0.0,
+    "BC_PMI_FA_K1": 0.0,
+    "observed_PMI_FA_K3": 0.0,
+    "perm_mean_FA_K3": 0.0,
+    "perm_std_FA_K3": 0.0,
+    "p_value_FA_K3": 1.0,
+    "p_bonf_FA_K3": 1.0,
+    "H_Snext_given_URL_HK1_FA": 1.566265,
+    "H_Snext_given_URL_HK3_FA": 1.533265,
+    "determinism_accuracy_FA": 1.0,
+    "determinism_groups_FA": 571,
+    "determinism_violations_FA": 0,
+    "n_transitions_FA": 2000,
+    "fa_unique_hashes": ["62fe3a150495f0b6"],
+    "n_unique_hashes": 1,
+    "positive_control_bc_pmi_h0": 0.0,
+    "positive_control_perm_std_h0": 0.0,
+    "positive_control_pass": false,
+    "null_control_bc_mean": 0.0,
+    "null_control_bc_std": 0.0,
+    "null_control_pass_raw": false,
+    "null_control_pass_bc": false,
+    "parent_BC_PMI_MTO_K3": 0.226,
+    "parent_BC_PMI_UNIQ_K3": 0.493,
+    "PMI_reduction_from_many_to_one_to_fully_ambiguous": 0.226,
+    "parent_H_Snext_given_URL_HK3_MTO": 1.533
+  },
+  "controls": {
+    "positive_control": {
+      "expected": "BC PMI approximately 0 with perm_std > 0 (since all states share 1 hash, content-shuffled produces identical data)",
+      "observed": "BC PMI = 0.0, perm_std = 0.0 (degenerate: |R|=1 by construction makes permutation null identically 0)",
+      "pass": false,
+      "degenerate": true,
+      "degeneracy_reason": "When all 3 states produce 1 identical hash, permutation null has zero variance (any permutation produces the same result). This is mathematically expected, not a validity failure.",
+      "evidence": "raw_result.json:positive_control"
+    },
+    "null_control": {
+      "expected": "BC shuffled PMI mean approximately 0",
+      "observed": "BC shuffled PMI mean = 0.0, std = 0.0 (degenerate: same reason as positive control)",
+      "pass": false,
+      "degenerate": true,
+      "degeneracy_reason": "When all response hashes are identical, within-strata label permutation produces identical data. PMI is identically 0 for any label assignment.",
+      "evidence": "raw_result.json:null_control"
+    },
+    "determinism_check": {
+      "expected": "P(Response_hash | FSM_state, session, step) = 1.0",
+      "observed": "accuracy = 1.0, 571 groups, 0 violations",
+      "pass": true,
+      "evidence": "raw_result.json:determinism"
+    },
+    "ceiling_check": {
+      "expected": "H(S_next|URL, H_K=3) > 0.2 bits",
+      "observed": 1.533265,
+      "pass": true,
+      "evidence": "raw_result.json:conditional_entropy"
+    },
+    "sample_size": {
+      "expected": ">= 500 valid transitions",
+      "observed": 2000,
+      "pass": true
+    },
+    "cardinality": {
+      "expected": "SUSPENDED (|R|=1 by construction in fully-ambiguous condition)",
+      "observed": "|R|=1 in all 63 strata",
+      "pass": "SUSPENDED",
+      "evidence": "raw_result.json:cardinality_summary"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35154721808/raw_result.json",
+      "sha256": "49b1e5444231bd58d04df34009538ac66293039354f73e58d31ef982c010f648",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35154721808/run_experiment.py",
+      "sha256": "a51a31601650490aeec24dd00df45a0500e58146023cd714f097b3325a4666ff",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "BC PMI at K=3 on fully-ambiguous condition = 0.000000 bits exactly. This is the primary measurement: zero predictive information from response content when all states share 1 hash.",
+    "BC PMI at K=1 on fully-ambiguous condition = 0.000000 bits. No predictive information at any history length.",
+    "The observed PMI is 0.0 bits in every stratum because all response hashes are identical (|R|=1). PMI is identically zero when one variable is constant.",
+    "Permutation null has zero variance (std=0.0) at both K=1 and K=3, confirming the response variable is constant and any permutation produces the same data.",
+    "Determinism check passes perfectly (accuracy=1.0, 571 groups, 0 violations): content is deterministic per (state, session, step) as designed.",
+    "Ceiling eliminated: H(S_next|URL, H_K=3) = 1.533 bits (comparable to parent's 1.533 bits for many-to-one condition), confirming the FSM has sufficient transition entropy for the test.",
+    "Session directions identical to parent experiment, confirmed by matching session_directions dict.",
+    "Positive and null controls are degenerate (perm_std=0) because |R|=1 makes the permutation null mathematically degenerate. This is an expected consequence of the fully-ambiguous design, not a measurement failure.",
+    "Cross-condition comparison: fully-ambiguous BC PMI (0.0) < many-to-one BC PMI (0.226) < unique-content BC PMI (0.493). The ordered sequence 0.0 < 0.226 < 0.493 demonstrates PMI is monotonically increasing with content-state discrimination capacity."
+  ],
+  "validity_notes": [
+    "The positive control and null control are mathematically degenerate when |R|=1 (all states share 1 hash). The permutation null has zero variance because permuting identical labels produces identical data. The pass criterion (|BC PMI| < 3*std AND std > 0) requires std > 0, which is impossible when the response variable is constant. This is NOT a validity failure — it is the expected mathematical behavior of the estimator under the fully-ambiguous condition. The preregistered positive control was designed for the many-to-one condition (2 hashes) where perm_std > 0.",
+    "The frozen decision rule's C2 clause (BC PMI > 0.05 with Bonf p < 0.0125) triggers FALSIFIED-IN-SETTING. The C3 clause (positive control pass) also fails due to degeneracy, but this is redundant with C2 failure. The scientific answer (BC PMI = 0.0) is unambiguous regardless of control validity.",
+    "The experiment was executed correctly: FSM parameters match parent (seed=42, p_left=0.7, p_right=0.3, 200 trajectories × 10 steps = 2000 transitions), session directions identical to parent, content mapping is fully-ambiguous (1 unique hash confirmed).",
+    "No infrastructure failure occurred. The result is a valid scientific negative: BC PMI = 0.0 exactly when response content carries zero state-identifying information.",
+    "The Bonferroni correction uses 2 comparisons (1 condition × 2 K values), but the preregistered threshold of 0.0125 (α/4) is used for comparability with the parent. This is conservative but does not affect the conclusion since p_bonf = 1.0."
+  ],
+  "unresolved": [
+    "The three-condition ordered sequence (unique=0.493, many-to-one=0.226, fully-ambiguous=0.0) quantifies the PMI decomposition: 0.226 bits of the unique-content PMI survives partial discrimination (many-to-one), and 0.0 bits survives full ambiguity. This suggests the parent's 0.226 bits was ENTIRELY explained by partial state discrimination (S2 unique hash isolating S2 from {S0,S1}).",
+    "The degenerate positive/null controls at |R|=1 mean the pipeline cannot be independently validated under the fully-ambiguous condition. The pipeline was validated under the parent's many-to-one condition where perm_std > 0. No new pipeline validation is provided by this experiment.",
+    "The claim C-WEB-DYNAMICS regarding genuine predictive dynamics beyond partial state discrimination on locally-hosted synthetic FSM is not supported by this experiment. The PMI vanishes entirely when partial discrimination is eliminated.",
+    "Per the parent handoff recommendation, the Physics lane should pivot to production SPA infrastructure after this experiment regardless of outcome."
+  ]
+}
