@@ -1,17 +1,25 @@
 {
   "experiment_id": "EXP-INTEL-35280397316",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "How do established measurement frameworks (code coverage, information retrieval, web analytics) handle recipe choice ambiguity when aggregating metrics across multiple definitions or dimensions, and can principled resolution methods inform SPIDER's density metric recipe choice problem?",
+  "hypothesis": "There exist principled methods for resolving recipe choice ambiguity in multi-definition metrics, and these methods can inform SPIDER's density metric recipe choice problem. The recipe choice instability (canonical per-iteration C2 FALSE vs per-task weighted C2 TRUE) is a known phenomenon in measurement theory with established resolution approaches.",
+  "falsifier": "F1: No principled methods exist in established measurement frameworks for resolving recipe choice ambiguity. Recipe choice is treated as an arbitrary implementation decision in all relevant fields (code coverage, information retrieval, web analytics). F2: The density metric recipe choice problem is fundamentally different from known measurement ambiguity problems and cannot be informed by prior art.",
+  "baselines": [
+    "Current SPIDER approach: principled justification (prereg §4) but not empirically validated on full-DOM data",
+    "Null hypothesis: recipe choice is arbitrary and no principled resolution methods exist"
+  ],
+  "positive_control": "Well-documented cases of recipe choice ambiguity in established fields: (1) code coverage metrics (line vs branch vs path coverage aggregation), (2) information retrieval (precision/recall aggregation across query sets), (3) web analytics (page density/engagement metrics across definition families).",
+  "null_control": "Systematic search finds no principled methods for resolving recipe choice ambiguity in any established measurement framework.",
+  "measurement_validity": [
+    "Systematic literature search with reproducible search criteria (databases, keywords, date range)",
+    "Documented inclusion/exclusion criteria for relevant prior art",
+    "Reproducible synthesis methodology (structured comparison matrix)",
+    "Bounded claim ceiling to published literature only (no new empirical measurement)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (1) PC1 passes (at least 2 well-documented cases of recipe choice ambiguity found in established fields), (2) PC2 passes (at least 1 principled resolution method identified that is applicable to SPIDER's density metric problem), (3) F1 not triggered (principled methods exist in at least 1 established field), (4) F2 not triggered (density metric problem is not fundamentally different from known problems). FALSIFIED_IN_SETTING if F1 triggered (no principled methods exist). MEASUREMENT_INVALID if literature search is insufficient or synthesis methodology is flawed.",
+  "product_consequence_positive": "SURVIVES informs spec amendment for MIXED outcomes and provides principled resolution methods for the recipe choice problem. Product lane gains a theoretically grounded approach to recipe selection, enabling advancement beyond the current blocking ambiguity. The canonical recipe assumption (per-iteration p=0.5) is either validated or refined by prior art.",
+  "product_consequence_negative": "FALSIFIED_IN_SETTING (F1 triggered: no principled methods exist) means recipe choice remains an unresolved fundamental issue. The density metric program cannot advance until the recipe ambiguity is resolved by empirical means (full-DOM re-run with both recipes). Product lane must treat recipe choice as a blocking dependency requiring empirical resolution.",
+  "estimated_cost": "Low: <1 GPU-hour. Literature search and synthesis only. No browser/network/model calls. No new data collection.",
+  "expected_information_gain": "High. Could resolve the central scientific issue from the parent experiment (recipe choice ambiguity) by providing theoretical grounding for recipe selection. Either outcome materially changes the C-MEAS-VALID claim trajectory: SURVIVES provides principled resolution, FALSIFIED_IN_SETTING confirms empirical resolution is required."
 }
