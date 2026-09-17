@@ -663,6 +663,16 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision rule requires ALL conditions C1-C6 for SURVIVES_CURRENT_TEST; C4 (B_UNFIXED_PROTOCOL_ONLY) fails due to test design flaw where Fix2 subsumes Fix3 for the frozen URL pair. However, C1-C3 provide strong positive evidence: URL binding accuracy 1.0 (9/9), HTTP binding accuracy 1.0 (9/9) on valid unseen IDs, literal baseline also 9/9, comment body validation fix works, kernel regression 3/3 pass. Claim ceiling expands from 'synthetic single-slot GET URL construction' to 'committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder.typicode.com'. Fix3 necessity not demonstrated; Fix3 is redundant with Fix2 for tested pattern and overbroad for host?query patterns. Remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE) due to frozen gate failure and open Fix3 issues."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35185290656",
+        "lane": "product",
+        "created_at": "2026-09-17T05:19:48.441018+00:00",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "source_commit": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Fix3 redesign validated narrowly: _is_protocol_only_prefix correctly rejects bare authority ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-parameterized ('https://api.example.com?key=', etc.) and path-slash prefixes for 12/12 corpus, preserves kernel regression 3/3, distills single-slot GET mechanism comments?postId=${url} with slot [url] that resolves EXECUTABLE and binds to https://jsonplaceholder.typicode.com/comments?postId=5 with 3/3 HTTP 200 on jsonplaceholder. This fixes parent V2_FIX3_OVERBROAD for host?query patterns. However, Fix3 independent necessity over Fix2 not demonstrated (audit V1): Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False); only scheme-only 'https://' discriminant untested. Claim ceiling bounded to 'single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification'. Does NOT support multi-slot, PUT/POST, noisy browser, LLM distillation, cross-site, or product economics. C-PRODUCT-ECON remains HYPOTHESIS."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -1420,14 +1430,14 @@
       "reason": "Primary measurement (BC PMI = 0.000000 bits at K=3) is mathematically forced because the fully-ambiguous content mapping makes Response_before constant (|R| = 1 unique hash across all states/sessions/steps), so I(S_next; Response_before | ...) = 0 by identity regardless of dynamics. The result is unambiguous but the frozen decision_rule triggers FALSIFIED-IN-SETTING on C2 (BC PMI \u2264 0.05). Auditor correctly identifies the controls as degenerate (perm_std = 0, frozen pass criterion |BC| < 3*std AND std > 0 unsatisfiable). The measurement is valid for the constant-response condition but cannot discriminate partial-state-discrimination from genuine dynamics because it eliminates ALL response variance, not just discriminative variance. The 3-condition ordered sequence (unique 0.493 > many-to-one 0.226 > fully-ambiguous 0.0) demonstrates PMI scales monotonically with content-state discrimination capacity, confirming the parent's 0.226 bits was entirely explained by partial state discrimination (S2 unique hash isolating S2 from {S0,S1}). No evidence accumulated for or against genuine predictive dynamics beyond aliasing on this FSM class. C-WEB-DYNAMICS remains HYPOTHESIS; the locally-hosted hash-constant observation model shows zero predictive information beyond action history."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35166508130",
+      "experiment_id": "EXP-PRODUCT-35185290656",
       "lane": "product",
-      "created_at": "2026-09-17T00:25:52.829104+00:00",
-      "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
+      "created_at": "2026-09-17T05:19:48.441018+00:00",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "source_commit": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "claim_id": "C-PARAM-INHERIT",
       "status": "EXPERIMENTAL",
-      "reason": "Frozen decision rule requires ALL conditions C1-C6 for SURVIVES_CURRENT_TEST; C4 (B_UNFIXED_PROTOCOL_ONLY) fails due to test design flaw where Fix2 subsumes Fix3 for the frozen URL pair. However, C1-C3 provide strong positive evidence: URL binding accuracy 1.0 (9/9), HTTP binding accuracy 1.0 (9/9) on valid unseen IDs, literal baseline also 9/9, comment body validation fix works, kernel regression 3/3 pass. Claim ceiling expands from 'synthetic single-slot GET URL construction' to 'committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder.typicode.com'. Fix3 necessity not demonstrated; Fix3 is redundant with Fix2 for tested pattern and overbroad for host?query patterns. Remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE) due to frozen gate failure and open Fix3 issues."
+      "reason": "Fix3 redesign validated narrowly: _is_protocol_only_prefix correctly rejects bare authority ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-parameterized ('https://api.example.com?key=', etc.) and path-slash prefixes for 12/12 corpus, preserves kernel regression 3/3, distills single-slot GET mechanism comments?postId=${url} with slot [url] that resolves EXECUTABLE and binds to https://jsonplaceholder.typicode.com/comments?postId=5 with 3/3 HTTP 200 on jsonplaceholder. This fixes parent V2_FIX3_OVERBROAD for host?query patterns. However, Fix3 independent necessity over Fix2 not demonstrated (audit V1): Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False); only scheme-only 'https://' discriminant untested. Claim ceiling bounded to 'single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification'. Does NOT support multi-slot, PUT/POST, noisy browser, LLM distillation, cross-site, or product economics. C-PRODUCT-ECON remains HYPOTHESIS."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-GRAPH-34586318405",
