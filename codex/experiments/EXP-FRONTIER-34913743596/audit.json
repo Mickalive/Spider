@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34913743596",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "severity": "medium",
+      "finding": "Code-result provenance mismatch: on-disk run_execute.py (sha256: 785b9337) contains legacy implementation with fixed 0.5 threshold and simplified kNN (non-Kraskov) that does NOT match frozen spec. Confirmatory results were produced by an optimized execution documented only in execute_log.txt (sha256: a3374507) using Kraskov/Scott from run_sensitivity.py (sha256: 9bb48ff7). The producer notes this in provenance.json and report.md, and the execute_log output is consistent with spec-compliant implementation (permutation thresholds, t-tests, Kraskov digamma). However, the committed code artifact is not the code that produced the results, creating a reproducibility gap.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-34913743596/provenance.json:artifacts[0].note",
+        "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:20-28",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:validity_notes[6]"
+      ]
+    },
+    {
+      "severity": "low",
+      "finding": "CV threshold sensitivity: KDE max CV 0.5745 (type 4, scaling_high_0.5,0.5) is only 14.9% over the frozen 0.5 threshold. The binary pass/fail rule correctly triggers FALSIFIED-IN-SETTING, but the marginal nature suggests a larger per-type n (500-1000) might achieve CV ≤0.5 for KDE. kNN max CV 0.7550 (type 0, rotation_low_0.5,0.5) is 51% over, indicating kNN is more substantially unstable at 250/type.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_cv_per_type[4]",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.knn_per_type.lambda1_cv_per_type[0]"
+      ]
+    },
+    {
+      "severity": "info",
+      "finding": "Exploratory sensitivity: kNN k=10 achieves CV pass (max 0.470, 8/8 types) with null 8/8 pass. This is correctly labeled EXPLORATORY per prereg §14 and cannot support confirmatory claims. Hypothesis-generating only.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-34913743596/sensitivity_exploratory.json:sensitivities.knn_k10.cv_check"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "metric_id": "binned_tv_reference",
+      "description": "Binned TV 20x20 replication control matches parent within tolerance",
+      "expected": "|recomputed - parent 0.034| < 0.01",
+      "observed": "recomputed 0.0343, abs_diff 0.0003",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/result.json:controls.bc_replication"
+    },
+    {
+      "metric_id": "frequency_baseline",
+      "description": "Frequency baseline marginal TV unchanged from parent",
+      "expected": "0.335 (parent)",
+      "observed": "0.3350",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.frequency_baseline"
+    }
+  ],
+  "recomputed_metrics": {
+    "kde_positive_control": {
+      "description": "KDE pooled subsampled BC at lambda=1 vs lambda=0",
+      "pooled_lambda0": 0.0023,
+      "pooled_lambda1": 0.0644,
+      "delta": 0.0621,
+      "t_statistic": 7.81,
+      "p_one_sided": 0.0007,
+      "pass": true,
+      "verification": "Matches execute_log.txt:23 and result.json:controls.kde_positive_control"
+    },
+    "knn_positive_control": {
+      "description": "kNN pooled subsampled BC at lambda=1 vs lambda=0",
+      "pooled_lambda0": 0.0017,
+      "pooled_lambda1": 0.0567,
+      "delta": 0.055,
+      "t_statistic": 6.82,
+      "p_one_sided": 0.0012,
+      "pass": true,
+      "verification": "Matches execute_log.txt:24 and result.json:controls.knn_positive_control"
+    },
+    "kde_null_control": {
+      "description": "KDE per-type null control at lambda=0",
+      "n_passing": 8,
+      "n_total": 8,
+      "max_observed_raw": 0.151,
+      "min_threshold_95th": 0.193,
+      "pass": true,
+      "verification": "All 8 types observed_raw <= threshold_95th, matches execute_log.txt:21 and result.json:controls.kde_null_control"
+    },
+    "knn_null_control": {
+      "description": "kNN per-type null control at lambda=0",
+      "n_passing": 8,
+      "n_total": 8,
+      "max_observed_raw": 0.020,
+      "min_threshold_95th": 0.046,
+      "pass": true,
+      "verification": "All 8 types observed_raw <= threshold_95th, matches execute_log.txt:22 and result.json:controls.knn_null_control"
+    },
+    "kde_cv_check": {
+      "description": "KDE CV across 5 replications at lambda=1",
+      "cv_per_type": [0.3019, 0.3971, 0.1317, 0.4018, 0.5745, 0.2804, 0.1965, 0.2885],
+      "max_cv": 0.5745,
+      "n_passing": 7,
+      "n_total": 8,
+      "threshold": 0.5,
+      "pass": false,
+      "verification": "Type 4 CV 0.5745 > 0.5, matches execute_log.txt:25 and result.json:controls.kde_cv_check"
+    },
+    "knn_cv_check": {
+      "description": "kNN CV across 5 replications at lambda=1",
+      "cv_per_type": [0.7550, 0.3212, 0.2111, 0.1889, 0.4235, 0.4360, 0.1157, 0.1588],
+      "max_cv": 0.7550,
+      "n_passing": 7,
+      "n_total": 8,
+      "threshold": 0.5,
+      "pass": false,
+      "verification": "Type 0 CV 0.7550 > 0.5, matches execute_log.txt:26 and result.json:controls.knn_cv_check"
+    },
+    "primary_comparison": {
+      "description": "Per-type vs pooled ordering at lambda=1",
+      "kde_per_type_mean_lambda1": 0.1827,
+      "kde_pooled_lambda1": 0.0644,
+      "kde_ratio_pooled_to_per_type": 0.3525,
+      "knn_per_type_mean_lambda1": 0.1382,
+      "knn_pooled_lambda1": 0.0567,
+      "knn_ratio_pooled_to_per_type": 0.4103,
+      "binned_tv_ratio_pooled_to_per_type": 1.49,
+      "observation": "KDE/kNN show per-type > pooled (ratio < 1), opposite to binned TV pooled > per-type (ratio 1.49). Estimator-dependent ordering.",
+      "verification": "Matches result.json:metrics.primary_comparison"
+    }
+  },
+  "claim_ceiling": "Validated: KDE and kNN binning-free estimators achieve per-type null control (8/8 pass) at 250/type where binned TV fails (4/8 fail), confirming the binned TV false-positive is estimator-specific. NOT validated: per-type CV stability (both KDE max 0.575 and kNN max 0.755 exceed frozen 0.5 threshold). The per-type stability limitation generalizes beyond binning to sample-size/heterogeneity at 250/type. All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types. C-WEB-DYNAMICS remains HYPOTHESIS — this experiment neither supports nor falsifies the claim about real Web dynamics. Frozen FALSIFIED-IN-SETTING outcome is a valid scientific negative on the per-type stability question within this synthetic setting.",
+  "evidence_refs": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/result.json",
+      "sha256": "1ca449f57480c2c46760655a92abfdbd039efb80813966f05c889779b16740a4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt",
+      "sha256": "a3374507d4bd16712bb159e76bfa965084fe79b266ca4eaa20989cb6a60394d1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/sensitivity_exploratory.json",
+      "sha256": "c1497e0317c95fdbf01cf3f113b9d01e281ecf821db8cea2304268091b61fb9e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/spec.json",
+      "sha256": "3cdb3643a1690e886e2dd6a3edbc8a9b61bc56f3527142c6e9cc6f59ba49e0b7",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/prereg.md",
+      "sha256": "3649dffced2f0514d959681b101999c8c63b5674b03e00b8f10abdb5e06afe9c",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/provenance.json",
+      "sha256": "352a8d5664c47da94b1790a265bd772f651ab53718bd0279ae3c3abc47fbe3ba",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/report.md",
+      "sha256": "abc44532fac72040a7e9a91f7f4d7e7dbdc0bc9e11a00e0b16b781fc9db11d2e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/run_sensitivity.py",
+      "sha256": "9bb48ff7dca8749219093c7e3fe46c6a6ae329606d3f908d71219aa3b8bca5ba",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34881708619/handoff.json",
+      "sha256": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa",
+      "role": "fixture"
+    }
+  ],
+  "unresolved": [
+    {
+      "question": "Whether kNN k=10 (EXPLORATORY CV pass max 0.470) would survive confirmatory preregistration at 250/type with proper threshold",
+      "status": "unknown",
+      "requires": "New confirmatory experiment with k=10 preregistered"
+    },
+    {
+      "question": "Whether per-type CV would pass at larger n (500-2000 per type) for KDE (marginal fail at 0.575) or kNN (substantial fail at 0.755)",
+      "status": "unknown",
+      "requires": "Orthogonal sample-size experiment"
+    },
+    {
+      "question": "Whether per-type vs pooled ordering reversal (KDE/kNN per-type > pooled vs binned pooled > per-type) is systematic across DGP families or specific to this 2D affine setting",
+      "status": "unknown",
+      "requires": "Additional DGP families"
+    },
+    {
+      "question": "Whether real Web DOM transitions exhibit action-conditional structure detectable by KDE/kNN at 250/type — all evidence remains synthetic 2D [0,1]^2",
+      "status": "unknown",
+      "requires": "Real Web transition data"
+    }
+  ]
+}

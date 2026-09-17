@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35154720995",
+  "lane": "runtime",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Implement actual brotli/gzip compression in MockOAuthHandler: inspect Accept-Encoding (or force per-baseline encoding), compress body via brotli.compress(data, quality=q) for q in [4,5,6,7,8] and gzip.compress, set Content-Encoding header to 'br'/'gzip' or omit for identity, and set Content-Length to compressed length. Current handler at research/experiments/EXP-RUNTIME-35154720995/run_experiment.py:260-301 never sets Content-Encoding and always sends raw body (raw_observations.json content_encoding='none' 2880/2880, body_hash_compressed == decompressed_hash 2880/2880). Without compressed wire bytes, decompression-normalization branch in decompress_body() (lines 340-353) is never exercised (identity fallback only).",
+    "Re-run baselines so that DECOMPRESSED-VARYING-BROTLI and DECOMPRESSED-VARYING-GZIP are distinct compressed streams whose decompressed bodies can be compared. Currently both baselines send identical uncompressed bytes (fingerprints identical 2880/2880, |brotli-gzip|=0.0 vacuous, compressed_hash_variation unique_count=1 in all 36 metric cells). Verification must show Content-Encoding in {br,gzip,identity}, body_size reduced vs uncompressed target (e.g., 1016 -> ~30-70B for error bodies at gzip/brotli), and decompressed_hash derived via brotli.decompress/gzip.decompress matches uncompressed sha.",
+    "Fix measurement_validity and claim scope to match implementation: either (a) re-execute under real compression and re-evaluate decision_rule (including falsifier OR brotli quality diversity does not increase), or (b) downgrade claim to 'status+body hash discrimination under identity (no compression) for synthetic JSON/HTML/XML at 1KB/10KB/100KB' and explicitly state decompression-normalization was NOT tested. Current report.md Section 3.5-3.6 and Section 7 claim 'under localhost compression' and 'decompression latency <0.1ms' are not supported (latency 0.0004-0.0013ms measured on identity path, not on 100KB brotli decompress).",
+    "Align falsifier and decision_rule: spec.json falsifier includes 'OR brotli quality diversity does not increase from 1KB to 100KB' which IS observed (avg_diversity_1KB=1.0, avg_diversity_100KB=1.0, C_BROTLI_QUALITY_SCALING pass=false) but decision_rule omits this condition and report declares SURVIVES_CURRENT_TEST. Required: either include quality-scaling in decision_rule and report FALSIFIED-IN-SETTING for quality-diversity, or remove it from falsifier and disclose that brotli quality convergence for small compressible payloads was not the falsifier. Do not silently ignore one of three frozen falsifier disjuncts."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-NO-COMPRESSION-IDENTITY-ONLY",
+      "severity": "critical",
+      "finding": "No compression was applied. All 2880 observations have Content-Encoding='none' (compression_verification content_encoding_values=['none'] in every metric cell, raw_observations.json headers only Server/Date/Content-Type/Content-Length, zero br/gzip). body_hash_compressed == decompressed_hash for 2880/2880, fingerprint_compressed == fingerprint_decompressed 2880/2880. Server handler do_GET/do_POST (run_experiment.py:260-301) never compresses, never sets Content-Encoding, always sends raw body. Defined compress_gzip/compress_brotli utilities (lines 329-338) and decompress_body() (340-353) are dead code. The question 'under brotli/gzip compression without CDN noise' and measurement_validity item 3 ('Compression uses brotli quality 4-8 and gzip') were not instantiated; the environment could not express the tested effect.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py:260-301 do_GET/do_POST no Content-Encoding, 340-353 decompress_body dead branch; research/experiments/EXP-RUNTIME-35154720995/raw_observations.json 2880 entries content_encoding='none' (sample JSON_1KB_DECOMPRESSED-VARYING-BROTLI /userinfo no_auth rep0 headers Content-Length 1016); research/experiments/EXP-RUNTIME-35154720995/result.json all 36 metrics compression_verification ['none'], body_hash_compressed == decompressed_hash implies identity; bash recompute 2880/2880 identical",
+      "impact": "Decompression-normalization mechanism (SHA256 on decompressed body + status via brotli.decompress/gzip.decompress after Content-Encoding inspection) was not exercised. Reported decompressed_body_only_discrimination 0.5 equals compressed_body_only_discrimination 0.5 trivially, not due to normalization. Status COMPLETE is incorrect; should be MEASUREMENT_INVALID per spec 'MEASUREMENT_INVALID if infrastructure failure prevents valid measurements'."
+    },
+    {
+      "id": "V2-ALGORITHM-EQUIVALENCE-VACUOUS",
+      "severity": "high",
+      "finding": "Baseline B-ALGORITHM-EQUIVALENCE |brotli - gzip| <0.1 reported as 0.0 PASS for all 18 content_type x size pairs, but both baselines are the same uncompressed stream relabeled DECOMPRESSED-VARYING-BROTLI vs GZIP. With no compression, algorithm invariance is tautologically true. Parent EXP-RUNTIME-35137033384 produced 3 Content-Encoding types (br/gzip/identity) and distinct compressed hashes (2-4 uniques), providing a meaningful test; this experiment collapsed to 1 unique for both algorithms.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/spec.json baselines B-ALGORITHM-EQUIVALENCE expected <0.1; research/experiments/EXP-RUNTIME-35154720995/result.json metrics per content_type/size |brotli-gzip|=0.0, compressed_hash_variation unique_count 1 for BROTLI and GZIP both; raw_observations.json fingerprint equivalence 2880/2880",
+      "impact": "Decision_rule condition (6) is not a discriminating test. Cannot claim decompressed bodies are algorithm-invariant under compression; only that identical uncompressed bodies are identical."
+    },
+    {
+      "id": "V3-BROTLI-QUALITY-SCALING-MEANINGLESS",
+      "severity": "high",
+      "finding": "Control C_BROTLI_QUALITY_SCALING fails as observed (avg 1.0 at 1KB and 100KB, pass=false, Falsifier third disjunct TRUE) but is reported as benign. However with no compression, unique_count=1 is not 'brotli qualities 4-8 converge for small compressible payloads' but 'no compression applied, so quality irrelevant'. Falsifier states decompression discrimination <0.3 OR decompressed variation >1 OR brotli diversity does not increase -> hypothesis falsified on third disjunct. Producer ignores falsifier and still declares SURVIVES because decision_rule omitted that clause, creating a frozen inconsistency between spec falsifier and decision_rule.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/spec.json falsifier third clause 'OR brotli quality diversity does not increase from 1KB to 100KB'; research/experiments/EXP-RUNTIME-35154720995/result.json controls C_BROTLI_QUALITY_SCALING avg_diversity_1kb 1.0 avg_diversity_100kb 1.0 pass false; research/experiments/EXP-RUNTIME-35154720995/report.md Section 4.3 pass NO with note 'all 5 qualities produce identical' but Section 5 SURVIVES; spec decision_rule lacks quality scaling conjunct",
+      "impact": "Interpretation overstates 'mechanism is size-invariant'; the size-dependent brotli diversity hypothesis is actually falsified under the no-compression implementation, but the result is uninformative about real compressibility scaling (which would require compressible vs random payloads at 10KB/100KB producing size-dependent compressed sizes)."
+    },
+    {
+      "id": "V4-DECOMPRESSION-DETERMINISM-TRIVIAL",
+      "severity": "medium",
+      "finding": "Positive control C_DECOMPRESSION_DETERMINISM all_same=true for all 36 conditions (144 state cells) is reported as confirming mechanism determinism. Since decompression path is identity (no Content-Encoding), determinism is trivial (hashing same raw bytes). Real test would require varying compressed bytes per state (different qualities producing different wire bytes) that decompress to one body (unique decompressed 1, compressed >1). Current decompressed_hash_variation and compressed_hash_variation are both 1, so no evidence that brotli.decompress correctly inverts multiple quality variants.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json metrics decompressed_hash_variation all_same true 144/144 and compressed_hash_variation all_same true 144/144; raw_observations.json decompressed_hash == body_hash_compressed 2880/2880; report.md Section 3.3 'fully deterministic'",
+      "impact": "SURVIVES condition (4) passes vacuously. Cannot extrapolate that decompression is deterministic under CDN brotli quality variation (parent had 2-4 compressed uniques collapsing to 1 decompressed, showing real normalization)."
+    },
+    {
+      "id": "V5-LATENCY-MISREPORTED",
+      "severity": "medium",
+      "finding": "Report.md Section 3.7 claims decompression latency mean ~0.001ms at 1KB, ~0.003ms at 10KB, ~0.025ms at 100KB with assessment '<0.1ms even at 100KB, cost negligible'. Recomputed decompression_latency_ms in result.json is actually 0.00062ms mean at 1KB (min 0.00041 max 0.00128), 0.00082-0.00117ms at 10KB, 0.00076-0.00081ms at 100KB \u2014 essentially timing of identity branch return, not brotli/gzip decompress of 10-100KB. Real 100KB brotli decompress latency would be higher (parent not measured but system brotli library expected ~0.02-0.1ms).",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json decompression_latency_ms mean values (e.g., /userinfo JSON_1KB 0.00062, JSON_10KB 0.00082, JSON_100KB 0.00081); research/experiments/EXP-RUNTIME-35154720995/run_experiment.py:626-630 decompression_latency measured around decompress_body call which returns raw without decompress; report.md Section 3.7 table fabricated ~0.025ms at 100KB not matching raw",
+      "impact": "Cost assessment for production is unsupported. Latency invariance claim cannot be used for product economics."
+    },
+    {
+      "id": "V6-DISCRIMINATION-AT-CEILING-BUT-NOT-ABOUT-COMPRESSION",
+      "severity": "medium",
+      "finding": "Recomputed decompressed discrimination =0.5 for all 18 /userinfo cells and 0.5 for all 18 /introspect cells (status_only 0.5 /userinfo, 0.0 /introspect) correctly reflects 3-way error collapse (no_auth/expired/invalid identical bodies, valid distinct). This equals structural ceiling and matches B-PARENT-JSON-1KB expectation (0.5). However this validates only that status+body hashing distinguishes valid vs error bodies for JSON/HTML/XML at 1KB-100KB under identity encoding, not that it survives non-determinism in compressed wire bytes. Compressed discrimination also 0.5 (vs parent 0.2789 under CDN noise) because without noise compressed == decompressed.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json metrics 36 entries all decompressed 0.5 status 0.5/0.0; raw_observations.json body_preview distinct valid vs error bodies per content_type (JSON {\"sub\":\"alice\"} vs {\"error\":\"invalid_token\"}, HTML valid User Profile vs 401 Unauthorized, XML valid <user> vs <error>), all_same true per state; recompute via compute_discrimination_score intra 1.0 inter 0.5 =>0.5 matches reported max_abs_diff 0.0",
+      "impact": "Result supports narrow body-content distinction, not decompression-normalization robustness. Parent ceiling (decompressed 0.5 /userinfo 0.8333 /introspect, compressed 0.2789) demonstrated CDN-induced degradation; this experiment cannot show degradation because no CDN/compression, so hypothesis that mechanism operates on decompressed logical bodies is untested."
+    },
+    {
+      "id": "V7-TARGET-SAMPLING-REPRESENTATION-LIMITATIONS",
+      "severity": "low",
+      "finding": "Three synthetic content types are structurally realistic in tag form but highly padded (repeating paragraph/list/element blocks targeting 1KB/10KB/100KB exactly: body_sizes JSON 1016/10232/102392, HTML 1024/10240/102400, XML similar). Bodies are compressible x* padding, not natural incompressible Web pages; real HTML with scripts/styles and XML with attributes would have different compressibility and brotli quality divergence. Server uses class-level body_size/content_type (run_experiment.py:225-228) which is safe here (sequential servers on BASE_PORT+idx) but race-prone if parallel. N=20 per state seeded shuffle deterministic (seed 44) \u2014 adequate for deterministic case but no power analysis for non-deterministic compressed variation.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py generate_json_body/html/xml padding loops, MockOAuthHandler class vars body_size/content_type; provenance.json known_issues class-level attributes race; prereg measurement_validity synthetic content types caveat; result.json body_sizes min==max exact target",
+      "impact": "Even if compression were fixed, generalizability remains bounded to localhost synthetic padded content, single seed, mock OAuth2 3-way collapse ceiling. Does not falsify but must remain in validity_notes and claim ceiling."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-RANDOM",
+      "expected": "0.0 for all conditions (null control, random 32-byte fingerprints produce no structure)",
+      "observed": "0.0 in all 36 metric cells (18 /userinfo + 18 /introspect across BROTLI/GZIP)",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json metrics baselines B-RANDOM 0.0 each cell; controls C_NULL_CONTROL observed [0.0 x18] pass true; recomputed via baseline_random seed 99 discrimination 0.0",
+      "strength": "strong as null floor check; trivial with deterministic hashes but correctly excludes spurious structure"
+    },
+    {
+      "baseline_id": "B-PARENT-JSON-1KB",
+      "expected": "0.5 on /userinfo, 0.8333 on /introspect (parent EXP-RUNTIME-35137033384 decompressed under CDN noise)",
+      "observed": "0.5 on /userinfo (matches), 0.5 on /introspect (diverges from parent 0.8333)",
+      "verdict": "PARTIAL",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json /userinfo JSON_1KB decompressed 0.5 matches parent 0.5, /introspect JSON_1KB decompressed 0.5 status 0.0 vs parent 0.8333 status 0.0; parent result.json /introspect 0.8333 due to different body distinctness (4 states with body-only 0.8333); this experiment /introspect bodies collapse 3-way like /userinfo so ceiling 0.5",
+      "strength": "Regression on /userinfo holds (\u22650.3 condition satisfied) but /introspect does not replicate parent's higher discrimination; difference is body design (identical valid_token body distinct, three errors identical) causing same 0.5 ceiling on both endpoints, not a compression effect. Without compression, comparison is still under identity, so not a valid regression test of decompression."
+    },
+    {
+      "baseline_id": "B-ALGORITHM-EQUIVALENCE",
+      "expected": "|brotli_decompressed - gzip_decompressed| <0.1 for each content type x size",
+      "observed": "0.0 for all 18 content_type x size pairs (both 0.5)",
+      "verdict": "FAIL - vacuous",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json metrics: for each HTML/JSON/XML at 1KB/10KB/100KB, BROTLI and GZIP cells both 0.5 => diff 0.0; raw_observations fingerprint equivalence 2880/2880 because no compression",
+      "strength": "No test of algorithm invariance; both baselines are same identity stream. A meaningful test requires Content-Encoding br vs gzip with distinct compressed bytes decompressing to same hash (|diff| after real brotli.compress vs gzip.compress)."
+    },
+    {
+      "baseline_id": "C_DECOMPRESSION_DETERMINISM",
+      "expected": "all_same=true for all content types x sizes x states",
+      "observed": "true for all 144 state cells (36 conditions x4 states)",
+      "verdict": "PASS - trivially",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json controls C_DECOMPRESSION_DETERMINISM pass true, metrics decompressed_hash_variation unique_count 1 all states; raw_observations all_same true",
+      "strength": "Determinism true because decompression not invoked (identity). Does not verify brotli.decompress determinism under multiple wire variants; parent showed 1 vs 2-4 compressed uniques collapsing, this shows 1 vs 1."
+    },
+    {
+      "baseline_id": "C_BROTLI_QUALITY_SCALING",
+      "expected": "Unique compressed hashes at 100KB > at 1KB for HTML (size-dependent diversity)",
+      "observed": "avg 1.0 at 1KB and 1.0 at 100KB, pass false",
+      "verdict": "FAIL - uninformative due to no compression",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json controls C_BROTLI_QUALITY_SCALING avg_diversity_1kb 1.0 avg_diversity_100kb 1.0 scaling_observed false; spec falsifier third disjunct TRUE",
+      "strength": "Observed failure does not demonstrate that brotli qualities 4-8 converge on 100KB compressible content; it demonstrates absence of compression. Parent noted effective diversity 2 variants for 1KB (q4 distinct vs q5-8 identical) but with gzip/identity override giving 2-4 variation; here no variation at all."
+    },
+    {
+      "baseline_id": "C_NULL_CONTROL (B-RANDOM ~0.0)",
+      "expected": "B-RANDOM ~0.0 at all conditions",
+      "observed": "0.0 all conditions, pass true",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json controls C_NULL_CONTROL observed [0.0 x18] pass true",
+      "strength": "adequate null; B-RANDOM correctly ~0.0 via random fingerprints seed 99"
+    },
+    {
+      "baseline_id": "C_NO_PIPELINE_ERRORS",
+      "expected": "0 errors across all requests",
+      "observed": "0 errors, 2880 requests (36 conditions x80) all present",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json controls C_NO_PIPELINE_ERRORS observed 0 pass true; all metrics total_requests 80 each; raw_observations 2880 entries",
+      "strength": "Infrastructure liveness verified; but liveness of uncompressed path does not imply correctness of compressed path."
+    },
+    {
+      "baseline_id": "C_REGRESSION_JSON",
+      "expected": "JSON decompressed >=0.3 at 1KB",
+      "observed": "0.5 at 1KB (both BROTLI and GZIP, /userinfo)",
+      "verdict": "PASS - but under identity not compression",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35154720995/result.json controls C_REGRESSION_JSON observed [0.5,0.5] pass true; metrics JSON_1KB 0.5",
+      "strength": "Threshold passes because body distinction unchanged; does not validate decompression resilience."
+    }
+  ],
+  "recomputed_metrics": {
+    "recomputed_from": "research/experiments/EXP-RUNTIME-35154720995/raw_observations.json (2880 observations: 9 content_type x size (JSON/HTML/XML x 1KB/10KB/100KB) x2 baselines DECOMPRESSED-VARYING-BROTLI/GZIP x2 endpoints /userinfo /introspect x4 states x20 reps) + result.json (36 metric cells) using run_experiment.py compute_discrimination_score (intra_match_rate - inter_match_rate) and fingerprint = SHA256(repr((status, SHA256(decompressed), '')))",
+    "match_reported": true,
+    "max_abs_diff_decompressed": 0.0,
+    "max_abs_diff_compressed": 0.0,
+    "max_abs_diff_status": 0.0,
+    "per_content_type_userinfo_decompressed": {
+      "JSON_1KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "JSON_10KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "JSON_100KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "HTML_1KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "HTML_10KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "HTML_100KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "XML_1KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "XML_10KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      },
+      "XML_100KB": {
+        "brotli_reported": 0.5,
+        "gzip_reported": 0.5,
+        "recomputed": 0.5,
+        "match": true
+      }
+    },
+    "introspect_decompressed_all": {
+      "reported": 0.5,
+      "recomputed": 0.5,
+      "match": true,
+      "note": "All 18 introspect cells 0.5 (status_only 0.0, not 0.8333 as parent) because introspect bodies also collapse 3-way; valid distinct vs three errors identical."
+    },
+    "B_RANDOM": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true
+    },
+    "algorithm_equivalence_diff": {
+      "reported": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "interpretation": "vacuous - both streams identical uncompressed"
+    },
+    "compression_verification": {
+      "reported_all_none": true,
+      "recomputed_content_encoding_none": "2880/2880 100%",
+      "distinct_encodings_observed": [
+        "none"
+      ],
+      "expected_per_spec": [
+        "br",
+        "gzip",
+        "identity or br/gzip"
+      ],
+      "mismatch": true
+    },
+    "hash_equality": {
+      "body_hash_compressed_eq_decompressed": "2880/2880 1.0",
+      "fingerprint_compressed_eq_decompressed": "2880/2880 1.0",
+      "compressed_hash_variation_unique_per_state": 1,
+      "decompressed_hash_variation_unique_per_state": 1,
+      "total_state_cells": 144
+    },
+    "brotli_quality_scaling": {
+      "avg_diversity_1kb_recomputed": 1.0,
+      "avg_diversity_100kb_recomputed": 1.0,
+      "scaling": false,
+      "match_reported": true
+    },
+    "decompression_latency_ms_recomputed": {
+      "JSON_1KB_mean": 0.00062,
+      "HTML_1KB_mean": 0.0007,
+      "JSON_10KB_mean": 0.00082,
+      "HTML_10KB_mean": 0.00079,
+      "JSON_100KB_mean": 0.00081,
+      "HTML_100KB_mean": 0.00079,
+      "note": "Identity branch timing, not brotli/gzip decompress; report.md fabricated 0.025ms at 100KB does not match raw"
+    },
+    "body_sizes": {
+      "JSON_1KB": 1016,
+      "JSON_10KB": 10232,
+      "JSON_100KB": 102392,
+      "HTML_1KB": 1024,
+      "HTML_10KB": 10240,
+      "HTML_100KB": 102400,
+      "XML_1KB": 1024,
+      "XML_10KB": 10240,
+      "XML_100KB": 102400,
+      "comment": "Uncompressed sizes exact; if brotli/gzip applied, Content-Length would be 30-2000B smaller depending on ratio, not equal to target"
+    }
+  },
+  "claim_ceiling": "Narrow ceiling justified: On localhost mock OAuth2 (Python BaseHTTPServer) with identity encoding only (no brotli/gzip compression, Content-Encoding 'none' 2880/2880), SHA256 on raw body + status distinguishes valid_token (200 with distinct user body) from no_auth/expired_token/invalid_token (401 with identical error body, 3-way collapse) at structural ceiling 0.5 on both /userinfo (status 0.5) and /introspect (status 0.0 -> 0.5 via body) for synthetic JSON (1016/10232/102392B), HTML (1024/10240/102400B), XML (similar) at 1KB/10KB/100KB padded sizes, N=20 per state per condition (80 per condition, 2880 total), seed 44, decompression path not exercised (identity fallback, latency ~0.0004-0.0013ms). Does NOT support: decompression-normalization (SHA256 on decompressed body via brotli.decompress/gzip.decompress) preserves discrimination under brotli/gzip compression; algorithm-equivalence of brotli vs gzip after decompression; brotli quality diversity scaling with payload size; latency cost of decompression at 10KB/100KB; or any CDN non-determinism resilience. Real compression must be implemented and re-measured before advancing claim ceiling beyond parent EXP-RUNTIME-35137033384 ('synthetic proxy + CDN simulator with realistic non-determinism' at 1KB JSON).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35154720995/spec.json - question 'under brotli/gzip compression without CDN noise', hypothesis format-invariance, falsifier includes decompressed <0.3 OR decompressed variation >1 OR brotli diversity not increasing, decision_rule 6 conjuncts (JSON/HTML/XML >=0.3, all_same, B-RANDOM 0, |brotli-gzip|<0.1) omitting quality scaling, measurement_validity 'Compression uses brotli quality 4-8 and gzip' and 'No real CDN infraestrutura bounded to localhost mock with compression'",
+    "research/experiments/EXP-RUNTIME-35154720995/prereg.md - Sections 2.4 compression brotli 4-8 + gzip, 3.1 discrimination SHA256(status,decompressed_body), 3.4 C_BROTLI_QUALITY_SCALING expects unique at 100KB >1KB",
+    "research/experiments/EXP-RUNTIME-35154720995/freeze.json - frozen_at 2026-09-17T05:22:30.995223 hashes prereg 7aa4e4 spec be71d2 request 75aff4",
+    "research/experiments/EXP-RUNTIME-35154720995/result.json - 36 metrics all decompressed 0.5 compressed 0.5 status 0.5/0.0 B-RANDOM 0.0 compression_verification ['none'] all cells body_sizes exact target decompression_latency ~0.0006ms controls C_DECOMPRESSION_DETERMINISM true C_BROTLI_QUALITY_SCALING 1.0 vs 1.0 false C_REGRESSION_JSON 0.5",
+    "research/experiments/EXP-RUNTIME-35154720995/report.md - claims SURVIVES_CURRENT_TEST Sections 3.1-3.7 (discrimination 0.5 all types/sizes, determinism true, B-RANDOM 0, |diff| 0, latency <0.1ms), Section 7 claim ceiling advances to 'multi-format multi-size under localhost compression'",
+    "research/experiments/EXP-RUNTIME-35154720995/raw_observations.json - 2880 entries: content_encoding 'none' 2880/2880, body_hash_compressed == decompressed_hash 2880/2880, fingerprint equality 2880/2880, headers {Server:BaseHTTP/0.6, Date, Content-Type, Content-Length}, no Content-Encoding br/gzip, body_preview valid {sub:alice} vs error {error:invalid_token}",
+    "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py - lines 260-301 do_GET/do_POST send raw body without compress, no Content-Encoding header; 329-338 compress utilities unused; 340-353 decompress_body checks Content-Encoding br/gzip but never triggered; 376 decode_content=False would preserve compressed bytes if present",
+    "research/experiments/EXP-RUNTIME-35154720995/provenance.json - seed 44 reps 20 brotli 1.2.0 python 3.12.14 total_requests 1440 (actual 2880 due to 9 vs stated 36 conditions? confusion) execution_parameters brotli_quality_range [4,5,6,7,8] cdn_noise false",
+    "research/experiments/EXP-RUNTIME-35137033384/result.json + audit.json - parent had CDN proxy with br/gzip/identity, 2-4 compressed uniques, decompressed 0.5/0.8333, compressed 0.2789 (<0.35), providing meaningful decompression test that this experiment lacks",
+    "research/experiments/EXP-RUNTIME-35154720995/request.json - parent_handoff EXP-RUNTIME-35137033384 sha 21072d, inherited_next_question real CDN blocker, lane runtime"
+  ],
+  "unresolved": [
+    "Does decompression-normalization (brotli.decompress/gzip.decompress after Content-Encoding inspection) preserve body-only discrimination at >=0.3 for HTML and XML at 10KB/100KB when actual brotli (quality 4-8) and gzip wire bytes are sent and decompressed? Current implementation did not test this; recompute after fixing server compression.",
+    "Does brotli quality diversity (unique compressed hashes per state) increase from 1KB to 100KB for HTML/XML with natural content when real compression is applied? Spec hypothesized yes (1KB 2 variants -> 100KB >2); this remains unknown because observed 1 vs 1 is artifact of no compression.",
+    "Does algorithm-equivalence |brotli_decompressed - gzip_decompressed| <0.1 hold for non-JSON content types at 100KB under real compression (distinct brotli vs gzip bytes both decompressing to same logical body)?",
+    "What is actual decompression latency per response at 1KB/10KB/100KB for HTML/XML when brotli/gzip decompress is invoked (vs identity ~0.0006ms)? Needed for product cost assessment.",
+    "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in synthetic proxy? This remains the critical blocker per request inherited_next_question and parent handoff."
+  ]
+}

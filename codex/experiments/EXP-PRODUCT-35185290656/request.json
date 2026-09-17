@@ -1,0 +1,20 @@
+{
+  "base_sha": "f9481fa55c42bfde4faebe957d3183a87457cd47",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T05:19:48.441018+00:00",
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can Fix3 (_is_protocol_only_prefix) be redesigned to reject only truly protocol-only prefixes (no '/' in rest) without blocking valid host?query parameterization, and can a discriminating test demonstrate its independent necessity over Fix2?",
+  "lane": "product",
+  "origin_github_run_id": "35185290656",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35166508130",
+    "path": "research/experiments/EXP-PRODUCT-35166508130/handoff.json",
+    "sha256": "7ba2bd4784dc3594eed59794cad9e32a487562ab9b850bed2af18fc07b4c35b6"
+  },
+  "reason": "pulse",
+  "request_hash": "e7adcab90feda27d9cd48fb99845ef1521e02770c01d90d3da551ab12edaa148",
+  "request_id": "3d111854a8ea25563cf9513b",
+  "schema_version": 1
+}

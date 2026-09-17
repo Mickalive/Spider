@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redesign or remove B_UNFIXED_PROTOCOL_ONLY (C4) from SURVIVES gate until discriminating: frozen pair https://jsonplaceholder.typicode.com/ vs https://jsonplaceholder.typicode.com/about produces common prefix https://jsonplaceholder.typicode.com/ which passes Fix2 (_validate_prefix_boundary True, ends with '/') and also passes Fix3 (_is_protocol_only_prefix False because '/' in rest), so distill_parameterized returns Mechanism with slot_count=1 for both fixed and unfixed paths. Provide a pair where Fix2 passes but Fix3 should reject, or demonstrate Fix3 delta on synthetic PROTOCOL_ONLY vs minimal-path corpus and decouple Fix2 subsumption; alternatively downgrade C4 to exploratory until Fix3 is proved non-redundant",
+    "Fix _is_protocol_only_prefix over-broad rejection: current logic `if '/' not in rest: return True` rejects valid parameterizable query-only URLs with no path slash (e.g., https://api.example.com?key=abc vs https://api.example.com?key=xyz, prefix https://api.example.com?key= has rest 'api.example.com?key=' with no '/' so Fix3 returns True and distill returns None, blocking valid ?key= parameterization). Restrict Fix3 to scheme+authority only (e.g., require no '?'/'=' in rest before rejecting) and add regression tests for query-param parameterization",
+    "Fix C5 kernel_tests_run reporting inconsistency: run_existing_kernel_tests parses result.stdout for 'Ran N tests' but unittest -v writes to stderr, so producer metric condition_5_kernel_tests_run=0 in experiment_results.json vs 3 in result.json and actual 3/3 PASS; parse stderr or combined output and persist consistent artifact hashes so provenance does not show tests_run 0 with passed True",
+    "Fix C6 token methodology apples-to-oranges encoding: parameterized_total_tokens encodes json.dumps(template, sort_keys=True) including '{\"method\":\"GET\",\"url\":...}' wrapper (3 templates -> 68 tokens) while literal_total_tokens encodes raw URLs (9 URLs -> 96 tokens) without wrapper and with 3x repetition by construction. Report comparable encodings (both JSON dumped or both raw), report per-template mean and per-resolution cost, and note that 29.17% saving is structural (3 vs 9 encodings) with absolute counts 68 vs 96 small; do not present as amortized economics",
+    "Persist corrected comment validation and valid-ID fixture documentation: keep validate_comment_body list-of-dicts fix and document unseen IDs posts 96-98 (1-100), users 8-10 (1-10), comments postId 5-7 as derived artifact with probe logs so future auditors can distinguish binding error from 404"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_C4_NONDISCRIMINATING_AND_FIX3_REDUNDANT",
+      "severity": "high",
+      "finding": "C4 B_UNFIXED_PROTOCOL_ONLY is non-discriminating for the frozen URL pair and Fix3 is redundant with Fix2: prefix 'https://jsonplaceholder.typicode.com/' passes Fix2 (True, ends with '/') and Fix3 returns False ( '/' in rest 'jsonplaceholder.typicode.com/'), so fixed distill returns Mechanism slot_count=1, not None. Unfixed_would_produce_slot=True via Fix2 alone, so expected delta (unfixed >0 vs fixed 0) never occurs. Frozen decision_rule C4 (unfixed>0 while fixed=0) is a priori impossible with current Fix2+Fix3 combination; failure triggers FALSIFIED-IN-SETTING but does not falsify HTTP binding — it reflects test design impossibility conflated with Fix3 necessity claim.",
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/run_experiment.py:385-433 test_b_unfixed_protocol_only prefix via _find_common_prefix_suffix ['https://jsonplaceholder.typicode.com/','https://jsonplaceholder.typicode.com/about'] -> 'https://jsonplaceholder.typicode.com/'; src/spider/kernel.py:267-285 _is_protocol_only_prefix, 232-241 _validate_prefix_boundary; audit rerun PYTHONPATH=src: _validate True, _is_protocol_only False, distill_parameterized returns param-12162880917dfa96 slot ['url'] not None; result.json controls B_UNFIXED_PROTOCOL_ONLY observed fixed_rejects=False unfixed_would=True passed False",
+      "impact": "SURVIVES_CURRENT_TEST gate impossible to pass as frozen; producer correctly outputs FALSIFIED-IN-SETTING per rule but scientific content is mixed (C1-C3 strong PASS). Claim about Fix3 necessity untested; Fix3 appears redundant for tested pattern and overall verdict overstates falsification of HTTP binding hypothesis."
+    },
+    {
+      "id": "V2_FIX3_OVERBROAD_BLOCKS_VALID_QUERY_PARAM",
+      "severity": "medium",
+      "finding": "Fix3 _is_protocol_only_prefix incorrectly rejects valid query-param parameterization where host is directly followed by '?' with no '/' . Example https://api.example.com?key=abc vs ?key=xyz has common prefix 'https://api.example.com?key=' where rest='api.example.com?key=' contains no '/' so Fix3 returns True and distill returns None, blocking a legitimate parameterization. Same for https://example.com?x=1 vs ?x=2. This is a genuine false-negative bug, not just untested redundancy.",
+      "evidence": "src/spider/kernel.py:267-285 _is_protocol_only_prefix logic `if '/' not in rest: return True`; audit rerun PYTHONPATH=src: prefix 'https://example.com?x=' validate True, is_protocol True, distill None; prefix 'https://api.example.com?key=' same; contrast comments prefix 'https://jsonplaceholder.typicode.com/comments?postId=' rest contains '/' so False and correctly passes",
+      "impact": "Fix3 as committed blocks a class of valid single-slot GET URLs (host?query) that should parameterize; narrows claim ceiling to path-slash URLs only and requires fix before any product promotion claims about general GET coverage."
+    },
+    {
+      "id": "V3_C5_REPORTING_ARTIFACT_INCONSISTENT",
+      "severity": "low",
+      "finding": "C5 kernel regression metric inconsistent between artifacts due to stdout vs stderr parsing: result.json reports condition_5_kernel_tests_run 3 and controls kernel_regression tests_run=3, while experiment_results.json reports tests_run=0 with passed True. Direct PYTHONPATH=src python -m unittest tests.test_kernel -v writes 'Ran 3 tests' to stderr, stdout empty, so run_existing_kernel_tests parsing stdout yields 0. Actual tests all PASS (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention).",
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/result.json metrics condition_5_kernel_tests_run 3 controls kernel_regression observed tests_run=3; research/experiments/EXP-PRODUCT-35166508130/experiment_results.json metrics condition_5_kernel_tests_run 0 controls kernel_regression tests_run=0; src: run_experiment.py:440-471 parsing result.stdout; audit direct rerun: stderr 'Ran 3 tests in 0.002s OK', stdout ''",
+      "impact": "No scientific impact (C5 PASS valid), but undermines provenance integrity; Director should rely on audit rerun and result.json not stale experiment_results.json value."
+    },
+    {
+      "id": "V4_C6_TOKEN_COMPARISON_BIASED",
+      "severity": "medium",
+      "finding": "C6 token cost PASS uses incomparable encodings: parameterized encodes 3 JSON dumps with method wrapper (22+22+24=68 tokens) while literal encodes 9 raw URLs (9x10 or 12=96 tokens). Savings 28 tokens (29.17%) guaranteed by 3 vs 9 denominator (structural, not per-resolution saving) and by including vs excluding JSON wrapper. Per-template mean parameterized 22.7 tokens vs per-URL literal 10.7 tokens actually shows parameterized template heavier per item. Absolute counts small and single data point, not amortized cost.",
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/run_experiment.py:478-560 measure_token_cost_actual param json.dumps sort_keys vs literal raw URL enc.encode; audit rerun tiktoken cl100k_base: fetch_posts template 22, fetch_users 22, fetch_comments 24 total 68; literal posts 96-98 10 each, users 8 10,9 10,10 10, comments 5-7 12 each total 96; result.json token_cost parameterized_total_tokens 68 literal 96 savings 29.17% parameterized_cheaper True",
+      "impact": "C6 PASS condition 'parameterized <= literal' holds under producer method, but does not establish product economic advantage; C-PRODUCT-ECON remains HYPOTHESIS pending per-task amortized measurement with comparable encoding and model/browser costs."
+    },
+    {
+      "id": "V5_REAL_HTTP_BINDING_VALIDATED",
+      "severity": "info",
+      "finding": "C1 P1_REAL_HTTP_BINDING and C2 N1, C3 B_LITERAL all valid and recomputed: with corrected endpoint-appropriate unseen IDs (posts 96-98, users 8-10, comments postId 5-7) and fixed comment validation (validate_comment_body list-of-dicts), URL binding 9/9 and HTTP binding 9/9 (status 200 + valid JSON body per expected schema) verified by code inspection and live spot checks (posts/96 200, comments?postId=5 200 len5). No split leakage (training 1-3 vs test 96-98 etc disjoint). Network available, 10s timeout, json body parsing preserved. This resolves parent V1_HTTP_DESIGN_IMPOSSIBLE_IDS and V2_COMMENT_BODY_VALIDATION_BUG.",
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/run_experiment.py:144-251 test_p1_real_http_binding url_correct via kernel.resolve + expected_url replace and http_get 200 + json validation including validate_comment_body; P1_UNSEEN 71-75; live probe audit: urllib posts/96 200 userId/id/title/body, users/8 200, comments?postId=5 200 list 5; result.json metrics condition_1_url 1.0 9/9 condition_1_http 1.0 9/9 condition_3 9/9; provenance datasets unseen_ids verified",
+      "impact": "Maximum achievable HTTP correctness confirmed 9/9 for tested jsonplaceholder GET endpoints; resolves blocker for C-PARAM-INHERIT HTTP binding subclaim. Ceiling remains synthetic single-slot GET on jsonplaceholder only."
+    },
+    {
+      "id": "V6_SCOPE_GET_ONLY_SYNTHETIC",
+      "severity": "medium",
+      "finding": "Experiment scope explicitly GET-only, single-slot, synthetic deterministic observations, no LLM distillation, no browser automation, no multi-step state. Fetch_posts training includes GET+PUT shared but distilled template is GET only via _METADATA_PATHS exclusion, so PUT binding unmeasured. Single API jsonplaceholder.typicode.com not general Web. Zero model/browser calls, so end-to-end economics unmeasured.",
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/spec.json measurement_validity GET-only, single-slot, synthetic; prereg.md Scope Limitations; src/spider/kernel.py _METADATA_PATHS method excluded; provenance dependencies tiktoken 0.14.0 python 3.12 network jsonplaceholder GET only; result.json validity_notes GET-only, synthetic",
+      "impact": "HTTP binding claim bounded to committed-code synthetic single-slot GET with real HTTP on jsonplaceholder; does NOT generalize to PUT/POST, multi-slot, noisy browser sessions, LLM distillation, or cross-site transfer. C-PRODUCT-ECON remains HYPOTHESIS."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "P1_REAL_HTTP_BINDING",
+      "baseline_id": "P1_REAL_HTTP_BINDING",
+      "expected": "HTTP binding accuracy >=1.0 (9/9 correct URL construction and 9/9 HTTP 200 with valid body per expected resource type)",
+      "observed": "Producer 9/9 url_correct and 9/9 http_correct (url_accuracy 1.0, http_accuracy 1.0, total_calls 9). Audit code review confirms correct URL construction via _bind vs template replace and real HTTP via urllib with status 200 + body schema check (posts dict userId/id/title/body, users dict id/name/username/email, comments list-of-dicts via validate_comment_body). Spot live probe confirms reachability. No data loss.",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/result.json controls P1_REAL_HTTP_BINDING passed true observed url 9/9 http 9/9; run_experiment.py test_p1_real_http_binding; experiment_results.json same; audit tiktoken recompute not needed, live urllib spot check posts/96 and comments?postId=5"
+    },
+    {
+      "id": "N1_NONEXISTENT_ENDPOINT",
+      "baseline_id": "N1_NONEXISTENT_ENDPOINT",
+      "expected": "All 3 calls to ID 999999 return 404/empty without crash",
+      "observed": "Producer all_passed True: posts/999999 404, users/999999 404, comments?postId=999999 200 with [] . Audit logic review confirms status_is_error 404 or body_is_empty [] check matches jsonplaceholder behavior. Valid error handling control.",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/result.json controls N1_NONEXISTENT_ENDPOINT passed true; run_experiment.py test_n1_nonexistent_endpoint 258-300; experiment_results.json same"
+    },
+    {
+      "id": "B_LITERAL_HTTP_EXECUTION",
+      "baseline_id": "B_LITERAL_HTTP_EXECUTION",
+      "expected": "All 9 literal HTTP calls succeed with correct status/body, demonstrating API reachability independent of parameterization",
+      "observed": "Producer all_succeed True 9/9 (fetch_posts 3/3, fetch_users 3/3, fetch_comments 3/3 with fixed validate_comment_body). Recomputed raw URL construction via literal_endpoints template replace and http_get with same body checks. Matches P1 parameterized, confirming improvement over parent is from corrected IDs/validation not parameterization advantage.",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/result.json controls B_LITERAL_HTTP_EXECUTION passed true observed 9/9; run_experiment.py test_b_literal_http_execution 307-371; experiment_results.json same"
+    },
+    {
+      "id": "B_UNFIXED_PROTOCOL_ONLY",
+      "baseline_id": "B_UNFIXED_PROTOCOL_ONLY",
+      "expected": "Unfixed heuristic produces slot_count >0 while fixed produces 0 for protocol-only URL https://jsonplaceholder.typicode.com/",
+      "observed": "Producer fixed_rejects False (distill returns Mechanism not None) with slot_count 1, unfixed_would_produce_slot True (prefix https://jsonplaceholder.typicode.com/ validate True). Condition fails (fix3_confirmed False). Audit rerun confirms Fix3 does not reject because '/' in rest, Fix2 already passes. Test therefore cannot demonstrate Fix3 necessity; expected delta does not exist for this prefix.",
+      "strength": "weak",
+      "passed": false,
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/result.json controls B_UNFIXED_PROTOCOL_ONLY passed false observed fixed_rejects=False unfixed True finding details Fix2 subsumes Fix3; run_experiment.py test_b_unfixed_protocol_only 377-433; audit rerun PYTHONPATH=src confirms _is_protocol_only False, _validate True, distill returns slot"
+    },
+    {
+      "id": "kernel_regression",
+      "baseline_id": "kernel_regression",
+      "expected": "All 3 existing kernel tests pass",
+      "observed": "Producer passed true (result.json tests_run 3 failures 0 errors 0; experiment_results.json incorrectly 0). Audit direct rerun PYTHONPATH=src python -m unittest tests.test_kernel -v => Ran 3 tests OK (test_invalidation_forces_abstention, test_parameterized_mechanism_binds_only_when_guarded, test_unknown_is_default). So baseline holds despite reporting artifact.",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35166508130/result.json controls kernel_regression passed true; experiment_results.json tests_run 0; tests/test_kernel.py; audit rerun stderr Ran 3 tests"
+    }
+  ],
+  "recomputed_metrics": {
+    "condition_1_url_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "n": 9,
+      "detail": "9/9 url_correct via kernel.resolve bound_action == expected_url replace; recomputed via code inspection and independent import of distill_parameterized on P1_TRAINING matches result.json"
+    },
+    "condition_1_http_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "n": 9,
+      "detail": "9/9 http_correct (status 200 + valid body). Posts 96-98 dict check userId/id/title/body, users 8-10 dict check id/name/username/email, comments postId 5-7 validate_comment_body list-of-dicts. Live spot probe posts/96 and comments?postId=5 confirms 200; full 9 would require live run but logic correct per parent audit where same host reachable"
+    },
+    "condition_1_total_url_correct": {
+      "producer_value": 9,
+      "recomputed_value": 9,
+      "match": true
+    },
+    "condition_1_total_http_correct": {
+      "producer_value": 9,
+      "recomputed_value": 9,
+      "match": true
+    },
+    "condition_1_total_calls": {
+      "producer_value": 9,
+      "recomputed_value": 9,
+      "match": true
+    },
+    "condition_1_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "condition_2_n1_all_passed": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "posts/999999 404, users/999999 404, comments?postId=999999 200 [] all without crash"
+    },
+    "condition_2_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "condition_3_b_literal_total_correct": {
+      "producer_value": 9,
+      "recomputed_value": 9,
+      "match": true
+    },
+    "condition_3_b_literal_total_calls": {
+      "producer_value": 9,
+      "recomputed_value": 9,
+      "match": true
+    },
+    "condition_3_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "condition_4_b_unfixed_fix3_confirmed": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true,
+      "detail": "fixed_rejects False (distill returns Mechanism), recomputed via _is_protocol_only_prefix('https://jsonplaceholder.typicode.com/')=False and _validate=True"
+    },
+    "condition_4_b_unfixed_would_produce_slot": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "unfixed common prefix 'https://jsonplaceholder.typicode.com/' validate True so would produce slot"
+    },
+    "condition_4_pass": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true
+    },
+    "condition_5_kernel_tests_passed": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "3/3 PASS via direct unittest; producer metric tests_run parsing artifact 0 vs 3 noted but pass boolean correct"
+    },
+    "condition_5_kernel_tests_run": {
+      "producer_value": 3,
+      "recomputed_value": 3,
+      "match": true,
+      "note": "experiment_results.json reports 0 due to stdout/stderr parse bug; correct is 3 via stderr"
+    },
+    "condition_6_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "68 <=96 true; recomputed tiktoken cl100k_base 68 vs 96 =29.17% savings matches producer; see V4 for methodological caveat"
+    },
+    "all_conditions_pass": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true,
+      "detail": "C4 fails so overall false per frozen ALL rule"
+    },
+    "mechanisms_distilled": {
+      "producer_value": 3,
+      "recomputed_value": 3,
+      "match": true,
+      "detail": "fetch_posts posts/${url} slot url, fetch_users users/${url}, fetch_comments comments?postId=${url} independently recomputed"
+    },
+    "token_cost": {
+      "producer_parameterized_total_tokens": 68,
+      "recomputed_parameterized_total_tokens": 68,
+      "producer_literal_total_tokens": 96,
+      "recomputed_literal_total_tokens": 96,
+      "producer_savings_pct": 29.17,
+      "recomputed_savings_pct": 29.17,
+      "match": true,
+      "tokenizer": "tiktoken cl100k_base",
+      "detail": "Exact match via independent tiktoken encode of json.dumps templates vs raw URLs"
+    }
+  },
+  "claim_ceiling": "C-PARAM-INHERIT SURVIVES only for committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder.typicode.com: distill_parameterized (Fix1+Fix2+Fix3 as committed src/spider/kernel.py sha30b741...) induces 3 GET-only mechanisms (fetch_posts GET https://jsonplaceholder.typicode.com/posts/${url}, fetch_users users/${url}, fetch_comments comments?postId=${url}) with slot_prefixes ''/''/'comments?postId=' and URL binding 1.0 (9/9) and HTTP binding 1.0 (9/9) on valid unseen IDs posts 96-98, users 8-10, comments postId 5-7 (status 200 + valid JSON per expected schema, N1 404/empty control PASS, B_LITERAL 9/9 PASS, kernel regression 3/3 PASS). This RESOLVES parent V1_HTTP_DESIGN_IMPOSSIBLE_IDS and V2_COMMENT_BODY_VALIDATION_BUG. Does NOT support SURVIVES_CURRENT_TEST as frozen (C4 B_UNFIXED fails because Fix3 is redundant/subsumed and overbroad, Fix3 blocks valid host?query param patterns), does NOT support Fix3 necessity, does NOT support token economics beyond single-point 68 vs 96 tiktoken comparison (29.17% structural, not amortized), does NOT support PUT/POST, multi-slot, noisy browser, LLM distillation, cross-site, or product economics. C-PARAM-INHERIT ceiling expands from 'synthetic single-slot GET URL construction' to 'synthetic single-slot GET with real HTTP binding on jsonplaceholder'; remains EXPERIMENTAL, not VALIDATED/PRODUCT_CORE. C-PRODUCT-ECON remains HYPOTHESIS (first tokenizer point only, no amortized cost).",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35166508130/request.json: lane product, claim_ids C-PARAM-INHERIT C-PRODUCT-ECON, parent_handoff EXP-PRODUCT-35154724610",
+    "research/experiments/EXP-PRODUCT-35166508130/spec.json: question real HTTP with valid IDs, baselines B_LITERAL_HTTP_EXECUTION B_UNFIXED_PROTOCOL_ONLY, controls P1_REAL_HTTP_BINDING N1_NONEXISTENT_ENDPOINT, measurement_validity 8 clauses, decision_rule C1-C6 ALL required",
+    "research/experiments/EXP-PRODUCT-35166508130/prereg.md: hypothesis 9/9 HTTP, unseen IDs posts 96-98 users 8-10 comments 5-7, method, validity, do_not_assume",
+    "research/experiments/EXP-PRODUCT-35166508130/freeze.json: hashes prereg 36c1e60e spec 82d4b63e request e2dcb2ea",
+    "research/experiments/EXP-PRODUCT-35166508130/result.json: metrics C1 1.0 9/9 C2 true C3 9/9 C4 false C5 true C6 true all false outcome FALSIFIES, controls 5, observations 11, validity_notes 5, unresolved 5",
+    "research/experiments/EXP-PRODUCT-35166508130/report.md: executive summary FALSIFIED-IN-SETTING but C1-C3 strong PASS, C4 root cause Fix3 not rejecting '/' prefix, per-condition tables, token table 68 vs 96",
+    "research/experiments/EXP-PRODUCT-35166508130/provenance.json: restored kernel 30b741... from a49d839e, tiktoken 0.14.0 python 3.12, unseen IDs verified to exist, pricing gpt-4o-mini 0.15/0.60 2026-09-17",
+    "research/experiments/EXP-PRODUCT-35166508130/run_experiment.py sha641dc5ed: P1_TRAINING 5+3+3, P1_UNSEEN valid IDs, http_get urllib 10s, validate_comment_body fix, test_p1/b_literal/n1/b_unfixed/token/kernel functions",
+    "research/experiments/EXP-PRODUCT-35166508130/experiment_results.json sha3e5d8eb8: duplicate metrics with kernel tests_run 0 artifact inconsistency",
+    "src/spider/kernel.py sha30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e: distill_parameterized Fix1 suffix guard Fix2 delimiter-bound Fix3 protocol-only, _is_protocol_only_prefix, _validate_prefix_boundary, _find_common_prefix_suffix",
+    "src/spider/models.py sha67ffda3e: Mechanism slot_prefixes field",
+    "tests/test_kernel.py: 3 tests, audit rerun Ran 3 OK via stderr",
+    "codex/index.json: prior narrow ceilings (EXP-PRODUCT-33528829801 PASS synthetic, EXP-PRODUCT-35154724610 MEASUREMENT_INVALID)",
+    "audit live probes: urllib posts/96 200, comments?postId=5 200 len5, posts/999999 404, plus independent tiktoken recompute 68 vs 96"
+  ],
+  "unresolved": [
+    "Fix3 independent necessity: no discriminating data where Fix2 passes but Fix3 alone blocks over-parameterization demonstrated; current design Fix2 subsumes Fix3 for tested pattern and Fix3 overbroad for host?query patterns — requires new URL corpus or revised Fix3 definition",
+    "PUT/POST method fidelity over real HTTP: fetch_posts PUT binding not tested (template is GET only); whether method-preserving mechanism needed remains unknown",
+    "Token economics for C-PRODUCT-ECON: single tiktoken point 68 vs 96 not amortized cost per successful real-browser task; needs harness with model tokens + browser/network + retrieval/verification/repair vs literal/cold baselines",
+    "Generalization beyond jsonplaceholder GET: other hosts, auth, pagination, encoding, multi-slot mechanisms, noisy multi-step browser sessions, LLM-based distillation not tested",
+    "B_UNFIXED true Fix3 delta on live-like traffic prevalence: curated URL pair not representative of real traffic distribution",
+    "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 not ported nor tested in this lane; mixed literal+parameterized registry safety remains inherited unresolved"
+  ]
+}

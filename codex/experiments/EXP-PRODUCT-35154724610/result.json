@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35154724610",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "condition_1_p1_url_binding_accuracy": 1.0,
+    "condition_1_p1_http_binding_accuracy": 0.3333333333333333,
+    "condition_1_p1_total_url_correct": 9,
+    "condition_1_p1_total_http_correct": 3,
+    "condition_1_p1_total_calls": 9,
+    "condition_1_pass": false,
+    "condition_1_fetch_posts_http_correct": 2,
+    "condition_1_fetch_users_http_correct": 0,
+    "condition_1_fetch_comments_http_correct": 1,
+    "condition_2_n1_all_passed": true,
+    "condition_2_pass": true,
+    "condition_3_b_literal_all_succeed": false,
+    "condition_3_b_literal_total_correct": 3,
+    "condition_3_b_literal_total_calls": 9,
+    "condition_3_pass": false,
+    "condition_4_b_unfixed_fix3_confirmed": true,
+    "condition_4_pass": true,
+    "condition_5_kernel_tests_passed": true,
+    "condition_5_kernel_tests_run": 3,
+    "condition_5_pass": true,
+    "condition_6_parameterized_tokens": 62.5,
+    "condition_6_literal_tokens": 110.25,
+    "condition_6_token_savings": 47.75,
+    "condition_6_pass": true,
+    "all_conditions_pass": false,
+    "mechanisms_distilled": 3,
+    "parameterized_mechanisms": [
+      {
+        "mechanism_id": "param-bfec59a07240a12f",
+        "intent": "fetch_posts",
+        "slots": ["url"],
+        "template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/posts/${url}"},
+        "slot_prefixes": {"url": ""},
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "param-3920ae6a52688013",
+        "intent": "fetch_users",
+        "slots": ["url"],
+        "template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/users/${url}"},
+        "slot_prefixes": {"url": ""},
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "param-08807ab1b9d22c04",
+        "intent": "fetch_comments",
+        "slots": ["url"],
+        "template": {"method": "GET", "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"},
+        "slot_prefixes": {"url": "comments?postId="},
+        "confidence": 0.9
+      }
+    ],
+    "literal_endpoint_data_limits": {
+      "posts_max_id": 100,
+      "users_max_id": 10,
+      "comments postId=99": "returns data",
+      "comments postId=100": "returns data",
+      "comments postId=101": "returns empty array"
+    }
+  },
+  "controls": {
+    "P1_REAL_HTTP_BINDING": {
+      "type": "positive_control",
+      "expected": "binding_accuracy >= 1.0 (9/9 correct HTTP executions)",
+      "observed": "url_accuracy=1.0000 (9/9), http_accuracy=0.3333 (3/9); URL construction correct for all 9 calls but HTTP responses fail because jsonplaceholder.typicode.com has only 100 posts and 10 users",
+      "passed": false,
+      "evidence_ref": "run_experiment.py test_p1_real_http_binding()"
+    },
+    "N1_NONEXISTENT_ENDPOINT": {
+      "type": "null_control",
+      "expected": "All 3 calls return 404/empty without crash",
+      "observed": "all_passed=True: posts/999999=404, users/999999=404, comments?postId=999999=200[]",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_n1_nonexistent_endpoint()"
+    },
+    "B_LITERAL_HTTP_EXECUTION": {
+      "type": "baseline",
+      "expected": "All 9 literal HTTP calls succeed with correct status/body",
+      "observed": "all_succeed=False, total=3/9; same failure pattern as parameterized (posts 2/3, users 0/3, comments 1/3) confirming issue is API data limits not parameterization",
+      "passed": false,
+      "evidence_ref": "run_experiment.py test_b_literal_http_execution()"
+    },
+    "B_UNFIXED_PROTOCOL_ONLY": {
+      "type": "baseline",
+      "expected": "Unfixed heuristic produces slot_count > fixed for protocol-only URLs",
+      "observed": "fixed_rejects=True (distill_parameterized returns None for protocol-only), unfixed_would_produce_slot=False (unfixed prefix 'https://api.example.com' fails _validate_prefix_boundary)",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_b_unfixed_protocol_only()"
+    },
+    "existing_kernel_tests": {
+      "type": "regression",
+      "expected": "All existing tests pass",
+      "observed": "tests_run=3, failures=0, errors=0, all_passed=True (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention)",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via subprocess unittest with PYTHONPATH=src"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35154724610/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35154724610/experiment_results.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": null,
+      "role": "code"
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "distill_parameterized successfully induces 3 parameterized mechanisms from P1_TRAINING observations: fetch_posts (GET+PUT shared, 1 slot 'url'), fetch_users (1 slot 'url'), fetch_comments (1 slot 'url')",
+    "URL binding accuracy is 1.0000 (9/9): all parameterized mechanisms construct correct URLs for unseen IDs 99, 100, 101",
+    "HTTP binding accuracy is 0.3333 (3/9): only 3 of 9 HTTP calls return status 200 with valid JSON matching expected resource type",
+    "HTTP failures are caused by jsonplaceholder.typicode.com API data limits, not binding errors: posts only has IDs 1-100 (post 101 returns 404), users only has IDs 1-10 (users 99-101 all return 404)",
+    "Literal baseline (B_LITERAL_HTTP_EXECUTION) shows identical failure pattern (3/9), confirming the issue is API data limits not parameterization",
+    "N1_NONEXISTENT_ENDPOINT null control passes: all 3 calls to resource 999999 return 404 or empty array without crashes",
+    "B_UNFIXED_PROTOCOL_ONLY confirms Fix3 necessity: protocol-only prefixes (scheme+authority without path) are correctly rejected",
+    "Existing kernel regression tests pass (3/3): test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention",
+    "Token cost comparison favors parameterized: 62.5 tokens vs 110.25 tokens for literal (savings 47.75 tokens, 43.3% reduction)",
+    "Frozen decision rule condition 1 (P1_REAL_HTTP_BINDING binding_accuracy >= 1.0) FAILS because the frozen spec assumes test IDs exist on the API, but jsonplaceholder.typicode.com has limited data"
+  ],
+  "validity_notes": [
+    "FROZEN DESIGN FLAW: The frozen spec assumes unseen IDs 99, 100, 101 exist on jsonplaceholder.typicode.com for all 3 endpoints, but the API has only 100 posts (IDs 1-100) and 10 users (IDs 1-10). This is a test design issue, not a binding failure.",
+    "URL CONSTRUCTION IS CORRECT: URL binding accuracy is 1.0000 (9/9). The parameterized mechanisms construct URLs correctly for all test cases. The 404s are because the API doesn't have these resources, not because the binding is wrong.",
+    "LITERAL BASELINE CONFIRMS: The literal baseline (B_LITERAL_HTTP_EXECUTION) shows the same failure pattern (3/9), proving the issue is API data limits not parameterization.",
+    "CODE RESTORATION: distill_parameterized and Fix1+Fix2+Fix3 code was restored from parent execute commit 09554a5d because it was removed at verdict commit 6e4206dc. The frozen spec assumes this code exists in src/spider/kernel.py.",
+    "KERNEL TESTS: The kernel tests require PYTHONPATH=src to import the spider module. The experiment script runs them via subprocess with the correct PYTHONPATH.",
+    "TOKEN COST MEASUREMENT: Uses character-level approximation (4 chars per token) rather than actual model tokenization. This is consistent for comparison but not absolute.",
+    "GET-ONLY DESIGN: The experiment tests only GET endpoints, avoiding method conflation (V3 from parent audit). PUT/POST not tested over real HTTP.",
+    "NETWORK DEPENDENCY: The experiment requires network access to jsonplaceholder.typicode.com. Network failures would cause infrastructure failure, not scientific falsification."
+  ],
+  "unresolved": [
+    "The frozen decision rule triggers FALSIFIED because HTTP binding accuracy 0.3333 < 1.0, but this is caused by API data limits (only 100 posts, 10 users) not binding errors. The URL binding accuracy is 1.0000 (9/9).",
+    "C-PARAM-INHERIT cannot advance: the frozen decision rule requires binding_accuracy >= 1.0 on real HTTP, which fails due to test design flaw. A corrected experiment with IDs that exist on the API would likely pass.",
+    "C-PRODUCT-ECON remains HYPOTHESIS: end-to-end amortized cost per successful real-browser task is not measured in this experiment.",
+    "Live browser traffic prevalence (V1) remains open: the experiment tests only JSONPlaceholder API, not real browser traffic.",
+    "Fix2 limitation persists: path-embedded version parameters (/v1/data vs /v2/data) fail Fix2 boundary check.",
+    "Multi-slot induction (G4 architectural bound) not tested.",
+    "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 not present in this kernel version.",
+    "Real LLM distillation not tested: no model calls, only algorithmic parameter induction.",
+    "Browser automation not tested: no DOM interaction."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35166505835",
+  "lane": "intel",
+  "decision": "DESIGN_PARTIALLY_RESOLVED — the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "BLOCKED",
+      "reason": "Dependency audit confirms three blocking dependencies persist: (1) substrate blocker — locatableSample cap still present at measure_fullpage_yield.py:89, runtime lane has not removed it; (2) code blocker — no canonical analysis script implementing 3-definition per-role filtering with cart_1 dedup, float scaling, and null-model exists at HEAD; (3) design blocker — C2 semantic contradiction narrowed (definition direction correctly resolved to null>=observed=FAILS per FALSIFIED intent) but frozen verdict mapping C1 AND C2 -> SURVIVES remains inverted and unamended, null-model recipe underspecified (RNG type, conditioning set, role-count mapping, tie handling not specified), density denominator ambiguous (totalDom vs locatable_elements vs elements_with_bbox). C-MEAS-VALID cannot advance from MEASUREMENT_INVALID until all three blockers are resolved and a valid full-DOM measurement is executed."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After the runtime lane removes the locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89), a frozen spec amendment resolves the C2 verdict mapping to null < observed -> SURVIVES (or equivalently C1 AND NOT C2 -> SURVIVES), the null-model recipe is specified to reproducibility (RNG type, conditioning, role-count mapping, tie handling), and a canonical analysis script is committed at a stable repo path, does full DOM enumeration confirm that the a->link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "reason": "The experiment is a dependency audit and design-resolution exercise. The audit confirms: (1) the C2 contradiction is real (falsifier says null>observed=FALSIFIED, decision_rule says null>=observed=SURVIVES at boundary); (2) no canonical analysis script exists at HEAD; (3) substrate blocker confirmed. The producer correctly diagnoses the statistical intent (observed must exceed null to survive, grounded in EXP-INTEL-35112013458 where 0.3 < 0.5275 was FALSIFIED) and proposes coherent C2 definition (null>=observed = FAILS). However, the frozen verdict mapping remains inverted (audit V1), the null-model recipe is underspecified (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design artifact not executable code (audit R5). The producer's BLOCKING_REDUCED is downgraded to DESIGN_PARTIALLY_RESOLVED because the design blocker is narrowed but not closed, and the code blocker persists. Full DOM has never been measured; no new ordering or null-model evidence was produced. C-MEAS-VALID remains BLOCKED.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35166505835/result.json (B1/B2/B3 baselines, C2_RESOLUTION, canonical_script_spec_components)",
+    "research/experiments/EXP-INTEL-35166505835/audit.json (REVISE, V1-V5, required_fixes R1-R6, claim_ceiling, recomputed_metrics)",
+    "research/experiments/EXP-INTEL-35166505835/report.md (BLOCKING_REDUCED claim, C2 resolution analysis, canonical spec)",
+    "research/experiments/EXP-INTEL-35166505835/spec.json (frozen decision_rule, C2 contradiction clauses)",
+    "research/experiments/EXP-INTEL-35137036013/spec.json (source of C2 contradiction: falsifier F2 null>observed=FALSIFIED, decision_rule null>=observed=SURVIVES, null_control null>=observed=FALSIFIED stands)",
+    "research/experiments/EXP-INTEL-35137036013/audit.json (V4_C2_SEMANTIC_CONTRADICTION, V5_NULL_MODEL_NOT_REPRODUCIBLE)",
+    "research/experiments/EXP-INTEL-35137036013/handoff.json (blocking dependencies: substrate, code, design)",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89 (locatableSample cap present)",
+    "research/experiments/EXP-INTEL-35131994346/reconstruct.py (3-definition per-role filtering, compute_density, random_baseline — closest to canonical, no null model)",
+    "research/experiments/EXP-INTEL-35112013458/result.json (null_mean 0.5275, observed 0.3, FALSIFIED — grounds C2 resolution intent)"
+  ]
+}
