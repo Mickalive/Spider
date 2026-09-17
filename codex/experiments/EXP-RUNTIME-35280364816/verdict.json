@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35280364816",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — Iterative decompression restores decompression-normalization under double-brotli encoding for ALL auth states and under triple-brotli encoding for error states (no_auth/expired_token/invalid_token) on localhost mock server with deterministic brotli quality 6. All 9 conditions achieve decompressed_body_only_discrimination 0.5 >= 0.3 and decompressed hash determinism all_same=true on observed scenarios. However, the audit REVISE finding V1 (valid_token triple_br never observed, 0/180 reps) is accepted: the triple-br claim for the distinct success body (valid_token) is UNTESTED due to systematic RNG shift from shared proxy-test draw. Claim ceiling bounded accordingly: multi-layer encoding survival including double-brotli for all states and triple-brotli for error states only. Triple-br for valid_token success body requires rerun with stratified scenario assignment.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "C-MEAS-VALID advances from parent: iterative decompression restores decompressed body-only discrimination to 0.5 (from 0.2911 under single-pass) and restores hash determinism (all_same=true) under double-brotli encoding for ALL auth states on localhost. Triple-brotli validated for error states (no_auth/expired/invalid, 81 observations, 0 errors, all decompressed hashes match single-layer). However, the claim ceiling is bounded: (1) triple-br for valid_token success body is UNTESTED (0/180 observations due to RNG shift — audit V1, severity high); (2) localhost mock server only, no real CDN; (3) synthetic padded content types with 3-way error collapse (structural ceiling 0.5); (4) N=20 per state per condition. The frozen decision rule SURVIVES_CURRENT_TEST on observed data, but the claim does not reach VALIDATED because audit V1 identified a systematic coverage gap that prevents validation of the triple-br scenario for the success body. Audit V6 confirms recomputed metrics match producer on observed data. Exceeds both parent baselines: B-SINGLE-PASS-0.2911 and B-NO-DOUBLE-BR-0.4486."
+    }
+  ],
+  "product_action": "No product promotion. Iterative decompression is validated for double-brotli encoding for all auth states on localhost. Triple-brotli for success body untested. Product team may proceed with iterative decompression (max_depth=5) for CDN deployment targeting double-brotli scenarios. Triple-brotli deployment requires rerun with guaranteed triple-br coverage for valid_token before claiming multi-layer survival.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression restore decompressed body-only discrimination >= 0.3 and decompressed hash determinism (all_same=true) under triple-brotli encoding for the valid_token success body when triple-br is guaranteed to be observed (stratified assignment, not uniform random)?",
+  "reason": "The frozen decision rule passes on observed data: all 9 conditions achieve discrimination 0.5 >= 0.3, all_same=true, B-RANDOM=0.0, all 6 encoding scenarios observed for error states. However, audit V1 (severity high) identified a systematic RNG defect: valid_token never experienced triple-br (0/180 reps across all 9 conditions) due to shared proxy-test draw consuming one RNG draw before the measured plan, shifting triple-br draws away from valid_token positions. This means triple-br for the distinct success body (the only body that separates valid_token from error collapse) is UNTESTED, not validated. The claim ceiling is therefore bounded: double-brotli survival established for all states, triple-brotli survival established for error states only. The audit V6 confirms all recomputed metrics match producer on observed data. No infrastructure failure — this is a sampling design limitation, not a measurement invalidity.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35280364816/spec.json — frozen question/hypothesis/falsifier/decision_rule requiring discrimination >=0.3 and all_same=true including double/triple",
+    "research/experiments/EXP-RUNTIME-35280364816/result.json — 9 conditions decompressed 0.5, compressed 0.266, B-RANDOM 0.0, encoding_scenarios_seen valid_token 5/6 missing triple, decompressed_hash_variation all_same true, all controls pass",
+    "research/experiments/EXP-RUNTIME-35280364816/audit.json — REVISE status, V1 valid_token triple_br 0/180 (severity high), V6 recomputation matches producer, claim_ceiling bounded to double-brotli all states + triple-brotli error states only",
+    "research/experiments/EXP-RUNTIME-35280364816/raw_observations.json — 720 obs, valid_token triple_br 0/180, total triple 81 (error states only), double_br_valid_token decompressed_correct true",
+    "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py — scenario_rng Random(SEED+7919) proxy connectivity test consuming 1 draw (line 736-749), decompress_body iterative loop depth 5",
+    "research/experiments/EXP-RUNTIME-35280364816/provenance.json — python 3.12.14 brotli 1.2.0, total_requests 720",
+    "research/experiments/EXP-RUNTIME-35262264593/handoff.json — parent established single-layer determinism and double_br as sole failure, next_question iterative decompression"
+  ]
+}

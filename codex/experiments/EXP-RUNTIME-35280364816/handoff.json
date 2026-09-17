@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35280364816",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression restore decompressed body-only discrimination >= 0.3 and decompressed hash determinism (all_same=true) under triple-brotli encoding for the valid_token success body when triple-br is guaranteed to be observed (stratified assignment, not uniform random)?",
+  "why_next": "The audit V1 (severity high) identified a systematic RNG defect: valid_token never experienced triple_br (0/180 reps across all 9 conditions) due to shared proxy-test draw consuming one RNG draw before the measured plan, shifting triple_br draws away from valid_token positions. This means triple-br for the distinct success body — the only body that separates valid_token from the 3-way error collapse — is UNTESTED, not validated. The fix is straightforward: use stratified/round-robin scenario assignment (guaranteeing at least 1 triple_br per state per condition at N=20) instead of uniform random selection, or separate the proxy connectivity-test RNG from the per-request scenario RNG. Rerunning with the same frozen design but corrected sampling would definitively establish or falsify triple-br survival for the success body.",
+  "carry_forward": {
+    "established": [
+      "Iterative decompression (brotli->gzip->identity looping to max_depth=5) restores decompression-normalization under double-brotli encoding for ALL auth states (no_auth, valid_token, expired_token, invalid_token) on localhost mock server with deterministic brotli quality 6: decompressed_body_only_discrimination 0.5 >= 0.3 for JSON/HTML/XML x 1KB/10KB/100KB, decompressed hash determinism all_same=true, B-RANDOM=0.0.",
+      "Triple-brotli encoding (brotli(brotli(brotli(body)))) is successfully decompressed by iterative depth 5 for error states (no_auth/expired_token/invalid_token): 81 observations, 0 decompression errors, all decompressed hashes match single-layer hashes.",
+      "Double-brotli for valid_token success body verified: 5-7 reps per condition, decompressed hash d15e53... matches single-layer hash, determinism holds.",
+      "Iterative decompression introduces no regressions: single-layer scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) maintain identical decompressed hashes, discrimination 0.5, all_same=true.",
+      "Decompression latency minimal: 0.012-0.27ms per response, scaling with decompressed size. No crashes/hangs from garbled Content-Encoding headers.",
+      "B-SINGLE-PASS-0.2911 baseline exceeded (0.5). B-NO-DOUBLE-BR-0.4486 baseline exceeded (0.5). B-COMPRESSED-BYTE-ONLY 0.266 < 0.5 confirms decompression is necessary."
+    ],
+    "rejected": [
+      "Single-pass client decompression does NOT survive double-brotli encoding (parent established, this experiment confirms iterative fix resolves it).",
+      "Triple-brotli for valid_token success body is NOT validated in this experiment (0/180 observations due to RNG shift — audit V1). Do NOT claim triple-br survival for all auth states."
+    ],
+    "unknown": [
+      "Does iterative decompression restore decompressed body-only discrimination >= 0.3 and hash determinism under triple-brotli encoding for the valid_token success body? (requires rerun with stratified assignment)",
+      "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
+      "What is production-scale latency/CPU at N>1000 with MB-scale natural (non-padded) content and concurrent clients?",
+      "Does iterative decompression work for binary content types or genuinely incorrect Content-Encoding on incompressible data?",
+      "What is the maximum practical decompression depth for real-world multi-layer encoding? (depth 5 tested, deeper untested)",
+      "Does 'br, br' multi-value Content-Encoding header with iterative parsing change outcome vs single 'br' header with layered body?",
+      "How does iterative decompression interact with decompression bombs or false positives on non-compressed data?"
+    ],
+    "do_not_assume": [
+      "Do NOT assume triple-brotli survival for valid_token success body — it was NOT observed in this experiment (0/180 reps). The claim ceiling excludes triple-br for the success body until a rerun with stratified assignment confirms or falsifies it.",
+      "Do NOT assume iterative decompression is production-ready — real CDN infrastructure (Cloudflare/Fastly/Akamai) is untested.",
+      "Do NOT assume the structural discrimination ceiling of 0.5 applies to production — it is a property of the 3-way error collapse mock design.",
+      "Do NOT assume localhost decompression latency (0.01-0.27ms) represents production cost at scale.",
+      "Do NOT assume format-invariance extends to binary content types or compressed data formats.",
+      "Do NOT assume the maximum decompression depth of 5 is sufficient for all real-world multi-layer encoding scenarios.",
+      "Do NOT assume non-deterministic quality variation is equivalent to real CDN behavior — real CDNs also vary caching, chunked encoding, Accept-Encoding negotiation, and edge selection.",
+      "Do NOT assume the claim ceiling advances to 'multi-layer encoding survival including triple encoding for all states' — it advances to 'double-brotli for all states, triple-brotli for error states only' on localhost."
+    ]
+  },
+  "dependencies": [
+    "Parent EXP-RUNTIME-35262264593 claim ceiling (single-layer encoding survival, discrimination 0.2911 under single-pass with double_br failure) is superseded by this experiment's results for double-brotli and single-layer scenarios",
+    "Iterative decompression implementation (decompress_body loop with max_depth=5) is the validated fix for the double-brotli failure mode",
+    "Rerun with stratified/round-robin scenario assignment required before claiming triple-br survival for valid_token",
+    "Real CDN infrastructure remains the critical blocker for product readiness but should be deferred until triple-br coverage for success body is confirmed locally",
+    "C-MEAS-VALID remains EXPERIMENTAL on the decompression-normalization sub-thread — this experiment advances the ceiling from single-layer to double-brotli for all states + triple-brotli for error states, but does not reach VALIDATED due to audit V1"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35280364816/result.json — 9 conditions decompressed 0.5, compressed 0.266, B-RANDOM 0.0, encoding_scenarios_seen valid_token 5/6 missing triple, decompressed_hash_variation all_same true",
+    "research/experiments/EXP-RUNTIME-35280364816/audit.json — REVISE, V1 valid_token triple_br 0/180 (high severity), V6 recomputation matches, claim_ceiling bounded to double-brotli all + triple error states only",
+    "research/experiments/EXP-RUNTIME-35280364816/raw_observations.json — 720 obs, valid_token triple 0/180, total triple 81 error states, double_br decompressed_correct true",
+    "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py — scenario_rng proxy test draw (line 736-749), decompress_body iterative loop (512-562)",
+    "research/experiments/EXP-RUNTIME-35280364816/provenance.json — python 3.12.14 brotli 1.2.0, 720 requests, run_experiment.py sha 5f9816ee",
+    "research/experiments/EXP-RUNTIME-35262264593/handoff.json — parent established/rejected/unknown/do_not_assume, next_question iterative decompression"
+  ],
+  "recommended_action": "Rerun the iterative decompression experiment with stratified/round-robin scenario assignment (guaranteeing at least 1 triple_br observation per auth state per condition at N=20) to definitively establish or falsify triple-br survival for the valid_token success body. Use the same frozen design otherwise. If valid_token triple_br decompresses correctly (all_same=true across triple+double+single scenarios), the claim ceiling advances to 'multi-layer encoding survival including triple encoding for all states'. If triple-br fails for valid_token, the failure mode must be characterized. Do NOT advance to real CDN testing until triple-br coverage for success body is confirmed locally."
+}
