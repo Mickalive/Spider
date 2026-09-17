@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35209111193",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Server compression fix validated: All 5760 observations show Content-Encoding='br' or 'gzip' (0 'none'). The parent MEASUREMENT_INVALID infrastructure failure is resolved.",
+    "Decompressed discrimination of 0.5 is structurally capped by 3-way error collapse (no_auth/expired_token/invalid_token share error body). This is a property of the mock server design, not the mechanism. The decision rule threshold (>=0.3) is met but the test has low discriminative power above the structural ceiling.",
+    "Nominal payload sizes (1KB/10KB/100KB) do not produce proportional compressed-size variation for brotli: JSON/XML brotli compressed bodies stay at ~69-72 bytes across all three sizes; HTML brotli at ~172-200 bytes. The decompression path is exercised (latency scales with nominal size: 0.015ms→0.21ms for JSON brotli) but wire-size variation is minimal. The 'multi-size' claim is bounded to nominal uncompressed size targets.",
+    "Brotli quality diversity (unique compressed hashes per state) does not increase from 1KB to 100KB (avg 2.33 vs 2.33 for HTML; 2.0 vs 2.0 for JSON/XML). This is an artifact of repetitive padding content, not a mechanism failure. C_BROTLI_QUALITY_SCALING fails as reported but is not a gating condition per frozen decision_rule.",
+    "No CDN noise applied by design (isolates content-type/size effects). Real-CDN survival remains the sole blocker for C-MEAS-VALID per the handoff chain.",
+    "Single mock server per condition (sequential ports) avoids concurrency but does not exercise CDN edge sharding or caching behaviors.",
+    "Decompression latency measured on localhost only (0.015-0.21ms brotli, 0.015-0.25ms gzip); production network/CDN latency not measured."
+  ],
+  "baseline_findings": [
+    "B-RANDOM null control: 0.0 for all 36 /userinfo conditions (and all 72 total). No spurious structure detected. PASS.",
+    "B-PARENT-JSON-1KB regression: JSON decompressed discrimination at 1KB = 0.5 (6/6 cells), matching grandparent EXP-RUNTIME-35137033384 /userinfo 0.5. PASS.",
+    "B-ALGORITHM-EQUIVALENCE: |brotli_decompressed - gzip_decompressed| = 0.0 for all 18 content-type×size pairs (both 0.5). Decompressed bodies are algorithm-invariant. PASS.",
+    "Compressed-only discrimination: brotli JSON 0.32-0.34, HTML 0.15-0.17, XML 0.33-0.34; gzip always 0.50. Gap confirms decompression is necessary for format-invariance; brotli quality cycling reduces compressed discrimination via cross-state collisions."
+  ],
+  "recomputed_metrics": {
+    "decompressed_body_only_discrimination": {
+      "JSON_1KB": 0.5,
+      "JSON_10KB": 0.5,
+      "JSON_100KB": 0.5,
+      "HTML_1KB": 0.5,
+      "HTML_10KB": 0.5,
+      "HTML_100KB": 0.5,
+      "XML_1KB": 0.5,
+      "XML_10KB": 0.5,
+      "XML_100KB": 0.5
+    },
+    "algorithm_equivalence_diff": {
+      "JSON_1KB": 0.0,
+      "JSON_10KB": 0.0,
+      "JSON_100KB": 0.0,
+      "HTML_1KB": 0.0,
+      "HTML_10KB": 0.0,
+      "HTML_100KB": 0.0,
+      "XML_1KB": 0.0,
+      "XML_10KB": 0.0,
+      "XML_100KB": 0.0
+    },
+    "B_RANDOM": 0.0,
+    "decompressed_hash_variation_all_same": true,
+    "C_BROTLI_QUALITY_SCALING": {
+      "HTML_avg_diversity_1KB": 2.33,
+      "HTML_avg_diversity_100KB": 2.33,
+      "scaling_observed": false
+    }
+  },
+  "claim_ceiling": "Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination >= 0.3 for HTML and XML at nominal uncompressed sizes 1KB/10KB/100KB under localhost brotli (quality 4-8) and gzip compression without CDN noise. Structural ceiling is 0.5 due to 3-way error collapse. Actual compressed wire sizes for brotli do not scale with nominal payload size (JSON/XML ~70 bytes, HTML ~180 bytes across all sizes) due to repetitive padding. Real-CDN infrastructure remains untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35209111193/result.json",
+    "research/experiments/EXP-RUNTIME-35209111193/raw_observations.json (sha256: eb0ab3c02f69ecc62f856c5d8184d171d4a3ddf0855fb75b3d381676f0db1100)",
+    "research/experiments/EXP-RUNTIME-35209111193/run_experiment.py (sha256: a86e95d5e1590c62acc87add0c20afaf92ed6b45fdf8ebf5502011fcbdf3c3e7)",
+    "research/experiments/EXP-RUNTIME-35209111193/provenance.json",
+    "research/experiments/EXP-RUNTIME-35209111193/spec.json",
+    "research/experiments/EXP-RUNTIME-35209111193/prereg.md",
+    "research/experiments/EXP-RUNTIME-35209111193/freeze.json",
+    "research/experiments/EXP-RUNTIME-35154720995/handoff.json (parent, sha256: 79c5e640c4745b24f4f11409957bccec69a3cb453f7410226f1545b5beb15bd1)"
+  ],
+  "unresolved": [
+    "Real CDN survival (Cloudflare/Fastly/Akamai) with per-edge brotli quality, caching, chunked encoding",
+    "Production-scale latency at N>1000, MB payloads, concurrent clients",
+    "Binary content types",
+    "Incorrect/missing/double-encoded Content-Encoding handling",
+    "Natural (non-padded) content compressibility at scale",
+    "Whether brotli quality diversity increases with natural (non-repetitive) content at larger sizes"
+  ]
+}

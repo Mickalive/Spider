@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **114**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **116**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -124,6 +124,8 @@ Validated experiments: **114**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35166508130 | product | REVISE | FALSIFIED-IN-SETTING | C-PARAM-INHERIT, C-PRODUCT-ECON | `d093d4367f8b` |
 | EXP-PHYSICS-35185288822 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `33406e17213e` |
 | EXP-PRODUCT-35185290656 | product | REVISE | SURVIVES_CURRENT_TEST | C-PARAM-INHERIT | `0c62083dcf0d` |
+| EXP-GRAPH-35191029030 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `b5b889919fbc` |
+| EXP-RUNTIME-35209111193 | runtime | PASS | SURVIVES_CURRENT_TEST — all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) determinism all_same=true for all 288 state×type×size cells, (5) B-RANDOM = 0.0 for all 72 conditions, (6) |brotli_decompressed - gzip_decompressed| = 0.0 < 0.1 for all 18 type×size pairs. The parent MEASUREMENT_INVALID infrastructure failure is resolved: the mock server now applies brotli (quality 4-8) and gzip compression with Content-Encoding headers on all 5760 observations. Decompression-normalization preserves body-only discrimination at structural ceiling 0.5 across JSON, HTML, and XML at nominal 1KB/10KB/100KB under localhost compression. The ceiling 0.5 is a property of 3-way error collapse (no_auth/expired/invalid share identical error bodies) not a mechanism limitation. Algorithm equivalence is perfect (diff 0.0). Compressed-only brotli discrimination is lower (0.15-0.34) proving decompression is necessary for format-invariance. C_BROTLI_QUALITY_SCALING fails (diversity 2.33 at 1KB = 2.33 at 100KB) due to repetitive padding content — not a gating condition. Audit PASS confirms all recomputed metrics match producer. Real-CDN infrastructure remains the sole untested blocker for C-MEAS-VALID product readiness. | C-MEAS-VALID | `0e400637ea60` |
 
 ## Latest recorded claim events
 
@@ -132,9 +134,9 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35166507358 | graph |
+| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35191029030 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | BLOCKED | EXP-INTEL-35166505835 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35209111193 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35185290656 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35166508130 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
