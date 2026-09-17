@@ -1,17 +1,47 @@
 {
   "experiment_id": "EXP-RUNTIME-35280364816",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression (decompress repeatedly until failure or a maximum depth of 3-5) restore decompressed body-only discrimination to >= 0.3 and decompressed hash determinism (all_same=true) under double-brotli and triple-brotli encoding on localhost — and does it maintain discrimination for the 4 single-layer encoding scenarios that already pass?",
+  "hypothesis": "Iterative decompression restores decompression-normalization because the double-brotli failure mode is a client implementation limitation (single-pass decompression stops after removing the outer layer), not a fundamental property of the encoding. Double-encoded responses contain brotli-compressed data wrapped in another brotli layer; decompressing twice recovers the true decompressed body. Triple-encoded responses (brotli(brotli(brotli(body)))) require three passes. The 4 single-layer scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) already produce identical decompressed hashes under single-pass decompression, so iterative decompression should maintain their discrimination. The maximum decompression depth should be bounded (3-5) to prevent infinite loops on malformed data.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any content type at any size under any encoding scenario (including double_br and triple_br), OR decompressed hash variation > 1 unique per state for any condition (determinism failure), OR iterative decompression causes client crashes/hangs on garbled Content-Encoding headers (missing graceful degradation), OR iterative decompression changes the decompressed hash for single-layer scenarios compared to single-pass (regression), OR triple-brotli encoding is not decompressible by iterative depth 5 (mechanism insufficient for depth > 2).",
+  "baselines": [
+    {
+      "id": "B-SINGLE-PASS-0.2911",
+      "description": "Parent EXP-RUNTIME-35262264593 decompressed discrimination under single-pass decompression with all 5 encoding scenarios (0.2911). Regression reference: iterative decompression should exceed this.",
+      "expected_value": 0.2911
+    },
+    {
+      "id": "B-NO-DOUBLE-BR-0.4486",
+      "description": "Parent EXP-RUNTIME-35262264593 decompressed discrimination excluding double_br scenario (0.4486). This is the discrimination when decompression fully succeeds for all requests. Iterative decompression should reach or exceed this across ALL scenarios including double_br.",
+      "expected_value": 0.4486
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0 discrimination. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-COMPRESSED-BYTE-ONLY",
+      "description": "Discrimination using compressed bytes directly (no decompression). Under encoding non-determinism, compressed bytes vary dramatically, so discrimination should be low. This proves decompression is necessary.",
+      "expected_value": "< 0.5"
+    }
+  ],
+  "positive_control": "C_ENCODING_VARIATION_EXISTS: For each content type x size, at least 4 distinct Content-Encoding scenarios must produce distinct response headers (correct_br, missing_ce, incorrect_gzip, double_br, triple_br, garbled_ce — at least 4 of 6 observed per condition). This verifies the experiment actually varies encoding and includes double/triple encoding.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Content types are synthetic but structurally realistic: JSON (key-value pairs), HTML (paragraphs, lists, links), XML (nested elements with attributes). All contain 4 auth-state bodies with 3-way error collapse (no_auth/expired/invalid share similar bodies, valid_token has distinct body).",
+    "Payload sizes are controlled by padding to hit target uncompressed sizes: 1KB, 10KB, 100KB.",
+    "The mock server generates brotli-compressed responses at quality 6 (deterministic baseline quality). Encoding non-determinism is applied ONLY at the CDN proxy layer.",
+    "Six Content-Encoding scenarios are tested: (1) correct 'br', (2) missing header (identity), (3) incorrect 'gzip' label on brotli content, (4) double-encoded 'br' (brotli(brotli(body))), (5) triple-encoded 'br' (brotli(brotli(brotli(body)))), (6) garbled 'br; quality=invalid'. Each scenario is applied per-request with independent random selection.",
+    "Iterative decompression: client decompresses body repeatedly until decompression fails or a maximum depth of 5 is reached, then hashes the final decompressed output. This replaces the single-pass decompress_body() function from the parent.",
+    "SHA256 decompression-normalization is applied to the response body AFTER iterative decompression, using the brotli library's built-in decompressor with fallback to gzip then identity at each iteration.",
+    "Seed=44 for request ordering. N=20 per state per content type per size (each request gets independent random encoding scenario).",
+    "Mock server is localhost only. No real CDN infrastructure is used. Results are bounded to localhost mock server with encoding-layer non-determinism."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for JSON at all sizes, (2) decompressed body-only discrimination >= 0.3 for HTML at all sizes, (3) decompressed body-only discrimination >= 0.3 for XML at all sizes, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under encoding non-determinism including double/triple), (5) B-RANDOM = 0.0 for all conditions, (6) C_ENCODING_VARIATION_EXISTS passes (at least 4 distinct encoding scenarios per content type x size). FALSIFIED-IN-SETTING if any content type has discrimination < 0.3 at any size under any encoding scenario, OR if decompressed hashes differ by encoding scenario for any condition (determinism failure), OR if iterative decompression introduces new failures on single-layer scenarios that previously passed. MEASUREMENT_INVALID if infrastructure failure prevents valid measurements.",
+  "product_consequence_positive": "Iterative decompression restores decompression-normalization under multi-layer encoding (double/triple brotli). Claim ceiling advances from 'single-layer encoding survival only' to 'multi-layer encoding survival including double and triple encoding'. This directly addresses CDN edge behaviors where intermediate proxies or origin+CDN both apply compression, producing nested encoding. Product team can proceed with CDN deployment knowing multi-layer encoding does not break the mechanism, provided the client uses iterative decompression with bounded depth.",
+  "product_consequence_negative": "Iterative decompression does NOT restore discrimination under double/triple encoding. The failure is not a client implementation limitation but a fundamental property of the encoding interaction. Product team must: (a) add Content-Encoding validation and layer-count detection before decompression, (b) reject responses with >1 compression layer, or (c) restrict CDN configurations to prevent nested encoding. Real-CDN deployment is blocked until the failure mode is understood and mitigated.",
+  "estimated_cost": "< 5000 tokens, < 3 minutes execution (localhost only, no network, no CDN proxy). 6 scenarios x 3 content types x 3 sizes x 4 states x 20 reps = 4320 requests.",
+  "expected_information_gain": "HIGH. Directly tests the iterative decompression fix that the parent handoff identified as the smallest change that could restore the claim ceiling. The parent established that 4/5 single-layer scenarios pass determinism and that single-pass decompression fails exclusively on double_br. Iterative decompression is the minimal targeted fix. A positive result unblocks multi-layer encoding survival and advances the claim ceiling. A negative result identifies whether the failure extends to triple encoding or introduces new regressions. Either outcome changes the product decision about CDN deployment strategy. This is the smallest experiment that could restore the claim ceiling lost in EXP-RUNTIME-35262264593."
 }
