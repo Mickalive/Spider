@@ -1,0 +1,45 @@
+{
+  "experiment_id": "EXP-GRAPH-35155716123",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Do session-level behavioral signals (token validation failure detection, cookie state inspection, authentication boundary probing) provide drift-vs-noise discrimination on a fundamentally different dimension from all six tested structural/schema-based signal families, thereby evading the magnitude confound?",
+  "hypothesis": "Session-level behavioral signals detect auth/session state drift (token expiry, session invalidation, permission boundary changes) with TP >= 0.90 and FP <= 0.15, while structural noise (field additions, description changes) that does not affect auth state produces FP <= 0.15 on behavioral signals. Behavioral signals are orthogonal to the best structural signal (Pearson r < 0.3) and achieve AUC > 0.80, demonstrating a complementary detection dimension for C-FRESHNESS.",
+  "falsifier": "Behavioral signals fail to detect auth/session drift (TP < 0.90), or produce high FP on structural noise (FP > 0.15), or are not orthogonal to structural signals (r >= 0.3), or AUC <= 0.80. If behavioral signals also fail the C-FRESHNESS gate, the domain may require fundamentally different experimental designs (real API deployments, stochastic field availability, production client traffic).",
+  "baselines": [
+    {
+      "id": "B-STRUCTURAL-JACCARD",
+      "description": "Best single structural signal from parent experiments: Jaccard structural similarity (FP=1.0 under structural noise, from EXP-GRAPH-34788722106)",
+      "source": "EXP-GRAPH-34788722106"
+    },
+    {
+      "id": "B-STRUCTURAL-SCHEMA-DIFF",
+      "description": "Direct schema comparison diff magnitude (r=-0.59 orthogonal to Jaccard, from EXP-GRAPH-35154724244)",
+      "source": "EXP-GRAPH-35154724244"
+    },
+    {
+      "id": "B-STRUCTURAL-ENSEMBLE",
+      "description": "Linear Fisher LDA ensemble of structural signals (AUC=0.625, from EXP-GRAPH-35130682058)",
+      "source": "EXP-GRAPH-35130682058"
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "Random classifier baseline (expected AUC=0.50)"
+    }
+  ],
+  "positive_control": "Known auth state change: server rotates signing key (old tokens become invalid). Behavioral token-validation signal must detect this as a state change. This is a deterministic, non-ambiguous auth drift that any valid behavioral signal must detect.",
+  "null_control": "Structural noise applied to API response schema (add optional fields, change descriptions) while auth state (token validity, session cookies, permissions) remains unchanged. Behavioral signals must NOT detect this as drift. If behavioral signals fire on structural noise, they are confounded with structural signals and provide no new dimension.",
+  "measurement_validity": [
+    "Mock API server issues real JWT tokens (PyJWT HS256) with configurable expiry and claims; tokens are cryptographically valid, not simulated",
+    "Session cookies use real Flask session mechanism with server-side session store",
+    "Auth boundary probing uses real HTTP requests with actual token/cookie headers, not simulated responses",
+    "Drift patterns change ONLY auth state (token validity, session state, permissions); structural properties of response payloads remain constant",
+    "Noise patterns change ONLY structural properties (response fields, descriptions); auth state remains constant",
+    "All measurements use deterministic computation with fixed seeds; no stochastic variation within conditions",
+    "Each condition produces exactly 30 samples (identical request sequences) to match parent experiment design"
+  ],
+  "decision_rule": "ALL of C1-C5 must pass for behavioral signals to survive the C-FRESHNESS gate:\nC1 (drift detection): TP rate >= 0.90 across all 5 drift patterns (token_expiry, session_invalidation, permission_boundary, signing_key_rotation, cookie_clearance)\nC2 (noise tolerance): FP rate <= 0.15 across all 4 noise patterns (optional_field_addition, description_change, response_time_jitter, field_type_normalization)\nC3 (discrimination): Behavioral signal AUC >= 0.80 on drift vs no-change discrimination\nC4 (orthogonality): Pearson correlation between behavioral signal feature and best structural signal feature (Jaccard or schema diff) < 0.3 across all 40 conditions (8 patterns x 5 schema sizes)\nC5 (positive control): Known signing-key-rotation produces behavioral signal change > 3x null-control standard deviation\n\nIf C1 or C2 fails: FALSIFIES behavioral signals for C-FRESHNESS in this setting\nIf C3-C5 pass but C1-C2 fail: behavioral signals detected but not reliable enough for gate\nIf C1-C2 pass but C4 fails: behavioral signals work but are not orthogonal (confounded with structural)\nIf C1-C2 pass but C5 fails: measurement validity concern",
+  "product_consequence_positive": "A new detection dimension for C-FRESHNESS beyond structural/schema-based signals. Session-level behavioral signals could be integrated into the freshness guard pipeline as a complementary signal, potentially enabling drift-vs-noise discrimination where all six structural families fail. Product architecture could route auth-state questions to behavioral signals and structural questions to schema signals.",
+  "product_consequence_negative": "All seven tested signal families (six structural + one behavioral) fail C-FRESHNESS in deterministic mock. The C-FRESHNESS domain may require fundamentally different experimental designs: real API deployments with DB/cache/CDN stochasticity, production client traffic patterns, or stochastic field availability. The magnitude confound may be intrinsic to deterministic mock settings and not solvable by additional signal families.",
+  "estimated_cost": "Low-medium. Requires building a Flask mock API server with JWT/session middleware (reuse patterns from EXP-RUNTIME-33902315583 and EXP-RUNTIME-34015740602), implementing 5 drift patterns and 4 noise patterns, and computing behavioral signal features. No browser automation, no external API calls, no LLM inference. Estimated 2-4 hours execution.",
+  "expected_information_gain": "High. This is the highest-upside untested alternative identified by the parent handoff. If behavioral signals succeed, it opens a new detection dimension for C-FRESHNESS. If they fail, it narrows the search space to real-API deployments or composite multi-signal approaches. Either outcome is highly informative for the C-FRESHNESS claim and product architecture decisions."
+}
