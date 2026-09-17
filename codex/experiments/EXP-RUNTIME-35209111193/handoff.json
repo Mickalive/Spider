@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35209111193",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does decompression-normalization (SHA256 on decompressed body + status) survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism — maintaining body-only discrimination >= 0.3 for JSON/HTML/XML at 1KB/10KB/100KB under real CDN compression?",
+  "why_next": "Decompression-normalization format-invariance is validated at localhost synthetic level across 3 content types × 3 sizes under brotli/gzip compression. The sole remaining blocker for decompression-normalization product readiness is real CDN infrastructure survival, which introduces fundamentally different non-determinism (edge quality selection, caching, chunked encoding, Accept-Encoding negotiation) not present in localhost testing. This question is orthogonal to the current localhost measurement — it tests a different environment, not a repetition of the same substrate.",
+  "carry_forward": {
+    "established": [
+      "Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination >= 0.3 for JSON, HTML, and XML at nominal 1KB/10KB/100KB under localhost brotli (quality 4-8) and gzip compression without CDN noise. Discrimination is 0.5 across all 9 content-type×size combinations (audit PASS, all 6 decision conditions pass).",
+      "Algorithm equivalence confirmed: |brotli_decompressed - gzip_decompressed| = 0.0 for all 18 type×size pairs. Decompressed bodies are algorithm-invariant.",
+      "Determinism confirmed: decompressed hash variation all_same=true for all 288 state×type×size×baseline cells. Within-state decompressed hashes are identical across 20 repetitions.",
+      "Decompression path is actually exercised: Content-Encoding br/gzip on all 5760 observations, decompression latency scales with payload size (0.015ms at 1KB to 0.21ms at 100KB for brotli). Parent MEASUREMENT_INVALID infrastructure failure resolved.",
+      "Compressed-only brotli discrimination is lower than decompressed (0.15-0.34 vs 0.5), confirming decompression is necessary for format-invariance. Gzip compressed discrimination equals decompressed (0.5) because gzip produces deterministic output (unique_count=1/20).",
+      "Structural discrimination ceiling is 0.5 due to 3-way error collapse in mock server design (no_auth/expired_token/invalid_token share identical error bodies). This is a property of the test environment, not the mechanism.",
+      "Parent EXP-RUNTIME-35137033384 claim ceiling (1KB JSON under synthetic CDN-noise proxy) stands and is expanded to multi-format multi-size under localhost compression."
+    ],
+    "rejected": [
+      "Brotli quality diversity (unique compressed hashes per state) does not increase from 1KB to 100KB for repetitive padded content (avg 2.33 at both sizes). This is an artifact of repetitive padding content compressing identically across sizes, not evidence that brotli quality levels are irrelevant. The question of whether quality diversity increases with natural (non-padded) content remains open.",
+      "Decompression-normalization was NOT tested on real CDN infrastructure — all results are localhost mock server only. No inference to Cloudflare/Fastly/Akamai edge behavior is justified."
+    ],
+    "unknown": [
+      "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism?",
+      "Does decompression-normalization maintain discrimination on natural (non-padded) content at production scale (MB payloads, N>1000, concurrent clients)?",
+      "Does brotli quality diversity increase with natural content at larger sizes (the repetitive-padding artifact suggests it might)?",
+      "Does decompression-normalization handle incorrect, missing, or double-encoded Content-Encoding headers gracefully?",
+      "Does decompression-normalization work for binary content types (images, protobuf, compressed data)?",
+      "What is the production decompression cost at scale (latency, CPU, memory) vs localhost measurements (0.015-0.21ms)?"
+    ],
+    "do_not_assume": [
+      "Do NOT assume decompression-normalization is production-ready — real CDN infrastructure is untested and is the critical remaining blocker.",
+      "Do NOT assume the structural discrimination ceiling of 0.5 applies to production environments — it is a property of the 3-way error collapse mock design. Real auth middleware may have different error response patterns.",
+      "Do NOT assume brotli quality diversity is irrelevant because it did not scale with repetitive padding — natural content may show different scaling behavior.",
+      "Do NOT assume the localhost decompression latency (0.015-0.21ms) represents production cost — real CDN latency includes network, edge computation, and negotiation overhead.",
+      "Do NOT assume format-invariance extends to binary content types, compressed data formats, or content types with variable encoding.",
+      "Do NOT assume this experiment advances or regresses the full-DOM locatable density sub-problem of C-MEAS-VALID (BLOCKED in EXP-INTEL-35166505835) — they address orthogonal sub-problems."
+    ]
+  },
+  "dependencies": [
+    "Parent EXP-RUNTIME-35137033384 claim ceiling (synthetic proxy + CDN simulator, 1KB JSON) stands expanded to multi-format multi-size localhost compression",
+    "Parent EXP-RUNTIME-35154720995 infrastructure failure resolved (server compression fix validated)",
+    "Real CDN infrastructure (Cloudflare Workers or Fastly Compute) required for next experiment — must proxy localhost mock or serve equivalent content through CDN edge",
+    "CDN experiment requires same frozen content types (JSON/HTML/XML), sizes (1KB/10KB/100KB), and auth states to enable direct comparison with localhost baseline",
+    "C-MEAS-VALID BLOCKED status on full-DOM locatable density (EXP-INTEL-35166505835) is orthogonal and unaffected by this decompression-normalization result"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35209111193/result.json — all 36 metric cells, decompressed/compressed discrimination, hash variation, compression verification, decompression latency",
+    "research/experiments/EXP-RUNTIME-35209111193/audit.json — PASS, producer_claim_supported=true, claim_ceiling, recomputed_metrics, 7 validity_findings",
+    "research/experiments/EXP-RUNTIME-35209111193/raw_observations.json (sha256: eb0ab3c02f69ecc62f856c5d8184d171d4a3ddf0855fb75b3d381676f0db1100) — 5760 HTTP observations with Content-Encoding br/gzip",
+    "research/experiments/EXP-RUNTIME-35209111193/run_experiment.py (sha256: a86e95d5e1590c62acc87add0c20afaf92ed6b45fdf8ebf5502011fcbdf3c3e7) — server compression fix, brotli quality cycling, gzip, Content-Encoding headers",
+    "research/experiments/EXP-RUNTIME-35209111193/provenance.json — environment (Python 3.12.14, brotli 1.2.0), frozen inputs, reproduction instructions",
+    "research/experiments/EXP-RUNTIME-35154720995/handoff.json (sha256: 79c5e640c4745b24f4f11409957bccec69a3cb453f7410226f1545b5beb15bd1) — parent (MEASUREMENT_INVALID, server never compressed)",
+    "research/experiments/EXP-RUNTIME-35137033384 — grandparent claim ceiling (1KB JSON, synthetic CDN-noise proxy)",
+    "research/experiments/EXP-RUNTIME-35209111193/spec.json — frozen question, hypothesis, falsifier, decision_rule",
+    "research/experiments/EXP-RUNTIME-35209111193/freeze.json (sha256: 7996996cb5c5660c78ca7ba0f59709f9b28a7223003fb33b7fa62be3381f2f97) — frozen design inputs"
+  ],
+  "recommended_action": "The next experiment should test decompression-normalization on real CDN infrastructure. Setup: (1) Deploy the mock OAuth2 server behind Cloudflare Workers or Fastly Compute with brotli/gzip compression enabled at the edge, (2) Run the same 3×3×4×2 content-type×size×state×algorithm matrix through the CDN proxy, (3) Measure whether decompressed discrimination >= 0.3 survives CDN non-determinism (edge quality selection, caching, chunked encoding, Accept-Encoding negotiation), (4) Compare localhost vs CDN discrimination deltas. If CDN survival is confirmed, C-MEAS-VALID decompression-normalization sub-thread is product-ready. If CDN introduces non-determinism that reduces discrimination below 0.3, investigate CDN-specific decompression issues (e.g., partial content, range requests, cache poisoning). Do NOT repeat the localhost measurement — it is established."
+}
