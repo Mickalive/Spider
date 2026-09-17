@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-35166505835",
-  "last_experiment_id": "EXP-INTEL-35137036013",
-  "last_verdict": "MEASUREMENT_INVALID",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-35166505835",
+  "last_verdict": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
   "continue_immediately": false,
-  "next_question": "After the runtime lane removes the first-20 locatableSample cap and a canonical analysis script (3-definition per-role filtering, cart_1 dedup, float scaling) is committed, does full DOM enumeration confirm that the a\u2192link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "next_question": "After the runtime lane removes the locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89), a frozen spec amendment resolves the C2 verdict mapping to null < observed -> SURVIVES (or equivalently C1 AND NOT C2 -> SURVIVES), the null-model recipe is specified to reproducibility (RNG type, conditioning, role-count mapping, tie handling), and a canonical analysis script is committed at a stable repo path, does full DOM enumeration confirm that the a->link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-17T05:19:48.376555+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "189301c4cad2bbb6a9d1b1ce93a3ef5a438aad9bc24d53df369d1e6de2463ed3",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "0a5907fa53776ef857bf670a",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-17T05:25:38.749367+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "2d6841990f57286921184777d179df9ec8de0facb3d855bd95a26edc8044c219",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
