@@ -1,17 +1,43 @@
 {
   "experiment_id": "EXP-RUNTIME-35237982464",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does decompression-normalization (SHA256 on decompressed body + status) maintain body-only discrimination >= 0.3 when brotli quality level varies non-deterministically per request — simulating CDN edge-selection non-determinism where the same logical body is served through different quality levels across requests?",
+  "hypothesis": "Decompression-normalization preserves body-only discrimination under non-deterministic brotli quality because the mechanism operates on decompressed logical bodies, which are quality-invariant. Random quality selection per request produces different compressed bytes but identical decompressed bodies, so decompressed SHA256 hashes remain stable within each auth state. Discrimination should equal the deterministic baseline (0.5) because quality variation affects only the compressed representation, not the decompressed content.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any content type, OR decompressed hash variation > 1 unique per state for any condition (determinism failure under quality variation), OR decompressed hashes differ between brotli quality 4 and quality 8 for the same auth state and content type.",
+  "baselines": [
+    {
+      "id": "B-DETERMINISTIC-QUALITY-6",
+      "description": "Parent EXP-RUNTIME-35209111193 decompressed discrimination at fixed brotli quality 6 across all content types (0.5). Regression reference: non-deterministic quality should not degrade below deterministic baseline.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0 discrimination. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-COMPRESSED-BYTE-ONLY",
+      "description": "Discrimination using compressed bytes directly (no decompression). Under non-deterministic quality, compressed bytes vary per request, so discrimination should be lower than decompressed. This proves decompression is necessary.",
+      "expected_value": "< 0.5"
+    }
+  ],
+  "positive_control": "C_QUALITY_VARIATION_EXISTS: For each content type x size, at least 2 distinct brotli quality levels must produce distinct compressed hashes for the same auth state (unique_compressed_hashes >= 2). This verifies the CDN proxy actually varies quality and the experiment is not trivially degenerate.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Content types are synthetic but structurally realistic: JSON (key-value pairs), HTML (paragraphs, lists, links), XML (nested elements with attributes). All contain 4 auth-state bodies with 3-way error collapse (no_auth/expired/invalid share similar bodies, valid_token has distinct body).",
+    "Payload sizes are controlled by padding to hit target uncompressed sizes: 1KB, 10KB, 100KB.",
+    "CDN proxy selects brotli quality uniformly at random from {4,5,6,7,8} per request. This simulates CDN edge-selection non-determinism where different edges or cache hits produce different quality levels for the same content.",
+    "The mock server generates the uncompressed body deterministically per auth state. Quality variation is applied ONLY at the CDN proxy layer, not at the server. This ensures decompressed bodies are identical across quality levels by construction.",
+    "SHA256 decompression-normalization is applied to the response body AFTER decompression by the client, using the brotli library's built-in decompressor.",
+    "No Accept-Encoding negotiation is tested — the client always advertises 'br'. This isolates quality non-determinism from algorithm non-determinism.",
+    "No chunked transfer-encoding is tested — responses use standard Content-Length. This isolates quality effects from framing effects.",
+    "Seed=44 for request ordering. N=20 per state per content type per size (each request gets independent random quality).",
+    "Mock server is localhost only. No real CDN infrastructure is used. Results are bounded to localhost mock server with CDN-proxy quality randomization."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for JSON at all sizes, (2) decompressed body-only discrimination >= 0.3 for HTML at all sizes, (3) decompressed body-only discrimination >= 0.3 for XML at all sizes, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under quality variation), (5) B-RANDOM = 0.0 for all conditions, (6) C_QUALITY_VARIATION_EXISTS passes (at least 2 distinct compressed hashes per content type x size). FALSIFIED-IN-SETTING if any non-JSON type has discrimination < 0.3 at any size, OR if decompressed hashes differ by quality level for any condition. MEASUREMENT_INVALID if infrastructure failure prevents valid measurements.",
+  "product_consequence_positive": "Decompression-normalization survives non-deterministic brotli quality variation, the core CDN edge-selection non-determinism. Claim ceiling advances from 'deterministic localhost compression' to 'non-deterministic quality localhost compression'. Product team can proceed with real-CDN deployment knowing quality variation does not break the mechanism. The decompressed-body invariant holds regardless of which quality level the CDN edge selects.",
+  "product_consequence_negative": "Decompression-normalization fails under non-deterministic brotli quality. The mechanism depends on deterministic compression, not just decompression. Product team must either: (a) force deterministic quality at the CDN edge (increasing infrastructure complexity), (b) investigate quality-specific decompression artifacts, or (c) abandon decompression-normalization in favor of alternative fingerprinting that handles quality non-determinism. Real-CDN deployment is blocked until the failure mode is understood.",
+  "estimated_cost": "< 5000 tokens, < 2 minutes execution (localhost only, no network, no CDN proxy).",
+  "expected_information_gain": "HIGH. Directly tests the core CDN non-determinism (quality variation) that the parent handoff identified as the critical untested blocker. The parent established deterministic survival; this tests non-deterministic survival. A positive result unblocks real-CDN deployment decisions. A negative result identifies the exact failure mode (quality-dependent decompression artifacts) without wasting CDN infrastructure investment. Either outcome changes a product decision. This is the smallest experiment that bridges the gap between localhost deterministic and real-CDN testing."
 }
