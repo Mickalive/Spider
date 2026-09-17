@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35166507358",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "mean_fp_rate": 0.0,
+    "auc": 1.0,
+    "auc_ci_lower": 1.0,
+    "auc_ci_upper": 1.0,
+    "pearson_r": 0.5932255944438963,
+    "pearson_p": 0.000999000999000999,
+    "positive_control_rate": 1.0,
+    "pattern_tp_rates": {
+      "token_expiry": 1.0,
+      "session_invalidation": 1.0,
+      "permission_boundary": 1.0,
+      "signing_key_rotation": 1.0,
+      "cookie_clearance": 1.0
+    },
+    "pattern_fp_rates": {
+      "optional_field_addition": 0.0,
+      "description_change": 0.0,
+      "response_time_jitter": 0.0,
+      "field_type_normalization": 0.0
+    },
+    "n_drift_conditions": 25,
+    "n_noise_conditions": 20,
+    "n_cooccurring_conditions": 15,
+    "n_samples_per_condition": 30,
+    "n_total_sequences": 1800
+  },
+  "controls": {
+    "C1_drift_detection": {
+      "threshold": "mean_tp >= 0.90 AND all Wilson lower CI > 0.85",
+      "observed_mean_tp": 1.0,
+      "observed_wilson_lower_bounds": [
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221,
+        0.8864829086095221
+      ],
+      "pass": true,
+      "evidence": "Mean TP rate across 5 drift patterns x 5 schema sizes = 25 conditions"
+    },
+    "C2_noise_tolerance": {
+      "threshold": "mean_fp <= 0.15 AND all Wilson upper CI < 0.25",
+      "observed_mean_fp": 0.0,
+      "observed_wilson_upper_bounds": [
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478,
+        0.113517091390478
+      ],
+      "pass": true,
+      "evidence": "Mean FP rate across 4 noise patterns x 5 schema sizes = 20 conditions"
+    },
+    "C3_discrimination": {
+      "threshold": "AUC >= 0.80 AND bootstrap 95% CI lower bound > 0.70",
+      "observed_auc": 1.0,
+      "observed_auc_ci": [
+        1.0,
+        1.0
+      ],
+      "pass": true,
+      "evidence": "AUC on drift vs noise discrimination across all 45 conditions"
+    },
+    "C4_orthogonality": {
+      "threshold": "|Pearson r| < 0.3 on co-occurring conditions",
+      "observed_r": 0.5932255944438963,
+      "observed_p": 0.000999000999000999,
+      "n_samples": 450,
+      "pass": false,
+      "evidence": "Pearson correlation between behavioral composite and best structural signal on co-occurring drift+noise conditions (no block-zero imputation)"
+    },
+    "C5_positive_control": {
+      "threshold": "30/30 signing key rotation requests produce token validation failure",
+      "observed_rate": 1.0,
+      "observed_count": "30/30",
+      "pass": true,
+      "evidence": "Signing key rotation with old token validated against new key"
+    },
+    "positive_control_signing_key_rotation": {
+      "pattern": "signing_key_rotation",
+      "expected": "token_validation_rate=1.0 on 30/30 requests",
+      "observed_rate": 1.0,
+      "pass": true
+    },
+    "null_control_optional_field_addition": {
+      "pattern": "optional_field_addition",
+      "schema_size": 10,
+      "expected": "no behavioral signal fires",
+      "observed_fp_rate": 0.0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "ba507d784339b65e3dd18a67a4c11a7afc8e636bdf4f842a0ed6ed8661f74662",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/derived_measurements.json",
+      "sha256": "c94b1620b506fa146419a95b89575122f16ee499b1ab477397e574b44ca8c6ab",
+      "role": "derived"
+    },
+    {
+      "path": "raw_evidence/decision_evaluation.json",
+      "sha256": "dc72233fd9432d89ecd06f45a2d3a455eb6c14de254ebdf455013e18fea8f6f5",
+      "role": "derived"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "aeaad8849e8a141bdeaa633bb09172a30aae061552d1ce5c122efb4887aac8fa",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean drift TP rate: 1.0000 (25/25 conditions have TP > 0)",
+    "Mean noise FP rate: 0.0000 (0/20 conditions have FP > 0)",
+    "AUC: 1.0000 (95% bootstrap CI: [1.0000, 1.0000])",
+    "Pearson r (behavioral vs structural on co-occurring): 0.5932 (p=0.0010, n=450)",
+    "Per-pattern drift TP: {'token_expiry': 1.0, 'session_invalidation': 1.0, 'permission_boundary': 1.0, 'signing_key_rotation': 1.0, 'cookie_clearance': 1.0}",
+    "Per-pattern noise FP: {'optional_field_addition': 0.0, 'description_change': 0.0, 'response_time_jitter': 0.0, 'field_type_normalization': 0.0}",
+    "Positive control (signing key rotation) rate: 1.0000 (30/30)",
+    "C1 drift detection: PASS",
+    "C2 noise tolerance: PASS",
+    "C3 discrimination: PASS",
+    "C4 orthogonality: FAIL",
+    "C5 positive control: PASS"
+  ],
+  "validity_notes": [
+    "Flask server started as real subprocess with PyJWT HS256 token signing and real Flask server-side session store",
+    "Tokens issued via jwt.encode() with real expiry claims; validated via jwt.decode() against current signing key",
+    "Session cookies use real Flask session mechanism with server-side session store; session invalidation clears the store",
+    "All behavioral signals derived from actual HTTP request/response cycles: token validation = jwt.decode success/failure; session validity = session store lookup; permission boundary = HTTP 401/403 status codes",
+    "Structural signals (Jaccard, schema_diff) computed from actual response bodies, not from schema definitions",
+    "Per-sample variation: 30 independent request sequences per condition with token expiry timing jitter (\u00b11s), session TTL variation (5-15s), permission probe ordering randomization",
+    "Co-occurring drift+noise conditions: 15 conditions where auth drift and structural noise occur simultaneously",
+    "Deterministic seed (SEED=42) for reproducibility; all RNG states logged and reproducible",
+    "Claim ceiling bounded to: Flask 3.x + PyJWT HS256 on localhost, 5 drift patterns, 4 noise patterns, 3 co-occurring patterns, 5 schema sizes, 30 sequences per condition",
+    "Real HTTP measurement (not analytical computation or mocked responses)"
+  ],
+  "unresolved": [
+    "Whether real APIs with stochastic behavior (DB/cache/CDN) preserve behavioral signal discrimination",
+    "Whether composite behavioral+structural classifiers outperform individual signals",
+    "Whether session-level signals generalize beyond HS256 JWT to RS256/ES256/OAuth/OIDC",
+    "Whether bounded optional field addition (max 1-2 fields) allows structural signals to pass C2",
+    "Whether behavioral signals work with real production OAuth/OIDC middleware (Auth0, Okta, Keycloak)",
+    "Whether the measured orthogonality holds under production traffic patterns with heterogeneous clients"
+  ]
+}

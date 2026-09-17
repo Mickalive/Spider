@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35166507358",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a redesigned co-occurring drift+noise measurement (where structural signals remain observable despite auth failure, e.g., via independent unauthenticated structural probe or baseline-schema comparison) demonstrate Pearson r < 0.3 between behavioral and structural signals on genuinely co-occurring conditions?",
+  "why_next": "This experiment established behavioral signals as a validated detection dimension (C1-C3 PASS: TP=1.0, FP=0.0, AUC=1.0 on real HTTP Flask+PyJWT) but C4 orthogonality failed (|r|=0.593) due to measurement design flaw: 5/15 co-occurring conditions have zero structural observability because auth-drift (signing_key_rotation) causes HTTP 401 on all endpoints, masking structural signal to imputed 0.0. The orthogonality hypothesis is untested, not falsified. The minimum next step is to fix the co-occurring measurement so both signals are non-trivially observable on the same conditions — either via independent structural probes (unauthenticated endpoint access), baseline-schema comparison independent of auth response, or drift patterns that do not uniformly block all endpoints. If orthogonality survives the fixed design, C-FRESHNESS gains a validated second detection channel. If it fails with proper measurement, behavioral signals are confirmed non-orthogonal and the domain pivots to composite multi-signal classifiers or real-API deployments.",
+  "carry_forward": {
+    "established": [
+      "Behavioral signals (token validation failure rate, session state change, auth boundary shift) measured from real HTTP on Flask 3.x + PyJWT HS256 localhost detect all 5 auth-drift patterns with TP=1.0 (Wilson lower 0.886) and tolerate all 4 structural noise patterns with FP=0.0 (Wilson upper 0.113). AUC=1.0 for drift-vs-noise discrimination. This is the first signal family to pass C1/C2/C3 for C-FRESHNESS.",
+      "Positive control: signing-key rotation produces token_validation_rate=1.0 on 30/30 requests (C5 PASS).",
+      "Six structural/schema-based signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard, TF-IDF, response-time KS, linear Fisher LDA ensemble, field-usage profiling, direct schema comparison.",
+      "The magnitude confound is structural: unbounded optional_field_addition noise scales diff magnitude with schema size, dominating subtle drift at all sizes.",
+      "Schema diff is orthogonal to Jaccard: Pearson r=-0.590 across 40 conditions.",
+      "Field-usage profiling provides orthogonal discrimination for field-availability drift (r=-0.045 to Jaccard) but fails on change_type."
+    ],
+    "rejected": [
+      "Direct schema comparison as standalone drift-vs-noise discriminator (C2 fails under frozen rule)",
+      "Any single structural/schema-based signal family providing complete C-FRESHNESS discrimination — six families tested, all fail frozen gate",
+      "Unbounded optional field addition noise (10% of schema size) tolerable by schema diff or Jaccard — both fail at all schema sizes",
+      "Linear Fisher LDA ensemble of structural signals rescuing individual failures — AUC=0.625",
+      "Block-zero imputed orthogonality — C4 as specified measures deterministic pairing when structural signal is masked to 0.0 by auth failure"
+    ],
+    "unknown": [
+      "Whether behavioral and structural signals are genuinely orthogonal (Pearson r < 0.3) when both are non-trivially measured on the same conditions — C4 measurement design flaw prevents testing",
+      "Whether bounded optional field addition (max 1-2 fields) allows structural signals to pass C2",
+      "Whether composite multi-signal classifiers (schema diff + usage profiling + behavioral signals) achieve discrimination none achieve individually",
+      "Whether real APIs with stochastic field availability, DB/cache/CDN variation, and heterogeneous client profiles preserve behavioral signal discrimination",
+      "Whether the magnitude confound is intrinsic to deterministic mock settings or also affects real API deployments",
+      "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware (Auth0/Okta/Keycloak)",
+      "Whether per-sample stochastic variation within conditions would reveal different results than deterministic paired means"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — seven bounded signal families falsified in specific deterministic mock settings; the broader domain remains open",
+      "Behavioral signals are falsified for C-FRESHNESS — C4 failure is measurement-confounded (structural masking by 401), not evidence against signal orthogonality",
+      "Behavioral signals are confirmed orthogonal — |r|=0.593 FAILS frozen threshold; the pooled correlation measures deterministic pairing, not genuine coupling, but orthogonality is untested",
+      "Deterministic mock server results transfer to real APIs — all signals tested on same deterministic mock; real APIs may shift discrimination gaps",
+      "AUC=1.0 with degenerate CI [1.0,1.0] generalizes — perfect deterministic separation reflects construction, not empirical overlap resilience",
+      "Per-sample features would show different results than aggregated means — all experiments used zero within-condition variance"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35166507358/result.json — C1-C5 metrics, pattern_tp_rates, pattern_fp_rates, pearson_r, controls",
+    "research/experiments/EXP-GRAPH-35166507358/audit.json — status=FAIL, V1-V5 validity findings, recomputed_metrics, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35166507358/report.md — interpretation, C4 analysis, scope limitations",
+    "research/experiments/EXP-GRAPH-35166507358/provenance.json — environment, parameters, code paths",
+    "research/experiments/EXP-GRAPH-35166507358/mock_server.py — Flask server implementation",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/experiment_data.json — raw measurements per condition",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/derived_measurements.json — behavioral/structural scores, co-occurring measurements",
+    "research/experiments/EXP-GRAPH-35155716123/handoff.json — parent carry_forward (six structural families falsified, behavioral signals untested)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35166507358/request.json",
+    "research/experiments/EXP-GRAPH-35166507358/spec.json",
+    "research/experiments/EXP-GRAPH-35166507358/prereg.md",
+    "research/experiments/EXP-GRAPH-35166507358/freeze.json",
+    "research/experiments/EXP-GRAPH-35166507358/result.json",
+    "research/experiments/EXP-GRAPH-35166507358/audit.json",
+    "research/experiments/EXP-GRAPH-35166507358/report.md",
+    "research/experiments/EXP-GRAPH-35166507358/provenance.json",
+    "research/experiments/EXP-GRAPH-35166507358/mock_server.py",
+    "research/experiments/EXP-GRAPH-35166507358/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/experiment_data.json",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/decision_evaluation.json",
+    "research/experiments/EXP-GRAPH-35155716123/handoff.json"
+  ],
+  "recommended_action": "Design a graph lane experiment that fixes the co-occurring drift+noise measurement design: (1) use drift patterns that do NOT uniformly block all endpoints (e.g., permission_boundary + optional_field_addition, session_invalidation + description_change — these already work with non-zero structural observability); (2) add independent structural probe (unauthenticated GET to retrieve response body schema without requiring valid token); (3) or compute structural signal from baseline schema definitions rather than live response bodies; (4) add per-sample stochastic variation that actually varies both signals within conditions (not deterministic fixed pairs). If behavioral vs structural Pearson r < 0.3 on the fixed co-occurring design, C-FRESHNESS gains a validated second detection channel and the product pipeline can integrate behavioral signals. If r >= 0.3 with proper measurement, behavioral signals are confirmed non-orthogonal and the domain pivots to composite multi-signal classifiers or real-API stochastic deployments."
+}

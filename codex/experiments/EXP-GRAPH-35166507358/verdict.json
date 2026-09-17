@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35166507358",
+  "lane": "graph",
+  "decision": "C4-ORTHOGONALITY-CONFOUNDED",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Behavioral signals on real HTTP Flask+PyJWT HS256 localhost achieve TP=1.0 (Wilson lower 0.886), FP=0.0 (Wilson upper 0.113), AUC=1.0 — first signal family to pass C1/C2/C3 for C-FRESHNESS. Positive control signing-key rotation fires 30/30. However, frozen decision rule requires ALL C1-C5; C4 orthogonality fails (|r|=0.593 >= 0.3). Audit identifies C4 failure as measurement-confounded: 5/15 co-occurring conditions have zero structural signal (drift causes 401 on all probes, structural imputed 0.0), per-condition r is NaN (zero within-condition variance), pooled r measures deterministic drift-noise pattern pairing not genuine signal coupling. Behavioral signals are a validated new detection dimension for auth-drift-vs-structural-noise discrimination, but co-occurring orthogonality is not demonstrated by this design. Claim advances from HYPOTHESIS to EXPERIMENTAL with narrowed ceiling: behavioral signals discriminate auth drift from structural noise on deterministic Flask mock, orthogonality measurement requires redesigned co-occurring conditions."
+    }
+  ],
+  "product_action": "No promotion. Behavioral signals validated as detection dimension but C-FRESHNESS gate not passed (C4 confounded). Product pipeline cannot integrate behavioral signals as orthogonal complement to structural signals until orthogonality is measured without the masking artefact.",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Can a redesigned co-occurring drift+noise measurement (where structural signals remain observable despite auth failure, e.g., via independent unauthenticated structural probe or baseline-schema comparison) demonstrate Pearson r < 0.3 between behavioral and structural signals on genuinely co-occurring conditions?",
+  "reason": "Frozen decision rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C4 fails (|r|=0.593 >= 0.3) but audit reveals the failure is measurement-confounded: (1) 5/15 co-occurring conditions have zero structural observability because signing_key_rotation causes 401 on all endpoints — structural imputed 0.0, not measured; (2) per-condition r is NaN (zero variance within each condition); (3) pooled r measures deterministic pairing of 3 drift-noise combinations across 5 sizes, not genuine within-condition independence. The producer's MIXED outcome correctly identifies C4 failure. The audit FAIL correctly withholds claim ceiling advancement. However, the underlying scientific finding — behavioral signals discriminate auth drift from structural noise with perfect TP/FP on real HTTP — is genuinely established (C1-C2-C3 PASS, C5 PASS). The orthogonal dimension hypothesis is untested, not falsified, because the measurement cannot observe both signals non-trivially on the same conditions. The frozen rule's ALL-C1-C5 gate is correctly applied; the next experiment must fix the co-occurring measurement design.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35166507358/request.json",
+    "research/experiments/EXP-GRAPH-35166507358/spec.json",
+    "research/experiments/EXP-GRAPH-35166507358/prereg.md",
+    "research/experiments/EXP-GRAPH-35166507358/freeze.json",
+    "research/experiments/EXP-GRAPH-35166507358/result.json — C1 PASS TP=1.0, C2 PASS FP=0.0, C3 PASS AUC=1.0, C4 FAIL |r|=0.593, C5 PASS 30/30",
+    "research/experiments/EXP-GRAPH-35166507358/audit.json — status=FAIL, V1_STRUCTURAL_MASKING_BY_AUTH_FAILURE (high), V2_PER_CONDITION_ZERO_VARIANCE (high), claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-GRAPH-35166507358/report.md — Co-occurring table showing nan per-condition r, behavioral/structural means",
+    "research/experiments/EXP-GRAPH-35166507358/provenance.json — environment, parameters, code paths",
+    "research/experiments/EXP-GRAPH-35166507358/mock_server.py — Flask server implementation",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/experiment_data.json",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35155716123/handoff.json — parent carry_forward (six structural families falsified, behavioral signals untested)"
+  ]
+}
