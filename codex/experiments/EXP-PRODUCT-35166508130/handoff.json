@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can Fix3 (_is_protocol_only_prefix) be redesigned to reject only truly protocol-only prefixes (no '/' in rest) without blocking valid host?query parameterization, and can a discriminating test demonstrate its independent necessity over Fix2?",
+  "why_next": "This experiment resolves the parent MEASUREMENT_INVALID blocker (V1_HTTP_DESIGN_IMPOSSIBLE_IDS) and demonstrates real HTTP binding correctness 9/9 on valid IDs, expanding the claim ceiling. However, the frozen decision rule fails on C4 (B_UNFIXED_PROTOCOL_ONLY) because Fix3 is redundant with Fix2 for the tested URL pair and overbroad for host?query patterns (audit V1, V2). Fix3 necessity is not demonstrated, and Fix3 blocks valid parameterization. The next step should either redesign Fix3 to be non-redundant and non-overbroad with a discriminating test, or pivot to orthogonal high-upside question such as PUT/POST method fidelity or end-to-end economics.",
+  "carry_forward": {
+    "established": [
+      "Real HTTP binding correctness 9/9 for parameterized mechanisms on jsonplaceholder.typicode.com GET endpoints with valid unseen IDs (posts 96-98, users 8-10, comments postId 5-7): URL binding accuracy 1.0, HTTP binding accuracy 1.0 (status 200 + valid JSON body per expected schema)",
+      "Literal baseline achieves identical 9/9 HTTP execution success, confirming both mechanisms work correctly over real HTTP",
+      "Comment body validation fix (V2 from parent audit) works: validate_comment_body accepts list-of-dicts with expected keys for comments endpoint",
+      "Token cost measurement with tiktoken cl100k_base: parameterized 68 tokens, literal 96 tokens (29.17% savings, parameterized cheaper) — single data point, structural advantage",
+      "Kernel regression tests pass (3/3): test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention",
+      "N1 null control passes: resource ID 999999 returns 404 or empty array without crashes on all 3 endpoints",
+      "distill_parameterized with Fix1+Fix2+Fix3 restored from parent commit induces 3 GET-only mechanisms from P1_TRAINING observations"
+    ],
+    "rejected": [
+      "C4 B_UNFIXED_PROTOCOL_ONLY test design is non-discriminating for the frozen URL pair: Fix2 subsumes Fix3, making Fix3 appear redundant for this pattern",
+      "Fix3 necessity not demonstrated by the frozen test: expected delta (unfixed >0 vs fixed 0) never occurs because Fix2 already prevents over-parameterization"
+    ],
+    "unknown": [
+      "Fix3 independent necessity on discriminating data where Fix2 passes but Fix3 should reject: no such data exists in current test design",
+      "PUT/POST method fidelity over real HTTP: fetch_posts PUT binding not tested (template is GET only); whether method-preserving mechanism needed remains unknown",
+      "End-to-end amortized cost per successful real-browser task: not measured; requires real-browser test harness with model/network/browser calls against literal/fixed baselines",
+      "Generalization beyond jsonplaceholder GET: other hosts, auth, pagination, encoding, multi-slot mechanisms, noisy multi-step browser sessions, LLM-based distillation not tested",
+      "B_UNFIXED true Fix3 delta on live-like traffic prevalence: curated URL pair not representative of real traffic distribution",
+      "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 not ported nor tested in this lane; mixed literal+parameterized registry safety remains inherited unresolved"
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is VALIDATED or PRODUCT_CORE: it remains EXPERIMENTAL at expanded ceiling (committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder); frozen gate fails on C4",
+      "Do not assume Fix3 is necessary for all URL patterns: Fix3 is redundant with Fix2 for tested path-slash patterns and overbroad for host?query patterns",
+      "Do not assume token cost savings of 29.17% reflect real economics: single tiktoken measurement, structural advantage (3 vs 9 encodings), not amortized cost per successful task",
+      "Do not assume HTTP binding correctness generalizes to PUT/POST, multi-slot, noisy browser, LLM distillation, cross-site: only GET endpoints tested on jsonplaceholder",
+      "Do not assume n=9 establishes statistical significance: deterministic synthetic training, single API, zero model/browser calls",
+      "Do not assume Fix3 blocks all valid parameterization: only host?query patterns affected; path-slash patterns unaffected",
+      "Do not assume B_UNFIXED_PROTOCOL_ONLY baseline demonstrates Fix3 necessity: audit finds Fix2 subsumes Fix3 for tested URL pair"
+    ]
+  },
+  "dependencies": [
+    "Fix3 redesign required: restrict _is_protocol_only_prefix to reject only scheme+authority prefixes with no '/' in rest, without blocking host?query parameterization (audit V2)",
+    "Discriminating test required: provide URL pair where Fix2 passes but Fix3 should reject, or demonstrate Fix3 delta on synthetic PROTOCOL_ONLY vs minimal-path corpus (audit V1)",
+    "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing",
+    "PUT/POST method fidelity testing needed to bound method preservation claim",
+    "End-to-end amortized cost measurement required for C-PRODUCT-ECON: needs real-browser test harness with model tokens + browser/network + retrieval/verification/repair vs literal/cold baselines"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35166508130/result.json: outcome FALSIFIES, metrics C1-C3 pass, C4 fail, C5-C6 pass, controls 5, observations 11, token_cost 68 vs 96",
+    "research/experiments/EXP-PRODUCT-35166508130/audit.json: status REVISE, producer_claim_supported false, validity_findings V1-V6, claim_ceiling expands to real HTTP binding on jsonplaceholder GET, required_fixes for Fix3 redesign and token methodology",
+    "research/experiments/EXP-PRODUCT-35166508130/report.md: executive summary FALSIFIED-IN-SETTING but C1-C3 strong PASS, C4 root cause Fix3 redundancy",
+    "research/experiments/EXP-PRODUCT-35166508130/provenance.json: restored kernel sha30b741..., unseen IDs verified, tiktoken 0.14.0, pricing gpt-4o-mini 2026-09-17",
+    "src/spider/kernel.py sha30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e: distill_parameterized Fix1+Fix2+Fix3, _is_protocol_only_prefix overbroad",
+    "research/experiments/EXP-PRODUCT-35154724610/handoff.json: parent MEASUREMENT_INVALID, carry_forward established/rejected/unknown/do_not_assume",
+    "codex/claim_state.json: C-PARAM-INHERIT latest status MEASUREMENT_INVALID (parent), C-PRODUCT-ECON HYPOTHESIS"
+  ],
+  "recommended_action": "Next product-lane experiment should: (1) Redesign Fix3 (_is_protocol_only_prefix) to reject only truly protocol-only prefixes without blocking host?query parameterization (audit V2); (2) Provide discriminating test where Fix2 passes but Fix3 should reject (audit V1); (3) Optionally test PUT/POST endpoints to bound method fidelity; (4) Consider pivoting to orthogonal high-upside question such as end-to-end amortized cost measurement for C-PRODUCT-ECON. Simultaneously: C-PARAM-INHERIT remains EXPERIMENTAL at expanded ceiling; C-PRODUCT-ECON remains HYPOTHESIS; no product promotion."
+}

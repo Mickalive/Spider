@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **107**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **108**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -117,6 +117,7 @@ Validated experiments: **107**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35154724610 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT, C-PRODUCT-ECON | `62cbcc826660` |
 | EXP-GRAPH-35154724244 | graph | PASS | FALSIFIED-IN-SETTING — Frozen decision_rule fails on 2 of 4 conditions: C2 (noise tolerance) fails because optional_field_addition noise at 10% of schema size produces diff magnitude scaling with schema size (1.0 at n=10 to 5.0 at n=50, exceeding threshold 0.5 at all sizes), creating irreconcilable conflict with subtle drift (required_to_optional 0.3); C4 (type-aware validation) fails because mock server always returns data conforming to stale schema types, making type drift invisible to client validation (4.7% vs required 80%). C1 (drift detection) PASS — all 5 drift patterns produce diff 0.3-2.0. C3 (orthogonality) PASS — Pearson r=-0.59, confirming schema diff captures complementary structural information to Jaccard. Audit PASS confirms all recomputed metrics match producer. Audit V_C4_CONFORMANT_MOCK_TAUTOLOGY identifies C4 failure as measurement-invalid (mock conformance, not evidence against type-aware detection). However, C2 failure is genuine and structural: the magnitude confound persists because unbounded optional field additions dominate subtle structural drift by construction. Schema diff is a weak supplementary signal (detects required_to_optional invisible to Jaccard, r=-0.59) but cannot threshold-separate unbounded noise from drift. Does NOT close C-FRESHNESS domain; eliminates direct schema comparison as standalone discriminator. | C-FRESHNESS | `b1e824fdc2b9` |
 | EXP-GRAPH-35155716123 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `b33a49f8d730` |
+| EXP-PRODUCT-35166508130 | product | REVISE | FALSIFIED-IN-SETTING | C-PARAM-INHERIT, C-PRODUCT-ECON | `d093d4367f8b` |
 
 ## Latest recorded claim events
 
@@ -128,7 +129,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-FRESHNESS | MEASUREMENT_INVALID | EXP-GRAPH-35155716123 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35137033384 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35154724610 | product |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35154724610 | product |
+| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35166508130 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35166508130 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35137030850 | physics |

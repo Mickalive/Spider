@@ -1,0 +1,53 @@
+{
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Can parameterized mechanisms bind correctly over real HTTP when using endpoint-appropriate unseen IDs that exist on jsonplaceholder.typicode.com, thereby resolving V1_HTTP_DESIGN_IMPOSSIBLE_IDS from the parent MEASUREMENT_INVALID experiment?",
+  "hypothesis": "With valid unseen IDs (posts 96-98, users 8-10, comments postId 5-7), distill_parameterized with Fix1+Fix2+Fix3 will achieve 9/9 HTTP binding correctness, demonstrating that parameterized mechanisms execute correctly over real HTTP. The literal baseline will also achieve 9/9, confirming the improvement is from corrected test design not parameterization advantage.",
+  "falsifier": "HTTP binding accuracy < 1.0 on valid IDs, or URL construction accuracy < 1.0, or B_LITERAL achieves higher HTTP accuracy than parameterized mechanisms.",
+  "baselines": [
+    {
+      "id": "B_LITERAL_HTTP_EXECUTION",
+      "description": "Literal mechanisms (zero-parameter) with same training data and valid IDs. Expected: 9/9 HTTP execution success. Serves as reachability control to distinguish binding errors from API data limits.",
+      "stable_id": "B_LITERAL_HTTP_EXECUTION"
+    },
+    {
+      "id": "B_UNFIXED_PROTOCOL_ONLY",
+      "description": "Unfixed heuristic (without Fix3) applied to protocol-only URLs. Expected: unfixed produces slot_count > 0 while fixed produces 0, demonstrating Fix3 necessity. Uses URL pair where Fix2 passes but Fix3 should reject.",
+      "stable_id": "B_UNFIXED_PROTOCOL_ONLY"
+    }
+  ],
+  "positive_control": {
+    "id": "P1_REAL_HTTP_BINDING",
+    "description": "Parameterized mechanisms with valid IDs on jsonplaceholder.typicode.com. Expected: 9/9 HTTP execution success (status 200, valid JSON body matching expected resource type).",
+    "stable_id": "P1_REAL_HTTP_BINDING"
+  },
+  "null_control": {
+    "id": "N1_NONEXISTENT_ENDPOINT",
+    "description": "Request to non-existent resource ID 999999 on each endpoint. Expected: 404 or empty array without crashes. Validates error handling.",
+    "stable_id": "N1_NONEXISTENT_ENDPOINT"
+  },
+  "measurement_validity": [
+    "distill_parameterized + Fix1+Fix2+Fix3 restored from parent execute commit a49d839e into src/spider/kernel.py; kernel regression tests pass before HTTP testing",
+    "Unseen IDs are endpoint-appropriate and verified to exist BEFORE HTTP binding test: posts 96-98 (jsonplaceholder has posts 1-100), users 8-10 (jsonplaceholder has users 1-10), comments postId 5-7 (returns data for any postId 1-100)",
+    "Comment body validation accepts list-of-dicts with keys postId,id,name,email,body (fixes V2_COMMENT_BODY_VALIDATION_BUG from parent audit); non-empty comment lists marked valid, empty lists marked valid",
+    "Token cost measured with tiktoken cl100k_base tokenizer (not chars/4 heuristic); model pricing documented (model name, $/1K tokens, source, date)",
+    "HTTP execution uses urllib.request with 10s timeout; validates status=200 and JSON body parsing; raw HTTP logs preserved as derived artifact",
+    "GET-only endpoints tested (PUT/POST method conflation not in scope)",
+    "Network access to jsonplaceholder.typicode.com required; network failure = infrastructure failure, not scientific falsification",
+    "Training observations use same P1_API_ENDPOINTS structure as parent (fetch_posts 5 obs with GET+PUT shared, fetch_users 3 obs, fetch_comments 3 obs)"
+  ],
+  "decision_rule": [
+    "C1: URL binding accuracy >= 1.0 (9/9 correct URL construction for unseen IDs)",
+    "C2: HTTP binding accuracy >= 1.0 (9/9 correct HTTP executions: status 200, valid JSON body matching expected resource type)",
+    "C3: B_LITERAL HTTP accuracy >= 1.0 (9/9 literal mechanisms execute correctly over HTTP with valid IDs)",
+    "C4: B_UNFIXED protocol-only detection: unfixed slot_count > 0 while fixed slot_count = 0 for protocol-only URL https://jsonplaceholder.typicode.com/ (demonstrates Fix3 necessity on discriminating data where Fix2 passes)",
+    "C5: Kernel regression tests pass (3/3): test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention",
+    "C6: Token cost measured with actual tokenizer; parameterized token count <= literal token count",
+    "ALL conditions C1-C6 must pass for SURVIVES_CURRENT_TEST; any failure triggers FALSIFIED-IN-SETTING"
+  ],
+  "product_consequence_positive": "C-PARAM-INHERIT advances from MEASUREMENT_INVALID to EXPERIMENTAL with real HTTP binding evidence on valid IDs. URL construction correctness 1.0 confirmed. HTTP binding correctness 9/9 demonstrated. Claim ceiling expands from 'synthetic single-slot GET URL construction' to 'committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder'. C-PRODUCT-ECON gets first actual tokenization data point. Product viability signal strengthened.",
+  "product_consequence_negative": "C-PARAM-INHERIT remains blocked on real HTTP binding. If HTTP accuracy < 9/9 even with valid IDs, there is a genuine binding or execution bug beyond test design. C-PRODUCT-ECON remains HYPOTHESIS. No product promotion.",
+  "estimated_cost": "Low: 18 HTTP requests to jsonplaceholder.typicode.com (9 parameterized + 9 literal), 3 null control requests, 3 kernel regression tests, 1 tiktoken measurement. No browser automation, no model calls, no network beyond jsonplaceholder.",
+  "expected_information_gain": "High: resolves the primary blocker (V1_HTTP_DESIGN_IMPOSSIBLE_IDS) from parent MEASUREMENT_INVALID experiment. If C1-C3 pass, provides first real HTTP evidence for C-PARAM-INHERIT. If C1-C3 fail, identifies genuine binding or execution bug. Either outcome materially changes the C-PARAM-INHERIT claim status."
+}

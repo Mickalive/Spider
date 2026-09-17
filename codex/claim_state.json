@@ -643,6 +643,16 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "MEASUREMENT_INVALID",
         "reason": "Frozen decision_rule triggers FALSIFIES (conditions 1 and 3 fail: http_binding_accuracy 0.333 < 1.0, B_LITERAL 3/9 < 9/9) but the failure is caused by a test design flaw \u2014 unseen IDs 99, 100, 101 do not exist on jsonplaceholder.typicode.com for posts (only 1-100) and users (only 1-10). URL binding accuracy is 1.0000 (9/9) proving parameterized mechanisms construct correct URLs. Literal baseline shows identical 3/9 failure pattern confirming API data limits not binding errors. Audit V1_HTTP_DESIGN_IMPOSSIBLE_IDS confirms maximum achievable http_correct is 5/9 (posts 2/3, users 0/3, comments 3/3 with corrected validation). Audit V2_COMMENT_BODY_VALIDATION_BUG shows producer undercounts 3/9 vs corrected 5/9. The measurement is invalid for the frozen 9/9 gate; claim ceiling bounded to URL construction correctness 1.0 on synthetic single-slot GET with committed code (sha256=30b741...). Does NOT advance. Parent status EXPERIMENTAL is preserved at URL-correctness ceiling."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35166508130",
+        "lane": "product",
+        "created_at": "2026-09-17T00:25:52.829104+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule requires ALL conditions C1-C6 for SURVIVES_CURRENT_TEST; C4 (B_UNFIXED_PROTOCOL_ONLY) fails due to test design flaw where Fix2 subsumes Fix3 for the frozen URL pair. However, C1-C3 provide strong positive evidence: URL binding accuracy 1.0 (9/9), HTTP binding accuracy 1.0 (9/9) on valid unseen IDs, literal baseline also 9/9, comment body validation fix works, kernel regression 3/3 pass. Claim ceiling expands from 'synthetic single-slot GET URL construction' to 'committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder.typicode.com'. Fix3 necessity not demonstrated; Fix3 is redundant with Fix2 for tested pattern and overbroad for host?query patterns. Remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE) due to frozen gate failure and open Fix3 issues."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -1113,6 +1123,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No valid economics measurement obtained. Condition 6 token cost comparison (62.5 vs 110.25) uses chars/4 heuristic not actual tokenization (audit V3_TOKEN_COST_NOT_TOKENIZATION). The experiment has zero model/browser calls and does not measure end-to-end amortized cost per successful real-browser task. C-PRODUCT-ECON remains HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35166508130",
+        "lane": "product",
+        "created_at": "2026-09-17T00:25:52.829104+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "First actual tokenization data point: parameterized 68 tokens vs literal 96 tokens (29.17% savings) with tiktoken cl100k_base. However, single measurement, structural advantage (3 vs 9 encodings), not amortized cost per successful real-browser task. Remains HYPOTHESIS pending end-to-end economics."
       }
     ],
     "C-MEAS-VALID": [
@@ -1380,14 +1400,14 @@
       "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on C3: many-to-one BC PMI (0.226 bits) < unique-content BC PMI (0.493 bits) - 0.1 = 0.393. The 0.268-bit drop (54%) demonstrates content-state aliasing is a significant source of prior PMI. However, the audit V3 correctly identifies this as threshold misalignment \u2014 the experiment shows PMI>0 persists with many-to-one mapping (0.226 bits, p_bonf=0.0 < 0.0125, well above 0.05 threshold), not PMI=0. The product_consequence_negative ('locally-hosted testable path for C-WEB-DYNAMICS across ALL observation levels is closed') is not justified as written: PMI>0 persists even with many-to-one mapping. However, the audit V4 identifies a critical partial discrimination confound: the many-to-one condition still has 2 unique hashes (S2 unique, S0/S1 shared), so the residual 0.226 bits cannot distinguish genuine predictive dynamics from partial state aliasing. The claim remains HYPOTHESIS: the experiment is descriptive and inconclusive for the broader claim. No confirmatory evidence accumulated; the frozen gate fails; the partial discrimination confound prevents attribution of the residual PMI to genuine dynamics."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35154724610",
+      "experiment_id": "EXP-PRODUCT-35166508130",
       "lane": "product",
-      "created_at": "2026-09-16T21:52:29.311511+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "created_at": "2026-09-17T00:25:52.829104+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
       "claim_id": "C-PARAM-INHERIT",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "Frozen decision_rule triggers FALSIFIES (conditions 1 and 3 fail: http_binding_accuracy 0.333 < 1.0, B_LITERAL 3/9 < 9/9) but the failure is caused by a test design flaw \u2014 unseen IDs 99, 100, 101 do not exist on jsonplaceholder.typicode.com for posts (only 1-100) and users (only 1-10). URL binding accuracy is 1.0000 (9/9) proving parameterized mechanisms construct correct URLs. Literal baseline shows identical 3/9 failure pattern confirming API data limits not binding errors. Audit V1_HTTP_DESIGN_IMPOSSIBLE_IDS confirms maximum achievable http_correct is 5/9 (posts 2/3, users 0/3, comments 3/3 with corrected validation). Audit V2_COMMENT_BODY_VALIDATION_BUG shows producer undercounts 3/9 vs corrected 5/9. The measurement is invalid for the frozen 9/9 gate; claim ceiling bounded to URL construction correctness 1.0 on synthetic single-slot GET with committed code (sha256=30b741...). Does NOT advance. Parent status EXPERIMENTAL is preserved at URL-correctness ceiling."
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule requires ALL conditions C1-C6 for SURVIVES_CURRENT_TEST; C4 (B_UNFIXED_PROTOCOL_ONLY) fails due to test design flaw where Fix2 subsumes Fix3 for the frozen URL pair. However, C1-C3 provide strong positive evidence: URL binding accuracy 1.0 (9/9), HTTP binding accuracy 1.0 (9/9) on valid unseen IDs, literal baseline also 9/9, comment body validation fix works, kernel regression 3/3 pass. Claim ceiling expands from 'synthetic single-slot GET URL construction' to 'committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder.typicode.com'. Fix3 necessity not demonstrated; Fix3 is redundant with Fix2 for tested pattern and overbroad for host?query patterns. Remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE) due to frozen gate failure and open Fix3 issues."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-GRAPH-34586318405",
@@ -1430,14 +1450,14 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35154724610",
+      "experiment_id": "EXP-PRODUCT-35166508130",
       "lane": "product",
-      "created_at": "2026-09-16T21:52:29.311511+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "created_at": "2026-09-17T00:25:52.829104+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "No valid economics measurement obtained. Condition 6 token cost comparison (62.5 vs 110.25) uses chars/4 heuristic not actual tokenization (audit V3_TOKEN_COST_NOT_TOKENIZATION). The experiment has zero model/browser calls and does not measure end-to-end amortized cost per successful real-browser task. C-PRODUCT-ECON remains HYPOTHESIS."
+      "reason": "First actual tokenization data point: parameterized 68 tokens vs literal 96 tokens (29.17% savings) with tiktoken cl100k_base. However, single measurement, structural advantage (3 vs 9 encodings), not amortized cost per successful real-browser task. Remains HYPOTHESIS pending end-to-end economics."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35137033384",

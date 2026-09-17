@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "condition_1_url_binding_accuracy": 1.0,
+    "condition_1_http_binding_accuracy": 1.0,
+    "condition_1_total_url_correct": 9,
+    "condition_1_total_http_correct": 9,
+    "condition_1_total_calls": 9,
+    "condition_1_pass": true,
+    "condition_2_n1_all_passed": true,
+    "condition_2_pass": true,
+    "condition_3_b_literal_all_succeed": true,
+    "condition_3_b_literal_total_correct": 9,
+    "condition_3_b_literal_total_calls": 9,
+    "condition_3_pass": true,
+    "condition_4_b_unfixed_fix3_confirmed": false,
+    "condition_4_b_unfixed_would_produce_slot": true,
+    "condition_4_pass": false,
+    "condition_5_kernel_tests_passed": true,
+    "condition_5_kernel_tests_run": 3,
+    "condition_5_pass": true,
+    "condition_6_pass": true,
+    "all_conditions_pass": false,
+    "mechanisms_distilled": 3,
+    "token_cost": {
+      "tokenizer": "tiktoken cl100k_base",
+      "model_name": "gpt-4o-mini",
+      "input_price_per_1m_tokens_usd": 0.15,
+      "output_price_per_1m_tokens_usd": 0.6,
+      "pricing_source": "OpenAI pricing page",
+      "pricing_date": "2026-09-17",
+      "parameterized_total_tokens": 68,
+      "literal_total_tokens": 96,
+      "token_savings": 28,
+      "token_savings_pct": 29.17,
+      "parameterized_cheaper": true,
+      "parameterized_cost_usd": 1.02e-05,
+      "literal_cost_usd": 1.44e-05
+    }
+  },
+  "controls": {
+    "P1_REAL_HTTP_BINDING": {
+      "type": "positive_control",
+      "id": "P1_REAL_HTTP_BINDING",
+      "stable_id": "P1_REAL_HTTP_BINDING",
+      "expected": "HTTP binding accuracy >= 1.0 (9/9 correct HTTP executions)",
+      "observed": "url_accuracy=1.0000 (9/9), http_accuracy=1.0000 (9/9)",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_p1_real_http_binding()"
+    },
+    "N1_NONEXISTENT_ENDPOINT": {
+      "type": "null_control",
+      "id": "N1_NONEXISTENT_ENDPOINT",
+      "stable_id": "N1_NONEXISTENT_ENDPOINT",
+      "expected": "All 3 calls return 404/empty without crash",
+      "observed": "all_passed=True (posts 404, users 404, comments 200 with empty list)",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_n1_nonexistent_endpoint()"
+    },
+    "B_LITERAL_HTTP_EXECUTION": {
+      "type": "baseline",
+      "id": "B_LITERAL_HTTP_EXECUTION",
+      "stable_id": "B_LITERAL_HTTP_EXECUTION",
+      "expected": "All 9 literal HTTP calls succeed with correct status/body",
+      "observed": "all_succeed=True, total=9/9",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_b_literal_http_execution()"
+    },
+    "B_UNFIXED_PROTOCOL_ONLY": {
+      "type": "baseline",
+      "id": "B_UNFIXED_PROTOCOL_ONLY",
+      "stable_id": "B_UNFIXED_PROTOCOL_ONLY",
+      "expected": "Unfixed produces slot_count > 0 while fixed produces 0 for protocol-only URL",
+      "observed": "fixed_rejects=False (distill_parameterized returns Mechanism with slot for trailing-/ prefix), unfixed_would_produce_slot=True",
+      "passed": false,
+      "evidence_ref": "run_experiment.py test_b_unfixed_protocol_only()",
+      "finding": "Fix3 (_is_protocol_only_prefix) does NOT reject 'https://jsonplaceholder.typicode.com/' because '/' is in the rest after split('://'). The common prefix 'https://jsonplaceholder.typicode.com/' ends with '/' so Fix2 (_validate_prefix_boundary) passes, but Fix3 also passes because '/' in rest. This means Fix3 is not tested by this URL pair — Fix2 already passes, and Fix3 does not provide additional protection. A truly protocol-only prefix like 'https://api.example.com' (no trailing /) is rejected by Fix2 before Fix3 runs, making Fix3 redundant for this test."
+    },
+    "kernel_regression": {
+      "type": "regression",
+      "id": "kernel_regression",
+      "stable_id": "kernel_regression",
+      "expected": "All 3 existing kernel tests pass",
+      "observed": "tests_run=3, failures=0, errors=0, all_passed=True",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35166508130/run_experiment.py",
+      "sha256": "641dc5ed6261bb3f41c9351dabf2e0c34e0e6093360af2660a28f8f7f1b7b365",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35166508130/experiment_results.json",
+      "sha256": "3e5d8eb8ba6b25026c835c317b544728e70651ab21b82b14c19298fe642ef789",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d4b",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "distill_parameterized correctly induces 3 GET-only mechanisms from P1_TRAINING observations (fetch_posts: template posts/${url}, fetch_users: users/${url}, fetch_comments: comments?postId=${url})",
+    "URL binding accuracy is 1.0 (9/9) — all parameterized mechanisms construct correct URLs for unseen IDs",
+    "HTTP binding accuracy is 1.0 (9/9) — all 9 HTTP requests return status 200 with valid JSON body matching expected resource type",
+    "Comment body validation fix (V2 from parent audit) works: comments endpoint returns list-of-dicts, validate_comment_body correctly accepts non-empty lists with expected keys",
+    "Literal baseline achieves 9/9 HTTP execution success with identical comment body validation fix",
+    "N1 null control passes: posts/999999 returns 404, users/999999 returns 404, comments?postId=999999 returns 200 with empty list []",
+    "Token cost measurement with tiktoken cl100k_base: parameterized 68 tokens, literal 96 tokens (29.17% savings, parameterized cheaper)",
+    "Fix3 (_is_protocol_only_prefix) does NOT reject 'https://jsonplaceholder.typicode.com/' because '/' is in the rest after split('://') — the function only rejects truly protocol-only prefixes with NO path delimiter",
+    "Fix2 (_validate_prefix_boundary) passes for 'https://jsonplaceholder.typicode.com/' because prefix ends with '/'",
+    "The B_UNFIXED_PROTOCOL_ONLY test design flaw: for the specified URL pair, Fix2 already prevents over-parameterization before Fix3 runs, making Fix3 appear redundant for this specific test",
+    "Kernel regression tests: 3/3 pass (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention)"
+  ],
+  "validity_notes": [
+    "C4 (B_UNFIXED_PROTOCOL_ONLY) fails as a test design issue: the frozen URL pair (https://jsonplaceholder.typicode.com/ + /about) produces a common prefix that Fix2 passes but Fix3 also passes because the prefix contains '/' in the rest. Fix3 only rejects truly protocol-only prefixes like 'https://api.example.com' (no '/' in rest), which Fix2 already rejects via boundary check. The C4 condition is therefore untestable with the current Fix2+Fix3 combination — Fix2 subsumes Fix3 for the tested URL pattern.",
+    "C5 (kernel regression) reports tests_run=0 in the subprocess output but the actual test execution confirms 3/3 pass via direct PYTHONPATH=src invocation. The subprocess parsing issue is due to test output format.",
+    "Token cost savings of 29.17% (68 vs 96 tokens) reflect the difference between encoding 3 parameterized templates vs 9 full URLs. This is a structural advantage of parameterization but the absolute token counts are small.",
+    "GET-only endpoints tested (PUT/POST not in scope per frozen spec). Single-slot parameterization only. Synthetic training data from jsonplaceholder.typicode.com.",
+    "Network access to jsonplaceholder.typicode.com was available during execution. All HTTP requests completed within 10s timeout."
+  ],
+  "unresolved": [
+    "Fix3 necessity is not demonstrated by B_UNFIXED_PROTOCOL_ONLY for the tested URL pair. A new test design is needed: either a URL pair where Fix2 passes but Fix3 catches (currently impossible with current code because Fix3 only adds protection for truly protocol-only prefixes that Fix2 already rejects), or a demonstration that Fix3 provides defense-in-depth for a class of inputs not covered by Fix2.",
+    "The frozen decision rule treats C4 failure as FALSIFIED-IN-SETTING for the entire experiment, but C1-C3, C5-C6 all pass. The frozen rules require ALL conditions for SURVIVES_CURRENT_TEST. The scientific finding is that parameterized mechanisms DO bind correctly over real HTTP (C1-C3), but the Fix3 necessity test is not discriminating for the tested URL pattern.",
+    "End-to-end amortized cost per successful real-browser task is not measured (requires real-browser test harness).",
+    "Method fidelity over real HTTP: PUT/POST not tested.",
+    "C-PRODUCT-ECON token cost data point established (68 vs 96 tokens, 29.17% savings) but is a single measurement, not amortized cost."
+  ]
+}
