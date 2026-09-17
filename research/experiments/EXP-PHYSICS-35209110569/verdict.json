@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35209110569",
+  "lane": "physics",
+  "decision": "PARTIAL_FALSIFICATION — Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants ≥2 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213–0.285) with achievable NL 357–394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation.",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "SPA leakage 0.21–0.28 valid-only (5/5 variants <40%) validates hash-SPAs as suitable testbeds for URL-level non-leakage PMI at NL scale (50 NL needs 64–70 raw). Mechanism understood: link_click leakage 1.00 (frozen normalization strips fragments), non-link actions leakage 0.00; headline rate reflects protocol's 27% link share, not site constant. However, title variation 0/5 (unique_titles=1, entropy 0.0 bits on all 840 SPA transitions) falsifies title-aware PMI on TodoMVC, replicating EXP-PHYSICS-34266105229 degeneracy; pipeline validated by 5 distinct Wikipedia titles on same code path. Neither URL-level PMI nor title-aware PMI has been tested on production SPAs with genuine state variation. C-WEB-DYNAMICS (predictive dynamical structure beyond memory) remains HYPOTHESIS — this experiment characterizes infrastructure viability, not the core claim."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the Physics lane proceed with URL-only PMI on the validated hash-SPA testbeds (vanillajs/react/vue/angular/svelte at NL scale, 64–70 raw per variant for 50 NL), or first survey production SPAs with history-based routing for joint (low-leakage, varying-title) sites that could enable title-aware PMI?",
+  "reason": "Frozen decision rule requires ALL six conditions for SURVIVES_CURRENT_TEST. Condition (2) fails: 0/5 TodoMVC variants have ≥2 unique titles (all constant document.title, entropy 0.0 bits). The title falsifier clause (prereg falsifier condition 2) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213–0.285) with achievable NL 357–394 at 500 raw — the SPA approach is justified for URL-level non-leakage PMI collection. Per-type stratification (link_click 1.00 vs non-link 0.00 on all 628 valid SPA transitions) confirms leakage is entirely action-mix dependent; the 21–28% headline rate reflects the frozen protocol's 27% link share. Fragment-stripping normalization makes link_click leakage tautological on hash-SPAs (all filter links normalize to same base path). All controls pass (Wikipedia 1.00 >80%, vanilla JS 0.2846 <60%, ≥100 raw, ≥5 sessions). Data quality exceeds frozen minimums (168 raw per SPA, 7 sessions). Zero EPIPE crashes across 40 sessions. Audit PASS confirms measurement validity but producer_claim_supported=false: the title-aware PMI ceiling is not justified. The dominant synthetic-to-real gap is partially addressed (SPAs confirmed viable for NL collection) but title-aware PMI remains blocked on TodoMVC. The next experiment should either (a) test URL-only PMI at NL scale on these validated testbeds to directly probe C-WEB-DYNAMICS, or (b) survey production SPAs for title variation to find better testbeds.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35209110569/result.json:metrics (leakage rates 0.21–0.28, title counts=1, achievable_NL 357–394, per-type stratification)",
+    "research/experiments/EXP-PHYSICS-35209110569/audit.json:claim_ceiling (bounded claim, title degeneracy confirmed, pipeline validated)",
+    "research/experiments/EXP-PHYSICS-35209110569/audit.json:recomputed_metrics (independent verification of all leakage rates and title counts)",
+    "research/experiments/EXP-PHYSICS-35209110569/audit.json:validity_findings V1-V8 (mechanism understanding, title validation, fragment-stripping, error exclusion)",
+    "research/experiments/EXP-PHYSICS-35209110569/spec.json:decision_rule (frozen six-condition decision criteria)",
+    "research/experiments/EXP-PHYSICS-35209110569/spec.json:falsifier (title variation falsifier clause 2: ALL variants <2 titles)",
+    "research/experiments/EXP-PHYSICS-35209110569/report.md:sections 2-4 (decision table, per-type mechanism, interpretation)",
+    "codex/claim_state.json:C-WEB-DYNAMICS:EXP-PHYSICS-34266105229 (prior title degeneracy on TodoMVC, same mechanism)"
+  ]
+}
