@@ -8,7 +8,7 @@
   "next_question": "Does parameterized mechanism representation save tokens when concrete values are long (UUIDs, slugs, full paths, bearer tokens) rather than short numeric IDs \u2014 or should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON (mechanism deduplication savings across tasks) where per-mechanism token penalty is offset by fewer unique mechanisms?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-17T19:01:14.685836+00:00",
+  "updated_at": "2026-09-17T22:07:07.879161+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "97a75186e42637b17f90dd00d76125f3f1ef0f2852c68b9861e99298be69d1b0",
   "same_failure_count": 0,
