@@ -683,6 +683,16 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Fix3 redesign validated narrowly: _is_protocol_only_prefix correctly rejects bare authority ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-parameterized ('https://api.example.com?key=', etc.) and path-slash prefixes for 12/12 corpus, preserves kernel regression 3/3, distills single-slot GET mechanism comments?postId=${url} with slot [url] that resolves EXECUTABLE and binds to https://jsonplaceholder.typicode.com/comments?postId=5 with 3/3 HTTP 200 on jsonplaceholder. This fixes parent V2_FIX3_OVERBROAD for host?query patterns. However, Fix3 independent necessity over Fix2 not demonstrated (audit V1): Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False); only scheme-only 'https://' discriminant untested. Claim ceiling bounded to 'single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification'. Does NOT support multi-slot, PUT/POST, noisy browser, LLM distillation, cross-site, or product economics. C-PRODUCT-ECON remains HYPOTHESIS."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35209109455",
+        "lane": "product",
+        "created_at": "2026-09-17T10:11:01.844125+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
+        "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots (C1 5/5 EXECUTABLE, C2 5/5 UNKNOWN, C3 5/5 binding correct, C7 3/3 kernel regression). However, token economics hypothesis is falsified in this setting: parameterized representation adds per-mechanism token overhead (-5% to -10%) rather than saving tokens, because ${varname} syntax (varname.length+3 chars) exceeds short numeric values (1-3 digits). Claim ceiling narrowed to: committed-code synthetic single-slot with prefix metadata, resolve/bind pipeline validated, token penalty measured for short-value GET URLs on api.example.com/jsonplaceholder. Does NOT advance to PRODUCT_CORE. Previous token savings claim (parent 68 vs 96, 29.17%) is not replicated and should not be cited as established."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -1193,6 +1203,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "First actual tokenization data point: parameterized 68 tokens vs literal 96 tokens (29.17% savings) with tiktoken cl100k_base. However, single measurement, structural advantage (3 vs 9 encodings), not amortized cost per successful real-browser task. Remains HYPOTHESIS pending end-to-end economics."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35209109455",
+        "lane": "product",
+        "created_at": "2026-09-17T10:11:01.844125+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
+        "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed \u2014 amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
       }
     ],
     "C-MEAS-VALID": [
@@ -1490,14 +1510,14 @@
       "reason": "MEASUREMENT_INVALID per frozen decision_rule: C7 fails (0/3 sites with >=50 non-leakage transitions; Wikipedia 8, GitHub 4, MDN 2). This is an infrastructure/data-sufficiency failure, not a scientific negative. Structural URL-level leakage (78-92% of link navigations have action.target_href == state_after.url) on server-rendered MPAs (Wikipedia/MDN/GitHub) makes the NL filter remove most transitions by design of these sites. After filtering, Wikipedia's 8 NL transitions have 6 unique SA pairs (all singleton), so Laplace-smoothed BC PMI = 0.0 bits is mathematically forced (I(X;Y)=0 when each (s,a) appears once). Positive control passes strongly (BC PMI = 1.841, p=0.001) validating the estimator on deterministic in-memory data. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. Claim ceiling bounded to: server-rendered MPAs with link-dominated Playwright navigation and exact href==URL leakage definition cannot express the tested effect at transition-level PMI with 50 NL threshold."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35185290656",
+      "experiment_id": "EXP-PRODUCT-35209109455",
       "lane": "product",
-      "created_at": "2026-09-17T05:19:48.441018+00:00",
-      "decision": "SURVIVES_CURRENT_TEST",
-      "source_commit": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
+      "created_at": "2026-09-17T10:11:01.844125+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
+      "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
       "claim_id": "C-PARAM-INHERIT",
       "status": "EXPERIMENTAL",
-      "reason": "Fix3 redesign validated narrowly: _is_protocol_only_prefix correctly rejects bare authority ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-parameterized ('https://api.example.com?key=', etc.) and path-slash prefixes for 12/12 corpus, preserves kernel regression 3/3, distills single-slot GET mechanism comments?postId=${url} with slot [url] that resolves EXECUTABLE and binds to https://jsonplaceholder.typicode.com/comments?postId=5 with 3/3 HTTP 200 on jsonplaceholder. This fixes parent V2_FIX3_OVERBROAD for host?query patterns. However, Fix3 independent necessity over Fix2 not demonstrated (audit V1): Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False); only scheme-only 'https://' discriminant untested. Claim ceiling bounded to 'single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification'. Does NOT support multi-slot, PUT/POST, noisy browser, LLM distillation, cross-site, or product economics. C-PRODUCT-ECON remains HYPOTHESIS."
+      "reason": "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots (C1 5/5 EXECUTABLE, C2 5/5 UNKNOWN, C3 5/5 binding correct, C7 3/3 kernel regression). However, token economics hypothesis is falsified in this setting: parameterized representation adds per-mechanism token overhead (-5% to -10%) rather than saving tokens, because ${varname} syntax (varname.length+3 chars) exceeds short numeric values (1-3 digits). Claim ceiling narrowed to: committed-code synthetic single-slot with prefix metadata, resolve/bind pipeline validated, token penalty measured for short-value GET URLs on api.example.com/jsonplaceholder. Does NOT advance to PRODUCT_CORE. Previous token savings claim (parent 68 vs 96, 29.17%) is not replicated and should not be cited as established."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-GRAPH-34586318405",
@@ -1540,14 +1560,14 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35166508130",
+      "experiment_id": "EXP-PRODUCT-35209109455",
       "lane": "product",
-      "created_at": "2026-09-17T00:25:52.829104+00:00",
-      "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
+      "created_at": "2026-09-17T10:11:01.844125+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
+      "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "First actual tokenization data point: parameterized 68 tokens vs literal 96 tokens (29.17% savings) with tiktoken cl100k_base. However, single measurement, structural advantage (3 vs 9 encodings), not amortized cost per successful real-browser task. Remains HYPOTHESIS pending end-to-end economics."
+      "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed \u2014 amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35209111193",
