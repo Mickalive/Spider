@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35191029030",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a session_invalidation behavioral measurement that includes /session/status probing produce within-condition variance (std>0) on all co-occurring conditions, enabling a valid pooled Pearson r test of behavioral-structural orthogonality on the fixed co-occurring drift+noise design?",
+  "why_next": "This experiment fixed the parent's zero-imputation confound (unauthenticated /schema achieves 99.2% both>0) and achieved directionally low pooled r=0.0498 (12x lower than parent 0.593), but the measurement is MEASUREMENT_INVALID because session_invalidation produces constant behavioral signal (API endpoints ignore session validity). The minimum fix is to add /session/status probing to the behavioral composite for session_invalidation conditions, or to restrict the confirmatory test to permission_boundary conditions only (n=120, r=0.051, p=0.577 — directionally consistent with orthogonality but underpowered). Either fix enables a valid orthogonality test. If |r|<0.3 survives with proper measurement, C-FRESHNESS gains a validated second detection channel (behavioral signals as independent channel alongside structural). If r≥0.3 with proper measurement, the domain pivots to composite multi-signal classifiers.",
+  "carry_forward": {
+    "established": [
+      "Behavioral signals (token validation failure rate, session state change, auth boundary shift) measured from real HTTP on Flask 3.x + PyJWT HS256 localhost detect all 5 auth-drift patterns with TP=1.0 (Wilson lower 0.886) and tolerate all 4 structural noise patterns with FP=0.0. AUC=1.0 for drift-vs-noise discrimination. This is the first signal family to pass C1/C2/C3 for C-FRESHNESS (parent EXP-GRAPH-35166507358, audit PASS).",
+      "Unauthenticated /schema endpoint provides structural observability independent of auth state: 99.2% of co-occurring samples have both behavioral>0 AND structural>0, fixing parent zero-imputation confound where signing_key_rotation masked structural signal to 0.0.",
+      "Pooled Pearson r=0.0498 (|r|=0.0498) on 240 paired samples is 12x lower than parent r=0.593, directionally consistent with orthogonality. Permission_boundary-only pooled r=0.051 (n=120, p=0.577) provides cleaner estimate with proper within-condition variation.",
+      "Null control FP=0.0 on 120 noise-only samples confirms behavioral signals do not false-positive on structural noise without drift.",
+      "Six structural/schema-based signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard, TF-IDF, response-time KS, linear Fisher LDA ensemble, field-usage profiling, direct schema comparison.",
+      "The magnitude confound is structural: unbounded optional_field_addition noise scales diff magnitude with schema size, dominating subtle drift at all sizes."
+    ],
+    "rejected": [
+      "Direct schema comparison as standalone drift-vs-noise discriminator (C2 fails under frozen rule)",
+      "Any single structural/schema-based signal family providing complete C-FRESHNESS discrimination — six families tested, all fail frozen gate",
+      "Unbounded optional field addition noise (10% of schema size) tolerable by schema diff or Jaccard — both fail at all schema sizes",
+      "Linear Fisher LDA ensemble of structural signals rescuing individual failures — AUC=0.625",
+      "Block-zero imputed orthogonality — parent C4 measured deterministic pairing when structural signal was masked to 0.0 by auth failure",
+      "signing_key_rotation as a co-occurring drift pattern — blocks ALL endpoints, making structural signal unobservable by design"
+    ],
+    "unknown": [
+      "Whether behavioral and structural signals are genuinely orthogonal (Pearson r < 0.3) when both are non-trivially measured on the same conditions — C3 UNTESTED due to MEASUREMENT_INVALID (4/8 conditions lack behavioral variance)",
+      "Whether permission_boundary-only orthogonality (r=0.051, n=120) would achieve p<0.05 with larger n (≥60 per condition) or wider stochastic variation (7 non-empty permission subsets vs 3 tested)",
+      "Whether session_invalidation behavioral variance can be recovered by adding /session/status probing to behavioral composite or making API middleware check session store",
+      "Whether real APIs with stochastic field availability, DB/cache/CDN variation, and heterogeneous client profiles preserve behavioral signal discrimination",
+      "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware (Auth0/Okta/Keycloak)",
+      "Whether composite multi-signal classifiers (schema diff + usage profiling + behavioral signals) achieve discrimination none achieve individually",
+      "Whether wider stochastic variation ranges or alternative composite weightings (2,3,1) change the correlation structure",
+      "Whether unauthenticated /schema endpoint is practical in real-world API deployments"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — seven bounded signal families falsified in specific deterministic mock settings; the broader domain remains open",
+      "Behavioral signals are falsified for C-FRESHNESS — MEASUREMENT_INVALID is a design flaw (session_invalidation constant behavioral), not evidence against signal orthogonality",
+      "Behavioral signals are confirmed orthogonal — pooled r=0.0498 is confounded by 120 constant behavioral values; permutation p=0.449 fails p<0.05 conjunctive threshold; hypothesis is untested, not supported",
+      "The permission_boundary-only r=0.051 is confirmatory — it is exploratory (n=120, p=0.577, underpowered) and cannot substitute for the preregistered pooled test",
+      "Deterministic mock server results transfer to real APIs — all signals tested on same deterministic Flask mock; real APIs may shift discrimination gaps",
+      "AUC=1.0 with degenerate CI [1.0,1.0] generalizes — perfect deterministic separation reflects construction, not empirical overlap resilience",
+      "The 12x r reduction (0.0498 vs 0.593) is purely from fixing zero-imputation — pooled estimate is also confounded by new constant behavioral values from session_invalidation"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35191029030/result.json — C1-C4 metrics, per-condition r, pooled r, conditions_with_variance=4",
+    "research/experiments/EXP-GRAPH-35191029030/audit.json — status=MEASUREMENT_INVALID, V1-V9 validity findings, recomputed_metrics all match producer, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35191029030/report.md — MEASUREMENT_INVALID narrative, per-condition variance table, descriptive r analysis",
+    "research/experiments/EXP-GRAPH-35191029030/provenance.json — Flask 3.1.3, PyJWT 2.14.0, seed 42, behavioral/structural composite formulas",
+    "research/experiments/EXP-GRAPH-35166507358/handoff.json — parent C4-ORTHOGONALITY-CONFOUNDED, established behavioral signals, carry_forward",
+    "codex/claim_state.json:C-FRESHNESS — HYPOTHESIS status, six structural families falsified, behavioral signals pass discrimination"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35191029030/request.json",
+    "research/experiments/EXP-GRAPH-35191029030/spec.json",
+    "research/experiments/EXP-GRAPH-35191029030/prereg.md",
+    "research/experiments/EXP-GRAPH-35191029030/freeze.json",
+    "research/experiments/EXP-GRAPH-35191029030/result.json",
+    "research/experiments/EXP-GRAPH-35191029030/audit.json",
+    "research/experiments/EXP-GRAPH-35191029030/report.md",
+    "research/experiments/EXP-GRAPH-35191029030/provenance.json",
+    "research/experiments/EXP-GRAPH-35191029030/mock_server.py",
+    "research/experiments/EXP-GRAPH-35191029030/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35191029030/raw_evidence/experiment_data.json",
+    "research/experiments/EXP-GRAPH-35166507358/handoff.json",
+    "codex/claim_state.json"
+  ],
+  "recommended_action": "Redesign session_invalidation behavioral measurement to produce within-condition variance: either (a) add /session/status probing to behavioral composite with stochastic session TTL/jitter so session_state_changes varies per-sample, or (b) make API middleware check session store so auth_boundary_shifts or token_validation_failures vary. Then re-run the co-occurring drift+noise orthogonality test with ≥6/8 conditions passing the variance gate. Alternatively, if the session_invalidation fix is intractable, restrict the confirmatory pooled test to permission_boundary conditions only (n=120) with wider stochastic variation (all 7 non-empty permission subsets, n≥60 per condition) and preregister per-drift stratification. If |r|<0.3 survives with proper measurement, C-FRESHNESS gains a validated second detection channel. If r≥0.3, the domain pivots to composite multi-signal classifiers or real-API stochastic deployments."
+}
