@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35209112878",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Which null-recipe is the scientifically canonical one: per-iteration p=0.5 inclusion (tests definition-level role relevance) or per-task weighted sampling (tests task-level density variability), and does the C2 reversal (recipe flips conclusion from FALSIFIED to SURVIVES) hold on full-DOM data after the runtime lane removes the locatableSample cap?",
+  "why_next": "The experiment established that recipe choice is a material determinant of the scientific conclusion (flips C2 direction), not a nuisance parameter. The new per-task weighted recipe is robust (F1 SD=0.0117, F2 all seeds TRUE, cross-RNG diff 0.0024) but which recipe is scientifically canonical remains unresolved. The frozen decision rule is logically incoherent (NC1 makes SURVIVES impossible; F3 threshold is a measurement artifact). Full-DOM enumeration is still blocked by the substrate cap (measure_fullpage_yield.py:89). The next step requires: (1) runtime lane to remove the locatableSample cap, (2) a frozen spec amendment to specify the canonical recipe and fix the decision rule, (3) re-run on full-DOM data to test whether the recipe reversal holds beyond truncated-first-20.",
+  "carry_forward": {
+    "established": [
+      "Recipe choice is a material determinant of the C2 direction and scientific conclusion: parent p=0.5 per-iteration recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new per-task weighted recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The conclusion completely reverses depending on recipe choice (result.json metrics, report.md Section 2)",
+      "The new per-task weighted recipe is robust across seeds (SD=0.0117 < 0.05), across 3 RNG implementations (max cross-RNG diff 0.0024), and produces consistent C2 direction (TRUE for all 10 seeds). The reversal is not a seed or RNG artifact (result.json metrics M2, M10-M13, M20)",
+      "Parent recipe null mean reproduction shows 2.3% deviation (0.5394 computed vs 0.5275 stored): F3 threshold of 0.001 is too strict for cross-Python-version reproducibility. Root cause is unsorted set iteration (PYTHONHASHSEED) + estimator mismatch (direct 499500 pairs vs sampled 10000 pairs), not script bug (audit V1)",
+      "C2 direction confirmation: under parent recipe, observed 0.3 < null 0.5275, so C2 = FALSE (metric fails), consistent with original FALSIFIED intent from EXP-INTEL-35112013458 (result.json C_C2_DIRECTION_CONFIRMED)",
+      "Page-type ordering reproduction: DEF-FULL-MAP cart>product_listing>detail and DEF-FORM-ONLY product_listing>cart>detail reproduced exactly on truncated-first-20 data (result.json M14, M15, PC1 PASS)",
+      "Substrate blocker confirmed: locatableSample cap at measure_fullpage_yield.py:89 still present; full-DOM enumeration not available (parent handoff dependency, provenance.json)"
+    ],
+    "rejected": [
+      "The frozen decision rule as written is logically incoherent: NC1 requires new recipe to reproduce parent null mean 0.5275 within 0.001 but recipes are structurally different by design (audit V2), making SURVIVES impossible. This is a design failure, not scientific falsification",
+      "F3 as frozen (0.001 threshold) is a measurement-threshold artifact, not scientific falsification of the robustness hypothesis: the deviation (0.0119) reflects cross-environment RNG variation (unsorted set + estimator mismatch), not recipe insensitivity (audit V1)",
+      "Producer verdict FALSIFIED_IN_SETTING is technically correct per frozen rule (F3 triggered) but scientifically overclaimed: the scientific content (recipe robustness) is actually supported by F1/F2; the failure is in the decision-rule design"
+    ],
+    "unknown": [
+      "Which null-recipe is scientifically canonical: per-iteration p=0.5 inclusion (tests definition-level role relevance) vs per-task weighted sampling (tests task-level density variability). The experiment shows choice flips C2 direction but offers no principled criterion to select between them",
+      "Whether the C2 reversal (recipe flips conclusion) holds on full-DOM data: current results are strictly truncated-first-20 locatable sample bound (7 tasks, 1 Magento site, cart n=1)",
+      "Whether full-DOM enumeration changes density magnitudes, ordering significance, and null distribution shape beyond current proxy estimators",
+      "The other 2 definitions from parent chain (5 planned, only 3 independently verified in this run) — their orderings were not re-checked",
+      "Whether menuitem/tab roles contribute additively when present (0 counts in current sample)"
+    ],
+    "do_not_assume": [
+      "Do not assume the new recipe's robustness answers the C-MEAS-VALID claim — it tests only null-model sensitivity on truncated data, not the broader measurement validity question",
+      "Do not assume the FALSIFIED_IN_SETTING verdict is a scientific falsification — the audit identifies F3 as a measurement-threshold artifact and NC1 as logically incoherent (audit V1, V2)",
+      "Do not assume the recipe reversal holds on full-DOM data — truncated-first-20 is a non-representative slice (7 tasks, 1 site, cart n=1)",
+      "Do not assume the new recipe (per-task weighted sampling) is the canonical null model — the scientific question of which recipe is appropriate remains open",
+      "Do not assume the F3 0.001 threshold is achievable across Python versions — adopt deterministic sorting and relaxed threshold (>=0.02) before re-run (audit V1, V3)",
+      "Do not assume C-MEAS-VALID status changed from this experiment — it remains EXPERIMENTAL from prior valid experiments; this experiment is MEASUREMENT_INVALID"
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Runtime lane must remove locatableSample cap (if locatableSample.length < 20) at measure_fullpage_yield.py:89 to provide true full DOM enumeration",
+      "blocking": true
+    },
+    {
+      "type": "design",
+      "description": "Frozen spec amendment required: (a) specify canonical null recipe (per-iteration p=0.5 vs per-task weighted sampling — must resolve C2 direction ambiguity), (b) fix decision rule incoherence (decouple NC1 from cross-recipe equivalence, relax F3 threshold to >=0.02), (c) commit deterministic role iteration (sorted(raw_roles)) for reproducibility, (d) freeze density denominator (elements_with_bbox vs locatable count), (e) align pairwise-agreement metric definition (spec C(5,2)=10 definition-pairs vs code 499500 null-ordering pairs)",
+      "blocking": true
+    },
+    {
+      "type": "code",
+      "description": "Commit canonical analysis script with deterministic role sorting, fixed estimator, and aligned metric definitions at stable repo path before next frozen re-run",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Additional site(s) with non-zero menuitem/tab counts to test role additivity; more distinct cart pages (current n=1) for within-type variance",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35209112878/result.json (F1-F3 triggers, recipe reversal, metrics M1-M20)",
+    "research/experiments/EXP-INTEL-35209112878/audit.json (REVISE, V1-V5, claim_ceiling, recomputed_metrics, required_fixes)",
+    "research/experiments/EXP-INTEL-35209112878/report.md (recipe reversal analysis, cross-RNG comparison)",
+    "research/experiments/EXP-INTEL-35209112878/provenance.json (execution parameters, data paths, reproduction commands)",
+    "research/experiments/EXP-INTEL-35209112878/canonical_analysis.py (canonical script implementation)",
+    "research/experiments/EXP-INTEL-35166505835/handoff.json (parent dependency audit, blocking dependencies)",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json (parent null 0.5275, observed 0.3)",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py (parent sampled-pair estimator, set iteration)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (truncated-first-20 locatable sample)"
+  ],
+  "recommended_action": "Route to runtime lane to remove locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89). Separately, prepare a frozen spec amendment that: (a) specifies the canonical null recipe with principled justification (per-iteration p=0.5 or per-task weighted — must resolve C2 direction ambiguity), (b) fixes the decision rule incoherence (NC1 cross-recipe gate, F3 threshold), (c) commits deterministic role sorting and aligned metric definitions, and (d) freezes the density denominator. Once the spec amendment is frozen, the canonical script is committed, and the substrate cap is removed, re-run the full-DOM density metric measurement with the canonical recipe. The intel lane should not re-run until all three blocking dependencies (substrate fix + spec amendment + canonical script) are met."
+}

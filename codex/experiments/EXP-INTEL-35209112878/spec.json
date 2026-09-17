@@ -1,0 +1,35 @@
+{
+  "experiment_id": "EXP-INTEL-35209112878",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Is the page-type density null model (random role-subset assignment, pairwise ordering agreement) sensitive to RNG implementation, seed, conditioning set, role-count mapping, or tie-handling choices — and does the canonical analysis script reproduce the parent chain's truncated-data metrics exactly?",
+  "hypothesis": "The null model's mean pairwise agreement and C2 direction (observed vs null) are robust across RNG implementations and seeds when the recipe is fully specified. Sensitivity analysis will reveal whether the recipe choice is material to the scientific conclusion or a nuisance parameter.",
+  "falsifier": "F1: Mean pairwise agreement across 10 seeds varies by >0.10 (SD > 0.05) across any RNG implementation, indicating recipe sensitivity material to the C2 conclusion. F2: C2 direction (observed > null or observed < null) flips across seeds within any single RNG implementation, indicating the recipe choice determines the scientific verdict. F3: Canonical script produces metrics differing by >0.001 from the parent chain's stored values on identical truncated input, indicating provenance mismatch persists.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_REPRODUCTION",
+      "description": "Parent chain observed pairwise agreement 0.3 (EXP-INTEL-35112013458) and null mean 0.5275 on truncated-first-20 data with 7 tasks, DEF-FULL-MAP/DEF-FORM-ONLY/ISOLATED-A-LINK definitions",
+      "expected_behavior": "Canonical script reproduces observed=0.3 and null_mean=0.5275 within ±0.001 on identical truncated input"
+    },
+    {
+      "id": "B2_RECIPE_SENSITIVITY",
+      "description": "Null model mean pairwise agreement across 10 seeds for each of 3 RNG implementations (Python random.Random, numpy RandomState, numpy default_rng)",
+      "expected_behavior": "SD across seeds < 0.05 for each RNG; mean across RNGs within ±0.02 of each other"
+    }
+  ],
+  "positive_control": "PC1: Canonical script on truncated data reproduces parent's DEF-FULL-MAP ordering cart>product_listing>detail and DEF-FORM-ONLY ordering product_listing>cart>detail (from EXP-INTEL-35112013458 baselines). PC2: C2 direction on truncated data is null > observed (0.5275 > 0.3), consistent with original FALSIFIED intent.",
+  "null_control": "NC1: Null model at seed=42 with Python random.Random reproduces parent null mean 0.5275 ±0.001 on identical truncated input (regression to committed parent artifacts).",
+  "measurement_validity": [
+    "All RNG implementations use deterministic seeding with explicitly recorded seed values",
+    "Canonical script is committed at a stable repo path before execution",
+    "C2 direction is defined coherently: observed > null → METRIC_PASSES, observed ≤ null → METRIC_FAILS (resolving parent inversion)",
+    "Density denominator is explicitly total count of elements matching the definition's role set within the truncated-first-20 locatable sample",
+    "Pairwise agreement computed as fraction of definition-pairs producing identical top-2 page-type ordering",
+    "No outcome-bearing measurements during design phase"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (1) PC1 passes (ordering reproduction within ±0.001), (2) PC2 passes (C2 direction null > observed on truncated), (3) NC1 passes (seed=42 null mean 0.5275 ±0.001), (4) F1 not triggered (SD across seeds < 0.05 for Python random.Random), (5) F2 not triggered (C2 direction consistent across all 10 seeds for Python random.Random), (6) F3 not triggered (script metrics within ±0.001 of parent). FALSIFIED_IN_SETTING if any of F1, F2, F3 triggered. MEASUREMENT_INVALID if PC1 or PC2 fails due to script bug (not data issue).",
+  "product_consequence_positive": "A robust null model (F1-F3 not triggered) unblocks the full-DOM enumeration experiment: the canonical script + fully specified recipe can be frozen and re-run on full-DOM data when the runtime lane removes the locatableSample cap. The C2 direction is definitively resolved.",
+  "product_consequence_negative": "A sensitive null model (F1 or F2 triggered) means the recipe choice determines the scientific verdict. The full-DOM experiment cannot proceed until the recipe is redesigned to eliminate sensitivity, or the metric is replaced with a recipe-invariant alternative. This is a design blocker for the entire page-type density program.",
+  "estimated_cost": "Low: 1-2 GPU hours. Canonical script implementation + 10 seeds × 3 RNG × 1000 null iterations = 30,000 null draws on 7-task truncated data. No browser/network/model calls.",
+  "expected_information_gain": "High. Resolves the two remaining design blockers (C2 direction + null-model reproducibility) that have persisted across 3 parent experiments (EXP-INTEL-35112013458, EXP-INTEL-35137036013, EXP-INTEL-35166505835). A robust result unblocks the full-DOM experiment; a sensitive result redirects the research program. Either outcome is high-information."
+}

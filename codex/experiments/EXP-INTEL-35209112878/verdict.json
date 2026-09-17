@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35209112878",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID — The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "No change to claim status. This experiment tests null-model recipe sensitivity for the page-type density sub-problem — an orthogonal sub-question of C-MEAS-VALID. The frozen decision rule is logically incoherent (NC1 makes SURVIVES impossible; F3 is a measurement-threshold artifact per audit V1). The recipe choice is material (flips C2 direction), but the new recipe's robustness does not answer the broader C-MEAS-VALID claim. Full-DOM enumeration still blocked by substrate cap. C-MEAS-VALID retains EXPERIMENTAL status from prior valid experiments (EXP-RUNTIME-35209111193 decompression-normalization, orthogonal sub-problem)."
+    }
+  ],
+  "product_action": "NONE — No product code involved; intel-lane null-model sensitivity analysis. No promotion warranted.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Which null-recipe is the scientifically canonical one: per-iteration p=0.5 inclusion (tests definition-level role relevance) or per-task weighted sampling (tests task-level density variability), and does the C2 reversal (recipe flips conclusion from FALSIFIED to SURVIVES) hold on full-DOM data after the runtime lane removes the locatableSample cap?",
+  "reason": "The experiment's central finding — recipe choice is a material determinant of the scientific conclusion, not a nuisance parameter — is scientifically important but does not settle the C-MEAS-VALID claim. The frozen decision rule is logically incoherent (NC1 makes SURVIVES impossible; F3 threshold is a measurement artifact per audit V1). The new recipe's robustness (F1/F2 not triggered, cross-RNG invariance) is established but the canonical recipe is unspecified. Full-DOM enumeration remains blocked by the substrate cap. The measurement framework requires design amendment (specify canonical recipe, fix F3 threshold, decouple NC1 from cross-recipe equivalence) before the page-type density question can be answered. No immediate chaining — wait for design amendment and substrate fix.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35209112878/request.json",
+    "research/experiments/EXP-INTEL-35209112878/spec.json",
+    "research/experiments/EXP-INTEL-35209112878/prereg.md",
+    "research/experiments/EXP-INTEL-35209112878/freeze.json",
+    "research/experiments/EXP-INTEL-35209112878/result.json",
+    "research/experiments/EXP-INTEL-35209112878/report.md",
+    "research/experiments/EXP-INTEL-35209112878/audit.json",
+    "research/experiments/EXP-INTEL-35209112878/provenance.json",
+    "research/experiments/EXP-INTEL-35209112878/canonical_analysis.py",
+    "research/experiments/EXP-INTEL-35166505835/handoff.json (parent dependency audit)",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json (parent null 0.5275, observed 0.3)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "experiment_id": "EXP-GRAPH-35237975537",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can adding /session/status endpoint probing to the behavioral composite produce within-condition variance (std>0) on all 8 co-occurring conditions, enabling a valid pooled Pearson r test of behavioral-structural orthogonality?",
+  "hypothesis": "When the behavioral composite includes a session_status_check signal from a /session/status endpoint (returns 200 for valid sessions, 401 for invalid), session_invalidation conditions gain behavioral variance because the endpoint checks session state. This produces std>0 on all 8 co-occurring conditions, enabling a valid pooled Pearson r test. The parent r=0.0498 is directionally low but confounded by 120 constant behavioral values; with proper variance, the confirmatory pooled |r| test determines whether behavioral and structural signals are genuinely orthogonal.",
+  "falsifier": "The hypothesis is falsified if: (1) Pearson |r| >= 0.3 on pooled paired per-sample scores from all 8 co-occurring conditions with all conditions passing the variance gate; OR (2) fewer than 6 of 8 co-occurring conditions have within-condition std > 0 for both signals after adding /session/status probing; OR (3) the /session/status endpoint fails to produce behavioral variance on session_invalidation conditions (std remains 0). A valid scientific negative (|r| >= 0.3 with proper measurement) confirms non-orthogonality and pivots to composite multi-signal classifiers.",
+  "baselines": [
+    {
+      "id": "B-PARENT-POOLED-R",
+      "description": "Parent EXP-GRAPH-35191029030 pooled r=0.0498 on 240 paired samples, MEASUREMENT_INVALID because 4/8 session_invalidation conditions had constant behavioral values (std=0).",
+      "expected": "With all conditions having behavioral variance, pooled r should remain low if orthogonality is genuine, or increase if parent low r was partly from constant-value dilution"
+    },
+    {
+      "id": "B-PERMISSION-BOUNDARY-ONLY-R",
+      "description": "Parent permission_boundary-only pooled r=0.051 (n=120, p=0.577), directionally consistent with orthogonality but underpowered.",
+      "expected": "New pooled estimate across all 8 conditions should be comparable to permission_boundary-only estimate if orthogonality is genuine"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-SESSION-STATUS-VARIANCE",
+    "description": "session_invalidation conditions must produce behavioral composite with std>0 when /session/status probing is included. The endpoint returns 200 for valid sessions and 401 for invalid sessions, creating a signal that varies with session state.",
+    "expected": "session_status_check > 0 for session_invalidation samples where session was cleared; std(behavioral_composite) > 0 across 30 samples per session_invalidation condition"
+  },
+  "null_control": {
+    "id": "NC-SCHEMA-NOISE-ONLY",
+    "description": "Schema noise applied WITHOUT drift should produce FP=0.0 on behavioral signals. Inherited from parent (FP=0.0 on 120 noise-only samples).",
+    "expected": "FP = 0.0 across all noise-only conditions"
+  },
+  "measurement_validity": [
+    "All behavioral signals derived from real HTTP request/response cycles on Flask 3.x + PyJWT HS256 localhost (not analytical computation)",
+    "New /session/status endpoint returns HTTP 200 for valid sessions and HTTP 401 for invalid sessions - minimum change to make session_invalidation produce behavioral variance",
+    "Structural signals computed from unauthenticated /schema endpoint (inherited from parent - fixes zero-imputation confound)",
+    "Drift patterns: permission_boundary (write=False, admin=False) and session_invalidation (clear session store) - same as parent",
+    "Within-condition stochastic variation: random permission subsets for permission_boundary; random session TTL (5-15s) and token expiry jitter (+-1s) for session_invalidation",
+    "30 independent request sequences per condition with per-seed RNG (SEED=42) for reproducibility",
+    "Pearson r computed on paired per-sample (behavioral_i, structural_i) scores from all 8 co-occurring conditions",
+    "Variance gate: at least 6 of 8 co-occurring conditions must have std>0 for both behavioral and structural signals"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP rate across co-occurring conditions >= 0.85 and all Wilson lower CI > 0.75; (2) C2_variance: >= 6 of 8 co-occurring conditions have within-condition std > 0 for BOTH behavioral and structural signals; (3) C3_orthogonality: Pearson |r| < 0.3 on pooled paired per-sample scores from ALL co-occurring conditions, AND permutation p < 0.05; (4) C4_null_control: FP rate on noise-only conditions = 0.0. FAIL if any criterion fails. MEASUREMENT_INVALID if fewer than 6 of 8 co-occurring conditions have sufficient within-condition variance (std > 0 for both signals), or if fewer than 240 paired samples are available.",
+  "product_consequence_positive": "If orthogonality survives (|r| < 0.3), C-FRESHNESS gains a validated second detection channel. The product pipeline can integrate behavioral signals alongside structural signals for composite freshness detection with each channel providing independent information. This enables multi-signal freshness guards robust to single-channel failures.",
+  "product_consequence_negative": "If orthogonality fails (|r| >= 0.3 with proper measurement), behavioral and structural signals are confirmed non-orthogonal. The product pipeline must use composite multi-signal classifiers rather than independent parallel channels, or rely on behavioral signals alone (since they pass C1-C3). Architecture pivots from parallel independent channels to fused classifiers.",
+  "estimated_cost": "Low: Flask server reuse from parent with one added /session/status endpoint. 8 co-occurring conditions x 30 samples = 240 paired measurements, plus 8 noise-only x 30 = 240 null control samples. Runtime ~10 minutes.",
+  "expected_information_gain": "High: this is the minimum next step that can change a product decision. The parent measurement was invalid due to a design flaw (session_invalidation producing constant behavioral signal). This fix enables a valid confirmatory test. If |r| < 0.3, the product gains a validated second detection dimension. If |r| >= 0.3, the architecture pivots to fused classifiers. Either outcome is decision-relevant."
+}
