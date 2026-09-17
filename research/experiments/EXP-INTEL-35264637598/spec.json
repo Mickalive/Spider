@@ -1,17 +1,43 @@
 {
   "experiment_id": "EXP-INTEL-35264637598",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the per-task weighted recipe's C2 TRUE reversal (observed 0.3 > null ~0.28, established under buggy implementation in EXP-INTEL-35209112878) persist under the corrected implementation with deterministic sorted roles and aligned estimator — or does the corrected implementation eliminate the reversal, revealing it as an artifact of the same bugs that caused the parent MEASUREMENT_INVALID?",
+  "hypothesis": "The recipe reversal is either (a) a genuine scientific finding robust to implementation fixes, meaning recipe choice is a material determinant of the C-MEAS-VALID density metric conclusion even under corrected code, or (b) an artifact of the unsorted set iteration and estimator mismatch bugs, meaning the canonical per-iteration recipe is the sole valid recipe and C2 FALSE is the unambiguous conclusion. The corrected implementation provides the first opportunity to distinguish these two possibilities.",
+  "falsifier": "F1: Under the corrected implementation, the per-task weighted recipe also produces C2 FALSE (observed ≤ null mean), eliminating the reversal. This would mean the recipe reversal was an artifact of implementation bugs, not a genuine scientific finding, and the canonical per-iteration recipe is the only valid recipe for C-MEAS-VALID.\nF2: The corrected canonical recipe fails to reproduce C2 FALSE (C2 reverses to TRUE), contradicting the parent EXP-INTEL-35262261436 result. This would indicate the parent's corrected implementation result is itself unreliable.\nF3: The per-task weighted recipe's null mean deviates from the parent's stored ~0.28 by >0.05, indicating the parent's stored value was unreliable even before accounting for implementation bugs.",
+  "baselines": [
+    {
+      "id": "B1_CANONICAL_REGRESSION",
+      "description": "The canonical per-iteration p=0.5 recipe reproduces C2 FALSE under corrected implementation (from parent EXP-INTEL-35262261436: observed 0.3 < null 0.5273, SD=0.0103 across 10 seeds)",
+      "expected_behavior": "C2 = FALSE with null mean within 0.02 of 0.5273, matching parent exactly"
+    },
+    {
+      "id": "B2_PARENT_REVERSAL_DIRECTION",
+      "description": "Parent per-task weighted recipe (EXP-INTEL-35209112878) produced C2 TRUE with null ~0.28 < observed 0.3, SD=0.0117. This was under buggy implementation (unsorted set, estimator mismatch).",
+      "expected_behavior": "Under corrected implementation: either C2 TRUE persists (reversal genuine) or C2 FALSE (reversal was artifact)"
+    },
+    {
+      "id": "B3_RECIPE_DIVERGENCE_MAGNITUDE",
+      "description": "The difference between canonical null mean (~0.5273) and per-task weighted null mean (~0.28) under corrected implementation. Parent estimated ~0.25 divergence. Corrected implementation should produce a precise estimate.",
+      "expected_behavior": "Divergence is quantifiable and reproducible across seeds"
+    }
+  ],
+  "positive_control": "PC1: Canonical per-iteration recipe reproduces C2 FALSE (observed 0.3 < null >0.5) under corrected implementation, matching parent EXP-INTEL-35262261436 exactly. This confirms the corrected implementation is working and provides the baseline for recipe comparison.\nPC2: Per-task weighted recipe produces a null mean that is significantly different from the canonical recipe's null mean (paired t-test or equivalent), confirming the recipes produce materially different null distributions.",
+  "null_control": "NC1: Both recipes agree on C2 direction (both FALSE or both TRUE) under the corrected implementation. If both give C2 FALSE, the reversal was an artifact. If both give C2 TRUE, the canonical recipe's FALSIFIED was wrong. Either outcome resolves the recipe ambiguity.\nNC2: Per-task weighted recipe's corrected null mean within 0.05 of parent's stored ~0.28. If outside this range, the parent's per-task weighted result was unreliable due to the same bugs.",
+  "measurement_validity": [
+    "Both recipes use identical corrected implementation: sorted(raw_roles) before sampling, direct 499500-pair estimator for both null and observed computation",
+    "Pairwise agreement defined identically for both recipes: fraction of C(n,2) definition-pairs with identical top-2 page-type ordering (n=3: DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK)",
+    "Density denominator = elements_with_bbox (matching parent chain for ordering reproducibility)",
+    "Same frozen seed list for both recipes: [42, 123, 456, 789, 1000, 2000, 3000, 4000, 5000, 99999]",
+    "N_iterations = 1000 per seed for both recipes (matching parent chain)",
+    "Per-iteration recipe: same random role subset (p=0.5 per role) applied uniformly to all tasks within each iteration",
+    "Per-task weighted recipe: independent random role subset per task (p=0.5 per role, per task), weighted by task density",
+    "No outcome-bearing measurements during design phase",
+    "Both recipes computed on identical raw data: research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json"
+  ],
+  "decision_rule": "SURVIVES_REVERSAL_PERSISTS requires ALL of: (1) PC1 passes (canonical C2 FALSE reproduced), (2) Per-task weighted C2 = TRUE (reversal persists under corrected implementation), (3) NC2 passes (per-task weighted null mean within 0.05 of 0.28), (4) F1 not triggered (per-task weighted C2 is TRUE, not FALSE), (5) F2 not triggered (canonical C2 is FALSE, not TRUE), (6) F3 not triggered (per-task weighted null mean within 0.05 of 0.28).\nFALSIFIED_REVERSAL_ARTIFACT if F1 triggered: per-task weighted recipe also gives C2 FALSE under corrected implementation, eliminating the reversal. Recipe sensitivity was an artifact of implementation bugs.\nUNEXPECTED_BOTH_TRUE if: canonical C2 = TRUE (reverses parent) AND per-task weighted C2 = TRUE. Both recipes agree ordering IS more stable than random — the parent's canonical FALSIFIED was wrong.\nMEASUREMENT_INVALID if: PC1 fails (canonical recipe doesn't reproduce parent C2 FALSE) or either recipe's implementation produces errors.",
+  "product_consequence_positive": "SURVIVES_REVERSAL_PERSISTS confirms recipe choice is a MATERIAL determinant of the C-MEAS-VALID density metric conclusion even under corrected code. The per-iteration canonical recipe gives C2 FALSE (definitions disagree more than random) while the per-task weighted recipe gives C2 TRUE (definitions agree more than random). This recipe ambiguity means the density metric's ordering is not just definition-dependent but also recipe-dependent — a second axis of instability. Product must pivot away from ordering-based density metrics entirely, or adopt a meta-analytic approach that bounds conclusions across recipes.",
+  "product_consequence_negative": "FALSIFIED_REVERSAL_ARTIFACT means the recipe reversal was caused by the same implementation bugs (unsorted set iteration, estimator mismatch) that caused the parent MEASUREMENT_INVALID. The corrected implementation eliminates the reversal, leaving only the canonical per-iteration recipe's C2 FALSE as the valid conclusion. Recipe choice is NOT material — only the canonical recipe produces valid results. Product decision simplifies: adopt the canonical recipe and pivot away from ordering-based density metrics.",
+  "estimated_cost": "Low: <1 GPU-hour. Re-analysis of existing truncated-first-20 raw evidence (7 tasks, 3 definitions, 2 recipes × 10 seeds × 1000 null iterations = 20,000 null draws). No browser/network/model calls. Code changes: add per-task weighted recipe implementation to the corrected analysis script.",
+  "expected_information_gain": "High. Resolves the recipe ambiguity under corrected implementation — the single most important unresolved question for the density metric sub-problem of C-MEAS-VALID. Either outcome materially changes the product decision: (a) reversal persists → recipe ambiguity is genuine, density metrics doubly unstable; (b) reversal eliminated → recipe choice resolved, canonical recipe validated. The experiment is the minimum work needed to distinguish these two possibilities without waiting for the blocked full-DOM re-run."
 }
