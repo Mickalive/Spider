@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35262264593",
+  "lane": "runtime",
+  "created_at": "2026-09-17T19:15:00.000000+00:00",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux 6.17.0-1022-azure x86_64",
+    "brotli_version": "1.2.0",
+    "requests_version": "2.34.2",
+    "numpy_version": "2.5.3",
+    "pyjwt_version": "2.14.0"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/request.json",
+      "sha256": "eccdb6e9f37131fc48dad711f8a64ab36b0f3c988dca1386ceef50467eeac0e2"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/spec.json",
+      "sha256": "830a40a355619479e2c5f8ed23034c69daf61bf687bf1d7a6f33784b89f793cc"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/prereg.md",
+      "sha256": "7dac1c8cd2fab978f8b512087ec18fdd9739550d81edb600977d18b396e74b9f"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/freeze.json",
+      "sha256": null
+    }
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/run_experiment.py",
+      "sha256": "58476ed4610baa5f20398f96919ef8909012da397e8e4dab411f79d63aff9f1e",
+      "role": "code"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/raw_observations.json",
+      "sha256": "9854e670cabf855726657f5e047801c5ccd3ee2dd5c9e13706219bcb49979f48",
+      "role": "raw"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/result.json",
+      "sha256": "6af021693f1bdf92b586c504f358cfb0a41476d0dfedb98d8a14d1edb045f5f1",
+      "role": "derived"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35262264593/report.md",
+      "sha256": "98ee91c672430bbdb9690e5ef8ee0d07c6ef7e9d62461046e770c7b5042593b9",
+      "role": "derived"
+    }
+  },
+  "parent_chain": {
+    "parent_experiment_id": "EXP-RUNTIME-35237982464",
+    "parent_handoff_path": "research/experiments/EXP-RUNTIME-35237982464/handoff.json",
+    "parent_handoff_sha256": "6ac0f30d0dd167f316a41fc1cd4ecb50fd58e6c8ab905a5713fbc2740f4d099f"
+  },
+  "execution": {
+    "total_requests": 720,
+    "conditions": 9,
+    "requests_per_condition": 80,
+    "states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "reps_per_state": 20,
+    "endpoints": ["/userinfo"],
+    "content_types": ["JSON", "HTML", "XML"],
+    "payload_sizes": ["1KB", "10KB", "100KB"],
+    "encoding_scenarios": ["correct_br", "missing_ce", "incorrect_gzip", "double_br", "garbled_ce"],
+    "seed_request_ordering": 44,
+    "seed_scenario_selection": 7963,
+    "mock_server_brotli_quality": 6,
+    "base_port": 5500,
+    "proxy_port": 5600
+  },
+  "reproduction": {
+    "command": "python3 run_experiment.py",
+    "working_directory": "research/experiments/EXP-RUNTIME-35262264593",
+    "dependencies": ["brotli==1.2.0", "pyjwt>=2.0", "requests>=2.0", "numpy>=1.0"],
+    "notes": "All ports are localhost-only. Mock server and CDN proxy are ephemeral and cleaned up after each condition."
+  }
+}
