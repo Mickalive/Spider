@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35209109455",
+  "lane": "product",
+  "decision": "FALSIFIED-IN-SETTING — frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots (C1 5/5 EXECUTABLE, C2 5/5 UNKNOWN, C3 5/5 binding correct, C7 3/3 kernel regression). However, token economics hypothesis is falsified in this setting: parameterized representation adds per-mechanism token overhead (-5% to -10%) rather than saving tokens, because ${varname} syntax (varname.length+3 chars) exceeds short numeric values (1-3 digits). Claim ceiling narrowed to: committed-code synthetic single-slot with prefix metadata, resolve/bind pipeline validated, token penalty measured for short-value GET URLs on api.example.com/jsonplaceholder. Does NOT advance to PRODUCT_CORE. Previous token savings claim (parent 68 vs 96, 29.17%) is not replicated and should not be cited as established."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed — amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
+    }
+  ],
+  "product_action": "Do not promote to Product Core. Parameterized inheritance remains EXPERIMENTAL at narrowed ceiling. Token savings is not a viable selling point for short-value URL patterns. Alternative economic arguments (mechanism deduplication, retrieval efficiency, amortization) remain open but unmeasured.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does parameterized mechanism representation save tokens when concrete values are long (UUIDs, slugs, full paths, bearer tokens) rather than short numeric IDs — or should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON (mechanism deduplication savings across tasks) where per-mechanism token penalty is offset by fewer unique mechanisms?",
+  "reason": "The experiment definitively falsifies token savings for short-value URL patterns under tiktoken cl100k_base encoding. The root cause is structural: ${varname} template syntax adds fixed overhead per slot that dominates when replaced values are short (1-3 chars). The resolve/bind pipeline is validated (C1-C3, C7 all pass), confirming the kernel correctly handles parameterized mechanisms — the issue is representation economics, not pipeline correctness. The parent's 29.17% savings (68 vs 96 tokens) is not replicated under same-domain full-URL encoding (pattern_2: 23 vs 24 tokens, -4.35%), suggesting the parent measurement used a different action_template structure. Product lane must either find long-value patterns where savings exist, measure amortized deduplication benefit, or pivot from token-savings argument to other economic benefits.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35209109455/result.json: status COMPLETE outcome FALSIFIES metrics C1 true C2 true C3 true C4 0/5 false C5 -6.4% false C6 false C7 3/3 true",
+    "research/experiments/EXP-PRODUCT-35209109455/audit.json: status PASS producer_claim_supported true recomputed_metrics match producer all 5 patterns claim_ceiling bounded to short-value GET synthetic token penalty",
+    "research/experiments/EXP-PRODUCT-35209109455/raw_evidence.json: token_measurements 5 entries 19/20 23/24 25/26 23/25 31/34 resolve_bind_tests 5 entries EXECUTABLE/UNKNOWN/bind_correct true",
+    "research/experiments/EXP-PRODUCT-35209109455/report.md: root cause ${varname} overhead exceeds short values token table 5 patterns all negative savings",
+    "research/experiments/EXP-PRODUCT-35209109455/provenance.json: tiktoken 0.14.0 cl100k_base no_network no_browser no_model_calls",
+    "research/experiments/EXP-PRODUCT-35209109455/spec.json: decision_rule C1-C7 ALL required frozen decision_rule",
+    "research/experiments/EXP-PRODUCT-35185290656/handoff.json: parent token cost 68 vs 96 29.17% single point not replicated",
+    "codex/claim_state.json: C-PARAM-INHERIT EXPERIMENTAL C-PRODUCT-ECON HYPOTHESIS prior status"
+  ]
+}
