@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **116**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **121**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -125,7 +125,12 @@ Validated experiments: **116**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35185288822 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `33406e17213e` |
 | EXP-PRODUCT-35185290656 | product | REVISE | SURVIVES_CURRENT_TEST | C-PARAM-INHERIT | `0c62083dcf0d` |
 | EXP-GRAPH-35191029030 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `b5b889919fbc` |
+| EXP-PHYSICS-35209110569 | physics | PASS | PARTIAL_FALSIFICATION — Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants ≥2 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213–0.285) with achievable NL 357–394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation. | C-WEB-DYNAMICS | `9f8fb1751e3b` |
+| EXP-PRODUCT-35209109455 | product | PASS | FALSIFIED-IN-SETTING — frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open. | C-PARAM-INHERIT, C-PRODUCT-ECON | `7a32946451c6` |
 | EXP-RUNTIME-35209111193 | runtime | PASS | SURVIVES_CURRENT_TEST — all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) determinism all_same=true for all 288 state×type×size cells, (5) B-RANDOM = 0.0 for all 72 conditions, (6) |brotli_decompressed - gzip_decompressed| = 0.0 < 0.1 for all 18 type×size pairs. The parent MEASUREMENT_INVALID infrastructure failure is resolved: the mock server now applies brotli (quality 4-8) and gzip compression with Content-Encoding headers on all 5760 observations. Decompression-normalization preserves body-only discrimination at structural ceiling 0.5 across JSON, HTML, and XML at nominal 1KB/10KB/100KB under localhost compression. The ceiling 0.5 is a property of 3-way error collapse (no_auth/expired/invalid share identical error bodies) not a mechanism limitation. Algorithm equivalence is perfect (diff 0.0). Compressed-only brotli discrimination is lower (0.15-0.34) proving decompression is necessary for format-invariance. C_BROTLI_QUALITY_SCALING fails (diversity 2.33 at 1KB = 2.33 at 100KB) due to repetitive padding content — not a gating condition. Audit PASS confirms all recomputed metrics match producer. Real-CDN infrastructure remains the sole untested blocker for C-MEAS-VALID product readiness. | C-MEAS-VALID | `0e400637ea60` |
+| EXP-INTEL-35209112878 | intel | REVISE | MEASUREMENT_INVALID — The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state. | C-MEAS-VALID | `4a05cb4bddd4` |
+| EXP-GRAPH-35237975537 | graph | FAIL | FAIL | C-FRESHNESS | `1b5a41d14312` |
+| EXP-RUNTIME-35237982464 | runtime | PASS | SURVIVES_CURRENT_TEST — all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under quality variation), (5) B-RANDOM = 0.0 for all conditions, (6) C_QUALITY_VARIATION_EXISTS passes with all 5 quality levels observed per condition. Audit PASS confirms all recomputed metrics match producer. Decompression-normalization survives non-deterministic brotli quality variation on localhost. The claim ceiling advances from 'deterministic localhost compression' to 'non-deterministic brotli quality variation on localhost proxy'. Real CDN infrastructure remains the sole untested blocker for C-MEAS-VALID decompression-normalization product readiness. | C-MEAS-VALID | `16975aec2e3d` |
 
 ## Latest recorded claim events
 
@@ -134,10 +139,10 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35191029030 | graph |
+| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35237975537 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35209111193 | runtime |
-| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35185290656 | product |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35166508130 | product |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35237982464 | runtime |
+| C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35209109455 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35209109455 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35185288822 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35209110569 | physics |

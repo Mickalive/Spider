@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35237975537",
+  "lane": "graph",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redesign session_invalidation variance mechanism to avoid TP dilution: current 50/50 coin flip mixes valid sessions (behavioral=0) under drift label, guaranteeing TP=0.43-0.47 and mean_tp=0.729 <0.85, Wilson lower ~0.27-0.30 <0.75, causing C1_drift_tp FAIL. Fix: vary session_status_check intensity while keeping session_change=1 for all drift samples (e.g., vary /session/status response latency, body field, or graded TTL expiry window that still yields 401 but with variable session_status_check weight), or define TP threshold to include session_status_check contribution, or preregister separate TP thresholds per drift pattern.",
+    "Align prereg-specified stochastic variation with execution: prereg 6.4 and spec measurement_validity specify random session TTL 5-15s + token expiry jitter +-1s for session_invalidation, but execution uses post-creation 50/50 invalidate coin flip plus +-1/3600h jitter. Implement actual TTL-based expiry (sleep or mocked clock) or amend prereg to coin-flip model and bound ceiling to synthetic bimodal variance (std~2.49) not continuous TTL.",
+    "Correct noise-only sample size to prereg/spec estimated_cost: spec states 8 noise-only x30=240 null samples, result uses 4 patterns x30=120. Align prereg, execution, and result reporting, or explicitly document 120 denominator for C4_null_control. FP=0.0 passes at 120 but power/CI differs (Wilson upper 0.030 vs 0.015).",
+    "Increase per-condition power or preregister pooled-only primary: n=30 yields per-condition Pearson r CIs wide (e.g., r=-0.319 p=0.086, r=0.313 p=0.092) and non-significant for all 8 conditions. Pooled n=240 is adequate for |r|=0.139 detection (p=0.031), but per-condition exploratory claims remain underpowered. Consider n>=60 per condition or state per-condition analysis is exploratory only.",
+    "Isolate structural signal for response_time_jitter: current structural_std 0.93-0.98 for jitter conditions arises from seed change across baseline/current schema generations (baseline is previous iteration's schema), not from jitter itself which applies no schema modification. Fix baseline capture to be deterministic given seed (e.g., generate both schemas from same seed) so jitter structural is 0 by design, or document that structural variance for jitter is artifactual seed drift not noise-pattern effect.",
+    "Narrow product consequence scope: C3 |r|<0.3 passes but C1 fails, so overall decision_rule requires FAIL. Do not claim product pipeline gains validated second detection channel until C1-C4 pass jointly. Next design must achieve C2 variance without breaking C1, per parent handoff recommendation to either fix /session/status probing or restrict confirmatory test to permission_boundary-only (n=120, r=0.051).",
+    "Preserve frozen C3 conjunctive threshold (|r|<0.3 AND permutation p<0.05): producer correctly applies it (r=0.1387 p=0.031 PASS). Do not relax p threshold post hoc; report permission_boundary-only r=0.051 p=0.577 and session_invalidation-only r=0.189 p=0.038 as exploratory, not confirmatory, until preregistered."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_C1_FAIL_BY_DESIGN_ARTIFACT",
+      "severity": "high",
+      "finding": "C1_drift_tp correctly FAILS per frozen rule: mean_tp=0.729 <0.85 and all_wilson_lower_above_075=false (4/8 conditions Wilson lower 0.27-0.30). Root cause is 50/50 session validity randomization: session_invalidation samples with coin_flip valid have token_validation_failures=0, session_state_changes=0, auth_boundary_shifts=0, session_status_code=200 -> behavioral_composite=0.0, counted as false negative. This dilutes TP to 0.433-0.467 for SI conditions vs 1.0 for PB conditions. Parent EXP-GRAPH-35191029030 had TP=1.0 for SI when always invalidated. The variance fix directly trades off detection performance by labeling non-drift as drift.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/result.json:metrics.per_condition_tp SI 0.433-0.467, metrics.mean_tp_rate 0.729, controls.C1_drift_tp pass=false",
+        "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:299-310 50/50 coin flip invalidate, 322-333 endpoint probing",
+        "research/experiments/EXP-GRAPH-35237975537/raw_evidence/experiment_data.json:cooccurring_results.cooccur_session_invalidation+* Counter 200:16-17 401:13-14, behavioral 0.0 for valid cases",
+        "research/experiments/EXP-GRAPH-35237975537/spec.json:decision_rule C1 requires mean>=0.85 AND all Wilson lower>0.75"
+      ]
+    },
+    {
+      "id": "V2_C2_VARIANCE_GATE_PASSES_BUT_BIMODAL",
+      "severity": "medium",
+      "finding": "C2_variance correctly PASSES 8/8 conditions std>0 for both signals. Recomputed behavioral_std PB 0.157-0.165, SI 2.477-2.494, structural_std 0.623-1.159 matches producer. However SI behavioral variance is bimodal (0.0 vs 5.0 composite: 0*2+0*3+0*1+0*2=0 valid vs 0*2+1*3+0*1+1*2=5 invalid) not continuous TTL variance as preregistered (TTL 5-15s, jitter +-1s). Std~2.49 reflects Bernoulli mixture, not session expiry dynamics. Positive control PC_SESSION_STATUS_VARIANCE 4/4 passes technically but via synthetic coin flip.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/result.json:controls.C2_variance 8/8 pass, metrics.per_condition_variance behavioral_std SI 2.49",
+        "research/experiments/EXP-GRAPH-35237975537/raw_evidence/experiment_data.json:session_status_code 200 vs 401 distribution, session_state_changes 0 vs 1",
+        "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:422-445 compute_behavioral_composite 200->0.0 401->1.0 weight 2",
+        "research/experiments/EXP-GRAPH-35237975537/prereg.md:6.4 stochastic variation TTL 5-15s vs spec measurement_validity #5",
+        "research/experiments/EXP-GRAPH-35237975537/provenance.json:parameters session_validity_randomization 50/50 coin flip"
+      ]
+    },
+    {
+      "id": "V3_C3_ORTHOGONALITY_NUMERICALLY_CORRECT_BUT_CEILING_LIMITED",
+      "severity": "high",
+      "finding": "C3_orthogonality correctly PASSES |r|=0.1387 <0.3 with permutation p=0.0309 <0.05 on pooled n=240. Recomputed scipy Pearson r=0.1387001509004612 p=0.031721 (parametric) matches producer within 1e-12; permutation p 0.0309 vs recomputed parametric 0.0317 both <0.05, magnitude identical. However pooled estimate conflates two heterogeneous drift families: per_drift_r PB 0.051 (n=120 p=0.577) vs SI 0.189 (n=120 p=0.038). Per-condition r range -0.319 to +0.313 all p>0.08 n=30. Pooled r significance is driven by SI subset, not uniform orthogonality. Producer report correctly notes exploratory per-condition table.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/result.json:metrics.pearson_r_pooled 0.1387 metrics.per_drift_r PB 0.051 SI 0.189 controls.C3_orthogonality pass true",
+        "research/experiments/EXP-GRAPH-35237975537/report.md:Per-Condition Pearson r table, Per-Drift-Pattern table",
+        "audit recomputation: pooled r 0.138700 p 0.0317, PB r 0.05135 p 0.577, SI r 0.18938 p 0.0383, per-condition r matches producer within 1e-12",
+        "research/experiments/EXP-GRAPH-35237975537/spec.json:measurement_validity #7 Pearson r on pooled 240 paired scores"
+      ]
+    },
+    {
+      "id": "V4_C4_NULL_CONTROL_VALID_BUT_UNDERSAMPLED",
+      "severity": "low",
+      "finding": "C4_null_control correctly PASSES FP=0.0 (0/120) on noise-only conditions. Recomputed noise behavioral 0/120 matches producer. Validated noise_only_samples have token_validation_failures=0 session_state_changes=0 auth_boundary_shifts=0 session_status_code=200. However denominator is 120 not 240 as spec estimated_cost stated (8 noise-only x30). Result reports n_noise_only_conditions 4, total_noise_only 120. Documentation inconsistency does not affect PASS but halves intended null power.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/result.json:metrics.fp_rate_noise_only 0.0 controls.C4_null_control total_noise_only 120",
+        "research/experiments/EXP-GRAPH-35237975537/raw_evidence/experiment_data.json:noise_only_results 4 conditions x30",
+        "research/experiments/EXP-GRAPH-35237975537/spec.json:estimated_cost 8 noise-only x30=240",
+        "audit recomputation: noise FP 0/120"
+      ]
+    },
+    {
+      "id": "V5_STRUCTURAL_JITTER_ARTIFACT",
+      "severity": "low",
+      "finding": "Structural composite for response_time_jitter conditions shows std 0.928-0.977 (structural_std) and mean 3.66-3.73, yet mock_server.py apply_noise_to_schema for response_time_jitter does pass (schema unchanged). Observed non-zero structural diff arises because baseline_schema captured before set_noise is previous condition's mutated schema with different seed, while current_schema generated with new seed; diff reflects seed drift not jitter delay. This inflates structural variance artifactualy but still satisfies C2 gate; does not affect pooled r validity beyond adding noise.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/mock_server.py:93-94 response_time_jitter pass",
+        "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:274-289 baseline before drift/noise, current after",
+        "research/experiments/EXP-GRAPH-35237975537/raw_evidence/experiment_data.json:cooccur_permission_boundary+response_time_jitter baseline vs current differ despite jitter passthrough"
+      ]
+    },
+    {
+      "id": "V6_PREREG_DEVIATION_SESSION_TTL",
+      "severity": "medium",
+      "finding": "Prereg 6.4 and spec measurement_validity #5 specify within-condition stochastic variation as random permission subsets (PB) and random session TTL 5-15s + token expiry jitter +-1s (SI). Execution instead randomizes session validity via explicit 50/50 coin flip after token creation (invalidate_session 50%) plus token expiry jitter +-1/3600h. TTL 5-15s mechanism not implemented. Validity_notes disclose coin flip, but prereg/spec deviation is not amended via freeze. Ceiling must be bounded to coin-flip bimodal model, not TTL model.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/prereg.md:6.4 session TTL 5-15s jitter +-1s",
+        "research/experiments/EXP-GRAPH-35237975537/spec.json:measurement_validity #5 random session TTL 5-15s and token expiry jitter",
+        "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:293-310 token_expiry_hours jitter +-1/3600 and coin flip 0.5",
+        "research/experiments/EXP-GRAPH-35237975537/result.json:validity_notes 5th and 8th note 50/50 coin flip"
+      ]
+    },
+    {
+      "id": "V7_COMPOSITE_FORMULA_NORMALIZATION",
+      "severity": "info",
+      "finding": "Behavioral composite formula change correctly implemented: token_val_rate*2 + session_change*3 + auth_boundary*1 + session_status_check*2 where session_status_check 200->0.0 401->1.0 matches spec intent. Spec text '(3 - status_code)/2' is arithmetic nonsense for HTTP codes but producer correctly maps to 0/1 via direct mapping in compute_behavioral_composite. Mock_server /session/status returns 200 valid 401 invalid as required. No measurement error, but spec formula description should be corrected.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/mock_server.py:291-302 session_status 200 vs 401",
+        "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:422-445 compute_behavioral_composite direct mapping 200->0 401->1",
+        "research/experiments/EXP-GRAPH-35237975537/spec.json:hypothesis session_status_check ranges 0 to 1"
+      ]
+    },
+    {
+      "id": "V8_NO_LEAKAGE_SAMPLING_INTEGRITY",
+      "severity": "info",
+      "finding": "No target/split leakage: each of 12 conditions uses isolated MockServerManager on distinct port BASE_PORT+condition_idx (18940-18951) with seed SEED+condition_idx and per-sample RNG derived from condition_rng.randint. Server reset per condition, unauthenticated /schema independent of auth state. Deterministic SEED=42 reproducible. Artifact hashes verified: raw 85fab4cedb8cc92cefec7c447df22ea2586082932ad0eb5d4ab5d2473f4f02c6 matches recomputed.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:460-488 per-condition server start/stop isolation, 473-476 per-sample RNG",
+        "research/experiments/EXP-GRAPH-35237975537/mock_server.py:238-242 /schema unauthenticated",
+        "research/experiments/EXP-GRAPH-35237975537/provenance.json:seed 42 base_port 18940",
+        "research/experiments/EXP-GRAPH-35237975537/result.json:artifacts sha256 raw 85fab4cedb8cc92cefec7c447df22ea2586082932ad0eb5d4ab5d2473f4f02c6 verified"
+      ]
+    },
+    {
+      "id": "V9_OVERALL_DECISION_RULE_CORRECTLY_APPLIED",
+      "severity": "info",
+      "finding": "Frozen decision_rule PASS requires ALL of C1 mean>=0.85 & Wilson lower>0.75, C2 >=6/8 variance, C3 |r|<0.3 & p<0.05, C4 FP=0.0. Observed C1 FAIL (0.729, false) C2 PASS (8/8) C3 PASS (0.1387, 0.031) C4 PASS (0.0) -> overall FAIL correctly triggers. Status COMPLETE (not MEASUREMENT_INVALID) correctly applied because validity gate 8/8 >=6 and n=240 >=240. Producer outcome FALSIFIES is justified per rule, though report narrative emphasizes orthogonality survives as isolated sub-result.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35237975537/spec.json:decision_rule PASS if ALL 1-4, FAIL if any fails, MEASUREMENT_INVALID if <6/8 or <240",
+        "research/experiments/EXP-GRAPH-35237975537/result.json:status COMPLETE outcome FALSIFIES controls C1 false C2 true C3 true C4 true",
+        "research/experiments/EXP-GRAPH-35237975537/report.md:Executive Summary Overall FAIL, Measurement validity VALID"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PARENT-POOLED-R",
+      "expected": "With all conditions having behavioral variance, pooled r should remain low if orthogonality genuine, or increase if parent low r was diluted by constants",
+      "observed": "Producer pooled |r|=0.1387 on 240 samples (8/8 variance) vs parent pooled |r|=0.0498 on 240 samples (4/8 variance, 120 constants). Observed increase +0.089 but remains <0.3. Recomputed pooled r 0.1387 matches producer.",
+      "verdict": "SUPPORTED_BOUNDED",
+      "detail": "Directionally consistent with genuine orthogonality (still <0.3) but increase suggests parent constant dilution did attenuate r somewhat. However pooled r now confounds PB (r=0.051) and SI (r=0.189) heterogeneous families; pooled is weighted average not uniform. Baseline comparator is moderate strength; parent MEASUREMENT_INVALID makes comparison descriptive, not confirmatory."
+    },
+    {
+      "id": "B-PERMISSION-BOUNDARY-ONLY-R",
+      "expected": "New pooled estimate across all 8 conditions should be comparable to permission_boundary-only estimate if orthogonality genuine",
+      "observed": "New pooled |r|=0.1387 vs parent PB-only |r|=0.051 (n=120 p=0.577). New pooled is 2.7x larger, driven by SI contribution (SI r=0.189). New PB-only recomputed r=0.05135 p=0.577 matches parent exactly, confirming PB orthogonality stable.",
+      "verdict": "PARTIALLY_SUPPORTED",
+      "detail": "PB-only estimate replicates parent exactly (0.051), supporting PB orthogonality. Full pooled diverges due to SI inclusion (SI r=0.189 higher). This indicates SI protocol introduces higher coupling than PB, but still <0.3. Baseline is underpowered at n=120 p=0.577; not discriminating."
+    },
+    {
+      "id": "B-BEHAVIORAL_TP_BASELINE",
+      "expected": "Behavioral signals previously discriminated auth drift with TP=1.0 on all conditions (parent C1 PASS)",
+      "observed": "Mean TP 0.729 due to SI dilution; PB conditions retain TP=1.0, SI 0.433-0.467. Wilson lower fails threshold.",
+      "verdict": "FAIL",
+      "detail": "Strong baseline fails under new variance design. Demonstrates that achieving C2 via coin-flip mixing directly violates C1. Establishes trade-off not present in parent."
+    }
+  ],
+  "recomputed_metrics": {
+    "mean_tp_rate": {
+      "producer": 0.7291666666666667,
+      "recomputed": 0.7291666666666667,
+      "match": true,
+      "evidence": "8 conditions 30 samples each behavioral>0 count 240 total TP 175/240; per-condition TP PB 30/30 SI 14,14,13,14/30"
+    },
+    "all_wilson_lower_above_075": {
+      "producer": false,
+      "recomputed": false,
+      "match": true,
+      "evidence": "PB lower 0.886 >0.75, SI lower 0.273-0.302 <0.75"
+    },
+    "pearson_r_pooled": {
+      "producer": 0.1387001509004612,
+      "recomputed": 0.1387001509004612,
+      "match": true,
+      "evidence": "scipy pearsonr on 240 paired (behavioral, structural) from raw_evidence; diff <1e-12; parametric p 0.0317 vs producer perm p 0.0309 both <0.05"
+    },
+    "pearson_p_pooled_perm": {
+      "producer": 0.030969030969030968,
+      "recomputed": 0.031721,
+      "match": true,
+      "evidence": "Producer permutation 1000 p=0.0309, recomputed parametric p=0.0317 (scipy); both <0.05, difference due to permutation sampling variance, threshold outcome identical PASS for |r|<0.3 & p<0.05"
+    },
+    "abs_r_pooled": {
+      "producer": 0.1387001509004612,
+      "recomputed": 0.1387001509004612,
+      "match": true
+    },
+    "fp_rate_noise_only": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "evidence": "120 noise-only behavioral scores all 0.0; 0/120 FP"
+    },
+    "positive_control_rate": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "30/30 permission_boundary detection"
+    },
+    "n_paired_samples": {
+      "producer": 240,
+      "recomputed": 240,
+      "match": true
+    },
+    "conditions_with_variance": {
+      "producer": 8,
+      "recomputed": 8,
+      "match": true,
+      "evidence": "PB std 0.157-0.165 SI std 2.477-2.494 >0, structural std 0.623-1.159 >0 all 8 has_variance true"
+    },
+    "per_condition_tp": {
+      "producer": {
+        "cooccur_permission_boundary+optional_field_addition": 1.0,
+        "cooccur_permission_boundary+description_change": 1.0,
+        "cooccur_permission_boundary+response_time_jitter": 1.0,
+        "cooccur_permission_boundary+field_type_normalization": 1.0,
+        "cooccur_session_invalidation+optional_field_addition": 0.4666666666666667,
+        "cooccur_session_invalidation+description_change": 0.4666666666666667,
+        "cooccur_session_invalidation+response_time_jitter": 0.43333333333333335,
+        "cooccur_session_invalidation+field_type_normalization": 0.4666666666666667
+      },
+      "recomputed": {
+        "cooccur_permission_boundary+optional_field_addition": 1.0,
+        "cooccur_permission_boundary+description_change": 1.0,
+        "cooccur_permission_boundary+response_time_jitter": 1.0,
+        "cooccur_permission_boundary+field_type_normalization": 1.0,
+        "cooccur_session_invalidation+optional_field_addition": 0.4666666666666667,
+        "cooccur_session_invalidation+description_change": 0.4666666666666667,
+        "cooccur_session_invalidation+response_time_jitter": 0.43333333333333335,
+        "cooccur_session_invalidation+field_type_normalization": 0.4666666666666667
+      },
+      "match": true
+    },
+    "per_condition_wilson_lower": {
+      "producer": {
+        "cooccur_permission_boundary+optional_field_addition": 0.8864829086095221,
+        "cooccur_permission_boundary+description_change": 0.8864829086095221,
+        "cooccur_permission_boundary+response_time_jitter": 0.8864829086095221,
+        "cooccur_permission_boundary+field_type_normalization": 0.8864829086095221,
+        "cooccur_session_invalidation+optional_field_addition": 0.30232127224128236,
+        "cooccur_session_invalidation+description_change": 0.30232127224128236,
+        "cooccur_session_invalidation+response_time_jitter": 0.2737723743061511,
+        "cooccur_session_invalidation+field_type_normalization": 0.30232127224128236
+      },
+      "recomputed": {
+        "cooccur_permission_boundary+optional_field_addition": 0.8864829086095221,
+        "cooccur_permission_boundary+description_change": 0.8864829086095221,
+        "cooccur_permission_boundary+response_time_jitter": 0.8864829086095221,
+        "cooccur_permission_boundary+field_type_normalization": 0.8864829086095221,
+        "cooccur_session_invalidation+optional_field_addition": 0.30232127224128236,
+        "cooccur_session_invalidation+description_change": 0.30232127224128236,
+        "cooccur_session_invalidation+response_time_jitter": 0.2737723743061511,
+        "cooccur_session_invalidation+field_type_normalization": 0.30232127224128236
+      },
+      "match": true
+    },
+    "per_condition_variance": {
+      "producer": {
+        "cooccur_permission_boundary+optional_field_addition": {"behavioral_std": 0.1651785416368723, "structural_std": 1.159621585786597, "has_variance": true},
+        "cooccur_permission_boundary+description_change": {"behavioral_std": 0.15713484026367724, "structural_std": 0.6282692274990254, "has_variance": true},
+        "cooccur_permission_boundary+response_time_jitter": {"behavioral_std": 0.15713484026367724, "structural_std": 0.9775252199076787, "has_variance": true},
+        "cooccur_permission_boundary+field_type_normalization": {"behavioral_std": 0.1632993161855452, "structural_std": 0.6236095644623236, "has_variance": true},
+        "cooccur_session_invalidation+optional_field_addition": {"behavioral_std": 2.494438257849295, "structural_std": 1.0204846343227754, "has_variance": true},
+        "cooccur_session_invalidation+description_change": {"behavioral_std": 2.494438257849295, "structural_std": 0.6668749674580853, "has_variance": true},
+        "cooccur_session_invalidation+response_time_jitter": {"behavioral_std": 2.4776781245530843, "structural_std": 0.9285592184789413, "has_variance": true},
+        "cooccur_session_invalidation+field_type_normalization": {"behavioral_std": 2.494438257849295, "structural_std": 0.6767980168082317, "has_variance": true}
+      },
+      "recomputed": {
+        "cooccur_permission_boundary+optional_field_addition": {"behavioral_std": 0.1651785416368723, "structural_std": 1.159621585786597, "has_variance": true},
+        "cooccur_permission_boundary+description_change": {"behavioral_std": 0.15713484026367724, "structural_std": 0.6282692274990254, "has_variance": true},
+        "cooccur_permission_boundary+response_time_jitter": {"behavioral_std": 0.15713484026367724, "structural_std": 0.9775252199076787, "has_variance": true},
+        "cooccur_permission_boundary+field_type_normalization": {"behavioral_std": 0.1632993161855452, "structural_std": 0.6236095644623236, "has_variance": true},
+        "cooccur_session_invalidation+optional_field_addition": {"behavioral_std": 2.494438257849295, "structural_std": 1.0204846343227754, "has_variance": true},
+        "cooccur_session_invalidation+description_change": {"behavioral_std": 2.494438257849295, "structural_std": 0.6668749674580853, "has_variance": true},
+        "cooccur_session_invalidation+response_time_jitter": {"behavioral_std": 2.4776781245530843, "structural_std": 0.9285592184789413, "has_variance": true},
+        "cooccur_session_invalidation+field_type_normalization": {"behavioral_std": 2.494438257849295, "structural_std": 0.6767980168082317, "has_variance": true}
+      },
+      "match": true,
+      "evidence": "numpy std on raw_evidence derived behavioral/structural per condition"
+    },
+    "per_condition_r": {
+      "producer": {
+        "cooccur_permission_boundary+optional_field_addition": {"r": 0.19239305828441824, "p": 0.3084},
+        "cooccur_permission_boundary+description_change": {"r": -0.3188870512307547, "p": 0.0858},
+        "cooccur_permission_boundary+response_time_jitter": {"r": 0.3134578344107679, "p": 0.0916},
+        "cooccur_permission_boundary+field_type_normalization": {"r": -0.2727723627949904, "p": 0.1447},
+        "cooccur_session_invalidation+optional_field_addition": {"r": 0.2989983787319249, "p": 0.1084},
+        "cooccur_session_invalidation+description_change": {"r": 0.16364637916592042, "p": 0.3875},
+        "cooccur_session_invalidation+response_time_jitter": {"r": 0.21491315963577962, "p": 0.2540},
+        "cooccur_session_invalidation+field_type_normalization": {"r": 0.10530418638944365, "p": 0.5797}
+      },
+      "recomputed": {
+        "cooccur_permission_boundary+optional_field_addition": {"r": 0.19239305828441824, "p": 0.30841229487892746},
+        "cooccur_permission_boundary+description_change": {"r": -0.3188870512307547, "p": 0.08587567985784407},
+        "cooccur_permission_boundary+response_time_jitter": {"r": 0.3134578344107679, "p": 0.09165367554254598},
+        "cooccur_permission_boundary+field_type_normalization": {"r": -0.2727723627949904, "p": 0.14473775071851896},
+        "cooccur_session_invalidation+optional_field_addition": {"r": 0.2989983787319249, "p": 0.10848117578830713},
+        "cooccur_session_invalidation+description_change": {"r": 0.16364637916592042, "p": 0.3875393846006481},
+        "cooccur_session_invalidation+response_time_jitter": {"r": 0.21491315963577962, "p": 0.2540785909703106},
+        "cooccur_session_invalidation+field_type_normalization": {"r": 0.10530418638944365, "p": 0.5797086316881896}
+      },
+      "match": true
+    },
+    "per_drift_r": {
+      "producer": {"permission_boundary": 0.05135707277765042, "session_invalidation": 0.18938118614960536},
+      "recomputed": {"permission_boundary": 0.05135707277765042, "session_invalidation": 0.18938118614960536},
+      "match": true
+    },
+    "artifact_hashes": {
+      "raw_evidence_experiment_data.json": "85fab4cedb8cc92cefec7c447df22ea2586082932ad0eb5d4ab5d2473f4f02c6 verified",
+      "mock_server.py": "c1db181e3accfc2c460809a16ebdc96816164040b28ff45bd48b0c1bf6de2510 verified",
+      "run_experiment.py": "2f439ffcb6c863b8e7210377d76a0df69519b2febcea98162ad7ce9f0052e39b verified"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: No overall PASS. Frozen decision_rule FAIL due to C1_drift_tp (mean 0.729 <0.85, Wilson lower 0.27-0.30 <0.75) despite measurement VALID (8/8 variance, n=240). Descriptive ceilings only: (1) /session/status probing with 50/50 coin-flip variance achieves PC_SESSION_STATUS_VARIANCE 4/4 and C2 8/8, confirming unauthenticated /schema + authenticated /session/status can co-observable behavioral and structural signals on deterministic Flask 3.1.3 + PyJWT HS256 localhost, but variance model is bimodal Bernoulli (std~2.49) not TTL 5-15s; (2) Pooled orthogonality |r|=0.1387 (|r|<0.3, perm p~0.031) survives in isolation on pooled 240, but is heterogeneous (PB 0.051 p=0.577, SI 0.189 p=0.038, per-condition |r| 0.10-0.32 all p>0.08) and does not support product pipeline parallel independent channels because drift detection fails when variance is induced this way; (3) Null control FP=0.0 on 120 noise-only samples replicates, but denominator half of prereg 240; (4)does NOT support: general orthogonality across drift families, real OAuth/OIDC middleware, production APIs with DB/cache/CDN/latency, or C-FRESHNESS VALIDATED. C-FRESHNESS remains EXPERIMENTAL (parent EXP-GRAPH-35166507358) with this narrow descriptive replication of PB orthogonality; SI orthogonality remains confounded by TP/variance trade-off. Obtain PASS requires redesigned SI variance that preserves TP >=0.85.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35237975537/request.json:5 parent_handoff EXP-GRAPH-35191029030 handoff  b86e49915b03105f3ad44bb3f700d3536eca78895038d8f6cb7c215f5e46363a inherited MEASUREMENT_INVALID with question on /session/status probing",
+    "research/experiments/EXP-GRAPH-35237975537/spec.json:54928ccda6a101e3fb4ca0e727344d7a4560fa7c30e39b4561ed81393d20847b lane graph claim_ids C-FRESHNESS question on variance gate and pooled r",
+    "research/experiments/EXP-GRAPH-35237975537/prereg.md:c8f7411ea29b81a3d0a2b1acf62dbf85057aa0c8b67638b76cd28e90ddfbac3c 8 co-occurring conditions, measurement_validity 1-8, decision_rule PASS requires C1-C4",
+    "research/experiments/EXP-GRAPH-35237975537/freeze.json:b1b39fd01f3e44de6dee4f50b72887819ac52821cc0abc2fa8aed4242382abcb frozen hashes",
+    "research/experiments/EXP-GRAPH-35237975537/result.json:status COMPLETE outcome FALSIFIES metrics mean_tp 0.729 pearson_r 0.1387 p 0.0309 conditions_with_variance 8",
+    "research/experiments/EXP-GRAPH-35237975537/report.md:Executive Summary Overall FAIL C1 FAIL C2 PASS C3 PASS C4 PASS Measurement VALID",
+    "research/experiments/EXP-GRAPH-35237975537/provenance.json:seed 42 Flask 3.1.3 PyJWT 2.14.0 n=30/8/4 base_port 18940 session_validity 50/50 coin flip",
+    "research/experiments/EXP-GRAPH-35237975537/raw_evidence/experiment_data.json:85fab4cedb8cc92cefec7c447df22ea2586082932ad0eb5d4ab5d2473f4f02c6 240 co-occurring +120 noise-only samples, re-derives behavioral 0.33/0.47/5.0 and structural 3.1-4.3",
+    "research/experiments/EXP-GRAPH-35237975537/mock_server.py:c1db181e3accfc2c460809a16ebdc96816164040b28ff45bd48b0c1bf6de2510 /session/status 200 vs 401, /schema unauthenticated",
+    "research/experiments/EXP-GRAPH-35237975537/run_experiment.py:2f439ffcb6c863b8e7210377d76a0df69519b2febcea98162ad7ce9f0052e39b per-sample RNG, compute_behavioral_composite, permutation_test 1000",
+    "research/experiments/EXP-GRAPH-35191029030/handoff.json:carry_forward established behavioral TP=1.0 etc rejected structural families",
+    "codex/claim_state.json:C-FRESHNESS EXPERIMENTAL — behavioral signals discriminate TP=1.0 but orthogonality MEASUREMENT_INVALID parent, six structural families falsified"
+  ],
+  "unresolved": [
+    "Whether session_invalidation variance can be achieved without TP dilution (e.g., graded session_status_check weight while keeping session_change=1 for all drift samples, or continuous TTL expiry with behavioral threshold recalibrated)",
+    "Whether pooled orthogonality |r|<0.3 would survive with redesigned variance that preserves C1 (true test of orthogonality under valid detection)",
+    "Whether per-drift heterogeneity (PB 0.051 vs SI 0.189) reflects genuine mechanism difference or artifact of bimodal SI distribution; requires larger n per drift (>=60) and wider permission subsets",
+    "Whether structural signal for response_time_jitter should be exactly 0 and how to define baseline to avoid seed-drift artifact; affects structural_std interpretation but not threshold",
+    "Whether 50/50 coin-flip adequately simulates real session TTL/expiry behavior for product relevance; real OAuth/OIDC middleware with RS256/ES256, DB/cache/CDN, rate limiting untested",
+    "Whether wider stochastic variation ranges or alternative behavioral weights (2,3,1,2) change correlation structure; weights frozen not optimized",
+    "Whether composite multi-signal classifiers would outperform independent channels even if orthogonality held; requires fused threshold design",
+    "Whether unauthenticated /schema and /session/status endpoints are practical in real-world APIs; synthetic probes vs real monitoring endpoints",
+    "Why noise-only n=120 not 240 and whether FP=0.0 would hold at larger n and more diverse structural noise"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "96b62e4739edba0ace1f318c84fd627e070f693d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T10:11:06.201549+00:00",
+  "experiment_id": "EXP-INTEL-35209112878",
+  "inherited_last_verdict": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
+  "inherited_next_question": "After the runtime lane removes the locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89), a frozen spec amendment resolves the C2 verdict mapping to null < observed -> SURVIVES (or equivalently C1 AND NOT C2 -> SURVIVES), the null-model recipe is specified to reproducibility (RNG type, conditioning, role-count mapping, tie handling), and a canonical analysis script is committed at a stable repo path, does full DOM enumeration confirm that the a->link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
+  "lane": "intel",
+  "origin_github_run_id": "35209112878",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35166505835",
+    "path": "research/experiments/EXP-INTEL-35166505835/handoff.json",
+    "sha256": "2d6841990f57286921184777d179df9ec8de0facb3d855bd95a26edc8044c219"
+  },
+  "reason": "pulse",
+  "request_hash": "cfd5d06419ec712ea06a43af62fc0e4458b649a9d0be3a8a634581f7eaa9884e",
+  "request_id": "246ba1f4f4b0f8b0d9813491",
+  "schema_version": 1
+}
