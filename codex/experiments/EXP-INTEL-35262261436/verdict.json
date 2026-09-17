@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35262261436",
+  "lane": "intel",
+  "decision": "SURVIVES_CURRENT_TEST — All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "The parent MEASUREMENT_INVALID verdict (design failure: incoherent NC1, unsorted set iteration, estimator mismatch) is resolved into a valid scientific finding within truncated-first-20 scope. Under the canonical per-iteration p=0.5 recipe, C2 = FALSE (observed 0.3 < null 0.5273): density ordering is LESS stable than random role subsets, meaning the metric's ordering is definition-dependent and unreliable. However, this applies only to truncated-first-20 locatable sample (7 tasks, 1 site, 3 definitions). C-MEAS-VALID as a broader claim (measurement substrate is intervention-valid) remains EXPERIMENTAL pending full-DOM re-run (blocked by substrate cap) and cross-site validation. This experiment converts a design-failure verdict into a scoped scientific finding but does not close the claim."
+    }
+  ],
+  "product_action": "Density metric ordering is definition-dependent under the canonical recipe on truncated-first-20 data. Product should pivot to definition-invariant alternatives (e.g., per-definition confidence intervals, rank-agreement scores) or abandon ordering-based page-type discrimination. Corrected canonical script + frozen recipe unblocks full-DOM re-run once substrate cap is removed.",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 — and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "reason": "All six frozen decision criteria pass with audit PASS. The FALSIFIED conclusion is scientifically valid within the tested scope: corrected sorted roles + aligned estimator reproduce C2 = FALSE (observed < null) for all 10 seeds (SD=0.0103). The prior MEASUREMENT_INVALID was entirely caused by implementation bugs (unsorted set iteration + estimator mismatch), now fixed. However, the claim ceiling is narrow: truncated-first-20 locatable sample, 1 site, 3 definitions (2 distinct due to zero menuitem/tab counts). Full-DOM re-run is the critical next step to test whether the finding generalizes beyond the truncated proxy. The per-task weighted recipe's C2 TRUE reversal (established in EXP-INTEL-35209112878) remains an open question — if it also holds on full-DOM, the recipe ambiguity becomes the central scientific issue for C-MEAS-VALID.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35262261436/spec.json (frozen decision_rule criteria 1-6, canonical recipe justification in prereg §4, measurement_validity fixes)",
+    "research/experiments/EXP-INTEL-35262261436/result.json (metrics M1-M9: null mean 0.5273, deviation 0.0002, C2 FALSE all seeds, SD 0.0103, orderings reproduced; controls PC1/PC2/NC1 PASS, F1/F2/F3 not triggered)",
+    "research/experiments/EXP-INTEL-35262261436/audit.json (PASS, all recomputed metrics match producer, claim_ceiling bounded to truncated-first-20, V1-V6 validity findings, V5 canonical recipe assumption material)",
+    "research/experiments/EXP-INTEL-35262261436/report.md (FIX1 sorted roles, FIX2 aligned estimator, FIX3 coherent decision rule, interpretation Section 4, scope Section 6)",
+    "research/experiments/EXP-INTEL-35262261436/provenance.json (base_commit 084bf58f, raw evidence sha da30bd05, code sha 1aefe2f6, reproduction command)",
+    "research/experiments/EXP-INTEL-35209112878/handoff.json (parent: recipe reversal established, NC1 incoherence, substrate blocker, canonical recipe unresolved)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (truncated-first-20 raw data, 7 tasks deduped)"
+  ]
+}

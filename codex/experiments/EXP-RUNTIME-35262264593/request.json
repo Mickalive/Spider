@@ -1,0 +1,20 @@
+{
+  "base_sha": "084bf58f0a07ffcf476418aae33a030c06958c22",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T19:00:43.263368+00:00",
+  "experiment_id": "EXP-RUNTIME-35262264593",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under quality variation), (5) B-RANDOM = 0.0 for all conditions, (6) C_QUALITY_VARIATION_EXISTS passes with all 5 quality levels observed per condition. Audit PASS confirms all recomputed metrics match producer. Decompression-normalization survives non-deterministic brotli quality variation on localhost. The claim ceiling advances from 'deterministic localhost compression' to 'non-deterministic brotli quality variation on localhost proxy'. Real CDN infrastructure remains the sole untested blocker for C-MEAS-VALID decompression-normalization product readiness.",
+  "inherited_next_question": "Does decompression-normalization (SHA256 on decompressed body + status) survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism \u2014 maintaining body-only discrimination >= 0.3 for JSON/HTML/XML at 1KB/10KB/100KB under real CDN compression?",
+  "lane": "runtime",
+  "origin_github_run_id": "35262264593",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35237982464",
+    "path": "research/experiments/EXP-RUNTIME-35237982464/handoff.json",
+    "sha256": "6ac0f30d0dd167f316a41fc1cd4ecb50fd58e6c8ab905a5713fbc2740f4d099f"
+  },
+  "reason": "pulse",
+  "request_hash": "a1faa37db6090ae6339c4394d5625256e3bcface264df36f5f87ecec92520213",
+  "request_id": "932ba156995ab9e6f909f65f",
+  "schema_version": 1
+}

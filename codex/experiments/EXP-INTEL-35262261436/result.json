@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35262261436",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M1_corrected_null_mean": {
+      "description": "Corrected parent null mean (direct estimator, sorted roles, within-iteration pairwise agreement)",
+      "value": 0.5273,
+      "unit": "pairwise agreement",
+      "seed": 42,
+      "n_iterations": 1000,
+      "recipe": "per-iteration p=0.5 independent inclusion"
+    },
+    "M2_deviation_from_stored": {
+      "description": "Difference from stored parent null mean 0.5275",
+      "value": 0.0002,
+      "unit": "absolute"
+    },
+    "M3_c2_direction_canonical": {
+      "description": "C2 direction under canonical per-iteration recipe",
+      "value": false,
+      "meaning": "C2 = FALSE (observed 0.3 < null 0.5273): ordering is LESS stable than random role subsets"
+    },
+    "M4_mean_pairwise_across_seeds": {
+      "description": "Mean within-iteration pairwise agreement across 10 seeds (canonical recipe)",
+      "value": 0.5373,
+      "unit": "pairwise agreement"
+    },
+    "M5_sd_across_seeds": {
+      "description": "SD of mean pairwise agreement across 10 seeds",
+      "value": 0.0103,
+      "unit": "pairwise agreement"
+    },
+    "M6_def_full_map_ordering": {
+      "description": "DEF-FULL-MAP ordering on truncated-first-20",
+      "value": ["cart", "product_listing", "detail"],
+      "matches_parent": true
+    },
+    "M7_def_form_only_ordering": {
+      "description": "DEF-FORM-ONLY ordering on truncated-first-20",
+      "value": ["product_listing", "cart", "detail"],
+      "matches_parent": true
+    },
+    "M8_isolated_a_link_ordering": {
+      "description": "ISOLATED-A-LINK ordering on truncated-first-20",
+      "value": ["cart", "product_listing", "detail"],
+      "matches_def_full_map": true
+    },
+    "M9_c2_direction_per_seed": {
+      "description": "C2 direction per seed (all FALSE under canonical recipe)",
+      "value": {
+        "42": false,
+        "123": false,
+        "456": false,
+        "789": false,
+        "1000": false,
+        "2000": false,
+        "3000": false,
+        "4000": false,
+        "5000": false,
+        "99999": false
+      },
+      "all_false": true
+    },
+    "M_observed_agreement": {
+      "description": "Observed pairwise agreement across 3 definitions on truncated-first-20",
+      "value": 0.3333,
+      "unit": "pairwise agreement",
+      "agreeing_pairs": "1/3",
+      "note": "Parent reported 3/10 = 0.3 from 5 definitions; this run uses 3 definitions (C(3,2)=3 pairs)"
+    }
+  },
+  "controls": {
+    "PC1_ordering_reproduction": {
+      "id": "PC1",
+      "description": "Corrected script reproduces DEF-FULL-MAP and DEF-FORM-ONLY orderings exactly",
+      "pass": true,
+      "def_full_map_match": true,
+      "def_form_only_match": true,
+      "evidence": "M6, M7 match parent orderings exactly (deterministic sorted roles)"
+    },
+    "PC2_c2_direction_canonical": {
+      "id": "PC2",
+      "description": "Under canonical per-iteration recipe, C2 = FALSE (observed 0.3 < null >0.5)",
+      "pass": true,
+      "observed": 0.3,
+      "null_seed42": 0.5273,
+      "c2_false_confirmed": true,
+      "evidence": "M3, M9: C2 = FALSE for all 10 seeds"
+    },
+    "NC1_null_mean_reproduction": {
+      "id": "NC1",
+      "description": "Canonical per-iteration null at seed=42 with sorted roles produces mean within 0.02 of stored 0.5275",
+      "pass": true,
+      "computed": 0.5273,
+      "expected": 0.5275,
+      "deviation": 0.0002,
+      "threshold": 0.02,
+      "evidence": "M1, M2: deviation 0.0002 << 0.02 threshold"
+    },
+    "F1_c2_direction": {
+      "id": "F1",
+      "description": "C2 direction under canonical recipe: FALSE confirms original FALSIFIED",
+      "triggered": false,
+      "c2_false_under_canonical": true,
+      "evidence": "M3: C2 = FALSE (observed < null), consistent with parent FALSIFIED intent"
+    },
+    "F2_null_mean_deviation": {
+      "id": "F2",
+      "description": "Corrected parent null mean deviates from stored 0.5275 by <=0.02",
+      "triggered": false,
+      "deviation": 0.0002,
+      "threshold": 0.02,
+      "evidence": "M2: deviation 0.0002, well within 0.02 threshold. Root cause of prior deviation was unsorted set iteration + estimator mismatch; both fixed"
+    },
+    "F3_seed_robustness": {
+      "id": "F3",
+      "description": "SD of mean pairwise agreement across 10 seeds <0.05",
+      "triggered": false,
+      "sd_across_seeds": 0.0103,
+      "threshold": 0.05,
+      "evidence": "M5: SD 0.0103, well below 0.05 threshold. Recipe is reproducible across seeds"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/run_corrected_analysis.py",
+      "sha256": "1aefe2f6b231b1ead388f9dd816f31d40e850c3e0b60bac8339a22043ca7719b",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/corrected_results.json",
+      "sha256": "ae22b3c3895f66136b5529840c1233c1f59a2925b7d31a6c21025dad3b3a6bdf",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "The corrected implementation with sorted roles reproduces both parent orderings exactly (PC1 PASS): DEF-FULL-MAP cart>product_listing>detail and DEF-FORM-ONLY product_listing>cart>detail",
+    "The canonical per-iteration p=0.5 null recipe produces mean pairwise agreement 0.5273 at seed=42, within 0.0002 of the parent's stored value 0.5275 (NC1 PASS). The prior 0.0119 deviation was entirely caused by unsorted set iteration (PYTHONHASHSEED) + estimator mismatch, both now fixed",
+    "Under the canonical recipe, observed 0.3 < null 0.5273, so C2 = FALSE (ordering is LESS stable than random). This reproduces the parent's FALSIFIED intent across all 10 seeds (M9: all FALSE)",
+    "ISOLATED-A-LINK ordering matches DEF-FULL-MAP exactly, confirming that a->link mapping (without menuitem/tab) is the primary driver of the DEF-FULL-MAP reversal relative to DEF-FORM-ONLY",
+    "Seed robustness: SD across 10 seeds = 0.0103 (F3 not triggered). Mean ranges from 0.5237 to 0.5543 across seeds, all well above observed 0.3. C2 direction is FALSE for every seed",
+    "The parent's 0.3 value was computed from 5 definitions (C(5,2)=10 pairs); this run uses 3 definitions (C(3,2)=3 pairs). The observed agreement 0.333 (1/3) is consistent with the parent's 0.3 (3/10) given the reduced definition set"
+  ],
+  "validity_notes": [
+    "Truncated-first-20 locatable sample only (7 tasks, 1 Magento site, cart n=1). Results do not generalize to full-DOM or cross-site data",
+    "3 of 5 planned definitions independently verified (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK). Pairwise agreement is C(3,2)=3 pairs, not C(5,2)=10 as in parent chain. The observed agreement metric (0.333) is not directly comparable to parent's 0.3, but the null distribution comparison is valid",
+    "Cart page appears once (n=1). Within-type variance for cart is undefined; mean density for cart is a single observation",
+    "Deduplication: raw data contains duplicate cart_1 entry; deduplicated to 7 unique tasks. Parent code may have included the duplicate (8 tasks), which would slightly affect density means for cart type",
+    "The per-iteration null model uses random role subsets without role mapping (role_map={}), matching the parent's implementation. This means the null tests random RAW role inclusion, not canonical role mapping",
+    "No browser/network/model calls required. Pure re-analysis of existing raw evidence"
+  ],
+  "unresolved": [
+    "Whether the C2 FALSE result holds on full-DOM data: current results are bounded to truncated-first-20 locatable sample. Full-DOM re-run blocked by substrate cap (locatableSample at measure_fullpage_yield.py:89)",
+    "Whether cross-site generalization holds: all data from one Magento site",
+    "The other 2 definitions from the parent chain (5 planned, only 3 verified) — their orderings were not re-checked",
+    "Whether menuitem/tab roles contribute additively when present (0 counts in current sample for these roles)",
+    "The observed agreement metric (0.333 from 3 definitions) is not directly comparable to parent's 0.3 (from 5 definitions). A fair comparison requires either the same 5 definitions or a normalized metric"
+  ]
+}

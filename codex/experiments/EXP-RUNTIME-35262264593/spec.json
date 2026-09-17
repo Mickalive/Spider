@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-RUNTIME-35262264593",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does decompression-normalization (SHA256 on decompressed body + status) maintain body-only discrimination >= 0.3 under CDN-like encoding-layer non-determinism — incorrect, missing, double-encoded, and garbled Content-Encoding headers — in addition to the previously established brotli quality variation?",
+  "hypothesis": "Decompression-normalization preserves body-only discrimination under encoding-layer non-determinism because the mechanism operates on decompressed logical bodies. CDN-like header corruption (incorrect algorithm label, missing Content-Encoding, double encoding, garbled value) is a header-layer artifact that does not alter the decompressed logical body when the client attempts standard decompression or falls back to identity. Discrimination should equal the quality-only baseline (0.5) because encoding non-determinism affects only the header/compressed representation, not the decompressed content, provided at least one decompression path succeeds. When ALL decompression paths fail (garbled/empty headers), the mechanism gracefully degrades to the raw body hash, which may still carry auth-state discrimination.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any content type at any size, OR decompressed hash variation > 1 unique per state for any condition (determinism failure under encoding non-determinism), OR decompressed hashes for double-encoded responses differ from single-encoded hashes for the same auth state and content type (decomposition-order sensitivity), OR a garbled Content-Encoding header causes a client crash/hang rather than a decompression error (missing graceful degradation).",
+  "baselines": [
+    {
+      "id": "B-QUALITY-ONLY-0.5",
+      "description": "Parent EXP-RUNTIME-35237982464 decompressed discrimination under non-deterministic brotli quality only (0.5). Regression reference: encoding non-determinism should not degrade below this baseline.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0 discrimination. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-COMPRESSED-BYTE-ONLY",
+      "description": "Discrimination using compressed bytes directly (no decompression). Under encoding non-determinism, compressed bytes vary dramatically across conditions, so discrimination should be near 0 for cross-condition comparisons. This proves decompression is necessary for quality-invariance.",
+      "expected_value": "< 0.5"
+    },
+    {
+      "id": "B-IDENTITY-FALLBACK",
+      "description": "When Content-Encoding is garbled/empty and decompression fails, the client receives the raw (still brotli-compressed) bytes. Decompressed hash of these raw bytes should differ from the truly decompressed hash for the same auth state, but discrimination among states should still be >= 0.3 if the compressed bytes retain auth-state structure.",
+      "expected_value": ">= 0.3"
+    }
+  ],
+  "positive_control": "C_ENCODING_VARIATION_EXISTS: For each content type x size, at least 3 distinct Content-Encoding scenarios must produce distinct response headers (missing, incorrect, double, garbled). This verifies the experiment actually varies encoding and is not trivially degenerate.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Content types are synthetic but structurally realistic: JSON (key-value pairs), HTML (paragraphs, lists, links), XML (nested elements with attributes). All contain 4 auth-state bodies with 3-way error collapse (no_auth/expired/invalid share similar bodies, valid_token has distinct body).",
+    "Payload sizes are controlled by padding to hit target uncompressed sizes: 1KB, 10KB, 100KB.",
+    "The mock server generates brotli-compressed responses at quality 6 (deterministic baseline quality). Encoding non-determinism is applied ONLY at the CDN proxy layer.",
+    "Five Content-Encoding scenarios are tested: (1) correct 'br', (2) missing header (identity), (3) incorrect 'gzip' label on brotli content, (4) double-encoded 'br, br', (5) garbled 'br; quality=invalid'. Each scenario is applied per-request with independent random selection.",
+    "SHA256 decompression-normalization is applied to the response body AFTER decompression by the client, using the brotli library's built-in decompressor with fallback to identity.",
+    "Seed=44 for request ordering. N=20 per state per content type per size (each request gets independent random encoding scenario).",
+    "Mock server is localhost only. No real CDN infrastructure is used. Results are bounded to localhost mock server with encoding-layer non-determinism."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for JSON at all sizes, (2) decompressed body-only discrimination >= 0.3 for HTML at all sizes, (3) decompressed body-only discrimination >= 0.3 for XML at all sizes, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under encoding non-determinism), (5) B-RANDOM = 0.0 for all conditions, (6) C_ENCODING_VARIATION_EXISTS passes (at least 3 distinct encoding scenarios per content type x size). FALSIFIED-IN-SETTING if any non-JSON type has discrimination < 0.3 at any size, OR if decompressed hashes differ by encoding scenario for any condition (determinism failure), OR if double-encoded responses produce different decompressed hashes than single-encoded for the same auth state. MEASUREMENT_INVALID if infrastructure failure prevents valid measurements.",
+  "product_consequence_positive": "Decompression-normalization survives encoding-layer non-determinism (incorrect, missing, double, garbled Content-Encoding). Claim ceiling advances from 'non-deterministic quality only' to 'non-deterministic quality + encoding-layer non-determinism'. This directly addresses CDN edge behaviors where Accept-Encoding negotiation, cache poisoning, or misconfigured origins produce non-standard encoding headers. Product team can proceed with real-CDN deployment knowing encoding non-determinism does not break the mechanism, provided the client gracefully handles decompression failures.",
+  "product_consequence_negative": "Decompression-normalization fails under encoding-layer non-determinism. The mechanism depends on correct Content-Encoding headers, not just decompressed body stability. Product team must: (a) add Content-Encoding validation before decompression, (b) handle double-encoded responses explicitly, or (c) restrict CDN configurations to ensure correct headers. Real-CDN deployment is blocked until the failure mode is understood and mitigated.",
+  "estimated_cost": "< 5000 tokens, < 2 minutes execution (localhost only, no network, no CDN proxy).",
+  "expected_information_gain": "HIGH. Directly tests the encoding-layer non-determinism that the parent handoff identified as the critical untested blocker alongside real CDN infrastructure. The parent established quality-only survival; this tests encoding survival. A positive result unblocks real-CDN deployment decisions for encoding corruption. A negative result identifies the exact failure mode (e.g., double-encoding sensitivity, garbled-header crash) without wasting CDN infrastructure investment. Either outcome changes a product decision. This is the smallest experiment that advances the claim ceiling beyond localhost quality-only toward production CDN readiness."
+}

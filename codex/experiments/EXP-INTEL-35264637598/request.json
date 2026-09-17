@@ -1,0 +1,20 @@
+{
+  "base_sha": "82720805e48ceccea268ddb49569d10685a39df6",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T19:24:06.621540+00:00",
+  "experiment_id": "EXP-INTEL-35264637598",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
+  "inherited_next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 \u2014 and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "lane": "intel",
+  "origin_github_run_id": "35264637598",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35262261436",
+    "path": "research/experiments/EXP-INTEL-35262261436/handoff.json",
+    "sha256": "c2270db0d48013c5840e5522e310a70e9375550edc05381e936d4a6d5a2e98e3"
+  },
+  "reason": "continuation",
+  "request_hash": "282e5f7328fd7182f0c7086bade61af4b964296eb619d2db35b820ce1c16c642",
+  "request_id": "2552bdd3825a76ca383d2123",
+  "schema_version": 1
+}
