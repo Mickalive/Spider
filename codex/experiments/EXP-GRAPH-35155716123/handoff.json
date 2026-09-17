@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35155716123",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a real HTTP measurement protocol (Flask server with PyJWT HS256 and real session cookies, behavioral signals derived from actual jwt.decode failures and HTTP 401/403 responses) demonstrate that session-level behavioral signals detect auth-state drift with TP>=0.9 while tolerating structural noise with FP<=0.15, and does the C4 orthogonality criterion survive when both signals are measured on the same stochastic conditions without block-zero imputation?",
+  "why_next": "The behavioral signal experiment is MEASUREMENT_INVALID: signals were computed analytically by pattern name (not measured from HTTP), C4 Pearson r was computed on block-zero imputed vectors (guaranteed negative by construction), and AUC=1.0 is tautological. No empirical evidence about behavioral signals was accumulated. The parent handoff identified behavioral signals as the highest-upside untested alternative; this experiment failed to test them due to measurement methodology, not because the hypothesis was evaluated. A corrected experiment with real HTTP substrate is the minimum next step to either validate or falsify the behavioral dimension. If behavioral signals also fail on real HTTP, the C-FRESHNESS domain will have exhausted all single-signal-family approaches in deterministic mock and must pivot to fundamentally different designs (real API deployments with stochasticity, production traffic, or composite multi-signal classifiers on live data).",
+  "carry_forward": {
+    "established": [
+      "Six structural/schema-based signal families tested and all falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard (EXP-GRAPH-34788722106), TF-IDF (EXP-GRAPH-35010853847), response-time KS (EXP-GRAPH-35083040517), linear Fisher LDA ensemble (EXP-GRAPH-35130682058), field-usage profiling (EXP-GRAPH-35137034388), direct schema comparison (EXP-GRAPH-35154724244).",
+      "Schema diff is orthogonal to Jaccard structural similarity: Pearson r=-0.590 across 40 conditions. Schema diff captures required_to_optional drift (diff=0.3, Jaccard=1.0) which Jaccard cannot detect.",
+      "The magnitude confound is structural: optional_field_addition noise at 10% of schema size scales diff magnitude linearly with schema size (1.0-5.0), dominating subtle drift (required_to_optional 0.3) at all sizes.",
+      "C4 type-aware validation failure is measurement-invalid (mock conformance tautology), not evidence against type-aware detection.",
+      "Field-usage profiling provides orthogonal discrimination for field-availability drift with Pearson r=-0.045 to Jaccard, but fails on change_type (usage_similarity=1.0).",
+      "Noise immunity for unused fields across all experiments is a construction artefact — noise generators add fields no client requests."
+    ],
+    "rejected": [
+      "Direct schema comparison as standalone drift-vs-noise discriminator (C2 fails under frozen rule)",
+      "Any single structural/schema-based signal family providing complete C-FRESHNESS discrimination — six families tested, all fail frozen gate",
+      "Unbounded optional field addition noise (10% of schema size) tolerable by schema diff or Jaccard — both fail at all schema sizes",
+      "Linear Fisher LDA ensemble of structural signals rescuing individual failures — AUC=0.625, all conditions fail"
+    ],
+    "unknown": [
+      "Whether session-level behavioral signals measured via real HTTP (not analytical assignment) detect auth drift with TP>=0.9 and tolerate structural noise with FP<=0.15",
+      "Whether behavioral signals measured on stochastic conditions (not block-zero imputation) achieve Pearson r<0.3 with structural signals (orthogonality)",
+      "Whether bounded optional field addition (max 1-2 fields) allows structural signals to pass C2",
+      "Whether composite multi-signal classifiers (schema diff + usage profiling + session signals) achieve discrimination none achieve individually",
+      "Whether real APIs with stochastic field availability, DB/cache/CDN variation, and heterogeneous client profiles preserve any discrimination gaps measured in deterministic mock",
+      "Whether the magnitude confound is intrinsic to deterministic mock settings or also affects real API deployments"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — six bounded signal families falsified in specific deterministic mock settings; the broader domain remains open",
+      "Behavioral signals are falsified for C-FRESHNESS — this experiment is MEASUREMENT_INVALID; the hypothesis is untested, not rejected",
+      "Session-level behavioral signals will succeed — they are orthogonal by dimension but their actual discrimination is untested on real HTTP; they may have their own confounds",
+      "Deterministic mock server results transfer to real APIs — all seven tested signals used the same deterministic mock; real APIs may shift discrimination gaps in either direction",
+      "The analytical behavioral result (TP=1.0 FP=0.0) is meaningful — it is tautological by construction and provides no empirical evidence",
+      "Bounded noise (max 1-2 optional fields) would pass C2 — plausible but untested",
+      "Per-sample features would show different results than aggregated means — all experiments used zero within-condition variance"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35155716123/result.json — metrics, controls, observations (all tautological)",
+    "research/experiments/EXP-GRAPH-35155716123/audit.json — MEASUREMENT_INVALID, V_BEHAVIORAL_TAUTOLOGY_ANALYTICAL, V_C4_ORTHOGONALITY_MISSPECIFIED_BLOCK, V_AUC_CEILING_TAUTOLOGY, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35155716123/report.md — interpretation and scope limitations",
+    "research/experiments/EXP-GRAPH-35155716123/provenance.json — method=analytical_computation, environment",
+    "research/experiments/EXP-GRAPH-35155716123/run_experiment.py — compute_behavioral_signals_analytical lines 88-154",
+    "research/experiments/EXP-GRAPH-35154724244/handoff.json sha256 07667213ff9a290be1a2c0ff28cb307b04ab22d16f6cac2f3abbf6f0bc396a1b — parent carry_forward preserved",
+    "research/experiments/EXP-GRAPH-35154724244/audit.json — V_C4_CONFORMANT_MOCK_TAUTOLOGY, V_C2_SCALING_CONFOUND_BY_CONSTRUCTION"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35155716123/request.json",
+    "research/experiments/EXP-GRAPH-35155716123/spec.json",
+    "research/experiments/EXP-GRAPH-35155716123/freeze.json",
+    "research/experiments/EXP-GRAPH-35155716123/result.json",
+    "research/experiments/EXP-GRAPH-35155716123/audit.json",
+    "research/experiments/EXP-GRAPH-35155716123/report.md",
+    "research/experiments/EXP-GRAPH-35155716123/provenance.json",
+    "research/experiments/EXP-GRAPH-35155716123/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35154724244/handoff.json"
+  ],
+  "recommended_action": "Design a graph lane experiment that measures session-level behavioral signals via real HTTP: start a Flask server with PyJWT HS256 signing and real session cookies, issue real tokens via jwt.encode, validate via jwt.decode against current signing key, derive behavioral signals from actual HTTP 401/403 responses and Set-Cookie inspection (not analytical branching). Fix C4 orthogonality by computing Pearson r on conditions where both behavioral and structural signals are non-trivially measured (co-occurring drift+noise conditions, or per-sample variation within conditions). Add per-sample variation (token expiry timing jitter, session TTL variation, permission probe ordering) to enable Wilson CIs and per-sample ROC. Add co-occurring drift+noise conditions (auth change + field additions simultaneously). If behavioral signals also fail on real HTTP, the C-FRESHNESS domain has exhausted single-signal-family approaches in deterministic mock and must pivot to real API deployments with DB/cache/CDN stochasticity, production client traffic patterns, or composite multi-signal classifiers on live data."
+}

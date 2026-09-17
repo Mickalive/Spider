@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35154724610",
+  "lane": "product",
+  "github_run_id": "35154724610",
+  "base_sha": "5753f67b8ddb085a62f130b48c74cced1fdf90c4",
+  "execution_sha": null,
+  "commits": {
+    "base": "5753f67b8ddb085a62f130b48c74cced1fdf90c4",
+    "parent_execute": "09554a5dfc598915c4bd28d6fb3983096ca1e5cd",
+    "parent_verdict": "6e420dcccf7de5d47af3da4a8f8cb4dde8f4326",
+    "code_restoration_source": "09554a5dfc598915c4bd28d6fb3983096ca1e5cd"
+  },
+  "datasets": {
+    "api_endpoint": "jsonplaceholder.typicode.com",
+    "api_limits": {
+      "posts": "IDs 1-100 only (101 returns 404)",
+      "users": "IDs 1-10 only (99-101 return 404)",
+      "comments": "postId 1-100 return data, postId 101 returns empty array"
+    },
+    "training_observations": {
+      "fetch_posts": "5 observations (3 GET + 2 PUT) with IDs 1-3",
+      "fetch_users": "3 observations (GET) with IDs 1-3",
+      "fetch_comments": "3 observations (GET) with postId 1-3"
+    },
+    "unseen_test_ids": [99, 100, 101]
+  },
+  "code_paths": {
+    "kernel": {
+      "path": "src/spider/kernel.py",
+      "sha256": "30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e",
+      "restored_from": "09554a5dfc598915c4bd28d6fb3983096ca1e5cd",
+      "note": "distill_parameterized and Fix1+Fix2+Fix3 code restored from parent execute commit; was removed at verdict commit 6e4206dc"
+    },
+    "models": {
+      "path": "src/spider/models.py",
+      "sha256": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d4b",
+      "restored_from": "09554a5dfc598915c4bd28d6fb3983096ca1e5cd",
+      "note": "slot_prefixes field restored from parent execute commit"
+    },
+    "tests": {
+      "path": "tests/test_kernel.py",
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6"
+    },
+    "experiment_script": {
+      "path": "research/experiments/EXP-PRODUCT-35154724610/run_experiment.py",
+      "sha256": "488527150ecb8c4b2cc4ebe9068a1d7f91b4bd12c66f3b2ce8cb9a8abba1a8a5"
+    }
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-PRODUCT-35154724610/result.json",
+      "sha256": "8317dd3fe76ae668d224d77588c795ef520c3e7315539402d09df461ec211b91"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-PRODUCT-35154724610/report.md",
+      "sha256": "ffed77ce40f4ef8e649f80ed45590f34d31837390b2cd4a3bae693e6d105a159"
+    },
+    "experiment_results": {
+      "path": "research/experiments/EXP-PRODUCT-35154724610/experiment_results.json",
+      "sha256": null
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "network_access": true,
+    "external_dependencies": ["jsonplaceholder.typicode.com (HTTP GET)"]
+  },
+  "execution_commands": [
+    "python3 research/experiments/EXP-PRODUCT-35154724610/run_experiment.py",
+    "PYTHONPATH=src python3 -m unittest tests.test_kernel -v"
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35132898840",
+    "path": "research/experiments/EXP-PRODUCT-35132898840/",
+    "handoff_sha256": "192df394422a2ef2ff38ccfa3acbd833ebcc014dc623080072ecf3eef8926a7b"
+  },
+  "frozen_inputs": {
+    "request.json": "8a18ac1f8ecc2aeed9ae710e5bc80de5c9445e2345a2a99ef546fe29427d3580",
+    "spec.json": "183d2325345d02725866efd4e111846c615ff15b0acc120735e908ba99d3328d",
+    "prereg.md": "c719ac9ebe00680b7465f57cdc7b3381370b73b87da3db664a7afc0b1b63d176",
+    "freeze.json": null
+  }
+}
