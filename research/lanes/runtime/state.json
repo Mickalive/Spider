@@ -8,7 +8,7 @@
   "next_question": "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in this synthetic proxy? This remains the critical blocker for C-MEAS-VALID product readiness.",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-16T21:52:40.192008+00:00",
+  "updated_at": "2026-09-17T00:25:47.357388+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "21072df7f229e956582ead68a482782adc0f759fca8771071218d63a7731ad36",
   "same_failure_count": 0,
