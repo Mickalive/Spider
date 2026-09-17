@@ -1,0 +1,11 @@
+{
+  "stage": "execute",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid result outcome: BLOCKING_REDUCED",
+  "retryable": false,
+  "fingerprint": "0a5907fa53776ef857bf670a",
+  "recorded_at": "2026-09-17T00:37:40.291853+00:00",
+  "github_run_id": "35166505835",
+  "github_run_attempt": "1",
+  "control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+}
