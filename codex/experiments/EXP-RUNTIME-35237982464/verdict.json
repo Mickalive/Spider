@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35237982464",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under quality variation), (5) B-RANDOM = 0.0 for all conditions, (6) C_QUALITY_VARIATION_EXISTS passes with all 5 quality levels observed per condition. Audit PASS confirms all recomputed metrics match producer. Decompression-normalization survives non-deterministic brotli quality variation on localhost. The claim ceiling advances from 'deterministic localhost compression' to 'non-deterministic brotli quality variation on localhost proxy'. Real CDN infrastructure remains the sole untested blocker for C-MEAS-VALID decompression-normalization product readiness.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at 0.5 under uniform random brotli quality variation {4,5,6,7,8} on localhost. All 6 frozen decision conditions pass. Audit PASS confirms recomputed metrics match producer. Claim ceiling bounded to: localhost mock OAuth2 server with CDN quality proxy (uniform random brotli quality 4-8 per request, independent RNG seed 7919), synthetic padded JSON/HTML/XML at nominal 1KB/10KB/100KB (effective compressed ~70 bytes JSON/XML, ~178 bytes HTML), 4 auth states with 3-way error collapse (structural ceiling 0.5), no Accept-Encoding negotiation, no chunked encoding, no caching, N=20 per state per type per size, seed 44, Python 3.12.14, brotli 1.2.0. Does NOT establish real CDN (Cloudflare/Fastly/Akamai) survival, natural content, binary types, or production latency/CPU. Real CDN infrastructure remains the critical untested blocker."
+    }
+  ],
+  "product_action": "No product promotion. Decompression-normalization is validated at localhost non-deterministic quality level, not at real CDN. Product team should plan CDN deployment test but must not assume production readiness.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does decompression-normalization (SHA256 on decompressed body + status) survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism — maintaining body-only discrimination >= 0.3 for JSON/HTML/XML at 1KB/10KB/100KB under real CDN compression?",
+  "reason": "The frozen decision rule passes all 6 conditions with audit PASS. Decompression-normalization is confirmed invariant to brotli quality level by construction: different quality levels produce different compressed bytes (compressed discrimination 0.16-0.35) but identical decompressed content (decompressed discrimination 0.5). The mechanism operates on the decompressed logical body, which is quality-invariant. This advances the claim ceiling one step toward product readiness: from deterministic localhost compression (parent EXP-RUNTIME-35209111193) to non-deterministic brotli quality variation on localhost. The remaining blocker is real CDN infrastructure, which introduces qualitatively different non-determinism (edge selection, caching, chunked encoding, Accept-Encoding negotiation) not present in localhost testing. The bounded information gain from this experiment is limited: the outcome was predictable from the brotli lossless compression specification, and the audit correctly identifies that the experiment validates library correctness and proxy wiring rather than discovering a contingent CDN effect. However, the experiment is necessary to close the gap between 'we expect quality variation not to matter' and 'we have measured quality variation not mattering' before investing in real CDN infrastructure.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35237982464/spec.json — frozen question, hypothesis, falsifier, baselines, decision_rule, measurement_validity",
+    "research/experiments/EXP-RUNTIME-35237982464/prereg.md — inherited state, design 5.1-5.7, decision rules 6.1-6.3, validity threats 8, scope boundaries 9",
+    "research/experiments/EXP-RUNTIME-35237982464/freeze.json — sha256 1f0d8e5a..., d730..., f6aede... confirms frozen inputs",
+    "research/experiments/EXP-RUNTIME-35237982464/result.json — 36 metric cells, decompressed 0.5 vs compressed 0.16-0.35, B-RANDOM 0.0, hash variation all_same=true, quality 5 levels observed",
+    "research/experiments/EXP-RUNTIME-35237982464/audit.json — PASS, producer_claim_supported=true, claim_ceiling, recomputed_metrics match, 6 validity_findings (info/low/medium, no measurement invalidity)",
+    "research/experiments/EXP-RUNTIME-35237982464/raw_observations.json (sha c9dcda88...) — 2880 HTTP observations with Content-Encoding br, X-Brotli-Quality 4-8, decompressed_hash stable 1 unique per state",
+    "research/experiments/EXP-RUNTIME-35237982464/run_experiment.py (sha 8d600704...) — CDNQualityProxy random quality per request, decompression path exercised",
+    "research/experiments/EXP-RUNTIME-35237982464/provenance.json — Python 3.12.14, brotli 1.2.0, frozen input hashes, reproduction instructions",
+    "research/experiments/EXP-RUNTIME-35209111193/handoff.json — parent SURVIVES_CURRENT_TEST, established deterministic baseline 0.5, next_question real CDN"
+  ]
+}
