@@ -8,7 +8,7 @@
   "next_question": "Can a redesigned co-occurring drift+noise measurement (where structural signals remain observable despite auth failure, e.g., via independent unauthenticated structural probe or baseline-schema comparison) demonstrate Pearson r < 0.3 between behavioral and structural signals on genuinely co-occurring conditions?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-17T06:42:49.385078+00:00",
+  "updated_at": "2026-09-17T10:10:56.613840+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "d3160d49adc24043ee606bd272b13622737d0efb926e5c2b62a718cf0d113841",
   "same_failure_count": 0,
