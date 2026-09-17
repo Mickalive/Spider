@@ -1,0 +1,10 @@
+{
+  "outcome": "MIXED",
+  "status": "COMPLETE",
+  "c1_pass": true,
+  "c2_pass": true,
+  "c3_pass": true,
+  "c4_pass": false,
+  "c5_pass": true,
+  "overall_pass": false
+}
