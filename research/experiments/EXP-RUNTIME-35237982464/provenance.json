@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35237982464",
+  "lane": "runtime",
+  "github_run_id": "35237982464",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "requests_version": "2.34.2",
+    "pyjwt_version": "2.14.0",
+    "numpy_version": "2.5.3"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/request.json",
+      "sha256": "f6aede524143810f89fb220fd5ec47c784b6fb3aa98284d4b0ec3df4f337a41f"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/spec.json",
+      "sha256": "d730947e2af89d44e9968dc60a1a35b97d3f3958e44e128ed11a3799e683a58e"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/prereg.md",
+      "sha256": "1f0d8e5a863c6e7d205f4001e3e4d99a3d29800492a77902dc50bab9d405cdd7"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/freeze.json",
+      "sha256": "f6475a5c91dc5467ed3fb8903d2e2cb8076ba960441abfbae2719da9dba0ac95"
+    }
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/result.json",
+      "sha256": "080e35343ce4ba3627675eb39d815b485d8277122435a6566795b98dd0fac9e3",
+      "role": "derived"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/report.md",
+      "role": "derived"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/provenance.json",
+      "role": "derived"
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/run_experiment.py",
+      "sha256": "8d600704c8554367addee298fc0b258c22d81ffb217c9f127028fad721b6df5a",
+      "role": "code"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-35237982464/raw_observations.json",
+      "sha256": "c9dcda8863a1406307393df45afb431c80f0ab6659def8efb3e608b172881487",
+      "role": "raw"
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35209111193",
+    "handoff_path": "research/experiments/EXP-RUNTIME-35209111193/handoff.json",
+    "handoff_sha256": "40cd703b3780e708d91ff1f45947559664082013b134548c2d1cdb288074f636"
+  },
+  "reproduction_instructions": {
+    "description": "Run the experiment script to reproduce all measurements",
+    "command": "cd research/experiments/EXP-RUNTIME-35237982464 && python3 run_experiment.py",
+    "dependencies": "pip install brotli requests pyjwt numpy",
+    "estimated_duration": "8-10 minutes",
+    "notes": "Experiment uses localhost mock server + CDN quality proxy. All ports are unique per content type x size combination. Quality RNG uses independent seed (SEED+7919) from request ordering (SEED=44)."
+  },
+  "architecture": {
+    "description": "Two-layer architecture: Mock OAuth2 Server (uncompressed) -> CDN Quality Proxy (random brotli quality) -> Client",
+    "mock_server": "Returns UNCOMPRESSED bodies per auth state. No compression applied.",
+    "cdn_proxy": "Intercepts responses, re-compresses with random brotli quality from {4,5,6,7,8} per request. Independent RNG for quality selection.",
+    "client": "Python requests library. SHA256 decompression-normalization applied after decoding.",
+    "quality_variation": "Uniform random from {4,5,6,7,8} per request, independent of auth state, content type, and payload size."
+  },
+  "key_findings": [
+    "Decompressed body-only discrimination = 0.5000 across all 9 content-type x size combinations under non-deterministic brotli quality",
+    "All 5 quality levels {4,5,6,7,8} observed across all conditions, confirming CDN proxy quality variation is active",
+    "Decompressed hashes remain perfectly stable (1 unique per state, all_same=true) despite quality variation",
+    "Compressed-only discrimination is lower (0.16-0.35 vs 0.50 decompressed), confirming decompression is necessary for quality-invariance",
+    "All 6 frozen decision-rule conditions pass",
+    "B-RANDOM = 0.0000 across all conditions (null control passes)",
+    "Decompression latency: 0.02ms at 1KB to 0.25ms at 100KB (sub-millisecond)"
+  ]
+}
