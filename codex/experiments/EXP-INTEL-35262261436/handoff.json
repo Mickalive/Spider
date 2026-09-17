@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35262261436",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 — and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "why_next": "The corrected canonical analysis definitively resolves the parent MEASUREMENT_INVALID: the FALSIFIED conclusion (density ordering is definition-dependent) is a genuine scientific finding, not an implementation artifact. However, results are bounded to truncated-first-20 locatable sample (7 tasks, 1 Magento site, 3 definitions). Full-DOM enumeration is the critical next step because: (1) the truncated proxy may not represent full-page density distributions; (2) the per-task weighted recipe's C2 TRUE reversal (established in parent) may also hold on full-DOM, making recipe ambiguity the central unresolved issue; (3) the substrate cap at measure_fullpage_yield.py:89 is the sole blocking dependency. Once removed, the canonical script can be re-run on full-DOM data with both recipes to definitively settle whether the FALSIFIED conclusion generalizes.",
+  "carry_forward": {
+    "established": [
+      "FALSIFIED conclusion validated under canonical per-iteration p=0.5 recipe on truncated-first-20: C2 = FALSE (observed 0.3 < null 0.5273), density ordering is LESS stable than random role subsets. Reproduced across all 10 frozen seeds (SD=0.0103), audit PASS, all metrics recomputed match producer (result.json M3, M9, audit.json recomputed_metrics.M3, M9)",
+      "Parent MEASUREMENT_INVALID resolved: implementation bugs (unsorted set iteration + estimator mismatch) were the sole cause. Corrected sorted(raw_roles) + direct within-iteration estimator reproduce parent null mean within 0.0002 of stored 0.5275 (result.json M1, M2, audit.json V1)",
+      "Per-iteration p=0.5 recipe adopted as canonical with principled justification (prereg §4): uniform application across definitions, controls for role preferences, tests the right question for C-MEAS-VALID. Per-task weighted recipe tests a different scientific question (task-level density variability) and is not canonical for this claim",
+      "Per-task weighted recipe C2 TRUE reversal remains established from parent (EXP-INTEL-35209112878): null ~0.28 < observed 0.3, ordering MORE stable than random. This reversal is robust (SD=0.0117, cross-RNG diff 0.0024) but was NOT retested in this experiment — only the canonical recipe was tested",
+      "Page-type orderings reproduced exactly: DEF-FULL-MAP cart>product_listing>detail, DEF-FORM-ONLY product_listing>cart>detail (result.json M6, M7). ISOLATED-A-LINK matches DEF-FULL-MAP exactly (menuitem/tab counts zero in truncated sample)",
+      "Density metric ordering is definition-dependent and unreliable for page-type discrimination under the canonical recipe: definitions disagree MORE (null 0.5273) than random role subsets, meaning the ordering is not a stable property of the page types"
+    ],
+    "rejected": [
+      "Per-task weighted sampling is NOT the canonical null recipe for C-MEAS-VALID — per-iteration p=0.5 is canonically justified (prereg §4) and produces the scientifically informative result (definitions disagree more than random)",
+      "F3 threshold of 0.001 is NOT achievable across Python versions — relaxed to 0.02 in this experiment; root cause was unsorted set iteration, not recipe sensitivity (audit V1, parent handoff)",
+      "Parent MEASUREMENT_INVALID verdict was a design failure, not scientific falsification — all implementation bugs are now fixed and the scientific conclusion is validated within scope",
+      "The original FALSIFIED_IN_SETTING from EXP-INTEL-35209112878 was overclaimed as a robustness failure — audit identified F3 as measurement-threshold artifact and NC1 as logically incoherent"
+    ],
+    "unknown": [
+      "Whether C2 FALSE holds on full-DOM enumeration: current results bounded to truncated-first-20 locatable sample (7 tasks, 1 site). Full-DOM re-run blocked by substrate cap",
+      "Whether per-task weighted recipe C2 TRUE reversal also holds on full-DOM — if both recipes survive on full-DOM, recipe ambiguity becomes the central scientific issue for C-MEAS-VALID",
+      "Cross-site generalization: all data from one Magento site with zero menuitem/tab counts. Role additivity untestable in this sample",
+      "5-definition family agreement: only 3 of 5 definitions independently verified. 5-definition pairwise agreement (0.3 from parent) not re-measured on same 3-definition basis",
+      "Cart within-type variance (n=1 distinct page) and deduplication effect on density means for full-DOM"
+    ],
+    "do_not_assume": [
+      "Do not assume the FALSIFIED conclusion generalizes to full-DOM — truncated-first-20 is a non-representative slice (7 tasks, 1 site, cart n=1, 3 definitions)",
+      "Do not assume the per-iteration recipe is universally canonical beyond this experiment's scope — the justification is principled but not empirically validated on non-truncated data",
+      "Do not assume the density metric is entirely useless — it means ordering-based discrimination is definition-sensitive, not that density values themselves are uninformative",
+      "Do not assume recipe choice is a nuisance parameter — it is a MATERIAL determinant of the scientific conclusion (flips C2 direction), not an implementation detail",
+      "Do not assume the observed agreement metric (0.333 from 3 definitions) is directly comparable to parent's 0.3 (from 5 definitions) — they are different metrics on different definition sets",
+      "Do not assume C-MEAS-VALID status changed from this experiment — it remains EXPERIMENTAL; this experiment scoped a finding within the density metric sub-problem, not the broader measurement validity claim"
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Runtime lane must remove locatableSample cap (if locatableSample.length < 20) at measure_fullpage_yield.py:89 to provide true full DOM enumeration for density metric re-run",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Full-DOM raw evidence from the same Magento site with canonical per-iteration recipe and both recipes (per-iteration + per-task weighted) to test whether C2 direction holds and recipe reversal persists at scale",
+      "blocking": true
+    },
+    {
+      "type": "design",
+      "description": "Frozen spec for full-DOM re-run: must specify both recipes (canonical per-iteration and per-task weighted) as co-primary analyses to settle recipe ambiguity if both survive on full-DOM",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35262261436/verdict.json (SURVIVES_CURRENT_TEST, claim_updates C-MEAS-VALID EXPERIMENTAL, next_question)",
+    "research/experiments/EXP-INTEL-35262261436/result.json (metrics M1-M9, controls PC1/PC2/NC1 PASS, F1/F2/F3 not triggered, all 10 seeds C2 FALSE)",
+    "research/experiments/EXP-INTEL-35262261436/audit.json (PASS, claim_ceiling bounded to truncated-first-20, V5 canonical recipe assumption material, recomputed_metrics all match)",
+    "research/experiments/EXP-INTEL-35262261436/spec.json (frozen decision_rule, canonical recipe in prereg §4, measurement_validity fixes FIX1-FIX3)",
+    "research/experiments/EXP-INTEL-35262261436/prereg.md (canonical recipe justification §4, decision rule §8, validity threats §11)",
+    "research/experiments/EXP-INTEL-35209112878/handoff.json (recipe reversal established, NC1 incoherence, substrate blocker, canonical recipe unresolved)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (truncated-first-20 raw data source, sha da30bd05)"
+  ],
+  "recommended_action": "Route to runtime lane to remove locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89). Once unblocked, re-run the canonical analysis script on full-DOM data with both recipes (per-iteration canonical + per-task weighted) as co-primary analyses. If C2 FALSE holds on full-DOM under the canonical recipe AND the per-task weighted recipe's C2 TRUE reversal also persists, the recipe ambiguity becomes the central scientific issue requiring a principled resolution (possibly a third recipe or a meta-analytic approach). If only one recipe survives on full-DOM, that recipe's conclusion stands. If neither survives, the density metric program should pivot to definition-invariant alternatives."
+}

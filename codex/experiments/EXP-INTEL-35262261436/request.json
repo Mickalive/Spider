@@ -1,0 +1,20 @@
+{
+  "base_sha": "084bf58f0a07ffcf476418aae33a030c06958c22",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T19:00:39.186719+00:00",
+  "experiment_id": "EXP-INTEL-35262261436",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state.",
+  "inherited_next_question": "Which null-recipe is the scientifically canonical one: per-iteration p=0.5 inclusion (tests definition-level role relevance) or per-task weighted sampling (tests task-level density variability), and does the C2 reversal (recipe flips conclusion from FALSIFIED to SURVIVES) hold on full-DOM data after the runtime lane removes the locatableSample cap?",
+  "lane": "intel",
+  "origin_github_run_id": "35262261436",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35209112878",
+    "path": "research/experiments/EXP-INTEL-35209112878/handoff.json",
+    "sha256": "c9d064f3dac7b40d08bc95d5c035bb878d43f577558a92c312888b30da965965"
+  },
+  "reason": "pulse",
+  "request_hash": "b05d00562794d7263efcb5b743c11c409ebe6bc99b066bbcaddf52b3744e11a4",
+  "request_id": "9c924516096756bf2f0a01e3",
+  "schema_version": 1
+}
