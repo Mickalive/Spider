@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35262262156",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "long_value_pattern_count": 5,
+    "positive_control_count": 1,
+    "null_control_count": 1,
+    "total_patterns": 7,
+    "total_observations": 21,
+    "long_value_token_measurements": {
+      "P1_UUID": {
+        "value_length": 36,
+        "literal_tokens": 36,
+        "parameterized_tokens": 20,
+        "savings_tokens": 16,
+        "savings_pct": 44.44
+      },
+      "P2_SLUG": {
+        "value_length": 28,
+        "literal_tokens": 21,
+        "parameterized_tokens": 21,
+        "savings_tokens": 0,
+        "savings_pct": 0.0
+      },
+      "P3_DEEPPATH": {
+        "value_length": 42,
+        "literal_tokens": 26,
+        "parameterized_tokens": 29,
+        "savings_tokens": -3,
+        "savings_pct": -11.54
+      },
+      "P4_BEARER": {
+        "value_length": 64,
+        "literal_tokens": 67,
+        "parameterized_tokens": 29,
+        "savings_tokens": 38,
+        "savings_pct": 56.72
+      },
+      "P5_MULTIPARAM": {
+        "value_length": 46,
+        "literal_tokens": 31,
+        "parameterized_tokens": 34,
+        "savings_tokens": -3,
+        "savings_pct": -9.68
+      }
+    },
+    "mean_savings_pct_long_value": 15.99,
+    "patterns_with_positive_savings": 2,
+    "patterns_with_negative_savings": 2,
+    "patterns_with_zero_savings": 1,
+    "savings_correlation_r": 0.3909,
+    "positive_control": {
+      "pattern_id": "PC_SHORT",
+      "value_length": 2,
+      "literal_tokens": 19,
+      "parameterized_tokens": 20,
+      "savings_pct": -5.26,
+      "confirms_parent": true
+    },
+    "null_control": {
+      "pattern_id": "NC_MID",
+      "value_length": 6,
+      "literal_tokens": 21,
+      "parameterized_tokens": 21,
+      "savings_pct": 0.0,
+      "direction": "ambiguous"
+    }
+  },
+  "controls": {
+    "C1_resolve_executable": {
+      "expected": "EXECUTABLE for all 5 long-value parameterized mechanisms with correct params",
+      "observed": "5/5 EXECUTABLE",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:resolve_bind_tests"
+    },
+    "C2_resolve_unknown_no_params": {
+      "expected": "UNKNOWN for all 5 long-value parameterized mechanisms when params missing",
+      "observed": "5/5 UNKNOWN",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:resolve_bind_tests"
+    },
+    "C3_bind_correct": {
+      "expected": "Correct bound_action for all 5 long-value patterns",
+      "observed": "5/5 correct URL",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:resolve_bind_tests"
+    },
+    "C4_param_fewer_tokens": {
+      "expected": "Parameterized fewer tokens for >= 3/5 long-value patterns",
+      "observed": "2/5 patterns with positive savings (P1_UUID, P4_BEARER)",
+      "pass": false,
+      "threshold": ">=3/5",
+      "evidence_ref": "raw_evidence.json:token_measurements"
+    },
+    "C5_mean_savings": {
+      "expected": "Mean savings across 5 long-value >= 10%",
+      "observed": "15.99%",
+      "pass": true,
+      "threshold": ">=10%",
+      "evidence_ref": "raw_evidence.json:token_measurements"
+    },
+    "C6_savings_increase_with_length": {
+      "expected": "Savings increase with concrete value length (r >= 0.7)",
+      "observed": "r = 0.3909",
+      "pass": false,
+      "threshold": "r >= 0.7",
+      "evidence_ref": "raw_evidence.json:token_measurements"
+    },
+    "C7_kernel_regression": {
+      "expected": "All 3 existing kernel tests still pass",
+      "observed": "3/3 passed",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:regression"
+    },
+    "C8_positive_control": {
+      "expected": "Short-value pattern shows negative savings (parameterized uses MORE tokens)",
+      "observed": "PC_SHORT: param=20 > literal=19, savings=-5.26%",
+      "pass": true,
+      "replicates_parent": true,
+      "evidence_ref": "raw_evidence.json:token_measurements"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json",
+      "sha256": "7f788cd7a2b654311855f2f4402ec7e5661227a1efaa99fdcb9e529399e4362f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "C1-C3 pass: resolve() and _bind() pipeline works correctly for all 5 long-value patterns with UUIDs, slugs, deep paths, bearer tokens, and multi-param queries",
+    "C4 FAIL: Only 2/5 long-value patterns (P1_UUID, P4_BEARER) show parameterized using fewer tokens than literal. P3_DEEPPATH and P5_MULTIPARAM show parameterized using MORE tokens despite long concrete values. P2_SLUG is neutral (equal tokens).",
+    "C5 passes: Mean savings 15.99% across 5 long-value patterns exceeds 10% threshold, but this is driven by the two large savings patterns (UUID 44.44%, bearer 56.72%) masking the two negative patterns",
+    "C6 FAIL: Savings do NOT monotonically increase with value length. P5_MULTIPARAM (46 chars) shows -9.68% savings while P1_UUID (36 chars) shows +44.44%. Correlation r=0.3909 is well below 0.7 threshold. The relationship is non-monotonic and depends on template overhead structure, not just value length.",
+    "Root cause of C4/C6 failure: Template syntax overhead (e.g., ${orgId}, ${projectId}, ${category}, ${minPrice}, ${maxPrice}) adds tokens proportional to slot count and slot name length. Multi-slot templates with short slot names still incur fixed overhead per slot. Deep path patterns have 2 slots, multi-param have 3 slots; the per-slot overhead (varname + 3 chars ${} wrapper) is not offset by removing short numeric IDs from the URL.",
+    "C7 passes: No kernel regression; all 3 existing tests pass",
+    "C8 passes: Positive control confirms parent's short-value penalty: parameterized uses MORE tokens for 2-char numeric values (-5.26% savings), replicating the parent result",
+    "The structural breakeven point hypothesized at ~8 chars is not a clean threshold. Token savings depend on: (a) concrete value length, (b) number of parameter slots, (c) slot name length, (d) URL path structure around the values. UUIDs and bearer tokens (single-slot, long value) show strong savings; multi-slot patterns (even with long total value) show negative savings."
+  ],
+  "validity_notes": [
+    "Token measurement uses tiktoken cl100k_base encoding of action_template JSON serialization (method + url fields, sort_keys=True) matching parent methodology",
+    "No network access, no browser automation, no model calls -- pure Python token measurement",
+    "Both literal and parameterized mechanisms constructed from same training data structure",
+    "resolve() and _bind() validated on long-value patterns confirming pipeline works with non-numeric values",
+    "Single test environment: Python 3.12, tiktoken 0.14.0",
+    "Bearer token pattern includes nested headers JSON which adds additional tokens to both literal and parameterized representations",
+    "The parent experiment's short-value result (-6.4% mean) is partially replicated: PC_SHORT shows -5.26% for a single 2-char pattern",
+    "The P2_SLUG result (0% savings) is at the breakeven point where template overhead exactly offsets value savings"
+  ],
+  "unresolved": [
+    "Whether the 2/5 positive savings patterns (UUID, bearer) are sufficient to justify a mixed-value economic model where only single-slot long-value patterns use parameterized representation",
+    "Whether amortized deduplication savings across tasks (C-PRODUCT-ECON) offset per-mechanism token penalties for multi-slot patterns",
+    "Whether slot name optimization (shorter variable names, fewer slots) could bring multi-slot patterns above breakeven",
+    "Whether different LLM tokenizers (not tiktoken cl100k_base) would show different savings patterns"
+  ]
+}

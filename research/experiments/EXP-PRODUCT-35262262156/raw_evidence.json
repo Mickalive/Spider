@@ -1,0 +1,294 @@
+{
+  "regression": {
+    "total": 3,
+    "passed": 3,
+    "failures": 0,
+    "errors": 0,
+    "failure_details": []
+  },
+  "token_measurements": [
+    {
+      "pattern_id": "P1_UUID",
+      "pattern_name": "UUID value (36 chars)",
+      "category": "long_value",
+      "num_params": 1,
+      "value_length": 36,
+      "literal_tokens": 36,
+      "parameterized_tokens": 20,
+      "savings_tokens": 16,
+      "savings_pct": 44.44,
+      "literal_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/users/550e8400-e29b-41d4-a716-446655440000\"}",
+      "parameterized_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/users/${userId}\"}"
+    },
+    {
+      "pattern_id": "P2_SLUG",
+      "pattern_name": "Slug value (28 chars)",
+      "category": "long_value",
+      "num_params": 1,
+      "value_length": 28,
+      "literal_tokens": 21,
+      "parameterized_tokens": 21,
+      "savings_tokens": 0,
+      "savings_pct": 0.0,
+      "literal_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/pages/user-profile-settings-page\"}",
+      "parameterized_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/pages/${pageSlug}\"}"
+    },
+    {
+      "pattern_id": "P3_DEEPPATH",
+      "pattern_name": "Deep API path (42 chars total)",
+      "category": "long_value",
+      "num_params": 2,
+      "value_length": 42,
+      "literal_tokens": 26,
+      "parameterized_tokens": 29,
+      "savings_tokens": -3,
+      "savings_pct": -11.54,
+      "literal_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/v2/api/organizations/100/projects/200\"}",
+      "parameterized_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/v2/api/organizations/${orgId}/projects/${projectId}\"}"
+    },
+    {
+      "pattern_id": "P4_BEARER",
+      "pattern_name": "Bearer token (64 chars)",
+      "category": "long_value",
+      "num_params": 1,
+      "value_length": 64,
+      "literal_tokens": 67,
+      "parameterized_tokens": 29,
+      "savings_tokens": 38,
+      "savings_pct": 56.72,
+      "literal_json": "{\"headers\": {\"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkw\"}, \"method\": \"GET\", \"url\": \"https://api.example.com/me\"}",
+      "parameterized_json": "{\"headers\": {\"Authorization\": \"Bearer ${token}\"}, \"method\": \"GET\", \"url\": \"https://api.example.com/me\"}"
+    },
+    {
+      "pattern_id": "P5_MULTIPARAM",
+      "pattern_name": "Multi-param query (46 chars)",
+      "category": "long_value",
+      "num_params": 3,
+      "value_length": 46,
+      "literal_tokens": 31,
+      "parameterized_tokens": 34,
+      "savings_tokens": -3,
+      "savings_pct": -9.68,
+      "literal_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/search?category=electronics&minPrice=100&maxPrice=500\"}",
+      "parameterized_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/search?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}\"}"
+    },
+    {
+      "pattern_id": "PC_SHORT",
+      "pattern_name": "Short numeric (2 chars)",
+      "category": "positive_control",
+      "num_params": 1,
+      "value_length": 2,
+      "literal_tokens": 19,
+      "parameterized_tokens": 20,
+      "savings_tokens": -1,
+      "savings_pct": -5.26,
+      "literal_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/items/42\"}",
+      "parameterized_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/items/${id}\"}"
+    },
+    {
+      "pattern_id": "NC_MID",
+      "pattern_name": "Mid alphanumeric (6 chars)",
+      "category": "null_control",
+      "num_params": 1,
+      "value_length": 6,
+      "literal_tokens": 21,
+      "parameterized_tokens": 21,
+      "savings_tokens": 0,
+      "savings_pct": 0.0,
+      "literal_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/sessions/abc123\"}",
+      "parameterized_json": "{\"method\": \"GET\", \"url\": \"https://api.example.com/sessions/${sessionId}\"}"
+    }
+  ],
+  "resolve_bind_tests": [
+    {
+      "pattern_id": "P1_UUID",
+      "pattern_name": "UUID value (36 chars)",
+      "category": "long_value",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/users/550e8400-e29b-41d4-a716-446655440000",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/users/550e8400-e29b-41d4-a716-446655440000",
+      "expected_url": "https://api.example.com/users/550e8400-e29b-41d4-a716-446655440000",
+      "test_params": {
+        "userId": "550e8400-e29b-41d4-a716-446655440000"
+      },
+      "slots": [
+        "userId"
+      ]
+    },
+    {
+      "pattern_id": "P2_SLUG",
+      "pattern_name": "Slug value (28 chars)",
+      "category": "long_value",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/pages/user-profile-settings-page",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/pages/user-profile-settings-page",
+      "expected_url": "https://api.example.com/pages/user-profile-settings-page",
+      "test_params": {
+        "pageSlug": "user-profile-settings-page"
+      },
+      "slots": [
+        "pageSlug"
+      ]
+    },
+    {
+      "pattern_id": "P3_DEEPPATH",
+      "pattern_name": "Deep API path (42 chars total)",
+      "category": "long_value",
+      "num_params": 2,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/v2/api/organizations/12345/projects/67890",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/v2/api/organizations/12345/projects/67890",
+      "expected_url": "https://api.example.com/v2/api/organizations/12345/projects/67890",
+      "test_params": {
+        "orgId": "12345",
+        "projectId": "67890"
+      },
+      "slots": [
+        "orgId",
+        "projectId"
+      ]
+    },
+    {
+      "pattern_id": "P4_BEARER",
+      "pattern_name": "Bearer token (64 chars)",
+      "category": "long_value",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/me",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/me",
+      "expected_url": "https://api.example.com/me",
+      "test_params": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkw"
+      },
+      "slots": [
+        "token"
+      ]
+    },
+    {
+      "pattern_id": "P5_MULTIPARAM",
+      "pattern_name": "Multi-param query (46 chars)",
+      "category": "long_value",
+      "num_params": 3,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/search?category=electronics&minPrice=100&maxPrice=500",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/search?category=electronics&minPrice=100&maxPrice=500",
+      "expected_url": "https://api.example.com/search?category=electronics&minPrice=100&maxPrice=500",
+      "test_params": {
+        "category": "electronics",
+        "minPrice": "100",
+        "maxPrice": "500"
+      },
+      "slots": [
+        "category",
+        "minPrice",
+        "maxPrice"
+      ]
+    },
+    {
+      "pattern_id": "PC_SHORT",
+      "pattern_name": "Short numeric (2 chars)",
+      "category": "positive_control",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/items/42",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/items/42",
+      "expected_url": "https://api.example.com/items/42",
+      "test_params": {
+        "id": "42"
+      },
+      "slots": [
+        "id"
+      ]
+    },
+    {
+      "pattern_id": "NC_MID",
+      "pattern_name": "Mid alphanumeric (6 chars)",
+      "category": "null_control",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/sessions/abc123",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/sessions/abc123",
+      "expected_url": "https://api.example.com/sessions/abc123",
+      "test_params": {
+        "sessionId": "abc123"
+      },
+      "slots": [
+        "sessionId"
+      ]
+    }
+  ],
+  "decision_rule": {
+    "C1_resolve_executable": {
+      "pass": true,
+      "count": 5,
+      "total": 5
+    },
+    "C2_resolve_unknown_no_params": {
+      "pass": true,
+      "count": 5,
+      "total": 5
+    },
+    "C3_bind_correct": {
+      "pass": true,
+      "count": 5,
+      "total": 5
+    },
+    "C4_param_fewer_tokens": {
+      "pass": false,
+      "count": 2,
+      "total": 5,
+      "threshold": 3
+    },
+    "C5_mean_savings_pct": {
+      "pass": true,
+      "value": 15.99,
+      "threshold": 10.0
+    },
+    "C6_savings_correlation": {
+      "pass": false,
+      "r": 0.3909,
+      "threshold": 0.7
+    },
+    "C7_kernel_regression": {
+      "pass": true,
+      "passed": 3,
+      "total": 3
+    },
+    "C8_positive_control": {
+      "pass": true,
+      "savings_pct": -5.26
+    },
+    "ALL_pass": false,
+    "verdict": "FALSIFIED-IN-SETTING"
+  }
+}
