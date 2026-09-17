@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35154724610",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the frozen decision rule for real HTTP binding correctness be satisfied by using endpoint-appropriate unseen IDs that actually exist on jsonplaceholder.typicode.com (e.g., posts 90-98, users 5-8, comments postId 5-7), combined with corrected comment body validation and actual tokenizer cost measurement, thereby resolving V1_HTTP_DESIGN_IMPOSSIBLE_IDS and enabling adjudication of whether parameterized mechanisms bind correctly over real HTTP?",
+  "why_next": "This experiment is MEASUREMENT_INVALID due to a frozen test design flaw: unseen IDs 99, 100, 101 do not exist on jsonplaceholder.typicode.com (posts 1-100, users 1-10), making the 9/9 HTTP gate mathematically impossible. However, URL binding accuracy is 1.0000 (9/9) and the literal baseline shows identical failure, confirming the issue is API data limits not binding errors. The smallest next step is a corrected experiment with valid IDs to actually adjudicate real HTTP binding correctness. The parent's V2_BINDING_NOT_HTTP gap remains open because this experiment's measurement was invalidated by the design flaw.",
+  "carry_forward": {
+    "established": [
+      "URL construction correctness 1.0 (9/9) for parameterized mechanisms with Fix1+Fix2+Fix3 on committed code src/spider/kernel.py (sha256=30b741...): distill_parameterized induces 3 GET-only mechanisms (fetch_posts GET template posts/${url}, fetch_users users/${url}, fetch_comments comments?postId=${url}) with slot_prefixes ''/''/'comments?postId=' and confidence 0.9",
+      "distill_parameterized induces correct mechanisms from P1_TRAINING observations (fetch_posts 5 obs GET+PUT shared, fetch_users 3, fetch_comments 3): algorithm correctly handles mixed-method training by excluding method metadata via _METADATA_PATHS",
+      "Fix3 protocol-only rejection confirmed: _is_protocol_only_prefix structural '/' delimiter check rejects scheme+authority-only prefixes (returns None for truly protocol-only URLs)",
+      "Kernel regression tests pass (3/3): test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention — audit rerun PYTHONPATH=src confirms",
+      "N1 null control passes: resource ID 999999 returns 404 or empty array without crashes on all 3 endpoints",
+      "Literal baseline shows identical failure pattern (3/9 or corrected 5/9) confirming API data limits are the failure source, not parameterization",
+      "Token cost heuristic favors parameterized (62.5 vs 110.25 tokens, 43.3% reduction) — heuristic only, not actual tokenization"
+    ],
+    "rejected": [
+      "Protocol-only over-parameterization IS real: unfixed heuristic produces slot_count=1 for protocol-only URLs (Fix3 delta=1 on synthetic PROTOCOL_ONLY)",
+      "Cross-host parameterization IS rejected by Fix2: _validate_prefix_boundary returns False for scheme+authority-only prefixes"
+    ],
+    "unknown": [
+      "Real HTTP binding correctness for valid IDs on jsonplaceholder.typicode.com: maximum achievable http_correct is 5/9 with corrected comment validation (audit V2) because users 99-101 return 404; corrected IDs (posts 90-98, users 5-8, comments postId 5-7) would likely reach 9/9 but are not tested",
+      "Actual token economics for C-PRODUCT-ECON: chars/4 heuristic insufficient; requires tiktoken or model-specific tokenizer plus documented pricing (model, $/1K tokens, date)",
+      "End-to-end amortized cost per successful real-browser task: not measured; requires real-browser test harness with model/network/browser calls against literal/fixed baselines",
+      "Live browser traffic prevalence of protocol-only vs minimal-path URL patterns: curated 52-URL corpus not statistically representative of real traffic",
+      "Method fidelity over real HTTP: PUT/POST not tested; only GET endpoints in this experiment",
+      "B_UNFIXED_PROTOCOL_ONLY necessity quantified: current test conflates Fix2 boundary rejection with Fix3 rejection; need pair where Fix2 passes but Fix3 should reject",
+      "Fix2 limitation: path-embedded version parameters (/v1/data vs /v2/data) fail delimiter-bound check — persists from parent"
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is VALIDATED or PRODUCT_CORE: it remains EXPERIMENTAL at URL-correctness ceiling only; the frozen FALSIFIED outcome is caused by test design flaw not binding failure",
+      "Do not assume HTTP 9/9 success is achievable on jsonplaceholder with IDs 99-101: the API has only 100 posts and 10 users, making the frozen gate mathematically impossible",
+      "Do not assume token cost savings of 43.3% reflects real economics: chars/4 heuristic not actual tokenization; arbitrary arithmetic guaranteed to favor parameterized because literal sums 9 full URLs vs 3 templates",
+      "Do not assume 40% mechanism reduction applies to real task sets: method-excluded counting on 5 synthetic endpoints; method-aware reduction is 20% at boundary",
+      "Do not assume n=3+3 establishes statistical significance: deterministic synthetic data, not generalization",
+      "Do not assume real HTTP binding correctness is established: URL construction 1.0 proves correct template resolution but does not prove HTTP-level success (API data limits prevent 9/9 on frozen IDs)",
+      "Do not assume Fix3 necessity is quantified on live-like traffic: B_UNFIXED test does not demonstrate Fix3 delta on discriminating data where Fix2 passes",
+      "Do not assume B_UNFIXED_PROTOCOL_ONLY baseline demonstrates Fix3 necessity: audit V4_B_UNFIXED_PROTOCOL_ONLY_NOT_DEMONSTRATED finds unfixed_would_produce_slot=False due to Fix2 boundary failure, not Fix3"
+    ]
+  },
+  "dependencies": [
+    "Corrected experiment with endpoint-appropriate unseen IDs (posts 90-98, users 5-8, comments postId 5-7) required before HTTP binding correctness can be adjudicated",
+    "Comment body validation bug (audit V2) must be fixed: isinstance(body_json, dict) check incorrectly rejects non-empty valid comment lists",
+    "Actual tokenizer (tiktoken cl100k_base or model-specific) required for C-PRODUCT-ECON token cost measurement",
+    "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing",
+    "Fix2 path-embedded version limitation documented but not resolved; affects broader URL pattern support"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35154724610/result.json: outcome FALSIFIES, condition_1_url 1.0, condition_1_http 0.333, condition_3 3/9, validity_notes[0] test design flaw",
+    "research/experiments/EXP-PRODUCT-35154724610/audit.json: status MEASUREMENT_INVALID, V1_HTTP_DESIGN_IMPOSSIBLE_IDS (high), V2_COMMENT_BODY_VALIDATION_BUG (medium), V3_TOKEN_COST_NOT_TOKENIZATION (high), V4_B_UNFIXED_NOT_DEMONSTRATED (medium), claim_ceiling URL construction correctness 1.0 survives",
+    "research/experiments/EXP-PRODUCT-35154724610/verdict.json: decision MEASUREMENT_INVALID, claim_updates C-PARAM-INHERIT MEASUREMENT_INVALID C-PRODUCT-ECON HYPOTHESIS",
+    "research/experiments/EXP-PRODUCT-35154724610/report.md: 'FALSIFIED Outcome is a Test Design Flaw', URL accuracy 1.0, literal identical 3/9, recommended corrected IDs",
+    "research/experiments/EXP-PRODUCT-35154724610/provenance.json: api_limits posts 1-100 users 1-10, unseen_ids [99,100,101], kernel sha30b741...",
+    "src/spider/kernel.py sha256=30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e: distill_parameterized, Fix1+Fix2+Fix3 committed code",
+    "research/experiments/EXP-PRODUCT-35132898840/handoff.json: parent carry_forward, V2_BINDING_NOT_HTTP high-severity gap, C-PRODUCT-ECON next_question"
+  ],
+  "recommended_action": "Next product-lane experiment should: (1) Rerun with endpoint-appropriate unseen IDs that exist on jsonplaceholder.typicode.com (posts 90-98, users 5-8, comments postId 5-7) to resolve V1_HTTP_DESIGN_IMPOSSIBLE_IDS; (2) Fix comment body validation bug (audit V2) to accept list-of-dicts for comments endpoint; (3) Replace chars/4 heuristic with actual tiktoken cl100k_base tokenizer plus documented model pricing for C-PRODUCT-ECON; (4) Demonstrate Fix3 necessity on discriminating data where Fix2 passes but Fix3 should reject; (5) Optionally test PUT/POST endpoints to bound method fidelity. Simultaneously: C-PARAM-INHERIT remains EXPERIMENTAL at URL-correctness ceiling; C-PRODUCT-ECON remains HYPOTHESIS; no product promotion."
+}

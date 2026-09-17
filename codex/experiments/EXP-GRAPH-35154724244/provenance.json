@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35154724244",
+  "lane": "graph",
+  "executed_at": "2026-09-16T21:56:35.586036+00:00",
+  "completed_at": "2026-09-16T21:56:35.808107+00:00",
+  "duration_seconds": 0.222,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.11.8",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "git_commit": null,
+    "git_branch": null,
+    "dependencies": {
+      "stdlib_only": true,
+      "external_packages": []
+    }
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-GRAPH-35154724244/request.json",
+      "hash": null
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-GRAPH-35154724244/spec.json",
+      "hash": null
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-GRAPH-35154724244/prereg.md",
+      "hash": null
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-GRAPH-35154724244/freeze.json",
+      "hash": null
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-35137034388",
+    "claim": "C-FRESHNESS",
+    "outcome": "FALSIFIED-IN-SETTING",
+    "relationship": "EXP-GRAPH-35154724244 tests direct schema comparison as alternative to indirect signal families tested in parent"
+  },
+  "execution": {
+    "code_path": "research/graph/freshness_detection/execute_schema_diff.py",
+    "command": "python3 research/graph/freshness_detection/execute_schema_diff.py",
+    "seed": 20260917,
+    "schema_sizes": [10, 20, 30, 50],
+    "samples_per_group": 30,
+    "total_measurements": 1200,
+    "drift_patterns": ["add_field", "remove_field", "change_type", "required_to_optional", "rename_field"],
+    "noise_patterns": ["description_change", "default_value_change", "optional_field_addition", "nested_property_addition", "enum_expansion"],
+    "client_profiles": {
+      "A": {"fields": ["id", "name"], "validation": "none"},
+      "B": {"fields": ["id", "name", "email"], "validation": "type only"},
+      "C": {"fields": ["id", "name", "email", "phone", "status"], "validation": "type+required+enum"}
+    },
+    "schema_diff_weights": {
+      "added_removed": 1.0,
+      "type_change": 0.5,
+      "required_to_optional": 0.3,
+      "enum_change": 0.2
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/experiment_data.json",
+      "sha256": "82ad39707b400af6376534f7cbbe42272ddadb541fb3af6de7c5eb4a3a1e8df4",
+      "role": "raw",
+      "description": "Per-condition raw experiment data including schema diff magnitudes, Jaccard similarities, and validation rates for all 1200 measurements"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json",
+      "sha256": "a585dc0cd07b2ab64ce0950ce067216e4f03a19b8a54d0e7a7617c4f36a34032",
+      "role": "derived",
+      "description": "Aggregated metrics: per-pattern means, discrimination gap, Pearson correlation, type-aware detection rates"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/decision_evaluation.json",
+      "sha256": "a9a9773dda3c37be7d76d4683118d21ea9d3f5c8530154ef442f001865dbb0eb",
+      "role": "derived",
+      "description": "Frozen decision rule evaluation: FALSIFIED-IN-SETTING with 5 violations across C2 and C4 conditions"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/hashes.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "SHA256 hashes of all raw evidence files"
+    },
+    {
+      "path": "research/graph/freshness_detection/execute_schema_diff.py",
+      "sha256": null,
+      "role": "code",
+      "description": "Full experiment implementation: schema generation, diff computation, pattern generators, client validation, analysis"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/result.json",
+      "sha256": null,
+      "role": "result",
+      "description": "Canonical experiment packet with metrics, controls, observations, and unresolved questions"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/report.md",
+      "sha256": null,
+      "role": "report",
+      "description": "Human-readable experiment report with findings, comparison with baselines, and recommendations"
+    }
+  ],
+  "reproduction_notes": [
+    "Experiment is fully deterministic given seed=20260917",
+    "No external dependencies beyond Python stdlib",
+    "All schemas are generated from core fields (id, name, email, phone, status) plus synthetic fields",
+    "Mock server simulation is embedded in validation functions; no HTTP server required",
+    "Runtime is <1 second due to pure computation without network I/O"
+  ]
+}
