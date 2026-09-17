@@ -1,0 +1,132 @@
+{
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "condition_1_url_binding_accuracy": 1.0,
+    "condition_1_http_binding_accuracy": 1.0,
+    "condition_1_total_url_correct": 9,
+    "condition_1_total_http_correct": 9,
+    "condition_1_total_calls": 9,
+    "condition_1_pass": true,
+    "condition_2_n1_all_passed": true,
+    "condition_2_pass": true,
+    "condition_3_b_literal_all_succeed": true,
+    "condition_3_b_literal_total_correct": 9,
+    "condition_3_b_literal_total_calls": 9,
+    "condition_3_pass": true,
+    "condition_4_b_unfixed_fix3_confirmed": false,
+    "condition_4_b_unfixed_would_produce_slot": true,
+    "condition_4_pass": false,
+    "condition_5_kernel_tests_passed": true,
+    "condition_5_kernel_tests_run": 0,
+    "condition_5_pass": true,
+    "condition_6_pass": true,
+    "all_conditions_pass": false,
+    "mechanisms_distilled": 3,
+    "parameterized_mechanisms": [
+      {
+        "mechanism_id": "param-bfec59a07240a12f",
+        "intent": "fetch_posts",
+        "slots": [
+          "url"
+        ],
+        "template": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/posts/${url}"
+        },
+        "slot_prefixes": {
+          "url": ""
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "param-3920ae6a52688013",
+        "intent": "fetch_users",
+        "slots": [
+          "url"
+        ],
+        "template": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/users/${url}"
+        },
+        "slot_prefixes": {
+          "url": ""
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "param-08807ab1b9d22c04",
+        "intent": "fetch_comments",
+        "slots": [
+          "url"
+        ],
+        "template": {
+          "method": "GET",
+          "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+        },
+        "slot_prefixes": {
+          "url": "comments?postId="
+        },
+        "confidence": 0.9
+      }
+    ],
+    "token_cost": {
+      "tokenizer": "tiktoken cl100k_base",
+      "model_name": "gpt-4o-mini",
+      "input_price_per_1m_tokens_usd": 0.15,
+      "output_price_per_1m_tokens_usd": 0.6,
+      "pricing_source": "OpenAI pricing page",
+      "pricing_date": "2026-09-17",
+      "parameterized_total_tokens": 68,
+      "literal_total_tokens": 96,
+      "token_savings": 28,
+      "token_savings_pct": 29.17,
+      "parameterized_cheaper": true,
+      "parameterized_cost_usd": 1.0199999999999999e-05,
+      "literal_cost_usd": 1.44e-05
+    }
+  },
+  "controls": {
+    "P1_REAL_HTTP_BINDING": {
+      "type": "positive_control",
+      "id": "P1_REAL_HTTP_BINDING",
+      "expected": "HTTP binding accuracy >= 1.0 (9/9 correct HTTP executions)",
+      "observed": "url_accuracy=1.0000 (9/9), http_accuracy=1.0000 (9/9)",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_p1_real_http_binding()"
+    },
+    "N1_NONEXISTENT_ENDPOINT": {
+      "type": "null_control",
+      "id": "N1_NONEXISTENT_ENDPOINT",
+      "expected": "All 3 calls return 404/empty without crash",
+      "observed": "all_passed=True",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_n1_nonexistent_endpoint()"
+    },
+    "B_LITERAL_HTTP_EXECUTION": {
+      "type": "baseline",
+      "id": "B_LITERAL_HTTP_EXECUTION",
+      "expected": "All 9 literal HTTP calls succeed with correct status/body",
+      "observed": "all_succeed=True, total=9/9",
+      "passed": true,
+      "evidence_ref": "run_experiment.py test_b_literal_http_execution()"
+    },
+    "B_UNFIXED_PROTOCOL_ONLY": {
+      "type": "baseline",
+      "id": "B_UNFIXED_PROTOCOL_ONLY",
+      "expected": "Unfixed produces slot_count > 0, fixed produces 0 for protocol-only URL",
+      "observed": "fixed_rejects=False, unfixed_would_produce_slot=True",
+      "passed": false,
+      "evidence_ref": "run_experiment.py test_b_unfixed_protocol_only()"
+    },
+    "kernel_regression": {
+      "type": "regression",
+      "id": "kernel_regression",
+      "expected": "All 3 existing kernel tests pass",
+      "observed": "tests_run=0, failures=0, errors=0",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    }
+  }
+}
