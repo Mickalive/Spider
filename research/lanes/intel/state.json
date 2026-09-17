@@ -8,7 +8,7 @@
   "next_question": "After the runtime lane removes the locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89), a frozen spec amendment resolves the C2 verdict mapping to null < observed -> SURVIVES (or equivalently C1 AND NOT C2 -> SURVIVES), the null-model recipe is specified to reproducibility (RNG type, conditioning, role-count mapping, tie handling), and a canonical analysis script is committed at a stable repo path, does full DOM enumeration confirm that the a->link-inclusive page-type ordering changes between truncated and full-DOM, and does the null-model pairwise agreement exceed chance on full-DOM data?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-17T10:29:03.915813+00:00",
+  "updated_at": "2026-09-17T15:06:10.644064+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "2d6841990f57286921184777d179df9ec8de0facb3d855bd95a26edc8044c219",
   "same_failure_count": 1,
