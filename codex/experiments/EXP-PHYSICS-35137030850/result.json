@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35137030850",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "BC_PMI_MTO_K3": 0.225711,
+    "BC_PMI_UNIQ_K3": 0.493481,
+    "BC_PMI_diff_K3": -0.267770,
+    "BC_PMI_MTO_K1": 0.246787,
+    "BC_PMI_UNIQ_K1": 0.565242,
+    "BC_PMI_MTO_K2": 0.241046,
+    "BC_PMI_UNIQ_K2": 0.544347,
+    "perm_p_bonf_MTO_K3": 0.0,
+    "perm_p_bonf_UNIQ_K3": 0.0,
+    "perm_p_bonf_MTO_K1": 0.0,
+    "perm_p_bonf_UNIQ_K1": 0.0,
+    "H_Snext_given_URL_HK3_MTO": 1.533265,
+    "H_Snext_given_URL_HK3_UNIQ": 1.536531,
+    "MTO_unique_response_hashes": 2,
+    "UNIQ_unique_response_hashes": 3,
+    "MTO_max_cardinality_ratio": 0.001,
+    "UNIQ_max_cardinality_ratio": 0.0015,
+    "MTO_n_transitions": 2000,
+    "UNIQ_n_transitions": 2000,
+    "MTO_n_strata_K3": 63,
+    "UNIQ_n_strata_K3": 63,
+    "determinism_accuracy_MTO": 1.0,
+    "determinism_accuracy_UNIQ": 1.0,
+    "determinism_violations_MTO": 0,
+    "determinism_violations_UNIQ": 0,
+    "positive_control_BC_PMI_h0": 0.001926,
+    "positive_control_perm_std_h0": 0.006422,
+    "null_control_raw_shuffled_pmi_mean": 0.051636,
+    "null_control_raw_shuffled_pmi_std": 0.006771,
+    "null_control_bc_shuffled_pmi_mean": 0.0,
+    "null_control_bc_shuffled_pmi_std": 0.006771,
+    "null_control_perm_mean_bias": 0.051636,
+    "elapsed_seconds": 28.2
+  },
+  "controls": {
+    "positive_control_content_shuffled": {
+      "identifier": "positive_control_content_shuffled_h0",
+      "description": "Content-shuffled control on many-to-one condition: each transition's response replaced with content from a random state, preserving many-to-one hash pool but breaking state-content pairing. Evaluated on H>0 strata only.",
+      "expected_behavior": "BC PMI ≈ 0 (response independent of state)",
+      "observed_behavior": "BC PMI = 0.001926, perm_std = 0.006422",
+      "pass": true,
+      "evidence_ref": "raw_result.json:positive_control"
+    },
+    "null_control_shuffled_labels": {
+      "identifier": "null_control_shuffled_labels",
+      "description": "Shuffled response labels within (URL, H_K=3, step) strata on many-to-one condition. Bias-corrected: BC shuffled PMI mean = 0.0, std = 0.006771.",
+      "expected_behavior": "BC shuffled PMI mean ≈ 0",
+      "observed_behavior": "Raw shuffled PMI mean = 0.051636 (finite-sample bias), BC shuffled PMI mean = 0.0 (by construction), BC shuffled PMI std = 0.006771",
+      "pass": true,
+      "evidence_ref": "raw_result.json:null_control"
+    },
+    "determinism_check_MTO": {
+      "identifier": "determinism_check_MTO",
+      "description": "P(Response_hash | FSM_state, session, step) = 1.0 on many-to-one condition",
+      "expected_behavior": "accuracy = 1.0",
+      "observed_behavior": "accuracy = 1.0, 571 groups, 0 violations",
+      "pass": true,
+      "evidence_ref": "raw_result.json:determinism.mto"
+    },
+    "determinism_check_UNIQ": {
+      "identifier": "determinism_check_UNIQ",
+      "description": "P(Response_hash | FSM_state, session, step) = 1.0 on unique-content condition",
+      "expected_behavior": "accuracy = 1.0",
+      "observed_behavior": "accuracy = 1.0, 582 groups, 0 violations",
+      "pass": true,
+      "evidence_ref": "raw_result.json:determinism.uniq"
+    },
+    "ceiling_check": {
+      "identifier": "ceiling_check",
+      "description": "H(S_next | URL, H_K=3) > 0.2 bits on many-to-one condition",
+      "expected_behavior": "H > 0.2 bits",
+      "observed_behavior": "H = 1.5333 bits",
+      "pass": true,
+      "evidence_ref": "raw_result.json:conditional_entropy.mto_K3"
+    },
+    "sample_size_check": {
+      "identifier": "sample_size_check",
+      "description": ">= 500 valid transitions per condition",
+      "expected_behavior": "N >= 500 per condition",
+      "observed_behavior": "MTO: 2000, UNIQ: 2000",
+      "pass": true,
+      "evidence_ref": "raw_result.json:n_trajectories"
+    },
+    "cardinality_check_MTO": {
+      "identifier": "cardinality_check_MTO",
+      "description": "|R| < 0.8 * N per stratum on many-to-one condition at K=3",
+      "expected_behavior": "max_cardinality_ratio < 0.8",
+      "observed_behavior": "max_cardinality_ratio = 0.001, all strata have 2 unique hashes",
+      "pass": true,
+      "evidence_ref": "raw_result.json:pmi_results.mto.3.max_card_ratio"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/raw_result.json",
+      "sha256": "05db670f44c90b59b0cb993c6c2087e1a33adb53acf7255733d5025b096921cc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py",
+      "sha256": "30dffae38c84c8741389d352850e090bdaffe47e5e6f2d551c014e6711a79ab8",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/spec.json",
+      "sha256": "2bbce89bdb72f79cfb2ef27e30d840dcb596d0c770c56ff6b9b8f5a1b07aae9f",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/prereg.md",
+      "sha256": "99ae33775a04cda52bf273a1ec9af445b759ba99f3d7b80d551d02124f1171e6",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35137030850/freeze.json",
+      "sha256": null,
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Many-to-one condition: BC PMI at K=3 = 0.226 bits (p_bonf=0.0). PMI persists even when content does NOT uniquely determine state for 2 of 3 states (S0 and S1 share content hash). This is the critical test for V10 identifiability concern.",
+    "Unique-content condition: BC PMI at K=3 = 0.493 bits (p_bonf=0.0). Replicates parent finding that unique content mapping yields higher PMI.",
+    "Content-state aliasing is a SIGNIFICANT but NOT SOLE source of PMI. The difference (mto - uniq) = -0.268 bits exceeds the -0.1 threshold, meaning many-to-one is substantially worse. However, many-to-one BC PMI = 0.226 > 0.05, so content carries predictive information even when ambiguous.",
+    "Positive control passes: content-shuffled BC PMI = 0.002 ≈ 0 on H>0 strata. The pipeline correctly detects that randomizing state→content pairing eliminates PMI.",
+    "Null control passes: BC shuffled PMI mean = 0.0 (by construction). Raw shuffled PMI mean = 0.052 indicates finite-sample bias of ~0.05 bits, correctly removed by BC correction.",
+    "Determinism check passes on both conditions: P(Response_hash | state, session, step) = 1.0. Content is deterministic per (state, session, step) in both conditions.",
+    "Conditional entropy H(S_next|URL, H_K=3) = 1.533 bits (many-to-one) / 1.537 bits (unique-content). Ceiling is eliminated; stochastic branching FSM creates genuine prediction uncertainty.",
+    "Cardinality: many-to-one has 2 unique response hashes (shared S0/S1 + unique S2) as expected. Unique-content has 3 unique hashes. No cardinality degeneracy.",
+    "Transition probabilities verified: p_hat ≈ 0.7 for left-direction, p_hat ≈ 0.3 for right-direction. Stochastic transitions confirmed.",
+    "Per frozen decision_rule, C3 fails: many-to-one BC PMI (0.226) < unique-content BC PMI (0.493) - 0.1 = 0.393. Verdict = FALSIFIED-IN-SETTING per frozen rule.",
+    "INTERPRETATION (beyond frozen rule): The result is MIXED, not purely negative. PMI>0 with many-to-one mapping demonstrates genuine predictive dynamics beyond content-state aliasing. The 54% reduction in PMI (0.226 vs 0.493) quantifies the contribution of content-state aliasing to the parent's signal. The remaining 0.226 bits represents genuine response-level predictive information."
+  ],
+  "validity_notes": [
+    "The frozen decision_rule's C3 threshold (mto > uniq - 0.1) is very conservative. A difference of -0.268 bits still leaves many-to-one BC PMI well above the 0.05 significance threshold. The FALSIFIED-IN-SETTING verdict per the frozen rule does not mean PMI=0; it means PMI is substantially reduced by many-to-one mapping.",
+    "The many-to-one condition still allows partial state discrimination: observing the unique S2 content eliminates 2 states, and observing the shared S0/S1 content narrows to 2 states. PMI>0 could partly reflect this partial discrimination rather than pure predictive dynamics.",
+    "Stochastic transitions (p=0.7/0.3) create genuine non-determinism, unlike the parent's deterministic FSM. This is a stronger test environment.",
+    "The estimator has a positive finite-sample bias of ~0.05 bits (perm_mean for MTO K=3 = 0.052). The BC correction (observed - perm_mean) removes this bias. Without BC, PMI would be inflated.",
+    "Synthetic-to-real gap remains: all tests are on locally-hosted Express SPA with known FSM structure. Production SPAs have client-side rendering, auth-dependent content, and external data feeds.",
+    "Session directions generated once with seed=42 and used identically for both conditions, ensuring the ONLY difference is content mapping strategy."
+  ],
+  "unresolved": [
+    "Does the remaining 0.226 bits of BC PMI on many-to-one condition represent genuine predictive dynamics (response context carries transition-relevant information beyond action history) or partial state discrimination (S2 is distinguishable from {S0,S1})? A 3-way content mapping (all states share one hash) would resolve this.",
+    "Would PMI persist with fully ambiguous content (all states share same content hash, 1 unique hash)? This would eliminate partial discrimination entirely.",
+    "Does the 54% PMI reduction from unique-to-many-to-one generalize to other FSM topologies, state counts, and transition structures?",
+    "How does PMI scale with N trajectories? Could larger N reveal PMI>0.05 even with fully shared content?",
+    "Does the PMI pipeline detect similar structure on production SPAs with stochastic transitions and noisy content? The synthetic-to-real gap is the dominant untested assumption."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35154724610",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen decision_rule triggers FALSIFIES (conditions 1 and 3 fail: http_binding_accuracy 0.333 < 1.0, B_LITERAL 3/9 < 9/9) but the failure is caused by a test design flaw — unseen IDs 99, 100, 101 do not exist on jsonplaceholder.typicode.com for posts (only 1-100) and users (only 1-10). URL binding accuracy is 1.0000 (9/9) proving parameterized mechanisms construct correct URLs. Literal baseline shows identical 3/9 failure pattern confirming API data limits not binding errors. Audit V1_HTTP_DESIGN_IMPOSSIBLE_IDS confirms maximum achievable http_correct is 5/9 (posts 2/3, users 0/3, comments 3/3 with corrected validation). Audit V2_COMMENT_BODY_VALIDATION_BUG shows producer undercounts 3/9 vs corrected 5/9. The measurement is invalid for the frozen 9/9 gate; claim ceiling bounded to URL construction correctness 1.0 on synthetic single-slot GET with committed code (sha256=30b741...). Does NOT advance. Parent status EXPERIMENTAL is preserved at URL-correctness ceiling."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No valid economics measurement obtained. Condition 6 token cost comparison (62.5 vs 110.25) uses chars/4 heuristic not actual tokenization (audit V3_TOKEN_COST_NOT_TOKENIZATION). The experiment has zero model/browser calls and does not measure end-to-end amortized cost per successful real-browser task. C-PRODUCT-ECON remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "No product action. Measurement invalid for frozen 9/9 gate. Do not promote to Product Core.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the frozen decision rule for real HTTP binding correctness be satisfied by using endpoint-appropriate unseen IDs that actually exist on jsonplaceholder.typicode.com (e.g., posts 90-98, users 5-8, comments postId 5-7), combined with corrected comment body validation and actual tokenizer cost measurement, thereby resolving V1_HTTP_DESIGN_IMPOSSIBLE_IDS and enabling adjudication of whether parameterized mechanisms bind correctly over real HTTP?",
+  "reason": "The frozen decision rule is MEASUREMENT_INVALID because the frozen spec requires 9/9 correct HTTP executions on unseen IDs 99, 100, 101, but jsonplaceholder.typicode.com has only 100 posts and 10 users — making the gate mathematically impossible regardless of binding correctness. URL binding accuracy is 1.0000 (9/9), proving parameterized mechanisms construct URLs correctly. The literal baseline shows identical failure (3/9 or 5/9 corrected), confirming API data limits as the failure source. Audit V1 confirms maximum achievable http_correct is 5/9 with corrected comment validation (audit V2). Additional validity gaps: V3 (chars/4 token heuristic not actual tokenization), V4 (B_UNFIXED baseline does not demonstrate Fix3 delta), V5 (provenance inconsistency tests_run 3 vs 0), V7 (zero model/browser calls for C-PRODUCT-ECON). The experiment was informative — it established URL construction correctness and confirmed the API data limit — but cannot adjudicate the frozen 9/9 HTTP binding gate. A corrected experiment with valid IDs and actual tokenization is the smallest next step.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35154724610/request.json: experiment_id, lane, parent_handoff EXP-PRODUCT-35132898840, inherited_last_verdict REVISE",
+    "research/experiments/EXP-PRODUCT-35154724610/spec.json: claim_ids C-PARAM-INHERIT C-PRODUCT-ECON, decision_rule 6 conditions, measurement_validity 5 clauses, baselines B_LITERAL_HTTP_EXECUTION B_UNFIXED_PROTOCOL_ONLY",
+    "research/experiments/EXP-PRODUCT-35154724610/result.json: outcome FALSIFIES, condition_1_url 1.0 condition_1_http 0.333 (3/9), condition_3 3/9, condition_6 62.5<110.25, all_conditions_pass false, validity_notes[0] 'Frozen design flaw'",
+    "research/experiments/EXP-PRODUCT-35154724610/audit.json: status MEASUREMENT_INVALID, V1_HTTP_DESIGN_IMPOSSIBLE_IDS (high), V2_COMMENT_BODY_VALIDATION_BUG (medium), V3_TOKEN_COST_NOT_TOKENIZATION (high), recomputed_metrics condition_1_http_corrected 5/9, claim_ceiling URL construction correctness survives",
+    "research/experiments/EXP-PRODUCT-35154724610/report.md: 'FALSIFIED Outcome is a Test Design Flaw', URL accuracy 1.0, literal identical 3/9 pattern",
+    "research/experiments/EXP-PRODUCT-35154724610/provenance.json: api_limits posts 1-100 users 1-10, unseen_ids [99,100,101], kernel sha30b741...",
+    "src/spider/kernel.py sha256=30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e: distill_parameterized, Fix1+Fix2+Fix3",
+    "research/experiments/EXP-PRODUCT-35132898840/handoff.json: parent carry_forward, next_question C-PRODUCT-ECON, V2_BINDING_NOT_HTTP identified as high-severity gap"
+  ]
+}

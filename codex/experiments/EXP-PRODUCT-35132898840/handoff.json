@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35132898840",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "What is the end-to-end amortized cost per successful real-browser task when the parameterized distillation kernel (Fix1+Fix2+Fix3) runs in a real agent harness with actual model, network, and browser calls — and does it save cost compared to literal mechanism replay?",
+  "why_next": "C-PRODUCT-ECON remains HYPOTHESIS because end-to-end economics were not measured. The experiment measured mechanism count reduction (40% on curated endpoints, method-excluded) and protocol-only prevalence (19.23% on curated 52-URL corpus) but all conditions are deterministic synthetic with zero model/network/browser calls. The two unknowns from the parent handoff (cost savings and live traffic prevalence) remain unmeasured in real-world context. The audit's V1 (curated corpus not live traffic) and V2 (string-match not HTTP) are high-severity measurement validity gaps that prevent economic claims. The next experiment must close these gaps by running in a real agent harness.",
+  "carry_forward": {
+    "established": [
+      "Fix1+Fix2+Fix3 code restored and importable from src/spider/kernel.py (sha256=30b741...): _is_protocol_only_prefix, _validate_prefix_boundary, _find_common_prefix_suffix, distill_parameterized all functional",
+      "distill_parameterized induces 1 slot 'url' on 3 synthetic P1_API_ENDPOINTS (fetch_posts GET template for mixed GET+PUT, fetch_users, fetch_comments?postId=) with string-match binding_accuracy=1.0 (9/9 unseen IDs 99,100,101)",
+      "Method-excluded mechanism count reduction 40% (3 parameterized vs 5 literal hardcoded); method-aware reduction 20% (5 vs 4) at threshold boundary",
+      "Fix3 structural '/' delimiter check rejects scheme+authority-only prefixes (https://, http://, https://a.com) while allowing prefixes with path delimiters (https://a.com/, https://jsonplaceholder.typicode.com/posts/1)",
+      "Fix3 protocol-only prevalence 19.23% (10/52 raw, 20.41% 10/49 deduped) on curated 52-URL corpus — NOT representative of live browser traffic",
+      "Existing kernel tests pass after Fix1+Fix2+Fix3 restoration (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention)",
+      "All parent synthetic single-slot properties preserved: P1/G1/G2/G3/G5 binding_accuracy=1.0, N1_ORIGINAL/N1_CORRECTED slot_count=0"
+    ],
+    "rejected": [
+      "Protocol-only over-parameterization IS real: unfixed heuristic produces slot_count=1 for protocol-only URLs (Fix3 delta=1 on PROTOCOL_ONLY)",
+      "Cross-host parameterization IS rejected by Fix2: N1_ORIGINAL slot_count=0",
+      "Method-conflated mechanism counting is valid only when method is metadata; method-aware counting yields 5 vs 4 (20% at threshold)"
+    ],
+    "unknown": [
+      "C-PRODUCT-ECON end-to-end amortized cost per successful real-browser task: unmeasured; requires real-browser agent testing with model/network/browser calls against literal/fixed baselines",
+      "Real HTTP binding correctness: all binding validation was string-match only, no actual HTTP requests to jsonplaceholder.typicode.com",
+      "Live browser traffic prevalence of protocol-only vs minimal-path URL patterns: curated 52-URL corpus not statistically representative",
+      "Token cost per resolution with documented model pricing: current 50 vs 35 (savings 15) is arbitrary arithmetic without pricing source",
+      "Fix2 limitation: path-embedded version parameters (/v1/data vs /v2/data) fail delimiter-bound check — persists from parent",
+      "Multi-slot induction (G4 architectural bound): single-char suffix guard only, not tested",
+      "VALUE CONTRACT slot_prefixes consumption: observed '' for 2/3 mechanisms due to rfind on delimiter-ending prefixes, end-to-end _bind prefix stripping not exercised",
+      "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 not present; unsafe for mixed literal+parameterized registries at equal confidence"
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is VALIDATED or PRODUCT_CORE: it remains EXPERIMENTAL at committed-code synthetic single-slot with metadata-only slot_prefixes",
+      "Do not assume promote_to_product=true: code is committed but claim is not measured in real traffic; all conditions synthetic with zero model/network/browser calls",
+      "Do not assume binding_accuracy=1.0 applies to real HTTP endpoints: validated by exact URL string equality only, no actual HTTP requests made",
+      "Do not assume protocol-only prevalence 19.23% represents live browser traffic: measured on curated 52-URL hardcoded list, not sampled from traffic logs",
+      "Do not assume 40% mechanism reduction applies to real task sets: method-excluded counting on 5 synthetic endpoints; method-aware reduction is 20% at boundary",
+      "Do not assume token cost savings of 15 tokens reflects real economics: arbitrary arithmetic (5*10 vs 3*10+5) without model pricing documentation",
+      "Do not assume Fix3 eliminates all protocol-only over-parameterization: https://a.com/ (with trailing slash) correctly parameterizes because it has a path delimiter",
+      "Do not assume n=3+3 per endpoint establishes statistical significance: it establishes determinism on synthetic data, not generalization",
+      "Do not assume B_UNFIXED_PROTOCOL_ONLY necessity is quantified on live-like traffic: parent delta=1 on synthetic only; this experiment omitted the baseline entirely"
+    ]
+  },
+  "dependencies": [
+    "C-PARAM-INHERIT must remain EXPERIMENTAL until real HTTP binding correctness verified",
+    "C-PRODUCT-ECON must remain HYPOTHESIS until end-to-end amortized cost measured in real-browser agent harness with model/network/browser calls",
+    "Real-browser test harness required: must support model calls (distill_parameterized with real LLM), network calls (HTTP to real endpoints), browser calls (DOM interaction)",
+    "Live URL corpus needed: traffic-sampled URLs with documented collection method, deduplication, and representative sampling frame",
+    "Token pricing documentation needed: cite model, price per token, prompt/completion split for C-PRODUCT-ECON economics",
+    "resolve() tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35132898840/result.json: metrics all 5 conditions pass arithmetically, binding_accuracy=1.0, mechanism 3 vs 5, protocol_only 19.23%, token_savings=15",
+    "research/experiments/EXP-PRODUCT-35132898840/audit.json: status=REVISE, V1-V8 validity_findings (V1 high: curated corpus, V2 high: string-match, V3 medium: method conflation, V4 medium: arbitrary tokens), recomputed_metrics all_conditions_pass_validated=false",
+    "research/experiments/EXP-PRODUCT-35132898840/verdict.json: decision=REVISE, claim_updates C-PARAM-INHERIT EXPERIMENTAL C-PRODUCT-ECON HYPOTHESIS, promote_to_product=false",
+    "src/spider/kernel.py sha256=30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e: committed Fix1+Fix2+Fix3 code",
+    "src/spider/models.py sha256=67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d: Mechanism slot_prefixes field",
+    "research/experiments/EXP-PRODUCT-35130681515/handoff.json: parent carry_forward, next_question C-PRODUCT-ECON, dependencies"
+  ],
+  "recommended_action": "Next product-lane experiment should: (1) Build a real-browser agent test harness with model/network/browser calls; (2) Run distill_parameterized with a real LLM to induce mechanisms from live browser observations; (3) Measure binding correctness via actual HTTP execution (GET/POST/PUT against real endpoints); (4) Measure end-to-end amortized cost per successful task vs literal baseline; (5) Sample live browser traffic URLs with documented collection method for protocol-only prevalence; (6) Port resolve() tie-break from EXP-GRAPH-33816735314 before testing mixed registries; (7) Document token pricing for C-PRODUCT-ECON economics. Simultaneously: C-PARAM-INHERIT remains EXPERIMENTAL; C-PRODUCT-ECON remains HYPOTHESIS until real-browser evidence closes the measurement validity gaps (V1, V2, V4)."
+}

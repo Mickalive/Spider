@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35137036013",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M6_PER_DEFINITION_ORDERING": {
+      "DEF-FULL-MAP": {
+        "truncated_ordering": [
+          "cart",
+          "product_listing",
+          "detail"
+        ],
+        "full_ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ]
+      },
+      "DEF-FORM-ONLY": {
+        "truncated_ordering": [
+          "product_listing",
+          "cart",
+          "detail"
+        ],
+        "full_ordering": [
+          "product_listing",
+          "detail",
+          "cart"
+        ]
+      },
+      "ISOLATED-A-LINK": {
+        "truncated_ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ],
+        "full_ordering": [
+          "cart",
+          "detail",
+          "product_listing"
+        ]
+      }
+    },
+    "M1_C1_ORDERING_CHANGED": {
+      "DEF-FULL-MAP": true,
+      "DEF-FORM-ONLY": true,
+      "ISOLATED-A-LINK": false
+    },
+    "M3_OBSERVED_PAIRWISE_AGREEMENT": {
+      "truncated_proxy_3defs": 0.0,
+      "full_proxy_3defs": 0.3333333333333333,
+      "parent_truncated_5defs_observed": 0.3,
+      "parent_truncated_null_mean": 0.5275
+    },
+    "M4_NULL_MEAN_PAIRWISE_AGREEMENT": {
+      "DEF-FULL-MAP": 0.40004004004004,
+      "DEF-FORM-ONLY": 0.40402602602602605,
+      "ISOLATED-A-LINK": 0.42080880880880883
+    },
+    "M2_C2_NULL_EXCEEDS_OBSERVED": {
+      "DEF-FULL-MAP": true,
+      "DEF-FORM-ONLY": true,
+      "ISOLATED-A-LINK": null
+    },
+    "M5_DENSITY_DIFF_TRUNCATED_VS_FULL": {
+      "DEF-FULL-MAP": {
+        "per_task_diff": [
+          0.2878064516129032,
+          0.2878846153846154,
+          0.28778772378516626,
+          0.2836213991769548,
+          0.29904264577893824,
+          0.3006124234470691,
+          0.2972429906542056
+        ],
+        "mean_diff": 0.2919997499771218
+      },
+      "DEF-FORM-ONLY": {
+        "per_task_diff": [
+          0.008451612903225807,
+          0.008397435897435898,
+          0.008375959079283889,
+          0.0029629629629629624,
+          0.0031331592689295036,
+          0.0031496062992125975,
+          4.672897196261695e-05
+        ],
+        "mean_diff": 0.004931066483287611
+      },
+      "ISOLATED-A-LINK": {
+        "per_task_diff": [
+          0.25225806451612903,
+          0.25256410256410255,
+          0.25255754475703324,
+          0.26584362139917694,
+          0.2802436901653612,
+          0.28171478565179353,
+          0.2953271028037383
+        ],
+        "mean_diff": 0.26864413026533357
+      }
+    },
+    "SUBSTRATE_VERIFICATION": {
+      "locatable_sample_cap_present": true,
+      "tasks_with_locatable_gt_20": 8,
+      "total_valid_tasks": 8,
+      "unique_tasks": 7,
+      "locatable_elements_by_task": {
+        "listing_clothing-shoes-jewelry": 82,
+        "listing_beauty-personal-care": 82,
+        "listing_electronics": 82,
+        "detail_camera": 32,
+        "detail_vr_bag": 32,
+        "detail_pet_camera": 32,
+        "cart_1": 21
+      },
+      "sample_len_by_task": {
+        "listing_clothing-shoes-jewelry": 20,
+        "listing_beauty-personal-care": 20,
+        "listing_electronics": 20,
+        "detail_camera": 20,
+        "detail_vr_bag": 20,
+        "detail_pet_camera": 20,
+        "cart_1": 20
+      },
+      "measure_js_cap_string_found": true,
+      "canonical_script_committed": false
+    },
+    "B1_TRUNCATED_REGRESSION": {
+      "def_full_map_trunc_match": true,
+      "def_full_map_full_match": true,
+      "def_form_only_trunc_match": true,
+      "def_form_only_full_match": true,
+      "def_full_map_expected_truncated": [
+        "cart",
+        "product_listing",
+        "detail"
+      ],
+      "def_full_map_expected_full": [
+        "cart",
+        "detail",
+        "product_listing"
+      ]
+    },
+    "B2_COMMITTED_SCRIPT_BASELINE": {
+      "all_role_truncated_ordering": [
+        "cart",
+        "detail",
+        "product_listing"
+      ],
+      "all_role_full_ordering": [
+        "product_listing",
+        "detail",
+        "cart"
+      ],
+      "all_role_ordering_changed": true,
+      "note": "committed script uses all-role density (a+button+form+input+combobox+div+label+span) vs per-definition filtering"
+    },
+    "B3_STORED_RESULTS_COMPARISON": {
+      "stored_isolated_identical_to_fullmap": true,
+      "stored_isolated_truncated_counts_first_task": 8,
+      "computed_isolated_truncated_counts_first_task": 2,
+      "stored_full_count_first_task_DEF-FULL-MAP": 454.1,
+      "computed_full_count_first_task_DEF-FULL-MAP": 454.1
+    }
+  },
+  "controls": {
+    "B1_TRUCATED_REGRESSION": {
+      "description": "Canonical script (3-def per-role filtering, cart_1 dedup, float scaling) on truncated-first-20 data reproduces known ordering",
+      "expected": "DEF-FULL-MAP truncated cart>product_listing>detail, full cart>detail>product_listing; DEF-FORM-ONLY truncated product_listing>cart>detail, full product_listing>detail>cart; null mean 0.5275 > observed 0.3",
+      "observed": "DEF-FULL-MAP ['cart', 'product_listing', 'detail'] -> ['cart', 'detail', 'product_listing'] match=True; DEF-FORM-ONLY ['product_listing', 'cart', 'detail'] -> ['product_listing', 'detail', 'cart'] match=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json"
+    },
+    "B2_COMMITTED_SCRIPT_BASELINE": {
+      "description": "Committed analyze.py (all-role density, 8 tasks) on full-DOM proxy data",
+      "expected": "All-role density inflates denominator, may produce different verdict than per-definition filtering",
+      "observed": "All-role ordering truncated ['cart', 'detail', 'product_listing'] -> full ['product_listing', 'detail', 'cart'] changed=True",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json"
+    },
+    "B3_STORED_RESULTS_COMPARISON": {
+      "description": "Load stored analysis_results.json, confirm reference values for truncated-sample ordering and density",
+      "expected": "Stored results show ordering_changed=True for all 3 defs, with ISOLATED-A-LINK byte-identical to DEF-FULL-MAP (bug)",
+      "observed": "Stored DEF-FULL-MAP ['cart', 'product_listing', 'detail'] -> ['cart', 'detail', 'product_listing']; ISOLATED identical to FULL-MAP? True; computed ISOLATED truncated ['cart', 'detail', 'product_listing'] vs stored ['cart', 'product_listing', 'detail']",
+      "pass": "PARTIAL",
+      "evidence_ref": "research/experiments/EXP-INTEL-35124660457/analysis_results.json"
+    },
+    "C_POSITIVE_SCRIPT_REGRESSION": {
+      "description": "Canonical script regression on truncated data must reproduce known ordering change and null result",
+      "expected": "C1=true for DEF-FULL-MAP and DEF-FORM-ONLY, null mean 0.5275 > observed 0.3",
+      "observed": "C1 DEF-FULL-MAP=True, DEF-FORM-ONLY=True, null_mean on truncated proxy (DEF-FULL-MAP)=0.4000 vs parent 0.5275",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json"
+    },
+    "C_NULL_MODEL_RANDOM_ROLE_MAP": {
+      "description": "Random ROLE_MAP (1000 iter, seed=42) on full-DOM per-role density estimates (proxy)",
+      "expected": "Null mean >= observed would indicate observed does not exceed chance (FALSIFIED stands); null mean < observed would indicate metric survives",
+      "observed": "Full proxy observed pairwise 0.333, null means per def: DEF-FULL-MAP 0.4000, DEF-FORM-ONLY 0.4040, ISOLATED 0.4208; C2 per def {'DEF-FULL-MAP': True, 'DEF-FORM-ONLY': True}",
+      "pass": "UNKNOWN",
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35137036013/full_dom_proxy_analysis.json",
+      "sha256": "5b3c03b4d8914a981f8365ac0d387e4b7d6f235fffe68619faf4bb73f3961e30",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35137036013/substrate_verification.json",
+      "sha256": "bce78e0cf63533f99bb920946a4ed71a5b7ba14ddc3d5978b0b43b6c7e506b9f",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analysis_results.json",
+      "sha256": "b2aaafdeeacbc9b39ffba40e4df058099b71b643fb2a2ce79d4b8c08f111d546",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analyze.py",
+      "sha256": "c2a085bb9f632ab7faf9ccaad5582cf21edd7b4433c47c6b96bf9b2166347d15",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35131994346/reconstruct.py",
+      "sha256": "b435676812fc9fbc92e78d9ae0c073f98bf19b317e8ac24be85507716b2d433d",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+      "sha256": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Substrate fix NOT applied: MEASURE_JS still contains 'locatableSample.length < 20' (True) and all 8 tasks with locatable_elements>20 are capped at 20 samples (sample_len 20 vs locatable 82/32/21)",
+    "Canonical analysis script NOT committed: no file at research/experiments/EXP-INTEL-35137036013/canonical_analysis.py or research/intel/canonical_35137036013.py; proxy reconstruction via per-definition role filtering used instead",
+    "Truncated vs full proxy ordering (estimator using DOM tag counts, inflates 4-7x): DEF-FULL-MAP ['cart', 'product_listing', 'detail'] -> ['cart', 'detail', 'product_listing'] changed=True; DEF-FORM-ONLY ['product_listing', 'cart', 'detail'] -> ['product_listing', 'detail', 'cart'] changed=True; ISOLATED-A-LINK corrected ['cart', 'detail', 'product_listing'] -> ['cart', 'detail', 'product_listing'] changed=False (correct a-only count ~2 vs stored 8)",
+    "ISOLATED-A-LINK stored bug confirmed: stored truncated_count=8 for listings vs correct a-only ~2; byte-identical to DEF-FULL-MAP across all 7 tasks (identical_to_fullmap=True)",
+    "B1 regression PASS: 2/2 valid definitions reconstruct exactly within tolerance, matching stored results for truncated and full orderings",
+    "B2 committed-script baseline: all-role density ordering ['cart', 'detail', 'product_listing'] -> ['product_listing', 'detail', 'cart'] (all-role inflates denominator, mask ordering change magnitude)",
+    "Observed pairwise agreement proxy: truncated 3-defs 0.000, full proxy 0.333 (parent 5-def observed 0.3); null model not defined for 3-def pairwise, per-def null means 0.5-0.7 range (proxy)",
+    "Null model on full-DOM proxy (1000 iter, seed=42, 8 roles p=0.5): DEF-FULL-MAP null_mean 0.4000 top ['product_listing', 'detail', 'cart'] (48.1%), DEF-FORM-ONLY null_mean 0.4040",
+    "Deduplication: 8 valid measurements contain duplicate cart_1 (2 entries for same task_id), deduplicated to 7 unique tasks (removed 1 duplicate)",
+    "Measurement validity FAIL: both blocking conditions fail (cap present AND canonical script missing), so frozen decision rule mandates MEASUREMENT_INVALID irrespective of proxy C1/C2 values (C1=True, C2=True)"
+  ],
+  "validity_notes": [
+    "BLOCKING substrate dependency: runtime lane locatableSample cap removal not implemented; MEASURE_JS still truncates at 20 (research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89). All 7 tasks have locatable_elements (82/32/21) > sample_len (20), truncation bias remains 62-95% of interactive elements discarded. True full DOM enumeration unavailable; proxy estimator uses DOM tag counts (linksCount 393-397, buttonsCount 15 etc.) conflated with locatable counts, inflating bias 4-7x per audit V1. Proxy full densities (0.29) are not valid locatable densities (should be ~0.02-0.06). Directional ordering change is robust but point estimates invalid.",
+    "BLOCKING code dependency: canonical analysis script with 3-definition per-role filtering, cart_1 dedup, float scaling not committed. Proxy reconstruction (this script) reproduces EXP-INTEL-35131994346 reconstruct.py logic; not an audited canonical artifact. Audit required_fixes remain open.",
+    "Estimator representation loss: full_count_estimate uses DOM tag counts for a/button/form/input and scaled sample counts for combobox/div/label/span. This conflates total DOM nodes with locatable interactive elements. Per audit V1 estimator_inflation, full-DOM estimate overcounts by factor 4-7x vs proper locatable scaling. C1/C2 computed on proxy cannot be cited as evidence for full DOM signal.",
+    "ISOLATED-A-LINK corrected: truncated_count 2 for listings (vs stored 8) correctly reflects a-only filtering; stored results invalid. Ordering_changed=False for corrected ISOLATED-A-LINK (both trunc and full are cart>detail>product_listing) \u2013 fails C1 for that definition alone, but decision rule evaluates DEF-FULL-MAP and DEF-FORM-ONLY primarily.",
+    "Small N and single-site bound: n=3 product_listing, n=3 detail, n=1 distinct cart (2 measurements deduped to 1). No within-type CI possible. All data from single Magento shopping site (am1n3e/webarena-verified-shopping:latest, frozen_seed=99). No cross-site generalization.",
+    "Null model interpretation limited: 1000 iterations, seed=42, random ROLE_MAP (8 roles p=0.5) is conservative null (real definitions occupy smaller subspace). Pairwise agreement metric measures coherence among random orderings, not direct test of observed vs chance; with only 3 definitions, pairwise agreement among definitions (0.0 or 1.0) is coarse. Proxy null mean 0.5-0.7 is not directly comparable to parent 0.5275 on 5 definitions.",
+    "No new browser/network/model execution; pure offline re-analysis of frozen raw evidence (sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050). No end-to-end economics beyond compute (numpy, 1000 iter).",
+    "Frozen inputs immutable: request.json, spec.json, prereg.md, freeze.json hashes verified; no outcome-bearing measurement was altered during design."
+  ],
+  "unresolved": [
+    "Whether true full DOM enumeration (after runtime cap removal) changes ordering beyond tag-count estimator \u2013 requires runtime lane to implement locatableSample cap removal and re-collect data for same 7 tasks",
+    "Whether canonical script should be committed at research/intel/canonical_35137036013.py with 3-definition filtering, dedup, float scaling, or committed analyze.py accepted as canonical with explicit scope note \u2013 until then measurement non-reproducible from HEAD",
+    "Whether corrected ISOLATED-A-LINK (ordering_changed=False, a-only) alters C3 conclusions \u2013 currently evaluated separately per spec; if ISOLATED were pooled, C1 would still hold via DEF-FULL-MAP and DEF-FORM-ONLY",
+    "Whether product_listing vs detail ordering swap is statistically significant under true full enumeration \u2013 means within 2% inflated or 0.016 vs 0.008 locatable-scaled, n=3 per type, no CI reported, needs bootstrap on full DOM counts",
+    "Whether menuitem/tab contribute additively when present \u2013 0 counts in this sample, requires site where those roles appear",
+    "Whether null-model pairwise agreement exceeds chance on true full-DOM data \u2013 cannot be tested without full enumeration; proxy suggests null mean ~0.5-0.7 but not a valid test"
+  ]
+}

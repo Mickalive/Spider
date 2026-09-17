@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35137033384",
+  "lane": "runtime",
+  "github_run_id": "35137033384",
+  "git_commit": "86bd8d6c08385c9b3c3bd5f77803fd86b3e55b8a",
+  "git_branch": null,
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2"
+  },
+  "frozen_inputs": {
+    "request_hash": "2d16bbb19e03a452bea3923cc9f8db5a6d99143a6426b14d7cd5cee3149bd945",
+    "spec_hash": "1587198ef5861e1a8e1b438a8c75fa9e6785d9a7b7901047d69208af7ae7dc98",
+    "prereg_hash": "8b4f71b9ac345a7fc540cb40984b743a57758154a41be822ff76f53a46020117",
+    "freeze_hash": "see freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35130682006",
+    "handoff_sha256": "122bb3ec6f2daaca6a1f06c3dc59c3ba8f812899478f13b495475fb2f3cece37"
+  },
+  "parent_reference_data": {
+    "source_experiment": "EXP-RUNTIME-35058619700",
+    "B_DECOMPRESSED_VARYING_GZIP_USERINFO": 0.5,
+    "B_DECOMPRESSED_VARYING_GZIP_INTROSPECT": 0.5,
+    "note": "Parent gzip reference data not re-executed; used for algorithm-equivalence comparison"
+  },
+  "artifacts": {
+    "result.json": {
+      "sha256": "b4481c9cb7f03eae09c0870c580b55aa5a8237275e3eb7b2030b5c8d8859c68b",
+      "role": "result"
+    },
+    "run_experiment.py": {
+      "sha256": "7688f931402db94e5b8238208e1a9e6131a3fa61497d8f6aaf734d0f00c3c973",
+      "role": "code"
+    },
+    "raw_observations.json": {
+      "sha256": "bcf3f52f9749f612a6c39d3be7ac3f7867004ab6eed9591b039072bcd099aad5",
+      "role": "raw"
+    },
+    "report.md": {
+      "sha256": "a86134d5df9aefc684af7a73c2018972a1f0af7751a54f4c8800663337ef8fec",
+      "role": "report"
+    }
+  },
+  "execution_details": {
+    "seed": 44,
+    "cdn_noise_seed": 9273,
+    "quality_seed": 1044,
+    "cdn_noise_seed_derivation": "seed + int(sha256('CDN_NOISE').hexdigest(), 16) % 10000 = 9273",
+    "reps_per_state_per_endpoint": 20,
+    "total_requests": 320,
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "endpoints": ["/userinfo (GET)", "/introspect (POST)"],
+    "baselines": ["DECOMPRESSED-VARYING-BROTLI-CDN", "COMPRESSED-VARYING-BROTLI-CDN"],
+    "cdn_noise_categories": [
+      "1. Brotli quality variation {4,5,6,7,8} per request",
+      "2. Chunked transfer-encoding (~30% of responses)",
+      "3. CDN-specific headers (CF-Ray, X-Cache, Age, Via)",
+      "4. Accept-Encoding negotiation (20% gzip, 5% identity, 75% brotli)",
+      "5. Response caching (~30% cache hits)",
+      "6. Content-Length variation (passive consequence)"
+    ],
+    "mock_server": "Flask-compatible HTTP server on localhost:5000 (PyJWT HS256)",
+    "cdn_proxy": "CDN-noise proxy on localhost:5001 applying 6 categories of non-determinism"
+  },
+  "known_issues": [
+    "Cache hit/miss counters show 0/0 due to Python class variable scoping bug (self.cache_hits += 1 creates instance variable); actual in-memory cache dict works correctly",
+    "Effective brotli diversity for 1KB JSON is 2 variants (q4 distinct vs q5-8 identical), not 5 distinct; inherited from parent audit",
+    "Mock OAuth2 3-way error collapse caps /userinfo discrimination at 0.5; structural ceiling not representative of production IdP"
+  ],
+  "reproduction_command": "cd research/experiments/EXP-RUNTIME-35137033384 && python3 run_experiment.py"
+}
