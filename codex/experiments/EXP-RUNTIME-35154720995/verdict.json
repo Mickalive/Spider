@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35154720995",
+  "lane": "runtime",
+  "decision": "MEASUREMENT_INVALID — Infrastructure failure: the mock server never applied brotli/gzip compression (Content-Encoding='none' on all 2880 observations, run_experiment.py:260-301). The decompression-normalization mechanism (SHA256 on decompressed body via brotli.decompress/gzip.decompress) was never exercised. The frozen question asked about behavior 'under brotli/gzip compression without CDN noise' but the environment could not express this effect. All reported discrimination metrics (0.5) reflect identity-path body hashing, not decompression-normalization. The frozen falsifier's third disjunct (brotli quality diversity does not increase) technically triggers but is uninformative because no compression was applied. C-MEAS-VALID does not advance from this experiment.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit V1-NO-COMPRESSION-IDENTITY-ONLY: server handler (run_experiment.py:260-301) never sets Content-Encoding, never compresses; all 2880 observations have Content-Encoding='none'. decompress_body() (lines 340-353) is dead code (identity fallback only). The frozen question 'under brotli/gzip compression without CDN noise' was not instantiated. Reported discrimination 0.5 equals compressed discrimination 0.5 trivially (identity path). The frozen decision_rule clause 'MEASUREMENT_INVALID if infrastructure failure prevents valid measurements' applies. Parent EXP-RUNTIME-35137033384 claim ceiling ('synthetic proxy + CDN simulator with realistic non-determinism' at 1KB JSON) stands; this experiment provides no new evidence about decompression-normalization robustness."
+    }
+  ],
+  "product_action": "No product action. The decompression-normalization mechanism remains untested on non-JSON content types. Parent claim ceiling stands; this experiment does not advance or regress it.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does decompression-normalization (SHA256 on decompressed body via brotli.decompress/gzip.decompress after Content-Encoding inspection) preserve body-only discrimination at >=0.3 for HTML and XML at 1KB/10KB/100KB when the mock server actually applies brotli (quality 4-8) and gzip compression — fixing the server to compress bodies and set Content-Encoding headers so the decompression path is exercised?",
+  "reason": "The experiment is MEASUREMENT_INVALID due to infrastructure failure: the mock server never compressed responses, so the decompression-normalization mechanism was never tested. The frozen question about format-invariance of decompression-normalization on non-JSON content types remains unanswered. The required fix is minimal: modify MockOAuthHandler to actually compress response bodies with brotli/gzip and set Content-Encoding headers. All other experimental infrastructure (content types, sizes, auth states, controls) is sound and can be reused. A re-run with working compression would directly answer the original question.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35154720995/audit.json — V1-NO-COMPRESSION-IDENTITY-ONLY (severity: critical), V2-ALGORITHM-EQUIVALENCE-VACUOUS, V3-BROTLI-QUALITY-SCALING-MEANINGLESS, V5-LATENCY-MISREPORTED, claim_ceiling bounded to identity encoding only",
+    "research/experiments/EXP-RUNTIME-35154720995/result.json — all 36 metric cells compression_verification content_encoding_values=['none'], body_hash_compressed == decompressed_hash 2880/2880, decompressed_body_only_discrimination 0.5 across all content types × sizes",
+    "research/experiments/EXP-RUNTIME-35154720995/raw_observations.json — 2880 entries with content_encoding='none', no Content-Encoding br/gzip headers",
+    "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py — lines 260-301 do_GET/do_POST send raw body without compression; 329-338 compress utilities defined but unused; 340-353 decompress_body dead branch",
+    "research/experiments/EXP-RUNTIME-35154720995/spec.json — frozen question 'under brotli/gzip compression without CDN noise', falsifier includes brotli quality diversity disjunct",
+    "research/experiments/EXP-RUNTIME-35154720995/prereg.md — Section 2.4 compression brotli 4-8 + gzip, Section 3.4 C_BROTLI_QUALITY_SCALING, measurement_validity item 3 'Compression uses brotli quality 4-8 and gzip'",
+    "research/experiments/EXP-RUNTIME-35137033384 — parent established decompression-normalization at 1KB JSON under CDN-noise proxy; claim ceiling unchanged"
+  ]
+}

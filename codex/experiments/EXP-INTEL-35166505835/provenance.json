@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35166505835",
+  "lane": "intel",
+  "github_run_id": "35166505835",
+  "created_at": "2026-09-17T00:25:49.618320+00:00",
+  "executed_at": "2026-09-17T00:30:00.000000+00:00",
+  "base_sha": "7e3946b64e578caa171e9f25af27acccab858057",
+  "frozen_files": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-35166505835/request.json",
+      "sha256": "dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-35166505835/spec.json",
+      "sha256": "724d7d91f1ea1ffdf234c7b78c80a57fc6d320645e0082c6be8dba71ebbfe2ce"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-35166505835/prereg.md",
+      "sha256": "bf3d76560f89eaa607680b35649f512dee935b36dde75e56500179a559fa35b8"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-35166505835/freeze.json",
+      "sha256": null
+    }
+  },
+  "evidence_sources": [
+    {
+      "path": "research/experiments/EXP-INTEL-35137036013/spec.json",
+      "role": "fixture",
+      "description": "Frozen spec.json containing C2 contradiction (B1 baseline evidence)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35137036013/handoff.json",
+      "role": "fixture",
+      "description": "Parent handoff with carry_forward state and C2 unknown"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+      "role": "fixture",
+      "description": "MEASURE_JS with locatableSample cap at line 89 (B3 baseline evidence)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35131994346/reconstruct.py",
+      "role": "fixture",
+      "description": "Reconstruction script implementing 3-definition per-role filtering (canonical script reference)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35112013458/analyze.py",
+      "role": "fixture",
+      "description": "Original FALSIFIED experiment analysis script (C2 resolution context)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35124660457/analyze.py",
+      "role": "fixture",
+      "description": "Committed analyze.py using all-role density (algorithm difference documentation)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35083033552/analyze.py",
+      "role": "fixture",
+      "description": "Additional analyze.py checked for canonical script absence (B2 baseline)"
+    },
+    {
+      "path": "research/intel/webarena_task_analysis/analyze.py",
+      "role": "fixture",
+      "description": "WebArena analysis script checked for canonical script absence (B2 baseline)"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "dependencies": "None required (offline code/spec reading and analysis only)",
+    "browser_required": false,
+    "network_required": false
+  },
+  "methodology": "Dependency audit and design-resolution exercise. All evidence from committed artifacts (spec.json, code files, MEASURE_JS). No browser interaction, no data collection, no model calls. C2 resolution grounded in original experiment's statistical intent (EXP-INTEL-35112013458 FALSIFIED verdict).",
+  "reproduction_steps": [
+    "1. Read frozen spec.json from EXP-INTEL-35137036013 and extract C2 falsifier/decision_rule/null_control clauses",
+    "2. Confirm C2 contradiction: falsifier says null>observed=FALSIFIED, decision_rule says null>=observed=SURVIVES",
+    "3. Search repository for canonical analysis script with all 4 components (3-def, dedup, float, null model)",
+    "4. Confirm no such script exists at HEAD (B2 baseline PASS)",
+    "5. Read MEASURE_JS in measure_fullpage_yield.py line 89 and confirm locatableSample cap present (B3 baseline PASS)",
+    "6. Analyze original FALSIFIED verdict context (EXP-INTEL-35112013458: null 0.5275 > observed 0.3)",
+    "7. Resolve C2 direction: null >= observed → metric FAILS null test (C2=true), consistent with FALSIFIED intent",
+    "8. Produce 8-component canonical-script specification grounded in resolved C2 direction"
+  ]
+}

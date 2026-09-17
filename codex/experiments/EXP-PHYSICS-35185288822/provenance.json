@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35185288822",
+  "lane": "physics",
+  "github_run_id": "35185288822",
+  "pre_execute_sha": "39ef779e1bea7c1e46309647b5c078b1ee50af8f",
+  "base_sha": "f9481fa55c42bfde4faebe957d3183a87457cd47",
+  "execution_recorded_at": "2026-09-17T05:22:18.110062+00:00",
+  "analysis_completed_at": "2026-09-17T06:30:00.000000+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "playwright_version": "1.63.0",
+    "chromium_version": "153.0.8010.12",
+    "numpy_version": "2.5.3",
+    "browser_args": ["--no-sandbox", "--disable-dev-shm-usage"],
+    "ci_environment": "GitHub Actions"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PHYSICS-35185288822/request.json",
+    "spec.json": "research/experiments/EXP-PHYSICS-35185288822/spec.json",
+    "prereg.md": "research/experiments/EXP-PHYSICS-35185288822/prereg.md",
+    "freeze.json": "research/experiments/EXP-PHYSICS-35185288822/freeze.json"
+  },
+  "frozen_hashes": {
+    "request.json": "f7430fbbcb7462aff29a9111389d9468e0827093c4294ac0d28ac8e2d796b3c8",
+    "spec.json": "fc365f6430a57ae2e2fbc02cdee7cfb66cc24acaba599d1dcf8d8369f741d36f",
+    "prereg.md": "a5cbfc921a062253c4691ed5a1efedcd5a954ec96fdea1137fb7495837019528"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35154721808",
+    "path": "research/experiments/EXP-PHYSICS-35154721808/handoff.json",
+    "sha256": "b23f5e807bc2e274d9a07aa8cd160bb6745a1f894052a083920059e36d7f94c1"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/wikipedia_transitions.json",
+      "sha256": "6b7f401a59d438f747dfa6f61b898195fe111fc5cb73c5c6e8593d831a545d0a",
+      "role": "raw",
+      "description": "91 browser transitions from Wikipedia (en.wikipedia.org), 10 trajectories x 8 steps"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/github_transitions.json",
+      "sha256": "07ef2389eb3b0f7879eacc330e99c2671df900911e6e64541e375b59e3b6e0af",
+      "role": "raw",
+      "description": "18 browser transitions from GitHub (github.com), 5 trajectories x 5 steps"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/mdn_transitions.json",
+      "sha256": "0a5a35314e2c7e0577c1219a720fda057d69237ff90070dcedd868d5e0c3c15c",
+      "role": "raw",
+      "description": "25 browser transitions from MDN (developer.mozilla.org), 5 trajectories x 5 steps"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json",
+      "sha256": "50f39603ed87e735754cf3380a56a441d0cee89789efac98308bcdf8046e5bcf",
+      "role": "derived",
+      "description": "PMI computation results, permutation tests, and decision rule evaluation"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/run_experiment.py",
+      "sha256": "cf4ad4a339d4a4c0ac4aaecd5ea169366e4f8c1cf93e06a768d516bd916b9b40",
+      "role": "code",
+      "description": "Full experiment pipeline: positive control, browser collection, PMI computation"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/analyze.py",
+      "sha256": "f03378f990ce99d762894f2120828e2e794f7c40587b81fe17e9250eda322d77",
+      "role": "code",
+      "description": "Analysis pipeline: BC PMI, cross-trajectory permutation, decision rule"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35185288822/collect_data.py",
+      "sha256": "96f9502229db6549a876a18c0917fad3f0c08814ff8a65fa1cc1d1cf7098a10c",
+      "role": "code",
+      "description": "Browser data collection script for 3 production sites"
+    }
+  ],
+  "code_paths": {
+    "positive_control": "research/experiments/EXP-PHYSICS-35185288822/run_experiment.py (run_positive_control function)",
+    "browser_collection": "research/experiments/EXP-PHYSICS-35185288822/collect_data.py",
+    "pmi_computation": "research/experiments/EXP-PHYSICS-35185288822/analyze.py (compute_bc_pmi, cross_trajectory_shuffle)",
+    "decision_rule": "research/experiments/EXP-PHYSICS-35185288822/analyze.py (main analysis section)"
+  },
+  "datasets": {
+    "wikipedia": "Live collection from en.wikipedia.org via Playwright headless Chromium",
+    "github": "Live collection from github.com via Playwright headless Chromium",
+    "mdn": "Live collection from developer.mozilla.org via Playwright headless Chromium",
+    "positive_control": "Synthetic 8-state linear SPA with unique deterministic titles (generated in-memory)"
+  },
+  "reproduction_notes": [
+    "Browser data collection requires Playwright with Chromium (pip install playwright && playwright install chromium)",
+    "CI environment (GitHub Actions) experiences Playwright EPIPE errors on context close, limiting batch sizes",
+    "Positive control is deterministic given SEED=42; results are reproducible",
+    "Production site data is non-deterministic (depends on site state at collection time)",
+    "Cross-trajectory permutation uses PYTHONHASHSEED=0 for reproducibility"
+  ]
+}

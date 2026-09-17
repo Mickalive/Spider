@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can Fix3 independent necessity be demonstrated on a discriminating corpus where Fix2 passes but Fix3 should reject (e.g., scheme-only 'https://'), or should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON or testing PUT/POST method fidelity?",
+  "why_next": "The experiment validates Fix3 redesign fixes overbroadness but does not demonstrate independent necessity over Fix2 (audit V1). Without necessity, Fix3 is defense-in-depth not a required gate. The next step must either provide a discriminating test (scheme-only 'https://' as sole discriminant) or pivot to higher-upside questions (C-PRODUCT-ECON amortized cost, PUT/POST fidelity) that materially advance product viability.",
+  "carry_forward": {
+    "established": [
+      "Fix3 redesign validated: _is_protocol_only_prefix correctly rejects bare authority prefixes ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-parameterized prefixes ('https://api.example.com?key=', 'https://example.com?x=', 'https://api.example.com?foo=bar&baz='), path-slash prefixes ('https://jsonplaceholder.typicode.com/', '/posts/', '/v1/'), and mixed/edge prefixes ('/path?query=', '#frag', ':8080/') for 12/12 corpus (audit V5)",
+      "Kernel regression tests pass 3/3 after Fix3 redesign (audit V2)",
+      "distill_parameterized with Fix3 redesign produces correct Mechanism for query-parameterized observations: slot ['url'], template 'comments?postId=${url}', resolves EXECUTABLE, bound URL 'https://jsonplaceholder.typicode.com/comments?postId=5' (C7)",
+      "HTTP binding accuracy 1.0 (3/3) on query-parameterized endpoint comments?postId=${url} with unseen IDs 5-7 on jsonplaceholder.typicode.com (C6) — n=3, single endpoint, GET only",
+      "Old Fix3 (pre-redesign) incorrectly rejects query-parameterized prefix 'https://api.example.com?key=' (C4) — confirms overbroad bug being fixed",
+      "Real HTTP binding correctness 9/9 for parameterized mechanisms on jsonplaceholder GET endpoints with valid unseen IDs (inherited from parent EXP-PRODUCT-35166508130)",
+      "Token cost measurement: parameterized 68 tokens, literal 96 tokens (29.17% savings) — single tiktoken data point, structural advantage (inherited)"
+    ],
+    "rejected": [
+      "Fix3 independent necessity over Fix2 for bare authority patterns not demonstrated: Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False). Only scheme-only 'https://' discriminant untested (audit V1)",
+      "Overgeneralization 'Fix3 demonstrated as non-redundant defense-in-depth for bare authority patterns' is not justified: ordering determines which blocks, not independent necessity (audit V1)",
+      "C4 B_UNFIXED_PROTOCOL_ONLY test design non-discriminating for the frozen URL pair (inherited from parent)"
+    ],
+    "unknown": [
+      "Fix3 independent necessity on discriminating data where Fix2 passes but Fix3 should reject (e.g., scheme-only 'https://')",
+      "HTTP generalization beyond single comments?postId endpoint on jsonplaceholder: other query patterns, multi-param, different hosts, pagination, auth not tested",
+      "Statistical strength of HTTP 3/3: Wilson 95% CI [0.44,1.0] not significant; larger n needed",
+      "PUT/POST method fidelity over real HTTP: whether method-preserving mechanism needed remains unknown",
+      "End-to-end amortized cost per successful real-browser task (C-PRODUCT-ECON): not measured; requires real-browser test harness",
+      "Multi-slot generalization, noisy multi-step browser sessions, LLM-based distillation, cross-site transfer not tested",
+      "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 not ported nor tested in this lane; mixed literal+parameterized registry safety remains inherited unresolved"
+    ],
+    "do_not_assume": [
+      "Do not assume C-PARAM-INHERIT is VALIDATED or PRODUCT_CORE: it remains EXPERIMENTAL at narrowed ceiling (single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification)",
+      "Do not assume Fix3 is necessary for all URL patterns: Fix3 and Fix2 are mutually exclusive for tested patterns; necessity unproven",
+      "Do not assume token cost savings of 29.17% reflect real economics: single tiktoken measurement, structural advantage, not amortized cost per successful task",
+      "Do not assume HTTP binding correctness generalizes to PUT/POST, multi-slot, noisy browser, LLM distillation, cross-site: only GET endpoints tested on jsonplaceholder",
+      "Do not assume n=3 establishes statistical significance: deterministic synthetic training, single API, zero model/browser calls",
+      "Do not assume Fix3 blocks all valid parameterization: only host?query patterns affected; path-slash patterns unaffected",
+      "Do not assume C-PRODUCT-ECON is measured: remains HYPOTHESIS"
+    ]
+  },
+  "dependencies": [
+    "Discriminating test required: provide URL pair where Fix2 passes but Fix3 should reject (e.g., scheme-only 'https://') to demonstrate Fix3 independent necessity (audit V1)",
+    "If necessity not demonstrable, consider removing Fix3 as redundant defense-in-depth to simplify codebase",
+    "resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing",
+    "PUT/POST method fidelity testing needed to bound method preservation claim",
+    "End-to-end amortized cost measurement required for C-PRODUCT-ECON: needs real-browser test harness with model tokens + browser/network + retrieval/verification/repair vs literal/cold baselines"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35185290656/result.json: outcome SUPPORTS, metrics C1-C7 all true, url_corpus 12/12, c6 3/3 1.0, c7 distilled true",
+    "research/experiments/EXP-PRODUCT-35185290656/audit.json: status REVISE, producer_claim_supported false, V1 high severity Fix3 necessity not demonstrated, claim_ceiling narrowed, required_fixes 5 items",
+    "research/experiments/EXP-PRODUCT-35185290656/report.md: verdict SURVIVES_CURRENT_TEST, 12 patterns table, Fix3 old vs new code",
+    "research/experiments/EXP-PRODUCT-35185290656/provenance.json: base ba1e3f6d, parent a5794a2b, kernel sha991b..., models sha67ff...",
+    "src/spider/kernel.py sha991b02823012012db9dd59774d7d7c1556d4c1aa4196e09fce4cdf73b1f0b002: _is_protocol_only_prefix redesigned",
+    "research/experiments/EXP-PRODUCT-35166508130/handoff.json: parent carry_forward established/rejected/unknown/do_not_assume",
+    "codex/claim_state.json: C-PARAM-INHERIT status EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS"
+  ],
+  "recommended_action": "Next product-lane experiment should: (1) Provide discriminating test where Fix2 passes but Fix3 should reject (e.g., scheme-only 'https://') to demonstrate Fix3 independent necessity; (2) If necessity not demonstrable, consider removing Fix3 as redundant defense-in-depth; (3) Optionally test PUT/POST endpoints to bound method fidelity; (4) Consider pivoting to end-to-end amortized cost measurement for C-PRODUCT-ECON. Simultaneously: C-PARAM-INHERIT remains EXPERIMENTAL at narrowed ceiling; C-PRODUCT-ECON remains HYPOTHESIS; no product promotion."
+}
