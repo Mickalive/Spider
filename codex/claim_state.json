@@ -1565,6 +1565,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Directional reversal persists under corrected implementation: per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) \u2014 recipe choice flips C2 direction (divergence 0.38), confirming reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). However, quantitative reproduction of parent stored values fails: canonical null mean deviates 0.0424 from parent 0.5273 (exceeds B1 0.02 threshold), per-task weighted null mean deviates 0.07 from parent ~0.28 (exceeds NC2/F3 0.05 threshold). Frozen decision rule has no branch for MIXED outcome (reversal persists but NC2/F3 fail). Claim ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 definitions, 1 Magento site), sorted(raw_roles), within-iteration agreement mean, frozen seeds. Does NOT establish SURVIVES_REVERSAL_PERSISTS as frozen (requires NC2/F3 pass), full-DOM ordering, cross-site invariance, 5-definition family agreement, or broader C-MEAS-VALID status. Density metric ordering is definition-dependent AND recipe-dependent."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35280397316",
+        "lane": "intel",
+        "created_at": "2026-09-17T22:07:30.804243+00:00",
+        "decision": "SURVIVES",
+        "source_commit": "84a41525644ef003ab20bd0f1dd30b3fc1ea945c",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Literature synthesis confirms recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods. However: (1) search was non-systematic (no PRISMA protocol, no inclusion/exclusion documentation); (2) SPIDER-to-IR applicability mapping is producer interpretation, not established literature result; (3) code coverage evidence from framework docs not peer-reviewed; (4) web analytics case is temporal definitional change not concurrent ambiguity. The experiment provides theoretical grounding for the recipe choice sub-problem but does not resolve the empirical recipe choice at scale. C-MEAS-VALID remains EXPERIMENTAL pending full-DOM enumeration."
       }
     ]
   },
@@ -1640,14 +1650,14 @@
       "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed \u2014 amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-INTEL-35264637598",
+      "experiment_id": "EXP-INTEL-35280397316",
       "lane": "intel",
-      "created_at": "2026-09-17T19:24:06.621540+00:00",
-      "decision": "MIXED",
-      "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
+      "created_at": "2026-09-17T22:07:30.804243+00:00",
+      "decision": "SURVIVES",
+      "source_commit": "84a41525644ef003ab20bd0f1dd30b3fc1ea945c",
       "claim_id": "C-MEAS-VALID",
       "status": "EXPERIMENTAL",
-      "reason": "Directional reversal persists under corrected implementation: per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) \u2014 recipe choice flips C2 direction (divergence 0.38), confirming reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). However, quantitative reproduction of parent stored values fails: canonical null mean deviates 0.0424 from parent 0.5273 (exceeds B1 0.02 threshold), per-task weighted null mean deviates 0.07 from parent ~0.28 (exceeds NC2/F3 0.05 threshold). Frozen decision rule has no branch for MIXED outcome (reversal persists but NC2/F3 fail). Claim ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 definitions, 1 Magento site), sorted(raw_roles), within-iteration agreement mean, frozen seeds. Does NOT establish SURVIVES_REVERSAL_PERSISTS as frozen (requires NC2/F3 pass), full-DOM ordering, cross-site invariance, 5-definition family agreement, or broader C-MEAS-VALID status. Density metric ordering is definition-dependent AND recipe-dependent."
+      "reason": "Literature synthesis confirms recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods. However: (1) search was non-systematic (no PRISMA protocol, no inclusion/exclusion documentation); (2) SPIDER-to-IR applicability mapping is producer interpretation, not established literature result; (3) code coverage evidence from framework docs not peer-reviewed; (4) web analytics case is temporal definitional change not concurrent ambiguity. The experiment provides theoretical grounding for the recipe choice sub-problem but does not resolve the empirical recipe choice at scale. C-MEAS-VALID remains EXPERIMENTAL pending full-DOM enumeration."
     }
   }
 }
