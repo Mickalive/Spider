@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35154720995",
+  "lane": "runtime",
+  "github_run_id": "35185288893",
+  "github_run_attempt": 1,
+  "created_at": "2026-09-17T05:22:36.804107+00:00",
+  "completed_at": "2026-09-17T05:30:00.000000+00:00",
+  "base_sha": "5753f67b8ddb085a62f130b48c74cced1fdf90c4",
+  "pre_execute_sha": "dd1da7ef6481bcc44123cd385555180106fac463",
+  "post_execute_sha": null,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "os": "Ubuntu 22.04.5 LTS",
+    "cpu": "x86_64",
+    "memory_gb": 7.7,
+    "dependencies": {
+      "brotli": "1.2.0",
+      "PyJWT": "2.14.0",
+      "requests": "2.34.2",
+      "numpy": "2.5.3",
+      "certifi": "2026.7.22"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/request.json",
+      "sha256": "75aff44bff46eeee93fa926a4dfcb77ffcdf31e949529155c2412f0cfbccb8c9"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/spec.json",
+      "sha256": "be71d2df31a3e3a42a94cca0943236cbf258dc7a1f11da08d6afa7ba278102ce"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/prereg.md",
+      "sha256": "7aa4e4871e4b2f0bd3bf13167ff660f55fd25c776a8d0601d164577d80fc3056"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/freeze.json",
+      "sha256": "5e8f5f2a7a7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35137033384",
+    "path": "research/experiments/EXP-RUNTIME-35137033384",
+    "handoff_sha256": "21072df7f229e956582ead68a482782adc0f759fca8771071218d63a7731ad36"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script with mock OAuth2 server, content type generators, and decompression-normalization logic"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/result.json",
+      "role": "derived",
+      "description": "Structured experiment results with metrics, controls, and observations"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/raw_observations.json",
+      "role": "raw",
+      "description": "All HTTP observations per baseline per endpoint per state per content type per size"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/report.md",
+      "role": "derived",
+      "description": "Human-readable experiment report with interpretation and analysis"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-RUNTIME-35154720995/provenance.json",
+      "role": "metadata",
+      "description": "Reproducibility metadata and provenance chain"
+    }
+  },
+  "execution_parameters": {
+    "seed": 44,
+    "reps_per_state": 20,
+    "content_types": ["JSON", "HTML", "XML"],
+    "payload_sizes": ["1KB", "10KB", "100KB"],
+    "baselines": ["DECOMPRESSED-VARYING-BROTLI", "DECOMPRESSED-VARYING-GZIP"],
+    "brotli_quality_range": [4, 5, 6, 7, 8],
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "endpoints": ["/userinfo", "/introspect"],
+    "cdn_noise": false,
+    "total_requests": 1440
+  },
+  "reproduction_instructions": {
+    "prerequisites": [
+      "Python 3.12+",
+      "brotli>=1.2.0",
+      "PyJWT>=2.14.0",
+      "requests>=2.34.0",
+      "numpy>=2.5.0"
+    ],
+    "commands": [
+      "cd research/experiments/EXP-RUNTIME-35154720995",
+      "pip install brotli PyJWT requests numpy",
+      "python3 run_experiment.py"
+    ],
+    "expected_duration_seconds": 300,
+    "expected_artifacts": [
+      "result.json",
+      "raw_observations.json"
+    ],
+    "known_issues": [
+      "Mock server uses class-level attributes for body_size and content_type, which may cause race conditions in parallel execution",
+      "Port allocation uses sequential BASE_PORT + index, which may conflict with other experiments running concurrently",
+      "JWT key length warning (19 bytes < recommended 32 bytes) is expected and does not affect experiment validity"
+    ]
+  },
+  "metadata": {
+    "frozen_at": "2026-09-17T05:22:30.995223+00:00",
+    "executed_at": "2026-09-17T05:22:36.804107+00:00",
+    "completed_at": "2026-09-17T05:30:00.000000+00:00",
+    "execution_duration_seconds": 480,
+    "model": "opencode/mimo-v2.5-free",
+    "model_id": "opencode/mimo-v2.5-free"
+  },
+  "evidence_chain": {
+    "request_to_design": "request.json -> spec.json + prereg.md",
+    "design_to_freeze": "spec.json + prereg.md -> freeze.json",
+    "freeze_to_execute": "freeze.json -> run_experiment.py -> result.json + raw_observations.json",
+    "execute_to_report": "result.json + raw_observations.json -> report.md + provenance.json"
+  }
+}

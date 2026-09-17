@@ -13,7 +13,7 @@
       "decision": "SURVIVES \u2014 C-PARAM-INHERIT survives at synthetic in-kernel POC level: distill_parameterized() with _extract_varying_values() correctly induces one parameter slot for isomorphic action paths and resolves to EXECUTABLE with correct bound_action for all 10 unseen single-char identifiers. All four frozen decision-rule conditions satisfied. Audit PASS confirms recomputed metrics match producer. However, the claim ceiling is narrow: single-parameter, single-field, common-prefix heuristic, deterministic synthetic data, hardcoded confidence, simulated baselines. No broader product promotion is authorized by this evidence.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "fb05ae4d41a0fec34053d42e6fe827e19c624e96",
       "hashes": {
         "request.json": "fd3e6828457739fc3e7094df53ba020c82d12bf513ddddcd7c3bbda070508a35",
@@ -40,7 +40,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "9cf80f63bd0f58287bbbf1526ca3432febca9492",
       "hashes": {
         "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
@@ -68,7 +68,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "0cef5908fade8d636ed40f64f5cd5d64e2a909b8",
       "hashes": {
         "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
@@ -95,7 +95,7 @@
       "decision": "NARROW_SUCCESS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "f6949358832f92af167d9a6ca8621546382d42dd",
       "hashes": {
         "request.json": "6145c1903ea8dcba98048817351b4cea1d9f9f6bad7b28fa0745af874da8e2bd",
@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -151,7 +151,7 @@
       "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "c72fbcd7da6a20452c55d684a4e7d32fd615eac1",
       "hashes": {
         "request.json": "e21c8ef54aaa8677b1814e8641e8df61b03358ffa51e94287a5de0599a73a0f9",
@@ -178,7 +178,7 @@
       "decision": "COMPETITION-UNSAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "bd318921b4ff04b7d690608708f66548b1a74aba",
       "hashes": {
         "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
@@ -205,7 +205,7 @@
       "decision": "MULTI-PARAM-SURVIVES \u2014 the frozen decision rule passes all 7 checks: C1 regression (slot\u22651, resolution=1.0, binding=1.0), C2 multi-param (slot=2, distinct, resolution=1.0, binding=1.0), C3 three-param (slot=3, distinct, resolution=1.0, binding=1.0), C4 non-identifier (slot=1, resolution=1.0, binding=1.0), C5 no-collision (slot=2, distinct, resolution=1.0, binding=1.0), null_control passed, no crashes. Producer metrics verified: 21/21 EXECUTABLE, 21/21 binding correct, 0/21 unsubstituted templates. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling remains narrow: synthetic POC implemented only in run_experiment.py (not in kernel.py), single-intent deterministic observations, trivial full-replacement parameterization for body fields, tautological confidence gate (0.8 == min_confidence 0.8), null control passes via intent mismatch not pattern absence, fragile positional slot-to-param mapping in harness. Do NOT promote to Product Core.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "b99b379f508ab3940986efbd32b2f9119b536ced",
       "hashes": {
         "request.json": "4b1917a31ca05e7dd0c4cf6c890445f0c08c444ea0b199b514870af6e8b8c554",
@@ -232,7 +232,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "f48d8baf8331e4a081fffa58aa3ad03e810a85d6",
       "hashes": {
         "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
@@ -259,7 +259,7 @@
       "decision": "NARROW_SUCCESS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "a6698de64a402d386cb9dfa9d7af76b55a565d55",
       "hashes": {
         "request.json": "655f8b7f40f69f7f55ad1411d433bd3eb47b37862604b486bd0246ab586483c5",
@@ -287,7 +287,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "0d00d3abac08d203c6df7314c622969785d6f83e",
       "hashes": {
         "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
@@ -314,7 +314,7 @@
       "decision": "NARROW_SUCCESS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "f48f1ad99f341d4cc98fb0421ac21653dd283d75",
       "hashes": {
         "request.json": "c8476dec201ef16f7d3fcdcf80562af142e95461a9a0bdfed44afb21994e946d",
@@ -341,7 +341,7 @@
       "decision": "COMPETITION-SAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "db32eb7948b01908e422a7ec66d465c6db6581a4",
       "hashes": {
         "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -396,7 +396,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "dca0b76bab7b58b4be4a44eea380e811550330b2",
       "hashes": {
         "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
@@ -423,7 +423,7 @@
       "decision": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) \u2014 standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "24969f18d2aed3c3a3b7d0655db58625986541de",
       "hashes": {
         "request.json": "a3d8fc09cf58ccfda3463926e286c1c9bbe996567cc4306cd617d9b652de804e",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -478,7 +478,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "d4353fcba3d3bb06d0f628cc54d9fbc111243db7",
       "hashes": {
         "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -534,7 +534,7 @@
       "decision": "SCOPE-LIMITED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "6c7df8c31f4a41833ea76f81f4543a4cab56d3ea",
       "hashes": {
         "request.json": "4b53acf9a0f23b2434203d8fa79bebc7409de22a560f47020e98c775c0fd3aa0",
@@ -562,7 +562,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "c1a660af636302945d2817697e5470f50efac713",
       "hashes": {
         "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
@@ -589,7 +589,7 @@
       "decision": "KERNEL-INTEGRATION-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "bcbc236d4ad4884ac9d439c0262c23a0c3058746",
       "hashes": {
         "request.json": "f3ac6e2ab30480ed7370041882af1fc9ac886489f7fe1668772593145237246f",
@@ -616,7 +616,7 @@
       "decision": "FIXES-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "44d59cfed64d527ca5261503d3c35886d386d93f",
       "hashes": {
         "request.json": "77e2c8039f4cc0dd2813eb3fd231667e388cfca68372b727c979a7172bfa296e",
@@ -643,7 +643,7 @@
       "decision": "PARTIAL_VALIDATION",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "a208512f89013a0a104157e793349609fd3427cf",
       "hashes": {
         "request.json": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5",
@@ -670,7 +670,7 @@
       "decision": "FIXES-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "740204b76eccdb1ff004e104d2686ecea01d84ab",
       "hashes": {
         "request.json": "d8aa047873053228069f0ae6f2a40d37a124c6489b58135e0f8a2fe7e7e5c6bb",
@@ -697,7 +697,7 @@
       "decision": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "abca81f5a5cacdcae7040a7c00c7bddf8db19d5c",
       "hashes": {
         "request.json": "603a862fdad3677be7895d680130f98f046d54e4effcdcc440ad9fc6b4c326f7",
@@ -724,7 +724,7 @@
       "decision": "KERNEL-INTEGRATION-PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "74256fb86a510180082f39d7346efa5894c7a070",
       "hashes": {
         "request.json": "8637bf8cae798a7888136c6b2ddde5787bb45a4a3cfda5af414e9e8bcbed25f7",
@@ -751,7 +751,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "22ccea04903ae256d363b8968b3c2a4690ef6057",
       "hashes": {
         "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
@@ -778,7 +778,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "1504ba88ec66a9060656c9a3b75c586bc55e9fe9",
       "hashes": {
         "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -834,7 +834,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "2ab22ff1c2fef6da589d75338825f570161b91a6",
       "hashes": {
         "request.json": "ba9cefd4d44540e65e090e9fae5bad7e919fb5b1eef3eb4d2348dbb9454d7d8c",
@@ -861,7 +861,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "8ae9ddc8f2025e7f38632b0eea3c02e62160f6a6",
       "hashes": {
         "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
@@ -888,7 +888,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "be11b0bfedbf5382b271084e52a2a36f44de855b",
       "hashes": {
         "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
@@ -915,7 +915,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "a4c9a3e22d344c9e0bd5d392d81dee1b572ff88d",
       "hashes": {
         "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
@@ -942,7 +942,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "111951aeb5f0c770376457836dc23e17b94e32e1",
       "hashes": {
         "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
@@ -969,7 +969,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "fcec93130c8d7a7d9feed13b142420d179c21b82",
       "hashes": {
         "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
@@ -996,7 +996,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "b727aee7b0585da3e3670394fa25c20b54a472f8",
       "hashes": {
         "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
@@ -1023,7 +1023,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "ca57376ba74b4524c92be11f7dd9fc545697f9da",
       "hashes": {
         "request.json": "b21878c4933f8f841b0056fd14377a235c35ed93557756b907d387186ddde530",
@@ -1050,7 +1050,7 @@
       "decision": "C2-FIX-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "b6a0886e36754837ded02ab836511b63f0522c14",
       "hashes": {
         "request.json": "ce4b6c34736ca35f2a986a7f7ea40647c45ba76637b3bd4efbd4db38f546a7cc",
@@ -1077,7 +1077,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "00bf4dd51b80ec66e60f11cfee757a4b0a0ace3c",
       "hashes": {
         "request.json": "c48613bd90a76990a0622d94b3ead95384fcfa30d05d9df244baf5de268c24f9",
@@ -1104,7 +1104,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "df9af4b6b730b12fa91816fa5fd592499cb781d6",
       "hashes": {
         "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
@@ -1131,7 +1131,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "a23db9347a329843bf69f7ffe1066831fcd55004",
       "hashes": {
         "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
@@ -1158,7 +1158,7 @@
       "decision": "C2-FIX-FALSIFIED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "d04d236205ae78814ed604f448585ca9e379333f",
       "hashes": {
         "request.json": "ba041eed4d24d1e99ed377e2f3a85a5d2a89e4806f79b563532b727a1b7a72d1",
@@ -1185,7 +1185,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "968991590c035e9ce5821849d206a7ad2ded493f",
       "hashes": {
         "request.json": "2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
@@ -1212,7 +1212,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "2a6b3b8a0f5f86de23771c375a87ebe05b1e2e21",
       "hashes": {
         "request.json": "14e43f720e1fba24c7432e375320a3883e153529960e4a178a3480d777ca7049",
@@ -1239,7 +1239,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "d742b1d9d82f1a59a62ed4297c8ce3fa6972d62b",
       "hashes": {
         "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
@@ -1266,7 +1266,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "e45dabebba74bac4239f93bdff7a6c1a27938156",
       "hashes": {
         "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1322,7 +1322,7 @@
       "decision": "BLOCKED_CLOSE_AND_PIVOT",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "34848357b257338eecf73b88b993195d58629860",
       "hashes": {
         "request.json": "3ba94d499c5c79aa09bf1be2163fdc84d99024e38e48261a67ac852e6b6c64fb",
@@ -1349,7 +1349,7 @@
       "decision": "SUPPORTED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "6c64f47170523c09a57a2b51e5dc5b724118324a",
       "hashes": {
         "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
@@ -1376,7 +1376,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "21e4401730683715d2680684fed56506c9527b7d",
       "hashes": {
         "request.json": "08b6fea0fb6b846a9c81cdb47094ca6e993855a157d9021f306d6e605fb731b5",
@@ -1403,7 +1403,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "32eced076e48102aee41f44edeebecd3ef6c0e19",
       "hashes": {
         "request.json": "9750fce79f52c98315138dbdb38a57344d9dc7570c31872b359c913d68bfea70",
@@ -1430,7 +1430,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "f3fee46cab94ef248b72b034f41f14ac632afd7d",
       "hashes": {
         "request.json": "cfca5639a8a7f2674b165ee94f5089f6800b92124567b2751b6c362a8718d007",
@@ -1457,7 +1457,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "6db3260c944a0fc12220fce002843288fe5fa1ad",
       "hashes": {
         "request.json": "80b3210ecbb01ff52f0c5510d78bf6f0a8c0366e21b02db4450fd1c5dfaa829f",
@@ -1484,7 +1484,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "ad803c5168c071bf1edc4125404a7a0096dcdee3",
       "hashes": {
         "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
@@ -1511,7 +1511,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "ca9884ed23d6f4d05199f80d093ccab39a3ea420",
       "hashes": {
         "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1566,7 +1566,7 @@
       "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
       "hashes": {
         "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1621,7 +1621,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "1eae61c57d53569bb75757e3e4114c823f2e7911",
       "hashes": {
         "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
@@ -1648,7 +1648,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "44f6659854350c031c5ed54cd415374d2db9277c",
       "hashes": {
         "request.json": "633f9e924564e990435ba30a8f5f48bde4cc725c74046fdc7cb548ba5ed227e9",
@@ -1675,7 +1675,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "9f154d27809942d795bfa4b903732126a53f006b",
       "hashes": {
         "request.json": "80f820e60421b5ff4dee4e7d9c80761021b0193b8e218207b604f7ba58c7ab91",
@@ -1702,7 +1702,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "60981e36e57022a10d3d5e780cbbc532ce26d4ae",
       "hashes": {
         "request.json": "42e0f10452526e8c0ad0ae84275a10c086ba9bb104b8b696a7cb81e4c0f9a316",
@@ -1729,7 +1729,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "df5a7fd2f905abe14373bfd3ac607f448a688af8",
       "hashes": {
         "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
@@ -1756,7 +1756,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "359a1644d1ba75423ab41a20689235331fc62fc7",
       "hashes": {
         "request.json": "0a650b5eeb497774ed60ddf457eb4b5dd7cedcc42f470902fa1dedeb5491135d",
@@ -1783,7 +1783,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "4ce4954fbfec56bcc79d0de613f8fcf99ea86b94",
       "hashes": {
         "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
@@ -1810,7 +1810,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "569a1573e40b239768c6b75da2c32a1bd2a8780c",
       "hashes": {
         "request.json": "e4249732669660c49afb59ba70b5fa6b1c5fd536c6ba3c6114dd93958da3ea57",
@@ -1837,7 +1837,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "d72132df7f2336b3519a2519d0b3bda6d0d2e14e",
       "hashes": {
         "request.json": "655bcac7a22953c68b62d0edb662ff06b176a7881cc372597730f75286990cab",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -1892,7 +1892,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "6fc96c940178ab198faee313db88403c6e3b777d",
       "hashes": {
         "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
@@ -1919,7 +1919,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "8ae879a69fd5021c8646c42f2d06a4915fe16898",
       "hashes": {
         "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
@@ -1946,7 +1946,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "636109afec367ad29acb94c1584fa6740c062169",
       "hashes": {
         "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
@@ -1973,7 +1973,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "7c633b0a2a5c11c739f36a791eea18074b4097b1",
       "hashes": {
         "request.json": "839a29f8e0fb8c6c6b11ff1737229b0bcc9d4a0aaf4ca1b8a813f38e63c9645a",
@@ -2000,7 +2000,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "5a2e3b5ab3b60d164a263a252d635333d95e98f3",
       "hashes": {
         "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
@@ -2027,7 +2027,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "b8b379afd65beb4b0782d7e4f0c950d04317bfb8",
       "hashes": {
         "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
@@ -2054,7 +2054,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "858edf9f6a14693e1c85d059c07365c13e1a2315",
       "hashes": {
         "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2110,7 +2110,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "78a2a667be8f291f6a0871b41d9f4c4baea4ddef",
       "hashes": {
         "request.json": "69878143db1e72811812a43265fed81f84ccfdfc8d2409438562d0bf254aeb8e",
@@ -2137,7 +2137,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "2916a7c97b2c2bc9299fe8644e4914dae54f99e9",
       "hashes": {
         "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
@@ -2164,7 +2164,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "d2eff3812d50dfe4877e90bb019792f22423ce6c",
       "hashes": {
         "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
@@ -2191,7 +2191,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "57ca23d0c9a481288a3e30b836396e9c0880253f",
       "hashes": {
         "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
@@ -2218,7 +2218,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "651877a2e9e93b595c2ca505b25e7c9d793a22b5",
       "hashes": {
         "request.json": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5",
@@ -2245,7 +2245,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
+      "source_ref_head": "0366638d2b8885285c29a2e268c8f6622fc7ce6b",
       "source_commit": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
       "hashes": {
         "request.json": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
@@ -2272,7 +2272,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "894ea2ef394f8f3101c7841ad48264f3752492a8",
       "hashes": {
         "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
@@ -2301,7 +2301,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2328,7 +2328,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "5c54f99d8325f9d973a4663bf9e16b53151e0b07",
       "hashes": {
         "request.json": "5c640867203f74c9a26232bf007716dbd7284906df70b21f58d8a80823bec8ff",
@@ -2355,7 +2355,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "39381a4eda531fd7cf3c24f57e52ad934f040310",
       "hashes": {
         "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
@@ -2382,7 +2382,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "77d4d23236294e10b101bae7a5cd7f9a5a22332d",
       "hashes": {
         "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
@@ -2409,7 +2409,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "9875ae7717e8cecedfad8092aa2caa89463e2eaf",
       "hashes": {
         "request.json": "348574668ded59beee1d01c493e215df4149d659d50eb713e6968ff706e6e6b6",
@@ -2436,7 +2436,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2463,7 +2463,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "8310a3a35cd4792a93d6a4d946536af217cce033",
       "hashes": {
         "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
@@ -2490,7 +2490,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2517,7 +2517,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2544,7 +2544,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "75062582173d25a6bb1097b6d1d4d574aa44c2ad",
       "hashes": {
         "request.json": "09566c08deef4d2b39cf6d8f743ef382841406889557ad122cceb20cdb9d04d9",
@@ -2571,7 +2571,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress after Content-Encoding:br removal) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under synthetic brotli quality selection from {4,5,6,7,8} via local Python proxy (N=20 per state, seed 44, 1KB compressible JSON). Algorithm-equivalence with gzip holds (diff=0.0). However, audit REVISE narrows claim ceiling: effective brotli diversity is 2 variants (q4 distinct vs q5-8 identical for all tested body types), not 5 distinct; the 5-level range is not a materially stronger stress test than binary {4,8} for these payload sizes. H3 (compressed <0.35) is falsified on /userinfo (0.4329 > 0.35). Producer's SUPPORTS outcome is accepted with narrowed ceiling per audit required_fixes.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "2918969df710542f3690880419fe59936f2a71fb",
       "hashes": {
         "request.json": "b66a03d98a288ef7e529118918bbab2195638ee9f690c27d3789c3ffaae301d8",
@@ -2599,7 +2599,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "0efda56bec081f965bb543dc494e249eb5865fc9",
       "hashes": {
         "request.json": "3d10ab9f180af2b51eb5399baa5e93c3cf56f117f5084b2a212cb536475e1bc8",
@@ -2626,7 +2626,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "hashes": {
         "request.json": "597e09c2fcef5c326c4374b44a38b1f99af46a23559f05122c50f55b7163ee6b",
@@ -2653,7 +2653,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "a605af55689dd0341a87ed8e07da1e9b1ef5f63e",
       "hashes": {
         "request.json": "e45c4c81142891b5bfdd694e1e08283ac3006a491a63100991b483b59c4523bf",
@@ -2681,7 +2681,7 @@
       "decision": "PROVENANCE_PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "57efaab4f56233946882021b627ad578524c8174",
       "hashes": {
         "request.json": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05",
@@ -2709,7 +2709,7 @@
       "decision": "REVISE \u2014 frozen decision rule passes arithmetically on all 5 conditions (Fix1+Fix2+Fix3 importable, binding_accuracy=1.0 on 3 parameterized endpoints, mechanism count 3 vs 5 = 40% reduction, protocol-only prevalence 19.23% on curated corpus, zero task failures). However, the audit identifies high-severity measurement validity gaps that prevent producer claims from being fully supported: (1) protocol-only prevalence measured on curated 52-URL hardcoded list (V1_PROTOCOL_CORPUS_NOT_LIVE) not actual live browser traffic as required by spec measurement_validity[3]; (2) binding accuracy validated by exact URL string matching (V2_BINDING_NOT_HTTP) not real HTTP execution against jsonplaceholder.typicode.com as required by spec measurement_validity[2]; (3) mechanism count reduction conflates GET/PUT methods (V3_MECHANISM_COUNT_METHOD_CONFLATION) \u2014 method-aware counting yields 5 vs 4 = 20% at threshold; (4) token cost baseline uses arbitrary arithmetic without pricing documentation (V4_TOKEN_COST_ARBITRARY); (5) B_UNFIXED_PROTOCOL_ONLY baseline omitted (V7_B_UNFIXED_MISSING). The claim ceiling is bounded to: committed-code synthetic single-slot with metadata-only slot_prefixes on src/spider/kernel.py, string-match binding accuracy 1.0 on 3 parameterized endpoints, method-excluded mechanism reduction 40% (method-aware 20% at boundary), curated 52-URL protocol-only prevalence 19.23% (20.41% deduped). Real HTTP binding correctness, live traffic prevalence, literal vs parameterized real cost per successful task (C-PRODUCT-ECON), and model-token economics are NOT established. No product promotion.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "6e4206dcccf7de5d47af3da4a8f8cb4dde8f4326",
       "hashes": {
         "request.json": "559b2942cce49ff61af4766771387874cc647e2cecae0d9b6611f5c1c3cdc185",
@@ -2736,7 +2736,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "10549ee646b031aa873d82f61ff86234d9b17eb8",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "source_commit": "10549ee646b031aa873d82f61ff86234d9b17eb8",
       "hashes": {
         "request.json": "643b91daec4b9882f577ba4f922d043f4fdf33b8f7d7cfe03c0fa9b57e479a43",
@@ -2763,7 +2763,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "hashes": {
         "request.json": "ed47b0039a46ad7d79d3c81b07ab6d0131599ade0fa0fe096d922a28d7ee2998",
@@ -2790,7 +2790,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "85222aac79ef618a0f2575a536351744d7708556",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "source_commit": "c87d8226bdc357b34fddeacb1e913ebb5d068a52",
       "hashes": {
         "request.json": "ecfe82543b6c6ae4460768e2b9b8815346dec7d46fb9765838fdfc4fe0d781ed",
@@ -2817,7 +2817,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality variation, chunked transfer-encoding, CDN headers, Accept-Encoding negotiation, response caching, Content-Length variation). Algorithm-equivalence with gzip holds (|diff| = 0.0 < 0.1). Compressed-byte-only hashing degrades to 0.2789 on /userinfo (< 0.35), confirming H3. Claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. Audit PASS confirms all recomputed metrics match producer (max_abs_diff 0.0). Bounded to: localhost synthetic proxy, 1KB compressible JSON, effective brotli diversity 2 variants (q4 distinct vs q5-8 identical), mock OAuth2 4 states with 3-way error collapse (ceiling 0.5 on /userinfo), seed 44, N=20 per state, chunked decoded by HTTP client before decompression. Do NOT promote to Product Core \u2014 real-CDN infrastructure validation remains the critical untested blocker.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "0e28925f49e6de355d7f362d5bdd62e62f89e65e",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "source_commit": "3b672238c289ae25c5cc98e9d6f211bc1a05f607",
       "hashes": {
         "request.json": "662b9236860872e014df8a1fe96e32c7f8a71e671ebea5b68b4a62dfd6e59258",
@@ -2845,7 +2845,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/product",
-      "source_ref_head": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
       "source_commit": "62cbcc826660c3c3b162490e326acdfa67cc3c32",
       "hashes": {
         "request.json": "8a18ac1f8ecc2aeed9ae710e5bc80de5c9445e2345a2a99ef546fe29427d3580",
@@ -2860,6 +2860,33 @@
         "handoff.json": "1e07c379942a2bc21ab714cfdbac54941ca52937f23be59cd47c46f6f4ca4a0e"
       }
     },
+    "EXP-PHYSICS-35154721808": {
+      "lane": "physics",
+      "request_id": "832a98023d9af6f0d29ba615",
+      "created_at": "2026-09-16T21:52:29.795273+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can a fully-ambiguous content mapping (all 3 states share 1 content hash, eliminating partial state discrimination) with stochastic branching FSM yield conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125, resolving whether the residual 0.226 bits from EXP-PHYSICS-35137030850 reflects genuine predictive dynamics beyond aliasing or is entirely explained by partial state discrimination?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (2) triggers: BC PMI at K=3 = 0.000000 bits \u2264 0.05 threshold, Bonferroni p = 1.0. The primary measurement is mathematically forced (I(X;Y) = 0 when Y is constant, |R| = 1 by design). The auditor's REVISE recommendation on control degeneracy is accepted: controls failing because |R| = 1 makes permutation null degenerate is a design-consequence, not an execution-failure. However, the primary measurement (BC PMI = 0.0) is unambiguous and independently sufficient for the FALSIFIED-IN-SETTING verdict \u2014 controls are confirmatory, not gating. The frozen rule's precedence (FALSIFIED checked before MEASUREMENT_INVALID) is correctly triggered. Claim ceiling bounded to: conditional PMI = 0.0 bits exactly on constant-response hash-based observation with stochastic branching FSM. No inference to richer representations, production SPAs, or H(Response) > 0 settings.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
+      "source_commit": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
+      "hashes": {
+        "request.json": "038454b1676888d7706ed54a0c9e75012501fcc2877b973db2ce8cdfb7920d1f",
+        "spec.json": "356e64e71c9f160e91046ae27e4b7c21517fd05bd0a2fbf14c6388678d540446",
+        "prereg.md": "6aaa8117f8395804f6bb46a4d1d7d08a1ba1ac300115e417c5563d55181d009e",
+        "freeze.json": "05f4df6b62bc4dcca409413bcae67e59ce6f39284bbbffd20ba1a6d180f34194",
+        "result.json": "feb8966ebf5b30cb2ec37cab41c26e44e18e17560f595fc74af604ec623f0144",
+        "report.md": "76eec90b09f59145a4148fc1c05d0a9a1397b08b3a70231712e9ee7f73f3e201",
+        "provenance.json": "4bfccf10b7ccee2925d527db99b7e702b8efbf152a4a7c7acb5b643a35fc9e11",
+        "audit.json": "ac13749604ed766774bffd9cb4deed42724284b8918880efdb0f6dc852913498",
+        "verdict.json": "8cc1a82d17235075f4cc4d274f1ad6b73b1a2711b19e7827f11cddb4d32f9120",
+        "handoff.json": "b23f5e807bc2e274d9a07aa8cd160bb6745a1f894052a083920059e36d7f94c1"
+      }
+    },
     "EXP-GRAPH-35154724244": {
       "lane": "graph",
       "request_id": "abcfe292d10ca906e074ed35",
@@ -2872,7 +2899,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule fails on 2 of 4 conditions: C2 (noise tolerance) fails because optional_field_addition noise at 10% of schema size produces diff magnitude scaling with schema size (1.0 at n=10 to 5.0 at n=50, exceeding threshold 0.5 at all sizes), creating irreconcilable conflict with subtle drift (required_to_optional 0.3); C4 (type-aware validation) fails because mock server always returns data conforming to stale schema types, making type drift invisible to client validation (4.7% vs required 80%). C1 (drift detection) PASS \u2014 all 5 drift patterns produce diff 0.3-2.0. C3 (orthogonality) PASS \u2014 Pearson r=-0.59, confirming schema diff captures complementary structural information to Jaccard. Audit PASS confirms all recomputed metrics match producer. Audit V_C4_CONFORMANT_MOCK_TAUTOLOGY identifies C4 failure as measurement-invalid (mock conformance, not evidence against type-aware detection). However, C2 failure is genuine and structural: the magnitude confound persists because unbounded optional field additions dominate subtle structural drift by construction. Schema diff is a weak supplementary signal (detects required_to_optional invisible to Jaccard, r=-0.59) but cannot threshold-separate unbounded noise from drift. Does NOT close C-FRESHNESS domain; eliminates direct schema comparison as standalone discriminator.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "b1e824fdc2b9a81618afc8e9e887da152ed78056",
       "hashes": {
         "request.json": "9dfa5b73f0ceaf721ec7c3f50cd61f72ac291e6c0e5300f6ed5692f464d9d885",
@@ -2887,6 +2914,33 @@
         "handoff.json": "07667213ff9a290be1a2c0ff28cb307b04ab22d16f6cac2f3abbf6f0bc396a1b"
       }
     },
+    "EXP-RUNTIME-35154720995": {
+      "lane": "runtime",
+      "request_id": "9d8f62b1e2c274706f762117",
+      "created_at": "2026-09-16T21:52:40.191689+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does decompression-normalization (SHA256 on decompressed body + status) maintain body-only discrimination on non-JSON content types (HTML, XML) at multiple payload sizes (1KB, 10KB, 100KB) under brotli/gzip compression without CDN noise?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID \u2014 Infrastructure failure: the mock server never applied brotli/gzip compression (Content-Encoding='none' on all 2880 observations, run_experiment.py:260-301). The decompression-normalization mechanism (SHA256 on decompressed body via brotli.decompress/gzip.decompress) was never exercised. The frozen question asked about behavior 'under brotli/gzip compression without CDN noise' but the environment could not express this effect. All reported discrimination metrics (0.5) reflect identity-path body hashing, not decompression-normalization. The frozen falsifier's third disjunct (brotli quality diversity does not increase) technically triggers but is uninformative because no compression was applied. C-MEAS-VALID does not advance from this experiment.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/runtime",
+      "source_ref_head": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
+      "source_commit": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
+      "hashes": {
+        "request.json": "75aff44bff46eeee93fa926a4dfcb77ffcdf31e949529155c2412f0cfbccb8c9",
+        "spec.json": "be71d2df31a3e3a42a94cca0943236cbf258dc7a1f11da08d6afa7ba278102ce",
+        "prereg.md": "7aa4e4871e4b2f0bd3bf13167ff660f55fd25c776a8d0601d164577d80fc3056",
+        "freeze.json": "4112ec26d7db9500aee3da9f407ded5d10c50182ef0c5f48a59ba326aba9c768",
+        "result.json": "e433ea4e2c8f4312c0bc08e02f6ca53be82a23eec0793de0035381f428732660",
+        "report.md": "6e58bc2faddbd84f2e416bda36fe11244601252e23a2ced404fdc956226ee24f",
+        "provenance.json": "164fb33d8a8f5ddd5724eb29ade7485c63450d1bbd0e3963d31c5622cff99cf2",
+        "audit.json": "92806e00686d549859d48109ec1f39d535aa7c9fcc4635dc654ada5246ac07ee",
+        "verdict.json": "1585c7df9ee3927b428c84c42ae33506d38e7d9ef13d2b16cce10dcdaf7b76c2",
+        "handoff.json": "79c5e640c4745b24f4f11409957bccec69a3cb453f7410226f1545b5beb15bd1"
+      }
+    },
     "EXP-GRAPH-35155716123": {
       "lane": "graph",
       "request_id": "e62d92538606b747b929b99c",
@@ -2899,7 +2953,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
+      "source_ref_head": "d343ca1c44da1b304f2687279b9ce211a2300b67",
       "source_commit": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "hashes": {
         "request.json": "06c6b660e6e9754840809ab991b92b30dd8abffc394ec4705341675de783a972",
@@ -2912,6 +2966,115 @@
         "audit.json": "f6406ebd2935ea71644eb96f79029e0b6d3878df6ff201a7ba8c7544d6268a6b",
         "verdict.json": "2f174e3bfb02fd2d1c53d0129eb105316ffb05e9c9d334a738f976c0db13cd59",
         "handoff.json": "90513f0056827f4ce2cf4aaee5e62d206eaca492948fa2868d2d37030f79edcb"
+      }
+    },
+    "EXP-INTEL-35166505835": {
+      "lane": "intel",
+      "request_id": "05cc2f42c2e8102b4dc95e87",
+      "created_at": "2026-09-17T00:25:49.618320+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Can the intel lane, within its own scope, resolve the two non-substrate blocking dependencies (C2 semantic contradiction in spec.json and canonical-script absence) that prevent re-running the full-DOM density metric measurement, and does a formal dependency audit confirm the substrate (locatableSample cap) remains the sole remaining runtime-lane blocker?",
+      "audit_status": "REVISE",
+      "decision": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "source_ref_head": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
+      "source_commit": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
+      "hashes": {
+        "request.json": "dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096",
+        "spec.json": "724d7d91f1ea1ffdf234c7b78c80a57fc6d320645e0082c6be8dba71ebbfe2ce",
+        "prereg.md": "bf3d76560f89eaa607680b35649f512dee935b36dde75e56500179a559fa35b8",
+        "freeze.json": "d0dae201993dd8dfec4319ff13c3203480d1225888e67eaeb5d48a69caec672f",
+        "result.json": "694d05892bf2b63d2847f3dee6e4d52d1cf14b2f06c7b4c5e08fc56184d373b2",
+        "report.md": "ad0d5204586e0b847fc8d1d7a62a2fd393f72d8245b9d49e22dfe1e94d08bc18",
+        "provenance.json": "1502550f0481930aab5eae463cd611b814d6143148231722b8d52937adc6669e",
+        "audit.json": "c8c5224e305e693c280748d3d3a7b9d0ef67632812056284ea00e3c0c4a826f6",
+        "verdict.json": "79796ee78a0270e0a3e465f7049c0adaaaeb8154028b50ec22e98b58dfe6a4b8",
+        "handoff.json": "2d6841990f57286921184777d179df9ec8de0facb3d855bd95a26edc8044c219"
+      }
+    },
+    "EXP-PRODUCT-35166508130": {
+      "lane": "product",
+      "request_id": "3866ac2e5b45df7fae3edf30",
+      "created_at": "2026-09-17T00:25:52.829104+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT",
+        "C-PRODUCT-ECON"
+      ],
+      "question": "Can parameterized mechanisms bind correctly over real HTTP when using endpoint-appropriate unseen IDs that exist on jsonplaceholder.typicode.com, thereby resolving V1_HTTP_DESIGN_IMPOSSIBLE_IDS from the parent MEASUREMENT_INVALID experiment?",
+      "audit_status": "REVISE",
+      "decision": "FALSIFIED-IN-SETTING",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
+      "source_commit": "d093d4367f8b3d3913fe7fd5c009979fd7c0e609",
+      "hashes": {
+        "request.json": "e2dcb2eaf998554344124e3812688ddadc039d254776dd0ce2a97641c49d6dd5",
+        "spec.json": "82d4b63e7fbd24fb4884b18794b0e8bd28e1b5b08da6b0174e729014e3e4f03f",
+        "prereg.md": "36c1e60ea5d70883c25fe87d6586d0e2cd3e869f87d880791cc5416b0ccd5d77",
+        "freeze.json": "c09025deeff97a06342ea99bded887892af7843aad779e34df3f88ce64b11c52",
+        "result.json": "ba9b0ed6c1624f3b6d95437fa224d9cbcc41e75152faff8a0de895cf03a5673a",
+        "report.md": "662ef08e196028594f971ef0fe76841268f9c52eadf8bdc81ab46c0481bcf9e9",
+        "provenance.json": "06cac41371423f6bc55b405986c8ae64b7966fedde950a349368618db22b55e4",
+        "audit.json": "e3bedffc54d0a53391281573a4f101cc5ccdff5f69e0a1396f8fa3f85181681d",
+        "verdict.json": "105233a3ce695b0e478f91eb387da082337abb7d0ce7a4d726e201009c755939",
+        "handoff.json": "7ba2bd4784dc3594eed59794cad9e32a487562ab9b850bed2af18fc07b4c35b6"
+      }
+    },
+    "EXP-PHYSICS-35185288822": {
+      "lane": "physics",
+      "request_id": "2ebd4ae86b4b47acb330e5c4",
+      "created_at": "2026-09-17T05:19:47.829838+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Can the PMI pipeline detect title-aware conditional PMI I(S_next; Title_before | URL, H_K=3) > 0.05 bits on production server-rendered websites with genuine title variation and navigational density, beyond what URL-only representation provides \u2014 thereby bridging the dominant synthetic-to-real gap in the C-WEB-DYNAMICS research program?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "source_ref_head": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
+      "source_commit": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
+      "hashes": {
+        "request.json": "f7430fbbcb7462aff29a9111389d9468e0827093c4294ac0d28ac8e2d796b3c8",
+        "spec.json": "fc365f6430a57ae2e2fbc02cdee7cfb66cc24acaba599d1dcf8d8369f741d36f",
+        "prereg.md": "a5cbfc921a062253c4691ed5a1efedcd5a954ec96fdea1137fb7495837019528",
+        "freeze.json": "69c3ea0a1527260cd286bc1cf77204cd73d013ccd21b22b801d71b2824594351",
+        "result.json": "d0e1b6304ad8049240e6305075e780b313ea267a3661037b795119636910ce2d",
+        "report.md": "0469bed44b320ebdc25deb6490b69180afce5b4e1c3d19e251bd85213967ac36",
+        "provenance.json": "58fb14b5a6478a5a4bfba8e6188f6934e8853cf9569dd18befd406631fe44749",
+        "audit.json": "00814d04db5f1c04fea35415fe8728ebd7d970b4a6258b453ba7fc28e180235a",
+        "verdict.json": "6222147f564ee3061ace6a558f381184014a5478c2457ee4465ac331156d471d",
+        "handoff.json": "8ef7cc72641d42daf5810f2fb371728adb8d76076387882037a0ac1f7681d812"
+      }
+    },
+    "EXP-PRODUCT-35185290656": {
+      "lane": "product",
+      "request_id": "3d111854a8ea25563cf9513b",
+      "created_at": "2026-09-17T05:19:48.441018+00:00",
+      "claim_ids": [
+        "C-PARAM-INHERIT"
+      ],
+      "question": "Can Fix3 (_is_protocol_only_prefix) be redesigned to reject only truly protocol-only prefixes (bare scheme+authority with no path, query, or fragment) without blocking valid host?query parameterization, and does a discriminating test corpus demonstrate its independent necessity over Fix2?",
+      "audit_status": "REVISE",
+      "decision": "SURVIVES_CURRENT_TEST",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/product",
+      "source_ref_head": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
+      "source_commit": "0c62083dcf0d98660b821b6307b2218a5bb6d822",
+      "hashes": {
+        "request.json": "1bfeeab35e875b39f4c7fd66a85a5f813c7a7e8e21b1eaad1a0b85b2f1de63a1",
+        "spec.json": "cf08c5c601cf03370a7b9ca648eeab4422a0460686365a67cd74ba1aa972b298",
+        "prereg.md": "b699e9c2a8cbf27219ef84a5438a3e780f656c4de8be9ae2c772ba550bceab6d",
+        "freeze.json": "142c4ed3c3814bda02e436a91e6c17acfea5b517d059b581b083be80d5449867",
+        "result.json": "4d286d12f70cdd4988d0db2da3de1eb075faf519eeb7c0b35dcb66dc023989ba",
+        "report.md": "86e54e42a31c9aa271f310b2c5a124c2fd3d6ba82f78e03accb3feb37885134a",
+        "provenance.json": "9b54fc6145123488b71ce8aba53039fd026bc8c74c75912cca620c3008ce3cb0",
+        "audit.json": "8064bfcf1c6992213106a128138079346a74c815cad24eaa6d32c2acc3c07510",
+        "verdict.json": "9027ef1247ecac8c7aa66bd62f81f6485c516bc2b94c1a87631a3dabad41b876",
+        "handoff.json": "760f0152a359242795d227ba3ede9d609bc64e775ecbed000f14042f70cfbbb8"
       }
     }
   }

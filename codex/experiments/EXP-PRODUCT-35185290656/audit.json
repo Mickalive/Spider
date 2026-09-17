@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Downgrade or remove Fix3 independent-necessity claim over Fix2: redesigned Fix3 is redundant for bare-authority rejection because _validate_prefix_boundary already rejects 'https://api.example.com' (last char 'm' not in /?=&). No prefix satisfies Fix2 passes (last char in /?=&) and Fix3 rejects (no /? # in rest) except trivial 'https://' (scheme-only). Either prove necessity on 'https://' as the sole discriminant with explicit test, or reframe Fix3 as defense-in-depth not independent gate, and correct report.md discriminating-test section which conflates old-Fix3 overbroad vs new-Fix3 accept with Fix2-vs-Fix3 necessity",
+    "Fix C5 kernel_tests_run reporting inconsistency: research/experiments/EXP-PRODUCT-35185290656/experiment_results.json reports c5_kernel_tests_run 0 and B_LITERAL_HTTP_REGRESSION tests_run=0 while result.json reports 3 and audit rerun confirms 3/3 PASS via stderr. run_experiment.py run_existing_kernel_tests parses result.stdout only, but unittest -v writes 'Ran 3 tests' to stderr. Parse combined output (stdout+stderr) and persist identical metrics in both artifacts",
+    "Bound C6 HTTP claim to tested endpoint and sample size: C6 achieves 3/3 on comments?postId 5-7 (single endpoint, n=3, no variance/error-mode testing). Do not generalize to 'query-parameterized GET' broadly until multiple distinct query-param templates/hosts and larger unseen set tested; report n, endpoint, and lack of statistical power explicitly in claim_ceiling",
+    "Remove overgeneralization 'Fix3 demonstrated as non-redundant defense-in-depth for bare authority patterns' from product consequence unless bounded: state explicitly that Fix3 and Fix2 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False) so ordering determines which blocks, not independent necessity",
+    "Persist token economics as carried HYPOTHESIS: experiment did not remeasure tokens (provenance carried 68 vs 96 from parent). Do not imply expanded claim ceiling includes economics; keep C-PRODUCT-ECON HYPOTHESIS until amortized measurement with comparable encodings"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_FIX3_NECESSITY_NOT_DEMONSTRATED",
+      "severity": "high",
+      "finding": "Redesigned Fix3 correctly fixes overbroadness (C1 True, C2 False, C3 False, C4 old True) and URL corpus 12/12 passes, but hypothesis bullet 4 'independently necessary over Fix2' is not demonstrated. For any non-trivial prefix, Fix2 and Fix3 are mutually exclusive: bare authority 'https://api.example.com' has Fix2 False (ends 'm') and Fix3 True; valid query prefix 'https://api.example.com?key=' has Fix2 True (ends '=') and Fix3 False; path-slash has Fix2 True Fix3 False. No prefix satisfies Fix2 passes AND Fix3 rejects except trivial scheme-only 'https://' (rest '' -> Fix3 True, _validate_prefix_boundary '' -> False, but this discriminant is not in corpus and not tested via distill). Distill pipeline Fix3 check precedes Fix2, so Fix3 blocks bare authority first, but Fix2 would also block it if reached. Producer's C7 'discriminating test' actually shows old Fix3 overbroad vs new Fix3 accept, not Fix2 vs Fix3 necessity.",
+      "evidence": "src/spider/kernel.py:267-287 _is_protocol_only_prefix redesigned 'if ? # / not in rest', 232-241 _validate_prefix_boundary 'last_char in /?=&', 352-376 distill order Fix3 then empty-guard then Fix2; audit recompute: _is_protocol_only_prefix('https://api.example.com') True _validate False; 'https://api.example.com?key=' False True; 'https://jsonplaceholder.typicode.com/' False True; brute scan all corpus prefixes shows zero cases Fix2 True and Fix3 True except 'https://'; result.json validity_notes and unresolved acknowledge redundancy but report.md claims non-redundant",
+      "impact": "Hypothesis partially falsified on necessity clause; decision rule C1-C7 still passes as frozen (C7 requires distill produces Mechanism, which it does), but product interpretation 'Fix3 is non-redundant' overstates evidence. Claim ceiling must be downgraded to 'fixes overbroadness, preserves correctness' without necessity."
+    },
+    {
+      "id": "V2_C5_REPORTING_INCONSISTENCY",
+      "severity": "low",
+      "finding": "C5 kernel regression metric inconsistent between artifacts due to stdout/stderr parsing. result.json correctly reports c5_kernel_tests_run 3 and B_LITERAL tests_run=3, while experiment_results.json reports 0 in both metrics with passed True. Direct unittest writes 'Ran 3 tests in 0.002s OK' to stderr, stdout empty, so run_existing_kernel_tests parsing stdout yields 0. Actual tests all PASS.",
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/result.json metrics c5_kernel_tests_run 3 controls B_LITERAL_HTTP_REGRESSION observed tests_run=3; research/experiments/EXP-PRODUCT-35185290656/experiment_results.json metrics c5_kernel_tests_run 0 controls B_LITERAL tests_run=0; research/experiments/EXP-PRODUCT-35185290656/run_experiment.py:258-289 subprocess.run parsing result.stdout split; audit rerun PYTHONPATH=src python -m unittest tests.test_kernel -v -> stderr 'Ran 3 tests in 0.002s OK' stdout '' returncode 0; src/tests/test_kernel.py 3 tests",
+      "impact": "No scientific impact (C5 PASS valid), but provenance integrity compromised; downstream Director should rely on audit rerun and result.json, not stale experiment_results.json zero value."
+    },
+    {
+      "id": "V3_HTTP_SAMPLE_SIZE_SINGLE_ENDPOINT",
+      "severity": "medium",
+      "finding": "C6 HTTP binding accuracy 1.0 on 3/3 is valid for tested endpoint comments?postId=1..3 training -> 5-7 unseen, but n=3 is minimal, single endpoint, single host jsonplaceholder.typicode.com, GET only, deterministic synthetic observations, 10s timeout, no failure-mode or variance testing. No statistical power; cannot distinguish 100% from 70% with n=3 (95% Wilson lower bound 0.44). No PUT/POST, no multi-slot, no cross-site.",
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/spec.json measurement_validity GET-only, single-slot, network jsonplaceholder; research/experiments/EXP-PRODUCT-35185290656/run_experiment.py:296-363 test_c6_http_binding_query_param loop over P1_UNSEEN fetch_comments 3 values, http_get urllib 10s, validate_comment_body list-of-dicts; result.json metrics c6_http_total_calls 3 c6_http_total_correct 3; experiment_results.json same",
+      "impact": "C6 PASS supports narrow claim 'distilled query template comments?postId=${url} executes correctly for 3 unseen IDs on jsonplaceholder', not broad 'query-parameterized GET' support. Generalization remains untested."
+    },
+    {
+      "id": "V4_SCOPE_SYNTHETIC_SINGLE_SLOT",
+      "severity": "medium",
+      "finding": "All derived measurements use deterministic synthetic observations with common-prefix heuristic, single intent fetch_comments, single field url, trivial full-replacement parameterization, hardcoded confidence 0.9. No browser automation, no LLM distillation, no noisy multi-step sessions, no auth, no pagination encoding, no multi-slot. Token economics not remeasured (carried 68 vs 96). Score reflects in-kernel POC with real HTTP spot check, not product economics.",
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/spec.json measurement_validity single function change, GET-only, synthetic; prereg.md Scope Limitations 8 bullets; provenance.json datasets jsonplaceholder GET only, code_paths kernel.py + models.py slot_prefixes, no browser calls; result.json validity_notes token cost not re-run, single-slot only, no browser/model calls",
+      "impact": "Claim ceiling bounded to synthetic single-slot GET with real HTTP on one host; does NOT support multi-param, noisy browser, LLM induction, cross-site, or C-PRODUCT-ECON amortization."
+    },
+    {
+      "id": "V5_URL_CORPUS_CORRECT_BUT_TRIVIAL_DISCRIMINANT",
+      "severity": "info",
+      "finding": "URL corpus 12/12 correct recomputed independently via src/spider/kernel.py _is_protocol_only_prefix matches expected per category (protocol_only 3 True, query 3 False, path-slash 3 False, mixed 3 False). Audit also verified edge cases: '' False, 'https://' True, 'http://example.com:8080' True, 'http://example.com:8080/' False, '//api.example.com' False. Corpus validates redesigned logic but does not include the sole Fix2-vs-Fix3 discriminant 'https://'.",
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/spec.json prereg URL corpus 12 patterns; result.json metrics url_corpus_all_correct true total 12 url_corpus_results 12 entries; experiment_results.json same 12; audit recompute PYTHONPATH=src python -c import _is_protocol_only_prefix loop 12 matches True",
+      "impact": "Fix correctness validated; necessity discriminant still missing. Add 'https://' to corpus if necessity claimed."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "P1_QUERY_PARAM_ACCEPTED",
+      "baseline_id": "P1_QUERY_PARAM_ACCEPTED",
+      "expected": "Redesigned Fix3 returns False for 'https://api.example.com?key=' (does NOT reject query-param)",
+      "observed": "Producer False, recomputed False via direct import _is_protocol_only_prefix",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/result.json controls P1_QUERY_PARAM_ACCEPTED passed true observed returns False; run_experiment.py test_c2_redesigned_accepts_query_param; audit recompute False matches"
+    },
+    {
+      "id": "N1_PROTOCOL_ONLY_REJECTED",
+      "baseline_id": "N1_PROTOCOL_ONLY_REJECTED",
+      "expected": "Redesigned Fix3 returns True for 'https://api.example.com' (rejects bare authority)",
+      "observed": "Producer True, recomputed True",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/result.json controls N1_PROTOCOL_ONLY_REJECTED passed true observed returns True; run_experiment.py test_c1; audit recompute True"
+    },
+    {
+      "id": "B_OLD_FIX3_OVERBROAD",
+      "baseline_id": "B_OLD_FIX3_OVERBROAD",
+      "expected": "Old Fix3 returns True for query-param prefix 'https://api.example.com?key=' demonstrating bug",
+      "observed": "Producer True, recomputed True via _old_is_protocol_only_prefix '/' not in rest logic",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/result.json controls B_OLD_FIX3_OVERBROAD passed true observed returns True; run_experiment.py _old_is_protocol_only_prefix and test_c4; audit recompute True"
+    },
+    {
+      "id": "B_LITERAL_HTTP_REGRESSION",
+      "baseline_id": "B_LITERAL_HTTP_REGRESSION",
+      "expected": "Existing kernel regression tests pass 3/3",
+      "observed": "Producer result.json 3/3 PASS, experiment_results.json 0/3 artifact bug, audit rerun 3/3 PASS returncode 0",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/result.json controls B_LITERAL_HTTP_REGRESSION passed true observed tests_run=3; provenance commands PYTHONPATH=src python -m unittest tests.test_kernel -v; audit rerun stderr Ran 3 tests OK"
+    },
+    {
+      "id": "kernel_regression",
+      "baseline_id": "kernel_regression",
+      "expected": "All 3 existing kernel tests pass after Fix3 redesign",
+      "observed": "tests_run=3 failures=0 errors=0 all_passed True direct, 0 parsed via stdout in experiment_results.json",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "tests/test_kernel.py test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention; audit direct run OK"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_redesigned_rejects_protocol_only": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "_is_protocol_only_prefix('https://api.example.com') True"
+    },
+    "c1_observed": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "c2_redesigned_accepts_query_param": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "_is_protocol_only_prefix('https://api.example.com?key=') False, so accepts"
+    },
+    "c2_observed": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true
+    },
+    "c3_redesigned_accepts_path_slash": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "_is_protocol_only_prefix('https://jsonplaceholder.typicode.com/') False"
+    },
+    "c3_observed": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true
+    },
+    "c4_old_fix3_overbroad": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "old logic '/' not in rest True for query prefix"
+    },
+    "c4_observed": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "c5_kernel_tests_passed": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "direct unittest 3/3 PASS"
+    },
+    "c5_kernel_tests_run": {
+      "producer_value": 3,
+      "recomputed_value": 3,
+      "match": true,
+      "note": "experiment_results.json reports 0 due to stdout parse bug; correct 3 via stderr"
+    },
+    "c6_http_binding_accuracy": {
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "match": true,
+      "n": 3,
+      "detail": "3/3 correct via code inspection of distill->bind->http_get; recomputed distill produces template comments?postId=${url} slot [url], bound URL https://jsonplaceholder.typicode.com/comments?postId=5 via _bind correct, live HTTP not re-executed but parent live probe and logic verified"
+    },
+    "c6_http_total_correct": {
+      "producer_value": 3,
+      "recomputed_value": 3,
+      "match": true
+    },
+    "c6_http_total_calls": {
+      "producer_value": 3,
+      "recomputed_value": 3,
+      "match": true
+    },
+    "c6_mechanism_template": {
+      "producer_value": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+      },
+      "recomputed_value": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+      },
+      "match": true
+    },
+    "c6_mechanism_slots": {
+      "producer_value": ["url"],
+      "recomputed_value": ["url"],
+      "match": true
+    },
+    "c7_mechanism_distilled": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "c7_template_correct": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "slot url and template contains postId= and ${url}"
+    },
+    "c7_resolves_executable": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "SpiderKernel.resolve fetch_comments {} {url:5} -> EXECUTABLE"
+    },
+    "c7_binding_correct": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true
+    },
+    "c7_template": {
+      "producer_value": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+      },
+      "recomputed_value": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+      },
+      "match": true
+    },
+    "c7_slots": {
+      "producer_value": ["url"],
+      "recomputed_value": ["url"],
+      "match": true
+    },
+    "c7_bound_url": {
+      "producer_value": "https://jsonplaceholder.typicode.com/comments?postId=5",
+      "recomputed_value": "https://jsonplaceholder.typicode.com/comments?postId=5",
+      "match": true
+    },
+    "url_corpus_all_correct": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "12/12 patterns recomputed via direct import matches expected"
+    },
+    "url_corpus_total": {
+      "producer_value": 12,
+      "recomputed_value": 12,
+      "match": true
+    },
+    "all_conditions_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "match": true,
+      "detail": "C1-C7 all pass per frozen decision rule as recomputed"
+    }
+  },
+  "claim_ceiling": "Fix3 redesign validated narrowly: _is_protocol_only_prefix correctly rejects bare authority ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-param ('https://api.example.com?key=', 'https://example.com?x=', 'https://api.example.com?foo=bar&baz='), path-slash ('https://jsonplaceholder.typicode.com/', '/posts/', '/v1/') and mixed ('/path?query=', '#frag', ':8080/') for 12/12 corpus. Preserves kernel regression 3/3 and distills single-slot GET mechanism comments?postId=${url} with slot [url] that resolves EXECUTABLE and binds to https://jsonplaceholder.typicode.com/comments?postId=5 with 3/3 HTTP 200 on jsonplaceholder. This fixes parent V2_FIX3_OVERBROAD for host?query patterns. Does NOT demonstrate Fix3 independent necessity over Fix2 for bare authority (Fix2 already rejects because last char not in /?=&; mutual exclusivity holds for all non-trivial prefixes, only scheme-only 'https://' discriminant untested). Claim ceiling expands only to 'single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification'. Does NOT support multi-slot, PUT/POST, noisy browser, LLM distillation, cross-site, or product economics. C-PARAM-INHERIT remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE); C-PRODUCT-ECON remains HYPOTHESIS.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35185290656/request.json: lane product claim C-PARAM-INHERIT parent EXP-PRODUCT-35166508130",
+    "research/experiments/EXP-PRODUCT-35185290656/spec.json: question Fix3 redesign with '?'/'/#' check, hypothesis, falsifier, baselines B_OLD_FIX3_OVERBROAD B_LITERAL_HTTP_REGRESSION, controls P1_QUERY_PARAM_ACCEPTED N1_PROTOCOL_ONLY_REJECTED, measurement_validity 8 clauses, decision_rule C1-C7 ALL",
+    "research/experiments/EXP-PRODUCT-35185290656/prereg.md: redesigned Fix3 spec 'if ? not in rest and / not in rest and # not in rest', URL corpus 12 patterns, decision rule C1-C7",
+    "research/experiments/EXP-PRODUCT-35185290656/freeze.json: hashes prereg b699..., spec cf08..., request 1bfe...",
+    "research/experiments/EXP-PRODUCT-35185290656/result.json: metrics C1-C7 all true, url_corpus 12/12, c6 3/3 1.0, c7 distilled true, controls 5 passed true, outcome SUPPORTS",
+    "research/experiments/EXP-PRODUCT-35185290656/report.md: verdict SURVIVES_CURRENT_TEST, 12 patterns table, Fix3 old vs new code, C6 3/3, C7 EXECUTABLE",
+    "research/experiments/EXP-PRODUCT-35185290656/provenance.json: base ba1e3f6d, parent a5794a2b, kernel sha991b..., models sha67ff..., run_experiment sha51b0..., experiment_results sha5d8c...",
+    "research/experiments/EXP-PRODUCT-35185290656/experiment_results.json: metrics duplicate with c5_kernel_tests_run 0 artifact bug vs result.json 3",
+    "research/experiments/EXP-PRODUCT-35185290656/run_experiment.py: URL_CORPUS 12, _old_is_protocol_only_prefix, test_c1..c7, corpus, kernel_tests stdout parse, http binding, distill",
+    "src/spider/kernel.py sha991b02823012012db9dd59774d7d7c1556d4c1aa4196e09fce4cdf73b1f0b002: _is_protocol_only_prefix redesigned, _validate_prefix_boundary, _find_common_prefix_suffix Fix1, distill_parameterized Fix1+Fix2+Fix3 order",
+    "src/spider/models.py sha67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d4b: Mechanism slot_prefixes",
+    "tests/test_kernel.py: 3 tests, audit rerun Ran 3 tests in 0.002s OK via stderr",
+    "research/experiments/EXP-PRODUCT-35166508130/handoff.json: carry_forward established 9/9 HTTP, rejected Fix3 necessity not demonstrated, unknown discriminant, do_not_assume",
+    "codex/index.json + claim_state.json: C-PARAM-INHERIT prior PASS narrow synthetic, remains EXPERIMENTAL"
+  ],
+  "unresolved": [
+    "Fix3 independent necessity over Fix2 for bare authority: no discriminant where Fix2 passes and Fix3 should reject except trivial 'https://'; distill order makes Fix3 preempt Fix2 but both would reject bare authority, so necessity unproven without 'https://' traffic or revised threat model",
+    "HTTP generalization beyond single comments?postId endpoint: other query patterns (host?key without '=', multi-param ?a=&b=, encoded values, different hosts) not tested; pagination/auth/pagination with path+query mixed not tested",
+    "Statistical strength of HTTP 3/3: Wilson 95% CI [0.44,1.0] not significant; larger n needed for 90%+ lower bound",
+    "PUT/POST method fidelity over real HTTP not tested (spec scope GET-only); whether method field parameterization needed remains unknown",
+    "End-to-end amortized cost per successful real-browser task not measured; requires harness with model tokens + browser/network + retrieval/verification/repair vs literal/cold baselines",
+    "Multi-slot and noisy multi-step browser session generalization not tested; remains synthetic single-slot deterministic",
+    "Cross-site transfer and LLM-based distillation not tested in this lane"
+  ]
+}

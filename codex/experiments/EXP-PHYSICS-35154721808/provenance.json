@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35154721808",
+  "lane": "physics",
+  "github_run_id": "35154721808",
+  "git_commit": "b43ccafbc888a35752907637f1de810bba374399",
+  "git_commit_message": "R2 physics: execution base EXP-PHYSICS-35154721808",
+  "python_version": "3.12.14",
+  "numpy_version": "2.5.3",
+  "platform": "linux",
+  "execution_environment": "GitHub Actions runner",
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35137030850",
+    "handoff_sha256": "874bb8b92550053d0bc8b1d446fc6c1e4e79b0dffea612c997b7048a906b133f",
+    "handoff_path": "research/experiments/EXP-PHYSICS-35137030850/handoff.json"
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "038454b1676888d7706ed54a0c9e75012501fcc2877b973db2ce8cdfb7920d1f",
+    "spec_json_sha256": "356e64e71c9f160e91046ae27e4b7c21517fd05bd0a2fbf14c6388678d540446",
+    "prereg_md_sha256": "6aaa8117f8395804f6bb46a4d1d7d08a1ba1ac300115e417c5563d55181d009e",
+    "freeze_json_sha256": "calculated_from_freeze.json"
+  },
+  "artifacts": {
+    "raw_result.json": {
+      "path": "research/experiments/EXP-PHYSICS-35154721808/raw_result.json",
+      "sha256": "49b1e5444231bd58d04df34009538ac66293039354f73e58d31ef982c010f648",
+      "role": "raw"
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-PHYSICS-35154721808/run_experiment.py",
+      "sha256": "a51a31601650490aeec24dd00df45a0500e58146023cd714f097b3325a4666ff",
+      "role": "code"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-PHYSICS-35154721808/result.json",
+      "sha256": "feb8966ebf5b30cb2ec37cab41c26e44e18e17560f595fc74af604ec623f0144",
+      "role": "derived"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-PHYSICS-35154721808/report.md",
+      "sha256": "76eec90b09f59145a4148fc1c05d0a9a1397b08b3a70231712e9ee7f73f3e201",
+      "role": "derived"
+    }
+  },
+  "experiment_parameters": {
+    "seed": 42,
+    "n_trajectories": 200,
+    "steps_per_trajectory": 10,
+    "n_sessions": 20,
+    "n_states": 3,
+    "state_labels": ["S0", "S1", "S2"],
+    "actions": ["advance", "branch"],
+    "p_left": 0.7,
+    "p_right": 0.3,
+    "n_permutations": 1000,
+    "k_values": [1, 3],
+    "bonferroni_comparisons": 2,
+    "content_mapping": "fully_ambiguous",
+    "n_unique_hashes": 1,
+    "unique_hash": "62fe3a150495f0b6"
+  },
+  "reproduction_command": "python3 research/experiments/EXP-PHYSICS-35154721808/run_experiment.py",
+  "execution_time_seconds": 12.1,
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-35137030850/handoff.json",
+    "research/experiments/EXP-PHYSICS-35137030850/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json"
+  ]
+}
