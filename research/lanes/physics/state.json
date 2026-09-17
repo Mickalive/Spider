@@ -8,7 +8,7 @@
   "next_question": "Can a fully-ambiguous content mapping (all 3 states share 1 content hash, eliminating partial state discrimination) with stochastic branching FSM yield conditional PMI > 0.05 bits at K=3, resolving whether the residual 0.226 bits from EXP-PHYSICS-35137030850 reflects genuine predictive dynamics beyond aliasing or is entirely explained by partial state discrimination?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-16T21:53:37.572717+00:00",
+  "updated_at": "2026-09-17T00:25:51.942988+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "874bb8b92550053d0bc8b1d446fc6c1e4e79b0dffea612c997b7048a906b133f",
   "same_failure_count": 1,
