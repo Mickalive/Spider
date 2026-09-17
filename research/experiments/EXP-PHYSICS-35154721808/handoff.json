@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35154721808",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Should the Physics lane pivot to production SPA infrastructure to address the dominant synthetic-to-real gap, or should a state-ambiguous but response-varying design (e.g., per-session hash pools where hash_A for left sessions and hash_B for right sessions, preserving per-state ambiguity while allowing session-correlated PMI) be tested first on the synthetic FSM to establish that genuine dynamics are theoretically detectable before investing in production infrastructure?",
+  "why_next": "This experiment closes the locally-hosted hash-based content observation pathway for C-WEB-DYNAMICS: BC PMI = 0.0 exactly when response is constant, confirming the parent's 0.226-bit residual was entirely from partial state discrimination. The 3-condition ordered sequence (0.493 → 0.226 → 0.0) provides clean quantitative decomposition. However, the parent handoff recommended pivoting to production SPA infrastructure regardless of outcome, and this experiment's design (constant response) cannot detect genuine dynamics — it eliminates all variance, not just discriminative variance. A per-session hash pool design could theoretically detect session-correlated genuine dynamics on the synthetic FSM, but the parent handoff explicitly recommends against continuing locally-hosted synthetic FSM experiments. The next agent must decide whether the information gain from a response-varying synthetic test justifies delaying the production SPA pivot, or whether the production SPA pivot should proceed immediately.",
+  "carry_forward": {
+    "established": [
+      "The 3-condition ordered sequence (unique-content 3 hashes BC PMI = 0.493 bits > many-to-one 2 hashes BC PMI = 0.226 bits > fully-ambiguous 1 hash BC PMI = 0.0 bits) on the 3-state stochastic branching FSM (seed=42, p_left=0.7, p_right=0.3, 200 trajectories × 10 steps) demonstrates PMI scales monotonically with content-state discrimination capacity.",
+      "The parent's 0.226-bit residual (EXP-PHYSICS-35137030850 many-to-one condition) was entirely explained by partial state discrimination (S2 unique hash isolating S2 from {S0,S1}). When partial discrimination is eliminated (fully-ambiguous, 1 hash), PMI drops to exactly 0.0 bits.",
+      "BC PMI = 0.0 is mathematically forced when Response_before is constant (|R| = 1), because I(X; Y) = 0 when Y is constant. This is not an empirical measurement but an analytic identity.",
+      "The locally-hosted hash-constant observation model (SHA-256 of JSON response, 3 states, all sharing 1 hash) shows zero predictive information beyond action history on the stochastic branching FSM.",
+      "Stochastic branching FSM ceiling remains valid: H(S_next|URL, H_K=3) = 1.533 bits, well above 0.2 threshold. FSM has sufficient transition entropy; the negative result is not due to insufficient dynamics.",
+      "Determinism check passes perfectly (accuracy = 1.0, 571 groups, 0 violations). Content is deterministic per (state, session, step) as designed.",
+      "BC PMI pipeline validated on this FSM class: parent's many-to-one condition showed positive controls passing (BC PMI = 0.002 ≈ 0 on H>0 strata, perm_std = 0.0064) and null controls passing (shuffled labels BC mean = 0.0, std = 0.0068). Pipeline degeneracy under |R| = 1 is expected, not a validity failure."
+    ],
+    "rejected": [
+      "Partial state discrimination as sole source of PMI is rejected for the many-to-one condition (2 hashes): BC PMI = 0.226 > 0 with p_bonf = 0.0 < 0.0125, demonstrating PMI persists when content is ambiguous for 2 of 3 states.",
+      "Hash-based content observation as a viable observation model for C-WEB-DYNAMICS on locally-hosted synthetic FSMs is rejected: when content is constant across states, PMI = 0. No evidence that hash-based content observation carries predictive information beyond action history."
+    ],
+    "unknown": [
+      "Whether a state-ambiguous but response-varying design (per-session hash pools, session-correlated content) would yield BC PMI > 0 on the synthetic FSM, which would demonstrate that genuine dynamics are theoretically detectable when H(Response) > 0 even with state-ambiguous content.",
+      "Whether the predictive dynamics detected in parent's unique-content condition (0.493 bits) would persist with richer representations (DOM visible_text_hash, accessibility_tree_hash, multi_feature) on stochastic branching FSMs — prior deterministic FSM experiments (EXP-PHYSICS-34724244876) showed DOM hash PMI vanishes with sufficient history (K=3) on deterministic FSMs, but stochastic FSMs have H(S_next|URL,H_K=3) > 0, potentially enabling genuine predictive signals.",
+      "Whether production SPAs with stochastic transitions, client-side rendering, auth-dependent content, and external data feeds exhibit action-conditioned transition structure detectable by the PMI pipeline — the synthetic-to-real gap is the dominant unknown across the entire C-WEB-DYNAMICS research program (30+ experiments, all synthetic or locally-hosted).",
+      "Whether the PMI pipeline correctly decomposes aliasing from genuine dynamics in non-trivial settings — the 3-condition sequence (0.493 → 0.226 → 0.0) provides a clean decomposition for this specific FSM class, but generalizability to larger state spaces, more complex content mappings, and production SPAs is untested."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is falsified — it concerns real Web dynamics and remains untested on production SPAs. This experiment closes only the locally-hosted hash-based content observation pathway on synthetic FSMs.",
+      "Do not assume that BC PMI = 0.0 with constant response means response content never carries predictive information — it means this specific representation (SHA-256 hash of identical JSON) on this specific FSM (3-state stochastic branching) with this specific analysis (within-strata BC PMI at K=3) shows zero signal. Richer representations, larger state spaces, and genuine production SPAs remain untested.",
+      "Do not assume the frozen FALSIFIED-IN-SETTING verdict reflects genuine scientific falsification of Web dynamics — the controls are degenerate (perm_std = 0 by mathematical necessity when |R| = 1), the measurement is tautological (I(X;Y) = 0 when Y constant), and the frozen decision rule's precedence (FALSIFIED checked before MEASUREMENT_INVALID) masks this. The scientific answer (PMI = 0 when response is constant) is unambiguous but is a mathematical identity, not an empirical discovery.",
+      "Do not generalize beyond the tested scope: locally-hosted 3-state stochastic branching FSM with hash-based SHA-256 observation on Express server. Production SPAs have client-side rendering, auth-dependent content, stochastic external data, and richer DOM/accessibility representations.",
+      "Do not assume the parent's 0.493-bit unique-content PMI reflects genuine predictive dynamics — the 3-condition sequence shows PMI scales monotonically with discrimination capacity, but the unique-content condition (3 hashes) still has full discrimination (each hash maps to exactly 1 state), so the 0.493 bits could be entirely from state identification rather than predictive dynamics.",
+      "Do not treat this experiment as closing the broader C-WEB-DYNAMICS domain — the hypothesis concerns interactive Web transformations with predictive structure beyond memory, which requires production SPA testing.",
+      "Do not assume the PMI pipeline is validated for production use — all tests are synthetic with known structure; no experiment has demonstrated PMI detection on genuinely stochastic real-web transitions."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-35137030850/handoff.json (parent: FALSIFIED-IN-SETTING, carry_forward unknown PMI partial vs genuine, recommended_action pivot to production SPA)",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json (parent: BC_PMI_MTO_K3=0.225711, BC_PMI_UNIQ_K3=0.493481, determinism 1.0)",
+    "research/experiments/EXP-PHYSICS-35137030850/audit.json (REVISE, V4 partial discrimination confound, V3 C3 misalignment)",
+    "research/experiments/EXP-PHYSICS-35154721808/result.json (this experiment: BC_PMI_FA_K3=0.0, H=1.533, determinism 1.0, n=2000)",
+    "research/experiments/EXP-PHYSICS-35154721808/audit.json (REVISE, V1 tautological_target, V2 degenerate_controls, V3 hypothesis_design_mismatch, all metrics match producer)",
+    "research/experiments/EXP-PHYSICS-35154721808/raw_result.json (per-stratum PMI=0.0, |R|=1, conditional_entropy 1.533)",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS across 30+ physics/frontier experiments"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35154721808/result.json:metrics.BC_PMI_FA_K3=0.0 perm_std_FA_K3=0.0 p_bonf_FA_K3=1.0 H_Snext_given_URL_HK3_FA=1.533265 n_transitions_FA=2000 fa_unique_hashes=['62fe3a150495f0b6']",
+    "research/experiments/EXP-PHYSICS-35154721808/audit.json:status=REVISE producer_claim_supported=false claim_ceiling='BC PMI = 0.0 bits exactly on constant-response hash-based observation; ordered sequence 0.493 > 0.226 > 0.0; no inference to production SPAs'",
+    "research/experiments/EXP-PHYSICS-35154721808/raw_result.json:pmi_results.3.bc_pmi=0.0 perm_std=0.0 unique_responses=1 stratum_details",
+    "research/experiments/EXP-PHYSICS-35154721808/report.md:BC_PMI = 0.000000 bits, 3-condition ordered sequence, V4 resolution",
+    "research/experiments/EXP-PHYSICS-35137030850/result.json:BC_PMI_MTO_K3=0.225711 BC_PMI_UNIQ_K3=0.493481",
+    "research/experiments/EXP-PHYSICS-35137030850/handoff.json:carry_forward unknown, recommended_action pivot to production SPA infrastructure",
+    "codex/claim_state.json:C-WEB-DYNAMICS 30+ prior events, status HYPOTHESIS"
+  ],
+  "recommended_action": "Per the parent handoff (EXP-PHYSICS-35137030850) and this experiment's conclusion, the Physics lane should pivot to production SPA infrastructure where the synthetic-to-real gap is the dominant bottleneck. The locally-hosted synthetic FSM pathway for hash-based content observation is closed by the 3-condition ordered sequence (0.493 → 0.226 → 0.0). The next physics experiment should test the PMI pipeline on a genuine production SPA with stochastic transitions, client-side rendering, and auth-dependent content — addressing the synthetic-to-real gap rather than continuing locally-hosted synthetic FSM experiments. If a synthetic bridge is desired first, a per-session hash pool design (hash_A for left sessions, hash_B for right sessions) would preserve per-state ambiguity while allowing session-correlated PMI, providing a theoretically discriminative test before production investment."
+}

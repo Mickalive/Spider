@@ -1,17 +1,17 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-35154721808",
-  "last_experiment_id": "EXP-PHYSICS-35137030850",
-  "last_verdict": "FALSIFIED-IN-SETTING",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-35154721808",
+  "last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (2) triggers: BC PMI at K=3 = 0.000000 bits \u2264 0.05 threshold, Bonferroni p = 1.0. The primary measurement is mathematically forced (I(X;Y) = 0 when Y is constant, |R| = 1 by design). The auditor's REVISE recommendation on control degeneracy is accepted: controls failing because |R| = 1 makes permutation null degenerate is a design-consequence, not an execution-failure. However, the primary measurement (BC PMI = 0.0) is unambiguous and independently sufficient for the FALSIFIED-IN-SETTING verdict \u2014 controls are confirmatory, not gating. The frozen rule's precedence (FALSIFIED checked before MEASUREMENT_INVALID) is correctly triggered. Claim ceiling bounded to: conditional PMI = 0.0 bits exactly on constant-response hash-based observation with stochastic branching FSM. No inference to richer representations, production SPAs, or H(Response) > 0 settings.",
   "continue_immediately": false,
-  "next_question": "Can a fully-ambiguous content mapping (all 3 states share 1 content hash, eliminating partial state discrimination) with stochastic branching FSM yield conditional PMI > 0.05 bits at K=3, resolving whether the residual 0.226 bits from EXP-PHYSICS-35137030850 reflects genuine predictive dynamics beyond aliasing or is entirely explained by partial state discrimination?",
+  "next_question": "Should the Physics lane pivot to production SPA infrastructure to address the dominant synthetic-to-real gap, or should a state-ambiguous but response-varying design (e.g., per-session hash pools where hash_A for left sessions and hash_B for right sessions, preserving per-state ambiguity while allowing session-correlated PMI) be tested first on the synthetic FSM to establish that genuine dynamics are theoretically detectable before investing in production infrastructure?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-17T00:25:51.942988+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "874bb8b92550053d0bc8b1d446fc6c1e4e79b0dffea612c997b7048a906b133f",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-17T00:57:56.187854+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "b23f5e807bc2e274d9a07aa8cd160bb6745a1f894052a083920059e36d7f94c1",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
