@@ -827,6 +827,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "Behavioral signals on real HTTP Flask+PyJWT HS256 localhost achieve TP=1.0 (Wilson lower 0.886), FP=0.0 (Wilson upper 0.113), AUC=1.0 \u2014 first signal family to pass C1/C2/C3 for C-FRESHNESS. Positive control signing-key rotation fires 30/30. However, frozen decision rule requires ALL C1-C5; C4 orthogonality fails (|r|=0.593 >= 0.3). Audit identifies C4 failure as measurement-confounded: 5/15 co-occurring conditions have zero structural signal (drift causes 401 on all probes, structural imputed 0.0), per-condition r is NaN (zero within-condition variance), pooled r measures deterministic drift-noise pattern pairing not genuine signal coupling. Behavioral signals are a validated new detection dimension for auth-drift-vs-structural-noise discrimination, but co-occurring orthogonality is not demonstrated by this design. Claim advances from HYPOTHESIS to EXPERIMENTAL with narrowed ceiling: behavioral signals discriminate auth drift from structural noise on deterministic Flask mock, orthogonality measurement requires redesigned co-occurring conditions."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35191029030",
+        "lane": "graph",
+        "created_at": "2026-09-17T06:42:49.384872+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "b5b889919fbc45f440260bde41c2ce0e89453fa7",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision_rule MEASUREMENT_INVALID trigger: only 4/8 co-occurring conditions have within-condition variance (std>0 for both signals), below the \u22656/8 validity gate. Root cause: session_invalidation drift produces constant behavioral signal (std=0.0) because API endpoints (/api/read, /api/write, /api/admin) only check JWT token and permissions, not session validity \u2014 session_state_changes is always 1, behavioral composite constant at 3.0 for all 120 session_invalidation samples. This is a measurement design flaw (audit V1_SESSION_INVALIDATION_ZERO_BEHAVIORAL_VARIANCE), not evidence against orthogonality. C3 orthogonality is UNTESTED: pooled r=0.0498 is confounded by 120 constant behavioral values; permutation p=0.449 fails p<0.05 conjunctive threshold. Descriptive observations preserved: (1) design fixes parent zero-imputation (unauthenticated /schema achieves 99.2% both>0); (2) pooled |r|=0.0498 is 12x lower than parent 0.593; (3) permission_boundary-only pooled r=0.051 (n=120, p=0.577) is directionally consistent with orthogonality but underpowered and non-significant. C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
       }
     ],
     "C-CROSSSITE": [
@@ -1480,14 +1490,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35166507358",
+      "experiment_id": "EXP-GRAPH-35191029030",
       "lane": "graph",
-      "created_at": "2026-09-17T00:25:48.760441+00:00",
-      "decision": "C4-ORTHOGONALITY-CONFOUNDED",
-      "source_commit": "b92ea780fafa9475defbc745bebbf44d443f7566",
+      "created_at": "2026-09-17T06:42:49.384872+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "b5b889919fbc45f440260bde41c2ce0e89453fa7",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "Behavioral signals on real HTTP Flask+PyJWT HS256 localhost achieve TP=1.0 (Wilson lower 0.886), FP=0.0 (Wilson upper 0.113), AUC=1.0 \u2014 first signal family to pass C1/C2/C3 for C-FRESHNESS. Positive control signing-key rotation fires 30/30. However, frozen decision rule requires ALL C1-C5; C4 orthogonality fails (|r|=0.593 >= 0.3). Audit identifies C4 failure as measurement-confounded: 5/15 co-occurring conditions have zero structural signal (drift causes 401 on all probes, structural imputed 0.0), per-condition r is NaN (zero within-condition variance), pooled r measures deterministic drift-noise pattern pairing not genuine signal coupling. Behavioral signals are a validated new detection dimension for auth-drift-vs-structural-noise discrimination, but co-occurring orthogonality is not demonstrated by this design. Claim advances from HYPOTHESIS to EXPERIMENTAL with narrowed ceiling: behavioral signals discriminate auth drift from structural noise on deterministic Flask mock, orthogonality measurement requires redesigned co-occurring conditions."
+      "reason": "Frozen decision_rule MEASUREMENT_INVALID trigger: only 4/8 co-occurring conditions have within-condition variance (std>0 for both signals), below the \u22656/8 validity gate. Root cause: session_invalidation drift produces constant behavioral signal (std=0.0) because API endpoints (/api/read, /api/write, /api/admin) only check JWT token and permissions, not session validity \u2014 session_state_changes is always 1, behavioral composite constant at 3.0 for all 120 session_invalidation samples. This is a measurement design flaw (audit V1_SESSION_INVALIDATION_ZERO_BEHAVIORAL_VARIANCE), not evidence against orthogonality. C3 orthogonality is UNTESTED: pooled r=0.0498 is confounded by 120 constant behavioral values; permutation p=0.449 fails p<0.05 conjunctive threshold. Descriptive observations preserved: (1) design fixes parent zero-imputation (unauthenticated /schema achieves 99.2% both>0); (2) pooled |r|=0.0498 is 12x lower than parent 0.593; (3) permission_boundary-only pooled r=0.051 (n=120, p=0.577) is directionally consistent with orthogonality but underpowered and non-significant. C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",
