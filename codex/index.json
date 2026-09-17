@@ -95,7 +95,7 @@
       "decision": "NARROW_SUCCESS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "f6949358832f92af167d9a6ca8621546382d42dd",
       "hashes": {
         "request.json": "6145c1903ea8dcba98048817351b4cea1d9f9f6bad7b28fa0745af874da8e2bd",
@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -259,7 +259,7 @@
       "decision": "NARROW_SUCCESS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "a6698de64a402d386cb9dfa9d7af76b55a565d55",
       "hashes": {
         "request.json": "655f8b7f40f69f7f55ad1411d433bd3eb47b37862604b486bd0246ab586483c5",
@@ -314,7 +314,7 @@
       "decision": "NARROW_SUCCESS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "f48f1ad99f341d4cc98fb0421ac21653dd283d75",
       "hashes": {
         "request.json": "c8476dec201ef16f7d3fcdcf80562af142e95461a9a0bdfed44afb21994e946d",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -423,7 +423,7 @@
       "decision": "C-MEAS-VALID survives narrowly on real Flask/JWT middleware within tested scope. Full-vector discrimination 0.833 > 0.5, null FP 0.0% < 5%, valid vs expired discriminable Jaccard 0.3505 < 0.5. All three decision criteria pass. Full vector equals B-BODY-ONLY (0.833 = 0.833) \u2014 standard headers add no independent discriminating information; body is the dominant signal. Parent gaps V1-REAL-MIDDLEWARE-GAP and V2-SYNTHETIC-HEADER-TAUTOLOGY closed. Claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256, localhost, 4 states, no synthetic headers, standard headers only, jitter 50-150ms, N=40.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "24969f18d2aed3c3a3b7d0655db58625986541de",
       "hashes": {
         "request.json": "a3d8fc09cf58ccfda3463926e286c1c9bbe996567cc4306cd617d9b652de804e",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -697,7 +697,7 @@
       "decision": "CONSTRAINED \u2014 C-MEAS-VALID survives narrowly. All three mandatory decision criteria pass (full-vector discrimination 1.0 > 0.5, null FP 0.0% < 5%, valid vs expired Jaccard 0.328 < 0.5). However, the producer's claim ceiling is overgeneralized: claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18928 with 4 states returning distinct bodies, headers filtered (Date/Server/X-Request-Id excluded), Cache-Control no-store/no-cache, ETag W/body_sha, Set-Cookie session only for valid_token, jitter 50-150ms uniform, N=40 seed 44, Python 3.12.14. The exploratory H4 test (full vector > B-BODY-ONLY) is INCONCLUSIVE due to ceiling effect: with all 4 bodies distinct, discrimination is at 1.0 and headers cannot improve beyond perfect. Full vector = B-BODY-ONLY (1.0 = 1.0) reflects body dominance under distinct-body design, not proof headers are non-discriminative. The bootstrap CI [1.0, 1.0] is degenerate at ceiling (uninformative, not high-precision). ETag and Content-Length are body-correlated by construction. Only Cache-Control and Set-Cookie are state-varying independent headers; each achieves 0.5 discrimination alone but is redundant when bodies already separate.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "abca81f5a5cacdcae7040a7c00c7bddf8db19d5c",
       "hashes": {
         "request.json": "603a862fdad3677be7895d680130f98f046d54e4effcdcc440ad9fc6b4c326f7",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -834,7 +834,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives narrowly. All four frozen decision criteria pass: full_vector_discrimination 1.0 > B-BODY-ONLY 0.833 (incremental header value 0.167), full_vector_discrimination 1.0 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.833 > 0. The parent H4 ceiling confound (V3-DISTINCT-BODY-CEILING-CONFOUND) is resolved: when expired_token and invalid_token share identical bodies, Cache-Control no-store vs no-cache provides the discriminating signal that body-only cannot capture, lifting full vector from 0.833 to 1.0. Audit V4 (ENGINEERED-HEADER-TAUTOLOGY-CONSTRAINT, medium severity) constrains the claim ceiling: incremental header value is by construction (application-set Cache-Control/Set-Cookie per auth state in Flask middleware), not discovery of natural production header variance. Claim extends only to Flask 3.1.3 + PyJWT 2.13.0 HS256 on localhost 127.0.0.1:18929, 4 states (no_auth 401 login_required body ae00c5, valid_token 200 alice_profile body 65d603 with Set-Cookie session, expired_token 401 auth_failed body a138b3 Cache-Control no-store, invalid_token 401 auth_failed body a138b3 identical to expired Cache-Control no-cache), headers after Date/Server/X-Request-Id exclusion, deterministic SHA-256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, ''))) on Python 3.12.14, N=40 (4x10 seed 44) server jitter 50-150ms uniform client 0-200ms. Does NOT extend to production OAuth/OIDC (Auth0/Okta/Keycloak), CDN/caching, load-balancer, rate-limit, compression, jitter >150ms, or natural (non-application-set) header variance. Product architecture recommendation to use full vector is supported only within this synthetic Flask localhost pattern where headers are application-set per state.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "2ab22ff1c2fef6da589d75338825f570161b91a6",
       "hashes": {
         "request.json": "ba9cefd4d44540e65e090e9fae5bad7e919fb5b1eef3eb4d2348dbb9454d7d8c",
@@ -1212,7 +1212,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 C-MEAS-VALID survives with severely narrowed ceiling. All four frozen decision criteria pass: full_vector_discrimination 0.833 > B-BODY-ONLY 0.5 (incremental header value 0.333), full_vector_discrimination 0.833 > 0.5, null FP 0.0% < 5%, Cache-Control-only discrimination 0.5 > 0. However, the audit corrects the producer's mechanistic interpretation: (1) Cache-Control variation is valid_token no-cache vs absent on ALL errors \u2014 it does NOT vary by error type (no-store vs no-cache as hypothesized), confirming V4 ENGINEERED-HEADER-TAUTOLOGY for the critical expired/invalid pair; (2) the true discriminating header is WWW-Authenticate (discrimination 0.833 == full vector), not Cache-Control; (3) Set-Cookie adds zero (absent on all Keycloak /userinfo responses); (4) expired_token and invalid_token remain indistinguishable (identical bodies, headers, fingerprint, Jaccard 1.0); (5) body baseline weakened (B-BODY-ONLY 0.5 vs parent 0.833) inflates apparent incremental value; (6) expired token is not truly Keycloak-issued (V6 state construction leakage). Claim ceiling bounded to Keycloak 25.0 start-dev localhost:18080 /userinfo, 3 distinct fingerprints (not 4), full vector via WWW-Authenticate not Cache-Control error-type variation. Does NOT extend to production OAuth/OIDC, CDN/load-balancer, /token endpoint, or cross-Python-version reproducibility.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "2a6b3b8a0f5f86de23771c375a87ebe05b1e2e21",
       "hashes": {
         "request.json": "14e43f720e1fba24c7432e375320a3883e153529960e4a178a3480d777ca7049",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1403,7 +1403,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 WWW-Authenticate header discrimination does NOT transfer across Keycloak endpoints. Frozen decision rule fails on both primary conditions: (1) WWW-Auth-only discrimination > 0 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.0); (2) full-vector discrimination > 0.5 on >= 2/3 additional endpoints: 0/3 positive (/token password 0.0, /token client_credentials 0.0, /introspect 0.5 not > 0.5). Positive control PASS (/userinfo WWW-Auth 0.833 == full vector, replicates parent EXP-RUNTIME-34300004597). Null FP PASS on 3/4 endpoints (100% on /token password is structural: fresh JWT per request, not measurement instability). Audit PASS, all metrics recomputed match producer. WWW-Authenticate header is absent from all /token and /introspect responses across all 120 reps of additional endpoints \u2014 this is expected OAuth behavior (credentials in form body, not Authorization header), not a measurement gap. The discrimination pattern is /userinfo-specific resource-server behavior, not Keycloak-level. /token endpoints ignore Authorization header entirely. /introspect achieves body-only discrimination 0.5 via active:true/false field. client_credentials test is degenerate (serviceAccountsEnabled false on spider-client, all 401 unauthorized_client); claim ceiling excludes this endpoint as informative transfer test.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "32eced076e48102aee41f44edeebecd3ef6c0e19",
       "hashes": {
         "request.json": "9750fce79f52c98315138dbdb38a57344d9dc7570c31872b359c913d68bfea70",
@@ -1457,7 +1457,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "6db3260c944a0fc12220fce002843288fe5fa1ad",
       "hashes": {
         "request.json": "80b3210ecbb01ff52f0c5510d78bf6f0a8c0366e21b02db4450fd1c5dfaa829f",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1675,7 +1675,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "9f154d27809942d795bfa4b903732126a53f006b",
       "hashes": {
         "request.json": "80f820e60421b5ff4dee4e7d9c80761021b0193b8e218207b604f7ba58c7ab91",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -1973,7 +1973,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "7c633b0a2a5c11c739f36a791eea18074b4097b1",
       "hashes": {
         "request.json": "839a29f8e0fb8c6c6b11ff1737229b0bcc9d4a0aaf4ca1b8a813f38e63c9645a",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2218,7 +2218,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "651877a2e9e93b595c2ca505b25e7c9d793a22b5",
       "hashes": {
         "request.json": "7c5ffd6f2b7ea8b6f4f47a22fee060c0d159805f705984fc2f7cd6ab5d33dcb5",
@@ -2301,7 +2301,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2328,7 +2328,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "5c54f99d8325f9d973a4663bf9e16b53151e0b07",
       "hashes": {
         "request.json": "5c640867203f74c9a26232bf007716dbd7284906df70b21f58d8a80823bec8ff",
@@ -2409,7 +2409,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "9875ae7717e8cecedfad8092aa2caa89463e2eaf",
       "hashes": {
         "request.json": "348574668ded59beee1d01c493e215df4149d659d50eb713e6968ff706e6e6b6",
@@ -2436,7 +2436,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2490,7 +2490,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2517,7 +2517,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2571,7 +2571,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress after Content-Encoding:br removal) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under synthetic brotli quality selection from {4,5,6,7,8} via local Python proxy (N=20 per state, seed 44, 1KB compressible JSON). Algorithm-equivalence with gzip holds (diff=0.0). However, audit REVISE narrows claim ceiling: effective brotli diversity is 2 variants (q4 distinct vs q5-8 identical for all tested body types), not 5 distinct; the 5-level range is not a materially stronger stress test than binary {4,8} for these payload sizes. H3 (compressed <0.35) is falsified on /userinfo (0.4329 > 0.35). Producer's SUPPORTS outcome is accepted with narrowed ceiling per audit required_fixes.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "2918969df710542f3690880419fe59936f2a71fb",
       "hashes": {
         "request.json": "b66a03d98a288ef7e529118918bbab2195638ee9f690c27d3789c3ffaae301d8",
@@ -2681,7 +2681,7 @@
       "decision": "PROVENANCE_PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "57efaab4f56233946882021b627ad578524c8174",
       "hashes": {
         "request.json": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05",
@@ -2736,7 +2736,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "10549ee646b031aa873d82f61ff86234d9b17eb8",
       "hashes": {
         "request.json": "643b91daec4b9882f577ba4f922d043f4fdf33b8f7d7cfe03c0fa9b57e479a43",
@@ -2817,7 +2817,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality variation, chunked transfer-encoding, CDN headers, Accept-Encoding negotiation, response caching, Content-Length variation). Algorithm-equivalence with gzip holds (|diff| = 0.0 < 0.1). Compressed-byte-only hashing degrades to 0.2789 on /userinfo (< 0.35), confirming H3. Claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. Audit PASS confirms all recomputed metrics match producer (max_abs_diff 0.0). Bounded to: localhost synthetic proxy, 1KB compressible JSON, effective brotli diversity 2 variants (q4 distinct vs q5-8 identical), mock OAuth2 4 states with 3-way error collapse (ceiling 0.5 on /userinfo), seed 44, N=20 per state, chunked decoded by HTTP client before decompression. Do NOT promote to Product Core \u2014 real-CDN infrastructure validation remains the critical untested blocker.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "3b672238c289ae25c5cc98e9d6f211bc1a05f607",
       "hashes": {
         "request.json": "662b9236860872e014df8a1fe96e32c7f8a71e671ebea5b68b4a62dfd6e59258",
@@ -2926,7 +2926,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 Infrastructure failure: the mock server never applied brotli/gzip compression (Content-Encoding='none' on all 2880 observations, run_experiment.py:260-301). The decompression-normalization mechanism (SHA256 on decompressed body via brotli.decompress/gzip.decompress) was never exercised. The frozen question asked about behavior 'under brotli/gzip compression without CDN noise' but the environment could not express this effect. All reported discrimination metrics (0.5) reflect identity-path body hashing, not decompression-normalization. The frozen falsifier's third disjunct (brotli quality diversity does not increase) technically triggers but is uninformative because no compression was applied. C-MEAS-VALID does not advance from this experiment.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
       "hashes": {
         "request.json": "75aff44bff46eeee93fa926a4dfcb77ffcdf31e949529155c2412f0cfbccb8c9",
@@ -3007,7 +3007,7 @@
       "decision": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "hashes": {
         "request.json": "dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096",
@@ -3198,7 +3198,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) determinism all_same=true for all 288 state\u00d7type\u00d7size cells, (5) B-RANDOM = 0.0 for all 72 conditions, (6) |brotli_decompressed - gzip_decompressed| = 0.0 < 0.1 for all 18 type\u00d7size pairs. The parent MEASUREMENT_INVALID infrastructure failure is resolved: the mock server now applies brotli (quality 4-8) and gzip compression with Content-Encoding headers on all 5760 observations. Decompression-normalization preserves body-only discrimination at structural ceiling 0.5 across JSON, HTML, and XML at nominal 1KB/10KB/100KB under localhost compression. The ceiling 0.5 is a property of 3-way error collapse (no_auth/expired/invalid share identical error bodies) not a mechanism limitation. Algorithm equivalence is perfect (diff 0.0). Compressed-only brotli discrimination is lower (0.15-0.34) proving decompression is necessary for format-invariance. C_BROTLI_QUALITY_SCALING fails (diversity 2.33 at 1KB = 2.33 at 100KB) due to repetitive padding content \u2014 not a gating condition. Audit PASS confirms all recomputed metrics match producer. Real-CDN infrastructure remains the sole untested blocker for C-MEAS-VALID product readiness.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "0e400637ea603fc1be680ca5cf5cf34639abde33",
       "hashes": {
         "request.json": "effc8d7d41ff83a248414a0ccb2f9e69906d5ea85b25dd3330cbbfa1d7255103",
@@ -3225,7 +3225,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "3ae3460fe8aec871dc634c384161e9c360a51e8e",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "source_commit": "4a05cb4bddd4a363a16fef0efb3f527351171bb5",
       "hashes": {
         "request.json": "f9bf5371a07ca694b57bed901fcb2f59a165d6cf5bd709f25db0a746564d2106",
@@ -3279,7 +3279,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under quality variation), (5) B-RANDOM = 0.0 for all conditions, (6) C_QUALITY_VARIATION_EXISTS passes with all 5 quality levels observed per condition. Audit PASS confirms all recomputed metrics match producer. Decompression-normalization survives non-deterministic brotli quality variation on localhost. The claim ceiling advances from 'deterministic localhost compression' to 'non-deterministic brotli quality variation on localhost proxy'. Real CDN infrastructure remains the sole untested blocker for C-MEAS-VALID decompression-normalization product readiness.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/runtime",
-      "source_ref_head": "c9981e430b88ba301a4b4b5567c0fcd215fe5635",
+      "source_ref_head": "7fdb223d164765c454c30be3c76bd4d3938a84c6",
       "source_commit": "16975aec2e3d889b7164bc1041785fc8b4e89e94",
       "hashes": {
         "request.json": "f6aede524143810f89fb220fd5ec47c784b6fb3aa98284d4b0ec3df4f337a41f",
@@ -3292,6 +3292,33 @@
         "audit.json": "722d73362ce8c8046d8fa9d3ca1a260aa330a07ff78b59be3979676f45d69fb2",
         "verdict.json": "39f4648e55c2dcdc7acdd93c468ff5095d91fd2a291cb638e72d00831747d66f",
         "handoff.json": "6ac0f30d0dd167f316a41fc1cd4ecb50fd58e6c8ab905a5713fbc2740f4d099f"
+      }
+    },
+    "EXP-INTEL-35262261436": {
+      "lane": "intel",
+      "request_id": "9c924516096756bf2f0a01e3",
+      "created_at": "2026-09-17T19:00:39.186719+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "With a corrected implementation (deterministic sorted roles, aligned estimator, coherent decision rule), does the canonical per-iteration p=0.5 null recipe reproduce the parent FALSIFIED result (C2 FALSE: observed 0.3 < null ~0.53) on truncated-first-20 data \u2014 confirming the original conclusion was scientifically valid despite the MEASUREMENT_INVALID verdict from implementation bugs?",
+      "audit_status": "PASS",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "source_ref_head": "46d4ce687f16595932ac9aaa12c25d733da34872",
+      "source_commit": "46d4ce687f16595932ac9aaa12c25d733da34872",
+      "hashes": {
+        "request.json": "450c3863973676610d95beecdb0bf50b95ed7eb48fc10f4c31edf110a21e0c0d",
+        "spec.json": "16444e53db753412e93e26298217769ca22774247f93a017932d33501a9c5cd7",
+        "prereg.md": "a55e701f851a766fa1892718e75048f7de4bc162f34108c974e9c12dffc58828",
+        "freeze.json": "3ec9c6672beafcfe21240dfc2a7302b0c166b432e7a4e4414010fa8703d23d15",
+        "result.json": "3652c93e051a03c4e1941dfdffdea35b6f9ba8319a5f3d9722d752263a53535b",
+        "report.md": "3c12296c524bf239ead30207324a15ff8bae7ca24f57c271aa481a4ff452d4fc",
+        "provenance.json": "dc9b3127e2b8aa6340e30be86178fe5804d444654ea7a317633f5de1647e1286",
+        "audit.json": "d7a32da8f1ebc1681fe3ac902fcc5fd735b928e3ef7bae8363d88c3a9f01891a",
+        "verdict.json": "e162c6ede7d45e1ffbf7cdb284035572950bb532f360240c5307649371e23678",
+        "handoff.json": "c2270db0d48013c5840e5522e310a70e9375550edc05381e936d4a6d5a2e98e3"
       }
     }
   }
