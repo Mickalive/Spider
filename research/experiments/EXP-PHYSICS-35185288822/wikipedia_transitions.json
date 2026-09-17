@@ -1,0 +1,1458 @@
+[
+  {
+    "trajectory_id": 0,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Menches"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Menches",
+      "title": "Menches - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Menches",
+      "title": "Menches - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Kerkeosiris"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Kerkeosiris",
+      "title": "Kerkeosiris - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Kerkeosiris",
+      "title": "Kerkeosiris - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Ankhwennefer_(pharaoh)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Ankhwennefer_(pharaoh)",
+      "title": "Ankhwennefer (pharaoh) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Ankhwennefer_(pharaoh)",
+      "title": "Ankhwennefer (pharaoh) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Thebaid"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Thebaid",
+      "title": "Thebaid - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Thebaid",
+      "title": "Thebaid - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Ptolemais_in_Thebaide"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Ptolemais_in_Thebaide",
+      "title": "Ptolemais Hermiou - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Ptolemais_Hermiou#Titular_see",
+      "title": "Ptolemais Hermiou - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Ptolemaic_Kingdom"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Ptolemaic_Kingdom",
+      "title": "Ptolemaic Kingdom - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Ptolemaic_Kingdom",
+      "title": "Ptolemaic Kingdom - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Antigonus_I_Monophthalmus"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Antigonus_I_Monophthalmus",
+      "title": "Antigonus I Monophthalmus - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Antigonus_I_Monophthalmus",
+      "title": "Antigonus I Monophthalmus - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Richard_Billows"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Richard_Billows",
+      "title": "Richard Billows - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Grace_Coolidge"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Grace_Coolidge",
+      "title": "Grace Coolidge - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Grace_Coolidge",
+      "title": "Grace Coolidge - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Caro_Dawes"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Caro_Dawes",
+      "title": "Caro Dawes - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Caro_Dawes",
+      "title": "Caro Dawes - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Caro_Dawes&action=edit"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Caro_Dawes&action=edit",
+      "title": "Editing Caro Dawes - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/USS_Enterprise_(CV-6)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/USS_Enterprise_(CV-6)",
+      "title": "USS Enterprise (CV-6) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/USS_Enterprise_(CV-6)",
+      "title": "USS Enterprise (CV-6) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Horsepower#Shaft_horsepower"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Horsepower#Shaft_horsepower",
+      "title": "Horsepower - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Horsepower#Shaft_horsepower",
+      "title": "Horsepower - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Horsepower_(disambiguation)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Horsepower_(disambiguation)",
+      "title": "Horse power (disambiguation) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Horse_power_(disambiguation)",
+      "title": "Horse power (disambiguation) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Horse_power_(disambiguation)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Horse_power_(disambiguation)",
+      "title": "Horse power (disambiguation) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Horse_power_(disambiguation)",
+      "title": "Horse power (disambiguation) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Horse_power_(disambiguation)&action=history"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Horse_power_(disambiguation)&action=history",
+      "title": "Horse power (disambiguation): Revision history - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Horse_power_(disambiguation)&action=history",
+      "title": "Horse power (disambiguation): Revision history - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Horse_power_(disambiguation)&action=edit&undoafter=758225522&undo=879363022"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Horse_power_(disambiguation)&action=edit&undoafter=758225522&undo=879363022",
+      "title": "Editing Horse power (disambiguation) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Horse_power_(disambiguation)&action=edit&undoafter=758225522&undo=879363022",
+      "title": "Editing Horse power (disambiguation) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:About"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+      "title": "Wikipedia:About - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+      "title": "Wikipedia:About - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:Citing_sources"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Citing_sources",
+      "title": "Wikipedia:Citing sources - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Main_Page&action=history"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&action=history",
+      "title": "Main Page: Revision history - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Main_Page&action=history",
+      "title": "Main Page: Revision history - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/User:Xaosflux"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/User:Xaosflux",
+      "title": "User:xaosflux - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/User:Xaosflux",
+      "title": "User:xaosflux - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Special:Contributions/Xaosflux"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Special:Contributions/Xaosflux",
+      "title": "User contributions for Xaosflux - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Special:Contributions/Xaosflux",
+      "title": "User contributions for Xaosflux - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Special:Tags"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Special:Tags",
+      "title": "Tags - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Special:Tags",
+      "title": "Tags - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Special:RecentChanges&tagfilter=OAuth+CID%3A+3251"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Special:RecentChanges&tagfilter=OAuth+CID%3A+3251",
+      "title": "Recent changes - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Special:RecentChanges&tagfilter=OAuth+CID%3A+3251",
+      "title": "Recent changes - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer",
+      "title": "Wikipedia:General disclaimer - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer",
+      "title": "Wikipedia:General disclaimer - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:About"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+      "title": "Wikipedia:About - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+      "title": "Wikipedia:About - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:Maintenance"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Maintenance",
+      "title": "Wikipedia:Maintenance - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Constitution_Day_and_Citizenship_Day"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Constitution_Day_and_Citizenship_Day",
+      "title": "Constitution Day and Citizenship Day - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Constitution_Day_and_Citizenship_Day",
+      "title": "Constitution Day and Citizenship Day - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Category:September_observances"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Category:September_observances",
+      "title": "Category:September observances - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Category:September_observances",
+      "title": "Category:September observances - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Category_talk:September_observances"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Category_talk:September_observances",
+      "title": "Category talk:September observances - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Category_talk:September_observances",
+      "title": "Category talk:September observances - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Years"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Years",
+      "title": "Wikipedia:WikiProject Years - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Years",
+      "title": "Wikipedia:WikiProject Years - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Special:Contributions/Aledownload"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Special:Contributions/Aledownload",
+      "title": "User contributions for Aledownload - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Special:Contributions/Aledownload",
+      "title": "User contributions for Aledownload - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=History_of_personal_computers&oldid=912694396"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=History_of_personal_computers&oldid=912694396",
+      "title": "History of personal computers - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=History_of_personal_computers&oldid=912694396",
+      "title": "History of personal computers - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence",
+      "title": "Wikipedia:Verifiability - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence",
+      "title": "Wikipedia:Verifiability - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Wikipedia:NONENG&redirect=no"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:NONENG&redirect=no",
+      "title": "Wikipedia:NONENG - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Shelly-Ann_Cox"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Shelly-Ann_Cox",
+      "title": "Shelly-Ann Cox - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Shelly-Ann_Cox",
+      "title": "Shelly-Ann Cox - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/University_of_the_West_Indies_at_Cave_Hill"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/University_of_the_West_Indies_at_Cave_Hill",
+      "title": "University of the West Indies at Cave Hill - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/University_of_the_West_Indies_at_Cave_Hill",
+      "title": "University of the West Indies at Cave Hill - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Samuel_Jackman_Prescod_Institute_of_Technology"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Samuel_Jackman_Prescod_Institute_of_Technology",
+      "title": "Samuel Jackman Prescod Institute of Technology - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Samuel_Jackman_Prescod_Institute_of_Technology",
+      "title": "Samuel Jackman Prescod Institute of Technology - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Samuel_Jackman_Prescod_Institute_of_Technology&action=history"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Samuel_Jackman_Prescod_Institute_of_Technology&action=history",
+      "title": "Samuel Jackman Prescod Institute of Technology: Revision history - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Samuel_Jackman_Prescod_Institute_of_Technology&action=history",
+      "title": "Samuel Jackman Prescod Institute of Technology: Revision history - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Samuel_Jackman_Prescod_Institute_of_Technology&action=edit&undoafter=1306134462&undo=1340627345"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Samuel_Jackman_Prescod_Institute_of_Technology&action=edit&undoafter=1306134462&undo=1340627345",
+      "title": "Editing Samuel Jackman Prescod Institute of Technology - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Samuel_Jackman_Prescod_Institute_of_Technology&action=edit&undoafter=1306134462&undo=1340627345",
+      "title": "Editing Samuel Jackman Prescod Institute of Technology - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+      "title": "Wikipedia:Contact us - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+      "title": "Wikipedia:Contact us - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia_talk:Contact_us"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Contact_us",
+      "title": "Wikipedia talk:Contact us - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 5,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Contact_us",
+      "title": "Wikipedia talk:Contact us - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/User_talk:FactOrOpinion"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/User_talk:FactOrOpinion",
+      "title": "User talk:FactOrOpinion - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Al-Qaeda_in_Yemen"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Al-Qaeda_in_Yemen",
+      "title": "Al-Qaeda in Yemen - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Al-Qaeda_in_Yemen",
+      "title": "Al-Qaeda in Yemen - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Al_Jazeera"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Al_Jazeera",
+      "title": "Al Jazeera Media Network - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Al_Jazeera_Media_Network",
+      "title": "Al Jazeera Media Network - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/United_States_Department_of_Justice"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/United_States_Department_of_Justice",
+      "title": "United States Department of Justice - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/United_States_Department_of_Justice",
+      "title": "United States Department of Justice - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License",
+      "title": "Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License",
+      "title": "Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License",
+      "title": "Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License",
+      "title": "Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License - Wikipedia"
+    },
+    "action": {
+      "action_type": "button",
+      "target_href": "btn://Search"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?search=&title=Special%3ASearch",
+      "title": "Search - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?search=&title=Special%3ASearch",
+      "title": "Search - Wikipedia"
+    },
+    "action": {
+      "action_type": "button",
+      "target_href": "btn://Search"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?search=&title=Special%3ASearch",
+      "title": "Search - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 6,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?search=&title=Special%3ASearch",
+      "title": "Search - Wikipedia"
+    },
+    "action": {
+      "action_type": "button",
+      "target_href": "btn://hide"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?search=&title=Special%3ASearch",
+      "title": "Search - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:About_Today's_featured_article"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:About_Today's_featured_article",
+      "title": "Wikipedia:About Today's featured article - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:About_Today's_featured_article",
+      "title": "Wikipedia:About Today's featured article - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:MAINPAGE"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:MAINPAGE",
+      "title": "Wikipedia, the free encyclopedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Slipknot_(band)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Slipknot_(band)",
+      "title": "Slipknot (band) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Slipknot_(band)",
+      "title": "Slipknot (band) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Guitar_World"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Guitar_World",
+      "title": "Guitar World - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Guitar_World",
+      "title": "Guitar World - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Harris_Publications"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Harris_Publications",
+      "title": "Harris Publications - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Harris_Publications",
+      "title": "Harris Publications - Wikipedia"
+    },
+    "action": {
+      "action_type": "button",
+      "target_href": "btn://Toggle History subse"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Harris_Publications",
+      "title": "Harris Publications - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Harris_Publications",
+      "title": "Harris Publications - Wikipedia"
+    },
+    "action": {
+      "action_type": "button",
+      "target_href": "btn://hide"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Harris_Publications",
+      "title": "Harris Publications - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 7,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Harris_Publications",
+      "title": "Harris Publications - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Vampirella#Vampi"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Vampirella#Vampi",
+      "title": "Vampirella - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Sinking_of_the_Virgo_Transport_8"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Sinking_of_the_Virgo_Transport_8",
+      "title": "Sinking of the Virgo Transport 8 - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Sinking_of_the_Virgo_Transport_8",
+      "title": "Sinking of the Virgo Transport 8 - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Category:Maritime_incidents_in_2026"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Category:Maritime_incidents_in_2026",
+      "title": "Category:Maritime incidents in 2026 - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Category:Maritime_incidents_in_2026",
+      "title": "Category:Maritime incidents in 2026 - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Category:2026_maritime_incidents?action=edit&redlink=1"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Category:2026_maritime_incidents",
+      "title": "Category:2026 maritime incidents - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Category:2026_maritime_incidents",
+      "title": "Category:2026 maritime incidents - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Category%3A2026+maritime+incidents"
+    },
+    "state_after": {
+      "url": "https://auth.wikimedia.org/enwiki/wiki/Special:UserLogin?useformat=desktop&usesul3=1&returnto=Category%3A2026+maritime+incidents&centralauthLoginToken=75aff0a7b4df502aa612bcaf4c3e54f5",
+      "title": "Log in - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 4,
+    "state_before": {
+      "url": "https://auth.wikimedia.org/enwiki/wiki/Special:UserLogin?useformat=desktop&usesul3=1&returnto=Category%3A2026+maritime+incidents&centralauthLoginToken=75aff0a7b4df502aa612bcaf4c3e54f5",
+      "title": "Log in - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer",
+      "title": "Wikipedia:General disclaimer - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer",
+      "title": "Wikipedia:General disclaimer - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Special:RecentChanges"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+      "title": "Recent changes - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Special:RecentChanges?hidebots=1&hidecategorization=1&hideWikibase=1&limit=50&days=1&urlversion=2",
+      "title": "Recent changes - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/w/index.php?title=Mundair_Kalan&curid=26638233&diff=1375339650&oldid=1354603735"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Mundair_Kalan&curid=26638233&diff=1375339650&oldid=1354603735",
+      "title": "Mundair Kalan: Difference between revisions - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 8,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/w/index.php?title=Mundair_Kalan&curid=26638233&diff=1375339650&oldid=1354603735",
+      "title": "Mundair Kalan: Difference between revisions - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Punjab,_Pakistan"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Punjab,_Pakistan",
+      "title": "Punjab, Pakistan - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Russo-Ukrainian_war_(2022\u2013present)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Russo-Ukrainian_war_(2022%E2%80%93present)",
+      "title": "Russo-Ukrainian war (2022\u2013present) - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Russo-Ukrainian_war_(2022%E2%80%93present)",
+      "title": "Russo-Ukrainian war (2022\u2013present) - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Stanytsia_Luhanska_kindergarten_bombing"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Stanytsia_Luhanska_kindergarten_bombing",
+      "title": "Stanytsia Luhanska kindergarten bombing - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Stanytsia_Luhanska_kindergarten_bombing",
+      "title": "Stanytsia Luhanska kindergarten bombing - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Category:February_2022_in_Ukraine"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Category:February_2022_in_Ukraine",
+      "title": "Category:February 2022 in Ukraine - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Category:February_2022_in_Ukraine",
+      "title": "Category:February 2022 in Ukraine - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Category:June"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Category:June",
+      "title": "Category:June - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Category:June",
+      "title": "Category:June - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Portal:Current_events/June_2023"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Portal:Current_events/June_2023",
+      "title": "Portal:Current events/June 2023 - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Portal:Current_events/June_2023",
+      "title": "Portal:Current events/June 2023 - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Humanitarian_pardon"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Humanitarian_pardon",
+      "title": "Compassionate release - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Compassionate_release",
+      "title": "Compassionate release - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/United_States"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/United_States",
+      "title": "United States - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 9,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/United_States",
+      "title": "United States - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Facebook"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Facebook",
+      "title": "Facebook - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Sanaa"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Sanaa",
+      "title": "Sanaa - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Sanaa",
+      "title": "Sanaa - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Turkish_bath"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Turkish_bath",
+      "title": "Hammam - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Hammam",
+      "title": "Hammam - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Hammam_al-Sarah"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Hammam_al-Sarah",
+      "title": "Hammam as-Sarah - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Hammam_as-Sarah",
+      "title": "Hammam as-Sarah - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Umayyad_architecture"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Umayyad_architecture",
+      "title": "Umayyad architecture - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Umayyad_architecture",
+      "title": "Umayyad architecture - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/ISBN_(identifier)"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/ISBN_(identifier)",
+      "title": "ISBN - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/ISBN",
+      "title": "ISBN - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Caribbean_Community"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Caribbean_Community",
+      "title": "Caribbean Community - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Caribbean_Community",
+      "title": "Caribbean Community - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Guyana"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Guyana",
+      "title": "Guyana - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 10,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Guyana",
+      "title": "Guyana - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Emancipation_Day"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Emancipation_Day",
+      "title": "Emancipation Day - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 0,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "title": "Wikipedia, the free encyclopedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Princess_Astrid,_Mrs._Ferner"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Princess_Astrid,_Mrs._Ferner",
+      "title": "Princess Astrid, Mrs. Ferner - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 1,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Princess_Astrid,_Mrs._Ferner",
+      "title": "Princess Astrid, Mrs. Ferner - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Hartvig_Nissen_School"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Hartvig_Nissen_School",
+      "title": "Hartvig Nissen School - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 2,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Hartvig_Nissen_School",
+      "title": "Hartvig Nissen School - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Bernhard_Cathrinus_Pauss"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Bernhard_Cathrinus_Pauss",
+      "title": "Bernhard Pauss - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 3,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Bernhard_Pauss",
+      "title": "Bernhard Pauss - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Frogner_School"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Frogner_School",
+      "title": "Frogner School - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 4,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Frogner_School",
+      "title": "Frogner School - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Oslo"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Oslo",
+      "title": "Oslo - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 5,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Oslo",
+      "title": "Oslo - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Ring_road"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Ring_road",
+      "title": "Ring road - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 6,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Ring_road",
+      "title": "Ring road - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/Philippines"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/Philippines",
+      "title": "Philippines - Wikipedia"
+    }
+  },
+  {
+    "trajectory_id": 11,
+    "step": 7,
+    "state_before": {
+      "url": "https://en.wikipedia.org/wiki/Philippines",
+      "title": "Philippines - Wikipedia"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://en.wikipedia.org/wiki/University_of_the_Philippines"
+    },
+    "state_after": {
+      "url": "https://en.wikipedia.org/wiki/University_of_the_Philippines",
+      "title": "University of the Philippines - Wikipedia"
+    }
+  }
+]

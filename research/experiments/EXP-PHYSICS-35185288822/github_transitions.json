@@ -1,0 +1,290 @@
+[
+  {
+    "trajectory_id": 0,
+    "step": 0,
+    "state_before": {
+      "url": "https://github.com/",
+      "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/marketplace"
+    },
+    "state_after": {
+      "url": "https://github.com/marketplace",
+      "title": "Marketplace \u00b7 Tools to improve your workflow \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 1,
+    "state_before": {
+      "url": "https://github.com/marketplace",
+      "title": "Marketplace \u00b7 Tools to improve your workflow \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/marketplace/linear-code"
+    },
+    "state_after": {
+      "url": "https://github.com/marketplace/linear-code",
+      "title": "Linear Code \u00b7 GitHub Marketplace \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 2,
+    "state_before": {
+      "url": "https://github.com/marketplace/linear-code",
+      "title": "Linear Code \u00b7 GitHub Marketplace \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/pricing"
+    },
+    "state_after": {
+      "url": "https://github.com/pricing",
+      "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 3,
+    "state_before": {
+      "url": "https://github.com/pricing",
+      "title": "Pricing \u00b7 Plans for every developer \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/github"
+    },
+    "state_after": {
+      "url": "https://github.com/github",
+      "title": "GitHub \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 0,
+    "step": 4,
+    "state_before": {
+      "url": "https://github.com/github",
+      "title": "GitHub \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/github/github-mcp-server/stargazers"
+    },
+    "state_after": {
+      "url": "https://github.com/github/github-mcp-server/stargazers",
+      "title": "Page not found \u00b7 GitHub \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 0,
+    "state_before": {
+      "url": "https://github.com/",
+      "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/features/issues"
+    },
+    "state_after": {
+      "url": "https://github.com/features/issues",
+      "title": "GitHub Issues \u00b7 Project planning for developers \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 1,
+    "state_before": {
+      "url": "https://github.com/features/issues",
+      "title": "GitHub Issues \u00b7 Project planning for developers \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/mobile?locale=en-US"
+    },
+    "state_after": {
+      "url": "https://github.com/mobile",
+      "title": "GitHub Mobile \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 2,
+    "state_before": {
+      "url": "https://github.com/mobile",
+      "title": "GitHub Mobile \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/features"
+    },
+    "state_after": {
+      "url": "https://github.com/features",
+      "title": "GitHub Features \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 3,
+    "state_before": {
+      "url": "https://github.com/features",
+      "title": "GitHub Features \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/why-github"
+    },
+    "state_after": {
+      "url": "https://github.com/why-github",
+      "title": "GitHub \u00b7 Why Choose GitHub? \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 1,
+    "step": 4,
+    "state_before": {
+      "url": "https://github.com/why-github",
+      "title": "GitHub \u00b7 Why Choose GitHub? \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/features/actions?locale=en-US"
+    },
+    "state_after": {
+      "url": "https://github.com/features/actions",
+      "title": "GitHub Actions \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 0,
+    "state_before": {
+      "url": "https://github.com/",
+      "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/enterprise/premium-support"
+    },
+    "state_after": {
+      "url": "https://github.com/enterprise/premium-support",
+      "title": "GitHub Premium Support \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 1,
+    "state_before": {
+      "url": "https://github.com/enterprise/premium-support",
+      "title": "GitHub Premium Support \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/why-github"
+    },
+    "state_after": {
+      "url": "https://github.com/why-github",
+      "title": "GitHub \u00b7 Why Choose GitHub? \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 2,
+    "state_before": {
+      "url": "https://github.com/why-github",
+      "title": "GitHub \u00b7 Why Choose GitHub? \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/enterprise?locale=en-US"
+    },
+    "state_after": {
+      "url": "https://github.com/enterprise",
+      "title": "GitHub Enterprise \u00b7 The AI-powered developer platform for the agent-ready enterprise \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 3,
+    "state_before": {
+      "url": "https://github.com/enterprise",
+      "title": "GitHub Enterprise \u00b7 The AI-powered developer platform for the agent-ready enterprise \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/services"
+    },
+    "state_after": {
+      "url": "https://github.com/services",
+      "title": "Expert Services | GitHub \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 2,
+    "step": 4,
+    "state_before": {
+      "url": "https://github.com/services",
+      "title": "Expert Services | GitHub \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/site/privacy"
+    },
+    "state_after": {
+      "url": "https://github.com/services",
+      "title": "Expert Services | GitHub \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 3,
+    "step": 0,
+    "state_before": {
+      "url": "https://github.com/",
+      "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home"
+    },
+    "state_after": {
+      "url": "https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home",
+      "title": "github.com"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 0,
+    "state_before": {
+      "url": "https://github.com/",
+      "title": "GitHub \u00b7 Change is constant. GitHub keeps you ahead. \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/login"
+    },
+    "state_after": {
+      "url": "https://github.com/login",
+      "title": "Sign in to GitHub \u00b7 GitHub"
+    }
+  },
+  {
+    "trajectory_id": 4,
+    "step": 1,
+    "state_before": {
+      "url": "https://github.com/login",
+      "title": "Sign in to GitHub \u00b7 GitHub"
+    },
+    "action": {
+      "action_type": "link",
+      "target_href": "https://github.com/password_reset"
+    },
+    "state_after": {
+      "url": "https://github.com/password_reset",
+      "title": "github.com"
+    }
+  }
+]

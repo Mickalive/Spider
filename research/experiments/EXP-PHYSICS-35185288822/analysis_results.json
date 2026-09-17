@@ -1,0 +1,98 @@
+{
+  "site_results": {
+    "wikipedia": {
+      "name": "wikipedia",
+      "n_raw": 91,
+      "n_nl": 8,
+      "n_leakage": 83,
+      "unique_titles": 6,
+      "title_samples": [
+        "Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License - Wikipedia",
+        "Wikipedia, the free encyclopedia",
+        "Harris Publications - Wikipedia",
+        "Category:2026 maritime incidents - Wikipedia",
+        "Category:Maritime incidents in 2026 - Wikipedia"
+      ],
+      "title_aware_k3": {
+        "bc_pmi": 0.0,
+        "observed_pmi": 0.0,
+        "perm_mean": 0.0,
+        "perm_std": 0.0,
+        "p_value": 0.009900990099009901,
+        "effect_size_d": 0.0,
+        "N": 8,
+        "unique_states": 6,
+        "unique_actions": 2,
+        "unique_sa_pairs": 6,
+        "n_permutations_used": 100
+      },
+      "url_only_k3": {
+        "bc_pmi": 0.0,
+        "observed_pmi": 0.0,
+        "perm_mean": 0.0,
+        "perm_std": 0.0,
+        "p_value": 0.009900990099009901,
+        "effect_size_d": 0.0,
+        "N": 8,
+        "unique_states": 6,
+        "unique_actions": 2,
+        "unique_sa_pairs": 6,
+        "n_permutations_used": 100
+      },
+      "h_entropy": 0.0,
+      "shuffled_pmi": 0.0,
+      "title_pass": false,
+      "url_pass": false
+    },
+    "github": {
+      "name": "github",
+      "n_raw": 18,
+      "n_nl": 4,
+      "n_leakage": 14,
+      "unique_titles": 3,
+      "status": "INSUFFICIENT_DATA"
+    },
+    "mdn": {
+      "name": "mdn",
+      "n_raw": 25,
+      "n_nl": 2,
+      "n_leakage": 23,
+      "unique_titles": 2,
+      "status": "INSUFFICIENT_DATA"
+    }
+  },
+  "checks": {
+    "C1_url_only": {
+      "sites": 0,
+      "ok": false
+    },
+    "C2_title_aware": {
+      "sites": 0,
+      "ok": false
+    },
+    "C3_title_variation": {
+      "sites": 3,
+      "ok": true
+    },
+    "C4_positive_control": {
+      "ok": true
+    },
+    "C5_negative_control": {
+      "ok": true
+    },
+    "C6_determinism": {
+      "ok": true
+    },
+    "C7_data_sufficiency": {
+      "sites": 0,
+      "ok": false
+    },
+    "C8_ceiling": {
+      "sites": 0,
+      "ok": false
+    }
+  },
+  "decision": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "status": "MEASUREMENT_INVALID"
+}
