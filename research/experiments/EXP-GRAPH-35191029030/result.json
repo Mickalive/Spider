@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35191029030",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "observability_rate": 0.9916666666666667,
+    "pearson_r_pooled": 0.04976142951025528,
+    "pearson_p_pooled": 0.4485514485514486,
+    "abs_r_pooled": 0.04976142951025528,
+    "fp_rate_noise_only": 0.0,
+    "positive_control_rate": 1.0,
+    "n_cooccurring_conditions": 8,
+    "n_noise_only_conditions": 4,
+    "n_samples_per_condition": 30,
+    "n_paired_samples": 240,
+    "n_valid_cooccurring_samples": 238,
+    "conditions_with_variance": 4,
+    "per_condition_tp": {
+      "cooccur_permission_boundary+optional_field_addition": 1.0,
+      "cooccur_permission_boundary+description_change": 1.0,
+      "cooccur_permission_boundary+response_time_jitter": 1.0,
+      "cooccur_permission_boundary+field_type_normalization": 1.0,
+      "cooccur_session_invalidation+optional_field_addition": 1.0,
+      "cooccur_session_invalidation+description_change": 1.0,
+      "cooccur_session_invalidation+response_time_jitter": 1.0,
+      "cooccur_session_invalidation+field_type_normalization": 1.0
+    },
+    "per_condition_r": {
+      "cooccur_permission_boundary+optional_field_addition": {
+        "r": 0.19239305828441824,
+        "p": 0.30841229487892746
+      },
+      "cooccur_permission_boundary+description_change": {
+        "r": -0.3188870512307547,
+        "p": 0.08587567985784407
+      },
+      "cooccur_permission_boundary+response_time_jitter": {
+        "r": 0.3134578344107679,
+        "p": 0.09165367554254598
+      },
+      "cooccur_permission_boundary+field_type_normalization": {
+        "r": -0.2727723627949904,
+        "p": 0.14473775071851896
+      },
+      "cooccur_session_invalidation+optional_field_addition": {
+        "r": null,
+        "p": null
+      },
+      "cooccur_session_invalidation+description_change": {
+        "r": null,
+        "p": null
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "r": null,
+        "p": null
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "r": null,
+        "p": null
+      }
+    },
+    "per_drift_r": {
+      "permission_boundary": 0.05135707277765042,
+      "session_invalidation": null
+    }
+  },
+  "controls": {
+    "C1_drift_tp": {
+      "threshold": "mean_tp >= 0.85",
+      "observed_mean_tp": 1.0,
+      "per_condition_tp": {
+        "cooccur_permission_boundary+optional_field_addition": 1.0,
+        "cooccur_permission_boundary+description_change": 1.0,
+        "cooccur_permission_boundary+response_time_jitter": 1.0,
+        "cooccur_permission_boundary+field_type_normalization": 1.0,
+        "cooccur_session_invalidation+optional_field_addition": 1.0,
+        "cooccur_session_invalidation+description_change": 1.0,
+        "cooccur_session_invalidation+response_time_jitter": 1.0,
+        "cooccur_session_invalidation+field_type_normalization": 1.0
+      },
+      "pass": true,
+      "evidence": "Mean TP rate across 8 co-occurring conditions"
+    },
+    "C2_observability": {
+      "threshold": ">= 80% of co-occurring sample pairs have BOTH behavioral > 0 AND structural > 0",
+      "observed_rate": 0.9916666666666667,
+      "observed_count": 238,
+      "total_count": 240,
+      "pass": true,
+      "evidence": "238/240 sample pairs with both signals > 0"
+    },
+    "C3_orthogonality": {
+      "threshold": "|Pearson r| < 0.3 on pooled paired scores, permutation p < 0.05",
+      "observed_r": 0.04976142951025528,
+      "observed_abs_r": 0.04976142951025528,
+      "observed_p": 0.4485514485514486,
+      "n_samples": 240,
+      "pass": false,
+      "evidence": "Pearson r=0.0498 on 240 pooled paired samples"
+    },
+    "C4_null_control": {
+      "threshold": "FP = 0.0 on noise-only conditions",
+      "observed_fp_rate": 0.0,
+      "observed_fp_count": 0,
+      "total_noise_only": 120,
+      "pass": true,
+      "evidence": "FP rate = 0.0000 across 4 noise-only conditions"
+    },
+    "PC_PERMISSION_BOUNDARY_DETECTION": {
+      "description": "permission_boundary drift should produce behavioral signal > 0",
+      "observed_rate": 1.0,
+      "pass": true,
+      "evidence": "Detection rate: 1.0000 (30/30)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "2efc4e28ab5ad630bbc961d91f9f7c9313de1cc1be141913117b63f7f099fd50",
+      "role": "raw"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "83f2b7d820efde1a1b19c9c2733a5402095c32f5caa443c31b5e88ea2dbfaf04",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "c11e7a1860fa6aadb60c810790a70186387277e82bb4fa467b10360b7fd81f77",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean drift TP rate across co-occurring conditions: 1.0000",
+    "Signal observability (both behavioral > 0 AND structural > 0): 0.9917 (238/240)",
+    "Pearson r (pooled paired scores, all co-occurring): 0.0498 (|r|=0.0498, p=0.4486, n=240)",
+    "Null control FP rate (noise-only): 0.0000 (0/120)",
+    "Positive control (permission_boundary detection): 1.0000",
+    "Conditions with within-condition variance (both signals std > 0): 4/8",
+    "Total paired samples: 240",
+    "Per-drift-pattern r: permission_boundary=0.05135707277765042, session_invalidation=null (undefined: zero behavioral variance)",
+    "C1 (drift TP >= 0.85): PASS",
+    "C2 (observability >= 80%): PASS",
+    "C3 (orthogonality |r| < 0.3): FAIL",
+    "C4 (null FP = 0.0): PASS"
+  ],
+  "validity_notes": [
+    "All behavioral signals derived from real HTTP request/response cycles on Flask 3.x + PyJWT HS256 localhost",
+    "Structural signals computed from unauthenticated /schema endpoint that returns current schema regardless of auth state",
+    "Drift patterns limited to permission_boundary (blocks write/admin only) and session_invalidation (clears session store)",
+    "signing_key_rotation EXCLUDED from co-occurring conditions (parent confound that blocks all endpoints)",
+    "Within-condition stochastic variation: random permission subset (3 options for permission_boundary), random token expiry jitter (\u00b11s for session_invalidation)",
+    "Structural noise from /schema endpoint is independent of auth state \u2014 cannot be masked by drift",
+    "Pearson r computed on paired per-sample (behavioral_i, structural_i) scores, NOT on condition means",
+    "Deterministic seed (SEED=42) for reproducibility; all RNG states logged and reproducible",
+    "Claim ceiling bounded to Flask 3.x + PyJWT HS256 on localhost, 2 drift patterns, 4 noise patterns, 8 co-occurring conditions, 30 samples per condition",
+    "MEASUREMENT_INVALID: session_invalidation conditions produce constant behavioral signal (std=0) because API endpoints (/api/read, /api/write, /api/admin) do not check session validity — they only check JWT token and permissions. Session invalidation is only detectable via /session/status endpoint, not via API endpoint probing. This means 4/8 conditions have zero behavioral variance, making paired correlation undefined for those conditions.",
+    "The pooled Pearson r=0.0498 is very low but not statistically significant (p=0.4486) due to the 4 session_invalidation conditions contributing constant behavioral values (3.0) with zero variance.",
+    "The permission_boundary conditions alone show r=0.0514 with proper within-condition variation, suggesting orthogonality within that drift type, but this is exploratory and not the preregistered pooled test."
+  ],
+  "unresolved": [
+    "Whether real APIs with stochastic behavior (DB/cache/CDN) preserve signal orthogonality",
+    "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware",
+    "Whether per-condition correlation differs from pooled correlation (exploratory per-condition analysis reported)",
+    "Whether wider stochastic variation ranges (more permission subsets, wider noise magnitudes) change the correlation",
+    "Whether composite multi-signal classifiers outperform individual signals when orthogonality holds",
+    "Whether the unauthenticated /schema endpoint is practical in real-world API deployments"
+  ]
+}
