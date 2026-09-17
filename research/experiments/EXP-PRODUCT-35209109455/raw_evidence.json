@@ -1,0 +1,201 @@
+{
+  "regression": {
+    "total": 3,
+    "passed": 3,
+    "failures": 0,
+    "errors": 0,
+    "failure_details": []
+  },
+  "token_measurements": [
+    {
+      "pattern_id": "pattern_1",
+      "pattern_name": "Single path parameter (1 param)",
+      "num_params": 1,
+      "literal_tokens": 19,
+      "parameterized_tokens": 20,
+      "savings_tokens": -1,
+      "savings_pct": -5.26,
+      "literal_action": {
+        "method": "GET",
+        "url": "https://api.example.com/users/1"
+      },
+      "parameterized_action": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${id}"
+      }
+    },
+    {
+      "pattern_id": "pattern_2",
+      "pattern_name": "Single query parameter (1 param)",
+      "num_params": 1,
+      "literal_tokens": 23,
+      "parameterized_tokens": 24,
+      "savings_tokens": -1,
+      "savings_pct": -4.35,
+      "literal_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/comments?postId=1"
+      },
+      "parameterized_action": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/comments?postId=${id}"
+      }
+    },
+    {
+      "pattern_id": "pattern_3",
+      "pattern_name": "Two query parameters (2 params)",
+      "num_params": 2,
+      "literal_tokens": 25,
+      "parameterized_tokens": 26,
+      "savings_tokens": -1,
+      "savings_pct": -4.0,
+      "literal_action": {
+        "method": "GET",
+        "url": "https://api.example.com/posts?userId=1&limit=10"
+      },
+      "parameterized_action": {
+        "method": "GET",
+        "url": "https://api.example.com/posts?userId=${userId}&limit=${limit}"
+      }
+    },
+    {
+      "pattern_id": "pattern_4",
+      "pattern_name": "Path + query parameter (2 params, mixed)",
+      "num_params": 2,
+      "literal_tokens": 23,
+      "parameterized_tokens": 25,
+      "savings_tokens": -2,
+      "savings_pct": -8.7,
+      "literal_action": {
+        "method": "GET",
+        "url": "https://api.example.com/users/1/posts?page=1"
+      },
+      "parameterized_action": {
+        "method": "GET",
+        "url": "https://api.example.com/users/${userId}/posts?page=${page}"
+      }
+    },
+    {
+      "pattern_id": "pattern_5",
+      "pattern_name": "Three query parameters (3 params)",
+      "num_params": 3,
+      "literal_tokens": 31,
+      "parameterized_tokens": 34,
+      "savings_tokens": -3,
+      "savings_pct": -9.68,
+      "literal_action": {
+        "method": "GET",
+        "url": "https://api.example.com/products?category=books&minPrice=10&maxPrice=50"
+      },
+      "parameterized_action": {
+        "method": "GET",
+        "url": "https://api.example.com/products?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}"
+      }
+    }
+  ],
+  "resolve_bind_tests": [
+    {
+      "pattern_id": "pattern_1",
+      "pattern_name": "Single path parameter (1 param)",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/users/42",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/users/42",
+      "expected_url": "https://api.example.com/users/42",
+      "test_params": {
+        "id": "42"
+      },
+      "slots": [
+        "id"
+      ]
+    },
+    {
+      "pattern_id": "pattern_2",
+      "pattern_name": "Single query parameter (1 param)",
+      "num_params": 1,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://jsonplaceholder.typicode.com/comments?postId=5",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://jsonplaceholder.typicode.com/comments?postId=5",
+      "expected_url": "https://jsonplaceholder.typicode.com/comments?postId=5",
+      "test_params": {
+        "id": "5"
+      },
+      "slots": [
+        "id"
+      ]
+    },
+    {
+      "pattern_id": "pattern_3",
+      "pattern_name": "Two query parameters (2 params)",
+      "num_params": 2,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/posts?userId=5&limit=25",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/posts?userId=5&limit=25",
+      "expected_url": "https://api.example.com/posts?userId=5&limit=25",
+      "test_params": {
+        "userId": "5",
+        "limit": "25"
+      },
+      "slots": [
+        "userId",
+        "limit"
+      ]
+    },
+    {
+      "pattern_id": "pattern_4",
+      "pattern_name": "Path + query parameter (2 params, mixed)",
+      "num_params": 2,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/users/5/posts?page=3",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/users/5/posts?page=3",
+      "expected_url": "https://api.example.com/users/5/posts?page=3",
+      "test_params": {
+        "userId": "5",
+        "page": "3"
+      },
+      "slots": [
+        "userId",
+        "page"
+      ]
+    },
+    {
+      "pattern_id": "pattern_5",
+      "pattern_name": "Three query parameters (3 params)",
+      "num_params": 3,
+      "resolve_with_params_status": "EXECUTABLE",
+      "resolve_with_params_executable": true,
+      "resolve_with_params_bound_url": "https://api.example.com/products?category=tools&minPrice=15&maxPrice=75",
+      "resolve_no_params_status": "UNKNOWN",
+      "resolve_no_params_unknown": true,
+      "bind_correct_url": true,
+      "bind_actual_url": "https://api.example.com/products?category=tools&minPrice=15&maxPrice=75",
+      "expected_url": "https://api.example.com/products?category=tools&minPrice=15&maxPrice=75",
+      "test_params": {
+        "category": "tools",
+        "minPrice": "15",
+        "maxPrice": "75"
+      },
+      "slots": [
+        "category",
+        "minPrice",
+        "maxPrice"
+      ]
+    }
+  ]
+}

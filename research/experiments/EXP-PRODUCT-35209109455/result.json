@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35209109455",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "c1_resolve_executable": {
+      "description": "resolve() returns EXECUTABLE for all 5 parameterized mechanisms with correct parameters",
+      "pass": true,
+      "value": "5/5",
+      "threshold": "5/5"
+    },
+    "c2_resolve_unknown": {
+      "description": "resolve() returns UNKNOWN for all 5 when parameters missing",
+      "pass": true,
+      "value": "5/5",
+      "threshold": "5/5"
+    },
+    "c3_bind_correct": {
+      "description": "_bind() produces correct bound_action for all 5 parameterized mechanisms",
+      "pass": true,
+      "value": "5/5",
+      "threshold": "5/5"
+    },
+    "c4_parameterized_fewer_tokens": {
+      "description": "Parameterized uses fewer tokens than literal per pattern",
+      "pass": false,
+      "value": "0/5",
+      "threshold": ">=4/5",
+      "per_pattern": {
+        "pattern_1": {"literal": 19, "parameterized": 20, "savings_pct": -5.26, "fewer": false},
+        "pattern_2": {"literal": 23, "parameterized": 24, "savings_pct": -4.35, "fewer": false},
+        "pattern_3": {"literal": 25, "parameterized": 26, "savings_pct": -4.0, "fewer": false},
+        "pattern_4": {"literal": 23, "parameterized": 25, "savings_pct": -8.7, "fewer": false},
+        "pattern_5": {"literal": 31, "parameterized": 34, "savings_pct": -9.68, "fewer": false}
+      }
+    },
+    "c5_mean_savings": {
+      "description": "Mean token savings percentage across 5 patterns >= 15%",
+      "pass": false,
+      "value_pct": -6.4,
+      "threshold_pct": 15.0
+    },
+    "c6_monotonic_increase": {
+      "description": "Token savings increase with parameter count (3-param savings > 1-param savings)",
+      "pass": false,
+      "value": false,
+      "detail": "3-param savings (-9.68%) is LESS than 1-param mean savings (-4.81%); savings decrease with parameter count",
+      "one_param_mean_savings_pct": -4.81,
+      "three_param_savings_pct": -9.68
+    },
+    "c7_regression": {
+      "description": "All 3 existing kernel tests pass",
+      "pass": true,
+      "value": "3/3",
+      "threshold": "3/3"
+    },
+    "all_conditions_pass": false,
+    "passing_conditions": ["C1", "C2", "C3", "C7"],
+    "failing_conditions": ["C4", "C5", "C6"],
+    "token_measurement_method": "tiktoken cl100k_base encoding of action_template JSON (method + url)",
+    "num_patterns": 5,
+    "total_observations": 15
+  },
+  "controls": {
+    "P1_RESOLVE_PARAM_EXECUTABLE": {
+      "description": "resolve() returns EXECUTABLE with correct bound_action for manually-registered parameterized mechanism when correct parameters provided",
+      "stable_id": "P1_RESOLVE_PARAM_EXECUTABLE",
+      "expected": "EXECUTABLE with correct bound_action for all 5 patterns",
+      "observed": "5/5 EXECUTABLE, 5/5 correct bound_action",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:resolve_bind_tests[*].resolve_with_params_executable"
+    },
+    "N1_RESOLVE_PARAM_UNKNOWN": {
+      "description": "resolve() returns UNKNOWN when parameters missing for parameterized mechanism",
+      "stable_id": "N1_RESOLVE_PARAM_UNKNOWN",
+      "expected": "UNKNOWN for all 5 patterns",
+      "observed": "5/5 UNKNOWN",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:resolve_bind_tests[*].resolve_no_params_unknown"
+    },
+    "B_LITERAL_TOKEN_COST": {
+      "description": "Token cost of literal mechanism representation for each of 5 URL patterns",
+      "stable_id": "B_LITERAL_TOKEN_COST",
+      "expected": "Baseline for comparison",
+      "observed": {"pattern_1": 19, "pattern_2": 23, "pattern_3": 25, "pattern_4": 23, "pattern_5": 31},
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:token_measurements[*].literal_tokens"
+    },
+    "B1_SINGLE_PARAM_EXISTING": {
+      "description": "Parent experiment single-slot GET token cost (68 tokens parameterized, 96 tokens literal) from EXP-PRODUCT-35185290656 carry_forward",
+      "stable_id": "B1_SINGLE_PARAM_EXISTING",
+      "expected": "Calibration reference, not re-measured",
+      "observed": "not re-measured (carry_forward from parent)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35185290656/handoff.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35209109455/raw_evidence.json",
+      "sha256": "1625e6e0751a58f88a8bb55fdf0c2af30d53f18e98d8c432f3833dd2cbfdb01d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35209109455/run_experiment.py",
+      "sha256": "cd5d2543a1bce80a50a04979eee7e8eebce69c9c5afe5b948ba58016725191f6",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "All 5 parameterized mechanisms resolve EXECUTABLE with correct bound_action when correct parameters provided (C1 PASS)",
+    "All 5 parameterized mechanisms resolve UNKNOWN when parameters are missing (C2 PASS)",
+    "_bind() produces correct URL substitution for all 5 patterns including multi-slot (C3 PASS)",
+    "Parameterized mechanisms use MORE tokens than literal mechanisms for all 5 patterns, not fewer (C4 FAIL: 0/5)",
+    "Mean token savings is -6.4% (negative), far below the 15% threshold (C5 FAIL)",
+    "Token savings DECREASE with parameter count: 1-param mean -4.81%, 3-param -9.68% (C6 FAIL)",
+    "3-param pattern (pattern_5) has highest token penalty: -9.68% (3 extra tokens for 3 template slots)",
+    "Template variable names (id, userId, limit, page, category, minPrice, maxPrice) are longer than the concrete values they replace (1-3 char numbers)",
+    "Token cost of template syntax: ${varname} adds 3 chars overhead per slot ($ and { and }) plus varname length",
+    "Kernel regression tests pass 3/3 with no regression (C7 PASS)"
+  ],
+  "validity_notes": [
+    "Token measurement is tiktoken cl100k_base, not actual LLM inference tokenizer. Different tokenizers may produce different results.",
+    "Action_template JSON serialization includes both method and url fields. Token cost measured on JSON.dumps(sort_keys=True).",
+    "Training observations are hand-crafted synthetic data, not real browser sessions.",
+    "No network access, no browser automation, no model calls during measurement.",
+    "All mechanisms use confidence=0.9, above min_confidence threshold of 0.8.",
+    "The parent experiment reported 68 vs 96 tokens (29.17% savings) for a single pattern. That measurement may have used a different action_template structure or different URL representation. This experiment uses the same full-URL format for both literal and parameterized mechanisms, revealing that template syntax overhead exceeds concrete value savings for short numeric values.",
+    "Parameterized template savings require concrete values LONGER than the template variable name + syntax overhead (${varname} = varname.length + 3 chars). For short values (1-3 digit numbers), literal is more token-efficient.",
+    "The negative savings represent a real structural property: the ${var} template syntax adds fixed overhead per slot that dominates when replaced values are short."
+  ],
+  "unresolved": [
+    "Whether parameterized representation saves tokens when concrete values are long strings (UUIDs, slugs, full paths) rather than short numeric IDs",
+    "Whether the parent's 29.17% savings (68 vs 96 tokens) used a different action_template structure or measurement methodology",
+    "Whether LLM tokenizers (not tiktoken) would show different savings patterns for template syntax",
+    "Whether amortized cost (fewer unique mechanisms to store/transmit) offsets per-mechanism token penalty in real agent workflows",
+    "C-PRODUCT-ECON end-to-end economics remain unmeasured",
+    "PUT/POST method fidelity remains untested"
+  ]
+}
