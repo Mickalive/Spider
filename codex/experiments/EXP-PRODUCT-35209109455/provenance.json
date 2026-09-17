@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35209109455",
+  "github_run_id": "35209109455",
+  "base_sha": "96b62e4739edba0ace1f318c84fd627e070f693d",
+  "current_sha": "2182a48b9bd8dbc3dc3a1e5dfeec2a3efee7de19",
+  "branch": "lab2/product",
+  "python_version": "3.12.14",
+  "platform": "linux",
+  "dependencies": {
+    "tiktoken": "0.14.0",
+    "tiktoken_encoding": "cl100k_base"
+  },
+  "frozen_inputs": {
+    "request.json_hash": "933647e49136510834bca5b34aba74ab060d851f553e2a9fd4a67ec65d8a6db3",
+    "spec.json_hash": "d2ab4fd651720d45076dd8ac8d0da4c1ecaf363e183f19d308c3e4dea887bc51",
+    "prereg.md_hash": "4ee0f7349ae3eab688759f52a3216432fc21807a32f3df85b43c63397a130041",
+    "freeze.json_hash": "see frozen freeze.json"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35185290656",
+    "path": "research/experiments/EXP-PRODUCT-35185290656/handoff.json",
+    "sha256": "760f0152a359242795d227ba3ede9d609bc64e775ecbed000f14042f70cfbbb8"
+  },
+  "code_paths": {
+    "kernel": "src/spider/kernel.py",
+    "models": "src/spider/models.py",
+    "registry": "src/spider/registry.py",
+    "tests": "tests/test_kernel.py",
+    "experiment_code": "research/experiments/EXP-PRODUCT-35209109455/run_experiment.py"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35209109455/raw_evidence.json",
+      "sha256": "1625e6e0751a58f88a8bb55fdf0c2af30d53f18e98d8c432f3833dd2cbfdb01d"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-35209109455/run_experiment.py",
+      "sha256": "cd5d2543a1bce80a50a04979eee7e8eebce69c9c5afe5b948ba58016725191f6"
+    }
+  },
+  "execution_commands": [
+    "pip install tiktoken",
+    "python research/experiments/EXP-PRODUCT-35209109455/run_experiment.py"
+  ],
+  "measurement_description": "Token cost measured via tiktoken cl100k_base encoding of action_template JSON serialization (json.dumps with sort_keys=True). Both literal and parameterized mechanisms measured with same encoding. 5 URL patterns with 1-3 parameters each, 3 training observations per pattern, manual mechanism construction.",
+  "no_network_access": true,
+  "no_browser_automation": true,
+  "no_model_calls": true
+}

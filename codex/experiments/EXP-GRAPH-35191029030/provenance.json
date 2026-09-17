@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35191029030",
+  "github_run_id": null,
+  "base_sha": "3fe441d02013b7a63418d8a38ac25b19fa2fd15a",
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-35166507358",
+    "handoff_sha256": "d3160d49adc24043ee606bd272b13622737d0efb926e5c2b62a718cf0d113841"
+  },
+  "environment": {
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python_version": "3.12.14",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1"
+  },
+  "parameters": {
+    "seed": 42,
+    "n_samples_per_condition": 30,
+    "n_cooccurring_conditions": 8,
+    "n_noise_only_conditions": 4,
+    "drift_patterns": [
+      "permission_boundary",
+      "session_invalidation"
+    ],
+    "noise_patterns": [
+      "optional_field_addition",
+      "description_change",
+      "response_time_jitter",
+      "field_type_normalization"
+    ],
+    "permission_subsets": [
+      {"read": true, "write": false, "admin": false},
+      {"read": true, "write": true, "admin": false},
+      {"read": true, "write": false, "admin": true}
+    ],
+    "schema_size": 10,
+    "base_port": 18930,
+    "behavioral_composite_formula": "token_val_rate * 2 + session_change * 3 + auth_boundary * 1",
+    "structural_composite_formula": "max(schema_diff_magnitude, 1.0 - jaccard_similarity)",
+    "permutation_test_iterations": 1000
+  },
+  "measurement_validity_issue": {
+    "description": "session_invalidation drift produces constant behavioral signal (std=0) because API endpoints (/api/read, /api/write, /api/admin) only check JWT token and permissions, not session validity. Session invalidation is only detectable via /session/status endpoint.",
+    "affected_conditions": [
+      "cooccur_session_invalidation+optional_field_addition",
+      "cooccur_session_invalidation+description_change",
+      "cooccur_session_invalidation+response_time_jitter",
+      "cooccur_session_invalidation+field_type_normalization"
+    ],
+    "consequence": "4/8 conditions have zero behavioral variance, making paired Pearson correlation undefined for those conditions. MEASUREMENT_INVALID per frozen decision rule."
+  },
+  "code_paths": {
+    "mock_server.py": "83f2b7d820efde1a1b19c9c2733a5402095c32f5caa443c31b5e88ea2dbfaf04",
+    "run_experiment.py": "c11e7a1860fa6aadb60c810790a70186387277e82bb4fa467b10360b7fd81f77"
+  },
+  "artifacts": {
+    "raw_evidence": "raw_evidence/experiment_data.json (sha256: 2efc4e28ab5ad630bbc961d91f9f7c9313de1cc1be141913117b63f7f099fd50)",
+    "result_json": "result.json",
+    "report_md": "report.md"
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35209109455",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_TOKEN_MEASUREMENT_REPRODUCED",
+      "severity": "info",
+      "finding": "Token cost measurement reproduces exactly via independent tiktoken cl100k_base encoding of json.dumps(action_template, sort_keys=True). All 5 patterns match producer: pattern_1 19 vs 20 (-5.26%), pattern_2 23 vs 24 (-4.35%), pattern_3 25 vs 26 (-4.0%), pattern_4 23 vs 25 (-8.70%), pattern_5 31 vs 34 (-9.68%). Mean -6.4%, 0/5 fewer, monotonic false. Computation is deterministic and correctly implemented in run_experiment.py:count_tokens.",
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/raw_evidence.json:token_measurements[*]; research/experiments/EXP-PRODUCT-35209109455/run_experiment.py:28-32 count_tokens; independent recompute via tiktoken cl100k_base yields identical 19/20, 23/24, 25/26, 23/25, 31/34",
+      "impact": "Core falsification (C4 C5 C6) is mathematically sound and independently verifiable. No measurement error."
+    },
+    {
+      "id": "V2_RESOLVE_BIND_PIPELINE_VALIDATED_NARROW",
+      "severity": "info",
+      "finding": "Resolve/bind pipeline correctly validated for manually-registered parameterized mechanisms: resolve() returns EXECUTABLE with correct bound_action for all 5 patterns when correct params supplied, and UNKNOWN when params missing, _bind() substitution correct for 1-3 slots. Independent kernel replay confirms 5/5 EXECUTABLE True and 5/5 UNKNOWN True with confidence 0.9 > min_confidence 0.8.",
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/raw_evidence.json:resolve_bind_tests[5]; src/spider/kernel.py:93-123 resolve required_slots = parameter_slots | _template_slots, _bind fullmatch/sub; independent replay via MechanismRegistry+SpiderKernel for patterns fetch_user..filter_products matches producer",
+      "impact": "C1 C2 C3 PASS is valid within tested narrow scope: isolated intents, confidence 0.9, manually constructed templates, GET only."
+    },
+    {
+      "id": "V3_SHORT_VALUE_OVERHEAD_DISCLOSED",
+      "severity": "info",
+      "finding": "Producer correctly diagnoses root cause: parameterized overhead is ${varname} (varname.length+3 chars: '$','{','}') plus varname length. For short concrete values (1-3 digit numbers: '1','10','books' etc vs slots id/userId/limit/page/category/minPrice/maxPrice), overhead dominates, causing -5% to -9% penalty. This is a structural property disclosed in validity_notes not a bug. Template savings require concrete value longer than varname+3.",
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/result.json:validity_notes[5-7]; report.md Root Cause example pattern_5 literal 38 chars vs parameterized 56 chars +18 overhead; raw_evidence literal parametrized_action URLs show slot names longer than values",
+      "impact": "Falsification bounded to short-value regime tested. Does not close token savings for long values (UUIDs, slugs, paths) which remain in unresolved correctly."
+    },
+    {
+      "id": "V4_CONTROL_NARROW_PARTIAL_PARAMS_UNTESTED",
+      "severity": "low",
+      "finding": "N1_RESOLVE_PARAM_UNKNOWN tests only fully missing params ({}). For multi-slot patterns (2-3 params) partial missing (e.g., provide userId but not limit) not tested. Spec prereg says 'when parameters are missing' and implementation checks any slot not in params -> UNKNOWN, so partial should also be UNKNOWN, but not empirically verified. P1/N1 are isolated per intent, so competition hazard from EXP-GRAPH-33718012817 (literal vs param tie-break at equal confidence lex order) is not exercised.",
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/spec.json positive_control/null_control definitions; run_experiment.py:218-224 resolve with {} only; src/spider/kernel.py:104-105 any(slot not in params)",
+      "impact": "Controls pass per frozen spec but are minimal. Mixed-registry safety remains inherited unresolved (parent handoff unknown 7). No impact on FALSIFIES verdict."
+    },
+    {
+      "id": "V5_SCOPE_SYNTHETIC_TIKTOKEN_ONLY",
+      "severity": "medium",
+      "finding": "Measurement is pure in-kernel synthetic: 5 hand-crafted URL patterns, 3 observations each (15 total), tiktoken cl100k_base only (not LLM inference tokenizer), action_template JSON only (method+url), GET only, confidence 0.9 single level, no browser, no model calls, no network, no distill_parameterized induction. Valid per spec measurement_validity 1-8 but narrow. No sampling variance, no statistical test beyond descriptive mean.",
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/spec.json measurement_validity 8 bullets GET-only no network; prereg.md Scope Limitations 8 bullets; provenance.json no_network no_browser no_model_calls; run_experiment.py PATTERNS 5*3 observations manual make_parameterized_mechanism",
+      "impact": "Claim correctly bounded to token representation cost on these 5 patterns. Cannot generalize to amortized product economics, LLM tokenizers, or real browser workflows. Producer disclosure adequate."
+    },
+    {
+      "id": "V6_PARENT_TOKEN_DISCREPANCY_UNRESOLVED",
+      "severity": "medium",
+      "finding": "Parent EXP-PRODUCT-35185290656 reported 68 parameterized vs 96 literal (29.17% savings) for single comments?postId=${url} pattern, while this experiment on same logical pattern (pattern_2) finds 24 vs 23 (-4.35% penalty). Producer flags this as unresolved possible different action_template structure or encoding. The parent figure should not be cited as established; this multi-pattern measurement provides stronger evidence that the 29% claim does not generalize under same-domain full-URL encoding. Audit confirms parent value not recomputed here (B1_SINGLE_PARAM_EXISTING carry_forward not re-measured per spec).",
+      "evidence": "research/experiments/EXP-PRODUCT-35185290656/handoff.json:established token cost 68 vs 96 29.17% single point; research/experiments/EXP-PRODUCT-35209109455/result.json metrics pattern_2 literal 23 param 24 savings -4.35% and validity_notes [5] and unresolved [1-2]; spec.json B1_SINGLE_PARAM_EXISTING description carry_forward not re-measured",
+      "impact": "Parent token economics remains HYPOTHESIS and is now challenged by 5-pattern evidence. Product lane should not use 29.17% as selling point."
+    },
+    {
+      "id": "V7_REGRESSION_VALID",
+      "severity": "info",
+      "finding": "Kernel regression 3/3 PASS independently reproduced via PYTHONPATH=src unittest. No regression from manually registered mechanisms (read-only registry).",
+      "evidence": "tests/test_kernel.py 3 tests; raw_evidence.json:regression total 3 passed 3 failures 0; provenance execution_commands; independent replay PYTHONPATH=src python -m unittest tests.test_kernel -v -> OK",
+      "impact": "C7 PASS valid. No side effects on kernel."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_LITERAL_TOKEN_COST",
+      "baseline_id": "B_LITERAL_TOKEN_COST",
+      "expected": "Token cost of literal action_template for each of 5 patterns as baseline",
+      "observed": "Producer 19,23,25,23,31 literal; recomputed 19,23,25,23,31 identical via tiktoken cl100k_base json.dumps sort_keys",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/result.json:controls.B_LITERAL_TOKEN_COST observed pattern_1 19 pattern_2 23 etc; raw_evidence.json:token_measurements literal_tokens; independent recompute ct(literal_action) matches"
+    },
+    {
+      "id": "B1_SINGLE_PARAM_EXISTING",
+      "baseline_id": "B1_SINGLE_PARAM_EXISTING",
+      "expected": "Parent 68 vs 96 (29.17% savings) calibration reference not re-measured",
+      "observed": "Not re-measured per spec, carry_forward from EXP-PRODUCT-35185290656 handoff.json",
+      "strength": "weak",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/spec.json baselines B1_SINGLE_PARAM_EXISTING description carry_forward; result.json controls B1_SINGLE_PARAM_EXISTING pass true evidence_ref parent handoff; handoff.json established token cost 68 vs 96"
+    },
+    {
+      "id": "P1_RESOLVE_PARAM_EXECUTABLE",
+      "baseline_id": "P1_RESOLVE_PARAM_EXECUTABLE",
+      "expected": "resolve() EXECUTABLE with correct bound_action for all 5 when correct params supplied",
+      "observed": "Producer 5/5 EXECUTABLE 5/5 correct bound_action; recomputed 5/5 EXECUTABLE via kernel replay true",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/result.json:controls.P1 observed 5/5 EXECUTABLE; raw_evidence.json resolve_bind_tests resolve_with_params_executable true resolve_with_params_bound_url matches expected_url; independent replay confirms"
+    },
+    {
+      "id": "N1_RESOLVE_PARAM_UNKNOWN",
+      "baseline_id": "N1_RESOLVE_PARAM_UNKNOWN",
+      "expected": "resolve() UNKNOWN when params missing for parameterized mechanism",
+      "observed": "Producer 5/5 UNKNOWN; recomputed 5/5 UNKNOWN via kernel replay. Narrow: only {} tested, not partial missing for multi-slot.",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/result.json:controls.N1 observed 5/5 UNKNOWN; raw_evidence.json resolve_no_params_unknown true; src/spider/kernel.py:104 any(slot not in params)"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_resolve_executable": {
+      "producer_value": "5/5",
+      "recomputed_value": "5/5",
+      "match": true,
+      "detail": "resolve(intent,{},{slot_vals}) == EXECUTABLE for pattern_1..5 independent kernel replay true; bound_action url matches expected",
+      "threshold": "5/5",
+      "pass": true
+    },
+    "c2_resolve_unknown": {
+      "producer_value": "5/5",
+      "recomputed_value": "5/5",
+      "match": true,
+      "detail": "resolve(intent,{},{}) == UNKNOWN for pattern_1..5 independent replay true",
+      "threshold": "5/5",
+      "pass": true
+    },
+    "c3_bind_correct": {
+      "producer_value": "5/5",
+      "recomputed_value": "5/5",
+      "match": true,
+      "detail": "_bind(template, test_params) url == expected_bound_url for all 5; resolve bound_action also matches",
+      "threshold": "5/5",
+      "pass": true
+    },
+    "c4_parameterized_fewer_tokens": {
+      "producer_value": "0/5",
+      "recomputed_value": "0/5",
+      "match": true,
+      "threshold": ">=4/5",
+      "pass": false,
+      "per_pattern": {
+        "pattern_1": {
+          "producer": {
+            "literal": 19,
+            "parameterized": 20,
+            "savings_pct": -5.26
+          },
+          "recomputed": {
+            "literal": 19,
+            "parameterized": 20,
+            "savings_pct": -5.26
+          },
+          "match": true
+        },
+        "pattern_2": {
+          "producer": {
+            "literal": 23,
+            "parameterized": 24,
+            "savings_pct": -4.35
+          },
+          "recomputed": {
+            "literal": 23,
+            "parameterized": 24,
+            "savings_pct": -4.3478
+          },
+          "match": true
+        },
+        "pattern_3": {
+          "producer": {
+            "literal": 25,
+            "parameterized": 26,
+            "savings_pct": -4.0
+          },
+          "recomputed": {
+            "literal": 25,
+            "parameterized": 26,
+            "savings_pct": -4.0
+          },
+          "match": true
+        },
+        "pattern_4": {
+          "producer": {
+            "literal": 23,
+            "parameterized": 25,
+            "savings_pct": -8.7
+          },
+          "recomputed": {
+            "literal": 23,
+            "parameterized": 25,
+            "savings_pct": -8.6956
+          },
+          "match": true
+        },
+        "pattern_5": {
+          "producer": {
+            "literal": 31,
+            "parameterized": 34,
+            "savings_pct": -9.68
+          },
+          "recomputed": {
+            "literal": 31,
+            "parameterized": 34,
+            "savings_pct": -9.6774
+          },
+          "match": true
+        }
+      }
+    },
+    "c5_mean_savings": {
+      "producer_value_pct": -6.4,
+      "recomputed_value_pct": -6.39,
+      "match": true,
+      "threshold_pct": 15.0,
+      "pass": false,
+      "detail": "mean = (-5.26-4.35-4.0-8.6956-9.6774)/5 = -6.396% vs producer -6.4% (rounding)"
+    },
+    "c6_monotonic_increase": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true,
+      "pass": false,
+      "detail": "1-param mean (-5.26-4.35)/2=-4.805% recomputed -4.81, 3-param -9.68% < -4.81% so savings decrease with param count, not increase",
+      "one_param_mean_savings_pct": -4.81,
+      "three_param_savings_pct": -9.68
+    },
+    "c7_regression": {
+      "producer_value": "3/3",
+      "recomputed_value": "3/3",
+      "match": true,
+      "threshold": "3/3",
+      "pass": true,
+      "detail": "PYTHONPATH=src unittest 3 tests OK"
+    },
+    "all_conditions_pass": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true,
+      "detail": "C1 true C2 true C3 true C4 false C5 false C6 false C7 true => ALL false per frozen decision_rule => FALSIFIED-IN-SETTING"
+    }
+  },
+  "claim_ceiling": "Resolve/bind pipeline survives narrowly: manually-registered parameterized mechanisms with 1-3 slots (templates https://api.example.com/users/${id}, https://jsonplaceholder.typicode.com/comments?postId=${id}, https://api.example.com/posts?userId=${userId}&limit=${limit}, https://api.example.com/users/${userId}/posts?page=${page}, https://api.example.com/products?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}) resolve EXECUTABLE with correct bound_action when required_slots satisfied and UNKNOWN when missing, and _bind substitutes correctly for 1-3 vars; kernel regression 3/3 intact. Token economics hypothesis FALSIFIED-IN-SETTING for tested regime: under tiktoken cl100k_base encoding of action_template JSON (method+url, sort_keys), parameterized representation uses MORE tokens than literal for 0/5 patterns (19->20,23->24,25->26,23->25,31->34), mean -6.4% (threshold 15%), monotonic increase false (-9.68% < -4.81%). Penalty grows with slot count because ${var} overhead (varname+3) exceeds short numeric values (1-3 chars). Ceiling bounded to synthetic deterministic short-value GET URLs with api.example.com/jsonplaceholder, single confidence 0.9, tiktoken only, isolated intents (no literal+param competition). No evidence for long-value savings (UUIDs/slugs), LLM tokenizer differences, amortized mechanism deduplication, PUT/POST, cross-site, noisy browser or LLM-distilled induction. Parent 68 vs 96 (29.17% savings) single-point remains unreplicated and should not be cited as established. C-PARAM-INHERIT remains EXPERIMENTAL (pipeline validated, economics falsified for this regime); C-PRODUCT-ECON remains HYPOTHESIS with negative token-component evidence; no promotion to product.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35209109455/request.json: lane product claim_ids C-PARAM-INHERIT C-PRODUCT-ECON parent EXP-PRODUCT-35185290656",
+    "research/experiments/EXP-PRODUCT-35209109455/spec.json: question token cost 5 patterns 1-3 params, hypothesis, falsifier, baselines B_LITERAL_TOKEN_COST B1_SINGLE_PARAM_EXISTING, controls P1 N1, measurement_validity tiktoken cl100k_base json.dumps sort_keys, decision_rule C1-C7 ALL",
+    "research/experiments/EXP-PRODUCT-35209109455/prereg.md: 5 patterns enumerated with training observations and expected templates/slots, per-pattern test_params, decision table C1 5/5 C4 >=4/5 C5 >=15% C6 3-param>1-param C7 3/3, scope limitations 8 bullets",
+    "research/experiments/EXP-PRODUCT-35209109455/freeze.json: frozen_at 2026-09-17T15:14:42 hashes spec d2ab... prereg 4ee0... request 9336...",
+    "research/experiments/EXP-PRODUCT-35209109455/result.json: status COMPLETE outcome FALSIFIES metrics C1 true C2 true C3 true C4 0/5 false C5 -6.4% false C6 false C7 3/3 true, controls 4 entries, observations 8, validity_notes 8, unresolved 6",
+    "research/experiments/EXP-PRODUCT-35209109455/report.md: verdict FALSIFIED-IN-SETTING, token table 5 patterns, root cause ${varname} overhead, resolve/bind table 5/5",
+    "research/experiments/EXP-PRODUCT-35209109455/provenance.json: base 96b62e, current 2182a48, tiktoken 0.14.0 cl100k_base, code_paths kernel models registry tests, artifacts raw_evidence sha1625... run_experiment sha cd5d..., execution pip install tiktoken python run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35209109455/raw_evidence.json: regression 3/3, token_measurements 5 entries 19/20 23/24 25/26 23/25 31/34, resolve_bind_tests 5 entries EXECUTABLE/UNKNOWN/bind_correct true",
+    "research/experiments/EXP-PRODUCT-35209109455/run_experiment.py: PATTERNS 5, count_tokens tiktoken, make_literal/parameterized Mechanism confidence 0.9, run_kernel_regression, run_token_measurements, run_resolve_bind_tests via MechanismRegistry SpiderKernel _bind",
+    "src/spider/kernel.py: _PARAMETER regex, _template_slots, _bind, SpiderKernel.resolve required_slots logic min_confidence 0.8",
+    "tests/test_kernel.py: 3 tests test_unknown_is_default test_parameterized_mechanism_binds_only_when_guarded test_invalidation_forces_abstention",
+    "research/experiments/EXP-PRODUCT-35185290656/handoff.json: carry_forward established token 68 vs 96 29.17% single point, do_not_assume do not assume savings reflect economics, next_question pivot to amortized cost or PUT/POST",
+    "codex/index.json + claim_state.json: C-PARAM-INHERIT EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS prior"
+  ],
+  "unresolved": [
+    "Whether parameterized representation saves tokens when concrete values are long (UUIDs, slugs, full paths) rather than short 1-3 digit numbers — requires long-value corpus",
+    "Whether LLM tokenizers (not tiktoken cl100k_base) would show different savings for ${var} syntax",
+    "Whether parent 68 vs 96 measurement used different action_template structure/serialization — not reproducible under current full-URL method",
+    "Whether amortized cost (fewer unique mechanisms to store/transmit/retrieve) offsets per-mechanism token penalty in real agent workflows — C-PRODUCT-ECON end-to-end still unmeasured",
+    "Partial-parameter missing behavior for multi-slot mechanisms (2-3 params) not empirically verified — only {} tested",
+    "Mixed literal+parameterized registry competition at equal confidence (EXP-GRAPH-33718012817 tie-break hazard) not tested in this lane — isolated intents only",
+    "PUT/POST method fidelity and cross-site generalization not tested",
+    "Noisy multi-step browser sessions and LLM-based parameter induction not tested — manual construction only"
+  ]
+}

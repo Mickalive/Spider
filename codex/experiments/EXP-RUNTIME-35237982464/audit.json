@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35237982464",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Decompressed determinism under varying brotli quality is tautological in this harness: mock server emits deterministic uncompressed bodies, CDN proxy applies brotli.compress (lossless) with quality 4-8, decompress is guaranteed identical by brotli spec. H1 cannot fail unless brotli library is buggy; experiment therefore validates library correctness and proxy wiring rather than discovering a contingent CDN effect. Producer discloses this construction (spec measurement_valid #4, prereg 5.1) and bounds ceiling to localhost proxy. Not measurement-invalid, but information gain is limited to confirming wiring.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/run_experiment.py:326-383 CDNQualityProxy._proxy_request brotli.compress; research/experiments/EXP-RUNTIME-35237982464/raw_observations.json JSON_1KB_DECOMPRESSED-VARYING-BROTLI /userinfo no_auth 5 distinct X-Brotli-Quality values map to 1 decompressed_hash 6fb10d4b9e73...; spec.json measurement_valid[3-4]"
+    },
+    {
+      "finding": "Synthetic padded content is highly compressible and underestimates both size scaling and quality diversity. Nominal 1KB/10KB/100KB uncompressed sizes compress to ~69-72 bytes (JSON/XML) and ~172-197 bytes (HTML) with brotli; compressed size barely increases 1KB->100KB (report decompression latency scales 0.02ms->0.25ms but size does not). Compressed hash variation shows only 2 unique (JSON/XML) or 3 (HTML) despite 5 quality levels observed, confirming qualities 5-8 produce identical bytes for this content. Producer notes 3-way error collapse ceiling and padding artifact (prereg 8 validity_threats #4, report Validity Threats #4). Representation loss limits generalizability to natural content; diversity scaling question remains open as inherited unknown.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/result.json /userinfo_DECOMPRESSED-VARYING-BROTLI_JSON_1KB body_sizes mean 69.8, /userinfo_DECOMPRESSED-VARYING-BROTLI_JSON_100KB mean 71.8, compressed_hash_variation unique_count 2; /userinfo_DECOMPRESSED-VARYING-BROTLI_HTML_1KB body_sizes mean 178.05 unique_count 3; raw_observations.json HTML_1KB q_uniq 5 compressed_uniq 3"
+    },
+    {
+      "finding": "Proxy header forwarding duplicates Server and Content-Type headers (e.g., 'Server: BaseHTTP/0.6 Python/3.12.14, BaseHTTP/0.6 Python/3.12.14' and 'Content-Type: application/json, application/json' in raw_observations.json). Caused by CDNQualityProxy forwarding original headers then unconditionally adding Content-Type (run_experiment.py:375-378). Does not affect decompression or discrimination (Content-Encoding is correctly isolated) and C_COMPRESSION_ACTIVE still passes with br on all observations, but indicates proxy implementation slop.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/raw_observations.json JSON_1KB_DECOMPRESSED-VARYING-BROTLI /userinfo no_auth headers.Server duplicate; research/experiments/EXP-RUNTIME-35237982464/run_experiment.py:373-379"
+    },
+    {
+      "finding": "Scope is exclusively localhost mock server + CDN proxy with uniform random quality 4-8, N=20 per state per type per size (720 logical requests per endpoint per baseline, 2880 total via duplicated baselines_to_run), seed 44 ordering + 7919 quality RNG, no Accept-Encoding negotiation, no chunked transfer-encoding, no caching, no real CDN edge. Producer correctly discloses all boundaries in spec measurement_valid, prereg 8-9, report Claim Ceiling and Validity Threats. No leakage of outcome into measurement because decompressed hash excludes compressed representation by construction (fingerprint_decompressed uses decompress_body).",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/spec.json measurement_valid; research/experiments/EXP-RUNTIME-35237982464/prereg.md:8-9 Scope Boundaries; research/experiments/EXP-RUNTIME-35237982464/report.md Claim Ceiling; research/experiments/EXP-RUNTIME-35237982464/run_experiment.py:326-345"
+    },
+    {
+      "finding": "Baselines_to_run duplicates the same proxy measurement under two labels DECOMPRESSED-VARYING-BROTLI and COMPRESSED-VARYING-BROTLI (both go through identical CDN proxy, same 80 requests per type x size per endpoint). Metrics are duplicated (36 metric entries are 18 logical conditions x2). Wasteful but not invalid; does not inflate decision rule because rule evaluates only /userinfo DECOMPRESSED entries. No double-counting of pass criteria.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/run_experiment.py:592 baselines_to_run=['DECOMPRESSED-VARYING-BROTLI','COMPRESSED-VARYING-BROTLI']; research/experiments/EXP-RUNTIME-35237982464/result.json 36 metric keys vs 18 logical type x size x endpoint combos"
+    },
+    {
+      "finding": "Decompression path is actually exercised: Content-Encoding br on all observations, decompression_latency_ms measured (0.02ms at 1KB ~0.25ms at 100KB), quality_values_seen shows all 5 levels per condition, compressed_hash_variation all_same=false while decompressed_hash_variation all_same=true. Positive control C_QUALITY_VARIATION_EXISTS and determinism control C_DECOMPRESSION_DETERMINISM correctly operationalized and pass.",
+      "severity": "info",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/result.json metrics[*].compression_verification, quality_values_seen, decompressed_hash_variation, compressed_hash_variation; research/experiments/EXP-RUNTIME-35237982464/report.md Decision Rule Evaluation C4-C6"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-DETERMINISTIC-QUALITY-6",
+      "expected": "0.5 deterministic baseline from parent EXP-RUNTIME-35209111193",
+      "observed": "0.5 decompressed discrimination at all 9 content-type x size combos under non-deterministic quality; diff = 0.0 < 0.05 regression threshold. Producer does not report this baseline as explicit metric but decision rule C1-C3 implicitly tests it; raw recomputation confirms 0.5.",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/result.json /userinfo_DECOMPRESSED-VARYING-BROTLI_* decompressed_body_only_discrimination 0.5; research/experiments/EXP-RUNTIME-35209111193/handoff.json established[0] deterministic 0.5"
+    },
+    {
+      "baseline_id": "B-RANDOM",
+      "expected": "0.0 null control",
+      "observed": "0.0 across all 36 metric cells (18 logical x2 duplicated). Recomputed random baseline via baseline_random() (random 32-byte fingerprints) yields 0.0. No spurious structure.",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/result.json metrics[*].baselines.B-RANDOM 0.0; controls.C_NULL_CONTROL pass true; recomputed via raw_observations independent RNG"
+    },
+    {
+      "baseline_id": "B-COMPRESSED-BYTE-ONLY",
+      "expected": "< 0.5 (decompression necessary)",
+      "observed": "JSON/XML 0.311-0.347, HTML 0.159-0.164 (depending on endpoint) under varying quality, vs 0.5 decompressed. Consistently lower (30% lower JSON/XML, 68% lower HTML). Confirms compressed bytes vary with quality while decompressed does not. Producer's compressed_body_only_discrimination values match independent recomputation (e.g., JSON_1KB recomputed 0.34736842105263155 vs reported 0.34736842105263155).",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35237982464/result.json /userinfo_*_JSON_1KB compressed_body_only_discrimination 0.347..., /userinfo_*_HTML_1KB 0.159..., raw_observations.json recomputed via compute_discrimination_score"
+    }
+  ],
+  "recomputed_metrics": {
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI_JSON_1KB_decompressed_disc": 0.5,
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI_JSON_1KB_compressed_disc": 0.34736842105263155,
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI_JSON_1KB_status_disc": 0.5,
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI_HTML_1KB_decompressed_disc": 0.5,
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI_HTML_1KB_compressed_disc": 0.15960526315789475,
+    "/userinfo_DECOMPRESSED-VARYING-BROTLI_XML_1KB_decompressed_disc": 0.5,
+    "/introspect_DECOMPRESSED-VARYING-BROTLI_JSON_1KB_decompressed_disc": 0.5,
+    "all_userinfo_decompressed_discrimination": "0.5 at all 9 JSON/HTML/XML x 1KB/10KB/100KB combos (recomputed from raw_observations.json fingerprints matches result.json exactly)",
+    "B-RANDOM_recomputed": 0.0,
+    "compressed_hash_variation_unique_counts": "2 (JSON/XML) or 3 (HTML) per state vs reported 2/3 matches raw",
+    "decompressed_hash_variation_unique_counts": "1 per state all_same=true across all 36 conditions matches report",
+    "quality_levels_observed": "5 distinct values {4,5,6,7,8} per type x size per state in raw_observations.json",
+    "verification_method": "Independent Python recomputation of compute_discrimination_score (intra_match_rate - inter_match_rate) from raw_observations.json fingerprints and body_hashes; decompressed_hash stability checked across quality groups; B-RANDOM recomputed via random fingerprint sets"
+  },
+  "claim_ceiling": "Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at 0.5 under uniform random brotli quality variation {4,5,6,7,8} on localhost. Ceiling bounded to: localhost mock OAuth2 server with CDN quality proxy (mock uncompressed -> proxy brotli recompress per-request random quality, independent RNG seed 7919), synthetic padded JSON/HTML/XML at nominal 1KB/10KB/100KB (effective compressed ~70 bytes JSON/XML, ~178 bytes HTML, repetitive padding), 4 auth states with 3-way error collapse (structural ceiling 0.5), no Accept-Encoding negotiation, no chunked encoding, no caching, N=20 per state per type per size, seed 44. Does NOT establish real-CDN (Cloudflare/Fastly/Akamai) survival, natural content, binary types, or production latency/CPU.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35237982464/spec.json — frozen question/hypothesis/falsifier baselines decision_rule measurement_valid",
+    "research/experiments/EXP-RUNTIME-35237982464/prereg.md — inherited state, design 5.1-5.7, decision rules 6.1-6.3, validity threats 8, scope boundaries 9",
+    "research/experiments/EXP-RUNTIME-35237982464/freeze.json — sha 1f0d8e5a..., d730..., f6aede... confirms frozen inputs",
+    "research/experiments/EXP-RUNTIME-35237982464/result.json — 36 metric cells, decompressed 0.5 vs compressed 0.15-0.34, B-RANDOM 0.0, hash variation, quality_values_seen, controls C_QUALITY_VARIATION_EXISTS C_NULL_CONTROL C_DECOMPRESSION_DETERMINISM C_COMPRESSION_ACTIVE C_NO_PIPELINE_ERRORS",
+    "research/experiments/EXP-RUNTIME-35237982464/raw_observations.json (sha c9dcda8863...) — 2880 HTTP observations with Content-Encoding br, X-Brotli-Quality 4-8, decompressed_hash stable 1 unique per state, compressed_hash 2-3 unique, recomputed discrimination matches",
+    "research/experiments/EXP-RUNTIME-35237982464/run_experiment.py (sha 8d600704c8...) — CDNQualityProxy random quality per request, separate RNG, decompress_body, fingerprint_decompressed/compressed, compute_discrimination_score",
+    "research/experiments/EXP-RUNTIME-35237982464/report.md — decision rule 6/6 PASS, claim ceiling bounding to localhost proxy, Validity Threats disclosure",
+    "research/experiments/EXP-RUNTIME-35237982464/provenance.json — python 3.12.14 brotli 1.2.0, frozen input hashes, reproduction command",
+    "research/experiments/EXP-RUNTIME-35209111193/handoff.json — parent SURVIVES_CURRENT_TEST deterministic baseline 0.5, next_question real CDN"
+  ],
+  "unresolved": [
+    "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with edge quality selection, caching, chunked transfer-encoding, Accept-Encoding negotiation? Parent next_question remains untested; producer correctly lists as unresolved.",
+    "Does brotli quality diversity increase with natural (non-padded) content at larger sizes, or remain 2-3 unique as with repetitive padding? Synthetic content artifact unresolved.",
+    "Does decompression-normalization handle incorrect/missing/double-encoded Content-Encoding, binary content types, concurrent clients, MB-scale payloads, N>1000?",
+    "What is production decompression latency/CPU at CDN edge vs localhost 0.02-0.25ms? Localhost measurement not representative of edge cost."
+  ]
+}

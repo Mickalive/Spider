@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35209112878",
+  "lane": "intel",
+  "github_run_id": "35237981970",
+  "pre_execute_sha": "39263ec7baa12b44f64063e342771bad9324ffcf",
+  "post_execute_sha": "0f17b62ff40b707c285b3b0fc8a83a83b62873b7",
+  "created_at": "2026-09-17T15:09:36.712545+00:00",
+  "executed_at": "2026-09-17T16:00:00+00:00",
+  "python_version": "3.12.14",
+  "numpy_version": "2.5.3",
+  "platform": "linux",
+  "code_paths": {
+    "canonical_analysis": {
+      "path": "research/experiments/EXP-INTEL-35209112878/canonical_analysis.py",
+      "sha256": "08928536dafbe33b4f045d35b1723dabf62090cc08ca2f128ccf9a62d93d248d",
+      "role": "code"
+    },
+    "parent_analyze": {
+      "path": "research/experiments/EXP-INTEL-35112013458/analyze.py",
+      "sha256": "ec8567f626986230fe368cf9a28f1a30c7ccd02b6a8760090829b17c22651699",
+      "role": "code"
+    }
+  },
+  "data_paths": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "description": "Truncated-first-20 locatable sample from Magento shopping site, 8 tasks (3 product_listing, 3 detail, 1 cart)"
+    },
+    "parent_null_model_results": {
+      "path": "research/experiments/EXP-INTEL-35112013458/null_model_results.json",
+      "sha256": "c680164a4f015f8536f398d0581e39d3e0a39e013f91c8704996855a2555b93c",
+      "role": "fixture",
+      "description": "Parent chain null model results (null_mean=0.5275, observed=0.3)"
+    }
+  },
+  "artifact_paths": {
+    "result_json": {
+      "path": "research/experiments/EXP-INTEL-35209112878/result.json",
+      "sha256": "a2e2ca8d5ea40954c878ac1006b6103e27964d48ec1c29b10f8408526bbdd332",
+      "role": "derived"
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-INTEL-35209112878/report.md",
+      "sha256": "f04d0639ff7d6d961fb7281722429647d472e6ec1d7794c5885dd8af10f05563",
+      "role": "derived"
+    },
+    "canonical_results_raw": {
+      "path": "/tmp/opencode/canonical_results.json",
+      "sha256": "b0f00020664b1b2ec5137520560733f22037d283abc2e9518a4d50e43eb7918f",
+      "role": "derived",
+      "note": "Intermediate results file (not in repo)"
+    }
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-INTEL-35209112878/request.json",
+      "sha256": "f9bf5371a07ca694b57bed901fcb2f59a165d6cf5bd709f25db0a746564d2106"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-INTEL-35209112878/spec.json",
+      "sha256": "6d7a513571f76f2dccf162d4196e183688d6ae6129bdab8cfb8b15e495c35dae"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-INTEL-35209112878/prereg.md",
+      "sha256": "5d0ec9a4613ec6e0c3798ee5b83067b21b7ae6b386a1bb797ec7e662ad4b3cdc"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-INTEL-35209112878/freeze.json",
+      "sha256": null
+    }
+  },
+  "execution_parameters": {
+    "n_iterations": 1000,
+    "n_seeds": 10,
+    "seeds": [42, 123, 456, 789, 1000, 2000, 3000, 4000, 5000, 99999],
+    "rng_implementations": ["RNG-PY", "RNG-NP-RS", "RNG-NP-DR"],
+    "total_null_draws": 30000,
+    "definition_count": 3,
+    "definitions_tested": ["DEF-FULL-MAP", "DEF-FORM-ONLY", "ISOLATED-A-LINK"]
+  },
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-INTEL-35209112878/canonical_analysis.py"
+  ],
+  "environment_notes": [
+    "Python 3.12.14, numpy 2.5.3 on linux",
+    "Parent chain likely used different Python/numpy version, explaining 2.3% null mean deviation",
+    "RNG determinism verified: all seeds produce consistent results across multiple runs"
+  ]
+}
