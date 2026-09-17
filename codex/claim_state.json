@@ -1407,6 +1407,16 @@
         "reason": "Decompression-normalization survives CDN-noise proxy simulation: all 4 frozen decision-rule conditions pass (positive control decompressed variation 0/20 all 8 cells, null B-RANDOM 0.0, H1 decompressed 0.5 >= 0.5, H2 diff 0.0 < 0.1). H3 confirmed: compressed-byte-only 0.2789 < 0.35 under CDN noise. Claim ceiling advances from parent (EXP-RUNTIME-35130682006) synthetic brotli quality to synthetic CDN simulator with 6 noise categories. Audit PASS recomputes all metrics exactly. However: (1) localhost synthetic proxy, not real CDN; (2) effective brotli diversity 2 variants not 5 for 1KB JSON; (3) /userinfo discrimination capped at 0.5 by 3-way error collapse; (4) single payload distribution (1KB compressible JSON, single seed 44); (5) chunked framing decoded by HTTP client before decompression pipeline sees it; (6) cache counter bug prevents quantitative hit-rate verification (qualitative cache noise verified via headers). C-MEAS-VALID remains EXPERIMENTAL \u2014 real-CDN infrastructure (Cloudflare/Fastly/Akamai) validation is the critical untested blocker before any Product Core promotion."
       },
       {
+        "experiment_id": "EXP-RUNTIME-35154720995",
+        "lane": "runtime",
+        "created_at": "2026-09-16T21:52:40.191689+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 Infrastructure failure: the mock server never applied brotli/gzip compression (Content-Encoding='none' on all 2880 observations, run_experiment.py:260-301). The decompression-normalization mechanism (SHA256 on decompressed body via brotli.decompress/gzip.decompress) was never exercised. The frozen question asked about behavior 'under brotli/gzip compression without CDN noise' but the environment could not express this effect. All reported discrimination metrics (0.5) reflect identity-path body hashing, not decompression-normalization. The frozen falsifier's third disjunct (brotli quality diversity does not increase) technically triggers but is uninformative because no compression was applied. C-MEAS-VALID does not advance from this experiment.",
+        "source_commit": "bd34e7a7bd4853e2b4cc9313c8ff849a38876e74",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Audit V1-NO-COMPRESSION-IDENTITY-ONLY: server handler (run_experiment.py:260-301) never sets Content-Encoding, never compresses; all 2880 observations have Content-Encoding='none'. decompress_body() (lines 340-353) is dead code (identity fallback only). The frozen question 'under brotli/gzip compression without CDN noise' was not instantiated. Reported discrimination 0.5 equals compressed discrimination 0.5 trivially (identity path). The frozen decision_rule clause 'MEASUREMENT_INVALID if infrastructure failure prevents valid measurements' applies. Parent EXP-RUNTIME-35137033384 claim ceiling ('synthetic proxy + CDN simulator with realistic non-determinism' at 1KB JSON) stands; this experiment provides no new evidence about decompression-normalization robustness."
+      },
+      {
         "experiment_id": "EXP-INTEL-35166505835",
         "lane": "intel",
         "created_at": "2026-09-17T00:25:49.618320+00:00",

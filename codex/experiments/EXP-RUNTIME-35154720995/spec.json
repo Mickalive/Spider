@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-RUNTIME-35154720995",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does decompression-normalization (SHA256 on decompressed body + status) maintain body-only discrimination on non-JSON content types (HTML, XML) at multiple payload sizes (1KB, 10KB, 100KB) under brotli/gzip compression without CDN noise?",
+  "hypothesis": "Decompression-normalization preserves body-only discrimination across content types and payload sizes because the mechanism operates on decompressed logical bodies, which are content-type-invariant. HTML and XML responses with distinct auth-state bodies should produce decompressed hash clusters as tight as JSON. Brotli quality diversity should increase with payload size (resolving the 1KB '2 variants' limitation).",
+  "falsifier": "Decompression-normalization discrimination < 0.3 on any non-JSON content type at any tested size, OR decompressed hash variation > 1 unique per state for any condition (determinism failure), OR brotli quality diversity does not increase from 1KB to 100KB.",
+  "baselines": [
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0 discrimination. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-PARENT-JSON-1KB",
+      "description": "Parent EXP-RUNTIME-35137033384 decompressed JSON discrimination at 1KB (0.5 on /userinfo, 0.8333 on /introspect). Regression reference.",
+      "expected_value": "0.5-0.8333"
+    },
+    {
+      "id": "B-ALGORITHM-EQUIVALENCE",
+      "description": "|brotli_decompressed_discrimination - gzip_decompressed_discrimination| < 0.1 for each content type × size. Decompressed bodies are algorithm-invariant.",
+      "expected_value": "< 0.1"
+    }
+  ],
+  "positive_control": "C_DECOMPRESSION_DETERMINISM: Within-state decompressed hash variation = 0 (all_same=true) for all content types × sizes × states. The parent established this for JSON under CDN noise; this test confirms it holds for non-JSON without CDN noise. If decompressed bodies are deterministic within state for HTML/XML, the mechanism's core property is preserved.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ≈ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure. Additionally, C_BROTLI_QUALITY_SCALING: brotli quality diversity (unique compressed hashes per state) should increase monotonically from 1KB to 100KB for HTML (natural language compressibility varies with quality 4-8), confirming the parent's 'effective diversity is 2 variants' limitation is size-dependent.",
+  "measurement_validity": [
+    "Content types are synthetic but structurally realistic: JSON (key-value pairs), HTML (paragraphs, lists, links), XML (nested elements with attributes). All contain 4 auth-state bodies with 3-way error collapse (no_auth/expired/invalid share similar bodies, valid_token has distinct body).",
+    "Payload sizes are controlled by padding (repeating paragraph/list/element blocks) to hit target uncompressed sizes: 1KB, 10KB, 100KB.",
+    "Compression uses brotli quality levels 4-8 (5 levels) and gzip (1 level) to test algorithm equivalence and quality diversity.",
+    "No CDN noise proxy is applied — this experiment isolates content-type and size effects from CDN non-determinism. CDN noise was already validated in parent.",
+    "Mock OAuth2 server returns same 4-state body pattern across all content types (Content-Type header varies, body structure adapts to content type but auth-state semantics are identical).",
+    "Seed=44 for request ordering. N=20 per state per content type per size.",
+    "Decompression latency measured per-response at each size for cost assessment.",
+    "No real CDN infrastructure is used. Results are bounded to localhost mock server with brotli/gzip compression."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination ≥ 0.3 for JSON at all sizes (regression), (2) decompressed body-only discrimination ≥ 0.3 for HTML at all sizes, (3) decompressed body-only discrimination ≥ 0.3 for XML at all sizes, (4) decompressed hash variation all_same=true for all content types × sizes × states (determinism), (5) B-RANDOM = 0.0 for all conditions, (6) |brotli - gzip| < 0.1 for all content types × sizes (algorithm equivalence). FALSIFIED-IN-SETTING if any non-JSON type has discrimination < 0.3 at any size. MEASUREMENT_INVALID if infrastructure failure prevents valid measurements.",
+  "product_consequence_positive": "Decompression-normalization generalizes from 1KB JSON to non-JSON content types (HTML, XML) and larger payloads (10KB, 100KB). Claim ceiling advances from '1KB JSON under synthetic CDN-noise proxy' to 'multi-format multi-size under localhost compression'. Real-CDN testing becomes the sole remaining blocker for C-MEAS-VALID product readiness. Product team can proceed with CDN infrastructure investment knowing the mechanism is format-robust.",
+  "product_consequence_negative": "Decompression-normalization fails on non-JSON content types or at larger sizes. The mechanism is format-dependent, not format-invariant. Product team must either: (a) restrict C-MEAS-VALID to JSON-only (narrowing product scope), (b) investigate format-specific decompression issues (e.g., brotli quality 5-8 convergence for HTML), or (c) abandon decompression-normalization in favor of alternative fingerprinting. Real-CDN testing investment is premature until format generality is resolved.",
+  "estimated_cost": "< 5000 tokens, < 2 minutes execution (localhost only, no network, no CDN proxy).",
+  "expected_information_gain": "HIGH. Directly answers two parent handoff unknowns: (1) 'Does result generalize to non-JSON content types?' and (2) 'Does 5-level brotli quality selection produce distinct outputs for larger payloads?' A positive result unblocks real-CDN testing. A negative result identifies the exact failure mode without wasting CDN investment. Either outcome changes a product decision."
+}
