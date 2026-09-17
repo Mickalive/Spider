@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-PRODUCT-35209109455",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Does parameterized mechanism representation reduce token cost compared to literal mechanism representation across multiple URL patterns with varying parameter counts (1-3 params), and does the resolve/bind pipeline correctly handle manually-registered parameterized mechanisms in the current kernel.py HEAD?",
+  "hypothesis": "Parameterized mechanisms (with ${var} template slots) use fewer tiktoken tokens than literal mechanisms encoding the same action information, and the savings increase with parameter count (1-param < 2-param < 3-param savings). The existing kernel.py resolve() and _bind() functions correctly resolve parameterized mechanisms registered with parameter_slots.",
+  "falsifier": "Parameterized mechanisms use more or equal tokens than literal mechanisms for the majority of test patterns, OR token savings do not increase monotonically with parameter count, OR resolve() fails to return EXECUTABLE with correct bound_action for manually-registered parameterized mechanisms.",
+  "baselines": [
+    {
+      "id": "B_LITERAL_TOKEN_COST",
+      "description": "Token cost of literal mechanism representation (full URL string with concrete values, no template slots) for each of 5 URL patterns. Measured via tiktoken cl100k_base encoding of the action_template JSON.",
+      "stable_id": "B_LITERAL_TOKEN_COST"
+    },
+    {
+      "id": "B1_SINGLE_PARAM_EXISTING",
+      "description": "Parent experiment single-slot GET token cost (68 tokens parameterized, 96 tokens literal) from EXP-PRODUCT-35185290656 carry_forward. Used as calibration reference, not re-measured.",
+      "stable_id": "B1_SINGLE_PARAM_EXISTING"
+    }
+  ],
+  "positive_control": {
+    "id": "P1_RESOLVE_PARAM_EXECUTABLE",
+    "description": "resolve() returns EXECUTABLE with correct bound_action for a manually-registered parameterized mechanism when correct parameters are provided. Validates the resolve/bind pipeline works with parameter_slots.",
+    "stable_id": "P1_RESOLVE_PARAM_EXECUTABLE"
+  },
+  "null_control": {
+    "id": "N1_RESOLVE_PARAM_UNKNOWN",
+    "description": "resolve() returns UNKNOWN when parameters are missing for a parameterized mechanism (required_slots not satisfied). Confirms parameter_slots guard is active.",
+    "stable_id": "N1_RESOLVE_PARAM_UNKNOWN"
+  },
+  "measurement_validity": [
+    "tiktoken cl100k_base used for token encoding (consistent across all measurements)",
+    "Token cost measured on action_template JSON serialization (method + url fields), not full Mechanism object",
+    "5 URL patterns span 1-3 parameters: single ID, query param, two query params, path+query, three-param",
+    "3 training observations per pattern for distill_parameterized (or manual construction if pipeline unavailable)",
+    "Both literal and parameterized mechanisms created for each pattern from same training data",
+    "resolve() and _bind() tested with correct and missing parameters to validate pipeline",
+    "No network access required (pure in-kernel token measurement)",
+    "No browser automation, no model calls, no LLM distillation"
+  ],
+  "decision_rule": [
+    "C1: resolve() returns EXECUTABLE for all 5 parameterized mechanisms when correct parameters provided",
+    "C2: resolve() returns UNKNOWN for all 5 parameterized mechanisms when parameters missing",
+    "C3: _bind() produces correct bound_action for all 5 parameterized mechanisms with test parameters",
+    "C4: Parameterized mechanism uses fewer tokens than literal mechanism for >= 4/5 patterns",
+    "C5: Mean token savings percentage across 5 patterns is >= 15%",
+    "C6: Token savings increase with parameter count (3-param savings > 1-param savings)",
+    "C7: All 3 existing kernel tests still pass (regression)",
+    "ALL conditions C1-C7 must pass for SURVIVES_CURRENT_TEST; any failure triggers FALSIFIED-IN-SETTING"
+  ],
+  "product_consequence_positive": "C-PARAM-INHERIT token economics validated across multiple URL patterns with varying parameter counts. C-PRODUCT-ECON moves from HYPOTHESIS toward measured: token savings demonstrated as structural property of parameterized representation, not single-data-point artifact. Product viability signal strengthened for real-world multi-parameter URL patterns. Supports continued investment in parameterized inheritance pipeline.",
+  "product_consequence_negative": "C-PARAM-INHERIT token economics challenged: parameterized representation does not reliably save tokens across diverse URL patterns. C-PRODUCT-ECON remains HYPOTHESIS with negative evidence on token component. Product lane may need to pivot from parameterized inheritance to alternative mechanisms (literal replay, retrieval-based, skill-based) or demonstrate token savings require LLM tokenizer not tiktoken.",
+  "estimated_cost": "Very low: no network access, no browser, no model calls. Pure Python token measurement with tiktoken on 5 URL patterns x 2 representations (literal + parameterized). ~50 lines of test code. Kernel regression 3 tests.",
+  "expected_information_gain": "High: multi-pattern token economics has never been measured (parent had single data point 68 vs 96). Either validates token savings as structural property (supports C-PARAM-INHERIT and C-PRODUCT-ECON) or falsifies it (challenges product economics). Either outcome materially changes product investment decision. Also validates resolve/bind pipeline in current HEAD as prerequisite for all future parameterization work."
+}

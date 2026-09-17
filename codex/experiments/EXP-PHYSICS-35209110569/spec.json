@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-PHYSICS-35209110569",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Which TodoMVC hash-SPA variants exhibit URL-level leakage below 40% and sufficient title variation, enabling >=50 non-leakage transitions for PMI analysis — thereby identifying suitable production-like testbeds to bridge the synthetic-to-real gap in the C-WEB-DYNAMICS research program?",
+  "hypothesis": "TodoMVC hash-SPA variants with client-side routing (where multiple views share the same URL path, e.g., #/active, #/completed) exhibit lower URL-level leakage than server-rendered MPAs (78-92%), because hash-based navigation allows multiple states per URL and client-side transitions (button clicks, form submissions, JavaScript-triggered) produce non-link-leakage transitions. At least 1 of 5 variants achieves <40% leakage, enabling >=50 NL transitions at manageable raw collection sizes (~83 raw at 40% leakage).",
+  "falsifier": "The claim is falsified if ANY of: (1) ALL 5 TodoMVC variants exhibit leakage >=40%; OR (2) ALL variants have <2 unique document.title values; OR (3) ALL variants have achievable NL count <50 at 500 raw collection limit (achievable_NL = 500 * (1 - leakage_rate)); OR (4) positive control (Wikipedia) leakage <80% (confirming measurement validity); OR (5) data quality insufficient (<100 raw transitions per variant).",
+  "baselines": [
+    "Server-rendered MPA baseline: Wikipedia leakage rate 91.2% from parent (EXP-PHYSICS-35185288822). Expected high leakage (>80%). Provides within-experiment comparison: the ONLY difference is site type (MPA vs SPA).",
+    "Frequency baseline: P(transition_type) marginal distribution of link clicks vs button clicks vs form submissions vs JavaScript-triggered across all variants. Expected link-dominated on MPAs, mixed on SPAs.",
+    "Achievable NL baseline: 50 NL transitions at 40% leakage requires 83 raw transitions; at 80% leakage requires 250 raw transitions; at 92% leakage requires 625 raw transitions. Provides feasibility threshold for PMI analysis."
+  ],
+  "positive_control": "TodoMVC vanilla JS hash-SPA (known structure: multiple views share URL #/active, #/completed, #/). Expected leakage <60% and >=2 unique titles. Pass criterion: leakage <60% AND unique_titles >=2 AND raw_transitions >=100. This validates the measurement pipeline on a known SPA structure before testing other variants.",
+  "null_control": "Wikipedia (known high leakage server-rendered MPA). Expected leakage >80%. Pass criterion: leakage >80% AND unique_titles >=2 AND raw_transitions >=100. This confirms the measurement pipeline correctly identifies high leakage on known MPAs.",
+  "measurement_validity": [
+    "5 TodoMVC variants: vanilla JS (ES6), React, Vue, Angular, Svelte. All use hash-based client-side routing. URLs: todomvc.com/examples/{vanillajs,react,vue,angular,svelte}/",
+    "Browser-based collection: Playwright headless Chrome, collect per-transition: URL (before and after), document.title (before and after), action target (href or element), action primitive (click, submit, type, keypress), timestamp.",
+    "Minimum 100 raw transitions per variant (20+ unique URLs, 3+ action types).",
+    "Title variation check: each variant must have >= 2 unique document.title values across collected transitions. Variants with constant title are flagged but not excluded (may indicate title=URL coupling).",
+    "Leakage definition: action.target_href == state_after.url (same as parent). URL normalization: strip trailing slash, decode percent-encoding, ignore fragment changes within same path.",
+    "Achievable NL count: 500 * (1 - leakage_rate). Threshold: >=50 NL at 500 raw.",
+    "Action type stratification: record action_primitive for each transition (link_click, button_click, form_submit, keypress, javascript). Compute per-type leakage rates.",
+    "Session diversity: at least 5 distinct browsing sessions per variant (different starting points, action sequences).",
+    "No authentication required (TodoMVC is publicly accessible).",
+    "Playwright EPIPE mitigation: use single-page context per session, close browser between sessions, do not close context before page load complete."
+  ],
+  "decision_rule": "If ALL of: (1) >=1/5 variants achieve leakage <40% AND achievable_NL >=50 at 500 raw AND (2) >=1/5 variants have >=2 unique titles AND (3) positive control (Wikipedia) leakage >80% AND (4) null control (TodoMVC vanilla JS) leakage <60% AND (5) >=100 raw transitions per variant AND (6) >=5 sessions per variant — verdict = SURVIVES_CURRENT_TEST (SPA approach viable for PMI analysis). If 0/5 variants achieve leakage <40% AND achievable_NL >=50 — verdict = FALSIFIED-IN-SETTING (SPA approach not viable for URL-level PMI on these variants). If controls fail or data quality insufficient — verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "TodoMVC hash-SPA variants with <40% leakage are suitable testbeds for title-aware PMI experiments. SPIDER should target these SPAs for the next C-WEB-DYNAMICS experiment, directly addressing the synthetic-to-real gap. The pivot to SPAs is justified. Specific variants with lowest leakage become priority targets.",
+  "product_consequence_negative": "All TodoMVC variants exhibit >=40% leakage, making URL-level PMI analysis infeasible at manageable collection sizes. SPIDER should reconsider state representation (e.g., DOM, accessibility tree, visual layout) or abandon URL-level PMI approach for SPAs. The pivot to SPAs is not justified. The dominant synthetic-to-real gap persists.",
+  "estimated_cost": "Low: 5 TodoMVC variants (publicly accessible, no auth), browser-based collection (~2-3 hours total including setup, data collection, and analysis), Python analysis (~1 hour). No model calls required. Estimated 3-4 hours total.",
+  "expected_information_gain": "Very high: directly addresses the dominant bottleneck across the entire C-WEB-DYNAMICS research program — the synthetic-to-real gap (30+ experiments, all synthetic or locally-hosted). A positive result (>=1 variant with <40% leakage) provides concrete targets for the next PMI experiment and justifies the SPA pivot. A negative result (all variants >=40% leakage) kills the SPA pivot approach and forces reconsideration of state representation. Either outcome resolves the dominant unknown and enables a targeted go/no-go decision on title-based state representation for production SPAs."
+}
