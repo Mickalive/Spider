@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "lane": "product",
+  "github_run_id": "35185290656",
+  "base_commit": "ba1e3f6d78d122e624fe2c342072cb7d2b07faab",
+  "parent_experiment_commit": "a5794a2bb218f5e600c13430844cfa06fb996b5d",
+  "parent_experiment_id": "EXP-PRODUCT-35166508130",
+  "freeze_commit": "39339e32",
+  "execution_base_commit": "ba1e3f6d",
+  "created_at": "2026-09-17T05:19:48.441018+00:00",
+  "frozen_at": "2026-09-17T05:23:59.083498+00:00",
+  "executed_at": "2026-09-17T05:30:00.000000+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "network_access": true,
+    "network_endpoints": ["jsonplaceholder.typicode.com"]
+  },
+  "datasets_fixtures": [
+    "jsonplaceholder.typicode.com/comments?postId=1..100 (training: postId 1-3, unseen: postId 5-7)",
+    "jsonplaceholder.typicode.com/posts/1..100 (training: id 1-3, unseen: id 96-98)",
+    "jsonplaceholder.typicode.com/users/1..10 (training: id 1-3, unseen: id 8-10)"
+  ],
+  "code_paths": [
+    "src/spider/kernel.py (redesigned _is_protocol_only_prefix + restored distill_parameterized)",
+    "src/spider/models.py (added slot_prefixes field to Mechanism)",
+    "research/experiments/EXP-PRODUCT-35185290656/run_experiment.py",
+    "tests/test_kernel.py (regression tests, unchanged)"
+  ],
+  "material_artifacts": {
+    "src/spider/kernel.py": "991b02823012012db9dd59774d7d7c1556d4c1aa4196e09fce4cdf73b1f0b002",
+    "src/spider/models.py": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d4b",
+    "research/experiments/EXP-PRODUCT-35185290656/run_experiment.py": "51b0a6095c11e2e3bfeb070c6c43a52795554e4cbb8b849dbd0ab9de22cd6219",
+    "research/experiments/EXP-PRODUCT-35185290656/experiment_results.json": "5d8c4c71540a78ee5fc8c3ad623ff6c9734fc082c0555819aebdc86c52d87bdc"
+  },
+  "commands": [
+    "PYTHONPATH=src python -m unittest tests.test_kernel -v",
+    "PYTHONPATH=src python research/experiments/EXP-PRODUCT-35185290656/run_experiment.py"
+  ],
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35166508130",
+    "path": "research/experiments/EXP-PRODUCT-35166508130/handoff.json",
+    "sha256": "7ba2bd4784dc3594eed59794cad9e32a487562ab9b850bed2af18fc07b4c35b6"
+  },
+  "frozen_spec_hash": "cf08c5c601cf03370a7b9ca648eeab4422a0460686365a67cd74ba1aa972b298",
+  "frozen_prereg_hash": "b699e9c2a8cbf27219ef84a5438a3e780f656c4de8be9ae2c772ba550bceab6d",
+  "frozen_request_hash": "1bfeeab35e875b39f4c7fd66a85a5f813c7a7e8e21b1eaad1a0b85b2f1de63a1"
+}

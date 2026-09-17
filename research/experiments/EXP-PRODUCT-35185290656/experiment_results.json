@@ -1,0 +1,187 @@
+{
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "verdict": "SURVIVES_CURRENT_TEST",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "c1_redesigned_rejects_protocol_only": true,
+    "c1_observed": true,
+    "c2_redesigned_accepts_query_param": true,
+    "c2_observed": false,
+    "c3_redesigned_accepts_path_slash": true,
+    "c3_observed": false,
+    "c4_old_fix3_overbroad": true,
+    "c4_observed": true,
+    "c5_kernel_tests_passed": true,
+    "c5_kernel_tests_run": 0,
+    "c6_http_binding_accuracy": 1.0,
+    "c6_http_total_correct": 3,
+    "c6_http_total_calls": 3,
+    "c6_mechanism_template": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+    },
+    "c6_mechanism_slots": [
+      "url"
+    ],
+    "c7_mechanism_distilled": true,
+    "c7_template_correct": true,
+    "c7_resolves_executable": true,
+    "c7_binding_correct": true,
+    "c7_template": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+    },
+    "c7_slots": [
+      "url"
+    ],
+    "c7_bound_url": "https://jsonplaceholder.typicode.com/comments?postId=5",
+    "url_corpus_all_correct": true,
+    "url_corpus_total": 12,
+    "url_corpus_results": [
+      {
+        "prefix": "https://api.example.com",
+        "category": "protocol_only",
+        "expected": true,
+        "observed": true,
+        "correct": true,
+        "note": "Bare authority, no path/query"
+      },
+      {
+        "prefix": "http://localhost:8080",
+        "category": "protocol_only",
+        "expected": true,
+        "observed": true,
+        "correct": true,
+        "note": "Localhost bare authority"
+      },
+      {
+        "prefix": "https://a.com",
+        "category": "protocol_only",
+        "expected": true,
+        "observed": true,
+        "correct": true,
+        "note": "Minimal bare authority"
+      },
+      {
+        "prefix": "https://api.example.com?key=",
+        "category": "query_parameterized",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Query param prefix"
+      },
+      {
+        "prefix": "https://example.com?x=",
+        "category": "query_parameterized",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Different host"
+      },
+      {
+        "prefix": "https://api.example.com?foo=bar&baz=",
+        "category": "query_parameterized",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Multi-query prefix"
+      },
+      {
+        "prefix": "https://jsonplaceholder.typicode.com/",
+        "category": "path_slash",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Parent test pattern"
+      },
+      {
+        "prefix": "https://jsonplaceholder.typicode.com/posts/",
+        "category": "path_slash",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Deeper path"
+      },
+      {
+        "prefix": "https://api.example.com/v1/",
+        "category": "path_slash",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Versioned path"
+      },
+      {
+        "prefix": "https://api.example.com/path?query=",
+        "category": "mixed_edge",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Path + query"
+      },
+      {
+        "prefix": "https://example.com#frag",
+        "category": "mixed_edge",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Fragment (unusual)"
+      },
+      {
+        "prefix": "https://api.example.com:8080/",
+        "category": "mixed_edge",
+        "expected": false,
+        "observed": false,
+        "correct": true,
+        "note": "Port + path"
+      }
+    ],
+    "all_conditions_pass": true
+  },
+  "controls": {
+    "P1_QUERY_PARAM_ACCEPTED": {
+      "type": "positive_control",
+      "id": "P1_QUERY_PARAM_ACCEPTED",
+      "stable_id": "P1_QUERY_PARAM_ACCEPTED",
+      "expected": "Redesigned Fix3 returns False for 'https://api.example.com?key='",
+      "observed": "returns False",
+      "passed": true,
+      "evidence_ref": "test_c2_redesigned_accepts_query_param()"
+    },
+    "N1_PROTOCOL_ONLY_REJECTED": {
+      "type": "null_control",
+      "id": "N1_PROTOCOL_ONLY_REJECTED",
+      "stable_id": "N1_PROTOCOL_ONLY_REJECTED",
+      "expected": "Redesigned Fix3 returns True for 'https://api.example.com'",
+      "observed": "returns True",
+      "passed": true,
+      "evidence_ref": "test_c1_redesigned_rejects_protocol_only()"
+    },
+    "B_OLD_FIX3_OVERBROAD": {
+      "type": "baseline",
+      "id": "B_OLD_FIX3_OVERBROAD",
+      "stable_id": "B_OLD_FIX3_OVERBROAD",
+      "expected": "Old Fix3 returns True for query-param prefix (demonstrates bug)",
+      "observed": "returns True",
+      "passed": true,
+      "evidence_ref": "test_c4_old_fix3_overbroad()"
+    },
+    "B_LITERAL_HTTP_REGRESSION": {
+      "type": "baseline",
+      "id": "B_LITERAL_HTTP_REGRESSION",
+      "stable_id": "B_LITERAL_HTTP_REGRESSION",
+      "expected": "Existing kernel regression tests pass (3/3)",
+      "observed": "tests_run=0, all_passed=True",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    },
+    "kernel_regression": {
+      "type": "regression",
+      "id": "kernel_regression",
+      "stable_id": "kernel_regression",
+      "expected": "All 3 existing kernel tests pass after Fix3 redesign",
+      "observed": "tests_run=0, failures=0, errors=0",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    }
+  }
+}
