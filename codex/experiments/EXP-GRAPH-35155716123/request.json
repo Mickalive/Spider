@@ -1,0 +1,20 @@
+{
+  "base_sha": "5753f67b8ddb085a62f130b48c74cced1fdf90c4",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T22:03:52.601418+00:00",
+  "experiment_id": "EXP-GRAPH-35155716123",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule fails on 2 of 4 conditions: C2 (noise tolerance) fails because optional_field_addition noise at 10% of schema size produces diff magnitude scaling with schema size (1.0 at n=10 to 5.0 at n=50, exceeding threshold 0.5 at all sizes), creating irreconcilable conflict with subtle drift (required_to_optional 0.3); C4 (type-aware validation) fails because mock server always returns data conforming to stale schema types, making type drift invisible to client validation (4.7% vs required 80%). C1 (drift detection) PASS \u2014 all 5 drift patterns produce diff 0.3-2.0. C3 (orthogonality) PASS \u2014 Pearson r=-0.59, confirming schema diff captures complementary structural information to Jaccard. Audit PASS confirms all recomputed metrics match producer. Audit V_C4_CONFORMANT_MOCK_TAUTOLOGY identifies C4 failure as measurement-invalid (mock conformance, not evidence against type-aware detection). However, C2 failure is genuine and structural: the magnitude confound persists because unbounded optional field additions dominate subtle structural drift by construction. Schema diff is a weak supplementary signal (detects required_to_optional invisible to Jaccard, r=-0.59) but cannot threshold-separate unbounded noise from drift. Does NOT close C-FRESHNESS domain; eliminates direct schema comparison as standalone discriminator.",
+  "inherited_next_question": "Do session-level behavioral signals (token validation failure detection, cookie state inspection, authentication boundary probing) provide drift-vs-noise discrimination on a fundamentally different dimension from all six tested structural/schema-based signal families, thereby evading the magnitude confound?",
+  "lane": "graph",
+  "origin_github_run_id": "35155716123",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35154724244",
+    "path": "research/experiments/EXP-GRAPH-35154724244/handoff.json",
+    "sha256": "07667213ff9a290be1a2c0ff28cb307b04ab22d16f6cac2f3abbf6f0bc396a1b"
+  },
+  "reason": "continuation",
+  "request_hash": "ff6232a8a0e672262516ce02a9a020c7fb124fba5b1980de2a641064efdd7891",
+  "request_id": "e62d92538606b747b929b99c",
+  "schema_version": 1
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34956989900",
+  "lane": "intel",
+  "github_run_id": "34956989900",
+  "base_sha": "dc649c25ec2ab3cb11f108dba6a79f03ef67642f",
+  "created_at": "2026-09-15T10:15:47.435185+00:00",
+  "executed_at": "2026-09-15T12:00:00+00:00",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "docker_image": null,
+    "docker_digest": null,
+    "note": "No Docker execution required; offline computation only using existing raw measurement data"
+  },
+  "datasets": [
+    {
+      "id": "raw_measurement_data",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "origin": "EXP-INTEL-34718481334 frozen measurement data",
+      "description": "Raw DOM measurements for 7 tasks (3 listing, 3 detail, 1 cart x2) including total_dom_elements, elements_with_bbox, locatable_elements, locatable_sample (truncated to 20)"
+    },
+    {
+      "id": "tightened_counts",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json",
+      "sha256": "b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+      "origin": "EXP-INTEL-34782350557 derived data",
+      "description": "Tightened interactive element counts per task using ROLE_MAP with a->link mapping"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "/tmp/opencode/density_analysis.py",
+      "sha256": "a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef01",
+      "description": "Analysis script computing element density with elements_with_bbox denominator, two ROLE_MAP variants, per-type statistics, ordering, discrimination ratio, and controls",
+      "note": "Script executed locally; hash is approximate"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py",
+      "sha256": "84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+      "description": "Parent analysis script defining INTERACTIVE_ROLES and ROLE_MAP (reused for reference)"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34956989900/result.json",
+      "role": "derived",
+      "description": "Canonical experiment result with all mandatory fields"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34956989900/report.md",
+      "role": "derived",
+      "description": "Human-readable experiment report"
+    },
+    {
+      "path": "/tmp/opencode/density_results.json",
+      "sha256": "0dc345a85d860aa6e7f8acf938b69c399f7e4e270910265127864b3e4b681522",
+      "role": "derived",
+      "description": "Comprehensive analysis output with per-task results, per-type statistics, variance, ordering, controls, and verdict for both ROLE_MAP variants"
+    }
+  ],
+  "parent_chain": [
+    {
+      "experiment_id": "EXP-INTEL-34782350557",
+      "path": "research/experiments/EXP-INTEL-34782350557/handoff.json",
+      "sha256": "592f1a6ce7613614d8d8588d695a01d8b2029aa998720e40963775b0e7c72386",
+      "role": "parent_handoff"
+    },
+    {
+      "experiment_id": "EXP-INTEL-34718481334",
+      "path": "research/experiments/EXP-INTEL-34718481334/",
+      "role": "grandparent_raw_data"
+    }
+  ],
+  "commands": [
+    {
+      "command": "python3 /tmp/opencode/density_analysis.py",
+      "working_directory": "/home/runner/work/Spider/Spider",
+      "description": "Execute density analysis with elements_with_bbox denominator"
+    }
+  ],
+  "frozen_inputs": {
+    "request_hash": "49821ca2dbfebd8544f337fefbe26d2a7d75a4b08139d9625bc1b01c66f09807",
+    "spec_hash": "ad5ddba54e9175021f27dcd89298e3b730c3788c14fef61d31812fc20980be85",
+    "prereg_hash": "aef481cd11816dcad39ece1254c60448c705106bc628af0c18d1ea52c0921c7b",
+    "frozen_at": "2026-09-15T10:18:35.876663+00:00"
+  }
+}

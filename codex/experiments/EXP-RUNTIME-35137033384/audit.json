@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35137033384",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "Effective brotli diversity remains 2 variants, not 5 distinct, for 1KB JSON payloads. CDN-noise proxy varies quality per request from {4,5,6,7,8} via quality_rng (seed 1044) but brotli.compress for these sizes collapses q5-8 to identical bytes (q4 distinct). Producer correctly discloses this in validity_notes and known_issues (inherited from parent audit). Effective noise from brotli quality is binary-equivalent; additional diversity in this experiment comes from Accept-Encoding override (br/gzip/identity) and compressed hash variation 2-4 uniques, not from 5-level brotli quality.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json metrics /userinfo_DECOMPRESSED-VARYING-BROTLI-CDN compressed_hash_variation valid_token 4 uniques (includes gzip/identity), parent audit effective_brotli_diversity 2 variants, provenance.json known_issues 'Effective brotli diversity for 1KB JSON is 2 variants', validity_notes 'Effective brotli diversity: 2 variants (q4 distinct vs q5-8 identical)'"
+    },
+    {
+      "finding": "CDN-noise proxy cache hit/miss counters show 0/0 due to Python class variable scoping bug (self.cache_hits +=1 creates instance var shadowing class var). Producer discloses bug in observations and validity_notes; actual in-memory cache dict functions correctly as evidenced by X-Cache HIT/MISS both present (20 unique CF-Ray per state, Age range 1-300, Via 1.1 varnish) and encoding diversity across requests for same auth state. Quantitative hit rate (~30% expected) cannot be verified from counters; qualitative cache noise is verified via headers.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py CDNNoiseProxyHandler cache_hits class var, result.json observations 'Cache stats: counters show 0/0 due to Python class variable scoping bug', cdn_header_verification x_cache_values [HIT,MISS] all states, run_experiment.py _should_cache_serve Bernoulli(0.3)"
+    },
+    {
+      "finding": "Chunked transfer-encoding (~22-35% observed vs 30% spec) is applied by proxy via Transfer-Encoding header and wrap_chunked framing, but HTTP client (requests/urllib3 with decode_content=False) decodes chunked at HTTP layer before body hashing. Body sizes identical for chunked vs non-chunked (e.g., /userinfo no_auth 26-46B both). Decompression pipeline never sees chunked framing bytes; survival verifies HTTP client chunk decoding plus decompression, not decompress handling of chunked framing. Outcome still SURVIVES but description 'tests whether decompression pipeline correctly handles chunked framing before brotli decompression' is imprecise.",
+      "severity": "low",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py wrap_chunked + _send_response_body, raw_observations.json headers Transfer-Encoding chunked present, body_size min==max for same state despite chunked flag, recomputed chunked counts DECOMPRESSED /userinfo 18/80 22.5% /introspect 25/80 31.25%"
+    },
+    {
+      "finding": "Synthetic proxy gap persists: localhost HTTPServer on 127.0.0.1:5001 with seeded RNG cannot exercise real CDN non-determinism (per-edge quality selection, geographic routing, load-balancing, hierarchical cache TTL/invalidation, TLS, connection reuse, latency/packet loss). Decompression via brotli.decompress/gzip.decompress is deterministic by library construction, so within-state decompressed variation 0 (positive control) verifies code correctness not CDN resilience. Null control B-RANDOM ~0.0 is trivial. Test is necessary intermediate gate before real-CDN (per prereg Validity Threats 1-2) but not sufficient for production CDN claim.",
+      "severity": "high",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/spec.json measurement_validity 'CDN-noise proxy runs on localhost', prereg.md 11.1 Simulator fidelity, provenance.json cdn_proxy 'CDN-noise proxy on localhost:5001', controls C_DECOMPRESSION_DETERMINISM all_same true 8/8 cells"
+    },
+    {
+      "finding": "Single payload distribution bounds generalizability: 1KB compressible JSON (~1024B uncompressed, valid_token ~999B JSON with x*924, error 26B invalid_token) single content-type, single seed 44, 4 auth states with 3-way error collapse capping /userinfo discrimination at 0.5 (status 0.5, decompressed 0.5) and /introspect at 0.8333 (status 0.0, decompressed 0.8333). Larger/incompressible payloads, HTML/XML/binary, MB-scale, seed variation not tested. H3 compressed degradation 0.2789 (<0.35) vs parent 0.4329 is payload and algorithm-mix dependent.",
+      "severity": "medium",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py MockOAuthHandler body_size 1024 x*924, result.json body_sizes valid_token 69-999 mean 117, provenance.json known_issues 'Mock OAuth2 3-way error collapse caps /userinfo discrimination at 0.5', result.json /introspect decompressed 0.8333 status 0.0 proves body signal isolated"
+    },
+    {
+      "finding": "No leakage or instrumentation tampering: recomputed discrimination from raw_observations.json fingerprint_compressed/decompressed/status matches result.json exactly (max_abs_diff 0.0 for all 4 metrics across 4 endpoint-baseline cells). Content-Encoding distribution includes all 3 types (br, gzip, identity) as spec, CDN headers vary per request (CF-Ray unique 20/20, X-Cache HIT/MISS, Age 1-300). 320/320 requests present (2 baselines x2 endpoints x4 states x20), 0 pipeline errors.",
+      "severity": "none",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/raw_observations.json 320 observations, result.json controls C_NO_PIPELINE_ERRORS 0, experiment recomputed_metrics max_abs_diff 0.0"
+    },
+    {
+      "finding": "Seed determinism fixed from parent audit: CDN noise seed derived via hashlib.sha256(b'CDN_NOISE') deterministic (9273 = 44 + int(sha256)%10000) not hash(), and quality_seed 1044 = 44+1000. Reproducibility is deterministic across PYTHONHASHSEED. Previous audit medium finding on hash() randomization is resolved.",
+      "severity": "none",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py cdn_noise_seed = (SEED + int(hashlib.sha256(b'CDN_NOISE').hexdigest(),16)%10000) %2**31, provenance.json cdn_noise_seed_derivation, prereg.md 9 CDN noise seed derived deterministically from experiment seed"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-DECOMPRESSED-VARYING-BROTLI-CDN",
+      "expected": ">=0.5 decompressed discrimination on /userinfo under CDN-noise proxy (H1), within-state decompressed unique 1/20, algorithm-equivalence |0.5 - CDN| <0.1",
+      "observed": "0.5 on /userinfo, 0.8333 on /introspect, decompressed_hash_variation unique 1/20 all 4 states both endpoints, compressed_hash_variation 2-4 uniques per state, diff 0.0",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json metrics /userinfo_DECOMPRESSED-VARYING-BROTLI-CDN decompressed_body_only 0.5 /introspect 0.8333, controls C_DECOMPRESSION_DETERMINISM pass true C_ALGORITHM_EQUIVALENCE observed 0.0 pass true, recomputed_metrics decompressed 0.5 exact",
+      "strength": "strong within synthetic CDN simulator scope; bounded to 1KB JSON, localhost, effective brotli diversity 2 plus gzip/identity override, chunked decoded by HTTP client"
+    },
+    {
+      "baseline_id": "B-COMPRESSED-VARYING-BROTLI-CDN",
+      "expected": "<0.35 compressed discrimination on /userinfo (H3) - CDN noise degrades compressed-byte hashing",
+      "observed": "0.278969 on /userinfo, 0.353070 on /introspect (DECOMPRESSED also 0.325263 on /userinfo, 0.390877 on /introspect)",
+      "verdict": "PASS - H3 CONFIRMED on /userinfo (<0.35)",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json metrics /userinfo_COMPRESSED-VARYING-BROTLI-CDN compressed 0.278969, /userinfo_DECOMPRESSED-VARYING-BROTLI-CDN compressed 0.325263, recomputed 0.278969 exact",
+      "strength": "moderate - compressed degradation correctly exceeds threshold due to added gzip/identity variation (3-4 compressed uniques) vs parent 0.4329 with only brotli quality; still size/compressibility dependent"
+    },
+    {
+      "baseline_id": "B-DECOMPRESSED-VARYING-GZIP",
+      "expected": "0.5 decompressed on /userinfo (parent reference from EXP-RUNTIME-35058619700, not re-executed) for algorithm-equivalence comparison",
+      "observed": "0.5 parent, CDN brotli 0.5 diff 0.0 <0.1",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/provenance.json parent_reference_data B_DECOMPRESSED_VARYING_GZIP_USERINFO 0.5 source EXP-RUNTIME-35058619700, controls C_ALGORITHM_EQUIVALENCE observed 0.0 pass true",
+      "strength": "weak for live comparison - not re-executed, inherits parent synthetic gzip N=20 seed 44; passes because decompression is lossless regardless of algorithm"
+    },
+    {
+      "baseline_id": "B-STATUS-ONLY",
+      "expected": "0.5 on /userinfo, 0.0 on /introspect, compression-immune",
+      "observed": "0.5 on /userinfo, 0.0 on /introspect in all 4 metrics cells, invariant across CDN encodings",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json metrics status_only_discrimination 0.5 /userinfo 0.0 /introspect both baselines, recomputed 0.5/0.0 exact",
+      "strength": "strong - isolates body signal from status; proves /introspect decompressed 0.8333 is body-only (status 0.0)"
+    },
+    {
+      "baseline_id": "B-RANDOM",
+      "expected": "~0.0 null (no spurious structure from CDN noise)",
+      "observed": "0.0 on all 4 cells, controls C_NULL_CONTROL pass true",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json baselines B-RANDOM 0.0, controls C_NULL_CONTROL observed [0.0,0.0] pass true, recomputed B-RANDOM 0.0 via baseline_random seed 99",
+      "strength": "strong - no leakage"
+    },
+    {
+      "baseline_id": "C_DECOMPRESSION_DETERMINISM",
+      "expected": "Within-state decompressed hash variation =0 for all 4 states under B-DECOMPRESSED-VARYING-BROTLI-CDN",
+      "observed": "true all 4 states /userinfo, true all 4 /introspect, 1/20 unique each",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json decompressed_hash_variation all_same true 8/8, controls C_DECOMPRESSION_DETERMINISM observed 4/4 true pass true, raw_observations.json fingerprint_decompressed unique 1 per state",
+      "strength": "strong as code correctness, none as CDN evidence - deterministic by construction"
+    },
+    {
+      "baseline_id": "C_CDN_NOISE_ACTIVE",
+      "expected": "Compressed-byte hashes vary >1 for at least 1 state (CDN noise introduces non-determinism)",
+      "observed": "no_auth 3, invalid 2, expired 2, valid 4 on /userinfo DECOMPRESSED; all 2-4 on /introspect and COMPRESSED baseline",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json controls C_CDN_NOISE_ACTIVE observed valid 4 pass true, metrics compressed_hash_variation unique_count>1 all states",
+      "strength": "strong - CDN simulator successfully introduced wire-byte variation beyond parent 1-2 uniques"
+    },
+    {
+      "baseline_id": "C_ALGORITHM_EQUIVALENCE",
+      "expected": "|B-DECOMPRESSED-VARYING-GZIP(parent 0.5) - B-DECOMPRESSED-VARYING-BROTLI-CDN| <0.1 on /userinfo",
+      "observed": "0.0",
+      "verdict": "PASS",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35137033384/result.json controls C_ALGORITHM_EQUIVALENCE observed 0.0 pass true, metrics /userinfo decompressed 0.5 exact",
+      "strength": "moderate - passes because both decompress to same logical body; bounded to tested body distribution and effective 2-variant brotli plus gzip/identity, not proof of general algorithm independence"
+    }
+  ],
+  "recomputed_metrics": {
+    "recomputed_from": "research/experiments/EXP-RUNTIME-35137033384/raw_observations.json (320 observations: 2 baselines DECOMPRESSED-VARYING-BROTLI-CDN + COMPRESSED-VARYING-BROTLI-CDN x2 endpoints /userinfo /introspect x4 states x20 reps) using discrimination = intra_match_rate - inter_match_rate per run_experiment.py compute_discrimination_score; fingerprints via SHA256(repr((status,body_hash,''))) with body_hash = SHA256(compressed_bytes) or SHA256(decompressed_bytes via brotli.decompress/gzip.decompress/identity)",
+    "match_reported": true,
+    "max_abs_diff": 0.0,
+    "per_cell": {
+      "/userinfo_DECOMPRESSED-VARYING-BROTLI-CDN": {
+        "compressed_body_only_discrimination": 0.3252631578947368,
+        "recomputed_compressed": 0.3252631578947368,
+        "decompressed_body_only_discrimination": 0.5,
+        "recomputed_decompressed": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_status": 0.5,
+        "b_random": 0.0,
+        "recomputed_b_random": 0.0
+      },
+      "/introspect_DECOMPRESSED-VARYING-BROTLI-CDN": {
+        "compressed_body_only_discrimination": 0.39087719298245616,
+        "recomputed_compressed": 0.39087719298245616,
+        "decompressed_body_only_discrimination": 0.8333333333333334,
+        "recomputed_decompressed": 0.8333333333333334,
+        "status_only_discrimination": 0.0,
+        "recomputed_status": 0.0,
+        "b_random": 0.0,
+        "recomputed_b_random": 0.0
+      },
+      "/userinfo_COMPRESSED-VARYING-BROTLI-CDN": {
+        "compressed_body_only_discrimination": 0.27896929824561406,
+        "recomputed_compressed": 0.27896929824561406,
+        "decompressed_body_only_discrimination": 0.5,
+        "recomputed_decompressed": 0.5,
+        "status_only_discrimination": 0.5,
+        "recomputed_status": 0.5,
+        "b_random": 0.0,
+        "recomputed_b_random": 0.0
+      },
+      "/introspect_COMPRESSED-VARYING-BROTLI-CDN": {
+        "compressed_body_only_discrimination": 0.3530701754385965,
+        "recomputed_compressed": 0.3530701754385965,
+        "decompressed_body_only_discrimination": 0.8333333333333334,
+        "recomputed_decompressed": 0.8333333333333334,
+        "status_only_discrimination": 0.0,
+        "recomputed_status": 0.0,
+        "b_random": 0.0,
+        "recomputed_b_random": 0.0
+      }
+    },
+    "controls_recomputed": {
+      "C_DECOMPRESSION_DETERMINISM": {
+        "expected": "within-state decompressed unique 1/20 all states",
+        "observed": {
+          "no_auth": 1,
+          "invalid_token": 1,
+          "expired_token": 1,
+          "valid_token": 1
+        },
+        "recomputed": {
+          "no_auth": 1,
+          "invalid_token": 1,
+          "expired_token": 1,
+          "valid_token": 1
+        },
+        "pass": true
+      },
+      "C_CDN_NOISE_ACTIVE": {
+        "expected": "compressed unique >1 for at least 1 state",
+        "observed": {
+          "no_auth": 3,
+          "invalid_token": 2,
+          "expired_token": 2,
+          "valid_token": 4
+        },
+        "recomputed": {
+          "no_auth": 3,
+          "invalid_token": 2,
+          "expired_token": 2,
+          "valid_token": 4
+        },
+        "pass": true
+      },
+      "C_ALGORITHM_EQUIVALENCE": {
+        "expected": "|0.5 - 0.5| <0.1",
+        "observed": 0.0,
+        "recomputed": 0.0,
+        "pass": true
+      },
+      "C_NULL_CONTROL": {
+        "expected": "B-RANDOM ~0.0",
+        "observed": 0.0,
+        "recomputed": 0.0,
+        "pass": true
+      },
+      "C_NO_PIPELINE_ERRORS": {
+        "expected": 0,
+        "observed": 0,
+        "recomputed": "320/320 present, 0 errors, all encodings br/gzip/identity observed, chunked 22-35%",
+        "pass": true
+      }
+    },
+    "chunked_verification": {
+      "DECOMPRESSED-VARYING-BROTLI-CDN_/userinfo": "18/80 22.5%",
+      "DECOMPRESSED-VARYING-BROTLI-CDN_/introspect": "25/80 31.25%",
+      "COMPRESSED-VARYING-BROTLI-CDN_/userinfo": "28/80 35.0%",
+      "COMPRESSED-VARYING-BROTLI-CDN_/introspect": "24/80 30.0%"
+    },
+    "encoding_distribution": {
+      "DECOMPRESSED-VARYING-BROTLI-CDN_/userinfo_no_auth": ["br", "gzip", "identity"],
+      "DECOMPRESSED-VARYING-BROTLI-CDN_/userinfo_valid_token": ["br", "gzip", "identity"],
+      "note": "All 3 encodings observed across states, identity cases fingerprint_compressed==fingerprint_decompressed matches (16/16), br/gzip never fallback"
+    }
+  },
+  "claim_ceiling": "Decompression-normalization (SHA256 on decompressed body + status via brotli.decompress/gzip.decompress/identity fallback after Content-Encoding inspection) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality {4,5,6,7,8} per request with effective 2-variant diversity, Accept-Encoding override 20% gzip 5% identity 75% br, chunked transfer-encoding ~30% decoded by HTTP client, CDN headers CF-Ray/X-Cache/Age/Via per request, in-memory cache Bernoulli 30% (counter bug 0/0 but HIT/MISS verified), Content-Length variation) via local Python proxy on 127.0.0.1:5001 fronting mock OAuth2 Flask/PyJWT on 127.0.0.1:5000 (N=20 per state per endpoint per baseline, 320 total, seed 44, CDN noise seed 9273 deterministic via hashlib, quality seed 1044, 1KB compressible JSON valid body ~999B ->69-71B brotli 26B error ->30B, introspect 32-43B). Algorithm-equivalence |gzip(0.5 parent) - brotli-CDN(0.5)| =0.0 <0.1 holds in this distribution. Compressed-byte-only hashing degrades to 0.2789-0.3253 on /userinfo (<0.35) confirming H3 under this richer noise (vs parent 0.4329). NOT justified for: real CDN infrastructure (Cloudflare/Fastly/Akamai) per-edge quality/caching/chunked/Accept-Encoding negotiation, non-JSON or MB-scale or incompressible payloads where q5-7 may diverge, missing/incorrect/double Content-Encoding, production latency, claim of 5 distinct brotli quality resistance, or deployment without real-CDN validation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35137033384/spec.json - frozen claim_ids [C-MEAS-VALID], question/H1/H2/H3, baselines B-DECOMPRESSED-VARYING-GZIP(parent 0.5)/B-DECOMPRESSED-VARYING-BROTLI-CDN(this)/B-COMPRESSED-VARYING-BROTLI-CDN/B-STATUS-ONLY/B-RANDOM, decision_rule SURVIVES if 4 conditions (decompressed variation 0, B-RANDOM~0, decompressed>=0.5, |diff|<0.1)",
+    "research/experiments/EXP-RUNTIME-35137033384/prereg.md - sections 4.1-4.6 CDN-noise 6 categories, section 5 baselines, section 6 controls, section 8 N=20x4x2=160 per baseline 320 total, section 9 seed 44 CDN noise seed hash(CDN_NOISE)%10000 deterministic",
+    "research/experiments/EXP-RUNTIME-35137033384/freeze.json - frozen_at 2026-09-16T18:57:16, hashes prereg 8b4f71 spec 158719 request 662b92",
+    "research/experiments/EXP-RUNTIME-35137033384/result.json - metrics /userinfo 0.3253/0.5/0.5 DECOMPRESSED 0.2789/0.5/0.5 COMPRESSED, /introspect 0.3908/0.8333/0.0 and 0.3530/0.8333/0.0, controls 5 pass true C_DECOMPRESSION_DETERMINISM C_NULL_CONTROL C_CDN_NOISE_ACTIVE valid 4 C_ALGORITHM_EQUIVALENCE 0.0 C_NO_PIPELINE_ERRORS 0, status COMPLETE outcome SUPPORTS",
+    "research/experiments/EXP-RUNTIME-35137033384/raw_observations.json - 320 observations 2 baselines x2x4x20 with headers Content-Encoding br/gzip/identity Transfer-Encoding chunked 22-35% CF-Ray unique 20/20 X-Cache HIT/MISS Age 1-300 Via 1.1 varnish body_hash_compressed/decompressed fingerprint_compressed/decompressed/status body_preview recomputed max_abs_diff 0.0",
+    "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py - BROTLI_QUALITY_RANGE (4,5,6,7,8), CHUNKED_PROB 0.3 GZIP_OVERRIDE 0.2 IDENTITY_OVERRIDE 0.05 CACHE_HIT 0.3, CDNNoiseProxyHandler quality_rng/noise_rng/cache, cdn_noise_seed deterministic hashlib 9273 quality_seed 1044, decompress_body brotli.decompress/gzip fallback, fingerprint functions SHA256(repr((status,body_hash,''))), compute_discrimination_score intra-inter",
+    "research/experiments/EXP-RUNTIME-35137033384/provenance.json - python 3.12.14 brotli 1.2.0 flask 3.1.3 pyjwt 2.14.0 numpy 2.5.3, parent_reference_data EXP-RUNTIME-35058619700 gzip 0.5, known_issues effective brotli diversity 2 variants cache counter bug 3-way collapse, execution_details 320 requests CDN noise categories 6",
+    "research/experiments/EXP-RUNTIME-35137033384/report.md - executive SURVIVES, H1 0.5 SURVIVES H2 0.0 SURVIVES H3 0.2790 CONFIRMED, controls table 5 PASS, CDN noise verification 22-35% chunked all encodings, claim ceiling from synthetic only to synthetic+CDN simulator, next_question real CDN",
+    "research/experiments/EXP-RUNTIME-35130682006/handoff.json - parent SURVIVES_CURRENT_TEST with REVISE, carry_forward established decompressed 0.5/0.8333 algorithm-equivalence 0.0 decompression determinism, rejected compressed-byte-only sufficient, unknown real CDN etc, next_question real CDN",
+    "research/experiments/EXP-RUNTIME-35130682006/audit.json - REVISE producer_claim_supported false 4 required_fixes, validity_findings 8 effective 2 variants synthetic gap hash non-determinism, recomputed max_abs_diff 0.0, claim_ceiling bounded to synthetic proxy effective-binary"
+  ],
+  "unresolved": [
+    "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, Accept-Encoding negotiation, load-balancing and geographic routing introduce non-determinism not present in localhost synthetic proxy?",
+    "Does 5-level brotli quality selection produce 5 distinct compressed outputs for larger or incompressible payloads (2KB+, random bytes, HTML/XML/binary) where qualities 5,6,7 may diverge from 8, and would compressed degradation and algorithm-equivalence hold there?",
+    "What is latency cost of per-response brotli/gzip decompression before hashing at production scale (1KB ~0.002-0.003s measured, MB-scale unknown) and is fallback correct when Content-Encoding is missing, incorrect, or double-encoded?",
+    "Is the CDN-noise proxy's Bernoulli Accept-Encoding override (20% gzip, 5% identity) realistic compared to real CDN negotiation based on client hints, edge capabilities, and cache state, and does cache TTL/hierarchy matter?",
+    "Does result generalize beyond 1KB compressible JSON, single seed 44, mock OAuth2 3-way error collapse (ceiling 0.5) to production IdP with diverse error bodies and status variation?"
+  ]
+}

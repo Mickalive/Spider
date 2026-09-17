@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-34932344937",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "On locally-hosted Express SPAs with session-dependent API responses and a BRANCHING FSM (at least one state with >=2 outgoing actions and session-dependent transition probabilities) so that H(S_next|URL,H_K=3) > 0.2 bits, does network-response payload structure exhibit conditional PMI I(S_next; Response_before | URL, H_K=3) > 0.05 bits with Bonferroni-corrected permutation p < 0.0125 and a discriminating positive control (non-zero perm_null_std)?",
+  "why_next": "The locally-hosted network-response PMI test is MEASUREMENT_INVALID at K=3 due to zero-entropy ceiling on the linear FSM (audit V1). However, the experiment revealed a strong positive signal at K=1 (BC PMI=0.386 bits, Bonferroni p=0.004) that network-response DOES carry predictive information when action-history is insufficient. The correct next step is to test the same hypothesis on a branching FSM where H(S_next|URL,H_K=3) > 0, eliminating the ceiling effect while keeping the observation level (network-response) that already shows PMI when H>0.",
+  "carry_forward": {
+    "established": [
+      "Network-response payload structure carries significant conditional PMI when action-history is insufficient: on the 5-state linear FSM at K=1 (H=0.4 bits), bias-corrected PMI = 0.386 bits, Bonferroni p = 0.004 < 0.0125, cardinality |R|/N = 0.05 non-degenerate (audit V5, recomputed metrics sd_bias_corrected_pmi_k1=0.3856). The ('/', 'advance') stratum at K=1 has PMI=1.0 and H=1.0 (N=800): response_before (state_id form_s2 vs review) disambiguates between two possible next states (review vs complete) when action-history is ambiguous.",
+      "On a 5-state LINEAR FSM with deterministic single-action-per-state transitions, action-history at K>=2 fully determines S_next (H=0 exactly), making response PMI identically 0 for ANY Response_before. This is a ceiling effect, not a falsification of response informativeness (audit V1).",
+      "Bias-corrected PMI estimator (observed - perm_mean) correctly implemented and produces valid effect sizes: K=1 null_mean = 0.014 (small bias), null_std = 0.003 (tight null), bias correction appropriate (audit V7). Cardinality |R|/N = 0.05 well below 0.8 threshold, avoiding parent's DOM-hash degeneracy.",
+      "Session-randomized positive control and shuffled-label null control pass at K=3, though degenerately (null_std=0.0 due to zero-entropy strata). At K=1 where H>0, controls are not exercised but the pipeline discriminates correctly (SD PMI=0.386, SI PMI=0.0)."
+    ],
+    "rejected": [
+      "Broad FALSIFIED-IN-SETTING for network-response payload structure as C-WEB-DYNAMICS observation level is NOT justified by this experiment. The K=3 PMI=0 result is a ceiling effect (H=0), not evidence that response structure lacks predictive information (audit V1, V5).",
+      "The producer's claim that 'locally-hosted testable path for C-WEB-DYNAMICS is closed across ALL observation levels' is not supported: K=1 evidence shows network-response DOES carry PMI when H>0 (audit V5).",
+      "DOM-hash with embedded session token trivially predicts itself (established from parent EXP-PHYSICS-34846934524, carries forward from prior handoff)."
+    ],
+    "unknown": [
+      "Whether network-response PMI remains >0 at K=3 on a branching FSM where H(S_next|URL,H_K=3) > 0.2 bits — this is the correct discriminating test that eliminates the ceiling effect.",
+      "Whether the significant K=1 PMI (0.386 bits) generalizes to richer response features (headers, timing, multi-endpoint) and to production infrastructure, or is specific to this synthetic JSON with state_id field.",
+      "Whether bias-corrected estimator (observed - perm_mean) is sufficient vs Miller-Madow or other estimators when H>0 but |R| moderate; K=1 null_mean 0.014 indicates small bias, not assessed at larger N or branching FSM.",
+      "Whether session-correlated design with token removed (variant_id only) would give PMI ≈ 1.32 bits as predicted in parent handoff, and whether that survives bias correction.",
+      "What the correct positive control is for branching FSM experiments: session-randomized control at K=1 was not exercised in this experiment (controls only at K=3 where degenerate)."
+    ],
+    "do_not_assume": [
+      "Do not interpret K=3 PMI=0 on the linear FSM as evidence that network-response payload structure lacks predictive information — H(S_next|URL,H_K=3)=0 is an environment ceiling, not a scientific finding about response informativeness.",
+      "Do not assume K=1 PMI=0.386 bits generalizes to all FSMs, all response types, or production SPAs — it is demonstrated only on this specific 5-state linear FSM with state-dependent JSON responses.",
+      "Do not assume positive/null control passes at K=3 validate the MI pipeline — controls are degenerate (null_std=0.0, pass criterion |0|<3*0) and non-discriminating (audit V4).",
+      "Do not confuse action-history sufficiency (H=0, deterministic FSM) with response non-informativeness — these are different properties: sufficiency means history already determines the answer; informativeness means response CAN provide information when history is insufficient.",
+      "Do not generalize to production SPAs, client-side virtual DOM, React/Vue concurrent mode, auth-dependent content, or external data feeds — the audit and producer validity_notes explicitly exclude these from the claim ceiling.",
+      "Do not treat the experiment's FALSIFIES outcome as a valid falsification of C-WEB-DYNAMICS — the audit correctly identified it as MEASUREMENT_INVALID due to zero-entropy ceiling (audit V1).",
+      "Do not assume deterministic round-robin session assignment (audit V2 deviation) biases the PMI result — both conditions have identical assignment, but the deviation requires disclosure in future preregistrations.",
+      "Do not assume determinism_check results (audit V3, code groups by trajectory index instead of session_id) are valid per spec — the correct grouping gives 100 triples, not 2000."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json (parent: DOM-hash MEASUREMENT_INVALID, carry_forward for C-WEB-DYNAMICS)",
+    "research/experiments/EXP-PHYSICS-34764605162/handoff.json (independent-noise DOM-hash FALSIFIED-IN-SETTING)",
+    "research/experiments/EXP-PHYSICS-34724244876/handoff.json (deterministic DOM-hash FALSIFIED-IN-SETTING)",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json (frozen design: claim_ids, decision_rule, measurement_validity, falsifier)",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json (producer evidence: per_k_results K=1 significant, K=3 ceiling, controls)",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json (independent audit: V1-V7, claim_ceiling, recomputed_metrics, required_fixes)",
+    "research/experiments/EXP-PHYSICS-34932344937/run_experiment.py (analysis pipeline, re-executed for audit recomputation)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:validity_findings V1 (severity critical, H=0 ceiling at K=3), V5 (severity high, K=1 PMI 0.386 bits ignored), V4 (severity high, degenerate controls), claim_ceiling (bounded ceiling statement)",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:recomputed_metrics sd_bias_corrected_pmi_k1=0.3856248724530916, sd_perm_p_bonf_k1=0.003996003996003996, H_S_next_given_URL_HK_1=0.4, H_S_next_given_URL_HK_3=0.0, per_stratum_K1_advance_PMI=1.0",
+    "research/experiments/EXP-PHYSICS-34932344937/audit.json:required_fixes (branching FSM, K=1 as primary, session sampling fix, determinism check fix, control degeneracy disclosure)",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.1.state_dependent raw_pmi=0.4000000000000002 bias_corrected_pmi=0.3856248724530916 perm_p_bonf=0.003996003996003996 cardinality all_pass ratio 0.05",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:per_k_results.3.cardinality per_stratum all_pass ratio 0.05 (non-degenerate)",
+    "research/experiments/EXP-PHYSICS-34932344937/result.json:controls positive_control_session_randomized pass_criterion '|0.000000| < 3 * 0.000000 = 0.000000' (degenerate), null_control_shuffled_labels PASS (degenerate at K=3)",
+    "research/experiments/EXP-PHYSICS-34932344937/spec.json:decision_rule (6 criteria, criterion_1 K=3 PMI>0.05 criterion_6 |R|<0.8N)",
+    "research/experiments/EXP-PHYSICS-34932344937/prereg.md:11.4 FSM Linearity (acknowledged ceiling threat), 12.2 FALSIFIED-IN-SETTING criteria",
+    "research/experiments/EXP-PHYSICS-34932344937/freeze.json:hashes prereg.md 230d945774d6442157ad828d7b401f0b7bed8f40956832f3933e06f8f5e1cdeb spec.json 5682f7473db3f3f03bc85d79ccf3a9eab51d41f866799810c6f3052643539598",
+    "research/experiments/EXP-PHYSICS-34932344937/provenance.json:datasets synthetic_data parameters seed 42 n_sessions 10 (round-robin deviation audit V2)",
+    "research/experiments/EXP-PHYSICS-34846934524/handoff.json:carry_forward established rejected unknown do_not_assume, next_question (parent DOM-hash MEASUREMENT_INVALID, network-response suggested)",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS",
+    "research/EXPERIMENT_PACKET.md:7 verdict.json required fields, 8 handoff.json carry_forward semantics"
+  ],
+  "recommended_action": "Next experiment should test network-response payload structure on a BRANCHING FSM where at least one state has >=2 outgoing actions with session-dependent transition probabilities, ensuring H(S_next|URL,H_K=3) > 0.2 bits. This eliminates the K=3 ceiling effect while keeping the observation level (network-response) that already shows PMI at K=1. Use K=1 (H=0.4 bits) as a secondary/confirmatory condition. Fix session assignment to independent uniform draw per prereg. Implement determinism check grouping by (FSM_state, session_id) per spec. Exercise positive and null controls at K=3 on the branching FSM where perm_null_std > 0, ensuring non-degenerate discrimination. Preregister branching FSM design before execution. Do not repeat the linear FSM design."
+}

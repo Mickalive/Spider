@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34956989900",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-SAMPLE-TRUNCATION-CRITICAL",
+      "severity": "critical",
+      "finding": "Tightened counts from truncated locatable_sample (cap 20 of 82 listing, 32 detail, 21 cart) are proportional estimates, not full-DOM measurements. Differential undercount factors 4.1x listing, 1.6x detail, 1.05x cart bound the ceiling to truncated-sample scope. Producer correctly discloses in result.json validity_notes[0] and prereg.md 8.1; does not invalidate offline recomputation per spec decision_rule, but prevents generalization to true density.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json: locatable_elements 82/32/21 vs locatable_sample length 20; result.json validity_notes[0]",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-CART-PSEUDOREPLICATION-REPEAT",
+      "severity": "major",
+      "finding": "Cart n=2 identical entries (same URL, same counts) retained from parent; deduped n=1 distinct. Within-type variance correctly computed as weighted variance over listing (n=3) and detail (n=3) only; cart contributes no within variance (CV undefined). Producer reports n_dedup=1 and deduped statistics separately as required by spec measurement_validity[4] and prereg 8.2.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json per_task duplicate cart_1; result.json metrics.density_bbox_with_map.per_type.cart.n_dedup=1",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-ROLE-MAPPING-DEVIATION",
+      "severity": "major",
+      "finding": "ROLE_MAP ('a'->'link', 'input'->'textbox') inflates tightened counts differentially: cart +100% (3->6), detail +150% (2->5), listing +33% (6->8). Producer tests both variants as preregistered (spec measurement_validity[5], prereg 6.2) and correctly identifies this as the primary driver of ordering sensitivity, not denominator choice. No hidden deviation.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py ROLE_MAP; result.json metrics.density_bbox_with_map vs density_bbox_no_map",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-SINGLE-SITE-GENERALIZATION",
+      "severity": "major",
+      "finding": "All 7-8 tasks from single Magento shopping site (am1n3e/webarena-verified-shopping:latest). elements_with_bbox behavior on other sites unknown. Producer bounds claim to this site in validity_notes[3] and report.md validity threats. Cross-site claims C-CROSSSITE and C-LLM-INHERIT remain unsupported by this offline recomputation, as acknowledged in spec claim_ids.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json docker_image; result.json validity_notes[3]",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-DENOMINATOR-NEAR-COLLINEARITY",
+      "severity": "minor",
+      "finding": "elements_with_bbox/total_dom ratio 0.87-0.94 (producer controls.denominator_sensitivity.pass=true) means denominators are highly collinear. Ordering is identical between denominators for a given ROLE_MAP (report.md Table: with_map cart>listing>detail both denominators; no_map listing>cart>detail both). This confirms denominator change cannot resolve ordering; producer interpretation that sensitivity is two-factor (denominator + ROLE_MAP inflation) is supported.",
+      "evidence_ref": "result.json controls.denominator_sensitivity.ratios; recomputed 0.9139 listing, 0.871 detail, 0.9419 cart",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-CV-ROUNDING-MINOR",
+      "severity": "minor",
+      "finding": "Per-type CV values show ~0.6% relative difference vs independent sample-SD recompute (listing CV 0.004608 reported vs 0.004637 recomputed; detail 0.033527 vs 0.033531). Difference is rounding/precision, does not affect discrimination_ratio or ordering decisions. Not material.",
+      "evidence_ref": "result.json metrics.density_bbox_with_map.per_type.product_listing.cv_density_bbox vs independent recompute",
+      "affects_claim": false
+    },
+    {
+      "id": "VF-PROVENANCE-HASH-APPROXIMATE",
+      "severity": "minor",
+      "finding": "provenance.json code_paths[0] sha256 a1b2c3d4... flagged as approximate and /tmp/opencode artifact not durable. Raw data hashes (exp347_raw_results.json da30bd..., tightened_results.json b6ebee...) verified exact match. Approximate hash does not affect reproducibility because analysis is deterministic arithmetic on frozen JSON.",
+      "evidence_ref": "provenance.json code_paths[0].note='hash is approximate'; verified sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 and b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+      "affects_claim": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Tightened interactive fraction with total_dom denominator (parent result, ordering reversed)",
+      "strength": "strong",
+      "finding": "Correctly reproduced: with_map ordering cart(0.005282)>listing(0.004692)>detail(0.003745) discrimination 60.08; no_map listing(0.003519)>cart(0.002641)>detail(0.001498) discrimination 603.19. Independently recomputed from raw locatable_sample matches producer to 2 decimal. Ordering identical between total_dom and elements_with_bbox for each ROLE_MAP, demonstrating denominator is not the ordering driver. Baseline is appropriate strong null.",
+      "evidence_ref": "result.json metrics.fraction_total_with_map.ordering and fraction_total_no_map.ordering; independent recompute confirmed",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Original interactive fraction with total_dom denominator (pre-tightening baseline)",
+      "strength": "weak_reference",
+      "finding": "Not recomputed in this experiment (inherited from EXP-INTEL-34718481334: listing 0.048 > detail 0.024 > cart 0.018). Producer cites correctly as motivation, not as active control. No misrepresentation.",
+      "evidence_ref": "spec.json baselines[1]; prereg.md 3.1",
+      "verdict": "PASS"
+    },
+    {
+      "baseline_id": "Extrapolated full-locatable-set density (parent audit BF-ORDERING-REVERSAL-ARTIFACT)",
+      "strength": "strong",
+      "finding": "Used as extrapolation_consistency control: expected listing>detail>cart (listing ~0.019, detail ~0.006, cart ~0.0055). Producer correctly reports FAIL in both variants (with_map cart>listing>detail, no_map listing>cart>detail). Failure is consistent with FALSIFIES verdict and shows truncated-sample result does not generalize to extrapolated full-DOM estimate. Control correctly applied as falsifier for robustness, not as proof.",
+      "evidence_ref": "result.json controls.extrapolation_consistency.pass=false; prereg.md 3.2 BF-ORDERING-REVERSAL-ARTIFACT",
+      "verdict": "PASS"
+    }
+  ],
+  "recomputed_metrics": {
+    "density_bbox_with_map": {
+      "per_task_recomputed": {
+        "listing_clothing-shoes-jewelry": {"tightened": 8, "density_bbox": 0.005161290322580645, "fraction_total": 0.0047169811320754715, "match": true},
+        "listing_beauty-personal-care": {"tightened": 8, "density_bbox": 0.005128205128205128, "fraction_total": 0.0046865846514352666, "match": true},
+        "listing_electronics": {"tightened": 8, "density_bbox": 0.005115089514066497, "fraction_total": 0.004672897196261682, "match": true},
+        "detail_camera": {"tightened": 5, "density_bbox": 0.00411522633744856, "fraction_total": 0.0035842293906810036, "match": true},
+        "detail_vr_bag": {"tightened": 5, "density_bbox": 0.004351610095735422, "fraction_total": 0.003816793893129771, "match": true},
+        "detail_pet_camera": {"tightened": 5, "density_bbox": 0.004374453193350831, "fraction_total": 0.003834355828220859, "match": true},
+        "cart_1": {"tightened": 6, "density_bbox": 0.005607476635514018, "fraction_total": 0.00528169014084507, "match": true}
+      },
+      "per_type_means_recomputed": {"product_listing": 0.005134861654950757, "detail": 0.004280429875511604, "cart": 0.005607476635514018},
+      "ordering_recomputed": ["cart", "product_listing", "detail"],
+      "ordering_match": true,
+      "between_type_variance_recomputed": 4.524119481335459e-07,
+      "within_type_variance_recomputed": 1.0583234603327154e-08,
+      "discrimination_ratio_recomputed": 42.75,
+      "discrimination_match": true
+    },
+    "density_bbox_no_map": {
+      "per_task_recomputed": {
+        "listing_clothing-shoes-jewelry": {"tightened": 6, "density_bbox": 0.003870967741935484, "match": true},
+        "listing_beauty-personal-care": {"tightened": 6, "density_bbox": 0.0038461538461538464, "match": true},
+        "listing_electronics": {"tightened": 6, "density_bbox": 0.0038363171355498722, "match": true},
+        "detail_camera": {"tightened": 2, "density_bbox": 0.0016460905349794238, "match": true},
+        "detail_vr_bag": {"tightened": 2, "density_bbox": 0.0017406440382941688, "match": true},
+        "detail_pet_camera": {"tightened": 2, "density_bbox": 0.0017497812773403325, "match": true},
+        "cart_1": {"tightened": 3, "density_bbox": 0.002803738317757009, "match": true}
+      },
+      "per_type_means_recomputed": {"product_listing": 0.003851145746, "detail": 0.00171217195, "cart": 0.002803738317757009},
+      "ordering_recomputed": ["product_listing", "cart", "detail"],
+      "ordering_match": true,
+      "between_type_variance_recomputed": 1.1439652517475005e-06,
+      "within_type_variance_recomputed": 1.8073982500077884e-09,
+      "discrimination_ratio_recomputed": 632.93,
+      "discrimination_match": true
+    },
+    "fraction_total_with_map_recomputed": {"ordering": ["cart", "product_listing", "detail"], "discrimination_ratio": 60.08, "match": true},
+    "fraction_total_no_map_recomputed": {"ordering": ["product_listing", "cart", "detail"], "discrimination_ratio": 603.19, "match": true},
+    "controls_recomputed": {
+      "positive_control": {"expected": "all tightened >0", "observed": "listing 8/6, detail 5/2, cart 6/3 all >0", "pass": true, "match": true},
+      "null_control": {"expected": "tightened <= original (82,32,21)", "observed": "8<=82,5<=32,6<=21 all true", "pass": true, "match": true},
+      "denominator_sensitivity": {"ratios_recomputed": {"listing": 0.9139, "detail": 0.871, "cart": 0.9419}, "all_gt_0.8": true, "match": true},
+      "extrapolation_consistency": {"expected": ["product_listing", "detail", "cart"], "with_map_observed": ["cart", "product_listing", "detail"], "no_map_observed": ["product_listing", "cart", "detail"], "pass": false, "match": true}
+    },
+    "hypothesis_tests_recomputed": {
+      "H1_ordering": {"description": "listing > detail > cart holds under elements_with_bbox in at least one ROLE_MAP", "pass": false, "match": true},
+      "H2_discrimination": {"description": "between/within >1.0 under elements_with_bbox", "with_map": 42.75, "no_map": 632.93, "pass": true, "match": true},
+      "H3_positive_control": {"pass": true, "match": true},
+      "H4_null_control": {"pass": true, "match": true}
+    },
+    "overall_verdict_recomputed": "FALSIFIED-IN-SETTING per spec decision_rule (H1 fails in both variants despite H2 and controls passing) => result.json outcome FALSIFIES is correct",
+    "numerical_discrepancies": "Minor CV rounding only (listing CV 0.004608 vs 0.004637 sample-SD, detail 0.033527 vs 0.033531) - immaterial to any threshold"
+  },
+  "claim_ceiling": "FALSIFIES is justified but BOUNDED: tightened_locatable_count/elements_with_bbox does NOT restore ordering listing>detail>cart on this single Magento shopping site when derived from truncated first-20 locatable_sample (listing n=3, detail n=3, cart n=1 distinct; undercounts 4.1x/1.6x/1.05x). Both ROLE_MAP variants fail (with_map: cart>listing>detail; no_map: listing>cart>detail). Discrimination remains >1 (42.75 with_map, 632.93 no_map) but does not rescue ordering. Ceiling does NOT extend to full-DOM enumeration, other sites, other interactive definitions, or a canonical ROLE_MAP resolution. C-MEAS-VALID denominator-sensitivity partially addressed but not resolved; C-CROSSSITE and C-LLM-INHERIT remain unsupported (single-site, offline recomputation, no new measurement).",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-34956989900/spec.json claim_ids C-MEAS-VALID/C-CROSSSITE/C-LLM-INHERIT decision_rule H1 fails => FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.density_bbox_with_map.ordering=[cart,product_listing,detail] metrics.density_bbox_no_map.ordering=[product_listing,cart,detail]",
+    "research/experiments/EXP-INTEL-34956989900/result.json metrics.hypothesis_tests.H1_ordering.pass=false",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json sha256:b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_analysis.py sha256:84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e INTERACTIVE_ROLES/ROLE_MAP definition",
+    "research/experiments/EXP-INTEL-34782350557/handoff.json carry_forward established/rejected/unknown/do_not_assume",
+    "independent recompute: python3 recomputation of tightened counts from locatable_sample roles and density/ variance/ ordering matches producer to reported precision"
+  ],
+  "unresolved": [
+    "True tightened interactive density when full DOM enumerated (not truncated to 20) — extrapolated proportional estimates suggest listing>detail>cart but unmeasured; requires runtime fix to MEASURE_JS locatableSample cap.",
+    "Canonical ROLE_MAP: does <a> with implicit role 'a' count as tightened 'link'? Spec does not mandate; differential inflation 33-150% remains the dominant ordering driver irrespective of denominator.",
+    "Whether any denominator (elements_with_bbox or other) can be invariant to both page-type DOM variation and ROLE_MAP variant — current data shows no denominator resolves ROLE_MAP sensitivity.",
+    "Cross-site generalization of density metric beyond single Magento site (C-CROSSSITE).",
+    "LLM inheritance claim C-LLM-INHERIT not tested by this offline density computation.",
+    "Cart true within-type variance — requires multiple distinct cart pages, not duplicate measurement of same URL."
+  ]
+}

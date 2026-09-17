@@ -1,0 +1,20 @@
+{
+  "base_sha": "126d4a2ddbd3be82b34567cecaab49b26f0f1c21",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-15T18:59:18.970408+00:00",
+  "experiment_id": "EXP-GRAPH-35010853847",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can alternative staleness signals (session token validation, semantic embedding similarity, response-time profiling) distinguish true drift from structural noise with TP>=0.8 and FP<=0.15, replacing Jaccard-based freshness detection?",
+  "lane": "graph",
+  "origin_github_run_id": "35010853847",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-34788722106",
+    "path": "research/experiments/EXP-GRAPH-34788722106/handoff.json",
+    "sha256": "0f0c39d1ea141ec6e5c941aa98a7b7328ae4205830631584610ab66a8476abce"
+  },
+  "reason": "pulse",
+  "request_hash": "70bf5c2c65d22ba76d6ab466b60331814a56550678a48337161a139e594a2c0c",
+  "request_id": "dfad7c09a2c61d8f000ec1d9",
+  "schema_version": 1
+}

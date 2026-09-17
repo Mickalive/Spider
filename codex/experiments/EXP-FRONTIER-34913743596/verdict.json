@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34913743596",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV ≤0.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability ≤0.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status. This experiment provides one disambiguation: the binned TV per-type false-positive (4/8 null fail in parent EXP-FRONTIER-34881708619) is estimator-specific, not general to density-divergence estimation — KDE and kNN both achieve 8/8 null control at 250/type. However, per-type CV stability (≤0.5 at lambda=1) fails for both KDE (max 0.575 type 4) and kNN (max 0.755 type 0), triggering frozen FALSIFIED-IN-SETTING. The per-type stability limitation generalizes beyond binning to sample-size/heterogeneity at 250/type. All evidence remains synthetic 2D [0,1]^2; no inference to real Web dynamics justified. The exploratory kNN k=10 CV pass (max 0.470, 8/8) is hypothesis-generating only per prereg §14 and cannot support confirmatory claims."
+    }
+  ],
+  "product_action": "No product action. Per-type density-divergence at 250/type is not justified with current estimators (KDE Scott, kNN k=5) under frozen stability criterion. Pooled estimation remains required. The binned TV sparse-binning diagnosis is validated (null now passes with binning-free estimators), confirming the recommendation to not repeat binned TV. Exploratory kNN k=10 pass requires new preregistration before any product consideration.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does per-type CV stability (≤0.5 at lambda=1) achieve at larger per-type n (500-1000/type) with KDE Scott or kNN k=5, or does kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type) survive confirmatory preregistration — and does the per-type vs pooled ordering reversal (KDE/kNN per-type>pooled vs binned pooled>per-type) persist across DGP families with different noise structures?",
+  "reason": "The frozen decision_rule requires ALL conditions for BOTH measures. Null control passes (KDE 8/8, kNN 8/8) — a genuine improvement over binned TV (4/8 fail) confirming the sparse-binning artifact. But CV fails (KDE max 0.5745 type 4, kNN max 0.755 type 0) — both exceed the frozen 0.5 threshold. The binary pass/fail rule triggers FALSIFIED-IN-SETTING. Positive controls pass with large effects (KDE t=7.81, kNN t=6.82), replication passes, no pipeline errors → valid scientific negative on stability, not measurement invalidity. Audit PASS confirms all metrics. Claim ceiling bounded: null-control is estimator-specific (binned TV artifact), stability limitation generalizes beyond binning to sample-size/heterogeneity at 250/type. C-WEB-DYNAMICS remains HYPOTHESIS. Orthogonal next questions: (1) sample-size scaling (500-1000/type) for KDE (marginal fail at 0.575), (2) confirmatory kNN k=10 preregistration, (3) real Web DOM transition data.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-34913743596/spec.json:question, hypothesis, falsifier, decision_rule, positive_control, null_control",
+    "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_cv_per_type[4]=0.5745, metrics.knn_per_type.lambda1_cv_per_type[0]=0.7550, controls.kde_null_control.pass=true (8/8), controls.knn_null_control.pass=true (8/8), controls.kde_cv_check.pass=false, controls.knn_cv_check.pass=false, controls.positive_control.pass=true",
+    "research/experiments/EXP-FRONTIER-34913743596/audit.json:status PASS, producer_claim_supported true, claim_ceiling, recomputed_metrics.kde_cv_check.pass=false, recomputed_metrics.knn_cv_check.pass=false, validity_findings[0] code-result mismatch, validity_findings[1] CV threshold sensitivity",
+    "research/experiments/EXP-FRONTIER-34913743596/sensitivity_exploratory.json:sensitivities.knn_k10.cv_check.pass=true (max 0.470), EXPLORATORY per prereg §14",
+    "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:21-28 confirmatory execution",
+    "research/experiments/EXP-FRONTIER-34913743596/provenance.json:method, environment, execution_time_seconds",
+    "research/experiments/EXP-FRONTIER-34881708619/handoff.json:carry_forward, parent_experiment reference",
+    "research/experiments/EXP-FRONTIER-34881708619/result.json:controls.null_control_per_type (4/8 fail binned TV), controls.cv_check (max 1.59 binned TV)"
+  ]
+}

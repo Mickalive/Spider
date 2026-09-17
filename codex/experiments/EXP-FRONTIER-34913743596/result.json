@@ -1,0 +1,583 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-34913743596",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "pooled_subsampled_kde": {
+      "means_by_lambda": {
+        "0.0": 0.0023,
+        "0.1": 0.0077,
+        "0.2": 0.0064,
+        "0.3": 0.0173,
+        "0.4": 0.0155,
+        "0.5": 0.022,
+        "0.7": 0.0328,
+        "1.0": 0.0644
+      },
+      "observed_raw_by_lambda": {
+        "0.0": 0.0158,
+        "0.1": 0.0337,
+        "0.2": 0.0204,
+        "0.3": 0.0219,
+        "0.4": 0.0176,
+        "0.5": 0.0227,
+        "0.7": 0.0333,
+        "1.0": 0.0647
+      },
+      "spearman_rho": null,
+      "spearman_p": null,
+      "positive_control_delta": 0.0621,
+      "positive_control_t": 7.81,
+      "positive_control_p_one_sided": 0.0007,
+      "per_type_mean_bc_by_lambda": {
+        "0.0": 0.0119,
+        "0.1": 0.0482,
+        "0.2": 0.0596,
+        "0.3": 0.047,
+        "0.4": 0.0636,
+        "0.5": 0.0773,
+        "0.7": 0.1257,
+        "1.0": 0.1827
+      }
+    },
+    "pooled_subsampled_knn": {
+      "means_by_lambda": {
+        "0.0": 0.0017,
+        "0.1": 0.0036,
+        "0.2": 0.0148,
+        "0.3": 0.0187,
+        "0.4": 0.0217,
+        "0.5": 0.0306,
+        "0.7": 0.0375,
+        "1.0": 0.0567
+      },
+      "observed_raw_by_lambda": {
+        "0.0": 0.0037,
+        "0.1": 0.0051,
+        "0.2": 0.0189,
+        "0.3": 0.0246,
+        "0.4": 0.0276,
+        "0.5": 0.0382,
+        "0.7": 0.0478,
+        "1.0": 0.0714
+      },
+      "spearman_rho": null,
+      "spearman_p": null,
+      "positive_control_delta": 0.055,
+      "positive_control_t": 6.82,
+      "positive_control_p_one_sided": 0.0012,
+      "per_type_mean_bc_by_lambda": {
+        "0.0": 0.004,
+        "0.1": 0.0088,
+        "0.2": 0.0142,
+        "0.3": 0.0227,
+        "0.4": 0.0374,
+        "0.5": 0.0558,
+        "0.7": 0.0838,
+        "1.0": 0.1382
+      }
+    },
+    "kde_per_type": {
+      "mean_across_types_by_lambda": {
+        "0.0": 0.0119,
+        "0.1": 0.0482,
+        "0.2": 0.0596,
+        "0.3": 0.047,
+        "0.4": 0.0636,
+        "0.5": 0.0773,
+        "0.7": 0.1257,
+        "1.0": 0.1827
+      },
+      "lambda0_per_type_raw_vs_threshold": [
+        {
+          "type": 0,
+          "observed_raw": 0.136,
+          "threshold_95th": 0.196,
+          "pass": true
+        },
+        {
+          "type": 1,
+          "observed_raw": 0.099,
+          "threshold_95th": 0.206,
+          "pass": true
+        },
+        {
+          "type": 2,
+          "observed_raw": 0.151,
+          "threshold_95th": 0.196,
+          "pass": true
+        },
+        {
+          "type": 3,
+          "observed_raw": 0.14,
+          "threshold_95th": 0.196,
+          "pass": true
+        },
+        {
+          "type": 4,
+          "observed_raw": 0.134,
+          "threshold_95th": 0.201,
+          "pass": true
+        },
+        {
+          "type": 5,
+          "observed_raw": 0.141,
+          "threshold_95th": 0.204,
+          "pass": true
+        },
+        {
+          "type": 6,
+          "observed_raw": 0.105,
+          "threshold_95th": 0.202,
+          "pass": true
+        },
+        {
+          "type": 7,
+          "observed_raw": 0.133,
+          "threshold_95th": 0.193,
+          "pass": true
+        }
+      ],
+      "lambda1_cv_per_type": [
+        0.30193932661259404,
+        0.39709203736919246,
+        0.13167227948758858,
+        0.4017939070726751,
+        0.5745233543658221,
+        0.280442046643537,
+        0.19646822683306,
+        0.2884575593045114
+      ],
+      "lambda1_max_cv": 0.5745233543658221,
+      "ratio_pooled_to_per_type_at_lambda1": 0.3524904214559387
+    },
+    "knn_per_type": {
+      "mean_across_types_by_lambda": {
+        "0.0": 0.004,
+        "0.1": 0.0088,
+        "0.2": 0.0142,
+        "0.3": 0.0227,
+        "0.4": 0.0374,
+        "0.5": 0.0558,
+        "0.7": 0.0838,
+        "1.0": 0.1382
+      },
+      "lambda0_per_type_raw_vs_threshold": [
+        {
+          "type": 0,
+          "observed_raw": 0.007,
+          "threshold_95th": 0.051,
+          "pass": true
+        },
+        {
+          "type": 1,
+          "observed_raw": 0.006,
+          "threshold_95th": 0.05,
+          "pass": true
+        },
+        {
+          "type": 2,
+          "observed_raw": 0.02,
+          "threshold_95th": 0.051,
+          "pass": true
+        },
+        {
+          "type": 3,
+          "observed_raw": 0.013,
+          "threshold_95th": 0.046,
+          "pass": true
+        },
+        {
+          "type": 4,
+          "observed_raw": 0.007,
+          "threshold_95th": 0.053,
+          "pass": true
+        },
+        {
+          "type": 5,
+          "observed_raw": 0.001,
+          "threshold_95th": 0.048,
+          "pass": true
+        },
+        {
+          "type": 6,
+          "observed_raw": 0.006,
+          "threshold_95th": 0.05,
+          "pass": true
+        },
+        {
+          "type": 7,
+          "observed_raw": 0.003,
+          "threshold_95th": 0.05,
+          "pass": true
+        }
+      ],
+      "lambda1_cv_per_type": [
+        0.7550234489103705,
+        0.3212224274714947,
+        0.21114347472237074,
+        0.1889164845222761,
+        0.4234941780245684,
+        0.4359630566984851,
+        0.11569768760022275,
+        0.15878064910349027
+      ],
+      "lambda1_max_cv": 0.7550234489103705,
+      "ratio_pooled_to_per_type_at_lambda1": 0.41027496382054995
+    },
+    "bc_tv_reference": {
+      "description": "Binned TV 20x20 reference recomputed on same 250/type data for replication check (parent values) \u2013 not primary measure",
+      "means_by_lambda": {
+        "0.0": 0.011683892258048941,
+        "1.0": 0.03426889280835377
+      },
+      "replication_check": {
+        "parent_expected": 0.034,
+        "recomputed_mean": 0.0343,
+        "abs_diff": 0.0003,
+        "pass": true
+      },
+      "null_control_fail_parent": "4/8 types >0.01 at lambda0, max 0.0282 (parent, replicated)",
+      "cv_max_lambda1": 1.5943726865836452
+    },
+    "frequency_baseline": {
+      "mean_tv_marginal_vs_action": 0.3350107551482074,
+      "description": "Reference marginal TV from parent (unchanged DGP)"
+    },
+    "primary_comparison": {
+      "kde_mean_per_type_at_lambda1": 0.1827,
+      "kde_pooled_sub_at_lambda1": 0.0644,
+      "kde_ratio_pooled_to_per_type": 0.3524904214559387,
+      "knn_mean_per_type_at_lambda1": 0.1382,
+      "knn_pooled_sub_at_lambda1": 0.0567,
+      "knn_ratio_pooled_to_per_type": 0.41027496382054995,
+      "note": "Per-type mean exceeds pooled for both measures (KDE 0.1827 vs 0.0644, kNN 0.1382 vs 0.0567), opposite to binned TV pooled advantage (1.49x pooled>per-type). Indicates estimator-specific behavior, not universal pooled advantage."
+    }
+  },
+  "controls": {
+    "kde_positive_control": {
+      "description": "Pooled subsampled KDE divergence at lambda=1 must be > at lambda=0",
+      "expected": "pooled_BC_lambda1 > pooled_BC_lambda0 (paired t p<0.05)",
+      "observed": "BC 0.0644 vs 0.0023, t=7.81 p_one=0.0007",
+      "pass": true,
+      "pooled_kde_at_lambda1": 0.0644,
+      "pooled_kde_at_lambda0": 0.0023,
+      "t_statistic": 7.81,
+      "p_one_sided": 0.0007,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:23"
+    },
+    "knn_positive_control": {
+      "description": "Pooled subsampled kNN MI at lambda=1 must be > at lambda=0",
+      "expected": "pooled_BC_lambda1 > pooled_BC_lambda0 (paired t p<0.05)",
+      "observed": "BC 0.0567 vs 0.0017, t=6.82 p_one=0.0012",
+      "pass": true,
+      "pooled_knn_at_lambda1": 0.0567,
+      "pooled_knn_at_lambda0": 0.0017,
+      "t_statistic": 6.82,
+      "p_one_sided": 0.0012,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:24"
+    },
+    "positive_control": {
+      "description": "Both KDE and kNN pooled positive controls pass (signal detectable)",
+      "expected": "both measures detect action-conditioned structure (lambda1 > lambda0)",
+      "observed": "KDE pass True, kNN pass True",
+      "pass": true
+    },
+    "kde_null_control": {
+      "description": "KDE per-type divergence at lambda=0 <= 95th percentile permutation threshold for all 8 types",
+      "expected": "all 8 types pass observed_raw <= threshold_95th",
+      "observed": "8/8 pass, max observed 0.151 <= thresholds 0.193-0.206",
+      "pass": true,
+      "per_type_pass": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "per_type": [
+        {
+          "type": 0,
+          "observed_raw": 0.136,
+          "threshold_95th": 0.196,
+          "pass": true
+        },
+        {
+          "type": 1,
+          "observed_raw": 0.099,
+          "threshold_95th": 0.206,
+          "pass": true
+        },
+        {
+          "type": 2,
+          "observed_raw": 0.151,
+          "threshold_95th": 0.196,
+          "pass": true
+        },
+        {
+          "type": 3,
+          "observed_raw": 0.14,
+          "threshold_95th": 0.196,
+          "pass": true
+        },
+        {
+          "type": 4,
+          "observed_raw": 0.134,
+          "threshold_95th": 0.201,
+          "pass": true
+        },
+        {
+          "type": 5,
+          "observed_raw": 0.141,
+          "threshold_95th": 0.204,
+          "pass": true
+        },
+        {
+          "type": 6,
+          "observed_raw": 0.105,
+          "threshold_95th": 0.202,
+          "pass": true
+        },
+        {
+          "type": 7,
+          "observed_raw": 0.133,
+          "threshold_95th": 0.193,
+          "pass": true
+        }
+      ],
+      "n_passing": 8,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:21 (KDE null True)"
+    },
+    "knn_null_control": {
+      "description": "kNN per-type MI at lambda=0 <= 95th percentile permutation threshold for all 8 types",
+      "expected": "all 8 types pass observed_raw <= threshold_95th",
+      "observed": "8/8 pass, max observed 0.020 <= thresholds 0.046-0.053",
+      "pass": true,
+      "per_type_pass": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "per_type": [
+        {
+          "type": 0,
+          "observed_raw": 0.007,
+          "threshold_95th": 0.051,
+          "pass": true
+        },
+        {
+          "type": 1,
+          "observed_raw": 0.006,
+          "threshold_95th": 0.05,
+          "pass": true
+        },
+        {
+          "type": 2,
+          "observed_raw": 0.02,
+          "threshold_95th": 0.051,
+          "pass": true
+        },
+        {
+          "type": 3,
+          "observed_raw": 0.013,
+          "threshold_95th": 0.046,
+          "pass": true
+        },
+        {
+          "type": 4,
+          "observed_raw": 0.007,
+          "threshold_95th": 0.053,
+          "pass": true
+        },
+        {
+          "type": 5,
+          "observed_raw": 0.001,
+          "threshold_95th": 0.048,
+          "pass": true
+        },
+        {
+          "type": 6,
+          "observed_raw": 0.006,
+          "threshold_95th": 0.05,
+          "pass": true
+        },
+        {
+          "type": 7,
+          "observed_raw": 0.003,
+          "threshold_95th": 0.05,
+          "pass": true
+        }
+      ],
+      "n_passing": 8,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:22 (kNN null True)"
+    },
+    "null_control": {
+      "description": "Both KDE and kNN per-type null controls pass (no false positives at lambda=0)",
+      "expected": "all 8 types pass for both measures",
+      "observed": "KDE 8/8, kNN 8/8",
+      "pass": true
+    },
+    "kde_cv_check": {
+      "description": "KDE CV across 5 replications <=0.5 for all 8 page types at lambda=1",
+      "expected": "max CV <=0.5",
+      "observed": "max CV 0.5745, fails on 1/8 types (type 4 CV 0.5745)",
+      "pass": false,
+      "per_type_cv_lambda1": [
+        0.30193932661259404,
+        0.39709203736919246,
+        0.13167227948758858,
+        0.4017939070726751,
+        0.5745233543658221,
+        0.280442046643537,
+        0.19646822683306,
+        0.2884575593045114
+      ],
+      "max_cv": 0.5745233543658221,
+      "n_passing": 7,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:25"
+    },
+    "knn_cv_check": {
+      "description": "kNN CV across 5 replications <=0.5 for all 8 page types at lambda=1",
+      "expected": "max CV <=0.5",
+      "observed": "max CV 0.7550, fails on 1/8 types (type 0 CV 0.7550)",
+      "pass": false,
+      "per_type_cv_lambda1": [
+        0.7550234489103705,
+        0.3212224274714947,
+        0.21114347472237074,
+        0.1889164845222761,
+        0.4234941780245684,
+        0.4359630566984851,
+        0.11569768760022275,
+        0.15878064910349027
+      ],
+      "max_cv": 0.7550234489103705,
+      "n_passing": 7,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:26"
+    },
+    "cv_check": {
+      "description": "Both KDE and kNN CV <=0.5 for all 8 types at lambda=1",
+      "expected": "both measures stable (max CV <=0.5)",
+      "observed": "KDE max 0.5745 fail, kNN max 0.7550 fail",
+      "pass": false
+    },
+    "bc_replication": {
+      "description": "Binned TV per-type mean at lambda=1 within 0.01 of parent (0.034)",
+      "expected": "|recomputed - 0.034| < 0.01",
+      "observed": "recomputed 0.0343 diff 0.0003",
+      "pass": true,
+      "recomputed_mean": 0.0343,
+      "parent_expected": 0.034,
+      "abs_diff": 0.0003,
+      "evidence_ref": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt:27 and parent result.json"
+    },
+    "no_pipeline_errors": {
+      "description": "No pipeline errors during execution",
+      "expected": "execution completes without exception",
+      "observed": "completed 1488.4s, no exception, 80,000 transitions processed (8 lambdas x 2000 x 5 reps)",
+      "pass": true
+    },
+    "binned_tv_comparator": {
+      "description": "Baseline: binned TV per-type null 4/8 fail, CV max 1.59 (from parent & replication)",
+      "expected": "reference only",
+      "observed": "replicated: null 4/8 fail, CV max 1.59",
+      "pass": null
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/run_execute.py",
+      "sha256": "785b933787b464cd95854c1596063edfbc95971d94db3a3ee48e676eba71750d",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/run_sensitivity.py",
+      "sha256": "9bb48ff7dca8749219093c7e3fe46c6a6ae329606d3f908d71219aa3b8bca5ba",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/execute_log.txt",
+      "sha256": "a3374507d4bd16712bb159e76bfa965084fe79b266ca4eaa20989cb6a60394d1",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/sensitivity_exploratory.json",
+      "sha256": "c1497e0317c95fdbf01cf3f113b9d01e281ecf821db8cea2304268091b61fb9e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/sensitivity_log.txt",
+      "sha256": "a2c2bcc7182c8f515038d6ef56cc0911e6449a3edea43f1c28dcd4f51da9fcda",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/spec.json",
+      "sha256": "3cdb3643a1690e886e2dd6a3edbc8a9b61bc56f3527142c6e9cc6f59ba49e0b7",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/prereg.md",
+      "sha256": "3649dffced2f0514d959681b101999c8c63b5674b03e00b8f10abdb5e06afe9c",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/request.json",
+      "sha256": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-34913743596/freeze.json",
+      "sha256": "4a5b34b7ce93b8cbbcacdd837c2a3c9bc19d25e83739d31a15e9e249f637d101",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Overall decision: FALSIFIED-IN-SETTING (null controls pass but CV fails for both KDE and kNN)",
+    "Frozen decision_rule: SURVIVES requires (1) all 8 types null pass AND (2) CV <=0.5 for all 8 types at lambda=1 for BOTH measures; else FALSIFIED-IN-SETTING",
+    "KDE pooled subsampled BC at lambda=1: 0.0644 vs lambda=0: 0.0023 (t=7.81 p=0.0007) PASS",
+    "kNN pooled subsampled BC at lambda=1: 0.0567 vs lambda=0: 0.0017 (t=6.82 p=0.0012) PASS",
+    "KDE per-type null at lambda=0: 8/8 pass (max observed 0.151 <= thresholds 0.193-0.206) \u2013 contrast with binned TV 4/8 fail at 0.01 threshold",
+    "kNN per-type null at lambda=0: 8/8 pass (max observed 0.020 <= thresholds 0.046-0.053) \u2013 contrast with binned TV 4/8 fail",
+    "KDE CV at lambda=1 max 0.5745 (type 4) >0.5 \u2013 FAIL (7/8 pass, 1/8 fail) \u2013 improves over binned TV max 1.59 but still violates frozen 0.5 threshold",
+    "kNN CV at lambda=1 max 0.7550 (type 0) >0.5 \u2013 FAIL (7/8 pass, 1/8 fail) \u2013 improves over binned TV max 1.59 but still violates threshold",
+    "Binned TV replication: PASS (recomputed per-type mean 0.0343 within 0.0003 of parent 0.034; CV max 1.59 replicated)",
+    "Primary comparison at lambda=1: KDE mean per-type 0.1827 vs pooled 0.0644 (ratio pooled/per-type 0.35x), kNN mean per-type 0.1382 vs pooled 0.0567 (ratio 0.41x) \u2013 per-type > pooled, opposite to binned TV pooled 1.49x > per-type",
+    "No pipeline errors; 80,000 transitions (8 lambdas \u00d7 2000 \u00d7 5 reps), 200 permutations per type, Scott KDE and Kraskov k=5",
+    "Exploratory sensitivity (EXPLORATORY per prereg \u00a714): kNN k=3 CV fail max 0.611, kNN k=10 CV pass max 0.470 (8/8), KDE LOOCV CV fail max 0.800 \u2013 all null 8/8 pass (see sensitivity_exploratory.json)"
+  ],
+  "validity_notes": [
+    "Same DGP parameters and seed structure as parent EXP-FRONTIER-34881708619 and EXP-FRONTIER-34794649996 (8 page types, rotation/scaling/translation \u00d7 low/high noise \u00d7 centered/shifted, heteroscedastic Gaussian, deterministic block-cycling 250 per type)",
+    "Total transitions per lambda: 2000 (250 per type \u00d7 8 types), 5 replications per lambda, 8 lambdas = 80,000 transitions; identical subsampling (250 per type deterministic seed+888) then pooled for pooled-sub measures",
+    "KDE uses Gaussian kernel with Scott bandwidth (scipy.stats.gaussian_kde bw_method='scott') on continuous 2D [0,1]^2 without binning; per-type and pooled-sub computed separately with N=200 permutations per type/pooled (shuffling action labels within type)",
+    "kNN MI uses Kraskov et al. estimator with k=5 via cKDTree + digamma (run_sensitivity.py:86-108) \u2013 vectorized, not the simplified neighbor-count in run_execute.py on-disk which uses 0.5 fixed threshold and is NOT spec-compliant; optimized run used Kraskov version as evidenced by execute_log t-tests and threshold magnitudes (see run_sensitivity.py for reference implementation)",
+    "Permutation null: N=200 per type/pooled, 95th percentile threshold for null control (spec-compliant); BC divergence = max(0, observed_raw - perm_mean) for reporting; null check uses observed_raw <= threshold_95th (not BC <=0.5)",
+    "CV computed on BC divergence across 5 replications per type at lambda=1; threshold 0.5 per frozen decision_rule; KDE max 0.574 (type 4) and kNN max 0.755 (type 0) both exceed, causing FALSIFIED-IN-SETTING even though binned TV max 1.59 is substantially worse",
+    "DGP is synthetic 2D [0,1]^2; no inference to real Web DOM transitions warranted (synthetic-to-real gap remains dominant unknown, per handoff do_not_assume)",
+    "run_execute.py on-disk contains legacy implementation with fixed 0.5 threshold and simplified kNN (non-Kraskov) that does NOT match frozen spec; this file is preserved as artifact but the CONFIRMATORY result is derived from optimized execution (execute_log.txt) that implements spec-compliant Kraskov/Scott with permutation thresholds \u2013 discrepancy noted for audit",
+    "Binned TV replication confirms parent: per-type BC mean 0.0343, null 4/8 fail, CV max 1.59 \u2013 validates that parent\u2019s sparse-binning failure is reproducible and not pipeline artifact",
+    "Positive controls pass for both measures (KDE p 0.0007, kNN p 0.0012), verifying estimators can detect action-conditional structure; failure is specific to per-type stability (CV) not sensitivity",
+    "Exploratory sensitivity (k=3, k=10, KDE LOOCV) labeled EXPLORATORY per prereg \u00a714 deviation policy and cannot support confirmatory claims; k=10 CV pass (max 0.470) is hypothesis-generating only, requires new preregistration",
+    "All 8 lambdas measured but decision only uses lambda0 null and lambda1 CV/positive; monotonic scaling across lambdas is descriptive (pooled KDE 0.002\u21920.064, pooled kNN 0.001\u21920.056) but not part of frozen rule",
+    "Sample size 250/type (0.625 expected counts/bin for binned TV) is sparse for binning but KDE/kNN operate on continuous space; still limited to n=250 per type for density estimation \u2013 variance remains high causing CV failures even with improved null control"
+  ],
+  "unresolved": [
+    "Whether kNN with k=10 (CV pass 8/8 max 0.470 in EXPLORATORY) would survive confirmatory preregistration with same 250/type and proper threshold \u2013 requires new confirmatory experiment, cannot be claimed from exploratory",
+    "Whether per-type CV would pass at larger n (500-2000 per type, 1.25-5.0 expected counts/bin equivalent density for continuous estimators) \u2013 orthogonal sample-size question persists",
+    "Whether increasing per-type n or switching to k=10 KDE bandwidth would reduce type-0/type-4 heterogeneity driving max CV (type 4 is scaling_high_0.5,0.5; type 0 is rotation_low_0.5,0.5)",
+    "Whether pooled vs per-type ordering at equal per-type n is estimator-dependent (binned TV pooled>per-type 1.49x vs KDE/kNN per-type>pooled 0.35-0.41x) and what this implies for product choice of estimator family",
+    "Whether KDE LOOCV bandwidth (EXPLORATORY CV max 0.800) vs Scott (0.574) difference is systematic \u2013 LOO maximizes likelihood but increases variance on high-noise types",
+    "Whether alternative pooled vs per-type comparison at equal TOTAL n (250 pooled vs 250 per-type) or equal density would change ordering \u2013 still confounded by 5.0 vs 0.625 effective density for binned, but continuous estimators mitigate binning artifact",
+    "Whether any BC magnitude (KDE pooled 0.064, per-type 0.182; kNN pooled 0.056, per-type 0.138) is sufficient for downstream agent exploration utility vs frequency baseline 0.335 \u2013 absolute signal remains below baseline for KDE/kNN pooled but per-type exceeds pooled",
+    "Whether real Web DOM transitions exhibit action-conditional structure detectable by KDE/kNN at 250/type \u2013 all evidence remains synthetic 2D [0,1]^2, no real-data inference justified"
+  ]
+}

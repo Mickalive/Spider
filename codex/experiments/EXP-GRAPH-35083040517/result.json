@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "overall_tp_rate": 0.0,
+    "overall_fp_rate": 0.1875,
+    "tp_detections": 0,
+    "tp_total": 12,
+    "fp_detections": 3,
+    "fp_total": 16,
+    "tp_ci_95": [0.0, 0.2425],
+    "fp_ci_95": [0.0659, 0.4301],
+    "calibration_r_squared": 0.9999,
+    "per_pattern_tp": {
+      "add_field": {"tp_rate": 0.0, "n_detected": 0, "n_total": 4, "detected_at_sizes": [], "missed_at_sizes": [10, 20, 30, 50]},
+      "remove_field": {"tp_rate": 0.0, "n_detected": 0, "n_total": 4, "detected_at_sizes": [], "missed_at_sizes": [10, 20, 30, 50]},
+      "change_type": {"tp_rate": 0.0, "n_detected": 0, "n_total": 4, "detected_at_sizes": [], "missed_at_sizes": [10, 20, 30, 50]}
+    },
+    "per_pattern_fp": {
+      "optional_field_churn": {"fp_rate": 0.0, "n_detected": 0, "n_total": 4, "false_alarm_at_sizes": [], "correct_reject_at_sizes": [10, 20, 30, 50]},
+      "null_valued_fields": {"fp_rate": 0.0, "n_detected": 0, "n_total": 4, "false_alarm_at_sizes": [], "correct_reject_at_sizes": [10, 20, 30, 50]},
+      "nested_object_variation": {"fp_rate": 0.75, "n_detected": 3, "n_total": 4, "false_alarm_at_sizes": [10, 20, 50], "correct_reject_at_sizes": [30]},
+      "fresh_copy": {"fp_rate": 0.0, "n_detected": 0, "n_total": 4, "false_alarm_at_sizes": [], "correct_reject_at_sizes": [10, 20, 30, 50]}
+    },
+    "per_schema_size": {
+      "10": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 1,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.3333,
+        "mean_ks_d_noise": 0.2778,
+        "mean_cohens_d_drift": -0.0264,
+        "mean_cohens_d_noise": 0.4124,
+        "mann_whitney_p_one_sided": 0.35,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.333333, "ks_p": 0.07088799, "detected": false, "cohens_d": 0.3487, "mean_diff_ms": 4.885},
+          "remove_field": {"ks_d": 0.366667, "ks_p": 0.03458008, "detected": false, "cohens_d": -0.7302, "mean_diff_ms": -10.388},
+          "change_type": {"ks_d": 0.3, "ks_p": 0.1350035, "detected": false, "cohens_d": 0.3023, "mean_diff_ms": 3.88},
+          "optional_field_churn": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": 0.0544, "mean_diff_ms": 0.636},
+          "null_valued_fields": {"ks_d": 0.1, "ks_p": 0.99883938, "detected": false, "cohens_d": 0.0446, "mean_diff_ms": 0.669},
+          "nested_object_variation": {"ks_d": 0.5, "ks_p": 0.00089958, "detected": true, "cohens_d": 1.1382, "mean_diff_ms": 14.729},
+          "fresh_copy": {"ks_d": 0.266667, "ks_p": 0.239073, "detected": false, "cohens_d": 0.4677, "mean_diff_ms": 6.952}
+        }
+      },
+      "20": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 1,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.2889,
+        "mean_ks_d_noise": 0.3444,
+        "mean_cohens_d_drift": -0.3354,
+        "mean_cohens_d_noise": 0.6497,
+        "mann_whitney_p_one_sided": 0.65,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.266667, "ks_p": 0.239073, "detected": false, "cohens_d": 0.2757, "mean_diff_ms": 3.999},
+          "remove_field": {"ks_d": 0.366667, "ks_p": 0.03458008, "detected": false, "cohens_d": -0.944, "mean_diff_ms": -13.047},
+          "change_type": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": -0.3378, "mean_diff_ms": -5.157},
+          "optional_field_churn": {"ks_d": 0.166667, "ks_p": 0.80796315, "detected": false, "cohens_d": -0.0458, "mean_diff_ms": -0.686},
+          "null_valued_fields": {"ks_d": 0.333333, "ks_p": 0.07088799, "detected": false, "cohens_d": 0.5219, "mean_diff_ms": 7.567},
+          "nested_object_variation": {"ks_d": 0.533333, "ks_p": 0.00029334, "detected": true, "cohens_d": 1.473, "mean_diff_ms": 23.29},
+          "fresh_copy": {"ks_d": 0.166667, "ks_p": 0.80796315, "detected": false, "cohens_d": -0.0792, "mean_diff_ms": -1.277}
+        }
+      },
+      "30": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 0,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.3222,
+        "mean_ks_d_noise": 0.2778,
+        "mean_cohens_d_drift": 0.0256,
+        "mean_cohens_d_noise": 0.4787,
+        "mann_whitney_p_one_sided": 0.328953,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.4, "ks_p": 0.01564339, "detected": false, "cohens_d": 0.8355, "mean_diff_ms": 13.438},
+          "remove_field": {"ks_d": 0.333333, "ks_p": 0.07088799, "detected": false, "cohens_d": -0.5967, "mean_diff_ms": -10.473},
+          "change_type": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": -0.162, "mean_diff_ms": -2.377},
+          "optional_field_churn": {"ks_d": 0.2, "ks_p": 0.59407063, "detected": false, "cohens_d": 0.1692, "mean_diff_ms": 2.612},
+          "null_valued_fields": {"ks_d": 0.2, "ks_p": 0.59407063, "detected": false, "cohens_d": 0.2698, "mean_diff_ms": 4.262},
+          "nested_object_variation": {"ks_d": 0.433333, "ks_p": 0.0065484, "detected": false, "cohens_d": 0.9972, "mean_diff_ms": 14.226},
+          "fresh_copy": {"ks_d": 0.133333, "ks_p": 0.95784629, "detected": false, "cohens_d": 0.0009, "mean_diff_ms": 0.013}
+        }
+      },
+      "50": {
+        "n_conditions": 7,
+        "drift_patterns_detected": 0,
+        "drift_patterns_total": 3,
+        "noise_patterns_detected": 1,
+        "noise_patterns_total": 3,
+        "mean_ks_d_drift": 0.2222,
+        "mean_ks_d_noise": 0.3667,
+        "mean_cohens_d_drift": 0.2422,
+        "mean_cohens_d_noise": 0.7706,
+        "mann_whitney_p_one_sided": 0.9,
+        "per_pattern": {
+          "add_field": {"ks_d": 0.3, "ks_p": 0.1350035, "detected": false, "cohens_d": 0.5964, "mean_diff_ms": 9.124},
+          "remove_field": {"ks_d": 0.133333, "ks_p": 0.95784629, "detected": false, "cohens_d": -0.1693, "mean_diff_ms": -2.174},
+          "change_type": {"ks_d": 0.233333, "ks_p": 0.39294501, "detected": false, "cohens_d": 0.2996, "mean_diff_ms": 5.343},
+          "optional_field_churn": {"ks_d": 0.4, "ks_p": 0.01564339, "detected": false, "cohens_d": 0.9311, "mean_diff_ms": 13.656},
+          "null_valued_fields": {"ks_d": 0.166667, "ks_p": 0.80796315, "detected": false, "cohens_d": -0.0858, "mean_diff_ms": -1.411},
+          "nested_object_variation": {"ks_d": 0.533333, "ks_p": 0.00029334, "detected": true, "cohens_d": 1.4665, "mean_diff_ms": 21.847},
+          "fresh_copy": {"ks_d": 0.2, "ks_p": 0.59407063, "detected": false, "cohens_d": 0.3073, "mean_diff_ms": 4.859}
+        }
+      }
+    },
+    "controls": {
+      "positive_control_add_field": {
+        "description": "add_field at n>=30: KS D > 0.1, p < 0.05",
+        "conditions_tested": 2,
+        "detected": 0,
+        "mean_ks_d": 0.35,
+        "all_detected": false,
+        "result": "FAIL"
+      },
+      "null_control_fresh_copy": {
+        "description": "fresh_copy: KS test should not detect shift (FP <= 0.15)",
+        "conditions_tested": 4,
+        "false_alarms": 0,
+        "fp_rate": 0.0,
+        "result": "PASS"
+      },
+      "separation_control_mann_whitney": {
+        "description": "Mann-Whitney one-sided: drift > noise KS D values, p < 0.05",
+        "sizes_tested": 4,
+        "sizes_passing": 0,
+        "p_values": {"10": 0.35, "20": 0.65, "30": 0.328953, "50": 0.9},
+        "result": "FAIL"
+      },
+      "calibration_control_field_count": {
+        "description": "Response time proportional to field count (R² > 0.7)",
+        "size_means_ms": {"10": 104.505, "20": 196.901, "30": 284.122, "50": 462.876},
+        "r_squared": 0.9999,
+        "result": "PASS"
+      }
+    },
+    "decision": "FALSIFIED-IN-SETTING",
+    "decision_reason": "positive_control=FAIL; drift_patterns_passing_0.8=0/3 (need >=2); separation=FAIL",
+    "decision_conditions": {
+      "1_positive_control": false,
+      "2_null_control": true,
+      "3_drift_patterns": false,
+      "4_separation": false,
+      "5_noise_fp": true
+    }
+  },
+  "controls": {
+    "positive_control_add_field": {
+      "expected": "add_field at n>=30 produces detectable response-time shift (KS D > 0.1, p < 0.05 after Bonferroni correction)",
+      "observed": "Not detected at any size. KS D ranges 0.27-0.40, p ranges 0.016-0.239. Even at n=30 (KS D=0.40, p=0.016), fails Bonferroni-corrected alpha=0.00208.",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.positive_control_add_field"
+    },
+    "null_control_fresh_copy": {
+      "expected": "fresh_copy (same schema, no modification) produces no detectable shift (FP <= 0.15)",
+      "observed": "0 false alarms across 4 sizes. KS p-values all > 0.05. FP rate = 0.0.",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.null_control_fresh_copy"
+    },
+    "separation_control_mann_whitney": {
+      "expected": "Mann-Whitney one-sided test confirms drift KS D > noise KS D (p < 0.05)",
+      "observed": "Failed at all 4 sizes. p-values: 0.35, 0.65, 0.33, 0.90. In fact, noise patterns often produce LARGER KS D values than drift patterns (inverted direction at sizes 20 and 50).",
+      "pass_fail": "FAIL",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.separation_control_mann_whitney"
+    },
+    "calibration_control_field_count": {
+      "expected": "Response time proportional to field count (R² > 0.7)",
+      "observed": "R² = 0.9999. Fresh-copy mean response times: 104.5ms (10 fields), 196.9ms (20), 284.1ms (30), 462.9ms (50). Near-perfect linear scaling.",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/response_time_derived_measurements.json controls.calibration_control_field_count"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_raw_measurements.json", "sha256": null, "role": "raw"},
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_derived_measurements.json", "sha256": null, "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json", "sha256": null, "role": "derived"},
+    {"path": "research/experiments/EXP-GRAPH-35083040517/raw_evidence/server_log.json", "sha256": null, "role": "raw"},
+    {"path": "research/graph/freshness_detection/execute_response_time.py", "sha256": null, "role": "code"}
+  ],
+  "observations": [
+    "The mock server produces computation-dependent response times that scale linearly with field count (R² = 0.9999). The calibration control passes strongly, confirming the server is NOT returning in constant time.",
+    "Response-time differences between before and after drift are small relative to jitter. Mean differences range from -13ms to +23ms across all conditions, while jitter is uniform 0-50ms. The signal-to-noise ratio is insufficient for KS test detection at n=30 per condition.",
+    "nested_object_variation is the only pattern detected by KS test (at sizes 10, 20, 50), but it is STRUCTURAL NOISE, not true drift. This produces a 75% false alarm rate for this pattern, worse than random.",
+    "The separation direction is INVERTED at sizes 20 and 50: structural noise patterns produce LARGER KS D values (mean 0.34, 0.37) than true drift patterns (mean 0.29, 0.22). This is the same inverted-direction failure mode observed in the Jaccard and TF-IDF experiments.",
+    "remove_field produces NEGATIVE mean differences at all sizes (-2ms to -13ms), meaning response time DECREASES after removing a field. This is directionally correct but the magnitude is too small to detect.",
+    "add_field produces positive mean differences (+4ms to +13ms) but these are not statistically significant after Bonferroni correction. The effect is real but small relative to jitter.",
+    "change_type produces inconsistent direction: positive at sizes 10 and 50, negative at sizes 20 and 30. The type change does not produce a reliable response-time signature.",
+    "The Bonferroni-corrected alpha (0.00208) is very conservative. Even the largest KS D values (0.40-0.53 for nested_object_variation) only approach this threshold. The KS test with n=30 per group has insufficient power to detect the small response-time differences produced by true drift."
+  ],
+  "validity_notes": [
+    "The mock server uses controlled computation (2000 iterations of json.dumps + sha256 per field) to produce field-count-proportional timing. This is a VALIDATED computation-dependent server (R² = 0.9999). The failure is NOT due to constant-time server responses.",
+    "Jitter is uniform 0-50ms per request. At n=50 fields, the serialization difference between add_field (51 fields) and base (50 fields) is approximately 1 field × 2000 iterations × ~0.001ms/iteration ≈ 2ms, which is much smaller than the 50ms jitter range. The signal-to-noise ratio is fundamentally limited by the jitter magnitude.",
+    "Client-side measurement includes HTTP round-trip overhead. On localhost this is minimal but adds ~1-2ms baseline noise. This does not materially affect the result since the jitter dominates.",
+    "The KS test with n=30 per group has ~80% power to detect D=0.4 (medium effect). The observed KS D values for true drift range 0.13-0.40, with most below 0.35. The test is underpowered for the actual effect sizes.",
+    "The experiment uses a single mock server implementation. Real APIs may have different timing characteristics (caching, database lookups, CDN effects). However, the controlled validation shows the method fails even under favorable conditions.",
+    "nested_object_variation adds 2 fields (nested object + inner field), effectively increasing field count by 2. This produces a detectable timing shift similar to add_field but is classified as structural noise. The pattern classification may need refinement for real-world API drift detection."
+  ],
+  "unresolved": [
+    "Whether a larger sample size (n>=100 per condition) would provide sufficient power to detect the small response-time differences for true drift patterns. The current n=30 is underpowered.",
+    "Whether reducing jitter range (e.g., 0-10ms instead of 0-50ms) would improve signal detection. The jitter dominates the signal, so tighter jitter control might help.",
+    "Whether per-request timing variance (rather than distribution-level KS test) provides a better discrimination signal. The KS test compares entire distributions; a sequential or adaptive test might be more sensitive.",
+    "Whether response-time profiling on REAL APIs (with database, caching, and network effects) produces larger timing differences than the controlled mock server. The mock server's computation is purely CPU-bound; real APIs may have larger variance from external dependencies.",
+    "Whether the inverted separation direction (noise more detectable than drift) is an artifact of the mock server design or a fundamental property of response-time signals. The nested_object_variation pattern adds fields, making it structurally similar to add_field.",
+    "Whether combining response-time signals with structural signals (Jaccard, TF-IDF) in a multi-signal ensemble improves discrimination. Both individual signal families have failed, but ensemble complementarity is untested."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35137033384",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — all 4 frozen decision-rule conditions pass. Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy simulating 6 categories (brotli quality variation, chunked transfer-encoding, CDN headers, Accept-Encoding negotiation, response caching, Content-Length variation). Algorithm-equivalence with gzip holds (|diff| = 0.0 < 0.1). Compressed-byte-only hashing degrades to 0.2789 on /userinfo (< 0.35), confirming H3. Claim ceiling advances from 'synthetic proxy only' to 'synthetic proxy + CDN simulator with realistic non-determinism'. Audit PASS confirms all recomputed metrics match producer (max_abs_diff 0.0). Bounded to: localhost synthetic proxy, 1KB compressible JSON, effective brotli diversity 2 variants (q4 distinct vs q5-8 identical), mock OAuth2 4 states with 3-way error collapse (ceiling 0.5 on /userinfo), seed 44, N=20 per state, chunked decoded by HTTP client before decompression. Do NOT promote to Product Core — real-CDN infrastructure validation remains the critical untested blocker.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization survives CDN-noise proxy simulation: all 4 frozen decision-rule conditions pass (positive control decompressed variation 0/20 all 8 cells, null B-RANDOM 0.0, H1 decompressed 0.5 >= 0.5, H2 diff 0.0 < 0.1). H3 confirmed: compressed-byte-only 0.2789 < 0.35 under CDN noise. Claim ceiling advances from parent (EXP-RUNTIME-35130682006) synthetic brotli quality to synthetic CDN simulator with 6 noise categories. Audit PASS recomputes all metrics exactly. However: (1) localhost synthetic proxy, not real CDN; (2) effective brotli diversity 2 variants not 5 for 1KB JSON; (3) /userinfo discrimination capped at 0.5 by 3-way error collapse; (4) single payload distribution (1KB compressible JSON, single seed 44); (5) chunked framing decoded by HTTP client before decompression pipeline sees it; (6) cache counter bug prevents quantitative hit-rate verification (qualitative cache noise verified via headers). C-MEAS-VALID remains EXPERIMENTAL — real-CDN infrastructure (Cloudflare/Fastly/Akamai) validation is the critical untested blocker before any Product Core promotion."
+    }
+  ],
+  "product_action": "No product action. Decompression-normalization is validated at the CDN-simulator level but not yet at real-CDN infrastructure. Real-CDN deployment requires a separate validation experiment (Cloudflare Workers or equivalent). Compressed-byte-only hashing is rejected as insufficient for fingerprinting under CDN conditions.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism not present in this synthetic proxy? This remains the critical blocker for C-MEAS-VALID product readiness.",
+  "reason": "All 4 frozen decision-rule conditions pass with audit PASS (max_abs_diff 0.0). The CDN-noise proxy successfully introduces wire-byte non-determinism (compressed hash variation 2-4 uniques per state, all 3 encodings observed, CDN headers HIT/MISS, chunked ~30%) while decompression-normalization produces invariant decompressed hashes (1/20 unique, all_same true for all 8 cells). Algorithm-equivalence |gzip(0.5) - brotli-CDN(0.5)| = 0.0 confirms that CDN noise affects compressed wire bytes but not decompressed logical bodies. H3 confirmed: compressed-byte-only hashing degrades to 0.2789 under richer noise (vs parent 0.4329 with brotli quality only). The claim ceiling is bounded by: localhost, synthetic proxy fidelity, 1KB JSON, effective 2-variant brotli, 3-way error collapse, and the fundamental gap between simulated and real CDN infrastructure. Parent required_fixes (hash seed determinism via hashlib.sha256) are resolved. New findings: Accept-Encoding override introduces gzip/identity paths that decompression handles correctly; chunked framing is transparent to the pipeline after HTTP client decoding. Next gate requires real-CDN validation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35137033384/spec.json",
+    "research/experiments/EXP-RUNTIME-35137033384/freeze.json",
+    "research/experiments/EXP-RUNTIME-35137033384/result.json",
+    "research/experiments/EXP-RUNTIME-35137033384/audit.json",
+    "research/experiments/EXP-RUNTIME-35137033384/raw_observations.json",
+    "research/experiments/EXP-RUNTIME-35137033384/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35137033384/provenance.json",
+    "research/experiments/EXP-RUNTIME-35137033384/report.md",
+    "research/experiments/EXP-RUNTIME-35130682006/handoff.json",
+    "codex/claim_state.json"
+  ]
+}

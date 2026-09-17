@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35154724244",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Do session-level behavioral signals (token validation failure detection, cookie state inspection, authentication boundary probing) provide drift-vs-noise discrimination on a fundamentally different dimension from all six tested structural/schema-based signal families, thereby evading the magnitude confound?",
+  "why_next": "Six orthogonal structural/schema-based signal families have now been tested and all fail the C-FRESHNESS frozen decision gate in the same deterministic mock setting: (1) Jaccard structural similarity FP=1.0 under structural noise; (2) TF-IDF semantic similarity FP=1.0 inverted; (3) response-time KS test TP=0.0 inverted; (4) linear Fisher LDA ensemble AUC=0.625 all conditions fail; (5) field-usage profiling change_type invisible; (6) direct schema comparison C2 fails due to unbounded optional field addition scaling (diff 1.0-5.0 at threshold 0.5). The common root cause is the magnitude confound where structural noise patterns produce larger divergence than drift patterns. All six signals operate on structural/schema-level information. Session-level behavioral signals (token validation, cookie state, auth boundary) test a fundamentally different dimension: whether the server's authentication/session state has changed. This dimension is orthogonal to schema structure and may evade the magnitude confound because auth/session state changes are not plausibly produced by optional field additions or description changes. The parent handoff (EXP-GRAPH-35137034388) identified session-level signals as the highest-upside untested alternative.",
+  "carry_forward": {
+    "established": [
+      "Six structural/schema-based signal families tested and all falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard (EXP-GRAPH-34788722106), TF-IDF (EXP-GRAPH-35010853847), response-time KS (EXP-GRAPH-35083040517), linear Fisher LDA ensemble (EXP-GRAPH-35130682058), field-usage profiling (EXP-GRAPH-35137034388), direct schema comparison (EXP-GRAPH-35154724244).",
+      "Schema diff is orthogonal to Jaccard structural similarity: Pearson r=-0.590 across 40 conditions (audit.json recomputed_metrics.c3_orthogonality_pearson_r match producer). Schema diff captures required_to_optional drift (diff=0.3, Jaccard=1.0) which Jaccard cannot detect — this is a genuine complementary signal.",
+      "The magnitude confound is structural, not weight-dependent: optional_field_addition noise at 10% of schema size scales diff magnitude linearly with schema size (1.0-5.0), dominating subtle drift (required_to_optional 0.3) at all sizes. This holds for schema diff weights 1.0/0.5/0.3/0.2 and would persist under alternative weightings (audit V_C2_SCALING_CONFOUND_BY_CONSTRUCTION).",
+      "C4 type-aware validation failure (4.7% vs required 80%) is measurement-invalid, not evidence against type-aware detection: mock server always returns data conforming to stale schema, making type mismatch impossible to detect (audit V_C4_CONFORMANT_MOCK_TAUTOLOGY). This is a mock design limitation, not a scientific finding.",
+      "Field-usage profiling provides orthogonal discrimination for field-availability drift (remove_field mean 0.865 <0.90, required_to_optional mean 0.639 <0.90) with Pearson r=-0.045 to Jaccard (EXP-GRAPH-35137034388 audit claim_ceiling), but fails on change_type (usage_similarity=1.0).",
+      "Noise immunity for unused fields across all experiments is a construction artefact (audit V_NOISE_TAUTOLOGICAL from EXP-GRAPH-35137034388): noise generators add fields no client requests, producing artificially favorable discrimination. Real-world noise affecting used fields would degrade all tested signals."
+    ],
+    "rejected": [
+      "Direct schema comparison as standalone drift-vs-noise discriminator — FALSIFIED under frozen decision rule (C2 fails, C4 measurement-invalid)",
+      "Any single structural/schema-based signal family providing complete C-FRESHNESS discrimination — six families tested, all fail frozen gate",
+      "Unbounded optional field addition noise (10% of schema size) is tolerable by schema diff or Jaccard — both fail at all schema sizes",
+      "Linear Fisher LDA ensemble of structural signals rescues individual signal failures — AUC=0.625, all conditions fail (EXP-GRAPH-35130682058)"
+    ],
+    "unknown": [
+      "Whether session-level behavioral signals (token validation, cookie state, auth boundary) provide drift-vs-noise discrimination on a fundamentally different dimension",
+      "Whether bounded optional field addition (max 1-2 fields, not 10% of schema) allows schema diff C2 to pass while detecting subtle drift 0.3",
+      "Whether type-aware validation detects change_type when mock server returns stale-type data (not conformant) — requires new experimental design (audit V_C4_CONFORMANT_MOCK_TAUTOLOGY)",
+      "Whether composite multi-signal classifiers (schema diff + usage profiling + session signals) achieve discrimination none achieve individually",
+      "Whether real APIs with stochastic field availability, DB/cache/CDN variation, and heterogeneous client profiles preserve any discrimination gaps measured in deterministic mock",
+      "Whether nonlinear ensembles (SVM, random forest) on schema diff + Jaccard + usage features achieve TP>=0.9 FP<=0.15 despite individual signal failures"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is globally closed or rejected — six bounded signal families falsified in specific deterministic mock settings; the broader domain remains open",
+      "Schema diff is useless — it provides genuine complementary information (r=-0.59, detects required_to_optional invisible to Jaccard) but cannot threshold-separate unbounded noise from drift as standalone signal",
+      "The magnitude confound is the only barrier — change_type failure across multiple experiments is a measurement-definition limitation (availability-only counting, conformant mock), not purely a magnitude confound",
+      "Session-level behavioral signals will succeed — they are orthogonal by dimension but their actual discrimination is untested; they may have their own confounds",
+      "Deterministic mock server results transfer to real APIs — all six tested signals used the same deterministic mock; real APIs with stochastic behavior, CDN caching, and heterogeneous clients may shift discrimination gaps in either direction",
+      "Bounded noise (max 1-2 optional fields) would pass C2 — this is plausible but untested; the audit V_C2_SCALING_CONFOUND_BY_CONSTRUCTION identifies the scaling as structural but does not guarantee bounded noise succeeds",
+      "Per-sample features would show different results than aggregated means — all experiments used deterministic computation with zero within-condition variance, making per-sample and aggregated equivalent in this setting"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35154724244/result.json — primary metrics, controls, observations",
+    "research/experiments/EXP-GRAPH-35154724244/audit.json — V_C4_CONFORMANT_MOCK_TAUTOLOGY, V_C2_SCALING_CONFOUND_BY_CONSTRUCTION, recomputed_metrics, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35154724244/report.md — interpretation and comparison with baselines",
+    "research/experiments/EXP-GRAPH-35154724244/provenance.json — parameters, environment, execution",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/experiment_data.json sha256 82ad39707b400af6376534f7cbbe42272ddadb541fb3af6de7c5eb4a3a1e8df4",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json sha256 a585dc0cd07b2ab64ce0950ce067216e4f03a19b8a54d0e7a7617c4f36a34032",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/decision_evaluation.json sha256 a9a9773dda3c37be7d76d4683118d21ea9d3f5c8530154ef442f001865dbb0eb",
+    "research/experiments/EXP-GRAPH-35137034388/handoff.json sha256 b8405bee638eee124ca9d2cc39ec93ae543b8ffde4f2d75c518544f05df427cb — parent carry_forward",
+    "research/experiments/EXP-GRAPH-35130682058/handoff.json — linear ensemble falsification",
+    "research/experiments/EXP-GRAPH-35083040517/handoff.json — response-time KS falsification",
+    "research/experiments/EXP-GRAPH-35010853847/handoff.json — TF-IDF semantic falsification",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json — Jaccard structural falsification",
+    "research/experiments/EXP-GRAPH-34755316488/handoff.json — adaptive threshold falsification"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35154724244/spec.json",
+    "research/experiments/EXP-GRAPH-35154724244/prereg.md",
+    "research/experiments/EXP-GRAPH-35154724244/freeze.json",
+    "research/experiments/EXP-GRAPH-35154724244/result.json",
+    "research/experiments/EXP-GRAPH-35154724244/audit.json",
+    "research/experiments/EXP-GRAPH-35154724244/report.md",
+    "research/experiments/EXP-GRAPH-35154724244/provenance.json",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/experiment_data.json sha256 82ad39707b400af6376534f7cbbe42272ddadb541fb3af6de7c5eb4a3a1e8df4",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json sha256 a585dc0cd07b2ab64ce0950ce067216e4f03a19b8a54d0e7a7617c4f36a34032",
+    "research/experiments/EXP-GRAPH-35154724244/raw_evidence/decision_evaluation.json sha256 a9a9773dda3c37be7d76d4683118d21ea9d3f5c8530154ef442f001865dbb0eb",
+    "research/experiments/EXP-GRAPH-35137034388/handoff.json sha256 b8405bee638eee124ca9d2cc39ec93ae543b8ffde4f2d75c518544f05df427cb"
+  ],
+  "recommended_action": "Design a graph lane experiment testing session-level behavioral signals (token validation failure, cookie state inspection, authentication boundary probing) for C-FRESHNESS drift-vs-noise discrimination. The experiment should model API endpoints that return auth tokens or session cookies alongside responses, with drift patterns that change token validity or session state, and noise patterns that change structural properties (field additions, description changes) without affecting auth state. The frozen decision rule should test whether behavioral auth-state signals discriminate drift from noise on a dimension orthogonal to all six tested structural/schema-based signals. If session-level signals also fail, the C-FRESHNESS domain may require fundamentally different experimental designs (real API deployments with DB/cache/CDN, production client traffic, or stochastic field availability) rather than additional mock-server signal families."
+}

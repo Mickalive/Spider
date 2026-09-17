@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-34782350557",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "tightened_locatable_count_per_task": {
+      "listing_clothing-shoes-jewelry": 8,
+      "listing_beauty-personal-care": 8,
+      "listing_electronics": 8,
+      "detail_camera": 5,
+      "detail_vr_bag": 5,
+      "detail_pet_camera": 5,
+      "cart_1": 6,
+      "cart_1_duplicate": 6
+    },
+    "tightened_interactive_fraction_per_task": {
+      "listing_clothing-shoes-jewelry": 0.0047169811320754715,
+      "listing_beauty-personal-care": 0.0046865846514352666,
+      "listing_electronics": 0.004672897196261682,
+      "detail_camera": 0.0035842293906810036,
+      "detail_vr_bag": 0.003816793893129771,
+      "detail_pet_camera": 0.003834355828220859,
+      "cart_1": 0.00528169014084507,
+      "cart_1_duplicate": 0.00528169014084507
+    },
+    "per_type_mean_fraction": {
+      "product_listing": 0.004692154326590807,
+      "detail": 0.0037451263706772112,
+      "cart": 0.00528169014084507
+    },
+    "per_type_cv": {
+      "product_listing": 0.004808785045881535,
+      "detail": 0.03727972386526172,
+      "cart": 0.0
+    },
+    "between_type_variance": 6.009071075604643e-07,
+    "within_type_variance": 8.000839332069265e-09,
+    "discrimination_ratio": 75.11,
+    "ordering_reversed": true,
+    "ordering_actual": ["cart", "product_listing", "detail"],
+    "ordering_expected": ["product_listing", "detail", "cart"],
+    "positive_control_pass": true,
+    "null_control_pass": true,
+    "original_baseline": {
+      "listing_mean": 0.048,
+      "detail_mean": 0.024,
+      "cart_mean": 0.0185,
+      "listing_cv": 0.0048,
+      "detail_cv": 0.037,
+      "discrimination_ratio": 582
+    }
+  },
+  "controls": {
+    "positive_control": {
+      "expected": "tightened_locatable_count > 0 on all tasks",
+      "observed": "all tasks have tightened_locatable_count > 0 (min 5)",
+      "pass": true,
+      "evidence_ref": "raw_evidence/tightened_results.json per_task"
+    },
+    "null_control": {
+      "expected": "tightened_locatable_count <= original_locatable_elements on all tasks",
+      "observed": "tightened <= original on all tasks (max tightened 8 vs original 82)",
+      "pass": true,
+      "evidence_ref": "raw_evidence/tightened_results.json per_task"
+    },
+    "replication_control": {
+      "expected": "tightened means shift downward relative to original means",
+      "observed": "tightened means are an order of magnitude lower (0.0047 vs 0.048 for listing)",
+      "pass": true,
+      "evidence_ref": "raw_evidence/tightened_results.json per_type"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/tightened_results.json",
+      "sha256": "b6ebee9247fb357a24103409fe3a7b5ace7022a4b764120dc1881c7842eb5427",
+      "role": "derived"
+    },
+    {
+      "path": "raw_evidence/tightened_analysis.py",
+      "sha256": "84d758acb4f3345a9d46fb5cedd120851089da2443bf8714f497e71c346c527e",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Tightened definition (role-only, no form-membership) reduces locatable count dramatically: listing from 82 to 8 (90% reduction), detail from 32 to 5 (84% reduction), cart from 21 to 6 (71% reduction).",
+    "The reduction confirms that original definition overcounted form-descendant DIV/SPAN/LABEL (audit VF-DEFINITION-OVERCOUNT).",
+    "Tightened interactive fraction per page type: listing mean 0.0047, detail mean 0.0037, cart mean 0.0053.",
+    "Cart fraction is highest despite having fewest locatable elements; denominator (total DOM) is smaller (1136 vs ~1700 for listing).",
+    "Ordering reversal: cart > listing > detail (expected listing > detail > cart). This violates hypothesis H3.",
+    "Within-type CV remains low: listing 0.0048, detail 0.037, cart 0.0 (pseudoreplication). Stability condition H1 holds for listing and detail.",
+    "Between-type variance > within-type variance (ratio 75). Discrimination condition H2 holds.",
+    "Positive control passes: all tasks have >0 tightened locatable count.",
+    "Null control passes: tightened count ≤ original count on all tasks.",
+    "Cart measurements are duplicate (identical URL, same DOM), causing pseudoreplication and zero variance."
+  ],
+  "validity_notes": [
+    "Cart sample size n=2 identical measurements (same URL) — not independent replications. Within-type CV for cart is artificially zero.",
+    "Tightened definition uses role field from accessibility tree; role values may be inconsistent across browsers. Raw data from consistent Chromium environment.",
+    "Total DOM elements vary across page types; denominator variation affects fraction magnitude. Cart's smaller DOM inflates its fraction relative to listing/detail.",
+    "The ordering reversal may be an artifact of denominator variation rather than a true difference in interactive element density.",
+    "The experiment is limited to a single shopping site (Magento). Generalization to other sites unknown."
+  ],
+  "unresolved": [
+    "Does the ordering reversal (cart > listing > detail) hold with independent cart page measurements (distinct URLs)?",
+    "Is the denominator (total_dom_elements) the appropriate normalizer for yield estimation, or should elements_with_bbox be used?",
+    "Would the ordering stabilize if denominator variation is controlled (e.g., using elements_with_bbox as denominator)?",
+    "What is the true interactive fraction for checkout page when port 7770 is accessible?"
+  ]
+}

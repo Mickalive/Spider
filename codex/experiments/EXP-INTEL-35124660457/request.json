@@ -1,0 +1,20 @@
+{
+  "base_sha": "781ae5bdc3a542cc90d964ef93f82f892cd860ba",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T16:52:49.433435+00:00",
+  "experiment_id": "EXP-INTEL-35124660457",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can full-DOM enumeration (without first-20 truncation) recover a statistically significant ordering or reveal that truncation artifacts drove the observed 0.3 agreement and button/form single-role match?",
+  "lane": "intel",
+  "origin_github_run_id": "35124660457",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35112013458",
+    "path": "research/experiments/EXP-INTEL-35112013458/handoff.json",
+    "sha256": "d9ca2d3296a623c39fbce4c1260aec450531fdda88760082dba60598c6e953d6"
+  },
+  "reason": "pulse",
+  "request_hash": "ac2eb1968cde1b0378bdcb8d6db3fb28d006e0cf8a504dc959fc46b4272911aa",
+  "request_id": "efc26503d5ccaccf02834d5d",
+  "schema_version": 1
+}

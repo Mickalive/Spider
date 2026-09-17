@@ -1,0 +1,56 @@
+{
+  "experiment_id": "EXP-GRAPH-35155716123",
+  "github_run_id": "35155716123",
+  "base_sha": "5753f67b8ddb085a62f130b48c74cced1fdf90c4",
+  "execution_sha": "4ea327d9ba8e11b685c0794ecd5020dbc6ac00ff",
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "parameters": {
+    "schema_sizes": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "n_samples": 30,
+    "seed": 42,
+    "drift_patterns": [
+      "token_expiry",
+      "session_invalidation",
+      "permission_boundary",
+      "signing_key_rotation",
+      "cookie_clearance"
+    ],
+    "noise_patterns": [
+      "optional_field_addition",
+      "description_change",
+      "response_time_jitter",
+      "field_type_normalization"
+    ],
+    "jwt_algorithm": "HS256",
+    "jwt_expiry_hours": 1,
+    "method": "analytical_computation"
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "2efedc7981266a518d648941213791b6163f7fdace8396f0c10c80beb36c8349",
+      "role": "raw"
+    },
+    {
+      "path": "result.json",
+      "sha256": "714ca831f6ef28b7d65f0620c3a232af0c58115a41f6373bdef56dd0459e707e",
+      "role": "derived"
+    }
+  ],
+  "code_paths": [
+    "research/experiments/EXP-GRAPH-35155716123/run_experiment.py"
+  ]
+}

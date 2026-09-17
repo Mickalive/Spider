@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35083033552",
+  "lane": "intel",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "SURVIVES_CURRENT_TEST per frozen spec decision_rule (2/4 adjacent pairs agree >= threshold, not ALL 5 orderings differ). However audit ceiling narrows: effective stable family is 2 definitions (DEF-FORM-ONLY and DEF-FORM-AND-A-TEXTBOX), not 3, because DEF-FORM-ONLY and DEF-FORM-AND-BUTTON-LINK are empirically identical on this data (raw role link=0 in truncated sample, Counter verified). The 30% pairwise agreement and 50% adjacency agreement have not been compared to chance because null models (prereg 8.1 random ROLE_MAP, 8.2 single-role) were not executed. No definition restores the hypothesized full-DOM ordering listing>detail>cart. Claim remains EXPERIMENTAL pending null model execution, full DOM enumeration, and cross-site validation."
+    }
+  ],
+  "product_action": "No product promotion. Audit VF-TRUNCATION-CRITICAL and audit required_fixes[2] bound product_consequence_positive to truncated-sample scope only. Product lane cannot adopt any definition for yield estimation until (1) MEASURE_JS locatableSample cap is fixed for full DOM enumeration, (2) cross-site validation is performed, and (3) null models confirm ordering exceeds chance. The stable truncated-sample ordering product_listing>cart>detail does not match expected full-DOM ordering listing>detail>cart.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the truncated-sample pairwise ordering agreement of 0.3 (and adjacency 0.5) exceed chance-level expectation, and can the isolated a→link contribution be separated from menuitem/tab effects in the ordering reversal?",
+  "reason": "Frozen spec decision_rule: SURVIVES if >=2 adjacent pairs agree. Audit recomputed 2/4 adjacent pairs agree (DEF-FORM-ONLY vs DEF-FORM-AND-BUTTON-LINK, DEF-FORM-AND-BUTTON-LINK vs DEF-FORM-AND-A-TEXTBOX), arithmetic confirmed. But audit VF-VACUOUS-DEFINITION-PAIR shows the first pair is empirically vacuous (0 elements with raw role='link' in 160 sampled elements, Counter(link)=0), so effective adjacent agreement is 1 meaningful pair (DEF-FORM-ONLY vs DEF-FORM-AND-A-TEXTBOX, differing only by input→textbox). Audit VF-MISSING-NULL-MODELS shows prereg 8.1 (random ROLE_MAP) and 8.2 (single-role) null models were not executed, so 0.3 pairwise agreement cannot be assessed against chance. Audit VF-LINK-SENSITIVITY-DILUTED shows isolated a→link effect (mean 0.001622) is larger than reported averaged link_sensitivity (0.000938). The ordering reversal is caused by a→link+menuitem/tab (DEF-FULL-MAP) but isolated a→link contribution not separated. All metrics recomputed by audit match producer. Bounded conclusion: excluding a→link stabilizes ordering on this truncated sample from this site, but statistical significance and full-DOM validity remain open.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35083033552/spec.json decision_rule: SURVIVES if >=2 adjacent agree, FALSIFIED if ALL 5 different",
+    "research/experiments/EXP-INTEL-35083033552/result.json metrics.orderings: 3 distinct orderings (DEF-FORM-ONLY/BUTTON-LINK/A-TEXTBOX: listing>cart>detail; DEF-FULL-MAP: cart>listing>detail; DEF-ALL-LOCATABLE: cart>detail>listing)",
+    "research/experiments/EXP-INTEL-35083033552/result.json metrics.adjacency_agreement: 2/4 adjacent pairs agree",
+    "research/experiments/EXP-INTEL-35083033552/audit.json status=REVISE, producer_claim_supported=false, claim_ceiling narrows effective stable family to 2",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-VACUOUS-DEFINITION-PAIR: raw role link=0 in Counter, DEF-FORM-ONLY identical to DEF-FORM-AND-BUTTON-LINK",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-MISSING-NULL-MODELS: prereg 8.1/8.2 not executed",
+    "research/experiments/EXP-INTEL-35083033552/audit.json validity_findings VF-LINK-SENSITIVITY-DILUTED: isolated a→link mean 0.001622 vs reported 0.000938",
+    "research/experiments/EXP-INTEL-35083033552/audit.json recomputed_metrics confirm all orderings, counts, densities match producer exactly",
+    "research/experiments/EXP-INTEL-35083033552/audit.json baseline_findings: parent with_map and no_map orderings reproduced",
+    "research/experiments/EXP-INTEL-34956989900/handoff.json carry_forward.established: a→link is dominant sensitivity driver, denominator not driver"
+  ]
+}

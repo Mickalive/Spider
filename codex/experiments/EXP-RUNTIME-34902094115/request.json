@@ -1,0 +1,20 @@
+{
+  "base_sha": "a8e93bb1a89e2eeaddbbb1de6137aaaa82cc0805",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-14T22:03:11.096208+00:00",
+  "experiment_id": "EXP-RUNTIME-34902094115",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does body-only discrimination survive at larger body sizes (KB-scale JSON) where compression entropy increases and may cause non-deterministic output or hash instability beyond the 0-729 byte Keycloak responses tested here?",
+  "lane": "runtime",
+  "origin_github_run_id": "34902094115",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-34741873198",
+    "path": "research/experiments/EXP-RUNTIME-34741873198/handoff.json",
+    "sha256": "e15c140c906048f01e49341d3df2901dccf0c865d48e6288516a966051dcaf75"
+  },
+  "reason": "pulse",
+  "request_hash": "335bee32ae2572e172ef40e21debee827ac545aa9604c6482dd39541870988b7",
+  "request_id": "6aa973161cb4fccb074203c4",
+  "schema_version": 1
+}

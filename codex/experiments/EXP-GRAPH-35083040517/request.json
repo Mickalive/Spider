@@ -1,0 +1,20 @@
+{
+  "base_sha": "85956bdb4aa5c4cbf532efc56abb9b741b074769",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-16T10:05:21.918859+00:00",
+  "experiment_id": "EXP-GRAPH-35083040517",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can response-time profiling (measuring endpoint response-time distribution shifts before/after schema modification) distinguish true schema drift from structural noise with TP>=0.8 and FP<=0.15, providing a temporal staleness signal orthogonal to token-based approaches?",
+  "lane": "graph",
+  "origin_github_run_id": "35083040517",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35010853847",
+    "path": "research/experiments/EXP-GRAPH-35010853847/handoff.json",
+    "sha256": "08b6de693c88b79ae01523d86dec52565249f246d5cc71dcadedc734a782f509"
+  },
+  "reason": "pulse",
+  "request_hash": "ea91b1a9125b07105b5d9b4f0570585ed80e4efee1a626dc2d6443163f0a2365",
+  "request_id": "ca21b668ed16180fb3647a3a",
+  "schema_version": 1
+}

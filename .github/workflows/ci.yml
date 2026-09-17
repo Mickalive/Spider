@@ -18,7 +18,7 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,12 +32,59 @@ jobs:
         run: python -m compileall -q src scripts
 
       - name: Validate repository contracts
-        run: python scripts/validate_repo.py
+        run: |
+          python scripts/validate_repo.py
+          python scripts/validate_main_safety.py
 
       - name: Test product kernel
         run: PYTHONPATH=src python -m unittest discover -s tests -v
 
+      - name: Dry-run canonical Codex against all live Research 2.0 lanes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch -q origin '+refs/heads/lab2/*:refs/remotes/origin/lab2/*'
+          python scripts/sync_codex.py
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+
+          lanes = ["graph", "physics", "runtime", "product", "intel", "frontier"]
+          index = json.loads(Path("codex/index.json").read_text())["experiments"]
+          quarantine = json.loads(Path("codex/quarantine.json").read_text())
+          gaps = json.loads(Path("codex/coverage_gaps.json").read_text())
+
+          by_lane = {lane: [] for lane in lanes}
+          for exp_id, entry in index.items():
+              lane = entry.get("lane")
+              if lane in by_lane:
+                  by_lane[lane].append(exp_id)
+
+          failures = []
+          for lane in lanes:
+              raw = subprocess.check_output(
+                  ["git", "show", f"origin/lab2/{lane}:research/lanes/{lane}/state.json"],
+                  text=True,
+              )
+              state = json.loads(raw)
+              last = state.get("last_experiment_id")
+              print(f"CODEX_LIVE lane={lane} canonical={len(by_lane[lane])} last={last}")
+              if not by_lane[lane]:
+                  failures.append(f"{lane}: no canonical finalized experiment")
+              if last and last not in index:
+                  failures.append(f"{lane}: last official experiment {last} is not canonical")
+
+          print(f"CODEX_LIVE_TOTAL canonical={len(index)} quarantine={len(quarantine)} gaps={len(gaps)}")
+          for item in quarantine:
+              print("CODEX_QUARANTINE", json.dumps(item, sort_keys=True))
+          for item in gaps:
+              print("CODEX_GAP", json.dumps(item, sort_keys=True))
+          if failures:
+              raise SystemExit("; ".join(failures))
+          PY
+
       - name: Shell syntax
         run: |
           bash -n scripts/checkpoint.sh
+          bash -n scripts/main_safety_anchor.sh
           bash -n .github/scripts/run-opencode-resilient.sh

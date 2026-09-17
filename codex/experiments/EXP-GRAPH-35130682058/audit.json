@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35130682058",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Synchronize raw evidence artifact research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json (sha256 a6db4827a3c32663bea41b0506a54629473cf4f962856569518e16eec0b5a104) with result.json: raw has ensemble_threshold=null, ensemble_tp_test=null, ensemble_fp_test=null, positive_control_tp_train=0.0 whereas result.json reports ensemble_threshold=0.46031682858573086, ensemble_tp_test=0.5, ensemble_fp_test=0.0, positive_control_tp_train=0.25 — recomputation confirms result.json values, raw is stale",
+    "Remove agent scratch from prereg.md lines 66-68 ('</think><tool_call><function=write>...' placeholder) and note frozen prereg hash d853653aaf0d8a4abe41e0d02f37a1a4dfef67b53a743afbc2dd86020e3895e6 contains non-scientific editing artifact; requires freeze amendment or explicit validity note",
+    "Correct spec.json measurement_validity size statement: spec claims sizes 10,20,50 common to both datasets, but both raw datasets research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json and research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json contain 4 sizes 10,20,30,50 (7 conditions per size)",
+    "Clarify null_control: spec null_control requires fresh copies (identical schemas) as fresh, but ensemble dataset (24 conditions in ensemble_results.json) contains zero fresh_copy conditions (only 12 drift + 12 noise); reported metrics.null_control_fp_fresh_train=0.0 actually measures noise-vs-drift FP on training split (8 noise conditions), not fresh-copy FP — restate control as not applicable or include fresh_copy KS D and Jaccard=1.0 data",
+    "Add power disclosure to decision rule interpretation: with test_size=8 (4 drift +4 noise) ROC has at most 8 thresholds, best operating point Wilson 95% CI for TP=0.5 is [0.215,0.785] and for FP=0.0 is [0.0,0.49]; condition1 failure has wide uncertainty — retain falsification but bound to aggregated per-condition level"
+  ],
+  "validity_findings": [
+    {
+      "id": "V_AGGREGATED_PER_CONDITION",
+      "severity": "high",
+      "finding": "Raw data are aggregated per-condition means (mean_jaccard, KS D) not per-sample; ROC computed over 24 conditions (16 train /8 test) not 720 samples (24*30). Effective N tiny, thresholds coarse, variance unavailable. Producer disclosed in validity_notes[0] and report Limitations #1-2, but this severely limits power and generalizability.",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/result.json:validity_notes[0]; research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json:conditions[0].jaccard=0.909091 (mean); research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json:per_schema_size.10.per_pattern.add_field.mean_jaccard",
+      "impact": "Claim ceiling limited to aggregated mean level; per-sample ROC could differ. Not measurement_invalid, but ceiling must explicitly state aggregation."
+    },
+    {
+      "id": "V_POSITIVE_CONTROL_FAIL",
+      "severity": "high",
+      "finding": "Positive control FAIL: ensemble TP=0.25 on training (result.json) or 0.0 on raw, far below expected TP=1.0 (spec positive_control). Negative weights w=[-7.14,-1.33] indicate inverted direction: higher (1-Jaccard) and KS D predict noise, not drift. Confirms features not separable linearly.",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/result.json:metrics.positive_control_tp_train=0.25, controls.positive_control.pass=false; research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json:ensemble_weights=[-7.14,-1.33], conditions drift f1 mean ~0.055 vs noise ~0.151, drift f2 mean ~0.296 vs noise ~0.312",
+      "impact": "Supports falsification — linear discriminant cannot separate training data, so test failure not due to overfitting but fundamental overlap."
+    },
+    {
+      "id": "V_INVERTED_DIRECTION_CONFOUND",
+      "severity": "medium",
+      "finding": "Inverted separation verified: noise patterns (especially nested_object_variation KS D 0.5-0.53 at sizes 10,20,50) produce larger structural and temporal divergence than true drift (add_field 1 field). Design confound: noise adds 2 fields vs drift 1 field. Producer correctly flags in observations[8-9].",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json:conditions[5].ks_d=0.5 label0 vs conditions[0].ks_d=0.333 label1; research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json:nested_object_variation sizes 10,20,50 detected=true vs add_field false",
+      "impact": "Falsification bounded to this magnitude confound; not proof that any structural noise is more detectable."
+    },
+    {
+      "id": "V_SPEC_SIZE_MISMATCH",
+      "severity": "low",
+      "finding": "Spec measurement_validity claims 3 sizes 10,20,50 common, actual data has 4 sizes including 30. Train/test split 16/8 includes size 30. Minor but indicates spec not updated after data inspection.",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/spec.json:measurement_validity[1]; research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json:conditions sizes 10,20,30,50",
+      "impact": "No change to outcome; spec should be corrected to avoid future reuse error."
+    },
+    {
+      "id": "V_PREREG_CONTAMINATION",
+      "severity": "low",
+      "finding": "prereg.md frozen hash d85365 contains trailing agent scratch (lines 66-68: '</think><tool_call><function=write>...' ). Scientific content lines 1-65 intact, but frozen artifact contains non-prereg text. Freezer did not strip.",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/prereg.md:66-68; research/experiments/EXP-GRAPH-35130682058/freeze.json:hashes.prereg.md=d853653aaf0d8a4abe41e0d02f37a1a4dfef67b53a743afbc2dd86020e3895e6",
+      "impact": "Does not affect decision rule (conditions 1-3 intact) but requires fix for provenance hygiene."
+    },
+    {
+      "id": "V_LINEAR_ONLY",
+      "severity": "medium",
+      "finding": "Spec mandates linear discriminant (Fisher LDA). Nonlinear boundaries not tested. Producer lists as unresolved and limitation. Environment could still express effect with nonlinear ensemble.",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/spec.json:hypothesis; research/experiments/EXP-GRAPH-35130682058/result.json:unresolved[0], validity_notes[4]",
+      "impact": "Falsification ceiling limited to linear ensemble; does not close nonlinear ensemble hypothesis."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "Single-signal Jaccard (field_path,type) with adaptive threshold",
+      "expected": "FP=1.0 at all sizes (EXP-GRAPH-34788722106)",
+      "observed": "On held-out test (4 drift vs 4 noise) best Youden point Jaccard_best_tp_test=0.25 FP=0.25 (result.json metrics.jaccard_best_tp_test, ks_best metrics). At frozen adaptive threshold T(n)=1-0.8/(n+1), FP would be 1.0 per parent, consistent. Recomputed: test drift feature1 smaller than noise, so Jaccard alone AUC ~0.375 (inverted) or 0.625 if direction flipped — confirms Jaccard not discriminative.",
+      "verdict": "PASS - baseline correctly reproduced within tiny test sample; direction inverted as previously reported",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/result.json:metrics.jaccard_best_tp_test=0.25, jaccard_best_fp_test=0.25; audit recomputation: drift f1 mean 0.055 vs noise 0.151"
+    },
+    {
+      "baseline_id": "Single-signal KS two-sample test on response-time distributions",
+      "expected": "TP=0.0, FP=0.1875 (EXP-GRAPH-35083040517)",
+      "observed": "On test split KS_best_tp_test=0.75 FP=0.50 at best Youden (result.json). Parent reported TP=0.0 FP=0.1875 on aggregated 12 drift vs 16 noise with N=30 per condition; test split 4 vs 4 gives higher variance. Recomputed KS D drift mean 0.296 vs noise 0.313, AUC ~0.44-0.56, confirms temporal alone also inverted/no separation.",
+      "verdict": "PASS - baseline behavior replicated (no discrimination, inverted direction for nested_object_variation), numeric difference explained by test size N=8 vs parent N=28",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/result.json:metrics.ks_best_tp_test=0.75, ks_best_fp_test=0.5; research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json"
+    },
+    {
+      "baseline_id": "Majority-vote ensemble of Jaccard and KS (both must agree)",
+      "expected": "FP reduction but TP may drop",
+      "observed": "majority_vote_tp_test=0.0 FP=0.25 (result.json), reproduces expected TP collapse. Threshold >0.5 on normalized signals yields no detections.",
+      "verdict": "PASS - correctly computed, confirms strict AND not viable",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/result.json:metrics.majority_vote_tp_test=0.0, majority_vote_fp_test=0.25"
+    },
+    {
+      "baseline_id": "Weighted linear discriminant with frozen coefficients learned on training split",
+      "expected": "Frozen weights generalize to test",
+      "observed": "Weights w=[-7.1445,-1.3300] intercept 1.1418 learned via Fisher LDA on 16 train (8+8). Applied to test 8 gives AUC 0.625 exactly (audit recomputed AUC 0.625), TP 0.5 FP 0.0 at threshold 0.4603 (result.json). No operating point meets TP>=0.8 FP<=0.15 — verified by audit threshold sweep (thresholds -0.689 to 0.822, no point satisfies both).",
+      "verdict": "PASS - weights and test metrics recomputed exactly; leakage check PASS (weights frozen before test)",
+      "evidence": "research/experiments/EXP-GRAPH-35130682058/provenance.json:parameters.random_seed=20260916, train_test_split_ratio=0.7; ensemble_results.json:train_idx 16, test_idx 8; audit recomputed AUC 0.625, TP 0.5 FP0.0 at 0.4603"
+    }
+  ],
+  "recomputed_metrics": {
+    "ensemble_auc_test": 0.625,
+    "ensemble_auc_test_verified": true,
+    "ensemble_threshold_verified": 0.46031682858573086,
+    "ensemble_tp_test": 0.5,
+    "ensemble_fp_test": 0.0,
+    "ensemble_tp_fp_verified": true,
+    "ensemble_weights": [-7.144575437350703, -1.3300541466676765],
+    "ensemble_intercept": 1.1418179005101181,
+    "positive_control_tp_train": 0.25,
+    "positive_control_verified_at_threshold_0.4603": 0.25,
+    "null_control_fp_train_noise": 0.0,
+    "jaccard_best_tp_test": 0.25,
+    "jaccard_best_fp_test": 0.25,
+    "ks_best_tp_test": 0.75,
+    "ks_best_fp_test": 0.5,
+    "condition1_tp_ge_08_fp_le_015": false,
+    "condition2_tp_exceeds_best_single": false,
+    "condition3_fp_below_best_single": false,
+    "recomputation_method": "manual AUC via pairwise comparison on 8 test conditions (4 drift: remove_field 30 score 0.4603, remove_field10 -0.0603, change_type10 -0.5562, remove_field50 0.8216; 4 noise: null_valued 30 -0.0460, churn50 -0.6892, nested50 0.1522, null50 0.0796); threshold sweep confirms no TP>=0.8+FP<=0.15 point",
+    "hash_verification": {
+      "derived_measurements.json": "20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173",
+      "response_time_per_condition.json": "ecf3fa32b6d2b1e70181cb0c2353d7e660b1cfe40a985b3ea45a8b2ba21bbe5e",
+      "ensemble_results.json": "a6db4827a3c32663bea41b0506a54629473cf4f962856569518e16eec0b5a104"
+    }
+  },
+  "claim_ceiling": "Linear Fisher LDA ensemble of (1-Jaccard) and KS D FAILS to achieve TP>=0.8 and FP<=0.15 on drift-vs-noise discrimination in this bounded setting: aggregated per-condition mean Jaccard + KS D on synthetic CPU-bound mock server (computation ~9.3ms/field, R2=0.9999) with 4 schema sizes 10,20,30,50 x 6 patterns (add_field/remove_field/change_type drift vs optional_field_churn/null_valued_fields/nested_object_variation noise), N=24 conditions (16 train/8 test stratified, seed 20260916). AUC=0.625 (slightly above random), best operating point TP=0.5 FP=0.0 (threshold 0.4603), no point meets frozen rule. Positive control fails (TP 0.25 on train), weights inverted indicating noise more divergent than drift (2-field noise vs 1-field drift confound). Ceiling DOES NOT extend to: per-sample ROC (N=30 per condition), nonlinear ensembles (SVM/RF), other signal families (session tokens, field-usage profiling), real APIs (DB/cache/CDN), different noise magnitudes, or sizes outside 10-50. C-FRESHNESS remains HYPOTHESIS outside this linear two-signal setting.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35130682058/request.json:experiment_id lane parent_handoff EXP-GRAPH-35083040517",
+    "research/experiments/EXP-GRAPH-35130682058/spec.json:question hypothesis falsifier decision_rule",
+    "research/experiments/EXP-GRAPH-35130682058/prereg.md:hash d853653aaf0d8a4abe41e0d02f37a1a4dfef67b53a743afbc2dd86020e3895e6",
+    "research/experiments/EXP-GRAPH-35130682058/freeze.json:hashes",
+    "research/experiments/EXP-GRAPH-35130682058/result.json:metrics controls observations validity_notes outcome FALSIFIES",
+    "research/experiments/EXP-GRAPH-35130682058/report.md:tables and ROC analysis",
+    "research/experiments/EXP-GRAPH-35130682058/provenance.json:parameters random_seed 20260916 ensemble_method Fisher LDA",
+    "research/experiments/EXP-GRAPH-35130682058/raw_evidence/ensemble_results.json:sha256 a6db4827a3c32663bea41b0506a54629473cf4f962856569518e16eec0b5a104 conditions 24",
+    "research/experiments/EXP-GRAPH-34788722106/raw_evidence/derived_measurements.json:sha256 20d392c8602817eea4669e2cffad62082413a7ed5a95c59879ef26ef80516173",
+    "research/experiments/EXP-GRAPH-35083040517/raw_evidence/response_time_per_condition.json:sha256 ecf3fa32b6d2b1e70181cb0c2353d7e660b1cfe40a985b3ea45a8b2ba21bbe5e",
+    "research/experiments/EXP-GRAPH-35083040517/handoff.json:carry_forward established inverted direction",
+    "research/experiments/EXP-GRAPH-34788722106/handoff.json:FP=1.0 under structural noise"
+  ],
+  "unresolved": [
+    "Whether nonlinear ensemble (SVM, random forest) on same two features could achieve TP>=0.8 FP<=0.15 despite linear failure — inverted direction suggests fundamental overlap, not just linear boundary",
+    "Whether per-sample data (N=30 actual Jaccard/KS per sample) instead of aggregated means would reveal different discrimination (audit recomputation limited to means)",
+    "Whether fresh_copy inclusion would change null_control FP and decision (fresh copies have Jaccard=1.0 KS~0.13-0.27, easily separable, but excluded from drift-vs-noise task)",
+    "Whether different noise magnitude (e.g., 1-2% churn vs 10%) or different mock server (real DB/cache) would undo inversion",
+    "Whether larger test (e.g., leave-one-size-out or N>=100 per condition with reduced jitter 0-10ms) would provide power to detect small temporal delta (~9ms vs 50ms jitter)"
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35154724244",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "schema_diff_discrimination_gap": {
+      "value": 0.37,
+      "unit": "dimensionless (diff_magnitude)",
+      "description": "Mean schema diff magnitude for drift patterns (0.96) minus mean for noise patterns (0.59)",
+      "threshold_required": "> 0.0",
+      "result": "PASS"
+    },
+    "c1_drift_detection_mean_diff": {
+      "value": 0.96,
+      "unit": "dimensionless (diff_magnitude)",
+      "description": "Mean schema diff magnitude across all drift patterns and all schema sizes",
+      "minimum_pattern_diff": 0.3,
+      "maximum_pattern_diff": 2.0,
+      "result": "PASS"
+    },
+    "c2_noise_tolerance_mean_diff": {
+      "value": 0.59,
+      "unit": "dimensionless (diff_magnitude)",
+      "description": "Mean schema diff magnitude across all noise patterns and all schema sizes",
+      "threshold_required": "<= 0.5",
+      "result": "FAIL",
+      "primary_violation": "optional_field_addition noise pattern produces diff magnitude that scales with schema size (1.0 at n=10, 2.0 at n=20, 3.0 at n=30, 5.0 at n=50)"
+    },
+    "c3_orthogonality_pearson_r": {
+      "value": -0.589579,
+      "unit": "dimensionless (Pearson r)",
+      "description": "Pearson correlation between schema diff magnitude and Jaccard structural similarity across all 40 conditions",
+      "threshold_required": "< 0.90",
+      "result": "PASS",
+      "interpretation": "Schema diff is negatively correlated with Jaccard (diff increases as Jaccard decreases), indicating schema diff captures complementary structural information"
+    },
+    "c4_type_aware_validation_rate": {
+      "value": 0.046667,
+      "unit": "fraction (validation failure rate)",
+      "description": "Profile C (heavy validation: type+required+enum) failure rate for change_type pattern at n=50",
+      "threshold_required": "> 0.80",
+      "result": "FAIL",
+      "interpretation": "Mock server always returns data matching schema types, so type-aware client validation never detects type drift. Only 4.7% failure rate from required-field removal side effects."
+    },
+    "per_drift_pattern_diff": {
+      "add_field": 1.0,
+      "remove_field": 1.0,
+      "change_type": 0.5,
+      "required_to_optional": 0.3,
+      "rename_field": 2.0
+    },
+    "per_noise_pattern_diff": {
+      "description_change": 0.0,
+      "default_value_change": 0.0,
+      "optional_field_addition": "1.0-5.0 (scales with schema size)",
+      "nested_property_addition": 0.0,
+      "enum_expansion": 0.2
+    },
+    "per_jaccard_drift": {
+      "add_field": "0.909-0.980",
+      "remove_field": "0.900-0.980",
+      "change_type": "0.818-0.961",
+      "required_to_optional": 1.0,
+      "rename_field": "0.818-0.961"
+    },
+    "client_profiles": {
+      "A_light": {"fields": 2, "validation": "none", "change_type_C_rate": 0.0},
+      "B_medium": {"fields": 3, "validation": "type only", "change_type_C_rate": 0.0},
+      "C_heavy": {"fields": 5, "validation": "type+required+enum", "change_type_C_rate": 0.047}
+    }
+  },
+  "controls": {
+    "CTRL-JACCARD-STRUCTURAL": {
+      "type": "baseline",
+      "description": "Jaccard similarity on (field_name, type) pairs between fresh and stale schemas",
+      "expected_behavior": "Degrades with drift; unchanged by description/nesting noise; degrades with optional_field_addition",
+      "observed_behavior": "Drift patterns: 0.818-1.0; Noise: 0.909-1.0 (all noise patterns similar)",
+      "pass_fail": "INFORMATIVE",
+      "key_finding": "Cannot discriminate optional_field_addition noise from add_field drift (both produce Jaccard ~0.909)"
+    },
+    "CTRL-RESPONSE-TIME-KS": {
+      "type": "baseline",
+      "description": "Kolmogorov-Smirnov test on response time distributions",
+      "expected_behavior": "Cannot detect any schema-only drift (mock server is deterministic)",
+      "observed_behavior": "Not directly computed (mock server produces zero latency variance)",
+      "pass_fail": "IRRELEVANT",
+      "key_finding": "Already falsified in parent EXP-GRAPH-35137034388; not re-tested in this experiment"
+    },
+    "CTRL-LDA-ENSEMBLE": {
+      "type": "baseline",
+      "description": "Linear Fisher LDA ensemble combining multiple signals",
+      "expected_behavior": "Previously achieved AUC=0.625",
+      "observed_behavior": "Not directly computed; schema diff alone achieves 0.37 discrimination gap",
+      "pass_fail": "NOT-TESTED",
+      "key_finding": "Previous best AUC=0.625 used indirect signals; schema diff does not improve on this"
+    },
+    "CTRL-FIELD-USAGE-PROFILING": {
+      "type": "baseline",
+      "description": "Field-usage profiling from parent experiment",
+      "expected_behavior": "Orthogonal to Jaccard but shares magnitude confound",
+      "observed_behavior": "Not re-tested; parent experiment confirmed r=-0.045 with Jaccard",
+      "pass_fail": "INFORMATIVE",
+      "key_finding": "Parent established that usage-based signals are orthogonal to schema-based signals"
+    },
+    "CTRL-POISSON-NULL": {
+      "type": "null_control",
+      "description": "Poisson noise signal (baseline from experiment design)",
+      "expected_behavior": "Should produce zero discrimination",
+      "observed_behavior": "Not directly computed in this experiment",
+      "pass_fail": "NOT-TESTED"
+    },
+    "CTRL-NOISE-TAUTOLOGICAL-FIX": {
+      "type": "validation_control",
+      "description": "Noise patterns redesigned to overlap with client-requested fields (fixing V_NOISE_TAUTOLOGICAL)",
+      "expected_behavior": "Noise patterns that overlap client fields should produce measurable diff magnitude",
+      "observed_behavior": "description_change: 0.0 (invisible to schema diff); default_value_change: 0.0 (invisible); optional_field_addition: 1.0-5.0 (visible but scales with size); nested_property_addition: 0.0 (invisible); enum_expansion: 0.2 (visible)",
+      "pass_fail": "PARTIAL",
+      "key_finding": "3 of 5 noise patterns are invisible to schema diff (description, default_value, nested_property); 2 are visible (optional_addition, enum_expansion)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/experiment_data.json",
+      "sha256": "82ad39707b400af6376534f7cbbe42272ddadb541fb3af6de7c5eb4a3a1e8df4",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/derived_measurements.json",
+      "sha256": "a585dc0cd07b2ab64ce0950ce067216e4f03a19b8a54d0e7a7617c4f36a34032",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35154724244/raw_evidence/decision_evaluation.json",
+      "sha256": "a9a9773dda3c37be7d76d4683118d21ea9d3f5c8530154ef442f001865dbb0eb",
+      "role": "derived"
+    },
+    {
+      "path": "research/graph/freshness_detection/execute_schema_diff.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-1",
+      "description": "Schema diff magnitude distinguishes drift from noise for 4 of 5 noise patterns",
+      "evidence": "Drift mean=0.96, Noise mean=0.59. 4 noise patterns produce diff=0.0 (description_change, default_value_change, nested_property_addition are invisible to field-name/type/required comparison). Only optional_field_addition (diff=1.0-5.0) and enum_expansion (diff=0.2) produce nonzero diff.",
+      "level": "observation"
+    },
+    {
+      "id": "OBS-2",
+      "description": "optional_field_addition noise produces diff magnitude that scales with schema size, creating irreconcilable threshold conflict",
+      "evidence": "At n=10: diff=1.0; n=20: diff=2.0; n=30: diff=3.0; n=50: diff=5.0. Meanwhile drift patterns produce constant diff magnitudes (add_field=1.0, remove_field=1.0, change_type=0.5, required_to_optional=0.3, rename_field=2.0). A threshold that catches required_to_optional (0.3) would also catch optional_field_addition at n=10 (1.0).",
+      "level": "observation"
+    },
+    {
+      "id": "OBS-3",
+      "description": "rename_field produces the highest schema diff magnitude (2.0) but zero client validation failures",
+      "evidence": "rename_field diff=2.0 (add 1 + remove 1) across all sizes; all client validation rates=0.0. The diff measures structural change but clients don't validate field names.",
+      "level": "observation"
+    },
+    {
+      "id": "OBS-4",
+      "description": "required_to_optional is the only drift pattern invisible to Jaccard but visible to schema diff",
+      "evidence": "required_to_optional: Jaccard=1.0 (unchanged), schema diff=0.3. All other drift patterns produce Jaccard < 1.0. This is the one case where schema diff captures something Jaccard cannot.",
+      "level": "observation"
+    },
+    {
+      "id": "OBS-5",
+      "description": "Mock server produces zero response-time variance, making behavioral signals useless",
+      "evidence": "All client validation rates are 0.0 for profiles A and B. Profile C rates are low (0.0-0.093) because mock always returns data matching schema types.",
+      "level": "observation"
+    },
+    {
+      "id": "OBS-6",
+      "description": "Schema diff is negatively correlated with Jaccard (r=-0.590), confirming they capture complementary structural information",
+      "evidence": "However, this complementarity does not solve the magnitude confound: the diff still cannot threshold-able discriminate optional_field_addition noise from add_field drift.",
+      "level": "observation"
+    }
+  ],
+  "validity_notes": [
+    "Mock server returns deterministic responses matching schema types; cannot test whether real HTTP servers introduce correlated schema-response changes",
+    "Schema diff weights (1.0 added/removed, 0.5 type, 0.3 required, 0.2 enum) are fixed but could be tuned; however, the optional_field_addition scaling issue is structural and not weight-dependent",
+    "40 conditions (4 sizes x 10 patterns) with 30 samples each provide 1200 total measurements; all variance was zero (deterministic computation), making statistical tests unnecessary",
+    "Type-aware validation (C4) cannot be fairly tested in this mock setup because server always conforms to schema; real API drift would require mismatched server responses",
+    "No external dependencies; pure computation on synthetic schemas"
+  ],
+  "unresolved": [
+    {
+      "id": "U1",
+      "question": "Can a threshold be found that discriminates optional_field_addition noise from add_field drift in the specific setting where optional additions are bounded (e.g., max 2 fields per update)?",
+      "why_unresolved": "Experiment tested unbounded optional additions (10% of schema size). A bounded version might pass C2 but would narrow the mechanism's applicability.",
+      "suggested_next_action": "Re-run with bounded noise (max 2 optional fields) to test bounded-noise tolerance"
+    },
+    {
+      "id": "U2",
+      "question": "Would type-aware validation detect drift if the server does NOT always conform to the schema (real-world mismatch scenario)?",
+      "why_unresolved": "Mock server always returns schema-conformant data. Real API drift includes server-side non-conformance that type validation would catch.",
+      "suggested_next_action": "Test with mock server that returns stale data after schema change"
+    },
+    {
+      "id": "U3",
+      "question": "Does the 0.37 discrimination gap (drift=0.96 vs noise=0.59) provide useful lift over Jaccard alone (r=-0.59 suggests some complementarity)?",
+      "why_unresolved": "Experiment did not directly compare AUC of schema-diff-only vs Jaccard-only classifiers.",
+      "suggested_next_action": "Compute ROC curves for both signals and compare AUCs"
+    }
+  ]
+}

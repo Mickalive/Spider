@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35040401992",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen control criteria C4 (positive_control_pass=false, perm_null_std=0.0 degenerate) and C5 (determinism_pass=false, SD accuracy=0.0 by construction due to step field in response design) fail per frozen decision_rule. Raw BC PMI at K=3 = 0.369 bits exceeds 0.05 threshold but Bonferroni p = 0.322 (raw 0.0805) fails p < 0.0125. No confirmatory claim supported. Descriptive observation preserved: ceiling eliminated (H=1.346 bits), state-independent BC PMI=0.0, raw discrimination SD-SI=0.369 bits. Synthetic state_id injection is the only demonstrated PMI source; no identifiability argument separates injected label from emergent web dynamics (audit V10). Measurement cannot support or falsify C-WEB-DYNAMICS."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Is there any non-trivial network-response encoding on a branching FSM that yields conditional PMI > 0.05 at K=3 without embedding explicit state labels, and if so, can a fixed measurement pipeline (corrected determinism check, non-degenerate positive control, trajectory-level paired test) confirm it?",
+  "reason": "Two frozen control criteria fail by construction, making the measurement invalid per the frozen decision_rule. The determinism check (C5) fails because the frozen response design includes a step field that varies within each (FSM_state, session_id) group, making P(Response_hash|FSM_state,session)=1.0 unachievable — this is a spec-design incompatibility, not a scientific finding (audit V1). The positive control (C4) fails with perm_null_std=0.0 due to deterministic strata where H(S_next|stratum)=0 after session randomization, making the pass criterion degenerate (audit V2). The primary claim C2 fails: BC PMI K3 SD=0.369 > 0.05 but Bonferroni p=0.322 >> 0.0125. Despite invalidity, the raw signal is informative: ceiling eliminated (H=1.346 bits >> 0.2), state-independent BC PMI=0.0 (estimator correct), K=1 BC PMI=0.924 bits replicating parent's K=1 finding. However, audit V10 identifies that the response trivially encodes state_id (explicit state label), so PMI>0 is a synthetic sanity check, not evidence for emergent web dynamical structure. A redesigned experiment must either (a) test non-trivial encodings without explicit state_id, or (b) fix controls and determinism check while acknowledging synthetic-only scope.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35040401992/spec.json:decision_rule 7 criteria, falsifier C4/C5",
+    "research/experiments/EXP-PHYSICS-35040401992/result.json:metrics.BC_PMI_K3_SD=0.369 perm_p_bonf_K3_SD=0.322 positive_control_pass=false determinism_pass_SD=false ceiling_eliminated=true",
+    "research/experiments/EXP-PHYSICS-35040401992/audit.json:status=MEASUREMENT_INVALID validity_findings V1 (determinism design incompatibility), V2 (positive control degeneracy), V4 (primary claim non-significant), V10 (physics identifiability trivial encoding), claim_ceiling",
+    "research/experiments/EXP-PHYSICS-35040401992/audit.json:recomputed_metrics H_S_next=1.345794 matched, BC_PMI_K3=0.369 matched, determinism_SD=0.0 vs with_step=1.0, session_mismatch_7_of_20",
+    "research/experiments/EXP-PHYSICS-35040401992/prereg.md:5.2 state-dependent response includes state_id step session_token direction, 12.3 MEASUREMENT_INVALID when controls fail",
+    "research/experiments/EXP-PHYSICS-35040401992/raw_result.json:per_k_results.3.state_dependent.bias_corrected_pmi=0.369 perm_p_raw=0.0805, controls.positive_control.min_perm_null_std=0.0, controls.determinism_check.state_dependent.accuracy=0.0",
+    "research/experiments/EXP-PHYSICS-34932344937/handoff.json:carry_forward established K=1 PMI=0.386 bits, rejected broad falsification, unknown branching FSM test",
+    "research/claims/registry.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ]
+}

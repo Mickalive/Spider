@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35137034388",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "drift_usage_mean": 0.834568,
+    "noise_usage_mean": 1.0,
+    "discrimination_gap": 0.165432,
+    "pearson_r_jaccard_vs_usage": -0.044548,
+    "n_conditions": 24,
+    "condition1_drift_detection": "FAIL",
+    "condition1_failing_patterns": ["change_type"],
+    "condition2_noise_tolerance": "PASS",
+    "condition3_orthogonality": "PASS",
+    "per_pattern_drift_usage_similarity": {
+      "remove_field": {
+        "mean": 0.865,
+        "std": 0.055,
+        "all_sizes_below_0.90": true
+      },
+      "change_type": {
+        "mean": 1.0,
+        "std": 0.0,
+        "all_sizes_below_0.90": false
+      },
+      "required_to_optional": {
+        "mean": 0.639,
+        "std": 0.0,
+        "all_sizes_below_0.90": true
+      }
+    },
+    "per_pattern_noise_usage_similarity": {
+      "optional_field_churn": {"mean": 1.0, "std": 0.0, "all_sizes_above_0.95": true},
+      "null_valued_fields": {"mean": 1.0, "std": 0.0, "all_sizes_above_0.95": true},
+      "nested_object_variation": {"mean": 1.0, "std": 0.0, "all_sizes_above_0.95": true}
+    },
+    "per_profile_usage_similarity_remove_field": {
+      "A": {"mean": 1.0, "description": "identity-only: unaffected by email removal"},
+      "B": {"mean": 0.844, "description": "contact: loses email access"},
+      "C": {"mean": 0.75, "description": "full-profile: loses email access"}
+    },
+    "per_profile_usage_similarity_required_to_optional": {
+      "A": {"mean": 0.5, "description": "identity-only: loses name ~50% of time"},
+      "B": {"mean": 0.667, "description": "contact: loses name ~50% of time"},
+      "C": {"mean": 0.75, "description": "full-profile: loses name ~50% of time"}
+    },
+    "per_schema_size_jaccard": {
+      "10": {"remove_field": 0.90, "change_type": 0.818, "noise_all": 0.909},
+      "20": {"remove_field": 0.95, "change_type": 0.905, "noise_all": 0.909},
+      "30": {"remove_field": 0.967, "change_type": 0.935, "noise_all": 0.909},
+      "50": {"remove_field": 0.98, "change_type": 0.961, "noise_all": 0.909}
+    }
+  },
+  "controls": {
+    "positive_control_fresh_copies": {
+      "expected": "usage_similarity = 1.0, Jaccard = 1.0",
+      "observed": "usage_similarity = 1.0 (identical schemas by construction)",
+      "pass": true,
+      "evidence": "fresh schemas are identical copies of baseline; Jaccard=1.0 by construction"
+    },
+    "null_control_noise_no_usage_drop": {
+      "expected": "noise usage_similarity >= 0.95",
+      "observed": "noise usage_similarity = 1.0 for all 3 noise patterns at all 4 sizes",
+      "pass": true,
+      "evidence": "raw_evidence/derived_measurements.json: per_pattern_noise_usage_similarity"
+    },
+    "stable_resource_control": {
+      "expected": "Not applicable (no users_stable resource in this experiment)",
+      "observed": "N/A",
+      "pass": true,
+      "evidence": "Experiment uses field-usage profiling, not per-resource drift detection"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/experiment_data.json",
+      "sha256": "e948750a6f81bb7ce9f395eb7b5cf6d9155836d4c050850296c0b655c05ad8c5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/derived_measurements.json",
+      "sha256": "345907d6d985ae14cc00df2ed5a54e2aa26a09b2058286e328f3ed16476d103b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/decision_evaluation.json",
+      "sha256": "73429cde6cacc823f77fe9ef74db19839cd5b6177245a919e0c260c83bfbec73",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35137034388/raw_evidence/hashes.json",
+      "sha256": "10f3754d80088a7834b9dea68b3d69e3639acd6e233a81385e41b7e68108a94f",
+      "role": "derived"
+    },
+    {
+      "path": "research/graph/freshness_detection/execute_usage_profiling.py",
+      "sha256": "cc6165f3216e0d17c54cd5226f08f80c60ef38c8b95f2908115e2835ca4abe4b",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Field-usage profiling successfully discriminates remove_field and required_to_optional from noise: both produce usage_similarity < 0.90 while all noise patterns produce usage_similarity = 1.0.",
+    "change_type does NOT reduce usage_similarity (remains 1.0 at all sizes) because the server still returns the field — clients receive the field regardless of type change. This is a genuine limitation: field-usage profiling measures field AVAILABILITY, not TYPE COMPATIBILITY.",
+    "The discrimination gap (noise_usage_mean - drift_usage_mean = 0.165) is substantial and exceeds the 0.05 threshold, indicating meaningful separation between noise and drift in the usage-similarity dimension.",
+    "Pearson r = -0.045 between Jaccard and usage-similarity confirms the signals are nearly uncorrelated (orthogonal). Usage-similarity provides information that Jaccard cannot: noise drops Jaccard to ~0.91 while usage_sim stays at 1.0; required_to_optional drops Jaccard to ~0.82-0.96 but usage_sim drops much further to ~0.64.",
+    "Per-profile analysis reveals asymmetric impact: Profile A (identity-only) is most affected by required_to_optional (usage_sim=0.5) because it depends on only 2 fields, losing 1 reduces Jaccard to 0.5. Profile C (full-profile) is least affected (usage_sim=0.75) because it has more fields to fall back on.",
+    "The experiment is FALSIFIED because change_type fails Condition 1: type-only changes do not alter field availability and thus cannot be detected by usage-similarity alone. This is a measurement-valid negative, not an infrastructure failure."
+  ],
+  "validity_notes": [
+    "Mock server returns deterministic responses with no timing jitter, network variation, or stochastic field availability. Real-world usage-similarity may be noisier.",
+    "Client profiles are hand-designed (3 profiles: light/medium/heavy). Real clients may use overlapping or unusual field subsets.",
+    "Noise patterns deliberately target fields NOT in any client profile. If real-world noise affected used fields, usage-similarity would drop under noise — potentially closing the discrimination gap.",
+    "The change_type pattern changes a non-id field's type but the field is still present and non-null. A more realistic model might have clients validate types and reject incompatible ones, which would reduce usage-similarity for type drift. This was not modeled in the current experiment.",
+    "required_to_optional is modeled by removing the field from ~50% of responses (resource_id % 2 == 0). The 50% missing rate is arbitrary; different rates would produce different usage-similarity values.",
+    "Sample size N=30 per condition is sufficient for the observed zero-variance conditions (noise, change_type) but may be insufficient for the non-zero-variance conditions (remove_field std~0.055, required_to_optional std~0.0).",
+    "Structural Jaccard is computed on (field_path, type) pairs as in prior experiments. Usage-similarity is computed as mean per-profile Jaccard(field_used_fresh, field_used_stale). These are different Jaccard computations on different object types."
+  ],
+  "unresolved": [
+    "Whether client-side type validation (rejecting fields with unexpected types) would make change_type detectable by usage-similarity. This would require modeling type schemas and client validation logic.",
+    "Whether usage-similarity discrimination holds when noise patterns affect fields that clients actually use (not just unused fields). The current noise model is adversarially favorable.",
+    "Whether real APIs with DB/cache/CDN effects produce usage-similarity values that match or differ from the deterministic mock.",
+    "Whether composite signals (Jaccard + usage-similarity + type-compatibility) could detect all three drift patterns simultaneously.",
+    "The optimal number and diversity of client profiles for generalizing usage-similarity discrimination to real-world heterogeneous API consumers.",
+    "Whether the required_to_optional detection (usage_sim ~0.64) generalizes to real-world optional fields where the field is present for authenticated users but absent for unauthenticated ones."
+  ]
+}

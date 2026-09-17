@@ -1,0 +1,20 @@
+{
+  "base_sha": "9402f59f23276c65b0cd314d8873cdae9eb6e07d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-15T00:34:39.261684+00:00",
+  "experiment_id": "EXP-FRONTIER-34913743596",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Do alternative divergence measures (KDE with adaptive bandwidth, kNN mutual information, or kernel-based divergence) maintain pooled-vs-per-type ordering at equal per-type n (250/type) where binned TV fails due to sparse binning (0.625 expected counts/bin), or does the estimator limitation dissolve when the binning artifact is removed?",
+  "lane": "frontier",
+  "origin_github_run_id": "34913743596",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34881708619",
+    "path": "research/experiments/EXP-FRONTIER-34881708619/handoff.json",
+    "sha256": "a6c937056dd1cd9c5bdf84a39b55bc2b03e5ea7d4131b7159bec22b2fd1e62fa"
+  },
+  "reason": "pulse",
+  "request_hash": "5191f4aa7245e8f15bdee692795333d99a58c319818ec5fcd134b1ab352357fd",
+  "request_id": "50208bc3a2c1025fb554602c",
+  "schema_version": 1
+}

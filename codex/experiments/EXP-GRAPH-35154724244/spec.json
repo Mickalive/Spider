@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-GRAPH-35154724244",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does direct schema comparison (structural diff of schema definitions) provide reliable drift-vs-noise discrimination that all five tested indirect signal families (Jaccard, TF-IDF, response-time KS, linear ensemble, field-usage profiling) cannot?",
+  "hypothesis": "Direct schema comparison measures structural change at the schema level (field names, types, nesting depth, required/optional status, enum constraints) rather than via behavioral proxies. This avoids the magnitude confound where noise patterns produce larger behavioral divergence than drift. By diffing schema definitions directly, we can detect drift patterns (field addition/removal, type change, required→optional) as structural changes, while noise patterns that only affect descriptions or unused optional fields produce minimal structural diff.",
+  "falsifier": "No threshold on schema diff magnitude (weighted sum of added/removed/changed fields) achieves both: (a) drift detection (all drift patterns produce diff magnitude > threshold) with TP >= 0.9, AND (b) noise tolerance (all noise patterns produce diff magnitude <= threshold) with FP <= 0.15, across all schema sizes 10-50 fields. OR the diff magnitude is perfectly correlated with Jaccard structural similarity (Pearson r > 0.95), demonstrating no independent information.",
+  "baselines": [
+    "Jaccard structural similarity (field_path,type) — FP=1.0 at all sizes under structural noise (EXP-GRAPH-34788722106)",
+    "TF-IDF bag-of-words semantic similarity — FP=1.0, inverted direction (EXP-GRAPH-35010853847)",
+    "Response-time KS two-sample test — TP=0.0, FP=0.1875, inverted direction (EXP-GRAPH-35083040517)",
+    "Linear Fisher LDA ensemble of (1-Jaccard) and KS D — AUC=0.625, all conditions fail (EXP-GRAPH-35130682058)",
+    "Field-usage profiling — orthogonal (r=-0.045) but fails on change_type (usage_similarity=1.0) (EXP-GRAPH-35137034388)"
+  ],
+  "positive_control": "Fresh copies (identical schemas) must have schema diff magnitude = 0 across all sizes.",
+  "null_control": "Noise patterns overlapping with client-requested fields must not produce diff magnitude > 0.5 (assuming max possible diff magnitude is number of fields).",
+  "measurement_validity": [
+    "Mock API server returns JSON Schema definitions alongside responses for each resource",
+    "Schema definitions are deterministic: same (resource, state) returns identical schema",
+    "3 client profiles with type-aware validation: A (light, no validation), B (medium, type checking), C (heavy, type + required + enum validation)",
+    "N >= 30 fresh + 30 stale samples per drift pattern per schema size",
+    "Per-sample diff features (not aggregated means) computed from schema pairs",
+    "Deterministic seed (20260917) for schema generation and client-profile field selection",
+    "Schema diff magnitude defined as weighted sum: 1.0 per added/removed field, 0.5 per type change, 0.3 per required→optional change, 0.2 per enum change",
+    "Noise patterns redesigned to overlap with client-requested fields (fix V_NOISE_TAUTOLOGICAL)",
+    "Type-aware client validation condition included (fix V_CHANGE_TYPE_AVAILABILITY_ONLY)"
+  ],
+  "decision_rule": "Condition (1): For EVERY drift pattern (add_field, remove_field, change_type, required_to_optional, rename_field) at EVERY schema size (10, 20, 30, 50), the mean schema diff magnitude across 30 stale samples is > 0.0 (detectable change). Condition (2): For EVERY noise pattern (description_change, default_value_change, optional_field_addition, nested_property_addition, enum_expansion) at EVERY schema size, the mean schema diff magnitude across 30 stale samples is <= 0.5 (below threshold). Condition (3): Pearson correlation between schema diff magnitude and Jaccard structural similarity across all 40 conditions (4 sizes x 10 patterns) is r < 0.90 (provides information beyond Jaccard). Condition (4): Type-aware client validation (profile C) detects change_type drift (validation failure rate > 0.8) while noise patterns produce validation failure rate < 0.1. All four conditions must hold for SURVIVES_CURRENT_TEST.",
+  "product_consequence_positive": "Direct schema comparison becomes the primary C-FRESHNESS signal for Product Core, replacing indirect behavioral signals. Schema diff can be computed without executing requests, enabling offline staleness detection. Triggers integration into freshness guards.",
+  "product_consequence_negative": "Direct schema comparison does not provide discrimination beyond Jaccard. C-FRESHNESS remains HYPOTHESIS pending session-level behavioral signals (token validation, cookie state inspection) or other fundamentally different mechanisms.",
+  "estimated_cost": "Low: mock server with deterministic responses, no real network calls. Compute: O(S * P * R * N) where S=4 sizes, P=10 patterns, R=3 clients, N=30 samples. Total ~3600 API calls, all local. Schema diff computation is O(fields) per sample.",
+  "expected_information_gain": "High: if schema diff discriminates, changes product decision (structural signals viable for freshness). If schema diff correlates with Jaccard, rules out direct comparison and redirects to session-level signals."
+}

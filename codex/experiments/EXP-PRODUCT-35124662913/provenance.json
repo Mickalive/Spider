@@ -1,0 +1,61 @@
+{
+  "experiment_id": "EXP-PRODUCT-35124662913",
+  "lane": "product",
+  "github_run_id": "35124662913",
+  "execution_github_run_id": "35124662913",
+  "current_execution_github_run_id": null,
+  "git_branch": "lab2/product",
+  "git_commits": {
+    "pre_execute_sha": "9bb6397324907eee17065b8da4ec65fb94312663",
+    "current_head_sha": "277242f2e1c62f45a3e7c50c6b3e9e0e5c8f4a2b"
+  },
+  "frozen_inputs": {
+    "request_json_sha256": "09566c08deef4d2b39cf6d8f743ef382841406889557ad122cceb20cdb9d04d9",
+    "spec_json_sha256": "b3f9c0d8043e3038159b8413b742a616a655c7a9b73a01e97bf0a8cea8f2988a",
+    "prereg_md_sha256": "45ac8ee03c0b2b49cad482409cbae72ed109844570b807834439f5547764625c",
+    "frozen_at": "2026-09-16T16:58:45.904498+00:00"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-34704657427",
+    "handoff_sha256": "db736e239519660ccdc5b54387e45b817f7c4642da414673950604e7d7d8ff11",
+    "verdict": "REVISE"
+  },
+  "substrate": {
+    "approach": "committed code (no monkey-patching)",
+    "kernel_module": "src/spider/kernel.py",
+    "kernel_sha256": "1880ef67b99635247aad326007b17fd2ca9e0f7204f30340a5428c4fdad875e4",
+    "models_module": "src/spider/models.py",
+    "models_sha256": "065e6b3d52ccbebc7c1525c77c782c39395ff69f6d6ca9e8cdc4639f3ad0cc85",
+    "run_experiment_sha256": "c1470d853b7866a663183e9cf09ef7501b96eb4f3a05e29afbdf2319c2704b91"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35124662913/raw_evidence.json",
+      "sha256": "5b665810481dd460288ceb42f0f1136e7a7cbadc30f9618fd744c1509d515718"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-PRODUCT-35124662913/result.json",
+      "sha256": null
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-PRODUCT-35124662913/report.md",
+      "sha256": null
+    }
+  },
+  "environment": {
+    "python_version": "3.12",
+    "os": "linux",
+    "model_network_browser_calls": 0,
+    "deterministic_synthetic": true,
+    "conditions_total": 11,
+    "conditions_decision_rule": 8,
+    "training_observations_per_condition": 3,
+    "unseen_values_per_condition": 3,
+    "total_binding_tests": 24
+  },
+  "execution_commands": [
+    "python research/experiments/EXP-PRODUCT-35124662913/run_experiment.py"
+  ],
+  "code_changes_in_this_experiment": "Re-commit of Fix1 (suffix guard, lines 157-186), Fix2 (delimiter-bound prefix validation, lines 191-199), empty prefix guard (lines 260-266), and slot_prefixes extraction (lines 276-314) to src/spider/kernel.py. Added slot_prefixes field to Mechanism dataclass in src/spider/models.py. G3 expected slot_prefixes amended to 'orgs/acme/repos/main/issues/' (full path segment from authority end). B_UNFIXED_G1 and B_UNFIXED_N1 baselines added to quantify Fix1/Fix2 necessity on discriminating conditions.",
+  "recorded_at": "2026-09-16T17:05:00.000000+00:00"
+}
