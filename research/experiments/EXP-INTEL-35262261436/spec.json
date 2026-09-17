@@ -1,17 +1,42 @@
 {
   "experiment_id": "EXP-INTEL-35262261436",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "With a corrected implementation (deterministic sorted roles, aligned estimator, coherent decision rule), does the canonical per-iteration p=0.5 null recipe reproduce the parent FALSIFIED result (C2 FALSE: observed 0.3 < null ~0.53) on truncated-first-20 data — confirming the original conclusion was scientifically valid despite the MEASUREMENT_INVALID verdict from implementation bugs?",
+  "hypothesis": "The parent FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an artifact of implementation bugs. A corrected canonical analysis reproduces C2 FALSE (observed < null) with the per-iteration recipe, and the deviation from the parent's stored null mean (0.5275) falls within the relaxed 0.02 threshold after fixing unsorted set iteration and aligning the estimator.",
+  "falsifier": "F1: C2 direction under the canonical per-iteration recipe is TRUE (observed > null) in the corrected implementation, reversing the parent's FALSIFIED conclusion. This would mean the original FALSIFIED was an artifact of implementation bugs, not a scientific finding.\nF2: Corrected parent null mean deviates from stored 0.5275 by >0.02 after sorted roles and estimator alignment, indicating the parent's stored value itself was unreliable.\nF3: SD of mean pairwise agreement across 10 seeds >0.05 for the canonical per-iteration recipe, indicating seed sensitivity that undermines reproducibility.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_ORDERING",
+      "description": "Parent chain orderings on truncated-first-20: DEF-FULL-MAP cart>product_listing>detail, DEF-FORM-ONLY product_listing>cart>detail (EXP-INTEL-35112013458, EXP-INTEL-35209112878 PC1 PASS)",
+      "expected_behavior": "Corrected script reproduces both orderings exactly (deterministic, no set-iteration ambiguity)"
+    },
+    {
+      "id": "B2_PARENT_NULL_MEAN",
+      "description": "Parent chain stored null mean 0.5275 (per-iteration p=0.5, sampled 10000 pairs, EXP-INTEL-35112013458). Audit V1 recomputed 0.5369 (direct 499500 pairs). Expected: corrected direct estimator with sorted roles produces value within 0.02 of 0.5275.",
+      "expected_behavior": "Corrected null mean within 0.02 of stored 0.5275 after sorted roles and same estimator type"
+    },
+    {
+      "id": "B3_RECIPE_ROBUSTNESS",
+      "description": "Per-iteration recipe SD across 10 seeds should be comparable to or lower than the new recipe's SD (0.0117 from EXP-INTEL-35209112878), since per-iteration applies the same role set to all tasks (less within-iteration variance).",
+      "expected_behavior": "SD across 10 seeds <0.05"
+    }
+  ],
+  "positive_control": "PC1: Corrected script reproduces DEF-FULL-MAP ordering cart>product_listing>detail and DEF-FORM-ONLY ordering product_listing>cart>detail on truncated-first-20 data (from EXP-INTEL-35209112878 PC1 PASS, now with deterministic sorted roles). PC2: Under the canonical per-iteration recipe, C2 = FALSE (observed 0.3 < null >0.5), confirming the FALSIFIED intent. Both PCs pass only if the implementation bugs (unsorted set, estimator mismatch) are truly fixed.",
+  "null_control": "NC1: Canonical per-iteration null at seed=42 with sorted roles and direct estimator produces mean pairwise agreement within 0.02 of stored 0.5275. This tests provenance reproducibility after the two identified fixes (sorted roles + estimator alignment).",
+  "measurement_validity": [
+    "All roles sorted deterministically via sorted(raw_roles) before sampling — eliminates PYTHONHASHSEED nondeterminism (audit V1 FIX1)",
+    "Direct 499500-pair estimator used consistently for both null and observed computation — eliminates parent's sampled-vs-direct estimator mismatch (audit V1 FIX2)",
+    "Pairwise agreement defined as fraction of C(n,2) definition-pairs with identical top-2 page-type ordering, where n = number of independently verified definitions in this run (3: DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK)",
+    "Density denominator = elements_with_bbox (total elements with bounding boxes), matching parent chain for ordering reproducibility",
+    "C2 direction defined as: observed > null_mean → C2 TRUE (metric passes), observed ≤ null_mean → C2 FALSE (metric fails)",
+    "Seed list frozen: [42, 123, 456, 789, 1000, 2000, 3000, 4000, 5000, 99999]",
+    "N_iterations = 1000 per seed (matching parent chain)",
+    "No outcome-bearing measurements during design phase"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (1) PC1 passes (both orderings reproduced exactly), (2) PC2 passes (C2 = FALSE under canonical recipe, confirming FALSIFIED intent), (3) NC1 passes (parent null mean within 0.02 of stored 0.5275), (4) F1 not triggered (C2 direction is FALSE, not TRUE), (5) F2 not triggered (corrected null mean within 0.02 of stored), (6) F3 not triggered (SD across seeds <0.05). FALSIFIED_IN_SETTING if F1 triggered (C2 reverses to TRUE — original conclusion was wrong). MEASUREMENT_INVALID if PC1 or PC2 fails due to implementation bug (not data issue). Note: NC1 here replaces the logically incoherent parent NC1 (which required cross-recipe equivalence). C2 is the scientific decision criterion; F1/F2/F3 are robustness checks.",
+  "product_consequence_positive": "SURVIVES confirms the FALSIFIED conclusion is scientifically valid: the page-type density ordering is less stable than random role subsets, meaning the density metric's ordering is definition-dependent and unreliable for C-MEAS-VALID. This is a clear product signal: the density metric program should pivot to definition-invariant alternatives or abandon the ordering-based approach. The corrected canonical script + frozen recipe unblocks the full-DOM re-run (once substrate cap is removed) with a coherent decision rule.",
+  "product_consequence_negative": "FALSIFIED_IN_SETTING (F1 triggered: C2 reverses to TRUE) means the original FALSIFIED conclusion was an artifact of implementation bugs, not a scientific finding. The density metric's ordering would be MORE stable than random under the corrected implementation, reviving the density program. Full-DOM re-run becomes high-priority to confirm the reversal on non-truncated data. This changes the product trajectory for C-MEAS-VALID.",
+  "estimated_cost": "Low: <1 GPU-hour. Re-analysis of existing truncated-first-20 raw evidence (7 tasks, 3 definitions, 10 seeds × 1000 null iterations × 1 recipe = 10,000 null draws). No browser/network/model calls. Code changes: add sorted() to role iteration, align estimator, simplify decision rule.",
+  "expected_information_gain": "High. Resolves whether the original FALSIFIED conclusion (persistent across 4 parent experiments) was a genuine scientific finding or an implementation artifact. Either outcome materially changes the C-MEAS-VALID claim trajectory and the density metric program. The experiment is the minimum work needed to convert MEASUREMENT_INVALID (design failure) into a coherent scientific verdict (SURVIVES or FALSIFIED_IN_SETTING)."
 }
