@@ -8,7 +8,7 @@
   "next_question": "Can a real HTTP measurement protocol (Flask server with PyJWT HS256 and real session cookies, behavioral signals derived from actual jwt.decode failures and HTTP 401/403 responses) demonstrate that session-level behavioral signals detect auth-state drift with TP>=0.9 while tolerating structural noise with FP<=0.15, and does the C4 orthogonality criterion survive when both signals are measured on the same stochastic conditions without block-zero imputation?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-17T00:25:48.760610+00:00",
+  "updated_at": "2026-09-17T05:19:47.569539+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "90513f0056827f4ce2cf4aaee5e62d206eaca492948fa2868d2d37030f79edcb",
   "same_failure_count": 0,
