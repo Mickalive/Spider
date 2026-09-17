@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35264637598",
+  "lane": "intel",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Directional reversal persists under corrected implementation: per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) — recipe choice flips C2 direction (divergence 0.38), confirming reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). However, quantitative reproduction of parent stored values fails: canonical null mean deviates 0.0424 from parent 0.5273 (exceeds B1 0.02 threshold), per-task weighted null mean deviates 0.07 from parent ~0.28 (exceeds NC2/F3 0.05 threshold). Frozen decision rule has no branch for MIXED outcome (reversal persists but NC2/F3 fail). Claim ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 definitions, 1 Magento site), sorted(raw_roles), within-iteration agreement mean, frozen seeds. Does NOT establish SURVIVES_REVERSAL_PERSISTS as frozen (requires NC2/F3 pass), full-DOM ordering, cross-site invariance, 5-definition family agreement, or broader C-MEAS-VALID status. Density metric ordering is definition-dependent AND recipe-dependent."
+    }
+  ],
+  "product_action": "No product promotion. Density metric ordering is definition-dependent (parent finding) AND recipe-dependent (this experiment): canonical recipe gives C2 FALSE (definitions disagree more than random), per-task weighted recipe gives C2 TRUE (definitions agree more than random). Product must pivot away from ordering-based density metrics entirely, or adopt a meta-analytic approach that bounds conclusions across recipes. The canonical per-iteration recipe remains the principled choice for C-MEAS-VALID (uniform application, controls for role preferences).",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 — and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "reason": "The experiment resolves the key scientific question: the recipe reversal is genuine, not an implementation artifact. Under corrected implementation (sorted roles + direct estimator), the canonical per-iteration recipe reproduces C2 FALSE (observed 0.333 < null 0.586) and the per-task weighted recipe produces C2 TRUE (observed 0.333 > null 0.205) — recipe choice flips the C2 direction entirely (divergence 0.38). This is robust across all 10 frozen seeds (SD 0.0123 canonical, 0.0046 per-task). However, the frozen decision rule's SURVIVES_REVERSAL_PERSISTS requires NC2 (per-task null within 0.05 of 0.28) and F3 (deviation <0.05), both fail (deviation 0.07). The canonical null mean also deviates from parent (0.0424 > 0.02 threshold). The parent's stored values were affected by implementation bugs, but C2 directions are preserved. The audit's REVISE status is accepted: the decision rule gap (no MIXED branch) is a spec design failure, not an execution failure. The quantitative drift indicates implementation non-identity between parent and this run (definition/estimator drift not fully documented), but the directional scientific finding is robust. The claim ceiling is bounded to truncated-first-20; full-DOM re-run remains the critical next step once the substrate cap is removed.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35264637598/result.json (metrics M1-M15, controls PC1/PC2/NC1/NC2/F1-F3, observations, validity_notes, unresolved)",
+    "research/experiments/EXP-INTEL-35264637598/audit.json (status REVISE, producer_claim_supported false, validity_findings V1-V6, claim_ceiling MIXED, recomputed_metrics all match producer)",
+    "research/experiments/EXP-INTEL-35264637598/report.md (MIXED outcome, decision-rule gap table, interpretation)",
+    "research/experiments/EXP-INTEL-35264637598/provenance.json (frozen_parameters seeds, estimator, raw sha da30bd05, code sha 28d84227)",
+    "research/experiments/EXP-INTEL-35264637598/spec.json (frozen decision_rule, measurement_validity, baselines, claim_ids C-MEAS-VALID)",
+    "research/experiments/EXP-INTEL-35264637598/prereg.md (F1-F3, PC1-PC2, NC1-NC2, B1-B3, report design, decision rule gap)",
+    "research/experiments/EXP-INTEL-35262261436/handoff.json (parent established FALSIFIED, per-task weighted reversal, canonical recipe, full-DOM blocker)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (raw data source, sha da30bd05)",
+    "/tmp/opencode/run_both_recipes_analysis.py (analysis code, sha 28d84227)",
+    "/tmp/opencode/both_recipes_results.json (seed means, aggregate means, recompute source)"
+  ]
+}

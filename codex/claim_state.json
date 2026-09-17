@@ -1545,6 +1545,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Decompression-normalization sub-thread of C-MEAS-VALID: (a) survives single-layer encoding non-determinism (correct_br, missing_ce, incorrect_gzip, garbled_ce all produce identical decompressed hashes \u2014 verified in this experiment); (b) FAILS under double-brotli encoding with single-pass client decompression (discrimination 0.2911 < 0.3, determinism fails). Iterative decompression (decompress until failure or max depth) would restore the body (audit V6 verified manually: brotli decompress outer 74B -> inner 70B -> true body). The double-encoding failure mode is a client implementation issue, not a fundamental mechanism limitation. Product team must implement iterative decompression or reject double-encoded responses. Claim ceiling bounded to: localhost mock server + CDNEncodingProxy, synthetic padded JSON/HTML/XML, sizes 1KB-100KB, 4 auth states with 3-way error collapse (ceiling 0.5), brotli 1.2.0 single-pass fallback, no real CDN. Parent established discrimination 0.5 under quality-only variation stands. Real CDN infrastructure remains the critical untested blocker."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35264637598",
+        "lane": "intel",
+        "created_at": "2026-09-17T19:24:06.621540+00:00",
+        "decision": "MIXED",
+        "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Directional reversal persists under corrected implementation: per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) \u2014 recipe choice flips C2 direction (divergence 0.38), confirming reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). However, quantitative reproduction of parent stored values fails: canonical null mean deviates 0.0424 from parent 0.5273 (exceeds B1 0.02 threshold), per-task weighted null mean deviates 0.07 from parent ~0.28 (exceeds NC2/F3 0.05 threshold). Frozen decision rule has no branch for MIXED outcome (reversal persists but NC2/F3 fail). Claim ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 definitions, 1 Magento site), sorted(raw_roles), within-iteration agreement mean, frozen seeds. Does NOT establish SURVIVES_REVERSAL_PERSISTS as frozen (requires NC2/F3 pass), full-DOM ordering, cross-site invariance, 5-definition family agreement, or broader C-MEAS-VALID status. Density metric ordering is definition-dependent AND recipe-dependent."
       }
     ]
   },
@@ -1620,14 +1630,14 @@
       "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed \u2014 amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-35262264593",
-      "lane": "runtime",
-      "created_at": "2026-09-17T19:00:43.263368+00:00",
-      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on multiple independent clauses: (1) decompressed body-only discrimination 0.2911 < 0.3 threshold for JSON, HTML, and XML at all three sizes (conditions 1-3 fail); (2) decompressed hash variation all_same=false with unique_count=2 per state across all 9 conditions (condition 4 fails). Root cause is double-brotli encoding (scenario 4 of 5): single-pass client decompression strips outer brotli layer but leaves inner brotli-compressed data intact, producing a different hash (ddd198...) than the true decompressed body (6fb10...). The other 4 encoding scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) all produce identical decompressed hashes deterministically. Discrimination without double_br is 0.4486 (above 0.3), confirming the failure is caused exclusively by the double-encoding scenario. Audit PASS confirms all recomputed metrics match producer. Claim ceiling does NOT advance from parent EXP-RUNTIME-35237982464: remains bounded to non-deterministic brotli quality variation on localhost only. NOT extended to encoding-layer double-encoding.",
-      "source_commit": "1fb0507ea11a376cf1263e335dff5f7fcbd20051",
+      "experiment_id": "EXP-INTEL-35264637598",
+      "lane": "intel",
+      "created_at": "2026-09-17T19:24:06.621540+00:00",
+      "decision": "MIXED",
+      "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "claim_id": "C-MEAS-VALID",
       "status": "EXPERIMENTAL",
-      "reason": "Decompression-normalization sub-thread of C-MEAS-VALID: (a) survives single-layer encoding non-determinism (correct_br, missing_ce, incorrect_gzip, garbled_ce all produce identical decompressed hashes \u2014 verified in this experiment); (b) FAILS under double-brotli encoding with single-pass client decompression (discrimination 0.2911 < 0.3, determinism fails). Iterative decompression (decompress until failure or max depth) would restore the body (audit V6 verified manually: brotli decompress outer 74B -> inner 70B -> true body). The double-encoding failure mode is a client implementation issue, not a fundamental mechanism limitation. Product team must implement iterative decompression or reject double-encoded responses. Claim ceiling bounded to: localhost mock server + CDNEncodingProxy, synthetic padded JSON/HTML/XML, sizes 1KB-100KB, 4 auth states with 3-way error collapse (ceiling 0.5), brotli 1.2.0 single-pass fallback, no real CDN. Parent established discrimination 0.5 under quality-only variation stands. Real CDN infrastructure remains the critical untested blocker."
+      "reason": "Directional reversal persists under corrected implementation: per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) \u2014 recipe choice flips C2 direction (divergence 0.38), confirming reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). However, quantitative reproduction of parent stored values fails: canonical null mean deviates 0.0424 from parent 0.5273 (exceeds B1 0.02 threshold), per-task weighted null mean deviates 0.07 from parent ~0.28 (exceeds NC2/F3 0.05 threshold). Frozen decision rule has no branch for MIXED outcome (reversal persists but NC2/F3 fail). Claim ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 definitions, 1 Magento site), sorted(raw_roles), within-iteration agreement mean, frozen seeds. Does NOT establish SURVIVES_REVERSAL_PERSISTS as frozen (requires NC2/F3 pass), full-DOM ordering, cross-site invariance, 5-definition family agreement, or broader C-MEAS-VALID status. Density metric ordering is definition-dependent AND recipe-dependent."
     }
   }
 }

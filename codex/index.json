@@ -124,7 +124,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "14d124a7e652c1bde161ec9b07cec61a0ff5ecc4",
       "hashes": {
         "request.json": "ac060980eee635b3edec766758f02747cfb02c42f5433aba27178285d1561c15",
@@ -369,7 +369,7 @@
       "decision": "PARTIALLY_COMPATIBLE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "957181df06b1fb89836ca0ea9e6299d90e84a812",
       "hashes": {
         "request.json": "d7ac099ff31b5f45a830349529520d4c2ee5473ea319c7b4af7cb37d955de79c",
@@ -451,7 +451,7 @@
       "decision": "SUPPORTS",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "8a494724d6ccee840c334bd11ae1c0e054007fe2",
       "hashes": {
         "request.json": "edd5c10df7802f25a590a582fbff6a4d8f165ad37f543608596140f57c9af185",
@@ -507,7 +507,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "8f2ef00975dfa2cc9d432e36ea67b2b4fec8f2dd",
       "hashes": {
         "request.json": "bb5b84eb9c0144aaa540ff513c65e954751faa98d0b0f2423083e4fd7a4d51db",
@@ -807,7 +807,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "c621fb1ed4a31330b70fb21850baf07bf3a8ed19",
       "hashes": {
         "request.json": "7ee0962085333152786c15e640a9fa22623c1153b8c80a2a4bf868e7099f7e3f",
@@ -1295,7 +1295,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "3b2e25ab87930a13cbba404b5a56a62b3e03a546",
       "hashes": {
         "request.json": "50ae967293cafdce03cf4b1072babb1b3ec76e8f03de0f57d04a09025a1e6261",
@@ -1539,7 +1539,7 @@
       "decision": "MIXED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "e79ae260a5b5b473df2597a5bb6b5eada1277c62",
       "hashes": {
         "request.json": "875f313b648ffdf067827b0aaeea2f7dd808b0ba68149712d9fe919e41e13ca8",
@@ -1594,7 +1594,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "0fa3c79845aee7f4f6a28b8d437667978fc3a867",
       "hashes": {
         "request.json": "98f667a8beaa87cb0386c9ec51228ecf21ddeeac39ed6c6878c4d3a710e816d0",
@@ -1865,7 +1865,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "bfbe74400ae9a3d15317c83ef51768731f467eec",
       "hashes": {
         "request.json": "51a0702f5b47e3b4c0643db51c9ab005bf398bbe52a41484f255f266ba8189c0",
@@ -2083,7 +2083,7 @@
       "decision": "INCONCLUSIVE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "1addb517158ec8aadf49941115e39be7d45bebfd",
       "hashes": {
         "request.json": "781b7f6a13ce6f0c7a0c8dc825c842bfa21385e348d6227a60787d9dfbdb4a91",
@@ -2301,7 +2301,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "ac10541a53a9de96a5038ab6c39404a04861f041",
       "hashes": {
         "request.json": "2a9100b28b5f34ddfd3f8dc6157d53999d7540d50159d985c4c1c309eb11b4b3",
@@ -2436,7 +2436,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "f0eb80b6f16f98ba5144c42fb3b4fb3d5a234ab8",
       "hashes": {
         "request.json": "1a02bca6e6fe9aa825c93e541e7e3ecbae8d8629f26ae482337def95dea81a28",
@@ -2490,7 +2490,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "d5a6add38ab8f7d1ef4ca23c840e09e900db77ae",
       "hashes": {
         "request.json": "431840fb12fdb08f4c5c0c4093fba7ece2a023d6091ae5797bd5577c85b35371",
@@ -2517,7 +2517,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "211227fc18095750b46c91f055d38b9b017a36f5",
       "hashes": {
         "request.json": "16cc65cdab8dcb20606191828520d31bcb3d6bfd6851cde151681f35c46bdfd4",
@@ -2681,7 +2681,7 @@
       "decision": "PROVENANCE_PARTIAL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "57efaab4f56233946882021b627ad578524c8174",
       "hashes": {
         "request.json": "03255fbd74467fd5cce429a979531a999dfaac9006d5477d277a48c1f5a4ea05",
@@ -2736,7 +2736,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "10549ee646b031aa873d82f61ff86234d9b17eb8",
       "hashes": {
         "request.json": "643b91daec4b9882f577ba4f922d043f4fdf33b8f7d7cfe03c0fa9b57e479a43",
@@ -3007,7 +3007,7 @@
       "decision": "DESIGN_PARTIALLY_RESOLVED \u2014 the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "8f0ab2e1591c3e4ca45ca2449b5134a12f04926f",
       "hashes": {
         "request.json": "dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096",
@@ -3225,7 +3225,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 The frozen decision rule is logically incoherent: NC1 expects the new weighted-per-task recipe to reproduce the parent p=0.5 per-iteration null mean 0.5275 within 0.001, but these recipes are structurally different by design (producer notes expected; audit V2 confirms). SURVIVES requires NC1 PASS, making SURVIVES logically impossible. F3 triggered (parent recipe null mean 0.5394 vs stored 0.5275, diff 0.0119 > 0.001) but audit V1 identifies this as a measurement-threshold artifact (unsorted set iteration + PYTHONHASHSEED + estimator mismatch), not scientific falsification of the robustness hypothesis. The critical scientific finding is that the recipe choice is material, not a nuisance parameter: parent recipe yields null 0.5275 > observed 0.3 (C2 FALSE, ordering LESS stable than random) while new recipe yields null ~0.28 < observed 0.3 (C2 TRUE, ordering MORE stable than random). The new recipe IS robust (F1 SD=0.0117, F2 all True, cross-RNG max diff 0.0024) but this does not settle the scientific question because the canonical recipe is unspecified. The measurement cannot support or falsify C-MEAS-VALID in this state.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "4a05cb4bddd4a363a16fef0efb3f527351171bb5",
       "hashes": {
         "request.json": "f9bf5371a07ca694b57bed901fcb2f59a165d6cf5bd709f25db0a746564d2106",
@@ -3306,7 +3306,7 @@
       "decision": "SURVIVES_CURRENT_TEST \u2014 All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/intel",
-      "source_ref_head": "257644fe682f55110ab82378366ac6bd3c243548",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
       "source_commit": "46d4ce687f16595932ac9aaa12c25d733da34872",
       "hashes": {
         "request.json": "450c3863973676610d95beecdb0bf50b95ed7eb48fc10f4c31edf110a21e0c0d",
@@ -3346,6 +3346,33 @@
         "audit.json": "3177062164647efdf4d5c1c0828da76e7913e2e987e90d7c9905810fbe8fe322",
         "verdict.json": "ccaeb4826af6a2ef385bec8a924b886facb771216037c6d16b6fe88caec57e9b",
         "handoff.json": "73b0e1ebae68724b41cb53d392eac48d2e3339121fc14a6e3c0e5a708b60747f"
+      }
+    },
+    "EXP-INTEL-35264637598": {
+      "lane": "intel",
+      "request_id": "2552bdd3825a76ca383d2123",
+      "created_at": "2026-09-17T19:24:06.621540+00:00",
+      "claim_ids": [
+        "C-MEAS-VALID"
+      ],
+      "question": "Does the per-task weighted recipe's C2 TRUE reversal (observed 0.3 > null ~0.28, established under buggy implementation in EXP-INTEL-35209112878) persist under the corrected implementation with deterministic sorted roles and aligned estimator \u2014 or does the corrected implementation eliminate the reversal, revealing it as an artifact of the same bugs that caused the parent MEASUREMENT_INVALID?",
+      "audit_status": "REVISE",
+      "decision": "MIXED",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/intel",
+      "source_ref_head": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
+      "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
+      "hashes": {
+        "request.json": "c632c17ab522cecd32dd3f3f3ba9efc11c7ffa5c67c4b33ba2b5afd8c019fb4c",
+        "spec.json": "f404ab4576f4dfcd22b14fbc3348ce95c43ef861c3f223383698c6cbcf44a490",
+        "prereg.md": "c8d40879acd8d7757eb7beef050d62b39cb5d33a9572ba590e4fdbd5024f721b",
+        "freeze.json": "4dc446e7b970afbb8301bf8c6d3cf8c1c570905a87ac6acad07d233e5596ebfa",
+        "result.json": "6f917fbdc0261263209f0be69fc579c6b0c30705c621cdbb0aa9585ea9528911",
+        "report.md": "70ac874239b73203b953aad73ffca8859ceb9520d86099dea6192caff4835747",
+        "provenance.json": "b863c4590fd0258e0d5b184c732a227ebfe7e5ddce85ea141d98ffc978ec59aa",
+        "audit.json": "4f6c9798db120fbf34b1600b8bb9f5d60330e8e73a0f257567755de1449bdc2c",
+        "verdict.json": "8cb60b649352069bd71667777c43c6055f747a887f02823cf9022fea79ea765d",
+        "handoff.json": "611c975b122ebbdcaffec8d804c3f21838b1c6a17bd093f9c80e3deee44f00b4"
       }
     }
   }

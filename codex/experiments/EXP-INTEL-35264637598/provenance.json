@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35264637598",
+  "lane": "intel",
+  "github_run_id": null,
+  "python_version": "3.12.14",
+  "platform": "linux",
+  "execution_environment": "OpenCode autonomous agent",
+  "frozen_spec_hash": "f404ab4576f4dfcd22b14fbc3348ce95c43ef861c3f223383698c6cbcf44a490",
+  "frozen_prereg_hash": "c8d40879acd8d7757eb7beef050d62b39cb5d33a9572ba590e4fdbd5024f721b",
+  "frozen_request_hash": "c632c17ab522cecd32dd3f3f3ba9efc11c7ffa5c67c4b33ba2b5afd8c019fb4c",
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-35262261436",
+    "handoff_path": "research/experiments/EXP-INTEL-35262261436/handoff.json",
+    "handoff_sha256": "c2270db0d48013c5840e5522e310a70e9375550edc05381e936d4a6d5a2e98e3"
+  },
+  "raw_evidence": {
+    "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "source_experiment": "EXP-INTEL-34782350557",
+    "tasks_deduped": 7,
+    "tasks_total": 10,
+    "tasks_failed": 2,
+    "tasks_duplicate": 1,
+    "definitions_used": 3,
+    "page_types": ["product_listing", "detail", "cart"]
+  },
+  "code": {
+    "analysis_script": {
+      "path": "/tmp/opencode/run_both_recipes_analysis.py",
+      "sha256": "28d8422796c8d9ba0717d5f7ad856144348a1ec3df47ff6fba95de5f53487f61",
+      "role": "code"
+    }
+  },
+  "derived_artifacts": {
+    "results": {
+      "path": "/tmp/opencode/both_recipes_results.json",
+      "sha256": "74f4e0b410b297b0081cea9b298a090f9c013b47e64390fac7ce0e145a5a9202",
+      "role": "derived"
+    }
+  },
+  "frozen_parameters": {
+    "seeds": [42, 123, 456, 789, 1000, 2000, 3000, 4000, 5000, 99999],
+    "n_iterations": 1000,
+    "p_include": 0.5,
+    "density_denominator": "elements_with_bbox",
+    "estimator": "direct 499500-pair (C(7,2) * C(3,2) = 63 pairs per iteration)",
+    "role_sorting": "sorted(raw_roles) before sampling (deterministic)",
+    "definitions": ["DEF-FULL-MAP", "DEF-FORM-ONLY", "ISOLATED-A-LINK"]
+  },
+  "reproduction_commands": [
+    "python3 /tmp/opencode/run_both_recipes_analysis.py"
+  ],
+  "notes": "Pure re-analysis of existing raw evidence. No browser/network/model calls. No new data collection."
+}
