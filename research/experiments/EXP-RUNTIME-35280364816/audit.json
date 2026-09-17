@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35280364816",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Guarantee triple_br coverage for the distinct success body (valid_token): separate the CDN proxy connectivity-test RNG draw from the per-request scenario RNG or use a balanced/stratified scenario assignment so each auth state observes all 6 scenarios at least once. Current shared Random(SEED+7919) and unsuppressed proxy test consumes 1 draw per condition, shifting the 80-request sequence by 1 and systematically excludes triple_br from valid_token slots (0/180 reps across all 9 conditions). Rerun and report per-state scenario counts demonstrating triple_br >=1 for valid_token before advancing claim ceiling to triple.",
+    "Report frozen baselines B-SINGLE-PASS-0.2911 and B-NO-DOUBLE-BR-0.4486 and B-COMPRESSED-BYTE-ONLY explicitly in result.json metrics baselines and evaluate them in controls, rather than reporting only B-RANDOM. Provide observed vs expected and pass/fail for each.",
+    "Clarify body_sizes metric definition: current body_sizes are compressed byte lengths (mean 70-170) not uncompressed target sizes (1KB/10KB/100KB). Rename to compressed_body_sizes or add decompressed_body_sizes verification and document representation loss from brotli compression of repetitive padding.",
+    "Document RNG consumption and sampling design in validity_notes and prereg: state that scenario RNG is per-condition fresh Random(SEED+7919) but also used for proxy connectivity test, and note the resulting minimum/maximum per-state scenario coverage expected under N=20 uniform random vs required pass threshold.",
+    "Re-validate C_TRIPLE_BR_DECOMPRESSIBLE with explicit per-state check: require triple_br decompression success for every state (including valid_token) rather than global triple_br_error_count==0 which is vacuous when zero triple_br observations exist for a state."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_VALID_TOKEN_TRIPLE_BR_NEVER_OBSERVED",
+      "severity": "high",
+      "finding": "valid_token never experienced triple_br (0/180 reps across all 9 content-type x size conditions; each condition valid_token encoding_scenarios_seen unique_count=5 missing triple_br, while no_auth/invalid_token/expired_token each have 6/6 including triple_br). Root cause: run_experiment.py creates scenario_rng=Random(SEED+7919) per condition then immediately consumes one draw for the CDN proxy connectivity test (requests.get through proxy) before the 80 shuffled measured requests. The 81-draw sequence shifted by 1 maps triple_br draws away from valid_token positions under uniform random choice. The frozen question explicitly asks whether iterative decompression restores discrimination under double AND triple brotli; triple survival for the distinct success body (the only body that separates valid_token from error collapse) is therefore UNTESTED. Decompressed_hash_variation all_same=true for valid_token is true but vacuous for triple layer. Decision rule clause 4 literally passes on observed data, but does not establish the claimed triple coverage.",
+      "evidence": "research/experiments/EXP-RUNTIME-35280364816/result.json metrics encoding_scenarios_seen valid_token values missing triple_br for all 9 keys, raw_observations.json total valid_token triple_br 0/180 vs triple_br 81 total across other states, research/experiments/EXP-RUNTIME-35280364816/run_experiment.py:736-749 scenario_rng init and proxy test before plan loop, recomputation showing shifted 80-seq vs 81-seq match"
+    },
+    {
+      "id": "V2_ITERATIVE_DECOMPRESSION_CORRECT_BUT_UNPROVEN_FOR_TRIPLE_SUCCESS",
+      "severity": "medium",
+      "finding": "Iterative decompress_body (brotli->gzip->identity looping to max_depth=5) correctly restores known bodies when tested in isolation: manual recompression of a 1KB valid JSON body (brotli quality 6) through double (74B) and triple (82B) wrapping decompresses to original identical bytes, and all observed error-state triple_br bodies (82B) decompress to true bodies (e.g., no_auth JSON 6fb10d...). For valid_token, double_br IS observed (5-7 reps per condition) and decompresses correctly to d15e53... matching single-layer hashes, proving double fix for success body. Triple fix for success body inferred via error-body evidence and manual test, not via measured valid_token triple observations. No over-decompression of plain text: plain text b'hello' returns unchanged, and gc/garbled paths succeed via brotli.",
+      "evidence": "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py:512-562 decompress_body loop, raw_observations.json JSON_1KB no_auth triple 82B vs double 74B vs correct 70B all decompressed_hash 6fb10..., JSON_1KB valid_token double 74B decompressed_hash d15e53... equals correct_br, manual python brotli recompression test valid body triple restores"
+    },
+    {
+      "id": "V3_BASELINES_INCOMPLETE",
+      "severity": "medium",
+      "finding": "Spec defines 4 baselines: B-SINGLE-PASS-0.2911, B-NO-DOUBLE-BR-0.4486, B-RANDOM ~0.0, B-COMPRESSED-BYTE-ONLY <0.5. Result.json metrics baselines only report B-RANDOM (0.0). Report.md compares to 0.2911 and 0.4486 in narrative table but no machine-checkable baseline values or control pass/fail. Compressed discrimination is reported (0.2661) and equals B-COMPRESSED-BYTE-ONLY expectation <0.5 and < decompressed 0.5, confirming decompression necessity holds, but not labeled as baseline control. Nan or missing baselines reduce auditability of regression/normative claims.",
+      "evidence": "research/experiments/EXP-RUNTIME-35280364816/spec.json baselines[0-3], research/experiments/EXP-RUNTIME-35280364816/result.json metrics[*].baselines keys only B-RANDOM, report.md Baselines table"
+    },
+    {
+      "id": "V4_BODY_SIZES_LABEL_MISLEADING",
+      "severity": "low",
+      "finding": "result.json body_sizes means 70-87 (JSON), 172-186 (HTML), 161-179 (XML) are compressed byte lengths (len of obs body from CDN proxy), not uncompressed target sizes 1024/10240/102400. Uncompressed bodies are correctly padded to target (generation via json.dumps + data padding to target_size and html/xml padding loops), but raw evidence never reports decompressed length. Not measurement-invalid, but representation loss is understated: brotli highly compresses repetitive padding so 1KB-100KB targets map to ~70 bytes compressed for JSON/XML.",
+      "evidence": "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py:117-194 body generators padding to target_size, result.json body_sizes min/max/mean 70-87, raw_observations.json body_size 70/74/82 per scenario"
+    },
+    {
+      "id": "V5_SAMPLING_DESIGN_UNDERCOVERS_TRIPLE",
+      "severity": "medium",
+      "finding": "Uniform random scenario selection with N=20 per state per condition yields high variance in per-state counts and zero-coverage risk for a specific scenario. With 6 scenarios uniform, expected per-state count ~3.3, P(zero of a given scenario in 20 draws) ~ 0.026, P(zero across 9 conditions for same state) ~ 0.79 if independent. The observed systematic zero (same shift) is deterministically worse than random: same shuffled plan reused per condition and same RNG sequence means missing scenario repeats across conditions. Stratified or round-robin assignment would guarantee coverage at N=20.",
+      "evidence": "research/experiments/EXP-RUNTIME-35280364816/result.json controls C_ENCODING_VARIATION_EXISTS observed 6/6 for 3 states 5/6 for valid_token, raw_observations.json scenario counts"
+    },
+    {
+      "id": "V6_RECOMPUTATION_MATCHES_PRODUCER_ON_OBSERVED_DATA",
+      "severity": "info",
+      "finding": "Independent recomputation from raw_observations.json fingerprints matches producer metrics exactly for observed data: decompressed_body_only_discrimination 0.5 for all 9 conditions (intra 1.0 inter 0.5 from 3-way error collapse), compressed 0.2660964912280702 for all 9, status 0.5, B-RANDOM 0.0, decompressed_hash variation 1 unique all_same true per observed state, compressed variation 2-3 unique all_same false. Uniform discrimination across conditions is genuine (same Jaccard structure), not copy-paste.",
+      "evidence": "raw_observations.json 720 obs 9x4x20 fingerprint_decompressed recomputation via compute_discrimination_score matches result.json metrics"
+    },
+    {
+      "id": "V7_LOCALHOST_MOCK_BOUNDARY",
+      "severity": "medium",
+      "finding": "Results bounded to localhost mock server (brotli quality 6 deterministic) + CDNEncodingProxy per-condition ports 5500+idx/5600+idx, no real CDN (Cloudflare/Fastly/Akamai), no caching/chunked/HTTP2/Accept-Encoding negotiation, synthetic padded JSON/HTML/XML with 3-way error collapse ceiling 0.5, N=20 per state (720 total), brotli 1.2.0 iterative depth 5, seed 44. Producer correctly bounds claim_ceiling to localhost in report validity notes, but product consequence positive in spec/report suggests CDN deployment readiness which overreaches this boundary.",
+      "evidence": "spec.json measurement_validity, result.json validity_notes No real CDN infrastructure bounded to localhost, provenance.json execution total_requests 720, report Claim Ceiling localhost only"
+    },
+    {
+      "id": "V8_NO_LEAKAGE_CRASHES",
+      "severity": "info",
+      "finding": "No leakage of outcome into fingerprint: fingerprint_decompressed uses decompress_body then hash, excluding compressed representation. No crashes/hangs on garbled Content-Encoding (garbled_ce contains 'br;' still decompresses via brotli try first), decompression_errors [] for all conditions, decompression_latency 0.012-0.27ms scales with decompressed size, no pipeline errors.",
+      "evidence": "research/experiments/EXP-RUNTIME-35280364816/result.json controls C_GRACEFUL_DEGRADATION 0 errors C_NO_PIPELINE_ERRORS 0 C_TRIPLE_BR_DECOMPRESSIBLE 0, run_experiment.py decompress_body try brotli then gzip"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-SINGLE-PASS-0.2911",
+      "expected": "0.2911 single-pass decompressed discrimination with all 5 prior scenarios (regression floor)",
+      "observed": "0.5 iterative decompressed discrimination for all 9 conditions (observed scenarios). Exceeds floor by 0.21. Recomputed via raw fingerprints confirms 0.5.",
+      "verdict": "PASS_EXCEEDS",
+      "evidence": "result.json decompressed_body_only_discrimination 0.5, parent EXP-RUNTIME-35262264593 result 0.2911, raw recomputation"
+    },
+    {
+      "id": "B-NO-DOUBLE-BR-0.4486",
+      "expected": "0.4486 discrimination excluding double_br (target floor when decompression succeeds)",
+      "observed": "0.5 exceeds 0.4486. Note observed value includes double_br (for valid_token double present) and partial triple, so comparison is inclusive inclusive. Filtered recomputation excluding triple still 0.5, consistent.",
+      "verdict": "PASS_EXCEEDS",
+      "evidence": "result.json 0.5, parent filtered 0.4486, report comparison table"
+    },
+    {
+      "id": "B-RANDOM",
+      "expected": "0.0 discrimination for SHA256 on random 32-byte fingerprints",
+      "observed": "0.0 for all 9 conditions",
+      "verdict": "PASS",
+      "evidence": "result.json metrics[*].baselines.B-RANDOM 0.0, controls.C_NULL_CONTROL pass true observed [0.0x9]"
+    },
+    {
+      "id": "B-COMPRESSED-BYTE-ONLY",
+      "expected": "<0.5 and < decompressed (decompression necessary)",
+      "observed": "0.2660964912280702 for all 9 conditions, <0.5 and < decompressed 0.5 by 0.234",
+      "verdict": "PASS",
+      "evidence": "result.json compressed_body_only_discrimination 0.2661 for all 9, recomputed compressed discrimination matches"
+    },
+    {
+      "id": "C_ENCODING_VARIATION_EXISTS",
+      "expected": ">=4 distinct encoding scenarios per content-type x size (6 total possible)",
+      "observed": "6/6 scenarios observed for no_auth/invalid_token/expired_token per condition; 5/6 for valid_token (missing triple_br) across all 9 conditions; 4 Content-Encoding header values (br, gzip, none, br; quality=invalid). Meets >=4 threshold globally but systematically missing triple_br for valid_token state.",
+      "verdict": "PASS_WITH_COVERAGE_GAP",
+      "evidence": "result.json controls.C_ENCODING_VARIATION_EXISTS pass true observed counts 6/5, raw_observations.json valid_token triple 0/20 per condition"
+    },
+    {
+      "id": "C_NULL_CONTROL",
+      "expected": "B-RANDOM ~0.0 all conditions",
+      "observed": "0.0 all 9",
+      "verdict": "PASS",
+      "evidence": "result.json controls.C_NULL_CONTROL pass true"
+    },
+    {
+      "id": "C_DECOMPRESSION_DETERMINISM",
+      "expected": "all_same=true within-state decompressed hash variation for all states",
+      "observed": "true for all 4 states across all 9 conditions on observed data (unique_count 1 per state). For valid_token, variation is over 5 scenarios only (triple not observed). For other 3 states, variation covers all 6 including triple.",
+      "verdict": "PASS_ON_OBSERVED_VACUOUS_FOR_VALID_TRIPLE",
+      "evidence": "result.json controls.C_DECOMPRESSION_DETERMINISM pass true, metrics decompressed_hash_variation all_same true, raw valid_token triple count 0"
+    },
+    {
+      "id": "C_GRACEFUL_DEGRADATION",
+      "expected": "No crashes/hangs from garbled Content-Encoding",
+      "observed": "0 errors, 0 decompression_errors",
+      "verdict": "PASS",
+      "evidence": "result.json controls.C_GRACEFUL_DEGRADATION error_count 0"
+    },
+    {
+      "id": "C_TRIPLE_BR_DECOMPRESSIBLE",
+      "expected": "Triple-encoded responses decompress successfully depth<=5",
+      "observed": "0 triple_br errors globally. However 81 triple_br observations are all from error states (no_auth 27, expired 27, invalid 27); 0 triple_br observations from valid_token. Control is vacuous for success body.",
+      "verdict": "PASS_FOR_ERROR_BODIES_NOT_TESTED_FOR_SUCCESS",
+      "evidence": "result.json controls.C_TRIPLE_BR_DECOMPRESSIBLE triple_br_error_count 0, raw total valid_token triple 0/180"
+    },
+    {
+      "id": "C_NO_PIPELINE_ERRORS",
+      "expected": "0 pipeline errors",
+      "observed": "0",
+      "verdict": "PASS",
+      "evidence": "result.json controls.C_NO_PIPELINE_ERRORS pass true"
+    }
+  ],
+  "recomputed_metrics": {
+    "/userinfo_JSON_1KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_JSON_10KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_JSON_100KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_HTML_1KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_HTML_10KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_HTML_100KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_XML_1KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_XML_10KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_XML_100KB.decompressed_body_only_discrimination": 0.5,
+    "/userinfo_JSON_1KB.compressed_body_only_discrimination": 0.2660964912280702,
+    "/userinfo_JSON_1KB.status_only_discrimination": 0.5,
+    "all_conditions_B-RANDOM": 0.0,
+    "recomputation_match_producer_discrimination": true,
+    "decompressed_hash_variation_observed_all_same": true,
+    "decompressed_hash_variation_unique_per_observed_state": 1,
+    "compressed_hash_variation_unique_per_state": "3 for no_auth/invalid/expired (triple+double+single collapse to 3 unique), 2 for valid_token (missing triple) on 1KB JSON",
+    "valid_token_triple_br_observations": 0,
+    "valid_token_total_observations": 180,
+    "total_triple_br_observations": 81,
+    "triple_br_distribution": "no_auth 27, expired_token 27, invalid_token 27, valid_token 0",
+    "encoding_scenarios_per_condition_valid_token": 5,
+    "encoding_scenarios_per_condition_other_states": 6,
+    "content_encoding_unique_values": 4,
+    "double_br_valid_token_decompressed_correct": true,
+    "triple_br_error_state_decompressed_correct": true,
+    "valid_token_double_br_reps_per_condition": "5-7 of 20 (observed)",
+    "decompression_latency_ms_range": "0.012-0.27 mean 0.017-0.24 per condition"
+  },
+  "claim_ceiling": "Iterative decompression (brotli->gzip->identity looping to max_depth=5) restores decompression-normalization under double-brotli encoding for ALL auth states and under triple-brotli encoding for error states (no_auth/expired_token/invalid_token) on localhost mock server with deterministic brotli quality 6: decompressed_body_only_discrimination 0.5 >=0.3 for JSON/HTML/XML x 1KB/10KB/100KB and decompressed hash determinism all_same=true for observed scenario coverage. Triple-brotli for the distinct success body (valid_token, hash d15e53.../50ff5d... etc) is UNTESTED (0/180 triple observations due to systematic RNG shift from shared proxy-test draw) so multi-layer claim including triple for success body NOT established. No extension to real CDN (Cloudflare/Fastly/Akamai), caching/chunked/Accept-Encoding, natural content, binary types, or production latency. Bounded to localhost CDNEncodingProxy, synthetic padded bodies (compressed ~70-180B), 4 states with 3-way error collapse (structural ceiling 0.5), N=20 per state per condition (720 total), brotli 1.2.0.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35280364816/spec.json — frozen question/hypothesis/falsifier/decision_rule requiring >=0.3 for JSON/HTML/XML and all_same true including double/triple",
+    "research/experiments/EXP-RUNTIME-35280364816/prereg.md — encoding scenarios 6, max depth 5, seed 44, scenario seed SEED+7919",
+    "research/experiments/EXP-RUNTIME-35280364816/freeze.json — hashes prereg 48273a..., spec 8bc6bd..., request 755bd4...",
+    "research/experiments/EXP-RUNTIME-35280364816/result.json — 9 metrics decompressed 0.5 compressed 0.266 status 0.5 B-RANDOM 0.0, encoding_scenarios_seen valid_token 5 missing triple, decompressed_hash_variation all_same true, controls C_*",
+    "research/experiments/EXP-RUNTIME-35280364816/raw_observations.json — 720 obs 9x4x20, valid_token triple 0/180, total triple 81 (error states only), double_br 153 total, body_size 70 correct 74 double 82 triple, decompressed_hash valid d15e53... vs no_auth 6fb10..., fingerprint recomputation matches 0.5",
+    "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py — CDNEncodingProxy scenario_rng Random(SEED+7919) + proxy connectivity test consuming 1 draw (line 736-749), decompress_body iterative loop depth 5 (512-562), compute_discrimination_score Jaccard",
+    "research/experiments/EXP-RUNTIME-35280364816/report.md — claims SURVIVES_CURRENT_TEST with 0.5 discrimination and 1 unique, claim ceiling to triple included",
+    "research/experiments/EXP-RUNTIME-35280364816/provenance.json — python 3.12.14 brotli 1.2.0, total_requests 720, run_experiment.py sha 5f9816ee..., raw sha 518aa533...",
+    "research/experiments/EXP-RUNTIME-35262264593/handoff.json — parent established single-layer determinism and double_br as sole failure, next_question iterative decompression 3-5 depth",
+    "research/experiments/EXP-RUNTIME-35262264593/audit.json — V6 confirms double_br inner hash ddd198... vs true 6fb10..., filtered discrimination 0.4486"
+  ],
+  "unresolved": [
+    "Does iterative decompression restore triple-brotli for the valid_token success body when triple is actually observed? Fix requires rerun with guaranteed triple coverage for valid_token (e.g., stratified assignment) and recomputation showing valid_token decompressed_hash 1 unique across triple+double+single.",
+    "What max decompression depth is safe against decompression bombs / false positives on non-compressed data? Depth 5 prevents infinite but iterative try(brotli) on arbitrary bytes could misidentify; needs test with random incompressible payloads.",
+    "Does Content-Encoding header parsing need to handle 'br, br' multi-value vs single 'br' with layered body? Current proxy sets single 'br' even for double/triple; real CDN may send 'br, br'. Iterative decompression content-sniffing vs header-driven decompression tradeoffs untested.",
+    "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity beyond localhost quality 6?",
+    "Production-scale latency/CPU at N>1000 with MB-scale natural (non-padded) JSON/HTML/XML and concurrent clients?",
+    "Binary content types and genuinely incorrect Content-Encoding on incompressible data: does fallback to identity preserve correctness?"
+  ]
+}
