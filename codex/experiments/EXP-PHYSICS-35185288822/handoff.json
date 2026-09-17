@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35185288822",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Should the Physics lane pivot to production SPAs with hash-based client-side routing (e.g., TodoMVC hash-SPA variants, React Router history-based SPAs) where multiple client-side states can share the same URL path, reducing URL-level leakage below 40% and enabling >=50 non-leakage transitions for PMI analysis?",
+  "why_next": "This experiment confirms the parent's recommendation to pivot away from server-rendered MPAs: structural URL-level leakage (78-92%) on Wikipedia/MDN/GitHub makes the NL filter unworkable. Even with unlimited collection, 50 NL transitions at 92% leakage requires ~625 raw transitions. The PMI pipeline itself is validated (positive control BC 1.841 p=0.001) but cannot be applied to the tiny NL subsets (8/4/2 transitions) on these sites. Production SPAs with hash-based routing where multiple client-side states share the same URL path would naturally reduce leakage below 40%, enabling >=50 NL transitions at manageable raw collection sizes (~83 raw at 40% leakage). The synthetic-to-real gap remains the dominant unknown; the next experiment must address it by testing on genuine SPAs rather than continuing locally-hosted synthetic FSM experiments or server-rendered MPAs.",
+  "carry_forward": {
+    "established": [
+      "Server-rendered MPAs (Wikipedia/MDN/GitHub) have structural URL-level leakage of 78-92% where action.target_href == state_after.url by construction for link-based navigation. This is a fundamental property of <a href> on these sites, not a measurement artifact (audit V2, result.json observations).",
+      "After NL filtering on server-rendered MPAs, the remaining subsets are too small for PMI analysis: Wikipedia 8 NL (6 unique SA pairs, all singleton under Laplace alpha=1.0), GitHub 4 NL, MDN 2 NL. BC PMI = 0.0 bits is mathematically forced by SA-sparsity (audit V3).",
+      "The PMI pipeline (BC estimator, within-strata permutation, cross-trajectory shuffle) correctly detects known deterministic structure: synthetic 8-state SPA positive control BC PMI = 1.841 bits, permutation p = 0.001, determinism accuracy = 1.0 (result.json controls, audit V7).",
+      "The 3-condition ordered sequence from parent experiments (unique-content 0.493 > many-to-one 0.226 > fully-ambiguous 0.0 bits) provides clean quantitative decomposition of aliasing vs genuine PMI on the locally-hosted 3-state stochastic branching FSM.",
+      "Wikipedia H(S_next | URL) = 0.647 bits on all 91 transitions (exceeding 0.2 threshold) but H = 0.0 on the 8 NL transitions only, confirming the ceiling exists on full data but vanishes in the NL subset (result.json controls.C8_CEILING).",
+      "Frozen decision_rule C7 (>=50 NL per site on >=2/3 sites) correctly triggers MEASUREMENT_INVALID: 0/3 sites pass. This is an infrastructure/data-sufficiency failure, not scientific falsification (audit V1)."
+    ],
+    "rejected": [
+      "Server-rendered MPAs as testbed for C-WEB-DYNAMICS title-aware PMI: rejected due to structural URL-level leakage (78-92%) making NL subsets too small for analysis. Site selection must target SPAs with client-side routing.",
+      "Global title-shuffle as valid negative control implementation: audit V5 finds it is misimplemented (should be within-strata, not global) and PASS is trivial when perm_std=0 (frozen pass criterion |BC|<3*std AND std>0 unsatisfiable when std=0).",
+      "Partial state discrimination as PMI source: the parent's 3-condition sequence (0.493 → 0.226 → 0.0) on the stochastic branching FSM established this is eliminated when content is constant."
+    ],
+    "unknown": [
+      "Whether production SPAs with hash-based client-side routing exhibit URL-level leakage <40% enabling >=50 NL transitions for PMI analysis (requires SPA corpus survey before experiment design).",
+      "Whether form submissions, button clicks, and JavaScript-triggered navigation on SPAs produce non-link-leakage transitions at rates sufficient for PMI analysis.",
+      "Whether title-aware PMI adds marginal information beyond URL-only on genuine SPAs where titles vary independently of URL path (requires per-URL title variance >1, not just global title diversity).",
+      "Whether the PMI pipeline can detect predictive structure on genuinely stochastic production SPA transitions (all prior tests are synthetic or locally-hosted; the synthetic-to-real gap remains the dominant unknown across 30+ experiments).",
+      "Whether the Bonferroni threshold inconsistency (spec says 0.0125 = alpha/4, code uses 0.00833 = alpha/6) affects any future decision and should be re-frozen consistently."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is falsified — it concerns real Web dynamics and remains untested on production SPAs. MEASUREMENT_INVALID means the measurement infrastructure failed, not that the hypothesis is wrong.",
+      "Do not assume that BC PMI = 0.0 on Wikipedia NL transitions means titles carry no predictive information — the result is mathematically forced by SA-sparsity (8 transitions, 6 singleton SA pairs under Laplace alpha=1.0), not by genuine absence of title information.",
+      "Do not assume the PMI pipeline is production-ready — it is validated only on deterministic in-memory synthetic data (8-state SPA). No experiment has demonstrated PMI detection on genuinely stochastic real-web transitions.",
+      "Do not generalize the structural leakage finding beyond server-rendered MPAs with <a href> navigation — SPAs with hash routing, form submissions, and button clicks may exhibit fundamentally different leakage profiles.",
+      "Do not assume the frozen MEASUREMENT_INVALID verdict reflects scientific falsification of Web dynamics — the frozen decision rule's precedence (C7 checked first) masks the fact that the underlying effect is untested, not absent.",
+      "Do not continue locally-hosted synthetic FSM experiments for hash-based content observation — the parent's 3-condition sequence (0.493 → 0.226 → 0.0) closes that pathway. The next experiment must address the synthetic-to-real gap.",
+      "Do not assume URL-only PMI = 0.0 on Wikipedia NL reflects genuine absence of dynamical structure — Wikipedia H(S_next | URL) = 0.647 on all 91 transitions, indicating structure exists before leakage filtering."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-PHYSICS-35154721808/handoff.json (parent: carry_forward established rejected unknown do_not_assume, recommended_action pivot to production SPA)",
+    "research/experiments/EXP-PHYSICS-35154721808/result.json (parent: BC PMI 0.0 constant response, H=1.533, 3-condition ordered sequence)",
+    "research/experiments/EXP-PHYSICS-35154721808/audit.json (REVISE, V1 tautological_target, V2 degenerate_controls, V3 hypothesis_design_mismatch)",
+    "research/experiments/EXP-PHYSICS-35185288822/result.json (this experiment: MEASUREMENT_INVALID, C7 fails, leakage 78-92%, positive control BC 1.841)",
+    "research/experiments/EXP-PHYSICS-35185288822/audit.json (MEASUREMENT_INVALID, V2 structural leakage, V3 SA-sparsity, V4 permutation deviation, V5 negative control misimplemented, 7 required_fixes)",
+    "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json (wikipedia N=8, 6 unique SA pairs, BC PMI 0.0, perm_std 0.0)",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS across 30+ physics/frontier experiments"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35185288822/result.json:status=MEASUREMENT_INVALID outcome=NOT_APPLICABLE metrics.wikipedia_n_non_leakage=8 github=4 mdn=2 sites_nl_above_50=0 leakage_fraction 0.912/0.778/0.920",
+    "research/experiments/EXP-PHYSICS-35185288822/audit.json:status=MEASUREMENT_INVALID producer_claim_supported=false claim_ceiling='server-rendered MPAs structural leakage V2 V3' required_fixes site_selection SPAs data_throughput PMI_conformance negative_control Bonferroni SA_sparsity leakage_handling",
+    "research/experiments/EXP-PHYSICS-35185288822/analysis_results.json:site_results.wikipedia.title_aware_k3.bc_pmi=0 perm_std=0 N=8 unique_sa_pairs=6; checks.C7_data_sufficiency.ok=false; checks.C4_positive_control.ok=true",
+    "research/experiments/EXP-PHYSICS-35185288822/result.json:controls.POS_CTRL_SYNTHETIC_8STATE PASS BC 1.841; controls.BASELINE_URL_ONLY FAIL; observations structural_leakage singleton_SA_degeneracy PMI_valid",
+    "research/experiments/EXP-PHYSICS-35185288822/report.md:decision_table C7 FAIL MEASUREMENT_INVALID server-rendered not SPA leakage structural",
+    "research/experiments/EXP-PHYSICS-35185288822/wikipedia_transitions.json:91 raw transitions 83 leakage recomputed match",
+    "research/experiments/EXP-PHYSICS-35185288822/github_transitions.json:18 raw 14 leakage",
+    "research/experiments/EXP-PHYSICS-35185288822/mdn_transitions.json:25 raw 23 leakage",
+    "research/experiments/EXP-PHYSICS-35154721808/handoff.json:carry_forward established 3-condition sequence 0.493>0.226>0.0 rejected hash-based content observation unknown synthetic-to-real gap do_not_assume production SPAs",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS 30+ events dominant synthetic-to-real gap"
+  ],
+  "recommended_action": "Target production SPAs with hash-based client-side routing (TodoMVC hash-SPAs, React Router SPAs, Vue Router SPAs) where multiple client-side states share the same URL path, reducing URL-level leakage below 40%. Before designing the next experiment: (1) survey 3-5 candidate SPAs to measure empirical leakage rates; (2) fix Playwright EPIPE for higher throughput (50+ trajectories per site); (3) fix permutation protocol (within-strata, 1000 per stratum); (4) fix negative control (within-strata shuffle, strict pass criterion); (5) reconcile Bonferroni threshold (alpha/4 vs alpha/6). The next experiment should test title-aware PMI on genuine SPAs where the NL threshold is achievable, directly addressing the dominant synthetic-to-real gap. If no production SPA is accessible, a per-session hash pool design on the synthetic FSM could theoretically detect session-correlated genuine dynamics before production investment, but the parent handoff recommends against further locally-hosted synthetic FSM experiments."
+}

@@ -1,0 +1,41 @@
+{
+  "experiment_id": "EXP-GRAPH-35166507358",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can session-level behavioral signals measured from real HTTP requests on a Flask+PyJWT HS256 server detect auth-state drift (TP>=0.9) while tolerating structural noise (FP<=0.15), and does the C4 orthogonality criterion survive when both behavioral and structural signals are measured on the same co-occurring drift+noise conditions without block-zero imputation?",
+  "hypothesis": "Session-level behavioral signals — token validation failure rate (jwt.decode vs current signing key), session cookie validity (server-side session store lookup), and HTTP 401/403 boundary probing — detect auth-state drift with TP >= 0.90 and produce FP <= 0.15 on structural noise that does not affect auth state. When both behavioral and structural signals are measured on conditions where both are non-trivially present (co-occurring drift+noise), Pearson r < 0.3, demonstrating genuine orthogonality rather than block-zero artefact.",
+  "falsifier": "Behavioral signals fail to detect auth drift (TP < 0.90), or produce high FP on structural noise (FP > 0.15), or Pearson r >= 0.3 on co-occurring drift+noise conditions (non-trivial orthogonality), or AUC <= 0.80. If behavioral signals also fail the C-FRESHNESS gate on real HTTP, the domain has exhausted all single-signal-family approaches in deterministic/mock settings.",
+  "baselines": [
+    {
+      "id": "B-STRUCTURAL-JACCARD",
+      "description": "Jaccard structural similarity of (field_name,field_type) pairs — FP=1.0 under structural noise in deterministic mock (EXP-GRAPH-34788722106). Re-measured on this experiment's conditions as head-to-head baseline.",
+      "source": "EXP-GRAPH-34788722106"
+    },
+    {
+      "id": "B-STRUCTURAL-SCHEMA-DIFF",
+      "description": "Direct schema comparison diff magnitude — r=-0.59 orthogonal to Jaccard on deterministic mock (EXP-GRAPH-35154724244). Re-measured here for head-to-head behavioral-vs-structural comparison.",
+      "source": "EXP-GRAPH-35154724244"
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "Random classifier baseline (expected AUC=0.50)"
+    }
+  ],
+  "positive_control": "Known signing-key rotation: server rotates HS256 signing key, old tokens signed with previous key are submitted to jwt.decode against new key. This MUST produce a decoding exception (jwt.InvalidSignatureError or jwt.DecodeError) on every request. Behavioral signal token_validation_rate must be 1.0. This is a deterministic, non-ambiguous auth drift that any valid behavioral signal must detect.",
+  "null_control": "Structural noise: add optional response fields (field_addition) and change field descriptions (description_change) while auth state (signing key, session store, permissions) remains unchanged. Behavioral signals must NOT fire on these conditions. If behavioral signals produce FP > 0.15 on structural noise, they are confounded with structural signals and provide no new detection dimension.",
+  "measurement_validity": [
+    "Flask server started as a real subprocess (not mocked/imported) with PyJWT HS256 token signing and real Flask server-side session store",
+    "Tokens issued via jwt.encode() with real expiry claims; validated via jwt.decode() against current signing key — any key mismatch raises jwt.InvalidSignatureError",
+    "Session cookies use real Flask session mechanism with server-side session store; session invalidation clears the store",
+    "All behavioral signals derived from actual HTTP request/response cycles: token validation = jwt.decode success/failure; session validity = Set-Cookie presence + session store lookup; permission boundary = HTTP 401/403 status codes from endpoint probing",
+    "Structural signals (Jaccard, schema_diff) computed from actual response bodies, not from schema definitions",
+    "Per-sample variation: 30 independent request sequences per condition with token expiry timing jitter (±1s), session TTL variation (5-15s), permission probe ordering randomization. Wilson CIs reported for TP and FP rates.",
+    "Co-occurring drift+noise conditions: at least 3 conditions where auth drift and structural noise occur simultaneously (e.g., key rotation + field addition), enabling non-trivial Pearson r computation without block-zero imputation",
+    "Deterministic seed for reproducibility; all RNG states logged and reproducible"
+  ],
+  "decision_rule": "ALL of C1-C5 must pass for behavioral signals to survive the C-FRESHNESS gate:\n\nC1 (drift detection): Mean TP rate >= 0.90 across 5 drift patterns x 5 schema sizes = 25 conditions, with Wilson lower CI bound > 0.85 at each condition\nC2 (noise tolerance): Mean FP rate <= 0.15 across 4 noise patterns x 5 schema sizes = 20 conditions, with Wilson upper CI bound < 0.25 at each condition\nC3 (discrimination): Behavioral signal AUC >= 0.80 on drift-vs-noise discrimination across all 45 conditions (25 drift + 20 noise), with bootstrap 95% CI lower bound > 0.70\nC4 (non-trivial orthogonality): Pearson correlation between behavioral composite and best structural signal (Jaccard or schema_diff) < 0.3, computed ONLY on conditions where both signals are non-zero (co-occurring drift+noise conditions, or per-sample variation within drift conditions). NOT on block-zero imputed vectors.\nC5 (positive control): Signing-key-rotation behavioral signal fires on 100% of rotated-key requests (token_validation_rate=1.0 on 30/30 independent requests)\n\nIf C1 or C2 fails: FALSIFIES behavioral signals for C-FRESHNESS in this setting\nIf C3-C5 pass but C1-C2 fail: behavioral signals detected but not reliable enough for gate\nIf C1-C2 pass but C4 fails: behavioral signals work but are not genuinely orthogonal (confounded)\nIf C1-C2 pass but C5 fails: measurement validity concern",
+  "product_consequence_positive": "A validated new detection dimension for C-FRESHNESS beyond structural/schema-based signals. Session-level behavioral signals could be integrated into the freshness guard pipeline as a complementary signal, routing auth-state questions to behavioral signals and structural questions to schema signals. Product architecture would gain a second detection channel with demonstrated orthogonality.",
+  "product_consequence_negative": "All seven tested signal families (six structural + one behavioral) fail C-FRESHNESS in deterministic/mock settings. The C-FRESHNESS domain requires fundamentally different experimental designs: real API deployments with DB/cache/CDN stochasticity, production client traffic patterns, or composite multi-signal classifiers on live data. The magnitude confound may be intrinsic to deterministic/mock settings and not solvable by additional signal families.",
+  "estimated_cost": "Low-medium. Requires building a Flask mock API server with JWT/session middleware (reuse patterns from EXP-RUNTIME-33902315583 and EXP-RUNTIME-34015740602), implementing 5 drift patterns and 4 noise patterns with 3 co-occurring conditions, running 30 independent request sequences per condition, and computing behavioral + structural signals from actual HTTP. No browser automation, no external API calls, no LLM inference. Estimated 3-5 hours execution.",
+  "expected_information_gain": "High. This is the highest-upside untested alternative identified by the parent handoff. If behavioral signals succeed on real HTTP, it opens a validated detection dimension for C-FRESHNESS. If they fail, it narrows the search space to real-API deployments or composite multi-signal approaches. The co-occurring drift+noise condition design specifically resolves the block-zero orthogonality artefact from the parent. Either outcome is highly informative for the C-FRESHNESS claim and product architecture decisions."
+}

@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35166505835",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "R1_RESOLVE_VERDICT_MAPPING: The producer C2 resolution aligns C2 definition (null>=observed = metric FAILS) with falsifier/null_control but contradicts the frozen decision_rule verdict mapping from EXP-INTEL-35137036013 which states C1=true AND C2=true -> SURVIVES_CURRENT_TEST. The parent audit V4 already flagged this: falsifier/null_control treat null>=observed as FALSIFYING while decision_rule treats same inequality as SURVIVING. The producer report.md claims 'all agree: null >= observed is the failure condition' while simultaneously quoting decision_rule as SURVIVES_CURRENT_TEST (result.json C2_RESOLUTION.consistency_check). Fix by issuing a single coherent amendment to the frozen spec: either (a) redefine C2 as null < observed -> SURVIVES and keep verdict mapping, or (b) keep C2 as null>=observed and flip verdict mapping to C1 AND NOT C2 -> SURVIVES (observed must exceed null to survive, consistent with EXP-INTEL-35112013458 where 0.5275>0.3 FALSIFIED). Treat = boundary explicitly as failure consistent with 'does observed exceed chance?' semantics.",
+    "R2_SPECIFY_NULL_MODEL_TO_REPRODUCIBILITY: The 8-component canonical spec states 'random ROLE_MAP assignment, 1000 iterations, seed=42' without the precision required by audit V5 of EXP-INTEL-35137036013 (conditioning set, RNG type, role-count mapping, tie handling, per-definition vs pooled draws). That audit showed producer M4 values (0.40004004004004 etc.) are not reproducible under any straightforward reading: unconditional RandomState(42)=0.4150, default_rng(42)=0.3955, conditioning on definition roles=0.211/0.433/0.626, seed sweep 0-1999 never hits 0.400040. Specify exactly: RNG implementation (Python random.Random vs numpy RandomState vs default_rng), whether ROLE_MAP draws are unconditional over the 8 raw roles with p=0.5 or conditioned on definition roles, how full counts are derived for combobox/div/label/span, how pairwise agreement ties are counted, and whether null draws are pooled or per-definition. Make the null result reproducible from HEAD without the missing /tmp/opencode script.",
+    "R3_FIX_DENSITY_DENOMINATOR_AMBIGUITY: The canonical spec component 4 states 'count matching roles / total DOM elements (or locatable elements, depending on substrate)' while reconstruct.py computes density as count / elements_with_bbox (compute_density(count, elements_with_bbox)). The parent prereg defines denominator as total_locatable_elements_in_page. Choose one operational denominator and make it consistent across truncated and full-DOM calculations; do not leave substrate-dependent ambiguity that changes ordering results.",
+    "R4_CORRECT_C1_C2_RESOLVED_ASSESSMENT: Do not mark C1_C2_RESOLVED true until R1-R3 are addressed. Update result.json metrics C1_C2_RESOLVED and C2_CANONICAL_SPEC_PRODUCED to reflect that the spec ambiguity is narrowed but not fully resolved to an unambiguous, implementable freezing amendment. The verbatim C2 direction (null>=observed = FAILS) is correct per original FALSIFIED intent but not yet reconciled with the frozen verdict rule.",
+    "R5_COMMIT_CANONICAL_SCRIPT_OR_SCOPE_NOTE: The blocking code dependency remains (canonical script absent from HEAD). Either commit the canonical analysis script implementing the 8-component spec at a stable repo path (e.g., research/intel/canonical_35166505835.py) and include its sha256 in provenance.json, or formally accept committed analyze.py as non-canonical with explicit scope note. Until then measurement reproducibility claim remains blocked; do not carry 'blocking reduced to substrate only' as if code blocker were resolved by a design document alone.",
+    "R6_DOWNGRADE_BLOCKING_REDUCED_TO_PARTIAL: Retract verdict BLOCKING_REDUCED. At most one blocker is verified reduced (substrate confirmed). The design blocker is partially narrowed but still has open ambiguity (R1 verdict mapping, R2 null reproducibility, R3 denominator). The appropriate interim status is DESIGN_PARTIALLY_RESOLVED with two remaining blockers (substrate + frozen spec coherence + code commitment), not BLOCKING_REDUCED with one remaining."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_C2_VERDICT_MAPPING_UNRESOLVED",
+      "severity": "high",
+      "finding": "Producer correctly diagnoses the falsifier vs decision_rule contradiction at null=observed and correctly grounds C2 definition in original FALSIFIED intent (null>=observed = observed does NOT exceed chance = FAILS, result.json C2_RESOLUTION). However producer then claims this resolution 'aligns falsifier and decision_rule: both say null >= observed is bad' while quoting decision_rule as C2=true -> SURVIVES_CURRENT_TEST. Per EXP-INTEL-35137036013 spec.json decision_rule, C1=true AND C2=true -> SURVIVES, i.e., null>=observed is treated as SURVIVING, opposite to falsifier/null_control and opposite to EXP-INTEL-35112013458 where null 0.5275 > observed 0.3 was FALSIFYING. The contradiction is therefore not resolved to a single coherent direction; only the C2 definition was aligned, the verdict mapping remains inverted. This is precisely audit V4 of the parent chain.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/spec.json:falsifier (F2 null mean > observed -> FALSIFIED)",
+        "research/experiments/EXP-INTEL-35137036013/spec.json:null_control (null >= observed -> FALSIFIED stands)",
+        "research/experiments/EXP-INTEL-35137036013/spec.json:decision_rule C2_NULL_EXCEEDS_OBSERVED null >= observed and C1 AND C2 -> SURVIVES_CURRENT_TEST",
+        "research/experiments/EXP-INTEL-35166505835/result.json:metrics.C2_RESOLUTION.consistency_check",
+        "research/experiments/EXP-INTEL-35166505835/report.md: C2 Resolution Analysis table and consistency paragraph",
+        "research/experiments/EXP-INTEL-35112013458/result.json:metrics.null_mean_pairwise_agreement 0.5275 > 0.3 FALSIFIED"
+      ]
+    },
+    {
+      "id": "V2_CANONICAL_SPEC_UNDERSPECIFIED_NULL",
+      "severity": "high",
+      "finding": "The 8-component canonical spec does not meet the reproducibility bar set by parent audit R2. It repeats the underspecified 'random ROLE_MAP assignment, 1000 iterations, seed=42, compute pairwise agreement' without conditioning set, RNG type, count-mapping for combobox/div/label/span, tie handling, or per-definition vs pooled procedure. Parent audit demonstrated seed sweeps 0-1999 for both numpy RNGs never reproduce M4 0.40004004004004 and that recipe choice flips C2 direction (0.211 < 0.333 < 0.626). A design document that leaves this open cannot unblock measurement reproducibility; the code blocker remains beyond a substrate-only remaining.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35166505835/result.json:metrics.canonical_script_spec_components[5] null model",
+        "research/experiments/EXP-INTEL-35137036013/audit.json:V5_NULL_MODEL_NOT_REPRODUCIBLE and R2",
+        "research/experiments/EXP-INTEL-35131994346/reconstruct.py:random_baseline function and full_estimates mapping"
+      ]
+    },
+    {
+      "id": "V3_DENSITY_DENOMINATOR_INCONSISTENCY",
+      "severity": "medium",
+      "finding": "Canonical spec density component says 'count / total DOM elements (or locatable elements, depending on substrate)' which conflates totalDom, locatable_elements, and elements_with_bbox. reconstruct.py uses elements_with_bbox as denominator (compute_density(count, elements_with_bbox)), while parent prereg specifies total_locatable_elements_in_page. The substrate-dependent alternative changes density magnitudes and could shift ordering; the spec must commit to one operational denominator for both truncated and full calculations.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35166505835/result.json:metrics.canonical_script_spec_components[3]",
+        "research/experiments/EXP-INTEL-35131994346/reconstruct.py:compute_density function",
+        "research/experiments/EXP-INTEL-35137036013/prereg.md:Density computation section"
+      ]
+    },
+    {
+      "id": "V4_BLOCKING_REDUCED_OVERCLAIM",
+      "severity": "medium",
+      "finding": "Producer verdict BLOCKING_REDUCED (C1 AND C2 AND C3 true) assumes two of three blockers resolved. Only C3 substrate blocker is independently verified reduced (cap present). C1_C2_RESOLVED is overstated due to V1, and C2_CANONICAL_SPEC_PRODUCED is a design document, not a committed executable artifact. Parent handoff and parent audit both classify 'canonical script absence' and 'C2 semantic contradiction' as blocking; a specification without implementation and without coherent verdict mapping does not reduce blocking to substrate-only. The design lane has narrowed the problem but not removed the design/code blockers.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35137036013/handoff.json:dependencies blocking substrate, code, design",
+        "research/experiments/EXP-INTEL-35137036013/audit.json:required_fixes R1-R3",
+        "research/experiments/EXP-INTEL-35166505835/spec.json:decision_rule VERDICT RULES"
+      ]
+    },
+    {
+      "id": "V5_NO_NEW_MEASUREMENT_BUT_VALID_AUDIT",
+      "severity": "informational",
+      "finding": "This experiment is correctly scoped as a dependency audit with no browser interaction, no data collection, no model calls. No new outcome-bearing measurement was performed, so no new leakage or sampling bias is introduced. The audit scope is respected; the issue is interpretive (producer interpretation exceeds observation).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35166505835/spec.json:measurement_validity",
+        "research/experiments/EXP-INTEL-35166505835/result.json:validity_notes",
+        "research/experiments/EXP-INTEL-35166505835/provenance.json:environment"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_SPEC_COHERENCE",
+      "finding": "PASS in observation, PARTIAL in resolution. Contradiction confirmed independently: frozen spec from EXP-INTEL-35137036013 contains falsifier F2 null > observed -> FALSIFIED, null_control null >= observed -> FALSIFIED stands, and decision_rule C2 null >= observed -> C2=true -> SURVIVES_CURRENT_TEST. At boundary null=observed they conflict. Producer extraction (result.json metrics.B1_SPEC_COHERENCE) matches independent read. The resolution direction (null>=observed = FAILS) is correctly grounded in original FALSIFIED intent (0.5275 > 0.3), but verdict mapping remains unresolved (V1).",
+      "evidence_ref": "research/experiments/EXP-INTEL-35137036013/spec.json"
+    },
+    {
+      "id": "B2_CANONICAL_SCRIPT_ABSENCE",
+      "finding": "PASS. Independent repo search confirms no committed script at HEAD implements all four components (3-definition per-role filtering, cart_1 dedup, float scaling, null-model with random ROLE_MAP). Closest is reconstruct.py (has 3-def, dedup, float, no null model) and the three analyze.py variants (no 3-def, with/without float, with null model). Producer list scripts_checked matches audit search. Blocking code dependency confirmed.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35131994346/reconstruct.py; research/experiments/EXP-INTEL-35112013458/analyze.py; research/experiments/EXP-INTEL-35124660457/analyze.py; research/intel/webarena_task_analysis/analyze.py"
+    },
+    {
+      "id": "B3_MEASURE_JS_CAP",
+      "finding": "PASS. MEASURE_JS in research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py line 89 still contains 'if (locatableSample.length < 20) {'. No other MEASURE_JS found repo-wide. All 8 raw measurements have sample_len 20 vs locatable_elements 82/32/21, confirming truncation still present. Substrate blocker CONFIRMED.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89"
+    }
+  ],
+  "recomputed_metrics": {
+    "C1_C2_RESOLVED": {
+      "producer": true,
+      "audit": false,
+      "reason": "Definition direction correctly resolved to null>=observed=FAILS per FALSIFIED intent, but decision_rule verdict mapping (C1 AND C2 -> SURVIVES) remains inverted and unamended. Single coherent direction not yet achieved; requires frozen spec amendment for verdict rule. See V1.",
+      "producer_match": false
+    },
+    "C2_CANONICAL_SPEC_PRODUCED": {
+      "producer": true,
+      "audit": "partial",
+      "reason": "8-component spec exists and correctly lists 3 definitions, dedup, float scaling, density, ordering, and C1/C2 evaluation using resolved direction. However null-model recipe underspecified (V2) and density denominator ambiguous (V3). Spec is a design artifact, not a committed executable script, so code blocker not removed.",
+      "producer_match": "partial"
+    },
+    "C3_SUBSTRATE_BLOCKER_CONFIRMED": {
+      "producer": true,
+      "audit": true,
+      "reason": "Cap present at line 89 confirmed independently; runtime lane has not removed substrate blocker.",
+      "producer_match": true
+    },
+    "B1_SPEC_COHERENCE": {
+      "contradiction_confirmed": true,
+      "falsifier_direction": "null > observed -> FALSIFIED",
+      "decision_rule_direction": "null >= observed -> C2=true -> SURVIVES_CURRENT_TEST",
+      "null_control_direction": "null >= observed -> FALSIFIED stands",
+      "boundary_conflict": "null = observed is FALSIFIED per falsifier/null_control but SURVIVES per decision_rule",
+      "producer_match": true
+    },
+    "B2_CANONICAL_SCRIPT_ABSENCE": {
+      "canonical_script_exists": false,
+      "closest_artifact": "research/experiments/EXP-INTEL-35131994346/reconstruct.py (3-def + dedup + float, no null model)",
+      "producer_match": true
+    },
+    "B3_MEASURE_JS_CAP": {
+      "cap_present": true,
+      "line": 89,
+      "content": "if (locatableSample.length < 20) {",
+      "file": "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py",
+      "producer_match": true
+    },
+    "verdict": {
+      "producer": "BLOCKING_REDUCED",
+      "audit": "DESIGN_PARTIALLY_RESOLVED",
+      "reason": "Producer C1 AND C2 AND C3 -> BLOCKING_REDUCED overstates: C1 not fully resolved (V1), C2 only partially specified (V2,V3) and not committed as code, only C3 verified. Maximum justified is substrate blocker confirmed, design narrowed but not closed, code still absent."
+    }
+  },
+  "claim_ceiling": "Dependency audit confirmed: (1) C2 semantic contradiction in frozen spec from EXP-INTEL-35137036013 is real (null>observed=FALSIFIED vs null>=observed=SURVIVES at boundary and in verdict mapping); producer correctly identifies the statistical intent (observed must exceed null to survive, as in EXP-INTEL-35112013458 0.3 < 0.5275 FALSIFIED) and proposes the coherent definition null>=observed = metric FAILS (C2=true = FAILS). This narrows but does not close the design blocker because the frozen decision_rule verdict mapping C1 AND C2 -> SURVIVES remains inverted and unamended, and the null-model recipe remains underspecified to reproducibility. (2) No canonical analysis script exists at HEAD; closest is reconstruct.py (3-def+dedup+float, no null model). A design document (8-component spec) was produced but not committed as executable code, so the code blocker remains. (3) Substrate blocker confirmed: MEASURE_JS still contains 'if (locatableSample.length < 20)' at line 89. Full DOM has never been measured; no new ordering or null-model evidence was produced. Do not claim two of three blockers resolved or that only substrate remains; at most one blocker is fully verified (substrate still present), design is partially narrowed, code still absent. C-MEAS-VALID remains MEASUREMENT_INVALID/BLOCKED for the density metric family until a coherent spec amendment (definition + verdict mapping + null recipe + denominator) is frozen and a canonical script is committed and a runtime cap removal provides true full DOM enumeration.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35166505835/request.json (sha256 dd1ea16d08f06485d0a541bef1477f9ca184a5d4dfb496fe4d7dbb3a81ff6096)",
+    "research/experiments/EXP-INTEL-35166505835/spec.json (sha256 724d7d91f1ea1ffdf234c7b78c80a57fc6d320645e0082c6be8dba71ebbfe2ce)",
+    "research/experiments/EXP-INTEL-35166505835/prereg.md (sha256 bf3d76560f89eaa607680b35649f512dee935b36dde75e56500179a559fa35b8)",
+    "research/experiments/EXP-INTEL-35166505835/freeze.json",
+    "research/experiments/EXP-INTEL-35166505835/result.json",
+    "research/experiments/EXP-INTEL-35166505835/report.md",
+    "research/experiments/EXP-INTEL-35166505835/provenance.json",
+    "research/experiments/EXP-INTEL-35137036013/spec.json (falsifier F2, null_control, decision_rule C2 and VERDICT RULES)",
+    "research/experiments/EXP-INTEL-35137036013/audit.json (V4_C2_SEMANTIC_CONTRADICTION, V5_NULL_MODEL_NOT_REPRODUCIBLE, R2, R3)",
+    "research/experiments/EXP-INTEL-35137036013/handoff.json (blocking substrate, code, design dependencies; carry_forward established/rejected/unknown/do_not_assume)",
+    "research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py:89 (locatableSample cap)",
+    "research/experiments/EXP-INTEL-35131994346/reconstruct.py (3-definition per-role filtering, compute_density with elements_with_bbox, random_baseline)",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py (random ROLE_MAP with Python random.Random seed=42, null mean 0.5275 vs observed 0.3 FALSIFIED)",
+    "research/experiments/EXP-INTEL-35112013458/result.json (null_mean 0.5275, observed 0.3, FALSIFIED)",
+    "codex/index.json and codex/claim_state.json C-MEAS-VALID chain (EXP-INTEL-35112013458 FALSIFIED intent)"
+  ],
+  "unresolved": [
+    "Whether the frozen spec amendment should redefine C2 as null < observed for SURVIVES or flip verdict mapping to C1 AND NOT C2 -> SURVIVES; both are logically equivalent but must be frozen explicitly before re-run.",
+    "Exact null-model recipe for reproducibility: RNG type, conditioning set, role-to-count mapping for combobox/div/label/span, pairwise agreement tie handling, per-definition vs pooled draws; required to make M4 reproducible and C2 adjudicable.",
+    "Operational density denominator: totalDom vs locatable_elements vs elements_with_bbox; choice affects density magnitudes and possibly ordering under full enumeration.",
+    "Whether canonical script should be committed at research/intel/canonical_35166505835.py with 3-definition filtering, dedup, float scaling, reproducible null model, or committed analyze.py accepted as canonical with explicit scope note.",
+    "Whether full DOM enumeration (after cap removal) changes density magnitudes, ordering significance, and null distribution beyond current proxy estimators.",
+    "Whether menuitem/tab roles contribute additively when present (0 counts in current sample); requires site where those roles appear.",
+    "Statistical significance of product_listing vs detail ordering swap under true full enumeration (n=3 per type, n=1 distinct cart, no CI reported)."
+  ]
+}

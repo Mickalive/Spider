@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35166507358",
+  "lane": "graph",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "C4 orthogonality fails as specified: observed |r|=0.593 >=0.3 threshold on pooled co-occurring conditions (n=450). Frozen decision rule requires |r|<0.3; ALL of C1-C5 must pass for SURVIVES_CURRENT_TEST. Producer outcome MIXED is correct but does not support full C-FRESHNESS gate. No SURVIVES claim is justified without rule change.",
+    "Fix co-occurring measurement design: 5/15 co-occurring conditions (signing_key_rotation+optional_field_addition across n=10..50) have zero observable structural signal because drift causes HTTP 401 on all 3 probes, so current_schema=None and derived structural score imputed as 0.0. These conditions are not co-occurring in measurement despite being co-occurring by design. Structural noise is masked by auth failure. Redesign to collect structural signal independently of auth success (e.g., separate unauthenticated probe, or structural diff from baseline schema definitions, not only from 200 response bodies) or select drift patterns that do not uniformly block all endpoints.",
+    "Fix per-condition zero-variance artefact: within each co-occurring condition behavioral composite is constant (2.0, 3.0, or 0.666) and structural constant within 1/3 pattern types, giving per-condition Pearson r=nan (report.md table). Pooled r is driven entirely by deterministic pairing of 3 chosen drift-noise pairs across 5 sizes, not by within-condition covariation. Provide per-sample stochastic variation that actually varies both signals within the same condition, or pre-register a different orthogonality statistic that does not conflate between-pairing deterministic correlation with genuine coupling.",
+    "Correct Pearson r sign reporting: producer reports pearson_r=+0.5932255944438963, recomputation on raw_evidence/derived_measurements.json cooccurring_behavioral_scores vs cooccurring_structural_scores gives r=-0.5932255944438963 (p≈4e-44, permutation p=0.001 stored). Absolute value identical, threshold outcome unchanged (|r|>=0.3 FAIL), but sign error should be corrected. Also reconcile Wilson upper for FP 0/30: recomputed -0.0 to 0.1135 matches producer.",
+    "Correct prereg/spec arithmetic and reporting: prereg Unit of Analysis claims 45*5*30=6750 observations but actual design is 25 drift +20 noise +15 co-occurring=60 conditions*30=1800 sequences (result.json metrics n_total_sequences=1800 correct). Spec measurement_validity states 'Jaccard, schema_diff computed from actual response bodies' but for 401 responses no body schema exists — structural imputed zero. Disclose this masking in validity_notes and bound ceiling accordingly.",
+    "Narrow ceiling for degenerate discrimination: AUC=1.0 with bootstrap CI [1.0,1.0] reflects perfect deterministic separation (drift_behavioral_scores in {0.666,2,3}, noise_behavioral_scores all 0.0) not empirical generalizable discrimination. Bootstrap CI at ceiling is degenerate/uninformative. Do not claim >0.80 discrimination generalizes beyond this deterministic Flask mock without stochastic overlap."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_STRUCTURAL_MASKING_BY_AUTH_FAILURE",
+      "severity": "high",
+      "category": "measurement_validity",
+      "description": "Structural signals require a 200 response body to extract schema, but drift patterns that cause 401 on all endpoints (signing_key_rotation, token_expiry) yield current_schema=None. In derived_measurements.json cooccurring_structural_scores, all 150 samples from signing_key_rotation+optional_field_addition (5 sizes *30) are exactly 0.0, while report.md shows Structural Mean 0.0 for those rows. 1/3 of co-occurring design has no structural observability. C4 pooled r therefore compares 5 conditions with zero structural variance against 10 with non-zero structural, violating intent that both signals be non-trivially present on each co-occurring condition.",
+      "evidence": "raw_evidence/experiment_data.json cooccurring_results 45,48,51,54,57 n_with_schema=0; raw_evidence/derived_measurements.json cooccurring_structural_scores first 30 and every third block =0.0; report.md Co-occurring table Structural Mean 0.0 rows"
+    },
+    {
+      "id": "V2_PER_CONDITION_ZERO_VARIANCE",
+      "severity": "high",
+      "category": "construct_validity",
+      "description": "Within each of 15 co-occurring conditions behavioral composite has zero variance (constant) and structural has zero variance for signing_key_rotation pairings and near-constant for others. Per-condition Pearson r is nan for all 15 (report.md). Pooled r therefore measures between-condition deterministic pairing (drift pattern -> 0.666/2/3, noise pattern -> 0/1/1.5/2/5.5/6) not genuine within-condition orthogonality. Block-zero imputation is removed per prereg, but block-constant artefact remains.",
+      "evidence": "report.md Co-occurring table Pearson r column all nan; derived_measurements.json cooccurring_behavioral_scores unique values {0.666,2.0,3.0} with 150 repeats each; recomputed per-condition variance 0"
+    },
+    {
+      "id": "V3_SIGN_ERROR_AND_DEGENERATE_CI",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "description": "Recomputed signed Pearson r=-0.593 vs producer +0.593. Decision uses |r| so threshold fails either way, but sign indicates low behavioral pairs with high structural (permission_boundary 0.666 with 5.5/6.0). AUC bootstrap CI [1.0,1.0] degenerate at ceiling; mean_TP=1.0 Wilson lower 0.886 and mean_FP=0.0 Wilson upper 0.113 correct but reflect deterministic 30/30 and 0/30 outcomes with no empirical noise overlap.",
+      "evidence": "raw_evidence/derived_measurements.json pearson_r 0.593 vs recomputed -0.593 via scipy pearsonr; result.json metrics auc_ci_lower=1.0 auc_ci_upper=1.0; wilson 30/30=0.886 0/30=0.113 recomputed matches"
+    },
+    {
+      "id": "V4_SESSION_STORE_REPRESENTATION_GAP",
+      "severity": "low",
+      "category": "measurement_validity",
+      "description": "Spec/prereg require 'real Flask server-side session store (filesystem-based)' and 'real Flask session mechanism'. Implementation uses manual in-memory dict `sessions` with custom /session/status validation (mock_server.py L61, L192-214), not Flask-Session filesystem. Functionally real HTTP session cookies are used (request.cookies.get('session_id')) and invalidation clears store, so behavioral signal (session_state_change) is derived from real HTTP Set-Cookie/store lookup, but representation claim is overstated.",
+      "evidence": "mock_server.py server_state session_store, sessions dict L61, validate_session L192, create_session L198; provenance.json environment Flask not listed"
+    },
+    {
+      "id": "V5_DETERMINISTIC_CONSTRUCTION_TAUTOLOGY_RISK",
+      "severity": "medium",
+      "category": "internal_validity",
+      "description": "TP=1.0 and FP=0.0 and AUC=1.0 follow deterministically from construction: noise patterns change only schema fields never checked by auth middleware; drift patterns use pre-drift credentials guaranteed invalid (token_expiry cutoff, key rotation, session clearance). No stochastic condition causes drift token to accidentally validate or noise to trigger 401. This validates the mock correctly implements separation, but provides no estimate of real-world overlap where auth and structural changes co-vary.",
+      "evidence": "run_experiment.py set_drift branches L354-370, use_pre_drift_credentials logic L500-505, run_request_sequence 401/403 counting; result.json pattern_tp_rates all 1.0 pattern_fp_rates all 0.0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STRUCTURAL-JACCARD",
+      "finding": "Not head-to-head discriminated. Structural signals computed only for C4 co-occurring correlation, not as competing drift-vs-noise classifier AUC. Producer reports Jaccard FP=1.0 in prior EXP-GRAPH-34788722106 and schema_diff r=-0.59 in EXP-GRAPH-35154724244, but does not recompute baseline AUC on current conditions. Recomputed data shows structural scores cleanly separate noise (0.0 vs 0.6-6.0) when observable, but masked to 0 under auth failure — baseline would also be masked, so comparison is not fair without independent structural probe.",
+      "evidence": "spec.json baselines B-STRUCTURAL-JACCARD, B-STRUCTURAL-SCHEMA-DIFF; result.json no baseline AUC metrics; derived_measurements.json cooccurring_structural_scores"
+    },
+    {
+      "id": "B-RANDOM",
+      "finding": "Random AUC=0.5 baseline trivially beaten (observed AUC=1.0). B-NULL-SHUFFLE permutation null mentioned in prereg but not executed for AUC; only Pearson permutation test done (p=0.001). Null for discrimination not demonstrated.",
+      "evidence": "prereg.md Nulls and Baselines #4 B-NULL-SHUFFLE 1000 shuffles; result.json metrics no shuffled AUC"
+    },
+    {
+      "id": "B-STRUCTURAL-SCHEMA-DIFF",
+      "finding": "Same as Jaccard — structural_best = max(schema_diff, 1-Jaccard) used for C4 correlation only. No standalone structural AUC reported to test producer interpretation that behavioral adds new dimension.",
+      "evidence": "run_experiment.py L735 structural_best; derived_measurements.json"
+    }
+  ],
+  "recomputed_metrics": {
+    "mean_tp_rate": 1.0,
+    "mean_fp_rate": 0.0,
+    "auc": 1.0,
+    "auc_ci_lower": 1.0,
+    "auc_ci_upper": 1.0,
+    "pearson_r_signed": -0.5932255944438963,
+    "pearson_r_abs": 0.5932255944438963,
+    "pearson_p_permutation": 0.000999000999000999,
+    "pearson_p_parametric": 4.040167972676008e-44,
+    "positive_control_rate": 1.0,
+    "wilson_lower_30_30": 0.8864829086095221,
+    "wilson_upper_0_30": 0.113517091390478,
+    "n_drift_conditions": 25,
+    "n_noise_conditions": 20,
+    "n_cooccurring_conditions": 15,
+    "n_samples_per_condition": 30,
+    "n_total_sequences": 1800,
+    "notes": "Recomputed from raw_evidence/derived_measurements.json and experiment_data.json. mean_tp, mean_fp, AUC exact match producer. Pearson signed sign correction only. Wilson bounds exact match. n_total_sequences 1800 =60*30 matches artifacts, not prereg 6750."
+  },
+  "claim_ceiling": "Behavioral signals on Flask 3.x + PyJWT HS256 localhost mock (5 drift patterns, 4 noise patterns, 30 sequences/condition) reliably detect auth-state drift with TP=1.0 (Wilson lower 0.886) and tolerate structural noise with FP=0.0 (Wilson upper 0.113) yielding AUC=1.0 — but only in this deterministic construction with zero overlap and degenerate CI. Positive control signing-key rotation fires on 30/30. No claim supported for orthogonality: pooled |r|=0.593 FAILS frozen C4 threshold <0.3; 1/3 of co-occurring conditions have no structural observability due to 401 masking, and per-condition r undefined (zero variance) so pooled r measures deterministic pairing artefact, not genuine independence. Behavioral and structural signals are discriminative on separate dimensions when measured independently (drift-only vs noise-only), but co-occurring orthogonality not demonstrated. Generalization to production OAuth/OIDC, RS256/ES256, CDN/cache stochasticity, heterogeneous traffic, or composite classifiers remains untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35166507358/request.json",
+    "research/experiments/EXP-GRAPH-35166507358/spec.json",
+    "research/experiments/EXP-GRAPH-35166507358/prereg.md",
+    "research/experiments/EXP-GRAPH-35166507358/freeze.json",
+    "research/experiments/EXP-GRAPH-35166507358/result.json",
+    "research/experiments/EXP-GRAPH-35166507358/report.md",
+    "research/experiments/EXP-GRAPH-35166507358/provenance.json",
+    "research/experiments/EXP-GRAPH-35166507358/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35166507358/mock_server.py",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/experiment_data.json",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/derived_measurements.json",
+    "research/experiments/EXP-GRAPH-35166507358/raw_evidence/decision_evaluation.json",
+    "research/experiments/EXP-GRAPH-35155716123/handoff.json"
+  ],
+  "unresolved": [
+    "Whether co-occurring drift+noise orthogonality can be demonstrated with a design where structural signal remains observable despite 401 (independent structural probe).",
+    "Whether behavioral AUC>0.80 and FP<=0.15 persist when auth drift and structural noise have stochastic overlap rather than deterministic separation.",
+    "Whether bounded optional field addition (1-2 fields) would allow structural baselines to pass C2, and how baseline comparison changes when structural not masked.",
+    "Whether composite behavioral+structural classifiers outperform individual signals on co-occurring conditions.",
+    "Generalization beyond HS256 to RS256/ES256/OAuth/OIDC production middleware (Auth0/Okta/Keycloak) and beyond localhost Flask to real API deployments with DB/cache/CDN stochasticity."
+  ]
+}
