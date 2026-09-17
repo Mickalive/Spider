@@ -1,17 +1,25 @@
 {
   "experiment_id": "EXP-INTEL-35166505835",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can the intel lane, within its own scope, resolve the two non-substrate blocking dependencies (C2 semantic contradiction in spec.json and canonical-script absence) that prevent re-running the full-DOM density metric measurement, and does a formal dependency audit confirm the substrate (locatableSample cap) remains the sole remaining runtime-lane blocker?",
+  "hypothesis": "The C2 semantic contradiction (falsifier says null>observed=FALSIFIED, decision_rule says null>=observed=SURVIVES) can be resolved to a single coherent direction by analyzing the statistical intent of the original FALSIFIED verdict from EXP-INTEL-35112013458, and a concrete canonical-script specification can be produced that unblocks measurement reproducibility. The locatableSample cap in MEASURE_JS remains the sole remaining runtime-lane blocker.",
+  "falsifier": "If (F1) the C2 contradiction cannot be resolved without introducing a new scientific assumption not present in the original experiment design, OR (F2) the canonical-script specification is inconsistent with the 3-definition per-role filtering algorithm established in EXP-INTEL-35131994346 reconstruct.py, OR (F3) the locatableSample cap has been removed (meaning the substrate blocker was resolved and this experiment's scoping is obsolete), THEN the design work is invalid or superseded.",
+  "baselines": [
+    "B1_SPEC_COHERENCE: Read the frozen spec.json from EXP-INTEL-35137036013 (the last experiment in this chain). Extract the C2 falsifier clause and the C2 decision_rule clause. Document the exact contradiction (falsifier: null>observed=FALSIFIED; decision_rule: null>=observed=SURVIVES). Verify these are still present in the canonical spec at HEAD.",
+    "B2_CANONICAL_SCRIPT_ABSENCE: Search the repository for any committed canonical analysis script implementing 3-definition per-role filtering (DEF-FULL-MAP: a+button+input+combobox, DEF-FORM-ONLY: button+combobox, ISOLATED-A-LINK: a only) with cart_1 deduplication and float scaling. Expected: no such script exists at HEAD (confirming the blocking dependency).",
+    "B3_MEASURE_JS_CAP: Search MEASURE_JS in research/experiments/EXP-INTEL-34718481334/measure_fullpage_yield.py for the locatableSample cap. Expected: 'if (locatableSample.length < 20)' still present at line 89 (confirming the substrate blocker)."
+  ],
+  "positive_control": "The frozen spec.json from the prior experiment (EXP-INTEL-35137036013) contains both the contradictory C2 clauses, confirming the contradiction exists and needs resolution. The canonical script search returns zero matches, confirming the code blocker. The MEASURE_JS cap search returns a match, confirming the substrate blocker.",
+  "null_control": "If the C2 contradiction has already been resolved in a newer spec.json (i.e., a subsequent experiment corrected it), the resolution work is unnecessary and the experiment is superseded.",
+  "measurement_validity": [
+    "This experiment is a dependency audit and design-resolution exercise, not an outcome-bearing measurement. No browser interaction, no data collection, no model calls required.",
+    "All evidence must come from reading committed artifacts (spec.json, code files, MEASURE_JS) — not from re-running measurements.",
+    "The C2 resolution must be grounded in the original experiment's statistical intent (the FALSIFIED verdict chain from EXP-INTEL-35112013458), not in post-hoc analysis of new data."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_C2_RESOLVED: The C2 semantic contradiction is resolved to a single coherent direction that is (a) consistent with the original FALSIFIED verdict's statistical intent, (b) unambiguous for both falsifier and decision_rule, and (c) implementable in a canonical analysis script.\n\nC2_CANONICAL_SPEC_PRODUCED: A concrete canonical-script specification exists that specifies: (a) 3-definition per-role filtering (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK), (b) cart_1 deduplication, (c) float scaling, (d) null-model implementation (random ROLE_MAP, seed, iterations), (e) C1/C2 evaluation logic using the resolved C2 direction.\n\nC3_SUBSTRATE_BLOCKER_CONFIRMED: The locatableSample cap is still present in MEASURE_JS (runtime lane has not addressed the substrate dependency).\n\nVERDICT RULES:\n- If C1=true AND C2=true AND C3=true: BLOCKING_REDUCED (two of three blockers resolved by intel lane; only substrate fix remains, routing to runtime)\n- If C1=true AND C2=true AND C3=false: SUPERSEDED (substrate fix already applied; the canonical-script and C2 work is still useful but the experiment's blocking premise is obsolete)\n- If C1=false OR C2=false: DESIGN_FAILED (the contradiction cannot be resolved or the canonical spec is inconsistent; re-examine the original experiment chain)\n- If C3=false AND (C1=false OR C2=false): SUPERSEDED_WITH_DESIGN_FAILED",
+  "product_consequence_positive": "If BLOCKING_REDUCED: The intel lane has resolved two of three blocking dependencies within its own scope. The next re-run of the full-DOM density metric measurement has only one remaining blocker (runtime substrate fix), making the path to a valid measurement concrete. Product lane gains a reproducible canonical-script specification that can be committed by any lane.",
+  "product_consequence_negative": "If DESIGN_FAILED: The C2 contradiction or canonical-script inconsistency cannot be resolved without new scientific assumptions. The full-DOM density metric measurement chain is blocked at a deeper level than previously recognized. Product lane must not adopt the density-based ordering metric until the underlying statistical framework is clarified.",
+  "estimated_cost": "Minimal: offline code/spec reading and analysis. No browser interaction, no data collection, no model calls. Compute cost: near zero (file reads and text analysis).",
+  "expected_information_gain": "Medium-high: resolves a blocking design ambiguity that has persisted across 4 experiments (EXP-INTEL-35112013458 → 35124660457 → 35131994346 → 35137036013). A clear resolution either unblocks the next measurement or reveals a deeper problem in the statistical framework."
 }
