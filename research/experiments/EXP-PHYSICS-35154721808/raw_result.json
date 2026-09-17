@@ -1,0 +1,681 @@
+{
+  "experiment_id": "EXP-PHYSICS-35154721808",
+  "seed": 42,
+  "n_trajectories": 200,
+  "steps_per_trajectory": 10,
+  "n_sessions": 20,
+  "session_directions": {
+    "session_0": "left",
+    "session_1": "right",
+    "session_2": "right",
+    "session_3": "left",
+    "session_4": "left",
+    "session_5": "right",
+    "session_6": "left",
+    "session_7": "right",
+    "session_8": "left",
+    "session_9": "left",
+    "session_10": "right",
+    "session_11": "right",
+    "session_12": "right",
+    "session_13": "right",
+    "session_14": "right",
+    "session_15": "right",
+    "session_16": "right",
+    "session_17": "left",
+    "session_18": "right",
+    "session_19": "left"
+  },
+  "fa_unique_hashes": [
+    "62fe3a150495f0b6"
+  ],
+  "determinism": {
+    "fa": {
+      "accuracy": 1.0,
+      "groups": 571,
+      "violations": 0
+    }
+  },
+  "conditional_entropy": {
+    "fa_K1": 1.566265,
+    "fa_K3": 1.533265
+  },
+  "pmi_results": {
+    "1": {
+      "observed_pmi": 0.0,
+      "perm_mean": 0.0,
+      "perm_std": 0.0,
+      "bc_pmi": 0.0,
+      "p_value": 1.0,
+      "p_bonf": 1.0,
+      "n_strata": 19,
+      "n_items": 2000,
+      "max_cardinality": 1,
+      "max_card_ratio": 0.0005,
+      "stratum_details": {
+        "('/app', ('START',), 0)": {
+          "N": 200,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 1)": {
+          "N": 113,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 2)": {
+          "N": 102,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 3)": {
+          "N": 95,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 4)": {
+          "N": 103,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 5)": {
+          "N": 107,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 6)": {
+          "N": 98,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 7)": {
+          "N": 110,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 8)": {
+          "N": 100,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 9)": {
+          "N": 105,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 2)": {
+          "N": 98,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 4)": {
+          "N": 97,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 8)": {
+          "N": 100,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 9)": {
+          "N": 95,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 7)": {
+          "N": 90,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 6)": {
+          "N": 102,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'),), 1)": {
+          "N": 87,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 3)": {
+          "N": 105,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'),), 5)": {
+          "N": 93,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        }
+      }
+    },
+    "3": {
+      "observed_pmi": 0.0,
+      "perm_mean": 0.0,
+      "perm_std": 0.0,
+      "bc_pmi": 0.0,
+      "p_value": 1.0,
+      "p_bonf": 1.0,
+      "n_strata": 63,
+      "n_items": 2000,
+      "max_cardinality": 1,
+      "max_card_ratio": 0.0005,
+      "stratum_details": {
+        "('/app', ('START', 'START', 'START'), 0)": {
+          "N": 200,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), 'START', 'START'), 1)": {
+          "N": 113,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), 'START'), 2)": {
+          "N": 55,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 3)": {
+          "N": 26,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 4)": {
+          "N": 26,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 5)": {
+          "N": 27,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 6)": {
+          "N": 31,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 7)": {
+          "N": 34,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 8)": {
+          "N": 25,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 9)": {
+          "N": 28,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), 'START'), 2)": {
+          "N": 58,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 3)": {
+          "N": 29,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 4)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 5)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 6)": {
+          "N": 25,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 8)": {
+          "N": 30,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 9)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 4)": {
+          "N": 25,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 7)": {
+          "N": 22,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 8)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 9)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 6)": {
+          "N": 25,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 7)": {
+          "N": 18,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 8)": {
+          "N": 27,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 9)": {
+          "N": 27,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), 'START', 'START'), 1)": {
+          "N": 87,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), 'START'), 2)": {
+          "N": 40,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 3)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 4)": {
+          "N": 25,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 5)": {
+          "N": 27,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 6)": {
+          "N": 23,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 7)": {
+          "N": 21,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 3)": {
+          "N": 29,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 4)": {
+          "N": 28,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 5)": {
+          "N": 30,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 9)": {
+          "N": 28,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 4)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 6)": {
+          "N": 26,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 7)": {
+          "N": 33,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 8)": {
+          "N": 31,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 5)": {
+          "N": 22,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 6)": {
+          "N": 27,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 7)": {
+          "N": 29,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 8)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 3)": {
+          "N": 29,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('advance')), 5)": {
+          "N": 26,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 8)": {
+          "N": 19,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), 'START'), 2)": {
+          "N": 47,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 3)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 4)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 3)": {
+          "N": 27,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 6)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('advance')), 7)": {
+          "N": 22,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 8)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 9)": {
+          "N": 30,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('branch')), 5)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 3)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 9)": {
+          "N": 19,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('branch'), np.str_('branch')), 9)": {
+          "N": 24,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('branch'), np.str_('branch')), 5)": {
+          "N": 20,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('branch')), 4)": {
+          "N": 28,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('advance'), np.str_('advance'), np.str_('advance')), 6)": {
+          "N": 19,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        },
+        "('/app', (np.str_('branch'), np.str_('advance'), np.str_('advance')), 7)": {
+          "N": 21,
+          "PMI": 0.0,
+          "unique_responses": 1,
+          "unique_next_states": 3
+        }
+      }
+    }
+  },
+  "positive_control": {
+    "bc_pmi_full": 0.0,
+    "bc_pmi_h0": 0.0,
+    "perm_std_full": 0.0,
+    "perm_std_h0": 0.0,
+    "h0_strata_count": 63,
+    "total_strata_count": 63,
+    "pass": false
+  },
+  "null_control": {
+    "raw_shuffled_pmi_mean": 0.0,
+    "raw_shuffled_pmi_std": 0.0,
+    "bc_shuffled_pmi_mean": 0.0,
+    "bc_shuffled_pmi_std": 0.0,
+    "perm_mean_bias": 0.0,
+    "pass_raw": false,
+    "pass_bc": false
+  },
+  "transition_verification": {
+    "S0_advance_left": {
+      "p_hat": 0.6822,
+      "total": 129,
+      "intended": 88,
+      "expected": 0.7
+    },
+    "S0_advance_right": {
+      "p_hat": 0.2552,
+      "total": 192,
+      "intended": 49,
+      "expected": 0.3
+    },
+    "S0_branch_left": {
+      "p_hat": 0.6875,
+      "total": 144,
+      "intended": 99,
+      "expected": 0.7
+    },
+    "S0_branch_right": {
+      "p_hat": 0.2775,
+      "total": 191,
+      "intended": 53,
+      "expected": 0.3
+    },
+    "S1_advance_left": {
+      "p_hat": 0.7222,
+      "total": 126,
+      "intended": 91,
+      "expected": 0.7
+    },
+    "S1_advance_right": {
+      "p_hat": 0.3288,
+      "total": 219,
+      "intended": 72,
+      "expected": 0.3
+    },
+    "S1_branch_left": {
+      "p_hat": 0.6842,
+      "total": 133,
+      "intended": 91,
+      "expected": 0.7
+    },
+    "S1_branch_right": {
+      "p_hat": 0.297,
+      "total": 202,
+      "intended": 60,
+      "expected": 0.3
+    },
+    "S2_advance_left": {
+      "p_hat": 0.7248,
+      "total": 149,
+      "intended": 108,
+      "expected": 0.7
+    },
+    "S2_advance_right": {
+      "p_hat": 0.2489,
+      "total": 221,
+      "intended": 55,
+      "expected": 0.3
+    },
+    "S2_branch_left": {
+      "p_hat": 0.7059,
+      "total": 119,
+      "intended": 84,
+      "expected": 0.7
+    },
+    "S2_branch_right": {
+      "p_hat": 0.3029,
+      "total": 175,
+      "intended": 53,
+      "expected": 0.3
+    }
+  },
+  "decision_criteria": {
+    "C1_entropy": {
+      "pass": true,
+      "value": 1.5333
+    },
+    "C2_primary_pmi": {
+      "pass": false,
+      "bc_pmi": 0.0,
+      "p_bonf": 1.0
+    },
+    "C3_positive_control": {
+      "pass": false
+    },
+    "C4_determinism": {
+      "pass": true
+    },
+    "C5_sample_size": {
+      "pass": true,
+      "fa_n": 2000
+    },
+    "cardinality_suspended": true
+  },
+  "verdict": "FALSIFIED-IN-SETTING",
+  "elapsed_seconds": 12.1
+}
