@@ -1,0 +1,20 @@
+{
+  "base_sha": "7e3946b64e578caa171e9f25af27acccab858057",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T00:25:52.829104+00:00",
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the frozen decision rule for real HTTP binding correctness be satisfied by using endpoint-appropriate unseen IDs that actually exist on jsonplaceholder.typicode.com (e.g., posts 90-98, users 5-8, comments postId 5-7), combined with corrected comment body validation and actual tokenizer cost measurement, thereby resolving V1_HTTP_DESIGN_IMPOSSIBLE_IDS and enabling adjudication of whether parameterized mechanisms bind correctly over real HTTP?",
+  "lane": "product",
+  "origin_github_run_id": "35166508130",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35154724610",
+    "path": "research/experiments/EXP-PRODUCT-35154724610/handoff.json",
+    "sha256": "1e07c379942a2bc21ab714cfdbac54941ca52937f23be59cd47c46f6f4ca4a0e"
+  },
+  "reason": "pulse",
+  "request_hash": "af0d5b18a5f92529a11ebed5f92fbb4968e304f1a75e095fc353708d73ede860",
+  "request_id": "3866ac2e5b45df7fae3edf30",
+  "schema_version": 1
+}

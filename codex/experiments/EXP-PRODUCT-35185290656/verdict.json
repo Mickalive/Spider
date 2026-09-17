@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Fix3 redesign validated narrowly: _is_protocol_only_prefix correctly rejects bare authority ('https://api.example.com', 'http://localhost:8080', 'https://a.com') and accepts query-parameterized ('https://api.example.com?key=', etc.) and path-slash prefixes for 12/12 corpus, preserves kernel regression 3/3, distills single-slot GET mechanism comments?postId=${url} with slot [url] that resolves EXECUTABLE and binds to https://jsonplaceholder.typicode.com/comments?postId=5 with 3/3 HTTP 200 on jsonplaceholder. This fixes parent V2_FIX3_OVERBROAD for host?query patterns. However, Fix3 independent necessity over Fix2 not demonstrated (audit V1): Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes (bare authority: Fix2 False Fix3 True; valid params: Fix2 True Fix3 False); only scheme-only 'https://' discriminant untested. Claim ceiling bounded to 'single-slot GET with host?query or path-slash on jsonplaceholder deterministic synthetic data, n=3 HTTP verification'. Does NOT support multi-slot, PUT/POST, noisy browser, LLM distillation, cross-site, or product economics. C-PRODUCT-ECON remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can Fix3 independent necessity be demonstrated on a discriminating corpus where Fix2 passes but Fix3 should reject (e.g., scheme-only 'https://'), or should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON or testing PUT/POST method fidelity?",
+  "reason": "All seven frozen decision-rule conditions C1-C7 pass (result.json all_conditions_pass=true, audit.json recomputed_metrics match producer). Fix3 redesign resolves parent overbroadness bug (C2 ACCEPTS query-param, C4 demonstrates old bug). However, audit V1 high-severity finding: Fix3 independent necessity over Fix2 not demonstrated—Fix2 and Fix3 are mutually exclusive for all non-trivial prefixes; only trivial scheme-only 'https://' discriminant untested. Audit required_fixes include downgrading necessity claim, bounding C6 HTTP claim to tested endpoint/sample size, removing overgeneralization, and persisting token economics as HYPOTHESIS. Claim ceiling narrowed accordingly; no product promotion.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35185290656/result.json: outcome SUPPORTS, metrics C1-C7 all true, url_corpus 12/12, c6 3/3 1.0, c7 distilled true, controls 5 passed true",
+    "research/experiments/EXP-PRODUCT-35185290656/audit.json: status REVISE, producer_claim_supported false, validity_findings V1-V5 (V1 high severity: Fix3 necessity not demonstrated), claim_ceiling narrowed, required_fixes 5 items",
+    "research/experiments/EXP-PRODUCT-35185290656/report.md: verdict SURVIVES_CURRENT_TEST, 12 patterns table, Fix3 old vs new code, C6 3/3, C7 EXECUTABLE",
+    "research/experiments/EXP-PRODUCT-35185290656/provenance.json: base ba1e3f6d, parent a5794a2b, kernel sha991b..., models sha67ff..., run_experiment sha51b0...",
+    "research/experiments/EXP-PRODUCT-35185290656/spec.json: question Fix3 redesign, hypothesis, falsifier, baselines, controls, decision_rule C1-C7 ALL",
+    "research/experiments/EXP-PRODUCT-35166508130/handoff.json: parent carry_forward established 9/9 HTTP, rejected Fix3 necessity not demonstrated, unknown discriminant, do_not_assume",
+    "codex/claim_state.json: C-PARAM-INHERIT latest status EXPERIMENTAL, C-PRODUCT-ECON HYPOTHESIS"
+  ]
+}

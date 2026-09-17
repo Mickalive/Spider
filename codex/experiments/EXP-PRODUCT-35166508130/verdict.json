@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "lane": "product",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule requires ALL conditions C1-C6 for SURVIVES_CURRENT_TEST; C4 (B_UNFIXED_PROTOCOL_ONLY) fails due to test design flaw where Fix2 subsumes Fix3 for the frozen URL pair. However, C1-C3 provide strong positive evidence: URL binding accuracy 1.0 (9/9), HTTP binding accuracy 1.0 (9/9) on valid unseen IDs, literal baseline also 9/9, comment body validation fix works, kernel regression 3/3 pass. Claim ceiling expands from 'synthetic single-slot GET URL construction' to 'committed-code synthetic single-slot GET with real HTTP binding on jsonplaceholder.typicode.com'. Fix3 necessity not demonstrated; Fix3 is redundant with Fix2 for tested pattern and overbroad for host?query patterns. Remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE) due to frozen gate failure and open Fix3 issues."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "First actual tokenization data point: parameterized 68 tokens vs literal 96 tokens (29.17% savings) with tiktoken cl100k_base. However, single measurement, structural advantage (3 vs 9 encodings), not amortized cost per successful real-browser task. Remains HYPOTHESIS pending end-to-end economics."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can Fix3 (_is_protocol_only_prefix) be redesigned to reject only truly protocol-only prefixes (no '/' in rest) without blocking valid host?query parameterization, and can a discriminating test demonstrate its independent necessity over Fix2?",
+  "reason": "The experiment resolves the parent MEASUREMENT_INVALID blocker (V1_HTTP_DESIGN_IMPOSSIBLE_IDS) and demonstrates real HTTP binding correctness 9/9 on valid IDs. However, the frozen decision rule triggers FALSIFIED-IN-SETTING because C4 fails: the B_UNFIXED_PROTOCOL_ONLY test is non-discriminating for the frozen URL pair (Fix2 subsumes Fix3). Additionally, Fix3 is overbroad, blocking valid host?query parameterization (audit V2). The scientific finding is mixed: C1-C3 strong PASS, C4 test design flaw. The claim ceiling expands to include real HTTP binding on jsonplaceholder GET endpoints. Next step should address Fix3 redesign to be non-redundant and non-overbroad, or pivot to orthogonal high-upside question such as PUT/POST method fidelity or end-to-end economics.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35166508130/result.json: outcome FALSIFIES, metrics C1-C3 pass, C4 fail, C5-C6 pass, controls 5, observations 11",
+    "research/experiments/EXP-PRODUCT-35166508130/audit.json: status REVISE, producer_claim_supported false, validity_findings V1-V6, claim_ceiling expands to real HTTP binding on jsonplaceholder GET, required_fixes for Fix3 redesign and token methodology",
+    "research/experiments/EXP-PRODUCT-35166508130/report.md: executive summary FALSIFIED-IN-SETTING but C1-C3 strong PASS, C4 root cause Fix3 redundancy",
+    "research/experiments/EXP-PRODUCT-35166508130/provenance.json: restored kernel sha30b741..., unseen IDs verified, tiktoken 0.14.0, pricing gpt-4o-mini 2026-09-17",
+    "src/spider/kernel.py sha30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e: distill_parameterized Fix1+Fix2+Fix3, _is_protocol_only_prefix overbroad",
+    "research/experiments/EXP-PRODUCT-35154724610/handoff.json: parent MEASUREMENT_INVALID, carry_forward established/rejected/unknown/do_not_assume"
+  ]
+}
