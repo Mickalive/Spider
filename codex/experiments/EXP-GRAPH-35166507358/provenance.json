@@ -1,0 +1,83 @@
+{
+  "experiment_id": "EXP-GRAPH-35166507358",
+  "github_run_id": "35185290520",
+  "base_sha": "7e3946b64e578caa171e9f25af27acccab858057",
+  "execution_sha": "3afacee5385cdc4778ba991d5c7b0c4889aefa41",
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "requests": "2.32.3",
+    "pyjwt": "2.14.0"
+  },
+  "parameters": {
+    "schema_sizes": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "n_samples": 30,
+    "seed": 42,
+    "drift_patterns": [
+      "token_expiry",
+      "session_invalidation",
+      "permission_boundary",
+      "signing_key_rotation",
+      "cookie_clearance"
+    ],
+    "noise_patterns": [
+      "optional_field_addition",
+      "description_change",
+      "response_time_jitter",
+      "field_type_normalization"
+    ],
+    "co_occurring_patterns": [
+      [
+        "signing_key_rotation",
+        "optional_field_addition"
+      ],
+      [
+        "session_invalidation",
+        "description_change"
+      ],
+      [
+        "permission_boundary",
+        "field_type_normalization"
+      ]
+    ],
+    "jwt_algorithm": "HS256",
+    "method": "real_http_measurement",
+    "token_expiry_jitter": "\u00b11s uniform",
+    "session_ttl_variation": "5-15s uniform",
+    "permission_probe_ordering": "randomized per sequence"
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "ba507d784339b65e3dd18a67a4c11a7afc8e636bdf4f842a0ed6ed8661f74662",
+      "role": "raw"
+    },
+    {
+      "path": "result.json",
+      "sha256": "500d181dba113af9f949d7f8c243969687a20a76da8fad1b32c8f57879eb033a",
+      "role": "derived"
+    },
+    {
+      "path": "report.md",
+      "sha256": "73b2e40555f463cdcdb21196eda4c176a6ffc1b1e2e780724264767c643ddcda",
+      "role": "derived"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "aeaad8849e8a141bdeaa633bb09172a30aae061552d1ce5c122efb4887aac8fa",
+      "role": "code"
+    }
+  ],
+  "code_paths": [
+    "research/experiments/EXP-GRAPH-35166507358/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35166507358/mock_server.py"
+  ]
+}
