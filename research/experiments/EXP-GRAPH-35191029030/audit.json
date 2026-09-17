@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35191029030",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redesign session_invalidation behavioral measurement to produce within-condition variance: API endpoints (/api/read, /api/write, /api/admin) currently only check JWT + permissions and ignore session validity, so behavioral_composite = token_val_rate*2 + session_change*3 + auth_boundary*1 is constant 3.0 (session_change=1, others 0) for all 120 session_invalidation samples (std=0). Fix: include /session/status probe in behavioral composite or make session validity checked by API middleware, with stochastic TTL/jitter that varies per-sample session_changed outcome, so std>0 for all 4 session_invalidation co-occurring conditions.",
+    "Re-run orthogonality test after fix and require >=6/8 conditions with behavioral_std>0 AND structural_std>0 before computing pooled Pearson r; if session_invalidation cannot be made to vary, restrict confirmatory pooled test to permission_boundary conditions only (n=120) with preregistered per-drift stratification.",
+    "Increase per-condition power for exploratory correlations: n=30 yields wide CI for per-condition r (e.g., r=-0.319 p=0.086); consider n>=60 for |r|<0.3 detection or preregister pooled-only primary with per-condition exploratory only.",
+    "Clarify noise-only control sample size: prereg/spec estimated_cost implied 8 noise-only conditions but execution uses 4 noise patterns (n=120, not 240); align prereg and execution or report correction explicitly. Decision rule C4 FP=0.0 is currently evaluated on 120 samples; frozen rule did not specify denominator.",
+    "Preserve frozen C3 decision rule conjunctive (|r|<0.3 AND permutation p<0.05): current pooled p=0.448 correctly fails C3; do not relax p threshold post hoc. Report permission_boundary-only r=0.051 as exploratory, not confirmatory, until preregistered."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_SESSION_INVALIDATION_ZERO_BEHAVIORAL_VARIANCE",
+      "severity": "critical",
+      "finding": "4/8 co-occurring conditions (all session_invalidation + noise) have behavioral_std=0.0 (constant 3.0) because mock_server.py API routes check JWT and permissions only, not session validity. Session invalidation is only observable via /session/status, not via /api/* probing used in behavioral composite. This violates spec measurement_validity #5 and prereg 6.4 stochastic variation intent. Producer correctly identified; recomputed std=0.0 confirmed.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/raw_evidence/experiment_data.json:cooccurring_results.cooccur_session_invalidation+* samples[].session_state_changes=1, token_validation_failures=0, auth_boundary_shifts=0 -> behavioral=3.0 for all 120 samples",
+        "research/experiments/EXP-GRAPH-35191029030/mock_server.py:258-288 require_token+require_permission decorators ignore session store; session_state only via /session/status",
+        "research/experiments/EXP-GRAPH-35191029030/run_experiment.py:315 session_changed = 0 if session_valid else 1 (always 1 after invalidate)",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:metrics.per_condition_r session_invalidation r=null p=null, metrics.conditions_with_variance=4, validity_notes[9]"
+      ]
+    },
+    {
+      "id": "V2_POOLED_R_CONFOUNDED_BY_CONSTANTS",
+      "severity": "high",
+      "finding": "Pooled Pearson r=0.04976 (|r|=0.04976, p_perm=0.4486, n=240) is confounded by 120 constant behavioral values (3.0) from session_invalidation. Effective behavioral variance comes only from 120 permission_boundary samples (values 0.333 or 0.666). Pooled r is attenuated and significance test has reduced effective n; per-drift r confirms: permission_boundary pooled r=0.0514 (n=120, p=0.577), session_invalidation r=nan (undefined). Producer recomputation matches independent scipy recomputation within 1e-12.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/raw_evidence/experiment_data.json:all_behavioral_scores unique=[0.333,0.666,3.0]",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:metrics.pearson_r_pooled=0.04976142951025528, metrics.per_drift_r",
+        "audit recomputation: pooled r_abs=0.04976142951025528 p_perm=0.4485514485514486 matches producer; permission_boundary r=0.051357 p=0.577, session_invalidation nan"
+      ]
+    },
+    {
+      "id": "V3_MEASUREMENT_VALIDITY_GATE_CORRECTLY_APPLIED",
+      "severity": "info",
+      "finding": "Frozen decision_rule requires MEASUREMENT_INVALID if <6/8 co-occurring conditions have std>0 for both signals OR <240 paired samples. Observed 4/8 and n=240 -> MEASUREMENT_INVALID correctly triggered. Producer status=MEASUREMENT_INVALID outcome=INCONCLUSIVE is justified; auditor agrees. C3 orthogonality cannot be evaluated as preregistered pooled test.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/spec.json:decision_rule MEASUREMENT_INVALID clause",
+        "research/experiments/EXP-GRAPH-35191029030/prereg.md:9 decision rules, 10 sample size",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:status=MEASUREMENT_INVALID, metrics.conditions_with_variance=4"
+      ]
+    },
+    {
+      "id": "V4_RESPONSE_TIME_JITTER_ZERO_STRUCTURAL",
+      "severity": "low",
+      "finding": "response_time_jitter noise adds delay only, not schema change; structural composite = max(schema_diff, 1-jaccard) =0.0 for 2/240 samples (one per permission_boundary+response_time_jitter and session_invalidation+response_time_jitter). This explains observability 238/240 (0.9917) vs 100%. Behavior is by design per mock_server.py apply_noise_to_schema pass-through and is within C2 threshold (>=80% PASS).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/mock_server.py:93-94 response_time_jitter pass",
+        "research/experiments/EXP-GRAPH-35191029030/raw_evidence/experiment_data.json: baseline_schema==current_schema for jitter samples",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:controls.C2_observability observed_rate=0.99166",
+        "audit recomputation: zero structural count=2"
+      ]
+    },
+    {
+      "id": "V5_PERMISSION_BOUNDARY_VARIANCE_LIMITED_BUT_VALID",
+      "severity": "low",
+      "finding": "permission_boundary conditions have valid but limited behavioral variance: only 2 distinct values (0.333 single 403, 0.666 double 403) from 3 permission subsets, structural variance 0.62-1.16 depending on noise. Std 0.157-0.165 >0 satisfies validity gate, but range is narrow and per-condition n=30 underpowered for |r|<0.3 detection (per-condition p 0.086-0.308).",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/run_experiment.py:64-69 PERMISSION_SUBSETS, 266-271 random choice",
+        "research/experiments/EXP-GRAPH-35191029030/report.md: Experimental Conditions table behavioral std 0.157-0.165",
+        "audit recomputation: permission_boundary behavioral unique {0.333,0.666}"
+      ]
+    },
+    {
+      "id": "V6_C1_WILSON_AND_TP_VALID",
+      "severity": "info",
+      "finding": "C1_drift_tp mean TP=1.0 across 8 conditions with per-condition Wilson lower 0.886 >0.75 passes frozen rule. However TP for session_invalidation is tautologically 1.0 via session_change=1 constant, not via API 403 detection; permission_boundary TP genuinely via auth_boundary_shifts. Auditor verifies Wilson CI correct for n=30 success=30.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/result.json:controls.C1_drift_tp per_condition_tp all 1.0",
+        "research/experiments/EXP-GRAPH-35191029030/spec.json:decision_rule C1 requires mean>=0.85 AND all Wilson lower >0.75",
+        "audit Wilson recomputation: lower=0.8864829086095221 for 30/30"
+      ]
+    },
+    {
+      "id": "V7_C4_NULL_CONTROL_VALID",
+      "severity": "info",
+      "finding": "C4_null_control FP=0.0 (0/120) on noise-only conditions passes. Validated that noise-only samples have token_validation_failures=0, session_state_changes=0, auth_boundary_shifts=0 via run_experiment.py run_noise_only_sample (no drift applied). Provenance n_noise_only_conditions=4 (not 8 as spec estimated_cost suggested) but denominator 120 is sufficient per frozen threshold FP=0.0.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/raw_evidence/experiment_data.json:noise_only_results 4 conditions x30",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:controls.C4_null_control observed_fp_rate=0.0 total_noise_only=120",
+        "audit recomputation: noise behavioral FP 0/120"
+      ]
+    },
+    {
+      "id": "V8_CONTROL_LABEL_MISMATCH",
+      "severity": "low",
+      "finding": "Producer result.json controls uses keys C1_drift_tp, C2_observability, C3_orthogonality, C4_null_control, PC_PERMISSION_BOUNDARY_DETECTION which map to frozen spec decision_rule C1-C4 and positive_control PC-PERMISSION-BOUNDARY-DETECTION. Naming is consistent (case-insensitive) and TP threshold matching preserved. Negative control NC-SCHEMA-NOISE-ONLY correctly implemented as C4_null_control.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/spec.json:positive_control id PC-PERMISSION-BOUNDARY-DETECTION, null_control NC-SCHEMA-NOISE-ONLY, decision_rule C1-C4",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:controls"
+      ]
+    },
+    {
+      "id": "V9_NO_LEAKAGE_OR_SAMPLING_BIAS",
+      "severity": "info",
+      "finding": "No target/split leakage: each co-occurring condition uses isolated MockServerManager on distinct port (BASE_PORT+condition_idx, 18930-18937) with seed SEED+condition_idx and per-sample RNG derived from condition_rng.randint. Server reset per condition. Structural signal from unauthenticated /schema is independent of auth state by design and cannot be masked. Deterministic seed 42 ensures reproducibility; hashes verify artifact integrity.",
+      "evidence_refs": [
+        "research/experiments/EXP-GRAPH-35191029030/run_experiment.py:416-437 per-condition server start/stop, condition_idx isolation",
+        "research/experiments/EXP-GRAPH-35191029030/mock_server.py:238-241 /schema unauthenticated",
+        "research/experiments/EXP-GRAPH-35191029030/provenance.json:parameters seed 42",
+        "research/experiments/EXP-GRAPH-35191029030/result.json:artifacts sha256 raw 2efc4e28ab5ad630bbc961d91f9f7c9313de1cc1be141913117b63f7f099fd50 matches audit hash"
+      ]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PARENT-POOLED-R",
+      "expected": "New |r| should be substantially lower than parent 0.593 if parent inflation was due to zero-imputation",
+      "observed": "|r|_pooled=0.04976 (12x lower than 0.593), permission_boundary-only |r|=0.0514 also ~12x lower",
+      "verdict": "PARTIALLY_SUPPORTED",
+      "detail": "Directionally supports hypothesis that parent zero-imputation (structural=0.0 on signing_key_rotation) inflated r. However pooled estimate is confounded by new constant behavioral values (120 x 3.0) so reduction cannot be attributed purely to fixed structural observability; permission_boundary-only subset provides cleaner comparison (r=0.051) but still underpowered and p=0.577. Baseline strength is moderate: parent r=0.593 is strong inflated comparator."
+    },
+    {
+      "id": "B-PARENT-INDEPENDENT-MEANS",
+      "expected": "Within-condition variance >0 for both behavioral and structural scores",
+      "observed": "Only 4/8 conditions (all permission_boundary) have std>0 for both signals; 4/8 session_invalidation have behavioral_std=0.0, structural_std 0.67-1.02",
+      "verdict": "FAIL",
+      "detail": "Baseline fails: stochastic variation design did not achieve within-condition variance for half the conditions. Permission subsets yield limited 2-value behavioral variation; session_invalidation jitter (±1s token expiry) does not affect behavioral composite because token remains valid and session check is binary. This is the root cause of MEASUREMENT_INVALID."
+    },
+    {
+      "id": "B-STRUCTURAL-ORTHOGONALITY-CEILING",
+      "expected": "Pearson |r| < 0.3 if signals operate on orthogonal server mechanisms",
+      "observed": "Pooled |r|=0.049 <0.3 nominally passes magnitude but permutation p=0.448 fails p<0.05 conjunctive; per-condition |r| range [-0.319,0.313] all nominally near threshold but p>0.08 (n=30 underpowered); permission_boundary pooled p=0.577 fails significance",
+      "verdict": "NOT_CONFIRMED",
+      "detail": "Conjunctive decision rule C3 requires |r|<0.3 AND p<0.05. Both pooled and permission_boundary-only fail p threshold. Low r magnitude alone is insufficient due to measurement invalidity and lack of significance. Baseline is strong (0.3 threshold) but test has insufficient power/confounded sample."
+    }
+  ],
+  "recomputed_metrics": {
+    "mean_tp_rate": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "8 conditions x30 behavioral>0 count 240/240; per-condition TP all 1.0; Wilson lower 0.886 >0.75"
+    },
+    "observability_rate": {
+      "producer": 0.9916666666666667,
+      "recomputed": 0.9916666666666667,
+      "match": true,
+      "evidence": "both>0 count 238/240; 2 zero structural from response_time_jitter"
+    },
+    "pearson_r_pooled": {
+      "producer": 0.04976142951025528,
+      "recomputed": 0.04976142951025528,
+      "match": true,
+      "evidence": "scipy pearsonr on 240 paired (behavioral, structural) from raw_evidence; diff <1e-12; direct r 0.049761 p 0.44287"
+    },
+    "pearson_p_pooled_perm": {
+      "producer": 0.4485514485514486,
+      "recomputed": 0.4485514485514486,
+      "match": true,
+      "evidence": "permutation_test_pearsonr 1000 perms abs(r) >= observed; seed 42 with np.random.permutation"
+    },
+    "abs_r_pooled": {
+      "producer": 0.04976142951025528,
+      "recomputed": 0.04976142951025528,
+      "match": true
+    },
+    "fp_rate_noise_only": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "evidence": "120 noise-only behavioral scores all 0.0; 0/120 FP"
+    },
+    "positive_control_rate": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "30/30 permission_boundary detection via run_experiment positive_control_results"
+    },
+    "conditions_with_variance": {
+      "producer": 4,
+      "recomputed": 4,
+      "match": true,
+      "evidence": "permission_boundary 4 conditions std 0.157-0.165 >0, session_invalidation 4 conditions std 0.0"
+    },
+    "per_condition_r": {
+      "producer": {
+        "cooccur_permission_boundary+optional_field_addition": 0.19239305828441824,
+        "cooccur_permission_boundary+description_change": -0.3188870512307547,
+        "cooccur_permission_boundary+response_time_jitter": 0.3134578344107679,
+        "cooccur_permission_boundary+field_type_normalization": -0.2727723627949904,
+        "cooccur_session_invalidation+optional_field_addition": null,
+        "cooccur_session_invalidation+description_change": null,
+        "cooccur_session_invalidation+response_time_jitter": null,
+        "cooccur_session_invalidation+field_type_normalization": null
+      },
+      "recomputed": {
+        "cooccur_permission_boundary+optional_field_addition": 0.19239305828441824,
+        "cooccur_permission_boundary+description_change": -0.3188870512307547,
+        "cooccur_permission_boundary+response_time_jitter": 0.3134578344107679,
+        "cooccur_permission_boundary+field_type_normalization": -0.2727723627949904,
+        "cooccur_session_invalidation+optional_field_addition": null,
+        "cooccur_session_invalidation+description_change": null,
+        "cooccur_session_invalidation+response_time_jitter": null,
+        "cooccur_session_invalidation+field_type_normalization": null
+      },
+      "match": true,
+      "evidence": "scipy pearsonr per condition n=30; session_invalidation nan due to constant input warning -> null per producer handling"
+    },
+    "per_drift_r": {
+      "producer": {
+        "permission_boundary": 0.05135707277765042,
+        "session_invalidation": null
+      },
+      "recomputed": {
+        "permission_boundary": 0.05135707277765042,
+        "session_invalidation": null
+      },
+      "match": true,
+      "evidence": "pooled 120 samples per drift type; permission_boundary r 0.051 p0.577, session_invalidation nan constant"
+    },
+    "n_paired_samples": {
+      "producer": 240,
+      "recomputed": 240,
+      "match": true
+    },
+    "n_valid_cooccurring_samples": {
+      "producer": 238,
+      "recomputed": 238,
+      "match": true
+    },
+    "artifact_hashes": {
+      "raw_evidence_experiment_data.json": "2efc4e28ab5ad630bbc961d91f9f7c9313de1cc1be141913117b63f7f099fd50 verified",
+      "mock_server.py": "83f2b7d820efde1a1b19c9c2733a5402095c32f5caa443c31b5e88ea2dbfaf04 verified",
+      "run_experiment.py": "c11e7a1860fa6aadb60c810790a70186387277e82bb4fa467b10360b7fd81f77 verified"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: No confirmatory orthogonality claim. The frozen C3 orthogonality hypothesis (|r|<0.3 AND p<0.05 on pooled paired scores) is UNTESTED due to MEASUREMENT_INVALID (4/8 conditions lack behavioral variance, pooled r confounded by 120 constants, p=0.449 not <0.05). Descriptive ceiling only: (1) Behavioral signals discriminate auth drift vs structural noise with TP=1.0 (Wilson lower 0.886) and FP=0.0 on Flask 3.1.3 + PyJWT 2.14.0 HS256 localhost (replicates parent C1/C2 but does not advance C-FRESHNESS); (2) Structural observability via unauthenticated /schema achieves 99.2% both>0, confirming design fixes parent zero-imputation for observability but not for variance; (3) Exploratory permission_boundary-only pooled r=0.051 (n=120, p=0.577, per-condition |r| 0.19-0.32 all p>0.08) is directionally consistent with orthogonality but underpowered and non-significant — hypothesis-generating only. Does NOT support: general orthogonality across drift families, real OAuth/OIDC middleware, production APIs with DB/cache/CDN, or product pipeline integration of parallel independent freshness channels. Claim remains EXPERIMENTAL per parent EXP-GRAPH-35166507358; this experiment adds no validated second detection channel.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35191029030/request.json:5ff4e6d3 parent_handoff EXP-GRAPH-35166507358",
+    "research/experiments/EXP-GRAPH-35191029030/spec.json:bbbd37d2a15d742fc7bc7e0bcd8f7c6af4476b2b9e3f2708e4e4cc77a9f9d369 — decision_rule PASS requires C1-C4 + validity gate >=6/8 variance",
+    "research/experiments/EXP-GRAPH-35191029030/prereg.md:f09391fb53c92afd483ae5d90ff31a35a9f935ce0f97096cab5faab89facf107 — within-condition stochastic variation, 8 co-occurring conditions",
+    "research/experiments/EXP-GRAPH-35191029030/freeze.json:f09391fb53c92afd483ae5d90ff31a35a9f935ce0f97096cab5faab89facf107 frozen hashes",
+    "research/experiments/EXP-GRAPH-35191029030/result.json:status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics pearson_r_pooled 0.04976 p 0.448 conditions_with_variance 4",
+    "research/experiments/EXP-GRAPH-35191029030/report.md:updated MEASUREMENT_INVALID narrative with per-condition variance table",
+    "research/experiments/EXP-GRAPH-35191029030/provenance.json:seed 42 Flask 3.1.3 PyJWT 2.14.0 numpy 2.5.3 scipy 1.18.1 parameters n=30/8/4",
+    "research/experiments/EXP-GRAPH-35191029030/raw_evidence/experiment_data.json:2efc4e28ab5ad630bbc961d91f9f7c9313de1cc1be141913117b63f7f099fd50 — 240 co-occurring +120 noise-only samples, re-derives behavioral 0.333/0.666/3.0",
+    "research/experiments/EXP-GRAPH-35191029030/mock_server.py:83f2b7d820efde1a1b19c9c2733a5402095c32f5caa443c31b5e88ea2dbfaf04 — /schema unauthenticated, API routes ignore session",
+    "research/experiments/EXP-GRAPH-35191029030/run_experiment.py:c11e7a1860fa6aadb60c810790a70186387277e82bb4fa467b10360b7fd81f77 — per-sample RNG, permutation_test_pearsonr 1000",
+    "research/experiments/EXP-GRAPH-35166507358/handoff.json:d3160d49adc24043ee606bd272b13622737d0efb926e5c2b62a718cf0d113841 — parent C4-ORTHOGONALITY-CONFOUNDED, carry_forward established/rejected/unknown",
+    "codex/claim_state.json:C-FRESHNESS EXPERIMENTAL — six structural families falsified, behavioral signals discriminate but orthogonality untested"
+  ],
+  "unresolved": [
+    "Whether session_invalidation can produce within-condition behavioral variance if behavioral composite integrates /session/status directly or API middleware checks session store — current design makes session_change constant 1.",
+    "Whether permission_boundary-only orthogonality (r=0.051, n=120) would achieve p<0.05 with larger n or wider stochastic variation (e.g., 7 non-empty permission subsets, continuous noise magnitudes) — current per-condition p 0.086-0.308 underpowered at n=30.",
+    "Whether real APIs with stochastic behavior, heterogeneous client profiles, DB/cache/CDN variation preserve behavioral signal discrimination and orthogonality — all evidence bounded to deterministic Flask mock.",
+    "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware (Auth0/Okta/Keycloak) — prereg validity threat.",
+    "Whether wider stochastic variation ranges or alternative composite weightings (2,3,1) change correlation structure — weights frozen, not optimized.",
+    "Whether composite multi-signal classifiers outperform individual signals when orthogonality holds — requires fused threshold design not tested.",
+    "Whether unauthenticated /schema endpoint is practical in real-world API deployments — synthetic construct proves measurability, not deployment feasibility.",
+    "Why noise-only total is 120 not 240 (4 vs 8 conditions) relative to spec estimated_cost — documentation inconsistency does not affect FP=0 result but indicates prereg/execution drift."
+  ]
+}
