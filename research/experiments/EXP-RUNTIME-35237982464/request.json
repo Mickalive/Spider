@@ -1,0 +1,20 @@
+{
+  "base_sha": "307f3c5ee706b5aeeee5fe1f42df0e02980a29ef",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T15:06:06.513570+00:00",
+  "experiment_id": "EXP-RUNTIME-35237982464",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) determinism all_same=true for all 288 state\u00d7type\u00d7size cells, (5) B-RANDOM = 0.0 for all 72 conditions, (6) |brotli_decompressed - gzip_decompressed| = 0.0 < 0.1 for all 18 type\u00d7size pairs. The parent MEASUREMENT_INVALID infrastructure failure is resolved: the mock server now applies brotli (quality 4-8) and gzip compression with Content-Encoding headers on all 5760 observations. Decompression-normalization preserves body-only discrimination at structural ceiling 0.5 across JSON, HTML, and XML at nominal 1KB/10KB/100KB under localhost compression. The ceiling 0.5 is a property of 3-way error collapse (no_auth/expired/invalid share identical error bodies) not a mechanism limitation. Algorithm equivalence is perfect (diff 0.0). Compressed-only brotli discrimination is lower (0.15-0.34) proving decompression is necessary for format-invariance. C_BROTLI_QUALITY_SCALING fails (diversity 2.33 at 1KB = 2.33 at 100KB) due to repetitive padding content \u2014 not a gating condition. Audit PASS confirms all recomputed metrics match producer. Real-CDN infrastructure remains the sole untested blocker for C-MEAS-VALID product readiness.",
+  "inherited_next_question": "Does decompression-normalization (SHA256 on decompressed body + status) survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism \u2014 maintaining body-only discrimination >= 0.3 for JSON/HTML/XML at 1KB/10KB/100KB under real CDN compression?",
+  "lane": "runtime",
+  "origin_github_run_id": "35237982464",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35209111193",
+    "path": "research/experiments/EXP-RUNTIME-35209111193/handoff.json",
+    "sha256": "40cd703b3780e708d91ff1f45947559664082013b134548c2d1cdb288074f636"
+  },
+  "reason": "pulse",
+  "request_hash": "847ab2003236585a6929882a8f53291eea80b95a7de7dec003845b32e834a92e",
+  "request_id": "55f092a8a7c441fab46328eb",
+  "schema_version": 1
+}
