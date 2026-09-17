@@ -1,0 +1,442 @@
+{
+  "experiment_id": "EXP-PHYSICS-35262258744",
+  "variant_results": {
+    "vanillajs": {
+      "n_raw": 168,
+      "n_valid": 130,
+      "n_non_leakage": 93,
+      "leakage_fraction": 0.2846153846153846,
+      "raw_url_pmi": {
+        "mean_pmi": 0.18948298212366158,
+        "unique_states": 4,
+        "unique_sa_pairs": 10,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 1.9585030291564345,
+        "N": 93
+      },
+      "norm_url_pmi": {
+        "mean_pmi": 5.7910073768195775e-05,
+        "unique_states": 1,
+        "unique_sa_pairs": 3,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 0.0,
+        "N": 93
+      },
+      "raw_permutation": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.04391451601000056,
+        "null_std": 0.02226280081312466,
+        "effect_size_d": 6.538641177072544
+      },
+      "norm_permutation": {
+        "p_value": 1.0,
+        "null_mean": 5.791007376819576e-05,
+        "null_std": 1.3552527156068805e-20,
+        "effect_size_d": 1.0
+      },
+      "unique_raw_urls": [
+        "https://todomvc.com/examples/javascript-es6/dist/",
+        "https://todomvc.com/examples/javascript-es6/dist/#/",
+        "https://todomvc.com/examples/javascript-es6/dist/#/active",
+        "https://todomvc.com/examples/javascript-es6/dist/#/completed"
+      ],
+      "unique_norm_urls": [
+        "https://todomvc.com/examples/javascript-es6/dist"
+      ],
+      "n_unique_raw_urls": 4,
+      "n_unique_norm_urls": 1,
+      "action_frequency": {
+        "form_submit": 0.45161290322580644,
+        "button_click": 0.3225806451612903,
+        "js_navigate": 0.22580645161290322
+      }
+    },
+    "react": {
+      "n_raw": 168,
+      "n_valid": 130,
+      "n_non_leakage": 93,
+      "leakage_fraction": 0.2846153846153846,
+      "raw_url_pmi": {
+        "mean_pmi": 0.18948298212366158,
+        "unique_states": 4,
+        "unique_sa_pairs": 10,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 1.9585030291564345,
+        "N": 93
+      },
+      "norm_url_pmi": {
+        "mean_pmi": 5.7910073768195775e-05,
+        "unique_states": 1,
+        "unique_sa_pairs": 3,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 0.0,
+        "N": 93
+      },
+      "raw_permutation": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.04391451601000056,
+        "null_std": 0.02226280081312466,
+        "effect_size_d": 6.538641177072544
+      },
+      "norm_permutation": {
+        "p_value": 1.0,
+        "null_mean": 5.791007376819576e-05,
+        "null_std": 1.3552527156068805e-20,
+        "effect_size_d": 1.0
+      },
+      "unique_raw_urls": [
+        "https://todomvc.com/examples/react/dist/",
+        "https://todomvc.com/examples/react/dist/#/",
+        "https://todomvc.com/examples/react/dist/#/active",
+        "https://todomvc.com/examples/react/dist/#/completed"
+      ],
+      "unique_norm_urls": [
+        "https://todomvc.com/examples/react/dist"
+      ],
+      "n_unique_raw_urls": 4,
+      "n_unique_norm_urls": 1,
+      "action_frequency": {
+        "form_submit": 0.45161290322580644,
+        "button_click": 0.3225806451612903,
+        "js_navigate": 0.22580645161290322
+      }
+    },
+    "vue": {
+      "n_raw": 168,
+      "n_valid": 108,
+      "n_non_leakage": 85,
+      "leakage_fraction": 0.21296296296296297,
+      "raw_url_pmi": {
+        "mean_pmi": 0.20917931570042736,
+        "unique_states": 3,
+        "unique_sa_pairs": 9,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 1.5299081631979607,
+        "N": 85
+      },
+      "norm_url_pmi": {
+        "mean_pmi": 8.711218144024274e-05,
+        "unique_states": 1,
+        "unique_sa_pairs": 3,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 0.0,
+        "N": 85
+      },
+      "raw_permutation": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.04709774393041235,
+        "null_std": 0.023551365486483036,
+        "effect_size_d": 6.882045623343554
+      },
+      "norm_permutation": {
+        "p_value": 1.0,
+        "null_mean": 8.711218144024272e-05,
+        "null_std": 2.710505431213761e-20,
+        "effect_size_d": 1.0
+      },
+      "unique_raw_urls": [
+        "https://todomvc.com/examples/vue/dist/#/",
+        "https://todomvc.com/examples/vue/dist/#/active",
+        "https://todomvc.com/examples/vue/dist/#/completed"
+      ],
+      "unique_norm_urls": [
+        "https://todomvc.com/examples/vue/dist"
+      ],
+      "n_unique_raw_urls": 3,
+      "n_unique_norm_urls": 1,
+      "action_frequency": {
+        "form_submit": 0.49411764705882355,
+        "button_click": 0.25882352941176473,
+        "js_navigate": 0.24705882352941178
+      }
+    },
+    "angular": {
+      "n_raw": 168,
+      "n_valid": 130,
+      "n_non_leakage": 93,
+      "leakage_fraction": 0.2846153846153846,
+      "raw_url_pmi": {
+        "mean_pmi": 0.18844694888578795,
+        "unique_states": 3,
+        "unique_sa_pairs": 9,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 1.3987153592677852,
+        "N": 93
+      },
+      "norm_url_pmi": {
+        "mean_pmi": 5.7910073768195775e-05,
+        "unique_states": 1,
+        "unique_sa_pairs": 3,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 0.0,
+        "N": 93
+      },
+      "raw_permutation": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.02082324081837833,
+        "null_std": 0.01860106807590331,
+        "effect_size_d": 9.01150984359641
+      },
+      "norm_permutation": {
+        "p_value": 1.0,
+        "null_mean": 5.791007376819576e-05,
+        "null_std": 1.3552527156068805e-20,
+        "effect_size_d": 1.0
+      },
+      "unique_raw_urls": [
+        "https://todomvc.com/examples/angular/dist/browser/#/active",
+        "https://todomvc.com/examples/angular/dist/browser/#/all",
+        "https://todomvc.com/examples/angular/dist/browser/#/completed"
+      ],
+      "unique_norm_urls": [
+        "https://todomvc.com/examples/angular/dist/browser"
+      ],
+      "n_unique_raw_urls": 3,
+      "n_unique_norm_urls": 1,
+      "action_frequency": {
+        "form_submit": 0.45161290322580644,
+        "button_click": 0.3225806451612903,
+        "js_navigate": 0.22580645161290322
+      }
+    },
+    "svelte": {
+      "n_raw": 168,
+      "n_valid": 130,
+      "n_non_leakage": 93,
+      "leakage_fraction": 0.2846153846153846,
+      "raw_url_pmi": {
+        "mean_pmi": 0.18948298212366158,
+        "unique_states": 4,
+        "unique_sa_pairs": 10,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 1.9585030291564345,
+        "N": 93
+      },
+      "norm_url_pmi": {
+        "mean_pmi": 5.7910073768195775e-05,
+        "unique_states": 1,
+        "unique_sa_pairs": 3,
+        "singleton_fraction": 0.0,
+        "url_entropy_bits": 0.0,
+        "N": 93
+      },
+      "raw_permutation": {
+        "p_value": 0.000999000999000999,
+        "null_mean": 0.04391451601000056,
+        "null_std": 0.02226280081312466,
+        "effect_size_d": 6.538641177072544
+      },
+      "norm_permutation": {
+        "p_value": 1.0,
+        "null_mean": 5.791007376819576e-05,
+        "null_std": 1.3552527156068805e-20,
+        "effect_size_d": 1.0
+      },
+      "unique_raw_urls": [
+        "https://todomvc.com/examples/svelte/dist/",
+        "https://todomvc.com/examples/svelte/dist/#/",
+        "https://todomvc.com/examples/svelte/dist/#/active",
+        "https://todomvc.com/examples/svelte/dist/#/completed"
+      ],
+      "unique_norm_urls": [
+        "https://todomvc.com/examples/svelte/dist"
+      ],
+      "n_unique_raw_urls": 4,
+      "n_unique_norm_urls": 1,
+      "action_frequency": {
+        "form_submit": 0.45161290322580644,
+        "button_click": 0.3225806451612903,
+        "js_navigate": 0.22580645161290322
+      }
+    }
+  },
+  "positive_control": {
+    "mean_pmi": 1.5776112458073703,
+    "permutation_p": 0.000999000999000999,
+    "effect_size_d": 228.50626143289182,
+    "unique_states": 8,
+    "unique_sa_pairs": 24,
+    "N": 1000,
+    "passes_pmi": true,
+    "passes_perm": true,
+    "passes": true
+  },
+  "decision_checks": {
+    "C1_raw_pmi_at_least_3_variants": {
+      "n_pass": 5,
+      "threshold": 3,
+      "total_variants": 5,
+      "per_variant": {
+        "vanillajs": {
+          "pmi": 0.18948298212366158,
+          "pmi_gt_005": true,
+          "p_value": 0.000999000999000999,
+          "p_lt_bonferroni": true,
+          "passes": true
+        },
+        "react": {
+          "pmi": 0.18948298212366158,
+          "pmi_gt_005": true,
+          "p_value": 0.000999000999000999,
+          "p_lt_bonferroni": true,
+          "passes": true
+        },
+        "vue": {
+          "pmi": 0.20917931570042736,
+          "pmi_gt_005": true,
+          "p_value": 0.000999000999000999,
+          "p_lt_bonferroni": true,
+          "passes": true
+        },
+        "angular": {
+          "pmi": 0.18844694888578795,
+          "pmi_gt_005": true,
+          "p_value": 0.000999000999000999,
+          "p_lt_bonferroni": true,
+          "passes": true
+        },
+        "svelte": {
+          "pmi": 0.18948298212366158,
+          "pmi_gt_005": true,
+          "p_value": 0.000999000999000999,
+          "p_lt_bonferroni": true,
+          "passes": true
+        }
+      },
+      "passes": true
+    },
+    "C2_normalized_pmi_zero_all_variants": {
+      "n_zero": 0,
+      "threshold": 5,
+      "per_variant": {
+        "vanillajs": {
+          "pmi": 5.7910073768195775e-05,
+          "is_zero": false,
+          "unique_states": 1
+        },
+        "react": {
+          "pmi": 5.7910073768195775e-05,
+          "is_zero": false,
+          "unique_states": 1
+        },
+        "vue": {
+          "pmi": 8.711218144024274e-05,
+          "is_zero": false,
+          "unique_states": 1
+        },
+        "angular": {
+          "pmi": 5.7910073768195775e-05,
+          "is_zero": false,
+          "unique_states": 1
+        },
+        "svelte": {
+          "pmi": 5.7910073768195775e-05,
+          "is_zero": false,
+          "unique_states": 1
+        }
+      },
+      "passes": false
+    },
+    "C3_positive_control": {
+      "pmi": 1.5776112458073703,
+      "permutation_p": 0.000999000999000999,
+      "threshold_pmi": 1.0,
+      "passes": true
+    },
+    "C4_non_leakage_sufficient": {
+      "n_pass": 5,
+      "threshold": 5,
+      "per_variant": {
+        "vanillajs": {
+          "n_non_leakage": 93,
+          "threshold": 50,
+          "passes": true
+        },
+        "react": {
+          "n_non_leakage": 93,
+          "threshold": 50,
+          "passes": true
+        },
+        "vue": {
+          "n_non_leakage": 85,
+          "threshold": 50,
+          "passes": true
+        },
+        "angular": {
+          "n_non_leakage": 93,
+          "threshold": 50,
+          "passes": true
+        },
+        "svelte": {
+          "n_non_leakage": 93,
+          "threshold": 50,
+          "passes": true
+        }
+      },
+      "passes": true
+    },
+    "C5_unique_raw_urls": {
+      "n_pass": 0,
+      "threshold_at_least": 3,
+      "per_variant": {
+        "vanillajs": {
+          "n_unique_raw_urls": 4,
+          "unique_urls": [
+            "https://todomvc.com/examples/javascript-es6/dist/",
+            "https://todomvc.com/examples/javascript-es6/dist/#/",
+            "https://todomvc.com/examples/javascript-es6/dist/#/active",
+            "https://todomvc.com/examples/javascript-es6/dist/#/completed"
+          ],
+          "threshold": 5,
+          "passes": false
+        },
+        "react": {
+          "n_unique_raw_urls": 4,
+          "unique_urls": [
+            "https://todomvc.com/examples/react/dist/",
+            "https://todomvc.com/examples/react/dist/#/",
+            "https://todomvc.com/examples/react/dist/#/active",
+            "https://todomvc.com/examples/react/dist/#/completed"
+          ],
+          "threshold": 5,
+          "passes": false
+        },
+        "vue": {
+          "n_unique_raw_urls": 3,
+          "unique_urls": [
+            "https://todomvc.com/examples/vue/dist/#/",
+            "https://todomvc.com/examples/vue/dist/#/active",
+            "https://todomvc.com/examples/vue/dist/#/completed"
+          ],
+          "threshold": 5,
+          "passes": false
+        },
+        "angular": {
+          "n_unique_raw_urls": 3,
+          "unique_urls": [
+            "https://todomvc.com/examples/angular/dist/browser/#/active",
+            "https://todomvc.com/examples/angular/dist/browser/#/all",
+            "https://todomvc.com/examples/angular/dist/browser/#/completed"
+          ],
+          "threshold": 5,
+          "passes": false
+        },
+        "svelte": {
+          "n_unique_raw_urls": 4,
+          "unique_urls": [
+            "https://todomvc.com/examples/svelte/dist/",
+            "https://todomvc.com/examples/svelte/dist/#/",
+            "https://todomvc.com/examples/svelte/dist/#/active",
+            "https://todomvc.com/examples/svelte/dist/#/completed"
+          ],
+          "threshold": 5,
+          "passes": false
+        }
+      },
+      "passes": false
+    }
+  },
+  "survives": false,
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
