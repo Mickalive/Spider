@@ -40,7 +40,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "9cf80f63bd0f58287bbbf1526ca3432febca9492",
       "hashes": {
         "request.json": "dbadd1fc6298fab81a2ccd08632e720f5621ae6ab56fba31d3a732c2bf21a60e",
@@ -68,7 +68,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "0cef5908fade8d636ed40f64f5cd5d64e2a909b8",
       "hashes": {
         "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
@@ -232,7 +232,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "f48d8baf8331e4a081fffa58aa3ad03e810a85d6",
       "hashes": {
         "request.json": "4fd8e220e5b0d682c402df1e674ef6147ab702e6cc34c73aff2514ae1f8746fd",
@@ -287,7 +287,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "0d00d3abac08d203c6df7314c622969785d6f83e",
       "hashes": {
         "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
@@ -396,7 +396,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "dca0b76bab7b58b4be4a44eea380e811550330b2",
       "hashes": {
         "request.json": "fb3652d895740298ef1e10009db3916536de1e2aec8f662affc63ea1e155a0ae",
@@ -478,7 +478,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "d4353fcba3d3bb06d0f628cc54d9fbc111243db7",
       "hashes": {
         "request.json": "1b231c2b8bfde60e6ba3693de74a87b33e7d85aeabd091e87a057831e43366c5",
@@ -562,7 +562,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "c1a660af636302945d2817697e5470f50efac713",
       "hashes": {
         "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
@@ -751,7 +751,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "22ccea04903ae256d363b8968b3c2a4690ef6057",
       "hashes": {
         "request.json": "c41a142a4c8e69b271678b4c32800520e0cb5293a1f1bccd2e9e4da1f0a63ac6",
@@ -778,7 +778,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "1504ba88ec66a9060656c9a3b75c586bc55e9fe9",
       "hashes": {
         "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
@@ -861,7 +861,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "8ae9ddc8f2025e7f38632b0eea3c02e62160f6a6",
       "hashes": {
         "request.json": "c307fca8608e2b9c1f7d246c67dfcbe0840173ae920aca112319e4ecede89c7f",
@@ -888,7 +888,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "be11b0bfedbf5382b271084e52a2a36f44de855b",
       "hashes": {
         "request.json": "7e41f131747af8a2a3b2ef8fbf911c5a86de89b3534b77271a209d9ef3d5ac80",
@@ -915,7 +915,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "a4c9a3e22d344c9e0bd5d392d81dee1b572ff88d",
       "hashes": {
         "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
@@ -942,7 +942,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "111951aeb5f0c770376457836dc23e17b94e32e1",
       "hashes": {
         "request.json": "562ecee83cbc08a62295c677ad2d53909b81291c3806be0cd85cba15599e8526",
@@ -969,7 +969,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "fcec93130c8d7a7d9feed13b142420d179c21b82",
       "hashes": {
         "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
@@ -1131,7 +1131,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "a23db9347a329843bf69f7ffe1066831fcd55004",
       "hashes": {
         "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
@@ -1266,7 +1266,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "e45dabebba74bac4239f93bdff7a6c1a27938156",
       "hashes": {
         "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
@@ -1484,7 +1484,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "ad803c5168c071bf1edc4125404a7a0096dcdee3",
       "hashes": {
         "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
@@ -1511,7 +1511,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "ca9884ed23d6f4d05199f80d093ccab39a3ea420",
       "hashes": {
         "request.json": "44fc1148df1f4f750c29ef9fdee31b22cedb50bce3c12868c20f1297956b4845",
@@ -1621,7 +1621,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "1eae61c57d53569bb75757e3e4114c823f2e7911",
       "hashes": {
         "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
@@ -1729,7 +1729,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "df5a7fd2f905abe14373bfd3ac607f448a688af8",
       "hashes": {
         "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
@@ -1783,7 +1783,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "4ce4954fbfec56bcc79d0de613f8fcf99ea86b94",
       "hashes": {
         "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
@@ -1892,7 +1892,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "6fc96c940178ab198faee313db88403c6e3b777d",
       "hashes": {
         "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
@@ -1919,7 +1919,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "8ae879a69fd5021c8646c42f2d06a4915fe16898",
       "hashes": {
         "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
@@ -1946,7 +1946,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "636109afec367ad29acb94c1584fa6740c062169",
       "hashes": {
         "request.json": "b31258748fe218f9105e9df2914467bc9ff3d2e44d582fb7a2448391846d41a4",
@@ -2027,7 +2027,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "b8b379afd65beb4b0782d7e4f0c950d04317bfb8",
       "hashes": {
         "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
@@ -2054,7 +2054,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "858edf9f6a14693e1c85d059c07365c13e1a2315",
       "hashes": {
         "request.json": "c426eaabcd14022130061e65d1bbb140d41ab22a9c81d28d0d5d4a9e0ae418d2",
@@ -2137,7 +2137,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "2916a7c97b2c2bc9299fe8644e4914dae54f99e9",
       "hashes": {
         "request.json": "f211fd104e0a2ce6c45dda252c283b4f991683522b2aa7ed2be2e21f621dbaab",
@@ -2164,7 +2164,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "d2eff3812d50dfe4877e90bb019792f22423ce6c",
       "hashes": {
         "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
@@ -2191,7 +2191,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "57ca23d0c9a481288a3e30b836396e9c0880253f",
       "hashes": {
         "request.json": "0596702daeeb836a1e6e44e2e802b838a2e351b43edce59f44627f1ea3fdc839",
@@ -2245,7 +2245,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/frontier",
-      "source_ref_head": "50eca6f09dc462ee7b43194d4a6c2296ce2bb30a",
+      "source_ref_head": "ca51d4c92e79dbf7599eaa02ce7f316169c9a9c2",
       "source_commit": "5a4e556ee45cafa4bbed8846efc28f6cefa113b9",
       "hashes": {
         "request.json": "b84320774f42091c164f6f00e86a0dbc1a80c615ff79bee14715392124b52c9b",
@@ -2272,7 +2272,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "894ea2ef394f8f3101c7841ad48264f3752492a8",
       "hashes": {
         "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
@@ -2382,7 +2382,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "77d4d23236294e10b101bae7a5cd7f9a5a22332d",
       "hashes": {
         "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
@@ -2626,7 +2626,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "hashes": {
         "request.json": "597e09c2fcef5c326c4374b44a38b1f99af46a23559f05122c50f55b7163ee6b",
@@ -2790,7 +2790,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "c87d8226bdc357b34fddeacb1e913ebb5d068a52",
       "hashes": {
         "request.json": "ecfe82543b6c6ae4460768e2b9b8815346dec7d46fb9765838fdfc4fe0d781ed",
@@ -2872,7 +2872,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (2) triggers: BC PMI at K=3 = 0.000000 bits \u2264 0.05 threshold, Bonferroni p = 1.0. The primary measurement is mathematically forced (I(X;Y) = 0 when Y is constant, |R| = 1 by design). The auditor's REVISE recommendation on control degeneracy is accepted: controls failing because |R| = 1 makes permutation null degenerate is a design-consequence, not an execution-failure. However, the primary measurement (BC PMI = 0.0) is unambiguous and independently sufficient for the FALSIFIED-IN-SETTING verdict \u2014 controls are confirmatory, not gating. The frozen rule's precedence (FALSIFIED checked before MEASUREMENT_INVALID) is correctly triggered. Claim ceiling bounded to: conditional PMI = 0.0 bits exactly on constant-response hash-based observation with stochastic branching FSM. No inference to richer representations, production SPAs, or H(Response) > 0 settings.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "hashes": {
         "request.json": "038454b1676888d7706ed54a0c9e75012501fcc2877b973db2ce8cdfb7920d1f",
@@ -3062,7 +3062,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "b9a2c51b34dbc8320b04440b095c14eeb4006a61",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "source_commit": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "hashes": {
         "request.json": "f7430fbbcb7462aff29a9111389d9468e0827093c4294ac0d28ac8e2d796b3c8",
@@ -3129,6 +3129,33 @@
         "audit.json": "ade683887e6e2754c57418459259df19662f0cc8e73a1b43cb3044ee1a5fa888",
         "verdict.json": "7103f7b8f7ce1811c5673666263aa70ad8128dad7150bed65d5e30adeac95842",
         "handoff.json": "b86e49915b03105f3ad44bb3f700d3536eca78895038d8f6cb7c215f5e46363a"
+      }
+    },
+    "EXP-PHYSICS-35209110569": {
+      "lane": "physics",
+      "request_id": "e5a306050bf60eb0a269ef35",
+      "created_at": "2026-09-17T10:11:00.874952+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS"
+      ],
+      "question": "Which TodoMVC hash-SPA variants exhibit URL-level leakage below 40% and sufficient title variation, enabling >=50 non-leakage transitions for PMI analysis \u2014 thereby identifying suitable production-like testbeds to bridge the synthetic-to-real gap in the C-WEB-DYNAMICS research program?",
+      "audit_status": "PASS",
+      "decision": "PARTIAL_FALSIFICATION \u2014 Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants \u22652 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213\u20130.285) with achievable NL 357\u2013394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "source_ref_head": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
+      "source_commit": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
+      "hashes": {
+        "request.json": "2c16aab185865b1d3840cb3ae9db74400519a513d1148d39ce703579564dd987",
+        "spec.json": "75fa201a68117be5dc19fbbe4799a2f88fb30e9dd9cdb0459915233f0776b66c",
+        "prereg.md": "99e6936d0ecd5c2cc60120ab9a71309c0f7d3eaf30992a8a7b24e84b2e2f0cb2",
+        "freeze.json": "9d4b84f3a997b7b213b35b97159cb000977591e90fdda07d34e680fcb4a07a14",
+        "result.json": "7e14d8624b529324e69c28c5676d38a1bf560310f321389925646cbcbe6437a5",
+        "report.md": "0df29b5f3c7ce8713ad89ae8a39dc3577d99967cae551c455a0f5b1a4ae67689",
+        "provenance.json": "753ac3f88b45d2a34045848837cff07707c6743d9d0b2e99babd0688ed52a28b",
+        "audit.json": "1f1996fc5ba893822b965a29d0a830077b0d1c3ddd3910ad7ed7819699e7278f",
+        "verdict.json": "8636ec0018ee3487b1d0f99fec1aa2d540df39d2b67893c4dce588926e9aafed",
+        "handoff.json": "efa17806c5c69a7d0871dfcadfb90b88ae851529f306f31e8372cf3c4b426174"
       }
     },
     "EXP-PRODUCT-35209109455": {

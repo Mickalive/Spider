@@ -1,0 +1,20 @@
+{
+  "base_sha": "96b62e4739edba0ace1f318c84fd627e070f693d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T10:11:00.874952+00:00",
+  "experiment_id": "EXP-PHYSICS-35209110569",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Should the Physics lane pivot to production SPAs with hash-based client-side routing (e.g., TodoMVC hash-SPA variants, React Router history-based SPAs) where multiple client-side states can share the same URL path, reducing URL-level leakage below 40% and enabling >=50 non-leakage transitions for PMI analysis?",
+  "lane": "physics",
+  "origin_github_run_id": "35209110569",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35185288822",
+    "path": "research/experiments/EXP-PHYSICS-35185288822/handoff.json",
+    "sha256": "8ef7cc72641d42daf5810f2fb371728adb8d76076387882037a0ac1f7681d812"
+  },
+  "reason": "pulse",
+  "request_hash": "a835ef7cbe199296211011858b6097d30af25968a468fba6ac9e804c22693a62",
+  "request_id": "e5a306050bf60eb0a269ef35",
+  "schema_version": 1
+}

@@ -351,6 +351,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "MEASUREMENT_INVALID per frozen decision_rule: C7 fails (0/3 sites with >=50 non-leakage transitions; Wikipedia 8, GitHub 4, MDN 2). This is an infrastructure/data-sufficiency failure, not a scientific negative. Structural URL-level leakage (78-92% of link navigations have action.target_href == state_after.url) on server-rendered MPAs (Wikipedia/MDN/GitHub) makes the NL filter remove most transitions by design of these sites. After filtering, Wikipedia's 8 NL transitions have 6 unique SA pairs (all singleton), so Laplace-smoothed BC PMI = 0.0 bits is mathematically forced (I(X;Y)=0 when each (s,a) appears once). Positive control passes strongly (BC PMI = 1.841, p=0.001) validating the estimator on deterministic in-memory data. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. Claim ceiling bounded to: server-rendered MPAs with link-dominated Playwright navigation and exact href==URL leakage definition cannot express the tested effect at transition-level PMI with 50 NL threshold."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35209110569",
+        "lane": "physics",
+        "created_at": "2026-09-17T10:11:00.874952+00:00",
+        "decision": "PARTIAL_FALSIFICATION \u2014 Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants \u22652 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213\u20130.285) with achievable NL 357\u2013394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation.",
+        "source_commit": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "SPA leakage 0.21\u20130.28 valid-only (5/5 variants <40%) validates hash-SPAs as suitable testbeds for URL-level non-leakage PMI at NL scale (50 NL needs 64\u201370 raw). Mechanism understood: link_click leakage 1.00 (frozen normalization strips fragments), non-link actions leakage 0.00; headline rate reflects protocol's 27% link share, not site constant. However, title variation 0/5 (unique_titles=1, entropy 0.0 bits on all 840 SPA transitions) falsifies title-aware PMI on TodoMVC, replicating EXP-PHYSICS-34266105229 degeneracy; pipeline validated by 5 distinct Wikipedia titles on same code path. Neither URL-level PMI nor title-aware PMI has been tested on production SPAs with genuine state variation. C-WEB-DYNAMICS (predictive dynamical structure beyond memory) remains HYPOTHESIS \u2014 this experiment characterizes infrastructure viability, not the core claim."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1520,14 +1530,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35185288822",
+      "experiment_id": "EXP-PHYSICS-35209110569",
       "lane": "physics",
-      "created_at": "2026-09-17T05:19:47.829838+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
+      "created_at": "2026-09-17T10:11:00.874952+00:00",
+      "decision": "PARTIAL_FALSIFICATION \u2014 Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants \u22652 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213\u20130.285) with achievable NL 357\u2013394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation.",
+      "source_commit": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "MEASUREMENT_INVALID per frozen decision_rule: C7 fails (0/3 sites with >=50 non-leakage transitions; Wikipedia 8, GitHub 4, MDN 2). This is an infrastructure/data-sufficiency failure, not a scientific negative. Structural URL-level leakage (78-92% of link navigations have action.target_href == state_after.url) on server-rendered MPAs (Wikipedia/MDN/GitHub) makes the NL filter remove most transitions by design of these sites. After filtering, Wikipedia's 8 NL transitions have 6 unique SA pairs (all singleton), so Laplace-smoothed BC PMI = 0.0 bits is mathematically forced (I(X;Y)=0 when each (s,a) appears once). Positive control passes strongly (BC PMI = 1.841, p=0.001) validating the estimator on deterministic in-memory data. No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. Claim ceiling bounded to: server-rendered MPAs with link-dominated Playwright navigation and exact href==URL leakage definition cannot express the tested effect at transition-level PMI with 50 NL threshold."
+      "reason": "SPA leakage 0.21\u20130.28 valid-only (5/5 variants <40%) validates hash-SPAs as suitable testbeds for URL-level non-leakage PMI at NL scale (50 NL needs 64\u201370 raw). Mechanism understood: link_click leakage 1.00 (frozen normalization strips fragments), non-link actions leakage 0.00; headline rate reflects protocol's 27% link share, not site constant. However, title variation 0/5 (unique_titles=1, entropy 0.0 bits on all 840 SPA transitions) falsifies title-aware PMI on TodoMVC, replicating EXP-PHYSICS-34266105229 degeneracy; pipeline validated by 5 distinct Wikipedia titles on same code path. Neither URL-level PMI nor title-aware PMI has been tested on production SPAs with genuine state variation. C-WEB-DYNAMICS (predictive dynamical structure beyond memory) remains HYPOTHESIS \u2014 this experiment characterizes infrastructure viability, not the core claim."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35209109455",
