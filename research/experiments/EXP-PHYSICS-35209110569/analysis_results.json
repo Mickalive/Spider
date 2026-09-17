@@ -1,0 +1,505 @@
+{
+ "per_site": {
+  "vanillajs": {
+   "n_raw": 168,
+   "n_sessions": 7,
+   "n_leakage": 42,
+   "leakage_rate": 0.25,
+   "unique_titles": 1,
+   "title_list": [
+    "TodoMVC: JavaScript Es6 Webpack"
+   ],
+   "title_entropy_bits": 0.0,
+   "unique_urls_norm": 1,
+   "url_entropy_bits": 0.0,
+   "achievable_NL_at_500": 375.0,
+   "action_distribution": {
+    "form_submit": 42,
+    "link_click": 42,
+    "button_click": 63,
+    "js_navigate": 21
+   },
+   "per_type_leakage": {
+    "button_click": {
+     "n": 63,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "form_submit": {
+     "n": 42,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "js_navigate": {
+     "n": 21,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "link_click": {
+     "n": 42,
+     "n_leakage": 42,
+     "leakage_rate": 1.0
+    }
+   },
+   "n_transition_errors": 38,
+   "n_valid_no_error": 130,
+   "valid_only": {
+    "n_raw": 130,
+    "n_sessions": 7,
+    "n_leakage": 37,
+    "leakage_rate": 0.2846153846153846,
+    "unique_titles": 1,
+    "title_list": [
+     "TodoMVC: JavaScript Es6 Webpack"
+    ],
+    "title_entropy_bits": 0.0,
+    "unique_urls_norm": 1,
+    "url_entropy_bits": 0.0,
+    "achievable_NL_at_500": 357.6923076923077,
+    "action_distribution": {
+     "form_submit": 42,
+     "link_click": 37,
+     "button_click": 30,
+     "js_navigate": 21
+    },
+    "per_type_leakage": {
+     "button_click": {
+      "n": 30,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "form_submit": {
+      "n": 42,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "js_navigate": {
+      "n": 21,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "link_click": {
+      "n": 37,
+      "n_leakage": 37,
+      "leakage_rate": 1.0
+     }
+    },
+    "n_transition_errors": 0
+   }
+  },
+  "react": {
+   "n_raw": 168,
+   "n_sessions": 7,
+   "n_leakage": 42,
+   "leakage_rate": 0.25,
+   "unique_titles": 1,
+   "title_list": [
+    "TodoMVC: React"
+   ],
+   "title_entropy_bits": 0.0,
+   "unique_urls_norm": 1,
+   "url_entropy_bits": 0.0,
+   "achievable_NL_at_500": 375.0,
+   "action_distribution": {
+    "form_submit": 42,
+    "link_click": 42,
+    "button_click": 63,
+    "js_navigate": 21
+   },
+   "per_type_leakage": {
+    "button_click": {
+     "n": 63,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "form_submit": {
+     "n": 42,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "js_navigate": {
+     "n": 21,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "link_click": {
+     "n": 42,
+     "n_leakage": 42,
+     "leakage_rate": 1.0
+    }
+   },
+   "n_transition_errors": 38,
+   "n_valid_no_error": 130,
+   "valid_only": {
+    "n_raw": 130,
+    "n_sessions": 7,
+    "n_leakage": 37,
+    "leakage_rate": 0.2846153846153846,
+    "unique_titles": 1,
+    "title_list": [
+     "TodoMVC: React"
+    ],
+    "title_entropy_bits": 0.0,
+    "unique_urls_norm": 1,
+    "url_entropy_bits": 0.0,
+    "achievable_NL_at_500": 357.6923076923077,
+    "action_distribution": {
+     "form_submit": 42,
+     "link_click": 37,
+     "button_click": 30,
+     "js_navigate": 21
+    },
+    "per_type_leakage": {
+     "button_click": {
+      "n": 30,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "form_submit": {
+      "n": 42,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "js_navigate": {
+      "n": 21,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "link_click": {
+      "n": 37,
+      "n_leakage": 37,
+      "leakage_rate": 1.0
+     }
+    },
+    "n_transition_errors": 0
+   }
+  },
+  "vue": {
+   "n_raw": 168,
+   "n_sessions": 7,
+   "n_leakage": 42,
+   "leakage_rate": 0.25,
+   "unique_titles": 1,
+   "title_list": [
+    "TodoMVC: Vue"
+   ],
+   "title_entropy_bits": 0.0,
+   "unique_urls_norm": 1,
+   "url_entropy_bits": 0.0,
+   "achievable_NL_at_500": 375.0,
+   "action_distribution": {
+    "form_submit": 42,
+    "link_click": 42,
+    "button_click": 63,
+    "js_navigate": 21
+   },
+   "per_type_leakage": {
+    "button_click": {
+     "n": 63,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "form_submit": {
+     "n": 42,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "js_navigate": {
+     "n": 21,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "link_click": {
+     "n": 42,
+     "n_leakage": 42,
+     "leakage_rate": 1.0
+    }
+   },
+   "n_transition_errors": 60,
+   "n_valid_no_error": 108,
+   "valid_only": {
+    "n_raw": 108,
+    "n_sessions": 7,
+    "n_leakage": 23,
+    "leakage_rate": 0.21296296296296297,
+    "unique_titles": 1,
+    "title_list": [
+     "TodoMVC: Vue"
+    ],
+    "title_entropy_bits": 0.0,
+    "unique_urls_norm": 1,
+    "url_entropy_bits": 0.0,
+    "achievable_NL_at_500": 393.5185185185185,
+    "action_distribution": {
+     "form_submit": 42,
+     "button_click": 22,
+     "js_navigate": 21,
+     "link_click": 23
+    },
+    "per_type_leakage": {
+     "button_click": {
+      "n": 22,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "form_submit": {
+      "n": 42,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "js_navigate": {
+      "n": 21,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "link_click": {
+      "n": 23,
+      "n_leakage": 23,
+      "leakage_rate": 1.0
+     }
+    },
+    "n_transition_errors": 0
+   }
+  },
+  "angular": {
+   "n_raw": 168,
+   "n_sessions": 7,
+   "n_leakage": 42,
+   "leakage_rate": 0.25,
+   "unique_titles": 1,
+   "title_list": [
+    "TodoMVC: Angular"
+   ],
+   "title_entropy_bits": 0.0,
+   "unique_urls_norm": 1,
+   "url_entropy_bits": 0.0,
+   "achievable_NL_at_500": 375.0,
+   "action_distribution": {
+    "form_submit": 42,
+    "link_click": 42,
+    "button_click": 63,
+    "js_navigate": 21
+   },
+   "per_type_leakage": {
+    "button_click": {
+     "n": 63,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "form_submit": {
+     "n": 42,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "js_navigate": {
+     "n": 21,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "link_click": {
+     "n": 42,
+     "n_leakage": 42,
+     "leakage_rate": 1.0
+    }
+   },
+   "n_transition_errors": 38,
+   "n_valid_no_error": 130,
+   "valid_only": {
+    "n_raw": 130,
+    "n_sessions": 7,
+    "n_leakage": 37,
+    "leakage_rate": 0.2846153846153846,
+    "unique_titles": 1,
+    "title_list": [
+     "TodoMVC: Angular"
+    ],
+    "title_entropy_bits": 0.0,
+    "unique_urls_norm": 1,
+    "url_entropy_bits": 0.0,
+    "achievable_NL_at_500": 357.6923076923077,
+    "action_distribution": {
+     "form_submit": 42,
+     "link_click": 37,
+     "button_click": 30,
+     "js_navigate": 21
+    },
+    "per_type_leakage": {
+     "button_click": {
+      "n": 30,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "form_submit": {
+      "n": 42,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "js_navigate": {
+      "n": 21,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "link_click": {
+      "n": 37,
+      "n_leakage": 37,
+      "leakage_rate": 1.0
+     }
+    },
+    "n_transition_errors": 0
+   }
+  },
+  "svelte": {
+   "n_raw": 168,
+   "n_sessions": 7,
+   "n_leakage": 42,
+   "leakage_rate": 0.25,
+   "unique_titles": 1,
+   "title_list": [
+    "TodoMVC: Svelte"
+   ],
+   "title_entropy_bits": 0.0,
+   "unique_urls_norm": 1,
+   "url_entropy_bits": 0.0,
+   "achievable_NL_at_500": 375.0,
+   "action_distribution": {
+    "form_submit": 42,
+    "link_click": 42,
+    "button_click": 63,
+    "js_navigate": 21
+   },
+   "per_type_leakage": {
+    "button_click": {
+     "n": 63,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "form_submit": {
+     "n": 42,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "js_navigate": {
+     "n": 21,
+     "n_leakage": 0,
+     "leakage_rate": 0.0
+    },
+    "link_click": {
+     "n": 42,
+     "n_leakage": 42,
+     "leakage_rate": 1.0
+    }
+   },
+   "n_transition_errors": 38,
+   "n_valid_no_error": 130,
+   "valid_only": {
+    "n_raw": 130,
+    "n_sessions": 7,
+    "n_leakage": 37,
+    "leakage_rate": 0.2846153846153846,
+    "unique_titles": 1,
+    "title_list": [
+     "TodoMVC: Svelte"
+    ],
+    "title_entropy_bits": 0.0,
+    "unique_urls_norm": 1,
+    "url_entropy_bits": 0.0,
+    "achievable_NL_at_500": 357.6923076923077,
+    "action_distribution": {
+     "form_submit": 42,
+     "link_click": 37,
+     "button_click": 30,
+     "js_navigate": 21
+    },
+    "per_type_leakage": {
+     "button_click": {
+      "n": 30,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "form_submit": {
+      "n": 42,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "js_navigate": {
+      "n": 21,
+      "n_leakage": 0,
+      "leakage_rate": 0.0
+     },
+     "link_click": {
+      "n": 37,
+      "n_leakage": 37,
+      "leakage_rate": 1.0
+     }
+    },
+    "n_transition_errors": 0
+   }
+  },
+  "wikipedia": {
+   "n_raw": 100,
+   "n_sessions": 5,
+   "n_leakage": 100,
+   "leakage_rate": 1.0,
+   "unique_titles": 5,
+   "title_list": [
+    "HTML - Wikipedia",
+    "HTTP - Wikipedia",
+    "URL - Wikipedia",
+    "Web browser - Wikipedia",
+    "World Wide Web - Wikipedia"
+   ],
+   "title_entropy_bits": 2.321928094887362,
+   "unique_urls_norm": 5,
+   "url_entropy_bits": 2.321928094887362,
+   "achievable_NL_at_500": 0.0,
+   "action_distribution": {
+    "link_click": 100
+   },
+   "per_type_leakage": {
+    "link_click": {
+     "n": 100,
+     "n_leakage": 100,
+     "leakage_rate": 1.0
+    }
+   },
+   "n_transition_errors": 0,
+   "n_valid_no_error": 100,
+   "valid_only": {
+    "n_raw": 100,
+    "n_sessions": 5,
+    "n_leakage": 100,
+    "leakage_rate": 1.0,
+    "unique_titles": 5,
+    "title_list": [
+     "HTML - Wikipedia",
+     "HTTP - Wikipedia",
+     "URL - Wikipedia",
+     "Web browser - Wikipedia",
+     "World Wide Web - Wikipedia"
+    ],
+    "title_entropy_bits": 2.321928094887362,
+    "unique_urls_norm": 5,
+    "url_entropy_bits": 2.321928094887362,
+    "achievable_NL_at_500": 0.0,
+    "action_distribution": {
+     "link_click": 100
+    },
+    "per_type_leakage": {
+     "link_click": {
+      "n": 100,
+      "n_leakage": 100,
+      "leakage_rate": 1.0
+     }
+    },
+    "n_transition_errors": 0
+   }
+  }
+ },
+ "spa_action_marginal": {
+  "form_submit": 0.3343949044585987,
+  "link_click": 0.27229299363057324,
+  "button_click": 0.22611464968152867,
+  "js_navigate": 0.16719745222929935
+ },
+ "leakage_definition": "normalize(action_target)==normalize(url_after); normalize=strip-fragment,rstrip-slash,unquote"
+}
