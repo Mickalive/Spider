@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35402003775",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING — All three materially orthogonal null frameworks fail to center PMI null at zero for the 12-state hash-routed SPA simulation. Parametric bootstrap null mean 0.357 bits (3.57x above |0.1| threshold, 14.5% improvement over within-stratum 0.417). Miller-Madow null mean 0.407 bits (4.07x above, +13.6% signal boost but null unchanged). Conditional entropy null mean -0.814 bits degenerate (positive control fails: H_full=0.0 on deterministic SPA by construction). Within-stratum permutation 0.417 replicates parent exactly. The null control problem is intrinsic to PMI estimator weighting across deterministic/stochastic strata (31.5% deterministic with PMI=0 diluting weighted average), not permutation scheme or estimator choice. 0/3 frameworks pass frozen decision rule. Measurement valid (audit PASS). The 0.933-bit K2 PMI signal remains reproducible (p=0.001, d~79) but cannot support confirmatory beyond-Markov claim without valid null control.",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status from prior HYPOTHESIS. This experiment falsifies three specific null centering methodologies (parametric bootstrap, Miller-Madow, conditional entropy) for the 12-state hash-routed SPA at N=5000, but does not accumulate evidence for or against the core claim that real Web transitions contain predictive dynamical structure beyond memory. The 0.933-bit K2 PMI signal is real and reproducible (p=0.001) but confirmatory beyond-Markov claim remains unsupported without valid null control. The frozen FALSIFIED-IN-SETTING verdict is due to null methodology limitation, not absence of signal. C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic SPA simulation."
+    }
+  ],
+  "product_action": "NONE — No code changes, no product promotion. C-WEB-DYNAMICS remains HYPOTHESIS. No mechanism survives gate.",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Is the 0.933-bit K2 PMI signal on the 12-state SPA primarily Markov (action determines next state given current state, requiring only current-state conditioning) or genuinely beyond-Markov (history K>2 adds predictive information beyond current state)? Compare state-history K2 PMI (0.933 bits) against action-history K3 PMI (1.221 bits) at N=5000 on the same SPA: if K3 >> K2, signal is primarily Markov; if K2 is comparable to or exceeds K3 after history conditioning, beyond-Markov structure is demonstrated. This decomposition does not require null centering (it is a ratio/comparison, not an absolute test) and resolves the interpretive ambiguity without resolving the null bias problem.",
+  "reason": "The frozen decision rule requires >=1/3 frameworks passing all conditions for SURVIVES_CURRENT_TEST; 0/3 pass. Audit PASS confirms all recomputed metrics match producer: parametric bootstrap null mean 0.357 (recomputed 0.357), Miller-Madow 0.407 (recomputed 0.407), conditional entropy -0.814 (recomputed -0.814). The convergence across frameworks (range 0.060 bits) and with parent within-stratum (0.417) confirms the bias floor is intrinsic to PMI weighted averaging across deterministic/stochastic strata, not estimator choice. The conditional entropy framework's degeneracy (H_full=0.0 on deterministic SPA) is informative: it reveals the bias extends beyond PMI to information-theoretic quantities that bypass PMI weighting, confirming the problem is structural (deterministic strata dilution) not estimational. The 0.933-bit K2 PMI signal and 1.221-bit action-history K3 signal remain reproducible but uninterpreted. The preregistered pivot to signal decomposition (Markov vs beyond-Markov) is the highest-information next step given this outcome.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35402003775/spec.json:decision_rule",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.framework_pass_count=0",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.parametric_bootstrap_null_mean_k2=0.3569402860952486",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.miller_madow_null_mean_k2=0.40719453952263834",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.conditional_entropy_null_mean_k2=-0.81441823876677",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.within_stratum_null_mean_k2=0.41745412103641627",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.state_history_pmi_k2=0.9332435964563096",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.action_history_pmi_k3=1.2205083083840707",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA.passes=true",
+    "research/experiments/EXP-PHYSICS-35402003775/audit.json:status=PASS",
+    "research/experiments/EXP-PHYSICS-35402003775/audit.json:claim_ceiling",
+    "research/experiments/EXP-PHYSICS-35402003775/audit.json:recomputed_metrics.framework_pass_details_producer",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ]
+}

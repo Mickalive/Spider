@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35402003775",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "parametric_bootstrap_null_mean_k2": 0.3569402860952486,
+    "parametric_bootstrap_null_std_k2": 0.007320633829459251,
+    "parametric_bootstrap_observed_pmi_k2": 0.9332435964563096,
+    "parametric_bootstrap_abs_mean_k2": 0.3569402860952486,
+    "miller_madow_null_mean_k2": 0.40719453952263834,
+    "miller_madow_null_std_k2": 0.008441979930278131,
+    "miller_madow_observed_pmi_mm_k2": 1.059767951542273,
+    "miller_madow_abs_mean_k2": 0.40719453952263834,
+    "conditional_entropy_null_mean_k2": -0.81441823876677,
+    "conditional_entropy_null_std_k2": 0.003082889115878363,
+    "conditional_entropy_observed_delta_h_k2": -0.9332435964563096,
+    "conditional_entropy_abs_mean_k2": 0.81441823876677,
+    "within_stratum_null_mean_k2": 0.41745412103641627,
+    "state_history_pmi_k2": 0.9332435964563096,
+    "state_history_pmi_k3": 0.168155815254065,
+    "action_history_pmi_k3": 1.2205083083840707,
+    "unconditional_pmi_k0": 1.4187811340289063,
+    "state_history_pmi_k1": 1.5309023746943278,
+    "determinism_check_state_k2": {
+      "deterministic_strata": 407,
+      "stochastic_strata": 885,
+      "total_strata": 1292,
+      "stochastic_ratio": 0.684984520123839,
+      "deterministic_ratio": 0.31501547987616096
+    },
+    "framework_pass_count": 0,
+    "framework_pass_details": {
+      "parametric_bootstrap": false,
+      "miller_madow": false,
+      "conditional_entropy": false
+    }
+  },
+  "controls": {
+    "POSITIVE_CONTROL_SYNTHETIC_SPA": {
+      "description": "8-state synthetic deterministic SPA with known beyond-Markov structure, N=5000, K=3",
+      "expected": "PMI >= 1.0 bits, permutation p < 0.001",
+      "observed_pmi_state_k3": 1.671251,
+      "observed_pmi_action_k3": 1.805624,
+      "observed_p_state": 0.000999000999000999,
+      "observed_p_action": 0.000999000999000999,
+      "effect_size_d_state": 121.71,
+      "effect_size_d_action": 154.53,
+      "passes_pmi": true,
+      "passes_perm": true,
+      "passes": true,
+      "observed_outcome": "PASS"
+    },
+    "NULL_CONTROL_PARAMETRIC_BOOTSTRAP": {
+      "description": "Model-based null: estimate P(url_after|stratum) from data with Laplace smoothing, simulate null samples, compute PMI distribution. 1000 bootstrap samples, seed=42.",
+      "expected": "null_mean within [-0.1, +0.1] bits of zero",
+      "observed_mean_k2": 0.3569402860952486,
+      "observed_std_k2": 0.007320633829459251,
+      "threshold_abs_mean": 0.1,
+      "passes": false,
+      "observed_outcome": "FAIL (mean 0.357 not within [-0.1, +0.1])"
+    },
+    "NULL_CONTROL_MILLER_MADOW": {
+      "description": "Miller-Madow bias-corrected PMI with within-stratum permutation null. 1000 permutations, seed=42.",
+      "expected": "null_mean within [-0.1, +0.1] bits of zero",
+      "observed_mean_k2": 0.40719453952263834,
+      "observed_std_k2": 0.008441979930278131,
+      "threshold_abs_mean": 0.1,
+      "passes": false,
+      "observed_outcome": "FAIL (mean 0.407 not within [-0.1, +0.1])"
+    },
+    "NULL_CONTROL_CONDITIONAL_ENTROPY": {
+      "description": "Conditional entropy difference DeltaH = H(S|A,S,H) - H(S|S,H) under within-stratum permutation null. 1000 permutations, seed=42.",
+      "expected": "null_mean within [-0.1, +0.1] bits of zero",
+      "observed_mean_k2": -0.81441823876677,
+      "observed_std_k2": 0.003082889115878363,
+      "threshold_abs_mean": 0.1,
+      "passes": false,
+      "observed_outcome": "FAIL (mean -0.814 not within [-0.1, +0.1])"
+    },
+    "NULL_CONTROL_WITHIN_STRATUM_PERMUTATION": {
+      "description": "Within-stratum conditional permutation (parent method, known biased). Diagnostic comparison.",
+      "expected": "null_mean within [-0.1, +0.1] bits of zero",
+      "observed_mean_k2": 0.41745412103641627,
+      "observed_std_k2": 0.006475080847523785,
+      "threshold_abs_mean": 0.1,
+      "passes": false,
+      "observed_outcome": "FAIL (mean 0.417 not within [-0.1, +0.1])"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35402003775/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json",
+      "sha256": "4704544873d799ce01a02b627a06877bd3399c010106a8e4cd32743eaef3708b",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35402003775/run_experiment.py",
+      "sha256": "a170973a5002d39c7172657c27e6a6fa4e53d4811b5a1b99c2de9ee75846bb98",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "5000 transitions collected in-memory from 12-state SPA simulation: 50 sessions x 100 steps, seed=42, same SHA256 transition function as parent EXP-PHYSICS-35389142077. Raw SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade (matches parent exactly, confirming identical data).",
+    "Parametric bootstrap null mean at K=2 = 0.357 bits. This FAILS the frozen primary falsifier (|mean| < 0.1 bits). The null is biased high by 0.357 bits, 3.57x above the threshold. The parametric bootstrap improves over within-stratum permutation (0.417) by 14.5% but remains far from zero.",
+    "Miller-Madow corrected PMI null mean at K=2 = 0.407 bits. This FAILS the frozen primary falsifier (|mean| < 0.1 bits). The Miller-Madow bias correction increases observed PMI from 0.933 to 1.060 bits (+13.6%) but does not reduce the null bias (0.407 vs 0.417 within-stratum).",
+    "Conditional entropy difference null mean at K=2 = -0.814 bits. This FAILS the frozen primary falsifier (|mean| < 0.1 bits). The conditional entropy framework yields a completely different result: observed DeltaH is negative (-0.933 bits), meaning H(S|A,S,H) < H(S|S,H). This indicates the conditional entropy estimator is degenerate in this setting.",
+    "The conditional entropy positive control fails: H(S|S,H_K=3) = 0.0 bits on the 8-state deterministic SPA (all K=3 strata are single-valued for S_next, making H=0 by construction). This confirms the conditional entropy framework is not suitable for deterministic SPAs.",
+    "Within-stratum permutation null mean 0.417 replicates parent exactly, confirming measurement reproducibility.",
+    "PMI signal remains strong and reproducible: state K2 PMI = 0.933 bits (p=0.001, d=79.7), unconditional K0 = 1.419 bits, K1 = 1.531 bits, action K3 = 1.221 bits. All match parent within floating-point precision.",
+    "Positive control passes strongly: 8-state deterministic SPA state K3 PMI = 1.671 bits, action K3 = 1.806 bits, both p=0.001. Pipeline validated at N=5000.",
+    "The convergence of parametric bootstrap (0.357), Miller-Madow (0.407), and within-stratum (0.417) null means suggests the bias floor is intrinsic to the PMI estimator weighting across deterministic/stochastic strata. The parametric bootstrap achieves a modest 14.5% improvement but does not resolve the fundamental bias.",
+    "All three frameworks fail to center null at zero. The frozen decision rule triggers FALSIFIED-IN-SETTING: 0/3 frameworks pass all conditions."
+  ],
+  "validity_notes": [
+    "The parametric bootstrap estimates P(url_after | stratum) from data and simulates null samples from this estimated distribution. The null mean of 0.357 bits indicates the estimated conditional distribution does not fully capture the action-PMI coupling. The bias is reduced by 14.5% vs within-stratum permutation but remains 3.57x above the 0.1 threshold.",
+    "The Miller-Madow bias correction increases observed PMI from 0.933 to 1.060 bits (+13.6%) but does not reduce the null bias (0.407 vs 0.417). This suggests the bias is not primarily due to finite-sample correction in the PMI estimator, but rather to the weighted averaging across deterministic/stochastic strata.",
+    "The conditional entropy framework yields a degenerate result: observed DeltaH is negative (-0.933 bits), meaning H(S|A,S,H) < H(S|S,H). This occurs because the conditional entropy estimator is biased downward when action determines next state (as in deterministic SPAs). The conditional entropy positive control fails (H_K3 = 0.0 on deterministic SPA), confirming this framework is not suitable for deterministic transition systems.",
+    "The experiment is COMPLETE (measurement valid) but FALSIFIES the null centering hypothesis for all three frameworks. This is a valid scientific negative: none of the tested alternative null frameworks resolve C4 for hash-routed SPAs.",
+    "No Bonferroni correction needed for primary falsifier test (single comparison per framework). The permutation p=0.001 confirms observed PMI is significantly above the biased null, but the biased null itself fails the centering criterion.",
+    "The conditional entropy framework's failure is informative: it reveals that the bias is not specific to the PMI estimator but extends to information-theoretic quantities that bypass PMI weighting. The degenerate DeltaH suggests the problem is intrinsic to the deterministic/stochastic strata mixing, not the estimator choice."
+  ],
+  "unresolved": [
+    "Why does the parametric bootstrap fail to center null at zero? The estimated P_hat(url_after|stratum) should preserve the conditional distribution while breaking action-PMI coupling. Possible explanations: (a) the estimated model is too simple (Laplace-smoothed frequencies) and does not capture the true data-generating process; (b) the bootstrap samples inherit the same weighted-average bias across deterministic/stochastic strata; (c) the action labels are not independent of url_after within strata, so simulating url_after from P_hat preserves some action-PMI coupling.",
+    "Is the bias floor of ~0.36-0.42 bits reducible by larger N? The bias may scale with N^(-1/2) or may be asymptotically irreducible for this SPA design. Testing at N=50000 or N=500000 could determine whether the bias is finite-sample or asymptotic.",
+    "Does the conditional entropy degeneracy generalize to stochastic SPAs? The current test uses deterministic SPAs where H(S|A,S,H) = 0 by construction. Testing on stochastic SPAs with H(S|A,S,H) > 0 could reveal whether conditional entropy is viable for non-deterministic transitions.",
+    "The Physics lane should pivot to the orthogonal high-upside question: whether the 0.933-bit K2 PMI signal is primarily Markov (action determines next state given current state) or beyond-Markov (history adds information beyond current state), using action-history K3 as baseline comparison at same N.",
+    "The null bias convergence across frameworks (parametric bootstrap 0.357, Miller-Madow 0.407, within-stratum 0.417) suggests a fundamental limit for this SPA design. The bias may be intrinsic to the 12-state SPA with 31.5% deterministic strata and mean observations per stratum of 3.87.",
+    "Production SPA testing remains untested. The validated PMI pipeline (0.933 bits, p=0.001) detects signal but without a valid null control, the p-value and significance claims cannot be confirmed. A different falsification framework is needed before production testing is meaningful."
+  ]
+}
