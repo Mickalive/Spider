@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35353016702",
+  "lane": "intel",
+  "github_run_id": "35353016702",
+  "base_sha": "80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb",
+  "commit_sha": "006c5bcbb479a63d1f0a1ae1d65b91913321e57b",
+  "commit_message": "R2 intel: execution base EXP-INTEL-35353016702",
+  "created_at": "2026-09-18T13:55:05.550962+00:00",
+  "executed_at": "2026-09-18T14:30:00.000000+00:00",
+  "frozen_at": "2026-09-18T14:04:43.719260+00:00",
+  "datasets": [
+    {
+      "name": "EXP-INTEL-34782350557 raw measurement data",
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "description": "Locatable sample data from Magento site: 7 tasks (3 product_listing, 3 detail, 1 cart), 3 definitions, locatable_sample capped at 20 elements per task"
+    }
+  ],
+  "code_paths": [
+    {
+      "path": "/tmp/opencode/third_recipe_analysis.py",
+      "sha256": null,
+      "description": "Analysis script implementing 3-recipe OECD/COINr framework analysis. Computes density matrix, dominance pairs, ranking analysis, and null control."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/analysis.py",
+      "description": "Parent analysis script for density computation (reference only, not executed directly)"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35353016702/result.json",
+      "sha256": null,
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35353016702/report.md",
+      "sha256": null,
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35353016702/provenance.json",
+      "sha256": null,
+      "role": "provenance"
+    },
+    {
+      "path": "/tmp/opencode/third_recipe_output/analysis_results.json",
+      "sha256": "b02e5a9205b51e49686dab65b059263b0d2e04f2e76688c714a0fdfa24efbd02",
+      "role": "derived",
+      "description": "Complete analysis output: density matrix, dominance pairs, ranking analysis, null control results"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "dependencies": ["json", "random", "hashlib", "math", "pathlib"],
+    "note": "Analysis is deterministic given frozen seed (42). No external dependencies beyond Python stdlib."
+  },
+  "reproduction": {
+    "command": "python3 /tmp/opencode/third_recipe_analysis.py",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "seed": 42,
+    "expected_runtime_seconds": "<5",
+    "note": "Reproduction requires access to raw data at research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json"
+  },
+  "frozen_inputs": {
+    "request_hash": "5a66aac977545bc7bc2f7c271c1e021a29744aea791d298a393d9c6adba93abc",
+    "spec_hash": "1cf710c1781a99e5c6afe16e49d6791dfc42543025405192428c40896caa72a9",
+    "prereg_hash": "311811e6532f6d9cd98cc7e4aea6ed3ee9923198eb6d3d2b3dac643bc3228188"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-35330747199",
+    "parent_handoff_sha256": "f1cb221b32b91f2669012155a9298493474d471bf6c8536b6b81851643f16341",
+    "parent_verdict": "REVISE",
+    "parent_next_question": "Can a third recipe variant break the 2-recipe dominance degeneracy?"
+  }
+}

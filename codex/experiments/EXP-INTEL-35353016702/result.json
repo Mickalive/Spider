@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35353016702",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M1_DENSITY_MATRIX": {
+      "description": "Per-task density values under 3 recipes x 3 definitions. 21 (task, definition) pairs, 3 recipes each.",
+      "n_tasks": 7,
+      "n_recipes": 3,
+      "n_definitions": 3,
+      "total_pairs": 21,
+      "canonical_density_mean": 0.006288,
+      "canonical_density_range": [0.000358, 0.008803],
+      "weighted_density_mean": 0.195188,
+      "weighted_density_range": [0.002530, 0.301222],
+      "mean_density_mean": 0.100738,
+      "mean_density_range": [0.001703, 0.154445],
+      "cross_recipe_density_ratio_weighted_vs_canonical": 31.04,
+      "summary": "Canonical recipe produces near-zero densities (mean 0.006). Weighted recipe produces task-type-dependent densities (mean 0.195). Meta-analytic mean is exactly the arithmetic average (mean 0.101). The mean always ranks between canonical and weighted by construction."
+    },
+    "M2_NONDEGENERATE_COUNT": {
+      "value": 0,
+      "threshold": "10% < dominance < 90%",
+      "total_comparisons": 3,
+      "description": "Zero non-degenerate dominance pairs. All 3 pairwise comparisons are strictly degenerate (0% or 100%)."
+    },
+    "M3_RANKING_CHANGE_COUNT": {
+      "value": 0,
+      "total_pairs": 21,
+      "threshold": ">=3",
+      "description": "Meta-analytic mean ranks exactly between canonical and weighted on ALL 21 task-definition pairs. Zero ranking changes."
+    },
+    "M4_NULL_NONDEGENERATE_COUNT": {
+      "value": 1.988,
+      "std": 0.109,
+      "n_shuffles": 1000,
+      "description": "Shuffled mean recipe produces ~2 non-degenerate pairs on average (from random permutation breaking the canonical<mean<weighted ordering). Real value is 0, well below null."
+    },
+    "M5_DOMINANCE_PAIRS": {
+      "canonical_vs_weighted": {"dominance_canonical": 0.0, "dominance_weighted": 100.0, "degenerate": true},
+      "canonical_vs_mean": {"dominance_canonical": 0.0, "dominance_mean": 100.0, "degenerate": true},
+      "weighted_vs_mean": {"dominance_weighted": 100.0, "dominance_mean": 0.0, "degenerate": true}
+    },
+    "M6_RANKING_POSITION_DISTRIBUTION": {
+      "description": "Position of meta-analytic mean recipe in 3-recipe ranking (0=highest density). All 21 pairs have mean at position 1 (exactly between weighted at 0 and canonical at 2).",
+      "position_0_count": 0,
+      "position_1_count": 21,
+      "position_2_count": 0
+    }
+  },
+  "controls": {
+    "PC1_FRAMEWORK_EXECUTES": {
+      "description": "OECD/COINr framework executes without error on 3-recipe x 7-task x 3-definition density matrix",
+      "expected": "All 63 comparisons produce non-null, non-NaN results",
+      "observed": "63/63 comparisons valid. Meta-analytic mean computable for all 21 pairs.",
+      "result": "PASS"
+    },
+    "NC1_SHUFFLED_THIRD": {
+      "description": "Shuffled third recipe produces fewer or equal non-degenerate pairs than real third recipe",
+      "expected": "Real third recipe produces >= 1 non-degenerate pair. Shuffled third produces fewer.",
+      "observed": "Real third recipe produces 0 non-degenerate pairs. Shuffled third produces ~1.988 on average. Real < shuffled (0 < 1.988).",
+      "result": "FAIL",
+      "note": "Null control fails because the real third recipe produces FEWER non-degenerate pairs than random shuffling. This confirms the meta-analytic mean is maximally uninformative — it always ranks between the two originals, preserving the degenerate dominance structure."
+    },
+    "B1_2RECIPE_BINARY": {
+      "description": "Baseline: 2-recipe OECD framework result (all 21 pairs degenerate 0%/100%)",
+      "observed": "All 21 pairs show canonical < weighted. Dominance is 0% canonical, 100% weighted.",
+      "result": "CONFIRMED"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35353016702/result.json",
+      "sha256": null,
+      "role": "result"
+    },
+    {
+      "path": "/tmp/opencode/third_recipe_output/analysis_results.json",
+      "sha256": "b02e5a9205b51e49686dab65b059263b0d2e04f2e76688c714a0fdfa24efbd02",
+      "role": "derived",
+      "note": "Complete analysis output: density matrix, dominance pairs, ranking analysis, null control"
+    },
+    {
+      "path": "/tmp/opencode/third_recipe_analysis.py",
+      "sha256": null,
+      "role": "code",
+      "note": "Analysis script implementing 3-recipe OECD/COINr framework analysis"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "note": "Source measurement data: 7 tasks, 3 definitions, locatable_sample capped at 20 elements"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-1",
+      "type": "RAW",
+      "description": "The meta-analytic mean recipe (canonical + weighted)/2 always ranks EXACTLY between canonical and weighted on all 21 task-definition pairs. This is a mathematical certainty, not an empirical finding: for any x < y, (x+y)/2 satisfies x < (x+y)/2 < y."
+    },
+    {
+      "id": "OBS-2",
+      "type": "DERIVED",
+      "description": "All 3 pairwise dominance comparisons are strictly degenerate: canonical vs weighted = 0%, canonical vs mean = 0%, weighted vs mean = 100%. The meta-analytic mean introduces no new discrimination — it merely interpolates between the two existing recipes."
+    },
+    {
+      "id": "OBS-3",
+      "type": "RAW",
+      "description": "The 2-recipe degeneracy (all dominance 0%/100%) persists with 3 recipes. The degeneracy is NOT solely a 2-recipe artifact. The density metric itself lacks sufficient task-dependent recipe sensitivity to produce non-degenerate dominance with a linear combination recipe."
+    },
+    {
+      "id": "OBS-4",
+      "type": "DERIVED",
+      "description": "Null control (shuffling mean densities) produces ~2 non-degenerate pairs on average. Shuffling breaks the canonical<mean<weighted ordering, creating cases where the shuffled mean ranks outside the canonical-weighted range. The real mean never does this."
+    },
+    {
+      "id": "OBS-5",
+      "type": "RAW",
+      "description": "Canonical recipe produces near-zero densities (mean 0.006) because p=0.5 independent inclusion on a sparse locatable sample (20 elements) yields very low expected counts. Weighted recipe produces much higher densities (mean 0.195) because area-based weighting amplifies the signal from larger elements."
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-1",
+      "note": "The meta-analytic mean is a LINEAR COMBINATION of the two existing recipes. For any two numbers x < y, (x+y)/2 always satisfies x < (x+y)/2 < y. This is a mathematical identity, not an empirical finding. The mean recipe can NEVER produce a non-degenerate dominance pair when the two original recipes have a strict ordering."
+    },
+    {
+      "id": "VN-2",
+      "note": "The 2-recipe degeneracy (0%/100% dominance) is a consequence of the density metric's extreme recipe sensitivity: canonical produces ~0.006, weighted produces ~0.195. These are 31x apart. The mean at ~0.101 is always between them. No linear combination can break this."
+    },
+    {
+      "id": "VN-3",
+      "note": "Results are bounded to truncated-first-20 locatable_sample (7 tasks, 1 site, 3 definitions). The density values are computed from capped data (20 elements per task, actual counts 21-82). Full DOM enumeration may change the density values but is unlikely to change the qualitative ranking structure."
+    },
+    {
+      "id": "VN-4",
+      "note": "A non-linear third recipe (e.g., DOM hierarchy depth, or a recipe that weights elements differently from both canonical and weighted) might produce rankings that sometimes fall outside the canonical-weighted range. This experiment tested only the simplest possible third recipe."
+    },
+    {
+      "id": "VN-5",
+      "note": "The frozen decision rule's C2 criterion (non-degenerate dominance >=1) is mathematically impossible to satisfy with a linear combination recipe when the two original recipes have strict ordering. This is a design limitation, not a measurement failure."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U-1",
+      "question": "Would a NON-LINEAR third recipe (e.g., DOM hierarchy depth, or a recipe that weights elements by a different function) produce rankings that sometimes fall outside the canonical-weighted range, creating non-degenerate dominance?",
+      "blocked_by": "Need to define and implement a structurally different third recipe, not a linear combination"
+    },
+    {
+      "id": "U-2",
+      "question": "Is the MIXED outcome decision rule resolvable at all with the OECD/COINr framework, or does the density metric's extreme recipe sensitivity (31x canonical/weighted gap) make dominance-based approaches fundamentally unworkable?",
+      "blocked_by": "Need to test with a non-linear third recipe or an alternative framework (density ratio, ranking reversal rate)"
+    },
+    {
+      "id": "U-3",
+      "question": "Does the near-zero canonical density (mean 0.006) reflect actual page structure or is it an artifact of p=0.5 independent inclusion on sparse DOM elements?",
+      "blocked_by": "Need to understand the actual DOM element distribution"
+    },
+    {
+      "id": "U-4",
+      "question": "Would the 84.7x cross-recipe density ratio persist with full locatable_sample data (21-82 elements vs cap 20)?",
+      "blocked_by": "BLOCKED by runtime lane removing locatableSample cap"
+    }
+  ]
+}

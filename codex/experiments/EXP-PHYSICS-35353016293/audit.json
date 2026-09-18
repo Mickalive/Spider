@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35353016293",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Browser-level automatability not tested: prereg 5.x and spec measurement_validity require Playwright collection on Express SPA (SPA simulation must be >10 URL states, stochastic, history-based routing AND automatable via Playwright). Producer used in-memory simulation (run_experiment.py:simulate_session, provenance.json:data_sources.type=in_memory_simulation) that exactly replicates server hash selection but bypasses fragment routing, history API, and browser automation. To claim 'locally-hosted SPA validated as automatable testbed' (spec product_consequence_positive), repeat collection via Playwright using spa_server.js /api/transition or collect_data.py browser path and demonstrate >=200 raw transitions in a single browser session without anti-bot blocking.",
+    "Power/sparsity failure: K=3 design creates 565 unique (url_before, H_K=3) strata from N=1000 records (analysis_results.json:K3.n_strata=565). Only 8/565 (1.4%) have >=5 records (result.json:metrics.conditional_pmi_k3.n_strata_used=8, n_strata_skipped_small=557). Weighted PMI is therefore estimated from 45/1000=4.5% of data and diluted by 55% deterministic strata where PMI=0 by construction. Frozen decision_rule triggers FALSIFIED-IN-SETTING on threshold 0.05 but test is severely underpowered. Fix by collecting N>=5000 (prior unresolved question) or collapsing state space / shortening history or using per-stratum testing with multiple-comparison correction rather than stratum-weighted average, and preregister power analysis.",
+    "Null control miscalibrated and fails: NULL_CONTROL_SHUFFLED_ACTIONS mean_pmi=0.053765, null_std=0.017119, expected mean~0.0; result.json:controls.NULL_CONTROL_SHUFFLED_ACTIONS.pass=false (0.054 not <3*0.017=0.051). Producer validity_notes correctly notes bias. Permutation procedure shuffles action labels but rebuilds H_K from shuffled actions (analyze_pmi.py:permutation_test), which for hash-routed SHA256(prev1:prev2:current:action) SPAs preserves implicit state information. Fix null to shuffle full (url_before, url_after) pairs or use trajectory-level block permutation, and validate that shuffled mean ~0 within Monte Carlo error before interpreting K=3 significance.",
+    "Construct misspecification: beyond-Markov structure in SPA is state-conditional (choose_next uses prev1:prev2:current state, spa_server.js:chooseNext, run_experiment.py:choose_next), but history H_K conditioned in PMI is action-history only (H_K=(action_{t-K}..action_{t-1}) per prereg Methods/History Construction and build_action_histories). Action history is an indirect proxy for state history; with 12 states and 4 actions, H_K=3 of actions alone cannot identify prev state distribution, weakening identifiability. Directly test identifiability argument: either condition on (url_before, state-history H_K) or demonstrate that I(url_after; action | url_before, H_action_K=3) is the intended operational for C-WEB-DYNAMICS and not confounded by state-action aliasing.",
+    "Threshold fragility: K3 PMI=0.04848 fails 0.05 threshold by 0.0015 bits (3% margin) while null_mean=0.05147 exceeds observed (effect_size_d=-0.18, permutation_p=0.5554, result.json:metrics.conditional_pmi_k3). Claim of Markov-only (H0) is not distinguishable from estimator noise/bias. Replace fixed 0.05 bit threshold with bias-corrected or permutation-calibrated threshold or report confidence interval for K3 PMI and show it excludes null distribution before claiming FALSIFIED.",
+    "Correct validity_notes/provenance to use BrowserState terminology if retaining URL-only PMI: result.json and report.md validity_notes acknowledge URL-only representation loss but do not quantify that K0=1.441 and K1=1.509 are already Markov-predictable and that K3 drop to 0.048 reflects both Markov dominance and dilution, not proof of no beyond-Markov dynamics in environment that determinism_check shows 254/565=45% stochastic strata."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_sparsity_dilution",
+      "severity": "critical",
+      "category": "sampling_power",
+      "description": "K=3 estimator uses 8/565 strata (1.4%) covering 45/1000 records (4.5%). 557 strata skipped as <5 records. 565 strata arise from 12 url_before * 4^3=768 possible (url,H_K3) combos at N=1000 => mean 1.77 obs/stratum. Weighted PMI 0.04848 is therefore high-variance and dominated by deterministic strata (55% deterministic) where PMI=0 by construction, pulling average below 0.05. Environment DOES have beyond-Markov structure (45% stochastic strata per determinism_check_k3: 254 stochastic of 565, result.json:metrics.determinism_check_k3), so FALSIFIED reflects estimator power, not structure absence.",
+      "evidence": "result.json:metrics.conditional_pmi_k3 {pmi_bits:0.04848, n_strata_total:565, n_strata_used:8, n_strata_skipped_small:557, n_total_records:1000}; analysis_results.json:K3 {n_strata:565, n_used:8, skipped_small:557}; run_experiment.py:MIN_STRATUM_SIZE=5, HISTORY_LENGTHS=[0,1,3]; recomputed K3 PMI 0.04848 matches producer within 1e-12"
+    },
+    {
+      "id": "V2_null_control_bias",
+      "severity": "high",
+      "category": "control",
+      "description": "NULL_CONTROL_SHUFFLED_ACTIONS fails its own criterion (mean 0.053765 not <3*0.017119=0.051357, pass=false, p_value 0.607) and null_mean 0.05147 in K3 permutation exceeds observed 0.04848. Indicates permutation null is biased upward for hash-routed SPA where SHA256(prev1:prev2:current:action) mod 4 couples shuffled action history to implicit state. Same bias explains mean shuffled PMI ~0.054 vs expected 0.0. Without unbiased null, Bonferroni p=0.555 is uninterpretable and SURVIVES condition (null mean <3*std) can never be satisfied.",
+      "evidence": "result.json:controls.NULL_CONTROL_SHUFFLED_ACTIONS {mean_pmi:0.053765, null_std:0.017119, pass:false}; result.json:metrics.conditional_pmi_k3 {null_mean:0.051469, null_std:0.016586, effect_size_d:-0.1802, permutation_p:0.555445}; analysis_results.json:null_control {mean_pmi:0.05376, p_value:0.607}"
+    },
+    {
+      "id": "V3_simulation_vs_browser_fidelity",
+      "severity": "high",
+      "category": "representation_loss",
+      "description": "Measurement validity threat: spec question and prereg Methods require locally-hosted Express.js SPA with Playwright browser collection (cookie/session support, fragment-preserving URLs). Producer executed in-memory Python simulation (provenance.json:data_sources.type=in_memory_simulation, run_experiment.py:simulate_session) that deterministically replays CANDIDATES hash selection. This correctly encodes transition table but does not test fragment-aware URL handling, history-based routing, or Playwright automatability that parent handoff identified as dominant unknown (anti-bot bypass). Automatability pilot (1000 raw) therefore validates Python loop, not browser session.",
+      "evidence": "provenance.json:data_sources[0].type=in_memory_simulation, description='12-state SPA with hash-based routing'; run_experiment.py:140-170 choose_next SHA256(prev1:prev2:current:action); collect_data.py browser path unused; validity_notes[0] admits 'in-memory simulation rather than browser-based Playwright collection' as valid substitute"
+    },
+    {
+      "id": "V4_threshold_fragility",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "description": "Primary falsifier is K3 PMI <=0.05. Observed 0.04848 fails by 0.0015 bits (3%). With effect_size_d -0.18 and permutation_p 0.555, observation is indistinguishable from null and within estimator noise. Decision flips with trivial threshold change to 0.04 or with bias correction (subtract null_mean 0.051 gives -0.003). No confidence interval reported.",
+      "evidence": "result.json:metrics.conditional_pmi_k3 {pmi_bits:0.04848, permutation_p:0.555445, effect_size_d:-0.1802}; spec.json:decision_rule 'K=3 conditional PMI >0.05 bits'; prereg.md Decision Rule threshold 0.05 bits"
+    },
+    {
+      "id": "V5_representation_action_vs_state_history",
+      "severity": "medium",
+      "category": "identifiability",
+      "description": "Physics identifiability gap: beyond-Markov stochasticity is defined by dependence on prev2 states, but conditioning variable H_K=3 is action history only, not state history. MDL/history-conditioned PMI I(url_after; action | url_before, H_action_K) is therefore testing a weaker hypothesis than full (prev state) dependence. Positive control (8-state deterministic SPA with per-state deterministic action->next mapping) still yields high PMI because action uniquely determines next state in that design, but does not validate that action-history conditioning captures state-history beyond-Markov structure in 12-state hash SPA.",
+      "evidence": "spec.json:positive_control '8-state synthetic deterministic SPA same as parent'; run_experiment.py:CANDIDATES hash on prev1:prev2 states, build_action_histories history=tuple(actions[i-K:i]); prereg.md History Construction H_K = (action_{t-K}...action_{t-1})"
+    },
+    {
+      "id": "V6_positive_control_valid_but_narrow",
+      "severity": "low",
+      "category": "baseline",
+      "description": "POSITIVE_CONTROL_SYNTHETIC_SPA passes strongly (pmi_k3_bits 1.769, permutation_p 0.000999, effect_size_d 103.18, n_transitions 5000, result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA). Validates PMI pipeline can detect beyond-Markov when state-action mapping is deterministic and N=5000 gives sufficient per-stratum counts. However control uses 8 states and deterministic mapping (distinct from 12-state SHA256 stochastic SPA) so does not calibrate power/sparsity failure mode for main experiment. Threshold >=1.0 is generous for this synthetic control.",
+      "evidence": "result.json:metrics.positive_control {pmi_k3_bits:1.769437, permutation_p:0.000999}; run_experiment.py:run_positive_control n_transitions 5000"
+    },
+    {
+      "id": "V7_leakage_filter_tautology",
+      "severity": "low",
+      "category": "leakage",
+      "description": "Non-leakage filter action_primitive != 'link_click' removes 0/1000 transitions (all NL) because SPA actions are form_submit/button_click/js_navigate/menu_select. Prior audit defined link_click as leakage because target_href == url_after. In simulation there are no link_clicks, so filter is inert; leakage assessment trivial. Does not threaten validity but confirms protocol's link_click leakage definition does not apply to this SPA design.",
+      "evidence": "result.json:metrics.automatability {raw_transitions:1000, nl_transitions:1000}; run_experiment.py:nl_transitions filter != link_click; spec.json:measurement_validity 'Non-leakage filter calibration for production-like SPA (link_click leakage definition may differ)'"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_unconditional_markov_component_strong",
+      "finding": "Baseline unconditional PMI K0=1.441433 bits (permutation_p 0.000999, d 58.5, n_strata 12/12) and conditional K1=1.508584 bits (p 0.000999, d 24.06, 49/56 strata) are highly significant and validate that 12-state SPA encodes strong state-conditioned predictability. Drop from K1 1.51 to K3 0.048 demonstrates Markov component dominates and beyond-Markov component is at most weak under current estimator. Baseline correctly establishes that any K3 signal must be beyond Markov.",
+      "evidence": "result.json:metrics.unconditional_pmi_k0 {pmi_bits:1.441433, permutation_p:0.000999, null_mean:0.321519}; metrics.conditional_pmi_k1 {pmi_bits:1.508584, permutation_p:0.000999}; analysis_results.json:K0,K1 identical; recomputed K0 1.441433, K1 1.508584 match producer within 1e-12"
+    },
+    {
+      "id": "B2_positive_control_strong",
+      "finding": "POSITIVE_CONTROL_SYNTHETIC_SPA is a strong positive baseline: K3 PMI 1.769 bits >>1.0 threshold, p 0.000999 <0.001, d 103.18, with 5000 transitions. Confirms estimator implemented correctly (alpha=0, MIN_STRATUM_SIZE=5, N_PERMUTATIONS=1000, seed 42) and can detect beyond-Markov structure when per-stratum N is sufficient. Pipeline reproduces parent signal (parent positive PMI 1.496-1.769) exactly.",
+      "evidence": "result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA {pmi_k3_bits:1.769437, permutation_p:0.000999, expected:'PMI >=1.0 bits, p<0.001', observed_outcome:'PASS'}; run_experiment.py:run_positive_control"
+    },
+    {
+      "id": "B3_null_control_indicates_bias_not_discriminating",
+      "finding": "Null baseline (within-trajectory shuffled labels) expected mean ~0 bits but observed mean 0.0537 (K3 null_mean 0.05147, std 0.0166). Null fails 3*std criterion and shows positive bias of ~0.05 bits, comparable to observed K3 0.048. Baseline is therefore not a strong null: it does not separate true beyond-Markov signal from estimator bias for this hash-based design. Bonferroni correction (3 tests, alpha 0.0167) is correctly applied but p values for K0/K1 are 0.001 and K3 0.555, so correction does not alter conclusions.",
+      "evidence": "result.json:controls.NULL_CONTROL_SHUFFLED_ACTIONS {mean_pmi:0.053765, pass:false}; metrics.conditional_pmi_k3 {permutation_p:0.555445, Bonferroni threshold 0.0167 per prereg}"
+    },
+    {
+      "id": "B4_automatability_baseline_passes_but_browser_not_tested",
+      "finding": "Automatability baseline AUTOMATABILITY_PILOT passes (1000 raw >=200, 12 unique URLs 60-116 per state, balanced actions 244/247/247/262). Confirms simulation can generate >=100 NL transitions as required. However baseline does not test Playwright browser session continuity, fragment preservation, or anti-bot bypass that motivated the experiment; therefore it is a weak baseline for the product question about browser testbed.",
+      "evidence": "result.json:metrics.automatability {raw_transitions:1000, nl_transitions:1000, n_sessions:20, n_unique_urls:12, pilot_pass:true}; controls.AUTOMATABILITY_PILOT {raw_transitions:1000, threshold:200, pass:true}"
+    }
+  ],
+  "recomputed_metrics": {
+    "conditional_pmi_k3": {
+      "pmi_bits": 0.04848040587771367,
+      "permutation_p": 0.5554445554445554,
+      "null_mean": 0.05146885714301133,
+      "null_std": 0.016585930176528325,
+      "effect_size_d": -0.18017990148823806,
+      "prediction_accuracy": 0.4666666666666667,
+      "n_strata_total": 565,
+      "n_strata_used": 8,
+      "n_strata_skipped_small": 557,
+      "n_total_records": 1000,
+      "match_producer": true,
+      "recomputed_by": "audit independent python (SHA256 CANDIDATES, alpha=0, MIN_STRATUM_SIZE=5, N_PERMUTATIONS=1000, seed 42)"
+    },
+    "conditional_pmi_k1": {
+      "pmi_bits": 1.508584175309816,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 0.9191755633883633,
+      "null_std": 0.024496101113627444,
+      "effect_size_d": 24.06132344030693,
+      "prediction_accuracy": 0.2413793103448276,
+      "n_strata_total": 56,
+      "n_strata_used": 49,
+      "match_producer": true
+    },
+    "unconditional_pmi_k0": {
+      "pmi_bits": 1.4414331017792639,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 0.3215187630060057,
+      "null_std": 0.01913813606093657,
+      "effect_size_d": 58.51741962787847,
+      "prediction_accuracy": 0.186,
+      "n_strata_total": 12,
+      "n_strata_used": 12,
+      "match_producer": true
+    },
+    "positive_control": {
+      "pmi_k3_bits": 1.7694368797062947,
+      "permutation_p": 0.000999000999000999,
+      "effect_size_d": 103.17934884703436,
+      "prediction_accuracy": 0.3878271707519734,
+      "passes": true,
+      "match_producer": true
+    },
+    "null_control": {
+      "mean_pmi": 0.05376487444439809,
+      "observed_pmi": 0.04848040587771366,
+      "p_value": 0.6073926073926074,
+      "null_std": 0.0171192673957047,
+      "pass": false,
+      "match_producer": true
+    },
+    "determinism_check_k3": {
+      "deterministic_strata": 311,
+      "stochastic_strata": 254,
+      "total_strata": 565,
+      "determinism_ratio": 0.5504424778761062,
+      "match_producer": true
+    },
+    "automatability": {
+      "raw_transitions": 1000,
+      "nl_transitions": 1000,
+      "n_sessions": 20,
+      "n_unique_urls": 12,
+      "pilot_pass": true,
+      "match_producer": true
+    },
+    "raw_transitions_sha256": "29ead5798e2f5c91c9f8046d71eb1882c9eef840bc11905a723ad0fae67523a8",
+    "recomputation_notes": "All material metrics recomputed from research/experiments/EXP-PHYSICS-35353016293/raw_transitions.json using independent implementation of build_action_histories, compute_conditional_pmi (alpha=0, MIN_STRATUM_SIZE=5, weighted average) and permutation_test logic as in run_experiment.py/analyze_pmi.py. Values match producer result.json and analysis_results.json within 1e-12 and 1e-9 for p values."
+  },
+  "claim_ceiling": "Maximum justified descriptive ceiling: On this specific 12-state in-memory SPA simulation (hash-based SHA256(prev1:prev2:current:action) mod 4 selection among 4 candidates per (state,action), 4 action primitives, 20 sessions x50 steps, N=1000, alpha=0, MIN_STRATUM_SIZE=5, H_K conditioned on action history), K=3 conditional PMI =0.04848 bits with permutation p=0.555 (Bonferroni 0.0167) does NOT exceed 0.05 threshold and is indistinguishable from shuffled null (mean 0.051). K0=1.44 and K1=1.51 highly significant. Positive control validates pipeline (K3=1.77, p=0.001). 45% of K3 strata are stochastic, confirming beyond-Markov dependence exists in environment by construction, but estimator cannot detect it above threshold at N=1000 due to 98.6% strata having <5 obs. No inference justified about: production SPAs with >10 states/stochastic/history routing, browser-level automatability via Playwright (untested), larger N (>=5000), state-history vs action-history conditioning, richer representations (DOM/a11y/visual), or C-WEB-DYNAMICS globally. Claim remains HYPOTHESIS per codex; this experiment demonstrates estimator sparsity/bias limits for hash-routed SPAs at this scale, not global falsification of beyond-Markov dynamics.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35353016293/request.json sha 0e16309b5476a585f5e8216d8e191469d1382e5816ff9abbb7777d082f7396ae",
+    "research/experiments/EXP-PHYSICS-35353016293/spec.json sha 86d85b6df90b44b6ee7a9f8dd1c5aebb0fa78efc17009fc21c85405d08c6693c",
+    "research/experiments/EXP-PHYSICS-35353016293/prereg.md sha 2a87e55280cd1b10c786114cea3392c290fabf17f29ed3edaca7cf0ba54f8371",
+    "research/experiments/EXP-PHYSICS-35353016293/freeze.json",
+    "research/experiments/EXP-PHYSICS-35353016293/result.json",
+    "research/experiments/EXP-PHYSICS-35353016293/report.md",
+    "research/experiments/EXP-PHYSICS-35353016293/provenance.json",
+    "research/experiments/EXP-PHYSICS-35353016293/raw_transitions.json sha256 29ead5798e2f5c91c9f8046d71eb1882c9eef840bc11905a723ad0fae67523a8",
+    "research/experiments/EXP-PHYSICS-35353016293/analysis_results.json",
+    "research/experiments/EXP-PHYSICS-35353016293/run_experiment.py (EXECUTE implementation, choose_next SHA256, MIN_STRATUM_SIZE=5, N_PERMUTATIONS=1000, seed 42)",
+    "research/experiments/EXP-PHYSICS-35353016293/analyze_pmi.py (PMI pipeline, permutation_test)",
+    "research/experiments/EXP-PHYSICS-35353016293/spa_server.js (Express SPA, 12 states, CANDIDATES table, SHA256 selection, intended Playwright target)",
+    "research/experiments/EXP-PHYSICS-35353016293/collect_data.py (Playwright browser path unused, API path alternate)",
+    "research/experiments/EXP-PHYSICS-35308806126/handoff.json sha e33d732263fae685d3ac3f6629f1f87f50f595045a9184b246ccc3021ce23371 (parent)",
+    "codex/claim_state.json C-WEB-DYNAMICS HYPOTHESIS (no status change warranted)",
+    "codex/index.json prior physics SPAs (EXP-PHYSICS-35290611436 etc.) for history of sparsity/Markov ceiling"
+  ],
+  "unresolved": [
+    "Whether N>=5000 would give sufficient per-stratum counts (>=5) for >50% of K3 strata and raise K3 PMI above 0.05 and permutation significance; 12*4^3=768 possible strata need ~3840-5000 obs for mean 5/stratum – current N=1000 gives mean 1.77, far underpowered.",
+    "Whether Playwright browser automation on spa_server.js (fragment-aware URLs, hashchange handling, /api/transition session state) yields same transition distribution and automatability as in-memory simulation, or introduces browser/network confounds (fragment stripping, history API).",
+    "Whether permutation null bias (mean 0.054 >0) is intrinsic to hash-routed SPA design or artifact of shuffling action history while preserving url_before marginals; trajectory-level block permutation or joint (action, history) shuffle may remove bias.",
+    "Whether conditioning on state-history (prev states) instead of action-history would reveal stronger beyond-Markov PMI in same environment, directly testing SHA256(prev1:prev2) dependence; current action-history proxy may underestimate true beyond-Markov information.",
+    "Whether lower threshold or bias-corrected PMI (observed - null_mean = -0.003) or per-stratum testing would detect signal in the 8 usable stochastic strata (e.g., stratum ('http://localhost:18973/#home', ('form_submit','menu_select','form_submit')) n=7 with 5-3-1 distribution) that are diluted in weighted average.",
+    "Whether production SPAs with >10 states, stochastic transitions, and history-based routing exhibit beyond-Markov URL-level PMI at K=3+ where H_K does NOT determine next state – the parent unknown remains untested on real-world SPAs due to anti-bot bypass not demonstrated here."
+  ]
+}
