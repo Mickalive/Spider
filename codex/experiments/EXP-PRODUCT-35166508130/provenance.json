@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35166508130",
+  "lane": "product",
+  "github_run_id": "35166508130",
+  "base_sha": "7e3946b64e578caa171e9f25af27acccab858057",
+  "execute_sha": "7e8767dcc4e44c9559eacefaa8b5e3dadad06553",
+  "frozen_files": {
+    "request.json": "e2dcb2eaf998554344124e3812688ddadc039d254776dd0ce2a97641c49d6dd5",
+    "spec.json": "82d4b63e7fbd24fb4884b18794b0e8bd28e1b5b08da6b0174e729014e3e4f03f",
+    "prereg.md": "36c1e60ea5d70883c25fe87d6586d0e2cd3e869f87d880791cc5416b0ccd5d77"
+  },
+  "restored_files": {
+    "src/spider/kernel.py": {
+      "sha256": "30b7413338ce89add774d95a95f8f37f61d016466b6830096e5de218dbf5864e",
+      "restored_from": "a49d839e",
+      "restoration_note": "distill_parameterized + Fix1+Fix2+Fix3 helpers restored from parent execute commit a49d839e as specified in frozen spec"
+    },
+    "src/spider/models.py": {
+      "sha256": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d4b",
+      "restored_from": "a49d839e",
+      "restoration_note": "Added slot_prefixes field to Mechanism dataclass (required by distill_parameterized)"
+    }
+  },
+  "code_files": {
+    "research/experiments/EXP-PRODUCT-35166508130/run_experiment.py": {
+      "sha256": "641dc5ed6261bb3f41c9351dabf2e0c34e0e6093360af2660a28f8f7f1b7b365"
+    }
+  },
+  "dependencies": {
+    "tiktoken": "0.14.0",
+    "python": "3.12",
+    "network_access": "jsonplaceholder.typicode.com (GET only)"
+  },
+  "datasets": {
+    "training_observations": "P1_TRAINING from frozen spec: fetch_posts 5 obs (GET+PUT shared), fetch_users 3 obs, fetch_comments 3 obs",
+    "unseen_ids": "posts 96-98 (jsonplaceholder has 1-100), users 8-10 (jsonplaceholder has 1-10), comments postId 5-7 (jsonplaceholder returns data for postId 1-100)",
+    "null_control_ids": "999999 on all 3 endpoints"
+  },
+  "environment": {
+    "platform": "linux",
+    "network": "outbound HTTP to jsonplaceholder.typicode.com",
+    "model_pricing": {
+      "model": "gpt-4o-mini",
+      "input_price_per_1m_tokens_usd": 0.15,
+      "output_price_per_1m_tokens_usd": 0.6,
+      "source": "OpenAI pricing page",
+      "date": "2026-09-17"
+    }
+  },
+  "execution_commands": [
+    "PYTHONPATH=src python -m unittest tests.test_kernel -v",
+    "PYTHONPATH=src python research/experiments/EXP-PRODUCT-35166508130/run_experiment.py"
+  ],
+  "artifacts": {
+    "experiment_results": "research/experiments/EXP-PRODUCT-35166508130/experiment_results.json (sha256=3e5d8eb8ba6b25026c835c317b544728e70651ab21b82b14c19298fe642ef789)",
+    "result_json": "research/experiments/EXP-PRODUCT-35166508130/result.json",
+    "report_md": "research/experiments/EXP-PRODUCT-35166508130/report.md"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-PRODUCT-35154724610",
+    "parent_outcome": "MEASUREMENT_INVALID",
+    "parent_sha": "a49d839e",
+    "parent_handoff_sha256": "1e07c379942a2bc21ab714cfdbac54941ca52937f23be59cd47c46f6f4ca4a0e",
+    "resolved_blockers": [
+      "V1_HTTP_DESIGN_IMPOSSIBLE_IDS: corrected unseen IDs that exist on jsonplaceholder.typicode.com",
+      "V2_COMMENT_BODY_VALIDATION_BUG: validate_comment_body now accepts list-of-dicts for comments endpoint"
+    ],
+    "unresolved_blockers": [
+      "V4_B_UNFIXED_NOT_DEMONSTRATED: Fix3 necessity not demonstrated for tested URL pattern (Fix2 subsumes Fix3)"
+    ]
+  }
+}

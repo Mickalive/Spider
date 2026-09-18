@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35262264593",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression (decompress repeatedly until failure or a maximum depth of 3-5) restore decompressed body-only discrimination to >= 0.3 and decompressed hash determinism (all_same=true) under double-brotli and triple-brotli encoding on localhost — and does it maintain discrimination for the 4 single-layer encoding scenarios that already pass?",
+  "why_next": "Double-brotli encoding with single-pass client decompression is the sole failure mode: discrimination 0.2911 < 0.3 and determinism fails (2 unique hashes per state). Audit V6 confirms iterative decompression (brotli decompress twice) recovers the true body. The 4 single-layer scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) all produce identical decompressed hashes, so the mechanism is not fundamentally broken — the client implementation is insufficient. Testing iterative decompression is the smallest change that could restore the claim ceiling. Real CDN infrastructure should be deferred until iterative-decompression is validated locally, because testing CDN with a known-broken client would confound CDN effects with client implementation effects.",
+  "carry_forward": {
+    "established": [
+      "Decompression-normalization (SHA256 on decompressed body + status) survives single-layer encoding non-determinism: correct_br, missing Content-Encoding, incorrect gzip label, and garbled Content-Encoding all produce identical decompressed hashes for the same auth state and content type. 4/5 encoding scenarios pass determinism (all_same=true within scenario). Verified across all 9 content-type x size combinations (JSON/HTML/XML x 1KB/10KB/100KB).",
+      "Discrimination without double_br is 0.4486 (above 0.3 threshold), confirming the mechanism works when decompression fully succeeds.",
+      "B-RANDOM null control passes at 0.0 for all 9 conditions. C_ENCODING_VARIATION_EXISTS passes (5/5 scenarios observed per condition). C_GRACEFUL_DEGRADATION passes (0 crashes/hangs from garbled headers).",
+      "Parent EXP-RUNTIME-35237982464 established: discrimination 0.5 under non-deterministic brotli quality variation {4,5,6,7,8} on localhost, algorithm equivalence (brotli vs gzip), determinism under quality variation (all_same=true), compressed-only discrimination lower than decompressed (0.16-0.35 vs 0.50), structural ceiling 0.5 from 3-way error collapse."
+    ],
+    "rejected": [
+      "Single-pass client decompression does NOT survive double-brotli encoding: discrimination 0.2911 < 0.3, decompressed hash variation all_same=false with 2 unique per state. The double_br scenario produces a hash of the still-inner-compressed data (ddd198...) rather than the true decompressed body (6fb10...).",
+      "B-IDENTITY-FALLBACK baseline was NOT exercised: missing_ce and garbled_ce scenarios still succeed via brotli fallback (decompression_errors=[]), so the identity-fallback discrimination path was never tested.",
+      "B-COMPRESSED-BYTE-ONLY baseline is INCONCLUSIVE: compressed and decompressed discrimination are identical (0.2911) in this encoding-proxy setting because double_br decompressed equals compressed intermediate."
+    ],
+    "unknown": [
+      "Does iterative decompression (decompress until failure or max depth) restore discrimination >= 0.3 and determinism under double-brotli and triple-brotli encoding?",
+      "Does iterative decompression maintain discrimination for the 4 single-layer scenarios that already pass?",
+      "Would a correct 'br, br' Content-Encoding header with iterative parsing (split on ',' and decompress in reverse order) change outcome vs single 'br' header?",
+      "What is B-IDENTITY-FALLBACK discrimination when decompression genuinely fails and client hashes raw compressed bytes? Requires a scenario where body is not valid brotli/gzip (e.g., truncated or random bytes).",
+      "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism?",
+      "Does decompression-normalization maintain discrimination on natural (non-padded) content at production scale?",
+      "What is production decompression cost at scale (latency, CPU, memory) vs localhost measurements (0.01-0.28ms)?"
+    ],
+    "do_not_assume": [
+      "Do NOT assume decompression-normalization is production-ready — real CDN infrastructure is untested and is the critical remaining blocker after iterative-decompression fix.",
+      "Do NOT assume the structural discrimination ceiling of 0.5 applies to production environments — it is a property of the 3-way error collapse mock design.",
+      "Do NOT assume single-pass decompression is adequate for production — double-brotli encoding is a realistic CDN scenario (CDN edge compresses already-compressed origin responses, or intermediate proxies add compression).",
+      "Do NOT assume the localhost decompression latency (0.01-0.28ms) represents production cost.",
+      "Do NOT assume format-invariance extends to binary content types or compressed data formats.",
+      "Do NOT assume non-deterministic quality is equivalent to real CDN behavior — real CDNs also vary caching, chunked encoding, Accept-Encoding negotiation, and edge selection.",
+      "Do NOT assume the parent's quality-only discrimination of 0.5 applies under encoding-layer non-determinism — it regressed to 0.2911 with double_br and 0.4486 without."
+    ]
+  },
+  "dependencies": [
+    "Parent EXP-RUNTIME-35237982464 claim ceiling (non-deterministic brotli quality variation on localhost, discrimination 0.5) stands and is NOT extended by this experiment",
+    "Iterative decompression implementation required: decompress body repeatedly until decompression fails or a maximum depth (3-5) is reached, then hash the final decompressed output",
+    "Same frozen content types (JSON/HTML/XML), sizes (1KB/10KB/100KB), auth states (4 with 3-way error collapse), and encoding scenarios (5) should be reused for direct comparison",
+    "Real CDN infrastructure (Cloudflare Workers or Fastly Compute) remains the critical blocker for product readiness but should be deferred until iterative-decompression is validated locally",
+    "C-MEAS-VALID remains EXPERIMENTAL on the decompression-normalization sub-thread — parent established quality-only survival, this experiment shows single-layer encoding survival but double-encoding failure"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35262264593/result.json — 9 condition metrics decompressed 0.2911, B-RANDOM 0.0, hash variation unique_count=2 all_same=false, encoding_scenarios 5/5",
+    "research/experiments/EXP-RUNTIME-35262264593/audit.json — PASS, claim_ceiling bounded to localhost single-layer, V1-V6 findings, V6 confirms iterative decompression recovers body",
+    "research/experiments/EXP-RUNTIME-35262264593/raw_observations.json — 720 observations, double_br hash ddd198... vs correct 6fb10..., body_size 74 vs 70",
+    "research/experiments/EXP-RUNTIME-35262264593/run_experiment.py — CDNEncodingProxy double_br implementation, decompress_body single-pass logic",
+    "research/experiments/EXP-RUNTIME-35262264593/report.md — failure mode analysis, 4/5 scenarios pass, product consequences",
+    "research/experiments/EXP-RUNTIME-35237982464/handoff.json — parent established/rejected/unknown/do_not_assume, next_question real CDN"
+  ],
+  "recommended_action": "Implement and test iterative decompression (decompress repeatedly until failure or max depth 3-5) for the double-brotli failure mode. Run the same 3x3x4 content-type x size x state matrix with 5 encoding scenarios. If iterative decompression restores discrimination >= 0.3 and determinism (all_same=true) across all 5 scenarios, the claim ceiling advances to 'quality + encoding-layer non-determinism including double-encoding'. If iterative decompression introduces new failures (e.g., false decompression of non-compressed bodies), investigate and fix. Do NOT advance to real CDN testing until iterative-decompression is validated locally — testing CDN with a known-broken client confounds CDN effects with client implementation effects."
+}

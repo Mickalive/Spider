@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35209110569",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_leakage_mix_dependence",
+      "severity": "info",
+      "finding": "Headline leakage 0.21-0.285 is protocol-mix dependent, not intrinsic site constant. Per-type stratification is perfectly separated on every SPA: link_click 1.00 (170/170 valid), button_click 0.00 (142/142), form_submit 0.00 (210/210), js_navigate 0.00 (105/105). Normalized URL entropy 0.0 bits on all SPAs (single normalized URL; fragment stripped per frozen definition).",
+      "evidence": "analysis_results.json:per_site.*.valid_only.per_type_leakage; result.json:metrics vanillajs_valid_leakrate_link_click=1.0 etc; raw_vanillajs.json url_after fragments #/, #/active, #/completed all normalize to same path"
+    },
+    {
+      "id": "V2_title_constancy_pipeline_validated",
+      "severity": "info",
+      "finding": "document.title constant within each SPA variant across all 168 raw transitions (unique_titles=1, entropy 0.0). Pipeline validated by same code recording 5 distinct Wikipedia titles (HTML, Web browser, World Wide Web, HTTP, URL) with entropy 2.32 bits, ruling out measurement failure.",
+      "evidence": "analysis_results.json:per_site.vanillajs.title_list, per_site.wikipedia.title_list; result.json:metrics vanillajs_unique_titles=1, wikipedia_unique_titles=5"
+    },
+    {
+      "id": "V3_fragment_stripping_makes_link_leakage_tautological",
+      "severity": "info",
+      "finding": "Frozen normalization strips fragment before comparison (prereg sec 8). All SPA filter links (#/active, #/completed) normalize to the same base path as url_after, so link_click leakage is 1.00 by definition on both SPA and MPA. Leakage variation across experiments therefore measures action-type mix, not site hash-routing benefit alone.",
+      "evidence": "analyze_spa_survey.py:normalize_url; prereg.md:leakage_definition; analysis_results.json:per_site.vanillajs.per_type_leakage.link_click.leakage_rate=1.0"
+    },
+    {
+      "id": "V4_uniform_leakage_reflects_protocol_not_site_variance",
+      "severity": "low",
+      "finding": "All-raw leakage identical 0.25 (42/168) on all 5 SPA variants; valid-only 0.2846 on 4/5 variants and 0.213 on vue (23/108). Uniformity reflects deterministic 24-action protocol (27% link clicks) replicated identically, not independent site measurement. Vue lower rate due to higher error exclusion (60 errors vs 38).",
+      "evidence": "result.json:metrics vanillajs_leakage_rate=0.25 x5; analysis_results.json:per_site.vanillajs.n_transition_errors=38, vue=60"
+    },
+    {
+      "id": "V5_error_exclusion_robust",
+      "severity": "info",
+      "finding": "Primary uses valid-only (errors excluded); all-raw sensitivity 0.25 never crosses 0.40 threshold. 22.6-35.7% error rate (failed toggle/destroy/filter on empty views) disclosed and preserved; exclusion raises leakage 0.25->0.21-0.285 without changing viability decision.",
+      "evidence": "result.json:observations[5]; analysis_results.json:per_site.vanillajs.n_transition_errors"
+    },
+    {
+      "id": "V6_wikipedia_session0_superseded",
+      "severity": "info",
+      "finding": "Wikipedia raw_wikipedia.json session 0 Main_Page hub 0/20 successes (no article links discovery failure) superseded by HTML hub rerun 20/20; both artifacts preserved. Final wikipedia n_valid=100 is 5x20 link clicks only, hence 1.00 leakage consistent with parent 0.912 mixed baseline.",
+      "evidence": "raw_wikipedia.json session 0 errors, raw_wikipedia_s0fix.json, provenance.json:wikipedia_hubs"
+    },
+    {
+      "id": "V7_data_quality_exceeds_minimums",
+      "severity": "info",
+      "finding": "Frozen minimums exceeded: 7 sessions x24=168 raw per SPA vs >=5/>=100, wiki 5x20=100; valid counts 130 (4 variants) /108 (vue) still >=100 valid except vue borderline but raw meets threshold. Zero EPIPE crashes across 40 sessions with per-session browser lifecycle mitigation.",
+      "evidence": "result.json:metrics vanillajs_n_raw=168, vanillajs_valid_n_raw=130, wikipedia_n_raw=100; observations[7]"
+    },
+    {
+      "id": "V8_generalization_bounded",
+      "severity": "info",
+      "finding": "TodoMVC demos are not production SPAs (no auth, single input.new-todo, hash routing only, history routing untested). Generalization to production SPAs untested, acknowledged in validity_notes and unresolved.",
+      "evidence": "result.json:validity_notes[5]; spec.json:measurement_validity"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_MPA_parent",
+      "baseline": "BASELINE_MPA_PARENT Wikipedia 91.2% parent EXP-PHYSICS-35185288822",
+      "expected": ">0.80 leakage on MPA",
+      "observed": "1.00 on pure link-click protocol; direction consistent, higher because 100% links vs parent mixed",
+      "verdict": "PASS",
+      "evidence": "result.json:controls.BASELINE_MPA_PARENT; analysis_results.json:per_site.wikipedia.valid_only.leakage_rate=1.0"
+    },
+    {
+      "id": "B2_action_mix",
+      "baseline": "BASELINE_FREQ_ACTION_MIX",
+      "expected": "link-dominated MPA, mixed SPAs",
+      "observed": "wikipedia 100% link_click; SPAs form 33.4%/link 27.2%/button 22.6%/js 16.7% (valid-only)",
+      "verdict": "PASS",
+      "evidence": "result.json:metrics spa_action_marginal_*; analysis_results.json:spa_action_marginal"
+    },
+    {
+      "id": "B3_NL_feasibility",
+      "baseline": "BASELINE_NL_FEASIBILITY 50 NL at 40% ->83 raw, 80%->250, 92%->625",
+      "expected": "threshold mapping for PMI planning",
+      "observed": "at 0.21-0.285, 50 NL needs 64-70 raw; at wiki 1.00 unachievable",
+      "verdict": "PASS",
+      "evidence": "result.json:metrics *_achievable_NL_at_500 357-393 vs wiki 0.0"
+    },
+    {
+      "id": "B4_null_control_wikipedia",
+      "baseline": "NULL_CTRL_WIKIPEDIA leakage>0.80, titles>=2, n_raw>=100",
+      "expected": ">0.80",
+      "observed": "1.00 (100/100), 5 titles, 100 raw",
+      "verdict": "PASS",
+      "evidence": "result.json:controls.NULL_CTRL_WIKIPEDIA"
+    },
+    {
+      "id": "B5_pos_control_vanillajs",
+      "baseline": "POS_CTRL_VANILLAJS leakage<0.60, titles>=2, n_raw>=100",
+      "expected": "<0.60 and >=2 titles",
+      "observed": "leakage 0.2846 PASS, n_raw 168 PASS, titles 1 FAIL -> PARTIAL; failure is site property (constant title) not pipeline failure, validated by wiki titles on same code path",
+      "verdict": "PARTIAL",
+      "evidence": "result.json:controls.POS_CTRL_VANILLAJS; result.json:validity_notes[5]"
+    }
+  ],
+  "recomputed_metrics": {
+    "vanillajs_all_raw_leakage_rate": 0.25,
+    "vanillajs_valid_leakage_rate": 0.2846153846153846,
+    "react_valid_leakage_rate": 0.2846153846153846,
+    "vue_valid_leakage_rate": 0.21296296296296297,
+    "angular_valid_leakage_rate": 0.2846153846153846,
+    "svelte_valid_leakage_rate": 0.2846153846153846,
+    "wikipedia_valid_leakage_rate": 1.0,
+    "variants_below_40pct_leakage_valid": 5,
+    "variants_with_2plus_titles": 0,
+    "variants_achievable_NL_ge50": 5,
+    "per_type_link_click_leakage_all_SPA_valid": 1.0,
+    "per_type_button_form_js_leakage_all_SPA_valid": 0.0,
+    "vanillajs_unique_titles": 1,
+    "wikipedia_unique_titles": 5,
+    "vanillajs_url_entropy_bits": 0.0,
+    "wikipedia_url_entropy_bits": 2.321928094887362,
+    "spa_valid_n_total": 628,
+    "spa_valid_n_leakage": 171,
+    "spa_valid_overall_leakage_rate": 0.27229299363057324
+  },
+  "claim_ceiling": "Hash-SPA TodoMVC leakage 0.21-0.28 valid-only (0.25 all-raw) on the frozen 24-action protocol (27% link clicks; link 1.00 vs non-link 0.00 by fragment-stripping definition) \u2013 5/5 variants <40%, achievable NL 357-394 at 500 raw (50 NL needs 64-70 raw). Title variation 0/5 (unique_titles=1, entropy 0.0) falsifies title-aware PMI viability on TodoMVC in this setting, replicating EXP-PHYSICS-34266105229 degeneracy; pipeline validated by 5 distinct Wikipedia titles on same code path. Maximum justified claim: TodoMVC hash-SPAs are suitable testbeds for URL-level non-leakage PMI at NL scale, but title-aware PMI remains untestable there and requires title-varying production SPAs (still unidentified) or non-title state representation. No inference to history-routed production SPAs, auth-gated flows, or per-URL title variance.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35209110569/result.json:metrics",
+    "research/experiments/EXP-PHYSICS-35209110569/analysis_results.json:per_site.*.valid_only",
+    "research/experiments/EXP-PHYSICS-35209110569/analysis_results.json:spa_action_marginal",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs_topup.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_react.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_react_topup.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_vue.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_vue_topup.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_angular.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_angular_topup.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_svelte.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_svelte_topup.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_wikipedia.json",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_wikipedia_s0fix.json",
+    "research/experiments/EXP-PHYSICS-35209110569/collect_spa_survey.py",
+    "research/experiments/EXP-PHYSICS-35209110569/analyze_spa_survey.py",
+    "research/experiments/EXP-PHYSICS-35209110569/spec.json:decision_rule",
+    "research/experiments/EXP-PHYSICS-35209110569/prereg.md:sections 6,8,12"
+  ],
+  "unresolved": [
+    "No title-varying production SPA identified: joint condition (low leakage <40% AND >=2 titles) untested on any production SPA; title-aware PMI ceiling remains HYPOTHESIS per parent chain (EXP-PHYSICS-34266105229).",
+    "History-based (non-hash) SPA routing leakage untested; only hash fragments stripped per frozen normalization.",
+    "Per-URL title variance (titles varying independently of path) untested anywhere; Todomvc titles constant makes url+title isomorphic to url-only."
+  ]
+}

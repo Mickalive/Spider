@@ -1,0 +1,20 @@
+{
+  "base_sha": "3fe441d02013b7a63418d8a38ac25b19fa2fd15a",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T06:42:49.384872+00:00",
+  "experiment_id": "EXP-GRAPH-35191029030",
+  "inherited_last_verdict": "C4-ORTHOGONALITY-CONFOUNDED",
+  "inherited_next_question": "Can a redesigned co-occurring drift+noise measurement (where structural signals remain observable despite auth failure, e.g., via independent unauthenticated structural probe or baseline-schema comparison) demonstrate Pearson r < 0.3 between behavioral and structural signals on genuinely co-occurring conditions?",
+  "lane": "graph",
+  "origin_github_run_id": "35191029030",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35166507358",
+    "path": "research/experiments/EXP-GRAPH-35166507358/handoff.json",
+    "sha256": "d3160d49adc24043ee606bd272b13622737d0efb926e5c2b62a718cf0d113841"
+  },
+  "reason": "continuation",
+  "request_hash": "16961321d981af0916d9a4d519eecb5df6f2b2fc3045431b0d9f04294369a72a",
+  "request_id": "439334a245a7ed91cc7d5050",
+  "schema_version": 1
+}

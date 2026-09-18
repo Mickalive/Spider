@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-GRAPH-35191029030",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can a redesigned co-occurring drift+noise measurement — using drift patterns that do NOT uniformly block all endpoints (permission_boundary, session_invalidation) and an independent unauthenticated structural probe (/schema endpoint) — demonstrate that behavioral and structural signals are independently observable on the same conditions, and does the Pearson correlation between paired behavioral and structural sample scores fall below 0.3?",
+  "hypothesis": "When structural observability is guaranteed via an unauthenticated /schema endpoint and drift patterns are chosen to preserve partial endpoint access (permission_boundary blocks write/admin only; session_invalidation clears sessions but tokens remain valid), behavioral signals (HTTP 403 rate, session invalidation) and structural signals (schema diff from /schema) measure genuinely independent dimensions. The Pearson correlation between paired per-sample behavioral composite and structural composite scores across co-occurring drift+noise conditions will be below 0.3, because: (a) both signals are non-trivially observable on every co-occurring condition (no zero-imputed structural values), (b) within-condition stochastic variation in permission subsets and noise magnitudes creates genuine paired variation, and (c) the drift and noise patterns operate on orthogonal server mechanisms (auth middleware vs response generation).",
+  "falsifier": "The hypothesis is falsified if: (1) Pearson |r| >= 0.3 on paired per-sample scores from co-occurring conditions (primary criterion); OR (2) fewer than 80% of co-occurring conditions have both behavioral composite > 0 AND structural composite > 0 simultaneously (both signals independently observable); OR (3) the behavioral signal fails to detect drift on permission_boundary or session_invalidation patterns (TP < 0.85). A valid scientific negative (r >= 0.3 with proper measurement) would confirm that behavioral and structural signals are non-orthogonal and the domain pivots to composite multi-signal classifiers.",
+  "baselines": [
+    {
+      "id": "B-PARENT-POOLED-R",
+      "description": "Parent EXP-GRAPH-35166507358 pooled Pearson r = 0.593 on co-occurring conditions with signing_key_rotation (zero-imputed structural values). The new design eliminates zero-imputation.",
+      "expected": "New |r| should be substantially lower than 0.593 if the parent inflation was caused by zero-imputation"
+    },
+    {
+      "id": "B-PARENT-INDEPENDENT-MEANS",
+      "description": "Parent behavioral means were constant within each co-occurring condition (deterministic drift). New design adds within-condition stochastic variation to enable proper paired correlation.",
+      "expected": "Within-condition variance > 0 for both behavioral and structural scores"
+    },
+    {
+      "id": "B-STRUCTURAL-ORTHOGONALITY-CEILING",
+      "description": "If behavioral and structural signals truly operate on orthogonal server mechanisms (auth middleware vs response generation), the correlation should approach 0 under independent stochastic variation.",
+      "expected": "Pearson |r| < 0.3"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-PERMISSION-BOUNDARY-DETECTION",
+    "description": "permission_boundary drift (set write=False, admin=False) should produce HTTP 403 on write/admin endpoints and HTTP 200 on read endpoint, yielding behavioral composite > 0 on all 30 samples. This is the same mechanism proven in the parent (TP=1.0 for permission_boundary).",
+    "expected": "TP >= 0.90 across all permission_boundary co-occurring conditions"
+  },
+  "null_control": {
+    "id": "NC-SCHEMA-NOISE-ONLY",
+    "description": "When schema noise is applied WITHOUT any drift (no permission change, no session invalidation), behavioral signals should not fire (FP = 0). This is the same null proven in the parent (FP=0.0 for all noise patterns).",
+    "expected": "FP = 0.0 across all noise-only conditions"
+  },
+  "measurement_validity": [
+    "All behavioral signals derived from real HTTP request/response cycles on Flask 3.x + PyJWT HS256 localhost (not analytical computation)",
+    "Structural signals computed from an unauthenticated /schema endpoint that returns the current schema regardless of auth state, ensuring non-zero structural observability on ALL co-occurring conditions",
+    "Drift patterns limited to permission_boundary (blocks write/admin only) and session_invalidation (clears session store) — both preserve at least one accessible endpoint for structural probing",
+    "signing_key_rotation is EXCLUDED from co-occurring conditions because it blocks ALL endpoints (parent confound)",
+    "Within-condition stochastic variation: random permission subset (2^{3}-1=7 non-empty proper subsets for permission_boundary), random noise field count (1-3 fields), random response time jitter (50-150ms)",
+    "30 independent request sequences per condition with per-seed RNG for reproducibility",
+    "Structural signal from /schema endpoint is independent of auth state — cannot be masked by drift",
+    "Pearson r computed on paired per-sample (behavioral_i, structural_i) scores, NOT on condition means",
+    "All 8 co-occurring conditions (2 drift x 4 noise) have non-trivial variation in both signals (verified in preprocessing)"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP rate across permission_boundary and session_invalidation co-occurring conditions >= 0.85 AND all Wilson lower CI > 0.75; (2) C2_observability: >= 80% of co-occurring sample pairs have BOTH behavioral composite > 0 AND structural composite > 0; (3) C3_orthogonality: Pearson |r| < 0.3 on paired per-sample scores from ALL co-occurring conditions pooled, AND permutation p < 0.05; (4) C4_null_control: FP rate on noise-only conditions = 0.0. FAIL if any criterion fails. MEASUREMENT_INVALID if fewer than 6 of 8 co-occurring conditions have sufficient within-condition variance (std > 0 for both signals), or if fewer than 240 paired samples are available.",
+  "product_consequence_positive": "If orthogonality survives (|r| < 0.3), C-FRESHNESS gains a validated second detection channel. The product pipeline can integrate behavioral signals alongside structural signals for composite freshness detection, with each channel providing independent information. This enables multi-signal freshness guards that are robust to single-channel failures.",
+  "product_consequence_negative": "If orthogonality fails (|r| >= 0.3 with proper measurement), behavioral and structural signals are confirmed non-orthogonal. The product pipeline must use composite multi-signal classifiers rather than independent parallel channels, or rely on behavioral signals alone (since they already pass C1-C3). The freshness detection architecture pivots from parallel independent channels to fused classifiers.",
+  "estimated_cost": "Low: Flask server reuse from parent with minor modifications (add /schema endpoint, exclude signing_key_rotation from co-occurring, add stochastic permission subsets). 8 co-occurring conditions x 30 samples = 240 paired measurements, plus 8 noise-only x 30 = 240 null control samples. Runtime ~10 minutes.",
+  "expected_information_gain": "High: this is the minimum next step that can change a product decision. If |r| < 0.3, the product gains a validated second detection dimension for freshness. If |r| >= 0.3, the architecture pivots to fused classifiers. Either outcome is decision-relevant and was blocked by the parent's measurement confound."
+}

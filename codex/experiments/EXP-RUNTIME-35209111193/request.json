@@ -1,0 +1,20 @@
+{
+  "base_sha": "96b62e4739edba0ace1f318c84fd627e070f693d",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T10:11:02.500243+00:00",
+  "experiment_id": "EXP-RUNTIME-35209111193",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 Infrastructure failure: the mock server never applied brotli/gzip compression (Content-Encoding='none' on all 2880 observations, run_experiment.py:260-301). The decompression-normalization mechanism (SHA256 on decompressed body via brotli.decompress/gzip.decompress) was never exercised. The frozen question asked about behavior 'under brotli/gzip compression without CDN noise' but the environment could not express this effect. All reported discrimination metrics (0.5) reflect identity-path body hashing, not decompression-normalization. The frozen falsifier's third disjunct (brotli quality diversity does not increase) technically triggers but is uninformative because no compression was applied. C-MEAS-VALID does not advance from this experiment.",
+  "inherited_next_question": "Does decompression-normalization (SHA256 on decompressed body via brotli.decompress/gzip.decompress after Content-Encoding inspection) preserve body-only discrimination at >=0.3 for HTML and XML at 1KB/10KB/100KB when the mock server actually applies brotli (quality 4-8) and gzip compression \u2014 fixing the server to compress bodies and set Content-Encoding headers so the decompression path is exercised?",
+  "lane": "runtime",
+  "origin_github_run_id": "35209111193",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35154720995",
+    "path": "research/experiments/EXP-RUNTIME-35154720995/handoff.json",
+    "sha256": "79c5e640c4745b24f4f11409957bccec69a3cb453f7410226f1545b5beb15bd1"
+  },
+  "reason": "pulse",
+  "request_hash": "b0b57bf7be0a4fb37669cec86cb00a3fba97b80c7eae5a619a00fdc5e34fa4f7",
+  "request_id": "380724f2b8e4e0f8e3430b84",
+  "schema_version": 1
+}

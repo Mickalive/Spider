@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-INTEL-35353016702",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does a third recipe variant (meta-analytic mean of canonical per-iteration and per-task weighted density) break the 2-recipe dominance degeneracy under the OECD/COINr framework on truncated-first-20 density data, producing at least one non-degenerate dominance pair (10% < dominance < 90%)?",
+  "hypothesis": "The OECD/COINr framework's 2-recipe degeneracy is a mathematical artifact of having exactly 2 alternatives (dominance is necessarily 0% or 100% by definition). Adding a third recipe (meta-analytic mean of the two existing recipes) makes dominance ternary (0%, 50%, 100%), and because recipe sensitivity is task-dependent (established: recipe choice is MATERIAL, EXP-INTEL-35264637598), some task-definition pairs will show the meta-analytic mean ranking between the two original recipes, producing non-degenerate dominance values.",
+  "falsifier": "The framework is falsified if ANY of: (F1) All 63 dominance pairs (21 task-definition pairs x 3 pairwise comparisons) remain degenerate (0% or 100%) with the third recipe added; (F2) The third recipe produces identical rankings to one of the existing recipes across all 21 task-definition pairs (meta-analytic mean is a linear combination that preserves ranking); (F3) The third recipe produces NaN or error on >20% of pairs due to ties or density reconstruction failures.",
+  "baselines": [
+    {
+      "id": "B1_2RECIPE_BINARY",
+      "description": "2-recipe OECD framework result: all 21 dominance pairs degenerate (0% or 100%) by mathematical necessity. This is the baseline the 3-recipe variant must improve upon.",
+      "source": "EXP-INTEL-35330747199 result.json OBS-3, VN-1; audit V2"
+    },
+    {
+      "id": "B2_RANDOM_THIRD",
+      "description": "Random third recipe (shuffled density values): dominance pairs would show random variation but no systematic improvement. Expected to produce non-degenerate pairs by chance, but without scientific meaning.",
+      "source": "Constructed null"
+    },
+    {
+      "id": "B3_MONOTONE_THIRD",
+      "description": "Worst-case third recipe: if the meta-analytic mean always ranks between the two original recipes on every task-definition pair, dominance would be exactly 50% for all pairs — non-degenerate but maximally uninformative.",
+      "source": "Theoretical bound"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_FRAMEWORK_EXECUTES",
+    "description": "The OECD/COINr framework executes without error on the reconstructed 3-recipe x 7-task x 3-definition density matrix and produces dominance pairs for all 63 pairwise comparisons (21 pairs x 3 comparisons).",
+    "expected": "All 63 comparisons produce non-null, non-NaN results. The meta-analytic mean recipe is computable for all 21 task-definition pairs."
+  },
+  "null_control": {
+    "id": "NC1_SHUFFLED_THIRD",
+    "description": "When the third recipe's density values are randomly shuffled (breaking the recipe-task association), the non-degenerate dominance fraction should decrease relative to the real third recipe, confirming that the observed non-degeneracy (if any) reflects genuine recipe structure rather than numerical artifact.",
+    "expected": "Real third recipe produces >= 1 non-degenerate pair (dominance strictly between 10% and 90%). Shuffled third recipe produces fewer non-degenerate pairs or identical distribution to 2-recipe baseline."
+  },
+  "measurement_validity": [
+    "Density values must be reconstructed from existing raw evidence (EXP-INTEL-34782350557 raw_results.json) for 7 tasks x 3 definitions x 2 recipes. Reconstruction must be documented with exact code path and hash.",
+    "The meta-analytic mean recipe is defined as: density_mean(task, def) = (density_canonical(task, def) + density_weighted(task, def)) / 2. This is a deterministic, reproducible computation.",
+    "Dominance is computed as: for each pair of recipes (A, B), dominance(A) = % of task-definition pairs where A ranks higher than B. With 3 recipes, there are 3 pairwise comparisons per task-definition pair.",
+    "The truncated-first-20 scope must be explicitly stated — no extrapolation to full-DOM.",
+    "Ties in density rankings must be handled consistently: ties count as 0.5 for both recipes in dominance computation."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_FRAMEWORK_VALID: The OECD/COINr framework executes without error on the 3-recipe density matrix and produces non-degenerate outputs for >= 80% (51/63) of pairwise comparisons.\n\nC2_NONDEGENERATE_EXISTS: At least one dominance pair is strictly between 10% and 90% (non-degenerate), indicating the 3-recipe framework can distinguish recipe-sensitive from recipe-insensitive cases.\n\nC3_THIRD_RECIPE_DISTINCT: The meta-analytic mean recipe produces different rankings from both original recipes on at least 3 of 21 task-definition pairs (not a trivial linear combination that preserves all rankings).\n\nC4_NULL_CONTROL_PASSES: Shuffled third recipe produces fewer non-degenerate pairs than the real third recipe (real_count > shuffled_count), or shuffled count equals real count but shuffled non-degenerate dominance values are closer to 50% (less informative).\n\nVERDICT RULES:\n- If C1 AND C2 AND C3 AND C4: SURVIVES_CURRENT_TEST — 3-recipe OECD framework is operationalizable for SPIDER density metric MIXED outcome handling at truncated-first-20 ceiling. The framework becomes viable pending full-DOM validation.\n- If C1 AND C2 AND NOT C4: MIXED — framework produces non-degenerate outputs but null control fails, suggesting non-degeneracy may be artifactual.\n- If C1 AND NOT C2: FALSIFIED-IN-SETTING — 3-recipe framework still produces degenerate dominance on this data. The degeneracy is not solely a 2-recipe artifact; the density metric itself lacks task-dependent recipe sensitivity.\n- If NOT C1: MEASUREMENT_INVALID — framework cannot execute or produces >20% errors.",
+  "product_consequence_positive": "Product lane gains a viable MIXED outcome decision rule: with 3+ recipes, the OECD framework produces non-degenerate dominance pairs that quantify recipe sensitivity per task-definition pair. This resolves the MIXED outcome amendment blocker for C-MEAS-VALID promotion. The frozen spec for the full-DOM re-run can include 3 recipes (canonical, weighted, meta-analytic mean) with a concrete decision rule. Product lane can also use the sensitivity classification to identify recipe-sensitive vs recipe-insensitive task-definition pairs.",
+  "product_consequence_negative": "If the 3-recipe framework is FALSIFIED (still degenerate), the density metric program must either: (a) abandon dominance-based MIXED outcome handling entirely and adopt an alternative approach (e.g., density ratio, ranking reversal rate), (b) restrict density metric use to recipe-insensitive task-definition pairs (if any exist), or (c) await a fundamentally different third recipe (not a linear combination) that might break the degeneracy. The MIXED outcome decision rule remains unresolved, blocking C-MEAS-VALID promotion.",
+  "estimated_cost": "LOW — computation is offline on existing reconstructed data (7 tasks x 3 definitions x 2 recipes = 21 density values, plus 21 meta-analytic mean values). No browser/network work. OECD/COINr framework is a lightweight Python library. Estimated < 2000 LLM tokens for execution.",
+  "expected_information_gain": "HIGH — directly resolves whether the 2-recipe degeneracy is a mathematical artifact (fixable by adding recipes) or a property of the density metric itself (requiring alternative approaches). Either outcome changes the frozen spec for the full-DOM re-run and determines the MIXED outcome strategy. Information gain is high because either SURVIVES or FALSIFIED changes a concrete product decision."
+}

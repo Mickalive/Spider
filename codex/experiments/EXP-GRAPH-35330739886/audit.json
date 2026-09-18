@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35330739886",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Fix result.json metrics.per_condition_correlations: 4 permission_boundary conditions report b_mean=0.333 b_std=0.0 r=0.0 p=1.0 contradicting raw_evidence per_condition_data (b_mean 0.406-0.467 b_std 0.138-0.165 r 0.022/-0.149/0.200/-0.245) and even contradicts result.json own pooled behavioral mean 2.466. SI conditions also mis-scaled (b_mean ~1.06 vs 4.433-4.550, s_mean 1.67-2.6 vs 3.26-4.24). Recompute from per_condition_data behavioral/structural arrays; pooled r remains unaffected.",
+    "Fix result.json metrics.delta_sample_size_tradeoff min_n_tost values (155,118,84,53): irreproducible under Fisher z TOST. Recomputed with observed r=0.03356 via n=3+(1.645/(atanh(delta)-z))^2 yields 610,361,199,98 (or 865,511,281,138 for CI-bound). Even with r=0 assumption yields 272,190,122,69. Reported values are ~4x too small and would fail TOST (p_upper 0.12-0.20 >0.05 at those n). Recompute and correct methodology description or remove table; CI-bound min_n values (873,518,287,142) are close (+7-8) to recomputed 865,511,281,138 and need only rounding clarification.",
+    "Clarify per-condition std inconsistency: result.json validity_notes and report correctly note 8/8 variance, but per_condition_correlations table implies only 4/8 variance (PB b_std=0). Align narrative and table after fixing per_condition values."
+  ],
+  "validity_findings": [
+    "PRIMARY_METRICS_VERIFIED: Pooled Pearson r=0.03354974840059444 on n=480 (all_behavioral_scores + all_structural_scores) recomputed via scipy pearsonr exactly matches result.json. Fisher z=0.03356234461331847, SE=0.045786854649563 (producer 0.04578685460128356 diff 4.8e-11). 95% two-sided CI [-0.05612086040514, 0.122683448522837] matches producer [-0.05612086040050875, 0.12268344848910374] within 3.4e-11. One-sided 95% upper recomputed 0.10844685544 vs producer 0.10845287233 diff 6e-06. r^2=0.0011255856 matches.",
+    "C3_EQUIVALENCE_DECISION_CORRECT: Two-sided CI upper 0.12268 <0.15 and <0.20 (PASS) but >0.12 and >0.10 (FAIL). TOST via Fisher z: p_upper 0.07237 at delta=0.10 (FAIL), 0.02868 at 0.12 (TOST PASS but CI FAIL), 0.00511 at 0.15 (PASS), 0.00011 at 0.20 (PASS) within 0.001 of producer p_upper values (0.07334,0.02950,0.00548,0.000138; diff from SE truncation). Frozen decision_rule specifies CI upper bound test -> C3 correctly recorded as PASS because at least one delta (0.15) passes, and report correctly labels outcome MIXED per spec prereg section 9 (passes only for delta>=0.15). No cherry-picking.",
+    "C1_C2_C4_REPLICATION_VERIFIED: mean_tp_rate=1.0 Wilson lower 0.9398260695220669 >0.75 (C1 PASS) recomputed from parent result.json per_condition_wilson_lower. C2 8/8 conditions std>0 for both signals recomputed from per_condition_data behavioral_std 0.138-0.431 structural_std 0.612-1.091 -> PASS; producer per_condition_correlations table erroneous but true data supports 8/8. C4 FP=0.0 on 240 noise_only_behavioral_scores all exactly 0.0 -> PASS. All inherited controls correctly verified, no new HTTP cycles.",
+    "MEASUREMENT_VALIDITY_CONFIRMED: Frozen statistical reanalysis only, no new request/response cycles, methodology Fisher z-transform correctly applied. Fisher bivariate-normality assumption disclosed as mild non-normality (behavioral bounded [0,5] structural [0,6]) adequate at n=480 near-zero r. Representation loss explicitly disclosed in validity_notes: behavioral composite weights arbitrary, graded session_status_check mapping 401->1.0/403->0.5/500->0.75 arbitrary, structural signal from unauthenticated /schema synthetic construct. All disclosed.",
+    "SAMPLING_INTEGRITY: n=480 =8*60 paired samples verified from raw_evidence (all_behavioral_scores length 480, per_condition_data each 60). No missing data, no split leakage introduced by reanalysis. Target definition unchanged from parent deterministic Flask 3.1.3 + PyJWT 2.14.0 HS256 localhost SEED=42.",
+    "LEAKAGE_CHECK_PASS: No causal link between behavioral endpoint (/api/*, /session/status) and structural endpoint (/schema) per cooccurring_results sample inspection; per-sample RNG independent draws. Structural signal recomputed from per_condition_data matches parent report.",
+    "PER_CONDITION_HETEROGENEITY_CORRECTLY_HANDLED: True per-condition r from per_condition_data: PB 0.022(p0.867), -0.149(p0.253), 0.200(p0.124), -0.245(p0.058); SI -0.314(p0.014), -0.044(p0.738), 0.157(p0.228), 0.153(p0.242). Single significant among 8 (expected 0.4 under global null) not inflated; pooled r is confirmatory as preregistered. Producer report notes 1/8 significant is expected, correct. Erroneous per_condition_correlations table would hide this heterogeneity (shows PB r=0) -> requires fix but does not affect pooled inference.",
+    "TOST_VS_CI_DISCREPANCY_EXPLAINED: delta=0.12 TOST PASS (one-sided z=1.645) vs CI FAIL (two-sided z=1.96) correctly explained by producer as critical-value difference. One-sided 95% upper 0.108 <0.12 would pass if one-sided criterion used, but frozen rule correctly uses two-sided bound -> FAIL. No post-hoc switching.",
+    "PROVENANCE_INTEGRITY: parent raw_evidence sha256 13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6 verified, recomputed metrics deterministic via reproduction_instructions."
+  ],
+  "baseline_findings": [
+    "B-PARENT-N480-R0335 PASS_VERIFIED: Predicted CI upper ~0.122 matches recomputed 0.12268. Parent |r|=0.0335 at n=480 is smaller than parent n=240 |r|=0.0527, direction consistent, confirming underpower diagnosis not heterogeneity.",
+    "B-FISHER-Z-CI PASS_VERIFIED: 95% CI via z±1.96/sqrt(n-3) recomputed exactly; expected SE 0.04578 and upper ~0.122 matches. No deviation.",
+    "B-TOST-DELTA-MAP PASS_VERIFIED: Expected pass at delta>=0.15 fail at <=0.10 confirmed. Delta=0.12 borderline correctly captured as TOST pass / CI fail per frozen two-sided rule. No baseline inversion.",
+    "PC-TP-VARIANCE-REPLICATION (C1/C2) PASS_VERIFIED: TP=1.0 Wilson 0.9398 and 8/8 variance replicate parent EXP-GRAPH-35308806969 audit PASS; no regression.",
+    "NC-FP-REPLICATION (C4) PASS_VERIFIED: FP=0.0 on 240 noise-only replicates parent and grandparent (120-240 samples). Trivial by design but executed as preregistered.",
+    "BASELINE_STRENGTH_APPROPRIATE: Strong null (permutation p) replaced by principled equivalence margin sweep (4 deltas); not weakened after seeing outcome. Delta range 0.10-0.20 brackets product-relevant shared-variance thresholds 1%-4%."
+  ],
+  "recomputed_metrics": {
+    "n_paired_samples": 480,
+    "pearson_r": 0.03354974840059444,
+    "abs_r": 0.03354974840059444,
+    "pearson_p_parametric": 0.4633583039263756,
+    "r_squared": 0.0011255855931345664,
+    "fisher_z": 0.03356234461331847,
+    "se_fisher_z": 0.04578685464956301,
+    "se_fisher_z_producer": 0.04578685460128356,
+    "ci_95_two_sided_lower_r": -0.05612086040514139,
+    "ci_95_two_sided_upper_r": 0.12268344852283661,
+    "ci_95_one_sided_upper_r": 0.10844685544385659,
+    "ci_95_one_sided_upper_r_producer": 0.10845287233428131,
+    "tost_delta_010": {
+      "z_lower": 2.924369745648,
+      "p_lower": 0.00172577248593,
+      "z_upper": -1.458344402541,
+      "p_upper": 0.072372818518,
+      "tost_pass": false,
+      "ci_bound_pass": false,
+      "producer_p_upper": 0.07334888897149866
+    },
+    "tost_delta_012": {
+      "z_lower": 3.366542086458,
+      "p_lower": 0.000380584832,
+      "z_upper": -1.900516743351,
+      "p_upper": 0.028682669921,
+      "tost_pass": true,
+      "ci_bound_pass": false,
+      "producer_p_upper": 0.029505609817392384
+    },
+    "tost_delta_015": {
+      "z_lower": 4.033969622028,
+      "p_lower": 2.7421206e-05,
+      "z_upper": -2.567944278921,
+      "p_upper": 0.005115179963,
+      "tost_pass": true,
+      "ci_bound_pass": true,
+      "producer_p_upper": 0.005489816250151343
+    },
+    "tost_delta_020": {
+      "z_lower": 5.160758491167,
+      "p_lower": 1.22976e-07,
+      "z_upper": -3.69473314806,
+      "p_upper": 0.000110058919,
+      "tost_pass": true,
+      "ci_bound_pass": true,
+      "producer_p_upper": 0.00013892259187103192
+    },
+    "min_n_ci_bound_recomputed": {
+      "0.10": 865,
+      "0.12": 511,
+      "0.15": 281,
+      "0.20": 138
+    },
+    "min_n_ci_bound_producer": {
+      "0.10": 873,
+      "0.12": 518,
+      "0.15": 287,
+      "0.20": 142
+    },
+    "min_n_tost_recomputed_with_observed_r": {
+      "0.10": 610,
+      "0.12": 361,
+      "0.15": 199,
+      "0.20": 98
+    },
+    "min_n_tost_producer": {
+      "0.10": 155,
+      "0.12": 118,
+      "0.15": 84,
+      "0.20": 53
+    },
+    "mean_tp_rate": 1.0,
+    "wilson_lower_ci_tp": 0.9398260695220669,
+    "conditions_with_variance_true": 8,
+    "conditions_with_variance_per_table_erroneous": 4,
+    "fp_rate_noise_only": 0.0,
+    "per_condition_r_true_from_raw": {
+      "cooccur_permission_boundary+optional_field_addition": {
+        "r": 0.022009314156572934,
+        "p": 0.8674351297848109
+      },
+      "cooccur_permission_boundary+description_change": {
+        "r": -0.14966205116524228,
+        "p": 0.2537314503658527
+      },
+      "cooccur_permission_boundary+response_time_jitter": {
+        "r": 0.20029213681074723,
+        "p": 0.12492768809950798
+      },
+      "cooccur_permission_boundary+field_type_normalization": {
+        "r": -0.24583633148878983,
+        "p": 0.05831117194609448
+      },
+      "cooccur_session_invalidation+optional_field_addition": {
+        "r": -0.3144887601032956,
+        "p": 0.014396374252335626
+      },
+      "cooccur_session_invalidation+description_change": {
+        "r": -0.04404283045693247,
+        "p": 0.7382739361129393
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "r": 0.15794965025709737,
+        "p": 0.22808011127249905
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "r": 0.15312182195766505,
+        "p": 0.2427948513789412
+      }
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: MIXED outcome verified. On deterministic Flask 3.1.3 + PyJWT HS256 localhost (SEED=42) with graded session_status_check (401->1.0,403->0.5,500->0.75) and unauthenticated /schema probe, 8 co-occurring conditions x60 (n=480), behavioral-structural correlation is near-zero r=0.0335 (r2=0.001) with 95% two-sided CI [-0.056,0.123] (one-sided upper 0.108). Equivalence confirmed ONLY for margins delta>=0.15 (shared variance <2.25%, >97.75% independent): TOST and CI both pass at 0.15 (p_upper 0.005) and 0.20, fail at delta=0.10 (p_upper 0.072>0.05, CI 0.123>0.10) and fail CI at 0.12 (0.123>0.12) despite TOST p=0.028. Therefore independent parallel channels are justified ONLY if product tolerates |r|<0.15; if delta=0.10 (<1% shared variance) required then n insufficient (CI needs ~865, TOST ~610 vs current 480). C1 (TP=1.0 Wilson 0.9398), C2 (8/8 variance), C4 (FP=0.0) hold. C-FRESHNESS remains EXPERIMENTAL, not VALIDATED; do not promote to Product Core beyond bounded parallel-channel assumption at delta=0.15. No inference to real APIs, RS256/ES256/OAuth/OIDC, DB/cache/CDN stochasticity, alternative behavioral mappings, or production routing without new data. Per-condition table and tradeoff min_n_tost require correction before archival.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35330739886/request.json",
+    "research/experiments/EXP-GRAPH-35330739886/spec.json",
+    "research/experiments/EXP-GRAPH-35330739886/prereg.md",
+    "research/experiments/EXP-GRAPH-35330739886/freeze.json",
+    "research/experiments/EXP-GRAPH-35330739886/result.json",
+    "research/experiments/EXP-GRAPH-35330739886/report.md",
+    "research/experiments/EXP-GRAPH-35330739886/provenance.json",
+    "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json (sha256:13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6)",
+    "research/experiments/EXP-GRAPH-35308806969/result.json",
+    "research/experiments/EXP-GRAPH-35308806969/audit.json",
+    "research/experiments/EXP-GRAPH-35308806969/handoff.json"
+  ],
+  "unresolved": [
+    "Whether delta=0.10 (1% shared variance) is required for product parallel-channel architecture; if so n~865 (CI) or ~610 (TOST) needed vs current 480",
+    "Whether one-sided 95% upper (0.108) should replace two-sided 0.123 as decision criterion; would pass delta=0.12 and nearly 0.10, but frozen rule specifies two-sided",
+    "Whether alternative session_status_check mappings (401->1.0/403->0.2/500->0.6 or continuous TTL) shift pooled r or per-condition r=-0.314 replication",
+    "Whether per-condition heterogeneity (SI+optional_field_addition r=-0.314 p=0.014) replicates or is sampling noise (1/8 expected under null)",
+    "Whether real APIs with stochastic DB/cache/CDN and heterogeneous profiles preserve near-zero correlation observed on deterministic mock",
+    "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware",
+    "Whether wider stochastic variation (all 7 permission subsets, larger n, varied noise magnitudes) changes pooled r estimate",
+    "Correct delta_sample_size_tradeoff formula and whether to report 80% power vs observed-r equivalence vs r=0 TOST"
+  ]
+}

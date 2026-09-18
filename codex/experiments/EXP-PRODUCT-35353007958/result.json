@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {
+    "C1_selection_accuracy": {
+      "expected_behavior": "Both LITERAL and PARAMETERIZED conditions achieve 100% selection accuracy (correct mechanism key selected for all 32 tasks)",
+      "observed_behavior": "NOT_MEASURED — no LLM API calls executed due to missing API keys",
+      "pass": null,
+      "evidence_ref": null
+    },
+    "C2_param_selection_tokens_le_literal": {
+      "expected_behavior": "Parameterized selection prompt tokens <= literal selection prompt tokens",
+      "observed_behavior": "NOT_MEASURED — no LLM API calls executed due to missing API keys",
+      "pass": null,
+      "evidence_ref": null
+    },
+    "C3_param_total_cost_le_literal": {
+      "expected_behavior": "Total workflow cost for parameterized <= total workflow cost for literal",
+      "observed_behavior": "NOT_MEASURED — no LLM API calls executed due to missing API keys",
+      "pass": null,
+      "evidence_ref": null
+    },
+    "C4_positive_control": {
+      "expected_behavior": "5 blog-read-post tasks select same parameterized mechanism with correct bound URLs",
+      "observed_behavior": "NOT_MEASURED — no LLM API calls executed due to missing API keys",
+      "pass": null,
+      "evidence_ref": null
+    }
+  },
+  "artifacts": [],
+  "observations": [
+    "Experiment requires real LLM API calls to measure actual prompt and completion tokens and verify task success rates",
+    "No API keys (OPENAI_API_KEY, ANTHROPIC_API_KEY, or equivalent) found in environment variables or configuration files",
+    "Cannot execute selection step (LLM selects mechanism from registry) or resolution step (LLM fills parameterized template slots) without API access",
+    "This is an infrastructure failure, not a scientific negative — the frozen decision rule cannot be evaluated"
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID: API failures prevent completion of >=5 tasks in either condition (0/32 tasks executed in any condition)",
+    "Infrastructure failure: No LLM API keys available in the execution environment. Required: OPENAI_API_KEY or equivalent for gpt-4o-mini or similar model",
+    "This is NOT a scientific falsification — the experiment was not executed. The frozen decision rule cannot be evaluated",
+    "The parent experiment (EXP-PRODUCT-35330741529) identified this exact measurement as the blocking validity gap (C1_success unmeasured, completion tokens estimated). Without API access, the gap remains unresolved",
+    "Smallest next action to unblock: configure API key in environment (e.g., export OPENAI_API_KEY=sk-...), then re-run this experiment"
+  ],
+  "unresolved": [
+    "Whether actual LLM selection achieves 100% accuracy when choosing from 25-32 mechanisms (C1 unmeasured)",
+    "Whether actual completion tokens exceed estimates (2 selection, 15 resolution) enough to reverse C3 with 5.42% margin",
+    "Whether the 5.42% analytical savings from parent EXP-PRODUCT-35330741529 survives real LLM execution",
+    "Whether COLD baseline success rate is viable (unmeasured)",
+    "Whether real LLM resolution of parameterized templates succeeds with low overhead"
+  ]
+}

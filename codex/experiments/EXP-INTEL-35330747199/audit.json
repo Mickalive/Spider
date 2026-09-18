@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35330747199",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "RF1_DECISION_RULE_GAP: Frozen decision_rule has no bucket for observed pattern C1=PASS C2=FAIL C3=PASS C4=PASS C5=PASS. Spec declares SURVIVES requires C1-C5 all PASS, MIXED requires NOT C5, FALSIFIED requires NOT(C2 OR C3 OR C4), MEASUREMENT_INVALID requires NOT C1. None matches. Producer forces MIXED violating frozen rule (result.json outcome MIXED with C5 PASS). Derived artifact internally verdicts MEASUREMENT_INVALID/INCONCLUSIVE (/tmp/opencode/oecd_analysis_results.json:decision_rule/verdict) contradicting result.json. Prereg must cover all 2^5 combinations before execution; gap is a preregistration defect.",
+    "RF2_C2_CONSTRUCT_IMPOSSIBLE: C2_DOMINANCE_INFORMATIVE requires 10-90% non-degenerate dominance but with exactly 2 recipes dominance is binary 0%/100% by definition (oecd_analysis_results.json:dominance_pairs all 0 or 100, result.json VN-1 admits). Hypothesis (a) was a priori unfalsifiable in this 2-recipe design. Reformulate C2 for 2-recipe comparisons (e.g., ranking reversal rate, density ratio) or add third recipe before claiming framework informativity.",
+    "RF3_C3_UNIT_MISMATCH: C3_CI_INFORMATIVE compares ranking CI width (rank units 1-4, oecd_analysis_results.json:ranking_cis) to density range (density units 0.54, aggregate_metrics.density_ranges). Producer check ci_width_normalized 0.018-0.073 < 0.541 (result.json VN-6) is trivially true because numerator and denominator are incommensurable scales and density range is inflated by cross-recipe 84.7-119x gap (vn-6). Must express both in same units or preregister normalization; disclose inflation.",
+    "RF4_C4_CHI_SQUARE_AND_N: C4 requires chi-square p<0.10 against uniform (spec.json decision_rule). Producer never computed p-value, only checked >=2 categories (report.md Decision Rule table, result.json M7). Recomputed chi-square 22.43 df=2 p~1e-05 is nominally <0.10 but based on wrong N: spec requires 21 task-definition pairs, producer classifies 14 task-recipe pairs (ranking_cis: 14 entries) with distribution MEDIUM 13 HIGH 1 LOW 0. Zero-cell violates chi-square assumptions and N mismatch violates measurement_validity #3.",
+    "RF5_NULL_CONTROL_THRESH_DRIFT_AND_DEGENERACY: spec.json positive_control/null_control thresholds (within 10% of 50% ; >=1.5x) differ from decision_rule C5 (within 15% ; >=1.3x) and result.json NC1 (gte_13x) without justification. Dominance null SD=0.0 trivially within 15% because shuffling 2 recipes preserves binary structure (result.json VN-5, oecd_analysis_results.json null_control null_sd 0). Dominance NC is degenerate and uninformative. CI width null ratio 125.3x (result.json M9) is driven by mixing near-zero canonical and 0.3-0.65 weighted regimes creating bimodal rankings, not proof of structure detection.",
+    "RF6_COINR_VALIDITY: measurement_validity #2 requires published versioned COINr PyPI or from-scratch with unit tests against OECD examples. Provenance shows custom /tmp/opencode/oecd_sensitivity_analysis.py (sha f3e1e66e) with no library version, no unit tests, and arbitrary per-task weighted formula (included/n_matching)*(bbox/1500) not mapped to OECD/COINr (analysis code recipe_per_task_weighted).",
+    "RF7_ARTIFACT_DURABILITY: Derived artifacts stored under /tmp/opencode/oecd_analysis_results.json and oecd_sensitivity_analysis.py are ephemeral; spec measurement_validity #1 requires reconstruction documented with exact code path and hash under research/experiments/ persistent path. Provenance hashes null for result.json/report.md/freeze.json.",
+    "RF8_BASELINE_COVERAGE: Control registry deviation - spec PC1_FRAMEWORK_EXECUTES and NC1_SHUFFLED_RECIPES vs producer controls NC1_SHUFFLED_RECIPES, NC2_C2_RECHECK, POSITIVE_CONTROL_DENSITY_CONSISTENCY. NC2 is invented (not frozen) and reports PASS without quantitative null means/p-values. B2_RANDOM_CLASSIFICATION threshold (chi-square p<0.05 vs decision_rule p<0.10) not reconciled; B1_BINARY_C2 recheck not quantitatively recomputed."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DECISION_RULE_UNCLASSIFIABLE",
+      "severity": "high",
+      "description": "Frozen conjunctive rule leaves observed C-pattern (C1 PASS C2 FAIL C3 PASS C4 PASS C5 PASS) uncovered. Producer outcome MIXED requires NOT C5 but C5 passes (null_ci_gte_13x true, dominance within 15%). Derived JSON verdicts MEASUREMENT_INVALID. This is a preregistration coverage defect, not a scientific result.",
+      "evidence_ref": "spec.json:decision_rule; result.json:controls; /tmp/opencode/oecd_analysis_results.json:decision_rule/verdict"
+    },
+    {
+      "id": "V2_DOMINANCE_DEGENERACY_BY_CONSTRUCTION",
+      "severity": "high",
+      "description": "With 2 recipes dominance is necessarily 0% or 100%. All 42 task-definition-recipe triples are degenerate (0 non-degenerate). Producer VN-1 correctly calls it framework limitation, but hypothesis required 0%<dominance<100% on 21 pairs, making F1 unfalsifiable in this design. This is construct failure not empirical discrimination.",
+      "evidence_ref": "result.json:observations OBS-3, validity_notes VN-1; /tmp/opencode/oecd_analysis_results.json:dominance_pairs"
+    },
+    {
+      "id": "V3_CI_WIDTH_UNIT_INCOMPARABILITY",
+      "severity": "high",
+      "description": "C3 compares rank-width CI (1-4 ranks) to density range (0.41-0.64 density). Normalized CI width 0.018-0.073 is derived after ad-hoc division by 100*mean_range, guaranteeing pass because numerator small. VN-6 admits range inflated by cross-recipe scale difference. Measurement not comparable as preregistered.",
+      "evidence_ref": "spec.json:measurement_validity; prereg.md section 11 M3; /tmp/opencode/oecd_analysis_results.json:ci_width_normalized, density_ranges; result.json:validity_notes VN-6"
+    },
+    {
+      "id": "V4_CLASSIFICATION_VALIDITY",
+      "severity": "medium",
+      "description": "Classification entropy 0.371 bits (normalized 0.234) with 13 MEDIUM 1 HIGH shows near-zero discrimination despite technically >=2 categories. Spec requires chi-square p<0.10 never computed; producer used category count proxy. N=14 vs frozen 21; thresholds 25th/75th percentiles are data-dependent, not preregistered absolute thresholds, undermining C4 falsifiability (prereg sec 16 validity threat 6).",
+      "evidence_ref": "result.json:metrics M7_CLASSIFICATION_ENTROPY; /tmp/opencode/oecd_analysis_results.json:sensitivity_classification/aggregate_metrics"
+    },
+    {
+      "id": "V5_NULL_DOMINANCE_DEGENERATE",
+      "severity": "high",
+      "description": "Null dominance mean 50% SD 0.0 (shuffled) is identical to original by construction with 2 recipes; shuffling preserves binary structure. Control result PASS is tautological, not evidence framework detects real recipe structure (producer note: uninformative with 2 recipes). Spec null_control expected degenerate to be detectable.",
+      "evidence_ref": "result.json:metrics M8_NULL_CONTROL_DOMINANCE, validity_notes VN-5; /tmp/opencode/oecd_analysis_results.json:null_control"
+    },
+    {
+      "id": "V6_COINR_FIDELITY",
+      "severity": "medium",
+      "description": "No OECD/COINr library used, no unit tests against OECD examples. Custom Python implements expected density averaging over 1000 iterations for canonical but per-task weighted normalizes by bbox/1500 arbitrary constant, introducing structural gap (119x ratio) not justified as OECD sensitivity mapping (interpretive analogy per do_not_assume[1]).",
+      "evidence_ref": "spec.json:measurement_validity item 2; provenance.json:analysis_parameters; /tmp/opencode/oecd_sensitivity_analysis.py:recipe_per_task_weighted"
+    },
+    {
+      "id": "V7_TRUNCATION_SCOPE",
+      "severity": "medium",
+      "description": "All densities computed on locatable_sample capped at 20 (provenance raw_evidence sha da30bd05, dom_stats linksCount 393 vs locatable_sample 20). Truncation underestimates densities for tasks with 21-82 locatable elements (VN-4). Results explicitly bounded to truncated-first-20; no extrapolation to full-DOM and parent next_question (full-DOM C2) remains blocked.",
+      "evidence_ref": "provenance.json:upstream_evidence/raw_data; result.json:validity_notes VN-4; research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json:locatable_elements"
+    },
+    {
+      "id": "V8_PROVENANCE_INTEGRITY",
+      "severity": "low",
+      "description": "Provenance lists ephemeral /tmp paths, null sha for frozen inputs/result, and git detached HEAD 135ae03 with no commit. Reproduction requires /tmp file persistence not guaranteed. Hashes for prereg/spec frozen but freeze.json sha null.",
+      "evidence_ref": "provenance.json:produced_artifacts/frozen_inputs/git_state; freeze.json"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_BINARY_C2",
+      "severity": "medium",
+      "description": "B1 divergence 0.38 (canonical FALSE vs weighted TRUE) qualitatively confirmed by cross-recipe gap (mean diff 0.50, ratio 84.7x producer / 119.9 recomputed). However producer NC2_C2_RECHECK invents post-hoc control not in frozen spec, reports PASS as structural confirmation without recomputing null means or p-values for both recipes. Baselines not quantitatively re-tested.",
+      "evidence_ref": "spec.json:baselines B1; result.json:metrics M10_CROSS_RECIPE_DENSITY_GAP, controls NC2_C2_RECHECK; /tmp/opencode/oecd_analysis_results.json:density_matrix"
+    },
+    {
+      "id": "B2_RANDOM_CLASSIFICATION",
+      "severity": "medium",
+      "description": "Random LOW/MEDIUM/HIGH expectation 33% each. Observed 13/14 MEDIUM 1 HIGH 0 LOW is statistically non-uniform (recomputed chi2 22.43 p~1e-05 passes p<0.05/0.10) but in opposite direction of discrimination: concentration, not balanced. Entropy 0.37/1.585 indicates poor discriminative utility despite passing count criterion. Constructed null's threshold discrepancy (spec B2 p<0.05 vs decision_rule p<0.10) not explained.",
+      "evidence_ref": "spec.json:baselines B2, decision_rule C4; result.json:metrics M7_CLASSIFICATION_ENTROPY"
+    },
+    {
+      "id": "B3_FULL_DOMEN",
+      "severity": "none",
+      "description": "Placeholder BLOCKED by runtime locatableSample cap at measure_fullpage_yield.py:89 correctly acknowledged. No comparison attempted; producer explicitly bounds to truncated-first-20. No baseline strength concern.",
+      "evidence_ref": "spec.json:baselines B3; prereg.md section 19; result.json:unresolved U-1"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_DENSITY_MATRIX_cross_recipe_ratio": {
+      "producer": 84.7,
+      "recomputed": 119.88,
+      "unit": "ratio weighted/canonical mean",
+      "note": "Recomputed from oecd_analysis_results.json density_matrix: canonical mean 0.00377 weighted mean 0.4523. Difference due to producer averaging per-definition range means vs overall means; direction consistent, magnitude discrepancy illustrates definition of mean not frozen.",
+      "match": false
+    },
+    "M5_DOMINANCE_MEAN": {
+      "producer": 50.0,
+      "recomputed": 50.0,
+      "unit": "percent",
+      "note": "Trivially 50% with 2 recipes. Null dominance mean also 50% SD 0.0; control degenerate as producer admits.",
+      "match": true
+    },
+    "M6_DOMINANCE_SD": {
+      "producer": 50.0,
+      "recomputed": 50.0,
+      "unit": "percent",
+      "match": true
+    },
+    "M7_CLASSIFICATION_ENTROPY": {
+      "producer": 0.3712,
+      "recomputed": 0.37123232664087563,
+      "unit": "bits",
+      "max": 1.585,
+      "distribution": {"MEDIUM": 13, "HIGH": 1},
+      "match": true
+    },
+    "M8_NULL_DOMINANCE_MEAN": {
+      "producer": 50.0,
+      "recomputed": 50.0,
+      "null_sd": 0.0,
+      "within_15_of_50": true,
+      "match": true
+    },
+    "M9_NULL_CI_WIDTH_RATIO": {
+      "producer": 125.3,
+      "recomputed": 125.33,
+      "original_ci_width_mean": 0.026395139850312575,
+      "null_ci_width_mean": 3.3085714285714283,
+      "gte_13x": true,
+      "match": true
+    },
+    "C1_FRAMEWORK_VALID": {
+      "producer": "PASS rate 1.0",
+      "recomputed": "PASS rate 1.0 (42/42 non-null)",
+      "match": true
+    },
+    "C2_DOMINANCE_INFORMATIVE": {
+      "producer": "FAIL 0 non-degenerate",
+      "recomputed": "FAIL 0 non-degenerate (all 42 triples 0% or 100%)",
+      "match": true
+    },
+    "C3_CI_INFORMATIVE": {
+      "producer": "PASS",
+      "recomputed": "PASS nominally but measurement units incommensurable (see V3); pass driven by ad-hoc normalization",
+      "match": "disputed"
+    },
+    "C4_CLASSIFICATION_DISCRIMINATES": {
+      "producer": "PASS 2 categories MEDIUM HIGH",
+      "recomputed": "PASS by count but chi-square 22.43 p~1e-05 with N=14 not 21, 0 LOW cell violated assumptions; discrimination narrow (13/14 one category)",
+      "match": "disputed"
+    },
+    "C5_NULL_CONTROL_PASSES": {
+      "producer": "PASS dom within 15% and CI >=1.3x",
+      "recomputed": "PASS 50 within 15% true (tautological) and 125x >=1.3x true",
+      "match": true
+    },
+    "FROZEN_DECISION_RULE_VERDICT": {
+      "producer": "MIXED (C1 and (C2 or C3 or C4) and NOT C5)",
+      "recomputed": "UNCLASSIFIED_GAP - no frozen bucket matches C1 T C2 F C3 T C4 T C5 T. Producer MIXED violates NOT C5 clause. Derived artifact verdict MEASUREMENT_INVALID is not frozen definition (which requires NOT C1).",
+      "match": false
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: On truncated-first-20 data (7 tasks: 3 product_listing, 3 detail, 1 cart, 3 definitions, locatable_sample cap 20) the canonical per-iteration (p=0.5) and per-task weighted recipes occupy distinct density regimes (cross-recipe gap ~0.50 absolute, 85-120x ratio, rank correlations >0.98 within recipe). The OECD/COINr dominance framework as operationalized with exactly 2 recipes is NOT informative for MIXED handling via dominance pairs (all degenerate 0%/100%, F1 triggered) and provides only narrow, heavily concentrated classification (13/14 MEDIUM, entropy 0.37 bits). CI-width and null-dominance controls are compromised by unit mismatch and degeneracy (see V3/V5). No principled OECD-based MIXED outcome decision rule (dominance pairs, ranking CIs, sensitivity classes) is established for the 2-recipe SPIDER density problem at any ceiling. Framework limitation is demonstrated, not a validated decision rule. The blocked next question (full-DOM C2 FALSE/TRUE reversal persistence) remains open; product lane may NOT use this experiment to justify recipe choice. Revalidation with 3+ recipes, unit-consistent CIs, chi-square reporting, and full locatable_sample required before any SURVIVES_CURRENT_TEST at even truncated ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35330747199/spec.json",
+    "research/experiments/EXP-INTEL-35330747199/prereg.md",
+    "research/experiments/EXP-INTEL-35330747199/freeze.json",
+    "research/experiments/EXP-INTEL-35330747199/result.json",
+    "research/experiments/EXP-INTEL-35330747199/report.md",
+    "research/experiments/EXP-INTEL-35330747199/provenance.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "/tmp/opencode/oecd_analysis_results.json",
+    "/tmp/opencode/oecd_sensitivity_analysis.py"
+  ],
+  "unresolved": [
+    "U-1 cross-recipe gap persistence on full locatable_sample (21-82 elements vs cap 20) - blocked by runtime lane",
+    "U-2 OECD informativity with 3+ recipes (third variant would break degeneracy) - requires new recipe definition",
+    "U-3 whether near-zero canonical density reflects true page structure or p=0.5 independent inclusion model on sparse sample",
+    "U-4 correct reformulation of C2_DOMINANCE_INFORMATIVE for 2-recipe comparisons (density ratio vs ranking reversal)",
+    "U-5 proper unit-consistent C3 CI width vs density range comparison after fixing normalization",
+    "U-6 informative null for dominance that does not preserve binary structure when n_recipes=2"
+  ]
+}

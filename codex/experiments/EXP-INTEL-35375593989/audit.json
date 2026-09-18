@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35375593989",
+  "lane": "intel",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recompute M4_Spearman_R_canonical and M5_Spearman_R_weighted using task-major ordering (7 tasks × 3 definitions) rather than definition-major ordering. The current values (rho=-0.6623, -0.7068) are artifacts of data reordering; correct values are rho≈-0.23, -0.21.",
+    "Fix NC1_SHUFFLED_RATIO control: the reported shuffled mean eta^2=0.117 is incorrect. Correct permutation test (shuffling page_type labels) gives mean eta^2≈0.099 with p=0.234 for observed eta^2=0.144, indicating task-type structure is not statistically significant.",
+    "Revise C2_RATIO_CORRELATION evaluation: with correct Spearman correlations (|rho|<0.30) and eta^2=0.144<0.20, C2 fails. The decision rule then yields FALSIFIED-IN-SETTING (C1 AND NOT C2), not SURVIVES_CURRENT_TEST.",
+    "Clarify C3_THRESHOLD_EXISTENCE: the significant Kruskal-Wallis threshold (T≈0.03–0.05) separates DEF-FORM-ONLY from other definitions, not task types. Fisher exact test on listing vs non-listing yields p=1.0 for any threshold in the definition gap."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF-1",
+      "finding": "Spearman correlations (M4, M5) computed on definition-major ordered data (all DEF-FULL-MAP, then all DEF-FORM-ONLY, then all ISOLATED-A-LINK), creating artificial monotonic structure. Correct task-major ordering (preserving the 7×3 experimental design) yields rho≈-0.23 (canonical) and rho≈-0.21 (weighted), both non-significant (p>0.30) and below the 0.30 threshold.",
+      "severity": "CRITICAL",
+      "affects_metrics": ["M4_Spearman_R_canonical", "M5_Spearman_R_weighted", "C2_RATIO_CORRELATION"]
+    },
+    {
+      "id": "VF-2",
+      "finding": "NC1_SHUFFLED_RATIO control misimplemented. Producer's shuffle (randomizing canonical across all 21 pairs) preserves definition-driven weighted density structure, yielding mean shuffled eta^2≈0.37 > real eta^2=0.144. Correct null (permuting page_type labels) gives mean eta^2≈0.099, p=0.234 — task-type structure is not significant.",
+      "severity": "HIGH",
+      "affects_metrics": ["NC1_SHUFFLED_RATIO"]
+    },
+    {
+      "id": "VF-3",
+      "finding": "Ratio variation is primarily driven by definition choice (10× difference between DEF-FORM-ONLY mean R=0.0072 and DEF-FULL-MAP/ISOLATED-A-LINK mean R≈0.072), not task type (1.78× difference between detail and listing). The hypothesis that the ratio captures 'recipe sensitivity per task-definition pair' conflates definition artifacts with task-type effects.",
+      "severity": "HIGH",
+      "affects_metrics": ["M1_R_distribution", "M2_R_by_task_type", "M3_R_by_definition", "OBS-2", "OBS-3"]
+    },
+    {
+      "id": "VF-4",
+      "finding": "C3_THRESHOLD_EXISTENCE passes only via Kruskal-Wallis on weighted density, which detects the definition-driven separation (DEF-FORM-ONLY weighted≈0.98 vs others weighted≈0.005–0.05). Fisher exact test on page-type composition (listing vs non-listing) yields p=1.0 for all thresholds in the definition gap, so the threshold does not classify by task type as the decision rule intends.",
+      "severity": "MEDIUM",
+      "affects_metrics": ["M8_threshold_analysis", "C3_THRESHOLD_EXISTENCE"]
+    },
+    {
+      "id": "VF-5",
+      "finding": "Small N=21 (7 tasks × 3 definitions, 1 site, truncated-first-20 sample) limits statistical power and generalizability. All 21 pairs used for both exploration and confirmation with no holdout. Results are bounded to the specific Magento site and element sample.",
+      "severity": "MEDIUM",
+      "affects_metrics": ["All metrics"]
+    },
+    {
+      "id": "VF-6",
+      "finding": "Canonical density denominator uses elements_with_bbox (total page elements with bounding boxes, ~1000–1500) while weighted density denominator uses sample total area (20 elements). This asymmetry affects absolute density values but cancels in the ratio. The weighted recipe uses area-weighting, not the role-based weighted sampling from prior experiments, so absolute densities are not directly comparable to parent experiments.",
+      "severity": "LOW",
+      "affects_metrics": ["M1_R_distribution", "VN-2", "VN-3"]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_DEGENERATE_DOMINANCE",
+      "finding": "Confirmed: 2-recipe OECD/COINr dominance yields 0%/100% for all 21 pairs (from parent experiments). The ratio provides continuous discrimination (17× range), improving on the degenerate baseline.",
+      "status": "CONFIRMED"
+    },
+    {
+      "baseline_id": "B2_LINEAR_MEAN_DEGENERACY",
+      "finding": "Confirmed: Meta-analytic mean recipe (canonical+weighted)/2 always ranks between originals by mathematical identity, yielding 0 non-degenerate dominance. Ratio approach is structurally different (non-linear in densities).",
+      "status": "CONFIRMED"
+    },
+    {
+      "baseline_id": "B3_CANONICAL_ONLY_BINARY",
+      "finding": "Confirmed: Canonical densities range 0.0004–0.009 (all <0.01). Any binary threshold on canonical density alone flags all 21 pairs (zero specificity). Ratio provides meaningful classification by definition.",
+      "status": "CONFIRMED"
+    },
+    {
+      "baseline_id": "B4_WEIGHTED_ONLY_BINARY",
+      "finding": "Weighted density alone separates definitions (form_only≈0.98 vs full_map≈0.02–0.05 vs iso_a≈0.005–0.02) but does not capture the relative recipe sensitivity (canonical/weighted relationship). The ratio adds task-type information (eta^2=0.144) that weighted density alone lacks (eta^2=0.000081).",
+      "status": "PARTIALLY_CONFIRMED"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_R_distribution": {
+      "n_pairs": 21,
+      "mean": 0.0504,
+      "std": 0.0351,
+      "cv": 0.6971,
+      "min": 0.0055,
+      "max": 0.0943,
+      "iqr": 0.0793,
+      "range_ratio": 17.02,
+      "note": "Matches producer M1 within rounding (CV 0.697 vs 0.680). Ratio varies substantially but is definition-driven."
+    },
+    "M2_R_by_task_type": {
+      "product_listing": {"mean": 0.0359, "n": 9},
+      "detail": {"mean": 0.0639, "n": 9},
+      "cart": {"mean": 0.0534, "n": 3},
+      "note": "Matches producer. Detail > cart > listing (1.78× separation). Task-type explains 14.4% of variance."
+    },
+    "M3_R_by_definition": {
+      "DEF-FULL-MAP": {"mean": 0.0729, "n": 7},
+      "ISOLATED-A-LINK": {"mean": 0.0712, "n": 7},
+      "DEF-FORM-ONLY": {"mean": 0.0072, "n": 7},
+      "note": "Matches producer. Definition is primary driver (10× gap)."
+    },
+    "M4_Spearman_R_canonical": {
+      "rho": -0.2325,
+      "p": 0.3106,
+      "note": "PRODUCER ERROR: reported rho=-0.6623 (definition-major order). Correct task-major order gives rho=-0.23, non-significant, below 0.30 threshold."
+    },
+    "M5_Spearman_R_weighted": {
+      "rho": -0.2107,
+      "p": 0.3592,
+      "note": "PRODUCER ERROR: reported rho=-0.7068 (definition-major order). Correct task-major order gives rho=-0.21, non-significant, below 0.30 threshold."
+    },
+    "M6_eta_squared_R_page_type": {
+      "value": 0.1437,
+      "note": "Matches producer. Below 0.20 threshold."
+    },
+    "M7_eta_squared_weighted_page_type": {
+      "value": 0.000081,
+      "note": "Matches producer. Weighted density alone has no task-type structure."
+    },
+    "M8_threshold_analysis": {
+      "best_threshold": 0.0514,
+      "best_p_value": 0.000108,
+      "method": "Kruskal-Wallis on weighted density",
+      "fisher_exact_listing_vs_nonlisting_p": 1.0,
+      "note": "Optimal KW threshold T=0.0514 (in definition gap 0.009–0.051). Producer used T=0.0297 (also in gap). Both separate definitions, not task types."
+    },
+    "M9_ratio_bimodality": {
+      "dip_p_approx": 0.95,
+      "note": "Matches producer. Distribution is unimodal with a large gap (0.009 to 0.051) between DEF-FORM-ONLY and other definitions, not true bimodality."
+    },
+    "M10_ratio_range": {
+      "value": 17.02,
+      "note": "Matches producer."
+    },
+    "M11_task_type_separation": {
+      "value": 1.778,
+      "note": "Matches producer."
+    },
+    "C1_RATIO_VARIATION": {
+      "cv": 0.6971,
+      "threshold": 0.10,
+      "pass": true
+    },
+    "C2_RATIO_CORRELATION": {
+      "spearman_r_canonical": -0.2325,
+      "spearman_r_weighted": -0.2107,
+      "eta_squared_page_type": 0.1437,
+      "thresholds": {"spearman": 0.30, "eta_squared": 0.20},
+      "pass": false,
+      "note": "All three sub-conditions fail. Producer incorrectly claimed pass via definition-major ordering artifact."
+    },
+    "C3_THRESHOLD_EXISTENCE": {
+      "kruskal_wallis_p": 0.000108,
+      "fisher_exact_p": 1.0,
+      "threshold": 0.10,
+      "pass": true,
+      "note": "Passes only via KW on weighted density (definition-driven). Fisher exact on page-type composition fails (p=1.0)."
+    },
+    "C4_RATIO_ADDS_INFO": {
+      "spearman_r_weighted": -0.2107,
+      "eta_squared_R_page_type": 0.1437,
+      "eta_squared_W_page_type": 0.000081,
+      "pass": true,
+      "note": "Passes both sub-conditions: |rho|=0.21<0.95 and eta^2(R)=0.144 > eta^2(W)=0.00008."
+    },
+    "OVERALL_VERDICT": "FALSIFIED-IN-SETTING (C1 true, C2 false)"
+  },
+  "claim_ceiling": "The density ratio R = canonical_density / weighted_density varies 17× across 21 task-definition pairs (CV=0.70) and adds task-type information beyond weighted density alone (eta^2=0.144 vs 0.00008). However, the variation is predominantly driven by definition choice (10×), not task-type (1.78×). The ratio does not significantly correlate with canonical or weighted density (|Spearman|≈0.21–0.23, p>0.30), and task-type structure is not statistically significant (permutation p=0.23). The density ratio cannot serve as a principled MIXED outcome decision rule for recipe sensitivity in this setting. Maximum justified claim: 'The density ratio is a definition-sensitive continuous metric that correlates with the canonical/weighted density gap, but its task-type signal is weak and not statistically distinguishable from noise in this N=21 sample.'",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35375593989/request.json",
+    "research/experiments/EXP-INTEL-35375593989/spec.json",
+    "research/experiments/EXP-INTEL-35375593989/prereg.md",
+    "research/experiments/EXP-INTEL-35375593989/freeze.json",
+    "research/experiments/EXP-INTEL-35375593989/result.json",
+    "research/experiments/EXP-INTEL-35375593989/report.md",
+    "research/experiments/EXP-INTEL-35375593989/provenance.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)"
+  ],
+  "unresolved": [
+    {
+      "id": "U-1",
+      "question": "Would the task-type signal in the ratio (eta^2=0.144) become significant with full DOM enumeration (21–82 elements per task vs cap 20) and/or more tasks/sites?",
+      "blocked_by": "BLOCKED by runtime lane removing locatableSample cap and cross-site data availability"
+    },
+    {
+      "id": "U-2",
+      "question": "Is the ratio variation driven by definition choice (DEF-FORM-ONLY vs others) or by genuine task-type sensitivity? The current design conflates these; a controlled experiment varying definitions within task types while holding recipe constant is needed.",
+      "blocked_by": "Requires additional analysis or controlled experiment"
+    },
+    {
+      "id": "U-3",
+      "question": "Would the ratio classification survive cross-site generalization? All data is from one Magento site; the ratio's dependence on element composition (area distribution, form density) may vary across sites.",
+      "blocked_by": "BLOCKED by cross-site data availability"
+    },
+    {
+      "id": "U-4",
+      "question": "Should the MIXED decision rule use ratio-based classification (threshold T≈0.03–0.05) or restrict to recipe-insensitive pairs? The ratio approach adds complexity and is definition-dependent; restricting to insensitive pairs may be simpler but loses coverage.",
+      "blocked_by": "Requires product lane decision on MIXED handling strategy"
+    },
+    {
+      "id": "U-5",
+      "question": "The negative Spearman(R, weighted) correlation is partially mathematical (R = canonical/weighted). What is the residual correlation after controlling for the mathematical dependence? This would indicate whether the ratio captures genuine structural information beyond the denominator.",
+      "blocked_by": "Requires partial correlation analysis not in frozen spec"
+    }
+  ]
+}

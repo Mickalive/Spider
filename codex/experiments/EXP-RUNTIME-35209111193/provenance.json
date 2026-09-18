@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35209111193",
+  "lane": "runtime",
+  "github_run_id": "35209111193",
+  "github_run_attempt": 1,
+  "created_at": "2026-09-17T10:54:03.634940+00:00",
+  "completed_at": "2026-09-17T10:54:03.634956+00:00",
+  "base_sha": "96b62e4739edba0ace1f318c84fd627e070f693d",
+  "pre_execute_sha": "bccc07091ba0617507614d64a7b98ebd4547dc3a",
+  "post_execute_sha": null,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "os": "Ubuntu 22.04.5 LTS",
+    "cpu": "x86_64",
+    "memory_gb": 7.7,
+    "dependencies": {
+      "brotli": "1.2.0",
+      "PyJWT": "2.14.0",
+      "requests": "2.34.2",
+      "numpy": "2.5.3",
+      "certifi": "2026.7.22"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/request.json",
+      "sha256": "effc8d7d41ff83a248414a0ccb2f9e69906d5ea85b25dd3330cbbfa1d7255103"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/spec.json",
+      "sha256": "1976cf3a9162e3b3b2a62d88de10a61a798de367313979cd20babe77bb1fabd7"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/prereg.md",
+      "sha256": "ff811a7412e71950059fca2c94a1b769a412cb19d7cb0b0d9bb3445740493013"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/freeze.json",
+      "sha256": "7996996cb5c5660c78ca7ba0f59709f9b28a7223003fb33b7fa62be3381f2f97"
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35154720995",
+    "path": "research/experiments/EXP-RUNTIME-35154720995",
+    "handoff_sha256": "79c5e640c4745b24f4f11409957bccec69a3cb453f7410226f1545b5beb15bd1"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script with server compression fix (brotli quality 4-8 cycling, gzip, Content-Encoding)",
+      "sha256": "a86e95d5e1590c62acc87add0c20afaf92ed6b45fdf8ebf5502011fcbdf3c3e7"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/result.json",
+      "role": "derived",
+      "description": "Structured experiment results with metrics, controls, and observations",
+      "sha256": "abc802c90b3da38b417c833a43a4d174e86ab9f30a18eddbd125ebf766bb7e26"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/raw_observations.json",
+      "role": "raw",
+      "description": "All HTTP observations per baseline per endpoint per state per content type per size (br/gzip)",
+      "sha256": "eb0ab3c02f69ecc62f856c5d8184d171d4a3ddf0855fb75b3d381676f0db1100"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/report.md",
+      "role": "derived",
+      "description": "Human-readable experiment report with interpretation and analysis",
+      "sha256": "e140de9a49de2a85c336afcc5ba842ff90a0e06463b34825a8e3154ad2bb9c83"
+    },
+    "provenance.json": {
+      "path": "research/experiments/EXP-RUNTIME-35209111193/provenance.json",
+      "role": "metadata",
+      "description": "Reproducibility metadata and provenance chain",
+      "sha256": null
+    }
+  },
+  "execution_parameters": {
+    "seed": 44,
+    "reps_per_state": 20,
+    "content_types": [
+      "JSON",
+      "HTML",
+      "XML"
+    ],
+    "payload_sizes": [
+      "1KB",
+      "10KB",
+      "100KB"
+    ],
+    "baselines": [
+      "DECOMPRESSED-VARYING-BROTLI",
+      "DECOMPRESSED-VARYING-GZIP",
+      "COMPRESSED-VARYING-BROTLI",
+      "COMPRESSED-VARYING-GZIP"
+    ],
+    "brotli_quality_range": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "auth_states": [
+      "no_auth",
+      "valid_token",
+      "expired_token",
+      "invalid_token"
+    ],
+    "endpoints": [
+      "/userinfo",
+      "/introspect"
+    ],
+    "cdn_noise": false,
+    "total_requests": 5760,
+    "base_port": 5400
+  },
+  "reproduction_instructions": {
+    "prerequisites": [
+      "Python 3.12+",
+      "brotli>=1.2.0",
+      "PyJWT>=2.14.0",
+      "requests>=2.34.0",
+      "numpy>=2.5.0"
+    ],
+    "commands": [
+      "cd research/experiments/EXP-RUNTIME-35209111193",
+      "pip install brotli PyJWT requests numpy",
+      "python3 run_experiment.py"
+    ],
+    "expected_duration_seconds": 400,
+    "expected_artifacts": [
+      "result.json",
+      "raw_observations.json"
+    ],
+    "known_issues": [
+      "Mock server uses class-level request_counter for brotli quality cycling \u2014 thread-unsafe under parallel but safe for sequential BaseHTTPServer",
+      "Port allocation sequential BASE_PORT+index may conflict if multiple experiments run concurrently",
+      "JWT key length warning (19 bytes) expected"
+    ]
+  },
+  "metadata": {
+    "frozen_at": "2026-09-17T10:13:08.252047+00:00",
+    "executed_at": "2026-09-17T10:54:03.634967+00:00",
+    "completed_at": "2026-09-17T10:54:03.634970+00:00",
+    "execution_duration_seconds": 380,
+    "model": "muse-spark-1.2-contributor-free",
+    "model_id": "opencode/muse-spark-1.2-contributor-free"
+  },
+  "evidence_chain": {
+    "request_to_design": "request.json -> spec.json + prereg.md",
+    "design_to_freeze": "spec.json + prereg.md -> freeze.json",
+    "freeze_to_execute": "freeze.json -> run_experiment.py (with compression fix) -> result.json + raw_observations.json",
+    "execute_to_report": "result.json + raw_observations.json -> report.md + provenance.json"
+  }
+}

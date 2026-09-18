@@ -1,0 +1,48 @@
+{
+  "experiment_id": "EXP-GRAPH-35375596525",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) persist when the mock API introduces HTTP-level caching semantics (Cache-Control, ETag, If-None-Match, 304 Not Modified responses) — or does HTTP caching create coupling between behavioral (auth/session) and structural (schema shape) signals by making response freshness jointly affect both channels?",
+  "hypothesis": "The parent EXP-GRAPH-35353011131 established near-zero pooled correlation (|r|=0.0463, CI upper 0.135 < delta=0.15) on a stochastic Flask server with SQLite DB, in-memory cache TTL, timing jitter, and mixed JWT algorithms. This experiment adds HTTP-level caching semantics — the single most pervasive production-API feature absent from the parent. The hypothesis is that |r| remains < 0.15 because: (1) behavioral signals (token validation, session state, auth boundary) are computed from auth middleware BEFORE cache lookup; (2) structural signals (schema shape from /schema endpoint) are computed from endpoint responses that may be cached or fresh but whose SCHEMA CONTENT is determined by API contract, not cache state; (3) HTTP caching affects response DELIVERY (304 vs 200, timing) but not the causal content of either signal channel. If |r| rises above 0.15 under HTTP caching, cache state is a hidden common cause affecting both channels and the parallel-channel architecture is not justified for production APIs with caching.",
+  "falsifier": "The hypothesis is falsified if ANY of: (1) C1_drift_tp fails (mean TP < 0.85 OR any Wilson lower CI < 0.75); (2) C2_variance fails (< 4/4 co-occurring conditions with std > 0 for both signals); (3) C3_equivalence fails: 95% CI upper bound on |r| >= 0.15 (i.e., TOST at delta=0.15 does NOT pass AND CI upper bound >= 0.15); (4) C4_null_control fails (FP > 0.0 on noise-only samples). If C1-C2-C4 PASS and C3 fails (CI upper bound >= 0.15), behavioral and structural signals are non-orthogonal under HTTP caching and the product must pivot to fused classifiers. If C3 passes at delta=0.15, orthogonality is confirmed under HTTP caching conditions and parallel channels remain justified.",
+  "baselines": [
+    {
+      "id": "B-PARENT-STOCHASTIC-N480",
+      "description": "Parent EXP-GRAPH-35353011131: n=480, |r|=0.0463, CI upper 0.135, TOST pass at delta=0.15, on stochastic Flask+SQLite+cache_TTL+jitter+mixed_JWT WITHOUT HTTP cache headers. This experiment adds HTTP caching semantics to the same stochastic infrastructure.",
+      "expected": "Parent result at delta=0.15: CI upper 0.135 < 0.15 (PASS). This experiment tests whether adding HTTP caching changes the bound."
+    },
+    {
+      "id": "B-NO-CACHE-HEADERS",
+      "description": "Same server with Cache-Control: no-store on all responses (HTTP caching disabled). This serves as a within-experiment baseline to isolate the HTTP caching effect from the parent's in-memory TTL cache.",
+      "expected": "Expected CI upper < 0.15, consistent with parent result."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-TP-VARIANCE-CACHE",
+    "description": "Verify that the server with HTTP caching still produces detectable drift: mean TP >= 0.85 and all Wilson lower CI > 0.75 across 4 co-occurring conditions. This control verifies that HTTP caching does not break the measurement pipeline's ability to detect behavioral drift.",
+    "expected": "Mean TP >= 0.85, all Wilson lower CI > 0.75"
+  },
+  "null_control": {
+    "id": "NC-FP-CACHE",
+    "description": "Verify zero false positives on noise-only conditions: FP = 0.0 across all noise-only samples. Noise patterns modify structural signals only; no drift is applied. Behavioral composite should remain 0.0.",
+    "expected": "FP = 0.0"
+  },
+  "measurement_validity": [
+    "Flask mock server with SQLite DB-backed session/permission state, in-memory cache with TTL-based expiry, response timing jitter from real I/O, and mixed JWT algorithms (HS256 for read/write, RS256 for admin)",
+    "NEW: HTTP-level caching semantics — Cache-Control headers, ETag generation from response body hash, If-None-Match conditional requests returning 304 Not Modified",
+    "4 co-occurring conditions: 2 drift patterns (permission_boundary, session_invalidation) x 2 HTTP caching modes (enabled: Cache-Control+ETag, disabled: Cache-Control: no-store)",
+    "Same graded session_status_check mapping: 401->1.0, 403->0.5, 500->0.75 (for invalid sessions)",
+    "Same behavioral composite formula: token_val_rate*2 + session_change*3 + auth_boundary*1 + session_status_check*2",
+    "Same structural computation: Jaccard similarity + schema diff magnitude on unauthenticated /schema endpoint",
+    "Same TOST/CI decision rule: 95% CI upper bound on |r| via Fisher z-transform, tested at delta=0.15",
+    "N_SAMPLES=60 per condition, SEED=42, 240 paired samples total",
+    "All behavioral signals derived from real HTTP request/response cycles (not analytical computation)",
+    "HTTP caching elements: (1) Cache-Control: max-age and no-store directives, (2) ETag generation from response body SHA-256, (3) If-None-Match conditional GET returning 304, (4) Vary header for content negotiation",
+    "Controlled difference from parent: parent had in-memory TTL cache but NO HTTP cache headers; this experiment adds Cache-Control, ETag, If-None-Match, 304 responses"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP >= 0.85 AND all Wilson lower CI > 0.75; (2) C2_variance: >= 4/4 co-occurring conditions have std > 0 for both behavioral and structural signals; (3) C3_equivalence: 95% CI upper bound on |r| < 0.15 (TOST-equivalent); (4) C4_null_control: FP = 0.0 on noise-only samples. FAIL if any fails. MIXED if C1-C2-C4 PASS and C3 fails only due to underpowering (CI upper 0.10-0.15 range, |r| < 0.15 but CI upper >= 0.15). If CI upper >= 0.20, behavioral and structural signals are non-orthogonal under HTTP caching and product pivots to fused classifiers.",
+  "product_consequence_positive": "If CI upper bound < 0.15 under HTTP caching conditions, C-FRESHNESS orthogonality extends beyond DB/cache/jitter to include HTTP-level caching semantics. Product pipeline integrates behavioral + structural as independent parallel channels with quantified shared-variance ceiling < 2.25% under realistic API caching conditions. The parallel-channel architecture is justified for production deployment with caching.",
+  "product_consequence_negative": "If CI upper bound >= 0.20, behavioral and structural signals are not practically independent under HTTP caching. Product architecture must pivot to fused classifiers. If CI upper bound is 0.15-0.20, the decision depends on product risk tolerance: delta=0.15 acceptable -> parallel channels with monitoring; delta=0.10 required -> fused classifiers or larger n.",
+  "estimated_cost": "Low: extend parent mock_server.py with HTTP cache header logic (estimated 100-150 lines additional Python), 4 conditions x 60 samples = 240 paired HTTP cycles on localhost, ~10-15 minutes execution time. No external API calls or network costs.",
+  "expected_information_gain": "High: directly tests whether the delta=0.15 orthogonality bound from the parent's stochastic mock survives the addition of HTTP caching — the single most pervasive production-API feature absent from prior experiments. A positive result extends the parallel-channel justification; a negative result forces architectural pivot. The answer changes a product architecture decision regardless of outcome."
+}

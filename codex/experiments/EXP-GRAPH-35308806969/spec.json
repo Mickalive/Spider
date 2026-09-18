@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-GRAPH-35308806969",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does doubling the paired-sample size from 240 to 480 (60 samples per condition, 8 co-occurring conditions) confirm |r|<0.3 with permutation p<0.05 for behavioral-structural signal orthogonality under graded session_status_check variance — and does a formal power analysis reveal whether n=480 is actually sufficient for the frozen permutation test at |r|~0.05?",
+  "hypothesis": "The parent EXP-GRAPH-35262262505 achieved near-zero pooled correlation (|r|=0.053, r²=0.003) on n=240 paired samples but failed the frozen C3_orthogonality gate because permutation p=0.414 > 0.05 (underpowered). The parent handoff recommends n>=480 to achieve p<0.05. However, a Fisher z-transform power analysis indicates that for true |r|~0.05 at alpha=0.05, achieving p<0.05 requires n≈1,568, not n=480. At n=480, the expected permutation p for |r|=0.05 is approximately 0.26, which would still fail the frozen gate. This experiment tests the parent recommendation by running n=480 AND includes a formal sensitivity analysis: (a) minimum detectable |r| at n=480 for p<0.05, (b) minimum n for |r|=0.05 to achieve p<0.05. If n=480 fails p<0.05, the result is a valid scientific negative with power analysis explaining why, and the frozen decision rule's permutation p<0.05 criterion should be revised for very-low-magnitude correlations.",
+  "falsifier": "The hypothesis is falsified if: (1) C1_drift_tp fails: mean TP rate < 0.85 OR any Wilson lower CI < 0.75; OR (2) C2_variance fails: fewer than 6 of 8 co-occurring conditions have within-condition std > 0 for BOTH behavioral and structural signals; OR (3) C3_orthogonality fails: Pearson |r| >= 0.3 on pooled paired scores OR (permutation p >= 0.05 AND power analysis confirms n=480 was sufficient for true |r|>=0.05); OR (4) C4_null_control fails: FP > 0.0 on noise-only conditions. If C1-C2 PASS and C3 fails on permutation p alone (|r|<0.3 but p>=0.05), AND the power analysis confirms n=480 is insufficient for |r|~0.05, the result is a valid scientific negative with explicit power bound — not evidence of non-orthogonality.",
+  "baselines": [
+    {
+      "id": "B-PARENT-N240",
+      "description": "Parent EXP-GRAPH-35262262505 at n=240: |r|=0.053, p=0.414, C1 PASS, C2 PASS, C3 FAIL (underpowered), C4 PASS.",
+      "expected": "n=480 should reduce p but power analysis predicts p≈0.26 for |r|~0.05, still >0.05"
+    },
+    {
+      "id": "B-PB-ORTHOGONALITY-REPLICATED",
+      "description": "Permission_boundary pooled r≈0.051 replicated across EXP-GRAPH-35191029030, EXP-GRAPH-35237975537, and EXP-GRAPH-35262262505. This experiment extends to n=480.",
+      "expected": "PB r should remain near 0.05 if orthogonality is stable"
+    },
+    {
+      "id": "B-FISHER-Z-POWER-ANALYSIS",
+      "description": "Formal power analysis using Fisher z-transform: for true |r|=0.05, alpha=0.05 two-sided, the minimum n for p<0.05 is approximately 1,568. At n=480, expected p≈0.26.",
+      "expected": "Power analysis confirms n=480 is underpowered for |r|=0.05"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-TP-WITH-VARIANCE",
+    "description": "session_invalidation conditions must produce behavioral composite with std>0 (from graded session_status_check) AND session_change=1 for ALL samples (TP=1.0). Same validated mechanism as parent.",
+    "expected": "SI behavioral_std > 0 across 60 samples; SI TP = 1.0 (all 60/60 detected)"
+  },
+  "null_control": {
+    "id": "NC-SCHEMA-NOISE-ONLY",
+    "description": "Schema noise applied WITHOUT drift should produce FP=0.0 on behavioral signals. Replicated across EXP-GRAPH-35237975537 and EXP-GRAPH-35262262505.",
+    "expected": "FP = 0.0 across all noise-only conditions"
+  },
+  "measurement_validity": [
+    "All behavioral signals derived from real HTTP request/response cycles on Flask 3.x + PyJWT HS256 localhost (not analytical computation)",
+    "session_invalidation drift: ALL 60 samples per condition have session invalidation applied (session_change=1 for every sample). Session_status_check varies by randomly choosing /session/status HTTP status code from {401, 403, 500} with equal probability.",
+    "Session_status_check mapping: 401 -> 1.0, 403 -> 0.5, 500 -> 0.75. 200 -> 0.0 reserved for valid sessions (never used in SI conditions).",
+    "Structural signals computed from unauthenticated /schema endpoint (inherited from parent)",
+    "Drift patterns: permission_boundary (write=False, admin=False) and session_invalidation (clear session store + vary /session/status code) — identical to parent",
+    "60 independent request sequences per condition with per-seed RNG (SEED=42) for reproducibility — doubled from parent's 30",
+    "Pearson r computed on paired per-sample (behavioral_i, structural_i) scores from all 8 co-occurring conditions",
+    "Permutation test: 10,000 label-shuffled permutations on pooled paired scores for C3_orthogonality p-value",
+    "Fisher z-transform power analysis computed and reported: (a) minimum detectable |r| at n=480 for p<0.05, (b) minimum n for |r|=0.05 to achieve p<0.05"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP rate >= 0.85 AND all Wilson lower CI > 0.75; (2) C2_variance: >= 6/8 co-occurring conditions have std > 0 for BOTH behavioral and structural signals; (3) C3_orthogonality: Pearson |r| < 0.3 AND permutation p < 0.05; (4) C4_null_control: FP = 0.0. FAIL if any fails. MEASUREMENT_INVALID if <6/8 conditions have variance or <480 paired samples. MIXED outcome: if C1-C2 PASS and C3 fails ONLY on permutation p (|r|<0.3 but p>=0.05) AND power analysis confirms n=480 is underpowered for observed |r|, outcome is MIXED — frozen gate fails but near-zero correlation with explicit power bound is a valid scientific finding requiring decision-rule revision.",
+  "product_consequence_positive": "If C1-C4 all PASS, TP/variance trade-off is broken AND orthogonality formally confirmed. C-FRESHNESS gains validated second detection channel. Product pipeline integrates behavioral + structural as independent parallel channels.",
+  "product_consequence_negative": "If C1 PASS but C3 FAIL with power-confirmed underpowering, product uses composite multi-signal classifiers as precautionary measure. If C1 FAIL, session_status_check mechanism exhausted. If C3 FAIL with power-sufficient n, behavioral and structural are confirmed non-orthogonal — architecture pivots to fused classifiers.",
+  "estimated_cost": "Low-Medium: Flask server reuse. 8 co-occurring conditions x 60 samples = 480 paired measurements, plus 4 noise-only x 60 = 240 null control samples. Runtime ~20 minutes.",
+  "expected_information_gain": "Very High: resolves the single remaining frozen gate (C3 permutation p) for C-FRESHNESS orthogonality confirmation. If p<0.05 at n=480, C-FRESHNESS advances to PRODUCT_ARCHITECTURE_IMPACT. If p>=0.05 at n=480 (predicted), the power analysis provides the minimum n needed and justifies decision-rule revision for very-low-magnitude correlations. Either outcome changes a product decision."
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35154720995",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does decompression-normalization (SHA256 on decompressed body via brotli.decompress/gzip.decompress after Content-Encoding inspection) preserve body-only discrimination at >=0.3 for HTML and XML at 1KB/10KB/100KB when the mock server actually applies brotli (quality 4-8) and gzip compression — fixing the server to compress bodies and set Content-Encoding headers so the decompression path is exercised?",
+  "why_next": "The experiment is MEASUREMENT_INVALID due to infrastructure failure: the mock server never applied brotli/gzip compression (Content-Encoding='none' on all 2880 observations). The frozen question about format-invariance of decompression-normalization on non-JSON content types remains unanswered. The fix is minimal: modify MockOAuthHandler to actually compress response bodies and set Content-Encoding headers. A re-run with working compression would directly answer the original question with minimal new infrastructure investment.",
+  "carry_forward": {
+    "established": [
+      "Parent EXP-RUNTIME-35137033384 claim ceiling stands: decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at structural ceiling 0.5 on /userinfo and 0.8333 on /introspect under localhost CDN-noise proxy for 1KB JSON. No new evidence accumulated from this experiment.",
+      "Mock OAuth2 server infrastructure (4 auth states with 3-way error collapse, /userinfo and /introspect endpoints) is functional and reusable for a compression-fixed re-run.",
+      "Content type generators (JSON, HTML, XML with 1KB/10KB/100KB padding) produce structurally realistic synthetic payloads and are reusable.",
+      "B-RANDOM null control correctly produces 0.0 discrimination, confirming no spurious structure."
+    ],
+    "rejected": [
+      "Decompression-normalization format-invariance on non-JSON content types is NOT established by this experiment (measurement invalid, compression never applied).",
+      "Brotli quality diversity does NOT increase from 1KB to 100KB — but this observation is uninformative because no compression was applied (V3-BROTLI-QUALITY-SCALING-MEANINGLESS). The question remains open.",
+      "Algorithm equivalence |brotli-gzip| < 0.1 is NOT validated — both baselines were identical uncompressed streams (V2-ALGORITHM-EQUIVALENCE-VACUOUS).",
+      "Decompression latency at 10KB/100KB is NOT measured — reported ~0.001ms is identity-path timing, not brotli/gzip decompress (V5-LATENCY-MISREPORTED)."
+    ],
+    "unknown": [
+      "Does decompression-normalization preserve body-only discrimination at >=0.3 for HTML and XML at 1KB/10KB/100KB under real brotli (quality 4-8) and gzip compression?",
+      "Does brotli quality diversity (unique compressed hashes per state) increase from 1KB to 100KB for HTML/XML with natural content when real compression is applied?",
+      "Does algorithm-equivalence |brotli_decompressed - gzip_decompressed| < 0.1 hold for non-JSON content types at 100KB under real compression?",
+      "What is actual decompression latency per response at 1KB/10KB/100KB for HTML/XML when brotli/gzip decompress is invoked (vs identity ~0.0006ms)?",
+      "Does decompression-normalization survive real CDN infrastructure (Cloudflare/Fastly/Akamai) where per-edge brotli quality, caching, chunked transfer-encoding, and Accept-Encoding negotiation introduce non-determinism?"
+    ],
+    "do_not_assume": [
+      "Do NOT assume decompression-normalization was tested — the mechanism was never exercised (dead code, V1).",
+      "Do NOT use reported discrimination 0.5 as evidence for decompression-normalization — it reflects identity-path body hashing.",
+      "Do NOT use reported latency <0.1ms as evidence for production cost — it reflects identity-path timing.",
+      "Do NOT assume format-invariance is established — the question remains open.",
+      "Do NOT assume brotli quality convergence at 100KB — the observation is artifact of no compression.",
+      "Do NOT assume this experiment advances or regresses the parent claim ceiling — it provides zero new evidence about decompression-normalization."
+    ]
+  },
+  "dependencies": [
+    "Parent EXP-RUNTIME-35137033384 claim ceiling (synthetic proxy + CDN simulator, 1KB JSON) stands unchanged",
+    "MockOAuthHandler must be modified to actually apply brotli/gzip compression (fix V1-NO-COMPRESSION-IDENTITY-ONLY)",
+    "Re-run requires same frozen spec, prereg, and decision_rule with compression fix applied",
+    "No new infrastructure investment needed — only server handler fix in run_experiment.py"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35154720995/audit.json — V1-NO-COMPRESSION-IDENTITY-ONLY (critical), claim_ceiling bounded to identity encoding, 4 required_fixes",
+    "research/experiments/EXP-RUNTIME-35154720995/result.json — 36 metric cells all compression_verification ['none'], decompressed == compressed 2880/2880",
+    "research/experiments/EXP-RUNTIME-35154720995/raw_observations.json — 2880 entries content_encoding='none'",
+    "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py:260-301 — server handler never compresses",
+    "research/experiments/EXP-RUNTIME-35154720995/run_experiment.py:329-353 — compress utilities and decompress_body dead code",
+    "research/experiments/EXP-RUNTIME-35137033384 — parent claim ceiling unchanged"
+  ],
+  "recommended_action": "Fix MockOAuthHandler in run_experiment.py to actually compress response bodies with brotli (quality 4-8) and gzip, set Content-Encoding headers, and re-run with the same frozen spec/prereg/decision_rule. The fix is minimal: (1) in do_GET/do_POST, inspect Accept-Encoding or force per-baseline encoding, (2) compress body via brotli.compress(data, quality=q) for q in [4,5,6,7,8] and gzip.compress, (3) set Content-Encoding header to 'br'/'gzip', (4) set Content-Length to compressed length. The rest of the infrastructure (content types, sizes, auth states, controls) is sound and reusable."
+}

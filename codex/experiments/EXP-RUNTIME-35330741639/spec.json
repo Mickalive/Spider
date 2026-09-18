@@ -1,0 +1,49 @@
+{
+  "experiment_id": "EXP-RUNTIME-35330741639",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression survive CDN-like proxy behaviors — specifically Accept-Encoding negotiation, response caching, and Transfer-Encoding: chunked — that real CDN infrastructure (Cloudflare/Fastly/Akamai) applies between origin and client?",
+  "hypothesis": "The parent (EXP-RUNTIME-35290615081) validated iterative decompression on localhost with a direct mock server, but real CDN infrastructure introduces intermediate behaviors that could break the decompression pipeline: (a) CDN caches a compressed response and serves it without re-compression, potentially stripping or modifying Content-Encoding headers; (b) CDN re-compresses the origin response with its own algorithm/quality, adding a new compression layer; (c) CDN applies Transfer-Encoding: chunked which alters wire format but should not affect body bytes after reassembly. These behaviors are orthogonal to the multi-layer encoding tested by the parent — the parent tested whether decompression handles brotli(brotli(brotli(body))), while this experiment tests whether decompression handles the same body when a proxy layer has cached, re-compressed, or chunked it. If iterative decompression is truly format-invariant, it should survive all three proxy behaviors because: (1) caching does not change the compressed bytes; (2) re-compression adds at most one additional layer which max_depth=5 handles; (3) chunked encoding is a transport-layer concern resolved before body processing.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any (auth_state, proxy_behavior) combination, OR decompressed hash for any (auth_state, proxy_behavior) differs from the direct-server hash (determinism failure across proxy paths), OR iterative decompression crashes/hangs on any cached or re-compressed response, OR chunked Transfer-Encoding causes body truncation or corruption, OR regression: any (state, scenario) combination that passed in the parent shows discrimination < 0.3 or determinism failure through the proxy.",
+  "baselines": [
+    {
+      "id": "B-PARENT-DECOMPRESSED-0.5",
+      "description": "Parent established decompressed body-only discrimination 0.5 for ALL (state, scenario) combinations on localhost direct. Regression reference: proxy must not degrade below this.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-PARENT-COMPRESSED-0.2781",
+      "description": "Parent compressed body-only discrimination 0.2781. Re-compressed responses through proxy may differ; this is a reference, not a regression threshold.",
+      "expected_value": 0.2781
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-DIRECT-PASSTHROUGH",
+      "description": "Client->proxy->origin with no caching and no re-compression (passthrough mode). Proxy forwards response bytes unmodified. Expected discrimination = 0.5 (identical to parent direct). This controls for mere proxy presence.",
+      "expected_value": 0.5
+    }
+  ],
+  "positive_control": "C_PROXY_PASSTHROUGH_EQUIVALENCE: When the proxy is in passthrough mode (no caching, no re-compression), decompressed body-only discrimination must equal 0.5 for all (auth_state, content_type x size) combinations — identical to parent direct. This confirms the proxy introduces no artifacts in the absence of CDN behaviors.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Mock origin server: localhost, same as parent (Flask/stdlib, 4 auth states, JSON/HTML/XML x 1KB/10KB/100KB). Brotli quality 6 deterministic.",
+    "Python reverse proxy on separate localhost port: accepts client requests, forwards to origin, applies configured proxy behavior (passthrough / caching / re-compression).",
+    "Three proxy behaviors tested: (a) PASSTHROUGH — forward request/response unmodified; (b) CACHED — cache compressed response by (URL, Accept-Encoding) for 60s, serve from cache on repeat requests; (c) RECOMPRESS — fetch origin response, decompress, then re-compress with proxy's own brotli quality 8 (adding one layer).",
+    "Transfer-Encoding: chunked applied by proxy in all three modes (proxy always uses chunked TE to forward responses). This tests chunked survival as a constant background condition.",
+    "Accept-Encoding header from client: 'br, gzip, identity' in all conditions. Proxy negotiates with origin on client's behalf.",
+    "Content types: JSON, HTML, XML. Sizes: 1KB, 10KB, 100KB. Auth states: no_auth, valid_token, expired_token, invalid_token.",
+    "N=5 reps per (auth_state, content_type x size, proxy_behavior). 4 states x 9 conditions x 3 proxy_behaviors x 5 reps = 540 total requests.",
+    "Seed=44 for request ordering. Scenario assignment is deterministic round-robin across proxy behaviors within each condition.",
+    "Iterative decompression: decompress repeatedly (brotli->gzip->identity) until failure or max_depth=5. Same as parent.",
+    "Decompressed hash for each proxy-path response must match the direct-server hash from the parent for the same (auth_state, content_type, size). This is the determinism-across-paths test."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for ALL (auth_state, proxy_behavior) combinations across all content types x sizes, (2) decompressed hash for each (auth_state, content_type, size, proxy_behavior) matches the parent's direct-server hash for the same (auth_state, content_type, size) — determinism across proxy paths, (3) B-RANDOM = 0.0 for all conditions, (4) C_PROXY_PASSTHROUGH_EQUIVALENCE passes (passthrough discrimination = 0.5 for all cells), (5) no decompression crashes/hangs across all proxy behaviors, (6) regression: all 4 auth states maintain discrimination >= 0.3 under passthrough (matching parent). FALSIFIED-IN-SETTING if any (auth_state, proxy_behavior) has discrimination < 0.3, OR any decompressed hash through proxy differs from direct-server hash, OR decompression crashes/hangs on cached or re-compressed responses. MEASUREMENT_INVALID if proxy fails to start, origin server unreachable through proxy, or chunked encoding causes connection failures.",
+  "product_consequence_positive": "Decompression-normalization survives CDN-like proxy behaviors (caching, re-compression, chunked TE). Claim ceiling advances to include 'CDN proxy layer does not break iterative decompression'. Product team can deploy iterative decompression with confidence that standard CDN configurations (caching, re-compression, chunked transfer) do not break any auth state.",
+  "product_consequence_negative": "One or more CDN-like behaviors break decompression. Specific failure mode determines product response: (a) if caching breaks it — CDN cache must be configured to pass Content-Encoding unmodified; (b) if re-compression breaks it — CDN must not re-compress already-compressed responses (origin should set Cache-Control: no-transform); (c) if chunked TE breaks it — client must buffer full response before decompression. Each failure identifies a specific CDN configuration constraint.",
+  "estimated_cost": "< 10000 tokens, < 5 minutes execution. 4 states x 9 conditions x 3 proxy_behaviors x 5 reps = 540 requests through proxy. Marginal cost: one additional Python process (proxy) beyond the parent's mock server.",
+  "expected_information_gain": "HIGH. This is the most actionable local experiment before real CDN deployment. The parent identified CDN infrastructure as the sole blocker for C-MEAS-VALID product readiness. Real CDN testing requires external infrastructure (Cloudflare/Fastly/Akamai accounts), which is a separate dependency. This experiment resolves the locally-testable subset of CDN concerns (caching, re-compression, chunked TE) and identifies which CDN behaviors are safe vs. dangerous. A positive result narrows the real-CDN experiment to edge-specific concerns (Accept-Encoding quality variation, edge selection, cache invalidation). A negative result identifies specific CDN configuration constraints before deployment. Either outcome is more informative than repeating the parent or testing additional localhost-only scenarios."
+}

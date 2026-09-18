@@ -1,0 +1,20 @@
+{
+  "base_sha": "307f3c5ee706b5aeeee5fe1f42df0e02980a29ef",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T15:06:04.655034+00:00",
+  "experiment_id": "EXP-GRAPH-35237975537",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a session_invalidation behavioral measurement that includes /session/status probing produce within-condition variance (std>0) on all co-occurring conditions, enabling a valid pooled Pearson r test of behavioral-structural orthogonality on the fixed co-occurring drift+noise design?",
+  "lane": "graph",
+  "origin_github_run_id": "35237975537",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35191029030",
+    "path": "research/experiments/EXP-GRAPH-35191029030/handoff.json",
+    "sha256": "b86e49915b03105f3ad44bb3f700d3536eca78895038d8f6cb7c215f5e46363a"
+  },
+  "reason": "pulse",
+  "request_hash": "2c254ab655a6179674f7ce0448733c6f34baaa62807406f2a069cb54298d4a19",
+  "request_id": "64998b44de651527210dce0a",
+  "schema_version": 1
+}

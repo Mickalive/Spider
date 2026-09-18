@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35280364816",
+  "lane": "runtime",
+  "github_run_id": "35280364816",
+  "base_sha": "37472f9d42345b00957e9aa0eda29ede162468ce",
+  "frozen_spec_sha256": "8bc6bd96baf211989c3aae0bf8121cce728d3845b4c940b9b576db57efddeb33",
+  "frozen_prereg_sha256": "48273af9f87f632083368869a4f67dff198a047cc2ac53c8989e1335c57bdd06",
+  "frozen_request_sha256": "755bd45214d145b2246ce2ecd54059b99926d0d30aa0c54d6cea2c84ac17fa1b",
+  "frozen_at": "2026-09-17T22:08:37.892185+00:00",
+  "parent_experiment_id": "EXP-RUNTIME-35262264593",
+  "parent_handoff_sha256": "73b0e1ebae68724b41cb53d392eac48d2e3339121fc14a6e3c0e5a708b60747f",
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py"
+  ],
+  "dependencies": {
+    "brotli": "1.2.0",
+    "PyJWT": "2.14.0",
+    "requests": "2.34.2",
+    "numpy": "2.5.3",
+    "python": "3.12.14"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "os": "Linux 6.5.0-1025-azure x86_64"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35280364816/run_experiment.py",
+      "sha256": "5f9816ee65a4ebb78768215f2ac70b8c771fd263e98adb578b2be376637afd63",
+      "role": "code",
+      "description": "Experiment execution script with iterative decompression and 6 encoding scenarios"
+    },
+    "raw_observations.json": {
+      "path": "research/experiments/EXP-RUNTIME-35280364816/raw_observations.json",
+      "sha256": "518aa533b5c069561010003b4e57d6645b9ddd674dcbb9346e1f89c090c6129d",
+      "role": "raw",
+      "description": "All HTTP observations through CDN encoding proxy per endpoint per state per content type per size"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35280364816/result.json",
+      "sha256": "901bbd383bd3c58dd445973f67030766ce1d217ebca3c29ef112b2dfcbfb918d",
+      "role": "derived",
+      "description": "Experiment results with metrics, controls, observations, and decision"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35280364816/report.md",
+      "sha256": "55129a4b82d1e21c446f0cc74735aa6f8d32d0bfe963325c4142575b2c824723",
+      "role": "derived",
+      "description": "Human-readable report of experiment results and interpretation"
+    }
+  },
+  "execution": {
+    "total_requests": 720,
+    "conditions": 9,
+    "states_per_condition": 4,
+    "reps_per_state": 20,
+    "encoding_scenarios": 6,
+    "content_types": ["JSON", "HTML", "XML"],
+    "payload_sizes": ["1KB", "10KB", "100KB"],
+    "seed": 44,
+    "scenario_seed": 7963,
+    "max_decompression_depth": 5
+  },
+  "key_change_from_parent": "Replaced single-pass decompress_body() with iterative decompression that loops until failure or max_depth=5. Added triple_br encoding scenario (brotli(brotli(brotli(body)))). Parent had 5 scenarios, this has 6.",
+  "measurement_commands": [
+    "python3 run_experiment.py"
+  ],
+  "frozen_inputs": {
+    "spec.json": "research/experiments/EXP-RUNTIME-35280364816/spec.json",
+    "prereg.md": "research/experiments/EXP-RUNTIME-35280364816/prereg.md",
+    "request.json": "research/experiments/EXP-RUNTIME-35280364816/request.json",
+    "freeze.json": "research/experiments/EXP-RUNTIME-35280364816/freeze.json"
+  }
+}

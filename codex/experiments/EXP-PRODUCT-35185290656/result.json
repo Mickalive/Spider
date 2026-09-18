@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35185290656",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "c1_redesigned_rejects_protocol_only": true,
+    "c1_observed": true,
+    "c2_redesigned_accepts_query_param": true,
+    "c2_observed": false,
+    "c3_redesigned_accepts_path_slash": true,
+    "c3_observed": false,
+    "c4_old_fix3_overbroad": true,
+    "c4_observed": true,
+    "c5_kernel_tests_passed": true,
+    "c5_kernel_tests_run": 3,
+    "c6_http_binding_accuracy": 1.0,
+    "c6_http_total_correct": 3,
+    "c6_http_total_calls": 3,
+    "c6_mechanism_template": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+    },
+    "c6_mechanism_slots": ["url"],
+    "c7_mechanism_distilled": true,
+    "c7_template_correct": true,
+    "c7_resolves_executable": true,
+    "c7_binding_correct": true,
+    "c7_template": {
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/comments?postId=${url}"
+    },
+    "c7_slots": ["url"],
+    "c7_bound_url": "https://jsonplaceholder.typicode.com/comments?postId=5",
+    "url_corpus_all_correct": true,
+    "url_corpus_total": 12,
+    "all_conditions_pass": true
+  },
+  "controls": {
+    "P1_QUERY_PARAM_ACCEPTED": {
+      "type": "positive_control",
+      "id": "P1_QUERY_PARAM_ACCEPTED",
+      "stable_id": "P1_QUERY_PARAM_ACCEPTED",
+      "expected": "Redesigned Fix3 returns False for 'https://api.example.com?key='",
+      "observed": "returns False",
+      "passed": true,
+      "evidence_ref": "test_c2_redesigned_accepts_query_param()"
+    },
+    "N1_PROTOCOL_ONLY_REJECTED": {
+      "type": "null_control",
+      "id": "N1_PROTOCOL_ONLY_REJECTED",
+      "stable_id": "N1_PROTOCOL_ONLY_REJECTED",
+      "expected": "Redesigned Fix3 returns True for 'https://api.example.com'",
+      "observed": "returns True",
+      "passed": true,
+      "evidence_ref": "test_c1_redesigned_rejects_protocol_only()"
+    },
+    "B_OLD_FIX3_OVERBROAD": {
+      "type": "baseline",
+      "id": "B_OLD_FIX3_OVERBROAD",
+      "stable_id": "B_OLD_FIX3_OVERBROAD",
+      "expected": "Old Fix3 returns True for query-param prefix (demonstrates bug)",
+      "observed": "returns True",
+      "passed": true,
+      "evidence_ref": "test_c4_old_fix3_overbroad()"
+    },
+    "B_LITERAL_HTTP_REGRESSION": {
+      "type": "baseline",
+      "id": "B_LITERAL_HTTP_REGRESSION",
+      "stable_id": "B_LITERAL_HTTP_REGRESSION",
+      "expected": "Existing kernel regression tests pass (3/3)",
+      "observed": "tests_run=3, all_passed=True",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    },
+    "kernel_regression": {
+      "type": "regression",
+      "id": "kernel_regression",
+      "stable_id": "kernel_regression",
+      "expected": "All 3 existing kernel tests pass after Fix3 redesign",
+      "observed": "tests_run=3, failures=0, errors=0",
+      "passed": true,
+      "evidence_ref": "tests/test_kernel.py via unittest"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "991b02823012012db9dd59774d7d7c1556d4c1aa4196e09fce4cdf73b1f0b002",
+      "role": "code"
+    },
+    {
+      "path": "src/spider/models.py",
+      "sha256": "67ffda3ef94a61ac674fb658b8c8606602a88762635a6ee3c6fa482240bc6d4b",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35185290656/run_experiment.py",
+      "sha256": "51b0a6095c11e2e3bfeb070c6c43a52795554e4cbb8b849dbd0ab9de22cd6219",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35185290656/experiment_results.json",
+      "sha256": "5d8c4c71540a78ee5fc8c3ad623ff6c9734fc082c0555819aebdc86c52d87bdc",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Redesigned Fix3 (_is_protocol_only_prefix) correctly rejects bare authority prefix 'https://api.example.com' (returns True) — protocol-only detection preserved",
+    "Redesigned Fix3 correctly accepts query-parameterized prefix 'https://api.example.com?key=' (returns False) — the overbroad bug is fixed",
+    "Redesigned Fix3 correctly accepts path-slash prefix 'https://jsonplaceholder.typicode.com/' (returns False) — backward compatible with existing patterns",
+    "Old Fix3 (pre-redesign) incorrectly rejects query-parameterized prefix 'https://api.example.com?key=' (returns True) — confirms the bug being fixed",
+    "URL test corpus of 12 patterns across 4 categories (protocol-only, query-parameterized, path-slash, mixed/edge) all pass with redesigned Fix3",
+    "Kernel regression tests pass 3/3 after Fix3 redesign: test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention",
+    "distill_parameterized with redesigned Fix3 produces correct Mechanism for query-parameterized observations: slot ['url'], template 'comments?postId=${url}'",
+    "HTTP binding test on query-parameterized endpoint (comments?postId=${url} with unseen IDs 5-7) achieves 3/3 correct (accuracy 1.0)",
+    "Mechanism resolves EXECUTABLE with correct bound_action: 'https://jsonplaceholder.typicode.com/comments?postId=5' for params {'url': '5'}",
+    "Fix3 redesign is a single condition change in _is_protocol_only_prefix: from 'if \"/\" not in rest' to 'if \"?\" not in rest and \"/\" not in rest and \"#\" not in rest'",
+    "distill_parameterized restored from parent commit (a5794a2b) with all Fix1+Fix2+Fix3 helpers, plus slot_prefixes field added to Mechanism model",
+    "All 7 frozen decision-rule conditions C1-C7 pass; overall verdict SURVIVES_CURRENT_TEST"
+  ],
+  "validity_notes": [
+    "C5 kernel regression tests: test runner output shows 'Ran 3 tests in 0.002s OK' via direct unittest invocation; subprocess parsing in run_experiment.py shows tests_run=0 due to output format mismatch but actual tests pass",
+    "C6 HTTP binding tested on GET-only comments endpoint (jsonplaceholder.typicode.com); PUT/POST not tested per frozen spec scope",
+    "C7 discriminating test shows Fix3 independently necessary: query-parameterized prefix 'https://api.example.com?key=' is accepted by redesigned Fix3 but would be rejected by old Fix3 (C4 demonstrates the bug). Fix2 passes this prefix because it ends with '=' (a structural delimiter), so Fix3 provides the non-redundant defense against protocol-only prefixes while Fix2 handles boundary validation",
+    "Network access to jsonplaceholder.typicode.com was available during execution; all HTTP requests completed within 10s timeout",
+    "Token cost measurement not re-run in this experiment (carried from parent: 68 vs 96 tokens, 29.17% savings)",
+    "Single-slot parameterization only; multi-slot not tested in this experiment",
+    "No browser automation, no model calls, no LLM distillation tested"
+  ],
+  "unresolved": [
+    "Fix3 independent necessity for truly protocol-only prefixes where Fix2 also passes: the current test corpus shows Fix3 catches 'https://api.example.com' but Fix2 already rejects it via boundary check (prefix ends with 'm', not in /?=&). Fix3 provides defense-in-depth for this class but the discriminating test (C7) only demonstrates necessity on query-parameterized patterns where old Fix3 was overbroad",
+    "End-to-end amortized cost per successful real-browser task not measured (requires real-browser test harness)",
+    "PUT/POST method fidelity over real HTTP not tested",
+    "Generalization beyond jsonplaceholder GET endpoints not tested",
+    "C-PARAM-INHERIT claim ceiling expanded to include host?query parameterization but remains EXPERIMENTAL (not VALIDATED/PRODUCT_CORE)"
+  ]
+}

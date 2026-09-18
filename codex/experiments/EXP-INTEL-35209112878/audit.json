@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35209112878",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix non-deterministic role iteration in parent recipe null_draw: canonical_analysis.py get_all_raw_roles() returns set and iterates 'for role in raw_roles_in_data' without sorting; PYTHONHASHSEED randomization causes ~0.01-0.02 variation in null mean. Deterministically sort roles (sorted(raw_roles)) before sampling to make F3 reproducible. Without this, F3 threshold 0.001 is unachievable across environments.",
+    "Amend decision rule incoherence: NC1 requires new-recipe (weighted per-task) seed=42 mean to reproduce parent null mean 0.5275 within 0.001 (result.json C_NULL_MODEL_REGRESSION). These recipes are structurally different by design (per-iteration p=0.5 inclusion vs per-task weighted sampling without replacement) and produce means 0.2989 vs 0.5275 (delta 0.2286). SURVIVES requiring NC1 PASS is logically impossible. Spec amendment must decouple parent-reproduction (F3) from new-recipe regression or remove NC1 as SURVIVES gate.",
+    "Revise F3 provenance threshold or metric: frozen spec 0.001 threshold is narrower than cross-environment RNG variation and narrower than parent's own sampling noise (direct 499500-pair mean 0.5201 vs sampled 10000-pair mean 0.5275 differ by ~0.007). Producer recomputed 0.5394 differs from stored 0.5275 by 0.0119; independent recompute 0.5369 differs by 0.0094 and varies 0.0025 between runs due to hash. Adopt deterministic ordering and use same estimator (direct vs sampled) and relax to >=0.02 or report CI before using F3 as falsifier.",
+    "Resolve spec-code divergence for pairwise agreement: spec 6.7 and prereg 6.7/10 define pairwise agreement as fraction of definition-pairs (C(5,2)=10) with identical top-2 ordering, and validity_notes claim 5 definitions. Code (canonical_analysis.py compute_pairwise_agreement and null test) computes agreement among 1000 null orderings (499500 pairs). This matches parent analyze.py test_random_null but contradicts spec text. Freeze an operational definition and align metric identifier M1/M3 semantics accordingly.",
+    "Clarify density denominator in frozen spec: spec measurement_validity states denominator is 'total count of elements matching definition role set within truncated-first-20 locatable sample' but code compute_density uses elements_with_bbox (total elements with bbox, ~1550) per parent chain. validity_notes acknowledge mismatch. Amendment must commit one denominator before full-DOM rerun; magnitude changes but ordering reproducibility was confirmed (PC1 PASS) so effect appears limited to scale.",
+    "Specify canonical script as committed artifact with hash and stabilize RNG seeding contract: spec 6.1/validity notes require RNG-PY per-iteration seeding; verify implementation does re-seed per iteration vs continuous RNG stream (current code uses single Random(42) stream for 1000 draws). Document and freeze which stream semantics parents used to make NC1/F3 reproducible."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_F3_NONDETERMINISM",
+      "severity": "high",
+      "observation": "Parent null mean not reproducible within 0.001: producer M7_PARENT_NULL_MEAN_COMPUTED=0.5394 vs expected 0.5275 diff 0.0119 (F3 TRIGGERED); independent re-execution of canonical_analysis.py in same environment yielded 0.5369 diff 0.0094, delta 0.0025 between runs. Root cause: set iteration order of raw roles randomised by PYTHONHASHSEED plus parent vs current estimator mismatch (parent sampled 10000 random pairs after generating orderings; canonical uses direct 499500 pairs). Direct mean 0.5201 vs sampled 0.5193 vs stored 0.5275 spread exceeds threshold.",
+      "evidence_refs": ["result.json.metrics.M6_SCRIPT_REPRODUCTION_ERROR_NULL_MEAN=0.0119", "result.json.metrics.M7_PARENT_NULL_MEAN_COMPUTED=0.5394", "result.json.metrics.M8_PARENT_NULL_MEAN_EXPECTED=0.5275", "provenance.json.execution_parameters.seeds", "canonical_analysis.py:139-149 (for role in raw_roles_in_data)", "research/experiments/EXP-INTEL-35112013458/analyze.py test_random_null sampled-pair logic", "recomputed /tmp/opencode/canonical_results.json parent_null_mean 0.5369"],
+      "producer_interpretation": "Producer validity_notes attribute 2.3% deviation to Python/numpy version difference, not script bug; report recommends 0.02 threshold.",
+      "audit_finding": "Attribution to version alone incomplete; primary variance is unsorted set iteration + estimator choice. F3 as frozen is a valid per-rule trigger but is a measurement-threshold artifact, not a scientific falsification of the robustness hypothesis. Treating it as FALSIFIED_IN_SETTING overstates scientific failure; this is MEASUREMENT_INVALID threshold design."
+    },
+    {
+      "id": "V2_NC1_INCOHERENCE",
+      "severity": "high",
+      "observation": "NC1 expects new weighted-per-task recipe at seed=42 to reproduce parent p=0.5 per-iteration mean 0.5275 within 0.001. Observed M17_NC1_SEED42_NEW_RECIPE_MEAN=0.2989 diff 0.2286 (43%). This failure is structural by design (producer notes expected). Decision rule SURVIVES requires NC1 PASS, making SURVIVES logically impossible even if F1/F2 robust.",
+      "evidence_refs": ["result.json.metrics.M17_NC1_SEED42_NEW_RECIPE_MEAN=0.2989", "result.json.controls.C_NULL_MODEL_REGRESSION.pass=false", "spec.json.decision_rule (6 conditions including NC1)", "prereg.md Section 9 NC1", "report.md Section 1 NC1"],
+      "producer_interpretation": "Producer correctly flags NC1 failure as expected and scientifically informative, but spec still treats it as blocking.",
+      "audit_finding": "Frozen decision rule is incoherent; NC1 as written tests cross-recipe equivalence that cannot pass. SURVIVES ceiling cannot be evaluated. Requires spec amendment decoupling parent reproduction from new-recipe evaluation."
+    },
+    {
+      "id": "V3_PAIRWISE_DEFINITION_MISMATCH",
+      "severity": "medium",
+      "observation": "Spec 6.7 and prereg 6.7 define pairwise agreement as fraction of definition-pairs (10 pairs among 5 definitions) with identical top-2 ordering. Implementation (canonical_analysis.py, parent analyze.py) computes agreement among 1000 null orderings (499500 pairs). Metrics M1-M4 therefore do not measure spec-defined object. Parent observed agreement 0.3 (3/10 definition pairs) is compared to null mean ~0.52 (pairwise among null draws) — different populations.",
+      "evidence_refs": ["spec.json.measurement_validity pairwise agreement definition", "prereg.md 6.7 Pairwise Agreement C(5,2)=10", "canonical_analysis.py:117-126 compute_pairwise_agreement over null_orderings", "canonical_analysis.py:295-305 seed_means from null_orderings", "provenance.json.execution_parameters.definition_count=3 vs prereg 5 definitions"],
+      "producer_interpretation": "Producer reports observed 0.3 and null 0.5275 without noting population mismatch; validity_notes list 5 definitions but only 3 tested (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK).",
+      "audit_finding": "Measurement is internally consistent with parent chain but spec-inconsistent. Threat is construct validity and cross-experiment comparability. Ceiling must note metric measures null-ordering consistency, not definition-pair stability, and n_definitions actually tested is 3 not 5."
+    },
+    {
+      "id": "V4_TRUNCATED_SINGLE_SITE_SCOPE",
+      "severity": "medium",
+      "observation": "All data truncated-first-20 locatable sample, 7 tasks (8 raw measurements filtered to 7), single Magento site, cart n=1 distinct (validity_notes: cart variance undefined), 8 raw roles (a,button,combobox,div,form,input,label,span) with link/menuitem/tab=0 excluded. No full-DOM enumeration (substrate cap measure_fullpage_yield.py:89 still present per provenance). Cross-site and within-type variance unmeasured.",
+      "evidence_refs": ["provenance.json.data_paths.raw_evidence.path=research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json", "provenance.json.execution_parameters.definitions_tested=3", "result.json.validity_notes cart n=1, single site, truncated-first-20", "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json locatable_sample len=20"],
+      "producer_interpretation": "Producer discloses single-site, truncated, cart n=1 limits and that full DOM still blocked.",
+      "audit_finding": "Scope is narrow by design for this sensitivity test, but any claim about page-type density ordering or null exceeding chance cannot generalize beyond this truncated slice. Must not be used to assert full-DOM effect or cross-site invariance."
+    },
+    {
+      "id": "V5_DENSITY_DENOMINATOR_AMBIGUITY",
+      "severity": "low",
+      "observation": "Spec says denominator is total_locatable_elements_in_task; code uses elements_with_bbox (~1550 per task vs locatable 82). Producer validity_notes flag this but still report orderings.",
+      "evidence_refs": ["spec.json.measurement_validity density denominator", "prereg.md 6.5/6.6 density", "canonical_analysis.py:74-79 compute_density(count, elements_with_bbox)", "result.json.validity_notes density denominator note"],
+      "producer_interpretation": "Producer notes spec vs code mismatch but argues magnitudes share ordering.",
+      "audit_finding": "Ordering reproduction (M14, M15) verified against parent despite denominator ambiguity, so ordering claim survives this threat for this dataset. Magnitude interpretation and future full-DOM scaling remain ambiguous; amendment needed before quantitative comparison."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_PARENT_REPRODUCTION",
+      "expected_behavior": "Canonical script reproduces observed=0.3 and null_mean=0.5275 within ±0.001 on identical truncated input",
+      "observed_behavior": "Observed 0.3 reproduced exactly (M3=0.3). Null mean computed 0.5394 diff 0.0119 (producer) and 0.5369 diff 0.0094 (audit recompute) both exceed 0.001. Ordering reproduction PC1 passes: DEF-FULL-MAP cart>product_listing>detail and DEF-FORM-ONLY product_listing>cart>detail match parent.",
+      "pass": false,
+      "evidence_refs": ["result.json.metrics.M3_OBSERVED_PAIRWISE_AGREEMENT=0.3", "result.json.metrics.M7_PARENT_NULL_MEAN_COMPUTED=0.5394", "result.json.metrics.M6_SCRIPT_REPRODUCTION_ERROR_NULL_MEAN=0.0119", "result.json.controls.C_POSITIVE_ORDERING_REPRODUCTION.pass=true", "result.json.controls.C_PROVENANCE_MATCH.pass=false", "/tmp/opencode/canonical_results.json parent_null_mean 0.5369"],
+      "audit_note": "Baseline is too strict, not a script bug. Failure is due to V1 (unsorted set + sampled vs direct estimator + hash randomization). Ordering baseline is strong; numeric null-mean baseline is weak as frozen."
+    },
+    {
+      "id": "B2_RECIPE_SENSITIVITY",
+      "expected_behavior": "SD across seeds <0.05 for each RNG; mean across RNGs within ±0.02",
+      "observed_behavior": "RNG-PY SD=0.0117, NP-RS SD=0.0089, NP-DR SD=0.0075 all <0.05. Means: 0.2822,0.2834,0.2846 max cross-RNG diff 0.0024 <0.02. Recompute verifies means and SDs exactly (0.2822/0.0117, 0.2834/0.0089, 0.2846/0.0075). C2 direction TRUE for all 10 seeds on all 3 RNGs.",
+      "pass": true,
+      "evidence_refs": ["result.json.metrics.M2_SD_PAIRWISE_AGREEMENT_RNG_PY=0.0117", "result.json.metrics.M10_NEW_RECIPE_SD_ACROSS_SEEDS_PY=0.0117", "result.json.metrics.M11_NEW_RECIPE_SD_ACROSS_SEEDS_NP_RS=0.0089", "result.json.metrics.M12_NEW_RECIPE_SD_ACROSS_SEEDS_NP_DR=0.0075", "result.json.metrics.M13_CROSS_RNG_MEAN_DIFF_MAX=0.0024", "result.json.metrics.M20_NEW_RECIPE_C2_ALL_SEEDS_TRUE=true", "/tmp/opencode/canonical_results.json new_null_model_sensitivity"],
+      "audit_note": "Strong baseline for within-recipe robustness. Confirms F1 not triggered and F2 not triggered for new recipe. Does not test between-recipe sensitivity, which is where the scientific reversal lives."
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_MEAN_PAIRWISE_AGREEMENT_RNG_PY": {
+      "producer": 0.2822,
+      "recomputed": 0.2822,
+      "match": true,
+      "evidence": "/tmp/opencode/canonical_results.json RNG-PY mean_across_seeds 0.2822"
+    },
+    "M2_SD_PAIRWISE_AGREEMENT_RNG_PY": {
+      "producer": 0.0117,
+      "recomputed": 0.0117,
+      "match": true,
+      "evidence": "/tmp/opencode/canonical_results.json RNG-PY sd_across_seeds 0.0117"
+    },
+    "M3_OBSERVED_PAIRWISE_AGREEMENT": {
+      "producer": 0.3,
+      "recomputed": 0.3,
+      "match": true,
+      "evidence": "parent null_model_results.json observed_agreement 0.3; result.json M3"
+    },
+    "M4_C2_DIRECTION_RNG_PY": {
+      "producer": true,
+      "recomputed": true,
+      "match": true,
+      "evidence": "0.3 > 0.2822 => TRUE; all 10 seeds TRUE per /tmp/opencode/canonical_results.json"
+    },
+    "M6_SCRIPT_REPRODUCTION_ERROR_NULL_MEAN": {
+      "producer": 0.0119,
+      "recomputed": 0.0094,
+      "match": false,
+      "delta": 0.0025,
+      "note": "Difference due to hash-random set iteration nondeterminism across runs; both exceed 0.001 threshold so F3 still TRIGGERED",
+      "evidence": "producer M7 0.5394 diff 0.0119 vs audit 0.5369 diff 0.0094"
+    },
+    "M7_PARENT_NULL_MEAN_COMPUTED": {
+      "producer": 0.5394,
+      "recomputed": 0.5369,
+      "match": false,
+      "delta": 0.0025,
+      "note": "Direct 499500-pair estimator; parent stored 0.5275 uses sampled 10000-pair estimator and different role ordering",
+      "evidence": "/tmp/opencode/canonical_results.json parent_null_model_reproduction.mean_pairwise_agreement 0.5369"
+    },
+    "M9_NEW_RECIPE_MEAN_ACROSS_RNGS": {
+      "producer": 0.2834,
+      "recomputed": 0.2834,
+      "match": true,
+      "evidence": "RNG-PY 0.2822 NP-RS 0.2834 NP-DR 0.2846"
+    },
+    "M13_CROSS_RNG_MEAN_DIFF_MAX": {
+      "producer": 0.0024,
+      "recomputed": 0.0024,
+      "match": true,
+      "evidence": "max |0.2846-0.2822|=0.0024"
+    },
+    "M14_DEF_FULL_MAP_ORDERING": {
+      "producer": ["cart", "product_listing", "detail"],
+      "recomputed": ["cart", "product_listing", "detail"],
+      "match": true,
+      "evidence": "canonical_analysis.py SECTION 1 DEF-FULL-MAP"
+    },
+    "M15_DEF_FORM_ONLY_ORDERING": {
+      "producer": ["product_listing", "cart", "detail"],
+      "recomputed": ["product_listing", "cart", "detail"],
+      "match": true,
+      "evidence": "canonical_analysis.py SECTION 1 DEF-FORM-ONLY"
+    },
+    "M17_NC1_SEED42_NEW_RECIPE_MEAN": {
+      "producer": 0.2989,
+      "recomputed": 0.2989,
+      "match": true,
+      "evidence": "/tmp/opencode/canonical_results.json RNG-PY seed_means[42]=0.2989"
+    },
+    "M20_NEW_RECIPE_C2_ALL_SEEDS_TRUE": {
+      "producer": true,
+      "recomputed": true,
+      "match": true,
+      "evidence": "all 10 seeds TRUE across 3 RNGs"
+    },
+    "audit_additional": {
+      "parent_direct_pairwise_mean": 0.5201,
+      "parent_sampled_pairwise_mean_replicated": 0.5193,
+      "parent_stored_sampled_mean": 0.5275,
+      "note": "Parent stored mean ~0.007-0.008 above direct replication, consistent with sampling noise + hash ordering"
+    }
+  },
+  "claim_ceiling": "Narrow sensitivity ceiling only: On truncated-first-20 locatable sample (7 tasks, 1 Magento site, cart n=1) the new null recipe (per-task weighted sampling without replacement, k~Uniform(1,len(roles)), density=sum(selected_counts)/elements_with_bbox, tie break alphabetically) is robust to seed and RNG implementation: SD across 10 seeds (42,123,456,789,1000,2000,3000,4000,5000,99999) <0.012 for all three RNGs, cross-RNG mean diff 0.0024, C2 direction TRUE stable (observed 0.3 > new null ~0.28-0.30) across all seeds. The recipe choice itself is material: parent per-iteration p=0.5 inclusion recipe yields null ~0.5275 >0.3 (C2 FALSE, FALSIFIED) while new per-task weighted recipe yields ~0.28 <0.3 (C2 TRUE, SURVIVES under same data). No claim supported beyond this slice: full-DOM enumeration not tested (substrate cap still present), cross-site invariance not tested, which of the two recipes (or alternative) is the scientifically canonical null remains unresolved, and density denominator / pairwise-definition semantics require amendment before any product or full-DOM conclusion. The frozen F3 0.001 provenance gate and NC1 cross-recipe gate as written are not justified thresholds for this setup.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35209112878/request.json",
+    "research/experiments/EXP-INTEL-35209112878/spec.json",
+    "research/experiments/EXP-INTEL-35209112878/prereg.md",
+    "research/experiments/EXP-INTEL-35209112878/freeze.json",
+    "research/experiments/EXP-INTEL-35209112878/result.json",
+    "research/experiments/EXP-INTEL-35209112878/report.md",
+    "research/experiments/EXP-INTEL-35209112878/provenance.json",
+    "research/experiments/EXP-INTEL-35209112878/canonical_analysis.py",
+    "/tmp/opencode/canonical_results.json (sha256 e9b873b9e1f9deed443124fd7c461f85a5e36369c98ebadf4ed4735b69911ba8)",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json (parent null 0.5275 observed 0.3)",
+    "research/experiments/EXP-INTEL-35112013458/analyze.py (parent sampled-pair estimator, set iteration)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)",
+    "research/experiments/EXP-INTEL-35166505835/handoff.json (parent dependency audit)"
+  ],
+  "unresolved": [
+    "Which null-recipe is the scientifically canonical one: per-iteration p=0.5 inclusion (tests definition-level role relevance) vs per-task weighted sampling (tests task-level density variability)? The experiment shows choice flips C2 direction, but offers no principled criterion to select between them.",
+    "Whether the observed C2 TRUE (0.3 > 0.28) under new recipe corresponds to meaningful definition stability: only 3 of 5 planned definitions were independently verified; the other 2 from parent chain not re-checked in this run.",
+    "Whether full-DOM enumeration (after runtime removes locatableSample cap at measure_fullpage_yield.py:89) preserves, amplifies, or reverses the ordering change and the null gap. Current results are strictly truncated-sample bound.",
+    "Operational denominator and pairwise definition amendment: must freeze elements_with_bbox vs locatable count and null-pairwise among orderings vs definition-pairs before next frozen rerun.",
+    "Deterministic reproducibility fix (sorted roles, fixed estimator) untested in frozen rerun; true cross-environment reproducibility within 0.001 after fix remains unmeasured.",
+    "Generalization beyond single Magento site and beyond n=1 cart: within-type variance for cart undefined; role additivity for menuitem/tab (zero counts here) untested."
+  ]
+}

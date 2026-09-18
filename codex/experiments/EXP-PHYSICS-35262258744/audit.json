@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35262258744",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen C2 (normalized PMI == 0.0 exactly) must be replaced with threshold check (|PMI| < 0.001 bits) or alpha=0 (no smoothing) for future hash-SPA PMI experiments. Current value 5.79e-05 bits (4 variants) and 8.71e-05 (vue) is mathematically forced Laplace alpha=1.0 artifact (see V1), not pipeline failure. Re-running with consistent no-smoothing gives normalized PMI = 0.0 exactly.",
+    "Frozen C5 (>=5 unique raw URLs per variant) is unachievable on TodoMVC (3-4 raw URLs: #/, #/active, #/completed plus trailing-slash variant). Next SPA PMI prereg must set threshold to >=3 unique raw URLs (TodoMVC-feasible) or switch testbed to richer SPA with >=5 route states. Historical comparison: parent EXP-PHYSICS-35209110569 handoff already disclosed 3-fragment structure; threshold misspecification is design error, not measurement invalidity.",
+    "Synthetic positive control spec mismatch: spec.json and prereg.md claim 4 actions but run_analysis.py:249 SYNTHETIC_ACTIONS has 3 actions (form_submit, button_click, js_navigate). Align spec and code (either 3 or 4) before reuse; outcome still passes (1.578 >=1.0) so no decision impact in this run.",
+    "PMI estimator smoothing is inconsistent (p_joint unsmoothed, marginals smoothed) inflating raw PMI by ~0.003 bits (nosmooth 0.1866 vs Laplace 0.1895). Future preregs should specify consistent smoothing or no smoothing and report both, to avoid biasing effect size and null control."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_laplace_smoothing_creates_normalized_nonzero",
+      "severity": "medium",
+      "finding": "Normalized PMI 5.79e-05 (4 variants) and 8.71e-05 (vue) is not evidence of state information. With 1 unique normalized state, distinct_next=1, p_s_next_given_s=1, and p_a_given_s=(count_sa+1)/(N+3), analytic weighted mean = sum(c/N * log2((c/N)/((c+1)/(N+3)))) = 5.79e-05 for N=93 (verified by independent recomputation). No-smoothing PMI is exactly 0.0. This validates producer validity_notes[0] artifact explanation and confirms normalized unique_states=1, url_entropy=0.0 on all 5 variants (raw_analysis_results.json).",
+      "evidence": "raw_analysis_results.json:variant_results.*.norm_url_pmi.mean_pmi=5.79e-05/8.71e-05; recomputed via python analytic 5.791007376819548e-05 matches; run_analysis.py:compute_pmi_stats alpha=1.0; nosmooth recomputation 0.0"
+    },
+    {
+      "id": "V2_raw_pmi_significant_and_recomputed",
+      "severity": "info",
+      "finding": "Raw URL PMI independently recomputed matches producer to 1e-06: vanillajs 0.189483 vs 0.189482982, react 0.189483 vs same, vue 0.209179 vs 0.209179315, angular 0.188447 vs 0.188446948, svelte 0.189483 vs same. No-smoothing values 0.1866 (vanillajs/react/angular/svelte) and 0.2041 (vue) also >0.05. All 5 variants exceed frozen 0.05 bits threshold. Permutation p=0.001 (0/1000 >= observed, (0+1)/1001) on all 5, well below Bonferroni alpha=0.01. Effect sizes d=6.54-9.01 (recomputed verbatim) indicate large separation from null mean 0.020-0.047 bits.",
+      "evidence": "raw_analysis_results.json:variant_results.*.raw_url_pmi.mean_pmi, raw_permutation.p_value; independent python recompute via compute_pmi()"
+    },
+    {
+      "id": "V3_state_cardinality_insufficient_for_frozen_C5",
+      "severity": "info",
+      "finding": "Unique raw URLs: vanillajs 4, react 4, vue 3, angular 3, svelte 4 (derived set counts match producer n_unique_raw_urls). Frozen C5 requires >=5, so 0/5 pass. This is inherent TodoMVC limitation (hash routes #/, #/active, #/completed plus bare '/' variant), disclosed in producer validity_notes[1] and report.md validity threats. Maximum per-prereg raw entropy log2(3)=1.585 bits; observed 1.40-1.96 bits reflects 3-4 states only. This is not a measurement failure but a pre-registered testbed ceiling misspecification.",
+      "evidence": "raw_analysis_results.json:variant_results.*.n_unique_raw_urls, unique_raw_urls; raw_vanillajs.json etc url_before fragments; spec.json falsifier clause 4, decision_rule C5"
+    },
+    {
+      "id": "V4_data_reuse_integrity_and_symmetric_protocol",
+      "severity": "low",
+      "finding": "Recombined base+topup per variant: vanillajs 168 raw /130 valid/93 NL, react 168/130/93 identical, svelte 168/130/93 identical, vue 168/108/85, angular 168/130/93. SHA256 verified: raw_analysis_results.json db4892e73278cfc5a1ab5a39d... matches declared, run_analysis.py c21a6cae7501259138859c352... Vanillajs/react/svelte NL counts, action frequencies (form_submit 45.16%, button_click 32.26%, js_navigate 22.58%) and PMI identical to 6 decimals due to deterministic 24-action protocol replication (7 sessions x12-15 NL each), not data copy error (urls differ by site path). Vue diverges correctly (108 valid due to 60 errors vs 38). Angular link_click target mismatch 14/37 (target #/ vs after #/all) does not affect NL (NL target==after 0/93). No new browser collection by design (prereg sec: no new collection); integrity relies on parent hashes (computed: raw_vanillajs 8897172862238d5c etc).",
+      "evidence": "parent raw_*.json hashes, analysis python counts, raw_analysis_results.json:per_variant n_raw/n_valid/n_non_leakage"
+    },
+    {
+      "id": "V5_leakage_filter_validated_no_tautology",
+      "severity": "info",
+      "finding": "NL filter action_primitive != 'link_click' is correctly conservative. Validation: 0/457 NL transitions have action_target == url_after (leakage), while 100% of vanillajs/react/svelte/vue link_clicks have target==after (37/37, 23/23), angular 23/37 (14 mismatched still excluded). Per parent audit V1/V3, all link_click leakage 1.00 is fragment-stripping tautology (normalized urls collapsed to 1 state). Non-link leakage 0.00, so PMI is not confounded by href==after predictability that invalidated prior Wikipedia/Python-docs PMI (EXP-PHYSICS-34038570933, 34071626363).",
+      "evidence": "python validation counts per variant leakage via target==after, raw_analysis_results.json variant_results leakage_fraction, parent audit.json V1/V3"
+    },
+    {
+      "id": "V6_permutation_test_methodologically_sound_but_distribution_narrow",
+      "severity": "low",
+      "finding": "Cross-trajectory shuffle within sessions (7 sessions, 12-15 NL per session, seed=42, 1000 perms) yields valid null. Null mean 0.020-0.047 bits non-zero due to smoothing; observed 4-5x null. All 5 variants achieve minimum p=0.000999 (0 exceedances). Identical p across variants reflects deterministic protocol and identical session grouping, not bug. However history-length is not tested: sessions are independent trajectories; shuffling within session preserves session state but destroys action->next_state association. Low singleton SA fraction 0.0 and SA pairs 9-10 ensure estimator non-degeneracy (distinct triples 9-11).",
+      "evidence": "run_analysis.py:permutation_test shuffle_actions_within_sessions, raw_analysis_results.json:raw_permutation.null_mean/null_std/p_value, python session counts"
+    },
+    {
+      "id": "V7_physics_identifiability_not_demonstrated",
+      "severity": "high",
+      "finding": "C-WEB-DYNAMICS requires 'predictive dynamical structure beyond memory and ordinary similarity.' This experiment tests I(url_after; action | url_before) only, without history-conditioned baseline I(url_after; action | url_before, H_K) or memoryless control (EXP-PHYSICS-34724244876 paradigm). On deterministic TodoMVC transitions (e.g., vanillajs (url_before, action, url_after) counts show deterministic: (#/ , form_submit) -> #/ 12x etc), positive PMI could reflect memoryless Markov dynamics, not beyond-memory structure. Producer correctly discloses ceiling bounded and does not claim C-WEB-DYNAMICS validation (report.md: What This Does NOT Demonstrate). Max justified ceiling is fragment-aware URL-level Markov predictability, not beyond-memory dynamics.",
+      "evidence": "report.md interpretation sections; python triple counts deterministic; spec.json hypothesis vs broader claim C-WEB-DYNAMICS; handoff analogy from EXP-PHYSICS-34724244876 K=3 history test"
+    },
+    {
+      "id": "V8_pmi_formula_inconsistent_smoothing",
+      "severity": "medium",
+      "finding": "compute_pmi_stats smooths p(a|s) and p(s'|s) with Laplace alpha=1.0 but leaves p(a,s'|s)=count_sasn/count_s unsmoothed. This biases PMI upward (mean +0.0029 bits on vanillajs) and guarantees normalized PMI >0. Analytic demonstration in V1. Unbiased estimator would smooth jointly or use alpha=0. Bias is small (1.5%) and does not cross 0.05 threshold (both smoothed and nosmooth >0.05), but inflates effect size and breaks exact-zero null expectation.",
+      "evidence": "run_analysis.py:compute_pmi_stats lines 149-151; recomputed nosmooth 0.186595889 vs smoothed 0.189482; spec.json measurement_validity alpha=1.0 disclosure"
+    },
+    {
+      "id": "V9_generalization_bounded_to_hash_demo_spas",
+      "severity": "info",
+      "finding": "TodoMVC hash-SPAs are minimal demos (no auth, single input.new-todo, 3-4 hash routes), not production SPAs with history routing, auth, pagination, dynamic content. Validated only on Playwright headless Chrome 7 sessions. Generalization to production SPAs with history-based routing and richer state spaces remains untested, explicitly listed in producer unresolved[3][4] and acknowledged as synthetic-to-real gap. Confirms parent handoff do_not_assume about hash-only testing.",
+      "evidence": "parent handoff.json do_not_assume, producer unresolved, spec.json measurement_validity 5 variants todoMVC only"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_null_control_normalized_pmi",
+      "baseline": "NULL_CTRL_NORMALIZED_URL (fragment-stripped) expected exactly 0.0 bits (mathematical identity: 1 unique normalized state, url_entropy 0.0)",
+      "expected": "0.0 bits on all 5 variants",
+      "observed": "5.79e-05 bits (vanillajs/react/angular/svelte, N=93) and 8.71e-05 (vue, N=85), unique_states=1, url_entropy=0.0 on all. Substantive PASS at threshold |PMI| <0.001 (100x below raw effect). Frozen exact-zero FAIL is smoothing artifact (V1), not pipeline bug. Null permutation p=1.0, effect_d=1.0 degenerate (null_std ~1e-20 floating residual).",
+      "verdict": "PASS_WITH_THRESHOLD",
+      "evidence": "raw_analysis_results.json:variant_results.*.norm_url_pmi, norm_permutation; recomputed nosmooth 0.0, smoothed analytic 5.79e-05"
+    },
+    {
+      "id": "B2_positive_control_synthetic_spa",
+      "baseline": "POSITIVE_CTRL_SYNTHETIC_SPA (8 states, 3 actions in code /4 in spec, deterministic mapping) PMI >=1.0 bits p<0.001",
+      "expected": "PMI >=1.0, p<0.001",
+      "observed": "PMI=1.5776 bits, p=0.000999, effect_d=228.5, unique_states=8, SA=24, N=1000. Independent recompute matches. Spec/code action-count mismatch (3 vs 4) does not affect pass; threshold exceeded by 0.577 bits.",
+      "verdict": "PASS",
+      "evidence": "result.json controls.POSITIVE_CTRL_SYNTHETIC_SPA, raw_analysis_results.json positive_control, run_analysis.py SYNTHETIC_ACTIONS"
+    },
+    {
+      "id": "B3_action_frequency_baseline",
+      "baseline": "Action-frequency marginal expected form_submit ~33%, button_click ~23%, js_navigate ~17%, link_click 0% after filter",
+      "expected": "~33/23/17",
+      "observed": "45.2/32.3/22.6 (vanillajs/react/angular/svelte) and 49.4/25.9/24.7 (vue). Deviates from spec prediction but reported correctly; reflects TodoMVC interaction pattern (form_submit dominates). PMI conditions on action_primitive categorical, so frequency shift is captured, not confounding.",
+      "verdict": "PASS",
+      "evidence": "raw_analysis_results.json variant_results.*.action_frequency, result.json metrics action_frequency"
+    },
+    {
+      "id": "B4_data_sufficiency",
+      "baseline": "DATA_SUFFICIENCY >=50 NL per variant, achievable at 64-70 raw given 21-28% leakage",
+      "expected": "5/5 >=50 NL",
+      "observed": "5/5 pass: 93,93,85,93,93 NL. Singleton fraction 0.0, SA pairs 9-10 non-degenerate. Parent achievable NL 357-394 at 500 raw confirmed.",
+      "verdict": "PASS",
+      "evidence": "raw_analysis_results.json decision_checks.C4, variant_results.*.n_non_leakage"
+    },
+    {
+      "id": "B5_achievable_NL_and_unique_state_check",
+      "baseline": "Prereg: >=5 unique raw URLs per variant (state variation for PMI sensitivity) and <50% singleton SA pairs",
+      "expected": "0/5 with >=5 URLs would be reported as insufficient variation (falsifier clause 4)",
+      "observed": "0/5 have >=5 URLs (3-4 only); 0/5 have >50% singletons (all 0.0). Frozen C5 fails (0/5) triggering FALSIFIED per spec, but this reflects testbed cardinality limit, not PMI estimator failure. PMI still detectable at 3-4 states (0.188-0.209 bits, 12-13% of max log2(3)=1.585).",
+      "verdict": "FAIL_AS_DESIGNED",
+      "evidence": "raw_analysis_results.json decision_checks.C5, variant_results.*.n_unique_raw_urls, singleton_fraction"
+    }
+  ],
+  "recomputed_metrics": {
+    "raw_url_pmi_by_variant_smoothed": {
+      "vanillajs": 0.18948298212366158,
+      "react": 0.18948298212366158,
+      "vue": 0.20917931570042736,
+      "angular": 0.18844694888578795,
+      "svelte": 0.18948298212366158
+    },
+    "raw_url_pmi_by_variant_nosmooth": {
+      "vanillajs": 0.18659588996288304,
+      "react": 0.18659588996288304,
+      "vue": 0.20415785607703674,
+      "angular": 0.18659588996288304,
+      "svelte": 0.18659588996288304
+    },
+    "norm_url_pmi_by_variant_smoothed": {
+      "vanillajs": 5.7910073768195775e-05,
+      "react": 5.7910073768195775e-05,
+      "vue": 8.711218144024274e-05,
+      "angular": 5.7910073768195775e-05,
+      "svelte": 5.7910073768195775e-05
+    },
+    "norm_url_pmi_by_variant_nosmooth": {
+      "vanillajs": 0.0,
+      "react": 0.0,
+      "vue": 0.0,
+      "angular": 0.0,
+      "svelte": 0.0
+    },
+    "raw_vs_norm_difference_smoothed": {
+      "vanillajs": 0.1894250720498935,
+      "react": 0.1894250720498935,
+      "vue": 0.2090922035189871,
+      "angular": 0.1883890388120198,
+      "svelte": 0.1894250720498935
+    },
+    "permutation_p_raw": {
+      "vanillajs": 0.000999000999000999,
+      "react": 0.000999000999000999,
+      "vue": 0.000999000999000999,
+      "angular": 0.000999000999000999,
+      "svelte": 0.000999000999000999
+    },
+    "effect_sizes_d_raw": {
+      "vanillajs": 6.538641177072544,
+      "react": 6.538641177072544,
+      "vue": 6.882045623343554,
+      "angular": 9.01150984359641,
+      "svelte": 6.538641177072544
+    },
+    "n_non_leakage_by_variant": {
+      "vanillajs": 93,
+      "react": 93,
+      "vue": 85,
+      "angular": 93,
+      "svelte": 93
+    },
+    "n_unique_raw_urls_by_variant": {
+      "vanillajs": 4,
+      "react": 4,
+      "vue": 3,
+      "angular": 3,
+      "svelte": 4
+    },
+    "n_unique_norm_urls_by_variant": {
+      "vanillajs": 1,
+      "react": 1,
+      "vue": 1,
+      "angular": 1,
+      "svelte": 1
+    },
+    "url_entropy_bits_raw": {
+      "vanillajs": 1.9585030291564345,
+      "react": 1.9585030291564345,
+      "vue": 1.5299081631979607,
+      "angular": 1.3987153592677852,
+      "svelte": 1.9585030291564345
+    },
+    "positive_control_pmi": 1.5776112458073703,
+    "positive_control_p": 0.000999000999000999,
+    "positive_control_pass": true,
+    "decision_checks_C1_raw_pmi_at_least_3_variants": 5,
+    "decision_checks_C2_normalized_zero_all": 0,
+    "decision_checks_C3_positive_control": true,
+    "decision_checks_C4_sufficient_NL": 5,
+    "decision_checks_C5_unique_urls_ge5": 0
+  },
+  "claim_ceiling": "Raw URL PMI with fragments preserved is significantly positive (0.188-0.209 bits, Bonferroni p=0.001, d=6.5-9.0) on 5/5 TodoMVC hash-SPA variants, demonstrating hash-fragment routing encodes Markov-predictive state information detectable by PMI when fragments are preserved; fragment-stripping normalization destroys this information (normalized PMI = 0.0 nosmooth, 5.8e-05 smoothed artifact, unique_states=1, entropy 0.0, difference 0.188-0.209 bits quantifies information loss). Positive control validates estimator (1.58 bits). Maximum justified: fragment-aware URL-level PMI detects state-conditioned predictability on minimal TodoMVC hash-SPAs at 85-93 NL transitions. NOT justified: (a) SURVIVES_CURRENT_TEST per frozen 5-condition rule (fails C2 exact-zero and C5 >=5 URLs; threshold misspecification not pipeline failure), (b) C-WEB-DYNAMICS beyond-memory dynamics (no history-conditioned PMI tested; transitions largely deterministic Markov), (c) generalization to production SPAs with history routing/auth/richer state spaces, (d) title-aware or DOM-based PMI (titles constant entropy 0.0), (e) practical utility for SPIDER exploration (0.19 bits is 12% of max for 3-4 states).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35262258744/result.json:metrics raw_url_pmi_by_variant, norm_url_pmi_by_variant, controls, artifacts",
+    "research/experiments/EXP-PHYSICS-35262258744/raw_analysis_results.json:variant_results.*, positive_control, decision_checks (sha256 db4892e73278cfc5a1ab5a39d95e608797de9c156b790ea1480d6b9b33c8d414)",
+    "research/experiments/EXP-PHYSICS-35262258744/run_analysis.py:compute_pmi_stats, permutation_test, SYNTHETIC_ACTIONS (sha256 c21a6cae7501259138859c352dd3f7198f4b46b8b94b8669d95bc6aba7dc57fb)",
+    "research/experiments/EXP-PHYSICS-35262258744/spec.json:decision_rule, falsifier, measurement_validity, baselines, positive_control, null_control",
+    "research/experiments/EXP-PHYSICS-35262258744/prereg.md:Decision Rule, Falsifier, Data, Analysis Plan (sections 12, 12.3)",
+    "research/experiments/EXP-PHYSICS-35262258744/provenance.json:data_sources, environment seed=42 alpha=1.0 n_perms=1000",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs.json (sha 8897172862238d5c) + raw_vanillajs_topup.json + react/vue/angular/svelte raw+topup files (data reuse validated)",
+    "research/experiments/EXP-PHYSICS-35209110569/audit.json:V1-V8, baseline_findings B1-B5, claim_ceiling TodoMVC hash-SPA suitable for URL-level PMI",
+    "research/experiments/EXP-PHYSICS-35209110569/handoff.json:carry_forward established (0.213-0.285 valid leakage, title constancy), do_not_assume"
+  ],
+  "unresolved": [
+    "Whether history-conditioned PMI I(url_after; action | url_before, H_K) remains >0 (beyond-memory test as in EXP-PHYSICS-34724244876) - required to elevate fragment-aware URL PMI to C-WEB-DYNAMICS claim.",
+    "Whether raw PMI magnitude 0.188-0.209 bits confers practical exploration gain for SPIDER (vs 1.585 bits max for 3 states) - product consequence unclear.",
+    "Whether production SPAs with history-based routing and richer URL state spaces (≥5 unique URLs, titles varying independently) exhibit similar fragment-aware PMI - TodoMVC cardinality caps this experiment.",
+    "Whether consistent smoothing (or alpha=0) changes quantitative PMI and threshold-based null control outcome - estimator bias unquantified for larger state spaces.",
+    "Whether DOM/accessibility-tree or visual representations add marginal PMI beyond fragment-aware URL on these TodoMVC SPAs (uncoupled test needed)."
+  ]
+}

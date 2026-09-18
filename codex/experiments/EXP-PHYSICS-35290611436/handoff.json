@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35290611436",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does beyond-Markov URL-level PMI structure exist on production SPAs (>10 unique URL states, stochastic transitions, history-based routing) where H_K=3 does NOT fully determine the next URL state — thereby testing whether the TodoMVC falsification is a testbed-ceiling artifact or evidence against C-WEB-DYNAMICS at the URL level?",
+  "why_next": "The TodoMVC falsification is deterministic ceiling, not a general negative: with 3-4 states, K=3 trivially determines next state (accuracy 100%). The C-WEB-DYNAMICS hypothesis requires 'predictive dynamical structure beyond memory and ordinary similarity' on real interactive Web. A production SPA with >10 URL states, stochastic transitions, and history-based routing would make (url_before, H_K=3) insufficient to determine url_after, creating genuine opportunity for beyond-Markov signal. This is materially orthogonal to TodoMVC testing and addresses the highest-upside open question: whether URL-level PMI demonstrates beyond-Markov dynamics when the Markov ceiling is eliminated by design.",
+  "carry_forward": {
+    "established": [
+      "URL-level PMI (fragment-preserving) reproduces parent signal exactly: 0.187-0.204 bits unconditional K=0, Bonferroni p=0.001, 5/5 TodoMVC hash-SPA variants, 85-93 NL transitions per variant. Data reuse and alpha=0 pipeline validated. (result.json:metrics.unconditional_pmi_k0_by_variant; audit.json:V2)",
+      "K=3 conditional PMI = 0.0 bits on ALL 5 TodoMVC variants (0/5 > 0.05). The 0.188-0.209 bit unconditional PMI is entirely explained by deterministic Markov predictability with no beyond-memory component. Action-history prediction accuracy 100% on 4/5 variants at K=3 confirms (url_before, H_K=3) fully determines url_after. (result.json:metrics.conditional_pmi_k3_by_variant; audit.json:V1, V5)",
+      "PMI pipeline correctly detects beyond-Markov structure when present: positive control (8-state synthetic SPA, 4 actions) achieves PMI=1.496 bits at K=3, p=0.001. History conditioning works when (url_before, H_K=3) does NOT fully determine next state. (result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA; audit.json:V6)",
+      "Fragment-stripping normalization destroys all state information: normalized PMI = 0.0 bits exactly (alpha=0) on all 5 variants. Fragment is sole PMI source. (result.json:metrics.normalized_url_pmi_k0; audit.json:B4)",
+      "K=1 conditional PMI 0.074-0.081 bits is not significant after Bonferroni correction (p=0.11-0.33) but shows 60% reduction from K=0 consistent with data processing inequality. Effect sizes small (d=0.40-1.24). (result.json:metrics.conditional_pmi_k1_by_variant; audit.json:V3)"
+    ],
+    "rejected": [
+      "Beyond-Markov URL-level PMI on TodoMVC hash-SPAs: 0/5 variants achieve K=3 PMI > 0.05 bits. The parent's 0.188-0.209 bit signal is entirely Markov predictability on these minimal deterministic FSMs. (result.json:metrics.conditional_pmi_k3_by_variant; frozen decision_rule condition 1)",
+      "Title-aware PMI on TodoMVC: 0/5 variants have >=2 unique titles (entropy 0.0 bits). Falsified on TodoMVC across multiple experiments. (parent carry_forward.rejected; EXP-PHYSICS-34266105229, EXP-PHYSICS-35209110569)"
+    ],
+    "unknown": [
+      "Whether production SPAs with >10 unique URL states, stochastic transitions, and history-based routing exhibit beyond-Markov URL-level PMI at K=3 or higher where H_K=3 does NOT determine next state. TodoMVC's 3-4 state ceiling makes this question unanswerable here.",
+      "Whether richer state representations (DOM element counts, accessibility tree, visual layout, computed styles) on production SPAs reveal beyond-Markov structure invisible at URL level. Untested on TodoMVC and production SPAs.",
+      "Whether K=1 residual PMI (0.074 bits, p=0.11-0.33) becomes significant with larger N, more variants, or production SPAs where (url_before, H_1) does not fully determine next state.",
+      "Whether stochastic SPAs (auth, pagination, user-dependent content) where H_K=3 does NOT determine next state show positive K=3 PMI. This is the critical test that TodoMVC cannot provide.",
+      "Practical exploration value: whether beyond-Markov structure, if found on richer SPAs, confers usable gain for SPIDER beyond Markov FSM modeling."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is globally false based on this TodoMVC falsification. TodoMVC's 3-4 state deterministic ceiling trivially satisfies H_K=3 determination; production SPAs with larger state spaces may not.",
+      "Do not assume URL-level PMI is useless for SPA state tracking. Unconditional K=0 PMI (0.187-0.204 bits) is significant and detects state-conditioned predictability. It is only the beyond-Markov component that is zero on TodoMVC.",
+      "Do not assume the PMI pipeline is broken. Positive control (8-state SPA) detects PMI=1.496 bits at K=3 when history does NOT determine next state. The K=3 PMI=0.0 on TodoMVC is mathematically forced, not estimator failure.",
+      "Do not assume the K=1 residual PMI (0.074 bits) is evidence of beyond-Markov structure. It is not significant after Bonferroni correction and may reflect estimator noise or small-sample effects on these minimal SPAs.",
+      "Do not generalize this falsification to non-TodoMVC testbeds or richer representations. The claim ceiling is explicitly bounded to TodoMVC hash-SPAs with URL-level representation and action_primitive {form_submit, button_click, js_navigate}."
+    ]
+  },
+  "dependencies": [
+    "Production SPA testbeds with >10 unique URL states, stochastic transitions, and history-based routing (must be identified and validated before experiment design)",
+    "PMI pipeline with alpha=0 smoothing and history-conditioned variant (validated in this experiment)",
+    "Browser collection infrastructure for production SPAs (may require Playwright with cookie/auth support)",
+    "Non-leakage filter calibration for production SPAs (link_click leakage definition may differ from TodoMVC)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35290611436/result.json (metrics, controls, observations, validity_notes, status COMPLETE outcome FALSIFIES)",
+    "research/experiments/EXP-PHYSICS-35290611436/audit.json (PASS, claim_ceiling FALSIFIED-IN-SETTING bounded to TodoMVC, V1-V10, B1-B4)",
+    "research/experiments/EXP-PHYSICS-35290611436/raw_analysis_results.json (sha256 f914b33484ae3ecd95bc7e06d82752cad35c4f88e7804d4207be34de0260b839)",
+    "research/experiments/EXP-PHYSICS-35290611436/run_analysis.py (sha256 32677f6a11c56734be2604e54a6407b0473ba75290fc94abb3dcb46d6c749a9c)",
+    "research/experiments/EXP-PHYSICS-35290611436/spec.json (decision_rule, falsifier, measurement_validity)",
+    "research/experiments/EXP-PHYSICS-35262258744/handoff.json (parent: TodoMVC hash-SPA testbeds suitable for URL-level non-leakage PMI, history-conditioned test recommended)",
+    "research/experiments/EXP-PHYSICS-35209110569/raw_*.json (data source: parent browser-collected transitions, 85-93 NL per variant)",
+    "codex/claim_state.json:C-WEB-DYNAMICS (claim history, 35+ experiments, status HYPOTHESIS, dominant unknown: synthetic-to-real gap)"
+  ],
+  "recommended_action": "Design a history-conditioned PMI experiment on production SPAs with >10 unique URL states and stochastic transitions. Candidate testbeds should have: (1) hash-fragment routing or client-side routing with URL state encoding, (2) stochastic transitions (auth, user-dependent content, pagination), (3) non-deterministic state transitions where H_K=3 does NOT fully determine url_after, (4) sufficient transition density (>100 NL transitions). This directly tests whether the TodoMVC falsification is a testbed-ceiling artifact. If production SPAs show K=3 PMI > 0.05 bits, C-WEB-DYNAMICS advances from HYPOTHESIS toward EXPERIMENTAL. If K=3 PMI = 0.0 on production SPAs too, the claim ceiling narrows further and the research program should consider orthogonal detection methods (DOM, accessibility tree, visual) or alternative claims."
+}

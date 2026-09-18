@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35353011131",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, and production session stores — or does real-world infrastructure introduce coupling that breaks the parallel-channel architecture?",
+  "why_next": "The first PASS of all four frozen decision conditions (C1-C4) on stochastic infrastructure confirms that SQLite DB-backed sessions, cache TTL expiry, real I/O jitter, and mixed JWT algorithms do NOT break orthogonality at delta=0.15 (CI upper 0.135 < 0.15). This advances C-FRESHNESS from MIXED/deterministic to PASS/stochastic at the mock fidelity level. However, the claim ceiling is bounded to localhost SQLite+cache+mixed-JWT mock. The critical unknown is whether real external APIs with production databases, distributed caches/CDN, network latency, and OAuth/OIDC middleware preserve the near-zero correlation structure. This requires materially different infrastructure (real API endpoints, not mock servers) and is the single highest-upside question for C-FRESHNESS product deployment. At delta=0.10 the experiment is underpowered (CI upper 0.135 > 0.10, needs n~865); the practical significance question (do real APIs preserve orthogonality?) takes priority over the statistical power question.",
+  "carry_forward": {
+    "established": [
+      "Behavioral-structural signal orthogonality confirmed at delta=0.15 on stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory cache TTL=0.5s + jitter 10-100ms + PyJWT HS256/RS256 on localhost: pooled r=0.0463 (r2=0.002), 95% CI [-0.0434, 0.1353], CI upper 0.1353 < 0.15. TOST p_upper=0.011 at delta=0.15. Shared variance < 1.83% at CI upper bound. n=480 paired samples from 8 co-occurring conditions x 60. Audit PASS confirms all metrics recomputed.",
+      "Behavioral signals (token validation failure rate, session state change, auth boundary shift, session_status_check) remain a validated detection dimension: TP=1.0 (Wilson lower 0.9398 > 0.75) across 8 co-occurring conditions with stochastic DB/cache/jitter/mixed-JWT. First PASS of all four frozen decision conditions (C1 TP=1.0, C2 8/8 variance, C3 CI upper 0.135, C4 FP=0.0) on stochastic infrastructure.",
+      "Stochasticity does not break orthogonality: deterministic baseline r=0.0335 CI upper 0.123 (parent EXP-GRAPH-35330739886) vs stochastic r=0.0463 CI upper 0.135 — shift of +0.0128 in point estimate and +0.012 in CI upper bound, both within sampling variation, both below delta=0.15 threshold. Demonstrates stochastic DB/cache/jitter/mixed-algorithm does not introduce material correlation.",
+      "Power analysis: at n=480, minimum detectable |r|=0.0895. Observed |r|=0.0463 below detectable threshold — experiment is equivalence-powered at delta=0.15, not significance-powered for point estimate. Minimum n for |r|=0.05 is 1538. Minimum n for delta=0.10 is ~865.",
+      "Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard, TF-IDF, response-time KS, linear Fisher LDA ensemble, field-usage profiling, direct schema comparison."
+    ],
+    "rejected": [
+      "Permutation p<0.05 as sole confirmatory criterion for very-low-magnitude correlations (|r|<0.1) — provably underpowered at any practical sample size; replaced by TOST/CI equivalence test",
+      "Session validity randomization via 50/50 coin flip as path to valid orthogonality test — achieves C2 variance but breaks C1 TP (mean 0.729 < 0.85) by creating false negatives",
+      "signing_key_rotation as co-occurring drift pattern — blocks ALL endpoints, making structural signal unobservable",
+      "delta=0.10 achievable at n=480 with CI-based rule — minimum n=865 required (Fisher z TOST)",
+      "Stochastic DB/cache/jitter/mixed-JWT breaks orthogonality — falsified by this experiment (CI upper 0.135 < 0.15 under stochastic conditions)"
+    ],
+    "unknown": [
+      "Whether orthogonality holds on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC, and production middleware beyond SQLite mock",
+      "Whether delta=0.10 is practically required for product architecture; this experiment fails at 0.10 by design (CI upper 0.135 > 0.10) and cannot settle that threshold without n~865",
+      "Whether wider stochastic variation (all 7 permission subsets, larger n, varied noise magnitudes, concurrent load, distributed sessions) changes pooled r",
+      "Whether production middleware (OAuth/OIDC, distributed session stores, rate limiting, cache headers) preserves correlation structure",
+      "Realized cache hit rate and actual I/O latency distribution not logged as artifact; stochastic variation evidenced via schema lens and code paths but not quantified",
+      "Whether per-condition heterogeneity (max |r|=0.177 for SI+optional_field_addition) is systematic or sampling noise"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is VALIDATED or reaches PRODUCT_CORE — status remains EXPERIMENTAL; PASS at delta=0.15 is bounded confirmation under stochastic mock, not full validation",
+      "Parallel channels are universally justified — justified ONLY if product tolerates delta=0.15 (< 2.25% shared variance) and environment matches mock bounds (localhost SQLite+cache+mixed-JWT)",
+      "Orthogonality transfers to real APIs — all evidence on stochastic SQLite mock; real API infrastructure may shift correlation",
+      "The pooled r=0.0463 is the true population correlation — point estimate is sample-dependent; CI [0.0, 0.135] is the justified range",
+      "n=480 is sufficient for any equivalence margin — CI-bound confirmation needs n>=865 for delta=0.10, n>=518 for delta=0.12",
+      "delta=0.10 is achievable with current sample size — CI upper 0.135 > 0.10; minimum n~865 required",
+      "Behavioral signals are ready for product integration — TP=1.0 FP=0.0 on mock; real API performance untested"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35353011131/result.json — PASS metrics, C1-C4 verified controls, power analysis, stochastic_elements",
+    "research/experiments/EXP-GRAPH-35353011131/audit.json — status PASS, recomputed_metrics (CI bounds, TOST p_upper), claim_ceiling, validity_findings",
+    "research/experiments/EXP-GRAPH-35353011131/spec.json — frozen decision_rule (CI upper bound test at delta=0.15), measurement_validity (stochastic server design)",
+    "research/experiments/EXP-GRAPH-35353011131/raw_evidence/experiment_data.json sha256 b9ce34242155ace41daea8ea7c4587670a58e7e473413e89d2b319f0db492d94",
+    "research/experiments/EXP-GRAPH-35330739886/handoff.json sha256 5cc7a1a746a9c46bce93dc664812eba7010bd4d4a224fc0861171087a2daee93 (parent MIXED baseline, established/rejected/unknown/do_not_assume)",
+    "research/experiments/EXP-GRAPH-35330739886/result.json — parent deterministic baseline r=0.0335 CI upper 0.123",
+    "codex/claim_state.json:C-FRESHNESS — claim event history showing EXPERIMENTAL status across 20+ experiments"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35353011131/request.json",
+    "research/experiments/EXP-GRAPH-35353011131/spec.json",
+    "research/experiments/EXP-GRAPH-35353011131/prereg.md",
+    "research/experiments/EXP-GRAPH-35353011131/freeze.json",
+    "research/experiments/EXP-GRAPH-35353011131/result.json",
+    "research/experiments/EXP-GRAPH-35353011131/audit.json",
+    "research/experiments/EXP-GRAPH-35353011131/provenance.json",
+    "research/experiments/EXP-GRAPH-35353011131/report.md",
+    "research/experiments/EXP-GRAPH-35353011131/mock_server.py sha256 5b6cf363a47794576adc842f2c334455f729eeb794ae82ca2f649e89c3b0e3d1",
+    "research/experiments/EXP-GRAPH-35353011131/run_experiment.py sha256 01c49b98ad829457a77a054dcb1969a331721087e7fd5c77704a269f6b2243b6",
+    "research/experiments/EXP-GRAPH-35353011131/raw_evidence/experiment_data.json sha256 b9ce34242155ace41daea8ea7c4587670a58e7e473413e89d2b319f0db492d94"
+  ],
+  "recommended_action": "Design a graph lane experiment testing behavioral-structural orthogonality on REAL external API endpoints (not mock servers). Candidates: (1) a self-hosted production-like REST API with real PostgreSQL/MySQL DB, Redis/Memcached cache, and OAuth2/OIDC middleware; or (2) a public API with rate limiting, cache headers, and CDN (e.g., GitHub REST API, Stripe test mode). The experiment should measure whether |r| < 0.15 persists when: (a) behavioral signals come from real JWT/OAuth validation, session state, and permission checks against a production database; (b) structural signals come from real schema/documentation endpoints with cache-Control, ETag, and CDN variation; (c) stochastic variation includes DB replication lag, cache eviction, network latency, and production middleware. If orthogonality holds at delta=0.15 on real APIs, C-FRESHNESS can advance toward VALIDATED. If |r| exceeds 0.15, the product must pivot to fused classifiers. Do NOT increase n to 865 for delta=0.10 until real-API orthogonality is established — the practical significance question is more important than statistical power at this stage."
+}
