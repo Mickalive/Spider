@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35353011131",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "PRIMARY_METRICS_VERIFIED: Pooled Pearson r=0.04630989111344118 on n=480 (all_behavioral_scores + all_structural_scores, raw_evidence/experiment_data.json sha256 b9ce34242155ace41daea8ea7c4587670a58e7e473413e89d2b319f0db492d94) recomputed via scipy.stats.pearsonr exactly matches result.json metrics.pearson_r_pooled within 1e-12. Fisher z=0.046343039268090455, SE=0.045786854649563 (producer 0.04578685464956301 diff 2e-14). Two-sided 95% CI [-0.04337196903741858, 0.13525138744768356] via tanh(z +/-1.96*SE) matches producer within 1e-12. TOST at delta=0.15 p_upper=0.011045206065998056 p_lower=8.048e-06 matches recomputed p_upper 0.011045 p_lower 8.0e-06; delta 0.10 p_upper 0.119157 delta 0.12 p_upper 0.052467 delta 0.2 p_upper 0.000318 all match within 1e-06.",
+    "C1_DRIFT_TP_VERIFIED: Mean TP=1.0 across 8 co-occurring conditions recomputed from per_condition_data behavioral arrays (all 480 samples behavioral>0) matches result.json controls.C1_drift_tp. Wilson lower CI 0.9398260695220669 for 60/60 successes recomputed via Wilson formula z=1.96 correctly >0.75 for all conditions -> PASS. No failures, no missing data.",
+    "C2_VARIANCE_VERIFIED: 8/8 co-occurring conditions have std>0 for both signals recomputed from per_condition_data: permission_boundary b_std 0.137-0.163 s_std 0.680-1.001, session_invalidation b_std 0.362-0.432 s_std 0.641-0.847. Producer metrics.per_condition_variance matches raw recomputation within 1e-12 -> PASS (>=6/8 required). Corrects parent artifact where PB b_std was 0 due to table error; now stochastic auth_boundary variation (shifts 1 vs 2) provides within-condition variance.",
+    "C3_EQUIVALENCE_DECISION_CORRECT: Frozen decision_rule requires 95% two-sided CI upper <0.15. Observed CI upper 0.135251 <0.15 -> PASS. TOST-equivalent also PASS at delta 0.15 (p_upper 0.011 <0.05 both sides) and at 0.20, FAIL at 0.10 and 0.12. Shared variance ceiling 1.83% at CI upper bound (<2.25%). Decision not cherry-picked from multiple deltas; only delta=0.15 is confirmatory per spec section 8.",
+    "C4_NULL_CONTROL_VERIFIED: FP=0/240 on noise_only_behavioral_scores recomputed (all 240 values exactly 0.0 from raw_evidence noise_only_results) matches result.json controls.C4_null_control -> PASS. Per-sample raw noise_only samples show token_validation_failures=0 auth_boundary_shifts=0 session_state_changes=0 session_status 200 consistent with no drift.",
+    "STOCHASTIC_IMPLEMENTATION_ATTESTED: mock_server.py sha256 5b6cf363a47794576adc842f2c334455f729eeb794ae82ca2f649e89c3b0e3d1 implements all four claimed stochastic elements: SQLite WAL-mode with per-thread connections and busy_timeout 5000 (lines 76-180), SchemaCache TTL=0.5s with stale/fresh alternation (lines 185-215, get_schema lines 405-422), jitter 10-100ms via random.uniform sleeps on DB and HTTP paths (lines 131,143,154,168,180,418,451,464,476), mixed JWT HS256 for read/write and RS256 for admin via cryptography RSA 2048 (lines 49-71, 329-359, 433-437). run_experiment.py sha256 01c49b98ad829457a77a054dcb1969a331721087e7fd5c77704a269f6b2243b6 drives 12 conditions x60 via real HTTP cycles (not analytical). Session status distribution SI conditions 401/403/500 counts (17-26 each) evidences stochastic grading; PB conditions 200 only as expected.",
+    "MEASUREMENT_VALIDITY_ACCEPTABLE_WITH_DISCLOSED_LIMITS: Behavioral composite weights (2,3,1,2) and graded session_status_check 401->1.0/403->0.5/500->0.75 are arbitrary parametric choices inherited from parent, exactly preserved per spec measurement_validity section 5; disclosed in validity_notes. Structural signal max(schema_diff,1-jaccard) is synthetic construct from unauthenticated /schema. Fisher bivariate-normality assumption mildly violated by bounded discrete behavioral (PB bimodal 0.33/0.66, SI trimodal 4.0/4.5/5.0) but n=480 and near-zero r makes transform adequate; producer discloses bounds. Cache hit rate and realized I/O latency not logged as artifact, but structural baseline lens {10,11,12} and unique baselines=60 per condition demonstrate variation. Single localhost instance, no production DB/network/CDN, claim ceiling correctly bounded to localhost.",
+    "NO_LEAKAGE_OR_CONFOUND: Behavioral channel from authenticated /api/* and /session/status (DB-backed auth) is causally separated from structural channel from unauthenticated /schema (schema_fields mutated only via set_noise/set_drift, independent of DB permission/session state). Code inspection confirms schema generation does not read permissions or sessions (mock_server.py generate_schema, apply_noise_to_schema, get_schema lines 242-282, 405-422). Inter-sample schema carryover (baseline lens varies) is representation artifact from no per-sample reset, but identical to parent design and not spuriously inflating correlation (per-condition r remain -0.104 to 0.177, all p>0.11). No data leakage across pooled correlation; n=480 independent paired samples verified.",
+    "PER_CONDITION_HETEROGENEITY_NOT_SIGNIFICANT: All 8 per-condition r p>0.17 (0.1087 p 0.408 to 0.177 p 0.175), 0/8 significant at alpha 0.05 vs expected 0.4 under null, consistent with sampling noise. Per-drift r 0.085 (PB n=240) and 0.076 (SI n=240) similarly near zero. No hidden strong per-condition correlation masked by pooling.",
+    "POWER_ANALYSIS_VERIFIED: min_detectable_r 0.08950209062260417 at n=480 recomputed tanh(1.96/sqrt(477)) matches producer. min_n for |r|=0.05 reported 1538 matches ceil(3+(1.96/atanh(0.05))^2). Observed |r| 0.0463 below detectable threshold confirms experiment is equivalence-powered at delta 0.15 but not significance-powered for point estimate, correctly interpreted.",
+    "REPRESETATION_LOSS_BOUNDED: Producer validity_notes correctly state stochastic Flask mock bounded to SQLite+cache+mixed JWT on localhost, NOT validated for production databases, distributed caches, network latency, OAuth/OIDC, SPA frontends, or delta=0.10. Infrastructure sequential per-condition servers (ports 18950-18961) could serialize DB contention, potentially reducing true stochastic concurrency vs production, but this would conservatively reduce correlation introduction, not inflate false orthogonality."
+  ],
+  "baseline_findings": [
+    "B-PARENT-DETERMINISTIC-N480 comparison verified: parent n=480 r=0.0335 CI [-0.056,0.1226] CI upper 0.1226 <0.15 PASS. This experiment n=480 r=0.0463 CI [-0.043,0.135] CI upper 0.135 <0.15 PASS. Shift delta +0.0127 in upper bound attributable to stochastic DB/cache/jitter/mixed-JWT, but still well below 0.15 threshold. Demonstrates stochasticity did not introduce material correlation; effect size difference 0.0128 is sampling variation (both CIs overlap substantially). No baseline strength deficit; deterministic vs stochastic is strong contrast orthogonal to similarity heuristic.",
+    "B-STOCHASTIC-FLASK-DB-CACHE desk baseline is the tested condition itself; expectation was CI upper <0.15 if orthogonality holds. Observed 0.135 meets expectation, supporting parallel-channel architecture at delta=0.15. At stricter delta=0.10 CI upper 0.135 >0.10 FAIL (consistent with parent needing n~865 for delta=0.10), so result does not generalize to delta=0.10.",
+    "Positive control PC_PERMISSION_BOUNDARY_DETECTION 1.0000 (60/60) independently verifies permission_boundary drift still detectable despite stochastic DB reads, confirming measurement pipeline sensitivity not degraded by new infrastructure."
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled": 0.04630989111344118,
+    "abs_r_pooled": 0.04630989111344118,
+    "ci_lower_95_two_sided": -0.04337196903741858,
+    "ci_upper_95_two_sided": 0.13525138744768356,
+    "ci_upper_95_one_sided": 0.12105907234760954,
+    "fisher_z": 0.046343039268090455,
+    "se_fisher_z": 0.04578685464956301,
+    "tost_p_upper_delta_0.10": 0.11915731910449862,
+    "tost_p_upper_delta_0.12": 0.052467852549816445,
+    "tost_p_upper_delta_0.15": 0.011045206065998056,
+    "tost_p_upper_delta_0.20": 0.0003182099681520019,
+    "mean_tp_rate": 1.0,
+    "wilson_lower_60_of_60": 0.9398260695220669,
+    "conditions_with_variance": 8,
+    "fp_rate_noise_only": 0.0,
+    "fp_count_noise_only": 0,
+    "n_paired_samples": 480,
+    "n_noise_only": 240,
+    "per_condition_r_perm_boundary_optional": 0.10870026760255458,
+    "per_condition_r_session_inv_optional": 0.1771455106176702,
+    "max_per_condition_abs_r": 0.1771455106176702,
+    "min_detectable_r_at_n480": 0.08950209062260417,
+    "shared_variance_ceiling_percent_at_ci_upper": 1.8284285611280655
+  },
+  "claim_ceiling": "C-FRESHNESS orthogonality (|r|<0.15, shared variance <2.25%) holds under stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory cache TTL=0.5s + jitter 10-100ms + PyJWT HS256 (read/write) / RS256 (admin) on localhost, for the 8 co-occurring conditions (2 drift x 4 noise) with N=60 per condition (n=480 paired), using the frozen behavioral composite (token*2+session_change*3+auth_boundary+session_status*2 with graded 401/403/500) and structural max(diff,1-jaccard). Ceiling: PASS at delta=0.15. NOT established at delta=0.10 (CI upper 0.135 >0.10, TOST FAIL, needs n~865), NOT for production databases/distributed caches/CDN/network/OAuth-OIDC/distributed session stores, NOT for alternative noise magnitudes or all permission subsets beyond the 3 tested, NOT for field-type normalization beyond deterministic string/integer flip, NOT for stochastic SPA frontends. Parallel-channel architecture justified ONLY where delta=0.15 acceptable and environment matches mock bounds.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35353011131/result.json sha256 result artifact hashes match provenance.json",
+    "research/experiments/EXP-GRAPH-35353011131/raw_evidence/experiment_data.json sha256 b9ce34242155ace41daea8ea7c4587670a58e7e473413e89d2b319f0db492d94 (480 all_behavioral_scores + 480 all_structural_scores + 240 noise_only_behavioral_scores)",
+    "research/experiments/EXP-GRAPH-35353011131/mock_server.py sha256 5b6cf363a47794576adc842f2c334455f729eeb794ae82ca2f649e89c3b0e3d1 (SQLite WAL, SchemaCache TTL, RS256/HS256, jitter)",
+    "research/experiments/EXP-GRAPH-35353011131/run_experiment.py sha256 01c49b98ad829457a77a054dcb1969a331721087e7fd5c77704a269f6b2243b6 (signal computation, Fisher z, TOST, Wilson CI)",
+    "research/experiments/EXP-GRAPH-35353011131/spec.json sha256 1a89886c1b82a24de3c99f3b1533bef7e1df65a5cd84c6806881f6ab3b8e4305 frozen decision_rule C1-C4 at delta 0.15",
+    "research/experiments/EXP-GRAPH-35353011131/prereg.md sha256 19b958e86484d90ea009fb049ec0ee80428d2c9e5724d748284079cce3334051",
+    "research/experiments/EXP-GRAPH-35330739886/handoff.json sha256 5cc7a1a746a9c46bce93dc664812eba7010bd4d4a224fc0861171087a2daee93 (parent MIXED at delta 0.15, deterministic baseline)"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC and production middleware beyond SQLite mock.",
+    "Whether delta=0.10 is required for product risk tolerance; this experiment FAILs at 0.10 by design (CI upper 0.135 >0.10) and cannot settle that threshold without n~865.",
+    "Whether wider stochastic variation (all 7 permission subsets, larger schema sizes, varied noise magnitudes, concurrent load) changes pooled r or per-condition heterogeneity systematically.",
+    "Realized cache hit rate and actual I/O latency distribution not logged as artifact; stochastic variation evidenced via schema lens and code paths but not quantified.",
+    "Single-machine localhost; production performance/physics characteristics and distributed concurrency effects untested."
+  ]
+}

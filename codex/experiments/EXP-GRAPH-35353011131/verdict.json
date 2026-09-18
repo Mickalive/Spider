@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35353011131",
+  "lane": "graph",
+  "decision": "PASS — C1-C2-C4 PASS verified from producer and independent audit. C3_equivalence passes at delta=0.15: CI upper bound 0.1353 < 0.15, TOST p_upper=0.0110. Audit PASS confirms all recomputed metrics (r=0.0463, Fisher z=0.0463, SE=0.0458, CI [-0.0434, 0.1353]) match producer within numerical precision. This is the first PASS with all four frozen decision conditions met after the parent's MIXED result on deterministic Flask. Orthogonality confirmed under stochastic DB/cache/timing/algorithm conditions at delta=0.15. NOT established at delta=0.10 (CI upper 0.135 > 0.10, TOST FAIL). C-FRESHNESS advances from EXPERIMENTAL with bounded confirmation under stochastic mock conditions; does NOT reach VALIDATED or PRODUCT_CORE.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Orthogonality (|r|=0.046, CI upper 0.135 < 0.15) confirmed under stochastic Flask 3.1.3 + SQLite WAL-mode + cache TTL=0.5s + jitter 10-100ms + HS256/RS256 JWT on localhost. This is the first PASS of all four frozen decision conditions (C1 TP=1.0, C2 8/8 variance, C3 CI upper 0.135 < 0.15, C4 FP=0.0) on stochastic infrastructure, advancing from the parent's MIXED result on deterministic Flask. However, the claim ceiling is bounded: stochastic SQLite mock on localhost with 8 co-occurring conditions, N=480, delta=0.15 only. NOT validated for production databases, distributed caches, CDN, network latency, OAuth/OIDC, stochastic SPA frontends, or delta=0.10. Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock (Jaccard, TF-IDF, response-time KS, linear ensemble, field-usage, schema comparison). Behavioral signals remain a validated detection dimension (TP=1.0, FP=0.0) but product promotion not warranted."
+    }
+  ],
+  "product_action": "No promotion. Orthogonality confirmed under stochastic mock at delta=0.15 but claim ceiling bounded to localhost SQLite+cache+mixed-JWT. Product pipeline MAY use parallel behavioral+structural channels WHERE delta=0.15 is acceptable and environment matches mock bounds. Do NOT promote to PRODUCT_CORE until validated on real APIs with production middleware.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, and production session stores — or does real-world infrastructure introduce coupling that breaks the parallel-channel architecture?",
+  "reason": "All four frozen decision criteria PASS with audit verification. The critical advance is that stochasticity (SQLite DB, cache TTL, I/O jitter, mixed JWT algorithms) did NOT introduce material correlation: r shifted from parent deterministic 0.0335 to stochastic 0.0463 (delta +0.0128, within sampling variation), CI upper moved from 0.123 to 0.135, both below 0.15 threshold. This resolves the parent's core unknown: real API stochasticity (simulated via SQLite/cache/jitter/mixed-algorithms) does not break orthogonality at the tested fidelity level. However, the claim ceiling remains bounded to mock infrastructure on localhost. The highest-upside next question is whether real external APIs with production middleware preserve this structure, which requires materially different infrastructure (not mock servers). At delta=0.10 the experiment is underpowered by design (CI upper 0.135 > 0.10); the practical significance question (do real APIs preserve near-zero correlation?) is more important than the statistical power question at this stage.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35353011131/result.json — PASS metrics: r=0.0463, CI [-0.0434, 0.1353], C1-C4 all PASS",
+    "research/experiments/EXP-GRAPH-35353011131/audit.json — status PASS, recomputed_metrics match producer, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35353011131/raw_evidence/experiment_data.json sha256 b9ce34242155ace41daea8ea7c4587670a58e7e473413e89d2b319f0db492d94",
+    "research/experiments/EXP-GRAPH-35353011131/mock_server.py sha256 5b6cf363a47794576adc842f2c334455f729eeb794ae82ca2f649e89c3b0e3d1",
+    "research/experiments/EXP-GRAPH-35353011131/run_experiment.py sha256 01c49b98ad829457a77a054dcb1969a331721087e7fd5c77704a269f6b2243b6",
+    "research/experiments/EXP-GRAPH-35330739886/handoff.json sha256 5cc7a1a746a9c46bce93dc664812eba7010bd4d4a224fc0861171087a2daee93 (parent MIXED baseline)"
+  ]
+}
