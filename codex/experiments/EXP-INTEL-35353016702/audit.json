@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35353016702",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "RF1_M1_REPORTING_INACCURACY: result.json M1_DENSITY_MATRIX reports canonical_density_mean 0.006288, weighted_density_mean 0.195188, mean_density_mean 0.100738, cross_recipe_ratio 31.04, weighted_range min 0.00253. Recomputation from derived artifact /tmp/opencode/third_recipe_output/analysis_results.json (sha b02e5a9205b51e49686dab65b059263b0d2e04f2e76688c714a0fdfa24efbd02) yields canonical mean 0.004654, weighted mean 0.146211, mean mean 0.075432, ratio 31.41, weighted min 0.001321 (detail_camera ISOLATED-A-LINK). Ranges max/min for canonical (0.000358-0.008803) and mean (0.001703-0.154445) match, but weighted min and all means are offset ~35%. Producer must correct M1 values to artifact or document alternative averaging (e.g., per-definition vs per-pair) and recompute ratio accordingly.",
+    "RF2_PROVENANCE_DURABILITY: provenance.json code_paths entry for /tmp/opencode/third_recipe_analysis.py has sha256 null and path is ephemeral /tmp, not under research/experiments/ persistent path. spec.json measurement_validity #1 requires reconstruction documented with exact code path and hash. Persist analysis script to experiment directory with versioned hash and update provenance/artifacts.",
+    "RF3_TERMINOLOGY_CLARITY: spec.json and falsifier describe '63 dominance pairs (21 task-definition pairs x 3 pairwise comparisons)' implying 63 values, while result.json M2 correctly reports total_comparisons 3 (global dominance per recipe pair per prereg M1 definition). Clarify that dominance is global per pair (3 values) not per-task (would be 63), to avoid inflating N and retain frozen C2 threshold (>=1 non-degenerate among 3, not 63). Add note to report/provenance.",
+    "RF4_C4_NULL_DEFINITION_SIMPLIFICATION: spec.json measurement_validity and decision_rule C4 state 'real_count > shuffled_count, or shuffled equals but closer to 50%' ; producer implements simplified 'real > null_mean' (result.json controls NC1, analysis_results.json decision_rule c4_pass). For this outcome (real 0 < 1.988) both definitions give FAIL, so no outcome change, but fix spec/report language to state simplified rule explicitly or implement full clause before full-DOM re-run."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_LINEAR_MEAN_TAUTOLOGY",
+      "severity": "medium",
+      "description": "Meta-analytic mean (canonical+weighted)/2 is mathematically guaranteed to rank between the two originals whenever canonical<weighted strictly. Recomputation confirms canonical<mean<weighted on all 21/21 pairs (100%, ranking_position_distribution position_1_count 21). Therefore C2_NONDEGENERATE_EXISTS (>=1 pair with 10%<dominance<90%) and C3_THIRD_RECIPE_DISTINCT (>=3 ranking changes) are a priori impossible given the observed strict ordering, not an empirical discrimination. Producer correctly discloses this as mathematical identity (OBS-1, VN-1, VN-5) and verdicts FALSIFIED-IN-SETTING, but hypothesis required task-dependent sensitivity to produce non-degeneracy which cannot occur with a linear combination. The experiment correctly falsifies the linear-recipe hypothesis, but information gain is limited to demonstrating the tautology, not to external variability.",
+      "evidence_ref": "result.json:observations OBS-1 OBS-2, validity_notes VN-1 VN-5; /tmp/opencode/third_recipe_output/analysis_results.json:density_matrix, ranking_position_distribution, dominance_results; spec.json:hypothesis, falsifier F1-F2"
+    },
+    {
+      "id": "V2_TRUNCATION_AND_SCOPE",
+      "severity": "medium",
+      "description": "All densities computed on locatable_sample capped at 20, from 7 tasks (3 listing, 3 detail, 1 cart) on 1 site (Magento) with 3 of 5 definitions. Provenance raw_evidence sha da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 shows locatable_elements 21-82 vs sample 20, total_dom 1136-1712. Producer correctly bounds to truncated-first-20 (VN-3, report Claim Ceiling) and does not extrapolate. Small N makes dominance percentages coarse (multiples of 4.76% for 21 pairs) and limits generalization.",
+      "evidence_ref": "provenance.json:datasets; result.json:validity_notes VN-3; research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json:locatable_elements, total_dom_elements; spec.json:measurement_validity item 4"
+    },
+    {
+      "id": "V3_SAMPLING_REPRESENTATION",
+      "severity": "low",
+      "description": "Sampling is offline reconstruction, no new browser work. All 21 task-definition pairs constitute population; no holdout/inference needed per prereg unit_of_analysis. Sampling integrity is intact within frozen scope. No leakage (deterministic mean, shuffled null permutes only mean values). Representation loss is truncation (V2), not producer-introduced bias.",
+      "evidence_ref": "prereg.md sections 4,5,6; result.json metrics M1 n_tasks 7 total_pairs 21; /tmp/opencode/third_recipe_analysis.py:compute_canonical_density, compute_weighted_density"
+    },
+    {
+      "id": "V4_CONTROLS_VALID",
+      "severity": "none",
+      "description": "PC1_FRAMEWORK_EXECUTES PASS verified: 63/63 comparisons valid (21 pairs x 3 comparisons), recomputed via script. NC1_SHUFFLED_THIRD correctly FAILS (real 0 < null 1.988 +/-0.109, n_shuffles 1000, seed 42). Null behavior (shuffling breaks canonical<mean<weighted ordering to create ~2 non-degenerate) confirms mean degeneracy is structural, not chance. Controls executed as frozen.",
+      "evidence_ref": "result.json:controls PC1_FRAMEWORK_EXECUTES, NC1_SHUFFLED_THIRD; /tmp/opencode/third_recipe_output/analysis_results.json:null_control, decision_rule"
+    },
+    {
+      "id": "V5_MEASUREMENT_VALIDITY_OVERALL",
+      "severity": "none",
+      "description": "Measurement validity items satisfied: reconstruction from existing raw, deterministic mean definition, dominance with tie 0.5, truncated scope stated, ties absent (no equal densities). Spec decision_rule applied correctly: C1 PASS and NOT C2 => FALSIFIED-IN-SETTING (spec decision_rule). Status COMPLETE outcome FALSIFIES matches. Not MEASUREMENT_INVALID.",
+      "evidence_ref": "spec.json:measurement_validity, decision_rule; result.json:status, outcome; /tmp/opencode/third_recipe_analysis.py:compute_dominance_for_pair"
+    },
+    {
+      "id": "V6_PROVENANCE_INTEGRITY",
+      "severity": "low",
+      "description": "Provenance correctly cites raw, derived artifact hash, frozen input hashes, and reproduction command. Durability gap noted in RF2 (tmp path, null code hash). Git base 80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb, commit 006c5bcbb479a63d1f0a1ae1d65b91913321e57b, executed_at 2026-09-18T14:30:00. No hidden branching.",
+      "evidence_ref": "provenance.json:github_run_id, base_sha, commit_sha, artifacts, reproduction; result.json:artifacts"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_2RECIPE_BINARY",
+      "severity": "none",
+      "description": "Baseline confirmed: canonical vs weighted dominance 0%/100% degenerate on all 21 pairs, matching parent EXP-INTEL-35330747199. Producer reports CONFIRMED; recomputed 0.0% canonical dominance (all weighted higher) matches. Serves as correct degenerate floor.",
+      "evidence_ref": "result.json:controls B1_2RECIPE_BINARY; /tmp/opencode/third_recipe_output/analysis_results.json:dominance_results canonical_vs_weighted 0.0; spec.json:baselines B1_2RECIPE_BINARY"
+    },
+    {
+      "id": "B2_RANDOM_THIRD",
+      "severity": "none",
+      "description": "Constructed null (shuffled mean) produces ~1.988 non-degenerate vs real 0. Producer correctly interprets real < shuffled as maximally uninformative linear combination, not as failure of null. Baseline strength adequate: demonstrates non-degeneracy is easily achieved by chance (shuffling) but not by linear mean, strengthening falsification.",
+      "evidence_ref": "result.json:metrics M4_NULL_NONDEGENERATE_COUNT value 1.988 std 0.109 n_shuffles 1000; /tmp/opencode/third_recipe_output/analysis_results.json:null_control; spec.json:baselines B2_RANDOM_THIRD, null_control NC1_SHUFFLED_THIRD"
+    },
+    {
+      "id": "B3_MONOTONE_THIRD",
+      "severity": "none",
+      "description": "Theoretical monotone bound (always ranks between => exactly 50% dominance if present on every pair) correctly not claimed empirically. Observed is degenerate 0%/100% not 50%, because linear mean is strictly between but dominance aggregates globally. No monotone third executed, correctly left as theoretical bound per spec.",
+      "evidence_ref": "spec.json:baselines B3_MONOTONE_THIRD; result.json:metrics M5_DOMINANCE_PAIRS canonical_vs_mean 0% weighted_vs_mean 100% degenerate true; report.md Ranking Analysis"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_DENSITY_MATRIX": {
+      "producer": {"canonical_density_mean": 0.006288, "weighted_density_mean": 0.195188, "mean_density_mean": 0.100738, "cross_recipe_ratio": 31.04, "canonical_range": [0.000358, 0.008803], "weighted_range": [0.00253, 0.301222], "mean_range": [0.001703, 0.154445]},
+      "recomputed": {"canonical_density_mean": 0.0046542051285892614, "weighted_density_mean": 0.14621075050626337, "mean_density_mean": 0.0754324778174263, "cross_recipe_ratio": 31.414762879302096, "canonical_range": [0.00035842293906810036, 0.008802816901408451], "weighted_range": [0.001321333632019116, 0.30122189736707566], "mean_range": [0.0008398782855436081, 0.1544453045117587]},
+      "match": false,
+      "note": "Recomputed from derived artifact density_matrix (21 pairs). Canonical/mean/weighted means offset ~35% vs producer; weighted min differs (producer excludes detail ISOLATED 0.00132). Ratio close (31.04 vs 31.41). Ordering and dominance unaffected. See RF1.",
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:density_matrix"
+    },
+    "M2_NONDEGENERATE_COUNT": {
+      "producer": {"value": 0, "threshold": "10% < dominance < 90%", "total_comparisons": 3},
+      "recomputed": {"value": 0, "total_comparisons": 3, "degenerate_all": true},
+      "match": true,
+      "note": "All 3 global pairwise dominances degenerate (0% or 100%). See M5.",
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:dominance_results, nondgenerate_count"
+    },
+    "M3_RANKING_CHANGE_COUNT": {
+      "producer": {"value": 0, "total_pairs": 21, "threshold": ">=3"},
+      "recomputed": {"value": 0, "total_pairs": 21, "position_1_count": 21},
+      "match": true,
+      "note": "Mean ranks position 1 (between) on 21/21 pairs; no pair where mean not between. Confirms VN-1 tautology.",
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:ranking_change_count, ranking_position_distribution"
+    },
+    "M4_NULL_NONDEGENERATE_COUNT": {
+      "producer": {"value": 1.988, "std": 0.109, "n_shuffles": 1000},
+      "recomputed": {"value": 1.988, "std": 0.10888526071052959, "n_shuffles": 1000, "real_nd": 0},
+      "match": true,
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:null_control"
+    },
+    "M5_DOMINANCE_PAIRS": {
+      "producer": {"canonical_vs_weighted": {"dominance_canonical": 0.0, "dominance_weighted": 100.0, "degenerate": true}, "canonical_vs_mean": {"dominance_canonical": 0.0, "dominance_mean": 100.0, "degenerate": true}, "weighted_vs_mean": {"dominance_weighted": 100.0, "dominance_mean": 0.0, "degenerate": true}},
+      "recomputed": {"canonical_vs_weighted": 0.0, "canonical_vs_mean": 0.0, "weighted_vs_mean": 100.0, "all_degenerate": true},
+      "match": true,
+      "note": "Recomputed via compute_dominance_for_pair: a_higher +0.5*tied /21 *100. No ties; all strict.",
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:dominance_results"
+    },
+    "M6_RANKING_POSITION_DISTRIBUTION": {
+      "producer": {"position_0_count": 0, "position_1_count": 21, "position_2_count": 0},
+      "recomputed": {"1": 21},
+      "match": true,
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:ranking_position_distribution"
+    },
+    "PC1_FRAMEWORK_EXECUTES": {
+      "producer": "PASS 63/63 valid",
+      "recomputed": "PASS 63/63 valid (21 pairs *3 comparisons, all non-null)",
+      "match": true,
+      "evidence_ref": "/tmp/opencode/third_recipe_analysis.py:main Step 3; result.json:controls PC1"
+    },
+    "NC1_SHUFFLED_THIRD": {
+      "producer": "FAIL real 0 < shuffled 1.988",
+      "recomputed": "FAIL real 0 < shuffled_mean 1.988",
+      "match": true,
+      "evidence_ref": "/tmp/opencode/third_recipe_output/analysis_results.json:null_control, decision_rule c4_pass false"
+    },
+    "C1_FRAMEWORK_VALID": {
+      "producer": "PASS",
+      "recomputed": "PASS",
+      "match": true
+    },
+    "C2_NONDEGENERATE_EXISTS": {
+      "producer": "FAIL 0/3",
+      "recomputed": "FAIL 0/3",
+      "match": true
+    },
+    "C3_THIRD_RECIPE_DISTINCT": {
+      "producer": "FAIL 0/21",
+      "recomputed": "FAIL 0/21",
+      "match": true
+    },
+    "C4_NULL_CONTROL_PASSES": {
+      "producer": "FAIL 0 < 1.988",
+      "recomputed": "FAIL 0 < 1.988",
+      "match": true
+    },
+    "VERDICT": {
+      "producer": "FALSIFIED-IN-SETTING (C1 AND NOT C2)",
+      "recomputed": "FALSIFIED-IN-SETTING",
+      "match": true,
+      "note": "Per spec decision_rule: C1 AND NOT C2 => FALSIFIED-IN-SETTING. Producer outcome FALSIFIES with that verdict correctly applied.",
+      "evidence_ref": "spec.json:decision_rule; /tmp/opencode/third_recipe_output/analysis_results.json:decision_rule/verdict"
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Adding a linear meta-analytic mean recipe (canonical+weighted)/2 does NOT break the 2-recipe dominance degeneracy under the OECD/COINr framework on truncated-first-20 data (7 tasks: 3 product_listing, 3 detail, 1 cart; 1 site Magento; 3 definitions DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK; locatable_sample cap 20). All 3 pairwise dominances remain degenerate 0%/100%, mean ranks strictly between on 21/21 pairs, 0 non-degenerate and 0 distinct rankings, null shuffled mean yields more non-degeneracy (~1.99) than real (0). The degeneracy is therefore NOT solely a 2-recipe mathematical artifact for this density metric and this linear third recipe; it persists because canonical<weighted strictly on every pair (31x gap) and linear interpolation preserves ordering. This is bounded to linear combination third recipes; it does NOT generalize to non-linear/structural third recipes (DOM hierarchy, semantic weighting), to full-DOM enumeration (blocked by runtime locatableSample cap), to cross-site, or to alternative MIXED frameworks (density ratio, reversal rate). The MIXED outcome decision rule remains UNRESOLVED; density program must pivot to non-linear recipe or alternative metric before a full-DOM re-run. C-MEAS-VALID remains EXPERIMENTAL.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35353016702/request.json",
+    "research/experiments/EXP-INTEL-35353016702/spec.json",
+    "research/experiments/EXP-INTEL-35353016702/prereg.md",
+    "research/experiments/EXP-INTEL-35353016702/freeze.json",
+    "research/experiments/EXP-INTEL-35353016702/result.json",
+    "research/experiments/EXP-INTEL-35353016702/report.md",
+    "research/experiments/EXP-INTEL-35353016702/provenance.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "/tmp/opencode/third_recipe_output/analysis_results.json",
+    "/tmp/opencode/third_recipe_analysis.py"
+  ],
+  "unresolved": [
+    "U-1 non-linear third recipe viability: Would a structurally different recipe (DOM hierarchy depth, conditional inclusion, semantic weighting) produce rankings outside canonical-weighted range and create non-degenerate dominance? Blocked by need to define/implement new recipe.",
+    "U-2 OECD framework viability at all: Is dominance-based MIXED handling fundamentally unworkable for density metric given extreme recipe sensitivity (31x gap), requiring alternative approach (density ratio, ranking reversal rate)?",
+    "U-3 canonical near-zero density artifact: Does mean 0.004-0.006 reflect true page structure or p=0.5 independent inclusion on sparse DOM (20-sample)?",
+    "U-4 full-DOM persistence: Would 31x ratio and strict canonical<weighted ordering persist with full locatable_sample (21-82 elements)? Blocked by runtime cap.",
+    "U-5 M1 mean reporting: Producer vs recomputed M1 means differ ~35% (RF1); does not affect dominance but leaves provenance of summary statistics unresolved."
+  ]
+}

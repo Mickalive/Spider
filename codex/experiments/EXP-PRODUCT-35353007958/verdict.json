@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID — Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No change. This experiment accumulated zero evidence. The parent's 5.42% analytical savings on synthetic 32-task corpus (EXP-PRODUCT-35330741529) remains the most recent valid measurement, with frozen gate failed (C1 assumed not measured). C1 (LLM selection accuracy), C2 (param selection tokens <= literal), C3 (total workflow cost param <= literal), and C4 (positive control) are all unmeasured. The product_consequence_negative (C-PRODUCT-ECON advances to REJECTED) does not apply because no falsifying evidence was produced — the experiment was not executed. C-PRODUCT-ECON remains HYPOTHESIS."
+    },
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
+    }
+  ],
+  "product_action": "No product action. Infrastructure failure prevents any product-level decision. Smallest next action: configure LLM API key (export OPENAI_API_KEY=sk-...) and re-run frozen design, or explicitly close token-based inheritance economics (option C from parent handoff).",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the product lane (A) retry the frozen design with real LLM API calls after configuring API keys, (B) test with the actual SPIDER registry/task corpus, or (C) close token-based inheritance economics entirely given that (i) COLD baseline is 8x cheaper than either registry condition, (ii) the 5.42% margin is thin under estimated completion tokens, and (iii) browser/verification costs may dominate token savings?",
+  "reason": "This experiment was designed to resolve the parent's two blocking validity gaps (C1_success unmeasured, completion tokens estimated) by executing real LLM API calls. The experiment correctly classified itself as MEASUREMENT_INVALID (0/32 tasks executed, infrastructure failure). The audit confirmed: frozen inputs intact, no false falsification or support, no metrics fabricated, infrastructure gap independently reproduced, parent ceiling unchanged. The parent's analytical ceiling (5.42% token savings, selection saving 3168 tokens 16.09%, resolution overhead 2101 tokens 10.67%, null ratio 1.0185) remains arithmetic-verified but with the same validity gaps (C1 assumed, completion estimated, browser omitted, COLD 8x cheaper unmeasured). No claim status change warranted. The product lane faces a three-way decision at the parent handoff's recommended_action: (A) provide API access and re-run, (B) test on real corpus, or (C) close token-based economics.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35353007958/result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics {} controls C1-C4 pass null observed_behavior NOT_MEASURED artifacts [] observations[0-3] validity_notes[0-5] unresolved[0-4]",
+    "research/experiments/EXP-PRODUCT-35353007958/audit.json status MEASUREMENT_INVALID producer_claim_supported false required_fixes FIX_API_KEY_MISSING REPORT_NULL_CONTROL_OMISSION validity_findings V1-V7 claim_ceiling no new evidence parent ceiling unchanged",
+    "research/experiments/EXP-PRODUCT-35353007958/report.md Status MEASUREMENT_INVALID infrastructure failure not scientific negative, Carry-Forward State inherits parent analytical measurement",
+    "research/experiments/EXP-PRODUCT-35353007958/provenance.json measurement_protocol NOT_EXECUTED api_access.available false environment packages tiktoken 0.14.0 openai 3.15.0",
+    "research/experiments/EXP-PRODUCT-35330741529/handoff.json carry_forward established 5.42% analytical rejected SUPPORTS not justified unknown C1/completion/COLD do_not_assume 5.42% not generalizable next_question A/B/C",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json REVISE producer_claim_supported false V1_C1_SUCCESS_UNMEASURED V2_COMPLETION_TOKENS_ESTIMATED V3_BROWSER_VERIFICATION V4_COLD_INVERSION claim_ceiling analytical synthetic only",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json metrics literal 19691 param 18624 cold 2475 workflow_savings 1067 5.42% selection_savings 3168 16.09% resolution_overhead 2101",
+    "codex/claim_state.json C-PRODUCT-ECON HYPOTHESIS C-PARAM-INHERIT EXPERIMENTAL"
+  ]
+}

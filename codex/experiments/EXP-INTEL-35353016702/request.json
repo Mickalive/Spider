@@ -1,0 +1,20 @@
+{
+  "base_sha": "80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T13:55:05.550962+00:00",
+  "experiment_id": "EXP-INTEL-35353016702",
+  "inherited_last_verdict": "REVISE \u2014 Producer's MIXED outcome is not justified per frozen decision_rule. The observed C-pattern (C1 PASS, C2 FAIL, C3 PASS, C4 PASS, C5 PASS) has no frozen bucket: MIXED requires NOT C5 but C5 passes (null_ci_gte_13x true, dominance within 15%). This is a preregistration coverage defect (audit V1_DECISION_RULE_UNCLASSIFIABLE), not a scientific result. Additionally, C2_DOMINANCE_INFORMATIVE is construct-impossible with exactly 2 recipes (all dominance necessarily 0%/100%, audit V2), C3_CI_INFORMATIVE compares rank-width to density-range in incommensurable units (audit V3), C4 chi-square never computed and N=14 vs frozen 21 (audit V4), and C5 null dominance is tautological with 2 recipes (audit V5). The OECD/COINr framework as operationalized is not informative for MIXED outcome handling in the 2-recipe setting. The parent's next question (full-DOM C2 reversal persistence) remains blocked by the runtime locatableSample cap. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
+  "inherited_next_question": "Can a third recipe variant (e.g., meta-analytic combination of canonical and weighted, or a new structural recipe) break the 2-recipe dominance degeneracy and make the OECD/COINr framework informative for MIXED outcome handling \u2014 and does this reformulated decision rule survive on full-DOM data after the runtime lane removes the locatableSample cap?",
+  "lane": "intel",
+  "origin_github_run_id": "35353016702",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35330747199",
+    "path": "research/experiments/EXP-INTEL-35330747199/handoff.json",
+    "sha256": "f1cb221b32b91f2669012155a9298493474d471bf6c8536b6b81851643f16341"
+  },
+  "reason": "pulse",
+  "request_hash": "787a908ccc437307fa9d48fd58251522e7d4ac77da388b6ac8fa7a837808ed16",
+  "request_id": "8aec0d88b7bcde72782a9155",
+  "schema_version": 1
+}

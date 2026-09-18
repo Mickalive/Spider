@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35353016702",
+  "lane": "intel",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule condition C2 fails: 0/3 pairwise dominance comparisons are non-degenerate (all strictly 0% or 100%). C1 passes (63/63 valid), but C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The meta-analytic mean recipe (canonical+weighted)/2 always ranks between the two originals by mathematical identity (OBS-1, VN-1), so no linear combination of two strictly-ordered recipes can produce non-degenerate dominance. The 2-recipe degeneracy is NOT solely a 2-recipe artifact — it persists because the density metric has extreme recipe sensitivity (31x canonical/weighted gap) and linear interpolation preserves ordering. The MIXED outcome decision rule remains UNRESOLVED. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "No claim status change warranted. This experiment tested whether a linear meta-analytic mean third recipe breaks OECD/COINr 2-recipe dominance degeneracy. Frozen decision_rule triggers FALSIFIED-IN-SETTING (C1 PASS, C2 FAIL). The mean recipe always ranks between canonical and weighted on all 21 pairs (mathematical identity), producing 0 non-degenerate dominance pairs and 0 ranking changes. Null shuffled mean yields ~2 non-degenerate pairs, confirming the real mean is maximally uninformative. The MIXED outcome decision rule remains unresolved. The density metric's extreme recipe sensitivity (31x gap) makes linear combinations fundamentally unable to break degeneracy. Non-linear third recipes or alternative frameworks (density ratio, ranking reversal rate) remain untested. C-MEAS-VALID is not advanced, not falsified by this experiment — this is a framework operationalization test, not an empirical measurement validation."
+    }
+  ],
+  "product_action": "NONE — The MIXED outcome decision rule remains unresolved. Product lane must NOT use the OECD/COINr dominance framework with linear combination recipes for MIXED outcome handling. The density metric program must either pivot to a non-linear third recipe (structural: DOM hierarchy depth, semantic weighting, conditional inclusion) or adopt an alternative MIXED framework (density ratio, ranking reversal rate) before the full-DOM re-run is worth conducting. The 3-recipe linear approach is closed.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Given that linear combination recipes cannot break OECD/COINr degeneracy (mathematical identity: mean always ranks between originals when canonical<weighted strictly), should the MIXED outcome program pivot to (a) a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element relationships, semantic role weighting) that could produce rankings outside the canonical-weighted range, (b) an alternative MIXED decision rule entirely (density ratio between canonical and weighted as a continuous sensitivity metric, or ranking reversal rate across definitions), or (c) abandon dominance-based MIXED handling and restrict density metric use to recipe-insensitive task-definition pairs if definition choice is shown to be the primary resolution lever?",
+  "reason": "The frozen decision_rule is satisfied: C1 PASS (framework executes, 63/63 valid), C2 FAIL (0/3 non-degenerate dominance), so C1 AND NOT C2 => FALSIFIED-IN-SETTING. The audit confirms all recomputed metrics match producer (dominance, ranking, null control). The failure is mathematical, not empirical: for any x < y, (x+y)/2 always satisfies x < (x+y)/2 < y, making the meta-analytic mean a trivial interpolation that preserves the degenerate dominance structure. The null control correctly shows shuffled means produce ~2 non-degenerate pairs (shuffling breaks the canonical<mean<weighted ordering), confirming the degeneracy is structural to linear combinations, not chance. The audit's REVISE findings (RF1-RF4) address reporting inaccuracies in M1 means (~35% offset) and provenance durability, but do not affect the dominance/ordering conclusion. The claim ceiling is bounded to: linear combination third recipes, truncated-first-20 locatable_sample, 7 tasks on 1 Magento site, 3 definitions. This experiment does NOT close the broader MIXED outcome question — non-linear recipes and alternative frameworks remain untested. However, the linear path is definitively closed and the program must pivot to materially different approaches.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35353016702/request.json — frozen request, parent_handoff reference",
+    "research/experiments/EXP-INTEL-35353016702/spec.json — frozen decision_rule (C1 AND NOT C2 => FALSIFIED-IN-SETTING), hypothesis, falsifier",
+    "research/experiments/EXP-INTEL-35353016702/prereg.md — carry_forward established/rejected/unknown/do_not_assume, claim ceiling",
+    "research/experiments/EXP-INTEL-35353016702/freeze.json — frozen inputs",
+    "research/experiments/EXP-INTEL-35353016702/result.json — M1-M6 metrics, C1-C4 criteria, OBS-1-5, VN-1-5, PC1 PASS, NC1 FAIL",
+    "research/experiments/EXP-INTEL-35353016702/audit.json — REVISE, V1-V6, recomputed_metrics all match, claim_ceiling: linear combination closed",
+    "research/experiments/EXP-INTEL-35353016702/report.md — executive summary, ranking analysis, null control, interpretation",
+    "research/experiments/EXP-INTEL-35353016702/provenance.json — execution provenance, raw data reference",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json — source measurement data (sha da30bd05)",
+    "/tmp/opencode/third_recipe_output/analysis_results.json — derived analysis artifact (sha b02e5a92)"
+  ]
+}
