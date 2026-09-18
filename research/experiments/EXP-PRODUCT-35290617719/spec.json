@@ -1,17 +1,41 @@
 {
   "experiment_id": "EXP-PRODUCT-35290617719",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON", "C-PARAM-INHERIT"],
+  "question": "Does parameterized mechanism representation reduce total unique mechanism count and token cost across the existing SPIDER task corpus, providing evidence that deduplication savings could offset per-mechanism token penalty in real agent workflows?",
+  "hypothesis": "Parameterized mechanisms reduce total registry size and token cost compared to literal (concrete-URL) mechanisms across the task corpus, because multiple tasks sharing the same action pattern (e.g., GET /posts/{id}) collapse to one parameterized mechanism instead of many literal variants.",
+  "falsifier": "Parameterized representation increases total registry size or token cost compared to literal representation across the task corpus (deduplication ratio > 1.0), OR the deduplication ratio is < 1.0 but the net token cost (parameterized overhead minus deduplication savings) is negative.",
+  "baselines": [
+    {
+      "id": "B-LITERAL-REGISTRY",
+      "description": "All mechanisms stored as literal concrete-URL mechanisms (one per unique URL across all tasks)",
+      "expected_behavior": "N_unique_mechanisms equals total distinct concrete URLs; token cost equals sum of all literal mechanism tokens"
+    },
+    {
+      "id": "B-PARAMETERIZED-REGISTRY",
+      "description": "Mechanisms stored as parameterized templates with slot names (one per unique action pattern across all tasks)",
+      "expected_behavior": "N_unique_mechanisms equals distinct action patterns; token cost equals sum of parameterized mechanism tokens including slot syntax"
+    }
+  ],
+  "positive_control": {
+    "id": "POS-CONTROL-TASK-SHARING",
+    "description": "Tasks sharing the same action pattern (e.g., GET /posts/{id} for different concrete IDs) should collapse to one parameterized mechanism",
+    "expected_behavior": "Parameterized mechanism count for shared patterns equals 1 regardless of number of concrete variants"
+  },
+  "null_control": {
+    "id": "NULL-NO-SHARING",
+    "description": "Tasks with completely distinct action patterns (no sharing) should show no deduplication benefit",
+    "expected_behavior": "Deduplication ratio approximately 1.0 when no tasks share action patterns"
+  },
+  "measurement_validity": [
+    "Mechanism definitions must come from existing SPIDER registry and task corpus (not synthetic)",
+    "Token counting must use tiktoken cl100k_base for consistency with parent experiments",
+    "Deduplication ratio must be computed as parameterized_total_tokens / literal_total_tokens",
+    "Both GET and non-GET methods must be counted separately to avoid method-conflation bias"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) parameterized mechanism count < literal mechanism count across task corpus; (C2) parameterized total token cost < literal total token cost (deduplication ratio < 1.0); (C3) net token savings (literal_cost - parameterized_cost) > 0; (C4) positive_control passes (shared patterns collapse to 1); (C5) null_control passes (no-sharing patterns show ratio ~1.0). FALSIFIED if any condition fails.",
+  "product_consequence_positive": "If deduplication ratio < 1.0 with positive net savings, proceed to end-to-end C-PRODUCT-ECON measurement with real agent infrastructure to validate amortized cost benefits in real workflows.",
+  "product_consequence_negative": "If deduplication ratio >= 1.0 or net savings <= 0, close token-based inheritance viability entirely and pursue alternative product economics (retrieval efficiency, registry size compression, or orthogonal mechanisms).",
+  "estimated_cost": "Low — purely analytical computation on existing registry/task data, no browser/model/network calls",
+  "expected_information_gain": "High — directly answers whether deduplication is viable before committing to expensive end-to-end measurement; changes product lane direction if negative"
 }
