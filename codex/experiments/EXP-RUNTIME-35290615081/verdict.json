@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35290615081",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — All seven frozen decision-rule conditions pass (C_STRATIFIED_COVERAGE, C_DECOMPRESSED_DISCRIMINATION, C_DECOMPRESSED_DETERMINISM, C_SINGLE_LAYER_NO_REGRESSION, C_LATENCY, C_NO_ERROR_INFLATION, C_COMPRESSED_BASELINE). The parent audit V1 coverage gap is closed: valid_token × triple_br now observed at 27/180 reps (vs 0/180 in parent), and decompressed hash determinism holds all_same=true across all 27 triple-br observations. Compressed body-only discrimination 0.2781 < 0.3 threshold is expected per frozen spec and confirms decompression is necessary. Independent audit V2 confirms all recomputed metrics match producer exactly. Claim ceiling advances from parent (double-brotli all states + triple-br error states only) to include triple-br for valid_token success body on localhost. C-MEAS-VALID remains EXPERIMENTAL — real CDN infrastructure (Cloudflare/Fastly/Akamai) remains the sole untested blocker for product readiness.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization sub-thread advances: iterative decompression (max_depth=5) restores body-only discrimination to 0.5 and hash determinism all_same=true under triple-brotli encoding for ALL auth states including valid_token success body, resolving parent V1 coverage gap (27/180 triple-br valid_token observations vs 0/180). All 7 frozen decision rules pass with audit PASS. However, C-MEAS-VALID remains EXPERIMENTAL because (a) this is localhost mock server only — real CDN infrastructure (Cloudflare/Fastly/Akamai) is untested; (b) the structural discrimination ceiling of 0.5 is a property of the 3-way error collapse mock design, not a production guarantee; (c) no real OAuth/OIDC production middleware, caching, chunked transfer-encoding, or edge quality diversity has been validated. Claim ceiling bounded to: localhost mock OAuth2 server, synthetic padded JSON/HTML/XML 1KB-100KB, 4 auth states, brotli quality 4-8 cycling, iterative decompression max_depth=5, N=20 per state per condition, seed 44, Python 3.12.14, brotli 1.2.0."
+    }
+  ],
+  "product_action": "Advance decompression-normalization to next-phase testing: real CDN infrastructure validation is the blocking gate for product readiness. No code changes required — this is a measurement-only experiment. The validated iterative decompression mechanism (decompress_body loop with max_depth=5) is ready for CDN stress testing.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
+  "reason": "The experiment definitively closes the parent V1 coverage gap: valid_token × triple-br is now observed and validated (27/180 reps, all decompressed hashes match single-layer, determinism all_same=true). All 7 frozen decision rules pass with audit PASS. The decompression-normalization mechanism is now validated on localhost across single-layer, double-brotli, and triple-brotli encoding for all 4 auth states. The only remaining blocker for C-MEAS-VALID product readiness is real CDN infrastructure. A materially orthogonal question (CDN survival) is prioritized over repeating a failed or already-answered question.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35290615081/result.json — 720 requests, 9 conditions, 4 states, 20 reps; decompressed 0.5 all cells; compressed 0.2781; valid_token triple_br 27/180; all decompressed hashes match single-layer; all_same=true",
+    "research/experiments/EXP-RUNTIME-35290615081/audit.json — PASS, producer_claim_supported true, required_fixes empty, V2 independent recomputation matches producer exactly",
+    "research/experiments/EXP-RUNTIME-35290615081/provenance.json — python 3.12.14, brotli 1.2.0, 720 requests, seed 44",
+    "research/experiments/EXP-RUNTIME-35280364816/handoff.json — parent carry_forward with V1 valid_token triple-br 0/180 gap (closed by this experiment)"
+  ]
+}
