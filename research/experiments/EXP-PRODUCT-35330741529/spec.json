@@ -1,17 +1,49 @@
 {
   "experiment_id": "EXP-PRODUCT-35330741529",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON", "C-PARAM-INHERIT"],
+  "question": "Does parameterized mechanism deduplication reduce total end-to-end workflow cost per successful task compared to literal mechanism replay, when model selection, mechanism resolution, browser execution, and verification costs are all measured on a fixed task corpus?",
+  "hypothesis": "The deduplicated parameterized registry (25 mechanisms) reduces total workflow cost versus the full literal registry (32 mechanisms) because: (1) fewer mechanisms to evaluate during selection reduces model selection tokens; (2) token savings from storing shared patterns once outweigh per-mechanism resolution overhead; (3) browser execution and verification costs are identical across conditions (same actions executed). Net workflow savings exceed the parent's 14.16% storage-level savings because selection cost scales with registry size.",
+  "falsifier": "Total workflow cost for parameterized condition is higher than literal condition when all costs (selection + resolution + execution + verification) are summed, OR the parameterized condition achieves lower success rate due to binding/resolution failures, OR selection tokens for parameterized are higher than literal despite smaller registry.",
+  "baselines": [
+    {
+      "id": "B-LITERAL-REGISTRY",
+      "description": "Full literal registry (32 concrete-URL mechanisms). Model selects from all 32 mechanisms and executes the matched one directly.",
+      "expected_behavior": "Model evaluates all 32 mechanisms during selection; selection token cost scales with registry size; no resolution step needed; execution and verification proceed on concrete URL."
+    },
+    {
+      "id": "B-PARAMETERIZED-REGISTRY",
+      "description": "Deduplicated parameterized registry (25 mechanisms with ${slot} templates). Model selects from 25 mechanisms and resolves the matched template to concrete URL.",
+      "expected_behavior": "Model evaluates 25 mechanisms during selection (reduced from 32); resolution adds one model call to fill slot; execution and verification proceed on resolved URL."
+    },
+    {
+      "id": "B-COLD-NO-REGISTRY",
+      "description": "No registry. Model must generate the correct URL from the task goal without any mechanism guidance.",
+      "expected_behavior": "Model uses task goal only; no selection or resolution cost; but may have lower success rate or higher exploration cost. Included as lower-bound cost reference (may be cheapest or most expensive depending on model capability)."
+    }
+  ],
+  "positive_control": {
+    "id": "POS-CONTROL-SHARED-PATTERN-COLLAPSE",
+    "description": "The 5 blog-read-post tasks that share GET /posts/{id} pattern must resolve to 1 parameterized mechanism in the parameterized condition, and the model must select this single mechanism for all 5 tasks.",
+    "expected_behavior": "Parameterized selection for all 5 blog-read-post tasks selects the same mechanism key; resolution fills ${id_0} with the correct concrete ID; bound_action matches the literal URL."
+  },
+  "null_control": {
+    "id": "NULL-UNIQUE-PATTERN-OVERHEAD",
+    "description": "Tasks with unique patterns (no sharing) should show parameterized selection cost <= literal selection cost (fewer mechanisms to evaluate) but higher per-task resolution cost (extra model call for slot filling). Net effect for unique patterns is expected to be approximately neutral or slightly negative (parameterized slightly more expensive per task).",
+    "expected_behavior": "For unique-pattern tasks, parameterized total workflow cost is within 30% of literal total workflow cost (resolution overhead partially offset by smaller registry). If parameterized cost exceeds literal by >50% for unique patterns, the deduplication overhead is not justified even at corpus level."
+  },
+  "measurement_validity": [
+    "Both conditions must use identical task definitions, model, and temperature from the parent synthetic corpus (32 tasks across 6 domains)",
+    "Model selection tokens measured via tiktoken cl100k_base on the full prompt+response for mechanism selection step",
+    "Resolution tokens measured separately for parameterized condition only (model call to fill ${slot} in selected template)",
+    "Browser execution cost measured as count of Playwright page interactions (clicks, navigations, form fills, screenshots)",
+    "Verification cost measured as count of model calls for post-execution state verification",
+    "Success rate measured as fraction of tasks where final state matches expected outcome",
+    "Registry size (mechanism count) recorded for both conditions as an independent check on deduplication"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) both conditions achieve 100% success rate on the task corpus; (C2) parameterized selection tokens <= literal selection tokens (fewer mechanisms = fewer or equal selection tokens); (C3) total workflow cost (selection + resolution + browser + verification) for parameterized <= total workflow cost for literal; (C4) positive control passes (shared patterns resolve correctly); (C5) null control passes (unique-pattern overhead <= 50%). FALSIFIED if any condition fails. MEASUREMENT_INVALID if infrastructure failure prevents completion of either condition.",
+  "product_consequence_positive": "If parameterized workflow cost <= literal cost with equal success rate, the 14.16% storage-level savings from parent translates to end-to-end workflow savings. Proceed to C-PRODUCT-ECON validation with real SPIDER registry and broader task families.",
+  "product_consequence_negative": "If parameterized workflow cost > literal cost or success rate drops, storage-level deduplication does not translate to workflow savings. Close token-based inheritance economics and redirect product lane to alternative mechanisms (registry compression, retrieval efficiency, or orthogonal product capabilities).",
+  "estimated_cost": "Low-medium — requires model API calls for selection/resolution/verification across 32 tasks x 2 conditions x 3 baselines = ~192 model invocations. Estimated <50K total tokens. No browser execution needed for the discriminating measurement (selection+resolution cost only); browser execution can be omitted if selection+resolution cost difference is already decisive.",
+  "expected_information_gain": "High — directly answers the parent's unresolved question 'whether retrieval/verification/repair costs with fewer mechanisms actually reduce end-to-end amortized cost.' Changes product lane direction if negative (close token-based economics) or positive (proceed to real-corpus validation). The smallest experiment that can change the C-PRODUCT-ECON claim from HYPOTHESIS to either REJECTED or VALIDATED."
 }
