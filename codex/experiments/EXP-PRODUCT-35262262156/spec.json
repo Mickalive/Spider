@@ -1,0 +1,56 @@
+{
+  "experiment_id": "EXP-PRODUCT-35262262156",
+  "lane": "product",
+  "claim_ids": ["C-PARAM-INHERIT", "C-PRODUCT-ECON"],
+  "question": "Does parameterized mechanism representation reduce token cost compared to literal representation when concrete values are long strings (UUIDs, slugs, full API paths, bearer tokens) rather than short numeric IDs, and does the token savings cross a structural breakeven point where template overhead is dominated by concrete value length?",
+  "hypothesis": "Parameterized mechanisms (with ${var} template slots) use fewer tiktoken tokens than literal mechanisms when concrete values exceed ~8 characters, because the fixed template overhead (${varname} = varname.length + 3 chars per slot) becomes a smaller fraction of total token cost. Mean token savings across long-value patterns is >= 10% with parameterized winning on >= 3/5 patterns.",
+  "falsifier": "Parameterized mechanisms use more or equal tokens than literal mechanisms for the majority of long-value patterns (fewer than 3/5), OR mean savings are negative, OR savings do not increase monotonically with concrete value length (longest values do not show largest savings).",
+  "baselines": [
+    {
+      "id": "B_LONGVALUE_LITERAL",
+      "description": "Token cost of literal mechanism representation (full URL string with concrete long values, no template slots) for each of 5 long-value URL patterns. Measured via tiktoken cl100k_base encoding of the action_template JSON.",
+      "stable_id": "B_LONGVALUE_LITERAL"
+    },
+    {
+      "id": "B_SHORTVALUE_PENALTY",
+      "description": "Parent experiment short-value penalty reference from EXP-PRODUCT-35209109455: mean -6.4% savings across 5 short-value patterns (1-3 char numeric values). Used as calibration baseline showing the breakeven exists.",
+      "stable_id": "B_SHORTVALUE_PENALTY"
+    }
+  ],
+  "positive_control": {
+    "id": "PC_SHORTVALUE_PENALTY",
+    "description": "A short-value pattern (1-2 char numeric) included in the same run to confirm the parent's negative-savings result is reproducible in this execution environment. Expected: parameterized uses MORE tokens.",
+    "stable_id": "PC_SHORTVALUE_PENALTY"
+  },
+  "null_control": {
+    "id": "NC_MIDVALUE_AMBIGUOUS",
+    "description": "A mid-value pattern (5-7 chars, roughly equal to template overhead) where the direction is uncertain. Expected: savings approximately 0 or marginally positive/negative, testing the structural breakeven region.",
+    "stable_id": "NC_MIDVALUE_AMBIGUOUS"
+  },
+  "measurement_validity": [
+    "tiktoken cl100k_base used for token encoding (consistent with parent experiment)",
+    "Token cost measured on action_template JSON serialization (method + url fields, sort_keys=True) matching parent methodology",
+    "5 long-value URL patterns spanning different value types: UUID (36 chars), slug (30 chars), deep path (45 chars), bearer token (40 chars), multi-param long (mixed)",
+    "1 short-value positive control pattern (2-char numeric, parent-compatible) to confirm environment",
+    "1 mid-value null control pattern (6-char alphanumeric) to probe breakeven region",
+    "No network access, no browser automation, no model calls — pure Python token measurement",
+    "Both literal and parameterized mechanisms constructed from same training data structure",
+    "resolve() and _bind() re-tested on long-value patterns to validate pipeline with non-numeric values",
+    "Total: 7 patterns (5 target + 1 positive control + 1 null control), 21 observations"
+  ],
+  "decision_rule": [
+    "C1: resolve() returns EXECUTABLE for all 5 long-value parameterized mechanisms when correct long-value parameters provided",
+    "C2: resolve() returns UNKNOWN for all 5 long-value parameterized mechanisms when parameters missing",
+    "C3: _bind() produces correct bound_action for all 5 long-value parameterized mechanisms with test long values",
+    "C4: Parameterized mechanism uses fewer tokens than literal mechanism for >= 3/5 long-value patterns",
+    "C5: Mean token savings percentage across 5 long-value patterns is >= 10%",
+    "C6: Token savings increase with concrete value length (longest value pattern shows largest savings)",
+    "C7: All 3 existing kernel tests still pass (regression — unchanged from parent)",
+    "C8 (positive_control): Short-value pattern shows negative savings (parameterized uses MORE tokens), replicating parent result",
+    "ALL conditions C1-C8 must pass for SURVIVES_CURRENT_TEST; any failure triggers FALSIFIED-IN-SETTING"
+  ],
+  "product_consequence_positive": "Token savings exist for long-value URL patterns, establishing that parameterized representation is viable for real-world UUIDs, slugs, paths and tokens. C-PARAM-INHERIT economics partially validated (long-value regime). C-PRODUCT-ECON moves from HYPOTHESIS toward partially measured: per-mechanism token cost is lower for long values. Product lane can proceed to amortized deduplication measurement or mixed-value economic modeling. Supports continued investment in parameterized inheritance for real-world API patterns.",
+  "product_consequence_negative": "Token savings do NOT exist even for long-value patterns. The structural breakeven does not occur in practice because tiktoken encodes template syntax more efficiently than expected, or because long URLs are already token-dense. C-PARAM-INHERIT token economics are closed for both short and long values. C-PRODUCT-ECON must pivot from token-savings argument to pure deduplication/storage/retrieval economics. Product lane pivots to alternative mechanisms or closes token-based inheritance viability.",
+  "estimated_cost": "Very low: no network access, no browser, no model calls. Pure Python token measurement with tiktoken on 7 URL patterns x 2 representations. ~80 lines of test code. Kernel regression 3 tests.",
+  "expected_information_gain": "Very high: directly tests the parent's falsification boundary. Either validates long-value savings (opening a viable token economics path) or closes it definitively. Both outcomes materially change the product investment decision. The breakeven characterization (value length vs template overhead) provides structural insight into when parameterized representation is viable."
+}

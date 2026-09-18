@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35262262156",
+  "lane": "product",
+  "github_run_id": "35280363344",
+  "github_run_attempt": 1,
+  "base_sha": "084bf58f0a07ffcf476418aae33a030c06958c22",
+  "execute_sha": "cdf1d2f4b57bb49de3d569d980a9977b20bebbd3",
+  "frozen_at": "2026-09-17T22:09:24.215001+00:00",
+  "executed_at": "2026-09-17T22:30:00.000000+00:00",
+  "python_version": "3.12",
+  "tiktoken_version": "0.14.0",
+  "tiktoken_encoding": "cl100k_base",
+  "dependencies": {
+    "tiktoken": "0.14.0",
+    "spider": "local (src/spider)"
+  },
+  "code_paths": [
+    {
+      "path": "src/spider/kernel.py",
+      "role": "kernel_under_test",
+      "sha256": null
+    },
+    {
+      "path": "src/spider/models.py",
+      "role": "data_models",
+      "sha256": null
+    },
+    {
+      "path": "src/spider/registry.py",
+      "role": "mechanism_registry",
+      "sha256": null
+    },
+    {
+      "path": "tests/test_kernel.py",
+      "role": "regression_tests",
+      "sha256": null
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/run_experiment.py",
+      "role": "experiment_code",
+      "sha256": null
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json",
+      "sha256": "7f788cd7a2b654311855f2f4402ec7e5661227a1efaa99fdcb9e529399e4362f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/spec.json",
+      "sha256": "27b1c2eba83617426d3398e88dd134e566d5ccc859a477714832864e4b8de834",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/prereg.md",
+      "sha256": "2256f96f71ba8be3d998cdc01cf864a9173be2fd503798c14b788df3c66731c8",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/request.json",
+      "sha256": "e89bcae26152102e64ebab561cc63cd648d1437788fadc31404d18ccbfbd1ff1",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35262262156/freeze.json",
+      "sha256": null,
+      "role": "fixture"
+    }
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35209109455",
+    "handoff_sha256": "97a75186e42637b17f90dd00d76125f3f1ef0f2852c68b9861e99298be69d1b0",
+    "key_finding": "Parameterized mechanisms use MORE tokens than literal for short-value (1-3 char numeric) URL patterns across all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%)"
+  },
+  "environment": {
+    "platform": "linux",
+    "os": "ubuntu",
+    "python_implementation": "CPython"
+  },
+  "measurement_method": "tiktoken cl100k_base encoding of action_template JSON serialization (json.dumps with sort_keys=True, default separators), counting encoded token count"
+}

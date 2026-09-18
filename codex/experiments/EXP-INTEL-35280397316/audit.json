@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35280397316",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "The applicability mapping from SPIDER's density metric recipes to IR micro/macro/weighted averaging (M4, M5) is a producer interpretation, not an established literature result. This must be explicitly bounded as an analogy, not presented as a validated mapping.",
+    "The literature search methodology (web search with keyword queries, no formal inclusion/exclusion criteria, no PRISMA-style protocol) does not meet the preregistered measurement validity criteria of 'systematic literature search with reproducible search criteria' and 'documented inclusion/exclusion criteria.' The claim ceiling must reflect this as a non-systematic synthesis.",
+    "Code coverage evidence relies on framework documentation (Datadog, coverage.py, PHPUnit, BullseyeCoverage) rather than peer-reviewed literature. While primary sources, this should be noted as a validity limitation.",
+    "The null control NC1 'fails' (pass=false) is correctly reported but the decision rule treats NC1 as a control, not a gate. The frozen decision rule only gates on PC1, PC2, F1, F2 — NC1 failure is expected when PC1/PC2 pass. No fix needed but the interpretation should be clarified."
+  ],
+  "validity_findings": [
+    "V1_SEARCH_NOT_SYSTEMATIC: The preregistered measurement validity criteria required 'systematic literature search with reproducible search criteria (databases, keywords, date range)' and 'documented inclusion/exclusion criteria.' The producer used web search (Google Scholar, ACM DL, arXiv) with keyword queries but no formal protocol, no date range specification, no inclusion/exclusion documentation, and no reproducibility artifact (e.g., search strings, result counts, screening log). This is a non-systematic narrative synthesis, not a systematic review.",
+    "V2_INTERPRETATION_AS_EVIDENCE: The core applicability claim (M4_applicability_to_spider=HIGH, M5_principled_resolution=EXISTS) rests on the producer's interpretation that SPIDER's canonical per-iteration recipe maps to IR micro-averaging and per-task weighted maps to IR macro-averaging. This analogy is principled but not established in any cited source. The producer acknowledges this in validity_notes[5]: 'The applicability mapping ... is an interpretation by the producer, not an established result.' This must be bounded as an interpretive analogy.",
+    "V3_CODE_COVERAGE_EVIDENCE_GRADE: Code coverage recipe ambiguity evidence comes from vendor/framework documentation (Datadog, coverage.py, PHPUnit, BullseyeCoverage), not peer-reviewed measurement theory literature. While these are primary sources for the claimed ambiguity, the evidence grade is lower than the IR textbook/paper sources. The producer should distinguish evidence tiers.",
+    "V4_WEB_ANALYTICS_AMBIGUITY_TYPE: The web analytics case (GA4 bounce rate redefinition) is primarily a temporal definitional change (UA vs GA4), not a simultaneous competing-recipes ambiguity like SPIDER's canonical vs per-task-weighted. The producer conflates 'definition evolution over time' with 'concurrent recipe choice ambiguity.' This weakens the PC1 case for web analytics as a parallel.",
+    "V5_NO_EMPIRICAL_VALIDATION: Per prereg and spec, this is a literature synthesis only — no new empirical measurement. The claim ceiling is correctly bounded to published literature. However, the producer's report.md executive summary states 'SURVIVES_CURRENT_TEST' as if the decision rule gates are definitively passed, when V1-V4 mean the evidence for PC2 applicability and F2 non-triggering is interpretive, not established.",
+    "V6_DECISION_RULE_MET_VIA_INTERPRETATION: The frozen decision rule requires PC2: 'at least 1 principled resolution method identified that is applicable to SPIDER's density metric problem.' The producer identifies 3 methods but their applicability rests on the V2 interpretation. Without the IR analogy, the code coverage and web analytics resolution methods (recipe-as-question-binding, sensitivity reporting) are general principles not specifically mapped to SPIDER's density metric structure."
+  ],
+  "baseline_findings": [
+    "B1_POSITIVE_CONTROL_PC1: Three cases of recipe choice ambiguity are documented (code coverage, IR, web analytics). IR evidence is strongest (Stanford NLP textbook, Sokolova & Lapalme 2019, scikit-learn docs). Code coverage evidence is from framework docs. Web analytics evidence is a definitional change (UA→GA4) not a concurrent ambiguity. PC1 threshold (>=2 cases) is technically met but evidence quality is heterogeneous.",
+    "B2_POSITIVE_CONTROL_PC2: Three resolution methods cited: (1) recipe-as-question-answer binding, (2) sensitivity reporting, (3) micro/macro/weighted framework. Methods 1-2 are general principles documented across fields. Method 3 (micro/macro/weighted) is specific to IR. Applicability to SPIDER rests entirely on the V2 interpretive mapping. Without that mapping, PC2 is not satisfied for SPIDER's specific problem.",
+    "B3_FALSIFIER_F1: F1 ('no principled methods exist in established frameworks') is correctly NOT triggered — principled methods exist in IR (micro/macro/weighted framework, prevalence calibration) and are documented in code coverage (choose metric by question) and web analytics (report sensitivity). This finding is robust.",
+    "B4_FALSIFIER_F2: F2 ('density metric problem is fundamentally different') is NOT triggered per producer, but this conclusion depends entirely on the V2 interpretive mapping to IR micro/macro. If the mapping is rejected as an unvalidated analogy, F2 cannot be assessed from this evidence alone — the density metric problem's relationship to known problems remains unknown."
+  ],
+  "recomputed_metrics": {
+    "M1_cases_found": 3,
+    "M1_description": "Number of documented recipe choice ambiguity cases (code coverage, IR, web analytics). IR is strongest; code coverage from framework docs; web analytics is temporal redefinition not concurrent ambiguity.",
+    "M2_resolution_methods_found": 3,
+    "M2_description": "Number of principled resolution methods cited. All three are documented in literature but applicability to SPIDER density metric is interpretive (V2).",
+    "M3_code_coverage_ambiguity": "PRESENT",
+    "M3_code_coverage_description": "Multiple coverage definitions (line/branch/path/condition) with configurable aggregation (set union, weighted merge, per-module thresholds). Well-documented in framework primary sources.",
+    "M3_ir_ambiguity": "PRESENT",
+    "M3_ir_description": "Micro vs macro vs weighted averaging of precision/recall/F1. Two distinct macro-F1 formulas (averaged-F1 vs F1-of-averages) diverge up to 0.5. Stanford NLP textbook, scikit-learn, Sokolova & Lapalme (2019), TACL 2024.",
+    "M3_web_analytics_ambiguity": "PARTIAL",
+    "M3_web_analytics_description": "GA4 redefined bounce rate (UA: single-page sessions → GA4: non-engaged sessions). This is a temporal definitional change, not a concurrent recipe choice ambiguity. Session duration vs engagement time are different metrics, not competing recipes for the same construct.",
+    "M4_applicability_to_spider": "INTERPRETIVE_ANALOGY",
+    "M4_description": "Producer's analogy: canonical per-iteration ≈ IR micro-averaging (uniform per iteration), per-task weighted ≈ IR macro-averaging (uniform per task). Not established in literature; producer interpretation.",
+    "M5_principled_resolution": "EXISTS_IN_IR",
+    "M5_description": "Principled resolution methods exist in IR (micro/macro/weighted framework, prevalence calibration, recipe-as-question-binding, sensitivity reporting). Code coverage and web analytics have general principles. Applicability to SPIDER requires the V2 analogy."
+  },
+  "claim_ceiling": "Literature synthesis confirms recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods (recipe-as-question-binding, sensitivity reporting, micro/macro framework). However: (1) the search was non-systematic (no formal protocol, inclusion/exclusion, reproducibility artifact); (2) the mapping from SPIDER's density metric recipes to IR micro/macro is a producer interpretation, not an established result; (3) code coverage evidence is from framework docs not peer-reviewed literature; (4) web analytics case is a temporal definition change not a concurrent ambiguity. The claim that principled methods exist in established fields is SUPPORTED. The claim that these methods inform SPIDER's density metric problem is an INTERPRETIVE ANALOGY requiring empirical validation on full-DOM data. C-MEAS-VALID recipe ambiguity remains EXPERIMENTAL; this experiment provides theoretical grounding but does not resolve the empirical recipe choice at scale.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35280397316/spec.json (frozen decision_rule, measurement_validity criteria)",
+    "research/experiments/EXP-INTEL-35280397316/prereg.md (falsifiers F1/F2, PC1/PC2, measurement validity §8)",
+    "research/experiments/EXP-INTEL-35280397316/result.json (metrics M1-M5, controls PC1/PC2/NC1/F1/F2, validity_notes[5] acknowledging interpretive mapping)",
+    "research/experiments/EXP-INTEL-35280397316/report.md (executive summary claiming SURVIVES, §2.1-2.3 evidence, §3 mapping, §4 resolution methods)",
+    "research/experiments/EXP-INTEL-35280397316/provenance.json (datasets_and_sources: 10 sources, 3 textbooks/papers, 7 documentation/industry sources)",
+    "research/experiments/EXP-INTEL-35264637598/handoff.json (parent established: recipe reversal genuine, canonical per-iteration principled for C-MEAS-VALID, full-DOM blocked)"
+  ],
+  "unresolved": [
+    "Whether the IR micro/macro/weighted framework is the OPTIMAL resolution framework for SPIDER's density metric, or whether information-theoretic, Bayesian, or meta-analytic approaches would be more appropriate (producer unresolved[0])",
+    "Whether reporting sensitivity to both recipes (co-primary) is sufficient, or whether a third recipe (meta-analytic combination) is needed (producer unresolved[1])",
+    "Whether the density metric problem has additional structure (definition correlation, task hierarchy, role additivity) not captured by the IR analogy (producer unresolved[2])",
+    "Full-DOM enumeration results remain unknown and blocked by runtime lane substrate cap — may change the recipe choice landscape entirely (producer unresolved[3], parent handoff unknown[0])",
+    "Whether a formal systematic review would yield additional relevant prior art (e.g., psychometrics, econometrics, meta-analysis literature on aggregation methods) not captured by the keyword web search",
+    "Whether the GA4/UA bounce rate case genuinely represents the same class of recipe choice ambiguity as SPIDER's, or is a different phenomenon (definitional evolution vs concurrent aggregation recipes)"
+  ]
+}
