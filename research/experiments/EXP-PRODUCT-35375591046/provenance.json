@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35375591046",
+  "github_run_id": "35375591046",
+  "base_sha": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "experiment_sha": null,
+  "status": "MEASUREMENT_INVALID",
+  "status_reason": "Infrastructure failure: no LLM API keys available. 0/32 tasks executed.",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "tiktoken_version": "0.14.0",
+    "tiktoken_encoding": "cl100k_base",
+    "openai_package_available": true,
+    "api_keys_available": false,
+    "local_llm_server": false,
+    "ollama_available": false,
+    "llm_endpoint_accessible": false,
+    "infrastructure_check": "No OPENAI_API_KEY or equivalent variable found; no localhost LLM server running; no LLM processes detected"
+  },
+  "data_sources": {
+    "task_corpus": {
+      "type": "synthetic",
+      "description": "32 tasks across 6 domains (blog, admin, shop, pm, auth, search)",
+      "location": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py:TASK_CORPUS",
+      "corpus_size": 32,
+      "domains": ["blog", "ecommerce", "admin", "project-management", "search", "auth"],
+      "sharing_distribution": {
+        "high_sharing": 10,
+        "moderate_sharing": 5,
+        "unique": 17
+      }
+    },
+    "parent_analytical_ceiling": {
+      "experiment_id": "EXP-PRODUCT-35330741529",
+      "measurement_type": "analytical (tiktoken token counting, NOT real LLM execution)",
+      "cold_per_task_tokens": 77.34,
+      "literal_per_task_tokens": 615.34,
+      "parameterized_per_task_tokens": 582.0,
+      "workflow_savings_pct": 5.42,
+      "cold_success_rate": "assumed 100% (not measured with real LLM)",
+      "cold_completion_tokens_estimate": 20,
+      "validity_gaps": ["C1 success rate assumed", "completion tokens estimated", "browser costs omitted"]
+    }
+  },
+  "code": {
+    "experiment_script": null,
+    "parent_code": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+    "kernel_code": "src/spider/kernel.py",
+    "note": "No experiment script was created because the frozen design could not be executed. The product lane's allowed_code_roots (src, tests, sdk, pyproject.toml) were not modified."
+  },
+  "methodology": {
+    "measurement_type": "NOT_EXECUTED",
+    "intended_model_execution": "real LLM API calls (32 tasks, COLD condition)",
+    "actual_model_execution": "zero (no API keys)",
+    "browser_execution": "omitted per frozen spec",
+    "verification": "omitted per frozen spec",
+    "token_measurement": "tiktoken cl100k_base (intended, never executed)",
+    "temperature": 0.0,
+    "max_tokens": 50,
+    "timeout": 30
+  },
+  "infrastructure_failure": {
+    "category": "missing_api_credentials",
+    "detail": "No OPENAI_API_KEY or equivalent LLM API credential available in execution environment",
+    "tasks_executed": 0,
+    "tasks_required": 32,
+    "threshold_met": true,
+    "per_packet_contract_section_9": "Infrastructure failure is NOT a scientific negative. A later retry must resume from the last valid checkpoint and must not rewrite frozen scientific inputs."
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35353007958",
+    "status": "MEASUREMENT_INVALID",
+    "same_cause": true,
+    "handoff_hash": "0fb45f53ab9fe04b8c3bdfb5e89d5e95e0cf7dc3ad67ac073f159e8c0258a9a"
+  },
+  "frozen_inputs": {
+    "request_hash": "61afd3418e5be59f7517c93fbb7915d99f3c312efd363a96516b080243f34230",
+    "spec_hash": "90a9c9d5d3757547ecd051832ffede5189e2a591d82ad9b5a82dbf94f846b69e",
+    "prereg_hash": "dfcad8fe965b0667a580e6b90fe573e8ca20653ed5b95ffafd65f34db6f443c6"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/request.json",
+      "role": "frozen_input",
+      "sha256": "61afd3418e5be59f7517c93fbb7915d99f3c312efd363a96516b080243f34230"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/spec.json",
+      "role": "frozen_input",
+      "sha256": "90a9c9d5d3757547ecd051832ffede5189e2a591d82ad9b5a82dbf94f846b69e"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/prereg.md",
+      "role": "frozen_input",
+      "sha256": "dfcad8fe965b0667a580e6b90fe573e8ca20653ed5b95ffafd65f34db6f443c6"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/freeze.json",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/result.json",
+      "role": "produced_result"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/report.md",
+      "role": "produced_report"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/provenance.json",
+      "role": "produced_provenance"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35353007958/handoff.json",
+      "role": "parent_handoff",
+      "sha256": "0fb45f53ab9fe04b8c3bdfb5e89d5e95e0cf7dc3ad67ac073f159e8c0258a9a"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/result.json",
+      "role": "parent_result_analytical_ceiling",
+      "sha256": "26843e77aca2ee161b9fae0e5a81c60a01cccb0c55785077d2e58670195c8cd0"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+      "role": "parent_code_analytical_measurement",
+      "sha256": "00ae2dd7b46fcf151ea8725df816aff0034a7162538444aa825dd59d0fc8f070"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "role": "codebase_reference"
+    },
+    {
+      "path": "research/claims/registry.json",
+      "role": "claim_registry",
+      "note": "C-PRODUCT-ECON status: HYPOTHESIS"
+    }
+  ],
+  "reproduction_instructions": "This experiment requires LLM API access (OPENAI_API_KEY or equivalent). Without credentials, the frozen design cannot be executed. To reproduce: (1) configure LLM API credentials, (2) run the 32-task COLD baseline measurement per spec.json measurement_validity protocol, (3) evaluate frozen decision_rule C1-C4."
+}
