@@ -1,0 +1,880 @@
+{
+  "experiment_id": "EXP-PRODUCT-35389141536",
+  "parent_token_costs": {
+    "literal": 19691,
+    "parameterized": 18624,
+    "cold": 2475
+  },
+  "browser_verification_totals": {
+    "total_browser_execution_ms": 1498.113,
+    "total_verification_ms": 0.844,
+    "total_browser_verification_ms": 1498.957,
+    "token_equivalent": 1499.0
+  },
+  "task_results": [
+    {
+      "task_id": "blog-read-post-1",
+      "intent": "read_post",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "browser_execution_time_ms": 38.339,
+      "verification_time_ms": 0.005,
+      "total_browser_verification_ms": 38.344,
+      "status_code": 200,
+      "response_body_bytes": 292,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        38.339,
+        37.068,
+        60.127
+      ],
+      "verification_all_times": [
+        0.217,
+        0.005,
+        0.004
+      ]
+    },
+    {
+      "task_id": "blog-read-post-2",
+      "intent": "read_post",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/2",
+      "browser_execution_time_ms": 42.803,
+      "verification_time_ms": 0.005,
+      "total_browser_verification_ms": 42.808,
+      "status_code": 200,
+      "response_body_bytes": 278,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        31.917,
+        46.387,
+        42.803
+      ],
+      "verification_all_times": [
+        0.198,
+        0.005,
+        0.003
+      ]
+    },
+    {
+      "task_id": "blog-read-post-3",
+      "intent": "read_post",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/3",
+      "browser_execution_time_ms": 33.747,
+      "verification_time_ms": 0.01,
+      "total_browser_verification_ms": 33.757,
+      "status_code": 200,
+      "response_body_bytes": 283,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        35.991,
+        33.747,
+        33.392
+      ],
+      "verification_all_times": [
+        0.214,
+        0.01,
+        0.003
+      ]
+    },
+    {
+      "task_id": "blog-read-post-4",
+      "intent": "read_post",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/4",
+      "browser_execution_time_ms": 36.326,
+      "verification_time_ms": 0.01,
+      "total_browser_verification_ms": 36.336,
+      "status_code": 200,
+      "response_body_bytes": 270,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        36.326,
+        35.1,
+        10054.673
+      ],
+      "verification_all_times": [
+        2.519,
+        0.01,
+        0.006
+      ]
+    },
+    {
+      "task_id": "blog-read-post-5",
+      "intent": "read_post",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/5",
+      "browser_execution_time_ms": 49.458,
+      "verification_time_ms": 0.005,
+      "total_browser_verification_ms": 49.463,
+      "status_code": 200,
+      "response_body_bytes": 225,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        42.201,
+        49.458,
+        53.25
+      ],
+      "verification_all_times": [
+        0.201,
+        0.005,
+        0.003
+      ]
+    },
+    {
+      "task_id": "blog-list-posts",
+      "intent": "list_posts",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 43.668,
+      "verification_time_ms": 0.205,
+      "total_browser_verification_ms": 43.873,
+      "status_code": 200,
+      "response_body_bytes": 27520,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        43.668,
+        41.093,
+        49.449
+      ],
+      "verification_all_times": [
+        0.17,
+        0.205,
+        0.343
+      ]
+    },
+    {
+      "task_id": "blog-create-post",
+      "intent": "create_post",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 55.015,
+      "verification_time_ms": 0.007,
+      "total_browser_verification_ms": 55.022,
+      "status_code": 201,
+      "response_body_bytes": 66,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        67.132,
+        50.022,
+        55.015
+      ],
+      "verification_all_times": [
+        0.197,
+        0.007,
+        0.006
+      ]
+    },
+    {
+      "task_id": "shop-view-product-1",
+      "intent": "view_product",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/101",
+      "browser_execution_time_ms": 48.617,
+      "verification_time_ms": 0.05,
+      "total_browser_verification_ms": 48.667,
+      "status_code": 404,
+      "response_body_bytes": 2,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        48.617,
+        46.674,
+        55.448
+      ],
+      "verification_all_times": [
+        3.657,
+        0.05,
+        0.003
+      ]
+    },
+    {
+      "task_id": "shop-view-product-2",
+      "intent": "view_product",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/102",
+      "browser_execution_time_ms": 93.7,
+      "verification_time_ms": 0.005,
+      "total_browser_verification_ms": 93.705,
+      "status_code": 404,
+      "response_body_bytes": 2,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        93.7,
+        107.206,
+        39.346
+      ],
+      "verification_all_times": [
+        0.22,
+        0.005,
+        0.002
+      ]
+    },
+    {
+      "task_id": "shop-view-product-3",
+      "intent": "view_product",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/103",
+      "browser_execution_time_ms": 70.015,
+      "verification_time_ms": 0.005,
+      "total_browser_verification_ms": 70.02,
+      "status_code": 404,
+      "response_body_bytes": 2,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        70.015,
+        47.167,
+        134.374
+      ],
+      "verification_all_times": [
+        0.208,
+        0.005,
+        0.002
+      ]
+    },
+    {
+      "task_id": "shop-add-to-cart-1",
+      "intent": "add_to_cart",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 53.127,
+      "verification_time_ms": 0.023,
+      "total_browser_verification_ms": 53.15,
+      "status_code": 201,
+      "response_body_bytes": 55,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        47.86,
+        53.127,
+        61.038
+      ],
+      "verification_all_times": [
+        0.304,
+        0.023,
+        0.006
+      ]
+    },
+    {
+      "task_id": "shop-add-to-cart-2",
+      "intent": "add_to_cart",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 55.941,
+      "verification_time_ms": 0.005,
+      "total_browser_verification_ms": 55.946,
+      "status_code": 201,
+      "response_body_bytes": 55,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        53.445,
+        55.941,
+        58.362
+      ],
+      "verification_all_times": [
+        0.278,
+        0.005,
+        0.003
+      ]
+    },
+    {
+      "task_id": "shop-checkout",
+      "intent": "checkout",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 53.194,
+      "verification_time_ms": 0.01,
+      "total_browser_verification_ms": 53.204,
+      "status_code": 201,
+      "response_body_bytes": 58,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        65.954,
+        49.223,
+        53.194
+      ],
+      "verification_all_times": [
+        0.385,
+        0.01,
+        0.004
+      ]
+    },
+    {
+      "task_id": "shop-list-categories",
+      "intent": "list_categories",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users",
+      "browser_execution_time_ms": 49.104,
+      "verification_time_ms": 0.072,
+      "total_browser_verification_ms": 49.176,
+      "status_code": 200,
+      "response_body_bytes": 5645,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        48.771,
+        49.104,
+        53.128
+      ],
+      "verification_all_times": [
+        0.08,
+        0.072,
+        0.063
+      ]
+    },
+    {
+      "task_id": "admin-view-user-1",
+      "intent": "view_user",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/1",
+      "browser_execution_time_ms": 46.637,
+      "verification_time_ms": 0.011,
+      "total_browser_verification_ms": 46.648,
+      "status_code": 200,
+      "response_body_bytes": 509,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        46.637,
+        47.04,
+        43.878
+      ],
+      "verification_all_times": [
+        0.281,
+        0.011,
+        0.007
+      ]
+    },
+    {
+      "task_id": "admin-view-user-2",
+      "intent": "view_user",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/2",
+      "browser_execution_time_ms": 49.585,
+      "verification_time_ms": 0.016,
+      "total_browser_verification_ms": 49.601,
+      "status_code": 200,
+      "response_body_bytes": 509,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        52.772,
+        44.805,
+        49.585
+      ],
+      "verification_all_times": [
+        0.299,
+        0.016,
+        0.006
+      ]
+    },
+    {
+      "task_id": "admin-view-user-3",
+      "intent": "view_user",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/3",
+      "browser_execution_time_ms": 55.984,
+      "verification_time_ms": 0.019,
+      "total_browser_verification_ms": 56.003,
+      "status_code": 200,
+      "response_body_bytes": 520,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        60.267,
+        51.412,
+        55.984
+      ],
+      "verification_all_times": [
+        0.319,
+        0.019,
+        0.013
+      ]
+    },
+    {
+      "task_id": "admin-view-user-4",
+      "intent": "view_user",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/4",
+      "browser_execution_time_ms": 51.811,
+      "verification_time_ms": 0.027,
+      "total_browser_verification_ms": 51.838,
+      "status_code": 200,
+      "response_body_bytes": 525,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        49.891,
+        51.811,
+        52.271
+      ],
+      "verification_all_times": [
+        0.268,
+        0.027,
+        0.009
+      ]
+    },
+    {
+      "task_id": "admin-view-user-5",
+      "intent": "view_user",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/5",
+      "browser_execution_time_ms": 43.185,
+      "verification_time_ms": 0.024,
+      "total_browser_verification_ms": 43.209,
+      "status_code": 200,
+      "response_body_bytes": 507,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        43.185,
+        10040.123,
+        35.823
+      ],
+      "verification_all_times": [
+        0.197,
+        0.024,
+        0.006
+      ]
+    },
+    {
+      "task_id": "admin-list-users",
+      "intent": "list_users",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users",
+      "browser_execution_time_ms": 37.549,
+      "verification_time_ms": 0.04,
+      "total_browser_verification_ms": 37.589,
+      "status_code": 200,
+      "response_body_bytes": 5645,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        37.693,
+        33.548,
+        37.549
+      ],
+      "verification_all_times": [
+        0.049,
+        0.04,
+        0.035
+      ]
+    },
+    {
+      "task_id": "admin-create-user",
+      "intent": "create_user",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/users",
+      "browser_execution_time_ms": 47.156,
+      "verification_time_ms": 0.007,
+      "total_browser_verification_ms": 47.163,
+      "status_code": 201,
+      "response_body_bytes": 66,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        48.097,
+        47.156,
+        43.297
+      ],
+      "verification_all_times": [
+        0.205,
+        0.007,
+        0.002
+      ]
+    },
+    {
+      "task_id": "pm-view-project-1",
+      "intent": "view_project",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/201",
+      "browser_execution_time_ms": 38.123,
+      "verification_time_ms": 0.003,
+      "total_browser_verification_ms": 38.126,
+      "status_code": 404,
+      "response_body_bytes": 2,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        60.223,
+        38.123,
+        37.823
+      ],
+      "verification_all_times": [
+        0.2,
+        0.003,
+        0.002
+      ]
+    },
+    {
+      "task_id": "pm-view-project-2",
+      "intent": "view_project",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts/202",
+      "browser_execution_time_ms": 56.611,
+      "verification_time_ms": 0.013,
+      "total_browser_verification_ms": 56.624,
+      "status_code": 404,
+      "response_body_bytes": 2,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        56.611,
+        102.28,
+        42.846
+      ],
+      "verification_all_times": [
+        0.267,
+        0.013,
+        0.002
+      ]
+    },
+    {
+      "task_id": "pm-list-projects",
+      "intent": "list_projects",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 36.263,
+      "verification_time_ms": 0.115,
+      "total_browser_verification_ms": 36.378,
+      "status_code": 200,
+      "response_body_bytes": 27520,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        36.263,
+        36.562,
+        34.056
+      ],
+      "verification_all_times": [
+        0.115,
+        0.151,
+        0.111
+      ]
+    },
+    {
+      "task_id": "pm-create-task",
+      "intent": "create_task",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 39.747,
+      "verification_time_ms": 0.007,
+      "total_browser_verification_ms": 39.754,
+      "status_code": 201,
+      "response_body_bytes": 38,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        40.879,
+        39.747,
+        39.085
+      ],
+      "verification_all_times": [
+        0.26,
+        0.007,
+        0.002
+      ]
+    },
+    {
+      "task_id": "search-blog",
+      "intent": "search",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts?_limit=10",
+      "browser_execution_time_ms": 35.473,
+      "verification_time_ms": 0.03,
+      "total_browser_verification_ms": 35.503,
+      "status_code": 200,
+      "response_body_bytes": 2726,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        34.765,
+        35.473,
+        133.133
+      ],
+      "verification_all_times": [
+        0.042,
+        0.03,
+        0.013
+      ]
+    },
+    {
+      "task_id": "search-shop",
+      "intent": "search",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/posts?_limit=5",
+      "browser_execution_time_ms": 32.584,
+      "verification_time_ms": 0.009,
+      "total_browser_verification_ms": 32.593,
+      "status_code": 200,
+      "response_body_bytes": 1420,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        37.539,
+        32.385,
+        32.584
+      ],
+      "verification_all_times": [
+        0.024,
+        0.009,
+        0.008
+      ]
+    },
+    {
+      "task_id": "search-users",
+      "intent": "search",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users?_limit=5",
+      "browser_execution_time_ms": 42.761,
+      "verification_time_ms": 0.021,
+      "total_browser_verification_ms": 42.782,
+      "status_code": 200,
+      "response_body_bytes": 2812,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        42.761,
+        34.282,
+        10046.932
+      ],
+      "verification_all_times": [
+        0.031,
+        0.021,
+        0.018
+      ]
+    },
+    {
+      "task_id": "auth-login-blog",
+      "intent": "login",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 39.704,
+      "verification_time_ms": 0.013,
+      "total_browser_verification_ms": 39.717,
+      "status_code": 201,
+      "response_body_bytes": 54,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        39.704,
+        48.168,
+        38.239
+      ],
+      "verification_all_times": [
+        0.216,
+        0.013,
+        0.009
+      ]
+    },
+    {
+      "task_id": "auth-login-shop",
+      "intent": "login",
+      "method": "POST",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "browser_execution_time_ms": 43.153,
+      "verification_time_ms": 0.023,
+      "total_browser_verification_ms": 43.176,
+      "status_code": 201,
+      "response_body_bytes": 55,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        45.826,
+        43.153,
+        41.972
+      ],
+      "verification_all_times": [
+        0.197,
+        0.023,
+        0.002
+      ]
+    },
+    {
+      "task_id": "auth-me-blog",
+      "intent": "get_me",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/1",
+      "browser_execution_time_ms": 35.545,
+      "verification_time_ms": 0.024,
+      "total_browser_verification_ms": 35.569,
+      "status_code": 200,
+      "response_body_bytes": 509,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        35.028,
+        37.398,
+        35.545
+      ],
+      "verification_all_times": [
+        0.191,
+        0.024,
+        0.008
+      ]
+    },
+    {
+      "task_id": "auth-me-shop",
+      "intent": "get_me",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/2",
+      "browser_execution_time_ms": 43.188,
+      "verification_time_ms": 0.025,
+      "total_browser_verification_ms": 43.213,
+      "status_code": 200,
+      "response_body_bytes": 509,
+      "browser_successful_runs": 3,
+      "verification_successful_runs": 3,
+      "browser_all_times": [
+        61.839,
+        43.188,
+        35.346
+      ],
+      "verification_all_times": [
+        0.23,
+        0.025,
+        0.011
+      ]
+    }
+  ],
+  "positive_control": {
+    "results": [
+      {
+        "task_id": "blog-read-post-1",
+        "url": "https://jsonplaceholder.typicode.com/posts/1",
+        "browser_ms": 41.059,
+        "verification_ms": 0.008,
+        "status_code": 200,
+        "success": true
+      },
+      {
+        "task_id": "blog-read-post-2",
+        "url": "https://jsonplaceholder.typicode.com/posts/2",
+        "browser_ms": 40.573,
+        "verification_ms": 0.008,
+        "status_code": 200,
+        "success": true
+      },
+      {
+        "task_id": "blog-read-post-3",
+        "url": "https://jsonplaceholder.typicode.com/posts/3",
+        "browser_ms": 46.016,
+        "verification_ms": 0.005,
+        "status_code": 200,
+        "success": true
+      },
+      {
+        "task_id": "blog-read-post-4",
+        "url": "https://jsonplaceholder.typicode.com/posts/4",
+        "browser_ms": 35.707,
+        "verification_ms": 0.005,
+        "status_code": 200,
+        "success": true
+      },
+      {
+        "task_id": "blog-read-post-5",
+        "url": "https://jsonplaceholder.typicode.com/posts/5",
+        "browser_ms": 37.68,
+        "verification_ms": 0.005,
+        "status_code": 200,
+        "success": true
+      }
+    ],
+    "pass": true
+  },
+  "null_control": {
+    "results": [
+      {
+        "task_id": "null-admin-view-user",
+        "url": "https://jsonplaceholder.typicode.com/nonexistent/99999",
+        "browser_ms": 57.873,
+        "verification_ms": 0.003,
+        "status_code": 404,
+        "is_error_status": true
+      },
+      {
+        "task_id": "null-auth-check-permissions",
+        "url": "https://jsonplaceholder.typicode.com/nonexistent/perm",
+        "browser_ms": 55.063,
+        "verification_ms": 0.003,
+        "status_code": 404,
+        "is_error_status": true
+      },
+      {
+        "task_id": "null-admin-list-audit-log",
+        "url": "https://jsonplaceholder.typicode.com/nonexistent/audit",
+        "browser_ms": 36.354,
+        "verification_ms": 0.003,
+        "status_code": 404,
+        "is_error_status": true
+      }
+    ],
+    "pass": true
+  },
+  "workflow_costs": {
+    "literal": {
+      "tokens": 19691,
+      "browser_verification_ms": 1498.113,
+      "total": 21190.0
+    },
+    "parameterized": {
+      "tokens": 18624,
+      "browser_verification_ms": 1498.113,
+      "total": 20123.0
+    },
+    "cold": {
+      "tokens": 2475,
+      "browser_verification_ms": 1498.113,
+      "total": 3974.0
+    }
+  },
+  "decision_rule": {
+    "C1_browser_measurable": {
+      "pass": true,
+      "note": "32/32 tasks have measurable browser execution time",
+      "threshold": 25,
+      "actual": 32
+    },
+    "C2_verification_positive": {
+      "pass": true,
+      "note": "32/32 tasks have measurable verification time",
+      "threshold": 20,
+      "actual": 32
+    },
+    "C3_browser_diff_threshold": {
+      "pass": true,
+      "note": "Browser cost difference: 0.0ms (<106.7 token-equiv threshold)",
+      "threshold": 106.7,
+      "actual": 0.0
+    },
+    "C4_param_workflow_le_literal": {
+      "pass": true,
+      "note": "Param workflow 20123 <= literal 21190, diff=1067",
+      "param_workflow": 20123.0,
+      "literal_workflow": 21190.0
+    },
+    "C5_positive_control": {
+      "pass": true,
+      "note": "Positive control: 5/5 blog-read-post tasks returned HTTP 200"
+    },
+    "ALL_pass": true,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  },
+  "per_task_summary": {
+    "avg_browser_ms": 46.816,
+    "avg_verification_ms": 0.026,
+    "avg_total_bv_ms": 46.842
+  }
+}
