@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35375596525",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "all_wilson_lower_above_075": true,
+    "pearson_r_pooled": 0.11399224212340807,
+    "abs_r_pooled": 0.11399224212340807,
+    "ci_lower_95": -0.012825103118808608,
+    "ci_upper_95": 0.23720044606891472,
+    "tost_at_delta_015": {
+      "pass": false,
+      "p_upper": 0.2862994140857907,
+      "p_lower": 2.163136182053993e-05,
+      "delta": 0.15,
+      "fisher_z": 0.11448987492263384,
+      "se": 0.06495698024616309
+    },
+    "tost_results_by_delta": {
+      "0.1": {
+        "pass": false,
+        "p_upper": 0.5862488926186988,
+        "p_lower": 0.00047118094327969207,
+        "delta": 0.1,
+        "fisher_z": 0.11448987492263384,
+        "se": 0.06495698024616309
+      },
+      "0.12": {
+        "pass": false,
+        "p_upper": 0.46264509113937186,
+        "p_lower": 0.0001479457926366612,
+        "delta": 0.12,
+        "fisher_z": 0.11448987492263384,
+        "se": 0.06495698024616309
+      },
+      "0.15": {
+        "pass": false,
+        "p_upper": 0.2862994140857907,
+        "p_lower": 2.163136182053993e-05,
+        "delta": 0.15,
+        "fisher_z": 0.11448987492263384,
+        "se": 0.06495698024616309
+      },
+      "0.2": {
+        "pass": false,
+        "p_upper": 0.08715590607923235,
+        "p_lower": 5.208916209475944e-07,
+        "delta": 0.2,
+        "fisher_z": 0.11448987492263384,
+        "se": 0.06495698024616309
+      }
+    },
+    "fp_rate_noise_only": 0.0,
+    "positive_control_rate": 1.0,
+    "n_cooccurring_conditions": 4,
+    "n_noise_only_conditions": 2,
+    "n_samples_per_condition": 60,
+    "n_paired_samples": 240,
+    "conditions_with_variance": 4,
+    "power_analysis": {
+      "observed_r": 0.11399224212340807,
+      "observed_abs_r": 0.11399224212340807,
+      "n_samples": 240,
+      "fisher_z_observed": 0.11448987492263384,
+      "z_statistic_h0": 1.7625492208652447,
+      "p_from_fisher_z": 0.07797654787659014,
+      "min_detectable_r_at_n": 0.12663221372485364,
+      "min_n_for_r_equals_005": 1538,
+      "expected_p_at_n_for_r005": 0.4410729540248908,
+      "n_sufficient_for_observed_r": false
+    },
+    "per_condition_tp": {
+      "cooccur_permission_boundary+cache_enabled": 1.0,
+      "cooccur_permission_boundary+cache_disabled": 1.0,
+      "cooccur_session_invalidation+cache_enabled": 1.0,
+      "cooccur_session_invalidation+cache_disabled": 1.0
+    },
+    "per_condition_wilson_lower": {
+      "cooccur_permission_boundary+cache_enabled": 0.9398260695220669,
+      "cooccur_permission_boundary+cache_disabled": 0.9398260695220669,
+      "cooccur_session_invalidation+cache_enabled": 0.9398260695220669,
+      "cooccur_session_invalidation+cache_disabled": 0.9398260695220669
+    },
+    "per_condition_variance": {
+      "cooccur_permission_boundary+cache_enabled": {
+        "behavioral_std": 0.16329931618554522,
+        "structural_std": 1.567109866388867,
+        "behavioral_mean": 0.4666666666666667,
+        "structural_mean": 5.05,
+        "has_variance": true
+      },
+      "cooccur_permission_boundary+cache_disabled": {
+        "behavioral_std": 0.1502056203843975,
+        "structural_std": 1.8050084641229676,
+        "behavioral_mean": 0.42777777777777776,
+        "structural_mean": 5.016666666666667,
+        "has_variance": true
+      },
+      "cooccur_session_invalidation+cache_enabled": {
+        "behavioral_std": 0.41799787346614836,
+        "structural_std": 1.5450638246435717,
+        "behavioral_mean": 4.516666666666667,
+        "structural_mean": 5.066666666666666,
+        "has_variance": true
+      },
+      "cooccur_session_invalidation+cache_disabled": {
+        "behavioral_std": 0.4281744192888376,
+        "structural_std": 1.8149647991689042,
+        "behavioral_mean": 4.5,
+        "structural_mean": 5.791666666666667,
+        "has_variance": true
+      }
+    },
+    "per_condition_r": {
+      "cooccur_permission_boundary+cache_enabled": {
+        "r": -0.19972457753936995,
+        "p": 0.12602251641211146,
+        "n": 60
+      },
+      "cooccur_permission_boundary+cache_disabled": {
+        "r": 0.055667077649873796,
+        "p": 0.6726947341324199,
+        "n": 60
+      },
+      "cooccur_session_invalidation+cache_enabled": {
+        "r": -0.027526879174297376,
+        "p": 0.8346227514773263,
+        "n": 60
+      },
+      "cooccur_session_invalidation+cache_disabled": {
+        "r": 0.0804250044392742,
+        "p": 0.5412953119899676,
+        "n": 60
+      }
+    },
+    "per_drift_r": {
+      "permission_boundary": -0.06618119868565904,
+      "session_invalidation": 0.02650873842072548
+    },
+    "per_caching_r": {
+      "cache_enabled": -0.005508257343970431,
+      "cache_disabled": 0.21696195390999432
+    },
+    "session_status_distribution": {
+      "cooccur_session_invalidation+cache_enabled": {
+        "401": 22,
+        "403": 20,
+        "500": 18,
+        "200": 0,
+        "n_total": 60
+      },
+      "cooccur_session_invalidation+cache_disabled": {
+        "401": 22,
+        "403": 22,
+        "500": 16,
+        "200": 0,
+        "n_total": 60
+      }
+    },
+    "stochastic_elements": {
+      "db_backend": "SQLite WAL-mode",
+      "cache_ttl_seconds": 0.5,
+      "jitter_range_ms": "10-100",
+      "jwt_algorithms": [
+        "HS256",
+        "RS256"
+      ],
+      "http_caching_semantics": [
+        "Cache-Control",
+        "ETag",
+        "If-None-Match",
+        "304"
+      ]
+    }
+  },
+  "controls": {
+    "C1_drift_tp": {
+      "threshold": "mean_tp >= 0.85 AND all Wilson lower CI > 0.75",
+      "observed_mean_tp": 1.0,
+      "all_wilson_lower_above_075": true,
+      "per_condition_tp": {
+        "cooccur_permission_boundary+cache_enabled": 1.0,
+        "cooccur_permission_boundary+cache_disabled": 1.0,
+        "cooccur_session_invalidation+cache_enabled": 1.0,
+        "cooccur_session_invalidation+cache_disabled": 1.0
+      },
+      "per_condition_wilson_lower": {
+        "cooccur_permission_boundary+cache_enabled": 0.9398260695220669,
+        "cooccur_permission_boundary+cache_disabled": 0.9398260695220669,
+        "cooccur_session_invalidation+cache_enabled": 0.9398260695220669,
+        "cooccur_session_invalidation+cache_disabled": 0.9398260695220669
+      },
+      "pass": true,
+      "evidence": "Mean TP rate across 4 co-occurring conditions, all Wilson lower CI > 0.75"
+    },
+    "C2_variance": {
+      "threshold": ">= 4 of 4 co-occurring conditions have std > 0 for BOTH behavioral and structural signals",
+      "conditions_with_variance": 4,
+      "per_condition_variance": {
+        "cooccur_permission_boundary+cache_enabled": {
+          "behavioral_std": 0.16329931618554522,
+          "structural_std": 1.567109866388867,
+          "behavioral_mean": 0.4666666666666667,
+          "structural_mean": 5.05,
+          "has_variance": true
+        },
+        "cooccur_permission_boundary+cache_disabled": {
+          "behavioral_std": 0.1502056203843975,
+          "structural_std": 1.8050084641229676,
+          "behavioral_mean": 0.42777777777777776,
+          "structural_mean": 5.016666666666667,
+          "has_variance": true
+        },
+        "cooccur_session_invalidation+cache_enabled": {
+          "behavioral_std": 0.41799787346614836,
+          "structural_std": 1.5450638246435717,
+          "behavioral_mean": 4.516666666666667,
+          "structural_mean": 5.066666666666666,
+          "has_variance": true
+        },
+        "cooccur_session_invalidation+cache_disabled": {
+          "behavioral_std": 0.4281744192888376,
+          "structural_std": 1.8149647991689042,
+          "behavioral_mean": 4.5,
+          "structural_mean": 5.791666666666667,
+          "has_variance": true
+        }
+      },
+      "pass": true,
+      "evidence": "4/4 conditions with within-condition variance (both signals std > 0)"
+    },
+    "C3_equivalence": {
+      "threshold": "95% CI upper bound on |r| < 0.15 (TOST-equivalent via Fisher z-transform)",
+      "observed_r": 0.11399224212340807,
+      "observed_abs_r": 0.11399224212340807,
+      "ci_lower_95": -0.012825103118808608,
+      "ci_upper_95": 0.23720044606891472,
+      "tost_p_upper_at_015": 0.2862994140857907,
+      "tost_pass_at_015": false,
+      "n_samples": 240,
+      "pass": false,
+      "evidence": "Pearson r=0.1140, 95% CI [-0.0128, 0.2372], CI upper 0.2372 >= 0.15"
+    },
+    "C4_null_control": {
+      "threshold": "FP = 0.0 on noise-only conditions",
+      "observed_fp_rate": 0.0,
+      "observed_fp_count": 0,
+      "total_noise_only": 120,
+      "pass": true,
+      "evidence": "FP rate = 0.0000 across 2 noise-only conditions"
+    },
+    "PC_PERMISSION_BOUNDARY_DETECTION": {
+      "description": "permission_boundary drift should produce behavioral signal > 0 (both caching modes)",
+      "observed_rate": 1.0,
+      "pass": true,
+      "evidence": "Detection rate: 1.0000 (120/120)"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "1a2d719102576dcb7cbb340f2fd7782eb30b164ef477db2c6ab61a488c3f5efa",
+      "role": "raw"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "7d1064a9d5a2d630a45cd9b9e5c1d39c6813092b4eda7f4c6a373fa0d132dd86",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "5598277cc730b2bb1608f15cc46bc16e5af88b4d1a3350a0c3b9f72b793997dd",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean drift TP rate across co-occurring conditions: 1.0000",
+    "All Wilson lower CI > 0.75: True",
+    "Pearson r (pooled, n=240): 0.1140 (|r|=0.1140)",
+    "95% CI (Fisher z): [-0.0128, 0.2372]",
+    "CI upper bound 0.2372 >= 0.15 (frozen delta=0.15 threshold)",
+    "TOST at delta=0.15: p_upper=0.2863, pass=False",
+    "Null control FP rate (noise-only): 0.0000 (0/120)",
+    "Positive control (permission_boundary detection): 1.0000",
+    "Conditions with within-condition variance: 4/4",
+    "Total paired samples: 240",
+    "Per-drift-pattern r: permission_boundary=-0.06618119868565904, session_invalidation=0.02650873842072548",
+    "Per-caching-mode r: cache_enabled=-0.005508257343970431, cache_disabled=0.21696195390999432",
+    "Stochastic server: SQLite DB, cache TTL=0.5s, jitter 10-100ms, HS256+RS256 JWT",
+    "HTTP caching semantics: Cache-Control, ETag, If-None-Match, 304 Not Modified"
+  ],
+  "validity_notes": [
+    "Stochastic server: Flask 3.1.3 + SQLite WAL-mode DB for sessions/permissions + in-memory cache TTL=0.5s + real I/O jitter 10-100ms + mixed JWT (HS256 read/write, RS256 admin)",
+    "NEW: HTTP-level caching semantics \u2014 Cache-Control: max-age=5 (enabled) or no-store (disabled), ETag from response body SHA-256, If-None-Match conditional GET returning 304, Vary header",
+    "All behavioral signals derived from real HTTP request/response cycles (not analytical computation)",
+    "session_invalidation: ALL samples have session invalidation applied (session_change=1), session_status_check varies via random /session/status code from {401, 403, 500}",
+    "session_status_check mapping: 401 -> 1.0, 403 -> 0.5, 500 -> 0.75",
+    "Structural signals from unauthenticated /schema endpoint (cached with TTL for stale/fresh alternation)",
+    "Noise patterns applied per sample for structural variation: optional_field_addition, description_change, response_time_jitter, field_type_normalization",
+    "Frozen decision rule: 95% CI upper bound (two-sided, z=1.96) via Fisher z-transform tested at delta=0.15",
+    "TOST equivalence test at delta=0.15 used as primary decision criterion (per frozen decision_rule)",
+    "240 paired samples from 4 co-occurring conditions x 60 samples, SEED=42",
+    "Controlled differences from parent: parent had stochastic server WITHOUT HTTP caching; this experiment adds Cache-Control, ETag, If-None-Match, 304 responses",
+    "Claim ceiling bounded to stochastic Flask mock on localhost with SQLite + cache + HTTP caching semantics; NOT validated for production databases, distributed caches, CDN, or network latency",
+    "ETags computed from content-only hash (excluding timing headers) to avoid timing-induced structural signal artifacts",
+    "Cache-Control: max-age=5 ensures ~50% stale/fresh alternation with ~1s request interval"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on real APIs with HTTP caching (CDN, distributed cache, production middleware)",
+    "Whether delta=0.10 is practically required or delta=0.15 sufficient for product architecture",
+    "Whether production CDN behavior (cache invalidation, purge, stale-while-revalidate) preserves correlation structure",
+    "Whether concurrent client load changes cache hit rate and correlation structure",
+    "Whether per-condition heterogeneity is systematic or sampling noise",
+    "Realized cache hit rate and actual I/O latency distribution not logged as artifact"
+  ]
+}

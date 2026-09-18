@@ -1,0 +1,20 @@
+{
+  "base_sha": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T17:39:23.440197+00:00",
+  "experiment_id": "EXP-PHYSICS-35375596894",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: K=3 PMI=0.04848 bits <= 0.05 threshold, permutation p=0.555 > 0.0167. However, the audit (V1_sparsity_dilution, critical severity) demonstrates this is a power/sparsity failure, not absence of beyond-Markov structure: 45% of K=3 strata (254/565) are stochastic with multiple successors (result.json:metrics.determinism_check_k3), confirming beyond-Markov dependence exists in the environment by construction. The estimator uses only 8/565 strata (1.4%) with >=5 records for PMI estimation; 557 strata are skipped as too small from N=1000 transitions. The weighted PMI is diluted by 55% deterministic strata where PMI=0 by construction. Null control fails (mean 0.054 > 3*0.017), indicating permutation bias for hash-routed SPA. Additionally, measurement validity gap (V3_simulation_vs_browser_fidelity, high severity): prereg requires Playwright browser collection but producer used in-memory simulation. The FALSIFIED outcome is a valid scientific negative for this specific SPA design and sample size, not a global falsification of beyond-Markov dynamics. Audit REVISE status accepted: producer cannot claim FALSIFIED as evidence against C-WEB-DYNAMICS because the environment demonstrably has the structure the estimator failed to detect.",
+  "inherited_next_question": "Can a larger sample (N>=5000) with state-history conditioning (prev states instead of action-history) detect the beyond-Markov PMI signal that this experiment confirmed exists but could not measure, and does Playwright browser automation on the same 12-state SPA yield the same transition distribution as the in-memory simulation?",
+  "lane": "physics",
+  "origin_github_run_id": "35375596894",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35353016293",
+    "path": "research/experiments/EXP-PHYSICS-35353016293/handoff.json",
+    "sha256": "b940d73598dadfe945f5c5bd48ea0c0fa721750fcd94718329851a64ae6ebe66"
+  },
+  "reason": "pulse",
+  "request_hash": "3d9515e16ad51953f8f92e1add0bac4b91242623d52f7e0cb1cc870862b57a8a",
+  "request_id": "fc0c30268f336b3af61db4ef",
+  "schema_version": 1
+}

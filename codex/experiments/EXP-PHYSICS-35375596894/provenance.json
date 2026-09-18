@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35375596894",
+  "lane": "physics",
+  "github_run_id": "35375596894",
+  "github_run_attempt": 1,
+  "base_sha": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "pre_execute_sha": "5e698935b0747880343adceca1ea942181488843",
+  "post_execute_sha": "c7a5489b8cafe8ab2f3b8f183b3a0f0a7430a2cf",
+  "frozen_hashes": {
+    "prereg.md": "74215540a3db551c2101821a608292c1f2305a0b2495fafab8e523f014f254ef",
+    "request.json": "3f4385fc3a37ad62e2f38a490eddbabe50d1f165d20db3c043e8810b2f4ffe75",
+    "spec.json": "5f789eaf1f055a0d658efca22968a9a10b402c14a75ca50a8606a6b1e017549b"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35375596894/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "role": "raw",
+      "bytes": 1124053,
+      "records": 5000
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35375596894/analysis_results.json",
+      "sha256": "bdee841d13f0acaa36494d17ced4636c5702e0e135f0b7506ec5e72313c96b53",
+      "role": "derived",
+      "bytes": 1063685
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35375596894/run_experiment.py",
+      "sha256": "25fad68b8d0647f3373c97dac3e34e1452bec62a09a51a49db73e2dbb83334aa",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35353016293/spa_server.js",
+      "sha256": "061bd6da1a60319c03597d4ce3ceb3e7b5c141a1bc2cb220dbea6a7e78981cf2",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35375596894/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35375596894/report.md",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-35375596894/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35353016293/spa_server.js",
+    "research/physics/information_theoretic/pmi_analysis.py (reference only, not executed)"
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.2.6",
+    "node_version": "22.21.1",
+    "platform": "linux",
+    "playwright_core_version": "1.40.0 (node_modules/playwright-core)",
+    "playwright_chromium_executable": "missing (/home/runner/.cache/ms-playwright/chromium_headless_shell-1243 not installed, needs npx playwright install)",
+    "seed": 42,
+    "n_permutations": 1000,
+    "min_stratum_size": 5,
+    "alpha": 0,
+    "bonferroni_alpha": 0.0167,
+    "n_sessions": 50,
+    "steps_per_session": 100,
+    "n_transitions": 5000
+  },
+  "commands": [
+    "python3 research/experiments/EXP-PHYSICS-35375596894/run_experiment.py"
+  ],
+  "datasets": [],
+  "fixtures": [
+    {
+      "name": "12-state SPA simulation",
+      "states": 12,
+      "actions": 4,
+      "transition_function": "SHA256(prev1:prev2:current:action) mod 4 over CANDIDATES table",
+      "sessions": 50,
+      "steps_per_session": 100,
+      "total_transitions": 5000,
+      "seed": 42
+    },
+    {
+      "name": "8-state synthetic deterministic SPA positive control",
+      "states": 8,
+      "actions": 4,
+      "transition_table": "deterministic per (current, action) -> next (no history)",
+      "sessions": 50,
+      "steps_per_session": 100,
+      "total_transitions": 5000
+    }
+  ],
+  "reproduction": {
+    "how_to_reproduce": "python3 research/experiments/EXP-PHYSICS-35375596894/run_experiment.py reproduces raw_transitions.json and analysis_results.json deterministically (seed 42). Hash of raw_transitions should be 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade. PMI pipeline is pure Python with no external network for main analysis; Playwright diagnostic requires chromium install.",
+    "determinism": "PYTHONHASHSEED not set but transition generation uses random.Random(42) and hashlib.sha256, deterministic across runs on same Python version (3.12). Permutation uses random.Random(seed) with sequential randint draws, deterministic."
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35353016293",
+    "path": "research/experiments/EXP-PHYSICS-35353016293/handoff.json",
+    "sha256": "b940d73598dadfe945f5c5bd48ea0c0fa721750fcd94718329851a64ae6ebe66"
+  },
+  "collection_time": "2026-09-18T18:15:00Z",
+  "execution_duration_seconds": 85,
+  "notes": "Main analysis completed in-memory with 5000 transitions. Positive control validated. Automatability diagnostic used HTTP API direct (Playwright chromium missing). Block permutation null control shows intrinsic bias for hash-routed SPA, flagged in validity_notes. No external network beyond localhost:18973 HTTP API probe."
+}
