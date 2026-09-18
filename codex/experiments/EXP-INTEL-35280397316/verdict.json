@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35280397316",
+  "lane": "intel",
+  "decision": "SURVIVES",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Literature synthesis confirms recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods. However: (1) search was non-systematic (no PRISMA protocol, no inclusion/exclusion documentation); (2) SPIDER-to-IR applicability mapping is producer interpretation, not established literature result; (3) code coverage evidence from framework docs not peer-reviewed; (4) web analytics case is temporal definitional change not concurrent ambiguity. The experiment provides theoretical grounding for the recipe choice sub-problem but does not resolve the empirical recipe choice at scale. C-MEAS-VALID remains EXPERIMENTAL pending full-DOM enumeration."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 — and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "reason": "The frozen decision rule SURVIVES requires PC1, PC2, F1 not triggered, F2 not triggered. PC1 passes robustly (3 cases found: code coverage, IR, web analytics). F1 is not triggered (principled methods exist in IR). However, PC2 and F2 depend on the producer's interpretive mapping from SPIDER's density metric recipes to IR micro/macro/weighted averaging — this mapping is principled but not established in cited literature (audit V2). The audit correctly bounds the claim ceiling: (1) recipe choice ambiguity is a known phenomenon in established fields — SUPPORTED; (2) these methods inform SPIDER's density metric problem — INTERPRETIVE ANALOGY requiring empirical validation on full-DOM data. The non-systematic literature search (audit V1) limits generalizability but does not invalidate the specific findings. Decision is SURVIVES with narrowed ceiling: the experiment provides theoretical grounding for the recipe choice problem but does not resolve the empirical recipe choice at scale. The critical next step remains full-DOM enumeration (blocked by runtime substrate cap).",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35280397316/spec.json (frozen decision_rule, measurement_validity, baselines, claim_ids C-MEAS-VALID)",
+    "research/experiments/EXP-INTEL-35280397316/prereg.md (falsifiers F1/F2, PC1/PC2, measurement validity §8)",
+    "research/experiments/EXP-INTEL-35280397316/result.json (metrics M1-M5, controls PC1/PC2/NC1/F1/F2, validity_notes[5] acknowledging interpretive mapping)",
+    "research/experiments/EXP-INTEL-35280397316/audit.json (REVISE status, V1-V6 validity_findings, claim_ceiling bounded, recomputed_metrics)",
+    "research/experiments/EXP-INTEL-35280397316/report.md (evidence §2.1-2.3, mapping §3, resolution methods §4)",
+    "research/experiments/EXP-INTEL-35264637598/handoff.json (parent established: recipe reversal genuine, canonical per-iteration principled, full-DOM blocked)"
+  ]
+}

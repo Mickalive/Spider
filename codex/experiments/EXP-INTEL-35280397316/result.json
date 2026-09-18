@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35280397316",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M1_cases_found": 3,
+    "M1_description": "Number of well-documented cases of recipe choice ambiguity found in established measurement frameworks (code coverage, information retrieval, web analytics)",
+    "M2_resolution_methods_found": 3,
+    "M2_description": "Number of principled resolution methods identified that are applicable to SPIDER's density metric problem",
+    "M3_code_coverage_ambiguity": "PRESENT",
+    "M3_code_coverage_description": "Multiple aggregation recipes (line/branch/path coverage × union/weighted/per-module thresholds) with configurable framework choices. Different recipes answer different questions (thoroughness vs practicality).",
+    "M3_ir_ambiguity": "PRESENT",
+    "M3_ir_description": "Micro-averaging vs macro-averaging vs weighted averaging of precision/recall/F1 across classes. Two distinct 'macro F1' formulas exist (averaged-F1 vs F1-of-averages) diverging by up to 0.5. Stanford NLP textbook documents this as a fundamental recipe choice.",
+    "M3_web_analytics_ambiguity": "PRESENT",
+    "M3_web_analytics_description": "Engagement rate vs bounce rate vs session duration vs pageviews-per-session. GA4 redefined bounce rate from single-page-sessions to non-engaged-sessions, changing the recipe entirely. Multiple equivalent formulations exist.",
+    "M4_applicability_to_spider": "HIGH",
+    "M4_description": "SPIDER's density metric recipe choice maps directly to the micro/macro/weighted aggregation distinction in IR. Per-iteration canonical recipe = micro-averaging (uniform weight per iteration). Per-task weighted recipe = macro-averaging (equal weight per task). Both answer legitimate scientific questions.",
+    "M5_principled_resolution": "EXISTS",
+    "M5_description": "Resolution in all three fields: recipe choice is a design decision, not an implementation detail. Each recipe answers a different scientific question. The principled approach is to (1) state which recipe you use, (2) justify it by the question you are answering, (3) report sensitivity to recipe choice when possible."
+  },
+  "controls": {
+    "PC1_cases_exist": {
+      "description": "At least 2 well-documented cases of recipe choice ambiguity found in established fields",
+      "expected": ">= 2 cases found",
+      "observed": "3 cases found (code coverage, IR, web analytics)",
+      "pass": true,
+      "evidence_refs": ["M1_cases_found", "M3_code_coverage_ambiguity", "M3_ir_ambiguity", "M3_web_analytics_ambiguity"]
+    },
+    "PC2_resolution_method_exists": {
+      "description": "At least 1 principled resolution method identified that is applicable to SPIDER's density metric problem",
+      "expected": ">= 1 method found",
+      "observed": "3 methods found: (1) recipe-as-question-answer binding, (2) sensitivity reporting, (3) micro/macro/weighted framework",
+      "pass": true,
+      "evidence_refs": ["M2_resolution_methods_found", "M4_applicability_to_spider", "M5_principled_resolution"]
+    },
+    "NC1_null_control": {
+      "description": "Systematic search finds no principled methods for resolving recipe choice ambiguity",
+      "expected": "No principled methods found",
+      "observed": "Principled methods found in all 3 fields. Null control FAILS (null rejected).",
+      "pass": false,
+      "evidence_refs": ["M5_principled_resolution"]
+    },
+    "F1_no_principled_methods": {
+      "description": "No principled methods exist in established measurement frameworks for resolving recipe choice ambiguity",
+      "expected": "F1 triggered if no methods exist",
+      "observed": "F1 NOT triggered: principled methods exist in code coverage, IR, and web analytics",
+      "pass": false,
+      "evidence_refs": ["M5_principled_resolution"]
+    },
+    "F2_fundamentally_different": {
+      "description": "The density metric recipe choice problem is fundamentally different from known measurement ambiguity problems",
+      "expected": "F2 triggered if problem is fundamentally different",
+      "observed": "F2 NOT triggered: SPIDER's recipe choice maps directly to micro/macro/weighted aggregation in IR",
+      "pass": false,
+      "evidence_refs": ["M4_applicability_to_spider"]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35280397316/result.json",
+      "sha256": "69354d40c1ae412b79dc3c34bddf7283302582f9106b1ca25c1de7d90aace73a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35280397316/report.md",
+      "sha256": "5366ed1b8c83bec001b0b929e940d04409a5ceb173264c81aa59925322380937",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35280397316/provenance.json",
+      "sha256": "2c5effd5a51b7659839015999ed50b302ecc34e8eecaa9b09924a69ff18a55f0",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Code coverage frameworks (Datadog, coverage.py, PHPUnit) support multiple coverage definitions (line, branch, path, condition) with configurable aggregation recipes (set union, weighted merge, per-module thresholds). The choice of which coverage metric and how to aggregate across test suites is a well-documented recipe choice ambiguity.",
+    "Information retrieval has the most direct parallel: micro-averaging vs macro-averaging vs weighted averaging of precision/recall/F1 across classes is a textbook recipe choice problem. The Stanford NLP textbook (Manning et al.) explicitly documents that 'the differences between the two methods can be large' and that 'microaveraged results are really a measure of effectiveness on the large classes.' Two distinct 'macro F1' formulas exist (averaged-F1 vs F1-of-averages) diverging by up to 0.5 in extreme cases (ar5iv:1911.03347).",
+    "Web analytics has recipe choice ambiguity in engagement metrics: GA4 redefined bounce rate from 'single-page sessions' (UA) to 'non-engaged sessions' (GA4), changing the recipe entirely. Session duration vs engagement time vs time-on-page are different recipes measuring different things. The choice of which metric to report changes the conclusion.",
+    "SPIDER's density metric recipe choice maps directly to the micro/macro/weighted aggregation distinction in IR. Per-iteration canonical recipe (uniform p=0.5 across definitions) is analogous to micro-averaging (equal weight per observation/iteration). Per-task weighted recipe is analogous to macro-averaging (equal weight per task/group). Both answer legitimate scientific questions: micro asks 'do definitions disagree more than random across all iterations?' while macro asks 'do definitions disagree more than random within each task on average?'",
+    "The principled resolution across all three fields is consistent: recipe choice is a design decision, not an implementation detail. Each recipe answers a different scientific question. The resolution is to (1) state which recipe you use, (2) justify it by the question you are answering, (3) report sensitivity to recipe choice when possible. This directly informs SPIDER's density metric approach."
+  ],
+  "validity_notes": [
+    "This is a literature synthesis experiment with no new empirical measurement. Claim ceiling is bounded to published literature only.",
+    "Literature search used web search (Google Scholar, ACM DL, arXiv references) with keyword-based queries. Not a systematic review with formal inclusion/exclusion criteria, but sufficient for the bounded claim ceiling.",
+    "Code coverage evidence comes from framework documentation (Datadog, coverage.py, PHPUnit, BullseyeCoverage) rather than peer-reviewed papers, but the recipe choice ambiguity is well-documented in these primary sources.",
+    "IR evidence is strongest: Stanford NLP textbook (Manning et al.), scikit-learn documentation, and ar5iv:1911.03347 (Sokolova & Lapalme) provide rigorous analysis of aggregation recipe ambiguity.",
+    "Web analytics evidence comes from Google Analytics documentation, industry analyses, and comparative studies (PMC9140287). The GA4 vs UA bounce rate definitional change is well-documented.",
+    "The applicability mapping (SPIDER density metric → IR micro/macro/weighted) is an interpretation by the producer, not an established result. The mapping is principled but requires validation by downstream audit."
+  ],
+  "unresolved": [
+    "Whether the micro/macro/weighted framework from IR is the OPTIMAL resolution framework for SPIDER's density metric recipe choice, or whether a different framework (e.g., information-theoretic, Bayesian) would be more appropriate",
+    "Whether reporting sensitivity to recipe choice (both recipes as co-primary) is sufficient, or whether a third recipe (meta-analytic combination) is needed",
+    "Whether the density metric problem has additional structure (definition correlation, task hierarchy) not captured by the IR analogy",
+    "Full-DOM enumeration results (blocked by runtime lane substrate cap) remain unknown and may change the recipe choice landscape"
+  ]
+}
