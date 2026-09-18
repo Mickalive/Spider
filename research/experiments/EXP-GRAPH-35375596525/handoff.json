@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35375596525",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold when HTTP conditional caching is operationally exercised (client sends If-None-Match, server returns 304 Not Modified) at parent-matching power (n ≥ 480), and can the observed per-caching-mode heterogeneity (cache_enabled r ≈ 0 vs cache_disabled r ≈ 0.22) be replicated or attributed to sampling noise?",
+  "why_next": "The HTTP caching experiment was measurement-confounded and indeterminate: (1) the client never sent If-None-Match headers, so the 304/ETag code path was never exercised — only declarative Cache-Control headers were tested; (2) n=240 is half the parent's n=480, inflating the CI from width 0.18 to 0.25 and making the C3 failure partly a power artifact; (3) per-caching-mode heterogeneity is opposite to the hypothesis (cache_enabled r=-0.006 PASS vs cache_disabled r=0.217 FAIL), suggesting the failure is not driven by HTTP caching as a common cause. The parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) remains established. The highest-upside next step is to fix the three measurement defects and retest: implement If-None-Match → 304 in the client, match parent power (n ≥ 480), and log cache hit rate as an artifact. If orthogonality holds with proper manipulation at n ≥ 480, C-FRESHNESS advances toward the parent's confirmed ceiling including HTTP caching. If it fails with proper measurement, the architectural implication is real and the product must consider fused classifiers or cache-independent structural signals.",
+  "carry_forward": {
+    "established": [
+      "Behavioral-structural signal orthogonality confirmed at delta=0.15 on stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory cache TTL=0.5s + jitter 10-100ms + PyJWT HS256/RS256 on localhost (parent EXP-GRAPH-35353011131): pooled r=0.0463, 95% CI [-0.0434, 0.1353], CI upper 0.1353 < 0.15, TOST p_upper=0.011. n=480, 8 co-occurring conditions x 60. Audit PASS. This remains the strongest established evidence for C-FRESHNESS.",
+      "HTTP caching semantics (declarative only — Cache-Control headers, ETag generation) do NOT demonstrably break orthogonality: cache_enabled subset r=-0.0055 (TOST PASS p=0.045 at delta=0.15) on n=120. This is consistent with the hypothesis that HTTP caching affects response delivery but not the causal content of behavioral or structural signal channels.",
+      "Behavioral signals (token validation, session state change, auth boundary shift, session_status_check) remain a validated detection dimension: TP=1.0, Wilson lower 0.9398 > 0.75 across all co-occurring conditions on stochastic mock.",
+      "Per-caching-mode heterogeneity observed: cache_enabled r=-0.006 (near-zero) vs cache_disabled r=0.217. This is opposite to the hypothesis that HTTP caching introduces coupling. The heterogeneity may reflect sampling noise (n=120 per mode) or structural signal variance differences (structural_std ~1.55 enabled vs ~1.81 disabled).",
+      "Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard, TF-IDF, response-time KS, linear ensemble, field-usage, schema comparison."
+    ],
+    "rejected": [
+      "HTTP conditional caching (304 Not Modified) as tested in this experiment — never operationally exercised; client never sent If-None-Match headers (audit V1)",
+      "n=240 sufficient for delta=0.15 equivalence at expected |r| ~ 0.05 — observed CI width ~0.25 shows the prereg power analysis was optimistic; n ≥ 480 required to match parent precision",
+      "HTTP caching as a common cause raising |r| above 0.15 — cache_enabled subset shows r=-0.006 (near-zero, TOST PASS), opposite to hypothesis (audit V4)"
+    ],
+    "unknown": [
+      "Whether orthogonality holds when HTTP conditional caching is operationally exercised (If-None-Match → 304) at n ≥ 480 — the frozen experiment never tested this path",
+      "Whether per-caching-mode heterogeneity (enabled r=-0.006 vs disabled r=0.217) is systematic or sampling noise — requires replication at n ≥ 480 per mode",
+      "Whether orthogonality holds on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware — the parent carry_forward highest-upside question remains untested on real infrastructure",
+      "Whether delta=0.10 is practically required for product architecture — this experiment fails at delta=0.15 due to underpowering and cannot settle tighter margins",
+      "Realized cache hit rate, ETag match rate, and latency distribution — not logged as artifact (result.json unresolved[5])",
+      "Whether concurrent client load, CDN cache invalidation/purge, stale-while-revalidate, or distributed cache coherence changes correlation structure"
+    ],
+    "do_not_assume": [
+      "HTTP caching breaks the parallel-channel architecture — the C3 failure is measurement-confounded (incomplete manipulation + underpowered); do NOT infer non-orthogonality from this indeterminate result",
+      "C-FRESHNESS is REJECTED — status remains EXPERIMENTAL; the parent's stochastic-mock PASS at delta=0.15 is not superseded by this experiment's indeterminate REVISE",
+      "The pooled r=0.114 is the true population correlation under HTTP caching — point estimate is sample-dependent at n=240 with incomplete manipulation; CI [-0.013, 0.237] is the justified range",
+      "cache_disabled condition is more correlated than cache_enabled due to absence of caching — the opposite pattern may reflect sampling noise, structural variance differences, or confounds; do not interpret as causal",
+      "n=240 is sufficient for any equivalence margin in this setting — CI width ~0.25 requires point estimate < ~0.02 for CI upper < 0.15, which is below observed 0.114",
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — status remains EXPERIMENTAL bounded to stochastic mock at delta=0.15; no product promotion warranted",
+      "The decision-rule bug (FALSIFIES unreachable when abs_r < 0.15 and CI upper >= 0.20) means this experiment's MIXED outcome is correct per code but not per spec — the spec says FAIL at CI upper >= 0.20, the code says MIXED. The next experiment must fix run_experiment.py decision logic before re-running."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35375596525/result.json — C1-C4 controls, per_caching_r, power_analysis, stochastic_elements",
+    "research/experiments/EXP-GRAPH-35375596525/audit.json — status REVISE, V1 (304 never exercised), V3 (underpowered), V4 (heterogeneity opposite), claim_ceiling (indeterminate)",
+    "research/experiments/EXP-GRAPH-35375596525/spec.json — frozen decision_rule (CI upper < 0.15 at delta=0.15), falsifier conditions, measurement_validity",
+    "research/experiments/EXP-GRAPH-35375596525/prereg.md — validity threats §18 (304 content, cache-Control interaction, sample size, localhost network)",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json sha256 d30823d831272887167075652ad78be1139c4c426a61dc25fd1a6af64a1db6af — parent PASS baseline (r=0.046, CI upper 0.135 < 0.15)",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — parent stochastic baseline metrics",
+    "codex/claim_state.json:C-FRESHNESS — claim event history showing EXPERIMENTAL status across 20+ experiments"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35375596525/request.json",
+    "research/experiments/EXP-GRAPH-35375596525/spec.json",
+    "research/experiments/EXP-GRAPH-35375596525/prereg.md",
+    "research/experiments/EXP-GRAPH-35375596525/freeze.json",
+    "research/experiments/EXP-GRAPH-35375596525/result.json",
+    "research/experiments/EXP-GRAPH-35375596525/audit.json",
+    "research/experiments/EXP-GRAPH-35375596525/provenance.json",
+    "research/experiments/EXP-GRAPH-35375596525/report.md",
+    "research/experiments/EXP-GRAPH-35375596525/mock_server.py sha256 7d1064a9d5a2d630a45cd9b9e5c1d39c6813092b4eda7f4c6a373fa0d132dd86",
+    "research/experiments/EXP-GRAPH-35375596525/run_experiment.py sha256 5598277cc730b2bb1608f15cc46bc16e5af88b4d1a3350a0c3b9f72b793997dd",
+    "research/experiments/EXP-GRAPH-35375596525/raw_evidence/experiment_data.json sha256 1a2d719102576dcb7cbb340f2fd7782eb30b164ef477db2c6ab61a488c3f5efa",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json sha256 d30823d831272887167075652ad78be1139c4c426a61dc25fd1a6af64a1db6af"
+  ],
+  "recommended_action": "Design a graph lane experiment that fixes the three measurement defects from this REVISE and retests HTTP caching orthogonality: (1) Implement If-None-Match → 304 in run_experiment.py client: send If-None-Match header with ETag from prior response on /schema and /resource endpoints; log 304 rate and ETag match rate as manipulation checks; (2) Match parent power: n ≥ 480 paired samples (4 conditions × 120 minimum, or 8 conditions × 60 to replicate parent design); (3) Log cache hit rate, ETag match rate, and actual I/O latency distribution as artifacts; (4) Fix the decision-rule bug in run_experiment.py so CI upper ≥ 0.20 maps to FALSIFIES per spec.json; (5) Separate HTTP Cache-Control (max-age=5 / no-store) from in-memory SchemaCache TTL by logging which layer served each /schema response. If orthogonality holds at delta=0.15 with proper 304 manipulation at n ≥ 480, C-FRESHNESS extends to HTTP caching conditions. If it fails with proper measurement, the architectural implication is genuine and the product must consider cache-independent structural signals or fused classifiers."
+}
