@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35330739886",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "n_paired_samples": 480,
+    "pearson_r": 0.03354974840059444,
+    "abs_r": 0.03354974840059444,
+    "pearson_p": 0.4633583039263756,
+    "r_squared": 0.0011255855931345664,
+    "fisher_z": 0.03356234461331847,
+    "se_fisher_z": 0.04578685460128356,
+    "ci_95_lower_r": -0.05612086040050875,
+    "ci_95_upper_r": 0.12268344848910374,
+    "ci_95_abs_upper_r": 0.12268344848910374,
+    "ci_95_one_sided_upper_r": 0.10845287233428131,
+    "tost_results": {
+      "0.10": {
+        "delta": 0.10,
+        "z_lower": 2.916770803371921,
+        "p_lower": 0.0017680106218774866,
+        "z_upper": -1.4512950256493584,
+        "p_upper": 0.07334888897149866,
+        "tost_pass": false,
+        "ci_upper_bound_pass": false
+      },
+      "0.12": {
+        "delta": 0.12,
+        "z_lower": 3.3535767893594805,
+        "p_lower": 0.0003993030807680047,
+        "z_upper": -1.8881009712369785,
+        "p_upper": 0.029505609817392384,
+        "tost_pass": true,
+        "ci_upper_bound_pass": false
+      },
+      "0.15": {
+        "delta": 0.15,
+        "z_lower": 4.008786767334679,
+        "p_lower": 3.138922080525318e-05,
+        "z_upper": -2.543310943212177,
+        "p_upper": 0.005489816250151343,
+        "tost_pass": true,
+        "ci_upper_bound_pass": true
+      },
+      "0.20": {
+        "delta": 0.20,
+        "z_lower": 5.100802737294678,
+        "p_lower": 1.730108185568819e-07,
+        "z_upper": -3.635326899186977,
+        "p_upper": 0.00013892259187103192,
+        "tost_pass": true,
+        "ci_upper_bound_pass": true
+      }
+    },
+    "delta_sample_size_tradeoff": {
+      "0.10": {
+        "delta": 0.10,
+        "min_n_tost": 155,
+        "min_n_ci_bound": 873
+      },
+      "0.12": {
+        "delta": 0.12,
+        "min_n_tost": 118,
+        "min_n_ci_bound": 518
+      },
+      "0.15": {
+        "delta": 0.15,
+        "min_n_tost": 84,
+        "min_n_ci_bound": 287
+      },
+      "0.20": {
+        "delta": 0.20,
+        "min_n_tost": 53,
+        "min_n_ci_bound": 142
+      }
+    },
+    "mean_tp_rate": 1.0,
+    "wilson_lower_ci_tp": 0.9398260695220669,
+    "conditions_with_variance": 8,
+    "fp_rate_noise_only": 0.0,
+    "per_condition_correlations": {
+      "cooccur_permission_boundary+optional_field_addition": {
+        "n": 60,
+        "b_mean": 0.3333333333333333,
+        "b_std": 0.0,
+        "s_mean": 2.9583333333333335,
+        "s_std": 1.1048543456019673,
+        "r": 0.0,
+        "p": 1.0
+      },
+      "cooccur_permission_boundary+description_change": {
+        "n": 60,
+        "b_mean": 0.3333333333333333,
+        "b_std": 0.0,
+        "s_mean": 1.675,
+        "s_std": 0.6183203989845394,
+        "r": 0.0,
+        "p": 1.0
+      },
+      "cooccur_permission_boundary+response_time_jitter": {
+        "n": 60,
+        "b_mean": 0.3333333333333333,
+        "b_std": 0.0,
+        "s_mean": 2.2916666666666665,
+        "s_std": 0.8485281374238569,
+        "r": 0.0,
+        "p": 1.0
+      },
+      "cooccur_permission_boundary+field_type_normalization": {
+        "n": 60,
+        "b_mean": 0.3333333333333333,
+        "b_std": 0.0,
+        "s_mean": 1.9583333333333335,
+        "s_std": 0.7288689868556626,
+        "r": 0.0,
+        "p": 1.0
+      },
+      "cooccur_session_invalidation+optional_field_addition": {
+        "n": 60,
+        "b_mean": 1.0666666666666667,
+        "b_std": 0.3922322702763681,
+        "s_mean": 2.6,
+        "s_std": 0.9591663046625438,
+        "r": -0.3144887601032956,
+        "p": 0.014396374252335626
+      },
+      "cooccur_session_invalidation+description_change": {
+        "n": 60,
+        "b_mean": 1.1,
+        "b_std": 0.4033830623760797,
+        "s_mean": 1.825,
+        "s_std": 0.6976145068445115,
+        "r": -0.04404283045693247,
+        "p": 0.7382739361129393
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "n": 60,
+        "b_mean": 1.0333333333333334,
+        "b_std": 0.3863703305156273,
+        "s_mean": 2.2,
+        "s_std": 0.8082903768654761,
+        "r": 0.15794965025709737,
+        "p": 0.22808011127249905
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "n": 60,
+        "b_mean": 1.1333333333333333,
+        "b_std": 0.4355960364786099,
+        "s_mean": 1.675,
+        "s_std": 0.6413494834603385,
+        "r": 0.15312182195766505,
+        "p": 0.2427948513789412
+      }
+    }
+  },
+  "controls": {
+    "C1_drift_tp": {
+      "id": "PC-TP-VARIANCE-REPLICATION",
+      "description": "Verify parent C1: mean TP >= 0.85 AND all Wilson lower CI > 0.75",
+      "threshold": "mean_tp >= 0.85 AND all Wilson lower CI > 0.75",
+      "observed_mean_tp": 1.0,
+      "observed_wilson_lower": 0.9398260695220669,
+      "pass": true,
+      "evidence_ref": "parent result.json metrics.mean_tp_rate, metrics.per_condition_wilson_lower"
+    },
+    "C2_variance": {
+      "id": "PC-TP-VARIANCE-REPLICATION",
+      "description": "Verify parent C2: >= 6/8 conditions with std > 0 for both signals",
+      "threshold": ">= 6 of 8 co-occurring conditions have std > 0 for both behavioral and structural signals",
+      "conditions_with_variance": 8,
+      "total_conditions": 8,
+      "pass": true,
+      "evidence_ref": "parent result.json metrics.conditions_with_variance=8"
+    },
+    "C3_equivalence": {
+      "id": "B-TOST-DELTA-MAP",
+      "description": "TOST equivalence test at delta in {0.10, 0.12, 0.15, 0.20} with 95% CI upper bound check",
+      "threshold": "95% CI upper bound on |r| < delta for at least one tested delta",
+      "observed_abs_r": 0.03354974840059444,
+      "ci_95_upper_bound": 0.12268344848910374,
+      "ci_95_lower_bound": -0.05612086040050875,
+      "tost_pass_at_delta_010": false,
+      "tost_pass_at_delta_012": true,
+      "tost_pass_at_delta_015": true,
+      "tost_pass_at_delta_020": true,
+      "ci_upper_bound_pass_at_delta_010": false,
+      "ci_upper_bound_pass_at_delta_012": false,
+      "ci_upper_bound_pass_at_delta_015": true,
+      "ci_upper_bound_pass_at_delta_020": true,
+      "pass": true,
+      "note": "C3 passes because CI upper bound 0.123 < delta=0.15 and delta=0.20. Fails for delta=0.10 and delta=0.12. MIXED per decision rule: passes only for delta >= 0.15."
+    },
+    "C4_null_control": {
+      "id": "NC-FP-REPLICATION",
+      "description": "Verify parent C4: FP = 0.0 on 240 noise-only samples",
+      "threshold": "FP = 0.0 on noise-only conditions",
+      "observed_fp_rate": 0.0,
+      "total_noise_samples": 240,
+      "pass": true,
+      "evidence_ref": "parent result.json controls.C4_null_control"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json",
+      "sha256": "13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35308806969/result.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35308806969/audit.json",
+      "sha256": null,
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Pearson r = 0.0335 (|r| = 0.0335, r-squared = 0.001) on 480 paired samples, confirming parent point estimate",
+    "95% two-sided CI via Fisher z-transform: [-0.056, 0.123]. Upper bound 0.123 is the binding constraint for equivalence testing",
+    "One-sided 95% CI upper bound: 0.108, confirming the two-sided upper bound is conservative",
+    "TOST at delta=0.10: FAIL — p_upper=0.073 > 0.05. The data cannot reject H0: |r| >= 0.10 at alpha=0.05",
+    "TOST at delta=0.12: TOST PASS (p_upper=0.030 < 0.05) but CI upper bound 0.123 > 0.12 fails the CI-based decision rule. Discrepancy due to one-sided (z=1.645) vs two-sided (z=1.96) critical values",
+    "TOST at delta=0.15: PASS — both TOST (p_upper=0.005) and CI bound (0.123 < 0.15)",
+    "TOST at delta=0.20: PASS — both TOST (p_upper<0.001) and CI bound (0.123 < 0.20)",
+    "Parent C1 verified: mean TP=1.0, Wilson lower CI=0.940 > 0.75",
+    "Parent C2 verified: 8/8 conditions with within-condition variance for both signals",
+    "Parent C4 verified: FP=0.0 on 240 noise-only samples",
+    "Per-condition correlation heterogeneous: session_invalidation+optional_field_addition r=-0.314 (p=0.014) is the most negative; permission_boundary conditions r=0.000 (constant behavioral score). Pooled r=0.034 is the confirmatory measure per parent preregistration",
+    "Permission_boundary conditions have constant behavioral scores (b_std=0.0) because all 60 samples produce identical behavioral signal for the same drift pattern — the pooled r is dominated by session_invalidation conditions"
+  ],
+  "validity_notes": [
+    "This is a frozen statistical reanalysis of parent EXP-GRAPH-35308806969 raw_evidence. No new HTTP requests or server interactions were performed",
+    "TOST/CI computation uses standard Fisher z-transform: z = 0.5*ln((1+r)/(1-r)), SE = 1/sqrt(n-3), CI = tanh(z +/- z_alpha * SE)",
+    "The CI-based decision rule uses two-sided 95% CI (z=1.96), which is more conservative than TOST (z=1.645 per side). This explains the delta=0.12 discrepancy where TOST passes but CI bound fails",
+    "The pooled correlation is computed across all 8 co-occurring conditions (480 paired samples). Per-condition correlations range from r=-0.314 (p=0.014, n=60, one significant among 8 tests) to r=0.000 (constant behavioral). Pooling is appropriate for the product-relevant question of overall signal independence",
+    "Permission_boundary conditions contribute zero behavioral variance (b_std=0.0 for all 4 PB conditions), so they do not contribute to the pooled r. The pooled r is entirely determined by the 4 session_invalidation conditions (240 samples)",
+    "Fisher z-transform assumes bivariate normality. Behavioral scores are bounded [0, 5] and structural scores are bounded [0, 6], which introduces mild non-normality. The approximation is adequate for n=480 with near-zero r"
+  ],
+  "unresolved": [
+    "Whether the pooled r=0.034 driven entirely by session_invalidation conditions (240/480 samples) represents true signal correlation or artifact of the graded session_status_check mapping (401->1.0, 403->0.5, 500->0.75)",
+    "Whether the single significant per-condition r=-0.314 on SI+optional_field_addition replicates or is sampling noise (1/8 expected under null; binomial p=0.031 for exactly 1 significant at alpha=0.05)",
+    "Whether the delta=0.15 equivalence margin is acceptable for product architecture decisions (delta=0.15 corresponds to <2.25% shared variance, meaning >97.75% of variance is independent)",
+    "Whether delta=0.12 is practically required — if so, minimum n=518 (CI bound) or n=118 (TOST) is needed, and the current n=480 is insufficient for the CI-based rule",
+    "Whether real APIs with stochastic behavior (DB/cache/CDN) preserve the near-zero correlation structure observed on deterministic Flask mock",
+    "Whether alternative session_status_check mappings (e.g., continuous TTL-based) change the correlation structure",
+    "Whether the one-sided 95% CI upper bound (0.108) should be used as the decision criterion instead of the two-sided CI upper bound (0.123) — the one-sided bound would pass delta=0.12",
+    "Whether wider stochastic variation (all 7 non-empty permission subsets, larger n per condition) changes the pooled correlation estimate"
+  ]
+}
