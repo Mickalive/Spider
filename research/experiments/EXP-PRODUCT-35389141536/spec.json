@@ -1,17 +1,44 @@
 {
   "experiment_id": "EXP-PRODUCT-35389141536",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "question": "After two consecutive MEASUREMENT_INVALID experiments (no LLM API keys), does pivoting to browser/verification cost measurement on the frozen 32-task synthetic corpus reveal that browser/verification costs dominate the 5.42% token savings from parameterized deduplication, or are token savings preserved in end-to-end workflow cost?",
+  "hypothesis": "Browser and verification costs are non-negligible and may dominate the 5.42% token savings from parameterized deduplication when measured on real HTTP execution of the 32-task synthetic corpus. Specifically: (H1) total browser execution time per task is >0 across all conditions, (H2) verification overhead (response validation) adds non-trivial cost, (H3) the relative browser/verification cost difference between LITERAL and PARAMETERIZED conditions is negligible (both execute identical actions), and (H4) COLD browser cost is identical to LITERAL/PARAMETERIZED (same HTTP requests, different URL source).",
+  "falsifier": "FALSIFIED if: (F1) browser execution time is 0 or unmeasurable for all tasks (infrastructure failure), OR (F2) total browser+verification cost difference between LITERAL and PARAMETERIZED exceeds 10% of token savings (1067 tokens equivalent), indicating token savings are offset by differential execution costs. MIXED if browser costs are measurable but the 5.42% token savings is preserved after adding browser+verification costs.",
+  "baselines": {
+    "B-HTTP-RAW": {
+      "description": "Raw HTTP GET/POST latency for each unique URL in the 32-task corpus, measured via Python requests library with timing. No mechanism selection or resolution overhead. Establishes minimum browser cost floor.",
+      "expected_behavior": "Non-zero latency for all reachable URLs; latency variance across tasks reflects network conditions"
+    },
+    "B-VERIFICATION-RESPONSE": {
+      "description": "Response validation cost: parse response body, check HTTP status, validate expected content type. Measures verification overhead per task.",
+      "expected_behavior": "Non-zero verification cost correlated with response body size"
+    },
+    "B-TOKEN-ONLY": {
+      "description": "Token-only cost from parent EXP-PRODUCT-35330741529 analytical measurement (LITERAL 615.34 tokens/task, PARAMETERIZED 582.0 tokens/task, COLD 77.34 tokens/task). Carried forward as reference baseline.",
+      "expected_behavior": "Parent analytical costs are a lower bound on total workflow cost"
+    }
+  },
+  "positive_control": {
+    "description": "5 blog-read-post tasks (GET /posts/{id} for id=101,203,303,404,505) executed via HTTP against a test endpoint. All 5 must return HTTP 200 with valid JSON. Validates that HTTP execution and response verification work correctly.",
+    "expected_behavior": "5/5 tasks complete successfully with HTTP 200 and parseable JSON response"
+  },
+  "null_control": {
+    "description": "3 admin/auth tasks (admin-view-user, auth-check-permissions, admin-list-audit-log) with URLs that return HTTP 403 or 404 on a public endpoint. Validates that failed requests are measured correctly and don't inflate cost estimates.",
+    "expected_behavior": "3/3 tasks return error status (403/404/401); error handling cost is measured, not treated as success"
+  },
+  "measurement_validity": [
+    "Browser execution costs measured via Python requests library with time.perf_counter() timing on HTTP GET/POST requests to real or mock endpoints",
+    "Verification costs measured as response parsing + status validation time, separate from browser latency",
+    "Each task measured independently (N=32 tasks, each measured 3 times for timing stability, median reported)",
+    "Network timing jitter controlled by measuring against localhost mock server OR by reporting median of 3 runs per task",
+    "Token costs carried forward from parent analytical measurement (tiktoken counting) as reference; NOT re-measured in this experiment",
+    "The frozen 32-task corpus is used as-is; tasks pointing to example.com/blog.example.com are remapped to jsonplaceholder.typicode.com endpoints with equivalent structure",
+    "This experiment measures ONLY browser/verification costs; token costs are inherited from parent and added post-hoc to compute total workflow cost"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) browser execution time measurable for >=25/32 tasks (at least 78% completion), (C2) median verification time >0 for >=20/32 tasks, (C3) LITERAL vs PARAMETERIZED browser cost difference <10% of token savings (1067 tokens * 0.10 = 106.7 token-equivalent threshold, using 1 token = 1ms as rough conversion), (C4) total workflow cost (token + browser + verification) for PARAMETERIZED remains <= total for LITERAL, (C5) positive control 5/5 success. MEASUREMENT_INVALID if C1 fails (browser execution infrastructure unavailable). FALSIFIED-IN-SETTING if C3 or C4 fails. MIXED if C1-C3 pass but C4 fails (browser costs wipe out token savings).",
+  "product_consequence_positive": "If browser/verification costs are small relative to token savings (C4 passes), the 5.42% analytical token savings is preserved in end-to-end workflow cost. This supports C-PRODUCT-ECON advancing and validates the token-based deduplication approach as economically viable.",
+  "product_consequence_negative": "If browser/verification costs dominate (C4 fails), the 5.42% token savings is illusory in practice. This falsifies the token-based economics line and redirects product lane to non-token mechanisms (e.g., retrieval efficiency, correctness improvements, or closing C-PRODUCT-ECON).",
+  "estimated_cost": "Low: HTTP requests to test endpoints (jsonplaceholder.typicode.com or localhost mock), Python timing measurements, no LLM API calls. Estimated 32 tasks * 3 runs = 96 HTTP requests, each <1s. Total wall clock <5 minutes.",
+  "expected_information_gain": "HIGH: This experiment resolves the 'do browser/verification costs dominate' unknown from the parent handoff. Either (a) costs are small and token savings are preserved (supports C-PRODUCT-ECON), or (b) costs dominate and token-based economics are closed (falsifies a product line). Either outcome changes a product decision."
 }
