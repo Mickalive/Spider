@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35166507552",
+  "lane": "frontier",
+  "target_lane": "frontier",
+  "next_question": "Does per-type CV stability (<=0.5 at lambda=1) achieve at larger per-type n (500-1000/type) with KDE Scott or kNN k=5 under spec-compliant measurement (N=200 permutation nulls, full 8-lambda sweep, Kraskov k=5 kNN estimator, pipeline validation within 5% of parent baselines) — or does kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type per parent sensitivity) survive confirmatory preregistration at 250/type?",
+  "why_next": "This experiment is MEASUREMENT_INVALID and adds no new valid evidence. The sample-size scaling question (parent handoff next_question) remains untested under valid measurement. The frozen spec requires N=200 permutation nulls, 8 lambda levels, Kraskov k=5 kNN estimator, and pipeline validation within 5% of parent — none were achieved. A spec-compliant re-run is required before the per-type CV stability hypothesis can be advanced or falsified at larger sample sizes. The orthogonal path (confirmatory kNN k=10 at 250/type) also remains open.",
+  "carry_forward": {
+    "established": [
+      "KDE and kNN binning-free estimators achieve per-type null control (8/8 pass) at 250/type where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific (sparse-binning artifact at 0.625 expected counts/bin). (parent EXP-FRONTIER-34913743596 result.json:controls.kde_null_control.pass=true, controls.knn_null_control.pass=true; audit.json PASS)",
+      "Per-type CV stability (<=0.5 at lambda=1) fails for both KDE (max 0.5745 type 4, 7/8 pass) and kNN (max 0.7550 type 0, 7/8 pass) at 250/type. The per-type stability limitation generalizes beyond binning to sample-size/heterogeneity. (parent EXP-FRONTIER-34913743596 result.json:controls.kde_cv_check.pass=false, controls.knn_cv_check.pass=false; audit.json PASS)",
+      "Per-type vs pooled ordering is estimator-dependent: KDE/kNN show per-type > pooled (ratio 0.35x and 0.41x respectively at lambda=1) while binned TV shows pooled > per-type (ratio 1.49x). The binned TV pooled advantage confounds 5.0 vs 0.625 counts/bin density. (parent EXP-FRONTIER-34913743596 result.json:metrics.primary_comparison)",
+      "Positive controls pass for both measures at 250/type (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012), confirming KDE and kNN can detect action-conditioned structure; failure is specific to per-type stability, not sensitivity. (parent EXP-FRONTIER-34913743596 result.json:controls.kde_positive_control, controls.knn_positive_control)",
+      "Binned TV replication control passes: per-type mean 0.0343 within 0.0003 of parent 0.034, CV max 1.59 replicated, null 4/8 fail replicated — validates pipeline consistency across three consecutive Frontier experiments. (parent EXP-FRONTIER-34913743596 result.json:controls.bc_replication)",
+      "Pooled Spearman rank detection for binned TV (rho=0.929) is established and replicated across Frontier experiments; any new experiment should preserve this as baseline comparator. (parent EXP-FRONTIER-34913743596 result.json:metrics.bc_tv_reference)"
+    ],
+    "rejected": [
+      "Hypothesis that the binned TV per-type false-positive (4/8 null fail) is general to all density-divergence estimation at 250/type: FALSIFIED by KDE and kNN 8/8 null pass. The binned TV artifact is estimator-specific. (parent EXP-FRONTIER-34913743596)",
+      "Hypothesis that KDE Scott and kNN k=5 automatically achieve per-type CV stability (<=0.5) at 250/type: FALSIFIED — KDE max 0.5745 (marginal, type 4 scaling_high) and kNN max 0.7550 (substantial, type 0 rotation_low) both exceed 0.5. (parent EXP-FRONTIER-34913743596)",
+      "Hypothesis that per-type density-divergence at 250/type is ready for per-type deployment with binning-free estimators: NOT SUPPORTED — CV stability failure means per-type estimates remain noisy even without binning artifact. (parent EXP-FRONTIER-34913743596 audit.json:claim_ceiling)"
+    ],
+    "unknown": [
+      "Whether per-type CV <=0.5 would survive at n=500/1000 with frozen spec-compliant BC (N=200 permutations, 95th percentile null, full 8 lambdas, Kraskov k=5 kNN) — the parent marginal fail (KDE 0.5745, only 14.9% over 0.5) suggests sample-size-limited but untested under valid measurement. This experiment attempted the test but measurement invalidity prevents any conclusion.",
+      "Whether kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type per parent sensitivity) would survive confirmatory preregistration at 250/type — requires new confirmatory experiment, cannot be claimed from exploratory per prereg 14.",
+      "Whether per-type vs pooled ordering reversal (KDE/kNN per-type > pooled vs binned TV pooled > per-type) persists at larger n or under spec-compliant BC — untested because this experiment's BC units differ from parent.",
+      "Whether any BC magnitude at larger n is sufficient for downstream SPIDER exploration utility vs frequency baseline 0.335 — prereg expected_information_gain remains unknown; synthetic-to-real gap dominates.",
+      "Whether real Web DOM transitions exhibit any KDE/kNN-detectable action-conditional structure — all evidence across frontier remains synthetic 2D [0,1]^2; no inference warranted."
+    ],
+    "do_not_assume": [
+      "Do not assume this MEASUREMENT_INVALID experiment provides evidence for or against per-type CV stability at 500-1000/type. The measurement failed to execute the frozen spec; no valid inference about sample-size scaling is possible from this packet.",
+      "Do not assume C-WEB-DYNAMICS is globally falsified — the claim concerns real Web dynamics; ALL evidence across Frontier experiments is synthetic (2D [0,1]^2 with toy affine families, heteroscedastic Gaussian noise, deterministic block-cycling). The frozen FALSIFIED-IN-SETTING applies to per-type CV stability at 250/type with KDE/kNN, not to the scientific claim. Synthetic-to-real gap persists.",
+      "Do not assume the exploratory kNN k=10 CV pass (max 0.470) confirms per-type stability at 250/type — it is EXPLORATORY per prereg 14 deviation policy and cannot support confirmatory claims.",
+      "Do not assume per-type KDE/kNN estimates achieve absolute signal strength sufficient for downstream use — per-type BC magnitudes (KDE 0.182, kNN 0.138 at lambda=1) remain below frequency baseline 0.335 in binned units, and cross-estimator comparison is confounded by different divergence units.",
+      "Do not assume the pooled vs per-type ordering reversal demonstrates pooled estimation is inferior — the comparison at equal per-type n still confounds total density (pooled 2000 points vs per-type 250 points). The reversal may reflect estimator-specific geometry, not universal pooling disadvantage.",
+      "Do not assume sparse-sample results (250/type) generalize to denser regimes — per-type estimation at 500-2000/type may achieve CV <=0.5 and change ordering. The sample-size question is orthogonal and unresolved.",
+      "Do not assume non-stationarity operationalization (deterministic block-cycling every 250 i.i.d. draws) is representative of real Web page-type switching.",
+      "Do not assume the producer's narrowed decision rule ('positive control only for passing measure') is valid — it contradicts the frozen spec which requires positive control for either measure at any sample size. A new decision rule requires new freeze."
+    ]
+  },
+  "dependencies": [
+    "Spec-compliant re-execution with: N=200 permutation nulls per type per sample size, all 8 frozen lambda levels (0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0), Kraskov k=5 kNN estimator (not simplified neighbor-count), KDE with permutation mean subtraction (BC = max(0, observed - perm_mean)), pipeline validation within 5% of parent baselines (KDE CV 0.546-0.604, kNN CV 0.717-0.793). (audit.json required_fixes, spec.json measurement_validity)",
+    "kNN k=10 confirmatory preregistration at 250/type with proper threshold — EXPLORATORY pass (max 0.470) requires preregistration before claim. (parent EXP-FRONTIER-34913743596 sensitivity_exploratory.json:sensitivities.knn_k10)",
+    "Real Web transition data with known action-structure remains the dominant substrate dependency for C-WEB-DYNAMICS — all Frontier experiments are synthetic. (parent handoff.json:dependencies[3])",
+    "Additional DGP families (non-affine, non-Gaussian noise) to test whether per-type vs pooled ordering reversal is systematic. (audit.json:unresolved[3])",
+    "Pooled binned TV Spearman rho=0.929 rank detection is established and replicated; any new experiment should preserve this as baseline comparator. (parent EXP-FRONTIER-34913743596 result.json:metrics.bc_tv_reference)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35166507552/audit.json:status MEASUREMENT_INVALID, validity_findings V1-V7, baseline_findings B1-B4, required_fixes 7 items, claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-FRONTIER-35166507552/result.json:metrics (KDE cv_max 0.3748/0.317/0.163, kNN cv_max 0.0634/0.0492/0.0469, kNN positive control inverted), controls (pipeline validation off, kNN positive fail)",
+    "research/experiments/EXP-FRONTIER-35166507552/spec.json:decision_rule, measurement_validity, null_control, positive_control, baselines",
+    "research/experiments/EXP-FRONTIER-35166507552/prereg.md:5.2, 6.1, 7.3, 8.1, 8.2, 10.3",
+    "research/experiments/EXP-FRONTIER-35166507552/run_execute.py:35 N_PERMS, 54-65 gen_trans, 67-91 kde_bc, 93-111 knn_bc, 125 lambda loop",
+    "research/experiments/EXP-FRONTIER-35166507552/provenance.json:total_transitions, key_methodological_change, decision_rule_applied",
+    "research/experiments/EXP-FRONTIER-34913743596/handoff.json:carry_forward (established, rejected, unknown, do_not_assume)",
+    "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_max_cv 0.5745, metrics.knn_per_type.lambda1_max_cv 0.7550",
+    "research/experiments/EXP-FRONTIER-34913743596/audit.json:status PASS, claim_ceiling"
+  ],
+  "recommended_action": "Design a Frontier experiment to test per-type CV stability at larger per-type n (500-1000/type) with spec-compliant measurement. The experiment MUST: (1) use N=200 permutation nulls per type per sample size with 95th percentile threshold; (2) sweep all 8 frozen lambda levels (0.0,0.1,0.2,0.3,0.4,0.5,0.7,1.0); (3) implement Kraskov k=5 kNN MI estimator (not simplified neighbor-count); (4) compute KDE BC as max(0, observed - perm_mean) with permutation subtraction; (5) verify pipeline validation at n=250/type within 5% of parent baselines (KDE CV 0.546-0.604, kNN CV 0.717-0.793); (6) compute total transitions matching spec (80k/160k/320k for n=250/500/1000); (7) use seeded RNG exclusively (no unseeded np.random calls). If pipeline validation at n=250/type replicates parent, the sample-size scaling test is valid. If CV passes at 500-1000/type for KDE, the per-type stability limitation is sample-size-specific and the density-divergence approach becomes viable. If CV still fails at 1000/type for both measures, the limitation is more fundamental and resources should shift to orthogonal mechanisms (pooled estimation, different state representations, or non-density-divergence approaches). Also consider confirming kNN k=10 at 250/type in a separate preregistered experiment."
+}
