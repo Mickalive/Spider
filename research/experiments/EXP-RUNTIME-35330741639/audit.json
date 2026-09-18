@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35330741639",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Spec decision_rule condition (2) 'decompressed hash matches parent for each proxy_behavior' was only verified for PASSTHROUGH in run_experiment.py:994-1018 (if not endswith PASSTHROUGH continue). Must verify RECOMPRESS and CACHED as well; CACHED will fail determinism-across-paths by design (3/4 auth states served stale body), which is a distinct falsifier from discrimination<0.3 and should be reported separately rather than aggregated into all_match=true.",
+    "CACHED falsification must be explicitly bounded as CDN cache-key artifact, not iterative-decompression failure: report should state 'iterative decompression correctly decompressed cached bytes (0 errors, all_same=true) but discrimination 0 is caused by (URL,Accept-Encoding) cache key excluding Authorization' and carry_forward should advance claim ceiling for PASSTHROUGH and RECOMPRESS only, not for naive CACHED. Future experiment should test Cache-Control:private / Vary:Authorization configuration as positive control.",
+    "Transfer-Encoding chunked is constant background (always chunked in all 3 modes per spec measurement_validity #5). Cannot isolate chunked effect as independent variable; future design should include non-chunked passthrough control if chunked-specific claim is desired."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_CACHED_IS_CACHE_SEMANTICS_NOT_DECOMPRESSION",
+      "severity": "high",
+      "finding": "CACHED discrimination 0.0 (9/9 cells, mean 0.0, producer result.json per_behavior CACHED mean 0.0) is NOT a decompression failure. decompression_errors=0 across all 540 requests, decompressed_hash_variation all_same=true per state, and producer correctly identifies root cause: cache key (URL, Accept-Encoding) excludes Authorization (run_experiment.py _get_cache_key returns (path, accept_encoding)). First request's compressed body is cached and served to all subsequent auth states, destroying inter-state variation before decompression is exercised. Iterative decompression correctly decompresses the (wrong) cached body. Falsification is bounded to naive CDN caching semantics.",
+      "evidence": "result.json metrics/per_cell: all _CACHED cells decompressed_body_only_discrimination 0.0, decompression_errors [], decompressed_hash_variation all_same true; run_experiment.py:358-360 _get_cache_key, 387-404 CACHED HIT path; report.md 2.3; provenance cache_ttl 60s"
+    },
+    {
+      "id": "V2_DETERMINISM_ACROSS_PATHS_INCOMPLETE",
+      "severity": "medium",
+      "finding": "Control C_DETERMINISM_ACROSS_PATHS reported as pass/all_match=true but code only checks PASSTHROUGH cells (run_experiment.py:996-998 if not endswith PASSTHROUGH continue). Per frozen spec decision rule (2) hash must match parent for each proxy_behavior. RECOMPRESS was not checked (should pass: re-compress with quality 8 decompresses to same bytes) and CACHED was not checked (would fail for 3/4 states due to stale cache). Reported pass overstates coverage.",
+      "evidence": "run_experiment.py:994-1018; result.json controls/C_DETERMINISM_ACROSS_PATHS all_match true; spec.json decision_rule condition (2) and measurement_validity decompressed hash must match parent direct-server hash; PARENT_REF_HASHES dict with 9x4 hashes in run_experiment.py:77-132"
+    },
+    {
+      "id": "V3_CHUNKED_CONSTANT_NOT_VARIED",
+      "severity": "low",
+      "finding": "Transfer-Encoding chunked is applied in all three proxy modes as constant background (spec measurement_validity #5, run_experiment.py always sends Transfer-Encoding chunked). This confirms chunked does not break iterative decompression for PASSTHROUGH/RECOMPRESS (no truncation/corruption observed, 0 errors) but provides no counterfactual non-chunked condition to isolate chunked effect. Claim about chunked survival is bounded to 'chunked background does not break PASSTHROUGH/RECOMPRESS'.",
+      "evidence": "spec.json measurement_validity[5]; run_experiment.py:394,425,481 Transfer-Encoding chunked; result.json validity_notes All three modes always apply Transfer-Encoding: chunked"
+    },
+    {
+      "id": "V4_SAMPLING_AND_TARGET_INTEGRITY_OK",
+      "severity": "info",
+      "finding": "Sampling integrity intact: 540 total requests = 27 cells *20 (4 states x5 reps), seed 44 shuffle per cell, jitter 50-150ms, separate origin port per content_type x size and separate proxy port per behavior, 5 reps per cell verified. No split leakage beyond Intentional CACHED design. Target integrity: discrimination metric correctly computed via compute_discrimination_score (intra 1.0 - inter 0.5 =0.5 when valid differs, 1.0-1.0=0 when all same). Recomputed per_behavior means match producer exactly (PASSTHROUGH 0.5, CACHED 0.0, RECOMPRESS 0.5).",
+      "evidence": "result.json metrics/per_cell 27 entries each total_requests 20; metrics/per_behavior verified via recomputation (0.5/0.0/0.5); run_experiment.py plan shuffle seed 44; provenance total_requests 540"
+    },
+    {
+      "id": "V5_REPRESENTATION_AND_ENVIRONMENT_BOUNDS",
+      "severity": "info",
+      "finding": "Environment bounds correctly disclosed: localhost mock origin + Python reverse proxy only, no real CDN (Cloudflare/Fastly/Akamai) per validity_notes. Single-layer brotli quality 6 origin, RECOMPRESS adds one layer at quality 8 (max_depth=5 handles). No double/triple-brotli through proxy, no binary content, synthetic padded JSON/HTML/XML, 3-way error collapse, HS256 expired_token locally signed. Latent variable: real CDN behaviors omitted (quality variation per edge, cache invalidation, X-Cache headers, Accept-Encoding negotiation across nodes, geographic latency). Producer correctly marks unresolved real-CDN block.",
+      "evidence": "spec.json measurement_validity; prereg 10 Scope Boundaries; provenance execution_parameters; result.json validity_notes"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PARENT-DECOMPRESSED-0.5",
+      "expected": 0.5,
+      "observed": 0.5,
+      "finding": "PASS: PASSTHROUGH decompressed discrimination mean 0.5 across 9 cells (all cells 0.5) matches parent direct-server baseline exactly. Confirms proxy passthrough introduces no artifacts.",
+      "evidence": "result.json metrics/per_behavior PASSTHROUGH decompressed mean 0.5; controls/C_PROXY_PASSTHROUGH_EQUIVALENCE pass true with 9x0.5"
+    },
+    {
+      "id": "B-DIRECT-PASSTHROUGH",
+      "expected": 0.5,
+      "observed": 0.5,
+      "finding": "PASS: Positive control C_PROXY_PASSTHROUGH_EQUIVALENCE passes (all passthrough cells 0.5). Proxy overhead 2.6-5.6ms mean, no decompression errors, latency <0.04ms per decompress, no regression vs parent.",
+      "evidence": "result.json controls/C_PROXY_PASSTHROUGH_EQUIVALENCE observed [0.5]*9 pass true; per_cell decompression_latency_ms and proxy_overhead_ms"
+    },
+    {
+      "id": "B-RANDOM",
+      "expected": 0.0,
+      "observed": 0.0,
+      "finding": "PASS: Null control C_NULL_CONTROL B-RANDOM=0.0 for all 27 cells (verify inter/intra identical random fingerprints yield 0 discrimination). No spurious structure.",
+      "evidence": "result.json controls/C_NULL_CONTROL observed 27x0.0 pass true; per_cell baselines B-RANDOM 0.0"
+    },
+    {
+      "id": "B-PARENT-COMPRESSED-0.2781",
+      "expected": 0.2781,
+      "observed": 0.3333,
+      "finding": "INFO: Compressed mean 0.333 is average of 0.5 (PASSTHROUGH/RECOMPRESS) and 0.0 (CACHED). PASSTHROUGH compressed 0.5 exceeds parent 0.2781 because single-layer brotli compressed bodies remain discriminable (vs parent's multi-layer triple-br compressed 0.278). RECOMPRESS also 0.5 (re-compressed at different quality remains discriminable). CACHED 0.0 collapses due to same cache artifact. Not a regression signal.",
+      "evidence": "result.json controls/C_COMPRESSED_BASELINE observed_mean 0.3333; metrics/per_behavior compressed means 0.5/0.0/0.5"
+    },
+    {
+      "id": "B-SINGLE_LAYER_NO_REGRESSION",
+      "expected": ">=0.3 under passthrough",
+      "observed": "0.5 all 9 passthrough cells",
+      "finding": "PASS: No regression through proxy for single-layer encoding. All 4 auth states maintain discrimination >=0.3 via passthrough.",
+      "evidence": "result.json controls/C_SINGLE_LAYER_NO_REGRESSION pass true"
+    }
+  ],
+  "recomputed_metrics": {
+    "per_behavior_decompressed_body_only_discrimination": {
+      "PASSTHROUGH": {"mean": 0.5, "min": 0.5, "max": 0.5, "n_cells": 9, "recomputed_match": true},
+      "CACHED": {"mean": 0.0, "min": 0.0, "max": 0.0, "n_cells": 9, "recomputed_match": true},
+      "RECOMPRESS": {"mean": 0.5, "min": 0.5, "max": 0.5, "n_cells": 9, "recomputed_match": true}
+    },
+    "per_behavior_compressed_body_only_discrimination": {
+      "PASSTHROUGH": {"mean": 0.5, "min": 0.5, "max": 0.5, "recomputed_match": true},
+      "CACHED": {"mean": 0.0, "min": 0.0, "max": 0.0, "recomputed_match": true},
+      "RECOMPRESS": {"mean": 0.5, "min": 0.5, "max": 0.5, "recomputed_match": true}
+    },
+    "total_requests": 540,
+    "total_cells": 27,
+    "decompression_errors": 0,
+    "decompressed_hash_variation_all_same": true,
+    "B_RANDOM_all_zero": true,
+    "C_DECOMPRESSED_DISCRIMINATION_min_observed": 0.0,
+    "C_DECOMPRESSED_DISCRIMINATION_pass": false,
+    "C_PROXY_PASSTHROUGH_EQUIVALENCE_pass": true,
+    "C_DETERMINISM_ACROSS_PATHS_reported_pass": true,
+    "C_DETERMINISM_ACROSS_PATHS_verified_passthrough_only": true,
+    "C_DETERMINISM_ACROSS_PATHS_cached_would_fail": true,
+    "recomputation_method": "independent python recomputation from result.json per_cell values; discrimination formula intra_match_rate - inter_match_rate verified against run_experiment.py compute_discrimination_score; per_behavior means recomputed as arithmetic mean of 9 cells per proxy_behavior; matches producer exactly to 4 decimals"
+  },
+  "claim_ceiling": "Iterative decompression (brotli->gzip->identity looping to max_depth=5) survives CDN-like proxy behaviors for PASSTHROUGH and RECOMPRESS only on localhost: decompressed body-only discrimination 0.5 (threshold >=0.3) across JSON/HTML/XML x 1KB/10KB/100KB (9 conditions) x 4 auth states x5 reps, chunked Transfer-Encoding constant background, brotli origin quality 6, proxy re-compress quality 8, 0 decompression errors, decompressed hash determinism all_same=true, B-RANDOM 0.0. PASSTHROUGH matches parent direct-server hash (determinism-across-paths verified for passthrough). RECOMPRESS also decompresses correctly (quality 8 layer within max_depth budget) but determinism-across-paths not independently verified in code. CACHED with naive (URL, Accept-Encoding) cache key (ignoring Authorization) is FALSIFIED-IN-SETTING: decompressed discrimination 0.0 across all 9 cells because proxy serves stale first-auth-state body to all states (CDN cache-key semantics, not decompression pipeline failure). No inference to real CDN infrastructure (Cloudflare/Fastly/Akamai), to double/triple-brotli through proxy, to Cache-Control:private / Vary:Authorization configurations, to edge quality diversity, chunked variation, or production-scale latency/concurrency. C-MEAS-VALID remains EXPERIMENTAL; real CDN remains sole blocker for product readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35330741639/result.json metrics/per_cell 27 entries decompressed_body_only_discrimination 0.5 PASSTHROUGH/RECOMPRESS 0.0 CACHED",
+    "research/experiments/EXP-RUNTIME-35330741639/result.json metrics/per_behavior PASSTHROUGH 0.5 CACHED 0.0 RECOMPRESS 0.5",
+    "research/experiments/EXP-RUNTIME-35330741639/result.json controls C_DECOMPRESSED_DISCRIMINATION min_observed 0.0 pass false, C_PROXY_PASSTHROUGH_EQUIVALENCE pass true, C_NULL_CONTROL 27x0.0 pass true, C_NO_ERROR_INFLATION observed 0",
+    "research/experiments/EXP-RUNTIME-35330741639/result.json observations and validity_notes",
+    "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py:358-360 _get_cache_key (URL,Accept-Encoding) and 387-404 CACHED HIT logic",
+    "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py:994-1018 C_DETERMINISM_ACROSS_PATHS passthrough-only check",
+    "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py:524-555 decompress_body max_depth=5 brotli->gzip loop",
+    "research/experiments/EXP-RUNTIME-35330741639/spec.json decision_rule SURVIVES if all >=0.3 else FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-RUNTIME-35330741639/spec.json measurement_validity and baselines B-PARENT-DECOMPRESSED-0.5 B-DIRECT-PASSTHROUGH B-RANDOM",
+    "research/experiments/EXP-RUNTIME-35330741639/provenance.json execution_parameters 540 requests seed 44",
+    "research/experiments/EXP-RUNTIME-35330741639/report.md section 2.3 CACHED root cause",
+    "research/experiments/EXP-RUNTIME-35290615081/handoff.json established triple-brotli survival on localhost direct"
+  ],
+  "unresolved": [
+    "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked TE, Accept-Encoding negotiation, edge quality diversity? Real CDN still sole blocker.",
+    "Does CACHED with correct configuration (Cache-Control: private, Vary: Authorization, or auth-aware cache key) restore discrimination >=0.3? Producer hypothesis is yes but untested.",
+    "How does proxy behavior interact with double/triple-brotli multi-layer encoding through the proxy? This experiment used single-layer origin brotli only.",
+    "What happens with CDN-specific header manipulation (X-Cache, Via, X-Forwarded-For) and Accept-Encoding negotiation across multiple CDN nodes?",
+    "Production-scale latency/CPU with concurrent clients and MB-scale natural content through CDN remains unknown."
+  ]
+}
