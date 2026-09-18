@@ -8,7 +8,7 @@
   "next_question": "Given that linear combination recipes cannot break OECD/COINr degeneracy (mathematical identity: mean always ranks between originals when canonical<weighted strictly), should the MIXED outcome program pivot to (a) a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element relationships, semantic role weighting) that could produce rankings outside the canonical-weighted range, (b) an alternative MIXED decision rule entirely (density ratio between canonical and weighted as a continuous sensitivity metric, or ranking reversal rate across definitions), or (c) abandon dominance-based MIXED handling and restrict density metric use to recipe-insensitive task-definition pairs if definition choice is shown to be the primary resolution lever?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-18T17:39:21.590474+00:00",
+  "updated_at": "2026-09-18T20:01:21.728303+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "9d94f3a8d1b1dfe9fb048ec824d10d5f7db3d754faba5051628314aa1f8dd4ed",
   "same_failure_count": 0,
