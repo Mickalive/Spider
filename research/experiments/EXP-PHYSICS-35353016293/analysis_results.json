@@ -1,0 +1,80 @@
+{
+  "analysis": {
+    "K0": {
+      "pmi_bits": 1.4414331017792639,
+      "n_strata": 12,
+      "n_used": 12,
+      "n_total": 1000,
+      "skipped_small": 0,
+      "skipped_zero_var": 0,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 0.3215187630060057,
+      "null_std": 0.01913813606093657,
+      "effect_size_d": 58.51741962787847,
+      "prediction_accuracy": 0.186,
+      "prediction_correct": 186,
+      "prediction_total": 1000,
+      "prediction_n_strata": 12
+    },
+    "K1": {
+      "pmi_bits": 1.508584175309816,
+      "n_strata": 56,
+      "n_used": 49,
+      "n_total": 1000,
+      "skipped_small": 7,
+      "skipped_zero_var": 0,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 0.9191755633883633,
+      "null_std": 0.024496101113627444,
+      "effect_size_d": 24.06132344030693,
+      "prediction_accuracy": 0.2413793103448276,
+      "prediction_correct": 238,
+      "prediction_total": 986,
+      "prediction_n_strata": 49
+    },
+    "K3": {
+      "pmi_bits": 0.04848040587771367,
+      "n_strata": 565,
+      "n_used": 8,
+      "n_total": 1000,
+      "skipped_small": 557,
+      "skipped_zero_var": 0,
+      "permutation_p": 0.5554445554445554,
+      "null_mean": 0.05146885714301133,
+      "null_std": 0.016585930176528325,
+      "effect_size_d": -0.18017990148823806,
+      "prediction_accuracy": 0.4666666666666667,
+      "prediction_correct": 21,
+      "prediction_total": 45,
+      "prediction_n_strata": 8
+    }
+  },
+  "positive_control": {
+    "pmi_k3": 1.7694368797062947,
+    "permutation_p": 0.000999000999000999,
+    "effect_size_d": 103.17934884703436,
+    "prediction_accuracy": 0.3878271707519734,
+    "n_transitions": 5000,
+    "passes_pmi": true,
+    "passes_perm": true,
+    "passes": true
+  },
+  "null_control": {
+    "description": "Shuffled action labels within sessions; expected mean = 0.0 bits",
+    "mean_pmi": 0.05376487444439809,
+    "observed_pmi": 0.04848040587771366,
+    "p_value": 0.6073926073926074,
+    "null_std": 0.0171192673957047,
+    "pass": false
+  },
+  "nl_count": 1000,
+  "raw_count": 1000,
+  "n_sessions": 20,
+  "n_unique_urls": 12,
+  "deterministic_strata_k3": 311,
+  "stochastic_strata_k3": 254,
+  "determinism_ratio": 0.5504424778761062,
+  "decision": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "status": "COMPLETE"
+}
