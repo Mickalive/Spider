@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35330747199",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M1_DENSITY_MATRIX": {
+      "description": "Per-task density values under 2 recipes x 3 definitions",
+      "n_tasks": 7,
+      "n_recipes": 2,
+      "n_definitions": 3,
+      "total_pairs": 42,
+      "canonical_density_range_mean": 0.005965,
+      "pertask_weighted_density_range_mean": 0.505066,
+      "cross_recipe_density_ratio": 84.7,
+      "summary": "Canonical recipe produces densities 85x lower than per-task weighted recipe on average. The two recipes occupy fundamentally different density scales, confirming the recipe choice is not a minor parameter but a structural regime change."
+    },
+    "M5_DOMINANCE_MEAN": {
+      "value": 50.0,
+      "unit": "percent",
+      "description": "Mean dominance across all task-definition-recipe triples. With 2 recipes, dominance is necessarily 0% or 100% (binary), so mean=50% is trivially expected and uninformative."
+    },
+    "M6_DOMINANCE_SD": {
+      "value": 50.0,
+      "unit": "percent",
+      "description": "Standard deviation of dominance. Trivially 50% given binary 0/100% distribution with 2 recipes."
+    },
+    "M7_CLASSIFICATION_ENTROPY": {
+      "value": 0.3712,
+      "unit": "bits",
+      "max_possible": 1.585,
+      "normalized": 0.234,
+      "distribution": {"MEDIUM": 13, "HIGH": 1},
+      "description": "Low entropy indicates classification is heavily concentrated on MEDIUM (13/14 pairs). Only detail_camera canonical recipe classified as HIGH. Discrimination is present but narrow."
+    },
+    "M8_NULL_CONTROL_DOMINANCE": {
+      "original_mean": 50.0,
+      "null_mean": 50.0,
+      "null_sd": 0.0,
+      "within_15_of_50": true,
+      "description": "Null control (shuffled recipe labels) produces identical dominance mean. With 2 recipes, shuffling preserves the binary structure, making this control uninformative for detecting recipe effects."
+    },
+    "M9_NULL_CONTROL_CI_WIDTH": {
+      "original_ci_width_mean": 0.0264,
+      "null_ci_width_mean": 3.3086,
+      "ratio": 125.3,
+      "gte_13x": true,
+      "description": "Null CI width is 125x larger than original, indicating recipe assignment has massive effect on ranking stability. This is the most informative control result."
+    },
+    "M10_CROSS_RECIPE_DENSITY_GAP": {
+      "mean_absolute_difference": 0.5001,
+      "min_difference": 0.2849,
+      "max_difference": 0.6415,
+      "by_page_type": {
+        "product_listing": {
+          "mean_diff": 0.6391,
+          "note": "Listing tasks show largest cross-recipe gap"
+        },
+        "detail": {
+          "mean_diff": 0.3983,
+          "note": "Detail tasks show moderate gap"
+        },
+        "cart": {
+          "mean_diff": 0.3616,
+          "note": "Cart task shows smallest gap"
+        }
+      }
+    }
+  },
+  "controls": {
+    "NC1_SHUFFLED_RECIPES": {
+      "description": "Shuffle recipe labels across task-definition pairs",
+      "expected": "Dominance mean within 15% of 50% (null hypothesis)",
+      "observed": "Dominance mean = 50.0% (null SD = 0.0)",
+      "result": "PASS",
+      "note": "Uninformative with 2 recipes — shuffling preserves binary dominance structure"
+    },
+    "NC2_C2_RECHECK": {
+      "description": "Recheck canonical vs weighted C2 status",
+      "expected": "Canonical FALSE, per-task weighted TRUE (from prior chain)",
+      "observed": "Both recipes produce consistent ordering across all 7 tasks",
+      "result": "PASS",
+      "note": "Prior chain's C2 reversal is structurally confirmed: canonical produces near-zero densities, weighted produces task-type-dependent densities"
+    },
+    "POSITIVE_CONTROL_DENSITY_CONSISTENCY": {
+      "description": "Within-recipe density ordering should be consistent across definitions",
+      "observed": "Rank correlations: canonical all definitions r>0.98; pertask_weighted all definitions r>0.99",
+      "result": "PASS",
+      "note": "Definitions (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK) produce highly correlated rankings within each recipe"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35330747199/result.json",
+      "sha256": null,
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "note": "Source measurement data: 7 tasks, 3 definitions, locatable_sample capped at 20 elements"
+    },
+    {
+      "path": "/tmp/opencode/oecd_analysis_results.json",
+      "sha256": "ec1ba71fca8792dec2fd10a64717c285559b63f68092fd7677a1a0388d76441e",
+      "role": "derived",
+      "note": "Complete analysis output: density matrix, dominance pairs, ranking CIs, classification, null controls"
+    },
+    {
+      "path": "/tmp/opencode/oecd_sensitivity_analysis.py",
+      "sha256": "f3e1e66ec03a8f8edb314e06414d76f44526d1556c73688f1c29d47daada5aca",
+      "role": "code",
+      "note": "Analysis script implementing OECD/COINr-style sensitivity analysis on density data"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-1",
+      "type": "RAW",
+      "description": "Canonical recipe (p=0.5 independent inclusion) produces near-zero densities: mean 0.006 across all task-definition pairs. Per-task weighted recipe produces task-type-dependent densities: product_listing ~0.56-0.65, detail ~0.30-0.50, cart ~0.29-0.44.",
+      "evidence_ref": "density_matrix in oecd_analysis_results.json"
+    },
+    {
+      "id": "OBS-2",
+      "type": "RAW",
+      "description": "Cross-recipe density ratio is 84.7x. The two recipes do not merely differ in magnitude — they occupy fundamentally different density regimes. Canonical treats the page as nearly empty; weighted treats it as 30-65% full.",
+      "evidence_ref": "M1_DENSITY_MATRIX.cross_recipe_density_ratio"
+    },
+    {
+      "id": "OBS-3",
+      "type": "DERIVED",
+      "description": "Dominance pairs are strictly degenerate: 0% (canonical loses) or 100% (weighted wins) across all 42 task-definition-recipe triples. No task-definition pair shows competitive dominance (10-90%).",
+      "evidence_ref": "dominance_pairs in oecd_analysis_results.json"
+    },
+    {
+      "id": "OBS-4",
+      "type": "DERIVED",
+      "description": "Ranking CIs are narrow (width 1-4) with per-task weighted producing width=1 for all tasks. Canonical shows width=2 for product_listing tasks and width=4 for detail_camera. Recipe choice dramatically affects ranking certainty.",
+      "evidence_ref": "ranking_cis in oecd_analysis_results.json"
+    },
+    {
+      "id": "OBS-5",
+      "type": "DERIVED",
+      "description": "Classification: 13/14 task-recipe pairs classified MEDIUM, 1/14 (detail_camera canonical) classified HIGH. Low entropy (0.37 bits) indicates poor discrimination.",
+      "evidence_ref": "M7_CLASSIFICATION_ENTROPY"
+    },
+    {
+      "id": "OBS-6",
+      "type": "RAW",
+      "description": "Within each recipe, the three definitions produce highly correlated rankings (Spearman r > 0.98). The definition choice is not the primary source of recipe sensitivity — the recipe choice itself is.",
+      "evidence_ref": "positive_control_density_consistency"
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-1",
+      "note": "The OECD/COINr dominance framework is designed for comparing 3+ alternatives. With exactly 2 recipes, dominance is necessarily binary (0% or 100%), making C2_DOMINANCE_INFORMATIVE trivially fail. This is a framework limitation, not a scientific finding."
+    },
+    {
+      "id": "VN-2",
+      "note": "Canonical recipe uses expected density (average over 1000 random iterations), not a single stochastic realization. This produces stable near-zero values. A single realization would show variance but still concentrate near 0.005-0.01."
+    },
+    {
+      "id": "VN-3",
+      "note": "Per-task weighted recipe normalizes by elements_with_bbox/1500, introducing an implicit weight that amplifies the recipe's structural difference from canonical. The weight is not a parameter choice but a consequence of how the recipe scales inclusion probability."
+    },
+    {
+      "id": "VN-4",
+      "note": "Raw evidence contains locatable_sample capped at 20 elements per task. Actual locatable element counts are 21-82. The cap truncates the true density computation, likely underestimating densities for tasks with >20 locatable elements."
+    },
+    {
+      "id": "VN-5",
+      "note": "Null control with 2 recipes is structurally uninformative for dominance (shuffling preserves binary structure). The CI width null control is informative and shows massive effect (125x ratio)."
+    },
+    {
+      "id": "VN-6",
+      "note": "C3_CI_INFORMATIVE passes because CI widths (0.0185-0.0739) are well below the density range (0.417-0.641). However, this is partly because the density range is inflated by the cross-recipe scale difference."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U-1",
+      "question": "Is the 84.7x cross-recipe density ratio a property of the truncated-first-20 data or would it persist with full locatable_sample data?",
+      "blocked_by": "Need full locatable_sample (not capped at 20) for accurate density computation"
+    },
+    {
+      "id": "U-2",
+      "question": "Would the OECD/COINr framework produce informative results with 3+ recipes (e.g., adding a third stochastic recipe variant)?",
+      "blocked_by": "Need to define and implement a third recipe variant for testing"
+    },
+    {
+      "id": "U-3",
+      "question": "Does the near-zero canonical density reflect the actual page structure or is it an artifact of the p=0.5 independent inclusion model applied to sparse DOM elements?",
+      "blocked_by": "Need to understand the actual DOM element distribution (how many elements are in each role)"
+    },
+    {
+      "id": "U-4",
+      "question": "Should C2_DOMINANCE_INFORMATIVE be reformulated for 2-recipe comparisons? Current formulation requires at least one non-degenerate (10-90%) pair, which is impossible with 2 recipes.",
+      "blocked_by": "Decision rule design question, not a measurement question"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "fc2dff3ee2489370e78ee1ed4a86f47656b3a01f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T04:55:35.250355+00:00",
+  "experiment_id": "EXP-PHYSICS-35308806126",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does beyond-Markov URL-level PMI structure exist on production SPAs (>10 unique URL states, stochastic transitions, history-based routing) where H_K=3 does NOT fully determine the next URL state \u2014 thereby testing whether the TodoMVC falsification is a testbed-ceiling artifact or evidence against C-WEB-DYNAMICS at the URL level?",
+  "lane": "physics",
+  "origin_github_run_id": "35308806126",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35290611436",
+    "path": "research/experiments/EXP-PHYSICS-35290611436/handoff.json",
+    "sha256": "f1d4b4593d2f877220a51a17bf90cde0c7b93db4d4a01f4c9a65f31a23ab3007"
+  },
+  "reason": "pulse",
+  "request_hash": "3d7e294b8dd1b6ffbe81d49db405d95b6d5194d1cfd15dcf58b417ede1b4341c",
+  "request_id": "59b3121fb2c48ee76a8770f4",
+  "schema_version": 1
+}
