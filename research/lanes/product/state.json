@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON (mechanism deduplication savings across tasks where fewer unique mechanisms to store/retrieve offset per-mechanism token penalty), or close token-based inheritance viability entirely and pursue alternative product economics (retrieval efficiency, registry size compression)?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-18T00:18:32.838508+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-18T00:21:38.315794+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "5d047feaad8feaab7e0a71e11a02b8031076d3e6a12e4e6a4fa97dcf348150b1",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
+  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
 }
