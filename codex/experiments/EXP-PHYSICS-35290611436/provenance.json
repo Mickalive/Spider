@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35290611436",
+  "lane": "physics",
+  "github_run_id": "35290611436",
+  "base_sha": "b8fd66a0876b1204973006c180e48571b72b8481",
+  "execution_commit": "e78b2dd13a320cd0c6edcd332b3b88d5d95600fc",
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35262258744",
+    "handoff_path": "research/experiments/EXP-PHYSICS-35262258744/handoff.json",
+    "handoff_sha256": "d150b78f0dd6f5bb2533d5406208b8754d3f0c827724cfbaf3df7a39be8f976d"
+  },
+  "data_sources": [
+    {
+      "description": "Parent raw transition files from EXP-PHYSICS-35209110569",
+      "path": "research/experiments/EXP-PHYSICS-35209110569/",
+      "files": [
+        "raw_vanillajs.json",
+        "raw_vanillajs_topup.json",
+        "raw_react.json",
+        "raw_react_topup.json",
+        "raw_vue.json",
+        "raw_vue_topup.json",
+        "raw_angular.json",
+        "raw_angular_topup.json",
+        "raw_svelte.json",
+        "raw_svelte_topup.json"
+      ],
+      "note": "Data reuse from parent. No new browser collection."
+    }
+  ],
+  "code": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35290611436/run_analysis.py",
+      "sha256": "32677f6a11c56734be2604e54a6407b0473ba75290fc94abb3dcb46d6c749a9c",
+      "role": "analysis"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35290611436/result.json",
+      "sha256": "ab79034510c3cb75090f1ab941b04e4d25bb52ab193d00fe9e3c851aea775107",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35290611436/report.md",
+      "sha256": "450f7f6b13051c94fbf234c6ee49169e7fccb7d749133466b446e5952168d5b8",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35290611436/raw_analysis_results.json",
+      "sha256": "f914b33484ae3ecd95bc7e06d82752cad35c4f88e7804d4207be34de0260b839",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35290611436/run_analysis.py",
+      "sha256": "32677f6a11c56734be2604e54a6407b0473ba75290fc94abb3dcb46d6c749a9c",
+      "role": "code"
+    }
+  ],
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PHYSICS-35290611436/request.json",
+    "spec.json": "research/experiments/EXP-PHYSICS-35290611436/spec.json",
+    "prereg.md": "research/experiments/EXP-PHYSICS-35290611436/prereg.md",
+    "freeze.json": "research/experiments/EXP-PHYSICS-35290611436/freeze.json"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "numpy_version": "2.5.3",
+    "seed": 42,
+    "n_permutations": 1000,
+    "alpha": 0,
+    "note": "All computation deterministic. PYTHONHASHSEED=0."
+  },
+  "reproduction_command": "cd /home/runner/work/Spider/Spider && python research/experiments/EXP-PHYSICS-35290611436/run_analysis.py"
+}

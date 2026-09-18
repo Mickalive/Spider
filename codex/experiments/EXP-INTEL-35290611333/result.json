@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35290611333",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M1_psychometric_recipe_problems": {
+      "value": 3,
+      "description": "Number of well-documented aggregation recipe choice problems found in psychometrics",
+      "evidence": [
+        "Kane & Case (2003): weighted composite scores for mixed-format tests (MC vs FR section weighting)",
+        "PMC5978518: composite score construction from multiple measures (GPA + test scores + essays for medical admissions)",
+        "PMC11588849: sum score vs weighted score vs average score debate in CTT"
+      ]
+    },
+    "M2_econometric_recipe_problems": {
+      "value": 4,
+      "description": "Number of well-documented aggregation recipe choice problems found in econometrics",
+      "evidence": [
+        "OECD Handbook (2008): arithmetic mean vs geometric mean vs weighted product for composite indicators",
+        "Munda (2005): social choice theory applied to aggregation rule selection",
+        "Dobbie (2013): robustness/sensitivity of weighting and aggregation in composite indices",
+        "Zhou et al. (2009): information loss perspective on data aggregation in composite indicators"
+      ]
+    },
+    "M3_meta_analytic_recipe_problems": {
+      "value": 2,
+      "description": "Number of aggregation recipe choice problems found in meta-analysis",
+      "evidence": [
+        "Fixed effects vs random effects pooling of effect sizes (core methodological debate)",
+        "DerSimonian-Laird weighted average vs alternative estimators (Pathak et al. 2020)"
+      ]
+    },
+    "M4_mixed_outcome_methods": {
+      "value": 3,
+      "description": "Number of principled methods found that directly address the MIXED outcome problem (conflicting aggregation results)",
+      "evidence": [
+        "OECD sensitivity analysis framework (COINr): systematic robustness testing across aggregation methods and weights, quantifies ranking stability via dominance pairs and confidence intervals",
+        "Greco et al. (2019) non-compensatory aggregation: social choice theory when weights uncertain, aggregation rule selection under ambiguity",
+        "Mathur & VanderWeele (2021) robust metrics: proportion-above-threshold reporting for heterogeneous effects, addresses what happens when pooled estimate is significant but individual effects vary"
+      ]
+    },
+    "M5_total_sources_screened": {
+      "value": 30,
+      "description": "Total number of sources screened across three databases"
+    },
+    "M6_sources_included": {
+      "value": 12,
+      "description": "Number of sources included in final synthesis (addressed aggregation recipe choice ambiguity)"
+    },
+    "M7_strengthening_of_IR_analogy": {
+      "value": true,
+      "description": "Whether found methods strengthen the existing IR micro/macro/weighted analogy",
+      "details": "YES: psychometrics (composite scores) and econometrics (composite indicators) independently document the same micro/macro/weighted recipe choice pattern found in IR. The mapping is strengthened by convergent evidence from independent fields."
+    },
+    "M8_alternative_resolution_frameworks": {
+      "value": true,
+      "description": "Whether found methods provide alternative resolution frameworks beyond IR micro/macro/weighted",
+      "details": "YES: OECD sensitivity analysis provides systematic robustness testing; social choice theory (Munda 2005) provides formal aggregation rule selection; meta-analytic heterogeneity quantification (I-squared, tau-squared) provides principled variance decomposition."
+    },
+    "M9_MIXED_outcome_informed": {
+      "value": true,
+      "description": "Whether found methods inform the MIXED outcome decision-rule amendment",
+      "details": "YES: OECD sensitivity analysis framework directly addresses what to do when different aggregation methods produce conflicting results - report robustness bounds, dominance pairs, and confidence intervals on rankings rather than choosing one recipe."
+    }
+  },
+  "controls": {
+    "PC1_recipe_choice_problems": {
+      "expected": "At least 2 well-documented aggregation recipe choice problems found in psychometrics or econometrics",
+      "observed": "7 problems found across psychometrics (3) and econometrics (4)",
+      "pass": true,
+      "evidence": "M1 + M2 = 7 total recipe choice problems documented in peer-reviewed literature"
+    },
+    "PC2_MIXED_outcome_method": {
+      "expected": "At least 1 principled method found that addresses MIXED outcome handling",
+      "observed": "3 principled methods found (OECD sensitivity analysis, social choice theory, robust meta-analytic metrics)",
+      "pass": true,
+      "evidence": "M4 = 3 methods, all directly address conflicting aggregation results"
+    },
+    "F1_no_prior_art": {
+      "expected": "No relevant prior art found in psychometrics, econometrics, or meta-analysis",
+      "observed": "Rich prior art found across all three fields (M5=30 screened, M6=12 included)",
+      "pass": false,
+      "triggered": false,
+      "evidence": "F1 NOT TRIGGERED: 12 relevant sources included covering all three target fields"
+    },
+    "F2_methods_weaker_than_IR": {
+      "expected": "All found methods are weaker than existing IR framework",
+      "observed": "Found methods strengthen and extend IR framework with additional theoretical grounding",
+      "pass": false,
+      "triggered": false,
+      "evidence": "F2 NOT TRIGGERED: OECD sensitivity analysis, social choice theory, and meta-analytic heterogeneity are more principled than IR micro/macro/weighted analogy"
+    },
+    "NC1_no_prior_art": {
+      "expected": "Systematic search finds no relevant prior art",
+      "observed": "12 relevant sources found across three fields",
+      "pass": false,
+      "evidence": "NC1 does not apply - relevant prior art exists"
+    },
+    "NC2_all_covered_by_IR": {
+      "expected": "All found methods already covered by IR framework",
+      "observed": "Found methods provide additional resolution power beyond IR framework",
+      "pass": false,
+      "evidence": "NC2 does not apply - OECD sensitivity analysis, social choice theory, and heterogeneity quantification provide new resolution methods"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35290611333/result.json",
+      "sha256": null,
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35290611333/report.md",
+      "sha256": null,
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35290611333/provenance.json",
+      "sha256": null,
+      "role": "provenance"
+    }
+  ],
+  "observations": [
+    "OBS-1: Psychometrics has extensively studied aggregation recipe choice in composite score construction. Kane & Case (2003) demonstrate that different weighting schemes (unit-weighted vs reliability-weighted) for mixed-format test scores produce different composites that answer different scientific questions. This is directly analogous to SPIDER's micro/macro/weighted density metric recipes.",
+    "OBS-2: Econometrics has developed entire methodological frameworks for composite indicator construction that explicitly address aggregation ambiguity. The OECD Handbook (2008) documents the 'non-aggregators' school that objects to aggregation because of 'the arbitrary nature of the weighting process.' The arithmetic mean vs geometric mean vs weighted product choice affects whether poor-performing indicators can be compensated by strong ones.",
+    "OBS-3: Meta-analysis is built on the fundamental aggregation recipe choice: fixed effects (weight by precision) vs random effects (weight by heterogeneity-adjusted precision). This choice changes the pooled estimate when effects are heterogeneous, which is the definition of the MIXED outcome problem.",
+    "OBS-4: The OECD sensitivity analysis framework (COINr) provides a directly applicable method for handling MIXED outcomes: systematically vary aggregation methods and weights, quantify ranking stability via dominance pairs and confidence intervals, and report robustness bounds rather than choosing one recipe.",
+    "OBS-5: Social choice theory (Munda 2005) provides a formally grounded framework for aggregation rule selection under uncertainty about weights, directly addressing the question of what to do when different aggregation recipes give conflicting conclusions.",
+    "OBS-6: Meta-analytic heterogeneity quantification (I-squared, tau-squared, Higgins & Thompson 2002) provides principled variance decomposition that tells you how much of the variation in results is due to methodological choices vs genuine effect heterogeneity.",
+    "OBS-7: The convergent evidence from three independent fields (psychometrics, econometrics, meta-analysis) strengthens the IR analogy from interpretive mapping to cross-field convergent evidence. Recipe choice ambiguity is not an IR-specific curiosity but a general measurement phenomenon.",
+    "OBS-8: The SPIDER-to-field applicability mappings remain interpretive analogies, not established results. The cross-field evidence strengthens the analogy but does not establish mathematical equivalence."
+  ],
+  "validity_notes": [
+    "V1: Search coverage is bounded to three databases (PubMed/Psychology, EconLit/Economics, Cochrane/Meta-analysis) with keyword search. Relevant papers using different terminology (e.g., 'composite index' vs 'aggregation recipe') may be missed, though the comprehensive search strings and cross-field coverage mitigate this risk.",
+    "V2: All found methods are analogies to SPIDER's density metric problem, not direct applications. The psychometric, econometric, and meta-analytic methods address similar aggregation ambiguity but in different measurement contexts. The SPIDER-to-field mappings are interpretive analogies, not established results.",
+    "V3: Publication bias may favor fields with canonical recipes (psychometrics has standard scoring rules) over fields that actively study recipe choice ambiguity. However, the econometrics composite indicator literature explicitly studies recipe choice, mitigating this concern.",
+    "V4: Non-English literature was excluded. German, French, or Chinese psychometrics/econometrics traditions may contain relevant work on aggregation methodology not captured here.",
+    "V5: The claim ceiling is bounded to literature synthesis only. No new empirical measurement was conducted. The findings provide theoretical grounding for recipe selection but do not resolve the empirical question of which recipe is correct for SPIDER's density metric.",
+    "V6: The 12 included sources represent a conservative inclusion criterion. Broader screening (e.g., including textbooks, working papers) would yield additional relevant sources, but the included set is sufficient to pass the positive controls."
+  ],
+  "unresolved": [
+    "U1: Whether the specific aggregation methods from psychometrics/econometrics/meta-analysis can be mathematically mapped to SPIDER's density metric recipe choice (beyond interpretive analogy).",
+    "U2: Whether the OECD sensitivity analysis framework can be operationalized for SPIDER's density metric to produce a principled MIXED outcome decision rule.",
+    "U3: Whether the cross-field convergence on recipe choice ambiguity implies a deeper mathematical structure (e.g., information-theoretic limits on aggregation) or is merely a surface similarity.",
+    "U4: Whether the social choice theory framework (Munda 2005) can provide formal axioms for recipe selection in SPIDER's density metric context.",
+    "U5: Whether meta-analytic heterogeneity quantification methods (I-squared, tau-squared) can be adapted to quantify the variance attributable to recipe choice in SPIDER's density metric."
+  ]
+}
