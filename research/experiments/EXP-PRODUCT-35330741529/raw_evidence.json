@@ -1,0 +1,1055 @@
+{
+  "corpus_summary": {
+    "total_tasks": 32,
+    "total_literal_mechanisms": 32,
+    "total_param_mechanisms": 25,
+    "mechanism_count_reduction_pct": 21.88
+  },
+  "aggregate_costs": {
+    "literal": {
+      "selection_prompt_tokens": 19627,
+      "selection_completion_tokens": 64,
+      "resolution_tokens": 0,
+      "total_model_cost": 19691
+    },
+    "parameterized": {
+      "selection_prompt_tokens": 16459,
+      "selection_completion_tokens": 64,
+      "resolution_tokens": 2101,
+      "total_model_cost": 18624
+    },
+    "cold": {
+      "selection_prompt_tokens": 1835,
+      "selection_completion_tokens": 640,
+      "resolution_tokens": 0,
+      "total_model_cost": 2475
+    }
+  },
+  "task_costs": [
+    {
+      "task_id": "blog-read-post-1",
+      "intent": "read_post",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 92,
+        "total_model_cost": 609
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "blog-read-post-2",
+      "intent": "read_post",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 92,
+        "total_model_cost": 609
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "blog-read-post-3",
+      "intent": "read_post",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 92,
+        "total_model_cost": 609
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "blog-read-post-4",
+      "intent": "read_post",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 92,
+        "total_model_cost": 609
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "blog-read-post-5",
+      "intent": "read_post",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 92,
+        "total_model_cost": 609
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "blog-list-posts",
+      "intent": "list_posts",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 613,
+        "selection_completion_tokens": 2,
+        "selection_total": 615,
+        "resolution_tokens": 0,
+        "total_model_cost": 615
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 514,
+        "selection_completion_tokens": 2,
+        "selection_total": 516,
+        "resolution_tokens": 0,
+        "total_model_cost": 516
+      },
+      "cold": {
+        "selection_prompt_tokens": 57,
+        "selection_completion_tokens": 20,
+        "selection_total": 77,
+        "resolution_tokens": 0,
+        "total_model_cost": 77
+      }
+    },
+    {
+      "task_id": "blog-create-post",
+      "intent": "create_post",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 90,
+        "total_model_cost": 607
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "shop-view-product-1",
+      "intent": "view_product",
+      "sharing_category": "shared_moderate",
+      "literal": {
+        "selection_prompt_tokens": 615,
+        "selection_completion_tokens": 2,
+        "selection_total": 617,
+        "resolution_tokens": 0,
+        "total_model_cost": 617
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 516,
+        "selection_completion_tokens": 2,
+        "selection_total": 518,
+        "resolution_tokens": 93,
+        "total_model_cost": 611
+      },
+      "cold": {
+        "selection_prompt_tokens": 59,
+        "selection_completion_tokens": 20,
+        "selection_total": 79,
+        "resolution_tokens": 0,
+        "total_model_cost": 79
+      }
+    },
+    {
+      "task_id": "shop-view-product-2",
+      "intent": "view_product",
+      "sharing_category": "shared_moderate",
+      "literal": {
+        "selection_prompt_tokens": 615,
+        "selection_completion_tokens": 2,
+        "selection_total": 617,
+        "resolution_tokens": 0,
+        "total_model_cost": 617
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 516,
+        "selection_completion_tokens": 2,
+        "selection_total": 518,
+        "resolution_tokens": 93,
+        "total_model_cost": 611
+      },
+      "cold": {
+        "selection_prompt_tokens": 59,
+        "selection_completion_tokens": 20,
+        "selection_total": 79,
+        "resolution_tokens": 0,
+        "total_model_cost": 79
+      }
+    },
+    {
+      "task_id": "shop-view-product-3",
+      "intent": "view_product",
+      "sharing_category": "shared_moderate",
+      "literal": {
+        "selection_prompt_tokens": 615,
+        "selection_completion_tokens": 2,
+        "selection_total": 617,
+        "resolution_tokens": 0,
+        "total_model_cost": 617
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 516,
+        "selection_completion_tokens": 2,
+        "selection_total": 518,
+        "resolution_tokens": 93,
+        "total_model_cost": 611
+      },
+      "cold": {
+        "selection_prompt_tokens": 59,
+        "selection_completion_tokens": 20,
+        "selection_total": 79,
+        "resolution_tokens": 0,
+        "total_model_cost": 79
+      }
+    },
+    {
+      "task_id": "shop-add-to-cart-1",
+      "intent": "add_to_cart",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 616,
+        "selection_completion_tokens": 2,
+        "selection_total": 618,
+        "resolution_tokens": 0,
+        "total_model_cost": 618
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 517,
+        "selection_completion_tokens": 2,
+        "selection_total": 519,
+        "resolution_tokens": 91,
+        "total_model_cost": 610
+      },
+      "cold": {
+        "selection_prompt_tokens": 60,
+        "selection_completion_tokens": 20,
+        "selection_total": 80,
+        "resolution_tokens": 0,
+        "total_model_cost": 80
+      }
+    },
+    {
+      "task_id": "shop-add-to-cart-2",
+      "intent": "add_to_cart",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 616,
+        "selection_completion_tokens": 2,
+        "selection_total": 618,
+        "resolution_tokens": 0,
+        "total_model_cost": 618
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 517,
+        "selection_completion_tokens": 2,
+        "selection_total": 519,
+        "resolution_tokens": 91,
+        "total_model_cost": 610
+      },
+      "cold": {
+        "selection_prompt_tokens": 60,
+        "selection_completion_tokens": 20,
+        "selection_total": 80,
+        "resolution_tokens": 0,
+        "total_model_cost": 80
+      }
+    },
+    {
+      "task_id": "shop-checkout",
+      "intent": "checkout",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 610,
+        "selection_completion_tokens": 2,
+        "selection_total": 612,
+        "resolution_tokens": 0,
+        "total_model_cost": 612
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 511,
+        "selection_completion_tokens": 2,
+        "selection_total": 513,
+        "resolution_tokens": 85,
+        "total_model_cost": 598
+      },
+      "cold": {
+        "selection_prompt_tokens": 54,
+        "selection_completion_tokens": 20,
+        "selection_total": 74,
+        "resolution_tokens": 0,
+        "total_model_cost": 74
+      }
+    },
+    {
+      "task_id": "shop-list-categories",
+      "intent": "list_categories",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 612,
+        "selection_completion_tokens": 2,
+        "selection_total": 614,
+        "resolution_tokens": 0,
+        "total_model_cost": 614
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 513,
+        "selection_completion_tokens": 2,
+        "selection_total": 515,
+        "resolution_tokens": 0,
+        "total_model_cost": 515
+      },
+      "cold": {
+        "selection_prompt_tokens": 56,
+        "selection_completion_tokens": 20,
+        "selection_total": 76,
+        "resolution_tokens": 0,
+        "total_model_cost": 76
+      }
+    },
+    {
+      "task_id": "admin-view-user-1",
+      "intent": "view_user",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "admin-view-user-2",
+      "intent": "view_user",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "admin-view-user-3",
+      "intent": "view_user",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "admin-view-user-4",
+      "intent": "view_user",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "admin-view-user-5",
+      "intent": "view_user",
+      "sharing_category": "shared_high",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "admin-list-users",
+      "intent": "list_users",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 612,
+        "selection_completion_tokens": 2,
+        "selection_total": 614,
+        "resolution_tokens": 0,
+        "total_model_cost": 614
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 513,
+        "selection_completion_tokens": 2,
+        "selection_total": 515,
+        "resolution_tokens": 0,
+        "total_model_cost": 515
+      },
+      "cold": {
+        "selection_prompt_tokens": 56,
+        "selection_completion_tokens": 20,
+        "selection_total": 76,
+        "resolution_tokens": 0,
+        "total_model_cost": 76
+      }
+    },
+    {
+      "task_id": "admin-create-user",
+      "intent": "create_user",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 612,
+        "selection_completion_tokens": 2,
+        "selection_total": 614,
+        "resolution_tokens": 0,
+        "total_model_cost": 614
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 513,
+        "selection_completion_tokens": 2,
+        "selection_total": 515,
+        "resolution_tokens": 88,
+        "total_model_cost": 603
+      },
+      "cold": {
+        "selection_prompt_tokens": 56,
+        "selection_completion_tokens": 20,
+        "selection_total": 76,
+        "resolution_tokens": 0,
+        "total_model_cost": 76
+      }
+    },
+    {
+      "task_id": "pm-view-project-1",
+      "intent": "view_project",
+      "sharing_category": "shared_moderate",
+      "literal": {
+        "selection_prompt_tokens": 615,
+        "selection_completion_tokens": 2,
+        "selection_total": 617,
+        "resolution_tokens": 0,
+        "total_model_cost": 617
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 516,
+        "selection_completion_tokens": 2,
+        "selection_total": 518,
+        "resolution_tokens": 106,
+        "total_model_cost": 624
+      },
+      "cold": {
+        "selection_prompt_tokens": 59,
+        "selection_completion_tokens": 20,
+        "selection_total": 79,
+        "resolution_tokens": 0,
+        "total_model_cost": 79
+      }
+    },
+    {
+      "task_id": "pm-view-project-2",
+      "intent": "view_project",
+      "sharing_category": "shared_moderate",
+      "literal": {
+        "selection_prompt_tokens": 615,
+        "selection_completion_tokens": 2,
+        "selection_total": 617,
+        "resolution_tokens": 0,
+        "total_model_cost": 617
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 516,
+        "selection_completion_tokens": 2,
+        "selection_total": 518,
+        "resolution_tokens": 106,
+        "total_model_cost": 624
+      },
+      "cold": {
+        "selection_prompt_tokens": 59,
+        "selection_completion_tokens": 20,
+        "selection_total": 79,
+        "resolution_tokens": 0,
+        "total_model_cost": 79
+      }
+    },
+    {
+      "task_id": "pm-list-projects",
+      "intent": "list_projects",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 613,
+        "selection_completion_tokens": 2,
+        "selection_total": 615,
+        "resolution_tokens": 0,
+        "total_model_cost": 615
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 514,
+        "selection_completion_tokens": 2,
+        "selection_total": 516,
+        "resolution_tokens": 94,
+        "total_model_cost": 610
+      },
+      "cold": {
+        "selection_prompt_tokens": 57,
+        "selection_completion_tokens": 20,
+        "selection_total": 77,
+        "resolution_tokens": 0,
+        "total_model_cost": 77
+      }
+    },
+    {
+      "task_id": "pm-create-task",
+      "intent": "create_task",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 613,
+        "selection_completion_tokens": 2,
+        "selection_total": 615,
+        "resolution_tokens": 0,
+        "total_model_cost": 615
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 514,
+        "selection_completion_tokens": 2,
+        "selection_total": 516,
+        "resolution_tokens": 108,
+        "total_model_cost": 624
+      },
+      "cold": {
+        "selection_prompt_tokens": 57,
+        "selection_completion_tokens": 20,
+        "selection_total": 77,
+        "resolution_tokens": 0,
+        "total_model_cost": 77
+      }
+    },
+    {
+      "task_id": "search-blog",
+      "intent": "search",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 611,
+        "selection_completion_tokens": 2,
+        "selection_total": 613,
+        "resolution_tokens": 0,
+        "total_model_cost": 613
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 512,
+        "selection_completion_tokens": 2,
+        "selection_total": 514,
+        "resolution_tokens": 105,
+        "total_model_cost": 619
+      },
+      "cold": {
+        "selection_prompt_tokens": 55,
+        "selection_completion_tokens": 20,
+        "selection_total": 75,
+        "resolution_tokens": 0,
+        "total_model_cost": 75
+      }
+    },
+    {
+      "task_id": "search-shop",
+      "intent": "search",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 610,
+        "selection_completion_tokens": 2,
+        "selection_total": 612,
+        "resolution_tokens": 0,
+        "total_model_cost": 612
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 511,
+        "selection_completion_tokens": 2,
+        "selection_total": 513,
+        "resolution_tokens": 122,
+        "total_model_cost": 635
+      },
+      "cold": {
+        "selection_prompt_tokens": 54,
+        "selection_completion_tokens": 20,
+        "selection_total": 74,
+        "resolution_tokens": 0,
+        "total_model_cost": 74
+      }
+    },
+    {
+      "task_id": "search-users",
+      "intent": "search",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 610,
+        "selection_completion_tokens": 2,
+        "selection_total": 612,
+        "resolution_tokens": 0,
+        "total_model_cost": 612
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 511,
+        "selection_completion_tokens": 2,
+        "selection_total": 513,
+        "resolution_tokens": 104,
+        "total_model_cost": 617
+      },
+      "cold": {
+        "selection_prompt_tokens": 54,
+        "selection_completion_tokens": 20,
+        "selection_total": 74,
+        "resolution_tokens": 0,
+        "total_model_cost": 74
+      }
+    },
+    {
+      "task_id": "auth-login-blog",
+      "intent": "login",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 611,
+        "selection_completion_tokens": 2,
+        "selection_total": 613,
+        "resolution_tokens": 0,
+        "total_model_cost": 613
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 512,
+        "selection_completion_tokens": 2,
+        "selection_total": 514,
+        "resolution_tokens": 86,
+        "total_model_cost": 600
+      },
+      "cold": {
+        "selection_prompt_tokens": 55,
+        "selection_completion_tokens": 20,
+        "selection_total": 75,
+        "resolution_tokens": 0,
+        "total_model_cost": 75
+      }
+    },
+    {
+      "task_id": "auth-login-shop",
+      "intent": "login",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 611,
+        "selection_completion_tokens": 2,
+        "selection_total": 613,
+        "resolution_tokens": 0,
+        "total_model_cost": 613
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 512,
+        "selection_completion_tokens": 2,
+        "selection_total": 514,
+        "resolution_tokens": 86,
+        "total_model_cost": 600
+      },
+      "cold": {
+        "selection_prompt_tokens": 55,
+        "selection_completion_tokens": 20,
+        "selection_total": 75,
+        "resolution_tokens": 0,
+        "total_model_cost": 75
+      }
+    },
+    {
+      "task_id": "auth-me-blog",
+      "intent": "get_me",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    },
+    {
+      "task_id": "auth-me-shop",
+      "intent": "get_me",
+      "sharing_category": "unique",
+      "literal": {
+        "selection_prompt_tokens": 614,
+        "selection_completion_tokens": 2,
+        "selection_total": 616,
+        "resolution_tokens": 0,
+        "total_model_cost": 616
+      },
+      "parameterized": {
+        "selection_prompt_tokens": 515,
+        "selection_completion_tokens": 2,
+        "selection_total": 517,
+        "resolution_tokens": 0,
+        "total_model_cost": 517
+      },
+      "cold": {
+        "selection_prompt_tokens": 58,
+        "selection_completion_tokens": 20,
+        "selection_total": 78,
+        "resolution_tokens": 0,
+        "total_model_cost": 78
+      }
+    }
+  ],
+  "sharing_analysis": {
+    "shared_high": {
+      "count": 10,
+      "avg_literal_cost": 616.0,
+      "avg_param_cost": 563.0,
+      "avg_cold_cost": 78.0,
+      "savings_pct": 8.6,
+      "param_overhead_pct": -8.6
+    },
+    "unique": {
+      "count": 17,
+      "avg_literal_cost": 614.47,
+      "avg_param_cost": 583.12,
+      "avg_cold_cost": 76.47,
+      "savings_pct": 5.1,
+      "param_overhead_pct": -5.1
+    },
+    "shared_moderate": {
+      "count": 5,
+      "avg_literal_cost": 617.0,
+      "avg_param_cost": 616.2,
+      "avg_cold_cost": 79.0,
+      "savings_pct": 0.13,
+      "param_overhead_pct": -0.13
+    }
+  },
+  "decision_rule": {
+    "C1_100pct_success": {
+      "pass": true,
+      "note": "Both conditions assumed 100% success (analytical measurement, no model execution). Resolution is deterministic given template and concrete values."
+    },
+    "C2_param_selection_le_literal": {
+      "pass": true,
+      "note": "Param selection 16523 vs literal 19691, diff=3168",
+      "param_selection_total": 16523,
+      "lit_selection_total": 19691,
+      "diff": 3168
+    },
+    "C3_param_total_le_literal_total": {
+      "pass": true,
+      "note": "Param total 18624 vs literal total 19691, diff=1067",
+      "param_total": 18624,
+      "lit_total": 19691,
+      "diff": 1067
+    },
+    "C4_positive_control": {
+      "pass": true,
+      "note": "Blog-read-post tasks select 1 pattern(s): {'GET:https://blog.example.com/posts/${id_0}'}"
+    },
+    "C5_null_control": {
+      "pass": true,
+      "note": "Search tasks: param=623.7, literal=612.3, ratio=1.0185",
+      "search_tasks_count": 3
+    },
+    "ALL_pass": true,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  },
+  "per_task_literal_selection_tokens": [
+    614,
+    614,
+    614,
+    614,
+    614,
+    613,
+    614,
+    615,
+    615,
+    615,
+    616,
+    616,
+    610,
+    612,
+    614,
+    614,
+    614,
+    614,
+    614,
+    612,
+    612,
+    615,
+    615,
+    613,
+    613,
+    611,
+    610,
+    610,
+    611,
+    611,
+    614,
+    614
+  ],
+  "per_task_param_selection_tokens": [
+    515,
+    515,
+    515,
+    515,
+    515,
+    514,
+    515,
+    516,
+    516,
+    516,
+    517,
+    517,
+    511,
+    513,
+    515,
+    515,
+    515,
+    515,
+    515,
+    513,
+    513,
+    516,
+    516,
+    514,
+    514,
+    512,
+    511,
+    511,
+    512,
+    512,
+    515,
+    515
+  ],
+  "per_task_param_resolution_tokens": [
+    92,
+    92,
+    92,
+    92,
+    92,
+    0,
+    90,
+    93,
+    93,
+    93,
+    91,
+    91,
+    85,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    88,
+    106,
+    106,
+    94,
+    108,
+    105,
+    122,
+    104,
+    86,
+    86,
+    0,
+    0
+  ],
+  "per_task_cold_selection_tokens": [
+    58,
+    58,
+    58,
+    58,
+    58,
+    57,
+    58,
+    59,
+    59,
+    59,
+    60,
+    60,
+    54,
+    56,
+    58,
+    58,
+    58,
+    58,
+    58,
+    56,
+    56,
+    59,
+    59,
+    57,
+    57,
+    55,
+    54,
+    54,
+    55,
+    55,
+    58,
+    58
+  ]
+}
