@@ -8,7 +8,7 @@
   "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-18T09:40:32.792547+00:00",
+  "updated_at": "2026-09-18T13:54:59.921821+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "1b5c80195b49a58c89691fcccc92320ed669a474586994f6e737b1c1969852df",
   "same_failure_count": 0,
