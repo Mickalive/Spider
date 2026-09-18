@@ -1,0 +1,49 @@
+{
+  "experiment_id": "EXP-PHYSICS-35308806126",
+  "lane": "physics",
+  "request_hash": "3d7e294b8dd1b6ffbe81d49db405d95b6d5194d1cfd15dcf58b417ede1b4341c",
+  "freeze_hash_prereg": "d0587d203ea75e30b591afdfded51aef750ba659f22b53fce936e9ec487619da",
+  "freeze_hash_request": "99ad74ae1f53345a2761ece1f7d3f5f71e04f2708633d1f14859fa7fe4c9e7a",
+  "freeze_hash_spec": "a02f70dafa674df55af1948470fceb59d3ca0613879c6a9aa1bf0dad93fb213e",
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-35308806126/run_experiment.py",
+    "research/physics/information_theoretic/spa_pmi.py",
+    "research/physics/run_experiment.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "numpy_version": "2.5.3",
+    "playwright_version": "1.63.0",
+    "chromium_version": "152.0.7977.0",
+    "platform": "linux"
+  },
+  "data_sources": [
+    {
+      "site": "bbc_news",
+      "url": "https://www.bbc.com/news",
+      "collection": "blocked_by_antibot"
+    },
+    {
+      "site": "amazon_search",
+      "url": "https://www.amazon.com/s?k=electronics",
+      "collection": "blocked_by_antibot"
+    },
+    {
+      "site": "twitter_x",
+      "url": "https://x.com/explore",
+      "collection": "blocked_by_antibot"
+    }
+  ],
+  "positive_control": {
+    "description": "Synthetic deterministic SPA with 8 states, 4 actions",
+    "pmi_k3": 1.7694368797062947,
+    "permutation_p": 0.000999000999000999,
+    "passes": true
+  },
+  "seeds": {
+    "experiment": 42,
+    "permutations": 1000
+  },
+  "execution_sha": "ed9fdf40c2728030e4c4babe551ccef535dae5a02998bd8fa77af6c9cc51fd15",
+  "recorded_at": "2026-09-18T12:59:20.014859Z"
+}
