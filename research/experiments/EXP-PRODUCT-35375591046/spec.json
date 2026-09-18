@@ -1,17 +1,49 @@
 {
   "experiment_id": "EXP-PRODUCT-35375591046",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "question": "What is the success rate and token cost of the COLD baseline (no registry) on the synthetic 32-task corpus using a real LLM, and does this viability close the token-based inheritance economics line?",
+  "hypothesis": "The COLD baseline (no registry) achieves >= 90% success rate with average token cost <= 100 tokens/task on the synthetic 32-task corpus, making token-based parameterized inheritance unnecessary because the cheapest baseline is already viable.",
+  "falsifier": "COLD success rate < 90% OR average token cost > 150 tokens/task, indicating that COLD is not viable and registry-based inheritance may still be needed.",
+  "baselines": [
+    {
+      "id": "B-COLD-EXECUTED",
+      "description": "No registry. Real LLM generates the correct URL from the task goal without any mechanism guidance via API call.",
+      "expected_behavior": "Single LLM call generates URL from task description only; no selection or resolution overhead; success rate measured (not assumed)."
+    },
+    {
+      "id": "B-LITERAL-EXECUTED",
+      "description": "Full literal registry (32 concrete-URL mechanisms). Real LLM selects from all 32 mechanisms via API call; executes the matched mechanism directly.",
+      "expected_behavior": "Reference baseline for token cost comparison; not primary target."
+    },
+    {
+      "id": "B-PARAMETERIZED-EXECUTED",
+      "description": "Deduplicated parameterized registry (25 mechanisms with ${slot} templates). Real LLM selects from 25 mechanisms via API call and resolves the matched template via a second API call.",
+      "expected_behavior": "Reference baseline for token cost comparison; not primary target."
+    }
+  ],
+  "positive_control": {
+    "id": "POS-CONTROL-COLD-SIMPLE",
+    "description": "The 5 blog-read-post tasks (simple GET /posts/{id}) must be solvable by COLD with correct URL generation.",
+    "expected_behavior": "All 5 tasks produce correct URLs under COLD; success rate 100% on these simple tasks."
+  },
+  "null_control": {
+    "id": "NULL-COLD-COMPLEX",
+    "description": "Tasks with complex parameters (admin, auth, search) may have lower COLD success rate, indicating registry value.",
+    "expected_behavior": "COLD success rate on complex tasks may be lower than on simple tasks; not required to pass."
+  },
+  "measurement_validity": [
+    "Both conditions use the identical 32-task synthetic corpus from parent EXP-PRODUCT-35330741529 (6 domains, 32 tasks)",
+    "All token counts measured from real LLM API calls via tiktoken on actual prompt+completion text, not estimated",
+    "COLD step: single API call with task description only; model outputs URL",
+    "Success rate measured per-task: resolved URL matches expected URL exactly",
+    "Each task executed independently; no cross-task state contamination",
+    "Temperature 0.0 for deterministic output; API model specified in provenance",
+    "Registry text format identical to parent (numbered list of [METHOD] URL pattern) for reference baselines"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) COLD success rate >= 90% across all 32 tasks; (C2) average COLD token cost (prompt+completion) <= 100 tokens/task; (C3) positive control passes (5 blog-read-post tasks succeed). FALSIFIED if any condition fails. MEASUREMENT_INVALID if API failures prevent completion of >=5 tasks.",
+  "product_consequence_positive": "If COLD achieves >=90% success with <=100 tokens/task, token-based inheritance economics are closed: the cheapest baseline is viable, and parameterized inheritance adds net token overhead without必要 benefit. Product lane pivots to alternative mechanisms (registry compression, retrieval efficiency, orthogonal capabilities). C-PRODUCT-ECON advances toward REJECTED for token-based savings.",
+  "product_consequence_negative": "If COLD fails (<90% success or >150 tokens/task), registry-based inheritance may still be needed. The parent's 5.42% analytical savings remain potentially relevant, and the product lane should pursue option A (re-run with API keys) or option B (real SPIDER corpus). C-PRODUCT-ECON remains HYPOTHESIS.",
+  "estimated_cost": "Low — 32 tasks × 1 condition × 1 LLM call each = 32 API invocations. At ~500 tokens/call average ≈ 16K total tokens. No browser/network execution needed.",
+  "expected_information_gain": "High — directly resolves whether COLD baseline is viable, which determines whether token-based inheritance economics are worth pursuing. A positive result (COLD viable) closes the line; a negative result (COLD not viable) keeps it open. Both outcomes materially change the C-PRODUCT-ECON claim or product decision."
 }
