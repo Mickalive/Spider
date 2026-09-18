@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35401997918",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-1_CONSTRUCT_HEURISTIC_DEPTH",
+      "severity": "high",
+      "finding": "Spec defines depth as 'distance from root <html> node in the DOM tree' but operationalization uses a 4-level heuristic: inForm + tag mapping (depth 1 outside forms, 2 FORM, 3 DIV/LABEL/SPAN inside form, 4 INPUT/BUTTON leaf). Locatable_sample is a flattened list without parent-child links, so true DOM depth (2 to 20+) cannot be recovered. Producer correctly discloses this as VN-1/VN-4 and bounds claim ceiling to heuristic.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/result.json:validity_notes VN-1, VN-4; /tmp/opencode/hierarchy_density_analysis.py:estimate_depth",
+      "impact": "Does not overturn FALSIFIED-IN-SETTING for heuristic, but means the conceptual hypothesis 'true DOM hierarchy depth breaks convex hull' remains untested (producer U-1). Audit endorses bounded negative only."
+    },
+    {
+      "id": "VF-2_P_VALUE_MISCOMPUTED",
+      "severity": "low",
+      "finding": "Producer reports p_hier_canonical=0.675309 for |rho|=0.879, n=21. Correct t=8.04, two-tailed p ~1e-7 (highly significant). Producer's p approximation uses math.erf(x_val/sqrt(2)) with incorrect x_val transform. Error does not affect frozen decision rule (which uses rho magnitudes only), but reported p-values are invalid and must not be used for inference.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/result.json:metrics.M6_C3_not_linear_combination; /tmp/opencode/hierarchy_density_analysis.py:spearman_rank_correlation; recomputed t=8.04",
+      "impact": "No change to C3 PASS/FAIL; decision rule unaffected. Requires correction if p-values are later cited."
+    },
+    {
+      "id": "VF-3_TIE_UNCORRECTED_SPEARMAN",
+      "severity": "low",
+      "finding": "Spearman rank computation does not apply tie correction. Weighted density has ties (7x 1.0) and hierarchy has ties (7x 1.0) at alpha=0.3, producing rho=1.0 exactly. Canonical also tied? Small effect. Without tie correction rho is inflated toward 1, but recomputation with same naive rank matches producer (rho_hier_weighted=1.0, rho_hier_canonical=0.8792). Even with tie correction direction would not cross 0.90 threshold for C3 at alpha=0.3 (rho would remain >0.95 for weighted). C3 PASS remains borderline but numerically stable across alphas (0.945 at 0.1, 1.0 at 0.3, 0.937 at 0.5).",
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/result.json:M6, M11; /tmp/opencode/hierarchy_analysis/hierarchy_analysis_results.json:spearman_details",
+      "impact": "No verdict change; C3 technically PASS via OR clause (|rho_hier_canonical|=0.879 <0.90) but hierarchy is demonstrably a monotonic reparameterization of weighted (rho=1.0), as producer notes."
+    },
+    {
+      "id": "VF-4_FIXED_N_TRUNCATION_REPRESENTATION_LOSS",
+      "severity": "medium",
+      "finding": "All 7 tasks have identical locatable_sample size (20 elements) and near-identical inForm distribution (17/20 inForm for listing, 19/20 for detail/cart). This suppresses any depth-distribution variation that could arise from different DOM sizes or nesting, directly causing eta^2=0 and type_means 0.666667 identical across listing/detail/cart at all alphas. Truncation to first-20 eliminates the major source of hierarchy variation the hypothesis predicts.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/result.json:M7, M9, M11; /tmp/opencode/hierarchy_analysis/hierarchy_analysis_results.json:positive_control.type_means; research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "impact": "Explains zero task-type structure (C4 failure) and PC1 failure. Bounded to truncated setting; does not test whether full-DOM depth would vary by page type."
+    },
+    {
+      "id": "VF-5_EPHEMERAL_DERIVED_ARTIFACT",
+      "severity": "low",
+      "finding": "Analysis code and derived artifact are stored in /tmp/opencode (ephemeral, not repository-durable). Path is not under research/experiments/*/raw_evidence. Hashes provided but artifact not archived in repo at handoff time.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/provenance.json:analysis_code.path,derived_artifacts[0].path; research/experiments/EXP-INTEL-35401997918/result.json:artifacts",
+      "impact": "Does not affect recomputation (hashes verifiable), but violates durable provenance expectation. Re-run requires restoring /tmp."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_CANONICAL_RECIPE",
+      "producer_id": "B1_CANONICAL_RECIPE",
+      "finding": "CONFIRMED: canonical mean 0.00517, range [0.00041,0.00935], consistent with prior. Recomputation matches.",
+      "pass": true,
+      "evidence_ref": "recomputed_metrics.M1_mean"
+    },
+    {
+      "id": "B2_WEIGHTED_RECIPE",
+      "producer_id": "B2_WEIGHTED_RECIPE",
+      "finding": "CONFIRMED: weighted mean 0.666667, range [0.00469,1.0], definition-driven (DEF-FULL-MAP=1.0, ISOLATED-A-LINK ~0.005-0.019). Recomputation matches.",
+      "pass": true,
+      "evidence_ref": "recomputed_metrics.M2_mean"
+    },
+    {
+      "id": "B3_LINEAR_MEAN",
+      "producer_id": "B3_LINEAR_MEAN",
+      "finding": "CONFIRMED: linear mean (canonical+weighted)/2 produces 0 hull breaks by mathematical identity, rho(canonical)=0.8948 rho(weighted)=0.9844. Hierarchy adds hull breaks (7) but not task-type structure. Baseline correctly degenerate.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/result.json:M12"
+    },
+    {
+      "id": "B4_DENSITY_RATIO",
+      "producer_id": "B4_DENSITY_RATIO",
+      "finding": "NOT RECOMPUTED here; correctly deferred to parent audit (EXP-INTEL-35375593989 VF-1/VF-2). Parent shows eta^2=0.144 <0.20 and non-significant Spearman. No new evidence to overturn.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-INTEL-35375593989/audit.json"
+    },
+    {
+      "id": "PC1_HIERARCHY_VARIATION",
+      "producer_id": "PC1_HIERARCHY_VARIATION",
+      "finding": "CONFIRMED FAIL: inter-type ratio 1.0, type_means listing=detail=cart=0.666667 across all alphas, eta^2=0. Producer correctly reports FAIL. Failure is design-consequent (VF-4) and supports FALSIFIED conclusion.",
+      "pass": false,
+      "evidence_ref": "recomputed_metrics.PC1_type_means"
+    },
+    {
+      "id": "NC1_RANDOM_WEIGHTS",
+      "producer_id": "NC1_RANDOM_WEIGHTS",
+      "finding": "CONFIRMED FAIL: random-weight mean|rho(canonical)|=0.8766 vs hierarchy 0.8792; mean|rho(weighted)|=0.9781 vs 1.0. For threshold |rho|<0.30 expected to PASS, both random and hierarchy far exceed. Producer notes expectation was misspecified because with 20 elements and definition based on tag/inForm, any weighting on same matching pattern yields high rank correlation. Hierarchy indistinguishable from random per this control, strengthening FALSIFIED interpretation. No evidence that null control was executed incorrectly.",
+      "pass": false,
+      "evidence_ref": "recomputed_metrics.NC1_mean_random_rho_canonical"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_canonical_density_summary": {
+      "producer_mean": 0.00517,
+      "recomputed_mean": 0.005169914747776984,
+      "producer_min": 0.000412,
+      "recomputed_min": 0.00041152263374485596,
+      "producer_max": 0.009346,
+      "recomputed_max": 0.009345794392523364,
+      "match": true
+    },
+    "M2_weighted_density_summary": {
+      "producer_mean": 0.666667,
+      "recomputed_mean": 0.6666666666666666,
+      "producer_min": 0.004693,
+      "recomputed_min": 0.004692697565052362,
+      "producer_max": 1.0,
+      "recomputed_max": 1.0,
+      "match": true
+    },
+    "M3_hierarchy_density_summary_alpha0.3": {
+      "producer_mean": 0.666667,
+      "recomputed_mean": 0.6666666666666666,
+      "producer_min": 0.087837,
+      "recomputed_min": 0.08783712075652195,
+      "producer_max": 1.0,
+      "recomputed_max": 1.0,
+      "match": true
+    },
+    "M4_C1_hierarchy_variation": {
+      "producer_cv": 0.583704,
+      "recomputed_cv": 0.5837038699367857,
+      "threshold": 0.1,
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "match": true
+    },
+    "M5_C2_outside_convex_hull": {
+      "producer_count_outside": 7,
+      "recomputed_count_outside": 7,
+      "producer_fraction": 0.333,
+      "recomputed_fraction": 0.3333333333333333,
+      "threshold": 3,
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "direction": "ALL_ABOVE",
+      "all_isolated_a_link": true,
+      "match": true
+    },
+    "M6_C3_not_linear_combination": {
+      "producer_rho_hier_canonical": 0.879221,
+      "recomputed_rho_hier_canonical": 0.8792207792207792,
+      "producer_rho_hier_weighted": 1.0,
+      "recomputed_rho_hier_weighted": 1.0,
+      "producer_p_hier_canonical": 0.675309,
+      "recomputed_p_correct_approx": "~1.6e-07 (t=8.04, df=19, two-tailed)",
+      "p_match": false,
+      "p_error": "producer p miscomputed; does not affect binary pass (rho magnitudes only)",
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "note": "Perfect monotonic with weighted (rho=1.0) means hierarchy is reparameterization, not structurally different; C3 passes only via OR clause (|rho_canonical|=0.879 <0.90)",
+      "match_rho": true
+    },
+    "M7_C4_task_type_structure": {
+      "producer_eta_squared": 0.0,
+      "recomputed_eta_squared": 0.0,
+      "threshold": 0.1,
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "match": true
+    },
+    "M9_PC1_hierarchy_variation": {
+      "producer_type_means": {
+        "product_listing": 0.666667,
+        "detail": 0.666667,
+        "cart": 0.666667
+      },
+      "recomputed_type_means": {
+        "product_listing": 0.6666666666666666,
+        "detail": 0.6666666666666666,
+        "cart": 0.6666666666666666
+      },
+      "producer_inter_type_ratio": 1.0,
+      "recomputed_inter_type_ratio": 1.0,
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "match": true
+    },
+    "M10_NC1_random_weights": {
+      "producer_mean_random_rho_canonical": 0.876629,
+      "recomputed_via_derived_mean_random_rho_canonical": 0.8766285714285714,
+      "producer_mean_random_rho_weighted": 0.978062,
+      "recomputed_via_derived_mean_random_rho_weighted": 0.9780623376623376,
+      "producer_hierarchy_rho_canonical": 0.879221,
+      "recomputed_hierarchy_rho_canonical": 0.8792207792207792,
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "match": true
+    },
+    "M11_alpha_sensitivity": {
+      "producer_alpha_0.1": {
+        "cv": 0.615723,
+        "eta_squared": 0.0,
+        "outside_hull": 10,
+        "rho_canonical": 0.781818,
+        "rho_weighted": 0.945455
+      },
+      "recomputed_alpha_0.1": {
+        "cv": 0.6157231262571494,
+        "eta_squared": 6.583768558980348e-32,
+        "outside_hull": 10,
+        "rho_canonical": 0.7818181818181819,
+        "rho_weighted": 0.9454545454545454,
+        "match": true
+      },
+      "producer_alpha_0.3": {
+        "cv": 0.583704,
+        "eta_squared": 0.0,
+        "outside_hull": 7,
+        "rho_canonical": 0.879221,
+        "rho_weighted": 1.0
+      },
+      "recomputed_alpha_0.3_match": true,
+      "producer_alpha_0.5": {
+        "cv": 0.545491,
+        "eta_squared": 0.0,
+        "outside_hull": 13,
+        "rho_canonical": 0.767532,
+        "rho_weighted": 0.937662
+      },
+      "recomputed_alpha_0.5_match": true,
+      "eta_squared_all_zero_confirmed": true
+    },
+    "M12_linear_mean_baseline": {
+      "producer_rho_canonical": 0.894805,
+      "recomputed_rho_canonical": 0.8948051948051948,
+      "producer_rho_weighted": 0.984416,
+      "recomputed_rho_weighted": 0.9844155844155844,
+      "outside_hull": 0,
+      "match": true
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for C-MEAS-VALID hierarchy-weighted recipe, narrowly bounded: The heuristic hierarchy-weighted density (exp(-alpha*depth) with 4-level inForm/tag depth, alpha=0.1/0.3/0.5) on the truncated-first-20 locatable_sample (7 tasks x 3 definitions=21 pairs, single Magento site, N=21) produces no task-type structure (eta^2=0.0 at all alphas, PC1 ratio=1.0) and is a perfect monotonic reparameterization of area-weighted density at alpha=0.3 (Spearman rho=1.0, rho_canonical=0.879). It breaks the canonical-weighted convex hull on 7/21 pairs (100% ISOLATED-A-LINK, all ABOVE hull) but that break is definition-dependent, not task-type-dependent, and indistinguishable from random weights (NC1). The heuristic does not provide a viable third recipe to break the 2-recipe degeneracy for MIXED outcome resolution in this setting. No inference justified to: (a) true DOM tree depth with parent-child links (untested, producer U-1), (b) full-DOM enumeration (truncation eliminates depth variance, VN-2), (c) cross-site generalization (blocked), or (d) alternative non-linear recipes (semantic role, conditional inclusion). The 31x canonical/weighted material gap remains established but the MIXED program remains without a validated 3-recipe classifier.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35401997918/spec.json:decision_rule (C1>=0.10, C2>=3, C3 OR <0.90, C4>=0.10; SURVIVES requires all four)",
+    "research/experiments/EXP-INTEL-35401997918/result.json:metrics.M4-M7 (C1 0.583704 PASS, C2 7/21 PASS, C3 0.879/1.0 PASS, C4 0.0 FAIL) and M9-M10 (PC1 FAIL, NC1 FAIL)",
+    "research/experiments/EXP-INTEL-35401997918/result.json:observations OBS-1 through OBS-6 (perfect monotonic, hull break definition-driven, zero type structure, random equivalence)",
+    "research/experiments/EXP-INTEL-35401997918/result.json:validity_notes VN-1 to VN-5 (heuristic depth, fixed 20 sample, rho=1 reparameterization, true DOM untested)",
+    "/tmp/opencode/hierarchy_density_analysis.py (estimate_depth heuristic, hierarchy_weighted_density, spearman_rank_correlation without tie correction)",
+    "/tmp/opencode/hierarchy_analysis/hierarchy_analysis_results.json (per_pair_results 21, decision_rules, alpha_sensitivity, positive_control, null_control, spearman_details)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256:da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050) - 7 unique tasks after dedup, 10 raw measurements",
+    "research/experiments/EXP-INTEL-35375593989/handoff.json (parent FALSIFIED-IN-SETTING for density ratio, recommendation to test non-linear recipe)",
+    "research/experiments/EXP-INTEL-35401997918/report.md:decision_rule table and comparison table (hierarchy vs B3 linear mean)"
+  ],
+  "unresolved": [
+    "Would TRUE DOM tree depth (actual parent-child distances from <html>, 2-20+ levels, from complete DOM not flattened 20-element sample) produce eta^2>0.10 and rho(weighted) <0.90 with hierarchy outside hull in a task-type-dependent way? Blocked by: locatable_sample lacks tree structure; requires runtime lane full-DOM capture with preserved hierarchy.",
+    "Is MIXED outcome resolvable at all within OECD/COINr with any density-based recipe, or should density-based MIXED handling be abandoned and restricted to recipe-insensitive pairs? Blocked by: requires product lane decision; no tested density recipe among canonical, weighted, linear mean, ratio, and heuristic hierarchy has provided task-type structure >0.10 while breaking hull in a non-definition-driven way.",
+    "Could a fundamentally different non-linear metric (semantic role weighting, conditional inclusion based on element relationships, learned embeddings) produce rankings both outside hull AND capturing task-type structure? Blocked by: requires genuinely structural element representations beyond flattened sample and binary inForm.",
+    "Do producer p-values and tie-uncorrected Spearman affect any downstream inference that thresholds on p<0.05? Current decision rule does not, but future meta-analyses must use recomputed p ~1e-7 for rho=0.879."
+  ]
+}

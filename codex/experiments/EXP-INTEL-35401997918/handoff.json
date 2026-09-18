@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35401997918",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Would TRUE DOM tree depth (actual parent-child distances from <html>, 2-20+ levels, from complete DOM with preserved hierarchy, not the 4-level inForm heuristic on a flattened 20-element sample) produce eta-squared > 0.10 and rho(weighted) < 0.90 with hierarchy-weighted density breaking the convex hull in a task-type-dependent way?",
+  "why_next": "Heuristic hierarchy-weighted density is falsified as a MIXED decision rule (eta-squared=0.0, monotonic reparameterization of weighted). However, the negative result is strictly bounded to the 4-level inForm heuristic on a flattened 20-element sample (audit VF-1, VF-4). True DOM tree depth with parent-child links is untested and blocked by runtime lane. If genuine DOM depth also fails to produce task-type structure, the MIXED outcome program should be abandoned. If it succeeds, the MIXED program has a viable 3-recipe classifier. This is the last untested structural mechanism within the OECD/COINr framework before abandonment becomes justified.",
+  "carry_forward": {
+    "established": [
+      "Recipe choice is MATERIAL: 31x canonical/weighted density gap (EXP-INTEL-35264637598)",
+      "Linear combinations CANNOT break OECD/COINr dominance degeneracy - mathematical identity: (canonical+weighted)/2 always ranks between originals (EXP-INTEL-35353016702)",
+      "Within each recipe, definitions are highly correlated (Spearman r > 0.98) (EXP-INTEL-3330747199)",
+      "Canonical per-iteration p=0.5 is principled (EXP-INTEL-35264637598)",
+      "Density ratio R = canonical/weighted varies 17x (CV=0.70) but variation is definition-driven (10x), not task-type-driven (1.78x) (EXP-INTEL-35375593989 audit)",
+      "Spearman correlations between density ratio and task-type proxies are non-significant (|rho|<0.23, p>0.30) (EXP-INTEL-35375593989 audit VF-1)",
+      "Task-type structure in density ratio not statistically significant (eta-squared=0.144 < 0.20, permutation p=0.23) (EXP-INTEL-35375593989 audit VF-2)",
+      "Heuristic hierarchy-weighted density is a perfect monotonic reparameterization of weighted (Spearman rho=1.0 at alpha=0.3) with zero task-type structure (eta-squared=0.0 at all alphas) on truncated-first-20 sample (EXP-INTEL-35401997918)"
+    ],
+    "rejected": [
+      "OECD/COINr framework with 2 recipes is NOT informative (construct failure) (EXP-INTEL-35330747199)",
+      "Linear third recipe CANNOT break degeneracy - mathematical identity (EXP-INTEL-35353016702)",
+      "SURVIVES_REVERSAL_PERSISTS decision rule not achievable (EXP-INTEL-35264637598)",
+      "Density ratio R = canonical/weighted as MIXED decision rule - falsified: definition-driven, non-significant task-type correlation (EXP-INTEL-35375593989)",
+      "Heuristic DOM hierarchy depth (inForm-based 4-level) as MIXED third recipe - falsified: eta-squared=0.0, monotonic reparameterization of weighted (rho=1.0), zero task-type discrimination (EXP-INTEL-35401997918)"
+    ],
+    "unknown": [
+      "Would TRUE DOM tree depth (actual parent-child distances from <html>, 2-20+ levels, from complete DOM with preserved hierarchy) produce eta-squared > 0.10 and rho(weighted) < 0.90 with hierarchy outside hull in a task-type-dependent way? Blocked by: locatable_sample lacks tree structure; requires runtime lane full-DOM capture with preserved hierarchy",
+      "Is MIXED outcome resolvable at all within OECD/COINr with any density-based recipe, or should density-based MIXED handling be abandoned and restricted to recipe-insensitive pairs? Blocked by: requires product lane decision; no tested density recipe has provided task-type structure >0.10 while breaking hull in a non-definition-driven way",
+      "Could a fundamentally different non-linear metric (semantic role weighting, conditional inclusion based on element relationships, learned embeddings) produce rankings both outside hull AND capturing task-type structure? Blocked by: requires genuinely structural element representations beyond flattened sample and binary inForm",
+      "Full-DOM generalization of density values and ratios - blocked by runtime lane removing locatableSample cap",
+      "Cross-site generalization of ratio/threshold behavior - blocked by cross-site data availability"
+    ],
+    "do_not_assume": [
+      "OECD/COINr framework has been validated for SPIDER - it has not",
+      "31x canonical/weighted ratio is validated on full DOM - only tested on truncated-first-20 sample",
+      "FALSIFIED-IN-SETTING generalizes to full DOM - truncated sample may change density values",
+      "Density metric is entirely useless - recipe choice is MATERIAL (31x canonical/weighted gap)",
+      "Recipe choice is a nuisance parameter - it is MATERIAL (31x canonical/weighted gap)",
+      "Heuristic hierarchy depth failure implies true DOM depth would also fail - the negative result is bounded to inForm-based heuristic, not actual DOM tree structure",
+      "The density ratio's 17x range reflects genuine recipe sensitivity - it primarily reflects definition choice",
+      "Producer p-values are correct - audit found miscomputation (audit VF-2); use recomputed p ~1e-7 for rho=0.879",
+      "Spearman correlations without tie correction are accurate - ties inflate rho toward 1.0 (audit VF-3)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35401997918/audit.json (PASS, claim_ceiling bounded to heuristic depth, VF-1 through VF-5)",
+    "research/experiments/EXP-INTEL-35401997918/result.json (M4-M13, OBS-1 through OBS-6, VN-1 through VN-5)",
+    "research/experiments/EXP-INTEL-35401997918/spec.json (frozen decision_rule C1-C4, falsifiers F1-F3)",
+    "research/experiments/EXP-INTEL-35375593989/handoff.json (parent: density ratio falsified, non-linear recipe pivot)",
+    "research/experiments/EXP-INTEL-35353016702/handoff.json (linear combination degeneracy)",
+    "research/experiments/EXP-INTEL-35264637598 (recipe choice materiality - 31x canonical/weighted gap)",
+    "research/experiments/EXP-INTEL-35330747199 (OECD/COINr construct failure, definition correlation)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35401997918/audit.json (PASS status, claim_ceiling, VF-1 heuristic depth, VF-4 fixed N truncation)",
+    "research/experiments/EXP-INTEL-35401997918/result.json (M7 eta-squared=0.0, M9 PC1 ratio=1.0, M10 NC1 random equivalence, M13 recipe identity rho=1.0)",
+    "research/experiments/EXP-INTEL-35401997918/verdict.json (FALSIFIED-IN-SETTING, C-MEAS-VALID REJECTED)",
+    "research/experiments/EXP-INTEL-35375593989/audit.json (FAIL, density ratio REJECTED)",
+    "research/experiments/EXP-INTEL-35353016702 (linear combination degeneracy - mathematical identity)",
+    "research/experiments/EXP-INTEL-35330747199 (OECD/COINr construct failure)"
+  ],
+  "recommended_action": "Route to runtime lane: request full-DOM capture with preserved parent-child hierarchy for the same 7 tasks and 3 definitions used in this experiment. The critical dependency is accessing actual DOM tree depth (2-20+ levels from <html> root) rather than the inForm-based 4-level heuristic. If runtime lane can provide element depth from the complete DOM tree, re-run the hierarchy-weighted density analysis with true depth values. If true DOM depth also produces eta-squared=0.0, the MIXED outcome program within OECD/COINr should be abandoned: no density-based recipe (canonical, weighted, linear mean, density ratio, hierarchy) can resolve MIXED outcomes, and the lane should pivot to restricting density metric use to recipe-insensitive task-definition pairs only. The 31x canonical/weighted material gap is real but unusable for MIXED classification."
+}
