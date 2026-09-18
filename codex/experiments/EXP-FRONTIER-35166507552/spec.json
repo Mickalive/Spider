@@ -1,0 +1,35 @@
+{
+  "experiment_id": "EXP-FRONTIER-35166507552",
+  "lane": "frontier",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Does per-type CV stability (<=0.5 at lambda=1) achieve at larger per-type n (500 and 1000/type) with KDE Scott or kNN k=5, where at 250/type both measures marginally fail (KDE max 0.575 type 4, kNN max 0.755 type 0)?",
+  "hypothesis": "Increasing per-type sample size from 250 to 500-1000 will resolve CV instability for KDE (marginal fail at 0.575, only 14.9% over threshold) but not for kNN (substantial fail at 0.755). The per-type CV failure at 250/type is primarily sample-size-limited for KDE and more fundamental for kNN. If CV passes at 500 or 1000/type for either measure, the per-type stability limitation is sample-size-specific, not a fundamental property of per-type heterogeneity.",
+  "falsifier": "CV >0.5 for any type at lambda=1 for BOTH KDE and kNN at n=1000/type. This would demonstrate that even 4x the parent sample size does not resolve per-type instability, indicating a more fundamental limitation of per-type divergence estimation under heterogeneous page-type dynamics.",
+  "baselines": [
+    "KDE at 250/type: per-type null control 8/8 pass, CV max 0.5745 type 4 (marginal fail), positive control t=7.81 p=0.0007 (EXP-FRONTIER-34913743596 result.json:metrics.pooled_subsampled_kde)",
+    "kNN at 250/type: per-type null control 8/8 pass, CV max 0.7550 type 0 (substantial fail), positive control t=6.82 p=0.0012 (EXP-FRONTIER-34913743596 result.json:metrics.pooled_subsampled_knn)",
+    "kNN k=10 EXPLORATORY at 250/type: CV max 0.470 8/8 pass (EXP-FRONTIER-34913743596 sensitivity_exploratory.json:sensitivities.knn_k10.cv_check) — hypothesis-generating only, not confirmatory",
+    "Binned TV at 250/type: per-type null control 4/8 fail, CV max 1.59 (EXP-FRONTIER-34881708619 result.json) — sparse-binning artifact baseline",
+    "Frequency baseline marginal TV: 0.335 (EXP-FRONTIER-34881708619 result.json)"
+  ],
+  "positive_control": "For each measure (KDE, kNN) and each sample size (250, 500, 1000): pooled subsampled divergence at lambda=1 must be > pooled subsampled divergence at lambda=0 with one-sided paired t-test p<0.05 across 5 replications. This verifies each measure can detect action-conditioned structure at every tested sample size.",
+  "null_control": "For each measure and each sample size: per-type divergence at lambda=0 must be <= permutation-based threshold (95th percentile of 200 permutations) across all 8 page types. Additionally, the 250/type null control must replicate parent results (KDE 8/8 pass, kNN 8/8 pass) as a pipeline validation.",
+  "measurement_validity": [
+    "Reuse identical DGP from parent EXP-FRONTIER-34913743596 (8 page types, rotation/scaling/translation x low/high noise x centered/shifted, heteroscedastic Gaussian, deterministic block-cycling)",
+    "Three sample sizes tested: n=250/type (pipeline validation), n=500/type, n=1000/type",
+    "For n=500: subsample 500 of the 1000 available transitions per type (same DGP generates unlimited i.i.d. draws per type)",
+    "For n=1000: use 1000 transitions per type from the DGP",
+    "KDE uses Gaussian kernel with Scott bandwidth (scipy.stats.gaussian_kde bw_method='scott')",
+    "kNN MI uses k=5 neighbors (Kraskov et al. estimator)",
+    "Permutation null: N=200 permutations per type per sample size",
+    "5 replications per lambda level per sample size",
+    "8 lambda levels: 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1.0",
+    "Total transitions per sample size: (lambda levels) x (replications) x (per-type n) x (8 types)",
+    "Seed independence across replications using parent formula: cell_seed = BASE_SEED * 100000 + lambda_idx * 1000 + rep_idx * 10 + 999"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ANY of: (A) KDE CV <=0.5 for all 8 types at lambda=1 at n=500/type, OR (B) KDE CV <=0.5 for all 8 types at lambda=1 at n=1000/type, OR (C) kNN CV <=0.5 for all 8 types at lambda=1 at n=500/type, OR (D) kNN CV <=0.5 for all 8 types at lambda=1 at n=1000/type — AND null control passes for all 8 types at all tested sample sizes for the passing measure — AND positive control passes for the passing measure at all tested sample sizes. FALSIFIED-IN-SETTING if: CV >0.5 for any type at lambda=1 for BOTH KDE and kNN at n=1000/type AND null control passes. MEASUREMENT_INVALID if: pipeline errors, positive control fails for either measure at any sample size, or 250/type validation fails to replicate parent results.",
+  "product_consequence_positive": "If CV passes at 500-1000/type for KDE or kNN, the per-type stability limitation is sample-size-specific. Product can use per-type divergence estimation with these estimators at realistic sample sizes (500-1000/type). The density-divergence approach may be viable for heterogeneous data without pooling.",
+  "product_consequence_negative": "If CV still fails at 1000/type for both measures, the per-type limitation is more fundamental to heterogeneous page-type dynamics. Pooled estimation may be required regardless of estimator choice. The density-divergence approach may be fundamentally limited for per-type analysis.",
+  "estimated_cost": "Moderate: generate new DGP data at 500 and 1000 per type (8 lambda x 5 reps x 8 types x (500+1000) = 480,000 transitions per sample size), compute KDE and kNN divergence at each sample size, run 200 permutation nulls per type per sample size. Estimated 3-5 hours compute. No browser/network/model calls.",
+  "expected_information_gain": "High: directly tests whether per-type CV failure is sample-size-limited (KDE marginal 0.575) or fundamental (kNN substantial 0.755). If KDE passes at 500/type, the density-divergence approach is viable at moderate sample sizes. If both fail at 1000/type, the per-type approach is effectively closed and resources should shift to alternative mechanisms (pooled estimation, different state representations, or non-density-divergence approaches). This is the minimum disambiguating step before committing to per-type vs pooled architecture."
+}

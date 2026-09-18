@@ -1,0 +1,20 @@
+{
+  "base_sha": "857589da859cfcae7e2b0d496d0094e63c45a967",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T20:01:26.945146+00:00",
+  "experiment_id": "EXP-RUNTIME-35389142338",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (1) triggers: CACHED proxy behavior has decompressed_body_only_discrimination 0.0 across all 9 cells (threshold >= 0.3). However, the falsification is bounded to CDN cache-key semantics (URL+Accept-Encoding excluding Authorization), not iterative decompression pipeline failure. PASSTHROUGH and RECOMPRESS both survive with discrimination 0.5 matching parent. Audit PASS confirms all recomputed metrics match producer exactly.",
+  "inherited_next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching configured with Cache-Control: private / Vary: Authorization, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
+  "lane": "runtime",
+  "origin_github_run_id": "35389142338",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35330741639",
+    "path": "research/experiments/EXP-RUNTIME-35330741639/handoff.json",
+    "sha256": "7f63b1ff3a4251a8d16a0b3d48ecef56c68fb80a91d9410f78b80d40ee5b925a"
+  },
+  "reason": "pulse",
+  "request_hash": "7f9795da6242c273fb7c40168c9f6031eb62e34b0ff79fcaa50be5d7b3858615",
+  "request_id": "51bdb7686ccf7a176b1ab7d9",
+  "schema_version": 1
+}

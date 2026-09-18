@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35375593989",
+  "lane": "intel",
+  "executed_at": "2026-09-18T22:00:00Z",
+  "github_run_id": null,
+  "base_commit": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "frozen_at": "2026-09-18T20:03:28.983685+00:00",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "dependencies": "stdlib only (json, math, hashlib, collections, random, pathlib)",
+    "model_id": "opencode/mimo-v2.5-free"
+  },
+  "input_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "description": "Source measurement data: 7 tasks on 1 Magento site, 3 definitions, locatable_sample capped at 20 elements per task"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/request.json",
+      "sha256": "7ecd8c6f07eb2d73b50195889183ba74970114f594865a50528ca8b45ca05cad",
+      "role": "fixture",
+      "description": "Frozen experiment request"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/spec.json",
+      "sha256": "c45b3b3cbeb648c991ac55b131333bbc098dc9b4f4edfdc528aa66cab0662335",
+      "role": "fixture",
+      "description": "Frozen experiment specification"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/prereg.md",
+      "sha256": "67ace094b34a70cf23d7583898be466da962095419b450783561c3918f150a92",
+      "role": "fixture",
+      "description": "Frozen preregistration"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/freeze.json",
+      "sha256": null,
+      "role": "fixture",
+      "description": "Freeze record"
+    }
+  ],
+  "output_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/result.json",
+      "sha256": null,
+      "role": "result",
+      "description": "Producer result packet with all mandatory fields"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable execution report"
+    },
+    {
+      "path": "/tmp/opencode/density_ratio_analysis.py",
+      "sha256": "f5e66892430daae60bad9d1639b456db2da6fc446923abf9c9728689a567feb6",
+      "role": "code",
+      "description": "Analysis script implementing density ratio computation and statistical tests"
+    },
+    {
+      "path": "/tmp/opencode/density_ratio_results.json",
+      "sha256": "e9cb922f5db6f364c193d34c4dd96a60a78fb432eff15f3c7122ca1a21bcdce1",
+      "role": "derived",
+      "description": "Complete analysis output: density matrix, metrics, controls, decision rule evaluation"
+    }
+  ],
+  "code_paths": {
+    "analysis_script": "/tmp/opencode/density_ratio_analysis.py",
+    "raw_data": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json"
+  },
+  "execution_commands": [
+    "python3 /tmp/opencode/density_ratio_analysis.py"
+  ],
+  "frozen_inputs_immutability": "All frozen files (request.json, spec.json, prereg.md, freeze.json) were read but never modified during execution. The experiment was executed exactly as specified in the frozen design.",
+  "measurement_methodology": {
+    "density_formula": {
+      "canonical": "(matching_count * 0.5) / elements_with_bbox — expected density under p=0.5 independent Bernoulli inclusion per element",
+      "weighted": "sum(element_area / total_area for matching elements) — area-weighted density",
+      "ratio": "canonical_density / weighted_density per task-definition pair"
+    },
+    "definitions": {
+      "DEF_FULL_MAP": "Elements whose canonical role (after role_map: a→link, input→textbox) is in the interactive set {button, link, textbox, checkbox, radio, combobox, listbox, menuitem, tab, slider, spinbutton, searchbox, switch}",
+      "DEF_FORM_ONLY": "Elements where inForm=true",
+      "ISOLATED_A_LINK": "Elements where tag='A' and inForm=false"
+    },
+    "tasks": "7 unique tasks from Magento shopping site (3 product_listing, 3 detail, 1 cart), deduplicated from 10 measurements (excluding checkout and duplicate cart_1)",
+    "sample_scope": "truncated-first-20 locatable_sample (20 elements per task, actual locatable_elements 21-82)"
+  },
+  "reproducibility": {
+    "deterministic": true,
+    "seed": "No random seed required for canonical density (expected value is deterministic). NC1 shuffle uses seed=42.",
+    "data_dependency": "Requires exp347_raw_results.json with sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050"
+  }
+}

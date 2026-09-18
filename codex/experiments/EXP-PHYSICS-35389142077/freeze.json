@@ -1,0 +1,10 @@
+{
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "frozen_at": "2026-09-18T20:06:35.795796+00:00",
+  "hashes": {
+    "prereg.md": "ddb8d0586c2251312e08f05d79d610fc65521e0217764c7a1bd16308c28897b8",
+    "request.json": "b24e4f359a06bdff4d8730c0e83879ce312d23b816ec9b577e87b73993ab377f",
+    "spec.json": "9ffc8ddd0cb9e08fd69734b4a7b638c44113312121a0783a6a782940d4d66c38"
+  },
+  "schema_version": 1
+}

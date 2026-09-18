@@ -1,0 +1,20 @@
+{
+  "base_sha": "7e3946b64e578caa171e9f25af27acccab858057",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T00:25:52.701887+00:00",
+  "experiment_id": "EXP-FRONTIER-35166507552",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING: null control passes for both KDE (8/8) and kNN (8/8) at lambda=0, but CV \u22640.5 at lambda=1 fails for both KDE (max 0.5745 on type 4, 7/8 pass) and kNN (max 0.5750 on type 0, 7/8 pass). Positive controls pass strongly (KDE t=7.81 p=0.0007, kNN t=6.82 p=0.0012). The frozen rule requires ALL conditions for BOTH measures; CV failure on one type per measure is sufficient. The result is a valid scientific negative on per-type stability at 250/type, not measurement invalidity. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to: KDE and kNN achieve per-type null control (8/8 pass) where binned TV fails (4/8 pass), confirming the binned TV false-positive is estimator-specific; however, per-type CV stability \u22640.5 is not achieved at 250/type by either KDE (max 0.575, marginal) or kNN (max 0.755, substantial). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted.",
+  "inherited_next_question": "Does per-type CV stability (\u22640.5 at lambda=1) achieve at larger per-type n (500-1000/type) with KDE Scott or kNN k=5, or does kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type) survive confirmatory preregistration \u2014 and does the per-type vs pooled ordering reversal (KDE/kNN per-type>pooled vs binned pooled>per-type) persist across DGP families with different noise structures?",
+  "lane": "frontier",
+  "origin_github_run_id": "35166507552",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-34913743596",
+    "path": "research/experiments/EXP-FRONTIER-34913743596/handoff.json",
+    "sha256": "27836707c28f5f54763fb28a9a2ba43757591250c51d9fd4a603e7299c2b8dc3"
+  },
+  "reason": "pulse",
+  "request_hash": "c0485f085451d6387a02976f605ee5e1f62350cc1aae3d1ea748d725f19c1635",
+  "request_id": "fba9acd436338859af1fe5e6",
+  "schema_version": 1
+}
