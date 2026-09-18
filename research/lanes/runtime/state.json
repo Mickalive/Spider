@@ -8,7 +8,7 @@
   "next_question": "Does iterative decompression restore decompressed body-only discrimination >= 0.3 and decompressed hash determinism (all_same=true) under triple-brotli encoding for the valid_token success body when triple-br is guaranteed to be observed (stratified assignment, not uniform random)?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-18T00:18:26.695698+00:00",
+  "updated_at": "2026-09-18T04:55:39.554581+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "c499c6aa50143e5be429c187b3b78d3298a10b0ea5fc730693b887ae4ba80c7c",
   "same_failure_count": 0,
