@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35330741529",
+  "github_run_id": "35330741529",
+  "base_sha": "f14b01cf8dbd10513705c8c9606023c4a27ac30f",
+  "experiment_sha": null,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "tiktoken_version": "0.14.0",
+    "tiktoken_encoding": "cl100k_base"
+  },
+  "data_sources": {
+    "task_corpus": {
+      "type": "synthetic",
+      "description": "32 tasks across 6 domains (blog, ecommerce, admin, project-management, search, auth)",
+      "location": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py:TASK_CORPUS",
+      "corpus_size": 32,
+      "domains": ["blog", "ecommerce", "admin", "project-management", "search", "auth"],
+      "sharing_distribution": {
+        "high_sharing": 10,
+        "moderate_sharing": 5,
+        "unique": 17
+      }
+    },
+    "literal_registry": {
+      "type": "derived",
+      "description": "32 concrete-URL mechanisms derived from task corpus observations",
+      "location": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json:aggregate_costs.literal"
+    },
+    "parameterized_registry": {
+      "type": "derived",
+      "description": "25 parameterized mechanisms with ${slot} templates, induced via heuristic regex from parent",
+      "location": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json:aggregate_costs.parameterized"
+    }
+  },
+  "code": {
+    "experiment_script": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+    "parent_code": "research/experiments/EXP-PRODUCT-35290617719/run_experiment.py",
+    "parameter_inference": "Heuristic regex (infer_parameterized_url) from parent, not kernel distill_parameterized()"
+  },
+  "methodology": {
+    "measurement_type": "analytical (tiktoken token counting)",
+    "model_execution": "none (token costs measured from prompt text, completion tokens estimated)",
+    "browser_execution": "omitted per frozen spec (both conditions execute identical actions)",
+    "verification": "omitted per frozen spec (both conditions produce identical outcomes)",
+    "completion_token_estimates": {
+      "selection_response": 2,
+      "resolution_response": "85-122 (variable by template complexity)",
+      "cold_url_generation": 20
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+      "role": "code",
+      "sha256": "00ae2dd7b46fcf151ea8725df816aff0034a7162538444aa825dd59d0fc8f070"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json",
+      "role": "raw",
+      "sha256": "be12567ea693e6e37971f4742e5d11b1e139f7575856f4b40edd73bbe2048a70"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/result.json",
+      "role": "derived",
+      "sha256": "26843e77aca2ee161b9fae0e5a81c60a01cccb0c55785077d2e58670195c8cd0"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/report.md",
+      "role": "derived",
+      "sha256": "66a8c4158aae26dd94dbde7ab6a60c589bbd41573db4044fb8a42b4119f30634"
+    }
+  ],
+  "frozen_inputs": {
+    "request_hash": "33f1178e2b0a5766dc263cfba4eb2958473e17536229910b64dd52ca1fff7c51",
+    "spec_hash": "30ccfbc1adc0aad6c2f012fba0c11eb4d70f7f932951a652a6e32860550b261d",
+    "prereg_hash": "5ffd2f5184cdeb25ab2723f02910607c6ee4c1f5bf252418c6ca84640950e5eb"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35290617719",
+    "handoff_hash": "fd386e76a3187d812f19dda54a4f4a7b4ebfb3a422ac2f925ebefb0a60e49a83"
+  },
+  "reproduction_instructions": "python3 research/experiments/EXP-PRODUCT-35330741529/run_experiment.py"
+}

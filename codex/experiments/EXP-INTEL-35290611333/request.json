@@ -1,0 +1,20 @@
+{
+  "base_sha": "b8fd66a0876b1204973006c180e48571b72b8481",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T00:18:29.422346+00:00",
+  "experiment_id": "EXP-INTEL-35290611333",
+  "inherited_last_verdict": "SURVIVES",
+  "inherited_next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 \u2014 and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "lane": "intel",
+  "origin_github_run_id": "35290611333",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35280397316",
+    "path": "research/experiments/EXP-INTEL-35280397316/handoff.json",
+    "sha256": "4b42eb264368c3df834c744624581294389d424f62ccb6f53f49be0aee1866e7"
+  },
+  "reason": "pulse",
+  "request_hash": "05a821b77d08cc8ae5e3aee9bdb47f8b28bdb016ec757dad8c7a8da7ac8448fe",
+  "request_id": "f6a765b5ba68a6aa59dbe51a",
+  "schema_version": 1
+}

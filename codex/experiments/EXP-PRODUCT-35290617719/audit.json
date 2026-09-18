@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35290617719",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace synthetic hardcoded TASK_CORPUS (32 tasks in run_experiment.py) with mechanism definitions from existing SPIDER registry/task corpus as required by spec.json measurement_validity[0] and prereg.md Data Sources; current data_sources.task_corpus is synthetic/representative, not registry-derived, so the tested population does not match the frozen claim about 'existing SPIDER task corpus'",
+    "Replace heuristic infer_parameterized_url() regex induction with the actual kernel distill_parameterized() / _extract_varying_values() pipeline or justify equivalence; current heuristic is not the product mechanism under test and contains a stale-index bug producing malformed templates (e.g., https://pm.example.com/orgs/${item_0}/project${item_1}00 instead of .../projects/${item_1}) that invalidates token counts for 2 of 25 parameterized mechanisms",
+    "Repair C5 NULL-NO-SHARING control: current run_experiment.py lines 695-698 computes null_ratio as self-ratio (search_param_tokens/search_param_tokens) and hardcodes c5_pass=True. Must compute true isolated null ratio = sum(search_param_tokens)/sum(search_literal_tokens) and test against frozen expected_behavior 'Deduplication ratio approximately 1.0'. True ratio is 104/83=1.253, not ~1.0, so C5 as specified fails and indicates per-unique-pattern token penalty, not neutrality",
+    "Repair C4 POS-CONTROL-TASK-SHARING to test binding correctness, not just count collapse; collapsing GET /posts/{id} 5->1 is necessary but not sufficient — must verify that bound_action for each of the 5 concrete IDs resolves correctly via kernel _bind()/_template_slots() rather than counting pattern keys",
+    "Fix alphanum regex coverage for single-letter prefix IDs: pattern [A-Z]{2,}-[A-Za-z0-9]{2,} misses /users/u-aaa type IDs (1-char prefix), leaving 5 admin-view-user mechanisms unparameterized. Expanding to detect this class changes param count from 25 to 21 and param tokens from 679 to ~599-601, materially changing deduplication ratio from 0.8584 to ~0.757 and net savings from 112 to ~192 tokens. Decision depends on which induction is product-representative",
+    "Add end-to-end cost measurement or explicitly bound claim to storage-token cost only: current token_costs measure JSON-serialized action_template storage (sum of unique mechanism tokens). Spec product_consequence requires evidence for amortized retrieval/verification/repair offset, but provenance.json confirms 'no browser/model/network calls' and validity_notes admit retrieval cost not measured. Token savings at rest do not imply amortized workflow savings"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_synthetic_corpus_violates_frozen_validity",
+      "severity": "high",
+      "finding": "spec.json measurement_validity[0] and prereg.md require mechanisms from existing SPIDER registry/task corpus (not synthetic). Producer uses hardcoded synthetic TASK_CORPUS (32 tasks across 6 domains) in run_experiment.py and records provenance.json data_sources.registry='in-memory (no persistent registry files)' and task_corpus='synthetic/representative'. This is a direct violation of the frozen measurement_validity contract, limiting external validity to a synthetic population",
+      "evidence_ref": "spec.json:measurement_validity[0]; prereg.md:Method/Data Sources; provenance.json:data_sources; run_experiment.py:TASK_CORPUS"
+    },
+    {
+      "id": "V2_heuristic_not_kernel",
+      "severity": "high",
+      "finding": "Parameter induction uses heuristic regex (infer_parameterized_url + build_action_template_full) not the kernel distill_parameterized(). Producer validity_notes and provenance reproducibility_notes acknowledge this. Token overhead and sharing counts therefore reflect heuristic design choices (slot naming, numeric/alphanum patterns, query param parameterization) not the shipped product mechanism. Results are hypothesis-generating for deduplication concept, not validation of kernel behavior",
+      "evidence_ref": "run_experiment.py:infer_parameterized_url; provenance.json:reproducibility_notes[3]; result.json:validity_notes[2]"
+    },
+    {
+      "id": "V3_malformed_pm_templates_stale_index_bug",
+      "severity": "medium",
+      "finding": "Heuristic has stale-index bug: loop over alphanum_pattern.finditer(template) while mutating template with stale match.start/end from original string. For /orgs/org-100/projects/proj-200, first replacement shortens string, second replacement uses stale index 45-53 and produces malformed https://pm.example.com/orgs/${item_0}/project${item_1}00 instead of correct .../projects/${item_1}. Token count for this pattern is 30 vs correct 29; POST variant 42 vs 41. Bug affects both pm-view-project patterns (2 tasks sharing) and pm-create-task, but impact on dedup ratio is small (1-2 tokens). Recomputed raw_evidence.json parameterized_mechanisms confirms malformed entries",
+      "evidence_ref": "run_experiment.py:400-405 alphanum loop; raw_evidence.json:parameterized_mechanisms GET:https://pm.example.com/orgs/${item_0}/project${item_1}00 tokens 30"
+    },
+    {
+      "id": "V4_null_control_degenerate_hardcoded",
+      "severity": "high",
+      "finding": "C5 null_control is degenerate. Code computes search_param_tokens correctly but then computes null_ratio as search_param_tokens/search_param_tokens (self-ratio) and sets c5_pass=True unconditionally. True isolated null ratio for the 3 search tasks is (31+42+31)/(26+31+26)=104/83=1.253 (>1.0), indicating a 25.3% token penalty for unique patterns due to ${slot} overhead, contradicting spec expected_behavior 'ratio ~1.0'. Under a correct test, C5 would FAIL, triggering FALSIFIED-IN-SETTING per frozen decision_rule ALL-must-pass, though the failure reflects spec expectation misalignment (unique patterns should show penalty, not neutrality)",
+      "evidence_ref": "run_experiment.py:673-698 C5 block; raw_evidence.json:literal_mechanisms search tokens 26,31,26; parameterized_mechanisms search tokens 31,42,31; result.json:controls.C5_null_control_no_sharing"
+    },
+    {
+      "id": "V5_storage_not_retrieval_cost",
+      "severity": "medium",
+      "finding": "Token costs measure storage of all unique mechanisms (sum over distinct URLs/patterns) via tiktoken cl100k_base on json.dumps(action_template, sort_keys=True). This conflates registry storage with per-query retrieval cost. In practice retrieval fetches only relevant mechanisms, so deduplication benefit depends on retrieval fan-out, not total registry size. Producer validity_notes[4] and prereg.md Scope Limitations acknowledge this, but report.md Product Consequence implies 14.16% savings justifies end-to-end measurement without quantifying retrieval economics. Claim ceiling must be limited to static storage, not amortized workflow",
+      "evidence_ref": "run_experiment.py:count_tokens; raw_evidence.json:token_costs; result.json:validity_notes[4]; report.md:Product Consequence"
+    },
+    {
+      "id": "V6_per_task_penalty_obscured",
+      "severity": "medium",
+      "finding": "Per-task savings (raw_evidence.json per_task_savings) show parameterized costs MORE per task for shared patterns that drive corpus savings: blog-read-post 5 tasks each -15.79% (19->22), pm-view-project -15.38% (26->30). Net corpus savings arise solely from storing pattern once vs N times, not from per-mechanism efficiency. Producer observations[3] note this, but controls C1-C3 report only aggregate savings without disclosing that 5 of 32 tasks pay per-task penalty to achieve corpus reduction. This is not falsification, but weakens product interpretation that deduplication 'offsets per-mechanism penalty' — it amortizes it across copies, at cost of per-task overhead",
+      "evidence_ref": "raw_evidence.json:per_task_savings blog-read-post-1..5, pm-view-project-1..2; result.json:observations[2][3]"
+    },
+    {
+      "id": "V7_admin_underparameterization",
+      "severity": "low",
+      "finding": "Heuristic alphanum pattern requires [A-Z]{2,} before dash, so /users/u-aaa (single-letter prefix) is not recognized as parameterizable. 5 admin-view-user literals remain separate (5*20 tokens) vs correct collapsed form 1*22 tokens (if properly parameterized as /users/${id}). Producer observations[5] notes this as understating deduplication potential. If corrected, param count drops 25->21, param tokens 679->599, dedup ratio 0.8584->0.757, net savings 112->192 (14.16%->24.27%). Direction unchanged, magnitude underestimated. Fix requires decision whether u-aaa class is product-representative",
+      "evidence_ref": "run_experiment.py:alphanum_pattern; raw_evidence.json:parameterized_mechanisms 5x admin/users/u-aaa tokens 20; result.json:observations[5]; recomputed 599 tokens"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_literal_vs_param_not_strong_baseline",
+      "severity": "medium",
+      "finding": "Baselines B-LITERAL-REGISTRY and B-PARAMETERIZED-REGISTRY are simply the two conditions under comparison, not strong alternatives. No competitive baseline such as literal-with-compression, registry-size-only, or retrieval-filtered cost is tested. The only discriminating controls are C4 (positive) and C5 (null), both degenerate as above",
+      "evidence_ref": "spec.json:baselines[0][1]; result.json:controls"
+    },
+    {
+      "id": "B2_null_control_should_be_penalty_baseline",
+      "severity": "medium",
+      "finding": "Null control expectation of ratio ~1.0 is miscalibrated. True baseline for no-sharing should be ratio >1.0 reflecting template overhead (observed 1.253 for search). The experiment therefore lacks a baseline that isolates overhead from deduplication. A proper baseline would measure per-unique-pattern overhead separately from sharing-driven savings, e.g., literal vs param cost for singleton patterns",
+      "evidence_ref": "spec.json:null_control expected_behavior; raw_evidence.json search tokens"
+    },
+    {
+      "id": "B3_no_retrieval_verification_baseline",
+      "severity": "high",
+      "finding": "No baseline for retrieval efficiency, verification or repair cost — the exact costs invoked in spec product_consequence_positive ('real agent infrastructure') and C-PRODUCT-ECON definition ('after retrieval, verification and maintenance'). Static token storage cannot discriminate whether fewer mechanisms actually reduce end-to-end cost. Parent handoff unknown explicitly lists this as unmeasured",
+      "evidence_ref": "spec.json:product_consequence_positive; provenance.json:data_sources; codex/claim_state.json:C-PRODUCT-ECON HYPOTHESIS"
+    }
+  ],
+  "recomputed_metrics": {
+    "literal_mechanism_count": {
+      "producer": 32,
+      "recomputed": 32,
+      "match": true,
+      "evidence_ref": "raw_evidence.json:corpus_summary.total_literal_mechanisms; run_experiment.py literal_mechanisms dict size"
+    },
+    "parameterized_mechanism_count_reported": {
+      "producer": 25,
+      "recomputed": 25,
+      "match": true,
+      "note": "Matches heuristic as implemented; corrected to 21 if admin u-aaa class parameterized and pm bug fixed",
+      "corrected_if_admin_collapsed": 21,
+      "evidence_ref": "raw_evidence.json:corpus_summary.total_param_mechanisms"
+    },
+    "literal_total_tokens": {
+      "producer": 791,
+      "recomputed": 791,
+      "match": true,
+      "method": "tiktoken cl100k_base on json.dumps(action_template, sort_keys=True); sum of literal_mechanisms tokens 19+19+19+19+19+17+34+... verified",
+      "evidence_ref": "raw_evidence.json:token_costs.literal_total_tokens; raw_evidence.json:literal_mechanisms sum"
+    },
+    "parameterized_total_tokens_reported": {
+      "producer": 679,
+      "recomputed": 679,
+      "match": true,
+      "method": "tiktoken cl100k_base; sum of parameterized_mechanisms tokens verified 22+17+35+22+37+37+36+17+20*5+17+35+30+24+42+31+42+31+34+34+18+18",
+      "corrected_if_bugs_fixed": 599,
+      "note": "679 verified as implemented; 599 if admin collapsed (679-78) and pm templates corrected (-2), dedup ratio 0.757",
+      "evidence_ref": "raw_evidence.json:token_costs.param_total_tokens"
+    },
+    "net_savings_tokens": {
+      "producer": 112,
+      "recomputed": 112,
+      "match": true,
+      "corrected": 192,
+      "evidence_ref": "raw_evidence.json:token_costs.net_savings_tokens 791-679"
+    },
+    "net_savings_pct": {
+      "producer": 14.16,
+      "recomputed": 14.16,
+      "match": true,
+      "corrected_pct": 24.27,
+      "computation": "112/791=14.16%; corrected 192/791=24.27%",
+      "evidence_ref": "raw_evidence.json:token_costs.net_savings_pct"
+    },
+    "deduplication_ratio": {
+      "producer": 0.8584,
+      "recomputed": 0.8584,
+      "match": true,
+      "computation": "679/791=0.858407...",
+      "corrected_ratio": 0.7573,
+      "corrected_computation": "599/791=0.7573",
+      "evidence_ref": "raw_evidence.json:token_costs.deduplication_ratio"
+    },
+    "mechanism_count_reduction_pct": {
+      "producer": 21.88,
+      "recomputed": 21.875,
+      "match": true,
+      "computation": "(32-25)/32=21.875% -> 21.88 rounded",
+      "corrected_pct": 34.375,
+      "corrected_computation": "(32-21)/32=34.38% if admin collapsed",
+      "evidence_ref": "raw_evidence.json:corpus_summary.mechanism_count_reduction_pct"
+    },
+    "sharing_distribution": {
+      "producer": {"1_task": 22, "2_tasks": 1, "3_tasks": 1, "5_tasks": 1},
+      "recomputed": {"1": 22, "2": 1, "3": 1, "5": 1},
+      "match": true,
+      "note": "Key naming differs (producer metrics vs raw sharing_distribution), counts identical: 22 singleton, 1 double, 1 triple, 1 quintuple patterns; only 3 patterns provide dedup benefit",
+      "evidence_ref": "raw_evidence.json:sharing_distribution; result.json:metrics.sharing_distribution"
+    },
+    "null_control_isolated_ratio": {
+      "producer_claim": "~1.0 (pass)",
+      "recomputed": 1.253,
+      "match": false,
+      "computation": "search param tokens 104 / search literal tokens 83 =1.253 (31+42+31)/(26+31+26)",
+      "interpretation": "Indicates 25.3% penalty for unique patterns, not neutrality; C5 as specified fails",
+      "evidence_ref": "raw_evidence.json literal_mechanisms search + parameterized_mechanisms search"
+    },
+    "positive_control_blog_collapse": {
+      "producer": "1 pattern for 5 tasks",
+      "recomputed": 1,
+      "match": true,
+      "pattern": "GET:https://blog.example.com/posts/${id_0}",
+      "evidence_ref": "raw_evidence.json:pattern_sharing GET:https://blog.example.com/posts/${id_0} n_tasks_sharing 5"
+    },
+    "per_task_penalty_shared": {
+      "blog_read_post_penalty_pct": -15.79,
+      "recomputed": -15.789,
+      "match": true,
+      "computation": "(19-22)/19=-15.789%",
+      "evidence_ref": "raw_evidence.json:per_task_savings blog-read-post-1"
+    },
+    "pm_template_token_bug_delta": {
+      "malformed_GET_pm_view": 30,
+      "correct_GET_pm_view": 29,
+      "delta": -1,
+      "malformed_POST_pm_create": 42,
+      "correct_POST_pm_create": 41,
+      "delta2": -1,
+      "evidence_ref": "run_experiment.py alphanum stale-index; tiktoken recount"
+    },
+    "kernel_regression": {
+      "producer": "3/3 passed",
+      "recomputed": null,
+      "note": "Not independently re-executed; producer evidence shows 3/3. Not gating for product decision per spec decision_rule (spec requires C1-C5 only, C7 is extra). Trust but verify via tests/test_kernel.py",
+      "evidence_ref": "raw_evidence.json:regression"
+    }
+  },
+  "claim_ceiling": "REVISE — Arithmetic for static storage deduplication on the as-implemented synthetic 32-task corpus is verified: 25 vs 32 mechanisms (21.9% count reduction), 679 vs 791 tokens (0.8584 dedup ratio, 112 tokens/14.16% savings) via heuristic regex induction and tiktoken cl100k_base. Maximum justified ceiling is NARROW and SYNTHETIC-ONLY: parameterized representation reduces storage-token cost across this specific hardcoded corpus because 3 of 25 patterns are shared (5x, 3x, 2x), amortizing per-task overhead (-15.8% per shared task) via single storage. This does NOT establish: (a) reduction across the existing SPIDER task corpus/registry (not tested, measurement_validity[0] violated); (b) per-mechanism token efficiency (per-task penalty persists); (c) retrieval/verification/repair amortized savings (not measured, provenance no browser/model/network); (d) general sharing frequency in real workflows (only 12% of patterns shared, 88% singleton); (e) production induction quality (heuristic != kernel, plus malformed pm templates and admin under-parameterization). Under a correct null-control test (isolated ratio 1.253, not ~1.0) the frozen ALL-must-pass decision_rule would be FALSIFIED-IN-SETTING on C5, though this reflects a mis-specified null expectation (unique patterns should show penalty). No inference to C-PRODUCT-ECON commercial viability warranted beyond justifying a future end-to-end measurement with real corpus and kernel induction.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35290617719/spec.json:decision_rule ALL C1-C5",
+    "research/experiments/EXP-PRODUCT-35290617719/result.json:metrics literal_mechanism_count 32 param 25 dedup 0.8584 net 112",
+    "research/experiments/EXP-PRODUCT-35290617719/raw_evidence.json:token_costs literal 791 param 679 sharing_distribution pattern_sharing per_task_savings",
+    "research/experiments/EXP-PRODUCT-35290617719/run_experiment.py:TASK_CORPUS infer_parameterized_url build_action_template_full C5 block",
+    "research/experiments/EXP-PRODUCT-35290617719/provenance.json:data_sources synthetic in-memory reproducibility_notes",
+    "research/experiments/EXP-PRODUCT-35290617719/prereg.md:Method Data Sources Decision Rule Scope Limitations",
+    "research/experiments/EXP-PRODUCT-35290617719/report.md:Executive Summary Analysis deduplication equation Implications",
+    "research/experiments/EXP-PRODUCT-35262262156/handoff.json:established/rejected/do_not_assume C-PRODUCT-ECON remains HYPOTHESIS per-mechanism token savings falsified",
+    "codex/claim_state.json:C-PARAM-INHERIT EXPERIMENTAL C-PRODUCT-ECON HYPOTHESIS",
+    "src/spider/kernel.py: not used for induction in this experiment (heuristic gap)"
+  ],
+  "unresolved": [
+    "Whether deduplication holds on the actual SPIDER task corpus/registry (existing mechanisms, not synthetic 32 tasks) with real sharing distribution",
+    "Whether kernel distill_parameterized() induction achieves same or different deduplication ratio and token overhead than heuristic regex (admin u-aaa, cart abc/def, pm org/proj patterns)",
+    "Whether retrieval/verification/repair costs with fewer mechanisms actually reduce end-to-end amortized cost per successful task (C-PRODUCT-ECON commercial viability)",
+    "What sharing frequency threshold makes deduplication breakeven when per-unique-pattern overhead is ~25% (search) and per-shared-task overhead is -15.79% (blog)",
+    "Whether correcting the pm stale-index bug and admin regex changes the product decision threshold (reported 14.16% vs corrected 24.27% savings)",
+    "Whether C5 null expectation should be calibrated to ~1.25 (penalty) rather than ~1.0, and whether decision_rule should be revised to separate overhead from sharing benefit"
+  ]
+}

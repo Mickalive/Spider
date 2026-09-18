@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35308806126",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID: Browser collection on all 3 production SPAs (BBC News, Amazon, Twitter/X) yielded 0 non-leakage transitions due to anti-bot protections. Infrastructure failure, not scientific negative. Positive control (synthetic deterministic SPA) passed (PMI=1.769 bits, p=0.000999), validating PMI pipeline. No evidence accumulated for or against H1 (beyond-Markov I(url_after;action|url_before,H_K3)>0.05 on >=2/3 production SPAs). Claim status remains HYPOTHESIS with parent carry_forward unchanged."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a locally-hosted production-like SPA simulation (>10 URL states, stochastic transitions, history-based routing) serve as an automatable testbed for beyond-Markov URL-level PMI detection, avoiding anti-bot blocking that invalidated this experiment?",
+  "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C3 fails (0/3 SPAs with >=100 NL transitions) and C1/C4 fail (0/3 SPAs with data). This is an infrastructure failure (anti-bot blocking) not a scientific negative. The positive control passes, confirming PMI pipeline correctly detects beyond-Markov structure when present. The experiment adds a critical constraint: automatable testbeds are required to test the frozen question. The dominant unknown from parent handoff persists: whether production SPAs with >10 URL states, stochastic transitions, and history-based routing exhibit beyond-Markov URL-level PMI at K=3.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35308806126/request.json",
+    "research/experiments/EXP-PHYSICS-35308806126/spec.json",
+    "research/experiments/EXP-PHYSICS-35308806126/prereg.md",
+    "research/experiments/EXP-PHYSICS-35308806126/freeze.json",
+    "research/experiments/EXP-PHYSICS-35308806126/result.json",
+    "research/experiments/EXP-PHYSICS-35308806126/report.md",
+    "research/experiments/EXP-PHYSICS-35308806126/provenance.json",
+    "research/experiments/EXP-PHYSICS-35308806126/audit.json",
+    "research/experiments/EXP-PHYSICS-35308806126/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35290611436/handoff.json"
+  ]
+}
