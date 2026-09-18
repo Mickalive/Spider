@@ -1,17 +1,17 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-35389141536",
-  "last_experiment_id": "EXP-PRODUCT-35375591046",
-  "last_verdict": "MEASUREMENT_INVALID \u2014 infrastructure failure: no LLM API keys available in execution environment. 0/32 tasks executed. Frozen decision_rule MEASUREMENT_INVALID clause triggers (32/32 tasks failed, threshold >=5). This is the second consecutive PRODUCT lane experiment with identical infrastructure cause (parent EXP-PRODUCT-35353007958 also MEASUREMENT_INVALID, 0/32). Per packet contract section 9, infrastructure failure is NOT a scientific negative. No evidence was produced or falsified. No new claim-relevant measurement accumulated. The parent analytical ceiling (5.42% token savings on synthetic 32-task corpus, EXP-PRODUCT-35330741529 audit REVISE) remains the most recent valid measurement and is unchanged by this experiment. Producer correctly classified as MEASUREMENT_INVALID with outcome NOT_APPLICABLE; audit independently confirmed (PASS, producer_claim_supported=false, claim_ceiling 'no new evidence').",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-35389141536",
+  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 frozen decision_rule C1-C5 all pass (C1: 32/32 browser measurable >=25, C2: 32/32 verification >0 >=20, C3: browser diff 0.0 <106.7 threshold, C4: param 20123 <= literal 21190, C5: positive control 5/5 HTTP 200). Audit PASS on arithmetic (V1) and genuine measurement (V2), but producer_claim_supported=false because C3 and C4 are tautologically satisfied: browser execution uses identical HTTP actions for LITERAL and PARAMETERIZED by construction (run_experiment.py:401-405 literal_browser_total=param_browser_total=total_browser_ms), so browser cost difference is identically 0.0 and workflow difference identically 1067 tokens (parent arithmetic). Neither criterion can falsify even if browser costs were large. The frozen spec makes this degenerate; the experiment cannot discriminate whether browser costs dominate. Parent token costs remain analytical estimates (completion tokens 2/15/20, C1 success 100% assumed, not measured with real LLM). Verification measured as JSON.parse + status check only (0.026ms/task), not semantic verification. Browser measured via Python requests, not Playwright. Endpoint is jsonplaceholder.typicode.com CDN, not production. Maximum justified claim: browser+verification cost is non-zero (1499 token-equivalents), negligible verification (0.06%), and identical across registry conditions by construction, so arithmetic token savings (1067 tokens, 5.42%) is preserved as a constant offset. No inference justified that 5.42% is economically meaningful in real SPIDER workflows.",
   "continue_immediately": false,
-  "next_question": "Should the product lane (A) configure LLM API access (OPENAI_API_KEY or equivalent) and retry the frozen COLD baseline measurement per spec.json, (B) close token-based inheritance economics entirely given that (i) COLD is analytically 8x cheaper than registry conditions, (ii) the 5.42% margin is thin and based on estimated completion tokens, and (iii) browser/verification costs may dominate token savings, or (C) pivot to measuring browser/verification costs or testing with the real SPIDER registry/task corpus?",
+  "next_question": "Should the product lane (A) provision LLM API credentials (OPENAI_API_KEY or equivalent) and execute the frozen COLD baseline measurement per parent spec.json to resolve the 5.1-5.3x cost advantage with real success rates, (B) close C-PRODUCT-ECON as unmeasurable given persistent infrastructure blockers and thin 5.42% margin on estimated completions, or (C) pivot to measuring end-to-end agent economics (retrieval, ranking, repair, maintenance amortization) on the real SPIDER registry rather than the synthetic 32-task corpus?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-18T22:32:45.055487+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "532076ad384a46e62297df286098ef67bf4e14e28fcb5bcfd280ef16961d13be",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "0e15ffebbefbf27c3a9071b8",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-18T22:39:23.020597+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "6b131e01718a3093b5b9ebf6f69995c9f22a57ffb835a37d81c9de1d627a66e9",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
