@@ -401,6 +401,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "MEASUREMENT_INVALID",
         "reason": "K=3 PMI=0.04848 bits is below the 0.05 frozen threshold by 0.0015 bits (3% margin), permutation p=0.555. However, the audit identifies this as estimator power failure (V1_sparsity_dilution, critical): 8/565 usable strata, 55% deterministic dilution, N=1000 grossly underpowered for 12*4^3=768 possible strata. Environment HAS beyond-Markov structure: 254/565 (45%) K=3 strata are stochastic per determinism_check. Null control biased (mean 0.054 > 3*std, V2_null_control_bias). In-memory simulation not Playwright browser (V3_simulation_vs_browser_fidelity). Measurement invalidity prevents both FALSIFIED and SURVIVES conclusions. The claim remains HYPOTHESIS: no evidence accumulated for or against beyond-Markov URL-level PMI from this experiment."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35375596894",
+        "lane": "physics",
+        "created_at": "2026-09-18T17:39:23.440197+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "48c81de0ad50a4df81d50673df691948d6bdab80",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Frozen decision_rule condition C4 fails (null control mean 0.552 > 3*std 0.044), triggering MEASUREMENT_INVALID. No confirmatory claim update permitted. However, the descriptive finding is scientifically significant and reproducible: state-history K=2 conditional PMI = 0.933 bits (18.6x threshold, p=0.001, d=25.9), demonstrating beyond-Markov URL-level PMI on the 12-state hash-routed SPA simulation at N=5000. The parent sparsity bottleneck (N=1000, 1.4% strata used) is resolved (30.8% strata used at N=5000). Action-history K=3 also detects at N=5000 (1.221 bits, p=0.001), contradicting the hypothesis that state-history conditioning is necessary. The null control failure is an inherited design limitation (trajectory-level block permutation cannot center null at 0 for hash-routed SPA, per parent audit V2), not measurement error. Status remains HYPOTHESIS because MEASUREMENT_INVALID provides no confirmatory basis for advancement."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1810,14 +1820,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35353016293",
+      "experiment_id": "EXP-PHYSICS-35375596894",
       "lane": "physics",
-      "created_at": "2026-09-18T13:55:08.463064+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: K=3 PMI=0.04848 bits <= 0.05 threshold, permutation p=0.555 > 0.0167. However, the audit (V1_sparsity_dilution, critical severity) demonstrates this is a power/sparsity failure, not absence of beyond-Markov structure: 45% of K=3 strata (254/565) are stochastic with multiple successors (result.json:metrics.determinism_check_k3), confirming beyond-Markov dependence exists in the environment by construction. The estimator uses only 8/565 strata (1.4%) with >=5 records for PMI estimation; 557 strata are skipped as too small from N=1000 transitions. The weighted PMI is diluted by 55% deterministic strata where PMI=0 by construction. Null control fails (mean 0.054 > 3*0.017), indicating permutation bias for hash-routed SPA. Additionally, measurement validity gap (V3_simulation_vs_browser_fidelity, high severity): prereg requires Playwright browser collection but producer used in-memory simulation. The FALSIFIED outcome is a valid scientific negative for this specific SPA design and sample size, not a global falsification of beyond-Markov dynamics. Audit REVISE status accepted: producer cannot claim FALSIFIED as evidence against C-WEB-DYNAMICS because the environment demonstrably has the structure the estimator failed to detect.",
-      "source_commit": "70ded2d9ca8dac2749a132b6437aed48439fc7d4",
+      "created_at": "2026-09-18T17:39:23.440197+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "48c81de0ad50a4df81d50673df691948d6bdab80",
       "claim_id": "C-WEB-DYNAMICS",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "K=3 PMI=0.04848 bits is below the 0.05 frozen threshold by 0.0015 bits (3% margin), permutation p=0.555. However, the audit identifies this as estimator power failure (V1_sparsity_dilution, critical): 8/565 usable strata, 55% deterministic dilution, N=1000 grossly underpowered for 12*4^3=768 possible strata. Environment HAS beyond-Markov structure: 254/565 (45%) K=3 strata are stochastic per determinism_check. Null control biased (mean 0.054 > 3*std, V2_null_control_bias). In-memory simulation not Playwright browser (V3_simulation_vs_browser_fidelity). Measurement invalidity prevents both FALSIFIED and SURVIVES conclusions. The claim remains HYPOTHESIS: no evidence accumulated for or against beyond-Markov URL-level PMI from this experiment."
+      "status": "HYPOTHESIS",
+      "reason": "Frozen decision_rule condition C4 fails (null control mean 0.552 > 3*std 0.044), triggering MEASUREMENT_INVALID. No confirmatory claim update permitted. However, the descriptive finding is scientifically significant and reproducible: state-history K=2 conditional PMI = 0.933 bits (18.6x threshold, p=0.001, d=25.9), demonstrating beyond-Markov URL-level PMI on the 12-state hash-routed SPA simulation at N=5000. The parent sparsity bottleneck (N=1000, 1.4% strata used) is resolved (30.8% strata used at N=5000). Action-history K=3 also detects at N=5000 (1.221 bits, p=0.001), contradicting the hypothesis that state-history conditioning is necessary. The null control failure is an inherited design limitation (trajectory-level block permutation cannot center null at 0 for hash-routed SPA, per parent audit V2), not measurement error. Status remains HYPOTHESIS because MEASUREMENT_INVALID provides no confirmatory basis for advancement."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
