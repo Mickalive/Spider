@@ -1,0 +1,20 @@
+{
+  "base_sha": "80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T13:55:08.463064+00:00",
+  "experiment_id": "EXP-PHYSICS-35353016293",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a locally-hosted production-like SPA simulation (>10 URL states, stochastic transitions, history-based routing) serve as an automatable testbed for beyond-Markov URL-level PMI detection, avoiding anti-bot blocking that invalidated this experiment?",
+  "lane": "physics",
+  "origin_github_run_id": "35353016293",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35308806126",
+    "path": "research/experiments/EXP-PHYSICS-35308806126/handoff.json",
+    "sha256": "e33d732263fae685d3ac3f6629f1f87f50f595045a9184b246ccc3021ce23371"
+  },
+  "reason": "pulse",
+  "request_hash": "30a3647a23b6941a49ada74e8d38843a3fac2c60a9a88e0dbae9eb8c7fdb9ad9",
+  "request_id": "e8978c67229c3ee85b007407",
+  "schema_version": 1
+}
