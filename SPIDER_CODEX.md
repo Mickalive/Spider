@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **150**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **151**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -160,6 +160,7 @@ Validated experiments: **150**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35375596894 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `48c81de0ad50` |
 | EXP-PHYSICS-35389142077 | physics | PASS | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `a650cbffad0e` |
 | EXP-RUNTIME-35389142338 | runtime | REVISE | CONSTRAINED — The frozen decision rule SURVIVES_CURRENT_TEST is unsatisfiable by construction: condition (1) requires decompressed discrimination >=0.3 for ALL cells (including NAIVE), while condition (4) requires NAIVE = 0.0. Both cannot be simultaneously satisfied. The producer correctly reports MIXED as the logical response. However, the scientific result is unambiguous: auth-aware caching (URL+Accept-Encoding+Authorization cache key, Cache-Control: private, Vary: Authorization) restores decompressed body-only discrimination to 0.5 across all 9 content conditions (JSON/HTML/XML x 1KB/10KB/100KB), matching parent PASSTHROUGH/RECOMPRESS baseline 0.5. NAIVE caching reproduces parent CACHED falsification at 0.0 exactly, confirming the parent failure was a cache-key semantics artifact. Audit REVISE accepted: the frozen spec contradiction is a design drafting error (condition (1) should apply only to AUTH-AWARE cells), not a measurement failure. All 6 producer controls pass. Audit recomputed metrics match producer exactly. Claim ceiling advanced to include localhost proxy with auth-aware cache configuration. Real CDN infrastructure (Cloudflare/Fastly/Akamai) remains the sole blocker for C-MEAS-VALID product readiness. | C-MEAS-VALID | `5d51a96d9476` |
+| EXP-PRODUCT-35389141536 | product | REVISE | SURVIVES_CURRENT_TEST — frozen decision_rule C1-C5 all pass (C1: 32/32 browser measurable >=25, C2: 32/32 verification >0 >=20, C3: browser diff 0.0 <106.7 threshold, C4: param 20123 <= literal 21190, C5: positive control 5/5 HTTP 200). Audit PASS on arithmetic (V1) and genuine measurement (V2), but producer_claim_supported=false because C3 and C4 are tautologically satisfied: browser execution uses identical HTTP actions for LITERAL and PARAMETERIZED by construction (run_experiment.py:401-405 literal_browser_total=param_browser_total=total_browser_ms), so browser cost difference is identically 0.0 and workflow difference identically 1067 tokens (parent arithmetic). Neither criterion can falsify even if browser costs were large. The frozen spec makes this degenerate; the experiment cannot discriminate whether browser costs dominate. Parent token costs remain analytical estimates (completion tokens 2/15/20, C1 success 100% assumed, not measured with real LLM). Verification measured as JSON.parse + status check only (0.026ms/task), not semantic verification. Browser measured via Python requests, not Playwright. Endpoint is jsonplaceholder.typicode.com CDN, not production. Maximum justified claim: browser+verification cost is non-zero (1499 token-equivalents), negligible verification (0.06%), and identical across registry conditions by construction, so arithmetic token savings (1067 tokens, 5.42%) is preserved as a constant offset. No inference justified that 5.42% is economically meaningful in real SPIDER workflows. | C-PRODUCT-ECON | `ffde2d5b9532` |
 
 ## Latest recorded claim events
 
@@ -172,6 +173,6 @@ These are chronological latest events, not an automatic truth ranking.
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35389142338 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35375591046 | product |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35389141536 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35389142077 | physics |
