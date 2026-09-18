@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35264637598",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix decision-rule gap: frozen spec defines only SURVIVES_REVERSAL_PERSISTS (requires NC2/F3 PASS), FALSIFIED_REVERSAL_ARTIFACT, UNEXPECTED_BOTH_TRUE, MEASUREMENT_INVALID — no handling for MIXED where reversal direction persists (F1 not triggered, F2 not triggered) but quantitative reproduction fails (NC2 FAIL, F3 TRIGGERED). Amend spec to explicitly define MIXED outcome and its claim ceiling before any SURVIVES promotion.",
+    "Fix or justify quantitative reproduction thresholds: NC2/F3 0.05 threshold fails (deviation 0.07) and canonical deviation 0.0424 exceeds parent B1 0.02 threshold despite claimed identical corrected implementation (sorted roles + direct estimator). Either relax thresholds with principled justification (estimator-change tolerance) or align code to parent corrected implementation; current deviation (0.0424 canonical, 0.07 per-task) exceeds frozen tolerances and makes SURVIVES impossible as written.",
+    "Correct M14_def_form_only_ordering matches_parent claim: producer reports M14 [cart,product_listing] matches_parent true, but parent EXP-INTEL-35262261436 M7 is [product_listing,cart,detail] (product_listing top). Independent recompute with producer definitions gives cart>product_listing>detail for DEF-FORM-ONLY, contradicting parent. Freeze exact definition logic (role inclusion sets for DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK) and update M13-M15 matches_parent flags to reflect true correspondence; ordering wording in provenance/spec must match code.",
+    "Align measurement_validity estimator wording: spec claims 'direct 499500-pair estimator' but code implements within-iteration C(3,2)=3 pairs mean across 1000 iterations (provenance notes estimator 'direct 499500-pair (C(7,2)*C(3,2)=63 pairs per iteration)' is inaccurate for 7 tasks/3 definitions). Freeze operational definition (within-iteration definition-pair agreement vs null-ordering-pair agreement) consistently across spec, prereg, provenance and code before full-DOM rerun.",
+    "Document per-task weighted weighting semantics: spec says 'weighted by task density' and provenance says weighted by elements_with_bbox, but code weights as (density * elements_with_bbox/total_weight) normalized within page-type. Freeze explicit formula (weighted average denominator, per-type normalization) and commit canonical analysis script at stable repo path with hash before next frozen rerun."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_CANONICAL_QUANTITATIVE_DRIFT",
+      "severity": "high",
+      "observation": "Canonical per-iteration null mean at seed 42 =0.5697 (mean across 10 seeds 0.5857 SD 0.0123) deviates 0.0424 from parent stored 0.5273 and 0.0584 from parent mean 0.5273, exceeding frozen B1 0.02 threshold. Independent recompute with producer code confirms 0.5697 exactly (both_recipes_results.json seed 42 0.56966). Parent EXP-INTEL-35262261436 with claimed identical fixes (sorted roles + direct within-iteration estimator) gave 0.5273 deviation 0.0002. Drift indicates implementation divergence (definition role sets or estimator) not explained by sorted-role fix alone; C2 direction (FALSE) still reproduced but quantitative provenance fails.",
+      "evidence_refs": ["result.json metrics M1_canonical_null_mean_seed42 value 0.5697 parent_stored 0.5273 deviation 0.0424", "result.json metrics M12_canonical_null_deviation_from_parent exceeds_threshold true", "provenance.json frozen_parameters estimator direct 499500-pair", "research/experiments/EXP-INTEL-35262261436/result.json M1 0.5273", "both_recipes_results.json per_seed 42 canonical_null_mean 0.569666", "/tmp/opencode/run_both_recipes_analysis.py run_null_iteration_canonical"],
+      "producer_interpretation": "Producer notes deviation 0.0424 consistent with estimator change (sampled 10000 vs direct 499500) and still claims C2 FALSE reproduced; reports M12 exceeds_threshold true but treats C2 direction as primary.",
+      "audit_finding": "Direction reproduction (C2 FALSE for all 10 seeds) is robust, but quantitative claim 'within 0.02 of parent' fails, undermining B1 baseline as frozen. Threshold as written is not met; ceiling must note quantitative drift and implementation non-identity."
+    },
+    {
+      "id": "V2_PERTASK_QUANTITATIVE_MISMATCH",
+      "severity": "high",
+      "observation": "Per-task weighted null mean seed42 0.21 (mean across seeds 0.2052 SD 0.0046) deviates 0.07 from parent stored ~0.28, exceeding NC2/F3 0.05 threshold. Recompute confirms 0.21 exactly (both_recipes_results.json 0.21). F3 TRIGGERED, NC2 FAIL. Deviation larger than producer's validity_notes estimate of 0.007 estimator difference, indicating parent stored 0.28 was inflated by buggy implementation (unsorted set + sampled estimator) beyond anticipated tolerance.",
+      "evidence_refs": ["result.json metrics M5_pertask_null_mean_seed42 value 0.21 parent_stored 0.28 deviation 0.07", "result.json controls NC2_pertask_null_reproduction pass false deviation 0.07", "result.json controls F3_pertask_null_deviation triggered true", "both_recipes_results.json per_seed 42 pertask_null_mean 0.21"],
+      "producer_interpretation": "Producer correctly reports NC2 FAIL and F3 TRIGGERED, but still interprets direction (C2 TRUE for all 10 seeds) as evidence reversal persists and is not artifact, treating quantitative mismatch as parent value unreliable not falsification.",
+      "audit_finding": "Directional reversal (per-task C2 TRUE for all 10 seeds, observed 0.333 > null 0.205) is strongly supported and not artifact of old bugs (F1 not triggered). Quantitative parent value ~0.28 is not reproduced; claim ceiling cannot include precise 0.28 estimate. F3 as frozen is correctly triggered but is measurement-threshold artifact, not falsification of robustness (SD 0.0046 <0.05)."
+    },
+    {
+      "id": "V3_ORDERING_MATCH_MISLABEL",
+      "severity": "medium",
+      "observation": "Producer reports M14_def_form_only_ordering [cart,product_listing] matches_parent true, but parent EXP-INTEL-35262261436 M7 is [product_listing,cart,detail] with product_listing top. Independent recompute with producer definitions (a,button,form,input,label,select) gives cart>product_listing>detail for DEF-FORM-ONLY, confirming producer ordering but contradicting parent. M13_def_full_map_ordering [cart,product_listing] does match parent cart>product_listing>detail, M15_isolated [cart,detail] differs from parent cart>product_listing>detail. Overall observed agreement 0.333 (1/3) numerically matches but which pair agrees flips (FULL-MAP==FORM-ONLY now vs FULL-MAP==ISOLATED in parent).",
+      "evidence_refs": ["result.json metrics M14_def_form_only_ordering value [cart,product_listing] matches_parent true", "research/experiments/EXP-INTEL-35262261436/result.json M7_def_form_only_ordering [product_listing,cart,detail]", "independent recompute DEF-FORM-ONLY averages cart 0.00654 > product_listing 0.00577 > detail 0.00513", "result.json metrics M15_isolated_a_link_ordering [cart,detail]"],
+      "producer_interpretation": "Producer treats [cart,product_listing] as matching parent and lists ISOLATED differing as note, without flagging form-only order flip.",
+      "audit_finding": "Ordering evidence is not exactly reproduced as claimed. Does not change observed agreement 0.333 or C2 directions (both null < observed for per-task, > observed for canonical still hold), but undermines PC1 ordering reproduction claim and indicates definition logic drift between parent corrected code and this script."
+    },
+    {
+      "id": "V4_ESTIMATOR_WORDING_INCONSISTENT",
+      "severity": "low",
+      "observation": "Spec measurement_validity and provenance claim 'direct 499500-pair estimator' and 'C(7,2)*C(3,2)=63 pairs per iteration' but code implements within-iteration C(3,2)=3 definition-pair agreement mean across 1000 iterations (compute_pairwise_agreement over 3 definitions). Parent audit V4 same mismatch. Numerical result consistent within experiment but wording inaccurate.",
+      "evidence_refs": ["spec.json measurement_validity[1] direct 499500-pair", "provenance.json frozen_parameters estimator direct 499500-pair (C(7,2)*C(3,2)=63)", "run_both_recipes_analysis.py compute_pairwise_agreement", "research/experiments/EXP-INTEL-35262261436/audit.json V4_ESTIMATOR_WORDING_MISMATCH"],
+      "producer_interpretation": "Producer reports estimator as direct 499500-pair aligned with parent, not noting within-iteration vs null-ordering-pair distinction.",
+      "audit_finding": "No measurement invalidity beyond wording; implementation reproducible (recompute matches). Fix documentation before next frozen spec."
+    },
+    {
+      "id": "V5_TRUNCATED_SCOPE_CORRECTLY_BOUNDED",
+      "severity": "info",
+      "observation": "Producer correctly bounds to truncated-first-20 locatable sample (7 tasks deduped: 3 product_listing, 3 detail, 1 cart; 1 Magento site; elements_with_bbox denominator; 3 definitions with effectively 2 distinct orderings due to menuitem/tab zero counts). Validity_notes and unresolved disclose single-site, cart n=1, 3/5 definitions, and substrate cap. No overgeneralization to full-DOM or cross-site in result.json validity_notes or report.",
+      "evidence_refs": ["result.json validity_notes[0] truncated-first-20 7 tasks 1 Magento site", "result.json validity_notes[1] 3 of 5 definitions", "provenance.json raw_evidence tasks_deduped 7", "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha da30bd05"],
+      "producer_interpretation": "Producer disclosures match parent chain and are accurate.",
+      "audit_finding": "Scope limitation correctly handled; claim ceiling must remain truncated-sample bound. Full-DOM re-run still blocked by runtime locatableSample cap at measure_fullpage_yield.py:89."
+    },
+    {
+      "id": "V6_DECISION_RULE_GAP",
+      "severity": "medium",
+      "observation": "Frozen decision_rule defines SURVIVES_REVERSAL_PERSISTS requires ALL 6 conditions (including NC2/F3 within 0.05), FALSIFIED_REVERSAL_ARTIFACT if F1, UNEXPECTED_BOTH_TRUE, else MEASUREMENT_INVALID if PC1 fails. Observed outcome is MIXED: F1 not triggered (reversal persists, canonical C2 FALSE, per-task C2 TRUE) but NC2 fails and F3 triggered. Rule has no branch for this, so producer reports outcome MIXED and flags gap in observations and unresolved. This matches parent audit pattern of incoherent NC1/F3 thresholds.",
+      "evidence_refs": ["spec.json decision_rule SURVIVES requires ALL 6", "result.json controls F1_triggered false F2 false F3 true NC2 pass false PC1 pass true", "result.json unresolved[0] frozen decision rule gap", "report.md Decision Rule Analysis table NOT TRIGGERED gap"],
+      "producer_interpretation": "Producer correctly identifies gap and reports MIXED, not overstating SURVIVES.",
+      "audit_finding": "Producer does not overclaim; audit confirms gap is genuine spec design failure, not execution failure. Required fix is spec amendment to define MIXED ceiling before any promotion."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_CANONICAL_REGRESSION",
+      "expected_behavior": "Canonical per-iteration null mean within 0.02 of parent 0.5273, C2 FALSE",
+      "observed_behavior": "Canonical null mean seed42 0.5697 deviation 0.0424 >0.02, mean across seeds 0.5857 deviation 0.0584, C2 FALSE for all 10 seeds (direction reproduced) but quantitative within-threshold fails. Recompute confirms 0.5697.",
+      "pass": false,
+      "evidence_refs": ["result.json metrics M1_canonical_null_mean_seed42 0.5697 deviation 0.0424 threshold 0.02 exceeds_threshold true", "result.json metrics M2_canonical_null_mean_across_seeds 0.5857 sd 0.0123", "both_recipes_results.json canonical_mean_of_means 0.58566", "research/experiments/EXP-INTEL-35262261436/result.json M1 0.5273"]
+    },
+    {
+      "id": "B2_PARENT_REVERSAL_DIRECTION",
+      "expected_behavior": "Per-task weighted C2 TRUE persists (reversal genuine) or C2 FALSE (artifact), mean within 0.05 of ~0.28",
+      "observed_behavior": "Per-task weighted C2 TRUE persists for all 10 seeds (observed 0.333 > null 0.205), reversal direction genuine, NOT artifact (F1 not triggered). However null mean 0.21 deviates 0.07 >0.05, so quantitative reproduction fails. SD 0.0046 <0.05 robust.",
+      "pass": false,
+      "evidence_refs": ["result.json metrics M5 0.21 deviation 0.07 threshold 0.05 exceeds true", "result.json metrics M6_pertask_null_mean_across_seeds 0.2052 sd 0.0046", "result.json controls NC2 pass false F1 triggered false", "both_recipes_results.json pertask_mean_of_means 0.20516"]
+    },
+    {
+      "id": "B3_RECIPE_DIVERGENCE_MAGNITUDE",
+      "expected_behavior": "Divergence quantifiable and reproducible across seeds",
+      "observed_behavior": "Divergence 0.3805 (canonical 0.5857 - pertask 0.2052) large, reproducible across 10 seeds (canonical SD 0.0123, pertask SD 0.0046). Recipe choice flips C2 direction (FALSE vs TRUE) at high significance. Recompute confirms 0.3805.",
+      "pass": true,
+      "evidence_refs": ["result.json metrics M9_recipe_divergence 0.3805", "both_recipes_results.json aggregate recipe_divergence 0.3805", "result.json controls PC2_recipe_divergence pass true divergence 0.3805"]
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_canonical_null_mean_seed42": {
+      "producer": 0.5697,
+      "recomputed": 0.5696666666666667,
+      "match": true,
+      "delta": 0.0000333333333333,
+      "method": "Re-executed /tmp/opencode/run_both_recipes_analysis.py seed 42 N=1000 per-iteration p=0.5 sorted roles",
+      "evidence": "both_recipes_results.json per_seed 42 canonical_null_mean 0.569666"
+    },
+    "M2_canonical_null_mean_across_seeds": {
+      "producer": 0.5857,
+      "recomputed": 0.5856666666666667,
+      "match": true,
+      "delta": 0.000033,
+      "evidence": "both_recipes_results.json aggregate canonical_mean_of_means 0.585666"
+    },
+    "M3_canonical_c2_direction": {
+      "producer": false,
+      "recomputed": false,
+      "match": true,
+      "meaning": "C2 FALSE observed 0.333 < null 0.585"
+    },
+    "M4_canonical_c2_per_seed": {
+      "producer": {"42": false, "123": false, "456": false, "789": false, "1000": false, "2000": false, "3000": false, "4000": false, "5000": false, "99999": false},
+      "recomputed": {"42": false, "123": false, "456": false, "789": false, "1000": false, "2000": false, "3000": false, "4000": false, "5000": false, "99999": false},
+      "match": true
+    },
+    "M5_pertask_null_mean_seed42": {
+      "producer": 0.21,
+      "recomputed": 0.21,
+      "match": true,
+      "evidence": "both_recipes_results.json per_seed 42 pertask_null_mean 0.21"
+    },
+    "M6_pertask_null_mean_across_seeds": {
+      "producer": 0.2052,
+      "recomputed": 0.20516666666666666,
+      "match": true,
+      "delta": 0.000033,
+      "evidence": "both_recipes_results.json aggregate pertask_mean_of_means 0.205166"
+    },
+    "M7_pertask_c2_direction": {
+      "producer": true,
+      "recomputed": true,
+      "match": true,
+      "meaning": "C2 TRUE observed 0.333 > null 0.205"
+    },
+    "M8_pertask_c2_per_seed": {
+      "producer": {"42": true, "123": true, "456": true, "789": true, "1000": true, "2000": true, "3000": true, "4000": true, "5000": true, "99999": true},
+      "recomputed": {"42": true, "123": true, "456": true, "789": true, "1000": true, "2000": true, "3000": true, "4000": true, "5000": true, "99999": true},
+      "match": true
+    },
+    "M9_recipe_divergence": {
+      "producer": 0.3805,
+      "recomputed": 0.3805,
+      "match": true,
+      "evidence": "0.585666-0.205166=0.3805"
+    },
+    "M10_observed_agreement": {
+      "producer": 0.3333,
+      "recomputed": 0.3333333333333333,
+      "match": true,
+      "note": "1/3 definition-pairs agree; independent recompute confirms DEF-FULL-MAP (cart,product_listing) DEF-FORM-ONLY (cart,product_listing) ISOLATED (cart,detail)"
+    },
+    "M11_pertask_null_deviation_from_parent": {
+      "producer": 0.07,
+      "recomputed": 0.07,
+      "match": true
+    },
+    "M12_canonical_null_deviation_from_parent": {
+      "producer": 0.0424,
+      "recomputed": 0.04236666666666668,
+      "match": true
+    },
+    "M13_def_full_map_ordering": {
+      "producer": ["cart", "product_listing"],
+      "recomputed": ["cart", "product_listing"],
+      "match": true,
+      "top2": true
+    },
+    "M14_def_form_only_ordering": {
+      "producer": ["cart", "product_listing"],
+      "recomputed": ["cart", "product_listing"],
+      "match": true,
+      "note": "Recompute matches producer but NOT parent product_listing>cart; mislabeled matches_parent"
+    },
+    "M15_isolated_a_link_ordering": {
+      "producer": ["cart", "detail"],
+      "recomputed": ["cart", "detail"],
+      "match": true
+    },
+    "PC1_canonical_c2_false": {
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "match": true
+    },
+    "PC2_recipe_divergence": {
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "match": true
+    },
+    "NC2_pertask_null_reproduction": {
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "match": true
+    },
+    "F1_pertask_c2_direction": {
+      "producer_triggered": false,
+      "recomputed_triggered": false,
+      "match": true
+    },
+    "F2_canonical_c2_direction": {
+      "producer_triggered": false,
+      "recomputed_triggered": false,
+      "match": true
+    },
+    "F3_pertask_null_deviation": {
+      "producer_triggered": true,
+      "recomputed_triggered": true,
+      "match": true
+    }
+  },
+  "claim_ceiling": "MIXED — Directional reversal survives corrected implementation: per-task weighted C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) — recipe choice flips C2 (divergence 0.38) — so reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). Quantitative SURVIVES_REVERSAL_PERSISTS as frozen (within 0.05 of parent 0.28 and within 0.02 of parent 0.5273) is NOT supported: canonical 0.0424 and per-task 0.07 exceed thresholds; parent stored means unreliable. Ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 product_listing/3 detail/1 cart, 1 Magento site), 3 definitions (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK = 2 distinct top2 orderings in this slice), elements_with_bbox denominator, sorted(raw_roles), within-iteration C(3,2) agreement mean, frozen seeds [42,123,456,789,1000,2000,3000,4000,5000,99999] N=1000/seed. Does NOT establish full-DOM ordering, cross-site invariance, 5-definition family agreement, elements_with_bbox vs locatable denominator invariance, or broader C-MEAS-VALID status. Full-DOM re-run still blocked by runtime locatableSample cap at measure_fullpage_yield.py:89.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35264637598/request.json (parent_handoff EXP-INTEL-35262261436)",
+    "research/experiments/EXP-INTEL-35264637598/spec.json (frozen decision_rule SURVIVES requires NC2/F3 within 0.05, measurement_validity sorted roles + direct estimator)",
+    "research/experiments/EXP-INTEL-35264637598/prereg.md (F1-F3, PC1-PC2, NC1-NC2, B1-B3, report design)",
+    "research/experiments/EXP-INTEL-35264637598/freeze.json (hashes prereg c8d40879 spec f404ab45)",
+    "research/experiments/EXP-INTEL-35264637598/result.json (metrics M1-M15, controls PC1/PC2/NC1/NC2/F1-F3, observations, validity_notes, unresolved)",
+    "research/experiments/EXP-INTEL-35264637598/report.md (MIXED outcome, decision-rule gap table)",
+    "research/experiments/EXP-INTEL-35264637598/provenance.json (frozen_parameters seeds, estimator, raw sha da30bd05, code /tmp/opencode/run_both_recipes_analysis.py sha 28d84227)",
+    "/tmp/opencode/run_both_recipes_analysis.py (534 lines, sorted roles, canonical + per-task weighted, within-iteration agreement)",
+    "/tmp/opencode/both_recipes_results.json (seed_means canonical 0.5696-0.6166, pertask 0.196-0.211, aggregate means 0.5856/0.2051, recompute source)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, 7 tasks deduped)",
+    "research/experiments/EXP-INTEL-35262261436/result.json (M1 0.5273 canonical mean) and handoff.json (SURVIVES_CURRENT_TEST, recipe-conditional ceiling)",
+    "research/experiments/EXP-INTEL-35262261436/audit.json (PASS, V4 estimator wording, V5 recipe assumption material)",
+    "research/experiments/EXP-INTEL-35209112878/result.json (M17 0.2989 new recipe, M8 0.5275 parent, stored per-task ~0.28)",
+    "independent recompute: python random.Random same seeds reproduces M1 0.56966 M6 0.20516 divergence 0.3805 exactly"
+  ],
+  "unresolved": [
+    "Whether canonical and per-task C2 directions hold on full-DOM enumeration: blocked by substrate cap measure_fullpage_yield.py:89; truncated-first-20 may not represent full-page density distributions — producer unresolved[4] and parent handoff dependency remain.",
+    "Cross-site generalization: all data single Magento site with menuitem/tab zero counts; role additivity for menuitem/tab untestable; cart within-type variance undefined (n=1); product still needs definition-invariant metric.",
+    "Exact quantitative null means under truly identical corrected implementation: parent corrected canonical 0.5273 vs this run 0.5697 suggests definition or estimator implementation drift not fully documented; true cross-environment reproducibility within 0.02 after sorting+estimator fix still unmeasured on same code.",
+    "Per-task weighted formula invariance: whether alternative weighting (e.g., unweighted per-task mean vs bbox-weighted normalized) would shift null mean toward 0.28 or preserve 0.205; spec ambiguity leaves recipe quantitative estimate unstable.",
+    "5-definition family agreement: only 3 of 5 definitions verified; observed 0.333 (1/3) not comparable to parent 0.3 (3/10); full family pairwise 0.3 not re-measured with same 3-definition basis.",
+    "Spec decision-rule amendment: MIXED ceiling needs formal freezing before DIRECTOR can promote any claim beyond EXPERIMENTAL for C-MEAS-VALID density sub-problem."
+  ]
+}

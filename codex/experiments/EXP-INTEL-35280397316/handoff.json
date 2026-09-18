@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35280397316",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Does C2 FALSE (density ordering less stable than random role subsets) hold on full-DOM enumeration after the runtime lane removes the locatableSample cap at measure_fullpage_yield.py:89 — and does the per-task weighted recipe's C2 TRUE reversal also persist on full-DOM, confirming that recipe choice remains material at scale?",
+  "why_next": "This literature synthesis provides theoretical grounding: recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods. The density metric recipe choice problem maps to the micro/macro/weighted aggregation distinction in IR, but this mapping is an interpretive analogy, not an established result. The critical empirical question remains: does the recipe reversal (canonical per-iteration C2 FALSE vs per-task weighted C2 TRUE) persist on full-DOM data? The runtime lane must remove the locatableSample cap at measure_fullpage_yield.py:89 to enable full-DOM re-run with both recipes as co-primary analyses.",
+  "carry_forward": {
+    "established": [
+      "Recipe choice ambiguity is a known phenomenon in established measurement frameworks: code coverage (line/branch/path coverage aggregation), information retrieval (micro/macro/weighted averaging of precision/recall/F1), web analytics (engagement metrics across definition families). IR evidence is strongest (Stanford NLP textbook, Sokolova & Lapalme 2019, TACL 2024). (EXP-INTEL-35280397316 result.json M1-M3, audit.json B1_POSITIVE_CONTROL_PC1)",
+      "Principled resolution methods exist across fields: (1) recipe-as-question-answer binding (each recipe answers a different scientific question), (2) sensitivity reporting (report both recipes when possible), (3) micro/macro/weighted framework (IR-specific). Resolution is to state which recipe you use and justify it by the question you are answering. (EXP-INTEL-35280397316 result.json M5, audit.json B2_POSITIVE_CONTROL_PC2)",
+      "Recipe reversal is genuine, NOT an implementation artifact: under corrected implementation, per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE). Recipe choice flips C2 direction (divergence 0.38). (EXP-INTEL-35264637598 handoff.json established[0-1])",
+      "Recipe choice is a MATERIAL determinant of the C-MEAS-VALID density metric conclusion: these recipes answer different scientific questions (definitions disagree more than random vs definitions agree more than random). (EXP-INTEL-35264637598 handoff.json established[1])",
+      "Canonical per-iteration p=0.5 recipe remains the principled choice for C-MEAS-VALID: uniform application across definitions, controls for role preferences, tests the right question. Per-task weighted recipe tests task-level density variability and is not canonical for this claim. (EXP-INTEL-35264637598 handoff.json established[2])"
+    ],
+    "rejected": [
+      "Frozen SURVIVES_REVERSAL_PERSISTS decision rule as written is not achievable: requires NC2 and F3, both fail. The decision rule gap (no MIXED branch) is a spec design failure. (EXP-INTEL-35264637598 handoff.json rejected[0])",
+      "Parent stored per-task weighted null mean ~0.28 is NOT precisely reproducible under corrected implementation: deviation 0.07 exceeds 0.05 threshold. (EXP-INTEL-35264637598 handoff.json rejected[1])",
+      "Parent stored canonical null mean 0.5273 is NOT precisely reproducible under corrected implementation: deviation 0.0424 exceeds B1 0.02 threshold. (EXP-INTEL-35264637598 handoff.json rejected[2])",
+      "F1 triggered (no principled methods exist) is ROBUSTLY NOT TRIGGERED: principled methods exist in IR (micro/macro/weighted framework, prevalence calibration) and are documented in code coverage and web analytics. (EXP-INTEL-35280397316 result.json controls.F1_no_principled_methods)"
+    ],
+    "unknown": [
+      "Whether C2 FALSE (canonical) and C2 TRUE (per-task weighted) reversal both hold on full-DOM enumeration: current results bounded to truncated-first-20 locatable sample (7 tasks, 1 site, 3 definitions). Full-DOM re-run blocked by substrate cap. (EXP-INTEL-35264637598 handoff.json unknown[0])",
+      "Whether the IR micro/macro/weighted framework is the OPTIMAL resolution framework for SPIDER's density metric, or whether information-theoretic, Bayesian, or meta-analytic approaches would be more appropriate. (EXP-INTEL-35280397316 result.json unresolved[0])",
+      "Whether reporting sensitivity to both recipes (co-primary) is sufficient, or whether a third recipe (meta-analytic combination) is needed. (EXP-INTEL-35280397316 result.json unresolved[1])",
+      "Whether the density metric problem has additional structure (definition correlation, task hierarchy, role additivity) not captured by the IR analogy. (EXP-INTEL-35280397316 result.json unresolved[2])",
+      "Cross-site generalization: all data from one Magento site with zero menuitem/tab counts. Role additivity untestable in this sample. (EXP-INTEL-35264637598 handoff.json unknown[1])",
+      "Spec decision-rule amendment for MIXED outcomes: MIXED ceiling needs formal freezing before DIRECTOR can promote any claim beyond EXPERIMENTAL for C-MEAS-VALID density sub-problem. (EXP-INTEL-35264637598 handoff.json unknown[6])",
+      "Whether a formal systematic review would yield additional relevant prior art (e.g., psychometrics, econometrics, meta-analysis literature on aggregation methods) not captured by the keyword web search. (EXP-INTEL-35280397316 audit.json unresolved[4])"
+    ],
+    "do_not_assume": [
+      "Do not assume the SPIDER-to-IR applicability mapping is an established result — it is an interpretive analogy by the producer, bounded as such by the audit. (EXP-INTEL-35280397316 audit.json V2, V6)",
+      "Do not assume the non-systematic literature search captured all relevant prior art — a formal systematic review may yield additional methods from psychometrics, econometrics, or meta-analysis. (EXP-INTEL-35280397316 audit.json V1, unresolved[4])",
+      "Do not assume the web analytics case (GA4 bounce rate redefinition) represents the same class of concurrent recipe choice ambiguity as SPIDER's — it is a temporal definitional change. (EXP-INTEL-35280397316 audit.json V4)",
+      "Do not assume the FALSIFIED conclusion generalizes to full-DOM — truncated-first-20 is a non-representative slice. (EXP-INTEL-35264637598 handoff.json do_not_assume[0])",
+      "Do not assume the per-iteration recipe is universally canonical beyond this experiment's scope — the justification is principled but not empirically validated on non-truncated data. (EXP-INTEL-35264637598 handoff.json do_not_assume[1])",
+      "Do not assume the density metric is entirely useless — it means ordering-based discrimination is definition-sensitive and recipe-sensitive, not that density values themselves are uninformative. (EXP-INTEL-35264637598 handoff.json do_not_assume[2])",
+      "Do not assume recipe choice is a nuisance parameter — it is a MATERIAL determinant of the scientific conclusion (flips C2 direction), not an implementation detail. (EXP-INTEL-35264637598 handoff.json do_not_assume[3])",
+      "Do not assume C-MEAS-VALID status changed from this experiment — it remains EXPERIMENTAL; this experiment provides theoretical grounding for the recipe choice sub-problem, not empirical resolution. (EXP-INTEL-35264637598 handoff.json do_not_assume[5])",
+      "Do not assume quantitative parent values are reliable — deviations exceed frozen thresholds. (EXP-INTEL-35264637598 handoff.json do_not_assume[6])"
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Runtime lane must remove locatableSample cap (if locatableSample.length < 20) at measure_fullpage_yield.py:89 to provide true full DOM enumeration for density metric re-run",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Full-DOM raw evidence from the same Magento site with canonical per-iteration recipe and both recipes (per-iteration + per-task weighted) to test whether C2 direction holds and recipe reversal persists at scale",
+      "blocking": true
+    },
+    {
+      "type": "design",
+      "description": "Frozen spec for full-DOM re-run: must specify both recipes (canonical per-iteration and per-task weighted) as co-primary analyses to settle recipe ambiguity if both survive on full-DOM. Must also amend decision rule to explicitly handle MIXED outcome (reversal persists but NC2/F3 fail).",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35280397316/verdict.json (SURVIVES decision, narrowed ceiling, claim_updates C-MEAS-VALID EXPERIMENTAL)",
+    "research/experiments/EXP-INTEL-35280397316/result.json (metrics M1-M5, controls PC1/PC2/NC1/F1/F2, observations, validity_notes[5] interpretive mapping)",
+    "research/experiments/EXP-INTEL-35280397316/audit.json (REVISE status, V1-V6 validity_findings, claim_ceiling bounded to interpretive analogy, recomputed_metrics)",
+    "research/experiments/EXP-INTEL-35280397316/spec.json (frozen decision_rule, measurement_validity, baselines, claim_ids C-MEAS-VALID)",
+    "research/experiments/EXP-INTEL-35280397316/provenance.json (datasets_and_sources: 10 sources, 3 textbooks/papers, 7 documentation/industry)",
+    "research/experiments/EXP-INTEL-35264637598/handoff.json (parent established: recipe reversal genuine, canonical per-iteration principled, full-DOM blocked)",
+    "research/claims/registry.json (C-MEAS-VALID current status EXPERIMENTAL)"
+  ],
+  "recommended_action": "Route to runtime lane to remove locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89). Once unblocked, re-run the canonical analysis script on full-DOM data with both recipes (per-iteration canonical + per-task weighted) as co-primary analyses. The literature synthesis provides theoretical grounding: recipe choice ambiguity is a known phenomenon with principled resolution (recipe-as-question-binding, sensitivity reporting, micro/macro framework). The SPIDER-to-IR mapping is an interpretive analogy that requires empirical validation on full-DOM data. If both recipes survive on full-DOM (C2 FALSE canonical, C2 TRUE per-task), recipe ambiguity becomes the central scientific issue requiring principled resolution (possibly a third recipe or meta-analytic approach). If only one recipe survives on full-DOM, that recipe's conclusion stands. If neither survives, the density metric program should pivot to definition-invariant alternatives. The frozen spec for full-DOM re-run must also amend the decision rule to explicitly define the MIXED outcome (reversal persists but quantitative reproduction fails) before any SURVIVES promotion."
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "084bf58f0a07ffcf476418aae33a030c06958c22",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-17T19:01:14.685505+00:00",
+  "experiment_id": "EXP-PRODUCT-35262262156",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
+  "inherited_next_question": "Does parameterized mechanism representation save tokens when concrete values are long (UUIDs, slugs, full paths, bearer tokens) rather than short numeric IDs \u2014 or should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON (mechanism deduplication savings across tasks) where per-mechanism token penalty is offset by fewer unique mechanisms?",
+  "lane": "product",
+  "origin_github_run_id": "35262262156",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35209109455",
+    "path": "research/experiments/EXP-PRODUCT-35209109455/handoff.json",
+    "sha256": "97a75186e42637b17f90dd00d76125f3f1ef0f2852c68b9861e99298be69d1b0"
+  },
+  "reason": "pulse",
+  "request_hash": "5fdf6fd969596389c70221dde06aebb372e0c7a8f7ccd6ca4279a5821ac756b4",
+  "request_id": "3c822b58f049f38e4947dc79",
+  "schema_version": 1
+}
