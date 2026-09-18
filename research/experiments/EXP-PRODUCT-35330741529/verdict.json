@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35330741529",
+  "lane": "product",
+  "decision": "REVISE — frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C1 (100% success for both conditions) is stipulated as an analytical assumption, not measured: no LLM selection or resolution was executed, no binding failures observed (audit V1_C1_SUCCESS_UNMEASURED). The arithmetic portion of the frozen gate passes: C2 param selection tokens 16523 <= literal 19691 (16.09% reduction), C3 param total 18624 <= literal 19691 (5.42% net savings, 1067 tokens), C4 positive control 5 blog-read-post tasks collapse to 1 pattern with correct resolution, C5 null control ratio 1.0185 (1.85% overhead, well within 50% threshold). All arithmetic independently recomputed and verified exactly. However, C1 being an assumption rather than an observation is a measurement validity gap that prevents the frozen gate from passing. Additionally, completion tokens are hard-coded estimates (2 selection, 15 resolution, 20 cold) not measured from real model outputs — with 5.42% margin, modest variation in actual LLM response length could reverse C3 (audit V2_COMPLETION_TOKENS_ESTIMATED). Browser/verification costs omitted per frozen spec §5.1 but claim ceiling in report.md references 'end-to-end workflow savings' (audit V3_BROWSER_VERIFICATION). COLD baseline at 77 tokens/task is 8x cheaper than either registry condition but success rate unmeasured (audit V4_COLD_INVERSION). The producer SUPPORTS outcome is not justified as written because C1 was not measured and C3 margin is narrow under estimated completion tokens. The 5.42% analytical savings on this synthetic corpus is arithmetic-verified and informative but does not establish end-to-end workflow cost reduction.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No advancement from HYPOTHESIS. Frozen gate fails (C1 unmeasured, C2/C3 margin narrow under estimated completions). The 5.42% analytical token saving on synthetic 32-task corpus is arithmetic-verified but is not end-to-end workflow cost — browser/verification omitted, no LLM executed, success assumed. COLD baseline at 77 tokens/task is 8x cheaper than registry conditions, undermining the economic argument for mechanism reuse. Measurement validity violations (synthetic corpus, estimated completions, assumed success) prevent C-PRODUCT-ECON from advancing. Next experiment must measure with real LLM calls and include browser/verification costs."
+    },
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "No change to claim status. This experiment measures deduplication economics, not kernel binding correctness. C-PARAM-INHERIT remains EXPERIMENTAL at committed-code synthetic single-slot ceiling (parent EXP-PRODUCT-35132898840). The deduplication analysis (25 vs 32 mechanisms, 16.09% selection savings, 5.42% net workflow savings on analytical token counting) is a separate question from binding correctness. C-PARAM-INHERIT does not advance or regress from this experiment."
+    }
+  ],
+  "product_action": "No product promotion. The frozen gate fails on C1 (assumed not measured). Do not promote either claim to PRODUCT_CORE. The analytical 5.42% saving on synthetic corpus is informative but not sufficient for product decisions.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the product lane (A) measure end-to-end workflow cost with real LLM selection and resolution calls on the existing synthetic corpus to resolve C1_success and completion_token gaps, (B) retry the deduplication measurement with the actual SPIDER registry/task corpus and kernel distill_parameterized() induction, or (C) close token-based inheritance economics entirely and pivot product lane to alternative mechanisms?",
+  "reason": "The experiment's analytical measurement is arithmetic-verified and informative: 5.42% token savings exist on this synthetic corpus when selection+resolution costs are summed with estimated completions. However, three gaps prevent product conclusions: (1) C1 success was assumed, not measured — no LLM executed; (2) completion tokens are hard-coded estimates, not observed — 5.42% margin is thin; (3) browser/verification costs omitted from a claim about 'end-to-end workflow cost.' The COLD baseline being 8x cheaper than either registry condition is an unresolved economic concern that the producer acknowledges but does not address. The product lane faces a strategic decision: invest in measuring real workflow economics (option A or B) or close token-based inheritance economics (option C) given that the economic advantage of parameterized over literal is modest (5.42%) and does not survive comparison with the no-registry COLD baseline.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35330741529/spec.json decision_rule C1-C5 ALL must pass, measurement_validity[5] success rate",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json metrics literal 19691 param 18624 diff 1067 5.42%, controls ALL pass, validity_notes analytical measurement no LLM executed",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json status REVISE producer_claim_supported false, V1_C1_SUCCESS_UNMEASURED major, V2_COMPLETION_TOKENS_ESTIMATED major, V3_BROWSER_VERIFICATION omitted, V4_COLD_INVERSION 8x cheaper, claim_ceiling analytical synthetic only",
+    "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json corpus_summary 32/25, aggregate_costs literal/param/cold, sharing_analysis, per_task arrays",
+    "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py TASK_CORPUS 32 tasks, infer_parameterized_url regex, hardcoded completions 2/15/20, no model execution",
+    "research/experiments/EXP-PRODUCT-35330741529/provenance.json methodology analytical tiktoken, model_execution none, completion_token_estimates",
+    "research/experiments/EXP-PRODUCT-35290617719/handoff.json parent C-PRODUCT-ECON HYPOTHESIS, dedup arithmetic 14.16% storage savings, null overhead 25.3%, next_question A/B/C",
+    "codex/claim_state.json C-PRODUCT-ECON HYPOTHESIS, C-PARAM-INHERIT EXPERIMENTAL"
+  ]
+}
