@@ -1,17 +1,52 @@
 {
   "experiment_id": "EXP-INTEL-35375593989",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can a density-ratio continuous sensitivity metric (canonical density / weighted density per task-definition pair) replace discrete OECD/COINr dominance as the MIXED outcome decision rule, producing a principled, stable, and informative classification of recipe-sensitive vs recipe-insensitive task-definition pairs?",
+  "hypothesis": "The density ratio R = canonical_density / weighted_density per task-definition pair: (a) varies across task types (not a universal constant), (b) correlates with between-recipe ordering disagreement (higher R => more recipe-sensitive), and (c) provides a more informative MIXED classification than degenerate 0%/100% dominance. The ratio captures the structural regime change (31x cross-recipe gap) as a per-pair continuous sensitivity measure that can be thresholded for MIXED classification.",
+  "falsifier": "The density ratio approach is falsified if ANY of: (F1) The coefficient of variation (CV) of R across all 21 task-definition pairs is < 0.10 (ratio is effectively constant, not task-dependent); (F2) R does not correlate (|Spearman rho| < 0.30) with any measurable ordering-disagreement proxy (e.g., between-recipe ranking distance, canonical density magnitude, or task-type clustering); (F3) No natural threshold separates recipe-sensitive from recipe-insensitive pairs (no gap or bimodality in R distribution); (F4) R is dominated by the denominator (weighted density) alone (|Spearman(R, weighted)| > 0.95 and |Spearman(R, canonical)| < 0.30), meaning the ratio adds no information beyond weighted density alone.",
+  "baselines": [
+    {
+      "id": "B1_DEGENERATE_DOMINANCE",
+      "description": "2-recipe OECD/COINr dominance: all 21 pairs degenerate 0%/100%, zero discrimination. This is the baseline the density ratio must improve upon.",
+      "source": "EXP-INTEL-35353016702 result.json M2, M5; EXP-INTEL-35330747199 result.json OBS-3"
+    },
+    {
+      "id": "B2_LINEAR_MEAN_DEGENERACY",
+      "description": "Meta-analytic mean recipe (canonical+weighted)/2: mean always ranks between originals, 0 non-degenerate dominance, maximally uninformative.",
+      "source": "EXP-INTEL-35353016702 result.json M2, M3, OBS-1"
+    },
+    {
+      "id": "B3_CANONICAL_ONLY_BINARY",
+      "description": "Binary threshold on canonical density alone: if canonical_density < 0.01 flag as MIXED (all 21 pairs would be flagged since canonical mean is 0.005, range 0.0004-0.009). Maximally sensitive but zero specificity.",
+      "source": "Constructed from EXP-INTEL-35353016702 result.json M1 canonical range"
+    },
+    {
+      "id": "B4_WEIGHTED_ONLY_BINARY",
+      "description": "Binary threshold on weighted density alone: flag pairs where weighted_density > some threshold. Does not use the ratio and cannot capture relative recipe sensitivity.",
+      "source": "Constructed"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_KNOWN_REVERSAL_PAIRS",
+    "description": "The 3 task-type groups (listing, detail, cart) are known to show recipe reversal (canonical listing>detail>cart vs weighted cart>listing>detail). The density ratio should differ between these groups if the ratio captures recipe sensitivity.",
+    "expected": "Ratio for cart tasks (where weighted >> canonical) differs from ratio for listing tasks (where weighted > canonical but less extremely). At minimum, the ratio is not identical across all 3 groups."
+  },
+  "null_control": {
+    "id": "NC1_SHUFFLED_RATIO",
+    "description": "When canonical density values are shuffled across task-definition pairs (breaking the task-canonical association), the resulting ratio distribution should lose task-type structure (no clustering by page_type).",
+    "expected": "Real ratio distribution shows task-type clustering (e.g., listing tasks cluster at one ratio range, cart at another). Shuffled ratio distribution shows no task-type clustering (p > 0.05 on clustering test)."
+  },
+  "measurement_validity": [
+    "Density values are reconstructed from existing raw evidence (EXP-INTEL-34782350557 raw_results.json) for 7 tasks x 3 definitions x 2 recipes. No new browser work.",
+    "The density ratio is defined as R(task, def) = canonical_density(task, def) / weighted_density(task, def). Pairs where weighted_density = 0 are excluded (none expected based on parent M1 range).",
+    "Results are bounded to truncated-first-20 locatable_sample (7 tasks, 1 site Magento, 3 definitions). No extrapolation to full-DOM or cross-site.",
+    "All computations are deterministic and reproducible from the raw evidence artifact (sha da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050).",
+    "The ratio metric is a descriptive/operational sensitivity measure, not a causal claim about recipe effects."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_RATIO_VARIATION: The coefficient of variation (CV) of R across all 21 task-definition pairs is >= 0.10. This confirms the ratio varies across tasks (is not a universal constant).\n\nC2_RATIO_CORRELATION: At least one of: (a) |Spearman(R, canonical_density)| >= 0.30, or (b) |Spearman(R, weighted_density)| >= 0.30, or (c) eta-squared(R, page_type) >= 0.20 (task-type explains >=20% of ratio variance). This confirms the ratio captures meaningful structure.\n\nC3_THRESHOLD_EXISTENCE: There exists a threshold T such that pairs with R > T and pairs with R <= T form two groups with distinct page-type composition (Fisher exact test p < 0.10 on listing vs non-listing, or Kruskal-Wallis p < 0.10 on weighted density across ratio groups). This confirms the ratio can classify pairs.\n\nC4_RATIO_ADDS_INFO: The ratio R has |Spearman(R, weighted_density)| < 0.95 OR eta-squared(R, page_type) > eta-squared(weighted_density, page_type). This confirms the ratio is not redundant with weighted density alone.\n\nVERDICT RULES:\n- If C1 AND C2 AND C3 AND C4: SURVIVES_CURRENT_TEST — density ratio is a viable continuous sensitivity metric for MIXED outcome handling. The full-DOM re-run spec can use ratio-based classification.\n- If C1 AND C2 AND NOT C3: MIXED — ratio captures structure but cannot classify pairs into sensitive/insensitive groups. Alternative threshold strategy needed.\n- If C1 AND NOT C2: FALSIFIED-IN-SETTING — ratio varies but does not correlate with task type, recipe sensitivity, or density magnitude. The ratio is noise, not signal.\n- If NOT C1: FALSIFIED-IN-SETTING — ratio is effectively constant (CV < 0.10). The 31x cross-recipe gap is a universal scaling factor, not task-dependent. Density ratio cannot serve as MIXED metric.",
+  "product_consequence_positive": "Product lane gains a continuous MIXED sensitivity metric (density ratio) that replaces degenerate dominance. The ratio can be thresholded to identify recipe-sensitive task-definition pairs, enabling a concrete MIXED decision rule for the full-DOM re-run. The threshold can be calibrated to the observed ratio distribution.",
+  "product_consequence_negative": "If the density ratio is falsified (constant, uncorrelated, or redundant with weighted density), the MIXED outcome program must abandon ratio-based approaches entirely. The remaining options are: (a) non-linear third recipe (DOM hierarchy, semantic weighting), (b) abandon MIXED handling and restrict density metric to recipe-insensitive pairs only, or (c) accept that the density metric's recipe sensitivity is irreducible and cannot be resolved without a fundamentally different metric.",
+  "estimated_cost": "LOW — offline computation on existing reconstructed data (21 density values). No browser/network work. Ratio computation is trivial arithmetic. Statistical tests (Spearman, eta-squared, Fisher exact) are lightweight. Estimated < 1000 LLM tokens.",
+  "expected_information_gain": "HIGH — directly resolves whether the density ratio is a viable MIXED metric or whether the 31x cross-recipe gap is a universal scaling factor. Either outcome changes the MIXED decision rule strategy and determines whether the full-DOM re-run can use ratio-based classification. Information gain is high because the answer is binary (ratio works or it doesn't) and consequential."
 }
