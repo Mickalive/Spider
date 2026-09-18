@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35353016293",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a larger sample (N>=5000) with state-history conditioning (prev states instead of action-history) detect the beyond-Markov PMI signal that this experiment confirmed exists but could not measure, and does Playwright browser automation on the same 12-state SPA yield the same transition distribution as the in-memory simulation?",
+  "why_next": "This experiment confirmed beyond-Markov structure EXISTS in the 12-state SPA (45% stochastic strata, determinism_check_k3: 254/565 stochastic) but the PMI estimator could not detect it above the 0.05 threshold due to critical sparsity (8/565 usable strata at N=1000). Two orthogonal improvements are available: (1) increase N>=5000 to achieve mean >=5 obs/stratum for >50% of K3 strata (audit V1), and (2) condition on state-history instead of action-history (audit V5: action-history is an indirect proxy for state-history; SHA256(prev1:prev2:current:action) dependence is on state pairs, not action sequences). Additionally, Playwright browser automation on spa_server.js remains untested (audit V3: prereg required Playwright but in-memory simulation was used). These three changes (N increase, state-history conditioning, browser validation) are orthogonal and can be tested in a single experiment.",
+  "carry_forward": {
+    "established": [
+      "URL-level PMI (fragment-preserving) reproduces parent signal exactly: unconditional K=0 PMI = 1.441 bits (p=0.001, d=58.5) on 12-state SPA simulation. K=1 conditional PMI = 1.509 bits (p=0.001, d=24.1). Strong state-conditioned predictability confirmed. (result.json:metrics.unconditional_pmi_k0, conditional_pmi_k1; audit.json:B1)",
+      "PMI pipeline correctly detects beyond-Markov structure when present: positive control (8-state deterministic SPA) achieves K3 PMI = 1.769 bits (p=0.001, d=103.2). Pipeline validated across multiple parent experiments. (result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA; audit.json:B2)",
+      "12-state SPA simulation with hash-based SHA256 routing has beyond-Markov structure BY CONSTRUCTION: 254/565 (45%) K=3 strata are stochastic (multiple successors), confirming environment has beyond-Markov dependence. The estimator failed to detect it, not that it does not exist. (result.json:metrics.determinism_check_k3; audit.json:V1)",
+      "Fragment-stripping normalization destroys all state information: normalized PMI = 0.0 bits exactly on TodoMVC. Fragment is sole PMI source for URL-level representation. (parent carry_forward.established; EXP-PHYSICS-35290611436)",
+      "K=3 conditional PMI = 0.0 bits on ALL 5 TodoMVC hash-SPA variants (parent carry_forward.established). TodoMVC's 3-4 state deterministic ceiling trivially satisfies H_K=3 determination. (EXP-PHYSICS-35290611436)"
+    ],
+    "rejected": [
+      "Beyond-Markov URL-level PMI on TodoMVC hash-SPAs: 0/5 variants achieve K3 PMI > 0.05 bits across multiple experiments. (EXP-PHYSICS-35290611436, EXP-PHYSICS-35308806126)",
+      "Title-aware PMI on TodoMVC: 0/5 variants have >=2 unique titles. (EXP-PHYSICS-34266105229, EXP-PHYSICS-35209110569)",
+      "K3 PMI on 12-state SPA via action-history conditioning at N=1000: 0.04848 bits <= 0.05 threshold, estimator sparsity-limited. Falsified FOR this specific estimator/sample/design combination, not for beyond-Markov structure itself. (this experiment)"
+    ],
+    "unknown": [
+      "Whether N>=5000 would give sufficient per-stratum counts (>=5) for >50% of K3 strata and raise K3 PMI above 0.05 threshold. Current N=1000 gives mean 1.77 obs/stratum across 565 strata; 12*4^3=768 possible strata need ~3840-5000 obs for mean 5/stratum. (audit V1)",
+      "Whether state-history conditioning (prev states instead of action-history) reveals stronger beyond-Markov PMI in same environment. SHA256(prev1:prev2:current:action) depends on state pairs; action-history is indirect proxy. (audit V5)",
+      "Whether Playwright browser automation on spa_server.js yields same transition distribution and automatability as in-memory simulation. Prereg required Playwright but was not tested. (audit V3)",
+      "Whether permutation null bias (mean 0.054 > 0) is intrinsic to hash-routed SPA design or artifact of action-history shuffling; trajectory-level block permutation may remove bias. (audit V2)",
+      "Whether production SPAs with >10 states, stochastic transitions, and history-based routing exhibit beyond-Markov URL-level PMI at K=3+. The critical real-world test remains untested due to anti-bot blocking on production SPAs. (parent carry_forward.unknown)",
+      "Whether richer state representations (DOM, accessibility tree, visual layout) on production SPAs reveal beyond-Markov structure invisible at URL level. (parent carry_forward.unknown)"
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is globally false based on this experiment. The environment HAS beyond-Markov structure (45% stochastic strata); the estimator failed to detect it due to sparsity, not structure absence.",
+      "Do not assume the K3 PMI=0.048 is evidence against beyond-Markov dynamics. It is a sparsity-limited estimate from 8/565 strata (1.4%) with no confidence interval, indistinguishable from null bias (mean 0.054).",
+      "Do not assume URL-level PMI is useless for SPA state tracking. Unconditional K=0 PMI (1.44 bits) and K=1 PMI (1.51 bits) are highly significant and detect strong state-conditioned predictability.",
+      "Do not assume the PMI pipeline is broken. Positive control validates it (K3=1.769 bits, p=0.001) on 8-state deterministic SPA with sufficient N=5000.",
+      "Do not generalize this falsification to state-history conditioning, larger N, or production SPAs. Claim ceiling is bounded to action-history PMI on 12-state in-memory hash-routed SPA at N=1000.",
+      "Do not assume the in-memory simulation validated Playwright browser automatability. The automatability pilot (1000 raw transitions) validates Python loop only; Playwright fragment handling, history API, and anti-bot bypass remain untested.",
+      "Do not assume the null control failure (mean 0.054) is evidence of beyond-Markov signal. It is permutation bias for hash-routed SPA where shuffled action history couples to implicit state via SHA256."
+    ]
+  },
+  "dependencies": [
+    "12-state SPA simulation with hash-based routing (spa_server.js, already implemented)",
+    "PMI pipeline with alpha=0 smoothing and state-history conditioning variant (new implementation required)",
+    "Playwright browser collection infrastructure with cookie/session support (spa_server.js intended target)",
+    "N>=5000 transitions to achieve sufficient per-stratum counts for K3 estimation",
+    "Bias-corrected or trajectory-level block permutation test to address null control bias"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35353016293/request.json",
+    "research/experiments/EXP-PHYSICS-35353016293/spec.json",
+    "research/experiments/EXP-PHYSICS-35353016293/result.json",
+    "research/experiments/EXP-PHYSICS-35353016293/audit.json",
+    "research/experiments/EXP-PHYSICS-35353016293/provenance.json",
+    "research/experiments/EXP-PHYSICS-35353016293/raw_transitions.json sha256 29ead5798e2f5c91c9f8046d71eb1882c9eef840bc11905a723ad0fae67523a8",
+    "research/experiments/EXP-PHYSICS-35308806126/handoff.json sha e33d732263fae685d3ac3f6629f1f87f50f595045a9184b246ccc3021ce23371",
+    "codex/claim_state.json:C-WEB-DYNAMICS"
+  ],
+  "recommended_action": "Design a follow-up experiment with THREE orthogonal improvements: (1) Increase N to >=5000 transitions to achieve mean >=5 obs/K3 stratum (audit V1 sparsity fix); (2) Condition PMI on state-history (prev URL states) instead of action-history to directly test SHA256(prev1:prev2) dependence (audit V5 identifiability fix); (3) Validate Playwright browser automation on spa_server.js to confirm automatable testbed (audit V3). If K3 state-history PMI > 0.05 bits with N>=5000 AND Playwright validates, C-WEB-DYNAMICS advances from HYPOTHESIS toward EXPERIMENTAL. If K3 PMI remains <=0.05 even with state-history and N>=5000, the claim ceiling narrows to: URL-level representation cannot detect beyond-Markov dynamics on 12-state hash-routed SPAs regardless of conditioning strategy, and orthogonal detection methods (DOM, accessibility tree, visual) should be explored."
+}
