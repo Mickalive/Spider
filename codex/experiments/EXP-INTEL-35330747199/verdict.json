@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35330747199",
+  "lane": "intel",
+  "decision": "REVISE — Producer's MIXED outcome is not justified per frozen decision_rule. The observed C-pattern (C1 PASS, C2 FAIL, C3 PASS, C4 PASS, C5 PASS) has no frozen bucket: MIXED requires NOT C5 but C5 passes (null_ci_gte_13x true, dominance within 15%). This is a preregistration coverage defect (audit V1_DECISION_RULE_UNCLASSIFIABLE), not a scientific result. Additionally, C2_DOMINANCE_INFORMATIVE is construct-impossible with exactly 2 recipes (all dominance necessarily 0%/100%, audit V2), C3_CI_INFORMATIVE compares rank-width to density-range in incommensurable units (audit V3), C4 chi-square never computed and N=14 vs frozen 21 (audit V4), and C5 null dominance is tautological with 2 recipes (audit V5). The OECD/COINr framework as operationalized is not informative for MIXED outcome handling in the 2-recipe setting. The parent's next question (full-DOM C2 reversal persistence) remains blocked by the runtime locatableSample cap. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "No claim status change warranted. This experiment attempted to operationalize the OECD/COINr sensitivity framework for MIXED outcome handling on truncated-first-20 data but the frozen decision_rule has no bucket for the observed C-pattern (audit V1), the C2 construct is impossible with 2 recipes (audit V2), and the MIXED outcome is not justified. The experiment adds theoretical grounding (OECD framework is designed for 3+ alternatives, 84.7x cross-recipe density ratio confirms structural regime change) but does not provide empirical resolution for C-MEAS-VALID. The blocked full-DOM re-run remains required. Product lane may NOT use this experiment to justify recipe choice."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a third recipe variant (e.g., meta-analytic combination of canonical and weighted, or a new structural recipe) break the 2-recipe dominance degeneracy and make the OECD/COINr framework informative for MIXED outcome handling — and does this reformulated decision rule survive on full-DOM data after the runtime lane removes the locatableSample cap?",
+  "reason": "The frozen decision_rule has a coverage gap: C1=C3=C4=C5 PASS, C2 FAIL (dominance degenerate by construction with 2 recipes) has no bucket. Producer forced MIXED violating NOT C5 clause. The fundamental issue is that OECD/COINr dominance requires 3+ alternatives. Three paths forward: (1) add a third recipe variant to break degeneracy, (2) reformulate C2 for 2-recipe comparisons (density ratio, ranking reversal rate), or (3) await full-DOM data where the recipe choice question may resolve differently. Path (1) is highest-information because it directly tests whether the OECD framework becomes informative with 3+ alternatives. The runtime substrate fix for full-DOM is still required for empirical validation regardless of approach.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35330747199/spec.json (frozen decision_rule with coverage gap)",
+    "research/experiments/EXP-INTEL-35330747199/result.json (metrics M1-M10, outcome MIXED, controls, observations OBS-1..OBS-6, validity_notes VN-1..VN-6)",
+    "research/experiments/EXP-INTEL-35330747199/audit.json (REVISE, V1_V_DECISION_RULE_UNCLASSIFIABLE, V2_V_DOMINANCE_DEGENERACY_BY_CONSTRUCTION, V3_V_CI_WIDTH_UNIT_INCOMPARABILITY, V4_V_CLASSIFICATION_VALIDITY, V5_V_NULL_DOMINANCE_DEGENERATE, V6_V_COINR_FIDELITY, claim_ceiling, recomputed_metrics)",
+    "research/experiments/EXP-INTEL-35330747199/prereg.md (frozen preregistration with conjunctive rule)",
+    "research/experiments/EXP-INTEL-35330747199/provenance.json (ephemeral /tmp paths, upstream evidence)",
+    "research/experiments/EXP-INTEL-35290611333/handoff.json (parent carry_forward, next_question, dependencies)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (source measurement data, locatable_sample capped at 20)"
+  ]
+}
