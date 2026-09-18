@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "lane": "product",
+  "claim_ids": ["C-PRODUCT-ECON", "C-PARAM-INHERIT"],
+  "question": "Does parameterized mechanism deduplication reduce total workflow cost per successful task when selection and resolution are executed with real LLM API calls, resolving the parent's C1_success and completion_token measurement gaps?",
+  "hypothesis": "The deduplicated parameterized registry (25 mechanisms) reduces total workflow cost versus the full literal registry (32 mechanisms) under real LLM execution because: (1) fewer mechanisms to evaluate during selection reduces prompt tokens; (2) real LLM completion tokens for mechanism selection are small (~2 tokens) and do not reverse the 5.42% analytical savings; (3) real LLM resolution of parameterized templates succeeds with low overhead. The parent's analytical estimate of 5.42% net savings survives real execution.",
+  "falsifier": "Total workflow cost for parameterized condition exceeds literal condition under real LLM execution, OR LLM selection accuracy drops below 100% for either condition (mechanism mis-selection), OR real completion tokens for parameterized resolution exceed 15 tokens/task average by enough to reverse the 5.42% margin, OR any task fails end-to-end under either condition.",
+  "baselines": [
+    {
+      "id": "B-LITERAL-EXECUTED",
+      "description": "Full literal registry (32 concrete-URL mechanisms). Real LLM selects from all 32 mechanisms via API call; executes the matched mechanism directly.",
+      "expected_behavior": "LLM evaluates all 32 mechanisms during selection prompt; selection prompt tokens match parent analytical count; completion tokens measured from real model output; no resolution step needed."
+    },
+    {
+      "id": "B-PARAMETERIZED-EXECUTED",
+      "description": "Deduplicated parameterized registry (25 mechanisms with ${slot} templates). Real LLM selects from 25 mechanisms via API call and resolves the matched template via a second API call.",
+      "expected_behavior": "LLM evaluates 25 mechanisms during selection (fewer prompt tokens); resolution call fills slot; total workflow cost = selection prompt + selection completion + resolution prompt + resolution completion."
+    },
+    {
+      "id": "B-COLD-EXECUTED",
+      "description": "No registry. Real LLM generates the correct URL from the task goal without any mechanism guidance via API call.",
+      "expected_behavior": "Single LLM call generates URL from task description only; no selection or resolution overhead; success rate measured (not assumed). COLD provides a lower-bound cost reference."
+    }
+  ],
+  "positive_control": {
+    "id": "POS-CONTROL-SHARED-PATTERN-EXECUTED",
+    "description": "The 5 blog-read-post tasks must select the same parameterized mechanism (GET:https://blog.example.com/posts/${id_0}) under real LLM selection, and resolution must produce correct bound URLs.",
+    "expected_behavior": "All 5 blog-read-post tasks select the same mechanism key in the parameterized condition; resolution calls produce correct bound URLs (posts/101, posts/202, posts/303, posts/404, posts/505); no resolution failures."
+  },
+  "null_control": {
+    "id": "NULL-UNIQUE-PATTERN-EXECUTED",
+    "description": "Tasks with unique patterns (search) should show parameterized total cost within 30% of literal total cost under real LLM execution, even though these tasks gain no sharing benefit.",
+    "expected_behavior": "For unique-pattern tasks (search), parameterized total workflow cost <= 1.3 * literal total workflow cost. Real resolution overhead for unique patterns is bounded."
+  },
+  "measurement_validity": [
+    "Both conditions use the identical 32-task synthetic corpus from parent EXP-PRODUCT-35330741529 (6 domains, 32 tasks)",
+    "All token counts measured from real LLM API calls via tiktoken on actual prompt+completion text, not estimated",
+    "Selection step: single API call with full registry description in system prompt, task description in user prompt; model outputs mechanism key",
+    "Resolution step (parameterized only): single API call with selected template in system prompt, task description in user prompt; model outputs resolved URL",
+    "COLD step: single API call with task description only; model outputs URL",
+    "Success rate measured per-task: mechanism key matches expected key (selection) AND resolved URL matches expected URL (resolution)",
+    "Each task executed independently; no cross-task state contamination",
+    "Temperature 0.0 for deterministic output; API model specified in provenance",
+    "Registry text format identical to parent (numbered list of [METHOD] URL pattern)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) both LITERAL and PARAMETERIZED conditions achieve 100% selection accuracy (correct mechanism key selected for all 32 tasks); (C2) parameterized selection prompt tokens <= literal selection prompt tokens; (C3) total workflow cost (selection prompt + selection completion + resolution prompt + resolution completion) for parameterized <= total workflow cost for literal; (C4) positive control passes (5 blog-read-post tasks resolve to 1 mechanism with correct bound URLs). FALSIFIED if any condition fails. MEASUREMENT_INVALID if API failures prevent completion of >=5 tasks in either condition.",
+  "product_consequence_positive": "If real LLM execution confirms 100% selection accuracy and net workflow savings survive, the 5.42% analytical estimate is validated under real conditions. C-PRODUCT-ECON advances toward VALIDATED. Proceed to option B (real SPIDER corpus) or larger registry testing.",
+  "product_consequence_negative": "If real LLM execution shows selection errors, completion token overrun, or cost inversion, the 5.42% analytical savings do not translate to real workflow economics. C-PRODUCT-ECON status may advance to REJECTED. Product lane pivots to alternative mechanisms (registry compression, retrieval efficiency, orthogonal capabilities).",
+  "estimated_cost": "Moderate — 32 tasks × 3 conditions × (1-2 LLM calls each) ≈ 128-192 API invocations. At ~500 tokens/call average ≈ 64K-96K total tokens. No browser/network execution needed.",
+  "expected_information_gain": "High — directly resolves the parent's two blocking validity gaps (C1_success unmeasured, completion tokens estimated). A positive result validates the 5.42% savings claim and enables progression to real-corpus testing. A negative result closes token-based inheritance economics and redirects the product lane. Both outcomes materially change the C-PRODUCT-ECON claim or product decision."
+}

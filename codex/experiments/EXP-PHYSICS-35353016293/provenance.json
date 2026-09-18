@@ -1,0 +1,71 @@
+{
+  "experiment_id": "EXP-PHYSICS-35353016293",
+  "lane": "physics",
+  "request_hash": "30a3647a23b6941a49ada74e8d38843a3fac2c60a9a88e0dbae9eb8c7fdb9ad9",
+  "freeze_hash_prereg": "2a87e55280cd1b10c786114cea3392c290fabf17f29ed3edaca7cf0ba54f8371",
+  "freeze_hash_request": "0e16309b5476a585f5e8216d8e191469d1382e5816ff9abbb7777d082f7396ae",
+  "freeze_hash_spec": "86d85b6df90b44b6ee7a9f8dd1c5aebb0fa78efc17009fc21c85405d08c6693c",
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-35353016293/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35353016293/spa_server.js",
+    "research/experiments/EXP-PHYSICS-35353016293/collect_data.py"
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "platform": "linux",
+    "node_version": "22.23.2"
+  },
+  "data_sources": [
+    {
+      "type": "in_memory_simulation",
+      "description": "12-state SPA with hash-based routing and stochastic transitions conditioned on previous 2 states (K=2)",
+      "n_states": 12,
+      "n_actions": 4,
+      "n_sessions": 20,
+      "steps_per_session": 50,
+      "total_transitions": 1000,
+      "selection_method": "SHA256(prev1:prev2:current:action) mod 4"
+    }
+  ],
+  "positive_control": {
+    "description": "8-state synthetic deterministic SPA with known beyond-Markov structure",
+    "pmi_k3": 1.769437,
+    "permutation_p": 0.000999,
+    "passes": true
+  },
+  "seeds": {
+    "experiment": 42,
+    "permutations": 1000
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35353016293/raw_transitions.json",
+      "sha256": "29ead5798e2f5c91c9f8046d71eb1882c9eef840bc11905a723ad0fae67523a8",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35353016293/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35353016293/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35353016293/analysis_results.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "execution_mode": "EXECUTE on frozen design",
+  "frozen_inputs_read": [
+    "request.json",
+    "spec.json",
+    "prereg.md",
+    "freeze.json"
+  ],
+  "recorded_at": "2026-09-18T14:10:00.000000+00:00"
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "lane": "product",
+  "created_at": "2026-09-18T13:55:00.615797+00:00",
+  "frozen_at": "2026-09-18T14:00:23.455566+00:00",
+  "executed_at": "2026-09-18T14:30:00.000000+00:00",
+  "base_sha": "80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb",
+  "request_hash": "8a7564a6e7b1c6de52bcd502dd6809bcc0cb682dfc96c5330f679ae0afd3f6d0",
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35330741529",
+    "handoff_sha256": "3876ceb91a77e10e2be1468b9d621f77e1a4eac941de86004794d75b6325015d"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "packages_installed": {
+      "tiktoken": "0.14.0",
+      "openai": "3.15.0"
+    },
+    "api_access": {
+      "available": false,
+      "reason": "No LLM API keys found in environment variables (OPENAI_API_KEY, ANTHROPIC_API_KEY) or configuration files",
+      "required_for": "selection step (LLM selects mechanism from registry) and resolution step (LLM fills parameterized template slots)"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35353007958/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35353007958/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35353007958/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35353007958/freeze.json"
+  },
+  "artifacts_read": [
+    "research/experiments/EXP-PRODUCT-35330741529/result.json",
+    "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json",
+    "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35330741529/handoff.json",
+    "codex/claim_state.json",
+    "codex/index.json",
+    "research/lanes/registry.json"
+  ],
+  "artifacts_produced": [
+    "research/experiments/EXP-PRODUCT-35353007958/result.json",
+    "research/experiments/EXP-PRODUCT-35353007958/report.md",
+    "research/experiments/EXP-PRODUCT-35353007958/provenance.json"
+  ],
+  "measurement_protocol": {
+    "status": "NOT_EXECUTED",
+    "reason": "No LLM API keys available. Experiment requires real LLM API calls for selection and resolution steps.",
+    "attempted_actions": [
+      "Checked environment variables for OPENAI_API_KEY, ANTHROPIC_API_KEY",
+      "Checked .env files and project configuration",
+      "Installed tiktoken and openai packages",
+      "Confirmed no API access available"
+    ],
+    "required_to_unblock": "Configure LLM API key (e.g., export OPENAI_API_KEY=sk-...)"
+  },
+  "claim_ids": ["C-PRODUCT-ECON", "C-PARAM-INHERIT"],
+  "decision_rule_evaluated": false,
+  "evidence_accumulated": false
+}
