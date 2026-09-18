@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-GRAPH-35262262505",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can varying session_status_check intensity (HTTP status code {401, 403, 500}) while keeping session_change=1 for all session_invalidation samples achieve within-condition behavioral variance (std>0) without diluting TP below 0.85, breaking the TP/variance trade-off identified in EXP-GRAPH-35237975537?",
+  "hypothesis": "The TP/variance trade-off in the parent experiment arose because 50/50 coin-flip session validity randomization mixes valid sessions (session_change=0, behavioral=0) under the drift label, creating false negatives. By contrast, keeping session_change=1 for ALL session_invalidation samples (all sessions are invalid) and varying only the session_status_check intensity (randomly choosing HTTP status code from {401, 403, 500} for the /session/status endpoint), behavioral composite gains within-condition variance (session_status_check maps to {1.0, 0.5, 0.75}) while TP remains high because session_change=1 fires for every sample. This preserves detection while enabling a valid pooled orthogonality test.",
+  "falsifier": "The hypothesis is falsified if: (1) C1_drift_tp fails: mean TP rate < 0.85 OR any Wilson lower CI < 0.75; OR (2) C2_variance fails: fewer than 6 of 8 co-occurring conditions have within-condition std > 0 for BOTH behavioral and structural signals; OR (3) C3_orthogonality fails: Pearson |r| >= 0.3 on pooled paired scores OR permutation p >= 0.05; OR (4) C4_null_control fails: FP > 0.0 on noise-only conditions. A valid scientific negative (C1 PASS but |r| >= 0.3) confirms non-orthogonality and pivots to composite multi-signal classifiers.",
+  "baselines": [
+    {
+      "id": "B-PARENT-5050-COIN-FLIP",
+      "description": "Parent EXP-GRAPH-35237975537 used 50/50 coin flip for session validity, achieving C2 variance (8/8 std>0) but failing C1 TP (mean 0.729 < 0.85) because valid sessions produce behavioral=0.",
+      "expected": "New design should achieve C1 TP >= 0.85 while maintaining C2 variance >= 6/8"
+    },
+    {
+      "id": "B-PERMISSION-BOUNDARY-ONLY-R",
+      "description": "Parent permission_boundary-only pooled r=0.051 (n=120, p=0.577), directionally consistent with orthogonality but underpowered. PB conditions always had TP=1.0.",
+      "expected": "New pooled estimate across all 8 conditions should remain low if orthogonality is genuine"
+    },
+    {
+      "id": "B-PARENT-SI-ALWAYS-INVALID",
+      "description": "Grandparent EXP-GRAPH-35191029030 had session_invalidation always-invalid (session_change=1 for all SI samples), achieving TP=1.0 but C2_variance FAIL because behavioral composite was constant (std=0).",
+      "expected": "New design should preserve TP=1.0-like detection while gaining variance via session_status_check intensity variation"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-STATUS-VARIANCE-WITH-DETECTION",
+    "description": "session_invalidation conditions must produce behavioral composite with std>0 (from varying session_status_check across {401, 403, 500}) AND session_change=1 for ALL samples (no false negatives).",
+    "expected": "SI behavioral_std > 0 across 30 samples; SI TP = 1.0 (all 30/30 detected); session_status_check values distributed across {1.0, 0.5, 0.75}"
+  },
+  "null_control": {
+    "id": "NC-SCHEMA-NOISE-ONLY",
+    "description": "Schema noise applied WITHOUT drift should produce FP=0.0 on behavioral signals. Inherited from parent (FP=0.0 on 120 noise-only samples).",
+    "expected": "FP = 0.0 across all noise-only conditions"
+  },
+  "measurement_validity": [
+    "All behavioral signals derived from real HTTP request/response cycles on Flask 3.x + PyJWT HS256 localhost (not analytical computation)",
+    "session_invalidation drift: ALL 30 samples per condition have session invalidation applied (session_change=1 for every sample, no coin flip). Session_status_check varies by randomly choosing /session/status HTTP status code from {401, 403, 500} with equal probability (1/3 each).",
+    "Session_status_check mapping: 401 -> 1.0, 403 -> 0.5, 500 -> 0.75 (all indicate invalid session but at different intensity levels). 200 -> 0.0 reserved for valid sessions (never used in SI conditions).",
+    "Structural signals computed from unauthenticated /schema endpoint (inherited from parent - fixes zero-imputation confound)",
+    "Drift patterns: permission_boundary (write=False, admin=False) and session_invalidation (clear session store + vary /session/status code) - same as parent with SI modification",
+    "Within-condition stochastic variation: random permission subsets for permission_boundary; random /session/status status code from {401, 403, 500} for session_invalidation",
+    "30 independent request sequences per condition with per-seed RNG (SEED=42) for reproducibility",
+    "Pearson r computed on paired per-sample (behavioral_i, structural_i) scores from all 8 co-occurring conditions",
+    "Variance gate: at least 6 of 8 co-occurring conditions must have std>0 for both behavioral and structural signals"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP rate across co-occurring conditions >= 0.85 AND all Wilson lower CI > 0.75; (2) C2_variance: >= 6 of 8 co-occurring conditions have within-condition std > 0 for BOTH behavioral and structural signals; (3) C3_orthogonality: Pearson |r| < 0.3 on pooled paired per-sample scores from ALL co-occurring conditions, AND permutation p < 0.05; (4) C4_null_control: FP rate on noise-only conditions = 0.0. FAIL if any criterion fails. MEASUREMENT_INVALID if fewer than 6 of 8 co-occurring conditions have sufficient within-condition variance (std > 0 for both signals), or if fewer than 240 paired samples are available.",
+  "product_consequence_positive": "If C1-C4 all PASS (TP >= 0.85, variance > 0, |r| < 0.3, FP = 0.0), the TP/variance trade-off is broken. C-FRESHNESS gains a validated second detection channel. The product pipeline can integrate behavioral signals alongside structural signals for composite freshness detection with each channel providing independent information. Architecture: parallel independent channels.",
+  "product_consequence_negative": "If C1 PASS but C3 FAIL (|r| >= 0.3), behavioral and structural signals are confirmed non-orthogonal. The product pipeline must use composite multi-signal classifiers rather than independent parallel channels. Architecture: fused classifier for freshness detection. If C1 FAIL again, the session_status_check intensity variation is insufficient and a fundamentally different variance mechanism is needed.",
+  "estimated_cost": "Low: Flask server reuse from parent. Same 8 co-occurring conditions x 30 samples = 240 paired measurements, plus 4 noise-only x 30 = 120 null control samples (aligned with parent execution). Runtime ~10 minutes.",
+  "expected_information_gain": "High: this is the minimum next step that can change a product decision. The parent measurement was INVALID due to a design flaw (50/50 coin flip diluting TP). This fix tests whether graded session_status_check intensity can achieve variance without TP dilution. If C1-C4 PASS, the product gains a validated second detection dimension. If C1 PASS but C3 FAIL, architecture pivots to fused classifiers. If C1 FAIL again, the entire session_status_check approach is exhausted and a fundamentally different mechanism is needed."
+}
