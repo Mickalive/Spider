@@ -1,17 +1,28 @@
 {
   "experiment_id": "EXP-PHYSICS-35353016293",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can a locally-hosted production-like SPA simulation (>10 URL states, stochastic transitions, history-based routing) serve as an automatable testbed for beyond-Markov URL-level PMI detection, avoiding anti-bot blocking that invalidated this experiment?",
+  "hypothesis": "History-conditioned PMI at K=3 will be >0.05 bits on the SPA simulation because transitions are stochastic and depend on previous states beyond the immediate predecessor, satisfying the beyond-Markov condition where (url_before, H_K=3) does NOT fully determine next state.",
+  "falsifier": "K=3 conditional PMI <= 0.05 bits on the SPA simulation (primary). Secondary: automatability failure (cannot collect >=200 raw transitions in a single session).",
+  "baselines": [
+    "Unconditional PMI K=0 (state-conditioned predictability without history)",
+    "Markov PMI K=1 (first-order history conditioning)",
+    "Positive control: 8-state synthetic deterministic SPA with known beyond-Markov structure (same as parent)",
+    "Null control: within-trajectory shuffled labels (permutation test)"
+  ],
+  "positive_control": "8-state synthetic deterministic SPA with 4 actions and stochastic transitions conditioned on previous 2 states (same as parent positive control). Expected PMI > 0.05 bits at K=3.",
+  "null_control": "Within-trajectory shuffled labels (permutation test) to assess statistical significance. Expected PMI ~0 bits.",
+  "measurement_validity": [
+    "Pilot validation: collect >=200 raw transitions in a single session before freeze.",
+    "Non-leakage filter calibration for production-like SPA (link_click leakage definition may differ from TodoMVC).",
+    "PMI pipeline with alpha=0 smoothing and history-conditioned variant (validated in parent).",
+    "Permutation test with Bonferroni correction for 3 tests (K=0, K=1, K=3).",
+    "SPA simulation must have >10 unique URL states, stochastic transitions, history-based routing."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL: (1) K=3 conditional PMI > 0.05 bits; (2) permutation p < 0.0167 (Bonferroni 3 tests); (3) positive control passes (PMI > 0.05 bits, p < 0.0167); (4) null control passes (mean PMI < 3*std). FALSIFIED-IN-SETTING if K=3 PMI <= 0.05 bits. MEASUREMENT_INVALID if automatability fails (<200 raw transitions) or pipeline failures.",
+  "product_consequence_positive": "C-WEB-DYNAMICS advances from HYPOTHESIS toward EXPERIMENTAL. Locally-hosted SPA simulation validated as automatable testbed for future physics experiments, enabling systematic exploration of beyond-Markov structure on richer state spaces.",
+  "product_consequence_negative": "C-WEB-DYNAMICS claim ceiling narrows further; research program may need to consider orthogonal detection methods (DOM, accessibility tree, visual) or alternative claims.",
+  "estimated_cost": "Low: single local Express.js server, Playwright collection, no external network.",
+  "expected_information_gain": "High: directly tests the critical unknown from parent handoff (whether >10-state stochastic SPA exhibits beyond-Markov PMI) and validates automatable testbed for future experiments."
 }
