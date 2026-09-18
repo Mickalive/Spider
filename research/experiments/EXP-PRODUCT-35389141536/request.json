@@ -1,0 +1,20 @@
+{
+  "base_sha": "857589da859cfcae7e2b0d496d0094e63c45a967",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T20:01:27.216252+00:00",
+  "experiment_id": "EXP-PRODUCT-35389141536",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 infrastructure failure: no LLM API keys available in execution environment. 0/32 tasks executed. Frozen decision_rule MEASUREMENT_INVALID clause triggers (32/32 tasks failed, threshold >=5). This is the second consecutive PRODUCT lane experiment with identical infrastructure cause (parent EXP-PRODUCT-35353007958 also MEASUREMENT_INVALID, 0/32). Per packet contract section 9, infrastructure failure is NOT a scientific negative. No evidence was produced or falsified. No new claim-relevant measurement accumulated. The parent analytical ceiling (5.42% token savings on synthetic 32-task corpus, EXP-PRODUCT-35330741529 audit REVISE) remains the most recent valid measurement and is unchanged by this experiment. Producer correctly classified as MEASUREMENT_INVALID with outcome NOT_APPLICABLE; audit independently confirmed (PASS, producer_claim_supported=false, claim_ceiling 'no new evidence').",
+  "inherited_next_question": "Should the product lane (A) configure LLM API access (OPENAI_API_KEY or equivalent) and retry the frozen COLD baseline measurement per spec.json, (B) close token-based inheritance economics entirely given that (i) COLD is analytically 8x cheaper than registry conditions, (ii) the 5.42% margin is thin and based on estimated completion tokens, and (iii) browser/verification costs may dominate token savings, or (C) pivot to measuring browser/verification costs or testing with the real SPIDER registry/task corpus?",
+  "lane": "product",
+  "origin_github_run_id": "35389141536",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35375591046",
+    "path": "research/experiments/EXP-PRODUCT-35375591046/handoff.json",
+    "sha256": "532076ad384a46e62297df286098ef67bf4e14e28fcb5bcfd280ef16961d13be"
+  },
+  "reason": "pulse",
+  "request_hash": "b8660cad546052741e2c0b1bd052e53eea0ea5414c98778d839568f5b3b52d17",
+  "request_id": "0a9ca44d93666cca38d01f5c",
+  "schema_version": 1
+}
