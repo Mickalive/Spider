@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Within-stratum conditional permutation fails to center null at zero for hash-routed SPA: null_mean=0.417 bits (|0.417| > 0.1 threshold, 4.17x above limit). The frozen decision_rule condition C4 triggers FALSIFIED-IN-SETTING. This is a valid negative on the null-control methodology, not on the beyond-Markov signal (K2 PMI=0.933 bits, p=0.001). The convergence of within-stratum (0.417) and action-shuffle (0.406) null means suggests intrinsic PMI estimator bias floor ~0.41 bits at N=5000 for deterministic/stochastic mixed SPAs. Phase 2 production testing precluded by Phase 1 falsification. Claim ceiling unchanged: HYPOTHESIS pending alternative null framework that centers null at zero."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can alternative null frameworks (model-based parametric bootstrap from estimated P(url_after|stratum), Miller-Madow unbiased PMI estimator, or conditional entropy H(url_after|action,url_before,history) as alternative to PMI) center the null at zero for hash-routed SPAs with deterministic/stochastic strata mixing, resolving the intrinsic ~0.41-bit PMI estimator bias floor that within-stratum permutation cannot eliminate?",
+  "reason": "Frozen decision_rule condition C4 (|null_mean| < 0.1 bits) fails decisively: within-stratum permutation yields null_mean=0.417 bits, 4.17x above threshold. Audit PASS confirms measurement valid, no implementation bug. The 24.4% improvement over block permutation (0.552) is insufficient; bias floor ~0.41 bits persists across within-stratum and action-shuffle methods, suggesting intrinsic PMI estimator bias from deterministic/stochastic strata mixing (31.5% deterministic strata with PMI=0 dilute weighted average). Positive control validates PMI pipeline (K3 PMI=1.671 bits, p=0.001). The 0.933-bit K2 PMI signal remains reproducible but cannot support confirmatory beyond-Markov claim without valid null control. Alternative falsification frameworks are required before production SPA testing is interpretable.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35389142077/spec.json:decision_rule",
+    "research/experiments/EXP-PHYSICS-35389142077/prereg.md:Decision Rule",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.within_stratum_null_mean_k2=0.417454",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.block_permutation_null_mean_k2=0.552119",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.action_shuffle_null_mean_k2=0.406444",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.state_history_pmi_k2.pmi_bits=0.933243",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA.passes=true",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:controls.NULL_CONTROL_WITHIN_STRATUM_PERMUTATION.passes=false",
+    "research/experiments/EXP-PHYSICS-35389142077/audit.json:status=PASS",
+    "research/experiments/EXP-PHYSICS-35389142077/audit.json:claim_ceiling",
+    "research/experiments/EXP-PHYSICS-35389142077/audit.json:recomputed_metrics.null_centering_passes=false",
+    "research/experiments/EXP-PHYSICS-35375596894/handoff.json:carry_forward.established",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ]
+}

@@ -421,6 +421,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "Frozen decision_rule condition C4 fails (null control mean 0.552 > 3*std 0.044), triggering MEASUREMENT_INVALID. No confirmatory claim update permitted. However, the descriptive finding is scientifically significant and reproducible: state-history K=2 conditional PMI = 0.933 bits (18.6x threshold, p=0.001, d=25.9), demonstrating beyond-Markov URL-level PMI on the 12-state hash-routed SPA simulation at N=5000. The parent sparsity bottleneck (N=1000, 1.4% strata used) is resolved (30.8% strata used at N=5000). Action-history K=3 also detects at N=5000 (1.221 bits, p=0.001), contradicting the hypothesis that state-history conditioning is necessary. The null control failure is an inherited design limitation (trajectory-level block permutation cannot center null at 0 for hash-routed SPA, per parent audit V2), not measurement error. Status remains HYPOTHESIS because MEASUREMENT_INVALID provides no confirmatory basis for advancement."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35389142077",
+        "lane": "physics",
+        "created_at": "2026-09-18T20:01:24.825049+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "a650cbffad0eb0c6b6c0b4b510d52730526e422d",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Within-stratum conditional permutation fails to center null at zero for hash-routed SPA: null_mean=0.417 bits (|0.417| > 0.1 threshold, 4.17x above limit). The frozen decision_rule condition C4 triggers FALSIFIED-IN-SETTING. This is a valid negative on the null-control methodology, not on the beyond-Markov signal (K2 PMI=0.933 bits, p=0.001). The convergence of within-stratum (0.417) and action-shuffle (0.406) null means suggests intrinsic PMI estimator bias floor ~0.41 bits at N=5000 for deterministic/stochastic mixed SPAs. Phase 2 production testing precluded by Phase 1 falsification. Claim ceiling unchanged: HYPOTHESIS pending alternative null framework that centers null at zero."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1830,14 +1840,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35375596894",
+      "experiment_id": "EXP-PHYSICS-35389142077",
       "lane": "physics",
-      "created_at": "2026-09-18T17:39:23.440197+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "48c81de0ad50a4df81d50673df691948d6bdab80",
+      "created_at": "2026-09-18T20:01:24.825049+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "a650cbffad0eb0c6b6c0b4b510d52730526e422d",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "Frozen decision_rule condition C4 fails (null control mean 0.552 > 3*std 0.044), triggering MEASUREMENT_INVALID. No confirmatory claim update permitted. However, the descriptive finding is scientifically significant and reproducible: state-history K=2 conditional PMI = 0.933 bits (18.6x threshold, p=0.001, d=25.9), demonstrating beyond-Markov URL-level PMI on the 12-state hash-routed SPA simulation at N=5000. The parent sparsity bottleneck (N=1000, 1.4% strata used) is resolved (30.8% strata used at N=5000). Action-history K=3 also detects at N=5000 (1.221 bits, p=0.001), contradicting the hypothesis that state-history conditioning is necessary. The null control failure is an inherited design limitation (trajectory-level block permutation cannot center null at 0 for hash-routed SPA, per parent audit V2), not measurement error. Status remains HYPOTHESIS because MEASUREMENT_INVALID provides no confirmatory basis for advancement."
+      "reason": "Within-stratum conditional permutation fails to center null at zero for hash-routed SPA: null_mean=0.417 bits (|0.417| > 0.1 threshold, 4.17x above limit). The frozen decision_rule condition C4 triggers FALSIFIED-IN-SETTING. This is a valid negative on the null-control methodology, not on the beyond-Markov signal (K2 PMI=0.933 bits, p=0.001). The convergence of within-stratum (0.417) and action-shuffle (0.406) null means suggests intrinsic PMI estimator bias floor ~0.41 bits at N=5000 for deterministic/stochastic mixed SPAs. Phase 2 production testing precluded by Phase 1 falsification. Claim ceiling unchanged: HYPOTHESIS pending alternative null framework that centers null at zero."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
