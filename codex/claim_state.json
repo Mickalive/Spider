@@ -1837,6 +1837,16 @@
         "reason": "No claim status change warranted. This experiment tested whether a linear meta-analytic mean third recipe breaks OECD/COINr 2-recipe dominance degeneracy. Frozen decision_rule triggers FALSIFIED-IN-SETTING (C1 PASS, C2 FAIL). The mean recipe always ranks between canonical and weighted on all 21 pairs (mathematical identity), producing 0 non-degenerate dominance pairs and 0 ranking changes. Null shuffled mean yields ~2 non-degenerate pairs, confirming the real mean is maximally uninformative. The MIXED outcome decision rule remains unresolved. The density metric's extreme recipe sensitivity (31x gap) makes linear combinations fundamentally unable to break degeneracy. Non-linear third recipes or alternative frameworks (density ratio, ranking reversal rate) remain untested. C-MEAS-VALID is not advanced, not falsified by this experiment \u2014 this is a framework operationalization test, not an empirical measurement validation."
       },
       {
+        "experiment_id": "EXP-INTEL-35375593989",
+        "lane": "intel",
+        "created_at": "2026-09-18T17:39:21.590294+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: with correct task-major ordering, |Spearman(R, canonical)| = 0.23 (p=0.31) and |Spearman(R, weighted)| = 0.21 (p=0.36), both below the 0.30 threshold; eta-squared(R, page_type) = 0.144 < 0.20. C1 passes (CV=0.70 > 0.10). C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The producer's claimed C2 pass was an artifact of definition-major data ordering (all DEF-FULL-MAP first, then all DEF-FORM-ONLY, then all ISOLATED-A-LINK), creating artificial monotonic structure. The density ratio is definition-sensitive (10x gap between DEF-FORM-ONLY and others) but does not significantly correlate with task type or recipe sensitivity in this N=21 sample. NC1 null control also fails: real eta-squared=0.144 vs shuffled mean=0.117, task-type structure not statistically significant (permutation p=0.23). C-MEAS-VALID status updated to REJECTED for the density-ratio MIXED metric approach.",
+        "source_commit": "2d30a999746852de85c2bc6b49378ca47044f9df",
+        "claim_id": "C-MEAS-VALID",
+        "status": "REJECTED",
+        "reason": "Density ratio R = canonical/weighted varies 17x (CV=0.70) but variation is predominantly definition-driven (10x between DEF-FORM-ONLY and DEF-FULL-MAP), not task-type driven (1.78x). The ratio does not significantly correlate with canonical or weighted density after correcting Spearman computation (|rho|\u22480.21\u20130.23, p>0.30), and task-type structure is not statistically significant (eta-squared=0.144 < 0.20 threshold; permutation p=0.23). Frozen decision_rule C2 fails. The density ratio cannot serve as a principled MIXED outcome decision rule for recipe sensitivity in this setting. Claim ceiling bounded to: definition-dependent ratio metric on 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 sample."
+      },
+      {
         "experiment_id": "EXP-RUNTIME-35389142338",
         "lane": "runtime",
         "created_at": "2026-09-18T20:01:26.945146+00:00",
