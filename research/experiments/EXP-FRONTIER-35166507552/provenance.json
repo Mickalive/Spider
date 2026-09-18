@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-FRONTIER-35166507552",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "lane": "frontier",
+  "execution_time_seconds": 58.46,
+  "total_transitions": {
+    "n250": 20000,
+    "n500": 40000,
+    "n1000": 80000
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1",
+    "scipy": "1.16.1"
+  },
+  "frozen_inputs": {
+    "prereg_hash": "c94fbd5309aa3f4966d705c19325b3f6bab07d596ca1116d833058e7af3bbad6",
+    "request_hash": "8404e00d5823b999ba2fb8b91d27cd3c437c0cb1173503bf9ef60721d447edd1",
+    "spec_hash": "113df2c38c8fb9a2304c7d5de70817a6911835603fdce1d0d7647d1e43a6de17"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-34913743596",
+    "parent_handoff_sha256": "27836707c28f5f54763fb28a9a2ba43757591250c51d9fd4a603e7299c2b8dc3"
+  },
+  "key_methodological_change": "KDE observed BC divergence without permutation null, 5 replications, lambda=0 and lambda=1 only, N_PERMS=0 for computational efficiency",
+  "decision_rule_applied": "SURVIVES_CURRENT_TEST if ANY measure (KDE) CV <=0.5 for all 8 types at lambda=1 at any tested sample size, AND positive control passes for that measure",
+  "note": "kNN positive control fails due to raw MI computation artifact; KDE results are primary basis for decision"
+}
