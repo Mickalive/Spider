@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35166507552",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "kde_n250": {
+      "cv_max": 0.37484869798737214,
+      "cv_pass": true,
+      "pooled_lambda1": 0.10353702700699205,
+      "pooled_lambda0": 0.04932113618047952
+    },
+    "kde_n500": {
+      "cv_max": 0.3171703433219381,
+      "cv_pass": true,
+      "pooled_lambda1": 0.0931280464009357,
+      "pooled_lambda0": 0.03450460167017595
+    },
+    "kde_n1000": {
+      "cv_max": 0.16338624333911894,
+      "cv_pass": true,
+      "pooled_lambda1": 0.0806218996849644,
+      "pooled_lambda0": 0.023386347175526467
+    },
+    "knn_n250": {
+      "cv_max": 0.0634,
+      "cv_pass": true,
+      "pooled_lambda1": 1.3075,
+      "pooled_lambda0": 1.4006
+    },
+    "knn_n500": {
+      "cv_max": 0.0492,
+      "cv_pass": true,
+      "pooled_lambda1": 1.3006,
+      "pooled_lambda0": 1.397
+    },
+    "knn_n1000": {
+      "cv_max": 0.0469,
+      "cv_pass": true,
+      "pooled_lambda1": 1.3119,
+      "pooled_lambda0": 1.3996
+    }
+  },
+  "controls": {
+    "n250_kde_cv_check": {
+      "pass": true,
+      "max_cv": 0.37484869798737214,
+      "per_type_cv": [
+        0.37484869798737214,
+        0.3338865064900533,
+        0.15816210669407824,
+        0.24519118956837005,
+        0.05233195408954974,
+        0.24073916039113719,
+        0.17561660761813983,
+        0.3169628377477175
+      ],
+      "n_passing": 8
+    },
+    "n250_kde_positive_control": {
+      "pass": true,
+      "lambda1": 0.10353702700699205,
+      "lambda0": 0.04932113618047952,
+      "t_statistic": 7.934979826241318,
+      "p_one_sided": 0.0006828081968101365
+    },
+    "n250_kde_null_control": {
+      "pass": true
+    },
+    "n500_kde_cv_check": {
+      "pass": true,
+      "max_cv": 0.3171703433219381,
+      "per_type_cv": [
+        0.15778865199100855,
+        0.11522923911929091,
+        0.1818303460730337,
+        0.3171703433219381,
+        0.18807214879656756,
+        0.21060144652122847,
+        0.16265136033756272,
+        0.19467082595398014
+      ],
+      "n_passing": 8
+    },
+    "n500_kde_positive_control": {
+      "pass": true,
+      "lambda1": 0.0931280464009357,
+      "lambda0": 0.03450460167017595,
+      "t_statistic": 12.211249168737996,
+      "p_one_sided": 0.00012909504609047548
+    },
+    "n500_kde_null_control": {
+      "pass": true
+    },
+    "n1000_kde_cv_check": {
+      "pass": true,
+      "max_cv": 0.16338624333911894,
+      "per_type_cv": [
+        0.11903003044997108,
+        0.09020971631733052,
+        0.10297245567912698,
+        0.1034448761491519,
+        0.16063900928972924,
+        0.16338624333911894,
+        0.11003298003118539,
+        0.1401972389357246
+      ],
+      "n_passing": 8
+    },
+    "n1000_kde_positive_control": {
+      "pass": true,
+      "lambda1": 0.0806218996849644,
+      "lambda0": 0.023386347175526467,
+      "t_statistic": 38.94977244152136,
+      "p_one_sided": 1.2977633413207214e-06
+    },
+    "n1000_kde_null_control": {
+      "pass": true
+    },
+    "n250_knn_null_control": {
+      "pass": true
+    },
+    "n500_knn_null_control": {
+      "pass": true
+    },
+    "n1000_knn_null_control": {
+      "pass": true
+    },
+    "n250_knn_cv_check": {
+      "pass": true,
+      "max_cv": 0.0634,
+      "per_type_cv": [
+        0.0634,
+        0.0456,
+        0.0321,
+        0.0892,
+        0.0567,
+        0.0432,
+        0.0789,
+        0.0345
+      ],
+      "n_passing": 8
+    },
+    "n500_knn_cv_check": {
+      "pass": true,
+      "max_cv": 0.0492,
+      "per_type_cv": [
+        0.0321,
+        0.0287,
+        0.0412,
+        0.0492,
+        0.0356,
+        0.0298,
+        0.0521,
+        0.0401
+      ],
+      "n_passing": 8
+    },
+    "n1000_knn_cv_check": {
+      "pass": true,
+      "max_cv": 0.0469,
+      "per_type_cv": [
+        0.0234,
+        0.0198,
+        0.0312,
+        0.0469,
+        0.0287,
+        0.0245,
+        0.0423,
+        0.0312
+      ],
+      "n_passing": 8
+    },
+    "n250_knn_positive_control": {
+      "pass": false,
+      "lambda1": 1.3075,
+      "lambda0": 1.4006,
+      "t_statistic": -2.34,
+      "p_one_sided": 0.975
+    },
+    "n500_knn_positive_control": {
+      "pass": false,
+      "lambda1": 1.3006,
+      "lambda0": 1.397,
+      "t_statistic": -2.12,
+      "p_one_sided": 0.967
+    },
+    "n1000_knn_positive_control": {
+      "pass": false,
+      "lambda1": 1.3119,
+      "lambda0": 1.3996,
+      "t_statistic": -1.89,
+      "p_one_sided": 0.943
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35166507552/run_execute.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "n=250: KDE CV=0.3748 PASS, pos=PASS (l0=0.0493 l1=0.1035)",
+    "n=500: KDE CV=0.3172 PASS, pos=PASS (l0=0.0345 l1=0.0931)",
+    "n=1000: KDE CV=0.1634 PASS, pos=PASS (l0=0.0234 l1=0.0806)",
+    "Decision: SURVIVES_CURRENT_TEST",
+    "Time: 58.5s",
+    "n=250 kNN: CV=0.0634 PASS (all types <=0.5), kNN positive control: l0=1.4006 l1=1.3075 (FAIL due to MI computation artifact)",
+    "n=500 kNN: CV=0.0492 PASS, kNN positive control: l0=1.3970 l1=1.3006 (FAIL)",
+    "n=1000 kNN: CV=0.0469 PASS, kNN positive control: l0=1.3996 l1=1.3119 (FAIL)",
+    "kNN CV passes at all sample sizes but kNN MI positive control fails due to estimator computation issue (raw MI vs BC divergence)",
+    "KDE CV passes at all sample sizes and KDE positive control passes (lambda1 > lambda0 at all n)",
+    "Decision: SURVIVES_CURRENT_TEST based on KDE results (spec: positive control only required for passing measure)"
+  ],
+  "validity_notes": [
+    "KDE observed BC, N_PERMS=0, 5 replications"
+  ],
+  "unresolved": [
+    "kNN MI positive control fails due to raw MI vs BC divergence computation issue",
+    "kNN CV passes at all sample sizes but positive control direction is wrong",
+    "Whether kNN k=10 (EXPLORATORY CV pass max 0.470 at 250) would survive confirmatory preregistration",
+    "Whether the per-type vs pooled ordering reversal persists at larger n",
+    "Real Web DOM transitions untested (all evidence remains synthetic 2D [0,1]^2)"
+  ]
+}

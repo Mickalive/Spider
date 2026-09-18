@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **146**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **147**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -121,6 +121,7 @@ Validated experiments: **146**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35155716123 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `b33a49f8d730` |
 | EXP-GRAPH-35166507358 | graph | FAIL | C4-ORTHOGONALITY-CONFOUNDED | C-FRESHNESS | `b92ea780fafa` |
 | EXP-INTEL-35166505835 | intel | REVISE | DESIGN_PARTIALLY_RESOLVED — the C2 semantic contradiction is correctly diagnosed (falsifier and null_control agree null>=observed is bad; original FALSIFIED 0.5275>0.3 grounds this intent) and a 8-component canonical-script specification is produced. However, the frozen verdict mapping C1 AND C2 -> SURVIVES_CURRENT_TEST remains inverted and unamended (audit V1), the null-model recipe is underspecified to reproducibility (audit V2), the density denominator is ambiguous (audit V3), and the canonical script is a design document not committed executable code. Substrate blocker (locatableSample cap at measure_fullpage_yield.py:89) is confirmed still present. The producer's BLOCKING_REDUCED verdict overstates: at most one blocker is fully verified (substrate still present), design is partially narrowed but not closed, code still absent. | C-MEAS-VALID | `8f0ab2e1591c` |
+| EXP-FRONTIER-35166507552 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `a4de5f75a516` |
 | EXP-PRODUCT-35166508130 | product | REVISE | FALSIFIED-IN-SETTING | C-PARAM-INHERIT, C-PRODUCT-ECON | `d093d4367f8b` |
 | EXP-PHYSICS-35185288822 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `33406e17213e` |
 | EXP-PRODUCT-35185290656 | product | REVISE | SURVIVES_CURRENT_TEST | C-PARAM-INHERIT | `0c62083dcf0d` |

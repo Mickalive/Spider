@@ -343,6 +343,16 @@
         "reason": "Primary measurement (BC PMI = 0.000000 bits at K=3) is mathematically forced because the fully-ambiguous content mapping makes Response_before constant (|R| = 1 unique hash across all states/sessions/steps), so I(S_next; Response_before | ...) = 0 by identity regardless of dynamics. The result is unambiguous but the frozen decision_rule triggers FALSIFIED-IN-SETTING on C2 (BC PMI \u2264 0.05). Auditor correctly identifies the controls as degenerate (perm_std = 0, frozen pass criterion |BC| < 3*std AND std > 0 unsatisfiable). The measurement is valid for the constant-response condition but cannot discriminate partial-state-discrimination from genuine dynamics because it eliminates ALL response variance, not just discriminative variance. The 3-condition ordered sequence (unique 0.493 > many-to-one 0.226 > fully-ambiguous 0.0) demonstrates PMI scales monotonically with content-state discrimination capacity, confirming the parent's 0.226 bits was entirely explained by partial state discrimination (S2 unique hash isolating S2 from {S0,S1}). No evidence accumulated for or against genuine predictive dynamics beyond aliasing on this FSM class. C-WEB-DYNAMICS remains HYPOTHESIS; the locally-hosted hash-constant observation model shows zero predictive information beyond action history."
       },
       {
+        "experiment_id": "EXP-FRONTIER-35166507552",
+        "lane": "frontier",
+        "created_at": "2026-09-17T00:25:52.701887+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "a4de5f75a516c0da50d5a6ef069cbc8dbb3949ea",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status. The experiment is MEASUREMENT_INVALID per frozen decision_rule: (1) pipeline validation at n=250/type fails to replicate parent within 5% tolerance (KDE CV max 0.3748 vs parent 0.5745, 34.8% off; kNN CV max 0.0634 vs parent 0.7550, 91.6% off); (2) kNN positive control fails at all n (pooled lambda1 < lambda0, t=-2.34 to -1.89, p_one_sided 0.943-0.975); (3) null control not measured per spec (N_PERMS=0-5 vs required 200, threshold check not performed); (4) lambda coverage truncated to 2/8 levels. The producer's SURVIVES_CURRENT_TEST decision applies a narrowed decision rule that contradicts the frozen spec (positive control only for passing measure, omitting null-control-at-all-n and either-measure conditions). Under the frozen rule, the packet is MEASUREMENT_INVALID regardless of KDE results. Parent claim ceiling unchanged: per-type CV stability <=0.5 fails for both KDE (max 0.5745) and kNN (max 0.7550) at 250/type (EXP-FRONTIER-34913743596 audit PASS). All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-35185288822",
         "lane": "physics",
         "created_at": "2026-09-17T05:19:47.829838+00:00",
