@@ -1,17 +1,47 @@
 {
   "experiment_id": "EXP-GRAPH-35353011131",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) persist when the mock API introduces genuine stochastic behavior via DB-backed state, cache TTL expiry, timing jitter, mixed JWT algorithms (HS256+RS256), and production-like middleware error modes — or does real-world stochasticity introduce correlation that breaks the parallel-channel product architecture?",
+  "hypothesis": "The parent EXP-GRAPH-35330739886 established near-zero pooled correlation (|r|=0.0335, CI upper 0.123 < delta=0.15) on DETERMINISTIC Flask 3.1.3 + PyJWT HS256 localhost with graded session_status_check. This experiment tests whether the same orthogonality holds when the server introduces four sources of genuine stochasticity absent from the parent: (1) SQLite DB-backed session/permission state with concurrent read/write timing, (2) in-memory cache with TTL-based expiry causing stale/fresh response alternation, (3) response timing jitter from real I/O operations, and (4) mixed JWT algorithms (RS256 for admin endpoints, HS256 for read/write) simulating production middleware diversity. The hypothesis is that |r| remains < 0.15 (shared variance < 2.25%) because behavioral signals (auth/session validation) and structural signals (schema shape from unauthenticated /schema) are causally independent channels — the former measures access control state, the latter measures API contract shape. If |r| rises above 0.15 under stochastic conditions, the signals share hidden common causes (e.g., DB state simultaneously affecting both auth validation and schema generation) and the product must pivot to fused classifiers.",
+  "falsifier": "The hypothesis is falsified if ANY of: (1) C1_drift_tp fails (mean TP < 0.85 OR any Wilson lower CI < 0.75); (2) C2_variance fails (< 6/8 co-occurring conditions with std > 0 for both signals); (3) C3_equivalence fails: 95% CI upper bound on |r| >= 0.15 (i.e., TOST at delta=0.15 does NOT pass AND CI upper bound >= 0.15); (4) C4_null_control fails (FP > 0.0 on noise-only samples). If C1-C2-C4 PASS and C3 fails (CI upper bound >= 0.15), behavioral and structural signals are confirmed non-orthogonal under stochastic conditions and the product architecture must pivot to fused classifiers. If C3 passes at delta=0.15, orthogonality is confirmed under stochastic API conditions and parallel channels are justified.",
+  "baselines": [
+    {
+      "id": "B-PARENT-DETERMINISTIC-N480",
+      "description": "Parent EXP-GRAPH-35330739886 reanalysis: n=480, |r|=0.0335, CI upper 0.123, TOST pass at delta=0.15, on deterministic Flask+HS256 localhost. This experiment uses the same signal computation, decision rule, and sample size but with a materially different server implementation introducing stochastic DB/cache/timing/algorithm variation.",
+      "expected": "Parent result at delta=0.15: CI upper 0.123 < 0.15 (PASS). This experiment tests whether the same bound holds under stochastic conditions."
+    },
+    {
+      "id": "B-STOCHASTIC-FLASK-DB-CACHE",
+      "description": "New server: Flask + SQLite DB + in-memory cache with TTL + timing jitter + mixed JWT algorithms (HS256+RS256). Same 8 co-occurring conditions, same signal computation, same N_SAMPLES=60 per condition.",
+      "expected": "If orthogonality holds: CI upper bound < 0.15, TOST pass at delta=0.15. If stochasticity introduces correlation: CI upper bound >= 0.15."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-TP-VARIANCE-STOCHASTIC",
+    "description": "Verify that the stochastic server still produces detectable drift: mean TP >= 0.85 and all Wilson lower CI > 0.75 across 8 co-occurring conditions. This control verifies that the new server's stochasticity does not break the measurement pipeline's ability to detect behavioral drift.",
+    "expected": "Mean TP >= 0.85, all Wilson lower CI > 0.75"
+  },
+  "null_control": {
+    "id": "NC-FP-STOCHASTIC",
+    "description": "Verify zero false positives on noise-only conditions: FP = 0.0 across all noise-only samples. Noise patterns modify structural signals only; no drift is applied. Behavioral composite should remain 0.0.",
+    "expected": "FP = 0.0"
+  },
+  "measurement_validity": [
+    "New Flask mock server with SQLite DB-backed session/permission state (not in-memory dict), in-memory cache with configurable TTL, response timing jitter from real I/O, and mixed JWT algorithms (HS256 for read/write endpoints, RS256 for admin endpoints)",
+    "Same 8 co-occurring conditions as parent: 2 drift patterns (permission_boundary, session_invalidation) x 4 noise patterns (optional_field_addition, description_change, response_time_jitter, field_type_normalization)",
+    "Same graded session_status_check mapping: 401->1.0, 403->0.5, 500->0.75 (for invalid sessions)",
+    "Same behavioral composite formula: token_val_rate*2 + session_change*3 + auth_boundary*1 + session_status_check*2",
+    "Same structural computation: Jaccard similarity + schema diff magnitude on unauthenticated /schema endpoint",
+    "Same TOST/CI decision rule: 95% CI upper bound on |r| via Fisher z-transform, tested at delta=0.15",
+    "N_SAMPLES=60 per condition, SEED=42, 480 paired samples total",
+    "All behavioral signals derived from real HTTP request/response cycles (not analytical computation)",
+    "Stochastic elements: (1) SQLite DB reads/writes for session/permission state, (2) cache TTL-based stale/fresh alternation, (3) timing jitter from real I/O operations, (4) mixed JWT algorithms (HS256+RS256)",
+    "Controlled differences from parent: parent used deterministic in-memory dict for sessions, no cache, no timing jitter, single JWT algorithm HS256"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP >= 0.85 AND all Wilson lower CI > 0.75; (2) C2_variance: >= 6/8 co-occurring conditions have std > 0 for both behavioral and structural signals; (3) C3_equivalence: 95% CI upper bound on |r| < 0.15 (TOST-equivalent); (4) C4_null_control: FP = 0.0 on noise-only samples. FAIL if any fails. MIXED if C1-C2-C4 PASS and C3 fails only due to underpowering (CI upper 0.10-0.15 range, |r| < 0.15 but CI upper >= 0.15). If CI upper >= 0.20, behavioral and structural signals are non-orthogonal under stochastic conditions and product pivots to fused classifiers.",
+  "product_consequence_positive": "If CI upper bound < 0.15 under stochastic DB/cache/timing/algorithm conditions, C-FRESHNESS orthogonality is confirmed beyond deterministic mocks. Product pipeline integrates behavioral + structural as independent parallel channels with quantified shared-variance ceiling < 2.25% under realistic API conditions. The parallel-channel architecture is justified for production deployment.",
+  "product_consequence_negative": "If CI upper bound >= 0.20, behavioral and structural signals are not practically independent under stochastic API conditions. Product architecture must pivot to fused classifiers. If CI upper bound is 0.15-0.20, the decision depends on product risk tolerance: delta=0.15 acceptable -> parallel channels with monitoring; delta=0.10 required -> fused classifiers or larger n.",
+  "estimated_cost": "Moderate: new mock server implementation with SQLite + cache + mixed JWT algorithms (estimated 400-500 lines Python), 8 conditions x 60 samples = 480 paired HTTP cycles on localhost, ~15-20 minutes execution time. No external API calls or network costs.",
+  "expected_information_gain": "Very High: directly tests whether the delta=0.15 orthogonality bound from the deterministic mock transfers to stochastic API conditions. This is the single highest-upside question for C-FRESHNESS product deployment — a positive result justifies parallel channels; a negative result forces architectural pivot. The answer changes a product architecture decision regardless of outcome."
 }
