@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **129**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **130**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -139,6 +139,7 @@ Validated experiments: **129**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35264637598 | intel | REVISE | MIXED | C-MEAS-VALID | `ec614d8a01bb` |
 | EXP-RUNTIME-35280364816 | runtime | REVISE | SURVIVES_CURRENT_TEST — Iterative decompression restores decompression-normalization under double-brotli encoding for ALL auth states and under triple-brotli encoding for error states (no_auth/expired_token/invalid_token) on localhost mock server with deterministic brotli quality 6. All 9 conditions achieve decompressed_body_only_discrimination 0.5 >= 0.3 and decompressed hash determinism all_same=true on observed scenarios. However, the audit REVISE finding V1 (valid_token triple_br never observed, 0/180 reps) is accepted: the triple-br claim for the distinct success body (valid_token) is UNTESTED due to systematic RNG shift from shared proxy-test draw. Claim ceiling bounded accordingly: multi-layer encoding survival including double-brotli for all states and triple-brotli for error states only. Triple-br for valid_token success body requires rerun with stratified scenario assignment. | C-MEAS-VALID | `4fb8b817a80a` |
 | EXP-INTEL-35280397316 | intel | REVISE | SURVIVES | C-MEAS-VALID | `84a41525644e` |
+| EXP-PHYSICS-35290611436 | physics | PASS | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `595ea236040b` |
 
 ## Latest recorded claim events
 
@@ -153,4 +154,4 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35262262156 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35262262156 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | EXPERIMENTAL | EXP-PHYSICS-35262258744 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35290611436 | physics |
