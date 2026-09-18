@@ -907,6 +907,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r\u00b2=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35308806969",
+        "lane": "graph",
+        "created_at": "2026-09-18T04:55:32.410642+00:00",
+        "decision": "MIXED \u2014 Frozen conjunctive gate C3 fails on permutation p (0.465 > 0.05) but |r|=0.0335 < 0.3 passes magnitude. Power analysis confirms n=480 is provably underpowered: minimum detectable |r|=0.0895 at n=480, minimum n=1538 required for |r|=0.05 at alpha=0.05. Near-zero correlation (r\u00b2=0.001) with explicit power bound is a valid scientific finding requiring decision-rule revision, not evidence of non-orthogonality. C1-C2 PASS, C4 PASS. Audit PASS confirms all recomputed metrics match producer. The preregistered MIXED outcome class correctly applies.",
+        "source_commit": "c5dbdafd8068a8758c6efa7ab2ab394470730230",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen gate fails on C3 permutation p (0.465 > 0.05) but this is provably due to underpowering, not non-orthogonality. Near-zero pooled |r|=0.0335 (r\u00b2=0.001) on n=480 paired samples from 8 co-occurring conditions on deterministic Flask 3.1.3 + PyJWT HS256 localhost with graded session_status_check (401->1.0, 403->0.5, 500->0.75). TP/variance trade-off remains broken (TP=1.0, 8/8 conditions with variance, FP=0.0). Orthogonality is PLAUSIBLE but NOT formally confirmed at p<0.05 \u2014 the test is underpowered (min detectable |r|=0.0895 at n=480, observed |r|=0.0335 below threshold). C-FRESHNESS cannot advance to PRODUCT_ARCHITECTURE_IMPACT without decision-rule revision (equivalence/TOST test, CI bound, or n~1538). Claim ceiling bounded to deterministic mock only; no inference to real APIs, production middleware, DB/cache/CDN stochasticity, or alternative session_status_check mappings."
       }
     ],
     "C-CROSSSITE": [
@@ -1670,14 +1680,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35262262505",
+      "experiment_id": "EXP-GRAPH-35308806969",
       "lane": "graph",
-      "created_at": "2026-09-17T19:00:41.829868+00:00",
-      "decision": "FAIL",
-      "source_commit": "38b90f1ac84c2067d76235189565d25e353105eb",
+      "created_at": "2026-09-18T04:55:32.410642+00:00",
+      "decision": "MIXED \u2014 Frozen conjunctive gate C3 fails on permutation p (0.465 > 0.05) but |r|=0.0335 < 0.3 passes magnitude. Power analysis confirms n=480 is provably underpowered: minimum detectable |r|=0.0895 at n=480, minimum n=1538 required for |r|=0.05 at alpha=0.05. Near-zero correlation (r\u00b2=0.001) with explicit power bound is a valid scientific finding requiring decision-rule revision, not evidence of non-orthogonality. C1-C2 PASS, C4 PASS. Audit PASS confirms all recomputed metrics match producer. The preregistered MIXED outcome class correctly applies.",
+      "source_commit": "c5dbdafd8068a8758c6efa7ab2ab394470730230",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r\u00b2=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
+      "reason": "Frozen gate fails on C3 permutation p (0.465 > 0.05) but this is provably due to underpowering, not non-orthogonality. Near-zero pooled |r|=0.0335 (r\u00b2=0.001) on n=480 paired samples from 8 co-occurring conditions on deterministic Flask 3.1.3 + PyJWT HS256 localhost with graded session_status_check (401->1.0, 403->0.5, 500->0.75). TP/variance trade-off remains broken (TP=1.0, 8/8 conditions with variance, FP=0.0). Orthogonality is PLAUSIBLE but NOT formally confirmed at p<0.05 \u2014 the test is underpowered (min detectable |r|=0.0895 at n=480, observed |r|=0.0335 below threshold). C-FRESHNESS cannot advance to PRODUCT_ARCHITECTURE_IMPACT without decision-rule revision (equivalence/TOST test, CI bound, or n~1538). Claim ceiling bounded to deterministic mock only; no inference to real APIs, production middleware, DB/cache/CDN stochasticity, or alternative session_status_check mappings."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",

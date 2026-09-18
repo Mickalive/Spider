@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **131**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **132**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -141,6 +141,7 @@ Validated experiments: **131**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35280397316 | intel | REVISE | SURVIVES | C-MEAS-VALID | `84a41525644e` |
 | EXP-PHYSICS-35290611436 | physics | PASS | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `595ea236040b` |
 | EXP-INTEL-35290611333 | intel | REVISE | REVISE — Producer SURVIVES_CURRENT_TEST claim not justified at systematic-review ceiling. Preregistered PubMed/EconLit/Cochrane database search was not executed (audit V1_DATABASE_MISREPRESENTATION, severity high): provenance.json shows web-search-API natural-language queries, not database-specific syntax with Boolean operators/MeSH/Cochrane filters. Positive controls PC1/PC2 pass on recomputed distinct counts (PC1 min 5-6 distinct ≥2 threshold, PC2 strong count 1 via OECD sensitivity framework ≥1 threshold). Falsifiers F1/F2 correctly not triggered. Audit dedup corrects producer counts: M1 3→2-3, M2 4→3, M4 3→1 strong, M6 12→10 distinct URLs. Provenance integrity degraded: 2 duplicate URL pairs in key_sources (Munda/Greco share Springer DOI, Dobbie/Zhou share ScienceDirect pii), M5 screened total 30 vs provenance 34. Evidence provides non-systematic synthesis of additional theoretical grounding (OECD sensitivity analysis framework for MIXED outcome handling; psychometric composite score problems; econometric composite indicator aggregation ambiguity) at interpretive-analogy ceiling, not the systematic-review ceiling claimed by producer. Report.md §1-3 overstates by presenting SURVIVES without bounding to interpretive ceiling (audit V6). C-MEAS-VALID remains EXPERIMENTAL: this experiment adds theoretical grounding for the recipe choice sub-problem but does not provide empirical resolution (full-DOM re-run required). No claim status change warranted. | C-MEAS-VALID | `287ed35331a8` |
+| EXP-GRAPH-35308806969 | graph | PASS | MIXED — Frozen conjunctive gate C3 fails on permutation p (0.465 > 0.05) but |r|=0.0335 < 0.3 passes magnitude. Power analysis confirms n=480 is provably underpowered: minimum detectable |r|=0.0895 at n=480, minimum n=1538 required for |r|=0.05 at alpha=0.05. Near-zero correlation (r²=0.001) with explicit power bound is a valid scientific finding requiring decision-rule revision, not evidence of non-orthogonality. C1-C2 PASS, C4 PASS. Audit PASS confirms all recomputed metrics match producer. The preregistered MIXED outcome class correctly applies. | C-FRESHNESS | `c5dbdafd8068` |
 
 ## Latest recorded claim events
 
@@ -149,7 +150,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35262262505 | graph |
+| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35308806969 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-INTEL-35290611333 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35262262156 | product |

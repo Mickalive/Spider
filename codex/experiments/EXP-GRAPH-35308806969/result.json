@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35308806969",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "all_wilson_lower_above_075": true,
+    "pearson_r_pooled": 0.03354974840059444,
+    "pearson_p_pooled": 0.46495350464953505,
+    "abs_r_pooled": 0.03354974840059444,
+    "fp_rate_noise_only": 0.0,
+    "positive_control_rate": 1.0,
+    "n_cooccurring_conditions": 8,
+    "n_noise_only_conditions": 4,
+    "n_samples_per_condition": 60,
+    "n_paired_samples": 480,
+    "conditions_with_variance": 8,
+    "power_analysis": {
+      "observed_r": 0.03354974840059444,
+      "observed_abs_r": 0.03354974840059444,
+      "n_samples": 480,
+      "fisher_z_observed": 0.03356234461331847,
+      "z_statistic_h0": 0.7330126707805816,
+      "p_from_fisher_z": 0.46355070133292564,
+      "min_detectable_r_at_n": 0.08950209062260417,
+      "min_n_for_r_equals_005": 1538,
+      "expected_p_at_n_for_r005": 0.2744254728754387,
+      "n_sufficient_for_observed_r": false,
+      "interpretation": "At n=480, the minimum detectable |r| for p<0.05 is 0.0895. For true |r|=0.05, the minimum n required is 1538, and the expected p at current n is 0.2744. Observed |r|=0.0335 does not reach the minimum detectable |r|."
+    },
+    "per_condition_tp": {
+      "cooccur_permission_boundary+optional_field_addition": 1.0,
+      "cooccur_permission_boundary+description_change": 1.0,
+      "cooccur_permission_boundary+response_time_jitter": 1.0,
+      "cooccur_permission_boundary+field_type_normalization": 1.0,
+      "cooccur_session_invalidation+optional_field_addition": 1.0,
+      "cooccur_session_invalidation+description_change": 1.0,
+      "cooccur_session_invalidation+response_time_jitter": 1.0,
+      "cooccur_session_invalidation+field_type_normalization": 1.0
+    },
+    "per_condition_wilson_lower": {
+      "cooccur_permission_boundary+optional_field_addition": 0.9398260695220669,
+      "cooccur_permission_boundary+description_change": 0.9398260695220669,
+      "cooccur_permission_boundary+response_time_jitter": 0.9398260695220669,
+      "cooccur_permission_boundary+field_type_normalization": 0.9398260695220669,
+      "cooccur_session_invalidation+optional_field_addition": 0.9398260695220669,
+      "cooccur_session_invalidation+description_change": 0.9398260695220669,
+      "cooccur_session_invalidation+response_time_jitter": 0.9398260695220669,
+      "cooccur_session_invalidation+field_type_normalization": 0.9398260695220669
+    },
+    "per_condition_variance": {
+      "cooccur_permission_boundary+optional_field_addition": {
+        "behavioral_std": 0.16329931618554522,
+        "structural_std": 1.0820184327861004,
+        "has_variance": true
+      },
+      "cooccur_permission_boundary+description_change": {
+        "behavioral_std": 0.1502056203843975,
+        "structural_std": 0.6075337210577058,
+        "has_variance": true
+      },
+      "cooccur_permission_boundary+response_time_jitter": {
+        "behavioral_std": 0.13732452327009192,
+        "structural_std": 0.8314979788844282,
+        "has_variance": true
+      },
+      "cooccur_permission_boundary+field_type_normalization": {
+        "behavioral_std": 0.15505873041058735,
+        "structural_std": 0.7177801427549617,
+        "has_variance": true
+      },
+      "cooccur_session_invalidation+optional_field_addition": {
+        "behavioral_std": 0.39475730941090037,
+        "structural_std": 0.9330356668185603,
+        "has_variance": true
+      },
+      "cooccur_session_invalidation+description_change": {
+        "behavioral_std": 0.40276819911981915,
+        "structural_std": 0.6890008869531462,
+        "has_variance": true
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "behavioral_std": 0.3817903729651769,
+        "structural_std": 0.7980444849756183,
+        "has_variance": true
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "behavioral_std": 0.4281744192888376,
+        "structural_std": 0.6355225321645873,
+        "has_variance": true
+      }
+    },
+    "per_condition_r": {
+      "cooccur_permission_boundary+optional_field_addition": {
+        "r": 0.022009314156572934,
+        "p": 0.8674351297848109
+      },
+      "cooccur_permission_boundary+description_change": {
+        "r": -0.14966205116524228,
+        "p": 0.2537314503658527
+      },
+      "cooccur_permission_boundary+response_time_jitter": {
+        "r": 0.20029213681074723,
+        "p": 0.12492768809950798
+      },
+      "cooccur_permission_boundary+field_type_normalization": {
+        "r": -0.24583633148878983,
+        "p": 0.05831117194609448
+      },
+      "cooccur_session_invalidation+optional_field_addition": {
+        "r": -0.3144887601032956,
+        "p": 0.014396374252335626
+      },
+      "cooccur_session_invalidation+description_change": {
+        "r": -0.04404283045693247,
+        "p": 0.7382739361129393
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "r": 0.15794965025709737,
+        "p": 0.22808011127249905
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "r": 0.15312182195766505,
+        "p": 0.2427948513789412
+      }
+    },
+    "per_condition_cv": {
+      "cooccur_permission_boundary+optional_field_addition": {
+        "behavioral_cv": 0.3499271061118826,
+        "structural_cv": 0.2550927542914186
+      },
+      "cooccur_permission_boundary+description_change": {
+        "behavioral_cv": 0.3511300216778124,
+        "structural_cv": 0.16022867368554877
+      },
+      "cooccur_permission_boundary+response_time_jitter": {
+        "behavioral_cv": 0.33860841354269244,
+        "structural_cv": 0.2257460576156819
+      },
+      "cooccur_permission_boundary+field_type_normalization": {
+        "behavioral_cv": 0.35329837308741424,
+        "structural_cv": 0.23342443666828022
+      },
+      "cooccur_session_invalidation+optional_field_addition": {
+        "behavioral_cv": 0.0867598482221759,
+        "structural_cv": 0.22040212602013234
+      },
+      "cooccur_session_invalidation+description_change": {
+        "behavioral_cv": 0.09084996972627499,
+        "structural_cv": 0.18052424985671953
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "behavioral_cv": 0.08468548014015015,
+        "structural_cv": 0.21424013019479685
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "behavioral_cv": 0.09514987095307502,
+        "structural_cv": 0.1945477139279349
+      }
+    },
+    "per_drift_r": {
+      "permission_boundary": 0.0005087255922857359,
+      "session_invalidation": -0.013649730508531098
+    },
+    "session_status_distribution": {
+      "cooccur_session_invalidation+optional_field_addition": {
+        "401": 22,
+        "403": 16,
+        "500": 22,
+        "200": 0,
+        "n_total": 60
+      },
+      "cooccur_session_invalidation+description_change": {
+        "401": 16,
+        "403": 24,
+        "500": 20,
+        "200": 0,
+        "n_total": 60
+      },
+      "cooccur_session_invalidation+response_time_jitter": {
+        "401": 18,
+        "403": 17,
+        "500": 25,
+        "200": 0,
+        "n_total": 60
+      },
+      "cooccur_session_invalidation+field_type_normalization": {
+        "401": 22,
+        "403": 22,
+        "500": 16,
+        "200": 0,
+        "n_total": 60
+      }
+    }
+  },
+  "controls": {
+    "C1_drift_tp": {
+      "threshold": "mean_tp >= 0.85 AND all Wilson lower CI > 0.75",
+      "observed_mean_tp": 1.0,
+      "all_wilson_lower_above_075": true,
+      "per_condition_tp": {
+        "cooccur_permission_boundary+optional_field_addition": 1.0,
+        "cooccur_permission_boundary+description_change": 1.0,
+        "cooccur_permission_boundary+response_time_jitter": 1.0,
+        "cooccur_permission_boundary+field_type_normalization": 1.0,
+        "cooccur_session_invalidation+optional_field_addition": 1.0,
+        "cooccur_session_invalidation+description_change": 1.0,
+        "cooccur_session_invalidation+response_time_jitter": 1.0,
+        "cooccur_session_invalidation+field_type_normalization": 1.0
+      },
+      "per_condition_wilson_lower": {
+        "cooccur_permission_boundary+optional_field_addition": 0.9398260695220669,
+        "cooccur_permission_boundary+description_change": 0.9398260695220669,
+        "cooccur_permission_boundary+response_time_jitter": 0.9398260695220669,
+        "cooccur_permission_boundary+field_type_normalization": 0.9398260695220669,
+        "cooccur_session_invalidation+optional_field_addition": 0.9398260695220669,
+        "cooccur_session_invalidation+description_change": 0.9398260695220669,
+        "cooccur_session_invalidation+response_time_jitter": 0.9398260695220669,
+        "cooccur_session_invalidation+field_type_normalization": 0.9398260695220669
+      },
+      "pass": true,
+      "evidence": "Mean TP rate across 8 co-occurring conditions, all Wilson lower CI > 0.75"
+    },
+    "C2_variance": {
+      "threshold": ">= 6 of 8 co-occurring conditions have std > 0 for BOTH behavioral and structural signals",
+      "conditions_with_variance": 8,
+      "per_condition_variance": {
+        "cooccur_permission_boundary+optional_field_addition": {
+          "behavioral_std": 0.16329931618554522,
+          "structural_std": 1.0820184327861004,
+          "has_variance": true
+        },
+        "cooccur_permission_boundary+description_change": {
+          "behavioral_std": 0.1502056203843975,
+          "structural_std": 0.6075337210577058,
+          "has_variance": true
+        },
+        "cooccur_permission_boundary+response_time_jitter": {
+          "behavioral_std": 0.13732452327009192,
+          "structural_std": 0.8314979788844282,
+          "has_variance": true
+        },
+        "cooccur_permission_boundary+field_type_normalization": {
+          "behavioral_std": 0.15505873041058735,
+          "structural_std": 0.7177801427549617,
+          "has_variance": true
+        },
+        "cooccur_session_invalidation+optional_field_addition": {
+          "behavioral_std": 0.39475730941090037,
+          "structural_std": 0.9330356668185603,
+          "has_variance": true
+        },
+        "cooccur_session_invalidation+description_change": {
+          "behavioral_std": 0.40276819911981915,
+          "structural_std": 0.6890008869531462,
+          "has_variance": true
+        },
+        "cooccur_session_invalidation+response_time_jitter": {
+          "behavioral_std": 0.3817903729651769,
+          "structural_std": 0.7980444849756183,
+          "has_variance": true
+        },
+        "cooccur_session_invalidation+field_type_normalization": {
+          "behavioral_std": 0.4281744192888376,
+          "structural_std": 0.6355225321645873,
+          "has_variance": true
+        }
+      },
+      "pass": true,
+      "evidence": "8/8 conditions with within-condition variance (both signals std > 0)"
+    },
+    "C3_orthogonality": {
+      "threshold": "|Pearson r| < 0.3 on pooled paired scores, permutation p < 0.05",
+      "observed_r": 0.03354974840059444,
+      "observed_abs_r": 0.03354974840059444,
+      "observed_p": 0.46495350464953505,
+      "n_samples": 480,
+      "pass": false,
+      "evidence": "Pearson r=0.0335 on 480 pooled paired samples"
+    },
+    "C4_null_control": {
+      "threshold": "FP = 0.0 on noise-only conditions",
+      "observed_fp_rate": 0.0,
+      "observed_fp_count": 0,
+      "total_noise_only": 240,
+      "pass": true,
+      "evidence": "FP rate = 0.0000 across 4 noise-only conditions"
+    },
+    "PC_PERMISSION_BOUNDARY_DETECTION": {
+      "description": "permission_boundary drift should produce behavioral signal > 0",
+      "observed_rate": 1.0,
+      "pass": true,
+      "evidence": "Detection rate: 1.0000 (60/60)"
+    },
+    "PC_SESSION_STATUS_VARIANCE": {
+      "description": "session_invalidation conditions must produce behavioral composite with std > 0 when graded session_status_check is included",
+      "session_invalidation_conditions_with_variance": 4,
+      "pass": true,
+      "evidence": "Session_invalidation conditions with variance: 4/4"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6",
+      "role": "raw"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "5c2163343e0b506500f36411bb261d974e0a31e5c5861347764cf9d331ec457d",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "7bed764f09daa71213b563f27fbf2e063e1eed8dbc5e2655afe8d9dd668729df",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean drift TP rate across co-occurring conditions: 1.0000",
+    "All Wilson lower CI > 0.75: True",
+    "Pearson r (pooled paired scores, all co-occurring): 0.0335 (|r|=0.0335, p=0.4650, n=480)",
+    "Null control FP rate (noise-only): 0.0000 (0/240)",
+    "Positive control (permission_boundary detection): 1.0000",
+    "Positive control (session_status_variance): True",
+    "Conditions with within-condition variance (both signals std > 0): 8/8",
+    "Total paired samples: 480",
+    "Per-drift-pattern r: permission_boundary=0.0005087255922857359, session_invalidation=-0.013649730508531098",
+    "C1 (drift TP >= 0.85, all Wilson lower > 0.75): PASS",
+    "C2 (variance >= 6/8 conditions): PASS",
+    "C3 (orthogonality |r| < 0.3): FAIL",
+    "C4 (null FP = 0.0): PASS"
+  ],
+  "validity_notes": [
+    "All behavioral signals derived from real HTTP request/response cycles on Flask 3.x + PyJWT HS256 localhost (not analytical computation)",
+    "session_invalidation drift: ALL 30 samples per condition have session invalidation applied (session_change=1 for every sample, no coin flip). Session_status_check varies by randomly choosing /session/status HTTP status code from {401, 403, 500} with equal probability (1/3 each).",
+    "session_status_check mapping: 401 -> 1.0, 403 -> 0.5, 500 -> 0.75 (all indicate invalid session but at different intensity levels). 200 -> 0.0 reserved for valid sessions (never used in SI conditions).",
+    "Structural signals computed from unauthenticated /schema endpoint (inherited from parent - fixes zero-imputation confound)",
+    "Drift patterns: permission_boundary (write=False, admin=False) and session_invalidation (clear session store + vary /session/status code) - same as parent with SI modification",
+    "Within-condition stochastic variation: random permission subsets for permission_boundary; random /session/status status code from {401, 403, 500} for session_invalidation",
+    "60 independent request sequences per condition with per-seed RNG (SEED=42) for reproducibility — doubled from parent's 30",
+    "Pearson r computed on paired per-sample (behavioral_i, structural_i) scores from all 8 co-occurring conditions",
+    "Variance gate: at least 6 of 8 co-occurring conditions must have std > 0 for both behavioral and structural signals",
+    "Graded status code mapping is arbitrary but any mapping that creates variance while keeping session_change=1 is valid for the hypothesis"
+  ],
+  "unresolved": [
+    "Whether real APIs with stochastic behavior (DB/cache/CDN) preserve signal orthogonality",
+    "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware",
+    "Whether per-condition correlation differs from pooled correlation (exploratory per-condition analysis reported)",
+    "Whether wider stochastic variation ranges (more permission subsets, wider noise magnitudes) change the correlation",
+    "Whether composite multi-signal classifiers outperform individual signals when orthogonality holds",
+    "Whether the unauthenticated /schema endpoint is practical in real-world API deployments",
+    "Whether graded session_status_check adequately simulates real session TTL/expiry behavior (vs 50/50 bimodal in parent)",
+    "Whether the arbitrary mapping (401->1.0, 403->0.5, 500->0.75) affects the correlation structure vs alternative mappings"
+  ]
+}
