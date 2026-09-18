@@ -1,0 +1,20 @@
+{
+  "base_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T22:32:49.214259+00:00",
+  "experiment_id": "EXP-PHYSICS-35402003775",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can alternative null frameworks (model-based parametric bootstrap from estimated P(url_after|stratum), Miller-Madow unbiased PMI estimator, or conditional entropy H(url_after|action,url_before,history) as alternative to PMI) center the null at zero for hash-routed SPAs with deterministic/stochastic strata mixing, resolving the intrinsic ~0.41-bit PMI estimator bias floor that within-stratum permutation cannot eliminate?",
+  "lane": "physics",
+  "origin_github_run_id": "35402003775",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35389142077",
+    "path": "research/experiments/EXP-PHYSICS-35389142077/handoff.json",
+    "sha256": "93ac2b2d7586e40d1ec39eb4c9ad6a9feaec3c7f6496acd5607ab7dfff432d04"
+  },
+  "reason": "pulse",
+  "request_hash": "9cf2a86dcc49d8839460539fc528ccc02847cd9012f65889b9b76042d7b86758",
+  "request_id": "469da6504d5d531fbd1198e6",
+  "schema_version": 1
+}
