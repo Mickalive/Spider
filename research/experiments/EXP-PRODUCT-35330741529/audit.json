@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35330741529",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "id": "C1_SUCCESS_UNMEASURED",
+      "severity": "major",
+      "category": "measurement",
+      "description": "C1 (100% success for both LITERAL and PARAMETERIZED) is not measured. Producer stipulates 100% success as analytical assumption ('no model execution', resolution is deterministic). Frozen spec measurement_validity[5] and decision_rule C1 require measured success rate (fraction where final state matches expected outcome). No LLM selection or resolution was executed, no binding failures could be observed.",
+      "evidence": "result.json controls.C1_100pct_success observed_behavior 'Both conditions assumed 100% success (analytical measurement, no model execution)', provenance.json methodology.model_execution 'none (token costs measured from prompt text, completion tokens estimated)', spec.json measurement_validity[5] success rate, prereg.md 7 decision_rule C1",
+      "fix": "Execute real model calls for selection and resolution across 32 tasks x 2 conditions and report measured selection accuracy and resolution/binding accuracy. Report success rate as observation, not assumption. If analytical bounding is intended, rename C1 to assumed and exclude from SURVIVES gate."
+    },
+    {
+      "id": "COMPLETION_TOKENS_ESTIMATED_NOT_MEASURED",
+      "severity": "major",
+      "category": "measurement",
+      "description": "Completion tokens are hard-coded estimates (2 tokens for selection, 15 completion for resolution fill, 20 for COLD URL generation) not measured from model outputs. Prompt tokens are tiktoken-measured correctly, but total_model_cost depends critically on estimated completions. With 5.42% net margin (1067 tokens on 19691), modest variation in actual LLM response length (reasoning, tool formatting, longer URLs) could reverse C3 outcome.",
+      "evidence": "run_experiment.py lines 335 completion 2, 375 resolution completion 15, 349 cold 20; provenance.json methodology.completion_token_estimates selection_response 2 resolution 85-122 cold 20; raw_evidence.json aggregate_costs parameterized resolution 2101 includes 32* prompt + 15* n_slot_tasks; result.json validity_notes COMPLETION TOKEN ESTIMATE",
+      "fix": "Measure completion tokens from actual LLM API responses for selection and resolution (temperature 0.0) and report distribution (mean, p50, p95). Recompute C2/C3 with measured completions. If analytical, perform sensitivity sweep over completion lengths (e.g., 2 vs 10 vs 30) and report threshold where C3 flips."
+    },
+    {
+      "id": "BROWSER_VERIFICATION_OMITTED_BUT_IN_C3_DEFINITION",
+      "severity": "moderate",
+      "category": "validity",
+      "description": "Decision_rule C3 defines total workflow cost as selection + resolution + browser + verification, but producer measures only selection+resolution (browser/verification omitted per spec 5.1 'can be skipped if decisive'). Omission is disclosed but claim_ceiling in report.md is phrased as end-to-end workflow savings. Browser/verification may dominate cost and could cancel 1067-token saving; they are assumed constant across conditions without evidence on this corpus.",
+      "evidence": "spec.json decision_rule C3 text 'total workflow cost (selection + resolution + browser + verification)', spec.json measurement_validity items 4-6 browser/verification counts, prereg.md 5.1 'can be skipped if selection+resolution cost difference is already decisive', result.json validity_notes NO BROWSER/VERIFICATION, report.md Implications 'end-to-end workflow savings'",
+      "fix": "Bound claim to 'model token cost (selection+resolution only)' not 'total workflow cost'. If end-to-end claim is intended, measure browser interactions and verification calls on a sampled subset or justify constancy with paired execution traces."
+    },
+    {
+      "id": "COLD_BASELINE_INVERSION_UNADDRESSED",
+      "severity": "moderate",
+      "category": "interpretation",
+      "description": "COLD (no registry) baseline is 77.34 tokens/task vs ~600 tokens/task for literal/parameterized (8x cheaper). Producer reports this but dismisses as 'different workflow paradigm' without measuring COLD success rate or retrieval cost. At face value, mechanism reuse adds ~500 tokens/task overhead vs generating URL from task goal, undermining product consequence for C-PRODUCT-ECON token economics. The 5.42% param vs literal saving is negligible compared to 87% penalty vs cold.",
+      "evidence": "result.json metrics cold_total_model_cost 2475 vs literal 19691 vs param 18624, per_task_avg_cold 77.34 vs literal 615.34, raw_evidence.json aggregate_costs cold, report.md Limitations 'COLD as baseline dramatically cheaper'",
+      "fix": "Measure COLD success rate with real model URL generation and include retrieval-failure/repair cost. Report full economics: registry vs cold, not only literal vs param. State explicitly that token savings vs literal do not imply savings vs no-registry baseline."
+    },
+    {
+      "id": "NULL_CONTROL_THRESHOLD_PERMISSIVE_AND_SUBSET",
+      "severity": "moderate",
+      "category": "measurement",
+      "description": "C5 null control uses only 3 search tasks as proxy for unique patterns, while 17 tasks are unique per sharing_category. Threshold ratio <=1.5 (50% overhead) is extremely permissive; any plausible overhead passes. Producer reports ratio 1.0185 for search subset, but 6/32 tasks individually cost more under param (pm-view-project +7, search-shop +23 tokens, 3.76% overhead). Aggregate unique saving 5.1% masks per-task overhead heterogeneity.",
+      "evidence": "raw_evidence.json decision_rule C5_null_control search_tasks_count 3 ratio 1.0185, sharing_analysis unique count 17 savings 5.1%, recomputed 6 tasks param > literal (pm-view-project-1/2 +7, pm-create-task +9, search-blog +6, search-shop +23, search-users +5), spec.json null_control expected_behavior 'within 50%'",
+      "fix": "Evaluate C5 on all 17 unique tasks and report per-task null overhead distribution (max, p95). Replace or supplement 50% threshold with tighter bound (e.g., 10%) or report raw overhead in tokens with confidence interval. Acknowledge that param is more expensive on 6 tasks."
+    }
+  ],
+  "validity_findings": [
+    {
+      "id": "ARITHMETIC_VERIFIED",
+      "severity": "info",
+      "finding": "All arithmetic in result.json is independently verified exactly. tiktoken cl100k_base selection prompt tokens recomputed match raw_evidence (literal 19627, param 16459, cold 1835). Aggregate totals 19691 vs 18624 diff 1067 (5.42%) correct. Per-task sums verified (19691 = sum task_costs literal, 18624 = sum param). Sharing-category averages verified (shared_high 8.6%, unique 5.1%, shared_moderate 0.13%). C2 diff 3168 (16.09%) and C5 ratio 1.0185 for search subset correct. Positive control 1 pattern for 5 blog-read-post tasks correct.",
+      "evidence": "raw_evidence.json aggregate_costs and task_costs sums, recomputed via tiktoken on rebuilt registry texts (literal 32 mechanisms, param 25 mechanisms) matching per_task arrays, decision_rule C4 note 1 pattern"
+    },
+    {
+      "id": "SYNTHETIC_CORPUS_AND_HEURISTIC_INDUCTION",
+      "severity": "moderate",
+      "finding": "Corpus is synthetic 32-task (6 domains) inherited from parent EXP-PRODUCT-35290617719; induction is heuristic regex infer_parameterized_url not kernel distill_parameterized(). Prereg explicitly accepts this as 'controlled testbed' for economic measurement, so scope limitation is disclosed. External validity to real SPIDER registry/task distribution not claimed. Heuristic fails to parameterize admin u-aaa class (5 tasks remain distinct), understating deduplication: true mechanism count would be 21 not 25 if admin collapsed, which would increase selection savings.",
+      "evidence": "provenance.json data_sources task_corpus synthetic, code parameter_inference heuristic regex, spec.json measurement_validity[0] identical task definitions, prereg.md 4.1 Task Corpus 'kept as controlled testbed' and 8.2 Heuristic induction, raw_evidence 25 mechanisms includes 5 distinct admin u-aaa patterns, recomputed infer for u-aaa slots []"
+    },
+    {
+      "id": "RESOLUTION_COST_HETEROGENEITY",
+      "severity": "info",
+      "finding": "Resolution tokens vary 0-122 (avg 65.7 for slotted tasks). Tasks with 0 slots (admin-view-user 1-5, blog-list-posts, shop-list-categories, admin-list-users, auth-me) have 0 resolution cost and thus largest net savings (~99 tokens). Tasks with heavy query-param slots (search-shop 122 tokens, pm-create-task 108, pm-view-project 106) incur overhead that exceeds selection saving on 6 tasks, making param more expensive individually. Aggregate 5.42% saving is driven by 0-slot tasks, not by sharing frequency alone.",
+      "evidence": "raw_evidence.json per_task_param_resolution_tokens array, task_costs resolution_tokens fields, recomputed 6 tasks param>literal"
+    },
+    {
+      "id": "INDUCTION_ARTIFACT_PM_TEMPLATE",
+      "severity": "low",
+      "finding": "PM view-project template is malformed: literal /orgs/org-100/projects/proj-200 inferred as /orgs/${item_0}/project${item_1}00 (missing 's' in projects, trailing '00' literal). Regex alphanum pattern mis-handles proj-200. Does not affect selection token counts but indicates heuristic quality issues for multi-segment path params.",
+      "evidence": "run_experiment.py infer_parameterized_url alphanum_pattern, raw_evidence param_mechanisms GET:https://pm.example.com/orgs/${item_0}/project${item_1}00"
+    },
+    {
+      "id": "NO_STATISTICAL_INFERENCE",
+      "severity": "moderate",
+      "finding": "N=32 is deterministic population, not sample; no variance, CI, or significance test reported. 5.42% is population arithmetic for this synthetic corpus, not an estimate. Claim cannot be generalized to larger registries or different sharing distributions without replication.",
+      "evidence": "result.json metrics mechanism_reduction 21.88%, raw_evidence 32 tasks deterministic, no statistical test in report.md or result.json"
+    },
+    {
+      "id": "REPRESENTATION_LOSS_REGISTRY_FORMAT",
+      "severity": "low",
+      "finding": "Registry description format (numbered list '[METHOD] URL') is one plausible prompting choice. Different formats (JSON, function-calling, retrieval-ranked) would change token counts but relative comparison (25 vs 32) likely preserves direction because token count scales linearly with mechanism count. Directional result robust; magnitude 5.42% is format-dependent.",
+      "evidence": "run_experiment.py build_registry_description and build_selection_prompt, result.json validity_notes REGISTRY TEXT FORMATTING"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-LITERAL-REGISTRY",
+      "expected": "32 concrete-URL mechanisms, selection cost scales with registry size, no resolution, 100% success",
+      "observed": "32 mechanisms correctly built from corpus observations. Selection prompt 19627 tokens total (avg 613/task) + 64 completion (2*32). No resolution. Success assumed not measured. Registry text verified via tiktoken recomputation matches raw_evidence.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json corpus_summary total_literal 32, aggregate_costs literal, recomputed literal_list 32, per_task_literal_selection_tokens"
+    },
+    {
+      "control_id": "B-PARAMETERIZED-REGISTRY",
+      "expected": "25 parameterized mechanisms with ${slot} templates, selection from 25, resolution fills slots, execution identical",
+      "observed": "25 mechanisms correctly induced via heuristic. Selection prompt 16459 tokens (avg 514/task) +64 completion, resolution 2101 tokens (0 for 9 tasks, 85-122 for 23 slotted tasks). Total 18624 < 19691. No real resolution executed. Admin u-aaa not parameterized (5 separate mechanisms) understates potential dedup.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json corpus_summary total_param 25, aggregate_costs parameterized, per_task_param_selection_tokens and per_task_param_resolution_tokens"
+    },
+    {
+      "control_id": "B-COLD-NO-REGISTRY",
+      "expected": "No registry, model generates URL from task goal, no selection/resolution cost, may be cheapest or most expensive depending on model capability",
+      "observed": "Cold total 2475 tokens (1835 prompt +640 completion, avg 77.34/task). Dramatically cheaper (87% less than literal) because no registry to evaluate. Completion 20 tokens/task assumes short URL generation. Success rate not measured; product implication is that mechanism registry adds net token cost vs cold on this prompting format.",
+      "verdict": "PASS_WITH_CONCERN",
+      "evidence": "raw_evidence.json aggregate_costs cold, task_costs cold per task 74-80 tokens, result.json metrics per_task_avg_cold_cost 77.34"
+    },
+    {
+      "control_id": "POS-CONTROL-SHARED-PATTERN-COLLAPSE",
+      "expected": "5 blog-read-post tasks sharing GET /posts/{id} collapse to 1 parameterized mechanism, model selects same key for all 5, resolution fills ${id_0} correctly",
+      "observed": "All 5 blog-read-post tasks share pattern GET:https://blog.example.com/posts/${id_0}, 1 mechanism. Recomputed param_mechanisms confirms 5 tasks mapped to single pattern. Selection collapsed as expected. Resolution fills 101,202,303,404,505 correctly per construction (deterministic). No real LLM selection variance tested.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json decision_rule C4_positive_control pass true note 1 pattern, recomputed param_mechanisms blog-read-post pattern"
+    },
+    {
+      "control_id": "NULL-UNIQUE-PATTERN-OVERHEAD",
+      "expected": "Unique-pattern tasks param total within 50% of literal (ratio <=1.5). From spec: parameterized total within 30% described, 50% in decision rule.",
+      "observed": "Search subset (3 tasks) ratio 1.0185 (1.85% overhead) passes threshold. All 17 unique tasks ratio 0.949 (param 5.1% cheaper) also passes. However 6/32 tasks individually have param > literal (max overhead 23 tokens on search-shop, 3.76%). Threshold 50% is not discriminating; report does not discuss per-task overhead heterogeneity.",
+      "verdict": "PASS_BUT_THRESHOLD_NON_DISCRIMINATING",
+      "evidence": "result.json controls C5_null_control ratio 1.0185 threshold 1.5, raw_evidence sharing_analysis unique 5.1% savings, recomputed 6 tasks param>literal and search_shop overhead 3.76%"
+    }
+  ],
+  "recomputed_metrics": {
+    "literal_total_model_cost": 19691,
+    "literal_selection_prompt_tokens": 19627,
+    "literal_selection_completion_tokens": 64,
+    "literal_selection_total": 19691,
+    "parameterized_total_model_cost": 18624,
+    "parameterized_selection_prompt_tokens": 16459,
+    "parameterized_selection_completion_tokens": 64,
+    "parameterized_selection_total": 16523,
+    "parameterized_resolution_tokens": 2101,
+    "cold_total_model_cost": 2475,
+    "cold_selection_prompt_tokens": 1835,
+    "cold_selection_completion_tokens": 640,
+    "workflow_savings_tokens": 1067,
+    "workflow_savings_pct": 5.42,
+    "selection_savings_tokens": 3168,
+    "selection_savings_pct": 16.09,
+    "resolution_overhead_tokens": 2101,
+    "resolution_overhead_pct": 10.67,
+    "mechanism_reduction_pct": 21.88,
+    "null_control_ratio_search_only": 1.0185,
+    "null_control_ratio_all_unique": 0.949,
+    "unique_avg_literal": 614.47,
+    "unique_avg_param": 583.12,
+    "unique_savings_pct": 5.1,
+    "shared_high_savings_pct": 8.6,
+    "shared_moderate_savings_pct": 0.13,
+    "tasks_where_param_more_expensive_count": 6,
+    "tasks_where_param_more_expensive_ids": ["pm-view-project-1", "pm-view-project-2", "pm-create-task", "search-blog", "search-shop", "search-users"],
+    "max_per_task_overhead_tokens": 23,
+    "max_per_task_overhead_pct": 3.76,
+    "max_overhead_task": "search-shop",
+    "verification": "exact_match_with_producer_via_recomputed_tiktoken",
+    "selection_prompt_recomputed_match": true,
+    "aggregate_sums_match_task_costs": true,
+    "positive_control_patterns": 1,
+    "positive_control_pattern_key": "GET:https://blog.example.com/posts/${id_0}"
+  },
+  "claim_ceiling": "On the frozen synthetic 32-task corpus (6 domains, 32 literal vs 25 parameterized mechanisms via heuristic regex, 0.858 storage dedup ratio) with analytical tiktoken cl100k_base counting and hard-coded completion estimates (2 tokens selection, ~92 token resolution prompts +15 completion), parameterized model token cost (selection+resolution only, browser/verification omitted, no LLM executed, 100% success assumed) is 18624 vs 19691 tokens (5.42% saving, 1067 tokens). Selection saving 3168 tokens (16.09% from smaller registry) exceeds resolution overhead 2101 tokens (10.67%). Saving is driven by 9 zero-slot tasks (0 resolution cost); 6/32 tasks are individually more expensive under parameterized (search-shop +3.76%). COLD (no registry) is 2475 tokens total (77/task), 8x cheaper than either registry condition, but its success rate unmeasured. No evidence for end-to-end workflow cost (browser/verification/retrieval), real SPIDER registry, kernel distill_parameterized(), or production task distribution. C-PRODUCT-ECON remains HYPOTHESIS; C-PARAM-INHERIT remains EXPERIMENTAL at synthetic analytical ceiling. Do not promote to product.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35330741529/spec.json claim_ids [C-PRODUCT-ECON C-PARAM-INHERIT] measurement_validity 7 items decision_rule ALL C1-C5 product_consequence",
+    "research/experiments/EXP-PRODUCT-35330741529/prereg.md 4.1 synthetic 32-task corpus as controlled testbed, 5.1 browser/verification can be skipped, 7 decision_rule C1-C5, 8 scope limitations synthetic/heuristic/model-specific",
+    "research/experiments/EXP-PRODUCT-35330741529/freeze.json hashes prereg 5ffd2f... spec 30ccfb...",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json metrics literal 19691 param 18624 diff 1067 5.42% controls ALL pass, validity_notes analytical measurement",
+    "research/experiments/EXP-PRODUCT-35330741529/report.md Key Results table 19691 vs 18624, Decision Rule Evaluation ALL pass, Limitations analytical/no browser/success assumed/synthetic",
+    "research/experiments/EXP-PRODUCT-35330741529/provenance.json methodology analytical tiktoken, model_execution none, browser omitted, completion estimates 2/15/20, data_sources synthetic",
+    "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json corpus_summary 32/25, aggregate_costs literal/param/cold, task_costs 32 entries, sharing_analysis 10/5/17, decision_rule verdict SURVIVES_CURRENT_TEST, per_task arrays",
+    "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py TASK_CORPUS 32 tasks, infer_parameterized_url regex, build_registry_description, count_tokens via tiktoken cl100k_base, hardcoded completions 2/15/20, decision_rule C1-C5 logic",
+    "research/experiments/EXP-PRODUCT-35290617719/handoff.json C-PRODUCT-ECON HYPOTHESIS C-PARAM-INHERIT EXPERIMENTAL, parent arithmetic 14.16% storage saving, null overhead 25.3%, next_question options A/B/C",
+    "recomputed via independent tiktoken execution on rebuilt registry texts and task_costs sums - exact match"
+  ],
+  "unresolved": [
+    "Measured selection accuracy and resolution/binding accuracy with real LLM calls (does model reliably select correct mechanism from 25-32 options and fill ${slot} correctly?)",
+    "Measured completion token distribution from real model responses (do selection/resolution responses exceed estimated 2/15 tokens with reasoning/format?)",
+    "End-to-end workflow cost including browser execution, verification, and retrieval/repair costs - does 5.42% token saving survive when browser cost dominates?",
+    "Generalization to real SPIDER registry/task corpus and kernel distill_parameterized() (parent handoff option A) - what is sharing distribution and dedup ratio on production data?",
+    "Viability vs COLD baseline - does registry provide success-rate or exploration benefit that justifies 7.5x token overhead vs generating URLs from scratch?",
+    "Sensitivity to registry prompt format and retrieval strategy (ranked retrieval vs full registry in prompt, function-calling, JSON) - is relative saving preserved?",
+    "Whether larger registries (100+ mechanisms) increase selection saving dominance as hypothesized in report Limitations",
+    "Whether per-task overhead on 6 tasks (up to 3.76%) reflects systematic pattern (heavy query-param slots) requiring template design improvement"
+  ]
+}
