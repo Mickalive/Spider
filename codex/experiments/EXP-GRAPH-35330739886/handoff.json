@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35330739886",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on real APIs with stochastic behavior (DB/cache/CDN), alternative JWT algorithms (RS256/ES256), and production middleware — and is delta=0.10 practically required, or is delta=0.15 sufficient for parallel-channel product architecture?",
+  "why_next": "The TOST/CI approach resolves the parent's underpowered permutation test: CI upper bound 0.123 < delta=0.15 confirms orthogonality at < 2.25% shared variance on deterministic Flask mock, but fails at delta=0.10 (CI needs n ~ 865 vs current 480). The product-decision boundary is now bounded: delta=0.15 acceptable -> parallel channels justified; delta=0.10 required -> need more data or fused classifiers. However, all evidence remains on deterministic Flask 3.1.3 + PyJWT HS256 localhost with graded session_status_check. The critical unknown is whether real APIs with stochastic DB/cache/CDN, production middleware, and alternative JWT algorithms preserve the near-zero correlation structure. This requires materially different infrastructure (real API endpoints, not mock servers) and is the highest-upside question for C-FRESHNESS product deployment.",
+  "carry_forward": {
+    "established": [
+      "Behavioral-structural signal orthogonality confirmed at delta=0.15 on deterministic Flask 3.1.3 + PyJWT HS256 localhost: pooled r=0.0335 (r2=0.001), 95% CI [-0.056, 0.123], CI upper 0.123 < 0.15. TOST p_upper 0.005 at delta=0.15. Shared variance < 2.25%, > 97.75% independent. n=480 paired samples from 8 co-occurring conditions x 60.",
+      "TP/variance trade-off broken and verified across multiple experiments: graded session_status_check (401->1.0, 403->0.5, 500->0.75) with session_change=1 for ALL session_invalidation samples achieves mean TP=1.0 (Wilson lower 0.9398 > 0.75) across 8 co-occurring conditions while maintaining within-condition variance (8/8 conditions std>0 for both signals). FP=0.0 on 240 noise-only samples.",
+      "Power analysis established: for true |r|=0.05 at alpha=0.05, minimum n=1538 (permutation test). At n=480, minimum detectable |r|=0.0895. Observed |r|=0.0335 is below detectable threshold, confirming parent C3 failure was underpowering, not non-orthogonality.",
+      "TOST equivalence test is the appropriate methodology for very-low-magnitude correlations where the question is 'is |r| small enough?' not 'is |r| exactly zero?'. CI upper bound test replaces underpowered permutation p<0.05 gate.",
+      "Per-condition heterogeneity: SI+optional_field_addition r=-0.314 (p=0.014) is 1/8 expected under global null (expected 0.4 significant at alpha=0.05). Pooled r=0.0335 is the confirmatory measure. Permission_boundary conditions contribute zero behavioral variance (b_std=0 for PB conditions per raw_evidence)."
+    ],
+    "rejected": [
+      "Permutation p<0.05 as the sole confirmatory criterion for very-low-magnitude correlations (|r|<0.1) — provably underpowered at any practical sample size; replaced by TOST/CI equivalence test",
+      "Session validity randomization via 50/50 coin flip as a path to valid orthogonality test — achieves C2 variance but breaks C1 TP (mean 0.729 < 0.85) by creating false negatives",
+      "signing_key_rotation as a co-occurring drift pattern — blocks ALL endpoints, making structural signal unobservable",
+      "delta=0.10 achievable at n=480 with CI-based rule — minimum n=865 required (Fisher z TOST); min_n_tost values reported in result.json are ~4x too small and require correction"
+    ],
+    "unknown": [
+      "Whether behavioral-structural orthogonality (|r| < 0.15) holds on real APIs with stochastic DB/cache/CDN, production middleware, and heterogeneous client profiles",
+      "Whether delta=0.10 (< 1% shared variance) is practically required for product architecture, or delta=0.15 is sufficient",
+      "Whether the single significant per-condition r=-0.314 (SI+optional_field_addition) replicates or is sampling noise (1/8 expected under null; binomial p=0.031 for exactly 1 significant)",
+      "Whether alternative JWT algorithms (RS256/ES256) or OAuth/OIDC production middleware preserve the correlation structure",
+      "Whether wider stochastic variation (all 7 permission subsets, larger n, varied noise magnitudes) changes pooled r estimate",
+      "Whether the one-sided 95% CI upper bound (0.108) should replace two-sided 0.123 as decision criterion — would pass delta=0.12 and nearly 0.10"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is VALIDATED or reaches PRODUCT_CORE — status remains EXPERIMENTAL; MIXED outcome at delta=0.15 is bounded confirmation, not full validation",
+      "Parallel channels are universally justified — justified ONLY if product tolerates delta=0.15 (< 2.25% shared variance); delta=0.10 requires larger n",
+      "Orthogonality transfers to real APIs — all evidence on deterministic Flask mock; real API stochasticity may shift correlation",
+      "The pooled r=0.0335 is the true population correlation — point estimate is sample-dependent; CI [0.0, 0.123] is the justified range",
+      "Per-condition table errors (PB b_std=0, min_n_tost ~4x too small) affect the C3 decision — CI bound 0.123 < 0.15 holds regardless of table corrections",
+      "n=480 is sufficient for any equivalence margin — CI-bound confirmation needs n >= 865 for delta=0.10, n >= 518 for delta=0.12"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35330739886/result.json — TOST/CI metrics, C1-C4 verified controls, delta-sample-size trade-off",
+    "research/experiments/EXP-GRAPH-35330739886/audit.json — status PASS, recomputed_metrics (CI bounds, TOST p_upper), required_fixes, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35330739886/spec.json — frozen decision_rule (CI upper bound test), equivalence margins delta in {0.10, 0.12, 0.15, 0.20}",
+    "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json (sha256:13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6) — parent n=480 paired samples used for reanalysis",
+    "research/experiments/EXP-GRAPH-35308806969/handoff.json — inherited established/rejected/unknown/do_not_assume, power analysis, decision-rule revision guidance",
+    "research/experiments/EXP-GRAPH-35308806969/audit.json — parent PASS, underpower diagnosis verification",
+    "codex/claim_state.json:C-FRESHNESS — claim event history showing EXPERIMENTAL status across 20+ experiments"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35330739886/request.json",
+    "research/experiments/EXP-GRAPH-35330739886/spec.json",
+    "research/experiments/EXP-GRAPH-35330739886/prereg.md",
+    "research/experiments/EXP-GRAPH-35330739886/freeze.json",
+    "research/experiments/EXP-GRAPH-35330739886/result.json",
+    "research/experiments/EXP-GRAPH-35330739886/report.md",
+    "research/experiments/EXP-GRAPH-35330739886/audit.json",
+    "research/experiments/EXP-GRAPH-35330739886/provenance.json",
+    "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json (sha256:13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6)",
+    "research/experiments/EXP-GRAPH-35308806969/handoff.json (sha256:a1d844e0da998d01a92a9824dee4d7bb9d85d5b0bf2eed5cd3a6ca9dd259a509)"
+  ],
+  "recommended_action": "Test behavioral-structural orthogonality on real APIs with stochastic behavior. Design a graph lane experiment using real API endpoints (e.g., self-hosted production-like REST APIs with DB-backed responses, cache headers, CDN simulation) to measure whether |r| < 0.15 persists when: (a) behavioral signals come from real JWT validation, session state, and permission checks; (b) structural signals come from real schema/documentation endpoints; (c) stochastic variation is introduced via DB state, cache TTL, and timing jitter. If orthogonality holds at delta=0.15 on real APIs, C-FRESHNESS can advance toward VALIDATED. If orthogonality breaks (|r| > 0.3), the product must pivot to fused classifiers. Do NOT increase n to 865 for delta=0.10 confirmation until real-API orthogonality is established — the practical significance question (do real APIs preserve near-zero correlation?) is more important than the statistical power question (can we confirm delta=0.10 at larger n?)."
+}

@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-INTEL-35330747199",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can the OECD/COINr sensitivity analysis framework be operationalized on existing truncated-first-20 density data to produce a principled MIXED outcome decision rule for SPIDER's density metric recipe ambiguity — specifically, can it generate dominance pairs, ranking confidence intervals, and a recipe-sensitivity classification that is more informative than the binary C2 TRUE/FALSE verdict?",
+  "hypothesis": "The OECD/COINr framework applied to per-task density scores from both recipes (canonical per-iteration p=0.5 and per-task weighted) across 3 definitions (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK) and 7 tasks will produce: (a) non-degenerate dominance pairs (0% < dominance < 100%) that quantify recipe-by-definition ranking stability, (b) confidence intervals on per-task density rankings with width < 50th percentile of the density range, and (c) a recipe-sensitivity classification (LOW/MEDIUM/HIGH) that distinguishes task-definition pairs where recipe choice matters from those where it does not. The framework will yield a MIXED outcome classification that is more informative than the current binary C2 TRUE/FALSE.",
+  "falsifier": "The framework is falsified if ANY of: (F1) dominance pairs are degenerate (all 0% or all 100%) across all task-definition pairs, indicating the framework cannot distinguish recipe-sensitive from recipe-insensitive cases; (F2) confidence interval width exceeds 90th percentile of the density range for all pairs, indicating the framework produces uninformative uncertainty bounds; (F3) the recipe-sensitivity classification assigns all pairs to the same category (all LOW or all HIGH), indicating the framework cannot discriminate; (F4) the framework produces errors or NaN values on >20% of task-definition pairs due to data sparsity (single-task per type, n=1 cart).",
+  "baselines": [
+    {
+      "id": "B1_BINARY_C2",
+      "description": "Current binary C2 outcome: per-iteration C2 FALSE (observed 0.333 < null 0.586) vs per-task weighted C2 TRUE (observed 0.333 > null 0.205). Divergence 0.38. This is the baseline the OECD framework must improve upon.",
+      "source": "EXP-INTEL-35264637598 result.json M3, M4, M7, M8"
+    },
+    {
+      "id": "B2_RANDOM_CLASSIFICATION",
+      "description": "Random assignment of task-definition pairs to LOW/MEDIUM/HIGH sensitivity categories (expected 33% each). The OECD classification must be non-random (chi-square p < 0.05 against uniform).",
+      "source": "Constructed null"
+    },
+    {
+      "id": "B3_FULL_DOMEN",
+      "description": "Placeholder for future full-DOM data. Not available now (blocked by runtime locatableSample cap). OECD framework results on truncated data are bounded to truncated-first-20 scope.",
+      "source": "BLOCKED — runtime substrate"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_FRAMEWORK_EXECUTES",
+    "description": "The OECD/COINr sensitivity analysis code executes without error on the reconstructed density matrix (7 tasks x 3 definitions x 2 recipes) and produces dominance pairs, confidence intervals, and classification for all 21 task-definition pairs.",
+    "expected": "All 21 pairs produce non-null, non-NaN results."
+  },
+  "null_control": {
+    "id": "NC1_SHUFFLED_RECIPES",
+    "description": "When recipe labels are randomly shuffled (breaking the recipe-definition association), the dominance pairs should converge to ~50% (no systematic recipe advantage) and confidence intervals should widen, confirming the framework detects real recipe structure vs noise.",
+    "expected": "Shuffled dominance mean within 10% of 50%; shuffled CI width >= 1.5x original CI width."
+  },
+  "measurement_validity": [
+    "Per-task density values must be reconstructed from raw evidence (EXP-INTEL-35083033557 raw_results.json or EXP-INTEL-35264637598 analysis code) before OECD analysis. Reconstruction must be documented with exact code path and hash.",
+    "The OECD/COINr framework implementation must use a published, versioned library (COINr PyPI package) or a from-scratch implementation with unit tests against known OECD examples.",
+    "All 21 task-definition pairs (7 tasks x 3 definitions) must have non-null density values for both recipes. Pairs with missing data must be flagged and analyzed for sensitivity to exclusion.",
+    "The recipe-sensitivity classification thresholds (LOW/MEDIUM/HIGH) must be specified before looking at outcomes (preregistered).",
+    "The truncated-first-20 scope must be explicitly stated in all outputs — no extrapolation to full-DOM."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_FRAMEWORK_VALID: The OECD/COINr framework executes without error on the reconstructed density matrix and produces non-degenerate outputs for >= 80% (17/21) of task-definition pairs.\n\nC2_DOMINANCE_INFORMATIVE: At least one dominance pair is strictly between 10% and 90% (non-degenerate), indicating the framework can distinguish recipe-sensitive from recipe-insensitive cases.\n\nC3_CI_INFORMATIVE: At least one confidence interval has width < 50th percentile of the observed density range, indicating the framework produces informative uncertainty bounds.\n\nC4_CLASSIFICATION_DISCRIMINATES: The recipe-sensitivity classification assigns pairs to >= 2 different categories (not all LOW or all HIGH), with chi-square p < 0.10 against uniform.\n\nC5_NULL_CONTROL_PASSES: Shuffled-recipe dominance mean is within 15% of 50% AND shuffled CI width >= 1.3x original CI width.\n\nVERDICT RULES:\n- If C1 AND C2 AND C3 AND C4 AND C5: SURVIVES_CURRENT_TEST — OECD framework operationalizable for SPIDER density metric MIXED outcome handling at truncated-first-20 ceiling\n- If C1 AND (C2 OR C3 OR C4) AND NOT C5: MIXED — framework produces informative outputs but null control fails, suggesting framework may overfit to recipe structure in this small sample\n- If C1 AND NOT (C2 OR C3 OR C4): FALSIFIED-IN-SETTING — framework produces degenerate outputs on this data, not operationalizable for SPIDER density metric\n- If NOT C1: MEASUREMENT_INVALID — framework cannot execute or produces >20% errors",
+  "product_consequence_positive": "Product lane gains a principled MIXED outcome decision rule for density metric recipe ambiguity. When the full-DOM re-run (blocked by runtime substrate) produces conflicting recipe results, the OECD framework provides a concrete protocol: report dominance pairs, ranking CIs, and sensitivity classification rather than choosing one recipe. This resolves the MIXED outcome amendment needed before any SURVIVES promotion (unknown[8] from EXP-INTEL-35264637598). Product lane can also use the sensitivity classification to identify which task-definition pairs are recipe-sensitive (requiring careful recipe justification) vs recipe-insensitive (where either recipe suffices).",
+  "product_consequence_negative": "If the framework is falsified on truncated data, the density metric program must either: (a) adopt the canonical per-iteration recipe as sole recipe with no MIXED fallback (risky — recipe choice is material per established[1]), (b) develop a SPIDER-specific sensitivity method not based on OECD/COINr (requires new research), or (c) restrict density metric use to recipe-insensitive task-definition pairs only (may be empty set). The MIXED outcome decision rule remains unresolved, blocking SURVIVES promotion for C-MEAS-VALID density sub-problem.",
+  "estimated_cost": "LOW — computation is offline on existing reconstructed data (7 tasks x 3 definitions x 2 recipes = 21 density values). OECD/COINr framework is a lightweight Python library. No browser/network work. Estimated < 1000 LLM tokens for execution.",
+  "expected_information_gain": "HIGH — resolves a concrete design blocker (MIXED outcome decision rule) that blocks C-MEAS-VALID promotion. The result directly changes the frozen spec for the full-DOM re-run: if SURVIVES, the MIXED decision rule is pre-operationalized; if FALSIFIED, the density metric program pivots before wasting a runtime-lane cycle on a re-run that cannot produce a promotable result. Information gain is high because either outcome changes a product decision."
+}

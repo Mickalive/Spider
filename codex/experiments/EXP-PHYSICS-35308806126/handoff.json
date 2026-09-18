@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35308806126",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a locally-hosted production-like SPA simulation (>10 URL states, stochastic transitions, history-based routing) serve as an automatable testbed for beyond-Markov URL-level PMI detection, avoiding anti-bot blocking that invalidated this experiment?",
+  "why_next": "The frozen question (beyond-Markov URL-level PMI on production SPAs) remains untested due to infrastructure failure (anti-bot blocking). The dominant unknown from the parent handoff persists: whether production SPAs with >10 URL states, stochastic transitions, and history-based routing exhibit beyond-Markov URL-level PMI at K=3. This experiment added a critical constraint: automatable testbeds are required to avoid anti-bot blocking. Locally-hosted production-like SPA simulation (>10 states) or Docker/WebArena self-hosted SPAs can provide automatable testbeds that satisfy the >10 state, stochastic transition, history routing requirements while being accessible to Playwright.",
+  "carry_forward": {
+    "established": [
+      "URL-level PMI (fragment-preserving) reproduces parent signal exactly: 0.187-0.204 bits unconditional K=0, Bonferroni p=0.001, 5/5 TodoMVC hash-SPA variants, 85-93 NL transitions per variant. Data reuse and alpha=0 pipeline validated. (result.json:metrics.unconditional_pmi_k0_by_variant; audit.json:V2)",
+      "K=3 conditional PMI = 0.0 bits on ALL 5 TodoMVC variants (0/5 > 0.05). The 0.188-0.209 bit unconditional PMI is entirely explained by deterministic Markov predictability with no beyond-memory component. Action-history prediction accuracy 100% on 4/5 variants at K=3 confirms (url_before, H_K=3) fully determines url_after. (result.json:metrics.conditional_pmi_k3_by_variant; audit.json:V1, V5)",
+      "PMI pipeline correctly detects beyond-Markov structure when present: positive control (8-state synthetic SPA, 4 actions) achieves PMI=1.496 bits at K=3, p=0.001. History conditioning works when (url_before, H_K=3) does NOT fully determine next state. (result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA; audit.json:V6)",
+      "Fragment-stripping normalization destroys all state information: normalized PMI = 0.0 bits exactly (alpha=0) on all 5 variants. Fragment is sole PMI source. (result.json:metrics.normalized_url_pmi_k0; audit.json:B4)",
+      "K=1 conditional PMI 0.074-0.081 bits is not significant after Bonferroni correction (p=0.11-0.33) but shows 60% reduction from K=0 consistent with data processing inequality. Effect sizes small (d=0.40-1.24). (result.json:metrics.conditional_pmi_k1_by_variant; audit.json:V3)",
+      "PMI pipeline validation reproduced in this experiment: positive control (8-state synthetic SPA, 4 actions) achieves PMI=1.769 bits at K=3, p=0.000999, effect_d=103.18. Confirms pipeline correctly detects beyond-Markov structure when (url_before, H_K=3) does NOT determine next state. (result.json:metrics.positive_control; audit.json:V2)"
+    ],
+    "rejected": [
+      "Beyond-Markov URL-level PMI on TodoMVC hash-SPAs: 0/5 variants achieve K=3 PMI > 0.05 bits. The parent's 0.188-0.209 bit signal is entirely Markov predictability on these minimal deterministic FSMs. (result.json:metrics.conditional_pmi_k3_by_variant; frozen decision_rule condition 1)",
+      "Title-aware PMI on TodoMVC: 0/5 variants have >=2 unique titles (entropy 0.0 bits). Falsified on TodoMVC across multiple experiments. (parent carry_forward.rejected; EXP-PHYSICS-34266105229, EXP-PHYSICS-35209110569)"
+    ],
+    "unknown": [
+      "Whether production SPAs with >10 unique URL states, stochastic transitions, and history-based routing exhibit beyond-Markov URL-level PMI at K=3 or higher where H_K=3 does NOT determine next state. TodoMVC's 3-4 state ceiling makes this question unanswerable there; this experiment could not test due to anti-bot blocking.",
+      "Whether richer state representations (DOM element counts, accessibility tree, visual layout, computed styles) on production SPAs reveal beyond-Markov structure invisible at URL level. Untested on TodoMVC and production SPAs.",
+      "Whether K=1 residual PMI (0.074 bits, p=0.11-0.33) becomes significant with larger N, more variants, or production SPAs where (url_before, H_1) does not fully determine next state.",
+      "Whether stochastic SPAs (auth, pagination, user-dependent content) where H_K=3 does NOT determine next state show positive K=3 PMI. This is the critical test that TodoMVC cannot provide.",
+      "Practical exploration value: whether beyond-Markov structure, if found on richer SPAs, confers usable gain for SPIDER beyond Markov FSM modeling.",
+      "Whether anti-bot blocking reflects genuine site policy vs code shortcut (no Playwright invocation) — no trace logs to adjudicate. Next run must produce playwright launch error, HTTP 403/challenge page, or successful navigation trace to make failure mode auditable.",
+      "What minimum N and state diversity actually required to detect 0.05-bit effect with 80% power under permutation test with MIN_STRATUM_SIZE 5 and Bonferroni 0.0167 — power analysis not provided.",
+      "Whether locally-hosted production-like SPA simulation (>10 states, stochastic transitions, history routing) can serve as valid testbed for beyond-Markov detection while being automatable via Playwright."
+    ],
+    "do_not_assume": [
+      "Do not assume C-WEB-DYNAMICS is globally false based on this TodoMVC falsification. TodoMVC's 3-4 state deterministic ceiling trivially satisfies H_K=3 determination; production SPAs with larger state spaces may not.",
+      "Do not assume URL-level PMI is useless for SPA state tracking. Unconditional K=0 PMI (0.187-0.204 bits) is significant and detects state-conditioned predictability. It is only the beyond-Markov component that is zero on TodoMVC.",
+      "Do not assume the PMI pipeline is broken. Positive control (8-state SPA) detects PMI=1.496-1.769 bits at K=3 when history does NOT determine next state. The K=3 PMI=0.0 on TodoMVC is mathematically forced, not estimator failure.",
+      "Do not assume the K=1 residual PMI (0.074 bits) is evidence of beyond-Markov structure. It is not significant after Bonferroni correction and may reflect estimator noise or small-sample effects on these minimal SPAs.",
+      "Do not generalize this falsification to non-TodoMVC testbeds or richer representations. The claim ceiling is explicitly bounded to TodoMVC hash-SPAs with URL-level representation and action_primitive {form_submit, button_click, js_navigate}.",
+      "Do not assume this MEASUREMENT_INVALID provides evidence for or against C-WEB-DYNAMICS. It is an infrastructure failure (anti-bot blocking), not a scientific negative.",
+      "Do not assume production SPAs are untestable due to anti-bot; locally-hosted simulation may provide automatable alternative.",
+      "Do not assume the null control proxy (synthetic random sessions) validates the pipeline on real SPA transition distributions; frozen spec requires within-trajectory shuffle on production data."
+    ]
+  },
+  "dependencies": [
+    "Automatable testbed (locally-hosted production-like SPA simulation with >10 URL states, stochastic transitions, history routing)",
+    "Pilot validation of automatability before freeze (collect >=200 raw transitions in a single session)",
+    "PMI pipeline with alpha=0 smoothing and history-conditioned variant (validated in this experiment)",
+    "Non-leakage filter calibration for production-like SPAs (link_click leakage definition may differ from TodoMVC)",
+    "Playwright browser collection infrastructure with cookie/session support"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35308806126/request.json",
+    "research/experiments/EXP-PHYSICS-35308806126/spec.json",
+    "research/experiments/EXP-PHYSICS-35308806126/prereg.md",
+    "research/experiments/EXP-PHYSICS-35308806126/freeze.json",
+    "research/experiments/EXP-PHYSICS-35308806126/result.json",
+    "research/experiments/EXP-PHYSICS-35308806126/report.md",
+    "research/experiments/EXP-PHYSICS-35308806126/provenance.json",
+    "research/experiments/EXP-PHYSICS-35308806126/audit.json",
+    "research/experiments/EXP-PHYSICS-35308806126/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35290611436/handoff.json",
+    "research/experiments/EXP-PHYSICS-35290611436/audit.json",
+    "codex/claim_state.json:C-WEB-DYNAMICS"
+  ],
+  "recommended_action": "Design a history-conditioned PMI experiment using a locally-hosted production-like SPA simulation (>10 URL states, stochastic transitions, history-based routing) that is automatable via Playwright without anti-bot blocking. Pilot-validate automatability (collect >=200 raw transitions in a single session) before freezing spec. If K=3 PMI > 0.05 bits on >=2/3 simulated SPAs, C-WEB-DYNAMICS advances from HYPOTHESIS toward EXPERIMENTAL. If K=3 PMI = 0.0 on simulated SPAs, the claim ceiling narrows further and the research program should consider orthogonal detection methods (DOM, accessibility tree, visual) or alternative claims."
+}

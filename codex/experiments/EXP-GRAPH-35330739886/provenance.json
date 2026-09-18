@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35330739886",
+  "lane": "graph",
+  "created_at": "2026-09-18T09:40:31.967217+00:00",
+  "executed_at": "2026-09-18T12:00:00+00:00",
+  "github_run_id": "35330739886",
+  "base_commit": "f14b01cf8dbd10513705c8c9606023c4a27ac30f",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-35308806969",
+    "path": "research/experiments/EXP-GRAPH-35308806969",
+    "raw_data_path": "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json",
+    "raw_data_sha256": "13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6"
+  },
+  "datasets": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json",
+      "sha256": "13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6",
+      "role": "raw",
+      "description": "Parent experiment raw data: 480 paired (behavioral, structural) scores from Flask 3.1.3 + PyJWT HS256 localhost, 8 co-occurring conditions x 60 samples, SEED=42"
+    }
+  ],
+  "code_paths": [],
+  "methodology": {
+    "description": "Frozen statistical reanalysis only. No new data collection. TOST equivalence test and Fisher z-transform CI on parent n=480 paired samples.",
+    "statistical_method": "Fisher z-transform: z = 0.5*ln((1+r)/(1-r)), SE = 1/sqrt(n-3), CI = tanh(z +/- z_alpha * SE)",
+    "tost_method": "Two one-sided tests at alpha=0.05 each: H0_lower: r <= -delta, H0_upper: r >= delta. Both must reject for equivalence.",
+    "decision_rule_ref": "spec.json decision_rule — CI upper bound test"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35330739886/result.json",
+      "role": "derived",
+      "description": "TOST/CI analysis results, verified parent controls, delta-vs-sample-size trade-off"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35330739886/report.md",
+      "role": "derived",
+      "description": "Human-readable report with tables and product consequences"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35330739886/provenance.json",
+      "role": "derived",
+      "description": "This provenance record"
+    }
+  ],
+  "frozen_inputs": {
+    "request_json_hash": "85a2096b2bb5dc7aa7ddfa6e7b1607344cc08e527adc3320f6cb52cbd8d36968",
+    "spec_json_hash": "45e632aba7a5cb455ffcb39d152878c70096bef652bd44e40b56d54df77fd39b",
+    "prereg_md_hash": "6e174a3a46bc84b0223827a718196b229a254668067bc2e170c4de1fb7230c75",
+    "freeze_json_hash": null
+  },
+  "reproduction_instructions": "Load parent raw_evidence/experiment_data.json, extract all_behavioral_scores and all_structural_scores (480 paired values), compute Pearson r, Fisher z-transform, and TOST at delta in {0.10, 0.12, 0.15, 0.20}. All computation is deterministic given the raw data."
+}

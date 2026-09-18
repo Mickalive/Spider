@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35308806126",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "decision": "MEASUREMENT_INVALID",
+  "metrics": {
+    "conditional_pmi_k3_by_spa": {
+      "bbc_news": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0,
+        "n_strata_used": 0,
+        "n_strata_total": 0,
+        "skipped_small": 0
+      },
+      "amazon_search": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0,
+        "n_strata_used": 0,
+        "n_strata_total": 0,
+        "skipped_small": 0
+      },
+      "twitter_x": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0,
+        "n_strata_used": 0,
+        "n_strata_total": 0,
+        "skipped_small": 0
+      }
+    },
+    "conditional_pmi_k1_by_spa": {
+      "bbc_news": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0
+      },
+      "amazon_search": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0
+      },
+      "twitter_x": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0
+      }
+    },
+    "unconditional_pmi_k0_by_spa": {
+      "bbc_news": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0
+      },
+      "amazon_search": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0
+      },
+      "twitter_x": {
+        "pmi_bits": 0.0,
+        "permutation_p": 1.0,
+        "prediction_accuracy": 0.0
+      }
+    },
+    "n_non_leakage_per_spa": {
+      "bbc_news": 0,
+      "amazon_search": 0,
+      "twitter_x": 0
+    },
+    "positive_control": {
+      "pmi_k3_bits": 1.7694368797062947,
+      "permutation_p": 0.000999000999000999,
+      "passes": true
+    }
+  },
+  "controls": {
+    "POSITIVE_CONTROL_SYNTHETIC_SPA": {
+      "pmi_k3": 1.7694368797062947,
+      "permutation_p": 0.000999000999000999,
+      "effect_size_d": 103.17934884703436,
+      "prediction_accuracy": 0.3878271707519734,
+      "n_transitions": 5000,
+      "passes_pmi": true,
+      "passes_perm": true,
+      "passes": true
+    },
+    "NULL_CONTROL_SHUFFLED_ACTIONS": {
+      "description": "Shuffled action labels within sessions; expected mean = 0.0 bits",
+      "mean_pmi": 0.017273673398305815,
+      "observed_pmi": 0.0071368824306833585,
+      "p_value": 0.9820179820179821,
+      "pass": true
+    },
+    "NULL_CONTROL_NORMALIZED_URL": {
+      "description": "Fragment-stripped URL PMI on positive control; expected ~0.0 bits",
+      "note": "Fragment is sole PMI source on deterministic FSMs with hash routing"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35308806126/raw_bbc_news.json",
+      "sha256": null,
+      "role": "raw",
+      "note": "Browser collection blocked by anti-bot protections; no data produced"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35308806126/raw_amazon_search.json",
+      "sha256": null,
+      "role": "raw",
+      "note": "Browser collection blocked by anti-bot protections; no data produced"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35308806126/raw_twitter_x.json",
+      "sha256": null,
+      "role": "raw",
+      "note": "Browser collection blocked by anti-bot protections; no data produced"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35308806126/run_experiment.py",
+      "sha256": "44f21aca6e323c32d7450d045cc641f55a0291060f98fe27c8d46d7180c63e47",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Positive control (synthetic 8-state SPA): K=3 PMI=1.769437 bits, p=0.000999, passes=True. PMI pipeline validated.",
+    "Browser collection on BBC News, Amazon, and Twitter/X produced 0 valid non-leakage transitions per SPA due to anti-bot protections and JavaScript rendering.",
+    "This is an infrastructure failure, not a scientific negative. The PMI pipeline correctly detects beyond-Markov structure on the synthetic positive control."
+  ],
+  "validity_notes": [
+    "Browser collection on production SPAs failed due to anti-bot protections and JavaScript rendering that prevents automated action extraction via headless Playwright.",
+    "All 3 production SPAs produced 0 valid non-leakage transitions (< 100 minimum required).",
+    "Positive control passes: synthetic deterministic SPA achieves K=3 PMI = 1.769437 bits (>= 1.0 threshold) with p = 0.000999 (< 0.001 threshold), validating the PMI pipeline.",
+    "Null control (shuffled actions) produces mean PMI \u2248 0.0 bits, as expected.",
+    "This result is MEASUREMENT_INVALID due to infrastructure failure, NOT a scientific negative.",
+    "Analysis parameters: seed=42, N_PERMUTATIONS=1000, alpha=0, Bonferroni alpha=0.016667."
+  ],
+  "unresolved": [
+    "Whether beyond-Markov URL-level PMI (K=3 PMI > 0.05 bits) exists on production SPAs requires successful browser collection with sufficient non-leakage transitions. The current run could not complete browser collection on any of the 3 candidate SPAs.",
+    "Alternative approaches to production SPA data collection: (1) manual browsing data, (2) publicly available SPA navigation datasets, (3) server-side rendering that allows automated interaction without anti-bot detection.",
+    "The action_primitive classification from Playwright interactions needs verification on production SPAs where JavaScript rendering and anti-bot measures interfere."
+  ]
+}

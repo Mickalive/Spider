@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35330747199",
+  "lane": "intel",
+  "created_at": "2026-09-18T00:00:00Z",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "model_id": "opencode/mimo-v2.5-free",
+    "agent": "SPIDER Research 2.0 intel lane researcher"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-35330747199/request.json",
+      "sha256": "8d7edc7a..."
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-35330747199/spec.json",
+      "sha256": "63c50c86..."
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-35330747199/prereg.md",
+      "sha256": "2e74c163..."
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-35330747199/freeze.json",
+      "sha256": null
+    }
+  },
+  "upstream_evidence": {
+    "raw_data": {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "note": "Parent experiment raw measurement data: 7 tasks, 3 definitions, locatable_sample capped at 20"
+    },
+    "parent_result": {
+      "path": "research/experiments/EXP-INTEL-35264637598/result.json",
+      "note": "Prior C2 verification experiment"
+    },
+    "parent_handoff": {
+      "path": "research/experiments/EXP-INTEL-35290611333/handoff.json",
+      "note": "Parent handoff with carry_forward state"
+    },
+    "sibling_audit": {
+      "path": "research/experiments/EXP-INTEL-35264637598/audit.json",
+      "note": "Sibling audit finding MIXED outcome"
+    }
+  },
+  "produced_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35330747199/result.json",
+      "sha256": null,
+      "role": "result",
+      "note": "Producer handoff with mandatory packet keys"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35330747199/report.md",
+      "sha256": null,
+      "role": "report",
+      "note": "Human-readable interpretation and implications"
+    },
+    {
+      "path": "/tmp/opencode/oecd_analysis_results.json",
+      "sha256": "ec1ba71fca8792dec2fd10a64717c285559b63f68092fd7677a1a0388d76441e",
+      "role": "derived",
+      "note": "Complete analysis output: density matrix, dominance pairs, ranking CIs, classification, null controls"
+    },
+    {
+      "path": "/tmp/opencode/oecd_sensitivity_analysis.py",
+      "sha256": "f3e1e66ec03a8f8edb314e06414d76f44526d1556c73688f1c29d47daada5aca",
+      "role": "code",
+      "note": "Analysis script implementing OECD/COINr-style sensitivity analysis"
+    }
+  ],
+  "analysis_parameters": {
+    "recipes": ["canonical", "pertask_weighted"],
+    "definitions": ["DEF-FULL-MAP", "DEF-FORM-ONLY", "ISOLATED-A-LINK"],
+    "tasks": 7,
+    "bootstrap_iterations": 1000,
+    "null_permutations": 1000,
+    "seeds": [42, 123, 456, 789, 1000],
+    "locatable_sample_cap": 20,
+    "note": "All parameters frozen in spec.json. Analysis executed exactly as designed."
+  },
+  "reproduction_command": "python3 /tmp/opencode/oecd_sensitivity_analysis.py",
+  "git_state": {
+    "branch": "HEAD detached at 135ae03",
+    "note": "No commits made. Git state preserved as-is per frozen constraint."
+  }
+}
