@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35262262505",
+  "lane": "graph",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen decision rule requires BOTH |r| < 0.3 AND permutation p < 0.05 for C3_orthogonality PASS. The observed |r|=0.0527 < 0.3 passes the magnitude threshold, but permutation p=0.414 > 0.05 fails the significance threshold. This is an underpowered confirmatory test (n=240) for very low correlations, not evidence of non-orthogonality. To resolve: either increase sample size (n>=480 recommended for power at |r|~0.05) or revise the frozen decision rule's permutation p threshold for low-magnitude correlations.",
+    "The arbitrary session_status_check mapping (401->1.0, 403->0.5, 500->0.75) should be justified or tested for sensitivity. Different mappings could alter the behavioral composite distribution and correlation structure.",
+    "Noise-only sample size is 120 (4 conditions x 30), not 240 as originally specified in earlier parent experiments. While FP=0.0 replicates, the smaller n reduces precision of the null control estimate."
+  ],
+  "validity_findings": [
+    "TP/variance trade-off IS broken: C1_drift_tp PASS (mean TP=1.0, all Wilson lower CI=0.8865 > 0.75) and C2_variance PASS (8/8 conditions with std>0 for both signals). The design fix from parent (ALL sessions invalid + graded session_status_check) successfully preserves detection while creating variance.",
+    "C3_orthogonality FAILs on the frozen decision rule: |r|=0.0527 < 0.3 passes magnitude gate but permutation p=0.414 > 0.05 fails significance gate. This is a known limitation — with true |r|~0.05 and n=240, the permutation test has very low power to achieve p<0.05. The correlation is near-zero (r²=0.003, behavioral explains 0.3% of structural variance).",
+    "Positive controls verified: PC_PERMISSION_BOUNDARY_DETECTION rate=1.0 (30/30), PC_SESSION_STATUS_VARIANCE = 4/4 session_invalidation conditions with behavioral std>0. Null control C4_null_control verified: FP=0.0 on 120 noise-only samples.",
+    "Measurement validity CONFIRMED: 8/8 co-occurring conditions have within-condition variance for both signals, 240 paired samples available. All validity gates pass.",
+    "Session_status_check distribution across {401, 403, 500} is approximately uniform per condition (9-12 each), confirming the graded intensity mechanism operates as designed. No 200 codes appear in SI conditions (session_change=1 always).",
+    "Per-drift-pattern correlations: permission_boundary r=0.0514 (n=120), session_invalidation r=0.0462 (n=120). Both very low, consistent with parent's PB-only finding (r=0.051, p=0.577). The pooled r=0.0527 is not driven by session_invalidation as in parent (where SI r=0.189).",
+    "Arbitrary session_status_check mapping is a validity threat: the mapping 401->1.0, 403->0.5, 500->0.75 is not grounded in real API behavior and could affect correlation structure. However, ANY mapping that creates variance while keeping session_change=1 tests the core hypothesis (variance without TP dilution).",
+    "Deterministic mock server limits external validity: Flask 3.x + PyJWT HS256 on localhost does not capture real API stochasticity (DB/cache/CDN, heterogeneous clients, OAuth/OIDC middleware). Claim ceiling bounded to deterministic mock."
+  ],
+  "baseline_findings": [
+    "Parent EXP-GRAPH-35237975537 C1 FAIL (mean TP=0.729) was caused by 50/50 coin flip mixing valid sessions (behavioral=0) into drift labels. This experiment's fix (ALL invalid + graded status) achieves mean TP=1.0 — confirming the audit's root cause analysis (V1_C1_FAIL_BY_DESIGN_ARTIFACT).",
+    "Parent pooled |r|=0.1387 (p=0.031) was heterogeneous: PB r=0.051 (p=0.577) vs SI r=0.189 (p=0.038). This experiment's pooled r=0.0527 is homogeneous and low for both drift patterns, eliminating the SI-driven correlation artifact from the bimodal coin-flip design.",
+    "Permission_boundary-only orthogonality (r=0.051, p=0.577) replicates across EXP-GRAPH-35191029030, EXP-GRAPH-35237975537, and this experiment — stable finding that PB behavioral and structural signals are near-orthogonal but confirmatory test underpowered.",
+    "Null control FP=0.0 on 120 noise-only samples replicates across all three experiments. Behavioral signals do not false-positive on structural noise without drift."
+  ],
+  "recomputed_metrics": {
+    "mean_tp_rate": 1.0,
+    "all_wilson_lower_above_075": true,
+    "wilson_lower_ci_value": 0.8864829086095221,
+    "pearson_r_pooled": 0.0526527661625716,
+    "pearson_p_pooled_parametric": 0.416793,
+    "permutation_p_pooled": 0.418581,
+    "abs_r_pooled": 0.0526527661625716,
+    "fp_rate_noise_only": 0.0,
+    "fp_count_noise_only": 0,
+    "total_noise_only_samples": 120,
+    "positive_control_rate": 1.0,
+    "n_cooccurring_conditions": 8,
+    "n_noise_only_conditions": 4,
+    "n_samples_per_condition": 30,
+    "n_paired_samples": 240,
+    "conditions_with_variance": 8,
+    "per_condition_tp": {
+      "cooccur_permission_boundary+optional_field_addition": 1.0,
+      "cooccur_permission_boundary+description_change": 1.0,
+      "cooccur_permission_boundary+response_time_jitter": 1.0,
+      "cooccur_permission_boundary+field_type_normalization": 1.0,
+      "cooccur_session_invalidation+optional_field_addition": 1.0,
+      "cooccur_session_invalidation+description_change": 1.0,
+      "cooccur_session_invalidation+response_time_jitter": 1.0,
+      "cooccur_session_invalidation+field_type_normalization": 1.0
+    },
+    "per_condition_wilson_lower": {
+      "cooccur_permission_boundary+optional_field_addition": 0.8864829086095221,
+      "cooccur_permission_boundary+description_change": 0.8864829086095221,
+      "cooccur_permission_boundary+response_time_jitter": 0.8864829086095221,
+      "cooccur_permission_boundary+field_type_normalization": 0.8864829086095221,
+      "cooccur_session_invalidation+optional_field_addition": 0.8864829086095221,
+      "cooccur_session_invalidation+description_change": 0.8864829086095221,
+      "cooccur_session_invalidation+response_time_jitter": 0.8864829086095221,
+      "cooccur_session_invalidation+field_type_normalization": 0.8864829086095221
+    },
+    "per_condition_variance": {
+      "cooccur_permission_boundary+optional_field_addition": {"behavioral_std": 0.1651785416368723, "structural_std": 1.159621585786597, "has_variance": true},
+      "cooccur_permission_boundary+description_change": {"behavioral_std": 0.15713484026367724, "structural_std": 0.6282692274990254, "has_variance": true},
+      "cooccur_permission_boundary+response_time_jitter": {"behavioral_std": 0.15713484026367724, "structural_std": 0.9775252199076787, "has_variance": true},
+      "cooccur_permission_boundary+field_type_normalization": {"behavioral_std": 0.1632993161855452, "structural_std": 0.6236095644623236, "has_variance": true},
+      "cooccur_session_invalidation+optional_field_addition": {"behavioral_std": 0.4153311931459039, "structural_std": 1.0204846343227754, "has_variance": true},
+      "cooccur_session_invalidation+description_change": {"behavioral_std": 0.3741657386773941, "structural_std": 0.6668749674580853, "has_variance": true},
+      "cooccur_session_invalidation+response_time_jitter": {"behavioral_std": 0.39475730941090037, "structural_std": 0.9285592184789413, "has_variance": true},
+      "cooccur_session_invalidation+field_type_normalization": {"behavioral_std": 0.41799787346614836, "structural_std": 0.6767980168082317, "has_variance": true}
+    },
+    "per_drift_r": {
+      "permission_boundary": 0.05135707277765042,
+      "session_invalidation": 0.046228106434003734
+    },
+    "session_status_distribution": {
+      "cooccur_session_invalidation+optional_field_addition": {"401": 9, "403": 12, "500": 9, "200": 0, "n_total": 30},
+      "cooccur_session_invalidation+description_change": {"401": 6, "403": 12, "500": 12, "200": 0, "n_total": 30},
+      "cooccur_session_invalidation+response_time_jitter": {"401": 8, "403": 11, "500": 11, "200": 0, "n_total": 30},
+      "cooccur_session_invalidation+field_type_normalization": {"401": 10, "403": 11, "500": 9, "200": 0, "n_total": 30}
+    }
+  },
+  "claim_ceiling": "Graded session_status_check intensity (401/403/500) while keeping session_change=1 for all session_invalidation samples successfully breaks the TP/variance trade-off: C1_drift_tp PASS (TP=1.0, Wilson lower 0.886) and C2_variance PASS (8/8 conditions with std>0). Behavioral and structural signals show near-orthogonality (|r|=0.053, r²=0.003) but the frozen confirmatory test is underpowered (permutation p=0.414 > 0.05 at n=240). Maximum justified claim: 'Session_invalidation behavioral variance can be achieved without TP dilution using graded status codes; behavioral-structural orthogonality is plausible but not formally confirmed at p<0.05.' Product consequence: architecture should use composite multi-signal classifiers as precautionary measure, not independent parallel channels.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35262262505/request.json",
+    "research/experiments/EXP-GRAPH-35262262505/spec.json",
+    "research/experiments/EXP-GRAPH-35262262505/prereg.md",
+    "research/experiments/EXP-GRAPH-35262262505/freeze.json",
+    "research/experiments/EXP-GRAPH-35262262505/result.json",
+    "research/experiments/EXP-GRAPH-35262262505/report.md",
+    "research/experiments/EXP-GRAPH-35262262505/provenance.json",
+    "research/experiments/EXP-GRAPH-35262262505/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35262262505/mock_server.py",
+    "research/experiments/EXP-GRAPH-35262262505/raw_evidence/experiment_data.json (sha256: ba917b54fb014203ee910e5e46616e1ab41ed441478ccdce9ac5881806dab866)",
+    "research/experiments/EXP-GRAPH-35237975537/handoff.json (sha256: cef7179d7126b4414b11ef418ccfb73108c779f29085c69692ba6bc562aac73e)",
+    "research/experiments/EXP-GRAPH-35237975537/audit.json"
+  ],
+  "unresolved": [
+    "Whether increasing sample size to n>=480 would achieve permutation p<0.05 for |r|~0.05 (power analysis needed)",
+    "Whether alternative session_status_check mappings (e.g., 401->1.0, 403->0.2, 500->0.6 or continuous TTL-based) change the correlation structure",
+    "Whether real APIs with stochastic behavior (DB/cache/CDN) and OAuth/OIDC middleware (Auth0/Okta/Keycloak) preserve the near-orthogonality observed in deterministic mock",
+    "Whether the unauthenticated /session/status endpoint is practical in real-world API deployments (synthetic construct)",
+    "Whether composite multi-signal classifiers (behavioral + structural) outperform individual channels when orthogonality holds",
+    "Whether the response_time_jitter structural variance (from seed drift across baseline/current schema generations) is a measurement artifact (inherited from parent, audit V5)",
+    "Whether wider stochastic variation (all 7 non-empty permission subsets, n>=60 per condition) would change PB correlation estimate"
+  ]
+}

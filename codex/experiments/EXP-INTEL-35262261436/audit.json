@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35262261436",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_TRUNCATED_SCOPE_CORRECTLY_BOUNDED",
+      "severity": "info",
+      "finding": "Producer correctly bounds SURVIVES_CURRENT_TEST to truncated-first-20 locatable sample (7 tasks deduped: 3 product_listing, 3 detail, 1 cart; 1 Magento site; elements_with_bbox denominator). Scope limitation disclosed in result.json validity_notes[0-2], report.md Section 6, and provenance. No overgeneralization to full-DOM or cross-site.",
+      "evidence": "result.json validity_notes[0], provenance.json data_sources[0], raw_evidence exp347_raw_results.json sha da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, recompute confirms 7 tasks deduped"
+    },
+    {
+      "id": "V2_OBSERVED_AGREEMENT_NOT_DIRECTLY_COMPARABLE",
+      "severity": "low",
+      "finding": "Producer reports M_observed_agreement 0.3333 (1/3 from 3 definitions) but uses parent 0.3 (3/10 from 5 definitions) for PC2/F1 C2 comparison. Validity_notes[1] and observations[5] explicitly disclose non-comparability. Recompute shows observed 0.3333 < null 0.5273 and parent 0.3 < null 0.5273 both yield C2 FALSE, so direction unchanged, but metric family differs. No falsification impact within truncated bound.",
+      "evidence": "result.json metrics M_observed_agreement value 0.3333 agreeing_pairs 1/3 note parent 3/10=0.3, controls PC2_c2_direction_canonical observed 0.3 null_seed42 0.5273, recompute DEF-FULL-MAP cart>product_listing>detail, DEF-FORM-ONLY product_listing>cart>detail, ISOLATED matches DEF-FULL-MAP, pairwise 1/3"
+    },
+    {
+      "id": "V3_ISOLATED_DEFINITION_REDUNDANT",
+      "severity": "low",
+      "finding": "ISOLATED-A-LINK ordering equals DEF-FULL-MAP exactly because menuitem/tab counts are 0 in truncated sample (raw role counts a:14 button:20 combobox:7 div:43 form:17 input:4 label:11 span:24; link/menuitem/tab 0). Effective distinct orderings is 2, not 3. Producer notes match in observations[3] but does not flag that pairwise agreement 1/3 is based on 2 identical of 3 definitions, reducing independent definition variance. Does not invalidate C2 direction but narrows evidential independence within claimed n=3.",
+      "evidence": "result.json metrics M8_isolated_a_link_ordering matches_def_full_map true, report.md 3.1, /tmp/opencode/corrected_results.json observed_metrics isolated_a_link_matches_full_map true, raw role counts recomputed"
+    },
+    {
+      "id": "V4_ESTIMATOR_WORDING_MISMATCH",
+      "severity": "low",
+      "finding": "spec.json measurement_validity claims Direct 499500-pair estimator but code and provenance implement direct within-iteration pairwise agreement (C(3,2)=3 pairs per iteration, mean across 1000 iterations). Parent chain 499500 refers to 1000-choose-2 null-ordering pairs; current design intentionally replaces sampled 10000-pair estimator with within-iteration mean. Wording is inaccurate but implementation is consistent and documented as aligned estimator in report.md FIX2 and provenance execution_parameters. No measurement invalidity.",
+      "evidence": "spec.json measurement_validity[1], provenance.json execution_parameters n_pairs 3, /tmp/opencode/run_corrected_analysis.py compute_within_iteration_agreement, report.md Table FIX2"
+    },
+    {
+      "id": "V5_CANONICAL_RECIPE_ASSUMPTION_MATERIAL",
+      "severity": "medium",
+      "finding": "Per-iteration p=0.5 recipe is adopted as canonical per prereg Section 4 justification; per-task weighted recipe flips C2 direction (parent handoff established reversal). Producer bounds SURVIVES to canonical recipe and reports scope limitation in report.md Section 4 what this does NOT mean. Claim is supported conditional on this assumption; reversal under alternative recipe remains established fact from EXP-INTEL-35209112878, not retested here. No falsification within frozen recipe, but ceiling must retain recipe-conditionality.",
+      "evidence": "spec.json baselines B3, prereg.md Section 4, request.json inherited_next_question, handoff EXP-INTEL-35209112878 carry_forward established[0]"
+    },
+    {
+      "id": "V6_CART_N1_AND_DEDUP_DISCLOSED",
+      "severity": "info",
+      "finding": "Cart n=1 distinct page (deduped from duplicate cart_1 entry) disclosed in validity_notes[2-3] and unresolved. Means cart density is single observation with undefined within-type variance. Deduplication to 7 tasks verified by recompute; parent raw counts differ (a:16 vs 14 etc.) due to same dedup. Correctly handled and does not break ordering reproduction.",
+      "evidence": "result.json validity_notes[2][3], provenance data_sources description 7 successful tasks, recompute tasks deduped 7, parent null_model_results.json raw_role_counts vs recomputed 14 vs 16"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_PARENT_ORDERING",
+      "finding": "PASS: Recompute confirms DEF-FULL-MAP cart>product_listing>detail and DEF-FORM-ONLY product_listing>cart>detail match parent chain EXP-INTEL-35112013458 parent_baselines. Deterministic sorted roles eliminates PYTHONHASHSEED nondeterminism.",
+      "evidence": "spec.json baselines B1_PARENT_ORDERING, result.json metrics M6_def_full_map_ordering value [cart product_listing detail] matches_parent true, M7_def_form_only_ordering value [product_listing cart detail] matches_parent true, recompute means full_map product_listing 0.0051349 detail 0.0042804 cart 0.0056075, form_only 0.0038511 0.0017122 0.0028037 matching parent null_model_results.json"
+    },
+    {
+      "id": "B2_PARENT_NULL_MEAN",
+      "finding": "PASS: Corrected null mean 0.5273 at seed 42 with sorted roles and within-iteration direct estimator deviates 0.0002 from stored 0.5275, well within frozen 0.02 threshold. Prior 0.0119 deviation (EXP-INTEL-35209112878) explained by unsorted set + estimator mismatch, now fixed. Also recomputed mean across 10 seeds 0.5373 matches producer.",
+      "evidence": "spec.json baselines B2_PARENT_NULL_MEAN expected within 0.02, result.json metrics M1_corrected_null_mean 0.5273 seed 42 n_iterations 1000, M2_deviation_from_stored 0.0002, /tmp/opencode/corrected_results.json parent_null_model_reproduction deviation 0.0002, recompute seed 42 mean 0.5273"
+    },
+    {
+      "id": "B3_RECIPE_ROBUSTNESS",
+      "finding": "PASS: SD across 10 frozen seeds 0.0103 < 0.05 threshold; per-seed means 0.5237-0.5543 all > observed, C2 FALSE for all 10 seeds. Matches new recipe SD 0.0117 from EXP-INTEL-35209112878, confirming per-iteration recipe is at least as robust.",
+      "evidence": "spec.json baselines B3_RECIPE_ROBUSTNESS, result.json metrics M5_sd_across_seeds 0.0103 M4_mean_pairwise_across_seeds 0.5373 M9_c2_direction_per_seed all_false true, recompute SD 0.0103 mean 0.5373"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_corrected_null_mean": {
+      "producer": 0.5273,
+      "recomputed": 0.5273,
+      "match": true,
+      "unit": "pairwise agreement",
+      "method": "Independent python recompute per spec: per-iteration p=0.5 with sorted raw_roles [a button combobox div form input label span], 1000 iterations seed 42, within-iteration C(3,2) agreement"
+    },
+    "M2_deviation_from_stored": {
+      "producer": 0.0002,
+      "recomputed": 0.0001666,
+      "match": true,
+      "threshold": 0.02,
+      "within_threshold": true
+    },
+    "M3_c2_direction_canonical": {
+      "producer": false,
+      "recomputed": false,
+      "match": true,
+      "meaning": "C2 FALSE observed 0.3 < null 0.5273 and observed 0.333 < null 0.5273 both FALSE"
+    },
+    "M4_mean_pairwise_across_seeds": {
+      "producer": 0.5373,
+      "recomputed": 0.5373,
+      "match": true
+    },
+    "M5_sd_across_seeds": {
+      "producer": 0.0103,
+      "recomputed": 0.0103,
+      "match": true,
+      "threshold": 0.05,
+      "f3_triggered": false
+    },
+    "M6_def_full_map_ordering": {
+      "producer": ["cart", "product_listing", "detail"],
+      "recomputed": ["cart", "product_listing", "detail"],
+      "match": true
+    },
+    "M7_def_form_only_ordering": {
+      "producer": ["product_listing", "cart", "detail"],
+      "recomputed": ["product_listing", "cart", "detail"],
+      "match": true
+    },
+    "M8_isolated_a_link_ordering": {
+      "producer": ["cart", "product_listing", "detail"],
+      "recomputed": ["cart", "product_listing", "detail"],
+      "match": true,
+      "matches_def_full_map": true
+    },
+    "M9_c2_direction_per_seed": {
+      "producer": {"42": false, "123": false, "456": false, "789": false, "1000": false, "2000": false, "3000": false, "4000": false, "5000": false, "99999": false},
+      "recomputed": {"42": false, "123": false, "456": false, "789": false, "1000": false, "2000": false, "3000": false, "4000": false, "5000": false, "99999": false},
+      "match": true
+    },
+    "M_observed_agreement": {
+      "producer": 0.3333,
+      "recomputed": 0.3333333333333333,
+      "match": true,
+      "note": "1/3 pairs agree; producer uses parent 0.3 for C2 but recomputed 0.333 both yield C2 FALSE"
+    },
+    "PC1_ordering_reproduction": {
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "match": true
+    },
+    "PC2_c2_direction_canonical": {
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "match": true
+    },
+    "NC1_null_mean_reproduction": {
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "deviation": 0.0002,
+      "threshold": 0.02,
+      "match": true
+    },
+    "F1_c2_direction": {
+      "producer_triggered": false,
+      "recomputed_triggered": false,
+      "match": true
+    },
+    "F2_null_mean_deviation": {
+      "producer_triggered": false,
+      "recomputed_triggered": false,
+      "match": true
+    },
+    "F3_seed_robustness": {
+      "producer_triggered": false,
+      "recomputed_triggered": false,
+      "match": true
+    }
+  },
+  "claim_ceiling": "SURVIVES_CURRENT_TEST is supported ONLY for: canonical per-iteration p=0.5 independent inclusion with deterministic sorted(raw_roles), direct within-iteration pairwise agreement estimator, elements_with_bbox denominator, truncated-first-20 locatable_sample (7 tasks deduped, 3 product_listing/3 detail/1 cart), 1 Magento site, 3 definitions (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK = 2 distinct orderings due to menuitem/tab zero), frozen seeds [42 123 456 789 1000 2000 3000 4000 5000 99999], N=1000/seed. Does NOT establish: full-DOM ordering, cross-site invariance, 5-definition family agreement (0.3 vs 0.333), per-task weighted recipe conclusion (which flips to C2 TRUE), or broader C-MEAS-VALID status. Runtime substrate cap at measure_fullpage_yield.py:89 remains blocking for full-DOM test.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35262261436/spec.json (frozen decision_rule, measurement_validity, baselines B1-B3, positive_control PC1-PC2, null_control NC1, falsifiers F1-F3)",
+    "research/experiments/EXP-INTEL-35262261436/prereg.md (canonical recipe justification, decision rule, validity threats)",
+    "research/experiments/EXP-INTEL-35262261436/freeze.json (hashes prereg a55e701f851a766fa1892718e75048f7de4bc162f34108c974e9c12dffc58828 spec 16444e53db753412e93e26298217769ca22774247f93a017932d33501a9c5cd7)",
+    "research/experiments/EXP-INTEL-35262261436/result.json (metrics M1-M9, controls PC1/PC2/NC1/F1-F3, observations, validity_notes)",
+    "research/experiments/EXP-INTEL-35262261436/report.md (FIX1 sorted roles, FIX2 within-iteration estimator, decision table SURVIVES_CURRENT_TEST)",
+    "research/experiments/EXP-INTEL-35262261436/provenance.json (base_commit 084bf58f0a07ffcf476418aae33a030c06958c22, data_sources sha da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, code /tmp/opencode/run_corrected_analysis.py sha 1aefe2f6b231b1ead388f9dd816f31d40e850c3e0b60bac8339a22043ca7719b, derived /tmp/opencode/corrected_results.json sha ae22b3c3895f66136b5529840c1233c1f59a2925b7d31a6c21025dad3b3a6bdf)",
+    "/tmp/opencode/run_corrected_analysis.py (534 lines, sorted(raw_roles), per-iteration p=0.5, within-iteration agreement)",
+    "/tmp/opencode/corrected_results.json (seed_means 42:0.5273 ... mean 0.5373 SD 0.0103, verdict SURVIVES_CURRENT_TEST)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (truncated-first-20, 7 tasks after dedup, 8 raw_roles)",
+    "research/experiments/EXP-INTEL-35112013458/null_model_results.json (stored null 0.5275 observed 0.3 orderings cart>product_listing>detail vs product_listing>cart>detail)",
+    "research/experiments/EXP-INTEL-35209112878/handoff.json (recipe reversal established, NC1 incoherence, F3 threshold artifact, substrate blocker)",
+    "independent recompute: python random.Random seed 42..99999 N=1000 per-iteration sorted roles yields M1 0.5273 M4 0.5373 SD 0.0103 all C2 FALSE, matching producer to 4 decimals"
+  ],
+  "unresolved": [
+    "Whether C2 FALSE (less stable than random) holds on full-DOM enumeration: blocked by locatableSample cap at measure_fullpage_yield.py:89 (handoff dependency not yet removed by runtime lane)",
+    "Whether recipe reversal (per-task weighted null ~0.28 C2 TRUE) generalizes to full-DOM and which recipe is canonical beyond this experiment's assumption; justification in prereg is principled but not empirically tested on non-truncated data",
+    "Cross-site generalization: all data from single Magento site with menuitem/tab zero counts; role additivity for menuitem/tab untestable in this sample",
+    "2 of 5 planned definitions not independently verified in this run (3 of 5 used); 5-definition pairwise agreement 0.3 not re-measured on same 3-definition basis",
+    "Cart within-type variance remains undefined (n=1 distinct cart page) and deduplication effect on density means acknowledged but not quantified for full-DOM"
+  ]
+}

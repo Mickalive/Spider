@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35262262156",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Clarify operational definition of 'long-value' before any citation: P3_DEEPPATH (value_length 42) and P5_MULTIPARAM (value_length 46) are NOT long per-slot value tests. Per-slot concrete values are orgId=12345 (5 chars), projectId=67890 (5 chars), category=electronics (11), minPrice=100 (3), maxPrice=500 (3). Total string length includes fixed URL scaffolding (v2/api/organizations/, category=, &minPrice=). Re-label these as multi-slot short/medium-per-slot patterns or replace with genuinely long per-slot values (e.g., UUID slugs per slot) before claiming 'long-value savings fail generally'.",
+    "Do not cite mean savings 15.99% as passing C5 in isolation or as evidence for savings. Mean is bimodal (P1 +44.44%, P4 +56.72% vs P3 -11.54%, P5 -9.68%, P2 0%) and does not represent the distribution. Report median, per-pattern table, or stratified by slot count instead. C5 PASS does not mitigate C4 FAIL under ALL-must-pass rule.",
+    "Fix or stratify C6 (savings increase with value length, r>=0.7). Current r=0.3909 conflates heterogeneous JSON structures (P4 includes headers.Authorization with Bearer, others url-only), total value_length vs per-slot length, and slot count (1 vs 2 vs 3). Recompute correlation stratified by slot count or using per-slot average value length, or pre-register separate hypotheses for single-slot vs multi-slot.",
+    "For P2_SLUG breakeven (28 chars, 0% savings) disclose that hypothesis 'saves when >~8 chars' is falsified for this tokenizer/path pattern: 28-char hyphenated slug vs 12-char ${pageSlug} yields equal tokens (21 vs 21) under cl100k_base due to subword tokenization of hyphens, not a clean char-length threshold.",
+    "For P3, disclose mismatch between token-measurement literal (first observation uses 100/200, 3 chars) and resolve/bind test literal (expected_bound uses 12345/67890, 5 chars). Token savings for P3 are measured on shorter values than the 'long' label implies, underestimating potential savings for longer IDs. Use consistent concrete values across measurement and pipeline tests or report both.",
+    "Provenance: populate missing sha256 for code_paths (kernel.py, models.py, registry.py, tests, run_experiment.py) to enable exact reproduction; current provenance has 4 null hashes."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_TOKEN_MEASUREMENT_REPRODUCED",
+      "severity": "info",
+      "finding": "All token measurements reproduce exactly via independent tiktoken cl100k_base encoding of json.dumps(action_template, sort_keys=True). P1 36 vs 20 (+44.44%), P2 21 vs 21 (0%), P3 26 vs 29 (-11.54%), P4 67 vs 29 (+56.72%), P5 31 vs 34 (-9.68%), PC 19 vs 20 (-5.26%), NC 21 vs 21 (0%). Mean savings 15.99% and Pearson r 0.3909 recompute exactly. Computation deterministic and correctly implemented in run_experiment.py:count_tokens.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json:token_measurements[7]; research/experiments/EXP-PRODUCT-35262262156/run_experiment.py:28-32 count_tokens; independent recompute via tiktoken 0.14.0 cl100k_base yields 36/20,21/21,26/29,67/29,31/34 identical; mean 15.988% and r 0.3909 match result.json metrics.mean_savings_pct_long_value and savings_correlation_r",
+      "impact": "Core C4, C5, C6 arithmetic is sound and independently verifiable. No measurement error; failures are genuine under frozen encoding."
+    },
+    {
+      "id": "V2_RESOLVE_BIND_PIPELINE_VALIDATED_NARROW",
+      "severity": "info",
+      "finding": "Resolve/bind pipeline correctly validated for manually-registered parameterized mechanisms: resolve() returns EXECUTABLE with correct bound_action for all 5 long-value + 2 controls when required_slots satisfied (7/7), and UNKNOWN when params missing (7/7). _bind() substitution correct for 1-3 slots including Bearer header template. Independent kernel replay via MechanismRegistry+SpiderKernel confirms 7/7 EXECUTABLE and 7/7 UNKNOWN.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json:resolve_bind_tests[7] all resolve_with_params_executable true, resolve_no_params_unknown true, bind_correct_url true; src/spider/kernel.py resolve required_slots = parameter_slots | _template_slots, _bind fullmatch; independent replay confirms; result.json controls C1-C3 pass 5/5",
+      "impact": "C1, C2, C3 PASS valid within narrow scope: isolated intents, confidence 0.9 > min_confidence 0.8, manually constructed templates, GET only. Does not test partial missing for multi-slot or mixed registry competition."
+    },
+    {
+      "id": "V3_LONG_VALUE_OPERATIONALIZATION_INVALID_FOR_P3_P5",
+      "severity": "high",
+      "finding": "P3_DEEPPATH and P5_MULTIPARAM labelled 'long-value' but per-slot concrete values are short. P3 value_length 42 counts full path 'v2/api/organizations/100/projects/200' including fixed scaffolding; actual parameterized values are orgId=12345 (5 chars) and projectId=67890 (5 chars) in the bound test and 100/200 (3 chars) in token measurement. P5 value_length 46 counts full query string including keys 'category=', '&minPrice=', '&maxPrice='; per-slot values are 11,3,3 chars. Hypothesis about 'long concrete values dominate template overhead' is therefore not tested by these patterns; they test multi-slot short-per-slot overhead accumulation, which is a different causal factor.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/spec.json measurement_validity bullet 3 '5 long-value URL patterns spanning different value types: UUID (36), slug (30), deep path (45), bearer token (40), multi-param long (mixed)'; prereg.md P3_DEEPPATH 42 chars | ${orgId}, ${projectId} and P5_MULTIPARAM 46 chars 3 slots; raw_evidence.json P3 literal_json url .../100/.../200, parameterized_json .../${orgId}/.../${projectId}, P5 ...category=electronics&minPrice=100..., test_params orgId 12345 projectId 67890 (5 each), category electronics 11 minPrice 100 3 maxPrice 500 3; run_experiment.py P3_DEEPPATH observations 100/200",
+      "impact": "C4 FAIL (2/5) and C6 low correlation cannot be cited as 'long values fail generally'. Only single-slot genuinely long values (P1 UUID 36, P4 bearer 64) show strong savings; P2 slug 28 breakeven, P3/P5 short-per-slot negative. Structural breakeven hypothesis is falsified as a universal threshold but NOT as a per-slot property. Producer observations partially disclose this (root cause slot count) but report title overgeneralizes."
+    },
+    {
+      "id": "V4_C6_CORRELATION_CONFOUNDED_HETEROGENEOUS",
+      "severity": "high",
+      "finding": "C6 r=0.3909 <0.7 correctly computed but construct-invalid as pooled test. Value_length mixes total string length (including fixed path/query) with per-slot value length, and literal/parameterized JSON structure mixes url-only (P1-3,P5) with headers+url+method (P4 bearer includes Authorization header). Slot count (1,1,2,1,3) confounds value_length. Ordering by total length P4(64)>P5(46)>P3(42)>P1(36)>P2(28) does not order per-slot length (P4 64, P1 36, P2 28, P5 avg ~5.7, P3 avg 4-5). Correlation of savings with total length is not the prereg falsifier's intended structural relationship (template overhead vs per-slot concrete length).",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/result.json metrics.savings_correlation_r 0.3909 threshold 0.7; raw_evidence.json token_measurements value_length 36,28,42,64,46 savings_pct 44.44,0,-11.54,56.72,-9.68; P4 literal_json includes headers Authorization Bearer..., others method+url only; spec.json falsifier 'savings do not increase monotonically with concrete value length'",
+      "impact": "C6 FAIL is arithmetically correct but scientifically uninformative as pooled. Strong null (r>=0.7) was mis-calibrated for heterogeneous design. Falsification of 'monotonic increase' is valid for this total-length operationalization, but does not falsify per-slot length hypothesis (which would be 2-slot and 3-slot patterns removed, single-slot shows monotonic: 28->0%,36->44%,64->56%). Ceiling must note C6 pooled result is not discriminating."
+    },
+    {
+      "id": "V5_MEAN_SAVINGS_BIMODAL_MISLEADING",
+      "severity": "medium",
+      "finding": "C5 mean 15.99% >=10% PASS masks bimodal distribution: two large positive outliers (UUID +44.44%, bearer +56.72%) average to +50.58%, two negatives (P3 -11.54%, P5 -9.68%) average to -10.61%, one zero. Median savings is 0% (P2), 3/5 patterns non-positive. Producer correctly notes 'driven by two large savings patterns masking two negative' in observations, but decision rule treats mean as sufficient. Under ALL-must-pass, C5 PASS does not rescue overall verdict, but citation of '15.99% mean savings passes' without distribution is misleading for product economics.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/result.json metrics.mean_savings_pct_long_value 15.99 patterns_with_positive_savings 2 patterns_with_negative_savings 2 patterns_with_zero_savings 1 long_value_token_measurements per-pattern; raw_evidence.json token_measurements savings_pct list; report.md Analysis why C4 fails",
+      "impact": "No change to FALSIFIED-IN-SETTING (C4 and C6 already fail), but product consequence must not cite mean as evidence for viability. Stratified reporting (single-slot vs multi-slot) required before any economic claim."
+    },
+    {
+      "id": "V6_BEARER_STRUCTURE_FAIR_WITHIN_PATTERN_CONFOUNDED_ACROSS",
+      "severity": "low",
+      "finding": "P4 bearer token comparison is fair within-pattern (both literal and parameterized include headers Authorization + method + url) and correctly shows large savings due to single 64-char JWT replaced by 8-char ${token}. However, comparing P4's 67 literal tokens (inflated by headers JSON overhead) to other patterns' 21-36 tokens confounds cross-pattern C6 and mean. This does not invalidate P4's positive saving, but inflates variance and makes total-length correlation uninterpretable.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json P4 literal_json {headers:{Authorization:Bearer eyJ...},method:GET,url:https://api.example.com/me} 67 tokens vs parameterized {headers:{Authorization:Bearer ${token}},method:GET,url:https://api.example.com/me} 29 tokens; other patterns only method+url; provenance measurement_method json.dumps sort_keys",
+      "impact": "P4 result is valid as single-slot long-value evidence (supports per-slot savings hypothesis), but should not be pooled with url-only patterns for correlation."
+    },
+    {
+      "id": "V7_POSITIVE_CONTROL_REPLICATES_NARROWLY",
+      "severity": "info",
+      "finding": "C8 positive control PC_SHORT correctly replicates parent short-value penalty: parameterized 20 > literal 19, savings -5.26%, confirming environment. Null control NC_MID correctly ambiguous 0% at breakeven (6-char abc123 vs ${sessionId} 12 chars). Both controls pass per frozen spec. NC not tested as falsifier, correctly informational.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/result.json controls.C8_positive_control pass true replicates_parent true savings -5.26%; raw_evidence token_measurements PC_SHORT 19/20 -5.26, NC_MID 21/21 0.0; parent handoff key_finding mean -6.4% short-value penalty",
+      "impact": "Controls demonstrate measurement discriminant validity: short values penalize, mid breakeven, single-slot long saves. Validates tiktoken environment consistent with parent."
+    },
+    {
+      "id": "V8_SCOPE_SYNTHETIC_NARROW_NO_LEAKAGE",
+      "severity": "medium",
+      "finding": "No split leakage: 5 long-value patterns ×3 training observations disjoint from test long values, intents isolated (fetch_user, fetch_page, fetch_project, authenticated_request, search_products), no shared state. No network/browser/model calls, pure Python tiktoken, GET only, confidence 0.9 single level, 7 patterns ×1 template each, no distill_parameterized induction (manual templates). Valid per spec but narrow. Partial missing params (e.g., provide 1 of 2 slots for P3, 1-2 of 3 for P5) not tested though frozen spec requires 'when parameters missing' for all 5. Mixed literal+parameterized registry competition (EXP-GRAPH-33718012817 tie-break hazard) not exercised due to isolated intents.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/spec.json measurement_validity 8 bullets GET-only no network; prereg.md Scope Limitations 8 bullets; run_experiment.py ALL_PATTERNS 7*3 observations manual make_parameterized_mechanism, resolve with {} only; src/spider/kernel.py resolve any(slot not in params) => UNKNOWN",
+      "impact": "C1-C3 pipeline validation does not generalize to noisy browser or partial missing. No impact on FALSIFIED-IN-SETTING but bounds claim ceiling to synthetic deterministic manual templates."
+    },
+    {
+      "id": "V9_REGRESSION_VALID",
+      "severity": "info",
+      "finding": "Kernel regression 3/3 PASS independently reproducible. No code change to kernel; mechanisms registered in isolated temp registry then cleaned up. Provenance executed_at 2026-09-17T22:30:00, base_sha 084bf58, execute_sha cdf1d2f, tiktoken 0.14.0 cl100k_base.",
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json regression total 3 passed 3 failures 0; provenance.json github_run_id 35280363344 base_sha 084bf58 execute_sha cdf1d2f tiktoken_version 0.14.0; tests/test_kernel.py",
+      "impact": "C7 PASS valid. No side effects."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B_LONGVALUE_LITERAL",
+      "baseline_id": "B_LONGVALUE_LITERAL",
+      "expected": "Token cost of literal mechanism (full URL with concrete long values, no template slots) for each of 5 long-value patterns via tiktoken cl100k_base of action_template JSON",
+      "observed": "Producer 36,21,26,67,31 literal tokens; recomputed 36,21,26,67,31 identical via tiktoken cl100k_base json.dumps sort_keys. Strong baseline correctly measured.",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/result.json metrics.long_value_token_measurements literal_tokens per pattern; raw_evidence.json token_measurements literal_tokens and literal_json; independent recompute len(enc.encode(json.dumps(...))) matches"
+    },
+    {
+      "id": "B_SHORTVALUE_PENALTY",
+      "baseline_id": "B_SHORTVALUE_PENALTY",
+      "expected": "Parent short-value penalty reference mean -6.4% across 5 short-value patterns (1-3 char numeric) as calibration showing breakeven exists",
+      "observed": "Producer replicates via PC_SHORT single point -5.26% (19 vs 20) directionally consistent with parent mean -6.4%. Not re-measured as 5-pattern distribution per spec; used as calibration baseline correctly. Null control 0% at 6 chars and slug 28-char 0% show breakeven region is tokenizer- and pattern-dependent, not a clean 8-char threshold.",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35209109455/handoff.json key_finding mean -6.4% 0/5 fewer; research/experiments/EXP-PRODUCT-35262262156/result.json metrics.positive_control savings_pct -5.26 confirms_parent true; spec.json baselines B_SHORTVALUE_PENALTY description"
+    },
+    {
+      "id": "PC_SHORTVALUE_PENALTY",
+      "baseline_id": "PC_SHORTVALUE_PENALTY",
+      "expected": "Short-value pattern (2-char numeric) in same run to confirm parent negative-savings reproducible: parameterized uses MORE tokens",
+      "observed": "PC_SHORT 19 literal 20 parameterized -5.26% savings, parameterized > literal, replicates parent direction. Also validates environment consistent (tiktoken, json sort_keys).",
+      "strength": "strong",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/result.json controls.C8_positive_control observed param 20 > literal 19 pass true; raw_evidence token_measurements PC_SHORT 19/20 -5.26"
+    },
+    {
+      "id": "NC_MIDVALUE_AMBIGUOUS",
+      "baseline_id": "NC_MIDVALUE_AMBIGUOUS",
+      "expected": "Mid-value pattern (6-char abc123, roughly template overhead) direction uncertain ~0 or marginally positive/negative testing breakeven region",
+      "observed": "NC_MID 21 vs 21 0% savings exactly breakeven, direction ambiguous per producer. Validates spec expectation that ~6 chars with ${sessionId} (12 chars) does not save tokens. Slug 28 chars also breakeven 21/21, showing breakeven depends on tokenization not just char length.",
+      "strength": "moderate",
+      "passed": true,
+      "evidence": "research/experiments/EXP-PRODUCT-35262262156/result.json metrics.null_control savings_pct 0.0 direction ambiguous; raw_evidence NC_MID 21/21 0.0; spec.json null_control description ambiguous"
+    }
+  ],
+  "recomputed_metrics": {
+    "long_value_pattern_count": {
+      "producer_value": 5,
+      "recomputed_value": 5,
+      "match": true
+    },
+    "total_patterns": {
+      "producer_value": 7,
+      "recomputed_value": 7,
+      "match": true
+    },
+    "total_observations": {
+      "producer_value": 21,
+      "recomputed_value": 21,
+      "match": true
+    },
+    "P1_UUID_tokens": {
+      "producer_value": {
+        "literal": 36,
+        "parameterized": 20,
+        "savings_pct": 44.44
+      },
+      "recomputed_value": {
+        "literal": 36,
+        "parameterized": 20,
+        "savings_pct": 44.44
+      },
+      "match": true,
+      "detail": "literal_json {method:GET,url:https://api.example.com/users/550e8400-e29b-41d4-a716-446655440000} 36 tokens, param {method:GET,url:https://api.example.com/users/${userId}} 20 tokens via cl100k_base"
+    },
+    "P2_SLUG_tokens": {
+      "producer_value": {
+        "literal": 21,
+        "parameterized": 21,
+        "savings_pct": 0.0
+      },
+      "recomputed_value": {
+        "literal": 21,
+        "parameterized": 21,
+        "savings_pct": 0.0
+      },
+      "match": true,
+      "detail": "21/21 breakeven for 28-char slug vs ${pageSlug}"
+    },
+    "P3_DEEPPATH_tokens": {
+      "producer_value": {
+        "literal": 26,
+        "parameterized": 29,
+        "savings_pct": -11.54
+      },
+      "recomputed_value": {
+        "literal": 26,
+        "parameterized": 29,
+        "savings_pct": -11.54
+      },
+      "match": true,
+      "detail": "literal 26 vs param 29, 2 slots orgId/projectId, per-slot values 3 chars (100/200) in measurement, not long"
+    },
+    "P4_BEARER_tokens": {
+      "producer_value": {
+        "literal": 67,
+        "parameterized": 29,
+        "savings_pct": 56.72
+      },
+      "recomputed_value": {
+        "literal": 67,
+        "parameterized": 29,
+        "savings_pct": 56.72
+      },
+      "match": true,
+      "detail": "headers Authorization Bearer JWT 64 chars vs ${token}, 67 vs 29 via cl100k_base"
+    },
+    "P5_MULTIPARAM_tokens": {
+      "producer_value": {
+        "literal": 31,
+        "parameterized": 34,
+        "savings_pct": -9.68
+      },
+      "recomputed_value": {
+        "literal": 31,
+        "parameterized": 34,
+        "savings_pct": -9.68
+      },
+      "match": true,
+      "detail": "31 vs 34, 3 slots category/minPrice/maxPrice, per-slot avg 5.7 chars"
+    },
+    "mean_savings_pct_long_value": {
+      "producer_value": 15.99,
+      "recomputed_value": 15.99,
+      "match": true,
+      "threshold": 10.0,
+      "pass": true,
+      "detail": "mean = (44.44+0-11.54+56.72-9.68)/5 = 15.988% rounds to 15.99%, median 0%, bimodal"
+    },
+    "patterns_with_positive_savings": {
+      "producer_value": 2,
+      "recomputed_value": 2,
+      "match": true,
+      "threshold": 3,
+      "pass": false,
+      "detail": "P1_UUID +44.44% and P4_BEARER +56.72% only; P2 0%, P3 -11.54%, P5 -9.68% fail C4 >=3/5"
+    },
+    "savings_correlation_r": {
+      "producer_value": 0.3909,
+      "recomputed_value": 0.3909,
+      "match": true,
+      "threshold": 0.7,
+      "pass": false,
+      "detail": "Pearson r between value_length [36,28,42,64,46] and savings_pct [44.44,0,-11.54,56.72,-9.68] = 0.3909 (cov 169.31, std_x 13.46, std_y 32.17, n=5 population cov) well below 0.7; confounded by slot count and heterogeneous JSON"
+    },
+    "C1_resolve_executable": {
+      "producer_value": "5/5",
+      "recomputed_value": "5/5",
+      "match": true,
+      "threshold": "5/5",
+      "pass": true
+    },
+    "C2_resolve_unknown_no_params": {
+      "producer_value": "5/5",
+      "recomputed_value": "5/5",
+      "match": true,
+      "threshold": "5/5",
+      "pass": true
+    },
+    "C3_bind_correct": {
+      "producer_value": "5/5",
+      "recomputed_value": "5/5",
+      "match": true,
+      "threshold": "5/5",
+      "pass": true
+    },
+    "C4_param_fewer_tokens": {
+      "producer_value": "2/5",
+      "recomputed_value": "2/5",
+      "match": true,
+      "threshold": ">=3/5",
+      "pass": false
+    },
+    "C5_mean_savings": {
+      "producer_value": "15.99%",
+      "recomputed_value": "15.99%",
+      "match": true,
+      "threshold": ">=10%",
+      "pass": true
+    },
+    "C6_savings_increase_with_length": {
+      "producer_value": "r=0.3909",
+      "recomputed_value": "r=0.3909",
+      "match": true,
+      "threshold": "r>=0.7",
+      "pass": false
+    },
+    "C7_kernel_regression": {
+      "producer_value": "3/3",
+      "recomputed_value": "3/3",
+      "match": true,
+      "threshold": "3/3",
+      "pass": true
+    },
+    "C8_positive_control": {
+      "producer_value": "-5.26%",
+      "recomputed_value": "-5.26%",
+      "match": true,
+      "threshold": "parameterized > literal",
+      "pass": true
+    },
+    "ALL_pass": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "match": true,
+      "detail": "C1 true C2 true C3 true C4 false C5 true C6 false C7 true C8 true => ALL false per frozen decision_rule => FALSIFIED-IN-SETTING"
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING per frozen decision_rule (ALL C1-C8 must pass): C4 (2/5 <3/5) and C6 (r 0.3909 <0.7) fail, so the hypothesis 'parameterized saves >=10% mean and >=3/5 patterns and correlates with length' does not survive as a general long-value claim. However, the ceiling is stratified, not general: single-slot genuinely long values SAVE tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) under tiktoken cl100k_base action_template JSON; single-slot medium slug 28-char breakeven (0%); multi-slot patterns with short per-slot values PENALIZE (deep path 2 slots -11.54%, multi-param 3 slots -9.68%) even though total string length is 42-46. Resolve/bind pipeline survives narrowly for manually-registered parameterized mechanisms (7/7 EXECUTABLE with correct params, 7/7 UNKNOWN when missing, _bind correct for 1-3 slots, kernel 3/3 intact) with confidence 0.9 >0.8, GET only, synthetic manual templates, isolated intents, no browser/model/network. No inference to amortized product economics (C-PRODUCT-ECON remains HYPOTHESIS), LLM tokenizers, PUT/POST, cross-site, or distill_parameterized induction. Do not cite mean 15.99% or P3/P5 as evidence that long values fail generally; per-slot length and slot count are the causal factors. Max justified claim: parameterized representation saves tokens only for single-slot patterns where per-slot concrete value >> slot name+3; multi-slot overhead dominates even when total length is long.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35262262156/request.json: lane product claim_ids C-PARAM-INHERIT C-PRODUCT-ECON parent EXP-PRODUCT-35209109455",
+    "research/experiments/EXP-PRODUCT-35262262156/spec.json: question hypothesis falsifier baselines B_LONGVALUE_LITERAL B_SHORTVALUE_PENALTY controls PC_SHORTVALUE_PENALTY NC_MIDVALUE_AMBIGUOUS measurement_validity tiktoken cl100k_base 7 patterns 21 observations decision_rule C1-C8 ALL must pass",
+    "research/experiments/EXP-PRODUCT-35262262156/prereg.md: 5 target patterns table P1 36 UUID P2 28 slug P3 42 deep path 2 slots P4 64 bearer P5 46 multi-param 3 slots, controls PC 2 chars NC 6 chars, training values, decision table C4 >=3/5 C5 >=10% C6 r>=0.7",
+    "research/experiments/EXP-PRODUCT-35262262156/freeze.json: frozen_at 2026-09-17T22:09:24 hashes prereg 2256f9 spec 27b1c2 request e89bca",
+    "research/experiments/EXP-PRODUCT-35262262156/result.json: status COMPLETE outcome FALSIFIES metrics long_value_token_measurements 5 entries mean 15.99 patterns 2/5 positive r 0.3909 controls C1 true C2 true C3 true C4 false C5 true C6 false C7 true C8 true",
+    "research/experiments/EXP-PRODUCT-35262262156/report.md: verdict FALSIFIED, token table 5 patterns, why C4 fails single-slot vs multi-slot, why C6 fails correlation weak slot count confound",
+    "research/experiments/EXP-PRODUCT-35262262156/provenance.json: base 084bf58 execute cdf1d2, tiktoken 0.14.0 cl100k_base, python 3.12, code_paths kernel/models/registry/tests/run_experiment, artifacts raw_evidence sha7f78...",
+    "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json: regression 3/3, token_measurements 7 entries literal 36/21/26/67/31 param 20/21/29/29/34, resolve_bind_tests 7 entries all EXECUTABLE/UNKNOWN/bind_correct, decision_rule ALL_pass false",
+    "research/experiments/EXP-PRODUCT-35262262156/run_experiment.py: count_tokens tiktoken, ALL_PATTERNS 7, make_literal/parameterized Mechanism confidence 0.9, run_token_measurements, run_resolve_bind_tests via MechanismRegistry SpiderKernel _bind",
+    "research/experiments/EXP-PRODUCT-35209109455/handoff.json: parent short-value falsification -6.4% mean, carry_forward established resolve/bind validated, rejected token savings short-value, unknown long-value savings, do_not_assume do not assume long savings exist",
+    "src/spider/kernel.py: _PARAMETER regex, _template_slots, _bind, SpiderKernel.resolve required_slots logic min_confidence 0.8",
+    "tests/test_kernel.py: 3 tests",
+    "codex/index.json + claim_state.json: C-PARAM-INHERIT EXPERIMENTAL prior, C-PRODUCT-ECON HYPOTHESIS prior"
+  ],
+  "unresolved": [
+    "Whether single-slot long values (UUIDs 36, bearer 64, slugs >30) consistently save tokens across diverse URL structures and LLM tokenizers not tested here; only 2 positive single-slot patterns observed (P1,P4) and 1 breakeven (P2)",
+    "What per-slot concrete length threshold offsets template overhead for tiktoken cl100k_base vs other tokenizers; hypothesized ~8 chars not supported as clean threshold (28-char slug breakeven)",
+    "Whether slot name optimization (shorter varnames like id vs pageSlug/sessionId/category) or reducing slot count (e.g., single combined query param) brings multi-slot patterns above breakeven - untested per result unresolved[3]",
+    "Whether amortized deduplication savings across tasks (fewer unique mechanisms to store/retrieve, C-PRODUCT-ECON) offsets per-mechanism token penalty for multi-slot patterns - requires end-to-end measurement with model calls/browser/network/retrieval/verification vs literal/cold baselines, still HYPOTHESIS",
+    "Whether mixed literal+parameterized registry at equal confidence (EXP-GRAPH-33718012817 tie-break) and partial missing params for multi-slot (provide subset of slots) maintain correct resolve behavior - not tested due to isolated intents and only {} missing case",
+    "Whether PUT/POST, headers beyond Authorization, or full Mechanism object (not just action_template method+url) tokenization changes savings - spec limited to GET method+url (+headers for bearer only)",
+    "Whether LLM-based distill_parameterized induction and cross-site transfer produce correctly named slots and generalize beyond manual templates - no induction tested, manual construction only"
+  ]
+}

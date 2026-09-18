@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35280397316",
+  "lane": "intel",
+  "github_run_id": null,
+  "commits": {
+    "base_sha": "37472f9d42345b00957e9aa0eda29ede162468ce",
+    "experiment_commit": null
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-INTEL-35280397316/request.json",
+      "sha256": "473e95dcb69c5603e9d9509d73b87a4a544bac20583d02e63bc2f2052dfedf17"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-INTEL-35280397316/spec.json",
+      "sha256": "30e9f346c4c3be4bcdfdd3a44dc91ce62d8897d01bf0c97bbcc9de7eb1ba88e4"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-INTEL-35280397316/prereg.md",
+      "sha256": "76eac8e55f764287b91792fe41792f9f9b32ea0965d9f8c585877b71737e168e"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-INTEL-35280397316/freeze.json",
+      "sha256": null
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35264637598",
+    "path": "research/experiments/EXP-INTEL-35264637598/handoff.json",
+    "sha256": "611c975b122ebbdcaffec8d804c3f21838b1c6a17bd093f9c80e3deee44f00b4"
+  },
+  "datasets_and_sources": [
+    {
+      "name": "Stanford NLP Textbook (Manning et al.)",
+      "type": "textbook",
+      "url": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-text-classification-1.html",
+      "relevance": "Primary source for micro/macro averaging ambiguity in IR"
+    },
+    {
+      "name": "Sokolova & Lapalme (2019) - Macro F1 and Macro F1",
+      "type": "paper",
+      "url": "https://ar5iv.labs.arxiv.org/html/1911.03347",
+      "relevance": "Documents two distinct macro F1 formulas diverging by up to 0.5"
+    },
+    {
+      "name": "A Closer Look at Classification Evaluation Metrics (TACL 2024)",
+      "type": "paper",
+      "url": "https://aclanthology.org/2024.tacl-1.46.pdf",
+      "relevance": "Rigorous analysis of macro metric properties and recipe choice"
+    },
+    {
+      "name": "scikit-learn micro/macro documentation",
+      "type": "documentation",
+      "url": "https://sklearn-evaluation.ploomber.io/en/latest/classification/micro_macro.html",
+      "relevance": "Practical implementation of aggregation recipes"
+    },
+    {
+      "name": "MetricGate - Macro vs Micro Average (2026)",
+      "type": "article",
+      "url": "https://metricgate.com/blogs/macro-vs-micro-average-classification/",
+      "relevance": "Clear comparison of aggregation tradeoffs"
+    },
+    {
+      "name": "Datadog Code Coverage Calculation",
+      "type": "documentation",
+      "url": "https://docs.datadoghq.com/code_coverage/coverage_calculation.md",
+      "relevance": "Code coverage aggregation recipe (set union)"
+    },
+    {
+      "name": "coverage.py documentation",
+      "type": "documentation",
+      "url": "https://github.com/nedbat/coveragepy",
+      "relevance": "Parallel coverage aggregation with set union"
+    },
+    {
+      "name": "BullseyeCoverage metrics",
+      "type": "documentation",
+      "url": "https://www.bullseye.com/coverage.html",
+      "relevance": "Coverage metric hierarchy and recipe choice"
+    },
+    {
+      "name": "Google Analytics 4 Engagement metrics",
+      "type": "documentation",
+      "url": "https://support.google.com/analytics/answer/12195621",
+      "relevance": "GA4 bounce rate redefinition (recipe change)"
+    },
+    {
+      "name": "PMC9140287 - Measuring user interactions comparison",
+      "type": "paper",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9140287/",
+      "relevance": "Cross-platform metric definition differences"
+    }
+  ],
+  "code_paths": [],
+  "environment": {
+    "platform": "linux",
+    "python_version": null,
+    "dependencies": "N/A - literature synthesis only, no code execution"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35280397316/result.json",
+      "role": "derived",
+      "sha256": "69354d40c1ae412b79dc3c34bddf7283302582f9106b1ca25c1de7d90aace73a"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35280397316/report.md",
+      "role": "derived",
+      "sha256": "5366ed1b8c83bec001b0b929e940d04409a5ceb173264c81aa59925322380937"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35280397316/provenance.json",
+      "role": "derived",
+      "sha256": "2c5effd5a51b7659839015999ed50b302ecc34e8eecaa9b09924a69ff18a55f0"
+    }
+  ]
+}

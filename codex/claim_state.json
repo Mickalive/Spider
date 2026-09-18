@@ -361,6 +361,26 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "SPA leakage 0.21\u20130.28 valid-only (5/5 variants <40%) validates hash-SPAs as suitable testbeds for URL-level non-leakage PMI at NL scale (50 NL needs 64\u201370 raw). Mechanism understood: link_click leakage 1.00 (frozen normalization strips fragments), non-link actions leakage 0.00; headline rate reflects protocol's 27% link share, not site constant. However, title variation 0/5 (unique_titles=1, entropy 0.0 bits on all 840 SPA transitions) falsifies title-aware PMI on TodoMVC, replicating EXP-PHYSICS-34266105229 degeneracy; pipeline validated by 5 distinct Wikipedia titles on same code path. Neither URL-level PMI nor title-aware PMI has been tested on production SPAs with genuine state variation. C-WEB-DYNAMICS (predictive dynamical structure beyond memory) remains HYPOTHESIS \u2014 this experiment characterizes infrastructure viability, not the core claim."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35262258744",
+        "lane": "physics",
+        "created_at": "2026-09-17T19:00:37.093130+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "50764ab2bc9e211e802b45d2da3e06516eccd1f6",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING: C2 fails (normalized PMI 5.8e-05 not exactly 0.0 due to Laplace alpha=1.0 smoothing artifact, audit V1 confirms nosmooth gives 0.0 exactly) and C5 fails (0/5 variants >=5 unique raw URLs; TodoMVC has 3-4 only, audit V3 confirms testbed ceiling misspecification not PMI failure). However, C1 passes decisively: all 5/5 variants achieve raw URL PMI 0.188-0.209 bits with Bonferroni p=0.001 and effect sizes d=6.5-9.0, demonstrating hash-fragment routing encodes Markov-predictive state information detectable by PMI when fragments preserved. Audit V7 finds identifiability not demonstrated: experiment tests I(url_after; action | url_before) without history-conditioned baseline, so beyond-memory dynamics (C-WEB-DYNAMICS core requirement) is untested. Claim ceiling bounded to: fragment-aware URL-level PMI detects state-conditioned predictability on minimal TodoMVC hash-SPAs at 85-93 NL transitions. NOT validated: beyond-memory dynamics, generalization to production SPAs with history routing, title-aware PMI, practical utility for SPIDER exploration (0.19 bits is 12% of max log2(3)=1.585 for 3 states)."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35290611436",
+        "lane": "physics",
+        "created_at": "2026-09-18T00:18:25.287835+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "595ea236040bae97c1405ee79f231b66660c0021",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status. Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: 0/5 TodoMVC hash-SPA variants achieve conditional PMI at K=3 > 0.05 bits (all exactly 0.0, Bonferroni p=1.0). The parent's 0.188-0.209 bit unconditional PMI is entirely explained by Markov predictability (deterministic (url_before, action) -> url_after). Action-history prediction accuracy at K=3 is 1.0 on 4/5 variants, confirming (url_before, H_K=3) fully determines url_after, making I(url_after; action | url_before, H_K=3) = 0 by mathematical identity. Falsification is bounded to TodoMVC hash-SPAs (3-4 states, deterministic FSM, hash routing, action_primitive {form_submit, button_click, js_navigate}). NOT falsified: production SPAs with >4 states, stochastic transitions, history-based routing, or richer state representations (DOM, accessibility tree, visual layout). Claim ceiling: URL-level PMI on these minimal deterministic SPAs demonstrates state-conditioned Markov predictability only, no beyond-memory component."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -703,6 +723,16 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots (C1 5/5 EXECUTABLE, C2 5/5 UNKNOWN, C3 5/5 binding correct, C7 3/3 kernel regression). However, token economics hypothesis is falsified in this setting: parameterized representation adds per-mechanism token overhead (-5% to -10%) rather than saving tokens, because ${varname} syntax (varname.length+3 chars) exceeds short numeric values (1-3 digits). Claim ceiling narrowed to: committed-code synthetic single-slot with prefix metadata, resolve/bind pipeline validated, token penalty measured for short-value GET URLs on api.example.com/jsonplaceholder. Does NOT advance to PRODUCT_CORE. Previous token savings claim (parent 68 vs 96, 29.17%) is not replicated and should not be cited as established."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35262262156",
+        "lane": "product",
+        "created_at": "2026-09-17T19:01:14.685505+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact.",
+        "source_commit": "ddc6bddb4fcaddaa4073464f5c647d5a5dde9acc",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Resolve/bind pipeline validated for 5 long-value patterns (7/7 EXECUTABLE with correct params, 7/7 UNKNOWN when missing, _bind correct for 1-3 slots). However, token savings hypothesis for long values is falsified as a general claim: only 2/5 patterns (single-slot UUID and bearer) save tokens; 2/5 multi-slot patterns penalize; 1/5 slug breakeven. The frozen gate fails (C4, C6). Per-slot concrete value length and slot count are the causal factors, not total string length. Claim ceiling bounded to: committed-code synthetic single-slot with prefix metadata for resolve/bind pipeline, token savings demonstrated ONLY for single-slot patterns where per-slot concrete value >> slot name + 3. NOT product-ready. Do not advance to VALIDATED or PRODUCT_CORE."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -867,6 +897,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "C1_drift_tp FAIL (mean_tp=0.729 < 0.85, Wilson lower 0.27-0.30 < 0.75) due to 50/50 session validity randomization diluting session_invalidation TP to 0.43-0.47 while achieving C2 variance (8/8 conditions std>0). C3 orthogonality passes in isolation (|r|=0.1387 < 0.3, permutation p=0.031 on pooled n=240) but overall decision FAIL per frozen conjunctive rule. Descriptive: PB-only r=0.051 (p=0.577) replicates parent exactly; SI r=0.189 (p=0.038) confounded by bimodal distribution (0 vs 5.0 composite). Fundamental trade-off identified: inducing behavioral variance via session validity randomization directly sacrifices detection performance (audit V1_C1_FAIL_BY_DESIGN_ARTIFACT). Measurement valid (8/8 conditions, 240 paired samples). C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35262262505",
+        "lane": "graph",
+        "created_at": "2026-09-17T19:00:41.829868+00:00",
+        "decision": "FAIL",
+        "source_commit": "38b90f1ac84c2067d76235189565d25e353105eb",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r\u00b2=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
       }
     ],
     "C-CROSSSITE": [
@@ -1223,6 +1263,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed \u2014 amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35262262156",
+        "lane": "product",
+        "created_at": "2026-09-17T19:01:14.685505+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact.",
+        "source_commit": "ddc6bddb4fcaddaa4073464f5c647d5a5dde9acc",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "Token economics hypothesis remains HYPOTHESIS. Short-value penalty (parent -6.4%) and long-value stratified result (single-slot saves, multi-slot penalizes) jointly close the general token-savings argument: parameterized representation does NOT reliably save tokens across URL patterns. However, C-PRODUCT-ECON's broader claim (amortized deduplication savings across tasks offset per-mechanism token penalty) is orthogonal to per-mechanism token count and remains untested. The product lane should pivot to measuring end-to-end amortized cost with model calls, browser, retrieval and verification if the deduplication hypothesis is to be pursued."
       }
     ],
     "C-MEAS-VALID": [
@@ -1525,29 +1575,79 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at 0.5 under uniform random brotli quality variation {4,5,6,7,8} on localhost. All 6 frozen decision conditions pass. Audit PASS confirms recomputed metrics match producer. Claim ceiling bounded to: localhost mock OAuth2 server with CDN quality proxy (uniform random brotli quality 4-8 per request, independent RNG seed 7919), synthetic padded JSON/HTML/XML at nominal 1KB/10KB/100KB (effective compressed ~70 bytes JSON/XML, ~178 bytes HTML), 4 auth states with 3-way error collapse (structural ceiling 0.5), no Accept-Encoding negotiation, no chunked encoding, no caching, N=20 per state per type per size, seed 44, Python 3.12.14, brotli 1.2.0. Does NOT establish real CDN (Cloudflare/Fastly/Akamai) survival, natural content, binary types, or production latency/CPU. Real CDN infrastructure remains the critical untested blocker."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35262261436",
+        "lane": "intel",
+        "created_at": "2026-09-17T19:00:39.186719+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 All six frozen decision criteria pass. Corrected implementation with deterministic sorted roles and aligned estimator reproduces the parent FALSIFIED conclusion: C2 = FALSE under canonical per-iteration p=0.5 null recipe (observed 0.3 < null 0.5273, seed=42; all 10 seeds FALSE). Parent null mean reproduced within 0.0002 of stored 0.5275 (threshold 0.02). Both parent orderings reproduced exactly. Audit PASS confirms all recomputed metrics match producer. The FALSIFIED conclusion (page-type density ordering is less stable than random role subsets) is a genuine scientific finding, not an implementation artifact. Claim ceiling bounded to: canonical per-iteration recipe, truncated-first-20 locatable sample, 7 tasks deduped, 1 Magento site, 3 definitions (2 distinct orderings), elements_with_bbox denominator, frozen seeds. Does NOT establish full-DOM, cross-site, 5-definition agreement, or broader C-MEAS-VALID status. Product consequence: density metric ordering is definition-dependent; pivot to definition-invariant alternatives or abandon ordering-based approach.",
+        "source_commit": "46d4ce687f16595932ac9aaa12c25d733da34872",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "The parent MEASUREMENT_INVALID verdict (design failure: incoherent NC1, unsorted set iteration, estimator mismatch) is resolved into a valid scientific finding within truncated-first-20 scope. Under the canonical per-iteration p=0.5 recipe, C2 = FALSE (observed 0.3 < null 0.5273): density ordering is LESS stable than random role subsets, meaning the metric's ordering is definition-dependent and unreliable. However, this applies only to truncated-first-20 locatable sample (7 tasks, 1 site, 3 definitions). C-MEAS-VALID as a broader claim (measurement substrate is intervention-valid) remains EXPERIMENTAL pending full-DOM re-run (blocked by substrate cap) and cross-site validation. This experiment converts a design-failure verdict into a scoped scientific finding but does not close the claim."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35262264593",
+        "lane": "runtime",
+        "created_at": "2026-09-17T19:00:43.263368+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on multiple independent clauses: (1) decompressed body-only discrimination 0.2911 < 0.3 threshold for JSON, HTML, and XML at all three sizes (conditions 1-3 fail); (2) decompressed hash variation all_same=false with unique_count=2 per state across all 9 conditions (condition 4 fails). Root cause is double-brotli encoding (scenario 4 of 5): single-pass client decompression strips outer brotli layer but leaves inner brotli-compressed data intact, producing a different hash (ddd198...) than the true decompressed body (6fb10...). The other 4 encoding scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) all produce identical decompressed hashes deterministically. Discrimination without double_br is 0.4486 (above 0.3), confirming the failure is caused exclusively by the double-encoding scenario. Audit PASS confirms all recomputed metrics match producer. Claim ceiling does NOT advance from parent EXP-RUNTIME-35237982464: remains bounded to non-deterministic brotli quality variation on localhost only. NOT extended to encoding-layer double-encoding.",
+        "source_commit": "1fb0507ea11a376cf1263e335dff5f7fcbd20051",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression-normalization sub-thread of C-MEAS-VALID: (a) survives single-layer encoding non-determinism (correct_br, missing_ce, incorrect_gzip, garbled_ce all produce identical decompressed hashes \u2014 verified in this experiment); (b) FAILS under double-brotli encoding with single-pass client decompression (discrimination 0.2911 < 0.3, determinism fails). Iterative decompression (decompress until failure or max depth) would restore the body (audit V6 verified manually: brotli decompress outer 74B -> inner 70B -> true body). The double-encoding failure mode is a client implementation issue, not a fundamental mechanism limitation. Product team must implement iterative decompression or reject double-encoded responses. Claim ceiling bounded to: localhost mock server + CDNEncodingProxy, synthetic padded JSON/HTML/XML, sizes 1KB-100KB, 4 auth states with 3-way error collapse (ceiling 0.5), brotli 1.2.0 single-pass fallback, no real CDN. Parent established discrimination 0.5 under quality-only variation stands. Real CDN infrastructure remains the critical untested blocker."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35264637598",
+        "lane": "intel",
+        "created_at": "2026-09-17T19:24:06.621540+00:00",
+        "decision": "MIXED",
+        "source_commit": "ec614d8a01bb1935f2dcc3426714d4f6e2d4fa26",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Directional reversal persists under corrected implementation: per-task weighted recipe C2 TRUE (observed 0.333 > null 0.205, all 10 seeds TRUE, SD 0.0046) and canonical per-iteration recipe C2 FALSE (observed 0.333 < null 0.586, all 10 seeds FALSE, SD 0.0123) \u2014 recipe choice flips C2 direction (divergence 0.38), confirming reversal is NOT an artifact of unsorted-set/estimator bugs (F1 not triggered, F2 not triggered). However, quantitative reproduction of parent stored values fails: canonical null mean deviates 0.0424 from parent 0.5273 (exceeds B1 0.02 threshold), per-task weighted null mean deviates 0.07 from parent ~0.28 (exceeds NC2/F3 0.05 threshold). Frozen decision rule has no branch for MIXED outcome (reversal persists but NC2/F3 fail). Claim ceiling bounded to truncated-first-20 locatable sample (7 tasks deduped, 3 definitions, 1 Magento site), sorted(raw_roles), within-iteration agreement mean, frozen seeds. Does NOT establish SURVIVES_REVERSAL_PERSISTS as frozen (requires NC2/F3 pass), full-DOM ordering, cross-site invariance, 5-definition family agreement, or broader C-MEAS-VALID status. Density metric ordering is definition-dependent AND recipe-dependent."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35280364816",
+        "lane": "runtime",
+        "created_at": "2026-09-17T22:07:11.360661+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 Iterative decompression restores decompression-normalization under double-brotli encoding for ALL auth states and under triple-brotli encoding for error states (no_auth/expired_token/invalid_token) on localhost mock server with deterministic brotli quality 6. All 9 conditions achieve decompressed_body_only_discrimination 0.5 >= 0.3 and decompressed hash determinism all_same=true on observed scenarios. However, the audit REVISE finding V1 (valid_token triple_br never observed, 0/180 reps) is accepted: the triple-br claim for the distinct success body (valid_token) is UNTESTED due to systematic RNG shift from shared proxy-test draw. Claim ceiling bounded accordingly: multi-layer encoding survival including double-brotli for all states and triple-brotli for error states only. Triple-br for valid_token success body requires rerun with stratified scenario assignment.",
+        "source_commit": "4fb8b817a80a4de4b3042f073b24ad914ed74066",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "C-MEAS-VALID advances from parent: iterative decompression restores decompressed body-only discrimination to 0.5 (from 0.2911 under single-pass) and restores hash determinism (all_same=true) under double-brotli encoding for ALL auth states on localhost. Triple-brotli validated for error states (no_auth/expired/invalid, 81 observations, 0 errors, all decompressed hashes match single-layer). However, the claim ceiling is bounded: (1) triple-br for valid_token success body is UNTESTED (0/180 observations due to RNG shift \u2014 audit V1, severity high); (2) localhost mock server only, no real CDN; (3) synthetic padded content types with 3-way error collapse (structural ceiling 0.5); (4) N=20 per state per condition. The frozen decision rule SURVIVES_CURRENT_TEST on observed data, but the claim does not reach VALIDATED because audit V1 identified a systematic coverage gap that prevents validation of the triple-br scenario for the success body. Audit V6 confirms recomputed metrics match producer on observed data. Exceeds both parent baselines: B-SINGLE-PASS-0.2911 and B-NO-DOUBLE-BR-0.4486."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35280397316",
+        "lane": "intel",
+        "created_at": "2026-09-17T22:07:30.804243+00:00",
+        "decision": "SURVIVES",
+        "source_commit": "84a41525644ef003ab20bd0f1dd30b3fc1ea945c",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Literature synthesis confirms recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods. However: (1) search was non-systematic (no PRISMA protocol, no inclusion/exclusion documentation); (2) SPIDER-to-IR applicability mapping is producer interpretation, not established literature result; (3) code coverage evidence from framework docs not peer-reviewed; (4) web analytics case is temporal definitional change not concurrent ambiguity. The experiment provides theoretical grounding for the recipe choice sub-problem but does not resolve the empirical recipe choice at scale. C-MEAS-VALID remains EXPERIMENTAL pending full-DOM enumeration."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35209110569",
+      "experiment_id": "EXP-PHYSICS-35290611436",
       "lane": "physics",
-      "created_at": "2026-09-17T10:11:00.874952+00:00",
-      "decision": "PARTIAL_FALSIFICATION \u2014 Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants \u22652 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213\u20130.285) with achievable NL 357\u2013394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation.",
-      "source_commit": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
+      "created_at": "2026-09-18T00:18:25.287835+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "595ea236040bae97c1405ee79f231b66660c0021",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "SPA leakage 0.21\u20130.28 valid-only (5/5 variants <40%) validates hash-SPAs as suitable testbeds for URL-level non-leakage PMI at NL scale (50 NL needs 64\u201370 raw). Mechanism understood: link_click leakage 1.00 (frozen normalization strips fragments), non-link actions leakage 0.00; headline rate reflects protocol's 27% link share, not site constant. However, title variation 0/5 (unique_titles=1, entropy 0.0 bits on all 840 SPA transitions) falsifies title-aware PMI on TodoMVC, replicating EXP-PHYSICS-34266105229 degeneracy; pipeline validated by 5 distinct Wikipedia titles on same code path. Neither URL-level PMI nor title-aware PMI has been tested on production SPAs with genuine state variation. C-WEB-DYNAMICS (predictive dynamical structure beyond memory) remains HYPOTHESIS \u2014 this experiment characterizes infrastructure viability, not the core claim."
+      "reason": "No change to claim status. Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: 0/5 TodoMVC hash-SPA variants achieve conditional PMI at K=3 > 0.05 bits (all exactly 0.0, Bonferroni p=1.0). The parent's 0.188-0.209 bit unconditional PMI is entirely explained by Markov predictability (deterministic (url_before, action) -> url_after). Action-history prediction accuracy at K=3 is 1.0 on 4/5 variants, confirming (url_before, H_K=3) fully determines url_after, making I(url_after; action | url_before, H_K=3) = 0 by mathematical identity. Falsification is bounded to TodoMVC hash-SPAs (3-4 states, deterministic FSM, hash routing, action_primitive {form_submit, button_click, js_navigate}). NOT falsified: production SPAs with >4 states, stochastic transitions, history-based routing, or richer state representations (DOM, accessibility tree, visual layout). Claim ceiling: URL-level PMI on these minimal deterministic SPAs demonstrates state-conditioned Markov predictability only, no beyond-memory component."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35209109455",
+      "experiment_id": "EXP-PRODUCT-35262262156",
       "lane": "product",
-      "created_at": "2026-09-17T10:11:01.844125+00:00",
-      "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
-      "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
+      "created_at": "2026-09-17T19:01:14.685505+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact.",
+      "source_commit": "ddc6bddb4fcaddaa4073464f5c647d5a5dde9acc",
       "claim_id": "C-PARAM-INHERIT",
       "status": "EXPERIMENTAL",
-      "reason": "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots (C1 5/5 EXECUTABLE, C2 5/5 UNKNOWN, C3 5/5 binding correct, C7 3/3 kernel regression). However, token economics hypothesis is falsified in this setting: parameterized representation adds per-mechanism token overhead (-5% to -10%) rather than saving tokens, because ${varname} syntax (varname.length+3 chars) exceeds short numeric values (1-3 digits). Claim ceiling narrowed to: committed-code synthetic single-slot with prefix metadata, resolve/bind pipeline validated, token penalty measured for short-value GET URLs on api.example.com/jsonplaceholder. Does NOT advance to PRODUCT_CORE. Previous token savings claim (parent 68 vs 96, 29.17%) is not replicated and should not be cited as established."
+      "reason": "Resolve/bind pipeline validated for 5 long-value patterns (7/7 EXECUTABLE with correct params, 7/7 UNKNOWN when missing, _bind correct for 1-3 slots). However, token savings hypothesis for long values is falsified as a general claim: only 2/5 patterns (single-slot UUID and bearer) save tokens; 2/5 multi-slot patterns penalize; 1/5 slug breakeven. The frozen gate fails (C4, C6). Per-slot concrete value length and slot count are the causal factors, not total string length. Claim ceiling bounded to: committed-code synthetic single-slot with prefix metadata for resolve/bind pipeline, token savings demonstrated ONLY for single-slot patterns where per-slot concrete value >> slot name + 3. NOT product-ready. Do not advance to VALIDATED or PRODUCT_CORE."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-GRAPH-34586318405",
@@ -1560,14 +1660,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35237975537",
+      "experiment_id": "EXP-GRAPH-35262262505",
       "lane": "graph",
-      "created_at": "2026-09-17T15:06:04.655034+00:00",
+      "created_at": "2026-09-17T19:00:41.829868+00:00",
       "decision": "FAIL",
-      "source_commit": "1b5a41d143129f351c76540eeb4ed88859f75c33",
+      "source_commit": "38b90f1ac84c2067d76235189565d25e353105eb",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "C1_drift_tp FAIL (mean_tp=0.729 < 0.85, Wilson lower 0.27-0.30 < 0.75) due to 50/50 session validity randomization diluting session_invalidation TP to 0.43-0.47 while achieving C2 variance (8/8 conditions std>0). C3 orthogonality passes in isolation (|r|=0.1387 < 0.3, permutation p=0.031 on pooled n=240) but overall decision FAIL per frozen conjunctive rule. Descriptive: PB-only r=0.051 (p=0.577) replicates parent exactly; SI r=0.189 (p=0.038) confounded by bimodal distribution (0 vs 5.0 composite). Fundamental trade-off identified: inducing behavioral variance via session validity randomization directly sacrifices detection performance (audit V1_C1_FAIL_BY_DESIGN_ARTIFACT). Measurement valid (8/8 conditions, 240 paired samples). C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
+      "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r\u00b2=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",
@@ -1590,24 +1690,24 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35209109455",
+      "experiment_id": "EXP-PRODUCT-35262262156",
       "lane": "product",
-      "created_at": "2026-09-17T10:11:01.844125+00:00",
-      "decision": "FALSIFIED-IN-SETTING \u2014 frozen decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST. C1-C3 and C7 pass (resolve/bind pipeline validated, kernel regression intact), but C4-C6 fail decisively: parameterized mechanisms use MORE tokens than literal for all 5 patterns (0/5 vs >=4/5 threshold), mean savings -6.4% (vs >=15%), and savings decrease with parameter count (3-param -9.68% < 1-param -4.81%). Audit PASS confirms all recomputed metrics match producer. The falsification is bounded to short-value (1-3 char numeric) URL patterns with tiktoken cl100k_base encoding; long-value savings remain open.",
-      "source_commit": "7a32946451c624a06a716933f6e9e4fed9ebc677",
+      "created_at": "2026-09-17T19:01:14.685505+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact.",
+      "source_commit": "ddc6bddb4fcaddaa4073464f5c647d5a5dde9acc",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "Negative evidence on token component: per-mechanism token cost is higher for parameterized than literal representation for short-value URL patterns (mean -6.4%). End-to-end amortized cost (fewer unique mechanisms to store/transmit/retrieve) remains unmeasured. Product economics viability is weakened on token dimension but not closed \u2014 amortized deduplication benefit is orthogonal to per-mechanism token penalty and has never been measured."
+      "reason": "Token economics hypothesis remains HYPOTHESIS. Short-value penalty (parent -6.4%) and long-value stratified result (single-slot saves, multi-slot penalizes) jointly close the general token-savings argument: parameterized representation does NOT reliably save tokens across URL patterns. However, C-PRODUCT-ECON's broader claim (amortized deduplication savings across tasks offset per-mechanism token penalty) is orthogonal to per-mechanism token count and remains untested. The product lane should pivot to measuring end-to-end amortized cost with model calls, browser, retrieval and verification if the deduplication hypothesis is to be pursued."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-35237982464",
-      "lane": "runtime",
-      "created_at": "2026-09-17T15:06:06.513570+00:00",
-      "decision": "SURVIVES_CURRENT_TEST \u2014 all 6 frozen decision-rule conditions pass: (1) JSON decompressed discrimination 0.5 >= 0.3 at all sizes, (2) HTML 0.5 >= 0.3, (3) XML 0.5 >= 0.3, (4) decompressed hash variation all_same=true for all content types x sizes x states (determinism under quality variation), (5) B-RANDOM = 0.0 for all conditions, (6) C_QUALITY_VARIATION_EXISTS passes with all 5 quality levels observed per condition. Audit PASS confirms all recomputed metrics match producer. Decompression-normalization survives non-deterministic brotli quality variation on localhost. The claim ceiling advances from 'deterministic localhost compression' to 'non-deterministic brotli quality variation on localhost proxy'. Real CDN infrastructure remains the sole untested blocker for C-MEAS-VALID decompression-normalization product readiness.",
-      "source_commit": "16975aec2e3d889b7164bc1041785fc8b4e89e94",
+      "experiment_id": "EXP-INTEL-35280397316",
+      "lane": "intel",
+      "created_at": "2026-09-17T22:07:30.804243+00:00",
+      "decision": "SURVIVES",
+      "source_commit": "84a41525644ef003ab20bd0f1dd30b3fc1ea945c",
       "claim_id": "C-MEAS-VALID",
       "status": "EXPERIMENTAL",
-      "reason": "Decompression-normalization (SHA256 on decompressed body + status) preserves body-only discrimination at 0.5 under uniform random brotli quality variation {4,5,6,7,8} on localhost. All 6 frozen decision conditions pass. Audit PASS confirms recomputed metrics match producer. Claim ceiling bounded to: localhost mock OAuth2 server with CDN quality proxy (uniform random brotli quality 4-8 per request, independent RNG seed 7919), synthetic padded JSON/HTML/XML at nominal 1KB/10KB/100KB (effective compressed ~70 bytes JSON/XML, ~178 bytes HTML), 4 auth states with 3-way error collapse (structural ceiling 0.5), no Accept-Encoding negotiation, no chunked encoding, no caching, N=20 per state per type per size, seed 44, Python 3.12.14, brotli 1.2.0. Does NOT establish real CDN (Cloudflare/Fastly/Akamai) survival, natural content, binary types, or production latency/CPU. Real CDN infrastructure remains the critical untested blocker."
+      "reason": "Literature synthesis confirms recipe choice ambiguity is a known phenomenon in established measurement frameworks (especially IR micro/macro/weighted averaging) with principled resolution methods. However: (1) search was non-systematic (no PRISMA protocol, no inclusion/exclusion documentation); (2) SPIDER-to-IR applicability mapping is producer interpretation, not established literature result; (3) code coverage evidence from framework docs not peer-reviewed; (4) web analytics case is temporal definitional change not concurrent ambiguity. The experiment provides theoretical grounding for the recipe choice sub-problem but does not resolve the empirical recipe choice at scale. C-MEAS-VALID remains EXPERIMENTAL pending full-DOM enumeration."
     }
   }
 }

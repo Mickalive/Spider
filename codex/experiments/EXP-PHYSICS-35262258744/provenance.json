@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35262258744",
+  "lane": "physics",
+  "created_at": "2026-09-17T22:30:00+00:00",
+  "origin_github_run_id": "35262258744",
+  "base_sha": "084bf58f0a07ffcf476418aae33a030c06958c22",
+  "frozen_request_sha": "9e03d53ea59fab1d9faf49c5a92aac91505c45634d0a39def1658309e042c0a4",
+  "frozen_spec_sha": "996317d7d1623f195fc0fd2de1296150fce6178f72db69f54956fa1a23fd36a6",
+  "frozen_prereg_sha": "086204a6065e282db73116954c9bc67d0897f0a4ba3cbb72021a5efe200d239a",
+  "frozen_freeze_sha": null,
+  "data_sources": {
+    "parent_experiment": "EXP-PHYSICS-35209110569",
+    "parent_handoff_path": "research/experiments/EXP-PHYSICS-35209110569/handoff.json",
+    "parent_handoff_sha256": "efa17806c5c69a7d0871dfcadfb90b88ae851529f306f31e8372cf3c4b426174",
+    "raw_data_files": [
+      "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs_topup.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_react.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_react_topup.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_vue.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_vue_topup.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_angular.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_angular_topup.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_svelte.json",
+      "research/experiments/EXP-PHYSICS-35209110569/raw_svelte_topup.json"
+    ]
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "numpy_version": "2.5.3",
+    "seed": 42,
+    "pythonhashseed": "0",
+    "n_permutations": 1000,
+    "alpha_laplace": 1.0,
+    "bonferroni_comparisons": 5,
+    "alpha_bonferroni": 0.01
+  },
+  "code_artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35262258744/run_analysis.py",
+      "sha256": "c21a6cae7501259138859c352dd3f7198f4b46b8b94b8669d95bc6aba7dc57fb",
+      "role": "analysis_code"
+    }
+  ],
+  "derived_artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35262258744/raw_analysis_results.json",
+      "sha256": "db4892e73278cfc5a1ab5a39d95e608797de9c156b790ea1480d6b9b33c8d414",
+      "role": "raw_derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35262258744/result.json",
+      "sha256": null,
+      "role": "result_packet"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35262258744/report.md",
+      "sha256": null,
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35262258744/provenance.json",
+      "sha256": null,
+      "role": "provenance"
+    }
+  ],
+  "execution_commands": [
+    "python3 research/experiments/EXP-PHYSICS-35262258744/run_analysis.py"
+  ],
+  "key_decisions": [
+    "Non-leakage filter: action_primitive != 'link_click' (frozen from spec.json)",
+    "State representation: raw url_before (with fragment) vs normalized url_before (fragment stripped)",
+    "Action representation: action_primitive categorical (form_submit, button_click, js_navigate)",
+    "Permutation test: cross-trajectory shuffle of action labels within sessions, seed=42, 1000 permutations",
+    "Bonferroni correction: 5 primary comparisons (5 variants), alpha = 0.01"
+  ]
+}

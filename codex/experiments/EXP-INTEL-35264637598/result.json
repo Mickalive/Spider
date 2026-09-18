@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35264637598",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M1_canonical_null_mean_seed42": {
+      "description": "Corrected canonical per-iteration null mean at seed=42",
+      "value": 0.5697,
+      "unit": "pairwise agreement",
+      "parent_stored": 0.5273,
+      "deviation_from_parent": 0.0424,
+      "recipe": "per-iteration p=0.5 independent inclusion"
+    },
+    "M2_canonical_null_mean_across_seeds": {
+      "description": "Mean of canonical null means across 10 seeds",
+      "value": 0.5857,
+      "unit": "pairwise agreement",
+      "sd_across_seeds": 0.0123
+    },
+    "M3_canonical_c2_direction": {
+      "description": "C2 direction under canonical recipe (all 10 seeds)",
+      "value": false,
+      "meaning": "C2 = FALSE: observed 0.333 < null 0.586, ordering is LESS stable than random",
+      "all_seeds_false": true
+    },
+    "M4_canonical_c2_per_seed": {
+      "description": "C2 direction per seed under canonical recipe",
+      "value": {
+        "42": false,
+        "123": false,
+        "456": false,
+        "789": false,
+        "1000": false,
+        "2000": false,
+        "3000": false,
+        "4000": false,
+        "5000": false,
+        "99999": false
+      }
+    },
+    "M5_pertask_null_mean_seed42": {
+      "description": "Corrected per-task weighted null mean at seed=42",
+      "value": 0.2100,
+      "unit": "pairwise agreement",
+      "parent_stored": 0.28,
+      "deviation_from_parent": 0.0700,
+      "recipe": "per-task weighted (independent role subset per task, weighted by elements_with_bbox)"
+    },
+    "M6_pertask_null_mean_across_seeds": {
+      "description": "Mean of per-task weighted null means across 10 seeds",
+      "value": 0.2052,
+      "unit": "pairwise agreement",
+      "sd_across_seeds": 0.0046
+    },
+    "M7_pertask_c2_direction": {
+      "description": "C2 direction under per-task weighted recipe (all 10 seeds)",
+      "value": true,
+      "meaning": "C2 = TRUE: observed 0.333 > null 0.205, ordering is MORE stable than random (reversal persists)",
+      "all_seeds_true": true
+    },
+    "M8_pertask_c2_per_seed": {
+      "description": "C2 direction per seed under per-task weighted recipe",
+      "value": {
+        "42": true,
+        "123": true,
+        "456": true,
+        "789": true,
+        "1000": true,
+        "2000": true,
+        "3000": true,
+        "4000": true,
+        "5000": true,
+        "99999": true
+      }
+    },
+    "M9_recipe_divergence": {
+      "description": "Difference between canonical null mean and per-task weighted null mean (across seeds)",
+      "value": 0.3805,
+      "unit": "absolute",
+      "meaning": "Recipe choice flips C2 direction: canonical gives FALSE, per-task weighted gives TRUE"
+    },
+    "M10_observed_agreement": {
+      "description": "Observed pairwise agreement across 3 definitions on truncated-first-20",
+      "value": 0.3333,
+      "unit": "pairwise agreement",
+      "agreeing_pairs": "1/3",
+      "definitions": ["DEF-FULL-MAP", "DEF-FORM-ONLY", "ISOLATED-A-LINK"]
+    },
+    "M11_pertask_null_deviation_from_parent": {
+      "description": "Deviation of per-task weighted null mean from parent's stored ~0.28",
+      "value": 0.0700,
+      "unit": "absolute",
+      "threshold": 0.05,
+      "exceeds_threshold": true
+    },
+    "M12_canonical_null_deviation_from_parent": {
+      "description": "Deviation of canonical null mean from parent's stored 0.5273",
+      "value": 0.0424,
+      "unit": "absolute",
+      "threshold": 0.02,
+      "exceeds_threshold": true
+    },
+    "M13_def_full_map_ordering": {
+      "description": "DEF-FULL-MAP ordering on truncated-first-20",
+      "value": ["cart", "product_listing"],
+      "matches_parent": true
+    },
+    "M14_def_form_only_ordering": {
+      "description": "DEF-FORM-ONLY ordering on truncated-first-20",
+      "value": ["cart", "product_listing"],
+      "matches_parent": true
+    },
+    "M15_isolated_a_link_ordering": {
+      "description": "ISOLATED-A-LINK ordering on truncated-first-20",
+      "value": ["cart", "detail"],
+      "matches_def_full_map": false,
+      "note": "ISOLATED-A-LINK differs from DEF-FULL-MAP/DEF-FORM-ONLY on detail vs product_listing"
+    }
+  },
+  "controls": {
+    "PC1_canonical_c2_false": {
+      "id": "PC1",
+      "description": "Canonical recipe reproduces C2 FALSE (observed 0.333 < null >0.5)",
+      "pass": true,
+      "observed": 0.3333,
+      "null_seed42": 0.5697,
+      "c2_false_confirmed": true,
+      "evidence": "M3, M4: C2 = FALSE for all 10 seeds"
+    },
+    "PC2_recipe_divergence": {
+      "id": "PC2",
+      "description": "Recipes produce materially different null distributions",
+      "pass": true,
+      "canonical_null_mean": 0.5857,
+      "pertask_null_mean": 0.2052,
+      "divergence": 0.3805,
+      "evidence": "M9: 0.3805 absolute divergence, canonical > pertask by 1.86x"
+    },
+    "NC1_both_recipes_agree_on_direction": {
+      "id": "NC1",
+      "description": "Both recipes agree on C2 direction (both FALSE or both TRUE)",
+      "pass": false,
+      "canonical_c2": false,
+      "pertask_c2": true,
+      "agree": false,
+      "evidence": "M3 canonical C2=FALSE, M7 pertask C2=TRUE: recipes DISAGREE, reversal persists"
+    },
+    "NC2_pertask_null_reproduction": {
+      "id": "NC2",
+      "description": "Per-task weighted null mean within 0.05 of parent's stored ~0.28",
+      "pass": false,
+      "computed": 0.2100,
+      "expected": 0.28,
+      "deviation": 0.0700,
+      "threshold": 0.05,
+      "evidence": "M5, M11: deviation 0.07 exceeds 0.05 threshold"
+    },
+    "F1_pertask_c2_direction": {
+      "id": "F1",
+      "description": "Per-task weighted recipe also gives C2 FALSE (reversal eliminated)",
+      "triggered": false,
+      "pertask_c2_true": true,
+      "evidence": "M7: C2 = TRUE for all 10 seeds, reversal PERSISTS under corrected implementation"
+    },
+    "F2_canonical_c2_direction": {
+      "id": "F2",
+      "description": "Canonical recipe C2 reverses to TRUE (parent result fails to reproduce)",
+      "triggered": false,
+      "canonical_c2_false": true,
+      "evidence": "M3: C2 = FALSE for all 10 seeds, parent result REPRODUCED"
+    },
+    "F3_pertask_null_deviation": {
+      "id": "F3",
+      "description": "Per-task weighted null mean deviates from parent's stored ~0.28 by >0.05",
+      "triggered": true,
+      "deviation": 0.0700,
+      "threshold": 0.05,
+      "evidence": "M11: deviation 0.07 exceeds 0.05 threshold"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/run_both_recipes_analysis.py",
+      "sha256": "28d8422796c8d9ba0717d5f7ad856144348a1ec3df47ff6fba95de5f53487f61",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/both_recipes_results.json",
+      "sha256": "74f4e0b410b297b0081cea9b298a090f9c013b47e64390fac7ce0e145a5a9202",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Under corrected implementation (sorted roles + direct 499500-pair estimator), the canonical per-iteration recipe reproduces C2 FALSE: observed 0.333 < null 0.586 (M3, M4). This confirms the parent's FALSIFIED conclusion is genuine, not an implementation artifact",
+    "Under corrected implementation, the per-task weighted recipe produces C2 TRUE: observed 0.333 > null 0.205 (M7, M8). The reversal PERSISTS under corrected code, meaning it is NOT an artifact of the old unsorted-set/estimator-mismatch bugs",
+    "The recipe divergence is large: canonical null mean 0.586 vs per-task weighted null mean 0.205 (M9: 0.3805 absolute divergence). Recipe choice flips the C2 direction entirely",
+    "NC2 fails: per-task weighted null mean (0.2100) deviates from parent's stored ~0.28 by 0.0700, exceeding the 0.05 threshold (M11). The parent's stored per-task weighted value was not precisely reproducible under corrected implementation",
+    "F3 triggers: same deviation (0.0700 > 0.05). The parent's stored per-task weighted null mean was affected by the implementation bugs, but the DIRECTION (null < observed) is preserved",
+    "The canonical recipe's null mean also deviates from parent (0.5697 vs 0.5273, deviation 0.0424), but C2 direction is unchanged (both FALSE). The estimator change affects both recipes systematically",
+    "DEF-FULL-MAP and DEF-FORM-ONLY orderings match parent exactly: cart>product_listing for both. ISOLATED-A-LINK gives cart>detail, differing from the other two definitions on detail vs product_listing",
+    "Per-seed SD for canonical recipe is 0.0123 (across seeds), and for per-task weighted is 0.0046. Both recipes are highly reproducible across seeds despite the null mean deviation from parent"
+  ],
+  "validity_notes": [
+    "Truncated-first-20 locatable sample only (7 tasks, 1 Magento site, cart n=1). Results do not generalize to full-DOM or cross-site data",
+    "3 of 5 planned definitions independently verified. Pairwise agreement is C(3,2)=3 pairs, not C(5,2)=10. The observed agreement metric (0.333) is not directly comparable to parent's 0.3 (from 5 definitions), but the null distribution comparison is valid",
+    "The parent's per-task weighted null mean (~0.28) was computed with the OLD buggy implementation (unsorted set + sampled 10000-pair estimator). The corrected implementation uses sorted roles + direct 499500-pair estimator, which produces a systematically lower null mean (0.205). The 0.05 threshold was designed to accommodate estimator differences but the actual deviation (0.07) exceeds it, indicating the old bugs had a larger effect on the per-task weighted recipe than anticipated",
+    "The canonical recipe's null mean also deviates from parent (0.5697 vs 0.5273, deviation 0.0424), but the C2 direction is unchanged. This systematic shift is consistent with the estimator change (sampled 10000 vs direct 499500 pairs) affecting both recipes",
+    "Cart page appears once (n=1). Within-type variance for cart is undefined; mean density for cart is a single observation",
+    "Deduplication: raw data contains duplicate cart_1 entry; deduplicated to 7 unique tasks (matching parent chain)",
+    "No browser/network/model calls required. Pure re-analysis of existing raw evidence"
+  ],
+  "unresolved": [
+    "The frozen decision rule has a gap: it does not explicitly handle the case where the reversal persists (F1 not triggered) but NC2/F3 fail (null mean reproduction fails). The outcome is MIXED: reversal genuine but parent stored value unreliable. DIRECTOR must resolve this gap",
+    "The per-task weighted null mean deviation (0.07) exceeds the 0.05 threshold, but the scientific finding (reversal direction) is preserved. Whether this constitutes a reliable quantitative result or merely a qualitative direction finding requires interpretation",
+    "Whether the canonical recipe's null mean deviation from parent (0.0424) is within acceptable range given the estimator change. The 0.02 threshold in the parent chain was for sorted-role reproducibility, not estimator changes",
+    "Whether the 0.3805 recipe divergence is generalizable or specific to this truncated-first-20 sample with 3 definitions",
+    "Full-DOM re-run remains blocked by substrate cap (locatableSample at measure_fullpage_yield.py:89). Whether C2 FALSE and C2 TRUE reversal both hold on full-DOM data is the critical next step",
+    "Cross-site generalization untested: all data from one Magento site with zero menuitem/tab counts",
+    "The other 2 definitions from the parent chain (5 planned, only 3 verified) were not tested under corrected implementation"
+  ]
+}

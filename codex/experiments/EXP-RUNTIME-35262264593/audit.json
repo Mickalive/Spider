@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35262264593",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_DOUBLE_BR_HEADER_MISMATCH",
+      "severity": "low",
+      "finding": "Spec prereg.md and spec.json describe double-encoded scenario as 'br, br' (spec.json B-COMPRESSED context and prereg encoding scenario 4). Implementation CDNEncodingProxy._apply_encoding_scenario for 'double_br' compresses brotli bytes again but sets new_ce='br' (single value) not 'br, br'. Client decompress_body checks 'br' substring and decompresses exactly once, so failure mode is still triggered. Recomputed raw_observations.json shows double_br body_size 74 vs correct_br 70 (1KB JSON) and decompressed_hash ddd198... (inner compressed) vs 6fb10... (true decompressed), confirming single-pass leaves inner layer. If header were 'br, br', current single-pass logic would still decompress only once, so direction of falsifier is unchanged. No measurement invalidation.",
+      "evidence": "research/experiments/EXP-RUNTIME-35262264593/run_experiment.py:391-394, raw_observations.json JSON_1KB no_auth rep0 double_br vs correct_br decompressed_hash, provenance.json run_experiment.py sha256 58476ed4610baa5f20398f96919ef8909012da397e8e4dab411f79d63aff9f1e"
+    },
+    {
+      "id": "V2_GARBLED_AND_MISSING_NOT_STRESSING_FALLBACK",
+      "severity": "medium",
+      "finding": "Spec hypothesis predicts graceful degradation to identity when ALL decompression paths fail (garbled/empty). In execution, decompress_body for missing_ce (Content-Encoding none) and garbled_ce ('br; quality=invalid') still succeeds via brotli.decompress because raw bytes are valid single-layer brotli and code checks 'br' substring (garbled contains 'br') or tries brotli unconditionally for missing. decompression_errors is [] for all 9 conditions and decompressed_hash for missing/garbled equals correct_br hash (6fb10...). Therefore B-IDENTITY-FALLBACK baseline (>=0.3 when fallback to raw) was never exercised; report's graceful-degradation PASS reflects absence of crashes, not identity-fallback discrimination. Does not invalidate determinism/compression findings but limits inference about true fallback path.",
+      "evidence": "research/experiments/EXP-RUNTIME-35262264593/run_experiment.py:499-553 decompress_body logic, result.json decompression_errors=[] for all 9 metrics, raw_observations.json missing_ce/garbled_ce decompressed_hash == correct_br"
+    },
+    {
+      "id": "V3_SAMPLE_IMBALANCE_FILTERED_DISCRIMINATION",
+      "severity": "info",
+      "finding": "Random per-request encoding scenario selection (seed 44 +7919 separate RNG) produces uneven per-state scenario counts (e.g., JSON_1KB no_auth: double_br 3/20, valid_token: double_br 7/20). After excluding double_br, per-state n varies 13-17, yielding recomputed filtered decompressed discrimination 0.4486 vs balanced 0.5. The 0.051 gap is sampling imbalance, not mechanism degradation. Inclusive discrimination 0.2911 is still <0.3 even after accounting for imbalance, so falsifier outcome stands.",
+      "evidence": "raw_observations.json JSON_1KB scenario counters, recomputed 0.4486 filtered vs 0.2911 inclusive, result.json metrics"
+    },
+    {
+      "id": "V4_UNIFORM_DISCRIMINATION_ACROSS_CONDITIONS",
+      "severity": "info",
+      "finding": "All 9 content-type x size conditions report identical decompressed_body_only_discrimination 0.2910964912280702 and compressed identical. Recomputation from raw_observations.json confirms uniformity is genuine: fingerprint construction is status+body_hash, and scenario success distribution is independent of size/type (payloads padded, same brotli quality 6). Indicates no content-type/size interaction and no leakage; not a copy-paste artifact.",
+      "evidence": "result.json metrics 9 entries, recomputed via raw_observations.json fingerprint recomputation matches 0.2910964912280702 for all"
+    },
+    {
+      "id": "V5_MOCK_BOUNDARY",
+      "severity": "medium",
+      "finding": "Results bounded to localhost mock server + CDNEncodingProxy on ports 5500/5600. No real CDN (Cloudflare/Fastly/Akamai) tested, no caching/chunked/HTTP2/edge selection, synthetic padded bodies, 3-way error collapse ceiling 0.5, N=20 per state (80 per condition, 720 total), brotli 1.2.0 single-pass client. Prereg correctly scopes claim ceiling to localhost encoding-layer non-determinism.",
+      "evidence": "spec.json measurement_validity, prereg.md Scope boundaries, provenance.json execution base_port 5500 proxy_port 5600, validity_notes"
+    },
+    {
+      "id": "V6_DETERMINISM_FAILURE_GENUINE",
+      "severity": "info",
+      "finding": "decompressed_hash_variation all_same=false with unique_count=2 per state is not measurement noise: one hash corresponds to true decompressed body (6fb10... for no_auth), second corresponds to still-compressed inner layer (ddd198...). Manual iterative decompression (brotli decompress twice) recovers true body, confirming failure is single-pass client logic, not server data corruption. Discrimination drop from 0.4486 (without double) to 0.2911 (with double) quantifies effect.",
+      "evidence": "raw_observations.json JSON_1KB no_auth double_br decompressed_hash ddd198... vs body_hash_compressed, manual recompression test c1 70B c2 74B double decompress restores body"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-QUALITY-ONLY-0.5",
+      "expected": "0.5 (parent EXP-RUNTIME-35237982464 decompressed under quality-only variation)",
+      "observed": "0.2911 with encoding non-determinism (inclusive), 0.4486 without double_br (filtered). Regression >0.05 explained by double_br determinism failure and sample imbalance, not quality variation.",
+      "verdict": "REGRESSED_AS_PREDICTED_BY_FALSIFIER",
+      "evidence": "result.json metrics decompressed_body_only_discrimination 0.2911, recomputed filtered 0.4486, parent handoff EXP-RUNTIME-35237982464 0.5"
+    },
+    {
+      "id": "B-RANDOM",
+      "expected": "0.0 discrimination for SHA256 on random 32-byte fingerprints",
+      "observed": "0.0 for all 9 conditions",
+      "verdict": "PASS",
+      "evidence": "result.json metrics[*].baselines.B-RANDOM 0.0, controls.C_NULL_CONTROL pass=true observed [0.0x9]"
+    },
+    {
+      "id": "B-COMPRESSED-BYTE-ONLY",
+      "expected": "<0.5 and should be < decompressed when decompression is necessary",
+      "observed": "0.2911 for both compressed and decompressed (identical) for all 9 conditions",
+      "verdict": "INCONCLUSIVE_FOR_NECESSITY",
+      "evidence": "result.json metrics compressed_body_only_discrimination 0.2911 == decompressed; recomputed compressed discrimination matches decompressed. In this encoding-proxy setting decompression necessity is masked because double_br decompressed equals compressed intermediate, so both metrics degrade equally. Parent showed 0.16-0.35 vs 0.50 benefit; this setting does not replicate that contrast."
+    },
+    {
+      "id": "B-IDENTITY-FALLBACK",
+      "expected": ">=0.3 when decompression fails and client falls back to raw (compressed) hash",
+      "observed": "Not exercised: missing_ce and garbled_ce succeed via brotli fallback, decompression_errors 0, decompressed_hash equals true body, not raw",
+      "verdict": "NOT_TESTED",
+      "evidence": "result.json decompression_errors [], raw_observations.json missing/garbled decompressed_hash == correct_br, run_experiment.py decompress_body fallback path not hitting identity"
+    },
+    {
+      "id": "C_ENCODING_VARIATION_EXISTS",
+      "expected": ">=3 distinct encoding scenarios per content type x size (positive control)",
+      "observed": "5/5 scenarios observed per condition per state, 4 Content-Encoding values observed (br, gzip, none, br; quality=invalid)",
+      "verdict": "PASS",
+      "evidence": "result.json controls.C_ENCODING_VARIATION_EXISTS observed 5 per state, raw_observations.json encoding_scenarios_seen unique_count 5, content_encoding_values unique_count 4"
+    },
+    {
+      "id": "C_NULL_CONTROL",
+      "expected": "B-RANDOM ~0.0 for all conditions",
+      "observed": "0.0 for all 9 conditions",
+      "verdict": "PASS",
+      "evidence": "result.json controls.C_NULL_CONTROL pass true"
+    },
+    {
+      "id": "C_DECOMPRESSION_DETERMINISM",
+      "expected": "all_same=true for decompressed hash variation",
+      "observed": "all_same=false for all 4 states across all 9 conditions, unique_count 2 per state",
+      "verdict": "FAIL_AS_PREDICTED_BY_FALSIFIER",
+      "evidence": "result.json controls.C_DECOMPRESSION_DETERMINISM pass false, metrics decompressed_hash_variation all_same false"
+    },
+    {
+      "id": "C_GRACEFUL_DEGRADATION",
+      "expected": "No client crashes/hangs from garbled headers",
+      "observed": "0 errors, 0 crashes",
+      "verdict": "PASS",
+      "evidence": "result.json controls.C_GRACEFUL_DEGRADATION error_count 0, controls.C_NO_PIPELINE_ERRORS 0"
+    }
+  ],
+  "recomputed_metrics": {
+    "/userinfo_JSON_1KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_JSON_10KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_JSON_100KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_HTML_1KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_HTML_10KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_HTML_100KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_XML_1KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_XML_10KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_XML_100KB.decompressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_JSON_1KB.compressed_body_only_discrimination": 0.2910964912280702,
+    "/userinfo_JSON_1KB.status_only_discrimination": 0.5,
+    "decompressed_hash_variation_unique_per_state": 2,
+    "decompressed_hash_variation_all_same": false,
+    "compressed_hash_variation_unique_per_state": 2,
+    "filtered_without_double_br_discrimination": 0.4485981308411215,
+    "B-RANDOM_all_conditions": 0.0,
+    "C_ENCODING_VARIATION_unique_scenarios_per_condition": 5,
+    "C_ENCODING_CONTENT_ENCODING_unique_values": 4,
+    "recomputation_match_producer": true,
+    "double_br_single_pass_decompressed_equals_inner_compressed": true,
+    "double_br_iterative_double_decompress_restores_body": true
+  },
+  "claim_ceiling": "Decompression-normalization (SHA256 on decompressed body + status) survives single-layer encoding non-determinism (correct_br, missing Content-Encoding, incorrect gzip label, garbled Content-Encoding) on localhost with deterministic brotli quality 6: those 4/5 scenarios yield identical decompressed hashes deterministically. It DOES NOT survive double-brotli encoding with single-pass client decompression: discrimination falls to 0.2911 (<0.3) for JSON/HTML/XML at 1KB/10KB/100KB and decompressed hash determinism fails (2 unique per state). Iterative decompression (decompress until failure, max depth) would restore body (verified by recomputation: brotli decompress outer 74B -> inner 70B -> true body 6fb10...). Claim ceiling remains at parent EXP-RUNTIME-35237982464: non-deterministic brotli quality variation on localhost only. NOT extended to encoding-layer double-encoding. Bounded to localhost mock server + CDNEncodingProxy, synthetic padded JSON/HTML/XML, sizes via padding, 4 auth states with 3-way error collapse (ceiling 0.5), Flask mock, brotli 1.2.0 single-pass fallback, no real CDN infrastructure, no chunked/cache/HTTP2/edge selection.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35262264593/result.json — metrics 9 conditions decompressed 0.2911 status 0.5 B-RANDOM 0.0 hash variation 2 unique all_same false",
+    "research/experiments/EXP-RUNTIME-35262264593/raw_observations.json — 720 observations 9x4x20, decompressed_hash 6fb10... vs ddd198... for double_br, body_size 70 vs 74, encoding_scenario distribution 5 values",
+    "research/experiments/EXP-RUNTIME-35262264593/run_experiment.py — CDNEncodingProxy double_br wraps brotli again quality 6, decompress_body single-pass brotli->gzip->identity, discrimination Jaccard formula, seed 44/7919",
+    "research/experiments/EXP-RUNTIME-35262264593/report.md — correct interpretation of double_br failure, discrimination <0.3, determinism failure",
+    "research/experiments/EXP-RUNTIME-35262264593/provenance.json — python 3.12.14 brotli 1.2.0, frozen hashes, reproduction command python3 run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35262264593/spec.json — frozen decision rule 6 conditions, falsifier <0.3 or determinism failure or double-hash mismatch",
+    "research/experiments/EXP-RUNTIME-35237982464/handoff.json — parent ceiling non-deterministic quality 0.5, establishes determinism and algorithm invariance"
+  ],
+  "unresolved": [
+    "Does iterative decompression (decompress repeatedly until failure or max depth 3-5) restore discrimination to >=0.3 and all_same=true under double/triple encoding without introducing false decompression of non-compressed bodies? Verified in manual recomputation for double_br but not in full experiment with N=20 per state.",
+    "Would a correct 'br, br' Content-Encoding header with iterative parsing (split on ',' and decompress in reverse order) change outcome vs single 'br' header used? Still expected to fail with single-pass but pass with iterative.",
+    "What is discrimination of B-IDENTITY-FALLBACK when decompression genuinely fails and client hashes raw compressed bytes? Not exercised because missing/garbled still decompress; requires a scenario where body is not valid brotli/gzip (e.g., truncated or random bytes).",
+    "Does encoding-layer non-determinism interact with real CDN caching/chunked transfer-encoding/Accept-Encoding negotiation beyond header-layer corruption tested here?",
+    "Real CDN infrastructure survival (Cloudflare/Fastly/Akamai per-edge brotli quality, caching, chunked) remains untested — parent blocker still open."
+  ]
+}
