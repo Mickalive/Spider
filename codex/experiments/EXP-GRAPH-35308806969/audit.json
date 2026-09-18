@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35308806969",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "C1_drift_tp VERIFIED PASS: mean TP=1.0 across 8 co-occurring conditions, all 8 Wilson lower CI=0.9398 >0.75. Recomputed from raw_evidence confirms 480/480 samples have behavioral composite >0. Single shared Wilson value due to identical 60/60 success counts. No failures.",
+    "C2_variance VERIFIED PASS: 8/8 conditions have behavioral_std>0 and structural_std>0. Recomputed behavioral_std range 0.137-0.428, structural_std 0.607-1.082 matches result.json. PC_SESSION_STATUS_VARIANCE 4/4 session_invalidation conditions with variance confirms graded session_status_check (401/403/500) creates variance while preserving session_change=1.",
+    "C3_orthogonality correctly recorded as FAIL on conjunctive frozen gate: |r|=0.03355 <0.3 passes magnitude but permutation p=0.4650 >0.05 fails significance. Auditor recomputed pooled r=0.0335497 (n=480) via raw_evidence with identical behavioral composite (weights 2,3,1,2) and structural diff (max(schema_diff,1-jaccard)), standard Pearson p=0.4634, Fisher z p=0.4636 — consistent with producer permutation p=0.4650 (10,000 permutations). Per-drift r: PB 0.0005 (n=240, p ~0.99), SI -0.0136 (n=240, p ~0.84) both near-zero; pooled result not driven by between-condition mean differences (no Simpson artifact).",
+    "Power analysis VERIFIED: min_detectable |r| at n=480 =0.0895 (tanh(1.96/sqrt(477))), producer reports 0.0895 exact. Min n for |r|=0.05 =1538 (ceil 3+(1.96/0.05004)^2), producer reports 1538. Expected p at n=480 for |r|=0.05 =0.274, producer reports 0.2744. Observed |r|=0.0335 <0.0895, so n insufficient. Fisher assumptions (bivariate normality) disclosed as supplementary in prereg validity threats; permutation test is primary — consistent disclosure.",
+    "C4_null_control VERIFIED PASS: FP=0.0 (0/240 noise-only samples). Recomputed behavioral composites on 4 noise-only conditions (60 each) are all exactly 0.0, confirming no false positives when drift absent. Control is trivial by design (noise-only never touches auth/session state) but executed as preregistered and replicates parent FP=0.0.",
+    "Measurement validity CONFIRMED: 480 paired samples (8x60) and 8/8 variance conditions meet prereg MEASUREMENT_INVALID threshold (>=6/8 and >=480). Server executed 720 request sequences successfully, no missing data.",
+    "Per-condition heterogeneity: one condition shows moderate negative correlation r=-0.3145 p=0.0144 (session_invalidation+optional_field_addition, n=60, uncorrected). 1/8 with p<0.05 is expected under global null (expected 0.4), not systematic evidence of non-orthogonality. Remaining 7 conditions |r| 0.022-0.245, p 0.058-0.867. Producer explores but does not inflate; correctly pools.",
+    "Representation integrity: behavioral composite arbitrary weights (2,3,1,2) and graded mapping 401->1.0/403->0.5/500->0.75 disclosed as validity threat in report/provenance. Structural signal uses unauthenticated /schema Jaccard/diff — synthetic construct bounded to deterministic mock — disclosed. Both signals derived from real HTTP cycles on Flask 3.1.3 + PyJWT HS256 localhost (verified in mock_server.py and run_experiment.py), not analytical computation.",
+    "Provenance/doc staleness (non-material): result.json validity_notes bullet 2 and run_experiment.py validity_notes list still state 'ALL 30 samples' while actual n_samples_per_condition=60 (provenance/result metrics confirm 60, raw_evidence confirms 60). run_experiment.py report-generation template contains stale literals '8 conditions x 30 samples' and 'permutation test, 1000 permutations' vs actual 60 and 10000. These are copy-paste artifacts from parent EXP-GRAPH-35262262505 and do not affect computed metrics or decision logic (code uses N_SAMPLES=60, permutation 10000).",
+    "Deterministic mock limits external validity: Flask localhost, HS256, single seed SEED=42, no DB/cache/CDN stochasticity, no RS256/ES256/OAuth/OIDC variation, synthetic /session/status and /schema endpoints. Claim ceiling must remain bounded to deterministic mock as producer correctly does. No evidence of leakage between behavioral (/api/*, /session/status) and structural (/schema) endpoints; shared per-sample RNG provides independent draws for permission subset/session code vs schema noise seed, no causal inducing link.",
+    "Decision-rule MIXED outcome correctly applied: per spec.json/prereg section 5, MIXED requires C1-C2 PASS, C3 fails ONLY on p (|r|<0.3 and p>=0.05), and power confirms n insufficient for observed |r|. All three hold (C1 1.0/0.9398, C2 8/8, |r| 0.0335, p 0.465, min_detectable 0.0895). Producer outcome MIXED is the preregistered correct outcome, not SUPPORTS or FALSIFIES. Interpretation as 'near-zero correlation with explicit power bound, not evidence of non-orthogonality, requires decision-rule revision' is justified."
+  ],
+  "baseline_findings": [
+    "B-PARENT-N240 VERIFIED: parent EXP-GRAPH-35262262505 at n=240 |r|=0.0527 p=0.414 C3 FAIL. Power analysis predicted p≈0.26 at n=480 for |r|~0.05, still >0.05. Observed pooled r=0.0335 p=0.465 at n=480 is even smaller |r| and non-significant, confirming prediction that doubling to 480 is insufficient. Direction consistent; magnitude decreased 37% (|r| 0.053->0.0335) and r2 0.003->0.001, supporting stable near-zero.",
+    "B-PB-ORTHOGONALITY-REPLICATED VERIFIED: permission_boundary per-drift r=0.0005 (n=240) vs parent PB r=0.051 and grandparents PB r≈0.05 range. Stable near-zero across 3+ experiments, now even closer to zero. SI per-drift r=-0.0136 vs parent SI r=0.046, homogeneous and eliminates prior heterogeneous SI-driven artifact from 50/50 coin-flip design. Pooled homogeneity supports orthogonality plausible.",
+    "B-FISHER-Z-POWER-ANALYSIS VERIFIED: formal Fisher z correctly computed (z=0.05004 for r=0.05). Recomputed min_n 1538 matches prereg 1537/1568 range and producer 1538; min_detectable 0.0895 matches prereg ~0.0897. Confirms parent handoff recommendation n>=480 was underpowered; next handoff requiring decision-rule revision is correctly justiifed.",
+    "Positive controls replicated: PC_PERMISSION_BOUNDARY_DETECTION 1.0 (60/60) and PC_SESSION_STATUS_VARIANCE 4/4 match parent validated mechanism; no regression. Null control FP=0.0 replicates EXP-GRAPH-35237975537 and EXP-GRAPH-35262262505 across 120-240 noise-only samples."
+  ],
+  "recomputed_metrics": {
+    "mean_tp_rate": 1.0,
+    "all_wilson_lower_above_075": true,
+    "wilson_lower_ci_value": 0.9398260695220669,
+    "pearson_r_pooled": 0.03354974840059444,
+    "pearson_p_pooled_parametric": 0.463358,
+    "permutation_p_pooled_producer": 0.46495350464953505,
+    "fisher_z_observed": 0.03356234461331847,
+    "z_statistic_h0": 0.7330126707805816,
+    "p_from_fisher_z": 0.46355070133292564,
+    "abs_r_pooled": 0.03354974840059444,
+    "r_squared": 0.001125585616435902,
+    "fp_rate_noise_only": 0.0,
+    "fp_count_noise_only": 0,
+    "total_noise_only_samples": 240,
+    "positive_control_rate": 1.0,
+    "n_cooccurring_conditions": 8,
+    "n_noise_only_conditions": 4,
+    "n_samples_per_condition": 60,
+    "n_paired_samples": 480,
+    "conditions_with_variance": 8,
+    "min_detectable_r_at_n480": 0.08950209062260417,
+    "min_n_for_r_equals_005": 1538,
+    "expected_p_at_n480_for_r005": 0.2744254728754387,
+    "n_sufficient_for_observed_r": false,
+    "per_drift_r": {
+      "permission_boundary": 0.0005087255922857359,
+      "session_invalidation": -0.013649730508531098
+    },
+    "per_condition_r": {
+      "cooccur_permission_boundary+optional_field_addition": {"r": 0.022009314156572934, "p": 0.8674351297848109},
+      "cooccur_permission_boundary+description_change": {"r": -0.14966205116524228, "p": 0.2537314503658527},
+      "cooccur_permission_boundary+response_time_jitter": {"r": 0.20029213681074723, "p": 0.12492768809950798},
+      "cooccur_permission_boundary+field_type_normalization": {"r": -0.24583633148878983, "p": 0.05831117194609448},
+      "cooccur_session_invalidation+optional_field_addition": {"r": -0.3144887601032956, "p": 0.014396374252335626},
+      "cooccur_session_invalidation+description_change": {"r": -0.04404283045693247, "p": 0.7382739361129393},
+      "cooccur_session_invalidation+response_time_jitter": {"r": 0.15794965025709737, "p": 0.22808011127249905},
+      "cooccur_session_invalidation+field_type_normalization": {"r": 0.15312182195766505, "p": 0.2427948513789412}
+    },
+    "session_status_distribution": {
+      "cooccur_session_invalidation+optional_field_addition": {"401": 22, "403": 16, "500": 22, "200": 0, "n_total": 60},
+      "cooccur_session_invalidation+description_change": {"401": 16, "403": 24, "500": 20, "200": 0, "n_total": 60},
+      "cooccur_session_invalidation+response_time_jitter": {"401": 18, "403": 17, "500": 25, "200": 0, "n_total": 60},
+      "cooccur_session_invalidation+field_type_normalization": {"401": 22, "403": 22, "500": 16, "200": 0, "n_total": 60}
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: On deterministic Flask 3.1.3 + PyJWT HS256 localhost mock with graded session_status_check (401->1.0, 403->0.5, 500->0.75, 200->0.0) and unauthenticated /schema structural probe, 8 co-occurring conditions (permission_boundary/session_invalidation x 4 structural noises), SEED=42, 60 samples/condition (n=480 pooled), behavioral and structural signals show near-zero correlation |r|=0.0335 (r2=0.001, Fisher z=0.0336, p=0.464, permutation p=0.465). TP/variance trade-off remains broken (mean TP=1.0 Wilson 0.94, 8/8 variance, FP=0.0). Orthogonality is PLAUSIBLE but NOT formally confirmed at preregistered p<0.05; the test is provably underpowered (min detectable |r|=0.0895 at n=480, min n=1538 for |r|=0.05, expected p=0.274). Outcome is correctly MIXED: frozen conjunctive gate fails, power analysis bounds the failure. Product: retain composite multi-signal classifiers as precautionary; do NOT promote to independent parallel channels. C-FRESHNESS remains EXPERIMENTAL. No inference to real APIs, production middleware (RS256/ES256/OAuth/OIDC), DB/cache/CDN stochasticity, or alternative mappings warranted without new experiment. Decision rule must be revised (equivalence/TOST or CI bound or n~1600) before confirmatory claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35308806969/request.json",
+    "research/experiments/EXP-GRAPH-35308806969/spec.json",
+    "research/experiments/EXP-GRAPH-35308806969/prereg.md",
+    "research/experiments/EXP-GRAPH-35308806969/freeze.json",
+    "research/experiments/EXP-GRAPH-35308806969/result.json",
+    "research/experiments/EXP-GRAPH-35308806969/report.md",
+    "research/experiments/EXP-GRAPH-35308806969/provenance.json",
+    "research/experiments/EXP-GRAPH-35308806969/run_experiment.py",
+    "research/experiments/EXP-GRAPH-35308806969/mock_server.py",
+    "research/experiments/EXP-GRAPH-35308806969/raw_evidence/experiment_data.json (sha256: 13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6)",
+    "research/experiments/EXP-GRAPH-35262262505/handoff.json (sha256: bc13abab121d2549c82a255d469c4d14a0a58f8fef3a0fbd9d2b19199db97b91)",
+    "research/experiments/EXP-GRAPH-35262262505/result.json",
+    "research/experiments/EXP-GRAPH-35262262505/audit.json"
+  ],
+  "unresolved": [
+    "Whether alternative session_status_check mappings (e.g., 401->1.0/403->0.2/500->0.6 or continuous TTL) change pooled or per-condition correlation structure",
+    "Whether real APIs with DB/cache/CDN stochasticity and heterogeneous client profiles preserve near-orthogonality observed in deterministic mock",
+    "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware (Auth0/Okta/Keycloak)",
+    "Whether revelatory structural probes beyond unauthenticated /schema (authenticated schema, version endpoints) change correlation",
+    "Whether wider stochastic variation (all 7 non-empty permission subsets, larger n per condition, varied noise magnitudes) changes correlation estimate",
+    "Whether composite multi-signal classifiers outperform single-signal when orthogonality holds at this effect size",
+    "Whether the single significant per-condition r=-0.314 (p=0.014 SI+optional_field_addition) replicates or is sampling noise",
+    "What revised decision rule (equivalence test bounds, confidence interval, or increased n~1538) should replace conjunctive |r|<0.3 AND p<0.05 for very-low-magnitude correlations"
+  ]
+}

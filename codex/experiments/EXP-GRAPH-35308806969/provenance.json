@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35308806969",
+  "github_run_id": "35308806969",
+  "base_sha": "fc2dff3ee2489370e78ee1ed4a86f47656b3a01f",
+  "claim_ids": ["C-FRESHNESS"],
+  "frozen_inputs": {
+    "freeze_json_hash": "freeze.json (frozen_at: 2026-09-18T05:04:14.150509+00:00)",
+    "prereg_hash": "5d8abeedd59cb93465d9e023e9b303fcb7b3cd7a3b91a29801e558b564d6fd15",
+    "request_hash": "b235741bb3e92383db52f7f3176f87ce2b0b099b12c38392ed2ded9e7097265d",
+    "spec_hash": "a4baaafe70d04b4abbc0a45d70a1bb293724441d9289af26b805f126078fbd25"
+  },
+  "environment": {
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python_version": "3.12.14",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1"
+  },
+  "parameters": {
+    "seed": 42,
+    "n_samples_per_condition": 60,
+    "n_cooccurring_conditions": 8,
+    "n_noise_only_conditions": 4,
+    "n_total_request_sequences": 720,
+    "drift_patterns": [
+      "permission_boundary",
+      "session_invalidation"
+    ],
+    "noise_patterns": [
+      "optional_field_addition",
+      "description_change",
+      "response_time_jitter",
+      "field_type_normalization"
+    ],
+    "permission_subsets": [
+      {"read": true, "write": false, "admin": false},
+      {"read": true, "write": true, "admin": false},
+      {"read": true, "write": false, "admin": true}
+    ],
+    "schema_size": 10,
+    "base_port": 18950,
+    "session_validity_randomization": "ALL invalid (session_change=1 for every SI sample, no coin flip)",
+    "session_status_code_choices": [401, 403, 500],
+    "session_status_check_mapping": {"401": 1.0, "403": 0.5, "500": 0.75, "200": 0.0},
+    "permutation_test_n_permutations": 10000,
+    "power_analysis": "Fisher z-transform (mandatory per prereg section 9)"
+  },
+  "code_paths": {
+    "mock_server.py": "5c2163343e0b506500f36411bb261d974e0a31e5c5861347764cf9d331ec457d",
+    "run_experiment.py": "7bed764f09daa71213b563f27fbf2e063e1eed8dbc5e2655afe8d9dd668729df"
+  },
+  "artifacts": {
+    "raw_evidence": "raw_evidence/experiment_data.json (sha256: 13981b746dda41a4f26f674a54661e308c60c8f63b405bf94f0e43953b5954b6)",
+    "result_json": "result.json",
+    "report_md": "report.md"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-GRAPH-35262262505",
+    "handoff_sha256": "bc13abab121d2549c82a255d469c4d14a0a58f8fef3a0fbd9d2b19199db97b91",
+    "key_change": "Doubled sample size from 30 to 60 per condition (n=240 to n=480 paired samples) to achieve sufficient power for permutation p<0.05 at |r|~0.05. Added Fisher z-transform power analysis.",
+    "parent_result_summary": {
+      "r": 0.0527,
+      "p": 0.414,
+      "n": 240,
+      "status": "FAIL",
+      "outcome": "FALSIFIES"
+    }
+  },
+  "execution_notes": [
+    "Experiment executed on 2026-09-18",
+    "All 720 request sequences completed successfully",
+    "8/8 co-occurring conditions have within-condition variance",
+    "480 paired samples collected (8 conditions × 60 samples)",
+    "240 null control samples collected (4 conditions × 60 samples)",
+    "Permutation test used 10,000 label-shuffled permutations",
+    "Fisher z-transform power analysis computed and reported"
+  ]
+}

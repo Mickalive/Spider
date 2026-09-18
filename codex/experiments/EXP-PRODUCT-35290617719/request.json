@@ -1,0 +1,20 @@
+{
+  "base_sha": "b8fd66a0876b1204973006c180e48571b72b8481",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T00:18:32.838247+00:00",
+  "experiment_id": "EXP-PRODUCT-35290617719",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule requires ALL C1-C8 for SURVIVES_CURRENT_TEST. C4 fails (2/5 < 3/5 patterns with positive savings) and C6 fails (r=0.3909 < 0.7, savings do not correlate with value length). The hypothesis that parameterized representation saves tokens for long-value URL patterns as a general claim is falsified under tiktoken cl100k_base. However, the ceiling is stratified: single-slot genuinely long values DO save tokens (UUID 36-char +44.44%, bearer 64-char +56.72%) while multi-slot patterns with short per-slot values penalize even at long total string length (P3 -11.54%, P5 -9.68%). Audit REVISE status accepted: arithmetic verified exactly, but 'long-value' label is misapplied to P3/P5 (per-slot values are 3-5 chars, not long), and mean 15.99% is bimodal and misleading as a standalone statistic. C1-C3 and C7-C8 pass, confirming resolve/bind pipeline works correctly for long values and kernel regression is intact.",
+  "inherited_next_question": "Should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON (mechanism deduplication savings across tasks where fewer unique mechanisms to store/retrieve offset per-mechanism token penalty), or close token-based inheritance viability entirely and pursue alternative product economics (retrieval efficiency, registry size compression)?",
+  "lane": "product",
+  "origin_github_run_id": "35290617719",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35262262156",
+    "path": "research/experiments/EXP-PRODUCT-35262262156/handoff.json",
+    "sha256": "5d047feaad8feaab7e0a71e11a02b8031076d3e6a12e4e6a4fa97dcf348150b1"
+  },
+  "reason": "pulse",
+  "request_hash": "0b6328227464fac001f0a5498f6c18751334c3bf9ef8502d360cdc6d5032e6c9",
+  "request_id": "acae9c755dc07cbc1f3b74ce",
+  "schema_version": 1
+}

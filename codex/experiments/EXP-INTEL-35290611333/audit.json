@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35290611333",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Reconcile internal inconsistency M5_total_sources_screened: result.json value 30 vs provenance.json total_screened 34 (12+14+8) vs search_databases sum 34. Provide per-string result counts and correct screened total before any SURVIVES claim.",
+    "Correct provenance.json key_sources duplicate URLs: Munda (2005) and Greco et al. (2019) both point to https://link.springer.com/article/10.1007/s11205-017-1832-9 (Greco DOI); Dobbie (2013) and Zhou et al. (2009) both point to https://www.sciencedirect.com/science/article/abs/pii/S1470160X13000034. Provide correct distinct DOIs/URLs and verify each citation supports the claimed aggregation recipe choice ambiguity.",
+    "Either execute the preregistered systematic protocol as frozen (PubMed/psychometrics, EconLit/economics, Cochrane/meta-analysis with documented date range 2000-2026 and reproducible database queries) or amend the claim ceiling to reflect what was actually executed: provenance.json reproducibility_notes state 'Literature search conducted via web search APIs' with long natural-language phrases, not database-specific syntax. The measurement_validity criterion #1 is not satisfied as written.",
+    "Provide per-source screening log with inclusion/exclusion decision per the frozen criteria (must address aggregation of multiple definitions/dimensions/indicators where recipe choice affects conclusion). The current provenance.json provides only aggregate counts (results_found/results_included) with no per-result screening trace.",
+    "Compute and populate provenance.json hashes for freeze.json/result.json/report.md/provenance.json (currently null) and ensure artifacts entries use stable repository-relative paths with sha256 as per EXPERIMENT_PACKET provenance requirements.",
+    "Bound report.md executive claim from 'SURVIVES_CURRENT_TEST — All four frozen decision-rule conditions pass' to an interpretive analogy ceiling: SPIDER-to-field mappings (M7-M9, OBS-1..OBS-8) remain producer interpretations, not established results (acknowledged in validity_notes V2 but overstated in report §1-2). Audit V2 from parent applies identically here."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DATABASE_MISREPRESENTATION",
+      "severity": "high",
+      "observation": "spec.json measurement_validity #1 and provenance.json search_databases list PubMed/Psychology, EconLit/Economics, Cochrane/Meta-analysis with date_range 2000-2026. provenance.json reproducibility_notes and execution environment (opencode/mimo-v2.5-free, web search APIs) show no PubMed/EconLit/Cochrane query was executed; search_strings are natural-language phrases (e.g., 'psychometrics aggregation recipe choice problem composite score...') not database query syntax, with no database-specific filters.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources.search_databases, research/experiments/EXP-INTEL-35290611333/provenance.json:reproducibility_notes[0], research/experiments/EXP-INTEL-35290611333/spec.json:measurement_validity[0], research/experiments/EXP-INTEL-35290611333/prereg.md:§8.1",
+      "impact": "Preregistered systematic search protocol was not executed as frozen. Positive controls PC1/PC2 are therefore supported by a non-systematic web synthesis, inheriting parent audit V1. Triggers prereg decision_rule MEASUREMENT_INVALID clause if read strictly, but core prior-art existence remains verifiable from public sources, warranting REVISE rather than full invalidation."
+    },
+    {
+      "id": "V2_SCREENED_COUNT_INCONSISTENCY",
+      "severity": "high",
+      "observation": "result.json M5_total_sources_screened value 30 conflicts with provenance.json total_screened 34 and with sum of search_databases results_found 12+14+8=34. No explanation for 4-source discrepancy.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M5_total_sources_screened.value=30, research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources.total_screened=34, research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources.search_databases[*].results_found",
+      "impact": "Metric recomputation fails exact match; indicates incomplete reproducibility artifact and undermines M5/M6 derived measurements."
+    },
+    {
+      "id": "V3_DUPLICATE_URL_PROVENANCE_INTEGRITY",
+      "severity": "high",
+      "observation": "Two pairs of distinct citations share identical URLs: Munda (2005) and Greco et al. (2019) -> https://link.springer.com/article/10.1007/s11205-017-1832-9 (Greco 2019 DOI); Dobbie (2013) and Zhou et al. (2009) -> https://www.sciencedirect.com/science/article/abs/pii/S1470160X13000034. Distinct sources collapse to at most 10 distinct URLs for 12 claimed included sources.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources.key_sources[4].url, [6].url identical; [5].url, [7].url identical",
+      "impact": "At least 2 of 12 included sources are misattributed in provenance; M2_econometric_recipe_problems value 4 and M6_sources_included 12 overstate distinct verified sources. Recomputed distinct count is 10 before verifying each citation meets inclusion criteria."
+    },
+    {
+      "id": "V4_MISSING_HASHES_INCOMPLETE_REPRODUCIBILITY",
+      "severity": "medium",
+      "observation": "provenance.json hashes for freeze.json, result.json, report.md, provenance.json are null; artifacts in result.json have sha256 null. No stable hash or path reference for reproducibility artifact as required by measurement_validity #3.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/provenance.json:hashes, research/experiments/EXP-INTEL-35290611333/result.json:artifacts[*].sha256",
+      "impact": "Reproducibility claim in prereg §8.4 not satisfied; packet hash integrity check fails for derived artifacts."
+    },
+    {
+      "id": "V5_NO_PER_SOURCE_SCREENING_LOG",
+      "severity": "medium",
+      "observation": "No screening log or inclusion decision table is provided. provenance.json and result.json give only aggregate counts (results_found, results_included) and a curated key_sources list, with no trace of the 18-22 excluded sources or their exclusion reasons per frozen inclusion/exclusion criteria.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/prereg.md:§8.4, research/experiments/EXP-INTEL-35290611333/spec.json:measurement_validity[2-3], research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources",
+      "impact": "Cannot independently verify that inclusion criteria ('must address aggregation where recipe choice affects conclusion') were applied systematically; cherry-picking risk remains, same threat as parent audit V1."
+    },
+    {
+      "id": "V6_INTERPRETIVE_ANALOGY_NOT_ESTABLISHED",
+      "severity": "medium",
+      "observation": "All SPIDER-to-field applicability mappings (M7_strengthening_of_IR_analogy, M8_alternative_resolution_frameworks, M9_MIXED_outcome_informed, OBS-1..OBS-7) are producer interpretations. validity_notes V2, V5 correctly bound this but report.md §1-3 presents SURVIVES and 'strengthened from interpretive mapping to cross-field convergent evidence' without bounding.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M7-M9.details, research/experiments/EXP-INTEL-35290611333/result.json:validity_notes[1], research/experiments/EXP-INTEL-35290611333/result.json:observations[8], research/experiments/EXP-INTEL-35290611333/report.md:§Key Findings",
+      "impact": "F2 'NOT TRIGGERED' and M8 'alternative frameworks' depend on this analogy. Following parent audit V2/V6 and prereg validity_threat #2, the analogy must remain bounded as interpretive, not evidentiary."
+    },
+    {
+      "id": "V7_SEARCH_STRINGS_NOT_DATABASE_SYNTAX",
+      "severity": "low",
+      "observation": "Documented search_strings are 3 multi-keyword English phrases per database (e.g., 'psychometrics aggregation recipe choice problem composite score test score aggregation micro macro weighted') with no Boolean operators, MeSH/EconLit descriptors, or Cochrane filters. Not reproducible as PubMed/EconLit/Cochrane queries.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources.search_databases[*].search_strings",
+      "impact": "Even if databases had been queried, the strings would not be valid systematic review queries; reinforces V1 that protocol is web-search synthesis, not systematic database review."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_POSITIVE_CONTROL_PC1",
+      "control": "PC1_recipe_choice_problems",
+      "expected": "At least 2 well-documented aggregation recipe choice problems in psychometrics or econometrics",
+      "observed": "Producer counts 7 (M1=3, M2=4). Recomputed distinct after dedup: 3 psychometric citations remain distinct (Kane & Case ED476421, PMC5978518, PMC11588849 — last needs verification) plus 3 distinct econometric (OECD Handbook 2008 strongly verified, one of Munda/Greco, one of Dobbie/Zhou). Minimum recomputed distinct = 5-6, still >=2. OECD Handbook alone documents arithmetic vs geometric vs weighted product choice; Kane & Case documents weighted composite ambiguity. Control technically passes even after correcting duplicates.",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M1-M2, research/experiments/EXP-INTEL-35290611333/provenance.json:key_sources[0-3], duplicate URL finding V3"
+    },
+    {
+      "id": "B2_POSITIVE_CONTROL_PC2",
+      "control": "PC2_MIXED_outcome_method",
+      "expected": "At least 1 principled method that addresses MIXED outcome (conflicting aggregation results)",
+      "observed": "Producer lists 3 (OECD/COINr sensitivity, Greco/Munda social choice, Mathur & VanderWeele robust metrics). After dedup Greco/Munda collapse to 1; OECD/COINr sensitivity framework is genuine and directly addresses conflicting recipes via robustness bounds/dominance pairs/confidence intervals. Mathur & VanderWeele (PMC7963111) addresses heterogeneous effect thresholding, not aggregation recipe choice ambiguity per inclusion criteria, and is tangential. Minimum strong count = 1 (OECD).",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M4_mixed_outcome_methods, research/experiments/EXP-INTEL-35290611333/provenance.json:key_sources OECD/Munda/Greco/Mathur",
+      "note": "Pass is via OECD sensitivity framework only; other two methods are duplicate or off-target. Applicability to SPIDER remains interpretive (V6)."
+    },
+    {
+      "id": "B3_FALSIFIER_F1",
+      "control": "F1_no_prior_art",
+      "expected": "F1 triggered if no relevant prior art",
+      "observed": "Relevant prior art exists across all three fields (OECD Handbook, Higgins & Thompson 2002, Kane & Case). F1 correctly NOT triggered even on recomputed distinct set.",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:controls.F1_no_prior_art.triggered=false"
+    },
+    {
+      "id": "B4_FALSIFIER_F2",
+      "control": "F2_methods_weaker_than_IR",
+      "expected": "F2 triggered if all found methods weaker than IR framework",
+      "observed": "Producer claims NOT triggered: OECD sensitivity analysis and social choice theory extend IR micro/macro/weighted. Recomputed: OECD framework is more systematic than IR averaging taxonomy; whether 'more principled' is subjective and depends on V6 analogy. At minimum not weaker, so NOT triggered is defensible but interpretive, not measured.",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:controls.F2_methods_weaker_than_IR.triggered=false",
+      "note": "Judgment is qualitative; no metric establishes superiority. Bounded as interpretive."
+    },
+    {
+      "id": "B5_NULL_CONTROLS_NC1_NC2",
+      "control": "NC1_no_prior_art / NC2_all_covered_by_IR",
+      "expected": "NC1 passes if no prior art; NC2 passes if all covered by IR",
+      "observed": "Both correctly reported as pass=false (null rejected): prior art exists and provides additional resolution beyond IR taxonomy. No fix needed; interpretation clarified correctly in result.json.",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:controls.NC1_no_prior_art, NC2_all_covered_by_IR"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_psychometric_recipe_problems": {
+      "producer_value": 3,
+      "recomputed_value": 2,
+      "recomputed_details": "Distinct URLs verified: Kane & Case ED476421 (HTTP 200), PMC5978518 (HTML 200), PMC11588849 (HTML 200 but PMC ID 11588849 is from late 2024 and article 'Recognize the Value of the Sum Score' argues sum score superiority, not recipe choice ambiguity where choice affects conclusion — inclusion per frozen criteria is debatable). Conservative recomputed = 2 clearly meeting criteria, 3 if inclusive.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M1_psychometric_recipe_problems, provenance key_sources[0-2], HTTP HEAD checks 2026-09-18"
+    },
+    "M2_econometric_recipe_problems": {
+      "producer_value": 4,
+      "recomputed_value": 3,
+      "recomputed_details": "Distinct econometric sources after dedup: OECD Handbook 2008 (verified handbook), 1 distinct from Munda/Greco duplicate DOI 10.1007/s11205-017-1832-9, 1 distinct from Dobbie/Zhou duplicate pii S1470160X13000034. Producer counts 4 double-counts one duplicate in each pair. Recomputed distinct minimum =3; if Dobbie and Zhou are truly distinct papers sharing a copy-paste URL, then 4 but provenance remains incorrect.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M2_econometric_recipe_problems, provenance key_sources[3-7], V3 duplicate finding"
+    },
+    "M3_meta_analytic_recipe_problems": {
+      "producer_value": 2,
+      "recomputed_value": 2,
+      "recomputed_details": "Fixed vs random effects pooling and DerSimonian-Laird vs alternatives are generic methodological debates, not paper-specific recipe problems meeting inclusion criteria. Count accepted as 2 descriptively, but neither maps to SPIDER density metric beyond generic aggregation analogy.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M3_meta_analytic_recipe_problems"
+    },
+    "M4_mixed_outcome_methods": {
+      "producer_value": 3,
+      "recomputed_value": 1,
+      "recomputed_details": "Strong recomputed = 1 (OECD/COINr sensitivity analysis — directly addresses conflicting aggregation results via robustness bounds, dominance pairs, confidence intervals). Greco/Munda collapse to 1 entry due to duplicate DOI; social choice framework is aggregation rule selection under weight ambiguity, applicable but same source as econometric problem. Mathur & VanderWeele addresses heterogeneous effects (proportion above threshold) not aggregation recipe conflict per inclusion criteria — excluded. Conservative strong count 1, inclusive 2 if counting Greco/Munda as distinct.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M4_mixed_outcome_methods, provenance key_sources[5-7,9], V3"
+    },
+    "M5_total_sources_screened": {
+      "producer_value": 30,
+      "recomputed_value": 34,
+      "recomputed_details": "Provenance search_databases results_found 12+14+8=34, total_screened 34, but result.json M5 value 30. Recomputed from provenance sums =34. Discrepancy 4 unexplained.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M5_total_sources_screened, research/experiments/EXP-INTEL-35290611333/provenance.json:datasets_and_sources"
+    },
+    "M6_sources_included": {
+      "producer_value": 12,
+      "recomputed_value": 10,
+      "recomputed_details": "Producer 12 includes 2 double-counted URLs. Distinct URLs =10. If Dobbie/Zhou and Munda/Greco are in fact 4 distinct papers with provenance URL errors, then 12 but provenance inaccurate. Recomputed distinct =10 minimum.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M6_sources_included, provenance key_sources distinct URL count, V3"
+    },
+    "M7_strengthening_of_IR_analogy": {
+      "producer_value": true,
+      "recomputed_value": null,
+      "recomputed_details": "Qualitative interpretive claim, not independently measurable. Convergent evidence from OECD and Kane reinforces that recipe ambiguity is general phenomenon, but SPIDER-to-field mapping remains interpretive analogy (validity_notes V2). Cannot recompute as true/false without subjective threshold.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M7_strengthening_of_IR_analogy"
+    },
+    "M8_alternative_resolution_frameworks": {
+      "producer_value": true,
+      "recomputed_value": null,
+      "recomputed_details": "OECD sensitivity analysis is an alternative resolution beyond IR taxonomy; social choice/heterogeneity are extensions. Whether they constitute 'alternative frameworks beyond IR' is interpretive. Recomputed as unmeasured.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M8_alternative_resolution_frameworks"
+    },
+    "M9_MIXED_outcome_informed": {
+      "producer_value": true,
+      "recomputed_value": null,
+      "recomputed_details": "OECD sensitivity framework does inform MIXED handling via robustness bounds, but operationalization for SPIDER density metric is untested. Bounded true as theoretical grounding, false as validated decision rule.",
+      "evidence": "research/experiments/EXP-INTEL-35290611333/result.json:metrics.M9_MIXED_outcome_informed"
+    },
+    "PC1_recipe_choice_problems_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "recomputed_details": "Pass threshold >=2 remains satisfied on recomputed distinct counts (min 5 distinct across psychometrics+econometrics).",
+      "evidence": "recomputed M1+M2 distinct >=5"
+    },
+    "PC2_MIXED_outcome_method_pass": {
+      "producer_value": true,
+      "recomputed_value": true,
+      "recomputed_details": "Pass threshold >=1 remains satisfied via OECD sensitivity framework alone, but with only 1 strong method not 3.",
+      "evidence": "recomputed M4 strong =1"
+    },
+    "F1_triggered": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "recomputed_details": "Correctly not triggered.",
+      "evidence": "recomputed M1-M3 existence"
+    },
+    "F2_triggered": {
+      "producer_value": false,
+      "recomputed_value": false,
+      "recomputed_details": "Not triggered is defensible; superiority over IR is subjective.",
+      "evidence": "OECD sensitivity vs IR taxonomy comparison"
+    }
+  },
+  "claim_ceiling": "Literature synthesis confirms that aggregation recipe choice ambiguity is a documented measurement phenomenon in at least one strong econometric source (OECD 2008 Handbook composite indicators: arithmetic vs geometric vs weighted product) and one strong psychometric source (Kane & Case mixed-format composite weighting), with a principled MIXED-outcome handling method (OECD/COINr sensitivity analysis/robustness bounds). After correcting duplicate provenance URLs and screened-count inconsistency, the minimum justified counts are M1>=2, M2>=3 distinct, M4>=1 strong method. The mapping from these fields to SPIDER's density metric recipes (per-iteration ≈ micro, per-task ≈ macro) and the claim that psychometrics/econometrics/meta-analysis 'strengthen' or 'provide alternative resolution beyond IR' remain interpretive analogies, not established results, exactly as bounded in the previous audit (EXP-INTEL-35280397316 audit V2/V6). No systematic PubMed/EconLit/Cochrane search was executed as preregistered; the reported search was a non-systematic web synthesis via generic APIs with long-phrase queries. Therefore producer SURVIVES_CURRENT_TEST (all four decision-rule conditions met) is not justified at the stated systematic-review ceiling. Maximum justified ceiling: non-systematic synthesis provides additional theoretical grounding (one sensitivity framework) for recipe-choice materiality but does not support systematic-review completeness, does not resolve the MIXED decision-rule amendment, and does not promote C-MEAS-VALID. C-MEAS-VALID remains EXPERIMENTAL pending full-DOM empirical re-run.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35290611333/spec.json (frozen decision_rule PC1/PC2/F1/F2, measurement_validity three databases 2000-2026)",
+    "research/experiments/EXP-INTEL-35290611333/prereg.md (§4 F1/F2, §6 PC1/PC2, §8 measurement validity, §9 decision rule SURVIVES requires ALL, §13 validity threats)",
+    "research/experiments/EXP-INTEL-35290611333/freeze.json (hashes request/spec/prereg, frozen_at 2026-09-18T04:57:16.351532+00:00)",
+    "research/experiments/EXP-INTEL-35290611333/result.json (metrics M1-M9, controls PC1/PC2/F1/F2/NC1/NC2, observations OBS-1..OBS-8, validity_notes V1-V6)",
+    "research/experiments/EXP-INTEL-35290611333/report.md (SURVIVES_CURRENT_TEST claim, §PC1 7 problems, §PC2 3 methods, claim ceiling statement)",
+    "research/experiments/EXP-INTEL-35290611333/provenance.json (search_databases 12/14/8, total_screened 34, total_included 12, key_sources 12 with 2 duplicate URLs, reproducibility_notes web search APIs, hashes null)",
+    "research/experiments/EXP-INTEL-35280397316/handoff.json (parent established recipe reversal genuine, carry_forward unknown full-DOM, do_not_assume interpretive analogy)",
+    "research/experiments/EXP-INTEL-35280397316/audit.json (V1 non-systematic, V2 interpretation as evidence, claim_ceiling bounded to interpretive analogy, precedent for REVISE)"
+  ],
+  "unresolved": [
+    "Whether a true systematic review in PubMed/EconLit/Cochrane with database-specific syntax and PRISMA screening would yield additional relevant prior art beyond the web synthesis (e.g., additional psychometric weighting debates, econometric composite indicator axiomatics).",
+    "Whether the OECD sensitivity analysis / COINr robustness framework can be operationalized for SPIDER's density metric to produce a principled MIXED outcome decision rule (e.g., dominance pairs, ranking confidence intervals across per-iteration vs per-task recipes) on full-DOM data.",
+    "Whether social choice theory (Munda 2005) provides formal axioms applicable to SPIDER's recipe selection, given the citation's provenance URL error and lack of direct mapping evidence.",
+    "Whether meta-analytic heterogeneity quantification (I², τ²) can be adapted to quantify variance attributable to recipe choice vs genuine density disagreement, as hypothesized in M9.",
+    "Whether C2 FALSE (canonical per-iteration) and C2 TRUE (per-task weighted) reversal both persist on full-DOM enumeration after runtime lane removes locatableSample cap at measure_fullpage_yield.py:89 — unchanged blocking dependency from parent handoff.",
+    "Cross-site generalization of density metric recipe sensitivity remains untested (single Magento site, truncated-first-20 locatableSample, 7 tasks, 3 definitions)."
+  ]
+}

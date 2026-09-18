@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35290617719",
+  "lane": "product",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C5 (NULL-NO-SHARING) fails under correct computation: isolated null-control ratio for 3 search tasks is 1.253 (param 104 tokens / literal 83 tokens), not ~1.0 as required by spec expected_behavior; code hardcodes c5_pass=True via self-ratio (search_param/search_param). Additionally C1 violates measurement_validity[0]: spec requires mechanisms from existing SPIDER registry/task corpus, but producer uses hardcoded synthetic TASK_CORPUS (32 tasks in run_experiment.py), violating the frozen population contract. Per frozen ALL-must-pass rule, FALSIFIED-IN-SETTING triggers. However, the arithmetic is verified: on the as-implemented synthetic 32-task corpus, parameterized representation yields 25 vs 32 mechanisms (21.9% reduction) and 679 vs 791 tokens (0.8584 dedup ratio, 112 tokens/14.16% savings) because 3 of 25 patterns are shared across 2-5 tasks. The savings are a lower bound (heuristic missed admin u-aaa class, true dedup ratio ~0.757 and savings ~24.3% if corrected). Per-task analysis reveals shared patterns incur -15.8% per-task penalty (parameterized costs MORE per task) but corpus savings arise from storing the pattern once instead of N times. The null-control failure is informative: unique patterns show 25.3% overhead from ${slot} syntax, meaning deduplication wins only when sharing frequency exceeds the per-pattern overhead threshold. No product promotion. C-PRODUCT-ECON remains HYPOTHESIS (frozen gate failed, measurement validity violated). C-PARAM-INHERIT remains EXPERIMENTAL.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen decision_rule FALSIFIED-IN-SETTING: C5 null control fails (isolated ratio 1.253, not ~1.0) and C1 violates measurement_validity[0] (synthetic corpus, not existing SPIDER registry). Arithmetic is verified (dedup ratio 0.8584, 14.16% savings on 32-task synthetic corpus) but claim ceiling is narrow and synthetic-only. Deduplication concept shows promise (3 shared patterns drive savings) but frozen gate failure and validity violations prevent advancement. C-PRODUCT-ECON's broader claim (amortized deduplication savings in real agent workflows) remains untested. The 14.16% savings is informative for experimental design but does not establish commercial viability."
+    },
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "EXPERIMENTAL",
+      "reason": "No change to claim status. This experiment measures deduplication economics, not kernel binding correctness. Resolve/bind pipeline validated in parent experiments remains EXPERIMENTAL at committed-code synthetic single-slot ceiling. This experiment does not advance or regress C-PARAM-INHERIT."
+    }
+  ],
+  "product_action": "No product promotion. C-PRODUCT-ECON remains HYPOTHESIS. C-PARAM-INHERIT remains EXPERIMENTAL. No code changes to production. The deduplication concept is validated analytically on synthetic corpus (14.16% savings, 21.9% mechanism count reduction) but frozen gate failure and measurement validity violations prevent product conclusions.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the product lane (A) retry the deduplication measurement with the actual SPIDER registry/task corpus and kernel distill_parameterized() induction to resolve measurement_validity[0] and V2, or (B) pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON with a real agent harness (model calls, browser, retrieval, verification) using the existing synthetic corpus as a controlled testbed, or (C) close token-based inheritance economics entirely and pursue alternative product mechanisms (registry compression, retrieval efficiency)?",
+  "reason": "The frozen decision rule is unambiguous: C5 fails under correct computation (isolated ratio 1.253, not ~1.0) and C1 violates measurement_validity[0] (synthetic corpus). However, the arithmetic is verified and informative: 14.16% savings on this synthetic corpus with 3 shared patterns demonstrates the deduplication concept works when sharing frequency exceeds per-pattern overhead. The null-control failure is the key insight: unique patterns incur 25.3% token penalty from ${slot} syntax, so deduplication requires sufficient sharing to overcome this overhead. Three paths forward: (A) fix measurement validity by using actual SPIDER registry, which tests the frozen claim as written; (B) accept synthetic corpus as controlled testbed and measure end-to-end amortized cost, testing the C-PRODUCT-ECON economic argument directly; (C) close token-based economics if the per-pattern overhead makes deduplication non-viable for realistic sharing distributions. Option B has highest information gain because it tests the only remaining economic argument (amortized deduplication) without requiring registry infrastructure that may not exist in suitable form.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35290617719/spec.json:decision_rule ALL C1-C5, measurement_validity[0] requires existing SPIDER registry",
+    "research/experiments/EXP-PRODUCT-35290617719/result.json:metrics dedup_ratio 0.8584 net_savings 112 tokens mechanism_count 25 vs 32",
+    "research/experiments/EXP-PRODUCT-35290617719/audit.json:REVISE producer_claim_supported false, V1 synthetic corpus, V4 C5 degenerate true_ratio 1.253, V5 storage not retrieval, claim_ceiling narrow synthetic only",
+    "research/experiments/EXP-PRODUCT-35290617719/raw_evidence.json:sharing_distribution 22 singleton 1 double 1 triple 1 quintuple, per_task_savings blog -15.79%, search penalty 25.3%",
+    "research/experiments/EXP-PRODUCT-35290617719/run_experiment.py:TASK_CORPUS synthetic 32 tasks, infer_parameterized_url heuristic regex, C5 block hardcoded c5_pass=True",
+    "research/experiments/EXP-PRODUCT-35290617719/provenance.json:data_sources in-memory no persistent registry, model_calls 0",
+    "research/experiments/EXP-PRODUCT-35262262156/handoff.json:parent carry_forward C-PRODUCT-ECON HYPOTHESIS, token savings falsified for short and long values as general claims",
+    "codex/claim_state.json:C-PRODUCT-ECON HYPOTHESIS, C-PARAM-INHERIT EXPERIMENTAL"
+  ]
+}

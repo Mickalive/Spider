@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35290615081",
+  "lane": "runtime",
+  "github_run_id": "35308808382",
+  "github_run_attempt": "1",
+  "base_sha": "b8fd66a0876b1204973006c180e48571b72b8481",
+  "pre_execute_sha": "3edc210a23ce84ae2f9fa63fdeb4331a823b6a59",
+  "post_execute_sha": null,
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35280364816",
+    "handoff_sha256": "c499c6aa50143e5be429c187b3b78d3298a10b0ea5fc730693b887ae4ba80c7c"
+  },
+  "execution": {
+    "total_requests": 720,
+    "conditions": 9,
+    "states_per_condition": 4,
+    "reps_per_state": 20,
+    "requests_per_condition": 80,
+    "seed": 44,
+    "connectivity_test_rng_seed": 10043,
+    "scenario_assignment": "stratified_round_robin_index_mod_6",
+    "scenario_header": "X-Requested-Scenario",
+    "mock_server_brotli_quality": 6,
+    "max_decompression_depth": 5,
+    "encoding_scenarios": ["correct_br", "missing_ce", "incorrect_gzip", "double_br", "triple_br", "garbled_ce"],
+    "content_types": ["JSON", "HTML", "XML"],
+    "payload_sizes": ["1KB", "10KB", "100KB"],
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "jitter_ms": "50-150 uniform"
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2",
+    "jwt_version": "2.14.0"
+  },
+  "code": {
+    "run_experiment.py": {
+      "sha256": "d2c6192ddc0ac528c75ad79abcaed35840ba0f1acaf8cc440be07ee1874484a1",
+      "role": "code",
+      "description": "Experiment execution script with stratified round-robin scenario assignment and iterative decompression"
+    }
+  },
+  "artifacts": {
+    "result.json": {
+      "sha256": "18fceafb1526761267b17e9c3b04eac3f1f20a5451f8a8843cda7f9659a3c5c4",
+      "role": "derived"
+    },
+    "raw_observations.json": {
+      "sha256": "f451e303cce56dc00d2a8db15f9eea2bd06f1f84cac6a2322ef2524b317a6c00",
+      "role": "raw",
+      "description": "All 720 HTTP observations with compressed/decompressed hashes, encoding scenarios, and decompression latencies"
+    }
+  },
+  "fix_applied": {
+    "description": "Replaced parent's random scenario assignment (scenario_rng.choice(ENCODING_SCENARIOS)) with deterministic round-robin (scenarios[request_index % 6]) passed via X-Requested-Scenario header. Proxy connectivity test uses separate RNG (seed=SEED+9999) that does not consume from measured-request sequence.",
+    "parent_defect": "RNG shift from shared proxy-test draw consumed one draw before measured plan, shifting triple_br away from valid_token positions (0/180 reps in parent)",
+    "fix_method": "Stratified round-robin: scenario = ENCODING_SCENARIOS[request_index % 6] pre-assigned per request, passed to proxy via X-Requested-Scenario header",
+    "expected_coverage": "80 requests per condition, 6 scenarios => 13-14 observations per scenario per condition, guaranteeing >=1 triple_br per state"
+  }
+}
