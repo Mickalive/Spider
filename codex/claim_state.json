@@ -371,6 +371,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING: C2 fails (normalized PMI 5.8e-05 not exactly 0.0 due to Laplace alpha=1.0 smoothing artifact, audit V1 confirms nosmooth gives 0.0 exactly) and C5 fails (0/5 variants >=5 unique raw URLs; TodoMVC has 3-4 only, audit V3 confirms testbed ceiling misspecification not PMI failure). However, C1 passes decisively: all 5/5 variants achieve raw URL PMI 0.188-0.209 bits with Bonferroni p=0.001 and effect sizes d=6.5-9.0, demonstrating hash-fragment routing encodes Markov-predictive state information detectable by PMI when fragments preserved. Audit V7 finds identifiability not demonstrated: experiment tests I(url_after; action | url_before) without history-conditioned baseline, so beyond-memory dynamics (C-WEB-DYNAMICS core requirement) is untested. Claim ceiling bounded to: fragment-aware URL-level PMI detects state-conditioned predictability on minimal TodoMVC hash-SPAs at 85-93 NL transitions. NOT validated: beyond-memory dynamics, generalization to production SPAs with history routing, title-aware PMI, practical utility for SPIDER exploration (0.19 bits is 12% of max log2(3)=1.585 for 3 states)."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35290611436",
+        "lane": "physics",
+        "created_at": "2026-09-18T00:18:25.287835+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "595ea236040bae97c1405ee79f231b66660c0021",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status. Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: 0/5 TodoMVC hash-SPA variants achieve conditional PMI at K=3 > 0.05 bits (all exactly 0.0, Bonferroni p=1.0). The parent's 0.188-0.209 bit unconditional PMI is entirely explained by Markov predictability (deterministic (url_before, action) -> url_after). Action-history prediction accuracy at K=3 is 1.0 on 4/5 variants, confirming (url_before, H_K=3) fully determines url_after, making I(url_after; action | url_before, H_K=3) = 0 by mathematical identity. Falsification is bounded to TodoMVC hash-SPAs (3-4 states, deterministic FSM, hash routing, action_primitive {form_submit, button_click, js_navigate}). NOT falsified: production SPAs with >4 states, stochastic transitions, history-based routing, or richer state representations (DOM, accessibility tree, visual layout). Claim ceiling: URL-level PMI on these minimal deterministic SPAs demonstrates state-conditioned Markov predictability only, no beyond-memory component."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -887,6 +897,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "C1_drift_tp FAIL (mean_tp=0.729 < 0.85, Wilson lower 0.27-0.30 < 0.75) due to 50/50 session validity randomization diluting session_invalidation TP to 0.43-0.47 while achieving C2 variance (8/8 conditions std>0). C3 orthogonality passes in isolation (|r|=0.1387 < 0.3, permutation p=0.031 on pooled n=240) but overall decision FAIL per frozen conjunctive rule. Descriptive: PB-only r=0.051 (p=0.577) replicates parent exactly; SI r=0.189 (p=0.038) confounded by bimodal distribution (0 vs 5.0 composite). Fundamental trade-off identified: inducing behavioral variance via session validity randomization directly sacrifices detection performance (audit V1_C1_FAIL_BY_DESIGN_ARTIFACT). Measurement valid (8/8 conditions, 240 paired samples). C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35262262505",
+        "lane": "graph",
+        "created_at": "2026-09-17T19:00:41.829868+00:00",
+        "decision": "FAIL",
+        "source_commit": "38b90f1ac84c2067d76235189565d25e353105eb",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r\u00b2=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
       }
     ],
     "C-CROSSSITE": [
@@ -1610,14 +1630,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35262258744",
+      "experiment_id": "EXP-PHYSICS-35290611436",
       "lane": "physics",
-      "created_at": "2026-09-17T19:00:37.093130+00:00",
+      "created_at": "2026-09-18T00:18:25.287835+00:00",
       "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "50764ab2bc9e211e802b45d2da3e06516eccd1f6",
+      "source_commit": "595ea236040bae97c1405ee79f231b66660c0021",
       "claim_id": "C-WEB-DYNAMICS",
-      "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING: C2 fails (normalized PMI 5.8e-05 not exactly 0.0 due to Laplace alpha=1.0 smoothing artifact, audit V1 confirms nosmooth gives 0.0 exactly) and C5 fails (0/5 variants >=5 unique raw URLs; TodoMVC has 3-4 only, audit V3 confirms testbed ceiling misspecification not PMI failure). However, C1 passes decisively: all 5/5 variants achieve raw URL PMI 0.188-0.209 bits with Bonferroni p=0.001 and effect sizes d=6.5-9.0, demonstrating hash-fragment routing encodes Markov-predictive state information detectable by PMI when fragments preserved. Audit V7 finds identifiability not demonstrated: experiment tests I(url_after; action | url_before) without history-conditioned baseline, so beyond-memory dynamics (C-WEB-DYNAMICS core requirement) is untested. Claim ceiling bounded to: fragment-aware URL-level PMI detects state-conditioned predictability on minimal TodoMVC hash-SPAs at 85-93 NL transitions. NOT validated: beyond-memory dynamics, generalization to production SPAs with history routing, title-aware PMI, practical utility for SPIDER exploration (0.19 bits is 12% of max log2(3)=1.585 for 3 states)."
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status. Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: 0/5 TodoMVC hash-SPA variants achieve conditional PMI at K=3 > 0.05 bits (all exactly 0.0, Bonferroni p=1.0). The parent's 0.188-0.209 bit unconditional PMI is entirely explained by Markov predictability (deterministic (url_before, action) -> url_after). Action-history prediction accuracy at K=3 is 1.0 on 4/5 variants, confirming (url_before, H_K=3) fully determines url_after, making I(url_after; action | url_before, H_K=3) = 0 by mathematical identity. Falsification is bounded to TodoMVC hash-SPAs (3-4 states, deterministic FSM, hash routing, action_primitive {form_submit, button_click, js_navigate}). NOT falsified: production SPAs with >4 states, stochastic transitions, history-based routing, or richer state representations (DOM, accessibility tree, visual layout). Claim ceiling: URL-level PMI on these minimal deterministic SPAs demonstrates state-conditioned Markov predictability only, no beyond-memory component."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35262262156",
@@ -1640,14 +1660,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35237975537",
+      "experiment_id": "EXP-GRAPH-35262262505",
       "lane": "graph",
-      "created_at": "2026-09-17T15:06:04.655034+00:00",
+      "created_at": "2026-09-17T19:00:41.829868+00:00",
       "decision": "FAIL",
-      "source_commit": "1b5a41d143129f351c76540eeb4ed88859f75c33",
+      "source_commit": "38b90f1ac84c2067d76235189565d25e353105eb",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "C1_drift_tp FAIL (mean_tp=0.729 < 0.85, Wilson lower 0.27-0.30 < 0.75) due to 50/50 session validity randomization diluting session_invalidation TP to 0.43-0.47 while achieving C2 variance (8/8 conditions std>0). C3 orthogonality passes in isolation (|r|=0.1387 < 0.3, permutation p=0.031 on pooled n=240) but overall decision FAIL per frozen conjunctive rule. Descriptive: PB-only r=0.051 (p=0.577) replicates parent exactly; SI r=0.189 (p=0.038) confounded by bimodal distribution (0 vs 5.0 composite). Fundamental trade-off identified: inducing behavioral variance via session validity randomization directly sacrifices detection performance (audit V1_C1_FAIL_BY_DESIGN_ARTIFACT). Measurement valid (8/8 conditions, 240 paired samples). C-FRESHNESS remains EXPERIMENTAL; no validated second detection channel established."
+      "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r\u00b2=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",

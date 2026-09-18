@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35262262505",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a pooled paired-sample orthogonality test with n>=480 (doubling current sample size) confirm |r|<0.3 with permutation p<0.05 for behavioral-structural signals under graded session_status_check variance without TP dilution?",
+  "why_next": "The frozen decision gate fails only on C3 permutation p (p=0.414 > 0.05) despite near-zero |r|=0.053. The audit identifies this as sample-size underpower, not evidence of non-orthogonality. Doubling n from 240 to 480 should achieve p<0.05 for true |r|~0.05 at standard alpha=0.05. This is the minimum next step that can change the frozen gate outcome and resolve the orthogonality question without changing the validated design. If confirmed, C-FRESHNESS gains a validated second detection channel (behavioral + structural as independent parallel channels). If p remains >0.05 at n=480, the frozen decision rule's permutation requirement should be revisited for very-low-magnitude correlations.",
+  "carry_forward": {
+    "established": [
+      "TP/variance trade-off IS broken: graded session_status_check intensity (401->1.0, 403->0.5, 500->0.75) with session_change=1 for ALL session_invalidation samples achieves mean TP=1.0 (Wilson lower 0.886) across 8 co-occurring conditions while maintaining within-condition variance (8/8 conditions std>0 for both behavioral and structural signals). Confirmed on Flask 3.1.3 + PyJWT HS256 localhost, 30 samples per condition, SEED=42.",
+      "Behavioral and structural signals show near-zero pooled correlation (|r|=0.053, r²=0.003) on 240 paired samples. Per-drift-pattern correlations are homogeneous: PB r=0.051 (n=120), SI r=0.046 (n=120), eliminating the heterogeneous SI-driven correlation artifact from the parent's 50/50 coin-flip design.",
+      "Null control FP=0.0 on 120 noise-only samples (4 conditions x 30) replicates across parent EXP-GRAPH-35237975537 and this experiment. Behavioral signals do not false-positive on structural noise without drift.",
+      "Permission_boundary behavioral signals (token validation failure rate, session state change, auth boundary shift) achieve TP=1.0 (Wilson lower 0.886) on all 4 PB co-occurring conditions with all 4 structural noise patterns, replicated across EXP-GRAPH-35166507358, EXP-GRAPH-35237975537, and this experiment.",
+      "Unauthenticated /schema endpoint provides structural observability independent of auth state: 8/8 co-occurring conditions have both behavioral>0 AND structural>0 (fixes parent zero-imputation confound from EXP-GRAPH-35191029030)."
+    ],
+    "rejected": [
+      "Session validity randomization via 50/50 coin flip as a path to valid orthogonality test — achieves C2 variance (8/8 conditions std>0) but breaks C1 TP (mean 0.729 < 0.85) by creating false negatives when sessions are randomly valid (parent audit V1_C1_FAIL_BY_DESIGN_ARTIFACT)",
+      "signing_key_rotation as a co-occurring drift pattern — blocks ALL endpoints, making structural signal unobservable by design (inherited from grandparent EXP-GRAPH-35166507358)"
+    ],
+    "unknown": [
+      "Whether n>=480 achieves permutation p<0.05 for |r|~0.05 (power analysis needed; true |r| may differ from point estimate at larger n)",
+      "Whether the arbitrary session_status_check mapping (401->1.0, 403->0.5, 500->0.75) affects the correlation structure vs alternative mappings (e.g., 401->1.0, 403->0.2, 500->0.6 or continuous TTL-based)",
+      "Whether behavioral signals generalize beyond HS256 to RS256/ES256/OAuth/OIDC production middleware (Auth0/Okta/Keycloak)",
+      "Whether real APIs with stochastic behavior (DB/cache/CDN) and heterogeneous client profiles preserve the near-orthogonality observed in deterministic mock",
+      "Whether composite multi-signal classifiers (behavioral + structural) outperform individual signals when orthogonality holds",
+      "Whether the unauthenticated /schema and /session/status endpoints are practical in real-world API deployments (synthetic constructs)",
+      "Whether the response_time_jitter structural variance is a genuine signal or a seed-drift artifact across baseline/current schema generations (audit V5 from parent)",
+      "Whether wider stochastic variation ranges (all 7 non-empty permission subsets, n>=60 per condition) change the correlation structure for permission_boundary conditions"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS is validated or rejected — status remains EXPERIMENTAL; the experiment passes C1/C2/C4 but fails the frozen conjunctive gate on C3 (permutation p=0.414 > 0.05)",
+      "Pooled |r|=0.053 demonstrates confirmed orthogonality — it is near-zero but the frozen confirmatory test is underpowered at n=240; p<0.05 is required for formal confirmation",
+      "The permutation p=0.414 means signals are correlated — it means the test lacks power to confirm they are uncorrelated at this sample size; the true |r| is near-zero (r²=0.003)",
+      "Product pipeline gains validated second detection channel — C3 FAIL prevents any product consequence; behavioral signals retain TP=1.0 on PB only but are not confirmed as independent of structural signals",
+      "Deterministic mock server results transfer to real APIs — all signals tested on same deterministic Flask mock; real APIs may shift discrimination gaps and correlation structure",
+      "The session_status_check mapping is the only mechanism — alternative mappings (TTL-based, continuous) may change the behavioral distribution and correlation structure",
+      "The structural jitter response_time_jitter variance is genuine — audit V5 from parent finds it arises from seed drift across baseline/current schema generations, not from jitter itself"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35262262505/result.json — C1-C4 metrics, per-condition TP/r/variance, pooled r, n=240",
+    "research/experiments/EXP-GRAPH-35262262505/audit.json — status FAIL, validity findings, recomputed_metrics, claim_ceiling",
+    "research/experiments/EXP-GRAPH-35262262505/spec.json — frozen decision_rule, measurement_validity, graded session_status_check design",
+    "research/experiments/EXP-GRAPH-35262262505/prereg.md — design changes from parent, session_status_check signal mapping",
+    "research/experiments/EXP-GRAPH-35262262505/provenance.json — Flask 3.1.3, PyJWT 2.14.0, seed 42",
+    "research/experiments/EXP-GRAPH-35237975537/handoff.json — parent established/rejected/unknown/do_not_assume, C1_FAIL_BY_DESIGN_ARTIFACT",
+    "codex/claim_state.json:C-FRESHNESS — claim event history showing prior EXPERIMENTAL status"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35262262505/request.json — parent_handoff EXP-GRAPH-35237975537, inherited question",
+    "research/experiments/EXP-GRAPH-35262262505/spec.json — frozen decision_rule (ALL C1-C4 required), graded session_status_check design",
+    "research/experiments/EXP-GRAPH-35262262505/result.json — status COMPLETE, outcome FALSIFIES, mean_tp=1.0, r=0.0527, p=0.414, FP=0.0",
+    "research/experiments/EXP-GRAPH-35262262505/audit.json — status FAIL, claim_ceiling, V1 underpower diagnosis",
+    "research/experiments/EXP-GRAPH-35262262505/report.md — Executive Summary, per-condition analysis, session status distribution",
+    "research/experiments/EXP-GRAPH-35262262505/mock_server.py — Flask 3.x + PyJWT, /session/status 401/403/500, /schema unauthenticated",
+    "research/experiments/EXP-GRAPH-35262262505/run_experiment.py — 8 co-occurring conditions, 30 samples each, graded session_status_check",
+    "research/experiments/EXP-GRAPH-35262262505/raw_evidence/experiment_data.json (sha256: ba917b54fb014203ee910e5e46616e1ab41ed441478ccdce9ac5881806dab866)",
+    "research/experiments/EXP-GRAPH-35237975537/handoff.json — parent established/rejected/unknown/do_not_assume"
+  ],
+  "recommended_action": "Increase sample size to n>=480 paired samples (double from 240) to achieve sufficient power for the frozen permutation p<0.05 criterion at |r|~0.05. The validated design (graded session_status_check, session_change=1 always, 8 co-occurring conditions) should be reused with 60 samples per condition instead of 30. If n>=480 achieves p<0.05, C-FRESHNESS advances to PRODUCT_ARCHITECTURE_IMPACT (independent parallel channels). If p remains >0.05, the frozen decision rule's conjunctive p<0.05 requirement for very-low-magnitude correlations (|r|<0.1) should be revisited in a new preregistration, since such low correlations have limited practical significance regardless of statistical significance."
+}
