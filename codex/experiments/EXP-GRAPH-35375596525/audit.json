@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35375596525",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix client to actually exercise HTTP conditional caching: run_experiment.py never sends If-None-Match header, so mock_server.py If-None-Match -> 304 code path (research/experiments/EXP-GRAPH-35375596525/mock_server.py:460-467) is never exercised. Conditional GET must be implemented and 304 rate logged as manipulation check. Current evidence tests only declarative Cache-Control/ETag headers, not operational 304 behavior.",
+    "Log realized cache hit rate, ETag match rate, and actual I/O latency distribution as artifacts. Prereg section 18 threat 5 and result.json unresolved explicitly list these as unlogged; without them the controlled difference 'HTTP caching enabled vs disabled' cannot be quantified (result.json:unresolved[5], report.md:Validity Threats 5).",
+    "Increase n to match parent power or correct power claim: n=240 gives SE=0.06496 and minimum detectable |r|=0.1266 (result.json:metrics:power_analysis:min_detectable_r_at_n) and 95% CI half-width ~0.127 in r-space. Parent n=480 gave SE=0.0458 and CI upper 0.135 at r=0.046. The CI widening from 0.135 to 0.237 is partly sample-size artifact, not solely HTTP caching effect. Prereg power analysis assumed delta=0.15 equivalence powered at n=240 if |r|<0.129, but observed |r|=0.114 still yields CI upper 0.237 >0.15, showing assumption was optimistic. Match parent n=480 or pre-specify n for equivalence at expected r~0.05.",
+    "Fix decision-rule branching in run_experiment.py:566-577 so CI upper >=0.20 maps to FALSIFIES per spec.json decision_rule. Current code orders 'abs_r <0.15 and ci_upper>=0.15 -> MIXED' before 'ci_upper>=0.20 -> FALSIFIES', making FALSIFIES unreachable when abs_r<0.15 (observed abs_r=0.114, ci_upper=0.237 incorrectly yields MIXED instead of spec-intended FAIL/FALSIFIES for >=0.20). Report correctly notes FAIL but outcome field is MIXED.",
+    "Separate HTTP Cache-Control (max-age=5 / no-store) from in-memory SchemaCache TTL=0.5s in measurement: mock_server.py:439-452 SchemaCache TTL triggers independently of HTTP header; run_experiment.py toggles only header via /admin/set_caching but schema staleness is driven by TTL expiry, so the two layers are confounded. Log which layer served each /schema response (cached flag already in response but not persisted in raw_evidence) to isolate HTTP effect."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_manipulation_incomplete_304_never_exercised",
+      "severity": "high",
+      "finding": "HTTP caching manipulation as preregistered (Cache-Control + ETag + If-None-Match + 304) was not operationally exercised. run_experiment.py:get_schema and all request paths never set If-None-Match header; mock_server.py checks If-None-Match only when header present. Raw evidence contains no 304 responses and no ETag validation. Only Cache-Control header presence and ETag generation are tested; actual conditional caching (304 Not Modified) is untested. This limits causal attribution of any correlation change to HTTP caching.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/run_experiment.py:164-172 get_schema (no If-None-Match), research/experiments/EXP-GRAPH-35375596525/mock_server.py:460-467 If-None-Match handling, research/experiments/EXP-GRAPH-35375596525/raw_evidence/experiment_data.json (no 304 or cached flag persisted)"
+    },
+    {
+      "id": "V2_cache_control_not_operational",
+      "severity": "medium",
+      "finding": "Cache-Control max-age=5 vs no-store does not produce client-side caching because client issues unconditional GET each time. Server still returns 200 with fresh body computed via SchemaCache TTL=0.5s. The declared HTTP semantics are declarative only; no hit/miss behavior is enforced. Prereg measurement_validity items 2,9-10 describe HTTP elements but evidence shows they do not alter data flow.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/mock_server.py:229-239 apply_http_caching, 439-474 get_schema, research/experiments/EXP-GRAPH-35375596525/run_experiment.py:410-411 set_caching, spec.json:measurement_validity[1,9]"
+    },
+    {
+      "id": "V3_underpowered_for_delta_015",
+      "severity": "medium",
+      "finding": "At n=240, CI width is ~0.25 (observed CI [-0.0128,0.2372] width 0.25). To confirm |r|<0.15 with 95% CI upper <0.15, point estimate must be <~0.02 (since half-width ~0.127). Observed pooled r=0.114 is below 0.15 but CI fails due to variance, not systematic correlation. Power analysis min_detectable_r=0.1266 > observed 0.114 confirms underpowered for point estimate, and equivalence-powered claim in prereg section 12 (powered for delta=0.15 if observed |r|<0.129) was miscalibrated. Result is indeterminate between true orthogonality and insufficient n, not evidence HTTP caching breaks orthogonality.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/result.json:metrics:power_analysis, prereg.md:12, result.json:metrics:ci_lower_95=-0.0128 ci_upper_95=0.2372"
+    },
+    {
+      "id": "V4_per_caching_heterogeneity_opposite_prediction",
+      "severity": "medium",
+      "finding": "Per-caching-mode correlations are heterogeneous and opposite to hypothesis: cache_enabled r=-0.0055 (95% CI [-0.185,0.174], TOST p_upper=0.045 PASS at delta=0.15) vs cache_disabled r=0.217 (95% CI [0.039,0.381], TOST p_upper=0.773 FAIL). Pooling obscures moderation. HTTP caching enabled *reduces* correlation (toward zero), disabled increases it. Hypothesis predicted caching introduces common cause and raises |r|; data show the opposite. Heterogeneity suggests sampling noise or unmodeled interaction, not systematic coupling.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/result.json:metrics:per_caching_r, recomputed cache_enabled CI [-0.184,0.174] cache_disabled CI [0.039,0.381] (audit recomputation)"
+    },
+    {
+      "id": "V5_C1_perfect_TP_trivial",
+      "severity": "low",
+      "finding": "C1_drift_tp mean_tp=1.0 with all Wilson lower 0.9398 >0.75 passes but is trivially achieved because behavioral composite >0 for any permission_boundary (auth_boundary 1-2 shifts gives 0.33-0.66) and always >0 for session_invalidation (session_change=1). Perfect detection does not discriminate pipeline sensitivity; control is weak but not invalid.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/result.json:controls:C1_drift_tp, raw_evidence samples auth_boundary_shifts 1-2, session_state_changes 1 for all session_invalidation"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PARENT-STOCHASTIC-N480",
+      "expected": "Parent CI upper 0.135 <0.15 PASS at n=480 r=0.0463",
+      "observed": "Current pooled r=0.114 CI upper 0.237 >0.15 FAIL at n=240. Recomputed matches producer (r=0.11399, SE=0.06496, CI [-0.0128,0.2372], TOST p_upper=0.286). Increase in point estimate (+0.068) and CI upper (+0.102) partly explained by halved n (SE increase 0.0458->0.065, expected CI width +0.038) and partly by higher observed r. Cache_enabled subset alone (r=-0.0055 CI upper 0.174) still > parent 0.135 but TOST passes at delta=0.15 (p=0.045), showing HTTP header presence alone does not materially break orthogonality beyond sampling variation.",
+      "assessment": "Baseline comparison correctly isolates sample-size confound. Parent superiority is not solely HTTP caching effect; underpowered design inflates CI. Isolated HTTP effect (cache_enabled vs disabled) shows no systematic coupling attributable to headers.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/result.json:metrics:per_caching_r, provenance parent EXP-GRAPH-35353011131 r=0.0463 CI upper 0.135, spec.json:baselines[0]"
+    },
+    {
+      "id": "B-NO-CACHE-HEADERS",
+      "expected": "Within-experiment no-cache control expected CI upper <0.15",
+      "observed": "cache_disabled r=0.217 CI [0.039,0.381] CI upper 0.381 >0.15 FAIL, more strongly non-orthogonal than cache_enabled. This inverts expectation that no-cache should be cleaner; suggests sampling noise or structural signal variance difference (structural_std 1.81-1.80 disabled vs 1.54-1.56 enabled) drives heterogeneity, not HTTP caching coupling.",
+      "assessment": "Baseline fails as stated; demonstrates within-experiment control does not isolate HTTP effect as intended because disabled condition is more correlated than enabled.",
+      "evidence": "research/experiments/EXP-GRAPH-35375596525/result.json:metrics:per_caching_r:cache_disabled=0.21696, result.json:metrics:per_condition_variance (structural_std disabled ~1.81 > enabled ~1.54)"
+    }
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled": 0.11399224212340807,
+    "abs_r_pooled": 0.11399224212340807,
+    "n_paired_samples": 240,
+    "fisher_z": 0.11448987492263384,
+    "se": 0.06495698024616309,
+    "ci_lower_95": -0.012825103118808608,
+    "ci_upper_95": 0.23720044606891472,
+    "ci_upper_vs_delta_015": 0.08720044606891472,
+    "tost_at_delta_015_pass": false,
+    "tost_p_upper_at_015": 0.2862994140857907,
+    "tost_p_lower_at_015": 2.163136182053993e-05,
+    "per_caching_r_cache_enabled": -0.005508257343970431,
+    "per_caching_r_cache_disabled": 0.21696195390999432,
+    "per_caching_ci_cache_enabled": [-0.18456261159399173, 0.17391601598870668],
+    "per_caching_ci_cache_disabled": [0.03924149691555413, 0.3813733708143237],
+    "tost_p_upper_cache_enabled_at_015": 0.04510167908962986,
+    "tost_p_upper_cache_disabled_at_015": 0.7733262667938903,
+    "mean_tp_rate": 1.0,
+    "all_wilson_lower_above_075": true,
+    "wilson_lower_at_60_60": 0.9398260695220669,
+    "fp_rate_noise_only": 0.0,
+    "fp_count_noise_only": 0,
+    "total_noise_only": 120,
+    "conditions_with_variance": 4,
+    "min_detectable_r_at_n240": 0.12663221372485364,
+    "recomputation_match": "All primary metrics (pooled r, Fisher z, SE, CI, TOST p-values, per-caching r, FP rate) match result.json within numerical precision (tolerance <1e-9). SHA256 of raw_evidence/experiment_data.json 1a2d719102576dcb7cbb340f2fd7782eb30b164ef477db2c6ab61a488c3f5efa, mock_server.py 7d1064a9d5a2d630a45cd9b9e5c1d39c6813092b4eda7f4c6a373fa0d132dd86, run_experiment.py 5598277cc730b2bb1608f15cc46bc16e5af88b4d1a3350a0c3b9f72b793997dd verified.",
+    "C1_pass": true,
+    "C2_pass": true,
+    "C3_pass": false,
+    "C4_pass": true
+  },
+  "claim_ceiling": "C-FRESHNESS orthogonality at delta=0.15 is NOT confirmed on this evidence: pooled r=0.114, 95% CI [-0.013,0.237], CI upper 0.237 >=0.15, TOST p_upper=0.286 FAIL (result.json:controls:C3_equivalence, report.md:Executive Summary). Producer's negative conclusion (C1 PASS, C2 4/4 PASS, C4 FP=0 PASS, C3 FAIL -> outcome MIXED/ overall FAIL) is measurement-valid and recomputed exactly. However, the maximum justified causal claim is bounded to: n=240 localhost Flask 3.1.3 + SQLite WAL + TTL=0.5s + jitter 10-100ms + HS256/RS256 with declarative HTTP cache headers (Cache-Control max-age=5/no-store, ETag SHA-256 generation) but WITHOUT operational conditional GET/304 exercise and without quantified cache hit rate. This is header-only, not full HTTP caching/CDN. The observed CI widening vs parent (0.135->0.237) is partly sample-size artifact (n 480->240) and partly higher point estimate, not attributable to HTTP caching as common cause; cache_enabled subset alone is near-zero (r=-0.0055, TOST PASS p=0.045) while cache_disabled is higher (r=0.217). No evidence HTTP caching introduces systematic behavioral-structural coupling; result is indeterminate due to underpowering and incomplete manipulation. Do NOT infer HTTP caching breaks parallel-channel architecture; do NOT promote to VALIDATED/PRODUCT_CORE; parallel channels remain EXPERIMENTAL bounded to stochastic mock without full HTTP caching. Next test must operationally exercise 304 and match parent n before attributing to caching.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35375596525/request.json sha256 536d2652c92e3a6228ae03fba06b187cb7da1bdb09bc4a6751dfbbd2c852b059",
+    "research/experiments/EXP-GRAPH-35375596525/spec.json sha256 f8e8ddee29160b19e65e16ad0dae39f2160a43216b66d90270e8c6323b6a16f2",
+    "research/experiments/EXP-GRAPH-35375596525/prereg.md sha256 95582bae66faeeaea1661d07ab380077ee3c4528ff7519e05c4b71a6890f245d",
+    "research/experiments/EXP-GRAPH-35375596525/freeze.json",
+    "research/experiments/EXP-GRAPH-35375596525/result.json sha256 recomputed from raw_evidence",
+    "research/experiments/EXP-GRAPH-35375596525/report.md",
+    "research/experiments/EXP-GRAPH-35375596525/provenance.json",
+    "research/experiments/EXP-GRAPH-35375596525/raw_evidence/experiment_data.json sha256 1a2d719102576dcb7cbb340f2fd7782eb30b164ef477db2c6ab61a488c3f5efa",
+    "research/experiments/EXP-GRAPH-35375596525/mock_server.py sha256 7d1064a9d5a2d630a45cd9b9e5c1d39c6813092b4eda7f4c6a373fa0d132dd86",
+    "research/experiments/EXP-GRAPH-35375596525/run_experiment.py sha256 5598277cc730b2bb1608f15cc46bc16e5af88b4d1a3350a0c3b9f72b793997dd",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json sha256 d30823d831272887167075652ad78be1139c4c426a61dc25fd1a6af64a1db6af",
+    "research/experiments/EXP-GRAPH-35353011131/result.json parent baseline r=0.0463 CI upper 0.135"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, and production session stores — the parent carry_forward highest-upside question remains untested (spec explicitly bounds claim to localhost mock).",
+    "Whether delta=0.10 is practically required for product architecture vs delta=0.15 sufficient; this experiment underpowered for delta=0.10 and fails even at delta=0.15 due to n=240.",
+    "Whether per-caching heterogeneity (cache_enabled -0.005 vs disabled 0.217) is systematic moderation or sampling noise; requires replication at n=480 with operational 304.",
+    "Whether concurrent client load, cache invalidation/purge, stale-while-revalidate, or distributed cache coherence changes correlation structure — not tested.",
+    "Realized cache hit rate, ETag match rate, and latency distribution not logged, so cannot quantify stochasticity actually realized (result.json:unresolved[5])."
+  ]
+}
