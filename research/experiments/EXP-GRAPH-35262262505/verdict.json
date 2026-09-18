@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35262262505",
+  "lane": "graph",
+  "decision": "FAIL",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule FAIL: C1 PASS (TP=1.0, all Wilson lower CI 0.886 > 0.75), C2 PASS (8/8 conditions with variance for both signals), C4 PASS (FP=0.0 on 120 noise-only samples), but C3 FAIL (permutation p=0.414 > 0.05 despite |r|=0.0527 < 0.3). The TP/variance trade-off identified in parent EXP-GRAPH-35237975537 IS broken by the graded session_status_check design fix. Behavioral and structural signals show near-zero correlation (r²=0.003) but the frozen conjunctive rule requires p<0.05, which is underpowered at n=240 for |r|~0.05 (audit confirms this is a sample-size limitation, not evidence of non-orthogonality). C-FRESHNESS remains EXPERIMENTAL. Claim ceiling bounded to: session_invalidation behavioral variance without TP dilution is achievable via graded session_status_check intensity (401/403/500) while keeping session_change=1; behavioral-structural orthogonality is plausible (|r|=0.053) but not formally confirmed at p<0.05."
+    }
+  ],
+  "product_action": "No product action. C3 fails the frozen conjunctive gate. The architecture implication is precautionary: product pipeline should use composite multi-signal classifiers rather than independent parallel channels until orthogonality is confirmed at larger n.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a pooled paired-sample orthogonality test with n>=480 (doubling current sample size) confirm |r|<0.3 with permutation p<0.05 for behavioral-structural signals under graded session_status_check variance without TP dilution?",
+  "reason": "The frozen decision rule requires ALL four criteria (C1-C4) for PASS. C1 and C2 pass decisively: mean TP=1.0 (Wilson lower 0.886 > 0.75) and 8/8 conditions have within-condition variance for both behavioral and structural signals, confirming the graded session_status_check fix resolves the TP/variance trade-off from the parent experiment. C4 passes with FP=0.0 on 120 noise-only samples. However, C3 fails the frozen conjunctive test: |r|=0.0527 < 0.3 (passes magnitude gate) but permutation p=0.414 > 0.05 (fails significance gate). The audit correctly identifies this as a sample-size limitation: at true |r|~0.05 and n=240, the permutation test has very low power to achieve p<0.05. The correlation is near-zero (r²=0.003, behavioral explains 0.3% of structural variance), and per-drift-pattern correlations are homogeneous (PB r=0.051, SI r=0.046), eliminating the heterogeneous SI-driven artifact from the parent. The frozen rule is the binding constraint; the Director does not override it. Maximum justified ceiling: TP/variance trade-off broken, orthogonality plausible but not confirmed. Product consequence: composite multi-signal classifiers as precautionary architecture.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35262262505/result.json — status COMPLETE, outcome FALSIFIES, mean_tp=1.0, r=0.0527, p=0.414, FP=0.0, 8/8 conditions with variance",
+    "research/experiments/EXP-GRAPH-35262262505/audit.json — status FAIL, claim_ceiling, validity_findings confirming TP/variance trade-off broken but C3 underpowered",
+    "research/experiments/EXP-GRAPH-35262262505/spec.json — frozen decision_rule requiring ALL C1-C4 (|r|<0.3 AND p<0.05 for C3)",
+    "research/experiments/EXP-GRAPH-35262262505/freeze.json — frozen hashes for prereg, request, spec",
+    "research/experiments/EXP-GRAPH-35262262505/prereg.md — graded session_status_check design (401/403/500, session_change=1 always)",
+    "research/experiments/EXP-GRAPH-35262262505/report.md — Executive Summary, per-condition analysis, session status distribution",
+    "research/experiments/EXP-GRAPH-35237975537/handoff.json — parent established/rejected/unknown/do_not_assume, C1_FAIL_BY_DESIGN_ARTIFACT",
+    "codex/claim_state.json:C-FRESHNESS — claim event history showing prior EXPERIMENTAL status"
+  ]
+}
