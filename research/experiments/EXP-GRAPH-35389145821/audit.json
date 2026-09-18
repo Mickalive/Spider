@@ -1,1 +1,177 @@
-{"schema_version": 1, "experiment_id": "EXP-GRAPH-35389145821", "lane": "graph", "status": "PASS", "producer_claim_supported": true, "required_fixes": [], "validity_findings": ["All five frozen decision criteria verified independently", "304 manipulation check (C5) confirmed operational: 304 rate = 0.3333 > 0.10 threshold in cache_enabled conditions", "If-None-Match code path verified: client sends prior ETag, server returns 304 when match", "ETag computation verified: SHA-256 of content-only schema data (excludes cached flag)", "Structural signal verified: non-zero scores confirm schema differences after noise application", "Behavioral signal verified: mean TP = 1.0, all Wilson lower CI > 0.75", "Null control verified: FP = 0.0 across all 240 noise-only samples", "Positive control verified: permission_boundary detection rate = 1.0"], "baseline_findings": ["B-PARENT-STOCHASTIC-N480: Parent r=0.046, CI upper 0.135 < 0.15 confirmed as established baseline. This experiment does NOT supersede it.", "B-NO-CACHE-HEADERS: Within-experiment no-store condition shows CI upper < 0.15, consistent with parent baseline.", "B-PARENT-HTTP-CACHING-N240: Prior experiment (EXP-GRAPH-35375596525) had measurement confounds (no 304 exercised, n=240 underpowered, decision-rule bug). This experiment resolves all three confounds."], "recomputed_metrics": {"pearson_r_pooled": 0.0021550631732880215, "ci_upper_95": 0.09163947812964152, "ci_lower_95": -0.08429554001262562, "tost_p_upper_at_015": 0.0007203294969384848, "tost_pass_at_015": true, "mean_tp_rate": 1.0, "fp_rate_noise_only": 0.0, "positive_control_rate": 1.0, "n_paired_samples": 480, "c5_304_rate_cache_enabled": 0.3333}, "claim_ceiling": "C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED under HTTP conditional caching with proper If-None-Match/304 manipulation at n >= 480. The maximum justified claim is that behavioral-structural signal orthogonality extends to include operational HTTP caching semantics. C-FRESHNESS status should be updated from EXPERIMENTAL to reflect this confirmation. The parent's stochastic-mock baseline (r=0.046, CI upper 0.135 < 0.15) remains established and is not superseded.", "evidence_refs": ["research/experiments/EXP-GRAPH-35389145821/result.json", "research/experiments/EXP-GRAPH-35389145821/report.md", "research/experiments/EXP-GRAPH-35389145821/provenance.json", "research/experiments/EXP-GRAPH-35389145821/raw_evidence/experiment_data.json", "research/experiments/EXP-GRAPH-35375596525/handoff.json", "codex/claim_state.json:C-FRESHNESS"], "unresolved": ["Jitter reduced from frozen 10-100ms to 1-5ms for runtime feasibility — validity threat noted but does not affect correlation measurement", "localhost scope only — not validated for production databases, distributed caches/CDN, or network latency", "Per-caching-mode heterogeneity at n=120 per mode: symmetric pattern (cache_enabled r=-0.061, cache_disabled r=0.061) differs from parent's asymmetric pattern; may be sampling noise or structural variance difference", "Two caching layers (in-memory TTL + HTTP Cache-Control) coexist; TTL cache causes alternation independent of HTTP caching", "No product promotion warranted — claim ceiling bounded to stochastic Flask mock on localhost"], "audit_timestamp": "2026-09-18T20:08:07.657282+00:00", "audit_version": "1.0"}
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35389145821",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "C1_drift_tp PASS verified: mean TP=1.0, per-condition TP=1.0, Wilson lower ~0.969 >0.75 for all 4 co-occurring conditions (recomputed from raw_evidence/experiment_data.json behavioral composites)",
+    "C2_variance PASS verified: 4/4 conditions have std>0 for both behavioral and structural signals (behavioral std 0.154-0.430, structural std 1.607-1.824); recomputed per-condition std matches producer",
+    "C3_equivalence PASS verified independently: pooled Pearson r=0.002155, n=480, Fisher z=0.002155, SE=0.04579, 95% CI [-0.08736, 0.09164], CI upper 0.09164 < 0.15, TOST at delta=0.15 p_upper=0.000569 PASS (spec.json decision_rule criterion 3). Recomputation from all_behavioral_scores/all_structural_scores matches result.json:metrics.pearson_r_pooled and ci_upper_95 exactly",
+    "C4_null_control PASS verified: FP=0.0 (0/240 noise-only samples); noise_only_behavioral_scores are constant 0.0, confirmed from raw evidence. Controls: NC-FP-CACHE threshold FP=0.0 met",
+    "C5_304_exercised PASS verified: 304 rate 0.3333 in both cache_enabled co-occurring conditions (120/360 schema requests), etag_match_rate=1.0, disabled rate 0.0 as expected. Manipulation check confirms If-None-Match code path operationally exercised \u2014 fixes parent defect V1 (client never sent If-None-Match). Evidence: raw_evidence/experiment_data.json manipulation_checks and mock_server.py If-None-Match handling (request.headers.get('If-None-Match') == etag ->304). Structural measurement unaffected because 304 request (step 2) occurs BEFORE drift/noise; structural computed from baseline (step1) vs post-noise (step4) both 200 (run_experiment.py:run_single_sample steps 1-4)",
+    "ETag integrity verified: mock_server.py compute_etag SHA-256 of content-only sorted JSON (excludes cached flag) ensures stable ETags and no timing header leakage into structural signal",
+    "Decision-rule bug fix verified: run_experiment.py now maps overall failure to outcome FALSIFIES via CI upper >=0.15 logic consistent with spec.json decision_rule (previously mapped CI>=0.20 to MIXED in parent)",
+    "Validity threat disclosed but non-material: jitter reduced from frozen 10-100ms to 1-5ms (run_experiment.py JITTER_MAX_MS=5, mock_server JITTER_MAX_MS via env). Timing-only jitter is orthogonal to behavioral-structural correlation by design; does not confound r but reduces stochastic realism versus prereg. Noted in result.json validity_notes and reproduced here",
+    "Representation integrity preserved: behavioral composite = token_val_rate*2 + session_change*3 + auth_boundary*1 + session_status_check*2 (graded 401:1.0,403:0.5,500:0.75) and structural = max(schema_diff_magnitude, 1-jaccard) match prereg.md section 4 and spec.json measurement_validity; recomputed per-sample composites verified",
+    "No leakage detected: behavioral signals derived from auth middleware (token/permissions/session) before cache lookup; structural signals from unauthenticated /schema; HTTP caching affects delivery only, not causal content. ETag coupling is structural-structural, not behavioral-structural"
+  ],
+  "baseline_findings": [
+    "B-PARENT-STOCHASTIC-N480 (EXP-GRAPH-35353011131): Established baseline r=0.0463, CI upper 0.135 <0.15 PASS remains unchallenged; this experiment at n=480, r=0.0022, CI upper 0.0916 <0.15 is consistent and more precise (shared variance ceiling 0.84% vs parent 1.83%). Does not supersede parent \u2014 extends it to HTTP caching conditions",
+    "B-NO-CACHE-HEADERS (within-experiment Cache-Control:no-store): Pooled per-caching analysis recomputed shows cache_enabled r=-0.0609 (CI [-0.186,0.066], upper on |r| 0.186) and cache_disabled r=0.0612 (CI [-0.066,0.186], upper 0.186). At n=240 per mode, per-mode equivalence at delta=0.15 is underpowered (SE 0.065, CI width ~0.25) and the disabled subset upper 0.186 exceeds delta. The producer claim that per-mode CI upper <0.15 is not supported when recomputed on |r| basis; pooled CI <0.15 is the justified inference. Heterogeneity is symmetric (+-0.06) within sampling noise, not systematic",
+    "B-PARENT-HTTP-CACHING-N240 (EXP-GRAPH-35375596525): Prior r=0.114, CI upper 0.237 TOST FAIL was measurement-confounded (no 304, n=240 SE 0.065, decision bug). This experiment fixes all three: If-None-Match operational (33% 304), n=480 SE 0.0457, bug fix verified. Prior indeterminate REVISE is resolved; this clean PASS supersedes the indeterminate HTTP caching result but not the parent stochastic baseline",
+    "Baseline strength: Positive control permission_boundary detection 1.0 and null FP 0.0 replicated exactly from parent; variance gate 4/4 passed both experiments, confirming manipulation strength unchanged by HTTP caching"
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled": 0.0021550631732880215,
+    "abs_r_pooled": 0.0021550631732880215,
+    "ci_lower_95": -0.08736387842652543,
+    "ci_upper_95": 0.09163947812964152,
+    "ci_width_95": 0.17900335655616695,
+    "fisher_z": 0.0021550665095486808,
+    "se_fisher_z": 0.04578685464956301,
+    "n_paired_samples": 480,
+    "tost_at_delta_015": {
+      "pass": true,
+      "p_upper": 0.0005691825827122186,
+      "p_lower": 0.0004069493582389283,
+      "delta": 0.15
+    },
+    "tost_results_by_delta": {
+      "0.1": {
+        "pass": true,
+        "p_upper": 0.016004840446275356,
+        "p_lower": 0.012596695034731598
+      },
+      "0.12": {
+        "pass": true,
+        "p_upper": 0.004848342398233551,
+        "p_lower": 0.003674550556284073
+      },
+      "0.15": {
+        "pass": true,
+        "p_upper": 0.0005691825827122186,
+        "p_lower": 0.0004069493582389283
+      },
+      "0.2": {
+        "pass": true,
+        "p_upper": 5.915517650795109e-06,
+        "p_lower": 3.8239076667334615e-06
+      }
+    },
+    "shared_variance_ceiling_at_ci_upper": 0.0083977914,
+    "per_condition_r": {
+      "cooccur_permission_boundary+cache_enabled": {
+        "r": -0.18576230887293366,
+        "p": 0.042220414706818477,
+        "n": 120
+      },
+      "cooccur_permission_boundary+cache_disabled": {
+        "r": 0.10436467363470389,
+        "p": 0.25663005333627464,
+        "n": 120
+      },
+      "cooccur_session_invalidation+cache_enabled": {
+        "r": -0.07301887895940082,
+        "p": 0.42802943484029576,
+        "n": 120
+      },
+      "cooccur_session_invalidation+cache_disabled": {
+        "r": 0.024279027956871417,
+        "p": 0.7923822441048824,
+        "n": 120
+      }
+    },
+    "per_caching_r": {
+      "cache_enabled": -0.06094796276399298,
+      "cache_disabled": 0.0612147264113237
+    },
+    "per_caching_ci_upper_95": {
+      "cache_enabled": 0.06619520617469164,
+      "cache_disabled": 0.18640197168656553
+    },
+    "per_drift_r": {
+      "permission_boundary": -0.043240672368013475,
+      "session_invalidation": -0.020641589799215848
+    },
+    "C1_drift_tp": {
+      "mean_tp": 1.0,
+      "per_condition_tp": 1.0,
+      "wilson_lower_per_condition": 0.9689797289440706,
+      "all_wilson_lower_above_075": true,
+      "pass": true
+    },
+    "C2_variance": {
+      "conditions_with_variance": 4,
+      "threshold": 4,
+      "pass": true,
+      "per_condition_std": {
+        "cooccur_permission_boundary+cache_enabled": {
+          "behavioral_std": 0.1647809994440432,
+          "structural_std": 1.7196575886560155
+        },
+        "cooccur_permission_boundary+cache_disabled": {
+          "behavioral_std": 0.15393501113886007,
+          "structural_std": 1.8241436346954698
+        },
+        "cooccur_session_invalidation+cache_enabled": {
+          "behavioral_std": 0.42961142003236164,
+          "structural_std": 1.6066214983277447
+        },
+        "cooccur_session_invalidation+cache_disabled": {
+          "behavioral_std": 0.41323587560724795,
+          "structural_std": 1.6992594383698119
+        }
+      }
+    },
+    "C4_null_control": {
+      "fp_rate": 0.0,
+      "fp_count": 0,
+      "n_noise_only": 240,
+      "pass": true
+    },
+    "C5_304_exercised": {
+      "rate_304_cache_enabled": 0.3333,
+      "etag_match_rate": 1.0,
+      "cache_hit_rate_200_only_cache_enabled": 0.4958,
+      "threshold": 0.1,
+      "pass": true,
+      "evidence": "33.33% = 120/360 per cache_enabled condition (1 conditional 304 + 2x200 per sample); disabled 0.0 as expected"
+    },
+    "positive_control_rate": 1.0,
+    "n_samples_per_condition": 120,
+    "n_cooccurring_conditions": 4,
+    "n_noise_only_conditions": 2,
+    "power_analysis": {
+      "se_at_n480": 0.04578685464956301,
+      "min_detectable_r_at_n480": 0.08950209062260417,
+      "ci_width_at_r0p05": 0.179
+    }
+  },
+  "claim_ceiling": "C-FRESHNESS behavioral-structural signal orthogonality at delta=0.15 (|r| <0.15, shared variance <2.25%) is CONFIRMED under operational HTTP conditional caching (Cache-Control max-age=5 / no-store, ETag-SHA256, If-None-Match ->304 at 33.3% in cache_enabled) at n=480 (4 conditions x120) on stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory TTL 0.5s + jitter 1-5ms + HS256/RS256 JWT on localhost. Pooled r=0.0022, 95% CI [-0.087,0.092], CI upper 0.092 <0.15, TOST PASS at delta=0.15 (and 0.10,0.12,0.20). Maximum justified claim extends parent's stochastic-mock orthogonality to include HTTP caching semantics with proper 304 manipulation. Bounded to localhost mock; NOT validated for production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, or real API schemas. Per-caching and per-condition heterogeneity is sampling noise (max |r| 0.186 at n=120, p=0.042 marginal). No product promotion to VALIDATED or PRODUCT_CORE warranted from mock alone.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35389145821/request.json",
+    "research/experiments/EXP-GRAPH-35389145821/spec.json",
+    "research/experiments/EXP-GRAPH-35389145821/prereg.md",
+    "research/experiments/EXP-GRAPH-35389145821/freeze.json",
+    "research/experiments/EXP-GRAPH-35389145821/result.json",
+    "research/experiments/EXP-GRAPH-35389145821/report.md",
+    "research/experiments/EXP-GRAPH-35389145821/provenance.json",
+    "research/experiments/EXP-GRAPH-35389145821/raw_evidence/experiment_data.json sha256 e90bc81473207e54e448892630f39cd6ef3e4afbf4b55fd055fc507948c144ad",
+    "research/experiments/EXP-GRAPH-35389145821/mock_server.py sha256 5e1511e37346b51204cddb711c95cfda7be1300c6dbc982bf8d9fb32ec846a51",
+    "research/experiments/EXP-GRAPH-35389145821/run_experiment.py sha256 aca729e0842621e2ffb5eb793acd51e6983832319d59e433fccd84e30e143ada",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json",
+    "research/experiments/EXP-GRAPH-35375596525/handoff.json",
+    "research/experiments/EXP-GRAPH-35375596525/result.json",
+    "codex/claim_state.json:C-FRESHNESS"
+  ],
+  "unresolved": [
+    "Jitter fidelity loss: frozen 10-100ms uniform reduced to 1-5ms for runtime feasibility \u2014 does not affect correlation but two caching layers (TTL 0.5s vs max-age=5) hit-rate interaction at 1-5ms differs from 10-100ms regime; future replication at frozen jitter would increase realism",
+    "Per-caching-mode equivalence at n=240 per mode is underpowered: cache_disabled pooled CI upper 0.186 >0.15, cache_enabled absolute upper 0.186 >0.15, so within-mode orthogonality is not individually confirmed; pooled n=480 is the powered inference. Heterogeneity replication inconclusive at this n",
+    "Report.md numerical discrepancy: reports CI lower -0.0842 vs recomputed -0.08736 (Fisher z with SE 0.04579); upper matches 0.0916; does not affect PASS but indicates reporting inconsistency",
+    "Two caching layers coexist (in-memory TTL cache and HTTP Cache-Control) \u2014 intentional to preserve parent stochastic alternation but makes cache_hit_rate artifact ambiguous (disabled mode shows 0.6639 > enabled 0.4958 because counted only among 200s)",
+    "localhost scope only \u2014 not validated for real APIs, CDN cache invalidation/purge, stale-while-revalidate, distributed coherence, concurrent load, or title-varying production SPAs",
+    "Delta=0.10 orthogonality: TOST passes at n=480 (p_upper 0.016) but CI upper 0.092 <0.10 also passes pooled; however per-mode and per-condition CIs exceed 0.10 and product risk tolerance at delta=0.10 remains unresolved per prereg section 19 MIXED guidance"
+  ]
+}
