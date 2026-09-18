@@ -1,0 +1,976 @@
+{
+  "corpus_summary": {
+    "total_tasks": 32,
+    "total_literal_mechanisms": 32,
+    "total_param_mechanisms": 25,
+    "mechanism_count_reduction_pct": 21.88
+  },
+  "token_costs": {
+    "literal_total_tokens": 791,
+    "param_total_tokens": 679,
+    "net_savings_tokens": 112,
+    "net_savings_pct": 14.16,
+    "deduplication_ratio": 0.8584
+  },
+  "literal_mechanisms": [
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts/101",
+      "url": "https://blog.example.com/posts/101",
+      "method": "GET",
+      "tokens": 19,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts/202",
+      "url": "https://blog.example.com/posts/202",
+      "method": "GET",
+      "tokens": 19,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts/303",
+      "url": "https://blog.example.com/posts/303",
+      "method": "GET",
+      "tokens": 19,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts/404",
+      "url": "https://blog.example.com/posts/404",
+      "method": "GET",
+      "tokens": 19,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts/505",
+      "url": "https://blog.example.com/posts/505",
+      "method": "GET",
+      "tokens": 19,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts",
+      "url": "https://blog.example.com/posts",
+      "method": "GET",
+      "tokens": 17,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://blog.example.com/posts",
+      "url": "https://blog.example.com/posts",
+      "method": "POST",
+      "tokens": 34,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/products/SKU-1001",
+      "url": "https://shop.example.com/products/SKU-1001",
+      "method": "GET",
+      "tokens": 23,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/products/SKU-2002",
+      "url": "https://shop.example.com/products/SKU-2002",
+      "method": "GET",
+      "tokens": 23,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/products/SKU-3003",
+      "url": "https://shop.example.com/products/SKU-3003",
+      "method": "GET",
+      "tokens": 23,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/cart/abc",
+      "url": "https://shop.example.com/cart/abc",
+      "method": "POST",
+      "tokens": 38,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/cart/def",
+      "url": "https://shop.example.com/cart/def",
+      "method": "POST",
+      "tokens": 38,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/checkout",
+      "url": "https://shop.example.com/checkout",
+      "method": "POST",
+      "tokens": 34,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/categories",
+      "url": "https://shop.example.com/categories",
+      "method": "GET",
+      "tokens": 17,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-aaa",
+      "url": "https://admin.example.com/users/u-aaa",
+      "method": "GET",
+      "tokens": 20,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-bbb",
+      "url": "https://admin.example.com/users/u-bbb",
+      "method": "GET",
+      "tokens": 20,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-ccc",
+      "url": "https://admin.example.com/users/u-ccc",
+      "method": "GET",
+      "tokens": 20,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-ddd",
+      "url": "https://admin.example.com/users/u-ddd",
+      "method": "GET",
+      "tokens": 20,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-eee",
+      "url": "https://admin.example.com/users/u-eee",
+      "method": "GET",
+      "tokens": 20,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users",
+      "url": "https://admin.example.com/users",
+      "method": "GET",
+      "tokens": 17,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://admin.example.com/users",
+      "url": "https://admin.example.com/users",
+      "method": "POST",
+      "tokens": 35,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://pm.example.com/orgs/org-100/projects/proj-200",
+      "url": "https://pm.example.com/orgs/org-100/projects/proj-200",
+      "method": "GET",
+      "tokens": 26,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://pm.example.com/orgs/org-300/projects/proj-400",
+      "url": "https://pm.example.com/orgs/org-300/projects/proj-400",
+      "method": "GET",
+      "tokens": 26,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://pm.example.com/orgs/org-100/projects",
+      "url": "https://pm.example.com/orgs/org-100/projects",
+      "method": "GET",
+      "tokens": 22,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://pm.example.com/orgs/org-100/projects/proj-200/tasks",
+      "url": "https://pm.example.com/orgs/org-100/projects/proj-200/tasks",
+      "method": "POST",
+      "tokens": 37,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/search?q=python+tutorial&limit=10",
+      "url": "https://blog.example.com/search?q=python+tutorial&limit=10",
+      "method": "GET",
+      "tokens": 26,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/search?q=laptop&min_price=500&max_price=2000",
+      "url": "https://shop.example.com/search?q=laptop&min_price=500&max_price=2000",
+      "method": "GET",
+      "tokens": 31,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/search?q=john+doe&role=admin",
+      "url": "https://admin.example.com/search?q=john+doe&role=admin",
+      "method": "GET",
+      "tokens": 26,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://blog.example.com/auth/login",
+      "url": "https://blog.example.com/auth/login",
+      "method": "POST",
+      "tokens": 33,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/auth/login",
+      "url": "https://shop.example.com/auth/login",
+      "method": "POST",
+      "tokens": 34,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/auth/me",
+      "url": "https://blog.example.com/auth/me",
+      "method": "GET",
+      "tokens": 18,
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/auth/me",
+      "url": "https://shop.example.com/auth/me",
+      "method": "GET",
+      "tokens": 18,
+      "shared_by_tasks": 1
+    }
+  ],
+  "parameterized_mechanisms": [
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts/${id_0}",
+      "template_url": "https://blog.example.com/posts/${id_0}",
+      "method": "GET",
+      "tokens": 22,
+      "slots": [
+        "id_0"
+      ],
+      "shared_by_tasks": 5
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/posts",
+      "template_url": "https://blog.example.com/posts",
+      "method": "GET",
+      "tokens": 17,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://blog.example.com/posts",
+      "template_url": "https://blog.example.com/posts",
+      "method": "POST",
+      "tokens": 35,
+      "slots": [
+        "body_title",
+        "body_content"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/products/${item_0}",
+      "template_url": "https://shop.example.com/products/${item_0}",
+      "method": "GET",
+      "tokens": 22,
+      "slots": [
+        "item_0"
+      ],
+      "shared_by_tasks": 3
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/cart/abc",
+      "template_url": "https://shop.example.com/cart/abc",
+      "method": "POST",
+      "tokens": 37,
+      "slots": [
+        "body_product_id"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/cart/def",
+      "template_url": "https://shop.example.com/cart/def",
+      "method": "POST",
+      "tokens": 37,
+      "slots": [
+        "body_product_id"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/checkout",
+      "template_url": "https://shop.example.com/checkout",
+      "method": "POST",
+      "tokens": 36,
+      "slots": [
+        "body_payment"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/categories",
+      "template_url": "https://shop.example.com/categories",
+      "method": "GET",
+      "tokens": 17,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-aaa",
+      "template_url": "https://admin.example.com/users/u-aaa",
+      "method": "GET",
+      "tokens": 20,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-bbb",
+      "template_url": "https://admin.example.com/users/u-bbb",
+      "method": "GET",
+      "tokens": 20,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-ccc",
+      "template_url": "https://admin.example.com/users/u-ccc",
+      "method": "GET",
+      "tokens": 20,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-ddd",
+      "template_url": "https://admin.example.com/users/u-ddd",
+      "method": "GET",
+      "tokens": 20,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users/u-eee",
+      "template_url": "https://admin.example.com/users/u-eee",
+      "method": "GET",
+      "tokens": 20,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/users",
+      "template_url": "https://admin.example.com/users",
+      "method": "GET",
+      "tokens": 17,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://admin.example.com/users",
+      "template_url": "https://admin.example.com/users",
+      "method": "POST",
+      "tokens": 35,
+      "slots": [
+        "body_name",
+        "body_email"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://pm.example.com/orgs/${item_0}/project${item_1}00",
+      "template_url": "https://pm.example.com/orgs/${item_0}/project${item_1}00",
+      "method": "GET",
+      "tokens": 30,
+      "slots": [
+        "item_0",
+        "item_1"
+      ],
+      "shared_by_tasks": 2
+    },
+    {
+      "mechanism_key": "GET:https://pm.example.com/orgs/${item_0}/projects",
+      "template_url": "https://pm.example.com/orgs/${item_0}/projects",
+      "method": "GET",
+      "tokens": 24,
+      "slots": [
+        "item_0"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://pm.example.com/orgs/${item_0}/project${item_1}00/tasks",
+      "template_url": "https://pm.example.com/orgs/${item_0}/project${item_1}00/tasks",
+      "method": "POST",
+      "tokens": 42,
+      "slots": [
+        "item_0",
+        "item_1",
+        "body_title"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/search?q=${q_q_0}&limit=${q_limit_1}",
+      "template_url": "https://blog.example.com/search?q=${q_q_0}&limit=${q_limit_1}",
+      "method": "GET",
+      "tokens": 31,
+      "slots": [
+        "q_q_0",
+        "q_limit_1"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/search?q=${q_q_0}&min_price=${q_min_price_1}&max_price=${q_max_price_2}",
+      "template_url": "https://shop.example.com/search?q=${q_q_0}&min_price=${q_min_price_1}&max_price=${q_max_price_2}",
+      "method": "GET",
+      "tokens": 42,
+      "slots": [
+        "q_q_0",
+        "q_min_price_1",
+        "q_max_price_2"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://admin.example.com/search?q=${q_q_0}&role=${q_role_1}",
+      "template_url": "https://admin.example.com/search?q=${q_q_0}&role=${q_role_1}",
+      "method": "GET",
+      "tokens": 31,
+      "slots": [
+        "q_q_0",
+        "q_role_1"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://blog.example.com/auth/login",
+      "template_url": "https://blog.example.com/auth/login",
+      "method": "POST",
+      "tokens": 34,
+      "slots": [
+        "body_pass"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "POST:https://shop.example.com/auth/login",
+      "template_url": "https://shop.example.com/auth/login",
+      "method": "POST",
+      "tokens": 34,
+      "slots": [
+        "body_pass"
+      ],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://blog.example.com/auth/me",
+      "template_url": "https://blog.example.com/auth/me",
+      "method": "GET",
+      "tokens": 18,
+      "slots": [],
+      "shared_by_tasks": 1
+    },
+    {
+      "mechanism_key": "GET:https://shop.example.com/auth/me",
+      "template_url": "https://shop.example.com/auth/me",
+      "method": "GET",
+      "tokens": 18,
+      "slots": [],
+      "shared_by_tasks": 1
+    }
+  ],
+  "per_task_savings": [
+    {
+      "task_id": "blog-read-post-1",
+      "intent": "read_post",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 19,
+      "param_tokens": 22,
+      "savings_tokens": -3,
+      "savings_pct": -15.79
+    },
+    {
+      "task_id": "blog-read-post-2",
+      "intent": "read_post",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 19,
+      "param_tokens": 22,
+      "savings_tokens": -3,
+      "savings_pct": -15.79
+    },
+    {
+      "task_id": "blog-read-post-3",
+      "intent": "read_post",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 19,
+      "param_tokens": 22,
+      "savings_tokens": -3,
+      "savings_pct": -15.79
+    },
+    {
+      "task_id": "blog-read-post-4",
+      "intent": "read_post",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 19,
+      "param_tokens": 22,
+      "savings_tokens": -3,
+      "savings_pct": -15.79
+    },
+    {
+      "task_id": "blog-read-post-5",
+      "intent": "read_post",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 19,
+      "param_tokens": 22,
+      "savings_tokens": -3,
+      "savings_pct": -15.79
+    },
+    {
+      "task_id": "blog-list-posts",
+      "intent": "list_posts",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 17,
+      "param_tokens": 17,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "blog-create-post",
+      "intent": "create_post",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 34,
+      "param_tokens": 35,
+      "savings_tokens": -1,
+      "savings_pct": -2.94
+    },
+    {
+      "task_id": "shop-view-product-1",
+      "intent": "view_product",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 23,
+      "param_tokens": 22,
+      "savings_tokens": 1,
+      "savings_pct": 4.35
+    },
+    {
+      "task_id": "shop-view-product-2",
+      "intent": "view_product",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 23,
+      "param_tokens": 22,
+      "savings_tokens": 1,
+      "savings_pct": 4.35
+    },
+    {
+      "task_id": "shop-view-product-3",
+      "intent": "view_product",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 23,
+      "param_tokens": 22,
+      "savings_tokens": 1,
+      "savings_pct": 4.35
+    },
+    {
+      "task_id": "shop-add-to-cart-1",
+      "intent": "add_to_cart",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 38,
+      "param_tokens": 37,
+      "savings_tokens": 1,
+      "savings_pct": 2.63
+    },
+    {
+      "task_id": "shop-add-to-cart-2",
+      "intent": "add_to_cart",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 38,
+      "param_tokens": 37,
+      "savings_tokens": 1,
+      "savings_pct": 2.63
+    },
+    {
+      "task_id": "shop-checkout",
+      "intent": "checkout",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 34,
+      "param_tokens": 36,
+      "savings_tokens": -2,
+      "savings_pct": -5.88
+    },
+    {
+      "task_id": "shop-list-categories",
+      "intent": "list_categories",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 17,
+      "param_tokens": 17,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-view-user-1",
+      "intent": "view_user",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 20,
+      "param_tokens": 20,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-view-user-2",
+      "intent": "view_user",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 20,
+      "param_tokens": 20,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-view-user-3",
+      "intent": "view_user",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 20,
+      "param_tokens": 20,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-view-user-4",
+      "intent": "view_user",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 20,
+      "param_tokens": 20,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-view-user-5",
+      "intent": "view_user",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 20,
+      "param_tokens": 20,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-list-users",
+      "intent": "list_users",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 17,
+      "param_tokens": 17,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "admin-create-user",
+      "intent": "create_user",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 35,
+      "param_tokens": 35,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "pm-view-project-1",
+      "intent": "view_project",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 26,
+      "param_tokens": 30,
+      "savings_tokens": -4,
+      "savings_pct": -15.38
+    },
+    {
+      "task_id": "pm-view-project-2",
+      "intent": "view_project",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 26,
+      "param_tokens": 30,
+      "savings_tokens": -4,
+      "savings_pct": -15.38
+    },
+    {
+      "task_id": "pm-list-projects",
+      "intent": "list_projects",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 22,
+      "param_tokens": 24,
+      "savings_tokens": -2,
+      "savings_pct": -9.09
+    },
+    {
+      "task_id": "pm-create-task",
+      "intent": "create_task",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 37,
+      "param_tokens": 42,
+      "savings_tokens": -5,
+      "savings_pct": -13.51
+    },
+    {
+      "task_id": "search-blog",
+      "intent": "search",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 26,
+      "param_tokens": 31,
+      "savings_tokens": -5,
+      "savings_pct": -19.23
+    },
+    {
+      "task_id": "search-shop",
+      "intent": "search",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 31,
+      "param_tokens": 42,
+      "savings_tokens": -11,
+      "savings_pct": -35.48
+    },
+    {
+      "task_id": "search-users",
+      "intent": "search",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 26,
+      "param_tokens": 31,
+      "savings_tokens": -5,
+      "savings_pct": -19.23
+    },
+    {
+      "task_id": "auth-login-blog",
+      "intent": "login",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 33,
+      "param_tokens": 34,
+      "savings_tokens": -1,
+      "savings_pct": -3.03
+    },
+    {
+      "task_id": "auth-login-shop",
+      "intent": "login",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 34,
+      "param_tokens": 34,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "auth-me-blog",
+      "intent": "get_me",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 18,
+      "param_tokens": 18,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    },
+    {
+      "task_id": "auth-me-shop",
+      "intent": "get_me",
+      "n_literal_urls": 1,
+      "n_param_patterns": 1,
+      "literal_tokens": 18,
+      "param_tokens": 18,
+      "savings_tokens": 0,
+      "savings_pct": 0.0
+    }
+  ],
+  "pattern_sharing": {
+    "GET:https://blog.example.com/posts/${id_0}": {
+      "template_url": "https://blog.example.com/posts/${id_0}",
+      "n_tasks_sharing": 5,
+      "tokens": 22
+    },
+    "GET:https://blog.example.com/posts": {
+      "template_url": "https://blog.example.com/posts",
+      "n_tasks_sharing": 1,
+      "tokens": 17
+    },
+    "POST:https://blog.example.com/posts": {
+      "template_url": "https://blog.example.com/posts",
+      "n_tasks_sharing": 1,
+      "tokens": 35
+    },
+    "GET:https://shop.example.com/products/${item_0}": {
+      "template_url": "https://shop.example.com/products/${item_0}",
+      "n_tasks_sharing": 3,
+      "tokens": 22
+    },
+    "POST:https://shop.example.com/cart/abc": {
+      "template_url": "https://shop.example.com/cart/abc",
+      "n_tasks_sharing": 1,
+      "tokens": 37
+    },
+    "POST:https://shop.example.com/cart/def": {
+      "template_url": "https://shop.example.com/cart/def",
+      "n_tasks_sharing": 1,
+      "tokens": 37
+    },
+    "POST:https://shop.example.com/checkout": {
+      "template_url": "https://shop.example.com/checkout",
+      "n_tasks_sharing": 1,
+      "tokens": 36
+    },
+    "GET:https://shop.example.com/categories": {
+      "template_url": "https://shop.example.com/categories",
+      "n_tasks_sharing": 1,
+      "tokens": 17
+    },
+    "GET:https://admin.example.com/users/u-aaa": {
+      "template_url": "https://admin.example.com/users/u-aaa",
+      "n_tasks_sharing": 1,
+      "tokens": 20
+    },
+    "GET:https://admin.example.com/users/u-bbb": {
+      "template_url": "https://admin.example.com/users/u-bbb",
+      "n_tasks_sharing": 1,
+      "tokens": 20
+    },
+    "GET:https://admin.example.com/users/u-ccc": {
+      "template_url": "https://admin.example.com/users/u-ccc",
+      "n_tasks_sharing": 1,
+      "tokens": 20
+    },
+    "GET:https://admin.example.com/users/u-ddd": {
+      "template_url": "https://admin.example.com/users/u-ddd",
+      "n_tasks_sharing": 1,
+      "tokens": 20
+    },
+    "GET:https://admin.example.com/users/u-eee": {
+      "template_url": "https://admin.example.com/users/u-eee",
+      "n_tasks_sharing": 1,
+      "tokens": 20
+    },
+    "GET:https://admin.example.com/users": {
+      "template_url": "https://admin.example.com/users",
+      "n_tasks_sharing": 1,
+      "tokens": 17
+    },
+    "POST:https://admin.example.com/users": {
+      "template_url": "https://admin.example.com/users",
+      "n_tasks_sharing": 1,
+      "tokens": 35
+    },
+    "GET:https://pm.example.com/orgs/${item_0}/project${item_1}00": {
+      "template_url": "https://pm.example.com/orgs/${item_0}/project${item_1}00",
+      "n_tasks_sharing": 2,
+      "tokens": 30
+    },
+    "GET:https://pm.example.com/orgs/${item_0}/projects": {
+      "template_url": "https://pm.example.com/orgs/${item_0}/projects",
+      "n_tasks_sharing": 1,
+      "tokens": 24
+    },
+    "POST:https://pm.example.com/orgs/${item_0}/project${item_1}00/tasks": {
+      "template_url": "https://pm.example.com/orgs/${item_0}/project${item_1}00/tasks",
+      "n_tasks_sharing": 1,
+      "tokens": 42
+    },
+    "GET:https://blog.example.com/search?q=${q_q_0}&limit=${q_limit_1}": {
+      "template_url": "https://blog.example.com/search?q=${q_q_0}&limit=${q_limit_1}",
+      "n_tasks_sharing": 1,
+      "tokens": 31
+    },
+    "GET:https://shop.example.com/search?q=${q_q_0}&min_price=${q_min_price_1}&max_price=${q_max_price_2}": {
+      "template_url": "https://shop.example.com/search?q=${q_q_0}&min_price=${q_min_price_1}&max_price=${q_max_price_2}",
+      "n_tasks_sharing": 1,
+      "tokens": 42
+    },
+    "GET:https://admin.example.com/search?q=${q_q_0}&role=${q_role_1}": {
+      "template_url": "https://admin.example.com/search?q=${q_q_0}&role=${q_role_1}",
+      "n_tasks_sharing": 1,
+      "tokens": 31
+    },
+    "POST:https://blog.example.com/auth/login": {
+      "template_url": "https://blog.example.com/auth/login",
+      "n_tasks_sharing": 1,
+      "tokens": 34
+    },
+    "POST:https://shop.example.com/auth/login": {
+      "template_url": "https://shop.example.com/auth/login",
+      "n_tasks_sharing": 1,
+      "tokens": 34
+    },
+    "GET:https://blog.example.com/auth/me": {
+      "template_url": "https://blog.example.com/auth/me",
+      "n_tasks_sharing": 1,
+      "tokens": 18
+    },
+    "GET:https://shop.example.com/auth/me": {
+      "template_url": "https://shop.example.com/auth/me",
+      "n_tasks_sharing": 1,
+      "tokens": 18
+    }
+  },
+  "sharing_distribution": {
+    "5": 1,
+    "1": 22,
+    "3": 1,
+    "2": 1
+  },
+  "regression": {
+    "total": 3,
+    "passed": 3,
+    "failures": 0,
+    "errors": 0,
+    "failure_details": []
+  },
+  "decision_rule": {
+    "C1_param_count_less_than_literal": {
+      "pass": true,
+      "param_count": 25,
+      "literal_count": 32,
+      "reduction_pct": 21.88
+    },
+    "C2_dedup_ratio_less_than_1": {
+      "pass": true,
+      "ratio": 0.8584
+    },
+    "C3_net_savings_positive": {
+      "pass": true,
+      "net_savings": 112
+    },
+    "C4_positive_control_sharing": {
+      "pass": true,
+      "shared_pattern_count": 1,
+      "expected": 1
+    },
+    "C5_null_control_no_sharing": {
+      "pass": true,
+      "unique_patterns": 3
+    },
+    "C7_kernel_regression": {
+      "pass": true,
+      "passed": 3,
+      "total": 3
+    },
+    "ALL_pass": true,
+    "verdict": "SURVIVES_CURRENT_TEST"
+  }
+}
