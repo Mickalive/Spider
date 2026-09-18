@@ -8,7 +8,7 @@
   "next_question": "Should the product lane (A) configure LLM API access (OPENAI_API_KEY or equivalent) and retry the frozen COLD baseline measurement per spec.json, (B) close token-based inheritance economics entirely given that (i) COLD is analytically 8x cheaper than registry conditions, (ii) the 5.42% margin is thin and based on estimated completion tokens, and (iii) browser/verification costs may dominate token savings, or (C) pivot to measuring browser/verification costs or testing with the real SPIDER registry/task corpus?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-18T20:08:29.462089+00:00",
+  "updated_at": "2026-09-18T22:32:45.055487+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "532076ad384a46e62297df286098ef67bf4e14e28fcb5bcfd280ef16961d13be",
   "same_failure_count": 1,
