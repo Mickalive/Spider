@@ -8,7 +8,7 @@
   "next_question": "Can session_invalidation behavioral variance be designed to preserve TP >= 0.85 (all session_invalidation samples correctly detected as drift) while achieving within-condition std > 0, breaking the TP/variance trade-off identified in this experiment?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-17T22:07:09.426963+00:00",
+  "updated_at": "2026-09-18T00:18:26.743447+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "cef7179d7126b4414b11ef418ccfb73108c779f29085c69692ba6bc562aac73e",
   "same_failure_count": 0,
