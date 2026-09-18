@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35290611436",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status. Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: 0/5 TodoMVC hash-SPA variants achieve conditional PMI at K=3 > 0.05 bits (all exactly 0.0, Bonferroni p=1.0). The parent's 0.188-0.209 bit unconditional PMI is entirely explained by Markov predictability (deterministic (url_before, action) -> url_after). Action-history prediction accuracy at K=3 is 1.0 on 4/5 variants, confirming (url_before, H_K=3) fully determines url_after, making I(url_after; action | url_before, H_K=3) = 0 by mathematical identity. Falsification is bounded to TodoMVC hash-SPAs (3-4 states, deterministic FSM, hash routing, action_primitive {form_submit, button_click, js_navigate}). NOT falsified: production SPAs with >4 states, stochastic transitions, history-based routing, or richer state representations (DOM, accessibility tree, visual layout). Claim ceiling: URL-level PMI on these minimal deterministic SPAs demonstrates state-conditioned Markov predictability only, no beyond-memory component."
+    }
+  ],
+  "product_action": "No product action. URL-level PMI on minimal deterministic TodoMVC hash-SPAs provides no beyond-Markov predictive value. SPIDER should not rely on URL-level PMI alone for SPA state tracking on these testbeds; richer representations or explicit FSM modeling may be needed.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does beyond-Markov URL-level PMI structure exist on production SPAs (>10 unique URL states, stochastic transitions, history-based routing) where H_K=3 does NOT fully determine the next URL state — thereby testing whether the TodoMVC falsification is a testbed-ceiling artifact or evidence against C-WEB-DYNAMICS at the URL level?",
+  "reason": "The frozen decision rule triggers FALSIFIED-IN-SETTING on condition (1): fewer than 3/5 variants achieve conditional PMI at K=3 > 0.05 bits. Result is 0/5 variants at exactly 0.0 bits. Audit PASS confirms all recomputed metrics match producer. The falsification is clean and mathematically forced by deterministic TodoMVC FSM structure: with 3-4 states and 3 actions, K=3 history uniquely identifies current state, making the current action redundant (prediction accuracy 100% on 4/5). The positive control passes strongly (PMI=1.496 bits, p=0.001) validating the pipeline detects structure when history does NOT fully determine next state. The K=0 unconditional PMI reproduces parent signal exactly (0.187-0.204 bits, 5/5 p=0.001), confirming data reuse integrity. This resolves the dominant unknown from EXP-PHYSICS-35262258744: URL-level PMI on TodoMVC is entirely Markov. The broader C-WEB-DYNAMICS claim remains HYPOTHESIS — TodoMVC is too minimal to test beyond-Markov dynamics because its small deterministic FSM ceiling makes the history test trivially pass/fail.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35290611436/result.json:metrics.conditional_pmi_k3_by_variant (0.0 bits, p=1.0, accuracy 1.0/0.954 on all 5 variants), unconditional_pmi_k0_by_variant (0.187-0.204 bits, p=0.001, 5/5), conditional_pmi_k1_by_variant (0.074-0.081, p=0.11-0.33), controls (positive_control PMI=1.496, null controls pass)",
+    "research/experiments/EXP-PHYSICS-35290611436/audit.json:status PASS, producer_claim_supported true, claim_ceiling FALSIFIED-IN-SETTING bounded to TodoMVC, V1_k3_zero_deterministically_forced, V2_k0_reproduction_exact, V6_positive_control_validates_history_conditioning, V9_physics_identifiability_achieved, V10_scope_bounded_no_overgeneralization",
+    "research/experiments/EXP-PHYSICS-35290611436/raw_analysis_results.json (sha256 f914b33484ae3ecd95bc7e06d82752cad35c4f88e7804d4207be34de0260b839): variant_results.*.k_results.0/1/3, positive_control.pmi_k3 1.4958",
+    "research/experiments/EXP-PHYSICS-35290611436/spec.json:decision_rule condition (1) fewer than 3/5 variants K=3 PMI > 0.05 => FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35262258744/handoff.json:parent signal 0.188-0.209 bits, audit V7 identifiability gap requiring history test, carry_forward established/rejected/unknown/do_not_assume"
+  ]
+}
