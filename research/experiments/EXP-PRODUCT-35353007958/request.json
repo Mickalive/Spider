@@ -1,0 +1,20 @@
+{
+  "base_sha": "80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T13:55:00.615797+00:00",
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "inherited_last_verdict": "REVISE \u2014 frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C1 (100% success for both conditions) is stipulated as an analytical assumption, not measured: no LLM selection or resolution was executed, no binding failures observed (audit V1_C1_SUCCESS_UNMEASURED). The arithmetic portion of the frozen gate passes: C2 param selection tokens 16523 <= literal 19691 (16.09% reduction), C3 param total 18624 <= literal 19691 (5.42% net savings, 1067 tokens), C4 positive control 5 blog-read-post tasks collapse to 1 pattern with correct resolution, C5 null control ratio 1.0185 (1.85% overhead, well within 50% threshold). All arithmetic independently recomputed and verified exactly. However, C1 being an assumption rather than an observation is a measurement validity gap that prevents the frozen gate from passing. Additionally, completion tokens are hard-coded estimates (2 selection, 15 resolution, 20 cold) not measured from real model outputs \u2014 with 5.42% margin, modest variation in actual LLM response length could reverse C3 (audit V2_COMPLETION_TOKENS_ESTIMATED). Browser/verification costs omitted per frozen spec \u00a75.1 but claim ceiling in report.md references 'end-to-end workflow savings' (audit V3_BROWSER_VERIFICATION). COLD baseline at 77 tokens/task is 8x cheaper than either registry condition but success rate unmeasured (audit V4_COLD_INVERSION). The producer SUPPORTS outcome is not justified as written because C1 was not measured and C3 margin is narrow under estimated completion tokens. The 5.42% analytical savings on this synthetic corpus is arithmetic-verified and informative but does not establish end-to-end workflow cost reduction.",
+  "inherited_next_question": "Should the product lane (A) measure end-to-end workflow cost with real LLM selection and resolution calls on the existing synthetic corpus to resolve C1_success and completion_token gaps, (B) retry the deduplication measurement with the actual SPIDER registry/task corpus and kernel distill_parameterized() induction, or (C) close token-based inheritance economics entirely and pivot product lane to alternative mechanisms?",
+  "lane": "product",
+  "origin_github_run_id": "35353007958",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35330741529",
+    "path": "research/experiments/EXP-PRODUCT-35330741529/handoff.json",
+    "sha256": "3876ceb91a77e10e2be1468b9d621f77e1a4eac941de86004794d75b6325015d"
+  },
+  "reason": "pulse",
+  "request_hash": "8a7564a6e7b1c6de52bcd502dd6809bcc0cb682dfc96c5330f679ae0afd3f6d0",
+  "request_id": "5a7970d88b2afa73ad7cba45",
+  "schema_version": 1
+}
