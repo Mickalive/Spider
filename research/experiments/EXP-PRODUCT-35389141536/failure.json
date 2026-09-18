@@ -1,0 +1,11 @@
+{
+  "stage": "execute",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid result outcome: SURVIVES_CURRENT_TEST",
+  "retryable": false,
+  "fingerprint": "0e15ffebbefbf27c3a9071b8",
+  "recorded_at": "2026-09-18T20:08:29.302644+00:00",
+  "github_run_id": "35389141536",
+  "github_run_attempt": "1",
+  "control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+}
