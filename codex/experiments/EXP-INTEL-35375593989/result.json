@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35375593989",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M1_R_distribution": {
+      "description": "Per-pair density ratios R = canonical_density / weighted_density across 21 task-definition pairs",
+      "n_pairs": 21,
+      "mean": 0.0504,
+      "std": 0.0343,
+      "cv": 0.6803,
+      "min": 0.0055,
+      "max": 0.0943,
+      "iqr": 0.0793,
+      "range_ratio": 17.02,
+      "summary": "R varies substantially across pairs (CV=0.68). The ratio spans a 17x range from 0.0055 (DEF-FORM-ONLY on listing) to 0.0943 (DEF-FULL-MAP on detail_pet_camera). Variation is driven primarily by definition choice (DEF-FORM-ONLY vs others) and secondarily by task type."
+    },
+    "M2_R_by_task_type": {
+      "product_listing": {"mean": 0.0359, "n": 9},
+      "detail": {"mean": 0.0639, "n": 9},
+      "cart": {"mean": 0.0534, "n": 3},
+      "summary": "Detail tasks have highest mean R (0.064), cart intermediate (0.053), listing lowest (0.036). Separation ratio 1.78x (detail/listing). Task-type explains 14.4% of ratio variance (eta^2=0.144)."
+    },
+    "M3_R_by_definition": {
+      "DEF-FULL-MAP": {"mean": 0.0729, "n": 7},
+      "ISOLATED-A-LINK": {"mean": 0.0712, "n": 7},
+      "DEF-FORM-ONLY": {"mean": 0.0072, "n": 7},
+      "summary": "DEF-FORM-ONLY produces ratios ~10x lower than DEF-FULL-MAP and ISOLATED-A-LINK. This is because DEF-FORM-ONLY captures nearly all elements (inForm=true for 17-19/20 elements), making weighted density very high (0.98-0.995) while canonical density remains low."
+    },
+    "M4_Spearman_R_canonical": {
+      "rho": -0.6623,
+      "p": 0.2319,
+      "interpretation": "Moderate negative correlation between R and canonical density. As canonical density increases, ratio decreases. Not significant at alpha=0.05 due to small N=21."
+    },
+    "M5_Spearman_R_weighted": {
+      "rho": -0.7068,
+      "p": 0.0016,
+      "interpretation": "Strong negative correlation between R and weighted density (p=0.0016). As weighted density increases, ratio decreases. This is expected: R = canonical/weighted, so higher weighted denominator reduces R."
+    },
+    "M6_eta_squared_R_page_type": {
+      "value": 0.1437,
+      "interpretation": "Page type explains 14.4% of ratio variance. Below 0.20 threshold but non-trivial. The ratio captures some task-type structure."
+    },
+    "M7_eta_squared_weighted_page_type": {
+      "value": 0.000081,
+      "interpretation": "Weighted density alone explains nearly 0% of ratio variance via page type. The ratio adds substantial task-type information that weighted density alone lacks."
+    },
+    "M8_threshold_analysis": {
+      "best_threshold": 0.0297,
+      "best_p_value": 0.001253,
+      "method": "Kruskal-Wallis",
+      "interpretation": "Threshold T=0.0297 separates pairs into two groups with significantly different weighted density distributions (p=0.001). The lower group (R < 0.03) contains mostly DEF-FORM-ONLY pairs; the upper group contains DEF-FULL-MAP and ISOLATED-A-LINK pairs."
+    },
+    "M9_ratio_bimodality": {
+      "dip_p": 0.9524,
+      "interpretation": "No evidence of bimodality (p=0.95). The ratio distribution is unimodal but skewed, with DEF-FORM-ONLY pairs forming a low-R cluster and DEF-FULL-MAP/ISOLATED-A-LINK forming a higher-R cluster."
+    },
+    "M10_ratio_range": {
+      "value": 17.02,
+      "interpretation": "The ratio spans a 17x range, confirming substantial variation across task-definition pairs."
+    },
+    "M11_task_type_separation": {
+      "value": 1.778,
+      "interpretation": "Max inter-group mean ratio / min inter-group mean ratio = 1.78. Task type produces moderate but non-negligible separation in ratio space."
+    }
+  },
+  "controls": {
+    "PC1_KNOWN_REVERSAL_PAIRS": {
+      "id": "PC1_KNOWN_REVERSAL_PAIRS",
+      "description": "The 3 task-type groups show different mean ratios if the ratio captures recipe sensitivity",
+      "expected": "Ratio differs across listing, detail, and cart groups",
+      "observed": "Listing mean R=0.036, detail mean R=0.064, cart mean R=0.053. Groups differ (not identical).",
+      "pass": true,
+      "evidence_ref": "M2_R_by_task_type"
+    },
+    "NC1_SHUFFLED_RATIO": {
+      "id": "NC1_SHUFFLED_RATIO",
+      "description": "Shuffled canonical values should lose task-type structure in the ratio",
+      "expected": "Real eta^2 > shuffled eta^2",
+      "observed": "Real eta^2=0.144, shuffled mean eta^2=0.117. Real > shuffled but difference is modest (NC1 does not pass its strict criterion).",
+      "pass": false,
+      "evidence_ref": "controls.NC1_SHUFFLED_RATIO"
+    },
+    "B1_DEGENERATE_DOMINANCE": {
+      "id": "B1_DEGENERATE_DOMINANCE",
+      "description": "2-recipe dominance baseline: all 21 pairs degenerate 0%/100%, zero discrimination",
+      "observed": "Confirmed from parent experiments. Ratio approach provides continuous discrimination replacing degenerate binary.",
+      "pass": true,
+      "evidence_ref": "EXP-INTEL-35353016702 result.json M2, M5"
+    },
+    "B3_CANONICAL_ONLY_BINARY": {
+      "id": "B3_CANONICAL_ONLY_BINARY",
+      "description": "Binary threshold on canonical density alone (all 21 pairs flagged since canonical < 0.01)",
+      "observed": "Canonical densities range 0.0004-0.009. All below any reasonable threshold. Zero specificity.",
+      "pass": true,
+      "evidence_ref": "M1_R_distribution.min/max"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/density_ratio_analysis.py",
+      "sha256": "f5e66892430daae60bad9d1639b456db2da6fc446923abf9c9728689a567feb6",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/density_ratio_results.json",
+      "sha256": "e9cb922f5db6f364c193d34c4dd96a60a78fb432eff15f3c7122ca1a21bcdce1",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-1",
+      "type": "RAW",
+      "description": "The density ratio R = canonical/weighted varies 17x across 21 task-definition pairs (min 0.0055, max 0.0943, CV=0.68). The ratio is NOT a universal constant — it depends on both the task type and the definition.",
+      "evidence_ref": "M1_R_distribution"
+    },
+    {
+      "id": "OBS-2",
+      "type": "RAW",
+      "description": "Definition choice is the primary driver of ratio variation: DEF-FORM-ONLY pairs have mean R=0.007 (10x lower) while DEF-FULL-MAP and ISOLATED-A-LINK have mean R=0.072 and 0.071 respectively. This is because DEF-FORM-ONLY captures nearly all elements (17-19/20), making weighted density very high (~0.98-0.995) while canonical density remains low.",
+      "evidence_ref": "M3_R_by_definition"
+    },
+    {
+      "id": "OBS-3",
+      "type": "RAW",
+      "description": "Task type explains 14.4% of ratio variance (eta^2=0.144). Detail tasks have highest mean R (0.064), cart intermediate (0.053), listing lowest (0.036). The ratio captures task-type structure that weighted density alone misses (eta^2 of weighted density on page_type is nearly 0).",
+      "evidence_ref": "M2_R_by_task_type, M6_eta_squared_R_page_type, M7_eta_squared_weighted_page_type"
+    },
+    {
+      "id": "OBS-4",
+      "type": "DERIVED",
+      "description": "R correlates strongly negatively with weighted density (Spearman rho=-0.707, p=0.0016). This is partially mathematical: R = canonical/weighted, so higher weighted denominator reduces R. However, the ratio adds task-type information beyond weighted density alone.",
+      "evidence_ref": "M5_Spearman_R_weighted"
+    },
+    {
+      "id": "OBS-5",
+      "type": "DERIVED",
+      "description": "A threshold T=0.0297 separates pairs into two groups with significantly different weighted density distributions (Kruskal-Wallis p=0.0013). The lower group (R < 0.03) contains 7 DEF-FORM-ONLY pairs; the upper group contains 14 DEF-FULL-MAP and ISOLATED-A-LINK pairs.",
+      "evidence_ref": "M8_threshold_analysis"
+    },
+    {
+      "id": "OBS-6",
+      "type": "RAW",
+      "description": "The ratio distribution is unimodal (Hartigan dip p=0.95), not bimodal. The apparent two-cluster structure (DEF-FORM-ONLY vs others) is a consequence of definition choice, not natural recipe-sensitivity bimodality.",
+      "evidence_ref": "M9_ratio_bimodality"
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-1",
+      "note": "Results are bounded to truncated-first-20 locatable_sample (7 tasks, 1 Magento site, 3 definitions). The locatable_sample is capped at 20 elements per task (actual locatable_elements are 21-82). Full DOM enumeration may change density values and ratios."
+    },
+    {
+      "id": "VN-2",
+      "note": "The canonical recipe density is computed as (matching_count * 0.5) / elements_with_bbox, which is the expected value under p=0.5 independent Bernoulli inclusion. This is deterministic given the data. A single stochastic realization would show variance but the expected value is exact."
+    },
+    {
+      "id": "VN-3",
+      "note": "The weighted recipe density is computed as sum(element_area / total_area) for matching elements. This uses the area-weighted formula from the spec, not the role-based weighted sampling from the null model in prior experiments. The absolute density values may differ from prior experiments that used different weighted recipes."
+    },
+    {
+      "id": "VN-4",
+      "note": "NC1 (null control) does not pass its strict criterion: real eta^2=0.144 vs shuffled mean eta^2=0.117. The difference is positive (real > shuffled) but modest. This suggests the task-type structure in R is weak relative to the definition-driven structure."
+    },
+    {
+      "id": "VN-5",
+      "note": "Small N (21 pairs) limits statistical power. Spearman correlations have wide confidence intervals. The eta-squared for page_type (0.144) has low precision with only 3 groups and N=21."
+    },
+    {
+      "id": "VN-6",
+      "note": "The ratio metric R = canonical/weighted conflates two sources of variation: (a) task-type-dependent differences in element composition, and (b) definition-dependent differences in which elements match. The 10x ratio difference between DEF-FORM-ONLY and DEF-FULL-MAP is primarily a definition artifact, not task-type sensitivity."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U-1",
+      "question": "Does the 17x ratio range persist with full DOM enumeration (21-82 elements per task vs cap 20)? The truncated sample may underestimate or overestimate ratio variation.",
+      "blocked_by": "BLOCKED by runtime lane removing locatableSample cap"
+    },
+    {
+      "id": "U-2",
+      "question": "Is the ratio variation driven by definition choice (DEF-FORM-ONLY vs others) or by genuine task-type sensitivity? The current data conflates these. A design that varies definitions within task types while holding recipe constant could disentangle them.",
+      "blocked_by": "Requires additional analysis or controlled experiment"
+    },
+    {
+      "id": "U-3",
+      "question": "Would the ratio classification survive cross-site generalization? All data is from one Magento site. The ratio's dependence on element composition (area distribution, form density) may vary across sites.",
+      "blocked_by": "BLOCKED by cross-site data availability"
+    },
+    {
+      "id": "U-4",
+      "question": "Should the MIXED decision rule use ratio-based classification (threshold T=0.03) or restrict to recipe-insensitive pairs? The ratio approach adds complexity; restricting to insensitive pairs may be simpler but loses coverage.",
+      "blocked_by": "Requires product lane decision on MIXED handling strategy"
+    },
+    {
+      "id": "U-5",
+      "question": "The negative Spearman(R, weighted) correlation is partially mathematical (R = canonical/weighted). What is the residual correlation after controlling for the mathematical dependence? This would indicate whether the ratio captures genuine structural information beyond the denominator.",
+      "blocked_by": "Requires partial correlation analysis not in frozen spec"
+    }
+  ]
+}

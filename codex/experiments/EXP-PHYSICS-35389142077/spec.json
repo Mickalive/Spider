@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can a revised null control (within-stratum conditional permutation shuffling url_after within each (url_before, H_K) stratum) center the null at zero for hash-routed SPAs, resolving the inherited C4 failure from EXP-PHYSICS-35375596894, and does the resulting validated pipeline detect beyond-Markov URL-level PMI on at least one production SPA with >=5000 non-leakage transitions via Playwright browser automation?",
+  "hypothesis": "H1 (null centering): Within-stratum conditional permutation (shuffle url_after within each (url_before, history) stratum, 1000 permutations) yields null mean PMI within [-0.05, +0.05] bits of zero at K=2 on the 12-state SPA simulation with N=5000, resolving the inherited C4 failure (parent null_mean=0.552). H2 (production detection): At least 1 of 3 candidate production SPAs achieves conditional PMI > 0.05 bits at K=2 with N>=5000 non-leakage transitions and valid null control (null_mean within [-0.1, +0.1] of zero).",
+  "falsifier": "Primary: Within-stratum conditional permutation null_mean at K=2 on 12-state SPA is outside [-0.1, +0.1] bits of zero (methodology failure — the revised permutation does not center null). Secondary: If null is centered (|mean| < 0.1), then production SPA K2 PMI <= 0.05 bits on all 3 tested sites (beyond-Markov signal absent or below detection on production SPAs with this representation).",
+  "baselines": [
+    "Parent result: trajectory-level block permutation null_mean=0.552 at K2 on 12-state SPA N=5000 (EXP-PHYSICS-35375596894) — the inherited C4 failure",
+    "Parent result: state-history K2 PMI=0.933 bits (p=0.001) on 12-state SPA N=5000 — the signal to be re-measured with valid null",
+    "Parent result: action-history K3 PMI=1.221 bits at N=5000 — controls for conditioning-strategy vs sample-size confound",
+    "Positive control: 8-state synthetic deterministic SPA N=5000, K3 PMI >= 1.0 bits",
+    "Unconditional K0 PMI reproduction (should be ~1.42 bits)",
+    "K1 state-history PMI reproduction (should be ~1.53 bits)"
+  ],
+  "positive_control": "8-state synthetic deterministic SPA with known beyond-Markov structure (same as parent). K=3 PMI must be >= 1.0 bits with permutation p < 0.001. Validates PMI pipeline at N=5000.",
+  "null_control": "Within-stratum conditional permutation: for each (url_before, history) stratum, shuffle url_after values among records within that stratum while keeping (url_before, history, action) fixed. This preserves the marginal distribution of url_after within each stratum (unlike block permutation which creates artificial state-history correlations) while breaking the action-PMI coupling. Expected mean PMI under null = 0 bits (verified analytically: within-stratum shuffling makes action and url_after independent while preserving P(url_after|stratum), so E[PMI] = 0). 1000 permutations, seed=42.",
+  "measurement_validity": [
+    "N=5000 transitions from 12-state SPA simulation (in-memory, same as parent — validated testbed)",
+    "Production SPA data via Playwright browser automation with >=5000 non-leakage transitions per site (if Chromium available)",
+    "State-history H_K built from URL states (prev1, prev2, ...) not action labels",
+    "PMI pipeline with alpha=0 smoothing, MIN_STRATUM_SIZE=5 (same as parent)",
+    "Within-stratum conditional permutation: 1000 perms, seed=42, Bonferroni 0.0167 for 3 tests",
+    "Non-leakage filter: exclude transitions where action.target_href == state_after.url (same definition as parent)",
+    "Two-phase design: Phase 1 (simulation) must pass before Phase 2 (production) begins"
+  ],
+  "decision_rule": "Phase 1 (simulation null centering): SURVIVES if |within_stratum_null_mean_K2| < 0.1 bits AND positive control passes (K3 PMI >= 1.0 bits, p < 0.001) AND K2 PMI > 0.05 bits. Phase 2 (production): SURVIVES_CURRENT_TEST if at least 1/3 production SPAs achieves K2 PMI > 0.05 bits with valid null (|null_mean| < 0.1) AND N >= 5000 NL transitions. FALSIFIED-IN-SETTING if Phase 1 null not centered (|mean| >= 0.1). MEASUREMENT_INVALID if controls fail or production data insufficient (< 5000 NL on all sites).",
+  "product_consequence_positive": "C-WEB-DYNAMICS advances from HYPOTHESIS toward EXPERIMENTAL. Within-stratum conditional permutation validated as measurement-valid null control for hash-routed SPAs. Production SPA beyond-Markov signal detected, generalizing beyond synthetic testbed.",
+  "product_consequence_negative": "If Phase 1 fails (null not centered): null control methodology for hash-routed SPAs requires fundamental rethink (model-based null, parametric bootstrap, or alternative falsification framework). If Phase 1 passes but Phase 2 fails: C-WEB-DYNAMICS claim ceiling bounded to synthetic SPAs; production SPA detection requires richer state representations or different detection methods.",
+  "estimated_cost": "Moderate: Phase 1 is single local computation (~5 min). Phase 2 requires Playwright browser automation on 3 production SPAs (~30 min each if available, may fail due to anti-bot). Total estimated: 1-2 hours if Playwright available, 5 min if not.",
+  "expected_information_gain": "Very high: Phase 1 resolves the single most actionable inherited methodology defect (null control bias). If null centers at zero, the entire PMI pipeline becomes measurement-valid for hash-routed SPAs, unblocking all subsequent Physics claims. If it doesn't, the methodology requires fundamental redesign. Phase 2 either detects production SPA signal (major breakthrough for C-WEB-DYNAMICS) or provides strong evidence that URL-level PMI is insufficient for production SPAs."
+}
