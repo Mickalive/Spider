@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35375591046",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID — infrastructure failure: no LLM API keys available in execution environment. 0/32 tasks executed. Frozen decision_rule MEASUREMENT_INVALID clause triggers (32/32 tasks failed, threshold >=5). This is the second consecutive PRODUCT lane experiment with identical infrastructure cause (parent EXP-PRODUCT-35353007958 also MEASUREMENT_INVALID, 0/32). Per packet contract section 9, infrastructure failure is NOT a scientific negative. No evidence was produced or falsified. No new claim-relevant measurement accumulated. The parent analytical ceiling (5.42% token savings on synthetic 32-task corpus, EXP-PRODUCT-35330741529 audit REVISE) remains the most recent valid measurement and is unchanged by this experiment. Producer correctly classified as MEASUREMENT_INVALID with outcome NOT_APPLICABLE; audit independently confirmed (PASS, producer_claim_supported=false, claim_ceiling 'no new evidence').",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No change. This experiment accumulated zero evidence. No LLM API calls were executed (0/32 tasks, infrastructure failure). The parent analytical ceiling (5.42% token savings on synthetic 32-task corpus, EXP-PRODUCT-35330741529, audit REVISE) remains the most recent valid measurement, with frozen gate failed (C1 assumed not measured, completion tokens estimated, browser/verification omitted). COLD baseline at 77 tokens/task (analytical) is 8x cheaper than registry conditions but success rate entirely unmeasured. The three-way product lane decision (A: retry with API keys, B: test with real SPIDER corpus, C: close token-based economics) remains unresolved after two consecutive MEASUREMENT_INVALID experiments. C-PRODUCT-ECON does not advance because no falsifying or supporting evidence was produced."
+    }
+  ],
+  "product_action": "No product promotion. No code changes to src/spider/kernel.py or any registry-authorized code root. C-PRODUCT-ECON stays HYPOTHESIS. C-PARAM-INHERIT stays EXPERIMENTAL (unchanged). The frozen design (spec.json, prereg.md) is valid but unexecutable without LLM API credentials.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Should the product lane (A) configure LLM API access (OPENAI_API_KEY or equivalent) and retry the frozen COLD baseline measurement per spec.json, (B) close token-based inheritance economics entirely given that (i) COLD is analytically 8x cheaper than registry conditions, (ii) the 5.42% margin is thin and based on estimated completion tokens, and (iii) browser/verification costs may dominate token savings, or (C) pivot to measuring browser/verification costs or testing with the real SPIDER registry/task corpus?",
+  "reason": "The frozen decision_rule specifies MEASUREMENT_INVALID if API failures prevent completion of >=5 tasks. Zero tasks were executed (32/32 failures), exceeding the threshold. This is an infrastructure blocker, not a scientific negative. The parent's analytical ceiling (5.42% workflow savings on synthetic 32-task corpus) is arithmetic-verified but has known validity gaps: C1 success rate assumed not measured, completion tokens estimated (2/15/20 per task), browser/verification costs omitted, COLD viability unmeasured. The COLD baseline at 77 tokens/task (analytical tiktoken counting) is 8x cheaper than either registry condition, but this metric measures prompt tokens only — real LLM execution could reveal different completion token counts and potentially different success rates. The 5.42% margin (1067 tokens) is thin: ~1 token/task estimate error across 32 tasks could reverse C3. Two consecutive PRODUCT lane experiments have failed with identical infrastructure cause. The three-way decision from the parent handoff (A: retry with API keys, B: real corpus, C: close token-based economics) remains the required product lane decision. The most productive next step is a directorial resolution of this decision, not another attempt at the same frozen design without API access.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35375591046/request.json — experiment_id, lane product, parent_handoff EXP-PRODUCT-35353007958, inherited_last_verdict MEASUREMENT_INVALID, inherited_next_question three-way decision",
+    "research/experiments/EXP-PRODUCT-35375591046/spec.json — claim_ids [C-PRODUCT-ECON], question COLD viability, hypothesis >=90% success <=100 tokens/task, falsifier <90% OR >150 tokens/task, baselines B-COLD/LITERAL/PARAMETERIZED-EXECUTED, positive_control POS-CONTROL-COLD-SIMPLE, decision_rule C1-C3, measurement_validity 7 items",
+    "research/experiments/EXP-PRODUCT-35375591046/prereg.md — frozen measurement protocol requiring 32 real LLM API calls, Scope Limitations 6 exclusions",
+    "research/experiments/EXP-PRODUCT-35375591046/freeze.json — frozen_at 2026-09-18T17:41:20, hashes verified",
+    "research/experiments/EXP-PRODUCT-35375591046/result.json — status MEASUREMENT_INVALID, outcome NOT_APPLICABLE, metrics {}, controls 8 entries all pass null, validity_notes 7 entries, unresolved 10 entries",
+    "research/experiments/EXP-PRODUCT-35375591046/report.md — Status MEASUREMENT_INVALID 0/32 infrastructure failure, Parent Analytical Ceiling table",
+    "research/experiments/EXP-PRODUCT-35375591046/provenance.json — github_run_id 35375591046, environment api_keys_available false, local_llm_server false, methodology NOT_EXECUTED, infrastructure_failure missing_api_credentials",
+    "research/experiments/EXP-PRODUCT-35375591046/audit.json — status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling no new evidence, V1-V8 validity findings, baseline_findings all NOT_MEASURED_INFRASTRUCTURE, recomputed_metrics {}",
+    "research/experiments/EXP-PRODUCT-35353007958/handoff.json — parent handoff, carry_forward established/rejected/unknown/do_not_assume, three-way decision A/B/C",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json — parent analytical ceiling: COLD 2475 tokens (77.34/task), literal 19691 (615.34/task), param 18624 (582.0/task), savings 1067 (5.42%), selection_savings 3168 (16.09%), resolution_overhead 2101 (10.67%), 32->25 mechanisms (21.9% reduction), null_ratio 1.0185",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json — REVISE, producer_claim_supported false, claim_ceiling analytical synthetic only, V1_C1_SUCCESS_UNMEASURED, V2_COMPLETION_TOKENS_ESTIMATED, V3_BROWSER_OMITTED, V4_COLD_INVERSION",
+    "codex/claim_state.json — C-PRODUCT-ECON current status HYPOTHESIS (latest EXP-PRODUCT-35353007958), C-PARAM-INHERIT EXPERIMENTAL",
+    "research/claims/registry.json — C-PRODUCT-ECON HYPOTHESIS, next_gate end-to-end amortized economics",
+    "research/lanes/registry.json — lane product mission product economics priority_claims includes C-PRODUCT-ECON"
+  ]
+}

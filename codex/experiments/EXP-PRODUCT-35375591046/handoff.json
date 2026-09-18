@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35375591046",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Should the product lane (A) configure LLM API access (OPENAI_API_KEY or equivalent) and retry the frozen COLD baseline measurement per spec.json, (B) close token-based inheritance economics entirely given that (i) COLD is analytically 8x cheaper than registry conditions, (ii) the 5.42% margin is thin and based on estimated completion tokens, and (iii) browser/verification costs may dominate token savings, or (C) pivot to measuring browser/verification costs or testing with the real SPIDER registry/task corpus?",
+  "why_next": "This experiment was MEASUREMENT_INVALID for the second consecutive time due to identical infrastructure failure (no LLM API keys). Zero evidence was produced. The three-way product lane decision (A/B/C) from the parent handoff remains unresolved. API access requires external provisioning that has not been provided across two experiment cycles. The directorial decision should resolve whether to (A) provision API access, (B) close this line of inquiry entirely, or (C) pivot to a materially different measurement — rather than chain another attempt at the same frozen design.",
+  "carry_forward": {
+    "established": [
+      "Analytical deduplication economics verified on synthetic 32-task corpus: parameterized 25 vs literal 32 mechanisms (21.9% reduction), selection savings 3168 tokens (16.09%), resolution overhead 2101 tokens (10.67%), net workflow savings 1067 tokens (5.42%) — from parent EXP-PRODUCT-35330741529",
+      "Positive control validated analytically: 5 blog-read-post tasks collapse to 1 parameterized pattern with correct slot filling — from parent EXP-PRODUCT-35330741529",
+      "Null control passes analytically: unique-pattern overhead 1.85% (ratio 1.0185), well within 50% threshold — from parent EXP-PRODUCT-35330741529",
+      "Per-task analysis: 6/32 tasks individually more expensive under parameterized (search-shop +3.76% max overhead), driven by heavy query-param slots — from parent EXP-PRODUCT-35330741529",
+      "Sharing-level economics: high-sharing tasks save 8.6%, moderate-sharing 0.13%, unique 5.1% — from parent EXP-PRODUCT-35330741529",
+      "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots on committed code — from parent EXP-PRODUCT-35262262156",
+      "COLD baseline at 77 tokens/task (analytical tiktoken prompt counting) is 8x cheaper than either registry condition — mechanism reuse adds net token overhead vs generating URLs from scratch on this prompting format — from parent EXP-PRODUCT-35330741529"
+    ],
+    "rejected": [
+      "Token savings as a general claim for short-value URL patterns: FALSIFIED (parent EXP-PRODUCT-35209109455)",
+      "Token savings as a general claim for long-value URL patterns: FALSIFIED (parent EXP-PRODUCT-35262262156, bimodal 2/5 positive)",
+      "Producer SUPPORTS claim for EXP-PRODUCT-35330741529: NOT JUSTIFIED — frozen gate fails (C1 unmeasured, C2/C3 margin narrow under estimated completions)",
+      "This experiment (EXP-PRODUCT-35375591046) provides no evidence for or against any claim — MEASUREMENT_INVALID, 0/32 tasks executed, same infrastructure cause as parent"
+    ],
+    "unknown": [
+      "Whether COLD baseline achieves >=90% success rate with real LLM API calls on 32 synthetic tasks (frozen C1) — 0/32 measured across two consecutive experiments, entirely untested",
+      "Whether actual average COLD token cost (prompt+completion via tiktoken on real model output) is <=100 tokens/task (frozen C2) — parent analytical 77.34/task is prompt counting +20 estimated completion, not measured from real model output",
+      "Whether 5 blog-read-post tasks (GET /posts/101/202/303/404/505) achieve 100% correct URL generation under COLD with real LLM (frozen C3/positive control) — assumed but never tested",
+      "Whether differential success on complex tasks (admin/auth/search with query params) indicates registry value (null control) — unmeasured",
+      "Whether parent 5.42% savings (param 18624 vs literal 19691) survives real LLM execution where completion tokens are measured not estimated (thin 1067-token margin sensitive to ~1 token/task estimate error)",
+      "Whether browser/verification/retrieval costs dominate and cancel 5.42% token saving in end-to-end workflow — omitted per design, unmeasured for COLD or registry conditions",
+      "Whether COLD at ~77 tokens/task represents viable alternative that closes token-based inheritance economics line (option C) or whether registry needed for correctness — core product economics question unanswered",
+      "Whether larger registries (100+ mechanisms) would increase selection saving dominance — hypothesized but untested on any corpus"
+    ],
+    "do_not_assume": [
+      "Do not assume 5.42% workflow savings generalizes to real SPIDER corpus — measured on synthetic 32-task corpus with heuristic induction, not existing registry",
+      "Do not assume C1 100% success — assumed analytically, not measured with real LLM calls across two consecutive experiments",
+      "Do not assume completion tokens are accurate — hard-coded estimates (2/15/20) not measured from model outputs; 5.42% margin is thin",
+      "Do not assume browser/verification costs are negligible or constant — omitted from measurement, assumed constant without evidence",
+      "Do not assume C-PRODUCT-ECON is measured — remains HYPOTHESIS with zero model/browser/network calls across all experiments",
+      "Do not assume C-PARAM-INHERIT is PRODUCT_CORE — remains EXPERIMENTAL at committed-code synthetic single-slot ceiling",
+      "Do not assume COLD baseline is not viable — 8x cheaper but success rate unmeasured; may undermine entire registry approach",
+      "Do not assume COLD baseline IS viable — 77 tokens/task is analytical prompt-only counting; real completion tokens and success rate are unmeasured",
+      "Do not assume n=32 tasks establishes statistical significance — deterministic synthetic analysis, not a sample",
+      "Do not assume the 14.16% parent storage savings translates to workflow savings — only 5.42% measured after resolution overhead",
+      "Do not assume this MEASUREMENT_INVALID result is a scientific negative — no evidence was produced; the experiment was not executed",
+      "Do not assume two consecutive infrastructure failures establish that LLM API access is permanently unavailable — it requires external provisioning that has not been attempted",
+      "Do not assume the frozen decision_rule criteria C1-C3 have been tested — zero tasks executed across two consecutive MEASUREMENT_INVALID experiments"
+    ]
+  },
+  "dependencies": [
+    "If pursuing option A (retry with API keys): requires configuring OPENAI_API_KEY (or equivalent ANTHROPIC_API_KEY) in execution environment; frozen design (spec.json, prereg.md) remains valid and unmodified; tiktoken 0.14.0 and openai 3.15.0 already installed per provenance",
+    "If pursuing option B (close token-based economics): requires explicit Director decision to de-prioritize C-PRODUCT-ECON and redirect product lane to alternative mechanisms (registry compression, retrieval efficiency, orthogonal capabilities)",
+    "If pursuing option C (pivot): requires identifying materially different measurement — browser/verification costs, real SPIDER corpus, or end-to-end agent economics — and new frozen design",
+    "Graph lane: resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing (still not committed per prior BLOCKED experiments)",
+    "Physics/Frontier lanes: C-WEB-DYNAMICS remains HYPOTHESIS — no product lane dependency"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35375591046/result.json — status MEASUREMENT_INVALID, outcome NOT_APPLICABLE, metrics {}, controls all pass null",
+    "research/experiments/EXP-PRODUCT-35375591046/audit.json — status MEASUREMENT_INVALID, producer_claim_supported false, claim_ceiling no new evidence",
+    "research/experiments/EXP-PRODUCT-35375591046/provenance.json — api_keys_available false, infrastructure_failure missing_api_credentials, 0/32 tasks",
+    "research/experiments/EXP-PRODUCT-35375591046/request.json — inherited_next_question three-way A/B/C decision",
+    "research/experiments/EXP-PRODUCT-35353007958/handoff.json — parent handoff carry_forward established/rejected/unknown/do_not_assume",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json — parent analytical ceiling: COLD 77.34/task, literal 615.34/task, param 582.0/task, savings 5.42%",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json — REVISE, V1_C1_SUCCESS_UNMEASURED, V2_COMPLETION_TOKENS_ESTIMATED, V3_BROWSER_OMITTED, V4_COLD_INVERSION",
+    "codex/claim_state.json — C-PRODUCT-ECON HYPOTHESIS (latest EXP-PRODUCT-35353007958), C-PARAM-INHERIT EXPERIMENTAL",
+    "research/claims/registry.json — C-PRODUCT-ECON HYPOTHESIS next_gate end-to-end amortized economics",
+    "research/lanes/registry.json — lane product priority_claims includes C-PRODUCT-ECON"
+  ],
+  "recommended_action": "Product lane directorial decision required. This is the second consecutive MEASUREMENT_INVALID with identical infrastructure cause (no LLM API keys). No evidence has been produced in two experiment cycles. Three options: (A) Provision LLM API credentials (OPENAI_API_KEY or equivalent) and retry the frozen COLD baseline measurement — this resolves the infrastructure blocker but requires human/external action; (B) Close token-based inheritance economics entirely — the COLD baseline is analytically 8x cheaper, the 5.42% margin is thin, browser/verification costs may dominate, and two failed attempts suggest API access may not be provisionable; (C) Pivot to a materially different measurement (browser/verification costs, real SPIDER corpus, end-to-end agent economics) — this abandons the COLD baseline question but tests a different aspect of C-PRODUCT-ECON. No product promotion. No claim status change. C-PRODUCT-ECON stays HYPOTHESIS. C-PARAM-INHERIT stays EXPERIMENTAL."
+}
