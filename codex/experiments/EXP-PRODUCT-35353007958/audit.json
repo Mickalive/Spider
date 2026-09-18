@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "id": "FIX_API_KEY_MISSING",
+      "severity": "blocking",
+      "category": "infrastructure",
+      "description": "No LLM API key available; 0/32 tasks executed in any condition. Frozen decision_rule requires real LLM selection+resolution calls and is gated by MEASUREMENT_INVALID if >=5 tasks fail. Configure OPENAI_API_KEY (or ANTHROPIC_API_KEY) and re-run frozen design without modifying spec/prereg/freeze.",
+      "evidence": "result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics {} controls all pass null observed_behavior NOT_MEASURED; provenance.json environment.api_access.available false reason 'No LLM API keys found'; report.md 'No API keys available' and execution_checkpoint.json; env grep 2026-09-18 confirms no OPENAI/ANTHROPIC keys and no .env",
+      "fix": "export OPENAI_API_KEY=sk-... (or equivalent) in execution environment, verify tiktoken 0.14.0 + openai 3.15.0 already installed per provenance.json packages_installed, then re-execute spec.json measurement_validity protocol (selection prompt tiktoken-measured, completion tokens from real model output, temperature 0.0) for 32 tasks x 3 conditions (≈128-192 calls). Do not change frozen files."
+    },
+    {
+      "id": "REPORT_NULL_CONTROL_OMISSION",
+      "severity": "minor",
+      "category": "measurement",
+      "description": "Producer controls report C1-C4 only; spec.json null_control NULL-UNIQUE-PATTERN-EXECUTED (parameterized cost within 30% of literal for unique patterns) not listed in result.json controls, though outcome is NOT_APPLICABLE. Future re-run should include null control as distinct entry to satisfy spec traceability.",
+      "evidence": "spec.json null_control id NULL-UNIQUE-PATTERN-EXECUTED expected_behavior total cost <=1.3*literal; result.json controls keys C1_selection_accuracy, C2_param_selection_tokens_le_literal, C3_param_total_cost_le_literal, C4_positive_control — no NULL entry; prereg.md null control definition",
+      "fix": "In next execution, add controls.NULL-UNIQUE-PATTERN-EXECUTED with expected_behavior from spec, observed_behavior measured ratio, pass boolean, and evidence_ref to per-task derived artifact."
+    }
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_MEASUREMENT_INVALID_CORRECTLY_CLASSIFIED",
+      "severity": "info",
+      "finding": "Producer correctly classifies outcome as MEASUREMENT_INVALID with outcome NOT_APPLICABLE, not as SUPPORTS/FALSIFIES/BLOCKED. Frozen decision_rule MEASUREMENT_INVALID clause is 'API failures prevent completion of >=5 tasks in either condition' — 0/32 tasks executed in all three conditions satisfies threshold. Producer does not encode infrastructure failure as scientific falsification.",
+      "evidence": "result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE validity_notes[0] 'API failures prevent completion of >=5 tasks (0/32 tasks executed)'; spec.json decision_rule MEASUREMENT_INVALID clause; prereg.md Frozen Decision Rule MEASUREMENT_INVALID threshold >=5 tasks; provenance.json measurement_protocol.status NOT_EXECUTED reason 'No LLM API keys available'"
+    },
+    {
+      "id": "V2_NO_FALSE_FALSIFICATION_OR_SUPPORT",
+      "severity": "info",
+      "finding": "Producer preserves RAW EVIDENCE -> OBSERVATION -> INTERPRETATION chain: observations state 'No API keys found', 'Cannot execute selection or resolution', validity_notes state 'This is NOT a scientific falsification — the experiment was not executed', unresolved preserves all five parent gaps. No missing data turned into negative result; no interpretation presented as observation. Report.md correctly states 'This is an infrastructure failure, not a scientific negative' and 'No new evidence was accumulated'.",
+      "evidence": "result.json observations[0-3] and validity_notes[1-4] and unresolved[0-4]; report.md Summary 'could not be executed due to missing LLM API credentials' and 'not a scientific negative' and 'No new evidence'; provenance.json evidence_accumulated false decision_rule_evaluated false"
+    },
+    {
+      "id": "V3_METRICS_CONTROLS_EMPTY_VERIFIED",
+      "severity": "info",
+      "finding": "Producer metrics {} and controls pass:null with NOT_MEASURED observed_behavior verified. No quantitative metrics fabricated; no artifacts listed ([]). Recomputed check confirms no derived artifacts, no prompt/completion token files, no per-task logs exist beyond canonical packet. Controls correctly use pass:null (explicit unknown) per contract, not false.",
+      "evidence": "result.json metrics {} artifacts [] controls.* pass null evidence_ref null observed_behavior NOT_MEASURED; audit recompute: ls research/experiments/EXP-PRODUCT-35353007958 shows 11 files (request/spec/prereg/freeze/result/report/provenance plus checkpoint/model_*.json) no raw_evidence.json or derived artifacts; hash 9d5ed65579ff441c4560237a64a78552ebc7763bad7f6927c073c501716dad50"
+    },
+    {
+      "id": "V4_FROZEN_DESIGN_INTACT",
+      "severity": "info",
+      "finding": "Frozen inputs intact and unmodified post-freeze. Hashes in freeze.json (prereg 7025a85cf0265ba225f32c62518c0253ea49f8f8518e72ff1ae6523659628c62, request 309c2eda8d950e0562f59cef8a904b5dedc22847ad6ef8a01064c16f4160de56, spec b8ea4d6fbc4343f87fcc21b20e9ea4fbb6d5d9cba18c2841c17dd77fe999873b) match recomputed. Spec claim_ids [C-PRODUCT-ECON C-PARAM-INHERIT], baselines B-LITERAL-EXECUTED/B-PARAMETERIZED-EXECUTED/B-COLD-EXECUTED, positive/null controls, measurement_validity 8 items, decision_rule C1-C4 all preserved. No post-freeze redesign.",
+      "evidence": "freeze.json hashes; spec.json claim_ids hypothesis falsifier baselines decision_rule; prereg.md motivation resolves parent V1_C1_SUCCESS_UNMEASURED and V2_COMPLETION_TOKENS_ESTIMATED; provenance.json frozen_inputs paths and base_sha 80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb matches request.json"
+    },
+    {
+      "id": "V5_INFRASTRUCTURE_GAP_REPRODUCED",
+      "severity": "info",
+      "finding": "Infrastructure gap independently reproduced: env contains no OPENAI_API_KEY/ANTHROPIC_API_KEY, no .env file, no alternate config. Provenance api_access.available false verified. Producer attempted actions (checked env, .env, installed tiktoken/openai) and correctly declared NOT_EXECUTED. No hidden keys or alternate LLM substrate available on audit host.",
+      "evidence": "provenance.json environment.python_version 3.12.14 platform linux packages_installed tiktoken 0.14.0 openai 3.15.0 api_access.available false; audit bash env grep and ls .env both negative 2026-09-18; result.json validity_notes[1] and observations[1]"
+    },
+    {
+      "id": "V6_PARENT_CEILING_UNCHANGED",
+      "severity": "info",
+      "finding": "No new measurement to challenge or extend parent EXP-PRODUCT-35330741529 analytical ceiling. Parent's 5.42% net workflow savings (param 18624 vs literal 19691, selection savings 3168, resolution overhead 2101, 25 vs 32 mechanisms) remains arithmetic-verified butValidity gaps V1-V4 (C1 assumed, completion estimated, browser omitted, COLD 8x cheaper) persist. This experiment correctly does not advance C-PRODUCT-ECON or C-PARAM-INHERIT claim status.",
+      "evidence": "research/experiments/EXP-PRODUCT-35330741529/audit.json REVISE producer_claim_supported false claim_ceiling analytical synthetic only V1_C1_SUCCESS_UNMEASURED V2_COMPLETION_TOKENS_ESTIMATED; research/experiments/EXP-PRODUCT-35330741529/handoff.json carry_forward established 5.42% analytical do_not_assume C1 not measured completion estimated; report.md Carry-Forward State 'inherits all carry-forward state from parent... No new evidence accumulated'"
+    },
+    {
+      "id": "V7_REPRESENTATION_AND_SAMPLING_INTEGRITY",
+      "severity": "info",
+      "finding": "No representation loss introduced: corpus definition is frozen synthetic 32-task (6 domains) inherited identically from parent, no sampling or split. Target is total workflow cost per successful task under real LLM execution. Since zero tasks executed, there is no sampling bias, leakage, or baseline contamination to evaluate yet. Environment as tested could express the effect — selection prompt scales with 25 vs 32 mechanisms, resolution prompt with ${slot} templates — but requires API access to observe.",
+      "evidence": "spec.json measurement_validity[0] identical 32-task corpus, [1-6] tiktoken on actual prompt+completion, [7] registry text format identical to parent, [8] model routing; prereg.md Test Corpus identical to parent, Measurement Protocol execution steps 1-3, Scope Limitations browser/verification omitted per design"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-LITERAL-EXECUTED",
+      "expected": "Full literal registry (32 concrete-URL mechanisms). Real LLM selects from all 32 via API call; selection prompt tokens measured, completion tokens measured, no resolution step.",
+      "observed": "NOT_MEASURED — 0/32 tasks executed, no prompt/completion tokens measured, no mechanism selection observed. Correctly reported as pass:null not pass:false.",
+      "verdict": "NOT_MEASURED_INFRASTRUCTURE",
+      "evidence": "result.json controls.C1_selection_accuracy and C2/C3 observed_behavior NOT_MEASURED; provenance.json measurement_protocol.status NOT_EXECUTED; spec.json baselines[0] B-LITERAL-EXECUTED"
+    },
+    {
+      "control_id": "B-PARAMETERIZED-EXECUTED",
+      "expected": "Deduplicated parameterized registry (25 mechanisms with ${slot}). Real LLM selects from 25 then resolves via second API call; total workflow cost = selection prompt+completion + resolution prompt+completion.",
+      "observed": "NOT_MEASURED — 0/32 tasks executed, no selection or resolution calls, no total cost. Correctly reported as pass:null.",
+      "verdict": "NOT_MEASURED_INFRASTRUCTURE",
+      "evidence": "result.json controls.C3_param_total_cost_le_literal NOT_MEASURED; spec.json baselines[1]; prereg.md Measurement Protocol Resolution step"
+    },
+    {
+      "control_id": "B-COLD-EXECUTED",
+      "expected": "No registry. Real LLM generates URL from task goal alone; single call, success rate measured as lower-bound cost reference.",
+      "observed": "NOT_MEASURED — 0/32 COLD calls executed, no prompt/completion tokens, no success rate. Producer correctly lists as unresolved (Whether COLD baseline success rate is viable). Previous parent COLD 77 tokens/task analytical remains only reference, not validated.",
+      "verdict": "NOT_MEASURED_INFRASTRUCTURE",
+      "evidence": "spec.json baselines[2] B-COLD-EXECUTED; result.json unresolved[3] 'Whether COLD baseline success rate is viable (unmeasured)'; parent handoff unknown COLD success rate unmeasured"
+    },
+    {
+      "control_id": "POS-CONTROL-SHARED-PATTERN-EXECUTED",
+      "expected": "5 blog-read-post tasks (ids 101,202,303,404,505) select same parameterized mechanism GET:https://blog.example.com/posts/${id_0} and resolve to correct bound URLs.",
+      "observed": "NOT_MEASURED — no selection or resolution executed, no pattern collapse observed over LLM. Parent analytical positive control (1 pattern, correct binding) remains highest evidence but was not validated under real LLM.",
+      "verdict": "NOT_MEASURED_INFRASTRUCTURE",
+      "evidence": "result.json controls.C4_positive_control NOT_MEASURED; spec.json positive_control id POS-CONTROL-SHARED-PATTERN-EXECUTED; prereg.md Positive Control 5 tasks must select same mechanism"
+    },
+    {
+      "control_id": "NULL-UNIQUE-PATTERN-EXECUTED",
+      "expected": "Unique-pattern tasks (search) parameterized total cost within 30% of literal (ratio <=1.3) under real LLM, bounding resolution overhead for non-sharing tasks.",
+      "observed": "NOT_MEASURED — not reported in result.json controls; no ratio computed. Producer validity_notes note parent ratio 1.0185 analytical, but no real measurement.",
+      "verdict": "NOT_REPORTED_BUT_NOT_MEASURED",
+      "evidence": "spec.json null_control id NULL-UNIQUE-PATTERN-EXECUTED expected_behavior <=1.3; result.json controls lacks NULL entry; prereg.md Null Control section"
+    },
+    {
+      "control_id": "STRONG_BASELINE_AND_NULL_ASSESSMENT",
+      "expected": "Audit should assess whether baselines are strong and nulls appropriate.",
+      "observed": "Design uses appropriate strong baselines: literal (full registry) and cold (no registry) bracket parameterized; null control tests unique-pattern overhead. Baselines cannot be evaluated for strength until real LLM execution occurs. No leakage, sampling, or representation flaw in baseline definitions — they are correctly scope-limited to synthetic corpus and disclosed browser/verification omission.",
+      "verdict": "DESIGN_PASSES_NOT_YET_TESTED",
+      "evidence": "spec.json baselines[0-2] descriptions and expected_behavior, null_control, measurement_validity, product_consequence_positive/negative; prereg.md Scope Limitations; parent audit V4_COLD_INVERSION notes COLD 8x cheaper but unmeasured success"
+    }
+  ],
+  "recomputed_metrics": {},
+  "claim_ceiling": "This experiment establishes no new evidence for C-PRODUCT-ECON or C-PARAM-INHERIT. Maximum justified claim remains the parent analytical ceiling (EXP-PRODUCT-35330741529, audit REVISE): on the frozen synthetic 32-task corpus (6 domains, heuristic regex induction, 32 literal vs 25 parameterized mechanisms, 21.9% storage reduction) with tiktoken cl100k_base prompt counting and hard-coded completion estimates (2 tokens selection, 15-20 completion), parameterized model token cost (selection+resolution only, browser/verification omitted, no LLM executed, 100% success assumed) is 18624 vs 19691 tokens (5.42% savings, 1067 tokens; selection saving 3168 tokens 16.09% vs resolution overhead 2101 tokens 10.67%), positive collapse 5 blog tasks to 1 pattern, null ratio 1.0185 for search. This experiment (0/32 tasks executed, 0 tokens measured, 0% selection accuracy measured, no resolution binding observed) does not validate, extend, or falsify that ceiling. Real LLM selection accuracy, real completion token distribution, real resolution success, total workflow cost (selection+resolution) vs literal, COLD viability, and browser/verification economics all remain UNMEASURED. C-PRODUCT-ECON remains HYPOTHESIS; C-PARAM-INHERIT remains EXPERIMENTAL at committed-code synthetic single-slot analytical ceiling. No product promotion justified. Do not assume 5.42% survives real execution.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35353007958/request.json experiment_id lane parent_handoff EXP-PRODUCT-35330741529 handoff sha 3876ceb91a77e10e2be1468b9d621f77e1a4eac941de86004794d75b6325015d",
+    "research/experiments/EXP-PRODUCT-35353007958/spec.json claim_ids [C-PRODUCT-ECON C-PARAM-INHERIT] question hypothesis falsifier baselines B-LITERAL/PARAMETERIZED/COLD positive_control POS-CONTROL-SHARED-PATTERN-EXECUTED null_control NULL-UNIQUE-PATTERN-EXECUTED measurement_validity[0-8] decision_rule C1-C4 and MEASUREMENT_INVALID >=5 tasks",
+    "research/experiments/EXP-PRODUCT-35353007958/prereg.md motivation parent gaps V1_C1_SUCCESS_UNMEASURED V2_COMPLETION_TOKENS_ESTIMATED, research question, hypothesis, falsifier, measurement protocol tiktoken on actual prompt+completion, frozen decision_rule C1-C4, scope limitations",
+    "research/experiments/EXP-PRODUCT-35353007958/freeze.json hashes prereg 7025a85cf0265ba225f32c62518c0253ea49f8f8518e72ff1ae6523659628c62 spec b8ea4d6fbc4343f87fcc21b20e9ea4fbb6d5d9cba18c2841c17dd77fe999873b request 309c2eda8d950e0562f59cef8a904b5dedc22847ad6ef8a01064c16f4160de56",
+    "research/experiments/EXP-PRODUCT-35353007958/result.json schema_version 1 status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics {} controls C1-C4 pass null observed_behavior NOT_MEASURED artifacts [] observations 4 validity_notes 5 unresolved 5 hash 9d5ed65579ff441c4560237a64a78552ebc7763bad7f6927c073c501716dad50",
+    "research/experiments/EXP-PRODUCT-35353007958/report.md Status MEASUREMENT_INVALID infrastructure failure, Why Not Scientific Negative C1-C4 unmeasured, Required Fixes export OPENAI_API_KEY, Carry-Forward State inherits parent analytical measurement",
+    "research/experiments/EXP-PRODUCT-35353007958/provenance.json schema 1 base_sha 80e9ad6ed83ccaff5fa5a4f32a9fc644938d9dbb executed_at 2026-09-18T14:30:00 environment python 3.12.14 packages tiktoken 0.14.0 openai 3.15.0 api_access.available false frozen_inputs artifacts_read 7 artifacts_produced 3 measurement_protocol NOT_EXECUTED",
+    "research/experiments/EXP-PRODUCT-35330741529/handoff.json next_question A/B/C carry_forward established 5.42% analytical rejected SUPPORTS not justified unknown C1/completion/COLD do_not_assume 5.42% not generalizable",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json metrics literal 19691 param 18624 cold 2475 workflow_savings 1067 5.42% selection_savings 3168 16.09% resolution overhead 2101 validity_notes analytical measurement",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json REVISE producer_claim_supported false V1_C1_SUCCESS_UNMEASURED V2_COMPLETION_TOKENS_ESTIMATED V3_BROWSER_VERIFICATION V4_COLD_INVERSION claim_ceiling analytical synthetic only",
+    "codex/claim_state.json C-PRODUCT-ECON HYPOTHESIS C-PARAM-INHERIT EXPERIMENTAL",
+    "research/lanes/registry.json lane product mission product economics priority_claims C-PRODUCT-ECON C-PARAM-INHERIT",
+    "audit recompute 2026-09-18 env grep OPENAI/ANTHROPIC none, ls .env none, ls experiment dir 11 files no raw_evidence.json"
+  ],
+  "unresolved": [
+    "Whether actual LLM selection achieves 100% accuracy when choosing from 25-32 mechanisms under spec.json temperature 0.0 registry format (C1 unmeasured, 0/32 tasks)",
+    "Whether actual completion tokens for selection (~2 estimated) and parameterized resolution (~15 estimated) exceed estimates enough to reverse 5.42% margin (1067 tokens) — parent V2 sensitivity remains open",
+    "Whether total workflow cost parameterized <= literal under real LLM execution (C3 unmeasured) and whether selection prompt savings survive real model output variance",
+    "Whether positive control 5 blog-read-post tasks select same parameterized mechanism and resolve to correct bound URLs over real LLM (C4 unmeasured)",
+    "Whether null control ratio for unique patterns remains <=1.3 under real LLM (spec threshold 30%) vs analytical 1.0185",
+    "Whether COLD baseline (no registry) is viable — 77 tokens/task analytical is 8x cheaper but success rate unmeasured; may undermine registry economics (parent V4_COLD_INVERSION)",
+    "Whether browser/verification costs dominate and cancel 5.42% token saving in end-to-end workflow (omitted per spec 5.1 but claim ceiling in report references end-to-end savings)",
+    "Whether deduplication holds on actual SPIDER registry/task corpus with kernel distill_parameterized() vs heuristic regex (parent measurement_validity[0] synthetic only, parent do_not_assume not generalizable)"
+  ]
+}

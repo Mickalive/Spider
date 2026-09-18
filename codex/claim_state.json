@@ -763,6 +763,16 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "No change to claim status. This experiment measures deduplication economics, not kernel binding correctness. C-PARAM-INHERIT remains EXPERIMENTAL at committed-code synthetic single-slot ceiling (parent EXP-PRODUCT-35132898840). The deduplication analysis (25 vs 32 mechanisms, 16.09% selection savings, 5.42% net workflow savings on analytical token counting) is a separate question from binding correctness. C-PARAM-INHERIT does not advance or regress from this experiment."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35353007958",
+        "lane": "product",
+        "created_at": "2026-09-18T13:55:00.615797+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
+        "source_commit": "086b152058240628e7c5cfe8a423846179fac71f",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
       }
     ],
     "C-SEMANTIC-RESOLVE": [
@@ -1343,6 +1353,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No advancement from HYPOTHESIS. Frozen gate fails (C1 unmeasured, C2/C3 margin narrow under estimated completions). The 5.42% analytical token saving on synthetic 32-task corpus is arithmetic-verified but is not end-to-end workflow cost \u2014 browser/verification omitted, no LLM executed, success assumed. COLD baseline at 77 tokens/task is 8x cheaper than registry conditions, undermining the economic argument for mechanism reuse. Measurement validity violations (synthetic corpus, estimated completions, assumed success) prevent C-PRODUCT-ECON from advancing. Next experiment must measure with real LLM calls and include browser/verification costs."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35353007958",
+        "lane": "product",
+        "created_at": "2026-09-18T13:55:00.615797+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
+        "source_commit": "086b152058240628e7c5cfe8a423846179fac71f",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "No change. This experiment accumulated zero evidence. The parent's 5.42% analytical savings on synthetic 32-task corpus (EXP-PRODUCT-35330741529) remains the most recent valid measurement, with frozen gate failed (C1 assumed not measured). C1 (LLM selection accuracy), C2 (param selection tokens <= literal), C3 (total workflow cost param <= literal), and C4 (positive control) are all unmeasured. The product_consequence_negative (C-PRODUCT-ECON advances to REJECTED) does not apply because no falsifying evidence was produced \u2014 the experiment was not executed. C-PRODUCT-ECON remains HYPOTHESIS."
       }
     ],
     "C-MEAS-VALID": [
@@ -1740,14 +1760,14 @@
       "reason": "MEASUREMENT_INVALID: Browser collection on all 3 production SPAs (BBC News, Amazon, Twitter/X) yielded 0 non-leakage transitions due to anti-bot protections. Infrastructure failure, not scientific negative. Positive control (synthetic deterministic SPA) passed (PMI=1.769 bits, p=0.000999), validating PMI pipeline. No evidence accumulated for or against H1 (beyond-Markov I(url_after;action|url_before,H_K3)>0.05 on >=2/3 production SPAs). Claim status remains HYPOTHESIS with parent carry_forward unchanged."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35330741529",
+      "experiment_id": "EXP-PRODUCT-35353007958",
       "lane": "product",
-      "created_at": "2026-09-18T09:40:30.278159+00:00",
-      "decision": "REVISE \u2014 frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C1 (100% success for both conditions) is stipulated as an analytical assumption, not measured: no LLM selection or resolution was executed, no binding failures observed (audit V1_C1_SUCCESS_UNMEASURED). The arithmetic portion of the frozen gate passes: C2 param selection tokens 16523 <= literal 19691 (16.09% reduction), C3 param total 18624 <= literal 19691 (5.42% net savings, 1067 tokens), C4 positive control 5 blog-read-post tasks collapse to 1 pattern with correct resolution, C5 null control ratio 1.0185 (1.85% overhead, well within 50% threshold). All arithmetic independently recomputed and verified exactly. However, C1 being an assumption rather than an observation is a measurement validity gap that prevents the frozen gate from passing. Additionally, completion tokens are hard-coded estimates (2 selection, 15 resolution, 20 cold) not measured from real model outputs \u2014 with 5.42% margin, modest variation in actual LLM response length could reverse C3 (audit V2_COMPLETION_TOKENS_ESTIMATED). Browser/verification costs omitted per frozen spec \u00a75.1 but claim ceiling in report.md references 'end-to-end workflow savings' (audit V3_BROWSER_VERIFICATION). COLD baseline at 77 tokens/task is 8x cheaper than either registry condition but success rate unmeasured (audit V4_COLD_INVERSION). The producer SUPPORTS outcome is not justified as written because C1 was not measured and C3 margin is narrow under estimated completion tokens. The 5.42% analytical savings on this synthetic corpus is arithmetic-verified and informative but does not establish end-to-end workflow cost reduction.",
-      "source_commit": "1ebac5133f8548e89b5346940b7bce7c31d6f021",
+      "created_at": "2026-09-18T13:55:00.615797+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
+      "source_commit": "086b152058240628e7c5cfe8a423846179fac71f",
       "claim_id": "C-PARAM-INHERIT",
       "status": "EXPERIMENTAL",
-      "reason": "No change to claim status. This experiment measures deduplication economics, not kernel binding correctness. C-PARAM-INHERIT remains EXPERIMENTAL at committed-code synthetic single-slot ceiling (parent EXP-PRODUCT-35132898840). The deduplication analysis (25 vs 32 mechanisms, 16.09% selection savings, 5.42% net workflow savings on analytical token counting) is a separate question from binding correctness. C-PARAM-INHERIT does not advance or regress from this experiment."
+      "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
     },
     "C-SEMANTIC-RESOLVE": {
       "experiment_id": "EXP-GRAPH-34586318405",
@@ -1790,14 +1810,14 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35330741529",
+      "experiment_id": "EXP-PRODUCT-35353007958",
       "lane": "product",
-      "created_at": "2026-09-18T09:40:30.278159+00:00",
-      "decision": "REVISE \u2014 frozen decision_rule requires ALL C1-C5 for SURVIVES_CURRENT_TEST. C1 (100% success for both conditions) is stipulated as an analytical assumption, not measured: no LLM selection or resolution was executed, no binding failures observed (audit V1_C1_SUCCESS_UNMEASURED). The arithmetic portion of the frozen gate passes: C2 param selection tokens 16523 <= literal 19691 (16.09% reduction), C3 param total 18624 <= literal 19691 (5.42% net savings, 1067 tokens), C4 positive control 5 blog-read-post tasks collapse to 1 pattern with correct resolution, C5 null control ratio 1.0185 (1.85% overhead, well within 50% threshold). All arithmetic independently recomputed and verified exactly. However, C1 being an assumption rather than an observation is a measurement validity gap that prevents the frozen gate from passing. Additionally, completion tokens are hard-coded estimates (2 selection, 15 resolution, 20 cold) not measured from real model outputs \u2014 with 5.42% margin, modest variation in actual LLM response length could reverse C3 (audit V2_COMPLETION_TOKENS_ESTIMATED). Browser/verification costs omitted per frozen spec \u00a75.1 but claim ceiling in report.md references 'end-to-end workflow savings' (audit V3_BROWSER_VERIFICATION). COLD baseline at 77 tokens/task is 8x cheaper than either registry condition but success rate unmeasured (audit V4_COLD_INVERSION). The producer SUPPORTS outcome is not justified as written because C1 was not measured and C3 margin is narrow under estimated completion tokens. The 5.42% analytical savings on this synthetic corpus is arithmetic-verified and informative but does not establish end-to-end workflow cost reduction.",
-      "source_commit": "1ebac5133f8548e89b5346940b7bce7c31d6f021",
+      "created_at": "2026-09-18T13:55:00.615797+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
+      "source_commit": "086b152058240628e7c5cfe8a423846179fac71f",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "No advancement from HYPOTHESIS. Frozen gate fails (C1 unmeasured, C2/C3 margin narrow under estimated completions). The 5.42% analytical token saving on synthetic 32-task corpus is arithmetic-verified but is not end-to-end workflow cost \u2014 browser/verification omitted, no LLM executed, success assumed. COLD baseline at 77 tokens/task is 8x cheaper than registry conditions, undermining the economic argument for mechanism reuse. Measurement validity violations (synthetic corpus, estimated completions, assumed success) prevent C-PRODUCT-ECON from advancing. Next experiment must measure with real LLM calls and include browser/verification costs."
+      "reason": "No change. This experiment accumulated zero evidence. The parent's 5.42% analytical savings on synthetic 32-task corpus (EXP-PRODUCT-35330741529) remains the most recent valid measurement, with frozen gate failed (C1 assumed not measured). C1 (LLM selection accuracy), C2 (param selection tokens <= literal), C3 (total workflow cost param <= literal), and C4 (positive control) are all unmeasured. The product_consequence_negative (C-PRODUCT-ECON advances to REJECTED) does not apply because no falsifying evidence was produced \u2014 the experiment was not executed. C-PRODUCT-ECON remains HYPOTHESIS."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-INTEL-35330747199",
