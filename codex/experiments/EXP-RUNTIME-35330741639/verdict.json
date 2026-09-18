@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35330741639",
+  "lane": "runtime",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule condition (1) triggers: CACHED proxy behavior has decompressed_body_only_discrimination 0.0 across all 9 cells (threshold >= 0.3). However, the falsification is bounded to CDN cache-key semantics (URL+Accept-Encoding excluding Authorization), not iterative decompression pipeline failure. PASSTHROUGH and RECOMPRESS both survive with discrimination 0.5 matching parent. Audit PASS confirms all recomputed metrics match producer exactly.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "No status change. Claim ceiling advances: iterative decompression (max_depth=5) survives CDN-like proxy behaviors for PASSTHROUGH and RECOMPRESS on localhost (decompressed discrimination 0.5, 0 errors, hash determinism all_same=true). CACHED with naive (URL, Accept-Encoding) cache key excluding Authorization is FALSIFIED-IN-SETTING (discrimination 0.0, all auth states receive same cached body). This is a CDN cache-key semantics issue, not decompression failure. Real CDN infrastructure (Cloudflare/Fastly/Akamai) remains the sole untested blocker for product readiness. Claim bounded to: localhost mock OAuth2 server, synthetic padded JSON/HTML/XML 1KB-100KB, 4 auth states, brotli quality 6 origin, proxy re-compress quality 8, chunked TE constant background, single-layer brotli through proxy. Does NOT extend to real CDN, double/triple-brotli through proxy, Cache-Control:private/Vary:Authorization configurations, edge quality diversity, or production-scale latency."
+    }
+  ],
+  "product_action": "No product action. C-MEAS-VALID remains EXPERIMENTAL. Real CDN testing required before any Product Core promotion.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching configured with Cache-Control: private / Vary: Authorization, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
+  "reason": "The frozen decision rule triggers FALSIFIED-IN-SETTING because CACHED proxy behavior has discrimination 0.0 — every auth state receives the same decompressed body. Root cause: cache key (URL, Accept-Encoding) excludes Authorization header, so first request's response is cached and served to all subsequent auth states regardless of token. This is a real and expected CDN behavior (Cloudflare/Fastly/Akamai default), not a decompression pipeline failure. Iterative decompression correctly decompresses the (wrong) cached bytes — 0 errors, all_same=true per state. The falsification is bounded and actionable: for auth-dependent content served through a CDN, the origin MUST set Cache-Control: private or Vary: Authorization to prevent stale cache serving. PASSTHROUGH (discrimination 0.5) and RECOMPRESS (discrimination 0.5) both survive, confirming decompression-normalization is format-invariant to proxy-added compression layers. The next experiment should test real CDN infrastructure with auth-aware cache configuration to resolve the blocking blocker for C-MEAS-VALID product readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35330741639/result.json metrics/per_cell: all CACHED cells decompressed_body_only_discrimination 0.0, PASSTHROUGH/RECOMPRESS 0.5",
+    "research/experiments/EXP-RUNTIME-35330741639/result.json metrics/per_behavior: PASSTHROUGH mean 0.5, CACHED mean 0.0, RECOMPRESS mean 0.5",
+    "research/experiments/EXP-RUNTIME-35330741639/result.json controls: C_DECOMPRESSED_DISCRIMINATION pass false (min 0.0), C_PROXY_PASSTHROUGH_EQUIVALENCE pass true, C_NULL_CONTROL 27x0.0 pass true, C_NO_ERROR_INFLATION observed 0",
+    "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py:358-360 _get_cache_key (URL, Accept-Encoding) and 387-404 CACHED HIT logic",
+    "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py:994-1018 C_DETERMINISM_ACROSS_PATHS passthrough-only check",
+    "research/experiments/EXP-RUNTIME-35330741639/audit.json status PASS, producer_claim_supported true, claim_ceiling, validity_findings V1-V5",
+    "research/experiments/EXP-RUNTIME-35330741639/spec.json decision_rule FALSIFIED-IN-SETTING condition (1) discrimination < 0.3",
+    "research/experiments/EXP-RUNTIME-35290615081/handoff.json established triple-brotli survival on localhost direct, next_question real CDN"
+  ]
+}

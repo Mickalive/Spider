@@ -1767,6 +1767,16 @@
         "reason": "No status change. This literature synthesis adds theoretical grounding for recipe-choice materiality at interpretive-analogy ceiling: (a) aggregation recipe choice ambiguity documented in psychometrics (Kane & Case 2003 composite scoring, PMC5978518), econometrics (OECD 2008 Handbook arithmetic vs geometric vs weighted product for composite indicators), and meta-analysis (fixed vs random effects pooling); (b) OECD/COINr sensitivity analysis framework provides principled MIXED-outcome handling method (robustness bounds, dominance pairs, confidence intervals); (c) convergent cross-field evidence strengthens IR analogy from single-field mapping to multi-field pattern. However, all SPIDER-to-field applicability mappings remain interpretive analogies, not established results (audit V6). Preregistered systematic review protocol was not executed; evidence bounded to non-systematic web synthesis (audit V1). Full-DOM empirical re-run with both recipes (canonical per-iteration + per-task weighted) remains the blocking dependency for C-MEAS-VALID advancement. Recipe reversal genuine (established in parent EXP-INTEL-35264637598); full-DOM generalization unknown."
       },
       {
+        "experiment_id": "EXP-RUNTIME-35330741639",
+        "lane": "runtime",
+        "created_at": "2026-09-18T09:40:32.792307+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (1) triggers: CACHED proxy behavior has decompressed_body_only_discrimination 0.0 across all 9 cells (threshold >= 0.3). However, the falsification is bounded to CDN cache-key semantics (URL+Accept-Encoding excluding Authorization), not iterative decompression pipeline failure. PASSTHROUGH and RECOMPRESS both survive with discrimination 0.5 matching parent. Audit PASS confirms all recomputed metrics match producer exactly.",
+        "source_commit": "e3674e7671dd20c1851fa6dacb3486621c08411f",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "No status change. Claim ceiling advances: iterative decompression (max_depth=5) survives CDN-like proxy behaviors for PASSTHROUGH and RECOMPRESS on localhost (decompressed discrimination 0.5, 0 errors, hash determinism all_same=true). CACHED with naive (URL, Accept-Encoding) cache key excluding Authorization is FALSIFIED-IN-SETTING (discrimination 0.0, all auth states receive same cached body). This is a CDN cache-key semantics issue, not decompression failure. Real CDN infrastructure (Cloudflare/Fastly/Akamai) remains the sole untested blocker for product readiness. Claim bounded to: localhost mock OAuth2 server, synthetic padded JSON/HTML/XML 1KB-100KB, 4 auth states, brotli quality 6 origin, proxy re-compress quality 8, chunked TE constant background, single-layer brotli through proxy. Does NOT extend to real CDN, double/triple-brotli through proxy, Cache-Control:private/Vary:Authorization configurations, edge quality diversity, or production-scale latency."
+      },
+      {
         "experiment_id": "EXP-INTEL-35330747199",
         "lane": "intel",
         "created_at": "2026-09-18T09:40:36.618320+00:00",
