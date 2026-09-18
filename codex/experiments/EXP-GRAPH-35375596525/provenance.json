@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35375596525",
+  "github_run_id": "35375596525",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-18T18:08:16.613618+00:00",
+  "base_sha": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "parent_experiment": "EXP-GRAPH-35353011131",
+  "parent_handoff_sha256": "d30823d831272887167075652ad78be1139c4c426a61dc25fd1a6af64a1db6af",
+  "frozen_inputs": {
+    "request_hash": "7caf0c653a972eb18b38108556045e2f3aa12ec010e0c6f154b605474e7839f8",
+    "spec_hash": "f8e8ddee29160b19e65e16ad0dae39f2160a43216b66d90270e8c6323b6a16f2",
+    "prereg_hash": "95582bae66faeeaea1661d07ab380077ee3c4528ff7519e05c4b71a6890f245d"
+  },
+  "code_hashes": {
+    "mock_server.py": "7d1064a9d5a2d630a45cd9b9e5c1d39c6813092b4eda7f4c6a373fa0d132dd86",
+    "run_experiment.py": "5598277cc730b2bb1608f15cc46bc16e5af88b4d1a3350a0c3b9f72b793997dd"
+  },
+  "raw_evidence_sha256": "1a2d719102576dcb7cbb340f2fd7782eb30b164ef477db2c6ab61a488c3f5efa",
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux",
+    "dependencies": {
+      "flask": "3.1.3",
+      "pyjwt": "2.14.0",
+      "cryptography": "50.0.1",
+      "scipy": "1.18.1",
+      "numpy": "2.5.3"
+    }
+  },
+  "execution": {
+    "server_script": "mock_server.py",
+    "runner_script": "run_experiment.py",
+    "n_conditions": 4,
+    "n_samples_per_condition": 60,
+    "n_paired_samples": 240,
+    "seed": 42,
+    "ports_used": [
+      18960,
+      18961,
+      18962,
+      18963,
+      18964,
+      18965,
+      18966,
+      18967
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "1a2d719102576dcb7cbb340f2fd7782eb30b164ef477db2c6ab61a488c3f5efa",
+      "role": "raw"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "7d1064a9d5a2d630a45cd9b9e5c1d39c6813092b4eda7f4c6a373fa0d132dd86",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "5598277cc730b2bb1608f15cc46bc16e5af88b4d1a3350a0c3b9f72b793997dd",
+      "role": "code"
+    }
+  ]
+}

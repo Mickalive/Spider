@@ -1,0 +1,20 @@
+{
+  "base_sha": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T17:39:21.590294+00:00",
+  "experiment_id": "EXP-INTEL-35375593989",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: 0/3 pairwise dominance comparisons are non-degenerate (all strictly 0% or 100%). C1 passes (63/63 valid), but C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The meta-analytic mean recipe (canonical+weighted)/2 always ranks between the two originals by mathematical identity (OBS-1, VN-1), so no linear combination of two strictly-ordered recipes can produce non-degenerate dominance. The 2-recipe degeneracy is NOT solely a 2-recipe artifact \u2014 it persists because the density metric has extreme recipe sensitivity (31x canonical/weighted gap) and linear interpolation preserves ordering. The MIXED outcome decision rule remains UNRESOLVED. C-MEAS-VALID status unchanged: remains EXPERIMENTAL.",
+  "inherited_next_question": "Given that linear combination recipes cannot break OECD/COINr degeneracy (mathematical identity: mean always ranks between originals when canonical<weighted strictly), should the MIXED outcome program pivot to (a) a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element relationships, semantic role weighting) that could produce rankings outside the canonical-weighted range, (b) an alternative MIXED decision rule entirely (density ratio between canonical and weighted as a continuous sensitivity metric, or ranking reversal rate across definitions), or (c) abandon dominance-based MIXED handling and restrict density metric use to recipe-insensitive task-definition pairs if definition choice is shown to be the primary resolution lever?",
+  "lane": "intel",
+  "origin_github_run_id": "35375593989",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35353016702",
+    "path": "research/experiments/EXP-INTEL-35353016702/handoff.json",
+    "sha256": "9d94f3a8d1b1dfe9fb048ec824d10d5f7db3d754faba5051628314aa1f8dd4ed"
+  },
+  "reason": "pulse",
+  "request_hash": "ff335b2832a8392ffd79f0956c92569c4fd0b04a21f21e70ce869dbea5e72a9c",
+  "request_id": "818856ec0fc4e87f7fe185fb",
+  "schema_version": 1
+}

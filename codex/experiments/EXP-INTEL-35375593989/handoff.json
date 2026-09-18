@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35375593989",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Given that linear combination recipes and density-ratio metrics both fail to break OECD/COINr degeneracy (mathematical identity and definition-artifact respectively), should the MIXED outcome program pivot to (a) a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element relationships, semantic role weighting) that could produce rankings outside the canonical-weighted range, or (b) abandon dominance-based MIXED handling entirely and restrict density metric use to recipe-insensitive task-definition pairs only?",
+  "why_next": "The density ratio approach is falsified: variation is definition-driven (10x) not task-type-driven (1.78x), and Spearman correlations with ordering-disagreement proxies are non-significant (|rho|<0.23, p>0.30). Both linear combination recipes (EXP-INTEL-35353016702) and density-ratio metrics (this experiment) fail to produce a viable MIXED decision rule. The two remaining pivot paths — non-linear third recipe or abandonment of dominance-based MIXED handling — are the only untested options. A non-linear recipe is the higher-information path because it could structurally break the ordering constraint that linear combinations cannot.",
+  "carry_forward": {
+    "established": [
+      "Recipe choice is MATERIAL: 31x canonical/weighted density gap (EXP-INTEL-35264637598)",
+      "Linear combinations CANNOT break OECD/COINr dominance degeneracy — mathematical identity: (canonical+weighted)/2 always ranks between originals (EXP-INTEL-35353016702)",
+      "Within each recipe, definitions are highly correlated (Spearman r > 0.98) (EXP-INTEL-3330747199)",
+      "Canonical per-iteration p=0.5 is principled (EXP-INTEL-35264637598)",
+      "Density ratio R = canonical/weighted varies 17x (CV=0.70) across 21 task-definition pairs but variation is definition-driven (10x between DEF-FORM-ONLY and DEF-FULL-MAP), not task-type-driven (1.78x) (EXP-INTEL-35375593989 audit recomputed metrics)",
+      "Spearman correlations between density ratio and task-type/recipe-sensitivity proxies are non-significant (|rho|<0.23, p>0.30) with correct task-major ordering (EXP-INTEL-35375593989 audit VF-1)",
+      "Task-type structure in density ratio is not statistically significant (eta-squared=0.144 < 0.20 threshold; permutation p=0.23) (EXP-INTEL-35375593989 audit VF-2)"
+    ],
+    "rejected": [
+      "OECD/COINr framework with 2 recipes is NOT informative (construct failure) (EXP-INTEL-35330747199)",
+      "Linear third recipe CANNOT break degeneracy — mathematical identity (EXP-INTEL-35353016702)",
+      "SURVIVES_REVERSAL_PERSISTS decision rule not achievable (EXP-INTEL-35264637598)",
+      "Density ratio R = canonical/weighted as MIXED outcome decision rule — falsified: definition-driven variation, non-significant task-type correlation (EXP-INTEL-35375593989)"
+    ],
+    "unknown": [
+      "Would a structurally non-linear third recipe (DOM hierarchy, semantic weighting, conditional inclusion) break the ordering constraint that linear combinations cannot?",
+      "Is MIXED outcome resolvable at all within the OECD/COINr framework, or should it be abandoned entirely?",
+      "Full-DOM generalization of density values and ratios — blocked by runtime lane removing locatableSample cap",
+      "Cross-site generalization of ratio/threshold behavior — blocked by cross-site data availability",
+      "Whether the density ratio captures genuine recipe sensitivity or just definition artifact — partially answered (definition artifact), but controlled experiment varying definitions within task types while holding recipe constant not yet run"
+    ],
+    "do_not_assume": [
+      "OECD/COINr framework has been validated for SPIDER — it has not",
+      "31x canonical/weighted ratio is validated on full DOM — only tested on truncated-first-20 sample",
+      "FALSIFIED-IN-SETTING generalizes to full DOM — truncated sample may change density values",
+      "Density metric is entirely useless — recipe choice is MATERIAL (31x gap), but the MIXED decision rule is the unresolved problem",
+      "Recipe choice is a nuisance parameter — it is MATERIAL (31x canonical/weighted gap)",
+      "The density ratio's 17x range reflects genuine recipe sensitivity — it primarily reflects definition choice (DEF-FORM-ONLY captures nearly all elements, inflating weighted denominator)",
+      "Spearman correlations reported by producer are correct — audit found critical ordering artifact (VF-1)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35375593989/audit.json (audit VF-1: Spearman ordering artifact, VF-2: NC1 null control)",
+    "research/experiments/EXP-INTEL-35375593989/result.json (producer metrics M1-M11, controls)",
+    "research/experiments/EXP-INTEL-35353016702/handoff.json (parent: linear combination degeneracy)",
+    "research/experiments/EXP-INTEL-35264637598 (recipe choice materiality)",
+    "research/experiments/EXP-INTEL-35330747199 (OECD/COINr construct failure, definition correlation)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35375593989/audit.json (FAIL status, producer_claim_supported=false, claim_ceiling, VF-1 through VF-6)",
+    "research/experiments/EXP-INTEL-35375593989/verdict.json (FALSIFIED-IN-SETTING, C-MEAS-VALID REJECTED)",
+    "research/experiments/EXP-INTEL-35375593989/result.json (OBS-1 through OBS-6, M1 through M11)",
+    "research/experiments/EXP-INTEL-35353016702 (linear combination degeneracy — mathematical identity)",
+    "research/experiments/EXP-INTEL-35330747199 (OECD/COINr construct failure)"
+  ],
+  "recommended_action": "Design experiment testing a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element parent-child relationships, or semantic role weighting) that could produce rankings outside the canonical-weighted range. The key requirement is that the recipe must not be a linear combination of canonical and weighted densities — it must use structural information (DOM tree position, element nesting, semantic roles) to produce density values that are not bounded between canonical and weighted. Alternatively, if the non-linear path is blocked, design an experiment that quantifies the MIXED outcome resolution lever: for each task-definition pair, measure whether definition choice or task type is the primary determinant of recipe sensitivity, and test whether restricting density metric use to recipe-insensitive pairs (those where definition choice has minimal effect) provides sufficient coverage."
+}

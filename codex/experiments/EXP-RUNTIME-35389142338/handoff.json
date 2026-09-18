@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35389142338",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration (Cache-Control: private / Vary: Authorization) — validating the localhost proxy result at production scale with edge-specific concerns (Accept-Encoding negotiation, chunked transfer-encoding, quality variation, geographic latency)?",
+  "why_next": "This experiment resolved the locally-testable caching question: auth-aware caching (URL+Accept-Encoding+Authorization in cache key) fully restores discrimination to 0.5, confirming the parent CACHED falsification was a cache-key semantics artifact. The parent's recommended real-CDN experiment is now justified: the local fix works, so the real-CDN test can focus on edge-specific concerns rather than local infrastructure bugs. Real CDN infrastructure is the sole remaining blocker for C-MEAS-VALID product readiness.",
+  "carry_forward": {
+    "established": [
+      "Iterative decompression (brotli->gzip->identity looping to max_depth=5) maintains decompression-normalized discrimination at 0.5 (threshold >=0.3) on localhost Python reverse proxy with auth-aware cache configuration (URL+Accept-Encoding+Authorization in cache key, Cache-Control: private, Vary: Authorization) — across JSON/HTML/XML x 1KB/10KB/100KB (9 conditions) x 4 auth states x 5 reps (180 requests per cache_config, 360 total, seed 44, jitter 50-150ms). Verified: 0 decompression errors, within-state decompressed hash all_same=true per state, B-RANDOM 0.0, 36 live direct-vs-proxy hash checks 0 mismatches, Content-Length forwarding",
+      "Parent CACHED falsification (discrimination 0.0 with naive URL+Accept-Encoding cache key) is confirmed as a CDN cache-key semantics artifact, NOT a decompression failure: iterative decompression correctly decompressed the (wrong) cached body in NAIVE mode (0 errors, all_same=true per state), proving the failure is stale cache serving, not pipeline failure",
+      "Auth-aware caching (Cache-Control: private / Vary: Authorization with Authorization in cache key) is the standard CDN pattern for user-specific content and is validated locally as sufficient for iterative decompression to maintain discrimination",
+      "Iterative decompression survives proxy PASSTHROUGH and RECOMPRESS with discrimination 0.5 (parent established, this experiment confirms via AUTH-AWARE=0.5 matching parent baseline)"
+    ],
+    "rejected": [
+      "Single-pass client decompression does NOT survive double-brotli or triple-brotli encoding (parent established, iterative fix resolves it)",
+      "Compressed-only body hashing is NOT sufficient for format-invariant discrimination (0.2781 < 0.3)",
+      "Naive CDN caching with (URL, Accept-Encoding) cache key excluding Authorization destroys auth-dependent content differentiation (discrimination 0.0 across all 9 cells) — this is a CDN cache-key semantics issue, not decompression failure",
+      "Frozen spec decision rule SURVIVES_CURRENT_TEST is unsatisfiable by construction when both NAIVE and AUTH-AWARE are tested simultaneously (c1 requires all cells >=0.3, c4 requires NAIVE=0.0)"
+    ],
+    "unknown": [
+      "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration (Cache-Control: private / Vary: Authorization)?",
+      "Does iterative decompression survive real CDN with double/triple-brotli multi-layer encoding through the proxy?",
+      "Does iterative decompression survive Transfer-Encoding: chunked through a real CDN proxy independently of Content-Length? (This experiment used Content-Length; chunked TE was not varied)",
+      "What is production-scale latency/CPU at N>1000 with MB-scale natural content and concurrent clients through real CDN?",
+      "Does iterative decompression work for binary content types or genuinely incorrect Content-Encoding on incompressible data?",
+      "How does proxy behavior interact with CDN-specific header manipulation (X-Cache, Via, X-Forwarded-For) and Accept-Encoding negotiation across multiple CDN nodes?",
+      "What is the maximum practical decompression depth for real-world multi-layer encoding scenarios?",
+      "Does frozen PARENT_REF_HASHES constant match live recomputed hashes byte-for-byte? (Live verification passed but direct hash equality to parent artifact not demonstrated)"
+    ],
+    "do_not_assume": [
+      "Do NOT assume iterative decompression is production-ready: real CDN infrastructure (Cloudflare/Fastly/Akamai) is untested",
+      "Do NOT assume the structural discrimination ceiling of 0.5 applies to production: it is a property of the 3-way error collapse mock design",
+      "Do NOT assume localhost decompression latency (0.01-0.22ms) or proxy overhead (1.5-2.7ms) represents production cost at scale",
+      "Do NOT assume format-invariance extends to binary content types or compressed data formats",
+      "Do NOT assume the maximum decompression depth of 5 is sufficient for all real-world multi-layer encoding scenarios",
+      "Do NOT assume Cache-Control: private / Vary: Authorization is sufficient for all CDN configurations — this is validated only on localhost Python proxy",
+      "Do NOT assume the CACHED falsification implies iterative decompression fails — it correctly decompressed the (wrong) cached body (0 errors, all_same=true per state)",
+      "Do NOT assume the claim ceiling advances to CDN-ready: it advances to localhost proxy with auth-aware cache configuration only",
+      "Do NOT assume C-MEAS-VALID has reached VALIDATED status: real CDN infrastructure remains the blocking dependency",
+      "Do NOT assume Transfer-Encoding chunked can be isolated as an independent variable — this experiment used Content-Length forwarding, not chunked TE"
+    ]
+  },
+  "dependencies": [
+    "Parent EXP-RUNTIME-35330741639 claim ceiling (localhost triple-brotli all states including valid_token, PASSTHROUGH/RECOMPRESS discrimination 0.5) is inherited and confirmed unchanged by this experiment",
+    "Auth-aware cache configuration (URL+Accept-Encoding+Authorization in cache key, Cache-Control: private, Vary: Authorization) is validated locally as sufficient for discrimination maintenance",
+    "Real CDN infrastructure with auth-aware cache configuration remains the critical blocker for C-MEAS-VALID product readiness",
+    "C-MEAS-VALID remains EXPERIMENTAL on the decompression-normalization sub-thread: this experiment advances the ceiling to include localhost proxy with auth-aware caching, but real CDN is untested",
+    "Audit required_fixes: (1) frozen spec decision rule contradiction (c1 vs c4) must be resolved before future experiments; (2) determinism-across-paths verification should use frozen parent hashes or document live comparison as equivalent; (3) chunked TE must be explicitly tested or excluded from claim ceiling; (4) C_PASSTHROUGH_REGRESSION must map correctly to available proxy modes"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35389142338/result.json - 360 requests, 18 cells, 9 NAIVE 0.0 + 9 AUTH-AWARE 0.5, 0 decompression errors, B-RANDOM 0.0, 6 controls pass",
+    "research/experiments/EXP-RUNTIME-35389142338/audit.json - REVISE status, V1 decision rule contradiction high severity, claim_ceiling bounded to localhost proxy auth-aware, recomputed metrics match producer exactly",
+    "research/experiments/EXP-RUNTIME-35389142338/report.md - Decision Rule Analysis, per-cell 0.0/0.5 table, Interpretation",
+    "research/experiments/EXP-RUNTIME-35389142338/provenance.json - 360 requests, seed 44, Content-Length forwarding, model mimo-v2.5-free",
+    "research/experiments/EXP-RUNTIME-35330741639/handoff.json - parent carry_forward, real CDN blocker, established/rejected/unknown/do_not_assume"
+  ],
+  "recommended_action": "Design a real-CDN decompression-normalization experiment using Cloudflare Workers or Fastly Compute@Edge as a CDN proxy in front of the localhost mock server. The CDN proxy should: (1) apply real brotli/gzip compression with Accept-Encoding negotiation; (2) use auth-aware cache configuration (Cache-Control: private / Vary: Authorization with Authorization in cache key) as positive control, plus default (URL, Accept-Encoding) cache key as negative control; (3) apply chunked transfer-encoding. Test all 4 auth states x JSON/HTML/XML x 1KB/10KB/100KB with iterative decompression max_depth=5. Include a non-chunked passthrough control to isolate chunked TE effect. Resolve the frozen spec decision rule contradiction (c1 vs c4) before designing: condition (1) should apply only to auth-aware cells, not naive cells. If iterative decompression survives real CDN with auth-aware cache configuration, C-MEAS-VALID decompression-normalization reaches the threshold for VALIDATED status."
+}

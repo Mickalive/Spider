@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35375596894",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Decision rule violation: Frozen decision_rule requires ALL four conditions (C1-C4) to pass for SURVIVES_CURRENT_TEST. C4 (null control mean < 3*std) FAILS (state_K2 null_mean=0.552, 3*std=0.044). Producer reported outcome=SUPPORTS/status=COMPLETE, overriding frozen rule. Must either: (a) report MEASUREMENT_INVALID per frozen rule, or (b) formally amend decision rule before freeze with justification.",
+    "Provenance integrity: SHA256 hashes in provenance.json and result.json for raw_transitions.json (reported 170df6e3..., actual 46ed606a...) and analysis_results.json (reported bdee841d..., actual b49734a4...) do not match artifacts on disk. Metrics are reproducible (re-run matches result.json values) but reported hashes are incorrect. Must correct provenance.json and result.json artifact hashes to match actual files.",
+    "Null control failure unaddressed: Trajectory-level block permutation yields null_mean=0.552 for state_K2 (31x the 3*std threshold). This replicates and amplifies parent experiment's null bias (parent mean=0.054). The permutation does not center null at zero for this hash-routed SPA design. Producer argues p-value remains valid (observed >> null), but the decision rule's null criterion is a hard gate, not advisory.",
+    "Playwright browser automation not validated: Chromium executable missing in CI (requires 'npx playwright install'). Automatability check fell back to HTTP API direct (5/5 probes). Full browser validation of fragment handling, history API, and session cookies remains untested. This is a known inherited gap (parent audit V3)."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Frozen decision rule violated by producer outcome assignment",
+      "severity": "critical",
+      "details": "The frozen decision_rule in spec.json and implemented in run_experiment.py explicitly requires C4 (null control mean < 3*std) to pass for SURVIVES_CURRENT_TEST. C4 fails: state_K2 null_mean=0.5521196, 3*null_std=0.0440693. The run_experiment.py code correctly evaluates this as MEASUREMENT_INVALID (lines 660-663). Producer's result.json reports status=COMPLETE, outcome=SUPPORTS, contradicting the frozen rule. This is a post-hoc override after seeing outcomes, violating transmission discipline (EXPERIMENT_PACKET.md §2: 'EXECUTE emits result.json... It executes the frozen design rather than re-designing after outcomes are visible')."
+    },
+    {
+      "finding": "Provenance hash mismatch for primary artifacts",
+      "severity": "high",
+      "details": "result.json:artifacts[0] and provenance.json:artifacts[0] report raw_transitions.json SHA256=170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade. Actual file SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512. Similarly analysis_results.json reported SHA=bdee841d13f0acaa36494d17ced4636c5702e0e135f0b7506ec5e72313c96b53, actual=b49734a4ee33ee5f5c24e3d6f2bca04a5e6850915d950fda5f84679b90f3e0e5. Metrics are reproducible (re-run with seed=42 yields identical pmi_bits to 15 decimal places), indicating the computation is deterministic but the reported hashes are stale or from a different run. This breaks artifact traceability."
+    },
+    {
+      "finding": "Null control permutation bias is intrinsic to hash-routed SPA design, not sampling error",
+      "severity": "high",
+      "details": "Trajectory-level block permutation yields state_K2 null_mean=0.552 (31x 3*std threshold), state_K3 null_mean=0.0129 (1.4x threshold), action_K3 null_mean=1.023 (25x threshold). Diagnostic action-shuffle permutation also fails (state_K2 null_mean=0.406, p=0.002). This replicates parent's null bias (mean 0.054 > 3*0.017) but amplified at N=5000. The bias arises because block permutation shuffles (url_before,url_after) while keeping history fixed, but history was computed from original url_before sequence, creating artificial state-history correlations. The p-value test (observed >= permuted) remains significant (p=0.001) because observed PMI (0.933) exceeds the biased null distribution, but the decision rule's mean<3*std criterion is unattainable for this SPA design."
+    },
+    {
+      "finding": "State-history K=2 primary metric achieves 0.933 bits (18.6x threshold) with high significance",
+      "severity": "observation",
+      "details": "state_history_pmi_k2 = 0.9332436 bits, permutation p=0.001 (Bonferroni 0.0167), effect size d=25.94, 398/1292 strata used (30.8% vs parent 1.4%), prediction accuracy 0.487. This is a strong, reproducible signal. The 68.5% stochastic strata at K=2 (885/1292) confirms the environment has substantial beyond-Markov structure detectable at this history length and sample size."
+    },
+    {
+      "finding": "Action-history K=3 at N=5000 outperforms state-history K=2 (1.221 vs 0.933 bits)",
+      "severity": "observation",
+      "details": "Contrary to the hypothesis that state-history conditioning is necessary (because SHA256 depends on prev1,prev2), action-history K=3 at N=5000 yields higher PMI (1.221 bits) with better coverage (62.1% strata used vs 30.8%). Parent at N=1000 gave 0.048 bits (1.4% coverage). This demonstrates the parent's failure was primarily sparsity (N=1000), not action-history proxy limitation. The identifiability argument (action-history cannot uniquely identify state history) does not prevent detection when N is sufficient."
+    },
+    {
+      "finding": "Stratum explosion at K=3 state-history limits interpretability",
+      "severity": "medium",
+      "details": "State-history K=3 has 2779 total strata but only 105 used (3.8%), with 2674 skipped as too small. Mean 0.24 obs/stratum at N=5000 (12^4=20736 possible). PMI=0.168 bits is significant but based on sparse coverage. Prereg validity threat #1 correctly anticipated this; K=2 is the appropriate primary test."
+    },
+    {
+      "finding": "Deterministic strata dilution remains substantial at K=2",
+      "severity": "medium",
+      "details": "31.5% of K=2 strata are deterministic (single successor, PMI=0 by construction), diluting the weighted average. Stochastic-strata-only PMI would be higher. Parent had 55% deterministic at K=3. The dilution is acknowledged but not corrected in the primary metric."
+    },
+    {
+      "finding": "In-memory simulation only; browser fidelity unvalidated",
+      "severity": "medium",
+      "details": "Main analysis uses in-memory simulation identical to parent. Playwright chromium not installed in CI. HTTP API check validates server logic but not browser fragment routing, history API, or cookie handling. This matches parent's measurement validity caveat (audit V3). The transition function SHA256(prev1:prev2:current:action) is deterministic and server-independent, so fidelity gap risk is low but not zero."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "POSITIVE_CONTROL_SYNTHETIC_SPA",
+      "status": "PASS",
+      "details": "8-state deterministic SPA: state_K3 PMI=1.671 bits (p=0.001, d=87.9), action_K3 PMI=1.806 bits (p=0.001, d=103.2). Both exceed 1.0 bit threshold and p<0.001. Validates PMI pipeline at N=5000 for both conditioning strategies. Note: positive control is deterministic (not stochastic beyond-Markov), so it validates pipeline sensitivity to strong structure but not calibration for stochastic detection."
+    },
+    {
+      "baseline": "NULL_CONTROL_BLOCK_PERMUTATION",
+      "status": "FAIL",
+      "details": "Trajectory-level block permutation (1000 perms, seed=42): state_K2 mean=0.552 (3*std=0.044) FAIL; state_K3 mean=0.0129 (3*std=0.0092) FAIL; action_K3 mean=1.023 (3*std=0.041) FAIL. Diagnostic action-shuffle: state_K2 mean=0.406 (3*std=0.023) FAIL, p=0.002. Null distribution is biased high, making criterion unattainable. This is a known inherited issue (parent audit V2). The permutation p-values remain highly significant (p=0.001) because observed PMI far exceeds null distribution."
+    },
+    {
+      "baseline": "AUTOMATABILITY_PILOT_BROWSER",
+      "status": "PARTIAL",
+      "details": "HTTP API direct check succeeded (5/5 probes, 200 transitions via http_api_direct_with_playwright_fail). Playwright chromium executable missing (requires npx playwright install). Browser automation not fully validated. Transition function is deterministic and server-identical, but fragment handling, history API, concurrent sessions, and anti-bot bypass untested."
+    },
+    {
+      "baseline": "Unconditional PMI K=0 reproduction",
+      "status": "PASS",
+      "details": "K=0 PMI=1.419 bits (p=0.001, d=321) reproduces parent 1.441 bits. K=1 state-history PMI=1.531 bits reproduces parent 1.509 bits. Confirms state-conditioned predictability pipeline intact."
+    }
+  ],
+  "recomputed_metrics": {
+    "state_history_pmi_k2": {
+      "pmi_bits": 0.9332435964563096,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 0.5521196059272595,
+      "null_std": 0.01468977718619695,
+      "effect_size_d": 25.944844887584008,
+      "n_strata_total": 1292,
+      "n_strata_used": 398,
+      "skipped_small": 894,
+      "skipped_zero_var": 2,
+      "prediction_accuracy": 0.48699374382614424,
+      "passes_threshold": true,
+      "passes_significance": true,
+      "deterministic_strata": 407,
+      "stochastic_strata": 885,
+      "stochastic_ratio": 0.684984520123839
+    },
+    "state_history_pmi_k3": {
+      "pmi_bits": 0.168155815254065,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 0.012930409456927876,
+      "null_std": 0.0030781552917030267,
+      "effect_size_d": 50.42806196800317,
+      "n_strata_total": 2779,
+      "n_strata_used": 105,
+      "skipped_small": 2674,
+      "skipped_zero_var": 2,
+      "prediction_accuracy": 0.5348460291734197,
+      "passes_threshold": true,
+      "passes_significance": true,
+      "deterministic_strata": 1801,
+      "stochastic_strata": 978,
+      "stochastic_ratio": 0.3519251529327096
+    },
+    "action_history_pmi_k3": {
+      "pmi_bits": 1.2205083083840707,
+      "permutation_p": 0.000999000999000999,
+      "null_mean": 1.023290481045267,
+      "null_std": 0.013920059936986848,
+      "effect_size_d": 14.167886361952954,
+      "n_strata_total": 821,
+      "n_strata_used": 510,
+      "skipped_small": 311,
+      "skipped_zero_var": 0,
+      "prediction_accuracy": 0.3365223630710356,
+      "passes_threshold": true,
+      "passes_significance": true,
+      "deterministic_strata": 89,
+      "stochastic_strata": 732,
+      "stochastic_ratio": 0.8915956151035322
+    },
+    "positive_control_state_k3": {
+      "pmi_bits": 1.671251,
+      "permutation_p": 0.000999000999000999,
+      "effect_size_d": 87.9,
+      "passes": true
+    },
+    "null_control_block_permutation": {
+      "state_k2_mean": 0.5521196059272595,
+      "state_k2_std": 0.01468977718619695,
+      "state_k2_pass_strict": false,
+      "state_k3_mean": 0.012930409456927876,
+      "state_k3_std": 0.0030781552917030267,
+      "state_k3_pass_strict": false,
+      "action_k3_mean": 1.023290481045267,
+      "action_k3_std": 0.013920059936986848,
+      "action_k3_pass_strict": false
+    },
+    "decision_rule_evaluation": {
+      "c1_pmi_threshold": true,
+      "c1_perm_significance": true,
+      "c1_overall": true,
+      "c2_positive_control": true,
+      "c3_min_transitions": true,
+      "c4_null_control": false,
+      "frozen_decision": "MEASUREMENT_INVALID",
+      "producer_decision": "SURVIVES_CURRENT_TEST",
+      "disagreement": "Producer overrode frozen C4 failure"
+    }
+  },
+  "claim_ceiling": "State-history K=2 conditional PMI detects beyond-Markov structure on the 12-state hash-routed SPA simulation at N=5000 (0.933 bits, p=0.001, d=25.9). However: (1) The frozen decision rule evaluates to MEASUREMENT_INVALID due to null control failure (C4), not SURVIVES_CURRENT_TEST; producer's SUPPORTS outcome is not justified per frozen rule. (2) Null control bias (mean 0.552) is intrinsic to hash-routed SPA design; the mean<3*std criterion is unattainable, making the decision rule mis-calibrated for this environment. (3) Action-history K=3 at N=5000 also detects signal (1.221 bits), demonstrating sample size was the dominant bottleneck in parent, not conditioning strategy. (4) Playwright browser automation unvalidated; in-memory simulation fidelity gap remains. (5) Claim ceiling bounded to: URL-level PMI with state-history conditioning on synthetic 12-state hash-routed SPA at N=5000 in-memory. Does not generalize to production SPAs, richer state representations, or browser-automated collection. C-WEB-DYNAMICS remains HYPOTHESIS pending valid browser-based test on production-like SPAs.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35375596894/request.json",
+    "research/experiments/EXP-PHYSICS-35375596894/spec.json",
+    "research/experiments/EXP-PHYSICS-35375596894/prereg.md",
+    "research/experiments/EXP-PHYSICS-35375596894/freeze.json",
+    "research/experiments/EXP-PHYSICS-35375596894/result.json",
+    "research/experiments/EXP-PHYSICS-35375596894/report.md",
+    "research/experiments/EXP-PHYSICS-35375596894/provenance.json",
+    "research/experiments/EXP-PHYSICS-35375596894/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35375596894/raw_transitions.json (actual SHA256: 46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512)",
+    "research/experiments/EXP-PHYSICS-35375596894/analysis_results.json (actual SHA256: b49734a4ee33ee5f5c24e3d6f2bca04a5e6850915d950fda5f84679b90f3e0e5)",
+    "research/experiments/EXP-PHYSICS-35353016293/handoff.json (sha256 b940d73598dadfe945f5c5bd48ea0c0fa721750fcd94718329851a64ae6ebe66)",
+    "codex/claim_state.json:C-WEB-DYNAMICS"
+  ],
+  "unresolved": [
+    "Whether a revised permutation scheme (e.g., within-stratum shuffle of url_after conditional on (url_before,history,action)) can center the null at zero for hash-routed SPAs without losing power due to small stratum sizes.",
+    "Whether Playwright browser automation on spa_server.js yields identical transition distribution to in-memory simulation when fragment handling, history API, and session cookies are involved. Requires chromium install and re-run.",
+    "Whether the action-history vs state-history comparison generalizes beyond this specific 12-state SHA256(prev1:prev2:current:action) mod 4 design. Action-history outperforming state-history at N=5000 suggests the identifiability argument is not decisive for this environment; systematic test across SPA designs needed.",
+    "Optimal history length K for detection given state/action cardinalities: K=2 state-history (causal parents) gives 0.933 bits, K=3 gives 0.168 bits (sparse), K=1 gives 1.531 bits (includes Markov component). Need systematic K sweep with N scaling to find power-optimal K.",
+    "Whether richer state representations (DOM hash, accessibility tree, visual layout) on this SPA or production SPAs yield marginal information beyond URL+state-history at N=5000.",
+    "Whether production SPAs with history-based routing, auth state, and stochastic external data exhibit beyond-Markov URL-level PMI detectable by this pipeline at comparable N (5000) via browser automation."
+  ]
+}

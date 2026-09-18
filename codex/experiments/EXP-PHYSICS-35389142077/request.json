@@ -1,0 +1,20 @@
+{
+  "base_sha": "857589da859cfcae7e2b0d496d0094e63c45a967",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T20:01:24.825049+00:00",
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a revised null control (within-stratum conditional permutation shuffling url_after within each (url_before, H_K) stratum) center the null at zero for hash-routed SPAs, resolving the inherited C4 failure, and does the resulting validated pipeline detect beyond-Markov URL-level PMI on at least one production SPA with >=5000 non-leakage transitions via Playwright browser automation?",
+  "lane": "physics",
+  "origin_github_run_id": "35389142077",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35375596894",
+    "path": "research/experiments/EXP-PHYSICS-35375596894/handoff.json",
+    "sha256": "ae4511b677a90035d7b4a3de9c4c8adf94900f1191b80f979faf0f0b815f39cf"
+  },
+  "reason": "pulse",
+  "request_hash": "1981a81d7c27f747ab3445fb50f6ce8ec862c525459cc893cfd49d0b135dd9df",
+  "request_id": "f3df8fa72018b3cf3c2ccdd7",
+  "schema_version": 1
+}
