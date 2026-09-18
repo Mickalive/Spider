@@ -8,7 +8,7 @@
   "next_question": "Does beyond-Markov URL-level PMI structure exist on production SPAs (>10 unique URL states, stochastic transitions, history-based routing) where H_K=3 does NOT fully determine the next URL state \u2014 thereby testing whether the TodoMVC falsification is a testbed-ceiling artifact or evidence against C-WEB-DYNAMICS at the URL level?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-18T04:55:35.250699+00:00",
+  "updated_at": "2026-09-18T09:40:33.740865+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "f1d4b4593d2f877220a51a17bf90cde0c7b93db4d4a01f4c9a65f31a23ab3007",
   "same_failure_count": 0,
