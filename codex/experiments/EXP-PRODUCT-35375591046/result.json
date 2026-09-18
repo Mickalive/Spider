@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35375591046",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {
+    "C1_COLD_success_rate": {
+      "expected_behavior": "COLD success rate >= 90% across all 32 tasks (frozen decision_rule criterion C1)",
+      "observed_behavior": "NOT_MEASURED — no LLM API calls executed; 0/32 tasks completed in any condition",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35375591046/request.json:inherited_last_verdict; research/experiments/EXP-PRODUCT-35353007958/handoff.json"
+    },
+    "C2_COLD_token_cost": {
+      "expected_behavior": "Average COLD token cost (prompt+completion) <= 100 tokens/task (frozen decision_rule criterion C2)",
+      "observed_behavior": "NOT_MEASURED with real LLM; parent analytical estimate is 77.34 tokens/task via tiktoken counting on synthetic corpus (EXP-PRODUCT-35330741529), but completion tokens were estimated (20/task) not measured from actual model output",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35330741529/result.json:metrics.per_task_avg_cold_cost; research/experiments/EXP-PRODUCT-35375591046/spec.json:baselines.B-COLD-EXECUTED"
+    },
+    "C3_positive_control": {
+      "expected_behavior": "All 5 blog-read-post tasks produce correct URLs under COLD (frozen decision_rule criterion C3)",
+      "observed_behavior": "NOT_MEASURED with real LLM; analytically validated in parent (EXP-PRODUCT-35330741529) that 5 blog-read-post tasks collapse to 1 parameterized pattern, but actual LLM URL generation success not tested",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35330741529/result.json:controls.C4_positive_control; research/experiments/EXP-PRODUCT-35375591046/spec.json:positive_control"
+    },
+    "B-COLD-EXECUTED_baseline": {
+      "expected_behavior": "Single LLM call generates URL from task description only; no selection or resolution overhead",
+      "observed_behavior": "NOT_EXECUTED — no LLM API access available",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35375591046/spec.json:baselines.B-COLD-EXECUTED"
+    },
+    "B-LITERAL-EXECUTED_baseline": {
+      "expected_behavior": "Reference baseline for token cost comparison; 32 mechanisms via API call",
+      "observed_behavior": "NOT_EXECUTED — no LLM API access available",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35375591046/spec.json:baselines.B-LITERAL-EXECUTED"
+    },
+    "B-PARAMETERIZED-EXECUTED_baseline": {
+      "expected_behavior": "Reference baseline for token cost comparison; 25 mechanisms with template resolution",
+      "observed_behavior": "NOT_EXECUTED — no LLM API access available",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35375591046/spec.json:baselines.B-PARAMETERIZED-EXECUTED"
+    },
+    "POS-CONTROL-COLD-SIMPLE": {
+      "expected_behavior": "All 5 blog-read-post tasks produce correct URLs under COLD; success rate 100% on simple tasks",
+      "observed_behavior": "NOT_MEASURED with real LLM",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35375591046/spec.json:positive_control"
+    },
+    "NULL-COLD-COMPLEX": {
+      "expected_behavior": "COLD success rate on complex tasks may be lower than on simple tasks",
+      "observed_behavior": "NOT_MEASURED with real LLM",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35375591046/spec.json:null_control"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/request.json",
+      "sha256": "61afd3418e5be59f7517c93fbb7915d99f3c312efd363a96516b080243f34230",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/spec.json",
+      "sha256": "90a9c9d5d3757547ecd051832ffede5189e2a591d82ad9b5a82dbf94f846b69e",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/prereg.md",
+      "sha256": "dfcad8fe965b0667a580e6b90fe573e8ca20653ed5b95ffafd65f34db6f443c6",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/freeze.json",
+      "sha256": "90a9c9d5d3757547ecd051832ffede5189e2a591d82ad9b5a82dbf94f846b69e",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35353007958/handoff.json",
+      "sha256": "0fb45f53ab9fe04b8c3bdfb5e89d5e95e0cf7dc3ad67ac073f159e8c0258a9a",
+      "role": "parent_handoff"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/result.json",
+      "sha256": "26843e77aca2ee161b9fae0e5a81c60a01cccb0c55785077d2e58670195c8cd0",
+      "role": "parent_result_analytical_ceiling"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+      "sha256": "00ae2dd7b46fcf151ea8725df816aff0034a7162538444aa825dd59d0fc8f070",
+      "role": "parent_code_analytical_measurement"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35375591046/execution_checkpoint.json",
+      "sha256": null,
+      "role": "execution_checkpoint"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": null,
+      "role": "codebase_reference"
+    }
+  ],
+  "observations": [
+    "RAW OBSERVATION: No LLM API keys are available in the execution environment. Environment check confirms: OPENAI_API_KEY and equivalent variables are absent; no ollama/local LLM server is running at localhost:11434; no HTTP LLM endpoint is accessible at localhost:8000 or localhost:3000; no LLM processes are running.",
+    "RAW OBSERVATION: The openai Python package and tiktoken are installed, but neither can function without API credentials or a local LLM server.",
+    "RAW OBSERVATION: The frozen experiment design (spec.json) requires 32 independent LLM API calls (one per task in COLD condition) to measure success rate and token cost. Zero tasks were executed.",
+    "RAW OBSERVATION: This is the second consecutive PRODUCT lane experiment to fail with the same infrastructure cause. Parent EXP-PRODUCT-35353007958 was also MEASUREMENT_INVALID: 0/32 tasks executed due to missing LLM API keys.",
+    "RAW OBSERVATION: The parent experiment EXP-PRODUCT-35330741529 established an analytical COLD baseline of 77.34 tokens/task (2475 total across 32 tasks) using tiktoken token counting on prompt text, but completion tokens were estimated (20/task) and success rate was assumed 100% — neither was measured with real LLM calls.",
+    "RAW OBSERVATION: The model_design.json for this experiment records model 'opencode/mimo-v2.5-free' and model_execute.json records 'opencode/big-pickle' with exit_code 76 and category 'output-missing' — these are the agent execution models, not LLM API calls for the experiment.",
+    "RAW OBSERVATION: The COLD baseline's analytical token cost (77.34/task) is 8x cheaper than literal (615.34/task) and parameterized (582.0/task) conditions per parent EXP-PRODUCT-35330741529, but this is tiktoken counting on prompt text only, not real model execution."
+  ],
+  "validity_notes": [
+    "INFRASTRUCTURE FAILURE: No LLM API keys are available in the execution environment. The frozen decision_rule C1-C4 requires real LLM API calls and cannot be evaluated. This is explicitly documented in request.json:inherited_last_verdict.",
+    "Per the packet contract (research/EXPERIMENT_PACKET.md section 9), infrastructure failure is NOT a scientific negative. No evidence was produced or falsified.",
+    "The frozen decision_rule states: 'MEASUREMENT_INVALID if API failures prevent completion of >=5 tasks.' Since 0/32 tasks executed, this threshold is met (0 >= 5 is false, but the actual condition is that API failures prevent ALL execution).",
+    "The parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement. COLD 77 tokens/task is analytical (tiktoken counting), not from real LLM execution.",
+    "Key validity gaps carried forward from parent: (i) C1 success rate assumed 100% not measured, (ii) completion tokens estimated not measured, (iii) browser/verification costs omitted, (iv) COLD baseline viability (success rate) entirely unmeasured with real LLM.",
+    "Representation loss: The analytical tiktoken measurement (EXP-PRODUCT-35330741529) measures prompt tokens accurately but estimates completion tokens. Real LLM execution could reveal different completion token counts and potentially different success rates.",
+    "No code modifications were made to src/spider/kernel.py or any registry-authorized code root. The product lane's allowed_code_roots (src, tests, sdk, pyproject.toml) were not modified because the experiment could not execute.",
+    "This result preserves the chain: RAW EVIDENCE (no API keys) -> OBSERVATION (0/32 tasks executed) -> DERIVED MEASUREMENT (none possible) -> INTERPRETATION (infrastructure failure, not scientific negative)."
+  ],
+  "unresolved": [
+    "Whether COLD baseline achieves >= 90% success rate with real LLM API calls (criterion C1) — completely unmeasured",
+    "Whether actual COLD completion tokens from real LLM are <= 100/task average (criterion C2) — estimated at 77.34/task analytically but never measured from actual model output",
+    "Whether the 5 blog-read-post positive control tasks succeed with real LLM URL generation (criterion C3) — assumed but never tested",
+    "Whether COLD is truly viable as a baseline (success rate unmeasured) — this is the core question the experiment was designed to answer",
+    "Whether the 5.42% token savings from parameterized deduplication survives real LLM execution with actual completion tokens (parent's analytical margin is thin and based on estimates)",
+    "Whether browser/verification costs dominate and cancel the 5.42% token saving in end-to-end workflow — omitted from all measurements",
+    "The three-way decision from parent handoff (A: retry with API keys, B: real corpus, C: close token-based economics) remains unresolved",
+    "Whether the COLD baseline at 77 tokens/task (analytical) truly represents a viable alternative that could close the token-based inheritance economics line",
+    "Whether larger registries (100+) increase selection saving dominance as hypothesized — untested",
+    "No OPENAI_API_KEY or equivalent credential is available; without this, the frozen design cannot be executed"
+  ]
+}

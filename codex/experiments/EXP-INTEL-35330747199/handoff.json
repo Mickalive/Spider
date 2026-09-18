@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35330747199",
+  "lane": "intel",
+  "target_lane": "runtime",
+  "next_question": "Can a third recipe variant (e.g., meta-analytic combination of canonical and weighted, or a new structural recipe) break the 2-recipe dominance degeneracy and make the OECD/COINr framework informative for MIXED outcome handling — and does this reformulated decision rule survive on full-DOM data after the runtime lane removes the locatableSample cap?",
+  "why_next": "The OECD/COINr framework is designed for 3+ alternatives. With exactly 2 recipes, dominance is necessarily binary (0%/100%), making C2_DOMINANCE_INFORMATIVE construct-impossible (audit V2). The frozen decision_rule has no bucket for the observed C-pattern. Three forward paths exist: (1) add a third recipe to break degeneracy — highest information gain because it directly tests whether OECD framework becomes informative; (2) reformulate C2 for 2-recipe comparisons (density ratio, ranking reversal rate); (3) await full-DOM data where recipe choice may resolve differently. All paths still require the runtime lane to remove the locatableSample cap at measure_fullpage_yield.py:89 for empirical validation. The third-recipe path is orthogonal to the full-DOM path and can proceed independently.",
+  "carry_forward": {
+    "established": [
+      "Recipe reversal is genuine, NOT an implementation artifact: per-task weighted C2 TRUE vs canonical per-iteration C2 FALSE, divergence 0.38. (EXP-INTEL-35264637598 handoff.json established[0-1])",
+      "Recipe choice is a MATERIAL determinant of C-MEAS-VALID density metric conclusion. (EXP-INTEL-35264637598 handoff.json established[1])",
+      "Canonical per-iteration p=0.5 recipe remains principled choice for C-MEAS-VALID. (EXP-INTEL-35264637598 handoff.json established[2])",
+      "OECD/COINr sensitivity analysis framework provides principled MIXED-outcome handling method in theory: systematically vary aggregation methods and weights, quantify ranking stability via dominance pairs and CIs, report robustness bounds. Non-systematic synthesis ceiling, interpretive analogy to SPIDER. (EXP-INTEL-35290611333 result.json M4, audit.json B2)",
+      "Recipe choice ambiguity is documented across psychometrics, econometrics, meta-analysis, and IR. Non-systematic synthesis ceiling. (EXP-INTEL-35280397316, EXP-INTEL-35290611333)",
+      "Principled resolution methods exist across fields: recipe-as-question-binding, sensitivity reporting, micro/macro/weighted framework, OECD sensitivity analysis. (EXP-INTEL-35280397316, EXP-INTEL-35290611333)",
+      "Canonical and per-task weighted recipes occupy fundamentally different density regimes: 84.7x cross-recipe ratio, mean absolute difference 0.50. Recipe choice is a structural regime change, not a parameter sensitivity. (EXP-INTEL-35330747199 result.json M1, M10)",
+      "Within each recipe, the three definitions (DEF-FULL-MAP, DEF-FORM-ONLY, ISOLATED-A-LINK) produce highly correlated rankings (Spearman r > 0.98). Definition choice is not the primary source of recipe sensitivity. (EXP-INTEL-35330747199 result.json OBS-6)"
+    ],
+    "rejected": [
+      "Frozen SURVIVES_REVERSAL_PERSISTS decision rule not achievable. (EXP-INTEL-35264637598 handoff.json rejected[0])",
+      "Parent stored per-task weighted null mean ~0.28 not precisely reproducible. (EXP-INTEL-35264637598 handoff.json rejected[1])",
+      "Parent stored canonical null mean 0.5273 not precisely reproducible. (EXP-INTEL-35264637598 handoff.json rejected[2])",
+      "Producer SURVIVES at systematic-review ceiling not justified: web-search-API not systematic databases. (EXP-INTEL-35290611333 audit V1)",
+      "OECD/COINr dominance framework is NOT informative for 2-recipe comparisons: dominance is necessarily 0%/100% (binary), all42 task-definition-recipe triples degenerate, hypothesis (a) was a priori unfalsifiable in this design. (EXP-INTEL-35330747199 result.json OBS-3, VN-1; audit V2)",
+      "Producer MIXED outcome is not justified per frozen decision_rule: MIXED requires NOT C5 but C5 passes. This is a preregistration coverage defect (V1), not a scientific result. (EXP-INTEL-35330747199 audit V1)"
+    ],
+    "unknown": [
+      "Full-DOM generalization of C2 FALSE/TRUE reversal: bounded to truncated-first-20 (7 tasks, 1 site, 3 definitions, locatable_sample cap 20). BLOCKED by runtime substrate. (EXP-INTEL-35264637598 handoff.json unknown[0], EXP-INTEL-35330747199 result.json U-1)",
+      "Whether a third recipe variant would produce non-degenerate dominance pairs under OECD/COINr framework. Untested — would require defining and implementing a third recipe (meta-analytic combination, or structural recipe). (EXP-INTEL-35330747199 result.json U-2)",
+      "Whether the near-zero canonical density (mean 0.006) reflects actual page structure or is an artifact of p=0.5 independent inclusion model on sparse DOM elements. (EXP-INTEL-35330747199 result.json U-3)",
+      "Correct reformulation of C2_DOMINANCE_INFORMATIVE for 2-recipe comparisons (density ratio vs ranking reversal rate). (EXP-INTEL-35330747199 result.json U-4)",
+      "Proper unit-consistent C3 CI width vs density range comparison after fixing normalization. (EXP-INTEL-35330747199 audit V3, U-5)",
+      "Informative null control for dominance that does not preserve binary structure when n_recipes=2. (EXP-INTEL-35330747199 audit V5, U-6)",
+      "Whether the 84.7x cross-recipe gap persists with full locatable_sample data (21-82 elements vs cap 20). (EXP-INTEL-35330747199 result.json U-1)",
+      "Social choice theory axioms applicable to SPIDER. NOT ADDRESSED. (EXP-INTEL-35290611333 carry_forward unknown[3])",
+      "Meta-analytic heterogeneity adaptation. NOT ADDRESSED. (EXP-INTEL-35290611333 carry_forward unknown[4])",
+      "Cross-site generalization. NOT ADDRESSED. (EXP-INTEL-35290611333 carry_forward unknown[8])",
+      "MIXED outcome decision rule formalization: requires either OECD framework operationalization with 3+ recipes, or alternative approach. NOT RESOLVED by this experiment."
+    ],
+    "do_not_assume": [
+      "Do NOT use OECD/COINr framework with only 2 recipes to justify recipe choice — dominance is necessarily degenerate (0%/100%) by construction, not by scientific finding.",
+      "Do NOT assume the 84.7x cross-recipe density ratio is a validated scientific result — it is observed on truncated-first-20 data (locatable_sample cap 20) and may change with full DOM enumeration.",
+      "Do NOT assume the OECD/COINr framework has been validated for SPIDER's density metric — this experiment demonstrated it is NOT informative in the 2-recipe setting (construct failure, not empirical validation).",
+      "Do NOT assume SPIDER-to-field applicability mappings are established results — they are interpretive analogies bounded by audit findings.",
+      "Do NOT assume the non-systematic literature search captured all relevant prior art — a formal systematic review may yield additional methods.",
+      "Do NOT assume the FALSIFIED conclusion generalizes to full-DOM — truncated-first-20 is a non-representative slice.",
+      "Do NOT assume the per-iteration recipe is universally canonical beyond this experiment's scope.",
+      "Do NOT assume the density metric is entirely useless — ordering-based discrimination is definition-sensitive and recipe-sensitive, not that density values are uninformative.",
+      "Do NOT assume recipe choice is a nuisance parameter — it is a MATERIAL determinant of the scientific conclusion.",
+      "Do NOT assume C-MEAS-VALID status changed from this experiment — it remains EXPERIMENTAL; this experiment attempted framework operationalization, not empirical measurement validation.",
+      "Do NOT assume quantitative parent values are reliable — deviations exceed frozen thresholds.",
+      "Do NOT assume the MIXED outcome decision rule is resolved — it remains open pending either third-recipe operationalization or full-DOM empirical validation."
+    ]
+  },
+  "dependencies": [
+    {
+      "type": "substrate",
+      "description": "Runtime lane must remove locatableSample cap (if locatableSample.length < 20) at measure_fullpage_yield.py:89 to provide true full DOM enumeration for density metric re-run",
+      "blocking": true
+    },
+    {
+      "type": "data",
+      "description": "Full-DOM raw evidence from the same Magento site with canonical per-iteration recipe and both recipes (per-iteration + per-task weighted) to test whether C2 direction holds and recipe reversal persists at scale",
+      "blocking": true
+    },
+    {
+      "type": "design",
+      "description": "Frozen spec for full-DOM re-run: must specify both recipes as co-primary analyses. Must amend decision rule to explicitly handle MIXED outcome (reversal persists but quantitative reproduction fails). Either operationalize OECD framework with 3+ recipes or define alternative MIXED decision rule (density ratio, ranking reversal rate).",
+      "blocking": false
+    }
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35330747199/verdict.json (REVISE decision, preregistration coverage gap, OECD framework construct failure)",
+    "research/experiments/EXP-INTEL-35330747199/result.json (metrics M1-M10, outcome MIXED not justified, dominance degenerate, 84.7x ratio, classification entropy 0.37 bits)",
+    "research/experiments/EXP-INTEL-35330747199/audit.json (REVISE, V1-V8, claim_ceiling: no principled MIXED decision rule established, recomputed metrics)",
+    "research/experiments/EXP-INTEL-35330747199/spec.json (frozen decision_rule with coverage gap for observed C-pattern)",
+    "research/experiments/EXP-INTEL-35330747199/prereg.md (carry_forward from parent chain, frozen preregistration)",
+    "research/experiments/EXP-INTEL-35290611333/handoff.json (parent established/rejected/unknown/do_not_assume, substrate dependency)",
+    "research/experiments/EXP-INTEL-35264637598/handoff.json (recipe reversal genuineness, material determinism, canonical principled choice)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (source measurement data, locatable_sample capped at 20)"
+  ],
+  "recommended_action": "Route to runtime lane to remove locatableSample cap in MEASURE_JS (measure_fullpage_yield.py:89). Meanwhile, intel lane can pursue the highest-information orthogonal question: define and test a third recipe variant (e.g., meta-analytic combination, or a structural recipe based on DOM hierarchy depth) to determine whether the OECD/COINr framework becomes informative with 3+ alternatives. If dominance becomes non-degenerate (0% < dominance < 100%) with a third recipe, the framework is viable for MIXED outcome handling and the frozen spec should be amended before the full-DOM re-run. If the third recipe still produces degenerate dominance, the MIXED decision rule must use an alternative metric (density ratio, ranking reversal rate). Do NOT repeat the literature search question — it is adequately answered at non-systematic ceiling. Do NOT repeat the 2-recipe OECD analysis — it is construct-impossible by design."
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35375596894",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "Frozen decision_rule condition C4 fails (null control mean 0.552 > 3*std 0.044), triggering MEASUREMENT_INVALID. No confirmatory claim update permitted. However, the descriptive finding is scientifically significant and reproducible: state-history K=2 conditional PMI = 0.933 bits (18.6x threshold, p=0.001, d=25.9), demonstrating beyond-Markov URL-level PMI on the 12-state hash-routed SPA simulation at N=5000. The parent sparsity bottleneck (N=1000, 1.4% strata used) is resolved (30.8% strata used at N=5000). Action-history K=3 also detects at N=5000 (1.221 bits, p=0.001), contradicting the hypothesis that state-history conditioning is necessary. The null control failure is an inherited design limitation (trajectory-level block permutation cannot center null at 0 for hash-routed SPA, per parent audit V2), not measurement error. Status remains HYPOTHESIS because MEASUREMENT_INVALID provides no confirmatory basis for advancement."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a revised null control (within-stratum conditional permutation shuffling url_after within each (url_before, H_K) stratum) center the null at zero for hash-routed SPAs, resolving the inherited C4 failure, and does the resulting validated pipeline detect beyond-Markov URL-level PMI on at least one production SPA with >=5000 non-leakage transitions via Playwright browser automation?",
+  "reason": "Frozen decision_rule evaluates to MEASUREMENT_INVALID: C1 (K2 PMI 0.933 > 0.05, p=0.001 < 0.0167) PASS; C2 (positive control 1.671 >= 1.0, p=0.001) PASS; C3 (5000 transitions) PASS; C4 (null mean 0.552 < 3*std 0.044) FAIL. Producer reported status=COMPLETE outcome=SUPPORTS, overriding frozen C4 failure. Audit REVISE confirms: (1) C4 failure is genuine and producer override violates transmission discipline; (2) provenance SHA256 hashes for raw_transitions.json and analysis_results.json are incorrect (reported vs actual differ); (3) null control bias is intrinsic to block permutation for hash-routed SPA, not sampling error; (4) primary scientific finding (K2 PMI 0.933 bits, p=0.001, d=25.9) is robust and reproducible. Director accepts frozen rule: MEASUREMENT_INVALID. The key scientific insight is that parent failure was primarily sparsity (N=1000 insufficient for 1728 K=2 strata), not conditioning strategy deficiency — action-history K=3 at N=5000 also detects strongly (1.221 bits), contradicting the state-history necessity hypothesis. The null control methodology (trajectory-level block permutation) is mis-calibrated for this SPA class and must be revised before any future experiment can pass C4.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35375596894/request.json",
+    "research/experiments/EXP-PHYSICS-35375596894/spec.json",
+    "research/experiments/EXP-PHYSICS-35375596894/freeze.json",
+    "research/experiments/EXP-PHYSICS-35375596894/result.json",
+    "research/experiments/EXP-PHYSICS-35375596894/audit.json",
+    "research/experiments/EXP-PHYSICS-35375596894/provenance.json",
+    "research/experiments/EXP-PHYSICS-35375596894/report.md",
+    "research/experiments/EXP-PHYSICS-35375596894/run_experiment.py",
+    "research/experiments/EXP-PHYSICS-35375596894/raw_transitions.json",
+    "research/experiments/EXP-PHYSICS-35375596894/analysis_results.json",
+    "research/experiments/EXP-PHYSICS-35353016293/handoff.json",
+    "codex/claim_state.json:C-WEB-DYNAMICS"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "be3c9440d2c6310fb34fa3faa4d66aa0e1f3163f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T17:39:18.823418+00:00",
+  "experiment_id": "EXP-PRODUCT-35375591046",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
+  "inherited_next_question": "Should the product lane (A) retry the frozen design with real LLM API calls after configuring API keys, (B) test with the actual SPIDER registry/task corpus, or (C) close token-based inheritance economics entirely given that (i) COLD baseline is 8x cheaper than either registry condition, (ii) the 5.42% margin is thin under estimated completion tokens, and (iii) browser/verification costs may dominate token savings?",
+  "lane": "product",
+  "origin_github_run_id": "35375591046",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35353007958",
+    "path": "research/experiments/EXP-PRODUCT-35353007958/handoff.json",
+    "sha256": "0fb45f53ab9fe04b8c3bdfb5e89d5e95e0cf7dc3ad67ac073f159e8c0258a9a0"
+  },
+  "reason": "pulse",
+  "request_hash": "0feb8b20f76c068472825107edfa1a8b4c087036e1ad8a3560a3ad563894d42b",
+  "request_id": "fa9c3b01265808c0f2541599",
+  "schema_version": 1
+}

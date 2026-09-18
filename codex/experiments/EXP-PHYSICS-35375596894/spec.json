@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-PHYSICS-35375596894",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can state-history conditioning (prev URL states instead of action-history) with N>=5000 transitions detect the beyond-Markov PMI signal that the parent experiment confirmed exists but could not measure due to sparsity and action-history proxy limitations?",
+  "hypothesis": "Conditional PMI I(url_after; action | url_before, prev1, prev2) at K=2 (state-history) will be >0.05 bits on the 12-state SPA simulation with N=5000, because: (a) N=5000 gives mean ~6.5 obs/stratum across 12*12*12=1728 possible K=2 state-history strata (vs 1.77 at N=1000), and (b) state-history directly conditions on the causal parents of the transition function (SHA256(prev1:prev2:current:action)), whereas action-history is an indirect proxy that cannot identify prev states with 12 states and 4 actions.",
+  "falsifier": "Primary: state-history K=2 conditional PMI <= 0.05 bits (same threshold as parent). Secondary: state-history K=3 PMI <= 0.05 bits. If BOTH K=2 and K=3 fail, the beyond-Markov signal in this environment is not detectable by PMI regardless of conditioning strategy.",
+  "baselines": [
+    "Parent result: action-history K=3 PMI = 0.048 bits at N=1000 (EXP-PHYSICS-35353016293)",
+    "Action-history K=3 PMI at N=5000 (same estimator, same threshold, larger sample — controls for sample-size vs conditioning-strategy confound)",
+    "Unconditional PMI K=0 at N=5000 (state-conditioned predictability without history)",
+    "Conditional PMI K=1 state-history at N=5000 (one-step state conditioning)",
+    "Positive control: 8-state synthetic deterministic SPA (same as parent, N=5000)",
+    "Null control: trajectory-level block permutation (addresses parent V2 null bias)"
+  ],
+  "positive_control": "8-state synthetic deterministic SPA with known beyond-Markov structure (same as parent). K=3 PMI must be >= 1.0 bits with permutation p < 0.001. Validates PMI pipeline at N=5000.",
+  "null_control": "Trajectory-level block permutation: shuffle (url_before, url_after) pairs within each trajectory while preserving trajectory structure. This breaks state transition dependencies while maintaining marginal distributions. Expected mean PMI ~0 bits. Addresses parent V2_null_control_bias where action-label shuffling preserved implicit state information via SHA256 routing.",
+  "measurement_validity": [
+    "N=5000 transitions from 12-state SPA simulation (in-memory, same as parent — Playwright automatability tested separately as automatability_check)",
+    "State-history H_K built from URL states (prev1, prev2, ...) not action labels",
+    "Action-history H_K built from action labels for comparison baseline",
+    "PMI pipeline with alpha=0 smoothing, MIN_STRATUM_SIZE=5 (same as parent)",
+    "Permutation test: 1000 trajectory-level block permutations, seed=42",
+    "Bonferroni correction for 3 confirmatory tests (state-history K=2, K=3, action-history K=3 comparison): alpha = 0.05/3 = 0.0167",
+    "Automatability check: 200 Playwright browser transitions on spa_server.js (separate from main analysis, diagnostic only)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL: (1) state-history K=2 conditional PMI > 0.05 bits AND Bonferroni-corrected permutation p < 0.0167; (2) positive control passes (K=3 PMI >= 1.0 bits, p < 0.001); (3) >= 5000 transitions collected; (4) null control passes (mean PMI < 3*std). FALSIFIED-IN-SETTING if state-history K=2 PMI <= 0.05 bits OR both K=2 and K=3 fail. MEASUREMENT_INVALID if controls fail or data quality insufficient. The action-history K=3 comparison at N=5000 is exploratory — it controls for sample-size confound but is not part of the primary SURVIVES/FALSIFIED decision.",
+  "product_consequence_positive": "C-WEB-DYNAMICS advances from HYPOTHESIS toward EXPERIMENTAL. State-history conditioning validated as more powerful than action-history for beyond-Markov detection on hash-routed SPAs. The 12-state SPA simulation validated as testbed for systematic physics experiments.",
+  "product_consequence_negative": "C-WEB-DYNAMICS claim ceiling narrows to: URL-level PMI cannot detect beyond-Markov dynamics on 12-state hash-routed SPAs regardless of conditioning strategy (state-history or action-history) or sample size (N<=5000). Research program should consider richer state representations (DOM, accessibility tree, visual) or alternative detection methods.",
+  "estimated_cost": "Low: single local computation (N=5000 transitions from same SPA simulation), no external network for main analysis. Playwright automatability check is ~5 min browser session.",
+  "expected_information_gain": "High: directly tests whether state-history conditioning resolves the parent's identifiability gap. If K=2 state-history PMI > 0.05 with N=5000, the beyond-Markov signal is real and detectable — a qualitative change in claim status. If it fails, the claim ceiling narrows definitively."
+}

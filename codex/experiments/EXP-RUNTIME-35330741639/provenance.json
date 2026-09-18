@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35330741639",
+  "lane": "runtime",
+  "github_run_id": "35375594517",
+  "github_run_url": null,
+  "commits": {
+    "base_sha": "f14b01cf8dbd10513705c8c9606023c4a27ac30f",
+    "execute_sha": "c49cebabbf66ab6ac70553cc4babddcf415deb24"
+  },
+  "datasets_fixtures": {
+    "parent_ref_hashes": {
+      "path": "/tmp/parent_ref_hashes.json",
+      "description": "Parent (EXP-RUNTIME-35290615081) decompressed hashes extracted from raw_observations.json, used for determinism-across-paths test",
+      "source": "research/experiments/EXP-RUNTIME-35290615081/raw_observations.json"
+    }
+  },
+  "code_paths": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py",
+      "description": "Complete experiment: mock origin server, 3-mode reverse proxy (PASSTHROUGH/CACHED/RECOMPRESS), iterative decompression client, Jaccard discrimination scoring"
+    }
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "packages": {
+      "brotli": "1.2.0",
+      "PyJWT": "2.14.0",
+      "requests": "2.34.2",
+      "numpy": "2.5.3"
+    }
+  },
+  "execution_parameters": {
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "content_types": ["JSON", "HTML", "XML"],
+    "payload_sizes": {"1KB": 1024, "10KB": 10240, "100KB": 102400},
+    "proxy_behaviors": ["PASSTHROUGH", "CACHED", "RECOMPRESS"],
+    "reps_per_cell": 5,
+    "total_requests": 540,
+    "seed": 44,
+    "max_decompression_depth": 5,
+    "mock_brotli_quality": 6,
+    "proxy_recompress_quality": 8,
+    "cache_ttl_seconds": 60,
+    "accept_encoding": "br, gzip, identity",
+    "transfer_encoding": "chunked (all proxy modes)",
+    "jitter_ms": "50-150 uniform"
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35330741639/result.json",
+      "role": "result",
+      "description": "Complete experiment results with per-cell metrics, controls, and decision rule evaluation"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35330741639/report.md",
+      "role": "report",
+      "description": "Human-readable report with findings and scientific interpretation"
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35330741639/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script"
+    }
+  },
+  "frozen_inputs": {
+    "request_hash": "d18079d8fc529a8e90f02f9e711ef1679f552a89906e2b712adbc0eb33104d8b",
+    "spec_hash": "7d645154e99b4c90de26fafca869e5ced8010149f13e75c4d7bdcdf2441027fc",
+    "prereg_hash": "400978cce61c3112a2949cb2b25ba96ecc2b539dce55c234c5b2bc1c608149f5",
+    "freeze_hash": null,
+    "frozen_at": "2026-09-18T17:48:06.908623+00:00"
+  }
+}
