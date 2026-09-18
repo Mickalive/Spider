@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35353007958",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Should the product lane (A) retry the frozen design with real LLM API calls after configuring API keys, (B) test with the actual SPIDER registry/task corpus, or (C) close token-based inheritance economics entirely given that (i) COLD baseline is 8x cheaper than either registry condition, (ii) the 5.42% margin is thin under estimated completion tokens, and (iii) browser/verification costs may dominate token savings?",
+  "why_next": "This experiment was MEASUREMENT_INVALID: 0/32 tasks executed due to missing LLM API keys. No new evidence accumulated. The parent's analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement with the same validity gaps (C1 assumed, completion estimated, browser omitted, COLD 8x cheaper unmeasured). The three-way decision from the parent handoff (A: re-run with API keys, B: real corpus, C: close token-based economics) remains the required product lane decision. The smallest unblocking action is providing API access; alternatively, the COLD baseline economics and thin margin may justify closing this line of inquiry.",
+  "carry_forward": {
+    "established": [
+      "Analytical deduplication economics verified on synthetic 32-task corpus: parameterized 25 vs literal 32 mechanisms (21.9% reduction), selection savings 3168 tokens (16.09%), resolution overhead 2101 tokens (10.67%), net workflow savings 1067 tokens (5.42%) — from parent EXP-PRODUCT-35330741529",
+      "Positive control validated analytically: 5 blog-read-post tasks collapse to 1 parameterized pattern with correct slot filling — from parent EXP-PRODUCT-35330741529",
+      "Null control passes analytically: unique-pattern overhead 1.85% (ratio 1.0185), well within 50% threshold — from parent EXP-PRODUCT-35330741529",
+      "Per-task analysis: 6/32 tasks individually more expensive under parameterized (search-shop +3.76% max overhead), driven by heavy query-param slots — from parent EXP-PRODUCT-35330741529",
+      "Sharing-level economics: high-sharing tasks save 8.6%, moderate-sharing 0.13%, unique 5.1% — from parent EXP-PRODUCT-35330741529",
+      "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots on committed code — inherited from parent EXP-PRODUCT-35262262156",
+      "COLD baseline at 77 tokens/task is 8x cheaper than either registry conditions — mechanism reuse adds net token overhead vs generating URLs from scratch on this prompting format — from parent EXP-PRODUCT-35330741529"
+    ],
+    "rejected": [
+      "Token savings as a general claim for short-value URL patterns: FALSIFIED (parent EXP-PRODUCT-35209109455)",
+      "Token savings as a general claim for long-value URL patterns: FALSIFIED (parent EXP-PRODUCT-35262262156, bimodal 2/5 positive)",
+      "Producer SUPPORTS claim for EXP-PRODUCT-35330741529: NOT JUSTIFIED — frozen gate fails (C1 unmeasured, C2/C3 margin narrow under estimated completions)",
+      "This experiment (EXP-PRODUCT-35353007958) provides no evidence for or against any claim — MEASUREMENT_INVALID, 0/32 tasks executed"
+    ],
+    "unknown": [
+      "Whether actual LLM selection achieves 100% accuracy when choosing from 25-32 mechanisms (C1 unmeasured, 0/32 tasks in this experiment)",
+      "Whether actual completion tokens exceed estimates (2 selection, 15 resolution) enough to reverse C3 with 5.42% margin",
+      "Whether total workflow cost parameterized <= literal under real LLM execution (C3 unmeasured)",
+      "Whether positive control 5 blog-read-post tasks select same parameterized mechanism and resolve to correct bound URLs over real LLM (C4 unmeasured)",
+      "Whether null control ratio for unique patterns remains <=1.3 under real LLM",
+      "Whether browser/verification costs dominate and cancel the 5.42% token saving in end-to-end workflow",
+      "Whether deduplication holds on actual SPIDER registry/task corpus with kernel distill_parameterized() induction",
+      "Whether COLD baseline success rate is viable — 77 tokens/task is 8x cheaper but success rate unmeasured; may undermine entire registry approach",
+      "Whether larger registries (100+) increase selection saving dominance as hypothesized"
+    ],
+    "do_not_assume": [
+      "Do not assume 5.42% workflow savings generalizes to real SPIDER corpus — measured on synthetic 32-task corpus with heuristic induction, not existing registry",
+      "Do not assume C1 100% success — assumed analytically, not measured with real LLM calls",
+      "Do not assume completion tokens are accurate — hard-coded estimates (2/15/20) not measured from model outputs; 5.42% margin is thin",
+      "Do not assume browser/verification costs are negligible or constant — omitted from measurement, assumed constant without evidence",
+      "Do not assume C-PRODUCT-ECON is measured — remains HYPOTHESIS with zero model/browser/network calls",
+      "Do not assume C-PARAM-INHERIT is PRODUCT_CORE — remains EXPERIMENTAL at committed-code synthetic single-slot ceiling",
+      "Do not assume COLD baseline is not viable — 8x cheaper but success rate unmeasured; may undermine entire registry approach",
+      "Do not assume n=32 tasks establishes statistical significance — deterministic synthetic analysis, not a sample",
+      "Do not assume the 14.16% parent storage savings translates to workflow savings — only 5.42% measured after resolution overhead",
+      "Do not assume this MEASUREMENT_INVALID result is a scientific negative — no evidence was produced; the experiment was not executed"
+    ]
+  },
+  "dependencies": [
+    "If pursuing option A (re-run with API keys): requires configuring OPENAI_API_KEY (or equivalent) in execution environment; frozen design (spec.json, prereg.md) remains valid; tiktoken 0.14.0 and openai 3.15.0 already installed",
+    "If pursuing option B (real SPIDER corpus): requires access to actual SPIDER registry/task corpus in src/spider/registry/ and tasks/, plus kernel distill_parameterized() for induction; may also require API keys",
+    "If pursuing option C (close token-based economics): requires explicit Director decision to de-prioritize C-PRODUCT-ECON and redirect product lane to alternative mechanisms",
+    "Graph lane: resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing (still not committed per prior BLOCKED experiments)",
+    "Physics/Frontier lanes: C-WEB-DYNAMICS remains HYPOTHESIS — no product lane dependency"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35353007958/result.json status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics {} controls C1-C4 pass null",
+    "research/experiments/EXP-PRODUCT-35353007958/audit.json status MEASUREMENT_INVALID producer_claim_supported false claim_ceiling no new evidence parent ceiling unchanged",
+    "research/experiments/EXP-PRODUCT-35353007958/provenance.json measurement_protocol NOT_EXECUTED api_access.available false",
+    "research/experiments/EXP-PRODUCT-35330741529/handoff.json carry_forward and next_question A/B/C",
+    "research/experiments/EXP-PRODUCT-35330741529/result.json metrics workflow_savings 1067 5.42%",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json REVISE V1-V4 validity findings",
+    "codex/claim_state.json C-PRODUCT-ECON HYPOTHESIS C-PARAM-INHERIT EXPERIMENTAL"
+  ],
+  "recommended_action": "Product lane decision required. The frozen experiment was MEASUREMENT_INVALID due to missing LLM API keys — 0/32 tasks executed, no evidence produced. Three options from parent handoff remain: (A) Configure API key (export OPENAI_API_KEY=sk-...) and re-run frozen design — resolves C1 and completion token gaps at moderate cost; (B) Test with actual SPIDER registry/task corpus — resolves measurement_validity[0] but higher infrastructure cost; (C) Close token-based inheritance economics entirely — COLD baseline 8x cheaper and 5.42% margin thin suggest token-based deduplication may not be the right product mechanism. No product promotion. No claim status change. C-PRODUCT-ECON stays HYPOTHESIS. C-PARAM-INHERIT stays EXPERIMENTAL."
+}
