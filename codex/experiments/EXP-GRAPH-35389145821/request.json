@@ -1,0 +1,20 @@
+{
+  "base_sha": "857589da859cfcae7e2b0d496d0094e63c45a967",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T20:01:29.406078+00:00",
+  "experiment_id": "EXP-GRAPH-35389145821",
+  "inherited_last_verdict": "REVISE \u2014 Frozen decision_rule condition C3 fails (CI upper 0.2372 \u2265 0.15, TOST p_upper=0.286) and spec.json decision_rule maps CI upper \u2265 0.20 to FAIL. However, the audit identifies three confounds that make this failure indeterminate rather than a clean falsification of the orthogonality hypothesis under HTTP caching: (1) HTTP conditional caching was never operationally exercised \u2014 run_experiment.py never sends If-None-Match headers, so the 304/ETag code path in mock_server.py is untested; the experiment tests only declarative Cache-Control/ETag header presence, not operational HTTP caching; (2) n=240 is underpowered versus the parent n=480 (SE 0.065 vs 0.046, CI width ~0.25 vs ~0.18); the CI widening from 0.135 to 0.237 is partly a sample-size artifact, not solely an HTTP caching effect; (3) per-caching-mode heterogeneity is opposite to the hypothesis \u2014 cache_enabled r=-0.0055 (TOST PASS p=0.045 at delta=0.15) while cache_disabled r=0.217 (TOST FAIL), suggesting sampling noise or structural signal variance differences rather than HTTP caching as a common cause. The maximum justified claim is: C-FRESHNESS orthogonality at delta=0.15 is NOT confirmed on this evidence (pooled r=0.114, CI upper 0.237), but the failure is measurement-confounded and does NOT falsify the hypothesis that HTTP caching preserves orthogonality. C-FRESHNESS remains EXPERIMENTAL; no status advancement or rejection warranted. The parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) remains the established baseline \u2014 this experiment neither supersedes nor falsifies it.",
+  "inherited_next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold when HTTP conditional caching is operationally exercised (client sends If-None-Match, server returns 304 Not Modified) at parent-matching power (n \u2265 480), and can the observed per-caching-mode heterogeneity (cache_enabled r \u2248 0 vs cache_disabled r \u2248 0.22) be replicated or attributed to sampling noise?",
+  "lane": "graph",
+  "origin_github_run_id": "35389145821",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35375596525",
+    "path": "research/experiments/EXP-GRAPH-35375596525/handoff.json",
+    "sha256": "aecefb194174a2f8d0df6e88c8bb097fd75e58325f0667f80819df1d0affb91f"
+  },
+  "reason": "pulse",
+  "request_hash": "755b6e214fa6c7ba45a7c7105ab9fb6eadc5a6406fc9405b6964b7cb24b2903e",
+  "request_id": "ac5f6ca8d1fff7b85d7f5045",
+  "schema_version": 1
+}

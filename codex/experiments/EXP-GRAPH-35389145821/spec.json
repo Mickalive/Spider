@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-GRAPH-35389145821",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold when HTTP conditional caching is operationally exercised (client sends If-None-Match, server returns 304 Not Modified) at parent-matching power (n >= 480), and is the observed per-caching-mode heterogeneity (cache_enabled r~-0.006 vs cache_disabled r~0.217) replicable or attributable to sampling noise?",
+  "hypothesis": "The parent EXP-GRAPH-35353011131 established near-zero pooled correlation (|r|=0.0463, CI upper 0.135 < delta=0.15) on stochastic Flask+SQLite+cache+jitter+mixed JWT without HTTP caching. EXP-GRAPH-35375596525 tested HTTP caching but was measurement-confounded: (1) client never sent If-None-Match headers so the 304/ETag code path was untested; (2) n=240 is half parent power; (3) per-caching-mode heterogeneity (cache_enabled r=-0.006 PASS vs cache_disabled r=0.217 FAIL) suggests sampling noise or structural variance rather than HTTP caching as common cause. This experiment fixes all three defects: implements If-None-Match -> 304 in the client, matches parent power (n >= 480), and logs cache hit/ETag match rates as manipulation checks. The hypothesis is that |r| < 0.15 with proper 304 manipulation at n >= 480 because: (1) behavioral signals (token validation, session state, auth boundary) are computed from auth middleware BEFORE cache lookup; (2) structural signals (schema shape from /schema) are determined by API contract not cache state; (3) HTTP caching affects response DELIVERY but not causal content of either signal channel.",
+  "falsifier": "The hypothesis is falsified if ANY of: (1) C1_drift_tp fails (mean TP < 0.85 OR any Wilson lower CI < 0.75); (2) C2_variance fails (< 4/4 co-occurring conditions with std > 0 for both signals); (3) C3_equivalence fails: 95% CI upper bound on |r| >= 0.15 (i.e., TOST at delta=0.15 does NOT pass AND CI upper bound >= 0.15); (4) C4_null_control fails (FP > 0.0 on noise-only samples); (5) C5_304_exercised fails (304 response rate < 10% in cache_enabled condition, indicating client never sent If-None-Match). If C1-C2-C4 PASS and C3 fails, behavioral and structural signals are non-orthogonal under HTTP caching and product must consider fused classifiers or cache-independent structural signals. If C3 passes at delta=0.15 with proper 304 manipulation at n >= 480, C-FRESHNESS orthogonality extends to HTTP caching conditions and parallel channels remain justified.",
+  "baselines": [
+    {
+      "id": "B-PARENT-STOCHASTIC-N480",
+      "description": "Parent EXP-GRAPH-35353011131: n=480, |r|=0.0463, CI upper 0.135, TOST pass at delta=0.15, on stochastic Flask+SQLite+cache_TTL+jitter+mixed_JWT WITHOUT HTTP caching. This experiment adds HTTP caching with proper 304 manipulation.",
+      "expected": "Parent result at delta=0.15: CI upper 0.135 < 0.15 (PASS). This experiment tests whether adding proper HTTP caching manipulation changes the bound."
+    },
+    {
+      "id": "B-NO-CACHE-HEADERS",
+      "description": "Same server with Cache-Control: no-store on all responses (HTTP caching disabled). This serves as a within-experiment baseline to isolate the HTTP caching effect from the parent's in-memory TTL cache.",
+      "expected": "Expected CI upper < 0.15, consistent with parent result."
+    },
+    {
+      "id": "B-PARENT-HTTP-CACHING-N240",
+      "description": "EXP-GRAPH-35375596525: n=240, |r|=0.114, CI upper 0.237, TOST FAIL at delta=0.15, with HTTP caching headers but WITHOUT If-None-Match/304 exercised. This experiment fixes the three measurement defects.",
+      "expected": "Indeterminate result due to measurement confounds; this experiment resolves the indeterminacy."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-TP-VARIANCE-CACHE",
+    "description": "Verify that the server with HTTP caching still produces detectable drift: mean TP >= 0.85 and all Wilson lower CI > 0.75 across 4 co-occurring conditions. This control verifies that HTTP caching does not break the measurement pipeline's ability to detect behavioral drift.",
+    "expected": "Mean TP >= 0.85, all Wilson lower CI > 0.75"
+  },
+  "null_control": {
+    "id": "NC-FP-CACHE",
+    "description": "Verify zero false positives on noise-only conditions: FP = 0.0 across all noise-only samples. Noise patterns modify structural signals only; no drift is applied. Behavioral composite should remain 0.0.",
+    "expected": "FP = 0.0"
+  },
+  "measurement_validity": [
+    "Flask mock server with SQLite DB-backed session/permission state, in-memory cache with TTL-based expiry, response timing jitter from real I/O, and mixed JWT algorithms (HS256 for read/write, RS256 for admin)",
+    "HTTP-level caching semantics: Cache-Control headers, ETag generation from response body hash, If-None-Match conditional requests returning 304 Not Modified",
+    "NEW: Client sends If-None-Match header with ETag from prior /schema response on subsequent /schema requests; 304 rate logged as manipulation check",
+    "4 co-occurring conditions: 2 drift patterns (permission_boundary, session_invalidation) x 2 HTTP caching modes (enabled: Cache-Control+ETag+If-None-Match+304, disabled: Cache-Control: no-store)",
+    "Same graded session_status_check mapping: 401->1.0, 403->0.5, 500->0.75 (for invalid sessions)",
+    "Same behavioral composite formula: token_val_rate*2 + session_change*3 + auth_boundary*1 + session_status_check*2",
+    "Same structural computation: Jaccard similarity + schema diff magnitude on unauthenticated /schema endpoint",
+    "Same TOST/CI decision rule: 95% CI upper bound on |r| via Fisher z-transform, tested at delta=0.15",
+    "N_SAMPLES=120 per condition (480 total), SEED=42 — matches parent power (SE ~0.046, CI width ~0.18 at r~0.05)",
+    "All behavioral signals derived from real HTTP request/response cycles (not analytical computation)",
+    "Manipulation checks: 304 response rate, ETag match rate, cache hit rate, I/O latency distribution logged as artifacts",
+    "Decision-rule bug fix: CI upper >= 0.20 maps to FALSIFIES per spec.json (not MIXED as in prior run_experiment.py)"
+  ],
+  "decision_rule": "PASS if ALL of: (1) C1_drift_tp: mean TP >= 0.85 AND all Wilson lower CI > 0.75; (2) C2_variance: >= 4/4 co-occurring conditions have std > 0 for both behavioral and structural signals; (3) C3_equivalence: 95% CI upper bound on |r| < 0.15 (TOST-equivalent); (4) C4_null_control: FP = 0.0 on noise-only samples; (5) C5_304_exercised: 304 response rate >= 10% in cache_enabled condition (confirms If-None-Match was actually sent). FAIL if any fails. If C1-C2-C4-C5 PASS and C3 fails: if CI upper >= 0.20 then FALSIFIES (non-orthogonal, product pivots to fused classifiers); if CI upper 0.15-0.20 then MIXED (indeterminate, consider product risk tolerance). A valid negative experiment (C3 fails cleanly) is status=COMPLETE with outcome=FALSIFIES, not an infrastructure failure.",
+  "product_consequence_positive": "If CI upper bound < 0.15 under HTTP caching with proper 304 manipulation at n >= 480, C-FRESHNESS orthogonality extends beyond DB/cache/jitter to include operational HTTP caching semantics. Product pipeline integrates behavioral + structural as independent parallel channels with quantified shared-variance ceiling < 2.25% under realistic API caching conditions. The parallel-channel architecture is justified for production deployment with caching.",
+  "product_consequence_negative": "If CI upper bound >= 0.20, behavioral and structural signals are not practically independent under HTTP caching. Product architecture must consider fused classifiers or cache-independent structural signals (e.g., compute structural signals from pre-cache API contract rather than cached response body). If CI upper is 0.15-0.20, the decision depends on product risk tolerance: delta=0.15 acceptable -> parallel channels with monitoring; delta=0.10 required -> fused classifiers or larger n.",
+  "estimated_cost": "Low: extend parent mock_server.py with HTTP cache header logic (estimated 100-150 lines additional Python), 4 conditions x 120 samples = 480 paired HTTP cycles on localhost, ~15-20 minutes execution time. No external API calls or network costs.",
+  "expected_information_gain": "High: directly resolves the three measurement defects from EXP-GRAPH-35375596525 and the decision-rule bug. A clean PASS or clean FAIL at n >= 480 with proper 304 manipulation settles the HTTP caching orthogonality question and changes a product architecture decision. The per-caching-mode heterogeneity replication at n=120 per mode provides additional information about whether the prior heterogeneity was sampling noise."
+}
