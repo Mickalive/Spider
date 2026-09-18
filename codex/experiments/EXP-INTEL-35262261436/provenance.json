@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35262261436",
+  "lane": "intel",
+  "github_run_id": null,
+  "base_commit": "084bf58f0a07ffcf476418aae33a030c06958c22",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "dependencies": ["json (stdlib)", "random (stdlib)", "hashlib (stdlib)", "collections (stdlib)", "math (stdlib)"],
+    "no_external_deps": true
+  },
+  "data_sources": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw_evidence",
+      "description": "Truncated-first-20 locatable sample from Magento site. 10 measurements total: 3 product_listing, 3 detail, 2 cart (deduplicated to 1), 2 checkout (failed). 7 successful tasks with locatable_sample."
+    }
+  ],
+  "code": [
+    {
+      "path": "/tmp/opencode/run_corrected_analysis.py",
+      "sha256": "1aefe2f6b231b1ead388f9dd816f31d40e850c3e0b60bac8339a22043ca7719b",
+      "role": "analysis_script",
+      "description": "Corrected analysis implementing sorted roles (FIX1), aligned estimator (FIX2), and coherent decision rule (FIX3) per frozen spec"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/tmp/opencode/corrected_results.json",
+      "sha256": "ae22b3c3895f66136b5529840c1233c1f59a2925b7d31a6c21025dad3b3a6bdf",
+      "role": "derived",
+      "description": "Full machine-readable results with all metrics, controls, and verdict"
+    }
+  ],
+  "frozen_inputs": {
+    "request_json": "research/experiments/EXP-INTEL-35262261436/request.json",
+    "spec_json": "research/experiments/EXP-INTEL-35262261436/spec.json",
+    "prereg_md": "research/experiments/EXP-INTEL-35262261436/prereg.md",
+    "freeze_json": "research/experiments/EXP-INTEL-35262261436/freeze.json"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-35209112878",
+    "parent_handoff": "research/experiments/EXP-INTEL-35209112878/handoff.json",
+    "parent_handoff_sha256": "c9d064f3dac7b40d08bc95d5c035bb878d43f577558a92c312888b30da965965",
+    "grandparent_chain": ["EXP-INTEL-35112013458", "EXP-INTEL-34782350557"]
+  },
+  "execution_parameters": {
+    "seeds": [42, 123, 456, 789, 1000, 2000, 3000, 4000, 5000, 99999],
+    "n_iterations_per_seed": 1000,
+    "canonical_recipe": "per-iteration p=0.5 independent inclusion",
+    "definitions_used": ["DEF-FULL-MAP", "DEF-FORM-ONLY", "ISOLATED-A-LINK"],
+    "n_definitions": 3,
+    "n_pairs": 3,
+    "density_denominator": "elements_with_bbox",
+    "role_sorting": "sorted(raw_roles) — deterministic"
+  },
+  "reproduction_command": "python3 /tmp/opencode/run_corrected_analysis.py",
+  "reproduction_notes": "Script reads raw evidence from research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json. No network, browser, or model calls required. Pure deterministic re-analysis. Output at /tmp/opencode/corrected_results.json."
+}

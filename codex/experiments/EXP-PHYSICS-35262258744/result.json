@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35262258744",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "raw_url_pmi_by_variant": {
+      "vanillajs": {"mean_pmi_bits": 0.1895, "N": 93, "unique_states": 4, "unique_sa_pairs": 10, "singleton_fraction": 0.0, "url_entropy_bits": 1.9585},
+      "react": {"mean_pmi_bits": 0.1895, "N": 93, "unique_states": 4, "unique_sa_pairs": 10, "singleton_fraction": 0.0, "url_entropy_bits": 1.9585},
+      "vue": {"mean_pmi_bits": 0.2092, "N": 85, "unique_states": 3, "unique_sa_pairs": 9, "singleton_fraction": 0.0, "url_entropy_bits": 1.5299},
+      "angular": {"mean_pmi_bits": 0.1884, "N": 93, "unique_states": 3, "unique_sa_pairs": 9, "singleton_fraction": 0.0, "url_entropy_bits": 1.3987},
+      "svelte": {"mean_pmi_bits": 0.1895, "N": 93, "unique_states": 4, "unique_sa_pairs": 10, "singleton_fraction": 0.0, "url_entropy_bits": 1.9585}
+    },
+    "norm_url_pmi_by_variant": {
+      "vanillajs": {"mean_pmi_bits": 0.000058, "N": 93, "unique_states": 1, "unique_sa_pairs": 3, "singleton_fraction": 0.0, "url_entropy_bits": 0.0},
+      "react": {"mean_pmi_bits": 0.000058, "N": 93, "unique_states": 1, "unique_sa_pairs": 3, "singleton_fraction": 0.0, "url_entropy_bits": 0.0},
+      "vue": {"mean_pmi_bits": 0.000087, "N": 85, "unique_states": 1, "unique_sa_pairs": 3, "singleton_fraction": 0.0, "url_entropy_bits": 0.0},
+      "angular": {"mean_pmi_bits": 0.000058, "N": 93, "unique_states": 1, "unique_sa_pairs": 3, "singleton_fraction": 0.0, "url_entropy_bits": 0.0},
+      "svelte": {"mean_pmi_bits": 0.000058, "N": 93, "unique_states": 1, "unique_sa_pairs": 3, "singleton_fraction": 0.0, "url_entropy_bits": 0.0}
+    },
+    "raw_vs_norm_pmi_difference": {
+      "vanillajs": 0.1894,
+      "react": 0.1894,
+      "vue": 0.2091,
+      "angular": 0.1884,
+      "svelte": 0.1894
+    },
+    "permutation_p_values_raw": {
+      "vanillajs": 0.001, "react": 0.001, "vue": 0.001, "angular": 0.001, "svelte": 0.001
+    },
+    "effect_sizes_d_raw": {
+      "vanillajs": 6.539, "react": 6.539, "vue": 6.882, "angular": 9.012, "svelte": 6.539
+    },
+    "n_unique_raw_urls_by_variant": {
+      "vanillajs": 4, "react": 4, "vue": 3, "angular": 3, "svelte": 4
+    },
+    "n_non_leakage_by_variant": {
+      "vanillajs": 93, "react": 93, "vue": 85, "angular": 93, "svelte": 93
+    },
+    "positive_control": {"mean_pmi_bits": 1.5776, "permutation_p": 0.001, "unique_states": 8, "unique_sa_pairs": 24, "N": 1000, "passes": true},
+    "action_frequency": {"form_submit": 0.452, "button_click": 0.323, "js_navigate": 0.226}
+  },
+  "controls": {
+    "POSITIVE_CTRL_SYNTHETIC_SPA": {
+      "description": "Synthetic deterministic SPA with 8 states, 4 actions, known action->next-state mapping",
+      "expected": "PMI >= 1.0 bits with permutation p < 0.001",
+      "observed": "PMI = 1.578 bits, p = 0.001",
+      "pass": true,
+      "evidence_ref": "raw_analysis_results.json:positive_control"
+    },
+    "NULL_CTRL_NORMALIZED_URL": {
+      "description": "Normalized URL PMI (fragment-stripped). Expected exactly 0.0 bits because normalization collapses all URLs to 1 state.",
+      "expected": "Normalized PMI = 0.0 bits on all 5 variants",
+      "observed": "Normalized PMI = 0.000058 bits on 4 variants, 0.000087 on vue. Unique_states = 1 on all 5. Not exactly 0.0 due to Laplace smoothing (alpha=1.0) with 3 unique actions and 1 state.",
+      "pass": false,
+      "evidence_ref": "raw_analysis_results.json:variant_results.*.norm_url_pmi"
+    },
+    "BASELINE_ACTION_FREQUENCY": {
+      "description": "Action-type marginal distribution across non-leakage transitions",
+      "expected": "form_submit ~33%, button_click ~23%, js_navigate ~17%",
+      "observed": "form_submit 45.2%, button_click 32.3%, js_navigate 22.6%",
+      "pass": true,
+      "note": "Action frequencies differ from spec predictions due to TodoMVC-specific interaction patterns (form_submit dominates because new-todo input is the primary interaction). PMI conditions all use action_primitive categorical, so frequency differences are captured in the state-conditional computation.",
+      "evidence_ref": "raw_analysis_results.json:variant_results.*.action_frequency"
+    },
+    "DATA_SUFFICIENCY": {
+      "description": ">= 50 non-leakage transitions per variant",
+      "expected": "5/5 variants >= 50 NL",
+      "observed": "5/5 variants: vanillajs=93, react=93, vue=85, angular=93, svelte=93",
+      "pass": true,
+      "evidence_ref": "raw_analysis_results.json:variant_results.*.n_non_leakage"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PHYSICS-35262258744/raw_analysis_results.json", "sha256": "db4892e73278cfc5a1ab5a39d95e608797de9c156b790ea1480d6b9b33c8d414", "role": "derived"},
+    {"path": "research/experiments/EXP-PHYSICS-35262258744/run_analysis.py", "sha256": "c21a6cae7501259138859c352dd3f7198f4b46b8b94b8669d95bc6aba7dc57fb", "role": "code"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs_topup.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_react.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_react_topup.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vue.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vue_topup.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_angular.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_angular_topup.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_svelte.json", "sha256": null, "role": "fixture"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_svelte_topup.json", "sha256": null, "role": "fixture"}
+  ],
+  "observations": [
+    "Raw URL PMI is significantly positive on ALL 5 TodoMVC hash-SPA variants (0.188-0.209 bits, Bonferroni p=0.001, effect sizes d=6.5-9.0). This is the first demonstration that URL-level PMI detects predictive dynamical structure on real browser-collected SPA transitions when URL fragments are preserved.",
+    "Normalized URL PMI is effectively zero (0.000058 bits) with unique_states=1 on all variants, confirming that fragment-stripping normalization destroys all state information encoded in URL fragments. The raw-vs-normalized difference (0.188-0.209 bits) directly quantifies the information loss from standard normalization.",
+    "Normalized PMI is not exactly 0.0 due to Laplace smoothing (alpha=1.0): with 3 unique actions but 1 unique state, the smoothed conditional probabilities introduce a tiny non-zero residual. This is a known estimator artifact, not evidence of state information in normalized URLs.",
+    "TodoMVC hash-SPAs have only 3-4 unique raw URLs per variant (#/, #/active, #/completed, sometimes trailing slash). The preregistered threshold of >=5 unique raw URLs is an inherent limitation of this testbed, not a failure of URL-level PMI.",
+    "Permutation null mean is 0.044 bits (non-zero due to Laplace smoothing inflating sparse counts), but observed PMI is 4-5x the null, yielding very large effect sizes.",
+    "All 5 variants have zero singleton state-action pairs, indicating sufficient data density for the PMI estimator (no degenerate sparse cells).",
+    "URL entropy (raw) ranges from 1.40-1.96 bits across variants, reflecting 3-4 distinct states. Vue and angular have 3 raw URLs (lower entropy) while vanillajs, react, svelte have 4 (higher entropy including trailing slash variant)."
+  ],
+  "validity_notes": [
+    "The frozen decision rule Check 2 requires normalized PMI = 0.0 exactly on all 5 variants. This fails because Laplace smoothing (alpha=1.0) introduces a non-zero residual (~0.000058 bits) even with 1 unique state. The 3 unique actions create smoothed conditional probabilities slightly different from 1.0. This is a known estimator artifact, not a measurement failure. The normalized PMI is effectively zero (unique_states=1, url_entropy=0.0 bits).",
+    "The frozen decision rule Check 5 requires >= 5 unique raw URLs per variant. TodoMVC hash-SPAs have only 3-4 unique raw URLs (#/, #/active, #/completed, sometimes trailing slash). This is an inherent limitation of the TodoMVC testbed, which was designed as a minimal SPA demonstration, not a rich state-space. The claim is falsified in this specific setting.",
+    "Data reuse from parent EXP-PHYSICS-35209110569: no new browser collection was performed. The parent raw transition files are referenced as fixtures. SHA-256 hashes for fixture files were not independently verified in this run (parent integrity assumed).",
+    "Cross-trajectory permutation test shuffles action labels within sessions. With mostly deterministic transitions (same (url, action) -> same next_url), the permutation null is well-behaved and the observed PMI is clearly distinguishable.",
+    "The positive control (synthetic deterministic SPA with 8 states) validates the PMI pipeline: PMI=1.578 bits, p=0.001. This confirms the estimator detects known structure before testing real data."
+  ],
+  "unresolved": [
+    "The frozen Check 2 (normalized PMI = 0.0 exactly) fails due to Laplace smoothing artifact. A future experiment could use alpha=0 (no smoothing) or a threshold-based check (|PMI| < 0.001) to accommodate this known estimator behavior.",
+    "The frozen Check 5 (>= 5 unique raw URLs) fails because TodoMVC has only 3-4 unique raw URLs. To satisfy this condition, a richer SPA testbed with more URL states is needed (e.g., a production SPA with multiple routes, filters, pagination).",
+    "Raw URL PMI is positive but the magnitude (0.188-0.209 bits) is modest relative to the maximum possible PMI for 3-4 states. The practical utility of this level of predictive structure for SPIDER's exploration task is unclear.",
+    "Whether the raw URL PMI signal persists on production SPAs with history-based routing (non-hash) is untested. The TodoMVC testbed uses hash routing which may have different dynamics than production SPAs.",
+    "Whether richer state representations (DOM, accessibility tree, visual layout) provide additional PMI beyond URL-only on these TodoMVC SPAs is untested in this experiment."
+  ]
+}

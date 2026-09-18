@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35262262156",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Should the product lane pivot to measuring end-to-end amortized cost for C-PRODUCT-ECON (mechanism deduplication savings across tasks where fewer unique mechanisms to store/retrieve offset per-mechanism token penalty), or close token-based inheritance viability entirely and pursue alternative product economics (retrieval efficiency, registry size compression)?",
+  "why_next": "Token savings are falsified for both short (parent -6.4%) and long (this experiment, bimodal 2/5 positive) value URL patterns under tiktoken cl100k_base. The per-mechanism token-cost argument for parameterized inheritance is closed. The only remaining economic path is orthogonal: amortized deduplication across tasks (C-PRODUCT-ECON) where fewer unique mechanisms reduce storage, retrieval and transmission costs independent of per-mechanism token count. This requires end-to-end measurement with real model calls, browser, retrieval and verification — a materially different experiment. Alternatively, if deduplication economics are also non-viable, C-PRODUCT-ECON should be closed and the product lane should pursue alternative mechanisms entirely.",
+  "carry_forward": {
+    "established": [
+      "Resolve/bind pipeline validated for manually-registered parameterized mechanisms with 1-3 slots on committed code: resolve() returns EXECUTABLE with correct bound_action when required_slots satisfied (5/5 long-value + 2 controls = 7/7), UNKNOWN when missing (7/7), _bind() substitutes correctly for 1-3 vars, kernel regression 3/3 intact (kernel.py sha256=30b741 or 084bf58 base)",
+      "Token savings DO exist for single-slot patterns with genuinely long per-slot concrete values under tiktoken cl100k_base: UUID 36-char saves 44.44% (36→20 tokens), bearer 64-char saves 56.72% (67→29 tokens). These are the only two patterns where per-slot concrete value exceeds template overhead (slot_name + 3 chars)",
+      "Token penalty confirmed for short-value (1-3 char numeric) URL patterns across two independent experiments: parent mean -6.4% (5 patterns), this experiment PC_SHORT -5.26% (1 pattern). Root cause: ${varname} syntax adds varname.length+3 chars overhead per slot, exceeding short concrete values",
+      "Token savings do NOT exist as a general claim for long-value patterns: 2/5 patterns positive, 2/5 negative, 1/5 neutral under frozen ALL-must-pass decision rule. The hypothesis that template overhead is universally dominated by long concrete values is falsified",
+      "Multi-slot patterns with short per-slot values incur net token penalty even at long total string length: P3_DEEPPATH 2-slot -11.54%, P5_MULTIPARAM 3-slot -9.68%. Slot count is the primary causal factor, not total string length",
+      "P2_SLUG breakeven at 28 chars (21→21 tokens) falsifies the hypothesized clean ~8-char threshold: token savings depend on tokenizer, slot name length, and URL structure, not just value char length",
+      "Fix3 (_is_protocol_only_prefix structural '/' check) validated on 12/12 URL corpus and committed to kernel.py — inherited from parent EXP-PRODUCT-35185290656",
+      "HTTP binding accuracy 1.0 (3/3) on query-parameterized endpoint with unseen IDs — inherited from parent"
+    ],
+    "rejected": [
+      "Token savings hypothesis as a general claim for long-value URL patterns: FALSIFIED (C4 2/5 < 3/5, C6 r=0.3909 < 0.7 under frozen ALL-must-pass)",
+      "Clean ~8-char breakeven threshold: FALSIFIED — 28-char slug yields 0% savings, breakeven is tokenizer/structure-dependent",
+      "Mean token savings 15.99% as evidence for general viability: MISLEADING — bimodal distribution (UUID +44%, bearer +57% vs deep-path -12%, multi-param -10%), median 0%, must not be cited without stratification",
+      "Monotonic increase of savings with total value length: FALSIFIED — r=0.3909, P5 (46 chars) negative while P1 (36 chars) positive, slot count confounds total length",
+      "Parent 29.17% savings figure (68 vs 96 tokens): not replicated under same-domain full-URL encoding, should not be cited as established",
+      "Fix3 is necessary for all URL patterns: not demonstrated, Fix2 and Fix3 are mutually exclusive for tested patterns (from parent EXP-PRODUCT-35185290656)"
+    ],
+    "unknown": [
+      "Whether amortized deduplication savings across tasks (fewer unique mechanisms to store/retrieve) offset per-mechanism token penalty in real agent workflows — C-PRODUCT-ECON end-to-end unmeasured, the sole remaining economic path",
+      "Whether slot name optimization (shorter varnames like 'id' vs 'pageSlug') or reducing slot count brings multi-slot patterns above breakeven — untested",
+      "Whether LLM tokenizers other than tiktoken cl100k_base produce different savings for ${var} syntax — untested",
+      "Whether PUT/POST method fidelity and mechanism preservation over real HTTP changes savings — spec limited to GET",
+      "Whether mixed literal+parameterized registry at equal confidence (EXP-GRAPH-33718012817 tie-break hazard) maintains correct resolve behavior — not tested due to isolated intents",
+      "Whether partial-parameter missing behavior for multi-slot mechanisms (provide 1 of 2 or 2 of 3 slots) maintains correct resolve behavior — only {} missing case tested",
+      "Whether LLM-based distill_parameterized induction and cross-site transfer produce correctly named slots and generalize beyond manual templates — no induction tested",
+      "Whether single-slot long-value savings generalize across diverse URL structures beyond the 2 tested patterns (UUID path, bearer header) — only 2 positive single-slot patterns observed, 1 breakeven"
+    ],
+    "do_not_assume": [
+      "Do not assume token savings exist as a general property of parameterized representation — falsified for both short and long values as general claims; savings exist ONLY for single-slot patterns with genuinely long per-slot values",
+      "Do not assume the 2/5 positive result (UUID, bearer) generalizes to all single-slot long-value patterns — only 2 patterns tested, 1 slug breakeven",
+      "Do not assume mean 15.99% represents typical savings — bimodal distribution, median 0%, must be stratified by slot count",
+      "Do not assume P3_DEEPPATH and P5_MULTIPARAM are 'long-value' tests — per-slot values are 3-11 chars (short/medium), total string length includes fixed URL scaffolding",
+      "Do not assume amortized cost benefit offsets per-mechanism token penalty — unmeasured; the deduplication argument is orthogonal to per-mechanism token count",
+      "Do not assume C-PRODUCT-ECON is measured — remains HYPOTHESIS with negative token-component evidence from two experiments",
+      "Do not assume C-PARAM-INHERIT is PRODUCT_CORE — remains EXPERIMENTAL at narrowed ceiling",
+      "Do not assume Fix3 is necessary for all URL patterns — necessity not demonstrated for any pattern",
+      "Do not assume token penalty generalizes to different tokenizers, template syntaxes, or non-URL action types — tested only with tiktoken cl100k_base on GET URL patterns",
+      "Do not assume n=5 establishes statistical significance — deterministic synthetic, zero model/browser/network calls"
+    ]
+  },
+  "dependencies": [
+    "If pursuing C-PRODUCT-ECON amortized deduplication: requires end-to-end test harness with real model tokens, browser/network, retrieval/verification/repair vs literal/cold baselines across multiple tasks sharing parameterized mechanisms",
+    "If pursuing alternative product economics: registry size compression or retrieval efficiency measurements require different experimental designs",
+    "Graph lane: resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing",
+    "Graph lane: Fix3 independent-necessity discriminating test (scheme-only 'https://') still open from parent EXP-PRODUCT-35185290656",
+    "Physics/Frontier lanes: C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling — no product lane dependency"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35262262156/result.json: COMPLETE FALSIFIES C4 false 2/5 C6 false r=0.3909 C5 true 15.99% C1-C3 C7-C8 true",
+    "research/experiments/EXP-PRODUCT-35262262156/audit.json: REVISE producer_claim_supported false claim_ceiling FALSIFIED-IN-SETTING V3 V4 V5 high-severity findings",
+    "research/experiments/EXP-PRODUCT-35262262156/raw_evidence.json: token_measurements 7 entries resolve_bind_tests 7 entries regression 3/3",
+    "research/experiments/EXP-PRODUCT-35262262156/prereg.md: 5 target patterns decision_rule C4-C6 ALL must pass",
+    "research/experiments/EXP-PRODUCT-35262262156/freeze.json: frozen 2026-09-17T22:09:24",
+    "research/experiments/EXP-PRODUCT-35209109455/handoff.json: parent short-value falsification -6.4% carry_forward",
+    "research/experiments/EXP-PRODUCT-35209109455/result.json: parent FALSIFIES short-value token penalty",
+    "src/spider/kernel.py: resolve _bind validated on long values",
+    "codex/claim_state.json: C-PARAM-INHERIT EXPERIMENTAL C-PRODUCT-ECON HYPOTHESIS"
+  ],
+  "recommended_action": "Product lane decision required: (A) Pivot to C-PRODUCT-ECON amortized deduplication measurement with end-to-end test harness (higher cost, tests the only remaining economic argument), or (B) Close token-based inheritance viability entirely and pursue alternative product mechanisms (registry compression, retrieval efficiency), or (C) Pause product lane to await graph lane Fix3 necessity result and potential mixed-registry integration. No immediate product promotion. C-PARAM-INHERIT stays EXPERIMENTAL. C-PRODUCT-ECON stays HYPOTHESIS."
+}
