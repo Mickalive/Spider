@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35290617719",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "corpus_size_tasks": 32,
+    "literal_mechanism_count": 32,
+    "parameterized_mechanism_count": 25,
+    "mechanism_count_reduction_pct": 21.88,
+    "literal_total_tokens": 791,
+    "parameterized_total_tokens": 679,
+    "net_savings_tokens": 112,
+    "net_savings_pct": 14.16,
+    "deduplication_ratio": 0.8584,
+    "sharing_distribution": {
+      "1_task": 22,
+      "2_tasks": 1,
+      "3_tasks": 1,
+      "5_tasks": 1
+    },
+    "patterns_with_deduplication_benefit": 3,
+    "patterns_without_deduplication_benefit": 22
+  },
+  "controls": {
+    "C1_param_count_less_than_literal": {
+      "expected": "parameterized_mechanism_count < literal_mechanism_count",
+      "observed": "25 < 32 (21.88% reduction)",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:decision_rule.C1_param_count_less_than_literal"
+    },
+    "C2_dedup_ratio_less_than_1": {
+      "expected": "deduplication_ratio < 1.0 (parameterized cheaper than literal)",
+      "observed": "0.8584",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:token_costs.deduplication_ratio"
+    },
+    "C3_net_savings_positive": {
+      "expected": "net_token_savings > 0",
+      "observed": "112 tokens (14.16%)",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:token_costs.net_savings_tokens"
+    },
+    "C4_positive_control_sharing": {
+      "expected": "Shared patterns (e.g., GET /posts/{id}) collapse to 1 parameterized mechanism",
+      "observed": "blog-read-post tasks share 1 pattern (GET /posts/${id_0}), 5 tasks sharing",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:pattern_sharing.GET:https://blog.example.com/posts/${id_0}"
+    },
+    "C5_null_control_no_sharing": {
+      "expected": "Unique patterns (no sharing) show no deduplication benefit",
+      "observed": "3 unique search patterns, each used by 1 task only",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:sharing_distribution"
+    },
+    "C7_kernel_regression": {
+      "expected": "All existing kernel tests pass",
+      "observed": "3/3 passed",
+      "pass": true,
+      "evidence_ref": "raw_evidence.json:regression"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35290617719/raw_evidence.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35290617719/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mechanism count reduction: 25 parameterized vs 32 literal = 21.88% reduction. The reduction is driven by 3 patterns that are shared across multiple tasks: GET /posts/{id} (5 tasks), GET /products/{id} (3 tasks), GET /orgs/{orgId}/projects/{projId} (2 tasks).",
+    "Token cost reduction: 679 parameterized tokens vs 791 literal tokens = 112 tokens saved (14.16%). Deduplication ratio 0.8584 < 1.0, confirming parameterized representation is cheaper overall.",
+    "Per-task analysis reveals that deduplication savings are concentrated in tasks that share patterns with other tasks. The 5 blog-read-post tasks each show -15.79% per-task penalty (parameterized costs MORE per task), but the pattern is stored once instead of 5 times.",
+    "The critical insight: per-task, parameterized mechanisms often cost MORE tokens (due to ${slot} syntax overhead). But across the corpus, the same pattern is stored once, not N times. The net effect depends on how many tasks share each pattern.",
+    "Sharing distribution: 22 patterns used by 1 task (no deduplication benefit), 1 pattern used by 2 tasks, 1 pattern used by 3 tasks, 1 pattern used by 5 tasks. Only 3 patterns (out of 25) provide deduplication benefit.",
+    "The admin-view-user URLs (u-aaa, u-bbb, etc.) were NOT parameterized by the heuristic regex, remaining as 5 separate literal mechanisms. A more sophisticated parameter induction system would recognize these as /users/{id} and collapse them, improving the deduplication ratio further.",
+    "Search tasks (blog, shop, admin) have unique query parameter patterns and show NO deduplication benefit. Parameterized representation adds tokens for these tasks (-19% to -35% penalty per task).",
+    "Kernel regression: 3/3 existing tests pass, no regression."
+  ],
+  "validity_notes": [
+    "This is a STATIC ANALYTICAL measurement, not an end-to-end agent workflow measurement. It measures registry storage and token cost, not retrieval efficiency, transmission cost, or amortized agent execution cost.",
+    "Task corpus is synthetic/representative, not derived from actual SPIDER agent execution logs. Real agent workflows may have different sharing patterns.",
+    "Parameter induction uses a heuristic regex-based approach, not the actual distill_parameterized() kernel function. Some parameterizable patterns (e.g., /users/u-aaa) were not recognized, understating deduplication potential.",
+    "Token counting uses tiktoken cl100k_base encoding of JSON-serialized action_template dicts, consistent with parent experiments.",
+    "The deduplication ratio measures storage cost (total tokens for all mechanisms), not per-query retrieval cost. In practice, retrieval would only fetch relevant mechanisms, changing the economics.",
+    "No browser, model, or network calls. Purely analytical computation in Python 3.12 with tiktoken 0.14.0.",
+    "The 14.16% net savings is a LOWER BOUND because the heuristic parameter induction missed some parameterizable patterns (e.g., admin user URLs)."
+  ],
+  "unresolved": [
+    "Whether end-to-end amortized cost (including retrieval, verification, and repair) also shows savings when fewer mechanisms need to be stored and retrieved",
+    "Whether a production-quality parameter induction system would achieve higher deduplication than the heuristic regex used here",
+    "Whether the 21.88% mechanism count reduction is sufficient to justify the engineering cost of maintaining parameterized mechanisms",
+    "Whether different task corpus compositions (more or less sharing) would produce different deduplication ratios",
+    "Whether the per-task token penalty (-15.79% for shared patterns) is acceptable given the corpus-wide savings (14.16%)"
+  ]
+}

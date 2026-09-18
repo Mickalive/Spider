@@ -1,0 +1,53 @@
+{
+  "experiment_id": "EXP-RUNTIME-35290615081",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression restore decompressed body-only discrimination >= 0.3 and decompressed hash determinism (all_same=true) under triple-brotli encoding for the valid_token success body when triple-br is guaranteed to be observed via stratified scenario assignment?",
+  "hypothesis": "The parent experiment (EXP-RUNTIME-35280364816) demonstrated that iterative decompression correctly handles triple-brotli for all error states (no_auth/expired_token/invalid_token) but NEVER observed triple-br for valid_token due to a systematic RNG shift: the proxy connectivity test consumed one draw from scenario_rng, shifting triple_br draws away from valid_token positions (0/180 reps across all 9 conditions). The fix is straightforward: use stratified round-robin scenario assignment guaranteeing at least 1 triple_br observation per auth state per condition. Under stratified assignment, if iterative decompression handles triple-brotli for error states (depth ≤ 5), it should also handle it for the distinct success body, because the decompression mechanism is state-agnostic — it iterates brotli→gzip→identity until failure regardless of body content. The success body is 1KB-100KB JSON/HTML/XML with distinct content (user profile data), not structurally different from error bodies in terms of compressibility. Therefore, iterative decompression should produce the same decompressed hash for triple-br as for single-layer scenarios, and discrimination should remain at 0.5.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for valid_token under triple-br at any content type or size, OR decompressed hash for valid_token triple-br differs from single-layer hash (determinism failure), OR iterative decompression crashes/hangs on valid_token triple-br, OR stratified assignment fails to produce at least 1 triple_br observation per auth state per condition (measurement validity), OR regression: any previously-passing (state, scenario) combination from parent shows discrimination < 0.3 or determinism failure.",
+  "baselines": [
+    {
+      "id": "B-PARENT-DOUBLE-BR-ALL-STATES-0.5",
+      "description": "Parent established double-brotli discrimination 0.5 for ALL auth states including valid_token. Regression reference: iterative decompression must maintain this.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-PARENT-TRIPLE-BR-ERROR-STATES-0.5",
+      "description": "Parent established triple-brotli discrimination 0.5 for error states (no_auth/expired_token/invalid_token). Regression reference.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-SINGLE-PASS-0.2911",
+      "description": "Grandparent EXP-RUNTIME-35262264593 decompressed discrimination under single-pass (0.2911). Iterative must exceed.",
+      "expected_value": 0.2911
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-COMPRESSED-BYTE-ONLY",
+      "description": "Discrimination using compressed bytes directly (no decompression). Expected < 0.5. Proves decompression is necessary.",
+      "expected_value": "< 0.5"
+    }
+  ],
+  "positive_control": "C_STRATIFIED_COVERAGE: Every (auth_state, encoding_scenario) pair must appear at least 1 time per condition (content_type × size) across N=20 reps. Specifically: valid_token × triple_br must have ≥1 observation per condition. This is the entire purpose of the experiment. Coverage is reported per-condition.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Identical to parent EXP-RUNTIME-35280364816 except for scenario assignment method.",
+    "Stratified round-robin scenario assignment: for each condition (content_type × size), create a plan of N=20 reps per auth_state, then assign scenarios in round-robin order across the 6 scenarios (correct_br, missing_ce, incorrect_gzip, double_br, triple_br, garbled_ce). With 4 states × 20 reps = 80 requests per condition, each scenario gets ~13-14 observations per condition, guaranteeing ≥1 triple_br per state.",
+    "The proxy connectivity test MUST use a separate RNG instance (or no RNG at all) from the measured-request scenario assignment, to eliminate the RNG shift defect.",
+    "Content types: JSON, HTML, XML. Sizes: 1KB, 10KB, 100KB. Auth states: no_auth, valid_token, expired_token, invalid_token.",
+    "Mock server: localhost, brotli quality 6 (deterministic). CDN proxy: applies encoding transformation per request.",
+    "Iterative decompression: decompress repeatedly (brotli→gzip→identity) until failure or max_depth=5. Same as parent.",
+    "Seed=44 for request ordering. Scenario assignment is deterministic round-robin, not random.",
+    "N=20 reps per state per condition (80 requests per condition, 9 conditions = 720 total requests).",
+    "Mock server is localhost only. No real CDN infrastructure."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) valid_token × triple_br has ≥1 observation per condition (stratified coverage passes), (2) decompressed body-only discrimination >= 0.3 for valid_token under triple-br for all content types × sizes, (3) decompressed hash variation all_same=true for valid_token under triple-br (determinism), (4) decompressed body-only discrimination >= 0.3 for ALL (state, scenario) combinations (regression from parent), (5) decompressed hash variation all_same=true for all conditions (determinism across all states × scenarios), (6) B-RANDOM = 0.0 for all conditions, (7) C_STRATIFIED_COVERAGE passes. FALSIFIED-IN-SETTING if valid_token × triple-br discrimination < 0.3 at any condition, OR valid_token triple-br hash differs from single-layer hash, OR any previously-passing (state, scenario) combination regresses. MEASUREMENT_INVALID if stratified coverage fails (valid_token triple-br not observed) or infrastructure failure prevents valid measurements.",
+  "product_consequence_positive": "Claim ceiling advances from 'double-brotli for all states + triple-brotli for error states only' to 'multi-layer encoding survival including triple-brotli for all auth states including success body'. Product team can deploy iterative decompression with confidence that triple-encoded CDN responses do not break any auth state, including the distinct success response that separates authenticated from error responses.",
+  "product_consequence_negative": "Triple-brotli fails for the success body despite working for error bodies. Possible causes: (a) success body size/content interacts with triple encoding depth, (b) iterative decompression depth 5 is insufficient for success body triple-encoding, (c) the error-state triple-br success was an artifact of body similarity (error bodies collapse to similar content). Product team must: (a) restrict CDN configurations to max 2 compression layers, (b) add Content-Encoding layer-count validation, or (c) investigate body-specific decompression limits.",
+  "estimated_cost": "< 5000 tokens, < 3 minutes execution (localhost only). 6 scenarios × 3 content types × 3 sizes × 4 states × 20 reps = 4320 requests. Marginal cost is zero beyond the parent — same infrastructure, same code, same parameters, only scenario assignment changes.",
+  "expected_information_gain": "HIGH. This is the smallest possible experiment that resolves the ONE untested condition in the parent's claim ceiling. The parent established 8/9 (state × encoding-level) combinations pass; only valid_token × triple-br remains unknown. A positive result unblocks the full triple-brotli claim ceiling. A negative result identifies whether the failure is body-specific or depth-related. Either outcome definitively closes the gap identified by audit V1. This is not a repetition of the parent — it is the minimal targeted fix for the specific measurement defect."
+}

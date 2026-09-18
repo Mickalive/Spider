@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35290617719",
+  "lane": "product",
+  "github_run_id": "35290617719",
+  "source_commit": "8a810a865fcd8e342b2dc85b21b8f124839673ea",
+  "base_sha": "b8fd66a0876b1204973006c180e48571b72b8481",
+  "created_at": "2026-09-18T00:18:32.838247+00:00",
+  "executed_at": "2026-09-18T12:00:00.000000+00:00",
+  "environment": {
+    "python_version": "3.12.14",
+    "tiktoken_version": "0.14.0",
+    "encoding": "cl100k_base",
+    "platform": "linux",
+    "dependencies": {
+      "tiktoken": "0.14.0",
+      "spider": "local (src/)"
+    }
+  },
+  "code_paths": {
+    "experiment_script": "research/experiments/EXP-PRODUCT-35290617719/run_experiment.py",
+    "kernel_source": "src/spider/kernel.py",
+    "models_source": "src/spider/models.py",
+    "registry_source": "src/spider/registry.py",
+    "test_source": "tests/test_kernel.py"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35290617719/raw_evidence.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35290617719/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35290617719/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35290617719/run_experiment.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "data_sources": {
+    "task_corpus": "synthetic/representative (32 tasks across 6 domains)",
+    "token_counter": "tiktoken cl100k_base",
+    "registry": "in-memory (no persistent registry files)"
+  },
+  "frozen_inputs": {
+    "request_json": "research/experiments/EXP-PRODUCT-35290617719/request.json",
+    "spec_json": "research/experiments/EXP-PRODUCT-35290617719/spec.json",
+    "prereg_md": "research/experiments/EXP-PRODUCT-35290617719/prereg.md",
+    "freeze_json": "research/experiments/EXP-PRODUCT-35290617719/freeze.json"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35262262156",
+    "path": "research/experiments/EXP-PRODUCT-35262262156/handoff.json",
+    "sha256": "5d047feaad8feaab7e0a71e11a02b8031076d3e6a12e4e6a4fa97dcf348150b1"
+  },
+  "commands": {
+    "run_experiment": "python research/experiments/EXP-PRODUCT-35290617719/run_experiment.py"
+  },
+  "reproducibility_notes": [
+    "Deterministic: no random seeds, no network calls, no model calls",
+    "Token counting is deterministic (tiktoken cl100k_base)",
+    "Task corpus is hardcoded in run_experiment.py",
+    "Parameter induction uses heuristic regex (not kernel distill_parameterized)",
+    "Results are fully reproducible on any system with Python 3.12+ and tiktoken"
+  ]
+}

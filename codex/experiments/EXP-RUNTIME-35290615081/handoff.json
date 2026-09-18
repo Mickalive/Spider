@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35290615081",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
+  "why_next": "The parent V1 coverage gap (valid_token triple-br 0/180) is closed: this experiment observed 27/180 valid_token x triple_br reps with correct decompression and all_same=true determinism. All 7 frozen decision rules pass with audit PASS. The decompression-normalization mechanism is validated on localhost across single-layer, double-brotli, and triple-brotli encoding for all 4 auth states. The only remaining blocker for C-MEAS-VALID product readiness is real CDN infrastructure. Real CDN testing is the highest-information next step because it tests the actual deployment environment rather than additional synthetic localhost scenarios.",
+  "carry_forward": {
+    "established": [
+      "Iterative decompression (brotli->gzip->identity looping to max_depth=5) restores decompression-normalization under triple-brotli encoding for ALL auth states including valid_token success body on localhost mock server with deterministic brotli quality 6: decompressed_body_only_discrimination 0.5 >= 0.3 for JSON/HTML/XML x 1KB/10KB/100KB, decompressed hash determinism all_same=true, B-RANDOM=0.0.",
+      "Triple-brotli encoding (brotli(brotli(brotli(body)))) is successfully decompressed by iterative depth 5 for ALL auth states including valid_token: 108 observations (27 valid_token + 81 error states), 0 decompression errors, all decompressed hashes match single-layer hashes. The parent V1 coverage gap (valid_token triple-br 0/180) is definitively closed.",
+      "Double-brotli for all auth states verified: decompressed hash determinism all_same=true, discrimination 0.5 across all 9 content-type x size combinations.",
+      "Iterative decompression introduces no regressions: single-layer scenarios (correct_br, missing_ce, incorrect_gzip, garbled_ce) maintain identical decompressed hashes, discrimination 0.5, all_same=true.",
+      "Decompression latency minimal: 0.012-0.27ms per response, scaling with decompressed size. No crashes/hangs from garbled Content-Encoding headers.",
+      "Compressed-only brotli discrimination 0.2781 < 0.3 confirms decompression is necessary for format-invariance (exceeds B-COMPRESSED-BYTE-ONLY baseline from parent).",
+      "Parent baselines exceeded: B-SINGLE-PASS-0.2911 and B-NO-DOUBLE-BR-0.4486 both exceeded by decompressed 0.5."
+    ],
+    "rejected": [
+      "Single-pass client decompression does NOT survive double-brotli or triple-brotli encoding (parent established, this experiment confirms iterative fix resolves it).",
+      "Compressed-only body hashing is NOT sufficient for format-invariant discrimination (0.2781 < 0.3)."
+    ],
+    "unknown": [
+      "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with caching, chunked transfer-encoding, Accept-Encoding negotiation, and edge quality diversity?",
+      "What is production-scale latency/CPU at N>1000 with MB-scale natural (non-padded) content and concurrent clients?",
+      "Does iterative decompression work for binary content types or genuinely incorrect Content-Encoding on incompressible data?",
+      "What is the maximum practical decompression depth for real-world multi-layer encoding? (depth 5 tested, deeper untested)",
+      "Does 'br, br' multi-value Content-Encoding header with iterative parsing change outcome vs single 'br' header with layered body?",
+      "How does iterative decompression interact with decompression bombs or false positives on non-compressed data?"
+    ],
+    "do_not_assume": [
+      "Do NOT assume iterative decompression is production-ready: real CDN infrastructure (Cloudflare/Fastly/Akamai) is untested.",
+      "Do NOT assume the structural discrimination ceiling of 0.5 applies to production: it is a property of the 3-way error collapse mock design.",
+      "Do NOT assume localhost decompression latency (0.01-0.27ms) represents production cost at scale.",
+      "Do NOT assume format-invariance extends to binary content types or compressed data formats.",
+      "Do NOT assume the maximum decompression depth of 5 is sufficient for all real-world multi-layer encoding scenarios.",
+      "Do NOT assume non-deterministic quality variation is equivalent to real CDN behavior: real CDNs also vary caching, chunked encoding, Accept-Encoding negotiation, and edge selection.",
+      "Do NOT assume the claim ceiling advances to CDN-ready: it advances to localhost triple-brotli survival including valid_token success body.",
+      "Do NOT assume C-MEAS-VALID has reached VALIDATED status: real CDN infrastructure remains the blocking dependency."
+    ]
+  },
+  "dependencies": [
+    "Parent EXP-RUNTIME-35280364816 claim ceiling (double-brotli all states + triple-br error states only, V1 valid_token triple-br 0/180) is superseded by this experiment results: triple-br now validated for all states including valid_token.",
+    "Iterative decompression implementation (decompress_body loop with max_depth=5) is the validated mechanism for multi-layer encoding survival.",
+    "Real CDN infrastructure remains the critical blocker for C-MEAS-VALID product readiness and should be the next experiment.",
+    "C-MEAS-VALID remains EXPERIMENTAL on the decompression-normalization sub-thread: this experiment advances the ceiling to triple-brotli for all states on localhost, but real CDN is untested."
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35290615081/result.json - 720 requests, 9 conditions, 4 states, 20 reps; decompressed 0.5 all cells; compressed 0.2781; valid_token triple_br 27/180; all decompressed hashes match single-layer; all_same=true",
+    "research/experiments/EXP-RUNTIME-35290615081/audit.json - PASS, producer_claim_supported true, required_fixes empty, V2 independent recomputation matches producer exactly",
+    "research/experiments/EXP-RUNTIME-35290615081/provenance.json - python 3.12.14, brotli 1.2.0, 720 requests, seed 44",
+    "research/experiments/EXP-RUNTIME-35280364816/handoff.json - parent carry_forward with V1 valid_token triple-br 0/180 gap closed by this experiment"
+  ],
+  "recommended_action": "Design a real-CDN decompression-normalization experiment using Cloudflare Workers or Fastly Compute@Edge as a CDN proxy in front of the localhost mock server. The CDN proxy should apply real brotli/gzip compression with Accept-Encoding negotiation, chunked transfer-encoding, and caching. Test all 4 auth states x JSON/HTML/XML x 1KB/10KB/100KB with iterative decompression max_depth=5. The frozen decision rules from this experiment (C_STRATIFIED_COVERAGE, C_DECOMPRESSED_DISCRIMINATION, C_DECOMPRESSED_DETERMINISM, C_SINGLE_LAYER_NO_REGRESSION, C_LATENCY, C_NO_ERROR_INFLATION, C_COMPRESSED_BASELINE) can be reused. If iterative decompression survives real CDN, C-MEAS-VALID decompression-normalization reaches the threshold for VALIDATED status."
+}

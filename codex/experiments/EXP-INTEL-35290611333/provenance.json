@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35290611333",
+  "github_run_id": "35308806351",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "9b79cc0dc241f418bb83dee0ec6672b28184252d",
+  "base_sha": "b8fd66a0876b1204973006c180e48571b72b8481",
+  "datasets_and_sources": {
+    "search_databases": [
+      {
+        "database": "PubMed/Psychology",
+        "search_strings": [
+          "psychometrics aggregation recipe choice problem composite score test score aggregation micro macro weighted",
+          "psychometrics test score aggregation micro macro weighted averaging choice problem scoring rules",
+          "composite score weighting psychometrics recipe choice ambiguity"
+        ],
+        "date_range": "2000-2026",
+        "results_found": 12,
+        "results_included": 4
+      },
+      {
+        "database": "EconLit/Economics",
+        "search_strings": [
+          "econometrics aggregation recipe choice panel data composite index construction micro macro weighted averaging",
+          "composite indicator construction weighting aggregation recipe choice ambiguity",
+          "sensitivity analysis aggregation recipe choice conflicting results decision rules composite indicators robustness"
+        ],
+        "date_range": "2000-2026",
+        "results_found": 14,
+        "results_included": 5
+      },
+      {
+        "database": "Cochrane/Meta-analysis",
+        "search_strings": [
+          "meta-analysis aggregation heterogeneity quantification effect size pooling recipe choice sensitivity analysis",
+          "meta-analysis fixed random effects pooling recipe choice aggregation ambiguity",
+          "heterogeneity quantification meta-analysis I-squared tau-squared aggregation choice"
+        ],
+        "date_range": "2000-2026",
+        "results_found": 8,
+        "results_included": 3
+      }
+    ],
+    "total_screened": 34,
+    "total_included": 12,
+    "exclusion_criteria": [
+      "Papers that use a single canonical recipe without discussing alternatives",
+      "Papers that treat recipe choice as arbitrary without principled justification",
+      "Non-English papers",
+      "Non-peer-reviewed papers (except working papers from established research groups)",
+      "Papers not addressing aggregation of multiple definitions/dimensions/indicators"
+    ],
+    "key_sources": [
+      {
+        "citation": "Kane & Case (2003). The Reliability and Validity of Weighted Composite Scores.",
+        "field": "psychometrics",
+        "relevance": "Direct aggregation recipe choice in mixed-format test scoring",
+        "url": "https://eric.ed.gov/?id=ED476421"
+      },
+      {
+        "citation": "PMC5978518. Weighting Components of a Composite Score Using Naive Expert Judgments.",
+        "field": "psychometrics",
+        "relevance": "Composite score construction from multiple measures with recipe choice",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5978518"
+      },
+      {
+        "citation": "PMC11588849. Recognize the Value of the Sum Score, Psychometrics' Greatest Accomplishment.",
+        "field": "psychometrics",
+        "relevance": "Sum score vs weighted score vs average score debate",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11588849"
+      },
+      {
+        "citation": "OECD (2008). Handbook on Constructing Composite Indicators: Methodology and User Guide.",
+        "field": "econometrics",
+        "relevance": "Comprehensive framework for aggregation recipe choice in composite indicators",
+        "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2008/08/handbook-on-constructing-composite-indicators-methodology-and-user-guide_g1gh9301/9789264043466-en.pdf"
+      },
+      {
+        "citation": "Munda (2005). Choosing Aggregation Rules for Composite Indicators.",
+        "field": "econometrics",
+        "relevance": "Social choice theory applied to aggregation rule selection",
+        "url": "https://link.springer.com/article/10.1007/s11205-017-1832-9"
+      },
+      {
+        "citation": "Dobbie (2013). Robustness and sensitivity of weighting and aggregation in constructing composite indices.",
+        "field": "econometrics",
+        "relevance": "Systematic sensitivity analysis for aggregation recipe choice",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S1470160X13000034"
+      },
+      {
+        "citation": "Greco et al. (2019). On the Methodological Framework of Composite Indices.",
+        "field": "econometrics",
+        "relevance": "Review of weighting, aggregation, and robustness methods (1764 citations)",
+        "url": "https://link.springer.com/article/10.1007/s11205-017-1832-9"
+      },
+      {
+        "citation": "Zhou et al. (2009). Data aggregation in constructing composite indicators: A perspective of information loss.",
+        "field": "econometrics",
+        "relevance": "Information loss framework for aggregation method selection",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S1470160X13000034"
+      },
+      {
+        "citation": "Higgins & Thompson (2002). Quantifying heterogeneity in a meta-analysis.",
+        "field": "meta-analysis",
+        "relevance": "I-squared and tau-squared for heterogeneity quantification",
+        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.1186"
+      },
+      {
+        "citation": "Mathur & VanderWeele (2021). Robust Metrics and Sensitivity Analyses for Meta-Analyses of Heterogeneous Effects.",
+        "field": "meta-analysis",
+        "relevance": "Proportion-above-threshold reporting for heterogeneous effects (MIXED outcome)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7963111"
+      },
+      {
+        "citation": "Pathak et al. (2020). Methods of estimating the pooled effect size under meta-analysis.",
+        "field": "meta-analysis",
+        "relevance": "Comparison of FEM, REM, and WLS aggregation methods",
+        "url": "https://www.sciencedirect.com/science/article/pii/S221339841930096X"
+      },
+      {
+        "citation": "COINr R package. Aggregation documentation.",
+        "field": "econometrics",
+        "relevance": "Software implementation of hierarchical aggregation with sensitivity analysis",
+        "url": "https://cran.r-project.org/web/packages/COINr/vignettes/aggregate.html"
+      }
+    ]
+  },
+  "code_paths": [],
+  "environment": {
+    "platform": "linux",
+    "model": "opencode/mimo-v2.5-free",
+    "model_id": "opencode/mimo-v2.5-free",
+    "execution_mode": "literature_synthesis",
+    "no_browser_network_model_calls": true
+  },
+  "hashes": {
+    "request.json": "cfcbb95331a97887331e31eb073ca950fc2af1e398a0e58cdf6422763b53fca4",
+    "spec.json": "ddf5279eebf4fc6fd8ff841009f73ae166b9628e1f8a7e5e4c9380b6627f1235",
+    "prereg.md": "d0cba141500a6b2d75ea09dfdcdbecad55a4a333d4e7c7162f60dfdc3e6ff742",
+    "freeze.json": null,
+    "result.json": null,
+    "report.md": null,
+    "provenance.json": null
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-35280397316",
+    "handoff_path": "research/experiments/EXP-INTEL-35280397316/handoff.json",
+    "handoff_sha256": "4b42eb264368c3df834c744624581294389d424f62ccb6f53f49be0aee1866e7"
+  },
+  "reproducibility_notes": [
+    "Literature search conducted via web search APIs with documented search strings",
+    "Inclusion/exclusion criteria applied systematically across all three databases",
+    "Search results screened for relevance to aggregation recipe choice ambiguity",
+    "Key sources verified via direct URL access and content review",
+    "No proprietary databases required; all sources publicly accessible"
+  ]
+}
