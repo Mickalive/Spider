@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **148**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **149**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -158,6 +158,7 @@ Validated experiments: **148**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35375596525 | graph | REVISE | REVISE — Frozen decision_rule condition C3 fails (CI upper 0.2372 ≥ 0.15, TOST p_upper=0.286) and spec.json decision_rule maps CI upper ≥ 0.20 to FAIL. However, the audit identifies three confounds that make this failure indeterminate rather than a clean falsification of the orthogonality hypothesis under HTTP caching: (1) HTTP conditional caching was never operationally exercised — run_experiment.py never sends If-None-Match headers, so the 304/ETag code path in mock_server.py is untested; the experiment tests only declarative Cache-Control/ETag header presence, not operational HTTP caching; (2) n=240 is underpowered versus the parent n=480 (SE 0.065 vs 0.046, CI width ~0.25 vs ~0.18); the CI widening from 0.135 to 0.237 is partly a sample-size artifact, not solely an HTTP caching effect; (3) per-caching-mode heterogeneity is opposite to the hypothesis — cache_enabled r=-0.0055 (TOST PASS p=0.045 at delta=0.15) while cache_disabled r=0.217 (TOST FAIL), suggesting sampling noise or structural signal variance differences rather than HTTP caching as a common cause. The maximum justified claim is: C-FRESHNESS orthogonality at delta=0.15 is NOT confirmed on this evidence (pooled r=0.114, CI upper 0.237), but the failure is measurement-confounded and does NOT falsify the hypothesis that HTTP caching preserves orthogonality. C-FRESHNESS remains EXPERIMENTAL; no status advancement or rejection warranted. The parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) remains the established baseline — this experiment neither supersedes nor falsifies it. | C-FRESHNESS | `427f948e7a77` |
 | EXP-PHYSICS-35375596894 | physics | REVISE | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `48c81de0ad50` |
 | EXP-PHYSICS-35389142077 | physics | PASS | FALSIFIED-IN-SETTING | C-WEB-DYNAMICS | `a650cbffad0e` |
+| EXP-RUNTIME-35389142338 | runtime | REVISE | CONSTRAINED — The frozen decision rule SURVIVES_CURRENT_TEST is unsatisfiable by construction: condition (1) requires decompressed discrimination >=0.3 for ALL cells (including NAIVE), while condition (4) requires NAIVE = 0.0. Both cannot be simultaneously satisfied. The producer correctly reports MIXED as the logical response. However, the scientific result is unambiguous: auth-aware caching (URL+Accept-Encoding+Authorization cache key, Cache-Control: private, Vary: Authorization) restores decompressed body-only discrimination to 0.5 across all 9 content conditions (JSON/HTML/XML x 1KB/10KB/100KB), matching parent PASSTHROUGH/RECOMPRESS baseline 0.5. NAIVE caching reproduces parent CACHED falsification at 0.0 exactly, confirming the parent failure was a cache-key semantics artifact. Audit REVISE accepted: the frozen spec contradiction is a design drafting error (condition (1) should apply only to AUTH-AWARE cells), not a measurement failure. All 6 producer controls pass. Audit recomputed metrics match producer exactly. Claim ceiling advanced to include localhost proxy with auth-aware cache configuration. Real CDN infrastructure (Cloudflare/Fastly/Akamai) remains the sole blocker for C-MEAS-VALID product readiness. | C-MEAS-VALID | `5d51a96d9476` |
 
 ## Latest recorded claim events
 
@@ -168,7 +169,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35375596525 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-INTEL-35353016702 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35389142338 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35375591046 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
