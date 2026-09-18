@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "github_run_id": "35389142077",
+  "github_run_attempt": 1,
+  "base_sha": "857589da859cfcae7e2b0d496d0094e63c45a967",
+  "pre_execute_sha": "0097e570eff78c89298462434c4febc1ca116803",
+  "execution_completed_at": "2026-09-18T20:30:00.000000+00:00",
+  "python_version": "3.12.14",
+  "numpy_version": "2.5.3",
+  "platform": "linux-x86_64",
+  "code_paths": {
+    "run_experiment": "research/experiments/EXP-PHYSICS-35389142077/run_experiment.py",
+    "run_experiment_sha256": "ec313396d39e8b3501eb85528c49b3042c9b8fdea26f364998702d5b93e304f5",
+    "parent_code": "research/experiments/EXP-PHYSICS-35375596894/run_experiment.py",
+    "parent_code_sha256": "25fad68b8d0647f3373c97dac3e34e1452bec62a09a51a49db73e2dbb83334aa"
+  },
+  "datasets_fixtures": {
+    "raw_transitions": {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "description": "5000 transitions from 12-state SPA simulation, 50 sessions x 100 steps, seed=42"
+    },
+    "analysis_results": {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/analysis_results.json",
+      "sha256": "cf33fd7e89c2e9be7133ba3365d97c511755dd7cb84eeb87e125e4ebd3fa12b8"
+    }
+  },
+  "environment": {
+    "seed": 42,
+    "n_permutations": 1000,
+    "alpha": 0,
+    "min_stratum_size": 5,
+    "bonferroni_comparisons": 3,
+    "bonferroni_alpha": 0.0167,
+    "n_sessions": 50,
+    "steps_per_session": 100,
+    "n_transitions": 5000,
+    "spa_states": 12,
+    "spa_actions": 4,
+    "transition_function": "SHA256(prev1:prev2:current:action) mod 4"
+  },
+  "frozen_inputs": {
+    "request_hash": "b24e4f359a06bdff4d8730c0e83879ce312d23b816ec9b577e87b73993ab377f",
+    "spec_hash": "9ffc8ddd0cb9e08fd69734b4a7b638c44113312121a0783a6a782940d4d66c38",
+    "prereg_hash": "ddb8d0586c2251312e08f05d79d610fc65521e0217764c7a1bd16308c28897b8"
+  },
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/result.json",
+      "role": "result",
+      "sha256": null
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/report.md",
+      "role": "report",
+      "sha256": null
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/provenance.json",
+      "role": "provenance",
+      "sha256": null
+    }
+  ],
+  "reproduction_instructions": "python research/experiments/EXP-PHYSICS-35389142077/run_experiment.py",
+  "execution_time_seconds": null,
+  "notes": "Raw transitions SHA256 matches parent EXP-PHYSICS-35375596894 exactly (170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade), confirming identical simulation. Within-stratum permutation is the new implementation; parent used block permutation only. Playwright chromium not installed in CI; Phase 2 not attempted."
+}
