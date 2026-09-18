@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **139**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **140**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -149,6 +149,7 @@ Validated experiments: **139**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35330739886 | graph | PASS | MIXED — C1-C2-C4 PASS verified from parent. C3_equivalence passes for delta >= 0.15 (CI upper bound 0.123 < 0.15) but fails for delta <= 0.12 (CI upper bound 0.123 > 0.12). Per frozen decision_rule section 9, MIXED applies when C1-C2-C4 PASS and C3 passes only for delta >= 0.15. Audit PASS confirms all primary metrics (r=0.0335, CI [-0.056, 0.123], TOST p_upper values) match producer within numerical precision. Audit identifies required_fixes for per_condition_correlations table errors (PB conditions report b_mean=0.333 b_std=0.0 instead of true values from raw_evidence) and delta_sample_size_tradeoff min_n_tost values (~4x too small under Fisher z TOST), but these do not affect the primary C3 decision (CI bound 0.123 < 0.15 passes regardless). Bounded confirmation: behavioral-structural signal orthogonality is established at delta=0.15 (shared variance < 2.25%, > 97.75% independent) on deterministic Flask 3.1.3 + PyJWT HS256 localhost with graded session_status_check. Not established at delta=0.10 (CI needs n ~ 865 vs current 480). C-FRESHNESS advances from EXPERIMENTAL toward bounded product-relevant confirmation at delta=0.15 but does NOT reach VALIDATED or PRODUCT_CORE — inference limited to deterministic mock; real APIs, stochastic behavior, alternative algorithms untested. | C-FRESHNESS | `d1d04e16a8aa` |
 | EXP-INTEL-35330747199 | intel | REVISE | REVISE — Producer's MIXED outcome is not justified per frozen decision_rule. The observed C-pattern (C1 PASS, C2 FAIL, C3 PASS, C4 PASS, C5 PASS) has no frozen bucket: MIXED requires NOT C5 but C5 passes (null_ci_gte_13x true, dominance within 15%). This is a preregistration coverage defect (audit V1_DECISION_RULE_UNCLASSIFIABLE), not a scientific result. Additionally, C2_DOMINANCE_INFORMATIVE is construct-impossible with exactly 2 recipes (all dominance necessarily 0%/100%, audit V2), C3_CI_INFORMATIVE compares rank-width to density-range in incommensurable units (audit V3), C4 chi-square never computed and N=14 vs frozen 21 (audit V4), and C5 null dominance is tautological with 2 recipes (audit V5). The OECD/COINr framework as operationalized is not informative for MIXED outcome handling in the 2-recipe setting. The parent's next question (full-DOM C2 reversal persistence) remains blocked by the runtime locatableSample cap. C-MEAS-VALID status unchanged: remains EXPERIMENTAL. | C-MEAS-VALID | `5741bbc510a1` |
 | EXP-PRODUCT-35353007958 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID — Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment. | C-PRODUCT-ECON, C-PARAM-INHERIT | `086b15205824` |
+| EXP-INTEL-35353016702 | intel | REVISE | FALSIFIED-IN-SETTING — Frozen decision_rule condition C2 fails: 0/3 pairwise dominance comparisons are non-degenerate (all strictly 0% or 100%). C1 passes (63/63 valid), but C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The meta-analytic mean recipe (canonical+weighted)/2 always ranks between the two originals by mathematical identity (OBS-1, VN-1), so no linear combination of two strictly-ordered recipes can produce non-degenerate dominance. The 2-recipe degeneracy is NOT solely a 2-recipe artifact — it persists because the density metric has extreme recipe sensitivity (31x canonical/weighted gap) and linear interpolation preserves ordering. The MIXED outcome decision rule remains UNRESOLVED. C-MEAS-VALID status unchanged: remains EXPERIMENTAL. | C-MEAS-VALID | `94c085899b8c` |
 
 ## Latest recorded claim events
 
@@ -159,7 +160,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35330739886 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-INTEL-35330747199 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-INTEL-35353016702 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35353007958 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
