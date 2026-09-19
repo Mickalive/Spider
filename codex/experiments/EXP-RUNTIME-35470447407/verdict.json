@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35470447407",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — All four frozen decision-rule conditions pass. C1: gzip correctness_match_rate == 1.0 for all 12 gzip cells (240/240). C2: silent_fallback_count == 0 for all gzip cells. C3: B-BROTLI-MC passes 100% (120/120, no regression). C4: null_control passes (all_same=true for all states across all gzip cells). Audit PASS confirms all recomputed metrics match producer. Gzip multi-chunk decompression correctness is validated on localhost buffered mock. However, the claim ceiling remains bounded to localhost mock scope; real CDN infrastructure is the sole remaining product-readiness gate for C-MEAS-VALID.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Gzip multi-chunk (chunk_size=32) and single-chunk (chunk_size=1024) decompression correctness validated on localhost mock: 240/240 gzip passes, 0 silent fallbacks, 0 errors, deterministic within-state grouping, audit PASS. Combined with established brotli correctness (360/360 parent + 120/120 regression), the iterative decompression pipeline covers both major content-encoding formats for localhost scope. However, C-MEAS-VALID cannot advance to VALIDATED or PRODUCT_CORE because: (1) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, multi-layer encoding, CDN header manipulation, geographic latency, and production concurrency is untested; (2) larger payloads (10KB/100KB) where dictionary references cross many chunk boundaries are untested; (3) streaming partial-frame forwarding is untested (proxy buffers entirely); (4) gzip compression level variation (1-9) is untested. The parent handoff's primary unknown 'Does gzip multi-chunk correctness hold?' is now resolved for localhost scope. Remaining product gate is CDN correctness validation."
+    }
+  ],
+  "product_action": "C-MEAS-VALID advances toward product readiness: the last common-encoding blocker (gzip) is removed for localhost scope. However, C-MEAS-VALID is NOT promoted to Product Core. The mandatory next gate is real CDN correctness validation. Product team may proceed with localhost-validated decompression for development/testing but MUST NOT ship to production without CDN correctness evidence.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, geographic latency, and production concurrency?",
+  "reason": "Frozen decision-rule C1-C4 all pass (audit PASS, recomputed metrics match producer). Gzip correctness is established for localhost mock, resolving the parent's gzip unknown. The claim ceiling is narrowly bounded: localhost buffered Python Reverse Proxy, Python 3.12.14 stdlib gzip, Flask mock OAuth2, 1KB payloads, chunk_size=32 (3-8 chunks), 4 auth states x 3 content types, N=10 per state per cell, seed 44, jitter 50-150ms. Audit findings V1-V8 are low/info severity and do not affect decision-critical metrics. V4 (gzip compressed discrimination anomaly 0.05-0.09 vs recomputed 0.5) is a reporting discrepancy that does not affect correctness controls. C-MEAS-VALID stays EXPERIMENTAL pending CDN validation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35470447407/result.json (aggregate 480/480, gzip 240/240, 0 silent fallbacks, 0 errors, per_cell correctness_match_rate 1.0 for all 6 gzip cells, decompression_altered 10/10, determinism all_same true, B-RANDOM 0.0)",
+    "research/experiments/EXP-RUNTIME-35470447407/audit.json (PASS, producer_claim_supported true, V1-V8 findings all low/info, recomputed metrics match producer on all decision-critical controls, claim_ceiling bounded to localhost mock)",
+    "research/experiments/EXP-RUNTIME-35470447407/spec.json (frozen hypothesis, falsifier SHA256 mismatch or silent fallback, decision_rule C1-C4, 4 baselines)",
+    "research/experiments/EXP-RUNTIME-35470447407/report.md (executive summary 480/480 table, gzip vs brotli chunk boundary analysis, scope ceiling)",
+    "research/experiments/EXP-RUNTIME-35470447407/provenance.json (python 3.12.14, brotli 1.2.0, PyJWT 2.14.0, seed 44)",
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (parent: established brotli 360/360, gzip unknown now resolved, CDN remains primary unknown)"
+  ]
+}
