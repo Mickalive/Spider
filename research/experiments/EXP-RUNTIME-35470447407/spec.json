@@ -1,17 +1,42 @@
 {
   "experiment_id": "EXP-RUNTIME-35470447407",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold for gzip multi-chunk transfer encoding on a localhost mock server with auth-aware caching?",
+  "hypothesis": "Iterative decompression (gzip->identity, max_depth=5) produces byte-identical output to ground-truth generate_*_body(state, target_size) for all 4 auth states across 3 content types (JSON/HTML/XML) at 1KB nominal with gzip multi-chunk framing (chunk_size=32 bytes).",
+  "falsifier": "Any SHA256(decompressed) != SHA256(generate_*_body(state, target_size)) across all 240 gzip observations, OR any silent fallback (SHA256(decompressed) == SHA256(raw_compressed)) for gzip-compressed responses.",
+  "baselines": [
+    {
+      "id": "B-BROTLI-MC",
+      "description": "Brotli multi-chunk correctness (established 360/360 in parent EXP-RUNTIME-35456070671)",
+      "expected": "100% correctness, serves as positive control for decompression pipeline integrity"
+    },
+    {
+      "id": "B-IDENTITY",
+      "description": "IDENTITY (no compression) baseline—hash matches generate_*_body() exactly",
+      "expected": "100% correctness, validates correctness oracle"
+    },
+    {
+      "id": "B-GZIP-SC",
+      "description": "Gzip single-chunk (chunk_size=1024)—tests gzip correctness without chunk-boundary stress",
+      "expected": "100% correctness; if gzip SC passes but MC fails, chunk boundaries are the failure mode"
+    }
+  ],
+  "positive_control": "BROTLI-MC (brotli multi-chunk): established 360/360 in parent; must pass 100% to confirm no regression in decompression pipeline infrastructure.",
+  "null_control": "B-RANDOM: Within-state decompressed hash must be deterministic (all_same=true for all 4 auth states across all gzip cells). Any within-state hash variation indicates non-deterministic decompression or server behavior.",
+  "measurement_validity": [
+    "Correctness oracle validated: generate_*_body(state, target_size) produces byte-identical output to uncompressed server responses (established via IDENTITY baseline in parent)",
+    "Deterministic server: Flask mock with seeded RNG (seed=44) produces deterministic bodies per (state, content_type) pair",
+    "Silent fallback detection: SHA256(decompressed) == SHA256(raw_compressed) classified as failure, not success",
+    "Gzip compression at quality-level equivalent (compressionlevel=6 for brotli, default for gzip) to match parent's compression intensity",
+    "chunk_size=32 for multi-chunk to stress chunk-boundary handling (gzip compressed 1KB payloads typically 300-600 bytes, spanning 10-19 chunks at 32 bytes)",
+    "Max decompression depth 5 (gzip->identity is depth 1; no multi-layer encoding in this design)",
+    "Request jitter 50-150ms uniform between requests to avoid rate-limit effects",
+    "Python 3.12 stdlib gzip module (no external dependencies)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) correctness_match_rate == 1.0 for ALL 12 gzip cells (4 states x 3 content types x 1 chunk mode); (C2) silent_fallback_count == 0 for ALL gzip cells; (C3) B-BROTLI-MC passes 100% (no regression); (C4) null_control passes (all_same=true for all states in all gzip cells). FALSIFIED if any correctness failure OR any silent fallback in gzip cells. MEASUREMENT_INVALID if infrastructure prevents data collection.",
+  "product_consequence_positive": "Gzip decompression correctness validated under chunked transfer encoding. Combined with established brotli correctness, the iterative decompression pipeline covers both major content-encoding formats. C-MEAS-VALID advances toward product readiness for the decompression correctness gate.",
+  "product_consequence_negative": "Gzip decompression fails under chunked framing. The iterative decompression pipeline is encoding-specific, not general. Product cannot ship gzip decompression without diagnosis. The decompression implementation requires investigation of gzip-specific chunk-boundary handling.",
+  "estimated_cost": "Low: ~240 HTTP requests to localhost mock server, <2 minutes execution, no external infrastructure, no API costs",
+  "expected_information_gain": "High: fills the specific gzip unknown from the parent handoff; determines whether the decompression pipeline generalizes beyond brotli; a negative result changes the product shipping scope; a positive result removes the last common-encoding blocker for C-MEAS-VALID decompression correctness"
 }
