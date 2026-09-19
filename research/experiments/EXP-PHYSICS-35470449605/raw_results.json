@@ -1,0 +1,213 @@
+{
+  "experiment_id": "EXP-PHYSICS-35470449605",
+  "seed": 42,
+  "n_transitions_5000": 5000,
+  "sha_inmemory_5000": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "n_transitions_50000": 50000,
+  "sha_raw_50000": "a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51",
+  "determinism_k2_n5000": {
+    "deterministic": 407,
+    "stochastic": 885,
+    "total": 1292,
+    "det_ratio": 0.31501547987616096
+  },
+  "determinism_k3_n5000": {
+    "deterministic": 89,
+    "stochastic": 732,
+    "total": 821,
+    "det_ratio": 0.10840438489646773
+  },
+  "screening": {
+    "B-WEIGHTED-PMI": {
+      "k2_pmi": 0.9332435964563089,
+      "k3_pmi": 1.2205083083840709,
+      "k3_minus_k2": 0.28726471192776193,
+      "k2_info": {
+        "n_strata": 1292,
+        "n_used": 398,
+        "total": 5000,
+        "skipped_small": 894
+      },
+      "k3_info": {
+        "n_strata": 821,
+        "n_used": 510,
+        "total": 5000,
+        "skipped_small": 311
+      },
+      "positive_control_k3": 1.8056238881521471,
+      "positive_control_p": 0.000999000999000999,
+      "positive_control_perm_scheme": "within-stratum url_after permutation",
+      "c3_pass": true,
+      "null_control": {
+        "observed": 0.9332435964563089,
+        "null_mean": 0.4070574334174484,
+        "null_std": 0.007267658065094704,
+        "abs_null_mean": 0.4070574334174484,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.41573570993516207,
+          0.4186376710799787,
+          0.4009564081901671,
+          0.3986023338429051,
+          0.40305093325710434
+        ]
+      },
+      "c1_pass": false
+    },
+    "B-EQUAL-WEIGHT-PMI": {
+      "k2_pmi": 1.4904747760316495,
+      "k3_pmi": 1.4462469462093848,
+      "k3_minus_k2": -0.0442278298222647,
+      "k2_info": {
+        "n_strata": 1292,
+        "n_used": 398,
+        "total": 5000,
+        "skipped_small": 894
+      },
+      "k3_info": {
+        "n_strata": 821,
+        "n_used": 510,
+        "total": 5000,
+        "skipped_small": 311
+      },
+      "positive_control_k3": 1.8098512278603744,
+      "positive_control_p": 0.000999000999000999,
+      "positive_control_perm_scheme": "within-stratum url_after permutation",
+      "c3_pass": true,
+      "null_control": {
+        "observed": 1.4904747760316495,
+        "null_mean": 0.704217209837271,
+        "null_std": 0.012815282019864585,
+        "abs_null_mean": 0.704217209837271,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.7217315048155726,
+          0.7271478644083564,
+          0.6864901715701313,
+          0.6892315333614811,
+          0.6960905997820154
+        ]
+      },
+      "c1_pass": false
+    },
+    "B-MEDIAN-PMI": {
+      "k2_pmi": 1.510964047443681,
+      "k3_pmi": 1.4768209688898335,
+      "k3_minus_k2": -0.03414307855384746,
+      "k2_info": {
+        "n_strata": 1292,
+        "n_used": 398,
+        "total": 5000,
+        "skipped_small": 894
+      },
+      "k3_info": {
+        "n_strata": 821,
+        "n_used": 510,
+        "total": 5000,
+        "skipped_small": 311
+      },
+      "positive_control_k3": 1.872699737514802,
+      "positive_control_p": 0.000999000999000999,
+      "positive_control_perm_scheme": "within-stratum url_after permutation",
+      "c3_pass": true,
+      "null_control": {
+        "observed": 1.510964047443681,
+        "null_mean": 0.6856105140572255,
+        "null_std": 0.01831173457332667,
+        "abs_null_mean": 0.6856105140572255,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.6995138503199658,
+          0.6995138503199658,
+          0.6995138503199658,
+          0.6666666666666666,
+          0.6992669173604371
+        ]
+      },
+      "c1_pass": false
+    },
+    "B-KNN-CMI": {
+      "k2_pmi": 0.023350119028318662,
+      "k3_pmi": 0.203142826903798,
+      "k3_minus_k2": 0.17979270787547935,
+      "k2_info": {
+        "n_records": 5000,
+        "k": 5,
+        "alpha": 1.0,
+        "history_kind": "state"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "k": 5,
+        "alpha": 1.0,
+        "history_kind": "action"
+      },
+      "positive_control_k3": 1.1908352763575794,
+      "positive_control_p": 0.000999000999000999,
+      "positive_control_perm_scheme": "global shuffled-action permutation",
+      "c3_pass": true,
+      "null_control": {
+        "observed": 0.023350119028318662,
+        "null_mean": -0.2619042294230531,
+        "null_std": 0.007456052498852704,
+        "abs_null_mean": 0.2619042294230531,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.2595350147280691,
+          -0.260843297441707,
+          -0.26270135534791195,
+          -0.2573218847771147,
+          -0.2582279804947603
+        ]
+      },
+      "c1_pass": false
+    }
+  },
+  "passers": [],
+  "all_fail_c1": true,
+  "phase2": null,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 313,
+      "total_records": 1982,
+      "observed_pmi": 1.463441287255115,
+      "null_mean": 0.7363823928559942,
+      "null_std": 0.015275768945932211
+    },
+    "10-19": {
+      "n_strata": 80,
+      "total_records": 953,
+      "observed_pmi": 1.6581756993482195,
+      "null_mean": 0.5623148512422753,
+      "null_std": 0.021383295403108515
+    },
+    "20-49": {
+      "n_strata": 5,
+      "total_records": 102,
+      "observed_pmi": 1.8179991123828811,
+      "null_mean": 0.369151991445685,
+      "null_std": 0.06666100536327332
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "reason": "C1: ALL estimators have |null_mean| >= 0.1 bits at N=5000 (or C3-invalid), indicating the bias is environment-level (deterministic/stochastic strata mixing) rather than estimator-level.",
+  "estimator_order": [
+    "B-WEIGHTED-PMI",
+    "B-EQUAL-WEIGHT-PMI",
+    "B-MEDIAN-PMI",
+    "B-KNN-CMI"
+  ],
+  "wall_seconds": 61.82365345954895
+}
