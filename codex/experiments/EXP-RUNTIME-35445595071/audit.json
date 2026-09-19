@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35445595071",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix degenerate error control: decompress_body (run_experiment.py:387-405) never raises - it catches brotli/gzip exceptions and returns raw bytes. C_NO_ERROR_INFLATION therefore always reports 0 even when decompression silently falls back to compressed bytes that still preserve state grouping (valid distinct vs 3 errors identical). Fix: count fallback as error or explicitly verify decompressed payload equals ground-truth uncompressed body (compare to generate_*_body output or to direct origin fetch without proxy). Re-run and demonstrate error count distinguishes corrupted vs correct reassembly.",
+    "Add direct payload-correctness control: compute decompressed byte equality to expected uncompressed body per state (or hash equality to origin direct fetch) and report per-cell correctness rate. Current decompressed_body_only_discrimination=0.5 and compressed_body_only_discrimination=0.5 (result.json per_cell both 0.5) are identical, proving the metric cannot distinguish successful decompression from silent fallback that returns compressed bytes which are also grouped as 0.5 (3 error states share identical 'Authentication failed' compressed payload). Add C_DECOMPRESSED_CORRECTNESS that requires decompressed body hash == expected uncompressed hash for all reps.",
+    "Replace indirect origin verification with direct header capture: C_ORIGIN_VERIFICATION currently tests fresh verify servers on 6700+ (run_experiment.py:832-869) not the 7700/7800 origins serving the 480 measured requests (same V3 indirectness as parent). Fix: log per-request origin response headers (Transfer-Encoding chunked without Content-Length) during main loop or capture proxy upstream headers, persist in result.json."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DEGENERATE_ERROR_CONTROL",
+      "severity": "medium",
+      "finding": "C_NO_ERROR_INFLATION is degenerate. decompress_body (387-405) implements iterative decompression as try brotli.decompress / try gzip.decompress / break returning current_data unchanged. It never raises. The experiment's error counting (612-627 try/except around decompress_body) therefore always records 0 errors even when brotli fails and payload falls back to raw compressed bytes. A corrupted multi-chunk reassembly that corrupts brotli symbols would throw inside brotli but be silently masked, still counted as 0 errors.",
+      "evidence": "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py:387-405 decompress_body never raises; 612-627 error capture expects exception; result.json controls.C_NO_ERROR_INFLATION observed 0 for all cells but metric is tautologically 0; validity_notes report 0 decompression errors across all 480 requests",
+      "impact": "Decision rule condition (4) 0 decompression errors is not informative. SURVIVES_CURRENT_TEST cannot be justified on error count alone without payload correctness check."
+    },
+    {
+      "id": "V2_INSENSITIVE_DISCRIMINATION",
+      "severity": "medium",
+      "finding": "decompressed_body_only_discrimination metric is insensitive to decompression correctness. Fingerprint is SHA256(repr((status, body_hash, ''))) (fingerprint_decompressed 418-424 includes status). Uncompressed bodies for 3 error states are identical ('Authentication failed') and valid distinct ('alice'), so compressed payloads are also grouped identically (compressed_discrimination 0.5). Result.json shows per_cell compressed_body_only_discrimination 0.5 and decompressed_body_only_discrimination 0.5 identically for all 6 cells. If decompression silently fell back to raw compressed bytes, discrimination would still be 0.5 via same grouping (valid vs 3 errors share status 401 and identical error bodies). No per-cell verification that decompressed bytes equal expected 1024-byte uncompressed body or differ from compressed body.",
+      "evidence": "research/experiments/EXP-RUNTIME-35445595071/result.json metrics.per_cell all 6 cells compressed 0.5 decompressed 0.5; run_experiment.py:412-415 fingerprint_compressed_only and 418-424 fingerprint_decompressed both include status; 77-150 generate_*_body shows 3-way error collapse identical bodies; body_sizes compressed 70-173 vs uncompressed 1024 but no decompressed_size logged",
+      "impact": "Primary decision conditions (1) and (5) decompressed discrimination >=0.3 would pass even with failed decompression. Claim that iterative decompression correctly reassembles multi-chunk brotli is not demonstrated by discrimination alone. Requires payload correctness control."
+    },
+    {
+      "id": "V3_PROXY_BUFFERING_MASKS_STREAMING",
+      "severity": "low",
+      "finding": "Reverse proxy buffers entire upstream body before re-chunking (run_experiment.py:318-325 upstream_resp.read() reassembles chunks, then 336-347 re-chunks at same chunk_size). Origin chunk boundaries are therefore not streamed to client; proxy reassembles then re-emits 3-6 chunks. Client still receives multi-chunk framing (compressed_size >32 forces re-chunking) but the test validates proxy re-chunking + client reassembly, not origin streaming where incomplete brotli frames could be forwarded incrementally. Real CDN may stream chunks without full buffering.",
+      "evidence": "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py:318-325 HTTPConnection read() de-chunks upstream, 336-347 re-chunk loop; provenance.json architecture Client->Reverse Proxy->Mock Origin; result.json compressed_size_stats exceeds_chunk_size true but chunk boundaries are proxy-generated",
+      "impact": "Test correctly validates that chunked TE is transparent when reassembled before decompression (hypothesis clause 2), but does not exercise streaming partial-frame forwarding failure mode. Low risk for correctness but bounds claim to buffered proxy model."
+    },
+    {
+      "id": "V4_ORIGIN_VERIFICATION_INDIRECT",
+      "severity": "low",
+      "finding": "C_ORIGIN_VERIFICATION passes (3/3 content types has_transfer_encoding_chunked true, no Content-Length) but verification is performed on fresh mock_verify servers on ports 6700+ (832-869) separate from measured origins on 7700/7800. Main loop origins are started with use_chunked=True and chunk_size 32/1024 (553-554) and code inspection confirms Transfer-Encoding: chunked without Content-Length (238-264 handler), but no per-request header capture from measured origins is persisted.",
+      "evidence": "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py:553-562 origin start in main loop use_chunked=True, 832-869 verification loop separate; result.json controls.C_ORIGIN_VERIFICATION origin_chunked_verified true but evidence_refs fresh servers; parent handoff V3 same limitation",
+      "impact": "Verification confirms codebase correctly implements chunked without CL, and measured path is genuinely chunked, but auditability relies on code inspection not direct observation. No adjustment to primary metric; future runs should log actual origin headers per measured request."
+    },
+    {
+      "id": "V5_SPEC_DEVIATION_QUALITY_AND_ACCEPT_ENCODING",
+      "severity": "low",
+      "finding": "Spec measurement_validity requires brotli quality 4-8 cycling and 'Client sends no Accept-Encoding header (stdlib urllib); proxy handles encoding' but implementation fixes quality 6 (MOCK_BROTLI_QUALITY=6, run_experiment.py:65,244) and client make_request (481) sends Accept-Encoding: br, gzip, identity in all conditions (validity_notes confirm). Proxy also injects Accept-Encoding if missing (315-316). Deviation does not affect discrimination but narrows exercised variation.",
+      "evidence": "research/experiments/EXP-RUNTIME-35445595071/spec.json measurement_validity[0] quality 4-8 cycling, [5] no Accept-Encoding; run_experiment.py:65 MOCK_BROTLI_QUALITY=6, 244 brotli.compress quality 6, 481 headers Accept-Encoding br,gzip,identity; result.json validity_notes 'Accept-Encoding from client: br, gzip, identity'",
+      "impact": "Claim ceiling bounded to quality 6 only; quality variation and negotiation untested. No impact on multi-chunk splitting test at fixed quality."
+    },
+    {
+      "id": "V6_RECOMPUTATION_MATCH",
+      "severity": "info",
+      "finding": "Independent recomputation matches producer exactly: 6 cells decompressed discrimination 0.5 min/mean/max, status 0.5, B-RANDOM 0.0 for all 6 cells, compressed_size_stats JSON 70-83 HTML 172-173 XML 161-165 exceeds_chunk_size true for MULTI-CHUNK false for SINGLE-CHUNK, 0 decompression errors, 4/4 states all_same true across 6 cells, total_requests 480, C_SINGLE_CHUNK_REGRESSION mean 0.5 pass, C_MULTI_CHUNK_PRIMARY min 0.5 pass.",
+      "evidence": "research/experiments/EXP-RUNTIME-35445595071/result.json metrics.per_cell, metrics.per_chunk_config, controls; recomputed via python SHA256 fingerprint logic and discrimination formula intra_match_rate - inter_match_rate yielding 0.5 by 3-way error collapse construction, B-RANDOM random SHA256 unique -> 0.0",
+      "impact": "No arithmetic or selective-reporting error. Producer derived metrics are reproducible. Issues are interpretive/validity, not numeric."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-RANDOM",
+      "expected": "0.0 for all cells (null model: random SHA256 fingerprint should show no state discrimination)",
+      "observed": "0.0 for all 6 cells (result.json controls.C_NULL_CONTROL observed [0.0 x6] pass true; per_cell baselines B-RANDOM 0.0)",
+      "assessment": "PASS - Trivial null baseline passes. Confirms fingerprint pipeline does not hallucinate structure when input is random. Appropriate weak null; stronger null would be status-only or body-only corrupted baseline but not required for this narrow question."
+    },
+    {
+      "id": "B-SINGLE-CHUNK",
+      "expected": "discrimination 0.5, 0 errors, determinism all_same=true (parent baseline where compressed fits in one chunk)",
+      "observed": "0.5 decompressed for all 3 SINGLE-CHUNK cells (JSON/HTML/XML), min 0.5 mean 0.5 (controls.C_SINGLE_CHUNK_REGRESSION observed_per_cell [0.5,0.5,0.5] pass true), B-RANDOM 0, determinism 1/1, 0 errors",
+      "assessment": "PASS - Regression reproduces parent. Confirms single-chunk path unchanged after chunk_size reduction for multi-chunk condition. Strong appropriate baseline for isolating multi-chunk effect."
+    },
+    {
+      "id": "C_MULTI_CHUNK_PRIMARY",
+      "expected": "MULTI-CHUNK decompressed discrimination >=0.3 for all cells (expected 0.5)",
+      "observed": "min 0.5 across 3 MULTI-CHUNK cells (JSON/HTML/XML), observed_per_cell [0.5,0.5,0.5] pass true",
+      "assessment": "PASS numerically, but validity limited by V2 insensitivity - metric alone does not verify decompression correctness. Numerically exceeds threshold decisively."
+    },
+    {
+      "id": "C_COMPRESSED_SIZE_VERIFICATION",
+      "expected": "All MULTI-CHUNK compressed payloads exceed chunk_size=32 bytes",
+      "observed": "true for all 3 MULTI-CHUNK cells: JSON min 70 max 83, HTML 172-173, XML 161-165, chunk_size 32 (result.json compressed_size_stats exceeds_chunk_size true)",
+      "assessment": "PASS - Direct verification that compressed payloads span 3-6 chunks at chunk_size 32. Eliminates parent V2 single-chunk degeneracy (parent max 176 <1024). Multi-chunk condition genuinely exercised (code inspection confirms manual chunked writer splits at 32)."
+    },
+    {
+      "id": "C_DECOMPRESSED_DETERMINISM",
+      "expected": "Within-state decompressed hash all_same=true for all states across all conditions",
+      "observed": "true for all 4 states (no_auth, valid_token, expired_token, invalid_token) across 6 cells (result.json controls.C_DECOMPRESSED_DETERMINISM observed 4x true pass true, per_cell hash_variation unique_count 1 total 20)",
+      "assessment": "PASS - Demonstrates determinism not corrupted by chunk boundaries. Does not verify correctness vs ground truth (V2)."
+    },
+    {
+      "id": "C_NO_ERROR_INFLATION",
+      "expected": "0 decompression errors",
+      "observed": "0 (controls.C_NO_ERROR_INFLATION observed 0 pass true, per_cell decompression_errors [] )",
+      "assessment": "PASS numerically but DEGENERATE per V1 - control always true due to silent fallback. Not a strong control. Requires fix to count fallback as error or verify payload correctness."
+    },
+    {
+      "id": "C_ORIGIN_VERIFICATION",
+      "expected": "Origin serves Transfer-Encoding: chunked (no Content-Length) for all cells",
+      "observed": "true for JSON/HTML/XML (has_transfer_encoding_chunked true, has_content_length false, transfer_encoding chunked, origin_chunked_verified true pass true)",
+      "assessment": "PASS on fresh verify servers; indirect per V4 but code inspection supports. Confirms V1 contamination eliminated (origin use_chunked=True for all cells)."
+    }
+  ],
+  "recomputed_metrics": {
+    "total_requests": 480,
+    "cells": 6,
+    "multi_chunk_cells": 3,
+    "single_chunk_cells": 3,
+    "per_cell_decompressed_discrimination_min": 0.5,
+    "per_cell_decompressed_discrimination_max": 0.5,
+    "per_cell_decompressed_discrimination_mean": 0.5,
+    "per_cell_compressed_discrimination_min": 0.5,
+    "per_cell_compressed_discrimination_max": 0.5,
+    "per_cell_status_discrimination_min": 0.5,
+    "multi_chunk_decompressed_min": 0.5,
+    "multi_chunk_decompressed_mean": 0.5,
+    "single_chunk_decompressed_min": 0.5,
+    "single_chunk_decompressed_mean": 0.5,
+    "B-RANDOM_all_zero": true,
+    "B-RANDOM_values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+    "decompression_errors_total": 0,
+    "decompressed_hash_variation_all_same": true,
+    "compressed_hash_variation_all_same": true,
+    "compressed_size_stats": {
+      "JSON_MULTI-CHUNK": {"min": 70, "max": 83, "mean": 73.25, "chunk_size": 32, "exceeds": true, "chunks": 3},
+      "HTML_MULTI-CHUNK": {"min": 172, "max": 173, "mean": 172.25, "chunk_size": 32, "exceeds": true, "chunks": 6},
+      "XML_MULTI-CHUNK": {"min": 161, "max": 165, "mean": 164.0, "chunk_size": 32, "exceeds": true, "chunks": 6},
+      "JSON_SINGLE-CHUNK": {"min": 70, "max": 83, "mean": 73.25, "chunk_size": 1024, "exceeds": false},
+      "HTML_SINGLE-CHUNK": {"min": 172, "max": 173, "mean": 172.25, "chunk_size": 1024, "exceeds": false},
+      "XML_SINGLE-CHUNK": {"min": 161, "max": 165, "mean": 164.0, "chunk_size": 1024, "exceeds": false}
+    },
+    "decision_rule_conditions": {
+      "c1_decompressed_discrimination_ge_0.3_all_multi": true,
+      "c2_hash_determinism_all_same": true,
+      "c3_B-RANDOM_zero": true,
+      "c4_zero_errors": true,
+      "c5_multi_chunk_ge_0.3": true,
+      "survives_current_test_per_producer_rule": true,
+      "measurement_invalid_trigger": false
+    },
+    "note": "All recomputed values match producer result.json exactly. Discrimination 0.5 is deterministic structural ceiling from 3-way error collapse (no_auth/expired/invalid share identical bodies) with intra 1.0 inter 0.5. Recomputation confirms no arithmetic error; validity concerns are about metric interpretive power (V1/V2) not numeric mismatch."
+  },
+  "claim_ceiling": "On localhost mock OAuth2 Flask origin (brotli quality 6, Transfer-Encoding chunked without Content-Length, chunk_size 32 MULTI-CHUNK / 1024 SINGLE-CHUNK) through buffered Python reverse proxy (reads full upstream then re-chunks) to requests client with iterative decompression (brotli->gzip loop max_depth 5, Accept-Encoding br,gzip,identity), multi-chunk framing where compressed payloads 70-173 bytes span 3-6 chunks does not cause crashes or loss of state-grouping: decompressed grouping discrimination remains 0.5 (threshold 0.3) and within-state hash determinism all_same true, B-RANDOM 0, 0 counted errors, for 1KB synthetic JSON/HTML/XML with 3-way error collapse (4 auth states: no_auth/valid_token/expired/expired share), N=20 per state per cell (480 total), seed 44, jitter 50-150ms, Python 3.12.14 brotli 1.2.0. This validates buffered reassembly transparency for single-quality brotli at this size, removing parent V2 single-chunk degeneracy for this size. Does NOT establish: decompressed payload byte-equality to ground-truth uncompressed body (no correctness control; discrimination insensitive and error control degenerate per V1/V2), streaming partial-frame forwarding, larger payloads (10KB/100KB) where brotli dictionary references may cross many chunks, gzip multi-chunk, quality variation 4-8, Accept-Encoding negotiation, real CDN infrastructure (Cloudflare/Fastly/Akamai), geographic latency, or production concurrency. Real CDN with auth-aware caching remains sole blocker for C-MEAS-VALID product readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35445595071/request.json",
+    "research/experiments/EXP-RUNTIME-35445595071/spec.json",
+    "research/experiments/EXP-RUNTIME-35445595071/prereg.md",
+    "research/experiments/EXP-RUNTIME-35445595071/freeze.json",
+    "research/experiments/EXP-RUNTIME-35445595071/result.json",
+    "research/experiments/EXP-RUNTIME-35445595071/report.md",
+    "research/experiments/EXP-RUNTIME-35445595071/provenance.json",
+    "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py:65 MOCK_BROTLI_QUALITY fixed 6; 77-150 body generators 3-way collapse; 238-264 origin chunked writer; 298-347 proxy buffering then re-chunking; 387-405 decompress_body silent fallback; 412-428 fingerprint with status; 481 Accept-Encoding header; 553-562 origin/proxy start chunk_size 32/1024; 612-627 error counting dead; 832-869 fresh verify servers",
+    "research/experiments/EXP-RUNTIME-35434773328/handoff.json (parent SURVIVES_CURRENT_TEST with V2 do_not_assume multi-chunk untested, V1 contamination, V3 indirect verification)",
+    "research/experiments/EXP-RUNTIME-35434773328/audit.json (V2_SINGLE_CHUNK_DEGENERACY medium, V1_CL_REGRESSION_CONTAMINATION, V3_ORIGIN_VERIFICATION_INDIRECT)",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Does decompressed body byte-equal ground-truth uncompressed body per state (direct correctness), not just grouping discrimination 0.5 which both compressed and decompressed achieve and which silent fallback would also preserve?",
+    "Does iterative decompression survive streaming proxy that forwards chunks without full buffering (real CDN behavior) where brotli frames may be forwarded incrementally?",
+    "Does multi-chunk reassembly work with larger payloads (10KB, 100KB) where compressed size spans 100+ chunks and brotli dictionary references cross many boundaries?",
+    "Does multi-chunk reassembly work with gzip encoding (not just brotli) and with quality variation 4-8 cycling?",
+    "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration, chunked TE, Accept-Encoding negotiation, quality variation, and geographic latency - the stated remaining blocker?",
+    "What is proxy/CDN-specific header interaction (X-Cache, Via, ETag, Content-Length) under multi-chunk framing on the wire for HIT vs MISS?",
+    "Does max_depth=5 handle multi-layer brotli->gzip->brotli through chunked framing without buffering exploits?"
+  ]
+}

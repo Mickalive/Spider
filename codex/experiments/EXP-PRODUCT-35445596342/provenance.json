@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35445596342",
+  "lane": "product",
+  "produced_by": "opencode/big-pickle (EXECUTE)",
+  "github": {
+    "repository": "Mickalive/Spider",
+    "workflow": "SPIDER R2 Lane (spider-lane.yml)",
+    "run_id": "35445596342",
+    "run_number": 763,
+    "run_attempt": 1,
+    "ref": "refs/heads/main",
+    "workflow_sha": "9d9a09e5f774143121e58b6fca8b698001aaadaa",
+    "branch_head_during_execution": {
+      "commit": "a8df57563640575289ef622b470d5696b3bde7bf",
+      "subject": "R2 product: execution base EXP-PRODUCT-35445596342"
+    },
+    "freeze_commit": {
+      "commit": "26b586e769c37e8bc8396066c4424c486ba86084",
+      "subject": "R2 product: freeze EXP-PRODUCT-35445596342"
+    },
+    "execution_checkpoint_pre_execute_sha": "26b586e769c37e8bc8396066c4424c486ba86084"
+  },
+  "environment": {
+    "os": "Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64",
+    "python": "3.12.14",
+    "flask": "3.1.3",
+    "werkzeug": "3.1.8",
+    "pyjwt": "2.14.0",
+    "cryptography": "50.0.1",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "requests": "not installed (client uses stdlib urllib)"
+  },
+  "reproduction": {
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "experiment_directory": "research/experiments/EXP-PRODUCT-35445596342",
+    "commands": [
+      "python3 -u run_experiment.py 2>server_log.txt",
+      "python3 - <<PY (independent recomputation of metrics from raw_evidence/experiment_data.json, no HTTP)"
+    ],
+    "parameters": {
+      "seed": 42,
+      "port": 18950,
+      "detection_threshold": 0.25,
+      "tost_delta": 0.15,
+      "cooccurring_conditions": "2 drift x 4 noise = 8",
+      "cooccurring_samples_per_condition": 60,
+      "cooccurring_total_paired": 480,
+      "noise_only_samples": 240,
+      "isolated_drift_tp_samples": 180,
+      "auth_state_probes": 40
+    }
+  },
+  "frozen_inputs": {
+    "request.json": {"sha256": "848354573e2d33f2edfdbdbef3013e8a3961cf1c4a06dfb78fde7e6422a36c33"},
+    "spec.json": {"sha256": "bc031085e708321623779ee8f4a02f221da4b67e38cb24d995e87a71fd03f708"},
+    "prereg.md": {"sha256": "b55f824e36559b466ac7ce26da03e13bedb417ba39eeefac60638459b9cc9ef9"},
+    "freeze.json": {"sha256": "589ee48bb02404e5526a400b2964a6f8fb3bafb9bf43bffaf67a3544798eb725"},
+    "execution_checkpoint.json": {"sha256": "bb28a06a959794360d91293e7669368a680209b92e3b1a4257ed05f5fa922b83"}
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/run_experiment.py", "sha256": "57f3a4d51294e1281e37cd9a2945d61d41df548d209dee540560c8328ab96baf", "role": "code", "note": "measurement driver: phases A-E, redesigned behavioral_score, TOST, decision"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/mock_server.py", "sha256": "7d813322c97358fbc565837b40240d55e42f608754e638b95af9bb23c82ff644", "role": "code", "note": "stochastic Flask+SQLite mock: TTL cache, I/O jitter, HS256/RS256 JWT, full state reset"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/raw_evidence/experiment_data.json", "sha256": "fc79a70f17cdfc2015d044cd024d3a3f74a18d0975e28ed3bbeb5752a54673b5", "role": "raw", "note": "per-sample observables for all phases plus phase-A raw HTTP responses"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/result_draft.json", "sha256": "d362cedb5266ccea9c39920155555804363610080657dcdac9dc165a09bd0a12", "role": "derived", "note": "driver-internal full packet (metrics, observations, raw_evidence_sha256)"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/server_log.txt", "role": "raw", "note": "werkzeug access log (stderr) captured during run; diagnostic only"}
+  ],
+  "inheritance": {
+    "parent_experiment": "EXP-PRODUCT-35434772331",
+    "parent_handoff_sha256": "5d023480c998d3879bb77083f057708239d05b791485336f242a417096ae0ff0",
+    "parent_verdict_status": "MEASUREMENT_INVALID",
+    "baseline_orthogonality_evidence": {
+      "experiment": "EXP-GRAPH-35353011131",
+      "artifact": "codex/experiments/EXP-GRAPH-35353011131/result.json",
+      "reference_values": {"pearson_r_pooled": 0.0463, "ci_upper": 0.1353, "tost_delta": 0.15, "tost_p_upper": 0.0110}
+    }
+  },
+  "verification": {
+    "independent_recomputation": "metrics recomputed from raw_evidence/experiment_data.json only (no HTTP, separate script); per-condition std/means, pooled r, CI, TOST p-values, TP/FP rates matched result_draft.json exactly",
+    "freeze_hash_check": "request/spec/prereg hashes in this provenance equal the hashes frozen in freeze.json"
+  }
+}

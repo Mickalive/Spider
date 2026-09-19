@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35445595108",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Audit V1_CRITICAL_SHARED_VARIABLE_CONFOUND: structural signal is defined as hash(body)%10000 including 401 error response bodies. When tokens expire, testbed_server.py @require_token returns 401 before applying ETag/Cache-Control, leaving etag='' cache_control='' and constant body hash (f6d40dd42dff2b868cbd3c36246e3f97471) for all 240 expired samples (structural std=0.0). Valid-token samples have varied bodies (structural std=0.2648, 167 unique values). Behavioral signal is binary 0 (valid) vs 7 (expired). Pearson r=0.375 is a forced mean-shift between degenerate and varied distributions, not independent CDN/OAuth correlation. This violates spec.json measurement_validity clause 7 (no shared variables between signal domains) and clause 1 (structural variation independent of behavioral state). The observed r=0.375 is a valid descriptive statistic for this implementation but measurement-invalid for the frozen hypothesis. Audit MEASUREMENT_INVALID confirmed with 8 required_fixes. C-FRESHNESS maximum justified ceiling remains localhost Flask mock: pooled r=0.0022 CI upper 0.0916 < 0.15 (EXP-GRAPH-35389145821, audit PASS) and stochastic mock r=0.0463 CI upper 0.135 < 0.15 (EXP-GRAPH-35353011131, audit PASS). No advancement toward VALIDATED or PRODUCT_CORE warranted."
+    }
+  ],
+  "product_action": "No product action. C-FRESHNESS remains EXPERIMENTAL bounded to localhost Flask mock. Parallel-channel architecture is neither validated nor falsified by this experiment. The measurement confound (error-body hashing) is a definitional artifact, not evidence that production-like infrastructure breaks orthogonality.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a production-like testbed server be redesigned with a structural signal definition that is provably independent of behavioral state — specifically, header-only structural signal (ETag variation, Cache-Control variation, dynamic timestamp/request_id entropy) that excludes error response bodies entirely — and does orthogonality hold at delta=0.15 under this corrected measurement?",
+  "reason": "The audit correctly identifies that r=0.375 is an artifact of structural signal definition, not evidence against orthogonality. The @require_token decorator returns 401 before ETag/Cache-Control headers are computed, making expired-token structural signal constant (std=0.0). The valid-token structural signal varies normally (std=0.265). The pooled correlation captures this binary structural degeneracy, not genuine CDN/OAuth coupling. The previous localhost mock evidence (r=0.0022 to 0.0463) used different structural definitions (schema_diff/Jaccard, stable-identifier hash) that excluded error bodies, so the comparison is confounded by definition change. To test whether production-like infrastructure actually breaks orthogonality, the structural signal must be defined to be independent of auth failure by construction — e.g., header-only signal on success responses, or structural hash excluding error bodies. The testbed infrastructure (CDN simulation, OAuth2 middleware, dynamic content, database-backed state) is sound; the signal extraction needs correction. The B-FLASK-ONLY baseline was also not executed, preventing attribution of any residual correlation to infrastructure features.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35445595108/request.json",
+    "research/experiments/EXP-GRAPH-35445595108/spec.json",
+    "research/experiments/EXP-GRAPH-35445595108/prereg.md",
+    "research/experiments/EXP-GRAPH-35445595108/freeze.json",
+    "research/experiments/EXP-GRAPH-35445595108/result.json sha256 3f7b8de174db29eabc4becd861798e208dfd6551898e08bd4dd2a36365ca6efb",
+    "research/experiments/EXP-GRAPH-35445595108/audit.json — status MEASUREMENT_INVALID, V1_CRITICAL_SHARED_VARIABLE_CONFOUND, 8 required_fixes",
+    "research/experiments/EXP-GRAPH-35445595108/testbed_server.py sha256 707106c6e4b235a921e81bc235b1bdd10caf3c8dcc1370a1d3e0f60f39197274",
+    "research/experiments/EXP-GRAPH-35445595108/run_experiment.py sha256 454f5b25bbeb06100e6318b17d0374f8975a78adcfa76f9a89511fa8e71a06f1",
+    "research/experiments/EXP-GRAPH-35445595108/raw_evidence/experiment_data.json sha256 367ca2e3576e7cd6c3d82387e522aab925dd13edf1a15c31fd7635ac75d49984",
+    "research/experiments/EXP-GRAPH-35389145821/result.json — pooled r=0.0022 CI upper 0.0916 PASS, localhost mock baseline",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — pooled r=0.0463 CI upper 0.135 PASS, stochastic mock baseline",
+    "research/experiments/EXP-GRAPH-35409927045/handoff.json — parent MEASUREMENT_INVALID, endpoint selection failure",
+    "codex/claim_state.json:C-FRESHNESS — EXPERIMENTAL status with localhost mock ceiling"
+  ]
+}

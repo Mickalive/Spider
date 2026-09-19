@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35445595108",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redefine structural_composite to be independent of behavioral failure: exclude 401/403 error response bodies from structural signal. Use only success-path signals (ETag, Cache-Control, dynamic timestamp/request_id hash for 2xx responses) or header-only structural signal. Current definition hashes full response body including constant error JSON, making structural signal deterministic function of behavioral state (expired structural std=0, valid std=0.265). This violates spec.json measurement_validity clause 7 'no shared variables between signal domains' and clause 1 'structural variation independent of behavioral state'.",
+    "Ensure expired-token responses still emit genuine structural variation: ETag/Cache-Control/dynamic content must vary independently of token state. Currently testbed_server.py @require_token returns 401 before apply_cache_headers/compute_etag, leaving etag='' and cache_control='' and constant body hash f6d40dd42dff2b868cbd3c36246e3f97471 for all 240 expired samples, violating measurement_validity clauses 2 and 4. Fix: emit ETag/Cache-Control even on 401 or compute structural signal from separate channel that is unaffected by auth failure.",
+    "Align result.json controls with frozen spec.json decision_rule. Spec C4 is TOST p_upper <0.05 at delta=0.15 and C5 is heterogeneity |r_cache_enabled - r_cache_disabled| <2*SE. Producer result.json implements C4_null_control as behavioral std check (observed_null_std=3.5 is behavioral, not structural) and C5_304_exercised as 304 rate >=0.10. Both mismap the frozen rule. Implement spec C4/C5 exactly or amend spec via formal prereg update before execution.",
+    "Fix report.md numerical inconsistencies: per-endpoint r in report Table 3.2 (0.2065,0.3491,0.3201) does not match result.json metrics.per_endpoint_r (0.3160,0.4303,0.3834) and recomputed values; per-cache r in report Table 3.3 (0.3062,0.2918) does not match result.json per_cache_r (0.3399,0.4120) and recomputed values. Variance gate values in report (behavioral_std 2.98) mismatch result.json (3.5). Regenerate report from result.json or correct recomputation.",
+    "Execute baseline B-FLASK-ONLY (spec.json baselines[1]): plain Flask without CDN/OAuth/dynamic content, same signal extraction but without infrastructure features, to isolate whether correlation is caused by infrastructure vs definitional confounding. No B-FLASK-ONLY data exists in raw_evidence or result.json.",
+    "Disclose and test per-token-state variance: report structural std conditioned on token_state, not only pooled per-endpoint. Pooled std masks degeneracy (expired structural std=0.0 unique=1 vs valid std=0.265 unique=167). Variance gate must require std>0 within each behavioral stratum per measurement_validity clause 1, or document heteroscedasticity and use stratified analysis.",
+    "Correct C4_null_control implementation: spec null_control expects structural std>0 with cache disabled and |r|<0.05 at lambda=0 (no behavioral drift). Producer computes null on behavioral scores (null_control_mean=3.5 std=3.5) and uses c4_pass=null_std>=0 tautology. Recompute on structural signal for cache-disabled AND on valid-token-only subset to test true null correlation.",
+    "Bound claim to local Flask testbed and disclose representation loss: provenance notes single-node Flask CDN simulation, not varnish/nginx multi-node, no concurrent load, no distributed coherence, jitter 10-200ms not 10-500ms per spec, binary behavioral signal (0 vs 7) not graded, hash %10000 structural proxy not schema-hash+etag_variation+cache_control_variation as prereg 4.3 describes."
+  ],
+  "validity_findings": [
+    "V1_CRITICAL_SHARED_VARIABLE_CONFOUND: Structural signal is defined as hash(body)%10000 including 401 error body. Expired token path returns constant error JSON (response_sha256 f6d40dd42dff2b868cbd3c36246..., structural_composite 0.671000 constant, n=240, std=0.0) while valid path returns varied bodies (mean 0.5194, std 0.2648, unique 167). Behavioral signal is binary 0 (valid) vs 7 (expired). Pearson r=0.375 is forced mean-shift between degenerate and varied distributions, not independent CDN/OAuth correlation. Violates spec.json measurement_validity[6] independent extraction and [0] independent variation. Evidence: raw_evidence/experiment_data.json expired structural std 0.0 unique 1 vs valid std 0.2648; testbed_server.py:381-391 @require_token early return without ETag/Cache-Control; run_experiment.py:399-403 structural_composite from body_sha256 including error body.",
+    "V2_CRITICAL_STRUCTURAL_DEGENERACY_EXPIRED: Per-token-state structural variance =0 for expired, violating genuine structural stochastic variation requirement. Pooled per-endpoint structural_std 0.19-0.217 in result.json metrics.per_endpoint_variance masks this by mixing valid+expired clusters. Spec requires genuine variation in BOTH domains; expired condition contributes no structural information, so correlation is undefined within that stratum. Recomputed: expired structural std 0.0000, valid 0.2648. Evidence: recomputed_metrics expired vs valid split; raw_evidence/experiment_data.json per-condition samples show etag='' cache_control='' for all expired.",
+    "V3_MAJOR_DECISION_RULE_MISMATCH: Frozen spec decision_rule C4=TOST p_upper<0.05 and C5=|r_en - r_dis|<2*SE. Producer controls map C4 to 'structural std>0 with cache disabled' (but implemented on behavioral scores, observed_null_std=3.5) and C5 to '304 rate >=10%'. Spec C4/C5 not tested as written. Recomputed spec C5 heterogeneity: |0.3399-0.4120|=0.0721 <2*SE 0.0916 PASS; spec C4 TOST p_upper=0.9999999 FAIL. Producer's C4/C5 PASS therefore does not demonstrate spec compliance. Evidence: spec.json decision_rule vs result.json controls C4_null_control/C5_304_exercised; run_experiment.py:621-644.",
+    "V4_MAJOR_REPORT_RESULT_INCONSISTENCY: report.md Table per-endpoint r (0.2065,0.3491,0.3201) and per-cache r (0.3062,0.2918) do not match result.json metrics (0.3160,0.4303,0.3834 and 0.3399,0.4120) nor recomputed values (verified equal to result.json). Report also lists behavioral_std 2.98 vs result 3.5 and misstates null_control. Indicates report generation not derived from result.json, undermining provenance chain.",
+    "V5_MAJOR_C4_NULL_CONTROL_TAUTOLOGY: result.json controls.C4_null_control threshold 'structural signal std>0 with cache disabled' observed_null_mean 3.5 std 3.5 is actually behavioral statistics (mean 3.5 is binary 0/7 mean). Run_experiment.py:624-631 computes null_behavioral from cond_b behavioral scores for nocache, not structural. Pass condition null_std>=0 is tautologically true. Does not test spec null_control expectation |r|<0.05 at lambda=0.",
+    "V6_MODERATE_BASELINE_OMISSION: Baseline B-FLASK-ONLY not executed. No evidence whether plain Flask without infrastructure also shows correlation under same confounded definition, so producer cannot attribute r=0.375 to CDN/OAuth/dynamic content. B-LOCALHOST-MOCK comparison notes prior r 0.002-0.046 but those experiments likely used different structural definition (stable-identifier hash vs full body hash) — comparison confounds definition change with infrastructure change.",
+    "V7_MODERATE_MEASUREMENT_VALIDITY_DISCLOSURE_GAP: Validity_notes claim 'Production-like testbed: CDN simulation ETag-SHA256, stale-while-revalidate' but implementation is Flask in-memory CDNCache with max-age=30, not varnish/nginx; jitter is 10-200ms not 10-500ms; behavioral signal is binary 0/7, not graded 4-signal composite per prereg; structural uses body hash %10000, not specified response_schema_hash+cache_control_variation+etag_variation+dynamic_content_hash weighted composite. Representation loss not fully disclosed.",
+    "V8_MINOR_POWER_AND_CI_CORRECT: Recomputation confirms primary statistic: pooled r=0.3751447 n=480 Fisher z 0.394397 SE 0.045786 CI [0.295567,0.449553] TOST at delta 0.15 p_upper 0.9999999 FAIL, at delta 0.20 p_upper 0.999985 FAIL. Variance gate 3/3 endpoints std>0 pooled PASS, C1 TP 1.0 PASS, 304 rate 0.3167 PASS are correctly computed. Statistical computation is sound; inferential validity fails due to confounded constructs, not arithmetic."
+  ],
+  "baseline_findings": [
+    "B-LOCALHOST-MOCK (spec baselines[0], prior EXP-GRAPH-35389145821 r=0.0022 CI upper 0.0916 PASS and EXP-GRAPH-35353011131 r=0.0463 CI upper 0.1353 PASS): Producer correctly notes dramatic increase to r=0.375, but increase is confounded with structural definition change (prior used schema_diff/Jaccard and stable-identifier ETag not full error-body hash; current uses body_sha256%10000 including error body). Without holding definition constant, baseline delta cannot be attributed to production-like infrastructure. Baseline comparison is measurement-invalid due to construct shift.",
+    "B-FLASK-ONLY (spec baselines[1] plain Flask without CDN/OAuth/dynamic content): NOT EXECUTED. No data in raw_evidence, result.json, or report.md. Spec expects |r|<0.15 on plain Flask to test infrastructure irrelevance. Omission prevents discriminating whether correlation is infrastructure-induced vs definition-induced. Required for product consequence decision per spec.",
+    "Positive control TP (spec positive_control): PASS verified — recomputed expired TP 1.0 (240/240 behavioral_delta=7) and valid TN 1.0 (240/240 delta=0) mean 1.0 >=0.85, consistent with prior. Control correctly indicates behavioral extraction functional, but does not rescue structural degeneracy.",
+    "Null control (spec null_control): FAIL to test as specified — expected structural std>0 with cache disabled and |r|<0.05 at lambda=0. Producer tests behavioral std tautology and does not compute correlation at lambda=0 (valid-token-only). Recomputed cache_disabled structural std 0.2308 >0 is true, but valid-only correlation not reported; recomputed per-cache r values (0.3399 vs 0.4120) both >0.15 and not <0.05, but they mix token states, not lambda=0 isolation."
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled": 0.37514470026794894,
+    "abs_r_pooled": 0.37514470026794894,
+    "ci_lower_95": 0.2955666240611473,
+    "ci_upper_95": 0.4495525101818425,
+    "ci_width_95": 0.1539858861206952,
+    "fisher_z": 0.3943970693097551,
+    "se_fisher_z": 0.04578685464956301,
+    "n_paired_samples": 480,
+    "tost_at_delta_015": {
+      "pass": false,
+      "p_upper": 0.9999999460247517,
+      "p_lower": 0.0,
+      "delta": 0.15
+    },
+    "tost_results_by_delta": {
+      "0.1": {
+        "pass": false,
+        "p_upper": 0.999999999932931,
+        "p_lower": 0.0
+      },
+      "0.12": {
+        "pass": false,
+        "p_upper": 0.999999998885904,
+        "p_lower": 0.0
+      },
+      "0.15": {
+        "pass": false,
+        "p_upper": 0.9999999460247517,
+        "p_lower": 0.0
+      },
+      "0.2": {
+        "pass": false,
+        "p_upper": 0.9999858053451539,
+        "p_lower": 0.0
+      }
+    },
+    "per_endpoint_r": {
+      "/api/user/profile": {
+        "r": 0.3159678215367939,
+        "p": 4.698415563147646e-05,
+        "n": 160,
+        "behavioral_std": 3.5,
+        "structural_std": 0.19685746699607148
+      },
+      "/api/data/list": {
+        "r": 0.43025630670192005,
+        "p": 1.3593973993395333e-08,
+        "n": 160,
+        "behavioral_std": 3.5,
+        "structural_std": 0.19015119296480235
+      },
+      "/api/session/status": {
+        "r": 0.3834267524866693,
+        "p": 5.597947983983417e-07,
+        "n": 160,
+        "behavioral_std": 3.5,
+        "structural_std": 0.21728889405779436
+      }
+    },
+    "per_endpoint_r_report_mismatch": {
+      "report_md_values": {
+        "/api/user/profile": 0.2065,
+        "/api/data/list": 0.3491,
+        "/api/session/status": 0.3201
+      },
+      "result_json_and_recomputed": {
+        "/api/user/profile": 0.3159678215367939,
+        "/api/data/list": 0.43025630670192005,
+        "/api/session/status": 0.3834267524866693
+      },
+      "match_result_json": true,
+      "match_report_md": false
+    },
+    "per_cache_r": {
+      "cache_enabled": 0.3399465378394294,
+      "cache_disabled": 0.4120181898061622,
+      "cache_enabled_n": 240,
+      "cache_disabled_n": 240,
+      "difference": 0.0720716519667328,
+      "two_se_threshold": 0.09157370929912602,
+      "spec_C5_heterogeneity_pass": true
+    },
+    "per_cache_r_report_mismatch": {
+      "report_md": {
+        "cache_enabled": 0.3062,
+        "cache_disabled": 0.2918
+      },
+      "result_json_and_recomputed": {
+        "cache_enabled": 0.3399465378394294,
+        "cache_disabled": 0.4120181898061622
+      },
+      "match_result_json": true,
+      "match_report_md": false
+    },
+    "C1_behavioral_tp": {
+      "mean_expired_tp": 1.0,
+      "mean_valid_tn": 1.0,
+      "pass": true,
+      "recomputed_match": true
+    },
+    "C2_variance": {
+      "endpoints_with_variance_pooled": 3,
+      "pass_pooled": true,
+      "per_token_state_structural_std": {
+        "expired": 0.0,
+        "valid": 0.2648
+      },
+      "expired_unique_structural": 1,
+      "valid_unique_structural": 167,
+      "recomputed_match": true,
+      "degeneracy_within_expired_stratum": true
+    },
+    "C3_equivalence": {
+      "ci_upper_95": 0.4495525101818425,
+      "threshold": 0.15,
+      "pass": false,
+      "recomputed_match": true
+    },
+    "C4_TOST_spec": {
+      "p_upper_at_015": 0.9999999460247517,
+      "pass": false,
+      "producer_C4_null_control_tautology": true
+    },
+    "C5_304_exercised": {
+      "rate_304_cache_enabled": 0.31666666666666665,
+      "count_304": 76,
+      "n_cache_enabled": 240,
+      "threshold": 0.1,
+      "pass": true,
+      "recomputed_match": true
+    },
+    "behavioral_distribution": {
+      "unique_values": [
+        0.0,
+        7.0
+      ],
+      "valid_mean": 0.0,
+      "expired_mean": 7.0,
+      "pooled_mean": 3.5,
+      "pooled_std": 3.5
+    },
+    "structural_distribution": {
+      "pooled_mean": 0.5952255208333334,
+      "pooled_std": 0.2105,
+      "valid_mean": 0.519395,
+      "valid_std": 0.2648,
+      "expired_mean": 0.671,
+      "expired_std": 0.0,
+      "min": 0.0036,
+      "max": 0.9846
+    },
+    "power_analysis": {
+      "se_at_n480": 0.04578685464956301,
+      "min_detectable_r_at_n480": 0.08950209062260417
+    }
+  },
+  "claim_ceiling": "No justified claim about C-FRESHNESS orthogonality on production-like infrastructure. The observed r=0.375 CI [0.2956,0.4496] is a valid descriptive statistic for this implementation but measurement-invalid for the frozen hypothesis: structural signal is confounded with behavioral state via constant 401 error-body hashing and missing ETag/Cache-Control on expired responses, violating independent extraction. Maximum justified ceiling remains localhost Flask mock: pooled r=0.0022 CI upper 0.0916 <0.15 (EXP-GRAPH-35389145821, audit PASS) and stochastic mock r=0.0463 CI upper 0.135 <0.15 — C-FRESHNESS remains EXPERIMENTAL bounded to localhost Flask 3.1.3 + SQLite WAL + in-memory cache + PyJWT, n=480. Production-like testbed demonstrates that naive body-hash structural definition cannot be orthogonal to auth failure by construction (error bodies differ), not that CDN/OAuth/dynamic content introduce correlation. No advancement toward VALIDATED or PRODUCT_CORE; parallel-channel architecture not falsified nor validated by this experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35445595108/request.json",
+    "research/experiments/EXP-GRAPH-35445595108/spec.json",
+    "research/experiments/EXP-GRAPH-35445595108/prereg.md",
+    "research/experiments/EXP-GRAPH-35445595108/freeze.json",
+    "research/experiments/EXP-GRAPH-35445595108/result.json sha256 3f7b8de174db29eabc4becd861798e208dfd6551898e08bd4dd2a36365ca6efb",
+    "research/experiments/EXP-GRAPH-35445595108/report.md",
+    "research/experiments/EXP-GRAPH-35445595108/provenance.json",
+    "research/experiments/EXP-GRAPH-35445595108/testbed_server.py sha256 707106c6e4b235a921e81bc235b1bdd10caf3c8dcc1370a1d3e0f60f39197274",
+    "research/experiments/EXP-GRAPH-35445595108/run_experiment.py sha256 454f5b25bbeb06100e6318b17d0374f8975a78adcfa76f9a89511fa8e71a06f1",
+    "research/experiments/EXP-GRAPH-35445595108/raw_evidence/experiment_data.json sha256 367ca2e3576e7cd6c3d82387e522aab925dd13edf1a15c31fd7635ac75d49984",
+    "research/experiments/EXP-GRAPH-35389145821/result.json pooled r=0.0022 PASS",
+    "research/experiments/EXP-GRAPH-35409927045/handoff.json",
+    "codex/claim_state.json:C-FRESHNESS",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on production-like infrastructure when structural signal is correctly defined to be independent of auth error bodies (header-only or success-only body hash) — requires re-run with fixed signal extraction.",
+    "Whether B-FLASK-ONLY baseline (plain Flask without CDN/OAuth/dynamic) is orthogonal under corrected definition — needed to attribute any residual correlation to infrastructure.",
+    "Whether expired responses should carry structural headers (ETag/Cache-Control) in production APIs — if production APIs also omit ETags on 401, definitional orthogonality may be impossible and claim scope must be narrowed to success-path freshness.",
+    "Whether per-token-state heteroscedasticity (valid varied, expired constant) reflects real production behavior or testbed artifact — concurrent load, distributed cache, or error-body variability in production could change structure.",
+    "What structural signal formulation (e.g., ETag variation, cache_control_variation, request_id entropy, schema hash of success bodies only) satisfies independent extraction while retaining product relevance for freshness detection.",
+    "Whether jitter 10-500ms vs 10-200ms or multi-node CDN vs single-node Flask cache changes correlation when measurement is valid — not tested due to invalid confound dominating effect.",
+    "Report generation pipeline: source of per-endpoint/per-cache discrepancies between report.md and result.json — whether reporting or recomputation path introduced error."
+  ]
+}
