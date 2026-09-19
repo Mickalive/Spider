@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35456070671",
+  "lane": "runtime",
+  "github_run_id": "35456070671",
+  "created_at": "2026-09-19T16:47:49.677231+00:00",
+  "executed_at": "2026-09-19T22:30:00+00:00",
+  "base_sha": "62cc83b9673f02e1e2991d80300efddd4d546e0e",
+  "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "platform": "linux",
+  "dependencies": {
+    "brotli": "1.2.0",
+    "pyjwt": "2.14.0",
+    "requests": "2.34.2"
+  },
+  "frozen_inputs": {
+    "request_hash": "89448edd8c502e6a3822b76e17260ec2c12988c64d8f00da60094ca24304ed23",
+    "spec_hash": "fe0d0083536cb3e98b3a33f64df009711a3ac89e11663a022f29ac484f44fbd6",
+    "prereg_hash": "80b64e79131ebf4db7bc3cf20c9eb2bf180ead4831554ec9fd2fe60b2562d52a",
+    "freeze_hash": "927f4164424b682861996cca4b90409353320ed6b8cda37b1d871a2c0b664c08"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35445595071",
+    "sha256": "2ee49f556b2b348ae351faae298bffc21d1361dbd5164fcbbb4e1a1a5edbba8f"
+  },
+  "artifacts": {
+    "result.json": {
+      "sha256": "65a2ce80759ede39b696d289e73abcbe237d21d525a440a69d1e5e50533f9651",
+      "role": "result"
+    },
+    "run_experiment.py": {
+      "sha256": "b782d873df8fefb210fff73a4db95b7d756f641c8d9e786f5fb30cacb922dbb3",
+      "role": "code"
+    }
+  },
+  "execution_environment": {
+    "server_ports": "7700-7702 (origin), 7800-7802 (proxy)",
+    "mock_server": "Python http.server with brotli compression",
+    "proxy": "Python http.server reverse proxy with chunked TE",
+    "seed": 44,
+    "reps_per_cell": 10,
+    "total_requests": 360,
+    "conditions": ["MULTI-CHUNK", "SINGLE-CHUNK", "IDENTITY"],
+    "content_types": ["JSON", "HTML", "XML"],
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"]
+  }
+}
