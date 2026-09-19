@@ -1,0 +1,296 @@
+{
+  "baseline_findings": [
+    {
+      "baseline_id": "B-STRUCTURAL-SIGNAL",
+      "evidence_ref": "result.json metrics c1_auth_discrimination 0.8333 controls PC-STRUCTURAL-DISCRIMINATION pass, raw_evidence phase_a_raw fingerprints, recomputed discrimination 0.8333",
+      "expected": "full-vector HTTP fingerprint discrimination >0.5 on auth-state changes (validated 0.8333 in EXP-RUNTIME-33902315583 and EXP-PRODUCT-35434772331 C1)",
+      "issue": "None. Bounded to Flask+PyJWT HS256 localhost as per do_not_assume; not production-general.",
+      "observed": "0.8333 recomputed (3 unique fingerprints of 4 states; expired_token and invalid_token share 401 authentication_failed surface 14553e10b9eddcb9; intra 1.0 inter 0.1667). Matches frozen expectation.",
+      "passes": true,
+      "strength": "strong"
+    },
+    {
+      "baseline_id": "B-BEHAVIORAL-VARIANCE",
+      "evidence_ref": "result.json controls C2-VARIANCE 8/8, metrics c3_per_condition per-condition std, recomputed unique_b verification",
+      "expected": ">=6 of 8 co-occurring conditions with behavioral_std >0.05 (graph baseline achieved 0.14-0.43)",
+      "issue": "Passes frozen gate but below graph-lane magnitude (see validity finding). Threshold 0.05 is lenient; still provides valid TOST power.",
+      "observed": "8 of 8 conditions pass; behavioral_std 0.0874-0.1039, structural_std 0.4034-0.4155",
+      "passes": true,
+      "strength": "medium"
+    },
+    {
+      "baseline_id": "B-ORTHO-GRAPII",
+      "evidence_ref": "result.json metrics c3_orthogonality, recomputed stats.pearsonr and Fisher-z TOST, provenance inheritance baseline_orthogonality",
+      "expected": "95% CI upper bound on |r| <0.15 and TOST p_upper <0.05 at delta=0.15 (graph baseline r=0.046 CI_upper 0.135 p_upper 0.011 n=480)",
+      "issue": "None at frozen delta. Recomputed exactly matches producer. Tight CI shows stronger equivalence than graph baseline.",
+      "observed": "r=-0.0258 p=0.573 CI [-0.115,0.064] CI_upper 0.064 <0.15, TOST p_upper 5.6e-05 p_lower 3.1e-03 TOST_pass true n=480",
+      "passes": true,
+      "strength": "strong"
+    },
+    {
+      "baseline_id": "PC-STRUCTURAL-DISCRIMINATION (positive control)",
+      "evidence_ref": "result.json controls PC-STRUCTURAL-DISCRIMINATION observed 0.8333",
+      "expected": "full-vector discrimination >0.5 (valid_token vs no_auth vs expired_token vs invalid_token)",
+      "issue": "None. Replicates parent exactly.",
+      "observed": "0.8333",
+      "passes": true,
+      "strength": "strong"
+    },
+    {
+      "baseline_id": "NC-NOISE-FP (null control)",
+      "evidence_ref": "result.json metrics c4_noise_fp_rate 0.0 controls NC-NOISE-FP, raw_evidence phase_c 240 scores exactly 0.05, recomputed FP 0/240",
+      "expected": "behavioral FP rate <=0.15 on 240 noise-only samples",
+      "issue": "None. Perfect null separation suggests mock noise is trivially non-discriminative; may not reflect production noise difficulty but passes frozen gate.",
+      "observed": "0.0 (0/240, all scores 0.05 baseline, per-noise 0.0 mean 0.05)",
+      "passes": true,
+      "strength": "strong"
+    },
+    {
+      "baseline_id": "B-STATUS-ONLY",
+      "evidence_ref": "result.json metrics baseline_status_only 0.5 controls B-STATUS-ONLY",
+      "expected": "status-code-only collapses no_auth/expired/invalid onto 401 -> discrimination ~0.5",
+      "issue": "None. Demonstrates body carries discriminating info beyond status.",
+      "observed": "0.5",
+      "passes": true,
+      "strength": "adequate"
+    },
+    {
+      "baseline_id": "B-BODY-ONLY",
+      "evidence_ref": "result.json metrics baseline_body_only 0.8333 controls B-BODY-ONLY",
+      "expected": "body-only collides expired_token with invalid_token (same authentication_failed) -> discrimination 0.8333",
+      "issue": "Full vector equals body-only (0.8333=0.8333) so standard headers add no independent info beyond body in this mock; expected per parent. Not a failure.",
+      "observed": "0.8333",
+      "passes": true,
+      "strength": "adequate"
+    },
+    {
+      "baseline_id": "CTL-EXPIRED-COLLISION",
+      "evidence_ref": "result.json controls CTL-EXPIRED-COLLISION, raw_evidence phase_a_raw expired/invalid traces identical",
+      "expected": "expired and invalid share one 401 surface (3 unique fingerprints of 4 states)",
+      "issue": "None. Intentional replication from parent; limits C1 ceiling to 0.833 not 1.0 per frozen gate >0.5.",
+      "observed": "fingerprint 14553e10b9eddcb9 for both, 3 unique",
+      "passes": true,
+      "strength": "info"
+    },
+    {
+      "baseline_id": "CTL-STATE-RESET",
+      "evidence_ref": "mock_server.py::set_drift lines 339-350 db.restore, raw_evidence phase_b per-condition means, result.json CTL-STATE-RESET",
+      "expected": "set_drift(None) fully resets current_role/session_valid/drift/noise and restores DB rows between conditions",
+      "issue": "None. Verified via code inspection and observed means.",
+      "observed": "all 8 conditions show expected per-condition score ranges without contamination (PB ~0.45 SI ~0.85 stable across noises)",
+      "passes": true,
+      "strength": "strong"
+    }
+  ],
+  "claim_ceiling": "C-FRESHNESS SURVIVES_CURRENT_TEST only at the bounded localhost stochastic-mock ceiling: Flask 3.1.3 + SQLite WAL DB + TTL cache 0.5s + jitter 10-100ms + mixed HS256/RS256 (pyjwt 2.14.0) on 127.0.0.1:18950, single-threaded sequential client seed 42, N=480 paired samples (8 conditions x 60: permission_boundary and session_invalidation crossed with 4 structural noises), behavioral_score severity-weighted discrete ranges PB 0.32/0.47/0.545 and SI 0.75/0.85/1.0 vs noise baseline 0.05 threshold 0.25, structural cardinality probe on /api/schema; orthogonality confirmed at delta=0.15 as equivalence (95% CI upper 0.064 <0.15, TOST p_upper 5.6e-05, shared variance <0.4% <<2.25% bound) with behavioral_std 0.087-0.104 and structural_std 0.40-0.42. Parallel-channel (behavioral + structural as independent channels) is justified ONLY at this mock ceiling. Does NOT support: production OAuth/OIDC/CDN endpoints, browser/network RTT, non-mock substrates, broader noise/drift coverage (token_refresh excluded from orthogonality, field_type_normalization etc only), continuous severity generalization, or PRODUCT_CORE promotion. Behavioral TP 1.0 at thresholds 0.25/delta 0.15 and noise FP 0.0 are synthetic-mock estimates with 1140 localhost HTTP cycles, zero LLM calls. Director must bound any product architecture decision to re-measurement on non-mock substrate.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35445596342/request.json sha256 848354573e2d33f2edfdbdbef3013e8a3961cf1c4a06dfb78fde7e6422a36c33",
+    "research/experiments/EXP-PRODUCT-35445596342/spec.json sha256 bc031085e708321623779ee8f4a02f221da4b67e38cb24d995e87a71fd03f708",
+    "research/experiments/EXP-PRODUCT-35445596342/prereg.md sha256 b55f824e36559b466ac7ce26da03e13bedb417ba39eeefac60638459b9cc9ef9",
+    "research/experiments/EXP-PRODUCT-35445596342/freeze.json sha256 589ee48bb02404e5526a400b2964a6f8fb3bafb9bf43bffaf67a3544798eb725 frozen_at 2026-09-19T13:33:36",
+    "research/experiments/EXP-PRODUCT-35445596342/result.json sha256 fc79a70f via raw_evidence (observed phase_b 0.087-0.1039, orthogonality r -0.0258 TOST pass, C1 0.8333 C2 1.0 C4 0.0)",
+    "research/experiments/EXP-PRODUCT-35445596342/raw_evidence/experiment_data.json sha256 fc79a70f17cdfc2015d044cd024d3a3f74a18d0975e28ed3bbeb5752a54673b5 role raw (480+240+180+40 rows, per-sample behavioral_score structural_signal status_code)",
+    "research/experiments/EXP-PRODUCT-35445596342/result_draft.json sha256 d362cedb5266ccea9c39920155555804363610080657dcdac9dc165a09bd0a12 recomputed identically",
+    "research/experiments/EXP-PRODUCT-35445596342/run_experiment.py sha256 57f3a4d51294e1281e37cd9a2945d61d41df548d209dee540560c8328ab96baf role code (phases A-E, behavioral_score, TOST, Wilson, discrimination)",
+    "research/experiments/EXP-PRODUCT-35445596342/mock_server.py sha256 7d813322c97358fbc565837b40240d55e42f608754e638b95af9bb23c82ff644 role code (TTLCache, SessionDB WAL, jitter, RS256/HS256, set_drift full reset)",
+    "research/experiments/EXP-PRODUCT-35445596342/provenance.json (github run 35445596342 commit a8df5756 freeze 26b586e, python 3.12.14 flask 3.1.3 pyjwt 2.14.0, independent recomputation from raw evidence matches)",
+    "research/experiments/EXP-PRODUCT-35434772331/handoff.json sha256 5d023480c998d3879bb77083f057708239d05b791485336f242a417096ae0ff0 parent MEASUREMENT_INVALID with three fixes spec",
+    "codex/experiments/EXP-GRAPH-35353011131/result.json orthogonality baseline r=0.046 CI_upper 0.135 p_upper 0.011 delta 0.15 n=480 (graph lane stochastic mock)",
+    "codex/experiments/EXP-RUNTIME-33902315583/result.json structural baseline discrimination 0.8333 (full-vector HS256 localhost)"
+  ],
+  "experiment_id": "EXP-PRODUCT-35445596342",
+  "lane": "product",
+  "producer_claim_supported": true,
+  "recomputed_metrics": {
+    "baseline_body_only": {
+      "match": true,
+      "producer_value": 0.8333,
+      "recomputed_value": 0.8333
+    },
+    "baseline_status_only": {
+      "match": true,
+      "producer_value": 0.5,
+      "recomputed_value": 0.5
+    },
+    "c1_auth_discrimination": {
+      "match": true,
+      "method": "intra - inter fingerprint discrimination; recomputed from raw_evidence phase_a_raw via fingerprint(): SHA256(status+body_keys+filtered_headers)",
+      "n_probes_per_state": 10,
+      "n_states": 4,
+      "notes": "Status-only 0.5 body-only 0.8333 both recomputed match.",
+      "producer_value": 0.8333,
+      "recomputed_value": 0.8333
+    },
+    "c2_cooccurring_tp": {
+      "match": true,
+      "notes": "All 8 co-occurring conditions TP 1.0 wilson_lower 0.9398 verified from phase_b threshold 0.25",
+      "producer_value": "1.0 each 8/8",
+      "recomputed_value": "1.0 each 8/8"
+    },
+    "c2_isolated_tp_permission_boundary": {
+      "behavioral_mean": 0.455,
+      "behavioral_std": 0.0945,
+      "match": true,
+      "n": 60,
+      "producer_value": 1.0,
+      "recomputed_value": 1.0,
+      "threshold": 0.25,
+      "wilson_lower": 0.9398
+    },
+    "c2_isolated_tp_session_invalidation": {
+      "behavioral_mean": 0.8633,
+      "behavioral_std": 0.0995,
+      "match": true,
+      "n": 60,
+      "producer_value": 1.0,
+      "recomputed_value": 1.0
+    },
+    "c2_isolated_tp_token_refresh": {
+      "behavioral_mean": 0.65,
+      "behavioral_std": 0.0,
+      "match": true,
+      "n": 60,
+      "notes": "deterministic fixed score 0.65; std 0.0 by design, not in orthogonality set",
+      "producer_value": 1.0,
+      "recomputed_value": 1.0
+    },
+    "c3_orthogonality": {
+      "match": true,
+      "method": "scipy.stats.pearsonr + Fisher-z TOST (math.atanh delta vs z_r) + tanh CI, n=480",
+      "notes": "CI upper 0.064 << delta 0.15 (shared variance 0.4% << 2.25%). Per-condition r -0.153..0.152 p>0.24 n=60 each.",
+      "producer_value": {
+        "ci_lower": -0.115035,
+        "ci_upper": 0.063851,
+        "delta": 0.15,
+        "n": 480,
+        "pearson_p": 0.572862,
+        "pearson_r": -0.025799,
+        "se": 0.045787,
+        "tost_p_lower": 0.0030965,
+        "tost_p_upper": 5.565075468978581e-05,
+        "tost_pass": true
+      },
+      "recomputed_value": {
+        "ci_lower": -0.115035,
+        "ci_upper": 0.063851,
+        "n": 480,
+        "pearson_p": 0.572862,
+        "pearson_r": -0.025799,
+        "se": 0.045787,
+        "tost_p_lower": 0.0030965,
+        "tost_p_upper": 5.565075e-05,
+        "tost_pass": true
+      }
+    },
+    "c3_variance_conditions_pass": {
+      "all_conditions_std_gt_0.05": true,
+      "match": true,
+      "observed_behavioral_std_range": "0.0874-0.1039",
+      "observed_structural_std_range": "0.4034-0.4155",
+      "producer_value": 8,
+      "recomputed_value": 8,
+      "required": 6
+    },
+    "c4_noise_fp_rate": {
+      "false_positives": 0,
+      "match": true,
+      "n_noise": 240,
+      "per_noise_fp": {
+        "description_change": 0.0,
+        "field_type_normalization": 0.0,
+        "optional_field_addition": 0.0,
+        "response_time_jitter": 0.0
+      },
+      "producer_value": 0.0,
+      "recomputed_value": 0.0,
+      "threshold": 0.25
+    },
+    "c4_per_noise_behavioral_mean": {
+      "match": true,
+      "producer_value": 0.05,
+      "recomputed_value": 0.05,
+      "unique_scores_noise_only": [
+        0.05
+      ]
+    },
+    "decision_rule_evaluation": {
+      "canonical_mapping": "SURVIVES_CURRENT_TEST -> SUPPORTS per packet enum, status COMPLETE not MEASUREMENT_INVALID",
+      "match": true,
+      "producer_value": {
+        "C1": true,
+        "C2": true,
+        "C3": true,
+        "C4": true,
+        "frozen_outcome": "SURVIVES_CURRENT_TEST"
+      },
+      "recomputed_value": {
+        "C1": true,
+        "C2": true,
+        "C3": true,
+        "C4": true,
+        "outcome": "SURVIVES"
+      }
+    }
+  },
+  "required_fixes": [],
+  "schema_version": 1,
+  "status": "PASS",
+  "unresolved": [
+    "Whether expired_token/invalid_token fingerprint collision (identical 401 authentication_failed) generalizes to production endpoints with differentiated error details (inherited parent unknown, still bounded to mock)",
+    "Whether within-condition behavioral variance (0.087-0.103) and structural variance maintain on real network RTT and cache-freshness distributions beyond localhost jitter/TTL (producer unresolved[1])",
+    "Whether token_refresh TP survives co-occurring noise (only isolated token_refresh TP tested; 8-condition orthogonality set covers PB and SI only; producer unresolved[2] and prereg do_not_assume #6)",
+    "Whether continuous differentiated scoring for token_refresh (currently fixed 0.65 std 0.0) needs redesign to achieve variance if included in future orthogonality sets",
+    "Whether parallel-channel claim ceiling needs re-measurement on a non-mock substrate before PRODUCT_CORE promotion (producer unresolved[3]; Director verdict required)",
+    "Whether 4 structural noise types (optional_field_addition, description_change, response_time_jitter, field_type_normalization) are sufficient coverage for production schema drift or additional noise patterns needed"
+  ],
+  "validity_findings": [
+    {
+      "detail": "All four frozen gates verified by independent recomputation from raw_evidence/experiment_data.json: C1 discrimination 0.8333 >0.5, C2 TP 1.0 >=0.85 (isolated 3/3 and co-occurring 8/8), C3 variance 8/8 >0.05 and orthogonality TOST pass at delta=0.15 (r=-0.0258, Fisher-z CI [-0.115,0.064] CI_upper 0.064 <0.15, p_upper 5.6e-05 <0.05, p_lower 3.1e-03 <0.05, n=480), C4 FP 0.0 <=0.15. Producer result.json outcome SUPPORTS (driver wording SURVIVES_CURRENT_TEST) correctly follows frozen decision_rule. No p-hacking or rule weakening.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35445596342/raw_evidence/experiment_data.json -> phase_b_cooccurring 480 rows, phase_c 240, phase_d 180, phase_a 40 probes; research/experiments/EXP-PRODUCT-35445596342/result.json::metrics.c3_orthogonality and independent python recomputation pearsonr r=-0.025799 p=0.573 se=0.045787",
+      "finding": "Measurement transaction valid for frozen decision rule at mock ceiling",
+      "severity": "info"
+    },
+    {
+      "detail": "Fix1 server replacement: stochastic Flask 3.1.3 + SQLite WAL + TTL cache 0.5s + jitter 10-100ms + mixed HS256/RS256 + X-Request-Id observed via cache_status fresh/stale alternation (structural_std 0.40-0.42) and jitter header variation. Fix2 scoring redesign: behavioral_score now severity-weighted with non-overlapping ranges PB [0.32,0.545] vs TR 0.65 vs SI [0.75,1.0] vs no-drift 0.05, continuous within-condition variance via per-request perm propagation sampling (PB std 0.087-0.099) and graded 401/403/500 codes (SI std 0.097-0.104). Fix3 state reset: set_drift(None) restores current_role admin, session_valid True, drift/noise cleared and DB rows restored; verified by per-condition means stable across noises (PB ~0.45 isolated 0.455 vs cooccurring 0.452-0.46; SI ~0.863 isolated vs 0.848-0.875) and no cross-condition contamination; per-condition isolation held.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35445596342/mock_server.py::set_drift (full reset inc DB restore) lines 333-367, ::_perm_propagation_state 0.40/0.30/0.30, ::session_status graded choice, raw_evidence phase_b behavioral per-condition means/std, result.json controls CTL-STATE-RESET pass",
+      "finding": "Three root-cause fixes verified on wire",
+      "severity": "info"
+    },
+    {
+      "detail": "All 8 co-occurring conditions exceed frozen gate 0.05 (observed 0.0874-0.1039) so TOST is valid, but range is below EXP-GRAPH-35353011131 graph baseline 0.14-0.43. Cause: permission_boundary samples only 3 discrete permission states (read / read+write / full) yielding 3 values 0.32/0.47/0.545, not a wider continuous severity spread; session_invalidation samples only 3 graded status codes 401/403/500 yielding 0.75/0.85/1.0. Passes gate with ample TOST power (p_upper 5.6e-05) but not a demonstration of fully continuous scoring. Does not invalidate claim at frozen ceiling, but limits generalization to production severity distributions.",
+      "evidence_ref": "result.json::metrics.c3_per_condition behavioral_std 0.0874-0.1039 vs B-BEHAVIORAL-VARIANCE expected 0.14-0.43, raw_evidence phase_b unique_b sets, provenance.json environment, result.json validity_notes[3]",
+      "finding": "Behavioral variance restored but below graph-lane envelope",
+      "severity": "medium"
+    },
+    {
+      "detail": "token_refresh isolated TP shows behavioral_std 0.0 by design (fixed response refreshed+new_token => score 0.65, TP=1.0). Frozen spec orthogonality set is 2 drifts x 4 noises = 8 conditions (permission_boundary and session_invalidation only); token_refresh is correctly excluded. The C2 gate is rate >=0.85, not variance, so no frozen violation. However claim 'continuous differentiated scoring' for token_refresh is not demonstrated (single point 0.65, not a range). producer validity_notes correctly discloses. Whether token_refresh survives co-occurring noise remains untested (inherited parent do_not_assume #6, result.json unresolved[2]). Bounded, not falsified.",
+      "evidence_ref": "result.json::metrics.c2_isolated_tp.token_refresh std 0.0, validity_notes[1], mock_server.py::session_status token_refresh branch (fixed body), spec.json COOCCUR_PAIRS 2x4, unresolved[2]",
+      "finding": "token_refresh deterministic variance excluded from orthogonality",
+      "severity": "medium"
+    },
+    {
+      "detail": "Experiment runs entirely on localhost synthetic mock (Flask 3.1.3 + SQLite + stdlib urllib, seed 42, single-threaded threaded=False, sequential client, port 18950). No production OAuth/OIDC, CDN, browser, network RTT, or LLM calls. Structural signal is cardinality (body key count + semantic header count + status) with excluded Date/Server/X-Request-Id/Content-Length; ETag/X-Cache-Status are mock-derived. Behavioral signal derived only from /api/session/status JSON. Measurements bounded to mock per prereg measurement_validity #6-7. Does not generalize to production without re-measurement on non-mock substrate (producer unresolved[3]). Producer correctly discloses in validity_notes[0] and report.md section 4.",
+      "evidence_ref": "prereg.md measurement_validity #6-7, result.json validity_notes[0], provenance.json environment python 3.12.14 flask 3.1.3 werkzeug 3.1.8, raw_evidence server field",
+      "finding": "Localhost mock representation loss",
+      "severity": "high"
+    },
+    {
+      "detail": "Frozen spec/prereg cite PyJWT 2.13.0 as graph baseline; provenance reports pyjwt 2.14.0 and cryptography 50.0.1, numpy 2.5.3, scipy 1.18.1. Minor patch drift, HS256/RS256 behavior unchanged (expired/invalid still collide 401). Does not affect discrimination result (recomputed 0.8333). Determinism strategy (global RNG seed 42 before server start, threaded=False, sequential client) is reproducible from raw_evidence; run time 106s, ~1140 HTTP cycles.",
+      "evidence_ref": "provenance.json environment, spec.json measurement_validity #1, result.json observations runtime 106.3s seed 42",
+      "finding": "Environment minor version drift",
+      "severity": "low"
+    },
+    {
+      "detail": "Auth state vs drift/noise conditions are orthogonal by design: Phase A uses /api/data probe, Phase B pairs /api/session/status (behavioral) with /api/schema (structural) per sample but endpoints are isolated (drift does not affect /api/schema content beyond noise_type; noise does not affect /api/session/status). Recomputed per-condition Pearson r values -0.153 to +0.152 all p>0.24 (n=60 each), confirming within-condition independence. Pooled r -0.0258 p=0.573 is not driven by subgroup Simpson effect; means stable across noises. No identifier or state leakage across co-occurring condition blocks due to verified state reset.",
+      "evidence_ref": "raw_evidence phase_b per-condition r recomputed 8 values, pooled r -0.0258, report.md observations, mock_server.py route isolation",
+      "finding": "No target/split leakage or cross-signal contamination",
+      "severity": "info"
+    },
+    {
+      "detail": "Behavioral scores take only 6 discrete values pooled (0.32,0.47,0.545,0.75,0.85,1.0) across the 8 conditions, clustered by drift type (PB low cluster ~0.45, SI high cluster ~0.86). Structural signal similarly discrete (9-11). Pearson r and Fisher-z TOST assume bivariate normal continuous, but with n=480 via CLT the equivalence test remains valid for testing shared variance <2.25% at delta=0.15. CI upper 0.064 is well inside margin; sign flip vs graph baseline (+0.046 vs -0.026) is sampling noise as producer notes, not mechanism. No violation of decision rule.",
+      "evidence_ref": "raw_evidence phase_b unique behavioral sets per condition, result.json c3_orthogonality se 0.045787 CI, validity_notes[4]",
+      "finding": "Discrete score structure limits Pearson/TOST interpretation but passes",
+      "severity": "low"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35445595108",
+  "lane": "graph",
+  "github_run_id": "35445595108",
+  "github_run_attempt": "6",
+  "pre_execute_sha": "b4852e253a221434b80f5d4c903fae256c054693",
+  "frozen_at": "2026-09-19T13:26:08.738911+00:00",
+  "code_files": {
+    "testbed_server.py": "707106c6e4b235a921e81bc235b1bdd10caf3c8dcc1370a1d3e0f60f39197274",
+    "run_experiment.py": "454f5b25bbeb06100e6318b17d0374f8975a78adcfa76f9a89511fa8e71a06f1"
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "367ca2e3576e7cd6c3d82387e522aab925dd13edf1a15c31fd7635ac75d49984",
+      "role": "raw"
+    },
+    {
+      "path": "testbed_server.py",
+      "sha256": "707106c6e4b235a921e81bc235b1bdd10caf3c8dcc1370a1d3e0f60f39197274",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "454f5b25bbeb06100e6318b17d0374f8975a78adcfa76f9a89511fa8e71a06f1",
+      "role": "code"
+    },
+    {
+      "path": "result.json",
+      "sha256": "3f7b8de174db29eabc4becd861798e208dfd6551898e08bd4dd2a36365ca6efb",
+      "role": "derived"
+    }
+  ],
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35409927045/handoff.json - parent MEASUREMENT_INVALID, endpoint selection failure",
+    "research/experiments/EXP-GRAPH-35389145821/result.json - localhost mock baseline r=0.0022, PASS",
+    "research/experiments/EXP-GRAPH-35353011131/result.json - stochastic mock baseline r=0.0463, PASS",
+    "codex/claim_state.json:C-FRESHNESS - EXPERIMENTAL status with localhost mock ceiling"
+  ],
+  "spec_hashes": {
+    "request.json": "3f8e4eacd819c89205882e3ea0ea11d82ef37d538e70b48ccb18b0e22e80897",
+    "spec.json": "7ba5322780474895ace571137f4a1e6d9bf1a2fba0c4ff69d284edb211d2e43e",
+    "prereg.md": "f9c8f5207aa712a5a57c4268027d4de81424464aa6f710856cd3f34bf5a60cc7"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "flask": "3.1.3",
+    "pyjwt": "2.14.0",
+    "scipy": "1.18.1",
+    "numpy": "2.5.3",
+    "database": "SQLite WAL-mode",
+    "cdn_simulation": "Flask-based ETag-SHA256 with Cache-Control",
+    "oauth": "PyJWT RS256 with access/refresh tokens"
+  },
+  "measurement_details": {
+    "n_paired_samples": 480,
+    "n_conditions": 8,
+    "n_endpoints": 3,
+    "samples_per_condition": 60,
+    "jitter_range_ms": "10-200",
+    "cache_max_age_seconds": 30,
+    "jwt_algorithm": "RS256",
+    "token_states": [
+      "valid",
+      "expired"
+    ],
+    "cache_modes": [
+      true,
+      false
+    ],
+    "permission_levels": [
+      "read",
+      "write"
+    ],
+    "endpoints": [
+      "/api/user/profile",
+      "/api/data/list",
+      "/api/session/status"
+    ]
+  },
+  "notes": "This experiment was previously attempted (model_execute.json: exit_code=1, category='transient'). The testbed server and experiment runner were rebuilt with proper ETag stability, cookie handling, and signal extraction. The 304 manipulation check now works correctly (31.67% cache hit rate). C-FRESHNESS orthogonality is FALSIFIED on the production-like testbed."
+}
