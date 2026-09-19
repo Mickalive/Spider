@@ -1057,6 +1057,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "C-FRESHNESS orthogonality confirmed at delta=0.15 under HTTP caching with proper 304 manipulation at n=480 (pooled r=0.0022, CI upper 0.0916 < 0.15, TOST PASS). This extends the parent's stochastic-mock confirmation (r=0.046, CI upper 0.135) to include operational HTTP caching semantics. However, claim ceiling is bounded to localhost Flask mock; no product promotion warranted. Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock. Status remains EXPERIMENTAL with strengthened evidence base."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35434772331",
+        "lane": "product",
+        "created_at": "2026-09-19T09:28:26.218475+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
+        "source_commit": "f42f866a7b435c96d3682a488591149b4fc1342f",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "C-FRESHNESS remains EXPERIMENTAL. Structural signal validated (C1 passes, discrimination 0.8333 replicating EXP-RUNTIME-33902315583). Behavioral drift detection validated in isolation (C2 TP=1.0). Orthogonality NOT tested in this experiment due to measurement invalidity (behavioral variance=0.0). Parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock. C3 requires re-run with redesigned behavioral_score and stochastic server. No product promotion warranted."
       }
     ],
     "C-CROSSSITE": [
@@ -1483,6 +1493,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No change to claim status. The frozen fragile hypothesis (margin is fragile) is FALSIFIED \u2014 break-even 33.3 tokens/task and survival 96.1% demonstrate the 5.42% margin is analytically robust to completion estimation error. However, this is a sensitivity analysis, not end-to-end economics measurement. The 5.42% margin is based on analytical estimates (completion tokens 2/15/20 assumed, COLD success 100% assumed, zero real LLM calls across 4 consecutive experiments). The audit V4 confirms purely analytical execution with no model/network/browser calls. The absolute magnitude (1067 tokens) remains thin and COLD is analytically 7.5x cheaper. C-PRODUCT-ECON requires end-to-end amortized economics on real agents with real LLM completions (measured, not estimated), real success rates, and real browser/production endpoints. Do NOT advance to EXPERIMENTAL based on this sensitivity analysis."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35434772331",
+        "lane": "product",
+        "created_at": "2026-09-19T09:28:26.218475+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
+        "source_commit": "f42f866a7b435c96d3682a488591149b4fc1342f",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "REJECTED",
+        "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
       }
     ],
     "C-MEAS-VALID": [
@@ -2000,14 +2020,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35389145821",
-      "lane": "graph",
-      "created_at": "2026-09-18T20:01:29.406078+00:00",
-      "decision": "PASS \u2014 All five frozen decision criteria pass: C1_drift_tp PASS (mean TP=1.0, all Wilson lower >0.75), C2_variance PASS (4/4 conditions with std>0 for both signals), C3_equivalence PASS (pooled r=0.0022, 95% CI [-0.0874, 0.0916], CI upper 0.0916 < 0.15, TOST p_upper=0.0006), C4_null_control PASS (FP=0.0 on 240 noise-only samples), C5_304_exercised PASS (304 rate=0.3333 in cache_enabled conditions). Audit PASS confirms all recomputed metrics match producer. C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED under operational HTTP conditional caching with proper If-None-Match/304 manipulation at n=480. This extends the parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) to include HTTP caching semantics. Claim ceiling bounded to stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory TTL 0.5s + jitter 1-5ms + HS256/RS256 JWT + HTTP caching (Cache-Control max-age=5 / no-store, ETag-SHA256, If-None-Match ->304 at 33.3%) on localhost. NOT validated for production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, or real API schemas. No product promotion warranted from mock alone.",
-      "source_commit": "673e930b26faa8182cf38f77e9490df5a882c1ad",
+      "experiment_id": "EXP-PRODUCT-35434772331",
+      "lane": "product",
+      "created_at": "2026-09-19T09:28:26.218475+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
+      "source_commit": "f42f866a7b435c96d3682a488591149b4fc1342f",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "C-FRESHNESS orthogonality confirmed at delta=0.15 under HTTP caching with proper 304 manipulation at n=480 (pooled r=0.0022, CI upper 0.0916 < 0.15, TOST PASS). This extends the parent's stochastic-mock confirmation (r=0.046, CI upper 0.135) to include operational HTTP caching semantics. However, claim ceiling is bounded to localhost Flask mock; no product promotion warranted. Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock. Status remains EXPERIMENTAL with strengthened evidence base."
+      "reason": "C-FRESHNESS remains EXPERIMENTAL. Structural signal validated (C1 passes, discrimination 0.8333 replicating EXP-RUNTIME-33902315583). Behavioral drift detection validated in isolation (C2 TP=1.0). Orthogonality NOT tested in this experiment due to measurement invalidity (behavioral variance=0.0). Parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock. C3 requires re-run with redesigned behavioral_score and stochastic server. No product promotion warranted."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",
@@ -2030,14 +2050,14 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35409929216",
+      "experiment_id": "EXP-PRODUCT-35434772331",
       "lane": "product",
-      "created_at": "2026-09-19T00:36:42.409271+00:00",
-      "decision": "FRAGILE-HYPOTHESIS-FALSIFIED-BUT-ECONOMICS-UNMEASURED \u2014 The frozen fragile hypothesis is FALSIFIED: break-even systematic bias is 33.3 tokens/task (far exceeds frozen F1 threshold of 3 tokens/task) and bootstrap survival is 96.1% under \u00b150% completion variation (far exceeds frozen F2 threshold of 70%). The margin is analytically robust to completion token estimation error under the frozen assumptions. However: (1) the audit V1_V_BREAK_EVEN_TAUTOLOGY identifies that systematic uniform bias cannot erase the margin by construction (margin is a difference), so the break-even threshold is only meaningful for differential bias; (2) the audit V2_V_BOOTSTRAP_SCALE_MISMATCH identifies that the bootstrap tests the 112-token selection savings, not the full 1067-token workflow margin, due to independent sampling dropping the 955-token completion offset; (3) critically, audit V4_V4_PURELY_ANALYTICAL_NO_LLM_MEASUREMENT confirms this is the fourth consecutive PRODUCT experiment with zero real LLM calls \u2014 the 5.42% margin is based entirely on analytical estimates (completion tokens 2/15/20 assumed, not measured). The absolute savings (1067 tokens, 5.42%) remain thin and the COLD baseline is analytically 7.5x cheaper. No product promotion. C-PRODUCT-ECON remains HYPOTHESIS.",
-      "source_commit": "c054b9f56124bb536c9288c9ce792f58aef28363",
+      "created_at": "2026-09-19T09:28:26.218475+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
+      "source_commit": "f42f866a7b435c96d3682a488591149b4fc1342f",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "HYPOTHESIS",
-      "reason": "No change to claim status. The frozen fragile hypothesis (margin is fragile) is FALSIFIED \u2014 break-even 33.3 tokens/task and survival 96.1% demonstrate the 5.42% margin is analytically robust to completion estimation error. However, this is a sensitivity analysis, not end-to-end economics measurement. The 5.42% margin is based on analytical estimates (completion tokens 2/15/20 assumed, COLD success 100% assumed, zero real LLM calls across 4 consecutive experiments). The audit V4 confirms purely analytical execution with no model/network/browser calls. The absolute magnitude (1067 tokens) remains thin and COLD is analytically 7.5x cheaper. C-PRODUCT-ECON requires end-to-end amortized economics on real agents with real LLM completions (measured, not estimated), real success rates, and real browser/production endpoints. Do NOT advance to EXPERIMENTAL based on this sensitivity analysis."
+      "status": "REJECTED",
+      "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35434773328",

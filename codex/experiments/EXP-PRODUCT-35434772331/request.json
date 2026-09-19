@@ -1,0 +1,20 @@
+{
+  "base_sha": "872b927f545174f093bc983622850240dfcece01",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T09:28:26.218475+00:00",
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "inherited_last_verdict": "FRAGILE-HYPOTHESIS-FALSIFIED-BUT-ECONOMICS-UNMEASURED \u2014 The frozen fragile hypothesis is FALSIFIED: break-even systematic bias is 33.3 tokens/task (far exceeds frozen F1 threshold of 3 tokens/task) and bootstrap survival is 96.1% under \u00b150% completion variation (far exceeds frozen F2 threshold of 70%). The margin is analytically robust to completion token estimation error under the frozen assumptions. However: (1) the audit V1_V_BREAK_EVEN_TAUTOLOGY identifies that systematic uniform bias cannot erase the margin by construction (margin is a difference), so the break-even threshold is only meaningful for differential bias; (2) the audit V2_V_BOOTSTRAP_SCALE_MISMATCH identifies that the bootstrap tests the 112-token selection savings, not the full 1067-token workflow margin, due to independent sampling dropping the 955-token completion offset; (3) critically, audit V4_V4_PURELY_ANALYTICAL_NO_LLM_MEASUREMENT confirms this is the fourth consecutive PRODUCT experiment with zero real LLM calls \u2014 the 5.42% margin is based entirely on analytical estimates (completion tokens 2/15/20 assumed, not measured). The absolute savings (1067 tokens, 5.42%) remain thin and the COLD baseline is analytically 7.5x cheaper. No product promotion. C-PRODUCT-ECON remains HYPOTHESIS.",
+  "inherited_next_question": "Should the product lane close C-PRODUCT-ECON and redirect to measuring end-to-end agent economics (retrieval ranking repair maintenance amortization) on the real SPIDER registry, or provision LLM API credentials to resolve the 5.1-5.3x COLD cost advantage with real success rates?",
+  "lane": "product",
+  "origin_github_run_id": "35434772331",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35409929216",
+    "path": "research/experiments/EXP-PRODUCT-35409929216/handoff.json",
+    "sha256": "f3ce339a1c8fbff4309caa9b968844292e232ac49aefc367f600add506b59d26"
+  },
+  "reason": "pulse",
+  "request_hash": "865232c0f17cea1d9ba52ab3515fb06578ac360c8b7e81e98bdc08b5e723508f",
+  "request_id": "9bc5b3b34321c2396c44d626",
+  "schema_version": 1
+}

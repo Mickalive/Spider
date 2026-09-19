@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "lane": "product",
+  "claim_ids": ["C-PRODUCT-ECON", "C-FRESHNESS"],
+  "question": "Should the product lane close C-PRODUCT-ECON (token-based deduplication economics) and redirect to C-FRESHNESS product integration — specifically, can the validated behavioral+structural parallel-channel architecture detect auth/session/API drift in real SPIDER kernel workflows using the existing HTTP fingerprint substrate, without requiring new LLM calls or browser automation?",
+  "hypothesis": "C-PRODUCT-ECON is not viable at current scale (5.42% thin margin, COLD 7.5x cheaper, 4 consecutive experiments with zero real LLM calls, analytical line exhausted). The product lane should close token-based economics and redirect to C-FRESHNESS: the validated behavioral+structural parallel-channel architecture (orthogonality confirmed at delta=0.15 under stochastic mock, EXP-GRAPH-35353011131) can detect auth/session/API drift in real SPIDER kernel workflows by integrating the HTTP fingerprint substrate (C-MEAS-VALID, EXP-RUNTIME-33902315583) as the structural signal and JWT/session validation as the behavioral signal, achieving TP>=0.85 and FP<=0.15 on drift-vs-noise discrimination.",
+  "falsifier": "FALSIFIED if: (F1) the HTTP fingerprint substrate cannot discriminate auth-state changes on real SPIDER kernel endpoints (discrimination <= 0.5), OR (F2) behavioral signals (JWT validation, session state) cannot detect auth drift on real kernel workflows (TP < 0.85), OR (F3) structural+behavioral signals are not orthogonal on real kernel workflows (CI upper bound on |r| >= 0.15 at delta=0.15). MIXED if one signal family works but the other fails or orthogonality is not confirmed.",
+  "baselines": {
+    "B-COLD-ANALYTICAL": {
+      "description": "Current COLD baseline at 77 tokens/task (analytical prompt-only counting). Carried forward from EXP-PRODUCT-35330741529. COLD success rate unmeasured.",
+      "expected_behavior": "COLD cost is an upper bound on true cost if success rate < 100%. Not re-measured in this experiment."
+    },
+    "B-PARAMETERIZED-ANALYTICAL": {
+      "description": "Current PARAMETERIZED baseline at 18624 tokens (analytical). Carried forward from EXP-PRODUCT-35330741529. Selection savings 112 tokens, completion savings 955 tokens. All estimated, not measured.",
+      "expected_behavior": "Parameterized cost is an analytical estimate. Not re-measured in this experiment."
+    },
+    "B-FRESHNESS-STRUCTURAL": {
+      "description": "HTTP fingerprint substrate discrimination on real SPIDER kernel endpoints (jsonplaceholder.typicode.com). Structural signal from EXP-RUNTIME-33902315583 (discrimination 0.833, null FP 0.0%).",
+      "expected_behavior": "Full-vector discrimination > 0.5 on auth-state changes"
+    },
+    "B-FRESHNESS-BEHAVIORAL": {
+      "description": "JWT/session validation behavioral signals on real SPIDER kernel endpoints. Behavioral signal from EXP-GRAPH-35353011131 (TP=1.0, FP=0.0, AUC=1.0 on stochastic mock).",
+      "expected_behavior": "TP >= 0.85 on auth drift detection"
+    }
+  },
+  "positive_control": {
+    "description": "Auth-state change detection on jsonplaceholder.typicode.com using HTTP fingerprint substrate (replicates EXP-RUNTIME-33902315583 positive control). Validated discrimination 0.833 > 0.5.",
+    "expected_behavior": "Full-vector discrimination > 0.5 on auth-state changes (valid_token vs no_auth vs expired_token)"
+  },
+  "null_control": {
+    "description": "Structural noise tolerance: optional field additions, timing jitter, response variation that do NOT represent auth drift. FP rate <= 0.15 on noise-only samples.",
+    "expected_behavior": "FP <= 0.15 on structural noise samples"
+  },
+  "measurement_validity": [
+    "HTTP fingerprint substrate measurements use the validated FLASK+JWT HS256 localhost pattern from EXP-RUNTIME-33902315583 (discrimination 0.833, null FP 0.0%)",
+    "Behavioral signals use the validated graded session_status_check pattern from EXP-GRAPH-35353011131 (TP=1.0, FP=0.0, orthogonality confirmed at delta=0.15)",
+    "Orthogonality tested via TOST equivalence test with delta=0.15 (CI upper bound < 0.15 confirms shared variance < 2.25%)",
+    "All measurements use deterministic mock server (Flask 3.1.3 + PyJWT 2.13.0 HS256) on localhost, not production APIs",
+    "N >= 480 paired samples (60 per condition x 8 co-occurring conditions) for orthogonality test",
+    "This experiment does NOT make real LLM calls — it tests the structural/behavioral signal architecture for freshness detection, not token economics"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) HTTP fingerprint discrimination > 0.5 on auth-state changes (positive control), (C2) behavioral TP >= 0.85 on auth drift, (C3) structural+behavioral orthogonality confirmed at delta=0.15 (CI upper bound < 0.15, TOST p_upper < 0.05), (C4) FP <= 0.15 on structural noise, (C5) C-PRODUCT-ECON closure decision documented with rationale. FALSIFIED if any of C1-C4 fail. MIXED if C1-C2 pass but C3 or C4 fail.",
+  "product_consequence_positive": "If SURVIVES: C-PRODUCT-ECON is closed (token-based deduplication economics not viable at current scale). Product lane redirects to C-FRESHNESS integration: behavioral+structural parallel-channel architecture justified for production deployment. Freshness guards become the next product gate. C-FRESHNESS advances toward PRODUCT_CORE.",
+  "product_consequence_negative": "If FALSIFIED: C-PRODUCT-ECON closure is premature — there may be a path to token economics with real LLM measurement (option A from parent handoff). Product lane must provision LLM API credentials or pivot to alternative mechanisms (C-RESIDUAL-NOVELTY, C-LLM-INHERIT).",
+  "estimated_cost": "Zero new LLM calls. Uses existing HTTP fingerprint substrate code (src/spider/kernel.py) and behavioral signal infrastructure. Flask mock server startup + JWT generation + HTTP requests = ~5 minutes wall clock. No API keys required.",
+  "expected_information_gain": "HIGH: This experiment directly resolves the parent handoff's three-way decision (A/B/C). Either (a) C-PRODUCT-ECON is closed and product lane redirects to C-FRESHNESS (changing product direction), or (b) C-FRESHNESS integration fails and product lane must provision LLM API credentials (changing infrastructure requirements). Either outcome changes a product decision."
+}
