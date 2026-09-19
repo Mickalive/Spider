@@ -451,6 +451,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No new evidence accumulated for or against C-WEB-DYNAMICS. Frozen decision_rule C4 triggers MEASUREMENT_INVALID: shuffled-action null mean 0.407 bits exceeds |0.1| threshold by 4.07x. Audit confirms this is intrinsic to weighted-averaged PMI estimator across deterministic/stochastic strata (31.5% deterministic), not genuine signal. The K3-K2 difference test (designed to be ratio-based and immune to null centering) ALSO fails: point estimate 0.287 > 0.1 bits but bootstrap 95% CI [-0.275, 0.080] includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator is unstable under session resampling due to strata fragmentation. N=50000 exploratory shows bias is ASYMPTOTIC (K2 grows from 0.933 to 1.779), not finite-sample. Point estimates replicate parent exactly (K2 0.933, K3 1.221) confirming reproducibility, but the estimator does not converge to a meaningful information-theoretic quantity. Markov-vs-beyond-Markov question remains unresolved pending estimator revision."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35445596894",
+        "lane": "physics",
+        "created_at": "2026-09-19T13:23:17.127745+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "15e784bf34c70dc256d61e7e8a52042bb871e6b0",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status from parent HYPOTHESIS. The frozen falsifier C1 triggers FALSIFIED-IN-SETTING: all four estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) fail the null control (|null_mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA: 0.407, 0.704, 0.686, 0.262 bits respectively, each 2.6-7.0x threshold and 32-56 sigma from threshold). The bias-corrected estimator pathway (equal-weight, median, KNN) is rejected as a remedy in this setting. The preregistered mechanistic hypothesis H1 (bias from large-stratum dominance) is falsified: equal-weight and median null bias is WORSE than weighted (0.704/0.686 vs 0.407 bits) because per-stratum plug-in bias is monotonically increasing in small strata (+0.742 bits at size 5-9 vs +0.379 at size 20-49), and equal-weighting/median promote the most biased strata. KNN shows negative bias (-0.262 bits) from Laplace smoothing + extra dimension. No estimator converges at N=50000 (all drift >0.2 bits). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. The K3-K2 beyond-Markov question is unanswered (no valid estimator exists), not answered in the negative."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2070,14 +2080,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35403136807",
+      "experiment_id": "EXP-PHYSICS-35445596894",
       "lane": "physics",
-      "created_at": "2026-09-18T22:48:41.862552+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "175217214f2ac0b426247685a11b4db315177895",
+      "created_at": "2026-09-19T13:23:17.127745+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "15e784bf34c70dc256d61e7e8a52042bb871e6b0",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No new evidence accumulated for or against C-WEB-DYNAMICS. Frozen decision_rule C4 triggers MEASUREMENT_INVALID: shuffled-action null mean 0.407 bits exceeds |0.1| threshold by 4.07x. Audit confirms this is intrinsic to weighted-averaged PMI estimator across deterministic/stochastic strata (31.5% deterministic), not genuine signal. The K3-K2 difference test (designed to be ratio-based and immune to null centering) ALSO fails: point estimate 0.287 > 0.1 bits but bootstrap 95% CI [-0.275, 0.080] includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator is unstable under session resampling due to strata fragmentation. N=50000 exploratory shows bias is ASYMPTOTIC (K2 grows from 0.933 to 1.779), not finite-sample. Point estimates replicate parent exactly (K2 0.933, K3 1.221) confirming reproducibility, but the estimator does not converge to a meaningful information-theoretic quantity. Markov-vs-beyond-Markov question remains unresolved pending estimator revision."
+      "reason": "No change to claim status from parent HYPOTHESIS. The frozen falsifier C1 triggers FALSIFIED-IN-SETTING: all four estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) fail the null control (|null_mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA: 0.407, 0.704, 0.686, 0.262 bits respectively, each 2.6-7.0x threshold and 32-56 sigma from threshold). The bias-corrected estimator pathway (equal-weight, median, KNN) is rejected as a remedy in this setting. The preregistered mechanistic hypothesis H1 (bias from large-stratum dominance) is falsified: equal-weight and median null bias is WORSE than weighted (0.704/0.686 vs 0.407 bits) because per-stratum plug-in bias is monotonically increasing in small strata (+0.742 bits at size 5-9 vs +0.379 at size 20-49), and equal-weighting/median promote the most biased strata. KNN shows negative bias (-0.262 bits) from Laplace smoothing + extra dimension. No estimator converges at N=50000 (all drift >0.2 bits). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. The K3-K2 beyond-Markov question is unanswered (no valid estimator exists), not answered in the negative."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
