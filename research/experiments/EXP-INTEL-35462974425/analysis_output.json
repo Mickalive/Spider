@@ -1,0 +1,177 @@
+{
+  "c3_gate": {
+    "tasks_with_locatable_sample_gt20": 0,
+    "total_tasks": 7,
+    "threshold": 5,
+    "pass": false,
+    "element_counts": {
+      "listing_clothing-shoes-jewelry": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 82,
+        "elements_with_bbox": 1550,
+        "total_dom_elements": 1696,
+        "page_type": "product_listing"
+      },
+      "listing_beauty-personal-care": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 82,
+        "elements_with_bbox": 1560,
+        "total_dom_elements": 1707,
+        "page_type": "product_listing"
+      },
+      "listing_electronics": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 82,
+        "elements_with_bbox": 1564,
+        "total_dom_elements": 1712,
+        "page_type": "product_listing"
+      },
+      "detail_camera": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 32,
+        "elements_with_bbox": 1215,
+        "total_dom_elements": 1395,
+        "page_type": "detail"
+      },
+      "detail_vr_bag": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 32,
+        "elements_with_bbox": 1149,
+        "total_dom_elements": 1310,
+        "page_type": "detail"
+      },
+      "detail_pet_camera": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 32,
+        "elements_with_bbox": 1143,
+        "total_dom_elements": 1304,
+        "page_type": "detail"
+      },
+      "cart_1": {
+        "locatable_sample_len": 20,
+        "locatable_elements": 21,
+        "elements_with_bbox": 1070,
+        "total_dom_elements": 1136,
+        "page_type": "cart"
+      }
+    },
+    "diagnosis": "ALL tasks have exactly 20 elements in locatable_sample. The raw data was truncated to first-20 at collection time. Full DOM elements (n=21-82) are NOT available in the existing raw evidence. Full DOM re-collection from the Magento Docker container would be required."
+  },
+  "pc1_positive_control": {
+    "pass": true,
+    "features": {
+      "tag_entropy": {
+        "eta2": 1.0,
+        "group_means": {
+          "product_listing": 2.6464393446710153,
+          "detail": 2.484183719779189,
+          "cart": 2.6016094970590276
+        },
+        "within_stds": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        }
+      },
+      "form_fraction": {
+        "eta2": 0.9999999999999982,
+        "group_means": {
+          "product_listing": 0.85,
+          "detail": 0.9499999999999998,
+          "cart": 0.95
+        },
+        "within_stds": {
+          "product_listing": 0.0,
+          "detail": 1.3597399555105182e-16,
+          "cart": 0.0
+        }
+      },
+      "total_area": {
+        "eta2": 1.0,
+        "group_means": {
+          "product_listing": 341795.171875,
+          "detail": 589190.03125,
+          "cart": 428790.3125
+        },
+        "within_stds": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        }
+      }
+    },
+    "note": "PC1 runs on truncated-first-20 (not full DOM) for reference. Full DOM PC1 is blocked."
+  },
+  "nc1_null_control": {
+    "pass": true,
+    "eta2": 0.0,
+    "group_means": {
+      "product_listing": 3.693777130463341e-07,
+      "detail": 3.693777130463341e-07,
+      "cart": 3.693777130463341e-07
+    },
+    "note": "NC1 runs on truncated-first-20 (not full DOM) for reference."
+  },
+  "non_recipe_truncated_first20": {
+    "eta2": {
+      "tag_entropy x DEF-FULL-MAP": {
+        "eta2": 0.9957833666117688,
+        "group_means": {
+          "product_listing": 0.0021215152038335204,
+          "detail": 0.0013225395223042651,
+          "cart": 0.001862763417693848
+        }
+      },
+      "form_fraction x DEF-FULL-MAP": {
+        "eta2": 0.9839692311312597,
+        "group_means": {
+          "product_listing": 0.0032092885343442228,
+          "detail": 0.0034243439004092834,
+          "cart": 0.004672897196261682
+        }
+      },
+      "total_area x DEF-FULL-MAP": {
+        "eta2": 0.9637074384170368,
+        "group_means": {
+          "product_listing": 10.923736197094186,
+          "detail": 11.701371021655989,
+          "cart": 14.251737733644859
+        }
+      },
+      "tag_entropy x DEF-FORM-ONLY": {
+        "eta2": 0.9996449276089042,
+        "group_means": {
+          "product_listing": 0.0015253762268340213,
+          "detail": 0.0004693827066048325,
+          "cart": 0.000931381708846924
+        }
+      },
+      "form_fraction x DEF-FORM-ONLY": {
+        "eta2": 0.9953605298138091,
+        "group_means": {
+          "product_listing": 0.0025674308274753785,
+          "detail": 0.0017121719502046417,
+          "cart": 0.002803738317757009
+        }
+      },
+      "total_area x DEF-FORM-ONLY": {
+        "eta2": 0.9975895555182402,
+        "group_means": {
+          "product_listing": 7.922710430575564,
+          "detail": 4.3728202791058495,
+          "cart": 6.251241238317757
+        }
+      }
+    },
+    "max_eta2": 0.9996449276089042,
+    "ranking_preserved": {
+      "tag_entropy x DEF-FULL-MAP": true,
+      "form_fraction x DEF-FULL-MAP": true,
+      "total_area x DEF-FULL-MAP": true,
+      "tag_entropy x DEF-FORM-ONLY": true,
+      "form_fraction x DEF-FORM-ONLY": true,
+      "total_area x DEF-FORM-ONLY": true
+    },
+    "note": "Results on truncated-first-20 data only; full DOM analysis blocked."
+  }
+}
