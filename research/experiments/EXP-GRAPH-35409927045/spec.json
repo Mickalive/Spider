@@ -1,17 +1,92 @@
 {
   "experiment_id": "EXP-GRAPH-35409927045",
   "lane": "graph",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on real external APIs with production-like network conditions (latency, CDN caching, rate limiting, variable response times) — the critical gap between localhost mock confirmation and product deployment?",
+  "hypothesis": "Behavioral signals (rate-limit detection, auth challenge probing, cache freshness indicators) and structural signals (response body schema Jaccard, schema diff magnitude) remain approximately uncorrelated (|r| < 0.15) on real public APIs, because auth/session/cache infrastructure and response schema generation are architecturally independent subsystems.",
+  "falsifier": "Pooled 95% CI upper bound on Pearson r between behavioral composite and structural signal >= 0.15 across real API endpoints at n >= 480, OR behavioral detection fails (mean TP < 0.85) on real APIs, OR network unavailability prevents measurement on >= 2/3 endpoints.",
+  "baselines": [
+    {
+      "id": "B-MOCK-PARENT",
+      "description": "Parent localhost mock result: r=0.0022, CI upper 0.0916 < 0.15 (EXP-GRAPH-35389145821). This is the established baseline that must be compared against.",
+      "expected": "Pooled |r| < 0.15 on real APIs, consistent with mock baseline"
+    },
+    {
+      "id": "B-RANDOM-NULL",
+      "description": "Randomly permute behavioral labels across structural measurements. Should show r ≈ 0 with wide CI.",
+      "expected": "r ≈ 0, CI includes 0, no significant correlation"
+    },
+    {
+      "id": "B-MOCK-ANTI-NULL",
+      "description": "Artificially couple behavioral and structural signals (e.g., use auth state to determine schema). Should show |r| >> 0.15.",
+      "expected": "r >> 0.15, demonstrating the measurement can detect correlation when present"
+    }
+  ],
+  "positive_control": {
+    "id": "PC-AUTH-DETECTION",
+    "description": "Probe API endpoints with invalid/expired tokens. Behavioral signals should detect auth boundary shifts (rate of 401/403 responses > 0). Validates that behavioral signal extraction works on real APIs.",
+    "expected": "At least one endpoint shows behavioral signal variance > 0 when probed with valid vs invalid auth"
+  },
+  "null_control": {
+    "id": "NC-STABLE-ENDPOINT",
+    "description": "Query a stable, non-authenticated API endpoint repeatedly (no drift, no noise). Behavioral composite should be 0 (no auth challenges, no rate limiting). Structural signal should be constant (schema unchanged). Validates no false behavioral detection.",
+    "expected": "FP = 0 on stable endpoint with no auth drift"
+  },
+  "measurement_validity": [
+    "Network access to at least 2/3 target public APIs must be available; if < 2/3 reachable, status=BLOCKED",
+    "Each paired sample must consist of one baseline request and one current request to the same endpoint within 5 seconds",
+    "Behavioral signals extracted from HTTP response headers and status codes (not mock admin endpoints)",
+    "Structural signals computed from response body schema (field names and types extracted via JSON parsing)",
+    "If-None-Match / ETag conditional requests used where supported (GitHub API supports ETags)",
+    "Rate limiting respected: minimum 1 second between requests to same API",
+    "All requests use User-Agent: SPIDER-Experiment/1.0 for identification",
+    "Request timeout: 15 seconds per request; timeouts recorded as missing data, not errors",
+    "Seed: SEED=42 for all random number generation (condition assignment, permutation tests)"
+  ],
+  "decision_rule": {
+    "description": "Conjunctive decision rule applied to pooled real-API data",
+    "conditions": [
+      {
+        "id": "C1_behavioral_detection",
+        "rule": "mean TP rate >= 0.85 across endpoints where auth probing is possible, AND all Wilson lower CI > 0.75",
+        "rationale": "Behavioral signals must actually detect auth/session changes on real APIs for orthogonality to be meaningful"
+      },
+      {
+        "id": "C2_variance",
+        "rule": ">= 3/3 endpoints have std > 0 for both behavioral and structural signals",
+        "rationale": "Both signals must vary for correlation to be measurable"
+      },
+      {
+        "id": "C3_equivalence",
+        "rule": "95% CI upper bound on pooled Pearson r < 0.15 (delta=0.15 TOST)",
+        "rationale": "Core orthogonality claim: shared variance < 2.25%"
+      },
+      {
+        "id": "C4_null_control",
+        "rule": "FP = 0.0 on stable non-authenticated endpoint",
+        "rationale": "No false behavioral detection on stable endpoints"
+      },
+      {
+        "id": "C5_network_availability",
+        "rule": ">= 2/3 target APIs reachable with >= 80% request success rate",
+        "rationale": "Measurement requires real API access"
+      }
+    ],
+    "verdict_mapping": {
+      "ALL_PASS": "SUPPORTS — orthogonality transfers to real APIs, parallel-channel architecture justified",
+      "C3_FAIL_CI_UPPER_GTE_020": "FALSIFIES — signals correlated on real APIs, fused classifier required",
+      "C3_FAIL_CI_UPPER_015_TO_020": "MIXED — inconclusive, larger sample needed",
+      "C1_OR_C2_OR_C4_FAIL": "MEASUREMENT_INVALID — behavioral extraction or variance insufficient",
+      "C5_FAIL": "BLOCKED — network unavailable"
+    }
+  },
+  "product_consequence_positive": "C-FRESHNESS parallel-channel architecture (independent behavioral + structural freshness detectors) justified for production deployment. Product can use behavioral signals (auth probe, rate-limit check, cache header inspection) as an independent freshness channel alongside structural signals, without fused classification overhead.",
+  "product_consequence_negative": "C-FRESHNESS requires fused classifier or fundamentally different signal architecture. Behavioral and structural signals are coupled on real APIs (e.g., CDN caching creates correlated staleness signatures). Product must either combine signals into a single detector or find cache-independent structural signals.",
+  "estimated_cost": {
+    "network_requests": "~600 (3 endpoints x 200 requests, including baseline/current pairs)",
+    "compute": "Minimal (HTTP requests + JSON parsing + correlation)",
+    "time_estimate_minutes": 15,
+    "blocking_risk": "Network unavailability in CI is the primary risk"
+  },
+  "expected_information_gain": "Very High: directly resolves the single critical gap between localhost mock confirmation (3 experiments, all PASS) and product deployment. A positive result justifies production parallel-channel architecture; a negative result forces architectural pivot. Both outcomes materially change the C-FRESHNESS product decision."
 }
