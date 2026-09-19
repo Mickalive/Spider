@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35445596342",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "c1_auth_discrimination": 0.8333,
+    "c1_pass": true,
+    "baseline_status_only": 0.5,
+    "baseline_body_only": 0.8333,
+    "c2_isolated_tp": {
+      "permission_boundary": {
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398,
+        "behavioral_mean": 0.455,
+        "behavioral_std": 0.0945
+      },
+      "session_invalidation": {
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398,
+        "behavioral_mean": 0.8633,
+        "behavioral_std": 0.0995
+      },
+      "token_refresh": {
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398,
+        "behavioral_mean": 0.65,
+        "behavioral_std": 0.0
+      }
+    },
+    "c2_cooccurring_tp": {
+      "permission_boundary+optional_field_addition": 1.0,
+      "permission_boundary+description_change": 1.0,
+      "permission_boundary+response_time_jitter": 1.0,
+      "permission_boundary+field_type_normalization": 1.0,
+      "session_invalidation+optional_field_addition": 1.0,
+      "session_invalidation+description_change": 1.0,
+      "session_invalidation+response_time_jitter": 1.0,
+      "session_invalidation+field_type_normalization": 1.0
+    },
+    "c2_pass": true,
+    "c3_per_condition": {
+      "permission_boundary+optional_field_addition": {
+        "n": 60,
+        "behavioral_mean": 0.4525,
+        "behavioral_std": 0.099,
+        "structural_mean": 10.8,
+        "structural_std": 0.4034,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "permission_boundary+description_change": {
+        "n": 60,
+        "behavioral_mean": 0.4525,
+        "behavioral_std": 0.096,
+        "structural_mean": 9.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "permission_boundary+response_time_jitter": {
+        "n": 60,
+        "behavioral_mean": 0.46,
+        "behavioral_std": 0.091,
+        "structural_mean": 9.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "permission_boundary+field_type_normalization": {
+        "n": 60,
+        "behavioral_mean": 0.4537,
+        "behavioral_std": 0.0874,
+        "structural_mean": 10.8,
+        "structural_std": 0.4034,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "session_invalidation+optional_field_addition": {
+        "n": 60,
+        "behavioral_mean": 0.8483,
+        "behavioral_std": 0.1017,
+        "structural_mean": 10.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "session_invalidation+description_change": {
+        "n": 60,
+        "behavioral_mean": 0.875,
+        "behavioral_std": 0.1039,
+        "structural_mean": 9.8,
+        "structural_std": 0.4034,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "session_invalidation+response_time_jitter": {
+        "n": 60,
+        "behavioral_mean": 0.8625,
+        "behavioral_std": 0.0968,
+        "structural_mean": 9.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "session_invalidation+field_type_normalization": {
+        "n": 60,
+        "behavioral_mean": 0.8558,
+        "behavioral_std": 0.1009,
+        "structural_mean": 10.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      }
+    },
+    "c3_variance_conditions_pass": 8,
+    "c3_variance_pass_required": 6,
+    "c3_orthogonality": {
+      "pearson_r": -0.025799,
+      "pearson_p": 0.5728622182122732,
+      "n": 480,
+      "se": 0.045787,
+      "z_r": -0.025804,
+      "ci_lower": -0.115035,
+      "ci_upper": 0.063851,
+      "tost_delta": 0.15,
+      "tost_p_upper": 5.565075468978581e-05,
+      "tost_p_lower": 0.0030965360137531484,
+      "tost_pass": true
+    },
+    "c3_pass": true,
+    "c4_noise_fp_rate": 0.0,
+    "c4_per_noise": {
+      "optional_field_addition": {"fp_rate": 0.0, "behavioral_mean": 0.05},
+      "description_change": {"fp_rate": 0.0, "behavioral_mean": 0.05},
+      "response_time_jitter": {"fp_rate": 0.0, "behavioral_mean": 0.05},
+      "field_type_normalization": {"fp_rate": 0.0, "behavioral_mean": 0.05}
+    },
+    "c4_pass": true,
+    "decision_rule_evaluation": {
+      "C1_discrimination_gt_0.5": true,
+      "C2_TP_ge_0.85": true,
+      "C3_variance_ge_6_of_8_and_TOST_delta_0.15": true,
+      "C4_FP_le_0.15": true,
+      "frozen_outcome": "SURVIVES_CURRENT_TEST"
+    },
+    "decision_source": "frozen prereg decision rule (prereg.md Decision Rule section)"
+  },
+  "controls": {
+    "PC-STRUCTURAL-DISCRIMINATION": {
+      "expected": "full-vector HTTP fingerprint discrimination > 0.5 on auth-state changes (valid_token vs no_auth vs expired_token vs invalid_token)",
+      "observed": 0.8333,
+      "pass": true,
+      "evidence_ref": ["raw_evidence/experiment_data.json::phase_a_raw", "result_draft.json::observations.phase_a"]
+    },
+    "NC-NOISE-FP": {
+      "expected": "behavioral FP rate <= 0.15 on noise-only samples (no drift)",
+      "observed": 0.0,
+      "pass": true,
+      "evidence_ref": ["raw_evidence/experiment_data.json::phase_c_noise_only"]
+    },
+    "C2-VARIANCE": {
+      "expected": ">= 6 of 8 co-occurring conditions with behavioral_std > 0.05 AND structural_std > 0.05",
+      "observed": "8 of 8 (behavioral_std range 0.0874-0.1039; structural_std range 0.4034-0.4155)",
+      "pass": true,
+      "evidence_ref": ["raw_evidence/experiment_data.json::phase_b_cooccurring", "result_draft.json::metrics.c3_per_condition"]
+    },
+    "B-STRUCTURAL-SIGNAL": {
+      "expected": "full-vector discrimination > 0.5 on auth-state changes (validated 0.8333 in EXP-RUNTIME-33902315583 and EXP-PRODUCT-35434772331 C1)",
+      "observed": 0.8333,
+      "pass": true,
+      "evidence_ref": ["result_draft.json::observations.phase_a.discrimination_full_fingerprint"]
+    },
+    "B-BEHAVIORAL-VARIANCE": {
+      "expected": ">= 6 of 8 co-occurring conditions with behavioral_std > 0.05 (graph baseline achieved 0.14-0.43)",
+      "observed": "8 of 8, behavioral_std 0.0874-0.1039",
+      "pass": true,
+      "evidence_ref": ["result_draft.json::metrics.c3_per_condition"]
+    },
+    "B-ORTHO-GRAPHII": {
+      "expected": "95% CI upper bound on |r| < 0.15 and TOST p_upper < 0.05 at delta=0.15 (graph baseline r=0.046, CI upper 0.135, p_upper=0.011)",
+      "observed": "r=-0.0258, CI upper 0.0639, TOST p_upper=5.6e-05 (all within the graph baseline envelope)",
+      "pass": true,
+      "evidence_ref": ["result_draft.json::metrics.c3_orthogonality"]
+    },
+    "B-STATUS-ONLY": {
+      "expected": "status-code-only substrate collapses no_auth/expired/invalid onto 401 -> discrimination ~0.5",
+      "observed": 0.5,
+      "pass": true,
+      "evidence_ref": ["result_draft.json::observations.phase_a.baseline_status_only"]
+    },
+    "B-BODY-ONLY": {
+      "expected": "body-only substrate collides expired_token with invalid_token (same authentication_failed body) -> discrimination 0.8333",
+      "observed": 0.8333,
+      "pass": true,
+      "evidence_ref": ["result_draft.json::observations.phase_a.baseline_body_only"]
+    },
+    "CTL-EXPIRED-COLLISION": {
+      "expected": "expired_token and invalid_token produce identical 401 authentication_failed surfaces (server behavior intentionally replicated from parent)",
+      "observed": "fingerprint 14553e10b9eddcb9 for both states; 3 unique fingerprints of 4 states",
+      "pass": true,
+      "evidence_ref": ["result_draft.json::observations.phase_a.fingerprint_groups"]
+    },
+    "CTL-STATE-RESET": {
+      "expected": "set_drift(None) fully resets current_role/session_valid/drift/noise and restores DB rows between conditions",
+      "observed": "all 8 co-occurring conditions proceeded with expected per-condition score ranges (PB ~0.45, SI ~0.85) and no cross-condition contamination",
+      "pass": true,
+      "evidence_ref": ["mock_server.py::set_drift", "raw_evidence/experiment_data.json::phase_b_cooccurring"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/run_experiment.py", "sha256": "57f3a4d51294e1281e37cd9a2945d61d41df548d209dee540560c8328ab96baf", "role": "code"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/mock_server.py", "sha256": "7d813322c97358fbc565837b40240d55e42f608754e638b95af9bb23c82ff644", "role": "code"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/raw_evidence/experiment_data.json", "sha256": "fc79a70f17cdfc2015d044cd024d3a3f74a18d0975e28ed3bbeb5752a54673b5", "role": "raw"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/result_draft.json", "sha256": "d362cedb5266ccea9c39920155555804363610080657dcdac9dc165a09bd0a12", "role": "derived"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/request.json", "sha256": "848354573e2d33f2edfdbdbef3013e8a3961cf1c4a06dfb78fde7e6422a36c33", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/spec.json", "sha256": "bc031085e708321623779ee8f4a02f221da4b67e38cb24d995e87a71fd03f708", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/prereg.md", "sha256": "b55f824e36559b466ac7ce26da03e13bedb417ba39eeefac60638459b9cc9ef9", "role": "fixture"},
+    {"path": "research/experiments/EXP-PRODUCT-35445596342/freeze.json", "sha256": "589ee48bb02404e5526a400b2964a6f8fb3bafb9bf43bffaf67a3544798eb725", "role": "fixture"}
+  ],
+  "observations": [
+    "Phase A: /api/data probed 10x per auth state on the stochastic Flask+SQLite server. Per-state fingerprints are internally stable (1 unique fingerprint per state); 3 unique fingerprints across 4 states because expired_token and invalid_token both produce 401 authentication_failed (same surface).",
+    "Phase B: 480 paired samples collected across 8 co-occurring conditions (2 auth drifts x 4 structural noises, 60 samples each). Each sample reads behavioral signal from /api/session/status and structural signal from /api/schema over real HTTP.",
+    "Phase C: 240 noise-only samples (4 noises x 60) with NO drift active. All behavioral scores observed at exactly 0.05 (admin-role baseline), i.e., 0 samples at/above the 0.25 detection threshold.",
+    "Phase D: 180 isolated-drift samples (3 drift types x 60). Observed score ranges: permission_boundary 0.32-0.545 (severity x propagated-permission count), session_invalidation 0.75-1.0 (graded status code 401/403/500), token_refresh fixed 0.65 (deterministic refresh surface).",
+    "Observed behavioral score ranges under co-occurring noise equal the ranges under isolation (PB mean 0.4525-0.46 with noise vs 0.455 isolated; SI mean 0.848-0.875 with noise vs 0.8633 isolated): noise does not shift the means or collapse the variance.",
+    "Within-condition behavioral variance: permission_boundary conditions std 0.0874-0.099; session_invalidation conditions std 0.0968-0.1039. All 8 conditions exceed the 0.05 variance gate. Structural variance (header/body cardinality) std 0.4034-0.4155 driven by TTL-cache freshness header presence and noise-dependent schema keys.",
+    "Pooled orthogonality over 480 pairs: Pearson r = -0.0258 (p=0.573, not significant), Fisher-z 95% CI [-0.115, 0.064], TOST at delta=0.15 passes on both tails (p_upper=5.6e-05, p_lower=3.1e-03).",
+    "Total real HTTP request cycles during measurement: ~1140 (40 phase-A probes + 960 paired phase-B/C probes + 180 phase-D probes + control-endpoint calls). No LLM calls; no network beyond localhost.",
+    "Runtime 106.3 s, single-threaded Werkzeug server (threaded=False) on 127.0.0.1:18950, seed=42 for the global Python RNG drawn before server start.",
+    "Frozen decision-rule outcome 'SURVIVES_CURRENT_TEST' maps to canonical packet outcome SUPPORTS (all of C1-C4 pass at the frozen ceiling)."
+  ],
+  "validity_notes": [
+    "Measurements are bounded to the localhost Flask 3.1.3 + SQLite mock server (prereg measurement_validity #6, #7); they are not production-API measurements.",
+    "token_refresh isolated TP has behavioral_std=0.0 by design: the /api/session/status refresh surface is a fixed refreshed+new_token response (score 0.65, TP=1.0). The C2 TP test requires a rate >= 0.85, not variance; token_refresh is not part of the 8 co-occurring orthogonality conditions (frozen spec table is 2 drifts x 4 noises), so the orthogonality variance precondition is unaffected.",
+    "C1 discrimination is 0.8333, not 1.0, because expired_token and invalid_token deliberately share one 401 authentication_failed surface (replicating parent baselines B-STATUS-ONLY=0.5, B-BODY-ONLY=0.8333). The frozen gate is > 0.5 (PC-STRUCTURAL-DISCRIMINATION), not perfeCt separation.",
+    "permission_boundary behavioral_std (0.087-0.099) is below the graph-lane range (0.14-0.16) because this run samples three propagation levels (read / read+write / full) rather than a wider spread; the frozen gate is > 0.05 and 8/8 conditions exceed it with TOST power to spare (p_upper 5.6e-05).",
+    "Pooled r is -0.0258 here vs +0.046 in EXP-GRAPH-35353011131. Both are essentially zero relative to delta=0.15; the sign flip is sampling noise with no mechanism implying directional coupling.",
+    "Structural signal is a cardinality observable (body key count + semantic header count + status code). X-Request-Id/Date/Server/Content-Length/Connection excluded from fingerprints to keep within-state fingerprints stable.",
+    "Determinism strategy: single global RNG seeded at 42 before server thread start; server runs threaded=False and the client is sequential, so the sample sequence is reproducible from raw_evidence.",
+    "result_draft.json (driver-internal packet) contains the full per-sample evidence pointers; the public result.json carries canonical outcome SUPPORTS for the packet enum (SUPPORTS|FALSIFIES|MIXED|INCONCLUSIVE|NOT_APPLICABLE)."
+  ],
+  "unresolved": [
+    "Whether the expired_token/invalid_token fingerprint collision generalizes to production endpoints (inherited from parent handoff, unknown category).",
+    "Whether within-condition behavioral variance changes on real network RTT (localhost jitter may not reproduce the cache-freshness timing distribution).",
+    "Whether token_refresh TP survives co-occurring noise (only isolated token_refresh was TP-tested; the 8-condition set covers permission_boundary and session_invalidation only - inherited parent do_not_assume #6).",
+    "Whether the parallel-channel claim ceiling needs re-measurement on a non-mock substrate before PRODUCT_CORE promotion (producer cannot authorize promotion; that is the DIRECTOR's verdict decision)."
+  ]
+}
