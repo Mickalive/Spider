@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-35456070671",
-  "last_experiment_id": "EXP-RUNTIME-35445595071",
-  "last_verdict": "CONSTRAINED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-35456070671",
+  "last_verdict": "SURVIVES_CURRENT_TEST",
   "continue_immediately": false,
-  "next_question": "Can decompressed payload byte-equality to ground-truth uncompressed body be verified via direct correctness controls (compare decompressed output to expected uncompressed body per state, or to direct origin fetch without proxy), establishing that iterative decompression actually produces correct output rather than silently falling back to compressed bytes that happen to preserve state-grouping discrimination?",
+  "next_question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, geographic latency, and production concurrency?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-19T19:00:44.236182+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "2ee49f556b2b348ae351faae298bffc21d1361dbd5164fcbbb4e1a1a5edbba8f",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-19T19:17:34.414661+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "647db27f115aad610f2b628f0b0f6289b18b9e1d101abfddcfd5558095d60e0b",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
