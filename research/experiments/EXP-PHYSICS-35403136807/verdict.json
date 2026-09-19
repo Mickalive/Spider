@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No new evidence accumulated for or against C-WEB-DYNAMICS. Frozen decision_rule C4 triggers MEASUREMENT_INVALID: shuffled-action null mean 0.407 bits exceeds |0.1| threshold by 4.07x. Audit confirms this is intrinsic to weighted-averaged PMI estimator across deterministic/stochastic strata (31.5% deterministic), not genuine signal. The K3-K2 difference test (designed to be ratio-based and immune to null centering) ALSO fails: point estimate 0.287 > 0.1 bits but bootstrap 95% CI [-0.275, 0.080] includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator is unstable under session resampling due to strata fragmentation. N=50000 exploratory shows bias is ASYMPTOTIC (K2 grows from 0.933 to 1.779), not finite-sample. Point estimates replicate parent exactly (K2 0.933, K3 1.221) confirming reproducibility, but the estimator does not converge to a meaningful information-theoretic quantity. Markov-vs-beyond-Markov question remains unresolved pending estimator revision."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a bias-corrected conditional mutual information estimator (equal-weight PMI, median PMI, or direct CMI via KSG/KNN) recover stable, finite-sample-convergent measurements on the 12-state hash-routed SPA, and does the corrected estimator detect K3-K2 > 0.1 bits with valid null centering — or does the weighted-averaged PMI bias (0.41 bits asymptotic) mask a genuinely zero beyond-Markov signal?",
+  "reason": "The experiment is MEASUREMENT_INVALID per frozen decision_rule C4 (null control |mean|=0.407 >> 0.1 threshold). Audit PASS confirms all recomputed metrics match producer within tolerance, but the PMI estimator has systematic positive bias that is asymptotic (K2 grows to 1.779 at N=50000), preventing any absolute PMI interpretation. The K3-K2 bootstrap CI includes zero, so even the ratio test is inconclusive. The root cause is the weighted-averaged PMI estimator's non-convergence: it does not converge to a meaningful information-theoretic quantity as N increases. The frozen decision rule is correctly applied. The Markov-vs-beyond-Markov question remains the highest-information open question for C-WEB-DYNAMICS, but it cannot be answered with the current estimator. A bias-corrected estimator is a prerequisite for any further PMI-based claims on this SPA class.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35403136807/result.json:metrics.k2_pmi_bits=0.933244, k3_pmi_bits=1.220508, k3_minus_k2_bits=0.287265, bootstrap CI [-0.275,0.080] includes zero, null_control mean=0.407 exceeds 0.1 threshold, positive_control passes (1.806>=1.0)",
+    "research/experiments/EXP-PHYSICS-35403136807/result.json:metrics.exploratory_n50000.k2_pmi=1.779 (asymptotic bias, +84.5% from N=5000 to N=50000)",
+    "research/experiments/EXP-PHYSICS-35403136807/audit.json:status=MEASUREMENT_INVALID, producer_claim_supported=true, V2_null_control_bias_confirmed (critical), V4_bootstrap_CI_includes_zero (critical), V7_N50000_bias_asymptotic (high), V10_estimator_identifiability (high)",
+    "research/experiments/EXP-PHYSICS-35403136807/audit.json:recomputed_metrics bootstrap_k3_minus_k2 difference=-0.1086 CI [-0.275,0.080] match producer; bootstrap means mismatched (stale values in result.json)",
+    "research/experiments/EXP-PHYSICS-35403136807/audit.json:recomputed_metrics determinism_K3 89/732 (ratio 0.108) vs producer 467/354 (ratio 0.569) — producer count inflated by 378",
+    "research/experiments/EXP-PHYSICS-35403136807/spec.json:decision_rule C4 null_control |mean|<0.1 gates MEASUREMENT_INVALID; C1 primary K3-K2>0.1 AND CI lower>0",
+    "research/experiments/EXP-PHYSICS-35403136807/report.md: MEASUREMENT_INVALID diagnosis, bootstrap instability, asymptotic bias finding",
+    "research/experiments/EXP-PHYSICS-35403136807/provenance.json:in-memory simulation, python 3.12, numpy 2.5.3, run_experiment.py sha256 ee70ff1814c217c291968db3ac36b1e5fb2dbdb1b8a9a6ca51db05e97785ba8e",
+    "research/experiments/EXP-PHYSICS-35402003775/handoff.json:carry_forward established K2=0.933 K3=1.221 null bias intrinsic to PMI weighted averaging, null centering failure across 4 frameworks"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a bias-corrected conditional mutual information estimator (equal-weight PMI, median PMI, or direct CMI via KSG/KNN) recover stable, finite-sample-convergent measurements on the 12-state hash-routed SPA, and does the corrected estimator detect K3-K2 > 0.1 bits with valid null centering — or does the weighted-averaged PMI bias (0.41 bits asymptotic) mask a genuinely zero beyond-Markov signal?",
+  "why_next": "This experiment demonstrates the weighted-averaged PMI estimator is asymptotically non-convergent (K2 grows from 0.933 at N=5000 to 1.779 at N=50000) with systematic positive bias ~0.41 bits (null mean 0.407, 4.07x threshold). The estimator fails identically across 5 frameworks (parametric bootstrap 0.357, Miller-Madow 0.407, conditional entropy -0.814, within-stratum 0.417, shuffled-action 0.407) confirming the bias is intrinsic to PMI weighted averaging across heterogeneous strata, not permutation scheme or estimator variant. The K3-K2 ratio test (designed to avoid null centering) also fails: bootstrap CI includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator fragility under session resampling. The Markov-vs-beyond-Markov question remains the highest-information open question for C-WEB-DYNAMICS but requires a convergent estimator before any PMI-based inference is valid. A bias-corrected estimator is the minimum prerequisite for continuing the PMI research program on this SPA class.",
+  "carry_forward": {
+    "established": [
+      "Weighted-averaged PMI estimator is asymptotically non-convergent: K2 PMI grows from 0.933 (N=5000) to 1.779 (N=50000, +84.5%). Bias is not finite-sample. (EXP-PHYSICS-35403136807 result.json:metrics.exploratory_n50000)",
+      "Null control bias floor ~0.41 bits is intrinsic to weighted-averaged PMI across deterministic/stochastic strata (31.5% deterministic at N=5000, 2.6% at N=50000). Bias persists across 5 independent frameworks with range 0.357-0.417 bits. (EXP-PHYSICS-35403136807 audit.json V2; EXP-PHYSICS-35402003775 handoff carry_forward)",
+      "K2 PMI = 0.933 bits and K3 PMI = 1.221 bits are reproducible point estimates (within rounding across 3+ experiments). Reproducibility is not the issue; interpretability is. (EXP-PHYSICS-35403136807 audit.json V1)",
+      "Bootstrap CI for K3-K2 includes zero [-0.275, 0.080] and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator fragility under session resampling due to action-history strata fragmentation (821 total, 510 used). (EXP-PHYSICS-35403136807 audit.json V4)",
+      "Positive control validates PMI pipeline on fully deterministic SPA: K3 PMI = 1.806 >= 1.0, p = 0.001. (EXP-PHYSICS-35403136807 result.json:controls.C3-POSITIVE-CONTROL)",
+      "K1 (1.531) > K2 (0.933) on this SPA: marginal action predictability exceeds state-conditioned predictability due to coarse vs fine strata weighting, not information content inversion. (EXP-PHYSICS-35403136807 audit.json V8)",
+      "Fragment-stripping destroys all state information: normalized PMI = 0.0 bits on TodoMVC. (EXP-PHYSICS-35290611436, EXP-PHYSICS-35308806126)",
+      "SPA environment has beyond-Markov structure by construction: choose_next(current,action,prev1,prev2) depends on 2-step history, so a valid estimator SHOULD detect K3>K2. (EXP-PHYSICS-35403136807 audit.json V9)"
+    ],
+    "rejected": [
+      "Weighted-averaged Laplace-smoothed conditional PMI as an identifiable information-theoretic quantity: asymptotically non-convergent (N=50000 gives 1.779 vs 0.933 at N=5000). (EXP-PHYSICS-35403136807)",
+      "Parametric bootstrap as null centering for hash-routed SPAs: null mean 0.357, 3.57x above threshold. (EXP-PHYSICS-35402003775)",
+      "Miller-Madow bias correction as null centering: null mean 0.407, 4.07x above threshold. (EXP-PHYSICS-35402003775)",
+      "Conditional entropy framework for deterministic SPAs: degenerate H_full=0.0. (EXP-PHYSICS-35402003775)",
+      "Within-stratum conditional permutation as null centering: null_mean=0.417, 4.17x above threshold. (EXP-PHYSICS-35389142077)",
+      "Shuffled-action permutation as null centering: null_mean=0.407, same bias floor. (EXP-PHYSICS-35403136807)",
+      "Beyond-Markov URL-level PMI on TodoMVC hash-SPAs: 0/5 variants achieve K3 PMI > 0.05 bits. (EXP-PHYSICS-35290611436, EXP-PHYSICS-35308806126)",
+      "Title-aware PMI on TodoMVC: 0/5 variants have >=2 unique titles. (EXP-PHYSICS-34266105229, EXP-PHYSICS-35209110569)",
+      "DOM structural features as predictive state beyond URL on TodoMVC degenerate demos. (EXP-PHYSICS-34524411213)"
+    ],
+    "unknown": [
+      "Whether a bias-corrected estimator (equal-weight, median, KSG, or consistently smoothed) would recover stable K3-K2 measurements and whether the true conditional mutual information is >0.1 bits in this 12-state SPA.",
+      "Whether the 0.287-bit K3-K2 point estimate contains any real beyond-Markov signal or is entirely estimator artifact; cannot be distinguished until bias-corrected re-run.",
+      "Root cause of K3 bootstrap instability: strata fragmentation vs trajectory correlation vs estimator nonlinearity.",
+      "Asymptotic behavior at larger N (N=100000+): does K2 PMI plateau after 1.779 or continue growing? What is the limit?",
+      "Why K1 > K2 (marginal > state-conditioned PMI) and whether this inversion is property of hash-routed SPA or purely estimator weighting artifact.",
+      "Whether SPAs with 0% deterministic strata would eliminate null bias (deterministic strata are 31.5% at N=5000, contribute PMI=0 diluting weighted average).",
+      "Whether production SPAs with stochastic transitions, browser-collected data, or richer state representations would exhibit measurable beyond-Markov structure with any estimator."
+    ],
+    "do_not_assume": [
+      "C-WEB-DYNAMICS is globally false. The 0.933-bit K2 PMI signal is real and reproducible. The MEASUREMENT_INVALID verdict is due to estimator non-convergence, not absence of signal.",
+      "Null bias is evidence against beyond-Markov signal. The permutation bias is intrinsic to PMI weighted averaging; it prevents interpretation but does not falsify the underlying dynamics.",
+      "All PMI null frameworks are exhausted. Truly orthogonal frameworks (Bayesian model comparison, likelihood ratio tests, non-PMI information-theoretic quantities) are untested.",
+      "The 0.933-bit K2 PMI demonstrates beyond-Markov dynamics in the C-WEB-DYNAMICS sense. The test is I(url_after; action | url_before, prev1, prev2) without history-conditioned baseline comparison.",
+      "Production SPA results generalize from this simulation. The 12-state SPA has 12 states, 4 deterministic candidates, hash-based selection, no anti-bot/auth/visual complexity.",
+      "The bias floor of ~0.41 bits at N=5000 is irreducible. Alternative estimators or different SPA designs may reduce or eliminate it.",
+      "K3-K2 difference of 0.287 bits reflects genuine beyond-Markov signal. Bootstrap instability (mean -0.109, CI includes zero) indicates the estimate is unreliable.",
+      "Phase 2 production testing was precluded by infrastructure. It was precluded by Phase 1 methodology falsification (estimator non-convergence); production testing requires valid estimator before being interpretable."
+    ]
+  },
+  "dependencies": [
+    "Bias-corrected PMI estimator development: equal-weight, median, direct CMI (KSG/KNN), or consistently smoothed joint that converges as N increases",
+    "Re-run K3-K2 signal decomposition with corrected estimator on same 12-state hash-routed SPA (same RNG seed 42 for reproducibility)",
+    "N=50000+ with corrected estimator to confirm convergence (not just bias reduction)",
+    "SPA design with 0% deterministic strata to test whether deterministic/stochastic mixing is the structural cause of null bias",
+    "Bayesian model comparison or likelihood ratio test as truly orthogonal framework not dependent on PMI weighted averaging",
+    "Production SPA with Playwright browser automation and >=5000 non-leakage transitions (requires valid estimator first)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35403136807/spec.json:question, hypothesis H1/H0/H2, falsifier C1-C5, decision_rule",
+    "research/experiments/EXP-PHYSICS-35403136807/result.json:metrics k1/k2/k3/bootstrap/null/positive/exploratory, controls, observations, validity_notes, unresolved",
+    "research/experiments/EXP-PHYSICS-35403136807/audit.json:status MEASUREMENT_INVALID, V2_null_control (critical), V4_bootstrap_CI (critical), V7_asymptotic_bias (high), V10_identifiability (high), claim_ceiling",
+    "research/experiments/EXP-PHYSICS-35403136807/report.md:MEASUREMENT_INVALID diagnosis, bootstrap instability, asymptotic bias, estimator non-convergence",
+    "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json:SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade, 5000 transitions",
+    "research/experiments/EXP-PHYSICS-35403136807/raw_results.json:SHA256 c89bbb85da7ad6aa8e0f3c5e8b785a4590f2bb1ff8d61d2a6954aae009048ee4",
+    "research/experiments/EXP-PHYSICS-35403136807/run_experiment.py:SHA256 ee70ff1814c217c291968db3ac36b1e5fb2dbdb1b8a9a6ca51db05e97785ba8e",
+    "research/experiments/EXP-PHYSICS-35402003775/handoff.json:carry_forward established/rejected/unknown/do_not_assume, parent null centering failure across 4 frameworks",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS, events from EXP-PHYSICS-35402003775"
+  ],
+  "recommended_action": "Design an estimator-revision experiment: develop and validate a bias-corrected conditional mutual information estimator (equal-weight PMI across strata, median PMI, or direct CMI via KSG/KNN) that converges as N increases. Apply to same 12-state hash-routed SPA (SEED=42) at N=5000 and N=50000. Decision rule: if corrected estimator's null control |mean| < 0.1 AND K3-K2 > 0.1 with bootstrap CI lower > 0.0, the beyond-Markov question is answered. If null control still fails, the problem is environment-level (deterministic strata mixing) not estimator-level, and SPA redesign is needed. If corrected K3-K2 <= 0.1 or CI includes 0, the signal is Markov. This is the minimum prerequisite before any further PMI-based claims on this SPA class."
+}
