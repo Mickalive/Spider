@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35470447439",
+  "lane": "intel",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M1_canonical_recipe_ranking_agreement_full_dom": null,
+    "M2_pertask_recipe_ranking_agreement_full_dom": null,
+    "M3_delta_vs_truncated_first20": null,
+    "M4_bootstrap_ci_canonical": null,
+    "M5_pipeline_eta2_full_dom": null,
+    "M6_canonical_recipe_eta2_full_dom": null,
+    "M7_pertask_recipe_eta2_full_dom": null,
+    "baseline_truncated_first20": {
+      "B1_canonical_agreement_55.95pct": 0.5595,
+      "B2_pertask_agreement_78.65pct": 0.7865,
+      "B3_non_recipe_ranking_100pct": 1.0,
+      "B4_pipeline_eta2_0.999645": 0.999645,
+      "B5_blocked_c3_gate_0_7_tasks": 0
+    }
+  },
+  "controls": {
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE": {
+      "expected": ">=5 tasks have locatable_sample >20 elements",
+      "observed": "0/7 tasks have locatable_sample >20 elements",
+      "pass": false,
+      "evidence": "research/experiments/EXP-INTEL-35462974425/analysis_output.json c3_gate"
+    },
+    "PC1_RAW_FEATURES_REPRODUCE_FULL_DOM": {
+      "expected": "All three features: eta2 >= 0.99 on page_type",
+      "observed": "Truncated-first-20: tag_entropy eta2=1.0, form_fraction eta2=1.0, total_area eta2=1.0",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35462974425/analysis_output.json pc1_positive_control",
+      "note": "PC1 runs on truncated-first-20 data only; full DOM PC1 blocked by Docker unavailability"
+    },
+    "NC1_HIERARCHY_NORMALIZED_FULL_DOM": {
+      "expected": "Normalized hierarchy density: eta2 < 0.01",
+      "observed": "Truncated-first-20: eta2=0.0 (all group means ~3.69e-7)",
+      "pass": true,
+      "evidence": "research/experiments/EXP-INTEL-35462974425/analysis_output.json nc1_null_control",
+      "note": "NC1 runs on truncated-first-20 data only; full DOM NC1 blocked by Docker unavailability"
+    },
+    "DOCKER_SUBSTRATE_AVAILABLE": {
+      "expected": "Docker image am1n3e/webarena-verified-shopping:latest accessible",
+      "observed": "Docker image not available locally, pull timed out after 120s",
+      "pass": false,
+      "evidence": "docker images output: empty; docker pull timeout"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/analysis_output.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Analysis output from truncated-first-20 data (baseline context)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "description": "Original truncated-first-20 raw data (all locatable_sample arrays length 20)"
+    }
+  ],
+  "observations": [
+    "Docker image am1n3e/webarena-verified-shopping:latest is not available locally and pull timed out after 120 seconds. The image may need to be pulled from a registry or built locally.",
+    "Without the Docker container, the Magento site at localhost:8080 is inaccessible, preventing full DOM data collection.",
+    "The frozen analyze.py was run on existing truncated-first-20 data for baseline context. Results confirm: C3 gate fails (0/7 tasks >20 elements), PC1 passes (all eta2=1.0), NC1 passes (eta2=0.0), non-recipe pipeline max eta2=0.999645.",
+    "All 7 tasks have locatable_sample truncated to exactly 20 elements, confirming the root cause identified in EXP-INTEL-35462974425.",
+    "The experiment design (analyze.py, decision_rule, baselines) is ready to execute on full-DOM data once Docker substrate becomes available."
+  ],
+  "validity_notes": [
+    "This is an infrastructure failure, not a scientific negative. The full DOM hypothesis remains UNTESTED.",
+    "The BLOCKED status is triggered by Docker substrate unavailability, not by the C3 gate on collected data. The C3 gate would be evaluated after successful data collection.",
+    "The baseline metrics from truncated-first-20 data are provided for context but are NOT the primary measurement of this experiment.",
+    "The frozen design is ready for re-execution: only the data collection phase (Phase A) is blocked.",
+    "No new task definitions or sites were introduced. Same Docker image, same seed, same viewport as parent experiments.",
+    "The 7 tasks (3 listing, 3 detail, 1 cart) are defined in the parent raw evidence and remain unchanged."
+  ],
+  "unresolved": [
+    "Can the Docker image am1n3e/webarena-verified-shopping:latest be made available (pulled from registry, built from Dockerfile, or restored from cache)?",
+    "Once Docker substrate is available, can full DOM locatable_sample (all elements with bbox, n=21-82 per task) be collected for the 7 existing tasks?",
+    "Will canonical recipe ranking agreement cross the 80% threshold at full element diversity, unblocking the MIXED program?",
+    "Is the ranking instability a truncation artifact (testable at full DOM) or structural limitation (closes recipe density design path)?",
+    "What is the smallest next action to unblock this experiment? Answer: Make Docker image am1n3e/webarena-verified-shopping:latest available in the execution environment."
+  ]
+}

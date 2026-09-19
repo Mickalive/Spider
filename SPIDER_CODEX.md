@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **172**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **173**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -182,6 +182,7 @@ Validated experiments: **172**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35456070379 | graph | FAIL | MEASUREMENT_INVALID — Frozen decision_rule triggers REJECTED on C3 (|r|=0.1737 > 0.15, CI [-0.259, -0.085] excludes zero and exceeds equivalence bounds) and C4 (TOST p_lower=0.702 > 0.05, equivalence FAIL). However, the audit identifies two high-severity measurement validity gaps that prevent a clean scientific falsification: (1) V1 residual request_id entropy confound (audit V1_residual_request_id_confound) — headers-only extraction replaced the error-body confound (r=0.375 parent) with a request_id-entropy confound (valid entropy mean 3.542 vs expired 3.233, p=2.7e-34, valid structural mean 0.4056 vs expired 0.3539, p=0.00013) because the testbed generates request_id differently for valid (UUID 36-char) vs expired (token_hex 16-hex) responses; (2) V2 B-FLASK-ONLY baseline degenerate (audit V2_baseline_B_FLASK_ONLY_degenerate) — behavioral_delta is constant 0.0 for all 480 samples (std=0) because flask_only_server.py implements no token validation, producing r=NaN; C6 PASS is trivially true and uninformative. The experiment is MEASUREMENT_INVALID because the structural signal definition is not independent of behavioral state (violates spec measurement_validity #8) and the baseline comparison is unexecutable. The frozen REJECTED outcome is valid for this specific flawed implementation but does NOT constitute evidence that infrastructure (CDN/OAuth/dynamic content) breaks orthogonality. The prior localhost-mock orthogonality confirmation (r=0.0022-0.046, EXP-GRAPH-35389145821, EXP-GRAPH-35353011131) remains the cleanest evidence for C-FRESHNESS. No advancement of C-FRESHNESS toward VALIDATED; status remains EXPERIMENTAL bounded to stochastic mock. | C-FRESHNESS | `23f71a3e5384` |
 | EXP-RUNTIME-35456070671 | runtime | PASS | SURVIVES_CURRENT_TEST | C-MEAS-VALID | `23d3812fefe1` |
 | EXP-INTEL-35462974425 | intel | PASS | BLOCKED — C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 → BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification. | C-MEAS-VALID | `dd87835fc927` |
+| EXP-INTEL-35470447439 | intel | BLOCKED | BLOCKED | C-MEAS-VALID | `b8c47aeabfe1` |
 
 ## Latest recorded claim events
 
@@ -192,7 +193,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35456070379 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-35462974425 | intel |
+| C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-35470447439 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35434772331 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |

@@ -2085,6 +2085,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "HYPOTHESIS",
         "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35470447439",
+        "lane": "intel",
+        "created_at": "2026-09-19T21:27:18.243275+00:00",
+        "decision": "BLOCKED",
+        "source_commit": "b8c47aeabfe1ed7fbeda65056c425763d500e1f2",
+        "claim_id": "C-MEAS-VALID",
+        "status": "HYPOTHESIS",
+        "reason": "No change. BLOCKED run provides zero new evidence: Docker substrate unavailable, no full-DOM data collected, no decision gates C1-C7 evaluated. C-MEAS-VALID remains HYPOTHESIS at parent ceiling. The full-DOM recipe ranking stability hypothesis (canonical agreement >=80% at n=21-82) is UNTESTED."
       }
     ]
   },
@@ -2160,14 +2170,14 @@
       "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-INTEL-35462974425",
+      "experiment_id": "EXP-INTEL-35470447439",
       "lane": "intel",
-      "created_at": "2026-09-19T19:00:41.860908+00:00",
-      "decision": "BLOCKED \u2014 C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 \u2192 BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
-      "source_commit": "dd87835fc927ead19f6f3e31a7fb9951b954cdc4",
+      "created_at": "2026-09-19T21:27:18.243275+00:00",
+      "decision": "BLOCKED",
+      "source_commit": "b8c47aeabfe1ed7fbeda65056c425763d500e1f2",
       "claim_id": "C-MEAS-VALID",
       "status": "HYPOTHESIS",
-      "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
+      "reason": "No change. BLOCKED run provides zero new evidence: Docker substrate unavailable, no full-DOM data collected, no decision gates C1-C7 evaluated. C-MEAS-VALID remains HYPOTHESIS at parent ceiling. The full-DOM recipe ranking stability hypothesis (canonical agreement >=80% at n=21-82) is UNTESTED."
     }
   }
 }
