@@ -1079,6 +1079,16 @@
         "reason": "C-FRESHNESS remains EXPERIMENTAL. Structural signal validated (C1 passes, discrimination 0.8333 replicating EXP-RUNTIME-33902315583). Behavioral drift detection validated in isolation (C2 TP=1.0). Orthogonality NOT tested in this experiment due to measurement invalidity (behavioral variance=0.0). Parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock. C3 requires re-run with redesigned behavioral_score and stochastic server. No product promotion warranted."
       },
       {
+        "experiment_id": "EXP-GRAPH-35445595108",
+        "lane": "graph",
+        "created_at": "2026-09-19T13:23:14.746307+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Audit V1_CRITICAL_SHARED_VARIABLE_CONFOUND: structural signal is defined as hash(body)%10000 including 401 error response bodies. When tokens expire, testbed_server.py @require_token returns 401 before applying ETag/Cache-Control, leaving etag='' cache_control='' and constant body hash (f6d40dd42dff2b868cbd3c36246e3f97471) for all 240 expired samples (structural std=0.0). Valid-token samples have varied bodies (structural std=0.2648, 167 unique values). Behavioral signal is binary 0 (valid) vs 7 (expired). Pearson r=0.375 is a forced mean-shift between degenerate and varied distributions, not independent CDN/OAuth correlation. This violates spec.json measurement_validity clause 7 (no shared variables between signal domains) and clause 1 (structural variation independent of behavioral state). The observed r=0.375 is a valid descriptive statistic for this implementation but measurement-invalid for the frozen hypothesis. Audit MEASUREMENT_INVALID confirmed with 8 required_fixes. C-FRESHNESS maximum justified ceiling remains localhost Flask mock: pooled r=0.0022 CI upper 0.0916 < 0.15 (EXP-GRAPH-35389145821, audit PASS) and stochastic mock r=0.0463 CI upper 0.135 < 0.15 (EXP-GRAPH-35353011131, audit PASS). No advancement toward VALIDATED or PRODUCT_CORE warranted."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-35445596342",
         "lane": "product",
         "created_at": "2026-09-19T13:23:17.363378+00:00",

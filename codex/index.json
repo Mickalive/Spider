@@ -151,7 +151,7 @@
       "decision": "PARAM-INHERIT-SUBSTRATE-BROKEN",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "c72fbcd7da6a20452c55d684a4e7d32fd615eac1",
       "hashes": {
         "request.json": "e21c8ef54aaa8677b1814e8641e8df61b03358ffa51e94287a5de0599a73a0f9",
@@ -178,7 +178,7 @@
       "decision": "COMPETITION-UNSAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "bd318921b4ff04b7d690608708f66548b1a74aba",
       "hashes": {
         "request.json": "ec06d399ca66fee7293ec6c7260b15349854d57bfecf249cdb5e0066044bcf73",
@@ -341,7 +341,7 @@
       "decision": "COMPETITION-SAFE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "db32eb7948b01908e422a7ec66d465c6db6581a4",
       "hashes": {
         "request.json": "477aec3869b8fe6ad5875de8e24fd3e856930b1eb36c765efed3c901edbfe6e8",
@@ -534,7 +534,7 @@
       "decision": "SCOPE-LIMITED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "6c7df8c31f4a41833ea76f81f4543a4cab56d3ea",
       "hashes": {
         "request.json": "4b53acf9a0f23b2434203d8fa79bebc7409de22a560f47020e98c775c0fd3aa0",
@@ -643,7 +643,7 @@
       "decision": "PARTIAL_VALIDATION",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "a208512f89013a0a104157e793349609fd3427cf",
       "hashes": {
         "request.json": "1ecf2440e6e1872cb02667017d912ad32f0dc8f2367781cccece88f9065406d5",
@@ -996,7 +996,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "b727aee7b0585da3e3670394fa25c20b54a472f8",
       "hashes": {
         "request.json": "bc755c2df004b5e6fb019da9e33ae55fc2722b1e76c6e3fc61487bc7a2c21b5a",
@@ -1023,7 +1023,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "ca57376ba74b4524c92be11f7dd9fc545697f9da",
       "hashes": {
         "request.json": "b21878c4933f8f841b0056fd14377a235c35ed93557756b907d387186ddde530",
@@ -1077,7 +1077,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "00bf4dd51b80ec66e60f11cfee757a4b0a0ace3c",
       "hashes": {
         "request.json": "c48613bd90a76990a0622d94b3ead95384fcfa30d05d9df244baf5de268c24f9",
@@ -1104,7 +1104,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "df9af4b6b730b12fa91816fa5fd592499cb781d6",
       "hashes": {
         "request.json": "49e55f0d601f0478c5bd0a6f883854a1db27fbe77d76cefd68571437c0c70ad2",
@@ -1185,7 +1185,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "968991590c035e9ce5821849d206a7ad2ded493f",
       "hashes": {
         "request.json": "2c5a03f4d4ca241aeff79df1acecd1c0f90a5fa3bf1709d515193e28bcd27242",
@@ -1239,7 +1239,7 @@
       "decision": "BLOCKED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "d742b1d9d82f1a59a62ed4297c8ce3fa6972d62b",
       "hashes": {
         "request.json": "635e45ce1c70234d773d59933bea81d8d5f2dcf35fb966ecc248c5ab948dd0f1",
@@ -1322,7 +1322,7 @@
       "decision": "BLOCKED_CLOSE_AND_PIVOT",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "34848357b257338eecf73b88b993195d58629860",
       "hashes": {
         "request.json": "3ba94d499c5c79aa09bf1be2163fdc84d99024e38e48261a67ac852e6b6c64fb",
@@ -1349,7 +1349,7 @@
       "decision": "SUPPORTED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "6c64f47170523c09a57a2b51e5dc5b724118324a",
       "hashes": {
         "request.json": "c5c7f947790fc1112561fb2c32de08a0079d779db03ee9b8c3eb3cf3fc11e204",
@@ -1566,7 +1566,7 @@
       "decision": "MIXED \u2014 H1 supported: kernel is deterministic exact-intent matcher (L97) with no URL template analysis, confirmed for complex aliasing types (query-param, path-rewriting, server-side routing) at equal confidence 0.9, n=6 aliased-first conditions (0/6 correct, binomial p=0.016). H2 falsified-in-setting: HTTP status-code grounding provides zero autonomous signal on jsonplaceholder.typicode.com (0/12 status differences across 12 aliased conditions; substrate returns 200 for malformed templates like /posts?id=1/comments). Body-based grounding is an exploratory non-autonomous finding (4/4 body differences in asymmetric scenarios B and C, but requires external oracle to determine correctness, produces false positives for equivalent templates in A and F). Experiment does not meet SURVIVES_CURRENT_TEST per frozen decision rule condition (4): for asymmetric scenarios B and C, HTTP execution per frozen status-code definition correctly identifies valid template in 0/4 cases, not 100%.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "0fc2196920aeb2ed772d83e524b079ebfd9ac9f9",
       "hashes": {
         "request.json": "49cc591ef0f8d0ca1de673e3bf5db3e35a83029a75f05cda389dd3db41f36b43",
@@ -1837,7 +1837,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "d72132df7f2336b3519a2519d0b3bda6d0d2e14e",
       "hashes": {
         "request.json": "655bcac7a22953c68b62d0edb662ff06b176a7881cc372597730f75286990cab",
@@ -2000,7 +2000,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "5a2e3b5ab3b60d164a263a252d635333d95e98f3",
       "hashes": {
         "request.json": "aa40376db7e624d11c7c0c84fad9256e8d7afd0c4e637cceb4bee33df95a05d8",
@@ -2110,7 +2110,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "78a2a667be8f291f6a0871b41d9f4c4baea4ddef",
       "hashes": {
         "request.json": "69878143db1e72811812a43265fed81f84ccfdfc8d2409438562d0bf254aeb8e",
@@ -2355,7 +2355,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "39381a4eda531fd7cf3c24f57e52ad934f040310",
       "hashes": {
         "request.json": "81185ed435facc3af36e857aee145293dcaf82234e80d8bcf882383bb580f251",
@@ -2463,7 +2463,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "8310a3a35cd4792a93d6a4d946536af217cce033",
       "hashes": {
         "request.json": "4e5fc91bf7008dc417a83d33cf93a30cf610393fdac2057540d07c888358b1b5",
@@ -2653,7 +2653,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "a605af55689dd0341a87ed8e07da1e9b1ef5f63e",
       "hashes": {
         "request.json": "e45c4c81142891b5bfdd694e1e08283ac3006a491a63100991b483b59c4523bf",
@@ -2763,7 +2763,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "73cf7767c67ae7847187fecad33aaa22ad09404a",
       "hashes": {
         "request.json": "ed47b0039a46ad7d79d3c81b07ab6d0131599ade0fa0fe096d922a28d7ee2998",
@@ -2899,7 +2899,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule fails on 2 of 4 conditions: C2 (noise tolerance) fails because optional_field_addition noise at 10% of schema size produces diff magnitude scaling with schema size (1.0 at n=10 to 5.0 at n=50, exceeding threshold 0.5 at all sizes), creating irreconcilable conflict with subtle drift (required_to_optional 0.3); C4 (type-aware validation) fails because mock server always returns data conforming to stale schema types, making type drift invisible to client validation (4.7% vs required 80%). C1 (drift detection) PASS \u2014 all 5 drift patterns produce diff 0.3-2.0. C3 (orthogonality) PASS \u2014 Pearson r=-0.59, confirming schema diff captures complementary structural information to Jaccard. Audit PASS confirms all recomputed metrics match producer. Audit V_C4_CONFORMANT_MOCK_TAUTOLOGY identifies C4 failure as measurement-invalid (mock conformance, not evidence against type-aware detection). However, C2 failure is genuine and structural: the magnitude confound persists because unbounded optional field additions dominate subtle structural drift by construction. Schema diff is a weak supplementary signal (detects required_to_optional invisible to Jaccard, r=-0.59) but cannot threshold-separate unbounded noise from drift. Does NOT close C-FRESHNESS domain; eliminates direct schema comparison as standalone discriminator.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "b1e824fdc2b9a81618afc8e9e887da152ed78056",
       "hashes": {
         "request.json": "9dfa5b73f0ceaf721ec7c3f50cd61f72ac291e6c0e5300f6ed5692f464d9d885",
@@ -2953,7 +2953,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "b33a49f8d730a87c585ae5c67faae9ad1c496853",
       "hashes": {
         "request.json": "06c6b660e6e9754840809ab991b92b30dd8abffc394ec4705341675de783a972",
@@ -2980,7 +2980,7 @@
       "decision": "C4-ORTHOGONALITY-CONFOUNDED",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "b92ea780fafa9475defbc745bebbf44d443f7566",
       "hashes": {
         "request.json": "f2057627db34b8a252593d6ec0915e650894bd5dd5776686b06614312e1ae7bb",
@@ -3143,7 +3143,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "b5b889919fbc45f440260bde41c2ce0e89453fa7",
       "hashes": {
         "request.json": "f80b558dd22f5be409b26e6b0dd266e822c25eaf5c1ed2e4566582365f680da0",
@@ -3279,7 +3279,7 @@
       "decision": "FAIL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "1b5a41d143129f351c76540eeb4ed88859f75c33",
       "hashes": {
         "request.json": "b1b39fd01f3e44de6dee4f50b72887819ac52821cc0abc2fa8aed4242382abcb",
@@ -3387,7 +3387,7 @@
       "decision": "FAIL",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "38b90f1ac84c2067d76235189565d25e353105eb",
       "hashes": {
         "request.json": "234bc3e6c2106f81964207049631f8999c694b3d159ee7296780129d5c2a7fcb",
@@ -3659,7 +3659,7 @@
       "decision": "MIXED \u2014 Frozen conjunctive gate C3 fails on permutation p (0.465 > 0.05) but |r|=0.0335 < 0.3 passes magnitude. Power analysis confirms n=480 is provably underpowered: minimum detectable |r|=0.0895 at n=480, minimum n=1538 required for |r|=0.05 at alpha=0.05. Near-zero correlation (r\u00b2=0.001) with explicit power bound is a valid scientific finding requiring decision-rule revision, not evidence of non-orthogonality. C1-C2 PASS, C4 PASS. Audit PASS confirms all recomputed metrics match producer. The preregistered MIXED outcome class correctly applies.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "c5dbdafd8068a8758c6efa7ab2ab394470730230",
       "hashes": {
         "request.json": "b235741bb3e92383db52f7f3176f87ce2b0b099b12c38392ed2ded9e7097265d",
@@ -3741,7 +3741,7 @@
       "decision": "MIXED \u2014 C1-C2-C4 PASS verified from parent. C3_equivalence passes for delta >= 0.15 (CI upper bound 0.123 < 0.15) but fails for delta <= 0.12 (CI upper bound 0.123 > 0.12). Per frozen decision_rule section 9, MIXED applies when C1-C2-C4 PASS and C3 passes only for delta >= 0.15. Audit PASS confirms all primary metrics (r=0.0335, CI [-0.056, 0.123], TOST p_upper values) match producer within numerical precision. Audit identifies required_fixes for per_condition_correlations table errors (PB conditions report b_mean=0.333 b_std=0.0 instead of true values from raw_evidence) and delta_sample_size_tradeoff min_n_tost values (~4x too small under Fisher z TOST), but these do not affect the primary C3 decision (CI bound 0.123 < 0.15 passes regardless). Bounded confirmation: behavioral-structural signal orthogonality is established at delta=0.15 (shared variance < 2.25%, > 97.75% independent) on deterministic Flask 3.1.3 + PyJWT HS256 localhost with graded session_status_check. Not established at delta=0.10 (CI needs n ~ 865 vs current 480). C-FRESHNESS advances from EXPERIMENTAL toward bounded product-relevant confirmation at delta=0.15 but does NOT reach VALIDATED or PRODUCT_CORE \u2014 inference limited to deterministic mock; real APIs, stochastic behavior, alternative algorithms untested.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "d1d04e16a8aabe6cc137c2b8f04dc0633aec074c",
       "hashes": {
         "request.json": "85a2096b2bb5dc7aa7ddfa6e7b1607344cc08e527adc3320f6cb52cbd8d36968",
@@ -3850,7 +3850,7 @@
       "decision": "PASS \u2014 C1-C2-C4 PASS verified from producer and independent audit. C3_equivalence passes at delta=0.15: CI upper bound 0.1353 < 0.15, TOST p_upper=0.0110. Audit PASS confirms all recomputed metrics (r=0.0463, Fisher z=0.0463, SE=0.0458, CI [-0.0434, 0.1353]) match producer within numerical precision. This is the first PASS with all four frozen decision conditions met after the parent's MIXED result on deterministic Flask. Orthogonality confirmed under stochastic DB/cache/timing/algorithm conditions at delta=0.15. NOT established at delta=0.10 (CI upper 0.135 > 0.10, TOST FAIL). C-FRESHNESS advances from EXPERIMENTAL with bounded confirmation under stochastic mock conditions; does NOT reach VALIDATED or PRODUCT_CORE.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "a6ba32ab0a6721731d99f947a2f365a17577fb10",
       "hashes": {
         "request.json": "e9d4608b9fd63ecd7d169070051a4a617c4f73c2df1e6fb9bf33c3314ce22ab4",
@@ -3958,7 +3958,7 @@
       "decision": "REVISE \u2014 Frozen decision_rule condition C3 fails (CI upper 0.2372 \u2265 0.15, TOST p_upper=0.286) and spec.json decision_rule maps CI upper \u2265 0.20 to FAIL. However, the audit identifies three confounds that make this failure indeterminate rather than a clean falsification of the orthogonality hypothesis under HTTP caching: (1) HTTP conditional caching was never operationally exercised \u2014 run_experiment.py never sends If-None-Match headers, so the 304/ETag code path in mock_server.py is untested; the experiment tests only declarative Cache-Control/ETag header presence, not operational HTTP caching; (2) n=240 is underpowered versus the parent n=480 (SE 0.065 vs 0.046, CI width ~0.25 vs ~0.18); the CI widening from 0.135 to 0.237 is partly a sample-size artifact, not solely an HTTP caching effect; (3) per-caching-mode heterogeneity is opposite to the hypothesis \u2014 cache_enabled r=-0.0055 (TOST PASS p=0.045 at delta=0.15) while cache_disabled r=0.217 (TOST FAIL), suggesting sampling noise or structural signal variance differences rather than HTTP caching as a common cause. The maximum justified claim is: C-FRESHNESS orthogonality at delta=0.15 is NOT confirmed on this evidence (pooled r=0.114, CI upper 0.237), but the failure is measurement-confounded and does NOT falsify the hypothesis that HTTP caching preserves orthogonality. C-FRESHNESS remains EXPERIMENTAL; no status advancement or rejection warranted. The parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) remains the established baseline \u2014 this experiment neither supersedes nor falsifies it.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "427f948e7a77f30e7bac3d81c1faf82f51003ee2",
       "hashes": {
         "request.json": "536d2652c92e3a6228ae03fba06b187cb7da1bdb09bc4a6751dfbbd2c852b059",
@@ -4120,7 +4120,7 @@
       "decision": "PASS \u2014 All five frozen decision criteria pass: C1_drift_tp PASS (mean TP=1.0, all Wilson lower >0.75), C2_variance PASS (4/4 conditions with std>0 for both signals), C3_equivalence PASS (pooled r=0.0022, 95% CI [-0.0874, 0.0916], CI upper 0.0916 < 0.15, TOST p_upper=0.0006), C4_null_control PASS (FP=0.0 on 240 noise-only samples), C5_304_exercised PASS (304 rate=0.3333 in cache_enabled conditions). Audit PASS confirms all recomputed metrics match producer. C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED under operational HTTP conditional caching with proper If-None-Match/304 manipulation at n=480. This extends the parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) to include HTTP caching semantics. Claim ceiling bounded to stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory TTL 0.5s + jitter 1-5ms + HS256/RS256 JWT + HTTP caching (Cache-Control max-age=5 / no-store, ETag-SHA256, If-None-Match ->304 at 33.3%) on localhost. NOT validated for production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, or real API schemas. No product promotion warranted from mock alone.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "673e930b26faa8182cf38f77e9490df5a882c1ad",
       "hashes": {
         "request.json": "81a78a21fa027c9da4dc3ecfc9c7fc938832eb30fbc6b8dcdb1cbfdf8e267bfa",
@@ -4255,7 +4255,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 frozen decision_rule condition C2_variance fails (0/3 endpoints have std > 0 for either signal) and C3_equivalence fails (Pearson r undefined 0/0, CI [0.0, 1.0] uninformative). Both signals have zero variance across all 60 paired samples because the selected public API endpoints return deterministic identical responses (GitHub 403 rate-limited for all unauthenticated requests, JSONPlaceholder returns identical JSON every time). This is an environment ceiling (insufficient endpoint selection), not a scientific falsification of the C-FRESHNESS orthogonality hypothesis. C-FRESHNESS orthogonality at delta=0.15 remains confirmed ONLY under localhost mock (parent EXP-GRAPH-35389145821: pooled r=0.0022, CI upper 0.0916 < 0.15). No extension to real external APIs is established. Audit PASS confirms all recomputed metrics match producer; 8 required_fixes identified including endpoint redesign, sample size restoration, and baseline execution.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/graph",
-      "source_ref_head": "4a68eaf867c1574ede73d45257ccc1a47c3eee15",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
       "source_commit": "0aace1fdb4fd601fd666616fdb381a04692e93ad",
       "hashes": {
         "request.json": "31aebca73775d5da7c520373006c1bcb32c0ed686a05e656553b34a011683ef8",
@@ -4458,6 +4458,33 @@
         "audit.json": "7486293f0a115cbe08dc41ae84afedcd354eb1ac024006789faa7e5f554c7676",
         "verdict.json": "3326888ec6db7674668c3439fc932815dd2657209bdcdeb263410cd1fd5e6661",
         "handoff.json": "2ee49f556b2b348ae351faae298bffc21d1361dbd5164fcbbb4e1a1a5edbba8f"
+      }
+    },
+    "EXP-GRAPH-35445595108": {
+      "lane": "graph",
+      "request_id": "2434a772e2f5557f3f03ccfe",
+      "created_at": "2026-09-19T13:23:14.746307+00:00",
+      "claim_ids": [
+        "C-FRESHNESS"
+      ],
+      "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on a production-like local testbed server with CDN simulation (varnish), OAuth2 middleware (PyJWT RS256), dynamic content (timestamps, request IDs, database-backed state), and configurable network latency \u2014 testing whether production-like infrastructure features introduce correlation that localhost Flask mock does not?",
+      "audit_status": "MEASUREMENT_INVALID",
+      "decision": "MEASUREMENT_INVALID",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/graph",
+      "source_ref_head": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
+      "source_commit": "10ba82fd3925737ed402c21986eb389dc9d0aeba",
+      "hashes": {
+        "request.json": "3f8e4eacd819c89205882e3ea0ea11d82ef37d538e70b48ccb18b0e22e280897",
+        "spec.json": "7ba5322780474895ace571137f4a1e6d9bf1a2fba0c4ff69d284edb211d2e43e",
+        "prereg.md": "f9c8f5207aa712a5a57c4268027d4de81424464aa6f710856cd3f34bf5a60cc7",
+        "freeze.json": "55d8b084ac78385558505c93159cca6deb1f40e89a8f801ba698e62ab009a699",
+        "result.json": "3f7b8de174db29eabc4becd861798e208dfd6551898e08bd4dd2a36365ca6efb",
+        "report.md": "5b79521effd21d6179d6f011373f4238cd1f3f5212cc97a38cb30d408c629e1f",
+        "provenance.json": "454f09f308806cc9283fd5e489970f16c2bc34bc08b461d0a2097d58855746d4",
+        "audit.json": "47591a2eb504e3c23a94bf1751efac44fb03f8ca0898d73f8fddafe385bbaf02",
+        "verdict.json": "b84509c9d14f004ecb6798651dbaafbbe67548efc500934adde9a0a7eaafc6be",
+        "handoff.json": "33a16bf5f1b15375a084a335c10f462a3ca61702a8f553f66a2d2f4d6dfe1d68"
       }
     },
     "EXP-PRODUCT-35445596342": {
