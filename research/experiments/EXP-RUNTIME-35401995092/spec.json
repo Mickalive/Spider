@@ -1,17 +1,48 @@
 {
   "experiment_id": "EXP-RUNTIME-35401995092",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression survive Transfer-Encoding: chunked through the localhost proxy with auth-aware cache configuration — closing the parent's explicit Content-Length-only scope gap before real CDN deployment?",
+  "hypothesis": "The parent (EXP-RUNTIME-35389142338) established that auth-aware caching restores decompressed body-only discrimination to 0.5 with Content-Length forwarding. However, the parent used Content-Length in all conditions and explicitly listed 'Does iterative decompression survive Transfer-Encoding: chunked through a real CDN proxy independently of Content-Length?' as unknown. Real CDNs commonly use chunked TE (especially for dynamic content, compressed responses, and streaming). The iterative decompression pipeline (brotli->gzip->identity looping to max_depth=5) operates on the logical body bytes, not on transport framing. If chunked TE is transparent to the decompressor (i.e., the proxy reassembles chunks into a coherent byte stream before the client decompresses), discrimination should remain at 0.5. If chunked TE causes the decompressor to receive incomplete frames (e.g., decompressor sees individual chunks as separate brotli streams, or chunk boundaries split multi-byte brotli symbols), discrimination will drop below 0.3 or decompression errors will appear.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any (auth_state, content_type x size) combination under chunked TE in either PASSTHROUGH or AUTH-AWARE CACHED mode, OR decompression errors > 0 for any chunked TE condition, OR decompressed hash for any auth state through chunked proxy differs from direct-server hash (determinism failure across transport framing), OR regression: Content-Length PASSTHROUGH discrimination drops below 0.5 (proxy infrastructure change breaks baseline), OR chunked AUTH-AWARE CACHED discrimination < 0.3 for any cell (caching + chunked interaction failure).",
+  "baselines": [
+    {
+      "id": "B-PARENT-CONTENT-LENGTH-0.5",
+      "description": "Parent established decompressed body-only discrimination 0.5 for Content-Length PASSTHROUGH and RECOMPRESS on localhost. Regression reference: proxy infrastructure must not degrade below this for Content-Length mode.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-PARENT-NAIVE-CACHED-0.0",
+      "description": "Parent NAIVE caching with (URL, Accept-Encoding) cache key yielded discrimination 0.0. Confirms cache-key semantics are unchanged.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-CHUNKED-CACHED-0.5",
+      "description": "If chunked TE is transparent to the decompressor and auth-aware caching works identically with chunked responses, CACHED discrimination should match Content-Length at 0.5. This is the primary test expectation.",
+      "expected_value": 0.5
+    }
+  ],
+  "positive_control": "C_CONTENT_LENGTH_REGRESSION: Content-Length PASSTHROUGH mode discrimination must equal 0.5 for all (auth_state, content_type x size) combinations — identical to parent. This confirms the proxy infrastructure is unchanged and any chunked TE effect is attributable to transport framing, not proxy drift.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Same mock origin server as parent: localhost Flask/stdlib, 4 auth states (no_auth, valid_token, expired_token, invalid_token), JSON/HTML/XML x 1KB/10KB/100KB, brotli quality 6 deterministic.",
+    "Same Python reverse proxy as parent on separate localhost port. Three configurations tested: (a) CL-PASSTHROUGH — Content-Length forwarding, PASSTHROUGH mode (parent baseline); (b) CHUNKED-PASSTHROUGH — Transfer-Encoding: chunked, PASSTHROUGH mode; (c) CHUNKED-CACHED — Transfer-Encoding: chunked, AUTH-AWARE CACHED mode (URL+Accept-Encoding+Authorization in cache key, Cache-Control: private, Vary: Authorization).",
+    "Origin server is configured to serve responses with Transfer-Encoding: chunked for the chunked conditions (no Content-Length header). Proxy forwards chunked encoding to client.",
+    "Accept-Encoding header from client: 'br, gzip, identity' in all conditions.",
+    "Content types: JSON, HTML, XML. Sizes: 1KB, 10KB, 100KB. Auth states: no_auth, valid_token, expired_token, invalid_token.",
+    "N=5 reps per (auth_state, content_type x size, config). 4 states x 9 conditions x 3 configs x 5 reps = 540 total requests.",
+    "Seed=44 for request ordering (same as parent for comparability).",
+    "Iterative decompression: decompress repeatedly (brotli->gzip->identity) until failure or max_depth=5. Same as parent.",
+    "Decompressed hash for each chunked response must match the direct-server hash from the parent for the same (auth_state, content_type, size). This is the determinism-across-transport-framing test."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for ALL (auth_state, config) combinations under chunked TE (both CHUNKED-PASSTHROUGH and CHUNKED-CACHED), (2) decompressed hash for each (auth_state, content_type, size) through chunked proxy matches the direct-server hash — determinism across transport framing, (3) B-RANDOM = 0.0 for all conditions, (4) C_CONTENT_LENGTH_REGRESSION passes (Content-Length PASSTHROUGH discrimination = 0.5 for all cells — reproducing parent), (5) 0 decompression errors across all chunked TE conditions, (6) chunked AUTH-AWARE CACHED discrimination >= 0.3 for all cells. FALSIFIED-IN-SETTING if chunked TE discrimination < 0.3 for any cell, OR any decompressed hash through chunked proxy differs from direct-server hash, OR decompression errors > 0 on chunked responses, OR Content-Length PASSTHROUGH drops below 0.5 (infrastructure regression). MEASUREMENT_INVALID if proxy fails to start, origin server unreachable through proxy, or chunked TE is not correctly applied (e.g., origin still sends Content-Length).",
+  "product_consequence_positive": "Iterative decompression survives chunked TE in both passthrough and cached modes. This closes the parent's explicit Content-Length-only scope gap and strengthens the case for real CDN readiness. Product team can proceed with chunked TE as a supported transport mode. The remaining blocker for C-MEAS-VALID shifts to real CDN infrastructure only (edge-specific concerns: Accept-Encoding negotiation, quality variation, geographic latency, CDN-specific header manipulation).",
+  "product_consequence_negative": "Chunked TE breaks iterative decompression (discrimination < 0.3 or decompression errors > 0). This identifies a specific transport-framing constraint that must be resolved before CDN deployment. Possible root causes: (a) decompressor cannot handle chunked stream framing; (b) proxy does not correctly reassemble chunks before forwarding; (c) chunk boundaries split brotli multi-byte symbols causing decompression failure. Each failure mode identifies a specific fix required before real CDN testing.",
+  "estimated_cost": "< 8000 tokens, < 3 minutes execution. 4 states x 9 conditions x 3 configs x 5 reps = 540 requests. Marginal cost beyond parent: minimal (same mock server, same proxy, only TE framing changed).",
+  "expected_information_gain": "HIGH. This is the minimum-cost experiment that closes the parent's explicit scope gap (Content-Length only) before real CDN investment. The parent identified chunked TE as an unknown and explicitly excluded it from its claim ceiling. If chunked TE passes: the real-CDN experiment can focus on edge-specific concerns without transport-framing worry. If chunked TE fails: there is a specific proxy/decompressor issue that must be resolved locally first, saving the cost of a failed real-CDN deployment. Either outcome is strictly more informative than either (a) repeating the parent or (b) jumping to real CDN with an untested transport mode."
 }
