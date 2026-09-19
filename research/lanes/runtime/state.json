@@ -8,7 +8,7 @@
   "next_question": "Can decompressed payload byte-equality to ground-truth uncompressed body be verified via direct correctness controls (compare decompressed output to expected uncompressed body per state, or to direct origin fetch without proxy), establishing that iterative decompression actually produces correct output rather than silently falling back to compressed bytes that happen to preserve state-grouping discrimination?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-19T16:49:00.046488+00:00",
+  "updated_at": "2026-09-19T19:00:44.236182+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "2ee49f556b2b348ae351faae298bffc21d1361dbd5164fcbbb4e1a1a5edbba8f",
   "same_failure_count": 1,
