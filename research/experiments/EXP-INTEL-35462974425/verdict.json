@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35462974425",
+  "lane": "intel",
+  "decision": "BLOCKED — C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 → BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
+    }
+  ],
+  "product_action": "NO_ACTION — BLOCKED status carries no product consequence. The MIXED verdict from parent EXP-INTEL-35445596324 remains the latest valid evidence. Recipe density viability for MIXED handling is unresolved. Product lane must continue using non-recipe density only (100% ranking agreement per parent B3 control). The 31x recipe material gap (EXP-INTEL-35264637598) remains unactionable pending full-DOM data.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can full DOM locatable_sample (all elements with bbox, n=21-82 per task) be re-collected from the Magento Docker container (am1n3e/webarena-verified-shopping:latest) for the 7 existing tasks, unblocking the frozen experiment and testing whether recipe ranking agreement crosses the 80% threshold at full element diversity?",
+  "reason": "The frozen decision_rule C3 gate requires ≥5 of 7 tasks with locatable_sample length >20. All 7 tasks have exactly 20 elements — the raw data (EXP-INTEL-34782350557) was truncated to first-20 DOM elements at collection time. The experiment is BLOCKED per frozen clause NOT C3 → BLOCKED. This is an infrastructure/data-availability failure, not a scientific negative. Audit PASS confirms: (1) C3 gate correctly evaluates to FAIL and triggers BLOCKED per frozen decision_rule (audit VF1); (2) truncation is at collection time, not downstream processing (audit VF2); (3) producer correctly uses status=BLOCKED outcome=NOT_APPLICABLE with null metrics, not encoding infrastructure failure as scientific falsification (audit VF3); (4) controls correctly marked blocked, truncated-first-20 reference values provided for consistency only (audit VF4); (5) no identifier renaming or silent rewrites (audit VF5). The hypothesis that truncation is the binding constraint on recipe ranking stability (parent handoff next_question) remains the highest-information unresolved question for the MIXED program. Full-DOM re-collection costs ~5-10 minutes of browser automation; the analysis script is ready.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35462974425/result.json — BLOCKED status, C3 gate 0/7 tasks, null metrics M1-M7",
+    "research/experiments/EXP-INTEL-35462974425/audit.json — status PASS, VF1-VF6, recomputed C3 gate 0/7 match producer",
+    "research/experiments/EXP-INTEL-35462974425/analysis_output.json — c3_gate.tasks_with_locatable_sample_gt20=0, baseline controls on truncated-first-20",
+    "research/experiments/EXP-INTEL-35462974425/spec.json — frozen decision_rule C3 threshold ≥5/7, NOT C3 → BLOCKED clause",
+    "research/experiments/EXP-INTEL-35462974425/freeze.json — sha256 3e15cfc492004632a1558823cb2c30038146a0095e191635c733bef16dde134f",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — all 7 locatable_sample arrays length 20 verified",
+    "research/experiments/EXP-INTEL-35445596324/handoff.json sha256 f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110 — parent carry_forward inherited unchanged",
+    "research/experiments/EXP-INTEL-35445596324/result.json M4 canonical 55.95% at n=20, M5 per-task 78.65% at n=20 — latest valid evidence"
+  ]
+}
