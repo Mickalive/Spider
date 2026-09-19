@@ -2037,6 +2037,16 @@
         "reason": "This experiment is diagnostic for OECD/COINr pipeline ranking stability under sample-size variation, not a direct advancement of C-MEAS-VALID. Frozen decision_rule MIXED verdict: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (hierarchy anchor eta2=0.0), C3 PASS (pipeline max eta2=0.999645 at n=20), C4 PASS (natural ranking preserved for tag_entropy both definitions at n=20), C5 PASS (Spearman=1.0 monotonic improvement, +55.95pp), C6 FAIL (canonical recipe agreement 55.95% < 80% threshold). The ranking instability is partially sample-size-dependent but not fully resolved at maximum available n=20. Audit PASS confirms all recomputed metrics match producer. C-MEAS-VALID retains EXPERIMENTAL status from prior valid experiments (decompression-normalization sub-thread); this experiment does not advance or falsify the broader measurement-validity claim."
       },
       {
+        "experiment_id": "EXP-RUNTIME-35456070671",
+        "lane": "runtime",
+        "created_at": "2026-09-19T16:47:49.677231+00:00",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "source_commit": "23d3812fefe1cc9ecd4a0c0d8a7a10749c6c340e",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Decompression correctness established within frozen scope: iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth uncompressed body for all 4 auth states across 3 content types and 3 chunk configurations (360/360 passes, 0 silent fallbacks, 0 errors). V1/V2 degeneracy from parent resolved. However, claim ceiling is bounded to localhost mock server with brotli quality 6, 1KB payloads, chunk_size=32/1024, Python 3.12.14 brotli 1.2.0, buffered reverse proxy. Real CDN infrastructure (Cloudflare/Fastly/Akamai) is the sole remaining product-readiness blocker. Larger payloads (10KB/100KB), gzip multi-chunk, brotli quality variation (4-8), streaming partial-frame forwarding, and production OAuth/OIDC middleware remain untested."
+      },
+      {
         "experiment_id": "EXP-INTEL-35462974425",
         "lane": "intel",
         "created_at": "2026-09-19T19:00:41.860908+00:00",

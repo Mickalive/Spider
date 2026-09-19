@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-RUNTIME-35456070671",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can decompressed payload byte-equality to ground-truth uncompressed body be verified via direct correctness controls, establishing that iterative decompression actually produces correct output rather than silently falling back to compressed bytes that happen to preserve state-grouping discrimination?",
+  "hypothesis": "Iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to the ground-truth uncompressed body for all 4 auth states across all content types and chunk configurations, because (1) the mock server generates bodies via deterministic generate_*_body() functions, (2) brotli.compress at fixed quality is a pure function, (3) HTTP chunked TE reassembles before decompression, and (4) iterative decompression correctly peels compression layers. Therefore SHA256(decompress_body(raw_body)) == SHA256(generate_*_body(state, target_size)) for every observation.",
+  "falsifier": "Decompression correctness fails if ANY of: (1) decompressed body hash != expected body hash for any observation (correctness control fails, indicating silent fallback or byte corruption); (2) decompressed body hash == raw body hash when Content-Encoding is brotli (silent fallback: decompression returned input unchanged); (3) decompression_occurred flag is false for any brotli-compressed response (decompression did not alter bytes). Any of these triggers FALSIFIED-IN-SETTING, meaning the entire decompression-normalization line rests on an unverified assumption.",
+  "baselines": [
+    {
+      "id": "B-SINGLE-CHUNK",
+      "description": "chunk_size=1024 (parent baseline: all compressed payloads fit in one chunk, discrimination 0.5, 0 errors, determinism all_same=true)",
+      "expected": "correctness pass, discrimination 0.5, 0 errors"
+    },
+    {
+      "id": "B-IDENTITY",
+      "description": "Origin serves without brotli compression (Content-Encoding: none), client receives uncompressed body directly. Ground-truth reference for hash correctness.",
+      "expected": "hash matches generate_*_body() exactly, discrimination 0.5 (structural ceiling), no decompression needed"
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "Random SHA-256 fingerprint of status+body (null model: should show 0 discrimination)",
+      "expected": "discrimination 0.0"
+    }
+  ],
+  "positive_control": "For each of 4 auth states, SHA256(decompress_body(raw_body)) == SHA256(generate_*_body(state, target_size)) for all observations. Structural ceiling: 100% correctness pass rate across all states and conditions.",
+  "null_control": "B-RANDOM: random SHA-256 fingerprint on the same response set. Null passes if discrimination = 0.0, confirming measured discrimination is not a statistical artifact.",
+  "measurement_validity": [
+    "Mock OAuth2 Flask server serves brotli-compressed responses (quality 6) with Transfer-Encoding: chunked and chunk_size=32 bytes (MULTI-CHUNK) or 1024 bytes (SINGLE-CHUNK)",
+    "Origin serves chunked without Content-Length (use_chunked=True) for all compressed cells",
+    "IDENTITY condition: origin serves without brotli compression (no Content-Encoding header, Content-Length set) as ground-truth baseline",
+    "Iterative decompression: brotli.decompress with gzip fallback, max_depth=5",
+    "Correctness control: SHA256(decompress_body(raw_body, ce)) compared to SHA256(generate_*_body(state, target_size)) for each observation",
+    "Silent fallback detection: if SHA256(decompressed) == SHA256(raw_body) when CE=br, classified as decompression failure",
+    "Decompression verification: raw_body != decompressed when CE=br, proving decompression actually altered bytes",
+    "Deterministic SHA-256 fingerprint: SHA256(repr((status, body_sha256)))",
+    "Headers filtered: Date, Server, X-Request-Id excluded from fingerprint",
+    "N=10 per state per condition, seed=44, jitter=50-150ms uniform server-side",
+    "Three content types: JSON, HTML, XML at 1KB nominal size",
+    "Auth-aware caching (URL+Accept-Encoding+Authorization cache key) with Cache-Control: private, Vary: Authorization"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body hash == expected body hash for 100% of observations across ALL cells (correctness control pass); (2) decompressed hash != raw body hash for ALL brotli-compressed observations (no silent fallback); (3) decompressed body-only discrimination >= 0.3 for ALL cells (expected: 0.5); (4) decompressed hash determinism all_same=true for ALL states across ALL conditions; (5) B-RANDOM = 0.0 for ALL cells; (6) 0 decompression errors (exceptions or silent fallbacks) across ALL requests; (7) IDENTITY baseline hash matches expected hash for 100% of observations. FALSIFIED-IN-SETTING if ANY of conditions (1), (2), or (6) fails. MEASUREMENT_INVALID if infrastructure prevents valid correctness measurement (e.g., generate_*_body() not available to correctness checker).",
+  "product_consequence_positive": "Decompression correctness is established: iterative decompression produces byte-identical output to ground-truth uncompressed body. This resolves the V1/V2 degeneracy (error count tautologically 0, discrimination insensitive to actual decompression output) and removes the decompression-correctness blocker for real CDN testing. Product team may proceed with CDN deployment knowing the decompression pipeline produces correct output.",
+  "product_consequence_negative": "Decompression correctness fails: iterative decompression silently produces wrong output (byte mismatch or silent fallback to compressed bytes). This is a fundamental blocker for C-MEAS-VALID product readiness. The entire decompression-normalization line rests on an unverified assumption. Product team must diagnose and fix the decompression pipeline before any CDN testing.",
+  "estimated_cost": "~420 requests (4 auth states x 3 content types x 3 conditions x 10 reps + IDENTITY baseline), localhost mock server, <5 min execution, negligible compute",
+  "expected_information_gain": "High: directly resolves the V1/V2 degeneracy which is the last blocker before real CDN testing. If correctness passes, C-MEAS-VALID advances to real CDN readiness. If correctness fails, the decompression pipeline has a latent bug. Either outcome changes the product decision. This is the smallest experiment that can change the C-MEAS-VALID claim status."
+}
