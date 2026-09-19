@@ -1,17 +1,43 @@
 {
   "experiment_id": "EXP-PRODUCT-35409929216",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-PRODUCT-ECON"],
+  "question": "Is the 5.42% token savings margin (1067 tokens) from parameterized deduplication robust to realistic completion token estimation error, or is it fragile and likely an artifact of the assumed 2/15/20 completion token distribution?",
+  "hypothesis": "The 5.42% margin is fragile: systematic completion token estimation error of less than 1 token/task (32 tasks * 1 token = 32 tokens) erases the margin (1067 tokens). Specifically: (H1) the break-even systematic bias in completion tokens is < 2 tokens/task, (H2) the margin is dominated by the selection prompt savings (112 tokens, 14.16%) not the completion savings, (H3) under realistic completion token variation (±50% of estimates), the margin survives in < 30% of bootstrap samples.",
+  "falsifier": "FALSIFIED if: (F1) the break-even systematic bias is ≥ 3 tokens/task (> 32 tasks * 3 = 96 tokens, still < 10% of margin), indicating the margin is robust to realistic estimation error, OR (F2) under ±50% completion token variation, the margin survives in > 70% of bootstrap samples. MIXED if the break-even is 1-3 tokens/task and survival rate is 30-70%.",
+  "baselines": {
+    "B-TOKEN-ESTIMATES": {
+      "description": "Current analytical estimates: completion tokens 2/15/20 for different task types, total workflow costs LITERAL 19691, PARAMETERIZED 18624, COLD 2475. Carried forward from EXP-PRODUCT-35330741529.",
+      "expected_behavior": "Baseline for sensitivity analysis; not re-measured in this experiment"
+    },
+    "B-SELECTION-PROMPT-ONLY": {
+      "description": "Token savings from selection prompt alone (112 tokens, 14.16%), measured via tiktoken on actual kernel outputs. Isolates the deduplication effect from completion estimates.",
+      "expected_behavior": "Selection prompt savings are measured, not estimated; completion savings are estimated"
+    },
+    "B-COLD-ANALYTICAL": {
+      "description": "COLD baseline at 77.34 tokens/task (prompt-only counting), total 2475 tokens for 32 tasks. Carried forward as reference; COLD success rate unmeasured.",
+      "expected_behavior": "COLD cost is an upper bound on true cost if success rate < 100%"
+    }
+  },
+  "positive_control": {
+    "description": "Sensitivity analysis on selection prompt savings only (112 tokens): vary completion tokens by ±100% and verify that selection prompt savings remain constant (they don't depend on completion tokens). Validates that the analysis correctly isolates the deduplication effect.",
+    "expected_behavior": "Selection prompt savings remain 112 tokens regardless of completion token variation"
+  },
+  "null_control": {
+    "description": "Zero-completion-token analysis: set all completion tokens to 0 and recompute savings. The margin should be exactly 112 tokens (selection prompt only), confirming that completion estimates don't affect the measured selection savings.",
+    "expected_behavior": "With zero completion tokens, savings = 112 tokens (selection prompt only)"
+  },
+  "measurement_validity": [
+    "Token costs from EXP-PRODUCT-35330741529 are carried forward as-is; not re-measured",
+    "Completion token estimates (2/15/20) are treated as the central estimate; sensitivity analysis varies them systematically",
+    "Break-even analysis computes the systematic bias (delta per task) needed to erase the 1067-token margin",
+    "Bootstrap analysis samples completion token variations from a normal distribution centered on estimates with coefficient of variation 0.5 (realistic for LLM output variability)",
+    "All analyses are deterministic given the carried-forward token costs; no new measurements or API calls required",
+    "Analysis uses the frozen 32-task corpus task composition: 5 blog-read-post (completion=2), 15 shop/admin/pm tasks (completion=15), 12 other tasks (completion=20)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) break-even systematic bias computed and reported, (C2) bootstrap survival rate computed for ±50% completion token variation, (C3) selection prompt savings confirmed constant under completion variation (positive control), (C4) null control (zero completion) yields exactly 112 tokens savings. FALSIFIED if: break-even ≥ 3 tokens/task AND bootstrap survival > 70% (margin robust). MIXED if break-even 1-3 tokens/task AND survival 30-70%. FRAGILE if break-even < 1 token/task OR survival < 30%.",
+  "product_consequence_positive": "If the margin is ROBUST (break-even ≥ 3 tokens/task AND survival > 70%), this supports continuing toward real LLM measurement (option A from parent handoff) and validates the token-based economics line.",
+  "product_consequence_negative": "If the margin is FRAGILE (break-even < 1 token/task or survival < 30%), this justifies closing C-PRODUCT-ECON and redirecting product lane to non-token mechanisms (registry compression, retrieval efficiency, correctness improvements).",
+  "estimated_cost": "Zero: purely analytical sensitivity analysis on carried-forward token costs. No API calls, no HTTP requests, no new measurements. Wall clock < 1 minute.",
+  "expected_information_gain": "HIGH: This experiment directly resolves the 'thin margin' concern from the parent handoff. Either (a) the margin is fragile and C-PRODUCT-ECON should be closed, or (b) the margin is robust and real LLM measurement should proceed. Either outcome changes a product decision."
 }
