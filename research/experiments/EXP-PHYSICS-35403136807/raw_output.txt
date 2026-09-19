@@ -1,0 +1,79 @@
+======================================================================
+EXPERIMENT EXP-PHYSICS-35403136807
+Signal Decomposition: Markov vs Beyond-Markov
+======================================================================
+
+[COLLECT] Simulating 12-state SPA 50x100=5000 transitions...
+  Total: 5000
+  Sessions: 50
+  SHA256: 46ed606a08615b86...
+
+[BUILD] Building records...
+
+[ANALYSIS] Computing PMIs...
+  K0_unconditional K=0: PMI=1.418781 used=12/12 acc=0.1612
+  K1_state1 K=1: PMI=1.530902 used=141/148 acc=0.2405
+  K2_state2 K=2: PMI=0.933244 used=398/1292 acc=0.4870
+  K3_action3 K=3: PMI=1.220508 used=510/821 acc=0.3365
+
+  K1 PMI: 1.530902
+  K2 PMI: 0.933244
+  K3 PMI: 1.220508
+  K3 - K2: 0.287265 bits
+  K2 - K1: -0.597659 bits
+
+======================================================================
+[BOOTSTRAP] 200 trajectory-block resamples for K3 - K2 CI
+======================================================================
+  Mean difference: -0.108602 bits
+  95% CI: [-0.275462, 0.080288]
+  Std: 0.094866
+  Time: 3.2s
+
+======================================================================
+[NULL CONTROL] Shuffled-action permutation N=1000 for K2
+======================================================================
+  Observed K2 PMI: 0.933244
+  Null mean: 0.406708 std: 0.007288
+  |null_mean|: 0.406708
+  0.1 threshold: FAIL
+  p-value: 0.000999
+  Effect size d: 72.24
+  Time: 6.5s
+
+======================================================================
+[CONTROL] Positive control 8-state deterministic N=5000
+======================================================================
+  K3 PMI: 1.805624
+  p-value: 0.000999
+  Effect size d: 154.53
+  Passes (PMI>=1.0 & p<0.001): True
+  Time: 7.1s
+
+======================================================================
+[EXPLORATORY] K2 PMI at N=50000 (bias-scaling test)
+======================================================================
+  N=50000
+  K2 PMI: 1.778725
+  Used: 1436/1540 strata
+  Determinism: 0.026
+  Time: 0.2s
+
+======================================================================
+DECISION RULE
+======================================================================
+C1: K3-K2=0.287265 > 0.1 = True
+  CI_lower=-0.275462 > 0 = False
+  -> FAIL
+C2: K2=0.933244 > K1+0.05=1.580902 = False
+  -> FAIL
+C3: Positive control K3=1.805624 >= 1.0 = True
+  -> PASS
+C4: Null control |mean|=0.406708 < 0.1 = False
+  -> FAIL
+
+DECISION: MEASUREMENT_INVALID
+OUTCOME: NOT_APPLICABLE
+REASON: Null control |mean| >= 0.1 bits
+
+Saved raw results to research/experiments/EXP-PHYSICS-35403136807/raw_results.json

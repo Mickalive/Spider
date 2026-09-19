@@ -1,0 +1,127 @@
+{
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "n_transitions": 5000,
+  "n_sessions": 50,
+  "results": {
+    "K0_unconditional": {
+      "pmi_bits": 1.4187811340289063,
+      "n_strata_total": 12,
+      "n_strata_used": 12,
+      "n_total_records": 5000,
+      "skipped_small": 0,
+      "skipped_zero_var": 0,
+      "prediction_accuracy": 0.1612,
+      "determinism": {
+        "deterministic": 0,
+        "stochastic": 0,
+        "total": 0
+      }
+    },
+    "K1_state1": {
+      "pmi_bits": 1.5309023746943278,
+      "n_strata_total": 148,
+      "n_strata_used": 141,
+      "n_total_records": 5000,
+      "skipped_small": 7,
+      "skipped_zero_var": 0,
+      "prediction_accuracy": 0.2404656764351666,
+      "determinism": {
+        "deterministic": 4,
+        "stochastic": 144,
+        "total": 148,
+        "stoch_ratio": 0.972972972972973,
+        "det_ratio": 0.02702702702702703
+      }
+    },
+    "K2_state2": {
+      "pmi_bits": 0.9332435964563096,
+      "n_strata_total": 1292,
+      "n_strata_used": 398,
+      "n_total_records": 5000,
+      "skipped_small": 894,
+      "skipped_zero_var": 2,
+      "prediction_accuracy": 0.48699374382614424,
+      "determinism": {
+        "deterministic": 407,
+        "stochastic": 885,
+        "total": 1292,
+        "stoch_ratio": 0.684984520123839,
+        "det_ratio": 0.31501547987616096
+      }
+    },
+    "K3_action3": {
+      "pmi_bits": 1.2205083083840707,
+      "n_strata_total": 821,
+      "n_strata_used": 510,
+      "n_total_records": 5000,
+      "skipped_small": 311,
+      "skipped_zero_var": 0,
+      "prediction_accuracy": 0.3365223630710356,
+      "determinism": {
+        "deterministic": 89,
+        "stochastic": 732,
+        "total": 821,
+        "stoch_ratio": 0.8915956151035322,
+        "det_ratio": 0.10840438489646773
+      }
+    }
+  },
+  "k1_pmi": 1.5309023746943278,
+  "k2_pmi": 0.9332435964563096,
+  "k3_pmi": 1.2205083083840707,
+  "k3_minus_k2": 0.28726471192776104,
+  "k2_minus_k1": -0.5976587782380182,
+  "bootstrap": {
+    "mean_difference": -0.10860215184341362,
+    "ci_lower_95": -0.2754621383818095,
+    "ci_upper_95": 0.08028796244704407,
+    "std_difference": 0.0948656332759229,
+    "mean_k3": 0.9393815450767826,
+    "mean_k2": 1.047983696920196,
+    "n_bootstrap": 200,
+    "differences_sample": [
+      -0.11986801629884714,
+      -0.22620711730439735,
+      -0.16407392588000236,
+      -0.26128851308610024,
+      -0.1443819039351354,
+      -0.12938680312637663,
+      -0.20297601560652057,
+      -0.2570684423029096,
+      -0.09089090992261639,
+      -0.036223796605355574
+    ]
+  },
+  "null_control": {
+    "observed_pmi": 0.9332435964563096,
+    "p_value": 0.000999000999000999,
+    "null_mean": 0.4067075323404194,
+    "null_std": 0.007288495575252302,
+    "effect_size_d": 72.24207776207142,
+    "shuffled_pmis": [
+      0.41573570993516273,
+      0.4186376710799786,
+      0.400956408190167,
+      0.39860233384290505,
+      0.4030509332571045
+    ]
+  },
+  "positive_control": {
+    "n_transitions": 5000,
+    "pmi_action_K3": 1.805623888152145,
+    "observed_p_action": 0.000999000999000999,
+    "effect_d_action": 154.5328219009639,
+    "passes": true
+  },
+  "exploratory_n50000": {
+    "n": 50000,
+    "k2_pmi": 1.7787252231911168,
+    "n_used": 1436,
+    "n_strata": 1540,
+    "det_ratio": 0.025974025974025976
+  },
+  "decision": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "reason": "Null control |mean| >= 0.1 bits",
+  "sha_raw": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512"
+}
