@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35470449310",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Implement missing B-PARENT-CONFOUND-REPRODUCTION baseline (spec baselines id B-PARENT-CONFOUND-REPRODUCTION requires request_id via token_hex for expired vs uuid for valid, expected |r|>=0.15). Producer collected zero samples for this control; run_experiment.py contains no execution for it (only 1 occurrence is header comment). Frozen spec requires three baselines; omission leaves negative control untested.",
+    "Align C3/C4 decision logic with frozen spec: spec.json decision_rule and prereg.md define C3 as 95% CI upper bound <0.15 and C4 as TOST p_upper <0.05 (one-sided). Producer result.json implements stricter C3 as CI within (-0.15,0.15) (both bounds) and C4 as two-sided TOST pass (p_upper<0.05 AND p_lower<0.05) via run_experiment.py:654 and 657 / tost_equivalence return pass=pu<0.05 and pl<0.05. Under frozen one-sided rule C3 would PASS (upper 0.0018<0.15) and C4 would PASS (p_upper 8.88e-08<0.05); producer reports both FAIL. Recompute decision under frozen rule or amend spec via prereg freeze.",
+    "Fix 304 structural signal coupling: run_experiment.py:363-374 overrides structural_composite for 304 responses to fixed 0.2 + norm_entropy*0.2 + etag_var*0.3 + cache_var*0.3, while non-304 uses sha256(request_id) hash*0.2. Only valid tokens produce 304 (raw_evidence 76 valid vs 0 expired, has_304/cache_hit counts). This token-state-dependent construction violates spec measurement_validity clause 8 (independent extraction) and inflates cache-mode heterogeneity. Either exclude 304 responses from pooled correlation or use identical hash-based construction for 304 (or exclude request_id components from structural composite for cache-enabled endpoints).",
+    "Recompute or justify per-endpoint heterogeneity: testbed per-endpoint r for cache-enabled endpoints is significantly negative (/api/user/profile r=-0.275 p=0.00042 n=160; /api/data/list r=-0.333 p=1.6e-05) while /api/session/status (no-store) r=0.041 p=0.60. Pooled r=-0.087 masks heterogeneity. If claim is pooled equivalence, report per-endpoint equivalence failures and bound claim to session/status endpoint or to delta 0.35 for cache-enabled endpoints.",
+    "Increase power or narrow delta claim: At n=480 SE=0.0457, minimum detectable |r| ~0.089 (result.json power_analysis). Observed |r|=0.087 at detection threshold; CI width ~0.177 ( [-0.1758,0.0018] ) exceeds delta 0.15 equivalence window on lower side by 0.025. To claim equivalence at delta 0.15 with this effect size requires n~800-900. Either claim delta 0.20 (where TOST both p<0.05 and CI within (-0.20,0.20)) or increase to n>=800."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_request_id_entropy_confound_fixed",
+      "severity": "low",
+      "status": "PASS",
+      "description": "V1 fix verified: all request_ids now via str(uuid.uuid4()) for all status codes (testbed_server.py:280,296,305,315,391). Raw evidence recomputed: valid entropy mean 3.723 vs expired 3.715, t=0.71 p=0.477 (n=240 each), vs parent p=2.7e-34. No residual entropy difference. Structural composite entropy component independent of behavioral state. Spec measurement_validity #1 satisfied.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/testbed_server.py:391", "research/experiments/EXP-GRAPH-35470449310/flask_only_server.py:134", "research/experiments/EXP-GRAPH-35470449310/raw_evidence/experiment_data.json:per_condition_data[*].request_id_entropy", "research/experiments/EXP-GRAPH-35470449310/result.json:validity_notes[0]"]
+    },
+    {
+      "id": "V2_flask_only_baseline_degeneracy_fixed",
+      "severity": "low",
+      "status": "PASS",
+      "description": "V2 fix verified: flask_only_server.py now implements SimpleTokenStore with valid/expired token_type, /token endpoint, require_token decorator checking Authorization Bearer or ?token param. B-FLASK-ONLY behavioral_std=3.5 (>0) for 480 samples, r=0.0259 defined (not NaN), CI [-0.063,0.115], TOST both p<0.05. Parent degenerate std=0 r=NaN eliminated. Spec measurement_validity #2 satisfied.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/flask_only_server.py:43-77", "research/experiments/EXP-GRAPH-35470449310/flask_only_server.py:227-235", "research/experiments/EXP-GRAPH-35470449310/result.json:controls.C6_baseline_flask_only", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics.flask_only_behavioral_std"]
+    },
+    {
+      "id": "V3_304_cache_hit_confound",
+      "severity": "medium",
+      "status": "FAIL",
+      "description": "New coupling introduced: 304/ cache_hit occurs only for valid tokens (76 valid 304 vs 0 expired, raw_evidence). For 304, run_experiment.py fixes dynamic_content_hash contribution to 0.2 constant instead of sha256(request_id)%10000/10000 variable, and etag_variation/cache_control_variation are 0 for 304 (prev==current). Structural composite mean for 304 is 0.3866 std 0.0058 vs non-304 mean 0.399 std 0.153. This token-state-dependent construction violates spec #8 (no shared variables) and contributes to cache heterogeneity. Per-endpoint heterogeneity shows cache-enabled endpoints (which can 304) have significant negative r (-0.27, -0.33) while no-store endpoint (session/status) has r=0.04 ns, suggesting cache path drives correlation.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/run_experiment.py:363-374", "research/experiments/EXP-GRAPH-35470449310/raw_evidence/experiment_data.json:per_condition_data[*].has_304", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics.per_endpoint_r_testbed", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics.per_cache_r_testbed"]
+    },
+    {
+      "id": "V4_missing_B_PARENT_baseline",
+      "severity": "high",
+      "status": "FAIL",
+      "description": "Frozen spec requires B-PARENT-CONFOUND-REPRODUCTION negative control (request_id token_hex for expired vs uuid for valid, expected |r|>=0.15) to confirm V1 confound is real and fix eliminates it. Producer lists baseline in spec but never executes it: run_experiment.py has no code path for B-PARENT, result.json has no metric for it, report.md omits it. Cannot verify that parent V1 defect would reproduce |r|>=0.15 under otherwise identical conditions.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/spec.json:baselines[2].id=B-PARENT-CONFOUND-REPRODUCTION", "research/experiments/EXP-GRAPH-35470449310/prereg.md:Baselines B-PARENT-CONFOUND-REPRODUCTION", "research/experiments/EXP-GRAPH-35470449310/run_experiment.py (no B-PARENT execution)", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics (no B-PARENT)"]
+    },
+    {
+      "id": "V5_decision_rule_deviation",
+      "severity": "medium",
+      "status": "FAIL",
+      "description": "Producer C3/C4 thresholds deviate from frozen spec. Spec C3: 95% CI upper <0.15 (one-sided); producer implements CI within (-0.15,0.15) (both bounds) -> reports FAIL with CI [-0.1758,0.0018] (lower -0.1758 < -0.15) while upper 0.0018<0.15 would PASS under spec. Spec C4: TOST p_upper<0.05; producer implements two-sided pass requiring p_lower<0.05 as well -> reports FAIL (p_lower 0.0837) while p_upper 8.88e-08 would PASS under spec. Under frozen one-sided rule the only failing frozen criterion would be C5 heterogeneity, not C3/C4. Producer outcome MIXED conflates strict and frozen interpretations.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/spec.json:decision_rule", "research/experiments/EXP-GRAPH-35470449310/prereg.md:Decision Rule C3/C4", "research/experiments/EXP-GRAPH-35470449310/run_experiment.py:653-657", "research/experiments/EXP-GRAPH-35470449310/result.json:controls.C3_equivalence", "research/experiments/EXP-GRAPH-35470449310/result.json:controls.C4_tost"]
+    },
+    {
+      "id": "V6_sampling_and_power",
+      "severity": "low",
+      "status": "PASS",
+      "description": "Sampling meets spec: n=480 testbed +480 flask (60 per condition per endpoint? Actually 20 per condition per endpoint *8 conditions*3 endpoints=480, spec requires >=480 paired, >=3 endpoints*2 cache*2 auth). All 24 conditions have n_valid=20/20. Power adequate for delta 0.15 detection: SE=0.0457, min detectable r=0.0895 at 95%. Observed |r|=0.087 at threshold. Power not excessive; larger n needed to shrink CI within +/-0.15 with this effect size (CI width 0.177). No sampling integrity violation.",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/result.json:metrics.n_paired_samples_testbed=480", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics.power_analysis", "research/experiments/EXP-GRAPH-35470449310/raw_evidence/experiment_data.json:per_condition_data[*].n_valid"]
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "status": "PASS",
+      "description": "Positive baseline survives: four prior localhost Flask mocks show |r|<0.15 (r=0.0022,0.0463,-0.0258,0.0022) with audit PASS. Current production-like pooled |r|=0.0877 is larger but still <0.15 magnitude; upper CI 0.0018<0.15 would PASS one-sided spec. Baseline comparison valid; prior evidence remains cleanest for C-FRESHNESS.",
+      "expected": "|r|<0.15",
+      "observed": "Current pooled |r|=0.0877 CI [-0.1758,0.0018] magnitude passes, but two-sided equivalence fails; per-endpoint cache-enabled r's exceed 0.15 magnitude (-0.275, -0.333)",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35389145821/result.json", "research/experiments/EXP-GRAPH-35353011131/result.json", "research/experiments/EXP-PRODUCT-35434772331/result.json", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics.pearson_r_pooled_testbed"]
+    },
+    {
+      "id": "B-FLASK-ONLY",
+      "status": "PASS",
+      "description": "Infrastructure baseline now informative and passes: plain Flask with genuine token validation (valid/expired via /token) yields |r|=0.0259 CI [-0.063,0.115] TOST both p<0.05, behavioral_std 3.5>0 (vs parent std 0 r NaN). Confirms orthogonality persists without CDN/OAuth/dynamic content at delta 0.15, discriminating infrastructure-induced vs definition-induced correlation. Under V1 fix, B-FLASK-ONLY uses same headers-only extraction.",
+      "expected": "|r|<0.15, behavioral_std>0",
+      "observed": "|r|=0.0259, CI upper 0.115<0.15, TOST PASS, behavioral_std 3.5",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/result.json:controls.C6_baseline_flask_only", "research/experiments/EXP-GRAPH-35470449310/result.json:metrics.pearson_r_pooled_flask_only=0.0259", "research/experiments/EXP-GRAPH-35470449310/flask_only_server.py"]
+    },
+    {
+      "id": "B-PARENT-CONFOUND-REPRODUCTION",
+      "status": "FAIL",
+      "description": "Negative control missing: expected to reproduce parent V1 entropy bifurcation and show |r|>=0.15, proving fix eliminates confound. Producer did not execute; no metric to compare. Cannot confirm that parent |r|=0.1737 was due to request_id entropy vs other factors.",
+      "expected": "|r|>=0.15 with token_hex vs uuid",
+      "observed": "Not executed; no data",
+      "evidence_refs": ["research/experiments/EXP-GRAPH-35470449310/spec.json:baselines[2]", "research/experiments/EXP-GRAPH-35470449310/result.json (absent)"]
+    }
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled_testbed": -0.08770416237535393,
+    "abs_r_pooled_testbed": 0.08770416237535393,
+    "ci_lower_95_testbed": -0.1758260700603832,
+    "ci_upper_95_testbed": 0.001812153116238386,
+    "ci_width": 0.1776382231766216,
+    "tost_delta_015_p_upper": 8.879788315216358e-08,
+    "tost_delta_015_p_lower": 0.0837109886692382,
+    "tost_delta_015_pass_two_sided": false,
+    "tost_delta_015_pass_one_sided_upper_only": true,
+    "tost_delta_020_p_upper": 1.0894720870624118e-10,
+    "tost_delta_020_p_lower": 0.006082459408189078,
+    "tost_delta_020_pass": true,
+    "pearson_r_pooled_flask_only": 0.025984118470173765,
+    "ci_flask_lower": -0.06366603598198227,
+    "ci_flask_upper": 0.11521825372822371,
+    "tost_flask_p_upper": 0.003134898159886555,
+    "tost_flask_p_lower": 5.473406623757171e-05,
+    "per_endpoint_r_testbed": {
+      "/api/user/profile": -0.2754890736783604,
+      "/api/data/list": -0.3338601337257182,
+      "/api/session/status": 0.041615689553693436
+    },
+    "per_endpoint_p_testbed": {
+      "/api/user/profile": 0.0004221302494876037,
+      "/api/data/list": 1.6005826482943658e-05,
+      "/api/session/status": 0.601321874718334
+    },
+    "per_endpoint_r_flask": {
+      "/api/user/profile": -0.016671873501627764,
+      "/api/data/list": 0.015115006094985464,
+      "/api/session/status": 0.14523187045676622
+    },
+    "cache_heterogeneity": {
+      "r_enabled": -0.20792040672902118,
+      "r_disabled": 0.012425751014823551,
+      "diff": 0.22034615774384472,
+      "se_pooled": 0.09186304243492506,
+      "two_se": 0.18372608486985012,
+      "pass": false
+    },
+    "request_id_entropy_valid_mean": 3.723,
+    "request_id_entropy_expired_mean": 3.7158,
+    "entropy_ttest_p": 0.4766315704259019,
+    "entropy_confound_eliminated": true,
+    "structural_composite_valid_mean": 0.4094,
+    "structural_composite_expired_mean": 0.3846,
+    "composite_ttest_p": 0.05484419137066351,
+    "point_biserial_token_expired_vs_composite_r": -0.08770416237535392,
+    "has_304_valid": 76,
+    "has_304_expired": 0,
+    "composite_304_mean": 0.3866,
+    "composite_non304_mean": 0.399,
+    "n_paired_testbed": 480,
+    "n_paired_flask": 480,
+    "behavioral_TP_expired": 1.0,
+    "behavioral_TN_valid": 1.0,
+    "endpoints_with_variance": 3,
+    "producer_metrics_match": true
+  },
+  "claim_ceiling": "C-FRESHNESS orthogonality at delta=0.15 is NOT confirmed on production-like LOCAL Flask 3.1.3+PyJWT RS256+SQLite WAL+CDN simulation testbed with corrected headers-only signal. Maximum justified ceiling: (1) Pooled magnitude passes one-sided delta 0.15 (upper CI 0.0018<0.15, |r|=0.087<0.15) but fails strict two-sided equivalence (CI [-0.1758,0.0018] exceeds -0.15 lower bound, TOST p_lower 0.083>0.05); equivalence holds only at delta 0.20 pooled (TOST both p<0.05, CI within (-0.20,0.20)). (2) Per-endpoint heterogeneity violates pooled claim: cache-enabled endpoints show significant moderate negative correlations (|r|=0.275 and 0.333, p<0.001) exceeding delta 0.15 and even delta 0.20 (for /api/data/list), while /api/session/status (no-store) shows r=0.04 ns. (3) Cache-mode heterogeneity is systematic: |r_enabled - r_disabled|=0.22 >2*SE 0.18, rejecting null of no CDN moderation. (4) B-FLASK-ONLY baseline survives at delta 0.15 (|r|=0.026), confirming orthogonality without infrastructure, so production-like failure is infrastructure-modulated, not definitional. (5) V1 request_id entropy confound and V2 baseline degeneracy are verified fixed, but 304 cache-hit coupling remains moderate validity concern and B-PARENT negative control is untested. Claim remains EXPERIMENTAL bounded to localhost production-like testbed; no advancement to VALIDATED; local mock confirmations (r=0.0022-0.046) remain cleanest evidence. Product parallel-channel architecture NOT justified for cache-enabled endpoints at delta 0.15.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35470449310/request.json",
+    "research/experiments/EXP-GRAPH-35470449310/spec.json",
+    "research/experiments/EXP-GRAPH-35470449310/prereg.md",
+    "research/experiments/EXP-GRAPH-35470449310/freeze.json",
+    "research/experiments/EXP-GRAPH-35470449310/result.json",
+    "research/experiments/EXP-GRAPH-35470449310/report.md",
+    "research/experiments/EXP-GRAPH-35470449310/provenance.json",
+    "research/experiments/EXP-GRAPH-35470449310/raw_evidence/experiment_data.json sha256:5d6bae1e2024b9e8cd172dd553b78d90accc6d1ad5934a26ba33d13776788f6f",
+    "research/experiments/EXP-GRAPH-35470449310/testbed_server.py sha256:b3be634e6c2e086264d293f430839575f59738daff5ede743b54a21a20a45a18",
+    "research/experiments/EXP-GRAPH-35470449310/flask_only_server.py sha256:3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "research/experiments/EXP-GRAPH-35470449310/run_experiment.py sha256:d3b85b071436fe68f83870658c72ef862b782c8ba2149318da2cf3a0757e8351",
+    "research/experiments/EXP-GRAPH-35456070379/handoff.json",
+    "research/experiments/EXP-GRAPH-35456070379/audit.json",
+    "codex/claim_state.json:C-FRESHNESS",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Whether B-PARENT-CONFOUND-REPRODUCTION would show |r|>=0.15 under identical conditions, confirming parent V1 was genuine confound",
+    "Whether 304 cache-hit structural construction (fixed 0.2) vs variable hash explains per-endpoint negative correlations or heterogeneity is genuine CDN moderation",
+    "Whether per-cache heterogeneity (r_enabled -0.207 vs r_disabled 0.012 diff 0.22) is reproducible or sampling noise; requires replication at n>=800",
+    "Whether orthogonality at delta 0.15 holds for no-store/session/status endpoint alone (r=0.041 ns, CI within) vs cache-enabled endpoints",
+    "Whether CDN cache invalidation on session state change introduces correlation under concurrent load or distributed cache (un-tested)",
+    "Whether result generalizes beyond Flask 3.1.3 localhost to distributed production, non-Flask frameworks, or real OAuth/CDN hierarchies",
+    "Whether headers-only structural signal (ETag+CacheControl+entropy+hash) captures sufficient variation for product freshness detection or captures too little variance (structural std 0.06-0.08)"
+  ]
+}
