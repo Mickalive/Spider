@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35434773328",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Isolate CL-PASSTHROUGH origin framing: spec.json measurement_validity #35 and prereg 4.3 fix V1 require use_chunked=True only for CHUNKED-PASSTHROUGH and CHUNKED-CACHED; run_experiment.py:626 sets origin_use_chunked=True for all origins including CL-PASSTHROUGH cells, so C_CONTENT_LENGTH_REGRESSION is not an independent Content-Length origin baseline but a chunked-origin->Content-Length-proxy path. Fix: start origin with use_chunked=False for CL-PASSTHROUGH and True only for chunked configs, or document the contamination and run an independent CL-origin regression cell.",
+    "Exercise multi-chunk reassembly: all observed compressed body_sizes are 70-176 bytes (result.json per_cell body_sizes max 176) while proxy and origin chunk_size is hard-coded 1024 (run_experiment.py:265/365/414). Every response fits in a single chunk plus terminator, so chunk boundaries never split brotli payload. The hypothesized failure mode 'chunk boundaries corrupt brotli multi-byte symbols' is untested. Fix: either lower chunk_size to e.g., 32-64 bytes or generate incompressible/less-compressible payloads so compressed size exceeds chunk_size, and log observed chunk counts per response.",
+    "Provide direct header evidence for proxy HIT path: V2 double-header fix is verified only by code inspection (run_experiment.py:360-373 sends only Transfer-Encoding on HIT for chunked configs). No raw observation in result.json captures actual HIT response headers (Transfer-Encoding presence and absence of Content-Length) for CHUNKED-CACHED HIT. Fix: capture and persist per-request response headers for HIT vs MISS and assert HIT has Transfer-Encoding: chunked and no Content-Length."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_CL_REGRESSION_CONTAMINATION",
+      "severity": "medium",
+      "finding": "CL-PASSTHROUGH origin incorrectly serves chunked. Frozen spec measurement_validity #35 and prereg 4.2/4.3 require origin Content-Length for CL-PASSTHROUGH and chunked only for CHUNKED configs. Code starts every origin with use_chunked=True (run_experiment.py:626 comment 'All origins serve chunked'), verified by result.json body_sizes showing same compressed sizes across configs but header verification only tests fresh servers with chunked=True. The positive control C_CONTENT_LENGTH_REGRESSION therefore tests chunked-origin->CL-proxy, not CL-origin->CL-proxy.",
+      "evidence": "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py:624-627 origin_use_chunked=True for all configs; spec.json measurement_validity[2] clause 35 'Origin server is configured with use_chunked=True for CHUNKED-PASSTHROUGH and CHUNKED-CACHED cells'; prereg.md 4.2 table CL-PASSTHROUGH Origin Framing Content-Length; result.json controls.C_CONTENT_LENGTH_REGRESSION pass true but observed_per_cell 9x 0.5 from contaminated path",
+      "impact": "C_CONTENT_LENGTH_REGRESSION is not an independent regression control. It still passes at 0.5, confirming proxy can transcode chunked upstream to Content-Length downstream, but it cannot isolate proxy drift from origin framing. Primary chunked test remains valid; control must be re-run with isolated CL origin before using CL regression to attribute effects."
+    },
+    {
+      "id": "V2_SINGLE_CHUNK_DEGENERACY",
+      "severity": "medium",
+      "finding": "Chunked TE exercised only as single-chunk framing. Compressed body_sizes are 70-176 bytes across all 27 cells (result.json per_cell body_sizes mean 70-176, max 176) while origin and proxy chunk_size is 1024 bytes (run_experiment.py:265, 365, 414). Brotli quality 6 on repetitive padded JSON/HTML/XML compresses 1KB/10KB/100KB uncompressed to <176 bytes, so each response is sent as one data chunk plus 0 terminator. No chunk boundary splits the brotli stream.",
+      "evidence": "research/experiments/EXP-RUNTIME-35434773328/result.json metrics.per_cell body_sizes max 176.0 across 27 cells; research/experiments/EXP-RUNTIME-35434773328/run_experiment.py:265 chunk_size=1024 origin, 365/414 proxy HIT/MISS; provenance.json brotli_quality 6, payload_sizes 1KB/10KB/100KB but body_sizes 70-176 compressed",
+      "impact": "Hypothesized failure mode 'chunk boundaries split brotli multi-byte symbols' cannot be falsified by this run. Evidence supports transparency of chunked reassembly only for single-chunk payloads via HTTPConnection.read() de-chunking. Claim ceiling must be bounded to single-chunk payloads; multi-chunk reassembly remains untested."
+    },
+    {
+      "id": "V3_ORIGIN_VERIFICATION_INDIRECT",
+      "severity": "low",
+      "finding": "C_ORIGIN_VERIFICATION passes (9/9 content conditions has_transfer_encoding_chunked true, has_content_length false) but verification is performed on fresh mock_verify servers on ports 6500+ (run_experiment.py:964-986), not on the actual origins serving the 540 measured requests on ports 5500+.",
+      "evidence": "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py:958-1000 C_ORIGIN_VERIFICATION loop starts mock_verify with use_chunked=True separately from main loop; result.json controls.C_ORIGIN_VERIFICATION observed 9 entries with has_transfer_encoding_chunked true",
+      "impact": "Verification confirms use_chunked=True correctly implements chunked without Content-Length in this codebase, and main loop uses same start_mock_server path, so upstream chunked path is genuinely exercised. No adjustment to primary metric, but future runs should log actual origin response headers per measured request for direct auditability."
+    },
+    {
+      "id": "V4_DOUBLE_HEADER_FIX_CODE_ONLY",
+      "severity": "low",
+      "finding": "V2 double-header violation from parent appears fixed by code inspection: cache HIT and MISS for chunked configs now send only Transfer-Encoding: chunked (run_experiment.py:360-373 HIT, 400-421 MISS both filter content-length/transfer-encoding then add chunked for chunked configs). No raw per-request header dump in result.json confirms HIT headers; confidence rests on code path not observed headers.",
+      "evidence": "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py:354-380 ReverseProxyHandler._proxy_request HIT block; provenance.json fixes_applied V2 evidence cites same code; parent audit research/experiments/EXP-RUNTIME-35401995092/audit.json V2_DOUBLE_HEADER",
+      "impact": "No decompression errors and discrimination preserved, consistent with correct framing, but audit cannot independently verify HIT framing from derived metrics alone. Fix is plausible and low risk; next run should persist HIT/MISS header captures."
+    },
+    {
+      "id": "V5_DETERMINISTIC_CEILING",
+      "severity": "info",
+      "finding": "All 27 cells report decompressed_body_only_discrimination=0.5 and decompressed_hash_variation all_same true for all 4 states (result.json per_cell). This is deterministic consequence of mock design: 3 error states share identical bodies (3-way error collapse), brotli quality 6 deterministic, and N=5 per cell. The 0.5 ceiling is not a production ceiling.",
+      "evidence": "research/experiments/EXP-RUNTIME-35434773328/result.json metrics.per_cell 27x decompressed_body_only_discrimination 0.5, decompressed_hash_variation all_same true; validity_notes '3-way error collapse preserved: no_auth, expired_token, invalid_token share similar error bodies' and 'Deterministic brotli: quality 6'",
+      "impact": "Supports internal validity for narrow mock question; external generalization requires real CDN, varied payloads, and stochastic content. No correction to producer numbers."
+    },
+    {
+      "id": "V6_RECOMPUTATION_MATCH",
+      "severity": "info",
+      "finding": "Independent recomputation matches producer exactly: 27 cells min/mean/max 0.5, per_config CL/CHUNKED-PASSTHROUGH/CHUNKED-CACHED min 0.5, B-RANDOM 27x 0.0, total_requests 540 (27*20), decompression_errors 0, C_DETERMINISM_ACROSS_PATHS 72/72 match, C_DECOMPRESSED_DETERMINISM all_same true, C_ORIGIN_VERIFICATION 9/9 pass.",
+      "evidence": "research/experiments/EXP-RUNTIME-35434773328/result.json metrics.per_cell, metrics.per_cache_config, controls; recomputed via python reading result.json",
+      "impact": "No arithmetic or selective-reporting error. Producer metrics are reproducible from derived artifact."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-RANDOM",
+      "expected": "0.0",
+      "observed": "27x 0.0 (result.json controls.C_NULL_CONTROL observed 27x 0.0)",
+      "assessment": "PASS - Null control passes for all cells. Trivial baseline: random SHA256 fingerprints cannot encode auth state; confirms fingerprint pipeline does not hallucinate structure. Recomputed matches producer."
+    },
+    {
+      "id": "B-PARENT-CONTENT-LENGTH-0.5",
+      "expected": "0.5",
+      "observed": "9x 0.5 for CL-PASSTHROUGH (result.json controls.C_CONTENT_LENGTH_REGRESSION observed_per_cell 9x 0.5, per_cache_config CL-PASSTHROUGH min 0.5)",
+      "assessment": "PASS numerically but contaminated: origin for CL cells was chunked (V1), so this is not a pure Content-Length origin baseline. It demonstrates proxy transcoding chunked->CL preserves discrimination, not that CL-origin baseline is unchanged. Requires isolated CL origin to serve as strong regression."
+    },
+    {
+      "id": "B-PARENT-DOWNSTREAM-CHUNKED-0.5",
+      "expected": "0.5",
+      "observed": "9x 0.5 for CHUNKED-PASSTHROUGH and 9x 0.5 for CHUNKED-CACHED (result.json perdiscriminations, control C_CHUNKED_CACHED_PRIMARY min 0.5)",
+      "assessment": "PASS - Regression reference preserved. Upstream chunked does not degrade below parent downstream-only 0.5 within single-chunk regime. Baseline strength appropriate for mock but single-chunk limitation applies."
+    },
+    {
+      "id": "B-CHUNKED-CACHED-0.5",
+      "expected": "0.5",
+      "observed": "9x 0.5, min 0.5 (result.json controls.C_CHUNKED_CACHED_PRIMARY)",
+      "assessment": "PASS - Primary auth-aware caching + chunked interaction exceeds >=0.3 threshold at 0.5 for all cells. Appropriate baseline."
+    },
+    {
+      "id": "C_CONTENT_LENGTH_REGRESSION",
+      "expected": "Content-Length PASSTHROUGH discrimination =0.5 for all cells",
+      "observed": "mean 0.5, 9x 0.5, pass true (result.json controls.C_CONTENT_LENGTH_REGRESSION)",
+      "assessment": "PASS numerically; validity limited by V1 contamination. See baseline_findings B-PARENT-CONTENT-LENGTH-0.5."
+    },
+    {
+      "id": "C_NULL_CONTROL",
+      "expected": "B-RANDOM ~0.0 for all conditions",
+      "observed": "27x 0.0, pass true",
+      "assessment": "PASS"
+    },
+    {
+      "id": "C_CHUNKED_CACHED_PRIMARY",
+      "expected": "Chunked AUTH-AWARE CACHED discrimination >=0.3 for all cells",
+      "observed": "min_observed 0.5, 9x 0.5, pass true",
+      "assessment": "PASS - Direct test of chunked + caching interaction. Exceeds 0.3 threshold decisively."
+    },
+    {
+      "id": "C_DECOMPRESSED_DETERMINISM",
+      "expected": "Within-state decompressed hash all_same=true for all states across all conditions",
+      "observed": "valid_token true, expired_token true, invalid_token true, no_auth true across 27 cells, pass true",
+      "assessment": "PASS - Demonstrates decompression deterministic and not corrupted by chunk framing within single-chunk regime. Does not test multi-chunk symbol splitting."
+    },
+    {
+      "id": "C_DETERMINISM_ACROSS_PATHS",
+      "expected": "Decompressed hash through proxy matches direct-server hash for same condition",
+      "observed": "all_match true, mismatch_count 0, conditions_checked 72 (18 chunked cells x4 states), pass true",
+      "assessment": "PASS - Recomputed 72/72 match, 0 mismatches. Note direct server in verification uses use_chunked=False (Content-Length) while proxy path uses chunked origin, so test is chunked-proxy vs CL-direct byte equality via HTTPConnection de-chunking. Correctly shows chunked reassembly preserves bytes for single-chunk payloads. Live recomputation via fresh mock_direct servers is appropriate; PARENT_REF_HASHES dead code removal (V3) resolved."
+    },
+    {
+      "id": "C_NO_ERROR_INFLATION",
+      "expected": "0 decompression errors across all conditions",
+      "observed": "0 (result.json controls.C_NO_ERROR_INFLATION observed 0, per_cell decompression_errors [] for all 27 cells)",
+      "assessment": "PASS - No brotli/gzip failures on chunked streams for single-chunk payloads. Would be stronger with multi-chunk payloads exceeding 1024 bytes compressed."
+    },
+    {
+      "id": "C_ORIGIN_VERIFICATION",
+      "expected": "Origin serves Transfer-Encoding: chunked (no Content-Length) for CHUNKED conditions",
+      "observed": "origin_chunked_verified true, 9/9 content conditions has_transfer_encoding_chunked true, has_content_length false, pass true",
+      "assessment": "PASS on fresh verify servers; V3 notes indirect verification. Supports claim that V1 fix is implemented in this codebase."
+    }
+  ],
+  "recomputed_metrics": {
+    "total_requests": 540,
+    "cells": 27,
+    "per_cell_decompressed_discrimination_min": 0.5,
+    "per_cell_decompressed_discrimination_max": 0.5,
+    "per_cell_decompressed_discrimination_mean": 0.5,
+    "per_cell_compressed_discrimination_min": 0.5,
+    "per_cell_status_discrimination_min": 0.5,
+    "CL-PASSTHROUGH_min": 0.5,
+    "CL-PASSTHROUGH_mean": 0.5,
+    "CHUNKED-PASSTHROUGH_min": 0.5,
+    "CHUNKED-PASSTHROUGH_mean": 0.5,
+    "CHUNKED-CACHED_min": 0.5,
+    "CHUNKED-CACHED_mean": 0.5,
+    "B-RANDOM_all_zero": true,
+    "B-RANDOM_values": [0.0],
+    "decompression_errors_total": 0,
+    "decompressed_hash_variation_all_same": true,
+    "determinism_across_paths_mismatches": 0,
+    "determinism_across_paths_checked": 72,
+    "origin_verification_pass": true,
+    "origin_verification_conditions": 9,
+    "body_sizes_compressed_min": 70.0,
+    "body_sizes_compressed_max": 176.0,
+    "chunk_size_origin_proxy": 1024,
+    "decision_rule_conditions": {
+      "c1_chunked_discrimination_ge_0.3_all_cells": true,
+      "c2_determinism_across_framing": true,
+      "c3_B-RANDOM_zero": true,
+      "c4_CL_PASSTHROUGH_eq_0.5": true,
+      "c5_zero_errors": true,
+      "c6_chunked_cached_ge_0.3": true,
+      "c7_origin_verification": true,
+      "survives_current_test": true
+    },
+    "note": "All recomputed values match producer result.json exactly. Discrimination formula intra_match_rate - inter_match_rate yields 0.5 by construction when 3 error states share identical bodies and valid_token distinct. No alternative calculation diverges."
+  },
+  "claim_ceiling": "Iterative decompression (brotli->gzip->identity loop max_depth=5) preserves decompressed body-only discrimination at 0.5 (threshold >=0.3) through chunked TE when BOTH upstream origin->proxy and downstream proxy->client legs are chunked on localhost mock infrastructure, but only for single-chunk payloads (compressed body 70-176 bytes < chunk_size 1024) in PASSTHROUGH and AUTH-AWARE CACHED modes (URL+Accept-Encoding+Authorization, Cache-Control: private, Vary: Authorization). Validated for Flask/stdlib mock OAuth2 origin brotli quality 6 deterministic, 3 content types (JSON/HTML/XML) x3 sizes (1KB/10KB/100KB uncompressed, highly compressible to <176 bytes) x4 auth states (no_auth, valid_token HS256, expired_token HS256, invalid_token) x5 reps seed 44 jitter 50-150ms, N=540, Python 3.12.14, brotli 1.2.0, 0 decompression errors, determinism 72/72 match, B-RANDOM 0.0. CL-PASSTHROUGH regression is contaminated (origin was also chunked, V1) so independent Content-Length origin baseline not re-verified. Multi-chunk reassembly where a brotli stream is split across chunks, real CDN infrastructure (Cloudflare/Fastly/Akamai), Accept-Encoding negotiation, multi-layer brotli, binary content, and production-scale concurrency remain untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35434773328/request.json",
+    "research/experiments/EXP-RUNTIME-35434773328/spec.json",
+    "research/experiments/EXP-RUNTIME-35434773328/prereg.md",
+    "research/experiments/EXP-RUNTIME-35434773328/freeze.json",
+    "research/experiments/EXP-RUNTIME-35434773328/result.json",
+    "research/experiments/EXP-RUNTIME-35434773328/report.md",
+    "research/experiments/EXP-RUNTIME-35434773328/provenance.json",
+    "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py:624-627 origin_use_chunked=True contamination; :265/:365/:414 chunk_size=1024; :354-421 proxy HIT/MISS chunked handling; :958-1000 C_ORIGIN_VERIFICATION; :900-946 C_DETERMINISM_ACROSS_PATHS",
+    "research/experiments/EXP-RUNTIME-35401995092/handoff.json",
+    "research/experiments/EXP-RUNTIME-35401995092/audit.json",
+    "research/experiments/EXP-RUNTIME-35401995092/result.json",
+    "codex/claim_state.json",
+    "codex/index.json"
+  ],
+  "unresolved": [
+    "Does iterative decompression survive multi-chunk Transfer-Encoding: chunked where compressed brotli payload exceeds chunk_size and chunk boundaries split the byte stream (requires chunk_size << compressed size or incompressible content)?",
+    "Does CL-PASSTHROUGH with true Content-Length origin (use_chunked=False) still reproduce 0.5 discrimination after isolating V1 contamination, confirming proxy transcoding vs drift?",
+    "Does HIT response for CHUNKED-CACHED actually send Transfer-Encoding: chunked without Content-Length on the wire (requires per-request header capture, not code inspection)?",
+    "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration, chunked TE, Accept-Encoding negotiation, quality variation, and geographic latency?",
+    "Does iterative decompression survive double/triple-brotli multi-layer encoding through a chunked proxy (max_depth=5 limit)?",
+    "What is production-scale latency/CPU at N>1000 with MB-scale incompressible natural content and concurrent clients through real or realistic chunked proxy?",
+    "Does proxy header handling interact with CDN-specific headers (X-Cache, Via, X-Forwarded-For, ETag, Content-Length) under chunked framing?"
+  ]
+}

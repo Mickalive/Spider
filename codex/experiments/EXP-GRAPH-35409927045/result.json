@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35409927045",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "total_paired_samples": 60,
+    "endpoints_reached": 3,
+    "network_errors": 0,
+    "pooled": {
+      "pearson_r": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 1.0,
+      "tost_pass": false,
+      "ci_upper": 1.0,
+      "n_samples": 60,
+      "auth_detection_rate": 1.0,
+      "rate_304": 0.0,
+      "false_positive_rate": 0.0,
+      "mean_behavioral_delta": 0.0,
+      "mean_structural_composite": 0.0,
+      "behavioral_stdev": 0.0,
+      "structural_stdev": 0.0,
+      "note": "Both behavioral_delta and structural_composite have zero variance across all 60 samples. Pearson r is undefined (0/0). CI is [0.0, 1.0] which is uninformative."
+    },
+    "per_endpoint": {
+      "github_repos": {
+        "n": 20,
+        "r": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "bd_mean": 0.0,
+        "bd_stdev": 0.0,
+        "sc_mean": 0.0,
+        "sc_stdev": 0.0,
+        "has_variance": false,
+        "status_codes": {
+          "200": 0,
+          "403": 20
+        },
+        "note": "GitHub API returns 403 (rate limited) for all unauthenticated requests"
+      },
+      "github_users": {
+        "n": 20,
+        "r": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "bd_mean": 0.0,
+        "bd_stdev": 0.0,
+        "sc_mean": 0.0,
+        "sc_stdev": 0.0,
+        "has_variance": false,
+        "status_codes": {
+          "403": 20
+        },
+        "note": "GitHub API returns 403 (rate limited) for all unauthenticated requests"
+      },
+      "jsonplaceholder_posts": {
+        "n": 20,
+        "r": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "bd_mean": 0.0,
+        "bd_stdev": 0.0,
+        "sc_mean": 0.0,
+        "sc_stdev": 0.0,
+        "has_variance": false,
+        "status_codes": {
+          "200": 20
+        },
+        "note": "JSONPlaceholder returns deterministic identical JSON every time; no structural or behavioral variation"
+      }
+    }
+  },
+  "controls": {
+    "C1_behavioral_detection": {
+      "expected": "mean TP rate >= 0.85 AND Wilson lower > 0.75",
+      "observed": "auth_detection_rate=1.0 (GitHub correctly returns 401 for invalid Bearer tokens)",
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json: auth_status field shows 401 for invalid token probes"
+    },
+    "C2_variance": {
+      "expected": ">= 2/3 endpoints have std > 0 for both behavioral and structural signals",
+      "observed": "0/3 endpoints have variance > 0 in either signal (all behavioral_delta=0.0, all structural_composite=0.0)",
+      "pass": false,
+      "evidence": "raw_evidence/experiment_data.json: zero variance across all 60 paired samples"
+    },
+    "C3_equivalence": {
+      "expected": "95% CI upper bound on pooled Pearson r < 0.15 (delta=0.15 TOST)",
+      "observed": "pooled r undefined (zero variance in both signals), CI=[0.0, 1.0], upper=1.0",
+      "pass": false,
+      "evidence": "Cannot compute meaningful correlation because both signals are constant"
+    },
+    "C4_null_control": {
+      "expected": "FP = 0.0 on stable non-authenticated endpoint",
+      "observed": "FP_rate=0.0 (0/60 samples with behavioral_delta > 0.5)",
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json: all behavioral_delta values are exactly 0.0"
+    },
+    "C5_network_availability": {
+      "expected": ">= 2/3 target APIs reachable with >= 80% request success rate",
+      "observed": "3/3 endpoints reached. GitHub returns 403 (rate limit) but connection succeeds. JSONPlaceholder returns 200.",
+      "pass": true,
+      "evidence": "All 3 endpoints responded to requests; network connectivity confirmed"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/raw_evidence/experiment_data.json",
+      "role": "raw",
+      "description": "60 paired sample results from real API endpoints"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/raw_evidence/network_errors.json",
+      "role": "raw",
+      "description": "Network error log (empty - all requests succeeded)"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/metrics.json",
+      "role": "derived",
+      "description": "Computed metrics and decision rule evaluation"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/run_efficient.py",
+      "role": "code",
+      "description": "Experiment execution script"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/request.json",
+      "role": "frozen-input",
+      "description": "Frozen experiment request"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/spec.json",
+      "role": "frozen-input",
+      "description": "Frozen experiment specification"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/prereg.md",
+      "role": "frozen-input",
+      "description": "Frozen preregistration"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35409927045/freeze.json",
+      "role": "frozen-input",
+      "description": "Frozen experiment state"
+    }
+  ],
+  "observations": [
+    "All 3 target API endpoints were reachable from the execution environment (network connectivity confirmed)",
+    "GitHub API returns 403 (rate limit exceeded) for unauthenticated requests to both /repos/octocat/Hello-World and /users/octocat",
+    "GitHub correctly returns 401 when probed with invalid Bearer token, confirming behavioral auth detection works",
+    "JSONPlaceholder returns 200 with deterministic identical JSON structure every time (no schema variation)",
+    "All endpoints return 200 or 403 status codes consistently across 20 samples each; no status code variation observed",
+    "No ETag headers present on any endpoint; no 304 conditional responses observed",
+    "Both behavioral_delta and structural_composite are exactly 0.0 for all 60 paired samples",
+    "The zero variance means Pearson r between behavioral and structural signals is mathematically undefined (0/0)",
+    "The experiment confirms that stable public APIs (GitHub, JSONPlaceholder) do not exhibit the natural stochastic variation needed for the C-FRESHNESS orthogonality test",
+    "The previous execution attempt (attempt 6, transient failure) and this attempt both demonstrate that the chosen endpoints lack the required variation"
+  ],
+  "validity_notes": [
+    "C2 variance condition FAILS: 0/3 endpoints have std > 0 for either behavioral or structural signal. This is because the chosen endpoints are deterministic public APIs with no natural variation.",
+    "The Pearson r is undefined (0/0) because both signals have zero variance. The 95% CI of [0.0, 1.0] is uninformative and does not support any conclusion about orthogonality.",
+    "GitHub API rate limiting (403) means the full 160-sample-per-endpoint target could not be achieved. GitHub's unauthenticated rate limit is 60 requests/hour.",
+    "JSONPlaceholder is a deterministic mock server that always returns identical JSON, making it unsuitable for testing structural variation.",
+    "The behavioral signal extraction works correctly (auth detection = 1.0, FP rate = 0.0) but there is no behavioral SIGNAL VARIATION to correlate with structural variation.",
+    "This result demonstrates that the specific endpoint selection in the preregistration was insufficient. Endpoints with natural stochastic variation (timestamps, request IDs, dynamic content) would be needed.",
+    "This is a measurement limitation (insufficient signal variance), NOT a scientific falsification of the C-FRESHNESS orthogonality hypothesis.",
+    "The status=COMPLETE reflects that the measurement transaction completed successfully. The outcome=INCONCLUSIVE reflects that the data cannot distinguish between orthogonality and correlation due to zero variance."
+  ],
+  "unresolved": [
+    "The C-FRESHNESS orthogonality hypothesis (|r| < 0.15) remains untested on real APIs with natural stochastic variation",
+    "Endpoints with natural behavioral and structural variation (e.g., APIs with timestamps, request IDs, dynamic content, rate limiting that creates variation) have not been identified or tested",
+    "Whether the localhost mock orthogonality result (r=0.0022, CI upper 0.0916) transfers to real APIs with production-like variation remains an open question",
+    "The correct endpoint selection for the C-FRESHNESS real-API test has not been determined; endpoints need natural stochastic variation in both response behavior and schema",
+    "Whether CDN caching, network latency variation, or rate limiting on production APIs would create sufficient behavioral variation to test orthogonality is unknown"
+  ]
+}

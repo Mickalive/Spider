@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "lane": "product",
+  "github_run_id": "35434772331",
+  "base_sha": "872b927f545174f093bc983622850240dfcece01",
+  "frozen_at": "2026-09-19T09:41:02.775047+00:00",
+  "executed_at": "2026-09-19T00:14:00Z",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": [
+      "flask (mock_server.py, not used in run_experiment.py)",
+      "pyjwt==2.13.0",
+      "cryptography",
+      "scipy",
+      "numpy"
+    ],
+    "server": "wsgiref.simple_server (single-process WSGI, port 18936)",
+    "deterministic_seed": 42
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "request.json",
+      "sha256": "daa1bb8c32b7a0b25f9a211ff6cd4d0f20f92c2049eb25804b4d770af18973d6"
+    },
+    "spec.json": {
+      "path": "spec.json",
+      "sha256": "bb38655dd5bba84109dcd551b975ccb25119fdc232b30b252ee1433d940be341"
+    },
+    "prereg.md": {
+      "path": "prereg.md",
+      "sha256": "f41a53780890d99b11f37c449bc3f9260cf992c008ad7768e13f886243ba1ed7"
+    },
+    "freeze.json": {
+      "path": "freeze.json",
+      "sha256": "3da975a9371c2385b6ac901cab66c3043b048dc2b21e65653b9a6bbc6675c865"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "233fd79230be9fb9d3f6a0f0479a7137b8991f93dc5a23c99924b7c1e2c1d87e"
+    },
+    "experiment_code": {
+      "path": "run_experiment.py",
+      "sha256": "4c594fa4716a75e6cfd75258814032b8d208f74ca7b4698ad560b56709dcf3bc"
+    },
+    "mock_server": {
+      "path": "mock_server.py",
+      "sha256": "0e3fd509e36fa5676cf858d523fc95786a0204b492677bc8e9af1920e0adcc84"
+    }
+  },
+  "referenced_evidence": [
+    {
+      "experiment_id": "EXP-RUNTIME-33902315583",
+      "path": "codex/experiments/EXP-RUNTIME-33902315583/result.json",
+      "claim": "C-MEAS-VALID",
+      "relevance": "Positive control: HTTP fingerprint discrimination 0.833 on real Flask/JWT endpoints"
+    },
+    {
+      "experiment_id": "EXP-GRAPH-35353011131",
+      "path": "codex/experiments/EXP-GRAPH-35353011131/result.json",
+      "claim": "C-FRESHNESS",
+      "relevance": "Orthogonality confirmed at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135)"
+    },
+    {
+      "experiment_id": "EXP-PRODUCT-35409929216",
+      "path": "research/experiments/EXP-PRODUCT-35409929216/handoff.json",
+      "sha256": "f3ce339a1c8fbff4309caa9b968844292e232ac49aefc367f600add506b59d26",
+      "relevance": "Parent handoff: three-way decision (close C-PRODUCT-ECON / provision LLM / redirect to C-FRESHNESS)"
+    }
+  ],
+  "execution_phases": [
+    "Phase 1: Auth-state discrimination (4 auth states x 10 samples = 40 requests)",
+    "Phase 2: Baselines (B-STATUS-ONLY, B-BODY-ONLY)",
+    "Phase 3: Null FP rate (4 auth states x 10 samples = 40 requests, no drift/noise)",
+    "Phase 4: Co-occurring conditions (12 drift x noise combinations x 60 samples = 720 requests)",
+    "Phase 5: Noise-only conditions (4 noise types x 60 samples = 240 requests)",
+    "Phase 6: Behavioral TP (3 drift types x 60 samples = 180 requests)",
+    "Phase 7: Orthogonality test (TOST on 720 paired behavioral/structural samples)",
+    "Phase 8: Noise FP rate (computed from Phase 5 data)"
+  ],
+  "total_requests": 1220,
+  "measurement_notes": [
+    "Server started as daemon thread via wsgiref.simple_server (single-process, synchronous)",
+    "All requests sequential from main thread (no concurrency)",
+    "Thread-safe state updates via threading.Lock",
+    "JWT tokens generated per-request with deterministic seed=42",
+    "Behavioral score computed client-side from response body JSON",
+    "Structural score = len(body_fields) + len(headers) + 1 (status code)"
+  ]
+}
