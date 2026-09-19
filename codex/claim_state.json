@@ -2025,6 +2025,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule passes arithmetically (all 5 conditions met): decompressed discrimination 0.5 >= 0.3 for all MULTI-CHUNK cells, determinism all_same=true for all states across all conditions, B-RANDOM 0.0 for all 6 cells, 0 counted decompression errors, MULTI-CHUNK discrimination 0.5 >= 0.3. Audit recomputes all metrics exactly (V6). The experiment directly resolves the parent V2 blocker (single-chunk degeneracy): compressed payloads 70-173 bytes genuinely span 3-6 chunks at chunk_size=32, and chunked framing is transparent to iterative decompression pipeline at this size. However, the frozen decision conditions are degenerate (audit V1: decompress_body never raises so error count is tautologically 0; V2: decompressed and compressed discrimination are identical at 0.5 because the metric cannot distinguish successful decompression from silent fallback to compressed bytes which also group as 0.5 via 3-way error collapse). The claim ceiling is bounded to: chunked framing transparency (no crashes, deterministic within-state grouping preserved) for localhost buffered Python reverse proxy, single-quality brotli (quality 6), payloads 70-173 bytes spanning 3-6 chunks, JSON/HTML/XML at 1KB nominal, 4 auth states with 3-way error collapse, N=20 per state per cell (480 total), Python 3.12.14 brotli 1.2.0. Does NOT establish decompressed payload byte-equality to ground-truth uncompressed body (no correctness control), real CDN behavior, larger payloads, gzip multi-chunk, streaming partial-frame forwarding, or production readiness. C-MEAS-VALID remains EXPERIMENTAL: decompression-normalization chunked-TE sub-thread advances but the sole remaining blocker for product readiness (real CDN infrastructure) is unchanged."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35445596324",
+        "lane": "intel",
+        "created_at": "2026-09-19T13:23:17.250983+00:00",
+        "decision": "MIXED",
+        "source_commit": "68db4301ae84b028e5b5aecab29415df7122ed8c",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "This experiment is diagnostic for OECD/COINr pipeline ranking stability under sample-size variation, not a direct advancement of C-MEAS-VALID. Frozen decision_rule MIXED verdict: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (hierarchy anchor eta2=0.0), C3 PASS (pipeline max eta2=0.999645 at n=20), C4 PASS (natural ranking preserved for tag_entropy both definitions at n=20), C5 PASS (Spearman=1.0 monotonic improvement, +55.95pp), C6 FAIL (canonical recipe agreement 55.95% < 80% threshold). The ranking instability is partially sample-size-dependent but not fully resolved at maximum available n=20. Audit PASS confirms all recomputed metrics match producer. C-MEAS-VALID retains EXPERIMENTAL status from prior valid experiments (decompression-normalization sub-thread); this experiment does not advance or falsify the broader measurement-validity claim."
       }
     ]
   },
@@ -2100,14 +2110,14 @@
       "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-35445595071",
-      "lane": "runtime",
-      "created_at": "2026-09-19T13:23:13.496457+00:00",
-      "decision": "CONSTRAINED",
-      "source_commit": "7884a3cfa04a7da574ae6770978a159f93da786b",
+      "experiment_id": "EXP-INTEL-35445596324",
+      "lane": "intel",
+      "created_at": "2026-09-19T13:23:17.250983+00:00",
+      "decision": "MIXED",
+      "source_commit": "68db4301ae84b028e5b5aecab29415df7122ed8c",
       "claim_id": "C-MEAS-VALID",
       "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule passes arithmetically (all 5 conditions met): decompressed discrimination 0.5 >= 0.3 for all MULTI-CHUNK cells, determinism all_same=true for all states across all conditions, B-RANDOM 0.0 for all 6 cells, 0 counted decompression errors, MULTI-CHUNK discrimination 0.5 >= 0.3. Audit recomputes all metrics exactly (V6). The experiment directly resolves the parent V2 blocker (single-chunk degeneracy): compressed payloads 70-173 bytes genuinely span 3-6 chunks at chunk_size=32, and chunked framing is transparent to iterative decompression pipeline at this size. However, the frozen decision conditions are degenerate (audit V1: decompress_body never raises so error count is tautologically 0; V2: decompressed and compressed discrimination are identical at 0.5 because the metric cannot distinguish successful decompression from silent fallback to compressed bytes which also group as 0.5 via 3-way error collapse). The claim ceiling is bounded to: chunked framing transparency (no crashes, deterministic within-state grouping preserved) for localhost buffered Python reverse proxy, single-quality brotli (quality 6), payloads 70-173 bytes spanning 3-6 chunks, JSON/HTML/XML at 1KB nominal, 4 auth states with 3-way error collapse, N=20 per state per cell (480 total), Python 3.12.14 brotli 1.2.0. Does NOT establish decompressed payload byte-equality to ground-truth uncompressed body (no correctness control), real CDN behavior, larger payloads, gzip multi-chunk, streaming partial-frame forwarding, or production readiness. C-MEAS-VALID remains EXPERIMENTAL: decompression-normalization chunked-TE sub-thread advances but the sole remaining blocker for product readiness (real CDN infrastructure) is unchanged."
+      "reason": "This experiment is diagnostic for OECD/COINr pipeline ranking stability under sample-size variation, not a direct advancement of C-MEAS-VALID. Frozen decision_rule MIXED verdict: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (hierarchy anchor eta2=0.0), C3 PASS (pipeline max eta2=0.999645 at n=20), C4 PASS (natural ranking preserved for tag_entropy both definitions at n=20), C5 PASS (Spearman=1.0 monotonic improvement, +55.95pp), C6 FAIL (canonical recipe agreement 55.95% < 80% threshold). The ranking instability is partially sample-size-dependent but not fully resolved at maximum available n=20. Audit PASS confirms all recomputed metrics match producer. C-MEAS-VALID retains EXPERIMENTAL status from prior valid experiments (decompression-normalization sub-thread); this experiment does not advance or falsify the broader measurement-validity claim."
     }
   }
 }
