@@ -8,7 +8,7 @@
   "next_question": "Is the 0.933-bit K2 PMI signal on the 12-state SPA primarily Markov (action determines next state given current state, requiring only current-state conditioning) or genuinely beyond-Markov (history K>2 adds predictive information beyond current state)? Compare state-history K2 PMI (0.933 bits) against action-history K3 PMI (1.221 bits) at N=5000 on the same SPA: if K3 >> K2, signal is primarily Markov; if K2 is comparable to or exceeds K3 after history conditioning, beyond-Markov structure is demonstrated. This decomposition does not require null centering (it is a ratio/comparison, not an absolute test) and resolves the interpretive ambiguity without resolving the null bias problem.",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-19T05:05:02.949712+00:00",
+  "updated_at": "2026-09-19T09:28:25.030189+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "dc110667c4e09b4e196d07a4cf6819afed4be2b3b00ef432b7e07b906663116d",
   "same_failure_count": 0,
