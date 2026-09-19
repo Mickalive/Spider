@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35456070671",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression correctness established within frozen scope: iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth uncompressed body for all 4 auth states across 3 content types and 3 chunk configurations (360/360 passes, 0 silent fallbacks, 0 errors). V1/V2 degeneracy from parent resolved. However, claim ceiling is bounded to localhost mock server with brotli quality 6, 1KB payloads, chunk_size=32/1024, Python 3.12.14 brotli 1.2.0, buffered reverse proxy. Real CDN infrastructure (Cloudflare/Fastly/Akamai) is the sole remaining product-readiness blocker. Larger payloads (10KB/100KB), gzip multi-chunk, brotli quality variation (4-8), streaming partial-frame forwarding, and production OAuth/OIDC middleware remain untested."
+    }
+  ],
+  "product_action": "C-MEAS-VALID decompression-correctness blocker removed for localhost mock scope. Product team may proceed with real CDN deployment design knowing the decompression pipeline produces correct output in the tested setting. Do NOT promote to Product Core: real CDN infrastructure is the required next gate.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, geographic latency, and production concurrency?",
+  "reason": "All 7 frozen decision-rule conditions pass. Producer metrics verified by independent audit (PASS). 360/360 correctness passes, 0 silent fallbacks, 0 decompression errors across all 9 cells. V1/V2 degeneracy resolved: correctness controls prove decompressed output matches expected output exactly, eliminating the possibility that discrimination was preserved by silent fallback to compressed bytes. The decompression-normalization line no longer rests on an unverified assumption within the frozen scope. However, the claim ceiling is bounded to localhost mock infrastructure; real CDN testing is the mandatory next gate for product readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35456070671/result.json (360/360 correctness, 0 silent fallbacks, 9 cells discrimination 0.5, B-RANDOM 0.0, C_CORRECTNESS_MATCH / C_SILENT_FALLBACK / C_NO_ERRORS pass)",
+    "research/experiments/EXP-RUNTIME-35456070671/audit.json (PASS, producer_claim_supported true, V1-V6 validity findings, claim_ceiling bounded to localhost mock, recomputed_metrics all match)",
+    "research/experiments/EXP-RUNTIME-35456070671/report.md (executive summary, per-cell table, product consequence scope, validity threats)",
+    "research/experiments/EXP-RUNTIME-35456070671/spec.json (frozen hypothesis, 7-condition decision_rule, falsifier, measurement_validity)",
+    "research/experiments/EXP-RUNTIME-35456070671/prereg.md (Background V1/V2 degeneracy, scope boundaries, decision rule)",
+    "research/experiments/EXP-RUNTIME-35456070671/run_experiment.py (decompress_body, BODY_GENERATORS, expected_hash, silent fallback detection, decompression_altered)",
+    "research/experiments/EXP-RUNTIME-35445595071/handoff.json (parent V1_DEGENERATE_ERROR_CONTROL and V2_INSENSITIVE_DISCRIMINATION requiring this correctness control)",
+    "research/experiments/EXP-RUNTIME-35456070671/freeze.json (frozen hashes prereg 80b64e.., spec fe0d00.., request 927f41..)",
+    "research/experiments/EXP-RUNTIME-35456070671/provenance.json (python 3.12.14, brotli 1.2.0, ports 7700-7702/7800-7802, seed 44)"
+  ]
+}
