@@ -1,17 +1,17 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-35456068953",
-  "last_experiment_id": "EXP-PRODUCT-35445596342",
-  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 All four frozen decision conditions pass at the bounded localhost stochastic-mock ceiling. C1 auth discrimination 0.8333 > 0.5 (positive control, replicating EXP-RUNTIME-33902315583). C2 behavioral TP 1.0 >= 0.85 on all three drift types in isolation and 8/8 co-occurring conditions. C3 behavioral variance 8/8 conditions with std > 0.05 (range 0.087\u20130.104) AND orthogonality confirmed at delta=0.15 (pooled r=-0.0258, 95% CI [-0.115, 0.064], CI upper 0.064 < 0.15, TOST p_upper 5.6e-05 < 0.05, shared variance < 0.4%). C4 noise FP 0.0 <= 0.15 on 240 noise-only samples. Audit PASS confirms all recomputed metrics match producer exactly. The three root causes of parent EXP-PRODUCT-35434772331 measurement invalidity \u2014 deterministic server, scoring weight collisions, server state carry-over \u2014 are resolved. However, the claim ceiling is strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL cache 0.5s + jitter 10-100ms + HS256/RS256 JWT on 127.0.0.1:18950, seed 42). No production generalization, PRODUCT_CORE promotion, or non-mock inference is warranted from this evidence alone.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-35456068953",
+  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 frozen decision_rule conditions C1-C4 all pass (C1 discrimination 0.8333 > 0.5, C2 token_refresh TP=1.0 on all 4 co-occurring noise conditions, C3 behavioral_std 0.134-0.143 > 0.05 on all 4 conditions, C4 FP=0.0 <= 0.15). Audit REVISE (not PASS): N=240 violates frozen N>=480 (spec measurement_validity #6, power halved causing TOST lower-tail failure ci_lower=-0.185 < -0.15), behavioral_score is bimodal discrete (0.35/0.65) not continuous as spec requires (V2), threshold 0.25 below both modes makes TP=1.0 tautological (V3), TOST full equivalence at delta=0.15 not met (tost_pass=false, p_lower=0.081). All numeric metrics match producer. Claim ceiling strictly bounded: token_refresh TP=1.0 under co-occurring structural noise on localhost stochastic mock only (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7, BIMODAL scores 0.35/0.65). No production generalization, no PRODUCT_CORE promotion, no non-mock inference.",
   "continue_immediately": false,
-  "next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, severity-weighted scoring, TOST delta=0.15) be measured on a non-mock production-like substrate with real HTTP endpoints exhibiting natural stochastic variation (real OAuth/OIDC middleware, CDN caching, network RTT, database-backed sessions), and does orthogonality survive at delta=0.15 on that substrate?",
+  "next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, severity-weighted scoring, token_refresh included) be measured on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions \u2014 and does orthogonality (TOST delta=0.15, n>=480) survive on that substrate including token_refresh under stochastic drift?",
   "promotion_ready": false,
-  "consecutive_failures": 2,
-  "updated_at": "2026-09-19T21:27:17.824698+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "0db18ccaca0210c28dd4a231c489b96d0881106b68cabadec6f9cf0c43ed7760",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "28c25234d08a5d010dc55dd8",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-19T21:35:18.564506+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "1f9e9cdc48847a0a6ca2a7799f35e77e1ac599a2e0f6e33fdaeaa3e6e492fcfb",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
