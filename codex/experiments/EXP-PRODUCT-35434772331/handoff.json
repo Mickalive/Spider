@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can a redesigned behavioral_score function with continuous differentiated scoring (weighted by drift severity, distinct signal combinations) produce sufficient variance for orthogonality testing when run on a stochastic Flask+SQLite mock server matching EXP-GRAPH-35353011131?",
+  "why_next": "The C3 orthogonality test is measurement-invalid due to behavioral signal zero variance (scoring weight collisions). The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock with behavioral variance 0.14-0.43. The fix is well-specified: (a) redesign behavioral_score to produce continuous differentiated scores, (b) replace deterministic WSGI with stochastic Flask+SQLite mock, (c) reset server state between conditions. This directly resolves the C3 blocker and advances C-FRESHNESS toward PRODUCT_ARCHITECTURE_IMPACT. C-PRODUCT-ECON is closed; product lane redirects to C-FRESHNESS as the next product gate.",
+  "carry_forward": {
+    "established": [
+      "Structural signal (HTTP fingerprint substrate) discriminates auth states on mock SPIDER kernel: discrimination 0.8333, replicating EXP-RUNTIME-33902315583 exactly (C1 passes)",
+      "Behavioral signal detects all three drift types with 100% accuracy in isolated conditions: TP=1.0 for permission_boundary, session_invalidation, token_refresh (C2 passes)",
+      "Structural noise does not cause behavioral false positives: FP=0.0 on 240 noise-only samples (C4 passes)",
+      "C-PRODUCT-ECON is REJECTED: 5+ consecutive PRODUCT experiments with zero real LLM calls, 5.42% thin margin, COLD 7.5x cheaper, analytical line exhausted",
+      "C-FRESHNESS orthogonality already confirmed by parent EXP-GRAPH-35353011131 under stochastic mock at delta=0.15 (r=0.046, CI upper 0.135, TOST p_upper=0.011)"
+    ],
+    "rejected": [
+      "C-PRODUCT-ECON (token-based deduplication economics): REJECTED as not viable at current scale",
+      "Hypothesis that behavioral scoring weights produce differentiated scores: FALSIFIED by measurement (all three drift types score 0.5 due to weight collisions: permission_boundary 0.3+0.2=0.5, session_invalidation 0.3+0.2=0.5, token_refresh 0.05+0.15+0.2=0.4 but measured 0.5 due to state carry-over)"
+    ],
+    "unknown": [
+      "Whether a redesigned behavioral_score with continuous differentiated scoring (e.g., weighted by drift severity) would produce sufficient variance for orthogonality testing on a stochastic server",
+      "Whether server state carry-over (current_role='viewer' persists, session_valid=False persists) affects Phase 6 behavioral TP measurements in addition to Phase 4 co-occurring conditions",
+      "Whether the expired_token/invalid_token fingerprint collision (identical 401 responses) generalizes to production endpoints with differentiated error details",
+      "Whether C-FRESHNESS can advance to PRODUCT_ARCHITECTURE_IMPACT with the stochastic-mock orthogonality baseline (delta=0.15) without re-measurement in this specific product-lane experiment"
+    ],
+    "do_not_assume": [
+      "Do not assume behavioral signal has zero variance in general — the zero variance is specific to this deterministic WSGI server with scoring weight collisions; parent stochastic mock achieved behavioral_std 0.14-0.43",
+      "Do not assume orthogonality is falsified — C3 failure is measurement invalidity (behavioral variance=0.0), not scientific evidence of signal coupling",
+      "Do not assume C-PRODUCT-ECON closure is based solely on this experiment — it is based on the full evidence chain across 5+ experiments",
+      "Do not assume C-FRESHNESS is validated or PRODUCT_CORE — it remains EXPERIMENTAL; orthogonality is confirmed only at delta=0.15 under stochastic mock on localhost, not production",
+      "Do not assume the structural signal (discrimination 0.8333) generalizes to production OAuth/OIDC, CDN, or non-deterministic endpoints — claim ceiling bounded to Flask 3.1.3 + PyJWT 2.13.0 HS256 localhost",
+      "Do not assume the behavioral TP=1.0 generalizes to co-occurring conditions — TP was measured in Phase 6 with isolated drift conditions, not co-occurring drift+noise where state carry-over occurs"
+    ]
+  },
+  "dependencies": [
+    "Redesigned behavioral_score function with continuous differentiated scoring must be implemented before re-running orthogonality test",
+    "Stochastic Flask+SQLite mock server (matching EXP-GRAPH-35353011131) must replace deterministic WSGI server",
+    "Server state must be fully reset between conditions (current_role, session_valid, drift_active, drift_type) to prevent contamination",
+    "C-FRESHNESS orthogonality re-run should use TOST equivalence test at delta=0.15 with n>=480 paired samples",
+    "Product lane should NOT pursue C-PRODUCT-ECON further without real LLM API access and real success rate measurement"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35434772331/result.json (sha256: 233fd79230be9fb9d3f6a0f0479a7137b8991f93dc5a23c99924b7c1e2c1d87e)",
+    "research/experiments/EXP-PRODUCT-35434772331/audit.json — MEASUREMENT_INVALID, V1 zero behavioral variance, V2 server state contamination, V3 deterministic server",
+    "codex/experiments/EXP-GRAPH-35353011131/result.json — orthogonality baseline (r=0.046, CI upper 0.135, stochastic mock)",
+    "research/experiments/EXP-PRODUCT-35409929216/handoff.json (sha256: f3ce339a1c8fbff4309caa9b968844292e232ac49aefc367f600add506b59d26) — parent carry_forward, C-PRODUCT-ECON closure recommendation",
+    "codex/experiments/EXP-RUNTIME-33902315583/result.json — structural signal baseline (discrimination 0.8333)",
+    "codex/claim_state.json — C-PRODUCT-ECON HYPOTHESIS (now REJECTED), C-FRESHNESS EXPERIMENTAL"
+  ],
+  "recommended_action": "Redesign behavioral_score with continuous differentiated scoring (severity-weighted, drift-type-specific signal combinations), replace deterministic WSGI with stochastic Flask+SQLite mock per EXP-GRAPH-35353011131 pattern, fix server state reset between conditions, and re-run C-FRESHNESS orthogonality test with TOST at delta=0.15. No product promotion. C-FRESHNESS remains EXPERIMENTAL. C-PRODUCT-ECON is closed. Product lane next gate is C-FRESHNESS integration with revised behavioral scoring."
+}

@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35409927864",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF-1_Y_COORDINATE_POSITIONAL_DIFFERENCE",
+      "severity": "medium",
+      "finding": "C1 strict failure is entirely y-coordinate positional differences on elements 12-19 (8/20 elements) for listing_electronics vs other listings and detail_pet_camera vs other details. Tags, roles, inForm, x, w, h are 100% identical within each page type across all tasks. Recomputed comparison confirms: listing_clothing-shoes-jewelry vs beauty-personal-care identical on all 7 fields; vs electronics 8 y mismatches only. Detail camera vs vr_bag identical; vs pet_camera 8 y mismatches only. Cart n=1 cannot be tested. Producer correctly reports C1_all_fields=false and C1_without_y=true. y differences are footer elements whose vertical position tracks total page height/content length (different products push footer), not structural tag differences. Per frozen spec C1 requires all 7 fields, so strict FAIL is correct.",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json: locatable_sample[12-19].y for listing_electronics 6368/6729 vs 6350/6729 for other listings; recomputed_metrics.M1_y_coordinate_differences; result.json:M1_sample_template_identity_all_fields=false, M1_sample_template_identity_without_y=true",
+      "impact": "Does not overturn FALSIFIES verdict: C1 FAIL triggers frozen rule NOT C1 -> FALSIFIES. Even if spec had excluded y (structural identity PASS), C2 and C4 still FAIL (eta2=1.0, I_sample=1.449), so verdict remains FALSIFIES. Rentifies bounded scope: template invariance is structural not positional."
+    },
+    {
+      "id": "VF-2_CART_N1_DEGENERACY_SMALL_N",
+      "severity": "medium",
+      "finding": "Cart page type has n=1 unique task after deduplication (cart_1 duplicate). Within-type std=0.0 for cart is degenerate (single observation, variance identically 0), not evidence of template invariance. Total N=7 tasks (3 listing, 3 detail, 1 cart) on 1 Magento site, truncated-first-20 sample. Cross-site generalization untested. Checkout_1 excluded (2 entries, net::ERR_CONNECTION_REFUSED, total_dom=0), correctly handled. Sample size limits statistical precision but does not invalidate discriminability finding because between-type variance is perfect (eta2=1).",
+      "evidence_ref": "result.json:validity_notes VN-1 VN-2, observations OBS-7, M2_within_type_std.cart all 0.0 with n=1; raw_evidence 10 measurements (8 success, 2 checkout errors); recomputed cart n=1",
+      "impact": "Bounds claim ceiling to 7-task/1-site/3-definition truncated setting. Does not weaken falsification: even with n=1 cart, listing vs detail comparison alone (n=3 vs 3) gives eta2=1.0 for non-trivial metrics and chi2 p<<0.01."
+    },
+    {
+      "id": "VF-3_CHI2_TAG_AGGREGATION_SENSITIVITY",
+      "severity": "low",
+      "finding": "Producer chi2=462.56 dof=86 p=6.14e-53 uses reduced 8-tag aggregation (div,a,span,li,form,input,button,img). Full 46-tag recomputation gives chi2=465.69 dof=90 p=4.95e-52 Cramer's V=0.1506 vs producer 0.1502. Both overwhelmingly <0.01, decision C3 PASS unchanged. Small numerical difference reflects tag subset choice, not error. Producer tag counts per page type (listing div501/a1204/span1492/li1048; detail div322/a985/span1053/li955; cart div43/a320/span319/li312) exactly match summed dom_stats.tagCounts recomputation.",
+      "evidence_ref": "result.json:M3_chi2=462.56 p=6.14e-53 dof86 CramersV0.1502; recomputed_metrics M3_chi2 465.69 dof90 p4.95e-52 V0.1506; raw_evidence dom_stats.tagCounts aggregated",
+      "impact": "No verdict change. Confirms C3 PASS robust to tag aggregation. Claim ceiling bounded to Magento site's tag distribution."
+    },
+    {
+      "id": "VF-4_MI_IS_ENTROPY_TAUTOLOGY",
+      "severity": "low",
+      "finding": "M4_mi_sample=1.4488 for both sample and full DOM equals H(page_type) for distribution 3-3-1 (entropy log2 3 listing/detail/cart =1.4488). Because sample metrics achieve perfect classification (eta2=1.0, within-type std0, between-type separation), discrete representation necessarily yields MI = entropy. Equality of I_sample and I_full (both 1.4488) therefore reflects perfect between-type separability in this tiny dataset, not that sample captures full DOM richness. With only 3 page types, max MI=log2(3)=1.585; both exploit ceiling. Producer correctly notes MI identical and C4 fails (I_sample !=0).",
+      "evidence_ref": "result.json:M4_mi_sample=1.4488 M4_mi_full_dom=1.4488 VN-4; recomputed H(page_type)=1.4488 for 3/7,3/7,1/7",
+      "impact": "Does not overturn C4 FAIL (requires I_sample=0). Reinforces interpretation: sample has maximal task-type information, not zero. Information loss ratio M5 undefined (0/positive) but reported as 0 not testable—correctly fails."
+    },
+    {
+      "id": "VF-5_PROVENANCE_EPHEMERAL_PATH",
+      "severity": "low",
+      "finding": "provenance.json analysis_script /tmp/opencode/analyze_v2.py is ephemeral (not under research/experiments). No durable derived artifact beyond result.json/report.md/provenance.json. Deterministic offline computation correctly described; sha256 of raw evidence verified da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050. Cost <1000 tokens valid.",
+      "evidence_ref": "provenance.json:environment.analysis_script, computation.deterministic=true; artifacts_produced only 3 json/md; raw_evidence sha256 matches file",
+      "impact": "No metric impact; affects reproducibility durability only. Recomputation from raw_evidence succeeds without /tmp."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_PARENT_DENSITY_ETA2",
+      "producer_id": "B1_PARENT_DENSITY_ETA2",
+      "finding": "CONFIRMED. Parent hierarchy-weighted density eta2=0.0 on page_type (EXP-INTEL-35401997918 M7) correctly cited. Recomputation on current sample shows density metric eta2=0 is specific to hierarchy formula, not to sample: sample tag_entropy/form_fraction/total_area achieve eta2=1.0 on same page_type, proving sample contains task-type structure that hierarchy recipe collapses. Producer validity note VN-3 correctly identifies this dissociation.",
+      "pass": true,
+      "evidence_ref": "result.json:M2_eta2_tag_entropy=1.0 etc; spec.json:baselines B1; parent result.json M7"
+    },
+    {
+      "id": "B2_PARENT_RECIPE_IDENTITY",
+      "producer_id": "B2_PARENT_RECIPE_IDENTITY",
+      "finding": "CONFIRMED. Parent Spearman(hierarchy,weighted)=1.0 at alpha0.3 cited correctly. Not directly recomputed here (no density recomputed), but logically consistent: hierarchy eta2=0 while sample metrics eta2=1 implies hierarchy collapses between-type variance that generic sample metrics preserve. Supports conclusion density mapping is lossy.",
+      "pass": true,
+      "evidence_ref": "spec.json:baselines B2; parent result.json M6; result.json observations OBS-3"
+    },
+    {
+      "id": "B3_FULL_DOM_TAG_VARIATION",
+      "producer_id": "B3_FULL_DOM_TAG_VARIATION",
+      "finding": "CONFIRMED. Full DOM tag counts vary listing div163-171 a399-403, detail div98-126 a328-329, cart div43 a320 as cited from dom_stats.tagCounts. Recomputation summed listing div501/a1204, detail div322/a985, cart div43/a320 confirms massive cross-type variation. Producer report scope 1700 vs1300 vs1136 elements correct per total_dom_elements.",
+      "pass": true,
+      "evidence_ref": "raw_evidence exp347 dom_stats.tagCounts per task; result.json M3_tag_counts_by_page_type"
+    },
+    {
+      "id": "PC1_FULL_DOM_DISCRIMINATION",
+      "producer_id": "PC1_FULL_DOM_DISCRIMINATION",
+      "finding": "CONFIRMED PASS. Expected p<0.01, observed p=6.14e-53 (recomputed full 46 tags p=4.95e-52). Chi2 462 vs 465, Cramers V0.15, all <<0.01. Proves full DOM has task-type structure. Decision C3 PASS justified. No leakage: dom_stats are direct counts, no sample overlap issue.",
+      "pass": true,
+      "evidence_ref": "result.json controls.PC1_FULL_DOM_DISCRIMINATION pass=true observed p6.14e-53; recomputed chi2 465.69 p4.95e-52"
+    },
+    {
+      "id": "NC1_SAMPLE_INVARIANCE",
+      "producer_id": "NC1_SAMPLE_INVARIANCE",
+      "finding": "CONFIRMED PASS for within-type invariance (std=0.0 for tag_entropy/form_fraction/total_area/mean_bbox_area within listing and detail). Recomputed std 0.0 exactly matches producer M2_within_type_std. Cart degenerate n=1 noted. Producer correctly notes paradox: within-type invariance holds yet between-type eta2=1.0, meaning sample DOES have task-type structure (contrary to hypothesis predicting eta2~0). Null control passes strictly (within-type variance zero) but positive hypothesis fails because between-type variance maximal, not zero. Handling correct.",
+      "pass": true,
+      "evidence_ref": "result.json controls.NC1_SAMPLE_INVARIANCE pass=true observed within std0; recomputed within std 0.0 for listing/detail; M2_eta2=1.0"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_sample_template_identity_all_fields": {
+      "producer": false,
+      "recomputed": false,
+      "match": true,
+      "detail": "8 y mismatches only: listing_clothing vs beauty identical, vs electronics 8 y diffs elements12-19; detail_camera vs vr_bag identical, vs pet_camera 8 y diffs elements12-19; structural fields tag/role/inForm/x/w/h 100% identical"
+    },
+    "M1_sample_template_identity_without_y": {
+      "producer": true,
+      "recomputed": true,
+      "match": true
+    },
+    "M1_y_coordinate_differences": {
+      "producer_product_listing_count": 8,
+      "recomputed_product_listing_count": 8,
+      "producer_detail_count": 8,
+      "recomputed_detail_count": 8,
+      "producer_elements_affected": [12, 13, 14, 15, 16, 17, 18, 19],
+      "recomputed_elements_affected_product_listing": [12, 13, 14, 15, 16, 17, 18, 19],
+      "recomputed_elements_affected_detail": [12, 13, 14, 15, 16, 17, 18, 19],
+      "match": true
+    },
+    "M2_eta2_tag_entropy": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "M2_eta2_form_fraction": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "M2_eta2_total_area": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "M2_eta2_mean_bbox_area": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true
+    },
+    "M2_eta2_unique_tags": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "note": "Constant 7 across all tasks, eta2=0 correctly indicates degenerate metric, not discriminative. Does not affect C2 failure (other metrics 1.0)"
+    },
+    "M2_eta2_element_count": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "note": "Constant 20 across all tasks, degenerate."
+    },
+    "M2_within_type_std": {
+      "producer": {"product_listing": {"tag_entropy": 0.0, "form_fraction": 0.0, "total_area": 0.0, "mean_bbox_area": 0.0}, "detail": {"tag_entropy": 0.0, "form_fraction": 0.0, "total_area": 0.0, "mean_bbox_area": 0.0}, "cart": {"tag_entropy": 0.0, "form_fraction": 0.0, "total_area": 0.0, "mean_bbox_area": 0.0}},
+      "recomputed": {"product_listing": {"tag_entropy": 0.0, "form_fraction": 0.0, "total_area": 0.0, "mean_bbox_area": 0.0}, "detail": {"tag_entropy": 0.0, "form_fraction": 0.0, "total_area": 0.0, "mean_bbox_area": 0.0}, "cart": {"tag_entropy": 0.0, "form_fraction": 0.0, "total_area": 0.0, "mean_bbox_area": 0.0}},
+      "match": true
+    },
+    "M2_sample_metrics_per_task": {
+      "producer_listing_entropy": 2.6464,
+      "recomputed_listing_entropy": 2.6464393446710153,
+      "producer_detail_entropy": 2.4842,
+      "recomputed_detail_entropy": 2.484183719779189,
+      "producer_cart_entropy": 2.6016,
+      "recomputed_cart_entropy": 2.6016094970590276,
+      "producer_listing_total_area": 341795.17,
+      "recomputed_listing_total_area": 341795.171875,
+      "producer_detail_total_area": 589190.03,
+      "recomputed_detail_total_area": 589190.03125,
+      "producer_cart_total_area": 428790.31,
+      "recomputed_cart_total_area": 428790.3125,
+      "producer_listing_form_frac": 0.85,
+      "recomputed_listing_form_frac": 0.85,
+      "producer_detail_form_frac": 0.95,
+      "recomputed_detail_form_frac": 0.95,
+      "match": true
+    },
+    "M3_chi2": {
+      "producer": 462.56,
+      "recomputed_full_46_tags": 465.68533592915946,
+      "match_approx": true,
+      "note": "Difference due to tag aggregation (8 vs 46 tags). Decision threshold p<0.01 passes in both (producer p6.14e-53 dof86, recomputed p4.95e-52 dof90). Recomputed per-type totals match producer M3_tag_counts_by_page_type exactly."
+    },
+    "M3_chi2_p": {
+      "producer": 6.14e-53,
+      "recomputed": 4.946539870066611e-52,
+      "threshold": 0.01,
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "match_decision": true
+    },
+    "M3_cramers_v": {
+      "producer": 0.1502,
+      "recomputed": 0.15064599945084448,
+      "match": true
+    },
+    "M4_mi_sample": {
+      "producer": 1.4488,
+      "recomputed_H_page_type": 1.4488156357251847,
+      "match": true,
+      "note": "Equals H(page_type) for 3-3-1 distribution, perfect classification (eta2=1) forces MI=entropy. Producer rounding 1.4488 vs 1.4488 correct."
+    },
+    "M4_mi_full_dom": {
+      "producer": 1.4488,
+      "recomputed": 1.4488156357251847,
+      "match": true
+    },
+    "M4_i_sample_zero": {
+      "producer": false,
+      "recomputed": false,
+      "match": true
+    },
+    "M4_i_full_dom_positive": {
+      "producer": true,
+      "recomputed": true,
+      "match": true
+    },
+    "M8_sample_element_field_coverage": {
+      "producer": {"tag": true, "role": true, "inForm": true, "x": true, "w": true, "h": true, "y": false},
+      "recomputed": {"tag": true, "role": true, "inForm": true, "x": true, "w": true, "h": true, "y": false},
+      "match": true
+    },
+    "C1_SAMPLE_TEMPLATE_INVARIANT": {
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "threshold": "100% identical on 7 fields",
+      "match": true
+    },
+    "C2_SAMPLE_ETA2_ZERO": {
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "threshold": "all eta2<0.01",
+      "observed_max_eta2": 1.0,
+      "match": true
+    },
+    "C3_FULL_DOM_DISCRIMINATES": {
+      "producer_pass": true,
+      "recomputed_pass": true,
+      "threshold": "p<0.01",
+      "match": true
+    },
+    "C4_INFORMATION_LOSS": {
+      "producer_pass": false,
+      "recomputed_pass": false,
+      "threshold": "I_sample=0.0 AND I_full>0",
+      "observed_I_sample": 1.4488,
+      "match": true
+    }
+  },
+  "claim_ceiling": "FALSIFIES template-composition explanation within narrow bounded setting only: On 7 tasks (3 product_listing, 3 detail, 1 cart deduplicated from 8 success measurements, 2 checkout errors excluded) from 1 Magento site (docker am1n3e/webarena-verified-shopping), truncated-first-20 locatable_sample, 3 definitions — the sample IS NOT informationally zero: structural fields (tag, role, inForm, x, w, h) are identical within each page type (y differs positionally on elements 12-19), and sample-derived metrics achieve perfect task-type discrimination (eta2=1.0 for tag_entropy=2.646 vs2.484 vs2.602, form_fraction 0.85 vs0.95, total_area 341k vs589k vs428k, within-type std0.0), contradicting hypothesis that eta2=0 is mathematical necessity for ANY recipe. Full DOM does discriminate (chi2~463-465 p~5e-52, CramersV~0.15, 501 vs322 vs43 div counts) but so does the sample (MI=1.449 bits=H(page_type) for both). Per frozen decision_rule NOT C1 triggers FALSIFIES: template invariance does not explain parent hierarchy density eta2=0.0; failure is metric-specific (hierarchy mapping collapses between-type variance). Bounded to tested sample/site; no inference to true DOM depth, other sites, full-DOM density values, or per-task sampling necessity. Per-task sampling NOT required for task-type discrimination in this sample; metric design is the bottleneck.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35409927864/spec.json:decision_rule C1-C4 conjunctive (C1 100% identical on 7 fields, C2 eta2<0.01, C3 p<0.01, C4 I_sample0 and I_full>0, verdict NOT C1->FALSIFIES)",
+    "research/experiments/EXP-INTEL-35409927864/result.json:metrics M1-M4 M8, controls PC1/NC1, observations OBS-1 to OBS-7, validity_notes VN-1 to VN-5",
+    "research/experiments/EXP-INTEL-35409927864/report.md:decision table C1 FAIL C2 FAIL C3 PASS C4 FAIL, Y-coordinate positional explanation",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050: 10 measurements, locatable_sample 20 elements, dom_stats.tagCounts",
+    "research/experiments/EXP-INTEL-35401997918/handoff.json sha256 b0fb7e618ae49216cd857d6e4bccf9c9a57b467a521a040a8ac9d051e41ce92c parent FALSIFIED-IN-SETTING heuristic depth",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/tightened_results.json: per_type tightened_interactive_fraction 0.00469/0.00374/0.00528"
+  ],
+  "unresolved": [
+    "Why does hierarchy-weighted density produce eta2=0.0 if sample has eta2=1.0 on basic metrics? Density formula maps different compositions (85% vs95% inForm, 341k vs589k area, distinct entropy) to identical density 0.666... Hypothesis: formula exp(-alpha*depth) with binary inForm depth collapses variation; recomputation of density not in scope but implied.",
+    "Could a different density metric based on entropy/form_frac/total_area achieve non-zero eta2 and discriminate task type where hierarchy fails? Suggests metric design, not sampling, is bottleneck. Requires designing/testing richer density recipe on same sample—blocked pending new metric definition.",
+    "Does true DOM tree depth (actual parent-child levels 2-20+ from complete DOM with hierarchy preserved, not inForm heuristic on flattened 20) vary by page type and provide hierarchy discrimination that truncated sample masks? Parent U-1 remains open; requires runtime lane full-DOM capture with preserved hierarchy (carry_forward from EXP-INTEL-35401997918).",
+    "Cross-site generalization: Do other Magento sites or non-Magento sites have fixed-template locatable_samples or per-task variation that changes eta2? Bounded to single site; cross-site data unavailable.",
+    "Cart task-type structure with n=1 cannot be validated; cart_1 duplicate suggests measurement captured twice identically. Minimum 2+ cart tasks needed to test within-type invariance for cart."
+  ]
+}

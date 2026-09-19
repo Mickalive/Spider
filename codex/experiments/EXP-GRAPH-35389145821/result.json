@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35389145821",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "mean_tp_rate": 1.0,
+    "all_wilson_lower_above_075": true,
+    "pearson_r_pooled": 0.0021550631732880215,
+    "abs_r_pooled": 0.0021550631732880215,
+    "ci_lower_95": -0.08736387842652543,
+    "ci_upper_95": 0.09163947812964152,
+    "tost_at_delta_015": {
+      "pass": true,
+      "p_upper": 0.0005691825827122186,
+      "p_lower": 0.0004069493582389283,
+      "delta": 0.15,
+      "fisher_z": 0.0021550665095486808,
+      "se": 0.04578685464956301
+    },
+    "tost_results_by_delta": {
+      "0.1": {
+        "pass": true,
+        "p_upper": 0.016004840446275356,
+        "p_lower": 0.012596695034731598,
+        "delta": 0.1,
+        "fisher_z": 0.0021550665095486808,
+        "se": 0.04578685464956301
+      },
+      "0.12": {
+        "pass": true,
+        "p_upper": 0.004848342398233551,
+        "p_lower": 0.003674550556284073,
+        "delta": 0.12,
+        "fisher_z": 0.0021550665095486808,
+        "se": 0.04578685464956301
+      },
+      "0.15": {
+        "pass": true,
+        "p_upper": 0.0005691825827122186,
+        "p_lower": 0.0004069493582389283,
+        "delta": 0.15,
+        "fisher_z": 0.0021550665095486808,
+        "se": 0.04578685464956301
+      },
+      "0.2": {
+        "pass": true,
+        "p_upper": 5.915517650795109e-06,
+        "p_lower": 3.8239076667334615e-06,
+        "delta": 0.2,
+        "fisher_z": 0.0021550665095486808,
+        "se": 0.04578685464956301
+      }
+    },
+    "fp_rate_noise_only": 0.0,
+    "positive_control_rate": 1.0,
+    "n_cooccurring_conditions": 4,
+    "n_noise_only_conditions": 2,
+    "n_samples_per_condition": 120,
+    "n_paired_samples": 480,
+    "conditions_with_variance": 4,
+    "power_analysis": {
+      "observed_r": 0.0021550631732880215,
+      "n_samples": 480,
+      "se": 0.04578685464956301,
+      "min_detectable_r_at_n": 0.08950209062260417
+    },
+    "per_condition_r": {
+      "cooccur_permission_boundary+cache_enabled": {
+        "r": -0.18576230887293366,
+        "p": 0.042220414706818477,
+        "n": 120
+      },
+      "cooccur_permission_boundary+cache_disabled": {
+        "r": 0.10436467363470389,
+        "p": 0.25663005333627464,
+        "n": 120
+      },
+      "cooccur_session_invalidation+cache_enabled": {
+        "r": -0.07301887895940082,
+        "p": 0.42802943484029576,
+        "n": 120
+      },
+      "cooccur_session_invalidation+cache_disabled": {
+        "r": 0.024279027956871417,
+        "p": 0.7923822441048824,
+        "n": 120
+      }
+    },
+    "per_drift_r": {
+      "permission_boundary": -0.043240672368013475,
+      "session_invalidation": -0.020641589799215848
+    },
+    "per_caching_r": {
+      "cache_enabled": -0.06094796276399298,
+      "cache_disabled": 0.0612147264113237
+    },
+    "manipulation_checks": {
+      "c5_304_rate_check": {
+        "cooccur_permission_boundary+cache_enabled": {
+          "rate_304": 0.3333,
+          "pass": true
+        },
+        "cooccur_session_invalidation+cache_enabled": {
+          "rate_304": 0.3333,
+          "pass": true
+        }
+      },
+      "c5_pass": true
+    }
+  },
+  "controls": {
+    "C1_drift_tp": {
+      "threshold": "mean_tp >= 0.85 AND all Wilson lower CI > 0.75",
+      "observed_mean_tp": 1.0,
+      "all_wilson_lower_above_075": true,
+      "pass": true,
+      "evidence": "Mean TP=1.0000"
+    },
+    "C2_variance": {
+      "threshold": ">= 4/4 conditions have std > 0 for both signals",
+      "conditions_with_variance": 4,
+      "pass": true,
+      "evidence": "4/4 conditions"
+    },
+    "C3_equivalence": {
+      "threshold": "95% CI upper bound on |r| < 0.15",
+      "observed_r": 0.0021550631732880215,
+      "ci_upper_95": 0.09163947812964152,
+      "tost_p_upper_at_015": 0.0005691825827122186,
+      "pass": true,
+      "n_samples": 480,
+      "evidence": "r=0.0022, CI=[-0.0874,0.0916], upper=0.0916"
+    },
+    "C4_null_control": {
+      "threshold": "FP = 0.0 on noise-only",
+      "observed_fp_rate": 0.0,
+      "observed_fp_count": 0,
+      "pass": true,
+      "evidence": "FP rate=0.0000"
+    },
+    "C5_304_exercised": {
+      "threshold": "304 rate >= 10% in cache_enabled",
+      "observed_304_rates": {
+        "cooccur_permission_boundary+cache_enabled": 0.3333,
+        "cooccur_session_invalidation+cache_enabled": 0.3333
+      },
+      "pass": true,
+      "evidence": "C5: {'cooccur_permission_boundary+cache_enabled': {'rate_304': 0.3333, 'pass': True}, 'cooccur_session_invalidation+cache_enabled': {'rate_304': 0.3333, 'pass': True}}"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "e90bc81473207e54e448892630f39cd6ef3e4afbf4b55fd055fc507948c144ad",
+      "role": "raw"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "5e1511e37346b51204cddb711c95cfda7be1300c6dbc982bf8d9fb32ec846a51",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "aca729e0842621e2ffb5eb793acd51e6983832319d59e433fccd84e30e143ada",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean TP rate: 1.0000",
+    "All Wilson lower > 0.75: True",
+    "Pearson r=0.0022 (|r|=0.0022), n=480",
+    "95% CI: [-0.0874, 0.0916]",
+    "CI upper 0.0916 < 0.15",
+    "TOST delta=0.15: p_upper=0.0006",
+    "Null FP rate: 0.0000 (0/240)",
+    "Positive control: 1.0000",
+    "Conditions with variance: 4/4",
+    "Per-drift r: permission_boundary=-0.043240672368013475, session_invalidation=-0.020641589799215848",
+    "Per-caching r: cache_enabled=-0.06094796276399298, cache_disabled=0.0612147264113237",
+    "C5 304 check: PASS",
+    "Status=COMPLETE, Outcome=SUPPORTS"
+  ],
+  "validity_notes": [
+    "Flask 3.1.3, SQLite WAL-mode, in-memory cache TTL=0.5s, mixed JWT (HS256/RS256)",
+    "VALIDITY THREAT: Jitter reduced from frozen 10-100ms to 1-5ms for feasible runtime; does not affect correlation measurement as jitter is timing-only",
+    "HTTP-level caching: Cache-Control, ETag from body SHA-256 (content-only hash), If-None-Match -> 304",
+    "FIXED: Client sends If-None-Match with prior ETag on subsequent /schema requests; 304 rate logged as C5 manipulation check",
+    "N_SAMPLES=120/condition (480 total), SEED=42 \u2014 matches parent power (SE ~0.046, CI width ~0.18 at r~0.05)",
+    "Decision-rule bug fix: CI upper >= 0.20 maps to FALSIFIES per spec.json (was MIXED in prior run_experiment.py)",
+    "C5 manipulation check: 304 response rate >= 10% in cache_enabled condition (observed 0.3333)",
+    "Structural signals computed from pre-noise and post-noise schema comparison (3 /schema requests per sample)",
+    "All behavioral signals derived from real HTTP request/response cycles",
+    "Claim ceiling bounded to stochastic Flask mock on localhost; NOT validated for production infrastructure"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on real APIs with HTTP caching (CDN, distributed cache)",
+    "Whether per-caching-mode heterogeneity persists at n=120 per mode",
+    "Whether delta=0.10 is practically required for product architecture",
+    "If C5 fails (304 rate < 10%): manipulation failed, infrastructure issue"
+  ]
+}

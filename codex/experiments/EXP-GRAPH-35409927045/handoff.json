@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35409927045",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can real public APIs with natural behavioral AND structural stochastic variation be identified and used as testbeds for C-FRESHNESS orthogonality (e.g., APIs returning timestamps, request IDs, dynamic content with genuine rate limiting, auth state variation, and ETag/304 support) \u2014 or must the lab construct a production-like testbed server with CDN simulation, OAuth middleware, and dynamic content to answer the inherited next_question?",
+  "why_next": "The C-FRESHNESS orthogonality hypothesis (|r| < 0.15) is confirmed under localhost mock across three experiments (deterministic Flask r=0.0335, stochastic Flask+SQLite+cache+jitter r=0.0463, HTTP caching r=0.0022), all n=480, all PASS. The claim ceiling remains localhost Flask mock. This experiment (EXP-GRAPH-35409927045) attempted real external APIs but is MEASUREMENT_INVALID: selected stable public APIs (GitHub 403 rate-limited, JSONPlaceholder deterministic) have zero behavioral and structural variance. Root cause is endpoint selection failure. The next step must either identify real APIs with genuine stochastic variation in both signal domains, or construct a production-like testbed server. A positive result justifies production parallel-channel architecture; a negative result forces architectural pivot to fused classifiers.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS behavioral-structural signal orthogonality confirmed at delta=0.15 under HTTP conditional caching with 304 manipulation at n=480 (EXP-GRAPH-35389145821): pooled r=0.0022, 95% CI [-0.0874, 0.0916], CI upper 0.0916 < 0.15, TOST p_upper=0.0006. Audit PASS. Shared variance ceiling 0.84%.",
+      "C-FRESHNESS behavioral-structural signal orthogonality confirmed at delta=0.15 on stochastic Flask 3.1.3 + SQLite WAL-mode + cache TTL=0.5s + jitter 10-100ms + PyJWT HS256/RS256 on localhost (EXP-GRAPH-35353011131): pooled r=0.0463, 95% CI [-0.0434, 0.1353], CI upper 0.1353 < 0.15, TOST p_upper=0.011. n=480. Audit PASS. Strongest established evidence for C-FRESHNESS.",
+      "Behavioral signals (token validation, session state change, auth boundary shift, session_status_check) validated detection dimension: TP=1.0 across all co-occurring conditions on stochastic mock.",
+      "HTTP conditional caching (If-None-Match -> 304 at 33.3% rate) does NOT break orthogonality: cache_enabled r=-0.061, cache_disabled r=0.061, symmetric heterogeneity within sampling noise.",
+      "Delta=0.10 orthogonality passes on pooled data (CI upper 0.0916 < 0.10, TOST p_upper=0.016) but per-mode and per-condition CIs exceed 0.10.",
+      "Stable public APIs (GitHub unauthenticated 403, JSONPlaceholder deterministic 200) have zero behavioral and structural variance and cannot serve as testbeds for orthogonality testing (EXP-GRAPH-35409927045, MEASUREMENT_INVALID, audit PASS)."
+    ],
+    "rejected": [
+      "HTTP caching as a common cause raising |r| above 0.15 - three experiments show orthogonality under HTTP caching on localhost mock",
+      "Per-caching-mode heterogeneity as systematic - symmetric at +/- 0.061 at n=480 (confirmed sampling noise)",
+      "n=240 sufficient for delta=0.15 equivalence - CI width ~0.25 at n=240 vs ~0.18 at n=480; n>=480 required",
+      "HTTP conditional caching (304 Not Modified) breaks parallel-channel architecture - C5 manipulation check passes, orthogonality confirmed",
+      "Stable public APIs (GitHub, JSONPlaceholder) can serve as testbeds for C-FRESHNESS orthogonality - zero variance in both signals, MEASUREMENT_INVALID"
+    ],
+    "unknown": [
+      "Whether orthogonality holds on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, and stochastic SPA frontends - the single critical gap for product deployment",
+      "Whether delta=0.10 is practically required for product architecture - pooled CI upper 0.0916 < 0.10 passes but per-mode/per-condition CIs exceed 0.10",
+      "Whether concurrent client load, CDN cache invalidation/purge, stale-while-revalidate, or distributed cache coherence changes correlation structure",
+      "Whether the orthogonal result transfers to non-Flask server frameworks (Express, FastAPI, Rails) with different middleware pipelines",
+      "Which real public APIs or production-like testbeds provide natural behavioral AND structural stochastic variation suitable for orthogonality testing"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE - status remains EXPERIMENTAL bounded to localhost mock; no product promotion warranted",
+      "The pooled r=0.0022 is the true population correlation under production conditions - point estimate is from localhost Flask mock with controlled stochasticity",
+      "Delta=0.10 is confirmed for product deployment - only pooled CI passes; per-mode/per-condition CIs exceed 0.10",
+      "Orthogonality is proven for all possible API architectures - bounded to Flask 3.1.3 + SQLite + in-memory cache + PyJWT on localhost",
+      "This MEASUREMENT_INVALID result falsifies orthogonality on real APIs - it is an environment ceiling (endpoint selection), not evidence against the hypothesis",
+      "GitHub API rate limiting (403) represents real-API behavioral signal - the 403 is constant across all samples with zero variance in behavioral_delta",
+      "The n=60 sample (12.5% of preregistered 480) provides meaningful power - CI width ~0.51 at n=60 vs ~0.18 at n=480"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35389145821/result.json - C1-C5 controls, pooled r=0.0022 CI upper 0.0916, audit PASS, parent established ceiling",
+    "research/experiments/EXP-GRAPH-35389145821/audit.json - status PASS, all five criteria verified, claim_ceiling (localhost mock bounded)",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json - stochastic mock orthogonality (r=0.046, CI upper 0.135 < 0.15, all C1-C4 PASS)",
+    "research/experiments/EXP-GRAPH-35409927045/result.json - C2_variance FAIL (0/3 endpoints have std>0), C3_equivalence FAIL (r undefined 0/0)",
+    "research/experiments/EXP-GRAPH-35409927045/audit.json - status MEASUREMENT_INVALID, 8 required_fixes, endpoint selection failure identified",
+    "research/experiments/EXP-GRAPH-35409927045/raw_evidence/experiment_data.json - 60 paired samples with zero behavioral_delta and structural_composite variance",
+    "codex/claim_state.json:C-FRESHNESS - EXPERIMENTAL status with localhost mock ceiling"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35409927045/request.json sha256 31aebca73775d5da7c520373006c1bcb32c0ed686a05e656553b34a011683ef8",
+    "research/experiments/EXP-GRAPH-35409927045/spec.json sha256 821664cb788de77e4a9dd43d454b950048eb0564b7f292162d9ffaa738af204e",
+    "research/experiments/EXP-GRAPH-35409927045/prereg.md sha256 2bce0b4675321716fc1db138cecc65a7bf4c0cebd32836b3a75cdfa2a1fff0df",
+    "research/experiments/EXP-GRAPH-35409927045/freeze.json sha256 ad2ae41a4386edae20784d34bf9735f8a3bbfff068899f9388a105f479146240",
+    "research/experiments/EXP-GRAPH-35409927045/result.json sha256 508bba25fecf1fc96fb4094b59f480bf7673c0f0237661e16b8a95fb3a004aa0",
+    "research/experiments/EXP-GRAPH-35409927045/audit.json status MEASUREMENT_INVALID, 8 required_fixes, endpoint redesign needed",
+    "research/experiments/EXP-GRAPH-35409927045/raw_evidence/experiment_data.json sha256 9ae6d117b6b830217c7da431f343c71a6a43c50705d661df7176a2ab79b0eb70 n=60",
+    "research/experiments/EXP-GRAPH-35409927045/run_efficient.py sha256 2df64f846a5c22831bde45b0234b232d76e43623bdb11fb068d54bd563a88f40",
+    "research/experiments/EXP-GRAPH-35389145821/handoff.json sha256 f0b1ac93f5522b7d4889fccf651f70c0169f7625f28f04a8adefe450eb116f9a parent PASS",
+    "research/experiments/EXP-GRAPH-35389145821/result.json pooled r=0.0022 CI upper 0.0916 PASS",
+    "research/experiments/EXP-GRAPH-35353011131/result.json pooled r=0.046 CI upper 0.135 PASS stochastic mock",
+    "codex/claim_state.json:C-FRESHNESS EXPERIMENTAL history"
+  ],
+  "recommended_action": "Construct a production-like local testbed server (Flask or FastAPI) with CDN simulation (varnish/nginx with cache invalidation, stale-while-revalidate, ETag-SHA256, Cache-Control max-age/no-store), OAuth2 middleware (PyJWT RS256 + refresh tokens + session invalidation + permission boundary), dynamic content (timestamps, request IDs, user-dependent responses, database-backed state), and configurable network latency (10-500ms jitter). This testbed would combine the stochastic variation of the parent mock with production-like infrastructure features, providing a controlled environment where endpoint selection failure cannot recur. Alternatively, identify 2-3 real public APIs that genuinely exhibit both behavioral variation (rate limiting triggers, auth state changes, cache header variation) and structural variation (timestamps, request IDs, schema changes). The graph lane should NOT repeat the stable-public-API approach. The orthogonality question remains the highest-upside question for C-FRESHNESS product deployment."
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35434771791",
+  "lane": "intel",
+  "github_run_id": "35434771791",
+  "base_sha": "872b927f545174f093bc983622850240dfcece01",
+  "analysis_sha": "5edc1bddc960cc7f8ef5048bdb39551244d912619c166b30bb12a7fc4bfc2490",
+  "datasets": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "source_experiment": "EXP-INTEL-34782350557",
+      "tasks_used": 7,
+      "tasks_total_in_raw": 8,
+      "excluded": [
+        "checkout_1 (ERR_CONNECTION_REFUSED)",
+        "cart_1_duplicate (deduplicated)"
+      ]
+    }
+  },
+  "code": {
+    "analysis_script": {
+      "path": "research/experiments/EXP-INTEL-35434771791/analyze.py",
+      "sha256": "5edc1bddc960cc7f8ef5048bdb39551244d912619c166b30bb12a7fc4bfc2490"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "external_dependencies": "none (stdlib only: json, math, random, collections)",
+    "browser_network_model_calls": false
+  },
+  "frozen_inputs": {
+    "request_hash": "e0fc549849a8c37b49d05e3b9e0d51e1d7e0474c77119eb0497690a93eb8a095",
+    "spec_hash": "3ff0d28248897e5022afb46109878efc1fca1d3aae6180c63c3541b98937794e",
+    "prereg_hash": "dc71509b7dc18be8326dd9d3a9e8f4a58bfd0b266e9198d741b2af75601f21a2",
+    "freeze_hash": "N/A (freeze.json is the freeze record itself)",
+    "parent_handoff_path": "research/experiments/EXP-INTEL-35422991016/handoff.json",
+    "parent_handoff_sha256": "7543ce365b2c41f6f72af2501134b0a6536fb0181b7fe7f6df0d5f1bd3348cfa"
+  },
+  "artifacts_produced": [
+    {
+      "path": "research/experiments/EXP-INTEL-35434771791/result.json",
+      "sha256": "e52ecf1d2fb980d87ae5778360e8c5ad9bebb7737977ca7ca693a8f8cdaa8c98",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35434771791/report.md",
+      "sha256": "c2bfacde67d76452e0daf7f2bc68e51cdca8d0f0dc70a55829d1d85509fe884a",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35434771791/analysis_output.json",
+      "sha256": "7bd3323c00041ad761b92aa05f6a10a2e7d9d757eaf6ab6e5536f837341be6b3",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35434771791/analyze.py",
+      "sha256": "5edc1bddc960cc7f8ef5048bdb39551244d912619c166b30bb12a7fc4bfc2490",
+      "role": "code"
+    }
+  ],
+  "reproduction_commands": [
+    "cd /home/runner/work/Spider/Spider",
+    "python research/experiments/EXP-INTEL-35434771791/analyze.py"
+  ],
+  "key_parameters": {
+    "definitions": [
+      "DEF-FULL-MAP",
+      "DEF-FORM-ONLY",
+      "ISOLATED-A-LINK"
+    ],
+    "features": [
+      "tag_entropy",
+      "form_fraction",
+      "total_area"
+    ],
+    "recipe_seeds": 10,
+    "recipe_iterations": 1000,
+    "recipe_p": 0.5,
+    "hierarchy_alpha": 0.3,
+    "normalization": "elements_with_bbox",
+    "sample": "truncated-first-20 locatable_sample"
+  }
+}

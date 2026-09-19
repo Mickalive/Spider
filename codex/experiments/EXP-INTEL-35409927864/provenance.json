@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35409927864",
+  "github_run_id": "35409927864",
+  "source_commit": "6a31d433db28594f110cca213cb690e01630af8c",
+  "raw_evidence": {
+    "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+    "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "source_experiment": "EXP-INTEL-34782350557"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-INTEL-35409927864/request.json",
+    "spec.json": "research/experiments/EXP-INTEL-35409927864/spec.json",
+    "prereg.md": "research/experiments/EXP-INTEL-35409927864/prereg.md",
+    "freeze.json": "research/experiments/EXP-INTEL-35409927864/freeze.json"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-35401997918",
+    "parent_handoff_path": "research/experiments/EXP-INTEL-35401997918/handoff.json",
+    "parent_handoff_sha256": "b0fb7e618ae49216cd857d6e4bccf9c9a57b467a521a040a8ac9d051e41ce92c"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "analysis_script": "/tmp/opencode/analyze_v2.py"
+  },
+  "computation": {
+    "method": "Field-by-field comparison of locatable_sample elements; eta-squared computation on sample metrics; chi-squared test on full DOM tag counts; mutual information estimation via discrete feature representation",
+    "deterministic": true,
+    "new_data_collection": false,
+    "offline_only": true
+  },
+  "artifacts_produced": [
+    {
+      "path": "research/experiments/EXP-INTEL-35409927864/result.json",
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35409927864/report.md",
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35409927864/provenance.json",
+      "role": "provenance"
+    }
+  ],
+  "cost": {
+    "llm_tokens_estimated": 800,
+    "compute_seconds_estimated": 30,
+    "browser_network": 0,
+    "new_data_collection": 0
+  }
+}
