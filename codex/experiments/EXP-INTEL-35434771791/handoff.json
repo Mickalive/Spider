@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35434771791",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM (not truncated-first-20) with richer element diversity — and does ranking stability improve when the sample contains more elements per definition, reducing the sensitivity to recipe sampling?",
+  "why_next": "The MIXED verdict confirms the pipeline preserves discrimination (C3 PASS, eta2 ≫ 0.05) but ranking reversals under recipe sampling (C4 FAIL) prevent full validation. The truncated-first-20 sample with template-invariant within-type structure makes eta2 trivially achievable; the real test is ranking stability. Full DOM samples with richer element diversity would increase the fraction of discriminative elements captured by each definition, potentially reducing recipe-sampling sensitivity and stabilizing rankings. This is a materially orthogonal question from the current experiment (which tested pipeline structure) — it tests whether the observed ranking instability is a sample-size artifact or a structural limitation.",
+  "carry_forward": {
+    "established": [
+      "OECD/COINr pipeline (definition filtering × normalization by elements_with_bbox) preserves between-type discrimination for DEF-FULL-MAP and DEF-FORM-ONLY: non-recipe feature-weighted density eta2 0.964-0.999 across all 3 features (tag_entropy, form_fraction, total_area) on truncated-first-20 locatable_sample from Magento localhost (EXP-INTEL-35434771791 M1, audit PASS on M1 metrics)",
+      "Best pipeline eta2 = 0.999645 (tag_entropy × DEF-FORM-ONLY), essentially equal to direct feature eta2 of 1.0 (EXP-INTEL-35434771791 M4)",
+      "Hierarchy formula bottleneck hypothesis confirmed: the OECD/COINr pipeline structure does NOT destroy discrimination; eta2=0.0 from prior hierarchy experiments was caused by exp(-alpha*depth)×inForm binary weighting combined with normalization (EXP-INTEL-35434771791 comparison: hierarchy eta2=0.0 vs feature eta2=0.964-0.999 through same pipeline)",
+      "Raw features retain perfect task-type discrimination before pipeline processing: tag_entropy/form_fraction/total_area all eta2=1.0, within-type std=0.0 (EXP-INTEL-35434771791 PC1, audit PASS; replicated from EXP-INTEL-35409927864 M2)",
+      "Normalized hierarchy density eta2=0.0 reproduced via y-proxy (exp(-0.3*y)/total_weight, all means 3.69e-07 identical), but this uses y-coordinate as DOM depth proxy with underflow degeneracy — true DOM depth effect remains untested (EXP-INTEL-35434771791 NC1, audit VF2)",
+      "Recipe choice is MATERIAL for feature-weighted density: canonical recipe reduces eta2 from ~0.99 to ~0.92 (DEF-FULL-MAP) and ~0.74 (DEF-FORM-ONLY); per-task recipe reduces to ~0.36 (audit VF5 recomputation). Ranking agreement drops to 58%/48% under canonical recipe iterations (audit VF1)",
+      "ISOLATED-A-LINK definition is degenerate on truncated-first-20 sample: zero elements have canonical role=link when using raw roles (role_map={}), so all ISOLATED-A-LINK densities are 0.0 (EXP-INTEL-35434771791 pipeline_eta2_9)",
+      "Within-type template invariance holds: locatable_sample tags/roles/inForm/w/h are identical within each page type, making eta2≈1.0 trivially achievable for any between-type discriminative function. The real test is ranking preservation (EXP-INTEL-35434771791 validity_notes; audit VF3)",
+      "Sample features have perfect task-type discrimination: tag_entropy (listing 2.646 vs detail 2.484 vs cart 2.602), form_fraction (0.85 vs 0.95 vs 0.95), total_area (341k vs 589k vs 428k), within-type std=0.0 (established in EXP-INTEL-35409927864 M2, audit PASS; replicated in EXP-INTEL-35422991016 M2-M4 and EXP-INTEL-35434771791 PC1)",
+      "Linear combinations CANNOT break OECD/COINr dominance degeneracy (EXP-INTEL-35353016702); within each recipe definitions are highly correlated Spearman r > 0.98 (EXP-INTEL-3330747199); recipe choice produces 31× canonical/weighted density gap (EXP-INTEL-35264637598)"
+    ],
+    "rejected": [
+      "OECD/COINr pipeline structure itself destroys between-type variance regardless of input feature — REJECTED: pipeline preserves discrimination for DEF-FULL-MAP and DEF-FORM-ONLY with eta2 0.964-0.999 (EXP-INTEL-35434771791 M1, hierarchy bottleneck hypothesis confirmed)",
+      "Template-composition explanation for zero density eta2 — REJECTED: sample has eta2=1.0 for raw features (EXP-INTEL-35409927864 M2, EXP-INTEL-35434771791 PC1)",
+      "OECD/COINr framework with 2 recipes NOT informative construct failure — REJECTED (EXP-INTEL-35330747199)",
+      "Linear third recipe CANNOT break degeneracy mathematical identity — REJECTED (EXP-INTEL-35353016702)",
+      "Density ratio R = canonical/weighted as MIXED decision rule falsified — REJECTED (EXP-INTEL-35375593989)",
+      "Heuristic DOM hierarchy depth inForm-based 4-level as MIXED third recipe falsified eta2=0.0 — REJECTED (EXP-INTEL-35401997918)"
+    ],
+    "unknown": [
+      "Does ranking preservation hold across both canonical AND per-task weighted recipes when both are fully sampled per frozen spec (6 combos)? Audit sample suggests it does not for canonical iterations majority (58%/48% agreement)",
+      "Does feature-weighted density preserve discrimination and ranking on full DOM (not truncated-first-20) with more diverse element structures where template invariance does not guarantee eta2≈1.0?",
+      "Would ISOLATED-A-LINK become informative with a larger sample containing standalone link elements beyond the logo a→link mapping?",
+      "Does true DOM tree depth (actual parent-child levels) reproduce hierarchy eta2=0.0 or would it recover discrimination, given y-proxy degeneracy (underflow for y>6000, early y's identical across types)?",
+      "What is the full per-task recipe eta2 distribution and ranking preservation for all 9 feature×definition combos at 10×1000 sampling? Audit partial recomputation shows ~0.36 mean for tag_entropy×DEF-FULL-MAP",
+      "How does cross-site generalization affect feature-weighted pipeline given single-site Magento evidence only?",
+      "What is the minimal set of OECD/COINr definitions that preserves discrimination for all features?"
+    ],
+    "do_not_assume": [
+      "OECD/COINr framework has been validated for SPIDER — it has not; only tested on 1 Magento site with truncated-first-20 sample",
+      "Pipeline preserves ranking across all definition×recipe combinations — C4 FAILS under frozen rules; ranking reversals occur under recipe sampling especially for DEF-FORM-ONLY",
+      "Feature-weighted eta2≥0.96 demonstrates general pipeline robustness — within-type template invariance makes high eta2 trivially achievable; the real test is ranking preservation which fails",
+      "Hierarchy density eta2=0.0 is validated on true DOM depth — uses y-proxy with underflow degeneracy, not tested on actual hierarchy",
+      "31× canonical/weighted ratio is validated on full DOM — only tested on truncated-first-20 sample",
+      "Cart page-type structure is validated — cart has n=1, within-type invariance is degenerate",
+      "The experiment generated new information beyond establishing the hierarchy bottleneck — it did establish that, but ranking stability under recipe sampling remains unresolved",
+      "ISOLATED-A-LINK definition is informative on this sample — it is degenerate (zero matching elements)",
+      "Single-site truncated-first-20 evidence generalizes to other sites or full DOM samples"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35409927864/audit.json PASS claim_ceiling — raw feature eta2=1.0 established fact",
+    "research/experiments/EXP-INTEL-35409927864/result.json M2 eta2=1.0 for tag_entropy/form_fraction/total_area",
+    "research/experiments/EXP-INTEL-35401997918/result.json M7 hierarchy density eta2=0.0",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — truncated-first-20 locatable_sample input",
+    "research/experiments/EXP-INTEL-35422991016/handoff.json parent MEASUREMENT_INVALID carry_forward establishing hierarchy formula bottleneck hypothesis and unknown: does OECD/COINr pipeline preserve feature discrimination",
+    "research/experiments/EXP-INTEL-35264637598 recipe choice materiality 31× gap",
+    "research/experiments/EXP-INTEL-35353016702 linear combinations cannot break degeneracy",
+    "research/experiments/EXP-INTEL-3330747199 within-recipe definition correlation Spearman r > 0.98"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35434771791/spec.json frozen decision_rule C4 requires all 3 definitions × 2 recipes",
+    "research/experiments/EXP-INTEL-35434771791/result.json metrics M1_eta2_by_feature_definition, M2_recipe_canonical_eta2, M4_best_pipeline_eta2=0.999645, M6_hierarchy_eta2=0.0, M7_ranking_agreement, controls PC1/NC1, observations, validity_notes",
+    "research/experiments/EXP-INTEL-35434771791/analysis_output.json pipeline_eta2_9 (9 feature×definition eta2), recipe_results (canonical only), ranking_agreement (9 entries including 5 false/degenerate), direct_rankings, decision_rules",
+    "research/experiments/EXP-INTEL-35434771791/audit.json status=REVISE, VF1_C4_RECIPE_DIMENSION_NOT_TESTED (critical, canonical 58%/48% agreement), VF2_HIERARCHY_Y_PROXY_DEGENERACY, VF3_TRUNCATION_AND_TEMPLATE_INVARIANCE_CEILING, VF4_ISOLATED_DEFINITION_DEGENERATE, VF5_MISSING_PER_TASK_RECIPE (~0.36 mean), VF6_CART_N1; claim_ceiling; recomputed_metrics",
+    "research/experiments/EXP-INTEL-35434771791/analyze.py lines 31-53 element matching, 122-149 hierarchy y-proxy, 152-169 pipeline eta2, 171-195 recipe loop (canonical only), 218-224 ranking and C4 logic (3 non-recipe combos only)",
+    "research/experiments/EXP-INTEL-35434771791/provenance.json raw_evidence sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, code hash 5edc1bddc960cc7f8ef5048bdb39551244d912619c166b30bb12a7fc4bfc2490",
+    "research/experiments/EXP-INTEL-35434771791/report.md SURVIVES verdict (ungrounded per audit VF1)",
+    "research/experiments/EXP-INTEL-35434771791/verdict.json MIXED decision, C-MEAS-VALID → EXPERIMENTAL"
+  ],
+  "recommended_action": "Design an experiment that tests feature-weighted density ranking stability on full DOM (not truncated-first-20) with richer element diversity. The truncated-first-20 sample with template invariance makes eta2 trivially achievable but ranking unstable under recipe sampling. Full DOM samples would increase the fraction of discriminative elements per definition, potentially stabilizing rankings. The experiment should: (1) use the full locatable_sample (not truncated-first-20) from EXP-INTEL-34782350557; (2) compute feature-weighted density for DEF-FULL-MAP and DEF-FORM-ONLY across all tasks; (3) test ranking preservation across canonical and per-task recipes with full 10×1000 sampling; (4) compare non-recipe vs recipe ranking agreement to quantify the sample-size effect. If ranking stabilizes on full DOM, the MIXED program is fully unblocked with feature-weighted density. If ranking remains unstable, the recipe-sensitivity is structural and product lane must use non-recipe density only."
+}
