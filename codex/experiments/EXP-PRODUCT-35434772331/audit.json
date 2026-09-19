@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Redesign behavioral_score function to produce continuous, differentiated scores across drift types (permission_boundary, session_invalidation, token_refresh). Current weights (0.3+0.2=0.5 for permission_boundary; 0.3+0.2=0.5 for session_invalidation; 0.05+0.15+0.2=0.4 for token_refresh) produce near-identical or identical totals.",
+    "Fix server state management: set_drift() must fully reset all server state (current_role, session_valid, drift_active, drift_type) before activating new drift. Current implementation carries over current_role=\"viewer\" and session_valid=False across conditions, contaminating subsequent measurements.",
+    "Replace deterministic WSGI mock server with stochastic server matching EXP-GRAPH-35353011131 (Flask + SQLite WAL-mode DB + cache TTL + I/O jitter + mixed JWT algorithms) to produce behavioral variance. The current deterministic server yields zero behavioral variance (std=0.0), making orthogonality assessment impossible.",
+    "Ensure behavioral signal has non-zero variance within each co-occurring condition before running orthogonality test. Frozen C2_Variance control from EXP-GRAPH-35353011131 required >=6 of 8 conditions with std>0 for both signals; this experiment has 0 of 12 conditions with behavioral std>0.",
+    "Document C-PRODUCT-ECON closure rationale separately from C-FRESHNESS integration test. The experiment was designed to test C-FRESHNESS, not to close C-PRODUCT-ECON. Closure decision requires Director verdict on full evidence chain including 4 prior experiments with zero real LLM calls."
+  ],
+  "validity_findings": [
+    "C3 orthogonality test is MEASUREMENT_INVALID: behavioral variance = 0.0 across all 720 co-occurring samples (std=0.0), making Pearson r undefined (NaN) and TOST equivalence test inapplicable. This is a measurement design flaw, not a scientific falsification of signal independence.",
+    "Behavioral_score function produces constant 0.5 for all three drift types in co-occurring conditions due to: (a) scoring weight collisions (permission_boundary=0.5, session_invalidation=0.5, token_refresh=0.4 but measured as 0.5 due to state carry-over), (b) server state not reset between conditions (current_role=\"viewer\" persists from permission_boundary into session_invalidation and token_refresh conditions), (c) deterministic server lacks stochastic variation that produced behavioral variance in EXP-GRAPH-35353011131.",
+    "Server state contamination confirmed: COOCURRING iteration order (permission_boundary first) sets current_role=\"viewer\" which persists into session_invalidation and token_refresh conditions. session_invalidation sets session_valid=False which persists into token_refresh. JWT tokens generated with stale current_role value.",
+    "Structural signal IS valid and varies (struct_variance=7.74, struct_std=2.78), replicating EXP-RUNTIME-33902315583 full-vector discrimination of 0.8333 exactly. Expired_token and invalid_token correctly produce identical fingerprints (137257c6fb39bf53).",
+    "Behavioral TP (C2) passes (1.0) but measured in Phase 6 with isolated drift+no_noise conditions where state is properly set per drift type. This does not generalize to co-occurring conditions where state carry-over occurs.",
+    "Null control (C4) passes (FP=0.0 on 240 noise-only samples) but noise-only conditions run after drift conditions with drift cleared, so server state is reset to defaults.",
+    "Positive control (C1) replicates EXP-RUNTIME-33902315583 exactly (0.8333 discrimination, same fingerprint collision pattern), confirming HTTP fingerprint substrate works on this mock kernel.",
+    "Experiment uses deterministic WSGI server (wsgiref.simple_server) with no stochastic elements, unlike EXP-GRAPH-35353011131 which used Flask+SQLite+cache+jitter+mixed JWT and achieved behavioral_std 0.14-0.43 across conditions. The frozen measurement_validity claim \"Behavioral signals use validated graded session_status_check pattern from EXP-GRAPH-35353011131\" is invalidated by substrate mismatch.",
+    "N=720 paired samples exceeds frozen N>=480 requirement, but sample quality is compromised by zero behavioral variance.",
+    "C-PRODUCT-ECON closure is NOT tested by this experiment. The experiment tests C-FRESHNESS integration only. The parent handoff's three-way decision (close C-PRODUCT-ECON / provision LLM / redirect to C-FRESHNESS) requires Director verdict on full evidence chain."
+  ],
+  "baseline_findings": [
+    "B-FRESHNESS-STRUCTURAL: PASS. Full-vector discrimination 0.8333 > 0.5 threshold. Matches EXP-RUNTIME-33902315583 exactly (discrimination 0.833, intra=1.0, inter=0.1667). Expired/invalid token fingerprint collision is correct substrate behavior.",
+    "B-FRESHNESS-BEHAVIORAL: PARTIAL. TP=1.0 >= 0.85 threshold met in isolated drift detection (Phase 6), but behavioral signal lacks variance for orthogonality testing in co-occurring conditions (Phase 4). Baseline from EXP-GRAPH-35353011131 (TP=1.0, FP=0.0, AUC=1.0, orthogonality confirmed at delta=0.15) used stochastic server with behavioral variance; this experiment's deterministic server fails to replicate the variance condition.",
+    "B-STATUS-ONLY: 0.5 (3 auth states share status 401). B-BODY-ONLY: 0.8333 (matches full-vector). Both consistent with EXP-RUNTIME-33902315583.",
+    "B-COLD-ANALYTICAL and B-PARAMETERIZED-ANALYTICAL: Not re-measured in this experiment (carried forward from EXP-PRODUCT-35330741529). Correctly noted as analytical estimates with zero real LLM calls across 4 consecutive experiments."
+  ],
+  "recomputed_metrics": {
+    "auth_discrimination_full": 0.8333333333333334,
+    "auth_discrimination_intra": 1.0,
+    "auth_discrimination_inter": 0.16666666666666666,
+    "behavioral_tp_rate_mean": 1.0,
+    "behavioral_tp_permission_boundary": 1.0,
+    "behavioral_tp_session_invalidation": 1.0,
+    "behavioral_tp_token_refresh": 1.0,
+    "orthogonality_pearson_r": null,
+    "orthogonality_pearson_p": null,
+    "orthogonality_tost_pass": false,
+    "orthogonality_tost_ci_lower": -1.0,
+    "orthogonality_tost_ci_upper": 1.0,
+    "orthogonality_tost_p_upper": 1.0,
+    "orthogonality_behav_variance": 0.0,
+    "orthogonality_struct_variance": 7.743055555555555,
+    "orthogonality_n": 720,
+    "noise_fp_rate": 0.0,
+    "noise_fp_total": 0,
+    "noiseonly_n": 240,
+    "baseline_status_only": 0.5,
+    "baseline_body_only": 0.8333333333333334,
+    "cooccur_behav_mean": 0.5,
+    "cooccur_behav_std": 0.0,
+    "cooccur_struct_mean": 7.416666666666667,
+    "cooccur_struct_std": 2.782634642844,
+    "cooccur_total": 720,
+    "c1_pass": true,
+    "c2_pass": true,
+    "c3_pass": false,
+    "c4_pass": true
+  },
+  "claim_ceiling": "C-FRESHNESS remains EXPERIMENTAL with structural signal validated (C1 passes, discrimination 0.8333) and behavioral drift detection validated in isolation (C2 passes, TP=1.0), but orthogonality of behavioral+structural signals UNTESTED due to measurement invalidity (behavioral variance=0.0). C-PRODUCT-ECON closure NOT addressed by this experiment. Maximum justified claim: HTTP fingerprint substrate discriminates auth states on mock SPIDER kernel; behavioral signal detects drift in isolated conditions; noise FP=0.0. Orthogonality claim requires re-run with stochastic server and differentiable behavioral scoring.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35434772331/raw_evidence/experiment_data.json (sha256: 233fd79230be9fb9d3f6a0f0479a7137b8991f93dc5a23c99924b7c1e2c1d87e)",
+    "research/experiments/EXP-PRODUCT-35434772331/run_experiment.py (sha256: 4c594fa4716a75e6cfd75258814032b8d208f74ca7b4698ad560b56709dcf3bc)",
+    "research/experiments/EXP-PRODUCT-35434772331/mock_server.py (sha256: 0e3fd509e36fa5676cf858d523fc95786a0204b492677bc8e9af1920e0adcc84) -- NOT USED in execution",
+    "codex/experiments/EXP-RUNTIME-33902315583/result.json (structural signal baseline, discrimination 0.8333)",
+    "codex/experiments/EXP-GRAPH-35353011131/result.json (orthogonality baseline with stochastic server, r=0.046, CI upper 0.135 < 0.15)",
+    "research/experiments/EXP-PRODUCT-35409929216/handoff.json (sha256: f3ce339a1c8fbff4309caa9b968844292e232ac49aefc367f600add506b59d26)"
+  ],
+  "unresolved": [
+    "Can orthogonality be confirmed with a redesigned behavioral_score function that produces continuous, differentiated scores (e.g., weighted by drift severity, distinct signal combinations)?",
+    "Will a stochastic server (Flask+SQLite+cache+jitter+mixed JWT per EXP-GRAPH-35353011131) restore behavioral variance in co-occurring conditions?",
+    "Does the server state carry-over bug affect only co-occurring conditions (Phase 4) or also Phase 6 behavioral TP measurements? Phase 6 sets drift then noise=None sequentially per drift type, so state is correctly set per iteration but not reset between drift types.",
+    "Should C3 decision rule be modified to require minimum behavioral variance (e.g., std > 0.05) as a precondition for orthogonality testing, rather than treating zero variance as TOST failure?",
+    "Is the 4-condition noise set (optional_field_addition, description_change, response_time_jitter, field_type_normalization) sufficient for structural noise coverage, or should additional noise patterns be tested?",
+    "Does the expired_token/invalid_token fingerprint collision (identical 401 responses) generalize to production endpoints with differentiated error details?",
+    "What is the correct C-PRODUCT-ECON closure criterion given 4 consecutive experiments with zero real LLM calls and analytical 5.42% margin (1067 tokens) with COLD 7.5x cheaper?"
+  ]
+}

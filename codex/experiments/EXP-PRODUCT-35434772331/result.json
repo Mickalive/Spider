@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "auth_discrimination_full": 0.8333,
+    "auth_discrimination_intra": 1.0,
+    "auth_discrimination_inter": 0.1667,
+    "behavioral_tp_rate_mean": 1.0,
+    "behavioral_tp_permission_boundary": 1.0,
+    "behavioral_tp_session_invalidation": 1.0,
+    "behavioral_tp_token_refresh": 1.0,
+    "orthogonality_pearson_r": null,
+    "orthogonality_pearson_p": null,
+    "orthogonality_tost_pass": false,
+    "orthogonality_tost_ci_lower": -1.0,
+    "orthogonality_tost_ci_upper": 1.0,
+    "orthogonality_tost_p_upper": 1.0,
+    "orthogonality_behav_variance": 0.0,
+    "orthogonality_struct_variance": 7.7431,
+    "orthogonality_n": 720,
+    "noise_fp_rate": 0.0,
+    "noise_fp_total": 0,
+    "noiseonly_n": 240,
+    "baseline_status_only": 0.5,
+    "baseline_body_only": 0.8333,
+    "cooccur_behav_mean": 0.5,
+    "cooccur_behav_std": 0.0,
+    "cooccur_struct_mean": 7.4167,
+    "cooccur_struct_std": 2.7826,
+    "cooccur_total": 720
+  },
+  "controls": {
+    "C1_AUTH_DISCRIMINATION": {
+      "description": "HTTP fingerprint discrimination > 0.5 on auth-state changes (positive control, replicates EXP-RUNTIME-33902315583)",
+      "expected": "> 0.5",
+      "observed": 0.8333,
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json :: auth_discrimination.full"
+    },
+    "C2_BEHAVIORAL_TP": {
+      "description": "Behavioral signal TP >= 0.85 on auth drift detection (JWT/session validation)",
+      "expected": ">= 0.85",
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json :: drift_tp.*.rate"
+    },
+    "C3_ORTHOGONALITY": {
+      "description": "Structural+behavioral orthogonality confirmed at delta=0.15 (TOST CI upper < 0.15, Pearson r computed with non-constant input)",
+      "expected": "CI upper < 0.15 on |r| at delta=0.15",
+      "observed": "FAIL: behavioral variance = 0.0 across all 720 co-occurring samples; Pearson r undefined (NaN); TOST cannot assess equivalence",
+      "pass": false,
+      "evidence": "raw_evidence/experiment_data.json :: orthogonality"
+    },
+    "C4_NOISE_FP": {
+      "description": "Noise FP rate <= 0.15 on structural noise samples (null control)",
+      "expected": "<= 0.15",
+      "observed": 0.0,
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json :: noise_fp_rate"
+    },
+    "B_FRESHNESS_STRUCTURAL": {
+      "description": "HTTP fingerprint substrate discrimination on real SPIDER kernel endpoints (from EXP-RUNTIME-33902315583)",
+      "expected": "discrimination > 0.5",
+      "observed": 0.8333,
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json :: auth_discrimination.full"
+    },
+    "B_FRESHNESS_BEHAVIORAL": {
+      "description": "JWT/session validation behavioral signals (from EXP-GRAPH-35353011131, TP=1.0 on stochastic mock)",
+      "expected": "TP >= 0.85",
+      "observed": 1.0,
+      "pass": true,
+      "evidence": "raw_evidence/experiment_data.json :: drift_tp.*.rate"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "233fd79230be9fb9d3f6a0f0479a7137b8991f93dc5a23c99924b7c1e2c1d87e",
+      "role": "raw"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "4c594fa4716a75e6cfd75258814032b8d208f74ca7b4698ad560b56709dcf3bc",
+      "role": "code"
+    },
+    {
+      "path": "mock_server.py",
+      "sha256": "0e3fd509e36fa5676cf858d523fc95786a0204b492677bc8e9af1920e0adcc84",
+      "role": "code"
+    },
+    {
+      "path": "spec.json",
+      "sha256": "bb38655dd5bba84109dcd551b975ccb25119fdc232b30b252ee1433d940be341",
+      "role": "fixture"
+    },
+    {
+      "path": "prereg.md",
+      "sha256": "f41a53780890d99b11f37c449bc3f9260cf992c008ad7768e13f886243ba1ed7",
+      "role": "fixture"
+    },
+    {
+      "path": "freeze.json",
+      "sha256": "3da975a9371c2385b6ac901cab66c3043b048dc2b21e65653b9a6bbc6675c865",
+      "role": "fixture"
+    },
+    {
+      "path": "request.json",
+      "sha256": "daa1bb8c32b7a0b25f9a211ff6cd4d0f20f92c2049eb25804b4d770af18973d6",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "Auth-state discrimination (0.8333) replicates EXP-RUNTIME-33902315583 exactly: 4 unique fingerprints, no_auth/valid_token/expired/invalid produce distinct HTTP responses",
+    "Behavioral TP rate is 1.0 for all three drift types (permission_boundary, session_invalidation, token_refresh), meaning the behavioral signal correctly identifies drift in every sample",
+    "Behavioral score is CONSTANT at 0.5 across ALL 720 co-occurring samples (std=0.0), making Pearson correlation undefined (NaN)",
+    "The behavioral_score function assigns 0.5 to permission_boundary (role=viewer +0.3, permissions<=1 +0.2) and session_invalidation (error=session_invalidated +0.3, permissions<=1 +0.2), producing identical scores for different drift mechanisms",
+    "Structural variance is non-zero (7.7431), confirming the structural signal DOES vary across conditions, but the behavioral signal does not",
+    "Noise FP rate is 0.0: structural noise (field additions, type normalization, description changes) never triggers behavioral false positives",
+    "Expired and invalid tokens produce identical fingerprints (137257c6fb39bf53), reducing inter-group discrimination from theoretical 1.0 to 0.8333",
+    "All measurements use localhost WSGI mock server (not Flask), JWT HS256, deterministic seed=42"
+  ],
+  "validity_notes": [
+    "This experiment tests a mock SPIDER kernel, not production endpoints. Generalization to real kernel auth/session behavior is unmeasured.",
+    "The behavioral_score function is a simplified heuristic (session_valid + role + status + permissions signals). A production behavioral signal may use different scoring.",
+    "The behavioral signal's constant score of 0.5 is an artifact of the scoring weights: permission_boundary and session_invalidation each accumulate exactly 0.5 from orthogonal signal components that happen to sum to the same value.",
+    "Orthogonality C3 FAILS not because the signals are correlated, but because the behavioral signal has zero variance. This is a measurement design issue, not a scientific finding about signal independence.",
+    "The experiment uses N=60 per condition (720 total co-occurring samples), exceeding the frozen N>=480 requirement.",
+    "Server-side state is protected by threading.Lock but requests are sequential from the main thread, so no race conditions were observed.",
+    "The 403 response for session_invalidation bypasses the noise application block (noise only applied when status_code==200), so session_invalidation co-occurring samples have no noise in the response body."
+  ],
+  "unresolved": [
+    "Why does the behavioral_score function produce a constant 0.5 across all three drift types? The scoring weights (0.3+0.2 for permission_boundary, 0.3+0.2 for session_invalidation, 0.05+0.15+0.2 for token_refresh) happen to produce near-identical sums. A production behavioral signal would need differentiated scoring.",
+    "Can orthogonality be assessed with a behavioral signal that produces a continuous (non-binary) score? The current signal is effectively binary (0.5 for drift, 0.25 for no-drift), which limits correlation analysis.",
+    "Would a different behavioral scoring function (e.g., weighted by drift severity) produce sufficient variance for orthogonality testing?",
+    "Does the expired/invalid token fingerprint collision (identical 401 responses) affect production discrimination if real endpoints return different error details?",
+    "The C3 failure is a MEASUREMENT INVALIDITY (constant behavioral score prevents orthogonality assessment), not a scientific falsification of signal independence. Should C3 be redefined to test with a behavioral signal that has sufficient variance?"
+  ]
+}

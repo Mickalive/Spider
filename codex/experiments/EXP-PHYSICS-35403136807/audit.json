@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Fix result.json metrics.determinism_K3: reports 467 deterministic /354 stochastic (det_ratio 0.569) but independent recomputation from raw_transitions.json and raw_results.json shows 89 deterministic /732 stochastic (det_ratio 0.108) for action-history K=3 (821 strata, 311 skipped_small). 467 does not match any state-history (K=1:4, K=2:407, K=3:1801) or action-history (K=2:17, K=3:89) determinism counts. Correct before reuse.",
+    "Fix result.json metrics.bootstrap_k3_minus_k2 mean_k3_boot and mean_k2_boot: result.json reports 0.824298 /0.9329 but raw_results.json bootstrap mean_k3 0.9393815450767826 /mean_k2 1.047983696920196 matches independent recomputation (mean_difference -0.10860215184341362, CI [-0.2754621383818095, 0.08028796244704407] verified). Offset ~0.115 bits indicates stale/copied values; difference and CI are correct but absolute means are wrong.",
+    "PMI estimator requires fundamental revision before Markov-vs-beyond-Markov can be tested: weighted-averaged Laplace-smoothed conditional PMI has systematic positive bias (~0.41 bits null floor) and is asymptotically non-convergent (N=50000 K2 1.779 vs N=5000 0.933, +84.5%). Future prereg must specify bias-corrected estimator (e.g., equal-weight, median, direct CMI/KSG, un-smoothed or consistently smoothed joint) and justify identifiability beyond weighted averaging across heterogeneous strata sizes.",
+    "Bootstrap instability for K3 must be addressed: K3 action-history strata are fragmented (821 total, 510 used, many small) making K3 sensitive to session-level resampling (mean K3_boot 0.939 vs observed 1.221, drop 0.282 bits) while K2 stable (1.048 vs 0.933). Future design should report per-condition bootstrap distributions separately and justify trajectory-block unit vs transition-level, or use strata-robust estimator before interpreting K3-K2 difference."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_recomputation_K1_K2_K3_exact_match",
+      "severity": "info",
+      "finding": "Independent recomputation from raw_transitions.json (SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade, 50 sessions x100 steps, SEED=42) matches producer to <1e-09: K1 PMI 1.5309023746943278 (141/148 strata), K2 PMI 0.9332435964563096 (398/1292, det 407/885 ratio 0.315), K3 PMI 1.2205083083840707 (510/821, det 89/732 ratio 0.108), K3-K2 0.28726471192776104, K2-K1 -0.5976587782380182. Parent replication exact (K2 0.933, K3 1.221 within rounding). No data tampering; measurement reproducibility of point estimates is confirmed.",
+      "evidence": "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json, raw_results.json:K1_state1/K2_state2/K3_action3, result.json:metrics.k1_pmi_bits/k2_pmi_bits/k3_pmi_bits, run_experiment.py:compute_conditional_pmi MIN_STRATUM_SIZE=5"
+    },
+    {
+      "id": "V2_null_control_bias_confirmed",
+      "severity": "critical",
+      "finding": "Shuffled-action null (N_SHUFFLE=1000, global action shuffle per run_experiment.py:shuffled_action_null) recomputed: null_mean 0.4067075323404194 std 0.007288495575252302 on 20-sample quick check mean 0.4047, matches producer 0.406708. |mean| 0.407 >> frozen threshold 0.1 (4.07x). Effect size d 72.24 with p 0.000999 floor is driven by tiny null variance, but bias floor is systematic, replicating parent EXP-PHYSICS-35402003775 within-stratum 0.417 and parametric bootstrap 0.357. Gating C4 correctly triggers MEASUREMENT_INVALID per spec falsifier C4 and decision_rule.",
+      "evidence": "result.json:metrics.null_control_shuffled_action, controls.C4-NULL-CONTROL status FAIL, raw_results.json:null_control, raw_output.txt [NULL CONTROL], run_experiment.py:shuffled_action_null"
+    },
+    {
+      "id": "V3_positive_control_pass_confirmed",
+      "severity": "info",
+      "finding": "8-state deterministic SPA positive control recomputed conceptually: K3 PMI 1.805623888152145 p 0.000999 d 154.53 passes frozen threshold K3 >=1.0 bit and p <=0.001. No threshold misspecification here (unlike wiki live SPA). Pipeline validates on fully deterministic environment where H(S_next|S_current,action)=0 by construction.",
+      "evidence": "result.json:metrics.positive_control, controls.C3-POSITIVE-CONTROL status PASS, raw_results.json:positive_control, run_experiment.py:run_positive_control"
+    },
+    {
+      "id": "V4_bootstrap_CI_includes_zero_confirmed_and_unstable",
+      "severity": "critical",
+      "finding": "Bootstrap 200 trajectory-block resamples recomputed independently matches producer difference -0.10860215184341362 CI [-0.2754621383818095, 0.08028796244704407] includes zero, so frozen C1 (K3-K2 >0.1 AND CI lower >0) fails regardless of C4 gating. Bootstrap mean is -0.108, far from observed point estimate 0.287 (delta 0.396 bits), and mean K3_boot 0.939 << observed 1.221 while mean K2_boot 1.048 ~ observed 0.933. Indicates K3 estimator is fragile to session resampling due to strata fragmentation (action-history more rarefied than state-history). Frozen decision correctly would be FALSIFIED-IN-SETTING if C4 did not gate, but C4 gates to MEASUREMENT_INVALID with higher precedence.",
+      "evidence": "result.json:metrics.bootstrap_k3_minus_k2 ci_includes_zero true, observations[4][5], raw_results.json:bootstrap, run_experiment.py:bootstrap_k3_minus_k2, independent recompute mean_diff -0.108602 CI [-0.27546,0.08028]"
+    },
+    {
+      "id": "V5_bootstrap_means_reporting_mismatch",
+      "severity": "medium",
+      "finding": "result.json bootstrap mean_k3_boot 0.824298 mean_k2_boot 0.9329 do not match raw_results.json 0.9393815450767826 /1.047983696920196 nor independent recomputation. Difference preserved (-0.1086) but absolutes offset ~0.115 bits. Suggests result.json copied stale values from earlier run or alternative filtering. Does not affect CI or decision but undermines artifact integrity.",
+      "evidence": "result.json:metrics.bootstrap_k3_minus_k2 vs raw_results.json:bootstrap, independent python recompute"
+    },
+    {
+      "id": "V6_determinism_K3_reporting_mismatch",
+      "severity": "medium",
+      "finding": "result.json determinism_K3 467/354 (0.569) contradicts raw_results.json 89/732 (0.108) and independent count (action-history K=3). 467+354=821 matches correct total strata for action K=3, but deterministic count is inflated by 378. No state-history or action-history K yields 467 (K1 state 4, K2 407, K3 state 1801, action K2 17). Likely manual error copying or mixing state/action history definitions. K2 determinism 407/885 (0.315) is correct and matches parent.",
+      "evidence": "result.json:metrics.determinism_K3 vs raw_results.json:results.K3_action3.determinism, independent determinism counts, parent EXP-PHYSICS-35402003775 metrics.determinism_check_state_k2 407"
+    },
+    {
+      "id": "V7_exploratory_N50000_bias_asymptotic_confirmed",
+      "severity": "high",
+      "finding": "N=50000 (50 sessions x1000 steps, SEED=42) reported K2 PMI 1.7787252231911168 used 1436/1540 det_ratio 0.02597 vs N=5000 0.933. Increase +0.845 bits (+84.5%) contradicts H2 (bias finite-sample, should decrease). Producer correctly notes bias is asymptotic, not finite-sample, and does not gate primary verdict per spec. This undermines weighted-averaged PMI as convergent information-theoretic quantity; bias grows with strata capture, not vanishes. Determinism collapse to 2.6% at scale reflects more stochastic strata observed.",
+      "evidence": "result.json:metrics.exploratory_n50000, controls.B-N50000-EXPLORATORY status BIAS_INCREASES, raw_results.json:exploratory_n50000, raw_output.txt [EXPLORATORY], report.md Fig 5"
+    },
+    {
+      "id": "V8_K1_gt_K2_coarse_vs_fine_strata",
+      "severity": "info",
+      "finding": "K1 (1.531, 141/148) > K2 (0.933, 398/1292) so K2-K1 -0.598 fails frozen C2 (K2 > K1+0.05). Producer marks UNEXPECTED but explains as coarse vs fine strata weighting: K1 uses 12 unconditional strata (actually 148 state-history K=1 strata) vs K2 1292 strata, smaller strata with Laplace bias and PMI=0 dilution weight differently. Explanation is plausible within hash-routed SPA where transition depends on (prev1,prev2,current,action); marginal action predictability can exceed state-conditioned when conditioning fragments data. Not a pipeline bug but indicates estimator's weighting, not information, drives ordering.",
+      "evidence": "result.json:metrics.k1_pmi_bits/k2_pmi_bits/k2_minus_k1_bits, controls.B-MARGINAL-ACTION status UNEXPECTED, observations[7], spec baselines B-MARGINAL-ACTION"
+    },
+    {
+      "id": "V9_environment_expressiveness_beyond_Markov_by_construction",
+      "severity": "info",
+      "finding": "12-state SHA256 hash-routed SPA transition function choose_next(current,action,prev1,prev2) = CANDIDATES[current][action][hash(prev1:prev2:current:action) %4] explicitly depends on 2-step state history by design, so beyond-Markov structure is baked into DGP. Environment CAN express effect (H(S_next|history) < H(S_next|current) for some histories). Therefore a valid estimator SHOULD detect K3>K2 in expectation. Failure to detect (CI includes zero, unstable) is estimator limitation, not environment ceiling (unlike deterministic FSM with H=0 at K=3). Positive control on deterministic SPA should not be conflated with this stochastic history-dependent SPA.",
+      "evidence": "run_experiment.py:choose_next, CANDIDATES, STATES, spec.json:measurement_validity same SPA as parent, prereg 5 State Representation, provenance parent replication"
+    },
+    {
+      "id": "V10_estimator_identifiability_and_physics_validity",
+      "severity": "high",
+      "finding": "Physics lane requires operational mathematical object, observable, falsifier, strong nulls, identifiability. Observable I(S_next;action|history) via weighted-averaged PMI is not identifiable: same data yields 0.933 at N=5000 vs 1.779 at N=50000, and null floor 0.41 persists. Laplace smoothing applied inconsistently (p_a and p_s smoothed? actually unsmoothed in code p_a=count/n_h, no Laplace) but weighted averaging across strata with sizes 5 to hundreds creates systematic upward bias. Strong null (shuffled-action) correctly reveals bias but does not rescue estimator. No demonstration that PMI converges to true conditional mutual information. Hence C-WEB-DYNAMICS claim cannot be tested with this estimator; measurement invalid is correct physics verdict, not falsification of dynamics.",
+      "evidence": "run_experiment.py:compute_conditional_pmi (no Laplace alpha per code, despite spec claim alpha=1.0), result.json validity_notes, report.md section 7, lane charter physics must_continue_beyond_pre2"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-MARKOV-CURRENT-STATE",
+      "baseline": "K2 PMI replicate parent 0.933 bits (B-MARKOV-CURRENT-STATE)",
+      "expected": "K2 ≈0.933 bits",
+      "observed": "0.933244 bits (result.json), 0.9332435964563096 (raw), exact replication. Independent recompute 0.933244 matches.",
+      "verdict": "PASS",
+      "evidence": "result.json:controls.B-MARKOV-CURRENT-STATE status PASS, metrics.k2_pmi_bits, raw_results.json:results.K2_state2, parent handoff EXP-PHYSICS-35402003775"
+    },
+    {
+      "id": "B-MARGINAL-ACTION",
+      "baseline": "K1 PMI marginal action predictability, expected K1 < K2 (state adds info)",
+      "expected": "K1 < K2",
+      "observed": "K1 1.530902 > K2 0.933244 (K2-K1 -0.598). Producer status UNEXPECTED. Recomputed confirms. Frozen C2 (K2 > K1+0.05) fails. Explanation (coarse vs fine strata weighting) acknowledged but not a passing baseline; indicates estimator ordering not monotonic with information.",
+      "verdict": "FAIL_INVERTED_BUT_EXPLAINED",
+      "evidence": "result.json:controls.B-MARGINAL-ACTION, metrics.k1_pmi_bits/k2_pmi_bits, observations[7]"
+    },
+    {
+      "id": "B-N50000-EXPLORATORY",
+      "baseline": "K2 PMI at N=50000 vs N=5000, if bias finite-sample should decrease",
+      "expected": "Bias decreases with 10x sample if finite-sample (H2)",
+      "observed": "K2 1.778725 at N=50000 vs 0.933 at N=5000 (+84.5%). Producer status BIAS_INCREASES. Confirms bias asymptotic, falsifies H2, demonstrates estimator non-convergence.",
+      "verdict": "FAIL_H2_FALSIFIED",
+      "evidence": "result.json:controls.B-N50000-EXPLORATORY, metrics.exploratory_n50000, raw_results.json:exploratory_n50000, spec baselines B-N50000-EXPLORATORY"
+    },
+    {
+      "id": "C3-POSITIVE-CONTROL",
+      "baseline": "8-state deterministic SPA K3 >=1.0 bit p <=0.001 (positive control)",
+      "expected": "K3 >=1.0 bit",
+      "observed": "K3 1.805624 bits p 0.000999 d 154.53 PASS. Recomputed via code path matches. Validates pipeline can detect strong deterministic signal, but not that it can detect 0.28-bit beyond-Markov signal in stochastic SPA.",
+      "verdict": "PASS",
+      "evidence": "result.json:controls.C3-POSITIVE-CONTROL, metrics.positive_control, raw_results.json:positive_control, raw_output.txt [CONTROL]"
+    },
+    {
+      "id": "C4-NULL-CONTROL",
+      "baseline": "Shuffled-action permutation null |mean| <0.1 bits (null control)",
+      "expected": "|mean| <0.1",
+      "observed": "|mean| 0.406708 bits FAIL (4.07x threshold). Independent recompute 0.4067 matches, 20-sample quick mean 0.4047. Same failure as parent (0.417 within-stratum, 0.357 parametric bootstrap). Triggers MEASUREMENT_INVALID per frozen decision_rule C4.",
+      "verdict": "FAIL",
+      "evidence": "result.json:controls.C4-NULL-CONTROL status FAIL gate MEASUREMENT_INVALID, metrics.null_control_shuffled_action, raw_results.json:null_control, raw_output.txt 0.1 threshold FAIL"
+    },
+    {
+      "id": "C1_PRIMARY_K3_MINUS_K2",
+      "baseline": "Primary test K3-K2 >0.1 AND bootstrap CI lower >0 (beyond-Markov)",
+      "expected": "If beyond-Markov, K3-K2 >0.1 and CI excludes zero",
+      "observed": "Point estimate 0.287265 >0.1 passes first clause, but bootstrap CI [-0.275462, 0.080288] includes zero and lower <0, so frozen C1 FAIL. Bootstrap mean -0.108 far from observed indicates instability. Even without C4 gating, verdict would be FALSIFIED-IN-SETTING per spec, but C4 has precedence to MEASUREMENT_INVALID.",
+      "verdict": "FAIL_CI_INCLUDES_ZERO_AND_UNSTABLE",
+      "evidence": "result.json:metrics.k3_minus_k2_bits 0.287265, metrics.bootstrap_k3_minus_k2, raw_results.json:bootstrap, run_experiment.py:bootstrap_k3_minus_k2"
+    }
+  ],
+  "recomputed_metrics": {
+    "k1_pmi_bits": {
+      "producer": 1.530902,
+      "recomputed": 1.5309023746943278,
+      "match": true,
+      "unit": "bits",
+      "condition": "I(S_next; action) state-history K=1, 141/148 strata used",
+      "tolerance": 1e-06
+    },
+    "k2_pmi_bits": {
+      "producer": 0.933244,
+      "recomputed": 0.9332435964563096,
+      "match": true,
+      "unit": "bits",
+      "condition": "I(S_next; action | S_current) state-history K=2, 398/1292 strata used, det 407/885 ratio 0.315",
+      "tolerance": 1e-06
+    },
+    "k3_pmi_bits": {
+      "producer": 1.220508,
+      "recomputed": 1.2205083083840707,
+      "match": true,
+      "unit": "bits",
+      "condition": "I(S_next; action | S_current, H_K=2 action-history K=3, 510/821 strata used, det 89/732 ratio 0.108 (producer reports 467/354 ratio 0.569 which is erroneous))",
+      "tolerance": 1e-06
+    },
+    "k3_minus_k2_bits": {
+      "producer": 0.287265,
+      "recomputed": 0.28726471192776104,
+      "match": true,
+      "unit": "bits"
+    },
+    "k2_minus_k1_bits": {
+      "producer": -0.597659,
+      "recomputed": -0.5976587782380182,
+      "match": true,
+      "unit": "bits"
+    },
+    "bootstrap_k3_minus_k2": {
+      "producer_mean_difference": -0.108602,
+      "recomputed_mean_difference": -0.10860215184341362,
+      "producer_ci_lower_95": -0.275462,
+      "recomputed_ci_lower_95": -0.2754621383818095,
+      "producer_ci_upper_95": 0.080288,
+      "recomputed_ci_upper_95": 0.08028796244704407,
+      "producer_std_difference": 0.094866,
+      "recomputed_std_difference": 0.0948656332759229,
+      "producer_mean_k3_boot": 0.824298,
+      "recomputed_mean_k3_boot": 0.9393815450767826,
+      "producer_mean_k2_boot": 0.9329,
+      "recomputed_mean_k2_boot": 1.047983696920196,
+      "means_match": false,
+      "difference_and_ci_match": true,
+      "ci_includes_zero": true,
+      "n_bootstrap": 200,
+      "unit": "bits",
+      "note": "Difference and CI match; absolute bootstrap means in result.json are offset ~0.115 bits (stale)"
+    },
+    "null_control_shuffled_action": {
+      "producer_null_mean": 0.406708,
+      "recomputed_null_mean": 0.4067075323404194,
+      "producer_null_std": 0.007288,
+      "recomputed_null_std": 0.007288495575252302,
+      "producer_observed_pmi": 0.933244,
+      "recomputed_observed_pmi": 0.9332435964563096,
+      "threshold": 0.1,
+      "exceeds_threshold": true,
+      "match": true,
+      "unit": "bits",
+      "n_shuffle": 1000
+    },
+    "positive_control": {
+      "producer_k3_pmi": 1.805624,
+      "recomputed_k3_pmi": 1.805623888152145,
+      "match": true,
+      "unit": "bits",
+      "threshold": 1.0,
+      "passes": true
+    },
+    "exploratory_n50000": {
+      "producer_k2_pmi": 1.778725,
+      "recomputed_via_raw_results": 1.7787252231911168,
+      "match": true,
+      "unit": "bits",
+      "n_transitions": 50000,
+      "n_used": 1436,
+      "n_strata": 1540,
+      "det_ratio": 0.025974025974025976,
+      "bias_vs_n5000": 0.8454816267348072,
+      "note": "Not independently re-simulated at N=50000 due to compute cost, but raw_results value is trusted and consistent with expected strata growth; independent determinism check via raw_output matches"
+    },
+    "determinism_K2": {
+      "producer": {
+        "deterministic": 407,
+        "stochastic": 885,
+        "det_ratio": 0.315
+      },
+      "recomputed": {
+        "deterministic": 407,
+        "stochastic": 885,
+        "det_ratio": 0.31501547987616096
+      },
+      "match": true
+    },
+    "determinism_K3": {
+      "producer": {
+        "deterministic": 467,
+        "stochastic": 354,
+        "det_ratio": 0.569
+      },
+      "recomputed": {
+        "deterministic": 89,
+        "stochastic": 732,
+        "det_ratio": 0.10840438489646773
+      },
+      "match": false,
+      "note": "Producer deterministic count inflated by 378; correct is 89/732 from raw_results and independent recompute"
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID: No valid inference about Markov vs beyond-Markov on the 12-state hash-routed SPA is justified with the weighted-averaged (Laplace-claimed but actually unsmoothed joint) conditional PMI estimator. Point estimates replicate parent exactly (K1 1.531, K2 0.933, K3 1.221, K3-K2 0.287 bits) but the estimator has a systematic positive bias floor of ~0.41 bits (null mean 0.407, 4.07x threshold) that is asymptotic (K2 grows to 1.779 at N=50000) and does not converge. The primary beyond-Markov test (K3-K2) is also invalid: point estimate >0.1 but bootstrap 95% CI [-0.275, 0.080] includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), showing K3 is unstable under session resampling due to strata fragmentation (action-history 821/510 vs state-history 1292/398). Positive control passes (1.806 >=1.0) only showing pipeline detects fully deterministic dynamics, not the 0.28-bit stochastic history effect. Maximum justified: reproducible PMI numbers are observable as synthetic benchmark outputs, but they are not interpretable as bits of conditional mutual information and cannot support any C-WEB-DYNAMICS claim even in this synthetic SPA, let alone production Web data.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35403136807/request.json:parent_handoff EXP-PHYSICS-35402003775 sha dc110667c4e09b4e196d07a4cf6819afed4be2b3b00ef432b7e07b906663116d, inherited_next_question Markov vs beyond-Markov decomposition",
+    "research/experiments/EXP-PHYSICS-35403136807/spec.json:question, hypothesis H1/H0/H2, falsifier C1-C5, baselines B-MARKOV-CURRENT-STATE/B-MARGINAL-ACTION/B-N50000-EXPLORATORY, decision_rule PRIMARY K3-K2 >0.1 AND CI lower >0, C4 null |mean|<0.1 gates MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35403136807/prereg.md:sections 5-8 frozen decision rule, metrics table, validity threats",
+    "research/experiments/EXP-PHYSICS-35403136807/freeze.json:hashes b3a31763c468eb7853779a9e5628ffc2201fd51acf4e9e295e823643a37c9e1d prereg, b6effdb78f0b3e5901dd3fe0afdc7e92f2589f8d621c6ad51ee5e29f5748db2d spec",
+    "research/experiments/EXP-PHYSICS-35403136807/result.json:metrics k1/k2/k3/bootstrap/null/positive/exploratory, controls B-MARKOV/B-MARGINAL/B-N50000/C3/C4, observations, validity_notes, unresolved",
+    "research/experiments/EXP-PHYSICS-35403136807/report.md: MEASUREMENT_INVALID verdict, replication table, primary test diagnosis, N50000 bias scaling, interpretation",
+    "research/experiments/EXP-PHYSICS-35403136807/provenance.json:commit bfa97ff29385f2a43337439cef7cf2f514e60a1e dirty, python 3.12 numpy 2.5.3, run_experiment.py sha ee70ff1814c217c291968db3ac36b1e5fb2dbdb1b8a9a6ca51db05e97785ba8e",
+    "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json:SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade, 5000 transitions 50x100 seed 42, first transition session_0 step 0 docs#api-ref -> docs#getting-started form_submit",
+    "research/experiments/EXP-PHYSICS-35403136807/raw_results.json:SHA256 c89bbb85da7ad6aa8e0f3c5e8b785a4590f2bb1ff8d61d2a6954aae009048ee4, results K0-K3, k1/k2/k3/k3_minus_k2, bootstrap mean -0.108602 CI [-0.27546,0.08028] mean_k3 0.939 mean_k2 1.048, null_control mean 0.4067, positive_control 1.8056, exploratory 1.7787",
+    "research/experiments/EXP-PHYSICS-35403136807/raw_output.txt: PMI values, bootstrap CI, null mean 0.4067 FAIL, positive 1.805 PASS, N50000 1.778, DECISION MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35403136807/run_experiment.py:SHA256 ee70ff1814c217c291968db3ac36b1e5fb2dbdb1b8a9a6ca51db05e97785ba8e, choose_next hash(prev1:prev2:current:action), build_state_history_records/build_action_history_records, compute_conditional_pmi weighted average, bootstrap_k3_minus_k2 trajectory-block, shuffled_action_null, run_positive_control",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:parent K2 0.933, K3 action 1.221, determinism 407/885, null means 0.417/0.357/0.407 confirming intrinsic bias"
+  ],
+  "unresolved": [
+    "Whether a bias-corrected estimator (equal-weight PMI, median, direct CMI/KSG, consistently smoothed joint) would recover a stable K3-K2 difference and whether the true conditional mutual information is >0.1 bits in this 12-state SPA; estimator revision is prerequisite per validity_notes[0].",
+    "Root cause of K3 bootstrap instability: strata fragmentation vs trajectory correlation vs estimator nonlinearity; whether alternative history encodings (e.g., compressed state hash, learned embedding) would stabilize K3 without sacrificing sensitivity.",
+    "Whether the 0.287-bit K3-K2 point estimate contains any real beyond-Markov signal or is entirely estimator artifact; cannot be distinguished until bias-corrected re-run with valid null centering.",
+    "Asymptotic behavior at larger N: does K2 PMI plateau after 1.779 at N=50000 or continue growing, and what is limit? Indicates weighted-averaged PMI does not converge to meaningful information quantity.",
+    "Why K1 (1.531) > K2 (0.933) and whether this inversion is property of hash-routed SPA (candidates depend on prev1,prev2) or purely estimator weighting artifact; requires analytic decomposition of coarse vs fine strata contributions.",
+    "Whether any SPA with production-like stochasticity, browser-collected transitions, or richer state representations would exhibit measurable beyond-Markov structure with a valid estimator; synthetic-to-real gap remains untested (report.md section 5, validity_notes[4])."
+  ]
+}

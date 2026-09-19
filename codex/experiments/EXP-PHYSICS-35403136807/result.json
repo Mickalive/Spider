@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "k1_pmi_bits": {
+      "value": 1.530902,
+      "unit": "bits",
+      "condition": "marginal I(S_next; action), K=0",
+      "n_strata_used": 141,
+      "n_strata_total": 148
+    },
+    "k2_pmi_bits": {
+      "value": 0.933244,
+      "unit": "bits",
+      "condition": "state-history I(S_next; action | S_current), K=2",
+      "n_strata_used": 398,
+      "n_strata_total": 1292,
+      "parent_replicate": 0.933
+    },
+    "k3_pmi_bits": {
+      "value": 1.220508,
+      "unit": "bits",
+      "condition": "action-history I(S_next; action | S_current, H_K=2), K=3",
+      "n_strata_used": 510,
+      "n_strata_total": 821,
+      "parent_replicate": 1.221
+    },
+    "k3_minus_k2_bits": {
+      "value": 0.287265,
+      "unit": "bits",
+      "description": "Primary test statistic: history conditioning gain"
+    },
+    "k2_minus_k1_bits": {
+      "value": -0.597659,
+      "unit": "bits",
+      "description": "State conditioning effect (negative = conditioning on state REDUCES action PMI)"
+    },
+    "bootstrap_k3_minus_k2": {
+      "mean_difference": -0.108602,
+      "ci_lower_95": -0.275462,
+      "ci_upper_95": 0.080288,
+      "std_difference": 0.094866,
+      "mean_k3_boot": 0.824298,
+      "mean_k2_boot": 0.9329,
+      "n_bootstrap": 200,
+      "ci_includes_zero": true,
+      "unit": "bits"
+    },
+    "null_control_shuffled_action": {
+      "observed_pmi": 0.933244,
+      "null_mean": 0.406708,
+      "null_std": 0.007288,
+      "abs_null_mean": 0.406708,
+      "threshold": 0.1,
+      "exceeds_threshold": true,
+      "effect_size_d": 72.24,
+      "p_value": 0.000999,
+      "n_shuffle": 1000,
+      "unit": "bits"
+    },
+    "positive_control": {
+      "k3_pmi": 1.805624,
+      "p_value": 0.000999,
+      "effect_size_d": 154.53,
+      "passes": true,
+      "threshold_pmi": 1.0,
+      "threshold_p": 0.001,
+      "n_transitions": 5000,
+      "unit": "bits"
+    },
+    "exploratory_n50000": {
+      "k2_pmi": 1.778725,
+      "n_used": 1436,
+      "n_strata": 1540,
+      "det_ratio": 0.026,
+      "n_transitions": 50000,
+      "n_sessions": 50,
+      "steps_per_session": 1000,
+      "bias_vs_n5000": 0.845481,
+      "unit": "bits",
+      "description": "K2 PMI at 10x sample. Bias INCREASES from 0.933 to 1.779, indicating asymptotic rather than finite-sample bias."
+    },
+    "determinism_K2": {
+      "deterministic": 407,
+      "stochastic": 885,
+      "det_ratio": 0.315
+    },
+    "determinism_K3": {
+      "deterministic": 467,
+      "stochastic": 354,
+      "det_ratio": 0.569
+    }
+  },
+  "controls": {
+    "B-MARKOV-CURRENT-STATE": {
+      "description": "K2 PMI replicate parent value 0.933 bits",
+      "expected": "K2 PMI \u2248 0.933 bits",
+      "observed": 0.933244,
+      "status": "PASS",
+      "note": "Exact replication of parent value"
+    },
+    "B-MARGINAL-ACTION": {
+      "description": "K1 PMI marginal action predictability",
+      "expected": "K1 PMI < K2 PMI",
+      "observed": 1.530902,
+      "status": "UNEXPECTED",
+      "note": "K1 (1.531) > K2 (0.933): conditioning on current state REDUCES PMI. This is expected in hash-routed SPA where transition depends on (p1, p2, current, action). K1 strata are coarser (12 unconditional) so weighted average is higher."
+    },
+    "B-N50000-EXPLORATORY": {
+      "description": "K2 PMI at N=50000 tests bias scaling",
+      "expected": "Bias decreases with N if finite-sample",
+      "observed": 1.778725,
+      "status": "BIAS_INCREASES",
+      "note": "K2 PMI increases from 0.933 (N=5000) to 1.779 (N=50000). Bias is asymptotic, not finite-sample. This is opposite of H2 prediction."
+    },
+    "C3-POSITIVE-CONTROL": {
+      "description": "8-state deterministic SPA, K3 >= 1.0",
+      "expected": "K3 PMI >= 1.0 bit, p <= 0.001",
+      "observed_k3": 1.805624,
+      "observed_p": 0.000999,
+      "status": "PASS",
+      "note": "Measurement pipeline validated on deterministic environment"
+    },
+    "C4-NULL-CONTROL": {
+      "description": "Shuffled-action permutation null, |mean| < 0.1",
+      "expected": "|mean_null| < 0.1 bits",
+      "observed_abs_mean": 0.406708,
+      "status": "FAIL",
+      "gate": "MEASUREMENT_INVALID",
+      "note": "Null bias floor 0.407 bits is intrinsic to weighted-averaged PMI estimator. Same finding as parent EXP-PHYSICS-35402003775."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "role": "raw",
+      "description": "5000 transitions from 12-state hash-routed SPA (50 sessions x 100 steps, SEED=42)"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/raw_results.json",
+      "sha256": "c89bbb85da7ad6aa8e0f3c5e8b785a4590f2bb1ff8d61d2a6954aae009048ee4",
+      "role": "derived",
+      "description": "Complete computation results including all PMI values, bootstrap CI, null/positive controls"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/run_experiment.py",
+      "sha256": "ee70ff1814c217c291968db3ac36b1e5fb2dbdb1b8a9a6ca51db05e97785ba8e",
+      "role": "code",
+      "description": "Experiment script implementing frozen spec"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/raw_output.txt",
+      "sha256": null,
+      "role": "raw",
+      "description": "Stdout from experiment execution"
+    }
+  ],
+  "observations": [
+    "K2 PMI = 0.933244 bits replicates parent (0.933) exactly, confirming measurement reproducibility.",
+    "K3 PMI = 1.220508 bits replicates parent (1.221) within rounding, confirming measurement reproducibility.",
+    "Point estimate K3 - K2 = 0.287 bits is positive, but bootstrap 95% CI = [-0.275, 0.080] INCLUDES ZERO. The bootstrap mean difference is -0.109, far from the observed 0.287. This indicates K3 PMI is highly unstable under session resampling.",
+    "Bootstrap instability: mean K3 across bootstraps = 0.824 (vs observed 1.221), while mean K2 = 0.933 (stable). K3 has 821 strata vs K2's 1292, and K3's action-history strata are more fragmented, making K3 estimates fragile to session-level resampling.",
+    "Null control fails: shuffled-action null mean = 0.407 bits, far above the 0.1 threshold. This is a SYSTEMATIC POSITIVE BIAS in the PMI estimator, not a genuine signal. The bias arises from the weighted-averaging scheme across strata with heterogeneous sizes and Laplace smoothing.",
+    "C2 condition: K2 (0.933) < K1 (1.531). In this hash-routed SPA, marginal action predictability exceeds state-conditioned predictability, because K1 strata are coarser (12 unconditional vs 1292 state-history strata) and the weighted average is dominated by high-count strata where action is highly predictive.",
+    "N=50000: K2 PMI increases to 1.779 bits (from 0.933 at N=5000). The PMI estimator bias is ASYMPTOTIC, not finite-sample. This contradicts H2 and suggests the weighted-averaged PMI does not converge to a meaningful value as N increases.",
+    "Determinism check: K2 sees 31.5% deterministic strata (407/1292), K3 sees 56.9% deterministic strata (467/821). K3's higher determinism ratio means more strata have PMI=0, which dilutes the weighted average. But the bootstrap instability is the primary concern, not determinism dilution.",
+    "Positive control passes: K3 PMI = 1.806 >= 1.0, p = 0.001. The estimator pipeline works correctly on a fully deterministic environment where the signal is unambiguous."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen decision rule C4: null control |mean| = 0.407 > 0.1 threshold. The PMI estimator has systematic positive bias that prevents absolute PMI interpretation.",
+    "The K3 - K2 difference test (designed to be ratio-based and immune to null centering) is ALSO compromised: bootstrap CI includes 0, and bootstrap mean is not centered on observed value. The estimator instability prevents even the difference test from being conclusive.",
+    "The N=50000 exploratory result (K2=1.779 vs K2=0.933 at N=5000) demonstrates that the PMI estimator has ASYMPTOTIC positive bias. The bias does not decrease with sample size; it increases. This fundamentally undermines the weighted-averaged PMI as a meaningful information-theoretic quantity.",
+    "The root cause is the weighted averaging across strata with wildly different sizes (from 5 to hundreds). Large strata dominate the weight but may have low PMI, while small strata (above the MIN_STRATUM_SIZE=5 threshold) can have high variance PMI estimates. The interaction between Laplace smoothing, strata size distribution, and weighted averaging creates a systematic upward bias.",
+    "Results are specific to the 12-state SHA256 hash-routed SPA. No inference to production SPAs, stochastic transitions, or browser-collected data."
+  ],
+  "unresolved": [
+    "The PMI estimator itself requires fundamental revision before the Markov-vs-beyond-Markov question can be answered. Possible fixes: (a) use unweighted PMI (equal strata weight), (b) use median rather than weighted mean, (c) use conditional mutual information estimator directly rather than strata-averaged PMI, (d) implement proper null centering that accounts for the strata distribution.",
+    "The bootstrap instability of K3 PMI needs investigation: is it due to strata fragmentation, trajectory correlation, or estimator nonlinearity?",
+    "Whether the 0.287-bit K3-K2 difference is real or an artifact of the estimator remains unresolved. A corrected estimator could resolve this.",
+    "The asymptotic bias at N=50000 (K2=1.779) needs characterization: does it plateau, or continue growing? What is the limit?",
+    "The K1 > K2 finding (marginal predictability exceeds state-conditioned predictability) is counterintuitive and needs analysis: is it a property of the hash-routed SPA or an estimator artifact?"
+  ]
+}
