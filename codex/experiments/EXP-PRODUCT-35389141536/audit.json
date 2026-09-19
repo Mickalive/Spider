@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35389141536",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    {
+      "id": "C3_C4_TAUTOLOGICAL_BY_CONSTRUCTION",
+      "severity": "major",
+      "category": "measurement",
+      "description": "C3 (browser diff <106.7) and C4 (param workflow <= literal) are tautologically satisfied because producer computes both conditions' browser+verification cost from the SAME measured total (1498.113ms) added as constant offset. Literal and parameterized execute identical HTTP actions by design, so browser_cost difference is identically 0.0 and workflow difference identically 1067 tokens (parent arithmetic). Neither criterion can discriminate; they cannot falsify even if browser costs were huge. Frozen spec makes this degenerate, but producer interpretation treats passing C3/C4 as empirical evidence that browser costs 'do not dominate'.",
+      "evidence": "run_experiment.py:401-405 literal_browser_total = total_browser_ms; param_browser_total = total_browser_ms; browser_diff = abs(...)=0.0; raw_evidence.json:workflow_costs literal.total 21190 = 19691+1498.113, param 20123=18624+1498.113; result.json:metrics decision_C3_browser_diff_threshold actual 0.0 threshold 106.7; spec.json:decision_rule C3 text",
+      "fix": "If differential browser cost is intended to be testable, measure browser execution independently per condition (e.g., separate registry selection paths, different URL-resolution code paths) or rephrase C3/C4 as consistency checks, not as falsifiers. Rename claim to 'browser costs are measurable and identical across conditions by construction' and bound inference accordingly."
+    },
+    {
+      "id": "PARENT_TOKEN_COSTS_STILL_ESTIMATED",
+      "severity": "major",
+      "category": "measurement",
+      "description": "Total workflow comparison inherits parent analytical token costs (LITERAL 19691, PARAMETERIZED 18624, COLD 2475) which audit REVISE of EXP-PRODUCT-35330741529 found to depend on hard-coded estimated completion tokens (2 for selection, 15 for resolution, 20 for COLD) and unmeasured 100% success assumption. Producer correctly discloses inheritance (result.json:validity_notes) but report.md claims '5.42% savings preserved in end-to-end workflow' and 'This was the last unmeasured cost component' as if parent gaps are closed. Browser measurement does not resolve completion-token estimation or success-rate gaps.",
+      "evidence": "result.json:metrics parent_literal_tokens 19691 parent_param_tokens 18624; provenance.json:measurement_methodology token_cost_measurement 'Inherited from parent EXP-PRODUCT-35330741529 analytical tiktoken ... NOT re-measured'; EXP-PRODUCT-35330741529/audit.json:required_fixes C1_SUCCESS_UNMEASURED, COMPLETION_TOKENS_ESTIMATED_NOT_MEASURED; report.md:Remaining validity gaps explicitly lists C1 and completion tokens still unmeasured but Implications section states 'Browser/verification costs are small relative to token savings supports C-PRODUCT-ECON advancing'",
+      "fix": "Bound claim ceiling to 'model token cost is analytically estimated; browser+verification adds constant offset preserving arithmetic difference' - do not claim end-to-end economics validated. Report sensitivity: token savings margin 1067 is thin; a +2 token/task estimate error flips C4. Require real LLM execution to measure completions before advancing C-PRODUCT-ECON beyond HYPOTHESIS."
+    },
+    {
+      "id": "VERIFICATION_MICROBENCHMARK_NOT_PRODUCTION",
+      "severity": "moderate",
+      "category": "measurement",
+      "description": "C2 reports 32/32 tasks with verification_time_ms >0 (median 0.026ms/task, total 0.844ms). Measurement is json.loads + status check micro-benchmark in Python, not semantic verification (response schema, correctness). Values 0.003-0.05ms are near timer resolution and do not co-vary with body size as baselines expected (B-VERIFICATION-RESPONSE expected 'correlated with response body size' - observed 27KB body 0.205ms vs 2-byte 404 body 0.003ms shows weak correlation, 0.06% of total). Pass is technically correct per threshold but does not validate realistic verification cost.",
+      "evidence": "raw_evidence.json:task_results[*].verification_time_ms 0.005-0.205, verification_all_times; result.json:metrics avg_verification_ms_per_task 0.026 total_verification_ms 0.844; controls:B-VERIFICATION-RESPONSE expected vs observed; run_experiment.py:measure_verification_cost json.loads + status_valid + has_content",
+      "fix": "Define verification to include expected product verification (agent output parsing, success determination) or explicitly bound claim to 'JSON parse + status check only, semantic verification unmeasured'. Tighten B-VERIFICATION-RESPONSE baseline to require demonstrable body-size correlation or mark as informative not pass/fail."
+    }
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_ARITHMETIC_RECOMPUTED_EXACT",
+      "severity": "info",
+      "finding": "All arithmetic in result.json and raw_evidence.json independently recomputed exactly. Total browser 1498.113ms = sum(task_results.browser_execution_time_ms), total verification 0.844ms = sum(verification_time_ms), total 1498.957ms matches. Per-task medians correctly computed via statistics.median of 3 runs (e.g., blog-read-post-4 median 36.326 from [36.326,35.1,10054.673], admin-view-user-5 median 43.185 from [43.185,10040.123,35.823]). Workflow totals literal 21190 =19691+1498.113, param 20123=18624+1498.113, cold 3974=2475+1498.113 correct. Token savings 1067 (5.42%) preserved arithmetically. 32/32 tasks measurable, 27/32 HTTP 2xx, avg 46.816ms/task recomputed matches.",
+      "evidence": "raw_evidence.json:task_results[32] browser_execution_time_ms sums, browser_verification_totals, workflow_costs, per_task_summary; parent raw_evidence.json aggregate_costs literal 19691 param 18624 cold 2475"
+    },
+    {
+      "id": "V2_BROWSER_MEASURABLE_GENUINE",
+      "severity": "info",
+      "finding": "C1 genuinely measured: 32/32 >=25 threshold, median per-task 33-93ms, total 1498ms across jsonplaceholder.typicode.com. Network jitter visible via outliers (10054.673ms on blog-read-post-4, 10040.123ms on admin-view-user-5, 10046.932ms on search-users) correctly mitigated by median of 3. All tasks had 3/3 successful runs per browser_successful_runs. Positive control 5/5 HTTP 200 in both task_results and separate positive_control block (200, 270-292 bytes).",
+      "evidence": "raw_evidence.json:task_results[*].browser_execution_time_ms >0 for 32/32, browser_all_times outliers, positive_control.results 5/5 status 200; result.json:metrics tasks_with_measurable_browser 32 decision_C1_browser_measurable pass true"
+    },
+    {
+      "id": "V3_NETWORK_JITTER_AND_API_CDN_BIAS",
+      "severity": "moderate",
+      "finding": "Browser costs measured against jsonplaceholder.typicode.com CDN (well-provisioned, free test API). Producer discloses this (validity_notes). Measured latency 47ms avg may not represent production endpoints with auth, rate-limiting, TLS, larger payloads. Jitter outliers up to 10s indicate CDN/shared-runner instability; median protects point estimate but variance unreported (no IQR/CI). No longitudinal or production-endpoint calibration.",
+      "evidence": "raw_evidence.json:task_results browser_all_times variance e.g., shop-view-product-2 [93.7,107.206,39.346] range 68ms; provenance.json:data_sources live_http_endpoint jsonplaceholder.typicode.com; result.json:validity_notes second bullet"
+    },
+    {
+      "id": "V4_REQUESTS_NOT_REAL_BROWSER",
+      "severity": "moderate",
+      "finding": "Browser execution uses Python requests library, not Playwright/Selenium real browser. Spec explicitly allows this ('via Python requests library with time.perf_counter()'), so compliant with frozen validity, but representation loss remains: real browser adds rendering, JS, navigation overhead that requests omits. Producer discloses (validity_notes). Since overhead would again be constant across conditions (same URLs), it would not change differential conclusion, but absolute workflow cost ceiling is understated.",
+      "evidence": "spec.json:measurement_validity bullet 1 'via Python requests library'; provenance.json:measurement_methodology browser_cost_measurement; result.json:validity_notes fourth bullet"
+    },
+    {
+      "id": "V5_TOKEN_EQUIVALENT_CONVERSION_ARBITRARY",
+      "severity": "moderate",
+      "finding": "Token-equivalent conversion 1ms ~ 1 token used to compute browser_verification_pct_of_token_savings 140.5% (1499/1067) and to add to token counts. Producer correctly labels 'rough approximation' and notes key insight is identical offset preserves inequality regardless of rate. However report.md tables compare 'Token Cost | Browser+Verification | Total Workflow' by summing incompatible units (tokens + ms). At alternative rates (e.g., 0.1ms/token or 10ms/token) absolute totals shift dramatically; only ordering (param < literal) is invariant. 140.5% figure is conversion-dependent, not a physical ratio.",
+      "evidence": "result.json:metrics browser_verification_pct_of_token_savings 140.5 browser_verification_is_dominant_cost false; provenance.json:measurement_methodology token_equivalent_conversion '1ms ~ 1 token (rough approximation)'; report.md:Key Results table"
+    },
+    {
+      "id": "V6_COLD_STILL_CHEAPER",
+      "severity": "info",
+      "finding": "COLD workflow 3974 remains 5.3x cheaper than LITERAL 21190 and 5.1x cheaper than PARAMETERIZED even after adding identical 1498ms overhead, reinforcing parent finding COLD 8x cheaper on tokens alone (77 vs 615 tokens/task). Producer correctly preserves this observation but COLD success rate and real completion tokens remain unmeasured (carry-forward unknown). No new evidence on COLD viability.",
+      "evidence": "raw_evidence.json:workflow_costs cold total 3974 vs literal 21190; result.json:metrics cold_total_workflow 3974; report.md:COLD baseline remains dramatically cheaper"
+    },
+    {
+      "id": "V7_NULL_CONTROL_WEAKER_THAN_SPEC",
+      "severity": "low",
+      "finding": "Spec null_control expects 3 admin/auth tasks with 403/404 on public endpoint. Implementation uses 3 synthetic /nonexistent/* URLs (nonexistent/99999, /perm, /audit) all returning 404 - passes 3/3 error status. Spec's auth-specific semantics (admin-view-user, auth-check-permissions, admin-list-audit-log) not literally tested against real auth endpoints, but functional error-handling measurement achieved. Task_results includes 5 additional 404s (posts/101-103,201-202) that are not part of null_control block, indicating corpus remapping produced unintended 404s for shop/pm tasks (4/32 404s).",
+      "evidence": "spec.json:null_control 3 admin/auth tasks; raw_evidence.json:null_control.results 3x nonexistent, task_results 5x 404 (shop-view-product 1-3, pm-view-project 1-2 posts/101 etc beyond jsonplaceholder's 100 posts)"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-HTTP-RAW",
+      "expected": "Non-zero latency for all reachable URLs; variance across tasks reflects network conditions",
+      "observed": "All 32 tasks had measurable execution time 32.584-93.7ms median (33-60ms typical, 1498ms total). Latency variance reflects network jitter, not task semantics (largest variance on shop-view-product-2 39-107ms). Recomputed via median of 3 runs with outlier protection. Pass justified but not discriminating between task types.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json:task_results[*].browser_execution_time_ms and browser_all_times; result.json:controls B-HTTP-RAW observed_behavior"
+    },
+    {
+      "control_id": "B-VERIFICATION-RESPONSE",
+      "expected": "Non-zero verification cost correlated with response body size",
+      "observed": "Verification 0.844ms total, 0.026ms/task median. Non-zero for 32/32 passes C2 threshold, but correlation with body size is weak: 27KB body (blog-list-posts) 0.205ms vs 2-byte 404 body 0.005ms shows some scaling, but 5KB users list 0.072ms vs 509-byte user 0.011-0.027ms not monotonic. Body-size correlation not statistically tested. Baseline passes lenient >0 criterion but not stronger correlated expectation.",
+      "verdict": "PASS_WITH_CONCERN",
+      "evidence": "raw_evidence.json:task_results response_body_bytes vs verification_time_ms; result.json:controls B-VERIFICATION-RESPONSE observed 0.844ms total"
+    },
+    {
+      "control_id": "B-TOKEN-ONLY",
+      "expected": "Parent analytical costs are a lower bound on total workflow cost",
+      "observed": "Inherited correctly: LITERAL 19691, PARAMETERIZED 18624, COLD 2475 from EXP-PRODUCT-35330741529 aggregate_costs. Total workflow adds 1498ms constant, so parent costs are lower bound as expected. Arithmetic verified exactly. However parent costs themselves depend on estimated completions (audit V2) - bound is on estimated not measured cost.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json:parent_token_costs; provenance.json:parent_experiment EXP-PRODUCT-35330741529; recomputed via parent raw_evidence.json"
+    },
+    {
+      "control_id": "positive_control",
+      "expected": "5/5 tasks complete successfully with HTTP 200 and parseable JSON response",
+      "observed": "5/5 blog-read-post tasks (posts/1-5) returned HTTP 200 with valid JSON 270-292 bytes, verification 0.005-0.01ms, in both task_results and dedicated positive_control.results block (browser_ms 35-46ms). Raw evidence cross-consistent.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json:positive_control.results 5/5 success true, task_results[0:5] status_code 200; result.json:controls positive_control observed_behavior"
+    },
+    {
+      "control_id": "null_control",
+      "expected": "3/3 tasks return error status (403/404/401); error handling cost is measured, not treated as success",
+      "observed": "3/3 null_control synthetic tasks (/nonexistent/99999, /perm, /audit) returned 404 with measured browser 36-57ms and verification 0.003ms. Pass true. Error handling correctly measured as cost, not excluded.",
+      "verdict": "PASS",
+      "evidence": "raw_evidence.json:null_control.results 3/3 is_error_status true status_code 404; result.json:controls null_control"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_browser_execution_ms": 1498.113,
+    "total_verification_ms": 0.844,
+    "total_browser_verification_ms": 1498.957,
+    "avg_browser_ms_per_task": 46.816,
+    "avg_verification_ms_per_task": 0.026,
+    "tasks_with_measurable_browser_recomputed": 32,
+    "tasks_with_positive_http_status_recomputed": 27,
+    "browser_verification_token_equivalent_at_1ms_per_token": 1499,
+    "token_savings_parent_analytical": 1067,
+    "token_savings_pct_parent": 5.42,
+    "workflow_literal_recomputed": 21189.113,
+    "workflow_param_recomputed": 20122.113,
+    "workflow_cold_recomputed": 3973.113,
+    "C1_browser_measurable": "PASS 32/32 >=25",
+    "C2_verification_positive": "PASS 32/32 >=20 but micro-benchmark 0.003-0.205ms",
+    "C3_browser_diff_recomputed": 0.0,
+    "C3_threshold": 106.7,
+    "C3_verdict": "PASS tautologically (degenerate)",
+    "C4_param_le_literal_recomputed": true,
+    "C4_diff_recomputed": 1067,
+    "C4_verdict": "PASS tautologically (inherits parent inequality)",
+    "C5_positive_control_recomputed": "PASS 5/5 HTTP 200",
+    "decision_verdict_recomputed": "SURVIVES_CURRENT_TEST per frozen rule (all 5 pass), but C3/C4 lack falsification power",
+    "arithmetic_match": true
+  },
+  "claim_ceiling": "Browser and verification costs are measurable via Python requests to jsonplaceholder.typicode.com on the synthetic 32-task corpus (N=32, 3 runs median): total 1498ms browser +0.84ms JSON/status verification (~47ms/task, verification 0.06% of non-token cost). At 1ms~1 token this equals ~1499 token-equivalents (140% of the 1067-token analytical margin) but because the same HTTP actions are executed in LITERAL, PARAMETERIZED and COLD, the cost is a constant offset: arithmetic 18624+1498 <19691+1498 is preserved. This SURVIVES_CURRENT_TEST per frozen decision rule C1-C5. No inference justified that 5.42% token savings is economically meaningful: parent token costs are analytical estimates (completion tokens 2/15/20) with unmeasured success rate (C1 100% assumed), browser measured is requests library not Playwright, verification is JSON parse only, endpoint is CDN not production, and COLD remains 5.1-5.3x cheaper (3974 vs 20123/21190) with unmeasured real success. C-PRODUCT-ECON remains HYPOTHESIS. Maximum justified claim: 'On synthetic 32-task corpus, browser+verification cost is non-zero, negligible verification, and identical across registry conditions by construction, so it does not differentially offset analytically-estimated token savings.' Do not generalize to real SPIDER corpus, real LLM completions, real browser, or production network.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35389141536/spec.json — frozen decision_rule C1-C5 and measurement_validity",
+    "research/experiments/EXP-PRODUCT-35389141536/prereg.md — hypothesis H1-H4 falsifier F1-F2",
+    "research/experiments/EXP-PRODUCT-35389141536/freeze.json — hashes",
+    "research/experiments/EXP-PRODUCT-35389141536/result.json — metrics, controls, artifacts, observations, validity_notes, unresolved",
+    "research/experiments/EXP-PRODUCT-35389141536/report.md — Key Results table and Interpretation",
+    "research/experiments/EXP-PRODUCT-35389141536/provenance.json — python 3.12.14 requests 2.34.2 api_keys_available false, parent EXP-PRODUCT-35330741529 inheritance",
+    "research/experiments/EXP-PRODUCT-35389141536/raw_evidence.json — task_results[32] per-task browser_execution_time_ms verification_time_ms status_code, positive_control 5/5, null_control 3/3, workflow_costs, decision_rule verdict SURVIVES_CURRENT_TEST",
+    "research/experiments/EXP-PRODUCT-35389141536/run_experiment.py — measure_browser_cost median of 3 via perf_counter, measure_verification_cost json.loads+status, degenerate C3 diff 0.0 literal_browser_total=param_browser_total=total_browser_ms",
+    "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json — aggregate_costs literal 19691 parameterized 18624 cold 2475",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json — REVISE required_fixes C1_SUCCESS_UNMEASURED COMPLETION_TOKENS_ESTIMATED BROWSER_OMITTED COLD_INVERSION",
+    "research/experiments/EXP-PRODUCT-35375591046/handoff.json — carry_forward established/rejected/unknown/do_not_assume and three-way A/B/C decision",
+    "codex/claim_state.json — C-PRODUCT-ECON HYPOTHESIS, C-PARAM-INHERIT EXPERIMENTAL",
+    "research/lanes/registry.json — product lane priority_claims"
+  ],
+  "unresolved": [
+    "Whether completion-token-adjusted total workflow ranking (PARAM vs LITERAL vs COLD) with real LLM outputs preserves 5.42% margin - parent estimate error sensitivity ~1 token/task flips outcome",
+    "Whether COLD at ~77 tokens/task analytical achieves viable success rate with real LLM (>90%) and whether real COLD completion tokens remain <=100/task",
+    "Whether Python requests latency underestimates real browser (Playwright) latency differentially across conditions - hypothesized no, unmeasured",
+    "Whether production endpoint latency/bandwidth/auth/rate-limiting changes absolute browser cost magnitude and variance vs jsonplaceholder CDN",
+    "Whether null_control semantics on real auth endpoints (403/401) differ from synthetic /nonexistent 404 in cost",
+    "Whether 5.42% saving generalizes beyond synthetic 32-task corpus to real SPIDER registry and natural task distribution",
+    "Whether end-to-end product economics (retrieval, ranking, repair, maintenance amortization) justify registry vs COLD beyond per-task token + HTTP cost"
+  ]
+}

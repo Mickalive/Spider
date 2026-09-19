@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35402003775",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Is the 0.933-bit K2 PMI signal on the 12-state SPA primarily Markov (action determines next state given current state, requiring only current-state conditioning) or genuinely beyond-Markov (history K>2 adds predictive information beyond current state)? Compare state-history K2 PMI (0.933 bits) against action-history K3 PMI (1.221 bits) at N=5000 on the same SPA: if K3 >> K2, signal is primarily Markov; if K2 is comparable to or exceeds K3 after history conditioning, beyond-Markov structure is demonstrated. This decomposition does not require null centering (it is a ratio/comparison, not an absolute test) and resolves the interpretive ambiguity without resolving the null bias problem.",
+  "why_next": "All three materially orthogonal null frameworks (parametric bootstrap 0.357, Miller-Madow 0.407, conditional entropy -0.814) fail to center PMI null at zero for the 12-state hash-routed SPA at N=5000. The convergence (range 0.060 bits) confirms the bias floor ~0.36-0.42 bits is intrinsic to PMI weighted averaging across deterministic/stochastic strata, not estimator choice or permutation scheme. Null centering may be fundamentally impossible for this SPA class without modifying the SPA design (e.g., eliminating deterministic strata). The 0.933-bit K2 PMI signal remains reproducible but uninterpreted: is it Markov (action determines next state given current state) or beyond-Markov (history adds information beyond current state)? The action-history K3 PMI (1.221 bits) at same N provides a direct comparison that does not require null centering — it is a ratio/comparison between two PMI measurements, not an absolute significance test. This pivot is the highest-information next step given the null centering impasse.",
+  "carry_forward": {
+    "established": [
+      "Parametric bootstrap null centering FAILS for hash-routed SPA: null mean 0.357+/-0.007 bits, 3.57x above |0.1| threshold, 14.5% improvement over within-stratum 0.417. (EXP-PHYSICS-35402003775 result.json:metrics.parametric_bootstrap_null_mean_k2)",
+      "Miller-Madow bias correction FAILS to center null: null mean 0.407+/-0.008 bits, 4.07x above threshold. Increases observed PMI +13.6% (0.933 to 1.060 bits) but null unchanged, confirming bias is not finite-sample log-ratio. (EXP-PHYSICS-35402003775 result.json:metrics.miller_madow_null_mean_k2)",
+      "Conditional entropy framework is degenerate for deterministic SPAs: H_full=0.0, DeltaH=-0.933, null mean -0.814+/-0.003 bits. Positive control fails (H_K3=0.0 on 8-state deterministic SPA). Framework unsuitable for deterministic transition systems. (EXP-PHYSICS-35402003775 result.json:metrics.conditional_entropy_null_mean_k2)",
+      "Null centering convergence across frameworks: parametric bootstrap 0.357, Miller-Madow 0.407, within-stratum 0.417 (range 0.060 bits). Bias floor ~0.36-0.42 bits is intrinsic to PMI weighted averaging across deterministic/stochastic strata, not estimator choice. (EXP-PHYSICS-35402003775 result.json:metrics)",
+      "Within-stratum conditional permutation FAILS to center null at zero: null_mean=0.417+/-0.006 bits, 4.17x above |mean|<0.1 threshold. (EXP-PHYSICS-35389142077, replicated in EXP-PHYSICS-35402003775)",
+      "State-history K2 PMI=0.933 bits (p=0.001, d~79) at N=5000 on 12-state SPA, reproducible across experiments. (EXP-PHYSICS-35389142077, replicated in EXP-PHYSICS-35402003775)",
+      "Action-history K3 PMI=1.221 bits (p=0.001) at N=5000 on 12-state SPA. (EXP-PHYSICS-35389142077, replicated in EXP-PHYSICS-35402003775)",
+      "Positive control validates PMI pipeline: 8-state deterministic SPA K3 PMI=1.671 bits (state), 1.806 bits (action), p=0.001. (EXP-PHYSICS-35402003775 result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA)",
+      "Deterministic strata 407/1292 (31.5%) contribute PMI=0 by construction; stochastic 885/1292 (68.5%) carry signal and bias. Mean observations per stratum 3.87; only 30.8% meet MIN_STRATUM_SIZE=5. (EXP-PHYSICS-35389142077, replicated in EXP-PHYSICS-35402003775)",
+      "Fragment-stripping destroys all state information: normalized PMI = 0.0 bits on TodoMVC. (EXP-PHYSICS-35290611436, EXP-PHYSICS-35308806126)"
+    ],
+    "rejected": [
+      "Parametric bootstrap as null centering method for hash-routed SPAs: null mean 0.357 bits, 3.57x above threshold. (EXP-PHYSICS-35402003775)",
+      "Miller-Madow bias-corrected PMI as null centering method: null mean 0.407 bits, 4.07x above threshold. (EXP-PHYSICS-35402003775)",
+      "Conditional entropy H(url_after|action,url_before,history) as null centering method for deterministic SPAs: degenerate H_full=0.0, null mean -0.814 bits. (EXP-PHYSICS-35402003775)",
+      "Within-stratum conditional permutation as null centering method for hash-routed SPAs: null_mean=0.417 bits, 4.17x above threshold. (EXP-PHYSICS-35389142077)",
+      "Trajectory-level block permutation as null control: null_mean=0.552 bits, known biased. (parent experiments)",
+      "Action-shuffle as null control: null_mean=0.406 bits, converges with within-stratum, same bias floor. (EXP-PHYSICS-35389142077)",
+      "Beyond-Markov URL-level PMI on TodoMVC hash-SPAs: 0/5 variants achieve K3 PMI > 0.05 bits. (EXP-PHYSICS-35290611436, EXP-PHYSICS-35308806126)",
+      "Title-aware PMI on TodoMVC: 0/5 variants have >=2 unique titles. (EXP-PHYSICS-34266105229, EXP-PHYSICS-35209110569)",
+      "DOM structural features as predictive state beyond URL on TodoMVC degenerate demos: DOM-feature PMI worse than URL-only. (EXP-PHYSICS-34524411213)"
+    ],
+    "unknown": [
+      "Whether the 0.933-bit K2 PMI signal is primarily Markov (action determines next state given current state) or genuinely beyond-Markov (history adds information beyond current state). Requires action-history K3 comparison at same N — the preregistered pivot question.",
+      "Whether the null bias floor ~0.36-0.42 bits is finite-sample or asymptotic: test at N=50000/500000 needed to determine scaling.",
+      "Whether null centering is possible on SPAs with 0% deterministic strata (all stochastic transitions). The 31.5% deterministic strata may be the structural cause; eliminating them could resolve bias.",
+      "Whether conditional entropy framework is viable for stochastic SPAs where H(S|A,S,H) > 0 (current test only deterministic).",
+      "Whether null bias generalizes beyond 12-state SHA256 SPA to other state cardinalities or transition functions.",
+      "Whether production SPA testing with valid null detects beyond-Markov URL-level PMI.",
+      "Whether the ~0.52 bits (0.933 minus ~0.41 bias) represents true beyond-Markov signal. Requires independent validation via alternative estimator or signal decomposition."
+    ],
+    "do_not_assume": [
+      "C-WEB-DYNAMICS is globally false. The 0.933-bit K2 PMI signal is real and reproducible (p=0.001). The FALSIFIED-IN-SETTING verdict is due to null methodology limitation, not absence of signal.",
+      "Null bias is evidence against beyond-Markov signal. The permutation bias is intrinsic to PMI estimator weighting; the p-value remains a valid significance test.",
+      "All PMI null frameworks are exhausted. The three tested frameworks share structural dependence on PMI weighted averaging; truly orthogonal frameworks (e.g., Bayesian model comparison, likelihood ratio tests, or non-PMI information-theoretic quantities on stochastic SPAs) are untested.",
+      "The 0.933-bit K2 PMI demonstrates beyond-Markov dynamics in the C-WEB-DYNAMICS sense (predictive structure beyond memory). The test is I(url_after; action | url_before, prev1, prev2) without history-conditioned baseline comparison. Action-history K3 (1.221 bits) at same N is higher, suggesting signal may be primarily Markov.",
+      "Production SPA results generalize from this simulation. The 12-state SPA has 12 states, 4 deterministic candidates, hash-based selection, no anti-bot/auth/visual complexity.",
+      "The bias floor of ~0.41 bits at N=5000 is irreducible. Alternative estimators, larger N, or different SPA designs may reduce it.",
+      "Phase 2 production testing was precluded by infrastructure. It was precluded by Phase 1 methodology falsification; production testing requires valid null before being interpretable."
+    ]
+  },
+  "dependencies": [
+    "Signal decomposition experiment: compare state-history K2 PMI (0.933 bits) vs action-history K3 PMI (1.221 bits) at N=5000 on same 12-state SPA to determine Markov vs beyond-Markov nature of signal",
+    "Larger N (>=50000) to test if bias floor reduces with sample size (finite-sample vs asymptotic)",
+    "SPA design with 0% deterministic strata to test whether deterministic/stochastic mixing is the structural cause of null bias",
+    "Stochastic SPA testing for conditional entropy framework viability (H(S|A,S,H) > 0)",
+    "Bayesian model comparison or likelihood ratio test as truly orthogonal null framework not dependent on PMI weighted averaging",
+    "Production SPA with Playwright browser automation and >=5000 non-leakage transitions (requires valid null first)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35402003775/spec.json:decision_rule",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.framework_pass_count=0",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.parametric_bootstrap_null_mean_k2=0.35694",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.miller_madow_null_mean_k2=0.40719",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.conditional_entropy_null_mean_k2=-0.81442",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.within_stratum_null_mean_k2=0.41745",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.state_history_pmi_k2=0.93324",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.action_history_pmi_k3=1.22051",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA.passes=true",
+    "research/experiments/EXP-PHYSICS-35402003775/audit.json:status=PASS",
+    "research/experiments/EXP-PHYSICS-35402003775/audit.json:claim_ceiling",
+    "research/experiments/EXP-PHYSICS-35389142077/handoff.json:carry_forward.established",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "recommended_action": "Design a signal decomposition experiment to determine whether the 0.933-bit K2 PMI signal is Markov or beyond-Markov. Compare state-history K2 PMI (0.933 bits) against action-history K3 PMI (1.221 bits) at N=5000 on the same 12-state SPA. Use a history-conditioned baseline: compute I(S_next; action | S_current, H_K) for K=1 (marginal), K=2 (current state), K=3 (current + 1 prior) to determine whether additional history beyond current state adds predictive information. If K3 > K2 by > 0.1 bits with valid comparison, beyond-Markov structure is demonstrated. If K3 ≈ K2 or K3 < K2, signal is primarily Markov (action determines next state given current state). This decomposition does not require null centering — it is a ratio/comparison between PMI measurements, not an absolute significance test. Also test at N=50000 to determine whether bias floor is finite-sample or asymptotic. If bias decreases with N, larger N may eventually enable valid null centering."
+}

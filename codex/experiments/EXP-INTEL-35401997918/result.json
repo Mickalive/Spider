@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35401997918",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M1_canonical_density_summary": {
+      "description": "Canonical per-iteration p=0.5 density across 21 task-definition pairs",
+      "mean": 0.005170,
+      "std": 0.003464,
+      "min": 0.000412,
+      "max": 0.009346,
+      "range": [0.000412, 0.009346],
+      "summary": "Near-zero densities consistent with prior experiments (EXP-INTEL-35353016702 mean 0.006). Low variance reflects p=0.5 independent inclusion on sparse locatable_sample."
+    },
+    "M2_weighted_density_summary": {
+      "description": "Area-weighted density (matching_area / total_area) across 21 pairs",
+      "mean": 0.666667,
+      "std": 0.475076,
+      "min": 0.004693,
+      "max": 1.000000,
+      "range": [0.004693, 1.000000],
+      "summary": "High mean because DEF-FULL-MAP matches all 20 elements (density=1.0 for 7/21 pairs). DEF-FORM-ONLY also high (17-19/20 elements match). Only ISOLATED-A-LINK produces low density (1-3 elements)."
+    },
+    "M3_hierarchy_density_summary": {
+      "description": "Hierarchy-weighted density (exp(-0.3*depth) weighting) across 21 pairs",
+      "mean": 0.666667,
+      "std": 0.389136,
+      "min": 0.087837,
+      "max": 1.000000,
+      "range": [0.087837, 1.000000],
+      "summary": "Mean identical to weighted density because depth estimation based on inForm flag produces identical weight distributions across tasks. The hierarchy recipe is a monotonic transformation of weighted, not a structurally different recipe."
+    },
+    "M4_C1_hierarchy_variation": {
+      "description": "C1: CV of hierarchy-weighted density across 21 pairs",
+      "cv": 0.583704,
+      "threshold": 0.10,
+      "pass": true,
+      "summary": "C1 passes: CV=0.58 >> 0.10 threshold. The hierarchy recipe varies across task-definition pairs, primarily driven by definition choice (DEF-FULL-MAP vs ISOLATED-A-LINK)."
+    },
+    "M5_C2_outside_convex_hull": {
+      "description": "C2: Count of pairs with hierarchy_density outside [min(canonical, weighted), max(canonical, weighted)]",
+      "count_outside": 7,
+      "total_pairs": 21,
+      "fraction_outside": 0.333,
+      "threshold": 3,
+      "pass": true,
+      "outside_direction": "ALL_ABOVE",
+      "summary": "C2 passes: 7/21 pairs have hierarchy_density ABOVE the convex hull. All7 are ISOLATED-A-LINK pairs where hierarchy density (0.088-0.210) exceeds weighted density (0.005-0.019). The hull-breaking occurs because hierarchy upweights shallow non-form elements (nav links, action buttons) that have minimal area in the weighted recipe."
+    },
+    "M6_C3_not_linear_combination": {
+      "description": "C3: Spearman correlation of hierarchy with canonical and weighted densities",
+      "rho_hier_canonical": 0.879221,
+      "rho_hier_weighted": 1.000000,
+      "abs_rho_hier_canonical": 0.879221,
+      "abs_rho_hier_weighted": 1.000000,
+      "p_hier_canonical": 0.675309,
+      "p_hier_weighted": 0.0,
+      "pass": true,
+      "summary": "C3 passes (barely): |rho(hier, canonical)|=0.879 < 0.90 threshold. However, |rho(hier, weighted)|=1.0 exactly — the hierarchy recipe produces a PERFECT monotonic transformation of weighted density. This is not 'different from a linear combination' in any meaningful sense; it is a reparameterization."
+    },
+    "M7_C4_task_type_structure": {
+      "description": "C4: eta-squared of hierarchy-density on page_type",
+      "eta_squared": 0.0,
+      "threshold": 0.10,
+      "pass": false,
+      "summary": "C4 decisively FAILS: eta^2=0.000. The hierarchy-weighted density has IDENTICAL mean across all three page types (listing=detail=cart=0.667). This is because: (a) the depth estimation is based on inForm which is binary, not structural; (b) all 20 locatable_sample elements have identical element composition across tasks; (c) the depth distribution is the same for all tasks within each definition."
+    },
+    "M8_verdict": {
+      "description": "Conjunctive decision rule evaluation",
+      "C1_pass": true,
+      "C2_pass": true,
+      "C3_pass": true,
+      "C4_pass": false,
+      "verdict": "FALSIFIED-IN-SETTING",
+      "rule_triggered": "C1 AND C2 AND C3 AND NOT C4 => FALSIFIED-IN-SETTING (C4 failure: zero task-type structure)"
+    },
+    "M9_PC1_hierarchy_variation": {
+      "description": "Positive control: hierarchy density differs across page types with inter-type ratio > 1.1",
+      "type_means": {
+        "product_listing": 0.666667,
+        "detail": 0.666667,
+        "cart": 0.666667
+      },
+      "inter_type_ratio": 1.0,
+      "pass": false,
+      "summary": "PC1 fails: all three page types have identical mean hierarchy density (0.667). The depth estimation (based on inForm flag) is invariant to page-type-specific DOM structure."
+    },
+    "M10_NC1_random_weights": {
+      "description": "Null control: random-weight density shows less structure than hierarchy",
+      "mean_random_rho_canonical": 0.876629,
+      "mean_random_rho_weighted": 0.978062,
+      "hierarchy_rho_canonical": 0.879221,
+      "hierarchy_rho_weighted": 1.000000,
+      "hierarchy_stronger_than_random_canonical": true,
+      "hierarchy_stronger_than_random_weighted": true,
+      "pass": false,
+      "summary": "NC1 fails: random weights show nearly identical correlation structure to hierarchy weights (mean|rho(rand,canon)|=0.877 vs |rho(hier,canon)|=0.879). The hierarchy recipe does not produce more systematic structure than random weights."
+    },
+    "M11_alpha_sensitivity": {
+      "description": "Sensitivity of results to alpha parameter (depth decay rate)",
+      "alpha_0.1": {
+        "cv": 0.615723,
+        "eta_squared": 0.0,
+        "outside_hull_count": 10,
+        "rho_canonical": 0.781818,
+        "rho_weighted": 0.945455
+      },
+      "alpha_0.3": {
+        "cv": 0.583704,
+        "eta_squared": 0.0,
+        "outside_hull_count": 7,
+        "rho_canonical": 0.879221,
+        "rho_weighted": 1.000000
+      },
+      "alpha_0.5": {
+        "cv": 0.545491,
+        "eta_squared": 0.0,
+        "outside_hull_count": 13,
+        "rho_canonical": 0.767532,
+        "rho_weighted": 0.937662
+      },
+      "summary": "Eta-squared is 0.0 at ALL alpha values. Task-type structure is absent regardless of depth decay rate. The number of hull-breaking pairs varies (10, 7, 13) but all hull breaks are ISOLATED-A-LINK pairs above the hull."
+    },
+    "M12_baseline_comparison": {
+      "description": "Comparison with B3 linear mean baseline",
+      "linear_mean_rho_canonical": 0.894805,
+      "linear_mean_rho_weighted": 0.984416,
+      "linear_mean_outside_hull": 0,
+      "summary": "Linear mean (B3) has rho(canonical)=0.895 and rho(weighted)=0.984, and produces 0 hull breaks (by mathematical identity). Hierarchy has rho(canonical)=0.879 (slightly lower, marginally better) but rho(weighted)=1.0 (identical, no improvement). The hierarchy recipe adds one new dimension (ISOLATED-A-LINK hull breaks) but provides zero task-type discrimination."
+    },
+    "M13_recipe_identity": {
+      "description": "Root cause: hierarchy recipe is isomorphic to weighted recipe",
+      "mechanism": "The depth estimation heuristic assigns depth based on inForm (binary), not actual DOM tree structure. Since ALL locatable_sample elements have the same inForm pattern across tasks, the depth distribution is task-invariant. The hierarchy recipe therefore produces a MONOTONIC transformation of weighted density (Spearman rho=1.0) that preserves rank ordering while shifting absolute values for ISOLATED-A-LINK pairs.",
+      "evidence": "Spearman(hierarchy, weighted)=1.0 at alpha=0.3. All type_means=0.667 (identical). Eta-squared=0.0 at all alpha values."
+    }
+  },
+  "controls": {
+    "B1_CANONICAL_RECIPE": {
+      "id": "B1_CANONICAL_RECIPE",
+      "description": "Canonical per-iteration p=0.5 density",
+      "expected": "Near-zero densities, high canonical/weighted ratio",
+      "observed": "Canonical mean=0.00517, range [0.00041, 0.00935]. Consistent with prior experiments.",
+      "pass": true,
+      "evidence_ref": "M1_canonical_density_summary"
+    },
+    "B2_WEIGHTED_RECIPE": {
+      "id": "B2_WEIGHTED_RECIPE",
+      "description": "Area-weighted density",
+      "expected": "Higher densities, definition-dependent",
+      "observed": "Weighted mean=0.667, range [0.00469, 1.0]. DEF-FULL-MAP=1.0, DEF-FORM-ONLY~0.99, ISOLATED-A-LINK~0.005-0.019.",
+      "pass": true,
+      "evidence_ref": "M2_weighted_density_summary"
+    },
+    "B3_LINEAR_MEAN": {
+      "id": "B3_LINEAR_MEAN",
+      "description": "Meta-analytic mean (canonical+weighted)/2 — maximally degenerate baseline",
+      "expected": "Always ranks between canonical and weighted (0 hull breaks)",
+      "observed": "0 hull breaks, rho(canonical)=0.895, rho(weighted)=0.984. Confirmed degenerate.",
+      "pass": true,
+      "evidence_ref": "M12_baseline_comparison"
+    },
+    "B4_DENSITY_RATIO": {
+      "id": "B4_DENSITY_RATIO",
+      "description": "Density ratio R = canonical/weighted — definition-driven",
+      "expected": "Definition-driven variation, non-significant task-type correlation",
+      "observed": "Not directly recomputed in this experiment; parent results (EXP-INTEL-35375593989) confirm R is definition-driven.",
+      "pass": true,
+      "evidence_ref": "EXP-INTEL-35375593989 result.json"
+    },
+    "PC1_HIERARCHY_VARIATION": {
+      "id": "PC1_HIERARCHY_VARIATION",
+      "description": "DOM hierarchy depth varies across page types — hierarchy density should differ",
+      "expected": "At least one inter-type ratio > 1.1",
+      "observed": "All three types have identical mean (0.667). Inter-type ratio=1.0. FAIL.",
+      "pass": false,
+      "evidence_ref": "M9_PC1_hierarchy_variation"
+    },
+    "NC1_RANDOM_WEIGHTS": {
+      "id": "NC1_RANDOM_WEIGHTS",
+      "description": "Random-weight density should show less structure than hierarchy",
+      "expected": "|Spearman(random, canonical)| < 0.30 AND |Spearman(random, weighted)| < 0.30",
+      "observed": "Random mean|rho(canonical)|=0.877, mean|rho(weighted)|=0.978. Both exceed 0.30. FAIL.",
+      "pass": false,
+      "evidence_ref": "M10_NC1_random_weights"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "/tmp/opencode/hierarchy_density_analysis.py",
+      "sha256": "941e80220bdaa25cc87f511d190f6cef562f9db0d4aa39fd287a10e0b4453942",
+      "role": "code"
+    },
+    {
+      "path": "/tmp/opencode/hierarchy_analysis/hierarchy_analysis_results.json",
+      "sha256": "c4c2ef60490024e6c3f7a66d7f7d4c54bd01d6c1555a5003cef6f18fb20f32e1",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    {
+      "id": "OBS-1",
+      "type": "RAW",
+      "description": "The hierarchy-weighted density recipe (exp(-alpha * depth) weighting with alpha=0.3) produces density values that are a PERFECT monotonic transformation of the weighted recipe (Spearman rho=1.0). The hierarchy recipe does not introduce a structurally different ranking; it reparameterizes the existing weighted ranking.",
+      "evidence_ref": "M6_C3_not_linear_combination"
+    },
+    {
+      "id": "OBS-2",
+      "type": "RAW",
+      "description": "The hierarchy recipe breaks the convex hull on 7/21 pairs (all ISOLATED-A-LINK), with all7 hull breaks ABOVE the hull (hierarchy > weighted). This occurs because hierarchy upweights shallow non-form elements (depth=1-2, nav links, action buttons) that have minimal area in the weighted recipe but receive equal weight in the hierarchy recipe.",
+      "evidence_ref": "M5_C2_outside_convex_hull"
+    },
+    {
+      "id": "OBS-3",
+      "type": "RAW",
+      "description": "The hierarchy-weighted density has IDENTICAL mean across all three page types (listing=detail=cart=0.667). Eta-squared=0.0 at all alpha values (0.1, 0.3, 0.5). The depth estimation heuristic (based on inForm binary flag) is invariant to page-type-specific DOM structure.",
+      "evidence_ref": "M7_C4_task_type_structure, M11_alpha_sensitivity"
+    },
+    {
+      "id": "OBS-4",
+      "type": "RAW",
+      "description": "The random-weight null control shows nearly identical correlation structure to hierarchy weights (mean|rho(rand,canon)|=0.877 vs |rho(hier,canon)|=0.879). The hierarchy recipe does not produce more systematic structure than random weights, confirming it is not a meaningful structural recipe.",
+      "evidence_ref": "M10_NC1_random_weights"
+    },
+    {
+      "id": "OBS-5",
+      "type": "DERIVED",
+      "description": "Root cause: The depth estimation heuristic uses inForm (a binary attribute) as the primary depth proxy. Since the locatable_sample contains a fixed set of 20 elements per task with the same inForm distribution across all tasks, the depth distribution is task-invariant. The hierarchy recipe therefore cannot differentiate task types.",
+      "evidence_ref": "M13_recipe_identity"
+    },
+    {
+      "id": "OBS-6",
+      "type": "DERIVED",
+      "description": "The convex hull breaks occur only for ISOLATED-A-LINK (the most restrictive definition, 1-3 matching elements). For DEF-FULL-MAP (20 matching elements) and DEF-FORM-ONLY (17-19 matching elements), hierarchy density is always between canonical and weighted. The hull-breaking is definition-dependent, not task-type-dependent.",
+      "evidence_ref": "M5_C2_outside_convex_hull.outside_pairs"
+    }
+  ],
+  "validity_notes": [
+    {
+      "id": "VN-1",
+      "note": "The depth estimation is a HEURISTIC, not actual DOM tree depth. The locatable_sample is a flattened list without parent-child links. Depth is inferred from tag type and inForm flag, which provides at most 4 distinct depth levels. True DOM tree depth could range from 2 to 20+ levels."
+    },
+    {
+      "id": "VN-2",
+      "note": "Results are bounded to truncated-first-20 locatable_sample (7 tasks, 1 Magento site, 3 definitions). The fixed sample size (20 elements per task) means all tasks have identical element count, eliminating any depth-distribution variation that might arise from different DOM sizes."
+    },
+    {
+      "id": "VN-3",
+      "note": "The hierarchy recipe's perfect correlation with weighted (rho=1.0) at alpha=0.3 suggests the depth estimation is effectively a reparameterization of area-based weighting. At alpha=0.1 and alpha=0.5, the correlation is slightly lower (0.95, 0.94) but still very high, and eta-squared remains 0.0 at all alpha values."
+    },
+    {
+      "id": "VN-4",
+      "note": "The experiment does not test whether TRUE DOM hierarchy depth (from complete DOM tree, not flattened locatable_sample) would produce different results. The negative result applies to the heuristic depth estimation, not to the theoretical possibility that genuine DOM depth information could break the degeneracy."
+    },
+    {
+      "id": "VN-5",
+      "note": "The NC1 null control fails because random weights on the same 20-element locatable_sample produce similar correlation structure to hierarchy weights. This is expected when depth estimation is binary (inForm) — random [0,1] weights on a fixed set of 20 elements naturally produce similar rank-ordering patterns."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U-1",
+      "question": "Would TRUE DOM hierarchy depth (from complete DOM tree with parent-child links, not the flattened locatable_sample) produce a structurally different recipe that breaks the convex hull AND captures task-type structure?",
+      "blocked_by": "Requires access to complete DOM tree structure (not available in locatable_sample)"
+    },
+    {
+      "id": "U-2",
+      "question": "Given that linear combinations, density ratios, and DOM hierarchy weighting all fail to produce a viable MIXED decision rule, should the MIXED outcome program be abandoned entirely?",
+      "blocked_by": "Requires product lane decision on MIXED handling strategy"
+    },
+    {
+      "id": "U-3",
+      "question": "Could a fundamentally different metric (e.g., semantic role weighting, conditional inclusion based on element relationships, or a learned embedding) produce rankings that are both outside the convex hull AND capture task-type structure?",
+      "blocked_by": "Requires testing with genuinely structural element representations beyond the flattened locatable_sample"
+    }
+  ]
+}

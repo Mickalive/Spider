@@ -1,0 +1,49 @@
+{
+  "experiment_id": "EXP-RUNTIME-35389142338",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression maintain discrimination when the CDN-like proxy cache is configured with auth-aware semantics (Cache-Control: private, Vary: Authorization, cache key includes Authorization) — resolving the parent's CACHED falsification from a cache-key configuration artifact into a genuine decompression test?",
+  "hypothesis": "The parent (EXP-RUNTIME-35330741639) falsified CACHED mode with discrimination 0.0, but the root cause was naive cache key (URL, Accept-Encoding) excluding Authorization — the proxy served stale first-auth-state body to all states. This is a cache-key semantics issue, not a decompression failure. If the proxy cache key is extended to include Authorization, each auth state receives its own cached response, and iterative decompression should restore discrimination to 0.5 (matching PASSTHROUGH/RECOMPRESS). This hypothesis is supported by: (1) decompression errors were 0 across all 540 parent requests; (2) decompressed hash determinism was all_same=true for all states; (3) PASSTHROUGH and RECOMPRESS both achieved 0.5 discrimination through the same proxy infrastructure. The auth-aware cache configuration (Cache-Control: private / Vary: Authorization) is the standard CDN pattern for user-specific content and is the parent's recommended positive control for the real-CDN experiment.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any (auth_state, cache_config) combination under auth-aware caching, OR decompressed hash for any auth state through auth-aware CACHED mode differs from the direct-server hash (determinism failure), OR iterative decompression crashes/hangs on auth-aware cached responses, OR regression: PASSTHROUGH discrimination drops below 0.5 (proxy infrastructure change breaks baseline), OR auth-aware caching does not restore discrimination above 0.0 (indicating the parent's CACHED failure was not solely a cache-key artifact).",
+  "baselines": [
+    {
+      "id": "B-PARENT-DECOMPRESSED-0.5",
+      "description": "Parent established decompressed body-only discrimination 0.5 for PASSTHROUGH and RECOMPRESS on localhost. Regression reference: proxy infrastructure must not degrade below this for non-cached modes.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-PARENT-CACHED-0.0",
+      "description": "Parent CACHED mode with naive (URL, Accept-Encoding) cache key yielded discrimination 0.0. This is the failure being tested: does auth-aware caching restore discrimination?",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-AUTH-AWARE-CACHED-0.5",
+      "description": "If auth-aware caching resolves the parent's cache-key artifact, CACHED discrimination should match PASSTHROUGH at 0.5. This is the primary test expectation.",
+      "expected_value": 0.5
+    }
+  ],
+  "positive_control": "C_PASSTHROUGH_REGRESSION: PASSTHROUGH mode discrimination must equal 0.5 for all (auth_state, content_type x size) combinations — identical to parent. This confirms the proxy infrastructure is unchanged and any CACHED improvement is attributable to cache-key fix, not proxy drift.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Same mock origin server as parent: localhost Flask/stdlib, 4 auth states (no_auth, valid_token, expired_token, invalid_token), JSON/HTML/XML x 1KB/10KB/100KB, brotli quality 6 deterministic.",
+    "Same Python reverse proxy as parent on separate localhost port. Two cache configurations tested: (a) NAIVE — cache key (URL, Accept-Encoding) per parent; (b) AUTH-AWARE — cache key (URL, Accept-Encoding, Authorization), origin sets Cache-Control: private, Vary: Authorization.",
+    "Cache-Control: private and Vary: Authorization headers set by origin server for all responses. Proxy respects these headers when computing cache key.",
+    "Transfer-Encoding: chunked applied by proxy in all modes (constant background, same as parent).",
+    "Accept-Encoding header from client: 'br, gzip, identity' in all conditions.",
+    "Content types: JSON, HTML, XML. Sizes: 1KB, 10KB, 100KB. Auth states: no_auth, valid_token, expired_token, invalid_token.",
+    "N=5 reps per (auth_state, content_type x size, cache_config). 4 states x 9 conditions x 2 cache_configs x 5 reps = 360 total requests.",
+    "Seed=44 for request ordering (same as parent for comparability).",
+    "Iterative decompression: decompress repeatedly (brotli->gzip->identity) until failure or max_depth=5. Same as parent.",
+    "Decompressed hash for each auth-aware CACHED response must match the direct-server hash from the parent for the same (auth_state, content_type, size). This is the determinism-across-paths test for the auth-aware path."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for ALL (auth_state, cache_config) combinations across all content types x sizes, (2) decompressed hash for each (auth_state, content_type, size) through auth-aware CACHED matches the parent's direct-server hash — determinism across cache paths, (3) B-RANDOM = 0.0 for all conditions, (4) C_PASSTHROUGH_REGRESSION passes (naive CACHED discrimination = 0.0 and PASSTHROUGH discrimination = 0.5 for all cells — reproducing parent), (5) no decompression crashes/hangs across all cache configs, (6) auth-aware CACHED discrimination >= 0.3 for all cells (the primary test). FALSIFIED-IN-SETTING if auth-aware CACHED discrimination < 0.3 for any cell, OR any decompressed hash through auth-aware CACHED differs from direct-server hash, OR decompression crashes/hangs on auth-aware cached responses, OR PASSTHROUGH drops below 0.5 (infrastructure regression). MEASUREMENT_INVALID if proxy fails to start, origin server unreachable through proxy, or Cache-Control/Vary headers not correctly applied.",
+  "product_consequence_positive": "Auth-aware caching restores CACHED discrimination to 0.5, confirming the parent's CACHED falsification was a cache-key configuration artifact. Claim ceiling advances to include 'iterative decompression survives CDN-like caching when cache key includes Authorization'. Product team can deploy iterative decompression with standard CDN auth-aware cache configuration (Cache-Control: private / Vary: Authorization). This resolves the local-testable subset of CDN concerns and narrows the real-CDN experiment to edge-specific issues (quality variation, Accept-Encoding negotiation, geographic latency).",
+  "product_consequence_negative": "Auth-aware caching does NOT restore discrimination, indicating the parent's CACHED failure was not solely a cache-key artifact. Possible deeper issues: (a) proxy decompression layer fails on auth-varied cached responses; (b) brotli re-compression after cache hit produces different bytes than origin; (c) cache-Control/Vary headers are not correctly propagated. Each failure mode identifies a specific CDN configuration constraint or proxy implementation bug that must be resolved before deployment.",
+  "estimated_cost": "< 8000 tokens, < 3 minutes execution. 4 states x 9 conditions x 2 cache_configs x 5 reps = 360 requests. Marginal cost beyond parent: zero (same mock server, same proxy, only cache key logic changed).",
+  "expected_information_gain": "HIGH. This is the minimum-cost experiment that directly resolves the parent's identified fixable constraint. The parent identified real CDN infrastructure as the sole blocker for C-MEAS-VALID product readiness, but also identified that the CACHED falsification was a cache-key artifact. Before investing in real CDN infrastructure (Cloudflare/Fastly/Akamai accounts, Workers/Compute@Edge deployment, DNS configuration), this experiment determines whether the local fix (auth-aware cache key) actually works. If positive: the real-CDN experiment can focus on edge-specific concerns. If negative: there is a deeper decompression or proxy issue that must be resolved locally first, saving the cost of a failed real-CDN deployment. Either outcome is strictly more informative than either (a) repeating the parent or (b) jumping directly to real CDN without validating the local fix."
+}

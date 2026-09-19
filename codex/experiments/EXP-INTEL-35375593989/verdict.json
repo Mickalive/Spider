@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35375593989",
+  "lane": "intel",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule condition C2 fails: with correct task-major ordering, |Spearman(R, canonical)| = 0.23 (p=0.31) and |Spearman(R, weighted)| = 0.21 (p=0.36), both below the 0.30 threshold; eta-squared(R, page_type) = 0.144 < 0.20. C1 passes (CV=0.70 > 0.10). C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The producer's claimed C2 pass was an artifact of definition-major data ordering (all DEF-FULL-MAP first, then all DEF-FORM-ONLY, then all ISOLATED-A-LINK), creating artificial monotonic structure. The density ratio is definition-sensitive (10x gap between DEF-FORM-ONLY and others) but does not significantly correlate with task type or recipe sensitivity in this N=21 sample. NC1 null control also fails: real eta-squared=0.144 vs shuffled mean=0.117, task-type structure not statistically significant (permutation p=0.23). C-MEAS-VALID status updated to REJECTED for the density-ratio MIXED metric approach.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "REJECTED",
+      "reason": "Density ratio R = canonical/weighted varies 17x (CV=0.70) but variation is predominantly definition-driven (10x between DEF-FORM-ONLY and DEF-FULL-MAP), not task-type driven (1.78x). The ratio does not significantly correlate with canonical or weighted density after correcting Spearman computation (|rho|≈0.21–0.23, p>0.30), and task-type structure is not statistically significant (eta-squared=0.144 < 0.20 threshold; permutation p=0.23). Frozen decision_rule C2 fails. The density ratio cannot serve as a principled MIXED outcome decision rule for recipe sensitivity in this setting. Claim ceiling bounded to: definition-dependent ratio metric on 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 sample."
+    }
+  ],
+  "product_action": "NONE — density ratio MIXED metric is falsified; product lane must not implement ratio-based MIXED decision rules.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Given that linear combination recipes and density-ratio metrics both fail to break OECD/COINr degeneracy (mathematical identity and definition-artifact respectively), should the MIXED outcome program pivot to (a) a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element relationships, semantic role weighting) that could produce rankings outside the canonical-weighted range, or (b) abandon dominance-based MIXED handling entirely and restrict density metric use to recipe-insensitive task-definition pairs only?",
+  "reason": "The audit identifies CRITICAL computation errors in the producer's Spearman correlations (VF-1): definition-major data ordering created artificial monotonic structure inflating |rho| from 0.21–0.23 to 0.66–0.71. With correct task-major ordering, all three C2 sub-conditions fail (|Spearman|<0.30, eta-squared<0.20). The NC1 null control also fails (VF-2): task-type structure is not statistically significant. The density ratio's 17x range is real but driven by definition choice (DEF-FORM-ONLY captures nearly all elements, making weighted density ~0.98 while canonical stays low), not by task-type-dependent recipe sensitivity. The ratio conflates definition artifacts with task-type effects (VF-3, VF-6). The frozen decision_rule yields FALSIFIED-IN-SETTING (C1 AND NOT C2).",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35375593989/request.json",
+    "research/experiments/EXP-INTEL-35375593989/spec.json",
+    "research/experiments/EXP-INTEL-35375593989/prereg.md",
+    "research/experiments/EXP-INTEL-35375593989/freeze.json",
+    "research/experiments/EXP-INTEL-35375593989/result.json",
+    "research/experiments/EXP-INTEL-35375593989/audit.json",
+    "research/experiments/EXP-INTEL-35375593989/report.md",
+    "research/experiments/EXP-INTEL-35375593989/provenance.json",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050)",
+    "audit.json:recomputed_metrics.M4_Spearman_R_canonical (rho=-0.2325, p=0.3106)",
+    "audit.json:recomputed_metrics.M5_Spearman_R_weighted (rho=-0.2107, p=0.3592)",
+    "audit.json:recomputed_metrics.C2_RATIO_CORRELATION.pass=false",
+    "audit.json:validity_findings.VF-1 (CRITICAL: Spearman computation ordering artifact)",
+    "audit.json:validity_findings.VF-2 (HIGH: NC1 null control misimplemented)"
+  ]
+}
