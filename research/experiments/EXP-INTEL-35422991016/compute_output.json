@@ -1,0 +1,198 @@
+{
+  "tasks": [
+    {
+      "task_id": "listing_clothing-shoes-jewelry",
+      "page_type": "product_listing",
+      "tag_entropy": 2.6464,
+      "form_fraction": 0.85,
+      "total_area": 341795.17,
+      "unique_tags": 7,
+      "hierarchy_density": 15.59391,
+      "normalized_entropy": 0.9427
+    },
+    {
+      "task_id": "listing_beauty-personal-care",
+      "page_type": "product_listing",
+      "tag_entropy": 2.6464,
+      "form_fraction": 0.85,
+      "total_area": 341795.17,
+      "unique_tags": 7,
+      "hierarchy_density": 15.59391,
+      "normalized_entropy": 0.9427
+    },
+    {
+      "task_id": "listing_electronics",
+      "page_type": "product_listing",
+      "tag_entropy": 2.6464,
+      "form_fraction": 0.85,
+      "total_area": 341795.17,
+      "unique_tags": 7,
+      "hierarchy_density": 15.59391,
+      "normalized_entropy": 0.9427
+    },
+    {
+      "task_id": "detail_camera",
+      "page_type": "detail",
+      "tag_entropy": 2.4842,
+      "form_fraction": 0.95,
+      "total_area": 589190.03,
+      "unique_tags": 7,
+      "hierarchy_density": 15.075546,
+      "normalized_entropy": 0.8849
+    },
+    {
+      "task_id": "detail_vr_bag",
+      "page_type": "detail",
+      "tag_entropy": 2.4842,
+      "form_fraction": 0.95,
+      "total_area": 589190.03,
+      "unique_tags": 7,
+      "hierarchy_density": 15.075546,
+      "normalized_entropy": 0.8849
+    },
+    {
+      "task_id": "detail_pet_camera",
+      "page_type": "detail",
+      "tag_entropy": 2.4842,
+      "form_fraction": 0.95,
+      "total_area": 589190.03,
+      "unique_tags": 7,
+      "hierarchy_density": 15.075546,
+      "normalized_entropy": 0.8849
+    },
+    {
+      "task_id": "cart_1",
+      "page_type": "cart",
+      "tag_entropy": 2.6016,
+      "form_fraction": 0.95,
+      "total_area": 428790.31,
+      "unique_tags": 7,
+      "hierarchy_density": 15.075546,
+      "normalized_entropy": 0.9267
+    }
+  ],
+  "eta2_results": {
+    "tag_entropy": {
+      "eta2": 1.0,
+      "ss_between": 0.04059270857142852,
+      "ss_within": 0.0,
+      "group_means": {
+        "product_listing": 2.6464,
+        "detail": 2.4842,
+        "cart": 2.6016
+      },
+      "grand_mean": 2.5704857142857143,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      }
+    },
+    "form_fraction": {
+      "eta2": 0.9999999999999982,
+      "ss_between": 0.017142857142857106,
+      "ss_within": 3.122502256758253e-17,
+      "group_means": {
+        "product_listing": 0.85,
+        "detail": 0.9499999999999998,
+        "cart": 0.95
+      },
+      "grand_mean": 0.9071428571428571,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 1.3597399555105182e-16,
+        "cart": 0.0
+      }
+    },
+    "total_area": {
+      "eta2": 1.0,
+      "ss_between": 92960946352.6958,
+      "ss_within": 0.0,
+      "group_means": {
+        "product_listing": 341795.17,
+        "detail": 589190.03,
+        "cart": 428790.31
+      },
+      "grand_mean": 460249.41571428574,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      }
+    },
+    "hierarchy_density": {
+      "eta2": 1.000000000000005,
+      "ss_between": 0.46063069113600247,
+      "ss_within": -2.3869795029440866e-15,
+      "group_means": {
+        "product_listing": 15.59391,
+        "detail": 15.075545999999997,
+        "cart": 15.075546
+      },
+      "grand_mean": 15.297702,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 2.175583928816829e-15,
+        "cart": 0.0
+      }
+    },
+    "normalized_entropy": {
+      "eta2": 1.0,
+      "ss_between": 0.005153897142857135,
+      "ss_within": 0.0,
+      "group_means": {
+        "product_listing": 0.9427,
+        "detail": 0.8849,
+        "cart": 0.9267
+      },
+      "grand_mean": 0.9156428571428571,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      }
+    },
+    "combined_entropy_area": {
+      "eta2": 1.0,
+      "ss_between": 0.0012196280469911312,
+      "ss_within": 0.0,
+      "group_means": {
+        "product_listing": 0.5,
+        "detail": 0.5,
+        "cart": 0.5377213386315534
+      },
+      "grand_mean": 0.5053887626616504,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      }
+    }
+  },
+  "decision_rules": {
+    "C1": {
+      "pass": false,
+      "eta2": 1.000000000000005
+    },
+    "C2": {
+      "pass": true,
+      "max_eta2": 1.0,
+      "best_metric": "tag_entropy"
+    },
+    "C3": {
+      "pass": true,
+      "listing_mean": 2.6464,
+      "detail_mean": 2.4842,
+      "abs_diff": 0.1621999999999999,
+      "range": 0.1621999999999999,
+      "pct_of_range": 1.0
+    },
+    "C4": {
+      "pass": true,
+      "max_within_std": 0.0,
+      "std_range_ratio": 0.0
+    }
+  },
+  "verdict": "MEASUREMENT_INVALID",
+  "reason": "C1 FAIL: hierarchy reproduction fails, cannot anchor comparison."
+}
