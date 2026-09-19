@@ -1,0 +1,20 @@
+{
+  "base_sha": "62cc83b9673f02e1e2991d80300efddd4d546e0e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T16:47:45.041069+00:00",
+  "experiment_id": "EXP-PRODUCT-35456068953",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 All four frozen decision conditions pass at the bounded localhost stochastic-mock ceiling. C1 auth discrimination 0.8333 > 0.5 (positive control, replicating EXP-RUNTIME-33902315583). C2 behavioral TP 1.0 >= 0.85 on all three drift types in isolation and 8/8 co-occurring conditions. C3 behavioral variance 8/8 conditions with std > 0.05 (range 0.087\u20130.104) AND orthogonality confirmed at delta=0.15 (pooled r=-0.0258, 95% CI [-0.115, 0.064], CI upper 0.064 < 0.15, TOST p_upper 5.6e-05 < 0.05, shared variance < 0.4%). C4 noise FP 0.0 <= 0.15 on 240 noise-only samples. Audit PASS confirms all recomputed metrics match producer exactly. The three root causes of parent EXP-PRODUCT-35434772331 measurement invalidity \u2014 deterministic server, scoring weight collisions, server state carry-over \u2014 are resolved. However, the claim ceiling is strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL cache 0.5s + jitter 10-100ms + HS256/RS256 JWT on 127.0.0.1:18950, seed 42). No production generalization, PRODUCT_CORE promotion, or non-mock inference is warranted from this evidence alone.",
+  "inherited_next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, severity-weighted scoring, TOST delta=0.15) be measured on a non-mock production-like substrate with real HTTP endpoints exhibiting natural stochastic variation (real OAuth/OIDC middleware, CDN caching, network RTT, database-backed sessions), and does orthogonality survive at delta=0.15 on that substrate?",
+  "lane": "product",
+  "origin_github_run_id": "35456068953",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35445596342",
+    "path": "research/experiments/EXP-PRODUCT-35445596342/handoff.json",
+    "sha256": "0db18ccaca0210c28dd4a231c489b96d0881106b68cabadec6f9cf0c43ed7760"
+  },
+  "reason": "pulse",
+  "request_hash": "361f226c9fa50ac96c1a3d8803c2997126357053ed520eaa0147ae888237d84e",
+  "request_id": "c52772375ca2c40b88d3d0b7",
+  "schema_version": 1
+}
