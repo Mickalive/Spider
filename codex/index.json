@@ -68,7 +68,7 @@
       "decision": "REVISE",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "0cef5908fade8d636ed40f64f5cd5d64e2a909b8",
       "hashes": {
         "request.json": "ed96c0ccde15e7efd71ffacadf8eaeb00415ac5d0233d8afa816b80e9cc076d0",
@@ -287,7 +287,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "0d00d3abac08d203c6df7314c622969785d6f83e",
       "hashes": {
         "request.json": "b014f5c206a83409bfd5326bc8d2e8183609e0ef80ed0e6078d50e2dae209ff6",
@@ -562,7 +562,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "c1a660af636302945d2817697e5470f50efac713",
       "hashes": {
         "request.json": "1e2103fdc982e84c4ec36d2ee7cab2393a663c14de893a8ee5a1884d60d59d6a",
@@ -778,7 +778,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "1504ba88ec66a9060656c9a3b75c586bc55e9fe9",
       "hashes": {
         "request.json": "ef69b2ab824ab126390fbdac9ba24183c8873d792d6b668b36758642e41920c5",
@@ -915,7 +915,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "a4c9a3e22d344c9e0bd5d392d81dee1b572ff88d",
       "hashes": {
         "request.json": "f9d4ed3f84e89331f2ac83f9f85bbddc32365434e231210382f56bb1bb7f4ec3",
@@ -969,7 +969,7 @@
       "decision": "SURVIVES_CURRENT_TEST",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "fcec93130c8d7a7d9feed13b142420d179c21b82",
       "hashes": {
         "request.json": "d21d7d22acb66d4f11314a8b972e483bc7d090c512548dff9a342563aa04afca",
@@ -1131,7 +1131,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "a23db9347a329843bf69f7ffe1066831fcd55004",
       "hashes": {
         "request.json": "44296e8a0f05e80ee7026b229d7c44b62590c4f0681126d65789312020965899",
@@ -1266,7 +1266,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "e45dabebba74bac4239f93bdff7a6c1a27938156",
       "hashes": {
         "request.json": "fee77c21b74c33cc4acb6de1c923ced87cd1bef36915166a9e2b9ee1c539547e",
@@ -1484,7 +1484,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "ad803c5168c071bf1edc4125404a7a0096dcdee3",
       "hashes": {
         "request.json": "d60876669422bd30ecca02b69ad05d139b27de2ca1b563db930bea82fc2e5e9b",
@@ -1621,7 +1621,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "1eae61c57d53569bb75757e3e4114c823f2e7911",
       "hashes": {
         "request.json": "6e3104464b3926ed0a5ed2664fe87b75e0b1fd422893c99c03d4a38817152b5b",
@@ -1729,7 +1729,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "df5a7fd2f905abe14373bfd3ac607f448a688af8",
       "hashes": {
         "request.json": "667132861981aaf93cf3fb7e1893748c608b7906f7aa99147fb58a93fb9d822f",
@@ -1783,7 +1783,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "4ce4954fbfec56bcc79d0de613f8fcf99ea86b94",
       "hashes": {
         "request.json": "1a8e5d55872d09e2e588c6f0a2e49982f9af7ef76ac8a95db7fe3089a64dea61",
@@ -1892,7 +1892,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "6fc96c940178ab198faee313db88403c6e3b777d",
       "hashes": {
         "request.json": "a11f8f082d0739e363059d6a25f9b7cd1ad313c5cadf8a5d7f82770c6c900f7c",
@@ -1919,7 +1919,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "8ae879a69fd5021c8646c42f2d06a4915fe16898",
       "hashes": {
         "request.json": "ce097733d05a360826ca1d4a773cf69502a8c61f050ae672c4f1bc693b5c5481",
@@ -2027,7 +2027,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "b8b379afd65beb4b0782d7e4f0c950d04317bfb8",
       "hashes": {
         "request.json": "243ff78ee4e866c46c3c10abe4f6e099663ac50dd9936b91f51f9e3d4f181591",
@@ -2164,7 +2164,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "d2eff3812d50dfe4877e90bb019792f22423ce6c",
       "hashes": {
         "request.json": "8b647314f029b13ac999f110c8f939caf4bd8e44782092e0c7ae7a356bfe1767",
@@ -2272,7 +2272,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "894ea2ef394f8f3101c7841ad48264f3752492a8",
       "hashes": {
         "request.json": "7b33fa27754a4baa3294bd596c89bd852b790c4fa48717efb2d7fbd7c633778b",
@@ -2382,7 +2382,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "77d4d23236294e10b101bae7a5cd7f9a5a22332d",
       "hashes": {
         "request.json": "7d16ca2020a7527f4aac613483409ade590f9c7917453b7901af1bbc168a236b",
@@ -2626,7 +2626,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "d35778c4f190eecd0ca3b3277592c72c3aa54b04",
       "hashes": {
         "request.json": "597e09c2fcef5c326c4374b44a38b1f99af46a23559f05122c50f55b7163ee6b",
@@ -2790,7 +2790,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "c87d8226bdc357b34fddeacb1e913ebb5d068a52",
       "hashes": {
         "request.json": "ecfe82543b6c6ae4460768e2b9b8815346dec7d46fb9765838fdfc4fe0d781ed",
@@ -2872,7 +2872,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition (2) triggers: BC PMI at K=3 = 0.000000 bits \u2264 0.05 threshold, Bonferroni p = 1.0. The primary measurement is mathematically forced (I(X;Y) = 0 when Y is constant, |R| = 1 by design). The auditor's REVISE recommendation on control degeneracy is accepted: controls failing because |R| = 1 makes permutation null degenerate is a design-consequence, not an execution-failure. However, the primary measurement (BC PMI = 0.0) is unambiguous and independently sufficient for the FALSIFIED-IN-SETTING verdict \u2014 controls are confirmatory, not gating. The frozen rule's precedence (FALSIFIED checked before MEASUREMENT_INVALID) is correctly triggered. Claim ceiling bounded to: conditional PMI = 0.0 bits exactly on constant-response hash-based observation with stochastic branching FSM. No inference to richer representations, production SPAs, or H(Response) > 0 settings.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "4ae97dc19815f7d43d4219e4f958e7d4a389adda",
       "hashes": {
         "request.json": "038454b1676888d7706ed54a0c9e75012501fcc2877b973db2ce8cdfb7920d1f",
@@ -3089,7 +3089,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "33406e17213e9200c89ae6d6b32c94f3e2bc390a",
       "hashes": {
         "request.json": "f7430fbbcb7462aff29a9111389d9468e0827093c4294ac0d28ac8e2d796b3c8",
@@ -3170,7 +3170,7 @@
       "decision": "PARTIAL_FALSIFICATION \u2014 Frozen decision rule SURVIVES_CURRENT_TEST requires ALL six conditions; condition (2) fails (0/5 variants \u22652 unique titles). Title falsifier clause (prereg falsifier condition 2: ALL variants <2 titles) triggers. However, condition (1) passes decisively: 5/5 variants achieve leakage <40% (valid-only 0.213\u20130.285) with achievable NL 357\u2013394 at 500 raw. SPA approach justified for URL-level non-leakage PMI but NOT for title-aware PMI on TodoMVC. All controls pass. Data quality exceeds minimums. Audit PASS confirms measurement validity but bounds claim ceiling: TodoMVC hash-SPAs suitable testbeds for URL-level non-leakage PMI; title-aware PMI requires title-varying production SPAs (unidentified) or non-title state representation.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "9f8fb1751e3b9309b7d96cfe332c33306698b2d1",
       "hashes": {
         "request.json": "2c16aab185865b1d3840cb3ae9db74400519a513d1148d39ce703579564dd987",
@@ -3333,7 +3333,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "50764ab2bc9e211e802b45d2da3e06516eccd1f6",
       "hashes": {
         "request.json": "9e03d53ea59fab1d9faf49c5a92aac91505c45634d0a39def1658309e042c0a4",
@@ -3550,7 +3550,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "595ea236040bae97c1405ee79f231b66660c0021",
       "hashes": {
         "request.json": "35e86da0c5dfaeff7a04161e2a0ca3dcf5e42427e7a6ea1e2ec8f68542e61449",
@@ -3686,7 +3686,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "f256700b8842d81e650b50c8e19e36886c271f4f",
       "hashes": {
         "request.json": "99ad74ae1f53345a2761ece1f7d3f5f71e04f27086333d1f14859fa7fe4c9e7a",
@@ -3904,7 +3904,7 @@
       "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule condition (1) triggers FALSIFIED-IN-SETTING: K=3 PMI=0.04848 bits <= 0.05 threshold, permutation p=0.555 > 0.0167. However, the audit (V1_sparsity_dilution, critical severity) demonstrates this is a power/sparsity failure, not absence of beyond-Markov structure: 45% of K=3 strata (254/565) are stochastic with multiple successors (result.json:metrics.determinism_check_k3), confirming beyond-Markov dependence exists in the environment by construction. The estimator uses only 8/565 strata (1.4%) with >=5 records for PMI estimation; 557 strata are skipped as too small from N=1000 transitions. The weighted PMI is diluted by 55% deterministic strata where PMI=0 by construction. Null control fails (mean 0.054 > 3*0.017), indicating permutation bias for hash-routed SPA. Additionally, measurement validity gap (V3_simulation_vs_browser_fidelity, high severity): prereg requires Playwright browser collection but producer used in-memory simulation. The FALSIFIED outcome is a valid scientific negative for this specific SPA design and sample size, not a global falsification of beyond-Markov dynamics. Audit REVISE status accepted: producer cannot claim FALSIFIED as evidence against C-WEB-DYNAMICS because the environment demonstrably has the structure the estimator failed to detect.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "70ded2d9ca8dac2749a132b6437aed48439fc7d4",
       "hashes": {
         "request.json": "0e16309b5476a585f5e8216d8e191469d1382e5816ff9abbb7777d082f7396ae",
@@ -4012,7 +4012,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "48c81de0ad50a4df81d50673df691948d6bdab80",
       "hashes": {
         "request.json": "3f4385fc3a37ad62e2f38a490eddbabe50d1f165d20db3c043e8810b2f4ffe75",
@@ -4039,7 +4039,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "a650cbffad0eb0c6b6c0b4b510d52730526e422d",
       "hashes": {
         "request.json": "b24e4f359a06bdff4d8730c0e83879ce312d23b816ec9b577e87b73993ab377f",
@@ -4201,7 +4201,7 @@
       "decision": "FALSIFIED-IN-SETTING \u2014 All three materially orthogonal null frameworks fail to center PMI null at zero for the 12-state hash-routed SPA simulation. Parametric bootstrap null mean 0.357 bits (3.57x above |0.1| threshold, 14.5% improvement over within-stratum 0.417). Miller-Madow null mean 0.407 bits (4.07x above, +13.6% signal boost but null unchanged). Conditional entropy null mean -0.814 bits degenerate (positive control fails: H_full=0.0 on deterministic SPA by construction). Within-stratum permutation 0.417 replicates parent exactly. The null control problem is intrinsic to PMI estimator weighting across deterministic/stochastic strata (31.5% deterministic with PMI=0 diluting weighted average), not permutation scheme or estimator choice. 0/3 frameworks pass frozen decision rule. Measurement valid (audit PASS). The 0.933-bit K2 PMI signal remains reproducible (p=0.001, d~79) but cannot support confirmatory beyond-Markov claim without valid null control.",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "cdde08c5e760342c6cac03a30166cf87e864939e",
       "hashes": {
         "request.json": "d268bcc904385e673d766a5f33b94c3afe0b8c98bc6b03e422f4cfc761163d59",
@@ -4228,7 +4228,7 @@
       "decision": "MEASUREMENT_INVALID",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "175217214f2ac0b426247685a11b4db315177895",
       "hashes": {
         "request.json": "3eb2fd81123fbf513fa62cd9416eecfb652e69ff246584bade39862dab1c3b22",
@@ -4499,7 +4499,7 @@
       "decision": "FALSIFIED-IN-SETTING",
       "promote_to_product": false,
       "source_ref": "origin/lab2/physics",
-      "source_ref_head": "48c1d0aa9a07dc76cb5c754709d6efbd411c9aa3",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "source_commit": "15e784bf34c70dc256d61e7e8a52042bb871e6b0",
       "hashes": {
         "request.json": "2533522e83a3bcf1fb3caa77e944b7811021205a8f7975e213d9dfa349a9b8fb",
@@ -4674,6 +4674,34 @@
         "audit.json": "b5285cb21dc0226d4f568b64eee79b2702a99ba9f35913365d771df79dbe3e0a",
         "verdict.json": "2fc2872064e2aa9e842d03571a3843a075177257da9f439642b09ea989d2d394",
         "handoff.json": "e2e33ed0a2e50da5eb3a587fe8a487b18c9bcfc06c6cd64963616961bd712670"
+      }
+    },
+    "EXP-PHYSICS-35470449605": {
+      "lane": "physics",
+      "request_id": "5983ff1fcc08f706bee3fdb9",
+      "created_at": "2026-09-19T21:27:17.376394+00:00",
+      "claim_ids": [
+        "C-WEB-DYNAMICS",
+        "C-MEAS-VALID"
+      ],
+      "question": "Does redesigning the 12-state hash-routed SPA to 0% deterministic strata (all CANDIDATES lists contain only distinct next states, ensuring every (current, action) pair is stochastic) eliminate the per-stratum plug-in PMI null bias that persists at +0.742 bits for small strata under the shuffled-action null \u2014 and does this redesign enable a valid beyond-Markov K3-K2 test, or is the bias intrinsic to plug-in estimation regardless of determinism ratio?",
+      "audit_status": "PASS",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
+      "promote_to_product": false,
+      "source_ref": "origin/lab2/physics",
+      "source_ref_head": "282dafffff0eb8483a174cc5576c5dfa6d266002",
+      "source_commit": "282dafffff0eb8483a174cc5576c5dfa6d266002",
+      "hashes": {
+        "request.json": "5b49c07079b0b0cb27a5217edec09a666c26f7b16c35954841d7e08a68ab26a2",
+        "spec.json": "06469505c38e08b7781ee087ea2781812825f416234e56601d3dbee3a5dbd4cb",
+        "prereg.md": "3fb4daa350339cd52a76ef802682ce3de63f6207842f9a702c3376106cc0ec53",
+        "freeze.json": "5c2fe7781268999b3b7d226be90c80d8b293067382dd54c2043bf592fe4dc028",
+        "result.json": "07b7bbb15deef2c94f61c8450d75354f2218b768eea22cb8f4d1c42bb1993636",
+        "report.md": "7d9b597de40f2f16195c5a00248c16f7947b7d0da11547761d9de8af64d25bb0",
+        "provenance.json": "15eb3c5f6be0cf479e56672c14b8a2ca2c5841a13ef7d1790c39f645bc5933b2",
+        "audit.json": "5b49350478b6c6954cd9345c84fc7655659fc5e327c775417bdc795a3967b24d",
+        "verdict.json": "3f24e52eda3b36225a3a84f10588da978400ed095167bff9f7d0237500cc6495",
+        "handoff.json": "57d4a2d0e198ef45c5f2cc028dd096f95d63b551bd56a193352233c24c573c6e"
       }
     },
     "EXP-INTEL-35470447439": {

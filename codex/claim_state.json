@@ -461,6 +461,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No change to claim status from parent HYPOTHESIS. The frozen falsifier C1 triggers FALSIFIED-IN-SETTING: all four estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) fail the null control (|null_mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA: 0.407, 0.704, 0.686, 0.262 bits respectively, each 2.6-7.0x threshold and 32-56 sigma from threshold). The bias-corrected estimator pathway (equal-weight, median, KNN) is rejected as a remedy in this setting. The preregistered mechanistic hypothesis H1 (bias from large-stratum dominance) is falsified: equal-weight and median null bias is WORSE than weighted (0.704/0.686 vs 0.407 bits) because per-stratum plug-in bias is monotonically increasing in small strata (+0.742 bits at size 5-9 vs +0.379 at size 20-49), and equal-weighting/median promote the most biased strata. KNN shows negative bias (-0.262 bits) from Laplace smoothing + extra dimension. No estimator converges at N=50000 (all drift >0.2 bits). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. The K3-K2 beyond-Markov question is unanswered (no valid estimator exists), not answered in the negative."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35470449605",
+        "lane": "physics",
+        "created_at": "2026-09-19T21:27:17.376394+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
+        "source_commit": "282dafffff0eb8483a174cc5576c5dfa6d266002",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status from parent HYPOTHESIS. Frozen decision_rule C1 triggers FALSIFIED-IN-SETTING: all 4 estimators (weighted PMI null_mean=0.407, equal-weight 0.704, median 0.686, KNN -0.262) fail |null_mean|<0.1 by 2.6-7.0x margins. The '0% deterministic strata' CANDIDATES redesign is verified at design level (48/48 pairs have 4 distinct candidates) but null bias is reproducibly identical to parent (within 0.001 bits), confirming the bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace alpha=1.0, NOT caused by deterministic/stochastic mixing. Stratum-size decomposition identical to parent: +0.736 at 5-9, +0.562 at 10-19, +0.369 at 20-49. The SPA-redesign pathway for null centering is closed. The parent's H1 hypothesis (bias is environment-caused) is falsified. Beyond-Markov K3-K2 testing is not gated (no estimator passes C1). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. Truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) remain untested and are the required next attack vector."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2097,6 +2107,16 @@
         "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
       },
       {
+        "experiment_id": "EXP-PHYSICS-35470449605",
+        "lane": "physics",
+        "created_at": "2026-09-19T21:27:17.376394+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
+        "source_commit": "282dafffff0eb8483a174cc5576c5dfa6d266002",
+        "claim_id": "C-MEAS-VALID",
+        "status": "HYPOTHESIS",
+        "reason": "Measurement validity remains limited by the plug-in PMI estimator bias: no estimator achieves valid null centering on this SPA class. The positive control passes (all 4 estimators K3 >= 1.0 bit, p=0.001), confirming the pipeline is functional. However, the measurement cannot support or falsify beyond-Markov claims without a valid estimator. Claim ceiling bounded to: in-memory simulation, 12-state SHA256 hash-routed SPA, URL-only state, 4 actions, N=5000, 500 permutations. Production SPA measurement validity requires a valid estimator first."
+      },
+      {
         "experiment_id": "EXP-INTEL-35470447439",
         "lane": "intel",
         "created_at": "2026-09-19T21:27:18.243275+00:00",
@@ -2110,14 +2130,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35445596894",
+      "experiment_id": "EXP-PHYSICS-35470449605",
       "lane": "physics",
-      "created_at": "2026-09-19T13:23:17.127745+00:00",
-      "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "15e784bf34c70dc256d61e7e8a52042bb871e6b0",
+      "created_at": "2026-09-19T21:27:17.376394+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
+      "source_commit": "282dafffff0eb8483a174cc5576c5dfa6d266002",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No change to claim status from parent HYPOTHESIS. The frozen falsifier C1 triggers FALSIFIED-IN-SETTING: all four estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) fail the null control (|null_mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA: 0.407, 0.704, 0.686, 0.262 bits respectively, each 2.6-7.0x threshold and 32-56 sigma from threshold). The bias-corrected estimator pathway (equal-weight, median, KNN) is rejected as a remedy in this setting. The preregistered mechanistic hypothesis H1 (bias from large-stratum dominance) is falsified: equal-weight and median null bias is WORSE than weighted (0.704/0.686 vs 0.407 bits) because per-stratum plug-in bias is monotonically increasing in small strata (+0.742 bits at size 5-9 vs +0.379 at size 20-49), and equal-weighting/median promote the most biased strata. KNN shows negative bias (-0.262 bits) from Laplace smoothing + extra dimension. No estimator converges at N=50000 (all drift >0.2 bits). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. The K3-K2 beyond-Markov question is unanswered (no valid estimator exists), not answered in the negative."
+      "reason": "No change to claim status from parent HYPOTHESIS. Frozen decision_rule C1 triggers FALSIFIED-IN-SETTING: all 4 estimators (weighted PMI null_mean=0.407, equal-weight 0.704, median 0.686, KNN -0.262) fail |null_mean|<0.1 by 2.6-7.0x margins. The '0% deterministic strata' CANDIDATES redesign is verified at design level (48/48 pairs have 4 distinct candidates) but null bias is reproducibly identical to parent (within 0.001 bits), confirming the bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace alpha=1.0, NOT caused by deterministic/stochastic mixing. Stratum-size decomposition identical to parent: +0.736 at 5-9, +0.562 at 10-19, +0.369 at 20-49. The SPA-redesign pathway for null centering is closed. The parent's H1 hypothesis (bias is environment-caused) is falsified. Beyond-Markov K3-K2 testing is not gated (no estimator passes C1). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. Truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) remain untested and are the required next attack vector."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
