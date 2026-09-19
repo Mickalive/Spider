@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35470449605",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can truly orthogonal estimators — specifically KSG (Kraskov-Stögbauer-Grassberger) conditional mutual information, Bayesian model comparison (e.g., variational Bayes for categorical transitions), or likelihood-ratio tests — achieve |shuffled-action null mean| < 0.1 bits on the 12-state hash-routed SPA at N=5000, closing the estimation-bias gap that plug-in PMI (weighted/equal/median) and KNN CMI cannot?",
+  "why_next": "The critical fork question is answered: PMI null bias is intrinsic to plug-in estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic mixing. SPA redesign pathway closed. The 4 tested estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5) all share plug-in/KNN construction. Truly orthogonal frameworks (KSG uses kNN distance-based estimation without stratum partitioning; Bayesian uses posteriors; likelihood-ratio compares nested models) remain untested and are the only remaining unexplored estimation pathway on this SPA class.",
+  "carry_forward": {
+    "established": [
+      "SPA redesign to 0% deterministic strata does NOT eliminate PMI null bias. Bias reproducible within 5.7e-05 bits of parent (weighted null_mean 0.407057 vs 0.407). Intrinsic to plug-in estimation. (EXP-PHYSICS-35470449605 result.json:null_control_comparison_to_parent, audit V2)",
+      "Null bias is monotonically decreasing in stratum size: +0.736 at size 5-9, +0.562 at 10-19, +0.369 at 20-49. Pattern identical to parent. (EXP-PHYSICS-35470449605 result.json:stratum_size_bias_decomposition, audit V6)",
+      "Equal-weight/median worsen bias (0.704/0.686 vs 0.407) by up-weighting small strata. KNN negative bias (-0.262) from Laplace + extra dimension. (EXP-PHYSICS-35470449605 result.json:screening_n5000)",
+      "Positive control validates all 4 pipelines: K3 1.81-1.87 (stratum), 1.19 (KNN), p=0.001. C1 failures not execution defects. (EXP-PHYSICS-35470449605 controls.C3-POSITIVE-CONTROL)",
+      "K2 PMI=0.933 and K3 PMI=1.221 are reproducible point estimates (replicate parent exactly). (EXP-PHYSICS-35470449605 result.json:metrics.k2_pmi_weighted, k3_pmi_weighted)",
+      "SPA has beyond-Markov structure by construction (choose_next depends on 2-step history). A valid estimator SHOULD detect K3>K2. (EXP-PHYSICS-35470449605 run_experiment.py:CANDIDATES/choose_next)",
+      "Empirical determinism persists despite 0% design-level: 31.5% K2 and 10.8% K3 strata deterministic from hash collisions. (EXP-PHYSICS-35470449605 result.json:determinism_k2_n5000, determinism_k3_n5000)",
+      "Per-stratum plug-in PMI null bias is monotonically increasing in small strata: +0.736 at 5-9 vs +0.369 at 20-49. Bias is Laplace small-sample artifact, not environment mixing. (EXP-PHYSICS-35470449605 stratum_size_bias_decomposition)"
+    ],
+    "rejected": [
+      "Hypothesis that deterministic/stochastic strata mixing causes PMI null bias: falsified by 0% design-level determinism with identical bias. (EXP-PHYSICS-35470449605)",
+      "Hypothesis that equal-weight/median PMI corrects bias: both worsen it. (EXP-PHYSICS-35470449605)",
+      "Hypothesis that SPA redesign eliminates plug-in PMI null bias: closed. (EXP-PHYSICS-35470449605)",
+      "Weighted-averaged Laplace-smoothed conditional PMI as identifiable information-theoretic quantity: asymptotically non-convergent. (EXP-PHYSICS-35403136807)",
+      "Parametric bootstrap as null centering for hash-routed SPAs: null mean 0.357. (EXP-PHYSICS-35402003775)",
+      "Miller-Madow bias correction as null centering: null mean 0.407. (EXP-PHYSICS-35402003775)",
+      "Conditional entropy framework for deterministic SPAs: degenerate H_full=0.0. (EXP-PHYSICS-35402003775)",
+      "Within-stratum conditional permutation as null centering: null_mean=0.417. (EXP-PHYSICS-35389142077)",
+      "KNN CMI k=5 alpha=1.0 as null-centering remedy: negative bias -0.262. (EXP-PHYSICS-35445596894, EXP-PHYSICS-35470449605)"
+    ],
+    "unknown": [
+      "Whether truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) can center null at 0 on this SPA class.",
+      "True sign and magnitude of beyond-Markov I(S_next; history_action | S_current, history_state) in any SPA class.",
+      "Whether KNN CMI negative bias disappears with different k, alpha, distance metric, or encoding.",
+      "Asymptotic behavior of all estimators beyond N=50000: none plateaued in parent.",
+      "Whether production SPAs with stochastic transitions and richer state representations exhibit measurable beyond-Markov structure.",
+      "Whether transition-matrix entropy rate, channel capacity, or causal discovery frameworks can detect dynamical structure where PMI estimators fail."
+    ],
+    "do_not_assume": [
+      "C-WEB-DYNAMICS is globally false. All evidence is synthetic in-memory SPA simulation. The 0.933-bit K2 PMI signal is real and reproducible.",
+      "The null bias of ~0.41 bits is evidence against beyond-Markov signal. The bias prevents interpretation but does not falsify underlying dynamics.",
+      "All estimation frameworks are exhausted. KSG, Bayesian, and likelihood-ratio methods are untested.",
+      "The bias is irreducible by any means. Truly orthogonal estimators have not been attempted.",
+      "K3-K2 difference of 0.287 bits reflects genuine beyond-Markov signal. Point estimates are uninterpretable without valid null centering.",
+      "Production SPAs generalize from this simulation. The 12-state SPA has 12 states, hash routing, no anti-bot/auth/visual complexity.",
+      "This experiment closes the broader C-WEB-DYNAMICS claim. It closes only the SPA-redesign pathway for plug-in PMI null centering."
+    ]
+  },
+  "dependencies": [
+    "Implementation of KSG CMI estimator (sklearn.feature_selection.mutual_info_classif or custom) with null control on the 12-state SPA",
+    "Bayesian model comparison framework (e.g., pymc or custom variational inference) for categorical transition models",
+    "Re-run 4-estimator + 3-orthogonal screening on the same 12-state SPA at N=5000 with identical null control",
+    "If orthogonal estimators pass C1: proceed to beyond-Markov K3-K2 testing",
+    "If orthogonal estimators also fail: pivot to fundamentally different detection paradigms or production Web data",
+    "Production SPA with Playwright browser automation (requires valid estimator first)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35470449605/result.json:metrics.screening_n5000 (all c1_pass false), metrics.null_control_comparison_to_parent, metrics.stratum_size_bias_decomposition, metrics.design_level_determinism, metrics.determinism_k2_k3_n5000",
+    "research/experiments/EXP-PHYSICS-35470449605/audit.json:status PASS, V1-V7 findings, claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-PHYSICS-35470449605/spec.json:falsifier C1, decision_rule, baselines, null_control",
+    "research/experiments/EXP-PHYSICS-35470449605/report.md:sections 3-5, controls ledger",
+    "research/experiments/EXP-PHYSICS-35470449605/provenance.json:artifacts, parent_experiment, data",
+    "research/experiments/EXP-PHYSICS-35445596894/handoff.json:carry_forward (parent established/rejected/unknown)",
+    "research/experiments/EXP-PHYSICS-35445596894/result.json:parent screening_n5000, stratum_size_bias_decomposition for reproducibility"
+  ],
+  "recommended_action": "Design an orthogonal-estimator experiment: implement KSG CMI (Kraskov-Stobauer-Grassberger), Bayesian categorical transition model comparison, and likelihood-ratio test on the same 12-state hash-routed SPA. Run all 7 estimators (4 parent + 3 orthogonal) at N=5000 with identical shuffled-action null (N_SHUFFLE=500, |mean| < 0.1 threshold). If any orthogonal estimator passes C1, proceed to beyond-Markov K3-K2 testing. If all 7 fail, the Physics lane must either (a) pivot to fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery) or (b) abandon synthetic SPA simulation and target production Web data with alternative state representations and estimators."
+}

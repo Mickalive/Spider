@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35470449310",
+  "lane": "graph",
+  "github_run_id": "35470449310",
+  "base_sha": "cce441dd25bba9649a80c2073d41eb2fc57e0a7f",
+  "code_files": {
+    "testbed_server.py": "b3be634e6c2e086264d293f430839575f59738daff5ede743b54a21a20a45a18",
+    "flask_only_server.py": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "run_experiment.py": "d3b85b071436fe68f83870658c72ef862b782c8ba2149318da2cf3a0757e8351"
+  },
+  "raw_evidence": {
+    "path": "raw_evidence/experiment_data.json",
+    "sha256": "5d6bae1e2024b9e8cd172dd553b78d90accc6d1ad5934a26ba33d13776788f6f"
+  },
+  "parent_experiment": "EXP-GRAPH-35456070379",
+  "parent_handoff_path": "research/experiments/EXP-GRAPH-35456070379/handoff.json",
+  "parent_handoff_sha": "383d478a7952243be9810eff02b89f7eceacdf4686bdd84958428dc932fdf1a8",
+  "corrections_from_parent": [
+    "V1 FIX: request_id uses uuid.uuid4() for ALL status codes (eliminates entropy confound)",
+    "V2 FIX: B-FLASK-ONLY baseline has genuine token-state variation (valid/expired via /token endpoint)"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "scipy_version": "1.18.1",
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2"
+  }
+}

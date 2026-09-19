@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35470447439",
+  "lane": "intel",
+  "github_run_id": "35470447439",
+  "github_run_attempt": 1,
+  "pre_execute_sha": "25995d67eba6bcfbe5d382f5f8f82109ead63698",
+  "recorded_at": "2026-09-19T21:35:00.000000+00:00",
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-INTEL-35470447439/request.json",
+    "spec.json": "research/experiments/EXP-INTEL-35470447439/spec.json",
+    "prereg.md": "research/experiments/EXP-INTEL-35470447439/prereg.md",
+    "freeze.json": "research/experiments/EXP-INTEL-35470447439/freeze.json"
+  },
+  "frozen_hashes": {
+    "request.json": "42a221ad654b0c78d2b8a39c73aed9d1d8da7200e2d2cca45bfdbc10888008c9",
+    "spec.json": "1211e32e47cb0101dd2f4b4ecf3951c4b601879c05bf48f9530a0d4c9f987984",
+    "prereg.md": "ab6bfc0cdc7f360f82296bcdd72ca41498fe985907f88d09868b429d8276fc8d"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35462974425",
+    "path": "research/experiments/EXP-INTEL-35462974425/handoff.json",
+    "sha256": "e2e33ed0a2e50da5eb3a587fe8a487b18c9bcfc06c6cd64963616961bd712670"
+  },
+  "analysis_code": {
+    "analyze.py": {
+      "path": "research/experiments/EXP-INTEL-35462974425/analyze.py",
+      "sha256": "79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+      "role": "analysis script (frozen, reused unchanged)"
+    }
+  },
+  "raw_evidence": {
+    "exp347_raw_results.json": {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw truncated-first-20 data (baseline context only)"
+    }
+  },
+  "execution_log": [
+    {
+      "step": 1,
+      "action": "Read frozen experiment files (request.json, spec.json, prereg.md, freeze.json)",
+      "result": "success",
+      "timestamp": "2026-09-19T21:30:00.000000+00:00"
+    },
+    {
+      "step": 2,
+      "action": "Read parent handoff (EXP-INTEL-35462974425/handoff.json)",
+      "result": "success",
+      "timestamp": "2026-09-19T21:30:05.000000+00:00"
+    },
+    {
+      "step": 3,
+      "action": "Read codex evidence (index.json, claim_state.json)",
+      "result": "success",
+      "timestamp": "2026-09-19T21:30:10.000000+00:00"
+    },
+    {
+      "step": 4,
+      "action": "Check Docker substrate availability",
+      "result": "BLOCKED: Docker image am1n3e/webarena-verified-shopping:latest not available locally; docker pull timed out after 120s",
+      "timestamp": "2026-09-19T21:31:00.000000+00:00"
+    },
+    {
+      "step": 5,
+      "action": "Run frozen analyze.py on existing truncated-first-20 data for baseline context",
+      "result": "success: C3 gate 0/7 (FAIL), PC1 pass (all eta2=1.0), NC1 pass (eta2=0.0), max pipeline eta2=0.999645",
+      "timestamp": "2026-09-19T21:32:00.000000+00:00"
+    },
+    {
+      "step": 6,
+      "action": "Write result.json, report.md, provenance.json",
+      "result": "success: BLOCKED status, NOT_APPLICABLE outcome, infrastructure failure documented",
+      "timestamp": "2026-09-19T21:35:00.000000+00:00"
+    }
+  ],
+  "infrastructure_failure": {
+    "category": "substrate_unavailable",
+    "description": "Docker image am1n3e/webarena-verified-shopping:latest is not available in the execution environment. Docker pull timed out after 120 seconds. The Magento site at localhost:8080 is inaccessible without the container.",
+    "retryable": true,
+    "blocking_action": "Make Docker image available (pull from registry, build from Dockerfile, restore from cache, or use alternative Magento container with identical DOM structure)",
+    "evidence": "docker images output: empty; docker pull timeout at 120s"
+  },
+  "baseline_context": {
+    "source": "research/experiments/EXP-INTEL-35462974425/analysis_output.json",
+    "description": "Analysis of truncated-first-20 data for reference. These are NOT the primary measurements of this experiment.",
+    "c3_gate": {
+      "tasks_with_locatable_sample_gt20": 0,
+      "total_tasks": 7,
+      "pass": false
+    },
+    "pc1_positive_control": {
+      "pass": true,
+      "tag_entropy_eta2": 1.0,
+      "form_fraction_eta2": 1.0,
+      "total_area_eta2": 1.0
+    },
+    "nc1_null_control": {
+      "pass": true,
+      "eta2": 0.0
+    },
+    "non_recipe_pipeline_max_eta2": 0.999645
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "docker_available": true,
+    "docker_image_present": false,
+    "date": "2026-09-19"
+  }
+}

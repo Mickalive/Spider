@@ -1,0 +1,43 @@
+{
+  "experiment_id": "EXP-PRODUCT-35456068953",
+  "lane": "product",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does token_refresh behavioral detection (TP) survive co-occurring structural noise at the same severity levels as permission_boundary and session_invalidation, when token_refresh drift is stochastic (randomized refresh success/failure) to produce behavioral variance?",
+  "hypothesis": "Token_refresh behavioral detection (TP) will remain >= 0.85 under co-occurring structural noise because the behavioral signal for token_refresh (refresh token status, new token issued) is independent of structural noise patterns (optional_field_addition, description_change, response_time_jitter, field_type_normalization). However, prior experiments show token_refresh drift produces deterministic behavioral_score (std=0.0) because refresh always succeeds. To test TP under noise, we must first introduce stochastic token_refresh drift (randomize refresh success/failure) to achieve behavioral variance >0.05. Under stochastic token_refresh, behavioral TP will survive noise because the signal (refresh success/failure) is orthogonal to structural noise.",
+  "falsifier": "FALSIFIED if: (F1) token_refresh TP < 0.85 under co-occurring noise (drift detection fails), OR (F2) token_refresh behavioral_std < 0.05 under stochastic drift (variance insufficient for orthogonality test), OR (F3) structural discrimination falls below 0.5 (positive control fails), OR (F4) noise FP > 0.15 (false positives). MIXED if TP >=0.85 but behavioral_std <0.05 (detection works but variance insufficient).",
+  "baselines": {
+    "B-TOKEN-REFRESH-ISOLATED": {
+      "description": "Token_refresh TP in isolation from prior experiments: TP=1.0, std=0.0 (deterministic). Expected: TP >=0.85 under stochastic drift.",
+      "expected_behavior": "TP >=0.85 on token_refresh drift in isolation"
+    },
+    "B-NOISE-TP-PARENT": {
+      "description": "Permission_boundary and session_invalidation TP under co-occurring noise from EXP-PRODUCT-35445596342: TP=1.0 on all 8 co-occurring conditions.",
+      "expected_behavior": "TP >=0.85 for token_refresh under same noise conditions"
+    }
+  },
+  "positive_control": {
+    "id": "PC-STRUCTURAL-DISCRIMINATION",
+    "description": "HTTP fingerprint substrate discrimination on stochastic Flask+SQLite server (reused from EXP-PRODUCT-35445596342).",
+    "expected_behavior": "Full-vector discrimination > 0.5 on auth-state changes"
+  },
+  "null_control": {
+    "id": "NC-NOISE-FP",
+    "description": "Structural noise tolerance: optional field additions, timing jitter, response variation that do NOT represent auth drift. FP rate <= 0.15 on noise-only samples.",
+    "expected_behavior": "FP <= 0.15 on structural noise samples"
+  },
+  "measurement_validity": [
+    "Stochastic Flask+SQLite mock server matching EXP-PRODUCT-35445596342 (Flask 3.1.3 + SQLite WAL-mode DB + in-memory cache TTL=0.5s + jitter 10-100ms + mixed JWT algorithms)",
+    "Token_refresh drift randomization: refresh success/failure randomized with probability p_refresh_success (e.g., 0.7) to produce behavioral variance",
+    "Server state fully reset between conditions (set_drift(None) clears all state)",
+    "Behavioral_score for token_refresh must be continuous (not fixed 0.65) to reflect refresh success/failure variance",
+    "Orthogonality tested via TOST equivalence test with delta=0.15 (CI upper bound < 0.15)",
+    "N >= 480 paired samples (60 per condition x 8 co-occurring conditions) for token_refresh TP and orthogonality",
+    "All measurements use localhost mock server, not production APIs",
+    "This experiment does NOT make real LLM calls"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) structural discrimination > 0.5 (positive control), (C2) token_refresh TP >= 0.85 under co-occurring noise, (C3) token_refresh behavioral_std > 0.05 under stochastic drift, (C4) FP <= 0.15 on noise-only samples. FALSIFIED if any condition fails. MIXED if C1-C2-C4 pass but C3 fails (variance insufficient).",
+  "product_consequence_positive": "If SURVIVES: token_refresh detection robust to noise, strengthening C-FRESHNESS claim ceiling. Token_refresh can be included in orthogonality sets, expanding parallel-channel architecture coverage.",
+  "product_consequence_negative": "If FALSIFIED: token_refresh detection fragile under noise, requiring either separate handling or fused classifier. C-FRESHNESS claim ceiling remains bounded to permission_boundary and session_invalidation only.",
+  "estimated_cost": "Zero new LLM calls. Reuses existing stochastic mock server with modifications to token_refresh drift randomization (~50 lines Python). 8 conditions x 60 samples = 480 paired HTTP cycles on localhost, ~15-20 minutes. No API keys required.",
+  "expected_information_gain": "HIGH: directly tests whether token_refresh detection (the only untested drift type) survives noise, changing C-FRESHNESS claim completeness. Either outcome changes product architecture decision."
+}
