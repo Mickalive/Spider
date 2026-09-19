@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35389142338",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Frozen spec decision_rule SURVIVES condition (1) requires decompressed discrimination >=0.3 for ALL cache_config cells, while condition (4) C_PASSTHROUGH_REGRESSION requires NAIVE (CACHED) discrimination =0.0 for all cells. Both cannot be simultaneously satisfied. Producer correctly reports outcome MIXED due to this internal contradiction. DIRECTOR must reinterpret condition (1) as applying only to AUTH-AWARE cells (or revise decision_rule to exclude NAIVE from the >=0.3 threshold) before a SURVIVES verdict can be issued; otherwise SURVIVES_CURRENT_TEST is unsatisfiable by construction. Prereg.md 9. SURVIVES list also duplicates condition (1) and (6) (both require AUTH-AWARE >=0.3), confirming drafting error.",
+    "Measurement validity deviation: spec measurement_validity #5 states Transfer-Encoding: chunked applied by proxy in all modes (constant background, same as parent). run_experiment.py and result.json validity_notes state both configs use PASSTHROUGH forwarding with Content-Length (isolate cache key effect) and report.md explicitly says Proxy uses Content-Length forwarding (not chunked TE). No Transfer-Encoding header is ever set in run_experiment.py. Claim about surviving chunked TE is therefore not tested in this experiment; validity_notes correctly disclose Content-Length forwarding but spec/measurement_validity must be corrected and claim_ceiling must not include chunked-TE survival beyond parent EXP-RUNTIME-35330741639 constant-background evidence.",
+    "Determinism-across-paths verification deviates from spec: spec decision_rule (2) requires decompressed hash through auth-aware CACHED matches parent direct-server hash; PARENT_REF_HASHES dict is defined but never used for verification. run_experiment.py:857-937 implements live direct-server comparison (starts fresh MockOAuthHandler on port 6100+ and decompresses direct response) for 36 AUTH-AWARE checks, not frozen parent hash comparison. Also NAIVE excluded by design (correct, would fail) but spec says for each (auth_state, content_type, size) without excluding NAIVE. Report and result must clarify that verification is live-proxy-vs-live-direct, not frozen-parent-hash, and that parent hash constant is unused; future verdict should cite live comparison as evidence, not parent artifact.",
+    "C_PASSTHROUGH_REGRESSION control as defined in spec (PASSTHROUGH discrimination =0.5) is not directly tested: experiment has only two cache configs NAIVE and AUTH-AWARE, no separate PASSTHROUGH proxy_behavior. Producer maps C_PASSTHROUGH_REGRESSION to C_NAIVE_CACHED_REPRODUCTION (NAIVE=0.0) and infers infrastructure stability via C_AUTH_AWARE_PRIMARY, but spec condition mentions PASSTHROUGH discrimination =0.5. DIRECTOR must map regression correctly: NAIVE=0.0 reproduces parent CACHED falsification, AUTH-AWARE=0.5 matches parent PASSTHROUGH/RECOMPRESS 0.5 baseline; there is no independent non-cached passthrough mode in this run."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DECISION_RULE_CONTRADICTION",
+      "severity": "high",
+      "finding": "Frozen spec decision_rule is internally contradictory: SURVIVES condition (1) decompressed >=0.3 for ALL (auth_state, cache_config) cells includes NAIVE, while condition (4) requires NAIVE=0.0 to reproduce parent. Minimum decompressed discrimination across all 18 cells is 0.0 (NAIVE), so condition (1) fails whenever condition (4) passes. Producer result.json correctly reports min 0.0 across all cells and auth-aware min 0.5; provenance and report acknowledge contradiction and emit outcome MIXED (c1 false, c4 true). This is a DESIGN flaw, not measurement failure. Recomputed c1 min 0.0, c4 pass true, c6 auth-aware min 0.5 true, confirming MIXED is the correct logical response to contradictory spec. SURVIVES_CURRENT_TEST as written is unsatisfiable.",
+      "evidence": "spec.json decision_rule SURVIVES_CURRENT_TEST if ALL of: (1) decompressed >=0.3 for ALL combinations ... (4) C_PASSTHROUGH_REGRESSION passes (naive CACHED=0.0 ...) ; result.json metrics/per_cell 9 NAIVE 0.0 + 9 AUTH-AWARE 0.5, per_cache_config NAIVE mean 0.0 AUTH-AWARE 0.5, observations Min decompressed discrimination across all cells: 0.0000, Auth-aware min 0.5000, provenance.json execution_notes MIXED caused by c1/c4 contradiction, report.md Decision Rule Analysis table"
+    },
+    {
+      "id": "V2_CHUNKED_VS_CONTENT_LENGTH",
+      "severity": "medium",
+      "finding": "Spec measurement_validity requires Transfer-Encoding: chunked constant background (same as parent). Implementation uses Content-Length forwarding in both proxy configs (ReverseProxyHandler sends Content-Length, never Transfer-Encoding). Validity notes disclose this accurately (Both configs use PASSTHROUGH forwarding with Content-Length). Therefore this experiment does not test chunked-TE survival; chunked claim remains bounded to parent EXP-RUNTIME-35330741639 where chunked was constant background. No corruption observed with Content-Length, but chunked-specific inference is invalid for this packet.",
+      "evidence": "spec.json measurement_validity[3] Transfer-Encoding: chunked applied by proxy in all modes; run_experiment.py no occurrence of Transfer-Encoding (count 0) and 6 Content-Length references, ReverseProxyHandler _proxy_request sends Content-Length and X-Cache headers; result.json validity_notes Both configs use PASSTHROUGH forwarding with Content-Length; report.md Validity Notes Proxy uses Content-Length forwarding (not chunked TE)"
+    },
+    {
+      "id": "V3_DETERMINISM_ACROSS_PATHS_LIVE_NOT_FROZEN",
+      "severity": "medium",
+      "finding": "Determinism-across-paths control C_DETERMINISM_ACROSS_PATHS reported pass (36 checks, 0 mismatches) but uses live direct-server recomputation (fresh mock on port 6100+) rather than comparison to frozen PARENT_REF_HASHES constant defined in run_experiment.py:68-123. Constant is unused. Live comparison correctly shows proxy is byte-preserving for AUTH-AWARE (within max_depth=5), but spec required parent hash match. This is a valid alternative verification (transparent forwarding) but deviates from frozen spec wording and should be documented as live-proxy-vs-live-direct, not parent-artifact match. NAIVE correctly excluded (would fail due to stale cache by design).",
+      "evidence": "run_experiment.py:68-123 PARENT_REF_HASHES unused, 857-937 live comparison loop with start_mock_server(direct_port) and hash compare, result.json controls/C_DETERMINISM_ACROSS_PATHS conditions_checked 36 mismatch 0, provenance execution_notes 36 AUTH-AWARE checks all hashes match, NAIVE excluded"
+    },
+    {
+      "id": "V4_SAMPLING_AND_TARGET_INTEGRITY_OK",
+      "severity": "info",
+      "finding": "Sampling integrity intact: 360 total requests = 18 cells *20 (4 states x5 reps), per_cache_config 9 cells *20 =180 each, per_cell total_requests 20 verified, seed 44 shuffle per cell, jitter 50-150ms uniform, separate origin port per content_type x size and separate proxy port per cache_config, no unintended split leakage. Target integrity: discrimination metric compute_discrimination_score correctly implements intra_match_rate - inter_match_rate. With 3-way error collapse (valid distinct, no_auth/expired/invalid share error body), expected 1.0 - 0.5 =0.5 matches observed AUTH-AWARE 0.5; NAIVE collapsed all 4 states to same cached body =>1.0-1.0=0.0 matches observed NAIVE 0.0. Body_sizes confirm: NAIVE all 83 identical, AUTH-AWARE valid 83 vs error 70 distinct for JSON_1KB. Recomputed per_cache_config means match producer exactly (NAIVE 0.0, AUTH-AWARE 0.5).",
+      "evidence": "result.json metrics/per_cell 18 entries each total_requests 20, per_cache_config NAIVE mean 0.0 AUTH-AWARE 0.5, body_sizes JSON_1KB_NAIVE all 83 vs AUTH-AWARE 83/70 split, run_experiment.py compute_discrimination_score intra/inter logic and recomputation via independent python confirms exact match"
+    },
+    {
+      "id": "V5_REPRESENTATION_AND_ENVIRONMENT_BOUNDS",
+      "severity": "info",
+      "finding": "Environment correctly disclosed as localhost only (Python reverse proxy + Flask/stdlib mock, brotli quality 6 deterministic, no real CDN). Representation loss disclosed: synthetic padded JSON/HTML/XML, 3-way error collapse, HS256 locally signed expired_token, payload sizes controlled by padding to hit uncompressed targets, single-layer brotli only, max_depth 5. No binary content, no double/triple-brotli through proxy, no edge diversity, no Accept-Encoding negotiation across nodes, no geographic distribution, no production-scale concurrency. Latent variables: proxy cache never expires within run (new proxy per content_type x size clears cache per batch, but cache TTL not tested). Iterative decompression correctly decompressed wrong cached body in NAIVE (0 errors, all_same true per state) proving failure is cache-key semantics, not pipeline failure.",
+      "evidence": "spec.json measurement_validity, prereg.md Scope Boundaries 11, result.json validity_notes, provenance model mimo-v2.5-free python 3.12.14, per_cell decompressed_hash_variation all_same true per state across all 18 cells, decompression_errors [] for all 360 requests, decompression_latency_ms 0.01-0.22ms"
+    },
+    {
+      "id": "V6_NO_PASSTHROUGH_BASELINE_IN_THIS_RUN",
+      "severity": "low",
+      "finding": "Spec defines positive control C_PASSTHROUGH_REGRESSION as PASSTHROUGH=0.5, but this experiment defines only NAIVE and AUTH-AWARE (both cached). There is no pure non-cached PASSTHROUGH mode. Producer substitutes C_NAIVE_CACHED_REPRODUCTION (NAIVE=0.0) and uses AUTH-AWARE=0.5 as proxy for PASSTHROUGH baseline via B-PARENT-DECOMPRESSED-0.5. This is acceptable as regression reference because parent PASSTHROUGH 0.5 equals AUTH-AWARE 0.5 and both use same passthrough forwarding, but direct PASSTHROUGH regression not independently re-measured in this packet; stability inferred via AUTH-AWARE.",
+      "evidence": "spec.json positive_control C_PASSTHROUGH_REGRESSION PASSTHROUGH=0.5, result.json controls C_NAIVE_CACHED_REPRODUCTION and C_AUTH_AWARE_PRIMARY, run_experiment.py CACHE_CONFIGS = [NAIVE, AUTH-AWARE] no PASSTHROUGH, per_cache_config AUTH-AWARE 0.5 matches parent PASSTHROUGH 0.5"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PARENT-DECOMPRESSED-0.5",
+      "expected": 0.5,
+      "observed": 0.5,
+      "finding": "PASS: AUTH-AWARE decompressed mean 0.5 across all 9 cells (min 0.5 max 0.5) exactly matches parent PASSTHROUGH/RECOMPRESS baseline 0.5. This confirms auth-aware cache key restores discrimination to direct-server level via same proxy infrastructure. NAIVE not counted here (intentionally fails).",
+      "evidence": "result.json metrics/per_cache_config AUTH-AWARE decompressed mean 0.5 min 0.5 max 0.5, per_cell 9 AUTH-AWARE cells all 0.5, spec baselines B-PARENT-DECOMPRESSED-0.5 expected 0.5"
+    },
+    {
+      "id": "B-PARENT-CACHED-0.0",
+      "expected": 0.0,
+      "observed": 0.0,
+      "finding": "PASS: NAIVE (parent-equivalent) discrimination mean 0.0 across all 9 cells reproduces parent CACHED falsification exactly. Confirms environment stability and that NAIVE failure is deterministic cache-key artifact, not transient.",
+      "evidence": "result.json metrics/per_cache_config NAIVE decompressed mean 0.0 min 0.0 max 0.0, per_cell 9 NAIVE cells all 0.0, controls/C_NAIVE_CACHED_REPRODUCTION observed_mean 0.0 pass true"
+    },
+    {
+      "id": "B-RANDOM",
+      "expected": 0.0,
+      "observed": 0.0,
+      "finding": "PASS: Null control B-RANDOM =0.0 for all 18 cells (18*0.0). Random 32-byte fingerprints produce no discriminating structure, confirming discrimination metric not spuriously inflated. Independent recomputation confirms all 18 baselines 0.0.",
+      "evidence": "result.json metrics/per_cell each baselines B-RANDOM 0.0, controls/C_NULL_CONTROL observed 18x0.0 pass true, run_experiment.py baseline_random seed 99 n=20"
+    },
+    {
+      "id": "B-AUTH-AWARE-CACHED-0.5",
+      "expected": 0.5,
+      "observed": 0.5,
+      "finding": "PASS: Primary test expectation met: AUTH-AWARE discrimination 0.5 >=0.3 for all 9 cells (min 0.5). Supports hypothesis that including Authorization in cache key restores discrimination to PASSTHROUGH level. This is the sole positive test of the hypothesis and it passes uniformly.",
+      "evidence": "result.json controls/C_AUTH_AWARE_PRIMARY min_observed 0.5 observed_per_cell 9x0.5 pass true, per_cache_config AUTH-AWARE 0.5"
+    }
+  ],
+  "recomputed_metrics": {
+    "per_cache_config_decompressed_body_only_discrimination": {
+      "NAIVE": {"mean": 0.0, "min": 0.0, "max": 0.0, "n_cells": 9, "recomputed_match": true},
+      "AUTH-AWARE": {"mean": 0.5, "min": 0.5, "max": 0.5, "n_cells": 9, "recomputed_match": true}
+    },
+    "per_cache_config_compressed_body_only_discrimination": {
+      "NAIVE": {"mean": 0.0, "min": 0.0, "max": 0.0, "recomputed_match": true},
+      "AUTH-AWARE": {"mean": 0.5, "min": 0.5, "max": 0.5, "recomputed_match": true}
+    },
+    "total_requests": 360,
+    "total_cells": 18,
+    "cells_per_cache_config": 9,
+    "decompression_errors": 0,
+    "decompressed_hash_variation_all_same": true,
+    "B_RANDOM_all_zero": true,
+    "C_NULL_CONTROL_pass": true,
+    "C_NAIVE_CACHED_REPRODUCTION_pass": true,
+    "C_AUTH_AWARE_PRIMARY_pass": true,
+    "C_DECOMPRESSED_DETERMINISM_pass": true,
+    "C_DETERMINISM_ACROSS_PATHS_reported_pass": true,
+    "C_DETERMINISM_ACROSS_PATHS_conditions_checked": 36,
+    "C_DETERMINISM_ACROSS_PATHS_mismatch_count": 0,
+    "C_DETERMINISM_ACROSS_PATHS_verified_via_live_direct_not_frozen_hash": true,
+    "decision_rule_c1_min_all_cells": 0.0,
+    "decision_rule_c1_pass_all_cells_ge_0.3": false,
+    "decision_rule_c6_auth_aware_min": 0.5,
+    "decision_rule_c6_pass": true,
+    "decision_rule_c4_naive_reproduction_pass": true,
+    "recomputation_method": "independent python recomputation from result.json per_cell values; discrimination formula intra_match_rate - inter_match_rate verified against run_experiment.py compute_discrimination_score; per_cache_config means recomputed as arithmetic mean of 9 cells per cache_config; B-RANDOM, hash_variation, error counts recomputed from per_cell; all match producer exactly to 4 decimals"
+  },
+  "claim_ceiling": "Iterative decompression (brotli->gzip->identity loop max_depth=5) maintains decompression-normalized discrimination at 0.5 (threshold >=0.3) ONLY when the localhost Python reverse proxy cache key includes Authorization (URL, Accept-Encoding, Authorization) and origin sets Cache-Control: private, Vary: Authorization — across JSON/HTML/XML x 1KB/10KB/100KB (9 conditions) x 4 auth states (no_auth, valid_token, expired_token, invalid_token with 3-way error collapse) x 5 reps (180 requests per cache_config, 360 total, seed 44, jitter 50-150ms). Verified: 0 decompression errors, within-state decompressed hash all_same=true per state, B-RANDOM 0.0, proxy byte-preserving (36 live direct vs proxy checks, 0 mismatches, Content-Length forwarding). Bounded to: single-layer brotli origin quality 6, localhost mock on dynamic ports, Content-Length forwarding (NOT chunked TE), synthetic padded bodies, HS256 locally signed tokens, no real CDN (Cloudflare/Fastly/Akamai), no double/triple-brotli through proxy, no binary content, no edge quality diversity, no Accept-Encoding negotiation across nodes, no production-scale concurrency/latency. Parent CACHED falsification with naive (URL, Accept-Encoding) key (discrimination 0.0) reproduced exactly and is bounded as CDN cache-key semantics, NOT decompression failure. Real CDN with auth-aware configuration remains untested and is still the sole blocker for C-MEAS-VALID product readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35389142338/spec.json decision_rule SURVIVES if ALL (1) >=0.3 for ALL cells vs (4) NAIVE=0.0 contradiction and measurement_validity chunked vs Content-Length",
+    "research/experiments/EXP-RUNTIME-35389142338/prereg.md 9 Decision Rule SURVIVES list duplicate (1) and (6) both AUTH-AWARE >=0.3",
+    "research/experiments/EXP-RUNTIME-35389142338/result.json metrics/per_cell 18 entries decompressed_body_only_discrimination 0.0 NAIVE / 0.5 AUTH-AWARE and per_cache_config NAIVE 0.0 AUTH-AWARE 0.5 and body_sizes JSON_1KB_NAIVE 83 uniform vs AUTH-AWARE 83/70 split",
+    "research/experiments/EXP-RUNTIME-35389142338/result.json metrics/per_cell baselines B-RANDOM 0.0 and controls C_NULL_CONTROL 18x0.0, C_NAIVE_CACHED_REPRODUCTION 9x0.0, C_AUTH_AWARE_PRIMARY 9x0.5 min 0.5, C_DECOMPRESSED_DETERMINISM all true, C_DETERMINISM_ACROSS_PATHS 36 checked 0 mismatches, C_NO_ERROR_INFLATION 0",
+    "research/experiments/EXP-RUNTIME-35389142338/result.json observations Min decompressed discrimination 0.0000, Auth-aware min 0.5000, Total decompression errors 0, Determinism across paths True",
+    "research/experiments/EXP-RUNTIME-35389142338/result.json validity_notes Both configs use PASSTHROUGH forwarding with Content-Length and No real CDN infrastructure",
+    "research/experiments/EXP-RUNTIME-35389142338/report.md Decision Rule Analysis contradiction table and per-cell 0.0/0.5 table",
+    "research/experiments/EXP-RUNTIME-35389142338/provenance.json execution_notes MIXED caused by c1/c4 contradiction and model mimo-v2.5-free",
+    "research/experiments/EXP-RUNTIME-35389142338/run_experiment.py CACHE_CONFIGS NAIVE/AUTH-AWARE, _get_cache_key (path, Accept-Encoding) vs (path, Accept-Encoding, Authorization), ReverseProxyHandler Content-Length never Transfer-Encoding, compute_discrimination_score and decompress_body max_depth 5, baseline_random",
+    "research/experiments/EXP-RUNTIME-35330741639/result.json 540 requests 27 cells PASSTHROUGH 0.5 CACHED 0.0 RECOMPRESS 0.5 parent baseline and handoff.json real CDN blocker",
+    "research/experiments/EXP-RUNTIME-35330741639/audit.json V1_CACHED_IS_CACHE_SEMANTICS_NOT_DECOMPRESSION PASS and required_fixes"
+  ],
+  "unresolved": [
+    "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration (Cache-Control: private / Vary: Authorization)? Untested; remains sole blocker for C-MEAS-VALID VALIDATED/product-ready status.",
+    "Does iterative decompression survive real CDN with double/triple-brotli multi-layer encoding through the proxy? This experiment used single-layer origin brotli only.",
+    "Does iterative decompression survive Transfer-Encoding: chunked through a real CDN proxy independently of Content-Length? This experiment used Content-Length; chunked TE was not varied.",
+    "What is production-scale latency/CPU at N>1000 with MB-scale natural content and concurrent clients through real CDN? Localhost latency 0.01-0.22ms decompress, 1.5-2.7ms proxy overhead not predictive of production.",
+    "Does iterative decompression work for binary content types or genuinely incorrect Content-Encoding on incompressible data? Only text JSON/HTML/XML tested.",
+    "How does proxy behavior interact with CDN-specific header manipulation (X-Cache, Via, X-Forwarded-For) and Accept-Encoding negotiation across multiple CDN nodes?",
+    "What is maximum practical decompression depth for real-world multi-layer encoding? max_depth 5 sufficient for tested single-layer cases but not validated for deeper nesting.",
+    "Does frozen PARENT_REF_HASHES constant match live recomputed hashes byte-for-byte? Live verification passed but direct hash equality to parent artifact not demonstrated in this packet."
+  ]
+}

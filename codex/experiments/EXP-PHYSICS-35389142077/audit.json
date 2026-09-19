@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_target_sampling_integrity",
+      "severity": "none",
+      "finding": "N=5000 transitions = 50 sessions x 100 steps, seed=42, SHA256(prev1:prev2:current:action) mod 4 routing. Raw transitions identical to parent EXP-PHYSICS-35375596894 (verified by file-byte SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade and regenerated simulation). Sampling matches spec.json measurement_validity and prereg Phase 1 exactly; no sampling drift.",
+      "evidence": "result.json:metrics.state_history_pmi_k2, provenance.json:environment, run_experiment.py:collect_transitions"
+    },
+    {
+      "id": "V2_representation_and_leakage",
+      "severity": "none",
+      "finding": "State-history H_K built from URL states with START_TOKEN padding, not action labels; matches spec 'State-history H_K built from URL states (prev1, prev2, ...)'. Non-leakage filter (action.target_href == state_after.url) vacuously passes: synthetic in-memory data has no target_href field, so all 5000 counted as non-leakage. Spec requires >=5000 non-leakage — satisfied. No leakage confound; representation correctly fragment-preserving (12 states with #fragment).",
+      "evidence": "run_experiment.py:build_state_history_records, result.json:metrics.state_history_pmi_k2.n_total_records=5000"
+    },
+    {
+      "id": "V3_null_control_implementation_validity",
+      "severity": "none",
+      "finding": "Within-stratum conditional permutation correctly implemented: groups by (url_before, history) stratum, shuffles url_after multiset within each stratum preserving P(url_after|stratum) while breaking I(url_after;action|stratum), keeping (url_before,history,action) fixed. 1000 perms seed=42, alpha=0, MIN_STRATUM_SIZE=5 as frozen. Code audited in run_experiment.py:225-269. No implementation bug detected.",
+      "evidence": "run_experiment.py:permutation_test_within_stratum, provenance.json:environment.n_permutations=1000"
+    },
+    {
+      "id": "V4_measurement_validity_primary_outcome",
+      "severity": "none",
+      "finding": "Primary outcome within_stratum_null_mean_k2 = 0.417454 bits, null_std=0.00647 bits (producer). Independent recomputation with 200 perms yields null_mean 0.41699 std 0.00703, consistent within sampling variation (expected 1000-perm std ~0.0065). |mean|=0.417 >> 0.1 threshold, failing spec decision_rule C4 by 4.17x. FALSIFIED-IN-SETTING verdict is mathematically forced. PMI signal 0.933243 bits at K2 recomputed exactly (0.933243), matching producer and parent. Measurement transaction completed validly: status=COMPLETE not MEASUREMENT_INVALID is correct — null bias is scientific negative, not infrastructure failure.",
+      "evidence": "result.json:metrics.within_stratum_null_mean_k2, analysis_results.json:within_stratum_permutation.null_mean, recomputed_metrics"
+    },
+    {
+      "id": "V5_control_degeneration_not_hidden",
+      "severity": "none",
+      "finding": "Deterministic strata 407/1292 (31.5%) contribute PMI=0 by construction; stochastic 885/1292 (68.5%) carry signal and bias. Mean observations per stratum 5000/1292≈3.87; only 398 used (30.8%) meeting MIN_STRATUM_SIZE=5. Small-stratum finite-sample PMI estimator bias explains why analytic E[PMI]=0 fails. Producer correctly discloses this in validity_notes and observations. Action-shuffle diagnostic 0.406444 vs within-stratum 0.417454 convergence (independent recomputation 0.40706 vs 0.41699) correctly interpreted as intrinsic estimator-weighting bias floor ~0.41 bits at N=5000, not permutation artifact.",
+      "evidence": "result.json:metrics.determinism_check_state_k2, result.json:controls.NULL_CONTROL_ACTION_SHUFFLE_DIAGNOSTIC, analysis_results.json:results.state_K2"
+    },
+    {
+      "id": "V6_provenance_and_artifact_integrity",
+      "severity": "none",
+      "finding": "Artifact hashes in result.json now match file-byte hashes (raw_transitions.json 170df6e34c78f..., analysis_results.json cf33fd7e89c2e..., run_experiment.py ec313396...). Prior parent stale-hash issue (noted in parent handoff do_not_assume) is resolved. Provenance correctly records base_sha 857589da..., seed 42, numpy 2.5.3, python 3.12.14. No provenance tampering.",
+      "evidence": "result.json:artifacts, provenance.json:datasets_fixtures, bash file-byte SHA256 verification"
+    },
+    {
+      "id": "V7_phase2_gating_correct",
+      "severity": "none",
+      "finding": "Spec prereg Phase 2 conditioned on Phase 1 SURVIVES (|null_mean|<0.1). Producer correctly did not attempt production SPA testing; reports Phase 2 not attempted because measurement framework invalid. Playwright browser automation diagnostic (AUTOMATABILITY_PILOT_BROWSER) correctly marked PASS diagnostic: chromium_headless_shell-1243 missing in CI, http_api_direct success validated server logic (200 transitions via fallback). Infrastructure failure not mis-encoded as scientific falsification.",
+      "evidence": "result.json:controls.AUTOMATABILITY_PILOT_BROWSER, result.json:observations[5], spec.json:measurement_validity, spec.json:decision_rule"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_parent_block_permutation_replication",
+      "finding": "Block permutation null_mean 0.552119 bits replicates parent EXP-PHYSICS-35375596894 block mean 0.552 exactly (producer diagnostic). Recomputed 200-perm block mean 0.550249 confirms replication. Demonstrates bias intrinsic to hash-routed SPA, not dataset shift. Baseline strength: strong positive replication.",
+      "passes": true,
+      "evidence": "result.json:controls.NULL_CONTROL_BLOCK_PERMUTATION_DIAGNOSTIC, result.json:metrics.block_permutation_null_mean_k2"
+    },
+    {
+      "id": "B2_parent_pmi_signal_reproduction",
+      "finding": "All PMI baselines reproduce parent within floating precision: unconditional K0 1.418781 (parent 1.419), state K1 1.530902 (parent 1.531), state K2 0.933243 (parent 0.933), state K3 0.168155, action K3 1.220508. Confirms deterministic pipeline and that parent sparsity bottleneck resolution (N=5000) holds.",
+      "passes": true,
+      "evidence": "result.json:metrics.state_history_pmi_k2, result.json:metrics.unconditional_pmi_k0, result.json:metrics.state_history_pmi_k1, result.json:metrics.action_history_pmi_k3"
+    },
+    {
+      "id": "B3_positive_control_synthetic_spa",
+      "finding": "8-state deterministic SPA positive control: state K3 PMI 1.671251 bits (p=0.001, d=87.9), action K3 1.805624 bits (p=0.001, d=103.24), threshold >=1.0 bits p<0.001 satisfied. Independently recomputed state K3 1.671250 / action 1.805623 matches. Pipeline validated at N=5000 as required by spec positive_control. Strong baseline — not tautological: deterministic mapping by construction but PMI pipeline must still detect it.",
+      "passes": true,
+      "evidence": "result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA, analysis_results.json:positive_control, run_experiment.py:run_positive_control"
+    },
+    {
+      "id": "B4_improvement_quantification",
+      "finding": "Within-stratum 0.417 vs block 0.552 improvement 0.134666 bits = 24.4% reduction. Action-shuffle 0.406444 nearly identical to within-stratum, confirming bias floor ~0.41 bits. Producer claim of partial improvement but failure is accurately quantified; no overstated improvement.",
+      "passes": true,
+      "evidence": "result.json:metrics.null_method_comparison, result.json:metrics.within_stratum_null_mean_k2, result.json:metrics.action_shuffle_null_mean_k2"
+    },
+    {
+      "id": "B5_unconditional_and_k1_controls",
+      "finding": "Unconditional K0 and K1 baselines listed in spec baselines reproduced and reported. No cherry-picking: K3 sparsity correctly reported (only 105/2779 strata used, 3.8%).",
+      "passes": true,
+      "evidence": "result.json:metrics.unconditional_pmi_k0, result.json:metrics.state_history_pmi_k1"
+    }
+  ],
+  "recomputed_metrics": {
+    "state_history_pmi_k2_pmi_bits": 0.9332435964563096,
+    "state_history_pmi_k2_n_strata_total": 1292,
+    "state_history_pmi_k2_n_strata_used": 398,
+    "within_stratum_null_mean_k2_200perms": 0.4169864863960024,
+    "within_stratum_null_std_k2_200perms": 0.007025208463790422,
+    "within_stratum_null_mean_k2_producer_1000perms": 0.41745412103641627,
+    "within_stratum_null_std_k2_producer_1000perms": 0.006475080847523785,
+    "block_permutation_null_mean_k2_200perms": 0.5502490135517235,
+    "block_permutation_null_mean_k2_producer_1000perms": 0.5521196059272595,
+    "action_shuffle_null_mean_k2_200perms": 0.40706157602816034,
+    "action_shuffle_null_mean_k2_producer_1000perms": 0.4064440096209083,
+    "determinism_check_k2_stochastic": 885,
+    "determinism_check_k2_deterministic": 407,
+    "determinism_check_k2_ratio_stochastic": 0.684984520123839,
+    "positive_control_state_k3_pmi": 1.6712509133878954,
+    "positive_control_action_k3_pmi": 1.805623888152145,
+    "positive_control_passes": true,
+    "raw_transitions_file_byte_sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+    "raw_transitions_canonical_sortkeys_sha256": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+    "analysis_results_file_byte_sha256": "cf33fd7e89c2e9be7133ba3365d97c511755dd7cb84eeb87e125e4ebd3fa12b8",
+    "artifact_hash_matches": true,
+    "null_centering_threshold": 0.1,
+    "null_centering_passes": false,
+    "null_bias_above_threshold_factor": 4.174541210364163,
+    "improvement_vs_block_bits": 0.13466548489084323,
+    "improvement_pct": 24.4
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Within-stratum conditional permutation (shuffle url_after within each (url_before, H_K) stratum, 1000 perms, seed=42) does NOT center null at zero for the 12-state hash-routed SPA simulation with SHA256(prev1:prev2:current:action) mod 4 routing, N=5000, K=2 state-history, alpha=0 smoothing, MIN_STRATUM_SIZE=5: null_mean=0.417+/-0.006 bits, threshold |mean|<0.1 FAILS by 4.17x (24.4% improvement over block permutation 0.552 but bias floor ~0.41 bits persists across within-stratum and action-shuffle). State-history K2 PMI=0.933 bits (p=0.001, d=79.7) and positive control K3 PMI>=1.67 bits are reproducible descriptive observations but confirmatory beyond-Markov claim remains unsupported without valid null. No inference to production SPAs (Phase 2 untested by design), other N/K, other SPA cardinalities, or alternative null frameworks (model-based null, parametric bootstrap, unbiased estimator, conditional entropy). C-WEB-DYNAMICS remains HYPOTHESIS per codex/claim_state.json; this experiment is a valid negative on the null-control methodology, not on the signal itself.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35389142077/spec.json:decision_rule",
+    "research/experiments/EXP-PHYSICS-35389142077/prereg.md:Decision Rule",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.within_stratum_null_mean_k2=0.417454",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.block_permutation_null_mean_k2=0.552119",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.action_shuffle_null_mean_k2=0.406444",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.state_history_pmi_k2.pmi_bits=0.933243",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA.passes=true",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:controls.NULL_CONTROL_WITHIN_STRATUM_PERMUTATION.passes=false",
+    "research/experiments/EXP-PHYSICS-35389142077/analysis_results.json:within_stratum_permutation.null_mean=0.417454",
+    "research/experiments/EXP-PHYSICS-35389142077/analysis_results.json:block_permutation_diagnostic.null_mean=0.552119",
+    "research/experiments/EXP-PHYSICS-35389142077/analysis_results.json:action_shuffle_diagnostic.null_mean=0.406444",
+    "research/experiments/EXP-PHYSICS-35389142077/run_experiment.py:permutation_test_within_stratum",
+    "research/experiments/EXP-PHYSICS-35389142077/provenance.json:environment.seed=42",
+    "research/experiments/EXP-PHYSICS-35389142077/raw_transitions.json:sha256=170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+    "research/experiments/EXP-PHYSICS-35389142077/freeze.json",
+    "research/experiments/EXP-PHYSICS-35375596894/handoff.json:carry_forward.established",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "unresolved": [
+    "Why analytic E[PMI]=0 for within-stratum independence fails empirically: finite-sample PMI log-ratio bias vs deterministic/stochastic weighting vs small-stratum variance. Mean stratum occupancy 3.87, only 30.8% meet MIN_STRATUM_SIZE=5. Whether larger N (>=50000) or MIN_STRATUM_SIZE>5 reduces bias floor ~0.41 bits remains untested.",
+    "Whether alternative falsification frameworks (model-based parametric bootstrap from estimated P(url_after|stratum), Miller-Madow unbiased PMI, conditional entropy H(url_after|action,stratum)) would center null; none tested here.",
+    "Whether ~0.52-bit bias-corrected signal (0.933 - 0.417) represents true beyond-Markov effect: producer notes convergence suggests this subtraction but correctly does not claim it without independent validation; identifiability alternative (action determines next state given current state, i.e., Markov, vs history-dependence) not disentangled — action-history K3 1.221 bits > state-history K2 0.933 bits at same N suggests Markov component dominates.",
+    "Whether null bias generalizes beyond this specific 12-state SHA256 SPA design to other deterministic/stochastic SPAs with different state cardinalities, candidate set sizes, or transition functions.",
+    "Phase 2 production SPA detection with valid null remains untested: infrastructure not the blocker, methodology was. Future production tests require validated null before being interpretable."
+  ]
+}

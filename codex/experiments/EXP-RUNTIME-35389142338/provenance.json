@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35389142338",
+  "lane": "runtime",
+  "model": "opencode/mimo-v2.5-free",
+  "recorded_at": "2026-09-18T21:15:00.000000+00:00",
+  "pre_execute_sha": "7927fd8c09b8fbf08cdace742fb7fc0ab7eebef3",
+  "parent_handoff_sha": null,
+  "frozen_inputs_sha256": {
+    "request.json": "83322fd204b375b35204db2850fdd82cc29810e6fd164546494505902328d6c7",
+    "spec.json": "00abcfcae3dd76ffe9d186417cacc46d4da41f6cc436f6ccb0be5d0b2d37adae",
+    "prereg.md": "209464c49edb4a0074f73bb60e3826da02393cfac95d9b3bf152b774762f27a7",
+    "freeze.json": "a5b09847bcd8f6238ed63d25ea231f295511d9dd2f988e0b94e346a7e227438c",
+    "run_experiment.py": "455e514c032e3cbde435f3cb338765820136612b00e7d1ba7fcc86f5fa8f1995"
+  },
+  "output_sha256": {
+    "result.json": "f3377f0a256dbbe093070cb34314605e94d8ace3a169df92dc928b196c56382a",
+    "report.md": "850c4214d32b46ba030469250b56160f4d41ef3e0551a1b8732f2d4b80ae3d01"
+  },
+  "controls_pass": {
+    "C_NULL_CONTROL": true,
+    "C_NAIVE_CACHED_REPRODUCTION": true,
+    "C_AUTH_AWARE_PRIMARY": true,
+    "C_DECOMPRESSED_DETERMINISM": true,
+    "C_DETERMINISM_ACROSS_PATHS": true,
+    "C_NO_ERROR_INFLATION": true
+  },
+  "outcome": "MIXED",
+  "status": "COMPLETE",
+  "execution_notes": [
+    "All 6 controls pass. MIXED outcome caused by frozen spec decision rule contradiction: c1 requires all cells >= 0.3 (including NAIVE), c4 requires NAIVE = 0.0. Both cannot be simultaneously satisfied.",
+    "Scientific finding: AUTH-AWARE caching restores discrimination to 0.5 across all 9 content conditions. NAIVE reproduces parent's 0.0.",
+    "360 total requests (4 states × 9 conditions × 2 configs × 5 reps). 0 decompression errors.",
+    "Proxy uses Content-Length forwarding (not chunked TE). Connectivity tests all pass (status=200).",
+    "C_DETERMINISM_ACROSS_PATHS: 36 AUTH-AWARE checks, all hashes match direct-server reference. NAIVE excluded from check (returns wrong cached response by design).",
+    "Decision rule c1 fails because min(decompressed_disc) across ALL cells = 0.0 (NAIVE), while c4 requires NAIVE = 0.0. This is a spec interpretation issue, not a scientific failure."
+  ],
+  "artifacts": [
+    {
+      "path": "result.json",
+      "sha256": "f3377f0a256dbbe093070cb34314605e94d8ace3a169df92dc928b196c56382a"
+    },
+    {
+      "path": "report.md",
+      "sha256": "850c4214d32b46ba030469250b56160f4d41ef3e0551a1b8732f2d4b80ae3d01"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "455e514c032e3cbde435f3cb338765820136612b00e7d1ba7fcc86f5fa8f1995"
+    }
+  ]
+}

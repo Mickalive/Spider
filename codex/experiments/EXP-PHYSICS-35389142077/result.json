@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35389142077",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "within_stratum_null_mean_k2": 0.41745412103641627,
+    "within_stratum_null_std_k2": 0.006475080847523785,
+    "within_stratum_null_abs_mean_k2": 0.41745412103641627,
+    "within_stratum_permutation_p_k2": 0.000999000999000999,
+    "within_stratum_effect_size_d_k2": 79.65761162922664,
+    "block_permutation_null_mean_k2": 0.5521196059272595,
+    "action_shuffle_null_mean_k2": 0.4064440096209083,
+    "null_method_comparison": {
+      "within_stratum": 0.417454,
+      "block_permutation": 0.55212,
+      "action_shuffle": 0.406444,
+      "improvement_vs_block": 0.134666,
+      "improvement_pct": 24.4
+    },
+    "state_history_pmi_k2": {
+      "pmi_bits": 0.9332435964563096,
+      "n_strata_total": 1292,
+      "n_strata_used": 398,
+      "n_total_records": 5000,
+      "skipped_small": 894,
+      "skipped_zero_var": 2,
+      "prediction_accuracy": 0.48699374382614424
+    },
+    "state_history_pmi_k3": {
+      "pmi_bits": 0.168155815254065,
+      "n_strata_total": 2779,
+      "n_strata_used": 105,
+      "n_total_records": 5000,
+      "skipped_small": 2674,
+      "skipped_zero_var": 2,
+      "prediction_accuracy": 0.5348460291734197
+    },
+    "action_history_pmi_k3": {
+      "pmi_bits": 1.2205083083840707,
+      "n_strata_total": 821,
+      "n_strata_used": 510,
+      "n_total_records": 5000,
+      "skipped_small": 311,
+      "skipped_zero_var": 0,
+      "prediction_accuracy": 0.3365223630710356
+    },
+    "unconditional_pmi_k0": {
+      "pmi_bits": 1.4187811340289063,
+      "n_strata_total": 12,
+      "n_strata_used": 12,
+      "n_total_records": 5000,
+      "prediction_accuracy": 0.1612
+    },
+    "state_history_pmi_k1": {
+      "pmi_bits": 1.5309023746943278,
+      "n_strata_total": 148,
+      "n_strata_used": 141,
+      "n_total_records": 5000,
+      "prediction_accuracy": 0.2404656764351666
+    },
+    "determinism_check_state_k2": {
+      "deterministic_strata": 407,
+      "stochastic_strata": 885,
+      "total_strata": 1292,
+      "stochastic_ratio": 0.684984520123839,
+      "deterministic_ratio": 0.31501547987616096
+    },
+    "determinism_check_state_k3": {
+      "deterministic_strata": 1801,
+      "stochastic_strata": 978,
+      "total_strata": 2779,
+      "stochastic_ratio": 0.3519251529327096,
+      "deterministic_ratio": 0.6480748470672903
+    }
+  },
+  "controls": {
+    "POSITIVE_CONTROL_SYNTHETIC_SPA": {
+      "description": "8-state synthetic deterministic SPA with known beyond-Markov structure, N=5000, K=3",
+      "expected": "PMI >= 1.0 bits, permutation p < 0.001",
+      "observed_pmi_state_k3": 1.671251,
+      "observed_pmi_action_k3": 1.805624,
+      "observed_p_state": 0.000999000999000999,
+      "observed_p_action": 0.000999000999000999,
+      "effect_size_d_state": 87.9,
+      "effect_size_d_action": 103.24,
+      "passes_pmi": true,
+      "passes_perm": true,
+      "passes": true,
+      "observed_outcome": "PASS"
+    },
+    "NULL_CONTROL_WITHIN_STRATUM_PERMUTATION": {
+      "description": "Within-stratum conditional permutation: shuffle url_after within each (url_before, history) stratum, 1000 perms, seed=42. Expected mean PMI ~0 bits.",
+      "expected": "null_mean within [-0.1, +0.1] bits of zero",
+      "observed_mean_k2": 0.41745412103641627,
+      "observed_std_k2": 0.006475080847523785,
+      "threshold_abs_mean": 0.1,
+      "passes": false,
+      "observed_outcome": "FAIL (mean 0.417 not within [-0.1, +0.1])",
+      "interpretation": "Within-stratum permutation reduces null mean from 0.552 (block) to 0.417, a 24.4% improvement, but still fails to center null at zero. The residual bias of 0.417 bits indicates that within-stratum shuffling does not fully eliminate the action-PMI coupling. Deterministic strata (31.5%) contribute PMI=0 by construction but do not offset the stochastic strata bias."
+    },
+    "NULL_CONTROL_BLOCK_PERMUTATION_DIAGNOSTIC": {
+      "description": "Trajectory-level block permutation (parent method, known biased). Diagnostic comparison.",
+      "observed_mean_k2": 0.5521196059272595,
+      "observed_std_k2": 0.01468977718619695,
+      "passes": false,
+      "observed_outcome": "FAIL (expected biased, diagnostic only)",
+      "interpretation": "Replicates parent null bias exactly (0.552). Confirms the bias is intrinsic to hash-routed SPA, not specific to permutation method."
+    },
+    "NULL_CONTROL_ACTION_SHUFFLE_DIAGNOSTIC": {
+      "description": "Action-shuffle diagnostic: shuffle action labels within each trajectory.",
+      "observed_mean_k2": 0.4064440096209083,
+      "observed_std_k2": 0.007635443138479829,
+      "passes": false,
+      "observed_outcome": "FAIL (expected biased, diagnostic only)",
+      "interpretation": "Action-shuffle yields null mean 0.406, very close to within-stratum 0.417. This convergence suggests the bias is a property of the estimator weighting across deterministic/stochastic strata, not the specific permutation scheme."
+    },
+    "AUTOMATABILITY_PILOT_BROWSER": {
+      "description": "Playwright browser automation diagnostic (not gating)",
+      "expected": ">=200 transitions via browser automation",
+      "observed_transitions": 200,
+      "method": "http_api_direct_with_playwright_fail",
+      "playwright_browser_available": false,
+      "http_api_direct_success": true,
+      "playwright_error": "browserType.launch: Executable missing at chromium_headless_shell-1243",
+      "passes": true,
+      "observed_outcome": "PASS (diagnostic): HTTP API validated; Playwright chromium missing in CI."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/analysis_results.json",
+      "sha256": "cf33fd7e89c2e9be7133ba3365d97c511755dd7cb84eeb87e125e4ebd3fa12b8",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35389142077/run_experiment.py",
+      "sha256": "ec313396d39e8b3501eb85528c49b3042c9b8fdea26f364998702d5b93e304f5",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35375596894/run_experiment.py",
+      "sha256": "25fad68b8d0647f3373c97dac3e34e1452bec62a09a51a49db73e2dbb83334aa",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "5000 transitions collected in-memory from 12-state SPA simulation: 50 sessions x 100 steps, seed=42, same SHA256(prev1:prev2:current:action) transition function as parent EXP-PHYSICS-35375596894. Raw SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade (matches parent exactly, confirming identical data).",
+    "Within-stratum conditional permutation null mean at K=2 = 0.417 bits. This FAILS the frozen primary falsifier (|mean| < 0.1 bits). The null is biased high by 0.417 bits, resolving 24.4% of the inherited C4 bias (parent block perm mean 0.552) but remaining 4.17x above the threshold.",
+    "Action-shuffle diagnostic yields null mean 0.406 bits, nearly identical to within-stratum (0.417). This convergence strongly suggests the bias is an intrinsic property of the PMI estimator weighting across deterministic/stochastic strata, not specific to the permutation scheme. When 31.5% of strata are deterministic (PMI=0), the weighted average is dominated by stochastic strata where any non-randomization of the true action-outcome coupling inflates the null.",
+    "Block permutation null mean 0.552 bits replicates parent exactly, confirming measurement reproducibility. All three permutation methods fail to center null at zero, with action-shuffle (0.406) and within-stratum (0.417) converging near each other, well above the 0.1 threshold.",
+    "PMI signal remains strong and reproducible: state K2 PMI = 0.933 bits (p=0.001, d=79.7), unconditional K0 = 1.419 bits, K1 = 1.531 bits, action K3 = 1.221 bits. All match parent within floating-point precision, confirming the PMI pipeline is deterministic and reproducible.",
+    "Positive control passes strongly: 8-state deterministic SPA state K3 PMI = 1.671 bits, action K3 = 1.806 bits, both p=0.001. Pipeline validated at N=5000.",
+    "Phase 2 (production SPA testing) was not attempted because Phase 1 falsified: the null control methodology does not center null at zero for hash-routed SPAs, so any production SPA result would be uninterpretable under the invalidated measurement framework.",
+    "Determinism check K2: 885/1292 stochastic (68.5%), 407 deterministic (31.5%). The deterministic strata contribute PMI=0 by construction and dilute the weighted average. The stochastic strata carry the signal but also the null bias."
+  ],
+  "validity_notes": [
+    "Within-stratum conditional permutation was the hypothesized fix for the inherited C4 failure. The analytic argument (preserves P(url_after|stratum) while breaking I(url_after; action|stratum), E[PMI]=0) is sound for infinite samples. The finite-sample bias (0.417 bits) indicates that either (a) the strata are too small for the analytic expectation to hold, or (b) the deterministic/stochastic stratum mixing creates a weighted-average bias that cannot be eliminated by any permutation scheme that preserves marginal stratum distributions.",
+    "The convergence of within-stratum (0.417) and action-shuffle (0.406) null means suggests the bias floor is ~0.41 bits for this SPA design at N=5000. This is an intrinsic property of the PMI estimator on this environment, not a fixable permutation artifact.",
+    "Block permutation bias (0.552) is 25% higher than within-stratum (0.417), confirming that trajectory-level block shuffling introduces additional artificial state-history correlation beyond the intrinsic estimator bias. The within-stratum method partially addresses this but does not eliminate it.",
+    "The experiment is COMPLETE (measurement valid) but FALSIFIES the null centering hypothesis. This is a valid scientific negative: the revised null control methodology does not resolve C4 for hash-routed SPAs.",
+    "Playwright browser automation not available in CI (chromium_headless_shell-1243 missing). HTTP API diagnostic validated server logic. Phase 2 production SPA testing was precluded by Phase 1 falsification, not infrastructure.",
+    "No Bonferroni correction needed for primary C4 test (single comparison). The within-stratum p=0.001 confirms observed PMI is significantly above the biased null, but the biased null itself fails the centering criterion."
+  ],
+  "unresolved": [
+    "Why does within-stratum conditional permutation fail to center null at zero? The analytic argument (E[PMI]=0 under independence within strata) should hold for sufficiently large strata. Possible explanations: (a) stratum sizes are too small (mean 2.89 obs/stratum at K2, 398 used of 1292); (b) deterministic strata (31.5%) with PMI=0 create a floor that inflates the weighted average when stochastic strata are biased; (c) the PMI estimator (log2 of ratio) has finite-sample bias that is not centered by permutation.",
+    "Is the 0.417-bit null bias reducible by alternative methods? Candidate approaches: (a) model-based null (parametric bootstrap from estimated transition probabilities); (b) stratified permutation with minimum stratum size >5; (c) unbiased PMI estimator (Miller-Madow correction); (d) conditional entropy H(url_after|action,url_before,history) as alternative to PMI.",
+    "Does the convergence of within-stratum and action-shuffle null means (0.417 vs 0.406) imply a fundamental limit for this estimator class? If so, the 0.933-bit observed PMI may be interpretable as signal minus bias (~0.52 bits true signal), but this requires independent validation.",
+    "Whether the null bias is specific to hash-routed SPA with SHA256 transition function, or generalizes to other deterministic/stochastic SPA designs. The bias floor of ~0.41 bits at N=5000 may vary with SPA cardinality, stratum dimensionality, and transition function properties.",
+    "Phase 2 production SPA testing remains untested. The validated PMI pipeline (0.933 bits, p=0.001) detects signal but without a valid null control, the p-value and significance claims cannot be confirmed. A different falsification framework is needed before production testing is meaningful."
+  ]
+}
