@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35422991016",
+  "lane": "intel",
+  "github_run_id": "35422991016",
+  "base_sha": "207150cad54aaffb23d2ab513b7aa2e765075e55",
+  "execution_sha": "aeb8aab30048070f8019d4ee5c5dcf89c69611ed",
+  "frozen_at": "2026-09-19T05:11:05.200681+00:00",
+  "executed_at": "2026-09-19T05:30:00+00:00",
+  "code_paths": [
+    "research/experiments/EXP-INTEL-35422991016/compute_output.json"
+  ],
+  "datasets": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "description": "Raw measurement data from EXP-INTEL-34782350557: 7 tasks (3 listing, 3 detail, 1 cart deduplicated from 8 success measurements), 1 Magento site, truncated-first-20 locatable_sample"
+    }
+  ],
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-35409927864",
+    "handoff_path": "research/experiments/EXP-INTEL-35409927864/handoff.json",
+    "handoff_sha256": "3eeacd04c615392ee9b15004884a840ce941f1f3c82770010354ff6684f0759b"
+  },
+  "established_facts_referenced": [
+    {
+      "experiment_id": "EXP-INTEL-35401997918",
+      "metric": "M7_C4_task_type_structure",
+      "value": "eta2=0.0 for hierarchy-weighted density on page_type",
+      "source": "research/experiments/EXP-INTEL-35401997918/result.json"
+    },
+    {
+      "experiment_id": "EXP-INTEL-35409927864",
+      "metric": "M2_eta2_tag_entropy",
+      "value": "eta2=1.0 for tag_entropy on page_type",
+      "source": "research/experiments/EXP-INTEL-35409927864/result.json"
+    },
+    {
+      "experiment_id": "EXP-INTEL-35409927864",
+      "metric": "M2_eta2_form_fraction",
+      "value": "eta2=1.0 for form_fraction on page_type",
+      "source": "research/experiments/EXP-INTEL-35409927864/result.json"
+    },
+    {
+      "experiment_id": "EXP-INTEL-35409927864",
+      "metric": "M2_eta2_total_area",
+      "value": "eta2=1.0 for total_area on page_type",
+      "source": "research/experiments/EXP-INTEL-35409927864/result.json"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35422991016/result.json",
+      "sha256": null,
+      "role": "result"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35422991016/report.md",
+      "sha256": null,
+      "role": "report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35422991016/compute_output.json",
+      "sha256": "ae1b89a0ed4a039bd517c9c3343baeab217ae1d52e80509eed5e1b9e07b1c19e",
+      "role": "derived"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python": "3.x",
+    "dependencies": "standard library only (json, math, collections)"
+  },
+  "reproduction_commands": [
+    "python3 research/experiments/EXP-INTEL-35422991016/compute_output.json (via script at /tmp/opencode/experiment_compute.py)"
+  ],
+  "methodology": {
+    "description": "Offline computation on existing reconstructed data. No browser/network work. Computed tag entropy, form fraction, total area, and other metrics for each task's truncated-first-20 locatable_sample. Tested eta2 (eta-squared) for each metric on page_type. Evaluated conjunctive decision rules C1-C4.",
+    "metric_definitions": {
+      "tag_entropy": "Shannon entropy of tag distribution in the 20-element locatable_sample (bits)",
+      "form_fraction": "Fraction of elements with inForm=True in the 20-element locatable_sample",
+      "total_area": "Sum of w*h (bounding box area) for all 20 elements",
+      "normalized_entropy": "tag_entropy / log2(unique_tags)",
+      "combined_entropy_area": "Average of normalized tag_entropy and normalized total_area",
+      "eta2": "Eta-squared: ratio of between-group (page_type) sum of squares to total sum of squares"
+    }
+  }
+}

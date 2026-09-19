@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35409929216",
+  "lane": "product",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "break_even_systematic_bias_tokens_per_task": 33.3,
+    "break_even_completion_only_tokens_per_task": 29.8,
+    "bootstrap_survival_rate_pct": 96.1,
+    "bootstrap_survival_count": 961,
+    "bootstrap_total_samples": 1000,
+    "bootstrap_mean_margin_tokens": 110.7,
+    "bootstrap_min_margin_tokens": -76,
+    "bootstrap_max_margin_tokens": 302,
+    "bootstrap_p5_margin": 6,
+    "bootstrap_p25_margin": 67,
+    "bootstrap_p50_margin": 110,
+    "bootstrap_p75_margin": 154,
+    "bootstrap_p95_margin": 211,
+    "bootstrap_negative_margin_count": 38,
+    "selection_prompt_savings_tokens": 112,
+    "completion_savings_tokens": 955,
+    "total_margin_tokens": 1067,
+    "total_margin_pct": 5.42,
+    "cold_param_ratio_at_2475": 0.13,
+    "cold_param_ratio_at_5000": 0.27,
+    "null_control_savings_tokens": 112,
+    "hypothesis_h1_supported": false,
+    "hypothesis_h2_supported": true,
+    "hypothesis_h3_supported": false
+  },
+  "controls": {
+    "B-TOKEN-ESTIMATES": {
+      "description": "Current analytical estimates: completion tokens 2/15/20 for different task types, total workflow costs LITERAL 19691, PARAMETERIZED 18624, COLD 2475",
+      "expected_behavior": "Baseline for sensitivity analysis; not re-measured in this experiment",
+      "observed_behavior": "Carried forward from EXP-PRODUCT-35330741529; used as central estimate for bootstrap sampling",
+      "pass": true
+    },
+    "B-SELECTION-PROMPT-ONLY": {
+      "description": "Token savings from selection prompt alone (112 tokens, 14.16%), measured via tiktoken on actual kernel outputs",
+      "expected_behavior": "Selection prompt savings are measured, not estimated; completion savings are estimated",
+      "observed_behavior": "112 tokens savings confirmed; constant across all completion variation scenarios",
+      "pass": true
+    },
+    "B-COLD-ANALYTICAL": {
+      "description": "COLD baseline at 77.34 tokens/task (prompt-only counting), total 2475 tokens for 32 tasks",
+      "expected_behavior": "COLD cost is an upper bound on true cost if success rate < 100%",
+      "observed_behavior": "COLD/PARAM ratio ranges from 0.13x (at 2475) to 0.27x (at 5000); COLD remains 3.8-7.5x cheaper than PARAMETERIZED",
+      "pass": true
+    },
+    "POSITIVE-CONTROL-SELECTION-CONSTANT": {
+      "description": "Selection prompt savings remain 112 tokens regardless of completion token variation",
+      "expected_behavior": "Selection prompt savings remain 112 tokens regardless of completion variation",
+      "observed_behavior": "112 tokens in all scenarios (zero completion, ±50% variation, systematic bias)",
+      "pass": true
+    },
+    "NULL-CONTROL-ZERO-COMPLETION": {
+      "description": "With zero completion tokens, savings = selection prompt savings only (112 tokens)",
+      "expected_behavior": "With zero completion tokens, savings = 112 tokens",
+      "observed_behavior": "Savings = 112 tokens exactly",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json",
+      "sha256": "be12567ea693e6e37971f4742e5d11b1e139f7575856f4b40edd73bbe2048a70",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+      "sha256": "00ae2dd7b46fcf151ea8725df816aff0034a7162538444aa825dd59d0fc8f070",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/handoff.json",
+      "sha256": "6b131e01718a3093b5b9ebf6f69995c9f22a57ffb835a37d81c9de1d627a66e9",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/sensitivity_analysis.py",
+      "sha256": null,
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "The 1067-token margin decomposes into 112 tokens of fixed selection prompt savings and 955 tokens of completion savings (the difference between literal and parameterized completion costs).",
+    "Systematic completion token bias cannot erase the margin: a uniform delta applied to all tasks shifts both literal and parameterized totals equally, leaving the 1067-token difference unchanged. The break-even of 33.3 tokens/task only applies if the bias is DIFFERENTIAL (parameterized biased higher than literal).",
+    "Under ±50% random completion token variation (CV=0.5, Normal distribution), the margin survives in 961/1000 bootstrap samples (96.1%). The mean margin is 110.7 tokens with 95% CI [6, 211]. Only 3.8% of samples produce negative margins.",
+    "The 5.42% margin is dominated by selection prompt savings (112 tokens, 14.16% of selection cost), not completion savings. The completion savings are large in absolute terms (955 tokens) but represent only 5.05% of completion cost, making them sensitive to estimation error only if the bias is differential.",
+    "COLD baseline at 2475 tokens is 7.5x cheaper than PARAMETERIZED (18624 tokens). Even doubling COLD cost to 5000 tokens leaves it 3.7x cheaper. The COLD advantage is robust to cost estimation.",
+    "Hypothesis H1 (break-even < 2 tokens/task) is FALSIFIED: break-even is 33.3 tokens/task. Hypothesis H2 (margin dominated by selection savings) is SUPPORTED: selection savings (112 tokens) are fixed and robust. Hypothesis H3 (survival < 30%) is FALSIFIED: survival is 96.1%.",
+    "The margin is robust to completion token estimation error under the frozen assumptions. However, the absolute magnitude of the savings (1067 tokens, 5.42%) remains thin and based on analytical estimates, not real LLM execution."
+  ],
+  "validity_notes": [
+    "This is a sensitivity analysis, not a real LLM measurement. It measures robustness to estimation error on carried-forward analytical costs, not actual LLM costs.",
+    "The bootstrap analysis assumes completion token variation is normally distributed with CV=0.5; real variation may be heavier-tailed or skewed.",
+    "The analysis assumes the current task composition (32 tasks, 5/15/12 type distribution) is representative; different task distributions could change the margin.",
+    "COLD success rate is assumed 100% (analytical); real success rate could change COLD economics.",
+    "The break-even analysis reveals a conceptual issue: systematic bias (same for both conditions) cannot erase the margin because the margin is the DIFFERENCE between conditions. The break-even only applies to differential bias.",
+    "Token costs from EXP-PRODUCT-35330741529 are carried forward as-is; not re-measured. The 2/15/20 completion estimates are hard-coded assumptions.",
+    "The prereg decomposition (791 selection + 18900 completion for LITERAL) differs from the raw_evidence decomposition (19627 selection_prompt + 64 selection_completion + 0 resolution). Both yield the same totals (19691, 18624). The analysis uses the prereg decomposition for consistency with the frozen design."
+  ],
+  "unresolved": [
+    "The absolute token savings (1067 tokens, 5.42%) are based on analytical estimates, not real LLM execution. Whether this margin is economically meaningful in real SPIDER workflows requires actual measurement.",
+    "COLD baseline success rate is unmeasured (assumed 100%). If real success rate is lower, COLD cost increases and the COLD-to-PARAM ratio changes.",
+    "Real LLM output token counts may differ substantially from the 2/15/20 estimates, especially for longer tasks. The ±50% variation is a rough approximation.",
+    "The analysis does not measure end-to-end latency, retrieval cost, verification cost, or maintenance amortization - only token counts.",
+    "Whether 5.42% token savings justifies the complexity of parameterized mechanism maintenance is a product decision, not a measurement question."
+  ]
+}

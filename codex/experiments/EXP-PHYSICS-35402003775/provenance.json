@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35402003775",
+  "lane": "physics",
+  "github_run_id": "35402003775",
+  "github_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+  "python_version": "3.12.14",
+  "numpy_version": "2.5.3",
+  "environment": "Linux runner 6f0d1a1a6b01 6.5.0-1025-azure #26~22.04.1-Ubuntu SMP x86_64 GNU/Linux",
+  "timestamp": "2026-09-18T22:40:00Z",
+  "seed": 42,
+  "n_permutations": 1000,
+  "n_sessions": 50,
+  "steps_per_session": 100,
+  "total_transitions": 5000,
+  "datasets": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35402003775/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "role": "raw",
+      "description": "5000 transitions from 12-state SPA simulation, 50 sessions x 100 steps, seed=42"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json",
+      "sha256": "4704544873d799ce01a02b627a06877bd3399c010106a8e4cd32743eaef3708b",
+      "role": "derived",
+      "description": "Complete analysis results including all framework metrics and controls"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35402003775/run_experiment.py",
+      "sha256": "a170973a5002d39c7172657c27e6a6fa4e53d4811b5a1b99c2de9ee75846bb98",
+      "role": "code",
+      "description": "Experiment implementation with three null frameworks"
+    }
+  ],
+  "code_dependencies": [
+    "research/experiments/EXP-PHYSICS-35389142077/run_experiment.py (parent, adapted)",
+    "numpy 2.5.3 (random number generation, array operations)",
+    "Python standard library: hashlib, json, math, random, collections"
+  ],
+  "key_parameters": {
+    "spa_states": 12,
+    "action_primitives": 4,
+    "transition_function": "SHA256(prev1:prev2:current:action) mod 4",
+    "min_stratum_size": 5,
+    "alpha_laplace_bootstrap": 1.0,
+    "bonferroni_comparisons": 3,
+    "bonferroni_alpha": 0.0167
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35389142077",
+    "path": "research/experiments/EXP-PHYSICS-35389142077/result.json",
+    "sha256": null,
+    "key_metrics": {
+      "state_history_pmi_k2": 0.9332435964563096,
+      "within_stratum_null_mean_k2": 0.41745412103641627,
+      "deterministic_strata": 407,
+      "stochastic_strata": 885
+    }
+  },
+  "inherited_state": {
+    "established": [
+      "Within-stratum conditional permutation FAILS to center null at zero: null_mean=0.417 bits",
+      "Bias floor ~0.41 bits is intrinsic to PMI estimator weighting across deterministic/stochastic strata",
+      "State-history K2 PMI=0.933 bits (p=0.001, d=79.7) at N=5000 on 12-state SPA",
+      "Positive control validates PMI pipeline: 8-state SPA K3 PMI=1.671 bits"
+    ],
+    "rejected": [
+      "Within-stratum conditional permutation as null centering method",
+      "Trajectory-level block permutation as null control",
+      "Action-shuffle as null control"
+    ],
+    "unknown": [
+      "Whether model-based parametric bootstrap centers null at zero",
+      "Whether Miller-Madow unbiased PMI estimator reduces bias below 0.41 bits",
+      "Whether conditional entropy eliminates deterministic/stochastic mixing bias"
+    ],
+    "do_not_assume": [
+      "C-WEB-DYNAMICS is globally false",
+      "Null bias is evidence against beyond-Markov signal",
+      "The bias floor of ~0.41 bits is irreducible"
+    ]
+  }
+}

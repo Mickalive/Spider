@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35401995092",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression survive Transfer-Encoding: chunked on the upstream origin->proxy leg (origin actually sending chunked without Content-Length, proxy reassembling) — fixing the origin use_chunked=False gap and double-header artifact before real CDN deployment?",
+  "why_next": "This experiment validated chunked TE on the proxy->client downstream leg only. The frozen spec required origin to serve chunked (no Content-Length) but the origin was started with use_chunked=False for all 27 cells. The upstream origin->proxy chunked reassembly path is the direct prerequisite before real CDN investment. The audit's required fixes (V1 origin chunked, V2 double-header) are implementation corrections that unblock the next measurement, not scientific reversals.",
+  "carry_forward": {
+    "established": [
+      "Auth-aware caching (URL+Accept-Encoding+Authorization cache key, Cache-Control: private, Vary: Authorization) with chunked TE on proxy->client leg preserves decompressed body-only discrimination at 0.5 across 27 cells (3 content types x 3 sizes x 3 configs), matching Content-Length baseline (EXP-RUNTIME-35401995092 audit PASS, recomputed min=0.5)",
+      "Transfer-Encoding: chunked is transparent to iterative decompression (brotli->gzip->identity, max_depth=5) on the proxy->client leg: 0 decompression errors across 540 requests, determinism across transport framing holds (72/72 conditions, 0 mismatches)",
+      "Content-Length PASSTHROUGH regression control reproduces parent EXP-RUNTIME-35389142338 baseline at 0.5 for all 9 CL cells — proxy infrastructure unchanged",
+      "NAIVE caching (URL+Accept-Encoding only cache key) yields discrimination 0.0 — inherited from parent, not re-measured with chunked framing",
+      "Decompression latency scales with payload size (1KB mean ~0.01ms, 10KB mean ~0.02ms, 100KB mean ~0.10-0.19ms), proxy overhead ~1.6-4.2ms independent of chunked vs CL framing"
+    ],
+    "rejected": [
+      "Hypothesis that chunked TE breaks iterative decompression on proxy->client leg — falsified by 0 errors, 0.5 discrimination across all 27 cells"
+    ],
+    "unknown": [
+      "Does iterative decompression survive Transfer-Encoding: chunked on the upstream origin->proxy leg (origin actually sending chunked without Content-Length, proxy reassembling)? — untested due to origin use_chunked=False default",
+      "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration and chunked TE, including Accept-Encoding negotiation, quality variation, and geographic latency?",
+      "Does the double-header artifact (Content-Length + chunked on cache HIT, run_experiment.py:406/410) mask real CDN behavior where Content-Length must be stripped?",
+      "Does iterative decompression survive double/triple-brotli multi-layer encoding through a chunked proxy (max_depth=5 limit)?",
+      "What is production-scale latency/CPU at N>1000 with MB-scale natural content and concurrent clients through real or realistic chunked proxy?",
+      "Does PARENT_REF_HASHES frozen constant match live recomputed decompressed hashes byte-for-byte for all 9 content conditions?"
+    ],
+    "do_not_assume": [
+      "Do not assume upstream origin->proxy chunked reassembly works — origin always served Content-Length in this experiment (audit V1, use_chunked=False)",
+      "Do not assume the double-header (Content-Length + chunked) on cache HIT is harmless at scale — it violates HTTP/1.1 and may not match real CDN behavior",
+      "Do not assume 0.5 discrimination is a production ceiling — it is a deterministic consequence of the 3-way error collapse mock design (no_auth/expired/invalid share identical bodies, brotli quality 6 deterministic)",
+      "Do not assume chunked TE has been tested end-to-end (origin->proxy->client) — only proxy->client was tested",
+      "Do not generalize from localhost Python reverse proxy to real CDN infrastructure — Accept-Encoding negotiation, edge-specific header manipulation, and geographic latency remain untested",
+      "Do not assume C-MEAS-VALID is VALIDATED — the claim ceiling is bounded to proxy->client chunked downstream on localhost mock infrastructure"
+    ]
+  },
+  "dependencies": [
+    "Fix origin server use_chunked=True for CHUNKED-PASSTHROUGH and CHUNKED-CACHED cells (audit V1 required_fix #1)",
+    "Fix double-header: remove Content-Length from cache HIT path for chunked configs (audit V2 required_fix #2)",
+    "Resolve PARENT_REF_HASHES dead code or assert byte-for-byte equality to frozen artifact (audit V3 required_fix #3)",
+    "Revise claim ceiling wording to qualify 'proxy->client chunked downstream' until upstream chunked is implemented (audit V4 required_fix #4)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35401995092/audit.json (V1_ORIGIN_NOT_CHUNKED, V2_DOUBLE_HEADER, V3_SYNTHETIC_DETERMINISM, claim_ceiling)",
+    "research/experiments/EXP-RUNTIME-35401995092/result.json (metrics.per_cell, controls, observations)",
+    "research/experiments/EXP-RUNTIME-35401995092/run_experiment.py:335 (start_mock_server use_chunked=False default), :406/:410 (cache HIT double-header)",
+    "research/experiments/EXP-RUNTIME-35389142338/handoff.json (parent carry_forward, chunked TE listed as unknown)"
+  ],
+  "recommended_action": "Fix origin chunked configuration and double-header artifact, then re-run the same frozen design with use_chunked=True for CHUNKED conditions. This is a minimal-cost fix (same mock server, same proxy, only TE framing on upstream leg changed). The downstream results (0 errors, 0.5 discrimination) should be preserved — the fix tests whether upstream chunked reassembly introduces any degradation. If upstream chunked passes, the full chunked TE story is closed on localhost, and the remaining blocker shifts to real CDN infrastructure only."
+}
