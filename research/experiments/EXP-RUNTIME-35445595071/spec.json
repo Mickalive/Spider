@@ -1,17 +1,39 @@
 {
   "experiment_id": "EXP-RUNTIME-35445595071",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression (brotli->gzip->identity, max_depth=5) survive multi-chunk brotli reassembly where compressed payloads span multiple HTTP chunks, preserving decompressed body-only discrimination at 0.5 and hash determinism?",
+  "hypothesis": "Iterative decompression will correctly reassemble and decompress brotli payloads that span multiple HTTP chunks, because (1) HTTP chunked transfer-encoding is a framing layer above the application data, (2) the HTTP client reassembles chunks into a contiguous byte stream before the decompression layer sees it, and (3) brotli decompression operates on the reassembled contiguous stream. Therefore, reducing chunk_size from 1024 to 32 bytes — forcing all compressed payloads (70-176 bytes) to span 3-6 chunks — will not corrupt decompression or degrade discrimination.",
+  "falsifier": "Iterative decompression fails under multi-chunk reassembly if ANY of: (1) decompression errors > 0 on any multi-chunk response; (2) decompressed hash determinism fails (all_same != true for any state×condition cell); (3) decompressed body-only discrimination drops below 0.3 for any cell. Any of these triggers FALSIFIED-IN-SETTING, indicating chunked framing corrupts brotli multi-byte symbols when chunk boundaries split the compressed byte stream — a fundamental blocker for real CDN deployment.",
+  "baselines": [
+    {
+      "id": "B-SINGLE-CHUNK",
+      "description": "chunk_size=1024 (parent baseline: all compressed payloads fit in one chunk, discrimination 0.5, 0 errors, determinism all_same=true)",
+      "expected": "discrimination 0.5, 0 errors, determinism all_same=true"
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "Random SHA-256 fingerprint of status+body on multi-chunk responses (null model: should show 0 discrimination)",
+      "expected": "discrimination 0.0"
+    }
+  ],
+  "positive_control": "Four auth states (no_auth/valid_token/expired_token/invalid_token) with 3-way error collapse (no_auth/expired/invalid share identical error bodies). Structural discrimination ceiling 0.5. Positive control passes if decompressed discrimination >= 0.5 on multi-chunk responses — confirming the mechanism is not destroyed by chunk splitting.",
+  "null_control": "B-RANDOM: random SHA-256 fingerprint on the same multi-chunk response set. Null passes if discrimination = 0.0, confirming the measured discrimination is not a statistical artifact of chunking.",
+  "measurement_validity": [
+    "Mock OAuth2 Flask server serves brotli-compressed responses (quality 4-8 cycling) with Transfer-Encoding: chunked and chunk_size=32 bytes, forcing all compressed payloads (70-176 bytes) to span 3-6 chunks",
+    "Origin serves chunked without Content-Length (use_chunked=True) for all cells, eliminating V1 CL-PASSTHROUGH contamination from parent",
+    "Auth-aware caching (URL+Accept-Encoding+Authorization cache key) with Cache-Control: private, Vary: Authorization",
+    "Client sends no Accept-Encoding header (stdlib urllib); proxy handles encoding",
+    "Iterative decompression: brotli.decompress with gzip fallback, max_depth=5",
+    "Deterministic SHA-256 fingerprint: SHA256(repr((status, tuple(sorted(filtered_headers.items())), body_sha256, redirect_chain)))",
+    "Headers filtered: Date, Server, X-Request-Id excluded from fingerprint",
+    "N=20 per state per condition, seed=44, jitter=50-150ms uniform server-side",
+    "Three content types: JSON, HTML, XML at 1KB nominal size",
+    "All compressed body_sizes verified to exceed chunk_size (forced by incompressible padding if needed)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for ALL multi-chunk cells (expected: 0.5); (2) decompressed hash determinism all_same=true for ALL states across ALL conditions; (3) B-RANDOM = 0.0 for ALL cells; (4) 0 decompression errors across ALL requests; (5) multi-chunk discrimination >= 0.3 for ALL cells (expected: 0.5). FALSIFIED-IN-SETTING if ANY of conditions (1)-(4) fails. MEASUREMENT_INVALID if infrastructure prevents valid multi-chunk generation (e.g., all payloads still fit in one chunk despite chunk_size=32).",
+  "product_consequence_positive": "Multi-chunk brotli reassembly works: chunked transfer-encoding does not corrupt brotli multi-byte symbols when chunk boundaries split the compressed byte stream. This removes the V2 single-chunk degeneracy blocker, advancing C-MEAS-VALID toward real CDN readiness. Product team may proceed with CDN deployment testing knowing the decompression pipeline handles arbitrary chunk boundaries.",
+  "product_consequence_negative": "Multi-chunk brotli reassembly fails: chunked framing corrupts brotli compressed data when boundaries split multi-byte symbols. This is a fundamental blocker for real CDN deployment because production CDNs apply arbitrary chunking. Product team must implement chunk-boundary-aware decompression or avoid chunked TE for compressed responses. C-MEAS-VALID product readiness is blocked pending a fix.",
+  "estimated_cost": "~540 requests (4 auth states × 3 content types × 3 chunk configurations × 15 reps), localhost mock server, <5 min execution, negligible compute",
+  "expected_information_gain": "High: directly resolves the V2 single-chunk degeneracy unknown, which is explicitly listed as 'do_not_assume' in the parent handoff. If positive, removes one of three blockers for C-MEAS-VALID product readiness. If negative, identifies a fundamental architectural limitation. Either outcome changes the product decision."
 }
