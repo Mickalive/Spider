@@ -1,0 +1,496 @@
+{
+  "tasks_used": [
+    {
+      "task_id": "listing_clothing-shoes-jewelry",
+      "page_type": "product_listing",
+      "elements_with_bbox": 1550,
+      "locatable_count": 20,
+      "tag_entropy": 2.6464393446710153,
+      "form_fraction": 0.85,
+      "total_area": 341795.171875
+    },
+    {
+      "task_id": "listing_beauty-personal-care",
+      "page_type": "product_listing",
+      "elements_with_bbox": 1560,
+      "locatable_count": 20,
+      "tag_entropy": 2.6464393446710153,
+      "form_fraction": 0.85,
+      "total_area": 341795.171875
+    },
+    {
+      "task_id": "listing_electronics",
+      "page_type": "product_listing",
+      "elements_with_bbox": 1564,
+      "locatable_count": 20,
+      "tag_entropy": 2.6464393446710153,
+      "form_fraction": 0.85,
+      "total_area": 341795.171875
+    },
+    {
+      "task_id": "detail_camera",
+      "page_type": "detail",
+      "elements_with_bbox": 1215,
+      "locatable_count": 20,
+      "tag_entropy": 2.484183719779189,
+      "form_fraction": 0.95,
+      "total_area": 589190.03125
+    },
+    {
+      "task_id": "detail_vr_bag",
+      "page_type": "detail",
+      "elements_with_bbox": 1149,
+      "locatable_count": 20,
+      "tag_entropy": 2.484183719779189,
+      "form_fraction": 0.95,
+      "total_area": 589190.03125
+    },
+    {
+      "task_id": "detail_pet_camera",
+      "page_type": "detail",
+      "elements_with_bbox": 1143,
+      "locatable_count": 20,
+      "tag_entropy": 2.484183719779189,
+      "form_fraction": 0.95,
+      "total_area": 589190.03125
+    },
+    {
+      "task_id": "cart_1",
+      "page_type": "cart",
+      "elements_with_bbox": 1070,
+      "locatable_count": 20,
+      "tag_entropy": 2.6016094970590276,
+      "form_fraction": 0.95,
+      "total_area": 428790.3125
+    }
+  ],
+  "pc1_direct_eta2": {
+    "tag_entropy": {
+      "eta2": 1.0,
+      "group_means": {
+        "product_listing": 2.6464393446710153,
+        "detail": 2.484183719779189,
+        "cart": 2.6016094970590276
+      },
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      }
+    },
+    "form_fraction": {
+      "eta2": 0.9999999999999982,
+      "group_means": {
+        "product_listing": 0.85,
+        "detail": 0.9499999999999998,
+        "cart": 0.95
+      },
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 1.3597399555105182e-16,
+        "cart": 0.0
+      }
+    },
+    "total_area": {
+      "eta2": 1.0,
+      "group_means": {
+        "product_listing": 341795.171875,
+        "detail": 589190.03125,
+        "cart": 428790.3125
+      },
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      }
+    }
+  },
+  "nc1_hierarchy": {
+    "densities": {
+      "listing_clothing-shoes-jewelry": 3.693777130463341e-07,
+      "listing_beauty-personal-care": 3.693777130463341e-07,
+      "listing_electronics": 3.693777130463341e-07,
+      "detail_camera": 3.693777130463341e-07,
+      "detail_vr_bag": 3.693777130463341e-07,
+      "detail_pet_camera": 3.693777130463341e-07,
+      "cart_1": 3.693777130463341e-07
+    },
+    "stats": {
+      "eta2": 0.0,
+      "group_means": {
+        "product_listing": 3.693777130463341e-07,
+        "detail": 3.693777130463341e-07,
+        "cart": 3.693777130463341e-07
+      },
+      "grand_mean": 3.693777130463341e-07,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "ss_between": 0.0,
+      "ss_within": 0.0
+    }
+  },
+  "subsample_results": {
+    "5": {
+      "pipeline_eta2": {
+        "tag_entropy x DEF-FULL-MAP": 0.9833490029994433,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": 0.0,
+        "form_fraction x DEF-FORM-ONLY": 0.0,
+        "total_area x DEF-FULL-MAP": 0.9833490029994437,
+        "total_area x DEF-FORM-ONLY": 0.0
+      },
+      "non_recipe_ranking_agreement": {
+        "tag_entropy x DEF-FULL-MAP": false,
+        "tag_entropy x DEF-FORM-ONLY": false
+      },
+      "recipe_canonical_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.4851843980799253,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": 0.0,
+        "form_fraction x DEF-FORM-ONLY": 0.0,
+        "total_area x DEF-FULL-MAP": 0.4851843980799255,
+        "total_area x DEF-FORM-ONLY": 0.0
+      },
+      "recipe_canonical_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.014842454411397353,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": 0.0,
+        "form_fraction x DEF-FORM-ONLY": 0.0,
+        "total_area x DEF-FULL-MAP": 0.014842454411397352,
+        "total_area x DEF-FORM-ONLY": 0.0
+      },
+      "recipe_canonical_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.0,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_canonical_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.0,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.3843179457109597,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": 0.0,
+        "form_fraction x DEF-FORM-ONLY": 0.0,
+        "total_area x DEF-FULL-MAP": 0.3843179457109596,
+        "total_area x DEF-FORM-ONLY": 0.0
+      },
+      "recipe_pertask_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.009391142298307084,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": 0.0,
+        "form_fraction x DEF-FORM-ONLY": 0.0,
+        "total_area x DEF-FULL-MAP": 0.009391142298307089,
+        "total_area x DEF-FORM-ONLY": 0.0
+      },
+      "recipe_pertask_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.3411,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.01143532538525539,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      }
+    },
+    "10": {
+      "pipeline_eta2": {
+        "tag_entropy x DEF-FULL-MAP": 0.9833490029994433,
+        "tag_entropy x DEF-FORM-ONLY": 0.9833490029994435,
+        "form_fraction x DEF-FULL-MAP": 0.9833490029994433,
+        "form_fraction x DEF-FORM-ONLY": 0.9833490029994433,
+        "total_area x DEF-FULL-MAP": 0.9833490029994434,
+        "total_area x DEF-FORM-ONLY": 0.9833490029994437
+      },
+      "non_recipe_ranking_agreement": {
+        "tag_entropy x DEF-FULL-MAP": false,
+        "tag_entropy x DEF-FORM-ONLY": false
+      },
+      "recipe_canonical_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.7361350636453833,
+        "tag_entropy x DEF-FORM-ONLY": 0.498361274720118,
+        "form_fraction x DEF-FULL-MAP": 0.7361350636453833,
+        "form_fraction x DEF-FORM-ONLY": 0.4983612747201179,
+        "total_area x DEF-FULL-MAP": 0.7361350636453834,
+        "total_area x DEF-FORM-ONLY": 0.4983612747201181
+      },
+      "recipe_canonical_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.008699536222258424,
+        "tag_entropy x DEF-FORM-ONLY": 0.013718413693498561,
+        "form_fraction x DEF-FULL-MAP": 0.008699536222258436,
+        "form_fraction x DEF-FORM-ONLY": 0.013718413693498561,
+        "total_area x DEF-FULL-MAP": 0.008699536222258454,
+        "total_area x DEF-FORM-ONLY": 0.013718413693498552
+      },
+      "recipe_canonical_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.0,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_canonical_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.0,
+        "tag_entropy x DEF-FORM-ONLY": 0.0,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.3910895094945909,
+        "tag_entropy x DEF-FORM-ONLY": 0.3887402088211986,
+        "form_fraction x DEF-FULL-MAP": 0.3961395672536439,
+        "form_fraction x DEF-FORM-ONLY": 0.3887402088211986,
+        "total_area x DEF-FULL-MAP": 0.39487720066692134,
+        "total_area x DEF-FORM-ONLY": 0.3887402088211986
+      },
+      "recipe_pertask_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.009841816132352292,
+        "tag_entropy x DEF-FORM-ONLY": 0.0040895629685125945,
+        "form_fraction x DEF-FULL-MAP": 0.010536172485439034,
+        "form_fraction x DEF-FORM-ONLY": 0.0040895629685126006,
+        "total_area x DEF-FULL-MAP": 0.010468019845888792,
+        "total_area x DEF-FORM-ONLY": 0.0040895629685125945
+      },
+      "recipe_pertask_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.33390000000000003,
+        "tag_entropy x DEF-FORM-ONLY": 0.3352,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.009723396754449774,
+        "tag_entropy x DEF-FORM-ONLY": 0.018546038810364745,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      }
+    },
+    "15": {
+      "pipeline_eta2": {
+        "tag_entropy x DEF-FULL-MAP": 0.7617753020623419,
+        "tag_entropy x DEF-FORM-ONLY": 0.9938886849881716,
+        "form_fraction x DEF-FULL-MAP": 0.7593616038398214,
+        "form_fraction x DEF-FORM-ONLY": 0.9125805575371598,
+        "total_area x DEF-FULL-MAP": 0.9452258449975751,
+        "total_area x DEF-FORM-ONLY": 0.7463609207743702
+      },
+      "non_recipe_ranking_agreement": {
+        "tag_entropy x DEF-FULL-MAP": true,
+        "tag_entropy x DEF-FORM-ONLY": true
+      },
+      "recipe_canonical_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.8284874749262696,
+        "tag_entropy x DEF-FORM-ONLY": 0.742576038815049,
+        "form_fraction x DEF-FULL-MAP": 0.8176563202334572,
+        "form_fraction x DEF-FORM-ONLY": 0.7209312143225638,
+        "total_area x DEF-FULL-MAP": 0.810149497699759,
+        "total_area x DEF-FORM-ONLY": 0.6800132644667587
+      },
+      "recipe_canonical_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.0073161952563121765,
+        "tag_entropy x DEF-FORM-ONLY": 0.008735999579604893,
+        "form_fraction x DEF-FULL-MAP": 0.006953613799822882,
+        "form_fraction x DEF-FORM-ONLY": 0.008715474687339173,
+        "total_area x DEF-FULL-MAP": 0.006871844626084564,
+        "total_area x DEF-FORM-ONLY": 0.009081604827490382
+      },
+      "recipe_canonical_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.4998,
+        "tag_entropy x DEF-FORM-ONLY": 0.4934,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_canonical_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.015908069231263332,
+        "tag_entropy x DEF-FORM-ONLY": 0.015093780912091652,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.35361159902236505,
+        "tag_entropy x DEF-FORM-ONLY": 0.3316758426703231,
+        "form_fraction x DEF-FULL-MAP": 0.34192167089768505,
+        "form_fraction x DEF-FORM-ONLY": 0.3311185446877869,
+        "total_area x DEF-FULL-MAP": 0.3723470252668836,
+        "total_area x DEF-FORM-ONLY": 0.3632655985478833
+      },
+      "recipe_pertask_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.007950219536588305,
+        "tag_entropy x DEF-FORM-ONLY": 0.008104702396409598,
+        "form_fraction x DEF-FULL-MAP": 0.009280010715648235,
+        "form_fraction x DEF-FORM-ONLY": 0.009531381712176755,
+        "total_area x DEF-FULL-MAP": 0.010278155028683787,
+        "total_area x DEF-FORM-ONLY": 0.00645466079439936
+      },
+      "recipe_pertask_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.5333,
+        "tag_entropy x DEF-FORM-ONLY": 0.7046,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.013140691678057821,
+        "tag_entropy x DEF-FORM-ONLY": 0.01646005265281167,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      }
+    },
+    "20": {
+      "pipeline_eta2": {
+        "tag_entropy x DEF-FULL-MAP": 0.995783366611769,
+        "tag_entropy x DEF-FORM-ONLY": 0.9996449276089042,
+        "form_fraction x DEF-FULL-MAP": 0.9839692311312597,
+        "form_fraction x DEF-FORM-ONLY": 0.9953605298138091,
+        "total_area x DEF-FULL-MAP": 0.9637074384170368,
+        "total_area x DEF-FORM-ONLY": 0.9975895555182401
+      },
+      "non_recipe_ranking_agreement": {
+        "tag_entropy x DEF-FULL-MAP": true,
+        "tag_entropy x DEF-FORM-ONLY": true
+      },
+      "recipe_canonical_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.9204647419270405,
+        "tag_entropy x DEF-FORM-ONLY": 0.7473391759579349,
+        "form_fraction x DEF-FULL-MAP": 0.9314375533639491,
+        "form_fraction x DEF-FORM-ONLY": 0.7429549973546038,
+        "total_area x DEF-FULL-MAP": 0.9270762267169352,
+        "total_area x DEF-FORM-ONLY": 0.7437132258224103
+      },
+      "recipe_canonical_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.007720200944441863,
+        "tag_entropy x DEF-FORM-ONLY": 0.008817679963778398,
+        "form_fraction x DEF-FULL-MAP": 0.007023556845706407,
+        "form_fraction x DEF-FORM-ONLY": 0.008737381134716253,
+        "total_area x DEF-FULL-MAP": 0.006934848182112972,
+        "total_area x DEF-FORM-ONLY": 0.008740973312232673
+      },
+      "recipe_canonical_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.5595,
+        "tag_entropy x DEF-FORM-ONLY": 0.4934,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_canonical_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.014841757907262087,
+        "tag_entropy x DEF-FORM-ONLY": 0.015093780912091652,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_eta2_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.3663938440924516,
+        "tag_entropy x DEF-FORM-ONLY": 0.4177064341037099,
+        "form_fraction x DEF-FULL-MAP": 0.397295989674013,
+        "form_fraction x DEF-FORM-ONLY": 0.40601444587151825,
+        "total_area x DEF-FULL-MAP": 0.3620948045042453,
+        "total_area x DEF-FORM-ONLY": 0.3725305243912529
+      },
+      "recipe_pertask_eta2_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.006117198007188693,
+        "tag_entropy x DEF-FORM-ONLY": 0.007469870384755871,
+        "form_fraction x DEF-FULL-MAP": 0.00793953940901744,
+        "form_fraction x DEF-FORM-ONLY": 0.008682403970899293,
+        "total_area x DEF-FULL-MAP": 0.007064732948153028,
+        "total_area x DEF-FORM-ONLY": 0.00817646737081175
+      },
+      "recipe_pertask_ranking_agreement_mean": {
+        "tag_entropy x DEF-FULL-MAP": 0.7865,
+        "tag_entropy x DEF-FORM-ONLY": 0.8814,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      },
+      "recipe_pertask_ranking_agreement_std": {
+        "tag_entropy x DEF-FULL-MAP": 0.009969397619158795,
+        "tag_entropy x DEF-FORM-ONLY": 0.007183313998427194,
+        "form_fraction x DEF-FULL-MAP": null,
+        "form_fraction x DEF-FORM-ONLY": null,
+        "total_area x DEF-FULL-MAP": null,
+        "total_area x DEF-FORM-ONLY": null
+      }
+    }
+  },
+  "bootstrap_results": {
+    "5": {
+      "mean": 0,
+      "std": 0.0,
+      "n_true": 0,
+      "n_total": 1000
+    },
+    "10": {
+      "mean": 0,
+      "std": 0.0,
+      "n_true": 0,
+      "n_total": 1000
+    },
+    "15": {
+      "mean": 0.502,
+      "std": 0.5002461856388775,
+      "n_true": 502,
+      "n_total": 1000
+    },
+    "20": {
+      "mean": 0.571,
+      "std": 0.4951809812626129,
+      "n_true": 571,
+      "n_total": 1000
+    }
+  },
+  "c5_spearman_correlation": 1.0,
+  "c5_ranking_agreement_values": {
+    "5": 0.0,
+    "10": 0.0,
+    "15": 0.4998,
+    "20": 0.5595
+  },
+  "c5_improvement": 0.5595,
+  "c5_pass": true,
+  "c6_agreement_at_n20": 0.5595,
+  "c6_pass": false,
+  "decision_rules": {
+    "C1": true,
+    "C2": true,
+    "C3": true,
+    "C4": true,
+    "C5": true,
+    "C6": false,
+    "verdict": "MIXED",
+    "reason": "C6 FAIL: ranking agreement at n=20 is 0.5595, below 80% threshold."
+  }
+}
