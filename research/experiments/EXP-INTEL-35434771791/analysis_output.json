@@ -1,0 +1,347 @@
+{
+  "tasks_used": [
+    {
+      "task_id": "listing_clothing-shoes-jewelry",
+      "page_type": "product_listing",
+      "elements_with_bbox": 1550,
+      "locatable_count": 20,
+      "tag_entropy": 2.6464393446710153,
+      "form_fraction": 0.85,
+      "total_area": 341795.171875
+    },
+    {
+      "task_id": "listing_beauty-personal-care",
+      "page_type": "product_listing",
+      "elements_with_bbox": 1560,
+      "locatable_count": 20,
+      "tag_entropy": 2.6464393446710153,
+      "form_fraction": 0.85,
+      "total_area": 341795.171875
+    },
+    {
+      "task_id": "listing_electronics",
+      "page_type": "product_listing",
+      "elements_with_bbox": 1564,
+      "locatable_count": 20,
+      "tag_entropy": 2.6464393446710153,
+      "form_fraction": 0.85,
+      "total_area": 341795.171875
+    },
+    {
+      "task_id": "detail_camera",
+      "page_type": "detail",
+      "elements_with_bbox": 1215,
+      "locatable_count": 20,
+      "tag_entropy": 2.484183719779189,
+      "form_fraction": 0.95,
+      "total_area": 589190.03125
+    },
+    {
+      "task_id": "detail_vr_bag",
+      "page_type": "detail",
+      "elements_with_bbox": 1149,
+      "locatable_count": 20,
+      "tag_entropy": 2.484183719779189,
+      "form_fraction": 0.95,
+      "total_area": 589190.03125
+    },
+    {
+      "task_id": "detail_pet_camera",
+      "page_type": "detail",
+      "elements_with_bbox": 1143,
+      "locatable_count": 20,
+      "tag_entropy": 2.484183719779189,
+      "form_fraction": 0.95,
+      "total_area": 589190.03125
+    },
+    {
+      "task_id": "cart_1",
+      "page_type": "cart",
+      "elements_with_bbox": 1070,
+      "locatable_count": 20,
+      "tag_entropy": 2.6016094970590276,
+      "form_fraction": 0.95,
+      "total_area": 428790.3125
+    }
+  ],
+  "pc1_direct_eta2": {
+    "tag_entropy": {
+      "eta2": 1.0,
+      "group_means": {
+        "product_listing": 2.6464393446710153,
+        "detail": 2.484183719779189,
+        "cart": 2.6016094970590276
+      },
+      "grand_mean": 2.5704969557728057,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "ss_between": 0.040619653643056905,
+      "ss_within": 0.0
+    },
+    "form_fraction": {
+      "eta2": 0.9999999999999982,
+      "group_means": {
+        "product_listing": 0.85,
+        "detail": 0.9499999999999998,
+        "cart": 0.95
+      },
+      "grand_mean": 0.9071428571428571,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 1.3597399555105182e-16,
+        "cart": 0.0
+      },
+      "ss_between": 0.017142857142857106,
+      "ss_within": 3.697785493223493e-32
+    },
+    "total_area": {
+      "eta2": 1.0,
+      "group_means": {
+        "product_listing": 341795.171875,
+        "detail": 589190.03125,
+        "cart": 428790.3125
+      },
+      "grand_mean": 460249.41741071426,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "ss_between": 92960945829.84459,
+      "ss_within": 0.0
+    }
+  },
+  "nc1_hierarchy": {
+    "densities": {
+      "listing_clothing-shoes-jewelry": 3.693777130463341e-07,
+      "listing_beauty-personal-care": 3.693777130463341e-07,
+      "listing_electronics": 3.693777130463341e-07,
+      "detail_camera": 3.693777130463341e-07,
+      "detail_vr_bag": 3.693777130463341e-07,
+      "detail_pet_camera": 3.693777130463341e-07,
+      "cart_1": 3.693777130463341e-07
+    },
+    "stats": {
+      "eta2": 0.0,
+      "group_means": {
+        "product_listing": 3.693777130463341e-07,
+        "detail": 3.693777130463341e-07,
+        "cart": 3.693777130463341e-07
+      },
+      "grand_mean": 3.693777130463341e-07,
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "ss_between": 0.0,
+      "ss_within": 0.0
+    }
+  },
+  "pipeline_eta2_9": {
+    "tag_entropy x DEF-FULL-MAP": {
+      "eta2": 0.995783366611769,
+      "group_means": {
+        "product_listing": 0.0021215152038335204,
+        "detail": 0.0013225395223042651,
+        "cart": 0.001862763417693848
+      },
+      "within_stds": {
+        "product_listing": 9.836839175916497e-06,
+        "detail": 4.434562254537547e-05,
+        "cart": 0.0
+      },
+      "grand_mean": 0.0017421325137296007
+    },
+    "tag_entropy x DEF-FORM-ONLY": {
+      "eta2": 0.9996449276089042,
+      "group_means": {
+        "product_listing": 0.0015253762268340213,
+        "detail": 0.0004693827066048325,
+        "cart": 0.000931381708846924
+      },
+      "within_stds": {
+        "product_listing": 7.072718875178995e-06,
+        "detail": 1.5738711762774737e-05,
+        "cart": 0.0
+      },
+      "grand_mean": 0.0009879512155947837
+    },
+    "tag_entropy x ISOLATED-A-LINK": {
+      "eta2": 0.0,
+      "group_means": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "grand_mean": 0.0
+    },
+    "form_fraction x DEF-FULL-MAP": {
+      "eta2": 0.9839692311312597,
+      "group_means": {
+        "product_listing": 0.0032092885343442228,
+        "detail": 0.0034243439004092834,
+        "cart": 0.004672897196261682
+      },
+      "within_stds": {
+        "product_listing": 1.4880522715280123e-05,
+        "detail": 0.0001148205097179494,
+        "cart": 0.0
+      },
+      "grand_mean": 0.003510542071503171
+    },
+    "form_fraction x DEF-FORM-ONLY": {
+      "eta2": 0.9953605298138091,
+      "group_means": {
+        "product_listing": 0.0025674308274753785,
+        "detail": 0.0017121719502046417,
+        "cart": 0.002803738317757009
+      },
+      "within_stds": {
+        "product_listing": 1.1904418172223979e-05,
+        "detail": 5.74102548589747e-05,
+        "cart": 0.0
+      },
+      "grand_mean": 0.0022346495215424386
+    },
+    "form_fraction x ISOLATED-A-LINK": {
+      "eta2": 0.0,
+      "group_means": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "grand_mean": 0.0
+    },
+    "total_area x DEF-FULL-MAP": {
+      "eta2": 0.9637074384170368,
+      "group_means": {
+        "product_listing": 10.923736197094186,
+        "detail": 11.701371021655989,
+        "cart": 14.251737733644859
+      },
+      "within_stds": {
+        "product_listing": 0.050650137211736904,
+        "detail": 0.3923546887170994,
+        "cart": 0.0
+      },
+      "grand_mean": 11.732437055699341
+    },
+    "total_area x DEF-FORM-ONLY": {
+      "eta2": 0.9975895555182401,
+      "group_means": {
+        "product_listing": 7.922710430575564,
+        "detail": 4.3728202791058495,
+        "cart": 6.251241238317757
+      },
+      "within_stds": {
+        "product_listing": 0.03673526741741115,
+        "detail": 0.146623548321741,
+        "cart": 0.0
+      },
+      "grand_mean": 6.162547623908857
+    },
+    "total_area x ISOLATED-A-LINK": {
+      "eta2": 0.0,
+      "group_means": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "within_stds": {
+        "product_listing": 0.0,
+        "detail": 0.0,
+        "cart": 0.0
+      },
+      "grand_mean": 0.0
+    }
+  },
+  "recipe_results": {
+    "tag_entropy x DEF-FULL-MAP": {
+      "mean": 0.9216352212267825,
+      "std": 0.00817427529712238
+    },
+    "tag_entropy x DEF-FORM-ONLY": {
+      "mean": 0.74495110127443,
+      "std": 0.007311615539336645
+    },
+    "tag_entropy x ISOLATED-A-LINK": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "form_fraction x DEF-FULL-MAP": {
+      "mean": 0.933079480829272,
+      "std": 0.007710907006879605
+    },
+    "form_fraction x DEF-FORM-ONLY": {
+      "mean": 0.7405920048982635,
+      "std": 0.007295414364134793
+    },
+    "form_fraction x ISOLATED-A-LINK": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "total_area x DEF-FULL-MAP": {
+      "mean": 0.9287142528014514,
+      "std": 0.007743835393941002
+    },
+    "total_area x DEF-FORM-ONLY": {
+      "mean": 0.7413540914896314,
+      "std": 0.00729776046579509
+    },
+    "total_area x ISOLATED-A-LINK": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "direct_rankings": {
+    "tag_entropy": [
+      "product_listing",
+      "cart",
+      "detail"
+    ],
+    "form_fraction": [
+      "cart",
+      "detail",
+      "product_listing"
+    ],
+    "total_area": [
+      "detail",
+      "cart",
+      "product_listing"
+    ]
+  },
+  "ranking_agreement": {
+    "tag_entropy x DEF-FULL-MAP": true,
+    "tag_entropy x DEF-FORM-ONLY": true,
+    "tag_entropy x ISOLATED-A-LINK": true,
+    "form_fraction x DEF-FULL-MAP": true,
+    "form_fraction x DEF-FORM-ONLY": false,
+    "form_fraction x ISOLATED-A-LINK": false,
+    "total_area x DEF-FULL-MAP": true,
+    "total_area x DEF-FORM-ONLY": false,
+    "total_area x ISOLATED-A-LINK": false
+  },
+  "decision_rules": {
+    "C1": true,
+    "C2": true,
+    "C3": true,
+    "C4": true,
+    "C5": true,
+    "verdict": "SURVIVES",
+    "reason": "All C1-C5 pass. Max pipeline eta2=0.999645"
+  }
+}
