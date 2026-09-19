@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **164**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **165**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -174,6 +174,7 @@ Validated experiments: **164**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35434772331 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID — C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain. | C-PRODUCT-ECON, C-FRESHNESS | `f42f866a7b43` |
 | EXP-RUNTIME-35434773328 | runtime | REVISE | SURVIVES_CURRENT_TEST — All 7 frozen decision-rule conditions pass: (1) decompressed body-only discrimination >= 0.3 for all 27 chunked cells (min 0.5), (2) decompressed hash determinism all_same=true for all states across all conditions, (3) B-RANDOM = 0.0 for all 27 cells, (4) CL-PASSTHROUGH = 0.5 for all 9 CL cells, (5) 0 decompression errors across all 540 requests, (6) CHUNKED-CACHED discrimination >= 0.3 for all cells (min 0.5), (7) C_ORIGIN_VERIFICATION passes (9/9 content conditions serve TE:chunked without Content-Length). Audit confirms all recomputed metrics match producer exactly. However, the claim ceiling is bounded by three audit findings: (V1) CL-PASSTHROUGH origin was also chunked (contamination of regression control — still passes at 0.5 but not an independent CL-origin baseline), (V2) all compressed body_sizes 70-176 bytes fit in a single chunk (chunk_size=1024), so multi-chunk brotli boundary splitting is untested, (V3) origin verification is on fresh verify servers not the measured origins. The upstream origin->proxy chunked path is genuinely exercised and transparent to proxy reassembly for single-chunk payloads. | C-MEAS-VALID | `792f9f362643` |
 | EXP-RUNTIME-35445595071 | runtime | REVISE | CONSTRAINED | C-MEAS-VALID | `7884a3cfa04a` |
+| EXP-PRODUCT-35445596342 | product | PASS | SURVIVES_CURRENT_TEST — All four frozen decision conditions pass at the bounded localhost stochastic-mock ceiling. C1 auth discrimination 0.8333 > 0.5 (positive control, replicating EXP-RUNTIME-33902315583). C2 behavioral TP 1.0 >= 0.85 on all three drift types in isolation and 8/8 co-occurring conditions. C3 behavioral variance 8/8 conditions with std > 0.05 (range 0.087–0.104) AND orthogonality confirmed at delta=0.15 (pooled r=-0.0258, 95% CI [-0.115, 0.064], CI upper 0.064 < 0.15, TOST p_upper 5.6e-05 < 0.05, shared variance < 0.4%). C4 noise FP 0.0 <= 0.15 on 240 noise-only samples. Audit PASS confirms all recomputed metrics match producer exactly. The three root causes of parent EXP-PRODUCT-35434772331 measurement invalidity — deterministic server, scoring weight collisions, server state carry-over — are resolved. However, the claim ceiling is strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL cache 0.5s + jitter 10-100ms + HS256/RS256 JWT on 127.0.0.1:18950, seed 42). No production generalization, PRODUCT_CORE promotion, or non-mock inference is warranted from this evidence alone. | C-FRESHNESS | `c8551c6a9bbb` |
 
 ## Latest recorded claim events
 
@@ -182,7 +183,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35434772331 | product |
+| C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35445596342 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35445595071 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
