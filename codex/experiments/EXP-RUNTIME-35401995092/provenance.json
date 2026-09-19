@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35401995092",
+  "lane": "runtime",
+  "created_at": "2026-09-19T05:36:45.562163+00:00",
+  "files": {
+    "run_experiment.py": {
+      "role": "experiment code",
+      "sha256": "7ab1ddd1cce678a81265fa8dc5833f0b3b2c1ecac2c9c7c4e62ff49f71948cbb",
+      "size_bytes": 49757
+    },
+    "result.json": {
+      "role": "experiment results",
+      "sha256": "16a661f0fc4c97427fdde8c9ed5c183ea819199d4852b4e14775349203132af9",
+      "size_bytes": 69196
+    },
+    "report.md": {
+      "role": "human-readable report",
+      "sha256": "4427b6a9069d3fc02c908dcbaa97e1cdebd68c2921a2b945f0e71445e0704bf6",
+      "size_bytes": 1662
+    },
+    "request.json": {
+      "role": "frozen input",
+      "sha256": "a2de49b353725d7889f57212ecbd5943ba454aa3edf18c8eb96177d3493a5fa7",
+      "size_bytes": 2403
+    },
+    "spec.json": {
+      "role": "frozen input",
+      "sha256": "df03a58938dabaebe1b398d389dc439e87bc78364f86f32c041b8c71e22ba431",
+      "size_bytes": 8205
+    },
+    "prereg.md": {
+      "role": "frozen input",
+      "sha256": "4ff9b03e1f05e82172ffec7a564660d29a6940b6e67f23703df9bf54ca5063ed",
+      "size_bytes": 7056
+    },
+    "freeze.json": {
+      "role": "frozen input",
+      "sha256": "23ed2ff807d00164b5d6685a49e244f0ae2d8ba6a0fe7103da609dfa4f1d0e80",
+      "size_bytes": 399
+    }
+  }
+}
