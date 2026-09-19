@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35389141536",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Should the product lane (A) provision LLM API credentials (OPENAI_API_KEY or equivalent) and execute the frozen COLD baseline measurement per parent spec.json to resolve the 5.1-5.3x cost advantage with real success rates, (B) close C-PRODUCT-ECON as unmeasurable given persistent infrastructure blockers and thin 5.42% margin on estimated completions, or (C) pivot to measuring end-to-end agent economics (retrieval, ranking, repair, maintenance amortization) on the real SPIDER registry rather than the synthetic 32-task corpus?",
+  "why_next": "This experiment (option C from parent handoff) successfully resolved that browser/verification costs are a constant offset across conditions by construction and do not differentially offset token savings. However, the core product economics question remains unanswered: parent token costs are analytical estimates (completion tokens 2/15/20, C1 success 100% assumed), COLD success rate is unmeasured, and the 5.42% margin is thin. Three consecutive PRODUCT lane experiments have not produced end-to-end measurement with real LLM: two MEASUREMENT_INVALID (no API keys) and one SURVIVES with tautological C3/C4. The three-way A/B/C decision from the parent handoff is partially resolved (C executed) but the blocking question (provision API access or close the line) persists. The next experiment must either resolve the infrastructure blocker or explicitly close the economics line.",
+  "carry_forward": {
+    "established": [
+      "Analytical deduplication economics verified on synthetic 32-task corpus: parameterized 25 vs literal 32 mechanisms (21.9% reduction), selection savings 3168 tokens (16.09%), resolution overhead 2101 tokens (10.67%), net workflow savings 1067 tokens (5.42%) — from parent EXP-PRODUCT-35330741529",
+      "Browser+verification cost is a constant offset across LITERAL/PARAMETERIZED/COLD conditions by construction (identical HTTP actions), total 1499 token-equivalents on jsonplaceholder.typicode.com CDN, verification 0.06% of non-token cost — from this experiment EXP-PRODUCT-35389141536",
+      "Token savings arithmetic preserved after adding browser/verification: LITERAL 21190 > PARAM 20123 (diff 1067 unchanged) — from this experiment, but tautological (constant offset cannot change inequality)",
+      "Positive control validated analytically: 5 blog-read-post tasks collapse to 1 parameterized pattern — from EXP-PRODUCT-35330741529",
+      "Null control passes analytically: unique-pattern overhead 1.85% (ratio 1.0185) — from EXP-PRODUCT-35330741529",
+      "COLD baseline at 77 tokens/task (analytical) is 8x cheaper than either registry condition — from EXP-PRODUCT-35330741529"
+    ],
+    "rejected": [
+      "Token savings as a general claim for short-value URL patterns: FALSIFIED (EXP-PRODUCT-35209109455)",
+      "Token savings as a general claim for long-value URL patterns: FALSIFIED (EXP-PRODUCT-35262262156)",
+      "Producer SUPPORTS claim for EXP-PRODUCT-35330741529: NOT JUSTIFIED (C1 unmeasured, C2/C3 narrow under estimated completions)",
+      "Hypothesis that browser/verification costs differentially offset token savings: FALSIFIED by construction (identical across conditions by design)",
+      "This experiment (EXP-PRODUCT-35389141536) validates end-to-end economics: NOT JUSTIFIED (tautological C3/C4, parent estimates unmeasured, verification micro-benchmark)"
+    ],
+    "unknown": [
+      "Whether COLD baseline achieves >=90% success rate with real LLM API calls on 32 synthetic tasks — 0/32 measured across three consecutive experiments",
+      "Whether actual average COLD token cost (prompt+completion via tiktoken on real model output) is <=100 tokens/task — analytical 77.34/task is prompt counting +20 estimated completion",
+      "Whether 5.42% token savings margin survives real LLM execution where completion tokens are measured not estimated (thin 1067-token margin sensitive to ~1 token/task estimate error)",
+      "Whether real browser (Playwright) execution adds latency not captured by Python requests — hypothesized constant across conditions, unmeasured",
+      "Whether production endpoint latency/auth/rate-limiting changes absolute browser cost magnitude — jsonplaceholder CDN is well-provisioned",
+      "Whether end-to-end product economics (retrieval, ranking, repair, maintenance amortization) justify registry vs COLD beyond per-task token + HTTP cost",
+      "Whether larger registries (100+ mechanisms) would increase selection saving dominance"
+    ],
+    "do_not_assume": [
+      "Do not assume 5.42% workflow savings generalizes to real SPIDER corpus — measured on synthetic 32-task corpus with estimated completions, not existing registry",
+      "Do not assume C1 100% success — assumed analytically, not measured with real LLM calls across three consecutive experiments",
+      "Do not assume completion tokens are accurate — hard-coded estimates (2/15/20) not measured from model outputs; 5.42% margin is thin",
+      "Do not assume C-PRODUCT-ECON is measured — remains HYPOTHESIS with zero real LLM calls across all experiments",
+      "Do not assume C-PARAM-INHERIT is PRODUCT_CORE — remains EXPERIMENTAL at committed-code synthetic single-slot ceiling",
+      "Do not assume COLD baseline is or is not viable — 77 tokens/task is analytical prompt-only counting; real completion tokens and success rate unmeasured",
+      "Do not assume browser/verification costs being constant across conditions validates end-to-end economics — the constant offset preserves arithmetic but does not measure real costs",
+      "Do not assume the audit REVISE status means the experiment failed — the frozen decision_rule C1-C5 all pass (SURVIVES_CURRENT_TEST); the audit bounds the claim ceiling",
+      "Do not assume two consecutive MEASUREMENT_INVALID plus one SURVIVES-with-tautology establishes that API access is permanently unavailable — it requires external provisioning",
+      "Do not assume n=32 tasks establishes statistical significance — deterministic synthetic analysis, not a sample"
+    ]
+  },
+  "dependencies": [
+    "If pursuing option A (provision API keys): requires configuring OPENAI_API_KEY or equivalent in execution environment; parent frozen COLD baseline design (spec.json, prereg.md from EXP-PRODUCT-35330741529) remains valid; tiktoken and openai packages installed",
+    "If pursuing option B (close C-PRODUCT-ECON): requires explicit Director decision to de-prioritize and redirect product lane to non-token mechanisms (registry compression, retrieval efficiency, orthogonal capabilities)",
+    "If pursuing option C (pivot to real corpus/end-to-end economics): requires new frozen design measuring agent economics on real SPIDER registry with real tasks, not synthetic 32-task corpus",
+    "Graph lane: resolve() parameter-slot-count tie-break from EXP-GRAPH-33816735314 should be ported before mixed literal+parameterized registry testing",
+    "Physics/Frontier lanes: C-WEB-DYNAMICS remains HYPOTHESIS — no product lane dependency"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35389141536/result.json — status COMPLETE, outcome SUPPORTS, decision_verdict SURVIVES_CURRENT_TEST, all C1-C5 pass, browser 1498ms, verification 0.844ms",
+    "research/experiments/EXP-PRODUCT-35389141536/audit.json — status REVISE, producer_claim_supported=false, required_fixes C3_C4_TAUTOLOGICAL_BY_CONSTRUCTION, claim_ceiling bounded to constant-offset synthetic",
+    "research/experiments/EXP-PRODUCT-35389141536/raw_evidence.json — task_results[32] per-task browser/verification timing, workflow_costs literal 21190 param 20123 cold 3974",
+    "research/experiments/EXP-PRODUCT-35389141536/run_experiment.py — degenerate C3 diff 0.0, literal_browser_total=param_browser_total",
+    "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json — aggregate_costs literal 19691 param 18624 cold 2475 (analytical, not measured)",
+    "research/experiments/EXP-PRODUCT-35330741529/audit.json — REVISE, completion tokens estimated, C1 success unmeasured",
+    "research/experiments/EXP-PRODUCT-35375591046/handoff.json — parent handoff carry_forward, three-way A/B/C decision, infrastructure blocker",
+    "research/experiments/EXP-PRODUCT-35353007958/handoff.json — grandparent carry_forward (second MEASUREMENT_INVALID)",
+    "codex/claim_state.json — C-PRODUCT-ECON HYPOTHESIS, C-PARAM-INHERIT EXPERIMENTAL",
+    "research/claims/registry.json — C-PRODUCT-ECON next_gate end-to-end amortized economics"
+  ],
+  "recommended_action": "Product lane directorial decision required. This is the third consecutive PRODUCT lane experiment without end-to-end measurement: two MEASUREMENT_INVALID (no LLM API keys) and one SURVIVES with tautological C3/C4 (browser costs identical by construction). The browser/verification question from parent handoff option C is resolved: constant offset, does not differentially offset token savings. The remaining three-way decision (A/B/C) from the parent handoff should now be resolved: (A) provision LLM API credentials and execute the frozen COLD baseline — requires external human action to configure OPENAI_API_KEY; (B) close C-PRODUCT-ECON as the economics line has persistent infrastructure blockers, the 5.42% margin is thin and based on estimates, and COLD is analytically 8x cheaper; (C) pivot to measuring end-to-end agent economics on real SPIDER corpus — requires new design. No product promotion. C-PRODUCT-ECON stays HYPOTHESIS. C-PARAM-INHERIT stays EXPERIMENTAL."
+}

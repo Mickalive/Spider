@@ -1,0 +1,53 @@
+{
+  "experiment_id": "EXP-INTEL-35401997918",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does a structurally non-linear third recipe (DOM hierarchy-depth weighting with exponential decay) produce density rankings outside the canonical-weighted convex hull, thereby breaking the 2-recipe degeneracy that blocks MIXED outcome resolution?",
+  "hypothesis": "A DOM hierarchy-weighted density recipe, where element weight = exp(-alpha * depth) with depth measured from the root DOM node, produces a density ranking across task-definition pairs that is not bounded between the canonical and weighted recipe rankings. This would demonstrate that non-linear structural weighting can break the ordering constraint that linear combinations cannot.",
+  "falsifier": "The non-linear recipe is falsified if ANY of: (F1) The hierarchy-weighted density ranking is monotonically bounded between canonical and weighted rankings on all 21 pairs (i.e., for every pair, min(canonical_density, weighted_density) <= hierarchy_density <= max(canonical_density, weighted_density)), meaning the non-linear recipe fails to escape the convex hull; (F2) |Spearman(hierarchy_density, canonical_density)| > 0.90 AND |Spearman(hierarchy_density, weighted_density)| > 0.90, meaning the non-linear recipe is effectively a linear combination of the existing two; (F3) The hierarchy-weighted density has zero variance across all 21 pairs (CV < 0.01), meaning the recipe is constant and uninformative.",
+  "baselines": [
+    {
+      "id": "B1_CANONICAL_RECIPE",
+      "description": "Canonical per-iteration p=0.5 density: matching_count * 0.5 / elements_with_bbox. The original recipe from EXP-INTEL-35264637598.",
+      "source": "EXP-INTEL-34782350557 raw_evidence, EXP-INTEL-35264637598"
+    },
+    {
+      "id": "B2_WEIGHTED_RECIPE",
+      "description": "Area-weighted density: sum(element_area / total_area) for matching elements. The second recipe from EXP-INTEL-35264637598.",
+      "source": "EXP-INTEL-34782350557 raw_evidence, EXP-INTEL-35264637598"
+    },
+    {
+      "id": "B3_LINEAR_MEAN",
+      "description": "Meta-analytic mean (canonical+weighted)/2: always ranks between originals (EXP-INTEL-35353016702). Maximally degenerate non-linear baseline.",
+      "source": "EXP-INTEL-35353016702"
+    },
+    {
+      "id": "B4_DENSITY_RATIO",
+      "description": "Density ratio R = canonical/weighted: definition-driven (10x gap), non-significant task-type correlation (EXP-INTEL-35375593989).",
+      "source": "EXP-INTEL-35375593989"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_HIERARCHY_VARIATION",
+    "description": "DOM hierarchy depth varies across page types (listing pages have deeper nesting than cart pages). The hierarchy-weighted density should reflect this structural difference.",
+    "expected": "Hierarchy-weighted density differs across listing/detail/cart task types, with at least one inter-type ratio > 1.1."
+  },
+  "null_control": {
+    "id": "NC1_RANDOM_WEIGHTS",
+    "description": "When element weights are randomly assigned (uniform [0,1] per element, seeded), the resulting density ranking should not show the non-linear structure of the hierarchy recipe.",
+    "expected": "Random-weight density has |Spearman(random, canonical)| < 0.30 AND |Spearman(random, weighted)| < 0.30, showing no systematic relationship to either existing recipe. The hierarchy recipe should show stronger structure than random weights."
+  },
+  "measurement_validity": [
+    "Density values are reconstructed from existing raw evidence (EXP-INTEL-34782350557 raw_results.json, sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050) for 7 tasks x 3 definitions x 2 recipes.",
+    "DOM hierarchy depth is extracted from the raw DOM structure in the parent experiment's observation data. Each element's depth is its distance from the root <html> node in the DOM tree.",
+    "The hierarchy-weighted density is computed as: sum(exp(-alpha * depth_i) * match_i) / sum(exp(-alpha * depth_i)) for alpha in {0.1, 0.3, 0.5}. This is a convex combination of element matches weighted by exponential depth decay, but the weighting is structural (DOM tree position) not density-based.",
+    "Results are bounded to truncated-first-20 locatable_sample (7 tasks, 1 site Magento, 3 definitions). No extrapolation to full-DOM or cross-site.",
+    "All computations are deterministic and reproducible from the raw evidence artifact.",
+    "The alpha parameter is swept to test sensitivity; the primary analysis uses alpha=0.3 (moderate depth weighting)."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_HIERARCHY_VARIATION: The coefficient of variation (CV) of hierarchy-weighted density across all 21 task-definition pairs is >= 0.10. This confirms the recipe varies across tasks.\n\nC2_OUTSIDE_CONVEX_HULL: At least 3 of 21 pairs (>=14.3%) have hierarchy_density outside the [min(canonical, weighted), max(canonical, weighted)] interval. This confirms the non-linear recipe breaks the ordering constraint.\n\nC3_NOT_LINEAR_COMBINATION: |Spearman(hierarchy_density, canonical_density)| < 0.90 OR |Spearman(hierarchy_density, weighted_density)| < 0.90. This confirms the recipe is not a disguised linear combination.\n\nC4_TASK_TYPE_STRUCTURE: eta-squared(hierarchy_density, page_type) >= 0.10. This confirms the recipe captures meaningful task-type structure.\n\nVERDICT RULES:\n- If C1 AND C2 AND C3 AND C4: SURVIVES_CURRENT_TEST — non-linear hierarchy recipe breaks convex hull and captures task-type structure. The MIXED program has a viable third recipe.\n- If C1 AND C2 AND NOT C3: MIXED — recipe breaks hull but is correlated with existing recipes. Marginal value unclear.\n- If C1 AND NOT C2: FALSIFIED-IN-SETTING — recipe does not escape convex hull. Non-linear DOM hierarchy weighting cannot break the 2-recipe degeneracy.\n- If NOT C1: FALSIFIED-IN-SETTING — recipe is effectively constant. DOM hierarchy depth does not differentiate task-definition pairs.",
+  "product_consequence_positive": "The MIXED outcome program gains a viable non-linear third recipe that breaks the 2-recipe degeneracy. Product lane can use hierarchy-weighted density alongside canonical and weighted to classify recipe-sensitive task-definition pairs. The full-DOM re-run can use 3-recipe classification instead of degenerate dominance.",
+  "product_consequence_negative": "If the non-linear hierarchy recipe fails to escape the convex hull, the MIXED outcome program is closed: neither linear combinations, density ratios, nor non-linear DOM structural weighting can resolve the MIXED decision rule. The remaining options are: (a) abandon density-based MIXED handling entirely and restrict to recipe-insensitive pairs only, or (b) accept that the density metric's recipe sensitivity is irreducible without a fundamentally different metric (e.g., semantic role weighting, conditional inclusion based on element relationships).",
+  "estimated_cost": "LOW — offline computation on existing reconstructed data (21 density values per alpha level). No browser/network work. DOM hierarchy depth extraction from existing raw evidence is lightweight. Statistical tests (Spearman, eta-squared, convex hull check) are trivial. Estimated < 2000 LLM tokens.",
+  "expected_information_gain": "HIGH — directly resolves whether non-linear DOM structural weighting can break the convex hull constraint that blocks MIXED outcome resolution. If SURVIVES, the MIXED program has a path forward with 3-recipe classification. If FALSIFIED, the MIXED program is closed and the lane must pivot to abandonment or alternative metrics. Either outcome is decisive for the MIXED decision rule strategy."
+}

@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35402003775",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_target_sampling_and_data_integrity",
+      "severity": "none",
+      "finding": "N=5000 transitions = 50 sessions x 100 steps, seed=42, SHA256(prev1:prev2:current:action) mod 4 routing on 12-state SPA. Raw transitions file-byte SHA256 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade matches parent EXP-PHYSICS-35389142077 exactly (verified by bash sha256sum and canonical sort_keys hashing). Sampling, history construction (START_TOKEN padding), alpha=0, MIN_STRATUM_SIZE=5 match frozen spec.json measurement_validity and prereg 5-6. No sampling drift.",
+      "evidence": "result.json:artifacts[0].sha256, provenance.json:datasets[0].sha256, run_experiment.py:collect_transitions, analysis_results.json:results.state_K2.pmi_bits=0.933243"
+    },
+    {
+      "id": "V2_representation_and_leakage_filter",
+      "severity": "none",
+      "finding": "State-history H_K built from URL states (url_before, history tuple of prev URLs) with START_TOKEN padding as specified. Spec non-leakage filter 'exclude where action.target_href == state_after.url' is vacuous for synthetic in-memory simulation (no target_href field) so all 5000 counted as non-leakage; spec threshold satisfied. No leakage confound in this simulated environment. Representation correctly fragment-preserving (12 hash states). No URL stripping.",
+      "evidence": "run_experiment.py:build_state_history_records, result.json:metrics.state_history_pmi_k2=0.933243, spec.json:measurement_validity"
+    },
+    {
+      "id": "V3_null_framework_implementations_audited",
+      "severity": "low",
+      "finding": "All three frameworks implemented as described and independently recomputed: (1) Parametric bootstrap estimates P_hat(url_after|stratum) via Laplace alpha=1.0 per observed vocab and simulates url_after per record keeping (url_before,history,action) fixed, 1000 bootstraps seed=42 — recomputed 50-sample mean 0.3579 and corrected-RNG 200-sample mean 0.3574 vs producer 0.35694 (diff <0.001, well within Monte Carlo error std~0.007). Implementation uses global random.random() instead of local rng.random() (run_experiment.py:422) — provenance deviation: not strictly deterministic from seed=42 alone, but reruns are reproducible when global random seeded and corrected version yields identical fail conclusion, so not material. Uses only observed vocab per stratum for smoothing (not global 12-state vocab) — minor deviation from ideal Laplace over full support, but does not affect fail verdict. (2) Miller-Madow applies per-record correction (V_a-1)/(2Nln2)+(V_y-1)/(2Nln2)-(V_ay-1)/(2Nln2) uniformly within stratum — recomputed raw 0.933243 and MM 1.059767 exactly match producer; recomputed 50-perm null mean 0.40743 vs producer 0.40719 diff 0.0002. Correction increases signal +13.6% but null unchanged, confirming bias is weighted-average not finite-sample log-ratio. (3) Conditional entropy DeltaH = H(S|A,S,H)-H(S|S,H) via plug-in with weighting n_h/total and skipping <5 — recomputed DeltaH -0.933243 and null -0.81485 vs producer -0.814418 diff 0.0004, H_full=0.0 exactly (all (S,H,A) strata deterministic with MIN_STRATUM_SIZE filter, n_used_full 83 vs n_used_marginal 398) making DeltaH negative by construction; null not zero. All three correctly FAIL |mean|<0.1.",
+      "evidence": "run_experiment.py:parametric_bootstrap_null:422, run_experiment.py:compute_miller_madow_pmi, run_experiment.py:compute_conditional_entropy, result.json:metrics.parametric_bootstrap_null_mean_k2=0.35694, result.json:metrics.miller_madow_null_mean_k2=0.40719, result.json:metrics.conditional_entropy_null_mean_k2=-0.814418, recomputed_metrics"
+    },
+    {
+      "id": "V4_measurement_validity_primary_decision_rule",
+      "severity": "none",
+      "finding": "Primary falsifier per frozen spec: |null_mean|<0.1 bits at K=2 N=5000. All frameworks yield |mean| 0.357, 0.407, 0.814 — failing by 3.57x, 4.07x, 8.14x respectively. Within-stratum permutation baseline recomputed 200 perms 0.416986 vs producer 0.417454 diff 0.00047 (<0.1*std). Effect sizes d~78-79 for PMI frameworks, d=-38 for CE. Bonferroni alpha 0.0167 not needed for primary threshold test but p=0.001 correctly reported. Decision rule evaluation: 0/3 pass => FALSIFIED-IN-SETTING triggers correctly per spec decision_rule SURVIVES requires >=1/3. Status COMPLETE (not MEASUREMENT_INVALID) is correct: null bias is valid scientific negative, not infrastructure failure.",
+      "evidence": "spec.json:decision_rule, result.json:metrics.framework_pass_count=0, result.json:controls.NULL_CONTROL_PARAMETRIC_BOOTSTRAP.passes=false, result.json:controls.NULL_CONTROL_MILLER_MADOW.passes=false, result.json:controls.NULL_CONTROL_CONDITIONAL_ENTROPY.passes=false, analysis_results.json:framework_pass"
+    },
+    {
+      "id": "V5_conditional_entropy_degeneracy_disclosed",
+      "severity": "low",
+      "finding": "Conditional entropy framework is degenerate for deterministic SPA by design: H(S|A,S,H)=0.0 for all qualifying strata (n_used_full 83 vs 398 marginal) so DeltaH = -H(S|S,H) = -0.933 and null mean -0.814 far from zero. Positive control defined as H(S|S,H_K=3) > H(S|S,H_K=2) fails (both H_full 0.0 on 8-state deterministic SPA: audit recomputed H_full K3 0.0 K2 0.0, H_marginal 1.671 vs 1.923, entropy_positive_control_passes false). Producer correctly reports FAIL and discusses degeneracy in validity_notes/report.md. Framework was a priori unsuitable for deterministic environment; failure is informative about representation not estimator choice. Not a measurement invalidity for overall experiment, but spec positive_control for this framework was misspecified for deterministic transitions.",
+      "evidence": "analysis_results.json:conditional_entropy.observed_h_full=0.0, analysis_results.json:positive_control.conditional_entropy_K3.h_full=0.0, result.json:controls.NULL_CONTROL_CONDITIONAL_ENTROPY.observed_mean_k2=-0.814418, report.md:Why Conditional Entropy Fails"
+    },
+    {
+      "id": "V6_determinism_and_sparsity_disclosure",
+      "severity": "none",
+      "finding": "Producer correctly discloses deterministic strata 407/1292 (31.5%) contribute PMI=0, stochastic 885/1292 (68.5%) carry bias; mean occupancy 5000/1292=3.87, only 398 strata used (30.8%) meeting MIN_STRATUM_SIZE=5, 894 skipped_small, 2 skipped_zero_var. For K3, 1801/2779 deterministic (64.8%) and only 105 used. Sparsity explains why analytic E[PMI]=0 fails at finite N. Convergence of parametric bootstrap 0.357, Miller-Madow 0.407, within-stratum 0.417 (range 0.060) and action-shuffle parent 0.406 correctly interpreted as intrinsic bias floor ~0.36-0.42 bits for this SPA design at N=5000, not permutation artifact. No hidden weighting error.",
+      "evidence": "result.json:metrics.determinism_check_state_k2, analysis_results.json:results.state_K2.determinism, result.json:metrics.state_history_pmi_k3.n_strata_used=105"
+    },
+    {
+      "id": "V7_controls_and_provenance_integrity",
+      "severity": "none",
+      "finding": "Positive control 8-state deterministic SPA N=5000 K3: recomputed state PMI 1.671250 vs producer 1.671251 diff 8e-07, action PMI 1.805623 vs 1.805624 diff 1e-06, p=0.001, d 121.71/154.53 — passes >=1.0 bits p<0.001 as frozen. Baseline reproductions exact: unconditional K0 1.418781 vs spec ~1.42, K1 1.530902 vs ~1.53, K3 state 0.168155, action K3 1.220508 replicate parent within floating precision. Artifact hashes in result.json match file-byte SHA256 (verified: raw 170df6..., analysis 47045..., code a17097...). Provenance records python 3.12.14, numpy 2.5.3, Linux 6.5.0-1025-azure, seed 42, 1000 perms, 50 sessions x 100 steps. Run_experiment.py hash matches. No provenance tampering; stale-hash issue from parent resolved.",
+      "evidence": "result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA.passes=true, recomputed_metrics.positive_control_state_k3_pmi=1.671250, provenance.json:python_version, result.json:artifacts"
+    },
+    {
+      "id": "V8_physics_operationalization",
+      "severity": "none",
+      "finding": "Experiment provides operational mathematical object (conditional PMI I(url_after;action|url_before,H_K) with explicit weighted-average estimator), observable (hash-routed SPA transitions), falsifier (|null_mean|<0.1), strong nulls (three materially orthogonal null frameworks plus within-stratum and action-shuffle diagnostics), and identifiability discussion (deterministic vs stochastic strata). It tests methodology validity, not yet Web-dynamical structure beyond memory on production data — correctly scoped as falsification-first methodology check. No physics claim beyond HYPOTHESIS is asserted. Graph reuse correctly not claimed as physics.",
+      "evidence": "spec.json:hypothesis, spec.json:falsifier, spec.json:null_control, prereg.md:Hypothesis, research/lanes/registry.json:physics.mission"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_parent_within_stratum_replication",
+      "finding": "Within-stratum conditional permutation null_mean 0.417454 replicates parent EXP-PHYSICS-35389142077 exactly (producer diagnostic). Independent 200-perm recomputation 0.416986 diff 0.00047 (<1 std). Confirms measurement reproducibility and bias floor persistence.",
+      "passes": true,
+      "evidence": "result.json:metrics.within_stratum_null_mean_k2=0.417454, parent result.json:metrics.within_stratum_null_mean_k2=0.417454, recomputed_metrics.within_stratum_null_mean_k2_200perms=0.416986"
+    },
+    {
+      "id": "B2_parent_pmi_signal_reproduction",
+      "finding": "All PMI baselines reproduce parent as specified in spec baselines: state K2 0.933243 (parent 0.933), unconditional K0 1.418781 (spec ~1.42), K1 1.530902 (spec ~1.53), action K3 1.220508 (parent 1.221), state K3 0.168155. Deterministic pipeline confirmed.",
+      "passes": true,
+      "evidence": "result.json:metrics.state_history_pmi_k2=0.933243, result.json:metrics.unconditional_pmi_k0=1.418781, result.json:metrics.state_history_pmi_k1=1.530902, result.json:metrics.action_history_pmi_k3=1.220508, analysis_results.json:results"
+    },
+    {
+      "id": "B3_block_and_action_shuffle_diagnostics",
+      "finding": "Parent diagnostics replicated: block permutation 0.552119 (not re-measured in this run but parent value correctly referenced) vs within-stratum 0.417 improvement 0.134 bits (24.4%); action-shuffle parent 0.406444 converges with within-stratum within 2.6% (0.011 difference). Parametric bootstrap 0.35694 achieves only 14.5% improvement over within-stratum, Miller-Madow 0.40719 no improvement — correctly quantified. No overstated improvement.",
+      "passes": true,
+      "evidence": "spec.json:baselines, provenance.json:parent_experiment.key_metrics, result.json:metrics.parametric_bootstrap_null_mean_k2=0.35694, result.json:metrics.miller_madow_null_mean_k2=0.40719"
+    },
+    {
+      "id": "B4_positive_control_strength",
+      "finding": "8-state synthetic deterministic SPA K3 positive control passes strongly: state PMI 1.671 >=1.0, p=0.001, d=121.71; action PMI 1.806 >=1.0, p=0.001, d=154.53. Independent recomputation matches within 1e-06. Baseline is strong — deterministic mapping requires PMI pipeline to detect beyond-Markov structure, pipeline validated at N=5000. Conditional entropy positive control for this framework fails by construction (H_full 0.0) — correctly reported as degenerate, not a pipeline break for PMI frameworks.",
+      "passes": true,
+      "evidence": "result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA, analysis_results.json:positive_control.pmi_state_K3=1.671250, analysis_results.json:positive_control.entropy_positive_control_passes=false"
+    },
+    {
+      "id": "B5_framework_orthogonality",
+      "finding": "Three frameworks are materially orthogonal as claimed: finite-sample correction (Miller-Madow), DGP simulation (parametric bootstrap), alternative quantity (conditional entropy). Framework correlation noted but Bonferroni 0.0167 applied. Each tested independently on identical K2 dataset (same 5000 transitions, same seed 42, same 1000 perms/bootstraps). No selective reporting — all three reported as FAIL.",
+      "passes": true,
+      "evidence": "spec.json:null_control, prereg.md:Methods, result.json:metrics.framework_pass_details"
+    }
+  ],
+  "recomputed_metrics": {
+    "state_history_pmi_k2_pmi_bits": 0.9332435964563096,
+    "state_history_pmi_k2_n_strata_total": 1292,
+    "state_history_pmi_k2_n_strata_used": 398,
+    "state_history_pmi_k3_pmi_bits": 0.168155815254065,
+    "action_history_pmi_k3_pmi_bits": 1.2205083083840707,
+    "unconditional_pmi_k0_pmi_bits": 1.4187811340289063,
+    "state_history_pmi_k1_pmi_bits": 1.5309023746943278,
+    "within_stratum_null_mean_k2_producer_1000perms": 0.41745412103641627,
+    "within_stratum_null_mean_k2_recomputed_200perms": 0.4169864863960024,
+    "within_stratum_null_std_k2_recomputed_200perms": 0.007025208463790422,
+    "within_stratum_null_std_k2_producer": 0.006475080847523785,
+    "parametric_bootstrap_null_mean_k2_producer_1000boot": 0.3569402860952486,
+    "parametric_bootstrap_null_mean_k2_recomputed_50boot": 0.35797887837569303,
+    "parametric_bootstrap_null_mean_k2_corrected_rng_200boot": 0.35743764433920594,
+    "parametric_bootstrap_null_std_k2_producer": 0.007320633829459251,
+    "parametric_bootstrap_observed_pmi_k2": 0.9332435964563096,
+    "miller_madow_null_mean_k2_producer": 0.40719453952263834,
+    "miller_madow_null_mean_k2_recomputed_50perms": 0.407428748000981,
+    "miller_madow_null_std_k2_producer": 0.008441979930278131,
+    "miller_madow_observed_pmi_mm_k2": 1.059767951542273,
+    "miller_madow_observed_pmi_raw_k2": 0.9332435964563096,
+    "conditional_entropy_null_mean_k2_producer": -0.81441823876677,
+    "conditional_entropy_null_mean_k2_recomputed_50perms": -0.8148531401029883,
+    "conditional_entropy_null_std_k2_producer": 0.003082889115878363,
+    "conditional_entropy_observed_delta_h_k2": -0.9332435964563096,
+    "conditional_entropy_observed_h_full_k2": 0.0,
+    "conditional_entropy_observed_h_marginal_k2": 0.9332435964563096,
+    "determinism_check_state_k2_deterministic_strata": 407,
+    "determinism_check_state_k2_stochastic_strata": 885,
+    "determinism_check_state_k2_total_strata": 1292,
+    "determinism_check_state_k2_stochastic_ratio": 0.684984520123839,
+    "positive_control_state_k3_pmi_recomputed": 1.6712509133878954,
+    "positive_control_state_k3_pmi_producer": 1.671251,
+    "positive_control_action_k3_pmi_recomputed": 1.805623888152145,
+    "positive_control_action_k3_pmi_producer": 1.805624,
+    "positive_control_passes": true,
+    "positive_control_conditional_entropy_h_full_k3": 0.0,
+    "positive_control_conditional_entropy_h_full_k2": 0.0,
+    "positive_control_conditional_entropy_passes": false,
+    "framework_pass_details_producer": {
+      "parametric_bootstrap": false,
+      "miller_madow": false,
+      "conditional_entropy": false
+    },
+    "framework_pass_count_producer": 0,
+    "null_centering_threshold_bits": 0.1,
+    "overall_verdict_recomputed": "FALSIFIED-IN-SETTING",
+    "raw_transitions_file_byte_sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+    "analysis_results_file_byte_sha256": "4704544873d799ce01a02b627a06877bd3399c010106a8e4cd32743eaef3708b",
+    "run_experiment_py_file_byte_sha256": "a170973a5002d39c7172657c27e6a6fa4e53d4811b5a1b99c2de9ee75846bb98",
+    "artifact_hashes_match": true
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: No null framework centers PMI null at zero for the 12-state hash-routed SPA simulation with SHA256(prev1:prev2:current:action) mod 4 routing, N=5000, K=2 state-history (url_before,history), alpha=0, MIN_STRATUM_SIZE=5: parametric bootstrap null mean 0.357+/-0.007 bits (3.57x above |0.1| threshold, 14.5% improvement over within-stratum 0.417), Miller-Madow null mean 0.407+/-0.008 bits (4.07x above, +13.6% signal but null unchanged), conditional entropy null mean -0.814+/-0.003 bits degenerate (positive control fails: H_full=0.0 on deterministic SPA by construction). Within-stratum permutation 0.417 replicates parent exactly. Bias floor ~0.36-0.42 bits is intrinsic to PMI weighted averaging across 31.5% deterministic (PMI=0) /68.5% stochastic strata at mean occupancy 3.87 (only 30.8% strata used), not permutation scheme, and is not resolved by these three orthogonal corrections at N=5000. State-history K2 PMI 0.933 bits (p=0.001, d~79) and positive control K3 PMI>=1.67 bits are reproducible descriptive observations but confirmatory beyond-Markov claim remains unsupported without valid null. C-WEB-DYNAMICS remains HYPOTHESIS. No inference to production SPAs, other N/K, other SPA cardinalities, or other estimators. Lane should pivot to orthogonal signal decomposition (Markov vs beyond-Markov via action-history K3 1.221 bits comparison) as preregistered.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35402003775/spec.json:decision_rule",
+    "research/experiments/EXP-PHYSICS-35402003775/prereg.md:Decision Rule",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.parametric_bootstrap_null_mean_k2=0.3569402860952486",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.miller_madow_null_mean_k2=0.40719453952263834",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.conditional_entropy_null_mean_k2=-0.81441823876677",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.within_stratum_null_mean_k2=0.41745412103641627",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.state_history_pmi_k2=0.9332435964563096",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:metrics.framework_pass_count=0",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.POSITIVE_CONTROL_SYNTHETIC_SPA.passes=true",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.NULL_CONTROL_PARAMETRIC_BOOTSTRAP.observed_mean_k2=0.3569402860952486",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.NULL_CONTROL_MILLER_MADOW.observed_mean_k2=0.40719453952263834",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.NULL_CONTROL_CONDITIONAL_ENTROPY.observed_mean_k2=-0.81441823876677",
+    "research/experiments/EXP-PHYSICS-35402003775/result.json:controls.NULL_CONTROL_WITHIN_STRATUM_PERMUTATION.observed_mean_k2=0.41745412103641627",
+    "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json:parametric_bootstrap.null_mean=0.3569402860952486",
+    "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json:miller_madow.null_mean=0.40719453952263834",
+    "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json:conditional_entropy.null_mean=-0.81441823876677",
+    "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json:within_stratum_permutation.null_mean=0.41745412103641627",
+    "research/experiments/EXP-PHYSICS-35402003775/analysis_results.json:positive_control.pmi_state_K3=1.6712509133878954",
+    "research/experiments/EXP-PHYSICS-35402003775/run_experiment.py:parametric_bootstrap_null",
+    "research/experiments/EXP-PHYSICS-35402003775/run_experiment.py:compute_miller_madow_pmi",
+    "research/experiments/EXP-PHYSICS-35402003775/run_experiment.py:compute_conditional_entropy",
+    "research/experiments/EXP-PHYSICS-35402003775/run_experiment.py:build_state_history_records",
+    "research/experiments/EXP-PHYSICS-35402003775/provenance.json:seed=42",
+    "research/experiments/EXP-PHYSICS-35402003775/raw_transitions.json:sha256=170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+    "research/experiments/EXP-PHYSICS-35389142077/result.json:metrics.within_stratum_null_mean_k2=0.41745412103641627",
+    "research/experiments/EXP-PHYSICS-35389142077/handoff.json:carry_forward.established",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS"
+  ],
+  "unresolved": [
+    "Why parametric bootstrap fails to center null even with correctly seeded RNG (mean 0.357 identical to producer): whether estimated P_hat is too simple (Laplace-smoothed frequencies on observed vocab only), bootstrap inherits weighted-average bias across deterministic/stochastic strata, or action not independent of url_after within strata so simulating from marginal preserves coupling — requires model-based investigation.",
+    "Whether bias floor ~0.36-0.42 bits is finite-sample or asymptotic: test at N=50000/500000 needed to see scaling (sqrt(N) vs irreducible). Producer correctly leaves unresolved.",
+    "Whether conditional entropy degeneracy generalizes: test on stochastic SPAs where H(S|A,S,H) >0 could reveal if framework is viable for non-deterministic transitions; current test only shows it is unsuitable for deterministic hash-SPAs.",
+    "Whether 0.933-bit PMI signal is Markov vs beyond-Markov: requires comparing K2 PMI against action-history K3 at same N (1.221 bits) with history-conditioned baseline, not just null centering — the preregistered pivot question remains untested.",
+    "Whether null bias generalizes beyond 12-state SHA256 SPA to other state cardinalities, transition functions, or production SPA settings — producer correctly bounds claim to this simulation."
+  ]
+}
