@@ -8,7 +8,7 @@
   "next_question": "Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM (not truncated-first-20) with richer element diversity \u2014 and does ranking stability improve when the sample contains more elements per definition, reducing the sensitivity to recipe sampling?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-19T13:23:17.251276+00:00",
+  "updated_at": "2026-09-19T16:47:47.043870+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "83a337a889f6dcaa0a08d1888e91a47ae8b34c62c34fcbc80e33dd9126f13085",
   "same_failure_count": 0,
