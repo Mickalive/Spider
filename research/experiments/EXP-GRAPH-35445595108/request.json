@@ -1,0 +1,20 @@
+{
+  "base_sha": "9d9a09e5f774143121e58b6fca8b698001aaadaa",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T13:23:14.746307+00:00",
+  "experiment_id": "EXP-GRAPH-35445595108",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 frozen decision_rule condition C2_variance fails (0/3 endpoints have std > 0 for either signal) and C3_equivalence fails (Pearson r undefined 0/0, CI [0.0, 1.0] uninformative). Both signals have zero variance across all 60 paired samples because the selected public API endpoints return deterministic identical responses (GitHub 403 rate-limited for all unauthenticated requests, JSONPlaceholder returns identical JSON every time). This is an environment ceiling (insufficient endpoint selection), not a scientific falsification of the C-FRESHNESS orthogonality hypothesis. C-FRESHNESS orthogonality at delta=0.15 remains confirmed ONLY under localhost mock (parent EXP-GRAPH-35389145821: pooled r=0.0022, CI upper 0.0916 < 0.15). No extension to real external APIs is established. Audit PASS confirms all recomputed metrics match producer; 8 required_fixes identified including endpoint redesign, sample size restoration, and baseline execution.",
+  "inherited_next_question": "Can real public APIs with natural behavioral AND structural stochastic variation be identified and used as testbeds for C-FRESHNESS orthogonality (e.g., APIs returning timestamps, request IDs, dynamic content with genuine rate limiting, auth state variation, and ETag/304 support) \u2014 or must the lab construct a production-like testbed server with CDN simulation, OAuth middleware, and dynamic content to answer the inherited next_question?",
+  "lane": "graph",
+  "origin_github_run_id": "35445595108",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35409927045",
+    "path": "research/experiments/EXP-GRAPH-35409927045/handoff.json",
+    "sha256": "d408a8378be1aac8e0ff786913364a732c527abfcc3b6dc14cc3751aa8e4ac9f"
+  },
+  "reason": "pulse",
+  "request_hash": "6632d92fc6c7fb3b03c371df6a2fc574776b60958ee8bd49ed75ae66b375c53f",
+  "request_id": "2434a772e2f5557f3f03ccfe",
+  "schema_version": 1
+}
