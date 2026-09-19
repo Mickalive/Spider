@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35434773328",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST — All 7 frozen decision-rule conditions pass: (1) decompressed body-only discrimination >= 0.3 for all 27 chunked cells (min 0.5), (2) decompressed hash determinism all_same=true for all states across all conditions, (3) B-RANDOM = 0.0 for all 27 cells, (4) CL-PASSTHROUGH = 0.5 for all 9 CL cells, (5) 0 decompression errors across all 540 requests, (6) CHUNKED-CACHED discrimination >= 0.3 for all cells (min 0.5), (7) C_ORIGIN_VERIFICATION passes (9/9 content conditions serve TE:chunked without Content-Length). Audit confirms all recomputed metrics match producer exactly. However, the claim ceiling is bounded by three audit findings: (V1) CL-PASSTHROUGH origin was also chunked (contamination of regression control — still passes at 0.5 but not an independent CL-origin baseline), (V2) all compressed body_sizes 70-176 bytes fit in a single chunk (chunk_size=1024), so multi-chunk brotli boundary splitting is untested, (V3) origin verification is on fresh verify servers not the measured origins. The upstream origin->proxy chunked path is genuinely exercised and transparent to proxy reassembly for single-chunk payloads.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Decompression-normalization advances: iterative decompression (brotli->gzip->identity, max_depth=5) preserves decompressed body-only discrimination at 0.5 through end-to-end chunked TE (origin->proxy->client) in both PASSTHROUGH and AUTH-AWARE CACHED modes on localhost mock infrastructure. Parent ceiling (proxy->client chunked downstream only, EXP-RUNTIME-35401995092) is expanded to include origin-served chunked upstream. Three fixes validated: V1 origin chunked (C_ORIGIN_VERIFICATION 9/9 pass), V2 double-header (code inspection), V3 dead code removal (72/72 determinism). Claim ceiling bounded to: single-chunk payloads (compressed 70-176 bytes < chunk_size 1024), Flask/stdlib mock OAuth2 origin brotli quality 6 deterministic, 4 auth states with 3-way error collapse (structural ceiling 0.5), JSON/HTML/XML x 1KB/10KB/100KB, N=540 seed 44 jitter 50-150ms, Python 3.12.14 brotli 1.2.0. CL-PASSTHROUGH regression control contaminated (origin was chunked — see audit V1). NOT validated: multi-chunk reassembly, real CDN (Cloudflare/Fastly/Akamai), Accept-Encoding negotiation, production OAuth/OIDC, binary content, production-scale concurrency, CL-origin isolated baseline."
+    }
+  ],
+  "product_action": "Product team may proceed with chunked TE as a supported transport mode on localhost mock infrastructure. The parent's explicit upstream scope gap (origin->proxy chunked) is closed. The remaining blocker for C-MEAS-VALID shifts to real CDN infrastructure only. However, CL-PASSTHROUGH regression should be re-run with isolated CL origin before using the CL baseline to attribute effects in other experiments.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration, chunked TE, Accept-Encoding negotiation, quality variation, and geographic latency — the sole remaining blocker for C-MEAS-VALID product readiness?",
+  "reason": "All frozen decision conditions pass with audit PASS on recomputed metrics. The upstream chunked path is genuinely exercised (origin serves TE:chunked, C_ORIGIN_VERIFICATION confirms). The claim ceiling is expanded from proxy->client to end-to-end chunked TE on localhost. However, three audit findings bound the ceiling: V1 (CL contamination — regression control not isolated), V2 (single-chunk degeneracy — multi-chunk untested), V3 (indirect origin verification). These are scope limitations, not failures of the primary measurement. The structural discrimination ceiling of 0.5 is a property of 3-way error collapse, not a mechanism limitation. Real CDN infrastructure is the critical untested domain for product readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35434773328/request.json",
+    "research/experiments/EXP-RUNTIME-35434773328/spec.json",
+    "research/experiments/EXP-RUNTIME-35434773328/prereg.md",
+    "research/experiments/EXP-RUNTIME-35434773328/freeze.json",
+    "research/experiments/EXP-RUNTIME-35434773328/result.json",
+    "research/experiments/EXP-RUNTIME-35434773328/report.md",
+    "research/experiments/EXP-RUNTIME-35434773328/provenance.json",
+    "research/experiments/EXP-RUNTIME-35434773328/audit.json (V1_CL_REGRESSION_CONTAMINATION, V2_SINGLE_CHUNK_DEGENERACY, V3_ORIGIN_VERIFICATION_INDIRECT)",
+    "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py:624-627 origin_use_chunked, :265/:365/:414 chunk_size=1024, :354-421 proxy HIT/MISS",
+    "research/experiments/EXP-RUNTIME-35401995092/handoff.json (parent, carry_forward upstream chunked gap)",
+    "research/experiments/EXP-RUNTIME-35401995092/audit.json (V1_ORIGIN_NOT_CHUNKED, V2_DOUBLE_HEADER, V3_SYNTHETIC_DETERMINISM)",
+    "codex/claim_state.json (C-MEAS-VALID claim history)",
+    "codex/index.json"
+  ]
+}

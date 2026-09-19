@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35434771791",
+  "lane": "intel",
+  "decision": "MIXED — Frozen conjunctive rule: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (normalized hierarchy eta2=0.0), C3 PASS (max pipeline eta2=0.999645 ≫ 0.05), C4 FAIL (ranking preservation not achieved across all 6 definition×recipe combinations per audit recomputation: canonical recipe 58%/48% agreement, per-task recipe untested), C5 PASS (0.999645 > 0.0+0.01). The OECD/COINr pipeline preserves between-type discrimination for DEF-FULL-MAP and DEF-FORM-ONLY (non-recipe eta2 0.964-0.999), confirming the hierarchy formula — not the pipeline — was the bottleneck. However, ranking reversal under recipe sampling (especially DEF-FORM-ONLY and per-task recipe ~0.36) means the pipeline does not reliably preserve the natural page-type ranking across all definition×recipe combinations. Claim ceiling bounded to single Magento site, truncated-first-20 locatable_sample, 7 tasks (cart n=1 degenerate), 2 non-degenerate definitions, y-proxy hierarchy depth.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "The OECD/COINr density pipeline (definition filtering × normalization by elements_with_bbox) preserves task-type discrimination for DEF-FULL-MAP and DEF-FORM-ONLY when feature-weighted densities (tag_entropy, form_fraction, total_area) replace the hierarchy formula: non-recipe eta2 0.964-0.999, best 0.999645 (tag_entropy × DEF-FORM-ONLY). Hierarchy bottleneck hypothesis confirmed — eta2=0.0 was caused by exp(-alpha*depth)×inForm formula, not pipeline structure. However, C4 fails under frozen rules: ranking preservation not achieved across all 3 definitions × 2 recipes (audit shows canonical 58%/48% agreement for tag_entropy, per-task recipe ~0.36 mean eta2 with ~50% ranking agreement). ISOLATED-A-LINK degenerate (zero elements match on truncated sample). Claim ceiling bounded to 2 non-degenerate definitions, single site, truncated-first-20, y-proxy hierarchy depth. No cross-site or full-DOM evidence."
+    }
+  ],
+  "product_action": "MIXED program partially unblocked: feature-weighted density through OECD/COINr pipeline achieves discrimination (eta2 ≫ 0.05) for DEF-FULL-MAP and DEF-FORM-ONLY, so density-based MIXED handling is viable with these definitions. However, ranking instability under recipe sampling means the pipeline does not reliably preserve the natural page-type ordering — product lane should use non-recipe feature-weighted density (direct definition-filtered, not recipe-sampled) and must validate ranking on fuller samples before deployment. The 31× recipe material gap (EXP-INTEL-35264637598) is partially actionable with feature-weighted density as input metric, but recipe choice materially affects both eta2 magnitude and ranking.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM (not truncated-first-20) with richer element diversity — and does ranking stability improve when the sample contains more elements per definition, reducing the sensitivity to recipe sampling?",
+  "reason": "The frozen conjunctive rule triggers MIXED (C1✓ C2✓ C3✓ C4✗ C5✓). The audit correctly identified that C4 was tested on only 3 non-recipe combinations (definition-only), not the frozen 6 (3 definitions × 2 recipes). Audit recomputation shows ranking agreement drops substantially under recipe sampling (canonical 58% DEF-FULL-MAP, 48% DEF-FORM-ONLY; per-task ~0.36 mean eta2). The non-recipe pipeline results are strong (eta2 0.964-0.999 for 2/3 definitions), confirming the hierarchy formula was the bottleneck. ISOLATED-A-LINK is degenerate on this sample (zero matching elements). The hierarchy null control uses y-proxy degeneracy (exp(-0.3*y) underflows for y>6000, early y's identical across types), reproducing parent eta2=0.0 numerically but not testing true DOM depth. Within-type template invariance means eta2≈1.0 is trivially achievable; the real test is ranking preservation, which fails under recipe sampling. Product promotion not warranted: intel lane, no code, bounded claim ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35434771791/spec.json decision_rule C4 requires all 3 definitions × 2 recipes",
+    "research/experiments/EXP-INTEL-35434771791/result.json metrics M1_eta2_by_feature_definition (9 combos), M2_recipe_canonical_eta2, M4_best_pipeline_eta2=0.999645, M7_ranking_agreement (4 true entries), C1-C5 all true",
+    "research/experiments/EXP-INTEL-35434771791/analysis_output.json pipeline_eta2_9, recipe_results, ranking_agreement (includes 5 false/degenerate entries omitted from result.json M7)",
+    "research/experiments/EXP-INTEL-35434771791/audit.json status=REVISE, VF1_C4_RECIPE_DIMENSION_NOT_TESTED (critical), VF2_HIERARCHY_Y_PROXY_DEGENERACY, VF3_TRUNCATION_AND_TEMPLATE_INVARIANCE_CEILING, VF5_MISSING_PER_TASK_RECIPE; recomputed_metrics C4_pipeline_preserves_ranking_recomputed_including_canonical_recipe_iterations=false",
+    "research/experiments/EXP-INTEL-35434771791/report.md SURVIVES verdict and ranking claims (ungrounded per audit VF1)",
+    "research/experiments/EXP-INTEL-35422991016/handoff.json parent MEASUREMENT_INVALID carry_forward establishing hierarchy formula bottleneck hypothesis",
+    "research/experiments/EXP-INTEL-35434771791/analyze.py lines 218-224 C4 logic tests only 3 non-recipe combinations",
+    "research/experiments/EXP-INTEL-35434771791/provenance.json raw_evidence sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050"
+  ]
+}

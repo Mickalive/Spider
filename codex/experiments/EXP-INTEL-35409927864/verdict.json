@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35409927864",
+  "lane": "intel",
+  "decision": "FALSIFIES — Frozen decision_rule NOT C1 triggers FALSIFIES: sample elements are NOT 100% identical within page type (y-coordinates differ for elements 12-19, 8/20 elements). Even ignoring positional y-differences, C2 and C4 still FAIL (eta2=1.0 on tag_entropy/form_fraction/total_area, I_sample=1.449 bits ≠ 0.0). The template-composition hypothesis is decisively falsified: the locatable_sample HAS task-type discrimination (eta2=1.0), and the parent's hierarchy-weighted density producing eta2=0.0 is caused by the density formula collapsing between-type variance, not by sample template invariance. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 locatable_sample.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Template-composition explanation for parent hierarchy-density failure is FALSIFIED (NOT C1: y-coordinates differ; C2 FAIL: eta2=1.0 on multiple sample metrics; C4 FAIL: I_sample=1.449 bits ≠ 0.0). The locatable_sample contains clear task-type discrimination (tag_entropy 2.646 vs 2.484 vs 2.602, form_fraction 0.85 vs 0.95, total_area 341k vs 589k vs 428k, within-type std=0.0). The parent's zero density eta2 is caused by the hierarchy-weighted density formula mapping different sample compositions to identical density values, not by sample template invariance. The MIXED program's bottleneck is metric design, not sampling procedure. Per-task sampling is NOT required for task-type discrimination in this sample. This experiment is diagnostic, not confirmatory for C-MEAS-VALID. Status remains EXPERIMENTAL pending: (1) design of a density metric that captures the task-type structure present in the sample, or (2) evidence that no density metric can exploit this structure. Audit PASS, claim ceiling bounded to 7-task/1-site/3-definition truncated-first-20 sample."
+    }
+  ],
+  "product_action": "No product action. The MIXED program's failure is attributed to metric design (hierarchy-weighted density formula collapses between-type variance), not sampling procedure. Product lane should NOT pursue per-task sampling as a solution — the existing truncated-first-20 sample already provides discriminative information (eta2=1.0). Instead, the bottleneck is designing a density metric that captures tag entropy, form fraction, and total area differences across page types. The 31x canonical/weighted material gap (EXP-INTEL-35264637598) remains usable if a non-collapsing density metric is found.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a density metric based on sample-derived features (tag entropy, form fraction, total_area) — which achieve eta2=1.0 on page_type — be designed to produce non-zero task-type discrimination within the OECD/COINr framework, or does the hierarchy-weighted density formula's collapse generalize to all density metrics on this truncated-first-20 sample?",
+  "reason": "The frozen decision rule NOT C1 triggers FALSIFIES: y-coordinates differ for elements 12-19 across tasks within listing and detail page types (8 differences per multi-task type). Tags, roles, inForm, x, w, h are 100% identical within each page type (C1b structural identity holds). Even under structural identity (ignoring y), C2 fails decisively: eta2=1.0 for tag_entropy, form_fraction, total_area, mean_bbox_area — the sample has PERFECT between-type discrimination, not zero. C4 fails: I_sample=1.449 bits (equals H(page_type) for 3-3-1 distribution), not zero. C3 passes: full DOM chi2=462.56 p=6.14e-53. The audit PASS confirms all recomputed metrics match producer (VF-1 through VF-5). The template-composition hypothesis is dead. The parent's hierarchy-density eta2=0.0 is caused by the density formula's mapping, not sample invariance. The sample carries maximal task-type information; the density metric is the bottleneck. Cart n=1 is degenerate but does not affect the listing vs detail comparison (n=3 vs 3, eta2=1.0). Bounded to 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 sample.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35409927864/spec.json:decision_rule C1-C4 conjunctive, verdict NOT C1→FALSIFIES",
+    "research/experiments/EXP-INTEL-35409927864/result.json:M1_sample_template_identity_all_fields=false, M2_eta2_tag_entropy=1.0, M4_mi_sample=1.4488, controls PC1/NC1",
+    "research/experiments/EXP-INTEL-35409927864/audit.json:status=PASS, producer_claim_supported=true, claim_ceiling, VF-1 y-coordinate positional, VF-2 cart n=1 degeneracy, VF-4 MI=entropy tautology",
+    "research/experiments/EXP-INTEL-35409927864/report.md:decision table C1 FAIL C2 FAIL C3 PASS C4 FAIL",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35401997918/handoff.json sha256 b0fb7e618ae49216cd857d6e4bccf9c9a57b467a521a040a8ac9d051e41ce92c"
+  ]
+}
