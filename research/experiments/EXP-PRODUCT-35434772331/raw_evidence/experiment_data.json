@@ -1,0 +1,153 @@
+{
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "seed": 42,
+  "n_samples_per_condition": 60,
+  "n_cooccurring": 12,
+  "n_noise_only": 4,
+  "auth_discrimination": {
+    "full": 0.8333333333333334,
+    "intra": 1.0,
+    "inter": 0.16666666666666666,
+    "fingerprints": {
+      "no_auth": [
+        "c2f7997c84e0a880"
+      ],
+      "valid_token": [
+        "057910645d0b020d"
+      ],
+      "expired_token": [
+        "137257c6fb39bf53"
+      ],
+      "invalid_token": [
+        "137257c6fb39bf53"
+      ]
+    }
+  },
+  "auth_bodies": {
+    "no_auth": [
+      {
+        "status": 401,
+        "body": "{\"error\": \"login_required\", \"message\": \"Authentication required\"}",
+        "fp": "c2f7997c84e0a880"
+      },
+      {
+        "status": 401,
+        "body": "{\"error\": \"login_required\", \"message\": \"Authentication required\"}",
+        "fp": "c2f7997c84e0a880"
+      }
+    ],
+    "valid_token": [
+      {
+        "status": 200,
+        "body": "{\"user_id\": \"alice\", \"role\": \"admin\", \"data\": {\"value\": \"test_data\"}, \"session_id\": \"sess-001\"}",
+        "fp": "057910645d0b020d"
+      },
+      {
+        "status": 200,
+        "body": "{\"user_id\": \"alice\", \"role\": \"admin\", \"data\": {\"value\": \"test_data\"}, \"session_id\": \"sess-001\"}",
+        "fp": "057910645d0b020d"
+      }
+    ],
+    "expired_token": [
+      {
+        "status": 401,
+        "body": "{\"error\": \"authentication_failed\"}",
+        "fp": "137257c6fb39bf53"
+      },
+      {
+        "status": 401,
+        "body": "{\"error\": \"authentication_failed\"}",
+        "fp": "137257c6fb39bf53"
+      }
+    ],
+    "invalid_token": [
+      {
+        "status": 401,
+        "body": "{\"error\": \"authentication_failed\"}",
+        "fp": "137257c6fb39bf53"
+      },
+      {
+        "status": 401,
+        "body": "{\"error\": \"authentication_failed\"}",
+        "fp": "137257c6fb39bf53"
+      }
+    ]
+  },
+  "baselines": {
+    "B_STATUS_ONLY": 0.5,
+    "B_BODY_ONLY": 0.8333333333333334
+  },
+  "null_fp": {
+    "counts": {
+      "no_auth": {
+        "total": 10,
+        "unique": 1,
+        "fp": 0
+      },
+      "valid_token": {
+        "total": 10,
+        "unique": 1,
+        "fp": 0
+      },
+      "expired_token": {
+        "total": 10,
+        "unique": 1,
+        "fp": 0
+      },
+      "invalid_token": {
+        "total": 10,
+        "unique": 1,
+        "fp": 0
+      }
+    },
+    "overall_rate": 0.0
+  },
+  "drift_tp": {
+    "permission_boundary": {
+      "tp": 60,
+      "total": 60,
+      "rate": 1.0
+    },
+    "session_invalidation": {
+      "tp": 60,
+      "total": 60,
+      "rate": 1.0
+    },
+    "token_refresh": {
+      "tp": 60,
+      "total": 60,
+      "rate": 1.0
+    }
+  },
+  "orthogonality": {
+    "r": null,
+    "p_value": null,
+    "n": 720,
+    "behav_variance": 0.0,
+    "struct_variance": 7.743055555555555,
+    "tost": {
+      "pass": false,
+      "p_upper": 1.0,
+      "ci_lower": -1.0,
+      "ci_upper": 1.0,
+      "n": 720
+    }
+  },
+  "noise_fp_rate": 0.0,
+  "noise_fp_total": 0,
+  "noiseonly_n": 240,
+  "cooccur_samples_summary": {
+    "total": 720,
+    "behav_mean": 0.5,
+    "behav_std": 0.0,
+    "struct_mean": 7.416666666666667,
+    "struct_std": 2.782634642844
+  },
+  "decision": {
+    "C1": true,
+    "C2": "True",
+    "C3": false,
+    "C4": true,
+    "outcome": "FALSIFIED"
+  }
+}
