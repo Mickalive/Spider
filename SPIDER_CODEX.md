@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **155**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **156**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -165,6 +165,7 @@ Validated experiments: **155**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35401997918 | intel | PASS | FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING: C4 fails (eta-squared=0.000 < 0.10 threshold). C1 passes (CV=0.584 > 0.10), C2 passes (7/21 pairs outside convex hull, threshold 3), C3 passes (|rho(hier, canonical)|=0.879 < 0.90, OR clause). The hierarchy-weighted density recipe produces zero task-type discrimination across all tested alpha values (0.1, 0.3, 0.5) with identical mean density (0.667) across listing, detail, and cart page types. The recipe is a perfect monotonic reparameterization of area-weighted density (Spearman rho=1.0 at alpha=0.3) because the depth estimation heuristic uses inForm (binary flag) rather than actual DOM tree structure, making the depth distribution task-invariant. Hull-breaking on 7/21 pairs is entirely ISOLATED-A-LINK and definition-dependent, not task-type-dependent. Positive control PC1 fails (inter-type ratio=1.0). Null control NC1 fails (random weights show equivalent correlation structure). Audit PASS confirms all recomputed metrics match producer; audit VF-1 identifies depth estimation as heuristic (not true DOM depth); audit VF-2 corrects producer p-values (irrelevant to binary decision rule). The negative result is bounded to heuristic depth estimation on truncated-first-20 locatable_sample (7 tasks, 1 Magento site, 3 definitions); true DOM tree depth with parent-child links remains untested (producer U-1). | C-MEAS-VALID | `748397fec074` |
 | EXP-PHYSICS-35402003775 | physics | PASS | FALSIFIED-IN-SETTING — All three materially orthogonal null frameworks fail to center PMI null at zero for the 12-state hash-routed SPA simulation. Parametric bootstrap null mean 0.357 bits (3.57x above |0.1| threshold, 14.5% improvement over within-stratum 0.417). Miller-Madow null mean 0.407 bits (4.07x above, +13.6% signal boost but null unchanged). Conditional entropy null mean -0.814 bits degenerate (positive control fails: H_full=0.0 on deterministic SPA by construction). Within-stratum permutation 0.417 replicates parent exactly. The null control problem is intrinsic to PMI estimator weighting across deterministic/stochastic strata (31.5% deterministic with PMI=0 diluting weighted average), not permutation scheme or estimator choice. 0/3 frameworks pass frozen decision rule. Measurement valid (audit PASS). The 0.933-bit K2 PMI signal remains reproducible (p=0.001, d~79) but cannot support confirmatory beyond-Markov claim without valid null control. | C-WEB-DYNAMICS | `cdde08c5e760` |
 | EXP-INTEL-35409927864 | intel | PASS | FALSIFIES — Frozen decision_rule NOT C1 triggers FALSIFIES: sample elements are NOT 100% identical within page type (y-coordinates differ for elements 12-19, 8/20 elements). Even ignoring positional y-differences, C2 and C4 still FAIL (eta2=1.0 on tag_entropy/form_fraction/total_area, I_sample=1.449 bits ≠ 0.0). The template-composition hypothesis is decisively falsified: the locatable_sample HAS task-type discrimination (eta2=1.0), and the parent's hierarchy-weighted density producing eta2=0.0 is caused by the density formula collapsing between-type variance, not by sample template invariance. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 locatable_sample. | C-MEAS-VALID | `f8d8e8447dc3` |
+| EXP-INTEL-35422991016 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `f2ad3407e315` |
 
 ## Latest recorded claim events
 
@@ -175,7 +176,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35389145821 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-INTEL-35409927864 | intel |
+| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-INTEL-35422991016 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35389141536 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
