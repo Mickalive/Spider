@@ -1,0 +1,20 @@
+{
+  "base_sha": "872b927f545174f093bc983622850240dfcece01",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T09:28:26.345783+00:00",
+  "experiment_id": "EXP-RUNTIME-35434773328",
+  "inherited_last_verdict": "CONSTRAINED \u2014 C-MEAS-VALID advances. All 6 frozen SURVIVES_CURRENT_TEST conditions pass for the proxy->client chunked TE scope that was actually tested: (1) decompressed discrimination >= 0.3 for all cells, (2) determinism across paths holds (72/72, 0 mismatches), (3) B-RANDOM = 0.0 for all conditions, (4) CL-PASSTHROUGH = 0.5 reproduces parent, (5) 0 decompression errors on chunked responses, (6) CHUNKED-CACHED discrimination >= 0.3 for all cells (min 0.5). Audit PASS confirms all recomputed metrics match producer exactly. However, the frozen spec measurement_validity clause #5 requires origin to serve Transfer-Encoding: chunked (no Content-Length), but the origin was started with use_chunked=False for all 27 cells \u2014 chunked framing was synthesized only by the reverse proxy on the proxy->client leg. The frozen decision_rule's MEASUREMENT_INVALID clause ('chunked TE is not correctly applied (e.g., origin still sends Content-Length)') technically triggers for the upstream scope. The Director bounds the claim ceiling to proxy->client chunked downstream only, consistent with audit V1. Upstream origin->proxy chunked and the double-header artifact (audit V2) require fixes before end-to-end chunked TE coverage is claimed.",
+  "inherited_next_question": "Does iterative decompression survive Transfer-Encoding: chunked on the upstream origin->proxy leg (origin actually sending chunked without Content-Length, proxy reassembling) \u2014 fixing the origin use_chunked=False gap and double-header artifact before real CDN deployment?",
+  "lane": "runtime",
+  "origin_github_run_id": "35434773328",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35401995092",
+    "path": "research/experiments/EXP-RUNTIME-35401995092/handoff.json",
+    "sha256": "4f4f667e11b873b45fba997b32f87a312c11e1ac467be35a5a1a24653a34c3fb"
+  },
+  "reason": "pulse",
+  "request_hash": "888f8c8d946cc1ed2582ee8340bdbe3c79fcf447c263d4a5442b5e7fda9bded7",
+  "request_id": "1068f7747467a45c5ce415c2",
+  "schema_version": 1
+}
