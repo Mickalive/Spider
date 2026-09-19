@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35456070379",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can the headers-only structural signal be corrected to use a single deterministic request_id generator independent of status code (e.g., UUID v4 for all paths), eliminating the V1 entropy confound, and does orthogonality at delta=0.15 hold on the production-like testbed under this corrected measurement — with the B-FLASK-ONLY baseline rebuilt to include genuine token-state variation (valid/expired via query param or header)?",
+  "why_next": "This experiment attempted to correct the parent V1 confound (error-body hashing, r=0.375) by switching to headers-only structural signal extraction. The error-body correlation was eliminated but a new V1 confound was introduced: request_id differs by token state (UUID 36-char for valid vs token_hex 16-hex for expired, entropy p=2.7e-34). The B-FLASK-ONLY baseline was built without token validation, producing degenerate zero behavioral variance (r=NaN). Both issues are correctable. The production-like testbed infrastructure (CDN simulation, PyJWT RS256, SQLite WAL, 3 endpoints, 304 rate 31.7%) remains sound and reusable. The frozen decision_rule C1-C6 can be reused. The orthogonality question remains the highest-upside question for C-FRESHNESS product deployment — a clean positive result justifies parallel-channel architecture for product, while a clean negative forces architectural pivot.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 under localhost Flask mock across three independent experiments (all n=480, all audit PASS): deterministic Flask r=0.0335 (EXP-GRAPH-35330739886), stochastic Flask+SQLite+cache+jitter r=0.0463 (EXP-GRAPH-35353011131), HTTP conditional caching r=0.0022 (EXP-GRAPH-35389145821).",
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 on stochastic Flask+SQLite mock (EXP-PRODUCT-35434772331): pooled r=-0.0258, CI upper 0.064, TOST p_upper 5.6e-05. Second independent confirmation.",
+      "Behavioral signals (token validation failure, session state change, auth boundary shift, session_status_check) validated: TP=1.0 across all co-occurring conditions on both localhost mock and production-like testbed.",
+      "HTTP conditional caching (304 at 31.7-33.3% rate) does NOT break orthogonality on localhost mock.",
+      "Production-like testbed infrastructure (Flask 3.1.3, PyJWT RS256, SQLite WAL, CDN simulation with ETag/Cache-Control/stale-while-revalidate, 3 endpoints) is functional and reusable with corrected signal extraction.",
+      "Headers-only structural signal extraction eliminates the error-body hash confound (r=0.375 parent EXP-GRAPH-35445595108) — but introduces a new request_id entropy confound that must be corrected."
+    ],
+    "rejected": [
+      "Stable public APIs (GitHub 403, JSONPlaceholder) as testbeds — zero behavioral and structural variance (EXP-GRAPH-35409927045, MEASUREMENT_INVALID).",
+      "Structural signal hash(body)%10000 including error bodies produces valid orthogonality measurement — V1 confound: error body constant for expired tokens creates forced correlation (r=0.375).",
+      "HTTP caching as common cause raising |r| above 0.15 — three independent experiments show orthogonality under HTTP caching.",
+      "n=240 sufficient for delta=0.15 equivalence — n>=480 required (CI width ~0.25 at n=240 vs ~0.18 at n=480).",
+      "Headers-only structural signal with different request_id generators per status code is independent of behavioral state — V1 confound: valid entropy 3.542 vs expired 3.233, p=2.7e-34."
+    ],
+    "unknown": [
+      "Whether orthogonality at delta=0.15 holds on production-like infrastructure with a corrected headers-only structural signal (single request_id generator independent of status code).",
+      "Whether the B-FLASK-ONLY baseline shows |r|<0.15 when given genuine token-state behavioral variation.",
+      "Whether per-cache heterogeneity (cache_enabled r=-0.270 vs cache_disabled r=-0.091, diff 0.178 > 2*SE 0.092) is systematic or sampling noise.",
+      "Whether orthogonality generalizes to distributed production, non-Flask frameworks, concurrent load, or real-world structural signal formulations.",
+      "Whether CDN cache invalidation on session state change introduces correlation."
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — status remains EXPERIMENTAL bounded to localhost mock.",
+      "The frozen REJECTED outcome (|r|=0.1737) falsifies orthogonality on production-like infrastructure — measurement-invalid due to V1 request_id entropy confound and V2 baseline degeneracy.",
+      "The localhost mock confirmations (r=0.0022-0.046) are true population correlations under production conditions — point estimates from localhost mock with controlled stochasticity.",
+      "Delta=0.10 confirmed for product deployment — only pooled CI passes; per-mode/per-condition CIs exceed 0.10.",
+      "Production-like infrastructure features (CDN/OAuth/dynamic content) break orthogonality — untested due to measurement confounds in this experiment.",
+      "r=0.1737 represents genuine behavioral-structural coupling — partially explained by request_id entropy bifurcation (audit V1).",
+      "Testbed CDN simulation represents production CDN behavior — single-node Flask in-memory cache, not multi-CDN with real cache hierarchies."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35389145821/result.json — localhost mock r=0.0022 PASS (clean baseline)",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — stochastic mock r=0.0463 PASS (clean baseline)",
+    "research/experiments/EXP-PRODUCT-35434772331/result.json — stochastic mock r=-0.0258 PASS (second confirmation)",
+    "research/experiments/EXP-GRAPH-35445595108/result.json — r=0.375 MEASUREMENT_INVALID (parent error-body confound)",
+    "research/experiments/EXP-GRAPH-35445595108/audit.json — V1_CRITICAL_SHARED_VARIABLE_CONFOUND",
+    "research/experiments/EXP-GRAPH-35445595108/testbed_server.py — functional, reusable testbed infrastructure",
+    "research/experiments/EXP-GRAPH-35456070379/result.json — pooled r=-0.1737, C3/C4 FAIL, V1 entropy confound",
+    "research/experiments/EXP-GRAPH-35456070379/audit.json — FAIL, 5 required_fixes, V1/V2 high-severity",
+    "research/experiments/EXP-GRAPH-35456070379/testbed_server.py — production-like testbed (reusable after V1 fix)",
+    "research/experiments/EXP-GRAPH-35456070379/flask_only_server.py — B-FLASK-ONLY baseline (requires rebuild with token-state variation)",
+    "research/experiments/EXP-GRAPH-35409927045/handoff.json — prior MEASUREMENT_INVALID parent",
+    "codex/claim_state.json:C-FRESHNESS — EXPERIMENTAL status history"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35456070379/result.json — pooled r=-0.1737, CI [-0.259, -0.085], TOST p_lower=0.702",
+    "research/experiments/EXP-GRAPH-35456070379/audit.json — FAIL, V1_residual_request_id_confound (high), V2_baseline_B_FLASK_ONLY_degenerate (high)",
+    "research/experiments/EXP-GRAPH-35456070379/audit.json:recomputed_metrics — valid_vs_expired_entropy_diff p=2.7e-34, structural_diff p=0.00013",
+    "research/experiments/EXP-GRAPH-35456070379/result.json:metrics.per_endpoint_r_testbed — /api/user/profile r=-0.402, /api/data/list r=-0.515, /api/session/status r=-0.192",
+    "research/experiments/EXP-GRAPH-35456070379/result.json:metrics.per_endpoint_flask_r — all NaN (zero behavioral variance, audit V2)",
+    "research/experiments/EXP-GRAPH-35456070379/spec.json — frozen decision_rule C1-C6, measurement_validity #8",
+    "research/experiments/EXP-GRAPH-35445595108/handoff.json — parent V1_CRITICAL_SHARED_VARIABLE_CONFOUND and carry_forward",
+    "research/experiments/EXP-GRAPH-35389145821/result.json — localhost mock r=0.0022 PASS",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — localhost mock r=0.0463 PASS",
+    "codex/claim_state.json:C-FRESHNESS — EXPERIMENTAL status history"
+  ],
+  "recommended_action": "Re-run orthogonality on the existing production-like testbed with TWO corrections: (1) Fix V1 request_id entropy confound — use a single deterministic request_id generator (e.g., UUID v4) for ALL status codes (200, 304, 401, 403) independent of auth outcome, ensuring request_id entropy is identical across valid/expired token states. Alternatively, exclude request_id_entropy and dynamic_content_hash from the structural composite and use only ETag variation + Cache-Control variation as the structural signal. (2) Fix V2 B-FLASK-ONLY baseline degeneracy — add genuine token-state variation (valid/expired tokens via Authorization header or query param) to flask_only_server.py so behavioral_delta varies (std > 0) and Pearson r is computable. Both fixes are small code changes to testbed_server.py and flask_only_server.py. The frozen decision_rule C1-C6 can be reused. n>=480, delta=0.15. The testbed infrastructure (CDN simulation, 3 endpoints, 304 at 31.7%) is sound and reusable. After fixes, a clean positive result (|r|<0.15, TOST p_lower<0.05) would justify parallel-channel architecture for product deployment. A clean negative result would force architectural pivot."
+}
