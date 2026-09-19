@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, and stochastic SPA frontends \u2014 the highest-upside question for C-FRESHNESS product deployment that cannot be answered by localhost mock experiments?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-19T05:05:05.983237+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-19T05:39:53.302035+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "f0b1ac93f5522b7d4889fccf651f70c0169f7625f28f04a8adefe450eb116f9a",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "571093cfed539e7e6e855500",
+  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
 }
