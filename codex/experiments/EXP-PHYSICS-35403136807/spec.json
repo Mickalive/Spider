@@ -1,0 +1,41 @@
+{
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Is the 0.933-bit K2 PMI signal on the 12-state hash-routed SPA primarily Markov (action determines next state given current state, requiring only current-state conditioning) or genuinely beyond-Markov (history K>2 adds predictive information beyond current state)?",
+  "hypothesis": "H1 (beyond-Markov): I(S_next; action | S_current, prev_action, prev_state) > I(S_next; action | S_current) by > 0.1 bits at N=5000 on the 12-state hash-routed SPA, indicating that history beyond current state adds predictive information. H0 (Markov): K3 PMI ≈ K2 PMI (difference ≤ 0.1 bits), indicating current state alone captures all action-conditioned predictability. Additionally, H2 (null-bias-structure): the null bias floor scales inversely with N, suggesting finite-sample rather than asymptotic origin.",
+  "falsifier": "Frozen decision rule: (C1) K3 PMI − K2 PMI ≤ 0.1 bits OR bootstrap CI for (K3 − K2) includes 0 at 95% confidence → FALSIFIED-IN-SETTING (Markov signal); (C2) K2 PMI ≤ K1 PMI + 0.05 bits → FALSIFIED-IN-SETTING (current state not contributing); (C3) positive control fails (synthetic deterministic SPA K3 PMI < 1.0 bit) → MEASUREMENT_INVALID; (C4) null control fails (shuffled-action PMI > |0.1| bits) → MEASUREMENT_INVALID; (C5) bias at N=50000 > 0.35 bits (bias floor asymptotic, not finite-sample) → noted as finding but does not trigger falsification.",
+  "baselines": [
+    {
+      "id": "B-MARKOV-CURRENT-STATE",
+      "description": "K2 PMI = I(S_next; action | S_current) at N=5000. Parent value 0.933 bits. If K3 ≈ K2, signal is primarily Markov.",
+      "expected": "K2 PMI ≈ 0.933 bits (replicate parent)"
+    },
+    {
+      "id": "B-MARGINAL-ACTION",
+      "description": "K1 PMI = I(S_next; action) at N=5000. Measures action predictability without state conditioning. If K2 >> K1, current state contributes.",
+      "expected": "K1 PMI < K2 PMI by significant margin"
+    },
+    {
+      "id": "B-N50000-EXPLORATORY",
+      "description": "K2 PMI at N=50000 on same SPA. Tests whether bias floor 0.36-0.42 bits decreases with 10x larger sample, indicating finite-sample origin.",
+      "expected": "Uncertain: if bias decreases, floor is finite-sample; if stable, asymptotic"
+    }
+  ],
+  "positive_control": "8-state deterministic SPA (same as parent): K3 PMI should be ≥ 1.0 bit with p ≤ 0.001. Validates estimator pipeline on fully deterministic environment where H(S_next | S_current, action) = 0 by construction.",
+  "null_control": "Shuffled-action permutation (N_SHUFFLE=1000): action labels randomly reassigned to (state_before, state_after) pairs. Null distribution of PMI should be centered near 0 for the K2 comparison. For the K3 vs K2 comparison, the null is that K3 − K2 ≤ 0 under permutation of the additional history variable.",
+  "measurement_validity": [
+    "Same 12-state SHA256 hash-routed SPA as parent experiments (EXP-PHYSICS-35389142077, EXP-PHYSICS-35402003775)",
+    "N=5000 transitions for primary conditions (K1, K2, K3), N=50000 for exploratory bias-scaling test",
+    "PMI estimator: Laplace-smoothed (alpha=1.0) conditional PMI, same as parent",
+    "Bootstrap CI: 200 bootstrap resamples of trajectory-level blocks (not individual transitions) for K3 − K2 difference",
+    "Same deterministic/stochastic strata mix: ~31.5% deterministic, ~68.5% stochastic",
+    "No null centering required: comparison is K3 vs K2 ratio/difference, not absolute PMI significance",
+    "In-memory simulation (same as parent); not Playwright browser collection"
+  ],
+  "decision_rule": "PRIMARY: If K3 PMI − K2 PMI > 0.1 bits AND bootstrap 95% CI lower bound > 0.0 → SURVIVES_CURRENT_TEST (beyond-Markov structure demonstrated). If K3 − K2 ≤ 0.1 bits OR CI includes 0 → FALSIFIED-IN-SETTING (Markov signal). SECONDARY: If K2 PMI ≤ K1 PMI + 0.05 → current state not contributing, FALSIFIED-IN-SETTING. CONTROLS: If positive_control K3 < 1.0 bit → MEASUREMENT_INVALID. If null_control mean PMI > |0.1| → MEASUREMENT_INVALID. EXPLORATORY: Bias at N=50000 reported but does not gate primary verdict.",
+  "product_consequence_positive": "Beyond-Markov structure demonstrated on synthetic SPA. Validates that history-conditioned state representation captures predictive information beyond current state alone. Supports richer state representation for SPIDER's operational knowledge layer. However, scope is narrow (synthetic SPA, not production Web).",
+  "product_consequence_negative": "Signal is primarily Markov: current state alone captures all action-conditioned predictability. History conditioning adds no information. Implications for SPIDER: state representation need not extend beyond current state for these SPA-like environments. However, scope is narrow; production SPAs with stochastic transitions may differ.",
+  "estimated_cost": "Low: in-memory simulation, N=5000 primary + N=50000 exploratory, ~5-10 min compute. Same codebase as parent experiments.",
+  "expected_information_gain": "HIGH: directly resolves the interpretive ambiguity from the null centering impasse. The K3 vs K2 comparison is self-contained (ratio, not absolute test), does not require null centering, and produces a definitive Markov vs beyond-Markov classification. Information gain is high because the answer changes the interpretation of the reproducible 0.933-bit signal and determines whether history representation adds value for SPIDER state modeling."
+}

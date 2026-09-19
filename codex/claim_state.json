@@ -441,6 +441,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No change to claim status from prior HYPOTHESIS. This experiment falsifies three specific null centering methodologies (parametric bootstrap, Miller-Madow, conditional entropy) for the 12-state hash-routed SPA at N=5000, but does not accumulate evidence for or against the core claim that real Web transitions contain predictive dynamical structure beyond memory. The 0.933-bit K2 PMI signal is real and reproducible (p=0.001) but confirmatory beyond-Markov claim remains unsupported without valid null control. The frozen FALSIFIED-IN-SETTING verdict is due to null methodology limitation, not absence of signal. C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic SPA simulation."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35403136807",
+        "lane": "physics",
+        "created_at": "2026-09-18T22:48:41.862552+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "175217214f2ac0b426247685a11b4db315177895",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence accumulated for or against C-WEB-DYNAMICS. Frozen decision_rule C4 triggers MEASUREMENT_INVALID: shuffled-action null mean 0.407 bits exceeds |0.1| threshold by 4.07x. Audit confirms this is intrinsic to weighted-averaged PMI estimator across deterministic/stochastic strata (31.5% deterministic), not genuine signal. The K3-K2 difference test (designed to be ratio-based and immune to null centering) ALSO fails: point estimate 0.287 > 0.1 bits but bootstrap 95% CI [-0.275, 0.080] includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator is unstable under session resampling due to strata fragmentation. N=50000 exploratory shows bias is ASYMPTOTIC (K2 grows from 0.933 to 1.779), not finite-sample. Point estimates replicate parent exactly (K2 0.933, K3 1.221) confirming reproducibility, but the estimator does not converge to a meaningful information-theoretic quantity. Markov-vs-beyond-Markov question remains unresolved pending estimator revision."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1960,14 +1970,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35402003775",
+      "experiment_id": "EXP-PHYSICS-35403136807",
       "lane": "physics",
-      "created_at": "2026-09-18T22:32:49.214259+00:00",
-      "decision": "FALSIFIED-IN-SETTING \u2014 All three materially orthogonal null frameworks fail to center PMI null at zero for the 12-state hash-routed SPA simulation. Parametric bootstrap null mean 0.357 bits (3.57x above |0.1| threshold, 14.5% improvement over within-stratum 0.417). Miller-Madow null mean 0.407 bits (4.07x above, +13.6% signal boost but null unchanged). Conditional entropy null mean -0.814 bits degenerate (positive control fails: H_full=0.0 on deterministic SPA by construction). Within-stratum permutation 0.417 replicates parent exactly. The null control problem is intrinsic to PMI estimator weighting across deterministic/stochastic strata (31.5% deterministic with PMI=0 diluting weighted average), not permutation scheme or estimator choice. 0/3 frameworks pass frozen decision rule. Measurement valid (audit PASS). The 0.933-bit K2 PMI signal remains reproducible (p=0.001, d~79) but cannot support confirmatory beyond-Markov claim without valid null control.",
-      "source_commit": "cdde08c5e760342c6cac03a30166cf87e864939e",
+      "created_at": "2026-09-18T22:48:41.862552+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "175217214f2ac0b426247685a11b4db315177895",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No change to claim status from prior HYPOTHESIS. This experiment falsifies three specific null centering methodologies (parametric bootstrap, Miller-Madow, conditional entropy) for the 12-state hash-routed SPA at N=5000, but does not accumulate evidence for or against the core claim that real Web transitions contain predictive dynamical structure beyond memory. The 0.933-bit K2 PMI signal is real and reproducible (p=0.001) but confirmatory beyond-Markov claim remains unsupported without valid null control. The frozen FALSIFIED-IN-SETTING verdict is due to null methodology limitation, not absence of signal. C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic SPA simulation."
+      "reason": "No new evidence accumulated for or against C-WEB-DYNAMICS. Frozen decision_rule C4 triggers MEASUREMENT_INVALID: shuffled-action null mean 0.407 bits exceeds |0.1| threshold by 4.07x. Audit confirms this is intrinsic to weighted-averaged PMI estimator across deterministic/stochastic strata (31.5% deterministic), not genuine signal. The K3-K2 difference test (designed to be ratio-based and immune to null centering) ALSO fails: point estimate 0.287 > 0.1 bits but bootstrap 95% CI [-0.275, 0.080] includes zero and bootstrap mean (-0.109) is not centered on observed (0.287), indicating K3 estimator is unstable under session resampling due to strata fragmentation. N=50000 exploratory shows bias is ASYMPTOTIC (K2 grows from 0.933 to 1.779), not finite-sample. Point estimates replicate parent exactly (K2 0.933, K3 1.221) confirming reproducibility, but the estimator does not converge to a meaningful information-theoretic quantity. Markov-vs-beyond-Markov question remains unresolved pending estimator revision."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",

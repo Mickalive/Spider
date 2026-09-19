@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35403136807",
+  "lane": "physics",
+  "execution_timestamp": "2026-09-19T09:58:20Z",
+  "git": {
+    "commit_sha": "bfa97ff29385f2a43337439cef7cf2f514e60a1e",
+    "branch": "lab2/physics",
+    "dirty": true,
+    "repo_root": "/home/runner/work/Spider/Spider"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "numpy_version": "2.5.3",
+    "execution_time_seconds": 24.0,
+    "compute_note": "In-memory simulation, no browser or external services"
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/request.json",
+      "sha256": "3eb2fd81123fbf513fa62cd9416eecfb652e69ff246584bade39862dab1c3b22"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/spec.json",
+      "sha256": "b6effdb78f0b3e5901dd3fe0afdc7e92f2589f8d621c6ad51ee5e29f5748db2d"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/prereg.md",
+      "sha256": "b3a31763c468eb7853779a9e5628ffc2201fd51acf4e9e295e823643a37c9e1d"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/freeze.json",
+      "sha256": "9f4d158bb5788a687238880f35ef127391ffe445645551a4172481b937602ab0"
+    }
+  },
+  "code": {
+    "run_experiment": {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/run_experiment.py",
+      "sha256": "ee70ff1814c217c291968db3ac36b1e5fb2dbdb1b8a9a6ca51db05e97785ba8e",
+      "length_chars": 23372,
+      "description": "Signal decomposition experiment implementing K1/K2/K3 PMI computation, bootstrap CI, shuffled-action null, positive control, N=50000 exploratory"
+    }
+  },
+  "parent_experiment": {
+    "id": "EXP-PHYSICS-35402003775",
+    "path": "research/experiments/EXP-PHYSICS-35402003775/",
+    "handoff_sha256": "dc110667c4e09b4e196d07a4cf6819afed4be2b3b00ef432b7e07b906663116d",
+    "replicated_values": {
+      "k1_pmi_parent": 1.531,
+      "k2_pmi_parent": 0.933,
+      "k3_pmi_parent": 1.221
+    }
+  },
+  "datasets": {
+    "raw_transitions": {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json",
+      "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade",
+      "n_transitions": 5000,
+      "n_sessions": 50,
+      "steps_per_session": 100,
+      "seed": 42,
+      "spa": "12-state SHA256 hash-routed SPA",
+      "actions": [
+        "form_submit",
+        "button_click",
+        "js_navigate",
+        "menu_select"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/result.json",
+      "sha256": "211d02045734d0466c8b6f368a3fd2d715cd333d2e752ce7369451d82746e763",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/report.md",
+      "sha256": "e180821c5526342c59e4eaba59d82343973981440f184580013cc8ee5549cd6e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/raw_results.json",
+      "sha256": "c89bbb85da7ad6aa8e0f3c5e8b785a4590f2bb1ff8d61d2a6954aae009048ee4",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35403136807/raw_output.txt",
+      "sha256": "74b151a431b98374cb4d7ca6cd55fc70fed021a88b63e4cd681e37c8904d3643",
+      "role": "raw"
+    }
+  ],
+  "reproduction_command": "cd /home/runner/work/Spider/Spider && python3 research/experiments/EXP-PHYSICS-35403136807/run_experiment.py",
+  "reproduction_notes": [
+    "Requires numpy (pip install numpy). Uses SEED=42 for all random operations.",
+    "Same SPA definition as parent EXP-PHYSICS-35402003775. Same PMI estimator (Laplace-smoothed weighted average).",
+    "Total execution time ~24 seconds on the test runner."
+  ]
+}
