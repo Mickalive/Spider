@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35470449605",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status from parent HYPOTHESIS. Frozen decision_rule C1 triggers FALSIFIED-IN-SETTING: all 4 estimators (weighted PMI null_mean=0.407, equal-weight 0.704, median 0.686, KNN -0.262) fail |null_mean|<0.1 by 2.6-7.0x margins. The '0% deterministic strata' CANDIDATES redesign is verified at design level (48/48 pairs have 4 distinct candidates) but null bias is reproducibly identical to parent (within 0.001 bits), confirming the bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace alpha=1.0, NOT caused by deterministic/stochastic mixing. Stratum-size decomposition identical to parent: +0.736 at 5-9, +0.562 at 10-19, +0.369 at 20-49. The SPA-redesign pathway for null centering is closed. The parent's H1 hypothesis (bias is environment-caused) is falsified. Beyond-Markov K3-K2 testing is not gated (no estimator passes C1). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. Truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) remain untested and are the required next attack vector."
+    },
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement validity remains limited by the plug-in PMI estimator bias: no estimator achieves valid null centering on this SPA class. The positive control passes (all 4 estimators K3 >= 1.0 bit, p=0.001), confirming the pipeline is functional. However, the measurement cannot support or falsify beyond-Markov claims without a valid estimator. Claim ceiling bounded to: in-memory simulation, 12-state SHA256 hash-routed SPA, URL-only state, 4 actions, N=5000, 500 permutations. Production SPA measurement validity requires a valid estimator first."
+    }
+  ],
+  "product_action": "NONE — No product promotion authorized. This experiment is a methodological negative on null-centering, not a product-relevant result.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can truly orthogonal estimators — specifically KSG (Kraskov-Stögbauer-Grassberger) conditional mutual information, Bayesian model comparison (e.g., variational Bayes for categorical transitions), or likelihood-ratio tests — achieve |shuffled-action null mean| < 0.1 bits on the 12-state hash-routed SPA at N=5000, closing the estimation-bias gap that plug-in PMI (weighted/equal/median) and KNN CMI cannot?",
+  "reason": "The frozen decision rule FALSIFIED-IN-SETTING triggers on C1: all 4 estimators fail null centering by 2.6-7.0x margins. The audit PASS confirms all metrics are correctly computed and the bias is reproducibly identical to parent (within 0.001 bits). The critical fork question from the parent handoff is definitively answered: the bias is estimator-level (intrinsic to plug-in PMI weighted-averaging with Laplace smoothing on varying-size strata), NOT environment-level (deterministic/stochastic mixing). This closes the SPA-redesign pathway. The 4 tested estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) all share the same fundamental limitation: plug-in stratum-level PMI estimation with Laplace smoothing on finite-size strata. Truly orthogonal estimation frameworks (KSG CMI which uses kNN distance-based estimation without explicit stratum partitioning, Bayesian model comparison which uses posterior distributions rather than point estimates, likelihood-ratio tests which compare nested models) have not been tested and represent the materially orthogonal next attack vector for the PMI research program.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35470449605/spec.json:falsifier C1 (all estimators |null_mean| >= 0.1), decision_rule FALSIFIED-IN-SETTING clause (1)",
+    "research/experiments/EXP-PHYSICS-35470449605/result.json:metrics.screening_n5000 (all 4 estimators null_control abs_null_mean >= 0.1, all c1_pass false), metrics.design_level_determinism (PASS 48/48), metrics.determinism_k2_n5000 (31.5% empirical), metrics.stratum_size_bias_decomposition (monotone 0.736/0.562/0.369), metrics.null_control_comparison_to_parent (within 0.001 bits)",
+    "research/experiments/EXP-PHYSICS-35470449605/audit.json:status PASS, producer_claim_supported true, V1-V7 findings, claim_ceiling, recomputed_metrics (all match producer)",
+    "research/experiments/EXP-PHYSICS-35470449605/prereg.md:sections 2, 4, 9, 14 (hypotheses H0/H1, CANDIDATES redesign, null_control, falsification rule)",
+    "research/experiments/EXP-PHYSICS-35470449605/report.md:sections 3-5 (SPA design verification, results, interpretation), controls ledger",
+    "research/experiments/EXP-PHYSICS-35470449605/provenance.json:artifacts hashes, parent_experiment, data collection_method in-memory",
+    "research/experiments/EXP-PHYSICS-35445596894/handoff.json:carry_forward (parent established/rejected/unknown), next_question (this experiment's question)",
+    "research/experiments/EXP-PHYSICS-35445596894/result.json:parent screening_n5000 and stratum_size_bias_decomposition for reproducibility comparison"
+  ]
+}
