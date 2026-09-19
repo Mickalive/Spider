@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35445595071",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Can decompressed payload byte-equality to ground-truth uncompressed body be verified via direct correctness controls (compare decompressed output to expected uncompressed body per state, or to direct origin fetch without proxy), establishing that iterative decompression actually produces correct output rather than silently falling back to compressed bytes that happen to preserve state-grouping discrimination?",
+  "why_next": "The multi-chunk framing question is resolved for this size class: chunked TE is transparent to iterative decompression pipeline. But the decompression CORRECTNESS question is not answered: V1 (decompress_body never raises, error count tautologically 0) and V2 (decompressed discrimination = compressed discrimination = 0.5, metric insensitive to actual decompression output) mean we cannot distinguish successful brotli decompression from silent fallback to compressed bytes that happen to preserve state-grouping. Before advancing C-MEAS-VALID toward real CDN testing (the product-readiness blocker), correctness must be established with direct payload-equality controls. Otherwise the entire decompression-normalization line rests on an unverified assumption.",
+  "carry_forward": {
+    "established": [
+      "Chunked framing transparency: iterative decompression (brotli->gzip->identity, max_depth=5) processes brotli payloads spanning 3-6 HTTP chunks (chunk_size=32 bytes, compressed 70-173 bytes) without crashes or loss of state-grouping on localhost buffered Python reverse proxy (audit V6 recomputation match, C_COMPRESSED_SIZE_VERIFICATION pass)",
+      "Deterministic within-state grouping preserved under multi-chunk: decompressed hash all_same=true for all 4 auth states across all 6 cells, B-RANDOM=0.0 for all cells",
+      "Origin serves Transfer-Encoding: chunked without Content-Length for all cells (C_ORIGIN_VERIFICATION 3/3 content types pass)",
+      "Single-chunk baseline regression reproduces parent: SINGLE-CHUNK discrimination 0.5 matching parent result",
+      "Auth-aware caching (URL+Accept-Encoding+Authorization cache key) is compatible with chunked TE (inherited from parent EXP-RUNTIME-35434773328)",
+      "Decompression-normalization preserves body-only discrimination at 0.5 through end-to-end chunked TE (origin->proxy->client) in both PASSTHROUGH and AUTH-AWARE CACHED modes on localhost (inherited from parent EXP-RUNTIME-35434773328, expanded by this experiment to include multi-chunk)"
+    ],
+    "rejected": [
+      "Chunk boundaries corrupt brotli multi-byte symbols at chunk_size=32 for 70-173 byte payloads - rejected (0 errors, deterministic grouping preserved across 480 requests)"
+    ],
+    "unknown": [
+      "Decompressed payload byte-equality to ground-truth uncompressed body per state (correctness control absent - V1/V2 degenerate)",
+      "Real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration, chunked TE, Accept-Encoding negotiation, quality variation, geographic latency",
+      "Larger payloads (10KB, 100KB) where compressed brotli spans 100+ chunks and dictionary references may cross many boundaries",
+      "gzip multi-chunk reassembly (only brotli tested)",
+      "Streaming partial-frame forwarding (proxy buffers entire upstream then re-chunks, does not exercise streaming failure modes)",
+      "Quality variation (4-8 cycling) and Accept-Encoding negotiation with real CDN",
+      "CL-PASSTHROUGH with true Content-Length origin (use_chunked=False) isolating V1 contamination from parent",
+      "CDN-specific header interaction (X-Cache, Via, ETag, Content-Length) under multi-chunk framing on the wire"
+    ],
+    "do_not_assume": [
+      "Decompression correctness is established - discrimination 0.5 is structural ceiling from 3-way error collapse; compressed and decompressed discrimination are identical (both 0.5); decompress_body never raises so error count is tautologically 0; the metric cannot distinguish successful brotli decompression from silent fallback to compressed bytes (audit V1, V2)",
+      "0.5 discrimination is a production ceiling - it is a structural property of 3-way error collapse (no_auth/expired/invalid share identical bodies) in mock design",
+      "The mechanism survives production CDN - localhost mock does not replicate Accept-Encoding negotiation, CDN-specific header manipulation, geographic latency, multi-layer encoding, or production-scale concurrency",
+      "C-MEAS-VALID is ready for Product Core promotion - real CDN infrastructure is the sole remaining blocker, AND decompression correctness must be established first",
+      "Multi-chunk reassembly works for large payloads - compressed sizes tested are 70-173 bytes spanning 3-6 chunks; larger payloads where dictionary references cross many chunk boundaries are untested",
+      "Origin verification applies to measured origins - verification was on fresh mock_verify servers on separate ports, not the origins serving the 480 measured requests (V4)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35434773328 (parent: end-to-end chunked TE PASSTHROUGH/AUTH-AWARE CACHED, V2 do_not_assume multi-chunk untested)",
+    "research/experiments/EXP-RUNTIME-35401995092 (grandparent: proxy->client chunked downstream, carry_forward upstream chunked gap)",
+    "research/experiments/EXP-RUNTIME-35389142338 (great-grandparent: auth-aware caching)",
+    "codex/claim_state.json (C-MEAS-VALID claim history, latest: EXP-RUNTIME-35434773328 SURVIVES_CURRENT_TEST EXPERIMENTAL)",
+    "codex/index.json (prior runtime experiments and their decisions)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35445595071/result.json (480 requests, 6 cells, all discrimination 0.5, B-RANDOM 0.0, compressed 70-173 bytes exceeds_chunk_size true for MULTI-CHUNK)",
+    "research/experiments/EXP-RUNTIME-35445595071/audit.json (V1_DEGENERATE_ERROR_CONTROL medium, V2_INSENSITIVE_DISCRIMINATION medium, V3_PROXY_BUFFERING_MASKS_STREAMING low, V4_ORIGIN_VERIFICATION_INDIRECT low, V5_SPEC_DEVIATION low, V6_RECOMPUTATION_MATCH info, claim_ceiling bounded to framing transparency only)",
+    "research/experiments/EXP-RUNTIME-35445595071/spec.json (frozen decision_rule 5 conditions, hypothesis, falsifier, measurement_validity)",
+    "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py (V1: decompress_body 387-405 never raises; V2: fingerprint 412-428 with status; V3: proxy 318-347 buffering; V4: origin 553-562 chunk_size 32/1024)",
+    "research/experiments/EXP-RUNTIME-35445595071/verdict.json (CONSTRAINED, C-MEAS-VALID stays EXPERIMENTAL, framing transparency established, decompression correctness not established)",
+    "research/experiments/EXP-RUNTIME-35434773328/handoff.json (parent: do_not_assume multi-chunk untested, established end-to-end chunked TE)",
+    "research/experiments/EXP-RUNTIME-35434773328/audit.json (V2_SINGLE_CHUNK_DEGENERACY resolved by this experiment)"
+  ],
+  "recommended_action": "Design a decompression-correctness experiment: add direct payload-equality control (decompressed byte hash == expected uncompressed body hash per state, computed from generate_*_body output or from direct origin fetch without proxy compression) and fix error counting to classify brotli/gzip decompression fallback as error (count raw-bytes-return as failure). This is a prerequisite for meaningful real CDN testing because without correctness verification, passing through a CDN proves nothing about decompression quality. Alternatively, in parallel, test multi-chunk reassembly with larger payloads (10KB, 100KB) where brotli dictionary references may cross chunk boundaries, and test gzip multi-chunk (not just brotli). Real CDN testing remains the ultimate product-readiness gate but correctness must be established first."
+}

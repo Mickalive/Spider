@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35445595071",
+  "lane": "runtime",
+  "github_run_id": null,
+  "commits": {
+    "base_sha": "9d9a09e5f774143121e58b6fca8b698001aaadaa",
+    "request_sha": "bae0aa6ff35b2aba9cdf1126354ea123eb7c20d1748cd50963aece726d456c92"
+  },
+  "datasets_fixtures": [
+    "Mock OAuth2 Flask server (inline in run_experiment.py): brotli-compressed responses with auth-state-dependent bodies",
+    "4 auth states: no_auth (200, login_required), valid_token (200, alice_profile), expired_token (401, auth_failed), invalid_token (401, auth_failed, identical to expired)",
+    "3 content types: JSON, HTML, XML at 1KB nominal uncompressed size with incompressible padding",
+    "Brotli quality 6 for all compressed responses"
+  ],
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py — full experiment execution script (mock origin, reverse proxy, iterative decompression, discrimination scoring)",
+    "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py — parent experiment (base for code adaptation)"
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "packages": {
+      "brotli": "1.2.0",
+      "PyJWT": "2.14.0",
+      "requests": "2.34.2"
+    }
+  },
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35445595071/result.json",
+      "role": "derived",
+      "description": "Full experiment result with per-cell metrics, controls, observations"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script (source of truth for methodology)"
+    }
+  ],
+  "execution_commands": [
+    "cd research/experiments/EXP-RUNTIME-35445595071 && python run_experiment.py"
+  ],
+  "reproduction_notes": "Script is self-contained. Requires brotli, PyJWT, requests packages. All servers bind to 127.0.0.1 with allow_reuse_address=True. Ports: BASE_PORT=7700 (origins), PROXY_PORT_BASE=7800 (proxies), 6700+ (verification). Duration: ~3 minutes on localhost."
+}

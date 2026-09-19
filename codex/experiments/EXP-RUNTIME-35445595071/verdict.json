@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35445595071",
+  "lane": "runtime",
+  "decision": "CONSTRAINED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule passes arithmetically (all 5 conditions met): decompressed discrimination 0.5 >= 0.3 for all MULTI-CHUNK cells, determinism all_same=true for all states across all conditions, B-RANDOM 0.0 for all 6 cells, 0 counted decompression errors, MULTI-CHUNK discrimination 0.5 >= 0.3. Audit recomputes all metrics exactly (V6). The experiment directly resolves the parent V2 blocker (single-chunk degeneracy): compressed payloads 70-173 bytes genuinely span 3-6 chunks at chunk_size=32, and chunked framing is transparent to iterative decompression pipeline at this size. However, the frozen decision conditions are degenerate (audit V1: decompress_body never raises so error count is tautologically 0; V2: decompressed and compressed discrimination are identical at 0.5 because the metric cannot distinguish successful decompression from silent fallback to compressed bytes which also group as 0.5 via 3-way error collapse). The claim ceiling is bounded to: chunked framing transparency (no crashes, deterministic within-state grouping preserved) for localhost buffered Python reverse proxy, single-quality brotli (quality 6), payloads 70-173 bytes spanning 3-6 chunks, JSON/HTML/XML at 1KB nominal, 4 auth states with 3-way error collapse, N=20 per state per cell (480 total), Python 3.12.14 brotli 1.2.0. Does NOT establish decompressed payload byte-equality to ground-truth uncompressed body (no correctness control), real CDN behavior, larger payloads, gzip multi-chunk, streaming partial-frame forwarding, or production readiness. C-MEAS-VALID remains EXPERIMENTAL: decompression-normalization chunked-TE sub-thread advances but the sole remaining blocker for product readiness (real CDN infrastructure) is unchanged."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can decompressed payload byte-equality to ground-truth uncompressed body be verified via direct correctness controls (compare decompressed output to expected uncompressed body per state, or to direct origin fetch without proxy), establishing that iterative decompression actually produces correct output rather than silently falling back to compressed bytes that happen to preserve state-grouping discrimination?",
+  "reason": "CONSTRAINED: The frozen decision rule passes arithmetically but the audit reveals the metric infrastructure is degenerate. V1 (decompress_body never raises, error count tautologically 0) and V2 (decompressed discrimination = compressed discrimination = 0.5, metric cannot distinguish success from silent fallback) mean the decision conditions do not actually test decompression correctness. The experiment establishes that chunked framing is transparent to the decompression pipeline (no crashes, deterministic grouping preserved), which resolves the parent V2 single-chunk degeneracy blocker for this size class. But decompression correctness itself remains unverified. The Director bounds the claim to framing transparency only and does not advance C-MEAS-VALID. The claim status remains EXPERIMENTAL with a narrowed ceiling. Real CDN infrastructure remains the sole blocker for product readiness, but decompression correctness must be established before that test is meaningful.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35445595071/request.json",
+    "research/experiments/EXP-RUNTIME-35445595071/spec.json",
+    "research/experiments/EXP-RUNTIME-35445595071/freeze.json",
+    "research/experiments/EXP-RUNTIME-35445595071/result.json (480 requests, all 6 cells discrimination 0.5, B-RANDOM 0.0, 0 counted errors, MULTI-CHUNK exceeds_chunk_size true, compressed 70-173 bytes)",
+    "research/experiments/EXP-RUNTIME-35445595071/audit.json (V1_DEGENERATE_ERROR_CONTROL medium, V2_INSENSITIVE_DISCRIMINATION medium, V3_PROXY_BUFFERING_MASKS_STREAMING low, V4_ORIGIN_VERIFICATION_INDIRECT low, V5_SPEC_DEVIATION low, V6_RECOMPUTATION_MATCH info, claim_ceiling)",
+    "research/experiments/EXP-RUNTIME-35445595071/report.md",
+    "research/experiments/EXP-RUNTIME-35445595071/provenance.json",
+    "research/experiments/EXP-RUNTIME-35445595071/run_experiment.py:387-405 decompress_body never raises; 412-428 fingerprint with status; 318-347 proxy buffering then re-chunking; 553-562 origin chunk_size 32/1024",
+    "research/experiments/EXP-RUNTIME-35434773328/handoff.json (parent SURVIVES_CURRENT_TEST, V2 do_not_assume multi-chunk untested, V1 contamination, V3 indirect verification)",
+    "research/experiments/EXP-RUNTIME-35434773328/audit.json (V2_SINGLE_CHUNK_DEGENERACY medium, V1_CL_REGRESSION_CONTAMINATION, V3_ORIGIN_VERIFICATION_INDIRECT)",
+    "codex/claim_state.json (C-MEAS-VALID latest event: EXP-RUNTIME-35434773328 SURVIVES_CURRENT_TEST EXPERIMENTAL)",
+    "codex/index.json"
+  ]
+}
