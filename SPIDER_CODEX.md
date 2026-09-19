@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **158**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **159**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -168,6 +168,7 @@ Validated experiments: **158**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35409929216 | product | REVISE | FRAGILE-HYPOTHESIS-FALSIFIED-BUT-ECONOMICS-UNMEASURED — The frozen fragile hypothesis is FALSIFIED: break-even systematic bias is 33.3 tokens/task (far exceeds frozen F1 threshold of 3 tokens/task) and bootstrap survival is 96.1% under ±50% completion variation (far exceeds frozen F2 threshold of 70%). The margin is analytically robust to completion token estimation error under the frozen assumptions. However: (1) the audit V1_V_BREAK_EVEN_TAUTOLOGY identifies that systematic uniform bias cannot erase the margin by construction (margin is a difference), so the break-even threshold is only meaningful for differential bias; (2) the audit V2_V_BOOTSTRAP_SCALE_MISMATCH identifies that the bootstrap tests the 112-token selection savings, not the full 1067-token workflow margin, due to independent sampling dropping the 955-token completion offset; (3) critically, audit V4_V4_PURELY_ANALYTICAL_NO_LLM_MEASUREMENT confirms this is the fourth consecutive PRODUCT experiment with zero real LLM calls — the 5.42% margin is based entirely on analytical estimates (completion tokens 2/15/20 assumed, not measured). The absolute savings (1067 tokens, 5.42%) remain thin and the COLD baseline is analytically 7.5x cheaper. No product promotion. C-PRODUCT-ECON remains HYPOTHESIS. | C-PRODUCT-ECON | `c054b9f56124` |
 | EXP-INTEL-35409927864 | intel | PASS | FALSIFIES — Frozen decision_rule NOT C1 triggers FALSIFIES: sample elements are NOT 100% identical within page type (y-coordinates differ for elements 12-19, 8/20 elements). Even ignoring positional y-differences, C2 and C4 still FAIL (eta2=1.0 on tag_entropy/form_fraction/total_area, I_sample=1.449 bits ≠ 0.0). The template-composition hypothesis is decisively falsified: the locatable_sample HAS task-type discrimination (eta2=1.0), and the parent's hierarchy-weighted density producing eta2=0.0 is caused by the density formula collapsing between-type variance, not by sample template invariance. Audit PASS confirms all recomputed metrics match producer. Claim ceiling bounded to 7 tasks, 1 Magento site, 3 definitions, truncated-first-20 locatable_sample. | C-MEAS-VALID | `f8d8e8447dc3` |
 | EXP-INTEL-35422991016 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID | `f2ad3407e315` |
+| EXP-RUNTIME-35434773328 | runtime | REVISE | SURVIVES_CURRENT_TEST — All 7 frozen decision-rule conditions pass: (1) decompressed body-only discrimination >= 0.3 for all 27 chunked cells (min 0.5), (2) decompressed hash determinism all_same=true for all states across all conditions, (3) B-RANDOM = 0.0 for all 27 cells, (4) CL-PASSTHROUGH = 0.5 for all 9 CL cells, (5) 0 decompression errors across all 540 requests, (6) CHUNKED-CACHED discrimination >= 0.3 for all cells (min 0.5), (7) C_ORIGIN_VERIFICATION passes (9/9 content conditions serve TE:chunked without Content-Length). Audit confirms all recomputed metrics match producer exactly. However, the claim ceiling is bounded by three audit findings: (V1) CL-PASSTHROUGH origin was also chunked (contamination of regression control — still passes at 0.5 but not an independent CL-origin baseline), (V2) all compressed body_sizes 70-176 bytes fit in a single chunk (chunk_size=1024), so multi-chunk brotli boundary splitting is untested, (V3) origin verification is on fresh verify servers not the measured origins. The upstream origin->proxy chunked path is genuinely exercised and transparent to proxy reassembly for single-chunk payloads. | C-MEAS-VALID | `792f9f362643` |
 
 ## Latest recorded claim events
 
@@ -178,7 +179,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35389145821 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-INTEL-35422991016 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35434773328 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | HYPOTHESIS | EXP-PRODUCT-35409929216 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |

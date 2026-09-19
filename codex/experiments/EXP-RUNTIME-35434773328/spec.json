@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-RUNTIME-35434773328",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression survive Transfer-Encoding: chunked on the upstream origin->proxy leg (origin actually serving chunked without Content-Length, proxy reassembling) — fixing the two implementation gaps (origin use_chunked=False, double-header) that bounded the parent's claim ceiling to proxy->client only?",
+  "hypothesis": "The parent (EXP-RUNTIME-35401995092) established that iterative decompression preserves decompressed body-only discrimination at 0.5 through chunked TE on the proxy->client leg (downstream). However, the origin was always started with use_chunked=False, so the upstream origin->proxy chunked reassembly path was never tested. The parent's audit identified this as a measurement validity gap (V1, severity medium). If chunked TE on the upstream leg is transparent to the proxy's reassembly pipeline (proxy reassembles chunked stream into coherent byte stream before forwarding/decompressing), discrimination should remain at 0.5 matching the parent's downstream result. If origin-served chunked causes the proxy to fail reassembly (partial chunks forwarded, chunk boundaries corrupt brotli multi-byte symbols, or proxy fails to strip chunked framing before cache storage), discrimination will drop below 0.3 or decompression errors will appear.",
+  "falsifier": "Decompressed body-only discrimination < 0.3 for any (auth_state, content_type x size) combination under chunked TE in either PASSTHROUGH or AUTH-AWARE CACHED mode when origin serves chunked, OR decompression errors > 0 for any chunked TE condition, OR decompressed hash for any auth state through chunked proxy with origin-served chunked differs from direct-server hash (determinism failure), OR regression: Content-Length PASSTHROUGH discrimination drops below 0.5 (proxy infrastructure change breaks baseline), OR chunked AUTH-AWARE CACHED discrimination < 0.3 for any cell, OR origin verification fails (origin response contains Content-Length header for CHUNKED conditions — confirming chunked is NOT actually served).",
+  "baselines": [
+    {
+      "id": "B-PARENT-DOWNSTREAM-CHUNKED-0.5",
+      "description": "Parent established decompressed body-only discrimination 0.5 for chunked TE on proxy->client leg only (origin not chunked). Regression reference: upstream chunked should not degrade below this.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-PARENT-CONTENT-LENGTH-0.5",
+      "description": "Parent and grandparent established decompressed body-only discrimination 0.5 for Content-Length PASSTHROUGH. Proxy infrastructure must not degrade below this for CL mode.",
+      "expected_value": 0.5
+    },
+    {
+      "id": "B-RANDOM",
+      "description": "SHA256 on random 32-byte fingerprints. Expected ~0.0. Null control for spurious structure.",
+      "expected_value": 0.0
+    },
+    {
+      "id": "B-CHUNKED-CACHED-0.5",
+      "description": "If upstream chunked is transparent and auth-aware caching works identically, CACHED discrimination should match parent at 0.5.",
+      "expected_value": 0.5
+    }
+  ],
+  "positive_control": "C_CONTENT_LENGTH_REGRESSION: Content-Length PASSTHROUGH mode discrimination must equal 0.5 for all (auth_state, content_type x size) combinations — identical to parent. Confirms proxy infrastructure unchanged and any upstream-chunked effect is attributable to origin framing, not proxy drift.",
+  "null_control": "C_NULL_CONTROL: B-RANDOM ~ 0.0 for all conditions. Random fingerprints cannot produce discriminating structure.",
+  "measurement_validity": [
+    "Same mock origin server as parent: localhost Flask/stdlib, 4 auth states (no_auth, valid_token, expired_token, invalid_token), JSON/HTML/XML x 1KB/10KB/100KB, brotli quality 6 deterministic.",
+    "Same Python reverse proxy as parent on separate localhost port. Three configurations tested: (a) CL-PASSTHROUGH — Content-Length forwarding, PASSTHROUGH mode (parent baseline); (b) CHUNKED-PASSTHROUGH — Transfer-Encoding: chunked, PASSTHROUGH mode; (c) CHUNKED-CACHED — Transfer-Encoding: chunked, AUTH-AWARE CACHED mode (URL+Accept-Encoding+Authorization in cache key, Cache-Control: private, Vary: Authorization).",
+    "FIX FROM PARENT V1: Origin server is configured with use_chunked=True for CHUNKED-PASSTHROUGH and CHUNKED-CACHED cells. Origin serves responses with Transfer-Encoding: chunked (no Content-Length header) for chunked conditions. Verification: origin response must NOT contain Content-Length header for CHUNKED conditions (checked in observations).",
+    "FIX FROM PARENT V2: Proxy cache HIT path for chunked configs sends ONLY Transfer-Encoding: chunked (no Content-Length), fixing the HTTP/1.1 double-header violation from parent audit V2.",
+    "FIX FROM PARENT V3: PARENT_REF_HASHES dead code resolved — either removed or asserted byte-for-byte equal to frozen artifact with clear documentation of which is the determinism ground truth.",
+    "Accept-Encoding header from client: 'br, gzip, identity' in all conditions.",
+    "Content types: JSON, HTML, XML. Sizes: 1KB, 10KB, 100KB. Auth states: no_auth, valid_token, expired_token, invalid_token.",
+    "N=5 reps per (auth_state, content_type x size, config). 4 states x 9 conditions x 3 configs x 5 reps = 540 total requests.",
+    "Seed=44 for request ordering (same as parent for comparability).",
+    "Iterative decompression: decompress repeatedly (brotli->gzip->identity) until failure or max_depth=5. Same as parent.",
+    "Decompressed hash for each chunked response must match the direct-server hash for the same (auth_state, content_type, size). This is the determinism-across-transport-framing test including origin-served chunked."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) decompressed body-only discrimination >= 0.3 for ALL (auth_state, config) combinations under chunked TE (both CHUNKED-PASSTHROUGH and CHUNKED-CACHED), (2) decompressed hash for each (auth_state, content_type, size) through chunked proxy matches the direct-server hash — determinism across transport framing including origin-served chunked, (3) B-RANDOM = 0.0 for all conditions, (4) C_CONTENT_LENGTH_REGRESSION passes (Content-Length PASSTHROUGH discrimination = 0.5 for all cells — reproducing parent), (5) 0 decompression errors across all chunked TE conditions, (6) chunked AUTH-AWARE CACHED discrimination >= 0.3 for all cells, (7) ORIGIN_VERIFICATION passes (origin response contains Transfer-Encoding: chunked and does NOT contain Content-Length for CHUNKED conditions — confirming origin actually serves chunked). FALSIFIED-IN-SETTING if chunked TE discrimination < 0.3 for any cell, OR any decompressed hash through chunked proxy differs from direct-server hash, OR decompression errors > 0 on chunked responses, OR Content-Length PASSTHROUGH drops below 0.5 (infrastructure regression), OR origin verification fails (origin still sends Content-Length for CHUNKED conditions). MEASUREMENT_INVALID if proxy fails to start, origin server unreachable through proxy, or chunked TE is not correctly applied on BOTH legs (origin and proxy).",
+  "product_consequence_positive": "Iterative decompression survives end-to-end chunked TE (origin->proxy->client) in both passthrough and cached modes. This closes the parent's explicit upstream scope gap and completes the chunked TE story on localhost. Product team can proceed with chunked TE as a supported transport mode on localhost mock infrastructure. The remaining blocker for C-MEAS-VALID shifts to real CDN infrastructure only (edge-specific concerns: Accept-Encoding negotiation, quality variation, geographic latency, CDN-specific header manipulation).",
+  "product_consequence_negative": "End-to-end chunked TE breaks iterative decompression (discrimination < 0.3 or decompression errors > 0 when origin serves chunked). This identifies a specific upstream reassembly constraint that must be resolved before CDN deployment. Possible root causes: (a) proxy cannot reassemble origin-chunked stream before forwarding; (b) chunk boundaries corrupt brotli symbols during proxy reassembly; (c) cache storage fails with chunked input. Each failure mode identifies a specific fix.",
+  "estimated_cost": "< 8000 tokens, < 3 minutes execution. 4 states x 9 conditions x 3 configs x 5 reps = 540 requests. Minimal code changes from parent: (1) set use_chunked=True for CHUNKED conditions in start_mock_server; (2) remove Content-Length from cache HIT chunked path; (3) resolve PARENT_REF_HASHES. Same mock server, same proxy, only origin TE framing changed.",
+  "expected_information_gain": "HIGH. This is the minimum-cost experiment that closes the parent's explicit upstream scope gap (origin->proxy chunked) before real CDN investment. The parent identified origin chunked as the sole remaining localhost blocker and explicitly excluded it from its claim ceiling. If upstream chunked passes: the full chunked TE story is closed on localhost and the real-CDN experiment can focus on edge-specific concerns. If upstream chunked fails: there is a specific proxy reassembly issue that must be resolved locally first, saving the cost of a failed real-CDN deployment. Either outcome is strictly more informative than either (a) repeating the parent or (b) jumping to real CDN with an untested upstream path."
+}
