@@ -1,17 +1,57 @@
 {
   "experiment_id": "EXP-INTEL-35462974425",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM elements (n=21-82 per task, not truncated-first-20) with richer element diversity — specifically, does canonical recipe ranking agreement reach the 80% threshold when the effective element count exceeds the 20-element truncation ceiling?",
+  "hypothesis": "The ranking instability observed at truncated-first-20 (canonical recipe agreement 55.95%, C6 FAIL in parent EXP-INTEL-35445596324) is a truncation artifact. Full DOM samples contain richer element diversity with more discriminative elements per definition, enabling canonical recipe sampling to capture a more representative subset of the definition-matching elements. Specifically: (H1) canonical recipe ranking agreement for tag_entropy × DEF-FULL-MAP will be ≥80% when computed on full locatable_sample (all elements with bbox, n=21-82 per task); (H2) full-DOM agreement will exceed truncated-first-20 agreement by ≥10 percentage points; (H3) per-task recipe ranking agreement will be ≥85% at full DOM.",
+  "falsifier": "The hypothesis is falsified if ANY of: (F1) Canonical recipe ranking agreement for tag_entropy × DEF-FULL-MAP on full DOM is <75% — demonstrating that the truncation ceiling is NOT the binding constraint and the instability is structural regardless of element count; (F2) Full-DOM agreement does NOT exceed truncated-first-20 agreement (55.95%) by ≥5 percentage points — demonstrating that additional elements do not improve stability; (F3) Per-task recipe ranking agreement on full DOM is <75% — demonstrating that even independent per-task sampling cannot stabilize rankings with richer element diversity; (F4) Pipeline eta2 for tag_entropy × DEF-FULL-MAP on full DOM drops below 0.90 — demonstrating that full-DOM elements introduce noise that degrades discrimination.",
+  "baselines": [
+    {
+      "id": "B1_TRUNCATED_FIRST20_CANONICAL",
+      "description": "Parent canonical recipe ranking agreement at truncated-first-20: tag_entropy × DEF-FULL-MAP 55.95% (559.5/1000 iterations), tag_entropy × DEF-FORM-ONLY 49.34%. From EXP-INTEL-35445596324 result.json M4 at n=20.",
+      "source": "EXP-INTEL-35445596324 result.json M4_recipe_canonical_ranking_agreement['20']"
+    },
+    {
+      "id": "B2_TRUNCATED_FIRST20_PERTASK",
+      "description": "Parent per-task recipe ranking agreement at truncated-first-20: tag_entropy × DEF-FULL-MAP 78.65%. From EXP-INTEL-35445596324 result.json M5 at n=20.",
+      "source": "EXP-INTEL-35445596324 result.json M5_recipe_pertask_ranking_agreement['20']"
+    },
+    {
+      "id": "B3_NON_RECIPE_RANKING_AGREEMENT",
+      "description": "Non-recipe pipeline ranking agreement: tag_entropy preserves listing > detail for both DEF-FULL-MAP and DEF-FORM-ONLY at truncated-first-20 (100% agreement). This is the ceiling that recipe sampling must approach.",
+      "source": "EXP-INTEL-35445596324 result.json B2 controls"
+    },
+    {
+      "id": "B4_PIPELINE_DISCRIMINATION",
+      "description": "Non-recipe pipeline eta2 at truncated-first-20 n=20: tag_entropy × DEF-FORM-ONLY = 0.9996, tag_entropy × DEF-FULL-MAP = 0.9958. Pipeline preserves discrimination; full DOM should maintain or improve.",
+      "source": "EXP-INTEL-35445596324 result.json M3_pipeline_eta2_by_effective_n['20']"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_RAW_FEATURE_REPRODUCES_FULL_DOM",
+    "description": "Direct (non-pipeline) computation of tag_entropy, form_fraction, and total_area eta2 on page_type reproduces eta2 >= 0.99 on the full DOM locatable_sample, confirming raw features retain perfect discrimination with the larger element set. Same control as parent PC1 but on full DOM.",
+    "expected": "All three features: eta2 >= 0.99, within-type std < 0.001. Feature values will differ from truncated-first-20 because more elements contribute to the sums, but within-type template invariance should preserve perfect discrimination."
+  },
+  "null_control": {
+    "id": "NC1_HIERARCHY_NORMALIZED_FULL_DOM",
+    "description": "The normalized hierarchy-weighted density formula (sum(exp(-alpha*depth)*inForm) / total_weight) produces eta2 < 0.01 on page_type with full DOM elements, reproducing the y-proxy degeneracy anchor. Same as parent NC1 but on full DOM.",
+    "expected": "Normalized hierarchy density: eta2 < 0.01, all page type means within 1% of each other."
+  },
+  "measurement_validity": [
+    "All computations use existing raw evidence from EXP-INTEL-34782350557 (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050). The raw data contains locatable_sample per task — prior experiments truncated to first-20 elements; this experiment uses ALL elements with bbox. No new data collection required. No browser/network/model calls.",
+    "CRITICAL DATA AVAILABILITY CHECK: The analysis script must first verify that locatable_sample contains >20 elements per task. If ALL tasks have exactly 20 elements in locatable_sample (confirming the raw data itself is truncated at collection time), the experiment is BLOCKED and cannot proceed — full DOM re-collection from the Magento Docker container would be required.",
+    "The 7 tasks (3 listing, 3 detail, 1 cart deduplicated to n=1) with full locatable_sample are the input. Full element counts expected: listing 1550-1564 elements_with_bbox, detail 1149-1215, cart 1070. Within-type template invariance is inherited — full DOM should have more diverse elements per definition.",
+    "OECD/COINr definitions use the SAME role mappings as prior experiments: DEF-FULL-MAP (a→link, input→textbox), DEF-FORM-ONLY (form roles only). ISOLATED-A-LINK expected degenerate zero; analysis focuses on DEF-FULL-MAP and DEF-FORM-ONLY.",
+    "Feature-weighted density = sum(feature_value(elem) for elem matching definition) / elements_with_bbox. This replaces element COUNT with feature VALUE sum while preserving definition filtering and normalization structure.",
+    "Full DOM analysis: For each task, use the ENTIRE locatable_sample (all elements with bbox). Compute feature-weighted density, eta2, and ranking agreement. Compare against truncated-first-20 results from parent.",
+    "Recipe sampling at full DOM: For canonical recipe (shared subset p=0.5) and per-task recipe (independent p=0.5 per task), perform 10 seeds × 1000 iterations. This replicates parent protocol on full DOM.",
+    "Bootstrap resampling for uncertainty: B=1000 bootstrap resamples of tasks within each page_type, compute ranking agreement per bootstrap, report mean ± std. This quantifies whether full-DOM bootstrap CI is narrower than parent's 57.1% ± 49.5%.",
+    "Metrics bounded to 7 tasks, 1 Magento site, 3 definitions (2 non-degenerate), 2 recipes, 3 features. Cart n=1 within-type variance degenerate; comparison focuses on listing vs detail.",
+    "DEF-FORM-ONLY analysis included but primary focus is DEF-FULL-MAP (broader definition, more matching elements, higher discrimination potential)."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_RAW_FEATURES_REPRODUCE_FULL_DOM: The positive control PC1 passes: all three direct features achieve eta2 >= 0.99 on page_type with within-type std < 0.001 using full DOM locatable_sample. PASS if all three pass; FAIL if any eta2 < 0.99.\n\nC2_HIERARCHY_NORMALIZED_REPRODUCES_FULL_DOM: The null control NC1 passes: normalized hierarchy density eta2 < 0.01 on page_type using full DOM. PASS if eta2 < 0.01; FAIL if eta2 >= 0.01.\n\nC3_FULL_DOM_ELEMENTS_AVAILABLE: The full DOM locatable_sample contains >20 elements for at least 5 of 7 tasks. PASS if >=5 tasks have locatable_count > 20; FAIL if <5 tasks — experiment BLOCKED (data is truncated at collection time, full DOM re-collection required).\n\nC4_FULL_DOM_PIPELINE_ETA2: At least one feature-weighted density through the OECD/COINr pipeline (any definition × any recipe × any feature) on full DOM achieves eta2 >= 0.05 on page_type. PASS if max(eta2) >= 0.05; FAIL if all eta2 < 0.05.\n\nC5_FULL_DOM_EXCEEDS_TRUNCATED: Canonical recipe ranking agreement for tag_entropy × DEF-FULL-MAP on full DOM exceeds truncated-first-20 agreement (55.95%) by ≥5 percentage points. PASS if full_DOM_agree > 0.6095; FAIL if ≤ 0.6095.\n\nC6_RANKING_STABILITY_FULL_DOM: Canonical recipe ranking agreement for tag_entropy × DEF-FULL-MAP on full DOM is ≥ 75%. PASS if agreement >= 0.75; FAIL if < 0.75.\n\nC7_PERTASK_RECIPE_IMPROVES: Per-task recipe ranking agreement for tag_entropy × DEF-FULL-MAP on full DOM is ≥ 85%. PASS if agreement >= 0.85; FAIL if < 0.85.\n\nVERDICT RULES:\n- If NOT C1: MEASUREMENT_INVALID — raw features don't reproduce on full DOM.\n- If NOT C2: MEASUREMENT_INVALID — hierarchy anchor fails on full DOM.\n- If NOT C3: BLOCKED — full DOM data unavailable, experiment cannot proceed.\n- If C1 AND C2 AND C3 AND NOT C4: FALSIFIES — pipeline collapses ALL feature-based discrimination on full DOM. Recipe density is not viable.\n- If C1 AND C2 AND C3 AND C4 AND NOT C5: FALSIFIES — full DOM does NOT improve ranking stability over truncated-first-20. Instability is structural, not a truncation artifact.\n- If C1 AND C2 AND C3 AND C4 AND C5 AND NOT C6: MIXED — full DOM improves stability but does NOT reach 75% threshold. Product lane must evaluate whether improvement is sufficient.\n- If C1 AND C2 AND C3 AND C4 AND C5 AND C6 AND NOT C7: SURVIVES_PARTIALLY — canonical recipe reaches 75% but per-task recipe does not reach 85%. Recipe density may be viable with canonical recipe.\n- If C1 AND C2 AND C3 AND C4 AND C5 AND C6 AND C7: SURVIVES — both canonical and per-task recipes achieve target thresholds. Recipe density is viable for MIXED handling.\n\nADDITIONAL EXPLORATORY REPORTING (not gated by decision rule):\n- Per-task recipe agreement at full DOM vs truncated-first-20 (78.65%)\n- Bootstrap CI width at full DOM vs parent (49.5% std)\n- Per-definition breakdown (DEF-FULL-MAP vs DEF-FORM-ONLY)\n- Element count distribution across tasks at full DOM\n- eta2 comparison full DOM vs truncated-first-20",
+  "product_consequence_positive": "If C5 AND C6 PASS: Resolves the MIXED program bottleneck. The ranking instability under recipe sampling (C6 FAIL in parent EXP-INTEL-35445596324: 55.95% at truncated-first-20) was a truncation artifact. Feature-weighted density through OECD/COINr pipeline with canonical recipe achieves stable task-type ranking (≥75%) on full DOM elements. Product lane can pursue density-based MIXED handling using tag_entropy-weighted density with the existing definition×recipe framework. The 31x recipe material gap (EXP-INTEL-35264637598) becomes actionable. If C7 ALSO passes (per-task ≥85%), both recipe types are viable and the product lane has maximum flexibility.",
+  "product_consequence_negative": "If C5 FAILS (full DOM does NOT exceed truncated-first-20 by ≥5pp): The ranking instability is structural — definition filtering × recipe sampling inherently destabilizes rankings regardless of element count. The truncation ceiling was NOT the binding constraint. Product lane must use non-recipe density only (which preserves ranking at 100% per B3) and accept the eta2 reduction from recipe sampling. This closes the recipe density design path permanently for this definition×recipe framework. If C6 ALSO fails (<75%): confirms structural instability, no recipe density viable.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network/model calls. Compute feature-weighted density for 3 features × 2 definitions × 7 tasks on full DOM, plus recipe-sampled densities (2 recipes × 10 seeds × 1000 iterations × 2 definitions × 3 features = 120,000 density samples — computationally cheap), plus bootstrap resampling (1000 bootstraps). Estimated < 5000 LLM tokens for analysis code and < 60 seconds compute.",
+  "expected_information_gain": "VERY HIGH — directly resolves the critical ambiguity from parent EXP-INTEL-35445596324 (MIXED verdict, C6 FAIL: 55.95% at truncated-first-20). The parent handoff identified full DOM testing as the single highest-information next step. Either outcome (truncation artifact vs structural instability) changes a concrete product decision about MIXED handling strategy. If truncation artifact: MIXED program unblocked, product lane can use recipe density. If structural: product lane must use non-recipe density, closing a costly design path. This is the最小 high-information experiment available — it reuses all existing code, data, and infrastructure; tests the exact question the parent left open; and produces a definitive binary outcome."
 }
