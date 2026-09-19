@@ -1,17 +1,47 @@
 {
   "experiment_id": "EXP-INTEL-35422991016",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can a density metric based on sample-derived features (tag entropy, form fraction, total_area) which achieve eta2=1.0 on page_type be designed to produce non-zero task-type discrimination within the OECD/COINr framework, or does the hierarchy-weighted density formula's collapse generalize to all density metrics on this truncated-first-20 sample?",
+  "hypothesis": "The hierarchy-weighted density formula's eta2=0.0 is caused by the specific exp(-alpha*depth) with binary inForm depth mapping collapsing between-type variance, not by a fundamental limitation of the sample or the OECD/COINr framework. A density metric constructed from the sample's discriminative features (tag entropy, form fraction, total_area which all achieve eta2=1.0 on page_type) should produce non-zero task-type discrimination when passed through OECD/COINr density computation. The sample contains the information; the formula is the bottleneck.",
+  "falsifier": "The hypothesis is falsified if ANY of: (F1) ALL tested density metrics based on entropy/form_frac/total_area produce eta2=0.0 on page_type within OECD/COINr (the collapse is formula-independent); OR (F2) The OECD/COINr density pipeline maps different input feature vectors to identical density values for all tasks of the same page type regardless of the input metric chosen (the framework itself collapses between-type variance); OR (F3) At least one alternative density metric achieves eta2 > 0.0 but within-type variance exceeds between-type variance (density values are noisy not discriminating).",
+  "baselines": [
+    {
+      "id": "B1_PARENT_HIERARCHY_DENSITY_ETA2",
+      "description": "Parent hierarchy-weighted density eta2=0.0 on page_type (EXP-INTEL-35401997918 M7). The formula exp(-alpha*depth) with binary inForm depth produces identical density values across page types despite the sample having eta2=1.0 on basic features.",
+      "source": "EXP-INTEL-35401997918 result.json M7"
+    },
+    {
+      "id": "B2_SAMPLE_FEATURE_DISCRIMINATION",
+      "description": "Sample-derived metrics achieve eta2=1.0 on page_type: tag_entropy (listing 2.646 vs detail 2.484 vs cart 2.602), form_fraction (0.85 vs 0.95 vs 0.95), total_area (341k vs 589k vs 428k). Within-type std=0.0 for all metrics.",
+      "source": "EXP-INTEL-35409927864 result.json M2"
+    },
+    {
+      "id": "B3_RECIPE_CHOICE_MATERIALITY",
+      "description": "Recipe choice produces 31x gap between canonical and weighted density (EXP-INTEL-35264637598). Linear combinations cannot break OECD/COINr dominance degeneracy (EXP-INTEL-35353016702). Within each recipe definitions are highly correlated (Spearman r > 0.98).",
+      "source": "EXP-INTEL-35264637598, EXP-INTEL-35353016702"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_SAMPLE_ETA2_NONZERO",
+    "description": "The sample's raw features (tag entropy, form fraction, total_area) achieve eta2 > 0.0 on page_type when computed directly (not through density formula). This confirms the sample contains task-type-discriminative information.",
+    "expected": "eta2 >= 0.10 for at least one of tag_entropy, form_fraction, or total_area on page_type"
+  },
+  "null_control": {
+    "id": "NC1_HIERARCHY_REPRODUCTION",
+    "description": "Reproduce the parent's hierarchy-weighted density computation on the same truncated-first-20 sample to confirm eta2=0.0 is reproducible and not an implementation artifact.",
+    "expected": "Hierarchy-weighted density eta2 < 0.01, reproducing EXP-INTEL-35401997918 M7"
+  },
+  "measurement_validity": [
+    "All computations use existing raw evidence from EXP-INTEL-34782350557 (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050). No new data collection required.",
+    "The locatable_sample elements with tag/role/inForm/x/w/h fields are the input for density metric construction.",
+    "Metrics are bounded to 7 tasks (3 listing, 3 detail, 1 cart deduplicated), 1 Magento site, 3 definitions, truncated-first-20 locatable_sample.",
+    "OECD/COINr density computation uses the same framework as parent experiments but with alternative input metrics.",
+    "Cart n=1 within-type variance is degenerate; comparison focuses on listing vs detail (n=3 vs 3) where eta2 discrimination is testable."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_HIERARCHY_REPRODUCES: The hierarchy-weighted density formula produces eta2 < 0.01 on page_type when run on the truncated-first-20 sample. PASS if eta2 < 0.01; FAIL if eta2 >= 0.01.\n\nC2_ALTERNATIVE_ETA2_NONZERO: At least one alternative density metric (constructed from tag entropy, form fraction, or total_area) achieves eta2 >= 0.05 on page_type within the OECD/COINr density pipeline. PASS if max(eta2) >= 0.05; FAIL if all eta2 < 0.05.\n\nC3_DENSITY_VALUES_DISCRIMINATE: For the best alternative metric, the between-type variance exceeds within-type variance (eta2 > 0.0) AND the density values for listing and detail tasks are distinct (absolute difference > 1% of range). PASS if both conditions hold; FAIL otherwise.\n\nC4_WITHIN_TYPE_STABILITY: For the best alternative metric, within-type standard deviation of density values is less than 50% of between-type range. PASS if std_within / range_between < 0.5; FAIL otherwise.\n\nVERDICT RULES:\n- If NOT C1: MEASUREMENT_INVALID - hierarchy reproduction fails, cannot anchor comparison.\n- If C1 AND NOT C2: FALSIFIES - all alternative density metrics also produce eta2=0.0. The collapse is formula-independent; the OECD/COINr framework itself cannot exploit the sample's discriminative features. Abandon density-based MIXED handling for this sample.\n- If C1 AND C2 AND NOT C3: MIXED - some alternative metric achieves non-zero eta2 but density values do not reliably discriminate. Metric design partially helps but is insufficient.\n- If C1 AND C2 AND C3 AND NOT C4: MIXED - density values discriminate on average but within-type noise is high. Limited practical utility.\n- If C1 AND C2 AND C3 AND C4: SURVIVES - a density metric based on discriminative sample features achieves task-type discrimination within OECD/COINr. The hierarchy formula was the bottleneck. Product can pursue density-based MIXED resolution.",
+  "product_consequence_positive": "Resolves the MIXED program bottleneck: density-based task-type discrimination is achievable with the right metric. Product lane can pursue density-based MIXED handling using entropy/form_frac/total_area-derived density instead of hierarchy-weighted density. The 31x recipe material gap (EXP-INTEL-35264637598) becomes actionable with the correct recipe.",
+  "product_consequence_negative": "If all alternative density metrics also produce eta2=0.0, the OECD/COINr framework itself is the bottleneck, not the specific formula. Density-based MIXED handling should be abandoned for this sample/site, and the lane should pivot to cross-site testing or non-density-based approaches.",
+  "estimated_cost": "VERY LOW - offline computation on existing reconstructed data. No browser/network work. Compute density from 3 features x 7 tasks x 20 elements = 420 feature values. Test ~5 alternative density metrics. Estimated < 2000 LLM tokens.",
+  "expected_information_gain": "HIGH - directly tests whether the hierarchy formula or the OECD/COINr framework is the bottleneck for density-based task-type discrimination. A positive result (C2 PASS) unblocks the MIXED program with a specific metric. A negative result (C2 FAIL) closes the density-based MIXED approach and redirects effort to cross-site or non-density methods. Either outcome prevents wasted cycles."
 }
