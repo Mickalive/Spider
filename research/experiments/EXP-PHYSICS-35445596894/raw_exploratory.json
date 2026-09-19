@@ -1,0 +1,85 @@
+{
+  "experiment_id": "EXP-PHYSICS-35445596894",
+  "role": "exploratory-descriptive-non-gating",
+  "n50000_descriptive": {
+    "B-WEIGHTED-PMI": {
+      "k2_n50000": 1.7787252231911186,
+      "k3_n50000": 1.5252162663165536,
+      "k2_n5000": 0.9332435964563089,
+      "k3_n5000": 1.2205083083840709,
+      "k2_diff_50000_vs_5000": 0.8454816267348096,
+      "k3_diff_50000_vs_5000": 0.30470795793248273,
+      "k3_minus_k2_n50000": -0.253508956874565,
+      "info_k2_n50000": {
+        "n_strata": 1540,
+        "n_used": 1436,
+        "total": 50000,
+        "skipped_small": 104
+      }
+    },
+    "B-EQUAL-WEIGHT-PMI": {
+      "k2_n50000": 1.7376814001326737,
+      "k3_n50000": 1.5423749916825502,
+      "k2_n5000": 1.4904747760316495,
+      "k3_n5000": 1.4462469462093848,
+      "k2_diff_50000_vs_5000": 0.24720662410102423,
+      "k3_diff_50000_vs_5000": 0.09612804547316545,
+      "k3_minus_k2_n50000": -0.19530640845012348,
+      "info_k2_n50000": {
+        "n_strata": 1540,
+        "n_used": 1436,
+        "total": 50000,
+        "skipped_small": 104
+      }
+    },
+    "B-MEDIAN-PMI": {
+      "k2_n50000": 1.8835231989130765,
+      "k3_n50000": 1.533341421145212,
+      "k2_n5000": 1.510964047443681,
+      "k3_n5000": 1.4768209688898335,
+      "k2_diff_50000_vs_5000": 0.37255915146939556,
+      "k3_diff_50000_vs_5000": 0.056520452255378606,
+      "k3_minus_k2_n50000": -0.3501817777678644,
+      "info_k2_n50000": {
+        "n_strata": 1540,
+        "n_used": 1436,
+        "total": 50000,
+        "skipped_small": 104
+      }
+    },
+    "B-KNN-CMI": {
+      "k2_n50000": 1.284006783045668,
+      "k3_n50000": 0.8019973254657289,
+      "k2_n5000": 0.023350119028318662,
+      "k3_n5000": 0.203142826903798,
+      "k2_diff_50000_vs_5000": 1.2606566640173493,
+      "k3_diff_50000_vs_5000": 0.5988544985619308,
+      "k3_minus_k2_n50000": -0.4820094575799392,
+      "info_k2_n50000": {
+        "n_records": 50000,
+        "k": 5,
+        "alpha": 1.0,
+        "history_kind": "state"
+      }
+    }
+  },
+  "stratum_size_bias_buckets": {
+    "10-19": {
+      "n_stratum_obs": 8000,
+      "mean_null_stratum_pmi": 0.5711995701217584,
+      "median_null_stratum_pmi": 0.560964047443681
+    },
+    "20-49": {
+      "n_stratum_obs": 500,
+      "mean_null_stratum_pmi": 0.3786901602880563,
+      "median_null_stratum_pmi": 0.3616940989881745
+    },
+    "5-9": {
+      "n_stratum_obs": 31300,
+      "mean_null_stratum_pmi": 0.7423518854864124,
+      "median_null_stratum_pmi": 0.7219280948873621
+    }
+  },
+  "n_shuffle_bias_decomposition": 100,
+  "note": "NOT part of the frozen measurement plan. Frozen gates C2/C4 are not applicable because no estimator passed C1 at N=5000."
+}

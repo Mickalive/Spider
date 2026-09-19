@@ -1,0 +1,55 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35445596894 — bias-corrected estimator screening
+========================================================================
+[DATA] parent raw_transitions.json file SHA256=170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade
+[DATA] matches frozen hash: True
+[DATA] in-memory sort_keys dump SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (parent raw_results.sha_raw=46ed606a... => consistent)
+[DATA] N(5000)=5000
+[DATA] regenerated N=5000 transitions deep-equal parent data: True
+
+[COLLECT] N=50000 (50 sessions x 1000 steps, SEED=42)...
+[COLLECT] N(50000)=50000 SHA256=a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51 (0.2s)
+
+[BUILD] N=5000 records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 407, 'stochastic': 885, 'total': 1292, 'det_ratio': 0.31501547987616096} K3={'deterministic': 89, 'stochastic': 732, 'total': 821, 'det_ratio': 0.10840438489646773}
+
+[COLLECT] positive control 8-state deterministic SPA...
+[COLLECT] positive control transitions=5000 K3 records=5000
+
+========================================================================
+PHASE 1: estimator screening at N=5000
+========================================================================
+
+--- B-WEIGHTED-PMI ---
+  K2 PMI = 0.933244 bits  {'n_strata': 1292, 'n_used': 398, 'total': 5000, 'skipped_small': 894}
+  K3 PMI = 1.220508 bits  {'n_strata': 821, 'n_used': 510, 'total': 5000, 'skipped_small': 311}
+  C3 positive control: K3=1.805624 p=0.000999 (within-stratum url_after permutation) -> PASS
+  C1 null control: null_mean=0.407057 std=0.007268 |mean|=0.407057 (threshold 0.1) -> FAIL (4.9s)
+
+--- B-EQUAL-WEIGHT-PMI ---
+  K2 PMI = 1.490475 bits  {'n_strata': 1292, 'n_used': 398, 'total': 5000, 'skipped_small': 894}
+  K3 PMI = 1.446247 bits  {'n_strata': 821, 'n_used': 510, 'total': 5000, 'skipped_small': 311}
+  C3 positive control: K3=1.809851 p=0.000999 (within-stratum url_after permutation) -> PASS
+  C1 null control: null_mean=0.704217 std=0.012815 |mean|=0.704217 (threshold 0.1) -> FAIL (4.7s)
+
+--- B-MEDIAN-PMI ---
+  K2 PMI = 1.510964 bits  {'n_strata': 1292, 'n_used': 398, 'total': 5000, 'skipped_small': 894}
+  K3 PMI = 1.476821 bits  {'n_strata': 821, 'n_used': 510, 'total': 5000, 'skipped_small': 311}
+  C3 positive control: K3=1.872700 p=0.000999 (within-stratum url_after permutation) -> PASS
+  C1 null control: null_mean=0.685611 std=0.018312 |mean|=0.685611 (threshold 0.1) -> FAIL (4.9s)
+
+--- B-KNN-CMI ---
+  K2 PMI = 0.023350 bits  {'n_records': 5000, 'k': 5, 'alpha': 1.0, 'history_kind': 'state'}
+  K3 PMI = 0.203143 bits  {'n_records': 5000, 'k': 5, 'alpha': 1.0, 'history_kind': 'action'}
+  C3 positive control: K3=1.190835 p=0.000999 (global shuffled-action permutation) -> PASS
+  C1 null control: null_mean=-0.261904 std=0.007456 |mean|=0.261904 (threshold 0.1) -> FAIL (12.9s)
+
+[SCREENING] C1+C3 passers: []
+[SCREENING] all estimators failed C1 (or C3-invalid): True
+
+[VERDICT] FALSIFIED-IN-SETTING
+[OUTCOME] FALSIFIES
+[REASON] C1: ALL estimators have |null_mean| >= 0.1 bits at N=5000 (or C3-invalid), indicating the bias is environment-level (deterministic/stochastic strata mixing) rather than estimator-level.
+
+Saved raw_results.json (wall 92.6s)
