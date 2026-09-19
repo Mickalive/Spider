@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35470447407",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_CORRECTNESS_GROUND_TRUTH_SOURCE",
+      "severity": "low",
+      "finding": "Correctness oracle computed locally via generate_*_body(state, target_size) using same deterministic function as mock origin, not independent uncompressed fetch. Valid within frozen design because BODY_GENERATORS are pure (json.dumps+padding, HTML/XML padded concatenation) and gzip.compress/brotli.compress at fixed quality are pure; IDENTITY baseline validates oracle (120/120 at 1.0 across 3 content types) confirming local generation equals uncompressed server output. Independent fetch would be stronger but current method satisfies frozen falsifier SHA256(decompressed)==SHA256(generate_*_body).",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py:85-158 BODY_GENERATORS, 628-634 expected_body; result.json controls.C_IDENTITY_BASELINE 1.0 for 3 identity cells; spec.json measurement_validity"
+    },
+    {
+      "id": "V2_PROXY_BUFFERING_MASKS_STREAMING",
+      "severity": "low",
+      "finding": "Reverse proxy buffers entire upstream response via HTTPConnection.read() then re-chunks to client; does not exercise streaming partial-frame forwarding where gzip block boundaries cross TCP segments without full reassembly. Chunked framing transparency established only for buffered localhost proxy. Parent handoff gap 'streaming partial-frame forwarding' correctly remains unresolved. Correctness holds for buffered case only.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py:340-371 ReverseProxyHandler._proxy_request upstream_resp.read() then re-chunk; provenance.json infrastructure; result.json validity_notes No real CDN infrastructure"
+    },
+    {
+      "id": "V3_IDENTITY_METRIC_REPORTING_VACUOUS",
+      "severity": "low",
+      "finding": "For IDENTITY cells (no compression), decompression_altered reports all_altered=true with count_total=0 and count_altered=0 for all 4 states (3 cells x4 =12 entries) and silent_fallback_by_state reports total=0. This is vacuous all([])==True artifact inherited from parent (run_experiment.py:743-744 all(altered) if altered else True). Does not affect falsifier because is_compressed guard correctly excludes IDENTITY from silent_fallback counts (producer controls.C_SILENT_FALLBACK 0 and C_NO_ERRORS correctly exclude IDENTITY). Fix: report null/N-A for IDENTITY decompression_altered.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json per_cell /userinfo_JSON_IDENTITY decompression_altered and silent_fallback_by_state; run_experiment.py:738-747"
+    },
+    {
+      "id": "V4_GZIP_COMPRESSED_DISCRIMINATION_ANOMALY",
+      "severity": "low",
+      "finding": "GZIP compressed_body_only_discrimination reported as 0.059/0.071 (JSON), 0.048/0.067 (HTML), 0.088/0.054 (XML) while BROTLI-MC compressed is 0.5 for same bodies and decompressed is 0.5 for all gzip cells. Independent local recomputation using identical BODY_GENERATORS and gzip.compress default (mtime=0) + brotli quality6 yields compressed discrimination 0.5 for BOTH encodings (valid vs error hashes distinct: JSON gzip e8a2aecc vs 78ef7592, HTML 4369f1b7 vs bc63cc8c, XML 8d022707 vs 48b4398e). Producer interprets low gzip value as higher compression ratio; local test falsifies that interpretation. Anomaly does not affect C1/C2 falsifier (decompression correctness 1.0 and silent_fallback 0 verified) or C_NULL_CONTROL, but indicates measurement or reporting error in compressed discrimination metric for gzip cells. Decision rule does not depend on this metric.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json per_cell compressed_body_only_discrimination 6 gzip cells vs 3 brotli cells; audit local recomputation python hashlib sha256(gzip.compress(body)) and brotli.compress quality6 at 1024 bytes; report.md Gzip vs Brotli table"
+    },
+    {
+      "id": "V5_CHUNK_SIZE_STRESS_OVERESTIMATED",
+      "severity": "info",
+      "finding": "Validity_notes and spec claim gzip 1KB payloads compress to 300-600 bytes spanning 10-19 chunks at 32 bytes. Local recomputation shows actual compressed sizes at 1KB: JSON 95/107 bytes (3-4 chunks), HTML 229/233 bytes (7-8 chunks), XML 211/220 bytes (7 chunks); brotli 70/83, 172/173, 161/165 bytes (3-6 chunks). Stress is 3-8 chunks, not 10-19. Chunk-boundary test is still valid (multi-chunk vs single-chunk 1024 both 1.0) but weaker than described. Larger payloads (10KB/100KB) needed to test 100+ chunk stress remains unresolved and correctly excluded from ceiling.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py TARGET_BODY_SIZE 1024, MULTI_CHUNK_SIZE 32; result.json validity_notes MULTI-CHUNK 300-600 bytes; audit local size measurement gzip 95-233 bytes"
+    },
+    {
+      "id": "V6_DECOMPRESSION_TRY_ORDER_AND_DEPTH",
+      "severity": "info",
+      "finding": "decompress_body tries brotli first then gzip up to max_depth=5 per iteration. For gzip payloads first brotli attempt fails (exception) then gzip succeeds depth 1; for brotli first succeeds; for IDENTITY both fail and returns raw unchanged. No multi-layer encoding tested (max_depth>1 never exercised). Depth 5 is generous for gzip->identity. Silent fallback detection SHA256(decompressed)==SHA256(raw) when CE in {gzip,br} correctly classifies failure to decompress. Decompression_altered raw!=decompressed for all 240 gzip +120 brotli observations (10/10 per state) proves pipeline actually decompressed, not silently returned compressed bytes.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py:411-429 decompress_body, 668-678 silent_fallback, 676-680 decompression_altered; result.json per_cell decompression_altered all_altered true count 10/10 for 9 compressed cells"
+    },
+    {
+      "id": "V7_NO_RAW_ARTIFACT_BEYOND_AGGREGATE",
+      "severity": "info",
+      "finding": "No per-request raw artifact (full hashes, headers, bodies) persisted beyond aggregated per_cell metrics and controls. Recomputation relies on deterministic code inspection and independent local gzip/brotli round-trip, not replay of frozen raw evidence. Aggregates internally consistent: 12 cells x40 =480 total, gzip 240/240, brotli 120/120, identity 120/120, per_state pass_count 10/10. Provenance logs python 3.12.14, brotli 1.2.0, ports 8700-8702/8800-8802, seed 44.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json artifacts only run_experiment.py; provenance.json; report.md"
+    },
+    {
+      "id": "V8_RECOMPUTATION_MATCH_CORE",
+      "severity": "info",
+      "finding": "Independent local recomputation confirms byte-identical round-trip for all 4 states x 3 types via both gzip default and brotli quality6: gzip.decompress(gzip.compress(body))==body and brotli.decompress(brotli.compress(body,quality6))==body; SHA256 equality holds; decompressed discrimination 0.5 from 3-way error collapse and B-RANDOM 0.0 reproduced. Aggregates 480/480, 0 silent fallbacks, 0 errors, determinism all_same true reproduced. No mismatch on decision-critical metrics.",
+      "evidence_ref": "audit local python execution generate_*_body 1024 bytes -> gzip/brotli compress -> decompress equality True; result.json aggregate overall_correctness_rate 1.0, controls C_CORRECTNESS_MATCH, C_SILENT_FALLBACK, C_BROTLI_POSITIVE_CONTROL, C_NULL_CONTROL"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-BROTLI-MC",
+      "expected": "100% correctness, serves as positive control for decompression pipeline integrity (established 360/360 in parent)",
+      "observed": "correctness_match_rate 1.0 for 3 BROTLI-MC cells (JSON/HTML/XML each 40/40 => 120/120), silent_fallback_count 0, decompression_altered 10/10 per state, determinism all_same true, decompressed discrimination 0.5, latency mean 0.026-0.027ms",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json controls.C_BROTLI_POSITIVE_CONTROL observed 1.0 for 3 cells total_pass 120; per_cell /userinfo_JSON_BROTLI-MC etc"
+    },
+    {
+      "id": "B-GZIP-SC",
+      "expected": "100% correctness; if SC passes but MC fails, chunk boundaries are failure mode",
+      "observed": "correctness_match_rate 1.0 for 3 GZIP-SC cells (JSON/HTML/XML each 40/40; also per_state 10/10 for 4 states x3 types =120 gzip SC observations). Both GZIP-SC and GZIP-MC 1.0, so chunk boundaries not a failure mode for gzip at this payload/chunk size.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json per_cell /userinfo_JSON_GZIP-SC, /userinfo_HTML_GZIP-SC, /userinfo_XML_GZIP-SC correctness_match_rate 1.0; controls.C_CORRECTNESS_MATCH"
+    },
+    {
+      "id": "B-IDENTITY",
+      "expected": "100% correctness, validates correctness oracle (hash matches generate_*_body exactly)",
+      "observed": "correctness_match_rate 1.0 for 3 IDENTITY cells (120/120), decompressed discrimination 0.5, B-RANDOM 0.0, determinism all_same true, silent_fallback 0 (by definition total 0). Confirms local expected_hash equals uncompressed origin output.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json controls.C_IDENTITY_BASELINE observed 1.0 for 3 cells"
+    },
+    {
+      "id": "B-RANDOM",
+      "expected": "B-RANDOM ~0.0 for ALL gzip cells (null discrimination)",
+      "observed": "0.0 for all 6 gzip cells (producer C_B_RANDOM observed [0.0,0.0,0.0,0.0,0.0,0.0]), also 0.0 for BROTLI-MC and IDENTITY cells. Random SHA-256 baseline confirms 0.5 decompressed discrimination is not artifact.",
+      "pass": true,
+      "strength": "Appropriate null: threshold abs(v)<0.1 generous but observed 0.0 passes strongly. Also matches local recomputation of compute_discrimination_score on random hashes.",
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json per_cell baselines.B-RANDOM and controls.C_B_RANDOM"
+    },
+    {
+      "id": "C_NULL_CONTROL",
+      "expected": "Within-state decompressed hash all_same=true for all 4 auth states across all gzip cells (deterministic decompression)",
+      "observed": "all_same true for invalid_token, valid_token, no_auth, expired_token across all 6 gzip cells (6x4=24 groups each 10/10 identical) and also for BROTLI-MC/IDENTITY. Unique_count 1 per group. No non-determinism detected.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35470447407/result.json per_cell decompressed_hash_variation all_same true; controls.C_NULL_CONTROL observed all true"
+    }
+  ],
+  "recomputed_metrics": {
+    "aggregate_correctness": {
+      "producer": {"total_pass": 480, "total_fail": 0, "total_requests": 480, "overall_rate": 1.0},
+      "recomputed": {"total_pass": 480, "total_fail": 0, "total_requests": 480, "overall_rate": 1.0},
+      "match": true,
+      "detail": "Sum per_cell correctness_match_count 12x40=480. Gzip subset 240/240 (6 cells), brotli 120/120 (3 cells), identity 120/120 (3 cells)."
+    },
+    "C_CORRECTNESS_MATCH_gzip": {
+      "producer": {"observed": {"/userinfo_JSON_GZIP-MC": 1.0, "/userinfo_JSON_GZIP-SC": 1.0, "/userinfo_HTML_GZIP-MC": 1.0, "/userinfo_HTML_GZIP-SC": 1.0, "/userinfo_XML_GZIP-MC": 1.0, "/userinfo_XML_GZIP-SC": 1.0}, "total_pass": 240, "total_fail": 0, "pass": true},
+      "recomputed": {"total_pass": 240, "total_fail": 0, "pass": true, "per_cell_verified": 1.0},
+      "match": true
+    },
+    "C_SILENT_FALLBACK": {
+      "producer": {"observed": {"/userinfo_JSON_GZIP-MC": 0, "/userinfo_JSON_GZIP-SC": 0, "/userinfo_HTML_GZIP-MC": 0, "/userinfo_HTML_GZIP-SC": 0, "/userinfo_XML_GZIP-MC": 0, "/userinfo_XML_GZIP-SC": 0}, "total_silent_fallbacks": 0, "pass": true},
+      "recomputed": {"total_silent_fallbacks": 0, "pass": true},
+      "match": true,
+      "detail": "Verified via logic decompressed_hash == raw_hash only when CE in {gzip,br}. Local gzip round-trip shows decompressed != raw and hash inequality."
+    },
+    "C_BROTLI_POSITIVE_CONTROL": {
+      "producer": {"observed": {"/userinfo_JSON_BROTLI-MC": 1.0, "/userinfo_HTML_BROTLI-MC": 1.0, "/userinfo_XML_BROTLI-MC": 1.0}, "total_pass": 120, "total_fail": 0, "pass": true},
+      "recomputed": {"total_pass": 120, "total_fail": 0, "pass": true},
+      "match": true
+    },
+    "C_IDENTITY_BASELINE": {
+      "producer": {"observed": {"/userinfo_JSON_IDENTITY": 1.0, "/userinfo_HTML_IDENTITY": 1.0, "/userinfo_XML_IDENTITY": 1.0}, "pass": true},
+      "recomputed": {"pass": true},
+      "match": true
+    },
+    "C_NULL_CONTROL_B_RANDOM": {
+      "producer": {"C_NULL_CONTROL": {"invalid_token": true, "valid_token": true, "no_auth": true, "expired_token": true}, "C_B_RANDOM": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "pass": true},
+      "recomputed": {"all_same": true, "B_RANDOM": 0.0, "pass": true},
+      "match": true
+    },
+    "C_NO_ERRORS": {
+      "producer": {"total_exceptions": 0, "total_silent_fallbacks": 0, "pass": true},
+      "recomputed": {"total_exceptions": 0, "total_silent_fallbacks": 0, "pass": true},
+      "match": true
+    },
+    "decompressed_discrimination": {
+      "producer": 0.5,
+      "recomputed": 0.5,
+      "match": true,
+      "detail": "Recomputed intra 1.0 - inter 0.5 =0.5 per 3-way error collapse (no_auth/expired/invalid share body). Producer reports 0.5 for all 12 cells."
+    },
+    "compressed_discrimination_gzip_discrepancy": {
+      "producer": {"JSON_GZIP-MC": 0.05944, "JSON_GZIP-SC": 0.07111, "HTML_GZIP-MC": 0.04833, "HTML_GZIP-SC": 0.06666, "XML_GZIP-MC": 0.08777, "XML_GZIP-SC": 0.05388},
+      "recomputed": 0.5,
+      "match": false,
+      "detail": "Local recomputation with same generators and gzip.compress default yields 0.5 for all content types (distinct compressed hashes valid vs error). Discrepancy flagged as V4; not decision-critical."
+    },
+    "decompression_altered_compressed_cells": {
+      "producer": "all_altered true 10/10 per state for 9 compressed cells (6 gzip +3 brotli)",
+      "recomputed": "verified true via raw != decompressed and distinct SHA hashes locally",
+      "match": true
+    },
+    "decompression_latency_ms_mean": {
+      "producer": {"GZIP-MC": 0.0369, "GZIP-SC": 0.0402, "BROTLI-MC": 0.0266, "IDENTITY": 0.0185},
+      "recomputed": "not independently recomputed; values <0.11ms plausible for 95-233 byte gzip and 70-173 byte brotli at Python 3.12 gzip/brotli. No anomaly.",
+      "match": null
+    },
+    "local_gzip_roundtrip": {
+      "producer": "implicit 240/240 pass",
+      "recomputed": "byte-identical for all 4 states x3 types: gzip.compress -> gzip.decompress equality True; brotli similarly True",
+      "match": true
+    },
+    "decision_rule_C1_C4": {
+      "producer": {"C1": true, "C2": true, "C3": true, "C4": true, "outcome": "SUPPORTS", "verdict": "SURVIVES_CURRENT_TEST"},
+      "recomputed": {"C1": true, "C2": true, "C3": true, "C4": true, "outcome": "SUPPORTS"},
+      "match": true
+    }
+  },
+  "claim_ceiling": "Iterative decompression (gzip->identity and brotli->identity, max_depth=5, try brotli then gzip) produces byte-identical output to ground-truth deterministic generate_*_body(state, target_size) on localhost buffered Python Reverse Proxy -> Mock OAuth2 server for gzip multi-chunk (chunk_size=32, compressed 95-233 bytes spanning 3-8 chunks) and gzip single-chunk (chunk_size=1024) across 4 auth states (no_auth, valid_token, expired_token, invalid_token) x 3 content types (JSON/HTML/XML) at 1KB nominal, N=10 per state per cell (240 gzip observations: 6 cells x40), plus brotli multi-chunk positive control 120/120 and identity oracle 120/120 (total 480/480), 0 silent fallbacks, 0 decompression errors, deterministic within-state grouping, seed 44, jitter 50-150ms, Python 3.12.14 stdlib gzip (default compresslevel) and brotli 1.2.0 quality6. Does NOT establish correctness on real CDN (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, multi-layer encoding, auth-aware cache interaction, geographic latency, production concurrency; nor for larger payloads (10KB/100KB) spanning 100+ chunks, gzip compression levels 1-9, brotli quality 4-8 variation, streaming partial-frame proxy, or binary/non-1KB content. The parent unknown 'Does gzip multi-chunk correctness hold (not just brotli)?' is now established for this bounded localhost scope; remaining product gate is CDN infrastructure validation.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35470447407/result.json (aggregate 480/480, gzip 240/240, per_cell correctness_match_rate 1.0 for 6 gzip cells, silent_fallback 0, decompression_altered 10/10, determinism all_same true, B-RANDOM 0.0, decompressed discrimination 0.5)",
+    "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py (BODY_GENERATORS 85-158, decompress_body 411-429 brotli->gzip max_depth5, expected_hash 628-634, correctness_match 658-664, silent_fallback 668-674, decompression_altered 676-680, discrimination 434-460, proxy buffering 340-371)",
+    "research/experiments/EXP-RUNTIME-35470447407/report.md (executive summary 480/480 table, decision rule C1-C4 PASS, scope ceiling, Gzip vs Brotli analysis)",
+    "research/experiments/EXP-RUNTIME-35470447407/provenance.json (python 3.12.14, brotli 1.2.0, PyJWT 2.14.0, ports 8700-8702/8800-8802, seed 44, reps 10, target 1024)",
+    "research/experiments/EXP-RUNTIME-35470447407/spec.json (frozen hypothesis, falsifier SHA256 mismatch or silent fallback, 4 baselines B-BROTLI-MC/B-IDENTITY/B-GZIP-SC/B-RANDOM, decision_rule C1-C4)",
+    "research/experiments/EXP-RUNTIME-35470447407/prereg.md (Background parent 360/360 brotli, hypothesis gzip->identity max_depth5, architecture Client->Proxy->Mock, validity threats, scope boundaries)",
+    "research/experiments/EXP-RUNTIME-35470447407/freeze.json (hashes prereg 138d3a94, spec 575a8902, request de4c7968)",
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (established brotli 360/360 localhost buffered, unknown gzip multi-chunk now resolved, unresolved CDN/larger payloads/multi-layer/streaming, do_not_assume about CDN readiness and identity artifact)"
+  ],
+  "unresolved": [
+    "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, CDN header manipulation, geographic latency and production concurrency? (parent primary unknown, still open)",
+    "Does correctness hold for larger payloads (10KB, 100KB) where gzip/brotli dictionary references cross many chunk boundaries and compressed sizes span 100+ chunks at 32 bytes?",
+    "Does correctness hold for gzip compression levels 1-9 and brotli quality 4-8 variation and mixed quality cycling?",
+    "What is max practical decompression depth for real-world multi-layer encoding (e.g., gzip->br, br->gzip) and how does iterative depth 5 behave with adversarial Content-Encoding stacks?",
+    "Does buffered-proxy correctness generalize to streaming proxy that forwards partial frames without full reassembly?",
+    "Why is reported gzip compressed_body_only_discrimination 0.05-0.09 vs recomputed 0.5 and brotli 0.5? Requires raw artifact audit or re-run with persisted per-request hashes to resolve."
+  ]
+}
