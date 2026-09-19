@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35434772331",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID — C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
+  "claim_updates": [
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "REJECTED",
+      "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "C-FRESHNESS remains EXPERIMENTAL. Structural signal validated (C1 passes, discrimination 0.8333 replicating EXP-RUNTIME-33902315583). Behavioral drift detection validated in isolation (C2 TP=1.0). Orthogonality NOT tested in this experiment due to measurement invalidity (behavioral variance=0.0). Parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock. C3 requires re-run with redesigned behavioral_score and stochastic server. No product promotion warranted."
+    }
+  ],
+  "product_action": "Close C-PRODUCT-ECON. Redirect product lane to C-FRESHNESS integration as the next product gate. The behavioral+structural parallel-channel architecture individual signals work (C1, C2, C4 pass) but orthogonality measurement requires revision (redesigned behavioral scoring, stochastic server, state reset).",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a redesigned behavioral_score function with continuous differentiated scoring (weighted by drift severity, distinct signal combinations) produce sufficient variance for orthogonality testing when run on a stochastic Flask+SQLite mock server matching EXP-GRAPH-35353011131?",
+  "reason": "The experiment is MEASUREMENT_INVALID per frozen decision_rule: C3 fails because behavioral variance = 0.0 prevents Pearson correlation computation. However, C1-C2-C4 pass, confirming individual signals work. The C3 failure is a measurement design issue (deterministic server, scoring weight collisions producing constant 0.5), not a scientific finding about signal independence. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). C-PRODUCT-ECON is closed based on the full evidence chain (5+ experiments, zero real LLM calls, thin margin, COLD 7.5x cheaper). Product lane redirects to C-FRESHNESS with required measurement fixes.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35434772331/result.json (sha256: 233fd79230be9fb9d3f6a0f0479a7137b8991f93dc5a23c99924b7c1e2c1d87e) — C1-C2-C4 pass, C3 FAIL behavioral_variance=0.0",
+    "research/experiments/EXP-PRODUCT-35434772331/audit.json — MEASUREMENT_INVALID, producer_claim_supported=false, scoring weight collisions, server state contamination",
+    "codex/experiments/EXP-RUNTIME-33902315583/result.json — structural signal baseline discrimination 0.8333",
+    "codex/experiments/EXP-GRAPH-35353011131/result.json — orthogonality confirmed at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135)",
+    "research/experiments/EXP-PRODUCT-35409929216/handoff.json (sha256: f3ce339a1c8fbff4309caa9b968844292e232ac49aefc367f600add506b59d26) — parent handoff, three-way decision, C-PRODUCT-ECON closure recommendation",
+    "codex/claim_state.json — C-PRODUCT-ECON HYPOTHESIS across all product experiments, C-FRESHNESS EXPERIMENTAL"
+  ]
+}

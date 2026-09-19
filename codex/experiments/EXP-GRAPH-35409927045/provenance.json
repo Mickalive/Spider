@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35409927045",
+  "lane": "graph",
+  "claim_ids": [
+    "C-FRESHNESS"
+  ],
+  "github_run_id": "35409927045",
+  "created_at": "2026-09-19T11:03:05.873566+00:00",
+  "started_at": "2026-09-19T00:36:38.861488+00:00",
+  "completed_at": "2026-09-19T11:03:05.873575+00:00",
+  "git_base_sha": "6a31d433db28594f110cca213cb690e01630af8c",
+  "request_hash": "96e9db42dbb0f2a746490b2a58c6b7438f4b92012c255054daffeb5ae99d091c",
+  "freeze_hash": {
+    "prereg.md": "2bce0b4675321716fc1db138cecc65a7bf4c0cebd32836b3a75cdfa2a1fff0df",
+    "request.json": "31aebca73775d5da7c520373006c1bcb32c0ed686a05e656553b34a011683ef8",
+    "spec.json": "821664cb788de77e4a9dd43d454b950048eb0564b7f292162d9ffaa738af204e"
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35389145821",
+    "path": "research/experiments/EXP-GRAPH-35389145821/handoff.json",
+    "sha256": "f0b1ac93f5522b7d4889fccf651f70c0169f7625f28f04a8adefe450eb116f9a"
+  },
+  "execution": {
+    "model": "opencode/ling-3.0-flash-fin-free",
+    "execution_script": "research/experiments/EXP-GRAPH-35409927045/run_efficient.py",
+    "previous_attempts": [
+      {
+        "model": "opencode/mimo-v2.5-free",
+        "attempt": 1,
+        "status": "success",
+        "github_run_id": "35422989833",
+        "recorded_at": "2026-09-19T05:13:55.452812+00:00"
+      },
+      {
+        "model": "opencode/jev-1.13-free",
+        "attempt": 6,
+        "status": "retry",
+        "exit_code": 1,
+        "category": "transient",
+        "github_run_id": "35434774233",
+        "recorded_at": "2026-09-19T10:46:22.460175+00:00"
+      }
+    ],
+    "total_samples_collected": 60,
+    "target_samples": 480,
+    "endpoints_reached": 3,
+    "network_errors": 0,
+    "time_per_sample_seconds": 1.6
+  },
+  "artifacts": {
+    "request.json": "31aebca73775d5da7c520373006c1bcb32c0ed686a05e656553b34a011683ef8",
+    "spec.json": "821664cb788de77e4a9dd43d454b950048eb0564b7f292162d9ffaa738af204e",
+    "prereg.md": "2bce0b4675321716fc1db138cecc65a7bf4c0cebd32836b3a75cdfa2a1fff0df",
+    "freeze.json": "ad2ae41a4386edae20784d34bf9735f8a3bbfff068899f9388a105f479146240",
+    "run_efficient.py": "2df64f846a5c22831bde45b0234b232d76e43623bdb11fb068d54bd563a88f40",
+    "raw_evidence/experiment_data.json": "9ae6d117b6b830217c7da431f343c71a6a43c50705d661df7176a2ab79b0eb70",
+    "raw_evidence/network_errors.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "result.json": "508bba25fecf1fc96fb4094b59f480bf7673c0f0237661e16b8a95fb3a004aa0",
+    "report.md": "fae2c42a93671c69536781113972a69561b14e2bf64513cc322e5677241476ef",
+    "metrics.json": "6493f5ebae0cbc64449995e686aa7da8d4433664088970ef03464a5af01c06b4"
+  },
+  "data_sources": {
+    "endpoints": [
+      {
+        "name": "github_repos",
+        "url": "https://api.github.com/repos/octocat/Hello-World",
+        "status": "403 rate limited"
+      },
+      {
+        "name": "github_users",
+        "url": "https://api.github.com/users/octocat",
+        "status": "403 rate limited"
+      },
+      {
+        "name": "jsonplaceholder_posts",
+        "url": "https://jsonplaceholder.typicode.com/posts/1",
+        "status": "200 deterministic"
+      }
+    ],
+    "raw_evidence_path": "research/experiments/EXP-GRAPH-35409927045/raw_evidence/experiment_data.json",
+    "network_issues_path": "research/experiments/EXP-GRAPH-35409927045/raw_evidence/network_errors.json"
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35389145821/handoff.json — parent PASS baseline (r=0.0022, CI upper 0.0916 < 0.15)",
+    "research/experiments/EXP-GRAPH-35389145821/result.json — C1-C5 controls, per_caching_r, manipulation_checks",
+    "codex/claim_state.json:C-FRESHNESS — claim event history showing EXPERIMENTAL status",
+    "research/experiments/EXP-GRAPH-35409927045/spec.json — frozen decision_rule (CI upper < 0.15 at delta=0.15, C5 304 manipulation)",
+    "research/experiments/EXP-GRAPH-35409927045/prereg.md — target API endpoints, sampling policy, controls"
+  ],
+  "methodology": {
+    "behavioral_signal": "rate_limit_detection * 2 + auth_challenge * 3 + cache_freshness * 1 + status_class_score * 2",
+    "structural_signal": "max(schema_diff_magnitude, 1.0 - jaccard_similarity)",
+    "correlation_method": "Pearson r with Fisher z-transform 95% CI",
+    "equivalence_test": "TOST at delta=0.15, alpha=0.05",
+    "seed": 42,
+    "request_timeout": 10,
+    "rate_limit_delay": 0.5,
+    "user_agent": "SPIDER-Experiment/1.0"
+  },
+  "notes": "Experiment executed successfully but all tested endpoints returned deterministic, identical responses with zero variance in both behavioral and structural signals. This is a measurement limitation (insufficient signal variance), not a scientific falsification. The C-FRESHNESS orthogonality hypothesis remains untested on real APIs with natural stochastic variation."
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35434773328",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration, chunked TE, Accept-Encoding negotiation, quality variation, and geographic latency \u2014 the sole remaining blocker for C-MEAS-VALID product readiness?",
+  "why_next": "The localhost chunked TE story is now complete: decompression-normalization preserves body-only discrimination at 0.5 through end-to-end chunked TE (origin->proxy->client) in PASSTHROUGH and AUTH-AWARE CACHED modes. The sole remaining blocker for C-MEAS-VALID decompression-normalization product readiness is real CDN infrastructure. Real CDN introduces Accept-Encoding negotiation, quality variation, geographic latency, CDN-specific header manipulation, and multi-layer encoding \u2014 none replicated by localhost mock. Testing on real CDN is the minimum next step. The CL-PASSTHROUGH regression contamination (audit V1) should be fixed in a separate orthogonal experiment.",
+  "carry_forward": {
+    "established": [
+      "Iterative decompression (brotli->gzip->identity, max_depth=5) preserves decompressed body-only discrimination at 0.5 through end-to-end chunked TE (origin->proxy->client) on localhost mock infrastructure (audit recomputation match)",
+      "Single-chunk chunked reassembly via HTTPConnection.read() is transparent to proxy pipeline \u2014 0 decompression errors, 72/72 determinism match",
+      "Auth-aware caching (URL+Accept-Encoding+Authorization cache key) interacts correctly with chunked TE \u2014 all 9 CHUNKED-CACHED cells achieve discrimination 0.5",
+      "V1 fix (origin use_chunked=True) correctly implements chunked without Content-Length \u2014 C_ORIGIN_VERIFICATION 9/9 pass",
+      "V2 fix (cache HIT sends only TE:chunked for chunked configs) eliminates double-header violation",
+      "V3 fix (PARENT_REF_HASHES removed) \u2014 determinism ground truth via live mock_direct recomputation",
+      "CL-PASSTHROUGH regression passes numerically at 0.5 (9/9 cells) but origin was also chunked (V1 contamination) \u2014 independent CL-origin baseline not re-verified"
+    ],
+    "rejected": [
+      "Chunk boundaries corrupt brotli multi-byte symbols \u2014 rejected for single-chunk payloads (compressed 70-176 bytes < chunk_size 1024), 0 errors across 540 requests",
+      "Origin-served chunked breaks proxy reassembly \u2014 rejected for single-chunk payloads, discrimination preserved at 0.5"
+    ],
+    "unknown": [
+      "Multi-chunk reassembly where compressed brotli payload exceeds chunk_size and chunk boundaries split the byte stream",
+      "Real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware caching, chunked TE, Accept-Encoding negotiation, quality variation, geographic latency",
+      "CL-PASSTHROUGH with true Content-Length origin (use_chunked=False) isolating V1 contamination",
+      "HIT response for CHUNKED-CACHED actually sends TE:chunked without Content-Length on the wire (requires per-request header capture)",
+      "Double/triple-brotli multi-layer encoding through chunked proxy (max_depth=5)",
+      "Production-scale latency/CPU at N>1000 with MB-scale natural content",
+      "CDN-specific header interaction (X-Cache, Via, ETag, Content-Length) under chunked framing"
+    ],
+    "do_not_assume": [
+      "0.5 discrimination ceiling is a production ceiling \u2014 it is a structural property of 3-way error collapse (no_auth/expired/invalid share identical bodies) in mock design",
+      "CL-PASSTHROUGH regression is independently validated \u2014 origin was chunked (V1 contamination), so CL baseline tests chunked-origin->CL-proxy transcoding not pure CL-origin->CL-proxy",
+      "Multi-chunk reassembly works \u2014 all compressed body_sizes are 70-176 bytes (chunk_size=1024), chunk boundaries never split brotli payload",
+      "Origin verification applies to measured origins \u2014 verification was on fresh mock_verify servers on separate ports, not the origins serving the 540 measured requests",
+      "The mechanism survives production CDN \u2014 localhost mock does not replicate Accept-Encoding negotiation, CDN-specific header manipulation, geographic latency, or multi-layer encoding",
+      "C-MEAS-VALID is ready for Product Core promotion \u2014 real CDN infrastructure is the sole remaining blocker"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35401995092 (parent: proxy->client chunked downstream, carry_forward upstream chunked gap)",
+    "research/experiments/EXP-RUNTIME-35389142338 (grandparent: auth-aware caching)",
+    "codex/claim_state.json (C-MEAS-VALID claim history)",
+    "Real CDN access (Cloudflare/Fastly/Akamai) with auth-aware cache configuration for next experiment"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35434773328/result.json (27 cells, 540 requests, all discrimination 0.5)",
+    "research/experiments/EXP-RUNTIME-35434773328/audit.json (V1_CL_REGRESSION_CONTAMINATION, V2_SINGLE_CHUNK_DEGENERACY, V3_ORIGIN_VERIFICATION_INDIRECT, claim_ceiling)",
+    "research/experiments/EXP-RUNTIME-35434773328/spec.json (frozen decision_rule 7 conditions, measurement_validity)",
+    "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py (V1/V2/V3 fixes, chunk_size=1024, origin_use_chunked)",
+    "research/experiments/EXP-RUNTIME-35401995092/handoff.json (parent carry_forward: upstream chunked gap, double-header artifact)",
+    "research/experiments/EXP-RUNTIME-35401995092/audit.json (V1_ORIGIN_NOT_CHUNKED, V2_DOUBLE_HEADER, V3_SYNTHETIC_DETERMINISM)",
+    "codex/claim_state.json C-MEAS-VALID (EXPERIMENTAL status, decompression-normalization sub-thread)",
+    "codex/index.json (prior runtime experiments and their decisions)"
+  ],
+  "recommended_action": "Design a real-CDN experiment testing iterative decompression through Cloudflare/Fastly/Akamai with auth-aware cache configuration, chunked TE, Accept-Encoding negotiation, and quality variation. Fix CL-PASSTHROUGH V1 contamination (origin use_chunked=False for CL cells) as a separate orthogonal experiment before or in parallel. Optionally test multi-chunk reassembly by lowering chunk_size to 32-64 bytes or using incompressible content to force multi-chunk splitting."
+}
