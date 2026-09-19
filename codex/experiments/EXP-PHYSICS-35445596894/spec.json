@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-PHYSICS-35445596894",
+  "lane": "physics",
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Can bias-corrected conditional mutual information estimators (equal-weight PMI, median PMI, or direct CMI via KNN) recover stable, finite-sample-convergent measurements on the 12-state hash-routed SPA, and does any corrected estimator detect K3-K2 > 0.1 bits with valid null centering?",
+  "hypothesis": "H1 (estimator-convergence): At least one of the three bias-corrected estimators (equal-weight PMI, median PMI, or KNN CMI) produces a null control |mean| < 0.1 bits at N=5000, where the weighted-averaged PMI baseline gives |mean| = 0.407 bits. H2 (beyond-Markov): If a convergent estimator is found, K3 PMI - K2 PMI > 0.1 bits at N=5000, detecting the known 2-step history dependence in the SPA construction. H0 (no-estimator-fix): None of the three corrected estimators reduce null control below 0.1 bits, indicating the bias is environment-level (deterministic/stochastic strata mixing) rather than estimator-level.",
+  "falsifier": "Frozen decision rule: (C1) ALL three estimators have null control |mean| >= 0.1 bits at N=5000 → FALSIFIED-IN-SETTING (estimator bias is environment-level). (C2) IF any estimator passes C1 (|mean| < 0.1), AND that estimator's K3-K2 <= 0.1 OR bootstrap CI includes 0 → FALSIFIED-IN-SETTING (signal is Markov even with correct estimator). (C3) positive_control K3 < 1.0 for an estimator → that estimator is MEASUREMENT_INVALID. (C4) convergence test: estimator K2 PMI at N=50000 differs from K2 PMI at N=5000 by more than 0.2 bits for any estimator that passes C1 → MEASUREMENT_INVALID (estimator not converged).",
+  "baselines": [
+    {
+      "id": "B-WEIGHTED-PMI",
+      "description": "Original weighted-averaged PMI from parent experiments (EXP-PHYSICS-35403136807). K2=0.933, K3=1.221, null=0.407. Re-run for direct within-framework comparison.",
+      "expected": "K2 ≈ 0.933, null mean ≈ 0.407 (replicate parent)"
+    },
+    {
+      "id": "B-EQUAL-WEIGHT-PMI",
+      "description": "Unweighted (equal-weight) average of per-stratum PMI values. Each stratum contributes 1/N_strata regardless of size. Removes the large-stratum dominance that causes asymptotic bias.",
+      "expected": "null mean < 0.1 if bias is weighting-driven; K2 stable across N"
+    },
+    {
+      "id": "B-MEDIAN-PMI",
+      "description": "Median of per-stratum PMI values (rather than weighted mean). Robust to outlier strata with extreme PMI values from small-sample Laplace smoothing.",
+      "expected": "null mean < 0.1 if bias is driven by outlier strata"
+    },
+    {
+      "id": "B-KNN-CMI",
+      "description": "Direct conditional mutual information estimation via KNN (Kruskal count or similar). Bypasses strata entirely; operates on raw (history, action, next_state) tuples. Uses sklearn.neighbors.KNeighborsClassifier or similar.",
+      "expected": "If strata weighting is the root cause, KNN should show lower null bias"
+    }
+  ],
+  "positive_control": "8-state deterministic SPA (same as parent): K3 PMI >= 1.0 bit with p <= 0.001 for EACH estimator. Validates that each estimator pipeline works on fully deterministic data.",
+  "null_control": "Shuffled-action permutation (N_SHUFFLE=500): action labels randomly reassigned globally. For each estimator, |mean_null| < 0.1 bits required. Reduced from 1000 to 500 for compute feasibility across 4 estimators; sensitivity analysis shows null std ~0.007 so N=500 gives SE ~0.0003, adequate for 0.1 threshold.",
+  "measurement_validity": [
+    "Same 12-state SHA256 hash-routed SPA as parent experiments (same RNG seed SEED=42 for reproducibility)",
+    "N=5000 transitions for primary conditions (4 estimators x K2 + K3), N=50000 for convergence test on best estimator",
+    "Reuse parent raw_transitions.json (SHA256: 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade) for N=5000 to ensure exact comparability",
+    "New collection for N=50000 (same seed, 50 sessions x 1000 steps)",
+    "Each estimator receives identical input records (same strata, same transitions)",
+    "Bootstrap CI: 200 trajectory-block resamples for K3-K2 difference on each estimator that passes C1",
+    "In-memory simulation; not Playwright browser collection"
+  ],
+  "decision_rule": "PHASE 1 (estimator screening): Run all 4 estimators on N=5000. (C1) If ALL have |null_mean| >= 0.1 → FALSIFIED-IN-SETTING (estimator-level fix insufficient; bias is environment-level). (C3) If any estimator's positive_control K3 < 1.0 → that estimator is MEASUREMENT_INVALID (skip to next). PHASE 2 (if any estimator passes C1): (C2) Compute K3-K2 for passing estimator(s). If K3-K2 > 0.1 AND bootstrap CI lower > 0.0 → SURVIVES_CURRENT_TEST. If K3-K2 <= 0.1 OR CI includes 0 → FALSIFIED-IN-SETTING (Markov signal). (C4) Run passing estimator at N=50000. If |K2(N=50000) - K2(N=5000)| > 0.2 → MEASUREMENT_INVALID (not converged). PRIMARY verdict = first triggered among {FALSIFIED-IN-SETTING, MEASUREMENT_INVALID, SURVIVES_CURRENT_TEST}.",
+  "product_consequence_positive": "Bias-corrected estimator resolves the PMI interpretability impasse. If K3-K2 > 0.1 survives, beyond-Markov structure is demonstrated on this SPA, justifying richer state representation for SPIDER. If null bias is eliminated but K3-K2 <= 0.1, the 0.933-bit K2 signal is purely Markov and history conditioning is unnecessary.",
+  "product_consequence_negative": "None of the three bias-corrected estimators reduce null bias below 0.1 bits. The bias is structural to the environment (deterministic/stochastic strata mixing), not the estimator. The PMI research program on this SPA class requires SPA redesign (0% deterministic strata) before any estimator can produce interpretable results.",
+  "estimated_cost": "Medium: 4 estimators x N=5000 + 1 convergence test x N=50000 + 4 positive controls + 1 bootstrap per passing estimator. Estimated ~15-20 min compute. Reuses parent transitions.",
+  "expected_information_gain": "HIGH: directly resolves the highest-priority unknown from the parent handoff (whether bias is estimator-level or environment-level). A definitive answer in either direction closes or redirects the PMI research program. Information gain is high because the answer determines whether to (a) proceed with SPA beyond-Markov testing using corrected estimator, (b) redesign the SPA to eliminate deterministic strata, or (c) abandon PMI-based approaches entirely."
+}

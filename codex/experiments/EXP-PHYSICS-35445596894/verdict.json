@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35445596894",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status from parent HYPOTHESIS. The frozen falsifier C1 triggers FALSIFIED-IN-SETTING: all four estimators (weighted PMI, equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) fail the null control (|null_mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA: 0.407, 0.704, 0.686, 0.262 bits respectively, each 2.6-7.0x threshold and 32-56 sigma from threshold). The bias-corrected estimator pathway (equal-weight, median, KNN) is rejected as a remedy in this setting. The preregistered mechanistic hypothesis H1 (bias from large-stratum dominance) is falsified: equal-weight and median null bias is WORSE than weighted (0.704/0.686 vs 0.407 bits) because per-stratum plug-in bias is monotonically increasing in small strata (+0.742 bits at size 5-9 vs +0.379 at size 20-49), and equal-weighting/median promote the most biased strata. KNN shows negative bias (-0.262 bits) from Laplace smoothing + extra dimension. No estimator converges at N=50000 (all drift >0.2 bits). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. The K3-K2 beyond-Markov question is unanswered (no valid estimator exists), not answered in the negative."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does SPA redesign with 0% deterministic strata (all transitions stochastic) eliminate the per-stratum plug-in PMI null bias on stochastic strata, where the bias persists at +0.742 bits even for strata of size 5-9 under the shuffled-action null — and does this redesign enable a valid beyond-Markov test, or is the bias intrinsic to plug-in estimation regardless of determinism ratio?",
+  "reason": "Frozen decision_rule condition C1 triggers FALSIFIED-IN-SETTING: ALL four estimators (three corrected plus baseline) have |null_mean| >= 0.1 bits at N=5000, with margins of 2.6-7.0x and 32-56 sigma from the threshold (audit V2 critical). The bias is environment-level (per-stratum plug-in PMI small-sample bias, pervasive across deterministic and stochastic strata), not estimator-level. Equal-weight/median corrections worsen bias by up-weighting small strata (audit V5 high). KNN CMI shows negative bias from Laplace smoothing (audit V7 medium). Positive controls pass for all 4 estimators (K3 1.81-1.87 bits, p=0.000999), confirming measurement pipelines function (audit V3 info). No Phase 2 conditions (bootstrap, convergence) are applicable. Audit PASS confirms all recomputed metrics match producer exactly (audit V1 info). Determinism recomputation corrects parent's unreproducible K3 record (89/821 det_ratio=0.108, not 467/821=0.569; audit V4 medium). Claim ceiling bounded to: FALSIFIED-IN-SETTING for the estimator-level-bias-correction hypothesis on 12-state SHA256 hash-routed SPA with 4-action candidates, SEED=42, N=5000. Not falsified: truly orthogonal frameworks (KSG CMI, Bayesian, likelihood-ratio), SPA redesign to 0% deterministic, production SPAs, browser-collected data, richer state representations.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35445596894/result.json:metrics.screening_n5000 all estimators null_mean_bits, controls.C1-NULL-CONTROL FAIL FALSIFIED-IN-SETTING, controls.C3-POSITIVE-CONTROL PASS all estimators, metrics.stratum_size_bias_decomposition monotonic decreasing in stratum size, metrics.n50000_descriptive_non_gating all drift >0.2, determinism_n5000 K2 0.315 K3 0.108",
+    "research/experiments/EXP-PHYSICS-35445596894/audit.json:status PASS producer_claim_supported true, V1_recomputation_exact_match, V2_null_control_C1_strong_falsification critical, V3_positive_control_C3_pass, V4_determinism_parent_discrepancy, V5_stratum_size_bias_decomposition high, V6_N50000_non_gating_drift, V7_KNN_negative_bias, V8_null_condition_immaterial, V9_environment_identifiability, V10_provenance minor, claim_ceiling FALSIFIED-IN-SETTING estimator-level fix insufficient environment-level bias",
+    "research/experiments/EXP-PHYSICS-35445596894/spec.json:falsifier C1-C4, decision_rule Phase1 Phase2, baselines B-WEIGHTED-PMI B-EQUAL-WEIGHT-PMI B-MEDIAN-PMI B-KNN-CMI, null_control shuffled-action N_SHUFFLE=500, measurement_validity same SPA SEED=42",
+    "research/experiments/EXP-PHYSICS-35445596894/report.md:sections 4.1-4.5 result COMPLETE FALSIFIES, controls ledger, determinism discrepancy",
+    "research/experiments/EXP-PHYSICS-35445596894/provenance.json:environment python 3.12.14 numpy 2.5.3 sklearn 1.9.1, parent_data sha 170df6e3, reproduction_parameters seed 42 knn k5 alpha1.0",
+    "research/experiments/EXP-PHYSICS-35445596894/raw_results.json:screening all estimators, null_control all_fail_c1 true, phase2 null verdict FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35445596894/raw_exploratory.json:n50000_descriptive all estimators drift >0.2, stratum_size_bias_buckets 5-9 0.74235 10-19 0.57120 20-49 0.37869",
+    "research/experiments/EXP-PHYSICS-35403136807/handoff.json:carry_forward established asymptotic non-convergence null bias floor 0.41 rejected weighted PMI as identifiable unknown estimator fix unknown SPA 0% deterministic do_not_assume orthogonal frameworks untested"
+  ]
+}

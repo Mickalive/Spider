@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35445596324",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "M1_pc1_tag_entropy_eta2": 1.0,
+    "M1_pc1_form_fraction_eta2": 1.0,
+    "M1_pc1_total_area_eta2": 1.0,
+    "M1_pc1_pass": true,
+    "M2_nc1_hierarchy_eta2": 0.0,
+    "M2_nc1_pass": true,
+    "M3_pipeline_eta2_by_effective_n": {
+      "5": {"tag_entropy x DEF-FULL-MAP": 0.983349, "tag_entropy x DEF-FORM-ONLY": 0.0},
+      "10": {"tag_entropy x DEF-FULL-MAP": 0.983349, "tag_entropy x DEF-FORM-ONLY": 0.983349},
+      "15": {"tag_entropy x DEF-FULL-MAP": 0.761775, "tag_entropy x DEF-FORM-ONLY": 0.993889},
+      "20": {"tag_entropy x DEF-FULL-MAP": 0.995783, "tag_entropy x DEF-FORM-ONLY": 0.999645}
+    },
+    "M4_recipe_canonical_ranking_agreement": {
+      "5": {"tag_entropy x DEF-FULL-MAP": 0.0, "tag_entropy x DEF-FORM-ONLY": 0.0},
+      "10": {"tag_entropy x DEF-FULL-MAP": 0.0, "tag_entropy x DEF-FORM-ONLY": 0.0},
+      "15": {"tag_entropy x DEF-FULL-MAP": 0.4998, "tag_entropy x DEF-FORM-ONLY": 0.4934},
+      "20": {"tag_entropy x DEF-FULL-MAP": 0.5595, "tag_entropy x DEF-FORM-ONLY": 0.4934}
+    },
+    "M5_recipe_pertask_ranking_agreement": {
+      "5": {"tag_entropy x DEF-FULL-MAP": 0.3411},
+      "10": {"tag_entropy x DEF-FULL-MAP": 0.3339},
+      "15": {"tag_entropy x DEF-FULL-MAP": 0.5333},
+      "20": {"tag_entropy x DEF-FULL-MAP": 0.7865}
+    },
+    "M6_recipe_canonical_eta2": {
+      "5": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.4852, "std": 0.0148}},
+      "10": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.7361, "std": 0.0087}},
+      "15": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.8285, "std": 0.0073}},
+      "20": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.9205, "std": 0.0077}}
+    },
+    "M7_recipe_pertask_eta2": {
+      "5": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.3843, "std": 0.0094}},
+      "10": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.3911, "std": 0.0098}},
+      "15": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.3536, "std": 0.0080}},
+      "20": {"tag_entropy x DEF-FULL-MAP": {"mean": 0.3664, "std": 0.0061}}
+    },
+    "M8_bootstrap_ranking_agreement": {
+      "5": {"mean": 0.0, "std": 0.0, "n_true": 0, "n_total": 1000},
+      "10": {"mean": 0.0, "std": 0.0, "n_true": 0, "n_total": 1000},
+      "15": {"mean": 0.502, "std": 0.5002, "n_true": 502, "n_total": 1000},
+      "20": {"mean": 0.571, "std": 0.4952, "n_true": 571, "n_total": 1000}
+    },
+    "M9_spearman_correlation": 1.0,
+    "M10_agreement_improvement": 0.5595,
+    "M11_max_pipeline_eta2_at_n20": 0.999645,
+    "C1_raw_features_reproduce": true,
+    "C2_hierarchy_normalized_reproduces": true,
+    "C3_pipeline_eta2_nonzero": true,
+    "C4_natural_ranking_preserved": true,
+    "C5_sample_size_effect": true,
+    "C6_ranking_stability_at_full": false
+  },
+  "controls": {
+    "PC1_RAW_FEATURES_REPRODUCE": {
+      "description": "Direct (non-pipeline) computation of tag_entropy, form_fraction, total_area eta2 on page_type reproduces eta2=1.0",
+      "expected": "All three features: eta2 >= 0.99, within-type std < 0.001",
+      "observed": "tag_entropy eta2=1.0, std=0.0; form_fraction eta2=1.0, std~0.0; total_area eta2=1.0, std=0.0",
+      "pass": true,
+      "evidence_ref": "analysis_output.json pc1_direct_eta2"
+    },
+    "NC1_HIERARCHY_NORMALIZED_REPRODUCES": {
+      "description": "Normalized hierarchy-weighted density formula (sum(exp(-alpha*depth)*inForm) / total_weight) produces eta2 < 0.01 on page_type",
+      "expected": "Normalized hierarchy density: eta2 < 0.01, all page type means within 1% of each other",
+      "observed": "eta2=0.0, all means identical at 3.69e-07 (y-proxy underflow degeneracy)",
+      "pass": true,
+      "evidence_ref": "analysis_output.json nc1_hierarchy"
+    },
+    "B1_CANONICAL_RECIPE_AGREEMENT": {
+      "description": "Parent canonical recipe ranking agreement baseline: tag_entropy x DEF-FULL-MAP 58%, x DEF-FORM-ONLY 48%",
+      "expected": "58%/48% agreement from parent audit VF1",
+      "observed": "n=20 canonical agreement 55.95%/49.34% — within range of parent estimate, slight variation from seed/iteration protocol differences",
+      "pass": "within_expected",
+      "evidence_ref": "analysis_output.json subsample_results['20'] recipe_canonical_ranking_agreement_mean"
+    },
+    "B2_NON_RECIPE_RANKING_AGREEMENT": {
+      "description": "Non-recipe pipeline ranking agreement: tag_entropy preserves listing > detail for both definitions at n=20",
+      "expected": "100% agreement for tag_entropy both definitions",
+      "observed": "DEF-FULL-MAP=True, DEF-FORM-ONLY=True at n=20; at n=15 DEF-FULL-MAP=True DEF-FORM-ONLY=True; at n=10 both False; at n=5 both False",
+      "pass": "confirmed_at_n20",
+      "evidence_ref": "analysis_output.json subsample_results non_recipe_ranking_agreement"
+    },
+    "B3_PIPELINE_DISCRIMINATION": {
+      "description": "Non-recipe pipeline eta2 at n=20: tag_entropy x DEF-FORM-ONLY = 0.9996, tag_entropy x DEF-FULL-MAP = 0.9958",
+      "expected": "All well above 0.05 threshold",
+      "observed": "max pipeline eta2 = 0.999645 at n=20, same as parent",
+      "pass": true,
+      "evidence_ref": "analysis_output.json subsample_results['20'] pipeline_eta2"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/analyze.py",
+      "sha256": "5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/analysis_output.json",
+      "sha256": "35bfbc77f59b643564b48ae46a2efa6e741eb89d19c23438c20709598d6e7ec8",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Sample-size effect on ranking agreement is REAL and MONOTONIC: canonical recipe tag_entropy x DEF-FULL-MAP agreement goes from 0% at n=5 to 0% at n=10 to 50% at n=15 to 56% at n=20. Spearman correlation = 1.0 (perfect monotonic). C5 PASSES.",
+    "BUT the improvement plateaus well below the 80% threshold: agreement at n=20 is only 55.95%, confirming the ranking instability is PARTIALLY sample-size-dependent but NOT fully resolved at the maximum available sample size. C6 FAILS.",
+    "Per-task recipe (independent p=0.5 per task) shows BETTER ranking agreement than canonical recipe (shared subset p=0.5) at n=20: 78.65% vs 55.95%. This is the opposite of the eta2 pattern (canonical 0.92 vs per-task 0.37), suggesting that independent per-task sampling captures diverse discriminative elements better for ranking even though it degrades overall eta2.",
+    "Non-recipe pipeline ranking agreement: at n=5 and n=10, tag_entropy x DEF-FULL-MAP ranking agreement is FALSE (pipeline reverses listing vs detail). This is because at small subsamples, the non-recipe pipeline's density for tag_entropy x DEF-FULL-MAP produces detail > listing instead of listing > detail. At n=15 and n=20, ranking agreement is TRUE. The non-recipe pipeline DOES require sufficient elements to preserve ranking.",
+    "Non-recipe pipeline eta2 for tag_entropy x DEF-FULL-MAP: 0.983 at n=5 (degraded from 0.996 at n=20), suggesting that even without recipe sampling, element subsampling degrades discrimination. The eta2 reduction at small n is from fewer elements contributing to the density sum.",
+    "Bootstrap ranking agreement at n=20: 57.1% ± 49.5% (571/1000 bootstrap samples agree). This high variance confirms the ranking is unstable — it depends heavily on which tasks happen to be sampled. The bootstrap CI spans from ~0% to ~100%, indicating the ranking is not reliably preserved at any effective_n in this sample.",
+    "The hierarchy density null control reproduces identically (eta2=0.0, all means 3.69e-07), confirming the y-proxy underflow degeneracy from the parent experiment. This is a known limitation, not a new finding.",
+    "Within-type template invariance persists: all tasks of the same page type have identical tag_entropy, form_fraction, and total_area values within the truncated-first-20 sample. This means any subsample preserves within-type identity — the ranking test is the only discriminating measure."
+  ],
+  "validity_notes": [
+    "The 7 tasks (3 listing, 3 detail, 1 cart deduplicated to n=1) with truncated-first-20 locatable_sample are the input. Full DOM testing (n=21-82) was NOT performed because raw data contains only truncated-first-20 elements. The n=20 result is the maximum achievable from this dataset.",
+    "Within-type template invariance: tasks of the same page type share identical element tags/roles/inForm/w/h in the truncated-first-20 sample. Any between-type discriminative mapping trivially yields eta2 close to 1.0 in the non-recipe pipeline. The test is ranking preservation, not magnitude.",
+    "Cart n=1 degeneracy: cart page_type has n=1 (deduplicated), making within-type variance degenerate. Comparison focuses on listing vs detail (n=3 each).",
+    "Effective_n subsampling uses the first n elements from each task's locatable_sample (ordered by DOM position), not random subsampling. This preserves the DOM-sequential structure but may not represent random element subsets. The monotonic improvement (Spearman=1.0) suggests the first-n approach captures meaningful structure.",
+    "Recipe sampling uses 10 seeds × 1000 iterations per effective_n per definition per recipe type. Total computational cost: ~480,000 recipe iterations, ~4000 bootstrap iterations. All offline computation, no browser/network/model calls.",
+    "The Spearman correlation is computed on only 4 points (n ∈ {5,10,15,20}). While the correlation is 1.0 (perfect monotonic), the small sample size limits statistical power. The 10-percentage-point improvement criterion provides additional guard against spurious monotonicity.",
+    "Per-task recipe seeding uses task_id hash as additional entropy to ensure independent role sampling per task. This differs from the parent experiment's protocol where all tasks shared the same random sequence; the independent approach better represents true per-task recipe behavior.",
+    "Single Magento site, single truncated-first-20 sample. Cross-site generalization not tested. Claim ceiling bounded accordingly."
+  ],
+  "unresolved": [
+    "Full DOM testing (n=21-82) is still needed for definitive answer on whether ranking stabilizes beyond the truncated-first-20 ceiling. The n=20 result strongly suggests structural instability but does not rule out stabilization at n>20.",
+    "The per-task recipe achieves 78.65% ranking agreement at n=20 — tantalizingly close to 80% but not tested by frozen C6 which only requires canonical recipe. A dedicated experiment on per-task recipe ranking stability at full DOM would be informative.",
+    "Why does non-recipe pipeline ranking fail at n=5 and n=10 but succeed at n=15 and n=20? The first-5 and first-10 elements may not contain enough discriminative signal. Understanding this threshold could inform element selection strategies.",
+    "Cross-site generalization of the sample-size effect remains untested. Different sites may have different template invariance properties, affecting the ranking stability boundary.",
+    "The bootstrap CI for ranking agreement at n=20 (57% ± 50%) is extremely wide, suggesting the ranking is not a stable property of this sample. A larger task set (more than 3 per type) would narrow the CI and provide more reliable agreement estimates."
+  ]
+}
