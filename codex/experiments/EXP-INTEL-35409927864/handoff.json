@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35409927864",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Can a density metric based on sample-derived features (tag entropy, form fraction, total_area) — which achieve eta2=1.0 on page_type — be designed to produce non-zero task-type discrimination within the OECD/COINr framework, or does the hierarchy-weighted density formula's collapse generalize to all density metrics on this truncated-first-20 sample?",
+  "why_next": "The template-composition explanation for zero density eta2 is FALSIFIED: the sample has clear task-type discrimination (eta2=1.0 on tag_entropy, form_fraction, total_area). The parent's hierarchy-density failure is caused by the density formula collapsing between-type variance, not sample invariance. The MIXED program's bottleneck is now identified as metric design. A density metric based on the discriminative sample features (entropy, form fraction, area) could potentially achieve non-zero eta2 and resolve MIXED outcomes. This is the natural next diagnostic step before abandoning density-based MIXED handling entirely.",
+  "carry_forward": {
+    "established": [
+      "Template-composition explanation for parent hierarchy-density eta2=0.0 is FALSIFIED: sample has task-type discrimination eta2=1.0 on tag_entropy/form_fraction/total_area (EXP-INTEL-35409927864 M2, audit PASS)",
+      "Locatable_sample structural fields (tag, role, inForm, x, w, h) are 100% identical within each page type; only y-coordinates differ positionally on elements 12-19 (EXP-INTEL-35409927864 M1, audit VF-1)",
+      "Within-type sample metrics have zero variance (std=0.0) for all tested metrics; between-type variance is perfect (eta2=1.0) (EXP-INTEL-35409927864 M2_within_type_std)",
+      "Full DOM tag distribution differs dramatically across page types (chi2=462.56, p=6.14e-53, CramersV=0.150) (EXP-INTEL-35409927864 M3, audit VF-3)",
+      "Mutual information I(tag_composition; page_type) = 1.449 bits for BOTH locatable_sample and full DOM — sample carries maximal task-type information (EXP-INTEL-35409927864 M4, audit VF-4)",
+      "Recipe choice is MATERIAL: 31x canonical/weighted density gap (EXP-INTEL-35264637598, inherited)",
+      "Linear combinations CANNOT break OECD/COINr dominance degeneracy — mathematical identity (EXP-INTEL-35353016702, inherited)",
+      "Within each recipe, definitions are highly correlated (Spearman r > 0.98) (EXP-INTEL-3330747199, inherited)",
+      "Heuristic hierarchy-weighted density is a perfect monotonic reparameterization of weighted (Spearman rho=1.0 at alpha=0.3) with zero task-type structure (EXP-INTEL-35401997918, inherited)"
+    ],
+    "rejected": [
+      "OECD/COINr framework with 2 recipes is NOT informative (construct failure) (EXP-INTEL-35330747199, inherited)",
+      "Linear third recipe CANNOT break degeneracy — mathematical identity (EXP-INTEL-35353016702, inherited)",
+      "SURVIVES_REVERSAL_PERSISTS decision rule not achievable (EXP-INTEL-35264637598, inherited)",
+      "Density ratio R = canonical/weighted as MIXED decision rule — falsified: definition-driven, non-significant task-type correlation (EXP-INTEL-35375593989, inherited)",
+      "Heuristic DOM hierarchy depth (inForm-based 4-level) as MIXED third recipe — falsified: eta-squared=0.0, monotonic reparameterization of weighted (EXP-INTEL-35401997918, inherited)",
+      "Template-composition explanation for zero density eta2 — falsified: sample has task-type discrimination eta2=1.0 (EXP-INTEL-35409927864)"
+    ],
+    "unknown": [
+      "Can a density metric based on tag entropy, form fraction, total_area (eta2=1.0 on page_type) be designed to produce non-zero task-type discrimination within OECD/COINr? This is the critical open question: the sample has the information, the density formula is the bottleneck.",
+      "Does the hierarchy-weighted density formula's collapse of between-type variance generalize to ALL density metrics, or is it specific to the exp(-alpha*depth) with binary inForm depth mapping?",
+      "Would TRUE DOM tree depth (actual parent-child distances from <html>, 2-20+ levels, from complete DOM with preserved hierarchy) provide additional hierarchy discrimination beyond what the truncated sample already captures? Parent U-1 still open.",
+      "Is MIXED outcome resolvable at all within OECD/COINr with any density-based recipe, or should density-based MIXED handling be abandoned entirely?",
+      "Cross-site generalization of sample template identity and metric discrimination — bounded to 1 Magento site"
+    ],
+    "do_not_assume": [
+      "OECD/COINr framework has been validated for SPIDER — it has not",
+      "31x canonical/weighted ratio is validated on full DOM — only tested on truncated-first-20 sample",
+      "FALSIFIED-IN-SETTING generalizes to full DOM — truncated sample may change density values",
+      "Density metric is entirely useless — recipe choice is MATERIAL (31x canonical/weighted gap)",
+      "Per-task sampling is required for task-type discrimination — this experiment shows the existing truncated-first-20 sample already has eta2=1.0 on basic metrics",
+      "Cart page-type structure is validated — cart has n=1, within-type invariance is degenerate",
+      "The y-coordinate differences are structural — they are positional (footer elements tracking page height), not tag/role/inForm differences",
+      "MI equality (sample = full DOM = 1.449 bits) means sample captures full DOM richness — it reflects perfect classification on 3 page types with max MI = log2(3) = 1.585",
+      "True DOM depth failure is implied by heuristic depth failure — the negative result is bounded to inForm-based heuristic, not actual DOM tree structure"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35409927864/audit.json (PASS, claim_ceiling, VF-1 through VF-5)",
+    "research/experiments/EXP-INTEL-35409927864/result.json (M1-M4, M8, PC1/NC1, OBS-1 through OBS-7)",
+    "research/experiments/EXP-INTEL-35409927864/spec.json (frozen decision_rule C1-C4, falsifiers F1-F3)",
+    "research/experiments/EXP-INTEL-35401997918/handoff.json sha256 b0fb7e618ae49216cd857d6e4bccf9c9a57b467a521a040a8ac9d051e41ce92c (parent: heuristic depth falsified, U-1 true DOM depth open)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 (raw evidence source)",
+    "research/experiments/EXP-INTEL-35375593989/handoff.json (density ratio falsified, inherited)",
+    "research/experiments/EXP-INTEL-35264637598 (recipe choice materiality, inherited)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35409927864/audit.json:status=PASS, producer_claim_supported=true, claim_ceiling bounded to 7-task/1-site/3-definition truncated-first-20 sample",
+    "research/experiments/EXP-INTEL-35409927864/result.json:M1_template_identity_all_fields=false, M2_eta2_tag_entropy=1.0/form_fraction=1.0/total_area=1.0, M4_mi_sample=1.4488, M3_chi2=462.56 p=6.14e-53",
+    "research/experiments/EXP-INTEL-35409927864/spec.json:decision_rule NOT C1→FALSIFIES, C2 FAIL (eta2=1.0), C4 FAIL (I_sample=1.449)",
+    "research/experiments/EXP-INTEL-35401997918/handoff.json:carry_forward.established hierarchy-density eta2=0.0, carry_forward.unknown true DOM depth question"
+  ],
+  "recommended_action": "Intel lane should investigate whether a density metric based on the sample's discriminative features (tag entropy, form fraction, total_area — all achieving eta2=1.0) can be designed to produce non-zero task-type discrimination within the OECD/COINr framework. This is a metric-design question, not a sampling or infrastructure question. The sample already contains the necessary task-type information; the hierarchy-weighted density formula is the bottleneck. If no density metric can exploit the sample's discriminative structure, the MIXED outcome program within OECD/COINr should be abandoned for this site, and the lane should pivot to cross-site testing or alternative non-density-based MIXED handling approaches."
+}

@@ -1,0 +1,48 @@
+{
+  "experiment_id": "EXP-INTEL-35409927864",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does the locatable_sample's fixed per-page-type template composition explain the parent's zero task-type discrimination (eta-squared=0.0), and does the full DOM contain task-type-discriminative tag structure that the sample masks?",
+  "hypothesis": "The 20-element locatable_sample is a fixed template per page type: all tasks of the same page type share identical element tags, roles, inForm flags, and bbox coordinates. This makes eta-squared=0.0 a mathematical necessity for ANY density recipe, because there is zero within-page-type variance in the sample. The full DOM, by contrast, exhibits genuine task-type variation in tag distribution, DOM size, and element counts (e.g., listing DOMs have ~1700 elements with ~400 links, detail DOMs have ~1300 elements with ~330 links, cart DOMs have ~1136 elements with ~320 links).",
+  "falsifier": "The template-composition explanation is falsified if ANY of: (F1) Within at least one page type, the locatable_sample elements differ across tasks in tag, role, inForm, or bbox (i.e., the sample is NOT a fixed template); (F2) A metric computed from the locatable_sample (e.g., tag entropy, form fraction, element count) achieves eta-squared >= 0.10 on page_type, showing the sample contains task-type-discriminative information; (F3) The full DOM tag distribution does NOT differ significantly across page types (chi-squared p > 0.05), meaning the full DOM also lacks task-type structure.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_DENSITY_ETA2",
+      "description": "Parent hierarchy-weighted density eta-squared = 0.0 on page_type (EXP-INTEL-35401997918 M7). All density recipes (canonical, weighted, hierarchy) produce identical within-type means.",
+      "source": "EXP-INTEL-35401997918 result.json M7"
+    },
+    {
+      "id": "B2_PARENT_RECIPE_IDENTITY",
+      "description": "Parent Spearman(hierarchy, weighted) = 1.0 at alpha=0.3 (EXP-INTEL-35401997918 M6). The hierarchy recipe is a monotonic reparameterization of weighted, confirming zero structural novelty.",
+      "source": "EXP-INTEL-35401997918 result.json M6"
+    },
+    {
+      "id": "B3_FULL_DOM_TAG_VARIATION",
+      "description": "Full DOM tag counts vary across tasks: listing div=163-171, a=399-403; detail div=98-126, a=328-329; cart div=43, a=320. This variation is absent from the locatable_sample.",
+      "source": "EXP-INTEL-34782350557 raw_evidence dom_stats.tagCounts"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_FULL_DOM_DISCRIMINATION",
+    "description": "The full DOM tag distribution differs significantly across page types (listing/detail/cart). Chi-squared test on tag-type counts should yield p < 0.01.",
+    "expected": "Full DOM chi-squared p < 0.01, confirming the full DOM has task-type structure that the locatable_sample masks."
+  },
+  "null_control": {
+    "id": "NC1_SAMPLE_INVARIANCE",
+    "description": "The locatable_sample tag composition is identical across all tasks within each page type. Any metric computed from the sample (tag entropy, form fraction, element count) should have zero within-type variance.",
+    "expected": "Within-type standard deviation of sample metrics = 0.0 for all tested metrics, confirming the template invariance."
+  },
+  "measurement_validity": [
+    "All computations use existing raw evidence from EXP-INTEL-34782350557 (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050). No new data collection required.",
+    "The locatable_sample elements are compared field-by-field (tag, role, inForm, x, y, w, h) to verify template identity.",
+    "Full DOM tag distributions are extracted from dom_stats.tagCounts for each task.",
+    "Tag-type chi-squared test uses the full DOM counts aggregated by page type.",
+    "Metrics are bounded to 7 tasks (3 listing, 3 detail, 1 cart*2), 1 Magento site, 3 definitions. No cross-site extrapolation.",
+    "*cart_1 appears twice in the raw data (duplicate entry); treated as single task."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_SAMPLE_TEMPLATE_INVARIANT: For each page type, the locatable_sample elements are identical across all tasks of that type (all fields: tag, role, inForm, x, y, w, h). PASS if 100% identical within each type; FAIL if any within-type difference exists.\n\nC2_SAMPLE_ETA2_ZERO: The eta-squared of ANY sample-derived metric (tag entropy, form fraction, total_area) on page_type is < 0.01 (effectively zero). PASS if all tested metrics have eta2 < 0.01; FAIL if any metric achieves eta2 >= 0.01.\n\nC3_FULL_DOM_DISCRIMINATES: The full DOM tag-type distribution differs significantly across page types (chi-squared p < 0.01). PASS if p < 0.01; FAIL if p >= 0.01.\n\nC4_INFORMATION_LOSS: The mutual information between tag composition and page_type is 0.0 for the locatable_sample and > 0.0 for the full DOM. PASS if I_sample = 0.0 AND I_full_dom > 0.0; FAIL otherwise.\n\nVERDICT RULES:\n- If C1 AND C2 AND C3 AND C4: CONFIRMS — template composition explains zero eta-squared. Full DOM has task-type structure. MIXED program viable if per-task sampling obtained.\n- If NOT C1: FALSIFIES template explanation — sample IS per-task, and density failure is genuine. MIXED program should be abandoned for this sample.\n- If C1 AND C2 AND NOT C3: MIXED program limited by page structure, not sample. Full DOM also lacks task-type variation. Abandon density-based MIXED.\n- If C1 AND NOT C2: Sample has task-type structure (unexpected). Density recipes may work with richer sample metrics.\n- If NOT C3: Full DOM also lacks task-type structure. The MIXED program is limited by the Magento site's page-type homogeneity, not by the sampling procedure.",
+  "product_consequence_positive": "The MIXED program's failure is attributed to sampling procedure (fixed template), not density metric limitation. Product lane can pursue MIXED resolution by obtaining per-task locatable_samples from the runtime lane. The 31x canonical/weighted material gap (EXP-INTEL-35264637598) remains usable if per-task samples are available.",
+  "product_consequence_negative": "If the full DOM also lacks task-type structure (C3 fails), the MIXED program is limited by the Magento site's page-type homogeneity. Density-based MIXED handling should be abandoned for this site, and the lane should pivot to cross-site testing or alternative metrics.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network work. Field-by-field comparison of 20-element samples (7 tasks x 20 elements x 7 fields = 980 comparisons). Tag-count chi-squared (3 page types x ~15 tag categories). Mutual information estimation. Estimated < 1000 LLM tokens.",
+  "expected_information_gain": "HIGH — directly diagnoses WHY the parent experiment produced eta-squared=0.0. If the template explanation is confirmed, the MIXED program has a clear path forward (per-task sampling). If falsified, the MIXED program should be abandoned or redirected. Either outcome resolves the parent's open question U-1 and prevents wasted cycles on density recipes applied to template samples."
+}

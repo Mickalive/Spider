@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35409927864",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M1_sample_template_identity_all_fields": false,
+    "M1_sample_template_identity_without_y": true,
+    "M1_y_coordinate_differences": {
+      "product_listing": {
+        "count": 8,
+        "elements_affected": [12, 13, 14, 15, 16, 17, 18, 19],
+        "note": "Only y-coordinates differ; tags, roles, inForm, x, w, h identical across 3 listing tasks"
+      },
+      "detail": {
+        "count": 8,
+        "elements_affected": [12, 13, 14, 15, 16, 17, 18, 19],
+        "note": "Only y-coordinates differ; tags, roles, inForm, x, w, h identical across 3 detail tasks"
+      }
+    },
+    "M2_eta2_tag_entropy": 1.0,
+    "M2_eta2_form_fraction": 1.0,
+    "M2_eta2_total_area": 1.0,
+    "M2_eta2_mean_bbox_area": 1.0,
+    "M2_eta2_unique_tags": 0.0,
+    "M2_eta2_element_count": 0.0,
+    "M2_within_type_std": {
+      "product_listing": {
+        "tag_entropy": 0.0,
+        "form_fraction": 0.0,
+        "total_area": 0.0,
+        "mean_bbox_area": 0.0
+      },
+      "detail": {
+        "tag_entropy": 0.0,
+        "form_fraction": 0.0,
+        "total_area": 0.0,
+        "mean_bbox_area": 0.0
+      },
+      "cart": {
+        "tag_entropy": 0.0,
+        "form_fraction": 0.0,
+        "total_area": 0.0,
+        "mean_bbox_area": 0.0
+      }
+    },
+    "M2_sample_metrics_per_task": {
+      "listing_clothing-shoes-jewelry": {
+        "tag_entropy": 2.6464,
+        "form_fraction": 0.85,
+        "total_area": 341795.17,
+        "unique_tags": 7
+      },
+      "listing_beauty-personal-care": {
+        "tag_entropy": 2.6464,
+        "form_fraction": 0.85,
+        "total_area": 341795.17,
+        "unique_tags": 7
+      },
+      "listing_electronics": {
+        "tag_entropy": 2.6464,
+        "form_fraction": 0.85,
+        "total_area": 341795.17,
+        "unique_tags": 7
+      },
+      "detail_camera": {
+        "tag_entropy": 2.4842,
+        "form_fraction": 0.95,
+        "total_area": 589190.03,
+        "unique_tags": 7
+      },
+      "detail_vr_bag": {
+        "tag_entropy": 2.4842,
+        "form_fraction": 0.95,
+        "total_area": 589190.03,
+        "unique_tags": 7
+      },
+      "detail_pet_camera": {
+        "tag_entropy": 2.4842,
+        "form_fraction": 0.95,
+        "total_area": 589190.03,
+        "unique_tags": 7
+      },
+      "cart_1": {
+        "tag_entropy": 2.6016,
+        "form_fraction": 0.95,
+        "total_area": 428790.31,
+        "unique_tags": 7
+      }
+    },
+    "M3_chi2": 462.56,
+    "M3_chi2_p": 6.14e-53,
+    "M3_chi2_dof": 86,
+    "M3_cramers_v": 0.1502,
+    "M3_tag_counts_by_page_type": {
+      "product_listing": {"div": 501, "a": 1204, "span": 1492, "li": 1048, "form": 42, "input": 120, "button": 45, "img": 39},
+      "detail": {"div": 322, "a": 985, "span": 1053, "li": 955, "form": 12, "input": 54, "button": 12, "img": 15},
+      "cart": {"div": 43, "a": 320, "span": 319, "li": 312, "form": 2, "input": 3, "button": 2, "img": 1}
+    },
+    "M4_mi_sample": 1.4488,
+    "M4_mi_full_dom": 1.4488,
+    "M4_i_sample_zero": false,
+    "M4_i_full_dom_positive": true,
+    "M8_sample_element_field_coverage": {
+      "tag": true,
+      "role": true,
+      "inForm": true,
+      "x": true,
+      "w": true,
+      "h": true,
+      "y": false
+    }
+  },
+  "controls": {
+    "PC1_FULL_DOM_DISCRIMINATION": {
+      "description": "Full DOM chi-squared test across page types",
+      "expected": "p < 0.01",
+      "observed": "p = 6.14e-53",
+      "pass": true
+    },
+    "NC1_SAMPLE_INVARIANCE": {
+      "description": "Locatable_sample tag composition identical within each page type",
+      "expected": "Within-type std = 0.0 for all metrics",
+      "observed": "Within-type std = 0.0 for all metrics (PASS for within-type invariance). Between-type eta2 = 1.0 (FAIL for zero eta2).",
+      "pass": true,
+      "note": "Null control passes: within-type variance IS zero. But between-type variance is perfect (eta2=1.0), which means the sample DOES have task-type structure."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "OBS-1: The locatable_sample is NOT a fixed template across ALL tasks. Y-coordinates of elements 12-19 differ within each page type (8 differences per multi-task type). However, tags, roles, inForm flags, x-coordinates, widths, and heights are 100% identical within each page type.",
+    "OBS-2: Structural template identity (without y): listing tasks share identical structural composition (7 tags, 85% inForm, total area 341795). Detail tasks share identical composition (7 tags, 95% inForm, total area 589190). Cart has unique composition (7 tags, 95% inForm, total area 428790).",
+    "OBS-3: The sample DOES have task-type discrimination: eta-squared = 1.0 for tag entropy, form fraction, total area, and mean bbox area. This means 100% of variance in these metrics is between-page-type, not within. The sample is NOT informationally zero.",
+    "OBS-4: Within-type standard deviation is 0.0 for all sample metrics within each page type. All listing tasks produce identical metrics; all detail tasks produce identical metrics. This confirms the sample is a fixed template WITHIN each page type.",
+    "OBS-5: Full DOM tag counts differ dramatically across page types: listing has 501 div/1204 a/1492 span; detail has 322 div/985 a/1053 span; cart has 43 div/320 a/319 span. Chi-squared p = 6.14e-53 confirms significant differences.",
+    "OBS-6: Mutual information I(tag_composition; page_type) = 1.449 bits for BOTH locatable_sample and full DOM. The sample carries the same task-type information as the full DOM for the 7-task/3-type dataset.",
+    "OBS-7: checkout_1 tasks (2 entries) have error 'Page.goto: net::ERR_CONNECTION_REFUSED' and are excluded from analysis. cart_1 appears twice (duplicate entry); deduplicated to single task."
+  ],
+  "validity_notes": [
+    "VN-1: Small sample: 7 tasks (3 listing, 3 detail, 1 cart), 1 Magento site, 3 definitions. No checkout data available. Cross-site generalization not tested.",
+    "VN-2: checkout_1 excluded due to connection refused error. Cart has only 1 task, so within-type template identity cannot be tested for cart.",
+    "VN-3: The parent's FALSIFIED-IN-SETTING was based on hierarchy-weighted density eta2=0.0. This experiment shows the sample HAS task-type structure (eta2=1.0 on basic metrics), so the parent's zero eta2 was specific to the density metric, not a property of the sample.",
+    "VN-4: Mutual information is identical for sample and full DOM (1.449 bits) because with 3 page types, the maximum MI is log2(3)=1.585 bits, and the discrete feature representation captures most of it.",
+    "VN-5: The y-coordinate differences in elements 12-19 reflect different page content lengths (listing pages have varying numbers of products, pushing footer elements to different vertical positions). These are positional, not structural differences."
+  ],
+  "unresolved": [
+    "U-1: The template explanation for zero density eta2 is FALSIFIED. The parent's density failure is NOT due to sample template invariance. Why did the hierarchy-weighted density produce eta2=0.0 if the sample has clear task-type structure? The specific density formula may map different sample compositions to the same density value.",
+    "U-2: Could a different density metric (not hierarchy-weighted) capture the task-type structure present in the sample? The sample has eta2=1.0 on entropy/form_frac/total_area, suggesting density metrics based on these features would work.",
+    "U-3: The 31x canonical/weighted material gap (EXP-INTEL-35264637598) remains valid. The question is whether a density metric can be designed to exploit the task-type structure in the sample.",
+    "U-4: Cross-site generalization of sample template identity is untested. Different Magento sites may have different sample compositions."
+  ]
+}
