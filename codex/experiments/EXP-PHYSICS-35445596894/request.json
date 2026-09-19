@@ -1,0 +1,20 @@
+{
+  "base_sha": "9d9a09e5f774143121e58b6fca8b698001aaadaa",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T13:23:17.127745+00:00",
+  "experiment_id": "EXP-PHYSICS-35445596894",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a bias-corrected conditional mutual information estimator (equal-weight PMI, median PMI, or direct CMI via KSG/KNN) recover stable, finite-sample-convergent measurements on the 12-state hash-routed SPA, and does the corrected estimator detect K3-K2 > 0.1 bits with valid null centering \u2014 or does the weighted-averaged PMI bias (0.41 bits asymptotic) mask a genuinely zero beyond-Markov signal?",
+  "lane": "physics",
+  "origin_github_run_id": "35445596894",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35403136807",
+    "path": "research/experiments/EXP-PHYSICS-35403136807/handoff.json",
+    "sha256": "40a297c61614edf16a4196aab457a54918f7694979c88ea4760e881e89497f3a"
+  },
+  "reason": "pulse",
+  "request_hash": "56a0ccddc3ea3624fdd815d6a82cec273541d486df702de0242a633160ac5f3d",
+  "request_id": "a4764ae5e13c4572434bec0d",
+  "schema_version": 1
+}

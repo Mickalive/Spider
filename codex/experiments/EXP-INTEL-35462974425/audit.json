@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35462974425",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF1_C3_GATE_CORRECTLY_BLOCKS",
+      "severity": "critical",
+      "finding": "C3_DATA_AVAILABILITY gate correctly evaluates to FAIL and triggers BLOCKED verdict per frozen decision_rule (NOT C3 -> BLOCKED). 0/7 tasks have locatable_sample length >20; all exactly 20.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/analysis_output.json:c3_gate.tasks_with_locatable_sample_gt20=0, research/experiments/EXP-INTEL-35462974425/result.json:controls.C3_FULL_DOM_ELEMENTS_AVAILABLE.pass=false, spec.json:decision_rule C3 and Verdict Rules",
+      "recomputed": "Independent recomputation on research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050) after filtering http_status==200, non-checkout, deduplicated cart yields 7 tasks: listing_clothing-shoes-jewelry 20/82/1550, listing_beauty-personal-care 20/82/1560, listing_electronics 20/82/1564, detail_camera 20/32/1215, detail_vr_bag 20/32/1149, detail_pet_camera 20/32/1143, cart_1 20/21/1070. Sum>20 =0, threshold >=5 fails."
+    },
+    {
+      "id": "VF2_RAW_DATA_TRUNCATED_AT_COLLECTION_NOT_PROCESSING",
+      "severity": "major",
+      "finding": "Truncation is at collection time in EXP-INTEL-34782350557, not a downstream processing artifact. locatable_sample array length 20 conflicts with metadata locatable_elements (82/32/21) and elements_with_bbox (1070-1564) and total_dom_elements (1136-1712) which confirm full pages are large but not fully sampled. No alternative array in raw evidence contains full per-element data (viewport_sample also 12 truncated, dom_stats only counts).",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json measurements[].locatable_sample length 20 vs locatable_elements 82/32/21, spec.json:measurement_validity #2 CRITICAL DATA AVAILABILITY CHECK",
+      "recomputed": "Verified raw JSON: every locatable_sample has exactly 20 elements with fields tag/role/ariaLabel/inForm/x/y/w/h; metadata locatable_elements 82/32/21 correctly reproduced in analysis_output.json:c3_gate.element_counts."
+    },
+    {
+      "id": "VF3_STATUS_SEMANTICS_CORRECT_INFRASTRUCTURE_NOT_FALSIFICATION",
+      "severity": "major",
+      "finding": "Producer correctly uses status=BLOCKED outcome=NOT_APPLICABLE with metrics M1-M5 and C1/C2/C4-C7 = null, per EXPERIMENT_PACKET.md mandatory-key semantics (null = explicitly unknown/not available). Does not encode infrastructure failure as scientific falsification (no FALSIFIES/MIXED/SUPPORTS) and correctly isolates hypothesis as UNTESTED in observations, validity_notes and unresolved.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:status=BLOCKED outcome=NOT_APPLICABLE metrics M1-M5 null, validity_notes #1-#3, report.md Executive Summary and Product Consequences",
+      "recomputed": "Checked result.json metrics match spec decision_rule mapping: NOT C3 -> BLOCKED takes precedence over C1/C2/C4-C7 evaluation (producer correctly marks C1/C2 as blocked not evaluated)."
+    },
+    {
+      "id": "VF4_CONTROLS_CORRECTLY_BLOCKED_AND_REFERENCE_ONLY",
+      "severity": "minor",
+      "finding": "PC1_RAW_FEATURE_REPRODUCES_FULL_DOM and NC1_HIERARCHY_NORMALIZED_FULL_DOM correctly marked pass=blocked (cannot execute on full DOM). Reference values computed on truncated-first-20 (eta2=1.0 for tag_entropy/form_fraction/total_area; hierarchy eta2=0.0) are explicitly labeled 'for reference, full DOM blocked' and not used to claim C1/C2 PASS. No leakage of truncated evidence into full-DOM claim.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:controls PC1/NC1 pass=blocked, analysis_output.json:pc1_positive_control/nc1_null_control notes, spec.json:positive_control PC1 and null_control NC1 expected",
+      "recomputed": "Recomputed truncated-first-20 PC1: tag_entropy eta2=1.0 mean 2.646/2.484/2.602 std 0.0, form_fraction eta2=0.9999999999999982, total_area eta2=1.0; NC1 hierarchy ALPHA=0.3 y-proxy eta2=0.0 means 3.693777130463341e-07 identical. Matches producer analysis_output.json within floating tolerance."
+    },
+    {
+      "id": "VF5_NO_RENAMING_OR_SILENT_REWRITE",
+      "severity": "minor",
+      "finding": "Producer preserves all frozen identifiers: experiment_id, lane, claim_ids C-MEAS-VALID, control IDs PC1/NC1 and B1/B2/B4, metric IDs M1-M5, C3 gate threshold >=5/7. No metric/control renaming to obscure disagreement. Artifact hashes verified.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/spec.json:claim_ids/positive_control/null_control/baselines/decision_rule, result.json:controls/metrics, provenance.json:artifacts and hashes",
+      "recomputed": "SHA256 verified: raw_evidence da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, analyze.py 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459, analysis_output.json 1ecf7ee501b2d13cb51461066bcaec446cff3b9a40f5968ed1ed835f095644d0 match provenance.json and result.json artifacts."
+    },
+    {
+      "id": "VF6_SPEC_VALIDITY_THREATS_PRESERVED",
+      "severity": "minor",
+      "finding": "Producer validity_notes correctly disclose that baseline controls on truncated-first-20 confirm consistency with parent but do NOT constitute evidence for/against full DOM hypothesis, and that within-type template invariance at truncated-first-20 remains discriminating-check-only (audit VF1 from parent). No new validity threat introduced; single-site and cart n=1 degeneracy still disclosed in spec.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:validity_notes #5, report.md Baseline Context, spec.json:measurement_validity #9 single site",
+      "recomputed": "Parent audit VF1 template invariance not contradicted; truncated-first-20 non-recipe pipeline max eta2 0.999645 and ranking_preserved true for all 6 combos matches parent M3/M4 and confirms data not corrupted."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF1_TRUNCATED_CANONICAL_BASELINE_CONFIRMED",
+      "finding": "B1_TRUNCATED_FIRST20_CANONICAL correctly cited as 55.95% (tag_entropy x DEF-FULL-MAP) from parent M4 at n=20; producer does not claim new measurement, confirms via evidence_ref. No attempt to inflate baseline.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:controls.B1_TRUNCATED_FIRST20_CANONICAL, EXP-INTEL-35445596324/result.json:M4_recipe_canonical_ranking_agreement['20']=0.5595",
+      "strength": "appropriate - inherited baseline exact"
+    },
+    {
+      "id": "BF2_TRUNCATED_PERTASK_BASELINE_NOT_REMEASURED_BUT_REFERENCED",
+      "finding": "B2 truncated per-task 78.65% not re-measured (producer correctly notes blocked for full DOM only). Producer B2_NON_RECIPE remains 100% agreement for truncated-first-20 non-recipe pipeline, recomputed and matches parent B3 ceiling.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:controls.B2_NON_RECIPE_RANKING_AGREEMENT observed all 6 combos true, analysis_output.json:non_recipe_truncated_first20.ranking_preserved",
+      "strength": "appropriate - strong baseline verified on same 7-task sample"
+    },
+    {
+      "id": "BF3_PIPELINE_DISCRIMINATION_BASELINE_REPRODUCES",
+      "finding": "B4_PIPELINE_DISCRIMINATION max eta2 0.999645 (tag_entropy x DEF-FORM-ONLY) on truncated-first-20 matches parent M3 at n=20 (0.999645). Controls verify pipeline not broken by full-DOM code path. Strong baseline correctly preserved.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:controls.B4_PIPELINE_DISCRIMINATION observed 0.999645, analysis_output.json:non_recipe_truncated_first20.max_eta2 0.9996449276089042, EXP-INTEL-35445596324/result.json:M3",
+      "strength": "strong - eta2 recomputed independently"
+    },
+    {
+      "id": "BF4_BASELINE_STRENGTH_APPROPRIATE_FOR_BLOCKED_VERDICT",
+      "finding": "No baseline strength inflation: producer does not claim improvement over B1 (would require >60.95% agreement) and does not claim 80% threshold reached. Baselines serve only as consistency checks, not as support for hypothesis. Appropriate use of strong baselines per AGENTS.md.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/report.md Frozen Decision Rule Evaluation C4-C7 NOT EVALUATED, spec.json:baselines B1-B4",
+      "strength": "appropriate"
+    }
+  ],
+  "recomputed_metrics": {
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_tasks_with_gt20": 0,
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_total_tasks": 7,
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_threshold": 5,
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_pass": false,
+    "C3_diagnois_match": "ALL tasks have exactly 20 elements in locatable_sample - matches producer",
+    "M1_full_dom_canonical_agreement": null,
+    "M2_full_dom_pertask_agreement": null,
+    "M3_full_dom_delta_vs_truncated": null,
+    "M4_full_dom_bootstrap_ci": null,
+    "M5_full_dom_pipeline_eta2": null,
+    "C1_raw_features_reproduce_full_dom": null,
+    "C2_hierarchy_normalized_full_dom": null,
+    "C4_full_dom_pipeline_eta2": null,
+    "C5_full_dom_exceeds_truncated": null,
+    "C6_ranking_stability_full_dom": null,
+    "C7_pertask_recipe_improves": null,
+    "recomputed_PC1_tag_entropy_eta2_truncated_ref": 1.0,
+    "recomputed_PC1_form_fraction_eta2_truncated_ref": 0.9999999999999982,
+    "recomputed_PC1_total_area_eta2_truncated_ref": 1.0,
+    "recomputed_PC1_within_std_product_listing": 0.0,
+    "recomputed_PC1_within_std_detail": 0.0,
+    "recomputed_NC1_hierarchy_eta2_truncated_ref": 0.0,
+    "recomputed_NC1_group_means": 3.693777130463341e-07,
+    "recomputed_non_recipe_max_eta2_truncated": 0.9996449276089042,
+    "recomputed_non_recipe_tag_entropy_x_DEF_FULL_MAP_eta2": 0.9957833666117688,
+    "recomputed_non_recipe_ranking_preserved_all_6": true,
+    "recomputed_raw_evidence_sha256_match": true,
+    "recomputed_analyze_py_sha256_match": true,
+    "recomputed_analysis_output_sha256_match": true
+  },
+  "claim_ceiling": "No claim about full-DOM (n=21-82) feature-weighted density ranking stability is justified. The OECD/COINr pipeline's canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP remains bounded to truncated-first-20 evidence: 55.95% agreement at n=20 (canonical), 78.65% per-task, bootstrap 57.1% ±49.5%, non-recipe 100% ranking preserved, max non-recipe pipeline eta2 0.999645, all on 7 tasks (3 listing ewb 1550-1564, 3 detail ewb 1143-1215, 1 cart ewb 1070), 1 Magento site, 2 non-degenerate definitions, y-proxy hierarchy. The hypothesis that truncation is the binding constraint (H1 >=80%, H2 +10pp, H3 >=85% at full DOM) is UNTESTED due to data truncation at collection time. Parent MIXED verdict (EXP-INTEL-35445596324) remains latest valid evidence. No product promotion authorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35462974425/request.json sha256 377d57138c68319b02d2ed80a20cd24d51cd5e2c47147869e8afc0ef1bbf1b5e",
+    "research/experiments/EXP-INTEL-35462974425/spec.json sha256 3e15cfc492004632a1558823cb2c30038146a0095e191635c733bef16dde134f",
+    "research/experiments/EXP-INTEL-35462974425/prereg.md sha256 8190419d14e613faf5cc4f3fa00928b7fa1f3648c1a9fe3e403040efd567a544",
+    "research/experiments/EXP-INTEL-35462974425/freeze.json",
+    "research/experiments/EXP-INTEL-35462974425/result.json sha256 941fb3839d5be111b01b4b053f1c13670b07a518e34b4192a145620883cc08a8",
+    "research/experiments/EXP-INTEL-35462974425/report.md sha256 a379f12718ccff8b2e1afa1b32f1d850c549caf7a443abe9dbb3027d17958cfd",
+    "research/experiments/EXP-INTEL-35462974425/provenance.json",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+    "research/experiments/EXP-INTEL-35462974425/analysis_output.json sha256 1ecf7ee501b2d13cb51461066bcaec446cff3b9a40f5968ed1ed835f095644d0 recomputed and hash-verified",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 - all 7 locatable_sample arrays length 20 verified",
+    "research/experiments/EXP-INTEL-35445596324/result.json M4/M5/M3/B2 controls parent baselines",
+    "research/experiments/EXP-INTEL-35445596324/handoff.json sha256 f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110 and audit.json PASS",
+    "codex/claim_state.json C-MEAS-VALID status EXPERIMENTAL/MIXED chain",
+    "research/lanes/registry.json intel lane charter"
+  ],
+  "unresolved": [
+    "Primary question UNRESOLVED and UNTESTED on existing data: Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM elements (n=21-82, full locatable_elements 82/32/21, elements_with_bbox 1070-1564) with richer element diversity - specifically does canonical recipe ranking agreement reach 80% threshold when effective element count exceeds 20-element truncation ceiling? Cannot be answered without full DOM re-collection.",
+    "Falsifier conditions F1 (<75% canonical agreement), F2 (no >5pp improvement over 55.95%), F3 (<75% per-task), F4 (eta2 <0.90) remain unevaluated on full DOM; none are triggered or rejected by this BLOCKED run.",
+    "Whether additional elements beyond first-20 improve stability monotonically or exhibit diminishing returns beyond n=20 plateau (+6pp from n=15->20) - parent C5 PASS suggests sample-size helps but C6 FAIL shows ceiling not crossed at n=20; full-DOM shape unknown.",
+    "Per-task vs canonical recipe ranking agreement gap at full DOM - parent showed per-task 78.65% vs canonical 55.95% at n=20; whether per-task crosses 85% at full DOM (spec H3/C7) unknown.",
+    "Pipeline eta2 on full DOM across 3 features x 2 definitions x 2 recipes (C4 threshold >=0.05) - expected to remain high (>0.90) but noise from additional diverse elements could degrade discrimination (spec F4); untested.",
+    "Bootstrap CI width for ranking agreement at full DOM vs parent 57.1% ±49.5% - unknown whether full DOM narrows uncertainty.",
+    "Substrate fix required: SPIDER browser substrate / exp347 collection script must be modified to capture ALL elements with bbox in locatable_sample (not capped at 20) before re-running analyze.py; estimated cost 5-10 min browser automation on am1n3e/webarena-verified-shopping:latest (provenance.json unblocking_action).",
+    "Cross-site generalization beyond single Magento site and single locatable_sample definition remains unknown per spec validity threats #5."
+  ]
+}
