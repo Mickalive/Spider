@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35422991016",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Recompute C1_HIERARCHY_REPRODUCES with faithful parent formula (normalized hierarchy-weighted density as in EXP-INTEL-35401997918 M7: exp(-alpha*depth) summed weight normalized by total weight / matching_area/total_area) - producer cites parent eta2=0.0 but derived artifact compute_output.json hierarchy_density eta2=1.000000000000005 with pass=false contradicts C1 PASS true in result.json",
+    "Test alternative metrics THROUGH the OECD/COINr density pipeline as frozen question/spec requires ('within the OECD/COINr framework' / 'when passed through OECD/COINr density computation') - producer tests direct feature eta2 (tag_entropy/form_fraction/total_area as density values) and acknowledges in validity_notes VN-5 and unresolved U-1/U-2 that pipeline was not directly tested",
+    "Resolve internal contradiction: result.json C1,NC1 PC1 all PASS true via inherited citation while compute_output.json decision_rules.C1 pass=false eta2=1.0 verdict=MEASUREMENT_INVALID with reason 'C1 FAIL: hierarchy reproduction fails, cannot anchor comparison' - align result.json observations/controls with derived artifact or explain normalization choice with exact code hash",
+    "If claiming SURVIVES / density metric achieves task-type discrimination within OECD/COINr, provide per-task OECD/COINr density values (definitions x recipes x normalization) showing eta2 >=0.05 and between-type > within-type through the pipeline, not just raw feature eta2=1.0 which is already established in parent EXP-INTEL-35409927864 M2"
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_C1_ANCHOR_CONTRADICTION",
+      "severity": "critical",
+      "finding": "C1_HIERARCHY_REPRODUCES is marked PASS true eta2=0.0 in result.json controls.C1_HIERARCHY_REPRODUCES and controls.NC1_HIERARCHY_REPRODUCTION via citation to EXP-INTEL-35401997918, but the producer's own derived artifact compute_output.json recomputes hierarchy_density eta2=1.000000000000005 ss_between 0.4606 ss_within ~0 group_means listing 15.59391 vs detail 15.075546 cart 15.075546 and decision_rules.C1 pass=false. The frozen decision rule requires C1 PASS to anchor comparison; per spec If NOT C1: MEASUREMENT_INVALID. The producer report.md and result.json outcome SUPPORTS / SURVIVES ignore this C1 failure present in their own compute_output.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35422991016/compute_output.json:eta2_results.hierarchy_density eta2=1.000000000000005, decision_rules.C1 pass=false verdict=MEASUREMENT_INVALID; research/experiments/EXP-INTEL-35422991016/result.json:controls.C1_HIERARCHY_REPRODUCES pass=true observed eta2=0.0; research/experiments/EXP-INTEL-35422991016/report.md:31-34 C1 PASS table"
+    },
+    {
+      "id": "VF2_PIPELINE_NOT_TESTED",
+      "severity": "critical",
+      "finding": "Frozen question and hypothesis explicitly require 'within the OECD/COINr framework' / 'when passed through OECD/COINr density computation' / 'used as input to OECD/COINr density computation pipeline replacing hierarchy-weighted density formula' (spec.json hypothesis, prereg Alternative Density Metrics section, measurement_validity #4). Producer tests tag_entropy/form_fraction/total_area DIRECTLY as density values (result.json validity_notes VN-3: 'direct use of sample features as density values', report.md 95: 'direct use... not through full pipeline', provenance methodology). No OECD/COINr definitions, recipes, or normalization applied. VN-5 and unresolved U-1/U-2 explicitly acknowledge pipeline not tested. Therefore C2/C3/C4 PASS on direct eta2=1.0 does not answer frozen question.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35422991016/spec.json:question hypothesis falsifier; research/experiments/EXP-INTEL-35422991016/prereg.md:Alternative Density Metrics 'Each metric will be used as input to OECD/COINr density computation pipeline'; research/experiments/EXP-INTEL-35422991016/result.json:validity_notes VN-3 VN-5 unresolved U-1 U-2; provenance.json:methodology"
+    },
+    {
+      "id": "VF3_NO_NEW_INFORMATION",
+      "severity": "major",
+      "finding": "Producer M2_eta2_tag_entropy eta2=1.0 group_means 2.6464/2.4842/2.6016, M3 form_fraction 0.85/0.95/0.95, M4 total_area 341795/589190/428790 are IDENTICAL to parent EXP-INTEL-35409927864 M2 already established as eta2=1.0 with audit PASS. Recomputation on same raw evidence research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 with deduplication to 7 tasks (3 listing 3 detail 1 cart) confirms same values (recomputed_metrics below). The experiment therefore replicates inherited knowledge, not a new density-pipeline test. Combined metric reporting inconsistency: M5 combined listing 0.5 detail 0.5 identical means listing vs detail not discriminated, yet eta2=1.0 due only to cart (n=1) difference - misrepresents C3 discrimination where listing vs detail are primary test (spec measurement_validity #5).",
+      "evidence_ref": "research/experiments/EXP-INTEL-35422991016/result.json:metrics M2-M6 M7; research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json; research/experiments/EXP-INTEL-35409927864/handoff.json carry_forward.established"
+    },
+    {
+      "id": "VF4_WITHIN_TYPE_DEGENERACY_AND_SCOPE",
+      "severity": "major",
+      "finding": "Within-type std=0.0 for all metrics reflects truncated-first-20 sample is fixed template within each page type (OBS-3). This is inherited (parent M1) not new. With zero within variance, eta2=1.0 is tautologically maximal and SS_within 0 (compute_output ss_within 0.0). Decision thresholds C2 >=0.05, C3 >1% range, C4 <0.5 are trivially passed given this degeneracy (pct_of_range 100%, std_range_ratio 0.0). Scope remains narrowly bounded as producer states: 7 tasks 1 Magento site 3 definitions truncated-first-20, cart n=1 degenerate. No cross-site, full-DOM, or non-truncated generalization tested. Claim ceiling cannot extend beyond this sample.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35422991016/result.json:metrics M2_within_type_std 0.0 M8 std_range_ratio 0.0; prereg Scope Limitations; spec measurement_validity"
+    },
+    {
+      "id": "VF5_TARGET_SPLIT_LEAKAGE_INTEGRITY",
+      "severity": "low",
+      "finding": "Sampling integrity: truncated-first-20 locatable_sample is used consistently. Raw evidence has 10 measurements (3 listing, 3 detail, 2 identical cart, 2 checkout failures). Producer correctly deduplicates to 7 tasks as per spec ('deduplicated from 8 success measurements' - actually 8 success including duplicate cart, filtered to 7). No leakage between train/test - descriptive offline computation. Hierarchy reproduction discrepancy is not leakage but formula normalization mismatch (validity_notes VN-2).",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json measurements 10 with task_id cart_1 duplicate and checkout_1 errors; provenance datasets"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_PARENT_HIERARCHY_DENSITY_ETA2",
+      "expected": "eta2=0.0 hierarchy-weighted density (EXP-INTEL-35401997918 M7) - parent cites identical mean 0.667 across types via normalized formula",
+      "observed": "Producer cites PASS (eta2=0.0) but derived artifact recomputes eta2=1.0 with binary inForm raw sum (listing 15.59 vs detail 15.07). Independent recomputation confirms binary inForm depth mapping IS discriminative on this sample (detail/cart share same 15.075 due to form_fraction 0.95). Parent normalization (matching_area/total_area or weighted sum normalized by total weight) apparently collapses variance to 0.0, but producer did not execute that normalized computation - anchor is unreproduced in executable artifact. Baseline discrepancy unresolved.",
+      "verdict": "unverified_in_this_artifact",
+      "evidence_ref": "research/experiments/EXP-INTEL-35401997918/result.json M7; compute_output.json eta2_results.hierarchy_density"
+    },
+    {
+      "id": "B2_SAMPLE_FEATURE_DISCRIMINATION",
+      "expected": "eta2=1.0 on tag_entropy 2.646/2.484/2.602, form_fraction 0.85/0.95/0.95, total_area 341k/589k/428k with within std 0.0 (EXP-INTEL-35409927864 M2)",
+      "observed": "Recomputed exactly: tag_entropy 2.6464393446710153 vs 2.484183719779189 vs 2.6016094970590276 eta2=1.0 ss_between 0.0406 ss_within 0.0; form_fraction 0.85/0.95 eta2 1.0; total_area 341795.17/589190.03/428790.31 eta2 1.0. All within std 0.0. Baseline correctly reproduced, but this is replication of inherited established fact, not new evidence for pipeline.",
+      "verdict": "reproduced",
+      "evidence_ref": "recomputed_metrics M2-M4; result.json M2-M4"
+    },
+    {
+      "id": "B3_RECIPE_CHOICE_MATERIALITY",
+      "expected": "31x canonical/weighted gap, linear combinations cannot break degeneracy, Spearman r>0.98 within recipe (EXP-INTEL-35264637598, EXP-INTEL-35353016702)",
+      "observed": "Not retested in this experiment (no recipe/density definition computed through OECD/COINr). Producer inherits as context but provides no new density-recipe comparison. No baseline strength violation, but also no extension.",
+      "verdict": "not_tested",
+      "evidence_ref": "spec baselines B3; result provenance established_facts_referenced"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_hierarchy_density_eta2_parent": {
+      "producer_claimed_eta2": 0.0,
+      "recomputed_eta2_raw_binary_inForm": 1.000000000000005,
+      "recomputed_group_means": {
+        "product_listing": 15.59391,
+        "detail": 15.075545999999997,
+        "cart": 15.075546
+      },
+      "recomputed_ss_between": 0.46063069113600247,
+      "recomputed_ss_within": -2.3869795029440866e-15,
+      "verdict": "CONTRADICTS_C1_PASS - producer compute_output shows C1 FAIL",
+      "note": "Parent normalized formula (eta2=0.0) not executed; binary inForm raw sum is discriminative. Producer acknowledges difference in validity_notes VN-2 but still marks C1 PASS.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35422991016/compute_output.json:eta2_results.hierarchy_density"
+    },
+    "M2_eta2_tag_entropy": {
+      "producer_eta2": 1.0,
+      "recomputed_eta2": 1.0,
+      "recomputed_group_means": {
+        "product_listing": 2.6464393446710153,
+        "detail": 2.484183719779189,
+        "cart": 2.6016094970590276
+      },
+      "recomputed_ss_between": 0.04061965364305691,
+      "recomputed_ss_within": 0.0,
+      "match": true
+    },
+    "M3_eta2_form_fraction": {
+      "producer_eta2": 1.0,
+      "recomputed_eta2": 1.0,
+      "recomputed_group_means": {
+        "product_listing": 0.85,
+        "detail": 0.95,
+        "cart": 0.95
+      },
+      "match": true
+    },
+    "M4_eta2_total_area": {
+      "producer_eta2": 1.0,
+      "recomputed_eta2": 1.0,
+      "recomputed_group_means": {
+        "product_listing": 341795.171875,
+        "detail": 589190.03125,
+        "cart": 428790.3125
+      },
+      "match": true
+    },
+    "M5_eta2_combined_entropy_area": {
+      "producer_eta2": 1.0,
+      "recomputed_group_means": {
+        "product_listing": 0.5,
+        "detail": 0.5,
+        "cart": 0.5377213386315534
+      },
+      "note": "listing vs detail identical (0.5 vs 0.5) - discrimination only via cart n=1; not valid for listing-vs-detail C3 interpretation despite eta2=1.0 due to zero within variance",
+      "match": true
+    },
+    "M6_eta2_normalized_entropy": {
+      "producer_eta2": 1.0,
+      "recomputed_eta2": 1.0,
+      "recomputed_group_means": {
+        "product_listing": 0.9427,
+        "detail": 0.8849,
+        "cart": 0.9267
+      },
+      "match": true
+    },
+    "M7_per_task_metrics": {
+      "producer_tasks": 7,
+      "recomputed_tasks": 7,
+      "note": "Deduplication from raw 10 measurements (2 cart duplicates identical, 2 checkout failures) to 7 correct per spec",
+      "match": true
+    },
+    "M8_best_alternative_metric": {
+      "producer_metric": "tag_entropy",
+      "producer_eta2": 1.0,
+      "recomputed_eta2": 1.0,
+      "producer_abs_diff": 0.1622,
+      "recomputed_abs_diff": 0.1622556248918263,
+      "producer_pct_of_range": 1.0,
+      "recomputed_pct_of_range": 1.0,
+      "producer_std_range_ratio": 0.0,
+      "recomputed_std_range_ratio": 0.0,
+      "verdict": "numerically matches but irrelevant to pipeline question"
+    },
+    "C1_HIERARCHY_REPRODUCES": {
+      "frozen_threshold": "eta2 < 0.01 PASS",
+      "producer_observed": "eta2=0.0 PASS true (cited parent)",
+      "recomputed_observed": "eta2=1.0 FAIL false (executed artifact)",
+      "frozen_consequence": "If NOT C1: MEASUREMENT_INVALID - cannot anchor comparison",
+      "audit_conclusion": "C1 FAIL per executable artifact triggers MEASUREMENT_INVALID per spec decision_rule"
+    },
+    "C2_ALTERNATIVE_ETA2_NONZERO": {
+      "frozen_threshold": "max eta2 >=0.05",
+      "producer_observed": "max 1.0 PASS",
+      "recomputed": "max 1.0 PASS on direct features",
+      "audit_note": "PASS on direct features does NOT equal PASS through OECD/COINr pipeline (prereg requires pipeline). Therefore C2 as frozen is not tested."
+    },
+    "C3_DENSITY_VALUES_DISCRIMINATE": {
+      "producer_pass": true,
+      "recomputed_listing_vs_detail_diff": 0.1622556248918263,
+      "recomputed_range": 0.1622556248918263,
+      "pct": 1.0,
+      "audit_note": "PASS on direct tag_entropy not on OECD/COINr density values"
+    },
+    "C4_WITHIN_TYPE_STABILITY": {
+      "producer_pass": true,
+      "recomputed_max_within_std": 0.0,
+      "recomputed_ratio": 0.0,
+      "audit_note": "Trivially PASS due to zero within variance degeneracy"
+    },
+    "PC1_SAMPLE_ETA2_NONZERO": {
+      "expected": "eta2 >=0.10",
+      "recomputed": "eta2=1.0 for all three",
+      "verdict": "PASS - confirms inherited established fact only"
+    },
+    "NC1_HIERARCHY_REPRODUCTION": {
+      "expected": "eta2 <0.01",
+      "producer_pass": true,
+      "recomputed_artifact_pass": false,
+      "verdict": "FAIL per artifact - unreproduced"
+    }
+  },
+  "claim_ceiling": "Maximum justified descriptive claim: On the frozen truncated-first-20 locatable_sample from research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050), 7 tasks (3 listing, 3 detail, 1 cart deduplicated), 1 Magento site, the direct sample features tag_entropy (2.6464 vs 2.4842 vs 2.6016), form_fraction (0.85 vs 0.95), total_area (341795 vs 589190 vs 428790) retain eta2=1.0 with within-type std=0.0, replicating parent EXP-INTEL-35409927864 M2 (audit PASS). This does NOT support the frozen hypothesis that a density metric based on those features achieves eta2 >=0.05 WITHIN the OECD/COINr density pipeline, because the pipeline was not executed (producer VN-5, U-1/U-2). No OECD/COINr density values (definitions x recipes x normalization) were computed; no inference about hierarchy-weighted vs alternative density metric collapse within OECD/COINr is justified. The hierarchy-weighted density anchor (C1) is not reproducibly <0.01 in the executed artifact (recomputed eta2=1.0), triggering the frozen MEASUREMENT_INVALID rule; even accepting parent eta2=0.0 citation, the pipeline gap alone restricts ceiling to 'sample contains discriminant features, pipeline discriminability unknown'. No product MIXED handling, cross-site, full-DOM, or non-density conclusion authorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35422991016/spec.json:question hypothesis falsifier decision_rule C1-C4 measurement_validity",
+    "research/experiments/EXP-INTEL-35422991016/prereg.md:Alternative Density Metrics 1-5 and 'Each metric will be used as input to OECD/COINr density computation pipeline'",
+    "research/experiments/EXP-INTEL-35422991016/freeze.json hashes prereg d1a9ccb084a03e64d96fff33e733ff2e1f9d40f633172e62a70dc2e56372930f spec 0cc5277f7af9e38e934305060ca4bc0593a1b7241c1aff1019278416b6f6932e",
+    "research/experiments/EXP-INTEL-35422991016/result.json:metrics M1-M8 controls C1-C4 PC1 NC1 observations OBS-1 to OBS-6 validity_notes VN-1 to VN-5 unresolved U-1 to U-4 outcome SUPPORTS",
+    "research/experiments/EXP-INTEL-35422991016/report.md:Decision Rule Evaluation table all PASS SURVIVES and sections 94-96 scope limitations",
+    "research/experiments/EXP-INTEL-35422991016/provenance.json:methodology metric_definitions datasets sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35422991016/compute_output.json:eta2_results hierarchy_density eta2 1.000000000000005 decision_rules C1 pass false verdict MEASUREMENT_INVALID",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json:10 measurements filtered to 7 tasks sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35409927864/handoff.json:carry_forward.established M2 eta2=1.0, unknown can density metric achieve non-zero within OECD/COINr",
+    "research/experiments/EXP-INTEL-35401997918/result.json M7_C4_task_type_structure eta2=0.0 hierarchy-weighted density (cited but not recomputed)"
+  ],
+  "unresolved": [
+    "Does ANY density metric based on tag entropy/form_fraction/total_area produce eta2 >=0.05 when ACTUALLY passed through the OECD/COINr density pipeline (definitions, recipes, normalization/sharing) on the same truncated-first-20 sample? Untested - requires executing pipeline with alternative input features.",
+    "What is the correct hierarchy-weighted density computation reproducing parent M7 eta2=0.0 with exact normalization (matching_area/total_area vs sum w*area/total weight) and alpha/depth mapping on the 7-task deduplicated sample? Binary inForm raw sum gives eta2=1.0, contradicting PASS.",
+    "Does hierarchy formula collapse generalize to ALL OECD/COINr density metrics or is it specific to exp(-alpha*depth) with binary inForm? Requires pipeline test per F1/F2.",
+    "Would true DOM tree depth (2-20+ actual parent-child levels) vs inForm binary proxy produce different hierarchy density eta2? Remains as parent U-1.",
+    "Can OECD/COINr framework itself exploit sample discriminant features or does it structurally collapse between-type variance regardless of input metric (F2)? Not tested.",
+    "Is MIXED outcome resolvable at all within OECD/COINr with any density-based recipe on this or other sites? Open.",
+    "Cross-site generalization of sample feature discrimination and any pipeline density discrimination - bounded to 1 Magento site only."
+  ]
+}

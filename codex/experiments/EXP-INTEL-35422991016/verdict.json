@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35422991016",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen decision_rule MEASUREMENT_INVALID triggered by two independent failures: (1) C1_HIERARCHY_REPRODUCES — producer result.json marks C1 PASS (eta2=0.0) via citation to parent EXP-INTEL-35401997918 M7, but the producer's own derived artifact compute_output.json recomputes hierarchy_density eta2=1.000000000000005 (ss_between=0.4606, listing mean 15.59 vs detail/cart 15.08) with decision_rules.C1 pass=false. The binary inForm raw sum is discriminative, contradicting the cited normalized parent formula eta2=0.0. The anchor for comparison is unreproducible in the executed artifact. (2) The frozen question explicitly requires testing density metrics 'within the OECD/COINr framework' / 'when passed through OECD/COINr density computation pipeline' (spec.json hypothesis, prereg Alternative Density Metrics section). Producer tests raw features DIRECTLY as density values (tag_entropy/form_fraction/total_area as eta2 inputs), not through the OECD/COINr pipeline with definitions, recipes, and normalization. Producer's own validity_notes VN-5 and unresolved U-1/U-2 explicitly acknowledge pipeline was not tested. C2/C3/C4 PASS on direct eta2=1.0 does not answer the frozen question. The experiment therefore provides no new evidence for or against whether OECD/COINr density computation can exploit sample discriminative features. Parent established facts (sample eta2=1.0 on features, hierarchy eta2=0.0) are replicated but the pipeline question is untested."
+    }
+  ],
+  "product_action": "NONE — no product consequence authorized. The OECD/COINr pipeline was not tested; density-based MIXED handling is neither validated nor closed by this experiment.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the OECD/COINr density pipeline (with definitions, recipes, normalization/sharing) preserve the discrimination present in sample-derived features (tag_entropy, form_fraction, total_area, all achieving eta2=1.0 on page_type) when these features are used as input replacing the hierarchy-weighted density formula on the truncated-first-20 locatable_sample from EXP-INTEL-34782350557?",
+  "reason": "The frozen decision rule requires C1 PASS to anchor comparison; C1 FAIL per the executed artifact (compute_output.json hierarchy_density eta2=1.0, C1 pass=false) triggers MEASUREMENT_INVALID per spec. Even accepting the parent's eta2=0.0 citation for hierarchy density, the OECD/COINr pipeline was not executed — producer tested raw feature eta2 directly, not through the pipeline as the frozen question mandates. The producer's SUPPORTS/SURVIVES outcome is not supported by the executed evidence. No new information beyond parent replication is generated. The critical open question — whether OECD/COINr can exploit sample discriminative features — remains untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35422991016/spec.json:question hypothesis falsifier decision_rule C1-C4 measurement_validity",
+    "research/experiments/EXP-INTEL-35422991016/prereg.md:Alternative Density Metrics 'Each metric will be used as input to OECD/COINr density computation pipeline'",
+    "research/experiments/EXP-INTEL-35422991016/result.json:metrics M1-M8 controls C1-C4 outcome SUPPORTS",
+    "research/experiments/EXP-INTEL-35422991016/compute_output.json:eta2_results.hierarchy_density eta2=1.000000000000005 decision_rules.C1 pass=false verdict=MEASUREMENT_INVALID",
+    "research/experiments/EXP-INTEL-35422991016/audit.json:status=MEASUREMENT_INVALID producer_claim_supported=false VF1_C1_ANCHOR_CONTRADICTION VF2_PIPELINE_NOT_TESTED VF3_NO_NEW_INFORMATION",
+    "research/experiments/EXP-INTEL-35422991016/report.md:Decision Rule Evaluation table all PASS claimed SURVIVES",
+    "research/experiments/EXP-INTEL-35409927864/handoff.json:carry_forward.established sample eta2=1.0, carry_forward.unknown can density metric achieve non-zero within OECD/COINr",
+    "research/experiments/EXP-INTEL-35401997918/result.json:M7 hierarchy-weighted density eta2=0.0 (cited but not reproducibly recomputed in this artifact)"
+  ]
+}
