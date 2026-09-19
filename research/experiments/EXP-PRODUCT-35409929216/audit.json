@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35409929216",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Clarify break-even semantics: systematic uniform delta (same for LITERAL and PARAMETERIZED) cannot erase margin (margin is difference 1067 = 3168 selection prompt savings - 2101 resolution overhead with equal completion 64/64). Reported 33.3 tokens/task (29.8 for completion-only) is differential bias threshold (PARAM higher than LITERAL), not systematic bias. Spec hypothesis/F1 wording conflates systematic with differential; report must state break-even is infinite for systematic bias.",
+    "Correct bootstrap baseline scale inconsistency: producer uses prereg decomposition 791+lit_comp vs 679+param_comp (baseline diff 112) yielding mean 110.7, not raw scale 19691 vs 18624 (baseline diff 1067, mean 1066.8 under same independent Normal(est,0.5*est) sampling). Prereg totals 791+18900 vs 679+17945 include 955 completion savings offset that bootstrap sampling (both centered on same 2/15/20 estimates) drops. Either recenter bootstrap on 19691/18624 or explicitly state bootstrap tests 112 selection prompt effect, not full 1067 workflow margin.",
+    "Persist executable artifact: research/experiments/EXP-PRODUCT-35409929216/sensitivity_analysis.py missing (provenance references /tmp/opencode/run_sensitivity.py, result artifact sha null). Copy deterministically seeded script into experiment directory with hash for reproducibility.",
+    "Prereg decomposition (791 selection + 18900 completion) vs raw_evidence (19627 selection_prompt +64 selection_completion +0/2101 resolution) not reconciled in report. Choose one coherent accounting and use consistently for break-even and bootstrap; do not present 112/955/1067 and 3168/2101/1067 interchangeably without mapping."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_BREAK_EVEN_TAUTOLOGY",
+      "severity": "major",
+      "observation": "Raw evidence shows equal selection completion (64 literal, 64 param) and fixed resolution overhead (0 vs 2101). Margin 1067 = 3168 selection prompt savings -2101 resolution, independent of completion estimates. Producer correctly discloses in result.json observations[1] and validity_notes[4] that systematic bias leaves 1067 unchanged and break-even only applies to differential bias, yet metrics names 'break_even_systematic_bias_tokens_per_task' 33.3 and decision rule F1 treat it as systematic threshold.",
+      "evidence": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json aggregate_costs literal 19627+64+0=19691 param 16459+64+2101=18624 diff 1067; research/experiments/EXP-PRODUCT-35409929216/result.json metrics.break_even_systematic_bias_tokens_per_task 33.3; /tmp/opencode/run_sensitivity.py lines 482-514 comment 'systematic bias cannot erase margin'",
+      "impact": "Break-even >=3 tokens/task appears to strongly falsify fragile hypothesis, but test is non-discriminating for systematic error; ceiling is bounded to differential robustness only. Fixes wording required before using to justify option A (provision LLM keys)."
+    },
+    {
+      "id": "V2_BOOTSTRAP_SCALE_MISMATCH",
+      "severity": "major",
+      "observation": "Bootstrap recomputed exactly under producer independent sampling: 961/1000 survival 96.1% mean 110.7 min -76 max 302 P5 6 P95 211 matches producer. However baseline is 112 (791-679) not 1067, because sampled lit_comp/param_comp both drawn from Normal(est,0.5*est) with zero mean difference, losing prereg 955 completion savings offset (18900-17945). Correlated (shared-draw) bootstrap survival is 100% mean 112. Raw-scale bootstrap (19627+lit_c vs 16459+param_c+2101 with uniform est 2) survival is 100% mean 1066.8 std 7.7. Producer survival 96.1% is conservative (independent sampling inflates variance) but scale is misreported as testing full 5.42% margin.",
+      "evidence": "research/experiments/EXP-PRODUCT-35409929216/result.json metrics.bootstrap_survival_rate_pct 96.1 bootstrap_mean_margin_tokens 110.7; /tmp/opencode/run_sensitivity.py lines 540-589 lit_total=791+lit_comp param_total=679+param_comp; recomputation script audit confirms independent 96.1% vs correlated 100% vs raw-scale 100%",
+      "impact": "Survival >70% conclusion (robust) holds under all three interpretations, but magnitude and confidence interval pertain to 112-token effect, not 1067-token workflow margin. Requires clarification before product decision."
+    },
+    {
+      "id": "V3_SAMPLING_INDEPENDENCE_NOT_PREREGISTERED",
+      "severity": "minor",
+      "observation": "Prereg 5.3 says 'For each task type, sample completion tokens from Normal(estimate,0.5*estimate) - Recompute LITERAL and PARAMETERIZED totals' ambiguous whether one draw shared or two independent draws. Implementation uses two independent draws (lit_tokens and param_tokens) per task, doubling variance of difference (total variance 4097 std64 for 2/15/20 mix). Shared-draw variance is zero (constant 112). Both satisfy decision rule >70%, but choice changes survival from 100% to 96.1%.",
+      "evidence": "/tmp/opencode/run_sensitivity.py lines 550-552 lit_tokens=max(1,round(gauss)) param_tokens=max(1,round(gauss)) independent; prereg.md 5.3 bootstrap plan",
+      "impact": "Not a falsification; independent sampling is more stringent, so reported 96.1% is lower bound on robustness."
+    },
+    {
+      "id": "V4_PURELY_ANALYTICAL_NO_LLM_MEASUREMENT",
+      "severity": "critical",
+      "observation": "No new measurements; all costs carried forward as tiktoken analytical estimates from EXP-PRODUCT-35330741529 (selection prompt via cl100k_base, completion 2 fixed, resolution 2101 measured as prompt tokens, not model outputs). Provenance execution_mode analytical, python_stdlib only. Four consecutive PRODUCT experiments without real LLM call (two MEASUREMENT_INVALID no API keys, one SURVIVES tautological browser costs, this sensitivity analysis).",
+      "evidence": "research/experiments/EXP-PRODUCT-35409929216/provenance.json execution_mode analytical dependencies external_packages []; spec.json measurement_validity 'Token costs carried forward as-is; not re-measured'; request.json chain_depth 0 inherited_next_question still lists option A/B/C",
+      "impact": "Claim ceiling strictly bounded to analytical robustness to estimation error under frozen 32-task synthetic corpus and 2/15/20 prior. No inference to real SPIDER registry economics or C-PRODUCT-ECON validated status."
+    },
+    {
+      "id": "V5_COLD_BASELINE_SUCCESS_UNMEASURED",
+      "severity": "major",
+      "observation": "Cold/Param ratio 0.13-0.27 across 2475-5000 assumed 100% success. COLD success rate unmeasured since EXP-PRODUCT-35330741529 C1 assumed 100% analytically. Producer validity_notes correctly flag this.",
+      "evidence": "research/experiments/EXP-PRODUCT-35409929216/result.json metrics.cold_param_ratio_at_2475 0.13 cold_param_ratio_at_5000 0.27; validity_notes COLD success rate assumed 100%",
+      "impact": "Even if 5.42% parameterized saving over literal is robust, COLD at 77 tokens/task is 7.5x cheaper analytically; real success rate could erase or reverse advantage. Product economic claim remains HYPOTHESIS."
+    },
+    {
+      "id": "V6_PROVENANCE_ARTIFACT_GAP",
+      "severity": "minor",
+      "observation": "Artifacts list includes sensitivity_analysis.py with sha256 null and /tmp/opencode/run_sensitivity.py not in experiment directory. Execution checkpoint pre_execute_sha recorded but script not persisted. Reproduction requires seed 42 and raw_evidence path, but exact script hash unavailable in experiment dir.",
+      "evidence": "research/experiments/EXP-PRODUCT-35409929216/result.json artifacts[3] path research/experiments/EXP-PRODUCT-35409929216/sensitivity_analysis.py sha256 null; glob shows no sensitivity_analysis.py; provenance analysis_commands python3 /tmp/opencode/run_sensitivity.py",
+      "impact": "Reproducibility requires recovering /tmp file; fix by persisting script."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-TOKEN-ESTIMATES",
+      "finding": "PASS - Carried forward 19691/18624/2475 totals verified against raw_evidence.json (19627+64=19691, 16459+64+2101=18624). No re-measurement per frozen design; disclosed as analytical prior. Not a discriminating baseline.",
+      "expected": "Baseline for sensitivity analysis; not re-measured",
+      "observed": "Used as central estimate; 2/15/20 distribution not reflected in raw (all tasks 2) - mismatch noted in V2/V4"
+    },
+    {
+      "id": "B-SELECTION-PROMPT-ONLY",
+      "finding": "PASS but tautological - selection prompt savings 112 (prereg) or 3168 (raw) are tiktoken-measured constants independent of completion variation, so constancy under ±50% variation is mathematically guaranteed, not an empirical discrimination.",
+      "expected": "Selection prompt savings are measured, not estimated",
+      "observed": "112 tokens constant across all scenarios (zero completion, ±50% variation) - verified"
+    },
+    {
+      "id": "B-COLD-ANALYTICAL",
+      "finding": "PASS arithmetically - COLD/PARAM 0.13 at 2475 to 0.27 at 5000 computed correctly (2475/18624=0.133, 5000/18624=0.268). However baseline is analytical prompt counting +20 completion estimate, success 100% assumed, so ratio is prior not measurement; does not demonstrate COLD is achievable.",
+      "expected": "COLD cost is upper bound if success <100%",
+      "observed": "COLD remains 3.7-7.5x cheaper even doubled, but unmeasured"
+    },
+    {
+      "id": "POSITIVE-CONTROL-SELECTION-CONSTANT",
+      "finding": "PASS - Verified 112 constant; tautological as above. Does not validate sensitivity mechanism beyond arithmetic.",
+      "expected": "Selection prompt savings remain 112 regardless of completion variation",
+      "observed": "112 in all scenarios"
+    },
+    {
+      "id": "NULL-CONTROL-ZERO-COMPLETION",
+      "finding": "PASS - 112 with zero completion verified; confirms decomposition total = selection + completion. On raw scale would be 3168 with zero completion (19627-16459) minus 2101 resolution =1067, but zero completion still leaves 1067 not 112, exposing decomposition mismatch (V2).",
+      "expected": "Savings =112 with zero completion",
+      "observed": "112 exactly under prereg accounting"
+    }
+  ],
+  "recomputed_metrics": {
+    "break_even_systematic_bias_tokens_per_task": {
+      "producer": 33.3,
+      "recomputed": 33.34375,
+      "match": true,
+      "note": "1067/32=33.34; 955/32=29.84 for completion-only. Recomputed via raw aggregates verified. Semantic issue: value is differential bias threshold, systematic threshold infinite (V1)."
+    },
+    "break_even_completion_only_tokens_per_task": {
+      "producer": 29.8,
+      "recomputed": 29.84375,
+      "match": true
+    },
+    "bootstrap_survival_rate_pct": {
+      "producer": 96.1,
+      "recomputed_independent": 96.1,
+      "recomputed_correlated": 100.0,
+      "recomputed_raw_scale": 100.0,
+      "match_independent": true,
+      "note": "Independent sampling (producer) 961/1000 mean 110.7 min -76 max 302 verified exact; correlated shared-draw 100% mean 112; raw-scale (19627/16459+2101 with uniform 2) 100% mean 1066.8 std7.7. Producer choice conservative."
+    },
+    "bootstrap_mean_margin_tokens": {
+      "producer": 110.7,
+      "recomputed": 110.749,
+      "match": true
+    },
+    "bootstrap_percentiles": {
+      "producer": {"p5": 6, "p25": 67, "p50": 110, "p75": 154, "p95": 211},
+      "recomputed": {"p5": 6, "p25": 67, "p50": 110, "p75": 154, "p95": 211},
+      "match": true
+    },
+    "selection_prompt_savings_tokens": {
+      "producer_prereg": 112,
+      "producer_raw": 3168,
+      "recomputed_prereg": 112,
+      "recomputed_raw": 3168,
+      "match": true,
+      "note": "Raw: 19627-16459=3168; prereg: 791-679=112. Both correct within accounting, inconsistency is representation mismatch not arithmetic error."
+    },
+    "total_margin_tokens": {
+      "producer": 1067,
+      "recomputed": 1067,
+      "match": true,
+      "note": "19691-18624=1067 verified"
+    },
+    "cold_param_ratios": {
+      "producer_at_2475": 0.13,
+      "recomputed_at_2475": 0.1329,
+      "producer_at_5000": 0.27,
+      "recomputed_at_5000": 0.2685,
+      "match": true
+    },
+    "null_control_savings_tokens": {
+      "producer": 112,
+      "recomputed": 112,
+      "match": true
+    }
+  },
+  "claim_ceiling": "Narrow analytical robustness only: under frozen synthetic 32-task corpus (5 blog-read-post, 15 shop/admin/pm, 12 other) and tiktoken-measured registry costs (LITERAL 19691, PARAM 18624, diff 1067 = 3168 prompt savings -2101 resolution overhead, completion 64/64 equal), the 1067-token workflow diff is unaffected by uniform (systematic) completion bias (infinite threshold; 33.3 tokens/task is differential threshold) and survives 96.1% of independent Normal(est,0.5*est) bootstrap samples (100% if shared-draw or raw-scale). This falsifies the fragile hypothesis (break-even <2 tokens/task and survival <30% per frozen F1/F2) within this analytical model. No inference justified that 5.42% token savings is economically meaningful, that COLD success >=90%, that C-PRODUCT-ECON is validated, or that 5.42% generalizes to real SPIDER registry or real LLM outputs. Maximum justified product claim remains option C executed (browser/verification constant offset) with thin 5.42% margin pending real LLM measurement (option A).",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35409929216/request.json - inherited chain from EXP-PRODUCT-35389141536 tautological C3/C4",
+    "research/experiments/EXP-PRODUCT-35409929216/spec.json - frozen claim C-PRODUCT-ECON hypothesis fragile <2 tokens/task survival <30% falsifier >=3 and >70%",
+    "research/experiments/EXP-PRODUCT-35409929216/prereg.md - decomposition 791+18900 vs 679+17945 vs raw 19627+64, bootstrap Normal CV0.5 plan",
+    "research/experiments/EXP-PRODUCT-35409929216/freeze.json - hashes prereg/spec/request frozen",
+    "research/experiments/EXP-PRODUCT-35409929216/result.json - metrics break_even 33.3 survival 96.1 observations validity_notes",
+    "research/experiments/EXP-PRODUCT-35409929216/provenance.json - execution_mode analytical seed 42 /tmp/opencode/run_sensitivity.py",
+    "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json - aggregate costs 19691/18624/2475 sha be12567ea693e6e37971f4742e5d11b1e139f7575856f4b40edd73bbe2048a70",
+    "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py - literal vs param registry construction tiktoken",
+    "research/experiments/EXP-PRODUCT-35389141536/handoff.json - parent three-way A/B/C decision browser constant offset",
+    "/tmp/opencode/run_sensitivity.py - deterministic sensitivity code recomputed and verified",
+    "research/experiments/EXP-PRODUCT-35409929216/report.md - interpretation falsifies fragile hypothesis",
+    "research/claims/registry.json - C-PRODUCT-ECON HYPOTHESIS next_gate end-to-end amortized economics",
+    "codex/claim_state.json - C-PRODUCT-ECON remains HYPOTHESIS across all product experiments"
+  ],
+  "unresolved": [
+    "Whether real LLM completion outputs average 2/15/20 or heavier-tailed: unmeasured, analytical prior only",
+    "Whether differential completion bias (param higher than literal) could approach 29.8 tokens/task in practice: no model for per-condition length correlation",
+    "Whether bootstrap CV=0.5 Normal is realistic or heavier-tailed/skewed would lower survival: producer assumes Normal",
+    "Whether 5.42% savings justifies parameterized maintenance cost: product decision not measurement question",
+    "COLD baseline real success rate and real token cost (including failures/retries): 0/32 measured",
+    "End-to-end economics beyond tokens (retrieval ranking repair maintenance browser Playwright latency): unmeasured per handoff option C",
+    "Generalization beyond synthetic 32-task corpus to real SPIDER registry with 100+ mechanisms where selection savings may dominate differently"
+  ]
+}
