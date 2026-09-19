@@ -1,0 +1,134 @@
+{
+  "experiment_id": "EXP-PRODUCT-35456068953",
+  "generated_at": "2026-09-19T21:30:09.872537+00:00",
+  "lane": "product",
+  "metrics": {
+    "baseline_body_only": 0.8333,
+    "baseline_status_only": 0.5,
+    "c1_auth_discrimination": 0.8333,
+    "c1_pass": true,
+    "c2_cooccurring_tp": {
+      "token_refresh+description_change": 1.0,
+      "token_refresh+field_type_normalization": 1.0,
+      "token_refresh+optional_field_addition": 1.0,
+      "token_refresh+response_time_jitter": 1.0
+    },
+    "c2_isolated_tp": {
+      "token_refresh": {
+        "behavioral_mean": 0.58,
+        "behavioral_std": 0.128,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      }
+    },
+    "c2_pass": true,
+    "c3_orthogonality": {
+      "ci_lower": -0.185439,
+      "ci_upper": 0.066922,
+      "n": 240,
+      "pearson_p": 0.3529346419997774,
+      "pearson_r": -0.060221,
+      "se": 0.064957,
+      "tost_delta": 0.15,
+      "tost_p_lower": 0.08097188282253587,
+      "tost_p_upper": 0.0005669800692128974,
+      "tost_pass": false,
+      "z_r": -0.060294
+    },
+    "c3_pass": false,
+    "c3_per_condition": {
+      "token_refresh+description_change": {
+        "behavioral_mean": 0.555,
+        "behavioral_std": 0.1407,
+        "n": 60,
+        "structural_mean": 9.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "token_refresh+field_type_normalization": {
+        "behavioral_mean": 0.57,
+        "behavioral_std": 0.1338,
+        "n": 60,
+        "structural_mean": 10.8,
+        "structural_std": 0.4034,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "token_refresh+optional_field_addition": {
+        "behavioral_mean": 0.55,
+        "behavioral_std": 0.1426,
+        "n": 60,
+        "structural_mean": 10.8,
+        "structural_std": 0.4034,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      },
+      "token_refresh+response_time_jitter": {
+        "behavioral_mean": 0.57,
+        "behavioral_std": 0.1338,
+        "n": 60,
+        "structural_mean": 9.7833,
+        "structural_std": 0.4155,
+        "tp_rate": 1.0,
+        "tp_rate_wilson_lower": 0.9398
+      }
+    },
+    "c3_variance_conditions_pass": 4,
+    "c3_variance_pass_required": 4,
+    "c4_noise_fp_rate": 0.0,
+    "c4_pass": true,
+    "c4_per_noise": {
+      "description_change": {
+        "behavioral_mean": 0.05,
+        "fp_rate": 0.0
+      },
+      "field_type_normalization": {
+        "behavioral_mean": 0.05,
+        "fp_rate": 0.0
+      },
+      "optional_field_addition": {
+        "behavioral_mean": 0.05,
+        "fp_rate": 0.0
+      },
+      "response_time_jitter": {
+        "behavioral_mean": 0.05,
+        "fp_rate": 0.0
+      }
+    },
+    "decision_source": "frozen prereg decision rule"
+  },
+  "observations": {
+    "cooccur_n": 240,
+    "delta": 0.15,
+    "detection_threshold": 0.25,
+    "noise_only_n": 240,
+    "p_refresh_success": 0.7,
+    "phase_a": {
+      "baseline_body_only": 0.8333,
+      "baseline_status_only": 0.5,
+      "discrimination_full_fingerprint": 0.8333,
+      "fingerprint_groups": {
+        "expired_token": [
+          "14553e10b9eddcb9"
+        ],
+        "invalid_token": [
+          "14553e10b9eddcb9"
+        ],
+        "no_auth": [
+          "266d7210de8ec9a5"
+        ],
+        "valid_token": [
+          "8885364b026f8482"
+        ]
+      },
+      "n_states": 4,
+      "n_unique_fingerprints": 3
+    },
+    "raw_evidence_sha256": "e8b8f3ef1b437a143e940fa31f3378190784e8fcc58554c671f7e3be6deab614",
+    "runtime_seconds": 68.13,
+    "tp_n": 60
+  },
+  "outcome": "MIXED",
+  "status": "COMPLETE"
+}
