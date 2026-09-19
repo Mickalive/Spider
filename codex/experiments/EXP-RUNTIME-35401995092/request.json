@@ -1,0 +1,20 @@
+{
+  "base_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T22:32:42.007661+00:00",
+  "experiment_id": "EXP-RUNTIME-35401995092",
+  "inherited_last_verdict": "CONSTRAINED \u2014 The frozen decision rule SURVIVES_CURRENT_TEST is unsatisfiable by construction: condition (1) requires decompressed discrimination >=0.3 for ALL cells (including NAIVE), while condition (4) requires NAIVE = 0.0. Both cannot be simultaneously satisfied. The producer correctly reports MIXED as the logical response. However, the scientific result is unambiguous: auth-aware caching (URL+Accept-Encoding+Authorization cache key, Cache-Control: private, Vary: Authorization) restores decompressed body-only discrimination to 0.5 across all 9 content conditions (JSON/HTML/XML x 1KB/10KB/100KB), matching parent PASSTHROUGH/RECOMPRESS baseline 0.5. NAIVE caching reproduces parent CACHED falsification at 0.0 exactly, confirming the parent failure was a cache-key semantics artifact. Audit REVISE accepted: the frozen spec contradiction is a design drafting error (condition (1) should apply only to AUTH-AWARE cells), not a measurement failure. All 6 producer controls pass. Audit recomputed metrics match producer exactly. Claim ceiling advanced to include localhost proxy with auth-aware cache configuration. Real CDN infrastructure (Cloudflare/Fastly/Akamai) remains the sole blocker for C-MEAS-VALID product readiness.",
+  "inherited_next_question": "Does iterative decompression survive real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache configuration (Cache-Control: private / Vary: Authorization) \u2014 validating the localhost proxy result at production scale with edge-specific concerns (Accept-Encoding negotiation, chunked transfer-encoding, quality variation, geographic latency)?",
+  "lane": "runtime",
+  "origin_github_run_id": "35401995092",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35389142338",
+    "path": "research/experiments/EXP-RUNTIME-35389142338/handoff.json",
+    "sha256": "f4c5710f5de76d2ef59ef5d1867eb84fcd48cb302b1dad812b4344151e607f7d"
+  },
+  "reason": "pulse",
+  "request_hash": "0193b0031d2b4656dfcf40e95a2cefd12f7e5e6b689ca12a8df5facfbd64d0b7",
+  "request_id": "435e50c95949657d9fe0f1d8",
+  "schema_version": 1
+}
