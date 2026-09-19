@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35445596894",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_recomputation_exact_match_all_estimators",
+      "severity": "info",
+      "finding": "Independent recomputation from raw_results.json and raw_exploratory.json matches producer result.json to <1e-12 for every gating quantity: B-WEIGHTED-PMI K2 0.9332435964563089 K3 1.2205083083840709 null 0.4070574334174484 std 0.007267658065094704 positive 1.8056238881521471 p 0.000999; B-EQUAL-WEIGHT-PMI K2 1.4904747760316495 K3 1.4462469462093848 null 0.704217209837271 std 0.012815282019864585 positive 1.8098512278603744; B-MEDIAN-PMI K2 1.510964047443681 K3 1.4768209688898335 null 0.6856105140572255 std 0.01831173457332667 positive 1.872699737514802; B-KNN-CMI K2 0.023350119028318662 K3 0.203142826903798 null -0.2619042294230531 std 0.007456052498852704 positive 1.1908352763575794. All derived K3-K2 differences (+0.287265 weighted, -0.044228 equal, -0.034143 median, +0.179793 KNN) and determinism recomputations confirmed. N50000 file hash e9e0c54eaa0ecc2266e655ab7fa6cd61e2bb91c1e5e1da3d2d4dca08ee2d152f verified; parent file hash 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade matches frozen spec. No data tampering.",
+      "evidence": "research/experiments/EXP-PHYSICS-35445596894/raw_results.json:screening, result.json:metrics.screening_n5000, raw_transitions_n50000.json, provenance.json:generated_artifacts, run_experiment.py:est_weighted_pmi/est_equal_weight_pmi/est_median_pmi/est_knn_cmi"
+    },
+    {
+      "id": "V2_null_control_C1_strong_falsification",
+      "severity": "critical",
+      "finding": "Shuffled-action permutation null control (N_SHUFFLE=500, global action shuffle, K2 state-history records, SEED=42) correctly implements frozen null_control. |null_mean| = 0.407 (weighted), 0.704 (equal-weight), 0.686 (median), 0.262 (KNN) bits each exceeds frozen threshold 0.1 by 2.6-7.0x. In sigma units: 56.0 sigma weighted, 55.0 sigma equal-weight, 37.4 sigma median, 35.1 sigma KNN above threshold (null_std 0.007-0.018). Producer reports 54.2/47.2/32.0/48.5 sigma (using stderr = std/sqrt(N) approximation اختلاف) but either formulation is >>5 sigma. Verdict FALSIFIED-IN-SETTING from frozen falsifier C1 (ALL three corrected estimators have |mean| >=0.1) is therefore not knife-edge; any threshold 0.05-0.2 would give same verdict. No estimator passes C1; baseline also fails.",
+      "evidence": "result.json:controls.C1-NULL-CONTROL status FAIL gate FALSIFIED-IN-SETTING, metrics.screening_n5000[*].null_mean_bits/null_std_bits, metrics.null_control_permutation n_shuffle 500, raw_results.json:screening[*].null_control, run_experiment.py:shuffled_action_null, spec.json:null_control, prereg.md:6.2"
+    },
+    {
+      "id": "V3_positive_control_C3_pass_all_estimators",
+      "severity": "info",
+      "finding": "8-state deterministic SPA positive control passes for all 4 estimators: K3 = 1.805624 (weighted), 1.809851 (equal-weight), 1.872700 (median), 1.190835 (KNN) bits, each >=1.0 threshold, p=0.000999 (permutation floor 1/1001, N_PERM_POSITIVE=1000). Validates pipelines detect strong deterministic signal; C1 failures are not execution defects. Stratum estimators use within-stratum url_after permutation, KNN uses global shuffled-action permutation (stratum-free); both documented in validity_notes and give identical p floor. Producer correctly marks C3-POSITIVE-CONTROL PASS.",
+      "evidence": "result.json:controls.C3-POSITIVE-CONTROL, metrics.positive_control estimator_k3_bits, raw_results.json:screening[*].positive_control_k3/positive_control_p/positive_control_perm_scheme, run_experiment.py:within_stratum_permutation/shuffled_action_null, spec.json:positive_control"
+    },
+    {
+      "id": "V4_determinism_recomputed_parent_discrepancy_confirmed",
+      "severity": "medium",
+      "finding": "Determinism at N=5000 recomputed: K2 state-history 407 deterministic / 885 stochastic /1292 total det_ratio 0.315015 (matches parent packet and producer observation); K3 action-history 89 deterministic /732 stochastic /821 total det_ratio 0.108404. Parent packet EXP-PHYSICS-35403136807 recorded determinism_K3 467/821 det_ratio 0.569 which is not reproducible from parent code+data (any K yields 4, 17, 89, 407, 1801 but never 467). Producer correctly flags this as parent-packet reproducibility finding in observations/validity_notes/unresolved and correctly states it does not alter this experiment's verdict which rests on C1 null gate, not determinism. Confirm parent narrative '56.9% deterministic dilution' is unsupported; correct K3 determinism is 10.8%, making K3 strata more stochastic-fragmented than parent implied.",
+      "evidence": "result.json:metrics.determinism_n5000 K2/K3, observations[9], validity_notes[8], raw_results.json:determinism_k2_n5000/determinism_k3_n5000, run_experiment.py:determinism_stats, parent EXP-PHYSICS-35403136807 result.json:metrics.determinism_K3"
+    },
+    {
+      "id": "V5_stratum_size_bias_mechanistic_decomposition_validated",
+      "severity": "high",
+      "finding": "Stratum-size bias decomposition (weighted framework, shuffled-action null, K2 records, 100 shuffles) recomputed from raw_exploratory.json: mean null per-stratum PMI +0.74235 bits (median 0.72193) for strata size 5-9 (n_obs 31300), +0.57120 (median 0.56096) for 10-19 (8000), +0.37869 (median 0.36169) for 20-49 (500). Monotonically decreasing in stratum size, confirming per-stratum plug-in PMI small-sample bias is largest in small strata. This falsifies prereg H1 mechanistic hypothesis (bias from large-stratum dominance) and explains why equal-weight (0.704) and median (0.686) worsen aggregate bias vs weighted (0.407): they up-weight the most biased small strata. Bias pervasive across stochastic strata, not limited to deterministic strata.",
+      "evidence": "result.json:metrics.stratum_size_bias_decomposition, raw_exploratory.json:stratum_size_bias_buckets, explore.py:per-stratum-size bias decomposition, report.md:4.3, run_experiment.py:stratum_items"
+    },
+    {
+      "id": "V6_N50000_descriptive_non_gating_drift_confirmed",
+      "severity": "high",
+      "finding": "N=50000 descriptive context (non-gating per frozen PHASE 2 applicability) shows no estimator converges within 0.2-bit C4 band: weighted K2 diff +0.845482 (1.778725 vs 0.933244), equal-weight +0.247207 (1.737681 vs 1.490475), median +0.372559 (1.883523 vs 1.510964), KNN +1.260657 (1.284007 vs 0.023350). K3 drifts similarly +0.305, +0.096, +0.057, +0.599 bits. All four exceed 0.2 threshold; KNN drift >1 bit demonstrates KNN estimator instability with sample size on this SPA due to neighborhood density change. Producer correctly marks C4 NOT_APPLICABLE and uses N50000 descriptively to document convergence impossibility, not to gate verdict. Supports environment-level bias interpretation and replicates parent exploratory N50000 weighted K2 1.778725 exactly.",
+      "evidence": "result.json:metrics.n50000_descriptive_non_gating, raw_exploratory.json:n50000_descriptive, raw_transitions_n50000.json, spec.json:measurement_validity N=50000 new collection, prereg.md:6.3"
+    },
+    {
+      "id": "V7_KNN_operationalization_and_negative_null_bias",
+      "severity": "medium",
+      "finding": "B-KNN-CMI operationalized as I(Y;X|Z)=E log2 P(Y|Z,X)/P(Y|Z) via KNeighborsClassifier k=5 on integer-encoded (Z=url_before+history, X=action, Y=url_after), self-neighbors excluded, Laplace alpha=1.0 on neighborhood counts. Produces null_mean -0.2619 bits (negative bias, |mean| 0.262 fails C1). Producer interprets as extra action dimension + alpha smoothing depressing P(Y|Z,X) below P(Y|Z) under null; plausible. Frozen spec phrase 'P(Y|Z) improvement over P(Y)' ambiguous but prereg 4.4 clarifies as history-conditioned vs unconditioned, consistent with implementation. k sensitivity (threat 1) not explored because no passer, correctly left unresolved. Negative bias still fails |mean|<0.1; no estimator rescue.",
+      "evidence": "result.json:metrics.screening_n5000.B-KNN-CMI, controls.B-KNN-CMI note, validity_notes[3][4], provenance.json:reproduction_parameters.knn k 5 alpha 1.0, run_experiment.py:encode_records_knn/knn_cmi_from_arrays/est_knn_cmi, prereg.md:4.4/8.1"
+    },
+    {
+      "id": "V8_null_control_condition_ambiguity_immaterial",
+      "severity": "low",
+      "finding": "Frozen spec declares shuffled-action null threshold |mean|<0.1 but does not pin K2 vs K3 condition; null_control_permutation correctly notes 'condition K2 records (state-history K=2), parent precedent'. Producer discloses choice in validity_notes[2] and uses K2 parent-aligned. If K3 action-history null had been used, bias would be similar or larger due to even smaller strata and greater fragmentation (K3 has 821 vs K2 1292 strata, smaller average n_h), so verdict FALSIFIED-IN-SETTING would not change. No selective reporting; disclosure adequate and margins make choice immaterial.",
+      "evidence": "spec.json:null_control, result.json:metrics.null_control_permutation condition K2, validity_notes[2], prereg.md:6.2"
+    },
+    {
+      "id": "V9_environment_expressiveness_identifiability",
+      "severity": "high",
+      "finding": "12-state SHA256 hash-routed SPA transition choose_next(current,action,prev1,prev2)=CANDIDATES[current][action][hash(prev1:prev2:current:action)%4] explicitly depends on 2-step history by construction, so beyond-Markov structure exists by design; environment CAN express K3>K2 for a valid estimator. Negative result is therefore estimator limitation, not environment ceiling (unlike deterministic FSM with H(S_next|URL,H_K=3)=0). However, stratum-size decomposition shows plug-in bias persists in stochastic strata (+0.742 at size 5-9 even when stochastic), so producer unresolved correctly notes that SPA redesign to 0% deterministic may NOT eliminate bias. Physics identifiability requirement fails: weighted/equal/median/KNN estimators do not converge to true conditional mutual information (N=50000 drift, null floors). Correct verdict is FALSIFIED-IN-SETTING for estimator-level-fix hypothesis, not global C-WEB-DYNAMICS falsification; unfolds to MEASUREMENT_INVALID for unbiased CMI.",
+      "evidence": "run_experiment.py:CANDIDATES/choose_next, spec.json:measurement_validity same SPA as parent, result.json:metrics.stratum_size_bias_decomposition, unresolved[2][3], report.md:7, parent handoff EXP-PHYSICS-35403136807 carry_forward established SPA beyond-Markov by construction"
+    },
+    {
+      "id": "V10_provenance_completeness_minor_gap",
+      "severity": "low",
+      "finding": "Provenance identifies python 3.12.14 numpy 2.5.3 sklearn 1.9.1, git_head 20e84c6, pre_execute_sha 743bf56, seed 42, file hashes for parent and N50000, reproduction_parameters complete. Minor gap: workflow run_id 'unknown_action_log_run_id' and freeze.json sha 'not_recorded_in_design_packet_note' — does not affect reproducibility because regenerated N5000 is deep-equal to parent and weighted estimator replicates parent exactly (K2 0.933244 K3 1.220508 positive 1.805624 N50000 K2 1.778725). No selective execution; both Phase1 screening and exploratory addendum artifacts preserved with hashes.",
+      "evidence": "provenance.json:environment/commits/workflow/frozen_inputs/generated_artifacts/reproduction_parameters, result.json:artifacts, report.md:3"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-WEIGHTED-PMI",
+      "baseline": "Original weighted-averaged PMI (parent baseline, expected K2 ~0.933 null ~0.407)",
+      "expected": "Replicate parent: K2 0.933, null_mean 0.407, positive K3 >=1.0",
+      "observed": "K2 0.9332435964563089 K3 1.2205083083840709 K3-K2 +0.287265 null_mean 0.407057 std 0.007268 positive 1.805624 p 0.000999. Exact replication (K2 0.933244 parent, K3 1.220508 parent, N50000 K2 1.778725 parent). Correctly marked PASS (replicates, re-fails C1). Strong baseline; not strawman.",
+      "verdict": "PASS",
+      "evidence": "result.json:controls.B-WEIGHTED-PMI status PASS, metrics.screening_n5000.B-WEIGHTED-PMI, raw_results.json:screening.B-WEIGHTED-PMI, provenance.json:inherited_inputs.parent_data sha 170df6e3"
+    },
+    {
+      "id": "B-EQUAL-WEIGHT-PMI",
+      "baseline": "Unweighted average of per-stratum PMI (1/N_strata each, remove large-stratum dominance)",
+      "expected": "null_mean <0.1 if bias is weighting-driven (frozen H1)",
+      "observed": "K2 1.490475 K3 1.446247 K3-K2 -0.044228 null_mean 0.704217 std 0.012815 positive 1.809851 p 0.000999. Null bias increases 1.73x vs weighted (0.704 vs 0.407), 54.2 sigma above threshold. Per-stratum bias decomposition shows small strata carry +0.742 bias, so equal-weighting amplifies bias. Correctly marked FAIL C1, hypothesis H1 large-stratum-dominance falsified.",
+      "verdict": "FAIL",
+      "evidence": "result.json:controls.B-EQUAL-WEIGHT-PMI status FAIL gate C1, metrics.screening_n5000.B-EQUAL-WEIGHT-PMI, raw_results.json:screening.B-EQUAL-WEIGHT-PMI, result.json:metrics.stratum_size_bias_decomposition stratum_size_5_9 0.7424"
+    },
+    {
+      "id": "B-MEDIAN-PMI",
+      "baseline": "Median of per-stratum PMI (robust to outlier strata)",
+      "expected": "null_mean <0.1 if bias outlier-driven",
+      "observed": "K2 1.510964 K3 1.476821 K3-K2 -0.034143 null_mean 0.685611 std 0.018312 positive 1.872700 p 0.000999. Null 0.686 bits 32.0 sigma above threshold and 37.4 sigma from zero. Per-stratum bias pervasive (positive in majority of strata), not outlier-driven, so median does not center null. Correctly FAIL C1.",
+      "verdict": "FAIL",
+      "evidence": "result.json:controls.B-MEDIAN-PMI status FAIL gate C1, metrics.screening_n5000.B-MEDIAN-PMI, raw_results.json:screening.B-MEDIAN-PMI"
+    },
+    {
+      "id": "B-KNN-CMI",
+      "baseline": "Direct CMI via KNN classifier k=5 bypassing strata, expected lower bias if strata weighting root cause",
+      "expected": "lower |null_mean| than weighted if strata weighting root cause",
+      "observed": "K2 0.023350 K3 0.203143 K3-K2 +0.179793 null_mean -0.261904 std 0.007456 |mean| 0.262 positive 1.190835 p 0.000999. Negative bias 48.5 sigma from zero (|mean| 2.62x threshold), fails C1. Descriptive K3-K2 +0.180 at N5000 meaningless without null centering; at N50000 K2 1.284+1.261 drift shows severe non-convergence. Correctly FAIL C1; not measurement_invalid pipeline (positive passes).",
+      "verdict": "FAIL",
+      "evidence": "result.json:controls.B-KNN-CMI status FAIL gate C1, metrics.screening_n5000.B-KNN-CMI, raw_results.json:screening.B-KNN-CMI, provenance.json:reproduction_parameters.knn"
+    },
+    {
+      "id": "C3-POSITIVE-CONTROL",
+      "baseline": "8-state deterministic SPA K3 >=1.0 p<=0.001 for EACH estimator",
+      "expected": "All four estimators detect deterministic signal",
+      "observed": "B-WEIGHTED 1.805624, B-EQUAL 1.809851, B-MEDIAN 1.872700, B-KNN 1.190835 bits, all p 0.000999 (floor). Pass confirms pipelines function; C1 failure is not execution defect.",
+      "verdict": "PASS",
+      "evidence": "result.json:controls.C3-POSITIVE-CONTROL status PASS, metrics.positive_control estimator_k3_bits p_all_estimators 0.000999"
+    },
+    {
+      "id": "C1-NULL-CONTROL",
+      "baseline": "Shuffled-action permutation |null_mean|<0.1 at N=5000 EACH estimator",
+      "expected": "At least one estimator achieves |mean|<0.1 (H1 estimator-convergence)",
+      "observed": "|null_mean| 0.407/0.704/0.686/0.262 all >=0.1. Frozen falsifier C1 triggered: ALL three corrected plus baseline fail. Correctly gates to FALSIFIED-IN-SETTING (environment-level bias: deterministic/stochastic strata mixing + small-stratum plug-in bias). Margins 2.6-7.0x threshold, 32-56 sigma, not knife-edge.",
+      "verdict": "FAIL",
+      "evidence": "result.json:controls.C1-NULL-CONTROL status FAIL gate FALSIFIED-IN-SETTING, metrics.screening_n5000[*].null_mean_bits, raw_results.json:screening[*].null_control, spec.json:falsifier C1, prereg.md:7 decision_rule Phase1"
+    },
+    {
+      "id": "C2-K3-MINUS-K2-BOOTSTRAP",
+      "baseline": "K3-K2 >0.1 and bootstrap 95% CI lower >0 for first C1 passer (200 trajectory-block resamples)",
+      "expected": "Detect beyond-Markov if convergent estimator found",
+      "observed": "NOT_APPLICABLE: no estimator passed C1. Descriptive point estimates at N5000: weighted +0.287, equal -0.044, median -0.034, KNN +0.180; sign/magnitude estimator-dependent. At N50000 all negative (-0.254 weighted, -0.195 equal, -0.350 median, -0.482 KNN). Uninterpretable without valid null centering. Correctly not gated.",
+      "verdict": "NOT_APPLICABLE",
+      "evidence": "result.json:controls.C2-K3-MINUS-K2-BOOTSTRAP status NOT_APPLICABLE, metrics.phase2_gates.C2, spec.json:decision_rule Phase2, prereg.md:7"
+    },
+    {
+      "id": "C4-CONVERGENCE-N50000",
+      "baseline": "|K2(N50000)-K2(N5000)| <=0.2 for any C1 passer",
+      "expected": "Converged estimator stable across 10x sample",
+      "observed": "NOT_APPLICABLE as gate; descriptively all fail: weighted +0.845, equal +0.247, median +0.373, KNN +1.261 bits, all >0.2. No estimator converges at N50000. Supports non-convergence diagnosis but not gating verdict.",
+      "verdict": "NOT_APPLICABLE_DESCRIPTIVE_FAIL",
+      "evidence": "result.json:controls.C4-CONVERGENCE-N50000 status NOT_APPLICABLE, metrics.n50000_descriptive_non_gating diff_bits, raw_exploratory.json:n50000_descriptive"
+    }
+  ],
+  "recomputed_metrics": {
+    "B-WEIGHTED-PMI": {
+      "producer_k2_pmi_bits": 0.9332435964563089,
+      "recomputed_k2_pmi_bits": 0.9332435964563089,
+      "producer_k3_pmi_bits": 1.2205083083840709,
+      "recomputed_k3_pmi_bits": 1.2205083083840709,
+      "producer_k3_minus_k2_bits": 0.28726471192776193,
+      "recomputed_k3_minus_k2_bits": 0.28726471192776193,
+      "producer_null_mean_bits": 0.4070574334174484,
+      "recomputed_null_mean_bits": 0.4070574334174484,
+      "producer_null_std_bits": 0.007267658065094704,
+      "recomputed_null_std_bits": 0.007267658065094704,
+      "producer_positive_control_k3_bits": 1.8056238881521471,
+      "recomputed_positive_control_k3_bits": 1.8056238881521471,
+      "producer_positive_p": 0.000999000999000999,
+      "match": true,
+      "c1_pass_producer": false,
+      "c1_pass_recomputed": false,
+      "c3_pass_producer": true,
+      "sigma_above_threshold": 56.00943657111145,
+      "threshold": 0.1
+    },
+    "B-EQUAL-WEIGHT-PMI": {
+      "producer_k2_pmi_bits": 1.4904747760316495,
+      "recomputed_k2_pmi_bits": 1.4904747760316495,
+      "producer_k3_pmi_bits": 1.4462469462093848,
+      "recomputed_k3_pmi_bits": 1.4462469462093848,
+      "producer_k3_minus_k2_bits": -0.0442278298222647,
+      "recomputed_k3_minus_k2_bits": -0.0442278298222647,
+      "producer_null_mean_bits": 0.704217209837271,
+      "recomputed_null_mean_bits": 0.704217209837271,
+      "producer_null_std_bits": 0.012815282019864585,
+      "recomputed_null_std_bits": 0.012815282019864585,
+      "producer_positive_control_k3_bits": 1.8098512278603744,
+      "match": true,
+      "c1_pass_producer": false,
+      "c1_pass_recomputed": false,
+      "sigma_above_threshold": 54.951362657933316,
+      "threshold": 0.1
+    },
+    "B-MEDIAN-PMI": {
+      "producer_k2_pmi_bits": 1.510964047443681,
+      "recomputed_k2_pmi_bits": 1.510964047443681,
+      "producer_k3_pmi_bits": 1.4768209688898335,
+      "recomputed_k3_pmi_bits": 1.4768209688898335,
+      "producer_k3_minus_k2_bits": -0.03414307855384746,
+      "recomputed_k3_minus_k2_bits": -0.03414307855384746,
+      "producer_null_mean_bits": 0.6856105140572255,
+      "recomputed_null_mean_bits": 0.6856105140572255,
+      "producer_null_std_bits": 0.01831173457332667,
+      "recomputed_null_std_bits": 0.01831173457332667,
+      "producer_positive_control_k3_bits": 1.872699737514802,
+      "match": true,
+      "c1_pass_producer": false,
+      "sigma_above_threshold": 37.441046958812024,
+      "threshold": 0.1
+    },
+    "B-KNN-CMI": {
+      "producer_k2_pmi_bits": 0.023350119028318662,
+      "recomputed_k2_pmi_bits": 0.023350119028318662,
+      "producer_k3_pmi_bits": 0.203142826903798,
+      "recomputed_k3_pmi_bits": 0.203142826903798,
+      "producer_k3_minus_k2_bits": 0.17979270787547935,
+      "recomputed_k3_minus_k2_bits": 0.17979270787547935,
+      "producer_null_mean_bits": -0.2619042294230531,
+      "recomputed_null_mean_bits": -0.2619042294230531,
+      "producer_abs_null_mean_bits": 0.2619042294230531,
+      "producer_null_std_bits": 0.007456052498852704,
+      "recomputed_null_std_bits": 0.007456052498852704,
+      "producer_positive_control_k3_bits": 1.1908352763575794,
+      "match": true,
+      "c1_pass_producer": false,
+      "c3_pass_producer": true,
+      "sigma_above_threshold": 35.126392881937655,
+      "threshold": 0.1,
+      "knn_k": 5,
+      "knn_alpha": 1.0
+    },
+    "determinism_n5000": {
+      "producer_K2_deterministic": 407,
+      "producer_K2_stochastic": 885,
+      "producer_K2_det_ratio": 0.31501547987616096,
+      "recomputed_K2_deterministic": 407,
+      "recomputed_K2_stochastic": 885,
+      "recomputed_K2_det_ratio": 0.31501547987616096,
+      "producer_K3_deterministic": 89,
+      "producer_K3_stochastic": 732,
+      "producer_K3_total": 821,
+      "producer_K3_det_ratio": 0.10840438489646773,
+      "recomputed_K3_deterministic": 89,
+      "recomputed_K3_stochastic": 732,
+      "recomputed_K3_det_ratio": 0.10840438489646773,
+      "parent_packet_K3_deterministic_claim": 467,
+      "parent_packet_mismatch_confirmed": true,
+      "match_current": true
+    },
+    "stratum_size_bias_decomposition": {
+      "producer_5_9_mean": 0.7424,
+      "recomputed_5_9_mean": 0.7423518854864124,
+      "producer_5_9_median": 0.7219,
+      "recomputed_5_9_median": 0.7219280948873621,
+      "producer_10_19_mean": 0.5712,
+      "recomputed_10_19_mean": 0.5711995701217584,
+      "producer_20_49_mean": 0.3787,
+      "recomputed_20_49_mean": 0.3786901602880563,
+      "producer_5_9_n_obs": 31300,
+      "recomputed_5_9_n_obs": 31300,
+      "monotonic_decreasing_confirmed": true,
+      "match": true
+    },
+    "n50000_descriptive": {
+      "B-WEIGHTED-PMI_k2_diff": 0.8454816267348096,
+      "B-EQUAL-WEIGHT-PMI_k2_diff": 0.24720662410102423,
+      "B-MEDIAN-PMI_k2_diff": 0.37255915146939556,
+      "B-KNN-CMI_k2_diff": 1.2606566640173493,
+      "threshold": 0.2,
+      "any_within_threshold": false,
+      "all_exceed_producer_claim": true,
+      "match": true
+    },
+    "positive_control_p_all": {
+      "producer": 0.000999000999000999,
+      "recomputed": 0.000999000999000999,
+      "floor": 0.000999000999000999,
+      "n_perm": 1000,
+      "all_pass": true
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING (estimator-level fix insufficient; environment-level bias): None of the three bias-corrected estimators (equal-weight PMI, median PMI, KNN CMI k=5 alpha=1.0) nor the weighted baseline centers the shuffled-action permutation null below |mean|<0.1 bits at N=5000 on the 12-state SHA256 hash-routed SPA (SEED=42, 50 sessions x100 steps, 1292 K2 strata 398 used, 821 K3 strata 510 used). Observed |null_mean| 0.407 (weighted), 0.704 (equal-weight), 0.686 (median), 0.262 (KNN) bits, each 2.6-7.0x threshold and 35-56 sigma from threshold, with positive controls passing (K3 1.81/1.81/1.87/1.19 >=1.0 p=0.000999). The bias is intrinsic to per-stratum plug-in PMI: small strata (size 5-9) have mean null PMI +0.742 bits vs +0.379 for size 20-49, so equal-weight/median up-weighting amplifies bias and cannot rescue it. KNN shows negative bias -0.262 bits (Laplace smoothing + extra dimension). No K3-K2 inference is justified: descriptive K3-K2 -0.044 to +0.287 at N5000 is estimator-dependent and uninterpretable without valid null; bootstrap/CI not applicable (no C1 passer). No estimator is convergent: |K2(N50000)-K2(N5000)| +0.247 to +1.261 bits >0.2 for all, with KNN worst. Bound strictly to in-memory SPA simulation with hash-routed 4-action candidates; no inference to production SPAs, browser-collected data, real Web dynamics, or other estimators (KSG, Bayesian, likelihood-ratio) which remain untested per do_not_assume. SPA redesign to 0% deterministic strata may NOT eliminate bias because bias persists in stochastic strata (producer unresolved). Determinism correction: K2 det_ratio 0.315, K3 det_ratio 0.108 (not 0.569).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35445596894/request.json:experiment_id lane physics parent_handoff EXP-PHYSICS-35403136807",
+    "research/experiments/EXP-PHYSICS-35445596894/spec.json:question hypothesis H1/H0/H2 falsifier C1-C4 baselines B-WEIGHTED-PMI/B-EQUAL-WEIGHT-PMI/B-MEDIAN-PMI/B-KNN-CMI positive_control null_control measurement_validity decision_rule",
+    "research/experiments/EXP-PHYSICS-35445596894/prereg.md:1-10 Question/Hypotheses/Estimators 4.x Data/Controls/Decision Rule Phase1 C1 C3 Phase2 C2 C4 validity threats",
+    "research/experiments/EXP-PHYSICS-35445596894/freeze.json:hashes prereg cce8c63a spec 0fafc743 request 2533522e frozen_at 2026-09-19T19:07:42",
+    "research/experiments/EXP-PHYSICS-35445596894/result.json:metrics.screening_n5000 B-WEIGHTED/EQUAL/MEDIAN/KNN k2/k3/k3_minus_k2/null_mean/std/positive_control, metrics.null_control_permutation n_shuffle 500, metrics.positive_control, metrics.determinism_n5000, metrics.n50000_descriptive_non_gating, metrics.stratum_size_bias_decomposition, metrics.phase2_gates NOT_APPLICABLE, controls C1 FAIL FALSIFIED-IN-SETTING C3 PASS, artifacts[0-5] hashes, observations[0-9], validity_notes[0-9], unresolved[0-5]",
+    "research/experiments/EXP-PHYSICS-35445596894/report.md:1-9 Identity/Question/Gates/Execution with fidelity checks/4.1 Positive 4.2 Null 4.3 Mechanistic 4.4 Convergence 4.5 Determinism/5 Controls ledger/6 Result COMPLETE FALSIFIES FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35445596894/provenance.json:environment python 3.12.14 numpy 2.5.3 sklearn 1.9.1, commits git_head 20e84c6, workflow commands run_experiment.py explore.py, frozen_inputs hashes, inherited_inputs parent_data sha 170df6e3 in_memory 46ed606a, generated_artifacts hashes, reproduction_parameters seed 42 knn k5 alpha1.0",
+    "research/experiments/EXP-PHYSICS-35445596894/raw_results.json:screening B-WEIGHTED/EQUAL/MEDIAN/KNN k2/k3/k3_minus_k2 null_control n_shuffle 500 shuffled_first5 positive_control passers [] all_fail_c1 true phase2 null verdict FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35445596894/raw_exploratory.json:n50000_descriptive B-WEIGHTED 1.778725/0.845 diff B-EQUAL 1.737681/0.247 B-MEDIAN 1.883523/0.373 B-KNN 1.284007/1.261 stratum_size_bias_buckets 5-9 0.74235 10-19 0.57120 20-49 0.37869",
+    "research/experiments/EXP-PHYSICS-35445596894/raw_transitions_n50000.json:sha e9e0c54e in_memory a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51 50 sessions x1000 steps SEED=42",
+    "research/experiments/EXP-PHYSICS-35445596894/run_experiment.py:sha f78fc85f estimator order B-WEIGHTED/B-EQUAL/B-MEDIAN/B-KNN, stratum_items MIN_STRATUM_SIZE 5, shuffled_action_null N_SHUFFLE 500, within_stratum_permutation N_PERM 1000, knn_cmi k5 alpha1.0, choose_next hash(prev1:prev2:current:action), build_state_history_records_K2 build_action_history_records_K3, determinism_stats",
+    "research/experiments/EXP-PHYSICS-35445596894/explore.py:sha 8188262e N50000 descriptive K2/K3 for all 4 estimators, per-stratum-size bias decomposition 100 shuffles",
+    "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json:sha 170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade reused at N5000, parent handoff carry_forward established/rejected/unknown/do_not_assume",
+    "research/experiments/EXP-PHYSICS-35403136807/handoff.json:next_question bias-corrected estimator K3-K2 >0.1 with valid null, established asymptotic non-convergence 0.933->1.779 bias floor 0.41, rejected weighted PMI as identifiable quantity, unknown SPA 0% deterministic, do_not_assume orthogonal frameworks untested",
+    "codex/claim_state.json:C-WEB-DYNAMICS status HYPOTHESIS, lane charter physics mission falsification-first operational definitions strong nulls identifiability"
+  ],
+  "unresolved": [
+    "No estimator tested here (equal-weight, median, KNN k=5 alpha=1.0) achieves null centering on 12-state hash-routed SPA. Whether ANY estimator (KSG CMI, Bayesian model comparison, likelihood-ratio, consistently smoothed joint) can center a null on deterministic/stochastic mixed strata remains open - truly orthogonal frameworks untested per parent handoff do_not_assume.",
+    "True sign and magnitude of beyond-Markov conditional mutual information I(S_next; history_action | S_current, history_state) in this SPA remain unmeasured: no valid estimator exists yet, so K3-K2 question is unanswered rather than answered in the negative, despite FALSIFIED-IN-SETTING for estimator-level-fix hypothesis.",
+    "Small-stratum plug-in bias (+0.742 at size 5-9) present in stochastic strata, so SPA redesign with 0% deterministic strata may NOT eliminate bias; dedicated test on stochastic-only SPA needed before prescribing redesign (producer unresolved[2]).",
+    "Whether KNN CMI negative null bias (-0.262 bits) disappears with different k (3,10), alpha, distance metric or encoding, and whether any KNN parameterization centers null |mean|<0.1, is untested (prereg threat 1).",
+    "Asymptotic behavior beyond N=50000 unknown; none of the four estimators plateaued (weighted +0.845 equal +0.247 median +0.373 KNN +1.261 vs N5000). Whether limit exists or bias continues growing with N is unmeasured.",
+    "Root cause of parent packet determinism_K3 record 467/821 vs reproducible 89/821 is unknown; should be audited against parent provenance but does not affect C1-gated verdict.",
+    "Generalization to production SPAs, browser-collected Playwright data, richer state representations (DOM, a11y, visual), and real Web dynamics is unwarranted from in-memory SPA simulation regardless of outcome (validity_notes[7])."
+  ]
+}
