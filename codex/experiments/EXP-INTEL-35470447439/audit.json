@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35470447439",
+  "lane": "intel",
+  "status": "BLOCKED",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Make Docker image am1n3e/webarena-verified-shopping:latest available in execution environment (pull from registry, build from Dockerfile, or restore from cache) — blocking substrate per provenance.json infrastructure_failure and result.json controls.DOCKER_SUBSTRATE_AVAILABLE pass=false; docker pull timed out after 120s with empty local image list",
+    "Modify collection script to remove the hardcoded '< 20' cap in MEASURE_JS (EXP-INTEL-34718481334/measure_fullpage_yield.py line 89) so locatable_sample captures ALL elements with bbox (expected n=21-82 per task, not truncated-first-20) and re-collect the same 7 tasks (3 listing ewb 1550/1560/1564, 3 detail ewb 1143-1215, 1 cart ewb 1070) on the same Magento container before re-running frozen analyze.py (sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459)",
+    "Re-run frozen decision_rule C1-C7 on full-DOM data; no spec/prereg freeze modification permitted (hashes prereg ab6bfc0cdc7f360f82296bcdd72ca41498fe985907f88d09868b429d8276fc8d, spec 1211e32e47cb0101dd2f4b4ecf3951c4b601879c05bf48f9530a0d4c9f987984 remain immutable)"
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_C3_GATE_CORRECTLY_TRIGGERS_BLOCKED",
+      "severity": "critical",
+      "finding": "C3_FULL_DOM_ELEMENTS_AVAILABLE correctly evaluates to FAIL and triggers frozen BLOCKED verdict (NOT C3 -> BLOCKED). 0/7 deduplicated tasks have locatable_sample >20 (all exactly 20). Threshold >=5/7 not met. Frozen decision_rule takes precedence over C1/C2/C4-C7, so null metrics M1-M7 are correct.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/analysis_output.json:c3_gate.tasks_with_locatable_sample_gt20=0 total_tasks=7 pass=false; research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 dedup 7 tasks listing 20/82/1550-1564 detail 20/32/1143-1215 cart 20/21/1070; spec.json:decision_rule C3 and VERDICT RULES; result.json:controls.C3_FULL_DOM_ELEMENTS_AVAILABLE pass=false",
+      "recomputed": "Independent recomputation on raw_evidence filtering http_status==200, deduplicating task_id (cart_1 duplicated, checkout_1 excluded) yields exactly 7 tasks, all locatable_sample length 20. Sum >20 =0, threshold 5 fails. Matches producer result.json controls.C3 and analysis_output.json c3_gate."
+    },
+    {
+      "id": "VF2_DOCKER_SUBSTRATE_BLOCK_VERIFIED",
+      "severity": "critical",
+      "finding": "DOCKER_SUBSTRATE_AVAILABLE correctly reported as unavailable: Docker image am1n3e/webarena-verified-shopping:latest not present locally (docker images empty), docker pull timed out after 120s, Magento at localhost:8080 inaccessible. Phase A collection cannot proceed. This is infrastructure failure, not scientific measurement.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/result.json:controls.DOCKER_SUBSTRATE_AVAILABLE expected vs observed; provenance.json:execution_log step 4 BLOCKED + infrastructure_failure category substrate_unavailable retryable=true; report.md Summary Blocking failure",
+      "recomputed": "Not independently re-executed Docker pull in audit (would require same network/registry), but producer evidence chain is consistent: raw_evidence still truncated-first-20 confirms no new collection occurred; no new artifact with full locatable_sample >20 exists; provenance recorded_at 2026-09-19T21:35:00 matches result.json BLOCKED."
+    },
+    {
+      "id": "VF3_STATUS_SEMANTICS_CORRECT_NOT_FALSIFICATION",
+      "severity": "major",
+      "finding": "Producer correctly uses status=BLOCKED outcome=NOT_APPLICABLE with primary metrics M1-M7 = null per EXPERIMENT_PACKET mandatory-key semantics (null = explicitly unknown/not available, not 0). Does not encode substrate failure as FALSIFIES/MIXED/SUPPORTS. Observations, validity_notes and unresolved explicitly state full-DOM hypothesis remains UNTESTED and design is ready for re-execution. No interpretation collapsed into observation.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/result.json:status BLOCKED outcome NOT_APPLICABLE metrics M1-M7 null; validity_notes #1 This is an infrastructure failure not a scientific negative; #4 frozen design ready for re-execution; report.md Status BLOCKED Infrastructure Failure; provenance.json:infrastructure_failure retryable true",
+      "recomputed": "Checked result.json metrics mapping: M1-M7 null matches spec decision_rule C3 gate precedence; baseline_truncated_first20 provided for context (B1 0.5595 B2 0.7865 B3 1.0 B4 0.999645) does not substitute for primary measurement."
+    },
+    {
+      "id": "VF4_TRUNCATION_ROOT_CAUSE_AT_COLLECTION_NOT_PROCESSING",
+      "severity": "major",
+      "finding": "Truncation to first-20 is at collection time in EXP-INTEL-34782350557 MEASURE_JS, not downstream. Metadata locatable_elements (82 listing, 32 detail, 21 cart) and elements_with_bbox (1070-1564) and total_dom_elements (1136-1712) confirm pages are large but locatable_sample array is capped at 20 with fields tag/role/ariaLabel/inForm/x/y/w/h. No alternative full array exists in raw evidence (viewport_sample also truncated to 12).",
+      "evidence_ref": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json measurements[].locatable_sample length 20 vs measurements[].locatable_elements 82/32/21; spec.json:measurement_validity Phase A; EXP-INTEL-35462974425/audit.json VF2; analysis_output.json c3_gate diagnosis",
+      "recomputed": "Verified raw JSON: all 7 deduped locatable_sample arrays have exactly 20 elements, each with expected schema; total_dom_elements and dom_stats tagCounts confirm full pages (e.g., 163-171 div, 328-403 a, 497-498 span) but not fully sampled."
+    },
+    {
+      "id": "VF5_CONTROLS_CORRECTLY_BLOCKED_REFERENCE_ONLY",
+      "severity": "major",
+      "finding": "PC1_RAW_FEATURES_REPRODUCE_FULL_DOM and NC1_HIERARCHY_NORMALIZED_FULL_DOM correctly marked pass=true on truncated-first-20 reference but annotated as blocked for full DOM. Producer does not claim C1/C2 PASS on full DOM; infrastructure_failure correctly isolates them as unevaluated. No leakage of truncated evidence into full-DOM claim.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/result.json:controls PC1 note PC1 runs on truncated-first-20 data only; full DOM PC1 blocked by Docker unavailability; NC1 same; analysis_output.json pc1_positive_control eta2 1.0/1.0/1.0 and nc1_null_control eta2 0.0 on truncated-first-20",
+      "recomputed": "Recomputed truncated-first-20 PC1 from analysis_output.json: tag_entropy eta2=1.0 mean 2.646/2.484/2.602 std 0.0, form_fraction eta2 0.9999999999999982, total_area eta2 1.0; NC1 hierarchy eta2 0.0 means 3.693777130463341e-07 identical. Matches producer truncated reference and confirms pipeline not broken, but does not support full-DOM C1/C2."
+    },
+    {
+      "id": "VF6_NO_METRIC_RENAMING_PRESERVES_TRACEABILITY",
+      "severity": "minor",
+      "finding": "Producer preserves all frozen identifiers: experiment_id/lane/claim_ids C-MEAS-VALID, metric IDs M1-M7, control IDs PC1/NC1/C3 and baselines B1-B5 per spec. No renaming to obscure disagreement. Artifacts list includes correct raw (exp347 sha256 da30bd059a) and derived references. Audit recomputations use same identifiers.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/spec.json:claim_ids hypothesis falsifier baselines positive_control null_control; result.json:metrics M1-M7 and controls C3/PC1/NC1/DOCKER; provenance.json:frozen_hashes and analysis_code analyze.py 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+      "recomputed": "SHA256 verified: raw_evidence da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 matches provenance raw_evidence; analyze.py 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 matches provenance analysis_code."
+    },
+    {
+      "id": "VF7_LEAKAGE_AND_BASELINE_STRENGTH_NOT_APPLICABLE_ON_FULL_DOM",
+      "severity": "minor",
+      "finding": "No leakage or baseline-strength inflation possible because full-DOM measurement was not executed. Producer correctly does not report canonical recipe agreement, delta vs truncated, bootstrap CI, or pipeline eta2 on full DOM (all null). Truncated baselines B1-B5 are cited with exact prior values (B1 55.95% canonical, B2 78.65% per-task, B3 100% non-recipe, B4 0.999645 eta2) and not re-inflated.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/result.json:metrics baseline_truncated_first20 B1-B5; spec.json:baselines B1-B5 sources EXP-INTEL-35445596324 M4/M5/B2/M3 and EXP-INTEL-35462974425 C3",
+      "recomputed": "Confirmed prior baselines via analysis_output.json: truncated-first-20 pc1/nc1 and raw_evidence counts; no new leakage surface created by this BLOCKED run (same Docker image, same 7 task IDs, same viewport per spec measurement_validity #1)."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "BF1_B1_TRUNCATED_CANONICAL_BASELINE_CONFIRMED",
+      "finding": "B1_TRUNCATED_FIRST20_CANONICAL correctly cited as 0.5595 (559.5/1000 iterations, tag_entropy x DEF-FULL-MAP at n=20) from EXP-INTEL-35445596324 M4. Producer does not claim new canonical agreement, leaves M1 null.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/result.json:metrics.baseline_truncated_first20.B1_canonical_agreement_55.95pct 0.5595; spec.json:baselines B1 source EXP-INTEL-35445596324 result.json M4_recipe_canonical_ranking_agreement['20']; EXP-INTEL-35462974425/result.json controls.B1",
+      "strength": "appropriate - exact inherited baseline, strong historical control (1000 iterations x 10 seeds), not remeasured"
+    },
+    {
+      "id": "BF2_B2_PERTASK_BASELINE_PRESERVED",
+      "finding": "B2_TRUNCATED_FIRST20_PERTASK 0.7865 per-task recipe agreement from parent M5 at n=20 correctly cited. Producer leaves M2 null; no claim that per-task crosses 85% (spec C7) on full DOM.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/result.json:metrics.baseline_truncated_first20.B2_pertask_agreement_78.65pct 0.7865; spec.json:baselines B2 source M5",
+      "strength": "appropriate - strong baseline, independent sampling protocol replicated in spec Phase B would be 10 seeds x 1000 on full DOM"
+    },
+    {
+      "id": "BF3_B3_B4_PIPELINE_DISCRIMINATION_CEILING_CONFIRMED",
+      "finding": "B3_NON_RECIPE_RANKING_AGREEMENT 100% (tag_entropy preserves listing>detail for both DEF-FULL-MAP and DEF-FORM-ONLY at n>=15) and B4_PIPELINE_DISCRIMINATION max eta2 0.999645 at n=20 correctly cited. These are the ceiling recipe sampling must approach. Producer confirms via truncated-first-20 reference (PC1 eta2 1.0, max pipeline 0.999645) without claiming improvement on full DOM.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/analysis_output.json:non_recipe_truncated_first20.ranking_preserved true max_eta2 0.9996449276089042; spec.json:baselines B3 source B2 controls, B4 source M3_pipeline_eta2; result.json baseline B3 1.0 B4 0.999645",
+      "strength": "strong - recomputed on same 7-task sample, pipeline discrimination preserved, ranking ceiling verified"
+    },
+    {
+      "id": "BF4_B5_BLOCKED_BASELINE_REPRODUCES",
+      "finding": "B5_BLOCKED_EXPERIMENT_C3_GATE correctly cited as 0/7 tasks >20 from EXP-INTEL-35462974425. This experiment independently recomputes same 0/7 and confirms C3 gate failure is not transient. Baseline strength is maximal for BLOCKED diagnosis (deterministic count).",
+      "evidence_ref": "research/experiments/EXP-INTEL-35462974425/result.json:controls.C3_FULL_DOM_ELEMENTS_AVAILABLE observed 0/7; analysis_output.json c3_gate tasks_with_locatable_sample_gt20 0; result.json metrics baseline B5_blocked_c3_gate_0_7_tasks 0",
+      "strength": "strong - deterministic count on immutable raw evidence, no sampling uncertainty"
+    },
+    {
+      "id": "BF5_BASELINE_STRENGTH_APPROPRIATE_FOR_BLOCKED_VERDICT",
+      "finding": "No baseline strength inflation: producer does not claim C5 exceeds truncated by >=10pp nor C6 >=80% nor C7 >=85%. Baselines serve only as consistency checks for unblocking. Appropriate use of strong baselines per AGENTS.md work discipline.",
+      "evidence_ref": "research/experiments/EXP-INTEL-35470447439/spec.json:decision_rule C5 threshold 0.6595 C6 0.80 C7 0.85 and falsifiers F1-F4; report.md Consequences Positive outcome remains possible; result.json metrics all null",
+      "strength": "appropriate"
+    }
+  ],
+  "recomputed_metrics": {
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_tasks_with_gt20": 0,
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_total_tasks": 7,
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_threshold": 5,
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE_pass": false,
+    "C3_recomputes_match_producer": true,
+    "C3_dedup_strategy": "http_status==200, non-checkout, task_id deduplication (cart_1 duplicate) on exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "M1_canonical_recipe_ranking_agreement_full_dom": null,
+    "M2_pertask_recipe_ranking_agreement_full_dom": null,
+    "M3_delta_vs_truncated_first20": null,
+    "M4_bootstrap_ci_canonical": null,
+    "M5_pipeline_eta2_full_dom": null,
+    "M6_canonical_recipe_eta2_full_dom": null,
+    "M7_pertask_recipe_eta2_full_dom": null,
+    "C1_raw_features_reproduce_full_dom": null,
+    "C2_hierarchy_normalized_full_dom": null,
+    "C4_full_dom_pipeline_eta2": null,
+    "C5_full_dom_exceeds_truncated": null,
+    "C6_ranking_stability_full_dom": null,
+    "C7_pertask_recipe_improves": null,
+    "DOCKER_SUBSTRATE_AVAILABLE_pass": false,
+    "DOCKER_SUBSTRATE_AVAILABLE_recomputed": "verified via provenance execution_log step 4 and result.json controls; no new collection artifact with locatable_sample >20 exists",
+    "baseline_B1_canonical_agreement_truncated_first20": 0.5595,
+    "baseline_B2_pertask_agreement_truncated_first20": 0.7865,
+    "baseline_B3_non_recipe_ranking_100pct": 1.0,
+    "baseline_B4_pipeline_max_eta2_truncated_first20": 0.999645,
+    "baseline_B5_blocked_c3_gate_0_7": 0,
+    "recomputed_truncated_PC1_tag_entropy_eta2_on_20": 1.0,
+    "recomputed_truncated_PC1_form_fraction_eta2_on_20": 0.9999999999999982,
+    "recomputed_truncated_PC1_total_area_eta2_on_20": 1.0,
+    "recomputed_truncated_NC1_hierarchy_eta2_on_20": 0.0,
+    "recomputed_truncated_NC1_group_means_on_20": 3.693777130463341e-07,
+    "recomputed_raw_evidence_sha256_match": true,
+    "recomputed_analyze_py_sha256_match": true,
+    "recomputed_analysis_output_sha256_match": true,
+    "material_metric_attempted": "full-DOM recomputation blocked by substrate; truncated-first-20 recomputation confirms producer baseline context"
+  },
+  "claim_ceiling": "No claim about full-DOM (n=21-82) feature-weighted density ranking stability is justified. The OECD/COINr pipeline hypothesis (H1 canonical >=80%, H2 +10-20pp over 55.95% truncated-first-20, H3 per-task >=85% at full DOM for tag_entropy x DEF-FULL-MAP) remains UNTESTED due to substrate unavailability and C3 gate failure (0/7 tasks >20). Latest valid evidence remains truncated-first-20: canonical recipe 55.95% agreement at n=20 (C6 FAIL), per-task 78.65% at n=20, bootstrap 57.1% +/-49.5%, non-recipe 100% ranking preserved at n>=15, max pipeline eta2 0.999645 at n=20, raw features eta2=1.0, hierarchy-normalized eta2=0.0, on 7 tasks (3 listing ewb 1550-1564, 3 detail ewb 1143-1215, 1 cart ewb 1070), 1 Magento site am1n3e/webarena-verified-shopping, 2 non-degenerate definitions (DEF-FULL-MAP DEF-FORM-ONLY), template-invariant within-type std 0.0. Product lane must continue using non-recipe density only; recipe density design path not closed nor opened by this BLOCKED run. No product promotion authorized.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35470447439/request.json sha256 42a221ad654b0c78d2b8a39c73aed9d1d8da7200e2d2cca45bfdbc10888008c9",
+    "research/experiments/EXP-INTEL-35470447439/spec.json sha256 1211e32e47cb0101dd2f4b4ecf3951c4b601879c05bf48f9530a0d4c9f987984",
+    "research/experiments/EXP-INTEL-35470447439/prereg.md sha256 ab6bfc0cdc7f360f82296bcdd72ca41498fe985907f88d09868b429d8276fc8d",
+    "research/experiments/EXP-INTEL-35470447439/freeze.json",
+    "research/experiments/EXP-INTEL-35470447439/result.json status BLOCKED outcome NOT_APPLICABLE",
+    "research/experiments/EXP-INTEL-35470447439/report.md Status BLOCKED Infrastructure Failure",
+    "research/experiments/EXP-INTEL-35470447439/provenance.json execution_log infrastructure_failure substrate_unavailable retryable true",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+    "research/experiments/EXP-INTEL-35462974425/analysis_output.json sha256 1ecf7ee501b2d13cb51461066bcaec446cff3b9a40f5968ed1ed835f095644d0 c3_gate pc1 nc1",
+    "research/experiments/EXP-INTEL-35462974425/result.json BLOCKED C3 0/7",
+    "research/experiments/EXP-INTEL-35462974425/handoff.json sha256 e2e33ed0a2e50da5eb3a587fe8a487b18c9bcfc06c6cd64963616961bd712670",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 all locatable_sample len 20 vs locatable_elements 82/32/21",
+    "research/experiments/EXP-INTEL-35445596324/result.json M4 0.5595 canonical M5 0.7865 per-task M3 0.999645 pipeline B2 ranking preserved (parent MIXED audit PASS)",
+    "research/experiments/EXP-INTEL-35445596324/handoff.json sha256 f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110",
+    "research/lanes/registry.json intel lane charter C-MEAS-VALID C-LLM-INHERIT",
+    "codex/index.json and codex/claim_state.json C-MEAS-VALID chain (no change by this BLOCKED run)"
+  ],
+  "unresolved": [
+    "Can full DOM locatable_sample (all elements with bbox, n=21-82 per task, distinct from metadata locatable_elements 82/32/21 and elements_with_bbox 1070-1564) be re-collected from am1n3e/webarena-verified-shopping:latest for the 7 existing tasks (3 listing, 3 detail, 1 cart) using modified MEASURE_JS without <20 cap — smallest next action per result.json unresolved #5 and provenance blocking_action",
+    "Will canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP cross 80% threshold at full DOM (spec C6) and exceed truncated-first-20 55.95% by >=10pp (C5)? Falsifiers F1 <75% and F2 no improvement remain unevaluated",
+    "Will per-task recipe ranking agreement for tag_entropy x DEF-FULL-MAP reach >=85% at full DOM (spec C7, H3) vs current 78.65% at n=20? Falsifier F3 <75% unevaluated",
+    "Will pipeline eta2 for tag_entropy x DEF-FULL-MAP on full DOM stay >=0.90 (falsifier F4) vs truncated-first-20 0.9958 (DEF-FULL-MAP) and 0.9996 (DEF-FORM-ONLY)? Full-DOM elements may introduce noise degrading discrimination",
+    "Does ranking instability structure persist across definitions (DEF-FORM-ONLY vs DEF-FULL-MAP) and features (tag_entropy vs form_fraction vs total_area) at full DOM with 10 seeds x 1000 iterations x 1000 bootstraps?",
+    "Cross-site generalization beyond single Magento Docker site and single locatable_sample definition — spec validity threat #1 single site, parent carry_forward unknown",
+    "Whether first-n DOM-position subsampling used in parent n=5/10/15/20 analysis represents random subset diversity at full DOM — spec threat #5 DOM-sequential subsampling limitation"
+  ]
+}

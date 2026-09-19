@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35445596324",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "VF1_TEMPLATE_INVARIANCE_CEILING",
+      "severity": "major",
+      "finding": "Within-type template invariance persists at all effective_n: identical tags/roles/inForm/w/h within page_type guarantees any between-type discriminative mapping yields eta2~1 for direct and non-recipe pipeline. Non-recipe pipeline eta2 0.964-0.999 is tautological given sample, not evidence of general robustness. Ranking preservation is the only discriminating check. Producer correctly discloses this in validity_notes and report and bounds claim accordingly.",
+      "evidence": "analysis_output.json tasks_used locatable_count 20 identical per type, within_stds 0.0; audit recompute confirms first-n tag/role/inForm seqs identical within type at n=5,10,15,20; result.json validity_notes bullet 2 and report Validity Threats 5"
+    },
+    {
+      "id": "VF2_Y_PROXY_HIERARCHY_DEGENERACY",
+      "severity": "major",
+      "finding": "NC1 normalized hierarchy density reproduces eta2=0.0 exactly (all means 3.693777130463341e-07) via y-proxy exp(-0.3*y) underflow degeneracy (y>6000 underflows to 0, early y 158-272 identical across types). This is proxy artifact, not test of true DOM depth. Producer reproduces parent identically and discloses y-proxy with underflow in validity_notes and report, correctly bounding claim to y-proxy.",
+      "evidence": "analysis_output.json nc1_hierarchy eta2 0.0 all means 3.69e-07; analyze.py:178-183 hierarchy computation with alpha 0.3 and y; result.json controls NC1_HIERARCHY_NORMALIZED_REPRODUCES observed identical"
+    },
+    {
+      "id": "VF3_FIRST_N_SUBSAMPLING_BIAS",
+      "severity": "major",
+      "finding": "Effective_n subsampling uses first n elements by DOM position, not random subsets. Early DOM positions are header/form/navigation elements (tags A, FORM, DIV, LABEL, SPAN, INPUT, BUTTON) with different matching rates (1/5 at n=5, 3/10 at n=10, 5/15 vs 4/15 listing vs detail at n=15, 8/20 vs 5/20 at n=20). This preserves DOM-sequential structure but biases discriminative signal vs random sampling and limits extrapolation to full DOM n=21-82. Producer discloses this as CRITICAL LIMITATION in spec measurement_validity 8-9 and validity_notes bullet 4.",
+      "evidence": "spec.json measurement_validity items 4-5 subsample description and item 8-9 critical limitation; analyze.py:217 subsample = locatable_sample[:n_eff]; audit recompute element match counts per n showing listing/detail divergence only at n>=15; result.json validity_notes bullet 4"
+    },
+    {
+      "id": "VF4_SPEARMAN_SMALL_N_AND_TIE_HANDLING",
+      "severity": "minor",
+      "finding": "C5 Spearman correlation computed on only 4 points (5,10,15,20) with tied agreement values (0.0 at n=5 and n=10). Producer code uses rank via sorted().index() without averaging ties, yielding Spearman=1.0. Correct tie-averaged Spearman (average rank 0.5 for both zeros) is 0.9486, still >=0.6. Improvement criterion (0.5595 >=0.10) also holds. Finding does not change PASS for C5 but indicates small-n low statistical power disclosed in validity_notes bullet 6.",
+      "evidence": "analyze.py:421-427 spearman_correlation tie handling; analysis_output.json c5_spearman_correlation 1.0 vs recomputed 0.9486; result.json M9_spearman_correlation 1.0 and M10_agreement_improvement 0.5595; result.json validity_notes bullet 6 acknowledges 4-point limitation"
+    },
+    {
+      "id": "VF5_BOOTSTRAP_RECIPE_VARIANCE_CONFLATION",
+      "severity": "minor",
+      "finding": "Bootstrap at each n resamples tasks within type and draws one canonical recipe iteration per bootstrap. High std ~0.50 (57.1% +-49.5% at n=20) therefore conflates task-sampling variance with recipe-sampling variance, not pure task uncertainty. Bootstrap CI spanning ~0-100% correctly signals ranking instability but is not a pure sampling CI for non-recipe ranking. Producer reports mean +- std and discloses high variance interpretation without overclaiming precision.",
+      "evidence": "analyze.py:359-406 bootstrap loop with random.choice tasks and one active_roles draw; analysis_output.json bootstrap_results 20 mean 0.571 std 0.495; result.json M8_bootstrap_ranking_agreement and observations bullet 6"
+    },
+    {
+      "id": "VF6_CART_N1_AND_SINGLE_SITE_BOUND",
+      "severity": "minor",
+      "finding": "Cart page_type n=1 makes within variance degenerate; listing vs detail n=3 each is focus. Single Magento site, truncated-first-20 sample limits generalizability. Producer bounds claim ceiling to single site, truncated sample, 7 tasks, 2 non-degenerate definitions, 2 recipes, 4 effective_n. No cross-site or full-DOM inference warranted.",
+      "evidence": "result.json validity_notes bullets 1,3,7-8 and report Validity Threats; provenance.json tasks 7 tasks_per_type product_listing 3 detail 3 cart 1; spec measurement_validity item 8"
+    },
+    {
+      "id": "VF7_PER_TASK_VS_CANONICAL_DISSOCIATION",
+      "severity": "minor",
+      "finding": "Per-task recipe ranking agreement (78.65% at n=20) substantially exceeds canonical (55.95%) despite lower eta2 (0.366 vs 0.921), inverse dissociation. C6 frozen threshold only tests canonical recipe (>=80%), so per-task near-threshold (78.65% <80% still FAIL if same threshold applied) is not evaluated by decision rule. Producer correctly reports but does not promote per-task as passing. Structural instability claim holds for canonical; per-task remains unresolved and reported as unresolved item.",
+      "evidence": "analysis_output.json subsample_results 20 recipe_pertask_ranking_agreement_mean 0.7865 vs recipe_canonical 0.5595; result.json M5 vs M4 and observations bullet 3; spec decision_rule C6 only canonical tag_entropy x DEF-FULL-MAP"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_CANONICAL_RECIPE_AGREEMENT",
+      "status": "pass",
+      "expected": "Parent audit 58% (DEF-FULL-MAP) / 48% (DEF-FORM-ONLY) canonical recipe ranking agreement",
+      "observed": "Recomputed at n=20: 55.95% DEF-FULL-MAP and 49.34% DEF-FORM-ONLY (analysis_output.json subsample_results 20 recipe_canonical_ranking_agreement_mean). Within sampling variance of parent (10 seeds x 1000 iterations, std ~1.5%). Producer correctly judges within_expected.",
+      "evidence": "analysis_output.json subsample_results 20 recipe_canonical_ranking_agreement_mean 0.5595/0.4934; result.json controls B1_CANONICAL_RECIPE_AGREEMENT observed 55.95%/49.34%; spec baselines B1 58%/48%"
+    },
+    {
+      "id": "B2_NON_RECIPE_RANKING_AGREEMENT",
+      "status": "pass",
+      "expected": "Non-recipe pipeline preserves listing>detail for tag_entropy both definitions (100%) at n=20",
+      "observed": "Confirmed: non_recipe_ranking_agreement true for both DEF-FULL-MAP and DEF-FORM-ONLY at n=20 and n=15, false at n=5 and n=10 due to identical numerator divided by ewb (detail>listing). Producer correctly notes dependency on sample size. Audit densities: listing 0.00213 > detail 0.00127 at n=20 DEF-FULL-MAP and 0.00153 > 0.00045 at DEF-FORM-ONLY.",
+      "evidence": "analysis_output.json subsample_results 5-20 non_recipe_ranking_agreement; result.json controls B2_NON_RECIPE_RANKING_AGREEMENT; audit density recomputation"
+    },
+    {
+      "id": "B3_PIPELINE_DISCRIMINATION",
+      "status": "pass",
+      "expected": "Non-recipe pipeline eta2 >0.05 for tag_entropy both definitions (parent 0.964-0.999)",
+      "observed": "Recomputed at n=20: DEF-FULL-MAP 0.995783, DEF-FORM-ONLY 0.999645, max 0.999645 well above 0.05. Matches parent. Producer report of eta2 degradation at small n (0.983 at n=5-10) also confirmed.",
+      "evidence": "analysis_output.json subsample_results 20 pipeline_eta2; result.json controls B3_PIPELINE_DISCRIMINATION and metrics M3_pipeline_eta2_by_effective_n"
+    }
+  ],
+  "recomputed_metrics": {
+    "PC1_tag_entropy_eta2": 1.0,
+    "PC1_form_fraction_eta2": 0.9999999999999982,
+    "PC1_total_area_eta2": 1.0,
+    "PC1_pass_recomputed": true,
+    "NC1_hierarchy_eta2": 0.0,
+    "NC1_pass_recomputed": true,
+    "pipeline_eta2_at_n20_tag_entropy_DEF_FULL_MAP": 0.995783366611769,
+    "pipeline_eta2_at_n20_tag_entropy_DEF_FORM_ONLY": 0.9996449276089042,
+    "max_pipeline_eta2_at_n20": 0.9996449276089042,
+    "non_recipe_ranking_at_n20_DEF_FULL_MAP": true,
+    "non_recipe_ranking_at_n20_DEF_FORM_ONLY": true,
+    "non_recipe_ranking_at_n5_DEF_FULL_MAP": false,
+    "non_recipe_ranking_at_n10_DEF_FULL_MAP": false,
+    "recipe_canonical_ranking_agreement_at_n20_DEF_FULL_MAP": 0.5595,
+    "recipe_canonical_ranking_agreement_at_n20_DEF_FORM_ONLY": 0.4934,
+    "recipe_canonical_ranking_values_all_n_DEF_FULL_MAP": {
+      "5": 0.0,
+      "10": 0.0,
+      "15": 0.4998,
+      "20": 0.5595
+    },
+    "recipe_pertask_ranking_agreement_at_n20_DEF_FULL_MAP": 0.7865,
+    "recipe_pertask_ranking_agreement_at_n20_DEF_FORM_ONLY": 0.8814,
+    "recipe_canonical_eta2_at_n20_DEF_FULL_MAP_mean": 0.9204647419270405,
+    "recipe_pertask_eta2_at_n20_DEF_FULL_MAP_mean": 0.3663938440924516,
+    "spearman_canonical_DEF_FULL_MAP_reported": 1.0,
+    "spearman_canonical_DEF_FULL_MAP_tie_corrected": 0.9486832980505138,
+    "spearman_pass_threshold_0_6": true,
+    "improvement_n20_minus_n5": 0.5595,
+    "improvement_pass_threshold_0_10": true,
+    "bootstrap_ranking_agreement_at_n20_mean": 0.571,
+    "bootstrap_ranking_agreement_at_n20_std": 0.4951809812626129,
+    "C1_raw_features_reproduce_recomputed": true,
+    "C2_hierarchy_normalized_reproduces_recomputed": true,
+    "C3_pipeline_eta2_nonzero_recomputed": true,
+    "C4_natural_ranking_preserved_recomputed": true,
+    "C5_sample_size_effect_recomputed": true,
+    "C6_ranking_stability_at_full_recomputed": false,
+    "verdict_recomputed": "MIXED",
+    "matches_producer_within_1e6": true,
+    "discrepancies": []
+  },
+  "claim_ceiling": "Maximum justified: On truncated-first-20 locatable_sample from single Magento localhost site (7 tasks: 3 product_listing ewb 1550/1560/1564, 3 detail ewb 1215/1149/1143, 1 cart ewb 1070, within-type template-identical tags/roles/inForm), feature-weighted density sum(feature_value)/elements_with_bbox through OECD/COINr non-recipe pipeline preserves between-type discrimination (max eta2 0.999645 at n=20) and preserves listing>detail ranking for tag_entropy at n>=15 for both DEF-FULL-MAP (a->link,input->textbox) and DEF-FORM-ONLY, but reverses at n<=10 due to ewb denominator dominance. Under recipe sampling (p=0.5), canonical shared-subset ranking agreement for tag_entropy x DEF-FULL-MAP improves monotonically from 0% at n=5/10 to 50% at n=15 to 55.95% at n=20 (Spearman 1.0 reported, 0.95 tie-corrected, +55.95pp improvement, C5 PASS) but plateaus below 80% threshold (C6 FAIL, 55.95% <80% with bootstrap 57.1% +-49.5%). Per-task independent recipe reaches 78.65% at n=20 (<80%) with lower eta2 0.37. Ranking instability is partially sample-size-dependent but not resolved at maximum available n=20; recipe-sampling destabilization is structural within this sample range. No inference to full DOM n=21-82, other sites, true DOM depth, or production MIXED handling warranted. Product lane must use non-recipe density only; do not promote recipe-based density.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35445596324/spec.json frozen decision_rule C1-C6 and measurement_validity critical limitation n=20 ceiling",
+    "research/experiments/EXP-INTEL-35445596324/prereg.md sections 10-11 C5/C6 thresholds and Validity Threats 1-6",
+    "research/experiments/EXP-INTEL-35445596324/result.json metrics M1-M11, controls PC1/NC1/B1/B2/B3, observations, validity_notes, unresolved",
+    "research/experiments/EXP-INTEL-35445596324/analysis_output.json tasks_used, pc1_direct_eta2, nc1_hierarchy, subsample_results 5/10/15/20 pipeline_eta2, non_recipe_ranking_agreement, recipe_canonical/pertask eta2 and ranking_agreement, bootstrap_results, c5/c6/decision_rules",
+    "research/experiments/EXP-INTEL-35445596324/analyze.py lines 36-68 feature-weighted density, 193-348 recipe sampling canonical and per-task, 356-406 bootstrap, 421-448 C5/C6 evaluation",
+    "research/experiments/EXP-INTEL-35445596324/report.md MIXED verdict table and Key Findings 1-5 with product consequences",
+    "research/experiments/EXP-INTEL-35445596324/provenance.json datasets raw_evidence sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, code hash 5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 locatable_sample fields tag/role/inForm/x/y/w/h truncated-first-20",
+    "research/experiments/EXP-INTEL-35434771791/handoff.json carry_forward established/rejected and next_question about full DOM vs sample-size artifact",
+    "research/experiments/EXP-INTEL-35434771791/audit.json VF1 canonical 58%/48% baseline and VF3 template invariance ceiling"
+  ],
+  "unresolved": [
+    "Full DOM testing (n=21-82, elements_with_bbox 1070-1564 full count 21-82 per task) still needed for definitive answer on whether ranking stabilizes beyond n=20 ceiling. Plateau n15 50% to n20 56% (+6pp) suggests diminishing returns but does not rule out crossing 80% at larger n.",
+    "Per-task recipe ranking agreement 78.65% at n=20 is close to 80% threshold but not tested by frozen C6 (canonical only). Dedicated experiment on per-task recipe stability at full DOM needed before any product use of per-task density.",
+    "Why non-recipe pipeline ranking fails at n=5/10 (detail>listing due to identical tag_entropy numerator divided by smaller detail ewb) but succeeds at n>=15 (listing sum 1.81/3.30 vs detail 1.29/1.54) — threshold element where discriminative signal emerges not characterized for element selection strategies.",
+    "Cross-site generalization of sample-size effect untested; different sites may lack template invariance and show different eta2/ranking behavior.",
+    "Bootstrap CI at n=20 extremely wide (57% +-50%) due to n=3 per type and recipe variance; larger task set needed for precise agreement estimation and to distinguish structural vs sampling instability."
+  ]
+}

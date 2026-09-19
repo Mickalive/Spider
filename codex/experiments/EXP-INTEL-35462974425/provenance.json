@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35462974425",
+  "lane": "intel",
+  "created_at": "2026-09-19T19:00:41.860908+00:00",
+  "frozen_at": "2026-09-19T19:03:13.071856+00:00",
+  "executed_at": "2026-09-19T19:30:00.000000+00:00",
+  "github_run_id": "35462974425",
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-35445596324",
+    "handoff_sha256": "f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110",
+    "verdict": "MIXED"
+  },
+  "base_commit": "de1caad11a36fcb29d3f7d3c8aa7279601eceab3",
+  "data_sources": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw",
+      "description": "Raw DOM measurements from Magento Docker container (7 tasks: 3 listing, 3 detail, 1 cart). locatable_sample truncated to first-20 elements at collection time."
+    }
+  ],
+  "code": [
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/analyze.py",
+      "sha256": "79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+      "description": "Analysis script: C3 gate verification + baseline controls on truncated-first-20 data"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/analysis_output.json",
+      "sha256": "1ecf7ee501b2d13cb51461066bcaec446cff3b9a40f5968ed1ed835f095644d0",
+      "role": "derived",
+      "description": "C3 gate analysis + baseline controls output"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/result.json",
+      "sha256": "941fb3839d5be111b01b4b053f1c13670b07a518e34b4192a145620883cc08a8",
+      "role": "result",
+      "description": "Canonical result packet (BLOCKED status)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/report.md",
+      "sha256": "a379f12718ccff8b2e1afa1b32f1d850c549caf7a443abe9dbb3027d17958cfd",
+      "role": "report",
+      "description": "Human-readable report"
+    }
+  ],
+  "frozen_inputs": {
+    "request.json": "377d57138c68319b02d2ed80a20cd24d51cd5e2c47147869e8afc0ef1bbf1b5e",
+    "spec.json": "3e15cfc492004632a1558823cb2c30038146a0095e191635c733bef16dde134f",
+    "prereg.md": "8190419d14e613faf5cc4f3fa00928b7fa1f3648c1a9fe3e403040efd567a544",
+    "freeze.json": "computed_at_freeze_time"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12+",
+    "dependencies": ["json", "math", "collections"],
+    "browser_required": false,
+    "network_required": false,
+    "model_calls_required": false,
+    "docker_image": "am1n3e/webarena-verified-shopping:latest (not used — BLOCKED before browser interaction)"
+  },
+  "execution_log": [
+    {
+      "step": "read_frozen_inputs",
+      "result": "success",
+      "note": "All frozen files read and immutable"
+    },
+    {
+      "step": "load_raw_data",
+      "result": "success",
+      "note": "Loaded 7 tasks (3 listing, 3 detail, 1 cart) from exp347_raw_results.json"
+    },
+    {
+      "step": "c3_gate_check",
+      "result": "BLOCKED",
+      "note": "0/7 tasks have locatable_sample > 20 elements. All truncated to first-20 at collection time."
+    },
+    {
+      "step": "baseline_controls_on_truncated_data",
+      "result": "success",
+      "note": "PC1 PASS, NC1 PASS, non-recipe pipeline eta2 0.999645, ranking preserved — all consistent with parent"
+    },
+    {
+      "step": "write_result_json",
+      "result": "success",
+      "note": "status=BLOCKED, outcome=NOT_APPLICABLE"
+    },
+    {
+      "step": "write_report_md",
+      "result": "success"
+    },
+    {
+      "step": "write_provenance_json",
+      "result": "success"
+    }
+  ],
+  "unblocking_action": "Re-collect full DOM locatable_sample from the Magento Docker container (am1n3e/webarena-verified-shopping:latest) for the 7 tasks, capturing ALL elements with bbox rather than truncated-first-20. Estimated 5-10 minutes of browser automation. The analysis script (analyze.py) is ready to process full DOM data once available."
+}

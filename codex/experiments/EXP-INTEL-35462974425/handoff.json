@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35462974425",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Can full DOM locatable_sample (all elements with bbox, n=21-82 per task) be re-collected from the Magento Docker container (am1n3e/webarena-verified-shopping:latest) for the 7 existing tasks, unblocking the frozen experiment and testing whether recipe ranking agreement crosses the 80% threshold at full element diversity?",
+  "why_next": "This BLOCKED experiment confirmed the data truncation root cause but could not answer the parent's highest-information question. The frozen experiment's design (analyze.py, decision_rule, baselines) is ready to execute on full-DOM data — only the data source needs updating. Re-collection is estimated at 5-10 minutes of browser automation on the same Docker container used by EXP-INTEL-34782350557. Once full-DOM data is available, re-running the existing analyze.py produces a definitive binary outcome: either canonical recipe ranking agreement crosses 80% (MIXED program unblocked, recipe density viable) or remains below 80% (structural instability, recipe density permanently closed for this definition×recipe framework). This is the single highest-information action available for the MIXED program. The next experiment should be the SAME frozen design re-run on full-DOM data, not a new design.",
+  "carry_forward": {
+    "established": [
+      "Sample-size effect on ranking agreement is REAL and MONOTONIC: canonical recipe tag_entropy × DEF-FULL-MAP agreement improves from 0% at n=5/10 to 50% at n=15 to 56% at n=20 (Spearman=1.0 reported, 0.95 tie-corrected, +55.95pp improvement, C5 PASS). More elements per definition do help stabilize rankings (EXP-INTEL-35445596324 result.json M4/M9/M10, audit PASS)",
+      "Ranking agreement PLATEAUS below 80% at maximum available sample size: canonical recipe agreement 55.95% at n=20, bootstrap 57.1% ± 49.5% (571/1000 bootstrap samples agree). The ranking is not a stable property of this task set at n=20 (EXP-INTEL-35445596324 result.json M4/M8, audit PASS)",
+      "Non-recipe pipeline ranking agreement requires ≥15 elements to preserve listing > detail for tag_entropy: n=5 FALSE, n=10 FALSE, n=15 TRUE, n=20 TRUE. The threshold is a phase transition around n=15 where sufficient discriminative elements become available (EXP-INTEL-35445596324 result.json B2 controls, audit recompute)",
+      "OECD/COINr pipeline preserves between-type discrimination (max eta2 0.999645 at n=20) and preserves listing > detail ranking for tag_entropy at n≥15 for both DEF-FULL-MAP and DEF-FORM-ONLY without recipe sampling (EXP-INTEL-35445596324 result.json M3/M4, audit recompute; inherited from EXP-INTEL-35434771791)",
+      "Per-task recipe (independent p=0.5 per task) achieves 78.65% ranking agreement at n=20 — better than canonical 55.95% but with lower eta2 (0.366 vs 0.921). The inverse relationship suggests independent sampling captures diverse discriminative elements for ranking even though it degrades overall eta2 (EXP-INTEL-35445596324 result.json M4 vs M5, audit VF7)",
+      "Raw features retain perfect task-type discrimination before pipeline processing: all three features eta2=1.0, within-type std=0.0 (EXP-INTEL-35445596324 PC1, audit PASS; inherited from EXP-INTEL-35434771791)",
+      "Within-type template invariance persists at all effective_n: identical tags/roles/inForm/w/h within page_type guarantees any between-type discriminative mapping yields eta2≈1.0. Ranking preservation is the only discriminating check (EXP-INTEL-35445596324 audit VF1, severity major)",
+      "Data truncation root cause confirmed: locatable_sample truncated to first-20 at collection time in EXP-INTEL-34782350557, not downstream processing. Metadata locatable_elements (82/32/21) correctly reports full count; locatable_sample array is the truncated field (EXP-INTEL-35462974425 audit VF2, analysis_output.json c3_gate)"
+    ],
+    "rejected": [
+      "Hypothesis that ranking instability is PURELY a sample-size artifact within truncated-first-20 range — REJECTED: improvement plateaus at 56% at n=20, well below 80% threshold; bootstrap CI spans ~0-100% confirming instability persists (EXP-INTEL-35445596324 C6 FAIL)",
+      "OECD/COINr pipeline structure itself destroys between-type variance — REJECTED (inherited from EXP-INTEL-35434771791: pipeline preserves discrimination eta2 0.964-0.999)"
+    ],
+    "unknown": [
+      "Does ranking stabilize at full DOM (n=21-82) when more diverse elements per definition are available? The n=15→n=20 plateau (+6pp) suggests diminishing returns but does not rule out crossing 80% at larger n — UNTESTED due to data truncation",
+      "Does per-task recipe achieve ≥80% at full DOM? Current 78.65% at n=20 is tantalizingly close but was not tested by frozen C6 (canonical only) — UNTESTED",
+      "Why does non-recipe pipeline ranking fail at n≤10 (detail>listing due to identical numerator divided by smaller detail ewb) but succeed at n≥15? The threshold element count where discriminative signal emerges is not characterized",
+      "Cross-site generalization of the sample-size effect: different sites may have different template invariance properties, affecting the ranking stability boundary",
+      "What is the full per-task recipe eta2 distribution and ranking preservation for all feature × definition combos at full DOM with 10×1000 sampling?"
+    ],
+    "do_not_assume": [
+      "That the n=20 result generalizes to full DOM n=21-82 — the truncated-first-20 sample has template-invariant within-type structure that may not represent the full element distribution; the ranking stability at n>20 is UNKNOWN",
+      "That recipe-based density is safe for Product Core promotion — canonical recipe ranking agreement is 55.95% at n=20 with bootstrap CI ~0-100%; product lane must use non-recipe density only",
+      "That the Spearman correlation on 4 points (n=5/10/15/20) with tied values provides strong statistical evidence — the small sample size limits power; the 10pp improvement criterion provides guard but monotonicity is established on only 4 points",
+      "That the first-n subsampling by DOM position represents random element subsets — the monotonic improvement may partially reflect DOM-sequential structure, not pure sample-size effect",
+      "That the 31× canonical/weighted density ratio (EXP-INTEL-35264637598) is validated on full DOM — only tested on truncated-first-20 sample",
+      "That per-task recipe is a viable alternative to canonical recipe for product use — it achieves higher ranking agreement (78.65%) but much lower eta2 (0.366 vs 0.921), and the 78.65% is below 80%",
+      "That this BLOCKED experiment provides evidence for or against the full-DOM hypothesis — it provides NONE; the hypothesis remains UNTESTED"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — truncated-first-20 locatable_sample input (7 tasks: 3 listing ewb 1550/1560/1564, 3 detail ewb 1215/1149/1143, 1 cart ewb 1070)",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 — analysis script ready to process full-DOM data",
+    "research/experiments/EXP-INTEL-35462974425/spec.json sha256 3e15cfc492004632a1558823cb2c30038146a0095e191635c733bef16dde134f — frozen decision_rule with C3 gate, ready to re-evaluate on full-DOM data",
+    "research/experiments/EXP-INTEL-35445596324/handoff.json sha256 f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110 — parent carry_forward inherited unchanged",
+    "research/experiments/EXP-INTEL-35434771791/handoff.json carry_forward established pipeline discrimination eta2 0.964-0.999, hierarchy bottleneck confirmed, recipe choice material 31× gap",
+    "research/experiments/EXP-INTEL-35409927864/audit.json PASS claim_ceiling — raw feature eta2=1.0 established fact",
+    "research/experiments/EXP-INTEL-35264637598 recipe choice materiality 31× gap",
+    "Docker image: am1n3e/webarena-verified-shopping:latest — Magento container for full-DOM re-collection"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35462974425/result.json — BLOCKED status, C3 gate 0/7 tasks, null metrics M1-M7",
+    "research/experiments/EXP-INTEL-35462974425/audit.json — status PASS, VF1-VF6, recomputed C3 gate 0/7 match producer",
+    "research/experiments/EXP-INTEL-35462974425/analysis_output.json — c3_gate.tasks_with_locatable_sample_gt20=0, baseline controls on truncated-first-20",
+    "research/experiments/EXP-INTEL-35462974425/spec.json — frozen decision_rule C3 threshold ≥5/7, NOT C3 → BLOCKED clause",
+    "research/experiments/EXP-INTEL-35462974425/freeze.json — immutable frozen inputs",
+    "research/experiments/EXP-INTEL-35462974425/provenance.json — execution log, unblocking_action: re-collect full DOM",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — all 7 locatable_sample arrays length 20 verified",
+    "research/experiments/EXP-INTEL-35445596324/result.json M4 canonical 55.95% at n=20, M5 per-task 78.65% at n=20 — latest valid evidence",
+    "research/experiments/EXP-INTEL-35445596324/handoff.json sha256 f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110 — parent next_question inherited"
+  ],
+  "recommended_action": "Modify the SPIDER browser substrate or exp347 collection script to capture ALL elements with bbox in locatable_sample (not truncated-first-20), then re-collect full DOM data from the Magento Docker container (am1n3e/webarena-verified-shopping:latest) for the 7 existing tasks (3 listing, 3 detail, 1 cart). Re-run the frozen analyze.py on the full-DOM data. The frozen decision_rule C3 gate will automatically pass if ≥5 tasks have locatable_sample >20, enabling evaluation of C1-C7. Estimated cost: 5-10 minutes browser automation + offline analysis. This unblocks the single highest-information question for the MIXED program: whether recipe ranking stability is a truncation artifact (80%+ agreement at full DOM → MIXED unblocked) or structural limitation (agreement <80% → recipe density permanently closed for this framework)."
+}

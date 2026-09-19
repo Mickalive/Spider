@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35462974425",
+  "lane": "intel",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "M1_full_dom_canonical_agreement": null,
+    "M2_full_dom_pertask_agreement": null,
+    "M3_full_dom_delta_vs_truncated": null,
+    "M4_full_dom_bootstrap_ci": null,
+    "M5_full_dom_pipeline_eta2": null,
+    "C1_raw_features_reproduce_full_dom": null,
+    "C2_hierarchy_normalized_full_dom": null,
+    "C3_full_dom_elements_available": false,
+    "C4_full_dom_pipeline_eta2": null,
+    "C5_full_dom_exceeds_truncated": null,
+    "C6_ranking_stability_full_dom": null,
+    "C7_pertask_recipe_improves": null
+  },
+  "controls": {
+    "C3_FULL_DOM_ELEMENTS_AVAILABLE": {
+      "description": "The full DOM locatable_sample contains >20 elements for at least 5 of 7 tasks",
+      "expected": ">=5 tasks have locatable_sample length > 20",
+      "observed": "0 of 7 tasks have locatable_sample length > 20. All tasks have exactly 20 elements. The raw data was truncated to first-20 at collection time.",
+      "pass": false,
+      "evidence_ref": "analysis_output.json c3_gate"
+    },
+    "PC1_RAW_FEATURES_REPRODUCE_FULL_DOM": {
+      "description": "Direct feature eta2 on full DOM — BLOCKED, cannot execute",
+      "expected": "All three features eta2 >= 0.99 on full DOM locatable_sample",
+      "observed": "BLOCKED — full DOM locatable_sample not available. On truncated-first-20: tag_entropy eta2=1.0, form_fraction eta2=1.0, total_area eta2=1.0 (PC1 passes on truncated data).",
+      "pass": "blocked",
+      "evidence_ref": "analysis_output.json pc1_positive_control"
+    },
+    "NC1_HIERARCHY_NORMALIZED_FULL_DOM": {
+      "description": "Normalized hierarchy density on full DOM — BLOCKED, cannot execute",
+      "expected": "eta2 < 0.01 on full DOM locatable_sample",
+      "observed": "BLOCKED — full DOM locatable_sample not available. On truncated-first-20: eta2=0.0, all means 3.69e-07 (NC1 passes on truncated data).",
+      "pass": "blocked",
+      "evidence_ref": "analysis_output.json nc1_null_control"
+    },
+    "B1_TRUNCATED_FIRST20_CANONICAL": {
+      "description": "Parent canonical recipe ranking agreement at truncated-first-20",
+      "expected": "55.95% (tag_entropy x DEF-FULL-MAP)",
+      "observed": "Reproduced in parent EXP-INTEL-35445596324 result.json M4 at n=20",
+      "pass": "confirmed",
+      "evidence_ref": "EXP-INTEL-35445596324/result.json M4_recipe_canonical_ranking_agreement['20']"
+    },
+    "B2_NON_RECIPE_RANKING_AGREEMENT": {
+      "description": "Non-recipe pipeline ranking agreement on truncated-first-20",
+      "expected": "100% agreement for tag_entropy both definitions",
+      "observed": "All 6 feature x definition combinations preserve listing > detail ranking on truncated-first-20",
+      "pass": true,
+      "evidence_ref": "analysis_output.json non_recipe_truncated_first20.ranking_preserved"
+    },
+    "B4_PIPELINE_DISCRIMINATION": {
+      "description": "Non-recipe pipeline eta2 on truncated-first-20",
+      "expected": "Max eta2 >= 0.05",
+      "observed": "Max eta2 = 0.999645 (tag_entropy x DEF-FORM-ONLY), matching parent result",
+      "pass": true,
+      "evidence_ref": "analysis_output.json non_recipe_truncated_first20.max_eta2"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/analyze.py",
+      "sha256": "79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/analysis_output.json",
+      "sha256": "1ecf7ee501b2d13cb51461066bcaec446cff3b9a40f5968ed1ed835f095644d0",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "C3 DATA AVAILABILITY GATE FAILS: ALL 7 tasks have exactly 20 elements in locatable_sample. The raw data (EXP-INTEL-34782350557) was collected with locatable_sample truncated to first-20 DOM elements. Full DOM locatable_sample (n=21-82 per task) is NOT available in the existing raw evidence.",
+    "The locatable_elements counts in the metadata (82 for listing, 32 for detail, 21 for cart) represent the TOTAL number of locatable elements on the page, but the locatable_sample array was capped at 20 elements at collection time. These are distinct fields — locatable_sample is a per-element array with tag/role/ariaLabel/inForm/xywh, while locatable_elements is a scalar count.",
+    "On truncated-first-20 data (which is what IS available), baseline controls reproduce: PC1 all features eta2=1.0, NC1 hierarchy eta2=0.0, non-recipe pipeline max eta2=0.999645, ranking preserved for all 6 feature x definition combinations. This confirms the truncated-first-20 data is consistent with parent EXP-INTEL-35445596324 results.",
+    "The frozen experiment CANNOT proceed because the primary hypothesis concerns full DOM elements (n=21-82) and the data source only provides truncated-first-20 elements. No analysis of recipe sampling stability on full DOM is possible with existing data."
+  ],
+  "validity_notes": [
+    "BLOCKED status: The experiment is blocked by C3 gate failure (frozen decision_rule clause: NOT C3 -> BLOCKED). This is an infrastructure/data-availability failure, not a scientific negative.",
+    "The BLOCKED status means the hypothesis about full DOM ranking stability remains UNTESTED — neither supported nor falsified by this experiment.",
+    "The data truncation was established at collection time in EXP-INTEL-34782350557, not by any processing step in this experiment. The locatable_sample arrays are exactly 20 elements for all 7 tasks.",
+    "To unblock this experiment, full DOM locatable_sample must be re-collected from the Magento Docker container (am1n3e/webarena-verified-shopping:latest) with locatable_sample capturing ALL elements with bbox, not truncated-first-20.",
+    "Baseline controls on truncated-first-20 data are provided for reference context only. They confirm data consistency with the parent experiment but do NOT constitute evidence for or against the full DOM hypothesis."
+  ],
+  "unresolved": [
+    "Primary question UNRESOLVED: Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM elements with richer element diversity? Cannot be answered without full DOM data re-collection.",
+    "The data collection artifact (locatable_sample truncated to first-20) needs to be addressed in the substrate layer before this experiment can proceed. The exp347 collection script or the SPIDER browser substrate may need modification to capture all locatable elements.",
+    "The parent experiment's MIXED verdict (C6 FAIL at 55.95% truncated-first-20) remains the latest valid evidence. The full DOM question from the parent handoff is carried forward unresolved.",
+    "Cost of unblocking: Requires running the Magento Docker container and re-collecting DOM data for the 7 tasks with full locatable_sample. Estimated 5-10 minutes of browser automation."
+  ]
+}
