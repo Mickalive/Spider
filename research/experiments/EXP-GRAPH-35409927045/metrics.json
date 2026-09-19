@@ -1,0 +1,74 @@
+{
+  "pooled": {
+    "pearson_r": 0.0,
+    "ci_95_lower": 0.0,
+    "ci_95_upper": 1.0,
+    "tost_pass": false,
+    "n_samples": 60,
+    "fp_rate": 0.0,
+    "fp_count": 0,
+    "auth_detection_rate": 1.0,
+    "rate_304": 0.0,
+    "mean_behavioral_delta": 0.0,
+    "mean_structural_composite": 0.0,
+    "behavioral_stdev": 0.0,
+    "structural_stdev": 0.0
+  },
+  "per_endpoint": {
+    "https://api.github.com/users/octocat": {
+      "n": 20,
+      "r": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "bd_mean": 0.0,
+      "bd_stdev": 0.0,
+      "sc_mean": 0.0,
+      "sc_stdev": 0.0,
+      "has_variance": false
+    },
+    "https://jsonplaceholder.typicode.com/posts/1": {
+      "n": 20,
+      "r": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "bd_mean": 0.0,
+      "bd_stdev": 0.0,
+      "sc_mean": 0.0,
+      "sc_stdev": 0.0,
+      "has_variance": false
+    },
+    "https://api.github.com/repos/octocat/Hello-World": {
+      "n": 20,
+      "r": 0.0,
+      "ci_lower": 0.0,
+      "ci_upper": 1.0,
+      "bd_mean": 0.0,
+      "bd_stdev": 0.0,
+      "sc_mean": 0.0,
+      "sc_stdev": 0.0,
+      "has_variance": false
+    }
+  },
+  "decision_rule": {
+    "C1_behavioral_detection": {
+      "pass": true,
+      "observed": "auth_detection=1.0000"
+    },
+    "C2_variance": {
+      "pass": false,
+      "observed": "0/3 endpoints"
+    },
+    "C3_equivalence": {
+      "pass": false,
+      "observed": "pooled_r=0.0000, CI=[0.0000, 1.0000], upper=1.0000"
+    },
+    "C4_null_control": {
+      "pass": true,
+      "observed": "FP_rate=0.0000 (0/60)"
+    },
+    "C5_network_availability": {
+      "pass": true,
+      "observed": "3/3 endpoints reached"
+    }
+  }
+}

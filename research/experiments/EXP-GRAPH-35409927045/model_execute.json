@@ -1,10 +1,10 @@
 {
   "status": "success",
-  "model": "opencode/mimo-v2.5-free",
-  "attempt": 1,
+  "model": "opencode/ling-3.0-flash-fin-free",
+  "attempt": 7,
   "exit_code": 0,
   "category": "ok",
-  "github_run_id": "35422989833",
+  "github_run_id": "35434774233",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-19T05:39:42.972669+00:00"
+  "recorded_at": "2026-09-19T11:03:21.477012+00:00"
 }
