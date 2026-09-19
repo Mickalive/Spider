@@ -2035,6 +2035,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "This experiment is diagnostic for OECD/COINr pipeline ranking stability under sample-size variation, not a direct advancement of C-MEAS-VALID. Frozen decision_rule MIXED verdict: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (hierarchy anchor eta2=0.0), C3 PASS (pipeline max eta2=0.999645 at n=20), C4 PASS (natural ranking preserved for tag_entropy both definitions at n=20), C5 PASS (Spearman=1.0 monotonic improvement, +55.95pp), C6 FAIL (canonical recipe agreement 55.95% < 80% threshold). The ranking instability is partially sample-size-dependent but not fully resolved at maximum available n=20. Audit PASS confirms all recomputed metrics match producer. C-MEAS-VALID retains EXPERIMENTAL status from prior valid experiments (decompression-normalization sub-thread); this experiment does not advance or falsify the broader measurement-validity claim."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35462974425",
+        "lane": "intel",
+        "created_at": "2026-09-19T19:00:41.860908+00:00",
+        "decision": "BLOCKED \u2014 C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 \u2192 BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
+        "source_commit": "dd87835fc927ead19f6f3e31a7fb9951b954cdc4",
+        "claim_id": "C-MEAS-VALID",
+        "status": "HYPOTHESIS",
+        "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
       }
     ]
   },
@@ -2110,14 +2120,14 @@
       "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-INTEL-35445596324",
+      "experiment_id": "EXP-INTEL-35462974425",
       "lane": "intel",
-      "created_at": "2026-09-19T13:23:17.250983+00:00",
-      "decision": "MIXED",
-      "source_commit": "68db4301ae84b028e5b5aecab29415df7122ed8c",
+      "created_at": "2026-09-19T19:00:41.860908+00:00",
+      "decision": "BLOCKED \u2014 C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 \u2192 BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
+      "source_commit": "dd87835fc927ead19f6f3e31a7fb9951b954cdc4",
       "claim_id": "C-MEAS-VALID",
-      "status": "EXPERIMENTAL",
-      "reason": "This experiment is diagnostic for OECD/COINr pipeline ranking stability under sample-size variation, not a direct advancement of C-MEAS-VALID. Frozen decision_rule MIXED verdict: C1 PASS (raw features reproduce eta2=1.0), C2 PASS (hierarchy anchor eta2=0.0), C3 PASS (pipeline max eta2=0.999645 at n=20), C4 PASS (natural ranking preserved for tag_entropy both definitions at n=20), C5 PASS (Spearman=1.0 monotonic improvement, +55.95pp), C6 FAIL (canonical recipe agreement 55.95% < 80% threshold). The ranking instability is partially sample-size-dependent but not fully resolved at maximum available n=20. Audit PASS confirms all recomputed metrics match producer. C-MEAS-VALID retains EXPERIMENTAL status from prior valid experiments (decompression-normalization sub-thread); this experiment does not advance or falsify the broader measurement-validity claim."
+      "status": "HYPOTHESIS",
+      "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
     }
   }
 }

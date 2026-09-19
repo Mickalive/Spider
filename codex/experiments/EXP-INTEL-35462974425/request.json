@@ -1,0 +1,20 @@
+{
+  "base_sha": "de1caad11a36fcb29d3f7d3c8aa7279601eceab3",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T19:00:41.860908+00:00",
+  "experiment_id": "EXP-INTEL-35462974425",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Does the OECD/COINr pipeline preserve feature-weighted density ranking on full DOM elements (n=21-82 per task, not truncated-first-20) with richer element diversity \u2014 specifically, does canonical recipe ranking agreement reach the 80% threshold when the effective element count exceeds the 20-element truncation ceiling?",
+  "lane": "intel",
+  "origin_github_run_id": "35462974425",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35445596324",
+    "path": "research/experiments/EXP-INTEL-35445596324/handoff.json",
+    "sha256": "f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110"
+  },
+  "reason": "pulse",
+  "request_hash": "4cbb156d2d619c5ef1d8a977500ba812caadf23aa1db685573c732430da0f649",
+  "request_id": "ffb3683557cec638830c3311",
+  "schema_version": 1
+}
