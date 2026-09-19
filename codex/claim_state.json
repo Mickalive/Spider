@@ -1059,6 +1059,16 @@
         "reason": "C-FRESHNESS orthogonality confirmed at delta=0.15 under HTTP caching with proper 304 manipulation at n=480 (pooled r=0.0022, CI upper 0.0916 < 0.15, TOST PASS). This extends the parent's stochastic-mock confirmation (r=0.046, CI upper 0.135) to include operational HTTP caching semantics. However, claim ceiling is bounded to localhost Flask mock; no product promotion warranted. Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock. Status remains EXPERIMENTAL with strengthened evidence base."
       },
       {
+        "experiment_id": "EXP-GRAPH-35409927045",
+        "lane": "graph",
+        "created_at": "2026-09-19T00:36:38.861488+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 frozen decision_rule condition C2_variance fails (0/3 endpoints have std > 0 for either signal) and C3_equivalence fails (Pearson r undefined 0/0, CI [0.0, 1.0] uninformative). Both signals have zero variance across all 60 paired samples because the selected public API endpoints return deterministic identical responses (GitHub 403 rate-limited for all unauthenticated requests, JSONPlaceholder returns identical JSON every time). This is an environment ceiling (insufficient endpoint selection), not a scientific falsification of the C-FRESHNESS orthogonality hypothesis. C-FRESHNESS orthogonality at delta=0.15 remains confirmed ONLY under localhost mock (parent EXP-GRAPH-35389145821: pooled r=0.0022, CI upper 0.0916 < 0.15). No extension to real external APIs is established. Audit PASS confirms all recomputed metrics match producer; 8 required_fixes identified including endpoint redesign, sample size restoration, and baseline execution.",
+        "source_commit": "0aace1fdb4fd601fd666616fdb381a04692e93ad",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "No change to claim status. Orthogonality at delta=0.15 remains confirmed ONLY under localhost mock (EXP-GRAPH-35389145821: r=0.0022, CI upper 0.0916, TOST PASS, n=480, audit PASS). This experiment (EXP-GRAPH-35409927045, n=60) is MEASUREMENT_INVALID due to zero-variance endpoints and cannot extend, support, or falsify the orthogonality hypothesis on real external APIs. The inherited next question remains open: does orthogonality hold on real APIs with natural stochastic variation? Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock. Behavioral signals remain a validated detection dimension (TP=1.0, FP=0.0) but on localhost only. No product promotion warranted."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-35434772331",
         "lane": "product",
         "created_at": "2026-09-19T09:28:26.218475+00:00",

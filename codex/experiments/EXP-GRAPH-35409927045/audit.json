@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35409927045",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Restore prereg sample size N=160 per endpoint (480 total): run_efficient.py currently uses N_SAMPLES_PER_ENDPOINT=20 (60 total) which is 12.5% of prereg. At n=60 SE=0.1325 CI width ~0.51, underpowered even if variance existed; prereg adequacy requires >=480 and spec estimated_cost 600 requests. Increase samples or justify power analysis for delta=0.15.",
+    "Select real API endpoints with natural stochastic variation in both behavioral and structural signals: current endpoints (GitHub api.github.com/repos/octocat/Hello-World, /users/octocat, jsonplaceholder.typicode.com/posts/1) return deterministic identical JSON (jaccard 1.0, schema_diff 0.0) and constant status codes (200 vs 403) yielding zero variance in behavioral_delta and structural_composite across all 60 samples. Use APIs with timestamps/request-IDs/dynamic content and rate-limit or auth state that varies within experiment window, or construct production-like test server with CDN simulation as suggested in report.md section 8.",
+    "Handle GitHub rate limiting to achieve usable success rate: unauthenticated GitHub quota 60/hr causes 100% 403 on all 40 GitHub paired samples, preventing status/body variation and blocking HTTP caching test. Use authenticated requests (PAT) or choose higher-quota endpoints (httpbin, postman-echo, or self-hosted Flask with OAuth middleware) to obtain >=80% 2xx success as required by spec C5_network_availability and falsifier C5 threshold.",
+    "Restore HTTP caching manipulation: all 60 samples have has_etag=false and responded_304=false. Spec measurement_validity requires If-None-Match/ETag where supported (GitHub supports ETags but none observed due to 403) and prereg C5 check expected 304. Choose ETag-supporting endpoints or inject cacheable resource with ETag-SHA256 as in parent mock_server.py, else mark C5 sub-condition explicitly BLOCKED.",
+    "Implement missing frozen baselines: spec baselines B-RANDOM-NULL (1000 permutations r~=0) and B-MOCK-ANTI-NULL (artificially coupled |r|>>0.15) and measurement_validity permutation bootstrap were not executed. Add them to demonstrate measurement sensitivity as required by prereg sections 9.3-10 and spec baselines.",
+    "Fix C1_behavioral_detection validity: current auth_detection_rate=1.0 counts only invalid Bearer token 401 response (40/40), never tests valid token, and behavioral_delta variance is 0.0 so no auth-boundary shift in composite. Prereg 9.1 requires variance >0 when probing valid vs invalid auth with Wilson lower >0.75 on detection rate. Test both valid and invalid states or measure behavioral composite difference directly.",
+    "Align status/outcome with frozen decision_rule verdict_mapping: spec maps C1_OR_C2_OR_C4_FAIL => MEASUREMENT_INVALID and C3_FAIL_CI_UPPER_GTE_020 => FALSIFIES. Producer result.json uses status=COMPLETE outcome=INCONCLUSIVE with C2 FAIL and C3 FAIL. Correct to status=MEASUREMENT_INVALID and explicitly map C2/C3 failure per spec to avoid misclassifying measurement ceiling as negative result.",
+    "Adjust timing parameters to match prereg: prereg 2.3 requires 1-2s between requests and 15s timeout; run_efficient.py uses RATE_LIMIT_DELAY=0.5s and REQUEST_TIMEOUT=10s. Align or document deviation impact on rate-limit detection and timeout missing-data handling."
+  ],
+  "validity_findings": [
+    "C2_variance FAIL independently confirmed: 0/3 endpoints have std>0 for either signal. Recomputed from raw_evidence/experiment_data.json (n=60): behavioral_delta stdev=0.0 pooled and 0.0 per-endpoint (github_repos 20, github_users 20, jsonplaceholder 20), structural_composite stdev=0.0 pooled and per-endpoint. Behavioral composite baseline/current are constant per endpoint (GitHub 6.0/6.0, JSONPlaceholder 0.0/0.0), jaccard=1.0 schema_diff=0.0 for all 60. Meets spec falsifier OR behavioral detection fails but due to environment ceiling, not hypothesis.",
+    "C3_equivalence FAIL confirmed but mathematically undefined: pooled Pearson r is 0/0 (both signals constant). Producer reports r=0.0 CI [0.0,1.0] upper=1.0 tost_pass=false via pearson_r fallback (den_x==0 or den_y==0 => r=0 CI 0,1). Recomputation matches: recomputed_metrics pooled r=0 CI [0,1] upper 1.0. CI upper 1.0 >=0.15 (and >=0.20) would falsify per mapping if taken literally, but is uninformative. Correct interpretation per result.json validity_notes: CI is uninformative, does not support or falsify orthogonality.",
+    "C1_behavioral_detection PASS reported (auth_detection_rate=1.0) is vacuous: auth_status 401 on 40/40 GitHub probes confirms probe logic works (report.md 3.2), but behavioral_delta used for correlation has zero variance (mean 0.0) so auth challenge never couples to behavioral composite variation. Wilson lower CI not computed. Positive control validates network path, not signal variance. Downgrade to inconclusive — passes transport but fails to demonstrate discriminating behavioral signal variance.",
+    "C4_null_control PASS (FP 0.0 on 0/60 with behavioral_delta>0.5) is vacuous: with delta identically 0.0, FP=0 by construction. Recomputed fp_count=0 fp_rate=0.0. Control is mathematically forced when variance=0, not evidence of no false detection. Null control degeneracy matches determinism_check pattern in prior physics audits.",
+    "C5_network_availability PASS reported (3/3 reachable, network_errors=0) is technically correct at transport layer but API-level failure systematic: github_repos 20/20 403, github_users 20/20 403, jsonplaceholder 20/20 200. Falsifier condition 'network unavailability prevents measurement on >=2/3 endpoints' not triggered per transport, but 'real API variation could express effect' fails: 2/3 endpoints are rate-limited with no body/header variation, 1/3 is deterministic mock. Environment ceiling per instruction to test whether observed environment could express effect: CANNOT. This is infrastructure choice failure, not transient network failure, so BLOCKED not warranted but MEASUREMENT_INVALID is正确的 per spec C1_OR_C2_OR_C4_FAIL.",
+    "Sampling integrity violation: prereg 6.1/13 requires N_SAMPLES=160 per endpoint (480 total) and adequacy rule >=480. Provenance total_samples_collected 60 target 480. run_efficient.py:30 N_SAMPLES_PER_ENDPOINT=20 is 87.5% short. At n=60 Fisher SE=0.1325 vs parent SE 0.0457, minimum detectable |r| ~0.26 at 95% vs 0.09 at n=480. Even if variance existed, experiment would be severely underpowered for TOST at delta=0.15. GitHub rate limit (60/hr unauth) mirrors second validity_notes limitation.",
+    "Representation loss disclosed accurately by producer but not mitigated: spec measurement_validity requires behavioral from headers/status (rate_limit_remaining<10, auth 401/403, cache_freshness 304, status_class_score) and structural from JSON schema (Jaccard/schema_diff). All 60 have has_etag false, responded_304 false, rate_limit_det 0, cache_fresh 0, so behavioral_composite static; structural fields extracted correctly (extract_field_types) but identical. Producer validity_notes 6 items correctly identify endpoint suitability failure. No hidden leakage; error is omission of stochastic variation, not confound.",
+    "Missing baselines reduce discrimination evidence: B-RANDOM-NULL permutation test (1000 label permutations) not executed, so null CI width not empirically validated; B-MOCK-ANTI-NULL coupling test (behavioral=structural+noise |r|>0.3) not executed, so assay sensitivity not demonstrated. Spec expected these but no artifact. This weakens claim that measurement CAN detect correlation when present, though positive control on localhost parent (r=0.0022) already demonstrated sensitivity.",
+    "Provenance and freeze integrity PASS: freeze hashes for request.json 31aebca..., spec.json 821664..., prereg.md 2bce0b4... match recomputed SHA256; parent handoff SHA f0b1ac93... matches request.json parent_handoff; git base 6a31d43... preserved; execution_script run_efficient.py SHA 2df64f... matches artifact. Model ling-3.0-flash-fin-free and previous transient failure on jev-1.13 (attempt 6) documented. Artifacts list complete with stable paths.",
+    "Status mapping correction: producer uses result.json status COMPLETE outcome INCONCLUSIVE; per spec decision_rule verbs ALL_PASS=>SUPPORTS, C3_FAIL_CI_UPPER_GTE_020=>FALSIFIES, C1_OR_C2_OR_C4_FAIL=>MEASUREMENT_INVALID, C5_FAIL=>BLOCKED. With C2 FAIL and C3 FAIL (upper 1.0), correct frozen status is MEASUREMENT_INVALID (not COMPLETE) and outcome maps to MEASUREMENT_INVALID per report.md 4 Decision Rule Evaluation which already states verdict MEASUREMENT_INVALID. Producer's validity_notes and report.md correctly explain this, so mislabel does not constitute data falsification but requires audit correction to MEASUREMENT_INVALID.",
+    "No leakage or p-hacking detected: no selective reporting, no post-hoc threshold shift (delta remains 0.15), no sample exclusion beyond documented timeout/non-JSON rules (0 network_errors), no tuning of behavioral composite weights after seeing data. Producer explicitly states status reflects limitation not falsification, preserving RAW->OBSERVATION->DERIVED->INTERPRETATION chain."
+  ],
+  "baseline_findings": [
+    "B-MOCK-PARENT (EXP-GRAPH-35389145821): r=0.0022 CI [-0.0874,0.0916] upper 0.0916 <0.15 PASS at n=480 with HTTP caching 304 exercised (33.3%). This baseline remains established but not comparable: current real-API CI [0,1] upper 1.0 is uninformative, so transfer to real APIs is neither consistent nor inconsistent — untested. Producer correctly notes ceiling remains localhost Flask (report.md 5.4). Baseline strength is moderate-high (n=480, SE 0.045) vs current n=60 weak.",
+    "B-RANDOM-NULL (permutation): Spec expects randomly permute behavioral labels => r~=0 wide CI including 0. NOT EXECUTED in this run. Therefore baseline cannot confirm that wide CI is expected under null for this endpoint set. Missing execution is flagged in required_fixes; does not invalidate but leaves width of expected null unknown for real API.",
+    "B-MOCK-ANTI-NULL (artificial coupling): Spec expects set behavioral_composite=structural_composite+noise => |r|>>0.15 to show sensitivity. NOT EXECUTED (no httpbin anti-null endpoint despite prereg 9.3). Producer prereg lists anti-null on httpbin but run_efficient.py ENDPOINTS does not include httpbin; no evidence in experiment_data.json. Without this, assay ability to detect true correlation on these endpoints is unproven.",
+    "PC-AUTH-DETECTION positive_control: Expected variance >0 when probing valid vs invalid auth. Observed auth_detection 40/40 401 (100%) but behavioral_delta variance 0. Baseline exists in mock as TP=1.0 with variance, but real API PC shows detection of invalid token only, not discriminating shift. Control is weak baseline — demonstrates header probing works but not that composite tracks auth state change.",
+    "NC-STABLE-ENDPOINT null_control: Expected FP 0 on stable non-auth endpoint. Observed FP 0.0 on JSONPlaceholder (20/20 200 deterministic). Matches expectation but degenerate because stable endpoint chosen IS the test endpoint — FP 0 also holds for GitHub endpoints due to constant delta. Baseline is preserved but uninformative when entire design lacks variance.",
+    "External benchmark baselines not required by spec: No comparison to production API sample from prior literature; intel lane prior work (EXP-INTEL-33842055594 etc) not invoked. This is appropriate — spec restricts to mock parent and null/anti-null."
+  ],
+  "recomputed_metrics": {
+    "total_paired_samples": 60,
+    "target_paired_samples": 480,
+    "fraction_collected": 0.125,
+    "endpoints_reached": 3,
+    "network_errors": 0,
+    "pooled": {
+      "behavioral_delta_mean": 0.0,
+      "behavioral_delta_stdev": 0.0,
+      "structural_composite_mean": 0.0,
+      "structural_composite_stdev": 0.0,
+      "pearson_r": 0.0,
+      "fisher_z": 0.0,
+      "se_fisher_z_n60": 0.13245323570650439,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 1.0,
+      "ci_width": 1.0,
+      "tost_delta_015_pass": false,
+      "tost_upper_vs_delta": 1.0,
+      "auth_detection_rate": 1.0,
+      "auth_probe_n": 40,
+      "fp_rate": 0.0,
+      "fp_count": 0,
+      "rate_304": 0.0,
+      "has_etag_any": false,
+      "responded_304_any": false,
+      "note": "Both signals have zero variance => Pearson r is undefined (0/0). Reported r=0 CI [0,1] is placeholder for undefined, not evidence of orthogonality."
+    },
+    "per_endpoint": {
+      "github_repos": {
+        "url": "https://api.github.com/repos/octocat/Hello-World",
+        "n": 20,
+        "r": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "bd_mean": 0.0,
+        "bd_stdev": 0.0,
+        "sc_mean": 0.0,
+        "sc_stdev": 0.0,
+        "has_variance": false,
+        "status_codes": {
+          "200": 0,
+          "403": 20
+        },
+        "observation": "All 403 rate-limited; behavioral_composite 6.0 constant"
+      },
+      "github_users": {
+        "url": "https://api.github.com/users/octocat",
+        "n": 20,
+        "r": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "bd_mean": 0.0,
+        "bd_stdev": 0.0,
+        "sc_mean": 0.0,
+        "sc_stdev": 0.0,
+        "has_variance": false,
+        "status_codes": {
+          "403": 20
+        },
+        "observation": "All 403 rate-limited; behavioral_composite 6.0 constant"
+      },
+      "jsonplaceholder_posts": {
+        "url": "https://jsonplaceholder.typicode.com/posts/1",
+        "n": 20,
+        "r": 0.0,
+        "ci_lower": 0.0,
+        "ci_upper": 1.0,
+        "bd_mean": 0.0,
+        "bd_stdev": 0.0,
+        "sc_mean": 0.0,
+        "sc_stdev": 0.0,
+        "has_variance": false,
+        "status_codes": {
+          "200": 20
+        },
+        "observation": "Deterministic identical JSON; jaccard 1.0 structural 0.0 constant"
+      }
+    },
+    "controls_recomputed": {
+      "C1_behavioral_detection": {
+        "expected": "mean TP >=0.85 AND Wilson lower >0.75",
+        "observed_auth_detection_rate": 1.0,
+        "observed_behavioral_variance": 0.0,
+        "pass_reported": true,
+        "pass_independent": "PARTIAL - transport probe passes but composite variance 0 fails spirit of control; recomputed as vacuous pass"
+      },
+      "C2_variance": {
+        "expected": ">=3/3 endpoints have std>0 for both signals (spec) / >=2/3 in provenance implementation",
+        "observed": "0/3",
+        "pass": false
+      },
+      "C3_equivalence": {
+        "expected": "95% CI upper <0.15 delta=0.15 TOST",
+        "observed_ci_upper": 1.0,
+        "observed_r_undefined": true,
+        "pass": false
+      },
+      "C4_null_control": {
+        "expected": "FP =0.0",
+        "observed_fp_rate": 0.0,
+        "pass_reported": true,
+        "pass_independent": "vacuous - constant signal guarantees FP 0"
+      },
+      "C5_network_availability": {
+        "expected": ">=2/3 reachable with >=80% success",
+        "observed": "3/3 reachable transport 0 network errors but GitHub 40/40 403 (API-level rate limited) and no ETag/304",
+        "pass_reported": true,
+        "pass_independent": "transport pass, API-usability fail"
+      }
+    },
+    "power_analysis": {
+      "se_at_n60_r0": 0.13245323570650439,
+      "ci_half_width_at_n60": 0.2596,
+      "min_detectable_r_at_n60_95": 0.2596,
+      "se_at_n480_r0": 0.045766,
+      "min_detectable_r_at_n480_95": 0.0895,
+      "parent_se_n480": 0.04578685464956301
+    }
+  },
+  "claim_ceiling": "C-FRESHNESS behavioral-structural orthogonality at delta=0.15 remains confirmed ONLY under localhost stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory TTL 0.5s + jitter 1-5ms + HS256/RS256 JWT + HTTP caching (Cache-Control max-age=5/no-store, ETag-SHA256, If-None-Match->304 at 33.3%) at n=480 (EXP-GRAPH-35389145821 pooled r=0.0022 CI [-0.087,0.092] upper 0.092<0.15). This experiment (EXP-GRAPH-35409927045, n=60, r undefined CI [0,1]) provides NO extension to real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC or stochastic SPA frontends. Maximum justified claim from this packet is MEASUREMENT_INVALID for real-API orthogonality: the tested stable public endpoints (GitHub unauth 403, JSONPlaceholder deterministic 200) have zero behavioral and structural variance and cannot express the effect, so orthogonality is untested, not falsified. No product promotion to VALIDATED or PRODUCT_CORE warranted from this evidence; claim status remains EXPERIMENTAL bounded to mock.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35409927045/request.json sha256 31aebca73775d5da7c520373006c1bcb32c0ed686a05e656553b34a011683ef8",
+    "research/experiments/EXP-GRAPH-35409927045/spec.json sha256 821664cb788de77e4a9dd43d454b950048eb0564b7f292162d9ffaa738af204e",
+    "research/experiments/EXP-GRAPH-35409927045/prereg.md sha256 2bce0b4675321716fc1db138cecc65a7bf4c0cebd32836b3a75cdfa2a1fff0df",
+    "research/experiments/EXP-GRAPH-35409927045/freeze.json sha256 ad2ae41a4386edae20784d34bf9735f8a3bbfff068899f9388a105f479146240",
+    "research/experiments/EXP-GRAPH-35409927045/result.json sha256 508bba25fecf1fc96fb4094b59f480bf7673c0f0237661e16b8a95fb3a004aa0",
+    "research/experiments/EXP-GRAPH-35409927045/report.md sha256 fae2c42a93671c69536781113972a69561b14e2bf64513cc322e5677241476ef",
+    "research/experiments/EXP-GRAPH-35409927045/provenance.json sha256 49e2342b508086df87cea64fdf5db0a26ea9739b99c1f9d8e5a14e2d03f3cd55",
+    "research/experiments/EXP-GRAPH-35409927045/metrics.json sha256 6493f5ebae0cbc64449995e686aa7da8d4433664088970ef03464a5af01c06b4",
+    "research/experiments/EXP-GRAPH-35409927045/raw_evidence/experiment_data.json sha256 9ae6d117b6b830217c7da431f343c71a6a43c50705d661df7176a2ab79b0eb70 n=60",
+    "research/experiments/EXP-GRAPH-35409927045/raw_evidence/network_errors.json sha256 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945 empty",
+    "research/experiments/EXP-GRAPH-35409927045/run_efficient.py sha256 2df64f846a5c22831bde45b0234b232d76e43623bdb11fb068d54bd563a88f40 N=20 per endpoint",
+    "research/experiments/EXP-GRAPH-35389145821/handoff.json sha256 f0b1ac93f5522b7d4889fccf651f70c0169f7625f28f04a8adefe450eb116f9a parent PASS",
+    "research/experiments/EXP-GRAPH-35389145821/result.json pooled r=0.0022 CI upper 0.0916 PASS",
+    "codex/claim_state.json:C-FRESHNESS EXPERIMENTAL history",
+    "codex/index.json EXP-GRAPH-35389145821 decision PASS"
+  ],
+  "unresolved": [
+    "Whether behavioral-structural orthogonality holds on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC and stochastic SPA frontends remains untested — the inherited next_question from EXP-GRAPH-35389145821 is still open (result.json unresolved 1-5).",
+    "Suitable endpoint selection for real-API test: which public or production-like testbed provides natural variation in both rate-limit/auth/cache headers and response schema (timestamps, request IDs, dynamic content) at sufficient sampling rate without 60/hr rate-limit blocking.",
+    "Whether CDN caching creates correlated staleness signatures (behavioral cache headers + structural body changes) as hypothesized in prereg 11 remains unknown because no ETag/304 was exercised.",
+    "Sample size adequacy for TOST at delta=0.15 on real APIs: required n ~350-480 at SE 0.045-0.05 is established, but at n=60 CI width ~0.51 is too wide; larger n=1000 per spec MIXED guidance not tested.",
+    "Correct interpretation of C1/C4 when variance is zero: is FP=0 and auth 401 detection sufficient positive/null controls when composite delta is constant, or must controls require variance demonstration (Wilson CI) to be non-vacuous.",
+    "Whether unauthenticated 403 rate-limit response should count as network success for C5_network_availability or as measurement-unavailable (would shift verdict toward BLOCKED per spec falsifier clause)."
+  ]
+}
