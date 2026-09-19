@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35456070379",
+  "lane": "graph",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix B-FLASK-ONLY baseline degeneracy: flask_only_server.py has zero behavioral variance (all behavioral_delta=0, std=0, n=480) because it implements no auth/token validation. Fix by adding simple token_state variation (valid/expired via query param or header) so behavioral_delta varies, allowing pearson r to be defined. Current B-FLASK-ONLY r=NaN marked C6_baseline_flask_only PASS trivially is invalid; prereg 4.2 and spec measurement_validity #7 require B-FLASK-ONLY baseline with genuine behavioral variation and same headers-only extraction.",
+    "Fix residual V2 shared-variable confound in structural signal: structural_composite includes request_id_entropy and dynamic_content_hash derived from request_id. Valid-token responses use UUID (36-char) for request_id, expired-token 401 responses use secrets.token_hex(8) (16-hex) fallback, and 304 responses use empty-body fallback. Recomputed: valid entropy mean 3.542 vs expired mean 3.233, t=13.40 p=2.7e-34; valid structural mean 0.4056 vs expired 0.3539, t=3.86 p=0.00013. This creates definitional non-independence. Fix by using single deterministic request_id generator (e.g., UUID v4 for all paths) independent of status code, or exclude request_id_entropy/dynamic hash from structural signal and use only ETag/Cache-Control variation, or include only success-path 2xx request_ids with identical generation.",
+    "Correct C5_304_exercised control definition: spec.json and prereg 7.1 C5 require symmetric heterogeneity check (|r_cache_enabled - r_cache_disabled| < 2*SE), not 304 rate >=10%. Producer implements rate check (observed 0.3167) and reports PASS, but per-cache r values are -0.2696 vs -0.0914 (diff 0.178) with SE 0.0458, 2*SE=0.0916, so diff exceeds threshold. Align control to frozen prereg or amend spec explicitly.",
+    "Correct outcome labeling and C3/C4 interpretation: producer outcome MIXED with C3 test 'CI upper <0.15' but implemented full equivalence (both bounds within +/-0.15). With recomputed pooled r=-0.1737, CI [-0.259,-0.085], lower bound -0.259 < -0.15 and abs(r)=0.173 >0.15, so orthogonality at delta=0.15 is REJECTED per spec falsifier (1). Report.md claim 'B-FLASK-ONLY r=nan supports hypothesis' is invalid; NaN is uninformative, not support. Outcome should be FALSIFIES/REJECTED for testbed, with C6 indeterminate.",
+    "Correct null_control reporting: result.json metrics null_control_mean=3.5 std=3.5 reflects behavioral_delta, not structural signal on cache-disabled responses. Spec null_control requires structural invariance check. Fix provenance and validity_notes to report actual structural std per cache mode."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_residual_request_id_confound",
+      "severity": "high",
+      "finding": "Headers-only correction eliminated V1 error-body hash confound (r=0.375 parent) but introduced V2 request_id-entropy confound. Structural signal recomputed differs by token state: 0.4056 (valid) vs 0.3539 (expired), p=0.00013. Entropy difference 3.542 vs 3.233, p=2.7e-34, explains pooled negative correlation r=-0.1737 (p=0.00013). Extraction violates spec measurement_validity #8 (no shared variables between domains).",
+      "evidence": "raw_evidence/experiment_data.json: valid_struct mean 0.4056, expired 0.3539; recomputed pearson r=-0.173677 CI [-0.259,-0.085]; run_experiment.py:compute_structural_composite_headers_only uses request_id_entropy from response-dependent request_id source; testbed_server.py:_make_unauthorized_response vs api_user_profile generate request_id differently"
+    },
+    {
+      "id": "V2_baseline_B_FLASK_ONLY_degenerate",
+      "severity": "high",
+      "finding": "B-FLASK-ONLY baseline measurement invalid: behavioral_delta constant 0.0 for all 480 samples (std=0 => pearson r=NaN). Producer marks C6 PASS trivially (flask_behavioral_std==0 => c6_pass True). No inference about infrastructure irrelevance is justified; decision_rule C6 cannot be evaluated.",
+      "evidence": "result.json: metrics.pearson_r_pooled_flask_only=NaN, controls.C6_baseline_flask_only observed_r_flask=NaN pass=true; recomputed flask_b std=0.0 mean=0.0, flask_s std=0.1527; run_experiment.py:run_flask_only_sample never varies token_validation_failure (always 0)"
+    },
+    {
+      "id": "V3_target_split_representation",
+      "severity": "medium",
+      "finding": "Target/split integrity OK: n=480 paired samples collected (160 per endpoint x 3 endpoints, 60 per condition x 8 conditions). Sampling covers 3 endpoints x 2 cache modes x 2 auth states as prereg 5. No missing data (all samples status OK). Representation bounded to local Flask testbed, not distributed production (acknowledged in validity_notes).",
+      "evidence": "result.json n_paired_samples_testbed=480 n_endpoints=3 n_conditions=8; raw_evidence/experiment_data.json per_condition_data 24 conditions each n_valid=20"
+    },
+    {
+      "id": "V4_control_C1_C2_valid",
+      "severity": "low",
+      "finding": "C1 behavioral TP and C2 variance controls pass as reported and recomputed: TP=1.0 TN=1.0 across 12 expired /12 valid conditions; 3/3 endpoints have behavioral_std=3.5 and structural_std 0.064-0.094 >0. Behavioral signal correctly discriminates expired vs valid via 401 vs 200/304.",
+      "evidence": "result.json controls.C1_behavioral_tp pass true, C2_variance 3/3; recomputed: valid_bd {0.0}, expired_bd {7.0}, per_endpoint std verified"
+    },
+    {
+      "id": "V5_control_C3_C4_falsified",
+      "severity": "high",
+      "finding": "C3 equivalence and C4 TOST correctly fail on recomputation: pooled |r|=0.1737 >0.15, CI [-0.259,-0.085] not within +/-0.15, TOST p_upper=4.9e-13 pass but p_lower=0.702 fail => equivalence FAIL. Per-endpoint heterogeneity strong: /api/user/profile r=-0.402 p=1.3e-07, /api/data/list r=-0.515 p=3e-12, /api/session/status r=-0.192 p=0.015. Orthogonality at delta=0.15 falsified on this testbed.",
+      "evidence": "result.json metrics.pearson_r_pooled_testbed -0.1737 ci_upper -0.085; recomputed pearsonr r=-0.173677 p=1.31e-04, fisher CI [-0.259,-0.085], TOST p_lower 0.702; per_endpoint_r_testbed verified exactly"
+    },
+    {
+      "id": "V6_control_C5_misdefined",
+      "severity": "medium",
+      "finding": "C5 304 manipulation check implemented as rate >=10% (0.3167) but prereg requires symmetric heterogeneity |r_ce - r_cd| <2*SE. Recomputed per-cache r -0.2696 vs -0.0914 diff 0.178 >2*SE 0.0916, so prereg C5 would FAIL, indicating cache mode heterogeneity not within sampling noise. Producer PASS is based on non-preregistered threshold.",
+      "evidence": "result.json controls.C5_304_exercised threshold '304 rate >=10%' observed 0.3167; recomputed per_cache_r cache_enabled -0.2696 cache_disabled -0.0914, SE 0.04578, spec.json decision_rule C5 vs prereg 7.1 mismatch"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "expected": "|r| <0.15, similar to localhost mock",
+      "observed": "Producer pooled r=-0.1737 (|r|=0.1737) exceeds 0.15; prior localhost mocks r=0.0022 and 0.0463 passed. This testbed shows stronger non-orthogonality, but residual V1 confound means not clean infrastructure effect.",
+      "verdict": "FAIL - does not match baseline",
+      "evidence": "result.json pearson_r_pooled_testbed -0.1737 vs spec baselines r=0.0022, r=0.0463"
+    },
+    {
+      "id": "B-FLASK-ONLY",
+      "expected": "|r| <0.15, confirming orthogonality persists without infrastructure",
+      "observed": "r=NaN (|r|=NaN) due to zero behavioral variance; not comparable. No evidence for B-FLASK-ONLY expectation. Cannot discriminate infrastructure-induced vs definition-induced correlation.",
+      "verdict": "MEASUREMENT_INVALID - baseline degenerate",
+      "evidence": "result.json pearson_r_pooled_flask_only NaN, controls.C6_baseline_flask_only pass true trivially, recomputed flask_b std 0.0"
+    },
+    {
+      "id": "B-ERROR-BODY-INCLUDED",
+      "expected": "|r| >=0.15 (negative control, reproduces parent confound r=0.375)",
+      "observed": "Not executed in this experiment; parent confound described as eliminated by headers-only extraction. No reproduction run included, so negative control unverified in this packet.",
+      "verdict": "UNKNOWN - not tested",
+      "evidence": "spec.json baselines B-ERROR-BODY-INCLUDED, provenance.json correction_from_parent, no metric for error-body-included in result.json"
+    }
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled_testbed": -0.1736773717786404,
+    "abs_r_pooled_testbed": 0.1736773717786404,
+    "ci_lower_95_testbed": -0.25915109140491477,
+    "ci_upper_95_testbed": -0.08550440331604539,
+    "ci_within_equivalence_0_15": false,
+    "tost_p_upper_at_0_15": 4.911215248018197e-13,
+    "tost_p_lower_at_0_15": 0.7023108590883979,
+    "tost_pass_at_0_15": false,
+    "pearson_r_pooled_flask_only": null,
+    "abs_r_pooled_flask_only": null,
+    "flask_behavioral_std": 0.0,
+    "flask_structural_std": 0.15270473845667706,
+    "per_endpoint_r_testbed": {
+      "/api/user/profile": {"r": -0.40241401382308534, "p": 1.3275006596893625e-07, "n": 160},
+      "/api/data/list": {"r": -0.515426635718929, "p": 3.0775994502913205e-12, "n": 160},
+      "/api/session/status": {"r": -0.19158666046967548, "p": 0.015227402348348245, "n": 160}
+    },
+    "per_cache_r_testbed": {"cache_enabled": -0.26963460782334725, "cache_disabled": -0.09138587229114128},
+    "valid_vs_expired_structural_diff": {"valid_mean": 0.405610951, "expired_mean": 0.353952632, "t": 3.8557, "p": 0.0001312746},
+    "valid_vs_expired_entropy_diff": {"valid_mean": 3.542294, "expired_mean": 3.232917, "t": 13.404458, "p": 2.72320149931973e-34},
+    "n_paired_samples_testbed": 480,
+    "n_paired_samples_flask": 480,
+    "status_code_distribution": {"401": 240, "200": 164, "304": 76},
+    "304_rate_cache_enabled": 0.31666666666666665,
+    "recomputation_match_producer": true
+  },
+  "claim_ceiling": "C-FRESHNESS orthogonality at delta=0.15 is FALSIFIED on this production-like local testbed (Flask 3.1.3, PyJWT RS256, SQLite WAL, CDN ETag/Cache-Control, jitter 10-100ms, n=480) with the implemented headers-only structural definition: pooled r=-0.1737 (|r|=0.1737), 95% CI [-0.259,-0.085] excludes 0 and exceeds equivalence bounds, per-endpoint r up to -0.51. However the falsification is CONFOUNDED by definitional leakage (request_id source differs by token state) and B-FLASK-ONLY baseline is invalid (NaN), so no inference is justified that infrastructure (CDN/OAuth/dynamic content) per se breaks orthogonality, nor that headers-only in principle fails. Maximum justified ceiling: on this specific local testbed and this specific flawed headers-only implementation, orthogonality does NOT hold; the prior localhost-mock confirmation (r=0.0022-0.046, EXP-GRAPH-35389145821) remains the only clean baseline. No advancement of C-FRESHNESS toward VALIDATED; status remains EXPERIMENTAL bounded to stochastic mock. Do not promote to Product Core.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35456070379/result.json",
+    "research/experiments/EXP-GRAPH-35456070379/spec.json",
+    "research/experiments/EXP-GRAPH-35456070379/prereg.md",
+    "research/experiments/EXP-GRAPH-35456070379/report.md",
+    "research/experiments/EXP-GRAPH-35456070379/provenance.json",
+    "research/experiments/EXP-GRAPH-35456070379/raw_evidence/experiment_data.json",
+    "research/experiments/EXP-GRAPH-35456070379/testbed_server.py",
+    "research/experiments/EXP-GRAPH-35456070379/flask_only_server.py",
+    "research/experiments/EXP-GRAPH-35456070379/run_experiment.py",
+    "codex/claim_state.json"
+  ],
+  "unresolved": [
+    "Whether orthogonality would hold with a truly independent headers-only definition (single request_id generator for all status codes, or ETag/Cache-Control only) - requires re-run after V1 fix",
+    "Whether B-FLASK-ONLY baseline shows |r|<0.15 when given genuine behavioral variation - requires rebuilding baseline with token-state variation",
+    "Whether the observed -0.17 correlation is driven entirely by request_id entropy bifurcation vs residual infrastructure (CDN cache invalidation, OAuth) - requires ablation isolating entropy component",
+    "Whether per-cache heterogeneity (-0.269 vs -0.091) is sampling noise or systematic cache-behavior interaction - requires larger n or stratified test",
+    "Generalization to distributed production, non-Flask frameworks, concurrent load, and real-world structural signal formulations remains untested"
+  ]
+}
