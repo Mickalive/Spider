@@ -8,7 +8,7 @@
   "next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, severity-weighted scoring, TOST delta=0.15) be measured on a non-mock production-like substrate with real HTTP endpoints exhibiting natural stochastic variation (real OAuth/OIDC middleware, CDN caching, network RTT, database-backed sessions), and does orthogonality survive at delta=0.15 on that substrate?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-19T16:56:34.485817+00:00",
+  "updated_at": "2026-09-19T19:00:41.246185+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "0db18ccaca0210c28dd4a231c489b96d0881106b68cabadec6f9cf0c43ed7760",
   "same_failure_count": 1,
