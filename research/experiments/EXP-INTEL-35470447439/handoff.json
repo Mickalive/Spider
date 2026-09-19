@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35470447439",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Can Docker image am1n3e/webarena-verified-shopping:latest be made available, enabling the frozen analyze.py to re-collect full-DOM locatable_sample (all elements with bbox, n=21-82 per task) for the 7 existing tasks and evaluate whether canonical recipe ranking agreement crosses the 80% threshold?",
+  "why_next": "Second consecutive BLOCKED run on identical infrastructure failure. The frozen experiment design is complete and ready for re-execution. Docker substrate availability is the sole blocking action. The full-DOM hypothesis remains the single highest-information question for the MIXED program: either outcome (>=80% agreement unblocks recipe density, <80% closes it) changes a concrete product decision.",
+  "carry_forward": {
+    "established": [
+      "Sample-size effect on ranking agreement is REAL and MONOTONIC: canonical recipe tag_entropy x DEF-FULL-MAP agreement improves from 0% at n=5/10 to 50% at n=15 to 56% at n=20 (Spearman=1.0, +55.95pp, C5 PASS). More elements per definition help stabilize rankings (EXP-INTEL-35445596324 M4/M9/M10, audit PASS)",
+      "Ranking agreement PLATEAUS below 80% at maximum available sample size: canonical 55.95% at n=20, bootstrap 57.1% +/- 49.5%. Ranking not stable at n=20 (EXP-INTEL-35445596324 M4/M8, audit PASS)",
+      "Non-recipe pipeline ranking requires >=15 elements to preserve listing > detail for tag_entropy. Phase transition around n=15 (EXP-INTEL-35445596324 B2 controls)",
+      "OECD/COINr pipeline preserves between-type discrimination (max eta2 0.999645 at n=20) and listing > detail ranking for tag_entropy at n>=15 for both DEF-FULL-MAP and DEF-FORM-ONLY without recipe sampling (EXP-INTEL-35445596324 M3/M4, inherited from EXP-INTEL-35434771791)",
+      "Per-task recipe achieves 78.65% ranking agreement at n=20 vs canonical 55.95% but with lower eta2 (0.366 vs 0.921). Independent sampling captures diverse discriminative elements (EXP-INTEL-35445596324 M4 vs M5, audit VF7)",
+      "Raw features retain perfect task-type discrimination before pipeline: all three features eta2=1.0, within-type std=0.0 (EXP-INTEL-35445596324 PC1, audit PASS)",
+      "Data truncation root cause confirmed: locatable_sample truncated to first-20 at collection time in EXP-INTEL-34782350557, not downstream. Metadata locatable_elements correctly reports full count (82/32/21) but locatable_sample array capped at 20 (EXP-INTEL-35462974425 VF2, analysis_output.json c3_gate)"
+    ],
+    "rejected": [
+      "Ranking instability is PURELY a sample-size artifact within truncated-first-20 range -- REJECTED: plateaus at 56% at n=20, well below 80% threshold (EXP-INTEL-35445596324 C6 FAIL)",
+      "OECD/COINr pipeline structure itself destroys between-type variance -- REJECTED (pipeline preserves discrimination eta2 0.964-0.999, inherited from EXP-INTEL-35434771791)"
+    ],
+    "unknown": [
+      "Does ranking stabilize at full DOM (n=21-82) when more diverse elements per definition are available? n=15->n=20 plateau (+6pp) suggests diminishing returns but does not rule out crossing 80% -- UNTESTED due to Docker unavailability",
+      "Does per-task recipe achieve >=80% at full DOM? Current 78.65% at n=20 tantalizingly close but not tested at full DOM -- UNTESTED",
+      "Cross-site generalization of the sample-size effect beyond single Magento Docker site",
+      "What is the full per-task recipe eta2 distribution and ranking preservation for all feature x definition combos at full DOM with 10x1000 sampling?",
+      "Can the Docker image am1n3e/webarena-verified-shopping:latest be made available (pulled, built, cached, or replaced)?"
+    ],
+    "do_not_assume": [
+      "That n=20 result generalizes to full DOM n=21-82 -- ranking stability at n>20 is UNKNOWN",
+      "That recipe-based density is safe for Product Core promotion -- canonical agreement 55.95% at n=20 with bootstrap CI ~0-100%; product lane must use non-recipe density only",
+      "That Spearman correlation on 4 points (n=5/10/15/20) with tied values provides strong statistical evidence -- small sample limits power",
+      "That first-n DOM-position subsampling represents random element subsets -- monotonic improvement may partially reflect DOM-sequential structure",
+      "That 31x canonical/weighted density ratio (EXP-INTEL-35264637598) is validated on full DOM -- only tested on truncated-first-20",
+      "That per-task recipe is viable alternative to canonical -- higher agreement (78.65%) but much lower eta2 (0.366 vs 0.921) and below 80%",
+      "That this BLOCKED experiment provides evidence for or against full-DOM hypothesis -- it provides NONE"
+    ]
+  },
+  "dependencies": [
+    "Docker image: am1n3e/webarena-verified-shopping:latest -- Magento container for full-DOM re-collection (sole blocking action)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 -- truncated-first-20 raw data (7 tasks)",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 -- frozen analysis script ready for full-DOM data",
+    "research/experiments/EXP-INTEL-35445596324/handoff.json sha256 f840e4c217589d9f2492ad8941b3725ee24d5ede8262156bf8d82e3507f31110 -- parent carry_forward inherited unchanged"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35470447439/result.json status BLOCKED outcome NOT_APPLICABLE",
+    "research/experiments/EXP-INTEL-35470447439/audit.json status BLOCKED producer_claim_supported=false",
+    "research/experiments/EXP-INTEL-35470447439/provenance.json infrastructure_failure substrate_unavailable retryable true",
+    "research/experiments/EXP-INTEL-35462974425/handoff.json sha256 e2e33ed0a2e50da5eb3a587fe8a487b18c9bcfc06c6cd64963616961bd712670",
+    "research/experiments/EXP-INTEL-35445596324/result.json M4 0.5595 M5 0.7865",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050"
+  ],
+  "recommended_action": "Make Docker image am1n3e/webarena-verified-shopping:latest available in the execution environment (pull from registry, build from Dockerfile, restore from cache, or substitute alternative Magento container with identical DOM structure). Then re-run this same frozen experiment: the collection script removes the <20 cap from MEASURE_JS to collect ALL elements with bbox into locatable_sample, and the frozen analyze.py evaluates C1-C7. Estimated cost: 5-10 minutes browser automation + <60 seconds offline analysis. This unblocks the single highest-information question for the MIXED program."
+}
