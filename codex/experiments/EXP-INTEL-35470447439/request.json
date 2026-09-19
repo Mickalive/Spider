@@ -1,0 +1,20 @@
+{
+  "base_sha": "cce441dd25bba9649a80c2073d41eb2fc57e0a7f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T21:27:18.243275+00:00",
+  "experiment_id": "EXP-INTEL-35470447439",
+  "inherited_last_verdict": "BLOCKED \u2014 C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 \u2192 BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification.",
+  "inherited_next_question": "Can full DOM locatable_sample (all elements with bbox, n=21-82 per task) be re-collected from the Magento Docker container (am1n3e/webarena-verified-shopping:latest) for the 7 existing tasks, unblocking the frozen experiment and testing whether recipe ranking agreement crosses the 80% threshold at full element diversity?",
+  "lane": "intel",
+  "origin_github_run_id": "35470447439",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35462974425",
+    "path": "research/experiments/EXP-INTEL-35462974425/handoff.json",
+    "sha256": "e2e33ed0a2e50da5eb3a587fe8a487b18c9bcfc06c6cd64963616961bd712670"
+  },
+  "reason": "pulse",
+  "request_hash": "b6830c2a9499d9d1a5b1dd1bcbe0a64445cb0dd2a6370a53244503a23b0b7822",
+  "request_id": "e9c9dfbf92a50638959dca57",
+  "schema_version": 1
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35470447439",
+  "lane": "intel",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "HYPOTHESIS",
+      "reason": "No change. BLOCKED run provides zero new evidence: Docker substrate unavailable, no full-DOM data collected, no decision gates C1-C7 evaluated. C-MEAS-VALID remains HYPOTHESIS at parent ceiling. The full-DOM recipe ranking stability hypothesis (canonical agreement >=80% at n=21-82) is UNTESTED."
+    }
+  ],
+  "product_action": "NONE. Infrastructure failure, not scientific measurement. Product lane continues using non-recipe density only. No product promotion authorized.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can Docker image am1n3e/webarena-verified-shopping:latest be made available, enabling the frozen analyze.py to re-collect full-DOM locatable_sample (all elements with bbox, n=21-82 per task) for the 7 existing tasks and evaluate whether canonical recipe ranking agreement crosses the 80% threshold?",
+  "reason": "Second consecutive BLOCKED run on identical infrastructure failure (Docker substrate unavailability). Frozen design is complete and validated (analyze.py sha256 79721d46, decision_rule C1-C7, baselines B1-B5). Docker image am1n3e/webarena-verified-shopping:latest not present locally, pull timed out 120s. No data collected. Full-DOM hypothesis remains the single highest-information question for the MIXED program: >=80% canonical agreement unblocks recipe density; <80% permanently closes it. The frozen experiment is ready for re-execution once substrate becomes available. No scientific evidence accumulated or lost in this BLOCKED run.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35470447439/result.json status BLOCKED outcome NOT_APPLICABLE metrics M1-M7 null",
+    "research/experiments/EXP-INTEL-35470447439/audit.json status BLOCKED producer_claim_supported=false VF1-VF7",
+    "research/experiments/EXP-INTEL-35470447439/provenance.json execution_log step 4 BLOCKED infrastructure_failure substrate_unavailable retryable true",
+    "research/experiments/EXP-INTEL-35470447439/spec.json frozen decision_rule C3 gate NOT C3 -> BLOCKED",
+    "research/experiments/EXP-INTEL-35470447439/report.md Status BLOCKED Infrastructure Failure",
+    "research/experiments/EXP-INTEL-35462974425/handoff.json sha256 e2e33ed0a2e50da5eb3a587fe8a487b18c9bcfc06c6cd64963616961bd712670 parent BLOCKED identical root cause",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 truncated-first-20 raw data",
+    "research/experiments/EXP-INTEL-35445596324/result.json M4 0.5595 canonical M5 0.7865 per-task latest valid evidence",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 frozen analysis code ready for full-DOM"
+  ]
+}

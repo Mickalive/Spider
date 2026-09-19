@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35470449310",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "V1 request_id entropy confound and V2 B-FLASK-ONLY degeneracy are verified FIXED (audit V1 PASS, V2 PASS). However, the experiment introduces a NEW measurement validity gap (V3): 304 cache-hit responses use fixed 0.2 structural composite while non-304 uses sha256(request_id) hash, and 304 occurs only for valid tokens (76 valid vs 0 expired), creating token-state-dependent structural construction that violates spec measurement_validity #8. Additionally, B-PARENT-CONFOUND-REPRODUCTION negative control was never executed, and C3/C4 decision logic deviates from frozen one-sided spec (audit V5). Under frozen one-sided rule, C3 would PASS (CI upper 0.0018 < 0.15) and C4 would PASS (TOST p_upper 8.88e-08 < 0.05); only C5 heterogeneity would fail. Under strict two-sided interpretation, C3/C4 FAIL. Pooled |r|=0.088 < 0.15 is directionally consistent with orthogonality, but the 304 coupling and missing baseline prevent a clean scientific conclusion. B-FLASK-ONLY baseline confirms orthogonality persists without infrastructure (r=0.026, TOST PASS at delta=0.15). C-FRESHNESS remains EXPERIMENTAL bounded to localhost mock; no advancement toward VALIDATED or PRODUCT_CORE. Product parallel-channel architecture NOT justified for cache-enabled endpoints at delta=0.15 pending a clean re-run with 304 coupling eliminated and B-PARENT baseline executed."
+    }
+  ],
+  "product_action": "No product action. The experiment is MEASUREMENT_INVALID due to V3 304 cache-hit coupling, missing B-PARENT baseline, and C3/C4 decision-rule deviation. C-FRESHNESS status remains EXPERIMENTAL bounded to localhost stochastic mock (EXP-GRAPH-35353011131 r=0.046, EXP-GRAPH-35389145821 r=0.0022, EXP-PRODUCT-35445596342 r=-0.026). No parallel-channel architecture deployment authorized. No fused classifier pivot required either — the pooled |r|=0.088 and B-FLASK-ONLY r=0.026 are directionally favorable.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the 304 cache-hit structural coupling be eliminated (e.g., by excluding 304 responses from pooled correlation, or by using identical hash-based construction for 304 responses), and does the B-PARENT-CONFOUND-REPRODUCTION baseline confirm the parent V1 entropy confound was genuine — yielding a clean MEASUREMENT_INVALID or CONFIRMED verdict at delta=0.15 on the production-like testbed?",
+  "reason": "The experiment is MEASUREMENT_INVALID because three independent validity gaps prevent a clean scientific conclusion: (1) V3 (audit, medium severity) — 304 cache-hit structural composite is token-state-dependent (fixed 0.2 for 304 vs variable sha256 hash for non-304; 304 occurs only for valid tokens, creating 76 valid vs 0 expired structural samples with different construction); (2) V4 (audit, high severity) — B-PARENT-CONFOUND-REPRODUCTION negative control was specified in frozen spec but never executed, so the parent V1 confound's causal status is unconfirmed; (3) V5 (audit, medium severity) — producer implements C3 as CI-within-bounds (both sides) and C4 as two-sided TOST, while frozen spec defines C3 as CI-upper-only and C4 as TOST-p-upper-only, causing producer to report FAIL where frozen rule would report PASS. The audit correctly identifies that under frozen one-sided rule, only C5 (cache heterogeneity |r_enabled - r_disabled|=0.22 > 2*SE=0.18) would fail, making the outcome a bounded REJECTED rather than global MEASUREMENT_INVALID. However, V3 and V4 are genuine measurement validity gaps that prevent trusting the point estimate. The verified V1 and V2 fixes are scientifically validated: (a) request_id entropy now identical across token states (p=0.477); (b) B-FLASK-ONLY behavioral_std=3.5 > 0 with r=0.026 and TOST PASS at delta=0.15. The pooled |r|=0.088 (CI upper 0.0018 < 0.15) and per-endpoint heterogeneity (cache-enabled |r| ~0.28-0.33 vs no-store r=0.04) are preserved as descriptive observations. The accumulated evidence chain for C-FRESHNESS remains: four independent localhost mock confirmations (r=0.0022-0.046, delta=0.15 PASS), one B-FLASK-ONLY baseline confirmation (r=0.026, delta=0.15 PASS), and zero clean confirmations on production-like infrastructure with CDN simulation.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35470449310/request.json",
+    "research/experiments/EXP-GRAPH-35470449310/spec.json",
+    "research/experiments/EXP-GRAPH-35470449310/freeze.json",
+    "research/experiments/EXP-GRAPH-35470449310/result.json",
+    "research/experiments/EXP-GRAPH-35470449310/audit.json",
+    "research/experiments/EXP-GRAPH-35470449310/report.md",
+    "research/experiments/EXP-GRAPH-35470449310/testbed_server.py sha256:b3be634e6c2e086264d293f430839575f59738daff5ede743b54a21a20a45a18",
+    "research/experiments/EXP-GRAPH-35470449310/flask_only_server.py sha256:3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "research/experiments/EXP-GRAPH-35470449310/run_experiment.py sha256:d3b85b071436fe68f83870658c72ef862b782c8ba2149318da2cf3a0757e8351",
+    "research/experiments/EXP-GRAPH-35470449310/raw_evidence/experiment_data.json sha256:5d6bae1e2024b9e8cd172dd553b78d90accc6d1ad5934a26ba33d13776788f6f",
+    "research/experiments/EXP-GRAPH-35456070379/handoff.json — parent carry_forward and V1/V2 identified",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — stochastic mock r=0.046 PASS (clean baseline)",
+    "research/experiments/EXP-GRAPH-35389145821/result.json — HTTP caching mock r=0.002 PASS (clean baseline)",
+    "research/experiments/EXP-PRODUCT-35445596342/result.json — second independent confirmation r=-0.026 PASS",
+    "codex/claim_state.json:C-FRESHNESS — EXPERIMENTAL status history"
+  ]
+}
