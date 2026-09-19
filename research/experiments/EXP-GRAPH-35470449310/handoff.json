@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35470449310",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can the 304 cache-hit structural coupling be eliminated (e.g., by excluding 304 responses from pooled correlation, or by using identical hash-based construction for 304 responses), and does the B-PARENT-CONFOUND-REPRODUCTION baseline confirm the parent V1 entropy confound was genuine — yielding a clean MEASUREMENT_INVALID or CONFIRMED verdict at delta=0.15 on the production-like testbed?",
+  "why_next": "This experiment fixed V1 (request_id entropy, verified PASS) and V2 (B-FLASK-ONLY degeneracy, verified PASS) but introduced V3 (304 cache-hit structural coupling: fixed 0.2 for 304 vs variable hash for non-304, with 304 occurring only for valid tokens) and left V4 (B-PARENT negative control unexecuted). The pooled |r|=0.088 is directionally favorable but the measurement is invalid due to V3 coupling and V4 missing control. The frozen decision rule is implementable correctly if C3/C4 are interpreted one-sided per spec (only C5 heterogeneity fails). Two small code fixes to run_experiment.py (exclude 304 from correlation or unify structural construction for 304/non-304; add B-PARENT execution path) would yield a clean verdict. The production-like testbed infrastructure (CDN simulation, PyJWT RS256, SQLite WAL, 3 endpoints) remains sound and reusable. The B-FLASK-ONLY baseline at r=0.026 TOST PASS confirms orthogonality without infrastructure, providing strong evidence that any production-like failure is infrastructure-modulated, not definitional.",
+  "carry_forward": {
+    "established": [
+      "V1 request_id entropy confound FIXED: all status codes use uuid.uuid4(), entropy valid=3.723 vs expired=3.716, p=0.477 (no difference). Parent p=2.7e-34 eliminated.",
+      "V2 B-FLASK-ONLY degeneracy FIXED: flask_only_server.py implements genuine token validation (valid/expired via /token endpoint), behavioral_std=3.5 > 0, r=0.0260, TOST PASS at delta=0.15, CI [-0.064, 0.115]. Parent r=NaN eliminated.",
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 under localhost stochastic Flask mock across three independent experiments (all n=480, all audit PASS): deterministic Flask r=0.0335 (EXP-GRAPH-35330739886), stochastic Flask+SQLite+cache+jitter r=0.0463 (EXP-GRAPH-35353011131), HTTP conditional caching r=0.0022 (EXP-GRAPH-35389145821).",
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 on stochastic Flask+SQLite mock (EXP-PRODUCT-35445596342): pooled r=-0.0258, CI upper 0.064, TOST p_upper 5.6e-05. Second independent confirmation.",
+      "B-FLASK-ONLY baseline confirms orthogonality persists WITHOUT CDN/OAuth/dynamic content infrastructure: r=0.0260, |r|=0.0260, CI upper 0.115 < 0.15, TOST PASS at delta=0.15, behavioral_std=3.5. Infrastructure is NOT required for orthogonality.",
+      "Behavioral signals (token validation failure, session state change, auth boundary shift) validated: TP=1.0 across all co-occurring conditions on both localhost mock and production-like testbed.",
+      "Production-like testbed infrastructure (Flask 3.1.3, PyJWT RS256, SQLite WAL, CDN simulation with ETag/Cache-Control/stale-while-revalidate, 3 endpoints) is functional and reusable."
+    ],
+    "rejected": [
+      "Stable public APIs (GitHub 403, JSONPlaceholder) as testbeds — zero behavioral and structural variance (EXP-GRAPH-35409927045, MEASUREMENT_INVALID).",
+      "Structural signal hash(body)%10000 including error bodies produces valid orthogonality measurement — V1 confound: error body constant for expired tokens creates forced correlation (r=0.375 parent EXP-GRAPH-35445595108).",
+      "Headers-only structural signal with different request_id generators per status code is independent of behavioral state — V1 confound: valid entropy 3.542 vs expired 3.233, p=2.7e-34 (EXP-GRAPH-35456070379). FIXED in this experiment.",
+      "HTTP caching as common cause raising |r| above 0.15 — three independent experiments show orthogonality under HTTP caching (r=0.0022-0.046).",
+      "n=240 sufficient for delta=0.15 equivalence — n>=480 required (CI width ~0.25 at n=240 vs ~0.18 at n=480).",
+      "Frozen REJECTED outcome (|r|=0.1737, EXP-GRAPH-35456070379) falsifies orthogonality on production-like infrastructure — measurement-invalid due to V1/V2 (now fixed).",
+      "304 cache-hit structural composite construction is independent of behavioral state — V3 confound identified in this experiment (fixed 0.2 for 304 vs variable hash for non-304, 304 occurs only for valid tokens)."
+    ],
+    "unknown": [
+      "Whether the 304 cache-hit structural coupling (V3) explains the per-endpoint cache-enabled negative correlations (r=-0.275, -0.334) or if genuine infrastructure-modulated correlation exists.",
+      "Whether B-PARENT-CONFOUND-REPRODUCTION would show |r|>=0.15 under identical conditions, confirming parent V1 entropy bifurcation was the sole cause of r=0.1737.",
+      "Whether orthogonality at delta=0.15 holds on production-like infrastructure when 304 structural coupling is eliminated and B-PARENT baseline is executed.",
+      "Whether per-cache heterogeneity (|r_enabled - r_disabled|=0.22 > 2*SE=0.18) is systematic or sampling noise; requires replication at n>=800.",
+      "Whether orthogonality at delta=0.15 holds on actual distributed production infrastructure with real CDN hierarchies, OAuth/OIDC middleware, and concurrent client load.",
+      "Whether CDN cache invalidation on session state change introduces correlation under distributed cache conditions.",
+      "Whether headers-only structural signal (ETag + Cache-Control + request_id entropy + dynamic content hash) captures sufficient variation for production freshness detection."
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — status remains EXPERIMENTAL bounded to localhost stochastic mock.",
+      "The pooled |r|=0.088 constitutes evidence that production-like infrastructure breaks orthogonality — measurement is invalid due to V3 coupling and V4 missing control; no causal inference warranted.",
+      "The B-FLASK-ONLY result (r=0.026) transfers to production-like infrastructure — B-FLASK-ONLY lacks CDN simulation, OAuth middleware, and dynamic content.",
+      "The per-endpoint cache-enabled negative correlations (r=-0.275, -0.334) represent genuine behavioral-structural coupling — may be artifacts of V3 304 structural construction coupling.",
+      "Delta=0.10 is achievable at n=480 — CI width ~0.178 exceeds 2*delta=0.10; minimum detectable |r| ~0.09 at n=480.",
+      "Production-like infrastructure features (CDN/OAuth/dynamic content) break orthogonality — untested due to measurement confounds; B-FLASK-ONLY baseline (no infrastructure, r=0.026) suggests infrastructure is NOT the causal factor.",
+      "Testbed CDN simulation represents production CDN behavior — single-node Flask in-memory cache, not multi-CDN with real cache hierarchies.",
+      "Frozen C3/C4 two-sided interpretation is scientifically required — frozen spec defines C3 as CI-upper-only and C4 as TOST-p-upper-only; producer deviation to two-sided caused spurious FAIL."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35389145821/result.json — localhost mock r=0.0022 PASS (clean baseline)",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — stochastic mock r=0.0463 PASS (clean baseline)",
+    "research/experiments/EXP-PRODUCT-35445596342/result.json — stochastic mock r=-0.0258 PASS (second confirmation)",
+    "research/experiments/EXP-GRAPH-35445595108/result.json — r=0.375 MEASUREMENT_INVALID (parent error-body confound)",
+    "research/experiments/EXP-GRAPH-35445595108/audit.json — V1_CRITICAL_SHARED_VARIABLE_CONFOUND",
+    "research/experiments/EXP-GRAPH-35456070379/result.json — pooled r=-0.1737, V1 entropy confound, V2 baseline degenerate",
+    "research/experiments/EXP-GRAPH-35456070379/audit.json — FAIL, V1/V2 high-severity validity gaps",
+    "research/experiments/EXP-GRAPH-35470449310/result.json — pooled r=-0.088, V1/V2 fixed, V3 304 coupling",
+    "research/experiments/EXP-GRAPH-35470449310/audit.json — REVISE, V3/V4/V5 validity gaps, 5 required_fixes",
+    "research/experiments/EXP-GRAPH-35470449310/testbed_server.py — production-like testbed (reusable, V1 fixed)",
+    "research/experiments/EXP-GRAPH-35470449310/flask_only_server.py — B-FLASK-ONLY baseline (reusable, V2 fixed)",
+    "research/experiments/EXP-GRAPH-35470449310/run_experiment.py — experiment harness (V3 304 coupling identified)",
+    "codex/claim_state.json:C-FRESHNESS — EXPERIMENTAL status history"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35470449310/result.json — pooled r=-0.0877, CI [-0.1758, 0.0018], B-FLASK-ONLY r=0.0260",
+    "research/experiments/EXP-GRAPH-35470449310/audit.json — REVISE, V3_304_cache_hit_confound (medium), V4_missing_B_PARENT (high), V5_decision_rule_deviation (medium), claim_ceiling",
+    "research/experiments/EXP-GRAPH-35470449310/audit.json:recomputed_metrics — per_endpoint_r_testbed, cache_heterogeneity, has_304_valid=76 has_304_expired=0",
+    "research/experiments/EXP-GRAPH-35470449310/run_experiment.py:363-374 — V3 304 structural construction coupling",
+    "research/experiments/EXP-GRAPH-35456070379/handoff.json — parent V1/V2 identified, carry_forward",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — r=0.0463 CI upper 0.135 < 0.15, TOST PASS",
+    "research/experiments/EXP-GRAPH-35389145821/result.json — r=0.0022 CI upper 0.0916 < 0.15, TOST PASS",
+    "research/experiments/EXP-PRODUCT-35445596342/result.json — r=-0.0258 CI upper 0.064 < 0.15, TOST PASS",
+    "codex/claim_state.json:C-FRESHNESS — 30+ experiment history, EXPERIMENTAL status"
+  ],
+  "recommended_action": "Re-run orthogonality on the existing production-like testbed with THREE targeted corrections to run_experiment.py: (1) Fix V3 304 cache-hit coupling — either exclude 304 responses from pooled Pearson correlation entirely, or use identical sha256(request_id) hash-based structural construction for 304 responses (eliminating the fixed-0.2 vs variable-hash asymmetry). The 304 code path (run_experiment.py:363-374) is the only remaining structural construction coupling. (2) Execute B-PARENT-CONFOUND-REPRODUCTION baseline — implement the frozen spec baseline that uses token_hex for expired request_ids and UUID for valid request_ids, expected |r|>=0.15, to confirm the parent V1 confound was genuine and the fix eliminates it. (3) Align C3/C4 decision logic with frozen one-sided spec — C3 should test CI upper < 0.15 only (not both bounds), C4 should test TOST p_upper < 0.05 only (not two-sided). Under frozen one-sided rule with the current data, only C5 (cache heterogeneity) fails, making this a bounded REJECTED rather than global MEASUREMENT_INVALID. Both fixes are small code changes. The testbed infrastructure (CDN simulation, PyJWT RS256, SQLite WAL, 3 endpoints, B-FLASK-ONLY baseline) is sound and reusable. n>=480, delta=0.15. A clean positive result (C1-C6 all pass under frozen rule, with C5 heterogeneity resolved by n>=800 or cache-mode equalization) would justify parallel-channel architecture for product deployment. A clean negative result (|r|>0.15 after V3 fix, with B-PARENT confirming V1 was genuine) would force architectural pivot to fused classifiers."
+}
