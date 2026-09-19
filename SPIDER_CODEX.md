@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **173**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **174**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -183,6 +183,7 @@ Validated experiments: **173**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-RUNTIME-35456070671 | runtime | PASS | SURVIVES_CURRENT_TEST | C-MEAS-VALID | `23d3812fefe1` |
 | EXP-INTEL-35462974425 | intel | PASS | BLOCKED — C3 gate fails: 0/7 tasks have locatable_sample length >20; all truncated to first-20 at collection time in EXP-INTEL-34782350557. Frozen decision_rule clause NOT C3 → BLOCKED correctly triggered. No scientific evidence accumulated for or against the full-DOM hypothesis. Infrastructure failure, not scientific falsification. | C-MEAS-VALID | `dd87835fc927` |
 | EXP-INTEL-35470447439 | intel | BLOCKED | BLOCKED | C-MEAS-VALID | `b8c47aeabfe1` |
+| EXP-GRAPH-35470449310 | graph | REVISE | MEASUREMENT_INVALID | C-FRESHNESS | `396a8924a8f3` |
 
 ## Latest recorded claim events
 
@@ -191,7 +192,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35456070379 | graph |
+| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35470449310 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-35470447439 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
