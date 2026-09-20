@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35530590171",
+  "lane": "intel",
+  "github_run_id": null,
+  "base_sha": "50afe1e2eee4d3612886cfb4428bfa92b9fa5b50",
+  "frozen_sha": "77331f7d7cecee79e669ff86f04173a631a29b7b20bdaf7cfc9fd3b1308a5f65",
+  "python_version": "3.12.14",
+  "platform": "linux",
+  "environment": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "pyhashseed": "0",
+    "compute_time_seconds": "<30"
+  },
+  "data_sources": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw_per_iteration_data",
+      "description": "10000 iterations per n (5,10,15,20), each with margin, se_l, se_d, snr, agree, eta2 per definition type and recipe variant"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "derived_parent_analysis",
+      "description": "Per-n aggregated margin_mean, margin_std, SE values, observed agreement, mechanism classification, extrapolation fits"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw_reconstruction_data",
+      "description": "Original truncated-first-20 raw density data for 7 tasks (3 listing, 3 detail, 1 cart)"
+    }
+  ],
+  "code_paths": [],
+  "analysis_commands": [
+    "python3: load snr_per_iteration_tag_entropy.json.gz, extract canonical DEF-FULL-MAP margins per n",
+    "python3: compute mean(M_i) and std(M_i, ddof=1) across 10000 iterations per n",
+    "python3: compute Phi(mean/std) = 0.5*(1+erf(SNR/sqrt(2))) as predicted agreement",
+    "python3: validate against frozen observed agreement targets (n=15: 0.4998, n=20: 0.5595)",
+    "python3: scipy.stats.linregress for power-law extrapolation of |margin| and margin_std to n=50",
+    "python3: bootstrap PI90 (n_boot=2000, seed=999) for extrapolation uncertainty"
+  ],
+  "frozen_inputs": {
+    "request.json": "77331f7d7cecee79e669ff86f04173a631a29b7b20bdaf7cfc9fd3b1308a5f65",
+    "spec.json": "54d0a5ec0cfe64057b71516c9576b32d2abf6251e848a4ed66b6f3d0ebc3ff7a",
+    "prereg.md": "1312fba8980a4a08bda11cc80a96a6c8464eaa2818692e1b0e5f6333f917b81d",
+    "freeze.json": "verified"
+  },
+  "material_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35530590171/result.json",
+      "role": "result",
+      "description": "Canonical machine-readable experiment output"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35530590171/report.md",
+      "role": "report",
+      "description": "Human-readable experiment report"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35530590171/provenance.json",
+      "role": "provenance",
+      "description": "This file: experiment provenance and reproduction instructions"
+    }
+  ],
+  "reproduction": {
+    "required_data": [
+      "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json"
+    ],
+    "required_packages": ["numpy", "scipy"],
+    "key_computation": "For each n in [5,10,15,20]: mean_M = mean(margins), std_M = std(margins, ddof=1), SNR = mean_M/std_M, Phi = 0.5*(1+erf(SNR/sqrt(2)))",
+    "frozen_targets": {"n15": 0.4998, "n20": 0.5595},
+    "threshold": "10 percentage points"
+  }
+}

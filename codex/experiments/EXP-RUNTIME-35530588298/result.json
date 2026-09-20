@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "total_observations": 840,
+    "multi_layer_cells": 24,
+    "multi_layer_observations": 480,
+    "regression_cells": 12,
+    "regression_observations": 240,
+    "identity_cells": 6,
+    "identity_observations": 120,
+    "reps_per_state": 5,
+    "auth_states": 4,
+    "content_types": ["JSON", "HTML", "BINARY"],
+    "target_sizes_bytes": [10240, 102400],
+    "multi_layer_encodings": ["GZIP-THEN-BROTLI", "BROTLI-THEN-GZIP"],
+    "stream_chunk_sizes_bytes": [8192, 32],
+    "shannon_entropy_bits_per_byte": {
+      "JSON": {"mean": 5.486, "min": 5.436, "max": 5.573},
+      "HTML": {"mean": 4.658, "min": 4.649, "max": 4.675},
+      "BINARY": {"mean": 7.690, "min": 7.673, "max": 7.697}
+    },
+    "streaming_correctness": {
+      "multi_layer_24_cells_rate": 1.0,
+      "multi_layer_24_cells_count": "480/480 streaming decompressed SHA256 == expected SHA256",
+      "regression_12_cells_rate": 1.0,
+      "regression_12_cells_count": "240/240 (6 configs x 2 chunk sizes x 20 obs)",
+      "fullbody_ground_truth_rate": 1.0,
+      "fullbody_ground_truth_count": "480/480 full-body decompressed == expected"
+    },
+    "streaming_equals_fullbody": {
+      "multi_layer_24_cells_rate": 1.0,
+      "multi_layer_24_cells_count": "480/480 observations byte-identical between streaming and full-body paths",
+      "regression_12_cells_rate": 1.0,
+      "identity_6_cells_rate": 1.0
+    },
+    "decompression_errors": {
+      "streaming_path_total": 0,
+      "fullbody_path_total": 0
+    },
+    "silent_fallbacks": {
+      "streaming_path_total": 0,
+      "definition": "SHA256(decompressed) == SHA256(raw_compressed) for compressed responses"
+    },
+    "within_state_determinism": {
+      "streaming_all_same": true,
+      "fullbody_all_same": true,
+      "detail": "all 4 auth states x all 24 multi-layer cells: unique_count==1 for 5 reps per state"
+    },
+    "compressed_size_bytes": {
+      "per_content_type_mean": {
+        "JSON_10KB_mean": 4330.9,
+        "JSON_100KB_mean": 36168.9,
+        "HTML_10KB_mean": 2848.9,
+        "HTML_100KB_mean": 23601.6,
+        "BINARY_10KB_mean": 9903.2,
+        "BINARY_100KB_mean": 98672.0
+      },
+      "range_overall": "2612-98730 bytes across all multi-layer cells",
+      "target_validation": "all 3/3 content types meet thresholds (>=2000 at 10KB, >=5000 at 100KB)"
+    },
+    "regression_baselines": {
+      "gzip_single_chunk8192_rate": 1.0,
+      "gzip_single_chunk32_rate": 1.0,
+      "brotli_single_chunk8192_rate": 1.0,
+      "brotli_single_chunk32_rate": 1.0
+    }
+  },
+  "controls": {
+    "B-FULLBODY-GROUND-TRUTH": {
+      "id": "B-FULLBODY-GROUND-TRUTH",
+      "description": "Full-body decompression (brotli.decompress / gzip.decompress on complete data) serves as ground truth",
+      "expected": "100% correctness: SHA256(decompressed) == SHA256(generate_*_body(state, target_size))",
+      "observed": "480/480 full-body observations correct across all 24 cells x 20 obs",
+      "pass": true,
+      "evidence": "result.json:metrics.fullbody_ground_truth_rate=1.0, raw_cell_results.json fullbody_correct_rate=1.0 for all cells"
+    },
+    "B-GZIP-SINGLE-LAYER-REGRESSION": {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer gzip streaming decompressor correctness at 10KB high-entropy",
+      "expected": "100% correctness in both streaming and full-body paths",
+      "observed": "6 cells x 20 obs = 120 obs: streaming 120/120 correct, streaming_equals_fullbody 120/120",
+      "pass": true,
+      "evidence": "raw_cell_results.json GZIP-SINGLE cells all streaming_correct_rate=1.0"
+    },
+    "B-BROTLI-SINGLE-LAYER-REGRESSION": {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer brotli streaming decompressor correctness at 10KB high-entropy",
+      "expected": "100% correctness in both streaming and full-body paths",
+      "observed": "6 cells x 20 obs = 120 obs: streaming 120/120 correct, streaming_equals_fullbody 120/120",
+      "pass": true,
+      "evidence": "raw_cell_results.json BROTLI-SINGLE cells all streaming_correct_rate=1.0"
+    },
+    "B-IDENTITY-HE-STREAMING": {
+      "id": "B-IDENTITY-HE-STREAMING",
+      "description": "IDENTITY (no compression) at 10KB and 100KB high-entropy through streaming API path",
+      "expected": "100% correctness, SHA256 matches generate_*_body exactly",
+      "observed": "6 cells x 20 obs = 120 obs: streaming 120/120 correct",
+      "pass": true,
+      "evidence": "raw_cell_results.json IDENTITY cells all streaming_correct_rate=1.0"
+    },
+    "B-COMPRESSED-TARGET-RANGE": {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "description": "Compressed size validation: at least 2/3 content types must achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB under multi-layer encoding",
+      "expected": "High-entropy payloads produce compressed sizes in the 2-99KB range",
+      "observed": "JSON 4331/36169, HTML 2849/23602, BINARY 9903/98672 — all 3/3 meet thresholds at both sizes",
+      "pass": true,
+      "evidence": "result.json:metrics.compressed_size_bytes.per_content_type_mean, C5 pass true"
+    },
+    "C1_STREAMING_EQUALS_FULLBODY": {
+      "id": "C1_STREAMING_EQUALS_FULLBODY",
+      "description": "Decision rule C1: streaming_hash == fullbody_hash for ALL multi-layer streaming cells",
+      "expected": "Byte-identical output between streaming decompressor API and full-body decompression",
+      "observed": "24/24 cells, 480/480 observations streaming_decompressed_hash == fullbody_decompressed_hash",
+      "pass": true,
+      "evidence": "raw_cell_results.json streaming_equals_fullbody_rate=1.0 for all 24 multi-layer cell keys"
+    },
+    "C2_STREAMING_EQUALS_EXPECTED": {
+      "id": "C2_STREAMING_EQUALS_EXPECTED",
+      "description": "Decision rule C2: streaming_hash == expected_hash for ALL multi-layer cells",
+      "expected": "Streaming decompressor output matches ground truth oracle",
+      "observed": "24/24 cells, 480/480 streaming correct",
+      "pass": true,
+      "evidence": "raw_cell_results.json streaming_correct_rate=1.0 for all 24 multi-layer cell keys"
+    },
+    "C3_REGRESSION": {
+      "id": "C3_REGRESSION",
+      "description": "Decision rule C3: B-GZIP-SINGLE and B-BROTLI-SINGLE pass 100% in both streaming and full-body paths",
+      "expected": "Single-layer regression controls not degraded",
+      "observed": "GZIP-SINGLE 120/120, BROTLI-SINGLE 120/120, both streaming and full-body paths",
+      "pass": true,
+      "evidence": "controls.B-GZIP-SINGLE-LAYER-REGRESSION and B-BROTLI-SINGLE-LAYER-REGRESSION both pass"
+    },
+    "C4_NULL_CONTROL_WITHIN_STATE_DETERMINISM": {
+      "id": "C4_NULL_CONTROL_WITHIN_STATE_DETERMINISM",
+      "description": "Null control: decompressed_hash identical across all 5 reps per (state, encoding, type, size, chunk_size) in both streaming and full-body paths",
+      "expected": "all_same=true for all states in all streaming cells",
+      "observed": "All 24 multi-layer + 12 regression cells: streaming_all_same=true for all 4 states across 5 reps",
+      "pass": true,
+      "evidence": "raw_cell_results.json hash_variation per cell streaming_all_same=true"
+    },
+    "C5_COMPRESSED_TARGET_RANGE": {
+      "id": "C5_COMPRESSED_TARGET_RANGE",
+      "description": "Decision rule C5: at least 2/3 types meet compressed size thresholds (>=2000 at 10KB, >=5000 at 100KB)",
+      "expected": "2/3 types >=2000 at 10KB and >=5000 at 100KB",
+      "observed": "3/3 meet at both sizes (meets_10k=3 meets_100k=3)",
+      "pass": true,
+      "evidence": "result.json:metrics.compressed_size_bytes"
+    },
+    "POSITIVE_CONTROL": {
+      "id": "POSITIVE_CONTROL",
+      "description": "B-FULLBODY-GROUND-TRUTH: same mock infrastructure produces 100% correctness under full-body decompression, confirming correctness oracle functional",
+      "expected": "100% correctness under full-body decompression",
+      "observed": "480/480 full-body multi-layer correct; identity 120/120 correct",
+      "pass": true,
+      "evidence": "controls.B-FULLBODY-GROUND-TRUTH"
+    },
+    "NULL_CONTROL": {
+      "id": "NULL_CONTROL",
+      "description": "Within-state determinism: decompressed hash identical across 5 reps for each cell",
+      "expected": "all_same=true",
+      "observed": "all_same=true for all states in all cells both streaming and full-body paths",
+      "pass": true,
+      "evidence": "controls.C4_NULL_CONTROL_WITHIN_STATE_DETERMINISM"
+    },
+    "SILENT_FALLBACK_CONTROL": {
+      "id": "SILENT_FALLBACK_CONTROL",
+      "description": "Silent fallback detection: decompressed == raw_compressed classified as failure",
+      "expected": "0 silent fallbacks for any compressed response",
+      "observed": "0 fallbacks across 480 streaming multi-layer + 240 regression = 720 compressed streaming observations",
+      "pass": true,
+      "evidence": "metrics.silent_fallbacks.streaming_path_total==0"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/run_experiment.py",
+      "sha256": "8251d45704eb99d6b13608fd11ce462a6f595a02d279021b0f0c6966144d0ab0",
+      "role": "code",
+      "description": "Execution script: high-entropy generators, brotli streaming (Decompressor.process), gzip streaming (GzipFile.read), full-body iterative decompression, multi-layer and single-layer comparison"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/raw_cell_results.json",
+      "sha256": "916b8f03b4393718276f56c5be90b37b14b77be29254288f5da84a1a1a37325b",
+      "role": "raw",
+      "description": "Per-cell raw observations: 24 multi-layer cells x20 + 12 regression x20 + 6 identity x20 = 840 total observations, each with streaming/fullbody hashes, compressed sizes, hash variation"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Canonical packet result with metrics, controls, artifacts, observations"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable report with interpretation and claim ceiling"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/provenance.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Provenance: execution environment, frozen input hashes, parent chain"
+    }
+  ],
+  "observations": [
+    "Experiment: EXP-RUNTIME-35530588298, Lane: runtime, Architecture: pure in-memory decompression comparison (no HTTP/proxies) — streaming decompressor APIs (brotli.Decompressor.process + gzip.GzipFile.read) vs full-body decompression (brotli.decompress + gzip.decompress)",
+    "Streaming brotli decompression: brotli.Decompressor().process(chunk) fed CHUNK_SIZE chunks produces output as available; no flush()/finish() method exists on brotli 1.2.0 Decompressor — process() is the sole API for incremental decompression",
+    "Streaming gzip decompression: gzip.GzipFile(io.BytesIO(compressed)).read(CHUNK_SIZE) loops produce byte-identical output to gzip.decompress()",
+    "Multi-layer streaming decompression: outer layer via streaming API feeds inner compressed bytes to inner layer streaming API — sequential requirement, not parallel. GZIP-THEN-BROTLI: brotli streaming decompresses outer, then gzip streaming decompresses inner. BROTLI-THEN-GZIP: gzip streaming decompresses outer, then brotli streaming decompresses inner.",
+    "Pre-flight Shannon entropy: JSON mean 5.49 min 5.44 max 5.57; HTML mean 4.66 min 4.65 max 4.67; BINARY mean 7.69 min 7.67 max 7.70 — all >=3.5 bits/byte threshold",
+    "Main multi-layer cells: 24 cells (2 sizes x 3 types x 2 encodings x 2 chunk sizes) x 20 obs = 480 streaming + 480 full-body = 960 decompression comparisons; all streaming_hash == fullbody_hash (480/480) byte-identical; all streaming_hash == expected_hash (480/480) correct; 0 decompression errors; 0 silent fallbacks",
+    "Regression cells: 12 cells (3 types x 2 single-layer modes x 2 chunk sizes) x 20 = 240 streaming + 240 full-body; all streaming_correct 240/240, fullbody_correct 240/240, streaming_equals_fullbody 240/240",
+    "Identity cells: 6 cells (3 types x 2 sizes) x 20 = 120 obs; all 120/120 correct",
+    "Within-state determinism: all 24 multi-layer + 12 regression cells show decompressed_hash all_same=true for all 4 states across 5 reps in both streaming and full-body paths (unique_count==1)",
+    "Compressed sizes: JSON 10KB mean 4331B / 100KB 36169B; HTML 10KB 2849B / 100KB 23602B; BINARY 10KB 9903B / 100KB 98672B — all 3/3 types meet >=2000 at 10KB and >=5000 at 100KB; overall range 2612-98730 bytes confirms non-degenerate high-entropy payloads",
+    "Chunk size independence: correctness holds at both realistic CDN chunk size 8192 (Cloudflare default ~8KB) and stress size 32 (maximizes chunk count and block boundary crossings)",
+    "Total correctness: streaming multi-layer 480/480 (100%), full-body multi-layer 480/480 (100%), regression 240/240 (100%), identity 120/120 (100%); aggregate 840/840 streaming decompression observations correct"
+  ],
+  "validity_notes": [
+    "V1_BROTLI_STREAMING_API: brotli 1.2.0 Decompressor has only process(), can_accept_more_data(), is_finished() methods — no flush() or finish(). process() returns decompressed output as available and signals completion via is_finished(). The initial run encountered a flush() AttributeError that was silently caught, producing incorrect results; corrected by removing flush() call. This is a valid measurement after the correction.",
+    "V2_MULTI_LAYER_SEQUENTIAL: multi-layer streaming decompression requires sequential unwrapping — outer streaming decompressor must complete before inner streaming decompressor begins. This is architecturally correct: real CDN/proxy pipelines process Content-Encoding layers sequentially.",
+    "V3_PURE_IN_MEMORY: experiment is entirely in-process (no HTTP servers, no proxies, no network). This eliminates network confounds but means CDN-specific behaviors (Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation) are not tested. Claim ceiling bounded to in-process decompressor API correctness.",
+    "V4_PYTHON_STDLIB_GZIP: gzip streaming uses Python 3.12 stdlib gzip.GzipFile. Different Python versions or gzip library implementations may have different streaming behavior, but the stdlib API is stable.",
+    "V5_CHUNK_SIZE_EQUALITY: streaming decompressor receives compressed data in CHUNK_SIZE chunks matching the frozen spec (8192 and 32). No mixed-size matrix tested.",
+    "V6_SAME_PROCESS_ORACLE: correctness oracle is in-process generate_*_body(state, target_size) SHA256; bounded to same interpreter session determinism.",
+    "V7_BINARY_HASHSEED: BINARY body header contains struct.pack(hash(state)) which is PYTHONHASHSEED-dependent; determinism holds within single process — confirmed all_same=true across reps.",
+    "V8_MULTI_LAYER_DEPTH_2: only two-layer stacked encodings tested (GZIP-THEN-BROTLI, BROTLI-THEN-GZIP); depths 3-5 untested but spec max_depth=5 is used in iterative decompressor."
+  ],
+  "unresolved": [
+    "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+    "Does correctness hold for payloads beyond 100KB nominal (e.g., 500KB, 1MB) where brotli/gzip dictionary windows cross chunk boundaries more frequently?",
+    "Do other gzip levels (2-9) and brotli qualities (5-7, 8-11) produce compressed structures that stress chunk boundaries differently at realistic sizes?",
+    "Does correctness hold for depths 3-5 stacked encodings (only depth 2 exercised)?",
+    "Cross-run BINARY ground truth reproducibility across interpreter sessions with different PYTHONHASHSEED and gzip/brotli library versions"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "50afe1e2eee4d3612886cfb4428bfa92b9fa5b50",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T18:55:19.535880+00:00",
+  "experiment_id": "EXP-GRAPH-35530590140",
+  "inherited_last_verdict": "REJECTED \u2014 Frozen decision_rule triggers REJECTED: C7 negative control FAILS under consistent non-304 exclusion. Producer reports C7 PASS (B-PARENT-CONFOUND endpoint-stratified weighted |r|=0.2992, n=816 including 304s), but audit recomputes with consistent non-304 exclusion per spec: per-endpoint non-304 r = 0.058 (profile, n=206), -0.247 (data_list, n=206), -0.042 (session_status, n=272); stratified weighted r=-0.0735, |r|=0.0735 <0.15 \u2192 C7 FAILS. Producer includes 304 for B-PARENT-CONFOUND (n=816 total) but excludes 304 for primary testbed (n=684 non-304) \u2014 inconsistent protocol. C1-C6 all independently PASS: C1 TP=1.0/TN=1.0; C2 3/3 endpoints with variance; C3 stratified r=0.0257, CI upper 0.1005 <0.15; C4 TOST p_upper=0.00053; C5 heterogeneity diff=0.0833 < 2*SE; C6 B-FLASK-ONLY |r|=0.0201. The REJECTED is driven by a fragile negative control that fails under consistent 304 handling, not by evidence against orthogonality. Orthogonality signal remains strong: stratified pooled r=0.0257 (n=684, CI [-0.049, 0.100]) on production-like LOCAL testbed.",
+  "inherited_next_question": "After designing a B-PARENT-CONFOUND negative control whose signal is robust to 304 inclusion/exclusion (e.g., using a different confound mechanism such as response-body-coupled request_id generation rather than token_hex-vs-uuid4, or defining C7 on the non-304 subset where the V1 confound must still reproduce), does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED at delta=0.15 on the production-like testbed with n_non304>=800?",
+  "lane": "graph",
+  "origin_github_run_id": "35530590140",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35510157861",
+    "path": "research/experiments/EXP-GRAPH-35510157861/handoff.json",
+    "sha256": "6691322dcc504eab716e3aa168b78d0a242e924c3938021b9d7b91991c3e876d"
+  },
+  "reason": "pulse",
+  "request_hash": "4d8c844dca785874398b3558066642641905c0bc75b474dbfec1f32a936126c5",
+  "request_id": "9e4d0b3bb1afbc3a9447f015",
+  "schema_version": 1
+}
