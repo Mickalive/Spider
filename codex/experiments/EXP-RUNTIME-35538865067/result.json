@@ -1,0 +1,264 @@
+{
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/raw_cell_results.jsonl",
+      "role": "raw",
+      "sha256": "b39fcbfbc7734b169571fe299f5f7c8015cce534f07185354061d641ed3f96c3"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/payload_manifest.json",
+      "role": "fixture",
+      "sha256": "2c3b61c48254bde93e322f08336c50ae1814fadd4593683ddcedd42373121732"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/forensic_rows.json",
+      "role": "derived",
+      "sha256": "93ba2c8ebc32c9032e4fbcb27ecc29794d2ef5135c65da1487c935a70db966f7"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/run_experiment.py",
+      "role": "code",
+      "sha256": "dd6a62b7696f2e1d1ec5cf6fa3946a9e8cab4ca5edf29c885c403aefb377317b"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/forensic_probe.py",
+      "role": "code",
+      "sha256": "8561babab2a507562d4816a864dd95589819646100a676a82e5f53d7f2c44c60"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/tunnel.log",
+      "role": "raw",
+      "sha256": "079c4ce6c44fbe78b4031039f15835d86d31121af186edad93aac57a81e5cb00"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/forensic_tunnel.log",
+      "role": "raw",
+      "sha256": "826dfef0754a1f537e230a1d31d0e9a359a8c49e07967c13f1a0a2b22bc71edf"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/run.log",
+      "role": "raw",
+      "sha256": "4b33798141ca2b9fa8419c59f13bcb4b5960e9975a0c511b77f397edd2861d3e"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35538865067/forensic.log",
+      "role": "raw",
+      "sha256": "3418d7589ad82eca9f31ffb9655c3c246b5d95cded90db892779526edaf79271"
+    }
+  ],
+  "controls": {
+    "B-CDN-BROTLI-ONLY": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN accept_encoding=br (60 rows)"
+      ],
+      "expected": "byte-identical decompression output to ground truth",
+      "observed": "0/60 correct (GZIP-OUTER 0/30: CDN gunzipped outer layer, served inner-brotli bytes with Content-Encoding absent; BROTLI-OUTER 0/30: CDN decoded outer brotli)",
+      "pass": false
+    },
+    "B-CDN-GZIP-ONLY": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN accept_encoding=gzip (60 rows)"
+      ],
+      "expected": "byte-identical decompression output to ground truth",
+      "observed": "30/60 correct (GZIP-OUTER 30/30 passthrough-or-valid-regzip; BROTLI-OUTER 0/30: CDN decoded outer brotli, re-gzipped text types)",
+      "pass": false
+    },
+    "B-CDN-IDENTITY": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN-IDENTITY (15 rows)",
+        "forensic_rows.json payload_key=*_IDENTITY ae=both (3 rows)"
+      ],
+      "expected": "byte-identical output to ground truth (passthrough)",
+      "observed": "5/15 correct via CDN (BINARY 5/5 passthrough; JSON 0/5 and HTML 0/5 gzip-compressed by CDN with Content-Encoding: gzip; forensic gzip_dc recovers ground truth, ITER==GT)",
+      "pass": false
+    },
+    "B-CDN-RAW-PASSTHROUGH": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN accept_encoding=none (60 rows)"
+      ],
+      "expected": "byte-identical decompression output to ground truth",
+      "observed": "0/60 correct (GZIP-OUTER 0/30: outer gzip decoded by CDN, inner-brotli bytes served with no Content-Encoding; BROTLI-OUTER 0/30: outer brotli decoded by CDN)",
+      "pass": false
+    },
+    "B-LOCALHOST-DIRECT": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=LOCALHOST (240 rows)"
+      ],
+      "expected": "byte-identical decompression output to ground truth (re-validates parent 840/840)",
+      "observed": "240/240 correct, 240/240 raw-bytes passthrough, 0 transport errors",
+      "pass": true
+    },
+    "C1_CDN_BYTE_IDENTITY": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN (240 rows)"
+      ],
+      "expected": "all CDN-served compressed payloads decompress byte-identical to ground truth",
+      "observed": "60/240 correct (0.25): only GZIP-OUTER with client Accept-Encoding containing gzip (60/60); all other 180 fail",
+      "pass": false
+    },
+    "C2_NO_SILENT_REENCODE": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl derived.ce_matches_expected (240 rows)",
+        "forensic_rows.json (36 rows)"
+      ],
+      "expected": "delivered Content-Encoding matches origin encoding, or any upgraded encoding still decompresses identically under fixed-order streaming",
+      "observed": "header match 60/240; byte passthrough 40/240; silent HTML gzip re-encode (bytes differ, header still 'gzip'); fixed-order streaming fails on all 180 transformed deliveries",
+      "pass": false
+    },
+    "C3_CACHE_STABILITY": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN-CACHE (18 rows)"
+      ],
+      "expected": "3 consecutive identical requests to same URL produce identical decompressed output",
+      "observed": "6/6 groups byte-stable across reps (raw_unique=1) and output-identical (3/6 all-correct True x3, 3/6 all-incorrect None x3); no cf-cache HIT ever observed (cf-cache-status=DYNAMIC on all 273 CDN responses) so cache-HIT staleness per se was not exercised",
+      "pass": true
+    },
+    "C4_IDENTITY_PASSTHROUGH": {
+      "evidence_refs": [
+        "raw_cell_results.jsonl session_kind=CDN-IDENTITY (15 rows)"
+      ],
+      "expected": "identity payloads pass through CDN without byte modification",
+      "observed": "5/15 byte-identical (BINARY 5/5; JSON/HTML 0/10 gzip-compressed by CDN, benign and reversible)",
+      "pass": false
+    }
+  },
+  "experiment_id": "EXP-RUNTIME-35538865067",
+  "lane": "runtime",
+  "metrics": {
+    "accept_encoding_variants": [
+      "none",
+      "gzip",
+      "br",
+      "both"
+    ],
+    "cdn_bytes_passthrough": "40/240",
+    "cdn_bytes_passthrough_rate": 0.1667,
+    "cdn_ce_header_match": "60/240",
+    "cdn_ce_header_match_rate": 0.25,
+    "cdn_chunk8192_correct": "30/120",
+    "cdn_chunk32_correct": "30/120",
+    "cdn_content_encoding_delivered_gzip": 100,
+    "cdn_content_encoding_delivered_none": 140,
+    "cdn_main_correct": "60/240",
+    "cdn_main_correct_rate": 0.25,
+    "cdn_median_response_time_ms": 162.0,
+    "cdn_response_time_ms_max": 287.2,
+    "cdn_response_time_ms_min": 140.6,
+    "cdn_transport_errors": 0,
+    "cdn_transport_errors_unit": "count",
+    "chunk_sizes_bytes": [
+      8192,
+      32
+    ],
+    "compression_orders": [
+      "GZIP-OUTER (inner brotli q4, outer gzip L1)",
+      "BROTLI-OUTER (inner gzip L1, outer brotli q4)"
+    ],
+    "conditions": 48,
+    "entropy_bits_per_byte": {
+      "BINARY": 7.69,
+      "HTML": 4.66,
+      "JSON": 5.57
+    },
+    "forensic_iterative_fullbody_recovers_ground_truth": "24/24 JSON/HTML forensic deliveries (forensic_rows.json decode_attempts.iter_dc_sha == manifest ground_truth_sha256)",
+    "forensic_n_rows": 36,
+    "identity_cdn_correct": "5/15",
+    "identity_cdn_correct_rate": 0.3333,
+    "localhost_correct": "240/240",
+    "localhost_correct_rate": 1.0,
+    "localhost_median_response_time_ms": 0.6,
+    "localhost_transport_errors": 0,
+    "n_cache_groups": 6,
+    "n_cache_groups_raw_stable": "6/6",
+    "n_cdn_cache_obs": 18,
+    "n_cdn_identity_obs": 15,
+    "n_cdn_main_obs": 240,
+    "n_forensic_obs": 36,
+    "n_localhost_obs": 240,
+    "n_total_rows": 513,
+    "per_cell_cdn_correct": {
+      "CDN_BINARY_BROTLI-OUTER_chunk32_ae-both": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk32_ae-br": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk32_ae-gzip": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk32_ae-none": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk8192_ae-both": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk8192_ae-br": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk8192_ae-gzip": "0/5",
+      "CDN_BINARY_BROTLI-OUTER_chunk8192_ae-none": "0/5",
+      "CDN_BINARY_GZIP-OUTER_chunk32_ae-both": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk32_ae-br": "0/5",
+      "CDN_BINARY_GZIP-OUTER_chunk32_ae-gzip": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk32_ae-none": "0/5",
+      "CDN_BINARY_GZIP-OUTER_chunk8192_ae-both": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk8192_ae-br": "0/5",
+      "CDN_BINARY_GZIP-OUTER_chunk8192_ae-gzip": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk8192_ae-none": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk32_ae-both": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk32_ae-br": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk32_ae-gzip": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk32_ae-none": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk8192_ae-both": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk8192_ae-br": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk8192_ae-gzip": "0/5",
+      "CDN_HTML_BROTLI-OUTER_chunk8192_ae-none": "0/5",
+      "CDN_HTML_GZIP-OUTER_chunk32_ae-both": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk32_ae-br": "0/5",
+      "CDN_HTML_GZIP-OUTER_chunk32_ae-gzip": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk32_ae-none": "0/5",
+      "CDN_HTML_GZIP-OUTER_chunk8192_ae-both": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk8192_ae-br": "0/5",
+      "CDN_HTML_GZIP-OUTER_chunk8192_ae-gzip": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk8192_ae-none": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk32_ae-both": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk32_ae-br": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk32_ae-gzip": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk32_ae-none": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk8192_ae-both": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk8192_ae-br": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk8192_ae-gzip": "0/5",
+      "CDN_JSON_BROTLI-OUTER_chunk8192_ae-none": "0/5",
+      "CDN_JSON_GZIP-OUTER_chunk32_ae-both": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk32_ae-br": "0/5",
+      "CDN_JSON_GZIP-OUTER_chunk32_ae-gzip": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk32_ae-none": "0/5",
+      "CDN_JSON_GZIP-OUTER_chunk8192_ae-both": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk8192_ae-br": "0/5",
+      "CDN_JSON_GZIP-OUTER_chunk8192_ae-gzip": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk8192_ae-none": "0/5"
+    },
+    "reps_per_condition": 5,
+    "target_size_bytes": 10240
+  },
+  "observations": [
+    "Positive control B-LOCALHOST-DIRECT: 240/240 streaming decompressions byte-identical to ground truth with 240/240 raw-byte passthrough across all 48 (payload x order x chunk x AE) cells; environment is valid so CDN inferences are licensed.",
+    "CDN main matrix: 60/240 correct. All 60 successes are GZIP-OUTER payloads fetched with client Accept-Encoding containing gzip (12 cells x 5/5). All 180 other observations fail with decoder errors, 0 transport errors.",
+    "No chunk-size effect: chunk 8192 and chunk 32 agree on every one of the 48 cells (12 cells 5/5 at both sizes, 36 cells 0/5 at both sizes).",
+    "CDN gunzips origin content when the client omits gzip: GZIP-OUTER with AE br/none is delivered as inner-brotli bytes (brotli-decodable, forensic br_dc OK) with Content-Encoding absent.",
+    "CDN always decodes origin brotli: BROTLI-OUTER is never delivered byte-identical (0/120 passthrough) under any Accept-Encoding; text types are re-gzipped when the client accepts gzip (Content-Encoding: gzip, forensic gzip_dc OK then ITER==GT); octet-stream is served as decoded inner-gzip bytes with Content-Encoding absent.",
+    "CDN silently re-encodes even when the header is unchanged: HTML GZIP-OUTER with AE gzip/both is delivered with Content-Encoding: gzip but different bytes (2752 -> 2759); the re-encoded bytes still gzip-decode to ground truth.",
+    "CDN gzip-compresses identity text payloads when the client accepts gzip (JSON 10240 -> 3999 bytes, HTML 10239 -> 2803 bytes, Content-Encoding: gzip); octet-stream identity passes through byte-identical 5/5.",
+    "Cache stability: all 6 fixed-URL triplets byte-stable across 1s-spaced reps (raw_unique=1); GZIP-OUTER triplets all-correct, BROTLI-OUTER triplets all-incorrect; cf-cache-status was DYNAMIC on all 273 CDN responses (no HIT observed).",
+    "Forensic encoding-agnostic iterative full-body decode (try brotli, try gzip until identity) recovers ground truth on 24/24 JSON/HTML CDN deliveries despite the transforms; the failure is in the fixed origin-order framing assumption, not byte corruption.",
+    "CDN median round-trip 162.0 ms (range 140.6-287.2 ms) vs localhost 0.6 ms; geographic edge for this run was sjc01 (tunnel.log)."
+  ],
+  "outcome": "FALSIFIES",
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "unresolved": [
+    "Whether encoding-agnostic iterative decode (shown recoverable on 24/24 JSON/HTML forensic deliveries) restores 240/240 correctness through the CDN was not executed as a frozen condition; it is the recommended next test, not an established result of this packet.",
+    "CDN-cache HIT staleness: no cf-cache HIT was observed (all DYNAMIC), so stale-cache serving behavior remains untested; a cacheable content-type/extension design would be needed.",
+    "Other CDN providers (Fastly, Akamai, CloudFront), paid-tier behaviors, payloads >100KB, depths 3-5, other quality/level settings, concurrent clients, and HTTP/2-vs-HTTP/1.1 differences remain untested per prereg claim ceiling.",
+    "BINARY forensic ground-truth comparison is in-session only (BINARY bodies depend on PYTHONHASHSEED per parent handoff); cross-run BINARY ground-truth reproducibility remains unknown."
+  ],
+  "validity_notes": [
+    "Measurement VALID: positive control 240/240; 0 transport errors across 513 rows; tunnel reachable with HTTP 200 health probes; per-row raw evidence (verbatim headers, raw-body SHA, timing) preserved in raw_cell_results.jsonl distinct from derived measurements.",
+    "Single Cloudflare edge (sjc01) via one quick tunnel; geographic distribution across edges untested.",
+    "cf-cache-status=DYNAMIC on all 273 CDN responses: the C3 cache test measured consecutive-serve stability, not HIT-cache staleness; do not read C3 PASS as 'CDN caching is safe'.",
+    "Unique URLs per main-matrix observation plus Cache-Control: public, max-age=300 on origin; jitter 200-500 ms between CDN requests; 1 s spacing for cache triplets.",
+    "Chunk sizes 8192/32 refer to decompressor feed granularity; network reads used 8192-byte frames over TLS; real TCP segmentation/TLS framing through Cloudflare applied to all CDN rows.",
+    "Client used http.client with no content decoding (no requests/urllib auto-decode path); raw_body_sha256 is wire bytes as delivered.",
+    "BINARY payload bytes vary across interpreter sessions (hash(state) depends on PYTHONHASHSEED); ground truth was computed within-run from the same bytes served, so correctness comparisons are valid within this run only.",
+    "Gzip level 1 and brotli quality 4 per parent-faithful layers (spec ceiling text mentions gzip default 6; actual executed levels were gzip L1 / brotli q4 as in parent run_experiment.py).",
+    "Two pre-registration-conformant execution bugs were fixed before any outcome-bearing measurement (tunnel-stdout blocking read; HTTPS hostname attribute); no frozen design element (conditions, N, decision rule) was altered."
+  ]
+}

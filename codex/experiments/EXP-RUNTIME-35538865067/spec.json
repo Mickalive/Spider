@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-RUNTIME-35538865067",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative brotli/gzip decompression correctness hold when high-entropy multi-layer compressed payloads are served through real CDN infrastructure (Cloudflare free tier via cloudflared tunnel) with Accept-Encoding negotiation, Vary/cache semantics, geographic latency, and TCP segmentation?",
+  "hypothesis": "Iterative decompression (brotli->gzip->identity, max_depth=5) of high-entropy multi-layer compressed payloads served through Cloudflare CDN produces byte-identical output to ground truth, because CDN transparent proxying preserves compressed bytes without re-encoding.",
+  "falsifier": "CDN-served compressed payloads produce different decompressed output than localhost ground truth, OR CDN silently re-encodes payloads (changes Content-Encoding), OR CDN caching causes stale/different responses for identical payloads, OR Accept-Encoding negotiation produces encoding combinations not present in the compressed payload.",
+  "baselines": [
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "description": "Same payloads served directly from localhost HTTP server without CDN — re-validates parent EXP-RUNTIME-35530588298 results",
+      "expected": "byte-identical decompression output to ground truth"
+    },
+    {
+      "id": "B-CDN-RAW-PASSTHROUGH",
+      "description": "CDN-served with no Accept-Encoding header — tests whether CDN preserves bytes when no negotiation occurs",
+      "expected": "byte-identical decompression output to ground truth"
+    },
+    {
+      "id": "B-CDN-GZIP-ONLY",
+      "description": "CDN-served with Accept-Encoding: gzip — tests CDN gzip negotiation and potential re-encoding",
+      "expected": "byte-identical decompression output to ground truth"
+    },
+    {
+      "id": "B-CDN-BROTLI-ONLY",
+      "description": "CDN-served with Accept-Encoding: br — tests CDN brotli negotiation and potential re-encoding",
+      "expected": "byte-identical decompression output to ground truth"
+    },
+    {
+      "id": "B-CDN-IDENTITY",
+      "description": "CDN-served uncompressed (identity) payloads — tests whether CDN corrupts or modifies uncompressed data",
+      "expected": "byte-identical output to ground truth (passthrough)"
+    }
+  ],
+  "positive_control": "B-LOCALHOST-DIRECT: localhost-served brotli/gzip decompression matches ground truth — re-validates parent's 840/840 result. If this fails, the environment is broken and no CDN inference is possible.",
+  "null_control": "B-CDN-IDENTITY: uncompressed payloads pass through CDN without corruption. If CDN corrupts uncompressed data, compressed data cannot be trusted either.",
+  "measurement_validity": [
+    "Cloudflare Tunnel (cloudflared) must be installed and a functional tunnel must be established to the local HTTP server",
+    "The tunnel URL must be reachable and return HTTP 200 for test requests",
+    "Each CDN-served request must include Content-Encoding header in response — record the actual encoding delivered",
+    "Minimum N=5 observations per CDN condition (Accept-Encoding variant x payload type x chunk size) with jitter 200-500ms between requests to avoid CDN cache collapse",
+    "CDN cache must be busted between conditions (unique URLs or Cache-Control: no-cache) to test fresh serving",
+    "Ground truth computed as SHA256 of full-body decompression output (brotli.decompress / gzip.decompress) — identical to parent",
+    "Environment: Python 3.12+, brotli 1.2.0, requests 2.x, cloudflared tunnel"
+  ],
+  "decision_rule": "ALL conditions must pass for SURVIVES_CURRENT_TEST:\n- C1: CDN-served compressed payloads decompress to byte-identical SHA256 output as ground truth for ALL (Accept-Encoding x payload_type x chunk_size) conditions\n- C2: CDN does not silently re-encode: Content-Encoding in response matches what we pre-compressed (gzip served as gzip, brotli served as brotli) OR if CDN upgrades encoding, the upgraded encoding decompresses identically to ground truth\n- C3: CDN caching does not cause stale/different responses: 3 consecutive identical requests to same URL produce identical decompressed output\n- C4: Identity payloads pass through CDN without byte corruption (B-CDN-IDENTITY)\n- Positive control passes: B-LOCALHOST-DIRECT decompression matches ground truth\n- Null control passes: B-CDN-IDENTITY decompression matches ground truth\nIF any condition fails: FALSIFIES with diagnosis of failure mode (Accept-Encoding, caching, byte corruption, re-encoding)",
+  "product_consequence_positive": "CDN infrastructure is safe for iterative decompression. The full decompression chain is validated across localhost AND real CDN, closing the sole remaining blocker for C-MEAS-VALID Product Core promotion. Only kernel integration testing remains.",
+  "product_consequence_negative": "CDN introduces decompression failures — must diagnose whether failure is in Accept-Encoding negotiation (CDN re-encoding), Vary/cache semantics (stale responses), geographic latency (chunk boundary timing), or TCP segmentation (byte corruption). This would block C-MEAS-VALID Product Core promotion and require CDN-specific decompression fixes.",
+  "estimated_cost": "Low: single cloudflared binary (~30MB), Python HTTP server, requests library, no GPU, no browser automation, no paid services. Estimated wall time 10-15 minutes.",
+  "expected_information_gain": "Very high: this is the sole remaining blocker for C-MEAS-VALID Product Core readiness per parent handoff. If CDN passes, C-MEAS-VALID is nearly ready for promotion (only kernel integration remains). If CDN fails, the specific failure mode identifies the next fix. Both outcomes change a product decision."
+}
