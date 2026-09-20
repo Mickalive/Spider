@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Execute or explicitly disposition missing frozen baselines B-PERMUTATION-TEST (within-strata permutation), B-PARENT-KSG-K5 (KSG k=5 replication), and B-KSG-CMI-K10 (KSG k=10) — spec.json baselines lists 4 entries but result.json controls contains only B-DETERMINISTIC-SPA; raw_results.json contains no KSG values.",
+    "Disclose and correct C1 stratification mismatch: producer null_control is computed on K2 records (Z=(current_state, history_state_K=2), n_strata=1438, observed=K2) while positive_control_k3 is on K3 records (Z=(current_state, history_action_K=3), n_strata=841). Frozen spec null_control does not tag K, but Phase-2 beyond-Markov hypothesis explicitly requires K3 vs K2. Report |null_mean| for BOTH K2 and K3 per alpha or state which Z is the decision variable for C1.",
+    "Correct B-DETERMINISTIC-SPA expectation: expected K3<0.1 is miscalibrated for this Z definition. Deterministic SPA chooses_next_deterministic uses hidden prev1,prev2 history not in Z=(current,history_action_K=3); therefore I(Y;A|Z) >0 even when hash routing is deterministic. Observed degenerate_control_k3 is 1.391 (alpha=0) to 0.109 (alpha=1.0) on deterministic SPA — all >0.1 and for alpha=0 exceeds stochastic K3 (1.391>1.377). Update baseline expected value or disclose identifiability gap.",
+    "Evaluate and disclose MEASUREMENT_INVALID clause (4) from decision_rule: 'Fewer than 30% of (state,action) strata have >=5 records at N=5000'. Recomputed K2 coverage = 380/1438 = 26.4% (343 strata in 5-9, 37 in 10-19) which triggers clause (4). Clause is subordinate to FALSIFIED-IN-SETTING priority, so verdict remains FALSIFIED-IN-SETTING, but the sparsity condition must be reported in controls/validity_notes and not omitted.",
+    "In validity_notes clarify that stratum_size_bias_decomposition is computed only at alpha=0.1 on K2 strata and that null_std values 0.000149 to 0.009312 indicate tight null distributions. If Phase2 not reached, explicitly state that bootstrap CI and N=50000 convergence (C2/C4) are not applicable because both_passers=[] — already noted but must be mirrored in handoff carry_forward."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-C1-stratification-mismatch",
+      "severity": "major",
+      "description": "Producer C1 (null_control) uses build_state_history_records K=2 (history_kind=state) while C3 uses build_action_history_records K=3 (history_kind=action). spec.json measurement_validity bullet 6 defines both Z forms but does not bind C1 to K; prereg section 5.1 per-alpha analysis step 3 says 'Run 500 within-session shuffled-action permutations, compute null_mean' without K tag. Mixing K inflates interpretive ambiguity: monotonic tradeoff is qualitatively robust but quantitative |null_mean| threshold crossing at 0.1 could differ between K2 and K3 due to different n_strata (1438 vs 841) and bias. Recomputation of raw_results.json confirms C1 values are K2-derived (null_control.observed equals k2_value_stochastic for each alpha). No evidence that K3 null would pass at any other alpha, but fix requires reporting both.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py:585-589 (shuffled_action_null_within_session on recs_k2_stoch), research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep.alpha_0.null_control.observed=1.1929==k2_value_stochastic, research/experiments/EXP-PHYSICS-35530591329/spec.json:measurement_validity and decision_rule"
+    },
+    {
+      "id": "V2-deterministic-baseline-miscalibrated",
+      "severity": "major",
+      "description": "B-DETERMINISTIC-SPA control expected <0.1 bits but observed 1.391 (alpha=0),1.294 (0.01),0.773 (0.1),0.239 (0.5),0.109 (1.0). Failure is systematic and alpha-monotonic, not random. Root cause is identifiability: deterministic chooser uses prev1,prev2 state history not conditioned in Z. Thus I(Y;A|Z) !=0 by construction for K3 action-history conditioning. Baseline expectation is invalid for this design; control pass=false is correct observation but misframes as estimator bias rather than design gap.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/result.json:controls.B-DETERMINISTIC-SPA, raw_results.json:alpha_sweep.*.degenerate_control_k3, run_experiment.py:88-93 choose_next_deterministic and 194-219 build_action_history_records"
+    },
+    {
+      "id": "V3-sparse-strata-coverage",
+      "severity": "moderate",
+      "description": "Measurement is on sparse regime: K3 has 841 strata for 5000 records (avg 1.48 per (z,a) cell with n_a=4), K2 has 1438 strata (avg ~0.87 per (z,a) cell). Stratum_size_bias_decomposition shows only 380 strata with >=5 records (26.4% of K2 strata), below frozen MEASUREMENT_INVALID threshold of 30%. Null bias 0.924 at alpha=0 reflects high variance in tiny strata (0*log(0) skipped, empty cells contribute 0). This is disclosed qualitatively but not quantitatively against decision_rule clause 4. Verdict priority FALSIFIED > MEASUREMENT_INVALID means FALSIFIED still governs, but sparsity explains why MLE null is inflated and must be carried forward.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:determinism_k2_stochastic.total=1438, stratum_size_bias_decomposition (5-9:343,10-19:37), result.json:metrics.determinism_k3_stochastic.total=841"
+    },
+    {
+      "id": "V4-missing-phase2-correctly-omitted",
+      "severity": "minor",
+      "description": "Producer correctly did not execute Phase2 bootstrap (K3-K2 CI) or N=50000 convergence because both_passers=[]; phase2=null in raw_results.json and validity_notes state bootstrap CI not computed. This matches frozen decision_rule Phase2 gating 'only if SURVIVES on C1'. No violation, but explicit null is appropriate.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:phase2=null, both_passers=[], result.json:validity_notes and unresolved"
+    },
+    {
+      "id": "V5-null-within-session-correct",
+      "severity": "info",
+      "description": "Within-session shuffle implementation preserves session structure, state sequence and url_before/url_after pairing, recomputes plug-in KL on shuffled data with same alpha. Corrects parent global-shuffle deviation identified in prior audit V5. 500 permutations for C1, 1000 for positive_control_p, seed 42 deterministic. Small null_std (0.000149 at alpha=1.0 to 0.009312 at alpha=0) confirms tight null distribution. Procedure matches frozen null_control description.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py:303-345 shuffled_action_null_within_session, result.json:controls.C1-NULL-CONTROL and C3-POSITIVE-CONTROL"
+    },
+    {
+      "id": "V6-representation-integrity-pass",
+      "severity": "info",
+      "description": "Design verification passes: 48/48 (state,action) pairs have 4 distinct candidates, same CANDIDATES as parent EXP-PHYSICS-35482477045. N=5000 (50 sessions x100 steps) stochastic (sha8cff7c33...) and deterministic (sha46ed606a...) datasets deterministic with seed 42. K3 determinism ratio 77/841=9.16% and K2 366/1438=25.4% confirm stochastic mixing 0.5 produces substantial non-determinism and environment can express CMI beyond Markov. Sampling correct.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:c6_design_pass true, c7_stratum_buckets=2, determinism_k3_stochastic, provenance.json:seed 42 n_transitions 5000"
+    },
+    {
+      "id": "V7-decision-rule-application-correct",
+      "severity": "info",
+      "description": "Frozen decision_rule priority FALSIFIED > MEASUREMENT_INVALID > SURVIVES applied correctly. C1 not triggered because not all alphas fail (alpha=1.0 passes |0.064|<0.1). C3 triggered because alphas passing C1 ([1.0]) have positive_control_k3 0.098876 <0.5 bits (best and only). C6 pass. Therefore verdict FALSIFIED-IN-SETTING via C3 is valid. Outcome FALSIFIES (H0) is consistent.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/spec.json:decision_rule, result.json:controls.C1-NULL-CONTROL pass false overall but passing_alphas [1.0], controls.C3-POSITIVE-CONTROL pass false, raw_results.json:verdict FALSIFIED-IN-SETTING reason C3"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-DETERMINISTIC-SPA",
+      "expected": "K3 <0.1 (degenerate, I=0 by construction)",
+      "observed": "K3 1.391 (alpha0),1.294 (0.01),0.773 (0.1),0.239 (0.5),0.109 (1.0) all >0.1; bias monotonic with alpha. For alpha0 degenerate > stochastic (1.391>1.377). Baseline fails not because estimator is broken but because Z omits prev1,prev2 determinants. Stronger baseline would be B-DETERMINISTIC oracle that conditions on full hash inputs or uses same SPA but reports per-spec identifiability gap.",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/result.json:controls.B-DETERMINISTIC-SPA, raw_results.json:alpha_sweep.*.degenerate_control_k3"
+    },
+    {
+      "id": "B-PERMUTATION-TEST",
+      "expected": "significant for stochastic SPA (action labels carry information by construction)",
+      "observed": "Not executed. Positive_control_p=0.000999 for all alphas (K3) equals one-sided permutation p under within-session shuffle, which would satisfy this baseline (p<=0.001 significant). However separate exploratory per-stratum PMI permutation test described in spec (for each stratum with >=5 records test whether observed action labels produce PMI significantly above null) was not run. Missing execution should be flagged, not scored as pass.",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/spec.json:baselines.B-PERMUTATION-TEST, run_experiment.py (no per-stratum PMI test), raw_results.json (no field)"
+    },
+    {
+      "id": "B-PARENT-KSG-K5",
+      "expected": "k3_value_stochastic within 10% of parent 0.000560; null_mean within 10% of parent 0.012078",
+      "observed": "Not executed. No KSG estimator invoked in run_experiment.py and no KSG metrics in raw_results.json. Parent replication cannot be verified in this run. This baseline was marked required to verify reproducibility on stochastic SPA; its absence does not affect C1/C3 gate but limits cross-estimator carry_forward.",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/spec.json:baselines.B-PARENT-KSG-K5, raw_results.json (no ksg fields)"
+    },
+    {
+      "id": "B-KSG-CMI-K10",
+      "expected": "k3_value_stochastic ~0.000560, null_mean ~0.012, c3_pass false (k-invariant and insensitive under discrete_features=True)",
+      "observed": "Not executed. Same as B-PARENT-KSG-K5; run_experiment.py imports sklearn.feature_selection.mutual_info_classif but never calls it for KSG CMI. Expected k-invariance cannot be reconfirmed.",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/spec.json:baselines.B-KSG-CMI-K10, provenance.json:dependencies scikit-learn 1.9.1 present but unused"
+    }
+  ],
+  "recomputed_metrics": {
+    "alpha_sweep_recomputed": {
+      "alpha_0": {"k3_value_stochastic": 1.3772399468136238, "k2_value_stochastic": 1.192910898863627, "k3_minus_k2": 0.18432904794999683, "c1_abs_null_mean": 0.9242679559160352, "c1_pass": false, "c3_positive_control_k3": 1.3772399468136238, "c3_permutation_p": 0.000999000999000999, "c3_pass": true, "degenerate_control_k3": 1.3908120709078604},
+      "alpha_0.01": {"k3_value_stochastic": 1.2742735313837399, "k2_value_stochastic": 1.1674919844162246, "k3_minus_k2": 0.1067815469675153, "c1_abs_null_mean": 0.940738486499608, "c1_pass": false, "c3_positive_control_k3": 1.2742735313837399, "c3_permutation_p": 0.000999000999000999, "c3_pass": true, "degenerate_control_k3": 1.294332560281507},
+      "alpha_0.1": {"k3_value_stochastic": 0.7431344952637531, "k2_value_stochastic": 0.6511207659709047, "k3_minus_k2": 0.09201372929284835, "c1_abs_null_mean": 0.5607804793740102, "c1_pass": false, "c3_positive_control_k3": 0.7431344952637531, "c3_permutation_p": 0.000999000999000999, "c3_pass": true, "degenerate_control_k3": 0.7732277392655869},
+      "alpha_0.5": {"k3_value_stochastic": 0.22076615564793486, "k2_value_stochastic": 0.16862137172060213, "k3_minus_k2": 0.05214478392733274, "c1_abs_null_mean": 0.15057871974895376, "c1_pass": false, "c3_positive_control_k3": 0.22076615564793486, "c3_permutation_p": 0.000999000999000999, "c3_pass": false, "degenerate_control_k3": 0.2387136851700366},
+      "alpha_1.0": {"k3_value_stochastic": 0.09887606746922993, "k2_value_stochastic": 0.07134701598598665, "k3_minus_k2": 0.027529051483243278, "c1_abs_null_mean": 0.06429067807063388, "c1_pass": true, "c3_positive_control_k3": 0.09887606746922993, "c3_permutation_p": 0.000999000999000999, "c3_pass": false, "degenerate_control_k3": 0.1093698633369889}
+    },
+    "monotonicity_verified": {"k3_monotonic_decreasing": true, "k3_range": [0.09887606746922993, 1.3772399468136238], "null_mean_range": [0.06429067807063388, 0.940738486499608], "no_alpha_both_pass": true, "crossover_alpha": null},
+    "decision_rule_recomputed": {"C1_all_fail": false, "c1_passers": [1.0], "c3_passers": [0, 0.01, 0.1], "both_passers": [], "C3_trigger_for_passers": true, "best_c3_among_c1_passers": {"alpha": 1.0, "k3": 0.09887606746922993}, "verdict": "FALSIFIED-IN-SETTING", "outcome": "FALSIFIES", "measure_invalid_clause4_triggered": true, "coverage_K2": 0.26425591098748263},
+    "design_verification_recomputed": {"c6_pairs_with_4_candidates": 48, "c6_total_pairs": 48, "c6_pass": true, "c7_non_empty_buckets": 2, "c7_pass": true, "determinism_k3_stochastic": {"deterministic": 77, "stochastic": 764, "total": 841, "det_ratio": 0.09155766944114149}, "determinism_k2_stochastic": {"deterministic": 366, "stochastic": 1072, "total": 1438, "det_ratio": 0.2545201668984701}},
+    "hash_verification": {"raw_results.json_sha256": "afa8b1c5e32bf589755a6031ef2c489d1384d3be46f743e083b32abb2440e017", "run_experiment.py_sha256": "9875c0bc2ce4e8ffeeca1f54ceb92fecac9eee70131baccede246a623c0730cf", "match_provenance": true},
+    "parent_audit_replication_check": {"parent_MLE_K3_1.377": "replicated exactly as alpha_0 k3=1.37724", "parent_alpha0.1_K3_0.743": "replicated exactly as alpha_0.1 k3=0.74313"}
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING survives only at this bounded ceiling: plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0,0.01,0.1,0.5,1.0}, computed with MIN_STRATUM_SIZE=5, on the synthetic stochastic 12-state 4-candidate hash SPA (50% deterministic hash over prev1,prev2,current,action +50% uniform over CANDIDATES[current][action], true I(Y;A|Z)~1.52 bits), at N=5000 (50 sessions x100 steps, seed 42, STATES and CANDIDATES frozen from parent), with within-session action-label shuffle null (500 permutations for C1, 1000 for C3), cannot achieve both |null_mean|<0.1 bits and K3>=0.5 bits with p<=0.001 — tradeoff is monotonic and irreconcilable (no crossover). Sensitivity increases 13.9x (0.099->1.377) while |null_mean| increases ~14.4x (0.064->0.924) as alpha decreases. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell for K3). No inference warranted to: production Web transitions, larger N (e.g., 50000), richer state representations (DOM, accessibility tree, embeddings), continuous or larger-vocabulary spaces, alternative estimators (histogram, Bayesian, likelihood-ratio, corrected KSG), or different null frameworks. C-WEB-DYNAMICS remains HYPOTHESIS; C-MEAS-VALID for this estimator class is FALSIFIED-IN-SETTING.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35530591329/spec.json:decision_rule, baselines, measurement_validity",
+    "research/experiments/EXP-PHYSICS-35530591329/prereg.md:sections 5-6 frozen triggers C1 C3 C6 C7 and Phase2 gating",
+    "research/experiments/EXP-PHYSICS-35530591329/freeze.json:hashes prereg 3a62c5eb, spec 9a4cf54d, request cbf8d1ab",
+    "research/experiments/EXP-PHYSICS-35530591329/result.json:metrics.alpha_sweep_summary, controls.C1-NULL-CONTROL/C3-POSITIVE-CONTROL/C6/C7/B-DETERMINISTIC-SPA, observations, validity_notes",
+    "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep alpha_0..alpha_1.0, null_control.abs_null_mean and positive_control_k3/p, c1_passers [1.0], c3_passers [0,0.01,0.1], both_passers [], stratum_size_bias_decomposition, determinism_k3_stochastic, phase2 null, verdict FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py:est_plugin_kl (alpha Laplace), shuffled_action_null_within_session, build_state_history_records/build_action_history_records, verify_design, stratum_size_bias_decomposition, collect_transitions stochastic/deterministic",
+    "research/experiments/EXP-PHYSICS-35530591329/provenance.json:python 3.12.14 numpy 2.5.3 sklearn 1.9.1 scipy 1.18.1 seed 42, artifacts raw_results.json afa8b1c5 and run_experiment.py 9875c0bc",
+    "research/experiments/EXP-PHYSICS-35510154353/handoff.json:carry_forward.established (null centering robust at alpha=1.0, true CMI 1.52, MLE recompute 1.377/0.743) and recommended alpha sweep",
+    "research/experiments/EXP-PHYSICS-35530591329/request.json:parent_handoff EXP-PHYSICS-35510154353"
+  ],
+  "unresolved": [
+    "Whether C1 |null_mean| on K3 stratification (Z=(current,history_action_K=3)) differs materially from K2 stratification used by producer; speculation is difference is small but requires direct 500-permutation recomputation on K3 records per alpha to confirm threshold robustness.",
+    "Whether B-PERMUTATION-TEST per-(state,action) PMI significance would indeed show per-stratum signal at alpha=0..1.0 given 48/48 strata have strong PMI (per parent permutation_test_exploratory) — not executed here.",
+    "Whether KSG with discrete_features=False or alternative continuous KSG implementations remains k-invariant or recovers sensitivity while preserving null centering — parent invariance is specific to sklearn discrete_features=True, not tested here despite baseline expectation.",
+    "Whether sensitivity-null tradeoff is finite-sample (N=5000, avg 1.5 per (z,a)) or asymptotic: would N=50000 (avg 15 per cell) center MLE null at ~0 while preserving K3>=0.5, thereby unblocking CMI pathway via larger data rather than estimator change.",
+    "Whether alternative detection paradigms (per-(state,action) PMI aggregated, channel capacity, likelihood-ratio test, Bayesian model comparison) bypass plug-in KL bias-variance tradeoff on same discrete SPA.",
+    "Whether any result generalizes beyond 12-state hash SPA to production SPA transitions with larger vocabularies, visual/DOM state, or stochasticity driven by session/user/external data rather than 50% uniform hash mixing."
+  ]
+}

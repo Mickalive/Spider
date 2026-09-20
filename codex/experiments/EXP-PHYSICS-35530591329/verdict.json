@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "REJECTED",
+      "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
+    }
+  ],
+  "product_action": "reject",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can entropy-rate estimation (H(Y|Z,A) vs H(Y|Z) without per-stratum KL weighting) or Bayesian model comparison detect the 1.52-bit CMI signal on the stochastic 12-state SPA while maintaining null centering, thereby bypassing the plug-in KL bias-variance tradeoff?",
+  "reason": "Frozen FALSIFIED-IN-SETTING triggered by C3: the only alpha passing C1 (alpha=1.0, |null_mean|=0.064) has positive_control_k3=0.099 < 0.5 bits. The sensitivity-null tradeoff is monotonic (K3 increases 13.9x from 0.099 to 1.377 while |null_mean| increases 14.4x from 0.064 to 0.924 as alpha decreases from 1.0 to 0). Audit PASS on measurement validity; audit REVISE on four methodological disclosures (C1 stratification K2 vs K3 mismatch, B-DETERMINISTIC-SPA identifiability gap, sparse strata 26.4% coverage, missing baselines B-PERMUTATION-TEST/B-PARENT-KSG-K5/B-KSG-CMI-K10). Audit recomputes match producer. Parent EXP-PHYSICS-35510154353 established audit MLE alpha=0 K3=1.377 and alpha=0.1 K3=0.743; this experiment confirms those values and adds null_mean measurements showing the crossover does not exist. The plug-in KL estimator class with Laplace smoothing is exhausted on this SPA class. Orthogonal estimator paradigms are the required next attack.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35530591329/spec.json:decision_rule, falsifier C1/C3, alpha_values {0, 0.01, 0.1, 0.5, 1.0}",
+    "research/experiments/EXP-PHYSICS-35530591329/result.json:metrics.alpha_sweep_summary (monotonic tradeoff), controls.C1-NULL-CONTROL pass=false passing_alphas=[1.0], controls.C3-POSITIVE-CONTROL pass=false, controls.B-DETERMINISTIC-SPA pass=false",
+    "research/experiments/EXP-PHYSICS-35530591329/result.json:metrics.sensitivity_null_tradeoff (crossover_alpha=none, tradeoff_monotonic=true)",
+    "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep alpha_0..alpha_1.0, null_control.abs_null_mean, positive_control_k3/p, both_passers=[], stratum_size_bias_decomposition, determinism_k3_stochastic",
+    "research/experiments/EXP-PHYSICS-35530591329/audit.json:status REVISE, validity_findings V1-C1-stratification-mismatch V2-deterministic-baseline-miscalibrated V3-sparse-strata-coverage V4-missing-phase2-correctly-omitted V5-null-within-session-correct V7-decision-rule-application-correct, claim_ceiling, recomputed_metrics.decision_rule_recomputed (verdict FALSIFIED-IN-SETTING via C3, measure_invalid_clause4_triggered true, coverage_K2 0.264)",
+    "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py:est_plugin_kl alpha sweep, shuffled_action_null_within_session, build_state_history_records K=2, build_action_history_records K=3",
+    "research/experiments/EXP-PHYSICS-35530591329/provenance.json:python 3.12.14 numpy 2.5.3 sklearn 1.9.1 scipy 1.18.1 seed 42",
+    "research/experiments/EXP-PHYSICS-35510154353/handoff.json:carry_forward.established (MLE alpha=0 K3=1.377, alpha=0.1 K3=0.743, true CMI 1.52 bits), recommended alpha sweep",
+    "research/experiments/EXP-PHYSICS-35530591329/request.json:parent_handoff EXP-PHYSICS-35510154353"
+  ]
+}

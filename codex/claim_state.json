@@ -501,6 +501,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "This experiment tests estimator sensitivity on a synthetic 12-state stochastic SPA, not Web dynamics. No new evidence for or against predictive dynamical structure on real Web transitions. Per-stratum PMI 1.46-1.69 bits confirms signal exists on this SPA class but does not address beyond-memory dynamics or production SPAs."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35530591329",
+        "lane": "physics",
+        "created_at": "2026-09-20T18:55:21.680285+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2335,19 +2345,29 @@
         "claim_id": "C-MEAS-VALID",
         "status": "MEASUREMENT_INVALID",
         "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C1_CORRECTED_MODEL_VALID fails at n=20 (predicted 0.7379 vs observed 0.5595, residual 17.8pp > 10pp threshold). C1 passes at n=15 (predicted 0.5648 vs observed 0.4998, residual 6.5pp <= 10pp). Per frozen conjunctive rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. The corrected model Phi(mean/std) using across-iteration margin_std as noise is a substantial improvement over parent (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20, 7.7x/2.5x improvement) and confirms margin_std (~1e-4 to 6e-4) is the right direction vs SE (~1e-5). However, the Phi(mean/std) form conflates sign and magnitude: the empirical driver of agreement is sign fraction proportion(margin_i>0) which matches observed within 1pp, not the SNR ratio. No mechanism identification (C2 gated), no full-DOM extrapolation (C3 gated on poor R^2=0.197 |margin| power law), and no product consequence are supported by this run."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35530591329",
+        "lane": "physics",
+        "created_at": "2026-09-20T18:55:21.680285+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+        "claim_id": "C-MEAS-VALID",
+        "status": "REJECTED",
+        "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35510154353",
+      "experiment_id": "EXP-PHYSICS-35530591329",
       "lane": "physics",
-      "created_at": "2026-09-20T12:16:54.076536+00:00",
+      "created_at": "2026-09-20T18:55:21.680285+00:00",
       "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "7c9a6df68e21edb11fb7bf256ff23be6295ead15",
+      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "This experiment tests estimator sensitivity on a synthetic 12-state stochastic SPA, not Web dynamics. No new evidence for or against predictive dynamical structure on real Web transitions. Per-stratum PMI 1.46-1.69 bits confirms signal exists on this SPA class but does not address beyond-memory dynamics or production SPAs."
+      "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
@@ -2410,14 +2430,14 @@
       "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-INTEL-35530590171",
-      "lane": "intel",
-      "created_at": "2026-09-20T18:55:20.209885+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
+      "experiment_id": "EXP-PHYSICS-35530591329",
+      "lane": "physics",
+      "created_at": "2026-09-20T18:55:21.680285+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
       "claim_id": "C-MEAS-VALID",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C1_CORRECTED_MODEL_VALID fails at n=20 (predicted 0.7379 vs observed 0.5595, residual 17.8pp > 10pp threshold). C1 passes at n=15 (predicted 0.5648 vs observed 0.4998, residual 6.5pp <= 10pp). Per frozen conjunctive rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. The corrected model Phi(mean/std) using across-iteration margin_std as noise is a substantial improvement over parent (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20, 7.7x/2.5x improvement) and confirms margin_std (~1e-4 to 6e-4) is the right direction vs SE (~1e-5). However, the Phi(mean/std) form conflates sign and magnitude: the empirical driver of agreement is sign fraction proportion(margin_i>0) which matches observed within 1pp, not the SNR ratio. No mechanism identification (C2 gated), no full-DOM extrapolation (C3 gated on poor R^2=0.197 |margin| power law), and no product consequence are supported by this run."
+      "status": "REJECTED",
+      "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
     }
   }
 }

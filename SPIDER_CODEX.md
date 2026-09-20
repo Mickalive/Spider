@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **191**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **192**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -201,6 +201,7 @@ Validated experiments: **191**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-RUNTIME-35522287921 | runtime | PASS | SURVIVES_CURRENT_TEST | C-MEAS-VALID | `c1c1e0048a6f` |
 | EXP-GRAPH-35530590140 | graph | REVISE | CONFIRMED — C-FRESHNESS orthogonality at delta=0.15 CONFIRMED per frozen decision_rule: all C1-C7 PASS on production-like LOCAL testbed. V2 confound redesign (fixed 'expired' request_id) resolves parent fragility (B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304, delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684. Claim ceiling BOUNDED: (a) n_non304=684 < 800 required by frozen question — delta=0.10 inference marginal (TOST p=0.060); (b) LOCAL testbed only (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDN simulation); (c) VALIDATED/PRODUCT_CORE not warranted pending n>=800 re-run and distributed/CDN validation. Audit REVISE on reporting consistency (C2/C7 include 304s, should be non-304 per spec) and power shortfall — no effect on primary metric validity. | C-FRESHNESS | `e8f71032e6e9` |
 | EXP-INTEL-35530590171 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-PRODUCT-ECON | `c8c9ee1d83a1` |
+| EXP-PHYSICS-35530591329 | physics | REVISE | FALSIFIED-IN-SETTING | C-MEAS-VALID, C-WEB-DYNAMICS | `daf134dfe232` |
 
 ## Latest recorded claim events
 
@@ -211,8 +212,8 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35530590140 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-INTEL-35530590171 | intel |
+| C-MEAS-VALID | REJECTED | EXP-PHYSICS-35530591329 | physics |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-INTEL-35530590171 | intel |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35510154353 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35530591329 | physics |
