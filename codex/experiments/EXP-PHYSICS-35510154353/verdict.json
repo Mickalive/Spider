@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35510154353",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Null centering validated: all 4 estimators pass C1 (|shuffled-action null_mean| < 0.1 bits) with within-session shuffle. However, positive control sensitivity (C3) fails for both primary estimators under frozen hyperparameters (plug-in KL alpha=1.0 K3=0.099, KSG k=10 K3=0.0006, both < 0.5 threshold against 1.52-bit true CMI). The audit recomputes that MLE (alpha=0) K3=1.377 bits and alpha=0.1 K3=0.743 bits would PASS C3 on the same data. Frozen FALSIFIED-IN-SETTING is valid conditional on alpha=1.0, not evidence of fundamental measurement impossibility. Claim ceiling strictly bounded to frozen alpha=1.0 plug-in KL and sklearn discrete_features=True KSG."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment tests estimator sensitivity on a synthetic 12-state stochastic SPA, not Web dynamics. No new evidence for or against predictive dynamical structure on real Web transitions. Per-stratum PMI 1.46-1.69 bits confirms signal exists on this SPA class but does not address beyond-memory dynamics or production SPAs."
+    }
+  ],
+  "product_action": "FALSIFIED-IN-SETTING per frozen decision_rule C3: both primary estimators passing C1 fail C3 (positive_control_k3 < 0.5 bits). Product consequence: CMI estimation pathway blocked for this SPA class with frozen alpha=1.0 and sklearn discrete_features=True. Audit finds pathway NOT fundamentally exhausted — MLE alpha=0 gives K3=1.377, alpha=0.1 gives K3=0.743, both exceed 0.5 threshold on same data. Blocking is hyperparameter-specific, not estimator-family-specific.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can plug-in KL with alpha=0.1 or bias-corrected MLE (alpha=0) achieve |shuffled-action null_mean| < 0.1 bits while maintaining positive_control_k3 >= 0.5 bits and p <= 0.001 at N=5000 on the stochastic 12-state SPA — thereby resolving whether hyperparameter tuning unblocks the CMI pathway, or whether null centering degrades with reduced smoothing?",
+  "reason": "Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: both primary estimators passing C1 (null centering) fail C3 (positive control sensitivity). Plug-in KL K3=0.099 bits < 0.5 threshold; KSG k=10 K3=0.000560 bits < 0.5 threshold. True CMI is 1.52 bits (audit-confirmed from parent). However, audit REVISE correctly narrows ceiling: the FALSIFICATION is strictly conditional on frozen alpha=1.0 Laplace smoothing (which creates 88% pseudo-count mass, degenerate control K3=0.109 > stochastic K3=0.099, bias exceeding signal) and sklearn discrete_features=True KSG (which is k-invariant: k=5,10,20 all produce identical K3=0.000560). Audit recomputes MLE (alpha=0) K3=1.377 and alpha=0.1 K3=0.743 on same records — both would PASS C3. The CMI estimation pathway is NOT fundamentally exhausted; it is blocked by frozen hyperparameter choices. KSG k-invariance is specific to sklearn discrete-mode categorical matching, not the KSG estimator family. Per-stratum PMI 1.46-1.69 bits across 48/48 strata (all p=0.0) confirms the signal exists and is detectable by non-parametric tests. Verdict is arithmetically correct per frozen rule; claim ceiling severely narrowed by audit.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35510154353/result.json:metrics.screening_n5000 (B-PLUGIN-KL k3=0.098876, null_mean=0.064291 c1_pass=true c3_pass=false; B-KSG-CMI-K10 k3=0.000560 null_mean=-0.012066 c1_pass=true c3_pass=false)",
+    "research/experiments/EXP-PHYSICS-35510154353/result.json:metrics.ksg_k_invariance (k=5,10,20 all produce K3=0.000560 identically)",
+    "research/experiments/EXP-PHYSICS-35510154353/result.json:metrics.plugin_kl_smoothing_bias (degenerate_k3=0.109370 > stochastic_k3=0.098876, smoothing_bias_exceeds_signal=true)",
+    "research/experiments/EXP-PHYSICS-35510154353/result.json:metrics.permutation_test_exploratory (48/48 strata significant, mean PMI 1.595 bits range 1.46-1.69)",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:status REVISE, producer_claim_supported=false",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:validity_findings[1] plug_in_KL_Laplace_smoothing_bias (MLE alpha=0 K3=1.377, alpha=0.1 K3=0.743, alpha=0.01 K3=1.274 — all pass C3)",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:validity_findings[2] KSG_discrete_k_invariance (k=5,10,20 identical to 1e-12)",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:claim_ceiling (strictly bounded to frozen alpha=1.0, does NOT justify broad CMI impossibility)",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:recomputed_metrics.plugin_KL_alpha_sensitivity_recompute_N5000_K3 (alpha sweep: 1.0->0.099, 0.1->0.743, 0.01->1.27, MLE->1.377)",
+    "research/experiments/EXP-PHYSICS-35510154353/spec.json:decision_rule FALSIFIED-IN-SETTING clause C3",
+    "research/experiments/EXP-PHYSICS-35510154353/freeze.json:frozen_at 2026-09-20T16:22:11"
+  ]
+}

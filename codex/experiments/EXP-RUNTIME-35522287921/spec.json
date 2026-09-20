@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-RUNTIME-35522287921",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression correctness hold for streaming incremental decompression where the proxy forwards partial chunked frames without full body reassembly, such that the decompressor processes chunk boundaries incrementally at realistic CDN chunk sizes (8KB+) and multi-layer encodings?",
+  "hypothesis": "Iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical SHA256 output between streaming (incremental chunk-by-chunk) and buffered (full-body) execution paths for all 4 auth states, 3 content types (JSON, HTML, BINARY), 2 multi-layer encoding configurations (GZIP-THEN-BROTLI, BROTLI-THEN-GZIP), and 2 chunk sizes (8KB realistic CDN, 32-byte stress test), using high-entropy non-redundant payloads with compressed sizes in the 2-99KB range.",
+  "falsifier": "Any SHA256(streaming_decompressed) != SHA256(buffered_decompressed) across all observations for any (size, encoding, content_type, state, chunk_size) cell, OR any decompression error in the streaming path, OR any silent fallback (streaming_decompressed == raw_compressed) for any compressed response.",
+  "baselines": [
+    {
+      "id": "B-BUFFERED-GROUND-TRUTH",
+      "description": "Full-body buffered decompression (established 240/240 multi-layer correctness in parent EXP-RUNTIME-35513777099) serves as ground truth for streaming comparison",
+      "expected": "100% correctness (SHA256 matches generate_*_body(state, target_size) for all cells), re-validated in this experiment"
+    },
+    {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer gzip correctness at 10KB high-entropy with streaming proxy (regression from parent EXP-RUNTIME-35513777099 established 60/60)",
+      "expected": "100% correctness in both buffered and streaming paths, confirms single-layer pipeline not degraded"
+    },
+    {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer brotli correctness at 10KB high-entropy with streaming proxy (regression from parent EXP-RUNTIME-35513777099 established 60/60)",
+      "expected": "100% correctness in both buffered and streaming paths"
+    },
+    {
+      "id": "B-IDENTITY-HE-STREAMING",
+      "description": "IDENTITY (no compression) at 10KB and 100KB high-entropy through streaming proxy - validates wire-preserving correctness under streaming chunk forwarding",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, target_size) exactly for all 3 content types"
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "description": "Compressed size validation - at least 2/3 content types must achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB under multi-layer encoding",
+      "expected": "High-entropy payloads produce compressed sizes in the 2-99KB range, confirming payloads are not degenerate"
+    }
+  ],
+  "positive_control": "B-BUFFERED-GROUND-TRUTH: the same mock server and payload generators produce 100% correctness under the established buffered path, confirming the test infrastructure is functional before comparing against streaming.",
+  "null_control": "Within-state determinism: decompressed_hash must be identical across all 5 repetitions for each (state, encoding, content_type, size, chunk_size) cell in both buffered and streaming paths. Any within-state hash variation indicates non-deterministic behavior.",
+  "measurement_validity": [
+    "Streaming proxy architecture: ReverseProxyHandler reads upstream response incrementally (upstream_resp.read(CHUNK_READ_SIZE) in a loop) and forwards each chunk directly to the client without buffering the full body; this is the critical architectural difference from the parent's V1_BUFFERED_PROXY_NOT_STREAMING",
+    "Streaming client architecture: make_request_streaming() reads response incrementally using resp.raw.read(CHUNK_READ_SIZE) in a loop, accumulating raw bytes; decompress_body is then called on the accumulated bytes (matching real-world proxy behavior where decompression happens after receipt)",
+    "Two-tier verification: (1) streaming decompressed hash matches buffered decompressed hash (byte-identical), (2) streaming decompressed hash matches expected hash (correctness oracle)",
+    "8KB chunk size matches realistic CDN behavior (Cloudflare default ~8KB frames); 32-byte chunk size maximizes chunk count for boundary stress",
+    "High-entropy payload generators reused from parent EXP-RUNTIME-35495699298 and EXP-RUNTIME-35513777099 (generate_json_he_body, generate_html_he_body, generate_binary_he_body) - validated at Shannon entropy >= 3.5 bits/byte",
+    "Multi-layer encoding configurations: GZIP-THEN-BROTLI (body -> gzip.compress -> brotli.compress -> chunked transfer) and BROTLI-THEN-GZIP (body -> brotli.compress -> gzip.compress -> chunked transfer)",
+    "Correctness oracle: SHA256(generate_*_body(state, target_size)) computed in-process, same as parent",
+    "Silent fallback detection: SHA256(decompressed) == SHA256(raw_compressed) classified as failure",
+    "Python 3.12 stdlib gzip module + brotli 1.2.0",
+    "Payload entropy validation: Shannon entropy of each high-entropy generator output >= 3.5 bits/byte (inherited from parent chain)"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) streaming_hash == buffered_hash for ALL multi-layer streaming cells (byte-identical decompression output between streaming and buffered paths); (C2) streaming_hash == expected_hash for ALL multi-layer streaming cells (streaming correctness matches ground truth); (C3) B-GZIP-SINGLE-LAYER-REGRESSION and B-BROTLI-SINGLE-LAYER-REGRESSION pass 100% in both buffered and streaming paths (regression controls); (C4) null_control passes (all_same=true for all states in all streaming cells); (C5) B-COMPRESSED-TARGET-RANGE passes (at least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB). FALSIFIED if any streaming decompressed hash differs from buffered hash OR any streaming decompressed hash differs from expected hash OR any decompression error in streaming path. MEASUREMENT_INVALID if infrastructure prevents data collection, if identity baseline fails, or if B-COMPRESSED-TARGET-RANGE fails.",
+  "product_consequence_positive": "Streaming incremental decompression is validated: the proxy can forward partial chunked frames without full body reassembly, and decompression correctness is preserved. This resolves the V1_BUFFERED_PROXY_NOT_STREAMING limitation, unblocking the CDN correctness gate. Real CDNs (Cloudflare/Fastly/Akamai) serve chunked responses without guaranteeing contiguous bodies; streaming correctness is a prerequisite for real-CDN testing.",
+  "product_consequence_negative": "Streaming decompression fails correctness: chunk boundaries corrupt the decompression state machine, causing byte-identical output to fail. The decompression pipeline requires streaming-aware redesign (e.g., decompressor must handle partial frames, cross-layer state contamination at chunk boundaries). CDN testing is blocked until streaming decompression is fixed. Diagnosis required: is the failure in the incremental decompression state machine, chunk-boundary dictionary references, or cross-layer state contamination?",
+  "estimated_cost": "Low: ~240 HTTP requests to localhost mock (2 sizes x 3 types x 2 multi-layer encodings x 4 states x 5 reps = 240 streaming cells + ~120 buffered ground truth + baselines), <15 minutes execution, no external infrastructure, no API costs. Reuses validated high-entropy generators and mock server from parent.",
+  "expected_information_gain": "High: this experiment directly tests the V1_BUFFERED_PROXY_NOT_STREAMING limitation inherited from parent EXP-RUNTIME-35495699298 and confirmed in EXP-RUNTIME-35513777099. The parent established 240/240 multi-layer correctness but explicitly noted that 'the decompressor never observes a chunk boundary' due to full-body buffering. A positive result unblocks the CDN correctness gate (the highest-priority remaining blocker for C-MEAS-VALID Product Core readiness). A negative result identifies a critical streaming decompression failure that must be fixed before CDN testing is meaningful. Either outcome is highly decision-relevant: streaming correctness is architecturally orthogonal to multi-layer correctness and cannot be inferred from the parent's results."
+}
