@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35538865067",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    "Positive control B-LOCALHOST-DIRECT passes 240/240 with 240/240 raw-byte passthrough and 0 transport errors, confirming the localhost environment and decompression logic are valid. CDN inferences are licensed.",
+    "CDN infrastructure (Cloudflare free tier, quick tunnel, edge sjc01) was reachable and returned HTTP 200 for all 273 CDN responses (240 main + 18 cache + 15 identity). Zero transport errors across all 513 rows. Tunnel health probes verified before measurement.",
+    "Measurement validity is established: raw evidence (verbatim headers, raw-body SHA256, timing) preserved distinct from derived measurements in raw_cell_results.jsonl. No auto-decode middleware used (raw http.client reads).",
+    "Chunk sizes 8192/32 refer to decompressor feed granularity; network reads used 8192-byte frames over TLS. Real TCP segmentation and TLS framing through Cloudflare applied to all CDN rows.",
+    "Content-Encoding headers recorded per observation; cf-cache-status was DYNAMIC on all 273 CDN responses (no HIT observed). This means C3 cache stability tested consecutive-serve stability only, not stale-cache serving behavior. Do not interpret C3 PASS as 'CDN caching is safe'.",
+    "Single Cloudflare edge (sjc01) via one quick tunnel. Geographic distribution across edges, paid-tier behaviors, other CDN providers (Fastly, Akamai, CloudFront), payloads >100KB, depths 3-5, other quality/level settings, concurrent clients, and HTTP/1.1 vs HTTP/2 differences remain untested per prereg claim ceiling.",
+    "BINARY payload bodies vary across interpreter sessions (hash(state) depends on PYTHONHASHSEED). Ground truth was computed within-run from the same bytes served, so within-run correctness comparisons are valid. Cross-run BINARY ground-truth reproducibility remains unknown.",
+    "Compression levels executed: gzip level 1, brotli quality 4 (parent-faithful). Spec ceiling text mentions gzip default level 6; actual executed levels match parent run_experiment.py.",
+    "Two pre-registration-conformant execution bugs were fixed before any outcome-bearing measurement (tunnel-stdout blocking read; HTTPS hostname attribute). No frozen design element (conditions, N, decision rule) was altered.",
+    "Jitter 200-500ms between CDN requests, unique URLs per main-matrix observation plus Cache-Control: public, max-age=300 on origin. 1s spacing for cache triplets. Cache-busting protocol followed."
+  ],
+  "baseline_findings": [
+    {
+      "control_id": "B-LOCALHOST-DIRECT",
+      "expected": "byte-identical decompression output to ground truth (re-validates parent 840/840)",
+      "observed": "240/240 correct, 240/240 raw-bytes passthrough, 0 transport errors",
+      "pass": true,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=LOCALHOST (240 rows)"
+    },
+    {
+      "control_id": "B-CDN-RAW-PASSTHROUGH",
+      "expected": "byte-identical decompression output to ground truth",
+      "observed": "0/60 correct (GZIP-OUTER 0/30: outer gzip decoded by CDN, inner-brotli bytes served with no Content-Encoding; BROTLI-OUTER 0/30: outer brotli decoded by CDN)",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN accept_encoding=none (60 rows)"
+    },
+    {
+      "control_id": "B-CDN-GZIP-ONLY",
+      "expected": "byte-identical decompression output to ground truth",
+      "observed": "30/60 correct (GZIP-OUTER 30/30 passthrough-or-valid-regzip; BROTLI-OUTER 0/30: CDN decoded outer brotli, re-gzipped text types)",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN accept_encoding=gzip (60 rows)"
+    },
+    {
+      "control_id": "B-CDN-BROTLI-ONLY",
+      "expected": "byte-identical decompression output to ground truth",
+      "observed": "0/60 correct (GZIP-OUTER 0/30: CDN gunzipped outer layer, served inner-brotli bytes with Content-Encoding absent; BROTLI-OUTER 0/30: CDN decoded outer brotli)",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN accept_encoding=br (60 rows)"
+    },
+    {
+      "control_id": "B-CDN-IDENTITY",
+      "expected": "byte-identical output to ground truth (passthrough)",
+      "observed": "5/15 correct via CDN (BINARY 5/5 passthrough; JSON 0/5 and HTML 0/5 gzip-compressed by CDN with Content-Encoding: gzip; forensic gzip_dc recovers ground truth, ITER==GT)",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN-IDENTITY (15 rows), forensic_rows.json payload_key=*_IDENTITY ae=both (3 rows)"
+    },
+    {
+      "control_id": "C1_CDN_BYTE_IDENTITY",
+      "expected": "all CDN-served compressed payloads decompress byte-identical to ground truth",
+      "observed": "60/240 correct (0.25): only GZIP-OUTER with client Accept-Encoding containing gzip (60/60); all other 180 fail",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN (240 rows)"
+    },
+    {
+      "control_id": "C2_NO_SILENT_REENCODE",
+      "expected": "delivered Content-Encoding matches origin encoding, or any upgraded encoding still decompresses identically under fixed-order streaming",
+      "observed": "header match 60/240; byte passthrough 40/240; silent HTML gzip re-encode (bytes differ, header still 'gzip'); fixed-order streaming fails on all 180 transformed deliveries",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl derived.ce_matches_expected (240 rows), forensic_rows.json (36 rows)"
+    },
+    {
+      "control_id": "C3_CACHE_STABILITY",
+      "expected": "3 consecutive identical requests to same URL produce identical decompressed output",
+      "observed": "6/6 groups byte-stable across reps (raw_unique=1) and output-identical (3/6 all-correct True x3, 3/6 all-incorrect None x3); no cf-cache HIT ever observed (cf-cache-status=DYNAMIC on all 273 CDN responses) so cache-HIT staleness per se was not exercised",
+      "pass": true,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN-CACHE (18 rows)"
+    },
+    {
+      "control_id": "C4_IDENTITY_PASSTHROUGH",
+      "expected": "identity payloads pass through CDN without byte modification",
+      "observed": "5/15 byte-identical (BINARY 5/5; JSON/HTML 0/10 gzip-compressed by CDN, benign and reversible)",
+      "pass": false,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN-IDENTITY (15 rows)"
+    }
+  ],
+  "recomputed_metrics": {
+    "cdn_main_correct": "60/240",
+    "cdn_main_correct_rate": 0.25,
+    "cdn_bytes_passthrough": "40/240",
+    "cdn_bytes_passthrough_rate": 0.1667,
+    "cdn_ce_header_match": "60/240",
+    "cdn_ce_header_match_rate": 0.25,
+    "cdn_chunk8192_correct": "30/120",
+    "cdn_chunk32_correct": "30/120",
+    "identity_cdn_correct": "5/15",
+    "identity_cdn_correct_rate": 0.3333,
+    "localhost_correct": "240/240",
+    "localhost_correct_rate": 1.0,
+    "per_cell_cdn_correct": {
+      "CDN_BINARY_GZIP-OUTER_chunk8192_ae-gzip": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk8192_ae-both": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk32_ae-gzip": "5/5",
+      "CDN_BINARY_GZIP-OUTER_chunk32_ae-both": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk8192_ae-gzip": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk8192_ae-both": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk32_ae-gzip": "5/5",
+      "CDN_HTML_GZIP-OUTER_chunk32_ae-both": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk8192_ae-gzip": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk8192_ae-both": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk32_ae-gzip": "5/5",
+      "CDN_JSON_GZIP-OUTER_chunk32_ae-both": "5/5",
+      "all_other_36_cells": "0/5"
+    },
+    "forensic_iterative_fullbody_recovers_ground_truth": "24/24 JSON/HTML forensic deliveries (forensic_rows.json decode_attempts.iter_dc_sha == manifest ground_truth_sha256)",
+    "forensic_n_rows": 36,
+    "cdn_content_encoding_delivered_gzip": 100,
+    "cdn_content_encoding_delivered_none": 140,
+    "n_cache_groups": 6,
+    "n_cache_groups_raw_stable": "6/6",
+    "cdn_median_response_time_ms": 162.0,
+    "cdn_response_time_ms_min": 140.6,
+    "cdn_response_time_ms_max": 287.2,
+    "localhost_median_response_time_ms": 0.6
+  },
+  "claim_ceiling": "The experiment FALSIFIES the hypothesis that iterative decompression (brotli→gzip→identity, max_depth=5) of high-entropy multi-layer compressed payloads served through Cloudflare free-tier CDN produces byte-identical output to ground truth under Accept-Encoding negotiation. The maximum justified claim is bounded to: CDN Accept-Encoding negotiation transforms (gunzip when client omits gzip, always de-brotli origin brotli, silent re-encode under unchanged header, gzip-compress identity text) break fixed-origin-order streaming decompression. The forensic finding that encoding-agnostic iterative decode (sniff delivered bytes, try brotli→gzip until identity) recovers ground truth on 24/24 JSON/HTML CDN deliveries is a hypothesis for the next experiment, not an established result of this packet. Claim ceiling: Cloudflare free tier, single edge (sjc01), 10KB nominal, depth 2, gzip L1 / brotli q4, sequential requests, no cache HIT observed. C-MEAS-VALID remains blocked from Product Core promotion pending encoding-agnostic decompression fix validated through same CDN protocol.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35538865067/raw_cell_results.jsonl (513 rows, raw vs derived split)",
+    "research/experiments/EXP-RUNTIME-35538865067/payload_manifest.json (sha256:2c3b61c48254bde93e322f08336c50ae1814fadd4593683ddcedd42373121732)",
+    "research/experiments/EXP-RUNTIME-35538865067/forensic_rows.json (sha256:93ba2c8ebc32c9032e4fbcb27ecc29794d2ef5135c65da1487c935a70db966f7)",
+    "research/experiments/EXP-RUNTIME-35538865067/result.json (producer handoff, outcome=FALSIFIES, status=COMPLETE)",
+    "research/experiments/EXP-RUNTIME-35538865067/report.md (EXECUTE interpretation)",
+    "research/experiments/EXP-RUNTIME-35538865067/provenance.json (sha256 artifacts, environment, commands)",
+    "research/experiments/EXP-RUNTIME-35538865067/run_experiment.py (frozen execution code, sha256:dd6a62b7696f2e1d1ec5cf6fa3946a9e8cab4ca5edf29c885c403aefb377317b)",
+    "research/experiments/EXP-RUNTIME-35538865067/spec.json (frozen design, hash b78e058d10225136002b0c85d1add0855fb6adc763a3f9e443c4749ba5b82f42)",
+    "research/experiments/EXP-RUNTIME-35538865067/prereg.md (frozen preregistration, hash 4aadb45e1ae6311a04a128e1ba8c95e054f24840b72ec9cb79b69911664103ee)",
+    "research/experiments/EXP-RUNTIME-35538865067/freeze.json (frozen inputs hash 380fabd9e43561549557e91ae93e56c736511af4dd8b48adc81318032baede4d3d)"
+  ],
+  "unresolved": [
+    "Whether encoding-agnostic iterative decode (shown recoverable on 24/24 JSON/HTML forensic deliveries) restores 240/240 correctness through the CDN was not executed as a frozen condition; it is the recommended next test, not an established result of this packet.",
+    "CDN-cache HIT staleness: no cf-cache HIT was observed (all DYNAMIC), so stale-cache serving behavior remains untested; a cacheable content-type/extension design would be needed.",
+    "Other CDN providers (Fastly, Akamai, CloudFront), paid-tier behaviors, payloads >100KB, depths 3-5, other quality/level settings, concurrent clients, and HTTP/1.1 vs HTTP/2 behavioral differences remain untested per prereg claim ceiling.",
+    "BINARY forensic ground-truth comparison is in-session only (BINARY bodies depend on PYTHONHASHSEED per parent handoff); cross-run BINARY ground-truth reproducibility remains unknown.",
+    "The specific interaction between CDN Accept-Encoding negotiation and multi-layer compression order (GZIP-OUTER vs BROTLI-OUTER) is diagnosed but the full parameter space of CDN encoding behaviors (quality upgrades, Vary semantics, ETag interaction) is not exhausted."
+  ]
+}

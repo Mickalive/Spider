@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "forensic_rows.json": "93ba2c8ebc32c9032e4fbcb27ecc29794d2ef5135c65da1487c935a70db966f7",
+    "forensic_tunnel.log": "826dfef0754a1f537e230a1d31d0e9a359a8c49e07967c13f1a0a2b22bc71edf",
+    "payload_manifest.json": "2c3b61c48254bde93e322f08336c50ae1814fadd4593683ddcedd42373121732",
+    "raw_cell_results.jsonl": "b39fcbfbc7734b169571fe299f5f7c8015cce534f07185354061d641ed3f96c3",
+    "run_experiment.py": "dd6a62b7696f2e1d1ec5cf6fa3946a9e8cab4ca5edf29c885c403aefb377317b",
+    "tunnel.log": "079c4ce6c44fbe78b4031039f15835d86d31121af186edad93aac57a81e5cb00"
+  },
+  "cdn_edge": "sjc01 (tunnel.log: Registered tunnel connection location=sjc01)",
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35538865067/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35538865067/forensic_probe.py",
+    "payload builders and streaming/fullbody decompressors copied parent-faithfully from research/experiments/EXP-RUNTIME-35530588298/run_experiment.py"
+  ],
+  "commands": [
+    "python3 research/experiments/EXP-RUNTIME-35538865067/run_experiment.py (detached via setsid; writes raw_cell_results.jsonl, payload_manifest.json, tunnel.log, run.log)",
+    "python3 research/experiments/EXP-RUNTIME-35538865067/forensic_probe.py (fresh tunnel; writes forensic_rows.json, forensic_tunnel.log, forensic.log)"
+  ],
+  "datasets_fixtures": [
+    "payload_manifest.json (9 payloads: 3 content types x 2 compression orders + 3 identity; deterministic seeds; BINARY bodies PYTHONHASHSEED-dependent, ground truth computed within-run)"
+  ],
+  "environment": {
+    "brotli": "1.2.0",
+    "cloudflared": "2026.9.1 (binary /tmp/opencode/cloudflared.gz, ELF x86-64, Go go1.26.8)",
+    "github_run_id": "35538865067",
+    "http_client": "python http.client (HTTPSConnection/HTTPConnection), manual reads, no content-decoding middleware",
+    "platform": "linux x86_64",
+    "python": "3.12.14",
+    "requests_lib": "2.34.2 (installed; NOT used for body reads)"
+  },
+  "experiment_id": "EXP-RUNTIME-35538865067",
+  "frozen_inputs": {
+    "freeze.json": "380fabd9e43561549557e91ae93e56c736511af4dd8b48adc81318032baede4d3d",
+    "prereg.md": "4aadb45e1ae6311a04a128e1ba8c95e054f24840b72ec9cb79b69911664103ee",
+    "request.json": "b823b814ed6b9e91eecfdf0f774aa1929c4d9a178abac01ccd3df29b2d713b9d",
+    "spec.json": "b78e058d10225136002b0c85d1add0855fb6adc763a3f9e443c4749ba5b82f42"
+  },
+  "lane": "runtime",
+  "protocol_reference": "frozen spec.json decision_rule C1-C4 with baselines B-LOCALHOST-DIRECT, B-CDN-RAW-PASSTHROUGH, B-CDN-GZIP-ONLY, B-CDN-BROTLI-ONLY, B-CDN-IDENTITY; prereg sections 4-6",
+  "relevant_commits": [
+    {
+      "note": "working tree base; no commits made by EXECUTE (commit/push prohibited)",
+      "sha": "base_sha 4fba76910065b12b84e998fb071fd3b07a37434e per request.json"
+    }
+  ],
+  "tunnel_urls": {
+    "forensic": "https://cos-exciting-corp-jvc.trycloudflare.com",
+    "main_matrix": "https://refrigerator-grammar-pike-decades.trycloudflare.com"
+  },
+  "wall_time": {
+    "forensic_probe_s": "~180 (approximate: launch-to-completion including fresh tunnel setup; no per-phase timestamps recorded)",
+    "main_run_s": 151.6
+  }
+}
