@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35495699298",
+  "lane": "runtime",
+  "github_run_id": "35495699298",
+  "source_commit": null,
+  "base_sha": "eb499446fe82f64a0c11c73770d08d7fda9702b0",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "brotli_version": "1.2.0",
+    "jwt_version": "2.14.0",
+    "requests_version": "2.34.2"
+  },
+  "frozen_inputs": {
+    "request_hash": "015606533317b41157e4c439db964dbb918888c21757385b49950d1b500d9917",
+    "spec_hash": "10f02a222b6a051f568f0201f458bffd6b5753557f5b07e696ab11689c527957",
+    "prereg_hash": "a2c15aae4234c14029384e11ec9c356775b000cba881080f82ef4e86e7be410b",
+    "freeze_hash": null
+  },
+  "code_paths": {
+    "run_experiment.py": "research/experiments/EXP-RUNTIME-35495699298/run_experiment.py",
+    "parent_experiment": "research/experiments/EXP-RUNTIME-35481773400/run_experiment.py"
+  },
+  "artifacts": {
+    "result.json": "research/experiments/EXP-RUNTIME-35495699298/result.json",
+    "report.md": "research/experiments/EXP-RUNTIME-35495699298/report.md",
+    "run_experiment.py": "research/experiments/EXP-RUNTIME-35495699298/run_experiment.py"
+  },
+  "datasets_fixtures": {
+    "wikipedia_html": "Generated deterministically from seeded RNG (no external fetch required)",
+    "jwt_tokens": "Generated via PyJWT with HS256, secret=spider-secret-12345"
+  },
+  "infrastructure": {
+    "mock_server": "Python http.server on localhost:8700+",
+    "reverse_proxy": "Python http.server on localhost:8800+",
+    "chunked_transfer_encoding": "chunk_size=32 bytes",
+    "ports_used": "8700-8723 (mock), 8800-8823 (proxy)"
+  },
+  "execution": {
+    "total_observations": 1200,
+    "main_cells": 24,
+    "regression_cells": 6,
+    "identity_cells": 6,
+    "observations_per_cell": 20,
+    "total_requests": 1200,
+    "execution_time_seconds": null
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-RUNTIME-35481773400",
+    "grandparent_experiment": "EXP-RUNTIME-35456070671",
+    "great_grandparent_experiment": "EXP-RUNTIME-35470447407",
+    "parent_decision": "NARROW_SUCCESS",
+    "parent_ceiling": "localhost synthetic redundant payloads compressing to 0.07-1.06KB (max 34 chunks)"
+  }
+}
