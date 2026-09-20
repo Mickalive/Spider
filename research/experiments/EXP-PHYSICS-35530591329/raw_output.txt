@@ -1,0 +1,69 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35530591329 - alpha sweep for plug-in KL on stochastic SPA
+========================================================================
+
+[VERIFY] CANDIDATES design-level check...
+[VERIFY] C6: PASS (48/48 pairs with 4 distinct candidates)
+
+[COLLECT] Stochastic SPA N=5000 (50 sessions x 100 steps, SEED=42)...
+[COLLECT] N=5000 SHA256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+
+[COLLECT] Deterministic SPA N=5000 (degenerate baseline)...
+[COLLECT] N=5000 SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (0.0s)
+
+[BUILD] Stochastic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701} K3={'deterministic': 77, 'stochastic': 764, 'total': 841, 'det_ratio': 0.09155766944114149}
+
+[BUILD] Deterministic SPA records...
+[BUILD] K3 records=5000
+
+========================================================================
+ALPHA SWEEP: plug-in KL with alpha in {0, 0.01, 0.1, 0.5, 1.0}
+========================================================================
+
+--- alpha=0 ---
+  K2 (stochastic) = 1.192911 bits (0.0s)
+  K3 (stochastic) = 1.377240 bits (0.0s)
+  C1 null control: null_mean=0.924268 std=0.009312 |mean|=0.924268 (threshold 0.1) -> FAIL (16.5s)
+  C3 positive control: K3=1.377240 p=0.000999 -> PASS (29.3s)
+  Degenerate control (deterministic SPA): K3=1.390812 bits (0.0s)
+
+--- alpha=0.01 ---
+  K2 (stochastic) = 1.167492 bits (0.1s)
+  K3 (stochastic) = 1.274274 bits (0.0s)
+  C1 null control: null_mean=0.940738 std=0.006997 |mean|=0.940738 (threshold 0.1) -> FAIL (34.9s)
+  C3 positive control: K3=1.274274 p=0.000999 -> PASS (47.0s)
+  Degenerate control (deterministic SPA): K3=1.294333 bits (0.0s)
+
+--- alpha=0.1 ---
+  K2 (stochastic) = 0.651121 bits (0.1s)
+  K3 (stochastic) = 0.743134 bits (0.0s)
+  C1 null control: null_mean=0.560780 std=0.002144 |mean|=0.560780 (threshold 0.1) -> FAIL (34.8s)
+  C3 positive control: K3=0.743134 p=0.000999 -> PASS (47.1s)
+  Degenerate control (deterministic SPA): K3=0.773228 bits (0.0s)
+
+--- alpha=0.5 ---
+  K2 (stochastic) = 0.168621 bits (0.1s)
+  K3 (stochastic) = 0.220766 bits (0.0s)
+  C1 null control: null_mean=0.150579 std=0.000383 |mean|=0.150579 (threshold 0.1) -> FAIL (35.0s)
+  C3 positive control: K3=0.220766 p=0.000999 -> FAIL (47.1s)
+  Degenerate control (deterministic SPA): K3=0.238714 bits (0.0s)
+
+--- alpha=1.0 ---
+  K2 (stochastic) = 0.071347 bits (0.1s)
+  K3 (stochastic) = 0.098876 bits (0.0s)
+  C1 null control: null_mean=0.064291 std=0.000149 |mean|=0.064291 (threshold 0.1) -> PASS (34.9s)
+  C3 positive control: K3=0.098876 p=0.000999 -> FAIL (46.9s)
+  Degenerate control (deterministic SPA): K3=0.109370 bits (0.0s)
+
+[SCREENING] C1 passers: [1.0]
+[SCREENING] C3 passers: [0, 0.01, 0.1]
+[SCREENING] C1+C3 passers: []
+[SCREENING] C7 stratum buckets: 2 non-empty -> PASS
+
+[VERDICT] FALSIFIED-IN-SETTING
+[OUTCOME] FALSIFIES
+[REASON] C3: alphas passing C1 ([1.0]) have positive_control_k3 < 0.5 bits on stochastic SPA. Best: alpha=1.0 K3=0.098876.
+
+Saved raw_results.json (wall 376.6s)

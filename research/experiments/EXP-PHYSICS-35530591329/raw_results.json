@@ -1,0 +1,296 @@
+{
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "seed": 42,
+  "alpha_values_tested": [
+    0,
+    0.01,
+    0.1,
+    0.5,
+    1.0
+  ],
+  "n_transitions_stochastic": 5000,
+  "sha_stochastic": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+  "n_transitions_deterministic": 5000,
+  "sha_deterministic": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "determinism_k2_stochastic": {
+    "deterministic": 366,
+    "stochastic": 1072,
+    "total": 1438,
+    "det_ratio": 0.2545201668984701
+  },
+  "determinism_k3_stochastic": {
+    "deterministic": 77,
+    "stochastic": 764,
+    "total": 841,
+    "det_ratio": 0.09155766944114149
+  },
+  "alpha_sweep": {
+    "alpha_0": {
+      "alpha": 0,
+      "k2_value_stochastic": 1.192910898863627,
+      "k3_value_stochastic": 1.3772399468136238,
+      "k3_minus_k2": 0.18432904794999683,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "plug-in KL (alpha=0)",
+        "alpha": 0
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "plug-in KL (alpha=0)",
+        "alpha": 0
+      },
+      "null_control": {
+        "observed": 1.192910898863627,
+        "null_mean": 0.9242679559160352,
+        "null_std": 0.009312254914512192,
+        "abs_null_mean": 0.9242679559160352,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.9276760238717043,
+          0.9187377482543696,
+          0.9157437324164724,
+          0.9157089740525565,
+          0.9177616336251924
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": 1.3772399468136238,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": true,
+      "degenerate_control_k3": 1.3908120709078604
+    },
+    "alpha_0.01": {
+      "alpha": 0.01,
+      "k2_value_stochastic": 1.1674919844162246,
+      "k3_value_stochastic": 1.2742735313837399,
+      "k3_minus_k2": 0.1067815469675153,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "plug-in KL (alpha=0.01)",
+        "alpha": 0.01
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "plug-in KL (alpha=0.01)",
+        "alpha": 0.01
+      },
+      "null_control": {
+        "observed": 1.1674919844162246,
+        "null_mean": 0.940738486499608,
+        "null_std": 0.0069972133920269295,
+        "abs_null_mean": 0.940738486499608,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.9433881474311038,
+          0.9362006739593919,
+          0.9343459281104847,
+          0.9339693840450679,
+          0.9344470651255539
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": 1.2742735313837399,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": true,
+      "degenerate_control_k3": 1.294332560281507
+    },
+    "alpha_0.1": {
+      "alpha": 0.1,
+      "k2_value_stochastic": 0.6511207659709047,
+      "k3_value_stochastic": 0.7431344952637531,
+      "k3_minus_k2": 0.09201372929284835,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "plug-in KL (alpha=0.1)",
+        "alpha": 0.1
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "plug-in KL (alpha=0.1)",
+        "alpha": 0.1
+      },
+      "null_control": {
+        "observed": 0.6511207659709047,
+        "null_mean": 0.5607804793740102,
+        "null_std": 0.0021440153264517775,
+        "abs_null_mean": 0.5607804793740102,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.5617160819947535,
+          0.5589888597499575,
+          0.5590876222042275,
+          0.5586780071370938,
+          0.5576355916376685
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": 0.7431344952637531,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": true,
+      "degenerate_control_k3": 0.7732277392655869
+    },
+    "alpha_0.5": {
+      "alpha": 0.5,
+      "k2_value_stochastic": 0.16862137172060213,
+      "k3_value_stochastic": 0.22076615564793486,
+      "k3_minus_k2": 0.05214478392733274,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "plug-in KL (alpha=0.5)",
+        "alpha": 0.5
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "plug-in KL (alpha=0.5)",
+        "alpha": 0.5
+      },
+      "null_control": {
+        "observed": 0.16862137172060213,
+        "null_mean": 0.15057871974895376,
+        "null_std": 0.0003832293056856607,
+        "abs_null_mean": 0.15057871974895376,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.1507840798950624,
+          0.15021076159737576,
+          0.15038766137786652,
+          0.1502946043269928,
+          0.14987522603098077
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": 0.22076615564793486,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": 0.2387136851700366
+    },
+    "alpha_1.0": {
+      "alpha": 1.0,
+      "k2_value_stochastic": 0.07134701598598665,
+      "k3_value_stochastic": 0.09887606746922993,
+      "k3_minus_k2": 0.027529051483243278,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "plug-in KL (alpha=1.0)",
+        "alpha": 1.0
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "plug-in KL (alpha=1.0)",
+        "alpha": 1.0
+      },
+      "null_control": {
+        "observed": 0.07134701598598665,
+        "null_mean": 0.06429067807063388,
+        "null_std": 0.00014874455936696908,
+        "abs_null_mean": 0.06429067807063388,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.06437765834800835,
+          0.06414712134435463,
+          0.06423313246156583,
+          0.06419886131271124,
+          0.06400777465076453
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.09887606746922993,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": 0.1093698633369889
+    }
+  },
+  "c1_passers": [
+    1.0
+  ],
+  "c3_passers": [
+    0,
+    0.01,
+    0.1
+  ],
+  "both_passers": [],
+  "c6_design_pass": true,
+  "c7_stratum_buckets": 2,
+  "c7_pass": true,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 343,
+      "total_records": 2147,
+      "observed_pmi": 0.7998208905608001,
+      "null_mean": 0.6439133494466475,
+      "null_std": 0.005413891693162193
+    },
+    "10-19": {
+      "n_strata": 37,
+      "total_records": 433,
+      "observed_pmi": 0.9611065561332295,
+      "null_mean": 0.6164541557317381,
+      "null_std": 0.016422969605349218
+    },
+    "20-49": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "phase2": null,
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "reason": "C3: alphas passing C1 ([1.0]) have positive_control_k3 < 0.5 bits on stochastic SPA. Best: alpha=1.0 K3=0.098876.",
+  "wall_seconds": 376.5574278831482
+}
