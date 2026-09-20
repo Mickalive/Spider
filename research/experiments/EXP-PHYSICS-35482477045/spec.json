@@ -1,17 +1,55 @@
 {
   "experiment_id": "EXP-PHYSICS-35482477045",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS", "C-MEAS-VALID"],
+  "question": "Can a stochastic positive control SPA — where action genuinely changes P(next_state | state) by mixing deterministic hash routing with uniform random candidate selection — validate KSG CMI and likelihood-ratio estimator sensitivity (positive_control_k3 >= 0.5 bits) while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby closing the C3 test-design gap that blocked the frozen verdict in EXP-PHYSICS-35476270440?",
+  "hypothesis": "H0 (null): Neither KSG CMI nor likelihood-ratio achieves BOTH |shuffled-action null_mean| < 0.1 bits AND positive_control_k3 >= 0.5 bits on the stochastic SPA at N=5000. H1 (alternative): At least one of KSG CMI or likelihood-ratio achieves BOTH |null_mean| < 0.1 bits AND positive_control_k3 >= 0.5 bits on the stochastic SPA at N=5000. H2 (beyond-Markov, conditional on H1): K3 CMI - K2 CMI > 0.1 bits with bootstrap 95% CI lower > 0.0 at N=5000 on the stochastic SPA.",
+  "falsifier": "C1 (null centering): For every estimator, |shuffled-action null_mean| >= 0.1 bits at N=5000. C3 (positive control sensitivity): For every estimator passing C1, positive_control_k3 < 0.5 bits. C6 (SPA design): Fewer than 48/48 (state, action) pairs with 4 distinct candidates. C7 (stratum coverage): Fewer than 2 non-empty stratum size buckets.",
+  "baselines": [
+    {
+      "id": "B-WEIGHTED-PMI",
+      "description": "Weighted-averaged per-stratum Laplace-smoothed conditional PMI (parent null_mean=0.407 bits). Replicates parent bias floor.",
+      "expected": "null_mean >= 0.1 (bias persists, inherited from parent)"
+    },
+    {
+      "id": "B-EQUAL-WEIGHT-PMI",
+      "description": "Equal-weight per-stratum PMI (parent null_mean=0.704 bits).",
+      "expected": "null_mean >= 0.1"
+    },
+    {
+      "id": "B-MEDIAN-PMI",
+      "description": "Median per-stratum PMI (parent null_mean=0.686 bits).",
+      "expected": "null_mean >= 0.1"
+    },
+    {
+      "id": "B-KNN-CMI",
+      "description": "KNN CMI estimator (k=5, alpha=1.0, parent null_mean=-0.262 bits).",
+      "expected": "null_mean may shift sign or magnitude"
+    },
+    {
+      "id": "B-DETERMINISTIC-SPA",
+      "description": "KSG CMI on the parent's fully deterministic 8-state SPA. Expected CMI ~0 by construction for CMI estimators. Validates that the stochastic SPA produces non-zero CMI.",
+      "expected": "positive_control_k3 < 0.1 (degenerate, I(Y;A|Z)=0 by construction)"
+    }
+  ],
+  "positive_control": "Stochastic 12-state SPA: for each (state, action) transition, with probability 0.5 choose next state via deterministic hash routing (same as parent choose_next), and with probability 0.5 choose uniformly at random from CANDIDATES[state][action]. This creates I(Y;A|Z) > 0 by construction because P(Y|Z,A) != P(Y|Z) when action changes the deterministic-vs-stochastic mixture. Theoretical H(Y|Z,A) = 1.549 bits; theoretical I(Y;A|Z) depends on SPA structure but is expected to be 0.3-0.8 bits. Positive_control_k3 threshold: >= 0.5 bits (conservative, well above 0.1 null threshold). Permutation p <= 0.001.",
+  "null_control": "Shuffled-action null: for each of 500 permutations, shuffle action labels within each session (preserving session structure and url_before/url_after pairing), recompute the estimator on the stochastic SPA, take the mean across permutations. The null mean must satisfy |mean| < 0.1 bits for any estimator to pass C1. Unit of permutation: action-label within session (same as parent).",
+  "measurement_validity": [
+    "Stochastic SPA uses the same 12-state design, STATES, ACTIONS, and CANDIDATES as parent EXP-PHYSICS-35476270440.",
+    "SPA modification: choose_next_stochastic() replaces choose_next() — with probability 0.5 use hash routing, with probability 0.5 choose uniformly from CANDIDATES[current][action]. RNG seeded with seed=42 independently of session RNG.",
+    "Design verification: all 48/48 (state, action) pairs have 4 distinct candidates (inherited from parent CANDIDATES design, unchanged).",
+    "N=5000 transitions (50 sessions x 100 steps) with seed=42, same collection procedure as parent.",
+    "Strata with < 5 records are skipped (MIN_STRATUM_SIZE=5, same as parent).",
+    "KSG CMI implemented via sklearn.feature_selection.mutual_info_classif with k=5, alpha=1.0, discrete_features=True (same as parent).",
+    "Likelihood-ratio implemented via scipy.stats.chi2_contingency with Bonferroni correction (same as parent).",
+    "Bootstrap CI uses 200 trajectory-block resamples (same as parent).",
+    "Bonferroni correction for 5 primary comparisons (4 parent + 1 deterministic-SPA degenerate): alpha=0.01.",
+    "A separate deterministic SPA positive control (parent's 8-state SPA) is run to verify I(Y;A|Z)=0 for CMI estimators, confirming the stochastic SPA is needed.",
+    "If any estimator fails due to implementation issues, report as MEASUREMENT_INVALID with explicit error message."
+  ],
+  "decision_rule": "Verdict priority: FALSIFIED-IN-SETTING > MEASUREMENT_INVALID > SURVIVES_CURRENT_TEST.\n\nFALSIFIED-IN-SETTING triggers if ANY of:\n  (1) C1: All estimators have |shuffled-action null mean| >= 0.1 bits at N=5000\n  (2) C3: For any estimator passing C1, positive_control_k3 < 0.5 bits OR permutation p > 0.001\n  (3) C6: Fewer than 48/48 (state,action) pairs with 4 distinct candidates\n\nMEASUREMENT_INVALID triggers if:\n  (4) Fewer than 30% of (state,action) strata have >= 5 records at N=5000\n  (5) stratum_size_bias_decomposition has < 2 non-empty size buckets\n  (6) Any estimator implementation fails (e.g., missing dependency, convergence error)\n\nSURVIVES_CURRENT_TEST requires ALL of:\n  (C1) At least 1 estimator has |null_mean| < 0.1 bits\n  (C3) Positive control passes for that estimator (k3 >= 0.5 bits, p <= 0.001)\n  (C6) Design check passes\n  (C7) >= 2 non-empty size buckets\n\nPhase 2 (beyond-Markov, only if SURVIVES on C1):\n  (C2) K3 CMI - K2 CMI > 0.1 bits AND bootstrap 95% CI lower > 0.0\n  (C4) |K2(N=50000) - K2(N=5000)| <= 0.3 bits for the best estimator\n\nNote: C3 threshold is lowered from parent's 1.0 bit to 0.5 bits because:\n- The parent's 1.0-bit threshold was calibrated for stratum PMI on deterministic SPA\n- CMI estimators (KSG, LR) operate on a different scale\n- Theoretical CMI on stochastic SPA is 0.3-0.8 bits depending on structure\n- 0.5 bits is conservative (5x above null threshold) while being achievable",
+  "product_consequence_positive": "If sensitivity validated (H1 passes): the C3 test-design gap is closed. KSG CMI and/or LR can detect genuine action-conditioned dynamics while maintaining null centering. The PMI research program is unblocked for beyond-Markov K3-K2 testing on the stochastic SPA. This opens the path to: (a) testing whether I(S_next; A | S_current, history) > 0 on this SPA class, (b) exploring KSG k-sensitivity and LR history-aware variants, (c) eventually testing on production SPAs with stochastic transitions.",
+  "product_consequence_negative": "If sensitivity not validated (H0 confirmed): KSG CMI and LR cannot detect even a designed-in CMI signal of ~0.5 bits while maintaining null centering. The orthogonal-estimator pathway for Physics is closed for this SPA class. The Physics lane must pivot to: (a) fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery), (b) production Web data with alternative state representations, or (c) abandoning synthetic SPA simulation entirely.",
+  "estimated_cost": "Low-medium. Single Python script execution on stochastic 12-state SPA, N=5000 primary + N=50000 convergence test. ~15-20 minutes compute. 500 shuffled-action permutations. No browser/network required. Uses parent run_experiment.py infrastructure with modified choose_next_stochastic().",
+  "expected_information_gain": "Very high. This experiment directly resolves the critical blocker from EXP-PHYSICS-35476270440: the C3 test-design gap. A definitive answer in either direction closes one pathway and opens the other. The experiment is small, clean, and resolves the highest-uncertainty question in the Physics lane's current state. If positive, it validates the estimator toolkit for all future CMI-based tests. If negative, it definitively closes the CMI pathway and forces a paradigm shift."
 }
