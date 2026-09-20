@@ -1,0 +1,925 @@
+{
+  "experiment_id": "EXP-PRODUCT-35538865048",
+  "frozen_outcome": "SURVIVES_CURRENT_TEST",
+  "lane": "product",
+  "metrics": {
+    "baseline_body_only": 0.8333,
+    "baseline_status_only": 0.5,
+    "c1_auth_discrimination": 0.8333,
+    "c1_pass": true,
+    "c2_f1": 1.0,
+    "c2_pass": true,
+    "c2_per_condition": {
+      "token_refresh+cdn_cache_headers": {
+        "behavioral_mean": 0.5403,
+        "behavioral_std": 0.1957,
+        "n": 120,
+        "structural_mean": 13.8,
+        "structural_std": 0.4017,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      },
+      "token_refresh+error_format_variation": {
+        "behavioral_mean": 0.5429,
+        "behavioral_std": 0.1992,
+        "n": 120,
+        "structural_mean": 9.8,
+        "structural_std": 0.4017,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      },
+      "token_refresh+pagination_metadata": {
+        "behavioral_mean": 0.5361,
+        "behavioral_std": 0.201,
+        "n": 120,
+        "structural_mean": 13.025,
+        "structural_std": 0.9567,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      },
+      "token_refresh+variable_length_data": {
+        "behavioral_mean": 0.5614,
+        "behavioral_std": 0.1971,
+        "n": 120,
+        "structural_mean": 11.8,
+        "structural_std": 0.4017,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      }
+    },
+    "c2_tp_rate": 1.0,
+    "c2_wilson_lower": 0.9842,
+    "c3_orthogonality": {
+      "ci_lower": -0.095931,
+      "ci_upper": 0.083066,
+      "n": 480,
+      "pearson_p": 0.8873228496240727,
+      "pearson_r": -0.006484,
+      "se": 0.045787,
+      "tost_delta": 0.15,
+      "tost_p_lower": 0.0007906395638112018,
+      "tost_p_upper": 0.0002881012199400564,
+      "tost_pass": true,
+      "z_r": -0.006484
+    },
+    "c3_pass": true,
+    "c3_per_condition": {
+      "token_refresh+cdn_cache_headers": {
+        "behavioral_mean": 0.5403,
+        "behavioral_std": 0.1957,
+        "n": 120,
+        "structural_mean": 13.8,
+        "structural_std": 0.4017,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      },
+      "token_refresh+error_format_variation": {
+        "behavioral_mean": 0.5429,
+        "behavioral_std": 0.1992,
+        "n": 120,
+        "structural_mean": 9.8,
+        "structural_std": 0.4017,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      },
+      "token_refresh+pagination_metadata": {
+        "behavioral_mean": 0.5361,
+        "behavioral_std": 0.201,
+        "n": 120,
+        "structural_mean": 13.025,
+        "structural_std": 0.9567,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      },
+      "token_refresh+variable_length_data": {
+        "behavioral_mean": 0.5614,
+        "behavioral_std": 0.1971,
+        "n": 120,
+        "structural_mean": 11.8,
+        "structural_std": 0.4017,
+        "tp_rate_at_calibrated": 1.0,
+        "tp_wilson_lower": 0.969
+      }
+    },
+    "c3_variance_conditions_pass": 4,
+    "c3_variance_pass_required": 4,
+    "c4_fp_rate": 0.0,
+    "c4_pass": true,
+    "c4_per_noise": {
+      "cdn_cache_headers": {
+        "behavioral_mean": 0.0953,
+        "fp_rate": 0.0
+      },
+      "error_format_variation": {
+        "behavioral_mean": 0.0931,
+        "fp_rate": 0.0
+      },
+      "pagination_metadata": {
+        "behavioral_mean": 0.0976,
+        "fp_rate": 0.0
+      },
+      "variable_length_data": {
+        "behavioral_mean": 0.1,
+        "fp_rate": 0.0
+      }
+    },
+    "c5_pass": true,
+    "c5_tost_equivalence": {
+      "ci_upper": 0.083066,
+      "ci_upper_lt_delta": true,
+      "n": 480,
+      "pearson_r": -0.006484,
+      "tost_p_lower": 0.0007906395638112018,
+      "tost_p_upper": 0.0002881012199400564,
+      "tost_pass": true
+    },
+    "calibrated_metrics": {
+      "f1": 1.0,
+      "fp_count": 0,
+      "fp_rate": 0.0,
+      "meets_constraints": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "threshold": 0.2,
+      "tp_count": 240,
+      "tp_rate": 1.0,
+      "wilson_lower": 0.9842
+    },
+    "calibrated_threshold": 0.2,
+    "continuous_injection_ok": true,
+    "decision_source": "frozen prereg decision rule",
+    "error_format_inert": false,
+    "error_format_structural_std": 0.4017,
+    "frozen_outcome": "SURVIVES_CURRENT_TEST",
+    "threshold_sweep": [
+      {
+        "f1": 1.0,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": true,
+        "precision": 1.0,
+        "recall": 1.0,
+        "threshold": 0.2,
+        "tp_count": 240,
+        "tp_rate": 1.0,
+        "wilson_lower": 0.9842
+      },
+      {
+        "f1": 0.9565,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": true,
+        "precision": 1.0,
+        "recall": 0.9167,
+        "threshold": 0.25,
+        "tp_count": 220,
+        "tp_rate": 0.9167,
+        "wilson_lower": 0.8748
+      },
+      {
+        "f1": 0.9189,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": true,
+        "precision": 1.0,
+        "recall": 0.85,
+        "threshold": 0.3,
+        "tp_count": 204,
+        "tp_rate": 0.85,
+        "wilson_lower": 0.7993
+      },
+      {
+        "f1": 0.8785,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.7833,
+        "threshold": 0.35,
+        "tp_count": 188,
+        "tp_rate": 0.7833,
+        "wilson_lower": 0.727
+      },
+      {
+        "f1": 0.8321,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.7125,
+        "threshold": 0.4,
+        "tp_count": 171,
+        "tp_rate": 0.7125,
+        "wilson_lower": 0.6522
+      },
+      {
+        "f1": 0.8321,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.7125,
+        "threshold": 0.45,
+        "tp_count": 171,
+        "tp_rate": 0.7125,
+        "wilson_lower": 0.6522
+      },
+      {
+        "f1": 0.8321,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.7125,
+        "threshold": 0.5,
+        "tp_count": 171,
+        "tp_rate": 0.7125,
+        "wilson_lower": 0.6522
+      },
+      {
+        "f1": 0.7817,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.6417,
+        "threshold": 0.55,
+        "tp_count": 154,
+        "tp_rate": 0.6417,
+        "wilson_lower": 0.5792
+      },
+      {
+        "f1": 0.7097,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.55,
+        "threshold": 0.6,
+        "tp_count": 132,
+        "tp_rate": 0.55,
+        "wilson_lower": 0.4868
+      },
+      {
+        "f1": 0.6047,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.4333,
+        "threshold": 0.65,
+        "tp_count": 104,
+        "tp_rate": 0.4333,
+        "wilson_lower": 0.3722
+      },
+      {
+        "f1": 0.5276,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.3583,
+        "threshold": 0.7,
+        "tp_count": 86,
+        "tp_rate": 0.3583,
+        "wilson_lower": 0.3003
+      },
+      {
+        "f1": 0.3448,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 1.0,
+        "recall": 0.2083,
+        "threshold": 0.75,
+        "tp_count": 50,
+        "tp_rate": 0.2083,
+        "wilson_lower": 0.1617
+      },
+      {
+        "f1": 0.0,
+        "fp_count": 0,
+        "fp_rate": 0.0,
+        "meets_constraints": false,
+        "precision": 0.0,
+        "recall": 0.0,
+        "threshold": 0.8,
+        "tp_count": 0,
+        "tp_rate": 0.0,
+        "wilson_lower": 0.0
+      }
+    ],
+    "unique_behavioral_scores": 451
+  },
+  "observations": {
+    "calibrated_threshold": 0.2,
+    "delta": 0.15,
+    "detection_thresholds_tested": [
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8
+    ],
+    "p_refresh_success": 0.7,
+    "phase_a_noise_n": 240,
+    "phase_a_token_n": 240,
+    "phase_b_cooccur_n": 480,
+    "phase_c": {
+      "baseline_body_only": 0.8333,
+      "baseline_status_only": 0.5,
+      "discrimination_full_fingerprint": 0.8333,
+      "fingerprint_groups": {
+        "expired_token": [
+          "14553e10b9eddcb9"
+        ],
+        "invalid_token": [
+          "14553e10b9eddcb9"
+        ],
+        "no_auth": [
+          "266d7210de8ec9a5"
+        ],
+        "valid_token": [
+          "8885364b026f8482"
+        ]
+      },
+      "n_states": 4,
+      "n_unique_fingerprints": 3
+    },
+    "raw_evidence_sha256": "e11daecdc919180373d3ad928ef9920b3ae3e7913c8def779c16b529003ab2a0",
+    "runtime_seconds": 116.22,
+    "threshold_sweep_summary": "T=0.20 TP=1.00 FP=0.00 F1=1.00; T=0.25 TP=0.92 FP=0.00 F1=0.96; T=0.30 TP=0.85 FP=0.00 F1=0.92; T=0.35 TP=0.78 FP=0.00 F1=0.88; T=0.40 TP=0.71 FP=0.00 F1=0.83; T=0.45 TP=0.71 FP=0.00 F1=0.83; T=0.50 TP=0.71 FP=0.00 F1=0.83; T=0.55 TP=0.64 FP=0.00 F1=0.78; T=0.60 TP=0.55 FP=0.00 F1=0.71; T=0.65 TP=0.43 FP=0.00 F1=0.60; T=0.70 TP=0.36 FP=0.00 F1=0.53; T=0.75 TP=0.21 FP=0.00 F1=0.34; T=0.80 TP=0.00 FP=0.00 F1=0.00"
+  },
+  "outcome": "SUPPORTS",
+  "pc": {
+    "baseline_body_only": 0.8333,
+    "baseline_status_only": 0.5,
+    "discrimination_full_fingerprint": 0.8333,
+    "fingerprint_groups": {
+      "expired_token": [
+        "14553e10b9eddcb9"
+      ],
+      "invalid_token": [
+        "14553e10b9eddcb9"
+      ],
+      "no_auth": [
+        "266d7210de8ec9a5"
+      ],
+      "valid_token": [
+        "8885364b026f8482"
+      ]
+    },
+    "n_states": 4,
+    "n_unique_fingerprints": 3,
+    "raw_probes": {
+      "expired_token": [
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "ef3cc560da4b4017"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "f2aef16d52c84ace"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "f4234befe0874106"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "a15d08aa0a1e4fdd"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "fef52d761da14bec"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "b3815fe99a2e4f64"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "6f1995c72604418e"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "8c253bfd6fbe4327"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "3ecd8b5869fb4b8e"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "db861293423b4d87"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        }
+      ],
+      "invalid_token": [
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "f58c98673c3245c3"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "19e867c2cf574ffa"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "eb60f84f1c484f64"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "75361f1c39344b0d"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "df04a7d3964f4c1f"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "96b32ee204d34109"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "6bab0d2044284fe9"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "8a57e487f4fa4768"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "1dbd910f100245a5"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "34",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:33 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "23da069ad8164e14"
+          },
+          "status": 401,
+          "text": "{\"error\":\"authentication_failed\"}\n"
+        }
+      ],
+      "no_auth": [
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:31 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "c4ae386c53ab466e"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:31 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "4f595b3f5bf54afd"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:31 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "195fecd701694cc5"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:31 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "390fa352fae04b39"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:31 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "49beb0d4289240b6"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:31 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "f181dcb0f6d64aa9"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "b6715eaec5564320"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "f62fde676a2b4961"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "d40551f44d794c93"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-store",
+            "Connection": "close",
+            "Content-Length": "63",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "X-Request-Id": "bc8b903cef274af8"
+          },
+          "status": 401,
+          "text": "{\"error\":\"login_required\",\"message\":\"Authentication required\"}\n"
+        }
+      ],
+      "valid_token": [
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "75118f4252c3449f"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "6ccd273fee2642ec"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "fd30a39cbf564f36"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "0dd250c69bb74dcf"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "ad9837985fae4ec8"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "cc4a90053a454791"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "dda45d3be45a445a"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "cf843785117f4f99"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "c39fa404130847bc"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        },
+        {
+          "headers": {
+            "Cache-Control": "no-cache",
+            "Connection": "close",
+            "Content-Length": "106",
+            "Content-Type": "application/json",
+            "Date": "Sun, 20 Sep 2026 23:44:32 GMT",
+            "Server": "Werkzeug/3.1.8 Python/3.12.14",
+            "Set-Cookie": "session=sess-admin-001; HttpOnly; Secure",
+            "X-Request-Id": "4b36178c7e784850"
+          },
+          "status": 200,
+          "text": "{\"data\":{\"value\":\"test_data_35538865048\"},\"role\":\"admin\",\"session_id\":\"sess-admin-001\",\"user_id\":\"alice\"}\n"
+        }
+      ]
+    }
+  },
+  "raw_sha": "e11daecdc919180373d3ad928ef9920b3ae3e7913c8def779c16b529003ab2a0",
+  "status": "COMPLETE"
+}
