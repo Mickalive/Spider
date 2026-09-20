@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35470449605",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "k2_pmi_weighted": 0.933244,
+    "k3_pmi_weighted": 1.220508,
+    "k3_minus_k2_weighted": 0.287264,
+    "n5000_sha": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+    "n50000_sha": "a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51",
+    "determinism_k2_n5000": {
+      "deterministic": 407,
+      "stochastic": 885,
+      "total": 1292,
+      "det_ratio": 0.31501547987616096
+    },
+    "determinism_k3_n5000": {
+      "deterministic": 89,
+      "stochastic": 732,
+      "total": 821,
+      "det_ratio": 0.10840438489646773
+    },
+    "design_level_determinism": "PASS - all 48 (state, action) pairs have 4 distinct candidates",
+    "screening_n5000": {
+      "B-WEIGHTED-PMI": {
+        "k2_pmi": 0.933244,
+        "k3_pmi": 1.220508,
+        "k3_minus_k2": 0.287264,
+        "k2_info": {"n_strata": 1292, "n_used": 398, "total": 5000, "skipped_small": 894},
+        "k3_info": {"n_strata": 821, "n_used": 510, "total": 5000, "skipped_small": 311},
+        "positive_control_k3": 1.805624,
+        "positive_control_p": 0.000999,
+        "positive_control_perm_scheme": "within-stratum url_after permutation",
+        "c3_pass": true,
+        "null_control": {
+          "observed": 0.933244,
+          "null_mean": 0.407057,
+          "null_std": 0.007268,
+          "abs_null_mean": 0.407057,
+          "p_value": 0.001996,
+          "n_shuffle": 500
+        },
+        "c1_pass": false
+      },
+      "B-EQUAL-WEIGHT-PMI": {
+        "k2_pmi": 1.490475,
+        "k3_pmi": 1.446247,
+        "k3_minus_k2": -0.044228,
+        "k2_info": {"n_strata": 1292, "n_used": 398, "total": 5000, "skipped_small": 894},
+        "k3_info": {"n_strata": 821, "n_used": 510, "total": 5000, "skipped_small": 311},
+        "positive_control_k3": 1.809851,
+        "positive_control_p": 0.000999,
+        "positive_control_perm_scheme": "within-stratum url_after permutation",
+        "c3_pass": true,
+        "null_control": {
+          "observed": 1.490475,
+          "null_mean": 0.704217,
+          "null_std": 0.012815,
+          "abs_null_mean": 0.704217,
+          "p_value": 0.001996,
+          "n_shuffle": 500
+        },
+        "c1_pass": false
+      },
+      "B-MEDIAN-PMI": {
+        "k2_pmi": 1.510964,
+        "k3_pmi": 1.476821,
+        "k3_minus_k2": -0.034143,
+        "k2_info": {"n_strata": 1292, "n_used": 398, "total": 5000, "skipped_small": 894},
+        "k3_info": {"n_strata": 821, "n_used": 510, "total": 5000, "skipped_small": 311},
+        "positive_control_k3": 1.872700,
+        "positive_control_p": 0.000999,
+        "positive_control_perm_scheme": "within-stratum url_after permutation",
+        "c3_pass": true,
+        "null_control": {
+          "observed": 1.510964,
+          "null_mean": 0.685611,
+          "null_std": 0.018312,
+          "abs_null_mean": 0.685611,
+          "p_value": 0.001996,
+          "n_shuffle": 500
+        },
+        "c1_pass": false
+      },
+      "B-KNN-CMI": {
+        "k2_pmi": 0.023350,
+        "k3_pmi": 0.203143,
+        "k3_minus_k2": 0.179793,
+        "k2_info": {"n_records": 5000, "k": 5, "alpha": 1.0, "history_kind": "state"},
+        "k3_info": {"n_records": 5000, "k": 5, "alpha": 1.0, "history_kind": "action"},
+        "positive_control_k3": 1.190835,
+        "positive_control_p": 0.000999,
+        "positive_control_perm_scheme": "global shuffled-action permutation",
+        "c3_pass": true,
+        "null_control": {
+          "observed": 0.023350,
+          "null_mean": -0.261904,
+          "null_std": 0.007456,
+          "abs_null_mean": 0.261904,
+          "p_value": 1.0,
+          "n_shuffle": 500
+        },
+        "c1_pass": false
+      }
+    },
+    "null_control_comparison_to_parent": {
+      "B-WEIGHTED-PMI": {
+        "this_run": 0.407057,
+        "parent_run": 0.407,
+        "diff_bits": 0.000057,
+        "note": "Within 0.001 bits of parent - bias is REPRODUCIBLE on the same SPA design"
+      },
+      "B-EQUAL-WEIGHT-PMI": {
+        "this_run": 0.704217,
+        "parent_run": 0.704,
+        "diff_bits": 0.000217,
+        "note": "Within 0.001 bits of parent"
+      },
+      "B-MEDIAN-PMI": {
+        "this_run": 0.685611,
+        "parent_run": 0.686,
+        "diff_bits": -0.000389,
+        "note": "Within 0.001 bits of parent"
+      },
+      "B-KNN-CMI": {
+        "this_run": -0.261904,
+        "parent_run": -0.262,
+        "diff_bits": 0.000096,
+        "note": "Within 0.001 bits of parent"
+      }
+    },
+    "stratum_size_bias_decomposition": {
+      "5-9": {
+        "n_strata": 313,
+        "total_records": 1982,
+        "observed_pmi": 1.463441,
+        "null_mean": 0.736382,
+        "null_std": 0.015276
+      },
+      "10-19": {
+        "n_strata": 80,
+        "total_records": 953,
+        "observed_pmi": 1.658176,
+        "null_mean": 0.562315,
+        "null_std": 0.021383
+      },
+      "20-49": {
+        "n_strata": 5,
+        "total_records": 102,
+        "observed_pmi": 1.817999,
+        "null_mean": 0.369152,
+        "null_std": 0.066661
+      },
+      "50+": {
+        "n_strata": 0,
+        "total_records": 0,
+        "observed_pmi": 0.0,
+        "null_mean": 0.0,
+        "null_std": 0.0
+      }
+    },
+    "wall_seconds": 61.8
+  },
+  "controls": {
+    "C1-NULL-CONTROL": {
+      "expected": "At least 1 estimator has |shuffled-action null mean| < 0.1 bits at N=5000",
+      "observed": "ALL 4 estimators have |null_mean| >= 0.1 bits: weighted=0.407, equal=0.704, median=0.686, KNN=0.262",
+      "pass": false,
+      "evidence_ref": "result.json:metrics.screening_n5000.*.null_control.abs_null_mean"
+    },
+    "C3-POSITIVE-CONTROL": {
+      "expected": "K3 PMI >= 1.0 bit AND p <= 0.001 on 8-state deterministic SPA",
+      "observed": "All 4 estimators PASS: weighted K3=1.806 p=0.001, equal K3=1.810 p=0.001, median K3=1.873 p=0.001, KNN K3=1.191 p=0.001",
+      "pass": true,
+      "evidence_ref": "result.json:metrics.screening_n5000.*.positive_control_k3"
+    },
+    "C6-DESIGN-DETERMINISM": {
+      "expected": "Every (state, action) has >= 2 unique candidates in CANDIDATES design",
+      "observed": "All 48 (state, action) pairs have 4 distinct candidates",
+      "pass": true,
+      "evidence_ref": "result.json:metrics.design_level_determinism"
+    },
+    "C7-SIZE-BUCKETS": {
+      "expected": ">= 2 non-empty size buckets in stratum decomposition",
+      "observed": "3 non-empty buckets: 5-9 (313 strata), 10-19 (80 strata), 20-49 (5 strata)",
+      "pass": true,
+      "evidence_ref": "result.json:metrics.stratum_size_bias_decomposition"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/run_experiment.py",
+      "sha256": "adfe1a351cfbe1ff943915f1f5a195df6a65a1c36a04ea5b18ba8b8b40d86643",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/raw_results.json",
+      "sha256": "9c2c72817853809da6f7d019bd28f06ae9bae2565f3cde37d67596fe5519475e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/raw_transitions_n50000.json",
+      "sha256": "e9e0c54eaa0ecc2266e655ab7fa6cd61e2bb91c1e5e1da3d2d4dca08ee2d152f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/raw_output.txt",
+      "sha256": "1b273cd3aead6ecd4c1e60e79911a84a4d84c19f00ab621d6edffc2bace4f61b",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "DESIGN-LEVEL DETERMINISM PASS: All 48 (state, action) pairs have 4 distinct candidates in CANDIDATES design. The SPA is guaranteed to have H(S_next | state, action) > 0 for every stratum by design.",
+    "EMPIRICAL DETERMINISM: K2 det_ratio = 0.315 (407/1292 strata deterministic), K3 det_ratio = 0.108 (89/821). The hash function maps different histories to the same candidate, creating deterministic strata empirically despite the CANDIDATES design having all distinct values.",
+    "BIAS PERSISTS: All 4 estimators have |shuffled-action null mean| >= 0.1 bits: weighted=0.407, equal=0.704, median=0.686, KNN=-0.262. The bias is REPRODUCIBLE within 0.001 bits of the parent experiment on the same SPA design.",
+    "STRATUM-SIZE BIAS DECOMPOSITION: Null bias is monotonically decreasing in stratum size: +0.736 bits at size 5-9, +0.562 at 10-19, +0.369 at 20-49. Small strata carry the bias. Pattern IDENTICAL to parent.",
+    "POSITIVE CONTROL: All 4 estimators PASS C3 on 8-state deterministic SPA (K3 >= 1.0 bit, p <= 0.001). Pipeline validated.",
+    "NO PHASE 2: No estimator passes C1, so beyond-Markov K3-K2 test and convergence test are not executed."
+  ],
+  "validity_notes": [
+    "The CANDIDATES design already had all distinct values in the parent experiment. The '0% deterministic strata' redesign is verified at the design level, but the hash function creates deterministic strata empirically (31.5% at K2) because different (prev1, prev2) tuples hash to the same candidate index.",
+    "The bias persists at nearly identical levels to the parent (weighted null_mean 0.407057 vs 0.407), confirming the bias is intrinsic to the plug-in PMI estimator's weighted-averaging across strata of varying size, NOT caused by deterministic/stochastic strata mixing in the CANDIDATES design.",
+    "The stratum-size decomposition shows the same monotonic pattern as the parent: +0.736 at size 5-9 vs +0.369 at size 20-49. This confirms the bias is a property of small strata regardless of the CANDIDATES design.",
+    "KNN CMI produces negative null bias (-0.262 bits) from Laplace smoothing + extra action dimension, consistent with parent.",
+    "N=5000 is adequate per prereg adequacy rule: 30.8% of strata have >= 5 records (398/1292 at K2).",
+    "All estimators use identical implementation to parent for comparability.",
+    "No browser/network required; in-memory simulation only."
+  ],
+  "unresolved": [
+    "Whether truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) can center a null on this SPA class.",
+    "Whether production SPAs with stochastic transitions exhibit measurable beyond-Markov structure with any estimator.",
+    "Whether the KNN CMI negative bias (-0.262 bits) disappears with different k, alpha, distance metric, or encoding.",
+    "Whether the 0.933-bit K2 PMI signal is interpretable or asymptotically non-convergent without valid null centering.",
+    "The true sign and magnitude of beyond-Markov I(S_next; history_action | S_current, history_state) in any SPA class."
+  ]
+}

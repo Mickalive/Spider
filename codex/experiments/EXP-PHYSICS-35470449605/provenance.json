@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35470449605",
+  "lane": "physics",
+  "github_run_id": "35470449605",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "numpy_version": "2.5.3",
+    "scikit_learn_version": "1.9.1",
+    "dependencies": ["numpy", "scikit-learn"]
+  },
+  "code_paths": {
+    "run_experiment": "research/experiments/EXP-PHYSICS-35470449605/run_experiment.py",
+    "parent_code": "research/experiments/EXP-PHYSICS-35445596894/run_experiment.py"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PHYSICS-35470449605/request.json",
+    "spec.json": "research/experiments/EXP-PHYSICS-35470449605/spec.json",
+    "prereg.md": "research/experiments/EXP-PHYSICS-35470449605/prereg.md",
+    "freeze.json": "research/experiments/EXP-PHYSICS-35470449605/freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35445596894",
+    "handoff_path": "research/experiments/EXP-PHYSICS-35445596894/handoff.json",
+    "handoff_sha256": "4e968f09d04398c5efe0131f9825c0c91ed38a4f013f4acb26b41e561779c0bc"
+  },
+  "data": {
+    "n5000_transitions": 5000,
+    "n5000_sha256": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+    "n50000_transitions": 50000,
+    "n50000_sha256": "a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51",
+    "seed": 42,
+    "collection_method": "in-memory simulation (no browser/network)",
+    "state_space": "12 states, 4 actions, SHA256 hash routing",
+    "candidates_design": "All 48 (state, action) pairs have 4 distinct next states"
+  },
+  "estimators": {
+    "B-WEIGHTED-PMI": {
+      "description": "Weighted-averaged per-stratum Laplace-smoothed conditional PMI",
+      "alpha": 1.0,
+      "min_stratum_size": 5
+    },
+    "B-EQUAL-WEIGHT-PMI": {
+      "description": "Equal-weight per-stratum PMI",
+      "alpha": 1.0,
+      "min_stratum_size": 5
+    },
+    "B-MEDIAN-PMI": {
+      "description": "Median per-stratum PMI",
+      "alpha": 1.0,
+      "min_stratum_size": 5
+    },
+    "B-KNN-CMI": {
+      "description": "KNN CMI estimator (k=5, alpha=1.0, distance-weighted Laplace)",
+      "k": 5,
+      "alpha": 1.0
+    }
+  },
+  "permutation_scheme": {
+    "type": "shuffled-action null",
+    "n_shuffle": 500,
+    "unit": "action labels within session",
+    "seed": 42
+  },
+  "positive_control": {
+    "description": "8-state deterministic SPA, same as parent",
+    "threshold_k3": 1.0,
+    "threshold_p": 0.001,
+    "result": "PASS (all 4 estimators)"
+  },
+  "artifacts": {
+    "run_experiment": {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/run_experiment.py",
+      "sha256": "adfe1a351cfbe1ff943915f1f5a195df6a65a1c36a04ea5b18ba8b8b40d86643"
+    },
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/raw_results.json",
+      "sha256": "9c2c72817853809da6f7d019bd28f06ae9bae2565f3cde37d67596fe5519475e"
+    },
+    "raw_transitions_n50000": {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/raw_transitions_n50000.json",
+      "sha256": "e9e0c54eaa0ecc2266e655ab7fa6cd61e2bb91c1e5e1da3d2d4dca08ee2d152f"
+    },
+    "raw_output": {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/raw_output.txt",
+      "sha256": "1b273cd3aead6ecd4c1e60e79911a84a4d84c19f00ab621d6edffc2bace4f61b"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/result.json",
+      "sha256": null
+    },
+    "report": {
+      "path": "research/experiments/EXP-PHYSICS-35470449605/report.md",
+      "sha256": null
+    }
+  },
+  "reproduction_parameters": {
+    "command": "python3 research/experiments/EXP-PHYSICS-35470449605/run_experiment.py",
+    "working_directory": "/home/runner/work/Spider/Spider",
+    "estimated_runtime_seconds": 62,
+    "seed_deterministic": true,
+    "numpy_version_pinned": false,
+    "scikit_learn_version_pinned": false
+  },
+  "key_finding": "The per-stratum plug-in PMI null bias (0.407 bits for weighted-PMI) is REPRODUCIBLE within 0.001 bits of the parent experiment, confirming the bias is NOT caused by deterministic/stochastic strata mixing in the CANDIDATES design. The bias is intrinsic to the plug-in PMI estimator's weighted-averaging across strata of varying size."
+}

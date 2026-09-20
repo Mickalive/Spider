@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35470449310",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "mean_behavioral_tp_rate": 1.0,
+    "mean_behavioral_tn_rate": 1.0,
+    "c1_all_conditions_pass": true,
+    "pearson_r_pooled_testbed": -0.08770416237535393,
+    "abs_r_pooled_testbed": 0.08770416237535393,
+    "ci_lower_95_testbed": -0.1758260700603832,
+    "ci_upper_95_testbed": 0.001812153116238386,
+    "tost_at_delta_015_testbed": {
+      "pass": false,
+      "p_upper": 8.879788315216358e-08,
+      "p_lower": 0.0837109886692382,
+      "delta": 0.15,
+      "fisher_z": -0.08793008001325865,
+      "se": 0.04578685464956301
+    },
+    "tost_results_by_delta": {
+      "0.1": {
+        "pass": false,
+        "p_upper": 1.963110131041892e-05,
+        "p_lower": 0.39322046013825074,
+        "delta": 0.1,
+        "fisher_z": -0.08793008001325865,
+        "se": 0.04578685464956301
+      },
+      "0.12": {
+        "pass": false,
+        "p_upper": 2.6323768538221545e-06,
+        "p_lower": 0.2378896265732411,
+        "delta": 0.12,
+        "fisher_z": -0.08793008001325865,
+        "se": 0.04578685464956301
+      },
+      "0.15": {
+        "pass": false,
+        "p_upper": 8.879788315216358e-08,
+        "p_lower": 0.0837109886692382,
+        "delta": 0.15,
+        "fisher_z": -0.08793008001325865,
+        "se": 0.04578685464956301
+      },
+      "0.2": {
+        "pass": true,
+        "p_upper": 1.0894720870624118e-10,
+        "p_lower": 0.006082459408189078,
+        "delta": 0.2,
+        "fisher_z": -0.08793008001325865,
+        "se": 0.04578685464956301
+      }
+    },
+    "pearson_r_pooled_flask_only": 0.025984118470173765,
+    "abs_r_pooled_flask_only": 0.025984118470173765,
+    "ci_lower_95_flask_only": -0.06366603598198227,
+    "ci_upper_95_flask_only": 0.11521825372822371,
+    "tost_at_delta_015_flask_only": {
+      "pass": true,
+      "p_upper": 0.003134898159886555,
+      "p_lower": 5.473406623757171e-05,
+      "delta": 0.15,
+      "fisher_z": 0.025989968777652365,
+      "se": 0.04578685464956301
+    },
+    "n_paired_samples_testbed": 480,
+    "n_paired_samples_flask": 480,
+    "n_conditions": 8,
+    "n_endpoints": 3,
+    "samples_per_condition": 60,
+    "endpoints_with_variance": 3,
+    "per_endpoint_r_testbed": {
+      "/api/user/profile": {
+        "r": -0.2754890736783604,
+        "p": 0.0004221302494876037,
+        "n": 160
+      },
+      "/api/data/list": {
+        "r": -0.3338601337257182,
+        "p": 1.6005826482943658e-05,
+        "n": 160
+      },
+      "/api/session/status": {
+        "r": 0.041615689553693436,
+        "p": 0.601321874718334,
+        "n": 160
+      }
+    },
+    "per_endpoint_variance_testbed": {
+      "/api/user/profile": {
+        "behavioral_std": 3.5,
+        "structural_std": 0.06702581799626461,
+        "behavioral_mean": 3.5,
+        "structural_mean": 0.31394054696136964,
+        "n_behavioral": 160,
+        "n_structural": 160,
+        "has_variance": true
+      },
+      "/api/data/list": {
+        "behavioral_std": 3.5,
+        "structural_std": 0.06658856068297515,
+        "behavioral_mean": 3.5,
+        "structural_mean": 0.3095008532997268,
+        "n_behavioral": 160,
+        "n_structural": 160,
+        "has_variance": true
+      },
+      "/api/session/status": {
+        "behavioral_std": 3.5,
+        "structural_std": 0.08506875896706494,
+        "behavioral_mean": 3.5,
+        "structural_mean": 0.5676122641598583,
+        "n_behavioral": 160,
+        "n_structural": 160,
+        "has_variance": true
+      }
+    },
+    "per_cache_r_testbed": {
+      "cache_enabled": -0.20792040672902118,
+      "cache_disabled": 0.012425751014823551,
+      "heterogeneity_diff": 0.22034615774384472
+    },
+    "cache_enabled_n_testbed": 240,
+    "cache_disabled_n_testbed": 240,
+    "c5_heterogeneity_pass": false,
+    "null_control_mean": 3.5,
+    "null_control_std": 3.5,
+    "power_analysis": {
+      "observed_r": -0.08770416237535393,
+      "n_samples": 480,
+      "se": 0.04578685464956301,
+      "min_detectable_r_at_n": 0.08950209062260417
+    },
+    "c1_expired_tp_rates": {
+      "expired+cache+read+user_profile": 1.0,
+      "expired+cache+write+user_profile": 1.0,
+      "expired+nocache+read+user_profile": 1.0,
+      "expired+nocache+write+user_profile": 1.0,
+      "expired+cache+read+data_list": 1.0,
+      "expired+cache+write+data_list": 1.0,
+      "expired+nocache+read+data_list": 1.0,
+      "expired+nocache+write+data_list": 1.0,
+      "expired+cache+read+session_status": 1.0,
+      "expired+cache+write+session_status": 1.0,
+      "expired+nocache+read+session_status": 1.0,
+      "expired+nocache+write+session_status": 1.0
+    },
+    "c1_valid_tn_rates": {
+      "valid+cache+read+user_profile": 1.0,
+      "valid+cache+write+user_profile": 1.0,
+      "valid+nocache+read+user_profile": 1.0,
+      "valid+nocache+write+user_profile": 1.0,
+      "valid+cache+read+data_list": 1.0,
+      "valid+cache+write+data_list": 1.0,
+      "valid+nocache+read+data_list": 1.0,
+      "valid+nocache+write+data_list": 1.0,
+      "valid+cache+read+session_status": 1.0,
+      "valid+cache+write+session_status": 1.0,
+      "valid+nocache+read+session_status": 1.0,
+      "valid+nocache+write+session_status": 1.0
+    },
+    "per_endpoint_flask_r": {
+      "/api/user/profile": {
+        "r": -0.016671873501627764,
+        "p": 0.8342566508870449,
+        "n": 160
+      },
+      "/api/data/list": {
+        "r": 0.015115006094985464,
+        "p": 0.8495417597829699,
+        "n": 160
+      },
+      "/api/session/status": {
+        "r": 0.14523187045676622,
+        "p": 0.06689517913616982,
+        "n": 160
+      }
+    },
+    "flask_only_behavioral_std": 3.5,
+    "outcome": "MIXED"
+  },
+  "controls": {
+    "C1_behavioral_tp": {
+      "threshold": "mean expired_TP >= 0.85 AND mean valid_TN >= 0.85",
+      "observed_mean_expired_tp": 1.0,
+      "observed_mean_valid_tn": 1.0,
+      "pass": true,
+      "evidence": "Expired TP=1.0000, Valid TN=1.0000"
+    },
+    "C2_variance": {
+      "threshold": ">= 2/3 endpoints have std > 0 for both signals",
+      "endpoints_with_variance": 3,
+      "pass": true,
+      "evidence": "3/3 endpoints",
+      "per_endpoint": {
+        "/api/user/profile": {
+          "behavioral_std": 3.5,
+          "structural_std": 0.06702581799626461,
+          "behavioral_mean": 3.5,
+          "structural_mean": 0.31394054696136964,
+          "n_behavioral": 160,
+          "n_structural": 160,
+          "has_variance": true
+        },
+        "/api/data/list": {
+          "behavioral_std": 3.5,
+          "structural_std": 0.06658856068297515,
+          "behavioral_mean": 3.5,
+          "structural_mean": 0.3095008532997268,
+          "n_behavioral": 160,
+          "n_structural": 160,
+          "has_variance": true
+        },
+        "/api/session/status": {
+          "behavioral_std": 3.5,
+          "structural_std": 0.08506875896706494,
+          "behavioral_mean": 3.5,
+          "structural_mean": 0.5676122641598583,
+          "n_behavioral": 160,
+          "n_structural": 160,
+          "has_variance": true
+        }
+      }
+    },
+    "C3_equivalence": {
+      "threshold": "95% CI within (-0.15, 0.15) for testbed",
+      "observed_r": -0.08770416237535393,
+      "abs_r": 0.08770416237535393,
+      "ci_lower_95": -0.1758260700603832,
+      "ci_upper_95": 0.001812153116238386,
+      "pass": false,
+      "n_samples": 480,
+      "evidence": "testbed r=-0.0877, CI=[-0.1758,0.0018]"
+    },
+    "C4_tost": {
+      "threshold": "TOST p_upper < 0.05 at delta=0.15",
+      "observed_p_upper": 8.879788315216358e-08,
+      "observed_p_lower": 0.0837109886692382,
+      "pass": false,
+      "n_samples": 480,
+      "evidence": "TOST p_upper=0.0000, p_lower=0.0837"
+    },
+    "C5_cache_heterogeneity": {
+      "threshold": "|r_enabled - r_disabled| < 2 * SE",
+      "r_enabled": -0.20792040672902118,
+      "r_disabled": 0.012425751014823551,
+      "heterogeneity_diff": 0.22034615774384472,
+      "pass": false,
+      "evidence": "|r_enabled - r_disabled|=0.2203"
+    },
+    "C6_baseline_flask_only": {
+      "threshold": "|r| < 0.15 on B-FLASK-ONLY baseline",
+      "observed_r_flask": 0.025984118470173765,
+      "abs_r_flask": 0.025984118470173765,
+      "ci_upper_95_flask": 0.11521825372822371,
+      "pass": true,
+      "n_samples": 480,
+      "behavioral_std": 3.5,
+      "evidence": "B-FLASK-ONLY r=0.0260, |r|=0.0260, behavioral_std=3.5000"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "5d6bae1e2024b9e8cd172dd553b78d90accc6d1ad5934a26ba33d13776788f6f",
+      "role": "raw"
+    },
+    {
+      "path": "testbed_server.py",
+      "sha256": "b3be634e6c2e086264d293f430839575f59738daff5ede743b54a21a20a45a18",
+      "role": "code"
+    },
+    {
+      "path": "flask_only_server.py",
+      "sha256": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "d3b85b071436fe68f83870658c72ef862b782c8ba2149318da2cf3a0757e8351",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean behavioral TP rate (expired): 1.0000",
+    "Mean behavioral TN rate (valid): 1.0000",
+    "C1 behavioral detection: PASS",
+    "Testbed Pearson r=-0.0877 (|r|=0.0877), n=480",
+    "Testbed 95% CI: [-0.1758, 0.0018]",
+    "Testbed CI upper 0.0018 < 0.15",
+    "Testbed TOST delta=0.15: p_upper=0.0000, p_lower=0.0837",
+    "B-FLASK-ONLY Pearson r=0.0260 (|r|=0.0260), n=480",
+    "B-FLASK-ONLY behavioral std=3.5000",
+    "Endpoints with variance: 3/3",
+    "Per-endpoint r (testbed): {'/api/user/profile': {'r': -0.2754890736783604, 'p': 0.0004221302494876037, 'n': 160}, '/api/data/list': {'r': -0.3338601337257182, 'p': 1.6005826482943658e-05, 'n': 160}, '/api/session/status': {'r': 0.041615689553693436, 'p': 0.601321874718334, 'n': 160}}",
+    "Per-endpoint r (flask-only): {'/api/user/profile': {'r': -0.016671873501627764, 'p': 0.8342566508870449, 'n': 160}, '/api/data/list': {'r': 0.015115006094985464, 'p': 0.8495417597829699, 'n': 160}, '/api/session/status': {'r': 0.14523187045676622, 'p': 0.06689517913616982, 'n': 160}}",
+    "Cache heterogeneity: r_enabled=-0.20792040672902118, r_disabled=0.012425751014823551, diff=0.22034615774384472",
+    "C1=True, C2=True, C3=False, C4=False, C5=False, C6=True",
+    "Status=COMPLETE, Outcome=MIXED",
+    "Total paired samples: 480 (testbed), 480 (flask-only)"
+  ],
+  "validity_notes": [
+    "V1 FIX: ALL request_ids use uuid.uuid4() for ALL status codes (200, 304, 401, 403)",
+    "V2 FIX: B-FLASK-ONLY has genuine token-state variation via /token endpoint",
+    "Structural signal extraction: headers-only (ETag, Cache-Control, request_id entropy)",
+    "Error response bodies (401, 403, 5xx) EXCLUDED from structural signal entirely",
+    "Production-like testbed: Flask 3.1.3, PyJWT RS256, SQLite WAL-mode",
+    "CDN simulation: ETag-SHA256, Cache-Control max-age/no-store, stale-while-revalidate",
+    "B-FLASK-ONLY baseline: plain Flask with token validation (valid/expired via header)",
+    "3 endpoints with genuine behavioral AND structural variation",
+    "N=480 paired samples testbed, 480 paired samples B-FLASK-ONLY",
+    "Behavioral signals: token_validation_failure, session_state_change, auth_boundary_shift",
+    "Structural signals: ETag variation, Cache-Control variation, request_id entropy, dynamic content hash",
+    "All 8 co-occurring conditions tested: token_state x cache_mode x permission_level",
+    "Claim ceiling bounded to production-like LOCAL testbed; NOT validated for distributed production",
+    "V1 confound (request_id entropy bifurcation) eliminated by UUID v4 for all status codes",
+    "V2 confound (B-FLASK-ONLY zero behavioral variance) eliminated by adding token validation"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on actual distributed production infrastructure",
+    "Whether CDN cache invalidation on session state change introduces correlation",
+    "Whether concurrent client load changes correlation structure",
+    "Whether the result generalizes to non-Flask frameworks",
+    "Whether headers-only structural signal captures sufficient variation for production use",
+    "Whether per-cache heterogeneity is systematic or sampling noise"
+  ]
+}
