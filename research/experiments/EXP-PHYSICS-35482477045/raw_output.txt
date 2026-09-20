@@ -1,0 +1,47 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35482477045 - stochastic positive control SPA
+========================================================================
+
+[VERIFY] CANDIDATES design-level determinism check...
+[VERIFY] All 48 (state, action) pairs have 4 distinct candidates: PASS
+
+[COLLECT] Stochastic SPA N=5000 (50 sessions x 100 steps, SEED=42)...
+[COLLECT] N=5000 SHA256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+
+[COLLECT] Deterministic SPA N=5000 (degenerate baseline)...
+[COLLECT] N=5000 SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (0.0s)
+
+[BUILD] Stochastic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701} K3={'deterministic': 77, 'stochastic': 764, 'total': 841, 'det_ratio': 0.09155766944114149}
+
+[BUILD] Deterministic SPA records...
+[BUILD] K3 records=5000
+
+========================================================================
+PHASE 1: Estimator screening on stochastic SPA at N=5000
+========================================================================
+
+--- B-KSG-CMI ---
+  K2 (stochastic) = -0.003735 bits  {'n_records': 5000, 'k': 5, 'history_kind': 'state', 'mi_joint_raw': 0.0478571080749296, 'mi_cond_raw': 0.0515917288568859, 'method': 'KSG (sklearn mutual_info_classif, k=5)'}
+  K3 (stochastic) = 0.000560 bits  {'n_records': 5000, 'k': 5, 'history_kind': 'action', 'mi_joint_raw': 0.03441340956812361, 'mi_cond_raw': 0.03385345052788933, 'method': 'KSG (sklearn mutual_info_classif, k=5)'}
+  C1 null control: null_mean=-0.012078 std=0.000187 |mean|=0.012078 (threshold 0.1) -> PASS (7.7s)
+  C3 positive control: K3=0.000560 p=0.000999 -> FAIL (18.2s)
+  Degenerate control (deterministic SPA): K3=-0.000405 bits
+
+--- B-LIKELIHOOD-RATIO ---
+  K2 (stochastic) = 0.103695 bits  {'n_records': 5000, 'n_tested_strata': 12, 'min_p_value': np.float64(1.6079003607050043e-196), 'n_significant_bonferroni': 12, 'bonferroni_alpha': 0.004166666666666667, 'max_chi2': np.float64(1036.946099414353), 'approx_mi_bits': np.float64(0.10369460994143531), 'method': 'chi-squared per-state, Bonferroni corrected', 'history_kind': 'state'}
+  K3 (stochastic) = 0.103695 bits  {'n_records': 5000, 'n_tested_strata': 12, 'min_p_value': np.float64(1.6079003607050043e-196), 'n_significant_bonferroni': 12, 'bonferroni_alpha': 0.004166666666666667, 'max_chi2': np.float64(1036.946099414353), 'approx_mi_bits': np.float64(0.10369460994143531), 'method': 'chi-squared per-state, Bonferroni corrected', 'history_kind': 'action'}
+  C1 null control: null_mean=0.004515 std=0.000596 |mean|=0.004515 (threshold 0.1) -> PASS (5.1s)
+  C3 positive control: K3=0.103695 p=0.000999 -> FAIL (10.2s)
+  Degenerate control (deterministic SPA): K3=0.104420 bits
+
+[SCREENING] C1+C3 passers: []
+[SCREENING] C6 design check: PASS
+[SCREENING] C7 stratum buckets: 2 non-empty -> PASS
+
+[VERDICT] FALSIFIED-IN-SETTING
+[OUTCOME] FALSIFIES
+[REASON] C3: estimators passing C1 (['B-KSG-CMI', 'B-LIKELIHOOD-RATIO']) have positive_control_k3 < 0.5 bits on stochastic SPA. KSG K3=0.000560, LR K3=0.103695.
+
+Saved raw_results.json (wall 44.4s)

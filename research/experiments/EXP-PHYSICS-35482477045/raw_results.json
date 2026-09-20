@@ -1,0 +1,149 @@
+{
+  "experiment_id": "EXP-PHYSICS-35482477045",
+  "seed": 42,
+  "n_transitions_stochastic": 5000,
+  "sha_stochastic": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+  "n_transitions_deterministic": 5000,
+  "sha_deterministic": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "determinism_k2_stochastic": {
+    "deterministic": 366,
+    "stochastic": 1072,
+    "total": 1438,
+    "det_ratio": 0.2545201668984701
+  },
+  "determinism_k3_stochastic": {
+    "deterministic": 77,
+    "stochastic": 764,
+    "total": 841,
+    "det_ratio": 0.09155766944114149
+  },
+  "screening": {
+    "B-KSG-CMI": {
+      "k2_value_stochastic": -0.0037346207819562993,
+      "k3_value_stochastic": 0.00055995904023428,
+      "k3_minus_k2": 0.004294579822190579,
+      "k2_info": {
+        "n_records": 5000,
+        "k": 5,
+        "history_kind": "state",
+        "mi_joint_raw": 0.0478571080749296,
+        "mi_cond_raw": 0.0515917288568859,
+        "method": "KSG (sklearn mutual_info_classif, k=5)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "k": 5,
+        "history_kind": "action",
+        "mi_joint_raw": 0.03441340956812361,
+        "mi_cond_raw": 0.03385345052788933,
+        "method": "KSG (sklearn mutual_info_classif, k=5)"
+      },
+      "null_control": {
+        "observed": -0.0037346207819562993,
+        "null_mean": -0.012077552015282858,
+        "null_std": 0.00018682506063066683,
+        "abs_null_mean": 0.012077552015282858,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.012160245282680435,
+          -0.012133682919055408,
+          -0.012228873237513455,
+          -0.012047324390668156,
+          -0.012191679110949857
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.00055995904023428,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": -0.00040458210893392493
+    },
+    "B-LIKELIHOOD-RATIO": {
+      "k2_value_stochastic": 0.10369460994143531,
+      "k3_value_stochastic": 0.10369460994143531,
+      "k3_minus_k2": 0.0,
+      "k2_info": {
+        "n_records": 5000,
+        "n_tested_strata": 12,
+        "min_p_value": 1.6079003607050043e-196,
+        "n_significant_bonferroni": 12,
+        "bonferroni_alpha": 0.004166666666666667,
+        "max_chi2": 1036.946099414353,
+        "approx_mi_bits": 0.10369460994143531,
+        "method": "chi-squared per-state, Bonferroni corrected",
+        "history_kind": "state"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_tested_strata": 12,
+        "min_p_value": 1.6079003607050043e-196,
+        "n_significant_bonferroni": 12,
+        "bonferroni_alpha": 0.004166666666666667,
+        "max_chi2": 1036.946099414353,
+        "approx_mi_bits": 0.10369460994143531,
+        "method": "chi-squared per-state, Bonferroni corrected",
+        "history_kind": "action"
+      },
+      "null_control": {
+        "observed": 0.10369460994143531,
+        "null_mean": 0.004515100947861067,
+        "null_std": 0.0005956842532989778,
+        "abs_null_mean": 0.004515100947861067,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.004575490292175785,
+          0.005306602441916805,
+          0.004003647907211882,
+          0.005575037697361073,
+          0.005006108248503405
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.10369460994143531,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": 0.10442004997356266
+    }
+  },
+  "passers": [],
+  "c6_design_pass": true,
+  "c7_stratum_buckets": 2,
+  "c7_pass": true,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 343,
+      "total_records": 2147,
+      "observed_pmi": 1.443787427994249,
+      "null_mean": 1.101110231372846,
+      "null_std": 0.01548870055398727
+    },
+    "10-19": {
+      "n_strata": 37,
+      "total_records": 433,
+      "observed_pmi": 1.5689454065145398,
+      "null_mean": 0.9756100985626514,
+      "null_std": 0.032091611308473905
+    },
+    "20-49": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "phase2": null,
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "reason": "C3: estimators passing C1 (['B-KSG-CMI', 'B-LIKELIHOOD-RATIO']) have positive_control_k3 < 0.5 bits on stochastic SPA. KSG K3=0.000560, LR K3=0.103695.",
+  "wall_seconds": 44.36035180091858
+}
