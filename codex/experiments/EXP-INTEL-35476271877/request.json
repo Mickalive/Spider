@@ -1,0 +1,20 @@
+{
+  "base_sha": "4449bc4a3ab45c34694aed90e7ec9e6e6cf0f8ba",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T23:30:02.291409+00:00",
+  "experiment_id": "EXP-INTEL-35476271877",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "Can Docker image am1n3e/webarena-verified-shopping:latest be made available, enabling the frozen analyze.py to re-collect full-DOM locatable_sample (all elements with bbox, n=21-82 per task) for the 7 existing tasks and evaluate whether canonical recipe ranking agreement crosses the 80% threshold?",
+  "lane": "intel",
+  "origin_github_run_id": "35476271877",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35470447439",
+    "path": "research/experiments/EXP-INTEL-35470447439/handoff.json",
+    "sha256": "91120b221c5197c56e7463eef4c544063fadcb7715f9289172358bf2fad256c4"
+  },
+  "reason": "pulse",
+  "request_hash": "6b75f34690aa3e9fdf67ea9a812e6ce34867b17e327684f3df2aea1610cdc6b1",
+  "request_id": "c26ea3a3a8e55b1c3649aee6",
+  "schema_version": 1
+}

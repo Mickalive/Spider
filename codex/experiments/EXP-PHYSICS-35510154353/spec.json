@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-PHYSICS-35510154353",
+  "lane": "physics",
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "Can alternative CMI estimators — a plug-in transition-matrix KL divergence estimator and KSG CMI with k=10 — detect the demonstrated 1.52-bit conditional mutual information signal on the stochastic 12-state SPA while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby resolving whether KSG k=5 and LR chi2-per-state insensitivity is estimator-specific or fundamental to discrete CMI estimation on this SPA class?",
+  "hypothesis": "H0 (null): Neither the plug-in KL estimator nor KSG CMI k=10 achieves BOTH |shuffled-action null_mean| < 0.1 bits AND positive_control_k3 >= 0.5 bits on the stochastic SPA at N=5000. H1 (alternative): At least one of plug-in KL or KSG k=10 achieves BOTH |null_mean| < 0.1 bits AND positive_control_k3 >= 0.5 bits on the stochastic SPA at N=5000. H2 (beyond-Markov, conditional on H1): K3 CMI - K2 CMI > 0.1 bits with bootstrap 95% CI lower > 0.0 at N=5000 on the stochastic SPA for any estimator passing C1+C3.",
+  "falsifier": "C1 (null centering): All estimators have |shuffled-action null_mean| >= 0.1 bits at N=5000. C3 (positive control sensitivity): For every estimator passing C1, positive_control_k3 < 0.5 bits OR permutation p > 0.001. C6 (SPA design): Fewer than 48/48 (state, action) pairs with 4 distinct candidates. C7 (stratum coverage): Fewer than 2 non-empty stratum size buckets.",
+  "baselines": [
+    {
+      "id": "B-DETERMINISTIC-SPA",
+      "description": "Plug-in KL and KSG k=10 on the fully deterministic 12-state SPA. Expected I(Y;A|Z)=0 by construction for both estimators. Validates that the stochastic SPA produces non-zero CMI.",
+      "expected": "positive_control_k3 < 0.1 (degenerate, I(Y;A|Z)=0 by construction)"
+    },
+    {
+      "id": "B-KSG-CMI-K20",
+      "description": "KSG CMI with k=20 on the stochastic SPA. Tests whether further neighborhood expansion beyond k=10 improves resolution.",
+      "expected": "null_mean < 0.1 (inherited from k=5 and k=10 centering); k3 unknown"
+    },
+    {
+      "id": "B-PERMUTATION-TEST",
+      "description": "Permutation test conditioned on (state, action) strata: for each stratum with >=5 records, test whether observed action labels produce PMI significantly above shuffled-action null via within-session permutation. Non-parametric, does not rely on CMI estimation.",
+      "expected": "significant for stochastic SPA (action labels carry information by construction)"
+    },
+    {
+      "id": "B-PARENT-KSG-K5",
+      "description": "Replicate parent KSG k=5 results on the stochastic SPA to verify reproducibility.",
+      "expected": "k3_value_stochastic within 10% of parent 0.000560; null_mean within 10% of parent 0.012078"
+    }
+  ],
+  "positive_control": "Stochastic 12-state SPA (same as parent EXP-PHYSICS-35482477045): 50% deterministic hash routing + 50% uniform random over 4 CANDIDATES per (state, action). Creates I(Y;A|Z) ≈ 1.52 bits by construction (audit-confirmed via exact enumeration and N=50000 empirical plug-in). The plug-in KL estimator computes D_KL(P(Y|Z,A) || P(Y|Z)) = I(Y;A;Z) directly on the empirical transition matrix, bypassing CMI estimation entirely. KSG k=10 tests whether increasing neighborhood resolution from k=5 detects the signal. Positive_control_k3 threshold: >= 0.5 bits (conservative, 3x below true CMI of 1.52 bits). Permutation p <= 0.001.",
+  "null_control": "Shuffled-action null: for each of 500 permutations, shuffle action labels within each session (preserving session structure, state sequence, and url_before/url_after pairing), recompute the estimator on the stochastic SPA, take the mean across permutations. Unit of permutation: action-label within session (correcting the global shuffle deviation identified in parent audit V5). The null mean must satisfy |mean| < 0.1 bits for any estimator to pass C1. Both plug-in KL and KSG k=10 are tested against the same null.",
+  "measurement_validity": [
+    "Stochastic SPA uses the same 12-state design, STATES, ACTIONS, and CANDIDATES as parent EXP-PHYSICS-35482477045.",
+    "SPA modification: choose_next_stochastic() replaces choose_next() — with probability 0.5 use hash routing, with probability 0.5 choose uniformly from CANDIDATES[current][action]. RNG seeded with seed=42 independently of session RNG.",
+    "Design verification: all 48/48 (state, action) pairs have 4 distinct candidates (inherited from parent CANDIDATES design, unchanged).",
+    "N=5000 transitions (50 sessions x 100 steps) with seed=42, same collection procedure as parent.",
+    "Strata with < 5 records are skipped (MIN_STRATUM_SIZE=5, same as parent).",
+    "Plug-in KL estimator: D_KL(P(Y|Z,A) || P(Y|Z)) = sum_{z,a,y} P(z,a,y) * log2[P(y|z,a)/P(y|z)] with Laplace smoothing (alpha=1.0) and within-session action shuffle for null. Z=(current_state, history_state_K) for K2 and Z=(current_state, history_action_K) for K3.",
+    "KSG CMI implemented via sklearn.feature_selection.mutual_info_classif with k=10, alpha=1.0, discrete_features=True (parent used k=5).",
+    "Bootstrap CI uses 200 trajectory-block resamples (same as parent).",
+    "Bonferroni correction for primary comparisons: alpha=0.01 for C1, alpha=0.001 for C3 permutation p.",
+    "Deterministic SPA positive control (same 12-state design with deterministic hash routing only) verifies I(Y;A|Z)=0 for both estimators.",
+    "If any estimator fails due to implementation issues, report as MEASUREMENT_INVALID with explicit error message."
+  ],
+  "decision_rule": "Verdict priority: FALSIFIED-IN-SETTING > MEASUREMENT_INVALID > SURVIVES_CURRENT_TEST.\n\nFALSIFIED-IN-SETTING triggers if ANY of:\n  (1) C1: All estimators have |shuffled-action null mean| >= 0.1 bits at N=5000\n  (2) C3: For any estimator passing C1, positive_control_k3 < 0.5 bits OR permutation p > 0.001\n  (3) C6: Fewer than 48/48 (state,action) pairs with 4 distinct candidates\n\nMEASUREMENT_INVALID triggers if:\n  (4) Fewer than 30% of (state,action) strata have >= 5 records at N=5000\n  (5) stratum_size_bias_decomposition has < 2 non-empty size buckets\n  (6) Any estimator implementation fails (e.g., missing dependency, convergence error)\n\nSURVIVES_CURRENT_TEST requires ALL of:\n  (C1) At least 1 estimator has |null_mean| < 0.1 bits\n  (C3) Positive control passes for that estimator (k3 >= 0.5 bits, p <= 0.001)\n  (C6) Design check passes\n  (C7) >= 2 non-empty size buckets\n\nPhase 2 (beyond-Markov, only if SURVIVES on C1):\n  (C2) K3 CMI - K2 CMI > 0.1 bits AND bootstrap 95% CI lower > 0.0\n  (C4) |K2(N=50000) - K2(N=5000)| <= 0.3 bits for the best estimator\n\nNote: C3 threshold of 0.5 bits is inherited from parent. True CMI is 1.52 bits (audit-confirmed), so 0.5 is 3x below the signal — a working estimator should comfortably exceed it.",
+  "product_consequence_positive": "If sensitivity validated (H1 passes): the estimator-insensitivity finding from EXP-PHYSICS-35482477045 is estimator-specific (KSG k=5 and LR chi2-per-state are insensitive, but alternative estimators work). The CMI research program is unblocked for beyond-Markov K3-K2 testing on the stochastic SPA. This opens the path to: (a) testing whether I(S_next; A | S_current, history) > 0 on this SPA class, (b) exploring production SPAs with stochastic transitions, (c) validating the transition-matrix KL estimator as the preferred CMI tool for discrete Web state spaces.",
+  "product_consequence_negative": "If sensitivity not validated (H0 confirmed): both the plug-in KL estimator (which bypasses CMI estimation entirely) and KSG k=10 (with larger neighborhood) fail to detect a 1.52-bit signal while maintaining null centering. This would suggest the insensitivity is not estimator-specific but reflects a fundamental limitation: the combination of discrete 12-state representation, shuffled-action null framework, and the specific structure of the stochastic SPA may make CMI estimation inherently difficult. The Physics lane must pivot to: (a) fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery), (b) production Web data with continuous state representations, or (c) abandoning the CMI estimation pathway entirely.",
+  "estimated_cost": "Low-medium. Single Python script execution on stochastic 12-state SPA, N=5000 primary + N=50000 convergence test. ~20-25 minutes compute. 500 within-session shuffled-action permutations for null. No browser/network required. Uses parent run_experiment.py infrastructure with added plug-in KL estimator and KSG k=10.",
+  "expected_information_gain": "Very high. This experiment directly resolves the critical question from EXP-PHYSICS-35482477045: is KSG k=5 and LR chi2-per-state insensitivity estimator-specific or fundamental? The plug-in KL estimator is a materially orthogonal approach (bypasses CMI estimation, works directly on transition matrices). KSG k=10 tests the neighborhood-resolution hypothesis. A definitive answer in either direction closes one pathway and opens the other. If positive, the CMI toolkit is validated for future Web dynamics tests. If negative, the CMI pathway is exhausted and the Physics lane must pivot."
+}

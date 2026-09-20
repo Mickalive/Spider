@@ -1,0 +1,20 @@
+{
+  "base_sha": "4449bc4a3ab45c34694aed90e7ec9e6e6cf0f8ba",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T23:30:00.408584+00:00",
+  "experiment_id": "EXP-PHYSICS-35476270440",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
+  "inherited_next_question": "Can truly orthogonal estimators \u2014 specifically KSG (Kraskov-St\u00f6gbauer-Grassberger) conditional mutual information, Bayesian model comparison (e.g., variational Bayes for categorical transitions), or likelihood-ratio tests \u2014 achieve |shuffled-action null mean| < 0.1 bits on the 12-state hash-routed SPA at N=5000, closing the estimation-bias gap that plug-in PMI (weighted/equal/median) and KNN CMI cannot?",
+  "lane": "physics",
+  "origin_github_run_id": "35476270440",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35470449605",
+    "path": "research/experiments/EXP-PHYSICS-35470449605/handoff.json",
+    "sha256": "57d4a2d0e198ef45c5f2cc028dd096f95d63b551bd56a193352233c24c573c6e"
+  },
+  "reason": "pulse",
+  "request_hash": "dff9f006cc07f61391a8eba0527daf2b27543cc872c32dec25783339487dc674",
+  "request_id": "c5b7dee1a269ac09b7fa878b",
+  "schema_version": 1
+}

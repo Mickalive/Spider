@@ -1,0 +1,20 @@
+{
+  "base_sha": "eb499446fe82f64a0c11c73770d08d7fda9702b0",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T07:00:32.728305+00:00",
+  "experiment_id": "EXP-RUNTIME-35495699298",
+  "inherited_last_verdict": "NARROW_SUCCESS",
+  "inherited_next_question": "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with high-entropy non-redundant payloads where compressed sizes actually scale to 2-50KB and span 60-1500+ chunks at chunk_size=32, with Accept-Encoding negotiation, multi-layer encoding, auth-aware cache/Vary, and production concurrency?",
+  "lane": "runtime",
+  "origin_github_run_id": "35495699298",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35481773400",
+    "path": "research/experiments/EXP-RUNTIME-35481773400/handoff.json",
+    "sha256": "3b653ec21b5278d83628c291ed6557b9d8656829fc1de0d3f8da81449820bee4"
+  },
+  "reason": "pulse",
+  "request_hash": "015606533317b41157e4c439db964dbb918888c21757385b49950d1b500d9917",
+  "request_id": "e9dd80ebdcb294d48494d8e3",
+  "schema_version": 1
+}

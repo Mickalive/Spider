@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35522287921",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST: all five conditions C1-C5 pass with audit PASS. C1: streaming_decompressed_hash == buffered_decompressed_hash for ALL 480 multi-layer streaming observations across 24 cells (byte-identical). C2: streaming_decompressed_hash == expected_hash for ALL 480 multi-layer streaming observations. C3: B-GZIP-SINGLE-LAYER-REGRESSION 120/120 and B-BROTLI-SINGLE-LAYER-REGRESSION 120/120 pass in both paths. C4: null_control all_same=true for all 4 auth states across all cells in both paths. C5: B-COMPRESSED-TARGET-RANGE passes (3/3 content types meet thresholds at both 10KB and 100KB). Audit PASS confirms all recomputed metrics match producer exactly. The parent V1_BUFFERED_PROXY_NOT_STREAMING limitation is resolved at the Transfer-Encoding framing layer: the streaming proxy (StreamingProxyHandler reads upstream_resp.read(STREAM_CHUNK_SIZE) in a loop without full-body buffering) and streaming client (resp.raw.read(stream_chunk_size) loop accumulating bytes) produce byte-identical decompressed output to the buffered ground truth at both realistic CDN chunk size (8192 bytes) and stress size (32 bytes, 86-3087 chunks per response). Claim ceiling advances to include streaming incremental decompression at the HTTP Transfer-Encoding framing layer on localhost with high-entropy multi-layer payloads. However, C-MEAS-VALID remains EXPERIMENTAL because: (1) the test is at the Transfer-Encoding framing layer (proxy forwards chunks, client accumulates then decompresses), NOT at the decompressor streaming API layer (brotli.Decompressor.process / gzip streaming without accumulation) — true incremental decompressor streaming across arbitrary Brotli block boundaries is untested; (2) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, Vary/cache, geographic latency, and production concurrency is untested — the sole remaining blocker for Product Core readiness; (3) depths 3-5 stacked encodings untested (only depth 2 exercised); (4) payloads >100KB untested; (5) compression level variation beyond tested gzip level 1/None and brotli quality 4/6 untested. Does NOT promote to PRODUCT_CORE — real CDN infrastructure testing is required."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+  "reason": "All five frozen decision-rule conditions C1-C5 pass with audit PASS. Streaming incremental decompression (proxy forwards partial chunked frames without full body reassembly) produces byte-identical decompressed output to buffered ground truth across 480 multi-layer streaming observations (24 cells x 20 obs), 240 regression observations, and 120 identity observations — 840/840 correct with 0 decompression errors and 0 silent fallbacks. The V1_BUFFERED_PROXY_NOT_STREAMING limitation inherited from EXP-RUNTIME-35495699298 and confirmed in EXP-RUNTIME-35513777099 is resolved at the framing layer. However, the claim does not reach VALIDATED or PRODUCT_CORE: (a) the chunk-boundary test is at the HTTP Transfer-Encoding layer (proxy forwards chunks incrementally, client accumulates then decompresses), not at the decompressor streaming API layer — true incremental decompressor processing of partial Brotli/Gzip frames is untested (audit V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION); (b) localhost mock only — no real CDN infrastructure (audit V7_LOCALHOST_ONLY); (c) depth limited to 2 layers (audit V8_DEPTH_LIMITED). The CDN correctness gate is unblocked at the framing layer but the real-CDN test remains the sole blocker for C-MEAS-VALID Product Core readiness.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35522287921/request.json (immutable frozen request with parent_handoff sha 6da4fb6c)",
+    "research/experiments/EXP-RUNTIME-35522287921/spec.json (frozen decision_rule C1-C5, baselines B-BUFFERED-GROUND-TRUTH through B-COMPRESSED-TARGET-RANGE, streaming proxy/client architecture specification)",
+    "research/experiments/EXP-RUNTIME-35522287921/freeze.json (immutable frozen inputs hash)",
+    "research/experiments/EXP-RUNTIME-35522287921/result.json (COMPLETE status, 480/480 streaming equals buffered, 480/480 streaming correct, all controls pass, within-state determinism all_same=true)",
+    "research/experiments/EXP-RUNTIME-35522287921/audit.json (PASS, producer_claim_supported=true, V1-V10 validity findings, claim_ceiling bounded)",
+    "research/experiments/EXP-RUNTIME-35522287921/report.md (SURVIVES_CURRENT_TEST interpretation, claim ceiling bounded)",
+    "research/experiments/EXP-RUNTIME-35522287921/run_experiment.py (sha256 fff117de528cda5cae67ebad605a9bcb5ef0d60b7bae507cc2f82b973ea08cee — StreamingProxyHandler incremental forwarding, make_request_streaming incremental accumulation, iterative decompress_body max_depth=5)",
+    "research/experiments/EXP-RUNTIME-35522287921/raw_cell_results.json (sha256 a8707b40c5a0af18ea44a1f3c93ee1d1bd5cc95793b9684aedeb5314386a48db — per-cell streaming/buffered hashes for 42 cells)",
+    "research/experiments/EXP-RUNTIME-35513777099/handoff.json (parent established 240/240 multi-layer buffered correctness, V1_BUFFERED_PROXY_NOT_STREAMING as next question, sha 6da4fb6c)",
+    "codex/claim_state.json (C-MEAS-VALID history, prior status EXPERIMENTAL from EXP-RUNTIME-35513777099)"
+  ]
+}

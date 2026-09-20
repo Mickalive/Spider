@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35476270440",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a stochastic positive control SPA — where action genuinely changes P(next_state | state) (e.g., 50% deterministic + 50% uniform over CANDIDATES) — validate KSG CMI and likelihood-ratio estimators by achieving positive_control_k3 >= 0.5 bits while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby closing the C3 test-design gap that blocked the frozen verdict?",
+  "why_next": "The frozen verdict is FALSIFIED-IN-SETTING because no estimator passes both C1 and C3. However, the critical advance is that KSG CMI (|null|=0.0155) and likelihood-ratio (|null|=0.0045) achieve null centering for the first time, breaking the 0.41-bit plug-in PMI floor. The C3 failure is a test-design limitation: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators. A stochastic positive control where P(Y|Z,A) != P(Y|Z) is needed to validate KSG/LR sensitivity. If sensitivity is validated, proceed to beyond-Markov K3-K2 testing. If not, the Physics lane must pivot to fundamentally different detection paradigms or production Web data.",
+  "carry_forward": {
+    "established": [
+      "KSG CMI (sklearn mutual_info_classif k=5) achieves |shuffled-action null_mean|=0.0155 bits on 12-state hash-routed SPA at N=5000 — first estimator to center null near zero. Likelihood-ratio achieves |null|=0.0045 bits. Both <0.1 threshold. (EXP-PHYSICS-35476270440 result.json:screening.B-KSG-CMI.null_control, screening.B-LIKELIHOOD-RATIO.null_control; audit.json V1, recomputed_metrics.recomputed_abs_null_means)",
+      "Null bias is specific to stratum-partitioned plug-in PMI with Laplace smoothing, not intrinsic to all estimation frameworks. KSG and LR bypass stratum partitioning entirely. (EXP-PHYSICS-35476270440 audit.json claim_ceiling, report.md section 3)",
+      "KSG CMI null centering comes at cost of sensitivity: positive_control_k3=0.018 bits (100x below theoretical ~2 bits for deterministic SPA). Null_std 0.000206 (35x smaller than PMI). Estimator near-zero for all inputs. (EXP-PHYSICS-35476270440 result.json:screening.B-KSG-CMI; audit.json V3-ksg_insensitivity_tradeoff)",
+      "Likelihood-ratio collapses history: K2=K3=0.104 forced equal, K3-K2=0.0. LR tests action-dependence within each state, ignoring history length. (EXP-PHYSICS-35476270440 result.json:screening.B-LIKELIHOOD-RATIO.k2_value==k3_value; audit.json V4)",
+      "Bayesian Dirichlet-Multinomial model comparison is inappropriate for CMI estimation: |null_mean|=213.7 bits (log BF scale), incomparable to bit-scale CMI. (EXP-PHYSICS-35476270440 result.json:screening.B-BAYESIAN-MODEL; audit.json V5)",
+      "Parent plug-in PMI estimators replicate exactly: weighted null_mean=0.407 (parent 0.407), K2=0.933, K3=1.221. Stratum bias decomposition identical: +0.736 at 5-9, +0.562 at 10-19, +0.369 at 20-49. (EXP-PHYSICS-35476270440 result.json; audit.json recomputed_parent_replication)",
+      "SPA design validated: 48/48 (state,action) pairs with 4 distinct candidates. 0% design-level determinism. C6 and C7 pass. (EXP-PHYSICS-35476270440 result.json:controls.C6-DESIGN-DETERMINISM, C7-SIZE-BUCKETS)",
+      "C3 positive control threshold (1.0 bit) is inappropriate for CMI estimators. KSG 0.018, LR 0.241 both significant (p=0.000999) but below bit threshold. A stochastic SPA positive control is needed. (EXP-PHYSICS-35476270440 audit.json V2, controls.C3-POSITIVE-CONTROL)"
+    ],
+    "rejected": [
+      "Hypothesis that plug-in PMI null bias is intrinsic to all estimation frameworks: falsified. KSG and LR center null at 0. (EXP-PHYSICS-35476270440)",
+      "Hypothesis that Bayesian Dirichlet-Multinomial model comparison is appropriate for CMI null testing: falsified. Scale incomparable. (EXP-PHYSICS-35476270440)",
+      "Hypothesis that equal-weight/median PMI corrects bias: falsified (both worsen it, null 0.704/0.686 vs 0.407). (EXP-PHYSICS-35470449605, replicated in EXP-PHYSICS-35476270440)",
+      "Hypothesis that SPA redesign to 0% deterministic strata eliminates plug-in PMI null bias: closed. (EXP-PHYSICS-35470449605)",
+      "Hypothesis that KNN CMI k=5 alpha=1.0 corrects bias: falsified (negative bias -0.262). (EXP-PHYSICS-35445596894, EXP-PHYSICS-35470449605, replicated in EXP-PHYSICS-35476270440)"
+    ],
+    "unknown": [
+      "Whether KSG CMI with different k (3 or 10), continuous distance encoding, or alternative CMI estimator (Ross 2014, mixed discrete-continuous KSG) preserves |null|<0.1 while achieving positive_control_k3 >> 0.02 bits",
+      "Whether likelihood-ratio with history-aware stratification (state, history) rather than state-only collapse yields history-dependent K3-K2 and still centers null",
+      "Whether a stochastic positive control SPA (50% deterministic + 50% uniform over CANDIDATES) where action genuinely changes P(Y|Z) validates both KSG and LR sensitivity with null centering preserved",
+      "True sign and magnitude of I(S_next; A | S_current, history) on the 12-state hash-routed SPA class (no estimator passes both null and sensitivity filters)",
+      "Whether KSG/LR null centering generalizes beyond the 12-state SPA to larger state spaces, stochastic transitions, or production SPAs",
+      "Whether transition-matrix entropy rate, channel capacity, or causal discovery frameworks can detect dynamical structure where PMI/CMI estimators fail"
+    ],
+    "do_not_assume": [
+      "C-WEB-DYNAMICS is globally false. All evidence is synthetic in-memory SPA simulation. The frozen FALSIFIED-IN-SETTING reflects test-design limitation, not scientific falsification.",
+      "The null bias of ~0.41 bits is evidence against beyond-Markov signal. The bias prevents interpretation but does not falsify underlying dynamics.",
+      "KSG CMI sensitivity failure (0.018 bits) on the deterministic SPA means KSG cannot detect action-conditioned dynamics on any SPA. The deterministic SPA is a degenerate test case for CMI.",
+      "The frozen FALSIFIED-IN-SETTING verdict closes the orthogonal-estimator pathway. It closes only the current test-design iteration; KSG/LR null centering is a genuine advance that requires a stochastic positive control to complete validation.",
+      "Likelihood-ratio test is invalid because K2=K3. The test is valid for action-dependence detection but cannot address conditional-on-history questions (H2) due to history collapse.",
+      "Production SPAs generalize from this simulation. The 12-state SPA has 12 states, hash routing, no anti-bot/auth/visual complexity.",
+      "This experiment closes the broader C-WEB-DYNAMICS claim. It closes only the current estimator-screening iteration on this specific SPA class."
+    ]
+  },
+  "dependencies": [
+    "Stochastic positive control SPA design: P(Y|Z,A) != P(Y|Z) with controllable action-dependence strength",
+    "KSG CMI sensitivity validation: achieve positive_control_k3 >= 0.5 bits on stochastic SPA while preserving |null| < 0.1",
+    "Likelihood-ratio history-aware redesign: stratify by (state, history) rather than state-only to enable K3-K2 testing",
+    "Estimator-appropriate positive control thresholds: separate for stratum PMI, CMI, chi2, and log BF scales",
+    "If KSG/LR sensitivity validated: beyond-Markov K3-K2 testing on 12-state stochastic SPA at N=5000",
+    "If sensitivity not validated: pivot to fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery) or production Web data"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.screening_n5000 (all 7 estimators)",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:status REVISE, V1-V7 findings, claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V2-positive_control_threshold_misspecification",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V3-ksg_insensitivity_tradeoff",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V4-likelihood_ratio_scale_and_history_collapse",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V5-bayesian_scale_incomparability",
+    "research/experiments/EXP-PHYSICS-35476270440/spec.json:decision_rule, positive_control, baselines",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.stratum_size_bias_decomposition",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:controls.C6-DESIGN-DETERMINISM, C7-SIZE-BUCKETS",
+    "research/experiments/EXP-PHYSICS-35476270440/provenance.json:environment, data, artifacts",
+    "research/experiments/EXP-PHYSICS-35470449605/handoff.json:carry_forward (parent established/rejected/unknown)",
+    "research/experiments/EXP-PHYSICS-35476270440/report.md:sections 2-5, critical findings"
+  ],
+  "recommended_action": "Design a stochastic positive control SPA where action genuinely changes P(next_state | state) — e.g., 50% deterministic hash routing + 50% uniform random over CANDIDATES, mixed per-transition. This creates I(Y;A|Z) > 0 by construction while preserving the 12-state structure and CANDIDATES framework. Test KSG CMI (k=5, and explore k=3/10) and likelihood-ratio on this stochastic SPA at N=5000 with the same shuffled-action null (N=500, |mean| < 0.1). If KSG achieves both |null| < 0.1 AND positive_control_k3 >= 0.5 bits, proceed to beyond-Markov K3-K2 testing on the 12-state stochastic SPA. If not, the Physics lane must pivot to fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery) or abandon synthetic SPA simulation for production Web data."
+}

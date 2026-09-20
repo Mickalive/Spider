@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-PRODUCT-35476271728",
+  "lane": "product",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "At n>=480, does token_refresh behavioral detection survive co-occurring structural noise with TOST equivalence confirmed at delta=0.15, and how does detection threshold choice affect TP/FP tradeoff?",
+  "hypothesis": "Token_refresh behavioral detection (TP >= 0.85) and behavioral variance (std > 0.05) will survive at n=480 under co-occurring structural noise, and TOST equivalence at delta=0.15 will be confirmed (CI upper bound < 0.15), resolving the parent's TOST lower-tail failure (p_lower=0.081, ci_lower=-0.185) as a sample-size power artifact. Additionally, the threshold sensitivity analysis will reveal whether the 0.25 threshold tautology (below both bimodal modes 0.35/0.65) limits discriminating power.",
+  "falsifier": "FALSIFIED if any of: (F1) token_refresh TP < 0.85 under co-occurring noise at n=480, OR (F2) behavioral_std < 0.05 under stochastic drift at n=480, OR (F3) structural discrimination < 0.5 (positive control), OR (F4) FP > 0.15 on noise-only samples, OR (F5) TOST at delta=0.15 still fails (CI upper bound >= 0.15) at n=480. MIXED if C1-C4 pass but TOST still fails at n=480 (equivalence not confirmed despite adequate power).",
+  "baselines": {
+    "B-N240-PARENT": {
+      "description": "Parent n=240 result: TP=1.0, behavioral_std 0.134-0.143, orthogonality r=-0.060, TOST p_lower=0.081 (FAIL), CI [-0.185, 0.067].",
+      "expected_behavior": "n=480 narrows CI so TOST lower tail passes (p_lower < 0.05)"
+    },
+    "B-N480-MOCK-ORTHOGONALITY": {
+      "description": "Three prior n=480 mock orthogonality experiments: EXP-GRAPH-35353011131 (r=0.046, CI upper 0.135, TOST PASS), EXP-GRAPH-35389145821 (r=0.0022, CI upper 0.0916, TOST PASS), EXP-PRODUCT-35445596342 (r=-0.0258, CI upper 0.064, TOST PASS).",
+      "expected_behavior": "token_refresh orthogonality at n=480 produces CI upper < 0.15 consistent with parent experiments"
+    },
+    "B-TOKEN-REFRESH-N240": {
+      "description": "Token_refresh TP=1.0 at n=240 under co-occurring noise (parent result).",
+      "expected_behavior": "TP >= 0.85 at n=480"
+    }
+  },
+  "positive_control": {
+    "id": "PC-STRUCTURAL-DISCRIMINATION",
+    "description": "HTTP fingerprint full-vector discrimination on stochastic Flask+SQLite mock server with 4 auth states (no_auth, valid_token, expired_token, invalid_token). Discrimination must exceed 0.5.",
+    "expected_behavior": "Full-vector discrimination > 0.5 on auth-state changes"
+  },
+  "null_control": {
+    "id": "NC-NOISE-FP",
+    "description": "Behavioral false positive rate on structural noise-only samples (4 noise types x 60 samples = 240 noise-only samples, no drift active).",
+    "expected_behavior": "FP <= 0.15 on noise-only samples"
+  },
+  "measurement_validity": [
+    "Stochastic Flask+SQLite mock server matching EXP-PRODUCT-35456068953 (Flask 3.1.3 + SQLite WAL-mode DB + in-memory cache TTL=0.5s + jitter 10-100ms + mixed JWT algorithms HS256/RS256)",
+    "Token_refresh drift: p_refresh_success=0.7 (Bernoulli), producing bimodal behavioral scores (~0.35 on failure, ~0.65 on success)",
+    "Server state fully reset between conditions (set_drift(None) clears all state)",
+    "N = 480 paired samples minimum (60 per condition x 8 co-occurring conditions) for token_refresh TP and orthogonality; additional 240 noise-only samples for FP measurement",
+    "Orthogonality tested via TOST equivalence test at delta=0.15 on Fisher-z transformed Pearson correlation",
+    "All measurements on localhost mock server (127.0.0.1:18951), not production APIs",
+    "This experiment does NOT make real LLM calls",
+    "Global RNG seeded at 42 before server thread start; server runs threaded=False, client sequential"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) structural discrimination > 0.5 (positive control), (C2) token_refresh TP >= 0.85 under co-occurring noise at n=480, (C3) token_refresh behavioral_std > 0.05 under stochastic drift at n=480, (C4) FP <= 0.15 on noise-only samples, (C5) TOST equivalence at delta=0.15 (CI upper bound < 0.15). FALSIFIED if any condition fails. MIXED if C1-C4 pass but C5 fails (TOST lower tail still fails at n=480, indicating genuine non-equivalence rather than power artifact).",
+  "product_consequence_positive": "If SURVIVES (all C1-C5 pass): TOST lower-tail failure resolved as sample-size artifact; token_refresh detection confirmed robust to noise with full TOST equivalence at delta=0.15; parallel-channel architecture validated for token_refresh inclusion; moves C-FRESHNESS toward PRODUCT_CORE eligibility (pending production-substrate validation).",
+  "product_consequence_negative": "If FALSIFIED: token_refresh detection fragile at n=480 or TOST equivalence impossible even at adequate power; parallel-channel architecture cannot include token_refresh; C-FRESHNESS claim ceiling remains bounded to permission_boundary and session_invalidation only; requires alternative detection strategy.",
+  "estimated_cost": "Zero new LLM calls. Reuses existing stochastic mock server (EXP-PRODUCT-35456068953). 480 paired phase-B samples + 240 noise-only phase-C samples + 48 threshold sensitivity samples + 40 phase-A probes + 60 isolated TP samples = ~870 total HTTP cycles on localhost. Runtime ~35-45 minutes single-threaded. No API keys required.",
+  "expected_information_gain": "HIGH: directly resolves two audit findings simultaneously (TOST lower-tail power artifact vs genuine non-equivalence; threshold tautology via sensitivity analysis). Either outcome changes C-FRESHNESS claim ceiling and product architecture decision."
+}

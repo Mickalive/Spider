@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35495699298",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Fix observation count reporting: prereg.md and report.md state 960 main high-entropy observations but the executed design produces 24 cells × 20 observations = 480 main observations (2 sizes × 3 content types × 4 compressions × 4 states × 5 reps aggregated per cell). The decision_rule references '960 observations' but the frozen spec.json decision_rule says 'ALL high-entropy cells across all size x compression x content_type combinations' (24 cells) not a raw count. The arithmetic C1 passes on the 24 cells; the narrative count is incorrect but does not invalidate the decision rule.",
+    "Qualify claim ceiling for BINARY content type: at 100KB nominal, BINARY produces ~98KB compressed (99% of input), exceeding the prereg's stated '2-50KB range'. This is not a failure — the incompressible high-entropy binary format still produces 3000+ chunks at chunk_size=32, exceeding the chunk-boundary stress target. The claim ceiling should note that BINARY at large sizes tests near-incompressible payloads, not the 2-50KB compressible range."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_BUFFERED_PROXY_NOT_STREAMING",
+      "severity": "high",
+      "finding": "The ReverseProxyHandler reads the full upstream response (upstream_resp.read()) before re-chunking, and the client uses requests.raw.read(decode_content=False) which reassembles Transfer-Encoding: chunked before iterative decompression. This tests transport reassembly + stdlib decompression correctness, NOT incremental streaming decompression across chunk boundaries. The parent audit V2_BUFFERED_REASSEMBLY_NOT_STREAMING finding remains unresolved. The experiment correctly acknowledges this in validity threat T1.",
+      "evidence": "run_experiment.py ReverseProxyHandler._proxy_request resp_body=upstream_resp.read() then re-chunk loop; make_request resp.raw.read(decode_content=False); decompress_body operates on fully reassembled bytes",
+      "impact": "Chunk-boundary stress is exercised at the transport framing level (32-byte chunks across 60-3000+ chunks) but not at the incremental parsing level. Real CDN streaming behavior remains untested."
+    },
+    {
+      "id": "V2_SINGLE_LAYER_ENCODING_ONLY",
+      "severity": "medium",
+      "finding": "Iterative decompression max_depth=5 is configured but only single-layer encodings (gzip OR brotli, never both) are tested. The max_depth logic for stacked Content-Encoding (gzip->br, br->gzip) remains unexercised beyond depth=1. Acknowledged in validity threat T2 and parent V3.",
+      "evidence": "spec.json measurement_validity item 6 'single-layer encoding per observation'; run_experiment.py COMPRESSION_MODELS only sets use_gzip XOR use_brotli; decompress_body while loop never takes second branch in this experiment",
+      "impact": "Claim ceiling bounded to single Content-Encoding header. Multi-layer decompression correctness unknown."
+    },
+    {
+      "id": "V3_CHUNK_SIZE_32_NOT_REPRESENTATIVE",
+      "severity": "low",
+      "finding": "chunk_size=32 bytes is far smaller than typical CDN chunk sizes (often 8KB-64KB). This maximizes chunk count (60-3000+ vs ~10-100 at realistic chunk sizes) and stresses the reassembly path aggressively. Acknowledged in validity threat T3. Not a validity threat to the localhost claim but limits extrapolation to real infrastructure.",
+      "evidence": "spec.json chunk_size=32; prereg.md validity threat T6; run_experiment.py CHUNK_SIZE=32 constant",
+      "impact": "Over-stresses chunk reassembly relative to production; a positive result here is necessary but not sufficient for CDN correctness."
+    },
+    {
+      "id": "V4_BINARY_NEAR_INCOMPRESSIBLE",
+      "severity": "info",
+      "finding": "BINARY content type at 100KB nominal produces ~98KB compressed (mean 97721-98973 bytes across compression modes), exceeding the prereg's '2-50KB' expectation. This occurs because the binary generator uses high-entropy random payload sections (near 8 bits/byte Shannon entropy). The compressed size still produces 3000+ chunks at chunk_size=32, exceeding the 1500+ chunk target. This strengthens rather than weakens the chunk-boundary stress test.",
+      "evidence": "result.json per_cell BINARY_*_102400B compressed_size_bytes means 97721-98973; report.md M-CHUNK-COUNT-MAX 3074 chunks; prereg.md expected 20-50KB compressed",
+      "impact": "Not a validity threat; the experiment achieves greater chunk-boundary stress than originally specified for this content type."
+    },
+    {
+      "id": "V5_OBSERVATION_COUNT_DISCREPANCY",
+      "severity": "low",
+      "finding": "Prereg.md and report.md incorrectly state 960 main high-entropy observations. The executed design produces 24 cells (2 sizes × 3 types × 4 compressions) each with 20 observations (4 states × 5 reps) = 480 main observations. The decision_rule in spec.json correctly references 'ALL high-entropy cells' (24 cells) not a raw count. C1 evaluates per-cell correctness_match_rate == 1.0, which passes. The narrative count error does not affect the frozen decision rule evaluation.",
+      "evidence": "prereg.md section 4.1 '2 × 3 × 4 × 4 × 5 = 960'; report.md section 4.1 'All 960 high-entropy observations pass'; result.json 24 main cell_keys each with total_requests=20; spec.json decision_rule C1 'correctness_match_rate == 1.0 for ALL high-entropy cells'",
+      "impact": "Reporting error only; scientific conclusion unchanged."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-GZIP-MC-1KB-REGRESSION",
+      "expected": "100% correctness, regression control for gzip decompression pipeline (spec baselines)",
+      "observed": "6 cells (JSON/HTML/BINARY × GZIP-MC-1KB) each 20/20 = 120/120 correctness_match_rate 1.0, silent_fallback 0, decompression_error 0. Recomputed sum matches producer.",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_GZIP-MC-1KB_1024B, HTML_GZIP-MC-1KB_1024B, BINARY_GZIP-MC-1KB_1024B; controls C_REGRESSION_CONTROLS gzip_1kb pass_all true",
+      "note": "Confirms no pipeline regression vs parent chain (240/240 then 120/120)."
+    },
+    {
+      "id": "B-BROTLI-MC-1KB-REGRESSION",
+      "expected": "100% correctness, regression control for brotli decompression pipeline",
+      "observed": "3 cells (JSON/HTML/BINARY × BROTLI-MC-1KB) each 20/20 = 60/60 correctness 1.0, silent_fallback 0. Combined regression 120/120 with gzip. Recomputed matches producer.",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_BROTLI-MC-1KB_1024B, HTML_BROTLI-MC-1KB_1024B, BINARY_BROTLI-MC-1KB_1024B; controls C_REGRESSION_CONTROLS brotli_1kb pass_all true",
+      "note": "Inherited 480/480 brotli history confirmed."
+    },
+    {
+      "id": "B-IDENTITY-HE-10KB",
+      "expected": "100% correctness, SHA256 matches generate_*_he_body(state, 10240) exactly for all 3 content types",
+      "observed": "3 cells (JSON/HTML/BINARY × IDENTITY-10KB) each 20/20 = 60/60 correctness 1.0. Recomputed matches producer.",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_IDENTITY-10KB_10240B, HTML_IDENTITY-10KB_10240B, BINARY_IDENTITY-10KB_10240B; controls C_IDENTITY_BASELINE pass true",
+      "note": "Validates correctness oracle for high-entropy payloads at 10KB; confirms server IDENTITY path preserves bytes."
+    },
+    {
+      "id": "B-IDENTITY-HE-100KB",
+      "expected": "100% correctness, SHA256 matches generate_*_he_body(state, 102400) exactly for all 3 content types",
+      "observed": "3 cells each 20/20 = 60/60 correctness 1.0. Recomputed matches producer.",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_IDENTITY-100KB_102400B, HTML_IDENTITY-100KB_102400B, BINARY_IDENTITY-100KB_102400B; controls C_IDENTITY_BASELINE pass true",
+      "note": "Oracle validated at both sizes; server determinism confirmed for high-entropy generators."
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "expected": "At least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB AND >= 5000 at 100KB",
+      "observed": "10KB: JSON 4215, HTML 2773, BINARY 9871 — 3/3 pass (≥2000). 100KB: JSON 35002, HTML 22358, BINARY 98380 — 3/3 pass (≥5000). All compression modes included in per-content-type means. Recomputed from result.json per_cell compressed_size_bytes means matches producer report.md table.",
+      "pass": true,
+      "evidence": "result.json per_cell compressed_size_bytes means for all 24 main cells; controls B_COMPRESSED_TARGET_RANGE pass true; report.md section 3.2 table",
+      "note": "High-entropy payloads genuinely produce realistic compressed sizes (2-99KB, 60-3000+ chunks), resolving parent V1_DEGENERATE_PAYLOAD_REDUNDANCY."
+    },
+    {
+      "id": "C_NULL_CONTROL_DETERMINISM",
+      "expected": "Within-state decompressed hash all_same=true for all 4 auth states across all 24 high-entropy cells (spec null_control B-RANDOM definition)",
+      "observed": "24 main cells × 4 states = 96 checks: all unique_count=1, all_same=true. Recomputed matches producer decompressed_hash_variation.",
+      "pass": true,
+      "evidence": "result.json per_cell decompressed_hash_variation for all main cells; controls C_NULL_CONTROL pass true",
+      "note": "Determinism holds for seeded RNG body generation and decompression pipeline."
+    },
+    {
+      "id": "C_SILENT_FALLBACK",
+      "expected": "0 silent fallbacks for ALL compressed observations in high-entropy cells (silent_fallback = SHA256(decompressed) == SHA256(raw_compressed))",
+      "observed": "0 silent fallbacks across all 24 main cells (480 compressed observations) and 6 regression cells (120 compressed). Recomputed from per_cell silent_fallback_count all 0.",
+      "pass": true,
+      "evidence": "result.json per_cell silent_fallback_count 0 for all 30 compressed cells; controls C_SILENT_FALLBACK pass true total_silent_fallbacks 0",
+      "note": "No case where decompression returned compressed bytes unchanged."
+    },
+    {
+      "id": "M_ENTROPY_SHANNON",
+      "expected": "All content types achieve Shannon entropy >= 3.5 bits/byte across all auth states and sizes (pre-flight validation)",
+      "observed": "JSON: mean 5.49 (min 5.44, max 5.57); HTML: mean 4.66 (min 4.63, max 4.67); BINARY: mean 7.69 (min 7.67, max 7.70). All above threshold. Recomputed from entropy_results in run_experiment.py validate_entropy_pre_flight() matches producer report.md table.",
+      "pass": true,
+      "evidence": "run_experiment.py compute_shannon_entropy and validate_entropy_pre_flight; result.json metrics.M_ENTROPY_SHANNON pass true; report.md section 3.1 table",
+      "note": "Payloads are genuinely high-entropy, not degenerate like parent's 'x'*pad."
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_correctness": {
+      "main_cells": 24,
+      "main_observations": 480,
+      "main_correctness_pass": 480,
+      "main_correctness_fail": 0,
+      "main_correctness_rate": 1.0,
+      "regression_cells": 6,
+      "regression_observations": 120,
+      "regression_correctness_pass": 120,
+      "identity_cells": 6,
+      "identity_observations": 120,
+      "identity_correctness_pass": 120,
+      "total_observations": 720,
+      "total_correctness_pass": 720,
+      "match_producer_aggregate": true,
+      "note": "Producer report.md claims 960 main observations; actual is 480 (24 cells × 20). Decision rule C1 evaluates per-cell rate (24 cells all 1.0), not raw count."
+    },
+    "per_cell_correctness_match_rate": {
+      "main_24_cells": "1.0 for all 24 cells (20/20 each)",
+      "regression_6_cells": "1.0 for all 6 cells (20/20 each)",
+      "identity_6_cells": "1.0 for all 6 cells (20/20 each)",
+      "silent_fallback_count": "0 for all 30 compressed cells",
+      "decompression_error_count": "0 for all 36 cells",
+      "match_producer": true
+    },
+    "decision_rule_recomputed": {
+      "C1_correctness_match_rate_all_high_entropy_cells": true,
+      "C2_silent_fallback_count_zero_all_high_entropy_cells": true,
+      "C3_regression_controls_100pct": true,
+      "C4_null_control_all_same_true": true,
+      "C5_compressed_target_range_pass": true,
+      "verdict_under_frozen_rule": "SURVIVES_CURRENT_TEST (all five conjuncts true per spec.json decision_rule)",
+      "producer_outcome": "SUPPORTS/COMPLETE",
+      "audit_agrees_on_rule": true
+    },
+    "compressed_size_recomputed": {
+      "10KB_per_content_type_mean": {
+        "JSON": 4215,
+        "HTML": 2773,
+        "BINARY": 9871
+      },
+      "100KB_per_content_type_mean": {
+        "JSON": 35002,
+        "HTML": 22358,
+        "BINARY": 98380
+      },
+      "chunk_counts_at_32_bytes": {
+        "10KB_range": "85-309 chunks",
+        "100KB_range": "630-3074 chunks"
+      },
+      "prereg_predicted_10KB_chunks": "60-300+",
+      "prereg_predicted_100KB_chunks": "600-1500+",
+      "observation": "All content types exceed minimum chunk counts; BINARY at 100KB far exceeds (near-incompressible). Target range validation (C5) passes with 3/3 types at both sizes."
+    },
+    "entropy_recomputed": {
+      "JSON_bits_per_byte": {"mean": 5.49, "min": 5.44, "max": 5.57},
+      "HTML_bits_per_byte": {"mean": 4.66, "min": 4.63, "max": 4.67},
+      "BINARY_bits_per_byte": {"mean": 7.69, "min": 7.67, "max": 7.70},
+      "threshold": 3.5,
+      "all_pass": true
+    }
+  },
+  "claim_ceiling": "localhost buffered-mock with HIGH-ENTROPY PAYLOADS at realistic compressed sizes: iterative decompression (brotli->gzip->identity max_depth=5) produces byte-identical SHA256(decompressed)==SHA256(generate_*_he_body) for JSON (UUIDs, random floats), HTML (realistic paragraphs), and BINARY (structured random payloads) at nominal 10KB/100KB yielding actual compressed 2.6-99KB (85-3074 chunks at chunk_size=32) across gzip levels 1/9 and brotli qualities 4/8 with multi-chunk Transfer-Encoding: chunked via Python buffering proxy that reassembles before decompression, 4 auth states, 5 reps/cell (480/480 main correctness, 120/120 regression, 120/120 identity, 0 silent fallbacks, 0 errors, within-state determinism all_same=true, entropy 4.66-7.69 bits/byte). Does NOT establish: (a) streaming incremental decompression across chunk boundaries (buffered proxy reassembles fully), (b) multi-layer stacked Content-Encoding (max_depth>1 untested), (c) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, cache/Vary, header manipulation, geographic latency, concurrency, (d) gzip levels 2-8 or brotli 5-7, (e) production OAuth/OIDC, (f) chunk sizes representative of CDN (8KB+). The remaining mandatory gate for Product Core is real CDN infrastructure with high-entropy payloads.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35495699298/spec.json (frozen question hypothesis falsifier baselines decision_rule C1-C5 measurement_validity)",
+    "research/experiments/EXP-RUNTIME-35495699298/prereg.md (test matrix, high-entropy generators, entropy validation, decision rule, validity threats)",
+    "research/experiments/EXP-RUNTIME-35495699298/freeze.json (immutable frozen inputs hashes)",
+    "research/experiments/EXP-RUNTIME-35495699298/result.json (aggregate 720/720 correctness, per_cell 36 cells all 1.0, compressed_size_bytes means 2616-98973, silent_fallback_count 0, controls all pass)",
+    "research/experiments/EXP-RUNTIME-35495699298/report.md (executive summary, compressed size table, entropy validation table, decision rule evaluation table)",
+    "research/experiments/EXP-RUNTIME-35495699298/run_experiment.py (high-entropy generators generate_json_he_body generate_html_he_body generate_binary_he_body, MockOAuthHandler, ReverseProxyHandler buffered read, decompress_body max_depth=5, correctness_match vs expected_hash, silent_fallback logic, entropy validation)",
+    "research/experiments/EXP-RUNTIME-35495699298/provenance.json (python 3.12.14 brotli 1.2.0 seed 44 ports 8700/8800 chunk_size 32 max_depth 5)",
+    "research/experiments/EXP-RUNTIME-35481773400/audit.json (parent V1_DEGENERATE_PAYLOAD_REDUNDANCY resolved by this experiment)",
+    "research/experiments/EXP-RUNTIME-35481773400/handoff.json (parent carry_forward unknown 'high-entropy non-redundant payloads' now addressed)"
+  ],
+  "unresolved": [
+    "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, multi-layer encoding, auth-aware cache/Vary, CDN header manipulation, geographic latency, and production concurrency? (Inherited from parent handoff unknown[0], now with high-entropy payloads validated on localhost)",
+    "Does correctness hold for streaming incremental decompression across chunk boundaries without full reassembly? (Parent V2, this experiment V1 - buffered architecture cannot test)",
+    "Does correctness hold for stacked multi-layer encodings (gzip->br, br->gzip) exercising max_depth>1? (Parent V3, this experiment V2 - only single-layer tested)",
+    "Does high-entropy payload correctness hold for payloads beyond 100KB nominal?",
+    "Do gzip levels 2-8 and brotli qualities 5-7 produce compressed structures that stress chunk boundaries differently at realistic chunk sizes (8KB+)?",
+    "What is decompression latency at realistic compressed sizes (20-99KB) on real network infrastructure? (localhost latency negligible ~0.05-0.5ms)"
+  ]
+}

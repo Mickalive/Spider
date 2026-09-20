@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35522287921",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "total_requests": 840,
+    "total_observations_streaming": 480,
+    "total_observations_buffered": 480,
+    "main_multi_layer_cells": 24,
+    "regression_cells": 12,
+    "identity_cells": 6,
+    "reps_per_state": 5,
+    "auth_states": 4,
+    "content_types": ["JSON", "HTML", "BINARY"],
+    "target_sizes_bytes": [10240, 102400],
+    "multi_layer_encodings": ["GZIP-THEN-BROTLI", "BROTLI-THEN-GZIP"],
+    "stream_chunk_sizes_bytes": [8192, 32],
+    "shannon_entropy_bits_per_byte": {
+      "JSON": {"mean": 5.486, "min": 5.436, "max": 5.573},
+      "HTML": {"mean": 4.66, "min": 4.633, "max": 4.672},
+      "BINARY": {"mean": 7.69, "min": 7.673, "max": 7.697}
+    },
+    "streaming_equals_buffered": {
+      "multi_layer_24_cells_rate": 1.0,
+      "multi_layer_24_cells_count": "480/480 observations byte-identical",
+      "regression_12_cells_rate": 1.0,
+      "identity_6_cells_rate": 1.0
+    },
+    "streaming_correctness": {
+      "multi_layer_24_cells_rate": 1.0,
+      "multi_layer_24_cells_count": "480/480 streaming decompressed SHA256 == expected SHA256",
+      "regression_12_cells_rate": 1.0,
+      "regression_12_cells_count": "240/240 (6 configs x 2 chunk sizes x 20 obs)",
+      "buffered_ground_truth_rate": 1.0,
+      "buffered_ground_truth_count": "480/480 buffered decompressed == expected"
+    },
+    "buffered_correctness": {
+      "multi_layer_24_cells_rate": 1.0,
+      "count": "480/480"
+    },
+    "decompression_errors": {
+      "streaming_path_total": 0,
+      "buffered_path_total": 0,
+      "per_cell_streaming": 0,
+      "per_cell_buffered": 0
+    },
+    "silent_fallbacks": {
+      "streaming_path_total": 0,
+      "buffered_path_total": 0,
+      "definition": "SHA256(decompressed) == SHA256(raw_compressed) for compressed responses"
+    },
+    "within_state_determinism": {
+      "streaming_all_same": true,
+      "buffered_all_same": true,
+      "detail": "all 4 auth states x all 24 multi-layer cells x both paths: unique_count==1 for 5 reps per state"
+    },
+    "compressed_size_bytes": {
+      "per_content_type_mean": {
+        "JSON_10KB_mean": 4330.875,
+        "JSON_100KB_mean": 36168.875,
+        "HTML_10KB_mean": 2854.0,
+        "HTML_100KB_mean": 23642.5,
+        "BINARY_10KB_mean": 9903.375,
+        "BINARY_100KB_mean": 98678.0
+      },
+      "range_overall": "2748-98741 bytes across all multi-layer cells",
+      "target_validation": "all means >=2000 at 10KB and >=5000 at 100KB"
+    },
+    "regression_baselines": {
+      "gzip_single_chunk8192_rate": 1.0,
+      "gzip_single_chunk32_rate": 1.0,
+      "brotli_single_chunk8192_rate": 1.0,
+      "brotli_single_chunk32_rate": 1.0
+    },
+    "decompression_latency_ms": {
+      "streaming_mean_multi_layer": 0.15,
+      "buffered_mean_multi_layer": 0.15,
+      "note": "decompress_body iterative max_depth=5, measured per-observation after byte accumulation"
+    }
+  },
+  "controls": {
+    "B-BUFFERED-GROUND-TRUTH": {
+      "id": "B-BUFFERED-GROUND-TRUTH",
+      "description": "Full-body buffered decompression re-validated as ground truth (parent 240/240)",
+      "expected": "100% correctness (SHA256 matches generate_*_body)",
+      "observed": "480/480 multi-layer buffered observations correct (rate 1.0) across 24 cells x 20 obs, both chunk sizes",
+      "pass": true,
+      "evidence": "result.json:metrics.buffered_correctness, raw_cell_results.json buffered_correctness_match_rate ==1.0 for all 24 cells"
+    },
+    "B-GZIP-SINGLE-LAYER-REGRESSION": {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer gzip correctness at 10KB high-entropy with streaming proxy",
+      "expected": "100% correctness in both buffered and streaming paths",
+      "observed": "6 cells (JSON/HTML/BINARY x 8192/32) x 20 obs =120 obs: streaming 120/120 correct, buffered 120/120 correct; streaming_equals_buffered 120/120",
+      "pass": true,
+      "evidence": "raw_cell_results.json keys JSON_GZIP-SINGLE_10240B_chunk8192 etc all streaming_correctness_match_rate=1.0"
+    },
+    "B-BROTLI-SINGLE-LAYER-REGRESSION": {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer brotli correctness at 10KB high-entropy with streaming proxy",
+      "expected": "100% correctness in both buffered and streaming paths",
+      "observed": "6 cells x 20 obs =120 obs: streaming 120/120, buffered 120/120, equals 120/120",
+      "pass": true,
+      "evidence": "raw_cell_results.json keys JSON_BROTLI-SINGLE_10240B_chunk8192 etc"
+    },
+    "B-IDENTITY-HE-STREAMING": {
+      "id": "B-IDENTITY-HE-STREAMING",
+      "description": "IDENTITY (no compression) at 10KB and 100KB high-entropy through streaming proxy",
+      "expected": "100% correctness, SHA256 matches generate_*_body",
+      "observed": "6 cells x 20 obs =120 obs: streaming 120/120 correct, buffered 120/120 correct (JSON/HTML/BINARY x 10KB/100KB)",
+      "pass": true,
+      "evidence": "raw_cell_results.json JSON_IDENTITY-10240 etc streaming_correctness_match_rate=1.0"
+    },
+    "B-COMPRESSED-TARGET-RANGE": {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "description": "Compressed size validation: mean >=2000 at 10KB and >=5000 at 100KB for at least 2/3 content types under multi-layer",
+      "expected": "High-entropy payloads produce 2-99KB compressed sizes",
+      "observed": "JSON 4330/36168, HTML 2854/23642, BINARY 9903/98678 — all 3/3 meet thresholds at both sizes",
+      "pass": true,
+      "evidence": "result.json:metrics.compressed_size_bytes.per_content_type_mean, C5 pass true"
+    },
+    "C1_STREAMING_EQUALS_BUFFERED": {
+      "id": "C1_STREAMING_EQUALS_BUFFERED",
+      "description": "Falsifier C1: streaming_hash == buffered_hash for ALL multi-layer streaming cells",
+      "expected": "Byte-identical output between streaming and buffered paths",
+      "observed": "24/24 cells 480/480 observations streaming_decompressed_hash == buffered_decompressed_hash",
+      "pass": true,
+      "evidence": "raw_cell_results.json streaming_equals_buffered_rate=1.0 for all 24 keys"
+    },
+    "C2_STREAMING_EQUALS_EXPECTED": {
+      "id": "C2_STREAMING_EQUALS_EXPECTED",
+      "description": "Falsifier C2: streaming_hash == expected_hash for ALL multi-layer cells",
+      "expected": "Streaming correctness matches ground truth oracle",
+      "observed": "24/24 cells 480/480 streaming correct",
+      "pass": true,
+      "evidence": "raw_cell_results.json streaming_correctness_match_rate=1.0"
+    },
+    "C3_REGRESSION": {
+      "id": "C3_REGRESSION",
+      "description": "Decision rule C3: B-GZIP-SINGLE and B-BROTLI-SINGLE pass 100% in both paths",
+      "expected": "Regression controls confirm single-layer not degraded",
+      "observed": "gzip 120/120 both paths, brotli 120/120 both paths",
+      "pass": true,
+      "evidence": "controls.B-GZIP-SINGLE-LAYER-REGRESSION and B-BROTLI-SINGLE-LAYER-REGRESSION"
+    },
+    "C4_NULL_CONTROL_WITHIN_STATE_DETERMINISM": {
+      "id": "C4_NULL_CONTROL_WITHIN_STATE_DETERMINISM",
+      "description": "Null control: decompressed_hash identical across all 5 reps per (state, encoding, type, size, chunk_size) in both paths",
+      "expected": "all_same=true for all states in all cells",
+      "observed": "All 24 multi-layer + 12 regression cells: unique_count==1 total==5 all_same==true for all 4 states in both streaming and buffered streaming_hash_variation and buffered_hash_variation",
+      "pass": true,
+      "evidence": "raw_cell_results.json streaming_hash_variation and buffered_hash_variation per cell"
+    },
+    "C5_COMPRESSED_TARGET_RANGE": {
+      "id": "C5_COMPRESSED_TARGET_RANGE",
+      "description": "Decision rule C5: at least 2/3 types meet compressed size thresholds",
+      "expected": "2/3 types >=2000 at 10KB and >=5000 at 100KB",
+      "observed": "3/3 meet at both sizes (meets_10k=3 meets_100k=3)",
+      "pass": true,
+      "evidence": "metrics.compressed_size_bytes"
+    },
+    "POSITIVE_CONTROL": {
+      "id": "POSITIVE_CONTROL",
+      "description": "B-BUFFERED-GROUND-TRUTH confirms infrastructure functional before streaming comparison",
+      "expected": "100% correctness under buffered path",
+      "observed": "480/480 buffered multi-layer correct; identity 120/120 correct",
+      "pass": true,
+      "evidence": "controls.B-BUFFERED-GROUND-TRUTH"
+    },
+    "NULL_CONTROL": {
+      "id": "NULL_CONTROL",
+      "description": "Within-state determinism across 5 reps",
+      "expected": "all_same=true",
+      "observed": "all_same=true all states all cells both paths",
+      "pass": true,
+      "evidence": "controls.C4_NULL_CONTROL_WITHIN_STATE_DETERMINISM"
+    },
+    "STREAMING_PROXY_MODE_VERIFICATION": {
+      "id": "STREAMING_PROXY_MODE_VERIFICATION",
+      "description": "Streaming proxy architecture verification: proxy forwards without full-body buffering",
+      "expected": "X-Proxy-Mode header STREAMING-PROXY for all streaming observations, BUFFERED-PROXY for buffered",
+      "observed": "All streaming obs X-Proxy-Mode==STREAMING-PROXY, all buffered X-Proxy-Mode==BUFFERED-PROXY; streaming proxy reads upstream via read(STREAM_CHUNK_SIZE) loop without buffering full body",
+      "pass": true,
+      "evidence": "run_experiment.py:StreamingProxyHandler._proxy_request loop upstream_resp.read(stream_chunk_size), raw_cell_results.json proxy_mode_ok"
+    },
+    "SILENT_FALLBACK_CONTROL": {
+      "id": "SILENT_FALLBACK_CONTROL",
+      "description": "Silent fallback detection: decompressed == raw_compressed classified as failure",
+      "expected": "0 silent fallbacks for any compressed response",
+      "observed": "0 fallbacks across 480 streaming multi-layer + 240 regression (all chunk sizes) =720 compressed streaming observations",
+      "pass": true,
+      "evidence": "metrics.silent_fallbacks.streaming_path_total==0"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/run_experiment.py",
+      "sha256": "fff117de528cda5cae67ebad605a9bcb5ef0d60b7bae507cc2f82b973ea08cee",
+      "role": "code",
+      "description": "Execution script: MockOAuthHandler, BufferedProxyHandler, StreamingProxyHandler, high-entropy generators, decompress_body max_depth=5, streaming vs buffered comparison"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/raw_cell_results.json",
+      "sha256": "a8707b40c5a0af18ea44a1f3c93ee1d1bd5cc95793b9684aedeb5314386a48db",
+      "role": "raw",
+      "description": "Per-cell raw observations: 24 multi-layer cells x20 +12 regression x20 +6 identity x20 =840 total requests, each with streaming/buffered hashes, latencies, proxy mode"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Canonical packet result with metrics, controls, artifacts, observations"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/report.md",
+      "sha256": "4fe1d2026fccabdcbb957973b490d9a46e535e0fe63121f3280d0b0550d42ce4",
+      "role": "derived",
+      "description": "Human-readable report with interpretation and claim ceiling"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/provenance.json",
+      "sha256": "6b26096d293b0004b440bfd87cfa0f1bd7113da18c33e4fa9c189e2f3ecbb75c",
+      "role": "derived",
+      "description": "Provenance: execution environment, frozen input hashes, parent chain"
+    }
+  ],
+  "observations": [
+    "Experiment: EXP-RUNTIME-35522287921, Lane: runtime, Architecture: StreamingProxy (incremental chunk forwarding) + BufferedProxy (full-body buffering) -> Mock OAuth2 Server (localhost), iterative decompression max_depth=5 (brotli->gzip->identity)",
+    "Streaming proxy architecture verified: StreamingProxyHandler._proxy_request reads upstream incrementally via upstream_resp.read(STREAM_CHUNK_SIZE) in while loop and forwards each chunk as chunked frame without buffering full body; buffered proxy uses upstream_resp.read() full buffering then re-chunk at 32 bytes",
+    "Streaming client architecture verified: make_request_streaming() uses resp.raw.read(stream_chunk_size) incremental loop accumulating raw bytes then decompress_body; buffered client uses resp.raw.read(decode_content=False) single read",
+    "Pre-flight Shannon entropy: JSON mean 5.49 min 5.44 max 5.57; HTML mean 4.66 min 4.63 max 4.67; BINARY mean 7.69 min 7.67 max 7.70 — all >=3.5 bits/byte threshold",
+    "Main multi-layer cells: 24 cells (2 sizes x3 types x2 encodings x2 chunk sizes 8192/32) x20 obs =480 streaming +480 buffered =960 requests; all streaming_hash == buffered_hash (480/480) byte-identical; all streaming_hash == expected_hash (480/480) correct; 0 decompression errors; 0 silent fallbacks",
+    "Regression cells: 12 cells (3 types x2 single-layer modes x2 chunk sizes) x20 =240 streaming +240 buffered; all streaming_correct 240/240, buffered_correct 240/240, streaming_equals_buffered 240/240",
+    "Identity cells: 6 cells (3 types x2 sizes) x20 =120 streaming +120 buffered; all 120/120 correct both paths",
+    "Within-state determinism: all 24 multi-layer +12 regression cells show decompressed_hash all_same=true for all 4 states across 5 reps in both streaming and buffered paths (unique_count==1)",
+    "Compressed sizes: JSON 10KB mean 4330B/100KB 36168B; HTML 10KB 2854B/100KB 23642B; BINARY 10KB 9903B/100KB 98678B — all 3/3 types meet >=2000 at 10KB and >=5000 at 100KB; overall range 2748-98741 bytes confirms non-degenerate high-entropy payloads",
+    "Per-cell example compressed sizes: JSON_GZIP-THEN-BROTLI_10240B_chunk8192 mean 4585B (4271-4785 range in parent consistency); BINARY_GZIP-THEN-BROTLI_10240B mean 9894B; JSON_GZIP-THEN-BROTLI_102400B mean 38951B",
+    "X-Proxy-Mode header verification: all streaming observations returned STREAMING-PROXY, all buffered returned BUFFERED-PROXY; confirms request routing through correct proxy class",
+    "X-Proxy-Mode and chunk size independence: correctness holds at both realistic CDN chunk size 8192 (Cloudflare default ~8KB) and stress size 32 (maximizes chunk count: 86-3087 chunks per response at 32B)",
+    "Total correctness: streaming multi-layer 480/480 (100%), buffered multi-layer 480/480 (100%), regression 240/240 (100%), identity 120/120 (100%); aggregate streaming across all 42 cells 840/840 correct before deduplication of per-path counting",
+    "Decompression latency: streaming mean ~0.15ms multi-layer (microseconds for iterative brotli+gzip), buffered similar; no latency divergence between paths"
+  ],
+  "validity_notes": [
+    "V1_STREAMING_DECOMPRESSOR_POST-ACCUMULATION: decompress_body is called on b''.join(chunks) after accumulation, not as incremental decompress during chunk arrival; this matches real-world proxy/CDN use where client accumulates Transfer-Encoding body before Content-Encoding decompression, and matches spec measurement_validity clause. True streaming incremental decompression of partial Brotli/Gzip frames (decompress as chunks arrive) is not tested — the chunk boundary test is at the HTTP Transfer-Encoding framing layer, not at the decompressor streaming API layer.",
+    "V2_PYTHON_REQUESTS_BUFFERING: requests with stream=True may internally buffer; mitigated by using resp.raw.read(stream_chunk_size) directly, not iter_content; still dependent on urllib3 raw socket buffering but observed X-Proxy-Mode and byte-identical sizes confirm no hidden reassembly corruption at the HTTP layer.",
+    "V3_CHUNK_SIZE_PROXY_CLIENT_ALIGNMENT: streaming proxy STREAM_CHUNK_SIZE and streaming client read size were set equal per cell (8192 or 32) to force chunk-boundary exposure; both values satisfy spec requirement of realistic CDN (8KB) and stress test (32B). No mixed-size matrix (proxy 8192 client 32 etc.) was tested — but equal-size already maximizes boundary intersection density.",
+    "V4_ORIGIN_CHUNK_SIZE_FIXED: Mock origin always chunked at 32 bytes before reaching proxy; proxy's streaming read re-chunks at 8192/32 regardless. This additive layering is faithful to CDN behavior where origin chunks are re-framed by edge.",
+    "V5_SAME_PROCESS_ORACLE: Correctness oracle is in-process generate_*_body(state,target_size) SHA256; correctness means matches deterministic generator, not independent corpus; inherited from parent chain (EXP-RUNTIME-35495699298) and bounded to same interpreter session determinism.",
+    "V6_BINARY_HASHSEED: BINARY body header contains struct.pack(hash(state)) which is PYTHONHASHSEED-dependent; determinism holds within single process (RANDOM seed and same PYTHONHASHSEED) — confirmed all_same=true across reps; cross-run reproducibility not claimed and not tested per parent do_not_assume.",
+    "V7_LOCALHOST_ONLY: All requests to 127.0.0.1; no real CDN (Cloudflare/Fastly/Akamai), no geographic latency, no TCP segmentation, no concurrent clients, no Accept-Encoding negotiation beyond br,gzip,identity; localhost streaming correctness does not imply CDN correctness but removes the V1_BUFFERED_PROXY_NOT_STREAMING blocker that made CDN testing moot.",
+    "V8_DEPTH_LIMITED: Multi-layer tested only at depth 2 (GZIP-THEN-BROTLI, BROTLI-THEN-GZIP) with gzip level=1 and brotli quality=4; depths 3-5 untested; spec max_depth=5 exercised but only 2 layers stacked.",
+    "V9_COMPRESSION_PARAMS_NARROW: Only gzip level 1/None and brotli quality 4/6 tested; other levels 2-9/qualities 5-7 untested but parent established single-layer extremes do not affect correctness.",
+    "V10_CHUNK_BOUNDARY_STRESS_COUNT: At 10KB multi-layer compressed ~2.7-9.9KB over 32B chunks => 86-310 chunks per response; at 100KB ~22.6-98.6KB =>710-3087 chunks; streaming path observed same bytes as buffered, confirming no byte loss/dup across thousands of chunk boundaries."
+  ],
+  "unresolved": [
+    "Does correctness hold for true incremental decompression where decompress_body is fed chunk-by-chunk via streaming decompressor APIs (brotli.Decompressor.process, gzip streaming) without full accumulation? The present test proves Transfer-Encoding chunking does not corrupt the byte stream; decompressor streaming state machine across arbitrary Brotli block boundaries remains untested at the API level.",
+    "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy payloads, Accept-Encoding negotiation, Vary/cache, geographic latency, and concurrency at 8KB chunk sizes?",
+    "Does correctness hold for payloads beyond 100KB nominal (e.g., 500KB, 1MB) where brotli/gzip dictionary windows cross chunk boundaries more frequently?",
+    "Do other gzip levels (2-9) and brotli qualities (5-7, 8-11) produce compressed structures that stress chunk boundaries differently at realistic sizes?",
+    "Cross-run BINARY ground truth reproducibility across interpreter sessions with different PYTHONHASHSEED and gzip/brotli library versions (1.2.0 vs future) remains untested."
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35476271728",
+  "lane": "product",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V-REPRESENTATION-MOCK-ONLY",
+      "severity": "info",
+      "finding": "All measurements remain localhost Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT on 127.0.0.1:18951, seed 42, p_refresh_success=0.7, sequential client, threaded=False. No production OAuth/OIDC, CDN, network RTT, or database-backed sessions. Producer correctly bounds claim_ceiling to this substrate in result.json validity_notes #1 and report.md Claim Ceiling. No production or PRODUCT_CORE inference warranted.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::validity_notes[0]; research/experiments/EXP-PRODUCT-35476271728/report.md::Claim Ceiling; research/experiments/EXP-PRODUCT-35476271728/spec.json::measurement_validity[6]"
+    },
+    {
+      "id": "V-BIMODAL-DISCRETE",
+      "severity": "info",
+      "finding": "Behavioral_score is discrete bimodal (0.35 failure / 0.65 success), not continuous severity variation. Recomputed from raw_evidence: phase_b 0.65=341/480, 0.35=139/480; phase_d 0.65=34/60, 0.35=26/60; noise-only exactly 0.05. Per-condition behavioral_std 0.1332-0.1411 and isolated 0.1499 are driven solely by Bernoulli p_refresh_success=0.7 mixing, not graded severity. Spec measurement_validity #2 explicitly defines this as expected (bimodal ~0.35/~0.65), so it is not a protocol violation, but it limits production severity generalization. Producer discloses this in validity_notes #2 (though it misstates failure mode as ~0.48 instead of observed 0.35).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/raw_evidence/experiment_data.json::phase_b_cooccurring; result.json::metrics.c3_per_condition; result.json::validity_notes[1]"
+    },
+    {
+      "id": "V-THRESHOLD-TAUTOLOGY",
+      "severity": "info",
+      "finding": "Detection at threshold 0.25 is tautological given bimodal scores: both modes (0.35 and 0.65) exceed 0.25, so TP=1.0 for any threshold in [0.15,0.35]. Recomputed threshold_sensitivity confirms TP=1.0 at 0.15-0.35 (540/540) and cliff to 0.694 at 0.40 (375/540), FP=0.0 at all thresholds. The metric does not discriminatingly test noise robustness; it is guaranteed by scoring weights (failure: 0.30(401)+0.03(admin)+0.02(session_valid)=0.35). Producer correctly reports this as flat TP and states '0.25 not uniquely optimal' in validity_notes #5 and report.md Phase E. Exploratory per prereg #9, does not affect C2 decision.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::metrics.threshold_sensitivity; result.json::validity_notes[4]; run_experiment.py::behavioral_score"
+    },
+    {
+      "id": "V-NULL-CONTROL-PERFECT",
+      "severity": "low",
+      "finding": "NC-NOISE-FP FP=0.0 on 240 noise-only samples (60 per noise type) with behavioral_score exactly 0.05 in every sample (no variance). Deterministic scoring makes FP test low-power: any threshold 0.15-0.40 yields same FP=0.0. Recomputed FP=0/240=0.0 matches producer. Pass at <=0.15 is valid per frozen rule, but does not demonstrate calibrated false-positive control under stochastic scoring.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/raw_evidence/experiment_data.json::phase_c_noise_only; result.json::metrics.c4_noise_fp_rate"
+    },
+    {
+      "id": "V-REPORTING-DISCREPANCY",
+      "severity": "low",
+      "finding": "Producer narrative misstates failure-mode behavioral_score as ~0.48 in result.json validity_notes #2, report.md Detailed Findings (Token Refresh Variance, Phase E), and result.json observations 'ranges from ~0.48 to ~0.65'. Raw evidence recompute shows failure mode is 0.35 (not 0.48). Report also states 'Token_refresh behavioral score under noise (mean 0.55-0.57) is slightly lower than isolated (mean 0.52)' but isolated mean is 0.52 which is lower, not higher (inverted). Neither error affects numeric metrics or decision logic; numeric metrics in result.json.metrics are correct (behavioral_mean 0.552-0.57 vs isolated 0.52). Flagged for correction but not material to SURVIVES determination.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::validity_notes[1]; result.json::observations[3]; research/experiments/EXP-PRODUCT-35476271728/report.md::Stochastic Token Refresh Behavioral Variance; raw_evidence/experiment_data.json recomputed means 0.5525-0.57 vs isolated 0.52"
+    },
+    {
+      "id": "V-SAMPLING-INTEGRITY",
+      "severity": "pass",
+      "finding": "N=480 paired samples satisfied (4 co-occurring conditions x 120), plus 240 noise-only, 60 isolated, 48 threshold probes = 868 HTTP cycles. Server state reset via set_drift(None) between conditions correctly implemented; no cross-condition contamination observed (per-condition score ranges consistent, cache_status distribution credible). RNG seeded 42 before server thread start, server threaded=False, client sequential - reproducible. Frozen measurement_validity N>=480 satisfied, resolving parent V1 (N=240) violation.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/run_experiment.py::N_COOCCUR=120; raw_evidence::phase_b_cooccurring counts 120 each; provenance.json::seed 42"
+    },
+    {
+      "id": "V-LEAKAGE-ORTHOGONALITY",
+      "severity": "pass",
+      "finding": "No behavioral-structural leakage: behavioral_signal from /api/session/status (body status/new_token_issued/role/status_code), structural_signal from /api/schema (cardinality of body keys + header count). Structural noise (optional_field_addition etc.) affects only /api/schema, drift affects only /api/session/status. Orthogonality recomputed correctly.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/mock_server.py::session_status vs get_schema; run_experiment.py::structural_signal vs behavioral_score"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-N240-PARENT-TOST",
+      "finding": "Parent n=240 TOST lower-tail failure (r=-0.060, CI [-0.185,0.067], p_lower=0.081 FAIL) resolved at n=480 as hypothesized. Recomputed at n=480: r=-0.0366, 95% CI [-0.126,0.053] width 0.179 (vs parent 0.252), p_lower=0.0062 PASS, p_upper=2.05e-05 PASS, ci_upper 0.053 < delta 0.15. Both tails pass. Narrowing matches 1/sqrt(n-3) expectation. Supports sample-size power artifact hypothesis (prereg hypothesis confirmed).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::metrics.c3_orthogonality; recomputed_metrics"
+    },
+    {
+      "id": "B-N480-MOCK-ORTHOGONALITY",
+      "finding": "Consistent with three prior n=480 mock orthogonality experiments: EXP-GRAPH-35353011131 (r=0.046 CI upper 0.135), EXP-GRAPH-35389145821 (r=0.0022 CI upper 0.0916), EXP-PRODUCT-35445596342 (r=-0.0258 CI upper 0.064) all TOST PASS. This experiment r=-0.0366 CI_upper 0.053 TOST PASS within same range, independent replication.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/spec.json::baselines.B-N480-MOCK-ORTHOGONALITY; result.json::metrics.c3_orthogonality"
+    },
+    {
+      "id": "B-TOKEN-REFRESH-N240",
+      "finding": "Token_refresh TP=1.0 at n=240 (parent) preserved at n=480: recomputed per-condition TP 1.0 on all 4 co-occurring conditions (120/120 each, Wilson lower 0.969), isolated TP 1.0 (60/60, Wilson lower 0.9398). Meets frozen C2 >=0.85 with margin.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::metrics.c2_cooccurring_tp; recomputed_metrics"
+    },
+    {
+      "id": "PC-STRUCTURAL-DISCRIMINATION",
+      "finding": "Positive control discrimination 0.8333 >0.5 passes. Recomputed full-vector fingerprints: 3 unique of 4 states (expired/invalid collision 14553e10b9eddcb9), matches EXP-RUNTIME-33902315583.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::controls.PC-STRUCTURAL-DISCRIMINATION; recomputed discrimination 0.8333"
+    },
+    {
+      "id": "NC-NOISE-FP",
+      "finding": "Null control FP 0.0 <=0.15 passes (recomputed 0/240). All 4 noise types FP 0.0 individually.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::controls.NC-NOISE-FP"
+    },
+    {
+      "id": "CTL-THRESHOLD-SENSITIVITY",
+      "finding": "Threshold sensitivity confirms parent audit V3 tautology: TP flat 1.0 across 0.15-0.35, only drops at 0.40 between modes. Producer correctly identifies 0.25 not uniquely optimal. No discriminating threshold calibration supported under discrete bimodal model.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35476271728/result.json::metrics.threshold_sensitivity"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_auth_discrimination": 0.8333,
+    "c1_pass": true,
+    "baseline_status_only": 0.5,
+    "baseline_body_only": 0.8333,
+    "n_unique_fingerprints": 3,
+    "c2_isolated_tp_token_refresh": {
+      "tp_rate": 1.0,
+      "tp_rate_wilson_lower": 0.9398,
+      "behavioral_mean": 0.52,
+      "behavioral_std": 0.1499,
+      "n": 60
+    },
+    "c2_cooccurring_tp": {
+      "token_refresh+optional_field_addition": 1.0,
+      "token_refresh+description_change": 1.0,
+      "token_refresh+response_time_jitter": 1.0,
+      "token_refresh+field_type_normalization": 1.0
+    },
+    "c3_per_condition_recomputed": {
+      "token_refresh+optional_field_addition": {"n": 120, "behavioral_mean": 0.5525, "behavioral_std": 0.1411, "tp_rate": 1.0},
+      "token_refresh+description_change": {"n": 120, "behavioral_mean": 0.57, "behavioral_std": 0.1332, "tp_rate": 1.0},
+      "token_refresh+response_time_jitter": {"n": 120, "behavioral_mean": 0.5675, "behavioral_std": 0.1345, "tp_rate": 1.0},
+      "token_refresh+field_type_normalization": {"n": 120, "behavioral_mean": 0.5625, "behavioral_std": 0.1369, "tp_rate": 1.0}
+    },
+    "c3_variance_conditions_pass": 4,
+    "c3_orthogonality": {
+      "pearson_r": -0.036635,
+      "pearson_p": 0.423242,
+      "n": 480,
+      "se": 0.045787,
+      "z_r": -0.036651,
+      "ci_lower": -0.125725,
+      "ci_upper": 0.053041,
+      "tost_delta": 0.15,
+      "tost_p_upper": 0.0000205,
+      "tost_p_lower": 0.006201,
+      "tost_pass": true
+    },
+    "c4_noise_fp_rate": 0.0,
+    "c4_per_noise_fp_rate": {
+      "optional_field_addition": 0.0,
+      "description_change": 0.0,
+      "response_time_jitter": 0.0,
+      "field_type_normalization": 0.0
+    },
+    "c5_tost_equivalence": {
+      "ci_upper": 0.053041,
+      "ci_upper_lt_delta": true,
+      "tost_pass": true,
+      "pearson_r": -0.036635,
+      "n": 480
+    },
+    "threshold_sensitivity_recomputed": {
+      "0.15": {"tp_rate": 1.0, "fp_rate": 0.0, "tp_count": 540, "fp_count": 0},
+      "0.20": {"tp_rate": 1.0, "fp_rate": 0.0, "tp_count": 540, "fp_count": 0},
+      "0.25": {"tp_rate": 1.0, "fp_rate": 0.0, "tp_count": 540, "fp_count": 0},
+      "0.30": {"tp_rate": 1.0, "fp_rate": 0.0, "tp_count": 540, "fp_count": 0},
+      "0.35": {"tp_rate": 1.0, "fp_rate": 0.0, "tp_count": 540, "fp_count": 0},
+      "0.40": {"tp_rate": 0.6944, "fp_rate": 0.0, "tp_count": 375, "fp_count": 0}
+    },
+    "match_producer": true,
+    "notes": "All numeric metrics match producer within rounding. Wilson lowers recomputed: 0.969 at n=120 TP=1.0, 0.9398 at n=60 TP=1.0. Behavioral failure mode 0.35 (not 0.48 as misstated in prose) confirmed via raw_evidence."
+  },
+  "claim_ceiling": "C-FRESHNESS SURVIVES at localhost stochastic-mock ceiling ONLY: Flask 3.1.3 + SQLite WAL + in-memory TTL cache 0.5s + jitter 10-100ms + mixed JWT HS256/RS256 on 127.0.0.1:18951, seed 42, p_refresh_success=0.7, bimodal behavioral scores 0.35 (failure, 401) / 0.65 (success, 200), n=480 paired co-occurring samples (4 noises x120) + 240 noise-only, TOST equivalence at delta=0.15 confirmed (r=-0.0366, CI [-0.126,0.053], both tails p<0.05). Token_refresh TP=1.0 (Wilson lower 0.969 per condition) and behavioral_std 0.133-0.149 >0.05 under co-occurring noise, FP=0.0, discrimination 0.8333. Threshold 0.25 tautological (any 0.15-0.35 identical TP=1.0; cliff at 0.40). No production generalization, no CDN/network RTT/OAuth generalization, no continuous severity inference, no PRODUCT_CORE promotion. Parent TOST lower-tail failure confirmed as sample-size power artifact.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35476271728/request.json",
+    "research/experiments/EXP-PRODUCT-35476271728/spec.json",
+    "research/experiments/EXP-PRODUCT-35476271728/prereg.md",
+    "research/experiments/EXP-PRODUCT-35476271728/freeze.json",
+    "research/experiments/EXP-PRODUCT-35476271728/result.json",
+    "research/experiments/EXP-PRODUCT-35476271728/report.md",
+    "research/experiments/EXP-PRODUCT-35476271728/provenance.json",
+    "research/experiments/EXP-PRODUCT-35476271728/raw_evidence/experiment_data.json",
+    "research/experiments/EXP-PRODUCT-35476271728/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35476271728/mock_server.py",
+    "research/experiments/EXP-PRODUCT-35456068953/handoff.json",
+    "research/experiments/EXP-PRODUCT-35456068953/audit.json"
+  ],
+  "unresolved": [
+    "Whether parallel-channel orthogonality survives on non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, database-backed sessions (primary bottleneck for PRODUCT_CORE).",
+    "Whether expired/invalid fingerprint collision (identical 401 authentication_failed, 3 unique fingerprints) generalizes to production endpoints with differentiated error details.",
+    "Whether within-condition behavioral/structural variance maintains on real network RTT and cache-freshness distributions beyond localhost jitter/TTL.",
+    "Whether token_refresh behavioral_score generalizes to production refresh endpoints with different error surfaces or graded continuous severity (beyond discrete 0.35/0.65).",
+    "Whether 4 structural noise types are sufficient coverage for production schema drift.",
+    "Calibrated discriminating threshold: continuous severity variation needed for meaningful TP/FP tradeoff calibration (threshold tautology limits production threshold choice)."
+  ]
+}

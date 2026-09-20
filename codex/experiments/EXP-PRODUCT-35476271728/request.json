@@ -1,0 +1,20 @@
+{
+  "base_sha": "4449bc4a3ab45c34694aed90e7ec9e6e6cf0f8ba",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T23:30:05.959120+00:00",
+  "experiment_id": "EXP-PRODUCT-35476271728",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 frozen decision_rule conditions C1-C4 all pass (C1 discrimination 0.8333 > 0.5, C2 token_refresh TP=1.0 on all 4 co-occurring noise conditions, C3 behavioral_std 0.134-0.143 > 0.05 on all 4 conditions, C4 FP=0.0 <= 0.15). Audit REVISE (not PASS): N=240 violates frozen N>=480 (spec measurement_validity #6, power halved causing TOST lower-tail failure ci_lower=-0.185 < -0.15), behavioral_score is bimodal discrete (0.35/0.65) not continuous as spec requires (V2), threshold 0.25 below both modes makes TP=1.0 tautological (V3), TOST full equivalence at delta=0.15 not met (tost_pass=false, p_lower=0.081). All numeric metrics match producer. Claim ceiling strictly bounded: token_refresh TP=1.0 under co-occurring structural noise on localhost stochastic mock only (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7, BIMODAL scores 0.35/0.65). No production generalization, no PRODUCT_CORE promotion, no non-mock inference.",
+  "inherited_next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, severity-weighted scoring, token_refresh included) be measured on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions \u2014 and does orthogonality (TOST delta=0.15, n>=480) survive on that substrate including token_refresh under stochastic drift?",
+  "lane": "product",
+  "origin_github_run_id": "35476271728",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35456068953",
+    "path": "research/experiments/EXP-PRODUCT-35456068953/handoff.json",
+    "sha256": "1f9e9cdc48847a0a6ca2a7799f35e77e1ac599a2e0f6e33fdaeaa3e6e492fcfb"
+  },
+  "reason": "pulse",
+  "request_hash": "3a9b2591d24f9d2f4ff4ac64653c41ef154a763d5af4412924584d0fc55d12c8",
+  "request_id": "5c27dce8b0b3fb57cd2606c9",
+  "schema_version": 1
+}
