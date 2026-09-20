@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35522287921",
+  "lane": "runtime",
+  "github_run_id": "35522287921",
+  "executed_at": "2026-09-20T16:42:00.000000+00:00",
+  "pre_execute_sha": "869e3506c17e19d6b1b78d05d08ea008e4ac1fb4",
+  "post_execute_sha": "d5e4eea2186e56d1fc9b82008e10d0457d517e7c",
+  "python_version": "3.12.14",
+  "platform": "linux",
+  "dependencies": {
+    "brotli": "1.2.0",
+    "PyJWT": "2.14.0",
+    "requests": "2.34.2",
+    "PyYAML": null
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-RUNTIME-35522287921/request.json",
+    "spec.json": "research/experiments/EXP-RUNTIME-35522287921/spec.json",
+    "prereg.md": "research/experiments/EXP-RUNTIME-35522287921/prereg.md",
+    "freeze.json": "research/experiments/EXP-RUNTIME-35522287921/freeze.json",
+    "request_hash": "6694c2022e3c01ac9a62b67f39500f03d7af6a836700d45b0b8a5eb844a540cf",
+    "spec_hash": "52a7493f5ddb1aaf7a12b1af160187b66f655a7614a642d229a156aa1ad91a68",
+    "prereg_hash": "705cca6fadac86669c71202db5b92f0e8ebf18101c0cead1e9dee6d67910a37e"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-RUNTIME-35513777099",
+    "parent_handoff": "research/experiments/EXP-RUNTIME-35513777099/handoff.json",
+    "parent_handoff_sha256": "6da4fb6cc3d2023210f6e7dc2133e62f163d73c7e730da40eaa95aaad0b69407",
+    "parent_result": "research/experiments/EXP-RUNTIME-35513777099/result.json",
+    "parent_audit": "research/experiments/EXP-RUNTIME-35513777099/audit.json",
+    "grandparent": "EXP-RUNTIME-35495699298"
+  },
+  "code_paths": {
+    "execution_script": "research/experiments/EXP-RUNTIME-35522287921/run_experiment.py",
+    "raw_results": "research/experiments/EXP-RUNTIME-35522287921/raw_cell_results.json",
+    "allowed_roots": ["research/harness", "research/runtime", "substrates"]
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/run_experiment.py",
+      "sha256": "fff117de528cda5cae67ebad605a9bcb5ef0d60b7bae507cc2f82b973ea08cee",
+      "role": "code",
+      "description": "MockOAuthHandler, StreamingProxyHandler (read(STREAM_CHUNK_SIZE) loop streaming), BufferedProxyHandler (full buffering), high-entropy generators, iterative decompress_body max_depth=5"
+    },
+    "raw_cell_results.json": {
+      "path": "research/experiments/EXP-RUNTIME-35522287921/raw_cell_results.json",
+      "sha256": "a8707b40c5a0af18ea44a1f3c93ee1d1bd5cc95793b9684aedeb5314386a48db",
+      "role": "raw",
+      "description": "Per-cell observations 42 cells total: 24 multi-layer x2 chunk sizes, 12 regression, 6 identity; each observation streaming vs buffered hashes, sizes, headers, latencies"
+    }
+  },
+  "execution_context": {
+    "architecture": "StreamingProxy(stream_chunk_size 8192/32 incremental forwarding without full-body buffer) and BufferedProxy(full-body buffering re-chunk 32) -> MockOAuth2 Server (127.0.0.1) -> Client iterative decompression (brotli->gzip max_depth=5)",
+    "streaming_proxy_detail": "StreamingProxyHandler._proxy_request: HTTPConnection request -> getresponse -> send_response/headers -> loop while chunk=upstream_resp.read(STREAM_CHUNK_SIZE): wfile.write(chunked frame) without buffering full body",
+    "buffered_proxy_detail": "BufferedProxyHandler: upstream_resp.read() full buffer -> re-chunk at 32 bytes with chunked framing",
+    "streaming_client_detail": "make_request_streaming: requests.get(stream=True) -> loop resp.raw.read(stream_chunk_size) accumulate b''.join(chunks) -> decompress_body",
+    "buffered_client_detail": "make_request_buffered: requests.get(stream=True) -> resp.raw.read(decode_content=False) single read -> decompress_body",
+    "multi_layer_encodings": [
+      "GZIP-THEN-BROTLI: body -> gzip.compress(level=1) -> brotli.compress(quality=4) -> chunked",
+      "BROTLI-THEN-GZIP: body -> brotli.compress(quality=4) -> gzip.compress(level=1) -> chunked"
+    ],
+    "regression_controls": [
+      "GZIP-SINGLE: gzip level None (default) at 10KB, chunk 8192 and 32",
+      "BROTLI-SINGLE: brotli quality 6 at 10KB, chunk 8192 and 32"
+    ],
+    "identity_baselines": [
+      "IDENTITY-10KB and IDENTITY-100KB high-entropy no compression via both proxies"
+    ],
+    "high_entropy_generators": "generate_json_he_body (UUIDs, random floats, 5.49 bits/byte), generate_html_he_body (Wikipedia paragraphs, 4.66 bits/byte), generate_binary_he_body (structured random 7.69 bits/byte) — reused from EXP-RUNTIME-35495699298/35513777099, Shannon >=3.5",
+    "total_requests": 840,
+    "total_observations_counting_both_paths": "480 streaming multi-layer +480 buffered multi-layer +240 regression streaming/buffered +120 identity streaming/buffered but metrics count unique HTTP requests 840",
+    "total_correctness_pass_streaming": "840/840 streaming correct (480 multi-layer +240 regression +120 identity)",
+    "total_correctness_pass_buffered": "840/840 buffered correct",
+    "total_streaming_equals_buffered": "840/840 byte-identical",
+    "total_silent_fallbacks": 0,
+    "total_decompression_errors_streaming": 0,
+    "total_decompression_errors_buffered": 0,
+    "seed": 44,
+    "reps_per_state_per_cell": 5,
+    "jitter_range_seconds": "0.02-0.08 uniform",
+    "ports": "origin base 18700, stream proxy base 18800, buffered proxy base 18900"
+  },
+  "commands": [
+    "python3 research/experiments/EXP-RUNTIME-35522287921/run_experiment.py"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35513777099/handoff.json (parent established 240/240 multi-layer buffered correctness, V1_BUFFERED_PROXY_NOT_STREAMING as next question)",
+    "research/experiments/EXP-RUNTIME-35513777099/result.json (parent metrics, compressed sizes 2.7-98.8KB, entropy validation)",
+    "research/experiments/EXP-RUNTIME-35513777099/audit.json (REVISE, claim ceiling bounded, validity findings V1-V6)",
+    "research/experiments/EXP-RUNTIME-35495699298/run_experiment.py (high-entropy generators reused verbatim)",
+    "research/experiments/EXP-RUNTIME-35522287921/request.json (immutable, parent_handoff sha 6da4fb6cc3d...)",
+    "research/experiments/EXP-RUNTIME-35522287921/spec.json (frozen decision_rule C1-C5, baselines, measurement_validity streaming architecture)",
+    "research/experiments/EXP-RUNTIME-35522287921/prereg.md (frozen design, 24 streaming cells matrix, consequences)",
+    "codex/claim_state.json (C-MEAS-VALID history, status EXPERIMENTAL before this experiment)"
+  ],
+  "environment": {
+    "os": "linux",
+    "python": "3.12.14",
+    "brotli": "1.2.0",
+    "gzip": "stdlib",
+    "PyJWT": "2.14.0",
+    "requests": "2.34.2",
+    "platform_details": "GitHub Actions runner, localhost 127.0.0.1 only, no external network"
+  }
+}
