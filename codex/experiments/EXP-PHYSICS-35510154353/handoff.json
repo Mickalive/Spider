@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35510154353",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can plug-in KL with alpha=0.1 or bias-corrected MLE (alpha=0) achieve |shuffled-action null_mean| < 0.1 bits while maintaining positive_control_k3 >= 0.5 bits and p <= 0.001 at N=5000 on the stochastic 12-state SPA — thereby resolving whether hyperparameter tuning unblocks the CMI pathway, or whether null centering degrades with reduced smoothing?",
+  "why_next": "The frozen FALSIFIED-IN-SETTING verdict is valid but narrowly bounded: the failure is alpha=1.0 Laplace smoothing (88% pseudo-count mass, degenerate control K3=0.109 > stochastic K3=0.099) and sklearn discrete-mode k-invariance (k=5,10,20 all identical). Audit recomputes that MLE (alpha=0) K3=1.377 bits and alpha=0.1 K3=0.743 bits on the same N=5000 data — both exceed the 0.5 threshold. However, null centering for those alphas has NOT been measured (spec mandated alpha=1.0). The critical unknown is whether reduced smoothing preserves |shuffled null_mean| < 0.1 while recovering sensitivity. This directly resolves whether the CMI pathway is blocked by hyperparameter choice (fixable) or by discrete state-space structure (fundamental). If alpha=0.1 achieves both C1 and C3, the pathway is unblocked and beyond-Markov K3-K2 testing can proceed. If null centering degrades, the combination of sensitivity and false-positive control may be fundamentally constrained on discrete 12-state data.",
+  "carry_forward": {
+    "established": [
+      "Null centering (C1) is robust across all estimator families on stochastic 12-state SPA at N=5000 with within-session shuffle: plug-in KL |null_mean|=0.064, KSG k=5/10/20 |null_mean|=0.012, all < 0.1 threshold with 1.6-8x margin. (EXP-PHYSICS-35510154353 result.json:controls.C1-NULL-CONTROL pass=true, 4/4 estimators)",
+      "sklearn.feature_selection.mutual_info_classif with discrete_features=True is k-invariant on purely discrete data: K3=0.000560, mi_joint=0.034413, mi_cond=0.033853 identical for k=5, k=10, k=20. Implementation uses categorical exact matching, not distance-based neighborhoods. (EXP-PHYSICS-35510154353 result.json:metrics.ksg_k_invariance; audit.json V3-KSG_discrete_k_invariance)",
+      "Plug-in KL with alpha=1.0 Laplace smoothing has bias exceeding the true signal: degenerate control K3=0.109 on deterministic SPA (I=0) > stochastic K3=0.099 (I=1.52 bits). 88% of probability mass is pseudo-counts (n_smoothed=45368 from N=5000 data). Smoothing alone determines outcome. (EXP-PHYSICS-35510154353 result.json:metrics.plugin_kl_smoothing_bias; audit.json V2-plug_in_KL_Laplace_smoothing_bias)",
+      "True I(Y;A|Z) on stochastic 12-state SPA is 1.52 bits (audit-confirmed from parent EXP-PHYSICS-35482477045 via exact enumeration and N=50000 empirical plug-in). Per-stratum PMI 1.46-1.69 bits across 48/48 strata (all p=0.0 after Bonferroni) confirms signal is strong and detectable by non-parametric tests. (EXP-PHYSICS-35510154353 result.json:metrics.permutation_test_exploratory; parent audit.json V1-theoretical_CMI_miscalibrated)",
+      "KSG CMI k=5 replication exactly matches parent: K3=0.000560 (0.007% error from parent 0.000560). Reproducibility confirmed. (EXP-PHYSICS-35510154353 result.json:controls.REPLICATION-B-PARENT-KSG-K5)",
+      "Audit MLE recomputation on same N=5000 records: alpha=0 (MLE) K3=1.377, alpha=0.1 K3=0.743, alpha=0.01 K3=1.274, alpha=0.001 K3=1.366 — all exceed 0.5 threshold. At N=50000: MLE K3=1.447. The signal IS recoverable with reduced smoothing. (audit.json:recomputed_metrics.plugin_KL_alpha_sensitivity_recompute_N5000_K3)"
+    ],
+    "rejected": [
+      "Hypothesis that KSG CMI k=5 insensitivity is due to insufficient neighborhood resolution: FALSIFIED for sklearn discrete_features=True. k=5, k=10, k=20 all produce identical K3=0.000560. The invariance is implementation-specific (categorical matching), not estimator-family-specific. (EXP-PHYSICS-35510154353 result.json:metrics.ksg_k_invariance)",
+      "Hypothesis that plug-in KL with alpha=1.0 Laplace smoothing detects the 1.52-bit CMI signal: FALSIFIED. K3=0.099, 5.1x below 0.5 threshold, with degenerate control K3=0.109 exceeding stochastic measurement. (EXP-PHYSICS-35510154353 result.json:controls.C3-POSITIVE-CONTROL pass=false)",
+      "Hypothesis that CMI estimation is fundamentally impossible on discrete 12-state SPAs: NOT SUPPORTED by this evidence. Frozen FALSIFIED-IN-SETTING is conditional on alpha=1.0 and sklearn discrete mode. MLE alpha=0 recovers K3=1.377. The pathway is blocked by hyperparameter choice, not discrete structure. (audit.json:claim_ceiling, recomputed_metrics.plugin_KL_alpha_sensitivity_recompute)"
+    ],
+    "unknown": [
+      "Whether plug-in KL with alpha=0.1 or alpha=0.01 achieves |shuffled-action null_mean| < 0.1 bits at N=5000 on stochastic SPA. MLE K3=1.377 passes C3 but null_mean for those alphas not yet measured — requires 500 within-session permutations per alpha.",
+      "Whether bias-corrected MLE (alpha=0, no smoothing) maintains acceptable false positive rate on sparse strata (avg 1.5 records per (z,a) cell in K3 conditioning).",
+      "Whether sklearn mutual_info_classif with discrete_features=False or continuous distance encoding makes k effective on this discrete dataset.",
+      "Whether alternative MI estimators (histogram plug-in, JMI, or custom categorical KSG) detect the 1.52-bit signal while preserving null centering.",
+      "Whether the per-(state,action) PMI signal (1.46-1.69 bits) can serve as an alternative detection paradigm for beyond-Markov dynamics, bypassing CMI estimation entirely.",
+      "Generalization beyond 12-state discrete hash SPA to production Web transitions with larger vocabularies, continuous embeddings, or different stochastic mixing."
+    ],
+    "do_not_assume": [
+      "The frozen FALSIFIED-IN-SETTING verdict closes the C-WEB-DYNAMICS claim or the Physics lane. It closes only the plug-in KL alpha=1.0 and sklearn discrete KSG k=10 pathways on this specific SPA class. Alternative estimators and hyperparameters remain untested.",
+      "CMI estimation is fundamentally impossible on discrete SPAs. The audit demonstrates MLE alpha=0 recovers K3=1.377 bits on the same data — the signal is detectable with unbiased estimation. The failure is hyperparameter-specific.",
+      "The 1.52-bit true CMI is undetectable in principle. Per-stratum PMI 1.46-1.69 bits across all 48 strata (p=0.0) and MLE 1.377 bits confirm the signal is strong and detectable by appropriate estimators.",
+      "KSG CMI family is universally k-invariant. The invariance is specific to sklearn.feature_selection.mutual_info_classif with discrete_features=True on categorical data. Continuous KSG or alternative implementations may behave differently.",
+      "Alpha=1.0 is the only valid Laplace smoothing choice. The audit shows alpha=0.1 gives K3=0.743 (would pass C3), suggesting smaller alpha is viable — pending null centering verification.",
+      "Production Web transitions generalize from this synthetic 12-state SPA. The SPA has hash routing, 4 candidates per (state,action), no anti-bot, auth, visual complexity, or stochastic production dynamics.",
+      "The within-session shuffle correction changes C1 pass/fail. C1 margin is 1.6-8x below threshold for plug-in KL and 8x for KSG; correction does not affect outcome."
+    ]
+  },
+  "dependencies": [
+    "Stochastic SPA 12-state design with CANDIDATES (validated: I(Y;A|Z)=1.52 bits, 48/48 pairs with 4 candidates)",
+    "Shuffled-action within-session null framework (validated: C1 passes for all estimators at alpha=1.0; needs verification for alpha<=0.1)",
+    "N=5000 transitions (50 sessions x 100 steps, seed=42) as frozen measurement unit",
+    "Audit MLE recomputation on same records (alpha=0 K3=1.377, alpha=0.1 K3=0.743) confirms signal recoverability — but null centering for those alphas not yet measured",
+    "Next experiment must test alpha sweep (0, 0.01, 0.1) with within-session null at each alpha to determine C1-C3 tradeoff",
+    "If alpha<=0.1 achieves both C1 and C3: proceed to beyond-Markov K3-K2 testing on stochastic SPA",
+    "If null centering degrades with reduced smoothing: CMI pathway on discrete 12-state SPA may be fundamentally constrained — pivot to alternative detection paradigms or production Web data"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35510154353/result.json:metrics.screening_n5000, metrics.ksg_k_invariance, metrics.plugin_kl_smoothing_bias, metrics.permutation_test_exploratory",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:status REVISE, validity_findings[1-3], claim_ceiling, recomputed_metrics.plugin_KL_alpha_sensitivity_recompute_N5000_K3",
+    "research/experiments/EXP-PHYSICS-35510154353/audit.json:recomputed_metrics.decision_rule_recomputed (FALSIFIED-IN-SETTING trigger confirmed)",
+    "research/experiments/EXP-PHYSICS-35510154353/spec.json:decision_rule, falsifier C1/C3, positive_control 0.5 bits, baselines B-PLUGIN-KL and B-KSG-CMI-K10",
+    "research/experiments/EXP-PHYSICS-35510154353/freeze.json:frozen_at 2026-09-20T16:22:11",
+    "research/experiments/EXP-PHYSICS-35510154353/provenance.json:python 3.12.14 sklearn 1.9.1 seed 42",
+    "research/experiments/EXP-PHYSICS-35482477045/handoff.json:carry_forward.established (true CMI 1.52, KSG null centering, LR history collapse)",
+    "research/experiments/EXP-PHYSICS-35482477045/audit.json:V1-theoretical_CMI_miscalibrated (true CMI 1.52 bits)",
+    "audit.json:unresolved (alpha sweep null measurement needed, sklearn discrete_features=False test needed)"
+  ],
+  "recommended_action": "Design a new frozen experiment testing plug-in KL with an alpha sweep (alpha=0 MLE, 0.01, 0.1, 0.5, 1.0) on the same stochastic SPA at N=5000. For EACH alpha, measure both C1 (500 within-session shuffled-action permutations) and C3 (positive control vs 0.5 threshold). This resolves the critical unknown: whether reduced smoothing preserves null centering while recovering sensitivity. If alpha=0.1 achieves C1+C3 (|null_mean|<0.1 AND K3>=0.5), the CMI pathway is unblocked and the next experiment should test beyond-Markov K3-K2. If null centering degrades monotonically with alpha, the sensitivity-false-positive tradeoff is characterized and the Physics lane can make an informed pivot decision. Do NOT repeat the frozen alpha=1.0 configuration."
+}

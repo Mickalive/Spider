@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35476271877",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Replace frozen SNR noise term: use across-iteration margin_std (or full distribution of M_i) instead of within-iteration within-type SE (~1e-5) as noise scale. The frozen model Phi(mean(SNR_i)) with SE_i ~1e-5 saturates at 1.0 while observed agreement is 0.50-0.56; margin_std is 10-50x larger (5.0e-05 at n5 to 6.2e-04 at n20) and is the empirically relevant flip driver. Preregister corrected model C1' = |Phi(mean(M)/std(M)) - observed| <=10pp and re-validate at n=15/20 before any extrapolation.",
+    "Do not use power-law extrapolation built on failed C1 model to justify Docker re-collection (EXP-INTEL-35462974425). The reported n50/n82 predictions (agreement 1.0, PI90 lo 0.845 at n50) inherit the failed Phi(mean(SNR)) and are gated as unusable per frozen rule. A corrected-model extrapolation must pass C1' before evaluating C3' (<80% at n50).",
+    "Treat C2 correlated-noise branch rho=1.0 as structural tautology, not mechanism identification. Under verified template invariance (identical tags/roles/inForm/w/h within type, verified true for listing/detail/cart) canonical same-type densities are scalar multiples differing only by elements_with_bbox denominators (listing 1550/1560/1564; detail 1215/1149/1143), so rho=1.0 is mathematically forced. Downstream interpretation must not count rho>0.3 as evidence for H2 independent instability mechanism without breaking template invariance (e.g., full-DOM or randomized element subsets).",
+    "If hybrid alpha-blend is pursued, test finer alpha grid and preregister C2-equivalent stability criterion. Current exploratory grid {0,0.2,0.4,0.6,0.8,1.0} shows no sweet spot (eta2>=0.80 AND agreement>=0.80) and best agreement 0.8406 at alpha=0.4 with eta2 0.464; this is hypothesis-generating only per prereg section 14 and not part of frozen decision rule."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_SNR_NOISE_SCALE_MISSPECIFICATION",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "finding": "Frozen SNR model uses within-iteration within-type SE of the mean (~3.8e-06 at n5 to 1.3e-05 at n20) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std 5.0e-05 at n5 to 6.2e-04 at n20, 10-50x larger). Phi(mean(SNR)) therefore saturates at 0.9999999999999991 (n15) and 1.0 (n20) versus observed 0.4996/0.5654 (frozen targets 0.4998/0.5595), residuals 0.5002 and 0.4405 >>10pp threshold. C1 correctly FAILs.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.snr_model.predicted_agreement_n15 0.9999999999999991 residual 0.5002",
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.snr_model.predicted_agreement_n20 1.0 residual 0.4405",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n.15.tag_entropy x DEF-FULL-MAP.canonical.se_tot_mean 1.08e-05 margin_std 0.000163 vs se_tot_mean 1.08e-05",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n.20.tag_entropy x DEF-FULL-MAP.canonical.se_tot_mean 1.32e-05 margin_std 0.000623",
+        "research/experiments/EXP-INTEL-35476271877/report.md:observations 1-2 noise-scale mismatch 10-50x"
+      ],
+      "producer_interpretation": "Producer correctly diagnoses root cause as wrong noise scale (within-iteration SE vs across-iteration margin_std) and marks C1 FAIL, status MEASUREMENT_INVALID, outcome INCONCLUSIVE.",
+      "audit_finding": "Producer diagnosis independently verified by recomputation (se_tot_mean 1.08e-05 vs margin_std 1.63e-04 at n15; 1.32e-05 vs 6.23e-04 at n20). C1 failure not borderline (residuals 40-50pp above threshold) robust to PYTHONHASHSEED=0 variation (delta 0.0059 in agreement)."
+    },
+    {
+      "id": "VF2_CORRELATED_NOISE_TAUTOLOGY",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "C2 passes only via correlated-noise branch rho_listing=1.0 rho_detail=1.0 >0.3, but this is structurally forced by template invariance plus canonical shared role subset. Same-type tasks share identical element tags/roles/inForm/w/h in truncated-first-20, so canonical densities differ only by scalar 1/elements_with_bbox, yielding perfect correlation. Not evidence for H2 independent correlated-noise mechanism.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.mechanism.margin_se_ratio_n20 29.96 cv_listing 0.0046 cv_detail 0.0335 rho 1.0",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:verification.template_invariance_first20 product_listing true detail true",
+        "research/experiments/EXP-INTEL-35476271877/result.json:observations rho=1.0 structurally forced scalar multiples 1550/1560/1564 and 1215/1149/1143",
+        "research/experiments/EXP-INTEL-35476271877/spec.json:measurement_validity cart n=1 degeneracy and template invariance disclosure"
+      ],
+      "producer_interpretation": "Producer explicitly states in validity_notes and observations that rho=1.0 is mathematical consequence of template invariance plus shared role subset and must not be read as independent mechanism (report.md Interpretation).",
+      "audit_finding": "Producer correctly bounds C2 interpretation. Independent per-task recomputation confirms contrast: per-task rho ~0.005 (0.0049 listing, 0.0007 detail) with CV 0.78/0.55, demonstrating breaking shared subset breaks correlation. No independent correlated-noise mechanism demonstrated."
+    },
+    {
+      "id": "VF3_EXTRAPOLATION_GATED_AND_UNUSABLE",
+      "severity": "high",
+      "category": "extrapolation",
+      "finding": "Power-law fits on |margin| (a=1.11e-05 b=0.876) and SE (a=1.05e-06 b=0.878) predict SNR 10.47 at n50 and 10.46 at n82 => agreement 1.0 (PI90 lo 0.845 at n50). This would map to SUPPORTS-FULL-DOM if C1 had passed, but frozen rule gates C3 behind C1. Since C1 failed, extrapolation inherits failed model and must not be used to justify Docker re-collection.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.extrapolation.n50.predicted_agreement 1.0 pi90 lo 0.845",
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.extrapolation.C3_EXTRAPOLATION_FALSIFIES_FULL_DOM false",
+        "research/experiments/EXP-INTEL-35476271877/result.json:validity_notes extrapolation inherits failed C1 model must NOT be used",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n margins [-4.9e-05 -0.00013 2.66e-05 0.000396] sign crosses zero between 10 and 15"
+      ],
+      "producer_interpretation": "Producer marks C3 false but explicitly states in validity_notes and report.md that it is not usable due to C1 failure and must not justify Docker.",
+      "audit_finding": "Producer handling correct and explicitly protocol-limited. Audit recomputes fits (a 1.11e-05 b 0.876, a_s 1.05e-06 b 0.878) and confirms monotonic extrapolation is artifact of fitting |margin| across sign-crossing (margin negative at n5/10, positive at n15/20) with n=4 points. No full-DOM inference justified."
+    },
+    {
+      "id": "VF4_ALTERNATIVE_STATISTIC_TAUTOLOGY",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "finding": "Diagnostic mean(Phi(SNR_i)) =0.4986 at n15 and 0.5649 at n20 matches observed 0.4996/0.5654 almost exactly, but is tautological: with SE_i~1e-5, Phi(SNR_i) collapses to indicator(margin_i>0), so its mean is observed agreement by construction, not mechanistic validation.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.snr_model_alt_statistic.mean_phi_snr_n15 0.498626 n20 0.564943",
+        "research/experiments/EXP-INTEL-35476271877/result.json:observations alternative statistic near-tautological",
+        "research/experiments/EXP-INTEL-35476271877/report.md:DERIVED MEASUREMENT alternative statistic"
+      ],
+      "producer_interpretation": "Producer correctly labels this diagnostic as near-tautological and does not count it toward C1.",
+      "audit_finding": "Correctly excluded from decision rule. Confirms noise-scale diagnosis: SE_i~0 makes per-iteration SNR degenerate."
+    },
+    {
+      "id": "VF5_DEGENERATE_ITERATIONS_HANDLING",
+      "severity": "low",
+      "category": "measurement_validity",
+      "finding": "Degenerate iterations with se_tot==0 (no matched elements) are correctly retained and counted as agreement 0 (margin not >0). Counts 5070/10000 at n5, 2464 at n10, 1230 at n15, 599 at n20 independently verified from snr_per_iteration_tag_entropy.json.gz. Handling is prereg-consistent and documented.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:observations degenerate iterations 5070/10000 etc",
+        "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz per_iteration n counts",
+        "research/experiments/EXP-INTEL-35476271877/analyze_snr.py:265 se_tot==0 => inf handling"
+      ],
+      "producer_interpretation": "Producer retains degenerates and documents explicit +inf/-inf semantics.",
+      "audit_finding": "Handling verified correct via direct recompute of snr_per_iteration counts. No bias introduced; C1 failure persists even if degenerates excluded (residuals remain ~0.44)."
+    },
+    {
+      "id": "VF6_TEMPLATE_INVARIANCE_AND_SCOPE",
+      "severity": "info",
+      "category": "validity",
+      "finding": "Template invariance verification (true for listing, detail, cart on first-20 subsample) and single-site (Magento) truncated-first-20 scope with cart n=1 degenerate are correctly verified, disclosed, and bounded. First-n subsampling bias and small type sample (n=3 per type) correctly disclosed as validity threats. No overgeneralization in report (explicitly states no product lane decision authorized).",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:verification.template_invariance_first20",
+        "research/experiments/EXP-INTEL-35476271877/result.json:validity_notes cart degeneracy, single site, small n=3",
+        "research/experiments/EXP-INTEL-35476271877/prereg.md:Representation loss threats 1-6"
+      ],
+      "producer_interpretation": "Producer bounds claim ceiling to 7 tasks truncated-first-20 single site and declares outcome INCONCLUSIVE, not falsification.",
+      "audit_finding": "Scope correctly bounded. No validity threat undisclosed."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_CANONICAL_ETA2_N20",
+      "expected": "Parent canonical eta2 at n=20 0.9205 std 0.0077 source EXP-INTEL-35445596324 M6",
+      "observed": "Producer 0.919454846818671 delta -0.0010 within seed/hash variation; recomputed 0.91945 matches producer to float precision.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35445596324/result.json M6 0.9205",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json per_n.20 canonical eta2_mean 0.9194"
+      ]
+    },
+    {
+      "baseline_id": "B2_PERTASK_ETA2_N20",
+      "expected": "Parent per-task eta2 at n=20 0.3664 std 0.0061 source EXP-INTEL-35445596324 M7",
+      "observed": "Producer 0.36700025544655573 delta +0.0006; recomputed matches.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35445596324/result.json M7 0.3664",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json per_n.20 pertask eta2_mean 0.3670"
+      ]
+    },
+    {
+      "baseline_id": "B3_CANONICAL_RANKING_N20",
+      "expected": "Parent canonical ranking agreement at n=20 55.95% source EXP-INTEL-35445596324 M4",
+      "observed": "Producer 0.5654 delta +0.0059; recomputed 0.5654 matches; within PYTHONHASHSEED set-iteration variance.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35445596324/result.json M4 55.95%",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json per_n.20 canonical ranking_agreement 0.5654"
+      ]
+    },
+    {
+      "baseline_id": "B4_PERTASK_RANKING_N20",
+      "expected": "Parent per-task ranking agreement at n=20 78.65% source EXP-INTEL-35445596324 M5",
+      "observed": "Producer 0.78 delta -0.0065; recomputed 0.78 matches.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35445596324/result.json M5 78.65%",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json per_n.20 pertask ranking_agreement 0.78"
+      ]
+    },
+    {
+      "baseline_id": "B5_NON_RECIPE_ETA2_N20",
+      "expected": "Non-recipe pipeline eta2 at n=20 0.9958 DEF-FULL-MAP 0.9996 DEF-FORM-ONLY source EXP-INTEL-35445596324 M3",
+      "observed": "Producer not recomputed, inherited as fixed reference (not needed for C1/C2/C3). No impact on verdict.",
+      "verdict": "NOT_RECOMPUTED_CORRECTLY_BOUNDED",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35445596324/result.json M3",
+        "research/experiments/EXP-INTEL-35476271877/result.json controls.B5_NON_RECIPE_ETA2_N20 pass not_recomputed"
+      ]
+    },
+    {
+      "baseline_id": "B6_SAMPLE_SIZE_EFFECT",
+      "expected": "Canonical ranking agreement at n=5/10/15/20 0%/0%/49.98%/55.95% Spearman 1.0 source EXP-INTEL-35445596324 M4",
+      "observed": "Producer 0.0/0.0/0.4996/0.5654 Spearman 1.0 perfect monotonic reproduced; recomputed matches.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35445596324/result.json M4",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json baseline_reproduction"
+      ]
+    },
+    {
+      "control_id": "PC1_SNR_MODEL_REPRODUCES_OBSERVED_AGREEMENT",
+      "expected": "Predicted agreement at n=15 within 10pp of 49.98%, at n=20 within 10pp of 55.95%",
+      "observed": "Predicted 0.9999999999999991 at n15 residual 0.5002 and 1.0 at n20 residual 0.4405, both FAIL >10pp. Recomputed residuals match to 1e-15.",
+      "verdict": "FAIL correctly evaluated",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json controls.PC1",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json snr_model"
+      ]
+    },
+    {
+      "control_id": "NC1_RANDOM_NOISE_BASELINE",
+      "expected": "Random noise model agreement 50% +/-5% at all n; SNR model error must be < null error to demonstrate structure",
+      "observed": "Null simulation 500k draws mean 0.499208 within 50% +/-5% PASS; SNR error 0.5002 at n15 vs null error 0.0006 and 0.4405 at n20 vs null error 0.0603 => SNR performs worse than null. Producer marks partial (null behaves, SNR-outperforms-null fails). Recomputed null 0.499208 matches.",
+      "verdict": "PASS for null behavior, FAIL for SNR-outperforms-null correctly reported as partial",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json controls.NC1",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json null_control predicted_agreement 0.499208"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "C1_SNR_MODEL_VALID": {
+      "producer_predicted_n15": 0.9999999999999991,
+      "producer_predicted_n20": 1.0,
+      "producer_observed_frozen_n15": 0.4998,
+      "producer_observed_frozen_n20": 0.5595,
+      "producer_observed_this_run_n15": 0.4996,
+      "producer_observed_this_run_n20": 0.5654,
+      "producer_residual_n15": 0.5001999999999991,
+      "producer_residual_n20": 0.4405,
+      "recomputed_predicted_n15": 0.9999999999999991,
+      "recomputed_predicted_n20": 1.0,
+      "recomputed_residual_n15": 0.5001999999999991,
+      "recomputed_residual_n20": 0.4405,
+      "threshold_pp": 0.1,
+      "match": true,
+      "verdict": "C1_SNR_MODEL_VALID false independently verified; residuals 40-50pp above threshold, not borderline",
+      "phi_computation": "phi(x)=0.5*(1+erf(x/sqrt(2))) with snr_mean 7.95 at n15 and 35.49 at n20 from se_tot_mean 1.08e-05 and 1.32e-05"
+    },
+    "C2_MECHANISM_IDENTIFIED": {
+      "producer_margin_se_ratio_n20": 29.961826091932533,
+      "recomputed_margin_se_ratio_n20": 29.961826091932533,
+      "producer_cv_listing_n20": 0.0046367045393507405,
+      "recomputed_cv_listing_n20": 0.0046367045393507405,
+      "producer_cv_detail_n20": 0.03353065961167798,
+      "recomputed_cv_detail_n20": 0.03353065961167798,
+      "producer_rho_listing_n20": 1.0,
+      "recomputed_rho_listing_n20": 1.0,
+      "producer_rho_detail_n20": 1.0,
+      "recomputed_rho_detail_n20": 1.0,
+      "producer_classification": {
+        "margin_deficit": false,
+        "task_variance": false,
+        "correlated_noise": true
+      },
+      "recomputed_classification": {
+        "margin_deficit": false,
+        "task_variance": false,
+        "correlated_noise": true
+      },
+      "producer_C2": true,
+      "recomputed_C2": true,
+      "match": true,
+      "audit_note": "Classification matches but correlated_noise branch is tautological under template invariance; not evidence for H2 as independent mechanism (see VF2)"
+    },
+    "C3_EXTRAPOLATION_FALSIFIES_FULL_DOM": {
+      "producer_n50_predicted_snr": 10.472904965194479,
+      "recomputed_n50_predicted_snr": 10.472904965194479,
+      "producer_n50_predicted_agreement": 1.0,
+      "recomputed_n50_predicted_agreement": 1.0,
+      "producer_n50_pi90_lo": 0.8451766770717319,
+      "recomputed_n50_pi90_lo": 0.8451766770717319,
+      "producer_C3": false,
+      "recomputed_C3": false,
+      "match": true,
+      "audit_note": "Numerically matches but gated behind failed C1; must not be used per frozen rule (VF3)"
+    },
+    "NC1_null_model": {
+      "producer_predicted_agreement": 0.499208,
+      "recomputed_predicted_agreement": 0.499208,
+      "expected_range": "0.45 to 0.55",
+      "match": true,
+      "n_simulations": 500000,
+      "snr_error_minus_null_error_n15": 0.49960799999999905,
+      "snr_error_minus_null_error_n20": 0.380208,
+      "audit_note": "Null behaves as expected; SNR model error far exceeds null error, confirming decomposition captures less than random noise"
+    },
+    "baseline_reproduction": {
+      "canonical_eta2_n20_producer": 0.919454846818671,
+      "recomputed_canonical_eta2_n20": 0.919454846818671,
+      "canonical_agreement_n20_producer": 0.5654,
+      "recomputed_canonical_agreement_n20": 0.5654,
+      "pertask_eta2_n20_producer": 0.36700025544655573,
+      "recomputed_pertask_eta2_n20": 0.36700025544655573,
+      "pertask_agreement_n20_producer": 0.78,
+      "recomputed_pertask_agreement_n20": 0.78,
+      "spearman_n5_20_producer": 1.0,
+      "recomputed_spearman": 1.0,
+      "match": true
+    },
+    "degenerate_iterations": {
+      "producer_n5": 5070,
+      "recomputed_n5": 5070,
+      "producer_n10": 2464,
+      "recomputed_n10": 2464,
+      "producer_n15": 1230,
+      "recomputed_n15": 1230,
+      "producer_n20": 599,
+      "recomputed_n20": 599,
+      "match": true,
+      "note": "snr_flag non-null counts from snr_per_iteration_tag_entropy.json.gz"
+    },
+    "alternative_statistic_meanPhi": {
+      "producer_n15": 0.498626,
+      "recomputed_n15": 0.498626,
+      "producer_n20": 0.564943,
+      "recomputed_n20": 0.564943,
+      "match": true,
+      "tautological": true
+    },
+    "margins_and_se": {
+      "ns": [
+        5,
+        10,
+        15,
+        20
+      ],
+      "margins": [
+        -4.904587178441492e-05,
+        -0.00013464925045408285,
+        2.6644429794731917e-05,
+        0.0003968766233917092
+      ],
+      "se_tots": [
+        3.8145757454281704e-06,
+        1.0472436236426359e-05,
+        1.083180399779113e-05,
+        1.3246075929216192e-05
+      ],
+      "sign_crosses_zero": true,
+      "margin_fits": {
+        "a": 1.1137672643065647e-05,
+        "b": 0.8756730457650053
+      },
+      "se_fit": {
+        "a": 1.0547486591500672e-06,
+        "b": 0.8777792068156026
+      },
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: The frozen SNR model agreement ~ Phi(mean(SNR_i)) with within-iteration SE noise is MEASUREMENT_INVALID: it fails C1 by 0.44-0.50 (threshold 0.10) at both decision points (n15 residual 0.5002, n20 residual 0.4405, saturated at 1.0 vs observed 0.50-0.56). Root cause is noise-scale misspecification (within-iteration SE ~1e-5 vs across-iteration margin_std ~1e-4 to 6e-4, 10-50x mismatch) verified under template invariance at truncated-first-20 (7 tasks: 3 listing, 3 detail, 1 cart; verified true). No mechanism among H1/H2/H3 is discriminated: C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent evidence), margin/SE=29.96 and CV<0.1 are false for H1/H2. No inference about full-DOM ranking agreement at n=21-82 is justified: extrapolation predicting 1.0 (PI90 lo 0.845 at n50) is gated behind failed C1 and built on sign-crossing |margin| power law from n=4 points, must not be used to justify or reject Docker re-collection (EXP-INTEL-35462974425 remains unvalidated). The only supported descriptive claims are: canonical eta2 0.919 at n20 (high discrimination) with agreement 0.565 (low), per-task eta2 0.367 with agreement 0.78, monotonic improvement Spearman 1.0 across n, and demonstration that the frozen decomposition is unreliable. Product consequence neither branch (adopt non-recipe density immediately vs wait for full-DOM) is authorized; the MIXED program question whether 56% plateau is structural remains OPEN and requires corrected SNR model (across-iteration margin_std) or direct full-DOM measurement if Docker image becomes available.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35476271877/request.json sha256 0403e9eecf4fb89b4917531c3001196de239ba3dd5008569305e96e92d75e1ea",
+    "research/experiments/EXP-INTEL-35476271877/spec.json sha256 c0f2730d03f73d2ce5333fd41b3f1606b68048b13b5a0e24f35cb1b28bbebe2d",
+    "research/experiments/EXP-INTEL-35476271877/prereg.md sha256 150d1c8b6bfff0f57560fedd3bfa41f6fcdaf4e499a8f366250221403664a798",
+    "research/experiments/EXP-INTEL-35476271877/freeze.json sha256 12a1b945b2e89f71f392ad173bfe7faba38746329a007f7b4bdaaeb8ac0dca17",
+    "research/experiments/EXP-INTEL-35476271877/result.json sha256 f170f1b1df94f6cc483ef2ba0773eb1b8fed8cc98d27c156ace4f4dbd442e910",
+    "research/experiments/EXP-INTEL-35476271877/report.md",
+    "research/experiments/EXP-INTEL-35476271877/provenance.json",
+    "research/experiments/EXP-INTEL-35476271877/analyze_snr.py sha256 a17c846f97e96c69fcff67971258acf0408b324f7483a074e27c8d9ee7d82bf4",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35445596324/result.json metrics M3 M4 M5 M6 M7 baseline sources for B1-B6",
+    "research/experiments/EXP-INTEL-35445596324/analyze.py sha256 5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724"
+  ],
+  "unresolved": [
+    "Whether ranking agreement at full-DOM element counts (n=21-82) crosses 80% remains OPEN: frozen model-based extrapolation is unreliable (C1 failed, sign-crossing |margin| fit from n=4) and cannot substitute for direct measurement.",
+    "Whether the actual instability mechanism is H1 small margin, H2 correlated noise from shared role subset, or H3 persistent template invariance remains undiscriminated: frozen decomposition failed its validity gate and rho=1.0 is tautological.",
+    "Whether a corrected SNR model using across-iteration margin_std (or full margin distribution) as noise scale would pass C1-equivalent validation and re-open extrapolation to n=50/82 is outside frozen design and requires new preregistration.",
+    "Whether a finer alpha grid for hybrid canonical/per-task blend has a sweet spot (eta2>=0.80 AND agreement>=0.80) is untested: exploratory grid {0,0.2,0.4,0.6,0.8,1.0} found none (best 0.8406 at alpha 0.4 with eta2 0.464).",
+    "Generalization beyond the 7-task truncated-first-20 single-Magento-site sample (including whether template invariance breaks at full DOM and changes variance structure) remains untested and unbounded.",
+    "B5_NON_RECIPE_ETA2_N20 (0.9958 DEF-FULL-MAP) was not recomputed in this run and remains inherited from parent; no impact on C1/C2/C3 but unvalidated in this packet."
+  ]
+}

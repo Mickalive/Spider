@@ -1,0 +1,48 @@
+{
+  "experiment_id": "EXP-GRAPH-35510157861",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "After three targeted measurement corrections — (1) V_ETAG permission leakage for /api/session/status fixed by making stable_key depend on permission_level, (2) C5 pooling code fixed to use endpoint-stratified weighting for per-cache correlations, (3) C7 negative control definition clarified as endpoint-stratified weighted |r| — does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED (any fails) at delta=0.15 on the production-like testbed with n>=800?",
+  "hypothesis": "C-FRESHNESS orthogonality at delta=0.15 will be CONFIRMED once three measurement defects are corrected. The parent's MIXED outcome (C5 FAIL, C7 FAIL) was contaminated by: (a) V_ETAG_PERMISSION_LEAKAGE for session_status (stable_key per session_id, not permission_level); (b) C5 code bug (concatenation across endpoints without stratification); (c) C7 definition ambiguity (simple pooled vs endpoint-stratified). With these corrected: audit-computed endpoint-stratified pooled r=0.0125 (CI upper 0.0874 < 0.15) and stratified weighted |r| for B-PARENT-CONFOUND = 0.260 > 0.15 indicate all conditions should pass.",
+  "falsifier": "C-FRESHNESS orthogonality is falsified at delta=0.15 if ANY of: (C1) behavioral detection TP < 0.85 across all endpoints; (C2) fewer than 2/3 endpoints have non-304 behavioral signal std > 0 AND fewer than 2/3 have non-304 structural signal std > 0; (C3) 95% CI upper bound of endpoint-stratified pooled Pearson r (non-304, stratified by endpoint) >= 0.15 on production-like testbed; (C4) TOST equivalence test p_upper >= 0.05 at delta=0.15 (one-sided, endpoint-stratified non-304); (C5) endpoint-stratified cache-mode heterogeneity check: |r_stratified_enabled - r_stratified_disabled| >= 2 * SE_pooled; (C6) B-FLASK-ONLY baseline shows |r| >= 0.15; (C7) B-PARENT-CONFOUND-REPRODUCTION shows endpoint-stratified weighted |r| < 0.15 (negative control fails to reproduce V1 confound). C-FRESHNESS orthogonality is REJECTED if ANY condition fails. MEASUREMENT_INVALID if infrastructure failure prevents data collection (endpoint unreachable, testbed construction fails, n < 400).",
+  "baselines": [
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "description": "Prior localhost Flask mock orthogonality: pooled r=0.0022 delta=0.15 PASS (EXP-GRAPH-35389145821, n=480, audit PASS). Stochastic mock r=0.0463 delta=0.15 PASS (EXP-GRAPH-35353011131, n=480, audit PASS). Stochastic mock confirmation r=-0.0258 delta=0.15 PASS (EXP-PRODUCT-35434772331, n=480, audit PASS). HTTP caching confirmation r=0.0022 delta=0.15 PASS (EXP-GRAPH-35389145821, n=480, audit PASS).",
+      "expected": "|r| < 0.15, consistent with four prior localhost confirmations"
+    },
+    {
+      "id": "B-FLASK-ONLY",
+      "description": "Plain Flask server WITHOUT CDN simulation, OAuth middleware, or dynamic content, but WITH genuine token-state variation (valid/expired tokens via Authorization header). Uses corrected headers-only structural signal extraction (ETag, Cache-Control, UUID-based request_id). Tests whether orthogonality persists without production-like infrastructure features.",
+      "expected": "|r| < 0.15, confirming orthogonality persists without infrastructure"
+    },
+    {
+      "id": "B-PARENT-CONFOUND-REPRODUCTION",
+      "description": "Reproduction of parent V1 confound: request_id uses token_hex for expired responses and uuid4 for valid responses (the exact prior defect). Expected to show endpoint-stratified weighted |r| >= 0.15 to confirm the confound is genuine. This is a negative control — a PASS here (|r| < 0.15) would indicate the V1 confound was not genuine or the fix is incomplete.",
+      "expected": "|r| >= 0.15 (negative control confirming V1 was genuine confound)"
+    }
+  ],
+  "positive_control": "Token validation failure detection: behavioral signal must correctly identify expired vs valid tokens with TP >= 0.85. The testbed_server.py @require_token decorator returns 401 for expired tokens and the behavioral signal extractor detects status_code, X-Token-Validation header, and session_state_change. TP=1.0 was achieved in all prior experiments. If TP < 0.85, behavioral signal extraction is broken.",
+  "null_control": "Structural signal std > 0 across all non-304 conditions: ETag, Cache-Control, and UUID-based dynamic content should produce non-zero structural variation even on cache-disabled responses (no-store/no-cache). Behavioral std should be zero only on conditions with no auth state variation (all-valid or all-expired). Both behavioral and structural signals should have std > 0 on the 8 co-occurring non-304 conditions.",
+  "measurement_validity": [
+    "V_ETAG_PERMISSION_LEAKAGE FIX: In testbed_server.py _make_unauthorized_response(), stable_key for session_status endpoint must depend on permission_level, not session_id alone. Change stable_key from f'session_{session_id}' to f'session_{permission_level}' (or similar) so valid and expired write-permission requests produce overlapping ETags. Verify fix: overlap check for write-permission conditions.",
+    "V5 C5 STRATIFICATION FIX: In run_experiment.py, compute per-cache correlations using endpoint-stratified weighting: for each endpoint, compute r_enabled_i and r_disabled_i, then weighted average across endpoints by sample count. Avoid concatenation across endpoints.",
+    "C7 NEGATIVE CONTROL DEFINITION: Use endpoint-stratified weighted |r| for B-PARENT-CONFOUND baseline, not simple pooled |r|. The audit recomputed stratified weighted |r|=0.260 > 0.15, which would PASS.",
+    "V3 FIX (SELECTION BIAS): Apply endpoint-stratified weighting for pooled Pearson r estimate (already implemented in parent).",
+    "V1 FIX VERIFIED (from parent): ALL request_ids use uuid.uuid4() for all status codes.",
+    "V2 FIX VERIFIED (from parent): B-FLASK-ONLY has genuine token-state variation via /token endpoint.",
+    "304 EXCLUSION: Exclude 304 responses from pooled correlation, per-endpoint correlations, and per-cache correlations.",
+    "POWER INCREASE: n >= 800 paired samples from >= 3 endpoints x >= 2 cache modes x >= 2 auth states.",
+    "TOST ONE-SIDED: C3 tests CI upper < 0.15 only; C4 tests TOST p_upper < 0.05 only (one-sided, consistent with frozen spec).",
+    "Testbed server must produce genuine behavioral AND structural stochastic variation.",
+    "CDN simulation must implement genuine cache behavior: ETag-SHA256, Cache-Control max-age/no-store, stale-while-revalidate.",
+    "OAuth middleware must use real PyJWT RS256 validation.",
+    "Structural signal extraction must use ONLY: (a) ETag change (0/1), (b) Cache-Control change (0/1), (c) normalized Shannon entropy of UUID-based request_id, (d) SHA256(request_id)[:16] as int % 10000 / 10000.",
+    "Each endpoint must have independent behavioral and structural signal extraction — no shared variables between signal domains."
+  ],
+  "decision_rule": "C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED if ALL of: (C1) behavioral detection TP >= 0.85 across all endpoints (expired tokens correctly detected as drift); (C2) at least 2/3 endpoints have non-304 behavioral signal std > 0 AND at least 2/3 endpoints have non-304 structural signal std > 0; (C3) 95% CI upper bound of endpoint-stratified pooled Pearson r (non-304 samples only) < 0.15 on production-like testbed; (C4) TOST equivalence test p_upper < 0.05 at delta=0.15 (one-sided, non-304 samples only); (C5) endpoint-stratified cache-mode heterogeneity check (non-304 samples): |r_stratified_enabled - r_stratified_disabled| < 2 * SE_pooled; (C6) B-FLASK-ONLY baseline shows |r| < 0.15; (C7) B-PARENT-CONFOUND-REPRODUCTION shows endpoint-stratified weighted |r| >= 0.15 (negative control passes, confirming V1 was genuine). C-FRESHNESS orthogonality is REJECTED if ANY condition fails. MEASUREMENT_INVALID if infrastructure failure prevents data collection (endpoint unreachable, testbed construction fails, n < 400).",
+  "product_consequence_positive": "C-FRESHNESS advances from EXPERIMENTAL toward VALIDATED on production-like infrastructure. Parallel-channel architecture (separate behavioral and structural signal processing) is justified for product deployment. Product may proceed with dual-signal freshness detection: behavioral signals for auth/session drift, structural signals for cache/schema drift.",
+  "product_consequence_negative": "C-FRESHNESS orthogonality fails on production-like infrastructure even with corrected measurement, endpoint-stratified pooling, and increased power. Parallel-channel architecture is NOT justified. Product must pivot to fused classifiers or cache-independent structural signals. The localhost mock evidence is insufficient for production deployment.",
+  "estimated_cost": "Low: (1) Fix V_ETAG_PERMISSION_LEAKAGE in testbed_server.py stable_key for session_status (~5 lines, ~10 min); (2) Apply endpoint-stratified weighting in run_experiment.py for C5 (~20 lines, ~20 min); (3) Clarify C7 definition in spec/prereg (~10 min); (4) Increase n from 480 to 800 (~30-60 min execution); (5) Analysis (~1 hour). Total: 2-3 compute-hours.",
+  "expected_information_gain": "Very high: this is the minimum cost experiment that directly resolves all three measurement validity gaps (V_ETAG_PERMISSION_LEAKAGE, C5 code bug, C7 definition) blocking a clean CONFIRMED or REJECTED verdict for C-FRESHNESS on production-like infrastructure. The same testbed infrastructure is reused with three small targeted code fixes. Either outcome changes a product decision: CONFIRMED justifies parallel-channel architecture; REJECTED forces architectural pivot. A clean MEASUREMENT_INVALID verdict is also informative."
+}

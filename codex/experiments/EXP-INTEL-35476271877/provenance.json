@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35476271877",
+  "lane": "intel",
+  "stage": "execute",
+  "github_run_id": "35522287501",
+  "github_run_attempt": "1",
+  "origin_github_run_id": "35476271877",
+  "execution_base_sha": "dea0410c54bab7e6dc65e768acc8ff152ffbff29",
+  "head_sha_at_execute": "f9946b3e475b322b8662270f863a1055de815aba",
+  "request_base_sha": "4449bc4a3ab45c34694aed90e7ec9e6e6cf0f8ba",
+  "environment": {
+    "os": "linux",
+    "python_version": "3.12.14",
+    "numpy": "not available",
+    "scipy": "not available",
+    "notes": "Pure Python 3.12 stdlib used throughout; no browser/network/model calls (frozen design: offline computation on existing data)."
+  },
+  "inputs": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/request.json",
+      "sha256": "0403e9eecf4fb89b4917531c3001196de239ba3dd5008569305e96e92d75e1ea",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/spec.json",
+      "sha256": "c0f2730d03f73d2ce5333fd41b3f1606b68048b13b5a0e24f35cb1b28bbebe2d",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/prereg.md",
+      "sha256": "150d1c8b6bfff0f57560fedd3bfa41f6fcdaf4e499a8f366250221403664a798",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/freeze.json",
+      "sha256": "12a1b945b2e89f71f392ad173bfe7faba38746329a007f7b4bdaaeb8ac0dca17",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw_substrate"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/analyze.py",
+      "sha256": "5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724",
+      "role": "framework_reference"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/analysis_output.json",
+      "sha256": "35bfbc77f59b643564b48ae46a2efa6e741eb89d19c23438c20709598d6e7ec8",
+      "role": "baseline_reference"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35470447439/handoff.json",
+      "role": "parent_handoff",
+      "note": "Inherited next-question (Docker image am1n3e/webarena-verified-shopping:latest availability for full-DOM) preserved in unresolved."
+    }
+  ],
+  "analysis": {
+    "script": "research/experiments/EXP-INTEL-35476271877/analyze_snr.py",
+    "script_sha256": "a17c846f97e96c69fcff67971258acf0408b324f7483a074e27c8d9ee7d82bf4",
+    "command": "PYTHONHASHSEED=0 python3 research/experiments/EXP-INTEL-35476271877/analyze_snr.py",
+    "notes": [
+      "PYTHONHASHSEED=0 pins Python set-iteration order for role-subset sampling; explains small deviations from parent per-iteration draws (e.g., canonical agreement n20 0.5654 vs parent 0.5595).",
+      "Non-finite SNR values (se_tot==0) serialized as snr null + snr_flag (+inf/-inf by margin sign).",
+      "Iterations: 10 seeds x 1000 iterations x 2 recipes x 4 effective_n = 80,000 recorded; 10,000 observable per (n, recipe)."
+    ]
+  },
+  "outputs": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/result.json",
+      "sha256": "f170f1b1df94f6cc483ef2ba0773eb1b8fed8cc98d27c156ace4f4dbd442e910",
+      "role": "producer_packet"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/report.md",
+      "sha256": null,
+      "role": "producer_report",
+      "note": "Self-referential packet file; sha256 left null per repo convention (parent EXP-INTEL-35445596324 uses null for its own packet files)."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/provenance.json",
+      "sha256": null,
+      "role": "producer_provenance",
+      "note": "Self-referential packet file; sha256 computed at write time was 00ba58545263693c3c4844c2857f6c7a006e31df4664fdd7011e2006b7399c2d (pre-hash-fill); left null per repo convention."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/hybrid_per_iteration_densities_n20.json.gz",
+      "sha256": "af431bec4fb0833eb91bb48839a1609b5e3ba710354527b9b356f09e63130fb6",
+      "role": "raw"
+    }
+  ],
+  "timestamps": {
+    "created": "2026-09-20T01:39:19.349470+00:00",
+    "freeze_recorded": "2026-09-20T01:39:28.212499+00:00",
+    "analysis_output_written": "2026-09-20T17:12:00Z"
+  },
+  "prior_attempts_context": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/failure.json",
+      "category": "VALIDATION_FAILURE",
+      "message": "invalid result outcome: MEASUREMENT_INVALID",
+      "note": "Prior producer attempt used outcome=MEASUREMENT_INVALID which is not a legal outcome value (packet contract allows outcomes SUPPORTS|FALSIFIES|MIXED|INCONCLUSIVE|NOT_APPLICABLE; MEASUREMENT_INVALID is a status). This run encodes status=MEASUREMENT_INVALID, outcome=INCONCLUSIVE."
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/model_execute.json",
+      "status": "retry",
+      "exit_code": 1,
+      "category": "transient",
+      "note": "Transient execution-layer retry; superseded by successful analysis run recorded above."
+    }
+  ],
+  "reproducibility": "Re-run: set PYTHONHASHSEED=0 and execute analyze_snr.py in a Python 3.12 environment with only the stdlib; verify script sha256 a17c846f...; outputs must match analysis_output_snr.json values to float precision."
+}
