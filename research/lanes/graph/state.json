@@ -8,7 +8,7 @@
   "next_question": "After fixing V3 selection bias (endpoint-stratified or balanced non-304 sampling), V_ETAG_PERMISSION_LEAKAGE (derive permission_level from session independent of token expiry), and re-running C5/C7 with n>=800, does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED (any fails) at delta=0.15 on the production-like testbed?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-20T01:35:28.634903+00:00",
+  "updated_at": "2026-09-20T07:00:33.250222+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "2970bf591f364529209e457752f53781f07ba52363932c137f17db2a743a038d",
   "same_failure_count": 0,
