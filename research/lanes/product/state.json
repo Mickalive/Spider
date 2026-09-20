@@ -8,7 +8,7 @@
   "next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, token_refresh included) be measured on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions \u2014 and does orthogonality (TOST delta=0.15, n>=480) survive on that substrate including token_refresh under stochastic drift?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-20T01:35:29.384016+00:00",
+  "updated_at": "2026-09-20T07:00:33.009180+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "bbd7e5de967eeb62249feeab8cf9e3a9af77b1c7393b4cf6fbe5e64cf9da5bc9",
   "same_failure_count": 0,
