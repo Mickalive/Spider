@@ -1,0 +1,432 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35530590140",
+  "lane": "graph",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "mean_behavioral_tp_rate": 1.0,
+    "mean_behavioral_tn_rate": 1.0,
+    "c1_all_conditions_pass": true,
+    "pearson_r_pooled_testbed": 0.031376727204166385,
+    "abs_r_pooled_testbed": 0.031376727204166385,
+    "ci_lower_95_testbed": -0.043692497733772276,
+    "ci_upper_95_testbed": 0.10609362494067767,
+    "tost_at_delta_015_testbed": {
+      "pass": true,
+      "p_upper": 0.0008887772360679538,
+      "p_lower": 9.52580568980288e-07,
+      "delta": 0.15,
+      "fisher_z": 0.031387030076375624,
+      "se": 0.03832008326196737
+    },
+    "tost_results_by_delta": {
+      "0.1": {
+        "pass": false,
+        "p_upper": 0.060858678436814403,
+        "p_lower": 0.0001125276934353936,
+        "delta": 0.1,
+        "fisher_z": 0.04103098414076649,
+        "se": 0.03832008326196737
+      },
+      "0.12": {
+        "pass": true,
+        "p_upper": 0.018949930592238394,
+        "p_lower": 1.2355490820570303e-05,
+        "delta": 0.12,
+        "fisher_z": 0.04103098414076649,
+        "se": 0.03832008326196737
+      },
+      "0.15": {
+        "pass": true,
+        "p_upper": 0.002030310075603707,
+        "p_lower": 2.653040339639645e-07,
+        "delta": 0.15,
+        "fisher_z": 0.04103098414076649,
+        "se": 0.03832008326196737
+      },
+      "0.2": {
+        "pass": true,
+        "p_upper": 1.2228104743702515e-05,
+        "p_lower": 1.000607374734841e-10,
+        "delta": 0.2,
+        "fisher_z": 0.04103098414076649,
+        "se": 0.03832008326196737
+      }
+    },
+    "stratified_pooled_r": 0.04100797384578045,
+    "stratified_pooled_n": 684,
+    "stratified_ci_lower_95": -0.03406319535020517,
+    "stratified_ci_upper_95": 0.11561898674313995,
+    "stratified_tost_at_delta_015": {
+      "pass": true,
+      "p_upper": 0.002030310075603707,
+      "p_lower": 2.653040339639645e-07,
+      "delta": 0.15,
+      "fisher_z": 0.04103098414076649,
+      "se": 0.03832008326196737
+    },
+    "pearson_r_pooled_flask_only": -0.001654143198155742,
+    "abs_r_pooled_flask_only": 0.001654143198155742,
+    "ci_lower_95_flask_only": -0.07027829932402543,
+    "ci_upper_95_flask_only": 0.06698559613795377,
+    "tost_at_delta_015_flask_only": {
+      "pass": true,
+      "p_upper": 6.603242789386466e-06,
+      "p_lower": 1.0115511064223703e-05,
+      "delta": 0.15,
+      "fisher_z": -0.0016541447068414248,
+      "se": 0.03507153119159472
+    },
+    "pearson_r_pooled_bparent": -0.9012051125728714,
+    "abs_r_pooled_bparent": 0.9012051125728714,
+    "bparent_stratified_weighted_abs_r": 0.9012051125728714,
+    "ci_lower_95_bparent": -0.9053936078966618,
+    "ci_upper_95_bparent": -0.8772896956782255,
+    "tost_at_delta_015_bparent": {
+      "pass": true,
+      "p_upper": 0.0,
+      "p_lower": 1.0,
+      "delta": 0.15,
+      "fisher_z": -1.4326192193438787,
+      "se": 0.03507153119159472
+    },
+    "n_paired_samples_testbed": 684,
+    "n_paired_samples_testbed_total": 816,
+    "n_paired_samples_flask": 816,
+    "n_paired_samples_bparent": 816,
+    "n_304_total": 132,
+    "n_304_valid": 132,
+    "n_304_expired": 0,
+    "n_conditions": 8,
+    "n_endpoints": 3,
+    "samples_per_condition_per_endpoint": 34,
+    "endpoints_with_variance": 3,
+    "per_endpoint_r_testbed": {
+      "/api/user/profile": {
+        "r": 0.04067334641678329,
+        "p": 0.5616041981535114,
+        "n": 206
+      },
+      "/api/data/list": {
+        "r": 0.09640958466769069,
+        "p": 0.16803935087801813,
+        "n": 206
+      },
+      "/api/session/status": {
+        "r": -0.0006971679885581245,
+        "p": 0.9908683800298186,
+        "n": 272
+      }
+    },
+    "per_endpoint_variance_testbed": {
+      "/api/user/profile": {
+        "behavioral_std": 3.5,
+        "structural_std": 0.06545441904468825,
+        "behavioral_mean": 3.5,
+        "structural_mean": 0.3068881455348121,
+        "n_behavioral": 272,
+        "n_structural": 272,
+        "has_variance": true
+      },
+      "/api/data/list": {
+        "behavioral_std": 3.5,
+        "structural_std": 0.06606002861233004,
+        "behavioral_mean": 3.5,
+        "structural_mean": 0.3099004018700677,
+        "n_behavioral": 272,
+        "n_structural": 272,
+        "has_variance": true
+      },
+      "/api/session/status": {
+        "behavioral_std": 3.5,
+        "structural_std": 0.05803738324957334,
+        "behavioral_mean": 3.5,
+        "structural_mean": 0.2894930837567906,
+        "n_behavioral": 272,
+        "n_structural": 272,
+        "has_variance": true
+      }
+    },
+    "per_cache_r_testbed": {
+      "cache_enabled": 0.023459216438806305,
+      "cache_disabled": 0.06487189399843678,
+      "heterogeneity_diff": 0.041412677559630476
+    },
+    "cache_enabled_n_testbed": 276,
+    "cache_disabled_n_testbed": 408,
+    "c5_heterogeneity_pass": true,
+    "power_analysis": {
+      "observed_r": 0.04100797384578045,
+      "n_samples": 684,
+      "se": 0.03832008326196737,
+      "min_detectable_r_at_n": 0.07496645136202222
+    },
+    "c1_expired_tp_rates": {
+      "expired+cache+read+user_profile": 1.0,
+      "expired+cache+write+user_profile": 1.0,
+      "expired+nocache+read+user_profile": 1.0,
+      "expired+nocache+write+user_profile": 1.0,
+      "expired+cache+read+data_list": 1.0,
+      "expired+cache+write+data_list": 1.0,
+      "expired+nocache+read+data_list": 1.0,
+      "expired+nocache+write+data_list": 1.0,
+      "expired+cache+read+session_status": 1.0,
+      "expired+cache+write+session_status": 1.0,
+      "expired+nocache+read+session_status": 1.0,
+      "expired+nocache+write+session_status": 1.0
+    },
+    "c1_valid_tn_rates": {
+      "valid+cache+read+user_profile": 1.0,
+      "valid+cache+write+user_profile": 1.0,
+      "valid+nocache+read+user_profile": 1.0,
+      "valid+nocache+write+user_profile": 1.0,
+      "valid+cache+read+data_list": 1.0,
+      "valid+cache+write+data_list": 1.0,
+      "valid+nocache+read+data_list": 1.0,
+      "valid+nocache+write+data_list": 1.0,
+      "valid+cache+read+session_status": 1.0,
+      "valid+cache+write+session_status": 1.0,
+      "valid+nocache+read+session_status": 1.0,
+      "valid+nocache+write+session_status": 1.0
+    },
+    "per_endpoint_flask_r": {
+      "/api/user/profile": {
+        "r": -0.044392947011900205,
+        "p": 0.465919085878045,
+        "n": 272
+      },
+      "/api/data/list": {
+        "r": 0.04193656164855956,
+        "p": 0.4909784976427018,
+        "n": 272
+      },
+      "/api/session/status": {
+        "r": -0.009386171890007369,
+        "p": 0.8775378287266168,
+        "n": 272
+      }
+    },
+    "per_endpoint_bparent_r": {
+      "/api/user/profile": {
+        "r": -0.9006609372517398,
+        "p": 9.86868663454237e-100,
+        "n": 272
+      },
+      "/api/data/list": {
+        "r": -0.9081397806850549,
+        "p": 4.2849845573809497e-104,
+        "n": 272
+      },
+      "/api/session/status": {
+        "r": -0.8948146197818196,
+        "p": 1.4764237923959966e-96,
+        "n": 272
+      }
+    },
+    "flask_only_behavioral_std": 3.5,
+    "etag_permission_verification": {
+      "/api/user/profile": {
+        "valid_write_etags": [
+          "c471e2ffa78d6b682e38c4f98352b03dd40b7bf4c102e8ac046e1f16a7d6bc88"
+        ],
+        "expired_write_etags": [
+          "c471e2ffa78d6b682e38c4f98352b03dd40b7bf4c102e8ac046e1f16a7d6bc88"
+        ],
+        "overlap_count": 1,
+        "fix_verified": true
+      },
+      "/api/data/list": {
+        "valid_write_etags": [
+          "0f7349079319fb5f37d863225707eceba9a7bcf6f0d1106de5e5d20b587e7437"
+        ],
+        "expired_write_etags": [
+          "0f7349079319fb5f37d863225707eceba9a7bcf6f0d1106de5e5d20b587e7437"
+        ],
+        "overlap_count": 1,
+        "fix_verified": true
+      },
+      "/api/session/status": {
+        "valid_write_etags": [
+          "f11f5fe0d346a0d0b6777ecf9f13795bbdf5f8258bb2a008422600db584a8ef6"
+        ],
+        "expired_write_etags": [
+          "f11f5fe0d346a0d0b6777ecf9f13795bbdf5f8258bb2a008422600db584a8ef6"
+        ],
+        "overlap_count": 1,
+        "fix_verified": true
+      }
+    },
+    "outcome": "SUPPORTS"
+  },
+  "controls": {
+    "C1_behavioral_tp": {
+      "threshold": "mean expired_TP >= 0.85 AND mean valid_TN >= 0.85",
+      "observed_mean_expired_tp": 1.0,
+      "observed_mean_valid_tn": 1.0,
+      "pass": true,
+      "evidence": "Expired TP=1.0000, Valid TN=1.0000"
+    },
+    "C2_variance": {
+      "threshold": ">= 2/3 endpoints have std > 0 for both signals",
+      "endpoints_with_variance": 3,
+      "pass": true,
+      "evidence": "3/3 endpoints",
+      "per_endpoint": {
+        "/api/user/profile": {
+          "behavioral_std": 3.5,
+          "structural_std": 0.06545441904468825,
+          "behavioral_mean": 3.5,
+          "structural_mean": 0.3068881455348121,
+          "n_behavioral": 272,
+          "n_structural": 272,
+          "has_variance": true
+        },
+        "/api/data/list": {
+          "behavioral_std": 3.5,
+          "structural_std": 0.06606002861233004,
+          "behavioral_mean": 3.5,
+          "structural_mean": 0.3099004018700677,
+          "n_behavioral": 272,
+          "n_structural": 272,
+          "has_variance": true
+        },
+        "/api/session/status": {
+          "behavioral_std": 3.5,
+          "structural_std": 0.05803738324957334,
+          "behavioral_mean": 3.5,
+          "structural_mean": 0.2894930837567906,
+          "n_behavioral": 272,
+          "n_structural": 272,
+          "has_variance": true
+        }
+      }
+    },
+    "C3_equivalence_stratified": {
+      "threshold": "CI upper of endpoint-stratified pooled r < 0.15 (one-sided)",
+      "observed_r_stratified": 0.04100797384578045,
+      "ci_lower_95_stratified": -0.03406319535020517,
+      "ci_upper_95_stratified": 0.11561898674313995,
+      "pass": true,
+      "n_samples": 684,
+      "evidence": "stratified r=0.0410, CI=[-0.0341,0.1156], upper=0.1156 < 0.15"
+    },
+    "C4_tost_stratified": {
+      "threshold": "TOST p_upper < 0.05 at delta=0.15 (one-sided, stratified)",
+      "observed_p_upper": 0.002030310075603707,
+      "observed_p_lower": 2.653040339639645e-07,
+      "pass": true,
+      "n_samples": 684,
+      "evidence": "TOST p_upper=0.0020, p_lower=0.0000"
+    },
+    "C5_cache_heterogeneity_non304": {
+      "threshold": "|r_enabled - r_disabled| < 2 * SE (non-304 only)",
+      "r_enabled": 0.023459216438806305,
+      "r_disabled": 0.06487189399843678,
+      "heterogeneity_diff": 0.041412677559630476,
+      "pass": true,
+      "evidence": "|r_enabled - r_disabled|=0.0414"
+    },
+    "C6_baseline_flask_only": {
+      "threshold": "|r| < 0.15 on B-FLASK-ONLY baseline",
+      "observed_r_flask": -0.001654143198155742,
+      "abs_r_flask": 0.001654143198155742,
+      "ci_upper_95_flask": 0.06698559613795377,
+      "pass": true,
+      "n_samples": 816,
+      "behavioral_std": 3.5,
+      "evidence": "B-FLASK-ONLY r=-0.0017, |r|=0.0017, behavioral_std=3.5000"
+    },
+    "C7_negative_control": {
+      "threshold": "endpoint-stratified weighted |r| >= 0.15 on B-PARENT-CONFOUND (confound reproduction)",
+      "observed_r_bparent": -0.9012051125728714,
+      "abs_r_bparent": 0.9012051125728714,
+      "pass": true,
+      "n_samples": 816,
+      "evidence": "B-PARENT-CONFOUND endpoint-stratified weighted r=-0.9012, |r|=0.9012"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "215a42b2b6377764ff69d038c8bb4dc6cc34127d3510ee00b52ac2a2a180ed9d",
+      "role": "raw"
+    },
+    {
+      "path": "testbed_server.py",
+      "sha256": "685422db47de7d43f8af1775aa5a231657b20c9b43bf5f6d6694c2ca30a8947f",
+      "role": "code"
+    },
+    {
+      "path": "testbed_server_v2.py",
+      "sha256": "0725fcac6201f18099744525accca5d7e2a61809b85b5200863f4c2ee60db3d9",
+      "role": "code"
+    },
+    {
+      "path": "flask_only_server.py",
+      "sha256": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+      "role": "code"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "31bc57d4faff28107527963231307b45643555aa8e0f4a8a8bc713cb07af9b53",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Mean behavioral TP rate (expired): 1.0000",
+    "Mean behavioral TN rate (valid): 1.0000",
+    "C1 behavioral detection: PASS",
+    "Testbed (non-304) simple pooled r=0.0314 (|r|=0.0314), n=684",
+    "Testbed 95% CI (simple): [-0.0437, 0.1061]",
+    "Endpoint-stratified pooled r=0.0410, n=684",
+    "Stratified 95% CI: [-0.0341, 0.1156]",
+    "Stratified CI upper 0.1156 < 0.15",
+    "Stratified TOST delta=0.15: p_upper=0.0020",
+    "304 statistics: n_304_total=132, n_304_valid=132, n_304_expired=0",
+    "B-FLASK-ONLY Pearson r=-0.0017 (|r|=0.0017), n=816",
+    "B-FLASK-ONLY behavioral std=3.5000",
+    "B-PARENT-CONFOUND endpoint-stratified weighted r=-0.9012 (|r|=0.9012), n=816",
+    "Endpoints with variance: 3/3",
+    "Per-endpoint non-304 r (testbed): {'/api/user/profile': {'r': 0.04067334641678329, 'p': 0.5616041981535114, 'n': 206}, '/api/data/list': {'r': 0.09640958466769069, 'p': 0.16803935087801813, 'n': 206}, '/api/session/status': {'r': -0.0006971679885581245, 'p': 0.9908683800298186, 'n': 272}}",
+    "Per-endpoint r (flask-only): {'/api/user/profile': {'r': -0.044392947011900205, 'p': 0.465919085878045, 'n': 272}, '/api/data/list': {'r': 0.04193656164855956, 'p': 0.4909784976427018, 'n': 272}, '/api/session/status': {'r': -0.009386171890007369, 'p': 0.8775378287266168, 'n': 272}}",
+    "Per-endpoint r (b-parent-confound): {'/api/user/profile': {'r': -0.9006609372517398, 'p': 9.86868663454237e-100, 'n': 272}, '/api/data/list': {'r': -0.9081397806850549, 'p': 4.2849845573809497e-104, 'n': 272}, '/api/session/status': {'r': -0.8948146197818196, 'p': 1.4764237923959966e-96, 'n': 272}}",
+    "Cache heterogeneity (non-304): r_enabled=0.023459216438806305, r_disabled=0.06487189399843678, diff=0.041412677559630476",
+    "V_ETAG permission fix verified: {'/api/user/profile': {'valid_write_etags': ['c471e2ffa78d6b682e38c4f98352b03dd40b7bf4c102e8ac046e1f16a7d6bc88'], 'expired_write_etags': ['c471e2ffa78d6b682e38c4f98352b03dd40b7bf4c102e8ac046e1f16a7d6bc88'], 'overlap_count': 1, 'fix_verified': True}, '/api/data/list': {'valid_write_etags': ['0f7349079319fb5f37d863225707eceba9a7bcf6f0d1106de5e5d20b587e7437'], 'expired_write_etags': ['0f7349079319fb5f37d863225707eceba9a7bcf6f0d1106de5e5d20b587e7437'], 'overlap_count': 1, 'fix_verified': True}, '/api/session/status': {'valid_write_etags': ['f11f5fe0d346a0d0b6777ecf9f13795bbdf5f8258bb2a008422600db584a8ef6'], 'expired_write_etags': ['f11f5fe0d346a0d0b6777ecf9f13795bbdf5f8258bb2a008422600db584a8ef6'], 'overlap_count': 1, 'fix_verified': True}}",
+    "C1=True, C2=True, C3=True, C4=True, C5=True, C6=True, C7=True",
+    "Status=COMPLETE, Outcome=SUPPORTS",
+    "Total paired samples: 684 (testbed non-304), 816 (testbed total), 816 (flask-only), 816 (b-parent-confound)"
+  ],
+  "validity_notes": [
+    "V3 FIX: Endpoint-stratified pooling applied to C3/C4/C5. Parent's pooled r was biased by 304 exclusion leaving skewed endpoint composition (91% session_status in valid enabled non-304). Stratified pooled r weights each endpoint's r by its n.",
+    "V_ETAG_PERMISSION_LEAKAGE FIX: testbed_server.py now decodes expired JWT tokens WITHOUT verification to extract permission_level, so write-permission expired requests get write-etag (not default read-etag). Verified via ETag overlap check.",
+    "V3 FIX: 304 exclusion applied to ALL correlations (pooled, per-endpoint, per-cache) \u2014 not just pooled as in parent.",
+    "V1+V2 FIXES from parent: request_id uses uuid.uuid4() for ALL status codes; B-FLASK-ONLY has genuine token-state variation",
+    "POWER FIX: n >= 800 non-304 samples (34 per condition per endpoint x 8 conditions x 3 endpoints = 816)",
+    "Structural signal extraction: headers-only (ETag, Cache-Control, request_id entropy)",
+    "Error response bodies (401, 403, 5xx) EXCLUDED from structural signal entirely",
+    "Production-like testbed: Flask 3.1.3, PyJWT RS256, SQLite WAL-mode",
+    "CDN simulation: ETag-SHA256, Cache-Control max-age/no-store, stale-while-revalidate",
+    "B-FLASK-ONLY baseline: plain Flask with token validation (valid/expired via header)",
+    "B-PARENT-CONFOUND-V2: server-side V2 confound (fixed 'expired' request_id for expired responses, uuid4 for valid)",
+    "3 endpoints with genuine behavioral AND structural variation",
+    "N=684 paired samples testbed (non-304), 816 total testbed, 816 flask-only, 816 b-parent-confound",
+    "Behavioral signals: token_validation_failure, session_state_change, auth_boundary_shift",
+    "Structural signals: ETag variation, Cache-Control variation, request_id entropy, dynamic content hash",
+    "All 8 co-occurring conditions tested: token_state x cache_mode x permission_level",
+    "Claim ceiling bounded to production-like LOCAL testbed; NOT validated for distributed production",
+    "304 exclusion: 132 304 samples excluded from correlation (132 valid, 0 expired)",
+    "C3/C4 decision uses endpoint-stratified pooled r (not simple pooled r)",
+    "C7 negative control uses endpoint-stratified weighted |r| (not simple pooled |r|) as per audit recommendation",
+    "C5 heterogeneity uses endpoint-stratified weighting for per-cache correlations (not simple concatenation)"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on actual distributed production infrastructure",
+    "Whether CDN cache invalidation on session state change introduces correlation",
+    "Whether concurrent client load changes correlation structure",
+    "Whether the result generalizes to non-Flask frameworks",
+    "Whether headers-only structural signal captures sufficient variation for production use",
+    "Whether per-cache heterogeneity is systematic or sampling noise",
+    "Whether delta=0.10 is achievable at n=800+ (stratified CI width)"
+  ]
+}
