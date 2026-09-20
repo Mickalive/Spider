@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-RUNTIME-35542474231",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does encoding-agnostic iterative decompression (sniff delivered bytes, try brotli→gzip→identity until SHA256 matches ground truth) restore byte-identical correctness through Cloudflare CDN for all 48 payload×order×chunk×Accept-Encoding conditions, and does it generalize to depths 3-5 and payloads >100KB?",
+  "hypothesis": "An encoding-agnostic decoder that does not assume the origin's layer stack — instead sniffing the delivered bytes and iteratively attempting brotli, gzip, then identity decompression until SHA256 matches the ground truth — restores byte-identical correctness through Cloudflare CDN for all 48 tested conditions. This works because: (1) CDN re-encoding is lossless (parent forensic: iterative decode == ground truth on 24/24 JSON/HTML); (2) the failure is in the fixed-origin-order framing assumption, not byte corruption; (3) encoding-agnostic decode is agnostic to which transforms CDN applies.",
+  "falsifier": "Any of the following falsifies the hypothesis: (1) any of the 48 CDN cells produces decompressed output with SHA256 != ground truth under encoding-agnostic decode; (2) encoding-agnostic decode fails for BINARY payload type (parent forensic only tested JSON/HTML); (3) CDN re-encoding at depth >2 or payload >100KB produces non-recoverable byte transformations; (4) identity payloads are corrupted (not just compressed) by CDN; (5) cache HIT staleness (if observed) causes different decompressed output than consecutive-serve.",
+  "baselines": [
+    {
+      "id": "B-ENCODING-AGNOSTIC-REGRESSION",
+      "description": "Parent fixed-origin-order decompression on the same 48-cell matrix — re-validates the 60/240 (0.25) CDN correctness from EXP-RUNTIME-35538865067. If encoding-agnostic decode improves on this, it demonstrates the fix is real.",
+      "expected": "60/240 correct (parent result), with all failures in the same cells (non-GZIP-OUTER or non-gzip AE)"
+    },
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "description": "Same payloads served directly from localhost without CDN — re-validates parent 240/240 result and serves as ground-truth sanity check for the encoding-agnostic decoder itself.",
+      "expected": "240/240 byte-identical decompression output to ground truth (encoding-agnostic and fixed-order both pass)"
+    },
+    {
+      "id": "B-CDN-IDENTITY",
+      "description": "Uncompressed (identity) payloads served through CDN — tests whether CDN corrupts or merely compresses uncompressed data. Parent found 5/15 byte-identical (BINARY 5/5 passthrough, JSON/HTML gzip-compressed by CDN).",
+      "expected": "Encoding-agnostic decode recovers ground truth for all 15 identity observations (CDN may gzip-compress text types, which encoding-agnostic decode handles)"
+    },
+    {
+      "id": "B-DEPTH-GENERALIZATION",
+      "description": "Encoding-agnostic decode applied to depths 3-5 (triple and quadruple stacked encodings: brotli(q4)+gzip(L1)+brotli(q4), etc.) served through CDN. Tests whether the fix generalizes beyond depth-2.",
+      "expected": "Encoding-agnostic decode recovers ground truth for all depth>2 CDN observations"
+    },
+    {
+      "id": "B-LARGE-PAYLOAD",
+      "description": "Encoding-agnostic decode applied to >100KB payloads served through CDN. Tests whether large-payload CDN behavior (TCP segmentation, chunked transfer) breaks the fix.",
+      "expected": "Encoding-agnostic decode recovers ground truth for all >100KB CDN observations"
+    }
+  ],
+  "positive_control": "B-LOCALHOST-DIRECT: encoding-agnostic decode on localhost-served payloads matches ground truth — re-validates parent 240/240. If this fails, the decoder implementation is broken and no CDN inference is possible.",
+  "null_control": "B-CDN-IDENTITY: encoding-agnostic decode on uncompressed CDN payloads recovers ground truth. If CDN corrupts uncompressed data, compressed data cannot be trusted. Additionally, encoding-agnostic decode on localhost identity must be trivially 15/15 (identity passthrough).",
+  "measurement_validity": [
+    "Cloudflare Tunnel (cloudflared) must be installed and functional — verify /health endpoint returns HTTP 200 through public URL before measuring",
+    "Each CDN-served request must record the actual delivered Content-Encoding header and raw wire bytes",
+    "Encoding-agnostic decode algorithm: try brotli.decompress(raw_bytes), if valid compare SHA256 to ground truth; else try gzip.decompress(raw_bytes), if valid compare; else compare raw_bytes SHA256 to ground truth (identity)",
+    "Minimum N=5 observations per condition with jitter 200-500ms between CDN requests to avoid cache collapse",
+    "Unique URLs per main-matrix observation plus Cache-Control: public, max-age=0 or no-cache to test fresh serving",
+    "Ground truth computed as SHA256 of full-body iterative decode (same as parent): for each origin-compressed payload, decompress all layers to produce the reference SHA256",
+    "Depths 3-5: generate payloads with 3-5 stacked compression layers (alternating brotli q4 and gzip L1), serve through CDN, apply encoding-agnostic decode",
+    "Large payloads: generate >100KB high-entropy payloads, compress with 2-layer stacking, serve through CDN, apply encoding-agnostic decode",
+    "BINARY payloads: within-run ground truth only (PYTHONHASHSEED-dependent; cross-run comparison not valid)",
+    "Environment: Python 3.12+, brotli 1.2.0, requests 2.x or http.client, cloudflared tunnel"
+  ],
+  "decision_rule": "ALL conditions must pass for SURVIVES_CURRENT_TEST:\n- C1: Encoding-agnostic decode produces byte-identical SHA256 output as ground truth for ALL 48 primary CDN cells (3 payload × 2 orders × 2 chunk sizes × 4 Accept-Encoding variants)\n- C2: Encoding-agnostic decode recovers ground truth for BINARY CDN cells (parent forensic did not fully test BINARY)\n- C3: CDN consecutive-serve stability preserved: 3 identical requests to same URL produce identical decompressed output under encoding-agnostic decode\n- C4: Identity payloads pass through CDN with encoding-agnostic decode recovering ground truth (B-CDN-IDENTITY)\n- C5: Depth generalization: encoding-agnostic decode recovers ground truth for at least 80% of depth 3-5 CDN observations\n- C6: Large payload: encoding-agnostic decode recovers ground truth for at least 80% of >100KB CDN observations\n- Positive control passes: B-LOCALHOST-DIRECT encoding-agnostic decode matches ground truth (240/240)\n- Null control passes: B-CDN-IDENTITY encoding-agnostic decode recovers ground truth\nIF C1 fails: FALSIFIES — encoding-agnostic decode does not restore correctness; diagnose which cells fail\nIF C1 passes but C5/C6 fail: MIXED — primary gate passes but generalization is bounded\nIF all pass: SUPPORTS — C-MEAS-VALID ready for Product Core promotion (only kernel integration remains)",
+  "product_consequence_positive": "CDN decompression gate closes. Encoding-agnostic decode validated through real CDN for all tested conditions. C-MEAS-VALID is ready for Product Core promotion — only kernel integration of the encoding-agnostic decoder remains. This unblocks the full decompression chain validation across localhost AND real CDN.",
+  "product_consequence_negative": "Encoding-agnostic decode fails on some CDN conditions — C-MEAS-VALID remains blocked from Product Core. Diagnosis of which cells fail identifies whether the issue is: (a) specific encoding combinations not handled by try-brotli→gzip→identity order, (b) CDN corruption at depth >2, (c) large-payload TCP segmentation effects, or (d) BINARY-specific ground-truth reproducibility.",
+  "estimated_cost": "Low: same infrastructure as parent (cloudflared, Python HTTP server, brotli library). Additional payload generation for depths 3-5 and >100KB adds ~5 minutes. Estimated total wall time 15-20 minutes.",
+  "expected_information_gain": "Very high: this is the sole remaining blocker for C-MEAS-VALID Product Core promotion per parent handoff. A positive result closes the CDN gate and enables promotion. A negative result identifies the specific remaining fix needed. Both outcomes directly change a product decision. The experiment is the smallest possible test that can resolve the inherited unknown."
+}
