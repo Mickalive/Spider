@@ -1,17 +1,63 @@
 {
   "experiment_id": "EXP-INTEL-35476271877",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-PRODUCT-ECON"],
+  "question": "What mechanism drives the paradoxical dissociation between canonical recipe's high discrimination (eta2=0.9205) and low ranking agreement (55.95%) versus per-task recipe's low discrimination (eta2=0.3664) and higher ranking agreement (78.65%) at truncated-first-20 — and does decomposition of the ranking-instability mechanism predict whether full-DOM element counts (n=21-82) could cross the 80% ranking agreement threshold?",
+  "hypothesis": "The canonical-recipe ranking instability is caused by (H1) small between-type density margins relative to recipe-induced within-type task variance: with only 3 tasks per type and 20 elements per task, recipe sampling creates task-specific density noise that exceeds the listing-vs-detail margin in ~44% of iterations, flipping the ranking. (H2) The canonical recipe's shared role-subset creates partially correlated noise across tasks of the same type (same roles selected, but different element counts per task), which is insufficient to stabilize the ranking because the between-type margin is inherently small at truncated-first-20. (H3) Extrapolation of the SNR (margin / SE_of_mean) to full-DOM element counts predicts ranking agreement remains below 80% because the margin improvement from additional elements is offset by persistent within-type template invariance.",
+  "falsifier": "The hypothesis is falsified if ANY of: (F1) The SNR model fails to predict observed ranking agreement at n=5/10/15 within 10 percentage points — indicating the decomposition is not capturing the actual instability mechanism; (F2) Extrapolated ranking agreement at n=50 (midpoint of full-DOM range) exceeds 80% — indicating the plateau at 56% is an artifact of the narrow n=5/10/15/20 range and full DOM WOULD resolve the instability; (F3) The between-type density margin at n=20 exceeds 3x the within-type SE — indicating the margin is NOT small relative to noise, contradicting H1 and suggesting a different instability mechanism.",
+  "baselines": [
+    {
+      "id": "B1_CANONICAL_ETA2_N20",
+      "description": "Parent canonical recipe eta2 at n=20: tag_entropy x DEF-FULL-MAP = 0.9205 (std 0.0077). High discrimination despite low ranking agreement.",
+      "source": "EXP-INTEL-35445596324 result.json M6_recipe_canonical_eta2['20']"
+    },
+    {
+      "id": "B2_PERTASK_ETA2_N20",
+      "description": "Parent per-task recipe eta2 at n=20: tag_entropy x DEF-FULL-MAP = 0.3664 (std 0.0061). Low discrimination despite higher ranking agreement.",
+      "source": "EXP-INTEL-35445596324 result.json M7_recipe_pertask_eta2['20']"
+    },
+    {
+      "id": "B3_CANONICAL_RANKING_N20",
+      "description": "Parent canonical recipe ranking agreement at n=20: 55.95%. Well below 80% threshold.",
+      "source": "EXP-INTEL-35445596324 result.json M4_recipe_canonical_ranking_agreement['20']"
+    },
+    {
+      "id": "B4_PERTASK_RANKING_N20",
+      "description": "Parent per-task recipe ranking agreement at n=20: 78.65%. Close to but below 80% threshold.",
+      "source": "EXP-INTEL-35445596324 result.json M5_recipe_pertask_ranking_agreement['20']"
+    },
+    {
+      "id": "B5_NON_RECIPE_ETA2_N20",
+      "description": "Non-recipe pipeline eta2 at n=20: tag_entropy x DEF-FULL-MAP = 0.9958, DEF-FORM-ONLY = 0.9996. Near-perfect discrimination without recipe sampling.",
+      "source": "EXP-INTEL-35445596324 result.json M3_pipeline_eta2_by_effective_n['20']"
+    },
+    {
+      "id": "B6_SAMPLE_SIZE_EFFECT",
+      "description": "Ranking agreement at n=5/10/15/20: 0%/0%/49.98%/55.95%. Spearman=1.0 (perfect monotonic). Plateau at n=20.",
+      "source": "EXP-INTEL-35445596324 result.json M4_recipe_canonical_ranking_agreement"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_SNR_MODEL_REPRODUCES_OBSERVED_AGREEMENT",
+    "description": "The SNR-based ranking-flip model (agreement = f(margin, SE_listing, SE_detail)) correctly predicts observed ranking agreement at n=15 and n=20 within 10 percentage points, using the parent's per-iteration density data. This confirms the model captures the actual instability mechanism.",
+    "expected": "Predicted agreement at n=15 within 10pp of 49.98%, predicted agreement at n=20 within 10pp of 55.95%."
+  },
+  "null_control": {
+    "id": "NC1_RANDOM_NOISE_BASELINE",
+    "description": "A random noise model (densities drawn from N(0,1) with no signal) predicts ranking agreement ~50% at all n values. The SNR model must outperform this null to demonstrate that the decomposition captures real structure.",
+    "expected": "Random noise model agreement: 50% +/- 5% at all n values. SNR model prediction error must be < random noise model prediction error."
+  },
+  "measurement_validity": [
+    "All computations use existing data from EXP-INTEL-34782350557 (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050) and the analysis framework from EXP-INTEL-35445596324 (analyze.py sha256: 5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724). No new data collection required. No browser/network/model calls.",
+    "The 7 tasks (3 listing, 3 detail, 1 cart) with truncated-first-20 locatable_sample are the input. Within-type template invariance persists: tasks of the same page type share identical element tags/roles/inForm/w/h in the truncated-first-20 sample.",
+    "The SNR decomposition requires per-iteration density values for both canonical and per-task recipes at each effective_n. The parent's analysis framework computes these; the decomposition re-analyzes them to extract margin, variance, and correlation structure.",
+    "Cart n=1 degeneracy: cart page_type has n=1, making within-type variance degenerate. Analysis focuses on listing vs detail (n=3 each).",
+    "OECD/COINr definitions use DEF-FULL-MAP (a->link, input->textbox) as primary definition. DEF-FORM-ONLY analysis included for comparison.",
+    "Extrapolation to full DOM (n=21-82) uses the SNR model's functional form (margin as f(n), SE as f(n)) fit to n=5/10/15/20 data points. Extrapolation uncertainty is reported as prediction intervals."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_SNR_MODEL_VALID: The positive control PC1 passes: the SNR model predicts observed ranking agreement at n=15 and n=20 within 10 percentage points. PASS if both predictions within 10pp; FAIL if either prediction off by >10pp.\n\nC2_MECHANISM_IDENTIFIED: The decomposition identifies the primary instability mechanism as one of: (a) small margin relative to SE (margin/SE < 3), (b) high within-type task variance (CV > 0.1), or (c) correlated noise across tasks (rho > 0.3). PASS if any mechanism identified with quantitative support; FAIL if no mechanism identified.\n\nC3_EXTRAPOLATION_FALSIFIES_FULL_DOM: The SNR model extrapolation predicts ranking agreement at n=50 (midpoint of full-DOM range) is < 80%. PASS if extrapolated agreement < 80%; FAIL if extrapolated agreement >= 80%.\n\nVERDICT RULES:\n- If NOT C1: MEASUREMENT_INVALID — SNR model does not capture the instability mechanism, decomposition is unreliable.\n- If C1 AND NOT C2: MIXED — model is valid but mechanism is unclear; further analysis needed.\n- If C1 AND C2 AND C3: FALSIFIES-FULL-DOM — the plateau at 56% is predicted to persist at full DOM; recipe density is structurally limited; product lane should use non-recipe density.\n- If C1 AND C2 AND NOT C3: SUPPORTS-FULL-DOM — the plateau is predicted to break at full DOM; Docker re-collection is warranted; recipe density remains viable.\n\nALL conditions must be evaluated. If C1 fails, the experiment is MEASUREMENT_INVALID regardless of C2/C3.",
+  "product_consequence_positive": "If NOT C3 (extrapolation predicts >=80% at full DOM): The plateau at 56% is an artifact of the narrow truncated-first-20 range. Full DOM testing (n=21-82) is predicted to cross the 80% threshold. The Docker re-collection investment is justified. Recipe density remains viable for MIXED handling. Product lane should wait for full-DOM results before closing the recipe density design path.",
+  "product_consequence_negative": "If C3 (extrapolation predicts <80% at full DOM): The plateau at 56% is structural — additional elements beyond n=20 do not provide enough margin improvement to overcome recipe-induced noise. The full-DOM experiment (EXP-INTEL-35462974425) is predicted to also fail C6 (<80% agreement). Product lane should adopt non-recipe density immediately (which preserves ranking at 100% per B5) and accept the eta2 reduction from recipe sampling. The Docker re-collection investment is NOT justified for the ranking stability question.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network/model calls. The analysis requires: (1) re-running the parent's recipe sampling with per-iteration density logging (10 seeds x 1000 iterations x 2 recipes x 4 effective_n values = 80,000 iterations, <30 seconds compute); (2) SNR decomposition and extrapolation (<5 seconds); (3) validation against observed agreement (<1 second). Total estimated < 1000 LLM tokens for analysis code and < 60 seconds compute.",
+  "expected_information_gain": "VERY HIGH — directly resolves the critical ambiguity from two consecutive BLOCKED runs: is the Docker re-collection investment justified for the ranking stability question? Either outcome (extrapolation above or below 80%) changes a concrete product decision. If below 80%: product lane adopts non-recipe density immediately, saving the cost of Docker re-collection and the full-DOM experiment. If above 80%: Docker re-collection is justified, and the full-DOM experiment becomes the single highest-information next step. This is the minimum-cost experiment that can unblock the MIXED program决策."
 }
