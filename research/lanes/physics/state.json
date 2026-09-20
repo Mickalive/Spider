@@ -8,7 +8,7 @@
   "next_question": "Can an estimator with sufficient sensitivity \u2014 such as a plug-in transition-matrix KL divergence estimator (D_KL(P(Y|Z,A) || P(Y|Z)) computed directly on the stochastic SPA's empirical transitions), a KSG CMI variant with k=10 or k=20 to increase neighborhood resolution, or a permutation test conditioned on (state, action) strata \u2014 detect the demonstrated 1.52-bit CMI signal while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby resolving whether the insensitivity is specific to KSG k=5 and LR chi2-per-state, or fundamental to discrete CMI estimation on 12-state SPAs?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-20T12:16:54.077002+00:00",
+  "updated_at": "2026-09-20T16:18:42.854669+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "55f227782178e2a38ca3fa9570b5467bfee4355c7cb7e3d091d4a247acc00141",
   "same_failure_count": 0,
