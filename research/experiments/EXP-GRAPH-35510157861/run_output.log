@@ -1,0 +1,181 @@
+================================================================================
+EXP-GRAPH-35481774794: C-FRESHNESS Orthogonality (V3+V_ETAG+n>=800)
+N=816 (34 x 8 conditions x 3 endpoints)
+V3 FIX: Endpoint-stratified pooling for C3/C4/C5
+V_ETAG FIX: permission_level from JWT payload for ETag
+POWER FIX: n >= 800 non-304 samples
+================================================================================
+
+[PHASE 1] Starting production-like testbed server...
+  Testbed server running on port 18970
+  Running: valid+cache+read+user_profile
+    34/34 valid samples
+  Running: valid+cache+write+user_profile
+    34/34 valid samples
+  Running: valid+nocache+read+user_profile
+    34/34 valid samples
+  Running: valid+nocache+write+user_profile
+    34/34 valid samples
+  Running: expired+cache+read+user_profile
+    34/34 valid samples
+  Running: expired+cache+write+user_profile
+    34/34 valid samples
+  Running: expired+nocache+read+user_profile
+    34/34 valid samples
+  Running: expired+nocache+write+user_profile
+    34/34 valid samples
+  Running: valid+cache+read+data_list
+    34/34 valid samples
+  Running: valid+cache+write+data_list
+    34/34 valid samples
+  Running: valid+nocache+read+data_list
+    34/34 valid samples
+  Running: valid+nocache+write+data_list
+    34/34 valid samples
+  Running: expired+cache+read+data_list
+    34/34 valid samples
+  Running: expired+cache+write+data_list
+    34/34 valid samples
+  Running: expired+nocache+read+data_list
+    34/34 valid samples
+  Running: expired+nocache+write+data_list
+    34/34 valid samples
+  Running: valid+cache+read+session_status
+    34/34 valid samples
+  Running: valid+cache+write+session_status
+    34/34 valid samples
+  Running: valid+nocache+read+session_status
+    34/34 valid samples
+  Running: valid+nocache+write+session_status
+    34/34 valid samples
+  Running: expired+cache+read+session_status
+    34/34 valid samples
+  Running: expired+cache+write+session_status
+    34/34 valid samples
+  Running: expired+nocache+read+session_status
+    34/34 valid samples
+  Running: expired+nocache+write+session_status
+    34/34 valid samples
+
+[PHASE 2] Starting B-FLASK-ONLY baseline server...
+  B-FLASK-ONLY server running on port 18980
+  Running B-FLASK-ONLY: valid+cache+read+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+cache+write+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+nocache+read+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+nocache+write+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+cache+read+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+cache+write+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+nocache+read+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+nocache+write+user_profile
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+cache+read+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+cache+write+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+nocache+read+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+nocache+write+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+cache+read+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+cache+write+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+nocache+read+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+nocache+write+data_list
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+cache+read+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+cache+write+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+nocache+read+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: valid+nocache+write+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+cache+read+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+cache+write+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+nocache+read+session_status
+    34/34 valid samples
+  Running B-FLASK-ONLY: expired+nocache+write+session_status
+    34/34 valid samples
+
+[PHASE 3] Starting B-PARENT-CONFOUND-REPRODUCTION...
+  B-PARENT-CONFOUND server running on port 18990
+  Running B-PARENT-CONFOUND: valid+cache+read+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+cache+write+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+nocache+read+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+nocache+write+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+cache+read+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+cache+write+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+nocache+read+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+nocache+write+user_profile
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+cache+read+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+cache+write+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+nocache+read+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+nocache+write+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+cache+read+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+cache+write+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+nocache+read+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+nocache+write+data_list
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+cache+read+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+cache+write+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+nocache+read+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: valid+nocache+write+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+cache+read+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+cache+write+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+nocache+read+session_status
+    34/34 valid samples
+  Running B-PARENT-CONFOUND: expired+nocache+write+session_status
+    34/34 valid samples
+
+[PHASE 4] Computing Derived Measurements
+
+Total testbed paired samples: 684 (non-304) / 816 (total)
+304 statistics: n_304_total=132, n_304_valid=132, n_304_expired=0
+Total B-FLASK-ONLY paired samples: 816
+Total B-PARENT-CONFOUND paired samples: 816
+
+================================================================================
+Results written:
+  result.json: /home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35510157861/result.json
+  provenance.json: /home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35510157861/provenance.json
+  report.md: /home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35510157861/report.md
+
+Stratified pooled r=0.0257, n=684, CI=[-0.0493,0.1005], upper=0.1005
+Simple pooled r=0.0140, n=684
+304 stats: n_304_total=132, n_304_valid=132, n_304_expired=0
+B-FLASK-ONLY r=0.0201, |r|=0.0201, behavioral_std=3.5000
+B-PARENT-CONFOUND r=-0.2992, |r|=0.2992
+C1=True, C2=True, C3=True, C4=True, C5=True, C6=True, C7=True
+Status=COMPLETE, Outcome=SUPPORTS
