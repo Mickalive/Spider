@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35482477045",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can an estimator with sufficient sensitivity \u2014 such as a plug-in transition-matrix KL divergence estimator (D_KL(P(Y|Z,A) || P(Y|Z)) computed directly on the stochastic SPA's empirical transitions), a KSG CMI variant with k=10 or k=20 to increase neighborhood resolution, or a permutation test conditioned on (state, action) strata \u2014 detect the demonstrated 1.52-bit CMI signal while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby resolving whether the insensitivity is specific to KSG k=5 and LR chi2-per-state, or fundamental to discrete CMI estimation on 12-state SPAs?",
+  "why_next": "Both KSG CMI (k=5) and LR (chi2-per-state) fail C3 on the stochastic SPA despite audit-confirmed true CMI of 1.52 bits (3x above the 0.5 threshold). KSG returns K3=0.000560 (893x below threshold), LR returns K3=0.103695 (4.8x below threshold, identical to degenerate deterministic SPA baseline). Null centering works for both (C1 passes with 8-22x margin), confirming the null framework is sound. The failure is estimator sensitivity, not SPA design. The next experiment must determine whether this insensitivity is estimator-specific (KSG k=5 too coarse for 12-state discrete; LR ignores history by construction) or fundamental to all discrete CMI estimation on this SPA class. A transition-matrix KL estimator bypasses CMI estimation entirely. KSG k=10/20 tests neighborhood resolution. These are materially orthogonal approaches that could each independently resolve the question.",
+  "carry_forward": {
+    "established": [
+      "KSG CMI (sklearn k=5) achieves |shuffled-action null_mean|=0.012078 bits on stochastic 12-state SPA at N=5000. LR achieves |null_mean|=0.004515 bits. Both <0.1 threshold with 8-22x margin. Null centering is robust across deterministic (parent) and stochastic SPA designs. (EXP-PHYSICS-35482477045 result.json:screening.B-KSG-CMI.null_control, screening.B-LIKELIHOOD-RATIO.null_control; audit.json V2)",
+      "KSG CMI (k=5) positive_control_k3=0.000560 bits against true CMI of 1.52 bits (audit V1 recomputed). 893x below 0.5 threshold. Null centering is achieved by near-zero output for all inputs (null_std=0.000187, 35x smaller than PMI baselines), not by unbiased estimation. This is a genuine insensitivity to a strong signal, not a weak-design artifact. (EXP-PHYSICS-35482477045 result.json:screening.B-KSG-CMI.k3_value_stochastic=0.000560, null_std=0.000187; audit.json V3-KSG_insensitivity_confirmed, V1-theoretical_CMI_miscalibrated)",
+      "LR history collapse persists on stochastic SPA: K2=K3=0.103695 exactly (k3_minus_k2=0.0). Degenerate control on deterministic SPA shows K3=0.104420, confirming LR tests within-state action-dependence without conditioning on history length. K3-K2=0 by construction. (EXP-PHYSICS-35482477045 result.json:screening.B-LIKELIHOOD-RATIO.k2_value_stochastic==k3_value_stochastic; audit.json V4-LR_history_collapse_replicated)",
+      "Stochastic SPA positive control design is valid: true I(Y;A|Z) is 1.52 bits (audit exact enumeration and empirical N=50000 plug-in estimate), not 0.004 bits as producer claimed. The 50/50 deterministic-stochastic mixing creates P(Y|Z,A) substantially different from P(Y|Z) because different actions have different 4-candidate sets. (audit.json V1-theoretical_CMI_miscalibrated; recomputed_metrics.theoretical_CMI.recomputed_mean=1.523)",
+      "KSG CMI degenerate control on deterministic SPA: K3=-0.000405 (expected ~0 by construction). Validates that deterministic SPA produces I(Y;A|Z)=0 for CMI estimators. (EXP-PHYSICS-35482477045 result.json:controls.DEGENERATE-CONTROL)",
+      "Frozen decision rule correctly applied: FALSIFIED-IN-SETTING triggered by C3 failure for both estimators passing C1. C1 passes (2/2), C3 fails (0/2), C6 passes (48/48), C7 passes (2 buckets). (audit.json V2-decision_rule_correctly_applied; result.json:controls)"
+    ],
+    "rejected": [
+      "Hypothesis that stochastic SPA 50/50 mixing produces weak CMI signal (~0.004 bits): falsified by audit recomputation. True CMI is 1.52 bits (380x stronger than claimed). The SPA design is valid; the estimators are insensitive. (audit.json V1-theoretical_CMI_miscalibrated)",
+      "Hypothesis that KSG CMI (k=5) and LR (chi2-per-state) jointly pass C1 and C3 on stochastic SPA: falsified. Both pass C1 but both fail C3 against 1.52-bit signal. (result.json:metrics.c3_pass_count=0)",
+      "Hypothesis that LR can address beyond-Markov H2 (K3-K2 > 0.1): closed for chi2-per-state LR regardless of SPA design. History collapse (K2=K3) is structural, not design-dependent. (audit.json V4; result.json:screening.B-LIKELIHOOD-RATIO.k3_minus_k2=0.0)"
+    ],
+    "unknown": [
+      "Whether KSG CMI with k=10 or k=20 (larger neighborhood) preserves |null|<0.1 while achieving positive_control_k3 >= 0.5 against the 1.52-bit signal at N=5000",
+      "Whether a plug-in transition-matrix KL divergence estimator (directly computing D_KL(P(Y|Z,A) || P(Y|Z)) on empirical transitions) achieves both null centering and sensitivity on the stochastic SPA",
+      "Whether KSG with continuous distance encoding (instead of discrete_features=True) improves resolution on 12-state discrete data",
+      "Whether LR with history-aware stratification (state, history) rather than state-only achieves K3-K2 > 0.1 without inflating null bias",
+      "True PMI baseline null means on stochastic SPA (B-WEIGHTED-PMI, B-EQUAL-WEIGHT-PMI, B-MEDIAN-PMI, B-KNN-CMI not executed; stratum decomposition suggests bias persists but exact values unknown)",
+      "Magnitude of within-session vs global shuffle bias on null_mean for this SPA class (implementation deviates from spec, quantification not performed)",
+      "Whether the C3 threshold of 0.5 bits is appropriate for CMI estimators, or whether a much lower threshold (e.g., 0.01 bits) better reflects estimator resolution limits on discrete 12-state data",
+      "Generalization beyond 12-state SPA to production Web transitions, larger state spaces, or continuous state representations"
+    ],
+    "do_not_assume": [
+      "KSG CMI and LR are useless for all CMI estimation. They achieve null centering (genuine methodological advance) but are insensitive to the specific signal on this SPA class. Different k values, distance encodings, or estimator families may succeed.",
+      "The 1.52-bit true CMI should be easy to detect. Discrete 12-state data with k=5 neighbors presents specific resolution challenges that may not apply to larger state spaces or continuous representations.",
+      "Null centering by near-zero output (KSG null_std=0.000187) is equivalent to unbiased estimation. It is a conservative defense against false positives but comes at the cost of sensitivity. The estimator is effectively a constant function for this input range.",
+      "Global shuffle deviation invalidates C1 results. The C1 margin is 8-22x below threshold; even with within-session shuffle correction, C1 would likely still pass. The deviation must be disclosed but does not change the verdict.",
+      "Missing baseline execution (4/7 baselines) invalidates the experiment. The two executed estimators (KSG, LR) are the primary test targets. The missing baselines would replicate parent PMI bias (~0.41-0.70 bits) but their absence does not affect the C1/C3 verdict.",
+      "The frozen FALSIFIED-IN-SETTING closes the C-WEB-DYNAMICS claim or the Physics lane. It closes only the KSG k=5 and LR chi2-per-state pathways on this specific SPA class. The SPA design is valid; alternative estimators remain untested.",
+      "Production Web transitions generalize from this synthetic SPA. The 12-state SPA has hash routing, 4 candidates per (state,action), no anti-bot, auth, visual complexity, or stochastic production dynamics."
+    ]
+  },
+  "dependencies": [
+    "Stochastic SPA 12-state design with CANDIDATES (validated: I(Y;A|Z)=1.52 bits, 48/48 pairs with 4 candidates)",
+    "Shuffled-action null framework (validated: |null_mean| < 0.1 for KSG and LR, within-session shuffle correction needed for spec compliance)",
+    "N=5000 transitions (50 sessions x 100 steps, seed=42) as frozen measurement unit",
+    "Next estimator must independently pass both C1 (|null_mean| < 0.1) and C3 (positive_control_k3 >= 0.5 bits, p <= 0.001) on the same stochastic SPA",
+    "If estimator sensitivity validated: beyond-Markov K3-K2 testing on stochastic SPA at N=5000",
+    "If all alternative estimators also fail: pivot to fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery) or production Web data"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35482477045/result.json:metrics.screening_n5000 (KSG/LR metrics, c1/c3 pass/fail, stratum decomposition, design verification)",
+    "research/experiments/EXP-PHYSICS-35482477045/audit.json:status REVISE, V1-V7 validity findings, B1-B4 baseline findings, claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-PHYSICS-35482477045/audit.json:V1-theoretical_CMI_miscalibrated (true CMI 1.52 bits)",
+    "research/experiments/EXP-PHYSICS-35482477045/audit.json:V3-KSG_insensitivity_confirmed (near-zero output, null_std 0.000187)",
+    "research/experiments/EXP-PHYSICS-35482477045/audit.json:V4-LR_history_collapse_replicated (K2=K3 exactly)",
+    "research/experiments/EXP-PHYSICS-35482477045/raw_results.json:screening.B-KSG-CMI, screening.B-LIKELIHOOD-RATIO (raw metrics)",
+    "research/experiments/EXP-PHYSICS-35482477045/run_experiment.py:choose_next_stochastic, est_ksg_cmi, est_likelihood_ratio, shuffled_action_null",
+    "research/experiments/EXP-PHYSICS-35482477045/spec.json:question, hypothesis, falsifier C1/C3/C6/C7, decision_rule, positive_control 0.5 bits, baselines",
+    "research/experiments/EXP-PHYSICS-35476270440/handoff.json:carry_forward (parent established KSG null centering, rejected PMI bias/Bayesian, unknown alternative estimators)"
+  ],
+  "recommended_action": "Design a new experiment testing alternative estimators on the validated stochastic SPA (I(Y;A|Z)=1.52 bits). Priority order: (1) plug-in transition-matrix KL divergence estimator -- directly computes D_KL(P(Y|Z,A) || P(Y|Z)) on empirical transitions, bypassing CMI estimation entirely; (2) KSG CMI with k=10 or k=20 -- tests whether neighborhood resolution is the binding constraint; (3) permutation test conditioned on (state, action) strata -- tests whether action-label permutation within state breaks the signal. All must satisfy C1 (|null_mean| < 0.1) and C3 (positive_control_k3 >= 0.5, p <= 0.001) on the same stochastic SPA at N=5000 with within-session shuffle (correcting the global shuffle deviation). If all alternative estimators also fail C3, the Physics lane should pivot to fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery) or move to production Web data, as the estimator-insensitivity pathway would be exhausted."
+}

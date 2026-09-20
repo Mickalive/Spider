@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35481773400",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Bound claim_ceiling to synthetic highly-redundant padded bodies: JSON HTML XML generated via generate_*_body(state,target_size) with 'x'*padding and repeated padding blocks. These compress to 70-1059 bytes (3-34 chunks at chunk_size=32), not the prereg-anticipated 2-10KB (60-300+ chunks) at 10KB and 20-50KB (600-1500+ chunks) at 100KB. Do not claim validation of 100+ chunk dictionary-crossing behavior; actual max is 33-34 chunks (HTML/XML GZIP-L1 at 100KB) and JSON brotli unchanged 76 bytes across 10x input growth (result.json per_cell compressed_size_bytes).",
+    "Bound claim to buffered proxy with client-side reassembly: proxy buffers entire upstream body then re-chunks, client reads via requests resp.raw.read(decode_content=False) which reassembles chunks before decompress_body iterates brotli->gzip max_depth=5. The environment cannot express streaming incremental decompression across chunk boundaries; report.md Key Finding 3 'chunk boundary handling is robust' must be qualified as 'transport reassembly preserved byte-identity' not 'incremental chunk-boundary decompression succeeded'.",
+    "Clarify that parent unknown 'Does correctness hold where gzip/brotli dictionary references cross many chunk boundaries and compressed sizes span 100+ chunks at 32 bytes?' (handoff.json EXP-RUNTIME-35470447407 unknown[1]) remains largely untested; this experiment tested 3-34 chunks on degenerate compressible payloads.",
+    "Narrow product consequence: do not advance C-MEAS-VALID ceiling to 'realistic web content sizes (10KB-100KB)' without qualification; advance only to 'localhost buffered mock with synthetic redundant payloads of nominal 10KB/100KB but actual compressed 0.07-1.06KB'. Real CDN infrastructure remains gate, but so does high-entropy realistic payload validation (prereg Scope NOT tested: binary types, multi-layer encoding, streaming forwarding, levels 2-8).",
+    "Fix report compressed_size description: report Table lists 10KB/100KB compressed means correctly (152/554 etc) but narrative claims spec-predicted 2-10KB range was achieved; it was not for brotli (flat) and was 10x smaller for gzip than predicted. Acknowledge degeneracy."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DEGENERATE_PAYLOAD_REDUNDANCY",
+      "severity": "high",
+      "finding": "Payload generation is highly redundant: JSON uses 'x'*padding (26 distinct byte values), HTML pads with identical '<p>Additional data padding...' block, XML with '<data_item>...' block. Iterative compressors exploit this: JSON BROTLI-Q4 mean 76.75 bytes at both 10KB and 100KB (ratio 1.0), XML BROTLI-Q4 185.75 bytes at both sizes, HTML BROTLI-Q4 197.5->198.25 (ratio 1.004). Gzip also 10x nominal growth yields only 3.6x compressed growth (JSON GZIP-L1 152->553). Spec prereg validity_threats and expected_information_gain assumed compressed sizes scale with payload and would stress 60-300 and 600-1500 chunks; observed max chunks 34 (XML GZIP-L1 1058 bytes /32) and brotli minimum 3 chunks. The tested effect (size-dependent chunk-boundary corruption) could not be expressed.",
+      "evidence": "result.json per_cell compressed_size_bytes means; run_experiment.py generate_json_body generate_html_body generate_xml_body; spec.json measurement_validity chunk_size=32 narrative; prereg section 3 background compressed size expectation",
+      "impact": "Information gain far lower than prereg expected; decision_rule pass does not demonstrate robustness to high-entropy realistic web content."
+    },
+    {
+      "id": "V2_BUFFERED_REASSEMBLY_NOT_STREAMING",
+      "severity": "high",
+      "finding": "Architecture buffers full response before re-chunking (ReverseProxyHandler reads upstream_resp.read() entirely, then re-chunks; MockOAuthHandler similarly compresses full body then chunks). Client decompress_body operates on fully reassembled compressed blob after requests library reassembles Transfer-Encoding: chunked. No incremental streaming decompression across chunk boundaries is tested, despite prereg validity threat 4 'Chunk boundary corruption: At 300+ chunks, multi-byte gzip/brotli symbols spanning chunk boundaries may be corrupted. This is the primary hypothesis being tested.' The environment is incapable of falsifying that failure mode.",
+      "evidence": "run_experiment.py _proxy_request resp_body=upstream_resp.read() then re-chunk loop; ReverseProxyHandler.use_chunked chunk loop; make_request resp.raw.read(decode_content=False); decompress_body iterative brotli->gzip loop on full bytes",
+      "impact": "Positive result demonstrates transport plus stdlib correctness, not chunk-boundary incremental parsing correctness."
+    },
+    {
+      "id": "V3_SINGLE_LAYER_ONLY",
+      "severity": "medium",
+      "finding": "Iterative decompression max_depth=5 exercised only at depth 1 single-layer encodings (gzip OR brotli, never both). Spec acknowledged 'single-layer encoding per observation' and prereg Scope lists multi-layer NOT tested. Correctness for gzip->brotli stacks remains unknown; max_depth logic untested beyond one successful branch.",
+      "evidence": "spec.json measurement_validity 6 Max decompression depth 5 (brotli->gzip->identity; single-layer encoding per observation); prereg Scope NOT tested multi-layer; run_experiment.py decompress_body while depth<MAX_DEPTH loop",
+      "impact": "Limits claim ceiling to single Content-Encoding, not stacked encodings."
+    },
+    {
+      "id": "V4_TRIVIAL_STDLIB_BASELINE",
+      "severity": "medium",
+      "finding": "Decompression correctness with stdlib gzip and brotli 1.2.0 on deterministic data is near-tautological; no adversarial truncated/corrupted payload or strong negative control where failure is expected. Correctness match trivially expected. Baseline strength low.",
+      "evidence": "provenance.json brotli_version 1.2.0 python 3.12.14; result.json decompression_error_count 0 and recomputed independent gzip.decompress/brotli.decompress equality on same bodies verifies trivial correctness",
+      "impact": "Effect size ceiling degenerate at 1.0; no discrimination power to detect pipeline flaws beyond trivial bugs."
+    },
+    {
+      "id": "V5_LATENCY_CEILING",
+      "severity": "info",
+      "finding": "Decompression latency 0.03-0.28 ms sub-millisecond confirms negligible overhead for these tiny compressed blobs (70-1059 bytes). Does not validate latency at prereg-predicted 20-50KB compressed sizes.",
+      "evidence": "result.json per_cell decompression_latency_ms means; provenance max_decompression_depth 5",
+      "impact": "Product economics not stressed."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-GZIP-MC-1KB",
+      "expected": "100% correctness, serves as regression control for decompression pipeline infrastructure (spec baselines)",
+      "observed": "6 cells (JSON/HTML/XML x GZIP-MC-1KB and BROTLI-MC-1KB) -> 120/120 correctness_match_rate 1.0, silent_fallback 0, decompression_error 0. Recomputed sum matches producer total_requests 120 for regression. Within spec: GZIP-MC-1KB mean compressed ~??? not reported but passes.",
+      "pass": true,
+      "evidence": "result.json per_cell GZIP-MC-1KB_1024B and BROTLI-MC-1KB_1024B correctness_match_rate 1.0; controls C_REGRESSION_CONTROLS pass_all true",
+      "note": "Regression confirms no pipeline degradation vs parent EXP-RUNTIME-35470447407 (480/480). Weak positive control (expected to pass) but passes."
+    },
+    {
+      "id": "B-BROTLI-MC-1KB",
+      "expected": "100% correctness, serves as regression control for brotli decompression",
+      "observed": "Same 3 cells BROTLI-MC-1KB_1024B each 20/20 (total 60/60) correctness 1.0, silent_fallback 0. Combined regression 120/120.",
+      "pass": true,
+      "evidence": "result.json per_cell BROTLI-MC-1KB_1024B; controls C_REGRESSION_CONTROLS pass_brotli true",
+      "note": "Inherited 480/480 brotli history confirmed."
+    },
+    {
+      "id": "B-IDENTITY-10KB",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state,10240) exactly",
+      "observed": "3 cells IDENTITY-10KB (JSON/HTML/XML) each 20/20 total 60/60 correctness 1.0 decompression_altered null (no compression). Recomputed matches producer.",
+      "pass": true,
+      "evidence": "result.json per_cell IDENTITY-10KB_10240B correctness_match_rate 1.0; controls C_IDENTITY_BASELINE observed 1.0 for all 3",
+      "note": "Validates oracle determinism for 10KB; confirms Mock handler IDENTITY path (Content-Length, no Content-Encoding) preserves bytes."
+    },
+    {
+      "id": "B-IDENTITY-100KB",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state,102400) exactly",
+      "observed": "3 cells IDENTITY-100KB each 20/20 total 60/60 correctness 1.0",
+      "pass": true,
+      "evidence": "result.json per_cell IDENTITY-100KB_102400B; controls C_IDENTITY_BASELINE pass true",
+      "note": "Oracle validated at both sizes; smallest validity threat (server determinism) mitigated."
+    },
+    {
+      "id": "B-RANDOM",
+      "expected": "~0.0 discrimination",
+      "observed": "All 24 main cells B-RANDOM 0.0 (intra_match - inter_match). Producer reports 0.0 for each per_cell baselines B-RANDOM. Recomputed trivial: decompressed hashes cluster into at most 2 groups (valid_token vs 3 error states share identical body), so intra 1.0 inter 0.5 -> discrimination 0.5 for decompressed, but B-RANDOM expected 0.0 differs construct is tautological random baseline always 0.",
+      "pass": true,
+      "evidence": "result.json per_cell baselines B-RANDOM 0.0 for all main cells; controls C_B_RANDOM observed 0.0 pass true",
+      "note": "Control passes but degenerate; does not demonstrate discriminative power."
+    },
+    {
+      "id": "C_NULL_CONTROL_DETERMINISM",
+      "expected": "Within-state decompressed hash all_same=true for all 4 auth states across all cells (spec null_control B-RANDOM definition)",
+      "observed": "24 main cells x 4 states =96 checks: all unique_count 1 all_same true. Recomputed matches producer decompressed_hash_variation. No non-determinism.",
+      "pass": true,
+      "evidence": "result.json per_cell decompressed_hash_variation valid_token/expired/invalid/no_auth all_same true; controls C_NULL_CONTROL pass true",
+      "note": "Determinism holds for Flask seeded RNG and decompression pipeline."
+    },
+    {
+      "id": "POSITIVE_CONTROL_B_BROTLI_MC",
+      "expected": "B-BROTLI-MC-1KB must pass 100% to confirm no regression",
+      "observed": "60/60 pass (JSON/HTML/XML x BROTLI-MC-1KB). Confirmed via recomputed metrics.",
+      "pass": true,
+      "evidence": "spec.json positive_control B-BROTLI-MC-1KB; result.json per_cell BROTLI-MC-1KB_1024B",
+      "note": "Positive control trivial but passes; no falsifiable strong positive where failure expected."
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_correctness": {
+      "total_requests": 720,
+      "total_correctness_pass": 720,
+      "total_correctness_fail": 0,
+      "overall_correctness_rate": 1.0,
+      "match_producer": true,
+      "evidence": "result.json metrics.aggregate total_correctness_pass 720 total_requests 720 sum(per_cell total_requests) 720 sum(correctness_match_count) 720"
+    },
+    "per_cell_correctness_match_rate": {
+      "main_cells_24": "1.0 for all 24 cells (2 sizes x 3 types x 4 compressions each 20/20)",
+      "regression_6": "1.0 for all 6 regression cells (1KB) 120/120",
+      "identity_6": "1.0 for all 6 identity cells 120/120",
+      "silent_fallback_count": "0 for all 30 compressed cells (24 main +6 regression), decompression_error_count 0",
+      "match_producer": true,
+      "evidence": "result.json per_cell correctness_match_rate 1.0 and silent_fallback_count 0 for each listed cell; controls C_CORRECTNESS_MATCH pass_all_main true C_SILENT_FALLBACK pass true C_NO_ERRORS pass true"
+    },
+    "decision_rule_recomputed": {
+      "C1_correctness_match_rate_all_cells": true,
+      "C2_silent_fallback_0_all_cells": true,
+      "C3_regression_B_GZIP_MC_1KB_and_B_BROTLI_MC_1KB_100pct": true,
+      "C4_null_control_all_same_true": true,
+      "MEASUREMENT_INVALID_oracle_invalid": false,
+      "verdict_under_frozen_rule": "SURVIVES_CURRENT_TEST (all four conjuncts true per spec.json decision_rule)",
+      "producer_outcome": "SUPPORTS/COMPLETE",
+      "audit_agrees_on_rule": true,
+      "note": "Arithmetic SURVIVES is correct under frozen rule; dispute is not arithmetic but claim ceiling and representation validity, not decision_rule logic."
+    },
+    "compressed_size_recomputed": {
+      "observation": "Means dramatically smaller than prereg expectation; JSON brotli constant across 10x payload growth",
+      "examples": {
+        "JSON_BROTLI_Q4_10KB_mean": 76.75,
+        "JSON_BROTLI_Q4_100KB_mean": 76.75,
+        "JSON_GZIP_L1_10KB_mean": 152.5,
+        "JSON_GZIP_L1_100KB_mean": 553.5,
+        "HTML_GZIP_L1_100KB_mean": 1036.0,
+        "XML_GZIP_L1_100KB_mean": 1058.5,
+        "max_chunks": 34,
+        "min_chunks": 3,
+        "spec_predicted_10KB_chunks": "60-300+",
+        "spec_predicted_100KB_chunks": "600-1500+"
+      },
+      "independent_recompute": "Standalone gzip.compress/brotli.compress on generate_json_body(valid_token,10240) -> gzip1 163 gzip9 127 broQ4 94 broQ8 85 matches order of magnitude of result.json means (152,116,77,75 allowing per-state averaging). Confirms degenerate highly-compressible payload, not measurement error.",
+      "evidence": "result.json per_cell compressed_size_bytes; independent recomputation with same generators (see audit analysis)"
+    },
+    "decompressed_hash_variation_recomputed": "96/96 state-cell checks all_same true matches producer",
+    "baseline_B_RANDOM_recomputed": "0.0 for all main cells matches producer (degenerate baseline)"
+  },
+  "claim_ceiling": "Narrow localhost buffered-mock ceiling ONLY: iterative decompression (brotli->gzip->identity max_depth=5) produces byte-identical SHA256(decompressed)==SHA256(generate_*_body) for synthetic highly-redundant JSON/HTML/XML bodies of nominal 10KB/100KB (actual compressed 0.07-1.06KB, 3-34 chunks at chunk_size=32) across gzip levels 1/9 and brotli qualities 4/8 with multi-chunk Transfer-Encoding: chunked via Python buffering proxy that reassembles before decompression, 4 auth states, 5 reps/cell (720/720 correctness, 0 fallbacks, 0 errors, decompressed_hash all_same true, B-RANDOM 0.0). Does NOT establish: (a) robustness to realistic high-entropy web content where 100KB would compress to ~20-50KB/600-1500 chunks (parent unknown remains), (b) streaming incremental decompression across chunk boundaries (not exercised), (c) multi-layer stacked Content-Encoding, (d) real CDN behaviors (Accept-Encoding negotiation, cache/Vary, header manipulation, geographic latency, concurrency), (e) gzip levels 2-8 or brotli 5-7, binary types, production OAuth. The next required gate remains real-CDN correctness AND a high-entropy payload variant that achieves the originally motivated chunk stress.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35481773400/spec.json (frozen question hypothesis falsifier baselines decision_rule C1-C4)",
+    "research/experiments/EXP-RUNTIME-35481773400/prereg.md (test matrix 480 obs, baselines B-GZIP-MC-1KB B-BROTLI-MC-1KB B-IDENTITY B-RANDOM, scope NOT tested, validity threats chunk boundary threat)",
+    "research/experiments/EXP-RUNTIME-35481773400/result.json (aggregate 720/720 overall_correctness_rate 1.0, per_cell correctness_match_rate 1.0 for 36 cells, compressed_size_bytes means 76-1058, silent_fallback_count 0, decompression_error_count 0, controls C_CORRECTNESS_MATCH C_SILENT_FALLBACK C_REGRESSION_CONTROLS C_IDENTITY_BASELINE C_NULL_CONTROL C_B_RANDOM all pass)",
+    "research/experiments/EXP-RUNTIME-35481773400/report.md (executive summary SURVIVES_CURRENT_TEST 720/720, compressed size table, Key Finding 3 claim of 6-33 chunks)",
+    "research/experiments/EXP-RUNTIME-35481773400/run_experiment.py (generate_json_body 'x'*padding, generate_html_body padding_block, generate_xml_body padding_block, MockOAuthHandler gzip_level brotli_quality chunk_size 32, ReverseProxyHandler buffered read then re-chunk, decompress_body brotli->gzip max_depth 5, make_request resp.raw.read decode_content False, correctness_match vs expected_hash, silent_fallback logic)",
+    "research/experiments/EXP-RUNTIME-35481773400/provenance.json (python 3.12.14 brotli 1.2.0 PyJWT 2.14.0 seed 44 ports 8700/8800 chunk_size 32 max_depth 5)",
+    "research/experiments/EXP-RUNTIME-35470447407/handoff.json (parent established 240/240 gzip MC correctness, unknown larger payloads 100+ chunks, do_not_assume larger payloads untested, recommended_action either CDN or larger payload experiment)",
+    "research/experiments/EXP-RUNTIME-35481773400/freeze.json (hashes prereg a9bbe spec a26d request 0bc3 frozen_at 2026-09-20T01:43:25)",
+    "request.json (C-MEAS-VALID lane runtime parent_handoff EXP-RUNTIME-35470447407)"
+  ],
+  "unresolved": [
+    "Does decompression correctness hold for high-entropy non-redundant 10KB/100KB payloads where compressed sizes actually scale to 2-10KB and 20-50KB and span 60-1500+ chunks at 32 bytes, as originally motivated? Current synthetic 'x'*pad payload collapses brotli to constant 77 bytes making the intended stress untested.",
+    "Does correctness hold under true streaming incremental decompression where gzip/brotli symbols are parsed across chunk arrivals without full reassembly? Buffered proxy+requests reassembly masks chunk-boundary failures.",
+    "Does correctness hold for stacked multi-layer encodings (gzip->br, br->gzip) exercising max_depth>1? Only depth 1 tested.",
+    "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, multi-layer encoding, auth-aware cache/Vary, CDN header manipulation, geographic latency, and concurrency (parent inherited_next_question remains open)?",
+    "What are compression level extremes behavior for gzip 2-8 and brotli 5-7, and for binary/high-entropy content types beyond JSON/HTML/XML?"
+  ]
+}

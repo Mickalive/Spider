@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35476270440",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct result.json metrics.c1_pass_count from 3 to 2 and metrics.c1_pass_estimators to remove B-BAYESIAN-MODEL: recomputed from raw_results.json shows only B-KSG-CMI (|null|=0.01551) and B-LIKELIHOOD-RATIO (|null|=0.00452) pass C1; Bayesian |null|=213.7 fails threshold. Evidence raw_results.json screening.B-BAYESIAN-MODEL.null_control.abs_null_mean=213.73745304523501 and c1_pass=false.",
+    "Correct result.json controls.C1-NULL-CONTROL.observed string which claims '3/7 estimators pass C1: B-KSG-CMI, B-LIKELIHOOD-RATIO, B-BAYESIAN-MODEL (FAILS)' — internally contradictory and miscounts. Should read 2/7 pass C1 (KSG, LR).",
+    "Correct raw_results.json reason string 'C1: ALL 7 estimators have |null_mean| >= 0.1' which is factually false: raw shows 2 estimators with |null|<0.1. The frozen decision_rule priority distinguishes C1 (all fail null) from C3 (passers fail positive control); code conflates them via c1_failers = not c1_pass or not c3_pass. Verdict should cite C3 trigger (no estimator passes BOTH C1 and C3), not C1 trigger. Update provenance reason to match frozen spec decision_rule clause 2.",
+    "Redesign positive control for CMI estimators or adjust decision threshold: frozen C3 requires K3 >=1.0 bit and p<=0.001 on 8-state deterministic SPA. KSG achieves 0.01798 bits and LR 0.2412 bits, both with p=0.000999, failing only the bit threshold. For deterministic SPA, theoretical I(Y;A|Z)=H(Y|Z)=2 bits if estimator were sensitive, but KSG with sklearn mutual_info_classif discrete_features=True, k=5 and history encoding of length 3 (Z dimension 4 integers with START_TOKEN=-2) yields near-zero MI (mi_joint 0.058 vs mi_cond 0.065). This indicates estimator insensitivity to categorical history, not environment lacking signal. LR approx_mi = chi2/(2*n) is scale-mismatched (nats vs bits, history collapsed per-state). Threshold 1.0 bits derived from stratum PMI is inappropriate for CMI/chi2 scales. Required fix: define estimator-appropriate positive control (e.g., stochastic SPA where P(Y|Z,A) != P(Y|Z) with history-independent null, or separate thresholds: KSG >=0.5 bits, LR p<Bonferroni and chi2>critical, Bayesian log BF scale separate).",
+    "Fix Bayesian model comparison deviation from prereg: spec.json measurement_validity states 'Bayesian via pymc Dirichlet-Multinomial with variational inference' and spec baselines expected null_mean <0.1 on same bit scale. Executed implementation uses scipy analytical Dirichlet-Multinomial log marginal likelihood (provenance.json pymc_used false). Scale is log Bayes factor ~4904 bits (log_ml_full -6995 vs -11900) with null_mean -213.7 bits, not comparable to CMI bits. Either exclude Bayesian from |null|<0.1 comparison or convert to comparable effect size (e.g., delta BIC per record or posterior predictive CMI). Prereg deviation plan allowed fallback but requires explicit annotation in result.json validity_notes and decision_rule exclusion.",
+    "Apply Bonferroni correction as preregistered for 7 primary comparisons (alpha=0.00714): result.json and raw_results.json do not report Bonferroni-adjusted p-values for C1 null means; they report raw permutation p=0.001996 for all estimators ( (count_ge+1)/501 ). C3 permutation uses within-stratum url_after permutation for KSG/stratum/knn (N_PERM=1000) vs global shuffled-action for Bayesian/LR, mixing null hypotheses. Standardize to single preregistered shuffled-action null (action labels within session, N=500) for all estimators when testing C1, and separate positive-control permutation as documented.",
+    "Report N=50000 convergence (C4) for completeness: raw_transitions_n50000.json collected (N=50000, SHA a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51) but result.json omits convergence metrics (|K2(50000)-K2(5000)| <=0.2). Run_experiment.py computes convergence only if Phase 2 triggered (passers non-empty); since passers=[] it skips. For REVISE, compute and report convergence for KSG and LR to rule out finite-sample bias on null centering."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-c1_miscount_and_reason_false",
+      "severity": "critical",
+      "finding": "Producer result.json claims 3 estimators pass C1 including Bayesian (|mean|=213.7) and raw_results.json verdict reason claims ALL 7 fail null >=0.1, both contradicted by raw evidence: recomputed from raw_results.json B-KSG-CMI abs_null_mean 0.01551 pass, B-LIKELIHOOD-RATIO 0.00452 pass, Bayesian 213.7 fail, parent estimators 0.407-0.704 fail. C1 pass count is 2/7, not 3/7 or 0/7.",
+      "evidence": "raw_results.json:screening.B-KSG-CMI.null_control.abs_null_mean=0.015510497912178933 c1_pass=true; screening.B-LIKELIHOOD-RATIO.null_control.abs_null_mean=0.004521137448472015 c1_pass=true; screening.B-BAYESIAN-MODEL.null_control.abs_null_mean=213.73745304523501 c1_pass=false; result.json:metrics.c1_pass_count=3, c1_pass_estimators includes Bayesian; raw_output.txt lines 52-65",
+      "impact": "Overstates Bayesian null performance and mislabels verdict trigger; downstream DIRECTOR would carry forward incorrect pass count."
+    },
+    {
+      "id": "V2-positive_control_threshold_misspecification",
+      "severity": "critical",
+      "finding": "Frozen C3 threshold K3 >=1.0 bit is calibrated to stratum PMI on deterministic 8-state SPA (weighted PMI 1.805, equal 1.809, median 1.872, KNN 1.190) but is inappropriate for CMI/chi2 estimators. KSG CMI positive_control_k3=0.01798 bits (mi_joint 0.0397 mi_cond 0.0401) and LR approx_mi=0.2412 bits both have permutation p=0.000999 (significant) but fail bit threshold. Theoretical CMI on deterministic SPA with uniform actions is ~2 bits (H(Y|Z)=2, H(Y|Z,A)=0), so failure indicates estimator insensitivity, not environment lacking signal. Threshold conflates estimator families.",
+      "evidence": "spec.json:positive_control and decision_rule C3; result.json:metrics.screening_n5000.B-KSG-CMI.positive_control_k3=0.01798 c3_pass=false; B-LIKELIHOOD-RATIO.positive_control_k3=0.2412 c3_pass=false; raw_results.json screening.B-KSG-CMI.k3_info; run_experiment.py lines 335-354 (KSG), 481-567 (LR), 572-588 (POSITIVE_TRANSITIONS distinct per action)",
+      "impact": "FALSIFIED-IN-SETTING verdict via C3 is technically per frozen rule but scientifically uninterpretable; it does not falsify orthogonal frameworks, it reveals scale misspecification and KSG sensitivity tradeoff. Environment could not express 1.0-bit CMI effect with current KSG encoding."
+    },
+    {
+      "id": "V3-ksg_insensitivity_tradeoff",
+      "severity": "high",
+      "finding": "KSG achieves null centering (std 0.000206, 56x smaller than PMI) by being near-zero for all inputs: K2 -0.0068, K3 -0.0004, diff 0.0064 bits. Positive control 0.018 bits demonstrates inability to detect strong deterministic dependency. sklearn mutual_info_classif with discrete_features=True and n_neighbors=5 averages MI across features (Z dimension 4) independent of joint distribution, yielding low resolution for categorical history with 12 states. Null std 35x smaller than PMI suggests estimator variance dominated by discretization, not sampling.",
+      "evidence": "raw_results.json:screening.B-KSG-CMI.k2_value=-0.006801734091583904 k3_value=-0.00040458210893392493 mi_joint_raw_k2 0.05855155943916499 mi_cond_raw_k2 0.0653532935307489; null_std 0.0002061149188082711 vs B-WEIGHTED-PMI null_std 0.007267",
+      "impact": "Null centering achieved at cost of sensitivity; cannot test H2 K3-K2 >0.1 (observed diff 0.006). Unclear if alternative k or continuous encoding would preserve centering with sensitivity."
+    },
+    {
+      "id": "V4-likelihood_ratio_scale_and_history_collapse",
+      "severity": "high",
+      "finding": "LR estimator collapses history: per-state contingency tables ignore history (kind state vs action both give identical k2_value=k3_value=0.10442, k3_minus_k2=0), so K3-K2 is forced 0. Approx MI = chi2/(2*n) uses natural log expectation without bit conversion (should be chi2/(2*n*ln2)). Scale not comparable to PMI bits; threshold 1.0 bit unreachable. Positive control approx_mi 0.241 likewise history-collapsed.",
+      "evidence": "run_experiment.py:est_likelihood_ratio lines 481-567 builds state_tables keyed only by url_before, ignoring history; raw_results.json:screening.B-LIKELIHOOD-RATIO.k2_value=k3_value=0.10442004997356266; result.json:metrics.screening_n5000.B-LIKELIHOOD-RATIO.k3_minus_k2=0.0",
+      "impact": "LR cannot address conditional-on-history question (H2); null centering is trivially achieved because statistic averages over states, not strata."
+    },
+    {
+      "id": "V5-bayesian_scale_incomparability",
+      "severity": "high",
+      "finding": "Bayesian log Bayes factor scale (k2_value 4904.98, null_mean -213.7, std 13.45) is on log marginal likelihood scale, not bits of CMI. Comparing |null_mean|<0.1 bits is meaningless. Spec required Laplace alpha 1.0 comparability violated. Prereg deviation plan allowed MLE fallback but not off-scale comparison.",
+      "evidence": "result.json:metrics.screening_n5000.B-BAYESIAN-MODEL.log_bayes_factor=4904.988 delta_bic=-9663.89 n_full_params 144 n_reduced 124; provenance.json environment pymc_used false note analytical scipy",
+      "impact": "Bayesian should be excluded from C1 decision or recalibrated; including it in 'All 7 fail' inflates failure count."
+    },
+    {
+      "id": "V6-sampling_and_provenance_integrity",
+      "severity": "low",
+      "finding": "Sampling integrity intact: N=5000 (50 sessions x100 steps) SHA 46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512, N=50000 SHA a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51 matches recomputed, seed 42 deterministic, CANDIDATES 48/48 with 4 distinct candidates verified in raw_output. Stratum decomposition 398/1292 used (30.8% >=5 records) passes 30% threshold, 3 non-empty size buckets passes C7. Parent estimator replication within 0.001 bits confirms no regression.",
+      "evidence": "raw_results.json n_transitions, sha_inmemory, determinism_k2/k3, stratum_size_bias_decomposition 5-9 313 strata 1982 records null 0.736 etc; raw_output.txt [VERIFY] All 48 pairs PASS; provenance.json execution_checkpoint_sha 0661d0b4ac8cc2dbd7e7f4887c44007f7142addd",
+      "impact": "Supports that null bias replication is genuine, not artifact of sampling or determinism leakage."
+    },
+    {
+      "id": "V7-leakage_and_representation",
+      "severity": "low",
+      "finding": "No leakage: synthetic SPA with hash-routed CANDIDATES, no browser/network, action target_href leakage not applicable. Representation loss acknowledged: strata <5 records skipped (894/1292 K2 strata), but orthogonal estimators avoid stratum partitioning, which is the intended test. Encoding for KSG/LR uses integer URL/action indices with history_kind state/action, preserving prereg representation.",
+      "evidence": "run_experiment.py build_state_history_records/build_action_history_records; spec.json measurement_validity MIN_STRATUM_SIZE 5",
+      "impact": "Null bias monotonic size dependence (0.736 at 5-9 vs 0.369 at 20-49) correctly attributed to Laplace smoothing artifact, not deterministic mixing."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-WEIGHTED-PMI",
+      "finding": "Replicates parent exactly: null_mean 0.4070574334174484 (parent 0.407), std 0.007267 vs 0.007, K2 0.9332435964563089 (parent 0.933), K3 1.2205083083840709, K3-K2 0.287. Bias 56 sigma above threshold, confirms strong null bias. Baseline correctly fails C1 as expected 'bias persists'.",
+      "expected": "null_mean >=0.1 (bias persists)",
+      "observed": "0.407057 FAIL C1, positive control 1.805 PASS C3",
+      "evidence": "raw_results.json screening.B-WEIGHTED-PMI; result.json metrics.screening_n5000.B-WEIGHTED-PMI; stratum_size_bias_decomposition identical to parent 0.736/0.562/0.369"
+    },
+    {
+      "id": "B-EQUAL-WEIGHT-PMI",
+      "finding": "Replicates parent: null_mean 0.704217209837271, K2 1.49047 K3 1.44624 diff -0.044. Fails C1, passes C3 (1.809). Equal weighting increases bias vs weighted, confirming stratum size weighting matters.",
+      "expected": "null_mean >=0.1",
+      "observed": "0.704217 FAIL C1, 1.809 PASS C3",
+      "evidence": "raw_results.json screening.B-EQUAL-WEIGHT-PMI"
+    },
+    {
+      "id": "B-MEDIAN-PMI",
+      "finding": "Replicates parent: null_mean 0.6856105140572255, K2 1.51096 K3 1.47682. Fails C1, passes C3 (1.872). Median does not rescue bias.",
+      "expected": "null_mean >=0.1",
+      "observed": "0.68561 FAIL C1, 1.872 PASS C3",
+      "evidence": "raw_results.json screening.B-MEDIAN-PMI"
+    },
+    {
+      "id": "B-KNN-CMI",
+      "finding": "Replicates parent: null_mean -0.2619042294230531 (parent -0.262), K2 0.02335 K3 0.20314 diff 0.179. Negative bias opposite sign, still |mean|>=0.1, fails C1, passes C3 (1.190). KNN with k=5 alpha 1.0 does not solve bias, shows sign reversal indicates estimator-specific artifact.",
+      "expected": "null_mean may shift sign",
+      "observed": "-0.261904 FAIL C1, 1.190 PASS C3",
+      "evidence": "raw_results.json screening.B-KNN-CMI"
+    },
+    {
+      "id": "B-KSG-CMI",
+      "finding": "ORTHOGONAL: null_mean -0.015510497912178933 (|mean| 0.0155) PASSES C1 (26x below threshold, first estimator to center). But positive_control_k3 0.017983 FAILS C3 threshold 1.0, and K2/K3 near zero indicates insensitivity. Improvement over weighted PMI is 0.407/0.015=26x, but tradeoff with sensitivity. Baseline expectation 'null <0.1' supported for centering, but expectation 'positive control passes' fails, revealing threshold misspecification and estimator insensitivity.",
+      "expected": "null_mean <0.1 (orthogonal avoids partitioning)",
+      "observed": "PASSES C1 (0.0155), FAILS C3 (0.018 <1.0), K2 -0.0068 K3 -0.0004 diff 0.0064",
+      "evidence": "raw_results.json screening.B-KSG-CMI null_control and k2_info/k3_info; result.json metrics.screening_n5000.B-KSG-CMI"
+    },
+    {
+      "id": "B-BAYESIAN-MODEL",
+      "finding": "ORTHOGONAL: null_mean -213.73745304523501 (|mean| 213.7) FAILS C1 dramatically off-scale; positive_control 6985.03 passes C3 but scale incomparable. Log BF 4904.98 with delta BIC -9663.89 reflects posterior concentration, not CMI. Baseline expectation 'null <0.1' falsified for this implementation; framework inappropriate for CMI null test as executed.",
+      "expected": "null_mean <0.1 (model-based avoids plug-in)",
+      "observed": "FAILS C1 massively (-213.7), PASSES C3 (6985) but not bits",
+      "evidence": "raw_results.json screening.B-BAYESIAN-MODEL"
+    },
+    {
+      "id": "B-LIKELIHOOD-RATIO",
+      "finding": "ORTHOGONAL: null_mean 0.004521137448472015 (|mean| 0.0045) PASSES C1 (22x below threshold, best centering). Positive_control 0.2412 FAILS C3, but chi2 significant (p=0.000999, max chi2 1044). K2=K3 forced 0 diff due to history collapse. Baseline expectation 'null <0.1' supported for centering, but threshold and history collapse prevent Phase 2.",
+      "expected": "null_mean <0.1 (asymptotically unbiased)",
+      "observed": "PASSES C1 (0.0045), FAILS C3 (0.241 <1.0), K3-K2 0.0",
+      "evidence": "raw_results.json screening.B-LIKELIHOOD-RATIO; result.json metrics.screening_n5000.B-LIKELIHOOD-RATIO"
+    }
+  ],
+  "recomputed_metrics": {
+    "recomputed_null_means": {
+      "B-WEIGHTED-PMI": 0.4070574334174484,
+      "B-EQUAL-WEIGHT-PMI": 0.704217209837271,
+      "B-MEDIAN-PMI": 0.6856105140572255,
+      "B-KNN-CMI": -0.2619042294230531,
+      "B-KSG-CMI": -0.015510497912178933,
+      "B-BAYESIAN-MODEL": -213.73745304523501,
+      "B-LIKELIHOOD-RATIO": 0.004521137448472015
+    },
+    "recomputed_abs_null_means": {
+      "B-WEIGHTED-PMI": 0.4070574334174484,
+      "B-EQUAL-WEIGHT-PMI": 0.704217209837271,
+      "B-MEDIAN-PMI": 0.6856105140572255,
+      "B-KNN-CMI": 0.2619042294230531,
+      "B-KSG-CMI": 0.015510497912178933,
+      "B-BAYESIAN-MODEL": 213.73745304523501,
+      "B-LIKELIHOOD-RATIO": 0.004521137448472015
+    },
+    "recomputed_c1_pass": {
+      "B-WEIGHTED-PMI": false,
+      "B-EQUAL-WEIGHT-PMI": false,
+      "B-MEDIAN-PMI": false,
+      "B-KNN-CMI": false,
+      "B-KSG-CMI": true,
+      "B-BAYESIAN-MODEL": false,
+      "B-LIKELIHOOD-RATIO": true
+    },
+    "corrected_c1_pass_count": 2,
+    "corrected_c1_pass_estimators": ["B-KSG-CMI", "B-LIKELIHOOD-RATIO"],
+    "producer_c1_pass_count_claim": 3,
+    "producer_c1_pass_estimators_claim": ["B-KSG-CMI", "B-BAYESIAN-MODEL", "B-LIKELIHOOD-RATIO"],
+    "recomputed_positive_control_k3": {
+      "B-WEIGHTED-PMI": 1.8056238881521471,
+      "B-EQUAL-WEIGHT-PMI": 1.8098512278603744,
+      "B-MEDIAN-PMI": 1.872699737514802,
+      "B-KNN-CMI": 1.1908352763575794,
+      "B-KSG-CMI": 0.017983276396855374,
+      "B-BAYESIAN-MODEL": 6985.033421989236,
+      "B-LIKELIHOOD-RATIO": 0.2412
+    },
+    "recomputed_c3_pass": {
+      "B-WEIGHTED-PMI": true,
+      "B-EQUAL-WEIGHT-PMI": true,
+      "B-MEDIAN-PMI": true,
+      "B-KNN-CMI": true,
+      "B-KSG-CMI": false,
+      "B-BAYESIAN-MODEL": true,
+      "B-LIKELIHOOD-RATIO": false
+    },
+    "pass_both_c1_and_c3": [],
+    "pass_both_count": 0,
+    "frozen_decision_rule_evaluation": "FALSIFIED-IN-SETTING per clause 'C3 fails for any estimator passing C1' (KSG and LR pass C1 but fail C3), not per clause 'All 7 have |null|>=0.1' as producer states. No estimator survives both filters, so Phase 2 (K3-K2 >0.1 CI) not triggered, consistent with raw_results.json passers=[] and all_fail_c1=true under conflated definition.",
+    "recomputed_parent_replication": {
+      "weighted_null_diff_vs_parent": 0.0000574334174484,
+      "weighted_k2_diff": 0.0002435964563089,
+      "k3_k2_diff_weighted": 0.28726471192776193,
+      "stratum_size_bias_monotonic": "0.736382 (5-9, n=313) > 0.562315 (10-19, n=80) > 0.369152 (20-49, n=5) confirms Laplace smoothing artifact"
+    },
+    "ksg_sensitivity_gap": "positive_control 0.01798 vs expected ~2 bits for deterministic SPA indicates 100x insensitivity; null_std 0.000206 vs PMI 0.007 indicates variance collapse",
+    "lr_history_collapse": "k2_value == k3_value ==0.10442 forces diff 0, proving history ignored"
+  },
+  "claim_ceiling": "On the 12-state SHA256 hash-routed SPA with CANDIDATES 48/48 x4 distinct at N=5000 seed42, KSG CMI (sklearn mutual_info_classif k=5) achieves |shuffled-action null_mean|=0.0155±0.0002 bits and likelihood-ratio (chi2/(2n) approx) achieves 0.0045±0.0005 bits, both <0.1, breaking the 0.41-bit floor of weighted PMI (0.407±0.007) and replicating parent equal/median/KNN failures. No estimator achieves BOTH null centering and positive-control sensitivity K3>=1.0 bit on the 8-state deterministic SPA (KSG 0.018, LR 0.241, both p=0.000999 significant but below bit threshold; Bayesian off-scale -213 bits). Therefore beyond-Markov K3-K2 (>0.1 bits, CI>0) remains untested and the orthogonal-estimator pathway is not validated for detecting action-conditioned dynamics. The observed null centering demonstrates bias is specific to stratum-partitioned plug-in PMI with Laplace smoothing, not intrinsic to all estimators, but the tradeoff (KSG insensitivity, LR history collapse) prevents claiming the estimation-bias gap is closed. No inference to production Web dynamics, SPA/form-heavy sites, or BrowserState representations is supported. All data synthetic in-memory.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35476270440/raw_results.json:screening.*.null_control",
+    "research/experiments/EXP-PHYSICS-35476270440/raw_results.json:screening.B-KSG-CMI.k2_info,k3_info",
+    "research/experiments/EXP-PHYSICS-35476270440/raw_results.json:stratum_size_bias_decomposition",
+    "research/experiments/EXP-PHYSICS-35476270440/raw_output.txt:[VERIFY] All 48 (state, action) pairs have 4 distinct candidates: PASS",
+    "research/experiments/EXP-PHYSICS-35476270440/raw_output.txt:PHASE 1 estimator screening",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.screening_n5000",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.c1_pass_count (erroneous 3)",
+    "research/experiments/EXP-PHYSICS-35476270440/run_experiment.py:est_ksg_cmi, est_bayesian_model, est_likelihood_ratio",
+    "research/experiments/EXP-PHYSICS-35476270440/provenance.json:pymc_used false, execution_checkpoint_sha 0661d0b4ac8cc2dbd7e7f4887c44007f7142addd",
+    "research/experiments/EXP-PHYSICS-35476270440/spec.json:decision_rule, positive_control, baselines, measurement_validity",
+    "research/experiments/EXP-PHYSICS-35476270440/prereg.md:Hypotheses H0/H1/H2 and deviation plan",
+    "research/experiments/EXP-PHYSICS-35476270440/freeze.json:hashes prereg/spec/request",
+    "research/experiments/EXP-PHYSICS-35476270440/raw_transitions_n50000.json:SHA a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51"
+  ],
+  "unresolved": [
+    "Whether KSG CMI with different k (3 or 10), continuous distance encoding, or alternative CMI estimator (e.g., Kraskov with mixed discrete-continuous, or Ross 2014) can preserve |null|<0.1 while achieving positive-control K3 >>0.02 bits on deterministic SPA or on a stochastic SPA where P(Y|Z,A) != P(Y|Z).",
+    "Whether likelihood-ratio with history-aware stratification (state, history) rather than state-only collapse can yield history-dependent K3-K2 and still center null, and what bit-scale conversion (chi2/(2n ln2)) would make threshold comparable.",
+    "Whether Bayesian Dirichlet-Multinomial can be recalibrated (e.g., per-record average log BF, or WAIC/LOO, or posterior predictive p-value) to yield CMI-comparable null distribution, and whether different prior (asymmetric Dirichlet) reduces |null|=-213 bias.",
+    "Whether stochastic positive control SPA (e.g., 50% deterministic 50% uniform over CANDIDATES) where action genuinely changes P(Y|Z) would allow CMI estimators to demonstrate sensitivity with null centering preserved.",
+    "True sign and magnitude of I(S_next; A | S_current, history) on 12-state hash-routed SPA class, which cannot be determined because no estimator passes both null and sensitivity filters.",
+    "Generalization to production SPAs with stochastic transitions, richer DOM/accessibility state, and history dependence beyond hash label."
+  ]
+}
