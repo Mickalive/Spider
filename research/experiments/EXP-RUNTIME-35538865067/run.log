@@ -1,0 +1,124 @@
+PHASE 0: entropy preflight + payload build
+  JSON: len=10240 entropy=5.57 bits/byte
+  payload JSON_GZIP-OUTER: plain=10240B comp=3777B ce=gzip gt_ok=True
+  payload JSON_BROTLI-OUTER: plain=10240B comp=4271B ce=br gt_ok=True
+  HTML: len=10239 entropy=4.66 bits/byte
+  payload HTML_GZIP-OUTER: plain=10239B comp=2752B ce=gzip gt_ok=True
+  payload HTML_BROTLI-OUTER: plain=10239B comp=2950B ce=br gt_ok=True
+  BINARY: len=10240 entropy=7.69 bits/byte
+  payload BINARY_GZIP-OUTER: plain=10240B comp=9930B ce=gzip gt_ok=True
+  payload BINARY_BROTLI-OUTER: plain=10240B comp=9902B ce=br gt_ok=True
+origin up on 127.0.0.1:18791
+starting cloudflared quick tunnel ...
+PHASE 0: entropy preflight + payload build
+  JSON: len=10240 entropy=5.57 bits/byte
+  payload JSON_GZIP-OUTER: plain=10240B comp=3777B ce=gzip gt_ok=True
+  payload JSON_BROTLI-OUTER: plain=10240B comp=4271B ce=br gt_ok=True
+  HTML: len=10239 entropy=4.66 bits/byte
+  payload HTML_GZIP-OUTER: plain=10239B comp=2752B ce=gzip gt_ok=True
+  payload HTML_BROTLI-OUTER: plain=10239B comp=2950B ce=br gt_ok=True
+  BINARY: len=10240 entropy=7.69 bits/byte
+  payload BINARY_GZIP-OUTER: plain=10240B comp=9926B ce=gzip gt_ok=True
+  payload BINARY_BROTLI-OUTER: plain=10240B comp=9902B ce=br gt_ok=True
+origin up on 127.0.0.1:18791
+starting cloudflared quick tunnel ...
+PHASE 0: entropy preflight + payload build
+  JSON: len=10240 entropy=5.57 bits/byte
+  payload JSON_GZIP-OUTER: plain=10240B comp=3777B ce=gzip gt_ok=True
+  payload JSON_BROTLI-OUTER: plain=10240B comp=4271B ce=br gt_ok=True
+  HTML: len=10239 entropy=4.66 bits/byte
+  payload HTML_GZIP-OUTER: plain=10239B comp=2752B ce=gzip gt_ok=True
+  payload HTML_BROTLI-OUTER: plain=10239B comp=2950B ce=br gt_ok=True
+  BINARY: len=10240 entropy=7.69 bits/byte
+  payload BINARY_GZIP-OUTER: plain=10240B comp=9926B ce=gzip gt_ok=True
+  payload BINARY_BROTLI-OUTER: plain=10240B comp=9902B ce=br gt_ok=True
+origin up on 127.0.0.1:18791
+starting cloudflared quick tunnel ...
+tunnel URL: https://scott-blink-consult-designated.trycloudflare.com
+Traceback (most recent call last):
+  File "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35538865067/run_experiment.py", line 627, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35538865067/run_experiment.py", line 461, in main
+    r = raw_get(cdn_base + "/health", accept_encoding=None, timeout=20)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35538865067/run_experiment.py", line 325, in raw_get
+    conn = http.client.HTTPSConnection(pu.host, pu.port or 443, timeout=timeout)
+                                       ^^^^^^^
+AttributeError: 'ParseResult' object has no attribute 'host'
+PHASE 0: entropy preflight + payload build
+  JSON: len=10240 entropy=5.57 bits/byte
+  payload JSON_GZIP-OUTER: plain=10240B comp=3777B ce=gzip gt_ok=True
+  payload JSON_BROTLI-OUTER: plain=10240B comp=4271B ce=br gt_ok=True
+  HTML: len=10239 entropy=4.66 bits/byte
+  payload HTML_GZIP-OUTER: plain=10239B comp=2752B ce=gzip gt_ok=True
+  payload HTML_BROTLI-OUTER: plain=10239B comp=2950B ce=br gt_ok=True
+  BINARY: len=10240 entropy=7.69 bits/byte
+  payload BINARY_GZIP-OUTER: plain=10240B comp=9926B ce=gzip gt_ok=True
+  payload BINARY_BROTLI-OUTER: plain=10240B comp=9902B ce=br gt_ok=True
+origin up on 127.0.0.1:18791
+starting cloudflared quick tunnel ...
+tunnel URL: https://periodic-moisture-gsm-batch.trycloudflare.com
+CDN reachable after 3 probes (rt=412.9ms)
+PHASE 1: B-LOCALHOST-DIRECT (localhost, 48 cells x 5)
+  localhost: 240/240 correct
+PHASE 2: CDN main matrix (48 cells x 5, jitter 200-500ms)
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-none: 0/5 correct
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-gzip: 5/5 correct
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-br: 0/5 correct
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-both: 5/5 correct
+  CDN_JSON_GZIP-OUTER_chunk32_ae-none: 0/5 correct
+  CDN_JSON_GZIP-OUTER_chunk32_ae-gzip: 5/5 correct
+  CDN_JSON_GZIP-OUTER_chunk32_ae-br: 0/5 correct
+  CDN_JSON_GZIP-OUTER_chunk32_ae-both: 5/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-none: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-gzip: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-br: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-both: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-none: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-gzip: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-br: 0/5 correct
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-both: 0/5 correct
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-none: 0/5 correct
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-gzip: 5/5 correct
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-br: 0/5 correct
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-both: 5/5 correct
+  CDN_HTML_GZIP-OUTER_chunk32_ae-none: 0/5 correct
+  CDN_HTML_GZIP-OUTER_chunk32_ae-gzip: 5/5 correct
+  CDN_HTML_GZIP-OUTER_chunk32_ae-br: 0/5 correct
+  CDN_HTML_GZIP-OUTER_chunk32_ae-both: 5/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-none: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-gzip: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-br: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-both: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-none: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-gzip: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-br: 0/5 correct
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-both: 0/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-none: 0/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-gzip: 5/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-br: 0/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-both: 5/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-none: 0/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-gzip: 5/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-br: 0/5 correct
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-both: 5/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-none: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-gzip: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-br: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-both: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-none: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-gzip: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-br: 0/5 correct
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-both: 0/5 correct
+PHASE 3: CDN cache stability (6 payloads x 3 consecutive)
+  JSON_GZIP-OUTER: raw_same=True dec_same=True all_correct=True cf=DYNAMIC
+  JSON_BROTLI-OUTER: raw_same=True dec_same=True all_correct=False cf=DYNAMIC
+  HTML_GZIP-OUTER: raw_same=True dec_same=True all_correct=True cf=DYNAMIC
+  HTML_BROTLI-OUTER: raw_same=True dec_same=True all_correct=False cf=DYNAMIC
+  BINARY_GZIP-OUTER: raw_same=True dec_same=True all_correct=True cf=DYNAMIC
+  BINARY_BROTLI-OUTER: raw_same=True dec_same=True all_correct=False cf=DYNAMIC
+PHASE 4: B-CDN-IDENTITY (3 types x 5 via CDN)
+  identity via CDN: 5/15 correct
+wrote 513 rows -> /home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35538865067/raw_cell_results.jsonl
+wall_time_s=151.6

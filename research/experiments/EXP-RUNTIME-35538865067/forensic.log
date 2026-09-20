@@ -1,0 +1,41 @@
+building payloads
+origin up
+tunnel https://cos-exciting-corp-jvc.trycloudflare.com
+reachable
+  JSON_GZIP-OUTER ae=both: identical=True ce=gzip dlen=3777
+  JSON_GZIP-OUTER ae=gzip: identical=True ce=gzip dlen=3777
+  JSON_GZIP-OUTER ae=br: identical=False ce=None dlen=3754
+  JSON_GZIP-OUTER ae=none: identical=False ce=None dlen=3754
+  JSON_BROTLI-OUTER ae=both: identical=False ce=gzip dlen=4290
+  JSON_BROTLI-OUTER ae=gzip: identical=False ce=gzip dlen=4290
+  JSON_BROTLI-OUTER ae=br: identical=False ce=None dlen=4267
+  JSON_BROTLI-OUTER ae=none: identical=False ce=None dlen=4267
+  JSON_IDENTITY ae=both: identical=False ce=gzip dlen=3999
+  JSON_IDENTITY ae=gzip: identical=False ce=gzip dlen=3999
+  JSON_IDENTITY ae=br: identical=True ce=None dlen=10240
+  JSON_IDENTITY ae=none: identical=True ce=None dlen=10240
+  HTML_GZIP-OUTER ae=both: identical=False ce=gzip dlen=2759
+  HTML_GZIP-OUTER ae=gzip: identical=False ce=gzip dlen=2759
+  HTML_GZIP-OUTER ae=br: identical=False ce=None dlen=2729
+  HTML_GZIP-OUTER ae=none: identical=False ce=None dlen=2729
+  HTML_BROTLI-OUTER ae=both: identical=False ce=gzip dlen=2976
+  HTML_BROTLI-OUTER ae=gzip: identical=False ce=gzip dlen=2976
+  HTML_BROTLI-OUTER ae=br: identical=False ce=None dlen=2946
+  HTML_BROTLI-OUTER ae=none: identical=False ce=None dlen=2946
+  HTML_IDENTITY ae=both: identical=False ce=gzip dlen=2803
+  HTML_IDENTITY ae=gzip: identical=False ce=gzip dlen=2803
+  HTML_IDENTITY ae=br: identical=True ce=None dlen=10239
+  HTML_IDENTITY ae=none: identical=True ce=None dlen=10239
+  BINARY_GZIP-OUTER ae=both: identical=True ce=gzip dlen=9926
+  BINARY_GZIP-OUTER ae=gzip: identical=True ce=gzip dlen=9926
+  BINARY_GZIP-OUTER ae=br: identical=False ce=None dlen=9928
+  BINARY_GZIP-OUTER ae=none: identical=False ce=None dlen=9928
+  BINARY_BROTLI-OUTER ae=both: identical=False ce=None dlen=9898
+  BINARY_BROTLI-OUTER ae=gzip: identical=False ce=None dlen=9898
+  BINARY_BROTLI-OUTER ae=br: identical=False ce=None dlen=9898
+  BINARY_BROTLI-OUTER ae=none: identical=False ce=None dlen=9898
+  BINARY_IDENTITY ae=both: identical=True ce=None dlen=10240
+  BINARY_IDENTITY ae=gzip: identical=True ce=None dlen=10240
+  BINARY_IDENTITY ae=br: identical=True ce=None dlen=10240
+  BINARY_IDENTITY ae=none: identical=True ce=None dlen=10240
+wrote 36 forensic rows

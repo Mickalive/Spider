@@ -1,0 +1,151 @@
+{
+  "experiment_id": "EXP-RUNTIME-35538865067",
+  "seed": 44,
+  "target_size": 10240,
+  "payloads": {
+    "JSON_GZIP-OUTER": {
+      "content_type": "JSON",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3777,
+      "compressed_sha256": "f65a266a280ae3b9b4d0f3a73ca26df1b66c621a269187f2b76aaa527a10c7ba",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "JSON_BROTLI-OUTER": {
+      "content_type": "JSON",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 4271,
+      "compressed_sha256": "3fd7d4964640825b842eb4984cdd8a1805d0672c68f5fe0e2afaf9d79cee0f85",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "HTML_GZIP-OUTER": {
+      "content_type": "HTML",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2752,
+      "compressed_sha256": "38138b2a559a51590e319f55e560b41eecbeda6d0fdbb959cb205689a11ae56e",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "HTML_BROTLI-OUTER": {
+      "content_type": "HTML",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2950,
+      "compressed_sha256": "e0b4d9ac70a0229c5d2e9ab3d4249621e8410b58b4f821ab5de3e4c62e8f0c5f",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "BINARY_GZIP-OUTER": {
+      "content_type": "BINARY",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "3429f97ed103a2af8af7f3e70e67e29eeaf6c7575458848378e8aa1f32ea6ee7",
+      "compressed_len": 9926,
+      "compressed_sha256": "e53a4c5cc1955d1b9f0f0af399fccbc0d14046b39bd3e5465224f0e519e1b529",
+      "ground_truth_sha256": "3429f97ed103a2af8af7f3e70e67e29eeaf6c7575458848378e8aa1f32ea6ee7"
+    },
+    "BINARY_BROTLI-OUTER": {
+      "content_type": "BINARY",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "3429f97ed103a2af8af7f3e70e67e29eeaf6c7575458848378e8aa1f32ea6ee7",
+      "compressed_len": 9902,
+      "compressed_sha256": "29152be4c96bd1f8cdca1866f03289a83c9b94bb7505d44caa82fb268a79164a",
+      "ground_truth_sha256": "3429f97ed103a2af8af7f3e70e67e29eeaf6c7575458848378e8aa1f32ea6ee7"
+    },
+    "JSON_IDENTITY": {
+      "content_type": "JSON",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "HTML_IDENTITY": {
+      "content_type": "HTML",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "BINARY_IDENTITY": {
+      "content_type": "BINARY",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10240,
+      "plain_sha256": "3429f97ed103a2af8af7f3e70e67e29eeaf6c7575458848378e8aa1f32ea6ee7"
+    }
+  },
+  "tunnel_url": "https://periodic-moisture-gsm-batch.trycloudflare.com",
+  "origin": "http://127.0.0.1:18791",
+  "n_rows": 513
+}
