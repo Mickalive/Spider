@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION limitation resolved at the in-process decompressor API layer: brotli.Decompressor().process(chunk) and gzip.GzipFile.read(CHUNK_SIZE) produce byte-identical SHA256 output to full-body decompression across 480 multi-layer streaming observations (24 cells x 5 reps x 4 states), 240 regression, 120 identity — 840/840 correct, 0 errors, 0 silent fallbacks (audit PASS). Claim ceiling bounded to Python 3.12.14, brotli 1.2.0, stdlib gzip, in-process only, equal chunk sizes for outer/inner layers, sequential unwrapping, high-entropy payloads at 10KB/100KB nominal under GZIP-THEN-BROTLI and BROTLI-THEN-GZIP (depth 2 only). V2 identity baseline is tautological (passthrough, not via decompressor API). Real CDN infrastructure remains the mandatory remaining gate. Status remains EXPERIMENTAL because CDN correctness, payloads >100KB, depths 3-5, mixed chunk sizes, and cross-run reproducibility are unresolved."
+    }
+  ],
+  "product_action": "None — CDN correctness gate remains open. Streaming decompressor API correctness validated on localhost; real CDN testing required before Product Core readiness.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+  "reason": "All five frozen decision rule conditions pass: C1 streaming==fullbody 480/480, C2 streaming==expected 480/480, C3 single-layer regression 240/240 gzip + 240/240 brotli, C4 null control all_same=true, C5 compressed size 3/3 types meet thresholds. Audit PASS confirms all recomputed metrics match producer. However, the claim ceiling is strictly bounded: in-process decompressor API layer only (no HTTP, no network, no CDN), depth 2 stacked encodings only, equal chunk sizes, Python 3.12.14 + brotli 1.2.0. The inherited parent question about real CDN infrastructure is the sole remaining blocker for C-MEAS-VALID Product Core readiness and has not been addressed by this experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35530588298/spec.json:d8dc6bee — frozen decision_rule C1-C5, hypothesis, falsifier",
+    "research/experiments/EXP-RUNTIME-35530588298/result.json — 840/840 correct, all controls pass, streaming_equals_fullbody 480/480, compressed sizes 2612-98730 bytes",
+    "research/experiments/EXP-RUNTIME-35530588298/raw_cell_results.json:916b8f03 — per-cell raw observations 840",
+    "research/experiments/EXP-RUNTIME-35530588298/audit.json — PASS, producer_claim_supported=true, V1-V8 findings, claim_ceiling bounded",
+    "research/experiments/EXP-RUNTIME-35530588298/report.md — Claim ceiling bounded to in-process decompressor API, identity tautological, CDN gate open",
+    "research/experiments/EXP-RUNTIME-35522287921/handoff.json:23f37576 — parent carry_forward, V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION as next question",
+    "codex/claim_state.json — C-MEAS-VALID claim history"
+  ]
+}
