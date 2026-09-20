@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35538864957",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After fixing C1 behavioral detection control to exclude 304 responses (consistent with primary metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800 — and does the C1 fix also resolve the parent audit's reporting inconsistency (C2/C7 including 304s)?",
+  "why_next": "The frozen FALSIFIES outcome is driven by a single measurement validity issue (C1 includes 304s in behavioral TN calculation), not by scientific evidence against orthogonality. The primary orthogonality metric (r=-0.0585, CI upper 0.0163 < 0.15, TOST p~0) independently confirms orthogonality on distributed infrastructure. Fixing C1 to exclude 304s (consistent with primary metric's 304 exclusion) should resolve the conjunctive rule failure and also address the parent audit's reporting inconsistency (C2/C7 304 inclusion). The distributed testbed infrastructure is sound and reusable. The n>=800 target (688 achieved) should be met in the re-run.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS orthogonality at delta=0.15 SUPPORTED by primary metric on distributed 2-node Flask testbed: stratified pooled r=-0.0585, 95% CI [-0.1327, 0.0163], CI upper 0.0163 < 0.15, TOST p_upper=2.03e-08, n_non304=688 (audit PASS on primary metric recomputation).",
+      "C-FRESHNESS orthogonality CONFIRMED on LOCAL testbed (parent EXP-GRAPH-35530590140: r=0.0410, CI upper 0.116, TOST p_upper=0.002, n_non304=684, C1-C7 all PASS).",
+      "Distributed infrastructure does not introduce behavioral-structural coupling: distributed r=-0.0585 is directionally consistent with LOCAL r=0.041 (delta=0.107, within noise).",
+      "B-CONCURRENT (N=5 concurrent client sessions): stratified r=-0.0319, n=816 — concurrent load does not introduce coupling.",
+      "B-CONFOUND-DISTRIBUTED negative control passes: |r|=0.8855 >= 0.15, confirming V2 confound is genuine in distributed setting.",
+      "B-LOCAL-ONLY baseline (C6): |r|=0.0471 < 0.15, no regression from parent (parent r=0.041).",
+      "Distributed testbed architecture verified: 2 independent Flask nodes (ports 18971, 18972) with independent SQLite DBs, independent in-memory CDN caches, independent ETag generation, round-robin routing.",
+      "V1 UUID fix (uuid4 for all status codes) and V_ETAG permission leakage fix applied and verified.",
+      "C5 cache heterogeneity check passes: |r_enabled - r_disabled|=0.0425 < 2*SE_pooled.",
+      "6 prior localhost mock experiments (r=0.002-0.046) consistent with LOCAL r=0.041 and DISTRIBUTED r=-0.0585 — orthogonality signal robust across infrastructure topologies."
+    ],
+    "rejected": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — not warranted: C1 measurement validity issue prevents CONFIRMED status; claim ceiling bounded to LOCAL production-like regime at delta=0.15 only.",
+      "Frozen CONFIRMED outcome from parent constitutes evidence for production deployment — claim ceiling bounded to LOCAL testbed only.",
+      "Simple-pooled pooled r as measure of orthogonality — biased by endpoint heterogeneity; stratified pooling correct.",
+      "HTTP caching as common cause raising |r| above 0.15 — seven experiments show orthogonality under caching (r=0.002-0.058).",
+      "Body-inclusive structural signals as orthogonal to behavioral — V1 error body confound fixed (headers-only extraction).",
+      "B-PARENT-CONFOUND V1 confound design (token_hex-vs-uuid4) — fragile under 304 exclusion; V2 redesign with fixed 'expired' request_id resolves."
+    ],
+    "unknown": [
+      "Whether C-FRESHNESS orthogonality at delta=0.15 achieves CONFIRMED status on distributed infrastructure after C1 304-exclusion fix.",
+      "Whether orthogonality holds on actual distributed production infrastructure with real CDN hierarchies (multi-node cache invalidation on session state change).",
+      "Whether concurrent client load (N>=50 parallel sessions) changes correlation structure (tested at N=5 only).",
+      "Whether the result generalizes to non-Flask frameworks (Django, FastAPI, Express).",
+      "Whether headers-only structural signal captures sufficient variation for production use vs body-inclusive signals.",
+      "Whether per-cache heterogeneity is systematic or sampling noise.",
+      "Whether delta=0.10 is achievable at n_non304>=1200 (CI half-width <=0.05)."
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — status remains EXPERIMENTAL with bounded LOCAL confirmation and distributed primary-metric support.",
+      "The frozen FALSIFIES outcome constitutes scientific falsification of orthogonality — the C1 failure is measurement-confounded (304 inclusion in behavioral detection control), not evidence against orthogonality.",
+      "n_non304>=800 requirement satisfied — achieved 688, 112 short. Distributed testbed infrastructure is sound but sample size below frozen question target.",
+      "Orthogonality holds on real distributed production infrastructure — tested only on 2-node Flask in-memory CDN simulation.",
+      "Testbed CDN simulation represents production CDN behavior — single-node Flask in-memory cache per node.",
+      "The V2 confound (fixed 'expired' request_id) generalizes to other confound mechanisms — tested only on request_id entropy zeroing.",
+      "Headers-only structural signal is sufficient for production — validated only on LOCAL and distributed testbeds with controlled response headers.",
+      "Concurrent load N>=50 produces same result as N=5 — only N=5 tested.",
+      "Non-Flask frameworks preserve orthogonality — untested."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35538864957/result.json -- COMPLETE, outcome=FALSIFIES per C1 failure, primary metric valid r=-0.0585",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json -- REVISE, producer_claim_supported=false, C1 measurement validity issue, primary metric recomputation PASS",
+    "research/experiments/EXP-GRAPH-35538864957/raw_evidence/experiment_data.json -- 4 conditions, n_non304=688 distributed",
+    "research/experiments/EXP-GRAPH-35538864957/spec.json -- frozen decision_rule C1-C7, falsifier, measurement_validity",
+    "research/experiments/EXP-GRAPH-35538864957/provenance.json -- distributed testbed architecture, environment",
+    "research/experiments/EXP-GRAPH-35530590140/handoff.json -- parent CONFIRMED on LOCAL, carry_forward established/rejected/unknown/do_not_assume",
+    "research/experiments/EXP-GRAPH-35530590140/result.json -- parent C1-C7 PASS, stratified r=0.0410",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json -- parent audit REVISE, claim_ceiling bounded LOCAL"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35538864957/result.json:metrics.dist_stratified_pooled_r=-0.0585, dist_tost_at_delta_015.pass=true, c1 controls TN=0.6863",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:claim_ceiling='orthogonality holds on 2-node distributed Flask at delta=0.15, C1 needs 304-exclusion fix'",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:recomputed_metrics.c1_mean_valid_tn_no_304s=1.0, b_distributed_stratified_r=-0.0585",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:validity_findings[0]='C1 MEASUREMENT VALIDITY THREAT: 304 inclusion causes false TN'",
+    "research/experiments/EXP-GRAPH-35538864957/spec.json:decision_rule C1-C7, measurement_validity 304 EXCLUSION",
+    "research/experiments/EXP-GRAPH-35538864957/raw_evidence/experiment_data.json:sha256=da89aed2f3a4b514b818e62add7601a8db480c9f606cee0bf5eacee0b6e85036",
+    "research/experiments/EXP-GRAPH-35530590140/handoff.json:parent carry_forward established/rejected/unknown/do_not_assume",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:metrics.stratified_pooled_r=0.0410, controls C1-C7 all PASS",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json:claim_ceiling bounded LOCAL, n=684 < 800"
+  ],
+  "recommended_action": "One follow-up experiment needed: (1) C1 FIX AND RE-RUN: Fix C1 behavioral detection control to exclude 304 responses from TP/TN calculation (consistent with primary metric's 304 exclusion and measurement_validity clause 304 EXCLUSION). Re-run distributed experiment with n_non304>=800 to achieve CONFIRMED status. The C1 fix should also resolve the parent audit's reporting inconsistency (C2/C7 including 304s). The distributed testbed infrastructure is verified sound; only the C1 calculation and sample size need updating. (2) After C1 fix CONFIRMED, consider power increase to n_non304>=1200 for delta=0.10 equivalence (CI half-width <=0.05). Prioritize C1 fix over delta=0.10 because CONFIRMED at delta=0.15 is the minimum gate for product-relevant deployment decisions."
+}

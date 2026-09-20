@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35538864957",
+  "lane": "graph",
+  "github_run_id": "35538864957",
+  "base_sha": "4fba76910065b12b84e998fb071fd3b07a37434e",
+  "pre_execute_sha": "7a091bfa938d744dfe65d3e18f6e31f241a176d7",
+  "code_files": {
+    "testbed_server.py": "685422db47de7d43f8af1775aa5a231657b20c9b43bf5f6d6694c2ca30a8947f",
+    "testbed_server_v2.py": "0725fcac6201f18099744525accca5d7e2a61809b85b5200863f4c2ee60db3d9",
+    "flask_only_server.py": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "run_experiment_distributed.py": "0309c427ed905c785a31b3292c32e656b67bbf36224d083e07e0e23ca38b8231"
+  },
+  "raw_evidence": {
+    "path": "raw_evidence/experiment_data.json",
+    "sha256": "da89aed2f3a4b514b818e62add7601a8db480c9f606cee0bf5eacee0b6e85036"
+  },
+  "parent_experiment": "EXP-GRAPH-35530590140",
+  "server_scripts": {
+    "testbed_server.py": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35530590140/testbed_server.py",
+    "testbed_server_v2.py": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35530590140/testbed_server_v2.py",
+    "flask_only_server.py": "/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35530590140/flask_only_server.py"
+  },
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "flask_version": "3.1.3",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "requests_version": "2.34.2"
+  },
+  "conditions_executed": {
+    "B-LOCAL-ONLY": {
+      "port": 18970,
+      "db": "/tmp/testbed_local_35538864957.db"
+    },
+    "B-DISTRIBUTED": {
+      "node_a": {
+        "port": 18971,
+        "db": "/tmp/testbed_dist_a_35538864957.db"
+      },
+      "node_b": {
+        "port": 18972,
+        "db": "/tmp/testbed_dist_b_35538864957.db"
+      }
+    },
+    "B-CONCURRENT": {
+      "port": 18973,
+      "db": "/tmp/testbed_conc_35538864957.db",
+      "concurrency": 5
+    },
+    "B-CONFOUND-DISTRIBUTED": {
+      "node_a": {
+        "port": 18974,
+        "db": "/tmp/testbed_conf_a_35538864957.db"
+      },
+      "node_b": {
+        "port": 18975,
+        "db": "/tmp/testbed_conf_b_35538864957.db"
+      }
+    }
+  }
+}

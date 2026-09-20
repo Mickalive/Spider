@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35538865067",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does encoding-agnostic iterative decompression (sniff delivered Content-Encoding or try brotli→gzip→identity until SHA256 matches ground truth) restore byte-identical correctness through Cloudflare CDN for all 48 payload×order×chunk×Accept-Encoding conditions — and does it generalize to depths 3-5 and payloads >100KB?",
+  "why_next": "The frozen fixed-origin-order decompression hypothesis is FALSIFIED on real CDN (60/240 = 25% correct) due to Cloudflare Accept-Encoding negotiation (gunzip, de-brotli, silent re-encode, identity gzip-compress). However, the forensic probe (24/24 JSON/HTML recovery via encoding-agnostic iterative decode) bounds the damage and identifies a specific fix: snif delivered bytes and try brotli→gzip→identity until SHA256 matches ground truth, rather than replaying the origin's layer stack. This fix has high probability of success (100% on forensic deliveries) and, if validated, closes the CDN gate for C-MEAS-VALID Product Core promotion. The localhost decompression chain (three layers, 840/840) is untouched.",
+  "carry_forward": {
+    "established": [
+      "CDN byte-identity hypothesis FALSIFIED for fixed-origin-order iterative decompression: Cloudflare free-tier CDN Accept-Encoding negotiation transforms origin encoding (gunzip when client omits gzip, always de-brotli origin brotli, silent re-encode under unchanged header, gzip-compress identity text) — 60/240 correct (25%), only GZIP-OUTER with client AE containing gzip passes (EXP-RUNTIME-35538865067, audit PASS)",
+      "Positive control B-LOCALHOST-DIRECT validates environment: 240/240 streaming decompressions byte-identical to ground truth, 240/240 raw-byte passthrough, 0 transport errors (EXP-RUNTIME-35538865067)",
+      "CDN cache stability: 6/6 triplets byte-stable across 1s-spaced reps; cf-cache-status DYNAMIC on all 273 CDN responses, no HIT observed — consecutive-serve stability established, stale-cache serving untested (EXP-RUNTIME-35538865067)",
+      "Encoding-agnostic iterative full-body decode (try brotli→gzip→identity until SHA256 matches ground truth) recovers ground truth on 24/24 JSON/HTML forensic CDN deliveries despite CDN transforms — exploratory, not a frozen condition (EXP-RUNTIME-35538865067 forensic probe)",
+      "CDN does not corrupt bytes; the failure is in the fixed-origin-order framing assumption, not data integrity (EXP-RUNTIME-35538865067 forensic diagnostic)",
+      "No chunk-size effect: 8192 vs 32 byte feed granularity agree on all 48 CDN cells (EXP-RUNTIME-35538865067)",
+      "Iterative decompression correctness on localhost for high-entropy non-redundant payloads with multi-layer stacked encodings: 240/240 multi-layer correctness, 120/120 single-layer regression, 120/120 identity (EXP-RUNTIME-35513777099, audit REVISE with ceiling bounded)",
+      "Streaming incremental decompression at the HTTP Transfer-Encoding framing layer produces byte-identical SHA256 output to buffered ground truth: 480/480 (EXP-RUNTIME-35522287921, audit PASS)",
+      "True incremental decompressor streaming produces byte-identical output to full-body decompression: brotli.Decompressor().process(chunk) and gzip.GzipFile.read(CHUNK_SIZE) both SHA256-identical to full-body across 480 multi-layer observations, 840/840 total (EXP-RUNTIME-35530588298, audit PASS)",
+      "High-entropy payload generators validated: JSON (5.57 bits/byte), HTML (4.66 bits/byte), Binary (7.69 bits/byte) — all above 3.5 bits/byte Shannon threshold (EXP-RUNTIME-35495699298)"
+    ],
+    "rejected": [
+      "CDN preserves origin Content-Encoding and serves compressed bytes byte-identical — rejected: Cloudflare transparently re-encodes based on client Accept-Encoding",
+      "Fixed-origin-order iterative decompression (replay origin's layer stack against wire bytes) works through CDN — rejected on 180/240 observations",
+      "Silent fallback to compressed bytes as explanation for preserved correctness — rejected across 840 localhost observations with 0 fallbacks confirmed",
+      "Gzip/brotli chunk boundaries corrupt multi-byte symbols at chunk_size=32 for payloads up to 3087 chunks — rejected on high-entropy multi-layer payloads",
+      "Streaming chunked forwarding at the HTTP Transfer-Encoding layer corrupts decompression input — rejected across 840 observations",
+      "Degenerate synthetic payloads (x*pad) adequately test chunk-boundary stress — rejected; high-entropy payloads required"
+    ],
+    "unknown": [
+      "Does encoding-agnostic iterative decompression (sniff + try brotli→gzip→identity) restore 240/240 correctness through Cloudflare CDN across all conditions?",
+      "Does encoding-agnostic decompression generalize to depths 3-5, payloads >100KB, other quality/level settings, and concurrent clients?",
+      "Does CDN cache HIT staleness (cf-cache-status=HIT) cause different decompression behavior than consecutive-serve stability (DYNAMIC)?",
+      "Do other CDN providers (Fastly, Akamai, CloudFront), paid-tier behaviors, HTTP/2-vs-HTTP/1.1, or geographic edge distribution affect correctness?",
+      "Cross-run BINARY ground truth reproducibility across interpreter sessions with different PYTHONHASHSEED",
+      "Does correctness hold for mixed chunk-size pipelines (outer 8192/inner 32 or vice versa)?",
+      "Do mixed chunk-size pipelines preserve correctness under CDN conditions?"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for Product Core promotion — CDN Accept-Encoding negotiation blocks fixed-order decompression; encoding-agnostic fix must be validated first",
+      "Encoding-agnostic decode works on all CDN conditions — the 24/24 forensic result is exploratory (not a frozen condition) and covers only JSON/HTML; BINARY forensic was not fully tested",
+      "Localhost decompression correctness implies CDN correctness — CDN introduces Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation, and concurrent clients",
+      "C3 PASS (cache stability) means CDN caching is safe — cf-cache-status was DYNAMIC on all 273 responses, no HIT observed; stale-cache serving behavior remains untested",
+      "CDN re-encoding is always benign — the forensic probe showed bytes differ but decompress identically; production CDNs with different quality levels may not preserve this property",
+      "Max decompression depth 5 is validated for stacked encodings — only depth 2 exercised; depths 3-5 untested",
+      "BINARY compressed cell sizes are cross-run reproducible — PYTHONHASHSEED-dependent hash(state) produces different bodies per interpreter session",
+      "Brotli streaming drain is safe at all quality levels — only tested at quality 4; higher qualities (5-11) may require empty-input draining for buffered final blocks",
+      "Identity baseline validates wire preservation under CDN — CDN gzip-compresses identity JSON/HTML text when client accepts gzip (benign and reversible but not byte-identical passthrough)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35530588298/handoff.json (parent: 840/840 localhost decompressor API streaming validated, CDN gate opened)",
+    "research/experiments/EXP-RUNTIME-35530588298/result.json (parent: 840/840 correct, C1-C5 all pass)",
+    "research/experiments/EXP-RUNTIME-35530588298/audit.json (PASS, claim ceiling bounded to in-process)",
+    "research/experiments/EXP-RUNTIME-35522287921/handoff.json (grandparent: TE framing streaming validated)",
+    "research/experiments/EXP-RUNTIME-35513777099/handoff.json (great-grandparent: 240/240 multi-layer buffered correctness)",
+    "research/experiments/EXP-RUNTIME-35538865067/result.json (this experiment: 60/240 CDN correct, 240/240 localhost correct, FALSIFIES)",
+    "research/experiments/EXP-RUNTIME-35538865067/audit.json (PASS, producer_claim_supported=false, encoding-agnostic decode hypothesis)",
+    "research/experiments/EXP-RUNTIME-35538865067/forensic_rows.json (24/24 encoding-agnostic recovery, exploratory)",
+    "research/experiments/EXP-RUNTIME-35538865067/raw_cell_results.jsonl (513 rows raw evidence)",
+    "codex/claim_state.json C-MEAS-VALID claim history (67 events, current status EXPERIMENTAL)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35538865067/result.json (outcome=FALSIFIES, status=COMPLETE, 60/240 CDN, 240/240 localhost, forensic 24/24 recovery)",
+    "research/experiments/EXP-RUNTIME-35538865067/audit.json (PASS, claim_ceiling bounded, all metrics recomputed match producer)",
+    "research/experiments/EXP-RUNTIME-35538865067/raw_cell_results.jsonl (513 rows: raw headers, raw-body SHA256, derived correctness)",
+    "research/experiments/EXP-RUNTIME-35538865067/forensic_rows.json (36 forensic deliveries, decode attempts, Content-Encoding headers)",
+    "research/experiments/EXP-RUNTIME-35538865067/spec.json (frozen decision_rule C1-C4, baselines, claim ceiling)",
+    "research/experiments/EXP-RUNTIME-35538865067/report.md (failure mode diagnosis, encoding-agnostic decode hypothesis)",
+    "research/experiments/EXP-RUNTIME-35538865067/provenance.json (environment: Cloudflare edge sjc01, cloudflared 2026.9.1, Python 3.12.14, brotli 1.2.0)",
+    "research/experiments/EXP-RUNTIME-35538865067/freeze.json (frozen inputs hash)",
+    "research/experiments/EXP-RUNTIME-35538865067/payload_manifest.json (9 payloads, sha256:2c3b61c4...)",
+    "research/experiments/EXP-RUNTIME-35530588298/handoff.json (parent carry_forward establishing localhost chain)"
+  ],
+  "recommended_action": "Design and execute an encoding-agnostic decompression experiment: implement a decoder that sniffs delivered Content-Encoding (or tries brotli→gzip→identity iteratively) and feeds through the same Cloudflare CDN protocol. Frozen conditions must include all 48 cells (3 payload × 2 orders × 2 chunk sizes × 4 Accept-Encoding variants) with the same N=5, jitter, and cache-busting protocol. If encoding-agnostic decode restores 240/240 correctness, C-MEAS-VALID is ready for Product Core promotion (only kernel integration remains). Additionally, test depths 3-5 and payloads >100KB as frozen conditions if the primary gate passes."
+}

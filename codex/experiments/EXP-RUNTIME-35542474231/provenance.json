@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "run_experiment.py": "143919ab88014b748cba5ce2227dccafb9950c48dc8dce1e1306855886d07a97",
+    "raw_cell_results.jsonl": "26e2ceb8db41cec551d6fb931f5533c8fec1eab9ae6f5dbc5ea4c9c6bf104311",
+    "payload_manifest.json": "b622d3ebd6179c34c92be44e65cc051d7e6e1772bb789dbb80c272c7a414d30c",
+    "tunnel.log": "1fe2e47e478e93baa79fd138b066a65e98659c9ce46daeb1643fee4a2f1af355",
+    "run.log": "a73f43eeae289f4808b5dfd7381cbabf8dd36559c3bc4acdb7ae56f64f0c1c32"
+  },
+  "cdn_edge": "iad05 (tunnel.log: Registered tunnel connection location=iad05)",
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35542474231/run_experiment.py",
+    "encoding_agnostic_decode function: iterative brotli->gzip->identity until SHA256 matches ground truth",
+    "payload generators and streaming/fullbody decompressors copied parent-faithfully from research/experiments/EXP-RUNTIME-35538865067/run_experiment.py"
+  ],
+  "commands": [
+    "python3 research/experiments/EXP-RUNTIME-35542474231/run_experiment.py (writes raw_cell_results.jsonl, payload_manifest.json, tunnel.log, run.log)"
+  ],
+  "datasets_fixtures": [
+    "payload_manifest.json (9 base payloads: 3 content types x 2 compression orders + 3 identity; deterministic seeds; depth 3-5 payloads with alternating brotli/gzip; large 150KB payloads; BINARY bodies PYTHONHASHSEED-dependent, ground truth computed within-run)"
+  ],
+  "environment": {
+    "brotli": "1.2.0",
+    "cloudflared": "2026.9.1 (binary /tmp/opencode/cloudflared, ELF x86-64)",
+    "github_run_id": "35542474231",
+    "http_client": "python http.client (HTTPSConnection/HTTPConnection), manual reads, no content-decoding middleware",
+    "platform": "linux x86_64",
+    "python": "3.12.14"
+  },
+  "experiment_id": "EXP-RUNTIME-35542474231",
+  "frozen_inputs": {
+    "freeze.json": "frozen at 2026-09-20T22:44:23.524873+00:00",
+    "prereg.md": "faaa05bbeda985a8955b19b1d64cfe1ad22f824b48f5ea648f0d81567869fc7d",
+    "request.json": "95a03bd3f7d96dde4ff04aed5059ad11a2b7202027f8899710604a733394d8de",
+    "spec.json": "360f3e1e68da1afc834c594af3d1958a77ca4086d63bbb014f8aac43433463ea"
+  },
+  "lane": "runtime",
+  "protocol_reference": "frozen spec.json decision_rule C1-C6 with baselines B-LOCALHOST-DIRECT, B-ENCODING-AGNOSTIC-REGRESSION, B-CDN-IDENTITY, B-DEPTH-GENERALIZATION, B-LARGE-PAYLOAD; prereg sections 4-8",
+  "relevant_commits": [
+    {
+      "note": "working tree base; no commits made by EXECUTE (commit/push prohibited)",
+      "sha": "base_sha b25d5560a22e9ffead7fbfc4edfcc5fea6e6fd33 per request.json"
+    }
+  ],
+  "tunnel_urls": {
+    "main_run": "https://associations-knights-oral-processes.trycloudflare.com"
+  },
+  "wall_time": {
+    "main_run_s": 192.3
+  }
+}

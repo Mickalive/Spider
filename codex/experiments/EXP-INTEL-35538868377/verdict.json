@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35538868377",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "HYPOTHESIS",
+      "reason": "Both proposed corrected noise decompositions REJECTED at C1 validation gate. Model A (Phi(median(|M|)/std)) predicted agreement at n=15 residual 34.59pp and n=20 residual 18.96pp, both exceeding 10pp threshold (audit VF1 confirms recomputed values match producer). Model B (saturating sign-fraction power law a*n^b/(1+a*n^b)) residual at n=15 12.39pp exceeds 10pp threshold, R-squared=0.8797 <0.90 (audit VF2). C1_EITHER_MODEL_VALID=FALSE per frozen conjunctive rule. Neither model beats the random noise null at n=20 (ModelB 0.0741 > null 0.0662). The diagnostic proportion(margin_i>0) reproduces observed exactly (0.00pp) under template invariance but is a structural identity, not a validated predictive model. The correct noise decomposition for a validated SNR model remains UNKNOWN. No evidence accumulated for or against C-MEAS-VALID from this experiment."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "HYPOTHESIS",
+      "reason": "No validated extrapolation to full DOM (n=50/82) exists. Both model-based extrapolation paths are gated behind failed C1/C2 per frozen rule. ModelB gated extrapolation predicts 0.982 at n50 (>0.80) but is invalid due to model misspecification (step-function data fitted by smooth saturating power law). The product consequence question (Docker re-collection investment vs recipe density viability) remains unresolved. Per-task recipe achieves 78.65% at n=20 but is untested at n>20. No evidence accumulated for or against C-PRODUCT-ECON from this experiment."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "What is the correct noise decomposition for a validated SNR model of ranking instability — specifically, can an empirical CDF mapping of the margin distribution, between-type vs within-type variance decomposition, or non-parametric margin distribution model pass C1-equivalent validation at n=15 and n=20, or should the Intel lane pivot to prioritize Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) to bypass modeling entirely?",
+  "reason": "Frozen conjunctive decision rule evaluates: C1_EITHER_MODEL_VALID=FALSE (ModelA fails at both n15 34.59pp and n20 18.96pp; ModelB fails at n15 12.39pp), C2_SIGN_FRACTION_FIT_QUALITY=FALSE (R-squared 0.8797 <0.90), C3 gated behind failed C1/C2. Per frozen rule: NOT C1 yields MEASUREMENT_INVALID. Audit PASS confirms all recomputed metrics match producer (audit VF1-VF10). The two orthogonal decompositions fail for distinct reasons: ModelA because Phi(median|M|/std) still conflates magnitude and variation (SNR 1.017 at n15 over-predicts by 34.59pp), ModelB because a smooth saturating power law cannot fit the step-function data (0,0,0.50,0.57) with only 4 training points. Neither decomposition adds predictive value beyond the random noise null at n=20. The diagnostic proportion(margin>0) remains near-exact (0.00pp) but is a template-invariance structural identity, not an extrapolable model.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35538868377/result.json",
+    "research/experiments/EXP-INTEL-35538868377/audit.json",
+    "research/experiments/EXP-INTEL-35538868377/spec.json",
+    "research/experiments/EXP-INTEL-35538868377/report.md",
+    "research/experiments/EXP-INTEL-35538868377/derived_analysis.json",
+    "research/experiments/EXP-INTEL-35530590171/handoff.json (sha256: 252702537489bc90a720725382a8387c37652e995ba46b8e0e9eabe638701af1)",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256: ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a)",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json (sha256: f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2)"
+  ]
+}
