@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35470447407",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, geographic latency, and production concurrency?",
+  "why_next": "Gzip multi-chunk decompression correctness is now established on localhost mock (240/240 passes, audit PASS), resolving the parent's gzip unknown. Combined with established brotli correctness (360/360 parent + 120/120 regression), the iterative decompression pipeline covers both major content-encoding formats for localhost scope. However, C-MEAS-VALID cannot advance to Product Core because the sole remaining product-readiness gate — real CDN infrastructure validation — is untested. CDN-specific behaviors (Accept-Encoding negotiation, multi-layer encoding, cache-Control/Vary interaction, geographic latency, production concurrency, CDN header manipulation) may expose decompression failure modes not present on localhost. The next experiment must validate correctness on a real CDN. If CDN correctness passes, C-MEAS-VALID can advance toward Product Core; if it fails, the decompression pipeline requires diagnosis before any production deployment.",
+  "carry_forward": {
+    "established": [
+      "Gzip multi-chunk (chunk_size=32) decompression correctness on localhost buffered mock: 240/240 passes, 0 silent fallbacks, 0 errors, byte-identical output to ground-truth generate_*_body across 4 auth states x 3 content types x 10 reps (audit PASS, EXP-RUNTIME-35470447407)",
+      "Gzip single-chunk (chunk_size=1024) decompression correctness on localhost buffered mock: same 240/240 included in aggregate (audit PASS, EXP-RUNTIME-35470447407)",
+      "Brotli multi-chunk decompression correctness on localhost buffered mock: 360/360 in parent EXP-RUNTIME-35456070671, 120/120 regression check in EXP-RUNTIME-35470447407 (audit PASS both)",
+      "Iterative decompression pipeline (try brotli then gzip, max_depth=5) covers both major content-encoding formats on localhost mock with 480/480 total correctness passes (audit PASS, recomputed metrics match producer)",
+      "Chunked framing transparency preserved: multi-chunk payloads spanning 3-8 chunks at chunk_size=32 decompress correctly for both gzip (95-233 bytes) and brotli (70-173 bytes); raw_body != decompressed for all compressed observations proving decompression altered bytes",
+      "Deterministic within-state grouping preserved: decompressed hash all_same=true for all 4 auth states across all cells, B-RANDOM=0.0 for all cells",
+      "IDENTITY baseline validates correctness oracle: 120/120 hash matches generate_*_body() exactly, confirming local generation equals uncompressed server output",
+      "Auth-aware caching compatible with chunked TE for decompression correctness (inherited from EXP-RUNTIME-35434773328, verified under correctness controls)"
+    ],
+    "rejected": [
+      "Silent fallback to compressed bytes as explanation for preserved discrimination — rejected by correctness controls (480/480 hash matches, 0 fallbacks, decompression_altered 10/10 per state for all 9 compressed cells)",
+      "Gzip chunk boundaries corrupt multi-byte symbols at chunk_size=32 for 95-233 byte compressed payloads — rejected (0 errors, deterministic grouping preserved, byte-identical decompression confirmed)",
+      "Chunk boundaries are a gzip-specific failure mode — rejected (GZIP-SC and GZIP-MC both 1.0, so chunk boundaries not a failure mode for gzip at this payload/chunk size)"
+    ],
+    "unknown": [
+      "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, geographic latency, and production concurrency?",
+      "Does correctness hold for larger payloads (10KB, 100KB) where gzip/brotli dictionary references cross many chunk boundaries and compressed sizes span 100+ chunks at 32 bytes?",
+      "Does correctness hold for gzip compression levels 1-9 and brotli quality 4-8 variation and mixed quality cycling?",
+      "What is max practical decompression depth for real-world multi-layer encoding (e.g., gzip->br, br->gzip) and how does iterative depth 5 behave with adversarial Content-Encoding stacks?",
+      "Does buffered-proxy correctness generalize to streaming proxy that forwards partial frames without full reassembly?",
+      "Why is reported gzip compressed_body_only_discrimination 0.05-0.09 vs recomputed 0.5 and brotli 0.5? (audit V4, requires raw artifact audit or re-run with persisted per-request hashes)"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for Product Core promotion — real CDN infrastructure is the sole remaining product-readiness gate; localhost mock correctness does not establish CDN correctness",
+      "Decompression correctness holds for large payloads — compressed sizes tested are 95-233 bytes (gzip) and 70-173 bytes (brotli) spanning 3-8 chunks; larger payloads where dictionary references cross many chunk boundaries are untested",
+      "The mechanism survives production CDN — localhost mock does not replicate Accept-Encoding negotiation, CDN-specific header manipulation, geographic latency, multi-layer encoding, or production-scale concurrency",
+      "0.5 discrimination is a production ceiling — it is a structural property of 3-way error collapse (no_auth/expired/invalid share identical bodies) in mock design",
+      "Streaming partial-frame forwarding is safe — proxy buffers entire upstream then re-chunks, does not exercise streaming failure modes",
+      "IDENTITY decompression_altered all_altered=true with count_total=0 is meaningful — this is reporting artifact of empty denominator handling (all([]) is True) per audit V3; do not interpret as evidence of decompression correctness for uncompressed responses",
+      "Gzip compression level variation is safe — only default compression level tested; levels 1-9 may produce different compressed structures",
+      "Multi-layer encoding (gzip->brotli, brotli->gzip) is safe — max_depth=5 is generous but only depth 1 (single encoding) was exercised"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (parent: established brotli 360/360, gzip unknown, CDN primary unknown)",
+    "research/experiments/EXP-RUNTIME-35456070671/result.json (parent: 360/360 correctness, 0 silent fallbacks)",
+    "research/experiments/EXP-RUNTIME-35456070671/audit.json (parent: PASS, claim_ceiling localhost mock)",
+    "research/experiments/EXP-RUNTIME-35445595071 (grandparent: multi-chunk framing transparency, V1/V2 degeneracy identified)",
+    "research/experiments/EXP-RUNTIME-35434773328 (great-grandparent: end-to-end chunked TE PASSTHROUGH/AUTH-AWARE CACHED)",
+    "research/experiments/EXP-RUNTIME-35401995092 (great-great-grandparent: proxy->client chunked downstream)",
+    "research/experiments/EXP-RUNTIME-35389142338 (great-great-great-grandparent: auth-aware caching)",
+    "codex/claim_state.json (C-MEAS-VALID claim history)",
+    "codex/index.json (prior runtime experiments and their decisions)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35470447407/result.json (aggregate 480/480, gzip 240/240, per_cell correctness_match_rate 1.0 for 6 gzip cells, silent_fallback 0, decompression_altered 10/10, determinism all_same true, B-RANDOM 0.0)",
+    "research/experiments/EXP-RUNTIME-35470447407/audit.json (PASS, producer_claim_supported true, V1-V8 findings all low/info, recomputed metrics match producer, claim_ceiling bounded to localhost mock)",
+    "research/experiments/EXP-RUNTIME-35470447407/verdict.json (SURVIVES_CURRENT_TEST, C-MEAS-VALID stays EXPERIMENTAL, gzip correctness established for localhost, CDN remains primary gate)",
+    "research/experiments/EXP-RUNTIME-35470447407/spec.json (frozen hypothesis, falsifier, decision_rule C1-C4, 4 baselines)",
+    "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py (BODY_GENERATORS, decompress_body brotli->gzip max_depth5, expected_hash, correctness_match, silent_fallback, decompression_altered, proxy buffering)",
+    "research/experiments/EXP-RUNTIME-35470447407/provenance.json (python 3.12.14, brotli 1.2.0, PyJWT 2.14.0, seed 44, ports 8700-8702/8800-8802)",
+    "research/experiments/EXP-RUNTIME-35470447407/report.md (executive summary 480/480, gzip vs brotli analysis, scope ceiling)",
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (parent established/rejected/unknown/do_not_assume carried forward)"
+  ],
+  "recommended_action": "Design a real CDN correctness experiment: deploy the same mock OAuth2 server behind Cloudflare or Fastly with auth-aware cache configuration, brotli+gzip compression enabled, and chunked transfer-encoding. Repeat the correctness controls (SHA256(decompressed) == SHA256(generate_*_body)) with the same 4 auth states and 3 content types, but now through real CDN infrastructure with Accept-Encoding negotiation, CDN-specific headers (X-Cache, Via, ETag), geographic latency, and production concurrency. This is the mandatory next gate for C-MEAS-VALID product readiness. If CDN correctness passes, C-MEAS-VALID can advance toward Product Core. If it fails, the decompression pipeline requires diagnosis. Alternatively, in parallel, test larger payloads (10KB/100KB) under correctness controls to determine if gzip/brotli dictionary references cross chunk boundaries causing decompression failure at scale."
+}

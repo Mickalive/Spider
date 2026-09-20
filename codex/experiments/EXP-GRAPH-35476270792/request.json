@@ -1,0 +1,20 @@
+{
+  "base_sha": "4449bc4a3ab45c34694aed90e7ec9e6e6cf0f8ba",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T23:30:03.401897+00:00",
+  "experiment_id": "EXP-GRAPH-35476270792",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the 304 cache-hit structural coupling be eliminated (e.g., by excluding 304 responses from pooled correlation, or by using identical hash-based construction for 304 responses), and does the B-PARENT-CONFOUND-REPRODUCTION baseline confirm the parent V1 entropy confound was genuine \u2014 yielding a clean MEASUREMENT_INVALID or CONFIRMED verdict at delta=0.15 on the production-like testbed?",
+  "lane": "graph",
+  "origin_github_run_id": "35476270792",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35470449310",
+    "path": "research/experiments/EXP-GRAPH-35470449310/handoff.json",
+    "sha256": "b31d88cc812627313ee52ccb959deb947b540c6d1c5b2c6ea23f73fd213edc85"
+  },
+  "reason": "pulse",
+  "request_hash": "004e88f1d3b6c743263ab9f0852684da4565ea61073ae9b7228b4ede45945275",
+  "request_id": "86004b113a3fc17dab33d454",
+  "schema_version": 1
+}

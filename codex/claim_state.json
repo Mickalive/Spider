@@ -1147,6 +1147,26 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "V1 request_id entropy confound and V2 B-FLASK-ONLY degeneracy are verified FIXED (audit V1 PASS, V2 PASS). However, the experiment introduces a NEW measurement validity gap (V3): 304 cache-hit responses use fixed 0.2 structural composite while non-304 uses sha256(request_id) hash, and 304 occurs only for valid tokens (76 valid vs 0 expired), creating token-state-dependent structural construction that violates spec measurement_validity #8. Additionally, B-PARENT-CONFOUND-REPRODUCTION negative control was never executed, and C3/C4 decision logic deviates from frozen one-sided spec (audit V5). Under frozen one-sided rule, C3 would PASS (CI upper 0.0018 < 0.15) and C4 would PASS (TOST p_upper 8.88e-08 < 0.05); only C5 heterogeneity would fail. Under strict two-sided interpretation, C3/C4 FAIL. Pooled |r|=0.088 < 0.15 is directionally consistent with orthogonality, but the 304 coupling and missing baseline prevent a clean scientific conclusion. B-FLASK-ONLY baseline confirms orthogonality persists without infrastructure (r=0.026, TOST PASS at delta=0.15). C-FRESHNESS remains EXPERIMENTAL bounded to localhost mock; no advancement toward VALIDATED or PRODUCT_CORE. Product parallel-channel architecture NOT justified for cache-enabled endpoints at delta=0.15 pending a clean re-run with 304 coupling eliminated and B-PARENT baseline executed."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35476270792",
+        "lane": "graph",
+        "created_at": "2026-09-19T23:30:03.401897+00:00",
+        "decision": "REVISE",
+        "source_commit": "8949d839480feca7a8d67bfa0acf6bd5f3985c1e",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule triggers REJECTED (C5 cache heterogeneity FAIL diff=0.2506>2*SE, C7 negative control FAIL |r|=0.1204<0.15), but audit finds the REJECTION is contaminated by two measurement defects: (1) V3 selection bias \u2014 valid cache-enabled non-304 composition is skewed (profile n=2, data_list n=2, session_status n=40 valid vs 40/40/40 expired), inflating pooled cache-enabled r to -0.453 vs stratified per-endpoint r ~0.04; (2) V_ETAG_PERMISSION_LEAKAGE \u2014 expired tokens decode without permission_level, defaulting to 'read' etag, violating spec clause 8 signal independence. The audit ceiling bounds C-FRESHNESS to EXPERIMENTAL on localhost stochastic Flask mock (r=0.002-0.046, n=480, 4 independent experiments all audit PASS). Within-endpoint non-304 orthogonality appears strong (stratified pooled r ~0.04) but is not validated under frozen protocol due to selection bias. No confirmatory or falsifying evidence accumulated from this experiment for the broader C-FRESHNESS claim. Status unchanged pending fixes and re-run."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35476271728",
+        "lane": "product",
+        "created_at": "2026-09-19T23:30:05.959120+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 all five frozen decision conditions pass at n=480. C1 structural discrimination 0.8333 > 0.5. C2 token_refresh TP=1.0 on all 4 co-occurring conditions (Wilson lower 0.969). C3 behavioral_std 0.133-0.141 > 0.05, TOST pass=true at delta=0.15 (r=-0.0366, CI [-0.126, 0.053], both tails p<0.05). C4 FP=0.0 on 240 noise-only samples. C5 TOST equivalence confirmed at n=480 (CI upper 0.053 < 0.15 delta, both tails pass). Parent n=240 TOST lower-tail failure (p_lower=0.081) confirmed as sample-size power artifact: CI width narrowed from 0.252 to 0.179, lower bound moved from -0.185 to -0.126 within equivalence interval. Audit PASS confirms all recomputed metrics match producer. Claim ceiling strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7). No production generalization, no PRODUCT_CORE promotion, no non-mock inference. Threshold sensitivity analysis (exploratory) confirms TP=1.0 at 0.15-0.35, cliff to 0.694 at 0.40 \u2014 bimodal distribution limits threshold calibration utility.",
+        "source_commit": "03c15bc561cfbe2a7bedeb55ff3125b0f94f7c3f",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "C-FRESHNESS SURVIVES at n=480 with TOST equivalence at delta=0.15 on localhost mock ceiling only. Token_refresh TP=1.0 under co-occurring structural noise confirmed at n=480 (audit PASS). Parent n=240 TOST lower-tail failure resolved as sample-size power artifact (CI lower bound -0.185 \u2192 -0.126, now inside [-0.15, 0.15]). Orthogonality confirmed across 4 independent mock experiments at n=480. However, claim ceiling remains strictly localhost mock: Flask 3.1.3 + SQLite WAL + JWT on 127.0.0.1:18951. No production OAuth/OIDC, CDN, network RTT, or database-backed sessions tested. Threshold 0.25 tautological (TP=1.0 at any threshold 0.15-0.35 due to bimodal 0.35/0.65 scores). No PRODUCT_CORE promotion warranted."
       }
     ],
     "C-CROSSSITE": [
@@ -2107,6 +2127,16 @@
         "reason": "No change to claim status. The hypothesis about OECD/COINr canonical recipe ranking stability on full-DOM elements (n=21-82) is UNTESTED by this experiment. C3 gate failure (0/7 tasks with locatable_sample >20) means no full-DOM measurement was possible. The parent MIXED verdict (EXP-INTEL-35445596324, canonical 55.95% at truncated-first-20) remains the latest valid evidence. Parent carry_forward established/rejected/unknown state is inherited unchanged."
       },
       {
+        "experiment_id": "EXP-RUNTIME-35470447407",
+        "lane": "runtime",
+        "created_at": "2026-09-19T21:27:14.669842+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 All four frozen decision-rule conditions pass. C1: gzip correctness_match_rate == 1.0 for all 12 gzip cells (240/240). C2: silent_fallback_count == 0 for all gzip cells. C3: B-BROTLI-MC passes 100% (120/120, no regression). C4: null_control passes (all_same=true for all states across all gzip cells). Audit PASS confirms all recomputed metrics match producer. Gzip multi-chunk decompression correctness is validated on localhost buffered mock. However, the claim ceiling remains bounded to localhost mock scope; real CDN infrastructure is the sole remaining product-readiness gate for C-MEAS-VALID.",
+        "source_commit": "a3152ccd50afcbdf54fcd6abd3023bad3ecba62c",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Gzip multi-chunk (chunk_size=32) and single-chunk (chunk_size=1024) decompression correctness validated on localhost mock: 240/240 gzip passes, 0 silent fallbacks, 0 errors, deterministic within-state grouping, audit PASS. Combined with established brotli correctness (360/360 parent + 120/120 regression), the iterative decompression pipeline covers both major content-encoding formats for localhost scope. However, C-MEAS-VALID cannot advance to VALIDATED or PRODUCT_CORE because: (1) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, multi-layer encoding, CDN header manipulation, geographic latency, and production concurrency is untested; (2) larger payloads (10KB/100KB) where dictionary references cross many chunk boundaries are untested; (3) streaming partial-frame forwarding is untested (proxy buffers entirely); (4) gzip compression level variation (1-9) is untested. The parent handoff's primary unknown 'Does gzip multi-chunk correctness hold?' is now resolved for localhost scope. Remaining product gate is CDN correctness validation."
+      },
+      {
         "experiment_id": "EXP-PHYSICS-35470449605",
         "lane": "physics",
         "created_at": "2026-09-19T21:27:17.376394+00:00",
@@ -2160,14 +2190,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35470449310",
-      "lane": "graph",
-      "created_at": "2026-09-19T21:27:19.077983+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "396a8924a8f3f74d3a6bf29a7d028bc5aac2e2a3",
+      "experiment_id": "EXP-PRODUCT-35476271728",
+      "lane": "product",
+      "created_at": "2026-09-19T23:30:05.959120+00:00",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 all five frozen decision conditions pass at n=480. C1 structural discrimination 0.8333 > 0.5. C2 token_refresh TP=1.0 on all 4 co-occurring conditions (Wilson lower 0.969). C3 behavioral_std 0.133-0.141 > 0.05, TOST pass=true at delta=0.15 (r=-0.0366, CI [-0.126, 0.053], both tails p<0.05). C4 FP=0.0 on 240 noise-only samples. C5 TOST equivalence confirmed at n=480 (CI upper 0.053 < 0.15 delta, both tails pass). Parent n=240 TOST lower-tail failure (p_lower=0.081) confirmed as sample-size power artifact: CI width narrowed from 0.252 to 0.179, lower bound moved from -0.185 to -0.126 within equivalence interval. Audit PASS confirms all recomputed metrics match producer. Claim ceiling strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7). No production generalization, no PRODUCT_CORE promotion, no non-mock inference. Threshold sensitivity analysis (exploratory) confirms TP=1.0 at 0.15-0.35, cliff to 0.694 at 0.40 \u2014 bimodal distribution limits threshold calibration utility.",
+      "source_commit": "03c15bc561cfbe2a7bedeb55ff3125b0f94f7c3f",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "V1 request_id entropy confound and V2 B-FLASK-ONLY degeneracy are verified FIXED (audit V1 PASS, V2 PASS). However, the experiment introduces a NEW measurement validity gap (V3): 304 cache-hit responses use fixed 0.2 structural composite while non-304 uses sha256(request_id) hash, and 304 occurs only for valid tokens (76 valid vs 0 expired), creating token-state-dependent structural construction that violates spec measurement_validity #8. Additionally, B-PARENT-CONFOUND-REPRODUCTION negative control was never executed, and C3/C4 decision logic deviates from frozen one-sided spec (audit V5). Under frozen one-sided rule, C3 would PASS (CI upper 0.0018 < 0.15) and C4 would PASS (TOST p_upper 8.88e-08 < 0.05); only C5 heterogeneity would fail. Under strict two-sided interpretation, C3/C4 FAIL. Pooled |r|=0.088 < 0.15 is directionally consistent with orthogonality, but the 304 coupling and missing baseline prevent a clean scientific conclusion. B-FLASK-ONLY baseline confirms orthogonality persists without infrastructure (r=0.026, TOST PASS at delta=0.15). C-FRESHNESS remains EXPERIMENTAL bounded to localhost mock; no advancement toward VALIDATED or PRODUCT_CORE. Product parallel-channel architecture NOT justified for cache-enabled endpoints at delta=0.15 pending a clean re-run with 304 coupling eliminated and B-PARENT baseline executed."
+      "reason": "C-FRESHNESS SURVIVES at n=480 with TOST equivalence at delta=0.15 on localhost mock ceiling only. Token_refresh TP=1.0 under co-occurring structural noise confirmed at n=480 (audit PASS). Parent n=240 TOST lower-tail failure resolved as sample-size power artifact (CI lower bound -0.185 \u2192 -0.126, now inside [-0.15, 0.15]). Orthogonality confirmed across 4 independent mock experiments at n=480. However, claim ceiling remains strictly localhost mock: Flask 3.1.3 + SQLite WAL + JWT on 127.0.0.1:18951. No production OAuth/OIDC, CDN, network RTT, or database-backed sessions tested. Threshold 0.25 tautological (TP=1.0 at any threshold 0.15-0.35 due to bimodal 0.35/0.65 scores). No PRODUCT_CORE promotion warranted."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",
