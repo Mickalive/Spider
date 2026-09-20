@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35513777099",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct reported observation counts. report.md states 'all 24 multi-layer cells (2 sizes x 3 content types x 2 multi-layer encodings x 4 auth states x 5 reps = 480 observations)' and the C1 row states '480/480 = 1.0000'. The executed design has 12 multi-layer cells, not 24, and 2x3x2x4x5 = 240 multi-layer observations, not 480. result.json metrics.aggregate itself carries the true counts (multi_layer_cells_count=12; total_requests=480 across all 24 cells including regression/identity; main_cells_count=18 because it includes the 6 single-layer regression cells). State C1 as 240/240 multi-layer (480/480 covers all cells) and label C2-C5 with the 12-cell/240-observation basis. prereg.md itself correctly states 240 (prereg.md '= 240 observations'), so the report inflated the frozen design.",
+    "Fix provenance.json execution_context.total_requests: it states 600; the actual aggregate is 480 (240 multi-layer + 120 regression + 120 identity).",
+    "Repair the C2 (C_SILENT_FALLBACK) and decompression_altered measurements for multi-layer cells: silent_fallback is computed with `is_compressed = obs['content_encoding'] in ('br', 'gzip')` (run_experiment.py:812), which never fires for multi-layer responses because their Content-Encoding header is 'gzip, br' or 'br, gzip'. 0/240 multi-layer observations were classified as compressed, so silent_fallback_count=0, silent_fallback_by_state.total=0, and decompression_altered.count_total=0 are vacuous-by-construction, not measurements. Re-instrument with a membership test over Content-Encoding tokens, or explicitly report multi-layer C2 as '0 true silent fallbacks (decompressed != raw verified on 360/360 compressed observations, audit-recomputed)' rather than implying the detector ran.",
+    "Remove or bound the claim that chunked framing 'genuinely exercises chunk-boundary behavior at multiple compression layers'. ReverseProxyHandler buffers the full upstream body (upstream_resp.read()) before re-chunking and the client reassembles Transfer-Encoding: chunked (resp.raw.read(decode_content=False)) before decompress_body runs; the decompressor never observes a chunk boundary. 32-byte framing here is transport-level reassembly stress only. This is the inherited V1_BUFFERED_PROXY_NOT_STREAMING bound (research/experiments/EXP-RUNTIME-35495699298/audit.json), which still applies verbatim; streaming incremental decompression remains untested.",
+    "Correct chunk-count statements: report.md claims '630-3,074 chunks' at 100KB; the observed multi-layer max compressed size is 98,776B = 3,087 chunks at chunk_size=32, and the 10KB range is 86-310 chunks (not '85-307'). The narrative numbers were copied from the parent run and do not match this run's data.",
+    "Fix the BINARY determinism claim. spec.json measurement_validity states 'Deterministic server ... produces deterministic bodies per (state, content_type, target_size)' and the report claims 'byte-identical SHA256 output'; this does not hold across interpreter sessions for BINARY. generate_binary_he_body embeds `hash(state) & 0xFFFFFFFF` (run_experiment.py:293) and Python str hash is PYTHONHASHSEED-salted (verified: hash('no_auth') differs across three processes). Independent re-execution reproduced every JSON/HTML cell byte-for-byte but all BINARY compressed cells differed (e.g., BINARY_BROTLI-THEN-GZIP_102400B mean 98736.0 -> 98732.5). Record PYTHONHASHSEED in provenance.json, derive the BINARY state marker from a seeded digest, or bound the determinism claim to within-process.",
+    "Correct decompression_altered field semantics: `all_altered = all(altered) if altered else True` (run_experiment.py:882) emits vacuous all_altered=true with count_total=0 for multi-layer and identity cells. Emit null or 'not_applicable' when no observation was checked."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_SILENT_FALLBACK_DETECTOR_VACUOUS_MULTI_LAYER",
+      "severity": "high",
+      "finding": "C2 silent-fallback detection never ran on multi-layer cells. `is_compressed = obs['content_encoding'] in ('br', 'gzip')` (run_experiment.py:812) is an exact-match test; every multi-layer response carries Content-Encoding 'gzip, br' or 'br, gzip'. Independent instrumented re-execution confirms 240/240 multi-layer observations have ce_raw 'gzip, br' or 'br, gzip' and 0/240 satisfy the classifier. Therefore silent_fallback_count=0 for all 12 multi-layer cells, silent_fallback_by_state.total=0, and decompression_altered.count_total=0 are structural artifacts, not measurements. The underlying fact the rule targets is nonetheless true: direct recomputation of decompressed_hash == body_hash_compressed across ALL 360 compressed observations (240 multi-layer + 120 single-layer regression) yields 0 silent fallbacks and decompressed != raw for 360/360 (decomp_neq_raw=true). Because any silent fallback would imply decompressed==raw while correctness_match compares against the uncompressed expected hash, C1's 240/240 correctness net would have caught it; the decision outcome is sustained by C1, not by C2 as instrumented.",
+      "evidence": "run_experiment.py:812-822 and 863-875 (exact-match classifier and silent_fallback_by_state filter); result.json per_cell silent_fallback_by_state total:0 and decompression_altered count_total:0 for all 12 multi-layer cells; independent instrumented re-run /tmp/opencode/audit_rerun/obs_audit.txt (ce_raw distribution, is_compressed_any=360/360, decomp_neq_raw=360/360)",
+      "impact": "C2 'silent_fallback_count == 0' for multi-layer cells is not a valid measurement in the produced artifact. The true zero-fallback fact holds via the correctness net and audit recomputation, so the frozen decision-rule outcome (SURVIVES_CURRENT_TEST) is preserved, but the metric must be re-instrumented or disclosed as recomputed rather than measured."
+    },
+    {
+      "id": "V2_OBSERVATION_COUNT_INFLATION_REPORT",
+      "severity": "medium",
+      "finding": "report.md claims 24 multi-layer cells and 480 multi-layer observations ('480/480 = 1.0000'); the executed design has 12 multi-layer cells x 20 observations = 240 (prereg.md line 35 correctly states 240). provenance.json total_requests=600 vs the actual aggregate 480. This is the same reporting-error class the inherited verdict claimed was corrected in the parent ('Audit-required observation-count correction (960->480 main)'); the producer repeated the pattern in a new form instead of fixing counting discipline.",
+      "evidence": "report.md lines 7, 15-16 (only 12 multi-layer cells are listed in its own table); result.json metrics.aggregate (multi_layer_cells_count=12, total_requests=480); provenance.json execution_context.total_requests=600; parent audit V5_OBSERVATION_COUNT_DISCREPANCY in research/experiments/EXP-RUNTIME-35495699298/audit.json",
+      "impact": "Reporting error. The frozen decision rule evaluates per-cell rates (C1 over 12 cells, all 1.0), so the scientific outcome is unaffected, but the producer's written claim numbers are false and must be corrected before the claim ceiling is carried forward."
+    },
+    {
+      "id": "V3_BINARY_GROUND_TRUTH_NOT_REPRODUCIBLE_ACROSS_RUNS",
+      "severity": "medium",
+      "finding": "generate_binary_he_body embeds hash(state) in the body header (run_experiment.py:293). Python str hash is salted per interpreter (PYTHONHASHSEED); verified: hash('no_auth') = 8786339367772244733 / 5132816468291710042 / -5349955956162653573 across three processes. Independent re-execution of the frozen script reproduced every JSON and HTML cell byte-for-byte (compressed_size_bytes identical) while all BINARY compressed cells differed (e.g., BINARY_BROTLI-THEN-GZIP_102400B mean 98736.0 -> 98732.5; BINARY_GZIP-THEN-BROTLI_102400B 98614.75 -> 98614.5). The spec's 'deterministic bodies per (state, content_type, target_size)' and the report's 'byte-identical SHA256 output to ground-truth generate_*_body' are within-process true only; exact raw observations are not reproducible from the packet because PYTHONHASHSEED is unrecorded in provenance.json and no per-observation raw artifact (expected_hash/decompressed_hash records) was persisted (result.json metrics.per_cell strips per-observation records at run_experiment.py:1343).",
+      "evidence": "run_experiment.py:293; producer result.json per_cell BINARY_* compressed_size_bytes vs identical-code re-run /tmp/opencode/audit_rerun/result.json; provenance.json (no PYTHONHASHSEED field); result.json per_cell (observations excluded)",
+      "impact": "Bounds reproducibility: within-run correctness (server and oracle share one process) is unaffected, but any downstream byte-level reproduction of BINARY observations requires fixing and recording PYTHONHASHSEED. Entropy and compressed-target-range conclusions are stable (all far above thresholds)."
+    },
+    {
+      "id": "V4_BUFFERED_REASSEMBLY_NOT_CHUNK_BOUNDARY_STRESS",
+      "severity": "medium",
+      "finding": "The report's interpretation that 32-byte framing 'genuinely exercises chunk-boundary behavior at multiple compression layers' is not supported by the architecture: ReverseProxyHandler buffers the complete upstream body (resp_body = upstream_resp.read()) before re-chunking, and the client reassembles the chunked stream (resp.raw.read(decode_content=False)) before calling decompress_body. The decompressor only ever sees one contiguous byte string; chunk boundaries never intersect a compression layer. The frozen design specifies this buffered architecture, so the measurement is as-designed, but the 'chunk-boundary stress' phrasing in report.md and the claim ceiling is an interpretation beyond what the test can express. Identical to inherited parent finding V1_BUFFERED_PROXY_NOT_STREAMING.",
+      "evidence": "run_experiment.py:547-555 (upstream_resp.read()), 564-575 (re-chunk loop), 693-695 (resp.raw.read), 617-635 (decompress_body on reassembled bytes); report.md lines 59, 66, 93",
+      "impact": "Bounds the claim ceiling: this experiment validates transport-framing reassembly + in-memory iterative decompression correctness, NOT streaming incremental decompression across chunk boundaries. The parent's open question on streaming incremental decompression is not advanced."
+    },
+    {
+      "id": "V5_DECOMPRESSION_ALTERED_VACUOUS_TRUE",
+      "severity": "low",
+      "finding": "decompression_altered is emitted with all_altered=true and count_total=0 for all 12 multi-layer cells and all identity cells (e.g., JSON_GZIP-THEN-BROTLI_10240B decompression_altered.no_auth = {all_altered: true, count_altered: 0, count_total: 0}). `all_altered = all(altered) if altered else True` (run_experiment.py:882) returns vacuous True on an empty list: a reader sees 'all decompressed outputs altered' while no observation was checked.",
+      "evidence": "run_experiment.py:877-885; result.json per_cell decompression_altered count_total:0 for all multi-layer and identity cells",
+      "impact": "Presentation defect; the true alteration fact (decompressed != raw for 360/360 compressed observations) was confirmed by audit recomputation, so no scientific conclusion changes, but the field is misleading as emitted."
+    },
+    {
+      "id": "V6_ORACLE_NOT_INDEPENDENT_OF_SERVER",
+      "severity": "low",
+      "finding": "The correctness oracle (expected_hash) is computed by calling the identical BODY_GENERATORS functions the mock server uses, in the same process. Correctness therefore proves server-encode -> wire -> proxy -> client-decode -> regenerated-ground-truth equality, not independence of ground truth from the measured pipeline. This is the frozen design (the falsifier explicitly references SHA256(generate_*_body(state, target_size))) and the identity baselines partially mitigate it, but the oracle is same-code regeneration, not an externally fixed corpus.",
+      "evidence": "spec.json falsifier; run_experiment.py:781-784 (expected_body = gen(state, target_size)) vs run_experiment.py:426-428 (_get_body uses the same BODY_GENERATORS)",
+      "impact": "The claim ceiling must remain stated as 'decompressed output equals the deterministic generator's body', not 'equals an independently known payload'."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "expected": "100% correctness at 10KB high-entropy (single-layer gzip regression)",
+      "observed": "3/3 cells (JSON_GZIP-SINGLE_10240B, HTML_GZIP-SINGLE_10240B, BINARY_GZIP-SINGLE_10240B) each 20/20 = 60/60; correctness_match_rate 1.0; silent_fallback_count 0; decompression_error_count 0",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_GZIP-SINGLE_10240B etc.; controls C_REGRESSION_CONTROLS pass_gzip true; recomputed from result.json and reproduced by independent re-execution (identical numbers)",
+      "note": "Genuine measurement for this control: Content-Encoding is exactly 'gzip', so the silent-fallback classifier did fire for these 60 observations."
+    },
+    {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "expected": "100% correctness at 10KB high-entropy (single-layer brotli regression)",
+      "observed": "3/3 cells each 20/20 = 60/60; correctness_match_rate 1.0; silent_fallback_count 0; decompression_error_count 0",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_BROTLI-SINGLE_10240B etc.; controls C_REGRESSION_CONTROLS pass_brotli true; recomputed and reproduced by independent re-execution",
+      "note": "Content-Encoding exactly 'br'; silent-fallback classifier fired (60/60 true negatives)."
+    },
+    {
+      "id": "B-IDENTITY-HE-10KB",
+      "expected": "100% correctness; SHA256 matches generate_*_body(state, 10240) for all 3 content types",
+      "observed": "3/3 cells each 20/20 = 60/60; identity path; compressed_size_bytes = 10240.0 exactly in all observations",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_IDENTITY-10KB_10240B, HTML_IDENTITY-10KB_10240B, BINARY_IDENTITY-10KB_10240B; controls C_IDENTITY_BASELINE pass true",
+      "note": "Correctness oracle valid at 10KB; wire path preserves bytes."
+    },
+    {
+      "id": "B-IDENTITY-HE-100KB",
+      "expected": "100% correctness; SHA256 matches generate_*_body(state, 102400) for all 3 content types",
+      "observed": "3/3 cells each 20/20 = 60/60; compressed_size_bytes = 102400.0 exactly",
+      "pass": true,
+      "evidence": "result.json per_cell JSON_IDENTITY-100KB_102400B, HTML_IDENTITY-100KB_102400B, BINARY_IDENTITY-100KB_102400B; controls C_IDENTITY_BASELINE pass true",
+      "note": "Correctness oracle valid at 100KB."
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "expected": "At least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB under multi-layer encoding",
+      "observed": "10KB means: JSON 4330.875, HTML 2854.0, BINARY 9903.875 -> 3/3 >= 2000. 100KB means: JSON 36168.875, HTML 23642.5, BINARY 98675.375 -> 3/3 >= 5000. All multi-layer compressed sizes fall in 2.7-98.8KB, inside the frozen 2-99KB target range.",
+      "pass": true,
+      "evidence": "result.json metrics.B_COMPRESSED_TARGET_RANGE per_content_type (audit recomputation from per-cell compressed_size_bytes means matches); controls B_COMPRESSED_TARGET_RANGE pass true",
+      "note": "Genuine pass; payloads are not degenerate. Re-run reproduced JSON/HTML means exactly; BINARY means vary slightly across runs (V3) but remain far above thresholds."
+    },
+    {
+      "id": "C4_C_NULL_CONTROL_DETERMINISM",
+      "expected": "decompressed_hash_variation all_same=true for all 4 auth states across all main cells",
+      "observed": "All 4 states x 12 multi-layer cells (+ 6 regression cells included in main_cells): unique_count=1, all_same=true in every case; controls C_NULL_CONTROL pass true",
+      "pass": true,
+      "evidence": "result.json per_cell decompressed_hash_variation for all cells; controls C_NULL_CONTROL observed no_auth/valid_token/expired_token/invalid_token all true",
+      "note": "Within-state determinism holds; also consistent across the independent re-run."
+    },
+    {
+      "id": "C_SILENT_FALLBACK_C2",
+      "expected": "silent_fallback_count == 0 for all multi-layer cells (frozen C2)",
+      "observed": "Multi-layer cells report 0 -- but vacuously (see V1; the detector never fired on multi-layer observations). Direct audit recomputation on ALL 360 compressed observations (240 multi-layer + 120 regression): decompressed_hash == body_hash_compressed in 0/360 cases; decompressed != raw in 360/360 cases. Correctness net C1 (240/240 multi-layer) independently excludes silent fallback.",
+      "pass": true,
+      "evidence": "result.json per_cell silent_fallback_by_state total:0; independent instrumented re-run /tmp/opencode/audit_rerun/obs_audit.txt (decomp_neq_raw=360/360)",
+      "note": "True fact confirmed, but the producer's multi-layer C2 value is not a measurement. Re-instrumentation required for honest metric semantics."
+    },
+    {
+      "id": "M_ENTROPY_SHANNON",
+      "expected": "All content types achieve Shannon entropy >= 3.5 bits/byte across all auth states and sizes",
+      "observed": "JSON mean 5.486 (min 5.436, max 5.573); HTML mean 4.660 (min 4.633, max 4.672); BINARY mean 7.690 (min 7.673, max 7.697); all above threshold",
+      "pass": true,
+      "evidence": "result.json metrics.M_ENTROPY_SHANNON; run_experiment.py validate_entropy_pre_flight",
+      "note": "Recomputed from the same generator code; matches producer."
+    }
+  ],
+  "recomputed_metrics": {
+    "overall_correctness": {
+      "multi_layer_cells": 12,
+      "multi_layer_observations": 240,
+      "multi_layer_correctness_pass": 240,
+      "multi_layer_correctness_fail": 0,
+      "multi_layer_correctness_rate": 1.0,
+      "regression_cells": 6,
+      "regression_observations": 120,
+      "regression_correctness_pass": 120,
+      "identity_cells": 6,
+      "identity_observations": 120,
+      "identity_correctness_pass": 120,
+      "total_observations": 480,
+      "total_correctness_pass": 480,
+      "total_correctness_fail": 0,
+      "total_silent_fallbacks_true_recomputed": 0,
+      "total_decompression_errors": 0,
+      "match_producer_aggregate": true,
+      "note": "Producer report.md claims 480 multi-layer observations across 24 cells; the executed design and result.json aggregate show 240 across 12 cells. Producer provenance total_requests=600 is wrong; aggregate is 480."
+    },
+    "per_cell_correctness_match_rate": {
+      "multi_layer_12_cells": "1.0 for all 12 cells (20/20 each)",
+      "regression_6_cells": "1.0 for all 6 cells (20/20 each)",
+      "identity_6_cells": "1.0 for all 6 cells (20/20 each)",
+      "all_24_cells": "1.0",
+      "match_producer": true
+    },
+    "silent_fallback_recomputed": {
+      "producer_multi_layer_value": 0,
+      "producer_multi_layer_classifier_fired": "0/240 observations (content_encoding in ('br','gzip') never matches 'gzip, br'/'br, gzip')",
+      "true_silent_fallbacks_over_all_360_compressed_obs": 0,
+      "decompression_altered_true_over_all_360_compressed_obs": "360/360 (decompressed != raw)",
+      "verdict": "The 0-fallback fact is true but must be attributed to the correctness net (C1) and audit recomputation, not to the C2 detector as instrumented"
+    },
+    "compressed_size_recomputed": {
+      "10KB_per_content_type_mean": {
+        "JSON": 4330.875,
+        "HTML": 2854.0,
+        "BINARY": 9903.875
+      },
+      "100KB_per_content_type_mean": {
+        "JSON": 36168.875,
+        "HTML": 23642.5,
+        "BINARY": 98675.375
+      },
+      "multi_layer_min_compressed_bytes": 2726,
+      "multi_layer_max_compressed_bytes": 98776,
+      "chunk_counts_at_32_bytes": "10KB: 86-310 chunks; 100KB: 710-3087 chunks",
+      "note": "report.md '85-307 chunks' and '630-3,074 chunks' are inherited parent numbers and do not match this run (max 3087 chunks at 98,776B)."
+    },
+    "decision_rule_recomputed": {
+      "C1_correctness_1.0_all_multi_layer_cells": true,
+      "C2_silent_fallback_zero": true,
+      "C2_as_measured": "vacuous for multi-layer cells (detector never fired); true via C1 net and direct recomputation",
+      "C3_regression_controls_100pct": true,
+      "C4_null_control_all_same_true": true,
+      "C5_compressed_target_range_pass": true,
+      "verdict_under_frozen_rule": "SURVIVES_CURRENT_TEST (all five conjuncts pass; C2's fact is confirmed by recomputation, though its producer measurement is invalid)",
+      "producer_outcome": "COMPLETE / SUPPORTS",
+      "audit_agrees_on_rule": true
+    },
+    "reproduction": {
+      "independent_re_execution": "Copied run_experiment.py to /tmp/opencode/audit_rerun and re-ran (Python 3.12.14, brotli 1.2.0, PyJWT 2.14.0, requests 2.34.2). Outcome reproduced: SUPPORTS/COMPLETE, 480/480 correctness, 0 failures, identical per-cell rates.",
+      "byte_exact": "All JSON and HTML per-cell compressed_size_bytes identical to producer (deterministic generators).",
+      "byte_diff": "All BINARY compressed cells differed slightly across runs (PYTHONHASHSEED-salted hash(state) in body header, run_experiment.py:293); within-run correctness unaffected."
+    }
+  },
+  "claim_ceiling": "SUPPORTED (decision-rule outcome), BOUNDED ceiling: On a localhost buffered mock, iterative decompression (blind brotli-first codec-trial loop, max_depth=5) produces byte-identical SHA256 output to the in-process deterministic ground-truth generate_*_body(state, target_size) for 12 multi-layer cells (2 sizes x 3 content types x 2 stacked encodings GZIP-THEN-BROTLI and BROTLI-THEN-GZIP, chunk_size=32 chunked transfer through a fully-buffering Python reverse proxy) x 4 auth states x 5 reps = 240 observations, plus 120/120 single-layer regression and 120/120 identity oracle observations: 480/480 total, 0 correctness failures, 0 true silent fallbacks (decompressed==raw) across all 360 compressed observations (audit-recomputed), within-state determinism all_same=true, Shannon entropy 4.63-7.70 bits/byte, compressed sizes 2.7-98.8KB. NOT justified as written: (a) the producer's '24 multi-layer cells / 480 multi-layer observations' and '480/480' figures (true: 12 cells / 240); (b) multi-layer C2/decompression_altered as measured quantities (detector never fired on multi-layer responses; fact confirmed only by the correctness net and audit recomputation); (c) 'chunk-boundary stress across multiple compression layers' (buffered reassembly precedes decompression; V1_BUFFERED_PROXY_NOT_STREAMING still applies); (d) byte-identical cross-run reproducibility for BINARY (hash(state) is PYTHONHASHSEED-dependent; per-observation raw artifacts were not persisted); (e) real CDN infrastructure, streaming incremental decompression, production OAuth/OIDC, gzip levels 2-8 / brotli qualities outside {4,6}, payloads beyond 100KB, or CDN-representative chunk sizes (8KB+).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35513777099/spec.json (frozen question, hypothesis, falsifier, baselines, decision_rule C1-C5)",
+    "research/experiments/EXP-RUNTIME-35513777099/prereg.md (240-observation main matrix, decision rule, controls)",
+    "research/experiments/EXP-RUNTIME-35513777099/freeze.json (immutable frozen inputs)",
+    "research/experiments/EXP-RUNTIME-35513777099/result.json (metrics.per_cell 24 cells, metrics.aggregate total_requests=480 multi_layer_cells_count=12, controls, M_ENTROPY_SHANNON, B_COMPRESSED_TARGET_RANGE)",
+    "research/experiments/EXP-RUNTIME-35513777099/report.md (executive summary with inflated 24-cell/480-observation claims, chunk-count claims)",
+    "research/experiments/EXP-RUNTIME-35513777099/provenance.json (execution_context.total_requests=600, dependencies, no PYTHONHASHSEED)",
+    "research/experiments/EXP-RUNTIME-35513777099/run_experiment.py (MockOAuthHandler._apply_layers, ReverseProxyHandler buffered read/re-chunk, decompress_body max_depth=5, is_compressed exact-match classifier line 812, all_altered vacuous-truth line 882, hash(state) line 293, oracle regeneration lines 781-784)",
+    "research/experiments/EXP-RUNTIME-35495699298/audit.json (parent V1_BUFFERED_PROXY_NOT_STREAMING, V5_OBSERVATION_COUNT_DISCREPANCY precedents)",
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (V2_UNKNOWN multi-layer limitation targeted by this experiment)",
+    "codex/claim_state.json (C-MEAS-VALID decompression-normalization sub-thread history, EXPERIMENTAL status)",
+    "Independent artifact: /tmp/opencode/audit_rerun/result.json and /tmp/opencode/audit_rerun/obs_audit.txt (audit re-execution and instrumentation; not part of the repo)"
+  ],
+  "unresolved": [
+    "The producer's PYTHONHASHSEED at execution time is unknown and unrecorded; exact byte-level reproduction of the BINARY observations is therefore impossible from the packet alone (V3).",
+    "Whether a correctly-instrumented C2 detector (CE-token membership) would change any multi-layer cell value: audit recomputation shows it would remain 0 (decompressed != raw for 360/360), so no decision-rule change is expected.",
+    "Streaming incremental decompression across chunk boundaries without full reassembly remains untested (V4; inherited from parent, the recommended next step per parent handoff).",
+    "The parent handoff's CDN gate (real Cloudflare/Fastly/Akamai with Accept-Encoding negotiation, Vary, geographic latency, concurrency) remains the binding prerequisite for Product Core promotion; this localhost multi-layer result does not substitute for it.",
+    "model_audit.json in this experiment directory records a prior audit-model invocation as 'retry' with exit_code 1, category 'transient' and no audit output; it is an operational artifact, not producer evidence, and does not affect this audit."
+  ]
+}

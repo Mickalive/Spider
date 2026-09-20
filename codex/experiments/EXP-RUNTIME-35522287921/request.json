@@ -1,0 +1,20 @@
+{
+  "base_sha": "2cf9d5270b376081a2ac1e34043f2ab09586c735",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T16:18:30.528344+00:00",
+  "experiment_id": "EXP-RUNTIME-35522287921",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does iterative decompression correctness hold for streaming incremental decompression where the proxy forwards partial chunked frames without full body reassembly, such that the decompressor processes chunk boundaries incrementally at realistic CDN chunk sizes (8KB+) and multi-layer encodings?",
+  "lane": "runtime",
+  "origin_github_run_id": "35522287921",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35513777099",
+    "path": "research/experiments/EXP-RUNTIME-35513777099/handoff.json",
+    "sha256": "6da4fb6cc3d2023210f6e7dc2133e62f163d73c7e730da40eaa95aaad0b69407"
+  },
+  "reason": "pulse",
+  "request_hash": "5ac101171e6b2a834e8fa95db608603fb1a553ff6ea6285bc682860abeffe46a",
+  "request_id": "3b5d636be0f1d52cc23b0734",
+  "schema_version": 1
+}

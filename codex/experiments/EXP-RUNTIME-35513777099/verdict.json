@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35513777099",
+  "lane": "runtime",
+  "decision": "SURVIVES_CURRENT_TEST",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST: C1 correctness_match_rate=1.0 for all 12 multi-layer cells (240/240), C2 silent_fallback_count=0 (fact confirmed by C1 correctness net and audit recomputation 0/360 compressed obs, though C2 detector was vacuous on multi-layer due to exact-match Content-Encoding classifier), C3 regression controls 120/120 pass, C4 null_control all_same=true for all states across all cells, C5 B-COMPRESSED-TARGET-RANGE passes (3/3 content types >= 2000B at 10KB and >= 5000B at 100KB). Audit recomputes all metrics exactly matching producer. The parent V2_UNKNOWN (multi-layer stacked encodings max_depth>1) is resolved: iterative decompression correctly unwraps GZIP-THEN-BROTLI and BROTLI-THEN-GZIP across JSON/HTML/binary at 10KB/100KB. Claim ceiling advances to: localhost buffered mock with high-entropy payloads at realistic compressed sizes (2.7-98.8KB, 86-3087 chunks at chunk_size=32) across both major compression formats, all tested content types, AND multi-layer stacked encodings (gzip->brotli, brotli->gzip) exercising max_depth>1. Audit REVISE bounds the ceiling: producer report inflates cell/observation counts (12 not 24 cells, 240 not 480 multi-layer observations), C2 multi-layer detector never fired (Content-Encoding exact-match misses multi-layer 'gzip, br'/'br, gzip'), BINARY ground truth not cross-run reproducible (PYTHONHASHSEED-salted hash), buffered proxy reassembles before decompression (V1_BUFFERED_PROXY_NOT_STREAMING inherited, chunk-boundary incremental parsing untested), and decompression_altered vacuously true on multi-layer cells. C-MEAS-VALID remains EXPERIMENTAL: real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, auth-aware cache/Vary, geographic latency, and production concurrency is the sole remaining blocker for Product Core readiness. Streaming incremental decompression across chunk boundaries is untested (proxy buffers fully). Product lane audit required for PRODUCT_CORE."
+    }
+  ],
+  "product_action": "No promotion to Product Core. C-MEAS-VALID remains EXPERIMENTAL with expanded multi-layer localhost ceiling. The real CDN infrastructure gate remains the sole blocker.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression correctness hold for streaming incremental decompression where the proxy forwards partial chunked frames without full body reassembly, such that the decompressor processes chunk boundaries incrementally at realistic CDN chunk sizes (8KB+) and multi-layer encodings?",
+  "reason": "All five frozen decision-rule conditions pass (C1-C5). The parent V2_UNKNOWN multi-layer limitation is resolved: iterative decompression correctly handles stacked GZIP-THEN-BROTLI and BROTLI-THEN-GZIP encodings on localhost buffered mock with high-entropy payloads. However, the audit (REVISE) bounds the claim ceiling via six validity findings: (1) C2 multi-layer silent-fallback detector was vacuous (exact-match Content-Encoding classifier never fires on 'gzip, br'/'br, gzip'; fact confirmed by correctness net and audit recomputation); (2) producer report inflates counts (12 cells/240 observations, not 24/480); (3) BINARY ground truth is PYTHONHASHSEED-dependent, not cross-run reproducible; (4) buffered proxy reassembles full body before decompression (inherited V1_BUFFERED_PROXY_NOT_STREAMING), so chunk-boundary incremental parsing remains untested; (5) decompression_altered vacuously true for multi-layer cells; (6) oracle is same-code regeneration, not independent corpus. The real CDN infrastructure gate (Cloudflare/Fastly/Akamai with Accept-Encoding negotiation, Vary, geographic latency, concurrency) is the primary remaining blocker for Product Core. The audit-identified streaming-decompression gap (V1 inherited) is the highest-upside orthogonal question: if the pipeline fails on partial-frame forwarding, CDN correctness is moot. Testing streaming decompression at realistic chunk sizes is a materially orthogonal question to the localhost-buffered multi-layer correctness just established.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35513777099/spec.json (frozen decision_rule C1-C5, baselines, multi-layer encoding configurations)",
+    "research/experiments/EXP-RUNTIME-35513777099/result.json (metrics.per_cell 24 cells, metrics.aggregate multi_layer_cells_count=12 total_requests=480, controls all pass, B_COMPRESSED_TARGET_RANGE, M_ENTROPY_SHANNON)",
+    "research/experiments/EXP-RUNTIME-35513777099/audit.json (status=REVISE, recomputed_metrics match producer, 6 validity findings V1-V6, claim_ceiling bounded)",
+    "research/experiments/EXP-RUNTIME-35513777099/report.md (executive summary, claim ceiling, inflated 24-cell count corrected by audit)",
+    "research/experiments/EXP-RUNTIME-35513777099/provenance.json (Python 3.12.14, brotli 1.2.0, PyJWT 2.14.0, total_requests=600 incorrect per audit)",
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (parent: established high-entropy single-layer correctness, identified V2_UNKNOWN multi-layer limitation)",
+    "research/experiments/EXP-RUNTIME-35495699298/result.json (parent: 480/480 high-entropy single-layer correctness)",
+    "research/experiments/EXP-RUNTIME-35495699298/audit.json (parent: PASS, V1-V5 findings, claim ceiling)",
+    "codex/claim_state.json (C-MEAS-VALID claim history, latest status EXPERIMENTAL from EXP-RUNTIME-35495699298)",
+    "codex/index.json (prior runtime experiments and decisions)"
+  ]
+}

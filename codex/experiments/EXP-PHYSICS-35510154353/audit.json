@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35510154353",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claim ceiling from broad 'CMI estimation pathway for discrete 12-state SPAs is now exhausted across three materially distinct estimator families' (report.md 5.1) to 'with frozen hyperparameters alpha=1.0 Laplace and sklearn mutual_info_classif discrete_features=True, plug-in KL and KSG k=10 both fail C3 while passing C1'. Independent recomputation with same data (seed=42, N=5000, build_action_history_records K=3) shows MLE plug-in (alpha=0) K3=1.377 bits and alpha=0.1 K3=0.743 bits — both >=0.5 threshold and would PASS C3 (alpha=0.1 still preserves near-zero null bias pending verification). Alpha=0.01 gives K3=1.274 bits. The frozen alpha=1.0 creates 88% smoothing mass (n_smoothed = 5000 + 841*4*12 = 45368) and degenerate control K3=0.109 > stochastic K3=0.099, proving smoothing bias alone exceeds true ~1.45-bit signal (N=50000 MLE K3=1.447). Verdict FALSIFIED-IN-SETTING is valid only conditional on frozen alpha=1.0, not evidence of fundamental discrete CMI impossibility.",
+    "Correct interpretation of KSG k-invariance: report correctly identifies identical K3=0.000560 across k=5,10,20, but must state ceiling is specific to sklearn.feature_selection.mutual_info_classif with discrete_features=True (which uses categorical matching ignoring n_neighbors) and not a test of continuous KSG estimator or alternative MI estimators (e.g., discrete_features=False, adaptive k, or histogram plugin). Claim 'KSG insensitivity is NOT specific to k=5' should be qualified as 'sklearn discrete-mode KSG is k-invariant on this categorical dataset (mi_joint 0.034413, mi_cond 0.033853 identical to 1e-12)', not that KSG family is universally k-insensitive.",
+    "Amend exploratory permutation-test description and evidence: spec B-PERMUTATION-TEST promises 'permutation test conditioned on (state, action) strata: for each stratum with >=5 records, test whether observed action labels produce PMI significantly above shuffled-action null via within-session permutation'. Implementation permutation_test_stratified() does not shuffle action labels within session per stratum; it shuffles global next-state marginals (all_next.elements() shuffled, perm_frac from all_next) and compares PMI against overall next-state distribution. This is not the frozen within-session action-label null used for C1/C3 (shuffled_action_null_within_session). Report should label exploratory 48/48 significant PMI (1.46-1.69 bits per state-action) as per-(state,action) PMI vs global marginal under global shuffle, not as validation of the frozen conditional stratification. Does not affect frozen decision but mischaracterizes baseline.",
+    "Disclose that degenerate control fails for plug-in KL due to smoothing bias, not merely informationally: spec B-DETERMINISTIC-SPA expects positive_control_k3 <0.1 on deterministic SPA. KSG passes (-0.000405) but plug-in KL degenerate K3=0.109 fails threshold, meaning even the null (I(Y;A|Z)=0) setting produces positive bias above 0.1 threshold. Therefore C1 pass (|null_mean|=0.064) for plug-in KL is not unbiased centering at 0 but biased centering at 0.064 with tiny std 0.000149; C3 comparison of K3=0.099 vs null_mean 0.064 yields delta only 0.035 bits (~235 sigma but absolute small). Report must not claim 'null framework is sound' for plug-in KL without noting this systematic bias, and future designs should require |null_mean| <0.02 or bias-corrected estimator."
+  ],
+  "validity_findings": [
+    {
+      "check": "metric_recomputation_frozen_C1_C3",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "Producer metrics for screening_n5000 match raw_results.json and frozen decision_rule C1 (|null_mean|<0.1) and C3 (k3>=0.5 and p<=0.001) applied correctly.",
+      "observed": "All 4 estimators recomputed from raw_results.json match result.json metrics exactly: B-PLUGIN-KL k3=0.09887606746922667, null_mean=0.06429067807063664, abs=0.064291 PASS C1 FAIL C3; B-KSG-CMI-K10 k3=0.00055995904023428, null_mean=-0.012066399977286075 PASS C1 FAIL C3; K5 and K20 identical to K10 to 1e-12 (mi_joint 0.03441340956812361, mi_cond 0.03385345052788933). Trigger FALSIFIED-IN-SETTING clause 2 (For any estimator passing C1, positive_control_k3 <0.5) holds for both primaries. Primary passers [] correctly computed.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json screening.B-PLUGIN-KL.k3_value_stochastic 0.098876, null_control.abs_null_mean 0.06429; screening.B-KSG-CMI-K10.k3 0.0005599; result.json metrics.screening_n5000 and controls.C1-NULL-CONTROL pass true, C3-POSITIVE-CONTROL pass false; raw_output.txt C1/C3 logs",
+      "impact": "Frozen verdict FALSIFIED-IN-SETTING is arithmetically correct per frozen rule; no metric fabrication or threshold misapplication.",
+      "producer_field": "result.json metrics.screening_n5000, controls.C1-NULL-CONTROL, controls.C3-POSITIVE-CONTROL, metrics.verdict_frozen FALSIFIED-IN-SETTING"
+    },
+    {
+      "check": "plug_in_KL_Laplace_smoothing_bias",
+      "status": "FAIL",
+      "severity": "critical",
+      "expected": "Plug-in KL with Laplace alpha should be ~unbiased at 0 on shuffled null and detect ~1.52-bit true CMI with K3>=0.5 while preserving |null_mean|<0.1.",
+      "observed": "With frozen alpha=1.0, n_z=841 K3 strata, n_smoothed=5000+841*4*12=45368, ~88% of probability mass is pseudo-counts (per-cell avg count_za 1.49 + 12 pseudo). Degenerate control on deterministic SPA gives K3=0.109370 > stochastic K3=0.098876, so bias exceeds signal. Null_mean 0.064291 with std 0.000149 is systematically >0 (64% of 0.1 threshold), not centered at 0. Independent MLE (alpha=0) on same records gives K3=1.377 at N=5000 and 1.447 at N=50000 (consistent with parent audit 1.52), alpha=0.1 gives 0.743, alpha=0.01 gives 1.274 — all would PASS C3. Smoothing choice alone determines outcome.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/run_experiment.py est_plugin_kl alpha=1.0 n_smoothed calc line 314; raw_results.json B-PLUGIN-KL degenerate_control_k3 0.10937 vs k3_value_stochastic 0.098876; recompute: MLE K3 1.377, alpha0.1 0.743, alpha0.01 1.274; provenance.json same CANDIDATES design",
+      "impact": "Producer correctly diagnoses bias but report's 'CMI pathway exhausted' overgeneralizes; pathway is blocked only for this frozen smoothing. Valid inference limited to alpha=1.0 configuration. Future experiment with alpha<=0.1 or bias-corrected plugin would likely SURVIVE.",
+      "producer_field": "result.json metrics.plugin_kl_smoothing_bias smoothing_bias_exceeds_signal true, validity_notes[0], unresolved[0]"
+    },
+    {
+      "check": "KSG_discrete_k_invariance",
+      "status": "FAIL",
+      "severity": "major",
+      "expected": "KSG CMI with k=10 should differ from k=5 if neighborhood resolution was binding; k=20 should further differ.",
+      "observed": "K3, K2, null_mean, mi_joint, mi_cond identical to 12 decimal places for k=5,10,20: K3=0.00055995904023428, K2=-0.0037346207819562993, null_mean=-0.012066399977286075, mi_joint_raw_k3 0.03441340956812361, mi_cond 0.03385345052788933. Proves sklearn mutual_info_classif discrete_features=True ignores n_neighbors on purely categorical data (tie-handling via exact matching). Null centering passes but estimator is k-invariant and insensitive (0.00056 vs 1.52 true, 893x below threshold).",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json screening B-KSG-CMI-K5/K10/K20 k3 identical; run_experiment.py est_ksg_cmi discrete_features=True n_neighbors=k; result.json metrics.ksg_k_invariance",
+      "impact": "Hypothesis that k=5 was too coarse is falsified for this sklearn implementation, but not for KSG family in general. Ceiling must state sklearn discrete-mode limitation, not universal KSG limitation. KSG degenerate control -0.000405 correctly ~0, so null valid but sensitivity absent.",
+      "producer_field": "result.json metrics.ksg_k_invariance finding identical results for k=5,10,20"
+    },
+    {
+      "check": "environment_expresses_true_CMI",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "Stochastic SPA with 50% hash + 50% uniform over 4 CANDIDATES per (state,action) should produce I(Y;A|Z)≈1.52 bits by construction (parent audit). Environment should allow estimator to express effect.",
+      "observed": "Independent MLE on collected N=5000 transitions gives K3 1.377 bits, K2 1.193 diff 0.184; N=50000 MLE K3 1.447 bits; per-(state,action) PMI exploratory 1.461-1.691 bits across 48/48 strata (mean 1.595, all p=0.0 Bonferroni alpha 0.001041). Determinism check shows 9.2% deterministic K3 strata (77/841) vs 25.5% K2, confirming stochastic majority. Design verification 48/48 pairs with 4 distinct candidates holds. Therefore environment does express strong ~1.5-bit signal and is detectable by unbiased estimator; observed estimator failure is estimator-side, not environment ceiling.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json determinism_k3_stochastic det_ratio 0.0916, c6_design_pass true, permutation_test_exploratory mean_stratum_pmi 1.595; recompute MLE 1.377/1.447; parent audit claim 1.52; run_experiment.py CANDIDATES 12x4",
+      "impact": "Spec measurement_validity that stochastic SPA provides non-zero CMI is satisfied; negative result is genuine estimator insensitivity under frozen hyperparameters, not weak design. FALSIFIED verdict is not due to uninformative environment.",
+      "producer_field": "result.json observations[3] per-stratum PMI 1.46-1.69, metrics.determinism_k3_stochastic"
+    },
+    {
+      "check": "within_session_shuffle_correction",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "Shuffled-action null must be within-session (correcting parent global shuffle deviation audit V5) with 500 permutations per estimator.",
+      "observed": "Implementation shuffled_action_null_within_session groups records by session and shuffles action labels within each session via per-session Random(rng.randint). N_SHUFFLE=500 for C1, N_PERM_POSITIVE=1000 for C3. |null_mean| 0.012 for KSG and 0.064 for plugin KL both <0.1, preserving C1 pass even after correction. Producer notes correction does not change C1 pass/fail (margin 8x and 1.6x).",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/run_experiment.py shuffled_action_null_within_session lines 349-402, provenance.json execution.within_session_shuffle true, result.json validity_notes[3]",
+      "impact": "C1 validity preserved; no hidden global-shuffle bias. Positive control p=0.000999 floor correctly uses 1000 perms (1/1001).",
+      "producer_field": "result.json controls.C1-NULL-CONTROL evidence, validity_notes[3]"
+    },
+    {
+      "check": "exploratory_permutation_test_spec_deviation",
+      "status": "FAIL",
+      "severity": "minor",
+      "expected": "B-PERMUTATION-TEST per spec: for each (state,action) stratum with >=5 records, test observed PMI significantly above shuffled-action null via within-session permutation, Bonferroni corrected.",
+      "observed": "Code permutation_test_stratified computes observed PMI vs global next-state marginal null_frac from all records, and permutes by shuffling global next-state list (all_next.elements() shuffled, perm_counts from first n_h). It does not shuffle action labels within session per stratum, nor condition on (state,action) strata membership as spec described. Yet it reports 48/48 significant with PMI 1.46-1.69, which is consistent with signal existence but not the promised conditional stratification. Text correctly labels exploratory and not frozen.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/run_experiment.py permutation_test_stratified lines 460-537 (all_next Counter, perm_rng.shuffle(all_next_shuf)); spec.json baselines B-PERMUTATION-TEST description",
+      "impact": "Does not affect frozen C1/C3 decision (exploratory only) but weakens claim that permutation test validates 'conditional stratification' baseline; signal existence is still supported by MLE, but permutation procedure is mischaracterized.",
+      "producer_field": "result.json metrics.permutation_test_exploratory"
+    },
+    {
+      "check": "C6_C7_design_and_stratum_coverage",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "C6: 48/48 pairs with 4 distinct candidates; C7: >=2 non-empty size buckets; MEASUREMENT_INVALID if <30% strata >=5 or <2 buckets or impl failure.",
+      "observed": "C6 passes 48/48 per verify_design and raw_output.txt. C7 passes 2 non-empty buckets: 5-9 (343 strata, 2147 records) and 10-19 (37 strata, 433 records); 20-49 and 50+ empty. Stratum decomposition correctly shows only small strata due to high-dimensional conditioning (state, history_action_K=3). No MEASUREMENT_INVALID trigger (30% threshold would require counting but spec says <30% of strata have >=5 records — here 380 strata with >=5 out of 841 total ~45% >30%, passes). No estimator impl failure.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json c6_design_pass true, c7_pass true, stratum_size_bias_decomposition; result.json metrics.design_verification",
+      "impact": "Design and coverage gates correctly not triggered; FALSIFIED takes precedence per priority.",
+      "producer_field": "result.json controls.C6-DESIGN-VERIFICATION, C7-STRATUM-BUCKETS, metrics.stratum_size_bias_decomposition"
+    },
+    {
+      "check": "parent_replication_KSG_K5",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "KSG k=5 replicate within 10% of parent 0.000560 and null_mean within 10% of 0.012078.",
+      "observed": "Replicate K3=0.00055995904023428 exactly matches parent 0.000560 (0.007% error), K2=-0.00373462078 vs parent -0.003735, null_mean -0.012066 vs parent -0.012078 (0.1% error). Determinism ratios identical to parent (det_ratio K2 0.2545, K3 0.0916).",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json B-KSG-CMI-K5; result.json controls.REPLICATION-B-PARENT-KSG-K5; research/experiments/EXP-PHYSICS-35482477045/result.json B-KSG-CMI k3 0.000560",
+      "impact": "Reproducibility confirmed; parent insensitivity not due to stochastic generation variance.",
+      "producer_field": "result.json controls.REPLICATION-B-PARENT-KSG-K5"
+    },
+    {
+      "check": "reporting_and_provenance_integrity",
+      "status": "PASS",
+      "severity": "info",
+      "expected": "result.json metrics consistent with raw_results.json, provenance hashes and env recorded, artifacts listed.",
+      "observed": "result.json metrics.screening_n5000 values round raw_results.json to 6 decimals correctly; artifacts sha256 match raw_results.json 5211e3ec..., run_experiment.py 47318bf7..., raw_output.txt 943c1b5...; provenance Python 3.12.14 sklearn 1.9.1 seed 42 wall 240.3s correct; base_sha 34f42089..., freeze hashes match. Report correctly states FALSIFIED-IN-SETTING on C3 and identifies both failure modes, but broad 'exhausted' language requires bounding (see required_fixes).",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/provenance.json hashes, artifacts; result.json artifacts, observations, validity_notes",
+      "impact": "No data integrity violation; reporting exceeds frozen claim only in interpretive breadth, which is correctable via ceiling.",
+      "producer_field": "result.json observations, validity_notes, report.md sections 5.1-5.3"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B-DETERMINISTIC-SPA",
+      "status": "MIXED",
+      "expected": "Plug-in KL and KSG k=10 on fully deterministic 12-state SPA expected positive_control_k3 <0.1 (I(Y;A|Z)=0 by construction).",
+      "observed": "KSG passes: degenerate_control_k3 -0.000405 for all k (true ~0, PASS). Plug-in KL fails: degenerate K3=0.10937 >0.1 threshold (FAIL). With alpha=1.0 smoothing bias 0.109 dominates, so even I=0 setting appears >0.1. Validates deterministic SPA produces zero for unbiased estimator (KSG) and reveals smoothing artifact for plug-in KL.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json B-PLUGIN-KL degenerate_control_k3 0.10936986333698663, B-KSG-CMI-K10 deg -0.00040458210893392493; result.json controls DEGENERATE-CONTROL-PLUGIN-KL fail, DEGENERATE-CONTROL-KSG pass",
+      "interpretation": "Baseline correctly distinguishes estimator properties: KSG correctly nulls (no leakage), plug-in KL with frozen alpha is positively biased even on degenerate baseline, invalidating its <0.1 expectation. Supports validity finding that alpha choice drives outcome."
+    },
+    {
+      "baseline": "B-KSG-CMI-K20",
+      "status": "FAIL_NO_IMPROVEMENT",
+      "expected": "null_mean <0.1 inherited, k3 unknown — tests whether further neighborhood expansion beyond k=10 improves resolution.",
+      "observed": "k=20 identical to k=10 and k=5: K3=0.0005599, null_mean -0.012066, mi_joint 0.034413, mi_cond 0.033853. All three ks produce bitwise identical estimates. No improvement with larger neighborhood.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json B-KSG-CMI-K20 identical; result.json metrics.ksg_k_invariance",
+      "interpretation": "Neighborhood resolution hypothesis is falsified for sklearn discrete mode; invariance suggests implementation uses categorical exact matching, not distance-based kNN. Does not test continuous KSG variant."
+    },
+    {
+      "baseline": "B-PERMUTATION-TEST",
+      "status": "PASS_SIGNIFICANT_BUT_MISALIGNED",
+      "expected": "Permutation test conditioned on (state,action) strata with >=5 records, within-session permutation, Bonferroni across strata — expected significant for stochastic SPA by construction.",
+      "observed": "Exploratory reports 48/48 strata significant with Bonferroni alpha 0.001041 (0.05/48), mean PMI 1.595 bits range 1.461-1.691 all p=0.0. However implementation shuffles global next-state marginal, not within-session action labels per stratum as spec described. Still demonstrates strong per-(state,action) signal consistent with true ~1.5-bit CMI.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json permutation_test_exploratory n_significant_bonferroni 48, bonferroni_alpha 0.001041, mean_stratum_pmi 1.595; run_experiment.py permutation_test_stratified",
+      "interpretation": "Signal existence confirmed (corroborates MLE 1.38), but baseline does not test the specified conditional stratification null; non-parametric detectability claim should be qualified to per-(state,action) vs global marginal, not per-(state,history,action) conditional."
+    },
+    {
+      "baseline": "B-PARENT-KSG-K5",
+      "status": "PASS",
+      "expected": "k3 within 10% of parent 0.000560; null_mean within 10% of parent 0.012078.",
+      "observed": "Exact replication: K3 0.00055995904023428 vs 0.000560 (0.007% diff), null_mean -0.012066 vs -0.012078 (0.1% diff), K2 -0.003734 vs -0.003735.",
+      "evidence": "research/experiments/EXP-PHYSICS-35510154353/result.json controls.REPLICATION-B-PARENT-KSG-K5 observed K3=0.000560; raw_results.json B-KSG-CMI-K5",
+      "interpretation": "Strong replication; parent KSG insensitivity reproducible and not due to implementation drift; validates that earlier 1.52-bit audit correction was not re-introduced as measurement error."
+    }
+  ],
+  "recomputed_metrics": {
+    "screening_n5000_recomputed": {
+      "B-PLUGIN-KL": {
+        "k2_value_stochastic": 0.07134701598598733,
+        "k3_value_stochastic": 0.09887606746922667,
+        "k3_minus_k2": 0.027529051483239336,
+        "null_mean": 0.06429067807063664,
+        "null_std": 0.0001487445593670134,
+        "abs_null_mean": 0.06429067807063664,
+        "c1_pass": true,
+        "positive_control_k3": 0.09887606746922667,
+        "positive_control_p": 0.000999000999000999,
+        "c3_pass": false,
+        "degenerate_control_k3": 0.10936986333698663,
+        "match_producer": true
+      },
+      "B-KSG-CMI-K10": {
+        "k2_value_stochastic": -0.0037346207819562993,
+        "k3_value_stochastic": 0.00055995904023428,
+        "k3_minus_k2": 0.004294579822190579,
+        "null_mean": -0.012066399977286075,
+        "null_std": 0.00020392508547216224,
+        "abs_null_mean": 0.012066399977286075,
+        "c1_pass": true,
+        "positive_control_k3": 0.00055995904023428,
+        "positive_control_p": 0.000999000999000999,
+        "c3_pass": false,
+        "degenerate_control_k3": -0.00040458210893392493,
+        "mi_joint_raw_k3": 0.03441340956812361,
+        "mi_cond_raw_k3": 0.03385345052788933,
+        "match_producer": true
+      },
+      "B-KSG-CMI-K5_replication": {
+        "k3_value_stochastic": 0.00055995904023428,
+        "null_mean": -0.012066399977286075,
+        "match_parent_K3_0_000560_within_10pct": true,
+        "delta_vs_parent_pct": 0.007
+      },
+      "B-KSG-CMI-K20": {
+        "k3_value_stochastic": 0.00055995904023428,
+        "identical_to_K5_K10_to_1e12": true
+      }
+    },
+    "plugin_KL_alpha_sensitivity_recompute_N5000_K3": {
+      "alpha_1_0_frozen": 0.09887606746923036,
+      "alpha_0_5": 0.22076615564793872,
+      "alpha_0_1": 0.7431344952637667,
+      "alpha_0_01": 1.2742735313837437,
+      "alpha_0_001": 1.3664048021337778,
+      "MLE_alpha_0": 1.377240,
+      "threshold_0_5": 0.5,
+      "alpha_0_1_passes_C3": true,
+      "alpha_0_01_passes_C3": true,
+      "MLE_passes_C3": true,
+      "note": "Recomputed on same records recs_k3 (N=5000, seed=42) via plugin_alpha helper mirroring est_plugin_kl logic; N=50000 MLE K3 1.447137 and alpha0.1 1.15995 confirm 1.52-bit signal is recoverable with lower smoothing"
+    },
+    "KSG_invariance_recompute": {
+      "k5_K3": 0.00055995904023428,
+      "k10_K3": 0.00055995904023428,
+      "k20_K3": 0.00055995904023428,
+      "k5_mi_joint": 0.03441340956812361,
+      "k10_mi_joint": 0.03441340956812361,
+      "k20_mi_joint": 0.03441340956812361,
+      "k_invariant": true,
+      "interpretation": "sklearn discrete_features=True ignores n_neighbors"
+    },
+    "design_verification_recomputed": {
+      "c6_pass": true,
+      "48_of_48_pairs_4_candidates": true,
+      "c7_non_empty_buckets": 2,
+      "c7_buckets_5_9_n": 343,
+      "c7_buckets_10_19_n": 37,
+      "c7_pass": true
+    },
+    "decision_rule_recomputed": {
+      "c1_pass_count": 4,
+      "c1_passers": ["B-PLUGIN-KL", "B-KSG-CMI-K10", "B-KSG-CMI-K5", "B-KSG-CMI-K20"],
+      "c3_pass_count": 0,
+      "primary_c1_passers": ["B-PLUGIN-KL", "B-KSG-CMI-K10"],
+      "primary_c3_passers": [],
+      "verdict": "FALSIFIED-IN-SETTING",
+      "trigger": "C3 fails for both primaries passing C1: plug-in KL K3 0.099 <0.5, KSG k=10 K3 0.00056 <0.5",
+      "priority_correct": true,
+      "measurement_invalid_not_triggered": true
+    },
+    "recomputation_method": "Verified raw_results.json vs result.json numeric equality; reproduced MLE plug-in (alpha=0) and alpha sweep by re-importing run_experiment.collect_transitions/build_action_history_records with seed=42 N=5000/50000 and plugin_alpha mirroring est_plugin_kl smoothing formula; confirmed KSG invariance from raw_results identical values and source code discrete_features=True"
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING per frozen decision rule is justified: with frozen hyperparameters (plug-in KL Laplace alpha=1.0, KSG sklearn mutual_info_classif k=10 discrete_features=True) at N=5000 on the stochastic 12-state SPA (50% hash + 50% uniform over 4 CANDIDATES), both primary estimators pass C1 (|null_mean| 0.064 and 0.012 <0.1) but fail C3 (K3 0.099 and 0.00056 <0.5, p 0.000999) where true I(Y;A|Z)≈1.38-1.52 bits. Ceiling is strictly bounded to these frozen implementations. It does NOT justify broad claims that CMI estimation is fundamentally impossible on discrete SPAs or that all plug-in/KSG families are insensitive: unbiased MLE plug-in on same data gives K3=1.38 bits (N=5000) and 1.45 bits (N=50000) and alpha=0.1 gives K3=0.74 bits, both would SURVIVE C3. Likewise KSG failure is attributable to sklearn discrete-mode k-invariance, not universal KSG. No inference to production SPAs, continuous state representations, or alternative estimators (alpha<=0.1, discrete_features=False, histogram MLE) is warranted. The per-(state,action) PMI signal 1.46-1.69 bits confirms environment does express effect; failure is estimator-parameter-specific.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35510154353/spec.json claim_ids C-MEAS-VALID C-WEB-DYNAMICS, decision_rule FALSIFIED-IN-SETTING > MEASUREMENT_INVALID > SURVIVES, thresholds C1 0.1 C3 0.5 p<=0.001 C6 48/48 C7 >=2 buckets",
+    "research/experiments/EXP-PHYSICS-35510154353/prereg.md sections 3 H0/H1/H2, 7.1 plug-in KL alpha=1.0 and KSG k=10 discrete_features=True, 9.1-9.2 C1/C3, 11 decision rules, 13 deviations",
+    "research/experiments/EXP-PHYSICS-35510154353/freeze.json hashes prereg be8ee98, spec c44c900, request aae4dad",
+    "research/experiments/EXP-PHYSICS-35510154353/result.json metrics.screening_n5000, metrics.ksg_k_invariance, metrics.plugin_kl_smoothing_bias, controls C1-C7, outcome FALSIFIES verdict FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35510154353/raw_results.json screening B-PLUGIN-KL/B-KSG-CMI-K10/K5/K20 identical KSG, null_control, degenerate_control_k3, stratum_size_bias_decomposition, permutation_test_exploratory 48/48 PMI 1.46-1.69",
+    "research/experiments/EXP-PHYSICS-35510154353/run_experiment.py est_plugin_kl alpha=1.0 n_smoothed 45368, est_ksg_cmi discrete_features=True n_neighbors=k, shuffled_action_null_within_session within-session, permutation_test_stratified global shuffle deviation, CANDIDATES 12x4",
+    "research/experiments/EXP-PHYSICS-35510154353/raw_output.txt C1/C3 logs, VERIFY 48/48, screening passers []",
+    "research/experiments/EXP-PHYSICS-35510154353/provenance.json python 3.12.14 sklearn 1.9.1 seed 42 wall 240.3s SHA stochastic 8cff7c33 deterministic 46ed606a",
+    "research/experiments/EXP-PHYSICS-35482477045/result.json parent KSG 0.000560 LR 0.103695 and audit correction true CMI 1.52 bits (inherited request.json)",
+    "audit recomputation: MLE K3 1.377 N5000 1.447 N50000, alpha sweep 1.0->0.099 0.1->0.743 0.01->1.27, KSG invariance 0.0005599 x3",
+    "research/experiments/EXP-PHYSICS-35482477045/handoff.json sha 55f227782178e2a38ca3fa9570b5467bfee4355c7cb7e3d091d4a247acc00141"
+  ],
+  "unresolved": [
+    "Would plug-in KL with smaller Laplace alpha (0.1, 0.01) or bias-corrected MLE maintain |shuffled null_mean| <0.1 while achieving K3 >=0.5? Recompute shows K3 0.74-1.27 would pass C3, but null_mean for those alphas not yet measured (requires 500 within-session permutations per alpha with same data). Spec mandates alpha=1.0, so new frozen experiment needed.",
+    "Would KSG with discrete_features=False, continuous distance, or alternative MI estimator (e.g., histogram plug-in, KSG with different metric, or JMI) make k effective and detect 1.5-bit signal while preserving null centering? Frozen discrete_features=True appears to use exact-match tie handling, so k irrelevant.",
+    "Would non-smoothed MLE plug-in (no Laplace) be unbiased enough at N=5000 with 841 K3 strata (avg 1.5 records per (z,a) cell) to keep false positive rate low? MLE recovers signal but may overestimate null as well.",
+    "Does the per-(state,action) PMI 1.46-1.69 bits measured by global-shuffle exploratory translate to conditional I(Y;A|Z) with Z=(current, history_action_K=3) vs Z=(current, history_state_K=2)? MLE shows I diff 0.184 bits, but bootstrap CI for H2 not computed because Phase2 gated on SURVIVES.",
+    "Is CMI insensitivity fundamental to low-count high-cardinality conditioning (841 strata at N=5000) even with optimal estimator, or specific to smoothing/discrete-mode choices? N=50000 improves MLE from 1.377 to 1.447 and alpha1 bias reduces from 0.099 to 0.423, suggesting sample size matters.",
+    "Generalization beyond 12-state discrete hash SPA to production Web transitions with larger vocabularies, continuous embeddings, or different stochastic mixing (p_deterministic !=0.5) and richer state representations remains untested."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35476271877",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Can a corrected SNR decomposition using across-iteration margin_std (not within-iteration within-type SE) as the noise scale pass C1-equivalent validation (predicted agreement within 10pp of observed at n=15 and n=20), enabling a reliable extrapolation to full-DOM element counts (n=21-82) that predicts whether ranking agreement crosses the 80% threshold?",
+  "why_next": "The frozen SNR decomposition failed C1 by 40–50pp due to noise-scale misspecification (within-iteration SE ~1e-5 vs across-iteration margin_std ~1e-4 to 6e-4, 10–50x mismatch). A corrected model using margin_std as noise is the minimum-cost preregistrable successor that could pass validation and re-open the extrapolation question. If the corrected model passes C1 and C3 predicts <80% at n=50, the 56% plateau is structural and product lane adopts non-recipe density immediately. If C3 predicts ≥80%, Docker re-collection is justified. This is the single highest-information offline next step for the MIXED program. Alternatively, if Docker becomes available, direct full-DOM measurement (EXP-INTEL-35462974425) bypasses the model entirely and should take priority.",
+  "carry_forward": {
+    "established": [
+      "Sample-size effect on ranking agreement is REAL and MONOTONIC: canonical recipe tag_entropy x DEF-FULL-MAP agreement improves from 0% at n=5/10 to 50% at n=15 to 56% at n=20 (Spearman=1.0, C5 PASS). More elements per definition help stabilize rankings (EXP-INTEL-35445596324 M4/M9/M10, audit PASS; EXP-INTEL-35476271877 baseline_reproduction confirms Spearman=1.0 reproduced)",
+      "Ranking agreement PLATEAUS below 80% at maximum available sample size: canonical 56.5% at n=20, per-task 78.0% at n=20. Ranking not stable at n=20 (EXP-INTEL-35445596324 M4/M8, audit PASS; EXP-INTEL-35476271877 baseline_reproduction confirms canonical 0.5654, per-task 0.78)",
+      "Non-recipe pipeline ranking requires >=15 elements to preserve listing > detail for tag_entropy. Phase transition around n=15 (EXP-INTEL-35445596324 B2 controls)",
+      "OECD/COINr pipeline preserves between-type discrimination (max eta2 0.999645 at n=20) and listing > detail ranking for tag_entropy at n>=15 for both DEF-FULL-MAP and DEF-FORM-ONLY without recipe sampling (EXP-INTEL-35445596324 M3/M4, inherited from EXP-INTEL-35434771791)",
+      "Per-task recipe achieves 78.65% ranking agreement at n=20 vs canonical 55.95% but with lower eta2 (0.366 vs 0.921). Independent sampling captures diverse discriminative elements (EXP-INTEL-35445596324 M4 vs M5, audit VF7; EXP-INTEL-35476271877 baseline_reproduction confirms)",
+      "Canonical eta2 0.919 at n=20 (high discrimination) with agreement 0.565 (low); per-task eta2 0.367 with agreement 0.78 — the dissociation is reproducible across runs (EXP-INTEL-35476271877 baseline_reproduction within hash-seed variation)",
+      "Frozen SNR decomposition model (Phi(mean(SNR_i)) with within-iteration SE noise) FAILS C1 validation: residuals 0.5002 (n15) and 0.4405 (n20) exceed 10pp threshold by ~40–50pp. Root cause is noise-scale misspecification (within-iteration SE ~1e-5 vs across-iteration margin_std ~1e-4 to 6e-4, 10–50x mismatch). Decomposition is unreliable for mechanism identification or extrapolation (EXP-INTEL-35476271877 result.json C1 FAIL, audit VF1)",
+      "Template invariance persists on truncated-first-20 subsample for listing, detail, cart page types (EXP-INTEL-35476271877 analysis_output_snr.json verification). Under template invariance, canonical same-type densities are scalar multiples (elements_with_bbox denominators listing 1550/1560/1564; detail 1215/1149/1143), forcing rho=1.0 as mathematical consequence, not evidence for independent correlated-noise mechanism (audit VF2)",
+      "Data truncation root cause confirmed: locatable_sample truncated to first-20 at collection time in EXP-INTEL-34782350557, not downstream (EXP-INTEL-35462974425 VF2, inherited from parent handoff)"
+    ],
+    "rejected": [
+      "Frozen SNR decomposition model Phi(mean(SNR_i)) with within-iteration SE noise captures the ranking instability mechanism — REJECTED: C1 fails by 40–50pp, residuals are not borderline (EXP-INTEL-35476271877 C1 FAIL, audit VF1)",
+      "Ranking instability is PURELY a sample-size artifact within truncated-first-20 range — REJECTED: plateaus at 56% at n=20, well below 80% threshold (EXP-INTEL-35445596324 C6 FAIL)",
+      "OECD/COINr pipeline structure itself destroys between-type variance — REJECTED (pipeline preserves discrimination eta2 0.964–0.999, inherited from EXP-INTEL-35434771791)",
+      "C2 correlated-noise branch (rho=1.0) is evidence for an independent H2 correlated-noise instability mechanism — REJECTED: rho=1.0 is structurally forced by template invariance + canonical shared role subset; not independent mechanism evidence (audit VF2)"
+    ],
+    "unknown": [
+      "Does ranking stabilize at full DOM (n=21-82) when more diverse elements per definition are available? n=15→n=20 plateau (+6pp) suggests diminishing returns but does not rule out crossing 80% — UNTESTED due to Docker unavailability and unreliable model extrapolation",
+      "Does per-task recipe achieve >=80% at full DOM? Current 78.65% at n=20 tantalizingly close but not tested at full DOM — UNTESTED",
+      "Whether a corrected SNR model using across-iteration margin_std (or full margin distribution) as noise scale would pass C1-equivalent validation and re-open extrapolation to n=50/82 — OUTSIDE FROZEN DESIGN, requires new preregistration",
+      "What is the actual instability mechanism: H1 (small margin relative to noise), H2 (correlated noise from shared role subset), or H3 (persistent template invariance)? Frozen decomposition that would discriminate them failed its validity gate",
+      "Whether template invariance breaks at full DOM element counts, changing the variance structure — UNTESTED",
+      "Cross-site generalization of the sample-size effect beyond single Magento Docker site — UNTESTED",
+      "Whether a finer alpha grid for hybrid canonical/per-task blend has a sweet spot (eta2>=0.80 AND agreement>=0.80) — exploratory grid {0,0.2,0.4,0.6,0.8,1.0} found none, but finer resolution untested"
+    ],
+    "do_not_assume": [
+      "That the C3 extrapolation (predicted agreement ≥80% at n=50, PI90 lo 0.845) is reliable or usable — it inherits the failed C1 model and is built on sign-crossing |margin| power law from n=4 data points; MUST NOT be used to justify Docker re-collection (audit VF3)",
+      "That the 56% plateau at n=20 persists or does not persist at full DOM — this is UNKNOWN, not established by either the failed extrapolation or the failed decomposition",
+      "That rho=1.0 represents an independent correlated-noise mechanism — it is mathematically forced by template invariance + shared role subset (audit VF2); downstream interpretation must not count it as H2 evidence without breaking template invariance",
+      "That mean(Phi(SNR_i)) ≈ observed agreement is mechanistic validation — it is near-tautological under template invariance where SE_i≈1e-5 makes Phi(SNR_i) collapse to indicator(margin_i>0) (audit VF4)",
+      "That recipe-based density is safe for Product Core promotion — canonical agreement 56% at n=20 with bootstrap CI ~0–100%; product lane must use non-recipe density only",
+      "That n=20 result generalizes to full DOM n=21-82 — ranking stability at n>20 is UNKNOWN",
+      "That first-n DOM-position subsampling represents random element subsets — monotonic improvement may partially reflect DOM-sequential structure",
+      "That this MEASUREMENT_INVALID result provides evidence for or against the full-DOM hypothesis — it provides NONE; the failure is the model's own validity gate, not a scientific negative",
+      "That the margin sign crossing zero between n=10 and n=15 is meaningful — it may be an artifact of small n=4 power-law fitting across a narrow range; the sign pattern (negative at n=5/10, positive at n=15/20) is preserved in both this run and parent but the physical interpretation is not established"
+    ]
+  },
+  "dependencies": [
+    "Docker image: am1n3e/webarena-verified-shopping:latest — Magento container for full-DOM re-collection (sole blocking action for direct full-DOM measurement)",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — truncated-first-20 raw data (7 tasks)",
+    "research/experiments/EXP-INTEL-35445596324/analyze.py sha256 5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724 — parent analysis framework for per-iteration density machinery",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 — frozen analysis script ready for full-DOM data",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a — per-iteration SNR data for corrected model construction",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2 — per-n margin_std and SE values needed for corrected noise scale"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35476271877/result.json — MEASUREMENT_INVALID, C1 FAIL (residuals 0.5002/0.4405), noise-scale mismatch 10–50x, baseline_reproduction, mechanism classification",
+    "research/experiments/EXP-INTEL-35476271877/audit.json — MEASUREMENT_INVALID, producer_claim_supported=true, VF1 noise-scale misspecification (critical), VF2 rho=1.0 tautology, VF3 extrapolation gated, VF4 alternative statistic tautology, all baseline_reproduction PASS",
+    "research/experiments/EXP-INTEL-35476271877/spec.json — frozen decision rule C1/C2/C3, hypothesis H1/H2/H3, falsifier F1/F2/F3, baselines B1-B6",
+    "research/experiments/EXP-INTEL-35476271877/report.md — noise-scale mismatch diagnosis, template invariance verification, interpretation bounded to 7 tasks truncated-first-20",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json — per_n margins/se_tots/margin_std/margins/sign_crosses_zero, mechanism classification, extrapolation fits, baseline_reproduction",
+    "research/experiments/EXP-INTEL-35445596324/result.json — parent baselines B1-B6 (canonical/per-task eta2 and ranking agreement at n=5/10/15/20)",
+    "research/experiments/EXP-INTEL-35470447439/handoff.json — inherited carry_forward (Docker BLOCKED, full-DOM question OPEN, recipe density viability unknown)",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz — raw per-iteration SNR records for corrected model construction"
+  ],
+  "recommended_action": "Two parallel paths, ordered by priority: (1) PREREGISTER a corrected SNR decomposition experiment using across-iteration margin_std (not within-iteration within-type SE) as noise scale, with C1' = |Phi(mean(M_i)/std(M_i)) - observed| <=10pp at n=15 and n=20, then evaluate C3' (extrapolated agreement at n=50 < 80%). Use the existing snr_per_iteration_tag_entropy.json.gz data (margin_std already computed in analysis_output_snr.json: 5.0e-05 at n5 to 6.2e-04 at n20). Estimated cost: <30 seconds compute, <500 LLM tokens for analysis code. (2) If Docker image am1n3e/webarena-verified-shopping:latest becomes available, prioritize direct full-DOM measurement (EXP-INTEL-35462974425) which bypasses the model entirely and directly answers the MIXED program question. The corrected SNR model is the minimum-cost path while Docker remains blocked."
+}
