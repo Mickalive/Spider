@@ -1,17 +1,47 @@
 {
   "experiment_id": "EXP-RUNTIME-35481773400",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold for larger payloads (10KB, 100KB) across gzip compression level extremes (levels 1 and 9) and brotli quality extremes (quality 4 and 8) on localhost buffered proxy with chunked transfer-encoding?",
+  "hypothesis": "Iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth generate_*_body(state, target_size) for all 4 auth states, 3 content types (JSON/HTML/XML), 2 payload sizes (10KB, 100KB), and 4 compression configurations (gzip level 1, gzip level 9, brotli quality 4, brotli quality 8) with multi-chunk framing (chunk_size=32), served through localhost buffered proxy with chunked transfer-encoding.",
+  "falsifier": "Any SHA256(decompressed) != SHA256(generate_*_body(state, target_size)) across all observations for any (size, compression, content_type, state) cell, OR any silent fallback (SHA256(decompressed) == SHA256(raw_compressed)) for any compressed response.",
+  "baselines": [
+    {
+      "id": "B-GZIP-MC-1KB",
+      "description": "Gzip multi-chunk correctness at 1KB (established 240/240 in parent EXP-RUNTIME-35470447407)",
+      "expected": "100% correctness, serves as regression control for decompression pipeline infrastructure"
+    },
+    {
+      "id": "B-BROTLI-MC-1KB",
+      "description": "Brotli multi-chunk correctness at 1KB (established 480/480 total including parent EXP-RUNTIME-35470447407)",
+      "expected": "100% correctness, serves as regression control for brotli decompression"
+    },
+    {
+      "id": "B-IDENTITY-10KB",
+      "description": "IDENTITY (no compression) at 10KB—validates correctness oracle for larger payloads",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, 10240) exactly"
+    },
+    {
+      "id": "B-IDENTITY-100KB",
+      "description": "IDENTITY (no compression) at 100KB—validates correctness oracle for large payloads",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, 102400) exactly"
+    }
+  ],
+  "positive_control": "B-BROTLI-MC-1KB: established 480/480 in parent chain; must pass 100% to confirm no regression in decompression pipeline infrastructure.",
+  "null_control": "B-RANDOM: Within-state decompressed hash must be deterministic (all_same=true for all 4 auth states across all cells). Any within-state hash variation indicates non-deterministic decompression or server behavior.",
+  "measurement_validity": [
+    "Correctness oracle validated at 1KB via IDENTITY baseline in parent; extended to 10KB and 100KB via B-IDENTITY-10KB and B-IDENTITY-100KB baselines",
+    "Deterministic server: Flask mock with seeded RNG (seed=44) produces deterministic bodies per (state, content_type, target_size) pair",
+    "Silent fallback detection: SHA256(decompressed) == SHA256(raw_compressed) classified as failure, not success",
+    "Compression level extremes produce maximally different compressed structures: gzip level 1 (fastest, largest output) vs level 9 (slowest, smallest output); brotli quality 4 (minimum) vs quality 8 (near maximum)",
+    "chunk_size=32 for multi-chunk framing; at 10KB nominal, gzip compressed ~2-10KB spans 60-300+ chunks; at 100KB nominal, compressed ~20-50KB spans 600-1500+ chunks",
+    "Max decompression depth 5 (brotli->gzip->identity; single-layer encoding per observation)",
+    "Request jitter 50-150ms uniform between requests to avoid rate-limit effects",
+    "Python 3.12 stdlib gzip module + brotli 1.2.0"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) correctness_match_rate == 1.0 for ALL cells across all size x compression x content_type combinations; (C2) silent_fallback_count == 0 for ALL cells; (C3) B-GZIP-MC-1KB and B-BROTLI-MC-1KB pass 100% (regression controls, no pipeline degradation); (C4) null_control passes (all_same=true for all states in all cells). FALSIFIED if any correctness failure OR any silent fallback in any cell. MEASUREMENT_INVALID if infrastructure prevents data collection or if correctness oracle baseline (B-IDENTITY) fails.",
+  "product_consequence_positive": "Larger payload correctness validated under chunked transfer encoding with compression level variation. The decompression pipeline handles realistic web content sizes (10KB-100KB) across encoding quality extremes. Product scope extends from1KB to 100KB payloads. C-MEAS-VALID claim ceiling advances; real CDN infrastructure remains the final product-readiness gate.",
+  "product_consequence_negative": "Larger payloads fail correctness under chunked framing at scale. The decompression pipeline has a size-dependent failure mode (e.g., chunk boundary corruption, buffer overflow, dictionary reference spanning). Product cannot handle realistic web content without diagnosis. The decompression implementation requires investigation of size-dependent behavior.",
+  "estimated_cost": "Low: ~640 HTTP requests to localhost mock server (2 sizes x 3 types x 4 compressions x 4 states x 5 reps + baselines + regression), <5 minutes execution, no external infrastructure, no API costs",
+  "expected_information_gain": "High: extends established1KB correctness to realistic web content sizes (10KB/100KB) and tests compression level sensitivity. A negative result reveals a critical size-dependent failure mode that changes product scope. A positive result advances C-MEAS-VALID claim ceiling and narrows the remaining gap to CDN correctness. The compression level extremes (gzip 1 vs 9, brotli 4 vs 8) produce maximally different compressed structures, making chunk-boundary failures most detectable."
 }
