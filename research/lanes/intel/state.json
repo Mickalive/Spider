@@ -1,17 +1,17 @@
 {
   "lane": "intel",
   "human_paused": false,
-  "active_experiment_id": "EXP-INTEL-35476271877",
-  "last_experiment_id": "EXP-INTEL-35470447439",
-  "last_verdict": "BLOCKED",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-INTEL-35476271877",
+  "last_verdict": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
   "continue_immediately": false,
-  "next_question": "Can Docker image am1n3e/webarena-verified-shopping:latest be made available, enabling the frozen analyze.py to re-collect full-DOM locatable_sample (all elements with bbox, n=21-82 per task) for the 7 existing tasks and evaluate whether canonical recipe ranking agreement crosses the 80% threshold?",
+  "next_question": "Can a corrected SNR decomposition using across-iteration margin_std (not within-iteration within-type SE) as the noise scale pass C1-equivalent validation (predicted agreement within 10pp of observed at n=15 and n=20), enabling a reliable extrapolation to full-DOM element counts (n=21-82) that predicts whether ranking agreement crosses the 80% threshold?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-20T16:18:32.643739+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "91120b221c5197c56e7463eef4c544063fadcb7715f9289172358bf2fad256c4",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "571093cfed539e7e6e855500",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-20T17:27:45.893347+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "94f853d160ebbabcd115e28dd1d6ad50f738afd289c8bfb2665537a1c78db36a",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
