@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "lane": "physics",
+  "github_run_id": null,
+  "python_version": "3.12.14",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "environment": {
+    "platform": "linux",
+    "seed": 42,
+    "n_transitions_stochastic": 5000,
+    "n_transitions_deterministic": 5000,
+    "n_sessions": 50,
+    "steps_per_session": 100,
+    "n_shuffle_c1": 500,
+    "n_perm_c3": 1000,
+    "n_bootstrap": 200,
+    "alpha_values_tested": [0, 0.01, 0.1, 0.5, 1.0]
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PHYSICS-35530591329/request.json",
+    "spec.json": "research/experiments/EXP-PHYSICS-35530591329/spec.json",
+    "prereg.md": "research/experiments/EXP-PHYSICS-35530591329/prereg.md",
+    "freeze.json": "research/experiments/EXP-PHYSICS-35530591329/freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35510154353",
+    "handoff_path": "research/experiments/EXP-PHYSICS-35510154353/handoff.json",
+    "handoff_sha256": "74c060dd80628bad97ac2c615f1c753b7215d8ab42e7f1d07402924339846fd2"
+  },
+  "code_paths": {
+    "run_experiment": "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py",
+    "run_experiment_sha256": "9875c0bc2ce4e8ffeeca1f54ceb92fecac9eee70131baccede246a623c0730cf"
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json",
+      "sha256": "afa8b1c5e32bf589755a6031ef2c489d1384d3be46f743e083b32abb2440e017"
+    },
+    "raw_output": {
+      "path": "research/experiments/EXP-PHYSICS-35530591329/raw_output.txt",
+      "sha256": "167f96bf6d56a284735da3719071dd95415376e1f8e04a0d2628db0eebc7e2ac"
+    },
+    "result_json": {
+      "path": "research/experiments/EXP-PHYSICS-35530591329/result.json",
+      "sha256": "907fa29b530f7be60d7315928da1038f57343fd384375d9dcda445b34123e24f"
+    },
+    "report_md": {
+      "path": "research/experiments/EXP-PHYSICS-35530591329/report.md",
+      "sha256": "d505d15a212b12646e9f0b5ee1251e7a9ee943189136c718890667de93cc8632"
+    }
+  },
+  "data_collection": {
+    "stochastic_spa_transitions_sha256": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+    "deterministic_spa_transitions_sha256": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+    "stochastic_spa_n": 5000,
+    "deterministic_spa_n": 5000,
+    "determinism_ratio_k3": 0.0916
+  },
+  "reproducibility": {
+    "command": "python research/experiments/EXP-PHYSICS-35530591329/run_experiment.py",
+    "wall_seconds": 376.6,
+    "deterministic": true,
+    "notes": "All RNG seeded with seed=42. Results are deterministic given the same dependencies."
+  },
+  "execution_timestamp": "2026-09-20T19:10:00+00:00"
+}

@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_BROTLI_FLUSH_BUG_DISCLOSED",
+      "severity": "low",
+      "description": "Initial execution called brotli.Decompressor.flush() which does not exist in brotli 1.2.0 (only process/can_accept_more_data/is_finished). AttributeError was caught by generic try/except producing 0/480 streaming correct. Producer disclosed bug in result.json:validity_notes V1, provenance.json:execution_notes, report.md Brotli Streaming API section, and corrected by removing flush() call. Final raw_cell_results.json shows 480/480 correct, 0 decompression_errors, 0 silent_fallbacks. Fix is audited and valid.",
+      "evidence": "result.json:validity_notes[0] V1_BROTLI_STREAMING_API, provenance.json:execution_notes[1][2], report.md:Findings Brotli Streaming API, run_experiment.py:streaming_brotli_decompress no flush() call, raw_cell_results.json 480/480 streaming_correct_rate=1.0",
+      "mitigated": true
+    },
+    {
+      "id": "V2_IDENTITY_STREAMING_TAUTOLOGY",
+      "severity": "medium",
+      "description": "B-IDENTITY-HE-STREAMING is specified as uncompressed data fed through streaming API path to validate wire preservation. Implementation in run_experiment.py Phase 3 bypasses decompressor APIs (streaming_result = expected_body direct passthrough, comment: 'identity = no compression'). 120/120 identity_correct is tautologically true and does not test streaming decompressor handling of non-compressed data or GzipFile/brotli error paths. Does not falsify C1-C2, and decision rule correctly does not gate SURVIVES on identity failure alone (MEASUREMENT_INVALID only if identity fails), but overstates wire-preserving validation. Claim ceiling must note identity not exercised via API.",
+      "evidence": "run_experiment.py:438-441 Phase 3 identity passthrough, spec.json:baselines B-IDENTITY-HE-STREAMING expected 100% via streaming API, result.json:controls.B-IDENTITY-HE-STREAMING observed 120/120 via passthrough",
+      "mitigated": false
+    },
+    {
+      "id": "V3_PURE_IN_MEMORY_ECOLOGICAL_VALIDITY",
+      "severity": "medium",
+      "description": "Entirely in-process decompression comparison (no HTTP servers, proxies, network, Accept-Encoding, Vary/cache, TCP segmentation). Spec measurement_validity explicitly bounds claim to decompressor API layer not HTTP TE framing layer, and producer explicitly bounds claim_ceiling to in-process. Real CDN infrastructure gate remains open. This is correctly disclosed in result.json validity_notes V3 and provenance execution_notes, not a falsification.",
+      "evidence": "result.json:validity_notes[2] V3_PURE_IN_MEMORY, result.json:unresolved[0] real CDN question, spec.json:measurement_validity[11], report.md:Claim Ceiling Not validated",
+      "mitigated": true
+    },
+    {
+      "id": "V4_BROTLI_DRAIN_RISK",
+      "severity": "low",
+      "description": "streaming_brotli_decompress loops process(chunk) and joins non-empty returns, but never drains internal buffer via process(b'') empty-input calls nor checks is_finished(). brotli docs note input may be buffered until enough data accumulated and output_buffer_limit draining may require empty-input calls. For tested payloads (high-entropy, GZIP-THEN-BROTLI outer brotli quality 4, BROTLI-THEN-GZIP inner brotli quality 4) no drain needed (audit independent recomputation 480/480 still matches with and without drain). Risk is bounded to untested encodings/levels where final block remains buffered and would truncate output. Ceiling bounded to tested qualities/levels.",
+      "evidence": "run_experiment.py:166-177 streaming_brotli_decompress, brotli 1.2.0 Decompressor.process docs buffered behavior, audit recomputation: streaming_brotli 32B/8192B both byte-identical to full decompress for random 10KB payload",
+      "mitigated": false
+    },
+    {
+      "id": "V5_PYTHONHASHSEED_BINARY_DETERMINISM",
+      "severity": "low",
+      "description": "generate_binary_he_body uses struct.pack(hash(state) & 0xFFFFFFFF) which is PYTHONHASHSEED-dependent (hash randomization). Within-process determinism holds (within_state_determinism all_same=true 5 reps per state per cell in both paths confirmed via recomputation). Cross-run reproducibility across interpreter sessions with different PYTHONHASHSEED is not tested and remains unknown per result.json unresolved[4]. Does not affect intra-run C1-C4.",
+      "evidence": "run_experiment.py:115 state_bytes = struct.pack(hash(state)...), result.json:validity_notes[6] V7_BINARY_HASHSEED, result.json:unresolved[4]",
+      "mitigated": true
+    },
+    {
+      "id": "V6_FULLBODY_ITERATIVE_VS_SINGLE_DECOMPRESS",
+      "severity": "low",
+      "description": "Spec defines full-body baseline as brotli.decompress / gzip.decompress on complete compressed bytes (single-layer or sequential outer-then-inner). Implementation uses iterative fullbody_decompress(max_depth=5) trying brotli then gzip each depth. For depth-2 stacked encodings this is functionally equivalent (verified: outer brotli decompress then inner gzip decompress). For single-layer regression uses same iterative decompress which still resolves correctly (240/240). No masking of silent fallback observed (silent_fallback_count 0). Acceptable but note representation loss: iterative could theoretically decompress deeper than spec intends (depth up to 5).",
+      "evidence": "run_experiment.py:148-164 fullbody_decompress, spec.json:measurement_validity[2][3], result.json:metrics.streaming_correctness.fullbody_ground_truth_rate 1.0",
+      "mitigated": true
+    },
+    {
+      "id": "V7_CHUNK_EQUALITY_ONLY",
+      "severity": "low",
+      "description": "Only equal chunk_size alignment tested (outer and inner both 8192 or both 32). Spec measurement_validity[7] lists chunk sizes 8192 and 32 but does not require mixed-size matrix. Parent unresolved noted mixed proxy/client chunk sizes untested. Claim ceiling correctly excludes mixed-size generalization.",
+      "evidence": "spec.json:measurement_validity[7], result.json:validity_notes[4] V5_CHUNK_SIZE_EQUALITY, run_experiment.py:streaming_decompress_multi_layer same chunk_size for both layers",
+      "mitigated": true
+    },
+    {
+      "id": "V8_SAME_PROCESS_ORACLE",
+      "severity": "low",
+      "description": "Correctness oracle SHA256(generate_*_body) computed in-process same interpreter session. Spec measurement_validity[8] defines this oracle; audit confirms recomputed SHA256 matches expected for sampled cells. Cross-session determinism not claimed. Bounded.",
+      "evidence": "spec.json:measurement_validity[8], result.json:validity_notes[5] V6_SAME_PROCESS_ORACLE, raw_cell_results.json observations expected_hash vs streaming_hash byte-identical",
+      "mitigated": true
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-FULLBODY-GROUND-TRUTH",
+      "finding": "PASS - recomputed 480/480 fullbody_correct_rate=1.0 across 24 multi-layer cells (20 obs each). Positive control confirms test infrastructure and oracle functional. Iterative decompressor (max_depth=5) correctly unwraps both GZIP-THEN-BROTLI and BROTLI-THEN-GZIP. Expected=fullbody hash equality holds.",
+      "severity": "none",
+      "evidence": "raw_cell_results.json: 24 cells each fullbody_correct_rate 1.0, result.json:metrics.streaming_correctness.fullbody_ground_truth_count 480/480, controls.B-FULLBODY-GROUND-TRUTH.pass true"
+    },
+    {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "finding": "PASS - recomputed 6 cells x 20 obs = 120 streaming_correct 120/120 at both chunk 8192 and 32, streaming_equals_fullbody 120/120. Single-layer gzip streaming via GzipFile.read(CHUNK_SIZE) loop byte-identical to gzip.decompress. Strong baseline; no degradation.",
+      "severity": "none",
+      "evidence": "raw_cell_results.json: JSON_GZIP-SINGLE_10240B_chunk8192 etc all streaming_correct_rate 1.0, result.json:metrics.regression_baselines gzip_single 1.0 at both chunk sizes"
+    },
+    {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "finding": "PASS - recomputed 6 cells x 20 obs = 120 streaming_correct 120/120 at both chunk sizes. brotli.Decompressor.process(chunk) fed 8192 and 32B chunks byte-identical to brotli.decompress. Independent audit recomputation on random 10KB payload (gzip.compress level1 -> brotli quality4 and reverse) confirms streaming_brotli(32B) == full decompress.",
+      "severity": "none",
+      "evidence": "raw_cell_results.json: BROTLI-SINGLE cells 1.0, result.json:metrics.regression_baselines brotli_single 1.0, audit independent brotli streaming test"
+    },
+    {
+      "id": "B-IDENTITY-HE-STREAMING",
+      "finding": "PASS per decision rule but MECHANISTICALLY WEAK - 6 cells x 20 obs = 120/120 reported correct, but implementation is direct passthrough (streaming_result = expected_body) not via decompressor API. Does not test wire preservation under chunked feeding as specified; tautologically passes. Does not trigger MEASUREMENT_INVALID per frozen rule (requires identity failure). Flagged as V2.",
+      "severity": "medium",
+      "evidence": "run_experiment.py:438-441 identity passthrough, raw_cell_results.json IDENTITY cells streaming_correct_rate 1.0, result.json:controls.B-IDENTITY-HE-STREAMING"
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "finding": "PASS - recomputed per-type means: JSON 4330.9/36168.9, HTML 2848.9/23601.6, BINARY 9903.2/98672.0 all exceed thresholds >=2000 at 10KB and >=5000 at 100KB. Audit recomputed from raw_cell_results compressed_size_bytes mean exactly matches result.json to 0.1. 3/3 types meet both sizes, exceeding spec minimum 2/3. Range overall 2603-98762 (raw 2612-98730 in producer summary due to rounding) confirms non-degenerate high-entropy payloads. Entropy preflight 5.49/4.66/7.69 bits/byte all >=3.5.",
+      "severity": "none",
+      "evidence": "raw_cell_results.json compressed_size_bytes per cell, result.json:metrics.compressed_size_bytes.per_content_type_mean, entropy_preflight all_above_threshold true"
+    },
+    {
+      "id": "B-TE-FRAMING-REGRESSION",
+      "finding": "NOT RE-EXECUTED by design - spec baselines[1] explicitly states TE framing correctness (840/840 in parent EXP-RUNTIME-35522287921) is regression reference not re-executed. This experiment tests decompressor API layer orthogonal to TE framing. Separation correctly maintained; no claim that TE framing re-validated here.",
+      "severity": "none",
+      "evidence": "spec.json:baselines[1] B-TE-FRAMING-REGRESSION description expected Established 100%, report.md Relationship to Parent"
+    },
+    {
+      "id": "NULL_CONTROL_WITHIN_STATE_DETERMINISM",
+      "finding": "PASS - recomputed all 24 multi-layer + 12 regression cells: per-state unique_count==1 for 5 reps in both streaming and full-body paths (streaming_all_same true for all 4 states). Audit recomputed hash_variation from raw_cell_results shows 0 failures. Determinism holds despite PYTHONHASHSEED-dependent BINARY header, within single process.",
+      "severity": "none",
+      "evidence": "raw_cell_results.json hash_variation per cell streaming_all_same true, result.json:metrics.within_state_determinism streaming_all_same true"
+    },
+    {
+      "id": "SILENT_FALLBACK_CONTROL",
+      "finding": "PASS - recomputed 0 silent fallbacks across 480 streaming multi-layer + 240 regression = 720 compressed observations (audit sum silent_fallback_count 0). Definition SHA256(decompressed)==SHA256(raw_compressed) for compressed responses. No truncation to compressed bytes.",
+      "severity": "none",
+      "evidence": "raw_cell_results.json silent_fallback_count 0 per cell, result.json:metrics.silent_fallbacks streaming_path_total 0"
+    }
+  ],
+  "recomputed_metrics": {
+    "total_observations": 840,
+    "multi_layer_cells": 24,
+    "multi_layer_observations": 480,
+    "regression_cells": 12,
+    "regression_observations": 240,
+    "identity_cells": 6,
+    "identity_observations": 120,
+    "streaming_correctness_multi_layer": "480/480 (1.0) streaming_hash==expected_hash recomputed from raw_cell_results",
+    "streaming_equals_fullbody_multi_layer": "480/480 (1.0) byte-identical streaming vs full-body recomputed; 240/240 regression, 120/120 identity",
+    "fullbody_ground_truth": "480/480 (1.0) recomputed",
+    "decompression_errors_streaming": 0,
+    "decompression_errors_fullbody": 0,
+    "silent_fallbacks_streaming": 0,
+    "within_state_determinism_streaming_all_same": true,
+    "within_state_determinism_fullbody_all_same": true,
+    "compressed_size_bytes_mean_per_type": {
+      "JSON_10KB": 4330.875,
+      "JSON_100KB": 36168.875,
+      "HTML_10KB": 2848.875,
+      "HTML_100KB": 23601.625,
+      "BINARY_10KB": 9903.25,
+      "BINARY_100KB": 98672.0,
+      "audit_note": "Means recomputed from raw_cell_results compressed_size_bytes mean per cell; match producer 4330.9/36168.9 etc within rounding"
+    },
+    "compressed_size_range": "2603-98762 bytes recomputed (producer reports 2612-98730 due to min/max rounding per cell mean vs per-observation)",
+    "shannon_entropy_recomputed": "JSON mean 5.486 min 5.436, HTML 4.658 min 4.649, BINARY 7.689 min 7.673 all >=3.5 PASS",
+    "chunk_size_independence": "chunk 8192 ml 240/240 correct eq 240/240; chunk 32 ml 240/240 correct eq 240/240",
+    "regression_gzip_single": "120/120 (1.0) recomputed",
+    "regression_brotli_single": "120/120 (1.0) recomputed",
+    "C1_streaming_equals_fullbody": "PASS 24/24 cells 1.0",
+    "C2_streaming_equals_expected": "PASS 24/24 cells 1.0",
+    "C3_regression": "PASS both gzip and brotli 1.0",
+    "C4_null_control": "PASS all_same true",
+    "C5_compressed_target_range": "PASS 3/3 types at both sizes (meets_10k=3 meets_100k=3)",
+    "decision_rule_recomputed": "C1 true && C2 true && C3 true && C4 true && C5 true && identity_pass true => status COMPLETE outcome SUPPORTS => SURVIVES_CURRENT_TEST per spec decision_rule",
+    "independent_brotli_gzip_streaming_verification": "Audit independent code path random 10KB body gzip->brotli and brotli->gzip both chunk 32 and 8192: streaming outer then inner byte-identical to iterative fullbody and to original body SHA256, confirming API correctness not artifact of shared code"
+  },
+  "claim_ceiling": "SURVIVES_CURRENT_TEST narrowly and only at the in-process decompressor API layer: brotli.Decompressor().process(chunk) fed CHUNK_SIZE chunks (8192 and 32) and gzip.GzipFile(io.BytesIO(compressed)).read(CHUNK_SIZE) loops produce byte-identical SHA256 to full-body iterative decompression (brotli.decompress/gzip.decompress max_depth=5) for high-entropy (5.49/4.66/7.69 bits/byte) multi-layer payloads at 10KB and 100KB nominal (compressed 2.6-98.7KB) under GZIP-THEN-BROTLI (gzip level 1 -> brotli quality 4) and BROTLI-THEN-GZIP (brotli quality 4 -> gzip level 1) across 4 auth states, 3 content types, 5 reps per state (480 streaming multi-layer observations). Single-layer gzip (default level) and brotli (quality 6) validated at 10KB. Validated environment: Python 3.12.14, brotli 1.2.0, stdlib gzip, Ubuntu 24.04, single process, equal chunk sizes for outer/inner layers, sequential unwrapping. NOT validated: real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation, concurrency; payloads >100KB (500KB/1MB); depths 3-5 stacked encodings; other gzip levels 2-9 or brotli qualities 5-11; mixed chunk sizes (e.g., proxy 8192/client 32); cross-run PYTHONHASHSEED reproducibility for BINARY; other library versions; HTTP TE framing beyond in-memory (already validated orthogonally in parent). Identity wire-preservation claim is tautological (bypassed API).",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35530588298/spec.json:d8dc6bee9a71988dd141934515c837bdd8c06763f87703f8ad63da173396fbb0 frozen decision_rule C1-C5",
+    "research/experiments/EXP-RUNTIME-35530588298/prereg.md:2a2e1f217711994151c399eec584cceadd45e9894e98a372c6255c6584976a06",
+    "research/experiments/EXP-RUNTIME-35530588298/freeze.json",
+    "research/experiments/EXP-RUNTIME-35530588298/result.json:87f79ed8e43954805489546eee652c2833c737ff4e7fe6368adaf45ffeea27b2 derived metrics",
+    "research/experiments/EXP-RUNTIME-35530588298/raw_cell_results.json:916b8f03b4393718276f56c5be90b37b14b77be29254288f5da84a1a1a37325b raw observations 840",
+    "research/experiments/EXP-RUNTIME-35530588298/run_experiment.py:8251d45704eb99d6b13608fd11ce462a6f595a02d279021b0f0c6966144d0ab0 code",
+    "research/experiments/EXP-RUNTIME-35530588298/report.md:d8f5d66a729f3ad9cd31ebb6022e04a6c2f65c4ecb5c38bb0f5cae5a2760cb08",
+    "research/experiments/EXP-RUNTIME-35530588298/provenance.json execution_environment python 3.12.14 brotli 1.2.0",
+    "research/experiments/EXP-RUNTIME-35522287921/handoff.json:23f375761196449289b4655fca42dddb7fa2e64f0fc184e98f8d540b07166bd8 parent carry_forward established/rejected/unknown/do_not_assume",
+    "codex/index.json C-MEAS-VALID history, codex/claim_state.json"
+  ],
+  "unresolved": [
+    "Does iterative decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+    "Does correctness hold for payloads beyond 100KB nominal (500KB, 1MB) where dictionary windows cross chunk boundaries more frequently?",
+    "Do other gzip levels (2-9) and brotli qualities (5-7, 8-11) produce compressed structures that stress chunk boundaries differently?",
+    "Does correctness hold for depths 3-5 stacked encodings (only depth 2 exercised, spec max_depth=5 untested)?",
+    "Cross-run BINARY ground truth reproducibility across interpreter sessions with different PYTHONHASHSEED and gzip/brotli library versions?",
+    "Does brotli streaming require empty-input draining (process(b'')) for compressed structures where final bytes remain buffered, at other quality levels or payload sizes?",
+    "Do mixed chunk-size pipelines (outer 8192/inner 32 or vice versa) preserve correctness?",
+    "Does identity (uncompressed) data mishandled by streaming APIs produce errors vs pass-through, and is wire preservation actually tested?"
+  ]
+}

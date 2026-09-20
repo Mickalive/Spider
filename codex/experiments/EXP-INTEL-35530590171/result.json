@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35530590171",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "corrected_snr_model": {
+      "model": "agreement ~ Phi(mean(M_i) / std(M_i)), M_i = mu_listing_i - mu_detail_i per iteration, noise scale = across-iteration margin_std, primary definition tag_entropy x DEF-FULL-MAP, canonical recipe",
+      "predicted_agreement_n5": 0.16205494239451274,
+      "predicted_agreement_n10": 0.10119768434904203,
+      "predicted_agreement_n15": 0.5648295640638915,
+      "predicted_agreement_n20": 0.7379210411265361,
+      "observed_agreement_n15_frozen_target": 0.4998,
+      "observed_agreement_n20_frozen_target": 0.5595,
+      "residual_n15": 0.06502956406389149,
+      "residual_n20": 0.17842104112653612,
+      "residual_threshold_pp": 10,
+      "C1_CORRECTED_MODEL_VALID": false,
+      "c1_n15_pass": true,
+      "c1_n20_pass": false
+    },
+    "parent_snr_model_reference": {
+      "model": "agreement ~ Phi(mean(SNR_i)), SNR_i = M_i / SE_tot_i (within-iteration SE noise)",
+      "predicted_agreement_n15": 0.9999999999999991,
+      "predicted_agreement_n20": 1.0,
+      "residual_n15": 0.5001999999999991,
+      "residual_n20": 0.4405,
+      "C1_SNR_MODEL_VALID": false
+    },
+    "mechanism": {
+      "corrected_snr_n20": 0.6369492246165328,
+      "cv_listing_n20": 0.0046367045393507405,
+      "cv_detail_n20": 0.03353065961167798,
+      "rho_listing_n20": 1.0,
+      "rho_detail_n20": 1.0,
+      "margin_deficit": true,
+      "task_variance": false,
+      "classification": "margin_deficit",
+      "C2_MECHANISM_CORRECTED": true
+    },
+    "extrapolation_n50": {
+      "ns": [5, 10, 15, 20],
+      "margin_means": [-4.904587178441491e-05, -0.00013464925045408282, 2.664442979473191e-05, 0.00039687662339170924],
+      "margin_stds": [4.973987554828668e-05, 0.00010562741091040149, 0.00016323690949982518, 0.0006230898917109818],
+      "margin_sign_by_n": [-1.0, -1.0, 1.0, 1.0],
+      "margin_sign_crosses_zero": true,
+      "power_law": {
+        "margin_a": 1.1137672643065647e-05,
+        "margin_b": 0.8756730457650053,
+        "margin_R2": 0.1973,
+        "std_c": 2.9306907593534815e-06,
+        "std_d": 1.6426773251019353,
+        "std_R2": 0.8666
+      },
+      "n50": {
+        "margin_hat": 3.424023111174484e-04,
+        "std_hat": 0.0018106291047987905,
+        "corrected_snr": 0.18910681939772445,
+        "predicted_agreement": 0.5749954515920276,
+        "predicted_agreement_pi90": {
+          "lo90": 0.5108666547878428,
+          "hi90": 0.7735391789249395,
+          "n_boot": 2000,
+          "seed": 999
+        }
+      },
+      "C3_EXTRAPOLATION_FALSIFIES_FULL_DOM": true
+    },
+    "null_control": {
+      "model": "3 listing + 3 detail densities ~ N(0,1); agreement = P(mean_l > mean_d)",
+      "n_simulations": 500000,
+      "predicted_agreement": 0.499208,
+      "expected": "50% +/- 5%",
+      "pass": true,
+      "corrected_model_error_n15": 0.06502956406389149,
+      "corrected_model_error_n20": 0.17842104112653612,
+      "null_error_n15": 0.0005920000000000369,
+      "null_error_n20": 0.06029200000000001,
+      "corrected_model_beats_null_n15": false,
+      "corrected_model_beats_null_n20": false
+    },
+    "diagnostic_indicator_statistic": {
+      "note": "Under template invariance, ranking agreement equals proportion(margin_i > 0) across iterations. This is a direct empirical statistic, not a model.",
+      "prop_margin_positive_n15": 0.4996,
+      "prop_margin_positive_n20": 0.5654,
+      "residual_n15": 0.0002,
+      "residual_n20": 0.0059
+    },
+    "baseline_reproduction": {
+      "canonical_agreement_n5": 0.0,
+      "canonical_agreement_n10": 0.0,
+      "canonical_agreement_n15": 0.4996,
+      "canonical_agreement_n20": 0.5654,
+      "canonical_eta2_n5": 0.4847910584787255,
+      "canonical_eta2_n10": 0.7410518086603806,
+      "canonical_eta2_n15": 0.8288318638190468,
+      "canonical_eta2_n20": 0.919454846818671,
+      "pertask_agreement_n5": 0.3431,
+      "pertask_agreement_n10": 0.3355,
+      "pertask_agreement_n15": 0.5393,
+      "pertask_agreement_n20": 0.78,
+      "pertask_eta2_n5": 0.3880559271520877,
+      "pertask_eta2_n10": 0.3920025033054028,
+      "pertask_eta2_n15": 0.3553856908977179,
+      "pertask_eta2_n20": 0.36700025544655573
+    },
+    "frozen_decision_rule": {
+      "C1_CORRECTED_MODEL_VALID": false,
+      "C2_MECHANISM_CORRECTED": true,
+      "C3_EXTRAPOLATION_FALSIFIES_FULL_DOM": true,
+      "verdict": "MEASUREMENT_INVALID",
+      "reason": "Frozen rule: if NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. C1 FAIL at n=20: corrected model Phi(mean/std) predicts 0.7379 vs observed 0.5595 (residual 17.8pp, >10pp threshold). C1 PASS at n=15: predicted 0.5648 vs observed 0.4998 (residual 6.5pp, <=10pp). The corrected model captures the mechanism partially (n=15 within threshold) but over-predicts at n=20, indicating margin_std overestimates the effective noise at larger n."
+    }
+  },
+  "controls": {
+    "PC1_CORRECTED_MODEL_REPRODUCES_OBSERVED": {
+      "expected": "Predicted agreement at n=15 within 10pp of 49.98%; at n=20 within 10pp of 55.95%.",
+      "observed": "Predicted 0.5648 at n=15 (residual 6.5pp, PASS) and 0.7379 at n=20 (residual 17.8pp, FAIL).",
+      "pass": false,
+      "evidence_refs": ["EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a)", "EXP-INTEL-35476271877/analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2)"]
+    },
+    "NC1_RANDOM_NOISE_BASELINE": {
+      "expected": "Random noise model agreement ~50% +/- 5% at all n; corrected model prediction error must be < null model prediction error.",
+      "observed": "Random noise model agreement 0.499208 (500000 sims), within 50% +/- 5%: null passes. Corrected model error (0.065 at n15, 0.178 at n20) exceeds null error (0.0006 at n15, 0.060 at n20) at BOTH sample sizes.",
+      "pass": false,
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> null_control"]
+    },
+    "B1_PARENT_FAILED_SNR_N15": {
+      "expected": "Parent frozen SNR model predicted 0.9999999999999991 at n=15 vs observed 0.4998 (residual 0.5002).",
+      "observed": "Corrected model predicts 0.5648 at n=15 (residual 0.065): 7.7x improvement over parent.",
+      "pass": true,
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> snr_model"]
+    },
+    "B2_PARENT_FAILED_SNR_N20": {
+      "expected": "Parent frozen SNR model predicted 1.0 at n=20 vs observed 0.5595 (residual 0.4405).",
+      "observed": "Corrected model predicts 0.7379 at n=20 (residual 0.178): 2.5x improvement over parent, but still exceeds 10pp threshold.",
+      "pass": true,
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> snr_model"]
+    },
+    "B3_NULL_NOISE_BASELINE": {
+      "expected": "Random noise model predicts agreement ~50% at all n.",
+      "observed": "From parent: 0.499208 (500000 sims). Verified within expected range.",
+      "pass": true,
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> null_control"]
+    },
+    "B4_OBSERVED_AGREEMENT_N15": {
+      "expected": "Observed canonical ranking agreement at n=15: 49.98%.",
+      "observed": "0.4996 this run (delta -0.0002 from frozen target).",
+      "pass": true,
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> baseline_reproduction"]
+    },
+    "B5_OBSERVED_AGREEMENT_N20": {
+      "expected": "Observed canonical ranking agreement at n=20: 55.95%.",
+      "observed": "0.5654 this run (delta +0.0059 from frozen target).",
+      "pass": true,
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> baseline_reproduction"]
+    },
+    "B6_PARENT_EXTRAPOLATION_N50": {
+      "expected": "Parent (failed) model extrapolated agreement 1.0 at n=50 (PI90 lo 0.845).",
+      "observed": "Corrected model extrapolates agreement 0.575 at n=50 (PI90 [0.511, 0.774]). Large change from parent but gated behind failed C1.",
+      "pass": "not_gated",
+      "evidence_refs": ["EXP-INTEL-35476271877/analysis_output_snr.json -> extrapolation"]
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35530590171/result.json", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35530590171/report.md", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35530590171/provenance.json", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz", "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json", "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2", "role": "raw"},
+    {"path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json", "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050", "role": "raw"}
+  ],
+  "observations": [
+    "Corrected SNR model Phi(mean(M_i)/std(M_i)) predicts agreement 0.5648 at n=15 (residual 6.5pp, PASS) and 0.7379 at n=20 (residual 17.8pp, FAIL). C1 requires BOTH within 10pp; n=20 fails by 7.8pp margin.",
+    "The corrected model improves substantially over the parent frozen model: n=15 residual drops from 50.0pp to 6.5pp (7.7x), n=20 from 44.1pp to 17.8pp (2.5x). margin_std is a better noise scale than within-iteration SE, but not sufficient at n=20.",
+    "Under template invariance, ranking agreement equals proportion(margin_i > 0) exactly: 0.4996 at n=15 and 0.5654 at n=20. This empirical statistic is near-exact (residuals 0.02pp and 0.59pp) but is not a predictive model.",
+    "The corrected model over-predicts at n=20 because std(M_i) grows faster than mean(M_i) as n increases: margin_std at n=20 (6.23e-4) is 3.8x margin_std at n=15 (1.63e-4), but margin_mean at n=20 (3.97e-4) is 14.9x margin_mean at n=15 (2.66e-5). The std dominates the SNR ratio at n=20, inflating the prediction.",
+    "Mechanism classification at n=20 using corrected noise: SNR=0.637 < 3.0 (margin-deficit regime, C2 PASS). However, C2 is gated behind failed C1 and cannot be used for scientific conclusions.",
+    "Power-law extrapolation to n=50: |margin| fit R²=0.197 (poor, due to sign crossing between n=10 and n=15); margin_std fit R²=0.867 (reasonable). Predicted agreement at n=50 = 0.575 (PI90 [0.511, 0.774]). C3 passes (predicted <80%) but gated behind failed C1.",
+    "Null control: random noise model predicts 49.9% agreement. Corrected model error exceeds null error at both n=15 (0.065 vs 0.0006) and n=20 (0.178 vs 0.060). The corrected model does not outperform the null baseline.",
+    "Baseline reproduction: all parent values reproduced within hash-seed variation (canonical agreement n20 0.5654 vs 0.5595, canonical eta2 n20 0.9195 vs 0.9205).",
+    "Template invariance persists on truncated-first-20 subsample (verified in parent). Under template invariance, same-type canonical densities are scalar multiples, making rho=1.0 a mathematical consequence rather than evidence for an independent correlated-noise mechanism."
+  ],
+  "validity_notes": [
+    "Frozen decision_rule triggers MEASUREMENT_INVALID: C1 fails at n=20 (residual 17.8pp > 10pp threshold). Per frozen conjunctive rule, NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3.",
+    "Status=MEASUREMENT_INVALID and outcome=INCONCLUSIVE: the measurement transaction completed validly and the frozen rule was evaluated mechanically. The corrected model partially captures the mechanism (passes at n=15) but fails at n=20. No scientific conclusion about full-DOM extrapolation is supported.",
+    "The corrected model (Phi(mean/std)) fails because it conflates two independent sources: (1) the mean margin determining the sign of ranking flips, and (2) the std of margins determining the magnitude of iteration-to-iteration variation. At n=20, std grows faster than mean, inflating the SNR and over-predicting agreement.",
+    "The parent's alternative statistic mean(Phi(SNR_i)) was near-exact but near-tautological: under template invariance, within-iteration SE ~1e-5 makes Phi(SNR_i) collapse to indicator(margin_i > 0). The direct indicator proportion(margin_i > 0) achieves near-exact prediction (residuals 0.02pp and 0.59pp) but is not a predictive model for extrapolation.",
+    "The power-law fit on |margin| has poor R² (0.197) due to the sign crossing between n=10 (negative) and n=15 (positive). Extrapolation to n=50 inherits this uncertainty. PI90 width 0.263 (from 0.511 to 0.774) reflects this.",
+    "Product consequence: C1 fails, so the experiment provides no usable prediction about whether ranking agreement crosses 80% at full DOM. The Docker re-collection question remains OPEN.",
+    "PYTHONHASHSEED=0 may cause small quantitative differences from parent runs due to set-iteration order affecting role-subset composition. These do not affect the C1 verdict (n=20 residual 17.8pp is an order of magnitude above the 10pp threshold).",
+    "Cart n=1 degeneracy excluded from margin/SNR computations per parent protocol. Listing vs detail used throughout."
+  ],
+  "unresolved": [
+    "Whether ranking agreement at full-DOM element counts (n=21-82) crosses 80% remains OPEN: the corrected model fails C1 validation and cannot substitute for direct measurement.",
+    "What is the correct noise decomposition for the SNR model? margin_std captures iteration-to-iteration variation but over-predicts at n=20. Possible improvements: (a) use median(|M_i|) / std(M_i) to separate sign and magnitude; (b) use a non-linear mapping instead of Phi; (c) decompose margin_std into within-type and between-type components.",
+    "The direct indicator statistic proportion(margin_i > 0) matches observed within 1pp at both n=15 and n=20. This is expected under template invariance but cannot be used for extrapolation to n=50 because it does not model the relationship between n and margin distribution.",
+    "Whether Docker image am1n3e/webarena-verified-shopping:latest becomes available for direct full-DOM measurement (EXP-INTEL-35462974425) remains the blocking action for directly answering the full-DOM question.",
+    "The margin_std power law (R²=0.867, d=1.643) suggests margin_std grows faster than n^1, while |margin| grows slower than n^1 (b=0.876). This widening gap is why the corrected model over-predicts at larger n. Whether this is a genuine scaling relationship or an artifact of 4 data points is unknown."
+  ]
+}

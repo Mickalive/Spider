@@ -1,0 +1,20 @@
+{
+  "base_sha": "50afe1e2eee4d3612886cfb4428bfa92b9fa5b50",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T18:55:21.680285+00:00",
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Can plug-in KL with alpha=0.1 or bias-corrected MLE (alpha=0) achieve |shuffled-action null_mean| < 0.1 bits while maintaining positive_control_k3 >= 0.5 bits and p <= 0.001 at N=5000 on the stochastic 12-state SPA \u2014 thereby resolving whether hyperparameter tuning unblocks the CMI pathway, or whether null centering degrades with reduced smoothing?",
+  "lane": "physics",
+  "origin_github_run_id": "35530591329",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35510154353",
+    "path": "research/experiments/EXP-PHYSICS-35510154353/handoff.json",
+    "sha256": "74c060dd80628bad97ac2c615f1c753b7215d8ab42e7f1d07402924339846fd2"
+  },
+  "reason": "pulse",
+  "request_hash": "0a120e584a3c6d2a2948142ffdf7fae4245897d6e8044c1912816e34dec3d118",
+  "request_id": "ee1a555aea6f9de96172e884",
+  "schema_version": 1
+}
