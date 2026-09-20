@@ -1149,6 +1149,16 @@
         "reason": "V1 request_id entropy confound and V2 B-FLASK-ONLY degeneracy are verified FIXED (audit V1 PASS, V2 PASS). However, the experiment introduces a NEW measurement validity gap (V3): 304 cache-hit responses use fixed 0.2 structural composite while non-304 uses sha256(request_id) hash, and 304 occurs only for valid tokens (76 valid vs 0 expired), creating token-state-dependent structural construction that violates spec measurement_validity #8. Additionally, B-PARENT-CONFOUND-REPRODUCTION negative control was never executed, and C3/C4 decision logic deviates from frozen one-sided spec (audit V5). Under frozen one-sided rule, C3 would PASS (CI upper 0.0018 < 0.15) and C4 would PASS (TOST p_upper 8.88e-08 < 0.05); only C5 heterogeneity would fail. Under strict two-sided interpretation, C3/C4 FAIL. Pooled |r|=0.088 < 0.15 is directionally consistent with orthogonality, but the 304 coupling and missing baseline prevent a clean scientific conclusion. B-FLASK-ONLY baseline confirms orthogonality persists without infrastructure (r=0.026, TOST PASS at delta=0.15). C-FRESHNESS remains EXPERIMENTAL bounded to localhost mock; no advancement toward VALIDATED or PRODUCT_CORE. Product parallel-channel architecture NOT justified for cache-enabled endpoints at delta=0.15 pending a clean re-run with 304 coupling eliminated and B-PARENT baseline executed."
       },
       {
+        "experiment_id": "EXP-GRAPH-35476270792",
+        "lane": "graph",
+        "created_at": "2026-09-19T23:30:03.401897+00:00",
+        "decision": "REVISE",
+        "source_commit": "8949d839480feca7a8d67bfa0acf6bd5f3985c1e",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Frozen decision rule triggers REJECTED (C5 cache heterogeneity FAIL diff=0.2506>2*SE, C7 negative control FAIL |r|=0.1204<0.15), but audit finds the REJECTION is contaminated by two measurement defects: (1) V3 selection bias \u2014 valid cache-enabled non-304 composition is skewed (profile n=2, data_list n=2, session_status n=40 valid vs 40/40/40 expired), inflating pooled cache-enabled r to -0.453 vs stratified per-endpoint r ~0.04; (2) V_ETAG_PERMISSION_LEAKAGE \u2014 expired tokens decode without permission_level, defaulting to 'read' etag, violating spec clause 8 signal independence. The audit ceiling bounds C-FRESHNESS to EXPERIMENTAL on localhost stochastic Flask mock (r=0.002-0.046, n=480, 4 independent experiments all audit PASS). Within-endpoint non-304 orthogonality appears strong (stratified pooled r ~0.04) but is not validated under frozen protocol due to selection bias. No confirmatory or falsifying evidence accumulated from this experiment for the broader C-FRESHNESS claim. Status unchanged pending fixes and re-run."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-35476271728",
         "lane": "product",
         "created_at": "2026-09-19T23:30:05.959120+00:00",

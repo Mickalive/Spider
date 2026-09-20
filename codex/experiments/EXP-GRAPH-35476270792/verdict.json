@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35476270792",
+  "lane": "graph",
+  "decision": "REVISE",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule triggers REJECTED (C5 cache heterogeneity FAIL diff=0.2506>2*SE, C7 negative control FAIL |r|=0.1204<0.15), but audit finds the REJECTION is contaminated by two measurement defects: (1) V3 selection bias — valid cache-enabled non-304 composition is skewed (profile n=2, data_list n=2, session_status n=40 valid vs 40/40/40 expired), inflating pooled cache-enabled r to -0.453 vs stratified per-endpoint r ~0.04; (2) V_ETAG_PERMISSION_LEAKAGE — expired tokens decode without permission_level, defaulting to 'read' etag, violating spec clause 8 signal independence. The audit ceiling bounds C-FRESHNESS to EXPERIMENTAL on localhost stochastic Flask mock (r=0.002-0.046, n=480, 4 independent experiments all audit PASS). Within-endpoint non-304 orthogonality appears strong (stratified pooled r ~0.04) but is not validated under frozen protocol due to selection bias. No confirmatory or falsifying evidence accumulated from this experiment for the broader C-FRESHNESS claim. Status unchanged pending fixes and re-run."
+    }
+  ],
+  "product_action": "No product action. C-FRESHNESS remains EXPERIMENTAL bounded to localhost mock. Parallel-channel architecture NOT justified for production-like infrastructure. No promotion authorized.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing V3 selection bias (endpoint-stratified or balanced non-304 sampling), V_ETAG_PERMISSION_LEAKAGE (derive permission_level from session independent of token expiry), and re-running C5/C7 with n>=800, does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED (any fails) at delta=0.15 on the production-like testbed?",
+  "reason": "REVISE because the frozen REJECTED outcome (C5 FAIL, C7 FAIL) is contaminated by two audit-identified measurement defects: (1) V3 selection bias — valid cache-enabled non-304 samples are 91% session_status (40/44), inflating pooled cache-enabled r from stratified ~0.04 to -0.453, causing C5 diff to appear 0.466 instead of ~0.04; (2) V_ETAG_PERMISSION_LEAKAGE — expired tokens lack permission_level payload, causing write-permission expired requests to use read-etag (c6b1...) instead of write-etag (c471...), violating spec clause 8 (no shared variables between signal domains). C7 negative control failure (|r|=0.1204<0.15) may reflect weak V1 entropy bifurcation under header-only extraction or endpoint heterogeneity (profile -0.406, data_list -0.317, session -0.032). The audit recomputes correct non-304 per-endpoint r as 0.009/0.122/-0.013 (near-zero within-endpoint orthogonality), suggesting the frozen REJECTED is not a clean scientific falsification but a measurement-design artifact. The frozen decision rule is implementable correctly once V3 selection bias and ETag leakage are fixed. B-FLASK-ONLY baseline (r=0.0263, TOST PASS) continues to confirm orthogonality without infrastructure, providing strong prior that the localhost result is genuine. Product deployment decision deferred pending clean measurement.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35476270792/result.json — pooled r=-0.126, C5 FAIL diff=0.2506, C7 FAIL |r|=0.1204",
+    "research/experiments/EXP-GRAPH-35476270792/audit.json — REVISE, V3_INCOMPLETE_SELECTION_BIAS severity high, V_ETAG_PERMISSION_LEAKAGE severity medium, V_TOST_INCONSISTENCY, V_C7_NEGATIVE_CONTROL_FAILURE",
+    "research/experiments/EXP-GRAPH-35476270792/audit.json:recomputed_metrics — per_endpoint_r_testbed_non304_audit profile 0.009 data_list 0.122 session -0.013, cache_heterogeneity_audit_non304 diff 0.466",
+    "research/experiments/EXP-GRAPH-35476270792/raw_evidence/experiment_data.json — 76 valid 304, 0 expired 304, valid cache enabled non304 session 40/44",
+    "research/experiments/EXP-GRAPH-35476270792/testbed_server.py:369-395 — ETag permission_level fallback to 'read' for expired tokens",
+    "research/experiments/EXP-GRAPH-35476270792/run_experiment.py:748 — non_304 filter applied to pooled only, not per-cache/per-endpoint",
+    "research/experiments/EXP-GRAPH-35476270792/result.json:controls — C1 PASS C2 PASS C3 PASS C4 PASS C5 FAIL C6 PASS C7 FAIL",
+    "research/experiments/EXP-GRAPH-35476270792/spec.json:decision_rule — C1-C7 all required for CONFIRMED",
+    "research/experiments/EXP-GRAPH-35389145821/result.json — localhost mock r=0.0022 PASS (clean baseline)",
+    "research/experiments/EXP-GRAPH-35353011131/result.json — stochastic mock r=0.0463 PASS (clean baseline)",
+    "research/experiments/EXP-PRODUCT-35445596342/result.json — stochastic mock r=-0.0258 PASS (second confirmation)",
+    "research/experiments/EXP-GRAPH-35476270792/result.json:metrics.b-FLASK-ONLY r=0.0263 TOST PASS behavioral_std=3.5"
+  ]
+}
