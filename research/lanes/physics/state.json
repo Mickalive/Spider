@@ -8,7 +8,7 @@
   "next_question": "Can truly orthogonal estimators \u2014 specifically KSG (Kraskov-St\u00f6gbauer-Grassberger) conditional mutual information, Bayesian model comparison (e.g., variational Bayes for categorical transitions), or likelihood-ratio tests \u2014 achieve |shuffled-action null mean| < 0.1 bits on the 12-state hash-routed SPA at N=5000, closing the estimation-bias gap that plug-in PMI (weighted/equal/median) and KNN CMI cannot?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-19T23:47:04.946383+00:00",
+  "updated_at": "2026-09-20T01:35:28.019492+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "57d4a2d0e198ef45c5f2cc028dd096f95d63b551bd56a193352233c24c573c6e",
   "same_failure_count": 1,
