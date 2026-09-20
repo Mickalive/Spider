@@ -1,17 +1,64 @@
 {
   "experiment_id": "EXP-INTEL-35538868377",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-PRODUCT-ECON"],
+  "question": "Can a sign-magnitude-separated noise decomposition (Phi(median(|M|)/std)) or a direct sign-fraction power law (proportion(margin_i>0) modeled as saturating function of n) pass C1-equivalent validation at n=15 and n=20, providing a validated extrapolation path to full-DOM n=50/82?",
+  "hypothesis": "The corrected Phi(mean/std) model fails C1 because it conflates sign (determining agreement) with magnitude (scaling noise). Two orthogonal corrected models may pass C1: (H1) A median-based decomposition Phi(median(|M_i|)/std(M_i)) separates sign from magnitude by replacing the mean (which is sign-contaminated) with the median of absolute margins, yielding predicted agreement within 10pp of observed at both n=15 and n=20. (H2) A direct sign-fraction model f(n) = a * n^b / (1 + a * n^b) (saturating power law) fitted to proportion(margin_i>0) at n=5/10/15/20 predicts the observed proportions at n=15 and n=20 within 1pp (since the diagnostic already matches within 0.02pp and 0.59pp), and extrapolates to n=50/82 without exceeding 80% agreement.",
+  "falsifier": "Both models are falsified if ANY of: (F1) Phi(median(|M|)/std) predicted agreement at n=15 or n=20 differs from observed by >10pp — indicating median-based decomposition does not capture the flip mechanism; (F2) The sign-fraction saturating power law fitted on n=5/10/15/20 predicts proportion(margin>0) at n=15 or n=20 with residual >2pp — indicating the saturating form does not capture the n→sign-fraction mapping; (F3) BOTH models pass C1 but the sign-fraction extrapolation to n=50 predicts proportion(margin>0) > 0.80 — indicating the plateau breaks at full DOM; (F4) The sign-fraction power law fit has R² < 0.90 on the 4-point training data — indicating the saturating form does not capture the observed trend.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_FAILED_SNR_N15",
+      "description": "Parent frozen SNR model Phi(mean(SNR_i)) predicted 0.9999999999999991 at n=15 vs observed 0.4998 (residual 0.5002). Corrected models must do better.",
+      "source": "EXP-INTEL-35476271877 result.json snr_model"
+    },
+    {
+      "id": "B2_PARENT_FAILED_SNR_N20",
+      "description": "Parent frozen SNR model predicted 1.0 at n=20 vs observed 0.5595 (residual 0.4405). Corrected models must do better.",
+      "source": "EXP-INTEL-35476271877 result.json snr_model"
+    },
+    {
+      "id": "B3_CORRECTED_FAILED_N20",
+      "description": "Previous corrected Phi(mean/std) model predicted 0.7379 at n=20 vs observed 0.5595 (residual 17.8pp, C1 FAIL). New models must beat this.",
+      "source": "EXP-INTEL-35530590171 result.json metrics.corrected_snr_model"
+    },
+    {
+      "id": "B4_DIAGNOSTIC_INDICATOR",
+      "description": "Direct indicator proportion(margin_i>0) matches observed at 0.4996 (n=15, residual 0.02pp) and 0.5654 (n=20, residual 0.59pp). This near-exact match under template invariance is the benchmark; new models must approach this accuracy.",
+      "source": "EXP-INTEL-35530590171 result.json metrics.diagnostic_indicator_statistic"
+    },
+    {
+      "id": "B5_NULL_NOISE_BASELINE",
+      "description": "Random noise model (densities ~ N(0,1)) predicts agreement ~50% at all n. Models must outperform this null.",
+      "source": "EXP-INTEL-35476271877 analysis_output_snr.json null_control 0.499208"
+    },
+    {
+      "id": "B6_PARENT_EXTRAPOLATION_N50",
+      "description": "Parent (failed) model extrapolated agreement 1.0 at n=50 (PI90 lo 0.845). Corrected model extrapolation predicted 0.575 (gated). New validated model extrapolation is the critical measurement.",
+      "source": "EXP-INTEL-35476271877 result.json extrapolation"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_SIGN_FRACTION_REPRODUCES_OBSERVED",
+    "description": "The sign-fraction statistic proportion(margin_i>0) reproduces observed ranking agreement at n=15 and n=20 within 1 percentage point, confirming the diagnostic finding from the parent experiment. This is a reconfirmation of the parent's near-exact diagnostic (residuals 0.02pp and 0.59pp).",
+    "expected": "proportion(margin_i>0) at n=15 within 1pp of 49.96% (i.e., 48.96% to 50.96%); at n=20 within 1pp of 56.54% (i.e., 55.54% to 57.54%)."
+  },
+  "null_control": {
+    "id": "NC1_RANDOM_NOISE_BASELINE",
+    "description": "A random noise model (densities ~ N(0,1) with no signal) predicts ranking agreement ~50% at all n. The best validated model must outperform this null at n=20.",
+    "expected": "Random noise model agreement: 50% +/- 5% at all n. Best model prediction error at n=20 must be < null model prediction error (0.060)."
+  },
+  "measurement_validity": [
+    "All computations use existing data from EXP-INTEL-35476271877: snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) and analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2). No new data collection required. No browser/network/model calls.",
+    "Model A (median-based): Computes Phi(median(|M_i|)/std(M_i)) per n using the per-iteration margin data. The median of absolute margins is sign-invariant and captures magnitude; std captures total variation. This separates the two sources that caused Phi(mean/std) to fail at n=20.",
+    "Model B (sign-fraction power law): Fits proportion(margin_i>0) = a * n^b / (1 + a * n^b) on n=5/10/15/20, then extrapolates to n=50/82. The saturating form ensures proportion ∈ (0,1) and naturally captures diminishing returns. Does NOT use Phi function.",
+    "The 7 tasks (3 listing, 3 detail, 1 cart) with truncated-first-20 locatable_sample are the input. Cart n=1 degeneracy excluded from margin/SNR computations per parent protocol.",
+    "Primary definition: tag_entropy x DEF-FULL-MAP. Same as parent experiments.",
+    "Two independent models tested: if either passes C1 it provides a validated extrapolation path; if both fail, the sign-fraction mechanism remains descriptive-only and no model-based extrapolation is justified.",
+    "Template invariance persists on truncated-first-20 subsample (verified in parent). Under template invariance, ranking agreement = proportion(margin_i>0) exactly, so Model B's near-exact fit at n=15/20 is expected; the critical test is extrapolation."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_EITHER_MODEL_VALID: At least one of Model A or Model B predicts observed ranking agreement at n=15 and n=20 within 10 percentage points. PASS if either model passes at BOTH n=15 and n=20; FAIL if both models fail at either n.\n\nC2_SIGN_FRACTION_FIT_QUALITY: The sign-fraction power law (Model B) achieves R² >= 0.90 on the 4-point training data (n=5/10/15/20). PASS if R² >= 0.90; FAIL if R² < 0.90.\n\nC3_SIGN_FRACTION_EXTRAPOLATION_BELOW_80: The sign-fraction model extrapolation predicts proportion(margin>0) at n=50 is < 0.80. PASS if predicted proportion < 0.80; FAIL if predicted proportion >= 0.80.\n\nVERDICT RULES:\n- If NOT C1: MEASUREMENT_INVALID — neither decomposition captures the instability mechanism.\n- If C1 AND NOT C2: MIXED — at least one model passes C1 but the sign-fraction fit quality is insufficient for reliable extrapolation. Exploratory extrapolation reported but not decision-gating.\n- If C1 AND C2 AND C3: SIGN_FRACTION_VALIDATED — the sign-fraction saturating power law is validated for extrapolation; predicts agreement remains below 80% at full DOM; recipe density is structurally limited; product lane should use non-recipe density.\n- If C1 AND C2 AND NOT C3: SIGN_FRACTION_PREDICTS_CROSSING — the sign-fraction model predicts agreement crosses 80% at full DOM; Docker re-collection is justified; recipe density remains viable.\n\nALL conditions must be evaluated. Model A and Model B are independent; C1 requires at least one to pass.",
+  "product_consequence_positive": "If C1 AND C3 (sign-fraction validated AND predicts <80% at full DOM): The 56% plateau is structural — sign fraction saturates below 80% as n increases. Product lane should adopt non-recipe density immediately (which preserves ranking at 100%) and accept the eta2 reduction. Docker re-collection investment is NOT justified for the ranking stability question. The sign-fraction model provides a validated diagnostic for any future pipeline or definition changes.",
+  "product_consequence_negative": "If C1 AND NOT C3 (sign-fraction predicts >=80% at full DOM): The plateau is predicted to break at full DOM. Docker re-collection investment is justified. Product lane should wait for full-DOM results before closing the recipe density design path.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network/model calls. The analysis requires: (1) computing median(|M_i|) and std(M_i) from snr_per_iteration_tag_entropy.json.gz for canonical recipe at n=5/10/15/20 (<5 seconds); (2) computing Phi(median/std) as predicted agreement (<1 second); (3) fitting sign-fraction saturating power law (<1 second); (4) validating both models against observed agreement (<1 second); (5) extrapolating to n=50/82 (<1 second). Total estimated <1000 LLM tokens for analysis code and <30 seconds compute.",
+  "expected_information_gain": "HIGH — directly resolves the critical ambiguity from the parent's MEASUREMENT_INVALID result by testing two orthogonal corrected decompositions. The sign-fraction power law (Model B) is the most promising path because: (a) the diagnostic proportion(margin>0) already matches within 1pp at both n=15 and n=20; (b) a saturating power law is the simplest form that captures diminishing returns; (c) if validated, it provides both a mechanism (sign fraction determines agreement) and an extrapolation (sign fraction at n=50). Either positive (validated extrapolation path) or negative (both decompositions fail) outcome changes a concrete product decision about Docker re-collection investment and recipe density viability."
 }
