@@ -1,0 +1,20 @@
+{
+  "base_sha": "cce441dd25bba9649a80c2073d41eb2fc57e0a7f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T21:27:14.669842+00:00",
+  "experiment_id": "EXP-RUNTIME-35470447407",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with auth-aware cache, Accept-Encoding negotiation, multi-layer encoding, geographic latency, and production concurrency?",
+  "lane": "runtime",
+  "origin_github_run_id": "35470447407",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35456070671",
+    "path": "research/experiments/EXP-RUNTIME-35456070671/handoff.json",
+    "sha256": "647db27f115aad610f2b628f0b0f6289b18b9e1d101abfddcfd5558095d60e0b"
+  },
+  "reason": "pulse",
+  "request_hash": "fa0a778cc6f0070c3b701251222d020c577eff028d7299354937e27d6df1fec3",
+  "request_id": "7796070c31adc6cbfed105f7",
+  "schema_version": 1
+}

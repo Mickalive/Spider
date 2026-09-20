@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35470447407",
+  "lane": "runtime",
+  "github_run_id": "35476270210",
+  "github_run_attempt": 1,
+  "execution_recorded_at": "2026-09-19T23:33:55.405112+00:00",
+  "result_recorded_at": "2026-09-19T23:34:30.000000+00:00",
+  "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+  "platform": "linux",
+  "dependencies": {
+    "brotli": "1.2.0",
+    "PyJWT": "2.14.0",
+    "requests": "2.34.2"
+  },
+  "frozen_inputs": {
+    "request_hash": "de4c79687229a0626b9413db99271ba9f4487f2653706c17906a6ba3f08c1ae1",
+    "spec_hash": "575a8902e8f1269f36058448a1df4fe36cd21fd91e14f44c723c294e4b219e63",
+    "prereg_hash": "138d3a94c3372f1067b3e0c1e5ace5c479459661dabf6e1fcb39f6df14dabb39"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35456070671",
+    "handoff_path": "research/experiments/EXP-RUNTIME-35456070671/handoff.json",
+    "handoff_sha256": "647db27f115aad610f2b628f0b0f6289b18b9e1d101abfddcfd5558095d60e0b"
+  },
+  "code": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py",
+      "sha256": "7ccee969deca1c47b6e56e0e1110e53f01f5d6dafcb0ef23f7036297cc325e79",
+      "role": "code",
+      "description": "Experiment execution script with mock origin, reverse proxy, and gzip decompression correctness controls"
+    }
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35470447407/result.json",
+      "sha256": "c6e96555b0161c9fe14a1bc0e1156d0f5c1792b99ecf27e614c9973b68a4b892",
+      "role": "derived"
+    }
+  },
+  "infrastructure": {
+    "origin_server": "Python http.server (ReusableHTTPServer) on localhost",
+    "reverse_proxy": "Python http.server (ReverseProxyHandler) on localhost",
+    "mock_oauth": "Flask-compatible PyJWT validation with HS256",
+    "base_ports": {
+      "origin": "8700-8702",
+      "proxy": "8800-8802"
+    }
+  },
+  "experiment_config": {
+    "seed": 44,
+    "reps_per_cell": 10,
+    "target_body_size": 1024,
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "content_types": ["JSON", "HTML", "XML"],
+    "compression_modes": {
+      "GZIP-MC": {"use_gzip": true, "use_brotli": false, "use_chunked": true, "chunk_size": 32},
+      "GZIP-SC": {"use_gzip": true, "use_brotli": false, "use_chunked": true, "chunk_size": 1024},
+      "IDENTITY": {"use_gzip": false, "use_brotli": false, "use_chunked": false, "chunk_size": 1024},
+      "BROTLI-MC": {"use_gzip": false, "use_brotli": true, "use_chunked": true, "chunk_size": 32}
+    },
+    "max_decompression_depth": 5,
+    "jitter_range_ms": [50, 150]
+  },
+  "reproduction": {
+    "command": "python3 run_experiment.py",
+    "working_directory": "research/experiments/EXP-RUNTIME-35470447407",
+    "estimated_duration_seconds": 120,
+    "network_requirements": "localhost only, no external network access",
+    "known_issues": "PyJWT InsecureKeyLengthWarning for short HMAC key (expected for test secret)"
+  }
+}

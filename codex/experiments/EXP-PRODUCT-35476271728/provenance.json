@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35476271728",
+  "lane": "product",
+  "github_run_id": null,
+  "github_run_attempt": null,
+  "executed_at": "2026-09-19T23:39:08.382563+00:00",
+  "completed_at": "2026-09-19T23:40:38.000000+00:00",
+  "base_sha": "62cc83b9673f02e1e2991d80300efddd4d546e0e",
+  "pre_execute_sha": "62cc83b9673f02e1e2991d80300efddd4d546e0e",
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35456068953",
+    "handoff_path": "research/experiments/EXP-PRODUCT-35456068953/handoff.json",
+    "handoff_sha256": null
+  },
+  "frozen_inputs": {
+    "request.json": "988e0cdbe2926390140f67e96d41b763cf7800b166e48e705e3ce50cefea96cb",
+    "spec.json": "37872f79d378c394abce7382577f32556f743c36a43537a8b3ead1463f4445d8",
+    "prereg.md": "1a66c82d1071728f52220d0014a613c068af19e407bc0e8c2ad1c8504c2f7241",
+    "freeze.json": {
+      "frozen_at": null,
+      "schema_version": 1
+    }
+  },
+  "artifacts": {
+    "mock_server.py": {
+      "path": "research/experiments/EXP-PRODUCT-35476271728/mock_server.py",
+      "sha256": "d8800789be4ce98eda8fff1b6d9706f0c42995622dc8b03b2d38a0f4680a8c8d",
+      "role": "code",
+      "description": "Stochastic Flask+SQLite mock server with randomized token_refresh drift (p_refresh_success=0.7). Copied from parent EXP-PRODUCT-35456068953; unmodified."
+    },
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-PRODUCT-35476271728/run_experiment.py",
+      "sha256": "02b7ae8434b7c4e25b8dc5a5597a46464244a5a4717496a918667c99b81c96b2",
+      "role": "code",
+      "description": "Experiment driver: 5 phases (C1 discrimination, co-occurring noise at n=480, noise-only null at n=240, isolated TP at n=60, threshold sensitivity at 6 levels)"
+    },
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35476271728/raw_evidence/experiment_data.json",
+      "sha256": "3b7d6afeb0aed22df797ef9221ee7c50ee2df73ad44fe4ba62b4b05fffe4a9f4",
+      "role": "raw",
+      "description": "All raw HTTP request/response evidence from 5 experiment phases"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-PRODUCT-35476271728/result.json",
+      "role": "derived",
+      "description": "Canonical result packet with metrics, controls, observations"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-PRODUCT-35476271728/report.md",
+      "role": "derived",
+      "description": "Human-readable interpretation of results"
+    }
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "dependencies": {
+      "flask": "3.1.3",
+      "pyjwt": "2.14.0",
+      "cryptography": "50.0.1",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "werkzeug": "3.1.8"
+    },
+    "server": "Flask 3.1.3 + SQLite WAL-mode + in-memory TTL cache (0.5s) + jitter 10-100ms + HS256/RS256 JWT",
+    "host": "127.0.0.1:18951",
+    "seed": 42,
+    "threaded": false
+  },
+  "reproduction": {
+    "command": "cd research/experiments/EXP-PRODUCT-35476271728 && python run_experiment.py",
+    "expected_duration_seconds": 103,
+    "expected_outcome": "SURVIVES",
+    "notes": "Server binds to port 18951. Requires flask, pyjwt, cryptography, numpy, scipy, werkzeug. Stochastic token_refresh uses p_refresh_success=0.7 with seed=42."
+  }
+}

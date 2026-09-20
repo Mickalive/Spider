@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35476270792",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix V3 selection bias after 304 exclusion: valid cache-enabled non-304 composition is skewed (profile 2, data_list 2, session_status 40 valid vs 40/40/40 expired). Pooled cache-enabled r is biased (-0.452 non-304 vs -0.237 inclusive). Recompute C3/C4/C5 with endpoint-stratified or balanced weighting, not raw pooled concatenation. Report per-endpoint non-304 r's (profile 0.009 n=122, data_list 0.122 n=122, session -0.013 n=160) and stratified pooled estimate.",
+    "Fix C5 to exclude 304 from per-cache correlations as frozen prereg requires. Producer C5 includes 304 (run_experiment.py per-cache loop uses all OK samples, not non-304 filter). Correct non-304 C5: r_enabled=-0.453 n=164, r_disabled=0.014 n=240, diff=0.466 > 2*SE=0.204 FAIL more strongly than reported 0.251 >0.184. Update run_experiment.py to apply V3 filter to C5 and per-endpoint correlations.",
+    "Fix _make_unauthorized_response ETag permission leakage: expired tokens decode as expired without permission_level payload, so fallback 'read' etag (c6b1...) is used for write-permission expired requests, causing write valid etag c471... vs expired c6b1... mismatch. Compute stable_key from request permission_level independent of token expiry (pass permission_level explicitly or derive from session). Verify ETag independence via check that valid and expired write etags overlap.",
+    "Fix TOST pass logic inconsistency: tost_equivalence() returns pass = pu<0.05 AND pl<0.05 (two-sided), but spec decision rule is one-sided pu<0.05 only. Metrics tost_at_delta_015_testbed.pass=false while Controls C4_tost.pass=true. Align metric pass to one-sided spec or report both clearly.",
+    "Re-run B-PARENT-CONFOUND with correct effect size power analysis: observed |r|=0.120 <0.15 fails C7, but per-endpoint bparent shows -0.406/-0.317 for profile/data_list vs -0.032 for session_status. Investigate why header-only fix (uuid vs token_hex) yields only 0.12 pooled when parent V1 was 0.17. Test larger n>=800 or stronger entropy bifurcation to determine if V1 confound is weaker than assumed or if header-only extraction dilutes effect.",
+    "Disclose and correct report that per_endpoint_r_testbed includes 304 samples (producer reports r=-0.378/-0.256/-0.013 n=160). Correct non-304 per-endpoint r's are 0.009/0.122/-0.013 and change interpretation from moderate negative coupling to near-zero within-endpoint orthogonality."
+  ],
+  "validity_findings": [
+    {
+      "id": "V3_INCOMPLETE_SELECTION_BIAS",
+      "severity": "high",
+      "finding": "V3 FIX (exclude 304 from correlation) corrects structural composite construction (fixed 0.2 vs sha256 hash) but leaves token-state-dependent sampling selection: valid cache-enabled non-304 n=44 (profile 2, data_list 2, session 40) vs expired n=120 (balanced). Session_status has higher structural mean ~0.57 vs profile ~0.29, so pooling creates spurious negative r. Validated by raw_evidence/experiment_data.json: valid+cache+read+user_profile has 19/20 304, leaving 1 non-304 per write/read. Producer does not disclose this bias.",
+      "evidence": "raw_evidence/experiment_data.json per_condition_data valid+cache+* has_304 true in 19/20 samples; audit recompute: pooled enabled non304 r=-0.452 vs per-endpoint 0.009/0.122/-0.013; run_experiment.py:746-750 filters pooled only, not per-cache/per-endpoint loops at 860-872 and 898-926",
+      "impact": "Pooled testbed r=-0.126 and C5 diff are biased; true within-endpoint orthogonality is stronger (|r| ~0.04 stratified) but heterogeneity is overstated. C3 one-sided pass remains true after stratification, but C5 fail is inflated by bias and cannot be interpreted as infrastructure-induced coupling without stratified correction."
+    },
+    {
+      "id": "V3_C5_DEVIATION",
+      "severity": "medium",
+      "finding": "Frozen spec and prereg.md V3 FIX require excluding 304 from pooled AND per-endpoint/per-cache correlations (C3,C4,C5,C6). Producer run_experiment.py excludes 304 only from pooled (non_304_testbed filter at line 748) but C5 cache heterogeneity and per_endpoint_r use all samples including 304. Reported C5 diff 0.251 is incorrect; correct non-304 diff 0.466.",
+      "evidence": "spec.json measurement_validity: 'Exclude 304 responses from pooled Pearson correlation and from per-endpoint/per-cache correlations (C3,C4,C5,C6)'; run_experiment.py:860-872 no has_304 filter; recomputed metrics: per_cache_r_testbed producer cache_enabled=-0.237 vs audit non304 -0.453",
+      "impact": "Understates heterogeneity; decision rule C5 still FAIL but magnitude doubled, reinforcing REJECTED not CONFIRMED."
+    },
+    {
+      "id": "V_ETAG_PERMISSION_LEAKAGE",
+      "severity": "medium",
+      "finding": "testbed_server.py _make_unauthorized_response() computes ETag from stable_key f'{path}_{permission_level}' but for expired tokens validate_token returns error payload without permission_level, so permission_level defaults to 'read'. Write-permission expired requests get read etag c6b1... vs valid write etag c471..., leaking behavioral state into structural ETag. Confirmed: per_condition_data for /api/user/profile write perm valid etag c471... unique, expired etag c6b1... overlap 0.",
+      "evidence": "testbed_server.py:369-395 _make_unauthorized_response permission_level param defaults to read; raw_evidence per_condition_data write perm etag sets disjoint; audit recompute group write perm overlap 0",
+      "impact": "Structural signal not fully independent per spec clause 8 for write perm expired conditions. Effect size small within-condition (etag_variation 0) but violates measurement validity and should be fixed before VALIDATED claim."
+    },
+    {
+      "id": "V_TOST_INCONSISTENCY",
+      "severity": "low",
+      "finding": "result.json tost_at_delta_015_testbed.pass=false due to two-sided logic (p_lower 0.313 fails) while controls.C4_tost.pass=true via one-sided p_upper 1.3e-08 <0.05. Inconsistency between metric and control identities violates preservation of metric/control identifiers.",
+      "evidence": "result.json metrics.tost_at_delta_015_testbed.pass false vs controls.C4_tost.pass true; run_experiment.py tost_equivalence pass = pu<0.05 and pl<0.05",
+      "impact": "Does not change C3/C4 decision (both pass one-sided), but creates confusion and fails audit recompute of metric identifier."
+    },
+    {
+      "id": "V_V1_FIX_VERIFIED",
+      "severity": "info",
+      "finding": "V1 request_id entropy confound remains fixed: valid entropy mean 3.723 vs expired 3.728 p=0.68 two-sided t-test, confirming uuid uniform. No evidence of entropy bifurcation in testbed non304 samples.",
+      "evidence": "raw_evidence non304 request_id_entropy valid mean 3.723 n164 expired 3.728 n240 p0.68; testbed_server.py generate_user_profile uses uuid.uuid4 always",
+      "impact": "Supports that pooled |r| -0.126 is not driven by entropy confound."
+    },
+    {
+      "id": "V_C7_NEGATIVE_CONTROL_FAILURE",
+      "severity": "high",
+      "finding": "B-PARENT-CONFOUND-REPRODUCTION expected |r|>=0.15 to confirm V1 was genuine confound; observed |r|=0.120 (CI [-0.208,-0.031]) fails threshold, p_upper 1.4e-09 still passes equivalence. Per-endpoint bparent r profile -0.406/-0.317 large but pooled diluted by session_status -0.032. Suggests V1 entropy effect is endpoint-dependent or delta 0.15 overestimates confound strength with header-only extraction.",
+      "evidence": "result.json metrics.pearson_r_pooled_bparent -0.120 abs 0.120 ci_upper -0.031; controls.C7_negative_control pass false; recomputed bparent per-endpoint r's",
+      "impact": "Negative control fails to reproduce parent V1, leaving unknown whether parent r=0.17 was fully due to entropy bifurcation. Blocks clean CONFIRMED verdict as per decision rule C7."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "expected": "|r| < 0.15 consistent with four prior localhost confirmations",
+      "observed": "Not re-run in this experiment; prior values r=0.0022 -0.0258 0.0335 0.0463 all PASS referenced in spec. No new evidence to overturn.",
+      "pass": true,
+      "evidence": "spec.json baselines B-LOCALHOST-MOCK references EXP-GRAPH-35389145821 etc.; provenance parent carry_forward established"
+    },
+    {
+      "id": "B-FLASK-ONLY",
+      "expected": "|r| < 0.15 confirming orthogonality without infrastructure",
+      "observed": "r=0.0263 |r|=0.0263 CI [-0.063,0.116] TOST p_upper 0.003 p_lower 5e-05 PASS one-sided; behavioral_std 3.5 n480. Recomputed matches producer. Per-endpoint r 0.041/0.083/0.054 near zero. No 304, no etag leakage (plain Flask).",
+      "pass": true,
+      "evidence": "result.json metrics.pearson_r_pooled_flask_only 0.026291; raw_evidence flask_behavioral_scores 480; audit recompute r 0.0263 p0.565"
+    },
+    {
+      "id": "B-PARENT-CONFOUND-REPRODUCTION",
+      "expected": "|r| >= 0.15 (negative control confirming V1 genuine)",
+      "observed": "|r|=0.120 <0.15 FAIL. CI upper -0.031 <0.15 would pass equivalence. Per-endpoint reveals heterogeneity: profile -0.406, data_list -0.317, session -0.032. Pooled diluted by session_status endpoint with no effect. Sampling of request_id entropy valid 3.721 vs expired 3.602 diff 0.119 small relative to uuid variance.",
+      "pass": false,
+      "evidence": "result.json metrics.pearson_r_pooled_bparent -0.1204; recomputed entropy diff 0.119; per_endpoint_bparent_r"
+    }
+  ],
+  "recomputed_metrics": {
+    "pearson_r_pooled_testbed_non304": -0.1261107581399694,
+    "abs_r_pooled_testbed_non304": 0.1261107581399694,
+    "ci_95_testbed_non304": [-0.22095841313035886, -0.028899983934028494],
+    "se_testbed_non304": 0.04993761694389223,
+    "tost_p_upper_delta015_testbed": 1.3072503270950571e-08,
+    "tost_p_lower_delta015_testbed": 0.3128804869227426,
+    "tost_one_sided_pass_delta015": true,
+    "n_testbed_non304": 404,
+    "n_testbed_total": 480,
+    "n_304_valid": 76,
+    "n_304_expired": 0,
+    "per_endpoint_r_testbed_incl304_producer": {
+      "/api/user/profile": -0.3784282177073812,
+      "/api/data/list": -0.25559279549107927,
+      "/api/session/status": -0.012959372284747653
+    },
+    "per_endpoint_r_testbed_non304_audit": {
+      "/api/user/profile": 0.009162,
+      "/api/data/list": 0.121843,
+      "/api/session/status": -0.012959
+    },
+    "per_endpoint_r_testbed_non304_n": {
+      "/api/user/profile": 122,
+      "/api/data/list": 122,
+      "/api/session/status": 160
+    },
+    "stratified_pooled_r_approx": 0.039,
+    "cache_heterogeneity_producer_incl304": {
+      "r_enabled": -0.23703965917558217,
+      "r_disabled": 0.013519815276475132,
+      "diff": 0.2505594744520573,
+      "two_se": 0.183726,
+      "pass": false
+    },
+    "cache_heterogeneity_audit_non304": {
+      "r_enabled": -0.45288,
+      "r_disabled": 0.013519815276475132,
+      "diff": 0.4664,
+      "two_se": 0.204261,
+      "pass": false,
+      "n_enabled": 164,
+      "n_disabled": 240
+    },
+    "pearson_r_flask_only": 0.026291101741257244,
+    "ci_flask_only": [-0.06336008203341456, 0.11552135806610708],
+    "pearson_r_bparent": -0.12040140629339428,
+    "per_endpoint_bparent": {
+      "/api/user/profile": -0.4058208599830295,
+      "/api/data/list": -0.3174879643565791,
+      "/api/session/status": -0.03187511867011109
+    },
+    "entropy_valid_mean_testbed_non304": 3.7231,
+    "entropy_expired_mean_testbed_non304": 3.7276,
+    "entropy_ttest_p": 0.6805
+  },
+  "claim_ceiling": "C-FRESHNESS remains EXPERIMENTAL bounded to localhost stochastic Flask mock (r=0.002-0.046, n=480, audit PASS across 4 experiments). Production-like testbed evidence is MIXED/REJECTED at delta=0.15 under corrected measurement: pooled non304 |r|=0.126 passes one-sided equivalence (CI upper -0.029 <0.15, p_upper 1.3e-08) and per-endpoint non304 r ~0.01-0.12 suggests within-endpoint orthogonality, but C5 heterogeneity FAIL (diff 0.466 >0.204 even after 304 exclusion) and C7 negative control FAIL (|r|=0.12 <0.15) block CONFIRMED. Residual selection bias and ETag permission leakage require fixes and stratified re-analysis at n>=800 before VALIDATED. No evidence supports PRODUCT_CORE or SHIPPED.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35476270792/result.json metrics pearson_r_pooled_testbed -0.126 CI [-0.221,-0.029]",
+    "research/experiments/EXP-GRAPH-35476270792/raw_evidence/experiment_data.json per_condition_data n_304_valid 76 n_304_expired 0",
+    "research/experiments/EXP-GRAPH-35476270792/raw_evidence/experiment_data.json testbed_all_samples 480 non304 404",
+    "research/experiments/EXP-GRAPH-35476270792/run_experiment.py:748 non_304 filter pooled only; :860-872 C5 no filter",
+    "research/experiments/EXP-GRAPH-35476270792/testbed_server.py:369-395 _make_unauthorized_response permission_level fallback",
+    "research/experiments/EXP-GRAPH-35476270792/result.json controls C1 PASS C2 PASS C3 PASS C4 PASS C5 FAIL C6 PASS C7 FAIL",
+    "research/experiments/EXP-GRAPH-35476270792/spec.json decision_rule C1-C7 all required",
+    "research/experiments/EXP-GRAPH-35476270792/prereg.md V3 FIX exclude 304 from pooled AND per-endpoint/per-cache",
+    "codex/index.json no C-FRESHNESS VALIDATED entry; status remains EXPERIMENTAL"
+  ],
+  "unresolved": [
+    "Whether C5 heterogeneity diff 0.466 is systematic infrastructure modulation or artifact of valid-cache selection bias (91% session_status in valid enabled non304). Requires endpoint-stratified or balanced resampling at n>=800 per prereg power note.",
+    "Whether B-PARENT-CONFOUND would reach |r|>=0.15 with stronger entropy bifurcation or larger n, or if parent V1 r=0.17 was overestimated and V1 confound is weaker than delta 0.15 assumes.",
+    "Whether ETag permission leakage (write perm expired read etag) materially affects pooled r magnitude or only structural validity; fix and re-measure required.",
+    "Whether orthogonality holds on actual distributed production infrastructure with real CDN hierarchies, concurrent load, and cache invalidation on session change (beyond single-node Flask in-memory cache at localhost).",
+    "Whether headers-only structural signal (ETag+Cache-Control+request_id entropy+sha256 hash) captures sufficient variation for product freshness detection vs body-inclusive signals."
+  ]
+}
