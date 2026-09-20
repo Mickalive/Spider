@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35481773764",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix production-like noise `error_format_variation` wire expression: in mock_server.py get_data() and session_status(), body reassignment `body = error_body` occurs after `resp = make_response(jsonify(body), ...)` without rebuilding resp — the error body never reaches the wire. For /api/schema, prereg specifies structural effect but code explicitly has `pass` (no effect). Re-implement so error_format_variation actually mutates response body/headers on measured endpoints and re-verify structural variance > baseline before claiming robustness to all 4 production-like types (research/experiments/EXP-PRODUCT-35481773764/mock_server.py:438-440,535-537,582-584).",
+    "Re-run with corrected mock or narrow claim ceiling to 3 effective noise types (pagination_metadata, variable_length_data, cdn_cache_headers) that were actually expressed; do not claim validated robustness to error_format_variation as designed until wire expression is demonstrated (spec.json:noise_design.types.error_format_variation).",
+    "Address threshold tautology before claiming discriminating noise robustness: current threshold 0.25 lies below both behavioral modes (0.35 failure, 0.65 success) so TP=1.0 is insensitive to any noise that does not cross 0.35 (result.json:metrics.c3_per_condition, raw_evidence phase_b_cooccurring behavioral_score unique [0.35,0.65], validity_notes). Use continuous severity variation or calibrate threshold between modes (e.g., 0.40-0.50) with FP/TP ROC to show discriminating robustness, as noted in handoff do_not_assume threshold tautology.",
+    "Retain mock-only ceiling explicitly: no inference to production OAuth/OIDC, CDN, network RTT, database-backed sessions without re-measurement on production-like substrate at n>=480 with TOST delta=0.15 (parent handoff EXP-PRODUCT-35476271728/handoff.json:unknown, do_not_assume)."
+  ],
+  "validity_findings": [
+    {
+      "id": "V-THRESHOLD-TAUTOLOGY",
+      "severity": "high",
+      "finding": "Behavioral scores are strictly bimodal 0.35 (refresh failure, 30%, N=155/480) and 0.65 (refresh success, 70%, N=325/480) — identical across all 4 co-occurring conditions. Detection threshold 0.25 is below both modes, so TP=1.0 tautologically regardless of noise. Recomputed threshold sweep on pooled B (n=480): TP=1.0 at 0.15/0.20/0.25/0.30/0.35, cliff to 0.677 at 0.40 (auditor recomputed). Noise robustness is thus not discriminatingly tested at 0.25; any noise preserving the discrete 0.35 mode will appear robust.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json:phase_b_cooccurring behavioral_score Counter {0.65:325,0.35:155}; result.json:metrics.c3_per_condition; result.json:validity_notes threshold tautology"
+    },
+    {
+      "id": "V-BIMODAL-DISCRETE",
+      "severity": "medium",
+      "finding": "Behavioral variance (std 0.1345-0.1465) is driven solely by Bernoulli p_refresh_success=0.7 mixture of two discrete points, not continuous severity. This limits generalizability to production token refresh where graded severity or continuous scores are expected. Same discrete model as parent EXP-PRODUCT-35476271728; audit does not falsify but bounds claim ceiling to discrete bimodal.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json:phase_d_isolated_tp unique [0.35,0.65]; result.json:metrics.c3_per_condition behavioral_std; provenance.json:p_refresh_success 0.7"
+    },
+    {
+      "id": "V-ERROR-FORMAT-INERT",
+      "severity": "high",
+      "finding": "Production-like noise `error_format_variation` is not expressed on measured channels: for /api/session/status (behavioral channel) and /api/data, body is replaced after resp creation without rebuilding resp, so wire body remains original behavioral payload (behavioral_score remains 0.35/0.65, recomputed FP not affected). For /api/schema (structural channel), code explicitly `pass` — structural_signal std for error_format_variation is 0.4017, identical to baseline jitter (variable_length_data 0.4017, parent simplistic 0.4017), not elevated. Only pagination_metadata shows elevated structural variance (std 0.898 vs 0.4017). Effective production-like coverage is 3/4 types as implemented; claim of robustness to all 4 types as designed is not justified.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/mock_server.py:438-440,535-537,582-584; raw_evidence phase_b_cooccurring structural_signal Counter error_format_variation {10:96,9:24} std 0.4017; run_experiment.py behavioral_score simulation 0.30 vs raw 0.35 mismatch"
+    },
+    {
+      "id": "V-STRUCTURAL-VARIANCE-PARTIAL",
+      "severity": "medium",
+      "finding": "Spec noise_design expected_total_structural_variance higher than parent due to multi-field variation. Recomputed: pagination_metadata structural_std 0.898 (elevated), variable_length_data 0.4017 (not elevated), cdn_cache_headers 0.4078 (not elevated), error_format_variation 0.4017 (inert). Only 1/4 types increases variance meaningfully. Overall production-like complexity is only partially realized on the structural_signal cardinality observable (body key count + header count + status).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/result.json:metrics.c3_per_condition structural_std; spec.json:noise_design.expected_total_structural_variance"
+    },
+    {
+      "id": "V-MOCK-ONLY-CEILING",
+      "severity": "high",
+      "finding": "All measurements remain on localhost stochastic Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, threaded=False sequential client — identical ceiling to parent. No production substrate (real OAuth/OIDC middleware, CDN caching, network RTT, DB sessions). Orthogonality TOST pass at n=480 does not generalize to production.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/provenance.json:environment, seed 42, port 18951; mock_server.py: Flask, TTLCache, P_REFRESH_SUCCESS; result.json:validity_notes measurement bounded to localhost mock"
+    },
+    {
+      "id": "V-REPRESENTATION-CARDINALITY",
+      "severity": "low",
+      "finding": "Structural signal is cardinality observable (n_keys + n_headers +1) with X-Request-Id/Date/Server/Content-Length excluded. This may under-represent realistic production structural variation (schema field renames, nested structure changes) but is consistent with parent and correctly discriminates auth states. Not falsifying, but bounds interpretation of structural robustness.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/run_experiment.py:structural_signal(); result.json:validity_notes structural signal cardinality"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "PC-STRUCTURAL-DISCRIMINATION",
+      "finding": "PASS — Recomputed full-vector discrimination 0.8333 (3 unique fingerprints for 4 states, expired_token and invalid_token collide on 401 authentication_failed) matches producer 0.8333 >0.5. Baseline status-only 0.5, body-only 0.8333 also recomputed exactly.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json:phase_a_raw; audit recomputation: discrimination 0.8333, baseline_status_only 0.5, baseline_body_only 0.8333"
+    },
+    {
+      "id": "NC-NOISE-FP",
+      "finding": "PASS — Recomputed FP=0.0 on 240 noise-only samples (60 per 4 production-like noises, behavioral_score constant 0.05). Threshold 0.25 yields 0 FP exactly as producer. Meets FP <=0.15.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json:phase_c_noise_only (n=240, unique behavioral_score [0.05]); recomputed FP 0/240=0.0"
+    },
+    {
+      "id": "B-SIMPLISTIC-NOISE-N480",
+      "finding": "PASS with caveat — Producer expected TP>=0.85 under production-like noise. Recomputed TP=1.0 on all 4 co-occurring conditions (n=120 each, Wilson lower 0.969) matches parent TP=1.0 under simplistic noise. Behavioral_std 0.1345-0.1465 >0.05 also holds. However error_format_variation condition achieved TP=1.0 via inert noise (V-ERROR-FORMAT-INERT), so this baseline comparison overstates equivalence for that noise type.",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json:phase_b_cooccurring; recomputed per-condition TP 1.0, behavioral_std 0.1345-0.1465"
+    },
+    {
+      "id": "B-ORTHOGONALITY-N480-MOCK",
+      "finding": "PASS — Recomputed pooled orthogonality TOST at delta=0.15, n=480: Pearson r=0.0161 (p=0.7247), Fisher-z CI [-0.07349,0.10546], se 0.045787, p_upper 0.00159 <0.05, p_lower 0.00013 <0.05, CI upper 0.1055 <0.15. Matches producer exactly (r 0.016116, CI upper 0.105465). Consistent with 4 prior n=480 mock orthogonality experiments cited (all CI upper <0.15).",
+      "evidence_ref": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json:phase_b_cooccurring (480 paired behavioral+structural); audit recomputation Pearson r 0.0161 CI [-0.0735,0.1055] TOST pass"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_auth_discrimination": 0.8333,
+    "c1_auth_discrimination_recomputed": 0.8333,
+    "c1_pass": true,
+    "baseline_status_only": 0.5,
+    "baseline_body_only": 0.8333,
+    "c2_isolated_tp_recomputed": 1.0,
+    "c2_cooccurring_tp_recomputed": {
+      "token_refresh+pagination_metadata": 1.0,
+      "token_refresh+variable_length_data": 1.0,
+      "token_refresh+error_format_variation": 1.0,
+      "token_refresh+cdn_cache_headers": 1.0
+    },
+    "c2_cooccurring_wilson_lower_recomputed": 0.969,
+    "c2_pass_recomputed": true,
+    "c3_per_condition_recomputed": {
+      "token_refresh+pagination_metadata": {"behavioral_mean": 0.535, "behavioral_std": 0.1465, "structural_mean": 13.0167, "structural_std": 0.898, "tp_rate": 1.0},
+      "token_refresh+variable_length_data": {"behavioral_mean": 0.5525, "behavioral_std": 0.1411, "structural_mean": 11.8, "structural_std": 0.4017, "tp_rate": 1.0},
+      "token_refresh+error_format_variation": {"behavioral_mean": 0.5575, "behavioral_std": 0.1391, "structural_mean": 9.8, "structural_std": 0.4017, "tp_rate": 1.0},
+      "token_refresh+cdn_cache_headers": {"behavioral_mean": 0.5675, "behavioral_std": 0.1345, "structural_mean": 13.7917, "structural_std": 0.4078, "tp_rate": 1.0}
+    },
+    "c3_variance_conditions_pass_recomputed": 4,
+    "c3_orthogonality_recomputed": {
+      "pearson_r": 0.016116,
+      "pearson_p": 0.7247068258689505,
+      "n": 480,
+      "se": 0.045787,
+      "z_r": 0.016117,
+      "ci_lower": -0.073493,
+      "ci_upper": 0.105465,
+      "tost_delta": 0.15,
+      "tost_p_upper": 0.0015942334441507657,
+      "tost_p_lower": 0.00012961968808844482,
+      "tost_pass": true
+    },
+    "c3_pass_recomputed": true,
+    "c4_noise_fp_rate_recomputed": 0.0,
+    "c4_pass_recomputed": true,
+    "c5_tost_equivalence_recomputed": {
+      "pearson_r": 0.016116,
+      "ci_upper": 0.105465,
+      "ci_upper_lt_delta": true,
+      "tost_pass": true,
+      "n": 480
+    },
+    "c5_pass_recomputed": true,
+    "threshold_sweep_recomputed": {
+      "0.15": 1.0,
+      "0.20": 1.0,
+      "0.25": 1.0,
+      "0.30": 1.0,
+      "0.35": 1.0,
+      "0.40": 0.6770833333333334
+    },
+    "provenance_hash_match": {
+      "raw_evidence_sha256": "b9ec764fb2d512930b97743e9dc6506f4f30dcdba17d3b8d0f7cc7cf04b1fca0",
+      "raw_match": true,
+      "mock_server_sha256": "c880c71799ec3ed134cea6734a04be488d2e53deca9d8ff775771a56cb581cde",
+      "run_experiment_sha256": "abad271a3edf29eccc06e4901162ef9a98b3853cf48a34731bdbc43938d02185",
+      "result_sha256": "cc52a238c7a7242fe8fe8c26943b99e9a6ed564293e95e65b24c2a414714c1ae"
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: token_refresh behavioral detection (TP=1.0, behavioral_std 0.1345-0.1465) and orthogonality (r=0.016, CI [-0.0735,0.1055], TOST delta=0.15 PASS at n=480) survive ONLY on localhost stochastic Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT mock, 127.0.0.1:18951, seed 42, p_refresh_success=0.7, with bimodal discrete scores 0.35/0.65 and threshold 0.25 tautologically below both modes. Effective production-like noise coverage is 3/4 types as actually expressed (pagination_metadata elevated variance, variable_length_data and cdn_cache_headers minimal variance, error_format_variation inert on measured channels). No inference to production OAuth/OIDC, CDN, network RTT, DB sessions; no continuous severity generalization; no threshold calibration beyond 0.15-0.35 tautology. C-FRESHNESS remains EXPERIMENTAL, not PRODUCT_CORE.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35481773764/request.json",
+    "research/experiments/EXP-PRODUCT-35481773764/spec.json",
+    "research/experiments/EXP-PRODUCT-35481773764/prereg.md",
+    "research/experiments/EXP-PRODUCT-35481773764/freeze.json",
+    "research/experiments/EXP-PRODUCT-35481773764/result.json::metrics.c1_auth_discrimination 0.8333, c2_cooccurring_tp 1.0 x4, c3_per_condition std 0.1345-0.1465, c3_orthogonality r 0.0161 CI upper 0.1055, c4_noise_fp_rate 0.0, c5_tost_equivalence",
+    "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json sha256 b9ec764fb2d512930b97743e9dc6506f4f30dcdba17d3b8d0f7cc7cf04b1fca0 (phase_a_raw 40 probes, phase_b_cooccurring 480, phase_c_noise_only 240, phase_d_isolated_tp 60)",
+    "research/experiments/EXP-PRODUCT-35481773764/mock_server.py sha256 c880c71799ec3ed134cea6734a04be488d2e53deca9d8ff775771a56cb581cde",
+    "research/experiments/EXP-PRODUCT-35481773764/run_experiment.py sha256 abad271a3edf29eccc06e4901162ef9a98b3853cf48a34731bdbc43938d02185",
+    "research/experiments/EXP-PRODUCT-35481773764/provenance.json github_run_id 35510156399",
+    "research/experiments/EXP-PRODUCT-35476271728/handoff.json — parent ceiling localhost mock only, threshold tautology, bimodal discrete, production substrate unknown",
+    "research/experiments/EXP-PRODUCT-35476271728/result.json — parent n=480 TOST r=-0.0366 CI [-0.126,0.053] TP=1.0",
+    "codex/claim_state.json C-FRESHNESS status EXPERIMENTAL"
+  ],
+  "unresolved": [
+    "Whether error_format_variation noise (or true production error format heterogeneity) couples behavioral and structural signals when actually expressed on wire — current implementation never tested this as designed.",
+    "Whether orthogonality and TP>=0.85 survive on non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, database-backed sessions at n>=480 (inherited primary bottleneck for PRODUCT_CORE).",
+    "Whether behavioral scores generalize beyond discrete 0.35/0.65 bimodal to continuous severity or production token refresh error surfaces with graded severity.",
+    "Whether threshold 0.25 can be calibrated discriminatingly (requires continuous scores or ROC between modes) versus tautological 0.15-0.35 plateau.",
+    "Whether structural cardinality observable adequately proxies production schema drift beyond pagination variation (only pagination_metadata elevated variance; other types minimal).",
+    "Whether within-condition behavioral/structural variance maintains on real network RTT and cache-freshness distributions beyond localhost jitter/TTL."
+  ]
+}

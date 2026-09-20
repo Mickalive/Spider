@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35481773764",
+  "github_run_id": "35510156399",
+  "github_run_attempt": 1,
+  "base_sha": "b33b5b790d82a016af6a4a8ebe567fbd9c36715a",
+  "current_sha": "85cc6bf8a9c9e6ab278c96c97d5615f4f0f64a7c",
+  "lane": "product",
+  "created_at": "2026-09-20T01:35:29.383782+00:00",
+  "executed_at": "2026-09-20T18:59:39.889211+00:00",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "packages": {
+      "flask": "3.1.3",
+      "pyjwt": "2.14.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "werkzeug": "3.1.8",
+      "cryptography": "50.0.1"
+    }
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json",
+      "sha256": "b9ec764fb2d512930b97743e9dc6506f4f30dcdba17d3b8d0f7cc7cf04b1fca0"
+    },
+    "mock_server": {
+      "path": "research/experiments/EXP-PRODUCT-35481773764/mock_server.py",
+      "sha256": "c880c71799ec3ed134cea6734a04be488d2e53deca9d8ff775771a56cb581cde"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-35481773764/run_experiment.py",
+      "sha256": "abad271a3edf29eccc06e4901162ef9a98b3853cf48a34731bdbc43938d02185"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-35481773764/result.json",
+      "sha256": "cc52a238c7a7242fe8fe8c26943b99e9a6ed564293e95e65b24c2a414714c1ae"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-35481773764/report.md",
+      "sha256": "2cddcfa3a19348791bdebf24e7061e4fd129910811097c9197ae584f3a04a541"
+    },
+    "freeze": {
+      "path": "research/experiments/EXP-PRODUCT-35481773764/freeze.json",
+      "sha256": "67816b8af836b2f0460e6eeb4c7090c9af050d677c1171765ff2a6915183c4d6"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35481773764/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35481773764/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35481773764/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35481773764/freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35476271728",
+    "handoff_path": "research/experiments/EXP-PRODUCT-35476271728/handoff.json",
+    "handoff_sha256": "bbd7e5de967eeb62249feeab8cf9e3a9af77b1c7393b4cf6fbe5e64cf9da5bc9"
+  },
+  "seed": 42,
+  "port": 18951,
+  "threshold": 0.25,
+  "tost_delta": 0.15,
+  "p_refresh_success": 0.7,
+  "server_command": "python run_experiment.py",
+  "notes": "Single-threaded Werkzeug server on 127.0.0.1:18951, global RNG seeded at 42 before server start. All measurements over real HTTP on localhost. No LLM calls. Production-like structural noise types: pagination_metadata, variable_length_data, error_format_variation, cdn_cache_headers."
+}

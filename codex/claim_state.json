@@ -501,6 +501,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "This experiment tests estimator sensitivity on a synthetic 12-state stochastic SPA, not Web dynamics. No new evidence for or against predictive dynamical structure on real Web transitions. Per-stratum PMI 1.46-1.69 bits confirms signal exists on this SPA class but does not address beyond-memory dynamics or production SPAs."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35530591329",
+        "lane": "physics",
+        "created_at": "2026-09-20T18:55:21.680285+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1209,6 +1219,16 @@
         "reason": "Frozen decision_rule REJECTED (C7 FAIL, C5 FAIL under wrong pooling) on production-like testbed. However, the REJECTED is measurement-confounded, not a scientific falsification of orthogonality. Audit confirms: (1) correctly stratified C5 PASSES (diff=0.0469 < 0.076); (2) C7 fails per frozen simple-pooled rule (|r|=0.1228) but endpoint heterogeneity (session_status null) dilutes pooled \u2014 stratified weighted |r|=0.260 would PASS; (3) stratified pooled r=0.0125 (CI upper 0.0874 < 0.15) confirms within-endpoint orthogonality. The frozen REJECTED does NOT accumulate evidence against the orthogonality hypothesis; it accumulates evidence that the frozen protocol's C7 simple-pooled definition and C5 pooling implementation need correction. Maximum justified ceiling: within-endpoint orthogonality confirmed (stratified r=0.0125), B-FLASK-ONLY replication (r=0.021), on single-node Flask 3.1.3 + PyJWT RS256 + SQLite WAL + in-memory CDN simulation localhost. NOT validated: cross-endpoint pooled orthogonality under simple pooling, production infrastructure, delta=0.10, distributed CDN, concurrent load, or body-inclusive signals."
       },
       {
+        "experiment_id": "EXP-PRODUCT-35481773764",
+        "lane": "product",
+        "created_at": "2026-09-20T01:35:29.383782+00:00",
+        "decision": "SURVIVES_CURRENT_TEST with audit-reduced claim ceiling \u2014 all five frozen decision conditions pass (C1 discrimination 0.8333 > 0.5, C2 TP=1.0 on all 4 co-occurring production-like noise conditions, C3 behavioral_std 0.1345-0.1465 > 0.05, C4 FP=0.0, C5 TOST pass at delta=0.15 CI upper 0.1055 < 0.15). However, audit REVISE status applies because: (1) error_format_variation noise is inert on measured channels (V-ERROR-FORMAT-INERT), reducing effective coverage to 3/4 types; (2) threshold tautology at 0.25 (below both behavioral modes 0.35/0.65) means TP=1.0 is not discriminatingly tested (V-THRESHOLD-TAUTOLOGY); (3) bimodal discrete scores limit generalizability. The frozen SURVIVES maps to canonical SURVIVES outcome but producer_claim_supported=false per audit. C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized. Claim ceiling bounded to localhost stochastic mock with 3/4 effective production-like noise types and tautological threshold.",
+        "source_commit": "4310ab40d861b59de21940a4b60a1423cfebaae2",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "Token_refresh behavioral detection (TP=1.0, behavioral_std 0.1345-0.1465) and orthogonality (r=0.016, CI [-0.0735,0.1055], TOST delta=0.15 PASS at n=480) survive on localhost stochastic Flask 3.1.3 + SQLite mock with production-like structural noise (pagination_metadata, variable_length_data, cdn_cache_headers effective; error_format_variation inert). Effective coverage 3/4 production-like noise types. Threshold 0.25 tautological (below both behavioral modes 0.35/0.65). Bimodal discrete scores (not continuous). Claim ceiling bounded to localhost mock only. NOT validated for production OAuth/OIDC, CDN, network RTT, DB sessions, continuous severity, or discriminating threshold calibration. Parent orthogonality baseline replicated across 5 independent mock experiments. Status unchanged from prior EXPERIMENTAL with narrowed effective noise coverage."
+      },
+      {
         "experiment_id": "EXP-GRAPH-35510157861",
         "lane": "graph",
         "created_at": "2026-09-20T12:16:53.631971+00:00",
@@ -1217,6 +1237,16 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule REJECTED (C7 FAIL under consistent non-304 exclusion) on production-like testbed. However, orthogonality signal is strong: C1-C6 all pass, stratified pooled r=0.0257 (n=684, CI upper 0.1005 <0.15, TOST p_upper=0.00053), B-FLASK-ONLY r=0.0201. The REJECTED reflects a fragile negative control design (304 inclusion/exclusion changes B-PARENT-CONFOUND |r| from 0.299 to 0.074), not evidence against orthogonality. V_ETAG permission fix verified, C5 stratification fix verified. Maximum justified ceiling: within-endpoint orthogonality confirmed at delta=0.15 on LOCAL testbed (Flask 3.1.3 + PyJWT RS256 + SQLite WAL + CDN simulation with ETag-SHA256/Cache-Control) with headers-only structural signal at n_non304=684. NOT validated: production infrastructure, distributed CDN, concurrent load, delta=0.10, or body-inclusive signals. Frozen REJECTED from prior EXP-GRAPH-35481774794 does NOT accumulate evidence against orthogonality hypothesis \u2014 measurement-confounded."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35530590140",
+        "lane": "graph",
+        "created_at": "2026-09-20T18:55:19.535880+00:00",
+        "decision": "CONFIRMED \u2014 C-FRESHNESS orthogonality at delta=0.15 CONFIRMED per frozen decision_rule: all C1-C7 PASS on production-like LOCAL testbed. V2 confound redesign (fixed 'expired' request_id) resolves parent fragility (B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304, delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684. Claim ceiling BOUNDED: (a) n_non304=684 < 800 required by frozen question \u2014 delta=0.10 inference marginal (TOST p=0.060); (b) LOCAL testbed only (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDN simulation); (c) VALIDATED/PRODUCT_CORE not warranted pending n>=800 re-run and distributed/CDN validation. Audit REVISE on reporting consistency (C2/C7 include 304s, should be non-304 per spec) and power shortfall \u2014 no effect on primary metric validity.",
+        "source_commit": "e8f71032e6e936d3e4cfb5f18342f70ec044de5e",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "C-FRESHNESS orthogonality CONFIRMED at delta=0.15 per frozen decision_rule (C1-C7 all PASS) on production-like LOCAL testbed. V2 confound redesign resolves parent fragility: B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304 inclusion/exclusion (delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684, 3 endpoints, 3/3 with variance. B-FLASK-ONLY |r|=0.0017 confirms orthogonality without infrastructure. However, claim ceiling bounded: n_non304=684 < 800 frozen question requirement (delta=0.10 marginal, TOST p=0.060); LOCAL testbed only (not distributed production); headers-only structural signal; single-node CDN simulation. VALIDATED/PRODUCT_CORE not warranted \u2014 parallel-channel architecture justified only for this LOCAL production-like regime at delta=0.15. Status EXPERIMENTAL pending: (1) n>=800 non-304 re-run; (2) distributed CDN/OAuth validation; (3) concurrent load testing."
       }
     ],
     "C-CROSSSITE": [
@@ -1663,6 +1693,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "REJECTED",
         "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35530590171",
+        "lane": "intel",
+        "created_at": "2026-09-20T18:55:20.209885+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
       }
     ],
     "C-MEAS-VALID": [
@@ -2295,19 +2335,49 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST: all five conditions C1-C5 pass with audit PASS. C1: streaming_decompressed_hash == buffered_decompressed_hash for ALL 480 multi-layer streaming observations across 24 cells (byte-identical). C2: streaming_decompressed_hash == expected_hash for ALL 480 multi-layer streaming observations. C3: B-GZIP-SINGLE-LAYER-REGRESSION 120/120 and B-BROTLI-SINGLE-LAYER-REGRESSION 120/120 pass in both paths. C4: null_control all_same=true for all 4 auth states across all cells in both paths. C5: B-COMPRESSED-TARGET-RANGE passes (3/3 content types meet thresholds at both 10KB and 100KB). Audit PASS confirms all recomputed metrics match producer exactly. The parent V1_BUFFERED_PROXY_NOT_STREAMING limitation is resolved at the Transfer-Encoding framing layer: the streaming proxy (StreamingProxyHandler reads upstream_resp.read(STREAM_CHUNK_SIZE) in a loop without full-body buffering) and streaming client (resp.raw.read(stream_chunk_size) loop accumulating bytes) produce byte-identical decompressed output to the buffered ground truth at both realistic CDN chunk size (8192 bytes) and stress size (32 bytes, 86-3087 chunks per response). Claim ceiling advances to include streaming incremental decompression at the HTTP Transfer-Encoding framing layer on localhost with high-entropy multi-layer payloads. However, C-MEAS-VALID remains EXPERIMENTAL because: (1) the test is at the Transfer-Encoding framing layer (proxy forwards chunks, client accumulates then decompresses), NOT at the decompressor streaming API layer (brotli.Decompressor.process / gzip streaming without accumulation) \u2014 true incremental decompressor streaming across arbitrary Brotli block boundaries is untested; (2) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, Vary/cache, geographic latency, and production concurrency is untested \u2014 the sole remaining blocker for Product Core readiness; (3) depths 3-5 stacked encodings untested (only depth 2 exercised); (4) payloads >100KB untested; (5) compression level variation beyond tested gzip level 1/None and brotli quality 4/6 untested. Does NOT promote to PRODUCT_CORE \u2014 real CDN infrastructure testing is required."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35530588298",
+        "lane": "runtime",
+        "created_at": "2026-09-20T18:55:18.221242+00:00",
+        "decision": "SURVIVES_CURRENT_TEST",
+        "source_commit": "12fbd4b1f5b3613ce5f6518c151c021a183b9830",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION limitation resolved at the in-process decompressor API layer: brotli.Decompressor().process(chunk) and gzip.GzipFile.read(CHUNK_SIZE) produce byte-identical SHA256 output to full-body decompression across 480 multi-layer streaming observations (24 cells x 5 reps x 4 states), 240 regression, 120 identity \u2014 840/840 correct, 0 errors, 0 silent fallbacks (audit PASS). Claim ceiling bounded to Python 3.12.14, brotli 1.2.0, stdlib gzip, in-process only, equal chunk sizes for outer/inner layers, sequential unwrapping, high-entropy payloads at 10KB/100KB nominal under GZIP-THEN-BROTLI and BROTLI-THEN-GZIP (depth 2 only). V2 identity baseline is tautological (passthrough, not via decompressor API). Real CDN infrastructure remains the mandatory remaining gate. Status remains EXPERIMENTAL because CDN correctness, payloads >100KB, depths 3-5, mixed chunk sizes, and cross-run reproducibility are unresolved."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35530590171",
+        "lane": "intel",
+        "created_at": "2026-09-20T18:55:20.209885+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C1_CORRECTED_MODEL_VALID fails at n=20 (predicted 0.7379 vs observed 0.5595, residual 17.8pp > 10pp threshold). C1 passes at n=15 (predicted 0.5648 vs observed 0.4998, residual 6.5pp <= 10pp). Per frozen conjunctive rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. The corrected model Phi(mean/std) using across-iteration margin_std as noise is a substantial improvement over parent (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20, 7.7x/2.5x improvement) and confirms margin_std (~1e-4 to 6e-4) is the right direction vs SE (~1e-5). However, the Phi(mean/std) form conflates sign and magnitude: the empirical driver of agreement is sign fraction proportion(margin_i>0) which matches observed within 1pp, not the SNR ratio. No mechanism identification (C2 gated), no full-DOM extrapolation (C3 gated on poor R^2=0.197 |margin| power law), and no product consequence are supported by this run."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35530591329",
+        "lane": "physics",
+        "created_at": "2026-09-20T18:55:21.680285+00:00",
+        "decision": "FALSIFIED-IN-SETTING",
+        "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+        "claim_id": "C-MEAS-VALID",
+        "status": "REJECTED",
+        "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35510154353",
+      "experiment_id": "EXP-PHYSICS-35530591329",
       "lane": "physics",
-      "created_at": "2026-09-20T12:16:54.076536+00:00",
+      "created_at": "2026-09-20T18:55:21.680285+00:00",
       "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "7c9a6df68e21edb11fb7bf256ff23be6295ead15",
+      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "This experiment tests estimator sensitivity on a synthetic 12-state stochastic SPA, not Web dynamics. No new evidence for or against predictive dynamical structure on real Web transitions. Per-stratum PMI 1.46-1.69 bits confirms signal exists on this SPA class but does not address beyond-memory dynamics or production SPAs."
+      "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
@@ -2330,14 +2400,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35510157861",
+      "experiment_id": "EXP-GRAPH-35530590140",
       "lane": "graph",
-      "created_at": "2026-09-20T12:16:53.631971+00:00",
-      "decision": "REJECTED \u2014 Frozen decision_rule triggers REJECTED: C7 negative control FAILS under consistent non-304 exclusion. Producer reports C7 PASS (B-PARENT-CONFOUND endpoint-stratified weighted |r|=0.2992, n=816 including 304s), but audit recomputes with consistent non-304 exclusion per spec: per-endpoint non-304 r = 0.058 (profile, n=206), -0.247 (data_list, n=206), -0.042 (session_status, n=272); stratified weighted r=-0.0735, |r|=0.0735 <0.15 \u2192 C7 FAILS. Producer includes 304 for B-PARENT-CONFOUND (n=816 total) but excludes 304 for primary testbed (n=684 non-304) \u2014 inconsistent protocol. C1-C6 all independently PASS: C1 TP=1.0/TN=1.0; C2 3/3 endpoints with variance; C3 stratified r=0.0257, CI upper 0.1005 <0.15; C4 TOST p_upper=0.00053; C5 heterogeneity diff=0.0833 < 2*SE; C6 B-FLASK-ONLY |r|=0.0201. The REJECTED is driven by a fragile negative control that fails under consistent 304 handling, not by evidence against orthogonality. Orthogonality signal remains strong: stratified pooled r=0.0257 (n=684, CI [-0.049, 0.100]) on production-like LOCAL testbed.",
-      "source_commit": "576ddb2ac356fe403656bdb05e7caf17f66f4386",
+      "created_at": "2026-09-20T18:55:19.535880+00:00",
+      "decision": "CONFIRMED \u2014 C-FRESHNESS orthogonality at delta=0.15 CONFIRMED per frozen decision_rule: all C1-C7 PASS on production-like LOCAL testbed. V2 confound redesign (fixed 'expired' request_id) resolves parent fragility (B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304, delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684. Claim ceiling BOUNDED: (a) n_non304=684 < 800 required by frozen question \u2014 delta=0.10 inference marginal (TOST p=0.060); (b) LOCAL testbed only (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDN simulation); (c) VALIDATED/PRODUCT_CORE not warranted pending n>=800 re-run and distributed/CDN validation. Audit REVISE on reporting consistency (C2/C7 include 304s, should be non-304 per spec) and power shortfall \u2014 no effect on primary metric validity.",
+      "source_commit": "e8f71032e6e936d3e4cfb5f18342f70ec044de5e",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule REJECTED (C7 FAIL under consistent non-304 exclusion) on production-like testbed. However, orthogonality signal is strong: C1-C6 all pass, stratified pooled r=0.0257 (n=684, CI upper 0.1005 <0.15, TOST p_upper=0.00053), B-FLASK-ONLY r=0.0201. The REJECTED reflects a fragile negative control design (304 inclusion/exclusion changes B-PARENT-CONFOUND |r| from 0.299 to 0.074), not evidence against orthogonality. V_ETAG permission fix verified, C5 stratification fix verified. Maximum justified ceiling: within-endpoint orthogonality confirmed at delta=0.15 on LOCAL testbed (Flask 3.1.3 + PyJWT RS256 + SQLite WAL + CDN simulation with ETag-SHA256/Cache-Control) with headers-only structural signal at n_non304=684. NOT validated: production infrastructure, distributed CDN, concurrent load, delta=0.10, or body-inclusive signals. Frozen REJECTED from prior EXP-GRAPH-35481774794 does NOT accumulate evidence against orthogonality hypothesis \u2014 measurement-confounded."
+      "reason": "C-FRESHNESS orthogonality CONFIRMED at delta=0.15 per frozen decision_rule (C1-C7 all PASS) on production-like LOCAL testbed. V2 confound redesign resolves parent fragility: B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304 inclusion/exclusion (delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684, 3 endpoints, 3/3 with variance. B-FLASK-ONLY |r|=0.0017 confirms orthogonality without infrastructure. However, claim ceiling bounded: n_non304=684 < 800 frozen question requirement (delta=0.10 marginal, TOST p=0.060); LOCAL testbed only (not distributed production); headers-only structural signal; single-node CDN simulation. VALIDATED/PRODUCT_CORE not warranted \u2014 parallel-channel architecture justified only for this LOCAL production-like regime at delta=0.15. Status EXPERIMENTAL pending: (1) n>=800 non-304 re-run; (2) distributed CDN/OAuth validation; (3) concurrent load testing."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",
@@ -2360,24 +2430,24 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35476271877",
+      "experiment_id": "EXP-INTEL-35530590171",
       "lane": "intel",
-      "created_at": "2026-09-19T23:30:02.291409+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
-      "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
+      "created_at": "2026-09-20T18:55:20.209885+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "REJECTED",
-      "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-35522287921",
-      "lane": "runtime",
-      "created_at": "2026-09-20T16:18:30.528344+00:00",
-      "decision": "SURVIVES_CURRENT_TEST",
-      "source_commit": "c1c1e0048a6fdc388f97e907d49b008e9eb5e10d",
+      "experiment_id": "EXP-PHYSICS-35530591329",
+      "lane": "physics",
+      "created_at": "2026-09-20T18:55:21.680285+00:00",
+      "decision": "FALSIFIED-IN-SETTING",
+      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
       "claim_id": "C-MEAS-VALID",
-      "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST: all five conditions C1-C5 pass with audit PASS. C1: streaming_decompressed_hash == buffered_decompressed_hash for ALL 480 multi-layer streaming observations across 24 cells (byte-identical). C2: streaming_decompressed_hash == expected_hash for ALL 480 multi-layer streaming observations. C3: B-GZIP-SINGLE-LAYER-REGRESSION 120/120 and B-BROTLI-SINGLE-LAYER-REGRESSION 120/120 pass in both paths. C4: null_control all_same=true for all 4 auth states across all cells in both paths. C5: B-COMPRESSED-TARGET-RANGE passes (3/3 content types meet thresholds at both 10KB and 100KB). Audit PASS confirms all recomputed metrics match producer exactly. The parent V1_BUFFERED_PROXY_NOT_STREAMING limitation is resolved at the Transfer-Encoding framing layer: the streaming proxy (StreamingProxyHandler reads upstream_resp.read(STREAM_CHUNK_SIZE) in a loop without full-body buffering) and streaming client (resp.raw.read(stream_chunk_size) loop accumulating bytes) produce byte-identical decompressed output to the buffered ground truth at both realistic CDN chunk size (8192 bytes) and stress size (32 bytes, 86-3087 chunks per response). Claim ceiling advances to include streaming incremental decompression at the HTTP Transfer-Encoding framing layer on localhost with high-entropy multi-layer payloads. However, C-MEAS-VALID remains EXPERIMENTAL because: (1) the test is at the Transfer-Encoding framing layer (proxy forwards chunks, client accumulates then decompresses), NOT at the decompressor streaming API layer (brotli.Decompressor.process / gzip streaming without accumulation) \u2014 true incremental decompressor streaming across arbitrary Brotli block boundaries is untested; (2) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, Vary/cache, geographic latency, and production concurrency is untested \u2014 the sole remaining blocker for Product Core readiness; (3) depths 3-5 stacked encodings untested (only depth 2 exercised); (4) payloads >100KB untested; (5) compression level variation beyond tested gzip level 1/None and brotli quality 4/6 untested. Does NOT promote to PRODUCT_CORE \u2014 real CDN infrastructure testing is required."
+      "status": "REJECTED",
+      "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
     }
   }
 }
