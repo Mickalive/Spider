@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does per-type CV stability (<=0.5 at lambda=1) achieve at larger per-type n (500-1000/type) with KDE Scott or kNN k=5 under spec-compliant measurement (N=200 permutation nulls, full 8-lambda sweep, Kraskov k=5 kNN estimator, pipeline validation within 5% of parent baselines) \u2014 or does kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type per parent sensitivity) survive confirmatory preregistration at 250/type?",
   "promotion_ready": false,
-  "consecutive_failures": 3,
-  "updated_at": "2026-09-20T07:00:34.396296+00:00",
+  "consecutive_failures": 4,
+  "updated_at": "2026-09-20T08:59:10.710309+00:00",
   "last_failure_retryable": true,
   "last_handoff_sha256": "42cb65e57b05552abb8861526009da81587355537b2a4c09c33c0add83f7f6bf",
-  "same_failure_count": 3,
+  "same_failure_count": 4,
   "last_failure_fingerprint": "fbf5825ef2ac96580695178f",
   "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
 }
