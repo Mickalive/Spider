@@ -1,17 +1,63 @@
 {
   "experiment_id": "EXP-INTEL-35530590171",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-PRODUCT-ECON"],
+  "question": "Does a corrected SNR decomposition using across-iteration margin_std (not within-iteration within-type SE) as the noise scale pass C1-equivalent validation (predicted agreement within 10pp of observed at n=15 and n=20), enabling a reliable extrapolation to full-DOM element counts (n=21-82) that predicts whether ranking agreement crosses the 80% threshold?",
+  "hypothesis": "The corrected model Phi(mean(M_i) / std(M_i)) captures the actual ranking-instability mechanism because margin_std (~1e-4 to 6e-4) is the empirically relevant noise scale for ranking flips, not within-iteration SE (~1e-5). Under this corrected model: (H1) the predicted agreement at n=15 and n=20 will be within 10pp of observed (49.98% and 55.95%), validating the decomposition; (H2) the corrected SNR at n=20 (margin_mean/margin_std ~ 0.64) indicates the mechanism is margin-deficit-driven (SNR < 3), not task-variance or correlated-noise; (H3) power-law extrapolation of margin and margin_std to n=50 predicts agreement < 80%, indicating the 56% plateau is structural and full-DOM does not cross the threshold.",
+  "falsifier": "The corrected model is falsified if ANY of: (F1) The predicted agreement at n=15 or n=20 differs from observed by >10pp — indicating margin_std does not capture the actual flip noise; (F2) Extrapolated agreement at n=50 exceeds 80% — indicating the plateau breaks at full DOM and Docker re-collection is justified; (F3) The corrected SNR at n=20 exceeds 3.0 — indicating the margin is NOT small relative to noise, contradicting H1 and suggesting a different mechanism.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_FAILED_SNR_N15",
+      "description": "Parent frozen SNR model predicted agreement 0.9999999999999991 at n=15 vs observed 0.4998 (residual 0.5002, C1 FAIL). Corrected model must do better.",
+      "source": "EXP-INTEL-35476271877 result.json snr_model.predicted_agreement_n15"
+    },
+    {
+      "id": "B2_PARENT_FAILED_SNR_N20",
+      "description": "Parent frozen SNR model predicted agreement 1.0 at n=20 vs observed 0.5595 (residual 0.4405, C1 FAIL). Corrected model must do better.",
+      "source": "EXP-INTEL-35476271877 result.json snr_model.predicted_agreement_n20"
+    },
+    {
+      "id": "B3_NULL_NOISE_BASELINE",
+      "description": "Random noise model (densities ~ N(0,1)) predicts agreement ~50% at all n. Corrected model must outperform this null.",
+      "source": "EXP-INTEL-35476271877 analysis_output_snr.json null_control.predicted_agreement 0.499208"
+    },
+    {
+      "id": "B4_OBSERVED_AGREEMENT_N15",
+      "description": "Observed canonical ranking agreement at n=15: 49.98% (frozen target). Corrected model prediction must be within 10pp.",
+      "source": "EXP-INTEL-35445596324 result.json M4_recipe_canonical_ranking_agreement['15']"
+    },
+    {
+      "id": "B5_OBSERVED_AGREEMENT_N20",
+      "description": "Observed canonical ranking agreement at n=20: 55.95% (frozen target). Corrected model prediction must be within 10pp.",
+      "source": "EXP-INTEL-35445596324 result.json M4_recipe_canonical_ranking_agreement['20']"
+    },
+    {
+      "id": "B6_PARENT_EXTRAPOLATION_N50",
+      "description": "Parent (failed) model extrapolated agreement 1.0 at n=50 (PI90 lo 0.845). Corrected model extrapolation is the critical new measurement.",
+      "source": "EXP-INTEL-35476271877 result.json extrapolation.n50"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_CORRECTED_MODEL_REPRODUCES_OBSERVED",
+    "description": "The corrected SNR model Phi(mean(M_i) / std(M_i)) predicts observed ranking agreement at n=15 and n=20 within 10 percentage points, using the parent's per-iteration margin data from snr_per_iteration_tag_entropy.json.gz.",
+    "expected": "Predicted agreement at n=15 within 10pp of 49.98% (i.e., 39.98% to 59.98%); predicted agreement at n=20 within 10pp of 55.95% (i.e., 45.95% to 65.95%)."
+  },
+  "null_control": {
+    "id": "NC1_RANDOM_NOISE_BASELINE",
+    "description": "A random noise model (densities ~ N(0,1) with no signal) predicts ranking agreement ~50% at all n. The corrected model must outperform this null — its prediction error must be less than the null's prediction error.",
+    "expected": "Random noise model agreement: 50% +/- 5% at all n. Corrected model prediction error at n=15 and n=20 must be < null model prediction error."
+  },
+  "measurement_validity": [
+    "All computations use existing data from EXP-INTEL-35476271877: snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) and analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2). No new data collection required. No browser/network/model calls.",
+    "The corrected model replaces the noise term: frozen model used within-iteration within-type SE (~1e-5); corrected model uses across-iteration margin_std (~1e-4 to 6e-4). Both are computed from the same per-iteration density data.",
+    "The 7 tasks (3 listing, 3 detail, 1 cart) with truncated-first-20 locatable_sample are the input. Cart n=1 degeneracy excluded from margin/SNR computations per parent protocol.",
+    "Primary definition: tag_entropy x DEF-FULL-MAP. DEF-FORM-ONLY included for comparison only (not decision-gating).",
+    "Extrapolation to full DOM (n=21-82) uses power-law fits on |margin(n)| and margin_std(n) from n=5/10/15/20. Extrapolation uncertainty reported as prediction intervals.",
+    "Template invariance persists on truncated-first-20 subsample (verified in parent). Under template invariance, canonical same-type densities are scalar multiples; this affects correlation structure but not the margin_std-based SNR."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_CORRECTED_MODEL_VALID: The positive control PC1 passes: the corrected model Phi(mean(M_i)/std(M_i)) predicts observed ranking agreement at n=15 and n=20 within 10 percentage points. PASS if both predictions within 10pp; FAIL if either prediction off by >10pp.\n\nC2_MECHANISM_CORRECTED: The decomposition identifies the primary instability mechanism using the corrected noise scale. PASS if corrected SNR at n=20 < 3.0 (margin-deficit regime, supporting H1) OR CV_listing or CV_detail > 0.1 (task-variance regime, supporting H2); FAIL if corrected SNR >= 3.0 AND both CVs < 0.1.\n\nC3_EXTRAPOLATION_FALSIFIES_FULL_DOM: The corrected model extrapolation predicts ranking agreement at n=50 (midpoint of full-DOM range) is < 80%. PASS if extrapolated agreement < 80%; FAIL if extrapolated agreement >= 80%.\n\nVERDICT RULES:\n- If NOT C1: MEASUREMENT_INVALID — corrected model does not capture the instability mechanism; margin_std is not the right noise scale.\n- If C1 AND NOT C2: MIXED — model is valid but mechanism classification is ambiguous; further analysis needed.\n- If C1 AND C2 AND C3: FALSIFIES-FULL-DOM — the plateau at 56% is predicted to persist at full DOM; recipe density is structurally limited; product lane should use non-recipe density.\n- If C1 AND C2 AND NOT C3: SUPPORTS-FULL-DOM — the plateau is predicted to break at full DOM; Docker re-collection is justified; recipe density remains viable.\n\nALL conditions must be evaluated. If C1 fails, the experiment is MEASUREMENT_INVALID regardless of C2/C3.",
+  "product_consequence_positive": "If NOT C3 (extrapolation predicts >=80% at full DOM): The plateau at 56% is an artifact of the narrow truncated-first-20 range. Full DOM testing (n=21-82) is predicted to cross the 80% threshold. Docker re-collection investment is justified. Recipe density remains viable for MIXED handling. Product lane should wait for full-DOM results before closing the recipe density design path.",
+  "product_consequence_negative": "If C3 (extrapolation predicts <80% at full DOM): The plateau at 56% is structural — additional elements beyond n=20 do not provide enough margin improvement to overcome ranking noise. Product lane should adopt non-recipe density immediately (which preserves ranking at 100% per B5) and accept the eta2 reduction from recipe sampling. Docker re-collection investment is NOT justified for the ranking stability question.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network/model calls. The analysis requires: (1) computing mean(M_i) and std(M_i) from snr_per_iteration_tag_entropy.json.gz for canonical recipe at n=5/10/15/20 (<5 seconds); (2) computing Phi(mean(M)/std(M)) as predicted agreement (<1 second); (3) validating against observed agreement (<1 second); (4) power-law extrapolation to n=50/82 (<5 seconds); (5) mechanism classification (<1 second). Total estimated <500 LLM tokens for analysis code and <30 seconds compute.",
+  "expected_information_gain": "VERY HIGH — directly resolves the critical ambiguity from the parent's MEASUREMENT_INVALID result: is the 56% plateau structural or an artifact of the narrow n-range? The corrected model is the minimum-cost path (reanalysis of existing data) that can: (a) if C1 passes and C3 predicts <80%: close the Docker re-collection question immediately, saving significant compute; (b) if C1 passes and C3 predicts >=80%: justify Docker re-collection as the next step; (c) if C1 fails: establish that margin_std is also not the right noise scale, narrowing the search for the correct decomposition. Either outcome changes a concrete product decision."
 }
