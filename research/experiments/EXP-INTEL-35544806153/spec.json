@@ -1,17 +1,59 @@
 {
   "experiment_id": "EXP-INTEL-35544806153",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-PRODUCT-ECON"],
+  "question": "Can a non-parametric empirical CDF mapping of the margin distribution predict ranking agreement at n=15 and n=20 within 10pp, providing a validated extrapolation path to full-DOM n=50/82 — or should the Intel lane pivot to prioritize Docker-based direct full-DOM measurement to bypass modeling entirely?",
+  "hypothesis": "Three consecutive parametric SNR decompositions (Phi(mean/std), Phi(median/std), saturating power law) have been REJECTED at C1. The step-function structure of proportion(margin>0) — (0, 0, 0.50, 0.57) at n=5/10/15/20 — suggests a threshold/phase-transition mechanism rather than smooth parametric form. An empirical CDF mapping F_empirical: n -> proportion(margin>0) uses the observed data directly without functional form assumptions, capturing the step-function structure that parametric models miss. H1: The empirical CDF interpolation at n=15 and n=20 reproduces observed agreement within 10pp (trivially true by construction at training points). H2: Linear interpolation between n=10 and n=15, and between n=15 and n=20, provides a lower-bound extrapolation that predicts agreement at n=50. H3: The extrapolated agreement at n=50 remains below 80%, confirming the plateau is structural.",
+  "falsifier": "F1: The empirical CDF mapping fails to reproduce observed agreement at training points n=15 and n=20 within 1pp (indicating data corruption or computation error). F2: Linear interpolation between n=10 and n=15 produces a slope that implies agreement crosses 80% before n=50 (indicating the plateau breaks). F3: The extrapolated proportion at n=50 exceeds 0.80, justifying Docker re-collection. F4: The step-function structure (0, 0, 0.50, 0.57) cannot be captured by any monotonic interpolation, indicating the margin distribution has non-monotonic behavior that invalidates the interpolation approach.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_MODEL_A",
+      "description": "Phi(median(|M|)/std) predicted 0.8455 at n15 (residual 34.59pp) and 0.7550 at n20 (residual 18.96pp). REJECTED at C1.",
+      "source": "EXP-INTEL-35538868377 result.json metrics.modelA_median_phi"
+    },
+    {
+      "id": "B2_PARENT_MODEL_B",
+      "description": "Saturating sign-fraction power law fitted 0.3757 at n15 (residual 12.39pp) and 0.6395 at n20 (residual 7.41pp). R2=0.8797 <0.90. REJECTED at C1/C2.",
+      "source": "EXP-INTEL-35538868377 result.json metrics.modelB_sign_fraction_powerlaw"
+    },
+    {
+      "id": "B3_CORRECTED_PHI_MEAN_STD",
+      "description": "Phi(mean/std) predicted 0.7379 at n20 (residual 17.8pp). REJECTED at C1.",
+      "source": "EXP-INTEL-35530590171 result.json metrics.corrected_snr_model"
+    },
+    {
+      "id": "B4_DIAGNOSTIC_INDICATOR",
+      "description": "Direct proportion(margin>0) = 0.4996 at n15 (residual 0.00pp) and 0.5654 at n20 (residual 0.00pp). Near-exact under template invariance.",
+      "source": "EXP-INTEL-35538868377 result.json metrics.positive_control_diagnostic"
+    },
+    {
+      "id": "B5_NULL_NOISE_BASELINE",
+      "description": "Random noise model agreement ~50% at all n. Best validated model must outperform this null.",
+      "source": "EXP-INTEL-35476271877 analysis_output_snr.json null_control 0.499208"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_EMPIRICAL_CDF_REPRODUCES_TRAINING",
+    "description": "The empirical CDF mapping reproduces observed ranking agreement at all training points (n=5, 10, 15, 20) within 1pp. This is trivially true by construction (the empirical CDF is defined at these points), but serves as a data integrity check.",
+    "expected": "Empirical CDF at n=5 within 1pp of 0.0; at n=10 within 1pp of 0.0; at n=15 within 1pp of 0.4996; at n=20 within 1pp of 0.5654."
+  },
+  "null_control": {
+    "id": "NC1_LINEAR_INTERPOLATION_NULL",
+    "description": "Linear interpolation between adjacent training points provides a null model for extrapolation. If the empirical CDF extrapolation to n=50 is indistinguishable from linear extrapolation from n=20, the non-parametric approach adds no information beyond simple linear trend.",
+    "expected": "Empirical CDF extrapolation at n=50 must differ from linear extrapolation from n=20 by >5pp to demonstrate non-trivial structure."
+  },
+  "measurement_validity": [
+    "All computations use existing data from EXP-INTEL-35476271877: snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) and analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2). No new data collection required. No browser/network/model calls.",
+    "The empirical CDF mapping is defined as: for each n, F(n) = proportion(margin_i > 0). This is the same statistic as the diagnostic indicator, which already matches observed agreement within 0.02pp and 0.59pp at n=15 and n=20 respectively.",
+    "The non-parametric extrapolation uses piecewise linear interpolation between training points (n=5, 10, 15, 20) and extrapolation beyond n=20 using the slope between n=15 and n=20.",
+    "Template invariance persists on truncated-first-20 subsample (verified in parent). Under template invariance, ranking agreement = proportion(margin_i > 0) exactly, so the empirical CDF mapping is the true data-generating process at training points.",
+    "The critical test is whether the step-function structure (0, 0, 0.50, 0.57) implies a threshold/phase-transition that makes linear extrapolation invalid, or whether the monotonic increase from n=10 to n=20 provides a reliable trend for extrapolation.",
+    "Primary definition: tag_entropy x DEF-FULL-MAP. Same as parent experiments.",
+    "Cart n=1 degeneracy excluded from margin computations per parent protocol."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_EMPIRICAL_CDF_REPRODUCES_TRAINING: The empirical CDF mapping reproduces observed ranking agreement at n=15 and n=20 within 1pp. PASS if residuals <1pp at both points; FAIL otherwise. (Expected: trivially PASS by construction.)\n\nC2_STEP_FUNCTION_STRUCTURE: The step-function structure (0, 0, 0.50, 0.57) has a monotonic increase from n=10 to n=20. PASS if proportion(20) > proportion(15) > proportion(10) > proportion(5); FAIL if non-monotonic.\n\nC3_EXTRAPOLATION_BELOW_80: The empirical CDF extrapolation to n=50 predicts agreement < 0.80. PASS if predicted proportion at n=50 < 0.80; FAIL if >= 0.80.\n\nVERDICT RULES:\n- If NOT C1: MEASUREMENT_INVALID — data corruption or computation error.\n- If C1 AND NOT C2: MEASUREMENT_INVALID — non-monotonic margin structure invalidates interpolation approach.\n- If C1 AND C2 AND C3: EMPIRICAL_CDF_VALIDATED — the non-parametric mapping captures the step-function structure; extrapolation predicts plateau persists below 80%; recipe density is structurally limited; product lane should use non-recipe density.\n- If C1 AND C2 AND NOT C3: EMPIRICAL_CDF_PREDICTS_CROSSING — the extrapolation predicts agreement crosses 80% at full DOM; Docker re-collection is justified; recipe density remains viable.",
+  "product_consequence_positive": "If C1 AND C2 AND C3 (empirical CDF validated, predicts <80% at full DOM): The 56% plateau is structural — the step-function proportion(margin>0) saturates below 80% as n increases. Product lane should adopt non-recipe density immediately (which preserves ranking at 100%) and accept the eta2 reduction. Docker re-collection investment is NOT justified for the ranking stability question. The empirical CDF provides a validated diagnostic for any future pipeline or definition changes.",
+  "product_consequence_negative": "If C1 AND C2 AND NOT C3 (empirical CDF predicts >=80% at full DOM): The plateau is predicted to break at full DOM. Docker re-collection investment is justified. Product lane should wait for full-DOM results before closing the recipe density design path.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network/model calls. The analysis requires: (1) computing empirical CDF from per-iteration margins (<5 seconds); (2) validating at training points (<1 second); (3) checking monotonicity (<1 second); (4) linear extrapolation to n=50/82 (<1 second); (5) comparing against linear null (<1 second). Total estimated <500 LLM tokens for analysis code and <10 seconds compute.",
+  "expected_information_gain": "HIGH — directly tests whether the non-parametric empirical CDF approach can succeed where three parametric decompositions failed. The step-function structure (0, 0, 0.50, 0.57) suggests threshold behavior that parametric models cannot capture. Either positive (validated non-parametric extrapolation) or negative (step-function structure invalidates interpolation) outcome changes a concrete product decision about Docker re-collection investment and recipe density viability. If both parametric and non-parametric modeling fail, the Intel lane should pivot to Docker-based direct measurement as the only remaining path to an empirical answer."
 }
