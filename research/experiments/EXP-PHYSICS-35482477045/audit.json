@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35482477045",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Correct producer theoretical CMI analysis: producer claims stochastic SPA I(Y;A|Z) ≈0.004 bits and 125x below 0.5 threshold (result.json:validity_notes[1], report.md:Analysis). Independent recomputation using frozen CANDIDATES and hash routing (run_experiment.py:choose_next_stochastic) shows H(Y|Z,A)=1.549 bits and mean H(Y|Z)=3.07 bits across random (state,history) strata, giving mean I(Y;A|Z)≈1.52 bits (range 1.01-1.75, n=5000). Empirical plug-in estimate on simulated N=50000 transitions with Z=(cur,p1,p2) gives H(Y|Z)=2.81, H(Y|Z,A)=1.25, I=1.56 bits. The 0.004-bit figure assumes P(Y|Z,A)≈P(Y|Z) by ignoring that different actions have different 4-candidate sets; it is mathematically invalid for this SPA. C3 failure is therefore genuine estimator insensitivity to a strong 1.5-bit signal, not weak design. Revise validity_notes, observations and report.md to reflect strong-signal insensitivity.",
+    "Execute missing frozen baselines B-WEIGHTED-PMI, B-EQUAL-WEIGHT-PMI, B-MEDIAN-PMI, B-KNN-CMI on the stochastic SPA at N=5000 with 500-shuffle null (spec.json:baselines[0]- [3], prereg.md:Analysis Plan steps 3/5). result.json:metrics.screening_n5000 contains only B-KSG-CMI and B-LIKELIHOOD-RATIO; raw_results.json:screening contains only those 2 keys. Without them the replication of parent null-bias floor (0.41/0.70/0.69 bits) on the stochastic SPA and the KNN-CMI negative-bias check cannot be assessed. Re-run or explicitly mark as not executed with justification.",
+    "Fix shuffled-action null implementation to match frozen spec: spec.json:null_control and prereg.md require shuffling action labels within each session (preserving session structure and url_before/url_after pairing). run_experiment.py:shuffled_action_null (lines 429-556) shuffles the flat A vector globally (perm_rng.shuffle(A_shuf) and perm_rng.shuffle(shuffled_actions) across all 5000 records) ignoring session boundaries. Parent EXP-PHYSICS-35476270440 used same deviation but convergence is not guaranteed; quantify impact by recomputing null with true within-session shuffle and reporting delta, or acknowledge deviation in validity_notes.",
+    "Do not rely on permutation p≈0.001 as evidence of adequate sensitivity: both estimators show p=0.000999 on K3 (raw_results.json:screening.B-KSG-CMI.positive_control_p, .B-LIKELIHOOD-RATIO.positive_control_p) yet K3 magnitudes are 0.00056 and 0.103 bits — 893x and 4.8x below the 0.5-bit decision threshold. p reflects rank vs degenerate null, not bit-magnitude. Clarify that C3 requires BOTH magnitude and p, and that p-pass alone does not indicate partial sensitivity.",
+    "Record github_run_id in provenance.json (currently null) and ensure artifact hashes are stable before DIRECTOR verdict; no re-freeze of frozen inputs."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-theoretical_CMI_miscalibrated",
+      "severity": "critical",
+      "finding": "Producer's post-hoc explanation that stochastic SPA signal is inherently weak (I≈0.004 bits) is contradicted by exact computation and empirical estimation. Frozen choose_next_stochastic creates P(Y|Z,A)=0.625 at hash target + 0.125 at other 3 candidates of that action; marginal P(Y|Z)=mean over 4 actions has entropy ~3.07 bits, giving I≈1.52 bits mean. Empirical N=50000 estimate with Z=(cur,p1,p2) gives I=1.56 bits. The 0.004-bit value assumes actions share the same candidate distribution, which they do not (CANDIDATES per state are disjoint-leaning). Environment could express the tested effect.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/run_experiment.py:92-106 choose_next_stochastic; spec.json:positive_control; report.md:Analysis Theoretical computation; result.json:validity_notes[1]; recomputed mean I 1.52 bits via hash_target enumeration"
+    },
+    {
+      "id": "V2-decision_rule_correctly_applied",
+      "severity": "info",
+      "finding": "FALSIFIED-IN-SETTING verdict is correctly triggered under frozen decision_rule: C1 passes for both estimators (|null|=0.012078 and 0.004515 <0.1), C3 fails for both (K3=0.000560 and 0.103695 <0.5), C6 passes (48/48), C7 passes (2 buckets). Recomputed metrics exactly match raw_results.json within rounding. Verdict would remain FALSIFIED even after correcting V1, but interpretation flips from 'weak design' to 'strong-signal estimator insensitivity'.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/result.json:metrics.screening_n5000.B-KSG-CMI.c1_pass=true, c3_pass=false, B-LIKELIHOOD-RATIO.c1_pass=true,c3_pass=false, metrics.c1_pass_count=2, c3_pass_count=0, verdict_frozen=FALSIFIED-IN-SETTING; raw_results.json:screening.B-KSG-CMI.null_control.abs_null_mean=0.012077552015282858, positive_control_k3=0.00055995904, B-LIKELIHOOD-RATIO.null_control.abs_null_mean=0.004515100947861067, positive_control_k3=0.10369460994; raw_output.txt:[VERDICT] FALSIFIED-IN-SETTING"
+    },
+    {
+      "id": "V3-KSG_insensitivity_confirmed",
+      "severity": "high",
+      "finding": "KSG CMI with k=5 (sklearn mutual_info_classif, discrete_features=True) returns K3=0.000560 bits on stochastic SPA despite 1.5-bit true CMI, and -0.000405 on deterministic SPA (degenerate control). Null centering (|null|=0.012078, std=0.000187) is achieved by near-zero output for all inputs, not by unbiased estimation. Replicates parent k=5 insensitivity (parent K3=0.018) but now against a strong signal, confirming tradeoff: null bias removed at cost of sensitivity. Resolution limit ~1/k not explanatory for 1.5-bit signal.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/raw_results.json:screening.B-KSG-CMI.k3_value_stochastic=0.0005599, degenerate_control_k3=-0.00040458, null_control.null_mean=-0.012077, null_std=0.000186; result.json:controls.DEGENERATE-CONTROL; parent EXP-PHYSICS-35476270440 handoff carry_forward established KSG null centering but k3=0.018"
+    },
+    {
+      "id": "V4-LR_history_collapse_replicated",
+      "severity": "high",
+      "finding": "Likelihood-ratio still collapses history: K2=K3=0.10369460994 exactly (k3_minus_k2=0.0) on stochastic SPA and 0.10442 on deterministic SPA. Method chi-squared per-state (run_experiment.py:est_likelihood_ratio) stratifies only by url_before, ignoring history length, so K3-K2=0 by construction. Approx_mi_bits = max_chi2/(2*N) = 1036.94/(10000)=0.103 bits, far below true 1.5 bits and identical to degenerate baseline, confirming LR cannot address beyond-Markov H2 regardless of SPA stochasticity. Null centering (|null|=0.0045) is preserved but irrelevant for H2.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/raw_results.json:screening.B-LIKELIHOOD-RATIO.k2_value_stochastic==k3_value_stochastic==0.1036946, k3_minus_k2=0.0, k2_info.n_tested_strata=12, max_chi2=1036.946; result.json:controls.DEGENERATE-CONTROL observed LR K3=0.10442 on deterministic SPA"
+    },
+    {
+      "id": "V5-shuffle_unit_deviation",
+      "severity": "medium",
+      "finding": "Null control specification requires within-session shuffle; implementation shuffles globally. For synthetic SPA with independent session starts and uniform action sampling, bias may be small, but deviation violates measurement_validity and inflates effective permutation exchangeability. Parent used same code; no quantification provided. Not sufficient to overturn C1 (|null| margin 8-22x below threshold), but must be disclosed.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/spec.json:null_control; prereg.md:Null Control; run_experiment.py:429-556 shuffled_action_null global shuffle"
+    },
+    {
+      "id": "V6-stratum_decomposition_partial",
+      "severity": "low",
+      "finding": "C7 passes with 2 non-empty buckets (5-9 n=343, 10-19 n=37) but no 20-49 or 50+ strata, unlike parent which had 3 buckets. Stochastic mixing reduces stratum sizes as noted. Measurement_validity requires <30% strata >=5 records check — producer reports determinism ratios (25.5% K2, 9.1% K3) but not the 30% stratum-size gate explicitly; still passes because 1438 strata at K2 with 5000 records implies >30% meeting threshold via 343+37 strata accounting for 2580 records. No invalidity trigger.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/result.json:metrics.stratum_size_bias_decomposition, metrics.design_verification.c7_non_empty_buckets=2; raw_results.json:determinism_k2_stochastic, stratum_size_bias_decomposition"
+    },
+    {
+      "id": "V7-sampling_integrity",
+      "severity": "info",
+      "finding": "Sampling integrity preserved: N=5000 (50 sessions x100 steps, seed=42) as frozen, SHA256 stochastic 8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 deterministic 46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512, CANDIDATES 12-state design unchanged, 48/48 pairs have 4 distinct candidates, min stratum size 5 enforced. Raw evidence present and hashes match provenance.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/raw_results.json:seed=42,n_transitions_stochastic=5000,sha_stochastic; provenance.json:data.stochastic_spa.n_transitions=5000, design 50% hash +50% uniform; raw_output.txt:[VERIFY] All 48 pairs PASS, [COLLECT] N=5000"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1-PMI_baselines_not_executed",
+      "severity": "high",
+      "finding": "Frozen baselines B-WEIGHTED-PMI (expected null >=0.1, parent 0.407), B-EQUAL-WEIGHT-PMI (parent 0.704), B-MEDIAN-PMI (parent 0.686) not executed on stochastic SPA. Spec and prereg require them to replicate parent bias floor. Only stratum_size_bias_decomposition (5-9 observed 1.44 null 1.10; 10-19 observed 1.57 null 0.975) is reported, which shows bias persists but no per-estimator null_mean for baselines. Cannot verify that stochastic mixing preserves parent 0.41-bit floor vs reduces it.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/spec.json:baselines[0]- [2] expected null_mean >=0.1; prereg.md:Baselines 3-5; result.json:metrics.screening_n5000 only has B-KSG-CMI and B-LIKELIHOOD-RATIO keys; raw_results.json:screening only those 2"
+    },
+    {
+      "id": "B2-KNN_CMI_not_executed",
+      "severity": "medium",
+      "finding": "Baseline B-KNN-CMI (k=5 alpha=1.0 parent null -0.262) not executed. KNN is the negative-bias counterpart to KSG; its omission prevents checking whether k=5 family as a whole centers null or only the sklearn mutual_info_classif variant.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/spec.json:baselines[3] B-KNN-CMI; raw_results.json:screening missing"
+    },
+    {
+      "id": "B3-DETERMINISTIC_SPA_degenerate_control_partial",
+      "severity": "info",
+      "finding": "Baseline B-DETERMINISTIC-SPA degenerate control correctly executed: KSG K3=-0.000405 (pass, <0.1 as expected for I=0), LR K3=0.10442 (fail, confirms history collapse). Validates that deterministic SPA is degenerate for CMI (I=0) and that stochastic SPA is needed; strengthened by V1 showing stochastic SPA does carry 1.5 bits, so degeneracy is not the cause of KSG failure.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/result.json:metrics.screening_n5000.B-KSG-CMI.degenerate_control_k3=-0.000405, B-LIKELIHOOD-RATIO.degenerate_control_k3=0.10442; controls.DEGENERATE-CONTROL pass=true"
+    },
+    {
+      "id": "B4-LR_permutation_baseline_strength",
+      "severity": "low",
+      "finding": "LR null control is strong: 500 shuffles give null_std 0.000596, |null|=0.0045, 22x below threshold, with 12/12 strata significant under Bonferroni (min p 1.6e-196, max chi2 1036). KSG null_std 0.000187 is 35x smaller than PMI baselines as per parent. Both demonstrate null centering is not due to high variance.",
+      "evidence": "research/experiments/EXP-PHYSICS-35482477045/raw_results.json:screening.B-KSG-CMI.null_control.null_std=0.0001868, .B-LIKELIHOOD-RATIO.null_control.null_std=0.0005956, n_shuffle=500"
+    }
+  ],
+  "recomputed_metrics": {
+    "B-KSG-CMI": {
+      "k2_value_stochastic": -0.0037346207819562993,
+      "k3_value_stochastic": 0.00055995904023428,
+      "k3_minus_k2": 0.004294579822190579,
+      "null_mean": -0.012077552015282858,
+      "abs_null_mean": 0.012077552015282858,
+      "null_std": 0.00018682506063066683,
+      "c1_pass": true,
+      "positive_control_k3": 0.00055995904023428,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": -0.00040458210893392493,
+      "threshold_c1": 0.1,
+      "threshold_c3": 0.5,
+      "margin_c1_factor": 8.28,
+      "margin_c3_factor": 892.9
+    },
+    "B-LIKELIHOOD-RATIO": {
+      "k2_value_stochastic": 0.10369460994143531,
+      "k3_value_stochastic": 0.10369460994143531,
+      "k3_minus_k2": 0.0,
+      "null_mean": 0.004515100947861067,
+      "abs_null_mean": 0.004515100947861067,
+      "null_std": 0.0005956842532989778,
+      "c1_pass": true,
+      "positive_control_k3": 0.10369460994143531,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": 0.10442004997356266,
+      "threshold_c1": 0.1,
+      "threshold_c3": 0.5,
+      "margin_c1_factor": 22.15,
+      "margin_c3_factor": 4.82,
+      "n_tested_strata": 12,
+      "max_chi2": 1036.946099414353,
+      "history_collapse": true
+    },
+    "c1_pass_count": 2,
+    "c1_pass_estimators": ["B-KSG-CMI", "B-LIKELIHOOD-RATIO"],
+    "c3_pass_count": 0,
+    "c3_passers_after_c1": [],
+    "design_verification": {
+      "c6_pass": true,
+      "c6_evidence": "48/48 pairs with 4 distinct candidates",
+      "c7_pass": true,
+      "c7_non_empty_buckets": 2,
+      "c7_buckets": {
+        "5-9": {"n_strata": 343, "total_records": 2147},
+        "10-19": {"n_strata": 37, "total_records": 433}
+      },
+      "determinism_k2_det_ratio": 0.2545201668984701,
+      "determinism_k3_det_ratio": 0.09155766944114149
+    },
+    "theoretical_CMI": {
+      "producer_claimed": 0.004,
+      "recomputed_mean": 1.523297741714871,
+      "recomputed_range": [1.0101696237278919, 1.75],
+      "recomputed_method": "Exact enumeration over hash targets per Z=(cur,p1,p2) using CANDIDATES, H(Y|Z,A)=1.54879, H(Y|Z)=mean 3.07, n=5000 random Z; empirical plug-in on N=50000 simulation with Z=(cur,p1,p2) gives I=1.563575135261427",
+      "threshold": 0.5,
+      "conclusion": "True CMI exceeds threshold by 3x; producer weak-signal explanation falsified"
+    },
+    "stratum_size_bias_decomposition": {
+      "5-9": {"n_strata": 343, "total_records": 2147, "observed_pmi": 1.443787427994249, "null_mean": 1.101110231372846},
+      "10-19": {"n_strata": 37, "total_records": 433, "observed_pmi": 1.5689454065145398, "null_mean": 0.9756100985626514}
+    },
+    "recomputed_abs_null_means_match": true,
+    "recomputed_c3_k3_match": true,
+    "hashes_verified": {
+      "raw_results.json": "06d95286846dc2cb760024e215b448cd025c9c627f786c03418aa604334f868b",
+      "run_experiment.py": "0bc0cf90e4aa52395927e0b34f92e0464d29e7610330cbac0afda1ae8f347eb4",
+      "raw_output.txt": "e99618afc26efcd7bf340c15dab43ae95671a67811bea3e77adb280e303c19a4"
+    }
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for H1 on the exact 12-state hash-routed SPA class with 50% deterministic hash + 50% uniform over 4 CANDIDATES per (state,action), N=5000 (50x100, seed 42), KSG k=5 and per-state chi2 LR as implemented: both achieve |shuffled-action null_mean| <0.1 (KSG 0.01208, LR 0.00452) but positive_control K3 is 0.00056 (KSG) and 0.1037 (LR), both <0.5 bits with p<=0.001, so neither passes C1&C3. KSG insensitivity is demonstrated against a strong 1.5-bit true CMI (not a weak 0.004-bit signal), confirming null-centering/sensitivity tradeoff. LR history collapse (K2=K3) persists, so beyond-Markov H2 is not testable with this LR. Claim is bounded to synthetic in-memory simulation with these encodings and N; no inference to production Web transitions, larger state spaces, alternative k, continuous distances, or other CMI estimators. The stochastic SPA positive-control design is valid (I≈1.52 bits) — failure is estimator-side.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35482477045/spec.json:question, hypothesis H0/H1/H2, falsifier C1/C3/C6/C7, decision_rule FALSIFIED>SURVIVES, baselines B-WEIGHTED-PMI etc, measurement_validity, positive_control threshold 0.5",
+    "research/experiments/EXP-PHYSICS-35482477045/prereg.md: H0/H1/H2, stochastic SPA choose_next_stochastic 50/50, theoretical H(Y|Z,A)=1.549 bits, expected CMI 0.3-0.8 bits",
+    "research/experiments/EXP-PHYSICS-35482477045/freeze.json: hashes prereg 8c5370..., spec a9a017..., request 51b4f2...",
+    "research/experiments/EXP-PHYSICS-35482477045/result.json: metrics.screening_n5000 B-KSG-CMI k3=0.000560 c1_pass true c3_pass false, B-LIKELIHOOD-RATIO k3=0.103695 c1_pass true c3_pass false, c1_pass_count 2 c3_pass_count 0 verdict_frozen FALSIFIED-IN-SETTING, controls C1-PASS C3-FAIL C6-PASS C7-PASS, stratum decomposition 5-9 n=343 10-19 n=37",
+    "research/experiments/EXP-PHYSICS-35482477045/raw_results.json: screening.B-KSG-CMI.null_control null_mean -0.012077552015282858, positive_control_k3 0.00055995904, degenerate -0.00040458; screening.B-LIKELIHOOD-RATIO null_mean 0.004515100947861067 positive_control 0.10369460994 max_chi2 1036.946, n_tested_strata 12, sha_stochastic 8cff7c33..., sha_deterministic 46ed606..., determinism ratios 0.2545/0.0915, verdict FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35482477045/run_experiment.py: choose_next_stochastic 50% hash +50% uniform (lines 92-106), CANDIDATES 12x4x4 distinct, simulate_session_stochastic, encode_records_knn, est_ksg_cmi (mutual_info_classif k=5 discrete), est_likelihood_ratio (chi2 per state), shuffled_action_null global shuffle (lines 429-556), determinism_stats, stratum_size_bias_decomposition",
+    "research/experiments/EXP-PHYSICS-35482477045/raw_output.txt: [VERIFY] 48/48 PASS, [COLLECT] N=5000 SHA 8cff7c33..., PHASE1 K2/K3 values, C1 PASS both, C3 FAIL both, [VERDICT] FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35482477045/provenance.json: python 3.12.14 numpy 2.5.3 sklearn 1.9.1 scipy 1.18.1 seed 42, commits run_experiment 0bc0cf90..., data stochastic 5000 50% hash+50% uniform",
+    "research/experiments/EXP-PHYSICS-35482477045/report.md: verdict FALSIFIED, Analysis theoretical 0.004 bits 125x below, KSG resolution limit, LR history collapse",
+    "research/experiments/EXP-PHYSICS-35476270440/handoff.json: parent null centering KSG 0.0155 LR 0.0045, C3 failure due to deterministic I=0, recommendation stochastic 50/50 SPA with threshold 0.5 bits, carry_forward established/rejected/unknown/do_not_assume"
+  ],
+  "unresolved": [
+    "Whether KSG CMI with different k (3,10), alternative distance encoding, Ross 2014 mixed estimator, or other CMI estimators preserves |null|<0.1 while achieving K3 >=0.5 bits against the demonstrated 1.5-bit signal at N=5000",
+    "Whether LR with history-aware stratification (state,history) rather than state-only can achieve K3-K2>0.1 with |null|<0.1, or whether structure inherently collapses",
+    "True PMI baseline null means on stochastic SPA (B-WEIGHTED-PMI etc) — missing due to non-execution; stratum decomposition suggests bias persists (~1.1/0.98 null) but exact values unknown",
+    "Magnitude of within-session vs global shuffle bias on null_mean for this SPA class — implementation deviates from spec; recomputation with session-stratified shuffle not performed",
+    "Whether increasing N beyond 5000 (e.g., 50000) or changing stochastic mixing ratio (e.g., 0.9 deterministic) rescues KSG/LR magnitude, or whether insensitivity is fundamental to these estimators on discrete 12-state data",
+    "Generalization beyond 12-state SPA to production Web transitions, DOM/accessibility representations, or continuous state spaces — all evidence remains synthetic in-memory"
+  ]
+}
