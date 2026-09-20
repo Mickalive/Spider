@@ -8,7 +8,7 @@
   "next_question": "Can a stochastic positive control SPA \u2014 where action genuinely changes P(next_state | state) (e.g., 50% deterministic + 50% uniform over CANDIDATES) \u2014 validate KSG CMI and likelihood-ratio estimators by achieving positive_control_k3 >= 0.5 bits while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby closing the C3 test-design gap that blocked the frozen verdict?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-20T02:07:30.255166+00:00",
+  "updated_at": "2026-09-20T07:00:35.199550+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "b9797e00a6b5b5e4b1e0d8d6b993b61f72fab478155bb6e31f1a788049724d53",
   "same_failure_count": 1,
