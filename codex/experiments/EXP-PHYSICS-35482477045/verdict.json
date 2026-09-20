@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35482477045",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 0.5 bits, p <= 0.001). KSG CMI passes C1 (|null_mean|=0.012078 bits, 8.3x below threshold) but fails C3 (positive_control_k3=0.000560 < 0.5, 893x below threshold against true 1.52-bit CMI). LR passes C1 (|null_mean|=0.004515 bits, 22x below threshold) but fails C3 (positive_control_k3=0.103695 < 0.5, 4.8x below threshold). Audit REVISE corrects producer theoretical analysis: stochastic SPA produces I(Y;A|Z) ≈ 1.52 bits (not 0.004 as claimed), so C3 failure is genuine estimator insensitivity to a strong signal, not weak design. KSG null centering is achieved by near-zero output for all inputs (null_std=0.000187), not unbiased estimation of the true CMI. LR history collapse (K2=K3 exactly) persists on stochastic SPA, confirmed by degenerate control (deterministic SPA LR K3=0.104420 ≈ stochastic 0.103695).",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "This experiment falsifies KSG CMI and LR sensitivity on the stochastic 12-state SPA but does not accumulate evidence for or against the broader C-WEB-DYNAMICS hypothesis. The frozen FALSIFIED-IN-SETTING is a test-design/estimator limitation: the stochastic SPA produces I(Y;A|Z) ≈ 1.52 bits (audit recomputed) but neither KSG (k=5) nor LR can detect it. This closes the KSG k=5 and LR chi2-per-state pathways for this SPA class but does not close alternative estimators, larger state spaces, or production Web data. The SPA design itself is valid as a positive control (audit V1 confirms 1.52-bit signal)."
+    },
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "HYPOTHESIS",
+      "reason": "Measurement validity concerns remain: (1) null shuffle implementation deviates from spec (global vs within-session, audit V5-shuffle_unit_deviation); (2) 4 of 7 frozen baselines not executed (audit B1-PMI_baselines_not_executed, B2-KNN_CMI_not_executed); (3) theoretical CMI analysis was incorrect (0.004 vs 1.52 bits, audit V1). However, these do not invalidate the C1/C3 verdict — C1 null centering is robust (8-22x margin below threshold) and C3 failure is confirmed by audit recomputation. The frozen decision rule was correctly applied."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can an estimator with sufficient sensitivity — such as a plug-in transition-matrix KL divergence estimator (D_KL(P(Y|Z,A) || P(Y|Z)) computed directly on the stochastic SPA's empirical transitions), a KSG CMI variant with k=10 or k=20 to increase neighborhood resolution, or a permutation test conditioned on (state, action) strata — detect the demonstrated 1.52-bit CMI signal while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby resolving whether the insensitivity is specific to KSG k=5 and LR chi2-per-state, or fundamental to discrete CMI estimation on 12-state SPAs?",
+  "reason": "The experiment conclusively answers its preregistered question: neither KSG CMI (k=5) nor LR (chi2 per-state) can detect a strong 1.52-bit CMI signal on the stochastic SPA while maintaining null centering. The C3 test-design gap from EXP-PHYSICS-35476270440 is NOT closed by these estimators. However, the gap is now narrowed: the SPA design is valid (1.52-bit signal confirmed), null centering works, but the specific estimators are insensitive. The Physics lane has accumulated substantial methodological knowledge across three experiments (null centering breakthrough, SPA design validation, insensitivity characterization) but no estimator has passed both C1 and C3. The next question targets the insensitivity root cause: whether it is estimator-specific (k=5 too coarse, chi2 ignores history) or fundamental to discrete CMI estimation. A transition-matrix KL estimator would bypass CMI estimation entirely by directly comparing P(Y|Z,A=a) vs P(Y|Z) distributions. A KSG k=10/20 variant tests whether neighborhood size is the binding constraint. These are materially orthogonal to each other and to the failed approaches.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35482477045/spec.json:question, hypothesis H0/H1/H2, falsifier C1/C3/C6/C7, decision_rule FALSIFIED>SURVIVES, baselines B-WEIGHTED-PMI etc, measurement_validity, positive_control threshold 0.5",
+    "research/experiments/EXP-PHYSICS-35482477045/freeze.json: hashes prereg 8c5370..., spec a9a017..., request 51b4f2...",
+    "research/experiments/EXP-PHYSICS-35482477045/result.json: metrics.screening_n5000 B-KSG-CMI k3=0.000560 c1_pass true c3_pass false, B-LIKELIHOOD-RATIO k3=0.103695 c1_pass true c3_pass false, c1_pass_count 2 c3_pass_count 0 verdict_frozen FALSIFIED-IN-SETTING, controls C1-PASS C3-FAIL C6-PASS C7-PASS, stratum decomposition 5-9 n=343 10-19 n=37",
+    "research/experiments/EXP-PHYSICS-35482477045/raw_results.json: screening.B-KSG-CMI.null_control null_mean -0.012077552015282858 positive_control_k3 0.00055995904 degenerate -0.00040458, screening.B-LIKELIHOOD-RATIO null_mean 0.004515100947861067 positive_control 0.10369460994 max_chi2 1036.946 n_tested_strata 12",
+    "research/experiments/EXP-PHYSICS-35482477045/audit.json: status REVISE, V1-theoretical_CMI_miscalibrated (true CMI 1.52 bits not 0.004), V2-decision_rule_correctly_applied, V3-KSG_insensitivity_confirmed, V4-LR_history_collapse_replicated, V5-shuffle_unit_deviation, claim_ceiling FALSIFIED-IN-SETTING, recomputed_metrics.theoretical_CMI recomputed_mean 1.52",
+    "research/experiments/EXP-PHYSICS-35482477045/run_experiment.py: choose_next_stochastic 50% hash +50% uniform, CANDIDATES 12x4x4 distinct, est_ksg_cmi (mutual_info_classif k=5 discrete), est_likelihood_ratio (chi2 per state), shuffled_action_null global shuffle",
+    "research/experiments/EXP-PHYSICS-35476270440/handoff.json: parent null centering KSG 0.0155 LR 0.0045, C3 failure due to deterministic I=0, recommendation stochastic 50/50 SPA, carry_forward established KSG null centering/rejected PMI bias/inappropriate Bayesian/unknown alternative estimators",
+    "research/experiments/EXP-PHYSICS-35482477045/report.md: verdict FALSIFIED, Analysis KSG resolution limit, LR history collapse, stochastic SPA weak signal explanation (corrected by audit)"
+  ]
+}
