@@ -1,0 +1,20 @@
+{
+  "base_sha": "4fba76910065b12b84e998fb071fd3b07a37434e",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T21:29:56.699167+00:00",
+  "experiment_id": "EXP-INTEL-35538868377",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can a noise decomposition that separates sign from magnitude (e.g., Phi(median(|M|)/std) or empirical CDF mapping of the margin distribution) pass C1-equivalent validation at n=15 and n=20, or does the direct sign-fraction indicator (proportion(margin_i>0)) itself provide a viable extrapolation path to full-DOM n=50/82 using a sign-fraction power law instead of Phi(mean/std)?",
+  "lane": "intel",
+  "origin_github_run_id": "35538868377",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35530590171",
+    "path": "research/experiments/EXP-INTEL-35530590171/handoff.json",
+    "sha256": "252702537489bc90a720725382a8387c37652e995ba46b8e0e9eabe638701af1"
+  },
+  "reason": "pulse",
+  "request_hash": "ce1bb22082b5b5ec94aceeb711331fc1e7eb25eaf9637449580b6428001a30b1",
+  "request_id": "f74898d4f07cd950e0acea4a",
+  "schema_version": 1
+}
