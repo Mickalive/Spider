@@ -1,0 +1,323 @@
+{
+  "experiment_id": "EXP-PHYSICS-35510154353",
+  "seed": 42,
+  "n_transitions_stochastic": 5000,
+  "sha_stochastic": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+  "n_transitions_deterministic": 5000,
+  "sha_deterministic": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "determinism_k2_stochastic": {
+    "deterministic": 366,
+    "stochastic": 1072,
+    "total": 1438,
+    "det_ratio": 0.2545201668984701
+  },
+  "determinism_k3_stochastic": {
+    "deterministic": 77,
+    "stochastic": 764,
+    "total": 841,
+    "det_ratio": 0.09155766944114149
+  },
+  "screening": {
+    "B-PLUGIN-KL": {
+      "k2_value_stochastic": 0.07134701598598733,
+      "k3_value_stochastic": 0.09887606746922667,
+      "k3_minus_k2": 0.027529051483239336,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "plug-in KL (alpha=1.0)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "plug-in KL (alpha=1.0)"
+      },
+      "null_control": {
+        "observed": 0.07134701598598733,
+        "null_mean": 0.06429067807063664,
+        "null_std": 0.0001487445593670134,
+        "abs_null_mean": 0.06429067807063664,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.06437765834801033,
+          0.06414712134435704,
+          0.06423313246156828,
+          0.06419886131271349,
+          0.06400777465076686
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.09887606746922667,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": 0.10936986333698663
+    },
+    "B-KSG-CMI-K10": {
+      "k2_value_stochastic": -0.0037346207819562993,
+      "k3_value_stochastic": 0.00055995904023428,
+      "k3_minus_k2": 0.004294579822190579,
+      "k2_info": {
+        "n_records": 5000,
+        "k": 10,
+        "history_kind": "state",
+        "mi_joint_raw": 0.0478571080749296,
+        "mi_cond_raw": 0.0515917288568859,
+        "method": "KSG (sklearn mutual_info_classif, k=10)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "k": 10,
+        "history_kind": "action",
+        "mi_joint_raw": 0.03441340956812361,
+        "mi_cond_raw": 0.03385345052788933,
+        "method": "KSG (sklearn mutual_info_classif, k=10)"
+      },
+      "null_control": {
+        "observed": -0.0037346207819562993,
+        "null_mean": -0.012066399977286075,
+        "null_std": 0.00020392508547216224,
+        "abs_null_mean": 0.012066399977286075,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.012192182932385692,
+          -0.011995229974859752,
+          -0.012332801912387746,
+          -0.012181895285167166,
+          -0.01204216419826154
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.00055995904023428,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": -0.00040458210893392493
+    },
+    "B-KSG-CMI-K5": {
+      "k2_value_stochastic": -0.0037346207819562993,
+      "k3_value_stochastic": 0.00055995904023428,
+      "k3_minus_k2": 0.004294579822190579,
+      "k2_info": {
+        "n_records": 5000,
+        "k": 5,
+        "history_kind": "state",
+        "mi_joint_raw": 0.0478571080749296,
+        "mi_cond_raw": 0.0515917288568859,
+        "method": "KSG (sklearn mutual_info_classif, k=5)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "k": 5,
+        "history_kind": "action",
+        "mi_joint_raw": 0.03441340956812361,
+        "mi_cond_raw": 0.03385345052788933,
+        "method": "KSG (sklearn mutual_info_classif, k=5)"
+      },
+      "null_control": {
+        "observed": -0.0037346207819562993,
+        "null_mean": -0.012066399977286075,
+        "null_std": 0.00020392508547216224,
+        "abs_null_mean": 0.012066399977286075,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.012192182932385692,
+          -0.011995229974859752,
+          -0.012332801912387746,
+          -0.012181895285167166,
+          -0.01204216419826154
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.00055995904023428,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": -0.00040458210893392493
+    },
+    "B-KSG-CMI-K20": {
+      "k2_value_stochastic": -0.0037346207819562993,
+      "k3_value_stochastic": 0.00055995904023428,
+      "k3_minus_k2": 0.004294579822190579,
+      "k2_info": {
+        "n_records": 5000,
+        "k": 20,
+        "history_kind": "state",
+        "mi_joint_raw": 0.0478571080749296,
+        "mi_cond_raw": 0.0515917288568859,
+        "method": "KSG (sklearn mutual_info_classif, k=20)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "k": 20,
+        "history_kind": "action",
+        "mi_joint_raw": 0.03441340956812361,
+        "mi_cond_raw": 0.03385345052788933,
+        "method": "KSG (sklearn mutual_info_classif, k=20)"
+      },
+      "null_control": {
+        "observed": -0.0037346207819562993,
+        "null_mean": -0.012066399977286075,
+        "null_std": 0.00020392508547216224,
+        "abs_null_mean": 0.012066399977286075,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.012192182932385692,
+          -0.011995229974859752,
+          -0.012332801912387746,
+          -0.012181895285167166,
+          -0.01204216419826154
+        ]
+      },
+      "c1_pass": true,
+      "positive_control_k3": 0.00055995904023428,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "degenerate_control_k3": -0.00040458210893392493
+    }
+  },
+  "primary_passers": [],
+  "all_passers": [],
+  "c6_design_pass": true,
+  "c7_stratum_buckets": 2,
+  "c7_pass": true,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 343,
+      "total_records": 2147,
+      "observed_pmi": 0.11747868583193435,
+      "null_mean": 0.10201392522141313,
+      "null_std": 0.0004568813380854526
+    },
+    "10-19": {
+      "n_strata": 37,
+      "total_records": 433,
+      "observed_pmi": 0.19529356853206903,
+      "null_mean": 0.14613640800117828,
+      "null_std": 0.0022005712569447664
+    },
+    "20-49": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_pmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "phase2": null,
+  "permutation_test_exploratory": {
+    "n_strata_tested": 48,
+    "n_significant_bonferroni": 48,
+    "bonferroni_alpha": 0.0010416666666666667,
+    "stratum_results": [
+      {
+        "state": "http://localhost:18973/docs#api-ref",
+        "action": "form_submit",
+        "n": 90,
+        "pmi_observed": 1.6908876947549496,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/docs#getting-started",
+        "action": "js_navigate",
+        "n": 79,
+        "pmi_observed": 1.6260846988227295,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/admin#reports",
+        "action": "button_click",
+        "n": 98,
+        "pmi_observed": 1.5303205373004332,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/docs#api-ref",
+        "action": "menu_select",
+        "n": 105,
+        "pmi_observed": 1.6010479792344074,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/docs#changelog",
+        "action": "form_submit",
+        "n": 86,
+        "pmi_observed": 1.5117756873903576,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/docs#getting-started",
+        "action": "form_submit",
+        "n": 91,
+        "pmi_observed": 1.6499121212518588,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/admin#users",
+        "action": "button_click",
+        "n": 82,
+        "pmi_observed": 1.6229373727742793,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/#home",
+        "action": "button_click",
+        "n": 135,
+        "pmi_observed": 1.6762708091991942,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/user#settings",
+        "action": "js_navigate",
+        "n": 113,
+        "pmi_observed": 1.4610074025516169,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      },
+      {
+        "state": "http://localhost:18973/app#search",
+        "action": "js_navigate",
+        "n": 123,
+        "pmi_observed": 1.6356209776406838,
+        "p_value": 0.0,
+        "n_perms": 500,
+        "degenerate": false
+      }
+    ]
+  },
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "reason": "C3: primary estimators passing C1 (['B-PLUGIN-KL', 'B-KSG-CMI-K10']) have positive_control_k3 < 0.5 bits on stochastic SPA. Plug-in KL K3=0.098876, KSG k=10 K3=0.000560.",
+  "wall_seconds": 240.33330821990967
+}

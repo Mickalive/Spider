@@ -1,0 +1,67 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35510154353 - alternative CMI estimators on stochastic SPA
+========================================================================
+
+[VERIFY] CANDIDATES design-level check...
+[VERIFY] C6: PASS (48/48 pairs with 4 distinct candidates)
+
+[COLLECT] Stochastic SPA N=5000 (50 sessions x 100 steps, SEED=42)...
+[COLLECT] N=5000 SHA256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+
+[COLLECT] Deterministic SPA N=5000 (degenerate baseline)...
+[COLLECT] N=5000 SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (0.0s)
+
+[BUILD] Stochastic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701} K3={'deterministic': 77, 'stochastic': 764, 'total': 841, 'det_ratio': 0.09155766944114149}
+
+[BUILD] Deterministic SPA records...
+[BUILD] K3 records=5000
+
+========================================================================
+PHASE 1: Estimator screening on stochastic SPA at N=5000
+========================================================================
+
+--- B-PLUGIN-KL ---
+  K2 (stochastic) = 0.071347 bits
+  K3 (stochastic) = 0.098876 bits
+  C1 null control: null_mean=0.064291 std=0.000149 |mean|=0.064291 (threshold 0.1) -> PASS (37.4s)
+  C3 positive control: K3=0.098876 p=0.000999 -> FAIL (51.4s)
+  Degenerate control (deterministic SPA): K3=0.109370 bits
+
+--- B-KSG-CMI-K10 ---
+  K2 (stochastic) = -0.003735 bits
+  K3 (stochastic) = 0.000560 bits
+  C1 null control: null_mean=-0.012066 std=0.000204 |mean|=0.012066 (threshold 0.1) -> PASS (11.1s)
+  C3 positive control: K3=0.000560 p=0.000999 -> FAIL (25.6s)
+  Degenerate control (deterministic SPA): K3=-0.000405 bits
+
+--- B-KSG-CMI-K5 ---
+  K2 (stochastic) = -0.003735 bits
+  K3 (stochastic) = 0.000560 bits
+  C1 null control: null_mean=-0.012066 std=0.000204 |mean|=0.012066 (threshold 0.1) -> PASS (11.2s)
+  C3 positive control: K3=0.000560 p=0.000999 -> FAIL (25.8s)
+  Degenerate control (deterministic SPA): K3=-0.000405 bits
+
+--- B-KSG-CMI-K20 ---
+  K2 (stochastic) = -0.003735 bits
+  K3 (stochastic) = 0.000560 bits
+  C1 null control: null_mean=-0.012066 std=0.000204 |mean|=0.012066 (threshold 0.1) -> PASS (11.8s)
+  C3 positive control: K3=0.000560 p=0.000999 -> FAIL (26.1s)
+  Degenerate control (deterministic SPA): K3=-0.000405 bits
+
+[SCREENING] Primary C1+C3 passers: []
+[SCREENING] All C1+C3 passers: []
+[SCREENING] C7 stratum buckets: 2 non-empty -> PASS
+
+[VERDICT] FALSIFIED-IN-SETTING
+[OUTCOME] FALSIFIES
+[REASON] C3: primary estimators passing C1 (['B-PLUGIN-KL', 'B-KSG-CMI-K10']) have positive_control_k3 < 0.5 bits on stochastic SPA. Plug-in KL K3=0.098876, KSG k=10 K3=0.000560.
+
+========================================================================
+EXPLORATORY: Permutation test (stratified)
+========================================================================
+  Strata tested: 48
+  Significant (Bonferroni): 48
+
+Saved raw_results.json (wall 240.3s)
