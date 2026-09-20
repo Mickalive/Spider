@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35481773400",
+  "lane": "runtime",
+  "github_run_id": "35481773400",
+  "github_run_attempt": 1,
+  "created_at": "2026-09-20T01:35:29.668700+00:00",
+  "executed_at": "2026-09-20T02:10:00.000000+00:00",
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "brotli_version": "1.2.0",
+    "pyjwt_version": "2.14.0",
+    "requests_version": "2.34.2",
+    "seed": 44,
+    "base_port": 8700,
+    "proxy_port_base": 8800,
+    "chunk_size": 32,
+    "max_decompression_depth": 5,
+    "reps_per_cell": 5,
+    "request_jitter_ms": "50-150 uniform"
+  },
+  "git": {
+    "sha": "b5138ad24cde3f4ec4f850692bcd5d8369fe8279",
+    "branch": "lab2/runtime",
+    "parent_experiment_sha": "b33b5b790d82a016af6a4a8ebe567fbd9c36715a"
+  },
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35481773400/run_experiment.py"
+  ],
+  "fixtures": [
+    "research/experiments/EXP-RUNTIME-35470447407/run_experiment.py (parent codebase, body generators, decompression pipeline)"
+  ],
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35481773400/run_experiment.py",
+      "sha256": "84bc845247cbc74da3577e9928bc5999b8a2cdd6650f9c14395aec9fc4207eba",
+      "role": "code"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35481773400/result.json",
+      "sha256": "2a9774bddb0ee636fcea6748999a91e24384d1ccde5a8bf02bb0dbed5609f424",
+      "role": "derived"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35481773400/report.md",
+      "sha256": "7e6736c448bebb5c2f796f1e5d4b86d9d49d2a816f4cb01ad7cc4021205408ba",
+      "role": "derived"
+    }
+  },
+  "frozen_inputs": {
+    "request.json": "0bc34d1feff518d1716c8d3f16a3b5f700c632a7f1b3e4db3f8cdec3e0874ae1",
+    "spec.json": "a26d60ac178cde1ba9fa9f4870f1b625a54558b23f5e91d7433954226d08078c",
+    "prereg.md": "a9bbe0451f9e1f5c8748365cb4aaeb1c29332acd1a2af6480e5f36fd2b5a3cd6",
+    "freeze.json_hash": "frozen"
+  },
+  "commands": [
+    "python3 run_experiment.py (in research/experiments/EXP-RUNTIME-35481773400/)"
+  ],
+  "test_matrix": {
+    "main_cells": "2 sizes (10KB, 100KB) x 3 types (JSON, HTML, XML) x 4 compressions (GZIP-L1, GZIP-L9, BROTLI-Q4, BROTLI-Q8) x 4 states x 5 reps = 480 observations",
+    "regression_controls": "3 types x 2 compressions (GZIP-MC-1KB, BROTLI-MC-1KB) x 4 states x 5 reps = 120 observations",
+    "identity_baselines": "2 sizes x 3 types x 4 states x 5 reps = 120 observations",
+    "total": "720 requests"
+  },
+  "compression_configs": {
+    "GZIP-L1-MC": {"algorithm": "gzip", "level": 1, "chunk_size": 32},
+    "GZIP-L9-MC": {"algorithm": "gzip", "level": 9, "chunk_size": 32},
+    "BROTLI-Q4-MC": {"algorithm": "brotli", "quality": 4, "chunk_size": 32},
+    "BROTLI-Q8-MC": {"algorithm": "brotli", "quality": 8, "chunk_size": 32},
+    "GZIP-MC-1KB": {"algorithm": "gzip", "level": "default", "chunk_size": 32, "size": "1KB"},
+    "BROTLI-MC-1KB": {"algorithm": "brotli", "quality": 6, "chunk_size": 32, "size": "1KB"}
+  }
+}

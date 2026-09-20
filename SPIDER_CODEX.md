@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **178**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **180**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -186,8 +186,10 @@ Validated experiments: **178**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PHYSICS-35470449605 | physics | PASS | FALSIFIED-IN-SETTING — Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics. | C-WEB-DYNAMICS, C-MEAS-VALID | `282dafffff0e` |
 | EXP-INTEL-35470447439 | intel | BLOCKED | BLOCKED | C-MEAS-VALID | `b8c47aeabfe1` |
 | EXP-GRAPH-35470449310 | graph | REVISE | MEASUREMENT_INVALID | C-FRESHNESS | `396a8924a8f3` |
+| EXP-PHYSICS-35476270440 | physics | REVISE | FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison. | C-WEB-DYNAMICS, C-MEAS-VALID | `844ad7476fb6` |
 | EXP-GRAPH-35476270792 | graph | REVISE | REVISE | C-FRESHNESS | `8949d839480f` |
 | EXP-PRODUCT-35476271728 | product | PASS | SURVIVES_CURRENT_TEST — all five frozen decision conditions pass at n=480. C1 structural discrimination 0.8333 > 0.5. C2 token_refresh TP=1.0 on all 4 co-occurring conditions (Wilson lower 0.969). C3 behavioral_std 0.133-0.141 > 0.05, TOST pass=true at delta=0.15 (r=-0.0366, CI [-0.126, 0.053], both tails p<0.05). C4 FP=0.0 on 240 noise-only samples. C5 TOST equivalence confirmed at n=480 (CI upper 0.053 < 0.15 delta, both tails pass). Parent n=240 TOST lower-tail failure (p_lower=0.081) confirmed as sample-size power artifact: CI width narrowed from 0.252 to 0.179, lower bound moved from -0.185 to -0.126 within equivalence interval. Audit PASS confirms all recomputed metrics match producer. Claim ceiling strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7). No production generalization, no PRODUCT_CORE promotion, no non-mock inference. Threshold sensitivity analysis (exploratory) confirms TP=1.0 at 0.15-0.35, cliff to 0.694 at 0.40 — bimodal distribution limits threshold calibration utility. | C-FRESHNESS | `03c15bc561cf` |
+| EXP-RUNTIME-35481773400 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID | `abbdb54dffae` |
 
 ## Latest recorded claim events
 
@@ -198,8 +200,8 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35476271728 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-35470447439 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35481773400 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35434772331 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35470449605 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35476270440 | physics |

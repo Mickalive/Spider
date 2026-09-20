@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35481773400",
+  "lane": "runtime",
+  "decision": "NARROW_SUCCESS",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "All four frozen decision-rule conditions pass (C1: correctness_match_rate=1.0 all 720/720, C2: silent_fallback_count=0, C3: regression 120/120, C4: null_control all_same=true). Audit confirms recomputed metrics match producer. However, audit REVISE status and producer_claim_supported=false because: (1) payloads are highly-redundant synthetic 'x'*pad bodies that compress to 0.07-1.06KB (max 34 chunks at chunk_size=32), not the 100+ chunks the prereg motivated; (2) buffered proxy reassembles before decompression, so chunk-boundary incremental parsing is untested; (3) single-layer encoding only, max_depth=5 unexercised beyond depth 1. Claim ceiling bounded to: localhost buffered mock with synthetic redundant payloads of nominal 10KB/100KB (actual compressed 0.07-1.06KB, 3-34 chunks) across gzip levels 1/9 and brotli qualities 4/8, 4 auth states, 5 reps/cell. Does NOT establish high-entropy payload correctness, streaming decompression, multi-layer encoding, or real CDN correctness."
+    }
+  ],
+  "product_action": "No product promotion. C-MEAS-VALID remains EXPERIMENTAL. Real CDN infrastructure and high-entropy payload validation remain mandatory gates.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with high-entropy non-redundant payloads where compressed sizes actually scale to 2-50KB and span 60-1500+ chunks at chunk_size=32, with Accept-Encoding negotiation, multi-layer encoding, auth-aware cache/Vary, and production concurrency?",
+  "reason": "Frozen decision-rule SURVIVES_CURRENT_TEST is arithmetically correct (720/720 correctness, 0 fallbacks, regression pass, determinism pass). However, the audit (REVISE, producer_claim_supported=false) correctly identifies that the measured effect is degenerate: synthetic payloads with 'x'*padding compress to 70-1059 bytes (3-34 chunks), so the prereg-motivated 100+ chunk boundary stress was never expressed. JSON brotli mean is constant 76.75 bytes at both 10KB and 100KB input, confirming the payload generator produces no information-dense variation. The buffered proxy architecture (upstream fully read then re-chunked, client resp.raw.read(decode_content=False) reassembles before decompression) cannot test incremental chunk-boundary decompression. Combined with the parent's established 1KB correctness (480/480) and this experiment's extension to nominal 10KB/100KB, the established ceiling is: iterative decompression (brotli->gzip->identity, max_depth=5) is correct for synthetic highly-redundant payloads at up to nominal 100KB (actual compressed 0.07-1.06KB) through a buffered proxy. The remaining gaps — high-entropy payloads, streaming decompression, multi-layer encoding, real CDN — are orthogonal to this result and each requires its own experiment.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35481773400/spec.json (frozen question, hypothesis, falsifier, decision_rule C1-C4)",
+    "research/experiments/EXP-RUNTIME-35481773400/result.json (720/720 correctness, 0 fallbacks, per_cell correctness_match_rate 1.0 for all 36 cells, compressed_size_bytes 70-1058, decompressed_hash all_same true, controls all pass)",
+    "research/experiments/EXP-RUNTIME-35481773400/audit.json (REVISE, producer_claim_supported=false, V1_DEGENERATE_PAYLOAD_REDUNDANCY high severity, V2_BUFFERED_REASSEMBLY_NOT_STREAMING high severity, V3-V5 medium/info, claim_ceiling bounded to localhost buffered mock synthetic payloads)",
+    "research/experiments/EXP-RUNTIME-35481773400/freeze.json (frozen_at 2026-09-20T01:43:25, hashes prereg/spec/request)",
+    "research/experiments/EXP-RUNTIME-35470447407/handoff.json (parent established 240/240 gzip MC + 360/360 brotli, unknown larger payloads 100+ chunks, CDN primary gate)"
+  ]
+}
