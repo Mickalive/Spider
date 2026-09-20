@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35510157861",
-  "last_experiment_id": "EXP-GRAPH-35481774794",
-  "last_verdict": "REJECTED \u2014 Frozen decision_rule triggers REJECTED: C7 negative control FAILS (B-PARENT-CONFOUND |r|=0.1228 < 0.15 threshold, simple pooled per frozen spec) and C5 FAILS under producer's simple-pooled implementation (diff=0.4971) though correctly stratified C5 PASSES (diff=0.0469 < 0.076). C1-C4 and C6 all PASS. The audit confirms the REJECTED is driven by two issues: (1) C7 endpoint heterogeneity \u2014 V1 entropy confound is strong on profile (-0.359) and data_list (-0.415) but null on session_status (-0.006), diluting simple-pooled |r| below 0.15; (2) C5 code bug \u2014 run_experiment.py concatenates across endpoints without stratification for per-cache correlations. The underlying orthogonality signal is strong: endpoint-stratified pooled r=0.0125 (CI [-0.063, 0.087], TOST p_upper 0.00015), B-FLASK-ONLY r=0.021. The REJECTED reflects protocol/measurement issues, not evidence against the orthogonality hypothesis. C-FRESHNESS status remains EXPERIMENTAL.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35510157861",
+  "last_verdict": "REJECTED \u2014 Frozen decision_rule triggers REJECTED: C7 negative control FAILS under consistent non-304 exclusion. Producer reports C7 PASS (B-PARENT-CONFOUND endpoint-stratified weighted |r|=0.2992, n=816 including 304s), but audit recomputes with consistent non-304 exclusion per spec: per-endpoint non-304 r = 0.058 (profile, n=206), -0.247 (data_list, n=206), -0.042 (session_status, n=272); stratified weighted r=-0.0735, |r|=0.0735 <0.15 \u2192 C7 FAILS. Producer includes 304 for B-PARENT-CONFOUND (n=816 total) but excludes 304 for primary testbed (n=684 non-304) \u2014 inconsistent protocol. C1-C6 all independently PASS: C1 TP=1.0/TN=1.0; C2 3/3 endpoints with variance; C3 stratified r=0.0257, CI upper 0.1005 <0.15; C4 TOST p_upper=0.00053; C5 heterogeneity diff=0.0833 < 2*SE; C6 B-FLASK-ONLY |r|=0.0201. The REJECTED is driven by a fragile negative control that fails under consistent 304 handling, not by evidence against orthogonality. Orthogonality signal remains strong: stratified pooled r=0.0257 (n=684, CI [-0.049, 0.100]) on production-like LOCAL testbed.",
   "continue_immediately": false,
-  "next_question": "After fixing (1) V_ETAG permission leakage for /api/session_status (stable_key must depend on permission_level, not session_id alone), (2) C5 pooling code to use endpoint-stratified weighting for per-cache correlations, and (3) either increasing entropy bifurcation strength on session_status endpoint or defining C7 as endpoint-stratified weighted pooled r, does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED (any fails) at delta=0.15 on the production-like testbed with n>=800?",
+  "next_question": "After designing a B-PARENT-CONFOUND negative control whose signal is robust to 304 inclusion/exclusion (e.g., using a different confound mechanism such as response-body-coupled request_id generation rather than token_hex-vs-uuid4, or defining C7 on the non-304 subset where the V1 confound must still reproduce), does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED at delta=0.15 on the production-like testbed with n_non304>=800?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-20T16:18:26.364353+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "88031ae5ab0ea0e4fe2ac9a0e4acf7164e3641319da19422ed68ead540017af8",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-20T17:34:30.711907+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "6691322dcc504eab716e3aa168b78d0a242e924c3938021b9d7b91991c3e876d",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
