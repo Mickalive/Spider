@@ -1703,6 +1703,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "MEASUREMENT_INVALID",
         "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35538868377",
+        "lane": "intel",
+        "created_at": "2026-09-20T21:29:56.699167+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "No validated extrapolation to full DOM (n=50/82) exists. Both model-based extrapolation paths are gated behind failed C1/C2 per frozen rule. ModelB gated extrapolation predicts 0.982 at n50 (>0.80) but is invalid due to model misspecification (step-function data fitted by smooth saturating power law). The product consequence question (Docker re-collection investment vs recipe density viability) remains unresolved. Per-task recipe achieves 78.65% at n=20 but is untested at n>20. No evidence accumulated for or against C-PRODUCT-ECON from this experiment."
       }
     ],
     "C-MEAS-VALID": [
@@ -2365,6 +2375,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "REJECTED",
         "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35538868377",
+        "lane": "intel",
+        "created_at": "2026-09-20T21:29:56.699167+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
+        "claim_id": "C-MEAS-VALID",
+        "status": "HYPOTHESIS",
+        "reason": "Both proposed corrected noise decompositions REJECTED at C1 validation gate. Model A (Phi(median(|M|)/std)) predicted agreement at n=15 residual 34.59pp and n=20 residual 18.96pp, both exceeding 10pp threshold (audit VF1 confirms recomputed values match producer). Model B (saturating sign-fraction power law a*n^b/(1+a*n^b)) residual at n=15 12.39pp exceeds 10pp threshold, R-squared=0.8797 <0.90 (audit VF2). C1_EITHER_MODEL_VALID=FALSE per frozen conjunctive rule. Neither model beats the random noise null at n=20 (ModelB 0.0741 > null 0.0662). The diagnostic proportion(margin_i>0) reproduces observed exactly (0.00pp) under template invariance but is a structural identity, not a validated predictive model. The correct noise decomposition for a validated SNR model remains UNKNOWN. No evidence accumulated for or against C-MEAS-VALID from this experiment."
       }
     ]
   },
@@ -2430,24 +2450,24 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35530590171",
+      "experiment_id": "EXP-INTEL-35538868377",
       "lane": "intel",
-      "created_at": "2026-09-20T18:55:20.209885+00:00",
+      "created_at": "2026-09-20T21:29:56.699167+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
+      "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
+      "status": "HYPOTHESIS",
+      "reason": "No validated extrapolation to full DOM (n=50/82) exists. Both model-based extrapolation paths are gated behind failed C1/C2 per frozen rule. ModelB gated extrapolation predicts 0.982 at n50 (>0.80) but is invalid due to model misspecification (step-function data fitted by smooth saturating power law). The product consequence question (Docker re-collection investment vs recipe density viability) remains unresolved. Per-task recipe achieves 78.65% at n=20 but is untested at n>20. No evidence accumulated for or against C-PRODUCT-ECON from this experiment."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-PHYSICS-35530591329",
-      "lane": "physics",
-      "created_at": "2026-09-20T18:55:21.680285+00:00",
-      "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+      "experiment_id": "EXP-INTEL-35538868377",
+      "lane": "intel",
+      "created_at": "2026-09-20T21:29:56.699167+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
       "claim_id": "C-MEAS-VALID",
-      "status": "REJECTED",
-      "reason": "Plug-in KL estimator D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} is REJECTED for simultaneous C1 null centering (|shuffled-action null_mean|<0.1 bits) and C3 sensitivity (positive_control_k3>=0.5 bits) on the stochastic 12-state SPA at N=5000. The tradeoff is monotonic and irreconcilable: alpha=0 achieves K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 achieves |null_mean|=0.064 but K3=0.099 (5.1x below threshold). No crossover exists in the tested alpha range. This falsifies only the hyperparameter-tuned plug-in KL pathway on this discrete sparse-data SPA class (avg 1.48 records per (z,a) cell). Audit REVISE status accepted: methodological findings (C1 stratification mismatch between K2/K3, deterministic baseline identifiability gap, sparse strata coverage 26.4% below 30% threshold) are disclosed but do not change the FALSIFIED-IN-SETTING verdict (priority rule: FALSIFIED > MEASUREMENT_INVALID)."
+      "status": "HYPOTHESIS",
+      "reason": "Both proposed corrected noise decompositions REJECTED at C1 validation gate. Model A (Phi(median(|M|)/std)) predicted agreement at n=15 residual 34.59pp and n=20 residual 18.96pp, both exceeding 10pp threshold (audit VF1 confirms recomputed values match producer). Model B (saturating sign-fraction power law a*n^b/(1+a*n^b)) residual at n=15 12.39pp exceeds 10pp threshold, R-squared=0.8797 <0.90 (audit VF2). C1_EITHER_MODEL_VALID=FALSE per frozen conjunctive rule. Neither model beats the random noise null at n=20 (ModelB 0.0741 > null 0.0662). The diagnostic proportion(margin_i>0) reproduces observed exactly (0.00pp) under template invariance but is a structural identity, not a validated predictive model. The correct noise decomposition for a validated SNR model remains UNKNOWN. No evidence accumulated for or against C-MEAS-VALID from this experiment."
     }
   }
 }
