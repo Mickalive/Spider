@@ -1,0 +1,538 @@
+{
+  "experiment_id": "EXP-RUNTIME-35542474231",
+  "seed": 44,
+  "target_size": 10240,
+  "payloads": {
+    "JSON_GZIP-OUTER": {
+      "content_type": "JSON",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3777,
+      "compressed_sha256": "8b29339eb7848cd9559840d1a70e85c7c306a92601fb6999ad2f65ea2352aa7a",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "JSON_BROTLI-OUTER": {
+      "content_type": "JSON",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 4271,
+      "compressed_sha256": "c602a90e71d4e114154214905f958ff5e44ad488984035a42073445bad52228e",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "HTML_GZIP-OUTER": {
+      "content_type": "HTML",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2752,
+      "compressed_sha256": "0841056f5b64057f155052a3b693206dfbcaeb047e1f65395f12e33584dd1f6e",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "HTML_BROTLI-OUTER": {
+      "content_type": "HTML",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2950,
+      "compressed_sha256": "a8419f775dfd26dee333ea7d6103d2a1bda637165a70b7d0dea652d52fc0e099",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "BINARY_GZIP-OUTER": {
+      "content_type": "BINARY",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "compressed_len": 9929,
+      "compressed_sha256": "21de133f343d779caa3bd99cfa5d65d22a71e116537edd4ea692dfd3cc26e68c",
+      "ground_truth_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e"
+    },
+    "BINARY_BROTLI-OUTER": {
+      "content_type": "BINARY",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "compressed_len": 9902,
+      "compressed_sha256": "60cbcc014b3508d8f2704c985917410bf81110dae409e4d49bdeaecb3662a375",
+      "ground_truth_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e"
+    },
+    "JSON_IDENTITY": {
+      "content_type": "JSON",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "HTML_IDENTITY": {
+      "content_type": "HTML",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "BINARY_IDENTITY": {
+      "content_type": "BINARY",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10240,
+      "plain_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e"
+    },
+    "JSON_DEPTH3": {
+      "content_type": "JSON",
+      "order": "DEPTH3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3781,
+      "compressed_sha256": "04d3944871776d11f305b7099650cd2da5b16343006d61a5782b2f25e5ddc9df",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "depth": 3
+    },
+    "HTML_DEPTH3": {
+      "content_type": "HTML",
+      "order": "DEPTH3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2756,
+      "compressed_sha256": "a352e02a83eff81a1556e1bb3b30801c16fd5804e46bd7a35cdd2ff1516344a9",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "depth": 3
+    },
+    "BINARY_DEPTH3": {
+      "content_type": "BINARY",
+      "order": "DEPTH3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "compressed_len": 9933,
+      "compressed_sha256": "cb86f863c35df48ded5146c78b4b218c80b5a1334d3f39592a07c54b1a752f05",
+      "ground_truth_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "depth": 3
+    },
+    "JSON_DEPTH4": {
+      "content_type": "JSON",
+      "order": "DEPTH4",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3804,
+      "compressed_sha256": "6238e9dabb148cf4df10bc1045622dbfa74d08425d8231caf9ece672cd324cd6",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "depth": 4
+    },
+    "HTML_DEPTH4": {
+      "content_type": "HTML",
+      "order": "DEPTH4",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2779,
+      "compressed_sha256": "e27df1b5189d1612b6a72c0d2467ed40118be77f6f3c3a03a8aa0226b4de9799",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "depth": 4
+    },
+    "BINARY_DEPTH4": {
+      "content_type": "BINARY",
+      "order": "DEPTH4",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "compressed_len": 9956,
+      "compressed_sha256": "e1a9d1901520c53595f8896cdb870e9085d523399acfeb995b0fd7b634072010",
+      "ground_truth_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "depth": 4
+    },
+    "JSON_DEPTH5": {
+      "content_type": "JSON",
+      "order": "DEPTH5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3808,
+      "compressed_sha256": "fc5688da55b7d36bee1d88df484689388d1b9fdff9d87cdbac44434bcd6ce3b7",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "depth": 5
+    },
+    "HTML_DEPTH5": {
+      "content_type": "HTML",
+      "order": "DEPTH5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2783,
+      "compressed_sha256": "34e5b6c532a875c630adc2d91256f89e3b7560725ec837a98ebec9eccfec01f3",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "depth": 5
+    },
+    "BINARY_DEPTH5": {
+      "content_type": "BINARY",
+      "order": "DEPTH5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "compressed_len": 9960,
+      "compressed_sha256": "1a808825f89c49758d556d160cbfa0432d1a83e2706049d790a88bb54314b5e2",
+      "ground_truth_sha256": "a8f5f5d062ad86027f4e79b64efff37dcef1f901e580a2dcbe34976dc3129a3e",
+      "depth": 5
+    },
+    "JSON_LARGE_GZIP-OUTER": {
+      "content_type": "JSON",
+      "order": "LARGE_GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "compressed_len": 43244,
+      "compressed_sha256": "17950a54cc58279408fd84fff364526f9bb827b2bcd77f678f1239995f1aec9f",
+      "ground_truth_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "payload_size": 150000
+    },
+    "JSON_LARGE_BROTLI-OUTER": {
+      "content_type": "JSON",
+      "order": "LARGE_BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "compressed_len": 50872,
+      "compressed_sha256": "0f6b7a673938bed29ab84cb4a02cbebd93e882184ffdf2484b2fb485315d2006",
+      "ground_truth_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "payload_size": 150000
+    },
+    "HTML_LARGE_GZIP-OUTER": {
+      "content_type": "HTML",
+      "order": "LARGE_GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 150000,
+      "plain_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "compressed_len": 33050,
+      "compressed_sha256": "094fc3063733910e0b24c041ff9521eba0685cb54a9951290b35f59e2536ebf8",
+      "ground_truth_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "payload_size": 150000
+    },
+    "HTML_LARGE_BROTLI-OUTER": {
+      "content_type": "HTML",
+      "order": "LARGE_BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 150000,
+      "plain_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "compressed_len": 36010,
+      "compressed_sha256": "976c6135c9e1d39092244594f94b13120b03d31565c97ff8226e4f3be890f10c",
+      "ground_truth_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "payload_size": 150000
+    },
+    "BINARY_LARGE_GZIP-OUTER": {
+      "content_type": "BINARY",
+      "order": "LARGE_GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 150000,
+      "plain_sha256": "7c86635f3c718ee6bb8384587c1f235d75e2ef7a2bce753a12d05e61d6bf245a",
+      "compressed_len": 144713,
+      "compressed_sha256": "60c9819f25fd6caf00db87ee91311ff2e0b5c955fca88ecb670b39bc10bfe094",
+      "ground_truth_sha256": "7c86635f3c718ee6bb8384587c1f235d75e2ef7a2bce753a12d05e61d6bf245a",
+      "payload_size": 150000
+    },
+    "BINARY_LARGE_BROTLI-OUTER": {
+      "content_type": "BINARY",
+      "order": "LARGE_BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 150000,
+      "plain_sha256": "7c86635f3c718ee6bb8384587c1f235d75e2ef7a2bce753a12d05e61d6bf245a",
+      "compressed_len": 144496,
+      "compressed_sha256": "db0de1cd240d624dc80b7c59ff93d95af111eecce0432ff5a7efcdcbf134a40f",
+      "ground_truth_sha256": "7c86635f3c718ee6bb8384587c1f235d75e2ef7a2bce753a12d05e61d6bf245a",
+      "payload_size": 150000
+    }
+  },
+  "tunnel_url": "https://associations-knights-oral-processes.trycloudflare.com",
+  "origin": "http://127.0.0.1:18793",
+  "n_rows": 663
+}

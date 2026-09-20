@@ -1,0 +1,100 @@
+PHASE 0: entropy preflight + payload build
+  JSON: len=10240 entropy=5.57 bits/byte
+  payload JSON_GZIP-OUTER: plain=10240B comp=3777B ce=gzip gt_ok=True
+  payload JSON_BROTLI-OUTER: plain=10240B comp=4271B ce=br gt_ok=True
+  HTML: len=10239 entropy=4.66 bits/byte
+  payload HTML_GZIP-OUTER: plain=10239B comp=2752B ce=gzip gt_ok=True
+  payload HTML_BROTLI-OUTER: plain=10239B comp=2950B ce=br gt_ok=True
+  BINARY: len=10240 entropy=7.69 bits/byte
+  payload BINARY_GZIP-OUTER: plain=10240B comp=9929B ce=gzip gt_ok=True
+  payload BINARY_BROTLI-OUTER: plain=10240B comp=9902B ce=br gt_ok=True
+origin up on 127.0.0.1:18793
+starting cloudflared quick tunnel ...
+tunnel URL: https://associations-knights-oral-processes.trycloudflare.com
+CDN reachable after 3 probes (rt=362.0ms)
+PHASE 1: B-LOCALHOST-DIRECT (localhost, 48 cells x 5)
+  localhost fixed-order: 240/240 correct
+  localhost encoding-agnostic: 240/240 correct
+PHASE 2: CDN main matrix (48 cells x 5, jitter 200-500ms)
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-none: fixed=0 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-gzip: fixed=5 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-br: fixed=0 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk8192_ae-both: fixed=5 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk32_ae-none: fixed=0 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk32_ae-gzip: fixed=5 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk32_ae-br: fixed=0 ea=5/5
+  CDN_JSON_GZIP-OUTER_chunk32_ae-both: fixed=5 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-none: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-gzip: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-br: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk8192_ae-both: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-none: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-gzip: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-br: fixed=0 ea=5/5
+  CDN_JSON_BROTLI-OUTER_chunk32_ae-both: fixed=0 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-none: fixed=0 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-gzip: fixed=5 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-br: fixed=0 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk8192_ae-both: fixed=5 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk32_ae-none: fixed=0 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk32_ae-gzip: fixed=5 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk32_ae-br: fixed=0 ea=5/5
+  CDN_HTML_GZIP-OUTER_chunk32_ae-both: fixed=5 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-none: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-gzip: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-br: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk8192_ae-both: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-none: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-gzip: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-br: fixed=0 ea=5/5
+  CDN_HTML_BROTLI-OUTER_chunk32_ae-both: fixed=0 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-none: fixed=0 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-gzip: fixed=5 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-br: fixed=0 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk8192_ae-both: fixed=5 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-none: fixed=0 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-gzip: fixed=5 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-br: fixed=0 ea=5/5
+  CDN_BINARY_GZIP-OUTER_chunk32_ae-both: fixed=5 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-none: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-gzip: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-br: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk8192_ae-both: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-none: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-gzip: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-br: fixed=0 ea=5/5
+  CDN_BINARY_BROTLI-OUTER_chunk32_ae-both: fixed=0 ea=5/5
+PHASE 3: CDN cache stability (6 payloads x 3 consecutive)
+  JSON_GZIP-OUTER: raw_same=True dec_same=True all_correct=True ea_all=True cf=DYNAMIC
+  JSON_BROTLI-OUTER: raw_same=True dec_same=True all_correct=False ea_all=True cf=DYNAMIC
+  HTML_GZIP-OUTER: raw_same=True dec_same=True all_correct=True ea_all=True cf=DYNAMIC
+  HTML_BROTLI-OUTER: raw_same=False dec_same=True all_correct=False ea_all=True cf=DYNAMIC
+  BINARY_GZIP-OUTER: raw_same=True dec_same=True all_correct=True ea_all=True cf=DYNAMIC
+  BINARY_BROTLI-OUTER: raw_same=True dec_same=True all_correct=False ea_all=True cf=DYNAMIC
+PHASE 4: B-CDN-IDENTITY (3 types x 5 via CDN)
+  identity via CDN encoding-agnostic: 15/15 correct
+PHASE 5: Depth generalization (depths 3-5, alternating brotli/gzip)
+  depth 3 JSON: ea_correct=5/5
+  depth 3 HTML: ea_correct=5/5
+  depth 3 BINARY: ea_correct=5/5
+  depth 4 JSON: ea_correct=5/5
+  depth 4 HTML: ea_correct=5/5
+  depth 4 BINARY: ea_correct=5/5
+  depth 5 JSON: ea_correct=5/5
+  depth 5 HTML: ea_correct=5/5
+  depth 5 BINARY: ea_correct=5/5
+PHASE 6: Large payload (>100KB)
+  large JSON GZIP-OUTER: ea_correct=5/5
+  large JSON BROTLI-OUTER: ea_correct=5/5
+  large HTML GZIP-OUTER: ea_correct=5/5
+  large HTML BROTLI-OUTER: ea_correct=5/5
+  large BINARY GZIP-OUTER: ea_correct=5/5
+  large BINARY BROTLI-OUTER: ea_correct=5/5
+=== SUMMARY ===
+CDN primary matrix encoding-agnostic: 240/240
+Localhost encoding-agnostic: 240/240
+Identity encoding-agnostic: 15/15
+Depth generalization encoding-agnostic: 45/45
+Large payload encoding-agnostic: 30/30
+wrote 663 rows -> /home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35542474231/raw_cell_results.jsonl
+wall_time_s=192.3
