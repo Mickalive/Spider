@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35476270440",
+  "github_run_id": "35476270440",
+  "github_run_attempt": 1,
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35470449605",
+    "path": "research/experiments/EXP-PHYSICS-35470449605",
+    "handoff_sha256": "57d4a2d0e198ef45c5f2cc028dd096f95d63b551bd56a193352233c24c573c6e"
+  },
+  "base_sha": "4449bc4a3ab45c34694aed90e7ec9e6e6cf0f8ba",
+  "execution_checkpoint_sha": "0661d0b4ac8cc2dbd7e7f4887c44007f7142addd",
+  "code": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/run_experiment.py",
+      "sha256": "09e68f5551cc90bed80965ffb63637ba0b51e2a5510ef7e535340498488f0f6f",
+      "based_on": "research/experiments/EXP-PHYSICS-35470449605/run_experiment.py",
+      "modifications": [
+        "Added B-KSG-CMI estimator via sklearn.feature_selection.mutual_info_classif (KSG algorithm, k=5)",
+        "Added B-BAYESIAN-MODEL estimator via Dirichlet-Multinomial log marginal likelihood (scipy)",
+        "Added B-LIKELIHOOD-RATIO estimator via chi2_contingency per-state with Bonferroni correction",
+        "Extended estimator registry from 4 to 7 estimators",
+        "Extended permutation null for KSG (shuffle action array, recompute MI) and LR/Bayesian (shuffle action labels)",
+        "Added convergence check for all 7 estimators at N=50000"
+      ]
+    }
+  },
+  "data": {
+    "spa_design": "12-state SHA256 hash-routed SPA with CANDIDATES (48 pairs, 4 distinct candidates each)",
+    "transitions_n5000": {
+      "sha256": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+      "n_sessions": 50,
+      "steps_per_session": 100,
+      "seed": 42,
+      "n_transitions": 5000
+    },
+    "transitions_n50000": {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/raw_transitions_n50000.json",
+      "sha256": "e9e0c54eaa0ecc2266e655ab7fa6cd61e2bb91c1e5e1da3d2d4dca08ee2d152f",
+      "n_sessions": 50,
+      "steps_per_session": 1000,
+      "seed": 42,
+      "n_transitions": 50000
+    },
+    "positive_control": "8-state fully deterministic SPA (POSITIVE_STATES, POSITIVE_TRANSITIONS)",
+    "n_shuffles": 500,
+    "n_bootstrap": 200,
+    "n_positive_perms": 1000,
+    "min_stratum_size": 5,
+    "knn_k": 5,
+    "knn_alpha": 1.0
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "linux",
+    "packages": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "pymc": "6.3.2"
+    },
+    "pymc_used": false,
+    "note": "pymc was installed but Bayesian model comparison was implemented via scipy (analytical Dirichlet-Multinomial log marginal likelihood) for determinism and speed"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/raw_results.json",
+      "sha256": "0abbb2c4a6dc3d1c37db13da05da768cf72da9418a13ead6ba52b850a92b4f7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/raw_transitions_n50000.json",
+      "sha256": "e9e0c54eaa0ecc2266e655ab7fa6cd61e2bb91c1e5e1da3d2d4dca08ee2d152f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/raw_output.txt",
+      "sha256": "9633ac192d3db299722229d191192e6ad030230ac6f7e1152ad71f93d606655a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/run_experiment.py",
+      "sha256": "09e68f5551cc90bed80965ffb63637ba0b51e2a5510ef7e535340498488f0f6f",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/result.json",
+      "sha256": "ddc7fe9d9bc45e9f072443ee37d752dbc094aadf9dd2c33b4bbe6d98145f118c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/report.md",
+      "sha256": "d763cb4b96e5b2afba1814c883cd6eb772180d1ad3b10958fcfb9d2198eebd68",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35476270440/provenance.json",
+      "sha256": "d2203611779180db20205327c1c39f76aac30374baf99db444994d9d3675c3fe",
+      "role": "derived"
+    }
+  ],
+  "wall_seconds": 106.6,
+  "execution_notes": [
+    "Experiment script is deterministic (seed=42 for all RNG calls)",
+    "Raw transitions are collected independently for N=5000 and N=50000",
+    "Positive control uses different seed base (seed=42) but different session prefix (pc_session_)",
+    "KSG CMI uses sklearn mutual_info_classif with discrete_features=True, n_neighbors=5",
+    "Bayesian model uses analytical Dirichlet-Multinomial log marginal likelihood (no MCMC/variational inference)",
+    "Likelihood-ratio uses scipy.stats.chi2_contingency per-state with Bonferroni correction (alpha=0.05/12 states)"
+  ]
+}

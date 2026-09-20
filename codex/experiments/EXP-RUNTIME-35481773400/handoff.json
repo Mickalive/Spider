@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35481773400",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with high-entropy non-redundant payloads where compressed sizes actually scale to 2-50KB and span 60-1500+ chunks at chunk_size=32, with Accept-Encoding negotiation, multi-layer encoding, auth-aware cache/Vary, and production concurrency?",
+  "why_next": "C-MEAS-VALID now has 720+480=1200 localhost correctness passes across gzip and brotli with audit confirmation, but ALL tested payloads are highly-redundant synthetic bodies compressing to <1.1KB (max 34 chunks). The prereg-motivated 100+ chunk boundary stress remains untested. Real CDN infrastructure is the sole remaining product-readiness gate, but must now use high-entropy payloads (binary, real HTML with unique content) that actually produce 20-50KB compressed sizes and 600-1500+ chunks. CDN experiment must include: (a) high-entropy payload generator (real webpage content, not 'x'*pad), (b) streaming forwarding mode to test chunk-boundary behavior, (c) Accept-Encoding negotiation with CDN, (d) multi-layer encoding test (gzip->br), (e) geographic latency and concurrency.",
+  "carry_forward": {
+    "established": [
+      "Gzip multi-chunk decompression correctness on localhost buffered mock: 240/240 (parent EXP-RUNTIME-35470447407) + regression confirmed",
+      "Brotli multi-chunk decompression correctness on localhost buffered mock: 360/360 (grandparent EXP-RUNTIME-35456070671) + regression confirmed",
+      "Iterative decompression (brotli->gzip->identity max_depth=5) correctness on localhost for synthetic highly-redundant payloads: 720/720 across 10KB/100KB nominal sizes, gzip levels 1/9, brotli qualities 4/8, 4 auth states, 3 content types (EXP-RUNTIME-35481773400, audit REVISE confirming recomputed metrics)",
+      "IDENTITY baseline validates correctness oracle at both 10KB and 100KB: 60/60 + 60/60",
+      "Deterministic within-state grouping preserved: decompressed hash all_same=true for all cells",
+      "No silent fallbacks: 0 across all 720+480=1200 compressed observations",
+      "Compression level extremes (gzip 1 vs 9, brotli 4 vs 8) do not affect correctness on synthetic payloads"
+    ],
+    "rejected": [
+      "Silent fallback to compressed bytes as explanation for preserved discrimination — rejected (0 fallbacks, 1200/1200 hash matches)",
+      "Gzip chunk boundaries corrupt multi-byte symbols at chunk_size=32 for payloads up to 34 chunks — rejected on synthetic payloads"
+    ],
+    "unknown": [
+      "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, CDN-specific headers, geographic latency, production concurrency?",
+      "Does correctness hold for high-entropy non-redundant payloads where 10KB compresses to 2-10KB and 100KB to 20-50KB (60-1500+ chunks at chunk_size=32)?",
+      "Does correctness hold for streaming incremental decompression across chunk boundaries without full reassembly?",
+      "Does correctness hold for stacked multi-layer encodings (gzip->br, br->gzip) exercising max_depth>1?",
+      "What is decompression latency at realistic compressed sizes (20-50KB) on real infrastructure?",
+      "Do gzip levels 2-8 and brotli qualities 5-7 produce compressed structures that stress chunk boundaries differently?"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for Product Core promotion — real CDN infrastructure with high-entropy payloads is the mandatory remaining gate",
+      "Decompression correctness holds for high-entropy realistic web content — tested payloads are synthetic 'x'*pad compressing to 0.07-1.06KB, not realistic 2-50KB",
+      "Chunk boundary decompression is safe — proxy buffers full body before re-chunking, incremental streaming decompression untested",
+      "Max decompression depth 5 is validated — only depth 1 (single encoding) exercised across 1200 observations",
+      "The 100KB nominal payloads stress the decompression pipeline — actual compressed sizes are 70-1059 bytes (max 34 chunks at chunk_size=32)",
+      "CDN behaviors (Vary, ETag, Accept-Encoding, geographic latency) are safe for decompression — localhost mock does not replicate these"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35470447407/handoff.json (parent: established gzip 240/240, CDN primary unknown)",
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (grandparent: established brotli 360/360)",
+    "research/experiments/EXP-RUNTIME-35481773400/result.json (this experiment: 720/720 correctness on synthetic 10KB/100KB)",
+    "research/experiments/EXP-RUNTIME-35481773400/audit.json (REVISE, claim_ceiling bounded, V1-V5 validity findings)",
+    "codex/claim_state.json (C-MEAS-VALID claim history)",
+    "codex/index.json (prior runtime experiments and their decisions)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35481773400/result.json (720/720 correctness, 0 fallbacks, 36 cells at 1.0, compressed_size_bytes 70-1058, controls all pass)",
+    "research/experiments/EXP-RUNTIME-35481773400/audit.json (REVISE, producer_claim_supported=false, V1 degenerate payload V2 buffered reassembly, claim_ceiling localhost synthetic only)",
+    "research/experiments/EXP-RUNTIME-35481773400/spec.json (frozen decision_rule C1-C4, baselines, falsifier)",
+    "research/experiments/EXP-RUNTIME-35481773400/freeze.json (immutable frozen inputs)",
+    "research/experiments/EXP-RUNTIME-35470447407/handoff.json (parent carry_forward established/rejected/unknown)"
+  ],
+  "recommended_action": "Design a real CDN correctness experiment with three mandatory additions: (1) high-entropy payload generator (e.g., real HTML pages, JSON with unique IDs, binary-like content) that produces compressed sizes in the 2-50KB range at 60-1500+ chunks at chunk_size=32; (2) deploy mock OAuth2 server behind Cloudflare or Fastly free tier with brotli+gzip compression, auth-aware cache/Vary; (3) test streaming forwarding mode where the proxy forwards partial frames without full reassembly. This is the mandatory next gate for C-MEAS-VALID. If CDN correctness passes with high-entropy payloads, C-MEAS-VALID can advance toward Product Core. If it fails, diagnose the failure mode. In parallel, optionally test multi-layer encoding (gzip->br) to exercise max_depth>1."
+}
