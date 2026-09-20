@@ -1663,6 +1663,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "REJECTED",
         "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35530590171",
+        "lane": "intel",
+        "created_at": "2026-09-20T18:55:20.209885+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
       }
     ],
     "C-MEAS-VALID": [
@@ -2295,6 +2305,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST: all five conditions C1-C5 pass with audit PASS. C1: streaming_decompressed_hash == buffered_decompressed_hash for ALL 480 multi-layer streaming observations across 24 cells (byte-identical). C2: streaming_decompressed_hash == expected_hash for ALL 480 multi-layer streaming observations. C3: B-GZIP-SINGLE-LAYER-REGRESSION 120/120 and B-BROTLI-SINGLE-LAYER-REGRESSION 120/120 pass in both paths. C4: null_control all_same=true for all 4 auth states across all cells in both paths. C5: B-COMPRESSED-TARGET-RANGE passes (3/3 content types meet thresholds at both 10KB and 100KB). Audit PASS confirms all recomputed metrics match producer exactly. The parent V1_BUFFERED_PROXY_NOT_STREAMING limitation is resolved at the Transfer-Encoding framing layer: the streaming proxy (StreamingProxyHandler reads upstream_resp.read(STREAM_CHUNK_SIZE) in a loop without full-body buffering) and streaming client (resp.raw.read(stream_chunk_size) loop accumulating bytes) produce byte-identical decompressed output to the buffered ground truth at both realistic CDN chunk size (8192 bytes) and stress size (32 bytes, 86-3087 chunks per response). Claim ceiling advances to include streaming incremental decompression at the HTTP Transfer-Encoding framing layer on localhost with high-entropy multi-layer payloads. However, C-MEAS-VALID remains EXPERIMENTAL because: (1) the test is at the Transfer-Encoding framing layer (proxy forwards chunks, client accumulates then decompresses), NOT at the decompressor streaming API layer (brotli.Decompressor.process / gzip streaming without accumulation) \u2014 true incremental decompressor streaming across arbitrary Brotli block boundaries is untested; (2) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, Vary/cache, geographic latency, and production concurrency is untested \u2014 the sole remaining blocker for Product Core readiness; (3) depths 3-5 stacked encodings untested (only depth 2 exercised); (4) payloads >100KB untested; (5) compression level variation beyond tested gzip level 1/None and brotli quality 4/6 untested. Does NOT promote to PRODUCT_CORE \u2014 real CDN infrastructure testing is required."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35530590171",
+        "lane": "intel",
+        "created_at": "2026-09-20T18:55:20.209885+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C1_CORRECTED_MODEL_VALID fails at n=20 (predicted 0.7379 vs observed 0.5595, residual 17.8pp > 10pp threshold). C1 passes at n=15 (predicted 0.5648 vs observed 0.4998, residual 6.5pp <= 10pp). Per frozen conjunctive rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. The corrected model Phi(mean/std) using across-iteration margin_std as noise is a substantial improvement over parent (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20, 7.7x/2.5x improvement) and confirms margin_std (~1e-4 to 6e-4) is the right direction vs SE (~1e-5). However, the Phi(mean/std) form conflates sign and magnitude: the empirical driver of agreement is sign fraction proportion(margin_i>0) which matches observed within 1pp, not the SNR ratio. No mechanism identification (C2 gated), no full-DOM extrapolation (C3 gated on poor R^2=0.197 |margin| power law), and no product consequence are supported by this run."
       }
     ]
   },
@@ -2360,24 +2380,24 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35476271877",
+      "experiment_id": "EXP-INTEL-35530590171",
       "lane": "intel",
-      "created_at": "2026-09-19T23:30:02.291409+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
-      "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
+      "created_at": "2026-09-20T18:55:20.209885+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "REJECTED",
-      "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-35522287921",
-      "lane": "runtime",
-      "created_at": "2026-09-20T16:18:30.528344+00:00",
-      "decision": "SURVIVES_CURRENT_TEST",
-      "source_commit": "c1c1e0048a6fdc388f97e907d49b008e9eb5e10d",
+      "experiment_id": "EXP-INTEL-35530590171",
+      "lane": "intel",
+      "created_at": "2026-09-20T18:55:20.209885+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "c8c9ee1d83a1eafe2940373d62b82ae08dfd6d10",
       "claim_id": "C-MEAS-VALID",
-      "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST: all five conditions C1-C5 pass with audit PASS. C1: streaming_decompressed_hash == buffered_decompressed_hash for ALL 480 multi-layer streaming observations across 24 cells (byte-identical). C2: streaming_decompressed_hash == expected_hash for ALL 480 multi-layer streaming observations. C3: B-GZIP-SINGLE-LAYER-REGRESSION 120/120 and B-BROTLI-SINGLE-LAYER-REGRESSION 120/120 pass in both paths. C4: null_control all_same=true for all 4 auth states across all cells in both paths. C5: B-COMPRESSED-TARGET-RANGE passes (3/3 content types meet thresholds at both 10KB and 100KB). Audit PASS confirms all recomputed metrics match producer exactly. The parent V1_BUFFERED_PROXY_NOT_STREAMING limitation is resolved at the Transfer-Encoding framing layer: the streaming proxy (StreamingProxyHandler reads upstream_resp.read(STREAM_CHUNK_SIZE) in a loop without full-body buffering) and streaming client (resp.raw.read(stream_chunk_size) loop accumulating bytes) produce byte-identical decompressed output to the buffered ground truth at both realistic CDN chunk size (8192 bytes) and stress size (32 bytes, 86-3087 chunks per response). Claim ceiling advances to include streaming incremental decompression at the HTTP Transfer-Encoding framing layer on localhost with high-entropy multi-layer payloads. However, C-MEAS-VALID remains EXPERIMENTAL because: (1) the test is at the Transfer-Encoding framing layer (proxy forwards chunks, client accumulates then decompresses), NOT at the decompressor streaming API layer (brotli.Decompressor.process / gzip streaming without accumulation) \u2014 true incremental decompressor streaming across arbitrary Brotli block boundaries is untested; (2) real CDN infrastructure (Cloudflare/Fastly/Akamai) with Accept-Encoding negotiation, Vary/cache, geographic latency, and production concurrency is untested \u2014 the sole remaining blocker for Product Core readiness; (3) depths 3-5 stacked encodings untested (only depth 2 exercised); (4) payloads >100KB untested; (5) compression level variation beyond tested gzip level 1/None and brotli quality 4/6 untested. Does NOT promote to PRODUCT_CORE \u2014 real CDN infrastructure testing is required."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C1_CORRECTED_MODEL_VALID fails at n=20 (predicted 0.7379 vs observed 0.5595, residual 17.8pp > 10pp threshold). C1 passes at n=15 (predicted 0.5648 vs observed 0.4998, residual 6.5pp <= 10pp). Per frozen conjunctive rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. The corrected model Phi(mean/std) using across-iteration margin_std as noise is a substantial improvement over parent (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20, 7.7x/2.5x improvement) and confirms margin_std (~1e-4 to 6e-4) is the right direction vs SE (~1e-5). However, the Phi(mean/std) form conflates sign and magnitude: the empirical driver of agreement is sign fraction proportion(margin_i>0) which matches observed within 1pp, not the SNR ratio. No mechanism identification (C2 gated), no full-DOM extrapolation (C3 gated on poor R^2=0.197 |margin| power law), and no product consequence are supported by this run."
     }
   }
 }

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35530590171",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen decision_rule triggers MEASUREMENT_INVALID: C1_CORRECTED_MODEL_VALID fails at n=20 (predicted 0.7379 vs observed 0.5595, residual 17.8pp > 10pp threshold). C1 passes at n=15 (predicted 0.5648 vs observed 0.4998, residual 6.5pp <= 10pp). Per frozen conjunctive rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3. The corrected model Phi(mean/std) using across-iteration margin_std as noise is a substantial improvement over parent (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20, 7.7x/2.5x improvement) and confirms margin_std (~1e-4 to 6e-4) is the right direction vs SE (~1e-5). However, the Phi(mean/std) form conflates sign and magnitude: the empirical driver of agreement is sign fraction proportion(margin_i>0) which matches observed within 1pp, not the SNR ratio. No mechanism identification (C2 gated), no full-DOM extrapolation (C3 gated on poor R^2=0.197 |margin| power law), and no product consequence are supported by this run."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "C1 fails, so no validated extrapolation to full-DOM n=21-82 exists from this run. The gated C3 extrapolation (predicted 0.575 at n50, PI90 [0.511,0.774]) is exploratory and unreliable (|margin| power law R^2=0.197 from 4 points with sign crossing). Docker re-collection is NOT justified by this extrapolation. Non-recipe density adoption is NOT justified. Product lane must await either a validated corrected model or direct full-DOM measurement."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a noise decomposition that separates sign from magnitude (e.g., Phi(median(|M|)/std) or empirical CDF mapping of the margin distribution) pass C1-equivalent validation at n=15 and n=20, or does the direct sign-fraction indicator (proportion(margin_i>0)) itself provide a viable extrapolation path to full-DOM n=50/82 using a sign-fraction power law instead of Phi(mean/std)?",
+  "reason": "The frozen decision rule is evaluated mechanically: NOT C1 -> MEASUREMENT_INVALID. The corrected model's failure at n=20 is not borderline (17.8pp vs 10pp threshold, 1.78x exceedance) and is robust to PYTHONHASHSEED variation (delta 0.0059 at n20). Audit PASS confirms all recomputed metrics match producer to 1e-15. The experiment provides strong descriptive evidence (margin_std is the right noise direction, 7.7x/2.5x improvement) but the Phi(mean/std) functional form is misspecified: it conflates the sign-determining mean with the magnitude-determining std, and at n=20 std grows faster (exponent 1.64) than |mean| (exponent 0.88), inflating the SNR and over-predicting agreement. The diagnostic proportion(margin_i>0)=0.5654 at n20 (residual 0.59pp) shows that sign fraction, not mean/std, determines agreement under template invariance. This is the key mechanistic insight for the next experiment. C2 (mechanism: margin_deficit SNR=0.637<3.0) and C3 (extrapolation: 0.575<80% at n50) are correctly evaluated but gated behind failed C1 and must not be used to justify product decisions.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35530590171/result.json:metrics.corrected_snr_model (C1 FAIL, residuals 6.5pp/17.8pp)",
+    "research/experiments/EXP-INTEL-35530590171/result.json:metrics.diagnostic_indicator_statistic (prop_margin_positive 0.4996/0.5654, residuals 0.02pp/0.59pp)",
+    "research/experiments/EXP-INTEL-35530590171/result.json:metrics.mechanism (SNR 0.637, margin_deficit, C2 gated)",
+    "research/experiments/EXP-INTEL-35530590171/result.json:metrics.extrapolation_n50 (predicted 0.575 PI90 [0.511,0.774], C3 gated, margin R^2=0.197)",
+    "research/experiments/EXP-INTEL-35530590171/audit.json:status MEASUREMENT_INVALID, producer_claim_supported=true, VF1-VF6",
+    "research/experiments/EXP-INTEL-35530590171/audit.json:recomputed_metrics (all match producer to 1e-15)",
+    "research/experiments/EXP-INTEL-35530590171/audit.json:claim_ceiling (descriptive ceiling only, no mechanism or extrapolation validated)",
+    "research/experiments/EXP-INTEL-35530590171/spec.json:decision_rule (conjunctive C1/C2/C3, NOT C1 -> MEASUREMENT_INVALID)",
+    "research/experiments/EXP-INTEL-35476271877/handoff.json (parent carry_forward, noise-scale misspecification diagnosis)",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json (per_n margins/se_tots/margin_std, parent baseline data)"
+  ]
+}
