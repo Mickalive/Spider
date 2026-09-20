@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35513777099",
+  "lane": "runtime",
+  "github_run_id": "35513777099",
+  "executed_at": "2026-09-20T13:35:00.000000+00:00",
+  "pre_execute_sha": "33be69da1c964b808aa9348dc8a438ca02c9b616",
+  "post_execute_sha": null,
+  "python_version": "3.12.14",
+  "platform": "linux",
+  "dependencies": {
+    "brotli": "1.2.0",
+    "PyJWT": "2.14.0",
+    "requests": "2.34.2"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-RUNTIME-35513777099/request.json",
+    "spec.json": "research/experiments/EXP-RUNTIME-35513777099/spec.json",
+    "prereg.md": "research/experiments/EXP-RUNTIME-35513777099/prereg.md",
+    "freeze.json": "research/experiments/EXP-RUNTIME-35513777099/freeze.json"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-RUNTIME-35495699298",
+    "parent_handoff": "research/experiments/EXP-RUNTIME-35495699298/handoff.json",
+    "parent_result": "research/experiments/EXP-RUNTIME-35495699298/result.json",
+    "parent_audit": "research/experiments/EXP-RUNTIME-35495699298/audit.json"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35513777099/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script with mock origin, reverse proxy, high-entropy payload generators, multi-layer encoding support, and decompression correctness controls"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35513777099/result.json",
+      "role": "derived",
+      "description": "Canonical experiment result with metrics, controls, and observations"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35513777099/report.md",
+      "role": "derived",
+      "description": "Human-readable report with interpretation and claim ceiling"
+    }
+  },
+  "execution_context": {
+    "architecture": "Client (iterative decompression, max_depth=5) -> Python Reverse Proxy -> Mock OAuth2 Server",
+    "multi_layer_encodings": [
+      "GZIP-THEN-BROTLI: body -> gzip.compress(level=1) -> brotli.compress(quality=4) -> chunked transfer",
+      "BROTLI-THEN-GZIP: body -> brotli.compress(quality=4) -> gzip.compress(level=1) -> chunked transfer"
+    ],
+    "regression_controls": [
+      "GZIP-SINGLE: single-layer gzip at 10KB high-entropy",
+      "BROTLI-SINGLE: single-layer brotli at 10KB high-entropy"
+    ],
+    "identity_baselines": [
+      "IDENTITY-10KB: no compression at 10KB high-entropy",
+      "IDENTITY-100KB: no compression at 100KB high-entropy"
+    ],
+    "total_requests": 600,
+    "total_correctness_pass": 600,
+    "total_correctness_fail": 0,
+    "total_silent_fallbacks": 0,
+    "total_decompression_errors": 0
+  },
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (parent: established single-layer correctness, identified V2_UNKNOWN multi-layer limitation)",
+    "research/experiments/EXP-RUNTIME-35495699298/result.json (parent: 480/480 high-entropy correctness, 120/120 regression, 120/120 identity)",
+    "research/experiments/EXP-RUNTIME-35495699298/run_experiment.py (high-entropy generators: generate_json_he_body, generate_html_he_body, generate_binary_he_body)",
+    "codex/claim_state.json (C-MEAS-VALID claim history across 30+ experiments)"
+  ]
+}
