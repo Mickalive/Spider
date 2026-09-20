@@ -1,17 +1,46 @@
 {
   "experiment_id": "EXP-PRODUCT-35538865048",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "When token_refresh behavioral scores are produced as a continuous severity gradient (not bimodal 0.35/0.65), can a calibrated discriminating threshold be found that achieves TP >= 0.85 AND FP <= 0.10 simultaneously — and does behavioral-structural orthogonality (TOST delta=0.15, n>=480) survive at that calibrated threshold under co-occurring production-like structural noise?",
+  "hypothesis": "A continuous severity model mapping token_refresh outcome quality to behavioral_score in [0.2, 0.8] range (instead of discrete 0.35/0.65) yields a calibrated threshold in [0.40, 0.60] where: (1) TP >= 0.85 on token_refresh samples, (2) FP <= 0.10 on noise-only samples, (3) Pearson r(behavioral, structural) CI upper < 0.15 at n=480, demonstrating that discriminating noise robustness survives when threshold is no longer tautological.",
+  "falsifier": "No threshold in [0.20, 0.80] achieves TP >= 0.85 AND FP <= 0.10 on continuous scores, OR orthogonality TOST fails at delta=0.15 at the best-F1 threshold on n=480 co-occurring samples, demonstrating that the behavioral signal cannot discriminate refresh quality at any calibrated operating point.",
+  "baselines": [
+    {
+      "id": "B-TAUT-025",
+      "description": "Current frozen threshold 0.25 on bimodal scores — expected TP=1.0, FP=0.0, but tautological (both modes 0.35/0.65 exceed threshold). Used as null ceiling, not a valid operating point.",
+      "expected_outcome": "TP=1.0, FP=0.0, F1=1.0 but not discriminating"
+    },
+    {
+      "id": "B-MODE-MID-050",
+      "description": "Midpoint threshold 0.50 on bimodal scores — expected TP ~0.70 (only success-mode 0.65 exceeds), FP=0.0. This is the theoretical boundary where bimodal scores start to lose TP.",
+      "expected_outcome": "TP ~0.70, FP=0.0"
+    },
+    {
+      "id": "B-PARENT-N480-MOCK",
+      "description": "Parent n=480 result with bimodal scores: TP=1.0 at threshold 0.25, orthogonality r=0.016 CI upper 0.1055, TOST PASS at delta=0.15.",
+      "expected_outcome": "TP=1.0, TOST PASS, but tautological threshold"
+    },
+    {
+      "id": "B-5X-ORTHO-MOCK",
+      "description": "Five prior n=480 mock orthogonality experiments all confirm delta=0.15: EXP-GRAPH-35353011131 (r=0.046), EXP-GRAPH-35389145821 (r=0.0022), EXP-PRODUCT-35445596342 (r=-0.0258), EXP-PRODUCT-35476271728 (r=-0.0366), EXP-PRODUCT-35481773764 (r=0.016).",
+      "expected_outcome": "All TOST PASS at delta=0.15"
+    }
+  ],
+  "positive_control": "PC-STRUCTURAL-DISCRIMINATION: HTTP fingerprint full-vector discrimination > 0.5 on stochastic Flask+SQLite mock with 4 auth states. Replicates parent 0.8333. Must pass before any threshold analysis is valid.",
+  "null_control": "NC-NOISE-FP: Behavioral FP rate on production-like noise-only samples (4 noise types x 60 = 240 samples, no drift). FP <= 0.10 at the calibrated threshold. Parent achieved FP=0.0 at threshold 0.25; we test whether FP remains acceptable at a higher, non-tautological threshold.",
+  "measurement_validity": [
+    "Mock server modified to produce continuous behavioral scores: token_refresh outcome maps to behavioral_score in [0.2, 0.8] via quality gradient (full success 0.8, partial 0.5-0.7, failure 0.2-0.4), not discrete 0.35/0.65. Continuous scores injected via /api/session/status response body field 'session_quality' normalized to [0,1] behavioral_score.",
+    "Structural noise types unchanged from parent: pagination_metadata, variable_length_data, error_format_variation (FIXED: body replaced BEFORE resp creation), cdn_cache_headers. Effective coverage target: 4/4 types.",
+    "Threshold sweep across [0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80] at 0.05 increments on Phase A data (n=240 token_refresh + n=240 noise-only). Compute TP, FP, F1, precision, recall at each threshold. Select calibrated threshold as argmax F1 subject to TP >= 0.85 AND FP <= 0.10.",
+    "Phase B: n=480 paired behavioral+structural samples at the calibrated threshold across 4 co-occurring conditions (token_refresh x 4 noise types, 120 each). Measure Pearson r, Fisher-z CI, TOST at delta=0.15.",
+    "Structural signal unchanged: cardinality observable (body key count + semantic header count + status code). X-Request-Id/Date/Server/Content-Length/Connection excluded.",
+    "Determinism: single global RNG seeded at 42 before server start. Server threaded=False, client sequential. Sample sequence reproducible from raw_evidence.",
+    "No LLM calls. No network beyond localhost."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of:\n- C1: full-vector discrimination > 0.5 (positive control passes)\n- C2: TP >= 0.85 at calibrated threshold on token_refresh samples (Wilson lower >= 0.80)\n- C3: behavioral_std > 0.05 on all 4 co-occurring conditions AND Pearson r CI upper < 0.15 at n=480 (orthogonality)\n- C4: FP <= 0.10 at calibrated threshold on 240 noise-only samples\n- C5: TOST equivalence pass at delta=0.15 on n=480 co-occurring samples\n\nFALSIFIED if:\n- No threshold achieves TP >= 0.85 AND FP <= 0.10 (C2 AND C4 jointly fail at all thresholds)\n- OR calibrated threshold TOST fails at delta=0.15 (C5 fails)\n- OR C1 fails (structural discrimination does not replicate)\n\nMEASUREMENT_INVALID if:\n- Continuous score injection fails (behavioral scores remain bimodal, <5 unique values)\n- OR error_format_variation remains inert (structural_std for that condition equals baseline jitter)\n- OR sample count < 480 after exclusions",
+  "product_consequence_positive": "Threshold tautology resolved. Calibrated operating point exists for continuous severity. Claim ceiling upgraded: C-FRESHNESS freshness guard discriminates token_refresh quality at a non-tautological threshold with orthogonality preserved. Moves C-FRESHNESS toward VALIDATED (still bounded to mock substrate; production gate remains open).",
+  "product_consequence_negative": "No calibrated threshold exists on continuous scores, OR orthogonality breaks at discriminating threshold. C-FRESHNESS mechanism is fundamentally limited to bimodal tautological detection. Claim ceiling downgraded: C-FRESHNESS is not viable for production deployment without a fundamentally different behavioral signal design.",
+  "estimated_cost": "~780 HTTP request cycles (40 phase-A probes + 480 phase-B paired + 240 phase-C noise-only + threshold sweep on phase-A). Runtime ~120s single-threaded. No LLM cost. Total compute cost negligible.",
+  "expected_information_gain": "HIGH — directly resolves V-THRESHOLD-TAUTOLOGY (high-severity audit finding). Either validates a calibrated operating point (strengthening C-FRESHNESS toward VALIDATED) or falsifies the behavioral signal's discrimination capacity (weakening C-FRESHNESS fundamentally). Both outcomes change the product decision. Information gain exceeds another mock orthogonality re-run (which would be the 6th independent confirmation at the same tautological threshold — zero new information)."
 }
