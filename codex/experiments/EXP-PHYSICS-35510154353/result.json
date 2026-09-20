@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35510154353",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "screening_n5000": {
+      "B-PLUGIN-KL": {
+        "k2_value_stochastic": 0.071347,
+        "k3_value_stochastic": 0.098876,
+        "k3_minus_k2": 0.027529,
+        "null_mean": 0.064291,
+        "null_std": 0.000149,
+        "abs_null_mean": 0.064291,
+        "c1_pass": true,
+        "positive_control_k3": 0.098876,
+        "positive_control_p": 0.000999,
+        "c3_pass": false,
+        "degenerate_control_k3": 0.109370,
+        "smoothing_bias": 0.109370,
+        "method": "plug-in KL (alpha=1.0 Laplace)",
+        "n_strata_z_k2": 1438,
+        "n_strata_z_k3": 841
+      },
+      "B-KSG-CMI-K10": {
+        "k2_value_stochastic": -0.003735,
+        "k3_value_stochastic": 0.000560,
+        "k3_minus_k2": 0.004295,
+        "null_mean": -0.012066,
+        "null_std": 0.000204,
+        "abs_null_mean": 0.012066,
+        "c1_pass": true,
+        "positive_control_k3": 0.000560,
+        "positive_control_p": 0.000999,
+        "c3_pass": false,
+        "degenerate_control_k3": -0.000405,
+        "method": "KSG (sklearn mutual_info_classif, k=10)",
+        "mi_joint_raw_k3": 0.034413,
+        "mi_cond_raw_k3": 0.033853
+      },
+      "B-KSG-CMI-K5": {
+        "k2_value_stochastic": -0.003735,
+        "k3_value_stochastic": 0.000560,
+        "k3_minus_k2": 0.004295,
+        "null_mean": -0.012066,
+        "null_std": 0.000204,
+        "abs_null_mean": 0.012066,
+        "c1_pass": true,
+        "positive_control_k3": 0.000560,
+        "positive_control_p": 0.000999,
+        "c3_pass": false,
+        "degenerate_control_k3": -0.000405,
+        "method": "KSG (sklearn mutual_info_classif, k=5)",
+        "mi_joint_raw_k3": 0.034413,
+        "mi_cond_raw_k3": 0.033853
+      },
+      "B-KSG-CMI-K20": {
+        "k2_value_stochastic": -0.003735,
+        "k3_value_stochastic": 0.000560,
+        "k3_minus_k2": 0.004295,
+        "null_mean": -0.012066,
+        "null_std": 0.000204,
+        "abs_null_mean": 0.012066,
+        "c1_pass": true,
+        "positive_control_k3": 0.000560,
+        "positive_control_p": 0.000999,
+        "c3_pass": false,
+        "degenerate_control_k3": -0.000405,
+        "method": "KSG (sklearn mutual_info_classif, k=20)",
+        "mi_joint_raw_k3": 0.034413,
+        "mi_cond_raw_k3": 0.033853
+      }
+    },
+    "c1_pass_count": 4,
+    "c1_pass_estimators": ["B-PLUGIN-KL", "B-KSG-CMI-K10", "B-KSG-CMI-K5", "B-KSG-CMI-K20"],
+    "c3_pass_count": 0,
+    "c3_passers_after_c1": [],
+    "primary_c1_passers": ["B-PLUGIN-KL", "B-KSG-CMI-K10"],
+    "verdict_frozen": "FALSIFIED-IN-SETTING",
+    "verdict_trigger": "C3 fails for both primary estimators passing C1: plug-in KL K3=0.099 < 0.5, KSG k=10 K3=0.000560 < 0.5",
+    "ksg_k_invariance": {
+      "finding": "KSG CMI (sklearn mutual_info_classif, discrete_features=True) produces IDENTICAL results for k=5, k=10, and k=20 on discrete data. K3=0.000560, mi_joint=0.034413, mi_cond=0.033853 for all three k values.",
+      "implication": "The KSG insensitivity is NOT specific to k=5 neighborhood resolution. sklearn's discrete-mode implementation appears to be invariant to the n_neighbors parameter on this discrete dataset, likely due to tie-handling in nearest-neighbor search for categorical features."
+    },
+    "plugin_kl_smoothing_bias": {
+      "degenerate_k3": 0.109370,
+      "stochastic_k3": 0.098876,
+      "true_cmi": 1.52,
+      "smoothing_bias_exceeds_signal": true,
+      "explanation": "With alpha=1.0 Laplace smoothing and 12 target classes, average K3 stratum size ~6 records, each (z,a) cell receives 12 pseudo-counts. Smoothing dominates ~67% of probability mass, creating positive bias of ~0.11 bits that masks the 1.52-bit true signal. Stochastic K3 (0.099) < degenerate K3 (0.109), meaning the estimator is LESS sensitive on the stochastic SPA than on the deterministic one."
+    },
+    "determinism_k2_stochastic": {
+      "deterministic": 366,
+      "stochastic": 1072,
+      "total": 1438,
+      "det_ratio": 0.2545
+    },
+    "determinism_k3_stochastic": {
+      "deterministic": 77,
+      "stochastic": 764,
+      "total": 841,
+      "det_ratio": 0.0916
+    },
+    "design_verification": {
+      "c6_pass": true,
+      "c6_evidence": "All 48 (state, action) pairs have 4 distinct candidates",
+      "c7_pass": true,
+      "c7_non_empty_buckets": 2,
+      "c7_evidence": "2 non-empty buckets: 5-9 (n=343 strata), 10-19 (n=37 strata)"
+    },
+    "stratum_size_bias_decomposition": {
+      "5-9": {
+        "n_strata": 343,
+        "total_records": 2147,
+        "observed_pmi": 0.117479,
+        "null_mean": 0.102014,
+        "null_std": 0.000457
+      },
+      "10-19": {
+        "n_strata": 37,
+        "total_records": 433,
+        "observed_pmi": 0.195294,
+        "null_mean": 0.146136,
+        "null_std": 0.002201
+      },
+      "20-49": {
+        "n_strata": 0,
+        "total_records": 0,
+        "observed_pmi": 0.0,
+        "null_mean": 0.0,
+        "null_std": 0.0
+      },
+      "50+": {
+        "n_strata": 0,
+        "total_records": 0,
+        "observed_pmi": 0.0,
+        "null_mean": 0.0,
+        "null_std": 0.0
+      }
+    },
+    "permutation_test_exploratory": {
+      "n_strata_tested": 48,
+      "n_significant_bonferroni": 48,
+      "bonferroni_alpha": 0.001042,
+      "mean_stratum_pmi": 1.595,
+      "min_stratum_pmi": 1.461,
+      "max_stratum_pmi": 1.691,
+      "interpretation": "Per-stratum PMI is strongly positive (1.46-1.69 bits) with p=0.0 for all 48 strata, confirming the true signal exists and is detectable by non-parametric stratum-level tests. The CMI estimators fail because they estimate a different quantity (joint MI minus conditional MI over the full state space) rather than per-stratum PMI."
+    }
+  },
+  "controls": {
+    "C1-NULL-CONTROL": {
+      "description": "Shuffled-action (within-session) null mean < 0.1 bits for at least 1 estimator at N=5000 on stochastic SPA",
+      "expected": ">=1 estimator with |null_mean| < 0.1",
+      "observed": "4/4 estimators pass C1: plug-in KL (|mean|=0.064), KSG k=5 (|mean|=0.012), KSG k=10 (|mean|=0.012), KSG k=20 (|mean|=0.012)",
+      "pass": true,
+      "evidence": "raw_results.json:screening.B-PLUGIN-KL.null_control.abs_null_mean=0.064291, B-KSG-CMI-K10.null_control.abs_null_mean=0.012066"
+    },
+    "C3-POSITIVE-CONTROL": {
+      "description": "For any estimator passing C1, K3 >= 0.5 bits with p <= 0.001 on stochastic SPA",
+      "expected": "K3 >= 0.5 bits for passing estimators",
+      "observed": "B-PLUGIN-KL K3=0.099 (FAIL, 5.1x below threshold), B-KSG-CMI-K10 K3=0.000560 (FAIL, 893x below threshold)",
+      "pass": false,
+      "evidence": "raw_results.json:screening.B-PLUGIN-KL.positive_control_k3=0.098876, B-KSG-CMI-K10.positive_control_k3=0.000560",
+      "note": "C3 fails for ALL estimators. Plug-in KL is limited by alpha=1.0 Laplace smoothing bias (degenerate K3=0.109 > stochastic K3=0.099). KSG is invariant to k parameter (k=5,10,20 all produce K3=0.000560). Both estimators pass C1 (null centering works) but neither detects the 1.52-bit signal."
+    },
+    "C6-DESIGN-VERIFICATION": {
+      "description": "All 48 (state,action) pairs have 4 distinct candidates",
+      "expected": "48/48 pairs with 4 distinct candidates",
+      "observed": "All 48 pairs have 4 distinct candidates",
+      "pass": true,
+      "evidence": "raw_output.txt:[VERIFY] C6: PASS (48/48 pairs with 4 distinct candidates)"
+    },
+    "C7-STRATUM-BUCKETS": {
+      "description": ">=2 non-empty size buckets in stratum decomposition",
+      "expected": ">=2 buckets",
+      "observed": "2 non-empty buckets: 5-9 (n=343), 10-19 (n=37)",
+      "pass": true,
+      "evidence": "raw_results.json:stratum_size_bias_decomposition"
+    },
+    "DEGENERATE-CONTROL-PLUGIN-KL": {
+      "description": "Plug-in KL on deterministic SPA (I(Y;A|Z)=0 by construction) should be ~0",
+      "expected": "K3 < 0.1 bits on deterministic SPA",
+      "observed": "K3=0.109370 (FAIL — smoothing bias exceeds threshold)",
+      "pass": false,
+      "evidence": "raw_results.json:screening.B-PLUGIN-KL.degenerate_control_k3=0.109370",
+      "note": "Alpha=1.0 Laplace smoothing on 12-class discrete data with ~6 records per stratum creates positive bias of ~0.11 bits, exceeding the 0.1-bit threshold for the degenerate control."
+    },
+    "DEGENERATE-CONTROL-KSG": {
+      "description": "KSG on deterministic SPA (I(Y;A|Z)=0 by construction) should be ~0",
+      "expected": "K3 < 0.1 bits on deterministic SPA",
+      "observed": "K3=-0.000405 for all k values (PASS)",
+      "pass": true,
+      "evidence": "raw_results.json:screening.B-KSG-CMI-K10.degenerate_control_k3=-0.000405"
+    },
+    "REPLICATION-B-PARENT-KSG-K5": {
+      "description": "Replicate parent KSG k=5 results on stochastic SPA to verify reproducibility",
+      "expected": "k3 within 10% of parent 0.000560",
+      "observed": "K3=0.000560 (EXACT match to parent)",
+      "pass": true,
+      "evidence": "raw_results.json:screening.B-KSG-CMI-K5.k3_value_stochastic=0.00055995904023428 vs parent 0.000560"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35510154353/raw_results.json",
+      "sha256": "5211e3ecdd14101dae65bc14626e94ef1dd73d54cbf803b2c9c5fbefea924a38",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35510154353/run_experiment.py",
+      "sha256": "47318bf7c591dd286ad2fc5033310d2d18a3e5f17d9e01396d328fe36aa548cf",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35510154353/raw_output.txt",
+      "sha256": "943c1b51e0a6c03f945b46e9815f267bdd4264e84affaf54663d08579c9fa892",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Plug-in KL estimator (alpha=1.0 Laplace) achieves K3=0.099 bits on stochastic SPA where true I(Y;A|Z)=1.52 bits. C1 passes (|null_mean|=0.064 < 0.1) but C3 fails (0.099 < 0.5). Critically, the degenerate control on deterministic SPA gives K3=0.109 > 0.099, meaning the smoothing bias exceeds the true signal — the estimator is LESS sensitive on the stochastic SPA than on the degenerate baseline.",
+    "KSG CMI produces IDENTICAL results for k=5, k=10, and k=20 on this discrete dataset: K3=0.000560, mi_joint=0.034413, mi_cond=0.033853 for all three. This confirms the KSG insensitivity is NOT specific to k=5 neighborhood resolution — sklearn's mutual_info_classif with discrete_features=True is invariant to the n_neighbors parameter on this data, likely due to tie-handling in categorical nearest-neighbor search.",
+    "All 4 estimators pass C1 (null centering works) with within-session shuffle. Plug-in KL |null_mean|=0.064, KSG |null_mean|=0.012 for all k values. The null framework is sound.",
+    "Per-stratum permutation test (exploratory) shows 48/48 strata with significant PMI (p=0.0 after Bonferroni correction). Individual stratum PMI ranges from 1.46 to 1.69 bits, consistent with the audit-confirmed true CMI of ~1.52 bits. The signal is clearly present and detectable by stratum-level tests — the CMI estimators fail because they estimate a different statistical quantity.",
+    "Stratum size decomposition: 2 non-empty buckets (5-9: 343 strata, 10-19: 37 strata). No 20-49 or 50+ strata. The stochastic SPA produces many small strata due to the high-dimensional (state, history_action_K) conditioning.",
+    "KSG k=5 replication exactly matches parent: K3=0.000560 (parent: 0.000560). The result is reproducible."
+  ],
+  "validity_notes": [
+    "The frozen alpha=1.0 Laplace smoothing in the plug-in KL estimator creates a positive bias that exceeds the true CMI signal. With 12 target classes and average stratum size ~6, each (z,a) cell receives 12 pseudo-counts from smoothing, dominating the empirical counts. The degenerate control (K3=0.109 on deterministic SPA) quantifies this bias, which exceeds the stochastic SPA measurement (K3=0.099), making the estimator LESS sensitive on the positive control than on the degenerate baseline.",
+    "sklearn.feature_selection.mutual_info_classif with discrete_features=True appears to ignore the n_neighbors parameter for purely discrete data. K3 values for k=5, k=10, and k=20 are identical to 6 decimal places (0.000560). This is likely because the nearest-neighbor search for discrete data uses exact matching rather than distance-based neighborhoods, making k irrelevant when many samples tie on all features.",
+    "The per-stratum PMI (1.46-1.69 bits) detected by the exploratory permutation test is consistent with the parent audit's theoretical CMI of ~1.52 bits. This confirms the signal exists and is strong, but the frozen CMI estimators (KSG, plug-in KL with alpha=1.0) cannot detect it due to estimator-specific limitations.",
+    "Within-session shuffle (correcting parent's global shuffle deviation) was implemented. The C1 margin is 1.6-8x below threshold for plug-in KL and 8x for KSG, so the correction does not change C1 pass/fail.",
+    "All data is synthetic in-memory SPA simulation with N=5000 transitions (50 sessions x 100 steps, seed=42). No browser, network, or production SPA data.",
+    "The stratum size decomposition shows only 2 non-empty buckets (5-9, 10-19), with no 20-49 or 50+ strata. The high-dimensional conditioning (state, history_action_K=3) creates many small strata."
+  ],
+  "unresolved": [
+    "Whether a smaller Laplace alpha (e.g., 0.1 or 0.01) would allow the plug-in KL estimator to detect the 1.52-bit signal. The frozen spec mandates alpha=1.0, which creates excessive smoothing bias.",
+    "Whether sklearn's mutual_info_classif with continuous_features (instead of discrete_features=True) would make the KSG k parameter effective on this discrete dataset. The current implementation appears to use categorical matching rather than distance-based neighborhoods.",
+    "Whether a non-smoothed plug-in estimator (maximum likelihood, no Laplace) would recover the true CMI. MLE would be noisy but unbiased for large strata.",
+    "Whether the CMI estimation failure is fundamental to discrete state spaces with high-dimensional conditioning, or specific to the estimator implementations tested.",
+    "Whether the per-stratum PMI signal (1.46-1.69 bits, all p=0.0) can be used as an alternative detection paradigm for beyond-Markov dynamics, bypassing CMI estimation entirely.",
+    "The generalization of these findings beyond 12-state discrete SPA to production Web transitions with continuous state representations."
+  ]
+}
