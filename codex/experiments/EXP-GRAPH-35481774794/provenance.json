@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35481774794",
+  "lane": "graph",
+  "github_run_id": "35481774794",
+  "base_sha": "b33b5b790d82a016af6a4a8ebe567fbd9c36715a",
+  "code_files": {
+    "testbed_server.py": "e8455421a8c63207a89260a10c498b16817e87c5636ad6e23494a0c647f9eb2e",
+    "flask_only_server.py": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "run_experiment.py": "77c0e2b6109522a1e0cd507daff791b1268f8b2173d1c9632dbd50df50e41da8"
+  },
+  "raw_evidence": {
+    "path": "raw_evidence/experiment_data.json",
+    "sha256": "25a1a36ef0d7c92583443a643fca46af8e46c31d9788f5e0767c6d9cffe63c07"
+  },
+  "parent_experiment": "EXP-GRAPH-35476270792",
+  "corrections_from_parent": [
+    "V3 FIX: Endpoint-stratified pooling for C3/C4/C5 (removes endpoint-heterogeneity bias from 304-exclusion skewed composition)",
+    "V_ETAG_PERMISSION_LEAKAGE FIX: permission_level derived from JWT payload before validation (write-permission expired get write-etag)",
+    "POWER FIX: n >= 800 non-304 samples (34 per condition per endpoint)",
+    "V3 FIX: 304 exclusion applied to ALL correlations (pooled, per-endpoint, per-cache)"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "scipy_version": "1.18.1",
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2"
+  }
+}
