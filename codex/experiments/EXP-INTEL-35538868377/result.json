@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35538868377",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "modelA_median_phi": {
+      "model": "agreement ~ Phi(median(|M_i|) / std(M_i)), M_i = mu_listing_i - mu_detail_i per iteration, median(|M_i|) sign-invariant magnitude, std(M_i) across-iteration, primary definition tag_entropy x DEF-FULL-MAP, canonical recipe",
+      "per_n": {
+        "5": {
+          "median_abs": 0.0,
+          "margin_std": 4.973987554828668e-05,
+          "snr_median": 0.0,
+          "predicted_agreement": 0.5,
+          "observed_agreement": 0.0,
+          "residual": 0.5,
+          "abs_residual_pp": 50.0,
+          "pass_10pp": false
+        },
+        "10": {
+          "median_abs": 7.116509029638507e-05,
+          "margin_std": 0.00010562741091040149,
+          "snr_median": 0.6737369559947929,
+          "predicted_agreement": 0.7497607189187954,
+          "observed_agreement": 0.0,
+          "residual": 0.7497607189187954,
+          "abs_residual_pp": 74.97607189187954,
+          "pass_10pp": false
+        },
+        "15": {
+          "median_abs": 0.00016606350353103776,
+          "margin_std": 0.00016323690949982518,
+          "snr_median": 1.01731590018381,
+          "predicted_agreement": 0.8454984124889241,
+          "observed_agreement": 0.4996,
+          "residual": 0.3458984124889241,
+          "abs_residual_pp": 34.58984124889241,
+          "pass_10pp": false
+        },
+        "20": {
+          "median_abs": 0.0004300680676544667,
+          "margin_std": 0.0006230898917109818,
+          "snr_median": 0.6902183350680199,
+          "predicted_agreement": 0.7549715526114175,
+          "observed_agreement": 0.5654,
+          "residual": 0.18957155261141745,
+          "abs_residual_pp": 18.957155261141743,
+          "pass_10pp": false
+        }
+      },
+      "C1_modelA_valid": false,
+      "C1_n15_pass": false,
+      "C1_n20_pass": false,
+      "note": "Falsifier F1: predicted agreement at n=15 residual 34.59pp >10pp, at n=20 residual 18.96pp >10pp. Both fail."
+    },
+    "modelB_sign_fraction_powerlaw": {
+      "model": "proportion(margin_i>0) = a * n^b / (1 + a * n^b), fitted on n=5,10,15,20 via scipy.optimize.curve_fit, primary definition tag_entropy x DEF-FULL-MAP, canonical recipe",
+      "fit_params": {
+        "a": 2.289059126799864e-05,
+        "b": 3.7580412833479446,
+        "perr_a": 0.00011640964568286301,
+        "perr_b": 1.8105485815295073
+      },
+      "training_data": {
+        "ns": [
+          5,
+          10,
+          15,
+          20
+        ],
+        "observed_proportion": [
+          0.0,
+          0.0,
+          0.4996,
+          0.5654
+        ],
+        "fitted_proportion": [
+          0.009599004845303702,
+          0.11592743046577687,
+          0.37570467437650606,
+          0.6395245060326379
+        ],
+        "residuals": [
+          -0.009599004845303702,
+          -0.11592743046577687,
+          0.12389532562349392,
+          -0.07412450603263787
+        ],
+        "abs_residual_pp": [
+          0.9599004845303701,
+          11.592743046577688,
+          12.389532562349393,
+          7.412450603263787
+        ]
+      },
+      "R2": 0.8796875423490754,
+      "R2_threshold": 0.9,
+      "C2_pass": false,
+      "C1_modelB_valid_10pp": false,
+      "C1_modelB_valid_2pp": false,
+      "fitted_vs_observed": {
+        "n15": {
+          "observed": 0.4996,
+          "fitted": 0.37570467437650606,
+          "residual": 0.12389532562349392,
+          "abs_residual_pp": 12.389532562349393,
+          "pass_10pp": false,
+          "pass_2pp": false
+        },
+        "n20": {
+          "observed": 0.5654,
+          "fitted": 0.6395245060326379,
+          "residual": -0.07412450603263787,
+          "abs_residual_pp": 7.412450603263787,
+          "pass_10pp": true,
+          "pass_2pp": false
+        }
+      },
+      "extrapolation": {
+        "n50_pred": 0.9823074267886316,
+        "n82_pred": 0.9972014412986306,
+        "pi90_n50": [
+          0.9806489614083199,
+          0.9837579442976808
+        ],
+        "pi90_n82": [
+          0.9968359861559447,
+          0.9975102953026626
+        ],
+        "bootstrap_median_n50": 0.9823112920841779,
+        "bootstrap_median_n82": 0.9972001443764333,
+        "n_boot": 2000,
+        "seed": 999,
+        "C3_below_80": false
+      },
+      "note": "Falsifiers F2 and F4: ModelB residual at n15=12.39pp >2pp (>10pp), at n20=7.41pp >2pp; R2=0.8797 <0.90. Extrapolation n50=0.982 >0.80 (F3 would trigger if C1 had passed)."
+    },
+    "decision_rule_evaluation": {
+      "C1_EITHER_MODEL_VALID": false,
+      "C2_SIGN_FRACTION_FIT_QUALITY": false,
+      "C3_SIGN_FRACTION_EXTRAPOLATION_BELOW_80": false,
+      "verdict": "MEASUREMENT_INVALID",
+      "reason": "C1 FAIL: ModelA fails at both n15 (34.59pp) and n20 (18.96pp) >10pp; ModelB fails at n15 (12.39pp) and at n20 per 2pp threshold (7.41pp) and also >10pp at n15. R2 0.8797 <0.90. Extrapolation gated behind failed C1/C2. Neither decomposition captures the instability mechanism."
+    },
+    "positive_control_diagnostic": {
+      "prop_margin_positive_n15": 0.4996,
+      "prop_margin_positive_n20": 0.5654,
+      "observed_agreement_n15": 0.4996,
+      "observed_agreement_n20": 0.5654,
+      "residual_n15_pp": 0.0,
+      "residual_n20_pp": 0.0,
+      "threshold_pp": 1.0,
+      "pass": true
+    },
+    "null_control": {
+      "model": "3 listing + 3 detail densities ~ N(0,1); agreement = P(mean_l > mean_d)",
+      "n_simulations": 500000,
+      "predicted_agreement": 0.499208,
+      "expected": "50% +/- 5%",
+      "pass_random": true,
+      "best_model_error_n15": 0.12389532562349392,
+      "best_model_error_n20": 0.07412450603263787,
+      "null_error_n15": 0.000392,
+      "null_error_n20": 0.066192,
+      "best_model_beats_null_n15": false,
+      "best_model_beats_null_n20": false
+    },
+    "baseline_comparison": {
+      "B1_parent_failed_SNR_n15_residual": 0.5002,
+      "B2_parent_failed_SNR_n20_residual": 0.4405,
+      "B3_corrected_failed_n20_residual": 0.17842104112653612,
+      "B4_diagnostic_residual_n15_pp": 0.02,
+      "B4_diagnostic_residual_n20_pp": 0.59,
+      "B5_null": 0.499208,
+      "B6_parent_extrapolation_n50": 1.0,
+      "modelA_residual_n15_pp": 34.58984124889241,
+      "modelA_residual_n20_pp": 18.957155261141747,
+      "modelB_residual_n15_pp": 12.389532562349393,
+      "modelB_residual_n20_pp": 7.412450603263787
+    },
+    "frozen_inputs_hashes": {
+      "snr_per_iteration_tag_entropy.json.gz": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "analysis_output_snr.json": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "exp347_raw_results.json": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050"
+    }
+  },
+  "controls": {
+    "PC1_SIGN_FRACTION_REPRODUCES_OBSERVED": {
+      "expected": "proportion(margin_i>0) at n=15 within 1pp of 49.96% (48.96%-50.96%); at n=20 within 1pp of 56.54% (55.54%-57.54%).",
+      "observed": "proportion(margin_i>0) at n=15 = 0.4996 (residual 0.00pp, PASS); at n=20 = 0.5654 (residual 0.00pp, PASS).",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json"
+      ]
+    },
+    "NC1_RANDOM_NOISE_BASELINE": {
+      "expected": "Random noise model agreement ~50% +/-5% at all n. Best validated model prediction error at n=20 must be < null model prediction error (0.0662).",
+      "observed": "Random noise model 0.499208 (PASS, within 50% +/-5%). Best model (ModelB) error at n20 = 0.0741 > null error 0.0662 (FAIL); ModelA error 0.1896 > null error (FAIL). No validated model beats null.",
+      "pass": false,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json -> null_control"
+      ]
+    },
+    "B1_PARENT_FAILED_SNR_N15": {
+      "expected": "Parent frozen SNR model predicted 0.9999999999999991 at n=15 vs observed 0.4998 (residual 0.5002). Corrected models must do better.",
+      "observed": "ModelA residual 0.3459 (1.4x better than parent but still FAIL C1); ModelB residual 0.1239 (4.0x better than parent).",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json -> snr_model"
+      ]
+    },
+    "B2_PARENT_FAILED_SNR_N20": {
+      "expected": "Parent frozen SNR model predicted 1.0 at n=20 vs observed 0.5595 (residual 0.4405).",
+      "observed": "ModelA residual 0.1896 (2.3x better than parent); ModelB residual 0.0741 (5.9x better than parent). Both improve but fail C1.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json -> snr_model"
+      ]
+    },
+    "B3_CORRECTED_FAILED_N20": {
+      "expected": "Previous corrected Phi(mean/std) predicted 0.7379 at n=20 vs observed 0.5595 (residual 17.8pp, C1 FAIL). New models must beat this.",
+      "observed": "ModelA 0.7550 (residual 18.96pp, WORSE than corrected mean/std by 1.15pp); ModelB fitted 0.6395 (residual 7.41pp, 2.4x better than corrected mean/std). ModelB beats B3, ModelA does not.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json -> metrics.corrected_snr_model"
+      ]
+    },
+    "B4_DIAGNOSTIC_INDICATOR": {
+      "expected": "Direct indicator proportion(margin_i>0) matches observed at 0.4996 (n15 residual 0.02pp) and 0.5654 (n20 residual 0.59pp). Benchmark for accuracy.",
+      "observed": "Reproduced: proportion(margin_i>0) = 0.4996 at n15 (residual 0.00pp) and 0.5654 at n20 (residual 0.00pp). Diagnostic remains near-exact under template invariance.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json -> metrics.diagnostic_indicator_statistic"
+      ]
+    },
+    "B5_NULL_NOISE_BASELINE": {
+      "expected": "Random noise model (densities ~ N(0,1)) predicts agreement ~50% at all n. Models must outperform this null.",
+      "observed": "Null 0.499208 verified (500k sims). ModelA errors 0.3459/0.1896 exceed null errors at both n; ModelB errors 0.1239/0.0741 exceed null at both n (n20 narrowly).",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json -> null_control"
+      ]
+    },
+    "B6_PARENT_EXTRAPOLATION_N50": {
+      "expected": "Parent (failed) model extrapolated agreement 1.0 at n=50 (PI90 lo 0.845). Corrected model extrapolation predicted 0.575 (gated). New validated model extrapolation is the critical measurement.",
+      "observed": "ModelB extrapolates 0.982 at n50 (PI90 [0.981,0.984]) and 0.997 at n82, exceeding 80% threshold. But gated behind failed C1/C2, so not decision-grade. ModelA not extrapolated (Phi form would give ~0.75 at n20, no n50 fit).",
+      "pass": "not_gated",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json -> extrapolation",
+        "research/experiments/EXP-INTEL-35530590171/result.json -> metrics.extrapolation_n50"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35538868377/derived_analysis.json",
+      "sha256": "934dc085afe13ef45e1537c9854fe01044bcaa5c1f23eb509e7b406b90808966",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/exp_35538868377_analysis.py",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "ModelA Phi(median(|M|)/std) predicts agreement 0.5000 at n=5 (residual 50.00pp vs observed 0.0), 0.7498 at n10 (residual 74.98pp), 0.8455 at n15 (residual 34.59pp, C1 FAIL), 0.7550 at n20 (residual 18.96pp, C1 FAIL). Both n15 and n20 exceed 10pp threshold by 24.59pp and 8.96pp respectively.",
+    "ModelA uses median(|M|) 0.000166 at n15 and 0.000430 at n20 with margin_std 0.000163 and 0.000623, giving SNR 1.017 and 0.690, Phi 0.8455 and 0.7550. The median magnitude is larger than |mean| but still over-predicts due to template-invariance structure.",
+    "ModelB saturating power law a=2.289e-05, b=3.758 fits proportion(margin>0) on n=5/10/15/20: fitted 0.0096 at n5 (residual -0.96pp), 0.1159 at n10 (residual -11.59pp), 0.3757 at n15 (residual +12.39pp), 0.6395 at n20 (residual -7.41pp). R2=0.8797 <0.90 threshold.",
+    "ModelB fails C1 at both strict (2pp) and loose (10pp) thresholds: n15 residual 12.39pp >10pp, n20 residual 7.41pp >2pp (but <10pp). The 4-point fit cannot capture the step-function-like data (0,0,0.50,0.57) with a smooth saturating power law.",
+    "ModelB extrapolation predicts proportion 0.982 at n50 (PI90 [0.981,0.984], B=2000 bootstrap per-iteration) and 0.997 at n82, exceeding 80% threshold. Extrapolation gated behind failed C1/C2 per frozen rule.",
+    "Positive control PC1 passes: direct proportion(margin>0) = 0.4996 at n15 and 0.5654 at n20 reproduces observed ranking agreement exactly (0.00pp residual) within 1pp threshold, reconfirming diagnostic from parent.",
+    "Null control NC1: random noise model 0.499208 within 50% +/-5% (PASS). Best model error at n20 (ModelB 0.0741, ModelA 0.1896) exceeds null error 0.0662; no model beats null.",
+    "Baselines: ModelB improves 4.0x over parent SNR at n15 and 5.9x at n20; ModelA improves 1.4x/2.3x. ModelB beats corrected Phi(mean/std) at n20 (7.41pp vs 17.8pp) but ModelA is worse (18.96pp vs 17.8pp).",
+    "Template invariance confirmed: per-iteration agree field equals indicator(margin>0) exactly, so ranking agreement == proportion(margin>0) to machine precision at all n.",
+    "All computations used validated input hashes: snr_per_iteration ce3dda6e..., analysis_output f7f69867..., exp347_raw da30bd05..., no new data collection, offline <30s compute."
+  ],
+  "validity_notes": [
+    "Measurement transaction completed validly on existing reconstructed data; status=MEASUREMENT_INVALID reflects frozen decision-rule verdict (NOT C1), not infrastructure failure.",
+    "ModelA fails because Phi(median(|M|)/std) inherits the same conflation problem as Phi(mean/std) but in a different form: median(|M|) is sign-invariant but still couples magnitude with std which grows faster than typical magnitude. At n15 median/std SNR=1.017 gives Phi 0.845 vs 0.50 observed; at n20 SNR=0.690 gives 0.755 vs 0.565 observed.",
+    "ModelB fails because the training data is degenerate: proportion is exactly 0.0 at n=5 and n=10 (all margins negative due to small-n structure) and jumps to ~0.50 at n=15. A smooth a*n^b/(1+a*n^b) cannot fit this step with 4 points; best fit leaves 12.39pp error at n15 and R2=0.8797 below 0.90 threshold. This is a model-misspecification, not a sampling artifact.",
+    "Template invariance makes the diagnostic proportion(margin>0) near-exact but also makes model-based extrapolation questionable: under template invariance, sign fraction is deterministic given margins, but margins distribution itself may change at full DOM if template invariance breaks.",
+    "Extrapolation to n50=0.982 is gated behind failed C1/C2 and must not be used for product decisions. Its narrow PI90 [0.981,0.984] reflects bootstrap stability of the saturating fit, not epistemic validity of the extrapolation.",
+    "Small training set (4 points, n=5/10/15/20) with sign crossing between n10 and n15 limits power-law reliability. Fitting a*n^b/(1+a*n^b) with 2 parameters on 4 points leaves only 2 degrees of freedom; R2 threshold 0.90 is stringent for this step-like data.",
+    "PYTHONHASHSEED=0 set; reproduced canonical agreement exactly (0.4996 at n15, 0.5654 at n20) within parent baseline_reproduction. No hash-seed variation affected verdict (margins >10pp threshold).",
+    "Cart n=1 degeneracy excluded per parent protocol; listing vs detail margins used throughout; tag_entropy x DEF-FULL-MAP canonical recipe is primary definition.",
+    "Product consequence: per frozen rule, NOT C1 -> MEASUREMENT_INVALID. No validated model-based extrapolation exists; Docker re-collection (EXP-INTEL-35462974425) remains the only path to answer full-DOM stability at n=21-82."
+  ],
+  "unresolved": [
+    "Correct noise decomposition for validated SNR model remains UNKNOWN: both Phi(median(|M|)/std) and saturating sign-fraction power law are REJECTED at C1. Candidates outside frozen design: empirical CDF mapping, between-type vs within-type variance decomposition, or non-parametric margin distribution model.",
+    "Full-DOM ranking stability at n=21-82 remains UNKNOWN: neither model provides validated extrapolation; direct measurement via Docker image am1n3e/webarena-verified-shopping:latest is BLOCKING.",
+    "Whether sign-fraction saturating form could succeed with alternative parameterization (e.g., logistic in log(n), Hill function with offset, or 3-parameter Richards) is UNKNOWN but outside frozen 2-parameter spec.",
+    "Per-task recipe full-DOM stability remains UNKNOWN (78.65% at n20, tantalizingly close to 80% but untested at n>20).",
+    "Cross-site generalization beyond single Magento Docker site remains UNKNOWN.",
+    "Whether template invariance breaks at full DOM changing variance structure remains UNKNOWN."
+  ]
+}

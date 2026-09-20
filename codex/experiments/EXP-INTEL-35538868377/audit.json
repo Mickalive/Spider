@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35538868377",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [],
+  "validity_findings": [
+    "VF1_MODEL_A_CORRECTLY_COMPUTED_AND_REJECTED: Model A (Phi(median(|M|)/std)) computed per frozen spec using per-iteration margins from validated snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e...). At n=15: median_abs=0.000166, std=0.000163, SNR=1.017, Phi=0.8455 vs observed 0.4996 (residual 34.59pp >10pp FAIL). At n=20: median_abs=0.000430, std=0.000623, SNR=0.690, Phi=0.7550 vs observed 0.5654 (residual 18.96pp >10pp FAIL). Both n=15 and n=20 exceed 10pp threshold. Model A FAILS C1. Recomputed values match producer derived_analysis.json and result.json exactly.",
+    "VF2_MODEL_B_CORRECTLY_FITTED_AND_REJECTED: Model B (saturating power law a*n^b/(1+a*n^b)) fitted via scipy.optimize.curve_fit on n=5/10/15/20 with observed proportions [0.0, 0.0, 0.4996, 0.5654]. Fit params: a=2.289e-05 (perr 1.16e-04), b=3.758 (perr 1.81). Fitted proportions: [0.0096, 0.1159, 0.3757, 0.6395]. Residuals at n=15: +12.39pp (>2pp and >10pp FAIL); at n=20: -7.41pp (>2pp FAIL, <10pp PASS at loose threshold). R²=0.8797 < 0.90 threshold (FAIL). Model B FAILS C1 (at both strict 2pp and loose 10pp) and C2. Recomputed values match producer exactly.",
+    "VF3_DECISION_RULE_CORRECTLY_APPLIED: Frozen conjunctive rule evaluated correctly: C1_EITHER_MODEL_VALID=FALSE (both models fail at n=15; ModelA fails at n=20; ModelB fails at n=15 per 2pp and 10pp, passes at n=20 only at 10pp but C1 requires BOTH n). C2_SIGN_FRACTION_FIT_QUALITY=FALSE (R²=0.8797<0.90). C3_SIGN_FRACTION_EXTRAPOLATION_BELOW_80=FALSE (n50=0.982>0.80) but gated behind failed C1/C2 per frozen rule. Verdict=MEASUREMENT_INVALID (NOT C1). Matches producer result.json status and decision_rule_evaluation.",
+    "VF4_POSITIVE_CONTROL_PASSES_AS_EXPECTED_UNDER_TEMPLATE_INVARIANCE: PC1_SIGN_FRACTION_REPRODUCES_OBSERVED passes: proportion(margin_i>0) computed directly from per-iteration margins equals 0.4996 at n=15 and 0.5654 at n=20, matching observed ranking agreement exactly (0.00pp residual). This is expected under template invariance (ranking agreement == proportion(margin>0) exactly) and confirms the diagnostic from parent experiment. Not a model validation, but a structural property of the data.",
+    "VF5_NULL_CONTROL_CORRECTLY_EVALUATED: NC1_RANDOM_NOISE_BASELINE passes (random noise model 0.499208 within 50%+/-5%). Best model error at n=20: ModelB 0.0741, ModelA 0.1896. Null model error at n=20: |0.499208 - 0.5654| = 0.0662. Neither ModelA nor ModelB beats null at n=20 (0.0741 > 0.0662; 0.1896 > 0.0662). Producer correctly reports null_control.pass=false. This is a critical finding: neither corrected model adds predictive value beyond chance for the small effect size (56.5% vs 50%).",
+    "VF6_BASELINES_COMPARED_CORRECTLY: B1/B2 (parent SNR): ModelA improves 1.4x/2.3x, ModelB improves 4.0x/5.9x over parent residuals. B3 (corrected Phi(mean/std) 17.8pp at n=20): ModelA 18.96pp (worse), ModelB 7.41pp (2.4x better). B4 (diagnostic indicator 0.02/0.59pp): diagnostic remains superior. B5 (null 0.499208): verified. B6 (parent extrapolation 1.0 at n=50): ModelB extrapolates 0.982 but gated. All baseline comparisons in producer result.json match recomputed values.",
+    "VF7_EXTRAPOLATION_GATED_AND_NOT_DECISION_GRADE: ModelB extrapolation to n=50 (0.982, PI90 [0.9806,0.9838]) and n=82 (0.997, PI90 [0.9968,0.9975]) is correctly marked as gated behind failed C1/C2. The narrow bootstrap PI90 reflects per-iteration resampling stability of the saturating fit, not epistemic validity of extrapolation from misspecified model on step-like data. Producer correctly does not use this for product decisions.",
+    "VF8_TEMPLATE_INVARIANCE_CONFIRMED_BUT_LIMITS_EXTRAPOLATION: Per-iteration 'agree' field equals indicator(margin>0) exactly at all n (verified in derived_analysis.json props_direct == observed). Under template invariance, ranking agreement == proportion(margin>0) is a mathematical identity. Model B's near-exact fit at n=15/20 would be expected IF the saturating form captured the true n→sign-fraction mapping. The failure (12.39pp at n=15) reveals the smooth saturating power law cannot capture the step-function data (0,0,0.50,0.57). This is model misspecification, not sampling noise.",
+    "VF9_SMALL_TRAINING_SET_AND_DEGENERACY_LIMIT_RELIABILITY: 4-point training set (n=5,10,15,20) with exact zeros at n=5,10 and jump at n=15 creates ill-conditioned fit. 2 parameters on 4 points leaves 2 df; R²=0.8797 is expected for step-like data. Curve_fit parameter errors are large (perr_a > a_fit; perr_b ~ 0.5*b_fit). Any extrapolation from this fit is highly uncertain regardless of bootstrap CI width.",
+    "VF10_MEASUREMENT_TRANSACTION_VALID: All computations use frozen inputs with verified hashes. No new data collection. Offline compute <30s. PYTHONHASHSEED=0 reproduces canonical agreement exactly (0.4996 n=15, 0.5654 n=20). Status=MEASUREMENT_INVALID in result.json reflects frozen decision-rule verdict (NOT C1), not infrastructure failure. The packet is internally consistent and reproducible."
+  ],
+  "baseline_findings": [
+    "BF1_PARENT_SNR_REJECTED: Parent frozen SNR model (Phi(mean(SNR_i)) with within-iteration SE) residuals 50.02pp (n=15) and 44.05pp (n=20) remain rejected baselines. Corrected models improve directionally but fail C1 gate.",
+    "BF2_CORRECTED_MEAN_STD_REJECTED_AT_C1: Previous corrected Phi(mean/std) model (EXP-INTEL-35530590171) residual 17.8pp at n=20 (C1 FAIL). ModelB fitted 7.41pp at n=20 beats this baseline; ModelA 18.96pp does not. However ModelB still fails C1 at n=15 (12.39pp).",
+    "BF3_DIAGNOSTIC_INDICATOR_REMAINS_BENCHMARK: proportion(margin_i>0) matches observed at 0.00pp/0.00pp (n=15/20). This exact match under template invariance is the upper bound any model can achieve on this truncated subsample. Neither ModelA nor ModelB approaches this accuracy.",
+    "BF4_NULL_BASELINE_DOMINATES_AT_N20: Random noise model error 0.0662 at n=20 is smaller than ModelB error 0.0741 and ModelA error 0.1896. Neither corrected model beats the null. This underscores the small signal (56.5% vs 50%) and the difficulty of validated modeling at current sample sizes.",
+    "BF5_PER_TASK_RECIPE_UNTESTED_AT_FULL_DOM: Per-task recipe achieves 78.65% at n=20 (from parent chain) but remains unvalidated at n>20. This is outside the frozen experiment scope but relevant to product consequence."
+  ],
+  "recomputed_metrics": {
+    "modelA_median_phi": {
+      "per_n": {
+        "5": {"median_abs": 0.0, "margin_std": 4.973987554828668e-05, "snr_median": 0.0, "predicted_agreement": 0.5, "observed_agreement": 0.0, "residual": 0.5, "abs_residual_pp": 50.0, "pass_10pp": false},
+        "10": {"median_abs": 7.116509029638507e-05, "margin_std": 0.00010562741091040149, "snr_median": 0.6737369559947929, "predicted_agreement": 0.7497607189187954, "observed_agreement": 0.0, "residual": 0.7497607189187954, "abs_residual_pp": 74.97607189187954, "pass_10pp": false},
+        "15": {"median_abs": 0.00016606350353103776, "margin_std": 0.00016323690949982518, "snr_median": 1.01731590018381, "predicted_agreement": 0.8454984124889241, "observed_agreement": 0.4996, "residual": 0.3458984124889241, "abs_residual_pp": 34.58984124889241, "pass_10pp": false},
+        "20": {"median_abs": 0.0004300680676544667, "margin_std": 0.0006230898917109818, "snr_median": 0.6902183350680199, "predicted_agreement": 0.7549715526114175, "observed_agreement": 0.5654, "residual": 0.18957155261141745, "abs_residual_pp": 18.957155261141743, "pass_10pp": false}
+      },
+      "C1_modelA_valid": false,
+      "C1_n15_pass": false,
+      "C1_n20_pass": false
+    },
+    "modelB_sign_fraction_powerlaw": {
+      "fit_params": {"a": 2.289059126799864e-05, "b": 3.7580412833479446, "perr_a": 0.00011640964568286301, "perr_b": 1.8105485815295073},
+      "training_data": {"ns": [5, 10, 15, 20], "observed_proportion": [0.0, 0.0, 0.4996, 0.5654], "fitted_proportion": [0.009599004845303702, 0.11592743046577687, 0.37570467437650606, 0.6395245060326379], "residuals": [-0.009599004845303702, -0.11592743046577687, 0.12389532562349392, -0.07412450603263787], "abs_residual_pp": [0.9599004845303701, 11.592743046577688, 12.389532562349393, 7.412450603263787]},
+      "R2": 0.8796875423490754,
+      "R2_threshold": 0.9,
+      "C2_pass": false,
+      "C1_modelB_valid_10pp": false,
+      "C1_modelB_valid_2pp": false,
+      "fitted_vs_observed": {"n15": {"observed": 0.4996, "fitted": 0.37570467437650606, "residual": 0.12389532562349392, "abs_residual_pp": 12.389532562349393, "pass_10pp": false, "pass_2pp": false}, "n20": {"observed": 0.5654, "fitted": 0.6395245060326379, "residual": -0.07412450603263787, "abs_residual_pp": 7.412450603263787, "pass_10pp": true, "pass_2pp": false}},
+      "extrapolation": {"n50_pred": 0.9823074267886316, "n82_pred": 0.9972014412986306, "pi90_n50": [0.9806489614083199, 0.9837579442976808], "pi90_n82": [0.9968359861559447, 0.9975102953026626], "bootstrap_median_n50": 0.9823112920841779, "bootstrap_median_n82": 0.9972001443764333, "n_boot": 2000, "seed": 999, "C3_below_80": false}
+    },
+    "decision_rule_evaluation": {
+      "C1_EITHER_MODEL_VALID": false,
+      "C2_SIGN_FRACTION_FIT_QUALITY": false,
+      "C3_SIGN_FRACTION_EXTRAPOLATION_BELOW_80": false,
+      "verdict": "MEASUREMENT_INVALID",
+      "reason": "C1 FAIL: ModelA fails at both n15 (34.59pp) and n20 (18.96pp) >10pp; ModelB fails at n15 (12.39pp) at both 2pp and 10pp thresholds. R2 0.8797 <0.90. Extrapolation gated behind failed C1/C2. Neither decomposition captures the instability mechanism within the validation gate."
+    },
+    "positive_control_diagnostic": {"prop_margin_positive_n15": 0.4996, "prop_margin_positive_n20": 0.5654, "observed_agreement_n15": 0.4996, "observed_agreement_n20": 0.5654, "residual_n15_pp": 0.0, "residual_n20_pp": 0.0, "threshold_pp": 1.0, "pass": true},
+    "null_control": {"model": "3 listing + 3 detail densities ~ N(0,1); agreement = P(mean_l > mean_d)", "n_simulations": 500000, "predicted_agreement": 0.499208, "expected": "50% +/- 5%", "pass_random": true, "best_model_error_n15": 0.12389532562349392, "best_model_error_n20": 0.07412450603263787, "null_error_n15": 0.000392, "null_error_n20": 0.066192, "best_model_beats_null_n15": false, "best_model_beats_null_n20": false}
+  },
+  "claim_ceiling": "Both proposed corrected noise decompositions (Model A: Phi(median(|M|)/std); Model B: sign-fraction saturating power law) are REJECTED at the C1 validation gate (|predicted-observed| <= 10pp at n=15 AND n=20). ModelA fails by 24.59pp and 8.96pp over threshold at n=15/20 respectively; ModelB fails by 2.39pp over 10pp threshold at n=15 and fails R²>=0.90 (achieved 0.8797). No model-based extrapolation to full DOM (n=50/82) is justified. The diagnostic proportion(margin_i>0) matches observed exactly (0.00pp) under template invariance but this is a structural identity on the truncated-first-20 subsample, not a validated predictive model. Neither corrected model beats the random noise null at n=20. Full-DOM ranking stability at n=21-82 remains UNKNOWN. Docker re-collection (EXP-INTEL-35462974425) remains the only path to a direct empirical answer. The correct noise decomposition for a validated SNR model remains UNKNOWN (candidates outside frozen design: empirical CDF mapping, between/within-type variance decomposition, non-parametric margin distribution model).",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35538868377/result.json",
+    "research/experiments/EXP-INTEL-35538868377/report.md",
+    "research/experiments/EXP-INTEL-35538868377/provenance.json",
+    "research/experiments/EXP-INTEL-35538868377/derived_analysis.json",
+    "research/intel/exp_35538868377_analysis.py",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256: ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a)",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json (sha256: f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2)",
+    "research/experiments/EXP-INTEL-35530590171/handoff.json (sha256: 252702537489bc90a720725382a8387c37652e995ba46b8e0e9eabe638701af1)",
+    "research/experiments/EXP-INTEL-35530590171/result.json",
+    "research/experiments/EXP-INTEL-35530590171/audit.json"
+  ],
+  "unresolved": [
+    "Correct noise decomposition for validated SNR model remains UNKNOWN: both Phi(median(|M|)/std) and saturating sign-fraction power law are REJECTED at C1. Candidates outside frozen design: empirical CDF mapping of margin distribution, between-type vs within-type variance decomposition, non-parametric margin distribution model, or alternative sign-fraction parameterization (logistic in log(n), Hill function with offset, 3-parameter Richards). All require new preregistration.",
+    "Full-DOM ranking stability at n=21-82 remains UNKNOWN: neither model provides validated extrapolation; direct measurement via Docker image am1n3e/webarena-verified-shopping:latest is BLOCKING (EXP-INTEL-35462974425).",
+    "Whether sign-fraction saturating form could succeed with alternative parameterization is UNKNOWN but outside frozen 2-parameter spec.",
+    "Per-task recipe full-DOM stability remains UNKNOWN (78.65% at n=20, tantalizingly close to 80% but untested at n>20).",
+    "Cross-site generalization beyond single Magento Docker site remains UNKNOWN.",
+    "Whether template invariance breaks at full DOM element counts, changing the variance structure, remains UNKNOWN.",
+    "Whether margin_std power law exponent d=1.643 and |margin| exponent b=0.876 reflect genuine scaling or artifact of 4 points with sign crossing remains UNRESOLVED (from parent handoff)."
+  ]
+}

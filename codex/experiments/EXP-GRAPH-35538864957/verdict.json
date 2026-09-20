@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35538864957",
+  "lane": "graph",
+  "decision": "FALSIFIES per frozen decision_rule — C1 behavioral detection control fails (mean TN=0.6863 < 0.85 threshold) due to measurement validity issue: 304 cache-hit responses are included in behavioral TP/TN calculation, where valid tokens with cache enabled produce 304 status codes that behavioral signal extraction maps to behavioral_delta=1.0 (status_code=304 -> default status_weight=0.5), causing false negative TN failures. Audit V1 confirms C1 passes when 304s are excluded (TN=1.0). Primary orthogonality metric is valid and independently passes equivalence: distributed endpoint-stratified pooled r=-0.0585, 95% CI [-0.1327, 0.0163], CI upper 0.0163 < 0.15, TOST p_upper=2.03e-08 < 0.05, n_non304=688. C2-C7 all PASS. Scientific ceiling: orthogonality at delta=0.15 is supported by primary metric on 2-node distributed Flask testbed with independent caches; C1 measurement validity issue prevents CONFIRMED status per frozen conjunctive rule.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "C-FRESHNESS orthogonality at delta=0.15 on distributed infrastructure remains EXPERIMENTAL. The frozen decision_rule triggers REJECTED (C1 fails), but the C1 failure is measurement-confounded: 304 cache-hit responses included in behavioral TN calculation inflate false negatives (TN=0.686 with 304s, TN=1.0 without). The primary orthogonality metric (stratified pooled r=-0.0585, CI upper 0.0163 < 0.15, TOST p~0, n=688) independently confirms orthogonality on distributed testbed. This extends the parent's LOCAL confirmation (r=0.041, EXP-GRAPH-35530590140) to distributed multi-node infrastructure. Claim ceiling bounded to: 2-node Flask 3.1.3 with independent SQLite databases, independent in-memory CDN caches, independent ETag generation, round-robin routing, PyJWT RS256, n_non304=688, delta=0.15 only. NOT validated: delta=0.10, n>=1200, production CDN hierarchies, concurrent load N>=50, non-Flask frameworks, headers-only structural signal sufficiency. C1 fix required (exclude 304s from behavioral detection control) before CONFIRMED status achievable."
+    }
+  ],
+  "product_action": "none — parallel-channel architecture justified only for LOCAL production-like regime at delta=0.15 per parent CONFIRMED. Distributed infrastructure generalization supported by primary metric (r=-0.0585) but C1 measurement validity issue prevents CONFIRMED status; no product promotion warranted.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing C1 behavioral detection control to exclude 304 responses (consistent with primary metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800 — and does the C1 fix also resolve the parent audit's reporting inconsistency (C2/C7 including 304s)?",
+  "reason": "The frozen decision_rule requires ALL C1-C7 to PASS for CONFIRMED; C1 fails because 304 cache-hit responses are incorrectly included in behavioral detection TP/TN calculation. This is a measurement validity issue (audit V1), not scientific evidence against orthogonality: when 304s are excluded, TN=1.0. The primary orthogonality metric is valid and independently confirms orthogonality at delta=0.15 on distributed infrastructure (stratified r=-0.0585, CI upper 0.0163, TOST p~0). C2 (3/3 endpoints with variance), C3 (CI upper 0.0163 < 0.15), C4 (TOST p_upper=2.03e-08), C5 (cache heterogeneity diff=0.0425), C6 (B-LOCAL-ONLY |r|=0.0471 < 0.15, no regression), and C7 (B-CONFOUND-DISTRIBUTED |r|=0.8855 >= 0.15, negative control passes) all PASS. The audit REVISE status with producer_claim_supported=false is accepted: the measurement validity issue prevents CONFIRMED but does not falsify the orthogonality hypothesis. Distributed result (r=-0.0585) is directionally consistent with LOCAL parent (r=0.041). B-CONCURRENT (r=-0.0319, n=816) shows concurrent load N=5 does not introduce coupling. n_non304=688 is adequate for delta=0.15 inference but below frozen question's n>=800 target.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35538864957/result.json:metrics.dist_stratified_pooled_r=-0.0585, dist_tost_at_delta_015.pass=true, mean_behavioral_tp_rate=1.0, mean_behavioral_tn_rate=0.6863",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:status=REVISE, claim_ceiling='orthogonality holds on 2-node distributed Flask at delta=0.15, C1 needs 304-exclusion fix', validity_findings[0]='C1 MEASUREMENT VALIDITY THREAT: 304 inclusion'",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:recomputed_metrics.b_distributed_stratified_r=-0.0585, c1_mean_valid_tn_no_304s=1.0",
+    "research/experiments/EXP-GRAPH-35538864957/spec.json:decision_rule C1-C7, falsifier, measurement_validity",
+    "research/experiments/EXP-GRAPH-35538864957/raw_evidence/experiment_data.json:sha256=da89aed2f3a4b514b818e62add7601a8db480c9f606cee0bf5eacee0b6e85036",
+    "research/experiments/EXP-GRAPH-35530590140/handoff.json:parent CONFIRMED on LOCAL, r=0.041, carry_forward established/rejected/unknown/do_not_assume"
+  ]
+}

@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **193**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **195**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -203,6 +203,8 @@ Validated experiments: **193**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35530590140 | graph | REVISE | CONFIRMED — C-FRESHNESS orthogonality at delta=0.15 CONFIRMED per frozen decision_rule: all C1-C7 PASS on production-like LOCAL testbed. V2 confound redesign (fixed 'expired' request_id) resolves parent fragility (B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304, delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684. Claim ceiling BOUNDED: (a) n_non304=684 < 800 required by frozen question — delta=0.10 inference marginal (TOST p=0.060); (b) LOCAL testbed only (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDN simulation); (c) VALIDATED/PRODUCT_CORE not warranted pending n>=800 re-run and distributed/CDN validation. Audit REVISE on reporting consistency (C2/C7 include 304s, should be non-304 per spec) and power shortfall — no effect on primary metric validity. | C-FRESHNESS | `e8f71032e6e9` |
 | EXP-INTEL-35530590171 | intel | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-MEAS-VALID, C-PRODUCT-ECON | `c8c9ee1d83a1` |
 | EXP-PHYSICS-35530591329 | physics | REVISE | FALSIFIED-IN-SETTING | C-MEAS-VALID, C-WEB-DYNAMICS | `daf134dfe232` |
+| EXP-GRAPH-35538864957 | graph | REVISE | FALSIFIES per frozen decision_rule — C1 behavioral detection control fails (mean TN=0.6863 < 0.85 threshold) due to measurement validity issue: 304 cache-hit responses are included in behavioral TP/TN calculation, where valid tokens with cache enabled produce 304 status codes that behavioral signal extraction maps to behavioral_delta=1.0 (status_code=304 -> default status_weight=0.5), causing false negative TN failures. Audit V1 confirms C1 passes when 304s are excluded (TN=1.0). Primary orthogonality metric is valid and independently passes equivalence: distributed endpoint-stratified pooled r=-0.0585, 95% CI [-0.1327, 0.0163], CI upper 0.0163 < 0.15, TOST p_upper=2.03e-08 < 0.05, n_non304=688. C2-C7 all PASS. Scientific ceiling: orthogonality at delta=0.15 is supported by primary metric on 2-node distributed Flask testbed with independent caches; C1 measurement validity issue prevents CONFIRMED status per frozen conjunctive rule. | C-FRESHNESS | `72a6471f57fa` |
+| EXP-INTEL-35538868377 | intel | PASS | MEASUREMENT_INVALID | C-MEAS-VALID, C-PRODUCT-ECON | `d5283e58d1c0` |
 
 ## Latest recorded claim events
 
@@ -211,10 +213,10 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35530590140 | graph |
+| C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35538864957 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | REJECTED | EXP-PHYSICS-35530591329 | physics |
+| C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-35538868377 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
-| C-PRODUCT-ECON | MEASUREMENT_INVALID | EXP-INTEL-35530590171 | intel |
+| C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-35538868377 | intel |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35530591329 | physics |
