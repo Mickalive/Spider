@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **183**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **184**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -193,6 +193,7 @@ Validated experiments: **183**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-RUNTIME-35481773400 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID | `abbdb54dffae` |
 | EXP-PHYSICS-35482477045 | physics | REVISE | FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 0.5 bits, p <= 0.001). KSG CMI passes C1 (|null_mean|=0.012078 bits, 8.3x below threshold) but fails C3 (positive_control_k3=0.000560 < 0.5, 893x below threshold against true 1.52-bit CMI). LR passes C1 (|null_mean|=0.004515 bits, 22x below threshold) but fails C3 (positive_control_k3=0.103695 < 0.5, 4.8x below threshold). Audit REVISE corrects producer theoretical analysis: stochastic SPA produces I(Y;A|Z) ≈ 1.52 bits (not 0.004 as claimed), so C3 failure is genuine estimator insensitivity to a strong signal, not weak design. KSG null centering is achieved by near-zero output for all inputs (null_std=0.000187), not unbiased estimation of the true CMI. LR history collapse (K2=K3 exactly) persists on stochastic SPA, confirmed by degenerate control (deterministic SPA LR K3=0.104420 ≈ stochastic 0.103695). | C-WEB-DYNAMICS, C-MEAS-VALID | `febd10026b0c` |
 | EXP-RUNTIME-35495699298 | runtime | PASS | SURVIVES_CURRENT_TEST - All five frozen decision-rule conditions pass with audit PASS. Iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical SHA256 output to ground-truth high-entropy generate_*_he_body(state, target_size) for all 24 high-entropy cells (480 observations), 6 regression cells (120 observations), and 6 identity cells (120 observations). Silent fallback count is 0 across all compressed observations. Within-state determinism confirmed (all_same=true for all states across all cells). Shannon entropy 4.66-7.69 bits/byte confirms non-degeneracy. Compressed sizes 2.6-99KB with 85-3074 chunks at chunk_size=32 genuinely exercise chunk-boundary stress. The parent critical limitation (V1_DEGENERATE_PAYLOAD_REDUNDANCY) is resolved: payloads now produce realistic compressed sizes, not 70-1059 bytes. Audit V1 (BUFFERED_PROXY_NOT_STREAMING) and V2 (SINGLE_LAYER_ENCODING_ONLY) bound the claim ceiling but do not invalidate the frozen decision rule. Audit-required observation-count correction (960->480 main) is a reporting fix, not a decision-rule issue. Audit V4 (BINARY_NEAR_INCOMPRESSIBLE at 100KB) strengthens chunk-boundary stress rather than weakening it. C-MEAS-VALID claim ceiling advances to: localhost buffered-mock with high-entropy payloads at realistic compressed sizes across both major compression formats and all tested content types. | C-MEAS-VALID | `8eab46d979ba` |
+| EXP-RUNTIME-35513777099 | runtime | REVISE | SURVIVES_CURRENT_TEST | C-MEAS-VALID | `cec674cd174f` |
 
 ## Latest recorded claim events
 
@@ -203,7 +204,7 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35481774794 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35495699298 | runtime |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35513777099 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35434772331 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
