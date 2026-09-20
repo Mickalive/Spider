@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+  "why_next": "The decompressor API streaming layer is now validated in-process: brotli.Decompressor.process(chunk) and gzip.GzipFile.read(CHUNK_SIZE) produce byte-identical output to full-body decompression across 480 multi-layer observations (audit PASS, all C1-C5 pass). This resolves the V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION limitation inherited from parent EXP-RUNTIME-35522287921. The full localhost decompression chain is now validated across three orthogonal layers: (1) iterative multi-layer decompression (EXP-RUNTIME-35513777099), (2) HTTP Transfer-Encoding framing streaming (EXP-RUNTIME-35522287921), and (3) decompressor API streaming (this experiment). The sole remaining blocker for C-MEAS-VALID Product Core readiness is real CDN infrastructure, which introduces Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation, and concurrent clients that cannot be replicated on localhost. This is materially orthogonal to the localhost tests just completed and cannot be inferred from them.",
+  "carry_forward": {
+    "established": [
+      "True incremental decompressor streaming produces byte-identical output to full-body decompression: brotli.Decompressor().process(chunk) fed CHUNK_SIZE chunks and gzip.GzipFile(io.BytesIO(compressed)).read(CHUNK_SIZE) loops both produce SHA256-identical output to brotli.decompress/gzip.decompress across 480 multi-layer streaming observations, 240 regression, 120 identity — 840/840 correct, 0 errors, 0 silent fallbacks (EXP-RUNTIME-35530588298, audit PASS)",
+      "Streaming incremental decompression at the HTTP Transfer-Encoding framing layer produces byte-identical SHA256 output to buffered ground truth: 480/480 multi-layer streaming observations, 840/840 total (EXP-RUNTIME-35522287921, audit PASS)",
+      "Iterative decompression (brotli->gzip->identity, max_depth=5) correctness on localhost for high-entropy non-redundant payloads with multi-layer stacked encodings: 240/240 multi-layer correctness, 120/120 single-layer regression, 120/120 identity (EXP-RUNTIME-35513777099, audit REVISE with ceiling bounded)",
+      "High-entropy payload generators validated: JSON (UUIDs, random floats, 5.49 bits/byte), HTML (real Wikipedia paragraphs, 4.66 bits/byte), Binary (structured random payloads, 7.69 bits/byte) — all above 3.5 bits/byte Shannon threshold",
+      "Gzip multi-chunk decompression correctness on localhost: 240/240 (EXP-RUNTIME-35470447407) + regression confirmed",
+      "Brotli multi-chunk decompression correctness on localhost: 360/360 (EXP-RUNTIME-35456070671) + regression confirmed",
+      "Within-state determinism preserved across all cells in all three decompression layers: decompressed hash all_same=true for 5 reps per state",
+      "Compressed sizes genuinely realistic: 10KB nominal -> 2.7-9.9KB compressed; 100KB nominal -> 22.6-98.8KB compressed",
+      "IDENTITY baseline validates correctness oracle at both 10KB and 100KB high-entropy",
+      "Compression level extremes (gzip 1 vs 9, brotli 4 vs 8) do not affect correctness on high-entropy payloads",
+      "Multi-layer streaming decompression requires sequential unwrapping (outer then inner) — architecturally correct for real CDN/proxy pipelines",
+      "Brotli 1.2.0 Decompressor API: process() is the sole incremental method; no flush()/finish() exists; process() returns output as available and signals via is_finished()"
+    ],
+    "rejected": [
+      "Silent fallback to compressed bytes as explanation for preserved correctness — rejected across 840 observations with 0 fallbacks confirmed",
+      "Gzip/brotli chunk boundaries corrupt multi-byte symbols at chunk_size=32 for payloads up to 3087 chunks — rejected on high-entropy multi-layer payloads",
+      "Streaming decompressor state machine fails at arbitrary block boundaries for tested qualities/levels — rejected: byte-identical output at both 8192B and 32B chunk sizes across GZIP-THEN-BROTLI and BROTLI-THEN-GZIP",
+      "Streaming chunked forwarding at the HTTP Transfer-Encoding layer corrupts decompression input — rejected across 840 observations",
+      "Degenerate synthetic payloads (x*pad) adequately test chunk-boundary stress — rejected; high-entropy payloads required"
+    ],
+    "unknown": [
+      "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+      "Does correctness hold for payloads beyond 100KB nominal (500KB, 1MB) where brotli/gzip dictionary windows cross chunk boundaries more frequently?",
+      "Do other gzip levels (2-9) and brotli qualities (5-7, 8-11) produce compressed structures that stress chunk boundaries differently?",
+      "Does correctness hold for depths 3-5 stacked encodings (only depth 2 exercised, spec max_depth=5 untested)?",
+      "Cross-run BINARY ground truth reproducibility across interpreter sessions with different PYTHONHASHSEED and gzip/brotli library versions",
+      "Does brotli streaming require empty-input draining (process(b'')) for compressed structures where final bytes remain buffered at other quality levels or payload sizes?",
+      "Do mixed chunk-size pipelines (outer 8192/inner 32 or vice versa) preserve correctness?",
+      "Does identity (uncompressed) data mishandled by streaming APIs produce errors vs pass-through, and is wire preservation actually tested via API (audit V2 found tautological passthrough)?"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for Product Core promotion — real CDN infrastructure with Accept-Encoding negotiation, auth-aware cache/Vary, geographic latency, TCP segmentation, and production concurrency is the mandatory remaining gate",
+      "Localhost decompressor API streaming correctness implies CDN correctness — CDN introduces Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation, and concurrent clients",
+      "Identity baseline validates wire preservation under chunked feeding — audit V2 found it is a direct passthrough (streaming_result = expected_body) not via decompressor API, so wire-preservation is tautologically true and untested",
+      "Max decompression depth 5 is validated for stacked encodings — only depth 2 (two-layer) exercised; depths 3-5 untested",
+      "CDN behaviors (Vary, ETag, Accept-Encoding negotiation, cache, geographic latency) are safe for decompression — localhost mock does not replicate these",
+      "chunk_size=32 results generalize to all CDN chunk sizes — chunk_size=32 maximizes chunk count but real CDNs vary frame sizes",
+      "BINARY compressed cell sizes are cross-run reproducible — PYTHONHASHSEED-dependent hash(state) produces different bodies per interpreter session",
+      "Brotli streaming drain is safe at all quality levels — only tested at quality 4; higher qualities (5-11) may require empty-input draining for buffered final blocks",
+      "Mixed chunk-size pipelines are safe — only equal-size alignment tested (both layers same chunk_size)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35522287921/handoff.json (parent: HTTP TE framing streaming validated, V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION identified)",
+    "research/experiments/EXP-RUNTIME-35522287921/result.json (parent: 840/840 streaming equals buffered)",
+    "research/experiments/EXP-RUNTIME-35522287921/audit.json (PASS, V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION claim bounding)",
+    "research/experiments/EXP-RUNTIME-35513777099/handoff.json (grandparent: 240/240 multi-layer buffered correctness)",
+    "research/experiments/EXP-RUNTIME-35513777099/result.json (grandparent: 240/240 multi-layer, 120/120 regression, 120/120 identity)",
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (great-grandparent: high-entropy generators validated)",
+    "research/experiments/EXP-RUNTIME-35470447407/handoff.json (gzip multi-chunk correctness established)",
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (brotli multi-chunk correctness established)",
+    "research/experiments/EXP-RUNTIME-35530588298/result.json (this experiment: 840/840 decompressor API streaming correct)",
+    "research/experiments/EXP-RUNTIME-35530588298/audit.json (PASS, V1-V8 findings, claim ceiling bounded to in-process)",
+    "research/experiments/EXP-RUNTIME-35530588298/spec.json (frozen decision_rule C1-C5)",
+    "codex/claim_state.json (C-MEAS-VALID claim history across 50+ experiments, current status EXPERIMENTAL)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35530588298/result.json (840/840 correct, C1-C5 all pass, streaming_equals_fullbody 480/480, compressed sizes 2612-98730 bytes, 0 errors, 0 fallbacks)",
+    "research/experiments/EXP-RUNTIME-35530588298/audit.json (PASS, producer_claim_supported=true, V1-V8 findings, claim_ceiling bounded to in-process decompressor API layer)",
+    "research/experiments/EXP-RUNTIME-35530588298/raw_cell_results.json:916b8f03 (840 per-cell raw observations)",
+    "research/experiments/EXP-RUNTIME-35530588298/run_experiment.py:8251d457 (brotli streaming process(), gzip GzipFile.read(), multi-layer sequential unwrapping)",
+    "research/experiments/EXP-RUNTIME-35530588298/report.md (claim ceiling bounded, identity tautological, CDN gate open)",
+    "research/experiments/EXP-RUNTIME-35522287921/handoff.json:23f37576 (parent carry_forward, V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION resolved by this experiment)",
+    "codex/claim_state.json C-MEAS-VALID history"
+  ],
+  "recommended_action": "Design and execute a real CDN decompression correctness experiment using Cloudflare or Fastly free tier: serve high-entropy multi-layer compressed payloads through a real CDN with Accept-Encoding negotiation, auth-aware Vary/cache, and measure whether iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth at 8KB+ chunk sizes. The full localhost decompression chain is now validated across three orthogonal layers (multi-layer buffered, TE framing streaming, decompressor API streaming); CDN infrastructure introduces Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation, and concurrent clients that cannot be replicated on localhost. If CDN passes, C-MEAS-VALID is ready for Product Core promotion. If CDN fails, diagnose whether the failure is in Accept-Encoding negotiation, cache/Vary semantics, geographic chunking, or decompression under CDN-specific response structures."
+}

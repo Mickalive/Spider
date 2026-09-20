@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35482477045",
+  "lane": "physics",
+  "github_run_id": null,
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "dependencies": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1"
+    },
+    "seed": 42,
+    "hostname": "runner"
+  },
+  "commits": {
+    "run_experiment.py": "0bc0cf90e4aa52395927e0b34f92e0464d29e7610330cbac0afda1ae8f347eb4"
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PHYSICS-35482477045/request.json",
+    "spec.json": "research/experiments/EXP-PHYSICS-35482477045/spec.json",
+    "prereg.md": "research/experiments/EXP-PHYSICS-35482477045/prereg.md",
+    "freeze.json": "research/experiments/EXP-PHYSICS-35482477045/freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35476270440",
+    "handoff_path": "research/experiments/EXP-PHYSICS-35476270440/handoff.json",
+    "handoff_sha256": "b9797e00a6b5b5e4b1e0d8d6b993b61f72fab478155bb6e31f1a788049724d53"
+  },
+  "data": {
+    "stochastic_spa": {
+      "path": "in-memory",
+      "sha256": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+      "n_transitions": 5000,
+      "n_sessions": 50,
+      "steps_per_session": 100,
+      "design": "50% deterministic hash routing + 50% uniform random over CANDIDATES"
+    },
+    "deterministic_spa": {
+      "path": "in-memory",
+      "sha256": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+      "n_transitions": 5000,
+      "n_sessions": 50,
+      "steps_per_session": 100,
+      "design": "100% deterministic hash routing (parent design)"
+    }
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-35482477045/raw_results.json",
+      "sha256": "06d95286846dc2cb760024e215b448cd025c9c627f786c03418aa604334f868b"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PHYSICS-35482477045/run_experiment.py",
+      "sha256": "0bc0cf90e4aa52395927e0b34f92e0464d29e7610330cbac0afda1ae8f347eb4"
+    },
+    "raw_output": {
+      "path": "research/experiments/EXP-PHYSICS-35482477045/raw_output.txt",
+      "sha256": "e99618afc26efcd7bf340c15dab43ae95671a67811bea3e77adb280e303c19a4"
+    }
+  },
+  "commands": {
+    "run": "python3 research/experiments/EXP-PHYSICS-35482477045/run_experiment.py",
+    "dependencies": "pip install numpy scikit-learn scipy"
+  },
+  "wall_seconds": 44.36
+}

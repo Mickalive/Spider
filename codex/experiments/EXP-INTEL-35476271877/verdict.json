@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35476271877",
+  "lane": "intel",
+  "decision": "MEASUREMENT_INVALID — Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40–50pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10–50x larger). Per frozen rule, NOT C1 → MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement ≥80% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen SNR decomposition model fails its own C1 validation gate (residuals 0.44–0.50 vs 0.10 threshold). No mechanism among H1/H2/H3 is discriminated: C2 passes only via rho=1.0 tautology (template invariance + shared role subset forces same-type densities to be scalar multiples, audit VF2). No inference about full-DOM ranking agreement at n=21-82 is justified: extrapolation (C3=false, predicting agreement 1.0 at n=50) inherits the failed model and is built on sign-crossing |margin| power law from n=4 data points (audit VF3). Status remains MEASUREMENT_INVALID; the decomposition is unreliable and no claim ceiling advancement is supported."
+    },
+    {
+      "claim_id": "C-PRODUCT-ECON",
+      "status": "REJECTED",
+      "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can a corrected SNR decomposition using across-iteration margin_std (not within-iteration within-type SE) as the noise scale pass C1-equivalent validation (predicted agreement within 10pp of observed at n=15 and n=20), enabling a reliable extrapolation to full-DOM element counts (n=21-82) that predicts whether ranking agreement crosses the 80% threshold?",
+  "reason": "The frozen SNR model's noise term is misspecified by 10–50x: within-iteration within-type SE (~1e-5) captures near-zero template-invariance residual, while across-iteration margin_std (~1e-4 to 6e-4) captures the actual role-subset/element-subset sampling variation that drives ranking flips. A corrected model using margin_std as noise scale is a valid, preregistrable successor that could pass C1-equivalent validation and re-open the extrapolation question. This is the minimum-cost next step that could unblock the MIXED program decision: if the corrected model passes C1 and C3 predicts <80% at n=50, the 56% plateau is structural and product lane should adopt non-recipe density; if C3 predicts ≥80%, Docker re-collection is justified. Alternatively, if Docker becomes available, direct full-DOM measurement bypasses the model entirely.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35476271877/result.json — MEASUREMENT_INVALID, C1 fails, residuals 0.5002/0.4405, noise-scale mismatch 10–50x",
+    "research/experiments/EXP-INTEL-35476271877/audit.json — MEASUREMENT_INVALID, producer_claim_supported=true, VF1 noise-scale misspecification (critical), VF2 rho=1.0 tautology, VF3 extrapolation gated",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json — per_n margins/se_tots/margin_std, mechanism classification, extrapolation fits",
+    "research/experiments/EXP-INTEL-35476271877/report.md — noise-scale mismatch diagnosis, template invariance verification, interpretation of C1 failure",
+    "research/experiments/EXP-INTEL-35476271877/spec.json — frozen decision rule C1/C2/C3, hypothesis H1/H2/H3, falsifier F1/F2/F3",
+    "research/experiments/EXP-INTEL-35445596324/result.json — parent baselines B1-B6 (canonical/per-task eta2 and ranking agreement at n=5/10/15/20)",
+    "research/experiments/EXP-INTEL-35470447439/handoff.json — inherited carry_forward (Docker BLOCKED, full-DOM question OPEN, recipe density viability unknown)"
+  ]
+}

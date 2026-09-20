@@ -1,0 +1,59 @@
+{
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression correctness hold when compressed data is fed chunk-by-chunk to streaming decompressor APIs (brotli.Decompressor.process, gzip streaming via GzipFile) without full accumulation, such that the decompressor state machine across arbitrary block boundaries produces byte-identical output to full-body decompression for multi-layer encodings at realistic CDN chunk sizes (8KB+) and stress chunk sizes (32B)?",
+  "hypothesis": "Iterative decompression via streaming decompressor APIs (brotli.Decompressor().process(chunk) fed incrementally then .flush(), and gzip.GzipFile(io.BytesIO(compressed)).read(CHUNK_SIZE) loops) produces byte-identical SHA256 output to full-body decompression (brotli.decompress / gzip.decompress on complete compressed data) for all 4 auth states, 3 content types (JSON, HTML, BINARY), 2 payload sizes (10KB, 100KB), 2 multi-layer encoding configurations (GZIP-THEN-BROTLI, BROTLI-THEN-GZIP), and 2 chunk sizes (8192B realistic CDN, 32B stress), using high-entropy non-redundant payloads with compressed sizes in the 2-99KB range.",
+  "falsifier": "Any SHA256(streaming_decompressed) != SHA256(fullbody_decompressed) across all observations for any (size, encoding, content_type, state, chunk_size) cell, OR any decompression error/exception in the streaming API path, OR any silent fallback (streaming_decompressed == raw_compressed bytes) for any compressed response.",
+  "baselines": [
+    {
+      "id": "B-FULLBODY-GROUND-TRUTH",
+      "description": "Full-body decompression (brotli.decompress / gzip.decompress on complete compressed data) serves as ground truth for streaming comparison, re-validated in this experiment via correctness oracle",
+      "expected": "100% correctness: SHA256(decompressed) == SHA256(generate_*_body(state, target_size)) for all cells"
+    },
+    {
+      "id": "B-TE-FRAMING-REGRESSION",
+      "description": "HTTP Transfer-Encoding chunked framing correctness (established 840/840 in parent EXP-RUNTIME-35522287921), not re-executed, used as regression reference",
+      "expected": "Established 100% correctness; this experiment tests a different layer (decompressor API, not TE framing)"
+    },
+    {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer gzip streaming decompressor correctness at 10KB high-entropy",
+      "expected": "100% correctness in both streaming and full-body paths, confirms single-layer pipeline not degraded"
+    },
+    {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer brotli streaming decompressor correctness at 10KB high-entropy",
+      "expected": "100% correctness in both streaming and full-body paths"
+    },
+    {
+      "id": "B-IDENTITY-HE-STREAMING",
+      "description": "IDENTITY (no compression) at 10KB and 100KB high-entropy through streaming API path, validates wire-preserving correctness under chunked feeding",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, target_size) exactly"
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "description": "Compressed size validation: at least 2/3 content types must achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB under multi-layer encoding",
+      "expected": "High-entropy payloads produce compressed sizes in the 2-99KB range, confirming payloads are not degenerate"
+    }
+  ],
+  "positive_control": "B-FULLBODY-GROUND-TRUTH: the same mock server and payload generators produce 100% correctness under full-body decompression, confirming the test infrastructure and correctness oracle are functional before comparing against streaming API.",
+  "null_control": "Within-state determinism: decompressed_hash must be identical across all 5 repetitions for each (state, encoding, content_type, size, chunk_size) cell in both streaming and full-body paths. Any within-state hash variation indicates non-deterministic decompression.",
+  "measurement_validity": [
+    "Two decompressor API streaming modes: (1) brotli streaming via brotli.Decompressor().process(chunk) called incrementally on CHUNK_SIZE chunks, then .flush() for final output; (2) gzip streaming via gzip.GzipFile(io.BytesIO(compressed_data)) reading in CHUNK_SIZE chunks",
+    "Full-body baseline: brotli.decompress(compressed_data) / gzip.decompress(compressed_data) on complete compressed bytes",
+    "Multi-layer encoding configurations: GZIP-THEN-BROTLI (body -> gzip.compress -> brotli.compress) and BROTLI-THEN-GZIP (body -> brotli.compress -> gzip.compress)",
+    "High-entropy payload generators reused from parent EXP-RUNTIME-35522287921 (generate_json_he_body, generate_html_he_body, generate_binary_he_body) validated at Shannon entropy >= 3.5 bits/byte",
+    "Chunk sizes: 8192B (realistic CDN frame size, Cloudflare default) and 32B (stress test, maximizes chunk count and block boundary crossings)",
+    "Correctness oracle: SHA256(generate_*_body(state, target_size)) computed in-process",
+    "Silent fallback detection: SHA256(decompressed) == SHA256(raw_compressed) classified as failure",
+    "Python 3.12 stdlib gzip module + brotli 1.2.0",
+    "This experiment tests the decompressor API layer, NOT the HTTP Transfer-Encoding framing layer (which was validated in parent EXP-RUNTIME-35522287921)",
+    "Multi-layer decompression involves unwrapping the outer layer via streaming API, then feeding the inner-layer compressed bytes to the second streaming decompressor"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) streaming_hash == fullbody_hash for ALL multi-layer streaming cells (byte-identical decompression output between streaming API and full-body paths); (C2) streaming_hash == expected_hash for ALL multi-layer streaming cells (streaming correctness matches ground truth); (C3) B-GZIP-SINGLE-LAYER-REGRESSION and B-BROTLI-SINGLE-LAYER-REGRESSION pass 100% in both streaming and full-body paths (regression controls); (C4) null_control passes (all_same=true for all states in all streaming cells); (C5) B-COMPRESSED-TARGET-RANGE passes (at least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB). FALSIFIED if any streaming decompressed hash differs from fullbody hash OR any streaming decompressed hash differs from expected hash OR any decompression error/exception in streaming API path. MEASUREMENT_INVALID if infrastructure prevents data collection, if identity baseline fails, or if B-COMPRESSED-TARGET-RANGE fails.",
+  "product_consequence_positive": "True incremental decompressor streaming is validated: the decompressor state machine correctly handles arbitrary block boundaries when fed chunk-by-chunk via streaming APIs. This resolves the V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION limitation from parent EXP-RUNTIME-35522287921, unblocking the CDN correctness gate. Real CDNs serve data incrementally; decompressor streaming correctness is a prerequisite for real-CDN testing and for true incremental proxy operation.",
+  "product_consequence_negative": "Streaming decompressor APIs fail correctness: feeding compressed data chunk-by-chunk to brotli.Decompressor.process() or gzip.GzipFile produces different output than full-body decompression. The decompressor state machine has a streaming failure mode that was not exposed by accumulated-byte testing. CDN testing is blocked until streaming decompression is fixed. Diagnosis required: is the failure in block-boundary handling, dictionary window references, flush semantics, or cross-layer state contamination in multi-layer unwrapping?",
+  "estimated_cost": "Low: ~240 in-process decompression comparisons (2 sizes x 3 types x 2 multi-layer encodings x 4 states x 5 reps streaming cells + baselines), no HTTP requests needed (pure in-memory decompression comparison), <5 minutes execution, no external infrastructure, no API costs. Reuses validated high-entropy generators and compression utilities from parent.",
+  "expected_information_gain": "High: this experiment directly tests the V1_STREAMING_DECOMPRESSOR_POST_ACCUMULATION limitation inherited from parent EXP-RUNTIME-35522287921 carry_forward unknown #2. The parent established 840/840 correctness but explicitly noted that the decompressor never observes a chunk boundary because decompress_body is called on accumulated bytes. A positive result unblocks the CDN correctness gate (the highest-priority remaining blocker for C-MEAS-VALID Product Core readiness). A negative result identifies a critical streaming decompression failure that must be fixed before CDN testing is meaningful. Either outcome is highly decision-relevant: streaming decompressor correctness is architecturally orthogonal to TE framing correctness and cannot be inferred from the parent's results."
+}

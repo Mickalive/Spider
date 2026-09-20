@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35530590140",
+  "lane": "graph",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "POWER: Increase non-304 paired samples to satisfy frozen question and spec POWER requirement: question and spec.json require n_non304 >=800 (spec.json:measurement_validity POWER INCREASE, request.json inherited_next_question). Producer achieves n_paired_samples_testbed=684 non-304 (result.json:metrics.stratified_pooled_n) with n_total=816 total; 132 304s (result.json:metrics.n_304_total, all n_304_valid=132) excluded leaving 684 <800 by 116 samples. At 34 per condition per endpoint, total=816, valid-cache conditions lose 33/34 to 304, so enabled/cache paths are underpowered (run_experiment.py N_SAMPLES_PER_CONDITION_PER_ENDPOINT=34, raw_evidence valid+cache+read+user_profile has304=33). To reach n_non304>=800 accounting for ~16% 304 loss, use >=40 per condition per endpoint with 304-aware allocation or validate after exclusion. Decision_rule MEASUREMENT_INVALID threshold is n<400 so status remains COMPLETE, but the frozen question as stated is not satisfied.",
+    "C2 variance reporting: result.json controls C2_variance reports per_endpoint_variance_testbed n=272 for /api/user/profile and /api/data/list (result.json:metrics.per_endpoint_variance_testbed) which includes 304 samples. Spec requires non-304 std>0 (spec.json:falsifier C2, decision_rule C2, spec measurement_validity 304 EXCLUSION). Recompute on non-304 gives profile n=206 std_beh=3.32 std_struct=0.0547, data_list n=206 std_beh=3.32 std_struct=0.0578, session n=272 std_beh=3.5 std_struct=0.0580 (audit recomputed) - still PASS, but report must use non-304 counts to preserve identity.",
+    "C7 reporting consistency: spec requires C7 on non-304 endpoint-stratified weighted |r| (spec.json baselines B-PARENT-CONFOUND-V2, spec measurement_validity 304 EXCLUSION). Producer C7 correctly stratified but pan-n metric n_paired_samples_bparent=816 (result.json) includes 304s; per-endpoint bparent n=272 includes 33 304s each for profile/data_list. Non-304 stratified weighted |r|=0.9009 (audit recomputed from raw_evidence bparent_per_condition_data: profile n=206 r=-0.9086, data_list n=206 r=-0.9012, session n=272 r=-0.8948) vs reported total 0.9012 differs negligibly but reporting must be consistent non-304 for ceiling. No effect on PASS but breaks transmission invariant for next-stage comparison.",
+    "Claim ceiling wording: producer report.md interprets as CONFIRMED product-consequence positive. Given n shortfall and LOCAL testbed limits, ceiling must be bounded before any VALIDATED/PRODUCT promotion (see claim_ceiling)."
+  ],
+  "validity_findings": [
+    {
+      "id": "V_POWER_SHORTFALL",
+      "severity": "high",
+      "category": "power_sampling",
+      "finding": "Frozen question requires n_non304>=800 (request.json inherited_next_question, spec.json question, spec measurement_validity POWER INCREASE). Producer achieves stratified_pooled_n=684 non-304 (result.json:metrics.stratified_pooled_n, n_paired_samples_testbed=684). POWER FIX note in result.json validity_notes claims n>=800 non-304 at 34*8*3=816 but this counts total before 304 exclusion; raw_evidence shows 132 304s excluded (33 per valid+cache profile/data_list) leaving 684. SE=0.0383 at n=684 vs 0.0354 at n=800; stratified CI width 0.1497 (upper 0.1156) still passes delta 0.15 but marginal at delta 0.10 (TOST p 0.060 at delta 0.10, result.json metrics tost_results_by_delta). Not MEASUREMENT_INVALID (spec decision n<400) but question not satisfied as stated.",
+      "evidence": "spec.json:question n_non304>=800; spec.json:measurement_validity POWER INCREASE; result.json:metrics.stratified_pooled_n 684, n_paired_samples_testbed_total 816, n_304_total 132; raw_evidence/experiment_data.json per_condition_data valid+cache+read has304=33/34"
+    },
+    {
+      "id": "V_C2_INCLUSIVE_VARIANCE",
+      "severity": "low",
+      "category": "control_spec_compliance",
+      "finding": "C2 per-endpoint variance reported with n=272 for profile/data_list includes 304s (result.json metrics per_endpoint_variance_testbed n_behavioral 272). Non-304 recompute shows n=206 for those endpoints, std_beh 3.3155, std_struct 0.0547-0.0578, still 3/3 PASS so decision unchanged but violates 304 EXCLUSION on per-endpoint and per-cache correlations.",
+      "evidence": "result.json:metrics.per_endpoint_variance_testbed; result.json:controls.C2_variance; audit recomputed non304 per_endpoint r: profile 206, data_list 206, session 272"
+    },
+    {
+      "id": "V_C7_REPORTING_INCONSISTENCY",
+      "severity": "low",
+      "category": "control_definition",
+      "finding": "C7 negative control passes robustly (reported stratified weighted |r|=0.9012, audit non-304 recompute 0.9009) confirming redesign fixes parent fragility (parent audit showed 0.299 including 304 vs 0.0735 excluding). However producer metrics report b-parent n=816 including 304 (result.json n_paired_samples_bparent) while spec requires non-304 only; producer also correctly computes stratified weighted variant, so scientific conclusion unchanged. Previous fragility resolved: delta between inclusion and exclusion is 0.0003 (0.9012 vs 0.9009) vs parent delta 0.225, confirming robustness.",
+      "evidence": "spec.json:baselines B-PARENT-CONFOUND-V2 expected |r|>=0.15 on non-304; result.json metrics bparent_stratified_weighted_abs_r 0.9012, per_endpoint_bparent_r; audit recomputed non304 stratified 0.9009"
+    },
+    {
+      "id": "V_LOCAL_TESTBED_CEILING",
+      "severity": "medium",
+      "category": "generalization",
+      "finding": "Orthogonality demonstrated only on production-like LOCAL testbed (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDNCache, localhost 127.0.0.1 ports 18970/18980/18990). Not validated for distributed CDN hierarchies, concurrent client load, cache invalidation on session change, or non-Flask frameworks. Producer correctly notes ceiling in validity_notes and report.md validity notes.",
+      "evidence": "provenance.json environment Flask 3.1.3 PyJWT 2.14.0 scipy 1.18.1; testbed_server.py CDNCache in-memory; report.md validity notes claim ceiling bounded to production-like LOCAL testbed"
+    },
+    {
+      "id": "V_STRUCTURAL_SIGNAL_REPRESENTATION",
+      "severity": "medium",
+      "category": "construct_validity",
+      "finding": "Headers-only structural signal captures limited variation (ETag change 0/1, Cache-Control change 0/1, request_id entropy, sha256 hash). Validated post V1 fix (testbed_server.py _make_unauthorized_response uses uuid4 for valid, 'expired' fixed for V2 only) and V_ETAG fix verified (overlap_count=1 for all endpoints, result.json etag_permission_verification). Headers-only excludes body-level confounds by design; whether this captures sufficient production variation remains unresolved (result.json unresolved).",
+      "evidence": "spec.json measurement_validity Structural signal extraction must use ONLY headers; result.json etag_permission_verification fix_verified true; run_experiment.py compute_structural_composite_headers_only"
+    },
+    {
+      "id": "V_304_SKEWED_COMPOSITION",
+      "severity": "low",
+      "category": "selection_bias",
+      "finding": "304 exclusion leaves skewed cache-mode composition (cache_enabled n=276 vs disabled n=408; per-endpoint enabled 70 vs 136 for profile/data_list). V3 endpoint-stratified pooling correctly weights by n, mitigating bias (result.json stratified_pooled_r 0.0410 vs simple pooled 0.0314). C5 uses correct endpoint-stratified weighting (diff 0.0414 <2*SE 0.156, audit recomputed). No residual bias detected.",
+      "evidence": "result.json metrics per_cache_r_testbed, cache_enabled_n 276 cache_disabled_n 408, per_endpoint_r_testbed n 206/206/272; audit recomputed stratified 0.0410, SE 0.0383"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-FLASK-ONLY",
+      "threshold": "|r| < 0.15",
+      "observed": "|r|=0.001654 (r=-0.00165, n=816, CI [-0.0703,0.0670], TOST p_upper=6.6e-06, behavioral_std=3.5)",
+      "pass": true,
+      "evidence": "result.json metrics pearson_r_pooled_flask_only -0.00165 abs_r 0.00165 n 816; result.json controls C6_baseline_flask_only pass true; audit recomputed -0.00165 from raw_evidence flask_per_condition_data (816 samples, no 304)",
+      "notes": "Plain Flask without CDN/OAuth still shows orthogonality; replicates parent B-FLASK-ONLY r=0.0201 and six prior mocks (r 0.002-0.046). Headers-only signal works without infrastructure features. Pass is genuine, not trivial variance failure."
+    },
+    {
+      "id": "B-PARENT-CONFOUND-V2",
+      "threshold": "endpoint-stratified weighted |r| >=0.15 (negative control)",
+      "observed": "stratified weighted |r|=0.9012 (r=-0.9012, n_total 816, non-304 0.9009 n=684, per-endpoint profile -0.9007, data_list -0.9081, session -0.8948, all p~1e-96 to 1e-104)",
+      "pass": true,
+      "evidence": "result.json metrics bparent_stratified_weighted_abs_r 0.9012 per_endpoint_bparent_r; testbed_server_v2.py _make_unauthorized_response request_id='expired' for expired, uuid4 for valid; audit recomputed non-304 stratified 0.9009 robust (delta 0.0003 vs parent delta 0.2257)",
+      "notes": "Redesign achieves robust confound independent of 304 (reported 0.9012 vs non-304 0.9009 both >>0.15). Fixes parent V1 confound fragility (parent including 304 0.299 PASS vs excluding 0.0735 FAIL). All endpoints now uniformly strong (unlike parent profile 0.058, data_list -0.247, session -0.042). Negative control validates measurement sensitivity."
+    },
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "threshold": "|r| < 0.15 consistent with prior mocks",
+      "observed": "Not rerun in this experiment; inherited prior r=0.0022 -0.0258 (codex/index). Current production-like testbed r=0.0410 consistent with prior range.",
+      "pass": true,
+      "evidence": "spec.json baselines B-LOCALHOST-MOCK description; codex/index.json prior experiments audit PASS; result.json stratified_pooled_r 0.0410 within 0.002-0.046 band",
+      "notes": "No regression from localhost mocks; production-like infrastructure does not introduce correlation."
+    }
+  ],
+  "recomputed_metrics": {
+    "stratified_pooled_r_non304": 0.04100797384578045,
+    "stratified_pooled_n": 684,
+    "stratified_ci": [-0.03406319535020517, 0.11561898674313995],
+    "stratified_tost_p_upper_delta015": 0.002030310075603707,
+    "simple_pooled_r_non304": 0.031376727204166385,
+    "simple_ci": [-0.043692497733772276, 0.10609362494067767],
+    "per_endpoint_r_non304": {
+      "/api/user/profile": {"r": 0.04067334641678329, "n": 206, "audit_r": 0.040673},
+      "/api/data/list": {"r": 0.09640958466769069, "n": 206, "audit_r": 0.09641},
+      "/api/session/status": {"r": -0.0006971679885581245, "n": 272, "audit_r": -0.000697}
+    },
+    "c1_tp_tn": {"mean_expired_TP": 1.0, "mean_valid_TN": 1.0, "threshold": 0.85, "pass": true},
+    "c2_variance_non304_recomputed": {"profile_beh_std": 3.3155, "profile_struct_std": 0.0547, "data_list_beh_std": 3.3155, "data_list_struct_std": 0.0578, "session_beh_std": 3.5, "session_struct_std": 0.058, "endpoints_with_variance": 3, "pass": true},
+    "c5_heterogeneity": {"r_enabled_weighted": 0.023459216438806305, "r_disabled_weighted": 0.06487189399843678, "diff": 0.041412677559630476, "two_SE": 0.1566, "pass": true},
+    "b_flask_only_r": -0.001654143198155742,
+    "b_parent_stratified_weighted_abs_r_total": 0.9012051125728714,
+    "b_parent_stratified_weighted_abs_r_non304": 0.900882,
+    "b_parent_per_endpoint_non304": {"/api/user/profile": -0.9086, "/api/data/list": -0.9012, "/api/session/status": -0.8948},
+    "c3_pass": true,
+    "c4_pass": true,
+    "c6_pass": true,
+    "c7_pass": true,
+    "304_counts": {"n_total": 816, "n_non304": 684, "n_304": 132, "n_304_valid": 132, "n_304_expired": 0},
+    "numerical_match": "All primary metrics match producer within 1e-6 (stratified r, CI, TOST, per-endpoint r, per-cache r, flask r)"
+  },
+  "claim_ceiling": "C-FRESHNESS orthogonality at delta=0.15 SURVIVES on production-like LOCAL testbed (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDN simulation ETag-SHA256/Cache-Control max-age/no-store, 3 endpoints /api/user/profile /api/data/list /api/session/status) with endpoint-stratified pooled r=0.0410 [CI -0.034,0.1156] n_non304=684 (n_total=816), TOST p_upper=0.002, C1-C7 all PASS per frozen decision_rule at delta=0.15, and robust B-PARENT-CONFOUND-V2 negative control |r|~0.90 independent of 304. Ceiling does NOT extend to: (a) n_non304>=800 as required by frozen question (achieved 684, 116 short), so inference at delta=0.10 remains marginal/bounded (TOST p 0.060 at 0.10); (b) distributed production CDN hierarchies, concurrent load, cache invalidation on session change, non-Flask frameworks, or body-inclusive structural signals; (c) headers other than ETag/Cache-Control/request_id entropy. For product, parallel-channel architecture is justified only for this LOCAL production-like regime at delta=0.15; VALIDATED/PRODUCT_CORE not yet warranted pending n>=800 re-run and real-CDN/distributed validation.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35530590140/request.json inherited_next_question n_non304>=800",
+    "research/experiments/EXP-GRAPH-35530590140/spec.json:question n_non304>=800; spec.json:measurement_validity POWER INCREASE n>=800; spec.json:decision_rule C1-C7 frozen at delta 0.15",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:metrics.stratified_pooled_r 0.0410 stratified_ci_upper_95 0.1156 n=684",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:controls C1-C7 all PASS",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:metrics.bparent_stratified_weighted_abs_r 0.9012 per_endpoint_bparent_r",
+    "research/experiments/EXP-GRAPH-35530590140/raw_evidence/experiment_data.json:per_condition_data 24 conditions 34 each total 816 non304 684 304 breakdown 33/34 valid+cache profile/data_list",
+    "research/experiments/EXP-GRAPH-35530590140/raw_evidence/experiment_data.json:bparent_per_condition_data non304 recompute 0.9009",
+    "research/experiments/EXP-GRAPH-35530590140/testbed_server.py:_make_unauthorized_response uuid4 for primary (V1 fix) and permission_level from JWT (V_ETAG fix)",
+    "research/experiments/EXP-GRAPH-35530590140/testbed_server_v2.py:_make_unauthorized_response request_id='expired' for expired (V2 confound)",
+    "research/experiments/EXP-GRAPH-35530590140/run_experiment.py:stratified_pooled_r and per-cache endpoint-stratified weighting",
+    "research/experiments/EXP-GRAPH-35510157861/handoff.json:carry_forward established V_ETAG/C5/V3 fixes verified, rejected V1 confound fragility",
+    "research/experiments/EXP-GRAPH-35510157861/audit.json:recomputed_metrics bparent non304 stratified -0.0735 FAIL",
+    "codex/index.json:prior localhost mocks r 0.0022-0.0463 audit PASS"
+  ],
+  "unresolved": [
+    "Whether orthogonality holds on actual distributed production infrastructure with real CDN hierarchies and concurrent load (spec measurement_validity, result.json unresolved)",
+    "Whether CDN cache invalidation on session state change introduces correlation (result.json unresolved)",
+    "Whether concurrent client load changes correlation structure (result.json unresolved)",
+    "Whether headers-only structural signal captures sufficient variation for production use vs body-inclusive signals (result.json unresolved)",
+    "Whether delta=0.10 is achievable with n_non304>=800 (current TOST delta 0.10 p=0.060 at n=684, CI half-width 0.075; result.json unresolved delta=0.10)",
+    "Whether per-cache heterogeneity diff 0.041 is systematic or sampling noise (result.json unresolved)",
+    "Whether session_status endpoint negligible r=-0.0007 vs profile/data_list heterogeneity reflects endpoint-specific structure"
+  ]
+}

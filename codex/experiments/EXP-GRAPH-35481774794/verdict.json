@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35481774794",
+  "lane": "graph",
+  "decision": "REJECTED — Frozen decision_rule triggers REJECTED: C7 negative control FAILS (B-PARENT-CONFOUND |r|=0.1228 < 0.15 threshold, simple pooled per frozen spec) and C5 FAILS under producer's simple-pooled implementation (diff=0.4971) though correctly stratified C5 PASSES (diff=0.0469 < 0.076). C1-C4 and C6 all PASS. The audit confirms the REJECTED is driven by two issues: (1) C7 endpoint heterogeneity — V1 entropy confound is strong on profile (-0.359) and data_list (-0.415) but null on session_status (-0.006), diluting simple-pooled |r| below 0.15; (2) C5 code bug — run_experiment.py concatenates across endpoints without stratification for per-cache correlations. The underlying orthogonality signal is strong: endpoint-stratified pooled r=0.0125 (CI [-0.063, 0.087], TOST p_upper 0.00015), B-FLASK-ONLY r=0.021. The REJECTED reflects protocol/measurement issues, not evidence against the orthogonality hypothesis. C-FRESHNESS status remains EXPERIMENTAL.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule REJECTED (C7 FAIL, C5 FAIL under wrong pooling) on production-like testbed. However, the REJECTED is measurement-confounded, not a scientific falsification of orthogonality. Audit confirms: (1) correctly stratified C5 PASSES (diff=0.0469 < 0.076); (2) C7 fails per frozen simple-pooled rule (|r|=0.1228) but endpoint heterogeneity (session_status null) dilutes pooled — stratified weighted |r|=0.260 would PASS; (3) stratified pooled r=0.0125 (CI upper 0.0874 < 0.15) confirms within-endpoint orthogonality. The frozen REJECTED does NOT accumulate evidence against the orthogonality hypothesis; it accumulates evidence that the frozen protocol's C7 simple-pooled definition and C5 pooling implementation need correction. Maximum justified ceiling: within-endpoint orthogonality confirmed (stratified r=0.0125), B-FLASK-ONLY replication (r=0.021), on single-node Flask 3.1.3 + PyJWT RS256 + SQLite WAL + in-memory CDN simulation localhost. NOT validated: cross-endpoint pooled orthogonality under simple pooling, production infrastructure, delta=0.10, distributed CDN, concurrent load, or body-inclusive signals."
+    }
+  ],
+  "product_action": "Do NOT promote to Product Core. Parallel-channel architecture NOT justified for production deployment. The frozen REJECTED prevents VALIDATED/PRODUCT_CORE. However, the within-endpoint stratified orthogonality (r=0.0125) is the strongest evidence to date and suggests parallel channels may be viable if the C7/simple-pooled and V_ETAG/session_status issues are resolved.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing (1) V_ETAG permission leakage for /api/session_status (stable_key must depend on permission_level, not session_id alone), (2) C5 pooling code to use endpoint-stratified weighting for per-cache correlations, and (3) either increasing entropy bifurcation strength on session_status endpoint or defining C7 as endpoint-stratified weighted pooled r, does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED (any fails) at delta=0.15 on the production-like testbed with n>=800?",
+  "reason": "Two measurement issues prevent CONFIRMED: (a) C7 negative control FAILS per frozen simple-pooled rule because V1 entropy confound is endpoint-dependent (profile -0.359, data_list -0.415 strong; session_status -0.006 null), diluting pooled |r| from 0.260 (stratified) to 0.123 (simple). The frozen spec defines C7 as simple pooled, so this is a genuine protocol failure. However, the endpoint-dependent pattern suggests the confound IS real on 2/3 endpoints and only absent on session_status where the stable_key is session_id-based. (b) C5 pooling code uses simple concatenation instead of the endpoint-stratified weighting required by the frozen spec. Audit recomputes correctly stratified C5 as PASS (diff=0.0469). Both issues are fixable: fix V_ETAG for session_status, fix C5 pooling code, and either strengthen session_status bifurcation or redefine C7. The stratified orthogonality (r=0.0125) is the strongest single-number evidence for C-FRESHNESS and should be the basis for the next experiment's decision rule.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35481774794/result.json — COMPLETE, MIXED, C1-C4 PASS, C5 FAIL, C6 PASS, C7 FAIL",
+    "research/experiments/EXP-GRAPH-35481774794/audit.json — REVISE, producer_claim_supported false, claim_ceiling REJECTED per frozen rule, C5 stratified recomputation PASS diff=0.0469",
+    "research/experiments/EXP-GRAPH-35481774794/audit.json:validity_findings — V_C5_STRATIFICATION_MISSING high, V_ETAG_SESSION_STATUS_ISOLATED medium, V_C7_NEGATIVE_CONTROL_WEAK high",
+    "research/experiments/EXP-GRAPH-35481774794/audit.json:recomputed_metrics — per_cache_stratified diff=0.0469 PASS, bparent_stratified_weighted -0.260",
+    "research/experiments/EXP-GRAPH-35481774794/result.json:metrics — stratified_pooled_r=0.0125, CI upper 0.0874, TOST p_upper 0.00015",
+    "research/experiments/EXP-GRAPH-35481774794/result.json:metrics.per_endpoint_r_testbed — profile -0.023, data_list -0.001, session 0.049",
+    "research/experiments/EXP-GRAPH-35481774794/result.json:metrics.per_endpoint_bparent_r — profile -0.359, data_list -0.415, session -0.006",
+    "research/experiments/EXP-GRAPH-35481774794/result.json:metrics.etag_permission_verification — profile/data_list overlap 1, session_status overlap 0",
+    "research/experiments/EXP-GRAPH-35481774794/spec.json:decision_rule — C5 endpoint-stratified, C7 simple pooled |r|>=0.15",
+    "research/experiments/EXP-GRAPH-35476270792/handoff.json — carry_forward established (B-FLASK-ONLY r=0.0263) and measurement defects V3/V_ETAG"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35530590140",
+  "lane": "graph",
+  "github_run_id": "35530590140",
+  "base_sha": "b33b5b790d82a016af6a4a8ebe567fbd9c36715a",
+  "code_files": {
+    "testbed_server.py": "685422db47de7d43f8af1775aa5a231657b20c9b43bf5f6d6694c2ca30a8947f",
+    "testbed_server_v2.py": "0725fcac6201f18099744525accca5d7e2a61809b85b5200863f4c2ee60db3d9",
+    "flask_only_server.py": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "run_experiment.py": "31bc57d4faff28107527963231307b45643555aa8e0f4a8a8bc713cb07af9b53"
+  },
+  "raw_evidence": {
+    "path": "raw_evidence/experiment_data.json",
+    "sha256": "215a42b2b6377764ff69d038c8bb4dc6cc34127d3510ee00b52ac2a2a180ed9d"
+  },
+  "parent_experiment": "EXP-GRAPH-35510157861",
+  "corrections_from_parent": [
+    "V2 CONFOUND: B-PARENT-CONFOUND redesigned with fixed 'expired' request_id for expired responses (server-side, independent of 304)",
+    "V3 FIX: Endpoint-stratified pooling for C3/C4/C5 (removes endpoint-heterogeneity bias from 304-exclusion skewed composition)",
+    "V_ETAG_PERMISSION_LEAKAGE FIX: permission_level derived from JWT payload before validation (write-permission expired get write-etag)",
+    "POWER FIX: n >= 800 non-304 samples (34 per condition per endpoint)",
+    "V3 FIX: 304 exclusion applied to ALL correlations (pooled, per-endpoint, per-cache)"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "scipy_version": "1.18.1",
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2"
+  }
+}

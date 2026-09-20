@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35530590171",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Do not use the corrected-model power-law extrapolation (n50 agreement 0.575 PI90 [0.511,0.774]) to justify product or Docker decisions. It is gated behind C1 FAIL and built on sign-crossing |margin| power law from n=4 points with R²=0.197 vs std R²=0.867. Per frozen rule NOT C1 -> MEASUREMENT_INVALID regardless of C2/C3, the extrapolation must be treated as exploratory and unvalidated.",
+    "Replace the tested noise decomposition Phi(mean(M)/std(M)) with a decomposition that separates sign from magnitude. Current test conflates mean (sign) and std (magnitude): at n20 mean 3.97e-04 / std 6.23e-04 = SNR 0.637 -> Phi 0.7379 vs observed 0.5595 residual 17.8pp. Diagnostic proportion(margin_i>0)=0.5654 residual 0.59pp shows agreement is driven by sign fraction, not mean/std ratio. Next prereg should test (a) Phi(median(|M|)/std) or (b) non-linear mapping of empirical margin distribution or (c) between-type vs within-type variance decomposition, preregister C1' = |predicted-observed| <=10pp at n15 and n20.",
+    "Treat null-control comparison as disclosed tautology at n15: null predicts 0.499208 vs observed 0.4998 error 0.0006 will always beat any model predicting ~0.56 at n15 where observed is ~0.50. Next prereg must define NC1 as corrected-model error < null error at n20 only, or as aggregate RMSE across n15+n20, and report both raw errors. Current NC1 FAIL (0.065 vs 0.0006 at n15, 0.178 vs 0.060 at n20) correctly evaluated but does not by itself falsify mechanism.",
+    "Retain disclosure of template invariance and single-site truncation scope as bounds, not fixes. Template invariance verified true for listing/detail/cart on truncated-first-20, forcing rho=1.0 as scalar-multiple tautology (elements_with_bbox listing 1550/1560/1564 detail 1215/1149/1143) and nullifying rho as mechanism evidence. Cart n=1 degeneracy, 7 tasks (3+3+1), Magento single site, truncated-first-20 sampling, and PYTHONHASHSEED=0 set-iteration variance (delta 0.0059 at n20) must remain in validity_notes and bound claim ceiling to that sampling regime.",
+    "Directly measure full-DOM ranking agreement at n=21-82 if Docker image am1n3e/webarena-verified-shopping:latest becomes available (EXP-INTEL-35462974425): neither parent nor corrected model provides a validated extrapolation. Do not iterate additional reanalyses of the same 4-point margin series without new data; the smallest next step that could answer whether agreement crosses 80% is empirical full-DOM enumeration, not another transform of mean/std."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_C1_CORRECTED_MODEL_FAIL_AT_N20",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "finding": "C1_CORRECTED_MODEL_VALID correctly FAILs per frozen conjunctive rule. Phi(mean/std) predicts 0.5648 at n15 residual 6.5pp PASS (threshold 10pp) but predicts 0.7379 at n20 residual 17.8pp FAIL (7.8pp above threshold). Rule requires BOTH within 10pp; one failure triggers MEASUREMENT_INVALID.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.corrected_snr_model.predicted_agreement_n15 0.5648295640638915 residual_n15 0.0650",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.corrected_snr_model.predicted_agreement_n20 0.7379210411265361 residual_n20 0.1784",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n.15.canonical.margin_mean 2.66e-05 margin_std 0.000163 per_n.20.margin_mean 0.000396 margin_std 0.000623",
+        "research/experiments/EXP-INTEL-35530590171/spec.json:decision_rule C1 threshold 10pp both n15 and n20",
+        "research/experiments/EXP-INTEL-35530590171/report.md:Results table Phi(SNR) 0.5648/0.7379"
+      ],
+      "producer_interpretation": "Producer marks C1 false (c1_n15_pass true, c1_n20_pass false) and sets verdict MEASUREMENT_INVALID per frozen rule, noting 7.7x and 2.5x improvement over parent but still above threshold.",
+      "audit_finding": "Independently recomputed Phi(mean/std)=0.5*(1+erf(SNR/sqrt2)): SNR n15 0.1632 -> 0.5648295640638915, SNR n20 0.6369 -> 0.7379210411265361, residuals 0.06503 and 0.17842 exactly matching producer to 1e-15. Failure not borderline at n20 (17.8pp, 1.78x threshold) and robust to reported PYTHONHASHSEED 0 delta 0.0059. PC1 correctly evaluated as fail."
+    },
+    {
+      "id": "VF2_NOISE_SCALE_PARTIAL_FIX",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Across-iteration margin_std (5.0e-05 at n5 to 6.23e-04 at n20) is ~10-50x larger than within-iteration SE (~3.8e-06 to 1.32e-05) and explains why parent Phi(mean(SNR_SE)) saturated at 1.0 (residuals 50.0pp at n15, 44.1pp at n20). Corrected model reduces residuals to 6.5pp and 17.8pp, confirming direction is correct but not sufficient: std grows faster than mean (std 3.8x from n15 1.63e-04 to n20 6.23e-04 vs mean 14.9x from 2.66e-05 to 3.97e-04), inflating SNR at n20 and overpredicting agreement.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n canonical se_tot_mean 1.08e-05 at n15, 1.32e-05 at n20 vs margin_std 0.000163/0.000623",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.corrected_snr_model.residual_n15 0.065 vs parent_snr_model_reference.residual_n15 0.5002; residual_n20 0.178 vs 0.4405",
+        "research/experiments/EXP-INTEL-35530590171/result.json:observations 2-4 root cause and 7.7x/2.5x improvement",
+        "research/experiments/EXP-INTEL-35476271877/audit.json:VF1_SNR_NOISE_SCALE_MISSPECIFICATION se 1e-5 vs margin_std 1e-4 to 6e-4"
+      ],
+      "producer_interpretation": "Producer attributes n20 overprediction to std growing faster than mean and labels margin_std as better but not the right noise scale, correctly withholding mechanism conclusion.",
+      "audit_finding": "Recomputed ratios confirm diagnosis. Parent and corrected predictions bracket observed at n20 (1.0 parent high, 0.7379 corrected still high, null 0.499 low), indicating true flip probability is not captured by symmetric Gaussian Phi(mean/std). Diagnostic prop(margin>0)=0.5654 (residual 0.59pp) confirms sign-fraction, not mean/std, determines agreement under template invariance."
+    },
+    {
+      "id": "VF3_EXTRAPOLATION_GATED_AND_UNSTABLE",
+      "severity": "high",
+      "category": "extrapolation",
+      "finding": "Extrapolation to n50 uses power laws on 4 points: |margin| a=1.11e-05 b=0.876 R²=0.197 (poor, sign crosses zero between n10 -1.35e-04 and n15 +2.66e-05), std a=2.93e-06 d=1.643 R²=0.867. Predicts margin_hat 3.42e-04, std_hat 0.00181, SNR 0.189, Phi 0.575 PI90 [0.511,0.774]. C3 true (<80%) but gated behind failed C1; PI width 0.263 reflects large uncertainty; b vs d gap explains overprediction trend.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.extrapolation_n50.power_law margin_R2 0.1973 std_R2 0.8666",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.extrapolation_n50.n50 predicted_agreement 0.5749954515920276 pi90 lo 0.51086 hi 0.7735",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n margins [-4.9e-05 -0.000134 2.66e-05 0.000396] sign_crosses true",
+        "research/experiments/EXP-INTEL-35530590171/provenance.json:analysis_commands scipy.stats.linregress bootstrap n_boot 2000 seed 999"
+      ],
+      "producer_interpretation": "Producer marks C3 true but explicitly states gated behind failed C1, cannot be used for product decisions, and flags R²=0.197 and PI width as validity threat.",
+      "audit_finding": "Linregress recomputation exactly matches a,b,R². Margins sign-crossing makes |margin| fit unreliable by construction; using signed margin would be invalid. PI90 correctly computed but not decision-gating. Producer handling protocol-correct; audit confirms no full-DOM inference justified."
+    },
+    {
+      "id": "VF4_DIAGNOSTIC_PROP_VS_MODEL",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "finding": "Under template invariance, ranking agreement = proportion(margin_i>0) exactly: 0.4996 at n15 residual 0.02pp and 0.5654 at n20 residual 0.59pp, near-exact. Corrected model Phi(mean/std) conflates sign and scale and fails at n20. Alternative mean(Phi(SNR_SE)) parent diagnostic 0.4986/0.5649 was near-tautological because SE~1e-5 makes Phi collapse to indicator(margin>0). None are predictive models for extrapolation.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.diagnostic_indicator_statistic.prop_margin_positive_n15 0.4996 n20 0.5654 residual 0.0002/0.0059",
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.snr_model_alt_statistic.mean_phi_snr_n15 0.498626 n20 0.564943 note collapses to indicator",
+        "research/experiments/EXP-INTEL-35530590171/report.md:Diagnostic Direct Indicator Statistic table"
+      ],
+      "producer_interpretation": "Producer correctly labels diagnostic as empirical statistic not model and excludes it from decision rule, noting tautology.",
+      "audit_finding": "Verified: with SE~1e-5 Phi(SNR) ~ indicator, so mean Phi ~ prop>0. Phi(mean/std) is not tautological but is misspecified. Neither supports extrapolation to n50 because they do not model n->distribution mapping."
+    },
+    {
+      "id": "VF5_NULL_CONTROL_CORRECTLY_EVALUATED",
+      "severity": "medium",
+      "category": "controls",
+      "finding": "Null model N(0,1) 3+3 densities predicts 0.499208 (500k sims) within 50% +/-5% PASS. Corrected model error 0.065 at n15 vs null 0.0006 and 0.178 at n20 vs 0.060 fails to beat null at both n. At n15 observed ~0.50, null will trivially appear superior. Evaluation correctly computed but comparison is not discriminating at n15.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.null_control predicted_agreement 0.499208 corrected_model_error_n15 0.065 null_error_n15 0.00059 corrected_beats_null false",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:null_control predicted_agreement 0.499208 n_simulations 500000"
+      ],
+      "producer_interpretation": "Producer marks NC1 pass false (does not beat null) and reports nuance that null behavior passes but model-outperforms-null fails.",
+      "audit_finding": "Recomputed null errors match: |0.499208-0.4998|=0.000592, |0.499208-0.5595|=0.060292. Corrected errors 0.0650 and 0.1784 match. Verdict NC1 false correctly applied. Baseline B3 null within range correctly PASS."
+    },
+    {
+      "id": "VF6_SCOPE_AND_REPRESENTATION_CORRECTLY_BOUNDED",
+      "severity": "info",
+      "category": "validity",
+      "finding": "Scope correctly bounded to tag_entropy x DEF-FULL-MAP canonical recipe, 7 tasks (3 listing, 3 detail, 1 cart) truncated-first-20 locatable_sample, cart n=1 excluded from margin, template invariance true for first-20, single Magento site, n=3 per type, PYTHONHASHSEED=0 variance. Baseline reproduction canonical agreement 0.5654 vs 0.5595 delta 0.0059, eta2 0.9194 vs 0.9205 delta -0.0010 within seed variation. No overgeneralization; outcome INCONCLUSIVE not falsification.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/spec.json:measurement_validity 1-6 truncated-first-20, cart degeneracy, template invariance",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.baseline_reproduction canonical_agreement_n20 0.5654 pertask 0.78 eta2",
+        "research/experiments/EXP-INTEL-35530590171/result.json:validity_notes PYTHONHASHSEED set-iteration variance, cart excluded",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:verification.template_invariance_first20 true"
+      ],
+      "producer_interpretation": "Producer explicitly bounds claim ceiling to 7 tasks truncated-first-20 single site and declares measurement invalid with no product consequence authorized.",
+      "audit_finding": "All disclosures present and consistent with frozen prereg validity threats 1-5. No hidden representation loss beyond disclosed truncation. Handling verified correct."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "PC1_CORRECTED_MODEL_REPRODUCES_OBSERVED",
+      "expected": "Predicted agreement within 10pp of 49.98% at n15 and 55.95% at n20 via Phi(mean/std) using snr_per_iteration margins",
+      "observed": "Predicted 0.5648 at n15 residual 6.5pp PASS, 0.7379 at n20 residual 17.8pp FAIL. Overall C1 false.",
+      "verdict": "FAIL correctly evaluated",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.PC1_CORRECTED_MODEL_REPRODUCES_OBSERVED pass false residual 6.5pp/17.8pp",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.corrected_snr_model.c1_n15_pass true c1_n20_pass false"
+      ]
+    },
+    {
+      "baseline_id": "NC1_RANDOM_NOISE_BASELINE",
+      "expected": "Null 50% +/-5% at all n; corrected model error < null error",
+      "observed": "Null 0.499208 within 50% +/-5% passes; corrected error 0.065 vs 0.0006 at n15 and 0.178 vs 0.060 at n20 both larger, so model does not beat null at either n.",
+      "verdict": "FAIL correctly evaluated (null behavior PASS, outperforms FAIL)",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.NC1_RANDOM_NOISE_BASELINE pass false",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.null_control"
+      ]
+    },
+    {
+      "baseline_id": "B1_PARENT_FAILED_SNR_N15",
+      "expected": "Parent predicts 0.9999999999999991 at n15 residual 0.5002 FAIL",
+      "observed": "Corrected predicts 0.5648 residual 0.065: 7.7x improvement, recomputed residual 0.06503 matches. Still PASS at n15 but not sufficient for C1.",
+      "verdict": "PASS improvement verified",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.snr_model.predicted_agreement_n15 0.9999999999999991 residual 0.5002",
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.B1_PARENT_FAILED_SNR_N15 pass true 7.7x"
+      ]
+    },
+    {
+      "baseline_id": "B2_PARENT_FAILED_SNR_N20",
+      "expected": "Parent predicts 1.0 at n20 residual 0.4405 FAIL",
+      "observed": "Corrected predicts 0.7379 residual 0.178: 2.5x improvement, recomputed residual 0.17842 matches. Still FAIL >10pp.",
+      "verdict": "PASS improvement verified",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.snr_model.predicted_agreement_n20 1.0 residual 0.4405",
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.B2_PARENT_FAILED_SNR_N20 pass true 2.5x"
+      ]
+    },
+    {
+      "baseline_id": "B3_NULL_NOISE_BASELINE",
+      "expected": "Random noise predicts ~50% at all n",
+      "observed": "Parent and current 0.499208 within 45-55% range. Recomputed via 500k sim expectation matches.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.B3_NULL_NOISE_BASELINE pass true",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:null_control.predicted_agreement 0.499208"
+      ]
+    },
+    {
+      "baseline_id": "B4_OBSERVED_AGREEMENT_N15",
+      "expected": "Frozen target 49.98% at n15",
+      "observed": "This run 0.4996 delta -0.0002 from frozen target; recomputed baseline_reproduction 0.4996 matches.",
+      "verdict": "PASS within seed variation",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.B4_OBSERVED_AGREEMENT_N15 observed 0.4996 delta -0.0002",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n.15.canonical.ranking_agreement 0.4996"
+      ]
+    },
+    {
+      "baseline_id": "B5_OBSERVED_AGREEMENT_N20",
+      "expected": "Frozen target 55.95% at n20",
+      "observed": "This run 0.5654 delta +0.0059 from frozen target; recomputed 0.5654 matches.",
+      "verdict": "PASS within seed variation",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.B5_OBSERVED_AGREEMENT_N20 observed 0.5654 delta 0.0059",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json:per_n.20.canonical.ranking_agreement 0.5654"
+      ]
+    },
+    {
+      "baseline_id": "B6_PARENT_EXTRAPOLATION_N50",
+      "expected": "Parent predicts 1.0 PI90 lo 0.845 at n50 (gated behind failed C1)",
+      "observed": "Corrected predicts 0.575 PI90 [0.511,0.774] large change but gated behind failed C1, marked not_gated. Recomputed PI via bootstrap seed 999 matches.",
+      "verdict": "NOT_GATED correctly applied",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/result.json:metrics.extrapolation.n50.predicted_agreement 1.0 pi90 lo 0.845",
+        "research/experiments/EXP-INTEL-35530590171/result.json:metrics.extrapolation_n50.n50 predicted_agreement 0.574995 pi90 lo 0.5108",
+        "research/experiments/EXP-INTEL-35530590171/result.json:controls.B6_PARENT_EXTRAPOLATION_N50 pass not_gated"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "corrected_snr_model": {
+      "producer_predicted_n15": 0.5648295640638915,
+      "recomputed_predicted_n15": 0.5648295640638915,
+      "producer_predicted_n20": 0.7379210411265361,
+      "recomputed_predicted_n20": 0.7379210411265361,
+      "producer_residual_n15": 0.06502956406389149,
+      "recomputed_residual_n15": 0.06502956406389149,
+      "producer_residual_n20": 0.17842104112653612,
+      "recomputed_residual_n20": 0.17842104112653612,
+      "threshold_pp": 10,
+      "c1_n15_pass": true,
+      "c1_n20_pass": false,
+      "C1_CORRECTED_MODEL_VALID": false,
+      "match": true,
+      "snr_n15": 0.1632255221957657,
+      "snr_n20": 0.6369492246165328,
+      "margin_mean_n15": 2.664442979473191e-05,
+      "margin_std_n15": 0.00016323690949982518,
+      "margin_mean_n20": 0.00039687662339170924,
+      "margin_std_n20": 0.0006230898917109818
+    },
+    "parent_reference": {
+      "predicted_n15": 0.9999999999999991,
+      "recomputed_n15": 0.9999999999999991,
+      "predicted_n20": 1.0,
+      "recomputed_n20": 1.0,
+      "residual_n15": 0.5001999999999991,
+      "residual_n20": 0.4405,
+      "improvement_factor_n15": 7.69,
+      "improvement_factor_n20": 2.47,
+      "match": true
+    },
+    "mechanism_n20": {
+      "corrected_snr": 0.6369492246165328,
+      "recomputed_corrected_snr": 0.6369492246165328,
+      "cv_listing": 0.0046367045393507405,
+      "cv_detail": 0.03353065961167798,
+      "rho_listing": 1.0,
+      "rho_detail": 1.0,
+      "C2_MECHANISM_CORRECTED": true,
+      "match": true,
+      "note": "C2 true but gated behind C1 FAIL; rho=1.0 tautology under template invariance"
+    },
+    "extrapolation_n50": {
+      "ns": [5, 10, 15, 20],
+      "margin_means": [-4.904587178441491e-05, -0.00013464925045408282, 2.664442979473191e-05, 0.00039687662339170924],
+      "margin_stds": [4.973987554828668e-05, 0.00010562741091040149, 0.00016323690949982518, 0.0006230898917109818],
+      "margin_a": 1.1137672643065647e-05,
+      "recomputed_margin_a": 1.1137672643065647e-05,
+      "margin_b": 0.8756730457650053,
+      "recomputed_margin_b": 0.8756730457650053,
+      "margin_R2": 0.1973,
+      "recomputed_margin_R2": 0.1973261330114311,
+      "std_c": 2.9306907593534815e-06,
+      "recomputed_std_c": 2.9306907593534815e-06,
+      "std_d": 1.6426773251019353,
+      "recomputed_std_d": 1.6426773251019353,
+      "std_R2": 0.8666,
+      "recomputed_std_R2": 0.8666444254126648,
+      "n50_margin_hat": 0.0003424023111174484,
+      "n50_std_hat": 0.0018106291047987905,
+      "n50_snr": 0.18910681939772445,
+      "predicted_agreement_n50": 0.5749954515920276,
+      "recomputed_agreement_n50": 0.5749954515920276,
+      "pi90_lo": 0.5108666547878428,
+      "pi90_hi": 0.7735391789249395,
+      "C3_EXTRAPOLATION_FALSIFIES_FULL_DOM": true,
+      "match": true,
+      "gated": true
+    },
+    "null_control": {
+      "predicted_agreement": 0.499208,
+      "recomputed_predicted_agreement": 0.499208,
+      "corrected_error_n15": 0.06502956406389149,
+      "recomputed_error_n15": 0.06502956406389149,
+      "null_error_n15": 0.0005920000000000369,
+      "recomputed_null_error_n15": 0.0005920000000000369,
+      "corrected_error_n20": 0.17842104112653612,
+      "recomputed_error_n20": 0.17842104112653612,
+      "null_error_n20": 0.06029200000000001,
+      "recomputed_null_error_n20": 0.06029200000000001,
+      "corrected_beats_null_n15": false,
+      "corrected_beats_null_n20": false,
+      "match": true
+    },
+    "diagnostic": {
+      "prop_positive_n15": 0.4996,
+      "recomputed_prop_n15": 0.4996,
+      "prop_positive_n20": 0.5654,
+      "recomputed_prop_n20": 0.5654,
+      "residual_n15": 0.0002,
+      "residual_n20": 0.0059,
+      "match": true
+    },
+    "baseline_reproduction": {
+      "canonical_agreement_n15": 0.4996,
+      "canonical_agreement_n20": 0.5654,
+      "canonical_eta2_n20": 0.919454846818671,
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: Corrected SNR Phi(mean/std) using across-iteration margin_std is MEASUREMENT_INVALID per frozen rule: C1 fails at n20 (residual 17.8pp >10pp, n15 passes at 6.5pp). Despite 7.7x/2.5x improvement over parent SE-based model (residuals 50.0pp->6.5pp at n15, 44.1pp->17.8pp at n20) and confirming margin_std (~1e-4 to 6e-4) is the correct direction vs SE (~1e-5), the ratio conflates sign and magnitude and overpredicts at larger n where std grows faster (exponent 1.64) than |mean| (0.88). Proportion(margin>0) at 0.4996/0.5654 residuals 0.02/0.59pp shows sign fraction, not mean/std, drives agreement under template invariance (rho=1.0 tautology, single Magento site, truncated-first-20, n=3 per type). No mechanism (C2 margin_deficit true, C2 gated) or full-DOM extrapolation (C3 true predicting 0.575 at n50 PI90 [0.511,0.774] but gated, built on 4-point sign-crossing |margin| R² 0.197) is validated. Null does not beat model at n15 due to ceiling. No inference whether ranking agreement crosses 80% at n=21-82; Docker re-collection remains unvalidated and product lane must not adopt non-recipe density nor invest in full-DOM on basis of this extrapolation. Descriptive ceiling only: canonical eta2 0.919 with agreement 0.565 at n20, monotonic Spearman 1.0 across n, and demonstration that neither SNR decomposition captures the 56% plateau.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35530590171/request.json sha256 77331f7d7cecee79e669ff86f04173a631a29b7b20bdaf7cfc9fd3b1308a5f65",
+    "research/experiments/EXP-INTEL-35530590171/spec.json sha256 54d0a5ec0cfe64057b71516c9576b32d2abf6251e848a4ed66b6f3d0ebc3ff7a",
+    "research/experiments/EXP-INTEL-35530590171/prereg.md sha256 1312fba8980a4a08bda11cc80a96a6c8464eaa2818692e1b0e5f6333f917b81d",
+    "research/experiments/EXP-INTEL-35530590171/freeze.json sha256 68a5089988f62f0d4e8d5bf6db32f14d3a9eac0dca17 (frozen_at 2026-09-20T18:57:02.399387+00:00)",
+    "research/experiments/EXP-INTEL-35530590171/result.json metrics.corrected_snr_model, mechanism, extrapolation_n50, null_control, diagnostic, frozen_decision_rule",
+    "research/experiments/EXP-INTEL-35530590171/report.md Results table and Frozen Verdict MEASUREMENT_INVALID",
+    "research/experiments/EXP-INTEL-35530590171/provenance.json data_sources snr_per_iteration_tag_entropy.json.gz ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a, analysis_output_snr.json f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json per_n margins [-4.9e-05 -0.000134 2.66e-05 0.000396] se_tots [3.8e-06 1.04e-05 1.08e-05 1.32e-05] null_control 0.499208",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a - 10000 iterations per n",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 - 7 tasks truncated-first-20 raw densities",
+    "research/experiments/EXP-INTEL-35476271877/audit.json status MEASUREMENT_INVALID VF1 noise-scale 10-50x mismatch",
+    "research/experiments/EXP-INTEL-35476271877/result.json metrics.snr_model parent residuals 0.5002/0.4405 and extrapolation 1.0 PI90 lo 0.845"
+  ],
+  "unresolved": [
+    "Whether ranking agreement at full-DOM element counts (n=21-82) crosses 80% remains OPEN: corrected model fails C1 (17.8pp at n20) and its n50 extrapolation (0.575 PI90 [0.511,0.774]) is gated and built on poor |margin| power law (R² 0.197, 4 points, sign crossing), cannot substitute for measurement.",
+    "What is the correct noise decomposition? margin_std partially improves over SE but overpredicts at n20 because std grows faster (d=1.64) than |mean| (b=0.88). Diagnostic prop>0 matches within 1pp but is non-predictive. Candidates outside frozen design: median(|M|)/std, empirical CDF mapping, or decomposition into within/between-type variance.",
+    "Whether the 56% plateau (0.50 at n15, 0.565 at n20) is structural or artifact of truncated-first-20 head-biased sampling (locatable_elements 82 listing, 32 detail sampled to 20) and template invariance (rho=1.0). Full-DOM or randomized subset sampling without template duplication needed to break invariance and test.",
+    "Whether Docker image am1n3e/webarena-verified-shopping:latest for direct full-DOM measurement (EXP-INTEL-35462974425) will become available remains blocking action; until then full-DOM question cannot be answered empirically.",
+    "Whether margin_std power law d=1.643 (faster than n^1) and |margin| b=0.876 (slower than n^1) reflect genuine scaling or artifact of 4 points with sign crossing; widening gap explains overprediction but is unvalidated beyond n=20.",
+    "Generalization beyond single Magento site, small type sample (n=3 per type, cart n=1 distinct), and single definition tag_entropy x DEF-FULL-MAP (DEF-FORM-ONLY comparison excluded from decision) remains untested."
+  ]
+}
