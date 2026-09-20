@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35481773764",
+  "lane": "product",
+  "target_lane": "runtime",
+  "next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, token_refresh included) be measured on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions — and does orthogonality (TOST delta=0.15, n>=480) survive on that substrate including token_refresh under stochastic drift?",
+  "why_next": "All five frozen decision conditions pass at n=480 on localhost mock with production-like structural noise. The effective noise coverage is 3/4 types (error_format_variation inert). Threshold tautology confirmed (0.25 below both behavioral modes 0.35/0.65). Parent n=240 TOST lower-tail failure was resolved as sample-size power artifact. This is the 5th independent mock orthogonality confirmation (r=0.016, CI upper 0.1055 < 0.15). The mock-to-production gap remains the sole bottleneck preventing PRODUCT_CORE promotion. Product lane has exhausted mock-ceiling designs — all 5 frozen conditions pass, orthogonality confirmed across 5 independent experiments. The critical unknown is whether real external APIs with production databases, distributed caches/CDN, network latency, and OAuth/OIDC middleware preserve the near-zero correlation structure. This requires materially different infrastructure (real API endpoints, not mock servers) and is the single highest-upside question for C-FRESHNESS product deployment. Route to runtime lane: build production-like HTTP observation substrate with real OAuth/OIDC, CDN, network RTT, database-backed sessions, then re-measure orthogonality at delta=0.15 with n>=480 including token_refresh.",
+  "carry_forward": {
+    "established": [
+      "Token_refresh behavioral TP=1.0 under co-occurring production-like structural noise (3 effective types: pagination_metadata, variable_length_data, cdn_cache_headers; error_format_variation inert per V-ERROR-FORMAT-INERT) at n=480 on stochastic Flask+SQLite mock — confirms parent result at adequate sample size (EXP-PRODUCT-35481773764 result.json, audit REVISE)",
+      "TOST orthogonality confirmed at delta=0.15 at n=480 (r=0.016, CI [-0.0735, 0.1055], both tails p<0.05) — 5th independent mock confirmation (EXP-PRODUCT-35481773764 result.json::metrics.c3_orthogonality)",
+      "Orthogonality confirmed across 5 independent mock experiments at n=480: EXP-GRAPH-35353011131 (r=0.046, CI upper 0.135), EXP-GRAPH-35389145821 (r=0.0022, CI upper 0.0916), EXP-PRODUCT-35445596342 (r=-0.0258, CI upper 0.064), EXP-PRODUCT-35476271728 (r=-0.0366, CI upper 0.053), EXP-PRODUCT-35481773764 (r=0.016, CI upper 0.1055) — all TOST PASS",
+      "Structural signal (HTTP fingerprint substrate) discriminates auth states on mock: discrimination 0.8333, replicated across 6+ product-lane experiments (EXP-PRODUCT-35481773764 result.json::controls.PC-STRUCTURAL-DISCRIMINATION)",
+      "Stochastic token_refresh produces bimodal behavioral scores: 0.35 (refresh failure, ~30%) and 0.65 (refresh success, ~70%), behavioral_std 0.1345-0.1465, both modes exceed 0.25 threshold (EXP-PRODUCT-35481773764 result.json::metrics.c3_per_condition)",
+      "Structural noise does not cause behavioral false positives: FP=0.0 on 240 noise-only samples (EXP-PRODUCT-35481773764 result.json::metrics.c4_noise_fp_rate)",
+      "Parallel-channel architecture (behavioral + structural as independent channels) justified at localhost stochastic-mock ceiling only",
+      "Threshold sensitivity (exploratory): TP=1.0 at thresholds 0.15-0.35, cliff to 0.677 at 0.40, FP=0.0 at all thresholds — bimodal distribution makes any threshold 0.15-0.35 tautologically identical (EXP-PRODUCT-35481773764 result.json::metrics.threshold_sweep)",
+      "C-PRODUCT-ECON is REJECTED: 5+ consecutive PRODUCT experiments with zero real LLM calls, 5.42% thin margin, COLD 7.5x cheaper"
+    ],
+    "rejected": [
+      "C-PRODUCT-ECON (token-based deduplication economics): REJECTED as not viable at current scale",
+      "Hypothesis that behavioral scoring weights produce differentiated scores (original additive weights): FALSIFIED by measurement in EXP-PRODUCT-35434772331",
+      "Six structural signal families for C-FRESHNESS frozen gate: Jaccard, TF-IDF, response-time KS, linear Fisher LDA, field-usage profiling, schema comparison — all falsified under structural noise",
+      "Hypothesis that n=240 TOST lower-tail failure (ci_lower -0.185, p_lower 0.081) indicated genuine non-equivalence: CONFIRMED as sample-size power artifact, not mechanism-driven",
+      "error_format_variation as effective production-like noise type: INERT on measured channels (body replaced after resp creation without rebuilding resp) — not a tested noise type"
+    ],
+    "unknown": [
+      "Whether the parallel-channel freshness guard orthogonality survives on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions (primary bottleneck for PRODUCT_CORE)",
+      "Whether the expired_token/invalid_token fingerprint collision (identical 401 authentication_failed) generalizes to production endpoints with differentiated error details",
+      "Whether within-condition behavioral variance and structural variance maintain on real network RTT and cache-freshness distributions beyond localhost jitter/TTL",
+      "Whether token_refresh behavioral_score generalizes to production token refresh endpoints where refresh failure may produce different error surfaces or graded severity (beyond discrete 0.35/0.65)",
+      "Whether 4 structural noise types are sufficient coverage for production schema drift (3/4 tested; error_format_variation untested on wire)",
+      "Calibrated discriminating threshold for production: continuous severity variation needed beyond bimodal 0.35/0.65 model — current 0.25 threshold tautological under bimodal distribution"
+    ],
+    "do_not_assume": [
+      "Do not assume C-FRESHNESS is VALIDATED or PRODUCT_CORE — it remains EXPERIMENTAL; orthogonality is confirmed at delta=0.15 under stochastic mock on localhost only, not production",
+      "Do not assume token_refresh TP=1.0 generalizes to production — threshold tautology (0.25 below both modes 0.35 and 0.65) means noise robustness is not discriminatingly tested at this threshold",
+      "Do not assume the behavioral variance range (0.1345-0.1465) reflects production severity distributions — token_refresh samples only 2 discrete modes (success/failure), not continuous severity",
+      "Do not assume that because five mock experiments confirm orthogonality, production endpoints will behave identically — real OAuth/OIDC middleware, CDN, and network RTT may introduce correlated structural-behavioral variation",
+      "Do not assume the TOST resolution at n=480 proves orthogonality is a universal property — it confirms mock-ceiling orthogonality at this sample size, not production orthogonality",
+      "Do not assume the n=480 result resolves all open questions — the production substrate gap remains the critical bottleneck",
+      "Do not assume the structural discrimination 0.8333 generalizes to production OAuth/OIDC, CDN, or non-deterministic endpoints — claim ceiling bounded to Flask 3.1.3 + PyJWT 2.14.0 HS256 localhost",
+      "Do not assume error_format_variation was tested — the noise was inert on measured channels (V-ERROR-FORMAT-INERT); only 3/4 production-like noise types were actually expressed",
+      "Do not assume the 5th mock confirmation adds independent evidence — all 5 mock experiments use the same Flask+SQLite+JWT architecture; the independent variable is noise types, not infrastructure"
+    ]
+  },
+  "dependencies": [
+    "Runtime lane must build and validate a production-like HTTP observation substrate with real OAuth/OIDC middleware (PyJWT RS256/ES256, multi-algorithm), CDN caching semantics, network RTT, and database-backed sessions before product lane attempts integration",
+    "Any non-mock re-measurement must use TOST delta=0.15 with n>=480 for comparability with the five mock-confirming experiments",
+    "Token_refresh behavioral_score redesign for continuous severity variation (currently bimodal discrete 0.35/0.65) if continuous variance is required for production claim ceiling",
+    "Calibrated discriminating threshold needed before claiming discriminating noise robustness — current 0.25 threshold is tautological under bimodal model",
+    "error_format_variation noise type must be fixed (body replacement after resp creation) and re-verified as effective before claiming robustness to all 4 production-like types"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35481773764/result.json — C1 0.8333, C2 TP 1.0 x4, C3 behavioral_std 0.1345-0.1465 TOST pass r=0.016 CI upper 0.1055, C4 FP 0.0, C5 TOST pass=true, frozen_outcome SURVIVES_CURRENT_TEST",
+    "research/experiments/EXP-PRODUCT-35481773764/audit.json — REVISE, producer_claim_supported=false, V-THRESHOLD-TAUTOLOGY severity high, V-ERROR-FORMAT-INERT severity high, V-MOCK-ONLY-CEILING severity high, claim_ceiling localhost mock 3/4 effective noise types",
+    "research/experiments/EXP-PRODUCT-35481773764/raw_evidence/experiment_data.json sha256 b9ec764fb2d512930b97743e9dc6506f4f30dcdba17d3b8d0f7cc7cf04b1fca0 (phase_a_raw 40 probes, phase_b_cooccurring 480, phase_c_noise_only 240, phase_d_isolated_tp 60)",
+    "research/experiments/EXP-PRODUCT-35481773764/mock_server.py sha256 c880c71799ec3ed134cea6734a04be488d2e53deca9d8ff775771a56cb581cde",
+    "research/experiments/EXP-PRODUCT-35481773764/provenance.json github_run_id 35510156399, seed 42, port 18951",
+    "research/experiments/EXP-PRODUCT-35476271728/handoff.json — parent carry_forward with established/rejected/unknown/do_not_assume categories, next_question for production substrate",
+    "research/experiments/EXP-PRODUCT-35476271728/result.json — parent n=480 TOST r=-0.0366 CI [-0.126,0.053] TP=1.0",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json — stochastic-mock orthogonality r=0.046 CI upper 0.135",
+    "research/experiments/EXP-GRAPH-35389145821/handoff.json — HTTP caching orthogonality r=0.0022 CI upper 0.0916",
+    "codex/claim_state.json C-FRESHNESS status EXPERIMENTAL across 30+ prior experiments"
+  ],
+  "recommended_action": "C-FRESHNESS remains EXPERIMENTAL with strengthened mock evidence (5th orthogonality confirmation, production-like noise types tested). Product lane has exhausted mock-ceiling designs — all 5 frozen conditions pass, orthogonality confirmed across 5 independent experiments. Route to runtime lane: build production-like HTTP observation substrate with real OAuth/OIDC, CDN, network RTT, database-backed sessions, then re-measure orthogonality at delta=0.15 with n>=480 including token_refresh. Parallel follow-up: (1) fix error_format_variation wire expression and re-verify as effective noise type; (2) continuous severity variation for token_refresh behavioral_score (bimodal 0.35/0.65 limits threshold calibration); (3) discriminating threshold calibration between behavioral modes. No product promotion. No code changes to production. C-PRODUCT-ECON remains closed."
+}
