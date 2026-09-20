@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "After fixing (1) V_ETAG permission leakage for /api/session_status (stable_key must depend on permission_level, not session_id alone), (2) C5 pooling code to use endpoint-stratified weighting for per-cache correlations, and (3) either increasing entropy bifurcation strength on session_status endpoint or defining C7 as endpoint-stratified weighted pooled r, does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED (any fails) at delta=0.15 on the production-like testbed with n>=800?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-20T12:16:53.632176+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-20T12:18:01.516551+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "88031ae5ab0ea0e4fe2ac9a0e4acf7164e3641319da19422ed68ead540017af8",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
+  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
 }
