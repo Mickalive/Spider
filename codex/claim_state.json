@@ -2175,6 +2175,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "MEASUREMENT_INVALID",
         "reason": "C3 positive control is invalid for CMI estimators on the 8-state deterministic SPA by construction (I(Y;A|Z)=0 when P(Y|Z,A)=P(Y|Z)). Frozen decision rule triggers FALSIFIED-IN-SETTING, but the underlying measurement is valid: SPA design verified (48/48 pairs with 4 candidates), parent estimators replicate within 0.001 bits, stratum bias decomposition confirmed. The frozen FALSIFIED-IN-SETTING is a consequence of the decision rule's C3 threshold being calibrated for stratum PMI estimators, not CMI estimators. Measurement validity is recoverable with estimator-appropriate positive controls."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35481773400",
+        "lane": "runtime",
+        "created_at": "2026-09-20T01:35:29.668700+00:00",
+        "decision": "NARROW_SUCCESS",
+        "source_commit": "abbdb54dffaee42b45d7b6286000cd3b570bbfdb",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "All four frozen decision-rule conditions pass (C1: correctness_match_rate=1.0 all 720/720, C2: silent_fallback_count=0, C3: regression 120/120, C4: null_control all_same=true). Audit confirms recomputed metrics match producer. However, audit REVISE status and producer_claim_supported=false because: (1) payloads are highly-redundant synthetic 'x'*pad bodies that compress to 0.07-1.06KB (max 34 chunks at chunk_size=32), not the 100+ chunks the prereg motivated; (2) buffered proxy reassembles before decompression, so chunk-boundary incremental parsing is untested; (3) single-layer encoding only, max_depth=5 unexercised beyond depth 1. Claim ceiling bounded to: localhost buffered mock with synthetic redundant payloads of nominal 10KB/100KB (actual compressed 0.07-1.06KB, 3-34 chunks) across gzip levels 1/9 and brotli qualities 4/8, 4 auth states, 5 reps/cell. Does NOT establish high-entropy payload correctness, streaming decompression, multi-layer encoding, or real CDN correctness."
       }
     ]
   },
@@ -2250,14 +2260,14 @@
       "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-PHYSICS-35476270440",
-      "lane": "physics",
-      "created_at": "2026-09-19T23:30:00.408584+00:00",
-      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison.",
-      "source_commit": "844ad7476fb6276d4bfa41bd480866d1b13dd52b",
+      "experiment_id": "EXP-RUNTIME-35481773400",
+      "lane": "runtime",
+      "created_at": "2026-09-20T01:35:29.668700+00:00",
+      "decision": "NARROW_SUCCESS",
+      "source_commit": "abbdb54dffaee42b45d7b6286000cd3b570bbfdb",
       "claim_id": "C-MEAS-VALID",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "C3 positive control is invalid for CMI estimators on the 8-state deterministic SPA by construction (I(Y;A|Z)=0 when P(Y|Z,A)=P(Y|Z)). Frozen decision rule triggers FALSIFIED-IN-SETTING, but the underlying measurement is valid: SPA design verified (48/48 pairs with 4 candidates), parent estimators replicate within 0.001 bits, stratum bias decomposition confirmed. The frozen FALSIFIED-IN-SETTING is a consequence of the decision rule's C3 threshold being calibrated for stratum PMI estimators, not CMI estimators. Measurement validity is recoverable with estimator-appropriate positive controls."
+      "status": "EXPERIMENTAL",
+      "reason": "All four frozen decision-rule conditions pass (C1: correctness_match_rate=1.0 all 720/720, C2: silent_fallback_count=0, C3: regression 120/120, C4: null_control all_same=true). Audit confirms recomputed metrics match producer. However, audit REVISE status and producer_claim_supported=false because: (1) payloads are highly-redundant synthetic 'x'*pad bodies that compress to 0.07-1.06KB (max 34 chunks at chunk_size=32), not the 100+ chunks the prereg motivated; (2) buffered proxy reassembles before decompression, so chunk-boundary incremental parsing is untested; (3) single-layer encoding only, max_depth=5 unexercised beyond depth 1. Claim ceiling bounded to: localhost buffered mock with synthetic redundant payloads of nominal 10KB/100KB (actual compressed 0.07-1.06KB, 3-34 chunks) across gzip levels 1/9 and brotli qualities 4/8, 4 auth states, 5 reps/cell. Does NOT establish high-entropy payload correctness, streaming decompression, multi-layer encoding, or real CDN correctness."
     }
   }
 }
