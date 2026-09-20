@@ -1,0 +1,55 @@
+{
+  "experiment_id": "EXP-RUNTIME-35495699298",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold for high-entropy non-redundant payloads where compressed sizes actually scale to the 2-50KB range and span 60-1500+ chunks at chunk_size=32, across gzip and brotli compression on localhost buffered proxy with chunked transfer-encoding?",
+  "hypothesis": "Iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth high-entropy generate_*_body(state, target_size) for all 4 auth states, 3 content types (JSON with unique IDs, real HTML from Wikipedia, binary-like random-with-structure), 2 payload sizes (10KB, 100KB), and 4 compression configurations (gzip level 1, gzip level 9, brotli quality 4, brotli quality 8) with multi-chunk framing (chunk_size=32), where the high-entropy payloads produce compressed sizes in the 2-50KB range and 60-1500+ chunks.",
+  "falsifier": "Any SHA256(decompressed) != SHA256(generate_*_body(state, target_size)) across all observations for any (size, compression, content_type, state) cell, OR any silent fallback (SHA256(decompressed) == SHA256(raw_compressed)) for any compressed response, OR any cell where compressed_size_bytes mean < 2000 (failing to reach the 2KB minimum target range that motivates the chunk-boundary stress test).",
+  "baselines": [
+    {
+      "id": "B-GZIP-MC-1KB-REGRESSION",
+      "description": "Gzip multi-chunk correctness at 1KB synthetic (established 240/240 in parent chain, 120/120 in grandparent EXP-RUNTIME-35481773400)",
+      "expected": "100% correctness, serves as regression control ensuring the decompression pipeline infrastructure is not degraded"
+    },
+    {
+      "id": "B-BROTLI-MC-1KB-REGRESSION",
+      "description": "Brotli multi-chunk correctness at 1KB synthetic (established 480/480 in parent chain, 120/120 in grandparent)",
+      "expected": "100% correctness, serves as regression control for brotli decompression"
+    },
+    {
+      "id": "B-IDENTITY-HE-10KB",
+      "description": "IDENTITY (no compression) at 10KB high-entropy — validates correctness oracle for high-entropy payloads at the smaller size",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, 10240) exactly for all 3 content types"
+    },
+    {
+      "id": "B-IDENTITY-HE-100KB",
+      "description": "IDENTITY (no compression) at 100KB high-entropy — validates correctness oracle for high-entropy payloads at the larger size",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, 102400) exactly for all 3 content types"
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "description": "Compressed size validation — at least 2 of 3 content types must achieve mean compressed_size_bytes >= 2000 at 10KB nominal and >= 5000 at 100KB nominal under gzip level 1 or brotli quality 4",
+      "expected": "High-entropy payloads produce compressed sizes in the 2-50KB range, confirming the payloads are not degenerate like parent's 'x'*pad"
+    }
+  ],
+  "positive_control": "B-BROTLI-MC-1KB-REGRESSION: established 480/480+ across parent chain; must pass 100% to confirm no regression in decompression pipeline infrastructure.",
+  "null_control": "B-RANDOM: Within-state decompressed hash must be deterministic (all_same=true for all 4 auth states across all high-entropy cells). Any within-state hash variation indicates non-deterministic decompression or server behavior.",
+  "measurement_validity": [
+    "High-entropy payload generators replace the degenerate 'x'*pad generators from parent: (a) JSON: unique UUIDs, timestamps, varied field values per entry with randomized content ensuring low compressibility; (b) HTML: real Wikipedia article HTML (fetched once, seeded selection) with unique section content; (c) Binary: structured binary with random payload sections, headers, and checksums ensuring high byte entropy",
+    "Correctness oracle validated at 1KB via IDENTITY baseline in parent chain; re-validated at 10KB and 100KB via B-IDENTITY-HE-10KB and B-IDENTITY-HE-100KB using the same high-entropy generators",
+    "Compressed size validation (B-COMPRESSED-TARGET-RANGE) ensures payloads are not degenerate: at least 2/3 content types must produce compressed sizes >= 2KB at 10KB and >= 5KB at 100KB, confirming chunk-boundary stress is actually expressed",
+    "Deterministic server: Flask mock with seeded RNG (seed=44) produces deterministic bodies per (state, content_type, target_size) pair; high-entropy generators use deterministic seeds derived from (state, content_type, target_size) to ensure reproducibility",
+    "Silent fallback detection: SHA256(decompressed) == SHA256(raw_compressed) classified as failure, not success",
+    "Compression level extremes produce maximally different compressed structures: gzip level 1 (fastest, largest output) vs level 9 (slowest, smallest output); brotli quality 4 (minimum) vs quality 8 (near maximum)",
+    "chunk_size=32 for multi-chunk framing; with high-entropy payloads producing 2-50KB compressed sizes, this yields 60-1500+ chunks, exercising the chunk-boundary behavior that parent could not stress",
+    "Max decompression depth 5 (brotli->gzip->identity; single-layer encoding per observation)",
+    "Request jitter 50-150ms uniform between requests to avoid rate-limit effects",
+    "Python 3.12 stdlib gzip module + brotli 1.2.0",
+    "Payload entropy validation: Shannon entropy of each high-entropy generator output measured and reported; minimum threshold 3.5 bits/byte for 10KB payloads to confirm non-degeneracy"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) correctness_match_rate == 1.0 for ALL high-entropy cells across all size x compression x content_type combinations; (C2) silent_fallback_count == 0 for ALL high-entropy cells; (C3) B-GZIP-MC-1KB-REGRESSION and B-BROTLI-MC-1KB-REGRESSION pass 100% (regression controls, no pipeline degradation); (C4) null_control passes (all_same=true for all states in all high-entropy cells); (C5) B-COMPRESSED-TARGET-RANGE passes (at least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB). FALSIFIED if any correctness failure OR any silent fallback in any high-entropy cell. MEASUREMENT_INVALID if infrastructure prevents data collection, if correctness oracle baseline (B-IDENTITY-HE) fails, or if B-COMPRESSED-TARGET-RANGE fails (payloads remain degenerate, chunk-boundary stress not expressed).",
+  "product_consequence_positive": "High-entropy payload correctness validated under chunked transfer encoding with realistic compressed sizes (2-50KB, 60-1500+ chunks). The decompression pipeline handles realistic web content where compressed sizes scale with input and chunk boundaries are actually stressed. C-MEAS-VALID claim ceiling advances from 'localhost synthetic redundant payloads' to 'localhost high-entropy payloads at realistic compressed sizes'. The remaining gate for Product Core promotion narrows to real CDN infrastructure with Accept-Encoding negotiation and production concurrency.",
+  "product_consequence_negative": "High-entropy payloads fail correctness under chunked framing. The decompression pipeline has a chunk-boundary or size-dependent failure mode that was masked by the parent's degenerate low-entropy payloads. Product cannot handle realistic web content. The decompression implementation requires diagnosis of the specific failure mode (e.g., multi-byte symbol corruption across chunks, buffer boundary errors, dictionary reference spanning).",
+  "estimated_cost": "Low: ~640 HTTP requests to localhost mock server (2 sizes x 3 types x 4 compressions x 4 states x 5 reps + baselines + regression), <10 minutes execution (high-entropy generation slightly slower than synthetic), no external infrastructure, no API costs. Payload generation adds ~30s pre-computation for Wikipedia HTML fetch (single cached fetch).",
+  "expected_information_gain": "Very high: this is the single highest-gain experiment in the C-MEAS-VALID validation chain. The parent established 720/720 correctness but on payloads compressing to 70-1059 bytes (max 34 chunks), leaving the chunk-boundary stress hypothesis entirely untested. This experiment directly fills that gap by generating payloads that produce 2-50KB compressed sizes and 60-1500+ chunks. A positive result validates the decompression pipeline at realistic scales and narrows the remaining gate to CDN infrastructure. A negative result reveals a critical chunk-boundary failure mode masked by synthetic payloads, changing the product architecture. Either outcome is highly decision-relevant."
+}

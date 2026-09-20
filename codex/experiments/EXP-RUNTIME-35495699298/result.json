@@ -1,0 +1,4476 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35495699298",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "per_cell": {
+      "JSON_GZIP-L1-MC_10240B": {
+        "compressed_body_only_discrimination": 0.3,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.10834524999268069,
+          "min": 0.0894339999604199,
+          "max": 0.14417599993521435
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 4581.0,
+          "min": 4267,
+          "max": 4781
+        }
+      },
+      "JSON_GZIP-L9-MC_10240B": {
+        "compressed_body_only_discrimination": 0.425,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.09382609999875058,
+          "min": 0.08462699997835443,
+          "max": 0.11570399999527581
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 4329.5,
+          "min": 3999,
+          "max": 4549
+        }
+      },
+      "JSON_BROTLI-Q4-MC_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.07190895000803721,
+          "min": 0.06042999996225262,
+          "max": 0.09834800005137367
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 4053.75,
+          "min": 3754,
+          "max": 4246
+        }
+      },
+      "JSON_BROTLI-Q8-MC_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.07615834999796789,
+          "min": 0.06680000001324515,
+          "max": 0.09487199997693097
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 3894.75,
+          "min": 3641,
+          "max": 4076
+        }
+      },
+      "HTML_GZIP-L1-MC_10240B": {
+        "compressed_body_only_discrimination": 0.325,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.07866580000381873,
+          "min": 0.07212900004560652,
+          "max": 0.1027649999514324
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 2956.0,
+          "min": 2941,
+          "max": 2981
+        }
+      },
+      "HTML_GZIP-L9-MC_10240B": {
+        "compressed_body_only_discrimination": 0.3,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.07797659998800555,
+          "min": 0.07252900002185925,
+          "max": 0.09605399998235953
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 2793.75,
+          "min": 2773,
+          "max": 2817
+        }
+      },
+      "HTML_BROTLI-Q4-MC_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.060654150001937523,
+          "min": 0.05111699999815755,
+          "max": 0.09492300000601972
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 2725.0,
+          "min": 2703,
+          "max": 2755
+        }
+      },
+      "HTML_BROTLI-Q8-MC_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.05660709999233404,
+          "min": 0.049164000074597425,
+          "max": 0.07341099990298972
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 2616.25,
+          "min": 2599,
+          "max": 2639
+        }
+      },
+      "BINARY_GZIP-L1-MC_10240B": {
+        "compressed_body_only_discrimination": 0.375,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.0958378999996512,
+          "min": 0.0855289999890374,
+          "max": 0.11323000001084438
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 9891.0,
+          "min": 9877,
+          "max": 9898
+        }
+      },
+      "BINARY_GZIP-L9-MC_10240B": {
+        "compressed_body_only_discrimination": 0.3,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.09052610000139794,
+          "min": 0.08349600000201463,
+          "max": 0.1281030000654937
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 9835.0,
+          "min": 9818,
+          "max": 9846
+        }
+      },
+      "BINARY_BROTLI-Q4-MC_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.07318890002352418,
+          "min": 0.06861300005311932,
+          "max": 0.09391100002176245
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 9916.5,
+          "min": 9899,
+          "max": 9927
+        }
+      },
+      "BINARY_BROTLI-Q8-MC_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.06980584998927952,
+          "min": 0.06204299995715701,
+          "max": 0.08782199995494011
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 9844.5,
+          "min": 9824,
+          "max": 9866
+        }
+      },
+      "JSON_GZIP-L1-MC_102400B": {
+        "compressed_body_only_discrimination": 0.175,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.44659034999767755,
+          "min": 0.3944930000443492,
+          "max": 0.49177799996869
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 38947.25,
+          "min": 34570,
+          "max": 40483
+        }
+      },
+      "JSON_GZIP-L9-MC_102400B": {
+        "compressed_body_only_discrimination": 0.325,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.4236369500006276,
+          "min": 0.35069700004441984,
+          "max": 0.492549999989933
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 35063.75,
+          "min": 30167,
+          "max": 36809
+        }
+      },
+      "JSON_BROTLI-Q4-MC_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.2974614500089956,
+          "min": 0.2616340000258788,
+          "max": 0.34132299992961634
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 33354.75,
+          "min": 29856,
+          "max": 34635
+        }
+      },
+      "JSON_BROTLI-Q8-MC_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.32856615000014244,
+          "min": 0.28135200000178884,
+          "max": 0.3563550000080795
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 32690.5,
+          "min": 28553,
+          "max": 34161
+        }
+      },
+      "HTML_GZIP-L1-MC_102400B": {
+        "compressed_body_only_discrimination": 0.225,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.3620217000047887,
+          "min": 0.34341600007792294,
+          "max": 0.38994600004116364
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 24561.75,
+          "min": 24502,
+          "max": 24657
+        }
+      },
+      "HTML_GZIP-L9-MC_102400B": {
+        "compressed_body_only_discrimination": 0.45,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.3332151499989777,
+          "min": 0.32313600001998566,
+          "max": 0.3524190000234739
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 22009.25,
+          "min": 21910,
+          "max": 22062
+        }
+      },
+      "HTML_BROTLI-Q4-MC_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.2195069000094918,
+          "min": 0.20962499991128425,
+          "max": 0.24907499994242244
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 22691.25,
+          "min": 22581,
+          "max": 22787
+        }
+      },
+      "HTML_BROTLI-Q8-MC_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.2139915000043402,
+          "min": 0.2066109999532273,
+          "max": 0.24305499994170532
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 20169.0,
+          "min": 20046,
+          "max": 20215
+        }
+      },
+      "BINARY_GZIP-L1-MC_102400B": {
+        "compressed_body_only_discrimination": 0.125,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.5061847500030581,
+          "min": 0.4903270000795601,
+          "max": 0.5183289999877161
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 98609.5,
+          "min": 98596,
+          "max": 98631
+        }
+      },
+      "BINARY_GZIP-L9-MC_102400B": {
+        "compressed_body_only_discrimination": 0.1,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.4944264999949155,
+          "min": 0.48236500003895344,
+          "max": 0.5162359999530963
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 98214.5,
+          "min": 98200,
+          "max": 98243
+        }
+      },
+      "BINARY_BROTLI-Q4-MC_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.5020058000127392,
+          "min": 0.4920290000427485,
+          "max": 0.5192800000486386
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 98973.0,
+          "min": 98958,
+          "max": 98992
+        }
+      },
+      "BINARY_BROTLI-Q8-MC_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.3726613999958772,
+          "min": 0.36164300001928495,
+          "max": 0.3879230000620737
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 97721.25,
+          "min": 97681,
+          "max": 97745
+        }
+      },
+      "JSON_GZIP-MC-1KB_1024B": {
+        "compressed_body_only_discrimination": 0.45,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.04864015000407562,
+          "min": 0.04440699990482244,
+          "max": 0.07378099996913079
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 678.75,
+          "min": 665,
+          "max": 689
+        }
+      },
+      "JSON_BROTLI-MC-1KB_1024B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.032879300005106415,
+          "min": 0.02920299994002562,
+          "max": 0.034622000043782464
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 630.0,
+          "min": 611,
+          "max": 642
+        }
+      },
+      "HTML_GZIP-MC-1KB_1024B": {
+        "compressed_body_only_discrimination": 0.25,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.04736500000603883,
+          "min": 0.045507999971050594,
+          "max": 0.049394000029678864
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 560.25,
+          "min": 551,
+          "max": 570
+        }
+      },
+      "HTML_BROTLI-MC-1KB_1024B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.03323974999602797,
+          "min": 0.027781999961007386,
+          "max": 0.04793199991581787
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 501.0,
+          "min": 493,
+          "max": 513
+        }
+      },
+      "BINARY_GZIP-MC-1KB_1024B": {
+        "compressed_body_only_discrimination": 0.25,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.03462264999143372,
+          "min": 0.031097000032787037,
+          "max": 0.03682500005197653
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 1047.0,
+          "min": 1047,
+          "max": 1047
+        }
+      },
+      "BINARY_BROTLI-MC-1KB_1024B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 5,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 5,
+            "count_total": 5
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.02990195001189022,
+          "min": 0.02763099996627716,
+          "max": 0.0315070000169726
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 1017.0,
+          "min": 1007,
+          "max": 1025
+        }
+      },
+      "JSON_IDENTITY-10KB_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.018872850006346198,
+          "min": 0.015463000067938992,
+          "max": 0.040341000044463726
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 10240.0,
+          "min": 10240,
+          "max": 10240
+        }
+      },
+      "HTML_IDENTITY-10KB_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.016147350004303007,
+          "min": 0.013511000020116626,
+          "max": 0.02103199994962779
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 10240.0,
+          "min": 10240,
+          "max": 10240
+        }
+      },
+      "BINARY_IDENTITY-10KB_10240B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.017932000008613613,
+          "min": 0.014813000007052324,
+          "max": 0.01956999994945363
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 10240.0,
+          "min": 10240,
+          "max": 10240
+        }
+      },
+      "JSON_IDENTITY-100KB_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.018254899993053186,
+          "min": 0.015692999909333594,
+          "max": 0.024978000055853045
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 102400.0,
+          "min": 102400,
+          "max": 102400
+        }
+      },
+      "HTML_IDENTITY-100KB_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.017680549996157424,
+          "min": 0.01559299994369212,
+          "max": 0.01939900005254458
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 102400.0,
+          "min": 102400,
+          "max": 102400
+        }
+      },
+      "BINARY_IDENTITY-100KB_102400B": {
+        "compressed_body_only_discrimination": 1.0,
+        "decompressed_body_only_discrimination": 1.0,
+        "baselines": {
+          "B-RANDOM": 0.0
+        },
+        "decompressed_hash_variation": {
+          "invalid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "expired_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "no_auth": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          },
+          "valid_token": {
+            "unique_count": 1,
+            "total": 5,
+            "all_same": true
+          }
+        },
+        "correctness_by_state": {
+          "invalid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "expired_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "no_auth": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          },
+          "valid_token": {
+            "pass_count": 5,
+            "fail_count": 0,
+            "total": 5,
+            "all_pass": true
+          }
+        },
+        "silent_fallback_by_state": {
+          "invalid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "expired_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "no_auth": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          },
+          "valid_token": {
+            "fallback_count": 0,
+            "total": 0,
+            "any_fallback": false
+          }
+        },
+        "decompression_altered": {
+          "invalid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "expired_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "no_auth": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          },
+          "valid_token": {
+            "all_altered": true,
+            "count_altered": 0,
+            "count_total": 0
+          }
+        },
+        "total_requests": 20,
+        "correctness_match_count": 20,
+        "correctness_match_rate": 1.0,
+        "silent_fallback_count": 0,
+        "decompression_error_count": 0,
+        "decompression_latency_ms": {
+          "mean": 0.021168349996969482,
+          "min": 0.019269000063104613,
+          "max": 0.025447999973948754
+        },
+        "decompression_errors": [],
+        "compressed_size_bytes": {
+          "mean": 102400.0,
+          "min": 102400,
+          "max": 102400
+        }
+      }
+    },
+    "aggregate": {
+      "total_correctness_pass": 720,
+      "total_correctness_fail": 0,
+      "total_silent_fallbacks": 0,
+      "total_decompression_errors": 0,
+      "total_requests": 720,
+      "overall_correctness_rate": 1.0,
+      "main_cells_count": 24,
+      "regression_cells_count": 6,
+      "identity_cells_count": 6
+    },
+    "M_ENTROPY_SHANNON": {
+      "per_content_type": {
+        "JSON": {
+          "mean_entropy_bits_per_byte": 5.4863499970660925,
+          "min_entropy_bits_per_byte": 5.436042358470466,
+          "max_entropy_bits_per_byte": 5.572613274280944,
+          "all_above_threshold": true
+        },
+        "HTML": {
+          "mean_entropy_bits_per_byte": 4.659762185367045,
+          "min_entropy_bits_per_byte": 4.632721149375558,
+          "max_entropy_bits_per_byte": 4.6717111292024,
+          "all_above_threshold": true
+        },
+        "BINARY": {
+          "mean_entropy_bits_per_byte": 7.689827674427751,
+          "min_entropy_bits_per_byte": 7.67346217927446,
+          "max_entropy_bits_per_byte": 7.696617358389605,
+          "all_above_threshold": true
+        }
+      },
+      "threshold_bits_per_byte": 3.5,
+      "pass": true
+    },
+    "B_COMPRESSED_TARGET_RANGE": {
+      "per_content_type": {
+        "JSON": {
+          "mean_compressed_10KB": 4214.75,
+          "mean_compressed_100KB": 35014.0625,
+          "meets_10KB_threshold": true,
+          "meets_100KB_threshold": true
+        },
+        "HTML": {
+          "mean_compressed_10KB": 2772.75,
+          "mean_compressed_100KB": 22357.8125,
+          "meets_10KB_threshold": true,
+          "meets_100KB_threshold": true
+        },
+        "BINARY": {
+          "mean_compressed_10KB": 9871.75,
+          "mean_compressed_100KB": 98379.5625,
+          "meets_10KB_threshold": true,
+          "meets_100KB_threshold": true
+        }
+      },
+      "types_meeting_10KB_threshold": 3,
+      "types_meeting_100KB_threshold": 3,
+      "pass": true
+    }
+  },
+  "controls": {
+    "C_CORRECTNESS_MATCH": {
+      "expected": "100% correctness match rate for ALL high-entropy cells (decompressed hash == expected hash)",
+      "observed_main_cells": {
+        "JSON_GZIP-L1-MC_10240B": 1.0,
+        "JSON_GZIP-L9-MC_10240B": 1.0,
+        "JSON_BROTLI-Q4-MC_10240B": 1.0,
+        "JSON_BROTLI-Q8-MC_10240B": 1.0,
+        "HTML_GZIP-L1-MC_10240B": 1.0,
+        "HTML_GZIP-L9-MC_10240B": 1.0,
+        "HTML_BROTLI-Q4-MC_10240B": 1.0,
+        "HTML_BROTLI-Q8-MC_10240B": 1.0,
+        "BINARY_GZIP-L1-MC_10240B": 1.0,
+        "BINARY_GZIP-L9-MC_10240B": 1.0,
+        "BINARY_BROTLI-Q4-MC_10240B": 1.0,
+        "BINARY_BROTLI-Q8-MC_10240B": 1.0,
+        "JSON_GZIP-L1-MC_102400B": 1.0,
+        "JSON_GZIP-L9-MC_102400B": 1.0,
+        "JSON_BROTLI-Q4-MC_102400B": 1.0,
+        "JSON_BROTLI-Q8-MC_102400B": 1.0,
+        "HTML_GZIP-L1-MC_102400B": 1.0,
+        "HTML_GZIP-L9-MC_102400B": 1.0,
+        "HTML_BROTLI-Q4-MC_102400B": 1.0,
+        "HTML_BROTLI-Q8-MC_102400B": 1.0,
+        "BINARY_GZIP-L1-MC_102400B": 1.0,
+        "BINARY_GZIP-L9-MC_102400B": 1.0,
+        "BINARY_BROTLI-Q4-MC_102400B": 1.0,
+        "BINARY_BROTLI-Q8-MC_102400B": 1.0
+      },
+      "observed_regression_cells": {
+        "JSON_GZIP-MC-1KB_1024B": 1.0,
+        "HTML_GZIP-MC-1KB_1024B": 1.0,
+        "BINARY_GZIP-MC-1KB_1024B": 1.0,
+        "JSON_BROTLI-MC-1KB_1024B": 1.0,
+        "HTML_BROTLI-MC-1KB_1024B": 1.0,
+        "BINARY_BROTLI-MC-1KB_1024B": 1.0
+      },
+      "observed_identity_cells": {
+        "JSON_IDENTITY-10KB_10240B": 1.0,
+        "HTML_IDENTITY-10KB_10240B": 1.0,
+        "BINARY_IDENTITY-10KB_10240B": 1.0,
+        "JSON_IDENTITY-100KB_102400B": 1.0,
+        "HTML_IDENTITY-100KB_102400B": 1.0,
+        "BINARY_IDENTITY-100KB_102400B": 1.0
+      },
+      "pass_all_main": true,
+      "pass_all_cells": true,
+      "total_pass": 720,
+      "total_fail": 0
+    },
+    "C_SILENT_FALLBACK": {
+      "expected": "0 silent fallbacks for ALL compressed observations in high-entropy cells",
+      "observed": {
+        "JSON_GZIP-L1-MC_10240B": 0,
+        "JSON_GZIP-L9-MC_10240B": 0,
+        "JSON_BROTLI-Q4-MC_10240B": 0,
+        "JSON_BROTLI-Q8-MC_10240B": 0,
+        "HTML_GZIP-L1-MC_10240B": 0,
+        "HTML_GZIP-L9-MC_10240B": 0,
+        "HTML_BROTLI-Q4-MC_10240B": 0,
+        "HTML_BROTLI-Q8-MC_10240B": 0,
+        "BINARY_GZIP-L1-MC_10240B": 0,
+        "BINARY_GZIP-L9-MC_10240B": 0,
+        "BINARY_BROTLI-Q4-MC_10240B": 0,
+        "BINARY_BROTLI-Q8-MC_10240B": 0,
+        "JSON_GZIP-L1-MC_102400B": 0,
+        "JSON_GZIP-L9-MC_102400B": 0,
+        "JSON_BROTLI-Q4-MC_102400B": 0,
+        "JSON_BROTLI-Q8-MC_102400B": 0,
+        "HTML_GZIP-L1-MC_102400B": 0,
+        "HTML_GZIP-L9-MC_102400B": 0,
+        "HTML_BROTLI-Q4-MC_102400B": 0,
+        "HTML_BROTLI-Q8-MC_102400B": 0,
+        "BINARY_GZIP-L1-MC_102400B": 0,
+        "BINARY_GZIP-L9-MC_102400B": 0,
+        "BINARY_BROTLI-Q4-MC_102400B": 0,
+        "BINARY_BROTLI-Q8-MC_102400B": 0
+      },
+      "pass": true,
+      "total_silent_fallbacks": 0
+    },
+    "C_REGRESSION_CONTROLS": {
+      "expected": "B-GZIP-MC-1KB-REGRESSION and B-BROTLI-MC-1KB-REGRESSION pass 100% (no pipeline regression)",
+      "gzip_1kb": {
+        "JSON_GZIP-MC-1KB_1024B": 1.0,
+        "HTML_GZIP-MC-1KB_1024B": 1.0,
+        "BINARY_GZIP-MC-1KB_1024B": 1.0
+      },
+      "brotli_1kb": {
+        "JSON_BROTLI-MC-1KB_1024B": 1.0,
+        "HTML_BROTLI-MC-1KB_1024B": 1.0,
+        "BINARY_BROTLI-MC-1KB_1024B": 1.0
+      },
+      "pass_gzip": true,
+      "pass_brotli": true,
+      "pass_all": true
+    },
+    "C_IDENTITY_BASELINE": {
+      "expected": "IDENTITY baseline hash matches expected for 100% of observations",
+      "observed": {
+        "JSON_IDENTITY-10KB_10240B": 1.0,
+        "HTML_IDENTITY-10KB_10240B": 1.0,
+        "BINARY_IDENTITY-10KB_10240B": 1.0,
+        "JSON_IDENTITY-100KB_102400B": 1.0,
+        "HTML_IDENTITY-100KB_102400B": 1.0,
+        "BINARY_IDENTITY-100KB_102400B": 1.0
+      },
+      "pass": true
+    },
+    "C_NULL_CONTROL": {
+      "expected": "Within-state decompressed hash all_same=true for ALL 4 auth states across ALL high-entropy cells",
+      "observed": {
+        "no_auth": true,
+        "valid_token": true,
+        "expired_token": true,
+        "invalid_token": true
+      },
+      "pass": true
+    },
+    "C_B_RANDOM": {
+      "expected": "B-RANDOM ~ 0.0 for ALL high-entropy cells",
+      "observed": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    "B_COMPRESSED_TARGET_RANGE": {
+      "expected": "At least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB AND >= 5000 at 100KB",
+      "per_content_type": {
+        "JSON": {
+          "mean_compressed_10KB": 4214.75,
+          "mean_compressed_100KB": 35014.0625,
+          "meets_10KB_threshold": true,
+          "meets_100KB_threshold": true
+        },
+        "HTML": {
+          "mean_compressed_10KB": 2772.75,
+          "mean_compressed_100KB": 22357.8125,
+          "meets_10KB_threshold": true,
+          "meets_100KB_threshold": true
+        },
+        "BINARY": {
+          "mean_compressed_10KB": 9871.75,
+          "mean_compressed_100KB": 98379.5625,
+          "meets_10KB_threshold": true,
+          "meets_100KB_threshold": true
+        }
+      },
+      "types_meeting_10KB_threshold": 3,
+      "types_meeting_100KB_threshold": 3,
+      "pass": true
+    },
+    "C_NO_ERRORS": {
+      "expected": "0 decompression errors (exceptions + silent fallbacks) across ALL requests",
+      "total_exceptions": 0,
+      "total_silent_fallbacks": 0,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script with mock origin, reverse proxy, high-entropy payload generators, and decompression correctness controls"
+    }
+  ],
+  "observations": [
+    "Experiment: EXP-RUNTIME-35495699298",
+    "Architecture: Client (iterative decompression, max_depth=5) -> Python Reverse Proxy -> Mock OAuth2 Server",
+    "Content types: ['JSON', 'HTML', 'BINARY'] (high-entropy generators)",
+    "Compression modes: ['GZIP-L1-MC', 'GZIP-L9-MC', 'BROTLI-Q4-MC', 'BROTLI-Q8-MC']",
+    "Regression modes: ['GZIP-MC-1KB', 'BROTLI-MC-1KB']",
+    "Target sizes: {'10KB': 10240, '100KB': 102400}",
+    "Reps per cell: 5",
+    "Seed: 44",
+    "Total requests made: 720",
+    "Total correctness passes: 720",
+    "Total correctness failures: 0",
+    "Total silent fallbacks: 0",
+    "Total decompression errors: 0",
+    "BINARY_BROTLI-MC-1KB_1024B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=1017B, decomp_latency=0.0ms",
+    "BINARY_BROTLI-Q4-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=98973B, decomp_latency=0.5ms",
+    "BINARY_BROTLI-Q4-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=9916B, decomp_latency=0.1ms",
+    "BINARY_BROTLI-Q8-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=97721B, decomp_latency=0.4ms",
+    "BINARY_BROTLI-Q8-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=9844B, decomp_latency=0.1ms",
+    "BINARY_GZIP-L1-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=98610B, decomp_latency=0.5ms",
+    "BINARY_GZIP-L1-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=9891B, decomp_latency=0.1ms",
+    "BINARY_GZIP-L9-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=98214B, decomp_latency=0.5ms",
+    "BINARY_GZIP-L9-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=9835B, decomp_latency=0.1ms",
+    "BINARY_GZIP-MC-1KB_1024B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=1047B, decomp_latency=0.0ms",
+    "BINARY_IDENTITY-100KB_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=102400B, decomp_latency=0.0ms",
+    "BINARY_IDENTITY-10KB_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=10240B, decomp_latency=0.0ms",
+    "HTML_BROTLI-MC-1KB_1024B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=501B, decomp_latency=0.0ms",
+    "HTML_BROTLI-Q4-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=22691B, decomp_latency=0.2ms",
+    "HTML_BROTLI-Q4-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=2725B, decomp_latency=0.1ms",
+    "HTML_BROTLI-Q8-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=20169B, decomp_latency=0.2ms",
+    "HTML_BROTLI-Q8-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=2616B, decomp_latency=0.1ms",
+    "HTML_GZIP-L1-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=24562B, decomp_latency=0.4ms",
+    "HTML_GZIP-L1-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=2956B, decomp_latency=0.1ms",
+    "HTML_GZIP-L9-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=22009B, decomp_latency=0.3ms",
+    "HTML_GZIP-L9-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=2794B, decomp_latency=0.1ms",
+    "HTML_GZIP-MC-1KB_1024B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=560B, decomp_latency=0.0ms",
+    "HTML_IDENTITY-100KB_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=102400B, decomp_latency=0.0ms",
+    "HTML_IDENTITY-10KB_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=10240B, decomp_latency=0.0ms",
+    "JSON_BROTLI-MC-1KB_1024B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=630B, decomp_latency=0.0ms",
+    "JSON_BROTLI-Q4-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=33355B, decomp_latency=0.3ms",
+    "JSON_BROTLI-Q4-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=4054B, decomp_latency=0.1ms",
+    "JSON_BROTLI-Q8-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=32690B, decomp_latency=0.3ms",
+    "JSON_BROTLI-Q8-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=3895B, decomp_latency=0.1ms",
+    "JSON_GZIP-L1-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=38947B, decomp_latency=0.4ms",
+    "JSON_GZIP-L1-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=4581B, decomp_latency=0.1ms",
+    "JSON_GZIP-L9-MC_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=35064B, decomp_latency=0.4ms",
+    "JSON_GZIP-L9-MC_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=4330B, decomp_latency=0.1ms",
+    "JSON_GZIP-MC-1KB_1024B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=679B, decomp_latency=0.0ms",
+    "JSON_IDENTITY-100KB_102400B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=102400B, decomp_latency=0.0ms",
+    "JSON_IDENTITY-10KB_10240B: correctness_rate=1.0000 (20/20), silent_fallbacks=0, compressed_size=10240B, decomp_latency=0.0ms",
+    "Entropy JSON: mean=5.4863 min=5.4360 max=5.5726",
+    "Entropy HTML: mean=4.6598 min=4.6327 max=4.6717",
+    "Entropy BINARY: mean=7.6898 min=7.6735 max=7.6966"
+  ],
+  "validity_notes": [
+    "Architecture: Client (iterative decompression, max_depth=5) -> Python Reverse Proxy -> Mock OAuth2 Server",
+    "Main experimental cells: 24 cells (2 sizes x 3 types x 4 compressions)",
+    "Regression controls: 6 cells (1KB)",
+    "IDENTITY baselines: 6 cells (correctness oracle at 10KB and 100KB)",
+    "Python version: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "Seed=44 for request ordering and body generation",
+    "Jitter: 50-150ms uniform between requests",
+    "No real CDN infrastructure - bounded to localhost mock server + Python reverse proxy",
+    "High-entropy body generation: unique UUIDs, random floats, varied content per state",
+    "Shannon entropy minimum threshold: 3.5 bits/byte",
+    "Compression level extremes: gzip level 1 vs 9, brotli quality 4 vs 8",
+    "chunk_size=32 for all compressed conditions (multi-chunk framing)",
+    "10KB payloads: compressed sizes expected ~2-10KB spanning 60-300+ chunks at chunk_size=32",
+    "100KB payloads: compressed sizes expected ~20-50KB spanning 600-1500+ chunks at chunk_size=32"
+  ],
+  "unresolved": [
+    "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai)?",
+    "What is the max practical decompression depth for real-world multi-layer encoding scenarios?",
+    "Does correctness hold for streaming partial-frame forwarding?",
+    "Does high-entropy payload correctness hold for payloads beyond 100KB?"
+  ]
+}
