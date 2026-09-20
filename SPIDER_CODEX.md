@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **180**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **181**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -190,6 +190,7 @@ Validated experiments: **180**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35476270792 | graph | REVISE | REVISE | C-FRESHNESS | `8949d839480f` |
 | EXP-PRODUCT-35476271728 | product | PASS | SURVIVES_CURRENT_TEST — all five frozen decision conditions pass at n=480. C1 structural discrimination 0.8333 > 0.5. C2 token_refresh TP=1.0 on all 4 co-occurring conditions (Wilson lower 0.969). C3 behavioral_std 0.133-0.141 > 0.05, TOST pass=true at delta=0.15 (r=-0.0366, CI [-0.126, 0.053], both tails p<0.05). C4 FP=0.0 on 240 noise-only samples. C5 TOST equivalence confirmed at n=480 (CI upper 0.053 < 0.15 delta, both tails pass). Parent n=240 TOST lower-tail failure (p_lower=0.081) confirmed as sample-size power artifact: CI width narrowed from 0.252 to 0.179, lower bound moved from -0.185 to -0.126 within equivalence interval. Audit PASS confirms all recomputed metrics match producer. Claim ceiling strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7). No production generalization, no PRODUCT_CORE promotion, no non-mock inference. Threshold sensitivity analysis (exploratory) confirms TP=1.0 at 0.15-0.35, cliff to 0.694 at 0.40 — bimodal distribution limits threshold calibration utility. | C-FRESHNESS | `03c15bc561cf` |
 | EXP-RUNTIME-35481773400 | runtime | REVISE | NARROW_SUCCESS | C-MEAS-VALID | `abbdb54dffae` |
+| EXP-PHYSICS-35482477045 | physics | REVISE | FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 0.5 bits, p <= 0.001). KSG CMI passes C1 (|null_mean|=0.012078 bits, 8.3x below threshold) but fails C3 (positive_control_k3=0.000560 < 0.5, 893x below threshold against true 1.52-bit CMI). LR passes C1 (|null_mean|=0.004515 bits, 22x below threshold) but fails C3 (positive_control_k3=0.103695 < 0.5, 4.8x below threshold). Audit REVISE corrects producer theoretical analysis: stochastic SPA produces I(Y;A|Z) ≈ 1.52 bits (not 0.004 as claimed), so C3 failure is genuine estimator insensitivity to a strong signal, not weak design. KSG null centering is achieved by near-zero output for all inputs (null_std=0.000187), not unbiased estimation of the true CMI. LR history collapse (K2=K3 exactly) persists on stochastic SPA, confirmed by degenerate control (deterministic SPA LR K3=0.104420 ≈ stochastic 0.103695). | C-WEB-DYNAMICS, C-MEAS-VALID | `febd10026b0c` |
 
 ## Latest recorded claim events
 
@@ -200,8 +201,8 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35476271728 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35481773400 | runtime |
+| C-MEAS-VALID | HYPOTHESIS | EXP-PHYSICS-35482477045 | physics |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-PRODUCT-35434772331 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35476270440 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35482477045 | physics |
