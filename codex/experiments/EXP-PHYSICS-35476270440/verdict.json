@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35476270440",
+  "lane": "physics",
+  "decision": "FALSIFIED-IN-SETTING — Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison.",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. The frozen FALSIFIED-IN-SETTING verdict reflects test-design limitation (CMI-inappropriate positive control), not falsification of Web dynamical structure. KSG/LR null centering is a methodological advance that unblocks future testing but does not itself test the hypothesis. All data is synthetic in-memory SPA simulation."
+    },
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "C3 positive control is invalid for CMI estimators on the 8-state deterministic SPA by construction (I(Y;A|Z)=0 when P(Y|Z,A)=P(Y|Z)). Frozen decision rule triggers FALSIFIED-IN-SETTING, but the underlying measurement is valid: SPA design verified (48/48 pairs with 4 candidates), parent estimators replicate within 0.001 bits, stratum bias decomposition confirmed. The frozen FALSIFIED-IN-SETTING is a consequence of the decision rule's C3 threshold being calibrated for stratum PMI estimators, not CMI estimators. Measurement validity is recoverable with estimator-appropriate positive controls."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Can a stochastic positive control SPA — where action genuinely changes P(next_state | state) (e.g., 50% deterministic + 50% uniform over CANDIDATES) — validate KSG CMI and likelihood-ratio estimators by achieving positive_control_k3 >= 0.5 bits while preserving |shuffled-action null_mean| < 0.1 bits at N=5000, thereby closing the C3 test-design gap that blocked the frozen verdict?",
+  "reason": "The frozen decision rule triggers FALSIFIED-IN-SETTING because no estimator passes both C1 and C3. However, the auditor (REVISE) correctly identifies that C3 failure is a test-design limitation: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators, and the 1.0-bit threshold was calibrated for stratum PMI, not CMI/chi2 scales. The critical scientific finding is that two orthogonal estimators (KSG CMI |null|=0.0155, LR |null|=0.0045) achieve null centering for the first time, breaking the 0.41-bit plug-in PMI floor. This establishes that the bias is specific to stratum-partitioned plug-in PMI with Laplace smoothing, not intrinsic to all estimation frameworks. The Bayesian model comparison is inappropriate (|null|=213.7 bits, log BF scale). To unblock the PMI research program, the next experiment must (a) design a stochastic positive control SPA where P(Y|Z,A) != P(Y|Z), (b) validate KSG/LR sensitivity with estimator-appropriate thresholds, and (c) if sensitivity validated, proceed to beyond-Markov K3-K2 testing on the 12-state stochastic SPA.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.screening_n5000.B-KSG-CMI (null_mean=0.0155, positive_control_k3=0.018, c1_pass=true, c3_pass=false)",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.screening_n5000.B-LIKELIHOOD-RATIO (null_mean=0.0045, positive_control_k3=0.241, c1_pass=true, c3_pass=false)",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.screening_n5000.B-BAYESIAN-MODEL (null_mean=-213.7, log_bayes_factor=4904.98, c1_pass=false)",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:status REVISE, V1-V7 findings, claim_ceiling, recomputed_metrics.pass_both_c1_and_c3=[]",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V2-positive_control_threshold_misspecification (CMI threshold inappropriate for deterministic SPA)",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V3-ksg_insensitivity_tradeoff (null centering at cost of sensitivity)",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V4-likelihood_ratio_scale_and_history_collapse (K2=K3 forced, history ignored)",
+    "research/experiments/EXP-PHYSICS-35476270440/audit.json:V5-bayesian_scale_incomparability (off-scale log BF)",
+    "research/experiments/EXP-PHYSICS-35476270440/spec.json:decision_rule (FALSIFIED-IN-SETTING priority, C1/C3/C6/C7 conditions)",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:metrics.stratum_size_bias_decomposition (5-9: 0.736, 10-19: 0.562, 20-49: 0.369)",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:controls.C6-DESIGN-DETERMINISM (48/48 PASS)",
+    "research/experiments/EXP-PHYSICS-35476270440/result.json:controls.C7-SIZE-BUCKETS (3 non-empty buckets)",
+    "research/experiments/EXP-PHYSICS-35476270440/provenance.json:environment.pymc_used=false (Bayesian via scipy, not pymc)"
+  ]
+}

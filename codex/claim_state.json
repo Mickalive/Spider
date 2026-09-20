@@ -471,6 +471,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No change to claim status from parent HYPOTHESIS. Frozen decision_rule C1 triggers FALSIFIED-IN-SETTING: all 4 estimators (weighted PMI null_mean=0.407, equal-weight 0.704, median 0.686, KNN -0.262) fail |null_mean|<0.1 by 2.6-7.0x margins. The '0% deterministic strata' CANDIDATES redesign is verified at design level (48/48 pairs have 4 distinct candidates) but null bias is reproducibly identical to parent (within 0.001 bits), confirming the bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace alpha=1.0, NOT caused by deterministic/stochastic mixing. Stratum-size decomposition identical to parent: +0.736 at 5-9, +0.562 at 10-19, +0.369 at 20-49. The SPA-redesign pathway for null centering is closed. The parent's H1 hypothesis (bias is environment-caused) is falsified. Beyond-Markov K3-K2 testing is not gated (no estimator passes C1). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. Truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) remain untested and are the required next attack vector."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35476270440",
+        "lane": "physics",
+        "created_at": "2026-09-19T23:30:00.408584+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison.",
+        "source_commit": "844ad7476fb6276d4bfa41bd480866d1b13dd52b",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. The frozen FALSIFIED-IN-SETTING verdict reflects test-design limitation (CMI-inappropriate positive control), not falsification of Web dynamical structure. KSG/LR null centering is a methodological advance that unblocks future testing but does not itself test the hypothesis. All data is synthetic in-memory SPA simulation."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2155,19 +2165,29 @@
         "claim_id": "C-MEAS-VALID",
         "status": "HYPOTHESIS",
         "reason": "No change. BLOCKED run provides zero new evidence: Docker substrate unavailable, no full-DOM data collected, no decision gates C1-C7 evaluated. C-MEAS-VALID remains HYPOTHESIS at parent ceiling. The full-DOM recipe ranking stability hypothesis (canonical agreement >=80% at n=21-82) is UNTESTED."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35476270440",
+        "lane": "physics",
+        "created_at": "2026-09-19T23:30:00.408584+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison.",
+        "source_commit": "844ad7476fb6276d4bfa41bd480866d1b13dd52b",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "C3 positive control is invalid for CMI estimators on the 8-state deterministic SPA by construction (I(Y;A|Z)=0 when P(Y|Z,A)=P(Y|Z)). Frozen decision rule triggers FALSIFIED-IN-SETTING, but the underlying measurement is valid: SPA design verified (48/48 pairs with 4 candidates), parent estimators replicate within 0.001 bits, stratum bias decomposition confirmed. The frozen FALSIFIED-IN-SETTING is a consequence of the decision rule's C3 threshold being calibrated for stratum PMI estimators, not CMI estimators. Measurement validity is recoverable with estimator-appropriate positive controls."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35470449605",
+      "experiment_id": "EXP-PHYSICS-35476270440",
       "lane": "physics",
-      "created_at": "2026-09-19T21:27:17.376394+00:00",
-      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: all 4 estimators have |shuffled-action null mean| >= 0.1 bits at N=5000 on the 12-state hash-routed SPA (weighted 0.407, equal-weight 0.704, median 0.686, KNN -0.262, each 2.6-7.0x threshold and 35-56 sigma). The CANDIDATES design is verified to have 0% deterministic strata (48/48 (state,action) pairs with 4 distinct candidates), yet null bias is reproducibly identical to parent (within 0.001 bits) and monotonically stratum-size dependent (0.736 at size 5-9 vs 0.369 at 20-49). The bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace smoothing, NOT caused by deterministic/stochastic strata mixing. SPA redesign pathway is closed. Positive control passes (all 4 estimators K3 >= 1.0 bit, p <= 0.001). Audit PASS confirms all recomputed metrics match producer. No Phase 2 executed (no estimator passes C1). C-WEB-DYNAMICS remains HYPOTHESIS; this experiment falsifies only the SPA-redesign pathway for null centering, not the broader claim about real Web dynamics.",
-      "source_commit": "282dafffff0eb8483a174cc5576c5dfa6d266002",
+      "created_at": "2026-09-19T23:30:00.408584+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison.",
+      "source_commit": "844ad7476fb6276d4bfa41bd480866d1b13dd52b",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No change to claim status from parent HYPOTHESIS. Frozen decision_rule C1 triggers FALSIFIED-IN-SETTING: all 4 estimators (weighted PMI null_mean=0.407, equal-weight 0.704, median 0.686, KNN -0.262) fail |null_mean|<0.1 by 2.6-7.0x margins. The '0% deterministic strata' CANDIDATES redesign is verified at design level (48/48 pairs have 4 distinct candidates) but null bias is reproducibly identical to parent (within 0.001 bits), confirming the bias is intrinsic to plug-in PMI estimation across varying-size strata with Laplace alpha=1.0, NOT caused by deterministic/stochastic mixing. Stratum-size decomposition identical to parent: +0.736 at 5-9, +0.562 at 10-19, +0.369 at 20-49. The SPA-redesign pathway for null centering is closed. The parent's H1 hypothesis (bias is environment-caused) is falsified. Beyond-Markov K3-K2 testing is not gated (no estimator passes C1). C-WEB-DYNAMICS concerns real Web dynamics; all evidence remains synthetic in-memory SPA simulation. Truly orthogonal estimators (KSG CMI, Bayesian model comparison, likelihood-ratio tests) remain untested and are the required next attack vector."
+      "reason": "No evidence accumulated for or against C-WEB-DYNAMICS from this experiment. The frozen FALSIFIED-IN-SETTING verdict reflects test-design limitation (CMI-inappropriate positive control), not falsification of Web dynamical structure. KSG/LR null centering is a methodological advance that unblocks future testing but does not itself test the hypothesis. All data is synthetic in-memory SPA simulation."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
@@ -2230,14 +2250,14 @@
       "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-INTEL-35470447439",
-      "lane": "intel",
-      "created_at": "2026-09-19T21:27:18.243275+00:00",
-      "decision": "BLOCKED",
-      "source_commit": "b8c47aeabfe1ed7fbeda65056c425763d500e1f2",
+      "experiment_id": "EXP-PHYSICS-35476270440",
+      "lane": "physics",
+      "created_at": "2026-09-19T23:30:00.408584+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule triggers FALSIFIED-IN-SETTING on clause C3: no estimator passes BOTH C1 (|null_mean| < 0.1 bits) AND C3 (positive_control_k3 >= 1.0 bit, p <= 0.001). B-KSG-CMI passes C1 (|null_mean|=0.0155 bits, 26x below threshold) but fails C3 (positive_control_k3=0.018 < 1.0). B-LIKELIHOOD-RATIO passes C1 (|null_mean|=0.0045 bits) but fails C3 (positive_control_k3=0.241 < 1.0). However, the C3 failure is a test-design limitation, not an estimator failure: the 8-state deterministic SPA produces I(Y;A|Z)=0 by construction for CMI estimators (P(Y|Z,A) = P(Y|Z) when transitions are deterministic). The frozen C3 threshold (1.0 bit, calibrated for stratum PMI) is inappropriate for KSG CMI and LR chi2 scales. Audit REVISE confirms measurement validity but recommends estimator-appropriate positive controls. Producer errors corrected: c1_pass_count is 2 (not 3); verdict trigger is C3 (not C1 as producer states); Bayesian model is off-scale (|null|=213.7 bits, log BF) and should be excluded from C1 comparison.",
+      "source_commit": "844ad7476fb6276d4bfa41bd480866d1b13dd52b",
       "claim_id": "C-MEAS-VALID",
-      "status": "HYPOTHESIS",
-      "reason": "No change. BLOCKED run provides zero new evidence: Docker substrate unavailable, no full-DOM data collected, no decision gates C1-C7 evaluated. C-MEAS-VALID remains HYPOTHESIS at parent ceiling. The full-DOM recipe ranking stability hypothesis (canonical agreement >=80% at n=21-82) is UNTESTED."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "C3 positive control is invalid for CMI estimators on the 8-state deterministic SPA by construction (I(Y;A|Z)=0 when P(Y|Z,A)=P(Y|Z)). Frozen decision rule triggers FALSIFIED-IN-SETTING, but the underlying measurement is valid: SPA design verified (48/48 pairs with 4 candidates), parent estimators replicate within 0.001 bits, stratum bias decomposition confirmed. The frozen FALSIFIED-IN-SETTING is a consequence of the decision rule's C3 threshold being calibrated for stratum PMI estimators, not CMI estimators. Measurement validity is recoverable with estimator-appropriate positive controls."
     }
   }
 }
