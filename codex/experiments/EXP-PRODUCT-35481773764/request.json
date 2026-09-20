@@ -1,0 +1,20 @@
+{
+  "base_sha": "b33b5b790d82a016af6a4a8ebe567fbd9c36715a",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T01:35:29.383782+00:00",
+  "experiment_id": "EXP-PRODUCT-35481773764",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST \u2014 all five frozen decision conditions pass at n=480. C1 structural discrimination 0.8333 > 0.5. C2 token_refresh TP=1.0 on all 4 co-occurring conditions (Wilson lower 0.969). C3 behavioral_std 0.133-0.141 > 0.05, TOST pass=true at delta=0.15 (r=-0.0366, CI [-0.126, 0.053], both tails p<0.05). C4 FP=0.0 on 240 noise-only samples. C5 TOST equivalence confirmed at n=480 (CI upper 0.053 < 0.15 delta, both tails pass). Parent n=240 TOST lower-tail failure (p_lower=0.081) confirmed as sample-size power artifact: CI width narrowed from 0.252 to 0.179, lower bound moved from -0.185 to -0.126 within equivalence interval. Audit PASS confirms all recomputed metrics match producer. Claim ceiling strictly bounded to localhost stochastic mock (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7). No production generalization, no PRODUCT_CORE promotion, no non-mock inference. Threshold sensitivity analysis (exploratory) confirms TP=1.0 at 0.15-0.35, cliff to 0.694 at 0.40 \u2014 bimodal distribution limits threshold calibration utility.",
+  "inherited_next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, token_refresh included) be measured on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions \u2014 and does orthogonality (TOST delta=0.15, n>=480) survive on that substrate including token_refresh under stochastic drift?",
+  "lane": "product",
+  "origin_github_run_id": "35481773764",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35476271728",
+    "path": "research/experiments/EXP-PRODUCT-35476271728/handoff.json",
+    "sha256": "bbd7e5de967eeb62249feeab8cf9e3a9af77b1c7393b4cf6fbe5e64cf9da5bc9"
+  },
+  "reason": "pulse",
+  "request_hash": "6f37ba59dfeed8908f2df6b839a146c98982cb863b70084fca207d36536af1b1",
+  "request_id": "9e4cc63a105ff887226af7d9",
+  "schema_version": 1
+}

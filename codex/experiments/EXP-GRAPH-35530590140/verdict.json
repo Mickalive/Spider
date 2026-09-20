@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35530590140",
+  "lane": "graph",
+  "decision": "CONFIRMED — C-FRESHNESS orthogonality at delta=0.15 CONFIRMED per frozen decision_rule: all C1-C7 PASS on production-like LOCAL testbed. V2 confound redesign (fixed 'expired' request_id) resolves parent fragility (B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304, delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684. Claim ceiling BOUNDED: (a) n_non304=684 < 800 required by frozen question — delta=0.10 inference marginal (TOST p=0.060); (b) LOCAL testbed only (Flask 3.1.3, PyJWT RS256, SQLite WAL-mode, single-node CDN simulation); (c) VALIDATED/PRODUCT_CORE not warranted pending n>=800 re-run and distributed/CDN validation. Audit REVISE on reporting consistency (C2/C7 include 304s, should be non-304 per spec) and power shortfall — no effect on primary metric validity.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "C-FRESHNESS orthogonality CONFIRMED at delta=0.15 per frozen decision_rule (C1-C7 all PASS) on production-like LOCAL testbed. V2 confound redesign resolves parent fragility: B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304 inclusion/exclusion (delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684, 3 endpoints, 3/3 with variance. B-FLASK-ONLY |r|=0.0017 confirms orthogonality without infrastructure. However, claim ceiling bounded: n_non304=684 < 800 frozen question requirement (delta=0.10 marginal, TOST p=0.060); LOCAL testbed only (not distributed production); headers-only structural signal; single-node CDN simulation. VALIDATED/PRODUCT_CORE not warranted — parallel-channel architecture justified only for this LOCAL production-like regime at delta=0.15. Status EXPERIMENTAL pending: (1) n>=800 non-304 re-run; (2) distributed CDN/OAuth validation; (3) concurrent load testing."
+    }
+  ],
+  "product_action": "NO_ACTION — Parallel-channel architecture (separate behavioral and structural signal processing) is justified for LOCAL production-like regime at delta=0.15. However, claim ceiling is bounded to LOCAL testbed; VALIDATED/PRODUCT_CORE requires n>=800 re-run and distributed production validation. No product code changes authorized.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does C-FRESHNESS orthogonality at delta=0.15 survive on distributed production-like infrastructure with real CDN hierarchies (multi-node cache invalidation on session state change), concurrent client load (N>=50 parallel sessions), and non-Flask frameworks — and does delta=0.10 become achievable at n_non304>=1200 (CI half-width <=0.05)?",
+  "reason": "Frozen decision_rule yields CONFIRMED: all C1-C7 pass at delta=0.15 on production-like LOCAL testbed. V2 confound redesign succeeds: B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304 (delta 0.0003 vs parent 0.225), resolving the only prior blocker. Audit REVISE on: (1) power shortfall n_non304=684 < 800 (spec requires 800, achieved 684); (2) C2/C7 reporting includes 304s (spec requires non-304); (3) claim ceiling must be bounded. Numerical metrics match within 1e-6. Scientific evidence strong: 6 prior localhost mock experiments (r=0.002-0.046) + production-like testbed r=0.041 + B-FLASK-ONLY r=0.002 all consistently below 0.15. Orthogonality signal robust across 20+ experiments. However, LOCAL testbed ceiling means product promotion requires distributed validation. Bounded negative: C-FRESHNESS does NOT reach VALIDATED/PRODUCT_CORE from this experiment alone.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35530590140/result.json:metrics.stratified_pooled_r 0.0410 stratified_ci_upper_95 0.1156 n=684",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:controls C1-C7 all PASS",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:metrics.bparent_stratified_weighted_abs_r 0.9012 per_endpoint_bparent_r",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json:status REVISE producer_claim_supported false",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json:validity_findings V_POWER_SHORTFALL n=684<800",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json:validity_findings V_C2_INCLUSIVE_VARIANCE V_C7_REPORTING_INCONSISTENCY",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json:claim_ceiling bounded LOCAL testbed delta=0.15",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json:recomputed_metrics stratified_pooled_r_non304 0.0410 numerical_match confirmed",
+    "research/experiments/EXP-GRAPH-35530590140/raw_evidence/experiment_data.json:per_condition_data 24 conditions 34 each n_non304=684",
+    "research/experiments/EXP-GRAPH-35530590140/testbed_server_v2.py:_make_unauthorized_response request_id='expired' for expired (V2 confound)",
+    "research/experiments/EXP-GRAPH-35510157861/handoff.json:carry_forward V_ETAG C5 V3 fixes verified",
+    "codex/claim_state.json:C-FRESHNESS claim history EXPERIMENTAL status across prior experiments",
+    "codex/index.json:EXP-GRAPH-35389145821 EXP-GRAPH-35353011131 EXP-PRODUCT-35434772331 localhost mock r 0.002-0.046 audit PASS"
+  ]
+}

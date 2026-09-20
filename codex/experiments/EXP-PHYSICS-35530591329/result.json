@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "alpha_sweep_summary": {
+      "alpha_0": {
+        "k3_value_stochastic": 1.377240,
+        "k2_value_stochastic": 1.192911,
+        "k3_minus_k2": 0.184329,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.924268,
+        "c1_null_std": 0.009312,
+        "c3_pass": true,
+        "c3_positive_control_k3": 1.377240,
+        "c3_permutation_p": 0.001,
+        "degenerate_control_k3": 1.390812
+      },
+      "alpha_0.01": {
+        "k3_value_stochastic": 1.274274,
+        "k2_value_stochastic": 1.167492,
+        "k3_minus_k2": 0.106782,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.940738,
+        "c1_null_std": 0.006997,
+        "c3_pass": true,
+        "c3_positive_control_k3": 1.274274,
+        "c3_permutation_p": 0.001,
+        "degenerate_control_k3": 1.294333
+      },
+      "alpha_0.1": {
+        "k3_value_stochastic": 0.743134,
+        "k2_value_stochastic": 0.651121,
+        "k3_minus_k2": 0.092014,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.560780,
+        "c1_null_std": 0.002144,
+        "c3_pass": true,
+        "c3_positive_control_k3": 0.743134,
+        "c3_permutation_p": 0.001,
+        "degenerate_control_k3": 0.773228
+      },
+      "alpha_0.5": {
+        "k3_value_stochastic": 0.220766,
+        "k2_value_stochastic": 0.168621,
+        "k3_minus_k2": 0.052145,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.150579,
+        "c1_null_std": 0.000383,
+        "c3_pass": false,
+        "c3_positive_control_k3": 0.220766,
+        "c3_permutation_p": 0.001,
+        "degenerate_control_k3": 0.238714
+      },
+      "alpha_1.0": {
+        "k3_value_stochastic": 0.098876,
+        "k2_value_stochastic": 0.071347,
+        "k3_minus_k2": 0.027529,
+        "c1_pass": true,
+        "c1_abs_null_mean": 0.064291,
+        "c1_null_std": 0.000149,
+        "c3_pass": false,
+        "c3_positive_control_k3": 0.098876,
+        "c3_permutation_p": 0.001,
+        "degenerate_control_k3": 0.109370
+      }
+    },
+    "sensitivity_null_tradeoff": {
+      "description": "Monotonic tradeoff: decreasing alpha increases K3 sensitivity but degrades null centering",
+      "k3_range": [0.099, 1.377],
+      "null_mean_range": [0.064, 0.924],
+      "tradeoff_monotonic": true,
+      "crossover_alpha": "none (no alpha achieves both C1 and C3)"
+    },
+    "design_verification": {
+      "c6_design_pass": true,
+      "c6_pairs_with_4_candidates": 48,
+      "c6_total_pairs": 48,
+      "c7_stratum_buckets_non_empty": 2,
+      "c7_pass": true
+    },
+    "determinism_k3_stochastic": {
+      "deterministic": 77,
+      "stochastic": 764,
+      "total": 841,
+      "det_ratio": 0.0916
+    },
+    "n_transitions": {
+      "stochastic": 5000,
+      "deterministic": 5000
+    }
+  },
+  "controls": {
+    "C1-NULL-CONTROL": {
+      "description": "Shuffled-action within-session null, 500 permutations per alpha. |mean| < 0.1 bits.",
+      "expected": "|shuffled-action null_mean| < 0.1 bits for at least one alpha",
+      "observed": "Only alpha=1.0 passes (|mean|=0.064). Alpha=0: 0.924, alpha=0.01: 0.941, alpha=0.1: 0.561, alpha=0.5: 0.151.",
+      "pass": false,
+      "passing_alphas": [1.0],
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep.alpha_1.0.null_control"
+    },
+    "C3-POSITIVE-CONTROL": {
+      "description": "Positive control K3 >= 0.5 bits with permutation p <= 0.001 for any alpha passing C1.",
+      "expected": "positive_control_k3 >= 0.5 bits and p <= 0.001",
+      "observed": "Alpha=1.0 (C1 passer) has K3=0.099 < 0.5. Alphas 0, 0.01, 0.1 pass C3 but fail C1.",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep.alpha_1.0.positive_control_k3"
+    },
+    "C6-DESIGN-VERIFICATION": {
+      "description": "48/48 (state,action) pairs with 4 distinct candidates.",
+      "expected": "48/48 pairs with 4 distinct candidates",
+      "observed": "48/48 pairs verified.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py:verify_design()"
+    },
+    "C7-STRATUM-COVERAGE": {
+      "description": ">=2 non-empty stratum size buckets.",
+      "expected": ">=2 non-empty buckets",
+      "observed": "2 non-empty buckets (5-9: 343 strata, 10-19: 37 strata).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:stratum_size_bias_decomposition"
+    },
+    "B-DETERMINISTIC-SPA": {
+      "description": "Plug-in KL on fully deterministic SPA. Expected I(Y;A|Z)=0 by construction.",
+      "expected": "K3 < 0.1 (degenerate, I=0 by construction)",
+      "observed": "K3 values: alpha=0: 1.391, alpha=0.01: 1.294, alpha=0.1: 0.773, alpha=0.5: 0.239, alpha=1.0: 0.109. All > 0.1 due to Laplace smoothing bias.",
+      "pass": false,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep.*.degenerate_control_k3"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35530591329/raw_results.json",
+      "sha256": "afa8b1c5e32bf589755a6031ef2c489d1384d3be46f743e083b32abb2440e017",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py",
+      "sha256": "9875c0bc2ce4e8ffeeca1f54ceb92fecac9eee70131baccede246a623c0730cf",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Strong monotonic sensitivity-null tradeoff: alpha=0 K3=1.377 bits but |null_mean|=0.924 (9.2x threshold); alpha=1.0 |null_mean|=0.064 (1.6x below threshold) but K3=0.099 (5.1x below 0.5 threshold).",
+    "No alpha achieves BOTH C1 (|null_mean|<0.1) AND C3 (K3>=0.5). The crossover does not exist in the tested alpha range.",
+    "C1 passers: {1.0} only. C3 passers: {0, 0.01, 0.1}. Intersection: empty.",
+    "The null bias is intrinsic to plug-in KL estimation across varying-size strata: it decreases monotonically with alpha (0.924 at alpha=0 to 0.064 at alpha=1.0) because Laplace smoothing dilutes the per-stratum PMI contribution.",
+    "Sensitivity (K3 on stochastic SPA) decreases monotonically with alpha: 1.377 (alpha=0) -> 1.274 (0.01) -> 0.743 (0.1) -> 0.221 (0.5) -> 0.099 (1.0).",
+    "The degenerate control (deterministic SPA, I=0 by construction) is non-zero for all alphas due to Laplace smoothing bias: alpha=0: 1.391, alpha=0.01: 1.294, alpha=0.1: 0.773, alpha=0.5: 0.239, alpha=1.0: 0.109.",
+    "Stratum size decomposition (alpha=0.1): 343 strata in 5-9 bucket (observed PMI 0.800, null 0.644), 37 strata in 10-19 bucket (observed 0.961, null 0.616). Smaller strata have higher null bias.",
+    "Determinism ratio K3=9.2% (77 deterministic / 841 total strata), confirming the stochastic SPA has substantial non-determinism.",
+    "Parent audit MLE recomputation (alpha=0 K3=1.377, alpha=0.1 K3=0.743) is exactly replicated in this experiment.",
+    "Permutation p-value is identical (0.001) across all alphas for the positive control, confirming the stochastic SPA signal is detectable by permutation test regardless of alpha."
+  ],
+  "validity_notes": [
+    "The experiment uses the same 12-state stochastic SPA design as parent EXP-PHYSICS-35510154353 and EXP-PHYSICS-35482477045. Results are specific to this SPA class.",
+    "MLE (alpha=0) handles zero-count cells by skipping them (convention: 0*log2(0/...) = 0). This is mathematically correct for KL divergence but means empty cells contribute zero, not negative bias.",
+    "The null control uses within-session action-label shuffle (500 permutations), correcting the global shuffle deviation identified in parent audits.",
+    "Bootstrap CI for K3-K2 is NOT computed because no alpha passes both C1 and C3 (Phase 2 not executed).",
+    "The stratum size decomposition uses alpha=0.1 as representative; decomposition may differ at other alphas.",
+    "All measurements are on synthetic in-memory SPA simulation. No browser/network/model calls. Generalization to production Web transitions is not claimed.",
+    "The frozen decision rule FALSIFIED-IN-SETTING triggers on C3 (alpha=1.0 passes C1 but K3=0.099 < 0.5). This is a valid scientific negative, not an infrastructure failure."
+  ],
+  "unresolved": [
+    "Whether the sensitivity-null tradeoff is fundamental to discrete CMI estimation or can be broken by (a) larger N, (b) richer state representations, (c) alternative estimators (histogram, Bayesian, likelihood-ratio), or (d) different null frameworks.",
+    "Whether the null bias at alpha=0 (0.924 bits) reflects genuine PMI in the shuffled data or estimator artifact from sparse strata (avg 1.5 records per (z,a) cell in K3 conditioning).",
+    "Whether K3-K2 beyond-Markov testing is feasible with any plug-in KL alpha given the observed tradeoff.",
+    "Whether production Web transitions with continuous state representations or larger vocabularies exhibit different sensitivity-null tradeoffs.",
+    "Whether alternative null frameworks (parametric bootstrap, Miller-Madow, conditional entropy) center null at zero for reduced-alpha plug-in KL."
+  ]
+}

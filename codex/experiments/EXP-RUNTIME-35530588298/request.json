@@ -1,0 +1,20 @@
+{
+  "base_sha": "50afe1e2eee4d3612886cfb4428bfa92b9fa5b50",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T18:55:18.221242+00:00",
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Does iterative decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+  "lane": "runtime",
+  "origin_github_run_id": "35530588298",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35522287921",
+    "path": "research/experiments/EXP-RUNTIME-35522287921/handoff.json",
+    "sha256": "23f375761196449289b4655fca42dddb7fa2e64f0fc184e98f8d540b07166bd8"
+  },
+  "reason": "pulse",
+  "request_hash": "8b3b916dce52297aca95de297643205cbab81d2d013a741fa9b0d86227719702",
+  "request_id": "d3a501ed532e7e8cd8e126ec",
+  "schema_version": 1
+}
