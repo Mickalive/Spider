@@ -1643,6 +1643,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "REJECTED",
         "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35476271877",
+        "lane": "intel",
+        "created_at": "2026-09-19T23:30:02.291409+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
+        "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "REJECTED",
+        "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
       }
     ],
     "C-MEAS-VALID": [
@@ -2207,6 +2217,16 @@
         "reason": "C3 positive control is invalid for CMI estimators on the 8-state deterministic SPA by construction (I(Y;A|Z)=0 when P(Y|Z,A)=P(Y|Z)). Frozen decision rule triggers FALSIFIED-IN-SETTING, but the underlying measurement is valid: SPA design verified (48/48 pairs with 4 candidates), parent estimators replicate within 0.001 bits, stratum bias decomposition confirmed. The frozen FALSIFIED-IN-SETTING is a consequence of the decision rule's C3 threshold being calibrated for stratum PMI estimators, not CMI estimators. Measurement validity is recoverable with estimator-appropriate positive controls."
       },
       {
+        "experiment_id": "EXP-INTEL-35476271877",
+        "lane": "intel",
+        "created_at": "2026-09-19T23:30:02.291409+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
+        "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen SNR decomposition model fails its own C1 validation gate (residuals 0.44\u20130.50 vs 0.10 threshold). No mechanism among H1/H2/H3 is discriminated: C2 passes only via rho=1.0 tautology (template invariance + shared role subset forces same-type densities to be scalar multiples, audit VF2). No inference about full-DOM ranking agreement at n=21-82 is justified: extrapolation (C3=false, predicting agreement 1.0 at n=50) inherits the failed model and is built on sign-crossing |margin| power law from n=4 data points (audit VF3). Status remains MEASUREMENT_INVALID; the decomposition is unreliable and no claim ceiling advancement is supported."
+      },
+      {
         "experiment_id": "EXP-RUNTIME-35481773400",
         "lane": "runtime",
         "created_at": "2026-09-20T01:35:29.668700+00:00",
@@ -2330,14 +2350,14 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-PRODUCT-35434772331",
-      "lane": "product",
-      "created_at": "2026-09-19T09:28:26.218475+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 C3 orthogonality test is measurement-invalid: behavioral signal has zero variance (std=0.0) across all 720 co-occurring samples due to behavioral_score scoring weights producing identical 0.5 for all drift types, making Pearson r undefined and TOST inapplicable. This is a measurement design flaw (deterministic WSGI server, scoring weight collisions, server state carry-over), not a scientific falsification of signal independence. C1 (auth discrimination 0.8333), C2 (behavioral TP 1.0), and C4 (noise FP 0.0) all pass individually. The parent EXP-GRAPH-35353011131 already confirmed orthogonality at delta=0.15 under stochastic mock (r=0.046, CI upper 0.135). Frozen decision_rule triggers MEASUREMENT_INVALID because C3 cannot be evaluated. Director closes C-PRODUCT-ECON separately based on the accumulated evidence chain.",
-      "source_commit": "f42f866a7b435c96d3682a488591149b4fc1342f",
+      "experiment_id": "EXP-INTEL-35476271877",
+      "lane": "intel",
+      "created_at": "2026-09-19T23:30:02.291409+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: C1_SNR_MODEL_VALID fails (Phi(mean(SNR_i)) predicts 0.9999999999999991 at n=15 and 1.0 at n=20 versus observed 0.4998/0.5595; residuals 0.5002 and 0.4405 exceed 10pp threshold by ~40\u201350pp). Root cause is noise-scale misspecification: frozen model uses within-iteration within-type SE (~1e-5) as noise term, but ranking flips are driven by across-iteration margin variation (margin_std ~1e-4 to 6e-4, 10\u201350x larger). Per frozen rule, NOT C1 \u2192 MEASUREMENT_INVALID regardless of C2/C3. C2 passes only via rho=1.0 tautology forced by template invariance + shared role subset (not independent mechanism evidence). C3 extrapolation (predicted agreement \u226580% at n=50) is gated behind failed C1 and must not be used to justify Docker re-collection. Audit PASS independently recomputes all metrics matching producer. No scientific conclusion about the instability mechanism or full-DOM ranking agreement is supported by this run.",
+      "source_commit": "babdbc00dc72e290a327005cb9b85dcc0cd177e5",
       "claim_id": "C-PRODUCT-ECON",
       "status": "REJECTED",
-      "reason": "Director closes C-PRODUCT-ECON based on accumulated evidence chain across 5+ consecutive PRODUCT experiments (EXP-PRODUCT-35330741529 through EXP-PRODUCT-35409929216): zero real LLM calls across all experiments; 5.42% net savings (1067 tokens) analytically robust but thin and synthetic-only; COLD 7.5x cheaper; purely analytical execution confirmed by audit V4; absolute margin not economically meaningful without real measurement. The analytical token-cost line is exhausted. C-PRODUCT-ECON is not viable at current scale."
+      "reason": "No change to claim status. C-PRODUCT-ECON was closed as REJECTED by Director based on accumulated evidence across 5+ consecutive PRODUCT experiments (zero real LLM calls, 5.42% analytical savings thin and synthetic-only, COLD 7.5x cheaper). This intel-lane experiment does not produce any new evidence for or against C-PRODUCT-ECON; it diagnoses the SNR decomposition model that was supposed to predict whether full-DOM testing would resolve the MIXED program question. The frozen decision rule's product_consequence branches (adopt non-recipe density immediately vs wait for full-DOM) are not reached because the experiment is MEASUREMENT_INVALID."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35522287921",
