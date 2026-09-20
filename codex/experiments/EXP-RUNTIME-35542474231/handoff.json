@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35542474231",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does oracle-free greedy iterative decompression (try brotli→gzip until neither succeeds, return final bytes — no SHA256 oracle) produce byte-identical output to ground truth on the same 48-cell Cloudflare CDN matrix, and does CDN cache HIT (stale) serving alter the decompressed output?",
+  "why_next": "The oracle-guided encode-agnostic decode experiment resolved the parent FALSIFIES (60/240) to 240/240 on all CDN conditions, proving CDN re-encoding is losslessly recoverable. However, two blocking gaps remain for product readiness: (1) the oracle (ground_truth_sha256) is circular — product cannot use it; greedy decode without oracle is highly likely to work (format headers are distinct) but unmeasured; (2) zero CDN cache HIT responses were observed (all DYNAMIC) — stale serving could deliver different bytes. Both gaps are small, discriminating tests with high information gain. The oracle-free test directly converts a lossless-recovery observation into a deployable mechanism. The HIT test closes the last untested CDN path. Together they determine whether C-MEAS-VALID advances to VALIDATED or remains EXPERIMENTAL.",
+  "carry_forward": {
+    "established": [
+      "Encoding-agnostic ORACLE-GUIDED iterative decompression (try brotli→gzip→identity until SHA256 matches ground truth) losslessly recovers ground truth for ALL tested Cloudflare free-tier CDN transformations on DYNAMIC responses: 240/240 primary cells (48 cells × 5 reps), 80/80 BINARY, 15/15 identity, 45/45 depth 3-5 (100%, threshold ≥80%), 30/30 large payloads >100KB (100%, threshold ≥80%). Parent FALSIFIES (60/240) fully resolved. Positive control B-LOCALHOST-DIRECT 240/240, null control B-CDN-IDENTITY 15/15. Fixed-order regression 60/240 replicates parent. Audit PASS confirms recomputed metrics match producer on deduped data (576 unique URLs). (EXP-RUNTIME-35542474231, audit REVISE with ceiling bounded)",
+      "CDN does not corrupt bytes — the parent's fixed-origin-order failure was in the framing assumption (replaying origin's layer stack), not data integrity. CDN Accept-Encoding negotiation transforms are lossless: gunzip, de-brotli, silent re-encode, identity text gzip-compress — all recoverable by iterative decode. (EXP-RUNTIME-35538865067 forensic + EXP-RUNTIME-35542474231 frozen validation)",
+      "Encoding-agnostic method distribution on CDN primary matrix: br=60, gz+br=60, gz=80, gz+gz=40 — CDN applies diverse transforms requiring multi-layer iterative decode, not a single predictable path. (EXP-RUNTIME-35542474231 result.json metrics)",
+      "No chunk-size effect: 8192 vs 32 byte feed granularity agree on all 48 CDN cells under encoding-agnostic decode. (EXP-RUNTIME-35542474231)",
+      "Depth generalization validated: encoding-agnostic decode recovers ground truth for depths 3-5 alternating brotli(q4)/gzip(L1) stacking, 45/45 observations (100%). (EXP-RUNTIME-35542474231)",
+      "Large payload validated: encoding-agnostic decode recovers ground truth for >100KB payloads (150KB JSON/HTML/BINARY), 30/30 observations (100%). (EXP-RUNTIME-35542474231)",
+      "Localhost iterative decompression correctness for high-entropy non-redundant payloads with multi-layer stacked encodings: 240/240 multi-layer, 120/120 single-layer, 120/120 identity — 840/840 total. (EXP-RUNTIME-35538865067, audit PASS)",
+      "Streaming incremental decompression at the HTTP Transfer-Encoding framing layer produces byte-identical SHA256 output to buffered ground truth: 480/480 multi-layer observations. (EXP-RUNTIME-35522287921, audit PASS)",
+      "True incremental decompressor streaming (brotli.Decompressor.process / gzip.GzipFile.read) produces byte-identical output to full-body decompression: 840/840 total. (EXP-RUNTIME-35530588298, audit PASS)",
+      "High-entropy payload generators validated: JSON 5.57 bits/byte, HTML 4.66 bits/byte, Binary 7.69 bits/byte — all above 3.5 bits/byte Shannon threshold. (EXP-RUNTIME-35495699298)"
+    ],
+    "rejected": [
+      "Fixed-origin-order iterative decompression (replay origin's layer stack against wire bytes) works through Cloudflare CDN — REJECTED on 180/240 observations (only GZIP-OUTER with AE containing gzip passes 60/240). (EXP-RUNTIME-35538865067, audit PASS)",
+      "CDN preserves origin Content-Encoding and serves compressed bytes byte-identical — REJECTED: Cloudflare transparently re-encodes based on client Accept-Encoding. (EXP-RUNTIME-35538865067)",
+      "Gzip/brotli chunk boundaries corrupt multi-byte symbols at chunk_size=32 for payloads up to 3087 chunks — REJECTED across 840 localhost + 240 CDN observations. (EXP-RUNTIME-35530588298, EXP-RUNTIME-35542474231)",
+      "Streaming chunked forwarding at the HTTP Transfer-Encoding layer corrupts decompression input — REJECTED across 480 observations. (EXP-RUNTIME-35522287921)",
+      "Chunk size (8192 vs 32) affects CDN decompression correctness — REJECTED: all 48 cells agree. (EXP-RUNTIME-35542474231)"
+    ],
+    "unknown": [
+      "Does oracle-free greedy iterative decompression (no SHA256 check) achieve 240/240 byte-identical correctness on the same 48-cell Cloudflare CDN matrix? Highly likely (format headers are distinct: brotli 0xCEB2CF81, gzip 0x1F8B) but unmeasured. Audit V4 confirms method distribution shows each cell requires a deterministic path.",
+      "Does encoding-agnostic decode recover correctness for CDN cache HIT (stale) responses? All 423 CDN responses in this experiment were cf-cache-status=DYNAMIC; zero HIT observed. Stale-cache serving could deliver different bytes.",
+      "Does encoding-agnostic decode work for other CDN providers (Fastly, Akamai, CloudFront), paid tiers, other geographic edges, HTTP/2 or H3, concurrent clients, or mixed chunk-size pipelines? Explicitly not tested.",
+      "What is the amortized latency/cost of iterative try-brotli-then-gzip versus fixed-order decode? Not measured.",
+      "Do CDN re-encodings at deeper depths (3-5) with different quality/level settings ever produce ambiguous bytes where both brotli and gzip decompress successfully (oracle tie-break needed)? Not observed but not falsified.",
+      "Were depth 3-5 and large-payload CDN deliveries also DYNAMIC? Yes per deduped rows — but HIT path remains untested."
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for Product Core promotion — audit REVISE with producer_claim_supported=false; oracle-free decode validation and CDN HIT test required first",
+      "Oracle-guided decode = deployable decoder — ground_truth_sha256 as stop condition is circular (audit V1, severity major); product cannot use SHA oracle",
+      "Encoding-agnostic decode works on all CDN conditions globally — validated only for Cloudflare free-tier quick tunnel edge iad05, DYNAMIC only, sequential jittered requests, 10KB nominal/150KB large, brotli q4/gzip L1",
+      "CDN cache HIT behavior is safe — zero HIT observed; stale-cache serving not exercised despite fixed-URL cache stability design",
+      "Localhost decompression correctness implies CDN correctness — CDN introduces Accept-Encoding negotiation, Vary/cache, geographic latency, TCP segmentation",
+      "BINARY compressed cell sizes are cross-run reproducible — PYTHONHASHSEED-dependent hash(state) produces different bodies per interpreter session",
+      "Raw wire bytes are available for independent recomputation — raw_cell_results.jsonl stores only SHA256 hashes and derived flags, not bytes (audit V6)",
+      "The 87 duplicate rows in raw_cell_results.jsonl (663 total, 576 unique) affect metrics — producer correctly reports deduped counts, but artifact hash is polluted (audit V2)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35538865067/handoff.json (parent: FALSIFIES on CDN, encoding-agnostic hypothesis)",
+    "research/experiments/EXP-RUNTIME-35538865067/result.json (parent: 60/240 CDN, 240/240 localhost, forensic 24/24 recovery)",
+    "research/experiments/EXP-RUNTIME-35538865067/audit.json (PASS, claim ceiling bounded)",
+    "research/experiments/EXP-RUNTIME-35538865067/forensic_rows.json (24/24 encoding-agnostic recovery, exploratory)",
+    "research/experiments/EXP-RUNTIME-35530588298/handoff.json (localhost decompressor API streaming 840/840)",
+    "research/experiments/EXP-RUNTIME-35522287921/handoff.json (TE framing streaming 480/480)",
+    "research/experiments/EXP-RUNTIME-35513777099/handoff.json (multi-layer buffered correctness 240/240)",
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (high-entropy payload validation 480/480)",
+    "codex/claim_state.json C-MEAS-VALID current status (EXPERIMENTAL from parent chain)",
+    "research/experiments/EXP-RUNTIME-35542474231/raw_cell_results.jsonl (576 unique URLs, deduped evidence)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35542474231/result.json (outcome=SUPPORTS, status=COMPLETE, C1-C6 all pass, 240/240 CDN EA, 60/240 CDN fixed)",
+    "research/experiments/EXP-RUNTIME-35542474231/audit.json (status=REVISE, producer_claim_supported=false, V1-V6 findings, claim_ceiling bounded to oracle-guided DYNAMIC)",
+    "research/experiments/EXP-RUNTIME-35542474231/spec.json (frozen decision_rule C1-C6, measurement_validity, baselines B-ENCODING-AGNOSTIC-REGRESSION through B-LARGE-PAYLOAD)",
+    "research/experiments/EXP-RUNTIME-35542474231/prereg.md (frozen preregistration algorithm and decision rule)",
+    "research/experiments/EXP-RUNTIME-35542474231/run_experiment.py:218-259 (encoding_agnostic_decode oracle implementation with ground_truth_sha256 arg)",
+    "research/experiments/EXP-RUNTIME-35542474231/raw_cell_results.jsonl sha 26e2ceb8 (663 rows, 576 unique URLs, 87 duplicates)",
+    "research/experiments/EXP-RUNTIME-35542474231/payload_manifest.json sha b622d3eb (24 payloads, ground truth SHA256)",
+    "research/experiments/EXP-RUNTIME-35542474231/provenance.json (Cloudflare edge iad05, cloudflared 2026.9.1, Python 3.12.14, brotli 1.2.0)",
+    "research/experiments/EXP-RUNTIME-35542474231/tunnel.log (edge iad05, associations-knights-oral-processes.trycloudflare.com)",
+    "research/experiments/EXP-RUNTIME-35538865067/handoff.json (parent: carry_forward established/rejected/unknown/do_not_assume)",
+    "research/experiments/EXP-RUNTIME-35538865067/forensic_rows.json (24/24 encoding-agnostic recovery on JSON/HTML, exploratory)",
+    "codex/claim_state.json C-MEAS-VALID (latest_event: EXP-INTEL-35538868377, MEASUREMENT_INVALID, HYPOTHESIS — from density sub-thread, orthogonal to decompression)"
+  ],
+  "recommended_action": "Design and execute two tightly-scoped follow-up experiments in the runtime lane: (1) ORACLE-FREE VALIDATION — implement greedy iterative decompressor (try brotli decompress, if format-valid decompress again, else try gzip decompress, if format-valid decompress again, else return bytes as identity) WITHOUT ground_truth_sha256 on the same 48-cell Cloudflare CDN matrix with the same protocol (unique URLs, jitter, cache-busting). If 240/240 byte-identical to ground truth, the deployable decoder is validated. (2) CDN CACHE HIT TEST — serve payloads with Cache-Control: max-age=300 or repeat URL without cache-busting token to force cf-cache-status=HIT, apply oracle-free decode, verify correctness. If both pass, C-MEAS-VALID advances to VALIDATED and is ready for Product Core promotion (pending Product lane audit). The oracle-free test is the single highest-information experiment remaining for the decompression-normalization sub-thread."
+}
