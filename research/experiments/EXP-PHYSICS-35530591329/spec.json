@@ -1,17 +1,50 @@
 {
   "experiment_id": "EXP-PHYSICS-35530591329",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "Can plug-in KL with alpha=0.1 or bias-corrected MLE (alpha=0) achieve |shuffled-action null_mean| < 0.1 bits while maintaining positive_control_k3 >= 0.5 bits and p <= 0.001 at N=5000 on the stochastic 12-state SPA — thereby resolving whether hyperparameter tuning unblocks the CMI pathway, or whether null centering degrades with reduced smoothing?",
+  "hypothesis": "H0 (null): For all tested alpha values (0, 0.01, 0.1, 0.5, 1.0), plug-in KL fails to achieve BOTH |shuffled-action null_mean| < 0.1 bits AND positive_control_k3 >= 0.5 bits on the stochastic SPA at N=5000. H1 (alternative): At least one alpha achieves BOTH |null_mean| < 0.1 bits AND positive_control_k3 >= 0.5 bits on the stochastic SPA at N=5000. H2 (beyond-Markov, conditional on H1): K3 CMI - K2 CMI > 0.1 bits with bootstrap 95% CI lower > 0.0 at N=5000 for the best alpha passing C1+C3.",
+  "falsifier": "C1 (null centering): All alphas have |shuffled-action null_mean| >= 0.1 bits at N=5000. C3 (positive control sensitivity): For any alpha passing C1, positive_control_k3 < 0.5 bits OR permutation p > 0.001. C6 (SPA design): Fewer than 48/48 (state, action) pairs with 4 distinct candidates. C7 (stratum coverage): Fewer than 2 non-empty stratum size buckets.",
+  "baselines": [
+    {
+      "id": "B-DETERMINISTIC-SPA",
+      "description": "Plug-in KL with alpha=0 (MLE) on the fully deterministic 12-state SPA. Expected I(Y;A|Z)=0 by construction. Validates that the stochastic SPA produces non-zero CMI.",
+      "expected": "positive_control_k3 < 0.1 (degenerate, I(Y;A|Z)=0 by construction)"
+    },
+    {
+      "id": "B-PERMUTATION-TEST",
+      "description": "Permutation test conditioned on (state, action) strata: for each stratum with >=5 records, test whether observed action labels produce PMI significantly above shuffled-action null via within-session permutation. Non-parametric, does not rely on CMI estimation.",
+      "expected": "significant for stochastic SPA (action labels carry information by construction)"
+    },
+    {
+      "id": "B-PARENT-KSG-K5",
+      "description": "Replicate parent KSG k=5 results on the stochastic SPA to verify reproducibility.",
+      "expected": "k3_value_stochastic within 10% of parent 0.000560; null_mean within 10% of parent 0.012078"
+    },
+    {
+      "id": "B-KSG-CMI-K10",
+      "description": "KSG CMI with k=10 on the stochastic SPA. Tests whether KSG remains k-invariant and insensitive under the same conditions.",
+      "expected": "k3_value_stochastic ~0.000560, null_mean ~0.012, c3_pass false"
+    }
+  ],
+  "positive_control": "Stochastic 12-state SPA (same as parent EXP-PHYSICS-35482477045): 50% deterministic hash routing + 50% uniform random over 4 CANDIDATES per (state, action). Creates I(Y;A|Z) ≈ 1.52 bits by construction (audit-confirmed via exact enumeration and N=50000 empirical plug-in). The plug-in KL estimator computes D_KL(P(Y|Z,A) || P(Y|Z)) = I(Y;A;Z) directly on the empirical transition matrix with Laplace smoothing parameter alpha. Positive_control_k3 threshold: >= 0.5 bits (conservative, 3x below true CMI of 1.52 bits). Permutation p <= 0.001.",
+  "null_control": "Shuffled-action null: for each of 500 permutations, shuffle action labels within each session (preserving session structure, state sequence, and url_before/url_after pairing), recompute the estimator on the stochastic SPA, take the mean across permutations. Unit of permutation: action-label within session (correcting global shuffle deviation identified in parent audit V5). The null mean must satisfy |mean| < 0.1 bits for any alpha to pass C1. Both C1 and C3 use the same within-session shuffle framework.",
+  "measurement_validity": [
+    "Stochastic SPA uses the same 12-state design, STATES, ACTIONS, and CANDIDATES as parent EXP-PHYSICS-35482477045.",
+    "SPA modification: choose_next_stochastic() replaces choose_next() — with probability 0.5 use hash routing, with probability 0.5 choose uniformly from CANDIDATES[current][action]. RNG seeded with seed=42 independently of session RNG.",
+    "Design verification: all 48/48 (state, action) pairs have 4 distinct candidates (inherited from parent CANDIDATES design, unchanged).",
+    "N=5000 transitions (50 sessions x 100 steps) with seed=42, same collection procedure as parent.",
+    "Strata with < 5 records are skipped (MIN_STRATUM_SIZE=5, same as parent).",
+    "Plug-in KL estimator: D_KL(P(Y|Z,A) || P(Y|Z)) = sum_{z,a,y} P(z,a,y) * log2[P(y|z,a)/P(y|z)] with Laplace smoothing (alpha variable) and within-session action shuffle for null. Z=(current_state, history_state_K) for K2 and Z=(current_state, history_action_K) for K3.",
+    "Alpha values tested: 0 (MLE, no smoothing), 0.01, 0.1, 0.5, 1.0 (frozen parent). For each alpha, compute K3 on stochastic SPA, null_mean from 500 within-session permutations, and positive control on deterministic SPA.",
+    "Bootstrap CI uses 200 trajectory-block resamples (same as parent).",
+    "Bonferroni correction for primary comparisons: alpha=0.01 for C1, alpha=0.001 for C3 permutation p.",
+    "Deterministic SPA positive control (same 12-state design with deterministic hash routing only) verifies I(Y;A|Z)=0 for each alpha.",
+    "If any alpha implementation fails due to numerical issues (e.g., log(0) for MLE), report as MEASUREMENT_INVALID with explicit error message."
+  ],
+  "decision_rule": "Verdict priority: FALSIFIED-IN-SETTING > MEASUREMENT_INVALID > SURVIVES_CURRENT_TEST.\n\nFALSIFIED-IN-SETTING triggers if ANY of:\n  (1) C1: All alphas have |shuffled-action null mean| >= 0.1 bits at N=5000\n  (2) C3: For any alpha passing C1, positive_control_k3 < 0.5 bits OR permutation p > 0.001\n  (3) C6: Fewer than 48/48 (state,action) pairs with 4 distinct candidates\n\nMEASUREMENT_INVALID triggers if:\n  (4) Fewer than 30% of (state,action) strata have >= 5 records at N=5000\n  (5) stratum_size_bias_decomposition has < 2 non-empty size buckets\n  (6) Any alpha implementation fails (e.g., missing dependency, convergence error)\n\nSURVIVES_CURRENT_TEST requires ALL of:\n  (C1) At least 1 alpha has |null_mean| < 0.1 bits\n  (C3) Positive control passes for that alpha (k3 >= 0.5 bits, p <= 0.001)\n  (C6) Design check passes\n  (C7) >= 2 non-empty size buckets\n\nPhase 2 (beyond-Markov, only if SURVIVES on C1):\n  (C2) K3 CMI - K2 CMI > 0.1 bits AND bootstrap 95% CI lower > 0.0\n  (C4) |K2(N=50000) - K2(N=5000)| <= 0.3 bits for the best alpha\n\nNote: C3 threshold of 0.5 bits is inherited from parent. True CMI is 1.52 bits (audit-confirmed), so 0.5 is 3x below the signal — a working estimator should comfortably exceed it. The critical unknown is whether null centering degrades with reduced smoothing.",
+  "product_consequence_positive": "If sensitivity validated (H1 passes): the estimator-insensitivity finding from EXP-PHYSICS-35510154353 is hyperparameter-specific (alpha=1.0 Laplace smoothing creates 88% pseudo-count mass). The CMI research program is unblocked for beyond-Markov K3-K2 testing on the stochastic SPA. This opens the path to: (a) testing whether I(S_next; A | S_current, history) > 0 on this SPA class, (b) exploring production SPAs with stochastic transitions, (c) validating the plug-in KL with reduced smoothing as the preferred CMI tool for discrete Web state spaces.",
+  "product_consequence_negative": "If sensitivity not validated (H0 confirmed): both MLE (alpha=0) and reduced smoothing (alpha=0.1) fail to detect a 1.52-bit signal while maintaining null centering. This would suggest the combination of discrete 12-state representation, shuffled-action null framework, and the specific structure of the stochastic SPA may make CMI estimation inherently difficult even with unbiased estimators. The Physics lane must pivot to: (a) fundamentally different detection paradigms (entropy rate, channel capacity, causal discovery), (b) production Web data with continuous state representations, (c) abandoning the CMI estimation pathway entirely.",
+  "estimated_cost": "Low-medium. Single Python script execution on stochastic 12-state SPA, N=5000 primary + N=50000 convergence test. ~20-25 minutes compute per alpha, 5 alphas ~100-125 minutes total. 500 within-session shuffled-action permutations per alpha. No browser/network required. Uses parent run_experiment.py infrastructure with alpha sweep.",
+  "expected_information_gain": "Very high. This experiment directly resolves the critical unknown from EXP-PHYSICS-35510154353: whether reduced smoothing (alpha<=0.1) preserves null centering while recovering sensitivity. The parent audit recomputes MLE K3=1.377 and alpha=0.1 K3=0.743 — both would PASS C3 — but null_mean for those alphas has NOT been measured. This experiment measures both C1 and C3 for each alpha, providing a definitive answer. If alpha=0.1 achieves both C1 and C3, the CMI pathway is unblocked. If null centering degrades monotonically with alpha, the sensitivity-false-positive tradeoff is characterized and the Physics lane can make an informed pivot decision."
 }
