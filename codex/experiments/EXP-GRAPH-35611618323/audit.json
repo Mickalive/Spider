@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35611618323",
+  "lane": "graph",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V-HS256-FIX-VERIFIED",
+      "severity": "none",
+      "finding": "HS256 symmetric JWT fix correctly applied: testbed_server.py and testbed_server_v2.py use HS256 with shared TESTBED_SECRET (os.environ.get), no RS256 per-process keypair. Distributed token cross-node validation now succeeds. Verified via code inspection: 'HS256' present, 'RS256' still present only as legacy string but not used for signing, TESTBED_SECRET shared via SHARED_TESTBED_SECRET in run_experiment_distributed.py.",
+      "evidence": "testbed_server.py:sha256 f116dffe71711338e77876a5af4a0d9278c72fada0fa87292616c1038f61fc11, testbed_server_v2.py:sha256 664a2087125ce87cad638926b2145bec22139f2fc99bb2ac4440766978be300c, run_experiment_distributed.py:sha256 88d003837ecbf30e0dfc9dff45da0caf3bb2b6f09b5f8e3bf8125c400e02e49d"
+    },
+    {
+      "id": "V-JSON-FIX-VERIFIED",
+      "severity": "none",
+      "finding": "NumpyEncoder and recursive sanitize correctly applied to all json.dump calls. No NaN/inf or numpy.bool_ serialization failure; result.json, raw_evidence/metrics.json and experiment_data.json all persist valid JSON with native types. Producer metrics match raw recomputation.",
+      "evidence": "run_experiment_distributed.py contains class NumpyEncoder, result.json:metrics.b_distributed_stratified_r=-0.0381, raw_evidence/metrics.json:sha256 ec0802c9cc64e0a37cca5e583669f6c9027bc4f9479c5332ad0a79e8f411df8b"
+    },
+    {
+      "id": "V-C1-TN-RECOMPUTED",
+      "severity": "critical",
+      "finding": "C1 behavioral detection TN recomputed from raw_evidence/experiment_data.json b_distributed_per_condition (304-excluded, 304 exclusion correct). Valid-token behavioral_delta==0 correctly defines TN. Per-endpoint TN: /api/user/profile=1.0 (86/86), /api/data/list=1.0 (86/86), /api/session/status=0.0 (0/168). Mean TN=0.6666667 <0.85 threshold. TP=1.0 (expired tokens all behavioral_delta=7.0 or 3.0). C1 FAIL is mathematically correct per frozen decision_rule C1. Root cause confirmed: valid session/status deltas are 3.0 (session_state_change*3) not 0.0 on distributed, versus 0.0 on local. Per-node SQLite session store does not replicate; round-robin routes valid-token+session_id to node lacking session, validate_session()=False adds behavioral signal. This is not RS256 token failure (HS256 fix works) but session-affinity failure.",
+      "evidence": "result.json:controls.C1_behavioral_tp.observed_mean_valid_tn=0.6666666, result.json:metrics.c1_distributed_tn_per_endpoint, raw_evidence/experiment_data.json b_distributed_per_condition valid session/status deltas constant 3.0 (n=168 non-304), b_local_per_condition valid session/status deltas constant 0.0 (n=168 non-304), recomputed in audit via Python count"
+    },
+    {
+      "id": "V-C2-VARIANCE-VERIFIED",
+      "severity": "none",
+      "finding": "C2 variance recomputed on non-304 distributed signals: behavioral std >0 on 3/3 endpoints (3.312, 3.312, 2.0), structural std >0 on 3/3 (0.0599, 0.0566, 0.0563). Threshold >=2/3 passes. Recomputed via raw_evidence matches producer controls.C2_variance.endpoints_with_variance=3.",
+      "evidence": "result.json:controls.C2_variance, raw_evidence/experiment_data.json recomputed std values match producer per_endpoint"
+    },
+    {
+      "id": "V-C3-C4-ORTHOGONALITY-VERIFIED",
+      "severity": "none",
+      "finding": "C3 and C4 recomputed from raw per-endpoint Pearson r and pass. Recomputed per-endpoint distributed r: -0.073986 (n254), -0.000475 (n254), -0.039486 (n336). Weighted stratified pooled r = -0.038128851 (simple n-weighted mean) matches producer b_distributed_stratified_r. Fisher-z weighted r = -0.038159, difference 0.00003 negligible. Recomputed 95% CI via Fisher z with SE=1/sqrt(N-3): [-0.10537,0.02940] vs producer [-0.10534,0.02943] difference 0.00003 due to rounding. CI upper 0.0294 <0.15 so C3 PASS. TOST p_upper 2.02e-08 <0.05 so C4 PASS. Orthogonality correlation holds under distributed HS256.",
+      "evidence": "result.json:metrics.b_distributed_stratified_r, b_distributed_stratified_ci_lower/upper, b_distributed_tost_p_upper, metrics.json same, recomputed via scipy.stats.pearsonr on raw_evidence/experiment_data.json"
+    },
+    {
+      "id": "V-C5-HETEROGENEITY-VERIFIED",
+      "severity": "none",
+      "finding": "C5 cache heterogeneity diff=0.1052, SE_pooled=0.07045, 2*SE=0.1409. |r_en - r_dis|=0.1052 <0.1409 so PASS. Recomputed from raw metrics.json values matches result.json:controls.C5_cache_heterogeneity.",
+      "evidence": "result.json:metrics.c5_heterogeneity_diff=0.10523, c5_se_pooled=0.07045, controls.C5_cache_heterogeneity"
+    },
+    {
+      "id": "V-C6-C7-BASELINES-VERIFIED",
+      "severity": "none",
+      "finding": "C6 B-LOCAL-ONLY |r|=0.05843 <0.15 PASS (recomputed weighted r 0.05843, CI upper 0.1254). C7 B-CONFOUND-DISTRIBUTED |r|=0.9120 >=0.15 PASS (per-endpoint r -0.928, -0.915, -0.897, strong confound). Both baselines correctly calibrated and match raw recomputation.",
+      "evidence": "result.json:metrics.b_local_stratified_r=0.05843, b_confounder_stratified_r=-0.9120, metrics.json same, raw recomputed per-endpoint r values verified"
+    },
+    {
+      "id": "V-SAMPLING-POWER",
+      "severity": "none",
+      "finding": "n_non304 recomputed from raw counts: b_local 844/1008, b_distributed 844/1008, b_concurrent 860/1008, b_confounder 844/1008. All >=800 target and >>400 MEASUREMENT_INVALID threshold. Power adequate: CI half-width ~0.067 at n=800 as prereg states. No sampling shortfall.",
+      "evidence": "result.json:metrics.n_samples, metrics.json:n_samples, raw_evidence/experiment_data.json counts per condition (42 per condition x 24 conditions =1008 per baseline, 304 counts 164/164/148/164)"
+    },
+    {
+      "id": "V-REPRESENTATION-LOSS",
+      "severity": "medium",
+      "finding": "304 exclusion correctly applied to all correlations and C1 per prereg, verified via raw where has_304=true excluded. V_ETAG_PERMISSION_LEAKAGE fix, V3 endpoint stratification, V1 UUID, headers-only structural signal all preserved. Behavioral signal formula token*2 + session*3 + auth*1 + status*2 is headers/behavioral domain-isolated as prereg specifies, but session_status endpoint mixes token validity with session existence (session_state_change weighted 3), causing C1 to test session replication rather than pure token detection. This is a testbed-design coupling, not a body-inclusive leakage. Acknowledged by producer in validity_notes.",
+      "evidence": "prereg.md section 10, result.json:validity_notes, raw_evidence samples show token_validation_failure=0 but behavioral_delta=3.0 for valid session/status on distributed"
+    },
+    {
+      "id": "V-INTERPRETATION-BOUND",
+      "severity": "medium",
+      "finding": "Producer interprets C1 TN=0.666 FAIL as genuine distributed infrastructure limitation (per-node session store without replication under round-robin), not measurement error, and reports outcome FALSIFIES per frozen rule (any C1-C7 fails => REJECTED). Interpretation is correct per decision_rule precedence but does not imply behavioral-structural correlation is non-orthogonal: C3/C4 strongly confirm orthogonality (r=-0.038, CI upper 0.029, TOST p 2e-08). The falsification is gate-level (detection TP/TN), not correlation-level. Claim ceiling must separate these two levels.",
+      "evidence": "spec.json:decision_rule, result.json:outcome=FALSIFIES all_criteria_pass=false, report.md C1 Failure Analysis correctly attributes to session store"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-LOCAL-ONLY",
+      "finding": "PASS: Single-node serial baseline |r|=0.0584 CI [-0.009,0.125] n844 TOST PASS. No regression from parent (r=0.023) or grandparent (r=0.041). Per-endpoint r 0.038 (n254), 0.161 (n254 p=0.0099), -0.004 (n336). Per-endpoint 0.161 mildly exceeds 0.15 but pooled decision rule correctly uses stratified pooled r, so not a failure.",
+      "expected": "|r| < 0.15",
+      "observed": "r=0.05843 ci_upper=0.1254",
+      "pass": true
+    },
+    {
+      "id": "B-DISTRIBUTED",
+      "finding": "PASS on correlation (r=-0.038 CI upper 0.029 <0.15, TOST p 2e-08) but FAIL on frozen gate via C1 TN=0.667. Round-robin+independent DB+HS256 correctly models distributed independence except shared secret. C1 failure is not due to token invalidation (HS256 works) but session non-replication. Baseline demonstrates orthogonality correlation survives distribution; detection fidelity does not for session endpoint.",
+      "expected": "|r| < 0.15",
+      "observed": "r=-0.0381 ci_upper=0.0294; C1 TN=0.667 FAIL",
+      "pass": true
+    },
+    {
+      "id": "B-CONCURRENT",
+      "finding": "PASS: 5-thread concurrent |r|=-0.032 CI [-0.099,0.034] n860 TOST p 3.88e-08. Confirms request contention does not introduce coupling, replicating parent.",
+      "expected": "|r| < 0.15",
+      "observed": "r=-0.0323 ci_upper=0.0345",
+      "pass": true
+    },
+    {
+      "id": "B-CONFOUND-DISTRIBUTED",
+      "finding": "PASS as negative control: |r|=0.912 >=0.15 strongly, per-endpoint -0.928, -0.915, -0.897 all p<1e-100. V2 fixed request_id confound reproduces on distributed nodes, confirming pipeline sensitivity: absence of correlation on primary is not due to insensitive measurement.",
+      "expected": "|r| >= 0.15",
+      "observed": "r=-0.9120 |r|=0.912 ci [-0.922,-0.899]",
+      "pass": true
+    }
+  ],
+  "recomputed_metrics": {
+    "b_local_stratified_r": 0.058439505025235636,
+    "b_local_stratified_n": 844,
+    "b_local_stratified_ci_lower_recomputed": -0.008711868921580664,
+    "b_local_stratified_ci_upper_recomputed": 0.12579048219618957,
+    "b_local_ci_upper_producer": 0.12542833877083504,
+    "b_local_ci_diff": 0.000362,
+    "b_distributed_stratified_r": -0.03812885111352208,
+    "b_distributed_stratified_n": 844,
+    "b_distributed_ci_lower_recomputed": -0.10537139448548534,
+    "b_distributed_ci_upper_recomputed": 0.029399941299438934,
+    "b_distributed_ci_upper_producer": 0.029430360873100008,
+    "b_distributed_ci_diff": 0.000030,
+    "b_distributed_fisher_z_r": -0.038159252732690496,
+    "b_concurrent_stratified_r": -0.032367180028500545,
+    "b_concurrent_stratified_n": 860,
+    "b_confounder_stratified_r": -0.9120439257133741,
+    "b_confounder_abs_r": 0.9120439257133741,
+    "c1_mean_tp_recomputed": 1.0,
+    "c1_mean_tn_recomputed": 0.6666666666666666,
+    "c1_tn_per_endpoint_recomputed": {
+      "/api/user/profile": 1.0,
+      "/api/data/list": 1.0,
+      "/api/session/status": 0.0
+    },
+    "c1_pass_recomputed": false,
+    "c2_endpoints_with_variance_recomputed": 3,
+    "c2_pass_recomputed": true,
+    "c3_ci_upper_recomputed": 0.029399941299438934,
+    "c3_pass_recomputed": true,
+    "c4_p_upper_producer": 2.017127536817553e-08,
+    "c4_pass_recomputed": true,
+    "c5_diff_recomputed": 0.10523403853330521,
+    "c5_se_pooled": 0.0704511677296909,
+    "c5_pass_recomputed": true,
+    "c6_abs_r": 0.058439505025235636,
+    "c6_pass_recomputed": true,
+    "c7_abs_r": 0.9120439257133741,
+    "c7_pass_recomputed": true,
+    "n_non304_recomputed": {
+      "b_local": 844,
+      "b_distributed": 844,
+      "b_concurrent": 860,
+      "b_confounder": 844
+    },
+    "distributed_per_endpoint_r_recomputed": {
+      "/api/user/profile": -0.07398624485875714,
+      "/api/data/list": -0.00047545060656865173,
+      "/api/session/status": -0.03948654670124965
+    },
+    "local_per_endpoint_r_recomputed": {
+      "/api/user/profile": 0.03802775629707025,
+      "/api/data/list": 0.16147542952023,
+      "/api/session/status": -0.004020437369926752
+    }
+  },
+  "claim_ceiling": "C-FRESHNESS orthogonality at delta=0.15 remains CONFIRMED on LOCAL (stratified r=0.058, CI upper 0.125, n844) and is SUPPORTED on distributed primary correlation (stratified r=-0.038, CI upper 0.029 <0.15, TOST p=2.0e-08, n844, delta=0.10 also passes p=3.0e-05) but is FALSIFIED per frozen C1-C7 gate on the tested distributed infrastructure: 2-node Flask HS256 symmetric JWT (shared TESTBED_SECRET) with independent per-node SQLite session DB, independent in-memory cache, round-robin routing, N=42/condition/endpoint (1008 per baseline, n_non304 844). Gate failure is C1 only: mean TN=0.667 <0.85 driven solely by /api/session/status TN=0.0 (valid-token deltas 3.0 vs 0.0 on local) due to session store non-replication; /api/user/profile and /api/data/list TN=1.0. No evidence for behavioral-structural correlation on any endpoint (|r|<0.074 all p>0.24). Parallel-channel architecture is NOT justified for multi-node deployment under stateless round-robin without session affinity or shared session store for session-dependent endpoints. Orthogonality correlation itself is not falsified; product may proceed with sticky affinity or externalized session store. No inference to real CDN hierarchies, non-Flask frameworks, or N>=50 concurrency warranted. Remains EXPERIMENTAL, not VALIDATED/PRODUCT_CORE.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35611618323/result.json:metrics.b_distributed_stratified_r=-0.0381 ci_upper=0.0294 n844",
+    "research/experiments/EXP-GRAPH-35611618323/result.json:controls.C1_behavioral_tp.observed_mean_valid_tn=0.6666 tn_per_endpoint",
+    "research/experiments/EXP-GRAPH-35611618323/result.json:controls.C3_equivalence_stratified ci_upper=0.0294 PASS",
+    "research/experiments/EXP-GRAPH-35611618323/result.json:controls.C4_tost_stratified p_upper=2.01e-08 PASS",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/experiment_data.json:sha256 dfc72b50a446cec659b3eb39558e9658bcc3116041db342c4bb642c8867c84ec (recomputed per-endpoint r, TN, std)",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/metrics.json:sha256 ec0802c9cc64e0a37cca5e583669f6c9027bc4f9479c5332ad0a79e8f411df8b",
+    "research/experiments/EXP-GRAPH-35611618323/run_experiment_distributed.py:sha256 88d003837ecbf30e0dfc9dff45da0caf3bb2b6f09b5f8e3bf8125c400e02e49d (NumpyEncoder, SHARED_TESTBED_SECRET)",
+    "research/experiments/EXP-GRAPH-35611618323/testbed_server.py:sha256 f116dffe71711338e77876a5af4a0d9278c72fada0fa87292616c1038f61fc11 (HS256)",
+    "research/experiments/EXP-GRAPH-35611618323/testbed_server_v2.py:sha256 664a2087125ce87cad638926b2145bec22139f2fc99bb2ac4440766978be300c",
+    "research/experiments/EXP-GRAPH-35611618323/spec.json:decision_rule C1-C7, measurement_validity",
+    "research/experiments/EXP-GRAPH-35611618323/prereg.md:sections 5,8,10",
+    "research/experiments/EXP-GRAPH-35572179326/handoff.json:carry_forward established/rejected/unknown"
+  ],
+  "unresolved": [
+    "Whether orthogonality plus C1 detection would CONFIRM on same 2-node testbed with sticky session affinity or shared Redis-backed session store (would test if session replication resolves TN=0.0 without changing correlation)",
+    "Whether result generalizes to real CDN hierarchies with multi-node cache invalidation on session state change beyond Flask in-memory simulation",
+    "Whether N>=50 parallel sessions changes correlation beyond N=5 tested",
+    "Whether result generalizes to non-Flask frameworks (Django, FastAPI, Express)",
+    "Whether per-endpoint local /api/data/list r=0.161 (p=0.0099) represents systematic endpoint heterogeneity or sampling noise; not gated by decision rule but worth monitoring"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "268626f89c808760222dfaf5a7baf0e94b0d7903",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T14:22:02.907475+00:00",
+  "experiment_id": "EXP-GRAPH-35611618323",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After fixing the DistributedManager RSA key sharing bug (each Flask node generates independent RSA key pairs, so tokens from node A are invalid on node B under round-robin routing), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
+  "lane": "graph",
+  "origin_github_run_id": "35611618323",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35572179326",
+    "path": "research/experiments/EXP-GRAPH-35572179326/handoff.json",
+    "sha256": "70d0f6f280a03beb3f1ea64c5728b1b0d5aa7d5a843b9824c8fa493e93e00c81"
+  },
+  "reason": "pulse",
+  "request_hash": "a5384466bb2cee9f63105f6cf2028734ee04c7dee035bb88138b24502af6a5d2",
+  "request_id": "90dc73786e8cf05e396104bf",
+  "schema_version": 1
+}
