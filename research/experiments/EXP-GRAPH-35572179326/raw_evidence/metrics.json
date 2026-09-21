@@ -1,0 +1,135 @@
+{
+  "b_local_stratified_r": 0.02331742017787589,
+  "b_local_stratified_n": 844,
+  "b_local_stratified_ci_lower": -0.04423567212998509,
+  "b_local_stratified_ci_upper": 0.0906582513946784,
+  "b_local_tost_p_upper": 0.00010497012395186024,
+  "b_local_tost_p_lower": 2.102884245624992e-07,
+  "b_distributed_stratified_r": NaN,
+  "b_distributed_stratified_n": 1008,
+  "b_distributed_stratified_ci_lower": NaN,
+  "b_distributed_stratified_ci_upper": NaN,
+  "b_distributed_tost_p_upper": NaN,
+  "b_distributed_tost_p_lower": NaN,
+  "b_concurrent_stratified_r": 0.023340123255236964,
+  "b_concurrent_stratified_n": 860,
+  "b_concurrent_stratified_ci_lower": -0.0435803402777597,
+  "b_concurrent_stratified_ci_upper": 0.09005207415454926,
+  "b_concurrent_tost_p_upper": 9.15812873123525e-05,
+  "b_confounder_stratified_r": NaN,
+  "b_confounder_stratified_n": 1008,
+  "b_confounder_abs_r": NaN,
+  "b_confounder_ci_lower": NaN,
+  "b_confounder_ci_upper": NaN,
+  "distributed_per_endpoint_r": {
+    "/api/user/profile": {
+      "r": NaN,
+      "p": NaN,
+      "n": 336
+    },
+    "/api/data/list": {
+      "r": NaN,
+      "p": NaN,
+      "n": 336
+    },
+    "/api/session/status": {
+      "r": NaN,
+      "p": NaN,
+      "n": 336
+    }
+  },
+  "local_per_endpoint_r": {
+    "/api/user/profile": {
+      "r": 0.07481915657054947,
+      "p": 0.23475236797984508,
+      "n": 254
+    },
+    "/api/data/list": {
+      "r": -0.027903639163570707,
+      "p": 0.6580525384191572,
+      "n": 254
+    },
+    "/api/session/status": {
+      "r": 0.023105241692722166,
+      "p": 0.6730220260571098,
+      "n": 336
+    }
+  },
+  "concurrent_per_endpoint_r": {
+    "/api/user/profile": {
+      "r": -0.005556636975357832,
+      "p": 0.9286744928919822,
+      "n": 262
+    },
+    "/api/data/list": {
+      "r": 0.12643841185642812,
+      "p": 0.0408535718169005,
+      "n": 262
+    },
+    "/api/session/status": {
+      "r": -0.034519401843263756,
+      "p": 0.5283145104505911,
+      "n": 336
+    }
+  },
+  "confounder_per_endpoint_r": {
+    "/api/user/profile": {
+      "r": NaN,
+      "p": NaN,
+      "n": 336
+    },
+    "/api/data/list": {
+      "r": NaN,
+      "p": NaN,
+      "n": 336
+    },
+    "/api/session/status": {
+      "r": NaN,
+      "p": NaN,
+      "n": 336
+    }
+  },
+  "n_samples": {
+    "b_local_total": 1008,
+    "b_local_non304": 844,
+    "b_distributed_total": 1008,
+    "b_distributed_non304": 1008,
+    "b_concurrent_total": 1008,
+    "b_concurrent_non304": 860,
+    "b_confounder_total": 1008,
+    "b_confounder_non304": 1008
+  },
+  "c1_mean_tp": 1.0,
+  "c1_mean_tn": 0.0,
+  "c2_endpoints_with_variance": 0,
+  "c3_ci_upper_distributed": NaN,
+  "c4_p_upper_distributed": NaN,
+  "c5_heterogeneity_diff": NaN,
+  "c5_se_pooled": 0.06318240236065635,
+  "c6_abs_r_local": 0.02331742017787589,
+  "c7_abs_r_confounder": NaN,
+  "outcome": "FALSIFIES",
+  "all_criteria_pass": false,
+  "tost_sweep_distributed": {
+    "0.1": {
+      "p_upper": NaN,
+      "p_lower": NaN,
+      "pass": false
+    },
+    "0.12": {
+      "p_upper": NaN,
+      "p_lower": NaN,
+      "pass": false
+    },
+    "0.15": {
+      "p_upper": NaN,
+      "p_lower": NaN,
+      "pass": false
+    },
+    "0.2": {
+      "p_upper": NaN,
+      "p_lower": NaN,
+      "pass": false
+    }
+  }
+}
