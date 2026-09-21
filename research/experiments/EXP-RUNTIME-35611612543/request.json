@@ -1,0 +1,20 @@
+{
+  "base_sha": "268626f89c808760222dfaf5a7baf0e94b0d7903",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T14:21:53.419631+00:00",
+  "experiment_id": "EXP-RUNTIME-35611612543",
+  "inherited_last_verdict": "SUPPORTS \u2014 Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for 100% of cached responses (330/330 cached-path observations, 240/240 primary 48x5 HIT, 45/45 depth 3-5, 30/30 >100KB, 15/15 identity, 6/6 stability) through a byte-preserving local nginx 1.24.0 proxy_cache reverse proxy in front of a Python origin. DYNAMIC and HIT wire bytes are byte-identical for 48/48 cells. All frozen decision-rule conditions C1-C8 pass. Audit PASS confirms all recomputed metrics match producer. The parent's 0% HIT rate on Cloudflare free-tier quick tunnel was an infrastructure ceiling, not a negative scientific result. The HIT sub-question is closed for nginx-class byte-preserving caches. Claim ceiling bounded to local nginx; production CDN HIT serving remains untested.",
+  "inherited_next_question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses on a production Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses \u2014 and does the CDN alter wire bytes on cache serve?",
+  "lane": "runtime",
+  "origin_github_run_id": "35611612543",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35551516706",
+    "path": "research/experiments/EXP-RUNTIME-35551516706/handoff.json",
+    "sha256": "be5276a0cebf8bcddc0db071cdb76c51e843eba37acf86b86123b38e02f1af7f"
+  },
+  "reason": "pulse",
+  "request_hash": "f28ff620f53bba6bcd86a6e2699a75d44e95455115eb247b57edb886b04d2316",
+  "request_id": "87dbf2973379e943c072b854",
+  "schema_version": 1
+}
