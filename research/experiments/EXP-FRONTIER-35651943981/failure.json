@@ -1,0 +1,11 @@
+{
+  "stage": "execute",
+  "category": "VALIDATION_FAILURE",
+  "message": "invalid result outcome: FALSIFIED",
+  "retryable": false,
+  "fingerprint": "28c25234d08a5d010dc55dd8",
+  "recorded_at": "2026-09-21T20:49:32.609597+00:00",
+  "github_run_id": "35651943981",
+  "github_run_attempt": "2",
+  "control_revision": "ef5e3057ac7ef422e1383cb1f36e5cd91112f3a3da9f3c75198a0455bbaf28ae"
+}
