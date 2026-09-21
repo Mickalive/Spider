@@ -24,6 +24,9 @@ AUDIT_STATUSES = frozenset({"PASS", "REVISE", "FAIL", "MEASUREMENT_INVALID", "BL
 RESULT_STATUSES = frozenset({"COMPLETE", "BLOCKED", "MEASUREMENT_INVALID"})
 RESULT_OUTCOMES = frozenset({"SUPPORTS", "FALSIFIES", "MIXED", "INCONCLUSIVE", "NOT_APPLICABLE"})
 LANES = frozenset({"graph", "physics", "runtime", "product", "intel", "frontier"})
+PORTFOLIO_ACTIONS = frozenset({"CONTINUE", "PIVOT", "PARK", "REOPEN", "TERMINATE"})
+PORTFOLIO_ACTIVE_ACTIONS = frozenset({"CONTINUE", "PIVOT", "REOPEN"})
+PORTFOLIO_BUDGET_UNITS = 100
 
 PACKET_FILES = (
     "request.json",
