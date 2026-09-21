@@ -1,0 +1,20 @@
+{
+  "base_sha": "6e56e17e90ba6712c5a0a041bfd9d2e9601c9754",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T01:38:01.489599+00:00",
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "On a Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses, does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses, and does the decompressed output differ from the DYNAMIC-path decompressed output?",
+  "lane": "runtime",
+  "origin_github_run_id": "35551516706",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35544804817",
+    "path": "research/experiments/EXP-RUNTIME-35544804817/handoff.json",
+    "sha256": "f465013f9b38a59ac3fb13496184988e02571acd5c711d2d6eef3d74cbb93ac3"
+  },
+  "reason": "pulse",
+  "request_hash": "58a2e5459a14e2d2c6bd32131b068a824d07210221eefb8e78d1782ce3fadbe2",
+  "request_id": "e2453fd263592531b3831e1d",
+  "schema_version": 1
+}

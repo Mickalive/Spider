@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35572180485",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID — The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "The frozen decision_rule is not satisfiable as executed: the K bug (K=len(counts) vs K=12) makes the null distribution invalid for C1 evaluation. The audit finds MEASUREMENT_INVALID per spec decision_rule clause 4 (implementation fails per measurement_validity item 6). Audit-side corrected recomputation with K=12 shows SURVIVES_CURRENT_TEST on the same data, but this is hypothesis-generating only — not a new frozen execution. C-MEAS-VALID cannot advance or decline from an invalid measurement. Status held pending corrected re-execution."
+    },
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No confirmatory evidence accumulated for or against predictive dynamical structure on real Web transitions from this experiment. All evidence is synthetic 12-state SPA simulation. The audit's corrected K=12 recomputation is an exploratory finding suggesting Bayesian model comparison may be the first estimator to pass both C1 and C3 on this SPA class, but this requires a new frozen experiment for confirmation. C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: Bayesian Dirichlet-Multinomial with K=12 on stochastic SPA is hypothesis-generating positive, not confirmed."
+    }
+  ],
+  "product_action": "None. The Bayesian model comparison approach is experimentally promising (audit-corrected recomputation passes C1+C3) but not validated. No product consequences apply.",
+  "promote_to_product": false,
+  "continue": true,
+  "next_question": "Can a corrected Bayesian model comparison with K=n_states=12 (frozen spec) and N>=1000 within-session shuffled-action permutations replicate the audit-corrected SURVIVES_CURRENT_TEST result on the stochastic 12-state SPA, thereby establishing the Bayesian paradigm as the first estimator to pass both C1 (null median < 0) and C3 (p < 0.001) and unblocking Phase 2 beyond-Markov K3-K2 testing?",
+  "reason": "The experiment is MEASUREMENT_INVALID due to a single critical implementation bug (K=len(counts) instead of K=12), not a scientific failure. The audit recomputes with corrected K=12 on identical data and finds: (1) null median -78 to -131 nats for all three alpha_priors (PASS C1); (2) observed log BF 168-643 nats exceeds max null by 200-500 nats (PASS C3 via percentile, nominal p=0.001996 > 0.001 threshold due to N=500 resolution cap). The K bug explains the entire +3700-4000 nat upward null bias (producer result) vs -78 to -131 nats (corrected). This is the 5th estimator family tested after plug-in KL (FALSIFIED), entropy-rate CMI (FALSIFIED), KSG CMI (insensitive), and LR chi2 (history collapse). If the corrected K=12 result replicates in a frozen re-execution with N>=1000, it would be a breakthrough: the first valid detection paradigm for discrete CMI on this SPA class. The Physics lane should NOT pivot to continuous estimators or production Web yet — the Bayesian pathway must be closed first.",
+  "evidence_refs": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/audit.json",
+      "hash": null,
+      "role": "audit",
+      "description": "MEASUREMENT_INVALID verdict, V1-formula-K-mismatch (severity: critical), corrected K=12 recomputed metrics showing null_median -78 to -131 nats and observed log BF 168-643 nats, claim_ceiling NULL"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/result.json",
+      "hash": null,
+      "role": "producer",
+      "description": "Producer FALSIFIES outcome with buggy K=len(counts): null_median +3621 to +4048 nats, p_value 0.002 for all alphas, C1_fail for all alphas"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/spec.json",
+      "hash": null,
+      "role": "spec",
+      "description": "Frozen spec: K=n_states=12 per measurement_validity items 4-6, exact log ML formula item 8, decision_rule C1/C3/C6/C7, alpha_prior in {0.5, 1.0, 2.0}"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/prereg.md",
+      "hash": null,
+      "role": "prereg",
+      "description": "Preregistration: section 4.3 K=12 definition, section 6 decision criteria C1 (null median < 0) and C3 (p < 0.001)"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py",
+      "hash": "5f3f82520c81003e84b1ee29672f254bfcb8583d8852f3bcbe06c966cdf4d01e",
+      "role": "code",
+      "description": "run_experiment.py:234-235 _dirichlet_multinomial_log_marginal K=len(counts) bug vs spec K=12"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/handoff.json",
+      "hash": "f28aa7171c1240244620b9ed22abd33868f1c9838041fb7038ef5785845a37c9",
+      "role": "parent_handoff",
+      "description": "Parent carry_forward: 4 estimator families exhausted, Bayesian model comparison as orthogonal attack"
+    },
+    {
+      "path": "codex/claim_state.json",
+      "hash": null,
+      "role": "codex",
+      "description": "C-WEB-DYNAMICS HYPOTHESIS status across 30+ experiments; C-MEAS-VALID MEASUREMENT_INVALID from parent EXP-PHYSICS-35538866166"
+    }
+  ]
+}

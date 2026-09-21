@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses on a production Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses — and does the CDN alter wire bytes on cache serve?",
+  "why_next": "The HIT sub-question is closed for local nginx byte-preserving caches (100% correct, 48/48 DYNAMIC-vs-HIT byte-identical). However, the critical unknown remains: whether real production CDN edges (Cloudflare paid-tier, Fastly, Akamai, CloudFront) alter cached-response wire bytes vs their DYNAMIC-path bytes. The parent's 0% HIT rate on Cloudflare free-tier was an infra ceiling confirmed as such; a paid-tier or alternative CDN that actually caches is required to test the production-relevant claim. C-MEAS-VALID cannot advance to VALIDATED until this gap is closed. This is the highest-information remaining question for the encoding-agnostic decompression claim.",
+  "carry_forward": {
+    "established": [
+      "Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for 100% of cached responses through a byte-preserving local nginx 1.24.0 proxy_cache: 330/330 cached-path obs (240/240 primary 48x5 HIT, 45/45 depth 3-5, 30/30 >100KB, 15/15 identity), 6/6 stability groups, 0 ambiguous tie-breaks, 1078/1078 total observations (EXP-RUNTIME-35551516706, audit PASS).",
+      "Oracle-free greedy iterative decompression produces byte-identical output to ground truth on Cloudflare free-tier quick-tunnel DYNAMIC responses: 240/240 primary matrix (48 cells x5), 240/240 localhost positive control, 15/15 identity null control, ~45/45 depth 3-5, ~30/30 large >100KB, 0 ambiguous tie-breaks (EXP-RUNTIME-35544804817, audit REVISE, ceiling bounded).",
+      "Parent's oracle circularity gap (audit V1, EXP-RUNTIME-35542474231) is resolved: the deployable decoder works without SHA256 oracle on DYNAMIC responses (EXP-RUNTIME-35544804817).",
+      "Brotli (magic 0xCEB2CF81) and gzip (magic 0x1F8B) have distinct format signatures making greedy try-brotli-then-gzip order unambiguous at every layer: zero ambiguous tie-breaks across 1771+ observations (EXP-RUNTIME-35544804817 + EXP-RUNTIME-35551516706).",
+      "CDN does not corrupt bytes: the parent fixed-origin-order failure was in the framing assumption, not byte transformation (EXP-RUNTIME-35538865067 + EXP-RUNTIME-35542474231).",
+      "Local nginx proxy_cache produces real cache HIT responses (X-Cache: HIT) and does not alter wire bytes vs origin (48/48 DYNAMIC-vs-HIT byte-identical, C8 null control, EXP-RUNTIME-35551516706).",
+      "Localhost iterative decompression correctness: 840/840 (brotli+gzip single-layer + multi-layer), 480/480 streaming TE framing, 840/840 streaming decompressor API (EXP-RUNTIME-35522287921, EXP-RUNTIME-35530588298, EXP-RUNTIME-35549699298).",
+      "Iterative decompression (max_depth=5) handles multi-layer stacked encodings (gzip->brotli, brotli->gzip) correctly on localhost (EXP-RUNTIME-35541777099).",
+      "Encoding-agnostic method distribution (br=60, gz+br=60, gz=80, gz+gz=40) matches parent oracle-guided exactly, confirming deterministic decompression paths per cell (EXP-RUNTIME-35544804817)."
+    ],
+    "rejected": [
+      "Fixed-origin-order iterative decompression through Cloudflare CDN (180/240 failures, EXP-RUNTIME-35538865067).",
+      "Gzip/brotli chunk boundary corruption at chunk_size=32.",
+      "Streaming chunked forwarding corruption.",
+      "Chunk size (8192 vs 32) affects decompression correctness (0 disagreements on all 48 cells)."
+    ],
+    "unknown": [
+      "Whether real CDN edge caches (Cloudflare paid-tier, Fastly, Akamai, CloudFront) alter cached-response wire bytes vs DYNAMIC-path bytes — local nginx shows 48/48 identity, parent had 0 HIT on Cloudflare free-tier; CDN transformation is untested.",
+      "Whether oracle-free greedy decode generalizes to real-world CDN cached payloads whose framing differs from origin layering (requires actual CDN HIT observation with edge re-encoding).",
+      "Cache freshness edge cases: expiry, revalidation, 304 Not Modified, stale-while-revalidate, stale-if-error were not exercised; all serves within 300s max-age.",
+      "Performance economics: amortized latency and CPU cost of greedy try-brotli-then-gzip loop vs oracle-guided decode not measured.",
+      "Behavior under concurrent load, HTTP/2 or HTTP/3, TLS, multi-edge, and cross-region cache variation not tested.",
+      "Whether CDN preserves origin Content-Encoding byte-identical on cache serve for byte-transforming CDN edges (parent Cloudflare 60/240 fixed-order failure was edge-specific)."
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for VALIDATED or PRODUCT_CORE promotion — production CDN HIT (stale) serving is untested, and the frozen decision_rule requires ALL C1-C8 pass on production infrastructure.",
+      "Oracle-free decode works on all CDN conditions globally — validated only for local nginx byte-preserving proxy_cache and Cloudflare free-tier DYNAMIC only.",
+      "CDN cache HIT behavior is safe on production CDN — only local nginx HIT behavior validated; Cloudflare free-tier produced 0% HIT.",
+      "Local nginx results generalize to production CDN — nginx proxy_cache does not re-encode bytes; production CDN edges (Cloudflare, Fastly) may transform cached bytes.",
+      "The fixed-order decode baseline 480/480 on local nginx means it would pass on production CDN — parent Cloudflare value was 60/240, confirming CDN-edge-specific behavior.",
+      "Cache stability (6/6 groups) generalizes to production CDN with varying cache states, TTL expiry, or multi-edge consistency."
+    ]
+  },
+  "dependencies": [
+    "Production Cloudflare paid-tier zone or alternative CDN (Fastly/Akamai/CloudFront) with cache enabled that respects origin Cache-Control: public, max-age=300 and produces cf-cache-status=HIT or X-Cache=HIT responses",
+    "Same oracle-free greedy decode algorithm (MAX_DEPTH=5, brotli->gzip, no SHA256 oracle)",
+    "N=5 per HIT cell with two-phase populate+test and 2-5s delay between phases",
+    "Same payload matrix (3 content types x 2 orders x 2 chunk sizes x 4 Accept-Encoding variants, SEED=44)",
+    "Raw wire bytes persisted per observation for independent recomputation",
+    "Cache stability rows persisted to raw_cell_results.jsonl",
+    "Oracle-guided and fixed-order baselines re-executed on same wire bytes for regression check"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35551516706/result.json sha256 b04b5c88362da521bb07068b11c347c2cb12a3b4d27c9ee72bf1d3810afab0c4 — 330/330 cached-path, all controls pass",
+    "research/experiments/EXP-RUNTIME-35551516706/audit.json status=PASS producer_claim_supported=true — V1 substrate ceiling, V5 no representation loss",
+    "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl sha256 7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7 — 1078 rows, 0 dups, 0 sha mismatches",
+    "research/experiments/EXP-RUNTIME-35551516706/hit_vs_dynamic.json sha256 9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217 — 48/48 identical",
+    "research/experiments/EXP-RUNTIME-35544804817/handoff.json sha256 f465013f9b38a59ac3fb13496184988e02571acd5c711d2d6eef3d74cbb93ac3 — parent DYNAMIC 240/240, 0% HIT ceiling, carry_forward",
+    "research/experiments/EXP-RUNTIME-35542474231/result.json parent oracle-guided 240/240, 60/240 fixed-order",
+    "research/experiments/EXP-RUNTIME-35542474231/audit.json parent REVISE V1 oracle circularity V3 0 HIT",
+    "research/experiments/EXP-RUNTIME-35538865067/result.json parent FALSIFIES 60/240 fixed-order, CDN Accept-Encoding negotiation"
+  ],
+  "recommended_action": "Design and execute EXP-RUNTIME on a production Cloudflare paid-tier zone or alternative CDN (Fastly/Akamai/CloudFront) that produces real cache HIT responses. The frozen design should: (1) use the same oracle-free greedy decode algorithm; (2) include N=5 per HIT cell with two-phase populate+test; (3) persist all raw observations including stability rows; (4) re-run oracle-guided and fixed-order baselines on same wire bytes; (5) record CDN edge identity and tier. If HIT serving is achieved and >=90% correct with byte-identical DYNAMIC-vs-HIT wire bytes, C-MEAS-VALID can advance to VALIDATED. If CDN alters cached bytes, the specific transformation will be documented. If no production CDN is available, the local-nginx-validated finding should be explicitly annotated as infrastructure-bounded in the Codex."
+}

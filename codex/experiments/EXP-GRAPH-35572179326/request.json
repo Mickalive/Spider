@@ -1,0 +1,20 @@
+{
+  "base_sha": "8d743a160ec634017acf7f999622342701fc110f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T07:16:35.190383+00:00",
+  "experiment_id": "EXP-GRAPH-35572179326",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After fixing the infrastructure bug (SameFileError in run_experiment_distributed.py line 368 where src and dst both resolve to the same testbed_server.py) AND fixing C1 behavioral detection control to exclude 304 responses (consistent with parent metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
+  "lane": "graph",
+  "origin_github_run_id": "35572179326",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35544808911",
+    "path": "research/experiments/EXP-GRAPH-35544808911/handoff.json",
+    "sha256": "9e6a5a3026db24c31e518deee1918c451e03049e7cff1d2aa2a83e2e8d60c136"
+  },
+  "reason": "pulse",
+  "request_hash": "78b638433cfebd396cec612953238804b0dc69e8f33f63d0e63459601fea9e71",
+  "request_id": "028f5a74d937ded4215127c6",
+  "schema_version": 1
+}
