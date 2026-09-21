@@ -1,0 +1,540 @@
+{
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "seed": 44,
+  "target_size": 10240,
+  "payloads": {
+    "JSON_GZIP-OUTER": {
+      "content_type": "JSON",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3777,
+      "compressed_sha256": "c04829f4061d6ae6fb19f426961993dfd8e14bb8b0c5e1bbf5802d92dace8dfc",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "JSON_BROTLI-OUTER": {
+      "content_type": "JSON",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 4271,
+      "compressed_sha256": "74866f4d0fe42adbf827d1353f02fde3e5d37ebdb56bffb63a7dd338f3857c18",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "HTML_GZIP-OUTER": {
+      "content_type": "HTML",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2752,
+      "compressed_sha256": "a1d011891fe3035c78425522011f8ccad0a978894f6ac51490becf9cbc9b2e3d",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "HTML_BROTLI-OUTER": {
+      "content_type": "HTML",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2950,
+      "compressed_sha256": "9b5224116f72e9a950624221866c3a95615c675a96b0c62bb9450d3f1bfd1e9f",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "BINARY_GZIP-OUTER": {
+      "content_type": "BINARY",
+      "order": "GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "compressed_len": 9925,
+      "compressed_sha256": "a2683e1c8fb1630f00eb9215ce8fe985e8edfdbb29ffb98268b2a40cbdc79e90",
+      "ground_truth_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367"
+    },
+    "BINARY_BROTLI-OUTER": {
+      "content_type": "BINARY",
+      "order": "BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "compressed_len": 9902,
+      "compressed_sha256": "cac73361783fd36dc44420103a2f42ab9319575af2ff2a907178edec2320c645",
+      "ground_truth_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367"
+    },
+    "JSON_IDENTITY": {
+      "content_type": "JSON",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4"
+    },
+    "HTML_IDENTITY": {
+      "content_type": "HTML",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456"
+    },
+    "BINARY_IDENTITY": {
+      "content_type": "BINARY",
+      "order": "IDENTITY",
+      "served_content_encoding": null,
+      "plain_len": 10240,
+      "plain_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367"
+    },
+    "JSON_DEPTH3": {
+      "content_type": "JSON",
+      "order": "DEPTH3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3781,
+      "compressed_sha256": "037d063d5e534af2a68763956537ae262c0993a1070df1e724cdbf7b70c2e06b",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "depth": 3
+    },
+    "HTML_DEPTH3": {
+      "content_type": "HTML",
+      "order": "DEPTH3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2756,
+      "compressed_sha256": "d65f0c8f46933c0ceaffee833e49fe2ebd3a66e40b3e24e1258f60db56f6d26b",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "depth": 3
+    },
+    "BINARY_DEPTH3": {
+      "content_type": "BINARY",
+      "order": "DEPTH3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "compressed_len": 9929,
+      "compressed_sha256": "75f2f4906e4c22b54baf6f188db05130950cc0866985512d7980a644d7ff9546",
+      "ground_truth_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "depth": 3
+    },
+    "JSON_DEPTH4": {
+      "content_type": "JSON",
+      "order": "DEPTH4",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3804,
+      "compressed_sha256": "369adae0d8ac7537a05487eb881cd8509fe029e537dacc697d002faa5bd4655f",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "depth": 4
+    },
+    "HTML_DEPTH4": {
+      "content_type": "HTML",
+      "order": "DEPTH4",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2779,
+      "compressed_sha256": "1cd4b1763190f0ec92c276effdde0b7265f65c26f8499915be8eb001ed2724f4",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "depth": 4
+    },
+    "BINARY_DEPTH4": {
+      "content_type": "BINARY",
+      "order": "DEPTH4",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 10240,
+      "plain_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "compressed_len": 9952,
+      "compressed_sha256": "73fb0cc2d5a53a3d17f3b6959d9db6dfad3a0180890eef9c73692227eaba4c7c",
+      "ground_truth_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "depth": 4
+    },
+    "JSON_DEPTH5": {
+      "content_type": "JSON",
+      "order": "DEPTH5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "compressed_len": 3808,
+      "compressed_sha256": "aae92f188092bd1abad953a1153087b07ed1deccf5b67993b971fa68a398f61f",
+      "ground_truth_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "depth": 5
+    },
+    "HTML_DEPTH5": {
+      "content_type": "HTML",
+      "order": "DEPTH5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "compressed_len": 2783,
+      "compressed_sha256": "d1d7b314403d53a53856a949b7306fd613775b467d8255664b5c87061331ced5",
+      "ground_truth_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "depth": 5
+    },
+    "BINARY_DEPTH5": {
+      "content_type": "BINARY",
+      "order": "DEPTH5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 10240,
+      "plain_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "compressed_len": 9956,
+      "compressed_sha256": "c05e2af300b387c5414e18db9f18d2890be16004ac880510fe8d0639a58d8de0",
+      "ground_truth_sha256": "bb7655182e1c0d2467008538109ff41f828e7f52d327eacf855802d7cea90367",
+      "depth": 5
+    },
+    "JSON_LARGE_GZIP-OUTER": {
+      "content_type": "JSON",
+      "order": "LARGE_GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "compressed_len": 43244,
+      "compressed_sha256": "ec611450cb40b4027c94990d86d0021f569679892fc6778cb73cff485274081d",
+      "ground_truth_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "payload_size": 150000
+    },
+    "JSON_LARGE_BROTLI-OUTER": {
+      "content_type": "JSON",
+      "order": "LARGE_BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "compressed_len": 50872,
+      "compressed_sha256": "d393b13437fb819789cc203b68a5c739464981e167d3043183950cbb7283f4d1",
+      "ground_truth_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "payload_size": 150000
+    },
+    "HTML_LARGE_GZIP-OUTER": {
+      "content_type": "HTML",
+      "order": "LARGE_GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 150000,
+      "plain_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "compressed_len": 33050,
+      "compressed_sha256": "70aa98dd6d4e5fe6f8b076d5f9349d7594f78efc730e15bc462b844f8d786bfd",
+      "ground_truth_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "payload_size": 150000
+    },
+    "HTML_LARGE_BROTLI-OUTER": {
+      "content_type": "HTML",
+      "order": "LARGE_BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 150000,
+      "plain_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "compressed_len": 36010,
+      "compressed_sha256": "54e7a5243e74a80d77ab24fdcbc468c2754952714dead2997cc53adf15dac26f",
+      "ground_truth_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "payload_size": 150000
+    },
+    "BINARY_LARGE_GZIP-OUTER": {
+      "content_type": "BINARY",
+      "order": "LARGE_GZIP-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "served_content_encoding": "gzip",
+      "plain_len": 150000,
+      "plain_sha256": "422c46845bb0ee0a46f9a2d42fd5291d707d6ce0de903598e1355e327b518b90",
+      "compressed_len": 144695,
+      "compressed_sha256": "b8b83854af377155df1ac4bd26414c2b4c0cf94ad14da3af8045d2a5151bce0a",
+      "ground_truth_sha256": "422c46845bb0ee0a46f9a2d42fd5291d707d6ce0de903598e1355e327b518b90",
+      "payload_size": 150000
+    },
+    "BINARY_LARGE_BROTLI-OUTER": {
+      "content_type": "BINARY",
+      "order": "LARGE_BROTLI-OUTER",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "served_content_encoding": "br",
+      "plain_len": 150000,
+      "plain_sha256": "422c46845bb0ee0a46f9a2d42fd5291d707d6ce0de903598e1355e327b518b90",
+      "compressed_len": 144496,
+      "compressed_sha256": "627ecf984187de94e531ad4eb45a31edf4fa41e798894c3d5eaa1c8a6c2609dc",
+      "ground_truth_sha256": "422c46845bb0ee0a46f9a2d42fd5291d707d6ce0de903598e1355e327b518b90",
+      "payload_size": 150000
+    }
+  },
+  "tunnel_url": "https://workplace-cell-level-closing.trycloudflare.com",
+  "origin": "http://127.0.0.1:18794",
+  "n_rows": 645,
+  "n_hit_observations": 48,
+  "cdn_edge": "unknown"
+}
