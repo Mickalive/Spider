@@ -1,0 +1,249 @@
+{
+  "baseline_findings": [
+    {
+      "baseline": "Parent uniform-shift calibrated threshold 0.20 flat 0-75% jump to 0.25 at 100%",
+      "evidence": "result.json thresholds_by_overlap vs spec baselines parent EXP-PRODUCT-35551517868 result.json::metrics.thresholds_by_overlap",
+      "result": "SUPERSEDED - Gaussian genuine overlap shows gradual increase 0.20->0.25->0.27 among valid, confirming parent flatness was uniform-shift artifact. Not reproduced."
+    },
+    {
+      "baseline": "Parent FP=0.0 at 25% and 50% uniform-shift",
+      "evidence": "result.json fp_at_020_by_overlap vs parent fp_at_020_by_overlap",
+      "result": "SUPERSEDED - Now FP 0.2375 and 0.4417 at genuine 25%/50% overlap. Parent artifact explained and fixed. Strong positive difference."
+    },
+    {
+      "baseline": "Parent orthogonality r=-0.0065 CI upper 0.0831",
+      "evidence": "result.json orthogonality_by_overlap vs spec baseline from EXP-PRODUCT-35538865048",
+      "result": "MIXED - Replicated at 0%: r=-0.023 CI 0.066, 25%: r=-0.029 CI 0.061, 75%: r=0.046 CI 0.135, 100%: r=-0.026 CI 0.064 (all PASS). Failed at 50%: r=0.080 CI 0.168 (marginal fail). Prior 6 confirmations remain but this experiment shows fragility at moderate overlap."
+    },
+    {
+      "baseline": "Parent FP 0.0958 at 75% and 0.35 at 100%",
+      "evidence": "result.json fp_at_020_by_overlap 75:0.675 100:0.9625 vs parent 0.0958/0.35",
+      "result": "EXTENDED - Now 0.675 at 75% and 0.9625 at 100% under Gaussian (much higher FP due to genuine distributional overlap vs uniform-shift boundary contact). Consistent direction, larger magnitude."
+    }
+  ],
+  "claim_ceiling": "FALSIFIES is justified ONLY under frozen spec decision_rule that treats ANY orthogonality break and ANY None threshold (including degenerate 100% identical distributions) as global falsification. Maximum justified scientific claim: Freshness guard DOES discriminate under genuine Gaussian overlap in bounded regime 0-25% (threshold 0.20->0.25 monotonic, orthogonality holds, FP binding moderate 23.75%). At 50% overlap discrimination possible (threshold 0.27, FP 44.17%) but orthogonality fragile (r=0.080 CI 0.168 marginal fail, non-monotonic, likely Type I under multiple testing at n=480). At >=75% overlap no operating point satisfies TPR>=0.85 & FPR<=0.10 (valid scientific envelope collapse, not measurement error). C-FRESHNESS remains EXPERIMENTAL, not PRODUCT_CORE. Claim does NOT generalize beyond localhost Flask 3.1.3+SQLite WAL+JWT mock with Gaussian N(0.295,0.05)/N(mu_noise,0.05) clamped [0,1], 4 noise types, 4 auth states, 50-point grid [0.05,0.54].",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35572180893/spec.json",
+    "research/experiments/EXP-PRODUCT-35572180893/prereg.md",
+    "research/experiments/EXP-PRODUCT-35572180893/freeze.json",
+    "research/experiments/EXP-PRODUCT-35572180893/result.json",
+    "research/experiments/EXP-PRODUCT-35572180893/result_draft.json",
+    "research/experiments/EXP-PRODUCT-35572180893/report.md",
+    "research/experiments/EXP-PRODUCT-35572180893/provenance.json",
+    "research/experiments/EXP-PRODUCT-35572180893/raw_evidence/experiment_data.json sha256:05206fa5b56ca26f9abf657b5bad01d642680c3ced125d9694213b2aa8a2b69d",
+    "research/experiments/EXP-PRODUCT-35572180893/mock_server.py sha256:fdba9ca563ee928d84d9a50de6b97fc0a00b011e5f8a9aac59a40ef2d184be6c",
+    "research/experiments/EXP-PRODUCT-35572180893/run_experiment.py sha256:56b0353910615f8fa416fd1b97b2a69a00037560f291f2fd94c26af3253f4299",
+    "research/experiments/EXP-PRODUCT-35551517868/handoff.json sha256:9a9cb8b35be2d62241c66bac0884b4554f78fed568dd7848b18ab198462a16f4",
+    "research/experiments/EXP-PRODUCT-35551517868/result.json"
+  ],
+  "experiment_id": "EXP-PRODUCT-35572180893",
+  "lane": "product",
+  "producer_claim_supported": true,
+  "recomputed_metrics": {
+    "c5_failing_conditions": [
+      "50"
+    ],
+    "c5_orthogonality_fails_at_any_condition": true,
+    "calibrated_threshold_none_at_any_condition": true,
+    "calibrated_threshold_none_conditions": [
+      "75",
+      "100"
+    ],
+    "continuous_injection_ok": true,
+    "empirical_overlap_by_condition": {
+      "0": 0.0042,
+      "100": 0.9625,
+      "25": 0.2375,
+      "50": 0.4417,
+      "75": 0.675
+    },
+    "fp_at_020_by_overlap": {
+      "0": 0.0042,
+      "100": 0.9625,
+      "25": 0.2375,
+      "50": 0.4417,
+      "75": 0.675
+    },
+    "fp_at_020_recomputed_from_sweep": "verified: noise_scores>=0.20 count /240 matches producer at all 5 conditions exactly; recomputed via raw_evidence per_overlap[].threshold_sweep entry threshold 0.20 fp_rate",
+    "fp_binding_below_75": true,
+    "meets_constraints_counts": {
+      "0": 16,
+      "100": 0,
+      "25": 7,
+      "50": 4,
+      "75": 0
+    },
+    "min_fp_among_tp_ge_085": {
+      "100": 0.5208,
+      "75": 0.1708
+    },
+    "n_unique_behavioral_scores_by_overlap": {
+      "0": 452,
+      "100": 455,
+      "25": 460,
+      "50": 454,
+      "75": 454
+    },
+    "orthogonality_by_overlap_recomputed": {
+      "0": {
+        "ci_upper": 0.066238,
+        "n": 480,
+        "pearson_r": -0.023402,
+        "se": 0.045787,
+        "tost_pass": true
+      },
+      "100": {
+        "ci_upper": 0.063647,
+        "pearson_r": -0.026004,
+        "tost_pass": true
+      },
+      "25": {
+        "ci_upper": 0.060522,
+        "pearson_r": -0.029138,
+        "tost_pass": true
+      },
+      "50": {
+        "ci_upper": 0.168418,
+        "pearson_r": 0.080124,
+        "recomputed_ci": [
+          -0.009446,
+          0.168418
+        ],
+        "tost_p_upper": 0.0609001195,
+        "tost_pass": false
+      },
+      "75": {
+        "ci_upper": 0.135293,
+        "pearson_r": 0.046352,
+        "tost_pass": true
+      }
+    },
+    "per_condition_calibrated_metrics": {
+      "0": {
+        "f1": 0.9979,
+        "fp_rate": 0.0042,
+        "precision": 0.9959,
+        "recall": 1.0,
+        "threshold": 0.2
+      },
+      "100": null,
+      "25": {
+        "f1": 0.9456,
+        "fp_rate": 0.05,
+        "precision": 0.9496,
+        "recall": 0.9417,
+        "threshold": 0.25
+      },
+      "50": {
+        "f1": 0.928,
+        "fp_rate": 0.0542,
+        "precision": 0.944,
+        "recall": 0.9125,
+        "threshold": 0.27
+      },
+      "75": null
+    },
+    "samples_per_condition": 960,
+    "threshold_increases_monotonically_all_conditions": false,
+    "threshold_increases_monotonically_among_valid": true,
+    "thresholds_by_overlap": {
+      "0": 0.2,
+      "100": null,
+      "25": 0.25,
+      "50": 0.27,
+      "75": null
+    },
+    "total_samples": 4800,
+    "tp_at_020_by_overlap": {
+      "0": 1.0,
+      "100": 0.9875,
+      "25": 0.9917,
+      "50": 0.9917,
+      "75": 0.975
+    }
+  },
+  "required_fixes": [],
+  "schema_version": 1,
+  "status": "PASS",
+  "unresolved": [
+    "Why orthogonality fails specifically at 50% (r=0.080 CI 0.168) but not at 75% (r=0.046 CI 0.135) or 100%? Non-monotonic pattern suggests spurious correlation rather than systematic contamination; requires n>=800 replication with Bonferroni or FDR correction to resolve.",
+    "Is calibrated threshold 0.27 at 50% practically usable given marginal orthogonality fail? Threshold exists but independence assumption borderline; future work should test whether joint model correcting for structural correlation restores safe operating point.",
+    "Threshold None at 75%/100% reflects envelope collapse, not invalidation of moderate-overlap discrimination. Should future preregistrations separate bounded-operating-range claims (0-50%) from extreme-overlap degenerate conditions to avoid tautological falsification at 100% identical distributions?",
+    "Production relevance unresolved: Gaussian overlap tests principle, not production fidelity. Real noise may be heavy-tailed/multimodal. Follow-up with production-like noise distributions needed before PRODUCT_CORE consideration.",
+    "Parent marginal orthogonality failure at 75% (CI 0.1549) vs this experiment's marginal failure at 50% (CI 0.168) - is TOST delta=0.15 too strict for n=480 given typical behavioral-structural correlation noise floor? Power analysis for equivalence margin warranted."
+  ],
+  "validity_findings": [
+    {
+      "check": "measurement_validity_continuous_injection",
+      "evidence": "result.json::metrics.n_unique_behavioral_scores_by_overlap {0:452,25:460,50:454,75:454,100:455}, raw_evidence/experiment_data.json per_overlap[].n_unique_behavioral_scores",
+      "finding": "PASS - continuous behavioral_score injection verified. Unique scores 452-460 across 5 conditions (threshold >=5). Gaussian draw via random.gauss() clamped [0,1] produces continuous distribution. Matches result.json n_unique_behavioral_scores_by_overlap.",
+      "severity": "none"
+    },
+    {
+      "check": "control NC-NULL-OVERLAP-0",
+      "evidence": "result.json::controls.NC-NULL-OVERLAP-0 observed FP=0.0042, raw_evidence per_overlap[0].fp_at_threshold_020=0.0042, empirical_overlap=0.0042",
+      "finding": "PASS - At 0% overlap (mu_noise=0.095, 4.1 sigma below threshold 0.20) FP at 0.20 =0.0042 (1/240). Expected 0.0, observed near-zero within sampling noise. Binomial 95% CI [0.0001,0.023]. Not a failure.",
+      "severity": "none"
+    },
+    {
+      "check": "controls PC-FP-BINDING-25 and PC-FP-BINDING-50",
+      "evidence": "result.json::controls.PC-FP-BINDING-25/50, result.json::metrics.fp_at_020_by_overlap {25:0.2375,50:0.4417}, spec.json positive_control/null_control definitions",
+      "finding": "PASS - Both positive controls pass and demonstrate genuine overlap fix. FP at 0.20: 0.2375 at 25% (target 25%, observed 23.75% empirical_overlap) and 0.4417 at 50% (target 50%, observed 44.17%). Parent uniform-shift had 0.0 at both conditions (0% actual overlap); Gaussian design now achieves genuine contamination. Recomputed from threshold_sweep: noise_scores>=0.20 counts match fp_at_020_by_overlap exactly.",
+      "severity": "none"
+    },
+    {
+      "check": "control PC-FP-BINDING-100",
+      "evidence": "result.json::controls.PC-FP-BINDING-100 observed 0.9625, raw_evidence per_overlap[100].threshold_sweep fp_rate at 0.20 =0.9625",
+      "finding": "PASS - At 100% overlap (mu_noise=0.295 = failure mu) FP at 0.20 =0.9625 >0.20 threshold. Strongly exceeds positive control requirement. Expected by design since P(N(0.295,0.05)>0.20)=~97% theoretically 1-Phi((0.20-0.295)/0.05)=0.971. Observed 96.25% matches. Recomputed from raw sweep.",
+      "severity": "none"
+    },
+    {
+      "check": "orthogonality_TOST_50_marginal_failure",
+      "evidence": "result.json::metrics.orthogonality_by_overlap[50] {pearson_r:0.0801,ci_upper:0.1684,tost_pass:false}, raw_evidence per_overlap[50].c3_orthogonality {ci_upper:0.168418, tost_p_upper:0.060900}, recomputed se=1/sqrt(480-3)=0.045787",
+      "finding": "CONFIRMED but MARGINAL - Orthogonality fails only at 50% overlap: r=0.080124, CI upper=0.168418 > delta=0.15, tost_p_upper=0.0609 >0.05. Recomputed Fisher z CI matches producer: se=0.045787, z_r=0.080296, CI [-0.00945,0.16842]. Failure is 0.018 (12%) above delta, non-monotonic (passes at 0%:0.066, 25%:0.061, 75%:0.135, 100%:0.064). With 5 parallel TOSTs, family-wise alpha inflation: uncorrected 0.05, Bonferroni requires 0.01. Under multiple-testing correction this marginal failure would not survive. 6 prior experiments + production-like LOCAL testbed all passed at delta 0.15. Suggests possible Type I/spurious correlation at n=480 rather than systematic behavioral-structural coupling. Frozen decision_rule condition (c) still triggers FALSIFIED per spec, but scientific interpretation should treat as borderline, not robust breakdown.",
+      "severity": "low"
+    },
+    {
+      "check": "calibrated_threshold_None_at_75_100",
+      "evidence": "raw_evidence per_overlap[75].threshold_sweep meets_constraints count 0, per_overlap[100] count 0; result.json calibrated_threshold_none_conditions [75,100]; run_experiment.py threshold_sweep logic",
+      "finding": "CONFIRMED - No threshold in 50-point grid [0.05,0.54] satisfies TPR>=0.85 and FPR<=0.10 at 75% (min FPR among TP>=0.85 is 0.1708) and 100% (min FPR 0.5208). Recomputed from raw threshold_sweep per condition: zero entries meet meets_constraints. This is not measurement failure but valid finding of operating-envelope collapse. However inclusion of 100% condition where noise=N(0.295,0.05)=failure makes discrimination tautologically impossible; falsifying entire hypothesis because it cannot separate identical distributions overstates scope. Hypothesis concerned moderate overlap (25-50%); high-overlap collapse is expected degenerate boundary.",
+      "severity": "low"
+    },
+    {
+      "check": "threshold_monotonicity",
+      "evidence": "result.json::metrics.thresholds_by_overlap {0:0.20,25:0.25,50:0.27,75:null,100:null}, raw_evidence per_overlap[].calibrated_threshold",
+      "finding": "CONFIRMED among valid conditions: thresholds 0.20 (0%) ->0.25 (25%) ->0.27 (50%) monotonically increasing. Recomputed valid_thresholds=[0.2,0.25,0.27] monotonic true. Producer metric threshold_increases_monotonically_among_valid=true correct. threshold_increases_monotonically_all_conditions=false correct due to None at 75/100 (not comparable). Supports hypothesis that parent's flat-then-jump (0.20 flat to 0.25 only at 100%) was artifact of uniform-shift design. Does not satisfy spec SUPPORT condition (1) across all conditions due to truncated valid set, but demonstrates gradual calibration under genuine overlap in operating regime.",
+      "severity": "none"
+    },
+    {
+      "check": "fp_binding_below_75",
+      "evidence": "result.json::metrics.fp_binding_below_75 true, fp_at_020_by_overlap, raw_evidence per_overlap[].fp_at_threshold_020",
+      "finding": "CONFIRMED - FP>0 at threshold 0.20 for both 25% and 50% conditions (0.2375 and 0.4417). Recomputed from noise_scores>=0.20. Satisfies spec condition (2). Demonstrates genuine overlap produces false accepts at baseline threshold, fixing parent artifact.",
+      "severity": "none"
+    },
+    {
+      "check": "code_vs_frozen_decision_rule_mismatch",
+      "evidence": "result_draft.json overall_hypothesis_outcome HYPOTHESIS_SUPPORTED vs result.json outcome FALSIFIES, report.md Note on Code vs Frozen Decision Rule, validity_notes[0], run_experiment.py lines 433-441 vs 336-359 gate checks",
+      "finding": "CONFIRMED and CORRECTLY HANDLED - run_experiment.py overall_hypothesis_outcome=HYPOTHESIS_SUPPORTED (SUPPORTS) based only on monotonicity and FP binding, ignoring orthogonality and None-threshold gate checks (prereg steps 4-6). Producer result.json correctly overrides code's outcome and applies frozen spec.json decision_rule (condition c) and prereg step 4, reporting outcome=FALSIFIES. No silent rewriting. Provenance correctly documents discrepancy. No measurement invalidity.",
+      "severity": "none"
+    },
+    {
+      "check": "empirical_overlap_verification",
+      "evidence": "result.json empirical_overlap_by_condition, raw_evidence per_overlap[].empirical_overlap, spec.json measurement_validity overlap defined as P(noise>0.20)",
+      "finding": "PASS - Empirical P(noise>0.20) measured from clamped Gaussian samples: 0.42% vs 0% target, 23.75% vs25%, 44.17% vs50%, 67.5% vs75%, 96.25% vs100%. Deviations explained by sampling variance (n=240 noise) and clamping to [0,1]. Far superior to parent uniform-shift artifact (0% actual at 25/50). Overlap definition matches spec measurement_validity: empirical count not assumed from parameters.",
+      "severity": "none"
+    },
+    {
+      "check": "sample_size_and_representation",
+      "evidence": "result.json samples_per_condition 960 total_samples 4800, spec measurement_validity at least 480, raw_evidence per_overlap[].phase_b_cooccur_n 480",
+      "finding": "PASS - Samples per condition 960 (240 token +240 noise calibration +480 cooccurring) exceeds prereg minimum 480 for TOST comparability. n_cooccur=480 at each overlap, unique behavioral scores 452-460. Total ~4800 samples. Representation loss acknowledged: Gaussian not production noise, single localhost mock Flask 3.1.3 SQLite WAL HS256/RS256, port 18953, 4 auth states, continuous severity only. No broader production inference warranted; validity_notes disclose.",
+      "severity": "none"
+    },
+    {
+      "check": "baseline_strength_and_leakage",
+      "evidence": "spec.json baselines list, mock_server.py _draw_session_quality vs structural_signal definition in run_experiment.py, threshold_grid 50 points",
+      "finding": "Baselines appropriate: parent uniform-shift thresholds/FP reported, orthogonality r=-0.0065 baseline. No leakage: structural_signal (n_keys+n_headers+1) independent of session_quality Gaussian mu; behavioral-structural correlation near zero at 4/5 conditions confirms no systematic coupling. Threshold grid 50 points [0.05,0.54] 0.01 increments resolves parent coarse grid artifact [0.20,0.25,...0.80]. Finer grid correctly finds optima 0.25/0.27 between parent nodes.",
+      "severity": "none"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35578258358",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Does the Bayesian Dirichlet-Multinomial model comparison maintain valid null centering (C1: null median < 0) and detection sensitivity (C3: p < 0.001) on real TodoMVC hash-SPA transitions at URL-level, where state representation is fragment-aware (not synthetic state_id) and transitions are genuine browser interactions?",
+  "why_next": "The Bayesian paradigm passes C1+C3 on the synthetic 12-state SPA, becoming the first valid estimator after 4 families failed. However, all evidence is synthetic SPA simulation — the claim ceiling explicitly excludes C-WEB-DYNAMICS and real Web data. The next materially orthogonal question is whether the estimator generalizes from synthetic state_id labels to genuine browser-derived URL state representations on TodoMVC hash-SPAs (leveraging EXP-PHYSICS-35209110569 infrastructure that validated hash-SPAs as suitable testbeds with 0.21-0.28 valid-only leakage). This tests a different dimension (synthetic→real state representation) rather than repeating the same synthetic SPA paradigm at larger N.",
+  "carry_forward": {
+    "established": [
+      "Bayesian Dirichlet-Multinomial with K=12 is the first estimator to pass simultaneous C1 (null median < 0) and C3 (p < 0.001) on stochastic 12-state SPA — audit PASS, all metrics recomputed exact (EXP-PHYSICS-35578258358)",
+      "True I(Y;A|Z) = 1.52 bits on stochastic 12-state SPA (audit-confirmed, parent chain, EXP-PHYSICS-35530591329)",
+      "Laplace smoothing inflates H(Y|Z,A) more than H(Y|Z) due to cell-count inflation — bypassed by Bayesian marginal likelihood (EXP-PHYSICS-35538866166, EXP-PHYSICS-35578258358)",
+      "Null centering robust across alpha_prior {0.5, 1.0, 2.0}: null_median -78 to -131 nats, observed log BF 168-643 nats, separation 194-669 nats (EXP-PHYSICS-35578258358 result.json metrics)",
+      "Deterministic SPA positive control: K2=854, K3=916 nats at alpha=0.5, confirming implementation detects strong action effects (EXP-PHYSICS-35578258358 result.json controls.positive_control_deterministic_spa)"
+    ],
+    "rejected": [
+      "Plug-in KL estimator with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} for simultaneous C1+C3 (EXP-PHYSICS-35530591329)",
+      "Entropy-rate CMI with alpha in {0.1, 0.5, 1.0} for simultaneous C1+C3 (EXP-PHYSICS-35538866166)",
+      "KSG CMI k=5 for CMI detection — insensitive, K3=0.018 (EXP-PHYSICS-35482477045)",
+      "LR chi2 for beyond-Markov detection — history collapse K2=K3 exactly (EXP-PHYSICS-35476270440)",
+      "Bias-corrected estimators (equal-weight, median, KNN) as remedy (EXP-PHYSICS-35445596894)",
+      "Hypothesis that per-stratum KL bias is estimator-specific — intrinsic to Laplace smoothing (EXP-PHYSICS-35538866166)"
+    ],
+    "unknown": [
+      "Whether Bayesian model comparison maintains valid null centering on real TodoMVC hash-SPA transitions with URL-level state representation (synthetic→real gap)",
+      "Whether Phase 2 beyond-Markov K3-K2 passes when history conditioning aligned to frozen spec (both action-history, not state-vs-action) at N>=10000 (audit V2 mismatch, V7 CI includes zero)",
+      "Whether spec-correct K3 (state + 2 prev actions) null median +7 > 0 indicates systematic over-parameterization or limited action diversity (audit V2: spec-correct K3 BF 1955.9 median +7.07 FAILS C1)",
+      "Whether Bayesian approach generalizes to production SPAs with high-cardinality state spaces (all evidence synthetic 12 states)",
+      "Whether alternative Bayesian methods (WAIC, LOO-CV, fractional Bayes factors) achieve comparable null centering"
+    ],
+    "do_not_assume": [
+      "C-WEB-DYNAMICS is supported by this experiment — all evidence is synthetic SPA; C-WEB-DYNAMICS requires real Web dynamics (audit V4)",
+      "The Bayesian paradigm is validated for production Web data — claim ceiling bounded to synthetic 12-state SPA, seed=42, N=5000, state-history K2 only",
+      "Phase 2 beyond-Markov K3-K2 = 235 nats is a valid detection — history-kind mismatch (state lags vs action lags per audit V2) makes K3-K2 apples-to-oranges; bootstrap CI [-415,34] includes zero (audit V7)",
+      "The log BF scale (nats) is directly comparable to PMI/CMI scale (bits) — fundamentally different quantities (spec baselines, result.json validity_notes[1])",
+      "The state-history K2 result generalizes to action-history K2 — audit V2 finds spec-correct action-history K2 BF 3298 nats (stronger) but spec-correct K3 (action-history 2 lags) median +7 FAILS C1, suggesting history-length sensitivity under action conditioning",
+      "Product promotion is warranted — all evidence is synthetic, no production Web data tested, claim concerns measurement infrastructure not product functionality"
+    ]
+  },
+  "dependencies": [
+    "TodoMVC hash-SPA infrastructure validated as suitable testbeds for URL-level non-leakage PMI (EXP-PHYSICS-35209110569: 5/5 variants <40% leakage, NL scale 357-394 at 500 raw)",
+    "Bayesian model comparison code with corrected K=12 (run_experiment.py sha 0a9c67480b842bd29c3bb53f99c59d07f17e617b80e60695bfdeec16a45bca63)",
+    "Parent carry_forward established items (true CMI 1.52 bits, estimator family failures, Laplace bias root cause) remain valid",
+    "Within-session shuffled-action null framework (run_experiment.py:334-359) validated for URL-level SPA transitions"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35578258358/audit.json:PASS, claim_ceiling, V1-V8 (all findings, recomputed metrics exact)",
+    "research/experiments/EXP-PHYSICS-35578258358/result.json:metrics/controls/observations (producer: all criteria pass, alpha sweep, Phase 2 exploratory)",
+    "research/experiments/EXP-PHYSICS-35578258358/raw_results.json:774d58b666bde223a393d3c7feb92bbb3cfc26e714a45bbafe074b5608cda3f7",
+    "research/experiments/EXP-PHYSICS-35578258358/run_experiment.py:0a9c67480b842bd29c3bb53f99c59d07f17e617b80e60695bfdeec16a45bca63 (K=12 fix verified)",
+    "research/experiments/EXP-PHYSICS-35572180485/handoff.json:1b8bc62006d54f1ba9ff0866ee50691426328ebe613f60203ab3c80aea32319c (parent handoff, K bug root cause)",
+    "research/experiments/EXP-PHYSICS-35209110569 (TodoMVC hash-SPA leakage validation, target for next experiment)",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS, C-MEAS-VALID history across 30+ experiments"
+  ],
+  "recommended_action": "Execute Bayesian model comparison on real TodoMVC hash-SPA transitions (leveraging EXP-PHYSICS-35209110569 infrastructure: 5 variants, <40% leakage, NL 357-394). Use same K=12 Dirichlet-Multinomial, alpha {0.5,1.0,2.0}, within-session shuffled-action null with N_SHUFFLE>=1000. URL-level state representation (fragment-aware) instead of synthetic state_id. This tests the materially orthogonal question of synthetic→real generalization. If Bayesian approach passes C1+C3 on TodoMVC, it establishes the estimator on genuine browser transitions and opens the path to production SPA testing. If it fails, the synthetic→real gap is identified as the binding bottleneck and the Physics lane should consider continuous-state estimators (KDE/kNN on embeddings) or richer state representations."
+}

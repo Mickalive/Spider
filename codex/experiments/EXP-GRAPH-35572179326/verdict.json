@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35572179326",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "No change to claim status. Infrastructure failure (RSA key sharing + JSON serialization) prevents any valid distributed measurement. This experiment adds zero new evidence for or against distributed C-FRESHNESS orthogonality. Maximum justified ceiling remains from prior packets: LOCAL CONFIRMED at delta=0.15 (EXP-GRAPH-35530590140: r=0.0410, CI upper 0.116, TOST p=0.002, n_non304=684, C1-C7 all PASS, audit PASS) and distributed SUPPORTED by primary metric only (EXP-GRAPH-35538864957: r=-0.0585, CI upper 0.0163 < 0.15, TOST p=2.03e-08, n_non304=688, audit PASS on primary metric, but C1 fails due to 304 inclusion). This run reconfirms B-LOCAL-ONLY (r=0.0233, n=844) and B-CONCURRENT (r=0.0233, n=860) but provides no distributed data."
+    }
+  ],
+  "product_action": "No product action. Parallel-channel architecture justified only for LOCAL production-like regime at delta=0.15; distributed deployment NOT yet validated. Do not promote to PRODUCT_CORE.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing the DistributedManager RSA key sharing bug (each Flask node generates independent RSA key pairs, so tokens from node A are invalid on node B under round-robin routing), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
+  "reason": "MEASUREMENT_INVALID per frozen decision_rule: infrastructure failure prevents data collection on the distributed primary condition. The SameFileError fix from parent EXP-GRAPH-35544808911 is confirmed resolved (no copy-block crash). The C1 304-exclusion fix is present but has no effect (n304=0 on distributed). However, two NEW infrastructure bugs replace the original blockers: (1) DistributedManager RSA key sharing — each Flask node generates independent RSA key pairs at import via generate_rsa_keys(), so JWT tokens created on node A cannot be validated on node B. Round-robin routing sends get_token to node N then request to node N+1, causing ALL 1008 distributed samples to return 401 (behavioral_delta constant 7.0, std 0.0 on all 3 endpoints). This makes C1 TN=0.0, C2 0/3 endpoints with variance, C3-C5 NaN. (2) JSON serialization failure — numpy.bool_ and NaN values in metrics/controls crash json.dump at line 696 ('Object of type bool is not JSON serializable'), producing an empty result.json that masks raw evidence. The auditor recovered raw_evidence from raw_evidence/experiment_data.json and raw_evidence/metrics.json, confirming the RSA root cause. B-LOCAL-ONLY and B-CONCURRENT reconfirm orthogonality on single-node path (r=0.0233, CI upper < 0.091, TOST PASS). No scientific falsification of distributed orthogonality is implied — the testbed was unrunnable on distributed conditions.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35572179326/request.json (parent_handoff EXP-GRAPH-35544808911, inherited_next_question n_non304>=800)",
+    "research/experiments/EXP-GRAPH-35572179326/spec.json (frozen decision_rule C1-C7, delta 0.15, 4 baselines)",
+    "research/experiments/EXP-GRAPH-35572179326/prereg.md (SameFileError fix, C1 304-exclusion fix)",
+    "research/experiments/EXP-GRAPH-35572179326/result.json (status MEASUREMENT_INVALID, outcome NOT_APPLICABLE, empty metrics/controls, observation 'Object of type bool is not JSON serializable')",
+    "research/experiments/EXP-GRAPH-35572179326/audit.json (status MEASUREMENT_INVALID, producer_claim_supported=false, recomputed_metrics with RSA root cause, 6 required_fixes, claim_ceiling)",
+    "research/experiments/EXP-GRAPH-35572179326/report.md (traceback line 765 json.dump TypeError)",
+    "research/experiments/EXP-GRAPH-35572179326/run_experiment_distributed.py (DistributedManager round-robin RSA mismatch, SingleServerManager RSA per-process, compute_c1 has_304 filter, json.dump line 696)",
+    "research/experiments/EXP-GRAPH-35572179326/raw_evidence/experiment_data.json (b_distributed all 401, behavioral_delta 7.0 constant, n304 0; b_local 844 non304)",
+    "research/experiments/EXP-GRAPH-35572179326/raw_evidence/metrics.json (b_distributed r NaN, c1_tn 0.0, c2 0/3, c3-c5 NaN)",
+    "research/experiments/EXP-GRAPH-35544808911/handoff.json (parent carry_forward: SameFileError + C1 304-exclusion as prerequisites)",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json (grandparent distributed primary metric r=-0.0585 CI upper 0.0163 n=688 audit PASS)",
+    "research/experiments/EXP-GRAPH-35530590140/result.json (LOCAL CONFIRMED r=0.0410 n=684 C1-C7 PASS)",
+    "codex/claim_state.json (C-FRESHNESS current status EXPERIMENTAL, no VALIDATED or PRODUCT_CORE)"
+  ]
+}

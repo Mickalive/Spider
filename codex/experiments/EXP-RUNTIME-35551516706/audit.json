@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1_SUBSTRATE_IS_BYTE_PRESERVING_PROXY_NOT_CDN_EDGE",
+      "severity": "medium",
+      "finding": "Substrate is local nginx 1.24.0 proxy_cache (proxy_cache_key $request_uri, proxy_cache_valid 200 5m, gzip off, HTTP/1.1, no TLS) in front of local Python origin. This produces real X-Cache:HIT (240/240 test-phase, warmup 9/10 HIT) and validates the frozen question as written, but does not reproduce CDN edge re-encoding. Producer correctly bounds ceiling to nginx-class byte-preserving caches in result.json validity_notes and report.md section 7. No overclaim to Cloudflare/Fastly/Akamai edge transformation.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/nginx_cache.conf sha256 c6ef7a22c5ef8cdbc31cfe33f693301b94bfdd37d67d6452b34fa3d56e383436; raw_cell_results.jsonl sha256 7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7; summary.json phase0.warmup_hits 9"
+    },
+    {
+      "id": "V2_FRESH_HIT_NOT_STALE_EXPIRED",
+      "severity": "low",
+      "finding": "All HIT observations were served within max-age=300s (1-3s populate->test delay, 5m proxy_cache_valid). Fresh cache HITs, not stale-expired, revalidated, or 304 cases. Spec decision_rule C8 tests byte-identity of fresh cached bytes; stale/expired edge case remains untested as noted in result.json unresolved.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/result.json unresolved; prereg validity threats; run_experiment.py phase3 delay 1.0+uniform(0,2)"
+    },
+    {
+      "id": "V3_SINGLE_EDGE_NO_CONCURRENCY_HTTP11_ONLY",
+      "severity": "low",
+      "finding": "Sequential requests only, single nginx edge, HTTP/1.1 only, no concurrent load, no HTTP/2/H3, no TLS. Prereg validity threats 4-6 explicitly scope these out. No concurrent-cache race or H2 framing tested.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/prereg.md section 12; provenance.json environment substrate HTTP/1.1 no TLS"
+    },
+    {
+      "id": "V4_M_HIT_RATE_DENOMINATOR_INCLUDES_FIRST_POPULATE",
+      "severity": "info",
+      "finding": "M-HIT-RATE 0.9455 (312/330) counts all cached-path test observations; 18/330 are first-populate MISS for depth/large/identity fixed URLs. Among already-cached resources x-cache==HIT rate is 312/312=1.0, primary HIT path 240/240=1.0. Producer discloses this split in result.json metrics notes and validity_notes; not a misrepresentation.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/result.json metrics.M-HIT-RATE note; recomputed 312/330=0.9455, 240/240 HIT, 312/312 HIT among cached"
+    },
+    {
+      "id": "V5_NO_REPRESENTATION_LOSS",
+      "severity": "info",
+      "finding": "Every row retains rawBody base64 + body_sha256 + headers + status in raw_cell_results.jsonl; derived oracle_free/ oracle_guided/ fixed_order computed over same bytes. Recomputed SHA mismatches 0/1078, duplicate (session_kind,cell,rep) keys 0 (parent had 75). Stability rows now persisted (18 STABILITY rows, 6 groups x3). Audit V3/V4 gaps from parent EXP-RUNTIME-35544804817 are closed.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl sha256 7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7 recomputed duplicate check 0, sha mismatch 0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "expected": "240/240 oracle-free correct (origin direct, no proxy)",
+      "observed": "240/240",
+      "pass": true,
+      "note": "Recomputed 240/240 LOCALHOST rows oracle_free_correct true. Positive control validates decoder implementation independent of caching; discriminating.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl session_kind=LOCALHOST; summary.json phase1 240/240"
+    },
+    {
+      "id": "B-ORACLE-GUIDED-REGRESSION",
+      "expected": ">= parent 240/240 DYNAMIC on same wire bytes",
+      "observed": "480/480 (DYNAMIC 240 + HIT 240)",
+      "pass": true,
+      "note": "Re-executed on same wire bytes this run (parent audit V5 gap closed). 480/480 recomputed. No regression.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl DYNAMIC+HIT; summary.json phase8 oracle_guided_ok 480/480"
+    },
+    {
+      "id": "B-FIXED-ORDER-CDN",
+      "expected": "prereg 60/240 (Cloudflare edge) ; on byte-preserving proxy origin framing expected to hold",
+      "observed": "480/480 (100%)",
+      "pass": true,
+      "note": "Non-discriminating on this byte-preserving substrate. Producer correctly notes prereg 60/240 is Cloudflare-specific; 100% here confirms parent finding that CDN does not corrupt bytes and edge (not corruption) broke fixed-order framing. Baseline passes trivially; does not test CDN transformation.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/result.json controls.B-FIXED-ORDER-CDN note; recomputed 480/480 fixed_order_correct"
+    },
+    {
+      "id": "B-DYNAMIC-VS-HIT-IDENTITY",
+      "expected": "48/48 cells byte-identical DYNAMIC vs HIT (null control for cache alters bytes)",
+      "observed": "48/48",
+      "pass": true,
+      "note": "Recomputed 48/48 identical (body sha256, base64, Content-Encoding, Content-Length) via hit_vs_dynamic.json and raw rows. Null control passes for byte-preserving proxy; does not test byte-transforming CDN edge.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/hit_vs_dynamic.json sha256 9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217 recomputed 48/48"
+    },
+    {
+      "id": "B-DEPTH-GENERALIZATION",
+      "expected": ">=80% depth 3-5 correct",
+      "observed": "45/45 (100%)",
+      "pass": true,
+      "note": "Recomputed 45/45 HIT-DEPTH rows correct; 36 HIT + 9 first-populate (all correct). Greedy iteration handles deeper stacking on cached responses.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl session_kind=HIT-DEPTH; summary.json phase6"
+    },
+    {
+      "id": "B-LARGE-PAYLOAD",
+      "expected": ">=80% >100KB correct",
+      "observed": "30/30 (100%)",
+      "pass": true,
+      "note": "Recomputed 30/30 HIT-LARGE rows correct; 24 HIT + 6 first-populate. Large payloads do not break greedy on cached path.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl session_kind=HIT-LARGE; summary.json phase7"
+    },
+    {
+      "id": "C-CACHE-MISS-KEY-NEGATIVE",
+      "expected": "unique cache-busting URLs never produce HIT",
+      "observed": "240/240 DYNAMIC X-Cache:MISS",
+      "pass": true,
+      "note": "Discriminating negative control proving cache is engaged and keyed by $request_uri.",
+      "evidence": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl session_kind=DYNAMIC x-cache MISS 240/240"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-HIT-RATE": {
+      "producer": 0.9455,
+      "recomputed": 0.9455,
+      "numerator": 312,
+      "denominator": 330,
+      "match": true,
+      "note": "312 HIT / 330 cached-path test obs (HIT/HIT-IDENTITY/HIT-DEPTH/HIT-LARGE). Primary HIT 240/240 HIT."
+    },
+    "M-ORACLE-FREE-HIT-ACCURACY": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 330,
+      "denominator": 330,
+      "match": true,
+      "note": "330/330 cached-path obs byte-identical to ground truth under oracle-free greedy decode (MAX_DEPTH=5, brotli->gzip). Among x-cache==HIT rows 312/312."
+    },
+    "M-ORACLE-FREE-DYNAMIC-ACCURACY": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "match": true
+    },
+    "M-ORACLE-FREE-LOCALHOST-ACCURACY": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "match": true
+    },
+    "M-ORACLE-GUIDED-REGRESSION": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 480,
+      "denominator": 480,
+      "match": true
+    },
+    "M-FIXED-ORDER-CDN": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 480,
+      "denominator": 480,
+      "match": true,
+      "note": "100% on byte-preserving nginx; parent Cloudflare 60/240 remains edge-specific."
+    },
+    "M-BYTES-IDENTICAL": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 48,
+      "denominator": 48,
+      "match": true,
+      "note": "C8 DYNAMIC vs HIT wire bytes identical for all 48 cells (body sha256 + base64 + CE + CL)."
+    },
+    "M-DEPTH-ACCURACY": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 45,
+      "denominator": 45,
+      "match": true
+    },
+    "M-LARGE-ACCURACY": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 30,
+      "denominator": 30,
+      "match": true
+    },
+    "M-STABILITY-GROUPS": {
+      "producer": 6,
+      "recomputed": 6,
+      "numerator": 6,
+      "denominator": 6,
+      "match": true,
+      "note": "6/6 groups byte-stable over 3 consecutive requests (MISS,HIT,HIT each group)."
+    },
+    "M-IDENTITY": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "numerator": 15,
+      "denominator": 15,
+      "match": true
+    },
+    "M-AMBIGUOUS": {
+      "producer": 0,
+      "recomputed": 0,
+      "numerator": 0,
+      "denominator": 1078,
+      "match": true,
+      "note": "0/1078 rows where brotli and gzip both succeed at same iteration; greedy order unambiguous."
+    },
+    "C1_C2_C8_DECISION": {
+      "producer": "SUPPORTS",
+      "recomputed": "SUPPORTS",
+      "match": true,
+      "note": "All frozen conditions C1(48/48), C2(330/330>=90%), C3(6/6), C4(15/15), C5(45/45>=80%), C6(30/30>=80%), C7(0), C8(48/48>=90%), positive and null controls pass."
+    }
+  },
+  "claim_ceiling": "Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for 100% of cached responses (330/330 cached-path obs, 240/240 primary 48x5 HIT, 45/45 depth 3-5, 30/30 >100KB, 15/15 identity, 6/6 stability) through a byte-preserving local nginx 1.24.0 proxy_cache reverse proxy (proxy_cache_key $request_uri, 5m validity, gzip off, HTTP/1.1, no TLS) in front of a Python origin with Cache-Control: public, max-age=300, when HIT is fresh (within max-age, 1-3s populate->test). DYNAMIC and HIT wire bytes are byte-identical for 48/48 cells, so decompressed outputs are identical. This closes the parent HIT gap only for nginx-class byte-preserving caches with the tested payload matrix (JSON/HTML/BINARY, entropy 4.66-7.70, GZIP-OUTER/BROTLI-OUTER, chunk 8192/32, 4 AE variants, SEED=44). Does NOT extend to: Cloudflare/Fastly/Akamai/CloudFront edge HIT behavior (re-encoding, stale-expired, 304, H2/H3, concurrent load, multi-edge, or byte-transforming caches), production CDN HIT serving, or performance economics.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35551516706/request.json sha256 6a911a9d6dea8412f6fefc3fd8d0929cda79bd6d31ee0cc84d1cda1ebace5bb4",
+    "research/experiments/EXP-RUNTIME-35551516706/spec.json sha256 403ab5a338ac65340793435cb7260f99c1ef65bf4cdf4ab0153a7dca9d7ecddc",
+    "research/experiments/EXP-RUNTIME-35551516706/prereg.md sha256 9043c0abce3f489401a30480531c275fb372f45d856aef40285141ebe6f54262",
+    "research/experiments/EXP-RUNTIME-35551516706/freeze.json sha256 frozen 2026-09-21T07:20:47.100476+00:00",
+    "research/experiments/EXP-RUNTIME-35551516706/result.json sha256 b04b5c88362da521bb07068b11c347c2cb12a3b4d27c9ee72bf1d3810afab0c4",
+    "research/experiments/EXP-RUNTIME-35551516706/report.md sha256 080f0e84c26f24d48756a7e365a15469949e7d69e4f4fc1115c16459cfcc31d5",
+    "research/experiments/EXP-RUNTIME-35551516706/provenance.json sha256 dafea9e8a9c522bef2b9f642f0eb38fd20bfd02e25d5b4a2332cc395bd39f60d",
+    "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl sha256 7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7 recomputed 1078 rows, 0 dups, 0 sha mismatches, 0 transport errors",
+    "research/experiments/EXP-RUNTIME-35551516706/summary.json sha256 ba119d2a70c76e27cf4037d0310fd46850872c178fb9c51a8572e1c29474aa4e recomputed C1-C8 all pass",
+    "research/experiments/EXP-RUNTIME-35551516706/hit_vs_dynamic.json sha256 9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217 recomputed 48/48 identical",
+    "research/experiments/EXP-RUNTIME-35551516706/nginx_cache.conf sha256 c6ef7a22c5ef8cdbc31cfe33f693301b94bfdd37d67d6452b34fa3d56e383436",
+    "research/experiments/EXP-RUNTIME-35551516706/payload_manifest.json sha256 4f0ca35cfc376eecfd5c831968b3da76d02e4ff2c4257f73fc38525032590594 gt_is_plain all true",
+    "research/experiments/EXP-RUNTIME-35551516706/run_experiment.py sha256 8ad331efa6dde6ace02cc54e4799936db1ef243d4e03a10f655945e45d176569 oracle_free_greedy_decode recomputed 5 sample HIT rows correct",
+    "research/experiments/EXP-RUNTIME-35544804817/handoff.json sha256 f465013f9b38a59ac3fb13496184988e02571acd5c711d2d6eef3d74cbb93ac3 parent DYNAMIC-only 240/240, 0% HIT ceiling, duplicate/stability/regression gaps cited",
+    "research/experiments/EXP-RUNTIME-35544804817/result.json parent fixed-order 60/240 vs current 480/480 explains edge-vs-byte-preserving difference"
+  ],
+  "unresolved": [
+    "Whether real CDN edge caches (Cloudflare paid-tier, Fastly, Akamai, CloudFront) alter cached-response wire bytes vs DYNAMIC-path bytes — parent had 0 HIT observations, local nginx shows 48/48 identity, so CDN transformation remains untested.",
+    "Whether oracle-free greedy decode generalizes to real-world CDN cached payloads whose framing differs from origin layering (requires actual CDN HIT observation with edge re-encoding).",
+    "Cache freshness edge cases: expiry, revalidation, 304 Not Modified, stale-while-revalidate, and stale-if-error were not exercised; all serves within 300s max-age.",
+    "Performance economics: amortized latency and CPU cost of greedy try-brotli-then-gzip loop vs oracle-guided decode not measured.",
+    "Behavior under concurrent load, HTTP/2/H3, TLS, multi-edge, and cross-region cache variation not tested.",
+    "Fixed-order decode behavior on byte-transforming CDN (parent 60/240) vs byte-preserving proxy (here 480/480) — discriminator is CDN edge, not caching layer."
+  ]
+}
