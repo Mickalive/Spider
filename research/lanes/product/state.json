@@ -8,7 +8,7 @@
   "next_question": "Does the orthogonality boundary lie at ~25% Gaussian overlap (where RC-25%-TOST fails at n=480 with r=0.080) rather than 50% \u2014 and does n>=800 at 25% overlap resolve this failure under Bonferroni correction, establishing a stable usable envelope of 0-50%?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-21T20:34:46.033460+00:00",
+  "updated_at": "2026-09-21T20:38:02.426276+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "b052a347732259e7ef72607dab9c25578e3b0a938f9536c36c22f79e7afbca1f",
   "same_failure_count": 0,
