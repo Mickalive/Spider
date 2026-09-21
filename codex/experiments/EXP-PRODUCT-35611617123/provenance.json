@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35611617123",
+  "github_run_id": "35611617123",
+  "github_run_attempt": 1,
+  "source_commit": "838b0fd0",
+  "source_ref": "origin/lab2/product",
+  "frozen_at": "2026-09-21T14:26:43.083315+00:00",
+  "executed_at": "2026-09-21T16:44:55.000000+00:00",
+  "completed_at": "2026-09-21T16:54:33.000000+00:00",
+  "runtime_seconds": 577.68,
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "dependencies": {
+      "flask": "3.1.3",
+      "pyjwt": "2.14.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "werkzeug": "3.1.8",
+      "cryptography": "50.0.1"
+    },
+    "seed": 42,
+    "port": 18954
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35611617123/raw_evidence/experiment_data.json",
+      "sha256": "3b26ddb150bf1aeb69b4a3c1235d58b6ed74110c5f626a8f05f08fc65587e2f3"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-35611617123/run_experiment.py",
+      "sha256": null
+    },
+    "mock_server": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/mock_server.py",
+      "sha256": "fdba9ca563ee928d84d9a50de6b97fc0a00b011e5f8a9aac59a40ef2d184be6c",
+      "note": "Reused parent mock server infrastructure"
+    }
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-PRODUCT-35611617123/request.json",
+      "sha256": "7b91620ed6d05992b57315f75fd10875ecb7c99e9a4a793eccede85e9dddcdc6"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-PRODUCT-35611617123/spec.json",
+      "sha256": "8689252218d4b11e6c1edfa1c8fb1ac74ae0dd7a8811c9a001517a90eb2aa012"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-PRODUCT-35611617123/prereg.md",
+      "sha256": "4becd78110a3f612bb8e131d742ced45de80698364284a092da4ef96abaa2bac"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-PRODUCT-35611617123/freeze.json",
+      "sha256": null
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35572180893",
+    "path": "research/experiments/EXP-PRODUCT-35572180893/result.json",
+    "sha256": null,
+    "key_finding": "50% orthogonality FAILURE: r=0.080, CI upper 0.168 > delta 0.15, TOST p_upper=0.061 at n=480"
+  },
+  "execution_commands": [
+    "cd research/experiments/EXP-PRODUCT-35611617123",
+    "python run_experiment.py"
+  ],
+  "measurement_parameters": {
+    "tost_delta": 0.15,
+    "bonferroni_alpha": 0.0167,
+    "failure_threshold": 0.20,
+    "gaussian_parameters": {
+      "failure_mu": 0.295,
+      "failure_sigma": 0.05,
+      "noise_sigma": 0.05,
+      "noise_mu_by_overlap_pct": {
+        "0": 0.095,
+        "25": 0.1663,
+        "50": 0.195
+      }
+    },
+    "threshold_grid": "50 points [0.05, 0.06, ..., 0.54] in 0.01 increments",
+    "overlap_conditions": [0, 25, 50],
+    "sample_sizes": {
+      "0": 960,
+      "25": 960,
+      "50_n480": 960,
+      "50_n1000": 2000
+    }
+  },
+  "reproduction_notes": [
+    "Same seed=42 as parent, but different server instance and timing",
+    "Port 18954 used instead of parent's 18953 to avoid conflicts",
+    "Mock server infrastructure reused from EXP-PRODUCT-35572180893",
+    "Parent mock server DB path conflicts avoided by running sequentially"
+  ]
+}

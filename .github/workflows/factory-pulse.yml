@@ -14,10 +14,14 @@ on:
       - "research/EXPERIMENT_PACKET.md"
       - "research/claims/**"
       - "research/lanes/**"
+      - "research/portfolio/**"
+      - "research/scout/**"
       - "config/models.json"
       - "AGENTS.md"
       - "SPIDER_ARCHITECTURE_RESEARCH2.md"
       - "SPIDER_MASTER_PROMPT.md"
+      - "SPIDER_CODEX.md"
+      - "codex/**"
   schedule:
     - cron: "7,22,37,52 * * * *"
 
@@ -27,67 +31,253 @@ permissions:
 
 concurrency:
   group: spider-r2-factory-pulse
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  pulse:
-    strategy:
-      fail-fast: false
-      max-parallel: 6
-      matrix:
-        lane: [graph, physics, runtime, product, intel, frontier]
+  direction:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
 
-      - name: Dispatch healthy independent lane
-        env:
-          GH_TOKEN: ${{ github.token }}
-          LANE: ${{ matrix.lane }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build live research map
         shell: bash
         run: |
           set -euo pipefail
-          ENABLED=$(jq -r --arg lane "$LANE" '.lanes[$lane].enabled // false' research/lanes/registry.json)
-          [[ "$ENABLED" == true ]] || { echo "lane disabled: $LANE"; exit 0; }
-          CONTROL_REV=$(python scripts/control_plane.py revision --root .)
+          git fetch -q origin '+refs/heads/lab2/*:refs/remotes/origin/lab2/*' || true
+          mkdir -p .spider-runtime
+          python scripts/build_portfolio_snapshot.py             --cycle-id "$GITHUB_RUN_ID"             --output .spider-runtime/director_snapshot.json
 
-          ACTIVE_EXP=""
-          if git ls-remote --exit-code --heads origin "refs/heads/lab2/$LANE" >/dev/null 2>&1; then
-            git fetch -q origin "refs/heads/lab2/$LANE:refs/remotes/origin/lab2/$LANE"
-            STATE=$(git show "origin/lab2/$LANE:research/lanes/$LANE/state.json" 2>/dev/null || echo '{}')
+      - name: Install OpenCode for Scout and Director
+        id: install
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          ready=false
+          for attempt in 1 2 3 4; do
+            echo "SPIDER_DIRECTION_OPENCODE_INSTALL_ATTEMPT=$attempt/4"
+            curl --retry 2 --retry-all-errors --retry-delay 10 -fsSL https://opencode.ai/install | bash
+            rc=$?
+            if [[ "$rc" -eq 0 ]]; then
+              "$HOME/.opencode/bin/opencode" --version
+              rc=$?
+            fi
+            if [[ "$rc" -eq 0 ]]; then ready=true; break; fi
+            sleep 15
+          done
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Scout lane — general reconnaissance
+        id: scout
+        if: ${{ steps.install.outputs.ready == 'true' }}
+        env:
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "480"
+          SPIDER_MODEL_STALL_SECONDS: "180"
+          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_MODEL_RETRY_DELAY_SECONDS: "10"
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/scout_brief.json"
+          bash .github/scripts/run-opencode-resilient.sh scout .spider-runtime/model_scout.json run --agent spider_research_scout             "SCOUT LANE cycle=$GITHUB_RUN_ID. Read the control-plane charter and exact .spider-runtime/director_snapshot.json. Maintain broad situational awareness across the full SPIDER Codex, all lane trajectories, general agent knowledge and shallow external reconnaissance when available. Do NOT choose allocations. Write ONLY .spider-runtime/scout_brief.json using the exact schema in .opencode/agents/spider_research_scout.md."
+          rc=$?
+
+          git reset --hard HEAD >/dev/null 2>&1 || true
+          git clean -fd -e .spider-runtime/ >/dev/null 2>&1 || true
+
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/validate_scout_brief.py               --snapshot .spider-runtime/director_snapshot.json               --brief .spider-runtime/scout_brief.json
+            rc=$?
+          fi
+          echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Global Research Director — choose lane objectives
+        id: director
+        if: ${{ steps.scout.outputs.ready == 'true' }}
+        env:
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "480"
+          SPIDER_MODEL_STALL_SECONDS: "180"
+          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_MODEL_RETRY_DELAY_SECONDS: "10"
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          export SPIDER_REQUIRED_OUTPUTS=".spider-runtime/director_allocation.json"
+          bash .github/scripts/run-opencode-resilient.sh director .spider-runtime/model_global_director.json run --agent spider_portfolio_director             "GLOBAL RESEARCH DIRECTION cycle=$GITHUB_RUN_ID. Read the exact .spider-runtime/director_snapshot.json and .spider-runtime/scout_brief.json, then the full compact Codex/claim state and exact packets needed for judgment. The Scout is staff advice, not authority. Decide the most promising next objective for every scientific lane; explicitly reactivate useful stalled/idle lanes; preserve already-frozen scientific transactions; and treat local handoff next_questions as proposals, not commands. Write ONLY .spider-runtime/director_allocation.json using the exact schema in .opencode/agents/spider_portfolio_director.md."
+          rc=$?
+
+          git reset --hard HEAD >/dev/null 2>&1 || true
+          git clean -fd -e .spider-runtime/ >/dev/null 2>&1 || true
+
+          if [[ "$rc" -eq 0 ]]; then
+            python scripts/validate_portfolio_allocation.py               --snapshot .spider-runtime/director_snapshot.json               --allocation .spider-runtime/director_allocation.json
+            rc=$?
+          fi
+          echo "ready=$([[ "$rc" -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Preserve direction artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spider-direction-${{ github.run_id }}
+          path: |
+            .spider-runtime/director_snapshot.json
+            .spider-runtime/scout_brief.json
+            .spider-runtime/director_allocation.json
+            .spider-runtime/model_scout.json
+            .spider-runtime/model_global_director.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Dispatch or resume lanes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DIRECTION_READY: ${{ steps.director.outputs.ready }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CONTROL_REV=$(python scripts/control_plane.py revision --root .)
+          LANES=(graph physics runtime product intel frontier)
+          DIRECTION_MISSING=0
+          DISPATCH_FAILURES=0
+
+          running_count() {
+            local lane="$1"
+            gh run list --workflow=spider-lane.yml --limit 100 --json status,displayTitle |
+              jq --arg prefix "R2 lane=$lane "                 '[.[] | select((.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending" or .status=="requested") and (.displayTitle|startswith($prefix)))] | length'
+          }
+
+          remote_exists() {
+            local ref="$1" path="$2"
+            git cat-file -e "$ref:$path" 2>/dev/null
+          }
+
+          for LANE in "${LANES[@]}"; do
+            ENABLED=$(jq -r --arg lane "$LANE" '.lanes[$lane].enabled // false' research/lanes/registry.json)
+            [[ "$ENABLED" == true ]] || { echo "lane disabled: $LANE"; continue; }
+
+            STATE='{}'
+            REF="origin/lab2/$LANE"
+            if git show-ref --verify --quiet "refs/remotes/$REF"; then
+              STATE=$(git show "$REF:research/lanes/$LANE/state.json" 2>/dev/null || echo '{}')
+            fi
+
             PAUSED=$(jq -r '.human_paused // false' <<<"$STATE")
-            [[ "$PAUSED" != true ]] || { echo "human-paused: $LANE"; exit 0; }
-            ACTIVE_EXP=$(jq -r '.active_experiment_id // empty' <<<"$STATE")
+            [[ "$PAUSED" != true ]] || { echo "human-paused: $LANE"; continue; }
 
             if [[ "$LANE" == product && "$(jq -r '.promotion_ready // false' <<<"$STATE")" == true ]]; then
               echo "SPIDER_PRODUCT_PROMOTION_PENDING experiment=$(jq -r '.last_experiment_id // empty' <<<"$STATE")"
-              echo "Product research waits until product-promote clears the durable latch."
-              exit 0
+              continue
             fi
 
-            RETRYABLE=$(jq -r '.last_failure_retryable // empty' <<<"$STATE")
-            SAME_COUNT=$(jq -r '.same_failure_count // 0' <<<"$STATE")
-            FAILURE_REV=$(jq -r '.last_failure_control_revision // empty' <<<"$STATE")
-            if [[ -n "$ACTIVE_EXP" && "$RETRYABLE" == "false" && "$SAME_COUNT" -ge 3 && "$FAILURE_REV" == "$CONTROL_REV" ]]; then
-              echo "SPIDER_CIRCUIT_OPEN lane=$LANE experiment=$ACTIVE_EXP same_failure_count=$SAME_COUNT control_revision=$CONTROL_REV"
-              echo "Skipping identical nonretryable failure until the operational control plane changes."
-              exit 0
+            RUNNING=$(running_count "$LANE")
+            if [[ "$RUNNING" != 0 ]]; then
+              echo "lane already active: $LANE"
+              continue
             fi
-          fi
 
-          RUNNING=$(gh run list --workflow=spider-lane.yml --limit 100 --json status,displayTitle | jq --arg prefix "R2 lane=$LANE " '[.[] | select((.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="pending" or .status=="requested") and (.displayTitle|startswith($prefix)))] | length')
-          if [[ "$RUNNING" != 0 ]]; then
-            echo "lane already active: $LANE"
-            exit 0
-          fi
+            ACTIVE_EXP=$(jq -r '.active_experiment_id // empty' <<<"$STATE")
+            ACTIVE_STAGE="IDLE"
+            ACTIVE_HAS_MANDATE="false"
+            ACTIVE_OLD_QUESTION=""
+            if [[ -n "$ACTIVE_EXP" ]] && git show-ref --verify --quiet "refs/remotes/$REF"; then
+              BASE="research/experiments/$ACTIVE_EXP"
+              if remote_exists "$REF" "$BASE/verdict.json"; then ACTIVE_STAGE="FINALIZED"
+              elif remote_exists "$REF" "$BASE/audit.json"; then ACTIVE_STAGE="AUDITED"
+              elif remote_exists "$REF" "$BASE/result.json"; then ACTIVE_STAGE="EXECUTED"
+              elif remote_exists "$REF" "$BASE/freeze.json"; then ACTIVE_STAGE="FROZEN"
+              elif remote_exists "$REF" "$BASE/request.json"; then ACTIVE_STAGE="PREFREEZE"
+              else ACTIVE_STAGE="BROKEN_REFERENCE"
+              fi
+              if remote_exists "$REF" "$BASE/request.json"; then
+                REQ=$(git show "$REF:$BASE/request.json" 2>/dev/null || echo '{}')
+                ACTIVE_HAS_MANDATE=$(jq -r 'has("director_mandate")' <<<"$REQ")
+                ACTIVE_OLD_QUESTION=$(jq -r '.director_mandate.allocation.question // empty' <<<"$REQ")
+              fi
+            fi
 
-          args=(workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=pulse" -f "chain_depth=0")
-          if [[ -n "$ACTIVE_EXP" ]]; then
-            args+=(-f "resume_experiment_id=$ACTIVE_EXP")
-            echo "resuming $ACTIVE_EXP"
+            if [[ "$ACTIVE_STAGE" == "FROZEN" || "$ACTIVE_STAGE" == "EXECUTED" || "$ACTIVE_STAGE" == "AUDITED" ]]; then
+              RETRYABLE=$(jq -r '.last_failure_retryable // empty' <<<"$STATE")
+              SAME_COUNT=$(jq -r '.same_failure_count // 0' <<<"$STATE")
+              FAILURE_REV=$(jq -r '.last_failure_control_revision // empty' <<<"$STATE")
+              if [[ "$RETRYABLE" == "false" && "$SAME_COUNT" -ge 3 && "$FAILURE_REV" == "$CONTROL_REV" ]]; then
+                echo "SPIDER_CIRCUIT_OPEN lane=$LANE experiment=$ACTIVE_EXP same_failure_count=$SAME_COUNT"
+                continue
+              fi
+              echo "SPIDER_RESUME_FROZEN lane=$LANE experiment=$ACTIVE_EXP stage=$ACTIVE_STAGE"
+              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-frozen" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
+                echo "::error::Failed to resume frozen lane=$LANE experiment=$ACTIVE_EXP"
+                DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
+              fi
+              continue
+            fi
+
+            if [[ "$DIRECTION_READY" != true || ! -f .spider-runtime/director_allocation.json ]]; then
+              echo "::error::SPIDER_DIRECTION_UNAVAILABLE lane=$LANE stage=$ACTIVE_STAGE; no NEW/PREFREEZE work dispatched"
+              DIRECTION_MISSING=1
+              continue
+            fi
+
+            ACTION=$(jq -r --arg lane "$LANE" '.allocations[$lane].action' .spider-runtime/director_allocation.json)
+            TARGET_CLAIM=$(jq -r --arg lane "$LANE" '.allocations[$lane].claim_id // empty' .spider-runtime/director_allocation.json)
+            NEW_QUESTION=$(jq -r --arg lane "$LANE" '.allocations[$lane].question // empty' .spider-runtime/director_allocation.json)
+
+            if [[ "$ACTION" == "PARK" || "$ACTION" == "TERMINATE" ]]; then
+              echo "SPIDER_DIRECTOR_ACTION lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
+              continue
+            fi
+
+            if [[ "$ACTIVE_STAGE" == "PREFREEZE" && "$ACTIVE_HAS_MANDATE" == true && "$ACTION" == "CONTINUE" && "$ACTIVE_OLD_QUESTION" == "$NEW_QUESTION" ]]; then
+              echo "SPIDER_RESUME_DIRECTED_PREFREEZE lane=$LANE experiment=$ACTIVE_EXP"
+              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-directed-prefreeze" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
+                echo "::error::Failed to resume directed prefreeze lane=$LANE experiment=$ACTIVE_EXP"
+                DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
+              fi
+              continue
+            fi
+
+            MANDATE=$(jq -c --arg lane "$LANE" '{
+              schema_version: .schema_version,
+              cycle_id: .cycle_id,
+              lane: $lane,
+              portfolio_assessment: .portfolio_assessment,
+              scout_assessment: .scout_assessment,
+              agent_priors_used: .agent_priors_used,
+              allocation: .allocations[$lane]
+            }' .spider-runtime/director_allocation.json)
+            MANDATE_B64=$(printf '%s' "$MANDATE" | base64 -w0)
+
+            if [[ "$ACTIVE_STAGE" == "PREFREEZE" ]]; then
+              echo "SPIDER_SUPERSEDE_PREFREEZE lane=$LANE old=$ACTIVE_EXP action=$ACTION claim=$TARGET_CLAIM"
+            else
+              echo "SPIDER_DIRECTOR_DISPATCH lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
+            fi
+
+            if ! gh workflow run spider-lane.yml --ref main               -f "lane=$LANE" -f "reason=global-director-$ACTION" -f "chain_depth=0"               -f "director_mandate_b64=$MANDATE_B64"; then
+              echo "::error::Failed Director dispatch lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
+              DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
+            fi
+          done
+
+          if [[ "$DIRECTION_MISSING" -ne 0 ]]; then
+            echo "::error::Global direction was unavailable while one or more lanes required NEW/PREFREEZE work."
+            exit 70
           fi
-          gh "${args[@]}"
+          if [[ "$DISPATCH_FAILURES" -ne 0 ]]; then
+            echo "::error::$DISPATCH_FAILURES lane dispatch/resume operation(s) failed."
+            exit 71
+          fi

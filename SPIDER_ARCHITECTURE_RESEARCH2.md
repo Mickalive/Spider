@@ -45,33 +45,36 @@ No agent may promote a claim because it sounds plausible.
 
 A claim can enter Product Core only after a frozen gate and independent audit justify that level. A rejected claim remains in the registry and Codex.
 
-## 4. Independent parallel lanes
+## 4. Scientific lanes, Scout and Global Research Director
 
-Research 2.0 has no global research cycle.
-
-Core lanes:
+Research 2.0 keeps six independent scientific execution lanes:
 
 - Graph
 - Physics
 - Runtime
 - Product
 - Intel
+- Frontier
 
-plus an open Frontier lane whose mandate is to generate and test materially orthogonal, high-upside hypotheses. Frontier is specifically authorized to search beyond what pre-2.0 already knows.
+Each scientific lane still owns its branch `lab2/<lane>`, immutable experiment transaction, checkpoints, state, code scope and independent audit.
 
-Each lane has its own:
+However, NEW research direction is global.
 
-- persistent branch `lab2/<lane>`;
-- concurrency group;
-- immutable work request;
-- experiment id;
-- checkpoints;
-- state;
-- continuation decision.
+A permanent non-scientific **Scout** control lane runs before the Global Research Director. Scout maintains broad situational awareness across the Codex, lane trajectories, general agent knowledge and shallow external reconnaissance. It does not create claims, freeze experiments or decide allocations.
 
-A lane never waits for another lane merely for synchronization.
+The **Global Research Director** reads the Scout brief plus the full accepted Codex and chooses the most promising next objective for every scientific lane. It may:
 
-Cross-lane evidence is consumed from the Codex or exact immutable commits. Cross-lane dependencies may affect priority but do not become workflow `needs:` barriers unless the scientific design strictly requires it.
+- CONTINUE the current thread;
+- PIVOT to a different claim/problem;
+- PARK a thread;
+- REOPEN a dormant/stalled direction with a new objective;
+- TERMINATE a bounded thread.
+
+A lane handoff's `next_question` is therefore advisory continuity state, not an authorization to self-dispatch.
+
+Already-frozen experiments are completed under their frozen design. Pre-freeze work may be superseded by a new Global Director mandate.
+
+Cross-lane evidence is consumed from the Codex or exact immutable commits. Cross-lane dependencies inform Director choices but do not become hard workflow barriers unless the scientific design strictly requires it.
 
 ## 5. One standard experiment transaction
 
@@ -158,22 +161,41 @@ The factory must survive model failures, GitHub retries and partial runs.
 - every failed stage writes a durable receipt;
 - no old work request may be consumed merely because it is the newest file;
 - no global all-or-nothing recovery;
-- no workflow depends on push-trigger recursion;
-- continuation uses explicit `workflow_dispatch`;
-- scheduled pulses repair sleeping transitions;
-- chained self-relaunch is bounded; scheduled pulses provide liveness;
+- no scientific lane self-dispatches a child experiment from its local handoff;
+- Codex synchronization wakes the next global direction pulse through canonical main updates;
+- every pulse runs Scout -> Global Research Director -> dispatch/resume;
+- scheduled pulses repair sleeping transitions and re-evaluate stopped/idle lanes;
+- frozen transactions resume independently of new direction decisions;
+- pre-freeze work is resumed only when still consistent with the Director mandate, otherwise it may be superseded;
 - per-lane concurrency prevents duplicate simultaneous work;
 - the pulse never dispatches a lane already queued or running.
 
-## 10. Research allocation
+## 10. Global research direction
 
-The factory should prioritize work roughly by:
+The Global Research Director uses judgment, not a fixed numerical score.
 
-`information_gain * claim_centrality * product_leverage * uncertainty_reduction / cost / measurement_risk`
+It reasons from:
 
-This is guidance, not a magic score.
+- the complete accepted Codex and claim state;
+- the Scout's broad reconnaissance brief;
+- lane missions and current liveness;
+- recent and historical research trajectories;
+- marginal information expected from another experiment in the same thread;
+- neglected or newly unblocked claims;
+- cross-lane dependencies;
+- product/scientific leverage;
+- real cost and measurement readiness;
+- general knowledge about autonomous agents, clearly separated from SPIDER evidence.
 
-A proposed experiment is low priority if neither a positive nor a negative result could change a scientific or product decision.
+The key question is:
+
+> Given everything SPIDER currently knows, what is the most promising next problem for each lane?
+
+The Director may deliberately continue a deep thread when it remains highest-value. Concentration/tunnel indicators are diagnostic warnings only, never mechanical quotas.
+
+A proposed experiment is low priority if neither a positive nor a negative result could change a scientific, architectural or product decision.
+
+Scout handles breadth. Intel or the appropriate lane handles deep verification.
 
 Frontier remains deliberately exploratory. It may investigate attractors, metastability, committors/barriers, directed geometry, characteristic times, entropy/flux, effective dimension, multi-scale dynamics, causal effect factorization, incremental computation, program synthesis, cache invalidation, process mining, verification, uncertainty, or ideas not yet named.
 
