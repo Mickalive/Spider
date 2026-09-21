@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "lane": "runtime",
+  "github": {
+    "run_id": null,
+    "note": "No CI run id available in this environment; execution was a local autonomous EXECUTE within the SPIDER worker workspace."
+  },
+  "git": {
+    "head_commit": "611585ed",
+    "head_commit_subject": "R2 runtime: execution base EXP-RUNTIME-35551516706",
+    "frozen_inputs_commits": [
+      "3c22ae6f R2 runtime: allocate EXP-RUNTIME-35551516706",
+      "03a5ffcc R2 runtime: freeze EXP-RUNTIME-35551516706",
+      "611585ed R2 runtime: execution base EXP-RUNTIME-35551516706"
+    ],
+    "note": "No git add/commit/push/switch/reset was performed during EXECUTE (scope discipline). All run outputs are uncommitted working-tree files; frozen inputs are committed and unmodified."
+  },
+  "environment": {
+    "python": "3.12.14",
+    "brotli": "1.2.0",
+    "nginx": "1.24.0 (Ubuntu) at /usr/sbin/nginx, proxy module present (--http-proxy-temp-path), gzip_static module present",
+    "platform": "linux",
+    "ports": {
+      "origin": 18794,
+      "nginx_proxy": 18080
+    },
+    "substrate": "local nginx proxy_cache reverse proxy in front of a local Python ThreadingHTTPServer origin; HTTP/1.1, no TLS"
+  },
+  "reproduce": {
+    "workdir": "research/experiments/EXP-RUNTIME-35551516706",
+    "command": "python3 run_experiment.py",
+    "code": "research/experiments/EXP-RUNTIME-35551516706/run_experiment.py",
+    "fixtures": "research/experiments/EXP-RUNTIME-35551516706/payload_manifest.json",
+    "nginx_config": "research/experiments/EXP-RUNTIME-35551516706/nginx_cache.conf",
+    "note": "Full run reproduces deterministically from SEED=44; payload generation and cell order are deterministic; nginx cache warm-up timing (1-3s sleeps) adds wall-clock variation only. Re-running rebuilds raw_cell_results.jsonl."
+  },
+  "inputs": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/request.json",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/spec.json",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/prereg.md",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/freeze.json",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/handoff.json",
+      "role": "parent_handoff"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/result.json",
+      "role": "parent_result"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/run_experiment.py",
+      "role": "parent_protocol"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/run_experiment.py",
+      "sha256": "8ad331efa6dde6ace02cc54e4799936db1ef243d4e03a10f655945e45d176569",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/payload_manifest.json",
+      "sha256": "4f0ca35cfc376eecfd5c831968b3da76d02e4ff2c4257f73fc38525032590594",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl",
+      "sha256": "7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/summary.json",
+      "sha256": "ba119d2a70c76e27cf4037d0310fd46850872c178fb9c51a8572e1c29474aa4e",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/hit_vs_dynamic.json",
+      "sha256": "9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/nginx_cache.conf",
+      "sha256": "c6ef7a22c5ef8cdbc31cfe33f693301b94bfdd37d67d6452b34fa3d56e383436",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/run.log",
+      "sha256": "dafea9e8a9c522bef2b9f642f0eb38fd20bfd02e25d5b4a2332cc395bd39f60d",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/result.json",
+      "sha256": "b04b5c88362da521bb07068b11c347c2cb12a3b4d27c9ee72bf1d3810afab0c4",
+      "role": "packet"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35551516706/report.md",
+      "sha256": "080f0e84c26f24d48756a7e365a15469949e7d69e4f4fc1115c16459cfcc31d5",
+      "role": "packet"
+    }
+  ]
+}

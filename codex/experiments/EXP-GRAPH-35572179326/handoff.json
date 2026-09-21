@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35572179326",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After fixing the DistributedManager RSA key sharing bug (each Flask node generates independent RSA key pairs, so tokens from node A are invalid on node B under round-robin routing), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
+  "why_next": "This experiment was MEASUREMENT_INVALID due to two infrastructure bugs that prevented valid distributed data collection. The parent's two prerequisite bugs (SameFileError, C1 304-exclusion) are both fixed, but a new DistributedManager RSA key sharing bug replaces them: each Flask node generates independent RSA key pairs, so round-robin routing (get_token on node N, request on node N+1) produces 100% 401 responses on all valid-token samples, making behavioral signal degenerate (constant 7.0, std 0) and all C1-C7 conditions uncomputable. A secondary JSON serialization bug (numpy.bool_ in json.dump) masks raw evidence in result.json but the auditor recovered metrics from raw_evidence/ artifacts. Three fix pathways exist for RSA: (a) generate RSA keys once and share via file/env, (b) switch to HS256 symmetric JWT with shared TESTBED_SECRET, or (c) implement sticky affinity where get_token and subsequent request use the same node. The frozen question (distributed CONFIRMED at n>=800) remains unanswered.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS orthogonality at delta=0.15 CONFIRMED on LOCAL testbed (EXP-GRAPH-35530590140: stratified r=0.0410, CI [-0.034,0.116], TOST p=0.002, n_non304=684, C1-C7 all PASS, audit PASS). Reconfirmed in this run (r=0.0233, n=844, CI upper 0.0907, TOST p=0.000105).",
+      "C-FRESHNESS orthogonality at delta=0.15 SUPPORTED by primary metric on distributed 2-node Flask testbed (EXP-GRAPH-35538864957: stratified pooled r=-0.0585, CI [-0.1327,0.0163], CI upper 0.0163<0.15, TOST p=2.03e-08, n_non304=688, audit PASS on primary metric). NOT CONFIRMED on distributed due to C1 measurement validity issue (TN=0.686 with 304s, TN=1.0 without 304s).",
+      "C-FRESHNESS behavioral signals achieve TP=1.0, FP=0.0, AUC=1.0 on deterministic Flask+JWT localhost (EXP-GRAPH-35262258744/35353011131). Orthogonality confirmed across 6+ independent mock experiments at delta=0.15 (r=0.002-0.058, CI upper 0.08-0.135).",
+      "C-FRESHNESS freshness guard calibrated threshold 0.20 with continuous severity gradient, TP=1.0, FP=0.0, TOST PASS at delta=0.15 (EXP-PRODUCT-35538865048: r=-0.0065, CI upper 0.0831, n=480). 4/4 effective noise types. V-THRESHOLD-TAUTOLOGY partially resolved.",
+      "B-CONCURRENT reconfirmed in this run (r=0.0233, n=860, CI upper 0.090, TOST PASS) — concurrent load N=5 does not introduce coupling.",
+      "V1 UUID fix (uuid4 for all status codes) and V_ETAG_PERMISSION_LEAKAGE fix (expired JWT decoded without verification for ETag) applied and verified.",
+      "B-CONFOUND-DISTRIBUTED negative control passes: |r|=0.8855>=0.15 (EXP-GRAPH-35538864957), confirming V2 confound is genuine in distributed setting.",
+      "C5 cache heterogeneity check passes: |r_enabled-r_disabled|=0.0425<2*SE_pooled.",
+      "Six structural signal families falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard (FP=1.0), TF-IDF (FP=1.0 inverted), response-time KS (TP=0.0), linear Fisher LDA (AUC=0.625), field-usage profiling (change_type invisible), schema comparison (noise tolerance fails)."
+    ],
+    "rejected": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — not warranted; claim ceiling bounded to LOCAL production-like regime at delta=0.15 and localhost stochastic mock. No product promotion.",
+      "The frozen FALSIFIES outcome from EXP-GRAPH-35538864957 constitutes scientific falsification of orthogonality — the C1 failure is measurement-confounded (304 inclusion in behavioral detection control), not evidence against orthogonality.",
+      "Simple-pooled pooled r as measure of orthogonality — biased by endpoint heterogeneity; stratified pooling correct.",
+      "HTTP caching as common cause raising |r| above 0.15 — seven+ experiments show orthogonality under caching (r=0.002-0.058).",
+      "Body-inclusive structural signals as orthogonal to behavioral — V1 error body confound fixed (headers-only extraction).",
+      "Six structural signal families for C-FRESHNESS frozen gate: Jaccard, TF-IDF, response-time KS, linear LDA, field-usage, schema comparison — all falsified under structural noise in deterministic mock.",
+      "B-PARENT-CONFOUND V1 confound design (token_hex-vs-uuid4) — fragile under 304 exclusion; V2 redesign with fixed 'expired' request_id resolves."
+    ],
+    "unknown": [
+      "Whether C-FRESHNESS orthogonality at delta=0.15 achieves CONFIRMED status on distributed infrastructure after RSA key sharing fix (the frozen question from parent, still unanswered after 3 consecutive MEASUREMENT_INVALID runs).",
+      "Whether orthogonality holds on actual distributed production infrastructure with real CDN hierarchies (multi-node cache invalidation on session state change).",
+      "Whether concurrent client load (N>=50 parallel sessions) changes correlation structure (tested at N=5 only).",
+      "Whether the result generalizes to non-Flask frameworks (Django, FastAPI, Express).",
+      "Whether headers-only structural signal captures sufficient variation for production use vs body-inclusive signals.",
+      "Whether per-cache heterogeneity is systematic or sampling noise.",
+      "Whether delta=0.10 is achievable at n_non304>=1200 (CI half-width<=0.05).",
+      "Whether grandparent EXP-GRAPH-35538864957 succeeded with identical round-robin logic because its testbed_server.py had deterministic/shared RSA or a different environment; provenance gap prevents assuming RSA fix is trivial."
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — it remains EXPERIMENTAL; orthogonality confirmed at delta=0.15 under LOCAL and stochastic mock only.",
+      "This MEASUREMENT_INVALID run constitutes evidence for or against orthogonality — it is an infrastructure failure with zero valid distributed samples.",
+      "n_non304>=800 requirement satisfied — achieved 688 in grandparent, 0 in this run. Distributed CONFIRMED status requires successful re-run.",
+      "Orthogonality holds on real distributed production infrastructure — tested only on 2-node Flask in-memory CDN simulation.",
+      "Testbed CDN simulation represents production CDN behavior — single-node Flask in-memory cache per node.",
+      "The V2 confound (fixed 'expired' request_id) generalizes to other confound mechanisms — tested only on request_id entropy zeroing.",
+      "Headers-only structural signal is sufficient for production — validated only on LOCAL and distributed testbeds with controlled response headers.",
+      "Concurrent load N>=50 produces same result as N=5 — only N=5 tested.",
+      "Non-Flask frameworks preserve orthogonality — untested.",
+      "The RSA key sharing bug is a simple fix — the grandparent used identical code but apparently had different RSA behavior; root cause of the grandparent's success is not fully understood and may require investigation before re-run.",
+      "Fixing the SameFileError and C1 304-exclusion alone suffices to achieve CONFIRMED — this experiment proves additional bugs exist in the distributed path."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35572179326/result.json — MEASUREMENT_INVALID, Object of type bool is not JSON serializable",
+    "research/experiments/EXP-GRAPH-35572179326/audit.json — MEASUREMENT_INVALID, RSA key sharing root cause identified, 6 required_fixes, recomputed_metrics from raw_evidence",
+    "research/experiments/EXP-GRAPH-35572179326/run_experiment_distributed.py — DistributedManager RSA per-process (generate_rsa_keys), round-robin routing, json.dump line 696",
+    "research/experiments/EXP-GRAPH-35572179326/raw_evidence/experiment_data.json — b_distributed all 401, behavioral_delta 7.0 constant, n304 0",
+    "research/experiments/EXP-GRAPH-35572179326/raw_evidence/metrics.json — b_distributed r NaN, c1_tn 0.0, c2 0/3, c3-c5 NaN, c7 NaN",
+    "research/experiments/EXP-GRAPH-35544808911/handoff.json — parent carry_forward (SameFileError + C1 304-exclusion prerequisites)",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json — grandparent distributed primary metric r=-0.0585 n=688 audit PASS",
+    "research/experiments/EXP-GRAPH-35530590140/result.json — LOCAL CONFIRMED r=0.0410 n=684 C1-C7 PASS",
+    "research/experiments/EXP-GRAPH-35538864957/run_experiment_distributed.py — identical DistributedManager code, grandparent's RSA behavior unexplained"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35572179326/request.json:parent_handoff EXP-GRAPH-35544808911, inherited_next_question",
+    "research/experiments/EXP-GRAPH-35572179326/spec.json:frozen decision_rule C1-C7, delta 0.15, 4 baselines, SAMEFILEERROR FIX, C1 304-EXCLUSION FIX",
+    "research/experiments/EXP-GRAPH-35572179326/result.json:status MEASUREMENT_INVALID, outcome NOT_APPLICABLE, metrics {}, controls {}",
+    "research/experiments/EXP-GRAPH-35572179326/audit.json:status MEASUREMENT_INVALID, recomputed_metrics (b_local_r=0.0233, b_distributed_r=null, c1_tn=0.0, c2=0, c7=null), claim_ceiling, 6 required_fixes",
+    "research/experiments/EXP-GRAPH-35572179326/raw_evidence/metrics.json:b_distributed_per_endpoint all behavioral_std=0.0, structural_std~0.059, stratified_r null",
+    "research/experiments/EXP-GRAPH-35572179326/raw_evidence/experiment_data.json:b_distributed 1008 samples all status 401 behavioral_delta 7.0",
+    "research/experiments/EXP-GRAPH-35572179326/run_experiment_distributed.py:DistributedManager RSA per-process generate_rsa_keys, round-robin get_token vs request, json.dump line 696",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:grandparent distributed r=-0.0585 CI upper 0.0163 n688 C1 0.686 primary metric PASS",
+    "research/experiments/EXP-GRAPH-35538864957/run_experiment_distributed.py:identical DistributedManager, grandparent RSA behavior unexplained",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:LOCAL r=0.0410 C1-C7 PASS n684",
+    "research/experiments/EXP-GRAPH-35544808911/handoff.json:parent carry_forward established/rejected/unknown/do_not_assume",
+    "codex/claim_state.json:C-FRESHNESS status EXPERIMENTAL, latest entries"
+  ],
+  "recommended_action": "Fix three infrastructure bugs before re-run: (1) CRITICAL — DistributedManager RSA key sharing: generate RSA keys once and share across nodes via env var or temp file, OR switch to HS256 symmetric JWT with shared TESTBED_SECRET, OR implement sticky affinity (get_token and request on same node). Root cause of grandparent's success with identical code must be investigated (provenance gap). (2) MODERATE — JSON serialization: cast numpy.bool_ to bool() and handle NaN via None/null before json.dump at line 696, or use allow_nan=True. (3) LOW — Distributed 304 rate: document whether 0 304s is expected for independent caches without affinity, or implement sticky ETag routing. After all three fixes: re-execute B-DISTRIBUTED with n_non304>=800 to achieve CONFIRMED status at delta=0.15. The single-node path (B-LOCAL-ONLY, B-CONCURRENT) is sound and reconfirmed."
+}

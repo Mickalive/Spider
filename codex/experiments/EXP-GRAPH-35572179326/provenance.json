@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35572179326",
+  "lane": "graph",
+  "error": "Object of type bool is not JSON serializable"
+}

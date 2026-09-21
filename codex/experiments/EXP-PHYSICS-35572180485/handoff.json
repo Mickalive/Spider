@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35572180485",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can a corrected Bayesian model comparison with K=n_states=12 (frozen spec) and N>=1000 within-session shuffled-action permutations replicate the audit-corrected SURVIVES_CURRENT_TEST result on the stochastic 12-state SPA, thereby establishing the Bayesian paradigm as the first estimator to pass both C1 (null median < 0) and C3 (p < 0.001) and unblocking Phase 2 beyond-Markov K3-K2 testing?",
+  "why_next": "The as-executed Bayesian model comparison is MEASUREMENT_INVALID due to K=len(counts) bug, but the audit-corrected recomputation with K=12 shows the first C1+C3 pass across all 5 tested estimator families. If this replicates in a corrected frozen experiment (with N>=1000 to resolve the p=0.001996 > 0.001 resolution cap), the Bayesian paradigm would be the first valid detection method for discrete CMI on this SPA class, unblocking Phase 2 beyond-Markov K3-K2 testing. The Physics lane should not pivot until this 5th estimator family is properly evaluated — a corrected re-execution is low-cost, high-information, and resolves the highest-uncertainty question remaining.",
+  "carry_forward": {
+    "established": [
+      "True I(Y;A|Z) = 1.52 bits on stochastic 12-state SPA (audit-confirmed, parent chain, EXP-PHYSICS-35530591329)",
+      "Plug-in KL alpha sweep tradeoff is monotonic and irreconcilable on this SPA at N=5000 (EXP-PHYSICS-35530591329)",
+      "Entropy-rate CMI does NOT bypass per-stratum KL bias — intrinsic to Laplace smoothing on discrete spaces (EXP-PHYSICS-35538866166)",
+      "Laplace smoothing inflates H(Y|Z,A) more than H(Y|Z) due to cell-count inflation in (z,a) conditioning space (EXP-PHYSICS-35538866166 audit V1)",
+      "KSG CMI k=5 is insensitive (K3=0.000560) but achieves null centering; LR chi2 collapses history (K2=K3 exactly) — both closed on this SPA class (EXP-PHYSICS-35482477045)",
+      "Deterministic/stochastic strata mixing is NOT the cause of bias — CANDIDATES redesign (0% deterministic) yields identical bias (EXP-PHYSICS-35470449605)",
+      "Bias-corrected estimators (equal-weight, median, KNN) are rejected — bias is intrinsic to plug-in PMI estimation across varying-size strata (EXP-PHYSICS-35445596894)",
+      "Bayesian model comparison with corrected K=12: null median -78 to -131 nats (PASS C1), observed log BF 168-643 nats exceeds max null (PASS C3 via percentile, p=0.001996 > 0.001 due to N=500 cap) — AUDIT CORRECTED RECOMPUTATION, hypothesis-generating only (this experiment audit.json:recomputed_metrics.corrected_K12_metrics)",
+      "As-executed K bug (K=len(counts) instead of K=12) explains entire +3700-4000 nat upward null bias — single-bug root cause confirmed by audit recomputation (this experiment audit.json V1-formula-K-mismatch)"
+    ],
+    "rejected": [
+      "Plug-in KL estimator class with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} for simultaneous C1+C3 on this SPA (EXP-PHYSICS-35530591329)",
+      "Entropy-rate CMI with alpha in {0.1, 0.5, 1.0} for simultaneous C1+C3 on this SPA (EXP-PHYSICS-35538866166)",
+      "Hypothesis that per-stratum KL bias is estimator-specific — FALSIFIED, bias is intrinsic to Laplace smoothing (EXP-PHYSICS-35538866166)",
+      "KSG CMI k=5 for CMI detection on this discrete SPA — insensitive (EXP-PHYSICS-35482477045)",
+      "LR chi2 for beyond-Markov detection — history collapse (EXP-PHYSICS-35476270440)",
+      "Hyperparameter tuning (reduced smoothing alpha<=0.1) as remedy for plug-in KL (EXP-PHYSICS-35530591329)",
+      "Bias-corrected estimators (equal-weight, median, KNN) as remedy (EXP-PHYSICS-35445596894)",
+      "Entropy-rate CMI via Laplace-smoothed histogram (alpha 0.1, 0.5, 1.0) for C1+C3 on this SPA (EXP-PHYSICS-35538866166)"
+    ],
+    "unknown": [
+      "Whether corrected K=12 Bayesian result replicates in a frozen re-execution with N>=1000 permutations (audit recomputation is hypothesis-generating, not confirmatory)",
+      "Whether N=50000 resolves the p-threshold cap (audit notes p=0.001996 with N=500 perms, would be <0.001 with N>=1000)",
+      "Whether the Bayesian paradigm maintains valid null centering on production Web data with high-cardinality state spaces",
+      "Whether Phase 2 beyond-Markov K3-K2 testing passes under corrected K=12 (audit-corrected K3-K2 = 79-235 nats positive, untested at N>=1000)",
+      "Whether the parent EXP-PHYSICS-35476270440 null_mean -213.7 nats discrepancy is due to K handling or shuffle framework differences",
+      "Whether alternative Bayesian methods (WAIC, LOO-CV, fractional Bayes factors) achieve valid null centering on this SPA class"
+    ],
+    "do_not_assume": [
+      "The MEASUREMENT_INVALID verdict means Bayesian model comparison fails as a detection method. The as-executed packet is invalid, but audit-corrected recomputation with K=12 shows SURVIVES_CURRENT_TEST — this is hypothesis-generating positive, not a failure.",
+      "The Bayesian paradigm is validated for C-WEB-DYNAMICS. All evidence is synthetic SPA simulation; C-WEB-DYNAMICS concerns real Web dynamics. Validation requires production Web data.",
+      "The K bug (K=len(counts) vs K=12) is a trivial typo. It is a material implementation error that reversed the entire scientific conclusion: from 'all 5 estimator families fail' to 'the 5th family (Bayesian) passes'. The corrected recomputation must be frozen and re-executed.",
+      "C-WEB-DYNAMICS is falsified or closed. The claim remains HYPOTHESIS across 30+ experiments. This experiment provides the first positive signal from a valid estimator paradigm on this SPA class.",
+      "The Physics lane has exhausted all detection approaches. The Bayesian pathway requires a corrected frozen re-execution before any pivot is warranted.",
+      "The 0.933-bit K2 PMI signal (established in parent chain) and the Bayesian log BF 168-643 nats are on the same scale — they are fundamentally different quantities (PMI in bits vs Bayes factor in nats) and not directly comparable.",
+      "The corrected null_median of -78 to -131 nats means the Bayesian approach has weak sensitivity. The magnitude is well above the |100| nats threshold established in parent baselines."
+    ]
+  },
+  "dependencies": [
+    "Corrected Bayesian model comparison implementation with K=n_states=12 (not K=len(counts))",
+    "N>=1000 within-session shuffled-action permutations to resolve p<0.001 threshold (N=500 gives minimum p=0.001996)",
+    "Stochastic 12-state SPA design with CANDIDATES (validated: I(Y;A|Z)=1.52 bits, 48/48 pairs with 4 candidates)",
+    "N=5000 transitions (50 sessions x 100 steps, seed=42) as frozen measurement unit",
+    "Parent carry_forward established items (true CMI 1.52 bits, all prior estimator failures) remain valid"
+  ],
+  "evidence_refs": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/audit.json",
+      "hash": null,
+      "role": "audit",
+      "description": "MEASUREMENT_INVALID, V1 K bug, corrected K=12 recomputation: null_median -78 to -131 nats, observed log BF 168-643 nats, claim_ceiling NULL"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/result.json",
+      "hash": "79493b49b114d63582cfea2c4120bf9312daf9143e2946323ee0e2ef0fe5b2e5",
+      "role": "producer",
+      "description": "Producer FALSIFIES with buggy K: null_median +3621 to +4048 nats, C1_fail all alphas"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/spec.json",
+      "hash": "618964cfa88ab0e47eaa97c1f7f2b49dfc78da210c8ad13367a7f9d77d11611c",
+      "role": "spec",
+      "description": "Frozen spec: K=12, alpha_prior {0.5,1.0,2.0}, decision_rule C1/C3/C6/C7"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/prereg.md",
+      "hash": "4f4a35bb1794a937cd059baafef2cef8503dcff9df26c35119375b489bc44e91",
+      "role": "prereg",
+      "description": "Preregistration: K=12 in 4.3, C1 null median <0 in 6, C3 p<0.001"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/handoff.json",
+      "hash": "f28aa7171c1240244620b9ed22abd33868f1c9838041fb7038ef5785845a37c9",
+      "role": "parent_handoff",
+      "description": "Parent carry_forward: 4 families exhausted, Bayesian as orthogonal attack vector"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py",
+      "hash": "5f3f82520c81003e84b1ee29672f254bfcb8583d8852f3bcbe06c966cdf4d01e",
+      "role": "code",
+      "description": "K=len(counts) bug at line 234-235 vs frozen spec K=12"
+    },
+    {
+      "path": "codex/claim_state.json",
+      "hash": null,
+      "role": "codex",
+      "description": "C-WEB-DYNAMICS HYPOTHESIS across 30+ experiments, C-MEAS-VALID status history"
+    }
+  ],
+  "recommended_action": "Execute a corrected frozen experiment with K=n_states=12 (as specified in frozen spec.json measurement_validity items 4-6) and N_SHUFFLE>=1000 (to resolve p<0.001 threshold). Use identical data (seed=42, N=5000, same SPA design) and within-session shuffle framework. This is the minimum-viable correction: a single-line code fix (K=12 instead of K=len(counts)) with high expected information gain. If corrected K=12 replicates audit-corrected SURVIVES_CURRENT_TEST with N>=1000, proceed to Phase 2 beyond-Markov K3-K2 testing. If corrected K=12 fails, then the Physics lane should pivot to continuous-state estimators (KDE/kNN on embeddings) or production Web data. Do NOT abandon the Bayesian pathway or pivot the Physics lane until this corrected re-execution is complete."
+}

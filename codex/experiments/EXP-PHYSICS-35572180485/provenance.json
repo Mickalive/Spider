@@ -1,0 +1,58 @@
+{
+  "experiment_id": "EXP-PHYSICS-35572180485",
+  "lane": "physics",
+  "request_hash": "72cae1a7e0756d1bc7b54392818e1ca8a7896359ec5c5453d7f989bed96c4681",
+  "freeze_hash_prereg": "4f4a35bb1794a937cd059baafef2cef8503dcff9df26c35119375b489bc44e91",
+  "freeze_hash_request": "cb4ffd872907c952bb31188da2356979883f412fc30011ee42d25cdc6ef4d3f9",
+  "freeze_hash_spec": "618964cfa88ab0e47eaa97c1f7f2b49dfc78da210c8ad13367a7f9d77d11611c",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35538866166",
+    "sha256": "f28aa7171c1240244620b9ed22abd33868f1c9838041fb7038ef5785845a37c9"
+  },
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py"
+  ],
+  "environment": {
+    "python_version": "3.12.x",
+    "numpy_version": "2.5.3",
+    "platform": "linux"
+  },
+  "data_hashes": {
+    "stochastic_spa_n5000": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+    "deterministic_spa_n5000": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py",
+      "sha256": "5f3f82520c81003e84b1ee29672f254bfcb8583d8852f3bcbe06c966cdf4d01e"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/raw_results.json",
+      "sha256": "fe57f87a53e9cf1edbc4e9e1d097e21a1200881c35f5842ba3501f9ab64b1f7a"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/raw_output.txt",
+      "sha256": "addef07b23eb4b44bbfefb35c0885011a1d871224402d71f942a13a7468c1d50"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/result.json",
+      "sha256": "79493b49b114d63582cfea2c4120bf9312daf9143e2946323ee0e2ef0fe5b2e5"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/report.md",
+      "sha256": "009b5746d64443bd1bdf0dc029e2b545c56161bfb0e08a83e6febd6a034e68b7"
+    }
+  ],
+  "execution_sha": null,
+  "recorded_at": "2026-09-21T08:00:00+00:00",
+  "wall_seconds": 29.36,
+  "reproducibility": {
+    "seed": 42,
+    "n_transitions": 5000,
+    "n_sessions": 50,
+    "steps_per_session": 100,
+    "alpha_prior_values": [0.5, 1.0, 2.0],
+    "n_shuffle_permutations": 500,
+    "min_stratum_size": 5
+  }
+}
