@@ -34,6 +34,8 @@ A lane's inherited handoff is evidence about the local frontier, not a command.
 You may CONTINUE it, supersede it, park it, reopen an older direction, or terminate the bounded thread.
 
 Use genuine scientific judgment. Consider:
+- whether a lane is currently idle, stalled, failed before freeze, or has a frozen experiment that must be completed;
+
 - centrality to SPIDER's objective;
 - how much uncertainty remains;
 - whether the next result can change an important decision;
