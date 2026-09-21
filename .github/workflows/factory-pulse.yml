@@ -152,6 +152,8 @@ jobs:
 
           CONTROL_REV=$(python scripts/control_plane.py revision --root .)
           LANES=(graph physics runtime product intel frontier)
+          DIRECTION_MISSING=0
+          DISPATCH_FAILURES=0
 
           running_count() {
             local lane="$1"
@@ -217,12 +219,16 @@ jobs:
                 continue
               fi
               echo "SPIDER_RESUME_FROZEN lane=$LANE experiment=$ACTIVE_EXP stage=$ACTIVE_STAGE"
-              gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-frozen" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"
+              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-frozen" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
+                echo "::error::Failed to resume frozen lane=$LANE experiment=$ACTIVE_EXP"
+                DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
+              fi
               continue
             fi
 
             if [[ "$DIRECTION_READY" != true || ! -f .spider-runtime/director_allocation.json ]]; then
-              echo "SPIDER_DIRECTION_UNAVAILABLE lane=$LANE stage=$ACTIVE_STAGE; no NEW/PREFREEZE work dispatched"
+              echo "::error::SPIDER_DIRECTION_UNAVAILABLE lane=$LANE stage=$ACTIVE_STAGE; no NEW/PREFREEZE work dispatched"
+              DIRECTION_MISSING=1
               continue
             fi
 
@@ -237,7 +243,10 @@ jobs:
 
             if [[ "$ACTIVE_STAGE" == "PREFREEZE" && "$ACTIVE_HAS_MANDATE" == true && "$ACTION" == "CONTINUE" && "$ACTIVE_OLD_QUESTION" == "$NEW_QUESTION" ]]; then
               echo "SPIDER_RESUME_DIRECTED_PREFREEZE lane=$LANE experiment=$ACTIVE_EXP"
-              gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-directed-prefreeze" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"
+              if ! gh workflow run spider-lane.yml --ref main                 -f "lane=$LANE" -f "reason=resume-directed-prefreeze" -f "chain_depth=0"                 -f "resume_experiment_id=$ACTIVE_EXP"; then
+                echo "::error::Failed to resume directed prefreeze lane=$LANE experiment=$ACTIVE_EXP"
+                DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
+              fi
               continue
             fi
 
@@ -258,5 +267,17 @@ jobs:
               echo "SPIDER_DIRECTOR_DISPATCH lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
             fi
 
-            gh workflow run spider-lane.yml --ref main               -f "lane=$LANE" -f "reason=global-director-$ACTION" -f "chain_depth=0"               -f "director_mandate_b64=$MANDATE_B64"
+            if ! gh workflow run spider-lane.yml --ref main               -f "lane=$LANE" -f "reason=global-director-$ACTION" -f "chain_depth=0"               -f "director_mandate_b64=$MANDATE_B64"; then
+              echo "::error::Failed Director dispatch lane=$LANE action=$ACTION claim=$TARGET_CLAIM"
+              DISPATCH_FAILURES=$((DISPATCH_FAILURES+1))
+            fi
           done
+
+          if [[ "$DIRECTION_MISSING" -ne 0 ]]; then
+            echo "::error::Global direction was unavailable while one or more lanes required NEW/PREFREEZE work."
+            exit 70
+          fi
+          if [[ "$DISPATCH_FAILURES" -ne 0 ]]; then
+            echo "::error::$DISPATCH_FAILURES lane dispatch/resume operation(s) failed."
+            exit 71
+          fi
