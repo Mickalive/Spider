@@ -1,17 +1,23 @@
 {
   "experiment_id": "EXP-PRODUCT-35551517868",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "What is the FP-TP tradeoff curve when noise and refresh quality distributions overlap, and does the calibrated threshold remain at 0.20 under overlapping distributions?",
+  "hypothesis": "The calibrated threshold will increase as overlap increases, and the FP constraint will become binding, revealing a discriminating operating point.",
+  "falsifier": "If the calibrated threshold remains at 0.20 even with overlapping distributions (FP constraint never binding), or if orthogonality (TOST delta=0.15) breaks under overlap.",
+  "baselines": [
+    "baseline calibrated threshold 0.20 from EXP-PRODUCT-35538865048",
+    "baseline orthogonality r=-0.0065 CI upper 0.0831 from EXP-PRODUCT-35538865048"
+  ],
+  "positive_control": "A known stale token detection with high overlap (noise scores overlapping failure scores) should yield FP > 0 at threshold 0.20.",
+  "null_control": "No overlap (current design) should replicate baseline FP=0.0.",
+  "measurement_validity": [
+    "We must measure at least 480 samples per overlap condition for TOST comparability.",
+    "Noise and refresh distributions must be designed with controlled overlap degrees (0%, 25%, 50%, 75%, 100%)."
+  ],
+  "decision_rule": "If calibrated threshold increases with overlap and FP > 0 at threshold 0.20 for overlap >=25%, then the claim about discriminating operating point is supported. If threshold remains 0.20 and FP remains 0.0 for all overlaps, the claim is falsified.",
+  "product_consequence_positive": "If discrimination exists under overlap, we can calibrate a production threshold and move toward PRODUCT_CORE.",
+  "product_consequence_negative": "If no discrimination under overlap, the freshness guard cannot distinguish noise from real refresh failures in production, blocking PRODUCT_CORE.",
+  "estimated_cost": "Medium: requires redesigning noise/refresh injection with controlled overlap, running 5 conditions x 480 samples = 2400 total.",
+  "expected_information_gain": "High: resolves the open question about discriminating operating point and threshold tautology."
 }
