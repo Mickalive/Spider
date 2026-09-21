@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35651924708",
+  "lane": "product",
+  "github_run_id": "35651924708",
+  "execution_timestamp": "2026-09-21T21:00:00Z",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "installed_packages": {
+      "openai": "3.16.2",
+      "requests": "2.34.2",
+      "numpy": "2.5.3"
+    },
+    "api_keys_checked": [
+      "OPENAI_API_KEY",
+      "ANTHROPIC_API_KEY",
+      "GOOGLE_API_KEY",
+      "OPENROUTER_API_KEY",
+      "HF_TOKEN"
+    ],
+    "api_keys_available": [],
+    "external_services": {
+      "jsonplaceholder": {
+        "url": "https://jsonplaceholder.typicode.com",
+        "accessible": true,
+        "auth_required": false
+      }
+    }
+  },
+  "frozen_files": {
+    "request.json": {
+      "path": "research/experiments/EXP-PRODUCT-35651924708/request.json",
+      "sha256": "1410d3f28eb6c50a6c1cec91b6fba6589470b1e19d1746f57fe4219dbe398e4d"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-PRODUCT-35651924708/spec.json",
+      "sha256": "d15c19b471b1a242d4e9fd00f36cf5c3026190869fef99b2f5edb295f7c0ca8d"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-PRODUCT-35651924708/prereg.md",
+      "sha256": "9e4c0dc5791ce6d3f638563e510a17764bef1d65425ca1cd7baa3337744187f7"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-PRODUCT-35651924708/freeze.json",
+      "frozen_at": "2026-09-21T20:40:04.171154+00:00"
+    }
+  },
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35611617123",
+    "path": "research/experiments/EXP-PRODUCT-35611617123/handoff.json",
+    "sha256": "b052a347732259e7ef72607dab9c25578e3b0a938f9536c36c22f79e7afbca1f"
+  },
+  "artifacts_produced": [],
+  "commands_executed": [
+    "pip3 install openai requests numpy",
+    "python3 -c 'import openai; print(openai.__version__)'",
+    "env | grep -iE '(api_key|api_token|llm)'"
+  ],
+  "failure_category": "INFRASTRUCTURE_MISSING_CREDENTIAL",
+  "failure_description": "No LLM API key (OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY, OPENROUTER_API_KEY, HF_TOKEN) present in environment. Frozen spec requires real LLM API calls. Zero of 120 planned executions performed.",
+  "reproduction_recipe": "1. Set OPENAI_API_KEY environment variable with valid key\n2. Run: python3 research/experiments/EXP-PRODUCT-35651924708/run_experiment.py\n3. Expected: 120 LLM executions, metrics collection, bootstrap analysis"
+}
