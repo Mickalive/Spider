@@ -10,7 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RECENT_WINDOW = 60
 DEFAULT_LANE_HISTORY = 15
-TOTAL_BUDGET_UNITS = 100
 CLOSED_STATUSES = {"REJECTED", "SUPERSEDED", "SHIPPED"}
 
 
@@ -144,7 +143,6 @@ def main() -> None:
                     counts.items(), key=lambda kv: (kv[1], kv[0])
                 )
         tunnel = streak >= 5 or dominant_recent_count >= 8
-        min_continue_budget = min(35, 5 + 2 * max(0, streak - 3))
 
         priority = cfg.get("priority_claims") or []
         lane_recent_counts = {
@@ -174,7 +172,6 @@ def main() -> None:
             "dominant_recent_claim": dominant_recent_claim,
             "dominant_recent_count_last10": dominant_recent_count,
             "tunnel_flag": tunnel,
-            "min_continue_budget": min_continue_budget,
             "neglected_priority_claims": neglected_priority,
             "recent_claim_counts": lane_recent_counts,
             "recent_experiments": [compact_experiment(e) for e in history],
@@ -184,7 +181,6 @@ def main() -> None:
         "schema_version": 1,
         "cycle_id": str(args.cycle_id),
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "total_budget_units": TOTAL_BUDGET_UNITS,
         "reset_question": (
             "If SPIDER were discovered today with all accepted evidence, "
             "what should receive the next unit of research attention?"
