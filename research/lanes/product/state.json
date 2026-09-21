@@ -1,17 +1,17 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-35611617123",
-  "last_experiment_id": "EXP-PRODUCT-35572180893",
-  "last_verdict": "FALSIFIED \u2014 frozen spec.json decision_rule condition (c) triggers: orthogonality (TOST delta=0.15) breaks at 50% overlap (pearson r=0.080, CI upper 0.168 > 0.15, TOST p_upper=0.061). Secondary trigger: calibrated_threshold is None at 75% and 100% overlap (prereg step 4). Both are independent falsification paths per the frozen decision tree. However, the audit claim_ceiling correctly identifies that the 100% condition is tautological (identical distributions cannot be separated) and the orthogonality failure at 50% is marginal (12% above delta, non-monotonic, likely Type I under multiple testing at n=480). The maximum justified scientific finding is bounded discrimination under genuine Gaussian overlap: usable at 0-25% (threshold 0.20->0.25, orthogonality holds, FP moderate), marginal at 50% (threshold 0.27, orthogonality fragile), unusable at >=75% (no operating point). C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-35611617123",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Does the freshness guard's bounded discrimination (usable at 0-25% Gaussian overlap, marginal at 50%) transfer to production-like noise distributions (non-Gaussian, heavy-tailed, multimodal) on a real OAuth/OIDC endpoint \u2014 and does increasing n to >=800 at 50% overlap resolve the marginal orthogonality failure (CI upper 0.168 vs delta 0.15) under Bonferroni correction?",
+  "next_question": "Does the orthogonality boundary lie at ~25% Gaussian overlap (where RC-25%-TOST fails at n=480 with r=0.080) rather than 50% \u2014 and does n>=800 at 25% overlap resolve this failure under Bonferroni correction, establishing a stable usable envelope of 0-50%?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-21T16:33:17.562028+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "4e5fc8d05f8a5b948e9f7892bfeb81eb11ec2a667b509962363b5c2af983d4f7",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "571093cfed539e7e6e855500",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-21T16:59:38.109825+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "b052a347732259e7ef72607dab9c25578e3b0a938f9536c36c22f79e7afbca1f",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
