@@ -1,0 +1,10 @@
+{
+  "status": "failure",
+  "model": "opencode/nemotron-3.5-lightning-free",
+  "attempt": 8,
+  "exit_code": 76,
+  "category": "output-missing-pool-exhausted",
+  "github_run_id": "35544808911",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-21T00:50:34.422119+00:00"
+}

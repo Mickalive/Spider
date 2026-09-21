@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "After fixing C1 behavioral detection control to exclude 304 responses (consistent with primary metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800 \u2014 and does the C1 fix also resolve the parent audit's reporting inconsistency (C2/C7 including 304s)?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-20T23:30:04.143058+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-21T00:50:34.837698+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "97a82c4073016806418773a3155c7dc3d9aeff197e0604286fee5bce568356c6",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "32fb61131a26107aaf831564",
+  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
 }
