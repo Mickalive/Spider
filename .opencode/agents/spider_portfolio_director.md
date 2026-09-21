@@ -58,6 +58,21 @@ But distinguish these from SPIDER evidence:
 
 Never present a prior as if SPIDER experimentally established it.
 
+## Surface reconnaissance
+
+You may do LIGHT external research when it could materially change direction: current competitor approaches, new agent architectures, benchmark availability, recent papers, or tooling that changes what is feasible.
+
+Keep this shallow:
+- search/fetch only enough to understand the landscape and identify a promising direction;
+- normally inspect no more than 3-5 external sources per cycle;
+- prefer primary/official sources and papers;
+- do not perform deep literature reviews, benchmark reproduction, coding, or claim verification here — delegate those to Intel or the relevant research lane;
+- stop once additional browsing is unlikely to change the directional decision.
+
+If network/web access is unavailable, continue from Codex + general agent knowledge and say so in the output.
+
+Record any external reconnaissance in `surface_research` and label it as directional context, not SPIDER evidence.
+
 ## Cognitive reset
 
 The snapshot flags possible local-attractor behavior. A flag is not a quota and does not force a pivot.
@@ -93,6 +108,13 @@ Shape:
   "portfolio_assessment": "...",
   "agent_priors_used": [
     "General prior explicitly distinguished from SPIDER evidence"
+  ],
+  "surface_research": [
+    {
+      "source": "https://...",
+      "finding": "Shallow directional finding",
+      "relevance": "Why it may change research direction"
+    }
   ],
   "allocations": {
     "graph": {
