@@ -1,17 +1,17 @@
 {
   "lane": "graph",
   "human_paused": false,
-  "active_experiment_id": "EXP-GRAPH-35544808911",
-  "last_experiment_id": "EXP-GRAPH-35538864957",
-  "last_verdict": "FALSIFIES per frozen decision_rule \u2014 C1 behavioral detection control fails (mean TN=0.6863 < 0.85 threshold) due to measurement validity issue: 304 cache-hit responses are included in behavioral TP/TN calculation, where valid tokens with cache enabled produce 304 status codes that behavioral signal extraction maps to behavioral_delta=1.0 (status_code=304 -> default status_weight=0.5), causing false negative TN failures. Audit V1 confirms C1 passes when 304s are excluded (TN=1.0). Primary orthogonality metric is valid and independently passes equivalence: distributed endpoint-stratified pooled r=-0.0585, 95% CI [-0.1327, 0.0163], CI upper 0.0163 < 0.15, TOST p_upper=2.03e-08 < 0.05, n_non304=688. C2-C7 all PASS. Scientific ceiling: orthogonality at delta=0.15 is supported by primary metric on 2-node distributed Flask testbed with independent caches; C1 measurement validity issue prevents CONFIRMED status per frozen conjunctive rule.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-GRAPH-35544808911",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "After fixing C1 behavioral detection control to exclude 304 responses (consistent with primary metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800 \u2014 and does the C1 fix also resolve the parent audit's reporting inconsistency (C2/C7 including 304s)?",
+  "next_question": "After fixing the infrastructure bug (SameFileError in run_experiment_distributed.py line 368 where src and dst both resolve to the same testbed_server.py) AND fixing C1 behavioral detection control to exclude 304 responses (consistent with parent metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-21T01:38:03.432625+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "97a82c4073016806418773a3155c7dc3d9aeff197e0604286fee5bce568356c6",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-21T01:58:30.424964+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "9e6a5a3026db24c31e518deee1918c451e03049e7cff1d2aa2a83e2e8d60c136",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
