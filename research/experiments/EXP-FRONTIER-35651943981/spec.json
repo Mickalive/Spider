@@ -1,17 +1,55 @@
 {
   "experiment_id": "EXP-FRONTIER-35651943981",
   "lane": "frontier",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-RESIDUAL-NOVELTY"],
+  "question": "Does later-agent cost track residual novelty fraction rather than full task length, when task length and novelty fraction are independently controlled in a synthetic web-like testbed?",
+  "hypothesis": "The cost advantage of mechanism inheritance over cold exploration is negatively correlated with novelty fraction (Spearman rho < 0) and is not positively correlated with task length when novelty fraction is held constant. Specifically: (1) at 0% novelty, inheritance provides negligible advantage over cold; (2) at 100% novelty, inheritance provides no advantage; (3) the advantage is monotonically decreasing in novelty fraction; (4) at fixed novelty fraction, cost scales with novelty fraction, not with task length.",
+  "falsifier": "The hypothesis is FALSIFIED if any of: (a) Spearman rho(cost_advantage, novelty_fraction) >= 0 (positive or zero correlation — cost does not track residual novelty); (b) Spearman rho(cost_advantage, task_length) is significant and negative at fixed novelty fraction (cost tracks task length, not novelty); (c) cost_advantage at 0% novelty exceeds 0.15 (inheritance helps even when nothing is new — spurious mechanism); (d) cost_advantage at 100% novelty exceeds 0.10 (inheritance helps when everything is new — mechanism is not novelty-dependent).",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "description": "Second agent starts from scratch with no prior knowledge. Measures full-task cost without any inheritance.",
+      "expected_behavior": "Cost scales with task length; no novelty-dependent benefit."
+    },
+    {
+      "id": "B-REPLAY",
+      "description": "Second agent replays the exact action sequence from training. Measures lower bound on inherited cost when novelty is zero.",
+      "expected_behavior": "Near-zero cost at 0% novelty; fails completely at 100% novelty."
+    },
+    {
+      "id": "B-RETRIEVAL",
+      "description": "Second agent retrieves the most similar prior trajectory by task description similarity and adapts it. Measures retrieval-based inheritance without parameterized mechanisms.",
+      "expected_behavior": "Partial benefit at low novelty; degrades with novelty but better than cold at moderate novelty."
+    },
+    {
+      "id": "B-SPIDER-PARAM",
+      "description": "Second agent uses SPIDER's parameterized mechanism: distill_parameterized() from training observations, resolve() to match new task, bind() to fill parameters, execute(), verify().",
+      "expected_behavior": "Strong benefit at low novelty (parameter binding); degrades with novelty fraction."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-NOVELTY-GRADIENT",
+    "description": "Across the 5 novelty levels (0%, 25%, 50%, 75%, 100%), B-SPIDER-PARAM must show monotonically non-increasing cost_advantage. At 0% novelty, cost_advantage must exceed 0.20 (inheritance clearly helps). At 100% novelty, cost_advantage must be below 0.10 (inheritance clearly does not help).",
+    "pass_condition": "cost_advantage(0%) > 0.20 AND cost_advantage(100%) < 0.10 AND Spearman rho(cost_advantage, novelty) < -0.5"
+  },
+  "null_control": {
+    "id": "NC-ZERO-NOVELTY",
+    "description": "At 0% novelty (all parameter values seen in training), B-SPIDER-PARAM cost must not exceed B-COLD cost by more than 15%. If inheritance adds overhead when nothing is new, the mechanism is spurious.",
+    "pass_condition": "cost_advantage(0%) <= 0.15"
+  },
+  "measurement_validity": [
+    "Task length and novelty fraction must be independently controlled: the testbed generates tasks where the number of steps (length) and the fraction of novel parameter values (novelty) vary orthogonally.",
+    "Each (novelty_fraction, task_length) cell must have at least 10 independent task instances to enable stable per-cell cost estimation.",
+    "Novelty fraction is computed as the fraction of action-parameter values that do not appear in the training observation set, not as the fraction of action types.",
+    "B-SPIDER-PARAM must use the same distill_parameterized/resolve/bind/execute/verify pipeline as the Product kernel; no hand-tuned shortcuts.",
+    "B-RETRIEVAL must use cosine similarity over TF-IDF task descriptions without access to action-level detail.",
+    "B-COLD must use the same LLM model and budget as B-SPIDER-PARAM; no cold-start discount.",
+    "Task success rate must be reported per cell; cost metrics are computed only over successful task completions.",
+    "If >30% of tasks in any cell fail across all conditions, that cell is excluded from correlation analysis and reported as data-insufficient."
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST if ALL of: (1) Spearman rho(cost_advantage_spider, novelty_fraction) < 0 with permutation p < 0.05 (N=1000 permutations over task instances); (2) Spearman rho(cost_advantage_spider, task_length) is NOT significant (p >= 0.05) when novelty fraction is held constant within each novelty level; (3) null_control passes (cost_advantage at 0% novelty <= 0.15); (4) positive_control passes (cost_advantage at 0% > 0.20, at 100% < 0.10, rho < -0.5). FALSIFIED if (1) rho >= 0 or p >= 0.05; or (2) rho(task_length) is significant and negative within fixed novelty; or (3) null_control fails; or (4) positive_control fails. MEASUREMENT_INVALID if >30% task failure in any cell or independence of novelty/length is violated.",
+  "product_consequence_positive": "If C-RESIDUAL-NOVELTY survives, SPIDER's economic value proposition is validated: later agents pay only for genuine novelty, not full task re-exploration. This supports product promotion of parameterized inheritance as a work-compression mechanism and justifies end-to-end economics measurement with real LLM agents (C-LLM-INHERIT).",
+  "product_consequence_negative": "If C-RESIDUAL-NOVELTY is falsified, the core economic thesis of SPIDER is undermined: later-agent cost does not track residual novelty, meaning inheritance does not compress work. Product development should pivot from mechanism inheritance toward alternative value propositions (e.g., verification, freshness, delta repair).",
+  "estimated_cost": "Low. Synthetic testbed, no browser/network, no real LLM API calls for the primary test (simulated LLM cost via action-count proxy). Estimated 50-100 compute-hours for full grid (5 novelty x 3 length x 10 instances x 4 conditions x 5 reps). The primary test uses deterministic simulated costs; real LLM validation deferred to C-LLM-INHERIT.",
+  "expected_information_gain": "High. This is the first experiment to test C-RESIDUAL-NOVELTY (0 prior experiments). A clean positive or negative result changes the product economic thesis. The experiment is the smallest rigorous test: synthetic testbed with controlled novelty, no browser/LLM infrastructure dependency, deterministic cost proxy. Even a negative result is high-value because it falsifies the core economic claim before real infrastructure is invested."
 }
