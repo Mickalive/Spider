@@ -1,0 +1,55 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35538866166 - entropy-rate CMI on stochastic SPA
+========================================================================
+
+[VERIFY] CANDIDATES design-level check...
+[VERIFY] C6: PASS (48/48 pairs with 4 distinct candidates)
+
+[COLLECT] Stochastic SPA N=5000 (50 sessions x 100 steps, SEED=42)...
+[COLLECT] N=5000 SHA256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+
+[COLLECT] Deterministic SPA N=5000 (positive control)...
+[COLLECT] N=5000 SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (0.0s)
+
+[BUILD] Stochastic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701} K3={'deterministic': 77, 'stochastic': 764, 'total': 841, 'det_ratio': 0.09155766944114149}
+
+[BUILD] Deterministic SPA records...
+[BUILD] K3 records=5000
+
+========================================================================
+ALPHA SWEEP: entropy-rate CMI with alpha in {0.1, 0.5, 1.0}
+========================================================================
+
+--- alpha=0.1 ---
+  K2 (stochastic) = 0.330698 bits (0.1s)
+  K3 (stochastic) = 0.522768 bits (0.0s)
+  C1 null control: null_mean=0.240358 std=0.002144 |mean|=0.240358 (threshold 0.1) -> FAIL (30.0s)
+  C3 positive control: K3=0.522768 p=0.000999 -> PASS (39.6s)
+  Deterministic SPA control: K3=0.544414 bits (0.0s)
+
+--- alpha=0.5 ---
+  K2 (stochastic) = -0.181732 bits (0.1s)
+  K3 (stochastic) = -0.069526 bits (0.0s)
+  C1 null control: null_mean=-0.199775 std=0.000383 |mean|=0.199775 (threshold 0.1) -> FAIL (29.7s)
+  C3 positive control: K3=-0.069526 p=0.000999 -> FAIL (39.7s)
+  Deterministic SPA control: K3=-0.072899 bits (0.0s)
+
+--- alpha=1.0 ---
+  K2 (stochastic) = -0.267633 bits (0.1s)
+  K3 (stochastic) = -0.185652 bits (0.0s)
+  C1 null control: null_mean=-0.274689 std=0.000149 |mean|=0.274689 (threshold 0.1) -> FAIL (29.7s)
+  C3 positive control: K3=-0.185652 p=0.000999 -> FAIL (39.6s)
+  Deterministic SPA control: K3=-0.198581 bits (0.0s)
+
+[SCREENING] C1 passers: []
+[SCREENING] C3 passers: [0.1]
+[SCREENING] C1+C3 passers: []
+[SCREENING] C7 stratum buckets: 2 non-empty -> PASS
+
+[VERDICT] FALSIFIED-IN-SETTING
+[OUTCOME] FALSIFIES
+[REASON] C1: ALL alpha values have |shuffled-action null mean| >= 0.1 bits. Values: alpha=0.1 |mean|=0.240358, alpha=0.5 |mean|=0.199775, alpha=1.0 |mean|=0.274689.
+
+Saved raw_results.json (wall 210.6s)

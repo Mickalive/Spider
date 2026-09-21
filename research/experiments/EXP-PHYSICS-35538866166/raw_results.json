@@ -1,0 +1,214 @@
+{
+  "experiment_id": "EXP-PHYSICS-35538866166",
+  "seed": 42,
+  "alpha_values_tested": [
+    0.1,
+    0.5,
+    1.0
+  ],
+  "n_transitions_stochastic": 5000,
+  "sha_stochastic": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+  "n_transitions_deterministic": 5000,
+  "sha_deterministic": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "determinism_k2_stochastic": {
+    "deterministic": 366,
+    "stochastic": 1072,
+    "total": 1438,
+    "det_ratio": 0.2545201668984701
+  },
+  "determinism_k3_stochastic": {
+    "deterministic": 77,
+    "stochastic": 764,
+    "total": 841,
+    "det_ratio": 0.09155766944114149
+  },
+  "alpha_sweep": {
+    "alpha_0.1": {
+      "alpha": 0.1,
+      "k2_value_stochastic": 0.33069809596628597,
+      "k3_value_stochastic": 0.5227683846011715,
+      "k3_minus_k2": 0.1920702886348855,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "entropy-rate CMI (alpha=0.1)",
+        "alpha": 0.1,
+        "h_y_given_z": 3.1179927566212995,
+        "h_y_given_za": 2.7872946606550135
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "entropy-rate CMI (alpha=0.1)",
+        "alpha": 0.1,
+        "h_y_given_z": 3.152114739003033,
+        "h_y_given_za": 2.6293463544018616
+      },
+      "null_control": {
+        "observed": 0.33069809596628597,
+        "null_mean": 0.24035780936923157,
+        "null_std": 0.002144015326458939,
+        "abs_null_mean": 0.24035780936923157,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          0.24129341198992105,
+          0.2385661897451583,
+          0.23866495219945305,
+          0.23825533713227554,
+          0.2372129216329517
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": 0.5227683846011715,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": true,
+      "deterministic_control_k3": 0.5444136536039261
+    },
+    "alpha_0.5": {
+      "alpha": 0.5,
+      "k2_value_stochastic": -0.18173232432384667,
+      "k3_value_stochastic": -0.06952607619397577,
+      "k3_minus_k2": 0.1122062481298709,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "entropy-rate CMI (alpha=0.5)",
+        "alpha": 0.5,
+        "h_y_given_z": 3.284715515196957,
+        "h_y_given_za": 3.4664478395208036
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "entropy-rate CMI (alpha=0.5)",
+        "alpha": 0.5,
+        "h_y_given_z": 3.3411225726102436,
+        "h_y_given_za": 3.4106486488042194
+      },
+      "null_control": {
+        "observed": -0.18173232432384667,
+        "null_mean": -0.19977497629550361,
+        "null_std": 0.0003832293056856398,
+        "abs_null_mean": 0.19977497629550361,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.19956961614937718,
+          -0.20014293444708686,
+          -0.19996603466657792,
+          -0.20005909171746028,
+          -0.2004784700134974
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": -0.06952607619397577,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "deterministic_control_k3": -0.07289912718242908
+    },
+    "alpha_1.0": {
+      "alpha": 1.0,
+      "k2_value_stochastic": -0.2676325175947336,
+      "k3_value_stochastic": -0.1856515339386049,
+      "k3_minus_k2": 0.08198098365612871,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata_z": 1438,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "state",
+        "method": "entropy-rate CMI (alpha=1.0)",
+        "alpha": 1.0,
+        "h_y_given_z": 3.276673409304801,
+        "h_y_given_za": 3.5443059268995345
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata_z": 841,
+        "n_actions": 4,
+        "n_targets_y": 12,
+        "history_kind": "action",
+        "method": "entropy-rate CMI (alpha=1.0)",
+        "alpha": 1.0,
+        "h_y_given_z": 3.3365371892038067,
+        "h_y_given_za": 3.5221887231424116
+      },
+      "null_control": {
+        "observed": -0.2676325175947336,
+        "null_mean": -0.2746888555099431,
+        "null_std": 0.00014874455936607394,
+        "abs_null_mean": 0.2746888555099431,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          -0.274601875232531,
+          -0.274832412236222,
+          -0.27474640111895754,
+          -0.2747806722678394,
+          -0.27497175892989834
+        ]
+      },
+      "c1_pass": false,
+      "positive_control_k3": -0.1856515339386049,
+      "positive_control_p": 0.000999000999000999,
+      "c3_pass": false,
+      "deterministic_control_k3": -0.19858114674731953
+    }
+  },
+  "c1_passers": [],
+  "c3_passers": [
+    0.1
+  ],
+  "both_passers": [],
+  "c6_design_pass": true,
+  "c7_stratum_buckets": 2,
+  "c7_pass": true,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 343,
+      "total_records": 2147,
+      "observed_cmi": 0.11706939404087979,
+      "null_mean": 0.07920184944067774,
+      "null_std": 0.0011371457426079868
+    },
+    "10-19": {
+      "n_strata": 37,
+      "total_records": 433,
+      "observed_cmi": 0.23993525400832771,
+      "null_mean": 0.13022317362425143,
+      "null_std": 0.004939104786251719
+    },
+    "20-49": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_cmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_cmi": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "phase2": null,
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "reason": "C1: ALL alpha values have |shuffled-action null mean| >= 0.1 bits. Values: alpha=0.1 |mean|=0.240358, alpha=0.5 |mean|=0.199775, alpha=1.0 |mean|=0.274689.",
+  "wall_seconds": 210.62807536125183
+}
