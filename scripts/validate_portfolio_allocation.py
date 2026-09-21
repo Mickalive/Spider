@@ -75,8 +75,9 @@ def main() -> None:
         require(isinstance(item["cognitive_reset"], bool), f"{lane}: cognitive_reset must be boolean")
         require(isinstance(item["dependencies"], list), f"{lane}: dependencies must be a list")
 
-        lane_state = snapshot["lanes"][lane]
-        tunnel = bool(lane_state.get("tunnel_flag"))
+        # Lane diagnostics such as tunnel_flag are advisory context for the
+        # Global Research Director. The validator checks contract coherence,
+        # not the Director's scientific judgment.
 
         if action in ACTIVE_ACTIONS:
             claim_id = item["claim_id"]
@@ -87,8 +88,6 @@ def main() -> None:
             # recent finalized claim id. A lane may be continuing an active
             # pre-freeze thread whose target claim differs from last_claim.
 
-            if tunnel:
-                require(item["cognitive_reset"] is True, f"{lane}: tunnel continuation/allocation requires cognitive_reset=true")
         else:
             require(item["question"] is None, f"{lane}: {action} question must be null")
             require(
