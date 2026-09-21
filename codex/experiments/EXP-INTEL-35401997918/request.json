@@ -1,0 +1,20 @@
+{
+  "base_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T22:32:45.253897+00:00",
+  "experiment_id": "EXP-INTEL-35401997918",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C2 fails: with correct task-major ordering, |Spearman(R, canonical)| = 0.23 (p=0.31) and |Spearman(R, weighted)| = 0.21 (p=0.36), both below the 0.30 threshold; eta-squared(R, page_type) = 0.144 < 0.20. C1 passes (CV=0.70 > 0.10). C1 AND NOT C2 triggers FALSIFIED-IN-SETTING per spec.json decision_rule. The producer's claimed C2 pass was an artifact of definition-major data ordering (all DEF-FULL-MAP first, then all DEF-FORM-ONLY, then all ISOLATED-A-LINK), creating artificial monotonic structure. The density ratio is definition-sensitive (10x gap between DEF-FORM-ONLY and others) but does not significantly correlate with task type or recipe sensitivity in this N=21 sample. NC1 null control also fails: real eta-squared=0.144 vs shuffled mean=0.117, task-type structure not statistically significant (permutation p=0.23). C-MEAS-VALID status updated to REJECTED for the density-ratio MIXED metric approach.",
+  "inherited_next_question": "Given that linear combination recipes and density-ratio metrics both fail to break OECD/COINr degeneracy (mathematical identity and definition-artifact respectively), should the MIXED outcome program pivot to (a) a structurally non-linear third recipe (DOM hierarchy depth, conditional inclusion based on element relationships, semantic role weighting) that could produce rankings outside the canonical-weighted range, or (b) abandon dominance-based MIXED handling entirely and restrict density metric use to recipe-insensitive task-definition pairs only?",
+  "lane": "intel",
+  "origin_github_run_id": "35401997918",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35375593989",
+    "path": "research/experiments/EXP-INTEL-35375593989/handoff.json",
+    "sha256": "cef85ef795b040c02355a57bebd0ba40a0bfa3baa97d2d535539e6e269c13bc5"
+  },
+  "reason": "pulse",
+  "request_hash": "0b3411f5d3190d448ddb89c4a23bdd9b6f25876acea91e25fffdaa12821a5454",
+  "request_id": "11488a880d957265fef4007d",
+  "schema_version": 1
+}

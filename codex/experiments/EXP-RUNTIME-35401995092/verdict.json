@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35401995092",
+  "lane": "runtime",
+  "decision": "CONSTRAINED — C-MEAS-VALID advances. All 6 frozen SURVIVES_CURRENT_TEST conditions pass for the proxy->client chunked TE scope that was actually tested: (1) decompressed discrimination >= 0.3 for all cells, (2) determinism across paths holds (72/72, 0 mismatches), (3) B-RANDOM = 0.0 for all conditions, (4) CL-PASSTHROUGH = 0.5 reproduces parent, (5) 0 decompression errors on chunked responses, (6) CHUNKED-CACHED discrimination >= 0.3 for all cells (min 0.5). Audit PASS confirms all recomputed metrics match producer exactly. However, the frozen spec measurement_validity clause #5 requires origin to serve Transfer-Encoding: chunked (no Content-Length), but the origin was started with use_chunked=False for all 27 cells — chunked framing was synthesized only by the reverse proxy on the proxy->client leg. The frozen decision_rule's MEASUREMENT_INVALID clause ('chunked TE is not correctly applied (e.g., origin still sends Content-Length)') technically triggers for the upstream scope. The Director bounds the claim ceiling to proxy->client chunked downstream only, consistent with audit V1. Upstream origin->proxy chunked and the double-header artifact (audit V2) require fixes before end-to-end chunked TE coverage is claimed.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Advances from parent EXP-RUNTIME-35389142338 claim ceiling. Auth-aware caching with chunked TE on the proxy->client leg preserves decompressed body-only discrimination at 0.5 across 27 cells (3 content types x 3 sizes x 3 configs), matching Content-Length baseline. Determinism across transport framing holds (72/72). Zero decompression errors. All 6 controls pass. However, claim ceiling is bounded to: (a) localhost Python reverse proxy only, not real CDN; (b) proxy->client chunked downstream only — origin always served Content-Length (audit V1, use_chunked=False default); (c) double-header artifact on cache HIT (Content-Length + chunked, audit V2) not corrected; (d) 3-way error collapse mock design with deterministic brotli quality 6. Not VALIDATED due to upstream chunked gap and localhost-only scope. Not PRODUCT_CORE — no Product lane, no audit gate passed for production code."
+    }
+  ],
+  "product_action": "No product action. C-MEAS-VALID remains experimental. Real CDN infrastructure (Cloudflare/Fastly/Akamai) is the sole remaining blocker for product readiness, per parent handoff. The upstream chunked gap must be fixed first.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does iterative decompression survive Transfer-Encoding: chunked on the upstream origin->proxy leg (origin actually sending chunked without Content-Length, proxy reassembling) — fixing the origin use_chunked=False gap and double-header artifact before real CDN deployment?",
+  "reason": "The experiment successfully closes the parent's explicit Content-Length-only scope gap for downstream chunked TE. All frozen decision conditions pass for proxy->client chunked framing. However, the upstream scope (origin->proxy chunked reassembly) is untested because the origin server was configured with use_chunked=False. The audit identifies this as a measurement validity gap (V1, severity medium) and a double-header HTTP/1.1 violation (V2, severity low). These are implementation fixes, not scientific failures — the downstream measurement is valid and discriminating. The bounded claim advances the parent's finding but cannot close the chunked TE story without upstream coverage. Next experiment should fix the origin chunked configuration and verify the double-header correction before any real CDN investment.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35401995092/request.json",
+    "research/experiments/EXP-RUNTIME-35401995092/spec.json",
+    "research/experiments/EXP-RUNTIME-35401995092/freeze.json",
+    "research/experiments/EXP-RUNTIME-35401995092/result.json",
+    "research/experiments/EXP-RUNTIME-35401995092/audit.json",
+    "research/experiments/EXP-RUNTIME-35401995092/report.md",
+    "research/experiments/EXP-RUNTIME-35401995092/provenance.json",
+    "research/experiments/EXP-RUNTIME-35401995092/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35389142338/handoff.json",
+    "research/experiments/EXP-RUNTIME-35389142338/result.json"
+  ]
+}

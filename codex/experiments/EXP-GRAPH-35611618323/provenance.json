@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35611618323",
+  "lane": "graph",
+  "created_at": "2026-09-21T16:07:12.669182+00:00",
+  "git_commit": "521851654a8fa883d7f4b1fd09d5c3ef41718802",
+  "artifacts": [
+    {
+      "path": "raw_evidence/experiment_data.json",
+      "sha256": "dfc72b50a446cec659b3eb39558e9658bcc3116041db342c4bb642c8867c84ec",
+      "role": "raw"
+    },
+    {
+      "path": "raw_evidence/metrics.json",
+      "sha256": "ec0802c9cc64e0a37cca5e583669f6c9027bc4f9479c5332ad0a79e8f411df8b",
+      "role": "derived"
+    },
+    {
+      "path": "run_experiment_distributed.py",
+      "sha256": "88d003837ecbf30e0dfc9dff45da0caf3bb2b6f09b5f8e3bf8125c400e02e49d",
+      "role": "code"
+    },
+    {
+      "path": "testbed_server.py",
+      "sha256": "f116dffe71711338e77876a5af4a0d9278c72fada0fa87292616c1038f61fc11",
+      "role": "code"
+    },
+    {
+      "path": "testbed_server_v2.py",
+      "sha256": "664a2087125ce87cad638926b2145bec22139f2fc99bb2ac4440766978be300c",
+      "role": "code"
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "platform": "linux"
+  },
+  "commands": [
+    "python3 research/experiments/EXP-GRAPH-35611618323/run_experiment_distributed.py"
+  ],
+  "notes": "Distributed C-FRESHNESS orthogonality experiment with HS256 symmetric JWT fix and JSON serialization fix. C1 FAILS due to per-node SQLite session non-replication under round-robin routing. Outcome: FALSIFIES, status: COMPLETE."
+}

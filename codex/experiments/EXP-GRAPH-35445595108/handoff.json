@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35445595108",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Can a production-like testbed server be redesigned with a structural signal definition that is provably independent of behavioral state \u2014 specifically, header-only structural signal (ETag variation, Cache-Control variation, dynamic timestamp/request_id entropy) that excludes error response bodies entirely \u2014 and does orthogonality hold at delta=0.15 under this corrected measurement?",
+  "why_next": "This experiment (EXP-GRAPH-35445595108) tested C-FRESHNESS orthogonality on a production-like local testbed server with CDN simulation, OAuth2 middleware, and dynamic content. The testbed infrastructure is sound and functional (304 rate 31.67%, behavioral TP 1.0, genuine ETag/Cache-Control/PyJWT RS256). However, the measurement is invalid: the structural signal definition (hash(body)%10000) includes 401 error response bodies, which are constant when tokens expire (audit V1_CRITICAL_SHARED_VARIABLE_CONFOUND). This creates a forced correlation (r=0.375) that is an artifact of the signal definition, not evidence that CDN/OAuth/dynamic content breaks orthogonality. The testbed can be reused with corrected signal extraction. Key fix: define structural signal from headers-only or success-body-only, excluding error response bodies. B-FLASK-ONLY baseline must also be included to discriminate infrastructure-induced vs definition-induced correlation.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 under HTTP conditional caching with 304 manipulation at n=480 (EXP-GRAPH-35389145821): pooled r=0.0022, CI upper 0.0916 < 0.15, TOST p_upper=0.0006. Audit PASS.",
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 on stochastic Flask 3.1.3 + SQLite WAL + PyJWT HS256/RS256 on localhost (EXP-GRAPH-35353011131): pooled r=0.0463, CI upper 0.1353 < 0.15, TOST p_upper=0.011. n=480. Audit PASS.",
+      "C-FRESHNESS orthogonality confirmed at delta=0.15 on stochastic Flask+SQLite mock (EXP-PRODUCT-35434772331): pooled r=-0.0258, CI upper 0.064, TOST p_upper 5.6e-05. Second independent confirmation.",
+      "Behavioral signals (token validation, session state change, auth boundary shift, session_status_check) validated: TP=1.0 across all co-occurring conditions.",
+      "HTTP conditional caching (304 at 33.3% rate) does NOT break orthogonality.",
+      "Production-like testbed infrastructure is functional and reusable with corrected signal extraction."
+    ],
+    "rejected": [
+      "Stable public APIs (GitHub 403, JSONPlaceholder) as testbeds \u2014 zero variance, MEASUREMENT_INVALID (EXP-GRAPH-35409927045)",
+      "Structural signal hash(body)%10000 including error bodies produces valid orthogonality measurement \u2014 V1 confound: error body constant for expired tokens creates forced correlation",
+      "HTTP caching as common cause raising |r| above 0.15 \u2014 three experiments show orthogonality under HTTP caching",
+      "n=240 sufficient for delta=0.15 equivalence \u2014 n>=480 required"
+    ],
+    "unknown": [
+      "Whether orthogonality holds on production-like infrastructure with header-only or success-only structural signal definition",
+      "Whether CDN/OAuth/dynamic content features introduce genuine correlation (B-FLASK-ONLY baseline not executed)",
+      "Whether expired responses should carry structural headers in production APIs",
+      "What structural signal formulation satisfies independent extraction while retaining product relevance",
+      "Whether the result generalizes to non-Flask frameworks"
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE \u2014 status remains EXPERIMENTAL bounded to localhost mock",
+      "r=0.375 falsifies orthogonality on production-like infrastructure \u2014 measurement-invalid due to shared-variable confound",
+      "pooled r=0.0022 is true population correlation under production conditions \u2014 point estimate from localhost mock",
+      "Delta=0.10 confirmed for product deployment \u2014 only pooled CI passes",
+      "Production-like infrastructure features introduce correlation \u2014 untested due to measurement confound",
+      "r=0.375 represents genuine behavioral-structural coupling \u2014 definitional artifact of error-body hashing",
+      "Testbed CDN simulation represents production CDN behavior \u2014 single-node Flask in-memory cache"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35389145821/result.json \u2014 pooled r=0.0022 PASS",
+    "research/experiments/EXP-GRAPH-35353011131/result.json \u2014 pooled r=0.0463 PASS",
+    "research/experiments/EXP-PRODUCT-35434772331/result.json \u2014 pooled r=-0.0258 PASS",
+    "research/experiments/EXP-GRAPH-35445595108/result.json \u2014 r=0.375 MEASUREMENT_INVALID",
+    "research/experiments/EXP-GRAPH-35445595108/audit.json \u2014 V1_CRITICAL_SHARED_VARIABLE_CONFOUND",
+    "research/experiments/EXP-GRAPH-35445595108/testbed_server.py \u2014 functional, reusable",
+    "research/experiments/EXP-GRAPH-35409927045/handoff.json \u2014 parent MEASUREMENT_INVALID",
+    "codex/claim_state.json:C-FRESHNESS \u2014 EXPERIMENTAL status"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35445595108/request.json",
+    "research/experiments/EXP-GRAPH-35445595108/spec.json",
+    "research/experiments/EXP-GRAPH-35445595108/prereg.md",
+    "research/experiments/EXP-GRAPH-35445595108/freeze.json",
+    "research/experiments/EXP-GRAPH-35445595108/result.json sha256 3f7b8de174db29eabc4becd861798e208dfd6551898e08bd4dd2a36365ca6efb",
+    "research/experiments/EXP-GRAPH-35445595108/audit.json \u2014 MEASUREMENT_INVALID, V1_CRITICAL_SHARED_VARIABLE_CONFOUND",
+    "research/experiments/EXP-GRAPH-35445595108/testbed_server.py sha256 707106c6e4b235a921e81bc235b1bdd10caf3c8dcc1370a1d3e0f60f39197274",
+    "research/experiments/EXP-GRAPH-35445595108/run_experiment.py sha256 454f5b25bbeb06100e6318b17d0374f8975a78adcfa76f9a89511fa8e71a06f1",
+    "research/experiments/EXP-GRAPH-35445595108/raw_evidence/experiment_data.json sha256 367ca2e3576e7cd6c3d82387e522aab925dd13edf1a15c31fd7635ac75d49984",
+    "research/experiments/EXP-GRAPH-35389145821/result.json \u2014 localhost mock baseline",
+    "research/experiments/EXP-GRAPH-35353011131/result.json \u2014 stochastic mock baseline",
+    "research/experiments/EXP-GRAPH-35409927045/handoff.json \u2014 parent handoff",
+    "codex/claim_state.json:C-FRESHNESS \u2014 EXPERIMENTAL history"
+  ],
+  "recommended_action": "Re-run orthogonality on the existing production-like testbed with corrected structural signal extraction: (1) header-only structural signal (ETag variation, Cache-Control variation, dynamic timestamp hash, request_id entropy), excluding error response bodies entirely; OR (2) success-path-only body hash (2xx responses only). Execute B-FLASK-ONLY baseline (plain Flask without CDN/OAuth/dynamic content, same corrected signal extraction) to discriminate infrastructure-induced vs definitional correlation. Ensure the testbed emits ETag/Cache-Control headers even on 401 responses, or define structural signal from a channel unaffected by auth failure. The frozen decision_rule C1-C5 can be reused. n>=480, delta=0.15. The orthogonality question remains the highest-upside question for C-FRESHNESS product deployment."
+}

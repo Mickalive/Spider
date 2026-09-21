@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35434771791",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Re-evaluate C4_PIPELINE_PRESERVES_RANKING under the frozen definition (all 3 definitions x 2 recipes = 6 combinations as per spec.json decision_rule). Producer's C4 check in analyze.py line 224 uses all(ranking_agreement[d] for d in DEFINITIONS) which tests only 3 non-recipe combinations. Ranking_agreement artifact (analysis_output.json ranking_agreement) contains only 9 feature x definition entries, no recipe dimension. Report.md claim 'tag_entropy preserves ranking across ALL 6 definition x recipe combinations' is therefore ungrounded. Must compute per-recipe-iteration ranking preservation for both canonical and per-task weighted recipes and apply the frozen conjunctive criterion before claiming SURVIVES.",
+    "Execute the second frozen recipe (per-task weighted, each task samples roles independently p=0.5) which is in spec.json measurement_validity and decision_rule scope but absent from result.json M2_recipe_canonical_eta2 and analyze.py recipe_results. Recompute shows per-task recipe mean eta2 drops to ~0.36 for tag_entropy x DEF-FULL-MAP vs 0.92 canonical, materially affecting discrimination and ranking inference. C3 and C4 must be evaluated across both recipes.",
+    "Disclose and bound the hierarchy null-control proxy: NC1 uses y-coordinate as DOM depth proxy with exp(-0.3*y) where y>6000 yields underflow to 0 and early header y's (158-272) are identical across all page types, guaranteeing identical normalized density (3.693777130463341e-07) regardless of true hierarchy. This is not a test of true DOM tree depth; spec preregmd 8.2 note anticipates this approximation. Claim that 'normalization collapse is reproducible and complete' must be qualified as proxy-induced degeneracy, not validation of the parent M7 hierarchy formula on real depth.",
+    "Correct M7_ranking_agreement reporting: result.json M7_ranking_agreement lists only 4 true entries and omits the 5 false/degenerate ones present in analysis_output.json ranking_agreement (form_fraction x DEF-FORM-ONLY false, total_area x DEF-FORM-ONLY false, all ISOLATED-A-LINK trivial true due to 0/0). Producer's observation that ISOLATED-A-LINK eta2=0.0 is a definition-scope ceiling is disclosed, but the effective definition space is 2/3, not 3/3, narrowing generalizability.",
+    "Quantify representation loss from within-type template invariance and truncated-first-20 sample: because locatable_sample tags/roles/inForm/w/h are identical within type (audit recompute confirms), any between-type discriminative mapping trivially yields eta2 ~1 in the non-recipe pipeline. The test is therefore ranking preservation not magnitude. Current high eta2 (>=0.96) does not demonstrate robust pipeline discrimination beyond this artifact. Bound product consequence accordingly to single Magento site, truncated sample, n=7 with cart n=1."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_C4_RECIPE_DIMENSION_NOT_TESTED",
+      "severity": "critical",
+      "finding": "Frozen C4 requires ranking preservation across all 6 definition x recipe combos. Producer tested only 3 non-recipe definition combos. Independent recomputation of canonical recipe iterations shows tag_entropy x DEF-FULL-MAP ranking agreement only 58% (116/200) and x DEF-FORM-ONLY 48% (96/200); per-task recipe not tested at all. Therefore SURVIVES (C1-C5 all PASS) is not justified as written. At least C4 as frozen is unresolved/FAIL if recipe dimension enforced.",
+      "evidence": "spec.json decision_rule C4 definition; analyze.py:224 c4 = any(all(ranking_agreement.get(f\"{f} x {d}\" ...) for d in DEFINITIONS) for f in ...); analysis_output.json ranking_agreement has 9 entries, no recipe keys; result.json M2_recipe_canonical_eta2 has only canonical recipe; audit recomputation above shows 58% agreement under canonical iterations"
+    },
+    {
+      "id": "VF2_HIERARCHY_Y_PROXY_DEGENERACY",
+      "severity": "major",
+      "finding": "NC1 hierarchy density identically 3.69e-07 across all 7 tasks because exp(-0.3*y) for y>=6019 underflows to 0 and remaining sum dominated by 12 header elements with identical y (158-272) across types. This reproduces parent eta2=0.0 numerically but via underflow degeneracy, not via tested hierarchy depth logic. Producer discloses y-proxy in validity_notes but report.md still states 'normalization collapse is reproducible and complete' without qualifying proxy limitation. True DOM depth effect remains untested.",
+      "evidence": "analyze.py:140 total_weight = sum(exp(-alpha * e[y])); audit recompute: total_w=2.5968192280107043e-21 identical for all types, early y list identical; provenance.json key_parameters hierarchy_alpha 0.3; prereg.md 8.2 note depth unavailable uses y-proxy"
+    },
+    {
+      "id": "VF3_TRUNCATION_AND_TEMPLATE_INVARIANCE_CEILING",
+      "severity": "major",
+      "finding": "Within-type template invariance (identical tags/roles/inForm/w/h within page_type) guarantees any between-type difference maps to eta2 ~1 in direct and non-recipe pipeline densities. High pipeline eta2 (0.964-0.999) is therefore tautological given the sample, not evidence of general pipeline robustness. Combined with truncated-first-20 and cart n=1 (within std degenerate 0), statistical power is illusory; ranking test is the only discriminating check.",
+      "evidence": "analysis_output.json tasks_used locatable_count 20 identical per type, within_stds 0.0 for direct features; result.json validity_notes bullet 3 acknowledges template invariance; spec.json measurement_validity item 6 bounds to 7 tasks 1 site truncated-first-20"
+    },
+    {
+      "id": "VF4_ISOLATED_DEFINITION_DEGENERATE",
+      "severity": "minor",
+      "finding": "ISOLATED-A-LINK yields 0 density for all tasks because role_map {} leaves role=a unmatched to link, so no elements match. Producer correctly notes this is sample-level ceiling, but it means 1/3 of definition hypotheses are untestable on this sample. Effective test is 2 definitions, not 3. Claim that pipeline preserves discrimination must be qualified to DEF-FULL-MAP and DEF-FORM-ONLY only.",
+      "evidence": "analysis_output.json pipeline_eta2_9 ISOLATED-A-LINK eta2 0.0 all means 0; DEFINITIONS ISOLATED-A-LINK role_map {}; result.json observations bullet 2 and validity_notes bullet 1 disclose"
+    },
+    {
+      "id": "VF5_MISSING_PER_TASK_RECIPE",
+      "severity": "major",
+      "finding": "Spec envisages 2 recipes (canonical shared subset and per-task weighted). Only canonical was executed. Audit per-task recomputation shows mean eta2 collapses to ~0.36 for same feature/definition, still >0.05 but revealing strong recipe sensitivity. Without per-task data, C3 max eta2 and C4 ranking claims are incomplete.",
+      "evidence": "spec.json measurement_validity and spec question mention definitions x recipes x normalization; provenance.json key_parameters lists recipe_seeds 10 recipe_iterations 1000 but not per-task; result.json M2_recipe_canonical_eta2 only canonical; analyze.py recipe_results loop only canonical"
+    },
+    {
+      "id": "VF6_CART_N1_AND_EWB_VARIANCE",
+      "severity": "minor",
+      "finding": "Cart page_type n=1 makes within-group variance degenerate (ss_within excludes cart spread) and inflates eta2. Elements_with_bbox variance within type (listing 1550/1560/1564, detail 1215/1149/1143) creates small non-zero within stds (e.g., 0.000115) that slightly lower eta2 from perfect 1.0, correctly captured. No leakage beyond template invariance detected.",
+      "evidence": "analysis_output.json tasks_used elements_with_bbox values; analysis_output.json pipeline_eta2_9 within_stds listing/detail small non-zero, cart 0.0"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_RAW_FEATURE_ETA2",
+      "status": "pass",
+      "expected": "eta2=1.0 for tag_entropy, form_fraction, total_area with within std 0.0 and group means matching parent",
+      "observed": "Audit recompute: tag_entropy eta2=1.0 means 2.646/2.484/2.601, form_fraction 1.0 means 0.85/0.95/0.95, total_area 1.0 means 341k/589k/428k; matches result.json pc1_tag_entropy_eta2 1.0 etc. and analysis_output.json pc1_direct_eta2. Producer control PC1_RAW_FEATURES_REPRODUCE PASS verified.",
+      "evidence": "result.json controls PC1_RAW_FEATURES_REPRODUCE observed; analysis_output.json pc1_direct_eta2; audit recompute above"
+    },
+    {
+      "id": "B2_HIERARCHY_NORMALIZED_ETA2",
+      "status": "pass_with_caveat",
+      "expected": "eta2 <0.01 normalized hierarchy density reproduces parent M7 eta2=0.0",
+      "observed": "Recompute reproduces exactly eta2=0.0 all means 3.693777130463341e-07 identical, matching result.json nc1_hierarchy_eta2 0.0 and analysis_output.json nc1_hierarchy eta2 0.0. However caveat per VF2: uses y-proxy degeneracy, not true DOM depth, so not strong evidence for parent hierarchy logic beyond proxy artifact. Producer null control NC1_NORMALIZED_HIERARCHY_REPRODUCES PASS numerically verified.",
+      "evidence": "result.json controls NC1_NORMALIZED_HIERARCHY_REPRODUCES; analysis_output.json nc1_hierarchy; audit y-proxy recompute total_w identical"
+    },
+    {
+      "id": "B3_RECIPE_MATERIALITY",
+      "status": "inconclusive",
+      "expected": "Recipe choice material (31x gap), definitions correlated r>0.98 within recipe",
+      "observed": "Producer shows canonical recipe reduces eta2 from 0.999 to 0.92 (DEF-FULL-MAP) and 0.74 (DEF-FORM-ONLY) confirming materiality, but per-task recipe not tested so full materiality not mapped. Within-recipe definition correlation not recomputed. Parent source EXP-INTEL-35264637598 not directly validated here.",
+      "evidence": "result.json M2_recipe_canonical_eta2 mean 0.9216 vs 0.7449; analysis_output.json recipe_results; missing per-task recipe prevents full baseline check"
+    }
+  ],
+  "recomputed_metrics": {
+    "PC1_tag_entropy_eta2": 1.0,
+    "PC1_form_fraction_eta2": 0.9999999999999982,
+    "PC1_total_area_eta2": 1.0,
+    "PC1_pass_recomputed": true,
+    "NC1_hierarchy_eta2": 0.0,
+    "NC1_pass_recomputed": true,
+    "M1_eta2_by_feature_definition_recomputed": {
+      "tag_entropy x DEF-FULL-MAP": 0.995783366611769,
+      "tag_entropy x DEF-FORM-ONLY": 0.9996449276089042,
+      "tag_entropy x ISOLATED-A-LINK": 0.0,
+      "form_fraction x DEF-FULL-MAP": 0.9839692311312597,
+      "form_fraction x DEF-FORM-ONLY": 0.9953605298138091,
+      "form_fraction x ISOLATED-A-LINK": 0.0,
+      "total_area x DEF-FULL-MAP": 0.9637074384170368,
+      "total_area x DEF-FORM-ONLY": 0.9975895555182401,
+      "total_area x ISOLATED-A-LINK": 0.0
+    },
+    "M1_matches_producer_within_1e6": true,
+    "M4_best_pipeline_eta2_recomputed": 0.9996449276089042,
+    "M4_best_combo_recomputed": "tag_entropy x DEF-FORM-ONLY",
+    "M6_hierarchy_eta2_recomputed": 0.0,
+    "C1_raw_features_reproduce_recomputed": true,
+    "C2_hierarchy_normalized_reproduces_recomputed": true,
+    "C3_pipeline_eta2_nonzero_recomputed": true,
+    "C4_pipeline_preserves_ranking_recomputed_non_recipe": true,
+    "C4_pipeline_preserves_ranking_recomputed_including_canonical_recipe_iterations": false,
+    "C4_detail": "Non-recipe pipeline: tag_entropy preserves listing>detail for both DEF-FULL-MAP and DEF-FORM-ONLY (true), form_fraction and total_area fail under DEF-FORM-ONLY (false) per analysis_output.json ranking_agreement. Under canonical recipe iterations (200-sample audit), tag_entropy agreement only 58% DEF-FULL-MAP and 48% DEF-FORM-ONLY, so >=1 feature preserving across all 6 combos fails when recipe sampled densities considered.",
+    "C5_feature_beats_hierarchy_recomputed": true,
+    "M2_recipe_canonical_eta2_recomputed_sample_5seeds_200iter": {
+      "tag_entropy x DEF-FULL-MAP mean ~0.92 matches producer 0.9216": true,
+      "note_per_task_recipe_mean ~0.36 not reported by producer": true
+    },
+    "ranking_agreement_non_recipe_recomputed": {
+      "tag_entropy x DEF-FULL-MAP": true,
+      "tag_entropy x DEF-FORM-ONLY": true,
+      "form_fraction x DEF-FULL-MAP": true,
+      "form_fraction x DEF-FORM-ONLY": false,
+      "total_area x DEF-FULL-MAP": true,
+      "total_area x DEF-FORM-ONLY": false
+    },
+    "discrepancies": [
+      "result.json M7_ranking_agreement reports only 4 true entries, omitting 5 entries (including 3 false) present in analysis_output.json ranking_agreement",
+      "C4 PASS claim in result.json and report.md assumes 6 combos but only 3 tested",
+      "Per-task recipe (second frozen recipe) not executed despite spec scope"
+    ]
+  },
+  "claim_ceiling": "Maximum justified: On the truncated-first-20 locatable_sample from Magento localhost 8080 (7 tasks: 3 product_listing, 3 detail, 1 cart degenerate, elements_with_bbox 1070-1564, template-identical within type), feature-weighted density using sum(feature_value)/elements_with_bbox for 2 non-degenerate definitions (DEF-FULL-MAP with a->link/input->textbox and DEF-FORM-ONLY) preserves between-type variance with max non-recipe eta2 0.9996 (tag_entropy x DEF-FORM-ONLY) beating y-proxy hierarchy normalized eta2 0.0 (C3 and C5 hold), and preserves non-recipe ranking for tag_entropy only (C4 holds for non-recipe 3-def scope). ISOLATED-A-LINK degenerate zero on this sample, cart n=1 degeneracy, single site, no cross-site or full-DOM evidence, hierarchy depth proxied by y with underflow degeneracy, recipe evaluation limited to canonical shared-subset p=0.5 (per-task recipe would reduce mean eta2 to ~0.36, still >0.05 but with ~50% ranking agreement). SURVIVES without recipe dimension is partly supported (MIXED if frozen 6-combo C4 enforced). No inference to other sites, larger samples, true DOM depth, or production OECD/COINr deployment warranted.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35434771791/spec.json decision_rule C4 requires all 3 definitions x 2 recipes",
+    "research/experiments/EXP-INTEL-35434771791/prereg.md sections 7.1-7.4 definitions/recipes/normalization",
+    "research/experiments/EXP-INTEL-35434771791/result.json metrics pc1_tag_entropy_eta2, nc1_hierarchy_eta2, M1_eta2_by_feature_definition, M2_recipe_canonical_eta2, M4_best_pipeline_eta2, M7_ranking_agreement, controls PC1_RAW_FEATURES_REPRODUCE and NC1_NORMALIZED_HIERARCHY_REPRODUCES, observations and validity_notes",
+    "research/experiments/EXP-INTEL-35434771791/analysis_output.json tasks_used, pc1_direct_eta2, nc1_hierarchy, pipeline_eta2_9, recipe_results, ranking_agreement, decision_rules",
+    "research/experiments/EXP-INTEL-35434771791/analyze.py lines 31-53 element matching, 35-46 per-element feature definitions, 122-149 hierarchy y-proxy, 152-169 pipeline eta2 loop, 171-195 recipe loop canonical only, 218-224 ranking and C4 logic",
+    "research/experiments/EXP-INTEL-35434771791/provenance.json datasets raw_evidence sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050, code hash 5edc1bddc960cc7f8ef5048bdb39551244d912619c166b30bb12a7fc4bfc2490",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 locatable_sample fields tag/role/inForm/x/y/w/h",
+    "research/experiments/EXP-INTEL-35422991016/handoff.json carry_forward established/rejected/unknown and WHY measurement invalid before",
+    "research/experiments/EXP-INTEL-35434771791/report.md SURVIVES verdict and ranking claims"
+  ],
+  "unresolved": [
+    "Does ranking preservation hold across canonical AND per-task weighted recipes when both are fully sampled per frozen spec (6 combos)? Audit sample suggests it does not for canonical iterations majority.",
+    "Does feature-weighted density preserve discrimination on full DOM (not truncated-first-20) and on other sites where within-type template invariance does not guarantee discrimination?",
+    "Would ISOLATED-A-LINK become informative with a larger sample containing verifiable link elements beyond the logo a->link mapping?",
+    "Does true DOM tree depth (actual parent-child levels) reproduce hierarchy eta2=0.0 or would it recover discrimination, given y-proxy degeneracy?",
+    "What per-task recipe eta2 distribution and ranking preservation holds for all 9 feature x definition combos at full 10x1000 sampling?",
+    "How does cross-site generalization affect the feature-weighted pipeline given single-site Magento evidence only?"
+  ]
+}

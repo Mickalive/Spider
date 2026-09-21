@@ -1,0 +1,55 @@
+{
+  "experiment_id": "EXP-RUNTIME-35513777099",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does iterative decompression correctness (byte-identical output to ground-truth uncompressed body) hold for multi-layer compressed encodings (gzip->brotli, brotli->gzip) where max_depth>1, using high-entropy non-redundant payloads with compressed sizes in the 2-99KB range?",
+  "hypothesis": "Iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth high-entropy generate_*_body(state, target_size) for all 4 auth states, 3 content types (JSON with unique IDs, real HTML from Wikipedia, binary-like random-with-structure), 2 payload sizes (10KB, 100KB), and 2 multi-layer encoding configurations (GZIP-THEN-BROTLI, BROTLI-THEN-GZIP) with multi-chunk framing (chunk_size=32), where the multi-layer encodings produce compressed sizes in the 2-99KB range and 60-3000+ chunks.",
+  "falsifier": "Any SHA256(decompressed) != SHA256(generate_*_body(state, target_size)) across all observations for any (size, encoding, content_type, state) cell, OR any silent fallback (SHA256(decompressed) == SHA256(raw_compressed)) for any compressed response, OR any cell where compressed_size_bytes mean < 2000 (failing to reach the 2KB minimum target range that motivates the chunk-boundary stress test).",
+  "baselines": [
+    {
+      "id": "B-GZIP-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer gzip correctness at 10KB high-entropy (established 240/240 in parent EXP-RUNTIME-35495699298)",
+      "expected": "100% correctness, serves as regression control ensuring the single-layer decompression pipeline is not degraded"
+    },
+    {
+      "id": "B-BROTLI-SINGLE-LAYER-REGRESSION",
+      "description": "Single-layer brotli correctness at 10KB high-entropy (established 240/240 in parent EXP-RUNTIME-35495699298)",
+      "expected": "100% correctness, serves as regression control for single-layer brotli decompression"
+    },
+    {
+      "id": "B-IDENTITY-HE-10KB",
+      "description": "IDENTITY (no compression) at 10KB high-entropy - validates correctness oracle for high-entropy payloads at the smaller size",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, 10240) exactly for all 3 content types"
+    },
+    {
+      "id": "B-IDENTITY-HE-100KB",
+      "description": "IDENTITY (no compression) at 100KB high-entropy - validates correctness oracle for high-entropy payloads at the larger size",
+      "expected": "100% correctness, SHA256 matches generate_*_body(state, 102400) exactly for all 3 content types"
+    },
+    {
+      "id": "B-COMPRESSED-TARGET-RANGE",
+      "description": "Compressed size validation - at least 2 of 3 content types must achieve mean compressed_size_bytes >= 2000 at 10KB nominal and >= 5000 at 100KB nominal under multi-layer encoding",
+      "expected": "High-entropy payloads produce compressed sizes in the 2-99KB range, confirming the payloads are not degenerate"
+    }
+  ],
+  "positive_control": "B-GZIP-SINGLE-LAYER-REGRESSION and B-BROTLI-SINGLE-LAYER-REGRESSION: established 240/240+ across parent chain; must pass 100% to confirm no regression in single-layer decompression pipeline infrastructure.",
+  "null_control": "B-RANDOM: Within-state decompressed hash must be deterministic (all_same=true for all 4 auth states across all multi-layer cells). Any within-state hash variation indicates non-deterministic decompression or server behavior.",
+  "measurement_validity": [
+    "Multi-layer encoding configurations: GZIP-THEN-BROTLI (body -> gzip.compress -> brotli.compress -> chunked transfer) and BROTLI-THEN-GZIP (body -> brotli.compress -> gzip.compress -> chunked transfer)",
+    "High-entropy payload generators reused from parent EXP-RUNTIME-35495699298 (generate_json_he_body, generate_html_he_body, generate_binary_he_body) - validated at Shannon entropy >= 3.5 bits/byte",
+    "Correctness oracle validated at 10KB and 100KB via B-IDENTITY-HE baselines using the same high-entropy generators",
+    "Compressed size validation (B-COMPRESSED-TARGET-RANGE) ensures payloads are not degenerate: at least 2/3 content types must produce compressed sizes >= 2KB at 10KB and >= 5KB at 100KB",
+    "Deterministic server: Flask mock with seeded RNG (seed=44) produces deterministic bodies per (state, content_type, target_size) pair; high-entropy generators use deterministic seeds derived from (state, content_type, target_size)",
+    "Silent fallback detection: SHA256(decompressed) == SHA256(raw_compressed) classified as failure, not success",
+    "Multi-layer encodings exercise max_depth>1: the iterative decompression pipeline must correctly unwrap two layers of compression",
+    "chunk_size=32 for multi-chunk framing; with high-entropy payloads producing 2-99KB compressed sizes, this yields 60-3000+ chunks, exercising chunk-boundary behavior at multiple compression layers",
+    "Request jitter 50-150ms uniform between requests to avoid rate-limit effects",
+    "Python 3.12 stdlib gzip module + brotli 1.2.0",
+    "Payload entropy validation: Shannon entropy of each high-entropy generator output measured and reported; minimum threshold 3.5 bits/byte for 10KB payloads to confirm non-degeneracy"
+  ],
+  "decision_rule": "SURVIVES_CURRENT_TEST requires ALL of: (C1) correctness_match_rate == 1.0 for ALL multi-layer cells across all size x encoding x content_type combinations; (C2) silent_fallback_count == 0 for ALL multi-layer cells; (C3) B-GZIP-SINGLE-LAYER-REGRESSION and B-BROTLI-SINGLE-LAYER-REGRESSION pass 100% (regression controls, no single-layer pipeline degradation); (C4) null_control passes (all_same=true for all states in all multi-layer cells); (C5) B-COMPRESSED-TARGET-RANGE passes (at least 2/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB). FALSIFIED if any correctness failure OR any silent fallback in any multi-layer cell. MEASUREMENT_INVALID if infrastructure prevents data collection, if correctness oracle baseline (B-IDENTITY-HE) fails, or if B-COMPRESSED-TARGET-RANGE fails (payloads remain degenerate, chunk-boundary stress not expressed).",
+  "product_consequence_positive": "Multi-layer encoding correctness validated under chunked transfer encoding with realistic compressed sizes (2-99KB, 60-3000+ chunks). The decompression pipeline correctly handles stacked encodings where max_depth>1, expanding the claim ceiling from 'single-layer only' to 'multi-layer'. This resolves the V2_UNKNOWN limitation from the parent and brings C-MEAS-VALID closer to Product Core readiness.",
+  "product_consequence_negative": "Multi-layer encodings fail correctness under chunked framing. The decompression pipeline has a multi-layer or stacked-encoding failure mode that was not exposed by single-layer testing. Product cannot handle real-world scenarios where multiple Content-Encoding layers are applied (e.g., CDN -> origin). The decompression implementation requires diagnosis of the specific failure mode (e.g., incorrect layer ordering, buffer contamination between layers, dictionary reference spanning across layers).",
+  "estimated_cost": "Low: ~160 HTTP requests to localhost mock server (2 sizes x 3 types x 2 multi-layer encodings x 4 states x 5 reps + baselines + regression), <10 minutes execution, no external infrastructure, no API costs. Reuses validated high-entropy generators from parent.",
+  "expected_information_gain": "High: this experiment directly tests the V2_UNKNOWN (multi-layer encoding) from the parent's carry_forward. The parent established 720/720 correctness for single-layer encodings (max_depth=1), but max_depth>1 was never exercised. A positive result validates the decompression pipeline for stacked encodings and expands the claim ceiling. A negative result reveals a critical multi-layer failure mode that could affect real-world CDN scenarios. Either outcome is highly decision-relevant and narrows the path to Product Core."
+}

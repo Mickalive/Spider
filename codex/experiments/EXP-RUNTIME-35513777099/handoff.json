@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35513777099",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "Does iterative decompression correctness hold for streaming incremental decompression where the proxy forwards partial chunked frames without full body reassembly, such that the decompressor processes chunk boundaries incrementally at realistic CDN chunk sizes (8KB+) and multi-layer encodings?",
+  "why_next": "The audit-identified V1_BUFFERED_PROXY_NOT_STREAMING (inherited from parent EXP-RUNTIME-35495699298) is now the highest-upside unresolved blocker. All tested decompression paths buffer the full upstream body before re-chunking and reassembling before decompressing. Chunk boundaries never intersect a compression layer. If the pipeline fails on partial-frame forwarding at realistic CDN chunk sizes (8KB+), the CDN correctness gate becomes moot because real CDNs serve chunked without guaranteeing a contiguous body. Streaming decompression is materially orthogonal to the localhost-buffered multi-layer correctness just established: it tests a different architectural property (incremental vs batched processing) rather than repeating the same question with different parameters. A positive result unblocks the CDN gate; a negative result identifies a critical infrastructure gap that must be fixed before CDN testing is meaningful.",
+  "carry_forward": {
+    "established": [
+      "Iterative decompression (brotli->gzip->identity max_depth=5) correctness on localhost buffered mock for HIGH-ENTROPY non-redundant payloads with multi-layer stacked encodings: 240/240 multi-layer correctness across 12 cells (2 sizes x 3 content types x 2 encodings GZIP-THEN-BROTLI and BROTLI-THEN-GZIP), 120/120 single-layer regression, 120/120 identity oracle, 0 true silent fallbacks (audit-recomputed 0/360 compressed obs), within-state determinism all_same=true, Shannon entropy 4.63-7.70 bits/byte, compressed sizes 2.7-98.8KB (EXP-RUNTIME-35513777099, audit REVISE with ceiling bounded)",
+      "High-entropy payload generators validated: JSON (UUIDs, random floats, 5.49 bits/byte), HTML (real Wikipedia paragraphs, 4.66 bits/byte), Binary (structured random payloads, 7.69 bits/byte) - all above 3.5 bits/byte Shannon threshold (inherited from parent EXP-RUNTIME-35495699298)",
+      "Compressed sizes genuinely realistic for multi-layer: 10KB nominal -> 2.7-9.9KB compressed (86-310 chunks at chunk_size=32); 100KB nominal -> 22.6-98.8KB compressed (710-3087 chunks at chunk_size=32)",
+      "Gzip multi-chunk decompression correctness on localhost buffered mock: 240/240 (EXP-RUNTIME-35470447407) + regression confirmed",
+      "Brotli multi-chunk decompression correctness on localhost buffered mock: 360/360 (EXP-RUNTIME-35456070671) + regression confirmed",
+      "IDENTITY baseline validates correctness oracle at both 10KB and 100KB high-entropy: 60/60 + 60/60 (parent EXP-RUNTIME-35495699298)",
+      "Deterministic within-state grouping preserved across all cells: decompressed hash all_same=true for all sizes, content types, and compression modes",
+      "Compression level extremes (gzip 1 vs 9, brotli 4 vs 8) do not affect correctness on high-entropy payloads (parent established)",
+      "B-COMPRESSED-TARGET-RANGE passes: 3/3 content types achieve mean compressed_size_bytes >= 2000 at 10KB and >= 5000 at 100KB under multi-layer encoding"
+    ],
+    "rejected": [
+      "Silent fallback to compressed bytes as explanation for preserved correctness - rejected (0 fallbacks confirmed by C1 correctness net and audit recomputation across 360 compressed observations)",
+      "Gzip chunk boundaries corrupt multi-byte symbols at chunk_size=32 for payloads up to 3087 chunks - rejected on high-entropy multi-layer payloads",
+      "Degenerate synthetic payloads (x*pad compressing to 70-1059 bytes) adequately test chunk-boundary stress - rejected; high-entropy payloads required (parent resolved)"
+    ],
+    "unknown": [
+      "Does iterative decompression correctness hold for streaming incremental decompression across chunk boundaries without full body reassembly? (Buffered proxy reassembles fully - V1_BUFFERED_PROXY_NOT_STREAMING inherited, all decompress_body calls receive a single contiguous byte string)",
+      "Does decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai) with high-entropy payloads, Accept-Encoding negotiation, auth-aware cache/Vary, geographic latency, and production concurrency?",
+      "Does correctness hold for payloads beyond 100KB nominal under multi-layer encoding?",
+      "Do gzip levels 2-8 and brotli qualities 5-7 produce compressed structures that stress chunk boundaries differently at realistic chunk sizes (8KB+)?",
+      "Is BINARY content type ground truth reproducible across interpreter sessions? (PYTHONHASHSEED-salted hash(state) in body header prevents cross-run byte-exact reproduction)"
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for Product Core promotion - real CDN infrastructure with high-entropy payloads is the mandatory remaining gate",
+      "Streaming decompression is safe - proxy buffers full body before re-chunking; incremental streaming decompression across chunk boundaries is untested",
+      "Max decompression depth 5 is validated for stacked encodings - only depth 2 (two-layer) exercised; depths 3-5 untested",
+      "CDN behaviors (Vary, ETag, Accept-Encoding negotiation, cache, geographic latency) are safe for decompression - localhost mock does not replicate these",
+      "chunk_size=32 results generalize to CDN chunk sizes (8KB+) - chunk_size=32 maximizes chunk count but does not test realistic frame sizes",
+      "Multi-layer C2 silent_fallback_count=0 is a valid measurement for multi-layer cells - the detector never fired on multi-layer Content-Encoding; fact confirmed only by correctness net (C1) and audit recomputation",
+      "BINARY compressed cell sizes are cross-run reproducible - PYTHONHASHSEED-dependent hash(state) produces different bodies per interpreter session",
+      "Producer report cell/observation counts are accurate - report inflates to 24 cells/480 multi-layer observations; true counts are 12 cells/240 (prereg.md correct)"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (parent: established single-layer high-entropy correctness, identified V2_UNKNOWN multi-layer limitation and V1_BUFFERED_PROXY_NOT_STREAMING)",
+    "research/experiments/EXP-RUNTIME-35495699298/result.json (parent: 480/480 high-entropy single-layer correctness)",
+    "research/experiments/EXP-RUNTIME-35495699298/audit.json (parent: PASS, claim ceiling, V1-V5 findings)",
+    "research/experiments/EXP-RUNTIME-35470447407/handoff.json (gzip multi-chunk correctness established)",
+    "research/experiments/EXP-RUNTIME-35456070671/handoff.json (brotli multi-chunk correctness established)",
+    "research/experiments/EXP-RUNTIME-35513777099/result.json (this experiment: 240/240 multi-layer, 120/120 regression, 120/120 identity, 480 total)",
+    "research/experiments/EXP-RUNTIME-35513777099/audit.json (REVISE, recomputed metrics match producer, 6 validity findings, claim_ceiling bounded)",
+    "research/experiments/EXP-RUNTIME-35513777099/spec.json (frozen decision_rule C1-C5, baselines, multi-layer configurations)",
+    "research/experiments/EXP-RUNTIME-35513777099/run_experiment.py (high-entropy generators, multi-layer encoding logic, decompress_body max_depth=5, is_compressed exact-match classifier)",
+    "codex/claim_state.json (C-MEAS-VALID claim history across 40+ experiments, current status EXPERIMENTAL)",
+    "codex/index.json (prior runtime experiments and their decisions)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35513777099/result.json (metrics.per_cell 24 cells, metrics.aggregate multi_layer_cells_count=12 total_requests=480, controls all pass)",
+    "research/experiments/EXP-RUNTIME-35513777099/audit.json (REVISE, recomputed_metrics match producer, V1-V6 validity findings, claim_ceiling bounded)",
+    "research/experiments/EXP-RUNTIME-35513777099/spec.json (frozen decision_rule C1-C5, multi-layer encoding configs GZIP-THEN-BROTLI and BROTLI-THEN-GZIP)",
+    "research/experiments/EXP-RUNTIME-35513777099/prereg.md (240-observation main matrix correctly stated)",
+    "research/experiments/EXP-RUNTIME-35513777099/freeze.json (immutable frozen inputs)",
+    "research/experiments/EXP-RUNTIME-35513777099/run_experiment.py (lines 547-555 upstream_resp.read(), 693-695 resp.raw.read, 617-635 decompress_body, 812 is_compressed exact-match, 882 all_altered vacuous)",
+    "research/experiments/EXP-RUNTIME-35495699298/audit.json (parent V1_BUFFERED_PROXY_NOT_STREAMING, V5_OBSERVATION_COUNT_DISCREPANCY)",
+    "research/experiments/EXP-RUNTIME-35495699298/handoff.json (V2_UNKNOWN multi-layer limitation targeted by this experiment)"
+  ],
+  "recommended_action": "Design a streaming incremental decompression experiment where the proxy forwards partial chunked frames without full body reassembly, testing whether iterative decompression (brotli->gzip->identity, max_depth=5) produces byte-identical output to ground-truth when chunk boundaries are fed incrementally. Use the validated high-entropy payload generators from EXP-RUNTIME-35495699298 and EXP-RUNTIME-35513777099. Test at realistic CDN chunk sizes (8KB) as well as the established chunk_size=32. Include multi-layer stacked encodings (GZIP-THEN-BROTLI, BROTLI-THEN-GZIP) to exercise incremental decompression across both layers. If streaming passes, the CDN correctness gate is unblocked. If it fails, diagnose whether the failure is in the incremental decompression state machine, chunk-boundary dictionary references, or cross-layer state contamination. After streaming decompression is validated, the next step is real CDN infrastructure testing (Cloudflare/Fastly/Akamai free tier with Accept-Encoding negotiation, auth-aware cache/Vary)."
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35445596894",
+  "lane": "physics",
+  "stage": "EXECUTE",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "platform": "linux",
+    "simulation": "in-memory, seed 42 (per frozen measurement_validity; no browser/network substrate)"
+  },
+  "commits": {
+    "git_head": "20e84c6cf1cb8a74525c657155428115975ca518",
+    "git_head_message": "R2 physics: execution base EXP-PHYSICS-35445596894",
+    "pre_execute_sha": "743bf5653cec544b65799742ea9f81607d63f575",
+    "note": "Execution based on the freeze commit 743bf565 (pre_execute_sha recorded in execution_checkpoint.json). No git mutations performed during this run."
+  },
+  "workflow": {
+    "run_id": "unknown_action_log_run_id",
+    "execute_attempt": "initial successful run in this packet (prior attempts failed with exit code 76, output-missing; superseded by this run's files)",
+    "commands": [
+      "python3 research/experiments/EXP-PHYSICS-35445596894/run_experiment.py",
+      "python3 research/experiments/EXP-PHYSICS-35445596894/explore.py"
+    ],
+    "cwd": "/home/runner/work/Spider/Spider (repo root; script paths repo-relative)"
+  },
+  "frozen_inputs": {
+    "request.json": {"path": "research/experiments/EXP-PHYSICS-35445596894/request.json", "sha256": "2533522e83a3bcf1fb3caa77e944b7811021205a8f7975e213d9dfa349a9b8fb"},
+    "spec.json": {"path": "research/experiments/EXP-PHYSICS-35445596894/spec.json", "sha256": "0fafc74376a805abced9d188a502a0e911e03ebb7978648998bc0bdf649e468e"},
+    "prereg.md": {"path": "research/experiments/EXP-PHYSICS-35445596894/prereg.md", "sha256": "cce8c63a1b698414649b7481c24eaf46e04690a8a8a7b70dc2185c26c86913f8"},
+    "freeze.json": {"path": "research/experiments/EXP-PHYSICS-35445596894/freeze.json", "sha256": "not_recorded_in_design_packet_note"},
+    "note": "Frozen files were read only; never modified."
+  },
+  "inherited_inputs": {
+    "parent_experiment": "EXP-PHYSICS-35403136807",
+    "parent_handoff": {"path": "research/experiments/EXP-PHYSICS-35403136807/handoff.json", "status": "read; established/rejected/unknown/do_not_assume preserved in result.json.unresolved"},
+    "parent_data": {"path": "research/experiments/EXP-PHYSICS-35403136807/raw_transitions.json", "sha256": "170df6e34c78f64584f5332d61b9a705d87838b61e24eb04bdd4cc1b095c6ade", "in_memory_sha_raw": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512", "role": "raw fixture reused at N=5000 per frozen measurement_validity"},
+    "parent_code": {"path": "research/experiments/EXP-PHYSICS-35403136807/run_experiment.py", "role": "replication reference for determinism recomputation"}
+  },
+  "generated_artifacts": [
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/run_experiment.py", "sha256": "f78fc85f1046097699445615862116934e4226ba1b5eda51a62a560586163e97", "role": "code"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/explore.py", "sha256": "8188262e41a65233ce1982ac30e4a8944fd6a8de3f50edaa6192ddf213ddf754", "role": "code"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/raw_results.json", "sha256": "fd27f50ef2996baf00d1c2c950006670617c39f4a9f01198bddc7aa60b1a35bc", "role": "derived"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/raw_exploratory.json", "sha256": "a5ae8be08468d42b6f4e5701e12fe5afea32fb82a162875f96921e4e3189dcf7", "role": "derived"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/raw_transitions_n50000.json", "sha256": "e9e0c54eaa0ecc2266e655ab7fa6cd61e2bb91c1e5e1da3d2d4dca08ee2d152f", "in_memory_sha": "a779372669d43f0d861007950b4bd397f1f4689708f89aa71fbaf5ff47bebb51", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/raw_output.txt", "sha256": "176c6feba0de4810d903cc844a7e3dc9f6a67b555d88c7e7dc5e2908ef4c2bee", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/result.json", "role": "producer handoff (this packet)"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/report.md", "role": "producer report (this packet)"},
+    {"path": "research/experiments/EXP-PHYSICS-35445596894/provenance.json", "role": "producer provenance (this packet)"}
+  ],
+  "reproduction_parameters": {
+    "seed": 42,
+    "n_transitions_5000_source": "parent raw_transitions.json (regeneration deep-equal verified)",
+    "n_transitions_50000": "50 sessions x 1000 steps, deterministic hash-routed 12-state SPA, seed 42",
+    "min_stratum_size": 5,
+    "null_control": "global shuffled-action permutation, 500 shuffles, seed 42, K2 records",
+    "positive_control": "8-state deterministic SPA, within-stratum url_after permutation (stratum estimators) / global shuffled-action (KNN), 1000 permutations",
+    "estimator_order": ["B-WEIGHTED-PMI", "B-EQUAL-WEIGHT-PMI", "B-MEDIAN-PMI", "B-KNN-CMI"],
+    "knn": {"k": 5, "alpha": 1.0, "scheme": "kNN density ratio I(Y;X|Z) with Laplace-smoothed neighborhood counts, self-neighbors excluded, integer encodings with data-driven url->index map, START_TOKEN=-2"},
+    "verdict_rule": "FALSIFIED-IN-SETTING (priority) > MEASUREMENT_INVALID > SURVIVES_CURRENT_TEST; C1 all-estimators |null_mean|>=0.1 -> FALSIFIED-IN-SETTING"
+  },
+  "known_reproducibility_notes": [
+    "N=5000 recycled data hash 170df6e3... (file) / 46ed606a... (in-memory) matches parent packet exactly.",
+    "Weighted estimator replicates parent: K2=0.933244, K3=1.220508, positive control K3=1.805624, N=50000 K2=1.778725.",
+    "Parent packet determinism_K3 (467/821, 0.569) is NOT reproducible from parent code+data; recomputation gives 89/821 (0.108). Recorded in result.json.observations/validity_notes/unresolved.",
+    "Null-control p-values (0.001996) are descriptive; the |mean| threshold is the frozen decision criterion."
+  ]
+}

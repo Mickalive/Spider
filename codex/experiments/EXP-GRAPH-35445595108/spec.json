@@ -1,0 +1,36 @@
+{
+  "experiment_id": "EXP-GRAPH-35445595108",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on a production-like local testbed server with CDN simulation (varnish), OAuth2 middleware (PyJWT RS256), dynamic content (timestamps, request IDs, database-backed state), and configurable network latency — testing whether production-like infrastructure features introduce correlation that localhost Flask mock does not?",
+  "hypothesis": "C-FRESHNESS orthogonality at delta=0.15 will hold on a production-like local testbed server. The behavioral signal (token validation, session state, auth boundary) and structural signal (response schema, cache headers, dynamic content) will remain near-uncorrelated (|r| < 0.15) because CDN caching, OAuth middleware, and dynamic content operate on orthogonal signal domains: CDN caching affects structural response patterns (ETag, Cache-Control, response freshness) while OAuth middleware affects behavioral state transitions (token validation, session invalidation, permission boundaries). The previous localhost mock evidence (r=0.0022 to 0.0463 across three experiments) suggests the correlation is structurally near-zero, not an artifact of the mock simplicity.",
+  "falsifier": "C-FRESHNESS orthogonality is falsified at delta=0.15 if ANY of: (1) 95% CI upper bound of Pearson r >= 0.15; (2) fewer than 2/3 endpoints have behavioral signal std > 0; (3) fewer than 2/3 endpoints have structural signal std > 0; (4) behavioral detection TP < 0.85; (5) 304 manipulation check fails (cache-enabled and cache-disabled correlations do not show expected symmetric heterogeneity within sampling noise).",
+  "baselines": [
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "description": "Prior localhost Flask mock results: pooled r=0.0022 (EXP-GRAPH-35389145821), r=0.0463 (EXP-GRAPH-35353011131). This experiment tests whether production-like infrastructure shifts the correlation away from the near-zero baseline.",
+      "expected": "|r| < 0.15 under production-like infrastructure, similar to localhost mock"
+    },
+    {
+      "id": "B-FLASK-ONLY",
+      "description": "Plain Flask without CDN/OAuth/dynamic content. If orthogonality holds on production-like server but not on plain Flask, the infrastructure features are benign. If orthogonality holds on both, the infrastructure features are irrelevant.",
+      "expected": "|r| < 0.15, confirming orthogonality persists across infrastructure complexity levels"
+    }
+  ],
+  "positive_control": "Token validation failure detection: behavioral signal must correctly identify expired vs valid tokens with TP >= 0.85. This is validated across all prior experiments (TP=1.0 on stochastic mock). If TP < 0.85 on production-like server, the behavioral signal extraction is broken, not orthogonality.",
+  "null_control": "Structural signal on cache-disabled responses (Cache-Control: no-store): if CDN caching is disabled, structural signal should be invariant across cache hits/misses. Expected: structural signal std > 0 only from dynamic content variation (timestamps, request IDs), not from cache artifacts. Null correlation at lambda=0 (no behavioral drift) should show |r| < 0.05.",
+  "measurement_validity": [
+    "Testbed server must produce genuine behavioral AND structural stochastic variation: token validation failures, session state changes, auth boundary shifts (behavioral) AND cache-Control/ETag/304 variation, dynamic timestamps, request IDs, database-backed state (structural)",
+    "CDN simulation must implement genuine cache behavior: ETag-SHA256, Cache-Control max-age/no-store, stale-while-revalidate, cache invalidation on session state change",
+    "OAuth middleware must use real PyJWT RS256 validation with refresh tokens, session invalidation, and permission boundary — not hand-programmed lookup tables",
+    "Dynamic content must include timestamps, request IDs, user-dependent responses, and database-backed state — ensuring structural variation independent of behavioral state",
+    "Network latency jitter must be configurable (10-500ms) and measured, not assumed",
+    "n >= 480 paired samples from >= 3 endpoints x >= 2 cache modes x >= 2 auth states, ensuring adequate power for delta=0.15 equivalence test",
+    "Each endpoint must have independent behavioral and structural signal extraction — no shared variables between signal domains"
+  ],
+  "decision_rule": "C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED if ALL of: (C1) behavioral detection TP >= 0.85 across all endpoints; (C2) at least 2/3 endpoints have behavioral signal std > 0 AND at least 2/3 endpoints have structural signal std > 0; (C3) 95% CI upper bound of pooled Pearson r < 0.15; (C4) TOST equivalence test p_upper < 0.05 at delta=0.15; (C5) 304 manipulation check passes: cache-enabled and cache-disabled correlations show symmetric heterogeneity within sampling noise (|r_cache_enabled - r_cache_disabled| < 2 * SE at n=480). C-FRESHNESS orthogonality is REJECTED if ANY condition fails. MEASUREMENT_INVALID if infrastructure failure prevents data collection (endpoint unreachable, testbed construction fails, n < 240).",
+  "product_consequence_positive": "C-FRESHNESS advances from EXPERIMENTAL toward VALIDATED on production-like infrastructure. Parallel-channel architecture (separate behavioral and structural signal processing) is justified for product deployment. The orthogonality result extends from localhost mock to production-like server, eliminating the critical gap identified in EXP-GRAPH-35409927045. Product may proceed with dual-signal freshness detection: behavioral signals for auth/session drift, structural signals for cache/schema drift.",
+  "product_consequence_negative": "C-FRESHNESS orthogonality fails on production-like infrastructure. Parallel-channel architecture is NOT justified. Product must pivot to fused classifiers (combined behavioral-structural signal) or cache-independent structural signals. The localhost mock evidence is insufficient for production deployment. The critical gap for C-FRESHNESS remains open.",
+  "estimated_cost": "Medium: testbed server construction (Flask/FastAPI + varnish/nginx + SQLite + PyJWT) estimated at 2-3 hours; experiment execution at n=480 estimated at 30-60 minutes; analysis at 1 hour. Total: 4-5 compute-hours.",
+  "expected_information_gain": "High: this experiment directly tests the critical gap for C-FRESHNESS product deployment — whether orthogonality transfers from localhost mock to production-like infrastructure. A positive result justifies parallel-channel architecture and advances C-FRESHNESS toward VALIDATED. A negative result forces architectural pivot. Either outcome changes a product decision."
+}

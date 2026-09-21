@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35572180893",
+  "lane": "product",
+  "execution_timestamp": "2026-09-21T07:45:34Z",
+  "runtime_seconds": 572.89,
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/request.json",
+      "sha256": "see freeze.json"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/spec.json",
+      "sha256": "see freeze.json"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/prereg.md",
+      "sha256": "see freeze.json"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/freeze.json",
+      "sha256": "see freeze.json"
+    }
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35551517868",
+    "path": "research/experiments/EXP-PRODUCT-35551517868/",
+    "outcome": "MIXED",
+    "key_finding": "Uniform-shift overlap design produced 0% actual overlap at 25%/50% conditions, making FP=0 at those conditions an artifact"
+  },
+  "code": {
+    "mock_server": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/mock_server.py",
+      "sha256": "fdba9ca563ee928d84d9a50de6b97fc0a00b011e5f8a9aac59a40ef2d184be6c",
+      "description": "Flask mock server with Gaussian overlap design, port=18953. Replaces parent's uniform-shift overlap with Gaussian distributions N(mu, sigma=0.05) for both failure and noise. Adds /api/overlap endpoint for per-condition overlap control."
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/run_experiment.py",
+      "sha256": "56b0353910615f8fa416fd1b97b2a69a00037560f291f2fd94c26af3253f4299",
+      "description": "Experiment driver: 50-point threshold grid [0.05, ..., 0.54], 5 overlap conditions x 960 samples each, Gaussian overlap via random.gauss(), empirical overlap verification, full cross-condition analysis."
+    }
+  },
+  "raw_evidence": {
+    "experiment_data": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/raw_evidence/experiment_data.json",
+      "sha256": "05206fa5b56ca26f9abf657b5bad01d642680c3ced125d9694213b2aa8a2b69d",
+      "description": "Complete raw evidence: per-overlap threshold sweeps (50 thresholds x 5 conditions), calibrated metrics, orthogonality tests, Phase C discrimination probes, empirical overlap measurements"
+    },
+    "result_draft": {
+      "path": "research/experiments/EXP-PRODUCT-35572180893/result_draft.json",
+      "sha256": null,
+      "description": "Code's internal result computation (includes incorrect overall_hypothesis_outcome due to incomplete decision rule implementation)"
+    }
+  },
+  "dependencies": {
+    "python": "3.12",
+    "packages": ["flask", "pyjwt", "cryptography", "numpy", "scipy", "werkzeug"],
+    "platform": "linux"
+  },
+  "environment": {
+    "port": 18953,
+    "server_startup_time_seconds": "~2",
+    "total_requests_served": "~4800+"
+  },
+  "reproduction_notes": [
+    "Mock server uses random.gauss() without fixed seed — results are stochastic. Reproduction will yield similar but not identical numerical values.",
+    "Gaussian parameters are deterministic: failure N(0.295, 0.05), noise N(mu_noise, 0.05) with mu_noise computed via inverse CDF.",
+    "The /api/overlap endpoint sets per-condition noise distribution — must be called before collecting samples for each overlap condition.",
+    "Threshold sweep is deterministic given the behavioral scores: 50 thresholds from 0.05 to 0.54 in 0.01 increments."
+  ]
+}

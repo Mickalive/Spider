@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35572179326",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [],
+  "observations": [
+    "Infrastructure failure: Object of type bool is not JSON serializable"
+  ],
+  "validity_notes": [
+    "Exception during execution"
+  ],
+  "unresolved": [
+    "Infrastructure failure - not scientific falsification"
+  ]
+}

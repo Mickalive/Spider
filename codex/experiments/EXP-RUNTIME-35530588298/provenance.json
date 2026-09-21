@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35530588298",
+  "lane": "runtime",
+  "github_run_id": "35530588298",
+  "origin_github_run_id": "35530588298",
+  "source_commit": "a309928a5a6a2bf99711884ec577140ada72c177",
+  "source_branch": "origin/lab2/runtime",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "python_implementation": "CPython",
+    "brotli_version": "1.2.0",
+    "gzip_implementation": "Python 3.12 stdlib",
+    "os": "Ubuntu 24.04 (Linux 6.5.0-1025-gcp x86_64)",
+    "date": "2026-09-20T19:07:00Z"
+  },
+  "frozen_inputs": {
+    "request.json": "bcc6c10c81882a89149c1e410964fbd1e815352aceeb3928e965a32b693c5d21",
+    "spec.json": "d8dc6bee9a71988dd141934515c837bdd8c06763f87703f8ad63da173396fbb0",
+    "prereg.md": "2a2e1f217711994151c399eec584cceadd45e9894e98a372c6255c6584976a06",
+    "freeze.json_hash": "computed_in_freeze"
+  },
+  "parent_chain": {
+    "parent_experiment_id": "EXP-RUNTIME-35522287921",
+    "parent_handoff_path": "research/experiments/EXP-RUNTIME-35522287921/handoff.json",
+    "parent_handoff_sha256": "23f375761196449289b4655fca42dddb7fa2e64f0fc184e98f8d540b07166bd8",
+    "inherited_next_question": "Does iterative decompression correctness hold on real CDN infrastructure (Cloudflare/Fastly/Akamai free tier) with high-entropy multi-layer payloads, Accept-Encoding negotiation, auth-aware Vary/cache, geographic latency, and production concurrency at 8KB+ chunk sizes?",
+    "inherited_unknown": "Does correctness hold for true incremental decompression where decompress_body is fed chunk-by-chunk via streaming decompressor APIs (brotli.Decompressor.process, gzip streaming) without full accumulation?"
+  },
+  "artifacts": {
+    "run_experiment.py": {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/run_experiment.py",
+      "sha256": "8251d45704eb99d6b13608fd11ce462a6f595a02d279021b0f0c6966144d0ab0",
+      "role": "code"
+    },
+    "raw_cell_results.json": {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/raw_cell_results.json",
+      "sha256": "916b8f03b4393718276f56c5be90b37b14b77be29254288f5da84a1a1a37325b",
+      "role": "raw"
+    },
+    "result.json": {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/result.json",
+      "sha256": "87f79ed8e43954805489546eee652c2833c737ff4e7fe6368adaf45ffeea27b2",
+      "role": "derived"
+    },
+    "report.md": {
+      "path": "research/experiments/EXP-RUNTIME-35530588298/report.md",
+      "sha256": "d8f5d66a729f3ad9cd31ebb6022e04a6c2f65c4ecb5c38bb0f5cae5a2760cb08",
+      "role": "derived"
+    }
+  },
+  "execution_commands": [
+    "python3 run_experiment.py"
+  ],
+  "key_dependencies": {
+    "brotli": "1.2.0",
+    "gzip": "Python 3.12 stdlib",
+    "hashlib": "Python 3.12 stdlib (SHA256)",
+    "PyJWT": "2.14.0 (installed but not used in this experiment — no HTTP layer)"
+  },
+  "execution_notes": [
+    "Pure in-process experiment: no HTTP servers, no proxies, no network requests",
+    "First run had flush() AttributeError on brotli.Decompressor (no such method); corrected by removing flush() call",
+    "Corrected run produces all 840/840 correct — valid measurement after bugfix",
+    "brotli.Decompressor has only process(), can_accept_more_data(), is_finished() — no flush/finish"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35544808911",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [],
+  "observations": [
+    "Infrastructure failure: PosixPath('/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35544808911/testbed_server.py') and PosixPath('/home/runner/work/Spider/Spider/research/experiments/EXP-GRAPH-35544808911/testbed_server.py') are the same file"
+  ],
+  "validity_notes": [
+    "Exception during execution"
+  ],
+  "unresolved": [
+    "Infrastructure failure - not scientific falsification"
+  ]
+}

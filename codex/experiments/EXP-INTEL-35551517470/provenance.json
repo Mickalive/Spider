@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35551517470",
+  "lane": "intel",
+  "github_run_id": "35551517470",
+  "base_sha": "6e56e17e90ba6712c5a0a041bfd9d2e9601c9754",
+  "frozen_at": "2026-09-21T01:45:13.438884+00:00",
+  "executed_at": "2026-09-21T01:55:00.000000+00:00",
+  "python_version": "3.12.14",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "input_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw",
+      "description": "Per-iteration margin data for tag_entropy x DEF-FULL-MAP canonical recipe"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "raw",
+      "description": "Per-n margin statistics, SNR model, and baseline values from parent analysis"
+    }
+  ],
+  "output_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35551517470/raw_evidence/saturating_fit.py",
+      "sha256": "40b3594be34b4ebbd853b8c5458434fb688e4404c7521f058b9e4bea4e4f2562",
+      "role": "code",
+      "description": "Analysis script implementing logistic, Hill, and Richards curve fitting with multiple restarts"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json",
+      "sha256": "c7bbf321478721a1d543250d5e8018832a2c0f85c568fe24c673566da230390a",
+      "role": "derived",
+      "description": "Raw analysis output with all fit parameters, metrics, and decision rule evaluations"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35551517470/result.json",
+      "sha256": "c3bc835bb0c3105232f9e2cd172b0422784cc7ca805d782d0b5a00bb93bba5b6",
+      "role": "derived",
+      "description": "Producer handoff with all mandatory packet fields"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35551517470/report.md",
+      "sha256": "ad8271e6af0f08471d0faa6fe717d0913f58a68e9df9c25e6e0732905d279329",
+      "role": "derived",
+      "description": "Human-readable interpretation of results"
+    }
+  ],
+  "frozen_inputs_verified": {
+    "request_json_hash": "9890c168e758e39e33ab49855ceecc3ed750e24abc089dfd9021c4dca4b9c818",
+    "spec_json_hash": "919b9dc6f05292b7e0ef721795a5fc4188bb23ccd47014adaf45962e592d4646",
+    "prereg_md_hash": "73cc434fcef9398dd7ce97a2ab81fdec9eef0841773febeb3054e7ecc8fb021b",
+    "freeze_json_hash": null
+  },
+  "execution_details": {
+    "method": "scipy.optimize.curve_fit with bounds, N=10 random restarts per function family (seed=42)",
+    "training_data_source": "analysis_output_snr.json per_n.5.10.15.20 tag_entropy x DEF-FULL-MAP canonical",
+    "training_n": [5, 10, 15, 20],
+    "training_F": [0.0, 0.0, 0.4996, 0.5654],
+    "function_families": ["logistic", "hill", "richards"],
+    "model_selection": "R2 primary, AIC/BIC secondary",
+    "extrapolation_targets": [50, 82],
+    "no_browser_or_model_calls": true,
+    "no_new_data_collection": true,
+    "compute_time_seconds": "<30"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-35544806153",
+    "parent_handoff_sha256": "fedc0f49e45fa39e866fe79b4ed032554f13cab64e9f16bb3bbfe8d311c799ec",
+    "inherited_verdict": "MEASUREMENT_INVALID",
+    "inherited_next_question": "Should the Intel lane pivot to Docker-based direct full-DOM measurement or preregister a bounded saturating function?"
+  },
+  "provenance_hash": "8a97ea0b91b749513f91f1b17c7bcf9df29f5d2f643cfa5438bc1ab6d3522c16",
+  "reproduction_command": "python3 research/experiments/EXP-INTEL-35551517470/raw_evidence/saturating_fit.py",
+  "environment": {
+    "os": "linux",
+    "platform": "GitHub Actions runner",
+    "python_path": "/opt/hostedtoolcache/Python/3.12.14/x64"
+  }
+}

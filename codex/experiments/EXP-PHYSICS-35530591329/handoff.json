@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35530591329",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can entropy-rate estimation (H(Y|Z,A) vs H(Y|Z) without per-stratum KL weighting) or Bayesian model comparison detect the 1.52-bit CMI signal on the stochastic 12-state SPA while maintaining null centering, thereby bypassing the plug-in KL bias-variance tradeoff?",
+  "why_next": "The frozen FALSIFIED-IN-SETTING verdict via C3 closes the plug-in KL alpha sweep pathway on the stochastic 12-state SPA: the tradeoff between sensitivity (K3>=0.5) and null centering (|null_mean|<0.1) is monotonic and irreconcilable across alpha in {0, 0.01, 0.1, 0.5, 1.0}. No alpha achieves both. The bias is intrinsic to per-stratum KL weighting across varying-size strata with Laplace smoothing, not a hyperparameter tuning problem. Orthogonal estimators that do not weight per-stratum PMI contributions (entropy-rate, Bayesian model comparison, likelihood-ratio) may bypass this bias-variance tradeoff. Entropy-rate estimation measures H(Y|Z,A)-H(Y|Z) globally rather than summing per-stratum KL, which could avoid the small-stratum bias that dominates at alpha<1.0.",
+  "carry_forward": {
+    "established": [
+      "Sensitivity-null tradeoff for plug-in KL D_KL(P(Y|Z,A)||P(Y|Z)) with Laplace smoothing is monotonic and irreconcilable on stochastic 12-state SPA at N=5000: alpha=0 K3=1.377 bits but |null_mean|=0.924; alpha=1.0 |null_mean|=0.064 but K3=0.099. No crossover exists. (EXP-PHYSICS-35530591329 result.json:metrics.alpha_sweep_summary, metrics.sensitivity_null_tradeoff)",
+      "C1 passers {1.0} and C3 passers {0, 0.01, 0.1} have empty intersection on this SPA class. (EXP-PHYSICS-35530591329 result.json:controls.C1-NULL-CONTROL passing_alphas=[1.0], controls.C3-POSITIVE-CONTROL)",
+      "Null centering (C1) is robust at alpha=1.0: |shuffled-action null_mean|=0.064, 1.6x below 0.1 threshold. (EXP-PHYSICS-35530591329 result.json:controls.C1-NULL-CONTROL)",
+      "True I(Y;A|Z) on stochastic 12-state SPA is 1.52 bits (audit-confirmed). Plug-in KL alpha=0 recovers K3=1.377, alpha=0.1 recovers K3=0.743, both exceed 0.5 threshold. (EXP-PHYSICS-35510154353 audit.json + EXP-PHYSICS-35530591329 replication)",
+      "KSG CMI k=5 is k-invariant on discrete data (sklearn discrete_features=True): identical K3=0.000560 for k=5,10,20. Implementation uses categorical matching, not distance neighborhoods. (EXP-PHYSICS-35510154353 result.json:metrics.ksg_k_invariance)",
+      "Plug-in KL alpha=1.0 Laplace smoothing has bias exceeding signal: degenerate control K3=0.109 on deterministic SPA (I=0) > stochastic K3=0.099. 88% pseudo-count mass. (EXP-PHYSICS-35510154353 result.json:metrics.plugin_kl_smoothing_bias)",
+      "Design verification passes: 48/48 (state,action) pairs with 4 distinct candidates, 2 non-empty stratum size buckets. (EXP-PHYSICS-35530591329 result.json:controls.C6-DESIGN-VERIFICATION, C7-STRATUM-COVERAGE)",
+      "Sparse strata coverage: 26.4% of K2 strata have >=5 records at N=5000 (380/1438), below 30% MEASUREMENT_INVALID threshold. FALSIFIED priority overrides. (audit.json V3-sparse-strata-coverage, recomputed_metrics.decision_rule_recomputed.coverage_K2=0.264)"
+    ],
+    "rejected": [
+      "Plug-in KL estimator class with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} for simultaneous C1+C3 on stochastic 12-state SPA at N=5000: FALSIFIED-IN-SETTING. Tradeoff monotonic, no crossover. (EXP-PHYSICS-35530591329 verdict via C3)",
+      "Hypothesis that hyperparameter tuning (reduced smoothing alpha<=0.1) unblocks the CMI pathway: FALSIFIED. Alpha=0.1 K3=0.743 passes C3 but |null_mean|=0.561 fails C1 by 5.6x. (EXP-PHYSICS-35530591329 result.json:alpha_sweep.alpha_0.1)",
+      "Hypothesis that sensitivity-null tradeoff is caused by deterministic/stochastic strata mixing: FALSIFIED. CANDIDATES redesign yields 0% deterministic strata but null bias identical to parent within 0.001 bits. Bias is intrinsic to per-stratum KL weighting. (EXP-PHYSICS-35470449605 result.json + EXP-PHYSICS-35530591329 audit V3)",
+      "Hypothesis that KSG CMI k=5 insensitivity is due to insufficient neighborhood resolution: FALSIFIED for sklearn discrete_features=True. (EXP-PHYSICS-35510154353 result.json:metrics.ksg_k_invariance)",
+      "Hypothesis that plug-in KL alpha=1.0 detects 1.52-bit CMI signal: FALSIFIED. K3=0.099, 5.1x below threshold. (EXP-PHYSICS-35510154353 result.json:controls.C3-POSITIVE-CONTROL)"
+    ],
+    "unknown": [
+      "Whether entropy-rate estimation H(Y|Z,A)-H(Y|Z) (global, not per-stratum weighted) detects the 1.52-bit signal while maintaining null centering on stochastic 12-state SPA",
+      "Whether Bayesian model comparison (Bayes factor for action-dependent vs action-independent transition model) detects the signal with valid null control",
+      "Whether likelihood-ratio tests between nested Markov and beyond-Markov models bypass the per-stratum weighting bias",
+      "Whether KSG with discrete_features=False or continuous distance encoding recovers sensitivity while preserving null centering",
+      "Whether N=50000 resolves the tradeoff (exploratory parent shows bias is asymptotic: K2 grows from 0.933 to 1.779, not converging to 0)",
+      "Whether alternative null frameworks (parametric bootstrap, conditional entropy) center null at zero for reduced-alpha plug-in KL (parent EXP-PHYSICS-35402003775 falsified three frameworks)",
+      "Whether per-(state,action) PMI signal (1.46-1.69 bits) can serve as alternative detection paradigm bypassing CMI estimation",
+      "Generalization beyond 12-state discrete hash SPA to production Web transitions with larger vocabularies, continuous embeddings, or stochastic mixing"
+    ],
+    "do_not_assume": [
+      "This FALSIFIED-IN-SETTING verdict closes C-WEB-DYNAMICS or the Physics lane. It closes only the plug-in KL alpha sweep pathway on this specific SPA class. Alternative estimators and hyperparameters remain untested.",
+      "CMI estimation is fundamentally impossible on discrete SPAs. Audit confirms MLE alpha=0 recovers K3=1.377 bits (1.52-bit true CMI). The signal IS detectable; the failure is estimator-class-specific.",
+      "The 1.52-bit true CMI is undetectable. Per-stratum PMI 1.46-1.69 bits across all 48 strata (p=0.0) and MLE 1.377 bits confirm the signal is strong.",
+      "Production Web transitions generalize from this synthetic 12-state SPA. SPA has hash routing, 4 candidates per (state,action), no anti-bot, auth, visual complexity, or production stochasticity.",
+      "The within-session shuffle correction changes C1 pass/fail. C1 margin is 1.6-8x below threshold; correction does not affect outcome.",
+      "Sparse strata (26.4% coverage below 30% threshold) invalidate the measurement. FALSIFIED priority overrides MEASUREMENT_INVALID in the frozen decision rule. The measurement is valid; the sparse regime explains why MLE null is inflated.",
+      "The missing baselines (B-PERMUTATION-TEST, B-PARENT-KSG-K5, B-KSG-CMI-K10) affect the C1/C3 gate. These baselines are supplementary; the primary gate is fully characterized by the alpha sweep.",
+      "C1 stratification mismatch (K2 for null, K3 for positive control) changes the verdict. Audit V1 confirms the tradeoff is qualitatively robust; quantitative threshold crossing could differ but no alpha achieves both under either K definition."
+    ]
+  },
+  "dependencies": [
+    "Stochastic 12-state SPA design with CANDIDATES (validated: I(Y;A|Z)=1.52 bits, 48/48 pairs with 4 candidates)",
+    "N=5000 transitions (50 sessions x 100 steps, seed=42) as frozen measurement unit",
+    "Plug-in KL alpha sweep {0, 0.01, 0.1, 0.5, 1.0} with within-session action-label shuffle null (500 permutations for C1, 1000 for C3)",
+    "Orthogonal estimator paradigm (entropy-rate, Bayesian, or likelihood-ratio) must be implemented and validated before CMI testing can resume",
+    "Parent carry_forward established items (null centering at alpha=1.0, true CMI 1.52 bits, KSG k-invariance) remain valid"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35530591329/spec.json:decision_rule, falsifier C1/C3, alpha_values, positive_control 0.5 bits",
+    "research/experiments/EXP-PHYSICS-35530591329/result.json:metrics.alpha_sweep_summary, controls.C1-NULL-CONTROL/C3-POSITIVE-CONTROL/C6/C7/B-DETERMINISTIC-SPA, metrics.sensitivity_null_tradeoff, observations",
+    "research/experiments/EXP-PHYSICS-35530591329/audit.json:status REVISE, validity_findings V1-V7, claim_ceiling, recomputed_metrics.decision_rule_recomputed",
+    "research/experiments/EXP-PHYSICS-35530591329/raw_results.json:alpha_sweep, null_control, positive_control, both_passers, stratum_size_bias_decomposition, determinism_k3_stochastic",
+    "research/experiments/EXP-PHYSICS-35530591329/run_experiment.py:est_plugin_kl, shuffled_action_null_within_session, build_state_history_records/build_action_history_records",
+    "research/experiments/EXP-PHYSICS-35530591329/provenance.json:python 3.12.14 seed 42 artifacts",
+    "research/experiments/EXP-PHYSICS-35510154353/handoff.json:carry_forward.established, recommended_action (alpha sweep resolved by this experiment)",
+    "research/experiments/EXP-PHYSICS-35530591329/request.json:parent_handoff EXP-PHYSICS-35510154353"
+  ],
+  "recommended_action": "Design a new frozen experiment testing entropy-rate estimation H(Y|Z,A)-H(Y|Z) (directly computing conditional entropy difference without per-stratum KL weighting) or Bayesian model comparison (action-dependent vs action-independent transition model via Bayes factor) on the stochastic 12-state SPA at N=5000. These estimators measure fundamentally different quantities than plug-in KL and may bypass the per-stratum bias-variance tradeoff. The frozen experiment must include: (a) the same C1 within-session shuffled-action null framework (500 permutations), (b) the same C3 positive control (K3>=0.5 bits, p<=0.001), (c) the same C6/C7 design verification, and (d) a new positive control calibrated for the estimator's natural scale. If entropy-rate or Bayesian estimation passes C1+C3, proceed to beyond-Markov K3-K2 testing. If all orthogonal estimators also fail, the CMI pathway on discrete 12-state SPAs is exhausted and the Physics lane must pivot to production Web data with continuous state representations."
+}

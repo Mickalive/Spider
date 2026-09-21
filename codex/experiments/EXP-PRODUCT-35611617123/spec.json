@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-PRODUCT-35611617123",
+  "lane": "product",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does increasing sample size from n=480 to n=1000 at 50% Gaussian overlap resolve the marginal orthogonality failure (CI upper 0.168 vs delta 0.15, TOST p_upper=0.061) under Bonferroni correction for 3 overlap conditions — and does this recover the 50% operating point for the freshness guard?",
+  "hypothesis": "The parent's 50% orthogonality failure (r=0.080, CI upper 0.168 at n=480) is a Type I error from underpowering: the true population correlation at 50% Gaussian overlap is below delta=0.15, and increasing n to 1000 will narrow the CI enough to pass TOST equivalence at the Bonferroni-corrected alpha=0.0167. The calibrated threshold at 50% (0.27) will remain valid, recovering the 0-50% usable operating envelope.",
+  "falsifier": "If the 50% orthogonality failure persists at n=1000 (CI upper >= 0.15 after Bonferroni correction), OR if the calibrated threshold becomes None at 50% with larger n, OR if any of the 0%/25% regression controls fail — then the 50% operating point is a real breakdown, not a sampling artifact, and the usable envelope remains bounded to 0-25% overlap.",
+  "baselines": [
+    "Parent 50% overlap: r=0.080, CI upper 0.168, TOST p_upper=0.061 at n=480 (EXP-PRODUCT-35572180893 result.json::metrics.orthogonality_by_overlap.50)",
+    "Parent calibrated threshold at 50%: 0.27, F1=0.928, precision=0.944, recall=0.9125 (EXP-PRODUCT-35572180893 result.json::metrics.per_condition_calibrated_metrics.50)",
+    "Parent 0% overlap: r=-0.023, CI upper 0.066, TOST PASS at n=480 (EXP-PRODUCT-35572180893 result.json::metrics.orthogonality_by_overlap.0)",
+    "Parent 25% overlap: r=-0.029, CI upper 0.061, TOST PASS at n=480 (EXP-PRODUCT-35572180893 result.json::metrics.orthogonality_by_overlap.25)",
+    "Parent 75% overlap: r=0.046, CI upper 0.135, TOST PASS at n=480 (EXP-PRODUCT-35572180893 result.json::metrics.orthogonality_by_overlap.75)",
+    "Parent 100% overlap: r=-0.026, CI upper 0.064, TOST PASS at n=480 (EXP-PRODUCT-35572180893 result.json::metrics.orthogonality_by_overlap.100)"
+  ],
+  "positive_control": "At 0% overlap (noise mean = 0.095, 5.5 sigma below FAILURE_THRESHOLD = 0.20), FP at threshold 0.20 must be <= 0.01 (near-zero). At 25% overlap, calibrated threshold must exist (not None) and TOST must pass at delta=0.15 — replicating the parent's 0-25% usable envelope at larger n.",
+  "null_control": "At 50% overlap with n=480 (parent sample size), TOST must FAIL — replicating the parent's marginal failure and confirming the larger-n result is not an artifact of different random seed or infrastructure changes.",
+  "measurement_validity": [
+    "Use identical Gaussian overlap design as parent: failure N(0.295, 0.05), noise N(mu_noise, 0.05) with mu_noise = 0.195 for 50% overlap target",
+    "Minimum 1000 samples per condition at 50% overlap for TOST with Bonferroni correction",
+    "Run 0%, 25%, and 50% overlap conditions only (75% and 100% are tautological boundary conditions, not actionable for product deployment)",
+    "Threshold sweep: 50 points [0.05, 0.06, ..., 0.54] in 0.01 increments — identical to parent",
+    "Clamp all generated scores to [0.0, 1.0] to maintain behavioral-score semantics",
+    "Use same mock server infrastructure (Flask 3.1.3 + PyJWT + SQLite) as parent for comparability",
+    "TOST equivalence test: delta=0.15, alpha=0.0167 (Bonferroni-corrected for 3 overlap conditions), one-sided CI upper bound < 0.15",
+    "Empirical overlap verification: compute P(noise_score > FAILURE_THRESHOLD) from generated samples"
+  ],
+  "decision_rule": "The 50% operating point is RECOVERED if ALL of: (a) TOST passes at 50% overlap with Bonferroni-corrected alpha=0.0167 (CI upper < 0.15); (b) calibrated threshold at 50% is not None; (c) 0% and 25% controls pass (TOST PASS, threshold not None). The 50% breakdown is CONFIRMED if EITHER: (a) TOST fails at 50% with corrected alpha (CI upper >= 0.15), OR (b) calibrated threshold is None at 50%. Otherwise MIXED. Any failure of 0%/25% regression controls triggers MEASUREMENT_INVALID.",
+  "product_consequence_positive": "If the 50% orthogonality failure resolves at n=1000, the freshness guard's usable envelope extends to 0-50% Gaussian overlap (threshold 0.20-0.27). This significantly broadens the production deployment window: genuine overlap up to 50% is tolerable. Combined with prior orthogonality confirmations at 0-25% and marginal confirmation at 50%, this moves C-FRESHNESS toward PRODUCT_CORE eligibility for environments with moderate noise/refresh overlap.",
+  "product_consequence_negative": "If the 50% orthogonality failure persists at n=1000, the usable envelope remains bounded to 0-25% Gaussian overlap. The 50% condition represents a genuine breakdown of the independence assumption. Production deployment requires keeping noise/refresh overlap below 25% — a tighter constraint that may be unrealistic for environments with high natural stochasticity. C-FRESHNESS stays EXPERIMENTAL with narrowed deployment envelope.",
+  "estimated_cost": "Low-medium: single new condition (n=1000 at 50% overlap) plus regression controls (0%, 25% at n=480). Reuses parent mock server infrastructure and threshold sweep code. Total ~3000 samples, comparable to a single parent condition run.",
+  "expected_information_gain": "High: directly resolves the parent's marginal 50% orthogonality failure — the single highest-information question for C-FRESHNESS deployment. A positive result recovers a significantly wider usable envelope (0-50% vs 0-25%). A negative result confirms a real constraint. Either outcome changes the product deployment decision. The experiment is minimal (one new condition + regression controls) and directly targeted at the identified uncertainty."
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35476270792",
+  "lane": "graph",
+  "github_run_id": "35476270792",
+  "base_sha": "cce441dd25bba9649a80c2073d41eb2fc57e0a7f",
+  "code_files": {
+    "testbed_server.py": "b3be634e6c2e086264d293f430839575f59738daff5ede743b54a21a20a45a18",
+    "flask_only_server.py": "3870f02d27133c36e40ea90a2ecbffa2ff9db4508e637cef965e8daa791e871b",
+    "run_experiment.py": "2f2f00e3a60084df8deba44e0a4ed90311748085f6d558810740a571b5e41c28"
+  },
+  "raw_evidence": {
+    "path": "raw_evidence/experiment_data.json",
+    "sha256": "e0a2d05b55190b4a88854615b9e7e5c88bb637f920b2fc2c822996077dfb65a5"
+  },
+  "parent_experiment": "EXP-GRAPH-35470449310",
+  "corrections_from_parent": [
+    "V3 FIX: Exclude 304 from pooled Pearson correlation (304 uses fixed 0.2 constant for dynamic_content_hash; token-state-dependent construction violates spec validity clause 8)",
+    "V4 FIX: B-PARENT-CONFOUND-REPRODUCTION negative control (secrets.token_hex(16) for expired, uuid4 for valid - exact prior defect)",
+    "V5 FIX: C3 one-sided (CI upper < 0.15 only); C4 one-sided (TOST p_upper < 0.05 only)"
+  ],
+  "environment": {
+    "python_version": "3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "flask_version": "3.1.3",
+    "pyjwt_version": "2.14.0",
+    "scipy_version": "1.18.1",
+    "numpy_version": "2.5.3",
+    "requests_version": "2.34.2"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "4953b317db6c23ff5c606e9e486d2c03a51552b8",
+  "chain_depth": 1,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T08:30:48.872966+00:00",
+  "experiment_id": "EXP-PHYSICS-35578258358",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated.",
+  "inherited_next_question": "Can a corrected Bayesian model comparison with K=n_states=12 (frozen spec) and N>=1000 within-session shuffled-action permutations replicate the audit-corrected SURVIVES_CURRENT_TEST result on the stochastic 12-state SPA, thereby establishing the Bayesian paradigm as the first estimator to pass both C1 (null median < 0) and C3 (p < 0.001) and unblocking Phase 2 beyond-Markov K3-K2 testing?",
+  "lane": "physics",
+  "origin_github_run_id": "35578258358",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35572180485",
+    "path": "research/experiments/EXP-PHYSICS-35572180485/handoff.json",
+    "sha256": "1b8bc62006d54f1ba9ff0866ee50691426328ebe613f60203ab3c80aea32319c"
+  },
+  "reason": "continuation",
+  "request_hash": "54f8a28fd510301bad0f72008bdf7a6f213d6d518e7f3d8c8428e74de1a6bc33",
+  "request_id": "1dca0bc5ac24164811782a43",
+  "schema_version": 1
+}

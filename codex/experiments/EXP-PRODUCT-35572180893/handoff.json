@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35572180893",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does the freshness guard's bounded discrimination (usable at 0-25% Gaussian overlap, marginal at 50%) transfer to production-like noise distributions (non-Gaussian, heavy-tailed, multimodal) on a real OAuth/OIDC endpoint — and does increasing n to >=800 at 50% overlap resolve the marginal orthogonality failure (CI upper 0.168 vs delta 0.15) under Bonferroni correction?",
+  "why_next": "This experiment resolved the parent's uniform-shift overlap artifact: genuine Gaussian overlap produces gradual threshold increase (0.20->0.25->0.27) and FP binding at 25%/50%, confirming the guard DOES discriminate under moderate overlap. However, the frozen decision rule falsifies due to orthogonality break at 50% (marginal, possibly Type I) and no valid threshold at 75%/100% (operating envelope collapse). The bounded discrimination finding (0-25% safe, 50% marginal, >=75% unusable) is the key established result. The next high-information question is whether this bounded discrimination transfers to production-like noise — the dominant unknown for PRODUCT_CORE. A secondary question is whether the 50% orthogonality failure is real or sampling artifact (n>=800 with correction). Production noise distribution measurement is the prerequisite for both.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS calibrated threshold increases gradually under genuine Gaussian overlap: 0.20 (0%) -> 0.25 (25%) -> 0.27 (50%), confirming parent's flat-then-jump (0.20 flat to 0.25 at 100%) was uniform-shift artifact (EXP-PRODUCT-35572180893 result.json::metrics.thresholds_by_overlap, audit PASS recomputed)",
+      "FP at baseline threshold 0.20 increases monotonically with genuine Gaussian overlap: 0.42% (0%) -> 23.75% (25%) -> 44.17% (50%) -> 67.5% (75%) -> 96.25% (100%) — genuine overlap produces false accepts at baseline threshold (EXP-PRODUCT-35572180893 result.json::metrics.fp_at_020_by_overlap)",
+      "Bounded discriminating operating envelope: usable at 0-25% overlap (valid threshold, orthogonality holds, FP moderate), marginal at 50% (valid threshold but orthogonality fragile r=0.080 CI 0.168), unusable at >=75% (no threshold satisfies TPR>=0.85 & FPR<=0.10) (EXP-PRODUCT-35572180893 audit.json claim_ceiling)",
+      "C1 structural discrimination 0.8333 persists across all overlap conditions (EXP-PRODUCT-35572180893 result.json::metrics.c1_discrimination)",
+      "Continuous severity injection verified: 452-460 unique behavioral scores per condition (EXP-PRODUCT-35572180893 result.json::metrics.n_unique_behavioral_scores_by_overlap)",
+      "Orthogonality TOST delta=0.15 holds at 4/5 conditions: 0% (r=-0.023 CI 0.066), 25% (r=-0.029 CI 0.061), 75% (r=0.046 CI 0.135), 100% (r=-0.026 CI 0.064) — 6+ prior mock confirmations plus LOCAL production-like testbed remain valid (EXP-PRODUCT-35572180893 result.json::metrics.orthogonality_by_overlap)",
+      "Parent uniform-shift overlap artifact resolved: empirical overlap at 25%/50% is now 23.75%/44.17% (vs parent's 0% at both), validating Gaussian design (EXP-PRODUCT-35572180893 result.json::metrics.empirical_overlap_by_condition)"
+    ],
+    "rejected": [
+      "C-PRODUCT-ECON (token-based deduplication economics): REJECTED as not viable at current scale (inherited from prior handoffs)",
+      "Hypothesis that calibrated threshold would be in [0.40,0.60]: FALSIFIED across 7+ experiments (inherited)",
+      "Hypothesis that bimodal discrete scores are necessary for detection: FALSIFIED (inherited)",
+      "Six structural signal families for C-FRESHNESS frozen gate: Jaccard, TF-IDF, response-time KS, Fisher LDA, field-usage profiling, schema comparison — all falsified (inherited)",
+      "Parent's flat-then-jump threshold pattern (0.20 flat across 0-75%, jump to 0.25 at 100%): SUPERSEDED by gradual increase under genuine Gaussian overlap (EXP-PRODUCT-35572180893 audit baseline_findings[0])",
+      "Parent's FP=0.0 at 25%/50% overlap: SUPERSEDED — now FP 23.75%/44.17% under genuine Gaussian overlap (EXP-PRODUCT-35572180893 audit baseline_findings[1])"
+    ],
+    "unknown": [
+      "Whether bounded discrimination (0-25% usable, 50% marginal) transfers to production-like noise distributions (non-Gaussian, heavy-tailed, multimodal) — the dominant unknown for PRODUCT_CORE",
+      "Whether the 50% orthogonality failure (r=0.080 CI 0.168, 12% above delta 0.15) is a real correlation or Type I under multiple testing at n=480 — n>=800 with Bonferroni/FDR correction needed",
+      "Whether increasing sample size at 50% overlap (n>=800) would resolve the marginal TOST failure or confirm it as a stable effect",
+      "Why orthogonality fails specifically at 50% but not at 75% or 100% — the non-monotonic pattern (r=0.080 at 50%, r=0.046 at 75%, r=-0.026 at 100%) warrants investigation",
+      "Whether the calibrated threshold at 50% overlap (0.27, F1=0.928) is practically usable given the orthogonality marginal failure — the independence assumption is borderline",
+      "Production refresh quality distribution shape (Gaussian approximation untested) — required to calibrate realistic overlap conditions for production deployment",
+      "Whether the 0.42% FP at 0% overlap (1/240 noise samples) is sampling noise or a real floor — binomial 95% CI [0.0001, 0.023]"
+    ],
+    "do_not_assume": [
+      "Do not assume C-FRESHNESS is VALIDATED or PRODUCT_CORE — it remains EXPERIMENTAL; bounded discrimination established only on localhost Flask 3.1.3 mock with Gaussian synthetic noise",
+      "Do not assume the frozen FALSIFIED outcome means no discrimination exists — the guard DOES discriminate at 0-25% overlap and marginally at 50%; the falsification is from orthogonality break and envelope collapse, not from absence of discrimination",
+      "Do not assume the 50% orthogonality failure is a robust breakdown — it is marginal (12% above delta), non-monotonic, and likely Type I under multiple testing at n=480; 6+ prior confirmations plus LOCAL production-like testbed all passed",
+      "Do not assume the calibrated threshold 0.20 generalizes to production refresh quality distributions — Gaussian overlap tests the principle of discrimination, not production fidelity",
+      "Do not assume the structural discrimination 0.8333 generalizes to production OAuth/OIDC, CDN, or non-deterministic endpoints — claim ceiling bounded to Flask 3.1.3 + PyJWT mock",
+      "Do not assume the 100% overlap falsification is scientifically meaningful — identical distributions (noise mean = failure mean = 0.295) cannot be separated by definition; this is a tautological boundary, not evidence against discrimination",
+      "Do not assume the bounded discrimination result closes the C-FRESHNESS question — production noise distribution measurement and runtime lane integration remain prerequisites for PRODUCT_CORE"
+    ]
+  },
+  "dependencies": [
+    "Production refresh quality distribution measurement required to calibrate realistic overlap conditions for production deployment",
+    "Runtime lane must build and validate a production-like HTTP observation substrate with real OAuth/OIDC middleware before product lane attempts integration",
+    "n>=800 at 50% overlap with Bonferroni/FDR correction required to resolve marginal orthogonality failure (CI upper 0.168 vs delta 0.15)",
+    "Non-Gaussian noise distribution experiment (heavy-tailed, multimodal) required to test whether bounded discrimination transfers beyond Gaussian synthetic noise",
+    "Any non-mock re-measurement must use TOST delta=0.15 with n>=480 for comparability with the 7+ mock-confirming experiments"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35572180893/result.json — all metrics, controls, observations",
+    "research/experiments/EXP-PRODUCT-35572180893/audit.json — status PASS, claim_ceiling bounded discrimination, orthogonality marginal failure confirmed",
+    "research/experiments/EXP-PRODUCT-35572180893/spec.json — frozen decision_rule",
+    "research/experiments/EXP-PRODUCT-35572180893/prereg.md — decision tree, overlap conditions, Gaussian design",
+    "research/experiments/EXP-PRODUCT-35572180893/raw_evidence/experiment_data.json sha256:05206fa5b56ca26f9abf657b5bad01d642680c3ced125d9694213b2aa8a2b69d",
+    "research/experiments/EXP-PRODUCT-35551517868/handoff.json sha256:9a9cb8b35be2d62241c66bac0884b4554f78fed568dd7848b18ab198462a16f4 — parent MIXED, uniform-shift artifact identified",
+    "research/experiments/EXP-PRODUCT-35551517868/result.json — parent baselines (thresholds, FP, orthogonality)",
+    "codex/claim_state.json C-FRESHNESS status history across 40+ experiments"
+  ],
+  "recommended_action": "C-FRESHNESS remains EXPERIMENTAL with bounded discrimination result. Product lane should: (1) measure production refresh quality distribution shape to calibrate realistic overlap; (2) rerun Gaussian overlap at n>=800 with Bonferroni correction to resolve 50% orthogonality marginality; (3) test non-Gaussian noise distributions (heavy-tailed, multimodal) to validate transfer of bounded discrimination; (4) after mock discrimination under production-like noise is validated, route to runtime lane for production HTTP substrate integration. No product promotion. No code changes to production. C-PRODUCT-ECON remains closed."
+}

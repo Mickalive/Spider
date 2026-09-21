@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35401996615",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "cv_check": {
+      "250": {
+        "kde": {
+          "cv_max": 0.3496,
+          "cv_max_type": 4,
+          "pass": true,
+          "n_pass": 8
+        },
+        "knn": {
+          "cv_max": 0.0578,
+          "cv_max_type": 1,
+          "pass": true,
+          "n_pass": 8
+        }
+      },
+      "500": {
+        "kde": {
+          "cv_max": 0.2955,
+          "cv_max_type": 7,
+          "pass": true,
+          "n_pass": 8
+        },
+        "knn": {
+          "cv_max": 0.0616,
+          "cv_max_type": 1,
+          "pass": true,
+          "n_pass": 8
+        }
+      },
+      "1000": {
+        "kde": {
+          "cv_max": 0.2695,
+          "cv_max_type": 4,
+          "pass": true,
+          "n_pass": 8
+        },
+        "knn": {
+          "cv_max": 0.056,
+          "cv_max_type": 1,
+          "pass": true,
+          "n_pass": 8
+        }
+      }
+    },
+    "positive_control": {
+      "250": {
+        "kde": {
+          "t_stat": 1.794,
+          "p_one_sided": 0.0736,
+          "pass": false
+        },
+        "knn": {
+          "t_stat": 0.067,
+          "p_one_sided": 0.4751,
+          "pass": false
+        }
+      },
+      "500": {
+        "kde": {
+          "t_stat": -1.013,
+          "p_one_sided": 0.8157,
+          "pass": false
+        },
+        "knn": {
+          "t_stat": -1.613,
+          "p_one_sided": 0.909,
+          "pass": false
+        }
+      },
+      "1000": {
+        "kde": {
+          "t_stat": 6.443,
+          "p_one_sided": 0.0015,
+          "pass": true
+        },
+        "knn": {
+          "t_stat": 0.607,
+          "p_one_sided": 0.2882,
+          "pass": false
+        }
+      }
+    },
+    "null_control": {
+      "250": {
+        "kde": {
+          "n_pass": 6,
+          "pass_all": false
+        },
+        "knn": {
+          "n_pass": 7,
+          "pass_all": false
+        }
+      },
+      "500": {
+        "kde": {
+          "n_pass": 7,
+          "pass_all": false
+        },
+        "knn": {
+          "n_pass": 6,
+          "pass_all": false
+        }
+      },
+      "1000": {
+        "kde": {
+          "n_pass": 7,
+          "pass_all": false
+        },
+        "knn": {
+          "n_pass": 8,
+          "pass_all": true
+        }
+      }
+    },
+    "pipeline_validation": {
+      "kde_cv_max_250": 0.3496,
+      "kde_cv_in_5pct": false,
+      "knn_cv_max_250": 0.0578,
+      "knn_cv_in_5pct": false,
+      "pass": false
+    }
+  },
+  "controls": {
+    "pipeline_validation": {
+      "status": "FAIL",
+      "detail": "KDE CV max 0.3496 outside 5% range 0.546-0.604 (37.7% below); kNN CV max 0.0578 outside 5% range 0.717-0.793 (92.0% below). DGP implementation mismatch with parent."
+    },
+    "positive_control": {
+      "status": "FAIL",
+      "detail": "kNN positive control fails at ALL sample sizes (p=0.475, 0.909, 0.288). KDE positive control fails at 250 (p=0.074) and 500 (p=0.816), passes only at 1000 (p=0.002)."
+    },
+    "null_control": {
+      "status": "FAIL",
+      "detail": "KDE null control 6/8 at 250, 7/8 at 500 and 1000 (never 8/8). kNN null control 7/8 at 250, 6/8 at 500, 8/8 at 1000."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "raw_evidence.json",
+      "role": "raw",
+      "sha256": null
+    },
+    {
+      "path": "run_execute_v3.py",
+      "role": "code",
+      "sha256": null
+    }
+  ],
+  "observations": [
+    "DGP implementation produces divergence magnitudes ~10x smaller than parent (KDE max ~0.05 at lambda=1 vs parent ~0.18; kNN ~1.3 vs parent ~0.14). Indicates fundamental DGP mismatch.",
+    "kNN MI estimator returns near-constant values (~1.3 bits) at ALL lambda levels and sample sizes. kNN CV max 0.058 is 13x smaller than parent 0.755. Estimator is not detecting lambda-dependent structure.",
+    "KDE CV decreases with sample size (0.350 -> 0.296 -> 0.270), consistent with expected behavior, but absolute magnitudes are wrong.",
+    "KDE positive control passes only at n=1000 (t=6.44, p=0.002), suggesting the DGP signal is weak and only detectable at large n.",
+    "Null control fails for KDE at all sample sizes (6-7/8 pass), indicating the KDE estimator produces non-zero divergence at lambda=0 for some page types.",
+    "kNN positive control never passes (p>0.28 at all n), suggesting the kNN MI estimator is not sensitive to lambda-dependent action conditioning in this DGP."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per frozen decision_rule: pipeline validation at 250/type fails (KDE CV 0.3496 not in 0.546-0.604, kNN CV 0.0578 not in 0.717-0.793).",
+    "MEASUREMENT_INVALID per frozen decision_rule: positive control fails for kNN at all sample sizes.",
+    "The DGP implementation diverges from parent EXP-FRONTIER-34913743596 in unspecified ways, producing qualitatively different divergence magnitudes and CV patterns.",
+    "The kNN Kraskov MI estimator implementation may be fundamentally different from the parent, as indicated by the 13x smaller CV and near-constant values.",
+    "No inference about per-type CV stability at larger sample sizes is possible from this measurement-invalid experiment.",
+    "All evidence remains synthetic 2D [0,1]^2 with 8 heterogeneous affine page types; no inference to real Web DOM dynamics warranted."
+  ],
+  "unresolved": [
+    "The exact DGP parameters used by parent EXP-FRONTIER-34913743596 are not fully recoverable from the frozen spec alone; the DGP implementation needs to be reverse-engineered from the parent result.json metrics.",
+    "The kNN MI estimator implementation needs to be validated against the parent before sample-size scaling can be tested.",
+    "Whether per-type CV stability <=0.5 achieves at 500-1000/type remains unanswered due to measurement invalidity."
+  ]
+}

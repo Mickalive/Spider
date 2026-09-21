@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35389141536",
+  "lane": "product",
+  "created_at": "2026-09-18T20:05:15.515018+00:00",
+  "executed_at": "2026-09-18T21:30:00.000000+00:00",
+  "git_commit": null,
+  "git_branch": null,
+  "github_run_id": "35389141536",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "requests_version": "2.34.2",
+    "dependencies": ["requests", "json", "time", "statistics"],
+    "api_keys_available": false,
+    "network_access": true
+  },
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-PRODUCT-35389141536/request.json",
+    "spec.json": "research/experiments/EXP-PRODUCT-35389141536/spec.json",
+    "prereg.md": "research/experiments/EXP-PRODUCT-35389141536/prereg.md",
+    "freeze.json": "research/experiments/EXP-PRODUCT-35389141536/freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PRODUCT-35330741529",
+    "path": "research/experiments/EXP-PRODUCT-35330741529",
+    "contribution": "Parent analytical token cost measurements (literal 19691, parameterized 18624, cold 2475) inherited as reference baseline"
+  },
+  "code_paths": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/run_experiment.py",
+      "role": "experiment_execution_script",
+      "description": "HTTP request timing measurement for browser/verification costs on 32-task synthetic corpus"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+      "role": "parent_experiment_script",
+      "description": "Parent analytical token cost measurement with TASK_CORPUS definition"
+    }
+  ],
+  "data_sources": [
+    {
+      "type": "parent_analytical_measurement",
+      "path": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json",
+      "description": "Parent token cost measurements via tiktoken cl100k_base on synthetic 32-task corpus"
+    },
+    {
+      "type": "live_http_endpoint",
+      "url": "https://jsonplaceholder.typicode.com",
+      "description": "Free test API used as HTTP endpoint for browser cost measurement (remapped from example.com)"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/result.json",
+      "role": "result",
+      "description": "Final experiment results with all mandatory packet fields"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/report.md",
+      "role": "report",
+      "description": "Human-readable experiment report with interpretation"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/raw_evidence.json",
+      "role": "raw",
+      "description": "Raw measurement data: per-task browser execution times, verification times, HTTP status codes"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script"
+    }
+  ],
+  "reproduction_instructions": "python3 research/experiments/EXP-PRODUCT-35389141536/run_experiment.py",
+  "measurement_methodology": {
+    "browser_cost_measurement": "Python requests library with time.perf_counter() timing on HTTP GET/POST requests. 3 runs per task, median reported.",
+    "verification_cost_measurement": "JSON.loads() + HTTP status code validation time measured separately from browser latency.",
+    "token_cost_measurement": "Inherited from parent EXP-PRODUCT-35330741529 analytical tiktoken cl100k_base measurement. NOT re-measured in this experiment.",
+    "token_equivalent_conversion": "1ms ~ 1 token (rough approximation for cost comparison). Key insight: browser costs identical across conditions, so token savings preserved regardless of conversion rate."
+  },
+  "controls": {
+    "positive_control": {
+      "description": "5 blog-read-post tasks (GET /posts/1-5) against jsonplaceholder.typicode.com",
+      "expected": "5/5 HTTP 200 with valid JSON",
+      "observed": "5/5 HTTP 200 with valid JSON (270-292 bytes each)",
+      "pass": true
+    },
+    "null_control": {
+      "description": "3 tasks with non-existent URLs expecting HTTP 404",
+      "expected": "3/3 error status (404/403/401)",
+      "observed": "3/3 HTTP 404",
+      "pass": true
+    }
+  }
+}

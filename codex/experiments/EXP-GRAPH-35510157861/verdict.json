@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35510157861",
+  "lane": "graph",
+  "decision": "REJECTED — Frozen decision_rule triggers REJECTED: C7 negative control FAILS under consistent non-304 exclusion. Producer reports C7 PASS (B-PARENT-CONFOUND endpoint-stratified weighted |r|=0.2992, n=816 including 304s), but audit recomputes with consistent non-304 exclusion per spec: per-endpoint non-304 r = 0.058 (profile, n=206), -0.247 (data_list, n=206), -0.042 (session_status, n=272); stratified weighted r=-0.0735, |r|=0.0735 <0.15 → C7 FAILS. Producer includes 304 for B-PARENT-CONFOUND (n=816 total) but excludes 304 for primary testbed (n=684 non-304) — inconsistent protocol. C1-C6 all independently PASS: C1 TP=1.0/TN=1.0; C2 3/3 endpoints with variance; C3 stratified r=0.0257, CI upper 0.1005 <0.15; C4 TOST p_upper=0.00053; C5 heterogeneity diff=0.0833 < 2*SE; C6 B-FLASK-ONLY |r|=0.0201. The REJECTED is driven by a fragile negative control that fails under consistent 304 handling, not by evidence against orthogonality. Orthogonality signal remains strong: stratified pooled r=0.0257 (n=684, CI [-0.049, 0.100]) on production-like LOCAL testbed.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule REJECTED (C7 FAIL under consistent non-304 exclusion) on production-like testbed. However, orthogonality signal is strong: C1-C6 all pass, stratified pooled r=0.0257 (n=684, CI upper 0.1005 <0.15, TOST p_upper=0.00053), B-FLASK-ONLY r=0.0201. The REJECTED reflects a fragile negative control design (304 inclusion/exclusion changes B-PARENT-CONFOUND |r| from 0.299 to 0.074), not evidence against orthogonality. V_ETAG permission fix verified, C5 stratification fix verified. Maximum justified ceiling: within-endpoint orthogonality confirmed at delta=0.15 on LOCAL testbed (Flask 3.1.3 + PyJWT RS256 + SQLite WAL + CDN simulation with ETag-SHA256/Cache-Control) with headers-only structural signal at n_non304=684. NOT validated: production infrastructure, distributed CDN, concurrent load, delta=0.10, or body-inclusive signals. Frozen REJECTED from prior EXP-GRAPH-35481774794 does NOT accumulate evidence against orthogonality hypothesis — measurement-confounded."
+    }
+  ],
+  "product_action": "No product action. C-FRESHNESS remains EXPERIMENTAL; parallel-channel architecture not justified for production deployment. The orthogonality evidence on localhost mock is strong (r=0.026, CI upper 0.100) but insufficient for production promotion. B-FLASK-ONLY baseline confirms orthogonality persists without CDN/OAuth infrastructure (r=0.020), consistent with 6 prior mock experiments.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After designing a B-PARENT-CONFOUND negative control whose signal is robust to 304 inclusion/exclusion (e.g., using a different confound mechanism such as response-body-coupled request_id generation rather than token_hex-vs-uuid4, or defining C7 on the non-304 subset where the V1 confound must still reproduce), does the frozen decision rule yield CONFIRMED (all C1-C7 pass) or REJECTED at delta=0.15 on the production-like testbed with n_non304>=800?",
+  "reason": "The audit identifies a critical inconsistency: producer includes 304 samples for B-PARENT-CONFOUND (n=816) but excludes them for primary testbed (n=684). Under consistent non-304 exclusion, C7 FAILS (stratified |r|=0.0735 <0.15) and the frozen decision_rule yields REJECTED. The root cause is that 304 responses (all valid-token) carry the token_hex-vs-uuid4 request_id entropy difference in the structural composite, inflating the confound signal on 304-included data. On non-304 data, the V1 confound is much weaker on profile (0.058) and session_status (-0.042), surviving only on data_list (-0.247). The negative control is therefore fragile — its pass/fail depends on 304 handling rather than on whether the V1 confound is genuine. All other findings are solid: V_ETAG fix verified (overlap_count=1 for all endpoints), C5 stratification correct (diff=0.0833), C3/C4 equivalence strong (CI upper 0.1005, TOST p=0.00053). The experiment successfully resolved all three parent measurement defects (V_ETAG, C5 pooling, C7 definition) but the C7 negative control itself needs redesign to be informative.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35510157861/spec.json:decision_rule C1-C7 frozen",
+    "research/experiments/EXP-GRAPH-35510157861/spec.json:measurement_validity 304 exclusion",
+    "research/experiments/EXP-GRAPH-35510157861/result.json:metrics.stratified_pooled_r 0.025739, stratified_ci_upper_95 0.1005, tost p_upper 0.000533",
+    "research/experiments/EXP-GRAPH-35510157861/result.json:controls.C1-C6 all PASS, C7 PASS (including304)",
+    "research/experiments/EXP-GRAPH-35510157861/audit.json:status REVISE, producer_claim_supported false",
+    "research/experiments/EXP-GRAPH-35510157861/audit.json:recomputed_metrics.c7_bparent_stratified_weighted_r_excluding304 -0.0735, c7_bparent_pass_excluding304 false",
+    "research/experiments/EXP-GRAPH-35510157861/audit.json:validity_findings V_C7_304_INCONSISTENCY high severity",
+    "research/experiments/EXP-GRAPH-35510157861/audit.json:claim_ceiling REJECTED per frozen rule under consistent non-304 handling",
+    "research/experiments/EXP-GRAPH-35510157861/raw_evidence/experiment_data.json:recomputed bparent non-304 per-endpoint r 0.058/-0.247/-0.042",
+    "research/experiments/EXP-GRAPH-35510157861/run_experiment.py:745-750 vs 922-932 baseline accumulation without has_304 filter",
+    "research/experiments/EXP-GRAPH-35510157861/testbed_server.py:354-396 V_ETAG fix verified",
+    "research/experiments/EXP-GRAPH-35510157861/provenance.json:corrections_from_parent, environment"
+  ]
+}

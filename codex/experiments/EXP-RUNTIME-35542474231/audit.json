@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35542474231",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix raw_cell_results.jsonl duplication bug: depth observations duplicated 45->90 rows and large observations duplicated 30->60 rows (run_experiment.py line 733: all_rows = rows + depth_observations + large_observations where rows already contains those observations via fetch_and_measure appends); persist deduped artifact or write separate files and recompute hashes; current producer metrics correctly use deduped denominators (45/45, 30/30) but file sha26e2ceb8db41cec551d6fb931f5533c8fec1eab9ae6f5dbc5ea4c9c6bf104311 contains 87 duplicate URL rows and must be regenerated",
+    "Replace oracle-guided encoding_agnostic_decode (requires ground_truth_sha256 to decide stop condition) with oracle-free greedy iterative decoder for product claim: current spec measurement_validity #3 and implementation encoding_agnostic_decode(raw_bytes, ground_truth_sha256) succeed tautologically if CDN transform is lossless because SHA match is the success criterion itself; validate that greedy loop (try brotli -> try gzip until neither succeeds, return final bytes) yields byte-identical output without SHA oracle on all 48 CDN cells, or explicitly bound claim to 'oracle-guided recovery of losslessly transformed bytes' and NOT 'deployable decompression fix ready for kernel integration'",
+    "Exercise CDN cache HIT path: all 423 CDN responses (primary matrix 240 + depth 90 + large 60 + identity 15 + cache 18) have cf-cache-status=DYNAMIC per result.json validity_notes and recomputed cf-cache-status distribution; no HIT observed. Before Product Core promotion, test stale-cache serving (Cache-Control max-age>0, repeated URL without unique token, or force HIT via second request) to verify C3 for HIT does not diverge",
+    "Persist delivered wire bytes or deterministic oracle-free decode trace to enable independent recomputation: raw_cell_results.jsonl stores only raw_body_sha256/len and derived correct booleans, not raw bytes; recomputation relies on trusting derived flags. Add optional artifact with raw bytes (or gzip-compressed batch) or at minimum store per-observation attempted decode path and SHA of each intermediate decompression for audit without re-fetching",
+    "Amend report.md/product_consequence claim 'C-MEAS-VALID ready for Product Core promotion \u2014 only kernel integration remains' to reflect oracle requirement and single-edge/single-tier scope: validated only for Cloudflare free-tier quick tunnel edge iad05, sequential jittered requests, DYNAMIC only, 10KB nominal /150KB large, brotli q4/gzip L1, not other CDN providers/tiers/edges or concurrent load"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_oracle_circularity",
+      "severity": "major",
+      "observation": "Frozen spec and implementation define encoding_agnostic_decode as iterative try brotli->gzip->identity until SHA256 matches ground truth (spec.json measurement_validity #3, prereg.md section 7 algorithm, run_experiment.py:218 encoding_agnostic_decode with ground_truth_sha256 arg). This is correct for testing whether CDN transforms are lossless but is circular as a product mechanism: success is defined as matching the oracle SHA, so 240/240 is tautologically achievable if any decompression chain yields that SHA and formats are distinguishable. Deployable decoder cannot use ground truth.",
+      "impact": "Inflates product readiness claim; does not invalidate lossless-recovery observation but requires oracle-free validation before promotion",
+      "evidence": "spec.json:measurement_validity[2], prereg.md:7, run_experiment.py:218-259, report.md:5 product_consequence"
+    },
+    {
+      "id": "V2_duplicate_artifact",
+      "severity": "minor",
+      "observation": "raw_cell_results.jsonl contains 663 rows with 87 duplicate URLs (576 unique). Depth: 90 rows for 45 unique payload_key/rep combos (each of 9 depth payloads x5 reps appears twice). Large: 60 rows for 30 unique combos. Root cause run_experiment.py:733 all_rows = rows + depth_observations + large_observations after rows already accumulated those via fetch_and_measure. Producer metrics correctly report deduped 45/45 and 30/30 but artifact hash is polluted and naive row counts overstate N.",
+      "impact": "No change to decision after deduped recomputation (still 100% pass); file must be regenerated for provenance integrity",
+      "evidence": "raw_cell_results.jsonl sha 26e2ceb8..., payload_manifest.json n_rows 663, run_experiment.py:664-668 and 732-736, bash recomputation: depth unique 45 vs 90 rows"
+    },
+    {
+      "id": "V3_no_cache_hit",
+      "severity": "moderate",
+      "observation": "All CDN responses have cf-cache-status=DYNAMIC (423/423). No HIT observed despite phase 3 cache stability test with fixed URLs and 1s spacing. Spec unknown 'Does CDN cache HIT staleness cause different behavior?' remains unknown. Validity_notes discloses this but report claim ceiling does not bound DYNAMIC-only until section 6.",
+      "impact": "C3 generalizes only to DYNAMIC consecutive-serve; HIT staleness unknown and explicitly unresolved in result.json",
+      "evidence": "result.json:validity_notes[1], report.md Fig C3 table cf-cache-status DYNAMIC, raw_cell_results.jsonl cf-cache-status Counter DYNAMIC:423, provenance.json"
+    },
+    {
+      "id": "V4_oracle_free_equivalence_likely_but_untested",
+      "severity": "moderate",
+      "observation": "Method distribution on deduped CDN primary (br 60, gz+br 60, gz 80, gz+gz 40) shows each cell requires a deterministic decompression path where only one format is valid at each layer, so greedy oracle-free iteration (try brotli fail -> try gzip succeed, loop) would likely reproduce same results without SHA check. However producer did not report oracle-free decode results; audit cannot independently verify without raw bytes. Formats brotli and gzip are reliably distinguishable by header/magic, so practical risk is low but unmeasured.",
+      "impact": "Supports that oracle fix is probably transferable to deployable fix, but transfer not demonstrated in this packet",
+      "evidence": "recomputed_metrics encoding_agnostic_method_distribution, cell_methods 48 cells each single method, run_experiment.py:200 fullbody_decompress logic"
+    },
+    {
+      "id": "V5_single_edge_single_tier",
+      "severity": "minor",
+      "observation": "Tunnel edge iad05 on this run vs sjc01 on parent; geographic variance not tested, free-tier quick tunnel only, sequential requests with jitter 200-500ms, no concurrent load, HTTP/1.1 only. Report section 6 correctly lists not validated for other providers/HTTP2/concurrent/paid tiers.",
+      "impact": "No overclaim if ceiling in section 6 is respected; product_consequence_positive overstates by omitting these bounds",
+      "evidence": "provenance.json cdn_edge iad05, tunnel.log, report.md:6 Claim Ceiling Not validated for"
+    },
+    {
+      "id": "V6_raw_bytes_not_persisted",
+      "severity": "minor",
+      "observation": "Evidence chain RAW->OBSERVATION is truncated: raw_cell_results.jsonl stores raw_body_sha256/len and derived flags but not wire bytes. Independent recomputation of encoding-agnostic decode must trust derived correct flags or re-fetch. SHA chain is verifiable (expected_sha matches payload_manifest ground_truth_sha256 for 663/663 rows, 0 mismatches) but byte-level decompression path not independently reproducible offline.",
+      "impact": "Audit recomputation verified SHA equality and method counts but not byte-level decompression; requires trusting implementation or re-running experiment",
+      "evidence": "raw_cell_results.jsonl schema, bash check expected_sha mismatch 0, provenance.json environment"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-ENCODING-AGNOSTIC-REGRESSION",
+      "passed": true,
+      "expected": "60/240 correct (parent result), only GZIP-OUTER with AE containing gzip passes",
+      "observed": "60/240 correct (verified 60/240 fixed-order on deduped CDN rows), per run.log per-cell fixed counts exactly 5/5 only for GZIP-OUTER ae gzip/both (12 cells x5=60), 0/5 for all 36 other cells",
+      "recomputed": "60/240",
+      "evidence": "raw_cell_results.jsonl session_kind=CDN derived.correct, run.log PHASE 2 lines fixed=0/5 or 5/5, result.json controls B-ENCODING-AGNOSTIC-REGRESSION"
+    },
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "passed": true,
+      "expected": "240/240 byte-identical decompression to ground truth, encoding-agnostic and fixed-order both pass",
+      "observed": "240/240 EA correct, 240/240 fixed correct, 0 transport errors, environment valid",
+      "recomputed": "local EA 240/240 fixed 240/240",
+      "evidence": "raw_cell_results.jsonl session_kind=LOCALHOST 240 rows, run.log PHASE 1, result.json controls B-LOCALHOST-DIRECT"
+    },
+    {
+      "id": "B-CDN-IDENTITY",
+      "passed": true,
+      "expected": "15/15 identity observations recover ground truth via EA decode (CDN may gzip-compress text)",
+      "observed": "15/15 correct via EA (deduped), CDN gzip-compresses JSON/HTML text when AE contains gzip (as parent 5/15 raw byte-identical), EA handles via gz decompression",
+      "recomputed": "15/15 EA correct",
+      "evidence": "raw_cell_results.jsonl session_kind=CDN-IDENTITY 15 rows"
+    },
+    {
+      "id": "B-DEPTH-GENERALIZATION",
+      "passed": true,
+      "expected": ">=80% correct under EA decode for depths 3-5",
+      "observed": "45/45 deduped (90 rows in file includes duplicates) 100% pass; per-depth 15/15 each for JSON/HTML/BINARY at depths 3,4,5",
+      "recomputed": "45/45 (90 file rows, 45 unique)",
+      "evidence": "raw_cell_results.jsonl session_kind=CDN-DEPTH deduped, run.log PHASE 5"
+    },
+    {
+      "id": "B-LARGE-PAYLOAD",
+      "passed": true,
+      "expected": ">=80% correct under EA decode for >100KB payloads",
+      "observed": "30/30 deduped (60 rows in file includes duplicates) 100% pass; 150KB JSON/HTML/BINARY x2 orders each 5/5",
+      "recomputed": "30/30 (60 file rows, 30 unique)",
+      "evidence": "raw_cell_results.jsonl session_kind=CDN-LARGE deduped, run.log PHASE 6, payload_manifest LARGE payload_size 150000"
+    }
+  ],
+  "recomputed_metrics": {
+    "C1_cdn_primary_cells_pass": "48/48 (240/240 observations, deduped unique URLs)",
+    "C1_verified_file_rows_cdn": 240,
+    "C1_verified_deduped": 240,
+    "C2_binary_cdn_cells_pass": "16/16 (80/80 observations)",
+    "C3_cache_stability_ea_all_correct": "6/6 groups (18 observations, cf-cache-status=DYNAMIC all)",
+    "C3_cache_stability_raw_same": "5/6 groups raw bytes identical; HTML_BROTLI-OUTER raw differs but decompressed identical",
+    "C4_identity_observations_pass": "15/15",
+    "C5_depth_generalization_pass": "45/45 (100% deduped; raw file contains 90 rows due to duplication bug, threshold >=80%)",
+    "C5_depth3_pass": "15/15 deduped (30 rows in file)",
+    "C5_depth4_pass": "15/15 deduped (30 rows in file)",
+    "C5_depth5_pass": "15/15 deduped (30 rows in file)",
+    "C6_large_payload_pass": "30/30 (100% deduped; raw file contains 60 rows due to duplication bug, threshold >=80%)",
+    "positive_control_localhost_ea": "240/240",
+    "positive_control_localhost_fixed": "240/240",
+    "null_control_identity_ea": "15/15",
+    "baseline_fixed_order_cdn": "60/240 (25%) matches parent regression",
+    "encoding_agnostic_method_distribution_deduped_CDN_primary": {
+      "br": 60,
+      "gz+br": 60,
+      "gz": 80,
+      "gz+gz": 40
+    },
+    "cdn_total_observations_deduped": 240,
+    "localhost_total_observations": 240,
+    "identity_total_observations": 15,
+    "depth_total_observations_deduped": 45,
+    "large_total_observations_deduped": 30,
+    "cache_total_observations": 18,
+    "total_unique_urls": 576,
+    "total_file_rows": 663,
+    "duplicate_rows": 87,
+    "file_integrity_note": "raw_cell_results.jsonl has 663 rows but 576 unique URLs; depth and large observations duplicated (45->90, 30->60) via all_rows=rows+depth_observations+large_observations bug in run_experiment.py:733; cf-cache duplicate URLs for cache stability (6 urls x3 reps but counted correctly)",
+    "run_log_wall_time_s": 192.3,
+    "manifest_payloads": 24,
+    "transport_errors": 0,
+    "cf_cache_status_distribution": {
+      "DYNAMIC": 423
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Encoding-agnostic ORACLE-guided iterative decompression (try brotli then gzip iteratively until SHA256 equals within-run ground truth) losslessly recovers the ground-truth bytes for all tested transformations applied by Cloudflare free-tier quick tunnel (edge iad05, DYNAMIC only, no HIT observed) on 10KB nominal payloads (JSON 5.57, HTML 4.66, BINARY 7.69 bits/byte) and 150KB large payloads, across 48 primary cells (3 payload types x 2 stacking orders x 2 client chunk sizes x 4 Accept-Encoding variants, N=5 per cell, unique URLs, jitter 200-500ms) and generalizes to depths 3-5 alternating brotli(q4)/gzip(L1) stacking and to 150KB payloads (100% on deduped 45 depth + 30 large observations). Positive control 240/240 localhost and null control 15/15 identity pass; fixed-order regression 60/240 replicates parent. NOT JUSTIFIED: Deployable oracle-free decompression without ground truth (products cannot use SHA oracle); CDN HIT/stale-cache behavior (0 HIT observed); other CDN providers/tiers/edges; concurrent load; HTTP/2 or H3 framing; mixed chunk-size pipelines; paid-tier or globally distributed edge behavior. Product Core promotion requires: (a) demonstration that greedy oracle-free iteration (try brotli/gzip until failure) yields 240/240 without SHA check on same matrix, stored with byte-level recomputable artifact, plus HIT staleness test.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35542474231/spec.json decision_rule C1-C6 and measurement_validity",
+    "research/experiments/EXP-RUNTIME-35542474231/prereg.md sections 4-8",
+    "research/experiments/EXP-RUNTIME-35542474231/result.json metrics C1-C6, controls B-..., observations, validity_notes",
+    "research/experiments/EXP-RUNTIME-35542474231/report.md sections 3.1-3.9, claim ceiling",
+    "research/experiments/EXP-RUNTIME-35542474231/run_experiment.py:218-259 encoding_agnostic_decode oracle implementation, 485-546 fetch_and_measure, 733 duplicate bug",
+    "research/experiments/EXP-RUNTIME-35542474231/raw_cell_results.jsonl sha 26e2ceb8db41cec551d6fb931f5533c8fec1eab9ae6f5dbc5ea4c9c6bf104311 (663 rows, 576 unique URLs)",
+    "research/experiments/EXP-RUNTIME-35542474231/payload_manifest.json sha b622d3ebd6179c34c92be44e65cc051d7e6e1772bb789dbb80c272c7a414d30c",
+    "research/experiments/EXP-RUNTIME-35542474231/run.log PHASE 2 per-cell fixed/ea counts, PHASE 3 cache DYNAMIC",
+    "research/experiments/EXP-RUNTIME-35542474231/tunnel.log edge iad05, tunnel URL associations-knights-oral-processes.trycloudflare.com",
+    "research/experiments/EXP-RUNTIME-35542474231/provenance.json environment brotli 1.2.0 python 3.12.14 cloudflared 2026.9.1",
+    "research/experiments/EXP-RUNTIME-35538865067/handoff.json parent unknown/gap closed"
+  ],
+  "unresolved": [
+    "Does oracle-free greedy iterative decompression (no SHA check) achieve 240/240 on same 48 CDN cells? Spec requires ground truth to declare success; deployable kernel cannot use it. Greedy likely succeeds given distinct gzip/brotli headers but not measured here and not independently recomputable without raw bytes.",
+    "Does encoding-agnostic decode recover correctness for CDN HIT (stale) responses? All 423 CDN responses are DYNAMIC; HIT path not exercised despite fixed-URL cache stability design.",
+    "Does effect generalize to other CDN providers (Fastly, Akamai, CloudFront), paid tiers, other geographic edges, HTTP/2 or H3, concurrent clients, or mixed chunk-size pipelines? Explicitly not tested per report section 6.",
+    "What is amortized latency/cost of iterative try-brotli-then-gzip versus fixed-order decode? Not measured.",
+    "Were depth 3-5 and large-payload CDN deliveries also DYNAMIC and under same Accept-Encoding both condition (true per deduped rows) \u2014 does CDN re-encoding at deeper depths ever produce ambiguous bytes where both brotli and gzip decompress successfully (oracle tie-break needed)? Not observed but not falsified at deeper depths with other quality/level settings."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35445596324",
+  "lane": "intel",
+  "origin_github_run_id": "35445596324",
+  "base_sha": "9d9a09e5f774143121e58b6fca8b698001aaadaa",
+  "datasets": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "description": "Raw evidence from EXP-INTEL-34782350557: 7 tasks (3 listing, 3 detail, 1 cart) from Magento localhost 8080, truncated-first-20 locatable_sample, each element with tag/role/ariaLabel/inForm/x/y/w/h",
+      "source_experiment": "EXP-INTEL-34782350557"
+    }
+  ],
+  "code": [
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/analyze.py",
+      "sha256": "5acc37315ef28a5dd21420701c6826c4fc8f242fadbd7ccd4481ea83e123b724",
+      "description": "Analysis script: subsample effective_n ∈ {5,10,15,20}, recipe sampling (canonical and per-task, 10 seeds × 1000 iterations), bootstrap resampling (B=1000), Spearman correlation test, C1-C6 decision rules",
+      "based_on": "research/experiments/EXP-INTEL-35434771791/analyze.py"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/analysis_output.json",
+      "sha256": "35bfbc77f59b643564b48ae46a2efa6e741eb89d19c23438c20709598d6e7ec8",
+      "role": "derived",
+      "description": "Full analysis output: subsample results at 4 effective_n, bootstrap results, C5/C6 evaluation, decision rules"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/result.json",
+      "sha256": null,
+      "role": "derived",
+      "description": "Canonical experiment packet result with all mandatory keys"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35445596324/report.md",
+      "sha256": null,
+      "role": "derived",
+      "description": "Human-readable report interpreting results"
+    }
+  ],
+  "frozen_inputs": {
+    "request.json": "research/experiments/EXP-INTEL-35445596324/request.json",
+    "spec.json": "research/experiments/EXP-INTEL-35445596324/spec.json",
+    "prereg.md": "research/experiments/EXP-INTEL-35445596324/prereg.md",
+    "freeze.json": "research/experiments/EXP-INTEL-35445596324/freeze.json"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-35434771791",
+    "handoff_path": "research/experiments/EXP-INTEL-35434771791/handoff.json",
+    "handoff_sha256": "83a337a889f6dcaa0a08d1888e91a47ae8b34c62c34fcbc80e33dd9126f13085"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.x",
+    "dependencies": ["json", "math", "os", "random", "collections", "statistics"],
+    "external_calls": "none — all offline computation on existing reconstructed data",
+    "browser_network_model_calls": false
+  },
+  "key_parameters": {
+    "effective_ns": [5, 10, 15, 20],
+    "bootstrap_resamples": 1000,
+    "recipe_seeds": 10,
+    "recipe_iterations": 1000,
+    "hierarchy_alpha": 0.3,
+    "definitions_tested": ["DEF-FULL-MAP", "DEF-FORM-ONLY"],
+    "features_tested": ["tag_entropy", "form_fraction", "total_area"],
+    "tasks": 7,
+    "tasks_per_type": {"product_listing": 3, "detail": 3, "cart": 1},
+    "locatable_sample_size": 20,
+    "elements_with_bbox_range": {"min": 1070, "max": 1564}
+  },
+  "reproduction_command": "python3 research/experiments/EXP-INTEL-35445596324/analyze.py",
+  "reproduction_notes": "All computation is deterministic except for random.seed calls in recipe/bootstrap loops. Results are reproducible with the same random seeds. The raw evidence file is immutable and referenced by SHA256."
+}

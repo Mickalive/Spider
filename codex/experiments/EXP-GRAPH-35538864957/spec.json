@@ -1,0 +1,52 @@
+{
+  "experiment_id": "EXP-GRAPH-35538864957",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does C-FRESHNESS orthogonality at delta=0.15 survive on distributed production-like infrastructure with multi-node independent caches, concurrent client load (N>=5 parallel sessions), and independent cache invalidation across nodes — and does the correlation remain below the LOCAL testbed ceiling (r=0.041)?",
+  "hypothesis": "C-FRESHNESS orthogonality at delta=0.15 will be CONFIRMED on distributed multi-node infrastructure. The LOCAL testbed result (stratified pooled r=0.041, CI upper 0.116, TOST p=0.002, n_non304=684) will generalize because: (1) behavioral signals (token validation, session state) are independent of structural signals (ETag, Cache-Control, request_id entropy) regardless of cache topology; (2) multi-node independent caches increase structural variance without introducing behavioral correlation; (3) concurrent load adds timing jitter that does not couple the two signal domains. The distributed correlation is expected to be |r| < 0.15, consistent with LOCAL.",
+  "falsifier": "C-FRESHNESS orthogonality is falsified at delta=0.15 if ANY of: (C1) behavioral detection TP < 0.85 on distributed infrastructure (expired tokens not detected); (C2) fewer than 2/3 endpoints have non-304 behavioral signal std > 0 OR fewer than 2/3 have non-304 structural signal std > 0; (C3) 95% CI upper bound of endpoint-stratified pooled Pearson r (non-304, stratified by endpoint) >= 0.15 on distributed testbed; (C4) TOST equivalence test p_upper >= 0.05 at delta=0.15 (one-sided, endpoint-stratified non-304); (C5) endpoint-stratified cache-mode heterogeneity: |r_stratified_enabled - r_stratified_disabled| >= 2 * SE_pooled; (C6) B-LOCAL-ONLY baseline (single-node, no concurrency) shows |r| >= 0.15 (regression from LOCAL parent); (C7) B-CONFOUND-DISTRIBUTED negative control shows endpoint-stratified weighted |r| < 0.15 (confound fails to reproduce). C-FRESHNESS orthogonality is REJECTED if ANY condition fails. MEASUREMENT_INVALID if infrastructure failure prevents data collection.",
+  "baselines": [
+    {
+      "id": "B-LOCAL-ONLY",
+      "description": "Single-node Flask testbed WITHOUT concurrent load or multi-node distribution — identical to parent EXP-GRAPH-35530590140 LOCAL testbed. Re-run on same infrastructure to confirm regression-free baseline. Expected: stratified pooled r ~0.04, CI upper < 0.15.",
+      "expected": "|r| < 0.15, consistent with parent r=0.041"
+    },
+    {
+      "id": "B-DISTRIBUTED",
+      "description": "Multi-node distributed testbed: 2 independent Flask processes on separate ports, each with independent SQLite database and in-memory CDN cache. Round-robin request routing. Each node independently generates ETag/Cache-Control headers. Cache invalidation on one node does NOT propagate to the other. Expected to increase structural variance while maintaining behavioral independence.",
+      "expected": "|r| < 0.15, with structural std potentially higher than LOCAL"
+    },
+    {
+      "id": "B-CONCURRENT",
+      "description": "Single-node Flask testbed with 5 concurrent client sessions making simultaneous requests. Tests whether request contention, timing jitter, and interleaved cache states introduce behavioral-structural coupling. Uses gevent/threading for concurrent request generation.",
+      "expected": "|r| < 0.15, similar to LOCAL"
+    },
+    {
+      "id": "B-CONFOUND-DISTRIBUTED",
+      "description": "Distributed negative control: same multi-node architecture as B-DISTRIBUTED but with V2 confound (fixed 'expired' request_id for expired responses, uuid4 for valid). Expected to reproduce the confound (|r| >= 0.15) across distributed nodes.",
+      "expected": "|r| >= 0.15 (negative control confirming confound is genuine in distributed setting)"
+    }
+  ],
+  "positive_control": "Token validation failure detection on distributed infrastructure: behavioral signal must correctly identify expired vs valid tokens with TP >= 0.85 across all distributed nodes. The distributed testbed_server_v3.py @require_token decorator returns 401 for expired tokens and the behavioral signal extractor detects status_code, X-Token-Validation header, and session_state_change. If TP < 0.85, behavioral signal extraction is broken in multi-node setting.",
+  "null_control": "Structural signal std > 0 across all non-304 conditions on distributed infrastructure: independent ETag generation per node, Cache-Control headers, and UUID-based dynamic content should produce non-zero structural variation even on cache-disabled responses. Behavioral std should be non-zero on conditions with auth state variation.",
+  "measurement_validity": [
+    "V_ETAG_PERMISSION_LEAKAGE FIX (inherited from parent): testbed_server_v3.py decodes expired JWT tokens WITHOUT verification to extract permission_level for ETag generation.",
+    "V3 ENDPOINT-STRATIFICATION (inherited from parent): Pooled Pearson r uses endpoint-stratified weighting, not simple concatenation.",
+    "V1 UUID FOR ALL STATUS CODES (inherited from parent): All request_ids use uuid.uuid4() for all status codes in primary testbed.",
+    "304 EXCLUSION: 304 responses excluded from pooled correlation, per-endpoint correlations, and per-cache correlations.",
+    "DISTRIBUTED INDEPENDENCE: Each Flask node has independent SQLite database, independent in-memory cache, independent ETag generation. No shared state between nodes.",
+    "CACHE INDEPENDENCE: Cache invalidation on node A does NOT propagate to node B. Each node's CDN simulation operates independently.",
+    "CONCURRENT LOAD: B-CONCURRENT condition uses 5 concurrent client sessions with thread-safe request generation.",
+    "ROUND-ROBIN ROUTING: Distributed testbed routes requests round-robin across nodes. Each node receives approximately equal load.",
+    "NON-304 POWER: n >= 800 non-304 samples per condition (34 per condition per endpoint x 8 conditions x 3 endpoints = 816).",
+    "TOST ONE-SIDED: C3 tests CI upper < 0.15 only; C4 tests TOST p_upper < 0.05 only (one-sided).",
+    "Testbed server must produce genuine behavioral AND structural stochastic variation on each distributed node.",
+    "Structural signal extraction uses ONLY: (a) ETag change (0/1), (b) Cache-Control change (0/1), (c) normalized Shannon entropy of UUID-based request_id, (d) SHA256(request_id)[:16] as int % 10000 / 10000.",
+    "Each endpoint must have independent behavioral and structural signal extraction — no shared variables between signal domains."
+  ],
+  "decision_rule": "C-FRESHNESS orthogonality at delta=0.15 on distributed infrastructure is CONFIRMED if ALL of: (C1) behavioral detection TP >= 0.85 across all endpoints on distributed testbed; (C2) at least 2/3 endpoints have non-304 behavioral signal std > 0 AND at least 2/3 have non-304 structural signal std > 0; (C3) 95% CI upper bound of endpoint-stratified pooled Pearson r (non-304 samples only) < 0.15 on distributed testbed; (C4) TOST equivalence test p_upper < 0.05 at delta=0.15 (one-sided, non-304 samples only); (C5) endpoint-stratified cache-mode heterogeneity check (non-304 samples): |r_stratified_enabled - r_stratified_disabled| < 2 * SE_pooled; (C6) B-LOCAL-ONLY baseline shows |r| < 0.15 (no regression from parent); (C7) B-CONFOUND-DISTRIBUTED shows endpoint-stratified weighted |r| >= 0.15 (negative control passes). C-FRESHNESS orthogonality is REJECTED if ANY condition fails. MEASUREMENT_INVALID if infrastructure failure prevents data collection.",
+  "product_consequence_positive": "C-FRESHNESS orthogonality confirmed on distributed production-like infrastructure. Parallel-channel architecture (separate behavioral and structural signal processing) is justified for multi-node deployment. Product may proceed with dual-signal freshness detection across distributed cache topologies.",
+  "product_consequence_negative": "C-FRESHNESS orthogonality fails on distributed infrastructure even with independent caches and concurrent load. Parallel-channel architecture is NOT justified for multi-node deployment. Product must investigate cache-coupling as a correlation source and potentially use fused classifiers.",
+  "estimated_cost": "Medium: (1) Develop testbed_server_v3.py (distributed variant with independent per-node caches) ~100 lines, ~30 min; (2) Develop run_distributed.py (multi-node orchestration, round-robin routing, concurrent client) ~200 lines, ~1 hour; (3) Develop run_experiment_distributed.py (measurement adapted from parent) ~150 lines, ~30 min; (4) Execute B-DISTRIBUTED condition ~1 hour; (5) Execute B-CONCURRENT condition ~30 min; (6) Execute B-LOCAL-ONLY baseline ~30 min; (7) Execute B-CONFOUND-DISTRIBUTED ~30 min; (8) Analysis ~1 hour. Total: 4-5 compute-hours.",
+  "expected_information_gain": "Very high: this is the minimum cost experiment that directly resolves the primary unknown from parent EXP-GRAPH-35530590140 — whether LOCAL orthogonality generalizes to distributed infrastructure with independent caches. Either outcome changes a product decision: CONFIRMED justifies multi-node parallel-channel deployment; REJECTED identifies cache coupling as a blocking issue. The B-LOCAL-ONLY baseline confirms regression-free comparison. The B-CONCURRENT condition separately tests concurrent-load effects."
+}

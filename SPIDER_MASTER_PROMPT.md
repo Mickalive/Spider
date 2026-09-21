@@ -10,6 +10,12 @@ Operational priorities belong in `directives/` and may evolve after every audite
 This constitution may NOT be silently rewritten by any autonomous agent.
 Changing it requires explicit human authorization.
 
+## RESEARCH 2.0 ORGANIZATIONAL OVERRIDE
+
+The scientific distinctions and evidence standards below remain binding.
+
+For the active Research 2.0 factory, organizational mechanics are governed by `SPIDER_ARCHITECTURE_RESEARCH2.md` and `research/portfolio/POLICY.md`. In particular, historical language below that lets Lane Directors self-dispatch the next cycle is superseded: lane handoffs are advisory, a permanent Scout control lane maintains broad reconnaissance, and a Global Research Director chooses and reactivates the next scientific-lane objectives from the whole accepted Codex.
+
 ---
 
 # 0. THE TWO SPIDER QUESTIONS

@@ -1,0 +1,20 @@
+{
+  "base_sha": "cce441dd25bba9649a80c2073d41eb2fc57e0a7f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-19T21:27:17.376394+00:00",
+  "experiment_id": "EXP-PHYSICS-35470449605",
+  "inherited_last_verdict": "FALSIFIED-IN-SETTING",
+  "inherited_next_question": "Does SPA redesign with 0% deterministic strata (all transitions stochastic) eliminate the per-stratum plug-in PMI null bias on stochastic strata, where the bias persists at +0.742 bits even for strata of size 5-9 under the shuffled-action null \u2014 and does this redesign enable a valid beyond-Markov test, or is the bias intrinsic to plug-in estimation regardless of determinism ratio?",
+  "lane": "physics",
+  "origin_github_run_id": "35470449605",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35445596894",
+    "path": "research/experiments/EXP-PHYSICS-35445596894/handoff.json",
+    "sha256": "4e968f09d04398c5efe0131f9825c0c91ed38a4f013f4acb26b41e561779c0bc"
+  },
+  "reason": "pulse",
+  "request_hash": "fba7732e361feac43cc8406ef575651942e889d265e74a8c5553b32207b4c0db",
+  "request_id": "5983ff1fcc08f706bee3fdb9",
+  "schema_version": 1
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35611618323",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
+  "why_next": "This experiment resolved the RSA key sharing bug (HS256 shared TESTBED_SECRET works: tokens valid across nodes, TP=1.0) and the JSON serialization bug (NumpyEncoder). The orthogonality correlation is confirmed on distributed infrastructure (stratified r=-0.038, CI upper 0.029 < 0.15, TOST p=2.0e-08). However, C1 behavioral detection fails (TN=0.667 < 0.85) due to per-node SQLite session stores that don't replicate across round-robin nodes — valid-token requests to node B fail session validation because node B lacks the session_id from node A. This is a genuine architectural limitation, not measurement error. The minimal next step is to add session affinity (sticky routing) or shared session store to resolve C1 without changing the correlation metric, then re-run distributed C1-C7 gate. A higher-upside alternative is to test whether this result generalizes to real CDN infrastructure or non-Flask frameworks, but the C1 session fix is prerequisite to any CONFIRMED claim.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS orthogonality at delta=0.15 CONFIRMED on LOCAL testbed (stratified r=0.041-0.058 across experiments, CI upper 0.09-0.125, TOST PASS, n_non304=684-844, C1-C7 all PASS). Reconfirmed in this run: r=0.0584, CI upper 0.1254, n=844.",
+      "C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 (stratified r=-0.038, CI upper 0.029 < 0.15, TOST p=2.0e-08, n_non304=844). This is the first valid distributed correlation measurement after 3 consecutive MEASUREMENT_INVALID runs. C3/C4/C5/C6/C7 all PASS.",
+      "HS256 symmetric JWT with shared TESTBED_SECRET resolves token cross-node validation: TP=1.0 (all expired tokens correctly detected), tokens valid on any node. The RSA key sharing bug from EXP-GRAPH-35572179326 is resolved.",
+      "JSON serialization fix (NumpyEncoder + recursive sanitize) resolves numpy.bool_/NaN persistence: result.json and raw_evidence/metrics.json persist valid JSON with native types.",
+      "C-FRESHNESS behavioral signals achieve TP=1.0, FP=0.0 on deterministic Flask+JWT localhost (EXP-GRAPH-35262258744/35353011131). Orthogonality confirmed across 8+ independent mock experiments at delta=0.15 (r=0.002-0.058, CI upper 0.08-0.135).",
+      "B-CONCURRENT confirmed: concurrent load N=5 does not introduce coupling (r=-0.032, CI upper 0.035, n=860).",
+      "B-CONFOUND-DISTRIBUTED negative control passes: |r|=0.912 >= 0.15, confirming V2 confound is genuine in distributed setting with HS256."
+    ],
+    "rejected": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — not warranted; C1 gate fails on distributed infrastructure. Claim ceiling bounded to LOCAL at delta=0.15 and distributed correlation confirmed but detection fidelity gated.",
+      "Stateless round-robin without session affinity is sufficient for distributed C-FRESHNESS CONFIRMED — per-node SQLite session stores cause C1 TN=0.0 on /api/session/status.",
+      "Simple-pooled r as measure of orthogonality — biased by endpoint heterogeneity; stratified pooling correct.",
+      "HTTP caching as common cause raising |r| above 0.15 — eight+ experiments show orthogonality under caching.",
+      "Body-inclusive structural signals as orthogonal to behavioral — V1 error body confound fixed (headers-only extraction).",
+      "Six structural signal families (Jaccard, TF-IDF, response-time KS, linear LDA, field-usage, schema comparison) for C-FRESHNESS frozen gate — all falsified under structural noise."
+    ],
+    "unknown": [
+      "Whether sticky session affinity or shared Redis session store resolves C1 TN=0.0 while preserving orthogonality correlation (minimal next experiment).",
+      "Whether orthogonality holds on real CDN hierarchies (multi-node cache invalidation on session state change) beyond Flask in-memory simulation.",
+      "Whether concurrent client load N>=50 changes correlation beyond N=5 tested.",
+      "Whether the result generalizes to non-Flask frameworks (Django, FastAPI, Express).",
+      "Whether per-endpoint local /api/data/list r=0.161 (p=0.0099) represents systematic endpoint heterogeneity or sampling noise (not gated by decision rule but worth monitoring).",
+      "Whether delta=0.10 is achievable at n_non304>=1200 (CI half-width<=0.05)."
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — it remains EXPERIMENTAL; orthogonality confirmed at delta=0.15 under LOCAL and distributed correlation, but C1 gate fails for session endpoints.",
+      "Orthogonality correlation is falsified — C3/C4 pass decisively on distributed (r=-0.038, CI upper 0.029, TOST p=2.0e-08). The C1 failure is detection fidelity (session state), not correlation.",
+      "The C1 failure applies to all endpoints — only /api/session/status fails (TN=0.0); /api/user/profile and /api/data/list have TN=1.0.",
+      "HS256 fix is incomplete — it fully resolves token cross-node validation (TP=1.0). The session replication issue is a separate architectural concern.",
+      "This experiment constitutes evidence against orthogonality — it constitutes evidence FOR orthogonality correlation on distributed infrastructure, with a C1 gate failure attributable to session non-replication.",
+      "Testbed CDN simulation represents production CDN behavior — single-node Flask in-memory cache per node.",
+      "The V2 confound (fixed 'expired' request_id) generalizes to other confound mechanisms — tested only on request_id entropy zeroing.",
+      "Non-Flask frameworks preserve orthogonality — untested.",
+      "Concurrent load N>=50 produces same result as N=5 — only N=5 tested."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35611618323/result.json — COMPLETE status, outcome FALSIFIES, all metrics valid, C1 TN=0.667 < 0.85",
+    "research/experiments/EXP-GRAPH-35611618323/audit.json — PASS status, V-C1-TN-RECOMPUTED confirms session non-replication root cause, V-C3-C4-ORTHOGONALITY-VERIFIED confirms r=-0.038",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/experiment_data.json — sha256 dfc72b50a446cec659b3eb39558e9658bcc3116041db342c4bb642c8867c84ec",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/metrics.json — sha256 ec0802c9cc64e0a37cca5e583669f6c9027bc4f9479c5332ad0a79e8f411df8b",
+    "research/experiments/EXP-GRAPH-35611618323/run_experiment_distributed.py — sha256 88d003837ecbf30e0dfc9dff45da0caf3bb2b6f09b5f8e3bf8125c400e02e49d",
+    "research/experiments/EXP-GRAPH-35611618323/testbed_server.py — sha256 f116dffe71711338e77876a5af4a0d9278c72fada0fa87292616c1038f61fc11 (HS256)",
+    "research/experiments/EXP-GRAPH-35572179326/handoff.json — prior carry_forward, RSA bug diagnosed, HS256 recommended",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json — grandparent distributed r=-0.0585 n=688 audit PASS (prior SUPPORTED)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35611618323/result.json:metrics.b_distributed_stratified_r=-0.0381 ci_upper=0.0294 c4_p_upper=2.02e-08 c1_mean_tn=0.6667",
+    "research/experiments/EXP-GRAPH-35611618323/result.json:controls.C1_behavioral_tp.tn_per_endpoint={session_status: 0.0, user_profile: 1.0, data_list: 1.0}",
+    "research/experiments/EXP-GRAPH-35611618323/audit.json:V-C1-TN-RECOMPUTED root cause session non-replication, V-C3-C4-ORTHOGONALITY-VERIFIED r=-0.038",
+    "research/experiments/EXP-GRAPH-35611618323/audit.json:claim_ceiling orthogonality correlation confirmed, C1 gate fails for session endpoints",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/experiment_data.json:sha256 dfc72b50 (recomputed per-endpoint r, TN, std)",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/metrics.json:sha256 ec0802c9 (recomputed stratified pooled r, CI, TOST)",
+    "research/experiments/EXP-GRAPH-35611618323/spec.json:decision_rule C1-C7, frozen at 2026-09-21",
+    "research/experiments/EXP-GRAPH-35611618323/prereg.md:sections 5,8,10,12",
+    "research/experiments/EXP-GRAPH-35572179326/handoff.json:carry_forward established LOCAL CONFIRMED, distributed SUPPORTED, RSA bug diagnosed"
+  ],
+  "recommended_action": "Two options for the next experiment: (1) MINIMAL — add session affinity (sticky routing by client IP) or shared session store (Redis-backed Flask session) to the 2-node distributed testbed, then re-run C1-C7 gate. This resolves the single C1 failure mode (session non-replication) while keeping all other conditions unchanged. Expected outcome: CONFIRMED if session endpoints achieve TN>=0.85. Cost: low (~2 hours). (2) HIGHER-UPSIDE — test C-FRESHNESS orthogonality on real CDN infrastructure (Cloudflare Workers or AWS CloudFront) with production-like session handling, to test whether the localhost in-memory cache simulation is a valid proxy. This addresses the most significant remaining unknown but has higher infrastructure cost. Recommended: option (1) first to close the C1 gate, then option (2) to validate production generalization."
+}

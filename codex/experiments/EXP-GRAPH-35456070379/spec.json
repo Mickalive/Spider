@@ -1,0 +1,43 @@
+{
+  "experiment_id": "EXP-GRAPH-35456070379",
+  "lane": "graph",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on a production-like local testbed server when structural signal is defined from headers-only (excluding error response bodies), and does the B-FLASK-ONLY baseline show similar orthogonality?",
+  "hypothesis": "C-FRESHNESS orthogonality at delta=0.15 will hold with corrected structural signal extraction (headers-only) because the previous confound (EXP-GRAPH-35445595108) was due to including error response bodies which are constant across token expiration. Removing error bodies eliminates the forced correlation (r=0.375). The production-like infrastructure features (CDN, OAuth, dynamic content) should not introduce correlation when structural signal is extracted from headers-only, as these features affect orthogonal domains. The B-FLASK-ONLY baseline should also show orthogonality, confirming that infrastructure complexity does not break orthogonality.",
+  "falsifier": "C-FRESHNESS orthogonality is falsified at delta=0.15 if ANY of: (1) 95% CI upper bound of pooled Pearson r >= 0.15 on production-like testbed with headers-only signal; (2) fewer than 2/3 endpoints have behavioral signal std > 0; (3) fewer than 2/3 endpoints have structural signal std > 0; (4) behavioral detection TP < 0.85; (5) 304 manipulation check fails; (6) B-FLASK-ONLY baseline shows |r| >= 0.15 (indicating infrastructure irrelevance).",
+  "baselines": [
+    {
+      "id": "B-LOCALHOST-MOCK",
+      "description": "Prior localhost Flask mock results: pooled r=0.0022 (EXP-GRAPH-35389145821), r=0.0463 (EXP-GRAPH-35353011131). This experiment tests whether corrected signal extraction on production-like server matches these near-zero correlations.",
+      "expected": "|r| < 0.15, similar to localhost mock"
+    },
+    {
+      "id": "B-FLASK-ONLY",
+      "description": "Plain Flask without CDN/OAuth/dynamic content, using same corrected headers-only structural signal extraction. Serves as baseline to discriminate infrastructure-induced vs definition-induced correlation.",
+      "expected": "|r| < 0.15, confirming orthogonality persists across infrastructure complexity levels"
+    },
+    {
+      "id": "B-ERROR-BODY-INCLUDED",
+      "description": "Reproduction of parent confound: structural signal includes error response bodies (hash(body)%10000). Expected to show |r| >= 0.15 (r=0.375) to confirm the confound is eliminated by headers-only extraction.",
+      "expected": "|r| >= 0.15 (negative control)"
+    }
+  ],
+  "positive_control": "Token validation failure detection: behavioral signal must correctly identify expired vs valid tokens with TP >= 0.85. Validated across all prior experiments (TP=1.0). If TP < 0.85, behavioral signal extraction is broken.",
+  "null_control": "Structural signal on cache-disabled responses (Cache-Control: no-store): if CDN caching is disabled, structural signal should be invariant across cache hits/misses. Expected: structural signal std > 0 only from dynamic content variation (timestamps, request IDs), not from cache artifacts. Null correlation at lambda=0 (no behavioral drift) should show |r| < 0.05.",
+  "measurement_validity": [
+    "Testbed server must produce genuine behavioral AND structural stochastic variation: token validation failures, session state changes, auth boundary shifts (behavioral) AND cache-Control/ETag/304 variation, dynamic timestamps, request IDs, database-backed state (structural)",
+    "CDN simulation must implement genuine cache behavior: ETag-SHA256, Cache-Control max-age/no-store, stale-while-revalidate, cache invalidation on session state change",
+    "OAuth middleware must use real PyJWT RS256 validation with refresh tokens, session invalidation, and permission boundary — not hand-programmed lookup tables",
+    "Dynamic content must include timestamps, request IDs, user-dependent responses, and database-backed state — ensuring structural variation independent of behavioral state",
+    "Network latency jitter must be configurable (10-500ms) and measured, not assumed",
+    "Structural signal extraction MUST exclude error response bodies (HTTP 401, 403, 5xx) — use headers-only (ETag, Cache-Control, dynamic timestamp hash, request_id entropy) or success-path-only body hash (2xx responses only)",
+    "B-FLASK-ONLY baseline must be constructed: plain Flask without CDN simulation, OAuth middleware, or dynamic content, using same corrected headers-only structural signal extraction",
+    "n >= 480 paired samples from >= 3 endpoints x >= 2 cache modes x >= 2 auth states, ensuring adequate power for delta=0.15 equivalence test",
+    "Each endpoint must have independent behavioral and structural signal extraction — no shared variables between signal domains"
+  ],
+  "decision_rule": "C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED if ALL of: (C1) behavioral detection TP >= 0.85 across all endpoints; (C2) at least 2/3 endpoints have behavioral signal std > 0 AND at least 2/3 endpoints have structural signal std > 0; (C3) 95% CI upper bound of pooled Pearson r < 0.15 on production-like testbed with headers-only signal; (C4) TOST equivalence test p_upper < 0.05 at delta=0.15; (C5) 304 manipulation check passes; (C6) B-FLASK-ONLY baseline shows |r| < 0.15 (orthogonality persists without infrastructure). C-FRESHNESS orthogonality is REJECTED if ANY condition fails. MEASUREMENT_INVALID if infrastructure failure prevents data collection (endpoint unreachable, testbed construction fails, n < 240).",
+  "product_consequence_positive": "C-FRESHNESS advances from EXPERIMENTAL toward VALIDATED on production-like infrastructure with corrected signal extraction. Parallel-channel architecture (separate behavioral and structural signal processing) is justified for product deployment. The orthogonality result extends from localhost mock to production-like server, eliminating the critical gap identified in EXP-GRAPH-35409927045. Product may proceed with dual-signal freshness detection: behavioral signals for auth/session drift, structural signals for cache/schema drift.",
+  "product_consequence_negative": "C-FRESHNESS orthogonality fails on production-like infrastructure even with corrected signal extraction. Parallel-channel architecture is NOT justified. Product must pivot to fused classifiers (combined behavioral-structural signal) or cache-independent structural signals. The localhost mock evidence is insufficient for production deployment. The critical gap for C-FRESHNESS remains open.",
+  "estimated_cost": "Medium: testbed server modification (change signal extraction) estimated at 1 hour; B-FLASK-ONLY baseline construction estimated at 1 hour; experiment execution at n=480 estimated at 30-60 minutes; analysis at 1 hour. Total: 3-4 compute-hours.",
+  "expected_information_gain": "High: this experiment directly resolves the confound from EXP-GRAPH-35445595108 and tests the critical gap for C-FRESHNESS product deployment — whether orthogonality transfers from localhost mock to production-like infrastructure with corrected signal extraction. A positive result justifies parallel-channel architecture and advances C-FRESHNESS toward VALIDATED. A negative result forces architectural pivot. Either outcome changes a product decision."
+}

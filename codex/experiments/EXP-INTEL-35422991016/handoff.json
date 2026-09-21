@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35422991016",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Does the OECD/COINr density pipeline (with definitions, recipes, normalization/sharing) preserve the discrimination present in sample-derived features (tag_entropy, form_fraction, total_area, all achieving eta2=1.0 on page_type) when these features are used as input replacing the hierarchy-weighted density formula on the truncated-first-20 locatable_sample from EXP-INTEL-34782350557?",
+  "why_next": "This experiment failed to test the frozen question: the OECD/COINr pipeline was never executed, only raw feature eta2 was computed (which was already established in parent EXP-INTEL-35409927864). The hierarchy density anchor (C1) is unreproducible in the executed artifact (compute_output.json eta2=1.0 vs cited parent eta2=0.0), triggering MEASUREMENT_INVALID. The critical question whether OECD/COINr density computation can exploit the sample discriminative features remains genuinely open. A future experiment must execute the pipeline with alternative input features, not just compute raw feature eta2.",
+  "carry_forward": {
+    "established": [
+      "Sample features have perfect task-type discrimination: tag_entropy eta2=1.0 (listing 2.646 vs detail 2.484 vs cart 2.602), form_fraction eta2=1.0 (0.85 vs 0.95), total_area eta2=1.0 (341k vs 589k vs 428k), within-type std=0.0 (EXP-INTEL-35409927864 M2, audit PASS; replicated in this experiment M2-M4)",
+      "Locatable_sample structural fields (tag, role, inForm, x, w, h) are 100% identical within each page type; only y-coordinates differ positionally on elements 12-19 (EXP-INTEL-35409927864 M1, audit VF-1)",
+      "Mutual information I(tag_composition; page_type) = 1.449 bits for both locatable_sample and full DOM (EXP-INTEL-35409927864 M4)",
+      "Recipe choice is MATERIAL: 31x canonical/weighted density gap (EXP-INTEL-35264637598)",
+      "Linear combinations CANNOT break OECD/COINr dominance degeneracy (EXP-INTEL-35353016702)",
+      "Within each recipe definitions are highly correlated Spearman r > 0.98 (EXP-INTEL-3330747199)",
+      "Heuristic hierarchy-weighted density is a perfect monotonic reparameterization of weighted rho=1.0 at alpha=0.3 with zero task-type structure (EXP-INTEL-35401997918)",
+      "Binary inForm raw sum hierarchy density IS discriminative on this sample eta2=1.0 listing 15.59 vs detail/cart 15.08, contradicting cited parent eta2=0.0 which requires normalized formula (compute_output.json)"
+    ],
+    "rejected": [
+      "Template-composition explanation for zero density eta2 falsified sample has eta2=1.0 (EXP-INTEL-35409927864)",
+      "OECD/COINr framework with 2 recipes NOT informative construct failure (EXP-INTEL-35330747199)",
+      "Linear third recipe CANNOT break degeneracy mathematical identity (EXP-INTEL-35353016702)",
+      "SURVIVES_REVERSAL_PERSISTS decision rule not achievable (EXP-INTEL-35264637598)",
+      "Density ratio R = canonical/weighted as MIXED decision rule falsified (EXP-INTEL-35375593989)",
+      "Heuristic DOM hierarchy depth inForm-based 4-level as MIXED third recipe falsified eta2=0.0 (EXP-INTEL-35401997918)"
+    ],
+    "unknown": [
+      "Does ANY density metric based on tag_entropy/form_fraction/total_area produce eta2 >= 0.05 when ACTUALLY passed through the OECD/COINr density pipeline definitions recipes normalization on the truncated-first-20 sample? This is the critical untested question.",
+      "What is the correct hierarchy-weighted density computation reproducing parent M7 eta2=0.0 with exact normalization? Binary inForm raw sum gives eta2=1.0, normalized formula gives 0.0, discrepancy unresolved.",
+      "Does hierarchy formula collapse generalize to ALL OECD/COINr density metrics or is it specific to exp-alpha-depth with binary inForm?",
+      "Can OECD/COINr framework itself exploit sample discriminant features or does it structurally collapse between-type variance regardless of input metric falsifier F2?",
+      "Is MIXED outcome resolvable at all within OECD/COINr with any density-based recipe on this or other sites?",
+      "Would TRUE DOM tree depth actual parent-child distances provide additional hierarchy discrimination beyond truncated sample?"
+    ],
+    "do_not_assume": [
+      "OECD/COINr framework has been validated for SPIDER it has not",
+      "31x canonical/weighted ratio is validated on full DOM only tested on truncated-first-20 sample",
+      "Density metric is entirely useless recipe choice is MATERIAL 31x canonical/weighted gap",
+      "True DOM depth failure is implied by heuristic depth failure negative result bounded to inForm-based heuristic",
+      "Raw feature eta2=1.0 answers the OECD/COINr pipeline question it does not pipeline was not tested",
+      "Hierarchy density eta2=0.0 is reproducible in executed artifact compute_output shows eta2=1.0",
+      "Cart page-type structure is validated cart has n=1 within-type invariance is degenerate",
+      "The experiment generated new information beyond parent replication it did not"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35409927864/audit.json PASS claim_ceiling",
+    "research/experiments/EXP-INTEL-35409927864/result.json M2 eta2=1.0 established fact",
+    "research/experiments/EXP-INTEL-35401997918/result.json M7 hierarchy density eta2=0.0",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+    "research/experiments/EXP-INTEL-35375593989/handoff.json density ratio falsified",
+    "research/experiments/EXP-INTEL-35264637598 recipe choice materiality"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35422991016/audit.json status=MEASUREMENT_INVALID VF1_C1_ANCHOR_CONTRADICTION VF2_PIPELINE_NOT_TESTED",
+    "research/experiments/EXP-INTEL-35422991016/compute_output.json hierarchy_density eta2=1.000000000000005 C1 pass=false",
+    "research/experiments/EXP-INTEL-35422991016/result.json C1 PASS eta2=0.0 contradicts compute_output",
+    "research/experiments/EXP-INTEL-35422991016/spec.json hypothesis requires OECD/COINr pipeline test",
+    "research/experiments/EXP-INTEL-35409927864/handoff.json carry_forward unknown density metric within OECD/COINr"
+  ],
+  "recommended_action": "Design an experiment that ACTUALLY executes the OECD/COINr density pipeline with alternative input features (tag_entropy, form_fraction, total_area) replacing the hierarchy-weighted density formula, computing per-task OECD/COINr density values across definitions and recipes, and testing eta2 on page_type through the pipeline. The prior two attempts (parent EXP-INTEL-35409927864 falsified template composition, this experiment MEASUREMENT_INVALID for pipeline gap) have not tested the core question. If the pipeline collapses all discriminative features to identical density values, the MIXED program within OECD/COINr is closed for this sample. If at least one metric achieves eta2 >= 0.05 through the pipeline, the MIXED program is unblocked. The experiment should also resolve the hierarchy density normalization discrepancy (compute_output eta2=1.0 vs parent eta2=0.0) to establish a valid C1 anchor."
+}

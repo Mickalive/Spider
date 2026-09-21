@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35434773328",
+  "lane": "runtime",
+  "github_run_id": "35434773328",
+  "created_at": "2026-09-19T09:28:26.345783+00:00",
+  "frozen_at": "2026-09-19T09:34:59.813600+00:00",
+  "executed_at": "2026-09-19T12:00:00+00:00",
+  "base_sha": "872b927f545174f093bc983622850240dfcece01",
+  "parent_experiment": {
+    "experiment_id": "EXP-RUNTIME-35401995092",
+    "handoff_path": "research/experiments/EXP-RUNTIME-35401995092/handoff.json",
+    "handoff_sha256": "4f4f667e11b873b45fba997b32f87a312c11e1ac467be35a5a1a24653a34c3fb"
+  },
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py"
+  ],
+  "fixes_applied": [
+    {
+      "id": "V1",
+      "description": "Origin server use_chunked=True for all configs — origin serves Transfer-Encoding: chunked (no Content-Length) for chunked conditions",
+      "evidence": "C_ORIGIN_VERIFICATION control pass: origin serves TE:chunked without Content-Length",
+      "parent_audit_ref": "research/experiments/EXP-RUNTIME-35401995092/audit.json V1_ORIGIN_NOT_CHUNKED"
+    },
+    {
+      "id": "V2",
+      "description": "Cache HIT path for chunked configs sends ONLY Transfer-Encoding: chunked (no Content-Length), fixing HTTP/1.1 double-header violation",
+      "evidence": "run_experiment.py cache HIT block sends only Transfer-Encoding for chunked configs",
+      "parent_audit_ref": "research/experiments/EXP-RUNTIME-35401995092/audit.json V2_DOUBLE_HEADER"
+    },
+    {
+      "id": "V3",
+      "description": "PARENT_REF_HASHES removed — dead code, determinism ground truth established by live recomputation via fresh mock_direct servers",
+      "evidence": "C_DETERMINISM_ACROSS_PATHS pass: 72/72 match, 0 mismatches via live mock_direct servers",
+      "parent_audit_ref": "research/experiments/EXP-RUNTIME-35401995092/audit.json V3_SYNTHETIC_DETERMINISM"
+    }
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "dependencies": {
+      "brotli": "1.2.0",
+      "pyjwt": "2.14.0",
+      "requests": "2.34.2"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35434773328/run_experiment.py",
+      "role": "code",
+      "description": "Experiment execution script with V1/V2/V3 fixes applied"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35434773328/result.json",
+      "role": "derived",
+      "description": "Complete experiment results with metrics, controls, observations"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35434773328/report.md",
+      "role": "derived",
+      "description": "Human-readable experiment report with interpretation"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35434773328/provenance.json",
+      "role": "derived",
+      "description": "Provenance and traceability metadata"
+    }
+  ],
+  "test_matrix": {
+    "auth_states": ["no_auth", "valid_token", "expired_token", "invalid_token"],
+    "content_types": ["JSON", "HTML", "XML"],
+    "payload_sizes": ["1KB", "10KB", "100KB"],
+    "configs": ["CL-PASSTHROUGH", "CHUNKED-PASSTHROUGH", "CHUNKED-CACHED"],
+    "reps_per_cell": 5,
+    "total_requests": 540,
+    "seed": 44,
+    "jitter_ms": "50-150 uniform",
+    "brotli_quality": 6,
+    "max_decompression_depth": 5
+  },
+  "reproduction_command": "cd research/experiments/EXP-RUNTIME-35434773328 && python3 run_experiment.py",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35401995092/audit.json (V1_ORIGIN_NOT_CHUNKED, V2_DOUBLE_HEADER, V3_SYNTHETIC_DETERMINISM)",
+    "research/experiments/EXP-RUNTIME-35401995092/handoff.json (carry_forward, dependencies)",
+    "research/experiments/EXP-RUNTIME-35401995092/result.json (baseline metrics, controls)",
+    "codex/claim_state.json (C-MEAS-VALID claim history)",
+    "research/lanes/registry.json (runtime lane charter)"
+  ]
+}

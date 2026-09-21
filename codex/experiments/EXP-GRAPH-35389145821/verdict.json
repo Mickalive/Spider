@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35389145821",
+  "lane": "graph",
+  "decision": "PASS — All five frozen decision criteria pass: C1_drift_tp PASS (mean TP=1.0, all Wilson lower >0.75), C2_variance PASS (4/4 conditions with std>0 for both signals), C3_equivalence PASS (pooled r=0.0022, 95% CI [-0.0874, 0.0916], CI upper 0.0916 < 0.15, TOST p_upper=0.0006), C4_null_control PASS (FP=0.0 on 240 noise-only samples), C5_304_exercised PASS (304 rate=0.3333 in cache_enabled conditions). Audit PASS confirms all recomputed metrics match producer. C-FRESHNESS orthogonality at delta=0.15 is CONFIRMED under operational HTTP conditional caching with proper If-None-Match/304 manipulation at n=480. This extends the parent's stochastic-mock orthogonality (r=0.046, CI upper 0.135 < 0.15) to include HTTP caching semantics. Claim ceiling bounded to stochastic Flask 3.1.3 + SQLite WAL-mode + in-memory TTL 0.5s + jitter 1-5ms + HS256/RS256 JWT + HTTP caching (Cache-Control max-age=5 / no-store, ETag-SHA256, If-None-Match ->304 at 33.3%) on localhost. NOT validated for production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, or real API schemas. No product promotion warranted from mock alone.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "C-FRESHNESS orthogonality confirmed at delta=0.15 under HTTP caching with proper 304 manipulation at n=480 (pooled r=0.0022, CI upper 0.0916 < 0.15, TOST PASS). This extends the parent's stochastic-mock confirmation (r=0.046, CI upper 0.135) to include operational HTTP caching semantics. However, claim ceiling is bounded to localhost Flask mock; no product promotion warranted. Six structural signal families remain falsified for C-FRESHNESS frozen gate in deterministic mock. Status remains EXPERIMENTAL with strengthened evidence base."
+    }
+  ],
+  "product_action": "No product action. C-FRESHNESS advances experimentally but claim ceiling remains bounded to stochastic Flask mock on localhost. Product pipeline may continue using behavioral + structural as independent parallel channels under delta=0.15 tolerance, consistent with parent EXP-GRAPH-35353011131 authorization.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does behavioral-structural signal orthogonality (|r| < 0.15) hold on real external APIs with production databases, distributed caches/CDN, network latency, OAuth/OIDC middleware, and stochastic SPA frontends — the highest-upside question for C-FRESHNESS product deployment that cannot be answered by localhost mock experiments?",
+  "reason": "The three measurement defects from EXP-GRAPH-35375596525 are resolved: (1) If-None-Match/304 operationally exercised at 33.3% rate (C5 PASS); (2) n=480 matches parent power (SE=0.0458, CI width=0.179); (3) decision-rule bug fixed (CI upper >= 0.20 maps to FALSIFIES per spec.json). Per-caching-mode heterogeneity is now symmetric (cache_enabled r=-0.061, cache_disabled r=0.061), confirming the prior asymmetry was sampling noise. All five frozen criteria pass; audit PASS confirms independent recomputation. The maximum justified claim extends parent stochastic-mock orthogonality to HTTP caching conditions at delta=0.15. However, the claim ceiling remains bounded to localhost mock — real API validation is the critical remaining gap for product deployment. Delta=0.10 also passes (CI upper 0.0916 < 0.10, TOST p_upper=0.016) but per-mode and per-condition CIs exceed 0.10, so tighter margins are not individually confirmed.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35389145821/request.json",
+    "research/experiments/EXP-GRAPH-35389145821/spec.json",
+    "research/experiments/EXP-GRAPH-35389145821/prereg.md",
+    "research/experiments/EXP-GRAPH-35389145821/freeze.json",
+    "research/experiments/EXP-GRAPH-35389145821/result.json",
+    "research/experiments/EXP-GRAPH-35389145821/audit.json",
+    "research/experiments/EXP-GRAPH-35389145821/report.md",
+    "research/experiments/EXP-GRAPH-35389145821/provenance.json",
+    "research/experiments/EXP-GRAPH-35389145821/raw_evidence/experiment_data.json sha256 e90bc81473207e54e448892630f39cd6ef3e4afbf4b55fd055fc507948c144ad",
+    "research/experiments/EXP-GRAPH-35389145821/mock_server.py sha256 5e1511e37346b51204cddb711c95cfda7be1300c6dbc982bf8d9fb32ec846a51",
+    "research/experiments/EXP-GRAPH-35389145821/run_experiment.py sha256 aca729e0842621e2ffb5eb793acd51e6983832319d59e433fccd84e30e143ada",
+    "research/experiments/EXP-GRAPH-35353011131/handoff.json",
+    "research/experiments/EXP-GRAPH-35375596525/handoff.json",
+    "codex/claim_state.json:C-FRESHNESS"
+  ]
+}

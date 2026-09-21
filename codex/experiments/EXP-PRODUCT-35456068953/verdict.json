@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35456068953",
+  "lane": "product",
+  "decision": "SURVIVES_CURRENT_TEST — frozen decision_rule conditions C1-C4 all pass (C1 discrimination 0.8333 > 0.5, C2 token_refresh TP=1.0 on all 4 co-occurring noise conditions, C3 behavioral_std 0.134-0.143 > 0.05 on all 4 conditions, C4 FP=0.0 <= 0.15). Audit REVISE (not PASS): N=240 violates frozen N>=480 (spec measurement_validity #6, power halved causing TOST lower-tail failure ci_lower=-0.185 < -0.15), behavioral_score is bimodal discrete (0.35/0.65) not continuous as spec requires (V2), threshold 0.25 below both modes makes TP=1.0 tautological (V3), TOST full equivalence at delta=0.15 not met (tost_pass=false, p_lower=0.081). All numeric metrics match producer. Claim ceiling strictly bounded: token_refresh TP=1.0 under co-occurring structural noise on localhost stochastic mock only (Flask 3.1.3 + SQLite WAL + TTL 0.5s + jitter 10-100ms + HS256/RS256 JWT, 127.0.0.1:18951, seed 42, p_refresh_success=0.7, BIMODAL scores 0.35/0.65). No production generalization, no PRODUCT_CORE promotion, no non-mock inference.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision_rule SURVIVES_CURRENT_TEST (C1-C4 pass), extending token_refresh coverage to co-occurring structural noise (4 conditions, TP=1.0, behavioral_std 0.134-0.143). However, audit REVISE (not PASS) prevents VALIDATED: N=240 violates frozen N>=480 causing TOST lower-tail failure, behavioral_score is bimodal discrete (not continuous as spec requires), threshold tautology limits discriminating power. C-FRESHNESS orthogonality at delta=0.15 confirmed across 3 prior mock experiments (parent handoff); this experiment adds token_refresh TP evidence but does not confirm full TOST equivalence at n=240. Claim ceiling bounded to localhost stochastic mock only. No PRODUCT_CORE promotion authorized."
+    }
+  ],
+  "product_action": "token_refresh detection confirmed robust to co-occurring structural noise at localhost mock ceiling; can be included in parallel-channel orthogonality sets pending n>=480 replication for full TOST equivalence. No code changes to production. No product promotion.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the parallel-channel freshness guard (behavioral + structural signals, severity-weighted scoring, token_refresh included) be measured on a non-mock production-like substrate with real OAuth/OIDC middleware, CDN caching, network RTT, and database-backed sessions — and does orthogonality (TOST delta=0.15, n>=480) survive on that substrate including token_refresh under stochastic drift?",
+  "reason": "The frozen decision rule passes all four conditions (C1-C4), confirming token_refresh TP=1.0 under co-occurring structural noise at the localhost mock ceiling. This resolves the parent's unknown #4 (token_refresh TP under noise). However, the independent audit returns REVISE (not PASS) due to: (1) N=240 violating frozen N>=480 (halved power causing TOST lower-tail failure); (2) behavioral_score bimodal discrete (0.35/0.65) not continuous as spec requires; (3) threshold tautology (0.25 below both modes). The audit VALIDATED gate is therefore not met. The single remaining bottleneck for C-FRESHNESS PRODUCT_CORE promotion is the mock-to-production gap: the production-like substrate question (inherited from parent) is now the only unknown preventing stronger claim status. Orthogonal follow-up: n>=480 replication to resolve TOST lower-tail and demonstrate full equivalence at delta=0.15.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35456068953/result.json — C1 0.8333, C2 TP 1.0 on 4 co-occurring conditions, C3 behavioral_std 0.134-0.143, C4 FP 0.0, decision_rule_evaluation SURVIVES_CURRENT_TEST",
+    "research/experiments/EXP-PRODUCT-35456068953/audit.json — REVISE, producer_claim_supported false, V1 N=240 violation, V2 bimodal discrete scores, V3 threshold tautology, V4 TOST lower-tail failure, claim_ceiling bounded to localhost mock, Do NOT promote to PRODUCT_CORE",
+    "research/experiments/EXP-PRODUCT-35456068953/spec.json — decision_rule C1-C4, measurement_validity N>=480 and continuous behavioral_score requirements",
+    "research/experiments/EXP-PRODUCT-35456068953/prereg.md — Decision Rule, Measurement Validity #4-#6, inherited carry-forward categories",
+    "research/experiments/EXP-PRODUCT-35456068953/raw_evidence/experiment_data.json — phase_b_cooccurring 240 rows behavioral_score in {0.35,0.65}, phase_d_isolated_tp 60 rows, phase_c_noise_only 240 rows all 0.05",
+    "research/experiments/EXP-PRODUCT-35456068953/mock_server.py — p_refresh_success=0.7 stochastic token_refresh, behavioral scoring",
+    "research/experiments/EXP-PRODUCT-35456068953/run_experiment.py — THRESHOLD=0.25, N_COOCCUR=60, COOCCUR_PAIRS=4",
+    "research/experiments/EXP-PRODUCT-35445596342/handoff.json — parent carry_forward established/rejected/unknown/do_not_assume, next_question for production substrate",
+    "research/experiments/EXP-PRODUCT-35445596342/result.json — parent C1-C4 SURVIVES, orthogonality r=-0.0258 CI upper 0.064 n=480",
+    "research/experiments/EXP-PRODUCT-35445596342/audit.json — parent audit PASS, claim_ceiling localhost mock"
+  ]
+}

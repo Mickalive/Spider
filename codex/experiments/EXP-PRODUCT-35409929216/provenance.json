@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35409929216",
+  "lane": "product",
+  "github_run_id": "35422992605",
+  "commit": "37502874eab76240c53faca37ebca5415a2d4d4e",
+  "branch": "lab2/product",
+  "python_version": "3.12",
+  "execution_mode": "analytical",
+  "dependencies": {
+    "python_stdlib": true,
+    "external_packages": []
+  },
+  "input_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/request.json",
+      "sha256": "951fbf3af1b0244060447645da27899e7d2420c8e00f6d6823c2d7b80614c151",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/spec.json",
+      "sha256": "6d77a23dd5acda886ed70124a191e09ad2fb98dfd35dde2bd42c7a1094dec6ae",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/prereg.md",
+      "sha256": "6893ead81132838fe30cfcb4bab4bd523e4b6876bc0a8fc83f7640fffca7112d",
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/freeze.json",
+      "sha256": null,
+      "role": "frozen_input"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/raw_evidence.json",
+      "sha256": "be12567ea693e6e37971f4742e5d11b1e139f7575856f4b40edd73bbe2048a70",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35330741529/run_experiment.py",
+      "sha256": "00ae2dd7b46fcf151ea8725df816aff0034a7162538444aa825dd59d0fc8f070",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35389141536/handoff.json",
+      "sha256": "6b131e01718a3093b5b9ebf6f69995c9f22a57ffb835a37d81c9de1d627a66e9",
+      "role": "fixture"
+    }
+  ],
+  "output_artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/result.json",
+      "sha256": "d2e6ff6156c5397d275c97a575ff296202c95a8ebae320b4ce8416c5fa4d5513",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/report.md",
+      "sha256": "cd9f3e88374800aefeef08b299ca4fb464257b8a932c8862895a1ef700a7e404",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35409929216/provenance.json",
+      "sha256": "ecb0d3e4b9a120d6bcd5b909e1335fd0cd01914bf342197ae36ffa0a81a9050f",
+      "role": "derived"
+    }
+  ],
+  "analysis_commands": [
+    "python3 /tmp/opencode/run_sensitivity.py"
+  ],
+  "reproduction_instructions": "Run the sensitivity analysis script with the same random seed (42) and input data from EXP-PRODUCT-35330741529/raw_evidence.json. The analysis is deterministic given the seed.",
+  "measurement_method": "Analytical sensitivity analysis on carried-forward token costs. Break-even: linear division of margin by task count. Bootstrap: 1000 samples from Normal(estimate, 0.5*estimate) per task, independent for literal and parameterized conditions. Controls: mathematical verification of fixed selection savings and zero-completion limit.",
+  "random_seed": 42,
+  "known_limitations": [
+    "Completion token estimates (2/15/20) are hard-coded assumptions, not measured from real LLM output",
+    "Bootstrap uses Normal distribution with CV=0.5; real variation may be heavier-tailed",
+    "Task composition (32 tasks, 5/15/12 type distribution) is fixed; different distributions could change results",
+    "COLD success rate assumed 100%; real rate unmeasured",
+    "Analysis does not measure latency, retrieval, verification, or maintenance costs"
+  ]
+}

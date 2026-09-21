@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35401997918",
+  "lane": "intel",
+  "reproduction_context": {
+    "github_run_id": "35401997918",
+    "base_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+    "experiment_dir": "research/experiments/EXP-INTEL-35401997918",
+    "execution_date": "2026-09-18"
+  },
+  "input_artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "raw_evidence",
+      "description": "Source measurement data: 7 tasks x 3 definitions x locatable_sample capped at 20 elements from Magento shopping site Docker container"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35375593989/handoff.json",
+      "sha256": "cef85ef795b040c02355a57bebd0ba40a0bfa3baa97d2d535539e6e269c13bc5",
+      "role": "parent_handoff",
+      "description": "Parent experiment handoff: density ratio approach falsified, recommending non-linear third recipe pivot"
+    }
+  ],
+  "frozen_inputs": {
+    "request_hash": "3b11e5a172d8795255f6482ee75791ab5c00c48e095cfd3ee6a45237cfe92b1b",
+    "spec_hash": "d85d548fe3238995224d20897416e276305092fc7f289da16975db06da0b1cf6",
+    "prereg_hash": "fd8a0b0b4be5a3055680d756ae51131137e8a0ecb93c55e47837b2d45683d471",
+    "freeze_hash": "see freeze.json",
+    "frozen_at": "2026-09-18T22:34:05.910676+00:00"
+  },
+  "analysis_code": {
+    "path": "/tmp/opencode/hierarchy_density_analysis.py",
+    "sha256": "941e80220bdaa25cc87f511d190f6cef562f9db0d4aa39fd287a10e0b4453942",
+    "description": "Python analysis script: computes canonical, weighted, and hierarchy-weighted density for 21 task-definition pairs; evaluates frozen decision rules C1-C4; runs positive/null controls; performs alpha sensitivity analysis"
+  },
+  "derived_artifacts": [
+    {
+      "path": "/tmp/opencode/hierarchy_analysis/hierarchy_analysis_results.json",
+      "sha256": "c4c2ef60490024e6c3f7a66d7f7d4c54bd01d6c1555a5003cef6f18fb20f32e1",
+      "role": "derived",
+      "description": "Complete analysis output: density matrix, decision rules, controls, alpha sensitivity, per-pair results"
+    }
+  ],
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "external_dependencies": "None — pure Python stdlib (json, math, random, hashlib, collections)",
+    "network_required": false,
+    "browser_required": false,
+    "docker_required": false
+  },
+  "reproduction_commands": [
+    "python3 /tmp/opencode/hierarchy_density_analysis.py",
+    "Output written to /tmp/opencode/hierarchy_analysis/hierarchy_analysis_results.json"
+  ],
+  "key_measurements": {
+    "primary_alpha": 0.3,
+    "C1_cv": 0.583704,
+    "C2_outside_hull": "7/21",
+    "C3_rho_hier_canonical": 0.879221,
+    "C3_rho_hier_weighted": 1.000000,
+    "C4_eta_squared": 0.0,
+    "verdict": "FALSIFIED-IN-SETTING",
+    "PC1_inter_type_ratio": 1.0,
+    "NC1_random_rho_canonical": 0.876629,
+    "NC1_random_rho_weighted": 0.978062
+  },
+  "evidence_chain": {
+    "raw_evidence": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256: da30bd05...)",
+    "parent_handoff": "research/experiments/EXP-INTEL-35375593989/handoff.json (sha256: cef85ef7...)",
+    "parent_verdict": "EXP-INTEL-35375593989 verdict: FALSIFIED-IN-SETTING (density ratio approach)",
+    "grandparent_verdict": "EXP-INTEL-35353016702 verdict: FALSIFIES (linear combination degeneracy)",
+    "established_recipe_materiality": "EXP-INTEL-35264637598: 31x canonical/weighted gap"
+  }
+}

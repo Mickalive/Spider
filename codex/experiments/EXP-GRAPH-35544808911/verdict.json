@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35544808911",
+  "lane": "graph",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "After fixing the infrastructure bug (SameFileError in run_experiment_distributed.py line 368 where src and dst both resolve to the same testbed_server.py) AND fixing C1 behavioral detection control to exclude 304 responses (consistent with parent metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
+  "reason": "MEASUREMENT_INVALID: infrastructure failure (shutil.SameFileError at run_experiment_distributed.py:368) prevented server startup and all sample collection. src and dst both resolve to EXP-GRAPH-35544808911/testbed_server.py. No samples collected; metrics={}, controls={}, artifacts=[]. Frozen decision_rule C1-C7 untested. Audit confirms this is operational failure, not scientific falsification (audit status=MEASUREMENT_INVALID, recomputed_metrics={}). The frozen question (C1 304-exclusion fix achieving CONFIRMED at n>=800 on distributed) remains unanswered. Two bugs must be fixed before re-run: (1) SameFileError — guard or correct the copy2 source path to use parent experiment's testbed_server.py (EXP-GRAPH-35538864957/testbed_server.py), not the experiment-local copy; (2) C1 behavioral detection control must exclude 304 responses from TP/TN calculation. Parent carry_forward state unchanged — no new evidence accumulated.",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35544808911/result.json (status=MEASUREMENT_INVALID, outcome=NOT_APPLICABLE, metrics={}, controls={}, artifacts=[], observations=['Infrastructure failure: SameFileError'])",
+    "research/experiments/EXP-GRAPH-35544808911/audit.json (status=MEASUREMENT_INVALID, producer_claim_supported=false, recomputed_metrics={}, claim_ceiling='No new evidence from this MEASUREMENT_INVALID run')",
+    "research/experiments/EXP-GRAPH-35544808911/report.md (traceback shutil.SameFileError at line 368, src/dst both EXP-GRAPH-35544808911/testbed_server.py)",
+    "research/experiments/EXP-GRAPH-35544808911/provenance.json (error SameFileError, incomplete — missing git_commit, artifacts hashes)",
+    "research/experiments/EXP-GRAPH-35544808911/spec.json (frozen decision_rule C1-C7 CONFIRMED requires all PASS; MEASUREMENT_INVALID if n<400 or infrastructure failure)",
+    "research/experiments/EXP-GRAPH-35538864957/handoff.json (parent carry_forward: C-FRESHNESS EXPERIMENTAL, distributed SUPPORTED r=-0.0585 CI upper 0.0163, LOCAL CONFIRMED r=0.0410)",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json (C1 TN=1.0 when 304s excluded, primary metric stratified r=-0.0585 PASS)",
+    "research/experiments/EXP-GRAPH-35530590140/result.json (LOCAL CONFIRMED: r=0.0410, C1-C7 PASS, n_non304=684)"
+  ]
+}

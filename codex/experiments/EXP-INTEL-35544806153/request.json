@@ -1,0 +1,20 @@
+{
+  "base_sha": "6cbe79a74a31e0b0ba0ebe110da059d7a5847e47",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T23:30:01.732204+00:00",
+  "experiment_id": "EXP-INTEL-35544806153",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "What is the correct noise decomposition for a validated SNR model of ranking instability \u2014 specifically, can an empirical CDF mapping of the margin distribution, between-type vs within-type variance decomposition, or non-parametric margin distribution model pass C1-equivalent validation at n=15 and n=20, or should the Intel lane pivot to prioritize Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) to bypass modeling entirely?",
+  "lane": "intel",
+  "origin_github_run_id": "35544806153",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35538868377",
+    "path": "research/experiments/EXP-INTEL-35538868377/handoff.json",
+    "sha256": "f67ff992cba30ded45770bef618a43d518703867bea1d9ff4107757450c8fa4a"
+  },
+  "reason": "pulse",
+  "request_hash": "c095b1a8da9b7b662a5143812964020a1c8d4b84315b7599e22415b8f291354c",
+  "request_id": "bdf7857d9c3688ff22c08771",
+  "schema_version": 1
+}

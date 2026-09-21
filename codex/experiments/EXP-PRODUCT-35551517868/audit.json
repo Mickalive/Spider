@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35551517868",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Overlap operationalization does not realize prereg definition: prereg requires 0/25/50/75/100% as proportion of noise distribution overlapping failure region. Code implements shift = overlap_pct/100 * 0.09 (mock_server.py:_draw_session_quality). Actual theoretical overlap is 0% at 25%, 0% at 50% (per code [0.095,0.185] vs failure [0.20,0.39]), ~8% at 75% ([0.1175,0.2075]) and ~33% at 100% ([0.14,0.23]). Even report table [0.11,0.20]/[0.14,0.23]/[0.17,0.26]/[0.20,0.29] (0%/30%/60%/100%) misstates code. A genuine 25%/50% overlap test was never executed — FP=0 at 25%/50% is not evidence against discrimination, it is artifact of insufficient shift. Redesign with failure distribution shift downward or larger noise range or Gaussian overlap to achieve true 25%/50% area overlap.",
+    "Threshold calibration grid is coarse discrete [0.20,0.25,...0.80] with tie-break lowest-threshold-wins. With FP=0 at all thresholds for 0-50% (noise max <0.20 per design), argmax-F1 trivially selects lowest threshold regardless of underlying continuous optimum. Calibrated threshold constancy 0.20 at 0-75% does not demonstrate absence of gradual shift — the optimum between 0.20-0.25 was not probed. Future design must use continuous threshold sweep or ROC analysis to locate discriminating point.",
+    "Orthogonality marginal failure at 75% (r=0.066326, CI upper 0.154909 >0.15, C3_pass false while TOST p_upper=0.032 passes) is dismissed as sample-size artifact in report.md without power calculation. At n=480 SE=0.045787, delta=0.15 requires |r| <0.06 to pass CI<delta. Observed r=0.066 just exceeds margin and may indicate genuine correlation emergence when noise enters failure zone (75% is first condition with nonzero FP). Requires n>=800 or replicated measurement before attributing to noise.",
+    "Mock-only ceiling remains: all signals via /api/session/status session_quality uniform draws on localhost Flask 3.1.3 + SQLite WAL + JWT + jitter 10-100ms. No production OAuth/OIDC, CDN, network RTT, DB-backed sessions. Parent handoff next_question about production-like substrate with FP>0 at calibrated threshold remains open. No inference to production refresh quality distributions which likely are not uniform.",
+    "Positive/negative control labeling in result.json::controls is contradictory: NC-FP-BINDING-25 and NC-FP-BINDING-50 expect FP>0 (positive expectation) but are labeled NC, and PC-FP-BINDING-75/100 are labeled PC. This does not invalidate measurements but obscures control semantics and decision-rule evaluation. Align control IDs to falsifiable expectations (e.g., PC binds at high overlap, NC null at 0%)."
+  ],
+  "validity_findings": [
+    "Recomputed calibrated thresholds from raw_evidence/experiment_data.json threshold_sweep match producer: 0%:0.20 F1=1.0 FP=0.0, 25%:0.20 F1=1.0 FP=0.0, 50%:0.20 F1=1.0 FP=0.0, 75%:0.20 F1=0.9543 FP=0.0958, 100%:0.25 F1=0.9565 FP=0.35 at 0.20 but calibrated FP=0.0. Verified via argmax F1 among meets_constraints TP>=0.85 FP<=0.10, tie lowest wins — recomputation confirms producer metrics exactly.",
+    "FP rates at threshold 0.20 recomputed from raw: 0% 0.0 (0/240), 25% 0.0 (0/240), 50% 0.0 (0/240), 75% 0.0958 (23/240 noise >=0.20), 100% 0.35 (84/240). Matches result.json::metrics.fp_at_020_by_overlap and per_overlap.fp_at_threshold_020. TP at 0.20 recomputed as 1.0 for all 0-75% (240/240) and 1.0 at 100% before recalibration — threshold sweep shows TP=0.9167 at calibrated 0.25 for 100% (220/240).",
+    "Orthogonality recomputed: Fisher-z CI with SE=1/sqrt(n-3)=0.045787 reproduces producer CIs exactly: 0% r=-0.00461 CI [-0.094074,0.084927] TOST pass, 25% r=0.036837 CI [-0.05284,0.125924] pass, 50% r=0.030152 CI [-0.05951,0.119332] pass, 75% r=0.066326 CI [-0.023314,0.154909] TOST p_upper=0.032139 p_lower=1.0e-06 pass but CI upper 0.154909>0.15 so C3_pass false per combined rule, 100% r=-0.004264 CI [-0.09373,0.085271] pass. Producer metrics verified.",
+    "Theoretical vs empirical overlap checked: code shift 0.09*overlap_pct/100 yields expected FP for uniform noise: 0% 0.0, 25% 0.0 (max 0.1625<0.20), 50% 0.0 (max 0.185<0.20), 75% 0.083 (0.0075/0.09) observed 0.0958, 100% 0.333 (0.03/0.09) observed 0.35. Close match confirms behavioral scoring is indeed session_quality uniform draws as intended and sampling is working — FP emergence pattern is design consequence, not measurement error, but contradicts report table ranges [0.05,0.14]/[0.11,0.20]/[0.14,0.23]/[0.17,0.26]/[0.20,0.29] which overstates early overlap.",
+    "C1 discrimination recomputed from threshold-independent fingerprints: 3 unique fingerprints over 4 auth states (expired/invalid collide on 401 authentication_failed) => discrimination 0.8333 = intra 1.0 - inter 0.1667. Matches parent 0.8333. Baseline status-only 0.5 and body-only 0.8333 replicated. Measurement correctly excludes date/server/x-request-id etc.",
+    "Sampling integrity verified: per_overlap phase_a_noise_n=240, phase_a_token_n=240, phase_b_cooccur_n=480 for each of 5 conditions, total 2400, n_unique_behavioral_scores 435-449 (>5 continuous_injection_ok true). Random seed 42, threaded=False, server on 127.0.0.1:18951. No missing conditions.",
+    "Provenance hash for raw_evidence verified: sha256 05f9b0d8fa68db4952e5e3dc8fad89faad30047f9de28e6611df0c53c84d9c80 matches provenance.json and recomputed on file. Artifacts mock_server.py sha256 11ef2dd7... and run_experiment.py a4bde151... recorded. Total HTTP requests ~12000, duration 39s as reported.",
+    "Control semantics verified: NC-NULL-OVERLAP-0 FP=0.0 pass true correctly validates null; PC-FP-BINDING-75 FP 0.0958>0 pass true correctly validates that high label shift finally produces FP; PC-FP-BINDING-100 FP 0.35>0 pass true. NC-FP-BINDING-25/50 expect FP>0 but observed 0.0 so pass false — correctly flags that decision-rule second conjunct (FP>0 for overlap >=25%) fails as stated.",
+    "No leakage between calibration and test phases: calibrated threshold from Phase A (240+240) applied to Phase B co-occurring 480 paired samples — independent samples, no reuse of same RNG draws for decision.",
+    "Representation loss disclosed by producer: uniform shift overlap not production-like; hand-designed session_quality mapping (noise uniform 0.05-0.14 base, failure uniform 0.20-0.39, success 0.50-0.80 with 70% success ratio) may not reflect production refresh quality distribution. Behavioral+structural signals still synthetic."
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "baseline calibrated threshold 0.20 from EXP-PRODUCT-35538865048",
+      "producer_expected": "0% overlap replicates parent 0.20 calibrated threshold with FP=0.0, TP=1.0, TOST pass",
+      "audit_observed": "0% condition exactly replicates: threshold 0.20, FP 0.0, TP 1.0, r=-0.00461 CI upper 0.0849 TOST pass, vs parent r=-0.0065 CI upper 0.0831. Baseline replicated at n=480. No drift.",
+      "pass_fail": "PASS",
+      "evidence_ref": "raw_evidence/experiment_data.json::per_overlap[0].calibrated_threshold and result.json::metrics.thresholds_by_overlap.0"
+    },
+    {
+      "baseline_id": "baseline orthogonality r=-0.0065 CI upper 0.0831 from EXP-PRODUCT-35538865048",
+      "producer_expected": "Orthogonality TOST delta=0.15 holds at baseline",
+      "audit_observed": "All except 75% hold: 0% r=-0.00461 CI 0.0849 pass, 25% r=0.0368 CI 0.1259 pass, 50% r=0.0302 CI 0.1193 pass, 75% r=0.0663 CI 0.1549 fails C3_pass (but TOST p still <0.05), 100% r=-0.00426 CI 0.0852 pass. Marginal failure at only condition with moderate FP indicates possible genuine violation rather than random, but not replicated at 100% where FP higher.",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json::metrics.orthogonality_by_overlap"
+    },
+    {
+      "baseline_id": "positive control: high overlap should yield FP>0 at threshold 0.20",
+      "producer_expected": "FP>0 at overlap >=75%",
+      "audit_observed": "FP>0 only at 75% (0.0958) and 100% (0.35). At designed 25% and 50% FP=0.0 due to insufficient shift, contradicting expectation FP>0 at >=25% per decision rule. Positive control is binding but threshold for binding is higher than hypothesized.",
+      "pass_fail": "FAIL",
+      "evidence_ref": "result.json::controls.PC-FP-BINDING-75 and result.json::metrics.fp_at_020_by_overlap"
+    },
+    {
+      "baseline_id": "null control: 0% overlap replicates FP=0.0",
+      "producer_expected": "FP=0.0 at threshold 0.20 when overlap 0%",
+      "audit_observed": "FP=0.0 exactly at 0% (0/240), matches parent. Null control honored.",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json::controls.NC-NULL-OVERLAP-0"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_discrimination": 0.8333,
+    "c1_baseline_status_only": 0.5,
+    "c1_baseline_body_only": 0.8333,
+    "thresholds_by_overlap": {
+      "0": 0.2,
+      "25": 0.2,
+      "50": 0.2,
+      "75": 0.2,
+      "100": 0.25
+    },
+    "fp_at_020_by_overlap": {
+      "0": 0.0,
+      "25": 0.0,
+      "50": 0.0,
+      "75": 0.0958,
+      "100": 0.35
+    },
+    "tp_at_020_by_overlap": {
+      "0": 1.0,
+      "25": 1.0,
+      "50": 1.0,
+      "75": 1.0,
+      "100": 1.0
+    },
+    "tp_at_calibrated_by_overlap": {
+      "0": 1.0,
+      "25": 1.0,
+      "50": 1.0,
+      "75": 1.0,
+      "100": 0.9167
+    },
+    "threshold_increases_with_overlap_monotonic_nondecreasing": true,
+    "threshold_strictly_increases_from_0_to_100": true,
+    "fp_binding_at_overlap_ge25_all_gt0": false,
+    "fp_binding_at_overlap_ge75": true,
+    "orthogonality_by_overlap": {
+      "0": {"pearson_r": -0.00461, "ci_upper": 0.084927, "tost_pass": true, "c3_pass": true, "c5_pass": true},
+      "25": {"pearson_r": 0.036837, "ci_upper": 0.125924, "tost_pass": true, "c3_pass": true, "c5_pass": true},
+      "50": {"pearson_r": 0.030152, "ci_upper": 0.119332, "tost_pass": true, "c3_pass": true, "c5_pass": true},
+      "75": {"pearson_r": 0.066326, "ci_upper": 0.154909, "tost_pass": true, "c3_pass": false, "c5_pass": false},
+      "100": {"pearson_r": -0.004264, "ci_upper": 0.085271, "tost_pass": true, "c3_pass": true, "c5_pass": true}
+    },
+    "per_overlap_n_unique_scores": [449, 448, 445, 448, 435],
+    "calibrated_metrics_fp_rate": {
+      "0": 0.0,
+      "25": 0.0,
+      "50": 0.0,
+      "75": 0.0958,
+      "100": 0.0
+    },
+    "total_samples": 2400,
+    "samples_per_condition": 480
+  },
+  "claim_ceiling": "C-FRESHNESS remains EXPERIMENTAL, mock-only. Narrowly established: on localhost Flask 3.1.3 + SQLite WAL + JWT HS256/RS256 with synthetic uniform session_quality, calibrated threshold 0.20 survives label overlap up to 75% (actual overlap ~8%, FP=0.0958 <0.10) and only shifts to 0.25 at 100% label shift (actual overlap ~33%, FP=0.35 violates constraint). Threshold response is flat at 0.20 for 0-75% then single jump to 0.25 — not the hypothesized gradual increase — and FP binding fails for 25%/50% because design produced 0% actual overlap. Orthogonality TOST delta=0.15 holds at 4/5 label overlaps (r -0.004 to 0.036) but marginally fails at 75% (r=0.066 CI upper 0.1549 >0.15) where FP first emerges. Discrimination 0.8333 and 4/4 noise types remain effective. No evidence for production OAuth/OIDC, CDN, network RTT, DB sessions, or non-uniform production refresh distributions. Do not promote to PRODUCT_CORE or VALIDATED; do not assume threshold 0.20 is discriminating under production overlapping noise.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35551517868/request.json sha256 5f6d81fad5c9f453bfb5f92762d6997dd79b3d025da0f5dae04a81a4d1a43036",
+    "research/experiments/EXP-PRODUCT-35551517868/spec.json sha256 13002375d16b9b0434d9983a164003658f56b9063c187d3f64a69fd37f71fb4d",
+    "research/experiments/EXP-PRODUCT-35551517868/prereg.md sha256 003655f70dced87ed47cf2db1f00607bc35f7ddfbf283fd2fb9b9ce0c1106387",
+    "research/experiments/EXP-PRODUCT-35551517868/freeze.json",
+    "research/experiments/EXP-PRODUCT-35551517868/result.json sha256 ca9a0a89297c01a0fb358fbc5d0855890dcdc6d518a128766973d9d77ee94963",
+    "research/experiments/EXP-PRODUCT-35551517868/raw_evidence/experiment_data.json sha256 05f9b0d8fa68db4952e5e3dc8fad89faad30047f9de28e6611df0c53c84d9c80",
+    "research/experiments/EXP-PRODUCT-35551517868/mock_server.py sha256 11ef2dd7d8dda1b0d095e2de35bad7b55173b353a3b0dacc2526b971a22e1173",
+    "research/experiments/EXP-PRODUCT-35551517868/run_experiment.py sha256 a4bde151e17a7b2f01153d147748e6b75f8c0ba82649a96dc45a74e016fb6187",
+    "research/experiments/EXP-PRODUCT-35551517868/report.md",
+    "research/experiments/EXP-PRODUCT-35551517868/provenance.json",
+    "research/experiments/EXP-PRODUCT-35538865048/result.json sha256 4043bff6c382d63a2a9f9969e8beea07e0cbeaab10c81e99a85ecaf6a7ae600d (baseline threshold 0.20 and orthogonality r=-0.0065)",
+    "research/experiments/EXP-PRODUCT-35538865048/handoff.json sha256 f5580efa18079930fffd2b62e8c0cf57fc538b20d56c49f64bf15281c36a668e (parent claim ceiling)",
+    "research/experiments/EXP-PRODUCT-35551517868/mock_server.py:_draw_session_quality lines 262-288 (shift=overlap_pct/100*0.09)",
+    "research/experiments/EXP-PRODUCT-35551517868/run_experiment.py:threshold_sweep lines 229-249 and run_overlap_condition lines 379-378 (calibration logic)"
+  ],
+  "unresolved": [
+    "Why does FP binding fail at 25%/50% label overlap despite intended design? Audit finds code shift too small to create actual distributional overlap — is a corrected design (larger shift, Gaussian, or failure mean shift) sufficient to produce FP>0 at 25%/50% with gradual threshold increase, or is guard genuinely robust to moderate overlap?",
+    "Is non-monotonic flat-then-jump threshold response (0.20 across 0-75% then 0.25 at 100%) a property of uniform shift design/0.05 discrete grid or genuine freshness guard characteristic? Continuous threshold ROC not tested.",
+    "Does marginal orthogonality failure at 75% (CI upper 0.1549 vs delta 0.15) replicate with n>=800 or is it sampling variation? 75% is only condition where FP first emerges, suggesting possible induced behavioral-structural correlation under partial overlap.",
+    "Would Gaussian or production-like noise distributions with gradual tails produce earlier FP binding and different FP-TP tradeoff than uniform shifted box?",
+    "How does calibrated threshold behave at intermediate label overlaps (e.g., 10,30,60,80,90%) under corrected overlap definition?",
+    "Does threshold increase and orthogonality pattern persist on production-like substrate with real OAuth/OIDC, CDN, network RTT, DB-backed sessions where noise/refresh distributions may be correlated, as per request.json inherited_next_question?"
+  ]
+}
