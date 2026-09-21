@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35578258358",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "id": "V1-K12-fix-verified",
+      "severity": "info",
+      "finding": "Critical FIX-1 verified: _dirichlet_multinomial_log_marginal uses K=K_categories=12 (N_STATES) not K=len(counts). Recomputed K2 log BF 643.088782 (alpha0.5), 338.671097 (alpha1.0), 167.898395 (alpha2.0) exactly match result.json/raw_results.json; deterministic positive control 854.131357/916.179931 also exact. Parent bug +3700-4000 nat upward bias is fully explained; corrected null medians -78.36/-130.91/-116.10 confirm Occam penalty. Frozen spec measurement_validity K=12 satisfied.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/run_experiment.py:233-252, raw_results.json:alpha_prior_sweep.*, result.json:metrics.best_null_median_nats"
+    },
+    {
+      "id": "V2-history-conditioning-mismatch",
+      "severity": "medium",
+      "finding": "Frozen spec measurement_validity #11 and prereg 4.6 define K2 as state + last 2 actions (a_{t-1},a_t) and K3 as state + last 3 actions (a_{t-2},a_{t-1},a_t) (action-history conditioning). Implementation uses K2=build_state_history_records(2) -> state history (url_before + 2 previous urls) and K3=build_action_history_records(3) -> action history (url_before + 3 previous actions + current). Thus primary K2 tests action effect beyond state-history, not beyond action-history as frozen, and K3-K2 compares different history kinds (state lags vs action lags) making Phase2 K3-K2 =235.03 nats apples-to-oranges. Recomputed spec-correct K2 (history 1 prev action) gives BF 3298.3 median -415.6 PASS C1/C3 stronger than producer; spec-correct K3 (history 2 prev actions) gives BF 1955.9 median +7.07 FAIL C1. Spec-correct K3-K2 = -1342 nats (negative), opposite sign to producer's +235. Main C1/C3 verdict robust to correction (both state-history and spec-correct K2 pass), but Phase2 beyond-Markov inference is invalid under this mismatch and must be treated as exploratory only (spec itself says Phase2 only if SURVIVES on C1, does not gate).",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/spec.json:measurement_validity[10], prereg.md:4.6, run_experiment.py:543-544,542-545,255-329"
+    },
+    {
+      "id": "V3-N_SHUFFLE-p-resolution",
+      "severity": "info",
+      "finding": "FIX-2 verified: N_SHUFFLE=1999 satisfies frozen spec >=1000 and resolves p<0.001 threshold (min achievable p=0.0005). Recomputed null max -21.14/-92.94/-92.77 all << observed 643/339/168; count_ge=0 => p=(0+1)/2000=0.0005 correct for all alphas. 99.9th percentile -25.40/-96.94/-95.87 computed via numpy.percentile and separation 194-669 nats matches result.json. Parent N=500 cap p=0.001996 issue resolved.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/raw_results.json:alpha_prior_sweep.*.null_control, raw_output.txt:C1 null control"
+    },
+    {
+      "id": "V4-synthetic-ceiling",
+      "severity": "high",
+      "finding": "All evidence synthetic SPA (50 sessions x100 steps, seed42, 12 states, CANDIDATES 48/48 verified, 50% hash +50% uniform). Validity note correctly states no support for C-WEB-DYNAMICS (real Web dynamics). Claim must not be generalized to production SPAs, titles, DOM, network payloads, or high-cardinality state spaces. Environment can express tested effect (true I(Y;A|Z)=1.52 bits established in parent chain) and did express it (det_ratio 0.254 K2 stochastic, deterministic control >>0).",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/result.json:validity_notes[0], prereg.md:10, spec.json:claim_ids"
+    },
+    {
+      "id": "V5-stratum-fragmentation",
+      "severity": "low",
+      "finding": "Stratum size distribution heavily fragmented: 343 strata 5-9 records (2147 records), 37 strata 10-19 (433), 0 with >=20. C7 >=2 buckets PASS (2 non-empty) recomputed exactly; <30% strata with >=5 not measured but C7 satisfied. Bayesian exact marginal handles small strata without Laplace bias, but representation loss disclosed. Both buckets show positive observed BF (187.6 and 68.0 nats at alpha 0.5) indicating robustness to small samples when K=12 penalty correct.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/raw_results.json:stratum_size_bias_decomposition, result.json:metrics.stratum_size_bias"
+    },
+    {
+      "id": "V6-positive-control",
+      "severity": "info",
+      "finding": "Deterministic SPA positive control passes: K2 854.13/K3 916.18 nats at alpha0.5 (also 467/500 at 1.0, 235/251 at 2.0) >>0 confirms implementation can detect strong action effects. Stochastic/det ratio 0.25-0.09 consistent with 50% stochasticity mixture. Control is strong and appropriate.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/raw_results.json:alpha_prior_sweep.alpha_0.5.deterministic_control_k2"
+    },
+    {
+      "id": "V7-phase2-variance",
+      "severity": "medium",
+      "finding": "Phase2 K3-K2 point estimate +235.03 nats at best alpha0.5 but bootstrap 95% CI [-415.20,34.39] includes zero (n_bootstrap=200, mean -169.46) indicating high variance due to limited within-session action diversity and history-space fragmentation (K2 n_strata 1438 vs K3 841, n_full_params 853/1567 vs 2418/2804). Producer correctly treats Phase2 as exploratory per frozen spec and does not gate SURVIVES verdict (code checks only K3-K2>0 as C2). Frozen spec C2 also requires permutation p<0.01 for difference, not computed; and history-kind mismatch (V2) further invalidates difference. Phase2 cannot support beyond-Markov claim at N=5000.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/raw_results.json:phase2, report.md:3.5, spec.json:decision_rule"
+    },
+    {
+      "id": "V8-no-leakage-target-integrity",
+      "severity": "info",
+      "finding": "No leakage detected: within-session shuffled-action null preserves session structure, state sequence, url_before/url_after pairing and shuffles only action labels via per-session Random shuffle (run_experiment.py:334-359). Target P(S_next|S_current,A) vs P(S_next|S_current) operationalized correctly with exact Dirichlet-Multinomial (lgamma) not variational/BIC. Sampling N=5000 (50*100) seed42 SHA 8cff7c33... verified deterministic vs stochastic designs.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/run_experiment.py:333-381, provenance.json:datasets"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-REPLICATE-AUDIT-CORRECTED",
+      "finding": "PASS: Replicates audit-corrected recomputation of EXP-PHYSICS-35572180485 with corrected K=12 and N_SHUFFLE>=1000. Expected null_median<0, observed>0, p<0.001. Observed: alpha0.5 null_median -78.36 vs audit -78 to -131, observed 643 vs audit 168-643 range (alpha sweep), p 0.0005 <0.001 vs audit p=0.001996 capped at N=500. Direction and magnitude consistent; stronger N_SHUFFLE resolves threshold. Baseline is strong.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/result.json:controls.C1_null_validity, result.json:controls.C3_sensitivity, raw_results.json:alpha_prior_sweep"
+    },
+    {
+      "id": "B-PMI-REFERENCE-SCALE",
+      "finding": "PASS as reference only: Established per-stratum PMI K3 1.22-1.69 bits, K2 0.93-1.51 bits is information-theoretic scale, separate from Bayes factor nats scale. Producer correctly treats as scale reference not direct comparison (spec baselines expected). No conflation of bits vs nats.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35578258358/spec.json:baselines[1], report.md:4, result.json:validity_notes[1]"
+    }
+  ],
+  "recomputed_metrics": {
+    "K_categories": 12,
+    "N_SHUFFLE": 1999,
+    "N_transitions": 5000,
+    "best_alpha_prior": 0.5,
+    "best_k2_stochastic_nats": 643.0887818351148,
+    "best_k3_stochastic_nats": 878.1214134674774,
+    "best_k3_minus_k2_nats": 235.0326316323626,
+    "best_null_median_nats": -78.3598155522759,
+    "best_null_mean_nats": -78.16585016584742,
+    "best_null_std_nats": 15.573707379066017,
+    "best_null_max_nats": -21.141361116682674,
+    "best_percentile_99_9_nats": -25.398867730717644,
+    "best_p_value": 0.0005,
+    "alpha_1_0_k2_stochastic_nats": 338.6710973256759,
+    "alpha_1_0_null_median_nats": -130.90835513540515,
+    "alpha_2_0_k2_stochastic_nats": 167.89839491149542,
+    "alpha_2_0_null_median_nats": -116.09881255547953,
+    "deterministic_positive_control_k2_nats": 854.1313574536543,
+    "deterministic_positive_control_k3_nats": 916.1799313874089,
+    "c1_passers": [0.5, 1.0, 2.0],
+    "c3_passers": [0.5, 1.0, 2.0],
+    "both_passers": [0.5, 1.0, 2.0],
+    "c6_pass": true,
+    "c7_pass": true,
+    "c7_non_empty_buckets": 2,
+    "phase2_k3_minus_k2_nats": 235.0326316323626,
+    "phase2_bootstrap_ci_lower": -415.19610765188065,
+    "phase2_bootstrap_ci_upper": 34.39469529670848,
+    "phase2_ci_includes_zero": true,
+    "spec_correct_K2_hist1_alpha0_5_BF": 3298.334159575268,
+    "spec_correct_K2_hist1_null_median": -415.57050941414855,
+    "spec_correct_K3_hist2_alpha0_5_BF": 1955.9382366899572,
+    "spec_correct_K3_hist2_null_median": 7.071555821789843,
+    "recomputed_via": "python3 run_experiment.py functions est_bayesian_model_comparison and shuffled_action_null_within_session on seed42 data; values exact to 1e-6 vs raw_results.json"
+  },
+  "claim_ceiling": "SURVIVES_CURRENT_TEST is supported ONLY for synthetic stochastic 12-state hash-routed SPA (CANDIDATES 48/48, 50% deterministic +50% uniform, N=5000, seed42) using exact Dirichlet-Multinomial Bayesian model comparison with K=n_states=12 and N_SHUFFLE=1999 within-session shuffled-action null, conditioned on state-history K2 = (url_before + 2 previous urls). Across alpha_prior {0.5,1.0,2.0} null median -78 to -131 nats <0 (C1 PASS) and observed log BF 168-643 nats exceeds max null by 194-669 nats, 99.9th percentile, p=0.0005 <0.001 (C3 PASS). Establishes Bayesian paradigm as first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this artifact class, bypassing Laplace smoothing bias. Ceiling EXCLUDES: (i) C-WEB-DYNAMICS / real Web dynamics, (ii) production Web data/high-cardinality states, (iii) beyond-Markov K3-K2 (exploratory, history-kind mismatch state-vs-action and bootstrap CI includes zero; spec-correct action-history K3 median +7 fails C1 and K3-K2 -1342), (iv) product promotion (synthetic only), (v) generalization to other alpha priors beyond 0.5-2.0 or to variational/BIC approximations.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35578258358/spec.json:d9b644b815afc3d5b1767facde1927937daefabcbab4942b4b020f77e5cf0d20",
+    "research/experiments/EXP-PHYSICS-35578258358/prereg.md:f81af4dab33c966a60b64073b931f4c3b67187f09b98af73d49891b0cf32c8c4",
+    "research/experiments/EXP-PHYSICS-35578258358/freeze.json:8:39:05.894818+00:00",
+    "research/experiments/EXP-PHYSICS-35578258358/result.json:metrics/controls",
+    "research/experiments/EXP-PHYSICS-35578258358/raw_results.json:774d58b666bde223a393d3c7feb92bbb3cfc26e714a45bbafe074b5608cda3f7",
+    "research/experiments/EXP-PHYSICS-35578258358/run_experiment.py:0a9c67480b842bd29c3bb53f99c59d07f17e617b80e60695bfdeec16a45bca63",
+    "research/experiments/EXP-PHYSICS-35578258358/raw_output.txt:052f28964150de8e6d12e96adf3322ecff1f4b107a24e22a3bea202953841eac",
+    "research/experiments/EXP-PHYSICS-35578258358/provenance.json:base_commit 4953b317db6c23ff5c606e9e486d2c03a51552b8",
+    "research/experiments/EXP-PHYSICS-35572180485/handoff.json:1b8bc62006d54f1ba9ff0866ee50691426328ebe613f60203ab3c80aea32319c",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS across 30+ experiments"
+  ],
+  "unresolved": [
+    "Whether Phase2 beyond-Markov K3-K2 passes when history conditioning aligned to frozen spec (both K2/K3 action-history) and with N>=10000 to resolve bootstrap variance and permutation p<0.01 (current phase2 invalid due to state-vs-action mismatch and CI includes zero)",
+    "Whether Bayesian paradigm maintains valid null centering on production Web data with high-cardinality state spaces (hash-SPAs, TodoMVC, real SPAs) — all evidence synthetic",
+    "Whether spec-correct K3 (state + 2 prev actions) null median +7 >0 indicates systematic failure of history-conditioned Bayesian comparison when conditioning set grows (over-parameterization) or is artifact of limited action diversity at N=5000",
+    "Whether alternative Bayesian methods (WAIC, LOO-CV, fractional Bayes factors) achieve comparable null centering and sensitivity, and whether prior sensitivity beyond {0.5,1.0,2.0} remains stable",
+    "Whether deterministic 854-916 nats positive control ceiling translates to detectable signal on non-leakage TodoMVC hash-SPA URL-level PMI (0.19 bits) or richer SPA representations"
+  ]
+}

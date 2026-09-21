@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **208**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **209**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -218,6 +218,7 @@ Validated experiments: **208**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35572179326 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `1c510af579c9` |
 | EXP-PRODUCT-35572180893 | product | PASS | FALSIFIED — frozen spec.json decision_rule condition (c) triggers: orthogonality (TOST delta=0.15) breaks at 50% overlap (pearson r=0.080, CI upper 0.168 > 0.15, TOST p_upper=0.061). Secondary trigger: calibrated_threshold is None at 75% and 100% overlap (prereg step 4). Both are independent falsification paths per the frozen decision tree. However, the audit claim_ceiling correctly identifies that the 100% condition is tautological (identical distributions cannot be separated) and the orthogonality failure at 50% is marginal (12% above delta, non-monotonic, likely Type I under multiple testing at n=480). The maximum justified scientific finding is bounded discrimination under genuine Gaussian overlap: usable at 0-25% (threshold 0.20->0.25, orthogonality holds, FP moderate), marginal at 50% (threshold 0.27, orthogonality fragile), unusable at >=75% (no operating point). C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized. | C-FRESHNESS | `5edcd6c0ac24` |
 | EXP-PHYSICS-35572180485 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID — The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated. | C-MEAS-VALID, C-WEB-DYNAMICS | `a1ea1b255759` |
+| EXP-PHYSICS-35578258358 | physics | PASS | SURVIVES_CURRENT_TEST — The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion. | C-MEAS-VALID, C-WEB-DYNAMICS | `b6bb02295597` |
 
 ## Latest recorded claim events
 
@@ -228,8 +229,8 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35572180893 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | MEASUREMENT_INVALID | EXP-PHYSICS-35572180485 | physics |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-PHYSICS-35578258358 | physics |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35572180485 | physics |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35578258358 | physics |

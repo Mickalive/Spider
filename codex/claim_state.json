@@ -531,6 +531,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No confirmatory evidence accumulated for or against predictive dynamical structure on real Web transitions from this experiment. All evidence is synthetic 12-state SPA simulation. The audit's corrected K=12 recomputation is an exploratory finding suggesting Bayesian model comparison may be the first estimator to pass both C1 and C3 on this SPA class, but this requires a new frozen experiment for confirmation. C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: Bayesian Dirichlet-Multinomial with K=12 on stochastic SPA is hypothesis-generating positive, not confirmed."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35578258358",
+        "lane": "physics",
+        "created_at": "2026-09-21T08:30:48.872966+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+        "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change. All evidence remains synthetic SPA simulation (audit V4: 'no support for C-WEB-DYNAMICS, real Web dynamics'). The Bayesian paradigm validates the estimator on a controlled synthetic testbed, not on production Web data. C-WEB-DYNAMICS requires evidence from real SPA/form-heavy browser data with genuine state variation. The Bayesian result establishes a viable estimator paradigm but does not accumulate evidence for or against the broader Web-dynamical-structure hypothesis."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2555,19 +2565,29 @@
         "claim_id": "C-MEAS-VALID",
         "status": "MEASUREMENT_INVALID",
         "reason": "The frozen decision_rule is not satisfiable as executed: the K bug (K=len(counts) vs K=12) makes the null distribution invalid for C1 evaluation. The audit finds MEASUREMENT_INVALID per spec decision_rule clause 4 (implementation fails per measurement_validity item 6). Audit-side corrected recomputation with K=12 shows SURVIVES_CURRENT_TEST on the same data, but this is hypothesis-generating only \u2014 not a new frozen execution. C-MEAS-VALID cannot advance or decline from an invalid measurement. Status held pending corrected re-execution."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35578258358",
+        "lane": "physics",
+        "created_at": "2026-09-21T08:30:48.872966+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+        "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Bayesian Dirichlet-Multinomial with K=12 passes C1 (null median -78 to -131 nats, all alphas) and C3 (p=0.0005, all alphas) on stochastic 12-state SPA, becoming the first of 5 estimator families to pass simultaneous C1+C3. Audit V1 confirms K=12 fix exact (recomputed metrics match to 1e-6), V3 confirms N_SHUFFLE=1999 resolves p-threshold. Claim ceiling bounded to synthetic SPA with exact Dirichlet-Multinomial, state-history K2, alpha {0.5,1.0,2.0}. Phase 2 beyond-Markov K3-K2 is exploratory only (audit V2 history-kind mismatch state-vs-action, V7 bootstrap CI [-415,34] includes zero). Does not generalize to production Web data or high-cardinality state spaces."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35572180485",
+      "experiment_id": "EXP-PHYSICS-35578258358",
       "lane": "physics",
-      "created_at": "2026-09-21T07:16:38.988883+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated.",
-      "source_commit": "a1ea1b25575959586a23e36237ffc142b9e28646",
+      "created_at": "2026-09-21T08:30:48.872966+00:00",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+      "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No confirmatory evidence accumulated for or against predictive dynamical structure on real Web transitions from this experiment. All evidence is synthetic 12-state SPA simulation. The audit's corrected K=12 recomputation is an exploratory finding suggesting Bayesian model comparison may be the first estimator to pass both C1 and C3 on this SPA class, but this requires a new frozen experiment for confirmation. C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: Bayesian Dirichlet-Multinomial with K=12 on stochastic SPA is hypothesis-generating positive, not confirmed."
+      "reason": "No change. All evidence remains synthetic SPA simulation (audit V4: 'no support for C-WEB-DYNAMICS, real Web dynamics'). The Bayesian paradigm validates the estimator on a controlled synthetic testbed, not on production Web data. C-WEB-DYNAMICS requires evidence from real SPA/form-heavy browser data with genuine state variation. The Bayesian result establishes a viable estimator paradigm but does not accumulate evidence for or against the broader Web-dynamical-structure hypothesis."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
@@ -2630,14 +2650,14 @@
       "reason": "The logistic F50=0.5654 < 0.80 prediction does NOT support the product consequence that 'plateau is structural and recipe density is limited.' This prediction is informationally identical to the constant null (audit VF3) and inherits the single-observation (n=20) uncertainty. Product decisions must not use this extrapolation as evidence for structural plateau below 80%. Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) remains the sole blocking path for an empirical answer on whether ranking agreement crosses 80% at n=21-82. Product lane should NOT invest in recipe density design until Docker data is available."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-PHYSICS-35572180485",
+      "experiment_id": "EXP-PHYSICS-35578258358",
       "lane": "physics",
-      "created_at": "2026-09-21T07:16:38.988883+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated.",
-      "source_commit": "a1ea1b25575959586a23e36237ffc142b9e28646",
+      "created_at": "2026-09-21T08:30:48.872966+00:00",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+      "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
       "claim_id": "C-MEAS-VALID",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "The frozen decision_rule is not satisfiable as executed: the K bug (K=len(counts) vs K=12) makes the null distribution invalid for C1 evaluation. The audit finds MEASUREMENT_INVALID per spec decision_rule clause 4 (implementation fails per measurement_validity item 6). Audit-side corrected recomputation with K=12 shows SURVIVES_CURRENT_TEST on the same data, but this is hypothesis-generating only \u2014 not a new frozen execution. C-MEAS-VALID cannot advance or decline from an invalid measurement. Status held pending corrected re-execution."
+      "status": "EXPERIMENTAL",
+      "reason": "Bayesian Dirichlet-Multinomial with K=12 passes C1 (null median -78 to -131 nats, all alphas) and C3 (p=0.0005, all alphas) on stochastic 12-state SPA, becoming the first of 5 estimator families to pass simultaneous C1+C3. Audit V1 confirms K=12 fix exact (recomputed metrics match to 1e-6), V3 confirms N_SHUFFLE=1999 resolves p-threshold. Claim ceiling bounded to synthetic SPA with exact Dirichlet-Multinomial, state-history K2, alpha {0.5,1.0,2.0}. Phase 2 beyond-Markov K3-K2 is exploratory only (audit V2 history-kind mismatch state-vs-action, V7 bootstrap CI [-415,34] includes zero). Does not generalize to production Web data or high-cardinality state spaces."
     }
   }
 }
