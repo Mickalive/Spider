@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35538866166",
+  "lane": "physics",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Correct H(Y|Z) P(z) denominator in est_entropy_rate_cmi(): use smoothed P(z)=(count_z+alpha*n_a*n_y)/n_smoothed (with n_smoothed=n_total+alpha*n_z*n_a*n_y) instead of current unsmoothed P(z)=count_z/n_total. Current implementation (run_experiment.py:298-309) mixes smoothed P(z,y) with unsmoothed P(z), inflating H(Y|Z) bias and producing negative CMI at alpha>=0.5. Re-run alpha sweep with corrected estimator before declaring estimator-class closure; recomputation shows corrected estimator still yields FALSIFIED-IN-SETTING (no alpha achieves both C1 and C3) but via different failure mode (small positive CMI 0.12/0.05 <0.5 rather than negative CMI).",
+    "Clarify control identity mapping: spec.json positive_control and prereg C3 define deterministic SPA as positive control (CMI=2.0 bits, threshold >=0.5), but run_experiment.py C3 uses stochastic SPA K3 (k3_value_stochastic) for threshold and permutation test, while deterministic SPA is relegated to supplementary baseline B-ENTROPY-RATE-DEG. Align code threshold with frozen spec or explicitly amend spec to define C3 as stochastic sensitivity and B-DEG as deterministic construct validation.",
+    "Restore missing baselines B-PLUGIN-KL-ALPHA1 and B-PLUGIN-KL-ALPHA0: spec.json and prereg list replication of parent plug-in KL alpha=1.0 (expected K3~0.099, |null|~0.064) and alpha=0 (expected K3~1.377, |null|~0.924) for direct comparison. No baseline controls were computed in this packet; include them or explicitly mark as not executed with justification, to preserve comparison table auditability."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-estimator-pz-inconsistency",
+      "severity": "high",
+      "category": "estimator_implementation",
+      "description": "est_entropy_rate_cmi() computes H(Y|Z,A) with smoothed joint P(z,a,y)=(count+alpha)/n_smoothed and H(Y|Z) with mixed denominators: P(z,y) smoothed sum_a(count+alpha)/n_smoothed but P(z)=count_z/n_total unsmoothed (run_experiment.py:299 p_z = z_counts[z]/n_total; 302-305 p_zy smoothed). Correct smoothed P(z) = (count_z+alpha*n_a*n_y)/n_smoothed. For n_z~841/1438, n_a=4, n_y=12, n_total=5000, alpha=0.5 n_smoothed~25184, the mismatch is numerically ~1% on P(y|z) (see audit recomputation) but systematically biases H(Y|Z) downward by 0.12-0.30 bits vs corrected estimator, producing artifactual negative CMI (-0.07 at alpha0.5, -0.19 at alpha1.0). The report correctly identifies Laplace cell-count inflation as root cause (report.md: why entropy-rate fails) but does not identify this additional denominator inconsistency.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py:240-326 est_entropy_rate_cmi, recomputed_metrics.corrected_cmi vs producer metrics, audit bash recomputation",
+      "affects_verdict": false,
+      "mitigation": "Recomputed with corrected H(Y|Z): K2 corrected 0.451/0.080/0.029 vs producer 0.331/-0.182/-0.268; K3 corrected 0.589/0.122/0.046 vs producer 0.523/-0.070/-0.186. Null means corrected (K2 50-100 shuffles): 0.361/0.062/0.022 vs producer 0.240/0.200/0.275. Corrected estimator still yields no alpha achieving both |null|<0.1 and K3>=0.5 (alpha0.1 fails C1, alpha0.5/1.0 fail C3), so FALSIFIED-IN-SETTING verdict is robust to this bug. Fix required before generalizing negative claims about entropy-rate class."
+    },
+    {
+      "id": "V2-control-stratification-mismatch",
+      "severity": "medium",
+      "category": "control_mapping",
+      "description": "C1 null control is computed on recs_k2_stoch (state-history K2, Z=(state, history_state_2)) while C3 positive control is computed on recs_k3_stoch (action-history K3, Z=(state, history_action_3)). Spec measurement_validity defines Z differently for K3 vs K2 but does not state that C1 and C3 use different K. Parent handoff do_not_assume notes this mismatch does not overturn tradeoff, and audit V1 confirms tradeoff robust, but the asymmetry means C1 and C3 are measured in different conditioning spaces, complicating joint decision interpretation. Producer does not disclose this K-mismatch in validity_notes.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py:613 recs_k2_stoch for null, 624 recs_k3_stoch for positive, spec.json:measurement_validity Z definition, handoff.json do_not_assume C1 stratification",
+      "affects_verdict": false
+    },
+    {
+      "id": "V3-deterministic-positive-control-failure",
+      "severity": "low",
+      "category": "construct_validity",
+      "description": "B-ENTROPY-RATE-DEG on deterministic SPA (I=0 by construction where H(Y|Z,A)=0) yields negative CMI at alpha0.5 (-0.073) and alpha1.0 (-0.199) with producer estimator, and small positive 0.133/0.051 with corrected estimator. Report.md correctly calls this a construct-validation failure at these smoothing levels. This confirms Laplace smoothing introduces bias even on deterministic control where signal should be ~log2(4) style, reinforcing that failures are estimator-intrinsic not data-intrinsic.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/result.json:controls.B-ENTROPY-RATE-DEG, raw_results.json:alpha_sweep.*.deterministic_control_k3, report.md: deterministic SPA positive control",
+      "affects_verdict": false
+    },
+    {
+      "id": "V4-null-distribution-tightness",
+      "severity": "info",
+      "category": "statistical_validity",
+      "description": "Null std 0.0021 (alpha0.1), 0.00038 (alpha0.5), 0.00015 (alpha1.0) across 500 within-session permutations shows tightly concentrated null away from zero (bias systematic, not random). Observed null means 0.240/0.200/0.275 are 112-1833 sigma from zero, confirming systematic bias. This is correctly interpreted as bias not variance. No leakage in shuffle: within-session action-label permutation preserves session structure and url_before/url_after pairing as specified.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:alpha_sweep.*.null_control",
+      "affects_verdict": false
+    },
+    {
+      "id": "V5-sparse-strata-not-invalidating",
+      "severity": "info",
+      "category": "measurement_validity",
+      "description": "No MEASUREMENT_INVALID triggers: C6 48/48 pairs verified, C7 2 non-empty buckets (5-9:343 strata, 10-19:37 strata), narrowly passing frozen thresholds (>=2 buckets, >=30% strata with >=5 records would be threatened but K3 has 841 strata for 5000 records ~5.9 avg, K2 1438 strata ~3.5 avg). Sparse regime explains inflated MLE null but does not invalidate measurement per frozen priority (FALSIFIED overrides MEASUREMENT_INVALID).",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/result.json:metrics.design_verification, raw_results.json:stratum_size_bias_decomposition",
+      "affects_verdict": false
+    },
+    {
+      "id": "V6-sample-size-boundedness",
+      "severity": "medium",
+      "category": "generalization",
+      "description": "All measurements at N=5000 only (50 sessions x100 steps, seed=42). No N=50000 or learning-curve condition tested, so cannot distinguish asymptotic bias from finite-sample smoothing artifact. Parent exploratory suggests bias asymptotic, but this experiment provides no N-sweep evidence. Falsification bounded to N=5000.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/spec.json:decision_rule C4, prereg Phase2, result.json validity_notes",
+      "affects_verdict": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-PLUGIN-KL-ALPHA1",
+      "expected": "K3 ~0.099, |null_mean| ~0.064 per spec.json",
+      "observed": "Not computed in this packet. Producer report.md provides side-by-side table quoting parent values (0.099/0.064) but no recomputed metric. No control entry in result.json.",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/result.json:controls (absent), report.md:Comparison with Parent Plug-in KL",
+      "assessment": "Missing. Does not affect FALSIFIED-IN-SETTING gate (supplementary comparison), but reduces auditability of claim that entropy-rate is worse than plug-in KL at alpha=1.0 (|null| 0.275 vs 0.064). Required for direct ceteris paribus comparison on same transitions."
+    },
+    {
+      "id": "B-PLUGIN-KL-ALPHA0",
+      "expected": "K3 ~1.377, |null_mean| ~0.924 per spec.json",
+      "observed": "Not computed. Absent from controls.",
+      "pass": null,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/spec.json:baselines[1]",
+      "assessment": "Missing. Supplementary. MLE recovery of 1.52-bit signal not replicated here."
+    },
+    {
+      "id": "B-ENTROPY-RATE-DEG",
+      "expected": "cmi_deterministic >0.5 bits (deterministic SPA where H(Y|Z,A)=0, H(Y|Z)=log2(4)=2.0, CMI=2.0)",
+      "observed": "alpha0.1 0.544 PASS (0.615 corrected), alpha0.5 -0.073 FAIL (-0.073 producer, 0.133 corrected), alpha1.0 -0.199 FAIL (0.051 corrected). Only alpha0.1 passes 0.5 threshold with producer estimator; with corrected estimator alpha0.1 still passes, alpha0.5/1.0 well below threshold (0.13/0.05).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/result.json:controls.B-ENTROPY-RATE-DEG, raw_results.json:alpha_sweep.*.deterministic_control_k3",
+      "assessment": "Degenerate control reveals smoothing pathology, not SPA design failure. At alpha>=0.5 estimator fails even on deterministic positive control, confirming bias intrinsic to Laplace smoothing on many-cell discrete space, not to stochastic mixing."
+    }
+  ],
+  "recomputed_metrics": {
+    "status": "recomputed_from_code_and_raw",
+    "method": "Independent execution of run_experiment.py est_entropy_rate_cmi and shuffled_action_null_within_session on same transitions (seed 42, 50 sessions x100 steps, SHA stoch 8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0, det 46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512). Exact match to raw_results.json within 1e-13. Additional recomputation with corrected H(Y|Z) P(z) denominator.",
+    "c1_null_abs_means_producer": {
+      "alpha_0.1": 0.24035780936923157,
+      "alpha_0.5": 0.19977497629550361,
+      "alpha_1.0": 0.2746888555099431
+    },
+    "c1_pass_producer": {
+      "alpha_0.1": false,
+      "alpha_0.5": false,
+      "alpha_1.0": false
+    },
+    "c3_k3_and_pass_producer": {
+      "alpha_0.1": {"k3": 0.5227683846011715, "p": 0.000999000999000999, "pass": true},
+      "alpha_0.5": {"k3": -0.06952607619397577, "p": 0.000999000999000999, "pass": false},
+      "alpha_1.0": {"k3": -0.1856515339386049, "p": 0.000999000999000999, "pass": false}
+    },
+    "both_pass_producer": [],
+    "decision_rule_recomputed": "FALSIFIED-IN-SETTING via C1: all alphas |null_mean| >=0.1 (0.240/0.200/0.275). C6 48/48 PASS, C7 2 buckets PASS, no MEASUREMENT_INVALID. Outcome FALSIFIES matches producer.",
+    "recomputed_match": true,
+    "max_abs_diff": 7.3e-14,
+    "corrected_estimator_for_audit": {
+      "note": "Corrected P(z)=(count_z+alpha*n_a*n_y)/n_smoothed; not producer's metric but audit stress-test. 50-100 shuffles for null.",
+      "k2_corrected": {"alpha_0.1": 0.451123, "alpha_0.5": 0.07981, "alpha_1.0": 0.028802},
+      "k3_corrected": {"alpha_0.1": 0.589349, "alpha_0.5": 0.122113, "alpha_1.0": 0.045836},
+      "null_k2_corrected_mean": {"alpha_0.1": 0.360584, "alpha_0.5": 0.061731, "alpha_1.0": 0.021732},
+      "null_k3_corrected_mean": {"alpha_0.1": 0.480588, "alpha_0.5": 0.095744, "alpha_1.0": 0.035077},
+      "c1_pass_corrected": {"alpha_0.1": false, "alpha_0.5": true, "alpha_1.0": true},
+      "c3_pass_corrected": {"alpha_0.1": true, "alpha_0.5": false, "alpha_1.0": false},
+      "both_pass_corrected": [],
+      "verdict_corrected": "FALSIFIED-IN-SETTING (still no alpha achieves both; tradeoff persists, C3 failure at high alpha due to smoothing washout rather than negative artifact)"
+    },
+    "k3_minus_k2": {"alpha_0.1": 0.1920702886348855, "alpha_0.5": 0.1122062481298709, "alpha_1.0": 0.08198098365612871},
+    "design_verification": {"c6_pairs": "48/48", "c7_buckets": 2, "determinism_k3": {"deterministic": 77, "stochastic": 764, "total": 841, "det_ratio": 0.0916}}
+  },
+  "claim_ceiling": "FALSIFIED-IN-SETTING for entropy-rate CMI = H(Y|Z)-H(Y|Z,A) via Laplace-smoothed histogram (alpha in {0.1,0.5,1.0}) on the stochastic 12-state SPA (50% hash routing +50% uniform over 4 candidates per (state,action), CANDIDATES 12x4) at N=5000 (50 sessions x100 steps, seed 42) with MIN_STRATUM_SIZE=5 and within-session shuffled-action null (500 permutations): no tested alpha achieves both |null_mean|<0.1 bits and K3>=0.5 bits. With producer (buggy) estimator all alphas fail C1 (0.24/0.20/0.27); with corrected P(z) estimator C1 passes at alpha0.5/1.0 but C3 fails (K3 0.12/0.05 <0.5), so joint C1+C3 still empty. Deterministic SPA construct validation also fails at alpha>=0.5 (negative CMI producer, 0.13/0.05 corrected <<0.5). Ceiling bounded to discrete Laplace-histogram entropy-rate on this SPA class, this N, this alpha set, this null framework. Does NOT close: Bayesian model comparison, likelihood-ratio, KSG/kNN/KDE or non-smoothed estimators, N=50000 or dense-strata regimes, continuous state representations, production Web transitions, or the 1.52-bit true CMI existence (MLE 1.377 bits, per-stratum PMI 1.46-1.69 bits remain established).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35538866166/spec.json:claim_ids C-MEAS-VALID C-WEB-DYNAMICS, question, hypothesis, falsifier C1/C3/C6, measurement_validity, decision_rule FALSIFIED-IN-SETTING vs SURVIVES",
+    "research/experiments/EXP-PHYSICS-35538866166/prereg.md: entropy-rate definition H(Y|Z)-H(Y|Z,A), hypothesis H1/H0, controls C1/C3/C6/C7, baselines B-PLUGIN, alpha values 0.1/0.5/1.0",
+    "research/experiments/EXP-PHYSICS-35538866166/freeze.json:hashes prereg/spec/request frozen 2026-09-21T01:40:37",
+    "research/experiments/EXP-PHYSICS-35538866166/result.json:metrics.alpha_sweep_summary, controls C1-NULL-CONTROL/C3-POSITIVE-CONTROL/C6/C7/B-ENTROPY-RATE-DEG, observations, validity_notes",
+    "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:alpha_sweep alpha_0.1/0.5/1.0 k2/k3 values, null_control null_mean/null_std, both_passers [], verdict FALSIFIED-IN-SETTING, SHA stoch 8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 det 46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+    "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py:est_entropy_rate_cmi (lines 240-326), shuffled_action_null_within_session, CANDIDATES 12-state design, collect_transitions seed 42, verify_design",
+    "research/experiments/EXP-PHYSICS-35538866166/report.md: frozen decision FALSIFIED-IN-SETTING via C1, alpha sweep table, negative CMI diagnosis",
+    "research/experiments/EXP-PHYSICS-35538866166/provenance.json:python 3.12.14 seed 42 n_transitions 5000 alpha_values [0.1,0.5,1.0] code_paths, data_hashes",
+    "research/experiments/EXP-PHYSICS-35530591329/handoff.json:carry_forward established true I=1.52 bits, monotonic irreconcilable tradeoff, do_not_assume scope bounds, next_question entropy-rate",
+    "codex/claim_state.json:C-WEB-DYNAMICS remains HYPOTHESIS per multiple FALSIFIED-IN-SETTING bounded to synthetic SPAs"
+  ],
+  "unresolved": [
+    "Whether corrected entropy-rate estimator with alternative smoothing (Jeffreys alpha=0.5 with corrected P(z), Hellinger, or no smoothing) or with bias correction (e.g., Miller-Madow) achieves joint C1+C3 at some alpha not in {0.1,0.5,1.0} or at larger N (50000) where cell-count smoothing penalty is smaller relative to signal.",
+    "Whether global entropy-rate without Laplace smoothing (alpha=0 MLE) would pass C3 (likely yes, ~1.3 bits) but with what null bias; MLE alpha=0 not tested in this packet and would likely fail C1 by larger margin as in parent (parent alpha0 |null|=0.924).",
+    "Whether the consistent positive K3-K2 differences (0.192/0.112/0.082 producer; corrected similar) represent genuine beyond-Markov signal vs residual smoothing asymmetry between K2 (n_z 1438) and K3 (n_z 841) cell counts.",
+    "Whether Bayesian model comparison (Bayes factor action-dependent vs independent transition model) or likelihood-ratio tests bypass the Laplace cell-count bias entirely, as suggested by handoff next_question.",
+    "Generalization beyond 12-state hash SPA to production Web with continuous embeddings, larger vocabularies, or natural stochastic mixing: bias scales with n_z*n_a*n_y relative to N, so larger discrete spaces would worsen tradeoff.",
+    "Whether per-(state,action) PMI (1.46-1.69 bits, p=0.0, noted in handoff unknown) can serve as alternative detection paradigm without CMI aggregation, avoiding global smoothing penalty."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "6e56e17e90ba6712c5a0a041bfd9d2e9601c9754",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T01:38:08.203376+00:00",
+  "experiment_id": "EXP-INTEL-35551517470",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Should the Intel lane pivot to Docker-based direct full-DOM measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) to bypass modeling entirely, given that five consecutive model-based approaches (Phi(mean(SNR_i)), Phi(mean/std), Phi(median/std), sign-fraction power law, empirical CDF linear extrapolation) have all failed to produce a validated extrapolation \u2014 or should the lane instead preregister a bounded saturating function (logistic, Hill, Richards) fit to the 4-point data as a final non-parametric attempt before pivoting?",
+  "lane": "intel",
+  "origin_github_run_id": "35551517470",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35544806153",
+    "path": "research/experiments/EXP-INTEL-35544806153/handoff.json",
+    "sha256": "fedc0f49e45fa39e866fe79b4ed032554f13cab64e9f16bb3bbfe8d311c799ec"
+  },
+  "reason": "pulse",
+  "request_hash": "1775e444ba3106bf5d15b83e5180b62280b8c60be12a847f6ed2f225000a8327",
+  "request_id": "3f9b045e4211a103be5a4686",
+  "schema_version": 1
+}

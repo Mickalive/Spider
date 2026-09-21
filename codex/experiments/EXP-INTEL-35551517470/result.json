@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35551517470",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "best_fit_family": "logistic",
+    "best_R2": 1.0,
+    "best_max_residual_pp": 3.78e-08,
+    "best_AIC": -161.66,
+    "best_BIC": -163.50,
+    "best_F50": 0.5654,
+    "best_F82": 0.5654,
+    "best_params": [0.5654, 10.75, 14.81],
+    "logistic": {
+      "R2": 1.0,
+      "max_residual_pp": 3.78e-08,
+      "AIC": -161.66,
+      "BIC": -163.50,
+      "F50": 0.5654,
+      "F82": 0.5654,
+      "params_L": 0.5654,
+      "params_k": 10.75,
+      "params_n0": 14.81
+    },
+    "hill": {
+      "R2": 0.999994,
+      "max_residual_pp": 0.1283,
+      "AIC": -41.46,
+      "BIC": -43.30,
+      "F50": 0.5657,
+      "F82": 0.5657,
+      "params_L": 0.5657,
+      "params_h": 20.0,
+      "params_K": 13.56
+    },
+    "richards": {
+      "R2": -0.0002,
+      "max_residual_pp": 29.92,
+      "AIC": -72.75,
+      "BIC": -75.21,
+      "F50": 0.2661,
+      "F82": 0.2661,
+      "converged": false
+    },
+    "parent_baseline_R2": 0.8797,
+    "parent_baseline_max_residual_pp": 12.39,
+    "constant_null_R2": -1.2528,
+    "constant_null_F50": 0.5654,
+    "constant_null_F82": 0.5654,
+    "logistic_extrapolation_identical_to_null": true,
+    "hill_extrapolation_identical_to_null": true,
+    "R2_improvement_over_parent": 0.1203,
+    "max_residual_improvement_pp": 12.39
+  },
+  "controls": {
+    "PC1_FIT_REPRODUCES_TRAINING": {
+      "description": "Best-fit function reproduces observed ranking agreement at all training points within 5pp",
+      "expected": "Predictions at n=5,10,15,20 within 5pp of (0.0,0.0,0.4996,0.5654)",
+      "observed": "Logistic predictions: 0.0000, 0.0000, 0.4996, 0.5654. Max residual 3.78e-08pp",
+      "pass": true
+    },
+    "NC1_PARENT_BEST_MODEL": {
+      "description": "Saturating function must improve over parent best model (sign-fraction power law, R2=0.8797, max residual 12.39pp)",
+      "expected": "Best saturating function R2 > 0.93 OR max residual < 8pp",
+      "observed": "Logistic R2=1.0 > 0.93 PASS, max residual 3.78e-08pp < 8pp PASS",
+      "pass": true
+    },
+    "C1_BEST_FIT_QUALITY": {
+      "description": "At least one saturating function achieves R2 >= 0.90 AND max residual < 10pp",
+      "observed_logistic": "R2=1.0 PASS, max_resid=3.78e-08pp PASS",
+      "observed_hill": "R2=0.999994 PASS, max_resid=0.128pp PASS",
+      "observed_richards": "R2=-0.0002 FAIL, max_resid=29.92pp FAIL",
+      "pass": true
+    },
+    "C2_EXTRAPOLATION_PHYSICAL": {
+      "description": "All qualifying functions (R2 >= 0.90) predict F(50) in [0,1] AND F(82) in [0,1]",
+      "observed_logistic": "F(50)=0.5654 in [0,1] PASS, F(82)=0.5654 in [0,1] PASS",
+      "observed_hill": "F(50)=0.5657 in [0,1] PASS, F(82)=0.5657 in [0,1] PASS",
+      "pass": true
+    },
+    "C3_IMPROVES_OVER_PARENT": {
+      "description": "Best function R2 > 0.93 OR max residual < 8pp",
+      "observed_R2": "1.0 > 0.93 PASS",
+      "observed_max_resid": "3.78e-08pp < 8pp PASS",
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35551517470/raw_evidence/saturating_fit.py",
+      "sha256": "40b3594be34b4ebbd853b8c5458434fb688e4404c7521f058b9e4bea4e4f2562",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json",
+      "sha256": "c7bbf321478721a1d543250d5e8018832a2c0f85c568fe24c673566da230390a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "Logistic F(n)=L/(1+exp(-k*(n-n0))) achieves perfect in-sample fit: R2=1.0, max residual 3.78e-08pp. Parameters: L=0.5654 (asymptote = observed F(n=20)), k=10.75 (very steep transition), n0=14.81 (midpoint between n=10 and n=15).",
+    "The logistic learns a STEP FUNCTION approximation: the steep k=10.75 transition captures the 0->0.50 jump between n=10 and n=15, then saturates to L=0.5654 for all n>15. This is the same step-function structure that falsified all five prior model-based approaches.",
+    "CRITICAL: The logistic extrapolation F(50)=0.5654, F(82)=0.5654 is IDENTICAL to the constant null F(n)=0.5654 for all n. The saturating function provides ZERO new predictive information beyond the observed value at n=20. The R2 improvement over parent (1.0 vs 0.8797) is purely in-sample, not in extrapolation power.",
+    "Hill function also achieves near-perfect fit (R2=0.999994, max residual 0.128pp) with nearly identical extrapolation: F(50)=0.5657, F(82)=0.5657. The Hill coefficient h=20.0 indicates an extremely steep (effectively step-like) transition. Extrapolation also identical to constant null.",
+    "Richards function fails to converge (R2=-0.0002, max residual 29.92pp). The 4-parameter family overfits to a flat line at F=0.266, unable to capture the step structure. This is expected given only 4 data points and the 0,0 plateau at low n.",
+    "The step-function structure (0, 0, 0.50, 0.57) has 7.6x growth deceleration. Both logistic and Hill handle this by learning very steep transitions (k=10.75 and h=20.0 respectively), which are smooth approximations to discontinuous steps. The asymptotic plateau L=0.5654 is learned directly from the n=20 observation.",
+    "Per frozen decision rules: C1 PASS (R2=1.0>=0.90, max_resid=3.78e-08pp<10pp), C2 PASS (F(50)=0.5654 in [0,1], F(82)=0.5654 in [0,1]), C3 PASS (R2=1.0>0.93, max_resid<8pp). Verdict: SURVIVES.",
+    "However, the SURVIVES outcome is INFORMATIONALLY TRIVIAL: the validated extrapolation is F(n)=0.5654 for all n>=15, which is the constant null extrapolation. The model-based path SURVIVES the frozen decision gates but provides no new information that would change the product decision on Docker investment."
+  ],
+  "validity_notes": [
+    "With 4 data points and 3 parameters (logistic) or 3 parameters (Hill), overfitting is structurally guaranteed. The R2=1.0 for logistic reflects interpolation of 4 points with 3 parameters, not genuine predictive power.",
+    "The logistic achieves R2=1.0 because the data has exactly the shape of a logistic: two zeros, then a jump to near-asymptote. The steepness parameter k=10.75 effectively models a step function, which is the same structure that falsified all prior smooth models.",
+    "Extrapolation uncertainty is extreme: with only 4 training points (and 2 at zero), the asymptotic value L is entirely determined by the single observation at n=20 (F=0.5654). There is no information to distinguish L=0.5654 (plateau) from L=0.80 or L=1.0 (continued growth).",
+    "The Richards 4-parameter family fails to converge, suggesting the optimization landscape is ill-conditioned for this sparse data. Only the 3-parameter families (logistic, Hill) converge, and both learn step-function approximations.",
+    "Template invariance makes ranking agreement = proportion(margin>0) exactly at training points. The fitting exercise is on a structural identity, not a predictive model. The extrapolation to n=50/82 is purely functional-form extrapolation, not empirical prediction.",
+    "The frozen decision rules do not include a criterion for 'extrapolation provides new information beyond constant null.' The SURVIVES verdict is correct per the frozen rules but should not be interpreted as the model providing actionable new predictions."
+  ],
+  "unresolved": [
+    "The logistic/Hill extrapolation F(50)=0.5654 is informationally identical to the constant null. Should the frozen decision rules include a C4 criterion requiring the extrapolation to differ from the constant null by a meaningful margin?",
+    "Does the SURVIVES outcome change the product decision on Docker investment? The extrapolation predicts F(50)=0.5654, which is below 80% -- consistent with the plateau hypothesis. But this is the same information available from the raw observation at n=20.",
+    "The step-function structure (0,0,0.50,0.57) is a genuine threshold phenomenon: ranking agreement is zero below n=10, jumps to ~50% at n=15, and plateaus. This suggests a phase transition in ranking stability, not a smooth saturation. Should future Intel lane work focus on characterizing this threshold rather than fitting smooth functions?",
+    "With only 4 data points, no functional form can discriminate between competing hypotheses about the full-DOM behavior (plateau at 56%, gradual increase to 80%, or continued growth). Docker-based direct measurement remains the only path to an empirical answer."
+  ]
+}

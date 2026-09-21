@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35544806153",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix C2 specification mismatch if re-preregistering: frozen decision_rule requires strict monotonicity F(20)>F(15)>F(10)>F(5) (spec.json:decision_rule C2_STEP_FUNCTION_STRUCTURE) but prereg text and hypothesis describe 'monotonic increase from n=10 to n=20' (prereg.md:Analysis Protocol Step 3, report.md:Interpretation). Under frozen rule C2 FAILS because F(10)=F(5)=0.0; under the intended n10->n20 rule C2 would PASS (0.0<0.4996<0.5654). Any future design must choose one definition and keep it consistent across hypothesis, falsifier, and decision_rule.",
+    "Do not use linear extrapolation for the bounded proportion F(n)=proportion(margin>0) in [0,1]. The frozen method slope from n=15->n=20 (0.01316/element) predicts F(50)=0.9602 and F(82)=1.3813 (>1.0 physically impossible per result.json:metrics.c3_extrapolation). All alternative linear anchors also exceed 1.0 (n5->n20 gives 1.696, n10->n20 gives 2.262 per result.json:metrics.alternative_extrapolations). Future non-parametric extrapolation must use a bounded form (e.g., logistic, Hill, Richards) or explicitly model saturation rather than piecewise linear.",
+    "Treat the empirical CDF mapping as the diagnostic identity under template invariance, not as an independent extrapolable model. Producer result.json:metrics.baseline_comparison and report.md correctly note F(n) IS proportion(margin>0) which equals ranking agreement exactly by construction (positive_control residual 0.00pp at all n). It provides zero predictive information beyond the parent diagnostic and cannot be validated beyond training points without full-DOM data. Do not cite C1 PASS (trivial by construction) as model validation.",
+    "For any future full-DOM claim, prioritize Docker-based direct measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) over modeling from n=5-20. Four consecutive model-based approaches have now failed C1/C2: Phi(mean(SNR_i)) 40-50pp, Phi(mean/std) 17.8pp, Phi(median/std) 34.59pp/18.96pp, sign-fraction power law 12.39pp/R2=0.8797, and now empirical CDF linear extrapolation physically impossible. This is model-misspecification due to step-function (0,0,0.50,0.57) / 7.6x deceleration, not a tunable parameter issue."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_C1_TRIVIALLY_PASSES_BY_CONSTRUCTION",
+      "severity": "info",
+      "category": "measurement_validity",
+      "finding": "C1_EMPIRICAL_CDF_REPRODUCES_TRAINING PASS is correct and trivially true by construction. F(n)=proportion(margin_i>0) computed from snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) gives F(5)=0.0, F(10)=0.0, F(15)=0.4996 (4996/10000), F(20)=0.5654 (5654/10000) matching observed ranking agreement exactly (residual 0.00pp <1pp). Recomputed from raw gzip: n5 pos0 zero5070 neg4930, n10 pos0 zero2464 neg7536, n15 pos4996 zero1230 neg3774, n20 pos5654 zero599 neg3747 all yield same proportions. Mean margins -4.904587e-05, -1.346493e-04, 2.664443e-05, 3.968766e-04 and sample stds 4.973988e-05, 1.056274e-04, 1.632369e-04, 6.230899e-04 match producer metrics to 1e-9. This confirms data integrity but provides no model validation under template invariance.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.empirical_cdf_mapping.per_n",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.c1_reproduction",
+        "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) recomputed proportions 0.0/0.0/0.4996/0.5654",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2)"
+      ],
+      "producer_interpretation": "Producer correctly marks C1 PASS as trivially true by construction under template invariance and labels it data integrity check only (result.json:validity_notes, report.md:Interpretation).",
+      "audit_finding": "Independently verified exact match. No disagreement. C1 PASS is not evidence of predictive power."
+    },
+    {
+      "id": "VF2_C2_FAIL_CORRECT_PER_FROZEN_RULE_BUT_SPEC_DESIGN_FLAW",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "C2_STEP_FUNCTION_STRUCTURE FAIL is correctly evaluated per frozen decision_rule. Frozen rule requires strictly monotonic F(20)>F(15)>F(10)>F(5). Observed: F(5)=0.0, F(10)=0.0 (tie at zero), F(15)=0.4996, F(20)=0.5654. Therefore F(10)>F(5) is false, strictly_monotonic_all_points false, C2_pass false. Producer correctly applies frozen rule despite text describing 'monotonic increase from n=10 to n=20' (spec.json, prereg.md Step 3) where F(10)<F(15)<F(20) would PASS. The discrepancy is a specification design flaw, not an infrastructure or computation error. Verdict MEASUREMENT_INVALID via C1 AND NOT C2 is the correct frozen outcome.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/spec.json:decision_rule C2_STEP_FUNCTION_STRUCTURE",
+        "research/experiments/EXP-INTEL-35544806153/prereg.md:Step 3 monotonicity from n=10 to n=20",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.c2_monotonicity strictly_monotonic_all_points false, monotonic_from_n10_to_n20 true",
+        "research/experiments/EXP-INTEL-35544806153/result.json:validity_notes C2 FAIL is specification design flaw"
+      ],
+      "producer_interpretation": "Producer explicitly notes the flaw (report.md:Interpretation, result.json:validity_notes) and correctly keeps frozen verdict rather than reinterpreting.",
+      "audit_finding": "Audit confirms frozen rule was applied mechanically and correctly. If corrected to n10->n20 only, C2 would PASS and verdict would be C1 AND C2 AND NOT C3 -> EMPIRICAL_CDF_PREDICTS_CROSSING per frozen logic, but that counterfactual extrapolation remains invalid due to VF3."
+    },
+    {
+      "id": "VF3_C3_FAIL_LINEAR_EXTRAPOLATION_PHYSICALLY_IMPOSSIBLE",
+      "severity": "critical",
+      "category": "extrapolation",
+      "finding": "C3_EXTRAPOLATION_BELOW_80 FAIL is correct: linear extrapolation from n15->n20 slope 0.01316 predicts F(50)=0.9602 (>0.80) and F(82)=1.3813 (>1.0). The >1.0 prediction is physically impossible for a proportion and demonstrates linear extrapolation of bounded [0,1] quantity from step-function data (0,0,0.50,0.57) is fundamentally inappropriate. Producer correctly notes diminishing growth ratio plateau/jump=0.1317 (7.6x deceleration, 88.4% of increase in n10->15 jump, 11.6% in n15->20 plateau) suggests saturation that linear model cannot capture. Alternative anchors even worse: n5->n20 slope 0.03769 gives F50=1.696, n10->n20 slope 0.05654 gives F50=2.262. No linear variant is viable.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.c3_extrapolation slope_15_20 0.01316 F_extrapolated_n50 0.9602 F_extrapolated_n82 1.38132 exceeds_100_at_n82 true",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.step_function_analysis ratio_plateau_to_jump 0.1317",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.alternative_extrapolations F_extrap_full_range_n50 1.6962 F_extrap_10_20_n50 2.2616",
+        "research/experiments/EXP-INTEL-35544806153/result.json:validity_notes C3 FAIL unreliable with 2 anchor points"
+      ],
+      "producer_interpretation": "Producer marks C3 FAIL and correctly states linear extrapolation is inappropriate for bounded quantity and cannot capture saturation (report.md:Extrapolation Analysis, validity_notes).",
+      "audit_finding": "Recomputed slope 0.01316, F50 0.9602, F82 1.3813 exactly matches producer. Failure is model-form misspecification, not borderline threshold exceedance. Even without C2 gate, this extrapolation must not be used for product decisions."
+    },
+    {
+      "id": "VF4_NC1_PASSES_BUT_NON_VALIDATING",
+      "severity": "medium",
+      "category": "measurement_validity",
+      "finding": "NC1_LINEAR_INTERPOLATION_NULL PASS is correctly computed: F_null(50)=0.5654 (constant) vs F_extrapolated(50)=0.9602 diff 39.48pp >>5pp threshold. Recomputed diff matches. However passing NC1 does not validate the empirical CDF approach; it only shows the flawed linear extrapolation diverges from the constant null. Both NC1 options are degenerate extrapolations of a bounded step-function. The control demonstrates non-trivial structure exists (jump vs plateau) but not that either extrapolates correctly.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.nc1_linear_null diff_n50_pp 39.48",
+        "research/experiments/EXP-INTEL-35544806153/spec.json:null_control NC1_LINEAR_INTERPOLATION_NULL",
+        "research/experiments/EXP-INTEL-35544806153/report.md:Null Control"
+      ],
+      "producer_interpretation": "Producer reports NC1 pass (39.48pp >>5pp) but notes in OBS7 that the direction contradicts saturation evidence.",
+      "audit_finding": "Computation verified. Interpretation bounded: NC1 PASS should not be read as support for empirical CDF extrapolation validity."
+    },
+    {
+      "id": "VF5_EMPIRICAL_CDF_IS_DIAGNOSTIC_IDENTITY_NOT_MODEL",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance (verified in parent chain: per-iteration agree == indicator(margin>0) exactly, ranking agreement == proportion(margin>0) to machine precision). Producer metrics confirm identical residuals 0.00pp to B4_DIAGNOSTIC_INDICATOR. Therefore H1 'reproduces observed agreement within 10pp' is tautological, and H2/H3 extrapolations are not independent model tests but extrapolations of the diagnostic itself. No information beyond parent positive control is added.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.baseline_comparison note empirical_cdf IS diagnostic indicator",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.empirical_cdf_mapping",
+        "research/experiments/EXP-INTEL-35476271877/result.json:observations template invariance verified",
+        "research/experiments/EXP-INTEL-35538868377/result.json:metrics.positive_control_diagnostic"
+      ],
+      "producer_interpretation": "Producer explicitly states in validity_notes and report.md that mapping provides zero information beyond parent PC1 and is true data-generating process at training points, not independent model.",
+      "audit_finding": "Producer interpretation is correct and explicitly bounded. Audit confirms no independent predictive validation claim can be sustained."
+    },
+    {
+      "id": "VF6_MINOR_PROVENANCE_DISCREPANCY_N_ZERO_AT_N15_N20",
+      "severity": "low",
+      "category": "provenance",
+      "finding": "Producer result.json:metrics.empirical_cdf_mapping.per_n reports n_zero 0 and n_negative 3774 at n15 and n_zero 0 n_negative 3747 at n20, but direct recomputation from snr_per_iteration_tag_entropy.json.gz shows n_zero 1230 at n15 and 599 at n20 (with pos+zero+neg=10000). At n5/n10 producer correctly reports n_zero 5070/2464 matching raw. The discrepancy does not affect F_n (pos/10000 = 0.4996/0.5654 remains correct) or any decision rule, but indicates either zero-count definition (margin==0 exactly vs se_tot==0 degenerate) was applied inconsistently or a reporting copy error for n15/20. Mean/std computation uses full margin array and matches sample std exactly, so arithmetic is unaffected.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.empirical_cdf_mapping.per_n.15 n_zero 0 vs recomputed 1230",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.empirical_cdf_mapping.per_n.20 n_zero 0 vs recomputed 599",
+        "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz per_iteration n counts"
+      ],
+      "producer_interpretation": "Producer does not discuss degenerate handling for n15/20 zero counts but retains F_n correctly.",
+      "audit_finding": "Discrepancy is minor and non-outcome-bearing. Flagged for provenance hygiene; does not change C1/C2/C3 verdicts."
+    },
+    {
+      "id": "VF7_MEASUREMENT_TRANSACTION_VALID_NOT_INFRASTRUCTURE_FAILURE",
+      "severity": "info",
+      "category": "measurement_validity",
+      "finding": "Measurement transaction completed validly on existing reconstructed data with verified hashes. Offline computation <5s, no browser/network/model calls, PYTHONHASHSEED=0, cart n=1 degeneracy excluded per parent protocol. Status=MEASUREMENT_INVALID reflects frozen decision-rule verdict (C1 PASS AND NOT C2) per spec.json:decision_rule, not infrastructure failure. This matches packet semantics (result.json:status MEASUREMENT_INVALID + outcome INCONCLUSIVE) and is correctly distinguished from falsification.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/provenance.json:data_sources hashes ce3dda...",
+        "research/experiments/EXP-INTEL-35544806153/result.json:validity_notes Status reflects frozen decision-rule verdict not infrastructure failure",
+        "research/experiments/EXP-INTEL-35544806153/spec.json:decision_rule VERDICT RULES"
+      ],
+      "producer_interpretation": "Producer correctly categorizes outcome as MEASUREMENT_INVALID per frozen rule and states it provides no validated product decision.",
+      "audit_finding": "Concur. This is correctly handled as measurement_invalid per frozen design, not as scientific falsification of the underlying step-function hypothesis."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_PARENT_MODELA",
+      "expected": "Phi(median(|M|)/std) predicted 0.8455 at n15 (residual 34.59pp) and 0.7550 at n20 (residual 18.96pp) REJECTED at C1 (source EXP-INTEL-35538868377 metrics.modelA_median_phi)",
+      "observed": "Producer reproduces B1 residuals exactly 34.59pp/18.96pp. Empirical CDF 0.00pp beats B1 by 34.59pp at n15 and 18.96pp at n20 but only because it is the diagnostic identity, not a model improvement.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.baseline_comparison B1_parent_modelA_residual_n15_pp 34.59",
+        "research/experiments/EXP-INTEL-35538868377/result.json:metrics.modelA_median_phi"
+      ]
+    },
+    {
+      "baseline_id": "B2_PARENT_MODELB",
+      "expected": "Saturating sign-fraction power law fitted 0.3757 at n15 (residual 12.39pp) and 0.6395 at n20 (residual 7.41pp) R2=0.8797 <0.90 REJECTED (source EXP-INTEL-35538868377)",
+      "observed": "Reproduced exactly. Empirical CDF again beats by 12.39pp at n15 via tautology. ModelB R2 and residuals correctly reported.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.baseline_comparison B2_parent_modelB_residual_n15_pp 12.39 R2 0.8797",
+        "research/experiments/EXP-INTEL-35538868377/result.json:metrics.modelB_sign_fraction_powerlaw"
+      ]
+    },
+    {
+      "baseline_id": "B3_CORRECTED_PHI_MEAN_STD",
+      "expected": "Phi(mean/std) predicted 0.7379 at n20 (residual 17.8pp) REJECTED (source EXP-INTEL-35530590171)",
+      "observed": "Reproduced as 17.84pp. Empirical CDF 0.00pp again tautologically superior.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:controls.B3_CORRECTED_PHI_MEAN_STD",
+        "research/experiments/EXP-INTEL-35530590171/result.json"
+      ]
+    },
+    {
+      "baseline_id": "B4_DIAGNOSTIC_INDICATOR",
+      "expected": "Direct proportion(margin>0) =0.4996 at n15 and 0.5654 at n20 residual 0.00pp near-exact under template invariance (source EXP-INTEL-35538868377 metrics.positive_control_diagnostic)",
+      "observed": "Empirical CDF matches B4 exactly (both are proportion(margin>0)): residuals 0.00pp at both n. Correctly identified as not beating a benchmark but being identical to it.",
+      "verdict": "PASS - tautologically identical, correctly disclosed",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.baseline_comparison note IS diagnostic indicator",
+        "research/experiments/EXP-INTEL-35538868377/result.json:metrics.positive_control_diagnostic"
+      ]
+    },
+    {
+      "baseline_id": "B5_NULL_NOISE_BASELINE",
+      "expected": "Random noise model agreement ~50% (0.499208 from 500k sims in EXP-INTEL-35476271877 analysis_output_snr.json null_control)",
+      "observed": "Null 0.499208 correctly cited. Empirical CDF at n15 (0.4996) differs by 0.04pp and at n20 (0.5654) by 6.62pp from null. At n15 no signal beyond null; at n20 small positive deviation. No model (including empirical CDF extrapolation) was tested against null at n50.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:controls.B5_NULL_NOISE_BASELINE",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json null_control 0.499208"
+      ]
+    },
+    {
+      "control_id": "PC1_EMPIRICAL_CDF_REPRODUCES_TRAINING",
+      "expected": "Empirical CDF at n=5 within 1pp of 0.0, n10 within 1pp of 0.0, n15 within 1pp of 0.4996, n20 within 1pp of 0.5654",
+      "observed": "F(5)=0.0 (0.00pp) F(10)=0.0 (0.00pp) F(15)=0.4996 (0.00pp) F(20)=0.5654 (0.00pp) all PASS. Recomputed proportions match to 0.0000. Tautologically exact by construction; correctly labeled data integrity check.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:controls.PC1_EMPIRICAL_CDF_REPRODUCES_TRAINING",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.c1_reproduction"
+      ]
+    },
+    {
+      "control_id": "NC1_LINEAR_INTERPOLATION_NULL",
+      "expected": "Empirical CDF extrapolation at n50 must differ from constant null trend (>5pp) to demonstrate non-trivial structure",
+      "observed": "F_extrapolated(50)=0.9602 vs F_null(50)=0.5654 diff 39.48pp >>5pp PASS. Recomputed diff correct. Passing reflects that linear extrapolation diverges sharply from constant, not that it is valid.",
+      "verdict": "PASS - computation correct, interpretation bounded",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.nc1_linear_null diff_n50_pp 39.48",
+        "research/experiments/EXP-INTEL-35544806153/result.json:controls.NC1_LINEAR_INTERPOLATION_NULL"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "empirical_cdf_F_n": {
+      "producer": {"F_5": 0.0, "F_10": 0.0, "F_15": 0.4996, "F_20": 0.5654},
+      "recomputed": {"F_5": 0.0, "F_10": 0.0, "F_15": 0.4996, "F_20": 0.5654, "method": "pos/10000 from snr_per_iteration_tag_entropy.json.gz per_iteration DEF-FULL-MAP canonical margin>0", "pos_counts": {"5": 0, "10": 0, "15": 4996, "20": 5654}, "zero_counts_raw": {"5": 5070, "10": 2464, "15": 1230, "20": 599}, "neg_counts": {"5": 4930, "10": 7536, "15": 3774, "20": 3747}},
+      "match": true
+    },
+    "mean_and_std_margins": {
+      "producer_means": {"5": -4.904587e-05, "10": -0.0001346493, "15": 2.664443e-05, "20": 0.0003968766},
+      "producer_stds_sample": {"5": 4.973988e-05, "10": 0.0001056274, "15": 0.0001632369, "20": 0.0006230899},
+      "recomputed_means": {"5": -4.904587e-05, "10": -0.00013464925045408285, "15": 2.6644429794731917e-05, "20": 0.0003968766233917092},
+      "recomputed_stds_sample": {"5": 4.973987554828668e-05, "10": 0.00010562741091040149, "15": 0.00016323690949982518, "20": 0.0006230898917109818},
+      "match": true,
+      "note": "Sample std (ddof=1) matches producer; population std is slightly smaller. Means match to 1e-10."
+    },
+    "c1_reproduction": {
+      "producer": {"F_n15": 0.4996, "F_n20": 0.5654, "residual_pp": 0.0, "C1_pass": true},
+      "recomputed": {"F_n15": 0.4996, "F_n20": 0.5654, "residual_pp": 0.0, "C1_pass": true, "observed_ref": {"n15": 0.4996, "n20": 0.5654}},
+      "match": true
+    },
+    "c2_monotonicity": {
+      "producer": {"F_5": 0.0, "F_10": 0.0, "F_15": 0.4996, "F_20": 0.5654, "strictly_monotonic_all_points": false, "monotonic_from_n10": true, "C2_pass": false},
+      "recomputed": {"F_5": 0.0, "F_10": 0.0, "F_15": 0.4996, "F_20": 0.5654, "F_10_gt_F_5": false, "F_15_gt_F_10": true, "F_20_gt_F_15": true, "strictly_monotonic_all_points": false, "C2_pass": false},
+      "match": true,
+      "note": "F(10)=F(5)=0.0 tie breaks strict inequality; from n10 onward strictly increasing."
+    },
+    "c3_extrapolation": {
+      "producer": {"slope_15_20": 0.01316, "F_extrapolated_n50": 0.9602, "F_extrapolated_n82": 1.38132, "below_80_at_n50": false, "exceeds_100_at_n82": true, "C3_pass": false},
+      "recomputed": {"slope_15_20": 0.01316, "F_extrapolated_n50": 0.9602000000000002, "F_extrapolated_n82": 1.3813200000000003, "below_80_at_n50": false, "exceeds_100_at_n82": true, "C3_pass": false},
+      "match": true
+    },
+    "nc1_linear_null": {
+      "producer": {"F_null_n50": 0.5654, "diff_n50_pp": 39.48, "exceeds_5pp": true, "NC1_pass": true},
+      "recomputed": {"F_null_n50": 0.5654, "diff_n50_pp": 39.48, "exceeds_5pp": true, "NC1_pass": true},
+      "match": true
+    },
+    "step_function_analysis": {
+      "producer": {"total_increase": 0.5654, "jump_F10_to_F15": 0.4996, "plateau_F15_to_F20": 0.0658, "ratio_plateau_to_jump": 0.1317053642914332, "fraction_jump": 0.8836222143615139},
+      "recomputed": {"total_increase": 0.5654, "jump_F10_to_F15": 0.4996, "plateau_F15_to_F20": 0.06580000000000002, "ratio_plateau_to_jump": 0.1317053642914332, "fraction_jump": 0.8836222143615139, "deceleration_factor": 7.59},
+      "match": true
+    },
+    "alternative_extrapolations": {
+      "producer": {"slope_5_20": 0.037693, "F_extrap_full_range_n50": 1.6962, "slope_10_20": 0.05654, "F_extrap_10_20_n50": 2.2616},
+      "recomputed": {"slope_5_20": 0.03769333333333333, "F_extrap_full_range_n50": 1.6959999999999997, "slope_10_20": 0.05654, "F_extrap_10_20_n50": 2.2616},
+      "match": true
+    },
+    "baseline_comparison": {
+      "producer": {"B1_residual_n15_pp": 34.59, "B2_residual_n15_pp": 12.39, "B2_R2": 0.8797, "B3_residual_n20_pp": 17.84, "B4_residuals": 0.0, "B5_null": 0.499208},
+      "recomputed": "Baselines inherited from EXP-INTEL-35538868377 and EXP-INTEL-35476271877; values cross-checked against parent result.json: B1 34.5898/18.957, B2 12.3895/7.412 R2 0.87968, B3 17.84, B4 0.00/0.00, B5 0.499208 all match within rounding.",
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: The empirical CDF mapping F(n)=proportion(margin_i>0) reproduces observed ranking agreement exactly at n=5 (0.0), n=10 (0.0), n=15 (0.4996), n=20 (0.5654) within 0.00pp (C1 PASS) but this is trivially true by construction under template invariance where ranking agreement equals proportion(margin>0) exactly; it is the diagnostic identity, not a validated predictive model, and adds zero information beyond the parent positive control. The step-function structure (0,0,0.50,0.57) exhibits a sharp jump n10->n15 (0.4996, 88.4% of total increase) and plateau n15->n20 (0.0658, 11.6%) with 7.6x growth deceleration (ratio 0.1317), consistent descriptively with a threshold/phase-transition but unvalidated as a predictive rate. Under the frozen strict-monotonicity rule C2 FAILS because F(10)=F(5)=0.0 (C2 requires F20>F15>F10>F5); descriptively F is strictly increasing from n=10 to n=20 (0.0<0.4996<0.5654). Linear extrapolation from n15->n20 slope (0.01316/element) is INVALID: it predicts F(50)=0.9602 and F(82)=1.3813 (>1.0 impossible), and all alternative linear anchors also exceed 1.0, demonstrating bounded-quantity misspecification. Therefore C3 FAILS and no validated extrapolation to full DOM n=50/82 is justified; the hypothesis that an empirical CDF / non-parametric mapping provides a validated extrapolation path within 10pp is NOT supported. Full-DOM ranking stability at n=21-82 remains UNKNOWN. The only product-grade fact established is the descriptive plateau at truncated-first-20 on this single Magento site with tag_entropy x DEF-FULL-MAP: canonical agreement 0.5654 at n=20 (56.5%) with diminishing returns from n15. No inference that the plateau persists below 80% at full DOM is justified from linear extrapolation; the 7.6x deceleration is hypothesis-generating only. Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) remains the only path to an empirical answer; the failure of four consecutive model-based approaches (Phi(mean(SNR_i)), Phi(mean/std), Phi(median/std), sign-fraction power law, now non-parametric linear) strengthens the case to bypass modeling.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35544806153/request.json (sha256 db0f173842ccf6ffa325300b64c1b3d28302918748d4cdcf7645ffd24ff5728b)",
+    "research/experiments/EXP-INTEL-35544806153/spec.json (sha256 3865eab694721602c212aae4b09f51e366b1200f414638c9d0123bc6c7609a34)",
+    "research/experiments/EXP-INTEL-35544806153/prereg.md (sha256 6dad88f899dc816b68d91b7cd610f233a519d7fa49e6b387a70497d04222c5cf)",
+    "research/experiments/EXP-INTEL-35544806153/freeze.json (sha256 frozen_at 2026-09-20T23:31:39.391596+00:00)",
+    "research/experiments/EXP-INTEL-35544806153/result.json (metrics.empirical_cdf_mapping, c1_reproduction, c2_monotonicity, c3_extrapolation, nc1_linear_null, step_function_analysis, baseline_comparison)",
+    "research/experiments/EXP-INTEL-35544806153/report.md",
+    "research/experiments/EXP-INTEL-35544806153/provenance.json",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) recomputed F(n) 0.0/0.0/0.4996/0.5654",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2)",
+    "research/experiments/EXP-INTEL-35538868377/result.json (metrics.modelA_median_phi, modelB_sign_fraction_powerlaw, positive_control_diagnostic, B1/B2)",
+    "research/experiments/EXP-INTEL-35538868377/audit.json (PASS, producer_claim_supported=false)",
+    "research/experiments/EXP-INTEL-35538868377/handoff.json (sha256 f67ff992cba30ded45770bef618a43d518703867bea1d9ff4107757450c8fa4a)",
+    "research/experiments/EXP-INTEL-35530590171/result.json (corrected_snr_model)",
+    "research/experiments/EXP-INTEL-35476271877/result.json (snr_model, null_control 0.499208, template invariance verification)"
+  ],
+  "unresolved": [
+    "Full-DOM ranking stability at n=21-82 (including n=50 and n=82) remains UNKNOWN: linear extrapolation is invalid (>1.0 impossible) and gated behind failed C1/C2; no validated model (parametric or non-parametric) provides an empirical prediction, and direct measurement via Docker image am1n3e/webarena-verified-shopping:latest (EXP-INTEL-35462974425) is BLOCKING.",
+    "Whether the frozen C2 specification flaw (strict monotonicity across n=5->n=10 where F=0 tie vs intended monotonicity from n=10->n=20) should be corrected in a future preregistration remains open; under corrected rule C2 would PASS and the frozen verdict would be C1 AND C2 AND NOT C3 -> EMPIRICAL_CDF_PREDICTS_CROSSING, but that crossing prediction would still be invalid due to bounded-quantity misspecification.",
+    "Whether the 7.6x growth deceleration (plateau/jump=0.132) and marginal sign crossing from -1.35e-04 at n10 to +2.66e-05 at n15 reflect a genuine threshold/phase-transition or an artifact of the narrow n=5-20 range with only 4 points is UNKNOWN; fitting a bounded saturating function (logistic, Hill, Richards) to these 4 points could be tested but is outside frozen spec and would have only 2 df.",
+    "Whether template invariance breaks at full DOM element counts, changing the variance structure and invalidating proportion(margin>0) as the data-generating process, remains UNTESTED.",
+    "Cross-site generalization beyond single Magento Docker site remains UNTESTED.",
+    "Whether per-task recipe (78.65% at n=20 per EXP-INTEL-35445596324) achieves >=80% at full DOM remains UNKNOWN and outside this experiment's truncated-first-20 scope.",
+    "The minor provenance discrepancy for n_zero counts at n15 (producer 0 vs raw 1230) and n20 (producer 0 vs raw 599) does not affect verdict but should be reconciled for artifact hygiene."
+  ]
+}
