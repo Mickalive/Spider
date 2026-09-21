@@ -1349,6 +1349,16 @@
         "reason": "Cache freshness lifecycle does not break oracle-free decompression on local nginx: SWR (240/240), SIE (240/240), 304 substrate (240/240), re-fetch (240/240) all byte-identical. Parent established fresh cache (240/240 primary 48x5). This experiment closes the parent's 'cache freshness edge cases' unknown within local-nginx scope. Not VALIDATED because production CDN stale-serving may re-encode wire bytes (the parent's Cloudflare free-tier produced 0% HIT, and CDN edge transformation was documented at 60/240 fixed-order in EXP-RUNTIME-35538865067)."
       },
       {
+        "experiment_id": "EXP-PRODUCT-35611617123",
+        "lane": "product",
+        "created_at": "2026-09-21T14:21:54.017559+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "2f64ee8b0fe45766c28a88b28edc3f121841d541",
+        "claim_id": "C-FRESHNESS",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Frozen decision tree triggers MEASUREMENT_INVALID on two independent control failures before primary test: (1) NC-NULL-OVERLAP-0 FAIL (FP=0.025 > 0.01 threshold, Step 2); (2) RC-25%-TOST FAIL (r=0.080, CI upper 0.168 > delta 0.15 at n=480, Step 3). Primary 50% n=1000 test PASSES all criteria (r=-0.003, CI upper 0.059 < 0.15, calibrated threshold 0.26, F1=0.942) but cannot advance claim status because upstream controls already triggered MEASUREMENT_INVALID. The NC-0% failure is threshold misspecification (theoretical tail 0.0179 exceeds 0.01 control), not infrastructure failure (audit V2). The 25% TOST failure shows identical magnitude (r=0.080) to parent's 50% failure, demonstrating stochastic Type I wander (per-test P(fail)=9.4%, family-wise 25.6% among 3 conditions, audit V3). Null-control 50% n=480 PASSES (r=-0.044), directly contradicting parent's 50% failure \u2014 confirming parent's result was sampling artifact (Type I). No justified advancement beyond parent handoff EXPERIMENTAL with bounded discrimination 0-25% usable. No PRODUCT_CORE eligibility."
+      },
+      {
         "experiment_id": "EXP-GRAPH-35611618323",
         "lane": "graph",
         "created_at": "2026-09-21T14:22:02.907475+00:00",
