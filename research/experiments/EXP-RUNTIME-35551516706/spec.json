@@ -1,17 +1,59 @@
 {
   "experiment_id": "EXP-RUNTIME-35551516706",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "On a local nginx caching reverse proxy that produces real cf-cache-status=HIT responses, does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses, and does the decompressed output differ from the DYNAMIC-path decompressed output?",
+  "hypothesis": "A local nginx proxy_cache in front of the same Python origin server produces real cache HIT responses (cf-cache-status=HIT or X-Cache=HIT). Oracle-free greedy iterative decode (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for >=90% of cache HIT observations. Cache HIT wire bytes are byte-identical to DYNAMIC wire bytes for the same payload, so decompressed output is identical. The parent's 0% HIT rate on Cloudflare free-tier quick tunnel was an infrastructure ceiling (no caching), not a negative scientific result about HIT serving behavior.",
+  "falsifier": "Any of the following falsifies the hypothesis: (1) fewer than 90% of cache HIT observations produce decompressed output with SHA256 == ground truth under oracle-free greedy decode; (2) cache HIT wire bytes differ from DYNAMIC wire bytes for the same payload (CDN alters bytes on cache serve); (3) oracle-free greedy decode enters an infinite loop or returns None for any cache HIT cell; (4) nginx fails to produce any cache HIT responses despite Cache-Control: public, max-age=300 (infrastructure ceiling, not falsification); (5) oracle-free greedy decode produces different decompression path for HIT vs DYNAMIC for any cell where the paths diverge in final output.",
+  "baselines": [
+    {
+      "id": "B-ORACLE-GUIDED-REGRESSION",
+      "description": "Oracle-guided encoding-agnostic decode (with ground_truth_sha256) on the same 48-cell matrix through nginx cache. Re-validates parent 240/240 on local caching infrastructure and confirms the test infrastructure produces identical wire bytes to origin.",
+      "expected": "240/240 correct (parent result)"
+    },
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "description": "Same payloads served directly from Python origin (bypassing nginx cache). Oracle-free decode on direct origin validates the decoder implementation independently of caching.",
+      "expected": "240/240 byte-identical decompression output to ground truth under oracle-free decode"
+    },
+    {
+      "id": "B-DYNAMIC-VS-HIT-IDENTITY",
+      "description": "For each of 48 cells, compare wire bytes from a DYNAMIC response (unique URL, cache-busting) with wire bytes from a cache HIT response (fixed URL, cache populated). If CDN does not alter bytes on cache serve, wire bytes must be byte-identical.",
+      "expected": "48/48 cells have byte-identical wire bytes between DYNAMIC and HIT paths"
+    },
+    {
+      "id": "B-DEPTH-GENERALIZATION",
+      "description": "Oracle-free greedy decode applied to depths 3-5 stacked encodings through nginx cache. Tests whether greedy iteration handles deeper stacking on cached responses.",
+      "expected": ">=80% correct under oracle-free decode"
+    },
+    {
+      "id": "B-LARGE-PAYLOAD",
+      "description": "Oracle-free greedy decode applied to >100KB payloads through nginx cache. Tests whether large-payload cached behavior breaks greedy iteration.",
+      "expected": ">=80% correct under oracle-free decode"
+    },
+    {
+      "id": "B-FIXED-ORDER-CDN",
+      "description": "Parent fixed-origin-order decompression on the same 48-cell matrix through nginx cache. Re-validates 60/240 and shows oracle-free greedy improvement.",
+      "expected": "60/240 correct (parent result)"
+    }
+  ],
+  "positive_control": "B-LOCALHOST-DIRECT: oracle-free greedy decode on origin-served payloads matches ground truth. Validates the decoder implementation without caching. If this fails the decoder is broken and no caching inference is possible.",
+  "null_control": "B-DYNAMIC-VS-HIT-IDENTITY: wire bytes from DYNAMIC and HIT paths are byte-identical for the same payload through the same origin. If CDN caching alters wire bytes, cached decompression cannot be trusted regardless of algorithm.",
+  "measurement_validity": [
+    "nginx must be installed and functional. Verify nginx -v and nginx -t succeed before measuring.",
+    "nginx proxy_cache must produce real HIT responses. Verify at least 1 HIT response in a 10-request warm-up sequence before main matrix.",
+    "Each request must record: raw wire bytes (or raw_body_sha256 for recomputation), Content-Encoding header, X-Cache or cf-cache-status header, HTTP status code.",
+    "Oracle-free greedy decode algorithm: try brotli.decompress(raw_bytes), if succeeds set current=decoded and continue loop; else try gzip.decompress(raw_bytes), if succeeds set current=decoded and continue loop; else return current (identity). NO SHA256 check at any point. Identical to parent (EXP-RUNTIME-35544804817).",
+    "Minimum N=5 observations per HIT cell with 1-3s delay between populate and test phases.",
+    "Two-phase design: Phase 1 (populate) sends requests with unique URLs to populate cache. Phase 2 (test) sends requests with fixed URLs to observe cache HITs.",
+    "Ground truth computed identically to parent: SHA256 of full-body iterative decode of origin-served payloads (decompress all layers in known order).",
+    "Depths 3-5 and large payloads reuse parent payload generation protocol from EXP-RUNTIME-35544804817.",
+    "Environment: Python 3.12+, brotli 1.2.0, nginx with proxy_cache module.",
+    "All raw_cell_results.jsonl rows persisted including stability groups and DYNAMIC-vs-HIT identity comparisons. No duplicate cell+rep keys."
+  ],
+  "decision_rule": "ALL conditions must pass for SURVIVES_CURRENT_TEST:\n- C1: Oracle-free greedy decode produces byte-identical SHA256 output as ground truth for ALL 48 primary cache HIT cells (3 payload x 2 orders x 2 chunk sizes x 4 Accept-Encoding variants)\n- C2: >=90% of cache HIT observations match ground truth under oracle-free greedy decode\n- C3: 6/6 cache stability groups byte-stable under oracle-free decode\n- C4: 15/15 identity observations recover ground truth under oracle-free decode\n- C5: Depth 3-5 oracle-free greedy decode recovers ground truth for >=80% of depth observations\n- C6: Large payload oracle-free greedy decode recovers ground truth for >=80% of >100KB observations\n- C7: No ambiguous tie-breaks where both brotli and gzip succeed at same layer and produce divergent final SHA256\n- C8: DYNAMIC and HIT wire bytes are byte-identical for >=90% of cells (CDN does not alter bytes on cache serve)\n- Positive control passes: B-LOCALHOST-DIRECT oracle-free greedy decode matches ground truth (240/240)\n- Null control passes: B-DYNAMIC-VS-HIT-IDENTITY wire bytes are byte-identical\nIF C1 fails: FALSIFIES oracle-free decode does not restore correctness on cached responses\nIF C1 passes but C2 fails: MIXED oracle-free works for some HIT cells but not all\nIF C1 passes but C8 fails: MIXED oracle-free works but CDN alters bytes on cache serve (new failure mode)\nIF all pass: SUPPORTS oracle-free decode validated for cached responses, C-MEAS-VALID HIT gap closed",
+  "product_consequence_positive": "CDN cache HIT (stale) serving sub-question closes. Oracle-free decode validated for both DYNAMIC and HIT responses. C-MEAS-VALID advances toward VALIDATED. The decompression fix is production-ready for cached CDN responses. Unblocks kernel integration of encoding-agnostic decoder for CDN-backed deployments.",
+  "product_consequence_negative": "Cache HIT responses fail oracle-free decode or CDN alters bytes on cache serve. C-MEAS-VALID remains EXPERIMENTAL. Diagnosis identifies whether the failure is: (a) cache serving different bytes than origin, (b) oracle-free decode failure on cached bytes, (c) ambiguous format detection, or (d) depth/payload generalization failure on cached responses. Product remains blocked from CDN-cached deployment.",
+  "estimated_cost": "Low: local nginx + Python origin server, no external CDN costs. Reuse parent payload manifest and ground truth. nginx setup ~5 min, main matrix ~10 min, HIT test ~5 min, stability ~3 min, depth/large ~5 min. Estimated total wall time 30-40 minutes.",
+  "expected_information_gain": "Very high. This is the last untested condition from the parent's claim ceiling (EXP-RUNTIME-35544804817 handoff). A positive result closes the HIT gap and allows C-MEAS-VALID to advance to VALIDATED. A negative result identifies the specific HIT failure mode. Both outcomes directly change a product decision. The experiment is the smallest possible test that resolves the inherited blocking gap (CDN HIT serving) using CI-available infrastructure (nginx). The local nginx proxy produces real cache HIT behavior, unlike Cloudflare free-tier quick tunnel which produced 0% HIT rate."
 }
