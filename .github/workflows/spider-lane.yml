@@ -24,6 +24,11 @@ on:
         required: false
         default: ""
         type: string
+      director_mandate_b64:
+        description: "Base64-encoded Global Research Director mandate for a NEW experiment"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -37,6 +42,7 @@ env:
   LANE: ${{ inputs.lane }}
   CHAIN_DEPTH: ${{ inputs.chain_depth }}
   RESUME_EXPERIMENT_ID: ${{ inputs.resume_experiment_id }}
+  DIRECTOR_MANDATE_B64: ${{ inputs.director_mandate_b64 }}
   GH_TOKEN: ${{ github.token }}
   SPIDER_CONTROL_HELPER: /tmp/spider-control-plane.py
 
@@ -104,7 +110,11 @@ jobs:
         run: |
           set -euo pipefail
           args=(--lane "$LANE" --run-id "$GITHUB_RUN_ID" --reason "${{ inputs.reason }}" --chain-depth "$CHAIN_DEPTH")
-          if [[ -n "$RESUME_EXPERIMENT_ID" ]]; then args+=(--experiment-id "$RESUME_EXPERIMENT_ID"); fi
+          if [[ -n "$RESUME_EXPERIMENT_ID" ]]; then
+            args+=(--experiment-id "$RESUME_EXPERIMENT_ID")
+          else
+            args+=(--director-mandate-b64 "$DIRECTOR_MANDATE_B64")
+          fi
           python scripts/prepare_lane.py "${args[@]}"
 
       - name: Persist machine request identity
@@ -152,7 +162,7 @@ jobs:
           EXP="${{ steps.prep.outputs.experiment_id }}"
           DIR="research/experiments/$EXP"
           bash .github/scripts/run-opencode-resilient.sh research "$DIR/model_design.json" run --agent spider_lane_researcher \
-            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, codex/index.json and codex/claim_state.json. Read only relevant codex/experiments packets; do NOT ingest SPIDER_CODEX.md wholesale. Search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. If request.json contains parent_handoff, read the exact referenced path and preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Choose the smallest high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
+            "DESIGN ONLY for SPIDER Research 2.0 lane=$LANE experiment=$EXP. FIRST read AGENTS.md and binding transmission contract research/EXPERIMENT_PACKET.md, then SPIDER_MASTER_PROMPT.md, SPIDER_ARCHITECTURE_RESEARCH2.md, research/lanes/registry.json, research/claims/registry.json, research/lanes/$LANE/state.json if present, codex/index.json and codex/claim_state.json. Read only relevant codex/experiments packets; do NOT ingest SPIDER_CODEX.md wholesale. Search .spider-runtime/pre2/SPIDER_CODEX_ULTIME.md only for relevant prior evidence. Exact immutable request=$DIR/request.json. For NEW governed experiments, request.json contains director_mandate: treat its target claim and strategic question as binding research direction. The inherited parent_handoff is continuity evidence only and MUST NOT silently override a SUPERSEDE/PIVOT/REOPEN Director decision. If request.json contains parent_handoff, preserve established/rejected/unknown/do_not_assume distinctions. Do not run outcome-bearing measurements. Convert the Director's strategic question into the smallest rigorous high-information experiment that can change a claim or product decision; do not merely repeat pre2. Fill only $DIR/spec.json and $DIR/prereg.md. Use stable metric/control identities for downstream transmission. Never git commit/push/switch/reset."
           rc=$?
           if [[ "$rc" -eq 0 ]]; then
             python scripts/check_scope.py --repair --lane "$LANE" --experiment-id "$EXP" --stage design
@@ -349,11 +359,9 @@ jobs:
             [[ "$PROMOTE_ACTIVE" != 0 ]] || gh workflow run product-promote.yml --ref main || true
           fi
 
-          CONT=$(jq -r '.continue // false' "$DIR/verdict.json")
-          DEPTH=${CHAIN_DEPTH:-0}
-          if [[ "$CONT" == true && "$DEPTH" =~ ^[0-9]+$ && "$DEPTH" -lt 2 ]]; then
-            NEXT=$((DEPTH+1))
-            gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation" -f "chain_depth=$NEXT"
-          else
-            echo "Immediate continuation not dispatched; scheduled pulse preserves liveness."
-          fi
+          # Local Directors no longer self-dispatch child experiments. Their
+          # next_question is advisory input to the Global Research Director.
+          # Codex sync will push the new canonical state to main; that main update
+          # wakes the factory pulse, whose Scout + Global Director choose the next
+          # objective across the whole program.
+          echo "SPIDER_GLOBAL_DIRECTION_REQUIRED lane=$LANE experiment=$EXP"

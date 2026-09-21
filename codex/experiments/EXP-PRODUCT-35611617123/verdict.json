@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35611617123",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Frozen decision tree triggers MEASUREMENT_INVALID on two independent control failures before primary test: (1) NC-NULL-OVERLAP-0 FAIL (FP=0.025 > 0.01 threshold, Step 2); (2) RC-25%-TOST FAIL (r=0.080, CI upper 0.168 > delta 0.15 at n=480, Step 3). Primary 50% n=1000 test PASSES all criteria (r=-0.003, CI upper 0.059 < 0.15, calibrated threshold 0.26, F1=0.942) but cannot advance claim status because upstream controls already triggered MEASUREMENT_INVALID. The NC-0% failure is threshold misspecification (theoretical tail 0.0179 exceeds 0.01 control), not infrastructure failure (audit V2). The 25% TOST failure shows identical magnitude (r=0.080) to parent's 50% failure, demonstrating stochastic Type I wander (per-test P(fail)=9.4%, family-wise 25.6% among 3 conditions, audit V3). Null-control 50% n=480 PASSES (r=-0.044), directly contradicting parent's 50% failure — confirming parent's result was sampling artifact (Type I). No justified advancement beyond parent handoff EXPERIMENTAL with bounded discrimination 0-25% usable. No PRODUCT_CORE eligibility."
+    }
+  ],
+  "product_action": "No promotion. C-FRESHNESS remains EXPERIMENTAL. The primary 50% n=1000 result is scientifically informative (near-zero correlation, calibrated threshold exists) but cannot support confirmatory deployment decisions due to MEASUREMENT_INVALID status. Parent's bounded discrimination (0-25% usable, marginal at 50%) remains the operational ceiling.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the orthogonality boundary lie at ~25% Gaussian overlap (where RC-25%-TOST fails at n=480 with r=0.080) rather than 50% — and does n>=800 at 25% overlap resolve this failure under Bonferroni correction, establishing a stable usable envelope of 0-50%?",
+  "reason": "The frozen decision tree correctly triggers MEASUREMENT_INVALID: NC-NULL-OVERLAP-0 (FP=0.025 > 0.01) and RC-25%-TOST (CI 0.168 > 0.15) both fail before the primary test. However, the primary 50% n=1000 result is strong evidence of Type I in the parent: near-zero r=-0.003, Bonferroni p=5.9e-07, calibrated threshold 0.26 with F1=0.942. The null-control 50% n=480 PASS (r=-0.044) directly contradicts the parent's r=0.080, confirming the parent's 50% failure was a sampling artifact. The non-monotonic orthogonality pattern (r=-0.029 at 0%, r=0.080 at 25%, r=-0.044 at 50%n480, r=-0.003 at 50%n1000) demonstrates stochastic wander around zero, not a stable boundary at any specific overlap level. The NC-0% failure is threshold misspecification (auditor V2: theoretical tail 0.0179 > 0.01 control), not measurement failure. No material change to C-FRESHNESS status: remains EXPERIMENTAL with bounded discrimination 0-25% usable, marginal at 50% now shown to be stochastic. The highest-information next question targets the 25% boundary with n>=800 to resolve the RC-25%-TOST failure, which would either establish 0-50% usable envelope or confirm 0-25% ceiling.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35611617123/result.json:metrics.orthogonality_by_overlap, metrics.primary_50pct_n1000, metrics.thresholds_by_overlap, controls",
+    "research/experiments/EXP-PRODUCT-35611617123/audit.json:status=MEASUREMENT_INVALID, validity_findings V1-V6, baseline_findings, claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-PRODUCT-35611617123/spec.json:decision_rule Steps 1-4, measurement_validity",
+    "research/experiments/EXP-PRODUCT-35611617123/prereg.md:Decision Tree, Controls, Bonferroni alpha=0.0167",
+    "research/experiments/EXP-PRODUCT-35611617123/raw_evidence/experiment_data.json sha256:3b26ddb150bf1aeb69b4a3c1235d58b6ed74110c5f626a8f05f08fc65587e2f3",
+    "research/experiments/EXP-PRODUCT-35572180893/result.json:metrics.orthogonality_by_overlap (parent baseline)",
+    "research/experiments/EXP-PRODUCT-35572180893/handoff.json:carry_forward.bounded discrimination 0-25%"
+  ]
+}

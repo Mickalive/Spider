@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35572180485",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix Dirichlet-Multinomial K to match frozen spec: spec.json measurement_validity items 5-6 and prereg.md 4.3 require K=n_states=12 categories for both M1 and M0. Code run_experiment.py:_dirichlet_multinomial_log_marginal uses K=len(counts) (observed distinct next_states, 1-4) instead of fixed K=12. Must use K=12 in lgamma(K*alpha)-lgamma(N+K*alpha) with zero-count categories contributing 0 to sum_i term. Re-run full 500 within-session shuffles after fix.",
+    "Increase N_SHUFFLE to >=1000 (ideally 1999 or 4999) so permutation p=(count_ge+1)/(N+1) can achieve p<0.001 threshold. With N=500, minimum p=0.001996 >0.001 makes C3 p<0.001 unreachable in principle; current C3 evaluation via 99.9th percentile via np.percentile is interpolation and inconsistent with p definition. Align decision_rule, analysis code, and prereg p threshold.",
+    "Recompute and rewrite result.json/report.md after fixes; do not claim FALSIFIED-IN-SETTING from buggy null. Corrected analysis must be a new frozen experiment or a formally amended re-execution with updated provenance and artifact hashes.",
+    "Document prior sensitivity correctly: with corrected K=12, report both absolute log BF scale (nats) and relative evidence (BF vs null distribution) and clarify that Bayes factor scale (nats) is not directly comparable to CMI bits scale, but null median sign is the validity criterion."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-formula-K-mismatch",
+      "severity": "critical",
+      "finding": "Implementation violates frozen spec formula. spec.json measurement_validity: M1 K1=n_states=12 per (s,a), M0 K0=12 per s; prereg.md 4.3 identical; spec measurement_validity item 8 gives exact log ML formula with K*alpha. Code run_experiment.py:234-235 sets K=len(counts) (number of observed next-state categories, typically 1-4 due to 4 candidates per (s,a)), not K=12. This under-penalizes M1 (many small strata with K~2) relative to M0 (larger strata with K~4-6 observed), producing systematic positive bias under null. Recomputation proves this single bug explains entire FALSIFIED verdict.",
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py:226-238 vs research/experiments/EXP-PHYSICS-35572180485/spec.json:measurement_validity[4-5] and prereg.md:4.3; recomputation script in audit proving K=12 null_med ~ -131 nats vs buggy +3787 nats (see recomputed_metrics)",
+      "impact": "Producer C1 (null median <0) fails for all alphas (+3621 to +4047 nats) under buggy code; with corrected K=12, all alphas PASS C1 (null_median -78 to -131 nats) and C3 (observed 167-643 nats >> null 99.9th -37 to -99 nats, p=0.001996 via 500 perms capped, actually observed exceeds max null by 200-500 nats). Verdict flips from FALSIFIED-IN-SETTING to SURVIVES_CURRENT_TEST. Producer outcome FALSIFIES is not justified as executed."
+    },
+    {
+      "id": "V2-permutation-resolution",
+      "severity": "major",
+      "finding": "With N_SHUFFLE=500, permutation p=(count_ge+1)/(N+1) has minimum 0.001996 > 0.001 threshold required by C3 (prereg.md 6: p<0.001). Even perfect separation (observed > all 500 nulls) yields p=0.001996 which fails C3 under strict p threshold, making SURVIVES impossible in principle. Code evaluates C3 via observed > 99.9th percentile (np.percentile interpolation) rather than p threshold, creating inconsistency between reported p_value and C3 decision. 99.9th percentile with 500 samples is estimated by extrapolation beyond data (99.9% of 500 = 499.5th order statistic).",
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/result.json:metrics.alpha_prior_sweep_summary.*.p_value=0.001996 for all alphas; run_experiment.py:346-347 p_value=(count_ge+1)/(n_shuffle+1) and line 573 c3_pass=k2_val>percentile_99_9; spec.json:decision_rule C3 p<0.001",
+      "impact": "Under buggy code C3 gated by C1, so not operative; under corrected code, C3 would PASS via percentile check but nominal p threshold still not met. Decision rule ambiguous. Fix requires N>=1000."
+    },
+    {
+      "id": "V3-target-sampling-integrity",
+      "severity": "none",
+      "finding": "Data generation and sampling integrity verified. Stochastic SPA N=5000 (50 sessions x100 steps, seed=42) SHA 8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 matches raw_results.json and our independent re-simulation. Deterministic SPA SHA 46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 matches. 48/48 (state,action) pairs with 4 distinct candidates verified in CANDIDATES. N_strata 1438 (K2) and 841 (K3) reproduced; determinism stats match.",
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/raw_results.json:n_transitions_stochastic, sha_stochastic; run_experiment.py:CANDIDATES, collect_transitions; provenance.json:data_hashes",
+      "impact": "No data integrity violation. The failure is estimator implementation, not environment."
+    },
+    {
+      "id": "V4-history-conditioning-valid",
+      "severity": "minor",
+      "finding": "History conditioning differs between K2 (state history, 2 previous urls) and K3 (action history, 3 previous actions) as preregistered. Both use same within-session shuffle null. No leakage across sessions. Within-session shuffle preserves session structure, state sequence, and url_before/url_after pairing per spec. Correct per spec.",
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/spec.json:measurement_validity[8-9]; run_experiment.py:build_state_history_records, build_action_history_records, shuffled_action_null_within_session",
+      "impact": "No validity threat from history conditioning."
+    },
+    {
+      "id": "V5-positive-control-expected-magnitude",
+      "severity": "none",
+      "finding": "Positive control (deterministic SPA) log BF strongly favors M1 under both buggy (+5006 to +5699 nats) and corrected (+235 to +854 nats) implementations, confirming implementation detects strong action effects when present. Deterministic > stochastic ordering holds under both.",
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/result.json:metrics.deterministic_control; recomputed_metrics.deterministic_control_corrected",
+      "impact": "No positive control failure. Implementation not completely broken, but mis-calibrated K creates quantitative bias."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-REPLICATE-BAYESIAN-PARENT",
+      "expected": "log_bf ~4905 nats, null_mean ~-213.7 nats (EXP-PHYSICS-35476270440)",
+      "observed": "Producer buggy: log_bf 4937 nats matches, but null_mean +3787 nats positive (not -213). Corrected K=12: log_bf 338.7 nats, null_mean -131 nats (negative, direction matches parent but magnitude differs due to N/K/implementation differences). Parent replication FAILED under buggy code due to K bug, not due to genuine divergence.",
+      "pass": false,
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/result.json:controls.B-REPLICATE-BAYESIAN-PARENT; recomputed_metrics.corrected_null_centering"
+    },
+    {
+      "id": "B-REPLICATE-BAYESIAN-NULL",
+      "expected": "null centered negative (Occam razor), |mean| >100 nats",
+      "observed": "Buggy: null +3700 to +4000 nats positive, FAILS. Corrected: null -78 to -131 nats negative, PASSES (|mean| 78-131, >100 for alpha 1.0/2.0). B fails as executed, passes after fix.",
+      "pass": false,
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/result.json:controls.B-REPLICATE-BAYESIAN-NULL; recomputed_metrics"
+    },
+    {
+      "id": "B-PMI-REFERENCE-SCALE",
+      "expected": "K3 PMI 1.22-1.69 bits, K2 PMI 0.93-1.51 bits (information-theoretic reference, NOT direct BF comparison)",
+      "observed": "Not recomputed here; established in parent chain. Bayes factor scale is nats, not bits; magnitude not comparable. Reference scale correctly noted as not-direct-comparison in spec. No violation.",
+      "pass": true,
+      "evidence": "research/experiments/EXP-PHYSICS-35572180485/spec.json:baselines[2]"
+    }
+  ],
+  "recomputed_metrics": {
+    "producer_metrics_reproduced": true,
+    "reproduction_notes": "Re-ran simulation with seed 42 and buggy _dirichlet_multinomial_log_marginal (K=len(counts)): reproduced producer K2 5364.56/4937.45/4665.00, null_median 4047.93/3787.22/3621.52 exactly (within 0.01 nats rounding). Data SHA and strata counts match. Producer arithmetic correct given buggy formula.",
+    "corrected_K12_metrics": {
+      "method": "Recomputed with fixed K=12 per spec (lgamma(12*alpha)-lgamma(N+12*alpha)+sum_i lgamma(n_i+alpha)-lgamma(alpha)), same data, same within-session shuffle framework, 500 perms",
+      "alpha_0.5": {
+        "k2_log_bf_stochastic": 643.09,
+        "k3_log_bf_stochastic": 878.12,
+        "k3_minus_k2": 235.03,
+        "null_median": -78.63,
+        "null_mean": -78.66,
+        "null_std": 15.5,
+        "percentile_99_9": -37.02,
+        "max_null": -36.61,
+        "p_value": 0.001996,
+        "c1_pass": true,
+        "c3_pass_via_percentile": true
+      },
+      "alpha_1.0": {
+        "k2_log_bf_stochastic": 338.67,
+        "k3_log_bf_stochastic": 482.43,
+        "k3_minus_k2": 143.75,
+        "null_median": -131.18,
+        "null_mean": -131.03,
+        "null_std": 10.03,
+        "percentile_99_9": -103.9,
+        "max_null": -103.19,
+        "p_value": 0.001996,
+        "c1_pass": true,
+        "c3_pass_via_percentile": true
+      },
+      "alpha_2.0": {
+        "k2_log_bf_stochastic": 167.9,
+        "k3_log_bf_stochastic": 246.99,
+        "k3_minus_k2": 79.09,
+        "null_median": -116.29,
+        "null_mean": -116.09,
+        "null_std": 6.04,
+        "percentile_99_9": -99.57,
+        "max_null": -99.04,
+        "p_value": 0.001996,
+        "c1_pass": true,
+        "c3_pass_via_percentile": true
+      },
+      "recomputed_with_N": 500,
+      "note": "With 500 perms, p=0.001996 >0.001 threshold by definition; observed exceeds max null by 200-500 nats, so threshold failure is resolution artifact, not lack of detection. With N>=1000, p would be <0.001.",
+      "both_passers_corrected": [0.5, 1.0, 2.0],
+      "verdict_under_corrected_implementation": "SURVIVES_CURRENT_TEST (C1 and C3 pass for all alphas; C6/C7 pass; Phase 2 K3-K2 >0 would proceed)"
+    },
+    "deterministic_control_corrected": {
+      "alpha_0.5_k2": 854.1,
+      "alpha_1.0_k2": 467.4,
+      "alpha_2.0_k2": 235.7,
+      "note": "Deterministic > stochastic for alpha 0.5 under buggy, but stochastic K3 > deterministic K2 under buggy; under corrected, deterministic > stochastic as expected"
+    },
+    "numerical_stability": "No overflow; lgamma in log-space stable; no implementation crash",
+    "code_reference": "independent recomputation in audit environment using same CANDIDATES and collect_transitions logic; run_experiment.py:226-238 identified as deviation from spec.json:measurement_validity[5-8]"
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID: No justified claim about Bayesian model comparison on this SPA class can be derived from the as-executed packet. The producer's FALSIFIED-IN-SETTING verdict (C1: all null medians >=0, Occam fails) is an artifact of implementation bug (K=len(observed) vs K=12) and does not support the interpretation that Laplace-smoothed-independent Bayesian comparison fails. Corrected recomputation on the same data shows the opposite: with spec-compliant K=12, all three alpha_prior values have null median strongly negative (-78 to -131 nats) and observed log BF strongly exceeds null (by 200-500 nats, exceeding max of 500 shuffles), satisfying both C1 and C3. The maximum justified ceiling from this evidence is therefore NULL: the experiment as run is invalid and cannot be used to update C-MEAS-VALID or C-WEB-DYNAMICS. Exploratory corrected analysis is hypothesis-generating only and suggests the Bayesian paradigm SURVIVES_CURRENT_TEST on this SPA at N=5000, but requires a new frozen re-execution with fixed K, N>=1000 permutations, and updated provenance before any confirmatory claim.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35572180485/spec.json:measurement_validity[5-8] K=12 definition and exact log ML formula",
+    "research/experiments/EXP-PHYSICS-35572180485/prereg.md:4.3-4.4 same formula and K=12",
+    "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py:226-238 _dirichlet_multinomial_log_marginal K=len(counts) bug",
+    "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py:259-285 est_bayesian_model_comparison (uses buggy K)",
+    "research/experiments/EXP-PHYSICS-35572180485/result.json:metrics.alpha_prior_sweep_summary null_median +4047/+3787/+3621",
+    "research/experiments/EXP-PHYSICS-35572180485/raw_results.json:alpha_prior_sweep.*.null_control",
+    "research/experiments/EXP-PHYSICS-35572180485/provenance.json:reproducibility seed 42 N=5000 N_SHUFFLE 500",
+    "research/experiments/EXP-PHYSICS-35572180485/report.md:4.1-4.2 producer interpretation of null bias",
+    "recomputed_metrics.corrected_K12_metrics: independent recomputation with K=12 showing null_median -131 and observed 338 (alpha 1.0)"
+  ],
+  "unresolved": [
+    "Whether corrected K=12 result replicates with independent code path and N>=1000 perms in a new frozen experiment (required for confirmation). Current evidence is audit-side recomputation, not a new frozen execution.",
+    "Whether K=12 is the scientifically correct prior support vs K=4 (number of candidates per (s,a)). Spec mandates 12, but 4 is the reachable support; corrected K=4 also yields C1 pass? Not fully tested with 500 perms at all alphas, but earlier 100-perm pilot showed similar sign flip. Choice affects absolute BF magnitude but not null sign after fix.",
+    "Why parent EXP-PHYSICS-35476270440 reported null_mean -213.7 nats: did it use correct K=12 or different shuffle (global vs within-session)? Discrepancy not resolved; requires inspection of parent code.",
+    "Phase 2 beyond-Markov K3-K2 with corrected K=12: observed K3-K2 79-235 nats positive, but permutation null for the difference and stability across N not yet tested per spec phase 2 criteria (C2, C4).",
+    "Generalization beyond synthetic SPA: does Bayesian model comparison maintain valid null centering on production Web data with high-cardinality state spaces and different stratum size distributions?"
+  ]
+}

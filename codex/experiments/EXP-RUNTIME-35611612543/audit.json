@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35611612543",
+  "lane": "runtime",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Age header not emitted by nginx; stale state verified by elapsed wait (1.5s > max-age=1s) and X-Cache STALE/HIT status rather than Age>max-age header (spec measurement_validity clause 5). This is a documented representation loss vs the frozen spec, but operationally valid for local nginx.",
+    "nginx emits X-Cache: STALE (not HIT) for stale serves in SWR and SIE stages. Spec clause 2 expected 'X-Cache: HIT or Age>0'. Producer correctly counts HIT+STALE as stale success (SWR: 120 HIT + 120 STALE = 240; SIE: 240 STALE = 240). Operational interpretation deviates from literal spec wording but correctly captures nginx behavior.",
+    "Stage 4 (304 Not Modified): 0/240 true 304 status observed through nginx. nginx proxy_cache with proxy_cache_revalidate on converts origin 304 to 200 MISS serving cached body. Origin correctly emits 304 when bypassing cache (verified direct). The 'substrate correctness' metric (240/240) measures nginx-mediated 304 handling (200 with cached body, no false decompression on empty body) rather than raw 304 forwarding. This is a validity limitation: the 304 no-body wire format was not exercised through the cache layer.",
+    "SIE error simulation uses in-process 500 return with proxy_cache_use_stale error, not actual origin process kill. Tests the SIE stale-serving code path but not full origin-unavailability scenario. Documented by producer.",
+    "Fixed-order baseline (2041/2041 on local nginx) confirms parent finding that CDN edge transformation (not caching layer) broke fixed-order framing (parent Cloudflare edge: 60/240). This contrast is a strong validation of the byte-preserving cache assumption.",
+    "Raw wire bytes (base64) persisted per observation in raw_cell_results.jsonl (sha256 f0328cc2acfbe6dc32f07058b63043a85710482cf392625042c1bc7dd09e7d46) enabling independent recomputation. No representation loss in raw evidence.",
+    "Zero duplicate (session_kind, cell, rep, stage) keys across 2047 rows. Zero transport errors. Zero ambiguous tie-breaks (both brotli and gzip succeed at same iteration) across all observations."
+  ],
+  "baseline_findings": [
+    "B-LOCALHOST-DIRECT: 240/240 oracle-free correct (origin direct, no proxy). PASS — reproduces parent finding.",
+    "B-FRESH-HIT: 240/240 byte-identical, X-Cache HIT 240/240. PASS — positive control reproducing parent 48/48 design at 5x replication.",
+    "B-ORACLE-GUIDED-REGRESSION: 2041/2041 (100%) on same wire bytes excluding 6 corrupted payloads. PASS — no regression vs parent oracle-guided 240/240 and 480/480.",
+    "B-FIXED-ORDER-CDN: 2041/2041 (100%) on local nginx byte-preserving proxy. PASS — confirms parent local-nginx value (480/480) and contrasts with Cloudflare edge 60/240, supporting claim that edge transformation (not cache) broke framing.",
+    "C-POSITIVE-CONTROL-FRESH: 240/240 byte-identical. PASS — validates test infrastructure.",
+    "C-NULL-IDENTITY: 15/15 (100%) uncompressed payloads through cache. PASS.",
+    "C-NULL-CORRUPT: 0/6 false accepts, 6/6 correct decode failures. PASS — corrupted brotli/gzip payloads correctly fail, no false positive decompression.",
+    "C-STALE-SWR: 240/240 byte-identical, 120 HIT + 120 STALE = 240 stale serves. PASS.",
+    "C-STALE-SIE: 240/240 byte-identical, 240 STALE. PASS.",
+    "C-304-SUBSTRATE: 240/240 substrate correct (nginx converts 304 to 200 MISS with cached body; no false decompression on empty body). PASS with noted limitation above."
+  ],
+  "recomputed_metrics": {
+    "M-FRESH-HIT-ACCURACY": { "value": 1.0, "numerator": 240, "denominator": 240, "unit": "fraction", "match": true },
+    "M-SWR-STALE-ACCURACY": { "value": 1.0, "numerator": 240, "denominator": 240, "unit": "fraction", "match": true },
+    "M-SIE-STALE-ACCURACY": { "value": 1.0, "numerator": 240, "denominator": 240, "unit": "fraction", "match": true },
+    "M-304-SUBSTRATE-CORRECT": { "value": 1.0, "numerator": 240, "denominator": 240, "unit": "fraction", "match": true, "note": "All 240 are 200 MISS with body; true 304 status 0/240 through nginx" },
+    "M-REFETCH-ACCURACY": { "value": 1.0, "numerator": 240, "denominator": 240, "unit": "fraction", "match": true },
+    "M-OVERALL-STAGE-ACCURACY": { "value": 1.0, "numerator": 960, "denominator": 960, "unit": "fraction", "match": true },
+    "M-LOCALHOST-DIRECT-ACCURACY": { "value": 1.0, "numerator": 240, "denominator": 240, "unit": "fraction", "match": true },
+    "M-ORACLE-GUIDED-REGRESSION": { "value": 1.0, "numerator": 2041, "denominator": 2041, "unit": "fraction", "match": true },
+    "M-FIXED-ORDER-CDN": { "value": 1.0, "numerator": 2041, "denominator": 2041, "unit": "fraction", "match": true },
+    "M-IDENTITY": { "value": 1.0, "numerator": 15, "denominator": 15, "unit": "fraction", "match": true },
+    "M-CORRUPT-FALSE-ACCEPT": { "value": 0.0, "numerator": 0, "denominator": 6, "unit": "fraction", "match": true },
+    "M-AMBIGUOUS-TIE-BREAKS": { "value": 0, "numerator": 0, "denominator": 2047, "unit": "count", "match": true }
+  },
+  "claim_ceiling": "Oracle-free greedy iterative decompression (brotli->gzip, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth across all five cache lifecycle stages (fresh HIT, SWR stale HIT, SIE stale HIT, 304-revalidated substrate, 200 re-fetched) through local nginx 1.24.0 proxy_cache with byte-preserving behavior. Claim ceiling is explicitly bounded to nginx-class byte-preserving caches; production CDN (Cloudflare paid-tier, Fastly, Akamai, CloudFront) stale-serving byte behavior remains untested and is the same unknown as the parent handoff.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35611612543/raw_cell_results.jsonl (sha256 f0328cc2acfbe6dc32f07058b63043a85710482cf392625042c1bc7dd09e7d46) — 2047 rows, primary evidence",
+    "research/experiments/EXP-RUNTIME-35611612543/summary.json (sha256 2f7b8e9f6ec2b005b3a608ffa392c466965de2d0c81f6e76bbcd34e1616af0cd) — derived analysis",
+    "research/experiments/EXP-RUNTIME-35611612543/run_experiment.py (sha256 cc00739a3f72a7ec502ba3e2242016a11ed318fc563a7e0e310762510f1a334e) — execution code",
+    "research/experiments/EXP-RUNTIME-35611612543/nginx_cache.conf (sha256 24ca1c46a6f7a20348715e3468131c0744ba9668525c0bf89f61c4958c1f79b5) — nginx fixture",
+    "research/experiments/EXP-RUNTIME-35611612543/payload_manifest.json (sha256 6c7be00446d641dfeef3cf0ab692af7d14e828748ca6d42d26c9cd2a2c26a8dd) — deterministic payloads SEED=44",
+    "research/experiments/EXP-RUNTIME-35611612543/spec.json (sha256 60e90d6fc3b7d9c384704a23e0ca0c32c333134518a3d9b7c6f83233b1e30dc4) — frozen spec",
+    "research/experiments/EXP-RUNTIME-35611612543/prereg.md (sha256 15bdd4335956957bbfcd0080e4b6f917320f4e00ed2b9c5a89f6033844532b67) — frozen prereg",
+    "research/experiments/EXP-RUNTIME-35611612543/freeze.json (sha256 of freeze.json itself) — frozen design",
+    "research/experiments/EXP-RUNTIME-35551516706/handoff.json (sha256 be5276a0cebf8bcddc0db071cdb76c51e843eba37acf86b86123b38e02f1af7f) — parent handoff with 'cache freshness edge cases' unknown"
+  ],
+  "unresolved": [
+    "Whether production CDN edges (Cloudflare paid-tier, Fastly, Akamai, CloudFront) alter cached-response wire bytes vs DYNAMIC-path bytes on HIT and stale serving (SWR/SIE) — local nginx shows HIT/STALE byte-identity, but production CDN transformation remains untested.",
+    "Whether 304 forwarding through production CDN preserves 304 status vs converting to 200 with cached body — local nginx converts 304 to 200 MISS; CDN behavior unknown.",
+    "Performance economics: amortized latency and CPU cost of greedy brotli->gzip loop (MAX_DEPTH=5) vs oracle-guided decode not measured.",
+    "Behavior under concurrent load, HTTP/2 or HTTP/3, TLS, multi-edge, cross-region cache variation, and cache key variation with Vary/Accept-Encoding not tested.",
+    "Fixed-order baseline generalization to byte-transforming CDN edges remains 60/240 per parent; not re-tested on production stale serving.",
+    "Age header not available from nginx; alternative stale verification (wait-time + STALE status) used. Direct Age>max-age check not validated."
+  ]
+}

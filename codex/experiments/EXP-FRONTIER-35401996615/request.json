@@ -1,0 +1,20 @@
+{
+  "base_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-18T22:32:42.405724+00:00",
+  "experiment_id": "EXP-FRONTIER-35401996615",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does per-type CV stability (<=0.5 at lambda=1) achieve at larger per-type n (500-1000/type) with KDE Scott or kNN k=5 under spec-compliant measurement (N=200 permutation nulls, full 8-lambda sweep, Kraskov k=5 kNN estimator, pipeline validation within 5% of parent baselines) \u2014 or does kNN k=10 (EXPLORATORY CV pass max 0.470 at 250/type per parent sensitivity) survive confirmatory preregistration at 250/type?",
+  "lane": "frontier",
+  "origin_github_run_id": "35401996615",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35166507552",
+    "path": "research/experiments/EXP-FRONTIER-35166507552/handoff.json",
+    "sha256": "42cb65e57b05552abb8861526009da81587355537b2a4c09c33c0add83f7f6bf"
+  },
+  "reason": "pulse",
+  "request_hash": "97e4668a0a6dff0e3a107bf0efe654ab8b091b8b6879fee37cf7fef7b9fbe89b",
+  "request_id": "6476a8b08af7ed729615aaa4",
+  "schema_version": 1
+}

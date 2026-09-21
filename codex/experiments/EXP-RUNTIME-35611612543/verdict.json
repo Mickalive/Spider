@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35611612543",
+  "lane": "runtime",
+  "decision": "SUPPORTS — C-MEAS-VALID and C-FRESHNESS survive. Oracle-free greedy iterative decompression (brotli->gzip, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth across all five cache lifecycle stages (fresh HIT, SWR stale HIT, SIE stale HIT, 304-revalidated substrate, 200 re-fetched) through local nginx 1.24.0 proxy_cache. All frozen decision-rule conditions satisfied: 960/960 byte-identical across stages 1-3 and 5 (240 each); stage 4 (304) correctly handled (240/240 substrate correct, 0 false decompressions). Audit PASS confirms all recomputed metrics match producer. All baselines and controls pass. Claim ceiling explicitly bounded to nginx-class byte-preserving caches; production CDN stale-serving byte behavior remains untested.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Strong accumulating evidence across two consecutive audit-PASS experiments (EXP-RUNTIME-35551516706 fresh cache, EXP-RUNTIME-35611612543 stale/SWR/SIE/revalidation) with 100% byte-identical decompression across all cache lifecycle stages on local nginx. Claim ceiling expanded: extends from fresh-only cache to include stale serving (SWR, SIE) and revalidation (304/200) for nginx-class byte-preserving caches. Not VALIDATED because production CDN (Cloudflare paid-tier, Fastly, Akamai, CloudFront) HIT and stale serving byte behavior is untested. The parent's 0% HIT rate on Cloudflare free-tier confirms CDN infrastructure gap is real, not a measurement artifact."
+    },
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Cache freshness lifecycle does not break oracle-free decompression on local nginx: SWR (240/240), SIE (240/240), 304 substrate (240/240), re-fetch (240/240) all byte-identical. Parent established fresh cache (240/240 primary 48x5). This experiment closes the parent's 'cache freshness edge cases' unknown within local-nginx scope. Not VALIDATED because production CDN stale-serving may re-encode wire bytes (the parent's Cloudflare free-tier produced 0% HIT, and CDN edge transformation was documented at 60/240 fixed-order in EXP-RUNTIME-35538865067)."
+    }
+  ],
+  "product_action": "Cache freshness lifecycle (SWR, SIE, 304, re-fetch) does not break oracle-free decompression on local nginx-class byte-preserving caches. Product may safely serve stale cached responses through the decompression pipeline when backed by a byte-preserving cache (nginx, similar architecture). Production CDN deployment remains gated on CDN-specific byte-behavior testing (Cloudflare paid-tier or alternative).",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses on a production Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses — and does the CDN alter wire bytes on cache serve?",
+  "reason": "All frozen decision-rule conditions pass (primary: byte-identical accuracy 1.0 across all 5 stages; secondary: zero decode failures, zero false accepts, oracle-guided regression, fixed-order baseline). Audit PASS with producer_claim_supported=true, all 12 recomputed metrics match producer exactly. Validity limitations are infrastructure-bounded: nginx does not emit Age header (stale verified by wait-time + STALE status), 304 converted to 200 MISS by nginx proxy_cache_valid, SIE error simulated via 500 return not process kill. None of these invalidate the measurement; they document nginx-specific behavior within the frozen scope. The core finding — byte-identity across the full cache lifecycle — is robust for local nginx. Production CDN remains the critical open gap for C-MEAS-VALID advancement to VALIDATED.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35611612543/raw_cell_results.jsonl sha256 f0328cc2acfbe6dc32f07058b63043a85710482cf392625042c1bc7dd09e7d46 — 2047 rows, primary evidence",
+    "research/experiments/EXP-RUNTIME-35611612543/audit.json status=PASS producer_claim_supported=true — all 12 recomputed metrics match",
+    "research/experiments/EXP-RUNTIME-35611612543/result.json status=COMPLETE outcome=SUPPORTS — 960/960 byte-identical across stages",
+    "research/experiments/EXP-RUNTIME-35611612543/summary.json sha256 2f7b8e9f6ec2b005b3a608ffa392c466965de2d0c81f6e76bbcd34e1616af0cd — derived analysis",
+    "research/experiments/EXP-RUNTIME-35551516706/handoff.json sha256 be5276a0cebf8bcddc0db071cdb76c51e843eba37acf86b86123b38e02f1af7f — parent handoff, cache freshness unknown closed within nginx scope",
+    "research/experiments/EXP-RUNTIME-35611612543/spec.json sha256 60e90d6fc3b7d9c384704a23e0ca0c32c333134518a3d9b7c6f83233b1e30dc4 — frozen spec and decision rule"
+  ]
+}

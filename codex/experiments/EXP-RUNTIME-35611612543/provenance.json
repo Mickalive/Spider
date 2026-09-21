@@ -1,0 +1,80 @@
+{
+  "experiment_id": "EXP-RUNTIME-35611612543",
+  "lane": "runtime",
+  "github_run_id": "35611612543",
+  "github_run_attempt": 1,
+  "base_sha": "268626f89c808760222dfaf5a7baf0e94b0d7903",
+  "head_sha": "ffff6ed2f1a53293a5329dd683a41201339790f5",
+  "pre_execute_sha": "6f3a0f6d98b5d0a8b2a1bacbc324c1459925247b",
+  "frozen_hashes": {
+    "prereg.md": "15bdd4335956957bbfcd0080e4b6f917320f4e00ed2b9c5a89f6033844532b67",
+    "request.json": "447bf5d403572284cea4da93bb4ea509954221be61b4be75c0197e8b55410d7c",
+    "spec.json": "60e90d6fc3b7d9c384704a23e0ca0c32c333134518a3d9b7c6f83233b1e30dc4"
+  },
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35611612543/run_experiment.py",
+    "research/experiments/EXP-RUNTIME-35611612543/spec.json",
+    "research/experiments/EXP-RUNTIME-35611612543/prereg.md",
+    "research/experiments/EXP-RUNTIME-35611612543/freeze.json"
+  ],
+  "datasets_fixtures": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/payload_manifest.json",
+      "sha256": "6c7be00446d641dfeef3cf0ab692af7d14e828748ca6d42d26c9cd2a2c26a8dd",
+      "note": "Deterministic payloads SEED=44, 48 primary cells + depth/large/identity/corrupt, TARGET_SIZE 10240, LARGE 150000"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/raw_cell_results.jsonl",
+      "sha256": "f0328cc2acfbe6dc32f07058b63043a85710482cf392625042c1bc7dd09e7d46",
+      "role": "raw",
+      "rows": 2047
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/summary.json",
+      "sha256": "2f7b8e9f6ec2b005b3a608ffa392c466965de2d0c81f6e76bbcd34e1616af0cd",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/nginx_cache.conf",
+      "sha256": "24ca1c46a6f7a20348715e3468131c0744ba9668525c0bf89f61c4958c1f79b5",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/run.log",
+      "sha256": "c46b5a627d9db6bf8500c9c6e63e090d8760771ebc8f42763caf0efd7e434607",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/result.json",
+      "sha256": null,
+      "role": "derived",
+      "note": "computed after run; hash not yet frozen"
+    }
+  ],
+  "environment": {
+    "os": "linux",
+    "python": "3.12.14",
+    "nginx": "nginx/1.24.0 (Ubuntu)",
+    "libraries": {
+      "brotli": "1.0.9",
+      "gzip": "stdlib"
+    },
+    "origin_port": 18795,
+    "nginx_port": 18081,
+    "nginx_prefix": "/tmp/opencode/exp35611612543_nginx_root",
+    "nginx_conf_tmp": "/tmp/opencode/exp35611612543_nginx.conf",
+    "seed": 44,
+    "max_depth": 5,
+    "reps": 5,
+    "target_size": 10240,
+    "large_target": 150000
+  },
+  "commands": [
+    "python research/experiments/EXP-RUNTIME-35611612543/run_experiment.py"
+  ],
+  "started_at": "2026-09-21T15:15:39Z",
+  "finished_at": "2026-09-21T15:23:58Z",
+  "notes": "Local nginx proxy_cache only; no external network, no CDN, no model calls. Origin Python ThreadingHTTPServer with per-prefix Cache-Control (fresh max-age 300, swr max-age 1 stale-while-revalidate, sie max-age 1 stale-if-error, reval max-age 0) and ETag handling. Greedy oracle-free decode brotli->gzip MAX_DEPTH=5 no SHA256 oracle, identical to parent EXP-RUNTIME-35551516706."
+}
