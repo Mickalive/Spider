@@ -1,17 +1,41 @@
 {
   "experiment_id": "EXP-RUNTIME-35611612543",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-FRESHNESS"],
+  "question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for stale cache responses (stale-while-revalidate, stale-if-error) and revalidated responses (304 Not Modified, 200 re-fetched) served through a byte-preserving local nginx proxy_cache?",
+  "hypothesis": "Oracle-free greedy decompression preserves byte-identity across all cache lifecycle stages (fresh HIT, stale HIT via SWR, stale HIT via SIE, 304 Not Modified, 200 re-fetched) through local nginx proxy_cache, because the cache serves the same wire bytes regardless of freshness state.",
+  "falsifier": "If any cache lifecycle stage produces byte-divergent output (oracle-free decompressed bytes differ from origin ground truth), the specific failure mode is documented and the freshness ceiling is narrowed to the passing stages only.",
+  "baselines": [
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "description": "Origin direct fetch (no proxy), oracle-free greedy decode. Expected: 100% byte-identical (established by parent EXP-RUNTIME-35551516706)."
+    },
+    {
+      "id": "B-FRESH-HIT",
+      "description": "Cache HIT within max-age=300. Expected: 100% byte-identical (established by parent 48/48 DYNAMIC-vs-HIT)."
+    },
+    {
+      "id": "B-ORACLE-GUIDED-REGRESSION",
+      "description": "Oracle-guided decode on same wire bytes. Expected: 100% correct, no regression vs parent."
+    },
+    {
+      "id": "B-FIXED-ORDER-CDN",
+      "description": "Fixed-order (gzip-then-brotli) decode on same wire bytes. Expected: partial failures on mixed-encoding cells (parent value 60/240 on Cloudflare; 480/480 on local nginx)."
+    }
+  ],
+  "positive_control": "Fresh cache HIT stage (max-age=300 within window) with identical payloads to parent's 48/48 design. Expected: 100% byte-identical. Validates test infrastructure reproduces parent finding.",
+  "null_control": "Identity (uncompressed) payloads served through each cache lifecycle stage. Expected: 100% byte-identical (no decompression applied; null for decompression correctness). Additionally: deliberately corrupted brotli/gzip payloads served through cache. Expected: decode failure (not byte-divergent output).",
+  "measurement_validity": [
+    "Each cache lifecycle stage must produce at least N=5 observations per cell (3 content types x 2 encoding orders x 2 chunk sizes x 4 Accept-Encoding = 48 cells x 5 reps = 240 per stage).",
+    "Cache HIT status verified by X-Cache: HIT or Age > 0 header for stale/SIE/SWR stages.",
+    "Origin ground truth captured for every payload independently (direct fetch, no cache).",
+    "Raw wire bytes persisted per observation for independent recomputation.",
+    "Stale state verified: Age header > max-age for SWR/SIE stages.",
+    "304 Not Modified verified by HTTP 304 status code and matching ETag."
+  ],
+  "decision_rule": "PRIMARY: byte-identical accuracy = 1.0 across ALL 5 cache lifecycle stages (fresh, SWR-stale, SIE-stale, 304-revalidated, 200-re-fetched). SECONDARY: (a) zero decode failures on valid payloads across all stages; (b) zero false accepts on corrupted payloads; (c) oracle-guided regression passes (no regression vs parent); (d) fixed-order baseline reproduces parent local-nginx value (480/480). OUTCOME: SUPPORTS if ALL conditions pass. FALSIFIES if ANY stage shows byte-divergence (document specific stage, cell, encoding). MIXED if some stages pass and others fail. BLOCKED if infrastructure prevents cache lifecycle testing (e.g., nginx cannot produce SIE/SWR responses). MEASUREMENT_INVALID if controls fail or data quality is insufficient.",
+  "product_consequence_positive": "Cache freshness lifecycle does not break oracle-free decompression. Claim ceiling extends from fresh-only cache to include stale cache serving (SWR, SIE) and revalidation (304, 200-re-fetch). Strengthens C-MEAS-VALID and C-FRESHNESS evidence for production CDN deployment. Product can safely serve stale cached responses through the decompression pipeline.",
+  "product_consequence_negative": "Stale cache serving breaks oracle-free decompression. Claim ceiling narrows to fresh-only cache behavior. Production deployment must avoid serving stale cached responses through the decompression pipeline, or the specific divergence must be understood and mitigated. C-FRESHNESS evidence weakened; stale cache is a production blocker.",
+  "estimated_cost": "~10 minutes wall clock. 5 stages x 48 cells x 5 reps = 1200 observations total. Local nginx proxy_cache only. No external network, no CDN, no model calls. Minimal compute.",
+  "expected_information_gain": "HIGH. Directly tests a concrete UNKNOWN from parent handoff (cache freshness edge cases). If positive: extends claim ceiling from fresh-only to full cache lifecycle, reducing the production-CDN unknown by one dimension. If negative: identifies a specific failure mode (stale cache byte divergence) that would be a production blocker. Either outcome changes a product decision about cache serving policy. The parent explicitly notes 'all serves within 300s max-age' — this is the gap."
 }
