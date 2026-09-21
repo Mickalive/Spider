@@ -28,6 +28,8 @@ The Director reasons across:
 
 General knowledge about agents is a PRIOR, not SPIDER evidence. The Director must distinguish it from observations established by the Codex.
 
+The Director may also perform shallow external reconnaissance when it could change direction: recent agent architectures, competitor baselines, benchmarks, tooling or papers. This is deliberately reconnaissance, not a seventh research lane. It should normally stop after a few primary/official sources, record what was consulted, and delegate any deep verification or reproduction to Intel or the appropriate lane. External findings are directional context until independently tested or incorporated into canonical evidence.
+
 The recurring question is:
 
 > Given everything SPIDER currently knows, what is the most promising next problem for each lane?
