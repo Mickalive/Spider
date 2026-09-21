@@ -17,6 +17,16 @@ def load(path: str):
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def git_file_exists(ref: str, path: str) -> bool:
+    p = subprocess.run(
+        ["git", "cat-file", "-e", f"{ref}:{path}"],
+        cwd=ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return p.returncode == 0
+
+
 def git_show_json(ref: str, path: str) -> dict:
     try:
         raw = subprocess.check_output(
@@ -144,6 +154,26 @@ def main() -> None:
                 )
         tunnel = streak >= 5 or dominant_recent_count >= 8
 
+        active_id = state.get("active_experiment_id")
+        active_stage = "IDLE"
+        active_has_portfolio_mandate = False
+        if active_id:
+            base = f"research/experiments/{active_id}"
+            req = git_show_json(ref, f"{base}/request.json")
+            active_has_portfolio_mandate = isinstance(req.get("portfolio_allocation"), dict)
+            if git_file_exists(ref, f"{base}/verdict.json"):
+                active_stage = "FINALIZED"
+            elif git_file_exists(ref, f"{base}/audit.json"):
+                active_stage = "AUDITED"
+            elif git_file_exists(ref, f"{base}/result.json"):
+                active_stage = "EXECUTED"
+            elif git_file_exists(ref, f"{base}/freeze.json"):
+                active_stage = "FROZEN"
+            elif git_file_exists(ref, f"{base}/request.json"):
+                active_stage = "PREFREEZE"
+            else:
+                active_stage = "BROKEN_REFERENCE"
+
         priority = cfg.get("priority_claims") or []
         lane_recent_counts = {
             claim_id: sum(claim_id in (e.get("claim_ids") or []) for e in history)
@@ -162,7 +192,11 @@ def main() -> None:
         lanes[lane] = {
             "mission": cfg.get("mission"),
             "priority_claims": priority,
-            "active_experiment_id": state.get("active_experiment_id"),
+            "active_experiment_id": active_id,
+            "active_stage": active_stage,
+            "active_has_portfolio_mandate": active_has_portfolio_mandate,
+            "last_failure_retryable": state.get("last_failure_retryable"),
+            "same_failure_count": state.get("same_failure_count", 0),
             "last_experiment_id": state.get("last_experiment_id"),
             "last_verdict": state.get("last_verdict"),
             "parent_handoff_proposal": state.get("next_question"),
