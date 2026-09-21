@@ -1,0 +1,126 @@
+{
+  "experiment_id": "EXP-PRODUCT-35611617123",
+  "frozen_outcome": "MEASUREMENT_INVALID",
+  "lane": "product",
+  "metrics": {
+    "c1_baseline_body_only": 0.8333,
+    "c1_baseline_status_only": 0.5,
+    "c1_discrimination": 0.8333,
+    "empirical_overlap_by_condition": {
+      "0": 0.025,
+      "25": 0.2333,
+      "50": 0.458
+    },
+    "fp_at_020_by_overlap": {
+      "0": 0.025,
+      "25": 0.2333,
+      "50": 0.458
+    },
+    "fp_binding_below_75": true,
+    "null_control_50pct_n480": {
+      "ci_upper": 0.045722,
+      "outcome": "SURVIVES_CURRENT_TEST",
+      "pearson_r": -0.04396,
+      "tost_pass": true
+    },
+    "orthogonality_by_overlap": {
+      "0": {
+        "c3_pass": true,
+        "ci_upper": 0.060522,
+        "pearson_r": -0.029138,
+        "tost_pass": true
+      },
+      "25": {
+        "c3_pass": false,
+        "ci_upper": 0.168209,
+        "pearson_r": 0.07991,
+        "tost_pass": false
+      },
+      "50": {
+        "c3_pass": true,
+        "ci_upper": 0.059289,
+        "pearson_r": -0.002715,
+        "tost_pass": true
+      }
+    },
+    "overlap_conditions": [
+      0,
+      25,
+      50
+    ],
+    "primary_50pct_n1000": {
+      "calibrated_threshold": 0.26,
+      "ci_upper": 0.059289,
+      "outcome": "SURVIVES_CURRENT_TEST",
+      "pearson_r": -0.002715,
+      "tost_pass": true
+    },
+    "samples_per_condition": {
+      "0": 960,
+      "25": 960,
+      "50_n1000": 2000,
+      "50_n480": 960
+    },
+    "threshold_increases_monotonically": true,
+    "thresholds_by_overlap": {
+      "0": 0.2,
+      "25": 0.24,
+      "50": 0.26
+    },
+    "tp_at_020_by_overlap": {
+      "0": 0.9917,
+      "25": 0.9917,
+      "50": 0.982
+    }
+  },
+  "observations": {
+    "bonferroni_alpha": 0.0167,
+    "decision_outcome": "MEASUREMENT_INVALID",
+    "decision_reason": "NC-NULL-OVERLAP-0 failed: FP at 0%% > 0.01",
+    "delta": 0.15,
+    "gaussian_parameters": {
+      "failure_mu": 0.295,
+      "failure_sigma": 0.05,
+      "failure_threshold": 0.2,
+      "noise_mu_by_overlap_pct": {
+        "0": 0.095,
+        "25": 0.1663,
+        "50": 0.195,
+        "75": 0.2237,
+        "100": 0.295
+      },
+      "noise_sigma": 0.05
+    },
+    "n_overlap_conditions": 3,
+    "overlap_distribution_design": "Gaussian: failure N(mu=0.295, sigma=0.05); noise N(mu_noise, sigma=0.05) with per-condition mu_noise to achieve target P(noise > 0.20); all scores clamped [0,1]",
+    "p_refresh_success": 0.7,
+    "raw_evidence_sha256": "3b26ddb150bf1aeb69b4a3c1235d58b6ed74110c5f626a8f05f08fc65587e2f3",
+    "runtime_seconds": 577.68,
+    "threshold_grid": "50 points [0.05, 0.06, ..., 0.54] in 0.01 increments",
+    "total_samples": 4880
+  },
+  "outcome": "MEASUREMENT_INVALID",
+  "pc_disc": {
+    "baseline_body_only": 0.8333,
+    "baseline_status_only": 0.5,
+    "discrimination_full_fingerprint": 0.8333,
+    "fingerprint_groups": {
+      "expired_token": [
+        "14553e10b9eddcb9"
+      ],
+      "invalid_token": [
+        "14553e10b9eddcb9"
+      ],
+      "no_auth": [
+        "266d7210de8ec9a5"
+      ],
+      "valid_token": [
+        "8885364b026f8482"
+      ]
+    },
+    "n_states": 4,
+    "n_unique_fingerprints": 3
+  },
+  "raw_sha": "3b26ddb150bf1aeb69b4a3c1235d58b6ed74110c5f626a8f05f08fc65587e2f3",
+  "status": "COMPLETE"
+}
