@@ -1,17 +1,56 @@
 {
   "experiment_id": "EXP-INTEL-35572177756",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can the Docker image am1n3e/webarena-verified-shopping:latest be made available to re-collect full-DOM locatable_sample (all elements with bbox, n=21-82 per task) for the 7 existing Magento tasks, enabling the frozen ranking-agreement analysis to be completed — and if so, does canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP cross the 80% threshold at full DOM?",
+  "hypothesis": "The ranking instability at truncated-first-20 (canonical recipe agreement 55.95%, bootstrap CI [55.6%, 57.5%]) is a truncation artifact caused by restricting locatable_sample to the first 20 DOM elements. Full DOM samples contain richer element diversity with more discriminative elements per definition. Specifically: (H1) canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP will be >= 80% when computed on full locatable_sample (all elements with bbox, n=21-82 per task); (H2) full-DOM agreement will exceed truncated-first-20 agreement (55.95%) by >= 10 percentage points; (H3) per-task recipe ranking agreement will be >= 85% at full DOM.",
+  "falsifier": "The hypothesis is falsified if ANY of: (F1) Canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP on full DOM is < 75% — demonstrating that the truncation ceiling is NOT the binding constraint and the instability is structural regardless of element count; (F2) Full-DOM agreement does NOT exceed truncated-first-20 agreement (55.95%) by >= 5 percentage points — demonstrating that additional elements do not improve stability; (F3) Per-task recipe ranking agreement on full DOM is < 75% — demonstrating that even independent per-task sampling cannot stabilize rankings with richer element diversity; (F4) Pipeline eta2 for tag_entropy x DEF-FULL-MAP on full DOM drops below 0.90 — demonstrating that full-DOM elements introduce noise that degrades discrimination.",
+  "baselines": [
+    {
+      "id": "B1_TRUNCATED_FIRST20_CANONICAL",
+      "description": "Parent canonical recipe ranking agreement at truncated-first-20: tag_entropy x DEF-FULL-MAP 55.95% (559.5/10000 iterations). Bootstrap 95% CI [55.56%, 57.49%]. From EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz.",
+      "source": "EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz canonical n=20"
+    },
+    {
+      "id": "B2_TRUNCATED_FIRST20_PERTASK",
+      "description": "Parent per-task recipe ranking agreement at truncated-first-20: tag_entropy x DEF-FULL-MAP 78.65%. From EXP-INTEL-35445596324 result.json M5 at n=20.",
+      "source": "EXP-INTEL-35445596324 result.json M5_recipe_pertask_ranking_agreement"
+    },
+    {
+      "id": "B3_NON_RECIPE_RANKING_AGREEMENT",
+      "description": "Non-recipe pipeline ranking agreement: tag_entropy preserves listing > detail for both DEF-FULL-MAP and DEF-FORM-ONLY at truncated-first-20 (100% agreement). This is the ceiling that recipe sampling must approach.",
+      "source": "EXP-INTEL-35462974425/analysis_output.json non_recipe_truncated_first20"
+    },
+    {
+      "id": "B4_PIPELINE_DISCRIMINATION",
+      "description": "Non-recipe pipeline eta2 at truncated-first-20 n=20: tag_entropy x DEF-FORM-ONLY = 0.9996, tag_entropy x DEF-FULL-MAP = 0.9958.",
+      "source": "EXP-INTEL-35445596324 result.json M3_pipeline_eta2_by_effective_n"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_RAW_FEATURE_REPRODUCES_FULL_DOM",
+    "description": "Direct (non-pipeline) computation of tag_entropy, form_fraction, and total_area eta2 on page_type reproduces eta2 >= 0.99 on the full DOM locatable_sample, confirming raw features retain perfect discrimination with the larger element set.",
+    "expected": "All three features: eta2 >= 0.99, within-type std < 0.001."
+  },
+  "null_control": {
+    "id": "NC1_HIERARCHY_NORMALIZED_FULL_DOM",
+    "description": "The normalized hierarchy-weighted density formula produces eta2 < 0.01 on page_type with full DOM elements, reproducing the y-proxy degeneracy anchor.",
+    "expected": "Normalized hierarchy density: eta2 < 0.01, all page type means within 1% of each other."
+  },
+  "measurement_validity": [
+    "Phase 1 (Docker availability check): Attempt to pull am1n3e/webarena-verified-shopping:latest from Docker Hub. Record pull success/failure, image size, and digest. If pull fails, record exact error and categorize as infra-blocked.",
+    "Phase 2 (Docker container execution): If image is available, start the Magento container with appropriate port mapping. Verify the container serves HTTP on the expected port. Record container startup time and health check status.",
+    "Phase 3 (Full-DOM data collection): Run the existing exp347 collection script (or equivalent) against the running container for the 7 tasks (3 listing: clothing-shoes-jewelry, beauty-personal-care, electronics; 3 detail: camera, vr-bag, pet-camera; 1 cart: cart_1). CRITICAL: modify the collection to capture ALL elements with bbox in locatable_sample, not truncated-first-20. The locatable_sample array must contain all locatable_elements (82 for listing, 32 for detail, 21 for cart).",
+    "Phase 4 (Analysis): Run the existing frozen analyze.py (EXP-INTEL-35462974425/analyze.py sha256: 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459) on the full-DOM data. The frozen decision_rule C1-C7 from EXP-INTEL-35462974425/spec.json applies without modification.",
+    "If Phase 1-2 fail (Docker unavailable): Execute Phase 5 (Bootstrap CI on existing n=20 data) as a lower-cost fallback that provides bounded uncertainty estimates without new data collection.",
+    "Phase 5 (Fallback: Bootstrap CI on margin data): Using the per-iteration margin data from EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz, compute: (a) one-sample sign test of H0: p(positive margin) = 0.5 at n=15 and n=20; (b) bootstrap 95% CI for p(positive margin) at each n using B=10000 resamples of iterations; (c) test whether the 80% agreement threshold is within the 99th percentile of the bootstrap distribution at n=20; (d) fit a simple monotone extrapolation (e.g., logistic on the 4 observed proportions at n=5/10/15/20) and compute the predicted agreement at n=50 and n=82 with bootstrap uncertainty bands. This provides bounded uncertainty estimates about whether the proportion trajectory could plausibly reach 80% at full DOM.",
+    "Data sources: EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json (sha256: da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050) for truncated-first-20 element data; EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256: ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) for per-iteration margin data.",
+    "Metrics bounded to 7 tasks, 1 Magento site, 3 definitions (2 non-degenerate), 2 recipes, 3 features. Cart n=1 within-type variance degenerate; comparison focuses on listing vs detail.",
+    "No LLM/model calls required. Compute: Docker pull + container start + browser automation (if Docker available) or offline bootstrap computation (if Docker unavailable)."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_DOCKER_AVAILABLE: The Docker image am1n3e/webarena-verified-shopping:latest is pullable and the container starts successfully. PASS if image pulled and container healthy; FAIL if image unavailable or container fails to start.\n\nIf C1 PASSES (Docker available):\n  C2_FULL_DOM_DATA_COLLECTED: Full-DOM locatable_sample collected for >= 5 of 7 tasks with locatable_sample length > 20. PASS if >= 5 tasks have full DOM; FAIL if < 5.\n  C3_RAW_FEATURES_REPRODUCE: Positive control PC1 passes (all three features eta2 >= 0.99 on full DOM).\n  C4_PIPELINE_ETA2: Pipeline max eta2 >= 0.05 on full DOM.\n  C5_FULL_DOM_EXCEEDS_TRUNCATED: Canonical recipe agreement on full DOM > 60.95% (55.95% + 5pp).\n  C6_RANKING_STABILITY: Canonical recipe agreement on full DOM >= 75%.\n  C7_PERTASK_IMPROVES: Per-task recipe agreement on full DOM >= 85%.\n  VERDICT if C1 AND C2 AND C3: apply frozen EXP-INTEL-35462974425 verdict rules (C4-C7) on full-DOM data.\n\nIf C1 FAILS (Docker unavailable):\n  C8_BOOTSTRAP_MARGIN_TEST: Bootstrap CI for p(positive margin) at n=20 excludes 80% with 99% confidence. PASS if upper 99% CI < 0.80; FAIL if upper 99% CI >= 0.80.\n  C9_STEP_FUNCTION_CONFIRMED: The proportion(margin>0) trajectory (0, 0, 0.4996, 0.5654 at n=5/10/15/20) shows monotonic increase but the logistic extrapolation to n=50 and n=82 produces predicted agreement < 80% with bootstrap 95% CI upper bound < 85%.\n  VERDICT if NOT C1 AND C8 AND C9: FALSIFIES (even under optimistic extrapolation, ranking agreement does not cross 80% at full DOM given the observed step-function trajectory).\n  VERDICT if NOT C1 AND NOT C8 OR NOT C9: MIXED (bootstrap CI is too wide to discriminate; Docker measurement is required).\n\nOVERALL VERDICT RULES:\n- If C1 AND C2 AND C3: follow frozen EXP-INTEL-35462974425 verdict.\n- If C1 AND NOT C2: BLOCKED (Docker available but full-DOM collection failed).\n- If NOT C1 AND C8 AND C9: FALSIFIES on extrapolation.\n- If NOT C1 AND (NOT C8 OR NOT C9): MIXED (bootstrap inconclusive, Docker required).\n- If NOT C1 AND NOT C8 AND NOT C9: MIXED (both inconclusive).",
+  "product_consequence_positive": "If Docker is available and C5 AND C6 PASS: The ranking instability under recipe sampling (C6 FAIL in parent at truncated-first-20: 55.95%) was a truncation artifact. Feature-weighted density through OECD/COINr pipeline with canonical recipe achieves stable task-type ranking (>= 75%) on full DOM elements. Product lane can pursue density-based MIXED handling using tag_entropy-weighted density with the existing definition x recipe framework. The 31x recipe material gap (EXP-INTEL-35264637598) becomes actionable.\n\nIf Docker unavailable but C8 AND C9 PASS (bootstrap falsifies 80% extrapolation): Product lane can definitively close the recipe density design path for this definition x recipe framework, saving future experimentation cost. Non-recipe density (100% ranking preservation) remains the only viable path.",
+  "product_consequence_negative": "If Docker is available and C5 FAILS (full DOM does NOT exceed truncated-first-20 by >= 5pp): The ranking instability is structural, not a truncation artifact. Recipe density is permanently closed for this definition x recipe framework. Product lane must use non-recipe density only.\n\nIf Docker unavailable and C8 FAILS (bootstrap CI includes 80%): The extrapolation question remains genuinely open — we cannot determine from n=20 data alone whether ranking agreement crosses 80% at full DOM. Docker measurement is required to resolve this. This carries forward as an unresolved blocking dependency.",
+  "estimated_cost": "LOW to MODERATE — If Docker available: Docker image pull (1-5 min), container start (1-3 min), browser automation for 7 tasks (5-10 min), offline analysis (< 1 min). Total: 10-20 min. If Docker unavailable: offline bootstrap computation only (< 1 min compute, 0 LLM tokens). Either way, very low cost compared to model-based approaches.",
+  "expected_information_gain": "VERY HIGH — This is the single highest-information experiment available. If Docker is available, it produces a definitive binary answer to the open empirical question (does ranking stabilize at full DOM?) that has been blocked since EXP-INTEL-35462974425. If Docker is unavailable, the bootstrap analysis provides bounded uncertainty that either (a) falsifies the 80% extrapolation (saving future cost) or (b) confirms the extrapolation is genuinely uncertain (justifying Docker investment). Either outcome changes a concrete product decision about MIXED handling strategy. This experiment reuses all existing code, data, and infrastructure; it tests the exact question the parent chain left open; and it produces a definitive outcome regardless of Docker availability."
 }
