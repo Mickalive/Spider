@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35538866166",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "alpha_sweep_summary": {
+      "alpha_0.1": {
+        "k3_value_stochastic": 0.522768,
+        "k2_value_stochastic": 0.330698,
+        "k3_minus_k2": 0.192070,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.240358,
+        "c1_null_std": 0.002144,
+        "c3_pass": true,
+        "c3_positive_control_k3": 0.522768,
+        "c3_permutation_p": 0.001,
+        "deterministic_control_k3": 0.544414,
+        "h_y_given_z": 3.152115,
+        "h_y_given_za": 2.629346
+      },
+      "alpha_0.5": {
+        "k3_value_stochastic": -0.069526,
+        "k2_value_stochastic": -0.181732,
+        "k3_minus_k2": 0.112206,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.199775,
+        "c1_null_std": 0.000383,
+        "c3_pass": false,
+        "c3_positive_control_k3": -0.069526,
+        "c3_permutation_p": 0.001,
+        "deterministic_control_k3": -0.072899,
+        "h_y_given_z": 3.341123,
+        "h_y_given_za": 3.410649
+      },
+      "alpha_1.0": {
+        "k3_value_stochastic": -0.185652,
+        "k2_value_stochastic": -0.267633,
+        "k3_minus_k2": 0.081981,
+        "c1_pass": false,
+        "c1_abs_null_mean": 0.274689,
+        "c1_null_std": 0.000149,
+        "c3_pass": false,
+        "c3_positive_control_k3": -0.185652,
+        "c3_permutation_p": 0.001,
+        "deterministic_control_k3": -0.198581,
+        "h_y_given_z": 3.336537,
+        "h_y_given_za": 3.522189
+      }
+    },
+    "sensitivity_null_tradeoff": {
+      "description": "No tradeoff exists: ALL alphas fail C1. Entropy-rate CMI does not bypass per-stratum KL bias.",
+      "k3_range": [-0.186, 0.523],
+      "null_mean_range": [0.200, 0.275],
+      "tradeoff_monotonic": false,
+      "crossover_alpha": "none (no alpha achieves both C1 and C3)",
+      "negative_cmi_alphas": [0.5, 1.0]
+    },
+    "design_verification": {
+      "c6_design_pass": true,
+      "c6_pairs_with_4_candidates": 48,
+      "c6_total_pairs": 48,
+      "c7_stratum_buckets_non_empty": 2,
+      "c7_pass": true
+    },
+    "determinism_k3_stochastic": {
+      "deterministic": 77,
+      "stochastic": 764,
+      "total": 841,
+      "det_ratio": 0.0916
+    },
+    "n_transitions": {
+      "stochastic": 5000,
+      "deterministic": 5000
+    }
+  },
+  "controls": {
+    "C1-NULL-CONTROL": {
+      "description": "Shuffled-action within-session null, 500 permutations per alpha. |mean| < 0.1 bits.",
+      "expected": "|shuffled-action null_mean| < 0.1 bits for at least one alpha",
+      "observed": "All alphas fail: alpha=0.1 |mean|=0.240, alpha=0.5 |mean|=0.200, alpha=1.0 |mean|=0.275. No alpha passes C1.",
+      "pass": false,
+      "passing_alphas": [],
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:alpha_sweep.*.null_control"
+    },
+    "C3-POSITIVE-CONTROL": {
+      "description": "Positive control CMI >= 0.5 bits with permutation p <= 0.001 for any alpha passing C1.",
+      "expected": "positive_control_k3 >= 0.5 bits and p <= 0.001",
+      "observed": "Alpha=0.1 passes C3 (K3=0.523, p=0.001) but fails C1. Alpha=0.5 K3=-0.070 and alpha=1.0 K3=-0.186 both fail C3.",
+      "pass": false,
+      "passing_alphas_c3_only": [0.1],
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:alpha_sweep.*.positive_control_k3"
+    },
+    "C6-DESIGN-VERIFICATION": {
+      "description": "48/48 (state,action) pairs with 4 distinct candidates.",
+      "expected": "48/48 pairs with 4 distinct candidates",
+      "observed": "48/48 pairs verified.",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py:verify_design()"
+    },
+    "C7-STRATUM-COVERAGE": {
+      "description": ">=2 non-empty stratum size buckets.",
+      "expected": ">=2 non-empty buckets",
+      "observed": "2 non-empty buckets (5-9: 343 strata, 10-19: 37 strata).",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:stratum_size_bias_decomposition"
+    },
+    "B-ENTROPY-RATE-DEG": {
+      "description": "Entropy-rate CMI on deterministic SPA where H(Y|Z,A)=0 by construction (deterministic transitions). Expected CMI = H(Y|Z) > 0.",
+      "expected": "cmi_deterministic > 0.5 bits (signal present)",
+      "observed": "Alpha=0.1 K3=0.544 passes threshold. Alpha=0.5 K3=-0.073 and alpha=1.0 K3=-0.199 are negative due to Laplace smoothing bias inflating H(Y|Z,A) above H(Y|Z).",
+      "pass": true,
+      "passing_alphas": [0.1],
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:alpha_sweep.*.deterministic_control_k3"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json",
+      "sha256": "e486d9ddbcd97d238e8cc0582b7f85c3605368cd891c5b0a69a4a0a2d80d698f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py",
+      "sha256": "9689865b771d2b24bfce2c82f16027e5138ca128e43dfef104ac84bd08faf3fd",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Entropy-rate CMI does NOT bypass the per-stratum KL bias-variance tradeoff. ALL three tested alphas (0.1, 0.5, 1.0) fail C1 (|shuffled-action null_mean| >= 0.1 bits): alpha=0.1 |mean|=0.240, alpha=0.5 |mean|=0.200, alpha=1.0 |mean|=0.275.",
+    "At alpha=0.1, the estimator achieves C3 sensitivity (K3=0.523 bits >= 0.5 threshold, p=0.001) but null centering fails at 2.4x threshold. This is the same tradeoff pattern as plug-in KL: sensitivity and null centering remain irreconcilable.",
+    "At alpha=0.5 and alpha=1.0, the entropy-rate CMI becomes NEGATIVE (K3=-0.070 and -0.186 respectively), meaning H(Y|Z,A) > H(Y|Z). This is a Laplace smoothing artifact: smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has more cells than the z-only space, and pseudo-counts add artificial uncertainty proportionally to cell count.",
+    "The deterministic SPA positive control (B-ENTROPY-RATE-DEG) confirms the smoothing bias: alpha=0.1 K3=0.544 (correct, H(Y|Z)>0 by construction), but alpha=0.5 K3=-0.073 and alpha=1.0 K3=-0.199 are negative. The estimator fails on the very control where I(Y;A|Z)=0 by construction.",
+    "Stratum size decomposition (alpha=0.5): 343 strata in 5-9 bucket (observed CMI 0.117, null 0.079), 37 strata in 10-19 bucket (observed 0.240, null 0.130). Smaller strata contribute more null bias, same pattern as plug-in KL.",
+    "The null mean is stable across shuffles (std 0.0001-0.002), confirming the bias is systematic, not random. The null distribution is tightly concentrated away from zero.",
+    "K3-K2 differences remain positive across all alphas (0.192, 0.112, 0.082), suggesting the beyond-Markov signal exists in the data but the estimator cannot separate it from bias.",
+    "Design verification passes: 48/48 (state,action) pairs with 4 distinct candidates, 2 non-empty stratum size buckets."
+  ],
+  "validity_notes": [
+    "The experiment uses the same 12-state stochastic SPA design as parent EXP-PHYSICS-35530591329. Results are specific to this SPA class.",
+    "Entropy-rate CMI computes H(Y|Z) - H(Y|Z,A) globally via histogram with Laplace smoothing. The global computation does not avoid the bias because Laplace smoothing adds pseudo-counts proportional to the number of cells, and H(Y|Z,A) has n_z * n_a * n_y cells while H(Y|Z) has n_z * n_y cells.",
+    "The negative CMI values at alpha >= 0.5 are a mathematical artifact of Laplace smoothing, not evidence against the true CMI being positive. The true I(Y;A|Z) = 1.52 bits is audit-confirmed.",
+    "The null control uses within-session action-label shuffle (500 permutations), same framework as parent.",
+    "Phase 2 (beyond-Markov K3-K2) was not executed because no alpha passes both C1 and C3.",
+    "All measurements are on synthetic in-memory SPA simulation. No browser/network/model calls.",
+    "The frozen decision rule FALSIFIED-IN-SETTING triggers on C1: all alphas have |null_mean| >= 0.1 bits. This is a valid scientific negative, not an infrastructure failure."
+  ],
+  "unresolved": [
+    "Whether the entropy-rate CMI null bias is fundamental to Laplace-smoothed histogram estimation or can be resolved by (a) larger N, (b) kernel density estimation, (c) Bayesian entropy estimation, or (d) different smoothing (Jeffreys, Hellinger).",
+    "Whether the negative CMI at alpha >= 0.5 indicates that Laplace smoothing is categorically unsuitable for entropy-rate CMI on discrete spaces with many cells.",
+    "Whether the beyond-Markov K3-K2 signal (consistently positive 0.08-0.19 bits across alphas) can be detected by an estimator that does not suffer from the smoothing bias.",
+    "Whether Bayesian model comparison (action-dependent vs action-independent transition model via Bayes factor) detects the signal with valid null centering, as suggested by the parent handoff.",
+    "Whether likelihood-ratio tests between nested Markov and beyond-Markov models bypass the bias.",
+    "Whether production Web transitions with continuous state representations or larger vocabularies exhibit different bias characteristics.",
+    "Whether the 0.192-bit K3-K2 difference at alpha=0.1 is statistically significant or an artifact of the same smoothing bias affecting H(Y|Z) and H(Y|Z,A) differently."
+  ]
+}

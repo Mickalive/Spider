@@ -511,6 +511,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35538866166",
+        "lane": "physics",
+        "created_at": "2026-09-20T21:29:52.632864+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: ALL three tested alphas (0.1, 0.5, 1.0) have |shuffled-action null_mean| >= 0.1 bits (0.240, 0.200, 0.275 respectively), each 2.0-2.75x above threshold. No alpha achieves both C1 and C3. Audit PASS confirms all recomputed metrics match producer. The bias is intrinsic to Laplace-smoothed histogram estimation: smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has n_a times more cells, and Laplace pseudo-counts add artificial uncertainty proportional to cell count. Corrected P(z) denominator (audit V1) does not change the FALSIFIED verdict. The entropy-rate estimator has WORSE null centering than plug-in KL at high alpha (0.275 vs 0.064 at alpha=1.0). The deterministic SPA construct validation (B-ENTROPY-RATE-DEG) fails at alpha>=0.5 (negative CMI), confirming the bias is estimator-intrinsic, not data-intrinsic.",
+        "source_commit": "ed0f9f346855a74f85c310be042e3a7bb229740c",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes the entropy-rate CMI pathway on this SPA class but does not accumulate evidence for or against C-WEB-DYNAMICS. The bias is estimator-specific (Laplace smoothing), not fundamental to discrete CMI estimation (MLE alpha=0 recovers 1.377 bits per parent). C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: entropy-rate CMI via Laplace-smoothed histogram (alpha in {0.1,0.5,1.0}) is rejected for simultaneous C1+C3 on this SPA class."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -2417,6 +2427,16 @@
         "reason": "CDN byte-identity hypothesis FALSIFIED: fixed-origin-order iterative decompression produces byte-identical output on only 60/240 CDN observations (25%) due to Cloudflare Accept-Encoding negotiation (gunzip, de-brotli, silent re-encode, identity gzip-compress). The frozen decision rule's all-conditions-must-pass gate fails on C1/C2/C4. However, localhost correctness is untouched (positive control 240/240), the failure mode is diagnosed (fixed-origin-order framing assumption vs CDN transparency), and encoding-agnostic iterative decode recovers ground truth on 24/24 forensic JSON/HTML CDN deliveries (exploratory, not frozen). C-MEAS-VALID remains blocked from Product Core: encoding-agnostic decompression must be implemented, frozen, and validated through the same CDN protocol before promotion. Claim ceiling bounded to: Cloudflare free tier, single edge (sjc01), 10KB nominal, depth 2, gzip L1 / brotli q4, sequential, no cache HIT. The parent's localhost-established claims (iterative decompression, TE framing streaming, decompressor API streaming \u2014 all 840/840) are unaffected."
       },
       {
+        "experiment_id": "EXP-PHYSICS-35538866166",
+        "lane": "physics",
+        "created_at": "2026-09-20T21:29:52.632864+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: ALL three tested alphas (0.1, 0.5, 1.0) have |shuffled-action null_mean| >= 0.1 bits (0.240, 0.200, 0.275 respectively), each 2.0-2.75x above threshold. No alpha achieves both C1 and C3. Audit PASS confirms all recomputed metrics match producer. The bias is intrinsic to Laplace-smoothed histogram estimation: smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has n_a times more cells, and Laplace pseudo-counts add artificial uncertainty proportional to cell count. Corrected P(z) denominator (audit V1) does not change the FALSIFIED verdict. The entropy-rate estimator has WORSE null centering than plug-in KL at high alpha (0.275 vs 0.064 at alpha=1.0). The deterministic SPA construct validation (B-ENTROPY-RATE-DEG) fails at alpha>=0.5 (negative CMI), confirming the bias is estimator-intrinsic, not data-intrinsic.",
+        "source_commit": "ed0f9f346855a74f85c310be042e3a7bb229740c",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "No new evidence accumulated for or against C-MEAS-VALID from this experiment. The experiment tests estimator sensitivity on synthetic SPA, not measurement validity infrastructure. Prior C-MEAS-VALID status from parent experiments is unchanged."
+      },
+      {
         "experiment_id": "EXP-INTEL-35538868377",
         "lane": "intel",
         "created_at": "2026-09-20T21:29:56.699167+00:00",
@@ -2460,14 +2480,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35530591329",
+      "experiment_id": "EXP-PHYSICS-35538866166",
       "lane": "physics",
-      "created_at": "2026-09-20T18:55:21.680285+00:00",
-      "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+      "created_at": "2026-09-20T21:29:52.632864+00:00",
+      "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: ALL three tested alphas (0.1, 0.5, 1.0) have |shuffled-action null_mean| >= 0.1 bits (0.240, 0.200, 0.275 respectively), each 2.0-2.75x above threshold. No alpha achieves both C1 and C3. Audit PASS confirms all recomputed metrics match producer. The bias is intrinsic to Laplace-smoothed histogram estimation: smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has n_a times more cells, and Laplace pseudo-counts add artificial uncertainty proportional to cell count. Corrected P(z) denominator (audit V1) does not change the FALSIFIED verdict. The entropy-rate estimator has WORSE null centering than plug-in KL at high alpha (0.275 vs 0.064 at alpha=1.0). The deterministic SPA construct validation (B-ENTROPY-RATE-DEG) fails at alpha>=0.5 (negative CMI), confirming the bias is estimator-intrinsic, not data-intrinsic.",
+      "source_commit": "ed0f9f346855a74f85c310be042e3a7bb229740c",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
+      "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes the entropy-rate CMI pathway on this SPA class but does not accumulate evidence for or against C-WEB-DYNAMICS. The bias is estimator-specific (Laplace smoothing), not fundamental to discrete CMI estimation (MLE alpha=0 recovers 1.377 bits per parent). C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: entropy-rate CMI via Laplace-smoothed histogram (alpha in {0.1,0.5,1.0}) is rejected for simultaneous C1+C3 on this SPA class."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
