@@ -8,7 +8,7 @@
   "next_question": "Does the freshness guard's bounded discrimination (usable at 0-25% Gaussian overlap, marginal at 50%) transfer to production-like noise distributions (non-Gaussian, heavy-tailed, multimodal) on a real OAuth/OIDC endpoint \u2014 and does increasing n to >=800 at 50% overlap resolve the marginal orthogonality failure (CI upper 0.168 vs delta 0.15) under Bonferroni correction?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-21T15:02:19.978479+00:00",
+  "updated_at": "2026-09-21T16:33:17.562028+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "4e5fc8d05f8a5b948e9f7892bfeb81eb11ec2a667b509962363b5c2af983d4f7",
   "same_failure_count": 1,
