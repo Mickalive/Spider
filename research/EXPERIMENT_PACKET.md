@@ -44,6 +44,8 @@ If a parent handoff exists, DESIGN must preserve its four-way distinction: `esta
 
 When `director_mandate` is present, its target claim and strategic question are binding research direction. DESIGN may refine that question into the smallest rigorous falsifiable experiment, but may not silently drift back to the parent handoff or substitute a nearby objective.
 
+For a governed NEW experiment, `spec.claim_ids` MUST include the Director target claim. Claim membership records evidentiary scope — the claim(s) the experiment can inform — and does not imply validation or promotion. A substrate experiment may therefore target `C-DELTA-REPAIR` while concluding only that a measurement substrate works, fails, is blocked, or is insufficient to update the claim. Scientific ceiling belongs in the design/result/audit/verdict, not in an empty `claim_ids` list.
+
 DESIGN emits only `spec.json` and `prereg.md`.
 
 ### DESIGN -> EXECUTE
@@ -76,7 +78,7 @@ Cross-lane scientific inheritance should occur through accepted Codex evidence o
 
 - `experiment_id`
 - `lane`
-- `claim_ids`
+- `claim_ids` — non-empty claims this experiment bears on; governed NEW work must include the Global Director target claim even when the experiment only validates a substrate or measurement path
 - `question`
 - `hypothesis`
 - `falsifier`
