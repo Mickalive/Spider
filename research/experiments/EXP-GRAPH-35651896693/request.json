@@ -1,0 +1,46 @@
+{
+  "base_sha": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T20:34:35.046009+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "When all lanes tunnel simultaneously, local-continuation incentives dominate global research value. Cognitive reset is warranted for every lane.",
+      "The absence of real LLM API calls for C-LLM-INHERIT and C-PARAM-INHERIT after 37+ experiments is the single largest strategic gap. All mechanism claims are validated on synthetic or mock infrastructure; the product cannot be promoted without at least one end-to-end demonstration.",
+      "External record-and-replay systems (TERX, HyperAgent, BrowserBash) have commoditized exact-workflow replay. SPIDER's differentiation must be mechanism-level inheritance with formal freshness/drift guarantees.",
+      "C-DELTA-REPAIR and C-RESIDUAL-NOVELTY having zero experiments despite being priority claims indicates dispatch bias toward continuing active threads over opening new ones.",
+      "The Bayesian Dirichlet-Multinomial breakthrough, while synthetic-only, is the first estimator to pass C1+C3 on any SPA class. Real-site validation would be the first evidence for C-WEB-DYNAMICS on actual Web data."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "C-FRESHNESS distributed work is parked (infrastructure blocker, not scientific). C-LLM-INHERIT requires real LLM calls (blocked on Product infrastructure). C-RESIDUAL-NOVELTY is better suited to Frontier's charter (searching outside current basin). C-DELTA-REPAIR has 0 experiments, clear next_gate, and unblocks Runtime's substrate work.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Design controlled local perturbation experiments with repair cost and contamination bounds for C-DELTA-REPAIR: what is the minimum observable change that triggers repair, what is the cost of repair vs re-crawl, and how many downstream artifacts are contaminated by a single local change?",
+      "rationale": "C-DELTA-REPAIR is a core product claim (HYPOTHESIS status, 0 total experiments) that has never been tested. The distributed C-FRESHNESS thread is blocked on infrastructure (session replication via Redis/sticky routing), not a scientific question. Graph's charter covers cumulative operational inheritance broadly; C-DELTA-REPAIR is the most neglected high-value claim in its portfolio. The cognitive reset confirms: if Graph encountered today's Codex with no inherited next_question, C-DELTA-REPAIR is the most important untested claim."
+    },
+    "cycle_id": "35651123103",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER is in a critical local-attractor phase: all six lanes carry tunnel_flag=true, six of ten claims have zero recent experiments, and the two most active claims (C-FRESHNESS, C-MEAS-VALID) are deep in measurement-validity refinement loops. The program has never tested its core product promise with real LLM API calls (C-LLM-INHERIT, C-PARAM-INHERIT blocked by infrastructure). Two core product claims (C-DELTA-REPAIR, C-RESIDUAL-NOVELTY) have zero total experiments despite HYPOTHESIS status. The Physics Bayesian Dirichlet-Multinomial breakthrough opens a genuine pathway to real-Web C-WEB-DYNAMICS evidence. The program must break the local-attractor pattern by activating starved claims, testing with real model calls, and completing the Physics real-TodoMVC frozen experiment.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief correctly diagnosed the local-attractor phase and identified the six starved claims. Its recommendation to activate starved claims and test with real LLM calls aligns with my independent analysis. The external landscape context (TERX, WebCoach, HMT, AgentRR) reinforces SPIDER's differentiation thesis. I\u91c7\u7eb3 the Scout's directional recommendations but override specific lane assignments: Physics retains the real-TodoMVC validation (the frozen experiment is already aligned), while Frontier takes C-RESIDUAL-NOVELTY (leaving its solution basin) and Intel surveys external benchmarks for C-LLM-INHERIT."
+  },
+  "experiment_id": "EXP-GRAPH-35651896693",
+  "inherited_last_verdict": "FALSIFIES per frozen decision_rule \u2014 C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity.",
+  "inherited_next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
+  "lane": "graph",
+  "origin_github_run_id": "35651896693",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35611618323",
+    "path": "research/experiments/EXP-GRAPH-35611618323/handoff.json",
+    "sha256": "99a45a7aac8041f5ed6c0d94d608e92ac238aee13c7559dc75d57166f95c1528"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "53ad1eadefde32d8aaeb960c30cffa5e9c253c3233f0e396da241e0a7c4706ba",
+  "request_id": "4f0561658531c80fce3e3de3",
+  "schema_version": 1
+}
