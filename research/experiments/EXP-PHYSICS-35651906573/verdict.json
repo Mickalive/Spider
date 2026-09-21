@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35651906573",
+  "lane": "physics",
+  "decision": "SURVIVES_CURRENT_TEST — frozen decision rule formally passes all conditions (C1 5/5, C3 5/5, C5 5/5, C6 pass). However, audit REVISE and producer_claim_supported=false constrain the claim ceiling: observed log BF is NEGATIVE (-10.4 to -15.6 nats) on all variants, meaning the memory-only model M0 is favored absolutely at K=12. The C3 'detection' is relative-to-null separation (observed exceeds all 1999 shuffled null samples, p=0.0005 floor), not evidence for action-conditioned dynamics beyond memory. Effective independent replications are 2 (not 5) due to isomorphic variant pairs. The estimator implementation is validated (positive control replication-exact), and the real-action-arrangement is statistically distinguishable from shuffled, but the absolute model comparison favors memory. This does NOT bridge the synthetic→real gap for C-WEB-DYNAMICS; it bridges it for estimator validation on real browser data.",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "EXPERIMENTAL",
+      "reason": "Frozen decision rule formally yields SURVIVES_CURRENT_TEST (C1 5/5, C3 5/5, C5 5/5, C6 pass on positive control). However, audit REVISE with producer_claim_supported=false constrains the ceiling: (1) observed log BF is NEGATIVE (-10.4 to -15.6 nats) on all 5 variants at all 3 alpha_prior values, so memory-only M0 is favored absolutely at K=12 — this is NOT evidence for action-conditioned web dynamics; (2) C3 'detection' is separation from an even-more-negative within-session shuffled-action null (null median -24.8 to -39.7 nats), not evidence that actions add predictive information beyond (url_before, H_K2); (3) effective independent replications = 2 isomorphic FSM types ({vanillajs,react,svelte} bit-identical, {vue,angular} bit-identical), not 5; (4) near-deterministic environment (B2=1.0, K2 determinism 85-94%) means I(url_after; action | url_before, H_K2) ≈ 0 by construction; (5) N_NL=80 per variant (6 scripted sessions) vs target N=5000. Claim ceiling bounded to: Bayesian DM K=12 on TodoMVC hash-SPA fragment-aware URL states shows valid null centering and relative separation from shuffled-action null on 2 effectively independent deterministic FSM types. EXCLUDES: action-conditioned dynamics beyond memory, production SPAs, stochastic or history-dependent dynamics, data-matched K, product promotion."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the Bayesian Dirichlet-Multinomial estimator with data-matched K (K≈3-4 matching observed state cardinality) yield positive absolute log BF (action-conditioned M1 favored over memory-only M0) on TodoMVC hash-SPAs, or does the negative BF persist, indicating URL-level state representation is fundamentally insufficient for action-conditioned dynamics on deterministic SPAs?",
+  "reason": "The frozen experiment formally passes its decision rule but the audit correctly identifies that the scientific content is fundamentally different from what the producer's SUPPORTS outcome implies. The observed BF is negative (M0 wins absolutely), the 'detection' is only relative-to-null, effective replications are 2 not 5, and the near-deterministic environment makes the test near-uninformative about beyond-memory dynamics. The estimator is validated on real browser data (positive control replication-exact), and the real action arrangement is distinguishable from shuffled (p=0.0005), but these are methodological findings, not C-WEB-DYNAMICS evidence. The claim remains EXPERIMENTAL with narrowed ceiling. No product promotion: this is a physics measurement, not production code, and the absolute model comparison favors memory. The most informative next step is testing sensitivity to K (data-matched K≈3-4) which would reveal whether the negative BF is an artifact of K=12 over-penalization or a genuine finding that URL-level state is insufficient for action-conditioned dynamics on deterministic SPAs.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35651906573/result.json sha256 e997d3b1da25d34516da8af692cf6c111ae6d10195059da98f1332fad7f25959",
+    "research/experiments/EXP-PHYSICS-35651906573/audit.json (independent recomputation matches producer; REVISE with producer_claim_supported=false)",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_results.json sha256 ec9b1e630e6d8ddb3ff3e7c352fcba5f02f30f81d2a6cd682beb1e2875ba8fee",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_synthetic.json sha256 0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be (positive control N=5000)",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vanillajs.json sha256 3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vue.json sha256 10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9",
+    "research/experiments/EXP-PHYSICS-35578258358/handoff.json sha256 2d4324ca6f6e4e3e5921e1d749f04abdcbc1304f8fbc7878f7e7f04e81a8a324 (parent synthetic SURVIVES_CURRENT_TEST)",
+    "codex/claim_state.json C-WEB-DYNAMICS events (remains HYPOTHESIS/EXPERIMENTAL across 30+ experiments)"
+  ]
+}

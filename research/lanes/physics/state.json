@@ -1,17 +1,17 @@
 {
   "lane": "physics",
   "human_paused": false,
-  "active_experiment_id": "EXP-PHYSICS-35651906573",
-  "last_experiment_id": "EXP-PHYSICS-35578258358",
-  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PHYSICS-35651906573",
+  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 frozen decision rule formally passes all conditions (C1 5/5, C3 5/5, C5 5/5, C6 pass). However, audit REVISE and producer_claim_supported=false constrain the claim ceiling: observed log BF is NEGATIVE (-10.4 to -15.6 nats) on all variants, meaning the memory-only model M0 is favored absolutely at K=12. The C3 'detection' is relative-to-null separation (observed exceeds all 1999 shuffled null samples, p=0.0005 floor), not evidence for action-conditioned dynamics beyond memory. Effective independent replications are 2 (not 5) due to isomorphic variant pairs. The estimator implementation is validated (positive control replication-exact), and the real-action-arrangement is statistically distinguishable from shuffled, but the absolute model comparison favors memory. This does NOT bridge the synthetic\u2192real gap for C-WEB-DYNAMICS; it bridges it for estimator validation on real browser data.",
   "continue_immediately": false,
-  "next_question": "Does the Bayesian Dirichlet-Multinomial model comparison maintain valid null centering (C1: null median < 0) and detection sensitivity (C3: p < 0.001) on real TodoMVC hash-SPA transitions at URL-level, where state representation is fragment-aware (not synthetic state_id) and transitions are genuine browser interactions?",
+  "next_question": "Does the Bayesian Dirichlet-Multinomial estimator with data-matched K (K\u22483-4 matching observed state cardinality) yield positive absolute log BF (action-conditioned M1 favored over memory-only M0) on TodoMVC hash-SPAs, or does the negative BF persist, indicating URL-level state representation is fundamentally insufficient for action-conditioned dynamics on deterministic SPAs?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-21T20:34:36.976182+00:00",
-  "last_failure_retryable": true,
-  "last_handoff_sha256": "2d4324ca6f6e4e3e5921e1d749f04abdcbc1304f8fbc7878f7e7f04e81a8a324",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
-  "last_failure_control_revision": "27ced0ea0b8f174d8ece90da704a7d4340189496f2541a8266666a8c8cda18db"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-21T22:09:59.293238+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "655f21a59dfe97c18eb5f66f5c0aa5367e473c21332bb84ac27a2a69c40fe792",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
