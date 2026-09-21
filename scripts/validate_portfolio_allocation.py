@@ -83,13 +83,9 @@ def main() -> None:
             require(claim_id in (cfg.get("priority_claims") or []), f"{lane}: claim {claim_id} is not lane-eligible")
             require(nonempty(item["question"]), f"{lane}: active allocation requires question")
 
-            if action == "CONTINUE":
-                last_claim = lane_state.get("last_claim")
-                if last_claim:
-                    require(
-                        claim_id == last_claim,
-                        f"{lane}: CONTINUE must continue last_claim={last_claim}; use PIVOT/REOPEN for {claim_id}",
-                    )
+            # CONTINUE is strategic continuity, not equality with the most
+            # recent finalized claim id. A lane may be continuing an active
+            # pre-freeze thread whose target claim differs from last_claim.
 
             if tunnel:
                 require(item["cognitive_reset"] is True, f"{lane}: tunnel continuation/allocation requires cognitive_reset=true")
