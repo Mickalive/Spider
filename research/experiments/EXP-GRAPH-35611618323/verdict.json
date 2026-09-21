@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35611618323",
+  "lane": "graph",
+  "decision": "FALSIFIES per frozen decision_rule — C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity.",
+  "claim_updates": [
+    {
+      "claim_id": "C-FRESHNESS",
+      "status": "EXPERIMENTAL",
+      "reason": "Orthogonality correlation strongly confirmed on distributed infrastructure (stratified r=-0.038, CI upper 0.029 < delta=0.15, TOST p=2.0e-08, n_non304=844, audit PASS on all correlation metrics). However, frozen C1-C7 gate fails on C1 only (TN=0.667 < 0.85): session-dependent endpoint /api/session/status has TN=0.0 because per-node SQLite session store does not replicate across round-robin nodes. TP=1.0 confirms token validation works with HS256. The correlation is sound but the detection fidelity gate fails for session endpoints; the claim remains EXPERIMENTAL until C1 passes on distributed infrastructure with session affinity or shared session store. Do not advance to VALIDATED or PRODUCT_CORE."
+    }
+  ],
+  "product_action": "NO_PRODUCT_ACTION — orthogonality correlation confirmed (C3/C4 pass strongly) but C1 gate failure means parallel-channel architecture is NOT fully justified for multi-node deployment under stateless round-robin without session affinity. Product may proceed with sticky session affinity or externalized session store (Redis) to resolve session-dependent endpoint TN failure. The correlation evidence (r=-0.038, CI upper 0.029) supports that behavioral-structural channels are orthogonal under distribution; the C1 failure is architectural (session state), not correlational.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
+  "reason": "The frozen decision_rule triggers REJECTED (C1 fails), but the Director bounds the scientific interpretation: the primary orthogonality metric (C3/C4) passes decisively on distributed infrastructure (r=-0.038, CI upper 0.029, TOST p=2.0e-08), the negative control passes (C7: |r|=0.912), and all other conditions pass. The C1 failure is attributable to a single architectural limitation — per-node session stores without replication under round-robin routing — not to behavioral-structural correlation. The HS256 fix successfully resolved the RSA key sharing bug (tokens valid across nodes, TP=1.0). The parent's MEASUREMENT_INVALID due to RSA bugs is now resolved; the data is valid but the C1 gate fails. The claim ceiling is bounded to: orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent caches and independent session stores; C1 detection fidelity fails for session-dependent endpoints under round-robin without session affinity. No product promotion warranted. B-LOCAL-ONLY reconfirmed (r=0.058, CI upper 0.125). B-CONCURRENT confirmed (r=-0.032).",
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35611618323/result.json — metrics.b_distributed_stratified_r=-0.0381, ci_upper=0.0294, c4_p_upper=2.02e-08, c1_mean_tn=0.6667",
+    "research/experiments/EXP-GRAPH-35611618323/result.json — controls.C1_behavioral_tp.tn_per_endpoint={'/api/session/status': 0.0, others: 1.0}",
+    "research/experiments/EXP-GRAPH-35611618323/audit.json — V-C1-TN-RECOMPUTED confirms TN=0.667 from session non-replication; V-C3-C4-ORTHOGONALITY-VERIFIED confirms r=-0.038",
+    "research/experiments/EXP-GRAPH-35611618323/audit.json — claim_ceiling: orthogonality correlation confirmed, C1 gate fails for session endpoints",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/experiment_data.json — sha256 dfc72b50 (recomputed per-endpoint r, TN, std)",
+    "research/experiments/EXP-GRAPH-35611618323/raw_evidence/metrics.json — sha256 ec0802c9 (recomputed stratified pooled r, CI, TOST)",
+    "research/experiments/EXP-GRAPH-35611618323/run_experiment_distributed.py — HS256 shared TESTBED_SECRET, NumpyEncoder, session store per-node SQLite",
+    "research/experiments/EXP-GRAPH-35572179326/handoff.json — prior carry_forward: LOCAL CONFIRMED r=0.041, distributed SUPPORTED r=-0.0585, RSA bug diagnosed"
+  ]
+}
