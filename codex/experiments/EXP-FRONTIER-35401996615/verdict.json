@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35401996615",
+  "lane": "frontier",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "No valid evidence accumulated for or against per-type CV stability at larger sample sizes. Frozen decision_rule triggers MEASUREMENT_INVALID on three independent clauses: (1) pipeline validation at 250/type fails 5% tolerance for BOTH measures (KDE CV max 0.3496 vs required 0.546-0.604, 37.7% below; kNN CV max 0.0578 vs required 0.717-0.793, 92.3% below per audit V1); (2) positive control fails for kNN at ALL sample sizes (p>0.28 at n=250/500/1000) and for KDE at 250 (p=0.074) and 500 (p=0.816 inverted) per audit V2; (3) null control never achieves 8/8 for KDE at any n (6-7/8) per audit V3. The DGP implementation diverges from parent EXP-FRONTIER-34913743596 (divergence magnitudes ~10x smaller, kNN returns near-constant ~1.3 bits across all lambda/type/n, audit V4/V5). Apparent CV passes (all max 0.27-0.35 KDE, 0.056-0.062 kNN) are computed on a different measurand (raw KL/MI without BC permutation subtraction, broken kNN returning action entropy) and are not evidence of sample-size resolution. C-WEB-DYNAMICS remains HYPOTHESIS with unchanged parent ceiling."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Can the parent DGP and estimator calibration be recovered from EXP-FRONTIER-34913743596 (KDE CV 0.5745, kNN CV 0.7550 at 250/type) such that a spec-compliant re-run achieves pipeline validation within 5% at 250/type — enabling a valid sample-size scaling test at 500-1000/type?",
+  "reason": "MEASUREMENT_INVALID is triggered by three independent frozen decision_rule clauses: pipeline validation failure (audit V1), positive control failure for kNN at all n and KDE at 250/500 (audit V2), and null control failure for KDE at all n (audit V3). The root cause is DGP/estimator implementation mismatch: current run_execute_v3.py produces divergence magnitudes ~10x smaller than parent, kNN returns near-constant 1.3 bits (action entropy, not conditional MI), and KDE positive control is inverted at n=500. The frozen spec requires pipeline validation within 5% of parent baselines before sample-size scaling can be tested; this prerequisite was not met. No inference about per-type CV stability at 500-1000/type is possible from this packet.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35401996615/result.json:status MEASUREMENT_INVALID, metrics.cv_check, metrics.positive_control, metrics.null_control, metrics.pipeline_validation",
+    "research/experiments/EXP-FRONTIER-35401996615/audit.json:status MEASUREMENT_INVALID, validity_findings V1-V7, baseline_findings B1-B4, required_fixes, claim_ceiling",
+    "research/experiments/EXP-FRONTIER-35401996615/report.md:MEASUREMENT_INVALID Triggers, Root Cause Analysis",
+    "research/experiments/EXP-FRONTIER-35401996615/spec.json:decision_rule, positive_control, null_control, measurement_validity",
+    "research/experiments/EXP-FRONTIER-35401996615/prereg.md:8.1 pipeline validation, 8.2 positive control, 10.3 MEASUREMENT_INVALID",
+    "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_max_cv 0.5745, metrics.knn_per_type.lambda1_max_cv 0.7550, controls (both PASS)",
+    "research/experiments/EXP-FRONTIER-34913743596/audit.json:status PASS, claim_ceiling",
+    "research/experiments/EXP-FRONTIER-35166507552/handoff.json:carry_forward, dependencies, next_question"
+  ]
+}

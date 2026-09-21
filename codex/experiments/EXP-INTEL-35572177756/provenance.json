@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35572177756",
+  "lane": "intel",
+  "created_at": "2026-09-21T14:40:23.978506+00:00",
+  "github_run_id": "35572177756",
+  "base_sha": "8d743a160ec634017acf7f999622342701fc110f",
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "docker_version": "28.0.4",
+    "playwright_version": "1.63.0",
+    "browser": "chromium-headless-shell-1243",
+    "seed": 99,
+    "viewport": {"width": 1280, "height": 720}
+  },
+  "datasets": [
+    {
+      "path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json",
+      "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050",
+      "role": "parent truncated-first-20 raw data (reference only)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/raw_evidence/exp355_fulldom_raw_results.json",
+      "sha256": "e81f4c4ef3417ef9fd58be7e04400a11e1c64c0819896ebb70fac7a57a9c0d7c",
+      "role": "full-DOM raw data (new collection)"
+    }
+  ],
+  "code": [
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/collect_fulldom.py",
+      "sha256": "f8e8631528455357c3a479a9a4cd064b146d9248b92af113a68d2188a923cd1b",
+      "role": "collection script (modified from EXP-INTEL-34718481334/measure_fullpage_yield.py)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/analyze_fulldom.py",
+      "sha256": "ed81d9ff6a3adaf96b4209bf5d8893781f8cfaf4c6aad44d3aca57d888ccd708",
+      "role": "analysis script (based on EXP-INTEL-35445596324/analyze.py)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35462974425/analyze.py",
+      "sha256": "79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459",
+      "role": "frozen analysis script (reference for decision rule C1-C7)"
+    }
+  ],
+  "docker": {
+    "image": "am1n3e/webarena-verified-shopping:latest",
+    "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "container_name": "webarena-magento",
+    "port": 8080,
+    "health_check": "HTTP 200"
+  },
+  "tasks": [
+    {"task_id": "listing_clothing-shoes-jewelry", "url": "http://localhost:8080/clothing-shoes-jewelry.html", "page_type": "product_listing", "locatable_elements": 82},
+    {"task_id": "listing_beauty-personal-care", "url": "http://localhost:8080/beauty-personal-care.html", "page_type": "product_listing", "locatable_elements": 82},
+    {"task_id": "listing_electronics", "url": "http://localhost:8080/electronics.html", "page_type": "product_listing", "locatable_elements": 82},
+    {"task_id": "detail_camera", "url": "http://localhost:8080/zosi-h-265-poe-home-security-camera-system-outdoor-indoor-8-channel-5mp-poe-nvr-recorder-4pcs-wired-2mp-1080p-surveillance-bullet-poe-ip-cameras-no-hard-drive-renewed.html", "page_type": "detail", "locatable_elements": 32},
+    {"task_id": "detail_vr_bag", "url": "http://localhost:8080/navitech-black-hard-carry-bag-case-cover-with-shoulder-strap-compatible-with-the-vr-virtual-reality-3d-headsets-including-the-crypto-vr-150-virtual-reality-headset-3d-glasses.html", "page_type": "detail", "locatable_elements": 32},
+    {"task_id": "detail_pet_camera", "url": "http://localhost:8080/indoor-pet-camera-hd-1080p-no-wifi-security-camera-with-night-vision-no-built-in-baterry.html", "page_type": "detail", "locatable_elements": 32},
+    {"task_id": "cart_1", "url": "http://localhost:8080/checkout/cart/", "page_type": "cart", "locatable_elements": 21}
+  ],
+  "analysis_parameters": {
+    "recipe_seeds": 10,
+    "recipe_iterations": 1000,
+    "bootstrap_resamples": 1000,
+    "definitions": ["DEF-FULL-MAP", "DEF-FORM-ONLY"],
+    "features": ["tag_entropy", "form_fraction", "total_area"],
+    "recipes": ["canonical", "pertask"]
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/raw_evidence/exp355_fulldom_raw_results.json",
+      "sha256": "e81f4c4ef3417ef9fd58be7e04400a11e1c64c0819896ebb70fac7a57a9c0d7c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/analysis_output.json",
+      "sha256": "5f1ad2ffc958becfa0cb627084bc03404829d5f5583b4339caf35cfb1c7b72cc",
+      "role": "derived"
+    }
+  ],
+  "reproducibility": "Full reproduction requires Docker image am1n3e/webarena-verified-shopping:latest, Playwright with chromium, and the two Python scripts. The analysis is deterministic given the raw data and fixed random seeds.",
+  "parent_experiment": {
+    "experiment_id": "EXP-INTEL-35462974425",
+    "frozen_spec": "research/experiments/EXP-INTEL-35462974425/spec.json",
+    "frozen_prereg": "research/experiments/EXP-INTEL-35462974425/prereg.md"
+  }
+}
