@@ -18,12 +18,12 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `SPIDER_CODEX.md`;
 - `codex/claim_state.json`;
 - `codex/index.json`;
 - the exact machine snapshot path supplied by the workflow.
 
-Open only the canonical packets needed to understand important live uncertainties. Do not disappear into one lane's local detail.
+Do NOT ingest `SPIDER_CODEX.md` wholesale. It is a human-facing index and grows with every experiment.
+Use the machine snapshot plus `codex/claim_state.json` and `codex/index.json` as the complete program map, then open only the canonical packets needed to resolve an important ambiguity. Do not disappear into one lane's local detail.
 
 ## Mission
 
