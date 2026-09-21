@@ -12,6 +12,8 @@ Before any NEW experiment is allocated, a Global Research Director considers the
 
 Already-frozen experiments are completed under their frozen design. Operational retries do not require a new research-direction decision.
 
+The Director is also responsible for research liveness. A lane that has stopped, failed before freeze, exhausted its local thread, or has no active experiment is not silently left dormant. The Director must explicitly decide whether to REOPEN it on the most promising available problem, PARK it for a stated dependency/reason, or TERMINATE a bounded thread.
+
 ## Director mandate
 
 The Director reasons across:
@@ -77,7 +79,11 @@ Frontier: deliberately search outside the current solution basin for orthogonal 
 
 ## Durable mandate
 
-Every NEW experiment request stores the Director mandate that authorized it:
+Every NEW experiment request stores the Director mandate that authorized it.
+
+For liveness, the Director snapshot identifies whether each lane is running, has an unfinished experiment, is stalled before freeze, or is idle. The Director must not leave an idle/stalled lane accidental: PARK/TERMINATE must be explicit; otherwise CONTINUE/PIVOT/REOPEN causes the factory to dispatch or redispatch work.
+
+The mandate records:
 
 - cycle id;
 - lane;
