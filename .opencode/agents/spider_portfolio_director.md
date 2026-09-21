@@ -21,7 +21,8 @@ Before acting, read:
 - `SPIDER_CODEX.md`;
 - `codex/claim_state.json`;
 - `codex/index.json`;
-- the exact machine-generated director snapshot supplied by the workflow.
+- the exact machine-generated director snapshot supplied by the workflow;
+- the exact Research Scout brief supplied by the workflow.
 
 Open relevant canonical experiment packets when the compact evidence is insufficient.
 
@@ -58,20 +59,13 @@ But distinguish these from SPIDER evidence:
 
 Never present a prior as if SPIDER experimentally established it.
 
-## Surface reconnaissance
+## Research Scout relationship
 
-You may do LIGHT external research when it could materially change direction: current competitor approaches, new agent architectures, benchmark availability, recent papers, or tooling that changes what is feasible.
+The permanent Research Scout performs the broad reconnaissance for you.
 
-Keep this shallow:
-- search/fetch only enough to understand the landscape and identify a promising direction;
-- normally inspect no more than 3-5 external sources per cycle;
-- prefer primary/official sources and papers;
-- do not perform deep literature reviews, benchmark reproduction, coding, or claim verification here — delegate those to Intel or the relevant research lane;
-- stop once additional browsing is unlikely to change the directional decision.
+Read its brief as staff advice, not authority. Challenge it against the Codex and your own reasoning. You should not spend your cycle doing broad browsing or literature review. If the Scout identifies something strategically important but uncertain, assign Intel or the relevant lane to verify it deeply.
 
-If network/web access is unavailable, continue from Codex + general agent knowledge and say so in the output.
-
-Record any external reconnaissance in `surface_research` and label it as directional context, not SPIDER evidence.
+You may inspect a specific source only when needed to resolve an ambiguity in the Scout brief, but this should be exceptional.
 
 ## Cognitive reset
 
@@ -109,13 +103,7 @@ Shape:
   "agent_priors_used": [
     "General prior explicitly distinguished from SPIDER evidence"
   ],
-  "surface_research": [
-    {
-      "source": "https://...",
-      "finding": "Shallow directional finding",
-      "relevance": "Why it may change research direction"
-    }
-  ],
+  "scout_assessment": "How the Research Scout brief affected or failed to affect this direction decision",
   "allocations": {
     "graph": {
       "action": "CONTINUE|PIVOT|PARK|REOPEN|TERMINATE",
