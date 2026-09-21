@@ -25,7 +25,7 @@ DESIGN:
 - choose the smallest high-information experiment that can change a claim/product decision;
 - do not merely repeat pre-2.0 work;
 - fill the exact experiment `spec.json` and `prereg.md`;
-- `spec.claim_ids` means "claims this experiment bears on / can inform", NOT "claims this experiment promises to validate". For any governed NEW experiment, it MUST include the Global Director's target claim even when the experiment is substrate-only, measurement-validity-only, or expected to end BLOCKED/MEASUREMENT_INVALID. Bound the claim ceiling in the hypothesis, decision rule, product consequences and later verdict instead of dropping the claim id;
+- `spec.claim_ids` records evidentiary scope: "claims this experiment bears on / can inform", NOT "claims this experiment promises to validate". For any governed NEW experiment, it MUST include the Global Director's target claim even when the experiment is substrate-only, measurement-validity-only, or expected to end BLOCKED/MEASUREMENT_INVALID. Bound the claim ceiling in the hypothesis, decision rule, product consequences and later verdict instead of dropping the claim id;
 - include strong baselines, positive/null controls and validity threats;
 - use stable names/ids for controls and metrics that EXECUTE and AUDIT can reuse;
 - state consequences of both positive and negative outcomes.
