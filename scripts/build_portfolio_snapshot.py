@@ -156,11 +156,21 @@ def main() -> None:
 
         active_id = state.get("active_experiment_id")
         active_stage = "IDLE"
-        active_has_portfolio_mandate = False
+        active_has_director_mandate = False
+        active_director_mandate = None
         if active_id:
             base = f"research/experiments/{active_id}"
             req = git_show_json(ref, f"{base}/request.json")
-            active_has_portfolio_mandate = isinstance(req.get("portfolio_allocation"), dict)
+            mandate = req.get("director_mandate")
+            active_has_director_mandate = isinstance(mandate, dict)
+            if active_has_director_mandate:
+                allocation = mandate.get("allocation") or {}
+                active_director_mandate = {
+                    "cycle_id": mandate.get("cycle_id"),
+                    "action": allocation.get("action"),
+                    "claim_id": allocation.get("claim_id"),
+                    "question": allocation.get("question"),
+                }
             if git_file_exists(ref, f"{base}/verdict.json"):
                 active_stage = "FINALIZED"
             elif git_file_exists(ref, f"{base}/audit.json"):
@@ -194,7 +204,8 @@ def main() -> None:
             "priority_claims": priority,
             "active_experiment_id": active_id,
             "active_stage": active_stage,
-            "active_has_portfolio_mandate": active_has_portfolio_mandate,
+            "active_has_director_mandate": active_has_director_mandate,
+            "active_director_mandate": active_director_mandate,
             "last_failure_retryable": state.get("last_failure_retryable"),
             "same_failure_count": state.get("same_failure_count", 0),
             "last_experiment_id": state.get("last_experiment_id"),
