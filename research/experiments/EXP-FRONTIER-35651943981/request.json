@@ -1,0 +1,47 @@
+{
+  "base_sha": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T20:34:58.993383+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "When all lanes tunnel simultaneously, local-continuation incentives dominate global research value. Cognitive reset is warranted for every lane.",
+      "The absence of real LLM API calls for C-LLM-INHERIT and C-PARAM-INHERIT after 37+ experiments is the single largest strategic gap. All mechanism claims are validated on synthetic or mock infrastructure; the product cannot be promoted without at least one end-to-end demonstration.",
+      "External record-and-replay systems (TERX, HyperAgent, BrowserBash) have commoditized exact-workflow replay. SPIDER's differentiation must be mechanism-level inheritance with formal freshness/drift guarantees.",
+      "C-DELTA-REPAIR and C-RESIDUAL-NOVELTY having zero experiments despite being priority claims indicates dispatch bias toward continuing active threads over opening new ones.",
+      "The Bayesian Dirichlet-Multinomial breakthrough, while synthetic-only, is the first estimator to pass C1+C3 on any SPA class. Real-site validation would be the first evidence for C-WEB-DYNAMICS on actual Web data."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": true,
+      "comparative_reasoning": "C-WEB-DYNAMICS estimator pipeline recovery (parent handoff) has failed 6+ consecutive times on CV stability. The Bayesian Dirichlet-Multinomial breakthrough on Physics lane opens a different pathway for C-WEB-DYNAMICS that doesn't require Frontier's estimator work. C-SEMANTIC-RESOLVE is lower priority (depends on real-Web state representation). C-CROSSSITE requires real-Web evidence first. C-RESIDUAL-NOVELTY is the highest-value untested claim in Frontier's portfolio.",
+      "dependencies": [
+        "product",
+        "graph"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Design a synthetic testbed with controlled novelty fractions (0%, 25%, 50%, 75%, 100% new parameters/actions) to test whether later-agent cost tracks residual novelty rather than full task length, measuring end-to-end cost across cold, replay, retrieval, and SPIDER inheritance conditions.",
+      "rationale": "C-RESIDUAL-NOVELTY is a core product claim (HYPOTHESIS status, 0 total experiments) in Frontier's priority claims. The claim that later-agent cost tracks residual novelty is the economic foundation of SPIDER's value proposition. Frontier's charter is to search outside the current solution basin; the C-WEB-DYNAMICS estimator pipeline (6+ consecutive MEASUREMENT_INVALID/FAIL) is a local attractor. Designing a novelty-fraction testbed is a genuinely new direction that could validate or falsify the core economic thesis."
+    },
+    "cycle_id": "35651123103",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER is in a critical local-attractor phase: all six lanes carry tunnel_flag=true, six of ten claims have zero recent experiments, and the two most active claims (C-FRESHNESS, C-MEAS-VALID) are deep in measurement-validity refinement loops. The program has never tested its core product promise with real LLM API calls (C-LLM-INHERIT, C-PARAM-INHERIT blocked by infrastructure). Two core product claims (C-DELTA-REPAIR, C-RESIDUAL-NOVELTY) have zero total experiments despite HYPOTHESIS status. The Physics Bayesian Dirichlet-Multinomial breakthrough opens a genuine pathway to real-Web C-WEB-DYNAMICS evidence. The program must break the local-attractor pattern by activating starved claims, testing with real model calls, and completing the Physics real-TodoMVC frozen experiment.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief correctly diagnosed the local-attractor phase and identified the six starved claims. Its recommendation to activate starved claims and test with real LLM calls aligns with my independent analysis. The external landscape context (TERX, WebCoach, HMT, AgentRR) reinforces SPIDER's differentiation thesis. I\u91c7\u7eb3 the Scout's directional recommendations but override specific lane assignments: Physics retains the real-TodoMVC validation (the frozen experiment is already aligned), while Frontier takes C-RESIDUAL-NOVELTY (leaving its solution basin) and Intel surveys external benchmarks for C-LLM-INHERIT."
+  },
+  "experiment_id": "EXP-FRONTIER-35651943981",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Can the parent DGP and estimator calibration be recovered from EXP-FRONTIER-34913743596 (KDE CV 0.5745, kNN CV 0.7550 at 250/type) such that a spec-compliant re-run achieves pipeline validation within 5% at 250/type \u2014 enabling a valid sample-size scaling test at 500-1000/type?",
+  "lane": "frontier",
+  "origin_github_run_id": "35651943981",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35401996615",
+    "path": "research/experiments/EXP-FRONTIER-35401996615/handoff.json",
+    "sha256": "d2393ea11d4a62073594068c2c4d9fa3bc54666dcb13ac1a1eff1e2af9934f75"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "f1eef65836d63e81fb12ff4e9e2f4bd399bf105823532f78d2ec20dc60018e47",
+  "request_id": "5c0a763e9d6a30a9e07c93c7",
+  "schema_version": 1
+}
