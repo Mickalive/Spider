@@ -28,7 +28,9 @@ The Director reasons across:
 
 General knowledge about agents is a PRIOR, not SPIDER evidence. The Director must distinguish it from observations established by the Codex.
 
-The Director may also perform shallow external reconnaissance when it could change direction: recent agent architectures, competitor baselines, benchmarks, tooling or papers. This is deliberately reconnaissance, not a seventh research lane. It should normally stop after a few primary/official sources, record what was consulted, and delegate any deep verification or reproduction to Intel or the appropriate lane. External findings are directional context until independently tested or incorporated into canonical evidence.
+A permanent Research Scout supports the Director with broad reconnaissance. The Scout continuously scans the Codex, lane trajectories, external agent approaches, benchmarks, papers and tooling at shallow depth, then produces a staff brief. It does not decide the agenda and its external findings are not SPIDER evidence.
+
+The Director should consume this brief rather than spend its own cycle on broad reconnaissance. Deep verification, reproduction or implementation is delegated to Intel or the appropriate research lane.
 
 The recurring question is:
 
@@ -84,6 +86,8 @@ Frontier: deliberately search outside the current solution basin for orthogonal 
 Every NEW experiment request stores the Director mandate that authorized it.
 
 For liveness, the Director snapshot identifies whether each lane is running, has an unfinished experiment, is stalled before freeze, or is idle. The Director must not leave an idle/stalled lane accidental: PARK/TERMINATE must be explicit; otherwise CONTINUE/PIVOT/REOPEN causes the factory to dispatch or redispatch work.
+
+The Director also records how the Scout brief affected the decision.
 
 The mandate records:
 
