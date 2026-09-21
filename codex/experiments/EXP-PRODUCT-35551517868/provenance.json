@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35551517868",
+  "lane": "product",
+  "github_run_id": "35551517868",
+  "base_commit": "a43cbcd721c41843d37504c45b5964d3cfc19fd7",
+  "base_commit_message": "R2 product: execution base EXP-PRODUCT-35551517868",
+  "created_at": "2026-09-21T01:56:45.000000+00:00",
+  "completed_at": "2026-09-21T01:57:24.000000+00:00",
+  "environment": {
+    "platform": "linux",
+    "python": "3.12",
+    "dependencies": {
+      "flask": "3.1.3",
+      "pyjwt": "2.14.0",
+      "cryptography": "50.0.1",
+      "scipy": "1.18.1",
+      "numpy": "2.5.3",
+      "werkzeug": "3.1.8"
+    },
+    "server": "Flask 3.1.3 development server on 127.0.0.1:18951",
+    "database": "SQLite WAL-mode (Python sqlite3 standard library)",
+    "jwt": "PyJWT 2.14.0 HS256 + RS256 (RSA 2048-bit generated at startup)"
+  },
+  "datasets_fixtures": {
+    "mock_server": "Stochastic Flask app with token_refresh endpoints, 4 noise types, overlap-controlled noise distribution, TTL cache (0.5s), jitter (10-100ms)",
+    "noise_types": ["pagination_metadata", "variable_length_data", "error_format_variation", "cdn_cache_headers"],
+    "overlap_design": "Noise distribution shifted upward: 0%=[0.05,0.14], 25%=[0.11,0.20], 50%=[0.14,0.23], 75%=[0.17,0.26], 100%=[0.20,0.29]; failure stays [0.20,0.39]",
+    "p_refresh_success": 0.7,
+    "seed": 42
+  },
+  "code_paths": {
+    "mock_server": "research/experiments/EXP-PRODUCT-35551517868/mock_server.py",
+    "run_experiment": "research/experiments/EXP-PRODUCT-35551517868/run_experiment.py",
+    "parent_mock_server": "research/experiments/EXP-PRODUCT-35538865048/mock_server.py",
+    "parent_run_experiment": "research/experiments/EXP-PRODUCT-35538865048/run_experiment.py"
+  },
+  "artifacts": {
+    "raw_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/raw_evidence/experiment_data.json",
+      "sha256": "05f9b0d8fa68db4952e5e3dc8fad89faad30047f9de28e6611df0c53c84d9c80",
+      "role": "raw"
+    },
+    "mock_server": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/mock_server.py",
+      "sha256": "11ef2dd7d8dda1b0d095e2de35bad7b55173b353a3b0dacc2526b971a22e1173",
+      "role": "code"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/run_experiment.py",
+      "sha256": "a4bde151e17a7b2f01153d147748e6b75f8c0ba82649a96dc45a74e016fb6187",
+      "role": "code"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/result.json",
+      "sha256": "ca9a0a89297c01a0fb358fbc5d0855890dcdc6d518a128766973d9d77ee94963",
+      "role": "derived"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    "result_draft": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/result_draft.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  },
+  "frozen_inputs": {
+    "request_json": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/request.json",
+      "sha256": "5f6d81fad5c9f453bfb5f92762d6997dd79b3d025da0f5dae04a81a4d1a43036"
+    },
+    "spec_json": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/spec.json",
+      "sha256": "13002375d16b9b0434d9983a164003658f56b9063c187d3f64a69fd37f71fb4d"
+    },
+    "prereg_md": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/prereg.md",
+      "sha256": "003655f70dced87ed47cf2db1f00607bc35f7ddfbf283fd2fb9b9ce0c1106387"
+    },
+    "freeze_json": {
+      "path": "research/experiments/EXP-PRODUCT-35551517868/freeze.json",
+      "sha256": null
+    }
+  },
+  "execution_commands": [
+    "cd research/experiments/EXP-PRODUCT-35551517868 && python run_experiment.py",
+    "Server: Flask development server on 127.0.0.1:18951, threaded=False",
+    "Total HTTP requests: ~12000 (5 conditions x (480 paired + 240 calibration + 240 noise + 40 discrimination) x ~2 endpoints)"
+  ],
+  "execution_duration_seconds": 39.0,
+  "total_samples": 2400,
+  "samples_per_overlap_condition": 480
+}

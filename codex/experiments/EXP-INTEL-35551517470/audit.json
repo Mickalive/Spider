@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35551517470",
+  "lane": "intel",
+  "status": "FAIL",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Add explicit information-gain criterion C4 to frozen decision_rule for any future bounded-function extrapolation: require |F_model(50) - F_constant_null| > delta (e.g., 5pp) or reduction in extrapolation uncertainty vs null. Without C4, the logistic R2=1.0 PASS (spec.json C1/C3) is purely in-sample interpolation of 4 points with 3 parameters and provides zero extrapolation power beyond F(n)=0.5654 for all n>=15. The SURVIVES verdict is scientifically vacuous as written.",
+    "Do not cite C1/C3 PASS (R2=1.0, max residual 3.78e-08pp) as evidence of validated extrapolation. With 4 training points and 3 free parameters (logistic L/k/n0, Hill L/h/K), perfect interpolation is structurally guaranteed when data is step-like (0,0,0.4996,0.5654). Report AIC/BIC but also report leave-one-out or extrapolation hold-out diagnostics; with n=20 as the sole non-zero asymptote informant, L is entirely determined by one observation.",
+    "Reconcile result.json outcome vs report.md verdict inconsistency. Frozen rule gives C1 PASS + C2 PASS + C3 PASS => SURVIVES (spec.json decision_rule). Producer result.json files outcome=MIXED while report.md and result.json observations state 'Verdict: SURVIVES' and producer validity_notes call SURVIVES 'INFORMATIONALLY TRIVIAL.' Competing verbiage must be resolved in handoff/verdict: file SURVIVES per frozen gates but bound ceiling to informational equivalence to constant null, or file MIXED with explicit deviation rationale. Do not leave both.",
+    "Treat Hill h=20.0 at upper bound as degenerate/boundary hit, not as validated fit. Bounds were [0.1,20] for h and [0,1] for L; Hill converges at h=20.0 exactly at the bound with R2=0.999994 and F50=0.565659 (0.03pp from null). This reproduces the step via infinite steepness, not a learnable saturation mechanism. Flag bound-hits as F4-degenerate per spec falsifier clause 4.",
+    "For product decisions, continue Docker-based direct full-DOM measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) as sole blocking path. Do not use logistic F50=0.5654 <0.80 as evidence for structural plateau below 80%; this prediction is informationally identical to the constant null F(n)=0.5654 and inherits the single-observation (n=20) uncertainty. Product lane must continue to use non-recipe density pending Docker data."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_RECOMPUTED_METRICS_MATCH_PRODUCER_EXACTLY",
+      "severity": "info",
+      "category": "recomputation",
+      "finding": "All material metrics recomputed from producer params and raw training data n=[5,10,15,20] F=[0.0,0.0,0.4996,0.5654]. Logistic L=0.5653999996 k=10.75038 n0=14.81143 gives predictions [8.80e-47, 1.94e-23, 0.4996, 0.5654] residuals pp [-8.8e-45, -1.94e-21, 5.68e-09, 3.78e-08] ss_res=1.46e-19 R2=1.0 exactly, max residual 3.78e-08pp, F50=0.5653999996 F82=0.5653999996. Hill L=0.565659 h=20 K=13.55711 gives R2=0.999994234 max resid 0.128pp F50=0.565659 F82=0.565659. Richards R2=-0.000224 max resid 29.92pp F50=0.2661. AIC logistic -161.66 Hill -41.46 Richards -72.75 BIC -163.50/-43.30/-75.21 match producer to 1e-9. Constant null R2=-1.25284 max resid 56.54pp correct. Parent baseline R2=0.8797 max resid 12.39pp reproduced.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics best_R2 best_max_residual_pp best_F50 best_F82 best_params",
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics.logistic hill richards",
+        "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json:fits",
+        "research/experiments/EXP-INTEL-35551517470/raw_evidence/saturating_fit.py:compute_metrics",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json per_n tag_entropy x DEF-FULL-MAP canonical ranking_agreement 0.0/0.0/0.4996/0.5654",
+        "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a recomputed pos 0/0/4996/5654"
+      ],
+      "producer_interpretation": "Producer reports same R2/F50/residual values and correctly labels logistic as perfect interpolation (result.json observations, report.md section 2).",
+      "audit_finding": "Recomputation confirms producer arithmetic is exact. No computational error. Disagreement is interpretive, not numerical."
+    },
+    {
+      "id": "VF2_OVERFITTING_STRUCTURALLY_GUARANTEED_4PTS_3PARAMS",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "finding": "With N=4 and k=3 (logistic/Hill) the R2>=0.90 threshold is not discriminating: any 3-parameter bounded monotonic step can interpolate 0,0,0.4996,0.5654. Logistic achieves R2=1.0 by placing steep transition k=10.75 at n0=14.81, saturating to L=0.5654 for n>15. Hill achieves R2=0.999994 with h=20 at upper bound (steepness -> step). This is smooth approximation to discontinuous step, the same structure that falsified five prior smooth models. Producer validity_notes correctly state overfitting is guaranteed, but frozen C1/C3 still PASS; the gates do not penalize overfitting.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:measurement_validity All computations use existing data N=4 k=3",
+        "research/experiments/EXP-INTEL-35551517470/result.json:validity_notes With 4 data points and 3 parameters overfitting is structurally guaranteed",
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics.logistic params_k 10.75 params_n0 14.81",
+        "research/experiments/EXP-INTEL-35551517470/raw_evidence/saturating_fit.py logistic_bounds [0,0,0.01]->[1,50,100] hill_bounds [0,0.1,0.1]->[1,20,100]"
+      ],
+      "producer_interpretation": "Producer explicitly discloses overfitting in validity_notes and observations and notes R2=1.0 reflects interpolation not predictive power.",
+      "audit_finding": "Producer disclosure is correct. Audit adds that frozen thresholds are mis-calibrated for N=4 k=3 and should not be read as model validation."
+    },
+    {
+      "id": "VF3_EXTRAPOLATION_IDENTICAL_TO_CONSTANT_NULL_ZERO_INFORMATION_GAIN",
+      "severity": "critical",
+      "category": "extrapolation",
+      "finding": "Logistic F50=0.5653999996 and Hill F50=0.5656592314 are 0.00pp and 0.026pp from constant null B5 F(n)=0.5654 for all n (result.json metrics constant_null_F50 0.5654, logistic_extrapolation_identical_to_null true). Producer observations 3-4 state extrapolation provides ZERO new predictive information beyond observed value at n=20. This is confirmed: for n>=15 logistic is at asymptote L (F_pred 0.4996 at n15 already 88% of L). With only one non-zero asymptote informant (n20), L is copied from that observation; no data distinguishes L=0.5654 plateau from L=0.80 or 1.0. Frozen C2 (F in [0,1]) passes trivially but does not test information gain. Product consequence of SURVIVES (validated extrapolation enabling Docker decision) is therefore unsupported.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics best_F50 0.5654 best_F82 0.5654 constant_null_F50 0.5654 logistic_extrapolation_identical_to_null true hill_extrapolation_identical_to_null true",
+        "research/experiments/EXP-INTEL-35551517470/result.json:observations CRITICAL extrapolation IDENTICAL to constant null ZERO new information",
+        "research/experiments/EXP-INTEL-35551517470/report.md:section 4 Extrapolation Equivalence to Constant Null",
+        "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json:fits.logistic.F50 0.5653999996 constant_null.F50 0.5654",
+        "research/experiments/EXP-INTEL-35544806153/handoff.json:carry_forward do_not_assume That the 7.6x growth deceleration is a validated saturation signal"
+      ],
+      "producer_interpretation": "Producer correctly identifies equivalence and states SURVIVES is informationally trivial and should NOT change Docker investment (report.md sections 6-7, result.json validity_notes and unresolved).",
+      "audit_finding": "Concur with producer's triviality assessment. Audit bounds ceiling accordingly: SURVIVES per frozen gates but extrapolation is empirically vacuous; model-based path remains closed for product decisions."
+    },
+    {
+      "id": "VF4_HILL_AT_BOUND_DEGENERATE_AND_RICHARDS_FAILURE",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Hill h=19.9999999997 hits upper bound 20.0 exactly, K=13.557 at fitted half-max. This is falsifier F4 degeneracy (exponent near 0 or bound-hit indicating ill-conditioned landscape for sparse data). Richards with 4 params fails to converge (R2=-0.0002 max resid 29.92pp) stuck at bounds L=0.275 n0=100 a=0.01 v=20 flat line 0.266. Both indicate optimization landscape ill-conditioned for 4 points with 2 at zero. Spec falsifier F4 predicted degenerate parameters; Hill provides partial instance.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:falsifier F4 fitted parameters are degenerate (e.g., L>1.0, K<0, exponent near 0)",
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics.hill params_h 20.0 params_K 13.56",
+        "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json:fits.hill.params [0.56565,20,13.55]",
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics.richards converged false R2 -0.0002"
+      ],
+      "producer_interpretation": "Producer notes Hill very steep (step-like) and Richards fails to converge due to 4 params on 4 points, optimization ill-conditioned (validity_notes, observations).",
+      "audit_finding": "Hill bound-hit should be classified as boundary-degenerate under F4. Richards failure confirms sparse-data non-identifiability. Neither provides independent saturating evidence."
+    },
+    {
+      "id": "VF5_TEMPLATE_INVARIANCE_EXTRAPOLATION_IS_FUNCTIONAL_FORM_ONLY",
+      "severity": "high",
+      "category": "measurement_validity",
+      "finding": "Under verified template invariance, ranking agreement = proportion(margin>0) exactly (0.0/0.0/0.4996/0.5654). Fitting exercise is on structural identity, not predictive mechanism. Extrapolation to 50/82 is purely functional-form extrapolation without empirical support. Producer validity_notes correctly state fitting is on structural identity and extrapolation is not empirical prediction.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:measurement_validity Template invariance persists",
+        "research/experiments/EXP-INTEL-35551517470/result.json:validity_notes Template invariance makes ranking agreement = proportion(margin>0) exactly",
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json verification template invariance",
+        "research/experiments/EXP-INTEL-35544806153/handoff.json:established Under template invariance ranking agreement equals proportion(margin>0) exactly"
+      ],
+      "producer_interpretation": "Producer correctly scopes extrapolation as functional-form only, not empirical prediction.",
+      "audit_finding": "Concur. No beyond-training empirical validation is possible without full-DOM data."
+    },
+    {
+      "id": "VF6_RESULT_REPORT_VERDICT_INCONSISTENCY",
+      "severity": "medium",
+      "category": "provenance",
+      "finding": "Producer controls: C1 PASS C2 PASS C3 PASS per frozen rule => SURVIVES (spec.json verdict rules). Report.md and result.json observations state VERDICT SURVIVES, but result.json outcome field is MIXED. The MIXED downgrade aligns with producer's triviality assessment but contradicts the mechanical frozen rule which reserves MIXED for C1 AND C2 AND NOT C3. This creates conflicting transmission: downstream Director reading outcome MIXED will apply MIXED handoff, while reading observations will apply SURVIVES. Inconsistency is non-outcome-bearing for recomputed metrics but must be resolved for packet semantics.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:decision_rule VERDICT RULES If C1 AND C2 AND C3 SURVIVES else if C1 AND C2 AND NOT C3 MIXED",
+        "research/experiments/EXP-INTEL-35551517470/result.json:controls C1_BEST_FIT_QUALITY pass true C2_EXTRAPOLATION_PHYSICAL pass true C3_IMPROVES_OVER_PARENT pass true",
+        "research/experiments/EXP-INTEL-35551517470/result.json:outcome MIXED",
+        "research/experiments/EXP-INTEL-35551517470/result.json:observations Per frozen decision rules C1 PASS C2 PASS C3 PASS Verdict SURVIVES",
+        "research/experiments/EXP-INTEL-35551517470/report.md:Executive Summary Verdict per frozen decision rules SURVIVES"
+      ],
+      "producer_interpretation": "Producer acknowledges SURVIVES per frozen gates but adds that it is INFORMATIONALLY TRIVIAL and files outcome MIXED to signal no new information.",
+      "audit_finding": "Producer's intent is transparent, but packet leaves contradictory verdict signals. Audit bounds SURVIVES as vacuous and recommends explicit deviation note rather than silent outcome override."
+    },
+    {
+      "id": "VF7_PROVENANCE_AND_HASHES_VERIFIED",
+      "severity": "info",
+      "category": "provenance",
+      "finding": "Input hashes verified: snr_per_iteration_tag_entropy.json.gz ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a and analysis_output_snr.json f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2 match spec and parent. Freeze hashes match computed spec/prereg/request. Artifacts exist at declared paths with roles code/derived/raw. No browser/network/model calls per provenance. Python 3.12.14 scipy 1.18.1 numpy 2.5.3, seed 42, 10 restarts per family, bounds as preregistered.",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/provenance.json:input_artifacts output_artifacts frozen_inputs_verified hashes",
+        "research/experiments/EXP-INTEL-35551517470/freeze.json:hashes prereg 73cc434f... request 9890c168... spec 919b9dc6...",
+        "research/experiments/EXP-INTEL-35551517470/result.json:artifacts sha256 40b359... c7bbf3... ce3dda... f7f698..."
+      ],
+      "producer_interpretation": "Producer correctly reports frozen hashes and no-new-data protocol.",
+      "audit_finding": "Provenance intact. No data integrity threat."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_PARENT_MODEL_A",
+      "expected": "Phi(median(|M|)/std) predicted 0.8455 at n15 residual 34.59pp and 0.7550 at n20 residual 18.96pp R2 not reported REJECTED at C1 source EXP-INTEL-35538868377",
+      "observed": "Producer reproduces residuals 34.59pp/18.96pp. Logistic beats by 34.59pp/18.96pp but only via step approximation, not mechanism. Recomputed logistic residuals 5.68e-09pp/3.78e-08pp vs B1 34.59pp/18.96pp difference confirmed but not mechanistic.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:baselines B1_PARENT_MODEL_A",
+        "research/experiments/EXP-INTEL-35551517470/report.md:section 5 Parent Baseline Comparison"
+      ]
+    },
+    {
+      "baseline_id": "B2_PARENT_MODEL_B",
+      "expected": "Saturating sign-fraction power law a*n^b/(1+a*n^b) 0.3757 at n15 residual 12.39pp 0.6395 at n20 residual 7.41pp R2=0.8797 REJECTED source EXP-INTEL-35538868377",
+      "observed": "Reproduced: logistic R2=1.0 vs 0.8797 (+0.1203) max residual 3.78e-08pp vs 12.39pp (-12.39pp). Improvement is in-sample interpolation of step with steep logistic, not extrapolation gain. Hill R2=0.999994 similar. Comparison correctly reported but baseline was already rejected; beating rejected baseline is low bar.",
+      "verdict": "PASS - arithmetic correct, interpretation bounded",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:baselines B2_PARENT_MODEL_B",
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics parent_baseline_R2 0.8797 parent_baseline_max_residual_pp 12.39 R2_improvement_over_parent 0.1203"
+      ]
+    },
+    {
+      "baseline_id": "B3_CORRECTED_PHI_MEAN_STD",
+      "expected": "Phi(mean/std) predicted 0.7379 at n20 residual 17.8pp REJECTED source EXP-INTEL-35530590171",
+      "observed": "Cited as 17.8pp. Logistic beats by 17.8pp in-sample. No extrapolation comparison reproduced; both already rejected at C1.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:baselines B3_CORRECTED_PHI_MEAN_STD"
+      ]
+    },
+    {
+      "baseline_id": "B4_EMPIRICAL_CDF_LINEAR",
+      "expected": "Linear extrapolation from n15-20 slope predicts F50=0.9602 F82=1.3813 >1.0 impossible REJECTED source EXP-INTEL-35544806153",
+      "observed": "Producer verifies logistic F50=0.5654 is physically valid vs B4 0.9602/1.3813 physically invalid. Logistic improvement over B4 is via bounded form, but logistic extrap is identical to null, so improvement over invalid linear is not informative.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:baselines B4_EMPIRICAL_CDF_LINEAR",
+        "research/experiments/EXP-INTEL-35544806153/result.json:metrics.c3_extrapolation"
+      ]
+    },
+    {
+      "baseline_id": "B5_LINEAR_NULL",
+      "expected": "Constant null F(n)=0.5654 for all n B5 from EXP-INTEL-35544806153",
+      "observed": "Constant null R2=-1.25284 max residual 56.54pp F50=0.5654 F82=0.5654 recomputed exactly matches producer. Logistic F50 0.5653999996 diff 0.00000038pp (0.00pp) and Hill 0.565659 diff 0.0259pp from null. Extrapolation equivalence confirmed.",
+      "verdict": "PASS - critical finding: no extrapolation advantage",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:baselines B5_LINEAR_NULL",
+        "research/experiments/EXP-INTEL-35551517470/result.json:metrics constant_null_R2 -1.2528 constant_null_F50 0.5654 logistic_extrapolation_identical_to_null true",
+        "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json:null_control constant_null F50 0.5654"
+      ]
+    },
+    {
+      "control_id": "PC1_FIT_REPRODUCES_TRAINING",
+      "expected": "Best-fit predictions at n=5,10,15,20 within 5pp of 0.0,0.0,0.4996,0.5654",
+      "observed": "Logistic predictions 8.80e-47, 1.94e-23, 0.4996, 0.5654 max residual 3.78e-08pp PASS. Hill max residual 0.128pp PASS. Recomputed exactly.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:positive_control PC1_FIT_REPRODUCES_TRAINING",
+        "research/experiments/EXP-INTEL-35551517470/result.json:controls PC1_FIT_REPRODUCES_TRAINING pass true"
+      ]
+    },
+    {
+      "control_id": "NC1_PARENT_BEST_MODEL",
+      "expected": "Best function R2>0.93 AND max residual <8pp vs parent R2=0.8797 max resid 12.39pp",
+      "observed": "Logistic R2=1.0>0.93 PASS max resid 3.78e-08pp<8pp PASS Hill also PASS. Threshold is low bar because parent was already rejected; passing does not indicate validated extrapolation.",
+      "verdict": "PASS - computation correct, strength weak",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:null_control NC1_PARENT_BEST_MODEL expected R2>0.93 AND max residual <8pp",
+        "research/experiments/EXP-INTEL-35551517470/result.json:controls NC1_PARENT_BEST_MODEL pass true"
+      ]
+    },
+    {
+      "control_id": "C1_BEST_FIT_QUALITY",
+      "expected": "At least one function R2>=0.90 AND max residual <10pp",
+      "observed": "Logistic R2=1.0 PASS 3.78e-08pp PASS Hill R2=0.999994 PASS 0.128pp PASS Richards -0.0002 FAIL. C1 PASS verified.",
+      "verdict": "PASS",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:decision_rule C1_BEST_FIT_QUALITY",
+        "research/experiments/EXP-INTEL-35551517470/result.json:controls C1_BEST_FIT_QUALITY pass true"
+      ]
+    },
+    {
+      "control_id": "C2_EXTRAPOLATION_PHYSICAL",
+      "expected": "All qualifying R2>=0.90 functions predict F50 in [0,1] AND F82 in [0,1]",
+      "observed": "Logistic 0.5654/0.5654 PASS Hill 0.5657/0.5657 PASS. C2 PASS verified but trivial because saturating forms are bounded [0,1] by construction via L in [0,1].",
+      "verdict": "PASS - trivial by construction",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:decision_rule C2_EXTRAPOLATION_PHYSICAL",
+        "research/experiments/EXP-INTEL-35551517470/result.json:controls C2_EXTRAPOLATION_PHYSICAL pass true"
+      ]
+    },
+    {
+      "control_id": "C3_IMPROVES_OVER_PARENT",
+      "expected": "Best function R2>0.93 OR max residual <8pp vs parent 0.8797/12.39pp",
+      "observed": "Logistic R2=1.0>0.93 PASS 3.78e-08pp<8pp PASS. C3 PASS verified but informationally vacuous because extrapolation equals null.",
+      "verdict": "PASS - computation correct, does not confer extrapolation validity",
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35551517470/spec.json:decision_rule C3_IMPROVES_OVER_PARENT",
+        "research/experiments/EXP-INTEL-35551517470/result.json:controls C3_IMPROVES_OVER_PARENT pass true"
+      ]
+    }
+  ],
+  "recomputed_metrics": {
+    "logistic": {
+      "producer": {"R2": 1.0, "max_residual_pp": 3.78e-08, "AIC": -161.66, "BIC": -163.5, "F50": 0.5654, "F82": 0.5654, "params": [0.5654, 10.75, 14.81]},
+      "recomputed": {"R2": 1.0, "max_residual_pp": 3.784763613623454e-08, "AIC": -161.66360080945213, "BIC": -163.50471772609245, "F50": 0.5653999996215237, "F82": 0.5653999996215237, "params": [0.5653999996215237, 10.750380503346248, 14.811431051760017], "F_pred_train": [8.799196826133325e-47, 1.943558813386787e-23, 0.4995999999432266, 0.5653999996215237]},
+      "match": true
+    },
+    "hill": {
+      "producer": {"R2": 0.999994, "max_residual_pp": 0.1283, "AIC": -41.46, "BIC": -43.3, "F50": 0.5657, "F82": 0.5657, "params": [0.5657, 20.0, 13.56]},
+      "recomputed": {"R2": 0.9999942344515792, "max_residual_pp": 0.1282987365829299, "AIC": -41.4590671915552, "BIC": -43.30018410819553, "F50": 0.5656592314919394, "F82": 0.5656592314945486, "params": [0.5656592314945487, 19.999999999747207, 13.557116162566906], "F_pred_train": [1.2263335777713056e-09, 0.001282987365829299, 0.4995717722845587, 0.5654220290519429]},
+      "match": true,
+      "note": "Hill h at upper bound 20 indicates boundary-hit degeneracy"
+    },
+    "richards": {
+      "producer": {"R2": -0.0002, "max_residual_pp": 29.92, "AIC": -72.75, "BIC": -75.21, "F50": 0.2661, "F82": 0.2661, "converged": false},
+      "recomputed": {"R2": -0.00022414256436720237, "max_residual_pp": 29.921903546438344, "AIC": -72.75189545412445, "BIC": -75.20671800964489, "F50": 0.2661203476456505, "F82": 0.26608751084867643, "params": [0.2754574069001526, 99.99999999863385, 0.01, 19.99999999998904]},
+      "match": true
+    },
+    "constant_null": {
+      "producer": {"R2": -1.2528, "max_residual_pp": 56.54, "F50": 0.5654, "F82": 0.5654},
+      "recomputed": {"R2": -1.2528403663055019, "max_residual_pp": 56.54, "F50": 0.5654, "F82": 0.5654, "F_constant": 0.5654},
+      "match": true
+    },
+    "extrapolation_information_gain": {
+      "producer": {"logistic_F50": 0.5654, "constant_F50": 0.5654, "identical_to_null": true, "R2_improvement": 0.1203, "max_residual_improvement_pp": 12.39},
+      "recomputed": {"logistic_F50": 0.5653999996215237, "hill_F50": 0.5656592314919394, "constant_F50": 0.5654, "logistic_minus_null_pp": 0.0000000378, "hill_minus_null_pp": 0.0259, "identical_within_0p03pp": true},
+      "match": true,
+      "note": "Logistic extrapolation 0.000000038pp from null, Hill 0.026pp from null - zero information gain"
+    },
+    "training_data_and_counts": {
+      "producer": {"n": [5, 10, 15, 20], "F": [0.0, 0.0, 0.4996, 0.5654]},
+      "recomputed": {"n": [5, 10, 15, 20], "F": [0.0, 0.0, 0.4996, 0.5654], "pos": {"5": 0, "10": 0, "15": 4996, "20": 5654}, "zero_raw": {"5": 5070, "10": 2464, "15": 1230, "20": 599}, "neg": {"5": 4930, "10": 7536, "15": 3774, "20": 3747}, "method": "proportion(margin>0) from snr_per_iteration_tag_entropy.json.gz per_iteration DEF-FULL-MAP canonical"},
+      "match": true
+    },
+    "decision_gates": {
+      "producer": {"C1_pass": true, "C2_pass": true, "C3_pass": true, "verdict": "SURVIVES"},
+      "recomputed": {"C1_pass": true, "C2_pass": true, "C3_pass": true, "verdict_per_frozen_rule": "SURVIVES", "outcome_filed": "MIXED", "inconsistency": "outcome MIXED contradicts controls PASS x3 which per spec => SURVIVES; producer downgraded to MIXED to signal triviality"},
+      "match": false,
+      "note": "Metric recomputation matches but verdict labeling is inconsistent"
+    }
+  },
+  "claim_ceiling": "MAX JUSTIFIED: Bounded saturating functions interpolate 4-point ranking agreement F=[0.0,0.0,0.4996,0.5654] at n=5/10/15/20 exactly: logistic F(n)=L/(1+exp(-k*(n-n0))) with L=0.5654 k=10.75 n0=14.81 achieves R2=1.0 max residual 3.78e-08pp, Hill L=0.5657 h=20 K=13.56 achieves R2=0.999994 max residual 0.128pp. Both reproduce the step 0->0.50 jump via very steep transitions (logistic k=10.75, Hill h at bound 20) that are smooth approximations to a discontinuous step, confirming step-function structure (0,0,0.50,0.57) with 7.6x deceleration. Both predict F(50)=0.5654/0.5657 and F(82)=0.5654/0.5657, which are 0.00pp/0.03pp from the constant null F(n)=0.5654. The saturating-function extrapolation therefore provides ZERO new predictive information beyond the observed value at n=20 and does not improve over the constant null in extrapolation; R2 improvement (+0.12 vs parent power law 0.8797) is purely in-sample with 4 points and 3 parameters (overfitting guaranteed). No validated extrapolation to full DOM n=50/82 is supported; ranking stability at n=21-82 remains UNKNOWN. Full-DOM stability below/above 80% cannot be decided from this data. Model-based extrapolation path of 6 consecutive failures (5 prior + this informationally vacuous SURVIVES) is definitively closed for product decisions; Docker direct measurement (EXP-INTEL-35462974425 image am1n3e/webarena-verified-shopping:latest) is the only remaining path. Claim does not support C-MEAS-VALID beyond in-sample identity nor C-PRODUCT-ECON below-80% plateau inference.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35551517470/request.json sha256 9890c168e758e39e33ab49855ceecc3ed750e24abc089dfd9021c4dca4b9c818 lane intel claim_ids C-MEAS-VALID C-PRODUCT-ECON",
+    "research/experiments/EXP-INTEL-35551517470/spec.json sha256 919b9dc6f05292b7e0ef721795a5fc4188bb23ccd47014adaf45962e592d4646 hypothesis H1/H2/H3 falsifier F1-F4 decision_rule C1_BEST_FIT_QUALITY R2>=0.90 max resid <10pp C2_EXTRAPOLATION_PHYSICAL in [0,1] C3_IMPROVES_OVER_PARENT R2>0.93 or resid<8pp baselines B1-B5 positive_control PC1 null_control NC1",
+    "research/experiments/EXP-INTEL-35551517470/prereg.md sha256 73cc434fcef9398dd7ce97a2ab81fdec9eef0841773febeb3054e7ecc8fb021b",
+    "research/experiments/EXP-INTEL-35551517470/freeze.json frozen_at 2026-09-21T01:45:13.438884+00:00 hashes matching spec/prereg/request",
+    "research/experiments/EXP-INTEL-35551517470/result.json status COMPLETE outcome MIXED metrics best_R2 1.0 best_max_residual_pp 3.78e-08 best_F50 0.5654 best_F82 0.5654 logistic hill richards parent 0.8797 constant_null -1.2528 observations validity_notes unresolved controls PC1 NC1 C1 C2 C3 artifacts",
+    "research/experiments/EXP-INTEL-35551517470/report.md SURVIVES per frozen gates but INFORMATIONALLY TRIVIAL identical to constant null sections 4 6 7 tables",
+    "research/experiments/EXP-INTEL-35551517470/provenance.json github_run_id 35551517470 base_sha 6e56e17e frozen_at executed_at python 3.12.14 scipy 1.18.1 input hashes ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2 output sha256 40b3594b c7bbf321",
+    "research/experiments/EXP-INTEL-35551517470/raw_evidence/saturating_fit.py sha256 40b3594be34b4ebbd853b8c5458434fb688e4404c7521f058b9e4bea4e4f2562 code curve_fit bounds N=10 restarts seed 42",
+    "research/experiments/EXP-INTEL-35551517470/raw_evidence/analysis_output.json sha256 c7bbf321478721a1d543250d5e8018832a2c0f85c568fe24c673566da230390a derived R2 max_resid F50 F82 params F_pred_train",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a per_iteration DEF-FULL-MAP canonical margins recomputed proportions 0.0/0.0/0.4996/0.5654 N 10000 each",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2 per_n 5 10 15 20 ranking_agreement margin_mean margin_std verification",
+    "research/experiments/EXP-INTEL-35544806153/handoff.json sha256 fedc0f49e45fa39e866fe79b4ed032554f13cab64e9f16bb3bbfe8d311c799ec established rejected unknown do_not_assume recommended_action Docker pivot or bounded saturating function",
+    "research/experiments/EXP-INTEL-35538868377/result.json metrics.modelB_sign_fraction_powerlaw R2 0.8797 max resid 12.39pp (parent baseline)"
+  ],
+  "unresolved": [
+    "Full-DOM ranking stability at n=21-82 (including n=50 and n=82 whether F crosses 80%) remains UNKNOWN. No functional form on 4 points (2 at zero) can discriminate L=0.5654 plateau vs L=0.80 vs L=1.0; extrapolation variance is dominated by single n=20 observation.",
+    "Whether saturating-function plateau at 0.5654 reflects genuine threshold/phase-transition (0->0.50 jump between n=10 and n=15) vs artifact of first-n DOM-position subsampling vs random subsets remains UNKNOWN; cross-site and random-sampling controls untested.",
+    "Whether Docker image am1n3e/webarena-verified-shopping:latest becomes available for direct full-DOM measurement (EXP-INTEL-35462974425) remains BLOCKING for empirical answer on whether 80% achieved at n>20.",
+    "Per-task recipe 78.65% at n=20 vs canonical 55.95% at n=20 (EXP-INTEL-35445596324) whether per-task crosses 80% at full DOM remains UNKNOWN and outside this canonical tag_entropy x DEF-FULL-MAP scope.",
+    "Template invariance breakage at full DOM counts (n>20) and consequent variance structure change remains UNTESTED.",
+    "Whether any alternative bounded form with fewer effective df or cross-validated selection could provide non-trivial information gain on 4 points remains UNTESTED but a priori unlikely given 2 plateau points."
+  ]
+}

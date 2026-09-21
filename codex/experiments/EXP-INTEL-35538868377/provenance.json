@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35538868377",
+  "lane": "intel",
+  "github_run_id": "35538868377",
+  "git_commit": "73dfff636abc30ce7872fb89ed21466eb5e135ae",
+  "frozen_inputs": {
+    "request.json": {"sha256": "ce14534fa06958648c1d105cd42c11e4a72f1afb73da90ff886a936c697fa11c", "path": "research/experiments/EXP-INTEL-35538868377/request.json"},
+    "spec.json": {"sha256": "57794968c4966a44537a1457d06b4925e04ff13ecfea326fe9380137e177a36e", "path": "research/experiments/EXP-INTEL-35538868377/spec.json"},
+    "prereg.md": {"sha256": "33c4dbec7942a130615f58ad0ccf412ffc2ed827951fab043b8b81ed75ed9158", "path": "research/experiments/EXP-INTEL-35538868377/prereg.md"},
+    "freeze.json": {"sha256": "396c33eb7aad7bb0ccb39214e9d8e378db06c02a2f7e820c3ee0ecf9d18ed83b", "hash": "396c33eb7aad7bb0ccb39214e9d8e378db06c02a2f7e820c3ee0ecf9d18ed83b", "frozen_at": "2026-09-20T21:36:14.546202+00:00"}
+  },
+  "data_sources": [
+    {"path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz", "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a", "role": "per-iteration margins", "n_iterations": 10000, "ns": [5,10,15,20], "definition": "tag_entropy x DEF-FULL-MAP canonical"},
+    {"path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json", "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2", "role": "per-n aggregates, null control, baseline reproduction"},
+    {"path": "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json", "sha256": "da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050", "role": "raw density truncated-first-20, 7 tasks"}
+  ],
+  "code_paths": [
+    {"path": "research/intel/exp_35538868377_analysis.py", "role": "analysis script", "description": "Computes ModelA Phi(median|M|/std) and ModelB saturating power law, bootstrap, controls, baselines"},
+    {"path": "research/experiments/EXP-INTEL-35538868377/derived_analysis.json", "sha256": "934dc085afe13ef45e1537c9854fe01044bcaa5c1f23eb509e7b406b90808966", "role": "derived intermediate"}
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "python_hash_seed": "0",
+    "packages": ["numpy", "scipy"],
+    "scipy_version": "installed",
+    "numpy_version": "installed",
+    "os": "linux",
+    "no_browser_calls": true,
+    "no_network_calls": true,
+    "no_model_calls": true,
+    "offline": true
+  },
+  "commands": [
+    "python3 research/intel/exp_35538868377_analysis.py",
+    "sha256sum research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+    "sha256sum research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json"
+  ],
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35538868377/result.json", "sha256": "8b7640aabaa9c3af730093ee7d6ea0ab9a109644e90cf9f50186962ba3c28a46", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35538868377/report.md", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35538868377/provenance.json", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35538868377/derived_analysis.json", "sha256": "934dc085afe13ef45e1537c9854fe01044bcaa5c1f23eb509e7b406b90808966", "role": "derived"}
+  ],
+  "reproduction": "To reproduce: `python3 research/intel/exp_35538868377_analysis.py` with PYTHONHASHSEED=0, requires scipy and numpy, reads validated gz/json hashes above, writes derived_analysis.json and result.json. Full reproduction <30s, no external dependencies.",
+  "parent_handoff": {"experiment_id": "EXP-INTEL-35530590171", "path": "research/experiments/EXP-INTEL-35530590171/handoff.json", "sha256": "252702537489bc90a720725382a8387c37652e995ba46b8e0e9eabe638701af1"}
+}

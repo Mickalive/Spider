@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35538866166",
+  "lane": "physics",
+  "github_run_id": "35538866166",
+  "source_commit": "2b77cd3bc529ee5c3c4dd73cffa4c91d9c528854",
+  "base_sha": "4fba76910065b12b84e998fb071fd3b07a37434e",
+  "frozen_at": "2026-09-21T01:40:37.709837+00:00",
+  "executed_at": "2026-09-21T00:00:00Z",
+  "python_version": "3.12.14",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "environment": {
+    "platform": "linux",
+    "seed": 42,
+    "n_transitions_stochastic": 5000,
+    "n_transitions_deterministic": 5000,
+    "n_sessions": 50,
+    "steps_per_session": 100,
+    "n_shuffle_null": 500,
+    "n_perm_positive": 1000,
+    "n_bootstrap": 200,
+    "min_stratum_size": 5,
+    "alpha_values": [0.1, 0.5, 1.0]
+  },
+  "code_paths": {
+    "run_experiment": "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py",
+    "estimator": "est_entropy_rate_cmi() in run_experiment.py",
+    "null_framework": "shuffled_action_null_within_session() in run_experiment.py",
+    "spa_design": "CANDIDATES dict in run_experiment.py (identical to parent EXP-PHYSICS-35530591329)"
+  },
+  "parent_experiment": {
+    "experiment_id": "EXP-PHYSICS-35530591329",
+    "handoff_path": "research/experiments/EXP-PHYSICS-35530591329/handoff.json",
+    "handoff_sha256": "95bd92115fa60e23d9d61416f64f918caba9c2a72e7e31b0d526dcbfea6dbcf0"
+  },
+  "artifacts": {
+    "raw_results": {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/raw_results.json",
+      "sha256": "e486d9ddbcd97d238e8cc0582b7f85c3605368cd891c5b0a69a4a0a2d80d698f"
+    },
+    "run_experiment": {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/run_experiment.py",
+      "sha256": "9689865b771d2b24bfce2c82f16027e5138ca128e43dfef104ac84bd08faf3fd"
+    },
+    "result": {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/result.json",
+      "sha256": "a259bb8243ec03492ccbd424b2ff179e312e7a5a40d6ab46ab7a9af8c7b0e9d7"
+    },
+    "report": {
+      "path": "research/experiments/EXP-PHYSICS-35538866166/report.md",
+      "sha256": "6dca988ff138f245ba97d2c30d3919a4c2da49c9d32d433be96ca9342876a04e"
+    }
+  },
+  "data_hashes": {
+    "stochastic_spa_transitions": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+    "deterministic_spa_transitions": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512"
+  },
+  "wall_seconds": 210.6,
+  "reproduction_command": "python3 research/experiments/EXP-PHYSICS-35538866166/run_experiment.py"
+}

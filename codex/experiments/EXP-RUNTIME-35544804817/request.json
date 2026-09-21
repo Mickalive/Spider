@@ -1,0 +1,20 @@
+{
+  "base_sha": "6cbe79a74a31e0b0ba0ebe110da059d7a5847e47",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-20T23:29:56.521387+00:00",
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "inherited_last_verdict": "CONSTRAINED \u2014 Encoding-agnostic ORACLE-GUIDED iterative decompression (try brotli\u2192gzip\u2192identity until SHA256 matches ground truth) produces byte-identical output for all tested Cloudflare free-tier CDN transformations on DYNAMIC responses: 240/240 primary CDN cells, 80/80 BINARY, 15/15 identity, 45/45 depth 3-5, 30/30 large payloads, positive control 240/240, null control 15/15. All six frozen decision-rule conditions C1-C6 pass. Audit confirms all recomputed metrics match producer on deduped data (576 unique URLs). However, producer_claim_supported=false per audit: (1) the implementation uses ground_truth_sha256 as stop condition (audit V1_oracle_circularity, severity major) \u2014 success is tautologically guaranteed when CDN transforms are lossless and formats are distinguishable, making this a lossless-recovery observation, not a deployable-decoder validation; (2) raw_cell_results.jsonl has 87 duplicate rows from run_experiment.py:733 bug (audit V2, minor); (3) zero CDN cache HIT responses observed (audit V3, moderate) \u2014 DYNAMIC only, stale-cache serving untested; (4) oracle-free greedy decode untested (audit V4, moderate) \u2014 product cannot use SHA oracle. Claim ceiling is bounded to: oracle-guided encoding-agnostic decode, Cloudflare free-tier quick tunnel, edge iad05, DYNAMIC only, sequential jittered requests, 10KB nominal/150KB large, brotli q4/gzip L1. NOT VALIDATED for: deployable oracle-free decompression, CDN HIT/stale-cache, other CDN providers/tiers/edges, concurrent load, HTTP/2 or H3, mixed chunk-size pipelines.",
+  "inherited_next_question": "Does oracle-free greedy iterative decompression (try brotli\u2192gzip until neither succeeds, return final bytes \u2014 no SHA256 oracle) produce byte-identical output to ground truth on the same 48-cell Cloudflare CDN matrix, and does CDN cache HIT (stale) serving alter the decompressed output?",
+  "lane": "runtime",
+  "origin_github_run_id": "35544804817",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35542474231",
+    "path": "research/experiments/EXP-RUNTIME-35542474231/handoff.json",
+    "sha256": "89772f7f201aaa0d3a78d73682bf3deceef8b6662f0d38eaa5f4ec5d819ad382"
+  },
+  "reason": "pulse",
+  "request_hash": "c29ed2fb5c555e3b2aec4b7db5564e23edfd7ca4a77318ffb0fbce4b4c2da513",
+  "request_id": "ab579c62f20740fbeb9cf487",
+  "schema_version": 1
+}

@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-PHYSICS-35538866166",
+  "lane": "physics",
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "Can entropy-rate estimation H(Y|Z,A)-H(Y|Z) (global conditional entropy difference, not per-stratum KL weighting) detect the 1.52-bit CMI signal on the stochastic 12-state SPA while maintaining |shuffled-action null_mean| < 0.1 bits, thereby bypassing the plug-in KL bias-variance tradeoff?",
+  "hypothesis": "H1 (alternative): Entropy-rate CMI estimation, which computes H(Y|Z) - H(Y|Z,A) globally rather than summing per-stratum KL, avoids the small-stratum bias that dominates at alpha<1.0. At least one tested alpha achieves BOTH |shuffled-action null_mean| < 0.1 bits AND positive_control_cmi >= 0.5 bits on the stochastic SPA at N=5000. H0 (null): All tested alphas have |null_mean| >= 0.1 bits OR positive_control_cmi < 0.5 bits.",
+  "falsifier": "C1 (null centering): All tested alphas have |shuffled-action null_mean| >= 0.1 bits at N=5000. C3 (positive control sensitivity): For any alpha passing C1, positive_control_cmi < 0.5 bits OR permutation p > 0.001 on deterministic SPA. C6 (SPA design): Fewer than 48/48 (state,action) pairs with 4 distinct candidates.",
+  "baselines": [
+    {
+      "id": "B-PLUGIN-KL-ALPHA1",
+      "description": "Replicate parent plug-in KL alpha=1.0 results for direct comparison. Expected: K3=0.099, |null_mean|=0.064.",
+      "expected": "K3 ~0.099, |null_mean| ~0.064"
+    },
+    {
+      "id": "B-PLUGIN-KL-ALPHA0",
+      "description": "Replicate parent plug-in KL alpha=0 (MLE) results. Expected: K3=1.377, |null_mean|=0.924.",
+      "expected": "K3 ~1.377, |null_mean| ~0.924"
+    },
+    {
+      "id": "B-ENTROPY-RATE-DEG",
+      "description": "Entropy-rate CMI on deterministic SPA where H(Y|Z,A)=0 by construction (deterministic transitions). H(Y|Z) > 0 because actions lead to different states. Expected CMI = H(Y|Z) > 0.",
+      "expected": "cmi_deterministic > 0.5 bits (signal present, H(Y|Z) > 0)"
+    }
+  ],
+  "positive_control": "Deterministic 12-state SPA (same design with deterministic hash routing only): H(Y|Z,A) = 0 by construction (deterministic transitions), H(Y|Z) = log2(4) = 2.0 bits (4 actions lead to 4 distinct states given state). Entropy-rate CMI = H(Y|Z) - 0 = 2.0 bits. Threshold: >= 0.5 bits (conservative, 4x below true signal). Permutation p <= 0.001.",
+  "null_control": "Shuffled-action within-session null: for each of 500 permutations, shuffle action labels within each session (preserving session structure, state sequence, and url_before/url_after pairing), recompute entropy-rate CMI on the stochastic SPA, take the mean across permutations. Unit of permutation: action-label within session. The null mean must satisfy |mean| < 0.1 bits for any alpha to pass C1.",
+  "measurement_validity": [
+    "Same stochastic 12-state SPA design as parent EXP-PHYSICS-35530591329 (12 states, 4 candidates per (state,action), 50% hash routing + 50% uniform random).",
+    "N=5000 transitions (50 sessions x 100 steps) with seed=42, same collection procedure as parent.",
+    "Entropy-rate CMI estimator: CMI = H(Y|Z) - H(Y|Z,A) computed globally via histogram-based conditional entropy with Laplace smoothing (alpha variable).",
+    "H(Y|Z) = -sum_{z,y} P(z,y) log2 P(y|z) where P(y|z) = sum_a P(z,a,y) / P(z).",
+    "H(Y|Z,A) = -sum_{z,a,y} P(z,a,y) log2 P(y|z,a).",
+    "Both conditional entropies estimated via histogram with Laplace smoothing parameter alpha.",
+    "Z = (current_state, history_action_K) for K3 conditioning, Z = (current_state, history_state_K) for K2 conditioning.",
+    "Alpha values tested: 0.1, 0.5, 1.0 (representative range spanning the tradeoff region). For each alpha, compute CMI on stochastic SPA, null_mean from 500 within-session permutations, and positive control on deterministic SPA.",
+    "Strata with < 5 records are skipped (MIN_STRATUM_SIZE=5, same as parent).",
+    "Design verification: 48/48 (state,action) pairs with 4 distinct candidates.",
+    "Bootstrap CI for K3-K2 uses 200 trajectory-block resamples (same as parent).",
+    "Bonferroni correction: alpha=0.01 for C1, alpha=0.001 for C3 permutation p.",
+    "If any implementation fails due to numerical issues (e.g., log(0)), report as MEASUREMENT_INVALID with explicit error message."
+  ],
+  "decision_rule": "Verdict priority: FALSIFIED-IN-SETTING > MEASUREMENT_INVALID > SURVIVES_CURRENT_TEST.\n\nFALSIFIED-IN-SETTING triggers if ANY of:\n  (1) C1: All alphas have |shuffled-action null_mean| >= 0.1 bits at N=5000\n  (2) C3: For any alpha passing C1, positive_control_cmi < 0.5 bits OR permutation p > 0.001\n  (3) C6: Fewer than 48/48 (state,action) pairs with 4 distinct candidates\n\nMEASUREMENT_INVALID triggers if:\n  (4) Fewer than 30% of (state,action) strata have >= 5 records at N=5000\n  (5) stratum_size_buckets has < 2 non-empty buckets\n  (6) Any alpha implementation fails (e.g., missing dependency, convergence error)\n\nSURVIVES_CURRENT_TEST requires ALL of:\n  (C1) At least 1 alpha has |null_mean| < 0.1 bits\n  (C3) Positive control passes for that alpha (cmi >= 0.5 bits, p <= 0.001)\n  (C6) Design check passes\n  (C7) >= 2 non-empty stratum size buckets\n\nPhase 2 (beyond-Markov, only if SURVIVES on C1):\n  (C2) K3 CMI - K2 CMI > 0.1 bits AND bootstrap 95% CI lower > 0.0\n  (C4) |K2(N=50000) - K2(N=5000)| <= 0.3 bits for the best alpha",
+  "product_consequence_positive": "If entropy-rate CMI passes C1+C3: the per-stratum KL bias is estimator-specific, not fundamental to discrete CMI estimation. The CMI research program is unblocked for beyond-Markov K3-K2 testing. Opens path to production SPA testing with stochastic transitions and richer state representations.",
+  "product_consequence_negative": "If entropy-rate CMI also fails C1+C3: the null centering problem may be intrinsic to the stochastic SPA design or discrete CMI estimation broadly. Physics lane must pivot to: (a) Bayesian model comparison or likelihood-ratio tests, (b) production Web data with continuous state representations, (c) abandoning CMI estimation pathway entirely.",
+  "estimated_cost": "Low. Single Python script execution on stochastic 12-state SPA, N=5000 primary. ~10-15 minutes compute per alpha, 3 alphas ~30-45 minutes total. 500 within-session shuffled-action permutations per alpha. No browser/network required. Uses parent infrastructure.",
+  "expected_information_gain": "Very high. Directly tests whether the bias-variance tradeoff is estimator-specific (entropy-rate bypasses per-stratum weighting) or fundamental to discrete CMI estimation. If entropy-rate passes, it is a breakthrough that unblocks the CMI pathway. If it fails, the Physics lane has a clear decision to pivot. The experiment is small, fast, and maximally discriminating."
+}
