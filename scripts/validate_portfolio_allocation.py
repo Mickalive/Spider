@@ -49,11 +49,10 @@ def main() -> None:
     require(allocation.get("schema_version") == 1, "portfolio allocation schema_version must be 1")
     require(allocation.get("cycle_id") == snapshot.get("cycle_id"), "portfolio allocation cycle_id mismatch")
     require(nonempty(allocation.get("portfolio_assessment")), "portfolio_assessment must be non-empty")
+    require(nonempty(allocation.get("scout_assessment")), "scout_assessment must be non-empty")
     priors = allocation.get("agent_priors_used")
     require(isinstance(priors, list), "agent_priors_used must be a list")
     require(all(isinstance(x, str) and x.strip() for x in priors), "agent_priors_used entries must be non-empty strings")
-    surface = allocation.get("surface_research", [])
-    require(isinstance(surface, list), "surface_research must be a list when present")
 
     allocs = allocation.get("allocations")
     require(isinstance(allocs, dict), "allocations must be an object")
