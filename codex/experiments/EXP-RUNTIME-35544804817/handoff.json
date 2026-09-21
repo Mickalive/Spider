@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "lane": "runtime",
+  "target_lane": "runtime",
+  "next_question": "On a Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses, does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses, and does the decompressed output differ from the DYNAMIC-path decompressed output?",
+  "why_next": "The oracle-free decode is validated for Cloudflare free-tier DYNAMIC responses (240/240, EXP-RUNTIME-35544804817), resolving the parent's oracle circularity gap. However, CDN cache HIT (stale) serving is untestable on Cloudflare quick tunnel free-tier (0% HIT rate, infra ceiling). C-MEAS-VALID cannot advance to VALIDATED or PRODUCT_CORE until the HIT sub-question is resolved on infrastructure that actually caches. The HIT question is the last untested condition from the parent's claim ceiling. A different CDN or paid tier is required.",
+  "carry_forward": {
+    "established": [
+      "Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth on Cloudflare free-tier quick-tunnel DYNAMIC responses: 240/240 primary matrix (48 cells x5), 240/240 localhost positive control, 15/15 identity null control, ~45/45 depth 3-5 (deduped), ~30/30 large >100KB (deduped), 48/48 HIT-test DYNAMIC bytes, 0 ambiguous tie-breaks, method distribution br=60 gz+br=60 gz=80 gz+gz=40 (EXP-RUNTIME-35544804817, audit REVISE with ceiling bounded).",
+      "Parent's oracle circularity gap (audit V1, EXP-RUNTIME-35542474231) is resolved: the deployable decoder works without SHA256 oracle on DYNAMIC responses.",
+      "Brotli (magic 0xCEB2CF81) and gzip (magic 0x1F8B) have distinct format signatures making greedy try-brotli-then-gzip order unambiguous at every layer: zero ambiguous tie-breaks across 693 observations (EXP-RUNTIME-35544804817).",
+      "Encoding-agnostic method distribution (br=60, gz+br=60, gz=80, gz+gz=40) matches parent oracle-guided exactly, confirming deterministic decompression paths per cell.",
+      "CDN does not corrupt bytes: the parent fixed-origin-order failure was in the framing assumption, not byte transformation (EXP-RUNTIME-35538865067 + EXP-RUNTIME-35542474231).",
+      "Localhost iterative decompression correctness: 840/840 (brotli+gzip single-layer + multi-layer), 480/480 streaming TE framing, 840/840 streaming decompressor API (EXP-RUNTIME-35522287921, EXP-RUNTIME-35530588298, EXP-RUNTIME-35549699298).",
+      "Iterative decompression (max_depth=5) handles multi-layer stacked encodings (gzip->brotli, brotli->gzip) correctly on localhost (EXP-RUNTIME-35541777099)."
+    ],
+    "rejected": [
+      "Fixed-origin-order iterative decompression through Cloudflare CDN (180/240 failures, EXP-RUNTIME-35538865067).",
+      "CDN preserves origin Content-Encoding byte-identical.",
+      "Gzip/brotli chunk boundary corruption at chunk_size=32.",
+      "Streaming chunked forwarding corruption.",
+      "Chunk size (8192 vs 32) affects CDN decompression correctness (0 disagreements on all 48 cells)."
+    ],
+    "unknown": [
+      "CDN cache HIT (stale) serving: 0% HIT on Cloudflare quick tunnel free-tier despite Cache-Control: public, max-age=300 and fixed URLs. Requires production Cloudflare zone with cache enabled, or Fastly/Akamai/CloudFront that respects origin Cache-Control headers.",
+      "Oracle-free decode behavior on CDN cache HIT responses: are cached compressed bytes byte-identical to DYNAMIC response bytes, or does stale serving alter encoding?",
+      "Edge generality: validated edge unknown this run (parent iad05); different edges may have different encoding negotiation behavior.",
+      "Performance economics: amortized latency and CPU cost of greedy try-brotli-then-gzip loop vs oracle-guided decode not measured.",
+      "Behavior under concurrent load, HTTP/2 or HTTP/3, non-Cloudflare CDNs, mixed chunk-size pipelines.",
+      "Deduped depth/large counts: artifact reports 90 depth / 60 large vs expected 45/30 for N=5 — whether doubling is intentional oversampling or artifact duplication bug.",
+      "Cache stability C3: claim 6/6 byte-stable across 3 consecutive requests not persisted to raw artifact (0 stability rows in raw_cell_results.jsonl).",
+      "Regression baseline re-validation: B-ORACLE-GUIDED-REGRESSION (240/240) and B-FIXED-ORDER-CDN (60/240) inherited from parent, not re-measured on same wire bytes this run."
+    ],
+    "do_not_assume": [
+      "C-MEAS-VALID is ready for VALIDATED or PRODUCT_CORE promotion — CDN HIT (stale) serving is untested, and frozen decision_rule requires ALL C1-C7 pass.",
+      "Oracle-free decode works on all CDN conditions globally — validated only for Cloudflare free-tier quick tunnel, edge unknown, DYNAMIC only, sequential jittered requests.",
+      "CDN cache HIT behavior is safe — zero HIT observed; stale-cache serving not exercised.",
+      "The 75 duplicate cell+rep keys in raw_cell_results.jsonl affect correctness rates — rates are unaffected but total_observations=693 is inflated (audit V3).",
+      "Stability claim 6/6 is independently verifiable from artifact — not persisted to raw_cell_results.jsonl (audit V4).",
+      "Oracle-guided and fixed-order baselines are re-validated this run — inherited from parent, not re-executed (audit V5).",
+      "CDN edge is iad05 — edge unknown this run (audit V6)."
+    ]
+  },
+  "dependencies": [
+    "Cloudflare paid-tier zone or alternative CDN (Fastly/Akamai/CloudFront) with production cache configuration that respects origin Cache-Control: public, max-age=300 and produces cf-cache-status=HIT responses",
+    "N=5 per HIT cell (240 total HIT observations) with two-phase populate+test and 2-5s delay between phases",
+    "Deduplicated artifact (remove 75 duplicate cell+rep keys) or corrected experiment script",
+    "Persisted per-observation stability rows in raw_cell_results.jsonl for C3 recomputation",
+    "Re-execution of oracle-guided and fixed-order baselines on same wire bytes for infrastructure-identity validation"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35544804817/result.json 240/240 oracle-free DYNAMIC, 0% HIT rate, all controls pass",
+    "research/experiments/EXP-RUNTIME-35544804817/audit.json REVISE, producer_claim_supported=false, V1-C2-not-evaluable, V2-HIT-N-underpowered, V3-duplicate-rows, V4-stability-not-persisted, V5-regression-not-rerun, V6-edge-unknown, V7-oracle-free-equivalence-valid",
+    "research/experiments/EXP-RUNTIME-35544804817/raw_cell_results.jsonl sha256 c8caf5bc 693 rows all oracle_free_correct true",
+    "research/experiments/EXP-RUNTIME-35544804817/verdict.json MIXED decision",
+    "research/experiments/EXP-RUNTIME-35542474231/result.json parent 240/240 oracle-guided, 60/240 fixed-order",
+    "research/experiments/EXP-RUNTIME-35542474231/audit.json parent REVISE V1 oracle circularity V3 0 HIT",
+    "research/experiments/EXP-RUNTIME-35542474231/handoff.json parent established/rejected/unknown state",
+    "research/experiments/EXP-RUNTIME-35538865067/result.json parent FALSIFIES 60/240 fixed-order, CDN Accept-Encoding negotiation diagnosis",
+    "codex/claim_state.json C-MEAS-VALID latest status EXPERIMENTAL"
+  ],
+  "recommended_action": "Design and execute EXP-RUNTIME on a production Cloudflare zone or alternative CDN (Fastly/Akamai/CloudFront) that produces cache HIT responses. The frozen design should: (1) use the same oracle-free greedy decode algorithm; (2) include N=5 per HIT cell with two-phase populate+test; (3) persist all raw observations including stability rows; (4) re-run oracle-guided and fixed-order baselines on same wire bytes; (5) deduplicate depth/large observations; (6) record CDN edge. If HIT serving is achieved and >=90% correct, C-MEAS-VALID can advance to VALIDATED. If HIT serving reveals stale-cache divergence, the specific failure mode will be documented. If no CDN produces HITs, the HIT sub-question should be explicitly marked infra-blocked and the DYNAMIC-only finding promoted with ceiling annotation."
+}

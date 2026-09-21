@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35538865048",
+  "lane": "product",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "FP constraint never binding: noise-only scores (0.05-0.14) fully separated from token_refresh failure minimum (0.20) by design. Production deployment requires overlapping distributions where FP > 0 at calibrated threshold to test discriminating operating point.",
+    "Calibrated threshold 0.20 at lower bound of tested range, below hypothesized [0.40, 0.60] interval. The argmax-F1 selection among thresholds meeting TP>=0.85/FP<=0.10 picks 0.20 because FP=0.0 at all thresholds and F1 is maximized at lowest threshold. This is a consequence of designed separation, not measurement of a discriminating operating point.",
+    "Threshold tautology partially resolved (continuous scores show gradual TP decline 1.00→0.917→0.85→0.78 from 0.20-0.35 vs parent flat 1.0 across 0.15-0.35) but calibrated threshold remains at low edge due to FP never binding. True discriminating threshold calibration requires overlapping noise/refresh distributions.",
+    "Mock-only ceiling: all measurements on localhost Flask 3.1.3 + SQLite WAL + TTLCache 0.5s + jitter 10-100ms + HS256/RS256 JWT. No inference to production OAuth/OIDC, CDN, network RTT, or DB-backed sessions (inherited V-MOCK-ONLY-CEILING from parent handoff)."
+  ],
+  "validity_findings": [
+    "Continuous severity injection verified: 451 unique behavioral scores in Phase A (>5 threshold, MEASUREMENT_INVALID avoided). Bimodal discrete 0.35/0.65 replaced with continuous [0.2, 0.8] distribution — V-BIMODAL-DISCRETE resolved in measurement.",
+    "error_format_variation fix verified: structural_std for token_refresh+error_format_variation = 0.4017 > 0.15 inert threshold. Body replaced BEFORE resp creation in mock_server.py line 360-361 and 464-475 preserves session_quality and varies error body across 401 statuses. Effective noise coverage now 4/4 types vs parent 3/4 — V-ERROR-FORMAT-INERT resolved.",
+    "Threshold sweep correctly computed per prereg: 13 thresholds at 0.05 increments, Wilson lower bounds for TP, calibrated threshold = argmax F1 subject to TP>=0.85 AND FP<=0.10. Calibrated threshold = 0.20 (ties at 0.20/0.25/0.30, lowest wins).",
+    "FP=0.0 at ALL thresholds because noise-only max score 0.14 < lowest tested threshold 0.20. FP constraint is never binding — this is a consequence of hand-designed separation gap (noise 0.05-0.14 vs failure 0.20-0.39), not measurement error. Limits inference about production where distributions may overlap.",
+    "Orthogonality (C3/C5) correctly computed on n=480 pooled co-occurring samples: Pearson r = -0.006484, 95% CI [-0.095931, 0.083066], TOST delta=0.15 PASS (p_upper=0.000288, p_lower=0.000791). CI upper 0.0831 < 0.15. Sixth independent mock confirmation (parent series: r=0.046, 0.0022, -0.0258, -0.0366, 0.016).",
+    "Behavioral variance per co-occurring condition > 0.05: pagination_metadata 0.2010, variable_length_data 0.1971, error_format_variation 0.1992, cdn_cache_headers 0.1957. All 4 pass C3 variance requirement.",
+    "Positive control C1 discrimination = 0.8333 > 0.5 PASS. Expired/invalid tokens collide on identical 401 authentication_failed fingerprint (3 unique fingerprints across 4 auth states). Replicates parent 0.8333.",
+    "Threshold calibration and orthogonality on independent phases (A and B) — no overfitting of Phase B to calibrated threshold.",
+    "Determinism preserved: global RNG seeded 42, server threaded=False, client sequential. Raw evidence preserves full sequence for reproduction."
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-TAUT-025",
+      "producer_expected": "TP=1.0, FP=0.0, F1=1.0 but not discriminating (tautological ceiling)",
+      "audit_observed": "At threshold 0.25 on continuous scores: TP=0.9167, FP=0.0, F1=0.9565. Unlike parent flat TP=1.0 across 0.15-0.35, continuous scores show TP decline beginning at 0.25 — threshold now discriminates severity. Tautology reduced but not eliminated; calibrated threshold still at low edge.",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json::metrics.threshold_sweep[1]"
+    },
+    {
+      "baseline_id": "B-MODE-MID-050",
+      "producer_expected": "TP ~0.70, FP=0.0 at threshold 0.50 on bimodal scores",
+      "audit_observed": "At threshold 0.50 on continuous scores: TP=0.7125, FP=0.0, F1=0.8321. Matches bimodal expectation but plateau 0.40-0.50 indicates failure cluster below 0.40 and success cluster above — continuous distribution reveals bimodal-like structure within synthetic mapping.",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json::metrics.threshold_sweep[6]"
+    },
+    {
+      "baseline_id": "B-PARENT-N480-MOCK",
+      "producer_expected": "Parent n=480: TP=1.0 at threshold 0.25, orthogonality r=0.016 CI upper 0.1055, TOST PASS, but tautological threshold",
+      "audit_observed": "Continuous n=480 orthogonality r=-0.0065 CI upper 0.0831 TOST PASS. TP at 0.25 is 0.9167 (not 1.0) reflecting continuous variance. Discrimination introduced vs parent tautological 1.0, but calibrated threshold remains low edge.",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json::metrics.c3_orthogonality"
+    },
+    {
+      "baseline_id": "B-5X-ORTHO-MOCK",
+      "producer_expected": "Five prior n=480 mock experiments all TOST PASS at delta=0.15",
+      "audit_observed": "Sixth confirmation: r=-0.0065 CI upper 0.0831 < 0.15 TOST PASS (p_upper 0.00028, p_lower 0.00079). Series extended to continuous severity. All 6 mock experiments confirm orthogonality at delta=0.15.",
+      "pass_fail": "PASS",
+      "evidence_ref": "result.json::metrics.c3_orthogonality"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_auth_discrimination": 0.8333,
+    "c1_pass": true,
+    "baseline_status_only": 0.5,
+    "baseline_body_only": 0.8333,
+    "threshold_sweep": [
+      {"threshold": 0.2, "tp_rate": 1.0, "fp_rate": 0.0, "precision": 1.0, "recall": 1.0, "f1": 1.0, "tp_count": 240, "fp_count": 0, "wilson_lower": 0.9842, "meets_constraints": true},
+      {"threshold": 0.25, "tp_rate": 0.9167, "fp_rate": 0.0, "precision": 1.0, "recall": 0.9167, "f1": 0.9565, "tp_count": 220, "fp_count": 0, "wilson_lower": 0.8748, "meets_constraints": true},
+      {"threshold": 0.3, "tp_rate": 0.85, "fp_rate": 0.0, "precision": 1.0, "recall": 0.85, "f1": 0.9189, "tp_count": 204, "fp_count": 0, "wilson_lower": 0.7993, "meets_constraints": true},
+      {"threshold": 0.35, "tp_rate": 0.7833, "fp_rate": 0.0, "precision": 1.0, "recall": 0.7833, "f1": 0.8785, "tp_count": 188, "fp_count": 0, "wilson_lower": 0.727, "meets_constraints": false},
+      {"threshold": 0.4, "tp_rate": 0.7125, "fp_rate": 0.0, "precision": 1.0, "recall": 0.7125, "f1": 0.8321, "tp_count": 171, "fp_count": 0, "wilson_lower": 0.6522, "meets_constraints": false},
+      {"threshold": 0.45, "tp_rate": 0.7125, "fp_rate": 0.0, "precision": 1.0, "recall": 0.7125, "f1": 0.8321, "tp_count": 171, "fp_count": 0, "wilson_lower": 0.6522, "meets_constraints": false},
+      {"threshold": 0.5, "tp_rate": 0.7125, "fp_rate": 0.0, "precision": 1.0, "recall": 0.7125, "f1": 0.8321, "tp_count": 171, "fp_count": 0, "wilson_lower": 0.6522, "meets_constraints": false},
+      {"threshold": 0.55, "tp_rate": 0.6417, "fp_rate": 0.0, "precision": 1.0, "recall": 0.6417, "f1": 0.7817, "tp_count": 154, "fp_count": 0, "wilson_lower": 0.5792, "meets_constraints": false},
+      {"threshold": 0.6, "tp_rate": 0.55, "fp_rate": 0.0, "precision": 1.0, "recall": 0.55, "f1": 0.7097, "tp_count": 132, "fp_count": 0, "wilson_lower": 0.4868, "meets_constraints": false},
+      {"threshold": 0.65, "tp_rate": 0.4333, "fp_rate": 0.0, "precision": 1.0, "recall": 0.4333, "f1": 0.6047, "tp_count": 104, "fp_count": 0, "wilson_lower": 0.3722, "meets_constraints": false},
+      {"threshold": 0.7, "tp_rate": 0.3583, "fp_rate": 0.0, "precision": 1.0, "recall": 0.3583, "f1": 0.5276, "tp_count": 86, "fp_count": 0, "wilson_lower": 0.3003, "meets_constraints": false},
+      {"threshold": 0.75, "tp_rate": 0.2083, "fp_rate": 0.0, "precision": 1.0, "recall": 0.2083, "f1": 0.3448, "tp_count": 50, "fp_count": 0, "wilson_lower": 0.1617, "meets_constraints": false},
+      {"threshold": 0.8, "tp_rate": 0.0, "fp_rate": 0.0, "precision": 0.0, "recall": 0.0, "f1": 0.0, "tp_count": 0, "fp_count": 0, "wilson_lower": 0.0, "meets_constraints": false}
+    ],
+    "unique_behavioral_scores": 451,
+    "continuous_injection_ok": true,
+    "calibrated_threshold": 0.2,
+    "calibrated_metrics": {"threshold": 0.2, "tp_rate": 1.0, "fp_rate": 0.0, "precision": 1.0, "recall": 1.0, "f1": 1.0, "tp_count": 240, "fp_count": 0, "wilson_lower": 0.9842, "meets_constraints": true},
+    "c2_tp_rate": 1.0,
+    "c2_wilson_lower": 0.9842,
+    "c2_f1": 1.0,
+    "c2_pass": true,
+    "c2_per_condition": {
+      "token_refresh+pagination_metadata": {"n": 120, "behavioral_mean": 0.5361, "behavioral_std": 0.201, "structural_mean": 13.025, "structural_std": 0.9567, "tp_rate_at_calibrated": 1.0, "tp_wilson_lower": 0.969},
+      "token_refresh+variable_length_data": {"n": 120, "behavioral_mean": 0.5614, "behavioral_std": 0.1971, "structural_mean": 11.8, "structural_std": 0.4017, "tp_rate_at_calibrated": 1.0, "tp_wilson_lower": 0.969},
+      "token_refresh+error_format_variation": {"n": 120, "behavioral_mean": 0.5429, "behavioral_std": 0.1992, "structural_mean": 9.8, "structural_std": 0.4017, "tp_rate_at_calibrated": 1.0, "tp_wilson_lower": 0.969},
+      "token_refresh+cdn_cache_headers": {"n": 120, "behavioral_mean": 0.5403, "behavioral_std": 0.1957, "structural_mean": 13.8, "structural_std": 0.4017, "tp_rate_at_calibrated": 1.0, "tp_wilson_lower": 0.969}
+    },
+    "c3_variance_conditions_pass": 4,
+    "c3_variance_pass_required": 4,
+    "c3_orthogonality": {"pearson_r": -0.006484, "pearson_p": 0.8873228496240727, "n": 480, "se": 0.045787, "z_r": -0.006484, "ci_lower": -0.095931, "ci_upper": 0.083066, "tost_delta": 0.15, "tost_p_upper": 0.0002881012199400564, "tost_p_lower": 0.0007906395638112018, "tost_pass": true},
+    "c3_pass": true,
+    "c4_fp_rate": 0.0,
+    "c4_pass": true,
+    "c4_per_noise": {
+      "pagination_metadata": {"fp_rate": 0.0, "behavioral_mean": 0.0976},
+      "variable_length_data": {"fp_rate": 0.0, "behavioral_mean": 0.1},
+      "error_format_variation": {"fp_rate": 0.0, "behavioral_mean": 0.0931},
+      "cdn_cache_headers": {"fp_rate": 0.0, "behavioral_mean": 0.0953}
+    },
+    "c5_tost_equivalence": {"ci_upper": 0.083066, "ci_upper_lt_delta": true, "tost_pass": true, "tost_p_upper": 0.0002881012199400564, "tost_p_lower": 0.0007906395638112018, "pearson_r": -0.006484, "n": 480},
+    "c5_pass": true,
+    "error_format_structural_std": 0.4017,
+    "error_format_inert": false,
+    "decision_source": "frozen prereg decision rule",
+    "frozen_outcome": "SURVIVES_CURRENT_TEST"
+  },
+  "claim_ceiling": "C-FRESHNESS freshness guard achieves TP>=0.85 and FP<=0.10 at calibrated threshold 0.20 with orthogonality TOST PASS at delta=0.15 (n=480) on localhost stochastic mock with continuous severity gradient. However: (1) calibrated threshold at lower bound 0.20, below hypothesized [0.40,0.60], due to designed noise/refresh separation gap (noise max 0.14 < failure min 0.20); (2) FP constraint never binding (FP=0.0 at all thresholds) — no test of discrimination against overlapping noise; (3) threshold tautology partially resolved (gradual TP decline vs parent flat) but operating point remains at low edge, not middle-range discriminating threshold; (4) mock-only ceiling — no inference to production OAuth/OIDC, CDN, network RTT, DB-backed sessions; (5) hand-designed severity mapping (50/50 partial/full within 70% success, noise 0.05-0.14, failure 0.20-0.39) may not reflect production refresh quality distributions. Claim ceiling bounded to localhost stochastic mock with 4/4 effective noise types and low-edge calibrated threshold.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35538865048/result.json sha256 4043bff6c382d63a2a9f9969e8beea07e0cbeaab10c81e99a85ecaf6a7ae600d",
+    "research/experiments/EXP-PRODUCT-35538865048/raw_evidence/experiment_data.json sha256 e11daecdc919180373d3ad928ef9920b3ae3e7913c8def779c16b529003ab2a0",
+    "research/experiments/EXP-PRODUCT-35538865048/mock_server.py sha256 c90fc51d0c670ba81574275bce3b1eae51a6b7639714504817013c58ebbbbea4",
+    "research/experiments/EXP-PRODUCT-35538865048/run_experiment.py sha256 644f72ce2de3363a53e8bd1982e7f3eb7d529d8a27bad181ce64cd82ce48f0dc",
+    "research/experiments/EXP-PRODUCT-35538865048/spec.json sha256 28d5c8699c3b90282206ff4124545d5eb0701780996c8fca514d9d78ee27d7cc",
+    "research/experiments/EXP-PRODUCT-35538865048/prereg.md sha256 0865ec8ae48000dfbdcad11331e3df2c02c34ce1c687f5ef142f5071927ebd13",
+    "research/experiments/EXP-PRODUCT-35538865048/freeze.json sha256 (from freeze.json hashes)",
+    "research/experiments/EXP-PRODUCT-35481773764/handoff.json sha256 b3e8f2042b06baab49a8041eb2b0c6d485bca91b2d82a5915495b565b7be7bdd"
+  ],
+  "unresolved": [
+    "Whether calibrated threshold 0.20 generalizes to production refresh quality distributions where noise and low-quality refresh may overlap more (current separation noise max 0.14 vs failure min 0.20 is hand-designed gap).",
+    "Whether orthogonality survives on production-like substrate with real OAuth/OIDC, CDN, network RTT, DB-backed sessions — still requires runtime lane (per parent handoff next_question).",
+    "Whether continuous severity partial vs full split (50/50 within 70% success) reflects production mixture; different mixture would shift TP curve and calibrated threshold.",
+    "Whether 4 noise types sufficient coverage for production schema drift remains unknown.",
+    "Hypothesized threshold interval [0.40,0.60] not achieved; calibrated threshold at 0.20 suggests threshold tautology moved from 0.25 bimodal to 0.20 continuous low edge, not fully to middle range as predicted.",
+    "Whether the behavioral signal (session_quality from /api/session/status) generalizes to production token refresh endpoints where refresh failure may produce different error surfaces or graded severity beyond the synthetic mapping."
+  ]
+}

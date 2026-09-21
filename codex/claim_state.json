@@ -1249,6 +1249,16 @@
         "reason": "C-FRESHNESS orthogonality CONFIRMED at delta=0.15 per frozen decision_rule (C1-C7 all PASS) on production-like LOCAL testbed. V2 confound redesign resolves parent fragility: B-PARENT-CONFOUND-V2 |r|=0.90 robust to 304 inclusion/exclusion (delta 0.0003). Stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684, 3 endpoints, 3/3 with variance. B-FLASK-ONLY |r|=0.0017 confirms orthogonality without infrastructure. However, claim ceiling bounded: n_non304=684 < 800 frozen question requirement (delta=0.10 marginal, TOST p=0.060); LOCAL testbed only (not distributed production); headers-only structural signal; single-node CDN simulation. VALIDATED/PRODUCT_CORE not warranted \u2014 parallel-channel architecture justified only for this LOCAL production-like regime at delta=0.15. Status EXPERIMENTAL pending: (1) n>=800 non-304 re-run; (2) distributed CDN/OAuth validation; (3) concurrent load testing."
       },
       {
+        "experiment_id": "EXP-PRODUCT-35538865048",
+        "lane": "product",
+        "created_at": "2026-09-20T21:29:48.211903+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 all five frozen decision conditions pass (C1 discrimination 0.8333 > 0.5, C2 TP=1.0 at calibrated threshold 0.20 Wilson lower 0.9842 >= 0.80, C3 behavioral_std 0.1957-0.2010 > 0.05 all 4 conditions AND Pearson r=-0.0065 CI upper 0.0831 < 0.15, C4 FP=0.0 <= 0.10 on 240 noise-only samples, C5 TOST pass at delta=0.15 p_upper 0.000288 < 0.05). However, audit REVISE status applies because: (1) FP constraint never binding \u2014 noise-only scores 0.05-0.14 fully separated from failure minimum 0.20 by design, so no test of discriminating operating point under overlapping distributions; (2) calibrated threshold 0.20 at lower bound of tested range, below hypothesized [0.40,0.60], because FP never binding means argmax F1 selects lowest feasible threshold; (3) threshold tautology partially resolved (gradual TP decline 1.00\u21920.917\u21920.85\u21920.78 from 0.20-0.35 vs parent flat 1.0 across 0.15-0.35) but operating point remains low-edge not middle-range; (4) mock-only ceiling \u2014 all measurements on localhost Flask 3.1.3 + SQLite WAL + JWT; no production OAuth/OIDC, CDN, network RTT, or DB-backed sessions. The frozen SURVIVES maps to canonical SUPPORTS outcome but producer_claim_supported=false per audit. C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized. Claim ceiling bounded to localhost stochastic mock with 4/4 effective noise types (error_format_variation fixed, now non-inert at structural_std 0.4017) and low-edge calibrated threshold.",
+        "source_commit": "9a71547e8a3f38021bcee844b19d9b7f3f7b4ef3",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "C-FRESHNESS remains EXPERIMENTAL with strengthened evidence base. All five frozen decision conditions pass at n=480 on localhost stochastic mock with continuous severity gradient. Calibrated threshold 0.20 achieves TP=1.0, FP=0.0, F1=1.0. Orthogonality confirmed: r=-0.0065 CI upper 0.0831 < 0.15, TOST PASS (6th independent mock confirmation). error_format_variation fix verified (structural_std 0.4017 > 0.15, 4/4 effective noise types). V-THRESHOLD-TAUTOLOGY partially resolved: continuous scores show discriminating TP decline (1.00\u21920.917\u21920.85\u21920.78 from 0.20-0.35) vs parent flat 1.0 across 0.15-0.35. However, claim ceiling bounded: (a) calibrated threshold at lower bound 0.20, below hypothesized [0.40,0.60], due to designed noise/refresh separation gap (noise max 0.14 < failure min 0.20); (b) FP constraint never binding (FP=0.0 at all thresholds) \u2014 no test of discrimination against overlapping noise; (c) mock-only ceiling \u2014 localhost Flask+SQLite+JWT only; no production OAuth/OIDC, CDN, network RTT, DB sessions. NOT validated: production substrate, overlapping noise/refresh distributions, delta=0.10, continuous severity in production, discriminating threshold in middle range."
+      },
+      {
         "experiment_id": "EXP-GRAPH-35538864957",
         "lane": "graph",
         "created_at": "2026-09-20T21:29:48.972222+00:00",
@@ -1723,6 +1733,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No validated extrapolation to full DOM (n=50/82) exists. Both model-based extrapolation paths are gated behind failed C1/C2 per frozen rule. ModelB gated extrapolation predicts 0.982 at n50 (>0.80) but is invalid due to model misspecification (step-function data fitted by smooth saturating power law). The product consequence question (Docker re-collection investment vs recipe density viability) remains unresolved. Per-task recipe achieves 78.65% at n=20 but is untested at n>20. No evidence accumulated for or against C-PRODUCT-ECON from this experiment."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35544806153",
+        "lane": "intel",
+        "created_at": "2026-09-20T23:30:01.732204+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence accumulated. The empirical CDF mapping cannot provide a validated extrapolation to full-DOM n=50/82 due to C2 FAIL (specification flaw) and C3 FAIL (linear extrapolation physically impossible). Product consequences are undefined under MEASUREMENT_INVALID per the frozen decision rule. Whether recipe-based or non-recipe density is optimal at full DOM remains UNKNOWN. The product_consequence_positive ('plateau structural, Docker re-collection NOT justified') and product_consequence_negative ('plateau breaks, Docker re-collection justified') are both untriggered. Claim ceiling unchanged."
       }
     ],
     "C-MEAS-VALID": [
@@ -2415,6 +2435,26 @@
         "claim_id": "C-MEAS-VALID",
         "status": "EXPERIMENTAL",
         "reason": "Encoding-agnostic ORACLE-GUIDED decompression (SHA256 ground truth as stop condition) losslessly recovers all tested Cloudflare CDN transformations on DYNAMIC responses: 240/240 primary, 80/80 BINARY, 15/15 identity, 45/45 depth 3-5, 30/30 large. This advances from parent FALSIFIES (EXP-RUNTIME-35538865067: 60/240 fixed-order) by demonstrating CDN re-encoding is fully recoverable via iterative decode. However, the claim remains EXPERIMENTAL \u2014 not VALIDATED \u2014 because: (a) the implementation is oracle-guided (uses ground_truth_sha256, audit V1 oracle circularity, severity major); a deployable decoder cannot use ground truth; (b) oracle-free greedy decode is likely correct (method distribution shows each cell requires a deterministic path, audit V4) but untested; (c) CDN cache HIT (stale) responses not exercised (0/423 HIT, audit V3); (d) single edge (iad05), single tier (free quick tunnel), no concurrent load; (e) raw wire bytes not persisted for independent recomputation (audit V6). The parent's localhost-established claims (iterative decompression 840/840, TE framing streaming 480/480, decompressor API streaming 840/840) are unaffected. C-MEAS-VALID remains blocked from VALIDATED and PRODUCT_CORE pending: oracle-free decode validation on same matrix, CDN HIT staleness test, and byte-level recomputable artifact."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35544804817",
+        "lane": "runtime",
+        "created_at": "2026-09-20T23:29:56.521387+00:00",
+        "decision": "MIXED",
+        "source_commit": "250fbb4605cbb194a82c5f4b2d49047106b5ec7d",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, no SHA256 oracle) produces byte-identical output to ground truth on all 240/240 Cloudflare free-tier quick-tunnel DYNAMIC CDN observations (48 cells x 5 reps), 240/240 localhost positive control, 15/15 identity null control, ~45/45 depth 3-5 (deduped), ~30/30 large >100KB (deduped), 48/48 HIT-test DYNAMIC bytes, 0 ambiguous tie-breaks, method distribution br=60 gz+br=60 gz=80 gz+gz=40 matching parent exactly. This resolves the parent's audit V1 oracle circularity (EXP-RUNTIME-35542474231): the deployable decoder works without SHA256 oracle. However, C-MEAS-VALID cannot advance to VALIDATED because: (a) CDN cache HIT (stale) serving is untestable on Cloudflare quick tunnel free-tier (0% HIT rate, all 48 DYNAMIC, infra ceiling not negative result); (b) frozen decision_rule requires ALL C1-C7 pass including C2 >=90% HIT rate, which is unmet; (c) raw_cell_results.jsonl has 75 duplicate cell+rep keys (audit V3, minor); (d) cache stability C3 claim 6/6 not persisted to raw artifact (audit V4, moderate); (e) regression baselines B-ORACLE-GUIDED-REGRESSION and B-FIXED-ORDER-CDN inherited-not-revalidated (audit V5, moderate); (f) CDN edge unknown this run (parent iad05, audit V6, minor). Claim ceiling bounded to: oracle-free greedy decode (MAX_DEPTH=5), Cloudflare free-tier quick tunnel, edge unknown, DYNAMIC only, sequential jittered requests 200-500ms, 10KB nominal/150KB large, brotli q4/gzip L1, Python 3.12.14, brotli 1.2.0. NOT VALIDATED for: CDN cache HIT/stale-cache, other CDN providers/tiers/edges, concurrent load, HTTP/2 or H3, streaming decompressor API on CDN wire bytes, or re-validated oracle-guided/fixed-order baselines on same wire bytes this run."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35544806153",
+        "lane": "intel",
+        "created_at": "2026-09-20T23:30:01.732204+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
+        "claim_id": "C-MEAS-VALID",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence accumulated for or against this claim. The frozen decision_rule triggers MEASUREMENT_INVALID (C1 PASS, C2 FAIL) because strict monotonicity requires F(10)>F(5) but F(5)=F(10)=0.0 \u2014 a specification design flaw (prereg text says 'from n=10 to n=20' but frozen rule includes n=5). The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance (audit VF5): it is the true data-generating process at training points, not an independent model that could be validated. C1 PASS is trivially true by construction, not evidence of predictive power. C3 FAIL (linear extrapolation predicts F(50)=0.9602, F(82)=1.3813 > 1.0 impossible) demonstrates the frozen linear method is misspecified for bounded [0,1] quantities. This is a measurement validity gate failure, not a scientific result. All four prior parametric/non-parametric approaches also failed: Phi(mean(SNR_i)) 40-50pp (EXP-INTEL-35476271877), Phi(mean/std) 17.8pp (EXP-INTEL-35530590171), Phi(median/std) 34.59pp + sign-fraction power law 12.39pp (EXP-INTEL-35538868377). No validated extrapolation model exists. Claim ceiling unchanged."
       }
     ]
   },
@@ -2480,24 +2520,24 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35538868377",
+      "experiment_id": "EXP-INTEL-35544806153",
       "lane": "intel",
-      "created_at": "2026-09-20T21:29:56.699167+00:00",
+      "created_at": "2026-09-20T23:30:01.732204+00:00",
       "decision": "MEASUREMENT_INVALID",
-      "source_commit": "d5283e58d1c0f6d0cb70253cfe9c09be76ceb4b3",
+      "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
       "claim_id": "C-PRODUCT-ECON",
       "status": "HYPOTHESIS",
-      "reason": "No validated extrapolation to full DOM (n=50/82) exists. Both model-based extrapolation paths are gated behind failed C1/C2 per frozen rule. ModelB gated extrapolation predicts 0.982 at n50 (>0.80) but is invalid due to model misspecification (step-function data fitted by smooth saturating power law). The product consequence question (Docker re-collection investment vs recipe density viability) remains unresolved. Per-task recipe achieves 78.65% at n=20 but is untested at n>20. No evidence accumulated for or against C-PRODUCT-ECON from this experiment."
+      "reason": "No new evidence accumulated. The empirical CDF mapping cannot provide a validated extrapolation to full-DOM n=50/82 due to C2 FAIL (specification flaw) and C3 FAIL (linear extrapolation physically impossible). Product consequences are undefined under MEASUREMENT_INVALID per the frozen decision rule. Whether recipe-based or non-recipe density is optimal at full DOM remains UNKNOWN. The product_consequence_positive ('plateau structural, Docker re-collection NOT justified') and product_consequence_negative ('plateau breaks, Docker re-collection justified') are both untriggered. Claim ceiling unchanged."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-RUNTIME-35542474231",
-      "lane": "runtime",
-      "created_at": "2026-09-20T22:42:25.215248+00:00",
-      "decision": "CONSTRAINED \u2014 Encoding-agnostic ORACLE-GUIDED iterative decompression (try brotli\u2192gzip\u2192identity until SHA256 matches ground truth) produces byte-identical output for all tested Cloudflare free-tier CDN transformations on DYNAMIC responses: 240/240 primary CDN cells, 80/80 BINARY, 15/15 identity, 45/45 depth 3-5, 30/30 large payloads, positive control 240/240, null control 15/15. All six frozen decision-rule conditions C1-C6 pass. Audit confirms all recomputed metrics match producer on deduped data (576 unique URLs). However, producer_claim_supported=false per audit: (1) the implementation uses ground_truth_sha256 as stop condition (audit V1_oracle_circularity, severity major) \u2014 success is tautologically guaranteed when CDN transforms are lossless and formats are distinguishable, making this a lossless-recovery observation, not a deployable-decoder validation; (2) raw_cell_results.jsonl has 87 duplicate rows from run_experiment.py:733 bug (audit V2, minor); (3) zero CDN cache HIT responses observed (audit V3, moderate) \u2014 DYNAMIC only, stale-cache serving untested; (4) oracle-free greedy decode untested (audit V4, moderate) \u2014 product cannot use SHA oracle. Claim ceiling is bounded to: oracle-guided encoding-agnostic decode, Cloudflare free-tier quick tunnel, edge iad05, DYNAMIC only, sequential jittered requests, 10KB nominal/150KB large, brotli q4/gzip L1. NOT VALIDATED for: deployable oracle-free decompression, CDN HIT/stale-cache, other CDN providers/tiers/edges, concurrent load, HTTP/2 or H3, mixed chunk-size pipelines.",
-      "source_commit": "a670fcd8f610361d192e394df978e7cd323abe73",
+      "experiment_id": "EXP-INTEL-35544806153",
+      "lane": "intel",
+      "created_at": "2026-09-20T23:30:01.732204+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
       "claim_id": "C-MEAS-VALID",
-      "status": "EXPERIMENTAL",
-      "reason": "Encoding-agnostic ORACLE-GUIDED decompression (SHA256 ground truth as stop condition) losslessly recovers all tested Cloudflare CDN transformations on DYNAMIC responses: 240/240 primary, 80/80 BINARY, 15/15 identity, 45/45 depth 3-5, 30/30 large. This advances from parent FALSIFIES (EXP-RUNTIME-35538865067: 60/240 fixed-order) by demonstrating CDN re-encoding is fully recoverable via iterative decode. However, the claim remains EXPERIMENTAL \u2014 not VALIDATED \u2014 because: (a) the implementation is oracle-guided (uses ground_truth_sha256, audit V1 oracle circularity, severity major); a deployable decoder cannot use ground truth; (b) oracle-free greedy decode is likely correct (method distribution shows each cell requires a deterministic path, audit V4) but untested; (c) CDN cache HIT (stale) responses not exercised (0/423 HIT, audit V3); (d) single edge (iad05), single tier (free quick tunnel), no concurrent load; (e) raw wire bytes not persisted for independent recomputation (audit V6). The parent's localhost-established claims (iterative decompression 840/840, TE framing streaming 480/480, decompressor API streaming 840/840) are unaffected. C-MEAS-VALID remains blocked from VALIDATED and PRODUCT_CORE pending: oracle-free decode validation on same matrix, CDN HIT staleness test, and byte-level recomputable artifact."
+      "status": "HYPOTHESIS",
+      "reason": "No new evidence accumulated for or against this claim. The frozen decision_rule triggers MEASUREMENT_INVALID (C1 PASS, C2 FAIL) because strict monotonicity requires F(10)>F(5) but F(5)=F(10)=0.0 \u2014 a specification design flaw (prereg text says 'from n=10 to n=20' but frozen rule includes n=5). The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance (audit VF5): it is the true data-generating process at training points, not an independent model that could be validated. C1 PASS is trivially true by construction, not evidence of predictive power. C3 FAIL (linear extrapolation predicts F(50)=0.9602, F(82)=1.3813 > 1.0 impossible) demonstrates the frozen linear method is misspecified for bounded [0,1] quantities. This is a measurement validity gate failure, not a scientific result. All four prior parametric/non-parametric approaches also failed: Phi(mean(SNR_i)) 40-50pp (EXP-INTEL-35476271877), Phi(mean/std) 17.8pp (EXP-INTEL-35530590171), Phi(median/std) 34.59pp + sign-fraction power law 12.39pp (EXP-INTEL-35538868377). No validated extrapolation model exists. Claim ceiling unchanged."
     }
   }
 }

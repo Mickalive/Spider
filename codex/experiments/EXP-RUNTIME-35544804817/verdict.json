@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "lane": "runtime",
+  "decision": "MIXED",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, no SHA256 oracle) produces byte-identical output to ground truth on all 240/240 Cloudflare free-tier quick-tunnel DYNAMIC CDN observations (48 cells x 5 reps), 240/240 localhost positive control, 15/15 identity null control, ~45/45 depth 3-5 (deduped), ~30/30 large >100KB (deduped), 48/48 HIT-test DYNAMIC bytes, 0 ambiguous tie-breaks, method distribution br=60 gz+br=60 gz=80 gz+gz=40 matching parent exactly. This resolves the parent's audit V1 oracle circularity (EXP-RUNTIME-35542474231): the deployable decoder works without SHA256 oracle. However, C-MEAS-VALID cannot advance to VALIDATED because: (a) CDN cache HIT (stale) serving is untestable on Cloudflare quick tunnel free-tier (0% HIT rate, all 48 DYNAMIC, infra ceiling not negative result); (b) frozen decision_rule requires ALL C1-C7 pass including C2 >=90% HIT rate, which is unmet; (c) raw_cell_results.jsonl has 75 duplicate cell+rep keys (audit V3, minor); (d) cache stability C3 claim 6/6 not persisted to raw artifact (audit V4, moderate); (e) regression baselines B-ORACLE-GUIDED-REGRESSION and B-FIXED-ORDER-CDN inherited-not-revalidated (audit V5, moderate); (f) CDN edge unknown this run (parent iad05, audit V6, minor). Claim ceiling bounded to: oracle-free greedy decode (MAX_DEPTH=5), Cloudflare free-tier quick tunnel, edge unknown, DYNAMIC only, sequential jittered requests 200-500ms, 10KB nominal/150KB large, brotli q4/gzip L1, Python 3.12.14, brotli 1.2.0. NOT VALIDATED for: CDN cache HIT/stale-cache, other CDN providers/tiers/edges, concurrent load, HTTP/2 or H3, streaming decompressor API on CDN wire bytes, or re-validated oracle-guided/fixed-order baselines on same wire bytes this run."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "On a Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses, does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses, and does the decompressed output differ from the DYNAMIC-path decompressed output?",
+  "reason": "MIXED: C1 passes decisively (240/240 oracle-free DYNAMIC decode correct, 0 ambiguous tie-breaks, method distribution identical to parent oracle-guided). This is the critical scientific finding — the deployable decoder works without SHA256 oracle on Cloudflare CDN DYNAMIC responses. However, frozen decision_rule SURVIVES_CURRENT_TEST requires ALL C1-C7 pass; C2 (CDN HIT >=90% correct) is untestable because Cloudflare quick tunnel free-tier does not cache responses despite Cache-Control: public, max-age=300 (0% HIT rate, all 48 DYNAMIC). This is an infrastructure ceiling, not a negative scientific result. The frozen spec required N=5 per HIT cell (240 total) but producer implemented N=1 per cell (48 total), further reducing evaluation power even if HITs were observed. Per frozen decision_rule clause 'IF C1 passes but C2 fails: MIXED — oracle-free works for DYNAMIC but HIT staleness is unresolvable', the correct verdict is MIXED. The audit REVISE status (producer_claim_supported=false) is accepted: the frozen gate cannot be claimed SURVIVES when C2 is unmet. The parent's oracle circularity gap (audit V1, EXP-RUNTIME-35542474231) is resolved by this experiment — oracle-free decode is validated for DYNAMIC. The HIT gap (parent audit V3) remains open and requires different infrastructure.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35544804817/spec.json frozen decision_rule C1-C7",
+    "research/experiments/EXP-RUNTIME-35544804817/prereg.md oracle_free_greedy_decode algorithm and N=5 per HIT cell",
+    "research/experiments/EXP-RUNTIME-35544804817/freeze.json frozen at 2026-09-20T23:36:27",
+    "research/experiments/EXP-RUNTIME-35544804817/result.json status COMPLETE outcome SUPPORTS metrics: cdn_primary 240/240, localhost 240/240, identity 15/15, depth 90/90, large 60/60, hit_test 48/48 but hit_rate 0.0",
+    "research/experiments/EXP-RUNTIME-35544804817/audit.json status REVISE, producer_claim_supported=false, V1-C2-not-evaluable (severity major), V2-HIT-N-underpowered, V3-duplicate-rows, V4-stability-not-persisted, V5-regression-not-rerun, V6-edge-unknown, V7-oracle-free-equivalence-valid",
+    "research/experiments/EXP-RUNTIME-35544804817/report.md C2 INFRA finding and interpretation",
+    "research/experiments/EXP-RUNTIME-35544804817/provenance.json cdn_edge unknown, wall_time 229.8s",
+    "research/experiments/EXP-RUNTIME-35544804817/raw_cell_results.jsonl sha256 c8caf5bc 693 rows all oracle_free_correct true 0 ambiguous",
+    "research/experiments/EXP-RUNTIME-35542474231/result.json parent 240/240 oracle-guided, 60/240 fixed-order",
+    "research/experiments/EXP-RUNTIME-35542474231/audit.json parent REVISE V1 oracle circularity V3 0 HIT",
+    "research/experiments/EXP-RUNTIME-35542474231/handoff.json parent ceiling oracle-guided DYNAMIC only",
+    "codex/claim_state.json C-MEAS-VALID latest status EXPERIMENTAL from EXP-RUNTIME-35542474231"
+  ]
+}

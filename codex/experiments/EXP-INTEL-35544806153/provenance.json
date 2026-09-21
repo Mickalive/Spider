@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35544806153",
+  "lane": "intel",
+  "created_at": "2026-09-20T23:30:01.732204+00:00",
+  "executed_at": "2026-09-20T23:45:00.000000+00:00",
+  "github_run_id": "35544806153",
+  "base_sha": "6cbe79a74a31e0b0ba0ebe110da059d7a5847e47",
+  "frozen_at": "2026-09-20T23:31:39.391596+00:00",
+  "execution_environment": {
+    "platform": "linux",
+    "python_version": "3.12",
+    "dependencies": ["gzip", "json", "hashlib", "math"],
+    "external_calls": "none — offline computation only",
+    "browser_network_model_calls": "none"
+  },
+  "data_sources": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw — per-iteration margin data for canonical recipe tag_entropy x DEF-FULL-MAP at n=5/10/15/20",
+      "n_iterations_per_n": 10000,
+      "source_experiment": "EXP-INTEL-35476271877"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "raw — per-n margin statistics, baseline reproduction, null control",
+      "source_experiment": "EXP-INTEL-35476271877"
+    }
+  ],
+  "frozen_inputs": {
+    "request.json": "db0f173842ccf6ffa325300b64c1b3d28302918748d4cdcf7645ffd24ff5728b",
+    "spec.json": "3865eab694721602c212aae4b09f51e366b1200f414638c9d0123bc6c7609a34",
+    "prereg.md": "6dad88f899dc816b68d91b7cd610f233a519d7fa49e6b387a70497d04222c5cf",
+    "freeze.json_frozen_at": "2026-09-20T23:31:39.391596+00:00"
+  },
+  "parent_chain": {
+    "parent_experiment": "EXP-INTEL-35538868377",
+    "parent_handoff_sha256": "f67ff992cba30ded45770bef618a43d518703867bea1d9ff4107757450c8fa4a",
+    "grandparent_experiment": "EXP-INTEL-35530590171",
+    "great_grandparent_experiment": "EXP-INTEL-35476271877",
+    "chain_status": "4 consecutive MEASUREMENT_INVALID or REJECTED results in SNR decomposition chain"
+  },
+  "computation": {
+    "method": "Offline Python computation on existing reconstructed data. No browser, network, or model calls.",
+    "analysis_steps": [
+      "Load per-iteration margins from snr_per_iteration_tag_entropy.json.gz for canonical recipe (tag_entropy x DEF-FULL-MAP)",
+      "Compute F(n) = proportion(margin_i > 0) at each n in {5, 10, 15, 20}",
+      "Validate F(n) against observed ranking agreement reference values at training points (C1)",
+      "Check strict monotonicity F(20)>F(15)>F(10)>F(5) (C2)",
+      "Linear extrapolation from n=15->n=20 slope to n=50/82 (C3)",
+      "Compare against constant-trend null extrapolation (NC1)"
+    ],
+    "compute_time_seconds": "<5"
+  },
+  "artifacts_produced": [
+    {
+      "path": "research/experiments/EXP-INTEL-35544806153/result.json",
+      "role": "derived — canonical result packet"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35544806153/report.md",
+      "role": "derived — human-readable interpretation"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35544806153/provenance.json",
+      "role": "derived — this file"
+    }
+  ],
+  "reproduction_instructions": {
+    "description": "Recompute F(n) = proportion(margin_i > 0) from per-iteration margin data",
+    "steps": [
+      "gunzip research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "For each n in {5, 10, 15, 20}, load per_iteration[n][DEF-FULL-MAP][canonical]",
+      "Compute proportion(margin > 0) across all 10000 iterations",
+      "Compare against observed_reference = {5: 0.0, 10: 0.0, 15: 0.4996, 20: 0.5654}"
+    ],
+    "expected_results": "F(5)=0.0, F(10)=0.0, F(15)=0.4996, F(20)=0.5654. C1 PASS, C2 FAIL (F(10)=F(5)=0.0), C3 FAIL (F(50)=0.9602>0.80)."
+  }
+}
