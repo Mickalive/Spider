@@ -1,0 +1,679 @@
+{
+  "experiment_id": "EXP-PHYSICS-35651906573",
+  "seed": 42,
+  "N_SHUFFLE": 1999,
+  "K_categories": 12,
+  "alpha_prior_values": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "positive_control": {
+    "transitions_sha256": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+    "n_transitions": 5000,
+    "determinism_k2": {
+      "deterministic": 366,
+      "stochastic": 1072,
+      "total": 1438,
+      "det_ratio": 0.2545201668984701
+    },
+    "per_alpha": {
+      "0.5": {
+        "alpha_prior": 0.5,
+        "observed_log_bf": 643.0887818351148,
+        "null_median": -78.3598155522759,
+        "null_mean": -78.16585016584742,
+        "null_std": 15.573707379066017,
+        "null_max": -21.141361116682674,
+        "percentile_99_9": -25.398867730717644,
+        "p_value": 0.0005,
+        "n_shuffle": 1999,
+        "shuffled_first5": [
+          -69.90112536011293,
+          -94.21280025642227,
+          -84.46247075098836,
+          -86.80349231469154,
+          -107.31231754710825
+        ],
+        "c1_pass": true,
+        "c3_pass": true
+      },
+      "1.0": {
+        "alpha_prior": 1.0,
+        "observed_log_bf": 338.6710973256759,
+        "null_median": -130.90835513540515,
+        "null_mean": -130.73795730275515,
+        "null_std": 10.076421545805399,
+        "null_max": -92.94141450463576,
+        "percentile_99_9": -96.93574007567125,
+        "p_value": 0.0005,
+        "n_shuffle": 1999,
+        "shuffled_first5": [
+          -125.00166324137535,
+          -140.9062931372373,
+          -134.169409832597,
+          -135.84892195784414,
+          -150.05722573815547
+        ],
+        "c1_pass": true,
+        "c3_pass": true
+      },
+      "2.0": {
+        "alpha_prior": 2.0,
+        "observed_log_bf": 167.89839491149542,
+        "null_median": -116.09881255547953,
+        "null_mean": -115.93068911084933,
+        "null_std": 6.0627353328463585,
+        "null_max": -92.76723145735923,
+        "percentile_99_9": -95.87055740225041,
+        "p_value": 0.0005,
+        "n_shuffle": 1999,
+        "shuffled_first5": [
+          -112.24433457682426,
+          -121.89708756832624,
+          -117.70788774620814,
+          -118.77231753544038,
+          -127.76807589645432
+        ],
+        "c1_pass": true,
+        "c3_pass": true
+      }
+    },
+    "c6_pass": true
+  },
+  "variants": {
+    "vanillajs": {
+      "n_raw": 144,
+      "n_valid": 112,
+      "n_nl": 80,
+      "n_link_valid": 32,
+      "n_link_nl": 0,
+      "sessions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unique_url_before": [
+        "https://todomvc.com/examples/javascript-es6/dist",
+        "https://todomvc.com/examples/javascript-es6/dist/#",
+        "https://todomvc.com/examples/javascript-es6/dist/#/active",
+        "https://todomvc.com/examples/javascript-es6/dist/#/completed"
+      ],
+      "unique_url_after": [
+        "https://todomvc.com/examples/javascript-es6/dist",
+        "https://todomvc.com/examples/javascript-es6/dist/#",
+        "https://todomvc.com/examples/javascript-es6/dist/#/active",
+        "https://todomvc.com/examples/javascript-es6/dist/#/completed"
+      ],
+      "action_distribution_nl": {
+        "form_submit": 36,
+        "button_click": 26,
+        "js_navigate": 18
+      },
+      "determinism_k2": {
+        "deterministic": 17,
+        "stochastic": 1,
+        "total": 18,
+        "det_ratio": 0.9444444444444444
+      },
+      "per_alpha": {
+        "0.5": {
+          "alpha_prior": 0.5,
+          "observed_log_bf": -11.48964481134648,
+          "null_median": -39.72955257045231,
+          "null_mean": -39.58627203450368,
+          "null_std": 2.646819776945562,
+          "null_max": -29.92603329704224,
+          "percentile_99_9": -30.550552548078507,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -39.55842029386517,
+            -40.92545247871709,
+            -36.97283607632366,
+            -38.98773909686594,
+            -39.25636197270231
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5478048324584961
+        },
+        "1.0": {
+          "alpha_prior": 1.0,
+          "observed_log_bf": -11.537420435660863,
+          "null_median": -32.690852592785234,
+          "null_mean": -32.54726082413151,
+          "null_std": 1.9851974894137085,
+          "null_max": -24.896372244403665,
+          "percentile_99_9": -25.867453148016423,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -32.472824142137824,
+            -33.796022281999484,
+            -30.47706299857427,
+            -32.27054097656003,
+            -31.411049769284176
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5438718795776367
+        },
+        "2.0": {
+          "alpha_prior": 2.0,
+          "observed_log_bf": -10.380099865694262,
+          "null_median": -24.821483716076898,
+          "null_mean": -24.697129042234224,
+          "null_std": 1.4106180191572564,
+          "null_max": -19.10703149476194,
+          "percentile_99_9": -19.43079891954526,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -24.644625276736463,
+            -25.752271017303684,
+            -23.195022272235832,
+            -24.680008690547282,
+            -23.09868325486397
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.545785665512085
+        }
+      },
+      "baseline_url_only_pmi_bits": 0.05813708206086476,
+      "baseline_action_history_acc_k3": {
+        "n_groups": 23,
+        "n_groups_det": 23,
+        "n_records": 80,
+        "n_records_det": 80,
+        "fraction_records_det": 1.0,
+        "fraction_groups_det": 1.0
+      },
+      "baseline_state_history_k2_mi_bits": 0.8269108161495716,
+      "c1_all_alphas": true,
+      "c3_all_alphas": true,
+      "c1_any_alpha": true,
+      "c3_any_alpha": true
+    },
+    "react": {
+      "n_raw": 144,
+      "n_valid": 112,
+      "n_nl": 80,
+      "n_link_valid": 32,
+      "n_link_nl": 0,
+      "sessions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unique_url_before": [
+        "https://todomvc.com/examples/react/dist",
+        "https://todomvc.com/examples/react/dist/#",
+        "https://todomvc.com/examples/react/dist/#/active",
+        "https://todomvc.com/examples/react/dist/#/completed"
+      ],
+      "unique_url_after": [
+        "https://todomvc.com/examples/react/dist",
+        "https://todomvc.com/examples/react/dist/#",
+        "https://todomvc.com/examples/react/dist/#/active",
+        "https://todomvc.com/examples/react/dist/#/completed"
+      ],
+      "action_distribution_nl": {
+        "form_submit": 36,
+        "button_click": 26,
+        "js_navigate": 18
+      },
+      "determinism_k2": {
+        "deterministic": 17,
+        "stochastic": 1,
+        "total": 18,
+        "det_ratio": 0.9444444444444444
+      },
+      "per_alpha": {
+        "0.5": {
+          "alpha_prior": 0.5,
+          "observed_log_bf": -11.48964481134648,
+          "null_median": -39.72955257045231,
+          "null_mean": -39.58627203450368,
+          "null_std": 2.646819776945562,
+          "null_max": -29.92603329704224,
+          "percentile_99_9": -30.550552548078507,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -39.55842029386517,
+            -40.92545247871709,
+            -36.97283607632366,
+            -38.98773909686594,
+            -39.25636197270231
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5501821041107178
+        },
+        "1.0": {
+          "alpha_prior": 1.0,
+          "observed_log_bf": -11.537420435660863,
+          "null_median": -32.690852592785234,
+          "null_mean": -32.54726082413151,
+          "null_std": 1.9851974894137085,
+          "null_max": -24.896372244403665,
+          "percentile_99_9": -25.867453148016423,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -32.472824142137824,
+            -33.796022281999484,
+            -30.47706299857427,
+            -32.27054097656003,
+            -31.411049769284176
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5485482215881348
+        },
+        "2.0": {
+          "alpha_prior": 2.0,
+          "observed_log_bf": -10.380099865694262,
+          "null_median": -24.821483716076898,
+          "null_mean": -24.697129042234224,
+          "null_std": 1.4106180191572564,
+          "null_max": -19.10703149476194,
+          "percentile_99_9": -19.43079891954526,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -24.644625276736463,
+            -25.752271017303684,
+            -23.195022272235832,
+            -24.680008690547282,
+            -23.09868325486397
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5483493804931641
+        }
+      },
+      "baseline_url_only_pmi_bits": 0.05813708206086476,
+      "baseline_action_history_acc_k3": {
+        "n_groups": 23,
+        "n_groups_det": 23,
+        "n_records": 80,
+        "n_records_det": 80,
+        "fraction_records_det": 1.0,
+        "fraction_groups_det": 1.0
+      },
+      "baseline_state_history_k2_mi_bits": 0.8269108161495716,
+      "c1_all_alphas": true,
+      "c3_all_alphas": true,
+      "c1_any_alpha": true,
+      "c3_any_alpha": true
+    },
+    "vue": {
+      "n_raw": 144,
+      "n_valid": 112,
+      "n_nl": 80,
+      "n_link_valid": 32,
+      "n_link_nl": 0,
+      "sessions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unique_url_before": [
+        "https://todomvc.com/examples/vue/dist/#",
+        "https://todomvc.com/examples/vue/dist/#/active",
+        "https://todomvc.com/examples/vue/dist/#/completed"
+      ],
+      "unique_url_after": [
+        "https://todomvc.com/examples/vue/dist/#",
+        "https://todomvc.com/examples/vue/dist/#/active",
+        "https://todomvc.com/examples/vue/dist/#/completed"
+      ],
+      "action_distribution_nl": {
+        "form_submit": 36,
+        "button_click": 26,
+        "js_navigate": 18
+      },
+      "determinism_k2": {
+        "deterministic": 11,
+        "stochastic": 2,
+        "total": 13,
+        "det_ratio": 0.8461538461538461
+      },
+      "per_alpha": {
+        "0.5": {
+          "alpha_prior": 0.5,
+          "observed_log_bf": -13.75062682860964,
+          "null_median": -38.89483314163893,
+          "null_mean": -38.75837399446058,
+          "null_std": 2.433534000357162,
+          "null_max": -28.866421474677324,
+          "percentile_99_9": -30.701361722037113,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -39.25288681623455,
+            -41.06608223257187,
+            -38.122554687365195,
+            -36.97173767034981,
+            -40.77043524407138
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5011324882507324
+        },
+        "1.0": {
+          "alpha_prior": 1.0,
+          "observed_log_bf": -15.505944768691677,
+          "null_median": -34.519866574339744,
+          "null_mean": -34.39018755069428,
+          "null_std": 1.8260305069855465,
+          "null_max": -26.925108570674297,
+          "percentile_99_9": -28.21162658305755,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -34.780350009946005,
+            -36.29036214224206,
+            -33.80966520600603,
+            -33.07456798391124,
+            -35.01083245572087
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.49497151374816895
+        },
+        "2.0": {
+          "alpha_prior": 2.0,
+          "observed_log_bf": -15.568494005387379,
+          "null_median": -28.68456104607469,
+          "null_mean": -28.564701527407856,
+          "null_std": 1.3313598434262035,
+          "null_max": -22.689699568964983,
+          "percentile_99_9": -23.480653910288467,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -28.98309593469412,
+            -30.10297176101841,
+            -28.085431165514592,
+            -27.825460305576485,
+            -27.98891877217693
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.49539852142333984
+        }
+      },
+      "baseline_url_only_pmi_bits": 0.07161169713610957,
+      "baseline_action_history_acc_k3": {
+        "n_groups": 23,
+        "n_groups_det": 23,
+        "n_records": 80,
+        "n_records_det": 80,
+        "fraction_records_det": 1.0,
+        "fraction_groups_det": 1.0
+      },
+      "baseline_state_history_k2_mi_bits": 0.7020178384350835,
+      "c1_all_alphas": true,
+      "c3_all_alphas": true,
+      "c1_any_alpha": true,
+      "c3_any_alpha": true
+    },
+    "angular": {
+      "n_raw": 144,
+      "n_valid": 112,
+      "n_nl": 80,
+      "n_link_valid": 32,
+      "n_link_nl": 0,
+      "sessions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unique_url_before": [
+        "https://todomvc.com/examples/angular/dist/browser/#/active",
+        "https://todomvc.com/examples/angular/dist/browser/#/all",
+        "https://todomvc.com/examples/angular/dist/browser/#/completed"
+      ],
+      "unique_url_after": [
+        "https://todomvc.com/examples/angular/dist/browser/#/active",
+        "https://todomvc.com/examples/angular/dist/browser/#/all",
+        "https://todomvc.com/examples/angular/dist/browser/#/completed"
+      ],
+      "action_distribution_nl": {
+        "form_submit": 36,
+        "button_click": 26,
+        "js_navigate": 18
+      },
+      "determinism_k2": {
+        "deterministic": 11,
+        "stochastic": 2,
+        "total": 13,
+        "det_ratio": 0.8461538461538461
+      },
+      "per_alpha": {
+        "0.5": {
+          "alpha_prior": 0.5,
+          "observed_log_bf": -13.75062682860964,
+          "null_median": -38.89483314163893,
+          "null_mean": -38.75837399446058,
+          "null_std": 2.433534000357162,
+          "null_max": -28.866421474677324,
+          "percentile_99_9": -30.701361722037113,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -39.25288681623455,
+            -41.06608223257187,
+            -38.122554687365195,
+            -36.97173767034981,
+            -40.77043524407138
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.4962480068206787
+        },
+        "1.0": {
+          "alpha_prior": 1.0,
+          "observed_log_bf": -15.505944768691677,
+          "null_median": -34.519866574339744,
+          "null_mean": -34.39018755069428,
+          "null_std": 1.8260305069855465,
+          "null_max": -26.925108570674297,
+          "percentile_99_9": -28.21162658305755,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -34.780350009946005,
+            -36.29036214224206,
+            -33.80966520600603,
+            -33.07456798391124,
+            -35.01083245572087
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.4959087371826172
+        },
+        "2.0": {
+          "alpha_prior": 2.0,
+          "observed_log_bf": -15.568494005387379,
+          "null_median": -28.68456104607469,
+          "null_mean": -28.564701527407856,
+          "null_std": 1.3313598434262035,
+          "null_max": -22.689699568964983,
+          "percentile_99_9": -23.480653910288467,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -28.98309593469412,
+            -30.10297176101841,
+            -28.085431165514592,
+            -27.825460305576485,
+            -27.98891877217693
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.4919760227203369
+        }
+      },
+      "baseline_url_only_pmi_bits": 0.07161169713610957,
+      "baseline_action_history_acc_k3": {
+        "n_groups": 23,
+        "n_groups_det": 23,
+        "n_records": 80,
+        "n_records_det": 80,
+        "fraction_records_det": 1.0,
+        "fraction_groups_det": 1.0
+      },
+      "baseline_state_history_k2_mi_bits": 0.7020178384350835,
+      "c1_all_alphas": true,
+      "c3_all_alphas": true,
+      "c1_any_alpha": true,
+      "c3_any_alpha": true
+    },
+    "svelte": {
+      "n_raw": 144,
+      "n_valid": 112,
+      "n_nl": 80,
+      "n_link_valid": 32,
+      "n_link_nl": 0,
+      "sessions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "unique_url_before": [
+        "https://todomvc.com/examples/svelte/dist",
+        "https://todomvc.com/examples/svelte/dist/#",
+        "https://todomvc.com/examples/svelte/dist/#/active",
+        "https://todomvc.com/examples/svelte/dist/#/completed"
+      ],
+      "unique_url_after": [
+        "https://todomvc.com/examples/svelte/dist",
+        "https://todomvc.com/examples/svelte/dist/#",
+        "https://todomvc.com/examples/svelte/dist/#/active",
+        "https://todomvc.com/examples/svelte/dist/#/completed"
+      ],
+      "action_distribution_nl": {
+        "form_submit": 36,
+        "button_click": 26,
+        "js_navigate": 18
+      },
+      "determinism_k2": {
+        "deterministic": 17,
+        "stochastic": 1,
+        "total": 18,
+        "det_ratio": 0.9444444444444444
+      },
+      "per_alpha": {
+        "0.5": {
+          "alpha_prior": 0.5,
+          "observed_log_bf": -11.48964481134648,
+          "null_median": -39.72955257045231,
+          "null_mean": -39.58627203450368,
+          "null_std": 2.646819776945562,
+          "null_max": -29.92603329704224,
+          "percentile_99_9": -30.550552548078507,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -39.55842029386517,
+            -40.92545247871709,
+            -36.97283607632366,
+            -38.98773909686594,
+            -39.25636197270231
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.555168867111206
+        },
+        "1.0": {
+          "alpha_prior": 1.0,
+          "observed_log_bf": -11.537420435660863,
+          "null_median": -32.690852592785234,
+          "null_mean": -32.54726082413151,
+          "null_std": 1.9851974894137085,
+          "null_max": -24.896372244403665,
+          "percentile_99_9": -25.867453148016423,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -32.472824142137824,
+            -33.796022281999484,
+            -30.47706299857427,
+            -32.27054097656003,
+            -31.411049769284176
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5481901168823242
+        },
+        "2.0": {
+          "alpha_prior": 2.0,
+          "observed_log_bf": -10.380099865694262,
+          "null_median": -24.821483716076898,
+          "null_mean": -24.697129042234224,
+          "null_std": 1.4106180191572564,
+          "null_max": -19.10703149476194,
+          "percentile_99_9": -19.43079891954526,
+          "p_value": 0.0005,
+          "n_shuffle": 1999,
+          "shuffled_first5": [
+            -24.644625276736463,
+            -25.752271017303684,
+            -23.195022272235832,
+            -24.680008690547282,
+            -23.09868325486397
+          ],
+          "c1_pass": true,
+          "c3_pass": true,
+          "wall_seconds": 0.5516951084136963
+        }
+      },
+      "baseline_url_only_pmi_bits": 0.05813708206086476,
+      "baseline_action_history_acc_k3": {
+        "n_groups": 23,
+        "n_groups_det": 23,
+        "n_records": 80,
+        "n_records_det": 80,
+        "fraction_records_det": 1.0,
+        "fraction_groups_det": 1.0
+      },
+      "baseline_state_history_k2_mi_bits": 0.8269108161495716,
+      "c1_all_alphas": true,
+      "c3_all_alphas": true,
+      "c1_any_alpha": true,
+      "c3_any_alpha": true
+    }
+  },
+  "decision": {
+    "c1_variant_count_all_alpha": 5,
+    "c3_variant_count_all_alpha": 5,
+    "c1_variant_count_any_alpha": 5,
+    "c3_variant_count_any_alpha": 5,
+    "c5_variant_count": 5,
+    "c6_pass": true,
+    "verdict": "SURVIVES_CURRENT_TEST",
+    "outcome": "SUPPORTS",
+    "reason": "Bayesian DM (K=12) passes C1 (null median<0) on 5/5 and C3 (p<0.001) on 5/5 real TodoMVC hash-SPA variants (all-3-alpha criterion), C5=5/5, C6 positive control PASS, C7 no validity violations. Claim ceiling bounded to passing variants at URL-level fragment-aware state representation."
+  },
+  "wall_seconds": 125.38745093345642
+}

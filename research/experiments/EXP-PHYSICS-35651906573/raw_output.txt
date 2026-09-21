@@ -1,0 +1,61 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35651906573 — Bayesian DM (K=12) on real TodoMVC hash-SPA transitions
+========================================================================
+
+[POSITIVE CONTROL] synthetic stochastic 12-state SPA N=5000 seed=42 ...
+[POSITIVE CONTROL] N=5000 sha256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+[POSITIVE CONTROL] K2 records=5000 determinism={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701}
+[POSITIVE CONTROL] alpha=0.5: observed=643.089 null_median=-78.360 null_max=-21.141 p=0.00050 C1=True C3=True (39.8s)
+[POSITIVE CONTROL] alpha=1.0: observed=338.671 null_median=-130.908 null_max=-92.941 p=0.00050 C1=True C3=True (38.6s)
+[POSITIVE CONTROL] alpha=2.0: observed=167.898 null_median=-116.099 null_max=-92.767 p=0.00050 C1=True C3=True (39.0s)
+[POSITIVE CONTROL] C6 = PASS (C1+C3 at all 3 alphas)
+
+[REAL DATA] load raw_transitions_all.json ...
+
+[vanillajs] raw=144 valid=112 NL=80 sessions=[0, 1, 2, 3, 4, 5] unique_before=['https://todomvc.com/examples/javascript-es6/dist', 'https://todomvc.com/examples/javascript-es6/dist/#', 'https://todomvc.com/examples/javascript-es6/dist/#/active', 'https://todomvc.com/examples/javascript-es6/dist/#/completed'] unique_after=['https://todomvc.com/examples/javascript-es6/dist', 'https://todomvc.com/examples/javascript-es6/dist/#', 'https://todomvc.com/examples/javascript-es6/dist/#/active', 'https://todomvc.com/examples/javascript-es6/dist/#/completed'] prims={'form_submit': 36, 'button_click': 26, 'js_navigate': 18}
+[vanillajs] K2 strata={'deterministic': 17, 'stochastic': 1, 'total': 18, 'det_ratio': 0.9444444444444444}
+[vanillajs] alpha=0.5: observed=-11.490 null_median=-39.730 null_max=-29.926 p=0.00050 C1=True C3=True
+[vanillajs] alpha=1.0: observed=-11.537 null_median=-32.691 null_max=-24.896 p=0.00050 C1=True C3=True
+[vanillajs] alpha=2.0: observed=-10.380 null_median=-24.821 null_max=-19.107 p=0.00050 C1=True C3=True
+[vanillajs] B1 url-only PMI=0.0581 bits | B2 action-hist acc=1.0 | B3 state-hist K2 MI=0.8269 bits
+
+[react] raw=144 valid=112 NL=80 sessions=[0, 1, 2, 3, 4, 5] unique_before=['https://todomvc.com/examples/react/dist', 'https://todomvc.com/examples/react/dist/#', 'https://todomvc.com/examples/react/dist/#/active', 'https://todomvc.com/examples/react/dist/#/completed'] unique_after=['https://todomvc.com/examples/react/dist', 'https://todomvc.com/examples/react/dist/#', 'https://todomvc.com/examples/react/dist/#/active', 'https://todomvc.com/examples/react/dist/#/completed'] prims={'form_submit': 36, 'button_click': 26, 'js_navigate': 18}
+[react] K2 strata={'deterministic': 17, 'stochastic': 1, 'total': 18, 'det_ratio': 0.9444444444444444}
+[react] alpha=0.5: observed=-11.490 null_median=-39.730 null_max=-29.926 p=0.00050 C1=True C3=True
+[react] alpha=1.0: observed=-11.537 null_median=-32.691 null_max=-24.896 p=0.00050 C1=True C3=True
+[react] alpha=2.0: observed=-10.380 null_median=-24.821 null_max=-19.107 p=0.00050 C1=True C3=True
+[react] B1 url-only PMI=0.0581 bits | B2 action-hist acc=1.0 | B3 state-hist K2 MI=0.8269 bits
+
+[vue] raw=144 valid=112 NL=80 sessions=[0, 1, 2, 3, 4, 5] unique_before=['https://todomvc.com/examples/vue/dist/#', 'https://todomvc.com/examples/vue/dist/#/active', 'https://todomvc.com/examples/vue/dist/#/completed'] unique_after=['https://todomvc.com/examples/vue/dist/#', 'https://todomvc.com/examples/vue/dist/#/active', 'https://todomvc.com/examples/vue/dist/#/completed'] prims={'form_submit': 36, 'button_click': 26, 'js_navigate': 18}
+[vue] K2 strata={'deterministic': 11, 'stochastic': 2, 'total': 13, 'det_ratio': 0.8461538461538461}
+[vue] alpha=0.5: observed=-13.751 null_median=-38.895 null_max=-28.866 p=0.00050 C1=True C3=True
+[vue] alpha=1.0: observed=-15.506 null_median=-34.520 null_max=-26.925 p=0.00050 C1=True C3=True
+[vue] alpha=2.0: observed=-15.568 null_median=-28.685 null_max=-22.690 p=0.00050 C1=True C3=True
+[vue] B1 url-only PMI=0.0716 bits | B2 action-hist acc=1.0 | B3 state-hist K2 MI=0.7020 bits
+
+[angular] raw=144 valid=112 NL=80 sessions=[0, 1, 2, 3, 4, 5] unique_before=['https://todomvc.com/examples/angular/dist/browser/#/active', 'https://todomvc.com/examples/angular/dist/browser/#/all', 'https://todomvc.com/examples/angular/dist/browser/#/completed'] unique_after=['https://todomvc.com/examples/angular/dist/browser/#/active', 'https://todomvc.com/examples/angular/dist/browser/#/all', 'https://todomvc.com/examples/angular/dist/browser/#/completed'] prims={'form_submit': 36, 'button_click': 26, 'js_navigate': 18}
+[angular] K2 strata={'deterministic': 11, 'stochastic': 2, 'total': 13, 'det_ratio': 0.8461538461538461}
+[angular] alpha=0.5: observed=-13.751 null_median=-38.895 null_max=-28.866 p=0.00050 C1=True C3=True
+[angular] alpha=1.0: observed=-15.506 null_median=-34.520 null_max=-26.925 p=0.00050 C1=True C3=True
+[angular] alpha=2.0: observed=-15.568 null_median=-28.685 null_max=-22.690 p=0.00050 C1=True C3=True
+[angular] B1 url-only PMI=0.0716 bits | B2 action-hist acc=1.0 | B3 state-hist K2 MI=0.7020 bits
+
+[svelte] raw=144 valid=112 NL=80 sessions=[0, 1, 2, 3, 4, 5] unique_before=['https://todomvc.com/examples/svelte/dist', 'https://todomvc.com/examples/svelte/dist/#', 'https://todomvc.com/examples/svelte/dist/#/active', 'https://todomvc.com/examples/svelte/dist/#/completed'] unique_after=['https://todomvc.com/examples/svelte/dist', 'https://todomvc.com/examples/svelte/dist/#', 'https://todomvc.com/examples/svelte/dist/#/active', 'https://todomvc.com/examples/svelte/dist/#/completed'] prims={'form_submit': 36, 'button_click': 26, 'js_navigate': 18}
+[svelte] K2 strata={'deterministic': 17, 'stochastic': 1, 'total': 18, 'det_ratio': 0.9444444444444444}
+[svelte] alpha=0.5: observed=-11.490 null_median=-39.730 null_max=-29.926 p=0.00050 C1=True C3=True
+[svelte] alpha=1.0: observed=-11.537 null_median=-32.691 null_max=-24.896 p=0.00050 C1=True C3=True
+[svelte] alpha=2.0: observed=-10.380 null_median=-24.821 null_max=-19.107 p=0.00050 C1=True C3=True
+[svelte] B1 url-only PMI=0.0581 bits | B2 action-hist acc=1.0 | B3 state-hist K2 MI=0.8269 bits
+
+========================================================================
+DECISION RULE (STRICT variant pass = all 3 alpha values)
+C1 (null median < 0, all alphas): 5/5 variants
+C3 (p < 0.001, all alphas):       5/5 variants
+C5 (>=50 NL):                     5/5 variants
+C6 (positive control):            PASS
+  (informative, any-alpha: C1=5/5 C3=5/5)
+========================================================================
+
+[VERDICT] SURVIVES_CURRENT_TEST
+[OUTCOME] SUPPORTS
+[REASON] Bayesian DM (K=12) passes C1 (null median<0) on 5/5 and C3 (p<0.001) on 5/5 real TodoMVC hash-SPA variants (all-3-alpha criterion), C5=5/5, C6 positive control PASS, C7 no validity violations. Claim ceiling bounded to passing variants at URL-level fragment-aware state representation.

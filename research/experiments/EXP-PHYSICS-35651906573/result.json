@@ -1,0 +1,553 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35651906573",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "positive_control_synthetic_k2_N5000_seed42": {
+      "n_transitions": 5000,
+      "transitions_sha256": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+      "n_records_k2": 5000,
+      "determinism_k2": {
+        "deterministic": 366,
+        "stochastic": 1072,
+        "total": 1438,
+        "det_ratio": 0.2545
+      },
+      "per_alpha_log_bayes_factor_nats": {
+        "0.5": {
+          "observed": 643.0887818351148,
+          "null_median": -78.3598155522759,
+          "null_max": -21.141361116682674,
+          "p_value": 0.0005,
+          "c1_pass": true,
+          "c3_pass": true
+        },
+        "1.0": {
+          "observed": 338.6710973256759,
+          "null_median": -130.90835513540515,
+          "null_max": -92.94141450463576,
+          "p_value": 0.0005,
+          "c1_pass": true,
+          "c3_pass": true
+        },
+        "2.0": {
+          "observed": 167.89839491149542,
+          "null_median": -116.09881255547953,
+          "null_max": -92.76723145735923,
+          "p_value": 0.0005,
+          "c1_pass": true,
+          "c3_pass": true
+        }
+      },
+      "c6_pass": true,
+      "parent_reference": "EXP-PHYSICS-35578258358 observed 168-643 nats, null_median -78 to -131 nats, p=0.0005; this run replication-exact"
+    },
+    "variants": {
+      "vanillajs": {
+        "url": "https://todomvc.com/examples/javascript-es6/dist/",
+        "n_raw": 144,
+        "n_valid": 112,
+        "n_nl": 80,
+        "n_link_valid": 32,
+        "n_link_nl": 0,
+        "sessions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n_states_url_before": 4,
+        "determinism_k2": {
+          "deterministic": 17,
+          "stochastic": 1,
+          "total": 18,
+          "det_ratio": 0.9444
+        },
+        "per_alpha_log_bayes_factor_nats": {
+          "0.5": {
+            "observed": -11.48964481134648,
+            "null_median": -39.72955257045231,
+            "null_max": -29.92603329704224,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "1.0": {
+            "observed": -11.537420435660863,
+            "null_median": -32.690852592785234,
+            "null_max": -24.896372244403665,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "2.0": {
+            "observed": -10.380099865694262,
+            "null_median": -24.821483716076898,
+            "null_max": -19.10703149476194,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          }
+        },
+        "c1_all_alphas": true,
+        "c3_all_alphas": true
+      },
+      "react": {
+        "url": "https://todomvc.com/examples/react/dist/",
+        "n_raw": 144,
+        "n_valid": 112,
+        "n_nl": 80,
+        "n_link_valid": 32,
+        "n_link_nl": 0,
+        "sessions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n_states_url_before": 4,
+        "determinism_k2": {
+          "deterministic": 17,
+          "stochastic": 1,
+          "total": 18,
+          "det_ratio": 0.9444
+        },
+        "per_alpha_log_bayes_factor_nats": {
+          "0.5": {
+            "observed": -11.48964481134648,
+            "null_median": -39.72955257045231,
+            "null_max": -29.92603329704224,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "1.0": {
+            "observed": -11.537420435660863,
+            "null_median": -32.690852592785234,
+            "null_max": -24.896372244403665,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "2.0": {
+            "observed": -10.380099865694262,
+            "null_median": -24.821483716076898,
+            "null_max": -19.10703149476194,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          }
+        },
+        "c1_all_alphas": true,
+        "c3_all_alphas": true
+      },
+      "vue": {
+        "url": "https://todomvc.com/examples/vue/dist/",
+        "n_raw": 144,
+        "n_valid": 112,
+        "n_nl": 80,
+        "n_link_valid": 32,
+        "n_link_nl": 0,
+        "sessions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n_states_url_before": 3,
+        "determinism_k2": {
+          "deterministic": 11,
+          "stochastic": 2,
+          "total": 13,
+          "det_ratio": 0.8462
+        },
+        "per_alpha_log_bayes_factor_nats": {
+          "0.5": {
+            "observed": -13.75062682860964,
+            "null_median": -38.89483314163893,
+            "null_max": -28.866421474677324,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "1.0": {
+            "observed": -15.505944768691677,
+            "null_median": -34.519866574339744,
+            "null_max": -26.925108570674297,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "2.0": {
+            "observed": -15.568494005387379,
+            "null_median": -28.68456104607469,
+            "null_max": -22.689699568964983,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          }
+        },
+        "c1_all_alphas": true,
+        "c3_all_alphas": true
+      },
+      "angular": {
+        "url": "https://todomvc.com/examples/angular/dist/browser/",
+        "n_raw": 144,
+        "n_valid": 112,
+        "n_nl": 80,
+        "n_link_valid": 32,
+        "n_link_nl": 0,
+        "sessions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n_states_url_before": 3,
+        "determinism_k2": {
+          "deterministic": 11,
+          "stochastic": 2,
+          "total": 13,
+          "det_ratio": 0.8462
+        },
+        "per_alpha_log_bayes_factor_nats": {
+          "0.5": {
+            "observed": -13.75062682860964,
+            "null_median": -38.89483314163893,
+            "null_max": -28.866421474677324,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "1.0": {
+            "observed": -15.505944768691677,
+            "null_median": -34.519866574339744,
+            "null_max": -26.925108570674297,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "2.0": {
+            "observed": -15.568494005387379,
+            "null_median": -28.68456104607469,
+            "null_max": -22.689699568964983,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          }
+        },
+        "c1_all_alphas": true,
+        "c3_all_alphas": true
+      },
+      "svelte": {
+        "url": "https://todomvc.com/examples/svelte/dist/",
+        "n_raw": 144,
+        "n_valid": 112,
+        "n_nl": 80,
+        "n_link_valid": 32,
+        "n_link_nl": 0,
+        "sessions": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n_states_url_before": 4,
+        "determinism_k2": {
+          "deterministic": 17,
+          "stochastic": 1,
+          "total": 18,
+          "det_ratio": 0.9444
+        },
+        "per_alpha_log_bayes_factor_nats": {
+          "0.5": {
+            "observed": -11.48964481134648,
+            "null_median": -39.72955257045231,
+            "null_max": -29.92603329704224,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "1.0": {
+            "observed": -11.537420435660863,
+            "null_median": -32.690852592785234,
+            "null_max": -24.896372244403665,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          },
+          "2.0": {
+            "observed": -10.380099865694262,
+            "null_median": -24.821483716076898,
+            "null_max": -19.10703149476194,
+            "p_value": 0.0005,
+            "c1_pass": true,
+            "c3_pass": true
+          }
+        },
+        "c1_all_alphas": true,
+        "c3_all_alphas": true
+      }
+    },
+    "baselines": {
+      "B1_url_only_conditional_mi_bits": {
+        "vanillajs": 0.0581,
+        "react": 0.0581,
+        "vue": 0.0716,
+        "angular": 0.0716,
+        "svelte": 0.0581,
+        "definition": "plug-in conditional MI I(url_after; action | url_before) in bits, Laplace alpha=1.0 over (y,a) space at each x, K=12 next-state categories",
+        "parent_cited_scope_note": "EXP-PHYSICS-35262258744 cited 0.188-0.209 bits for its URL-only PMI baseline on a different computation scope; discrepancy listed in unresolved"
+      },
+      "B2_action_history_accuracy_k3": {
+        "vanillajs": 1.0,
+        "react": 1.0,
+        "vue": 1.0,
+        "angular": 1.0,
+        "svelte": 1.0,
+        "definition": "fraction of records whose next state is correctly predicted deterministically from (action_history K=3) over the FSM-synthesized 12-state outcome space",
+        "expected": "~1.0 per parent chain EXP-PHYSICS-35290611436 / EXP-PHYSICS-35209110569 (deterministic FSM finding replicated)"
+      },
+      "B3_state_history_k2_mi_bits": {
+        "vanillajs": 0.8269,
+        "react": 0.8269,
+        "vue": 0.702,
+        "angular": 0.702,
+        "svelte": 0.8269,
+        "definition": "plug-in MI I(url_after; (url_before, H_K2)) in bits, Laplace alpha=1.0 over joint table"
+      }
+    },
+    "decision_rule_counts": {
+      "c1_variant_count_all_alpha": 5,
+      "c3_variant_count_all_alpha": 5,
+      "c1_variant_count_any_alpha": 5,
+      "c3_variant_count_any_alpha": 5,
+      "c5_variant_count": 5,
+      "c6_pass": true,
+      "verdict": "SURVIVES_CURRENT_TEST",
+      "outcome": "SUPPORTS"
+    },
+    "wall_seconds": 125.4,
+    "n_shuffle": 1999,
+    "seed": 42,
+    "K_categories": 12,
+    "alpha_prior_values": [
+      0.5,
+      1.0,
+      2.0
+    ]
+  },
+  "controls": {
+    "CTRL_POS_K2_N5000_S42": {
+      "kind": "positive_control",
+      "expected": "observed log BF > 0 and null_median < 0 and p < 0.001 at all 3 alpha values (parent EXP-PHYSICS-35578258358: observed 168-643 nats, null_median -78 to -131 nats, p=0.0005)",
+      "observed": "observed 167.9-643.1 nats, null_median -78.4 to -130.9 nats, null_max -92.8 to -21.1 nats, p=0.0005 at all 3 alphas; replication-exact vs parent",
+      "pass": true,
+      "evidence": [
+        "raw_results.json/positive_control",
+        "raw_synthetic.json"
+      ]
+    },
+    "CTRL_NULL_WITHIN_SESSION_SHUFFLE_C1": {
+      "kind": "null_control",
+      "expected": "null_median < 0 on >= 2/5 variants per frozen C1",
+      "observed": "null_median < 0 on 5/5 variants at all 3 alphas (median range -24.8 to -39.7 nats)",
+      "pass": true,
+      "evidence": [
+        "raw_results.json/variants/*/per_alpha"
+      ]
+    },
+    "CTRL_NULL_WITHIN_SESSION_SHUFFLE_C3": {
+      "kind": "null_control",
+      "expected": "permutation p < 0.001 on >= 2/5 variants per frozen C3",
+      "observed": "p = 0.0005 (floor of N_SHUFFLE=1999) on 5/5 variants at all 3 alphas; observed log BF exceeds all 1999 null samples in every (variant, alpha) cell",
+      "pass": true,
+      "evidence": [
+        "raw_results.json/variants/*/per_alpha"
+      ]
+    },
+    "CTRL_C5_NL_SUFFICIENCY": {
+      "kind": "sufficiency_gate",
+      "expected": ">= 50 non-leakage transitions on >= 2/5 variants per frozen C5",
+      "observed": "80 non-leakage transitions on 5/5 variants (112 valid of 144 raw per variant; 32 link-click leakages filtered per variant)",
+      "pass": true,
+      "evidence": [
+        "raw_output.txt",
+        "nl_transitions_*.json"
+      ]
+    },
+    "CTRL_DEGENERATE_ACTION_TARGET": {
+      "kind": "encoding_diagnostic",
+      "expected": "using action_target as model action would be degenerate: action_target is None for all 80 NL records per variant (link_click targets exist only for leakage-filtered records), so log BF should be ~0 by identity",
+      "observed": "action_target distribution {None: 80} on vanillajs NL; log BF with action=action_target = 0.000000 nats (alpha=1.0); action_primitive is the only non-degenerate action encoding",
+      "pass": true,
+      "evidence": [
+        "run_experiment.py verification diagnostics (section 8b)",
+        "report.md section 6"
+      ]
+    },
+    "CTRL_VARIANT_ISOMORPHISM": {
+      "kind": "consistency_check",
+      "expected": "vanillajs/react/svelte and vue/angular are isomorphic 4-state deterministic FSMs under identical action protocols, so bit-identical measurements are expected if the pipeline is deterministic (same seed, same counts up to state relabeling)",
+      "observed": "bit-identical observed log BF, null statistics and baselines within each isomorphism class: {vanillajs, react, svelte} and {vue, angular}",
+      "pass": true,
+      "evidence": [
+        "raw_results.json/variants"
+      ]
+    },
+    "BASE_B1_URL_ONLY_PMI": {
+      "kind": "baseline",
+      "expected": "> 0 bits (small); parent-cited 0.188-0.209 bits on a different PMI scope (EXP-PHYSICS-35262258744)",
+      "observed": "0.0581 bits (vanillajs/react/svelte), 0.0716 bits (vue/angular) conditional MI I(url_after; action | url_before)",
+      "pass": "informational",
+      "evidence": [
+        "raw_results.json/variants/*/baseline_url_only_pmi_bits",
+        "run_experiment.py plugin_conditional_mi"
+      ]
+    },
+    "BASE_B2_ACTION_HIST_K3": {
+      "kind": "baseline",
+      "expected": "~1.0 action-history K=3 prediction accuracy (deterministic FSM finding from parent chain)",
+      "observed": "1.0 on all 5 variants",
+      "pass": true,
+      "evidence": [
+        "raw_results.json/variants/*/baseline_action_history_acc_k3"
+      ]
+    },
+    "BASE_B3_STATE_HIST_K2": {
+      "kind": "baseline",
+      "expected": "> 0 bits (memory-only predictability of next state)",
+      "observed": "0.7020-0.8269 bits across variants",
+      "pass": "informational",
+      "evidence": [
+        "raw_results.json/variants/*/baseline_state_history_k2_mi_bits"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_all.json",
+      "sha256": "cdb3ad1c29974f560aacac27455e71cbe7af2e2b10aef1808496fcc8b06cc335",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_vanillajs.json",
+      "sha256": "5bf4af23a8cf2b37428d4f413b0d55deae70e632e2865ccf97eb763a12b1ec0c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_react.json",
+      "sha256": "978fa8f7bf6171e21065d0ecd06e30503da636ea7e460bfd43f43662fc1a9d57",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_vue.json",
+      "sha256": "fcca4eb1f2cc9920178b83804e6ffc02c507236431cdc97dab2bd7d6260f3928",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_angular.json",
+      "sha256": "c8640321059d66bbcba30a6f19201b68dd9a54a2e1bd3c18b23ee4b220660ad5",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_svelte.json",
+      "sha256": "c1637e19c1061899afd5c5257015530ee1557a8b4ee64287b2ce470fdd75e241",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vanillajs.json",
+      "sha256": "3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_react.json",
+      "sha256": "115b6a63ade5ccb6c53ad5732a920be313305555b38fe4be039e4f4367def133",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vue.json",
+      "sha256": "10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_angular.json",
+      "sha256": "f27acff699d6157890fb7daab024f96af52be4802829a8cd4809dd7fcc7b2a18",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_svelte.json",
+      "sha256": "3ec95119d5842bce2864e9244b00ae39e7593d9eba5dcd13c1022b49dd94b496",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_synthetic.json",
+      "sha256": "0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_results.json",
+      "sha256": "ec9b1e630e6d8ddb3ff3e7c352fcba5f02f30f81d2a6cd682beb1e2875ba8fee",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/raw_output.txt",
+      "sha256": "e997d3b1da25d34516da8af692cf6c111ae6d10195059da98f1332fad7f25959",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/collect_todomvc.py",
+      "sha256": "bede1ca19b15e09ba8e8d8b4c6a39bb18a90acd56b2c4a3fe7cf760358398999",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35651906573/run_experiment.py",
+      "sha256": "bdbc8dd98698f1f1e41d7791927d0bf88800de38210db1eadefd99bc6d837126",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Collection: per variant 144 raw transitions (6 sessions x 24 interactions), 112 valid, 32 link-click leakages (target URL normalized == next URL), 80 non-leakage transitions; leakages form 100% of link_click records per variant.",
+    "NL action primitives per variant: form_submit=36, button_click=26, js_navigate=18; action_target is None on all 80 NL records.",
+    "State space: 4 URL states for vanillajs/react/svelte (no-fragment base, '#', '#/active', '#/completed'), 3 for vue (explicit '#' base only) and angular ('#/all', '#/active', '#/completed'); '#/active' and '#/completed' are distinct states.",
+    "Observed log Bayes factor is NEGATIVE on all 5 real variants at all 3 alphas (range -10.380 to -15.568 nats): the memory-only model M0 (url_before + H_K2) is favored over action-conditioned M1 at K=12 under the Occam penalty.",
+    "Within-session shuffled-action null is more negative still (null median -24.821 to -39.730 nats; null max -19.107 to -29.926 nats); observed exceeds every one of the 1999 null samples in all 15 (variant x alpha) cells -> p=0.0005 (permutation floor), so the observed action arrangement is statistically unlike a random shuffle even though M0 wins absolutely.",
+    "Positive control replication: observed 167.9/338.7/643.1 nats vs parent 168/338/643; null medians -78.4/-130.9/-116.1 vs parent -78/-131/-116; p=0.0005. Estimator implementation validated bit-identically vs EXP-PHYSICS-35578258358.",
+    "vanillajs, react and svelte produce bit-identical measurements; vue and angular produce bit-identical measurements. Expected under isomorphic deterministic 4-state FSMs with identical action protocols (verified by CTRL_VARIANT_ISOMORPHISM).",
+    "K2 strata: 17/18 deterministic (94.4%) for vanillajs/react/svelte, 11/13 (84.6%) for vue/angular; per-stratum decomposition (vanillajs, alpha=1.0) shows the negative observed BF is driven by two multi-record deterministic strata (-9.68 nats for the '#/' -> '#/' stratum, -2.15 for '#/completed' -> '#/completed'); the two stochastic strata contribute +0.30/+0.56 nats; all other strata contribute exactly 0.00 nats.",
+    "Baselines: B1 conditional MI 0.0581-0.0716 bits > 0 (small action signal conditional on url_before); B2 action-history K=3 accuracy 1.0 on all variants; B3 state-history K2 MI 0.7020-0.8269 bits (memory alone strongly predicts next state).",
+    "Encoding diagnostic: with action=action_target the model comparison is degenerate (log BF = 0.000000 exactly, alpha=1.0) because the action variable is constant; action_primitive is the sole non-degenerate action encoding on this dataset."
+  ],
+  "validity_notes": [
+    "URL resolution deviation: the spec shorthand URLs (todomvc.com/examples/{vanillajs,react,vue,angular,svelte}/) return HTTP 404; live serving URLs are the dist paths frozen by infra parent EXP-PHYSICS-35209110569 (javascript-es6/dist, react/dist, vue/dist, angular/dist/browser, svelte/dist). Same five variants, same hash-routing behavior; documented here so AUDIT/DIRECTOR do not treat this as a spec violation.",
+    "Action-variable resolution: prereg.md states 'Action: URL of the action target (action.target_href)'. That field is only meaningful for link_click records, which are by definition filtered out as leakages conjunction on 100% of records; action_target is None for all NL records, making it a constant. Verified: action-target-as-action yields log BF = 0.000000. The model action is therefore action_primitive, matching the PMI-pipeline parent EXP-PHYSICS-35262258744 whose baseline numbers this spec cites. Frozen K=12 category space, priors and shuffles unchanged.",
+    "Detection vs absolute preference: C3 measures separation of the observed log BF from the within-session shuffled-action null. On the real variants the observed BF is negative (M0 wins absolutely at K=12); the separation is real (observed exceeds all 1999 null samples) but does NOT establish action-conditioned dynamics over memory on the absolute scale. The claim ceiling must remain 'URL-level fragment-aware state representation; action-conditioned model comparison separated from within-session shuffled-action null (5/5 variants, all alphas)'.",
+    "p-value resolution floor: with N_SHUFFLE=1999 the smallest representable p is 0.0005; C3's '<0.001' is satisfied at the floor, and any finer resolution (e.g., N_SHUFFLE=9999) is untested in this frozen run.",
+    "K=12 category-space carryover: K=12 is frozen from the parent chain and dominates the Occam penalty because observed state cardinality is only 3-4. BF magnitudes (-10.4 to -15.6) are therefore not directly comparable to the synthetic setting (K matches n_states=12 there); sensitivity to data-matched K is untested (not frozen).",
+    "Near-deterministic environment: B2=1.0 and 85-94% deterministic K2 strata confirm the TodoMVC hash-SPA environment is a near-deterministic finite state machine at fragment-aware URL resolution; the 6 scripted sessions per variant are near-identical by construction, which reduces independent measurement mass. Generalization to stateful, stochastic, or history-dependent web apps is untested.",
+    "Permutation null shuffles actions within sessions while preserving (z,a)-cell cardinality; the null distribution is heavily negative because shuffled assignments mix outcomes inside deterministic cells. This is the frozen null; its validity on this data is evidenced by C6 (synthetic replication-exact) and the C1 requirement (all null medians < 0).",
+    "Representation loss: final canonical URL after interaction can collapse distinct app states that differ only in DOM/JS state (e.g., input focus, edited content of the todo text field). The measurement is defined on fragment-aware URL states only, per the frozen design.",
+    "Collection infrastructure: requires live network (todomvc.com reachable, verified); chromium headless via Playwright 1.63.0. Intermittent Vue '#/' click timeouts were handled with force=True; timestamps recorded per interaction. A collection infrastructure failure would map to status=BLOCKED, not to a scientific negative; no such failure occurred.",
+    "Run reproducibility: all pseudo-random streams seeded (seed=42); the positive control and all 15 (variant x alpha) null distributions are bit-reproducible from raw_synthetic.json / nl_transitions_*.json via run_experiment.py."
+  ],
+  "unresolved": [
+    "Whether the frozen C3 'detection' (relative-to-null separation at p<=0.0005) should be interpreted as claim-supporting evidence given that the observed log BF is negative (M0 memory-only wins on the absolute scale at K=12). The frozen decision rule yields SURVIVES_CURRENT_TEST; Director must adjudicate whether the claim ceiling should be rewritten to make the relative-detection semantics explicit.",
+    "Sensitivity of the verdict to K (category count): K=12 over-penalizes the tiny observed state spaces (S=3-4); a data-matched K would change the absolute BF scale and possibly the C1/C3 reading. Untested because K=12 is frozen.",
+    "B1 baseline discrepancy: this run's URL-conditional MI is 0.0581-0.0716 bits while parent EXP-PHYSICS-35262258744 cited 0.188-0.209 bits for its URL-only PMI baseline (different computation scope/definition). Needs reconciliation if B1 is ever promoted to a gate.",
+    "Permutation p resolution floor: p=0.0005 is the minimal resolvable value at N_SHUFFLE=1999; observed exceeded ALL 1999 samples, so the true p may be much smaller. Finer resolution untested.",
+    "Measurement independence: 5/5 variant passes include two pairs of bit-identical isomorphic environments ({vanillajs,react,svelte} and {vue,angular}); the effective independent replications may be 2 rather than 5. Not resolvable within this frozen design.",
+    "Generalization to non-TodoMVC, non-deterministic, or stateful (non-URL-representable) web applications is untested; the physics claim's bounds are limited to near-deterministic fragment-routed SPAs with 3-4 observable URL states."
+  ]
+}
