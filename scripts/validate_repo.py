@@ -124,6 +124,10 @@ def main():
     direction_validator = text("scripts/validate_portfolio_allocation.py")
     require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
     require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
+    require("ACTIVE_OLD_CLAIM" in pulse and "ACTIVE_OLD_QUESTION" in pulse, "prefreeze resume must compare strategic mandate identity")
+    snapshot_builder = text("scripts/build_portfolio_snapshot.py")
+    require('req.get("director_mandate")' in snapshot_builder, "portfolio snapshot must expose active Director mandates")
+    require('req.get("portfolio_allocation")' not in snapshot_builder, "snapshot must not use removed portfolio_allocation request key")
 
     promote = text(".github/workflows/product-promote.yml")
     require("git merge --no-commit --no-ff origin/lab2/product" not in promote, "Product workflow must never merge the whole research branch")
