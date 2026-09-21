@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35401996615",
+  "lane": "frontier",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Recover exact parent DGP and estimator calibration before any sample-size claim: pipeline validation at n=250/type fails by 37.7% (KDE CV 0.3496 vs required 0.546-0.604) and 92.0% (kNN CV 0.0578 vs required 0.717-0.793) per spec.json:decision_rule and prereg.md:8.1. Producer correctly declares MEASUREMENT_INVALID; a re-run must first replicate parent EXP-FRONTIER-34913743596 within 5% using identical DGP parameters (THETA/OFFSET/SCALE/noise), heteroscedastic state-dependent variance, block-cycling assignment, and BC measurand max(0, observed - perm_mean) with N=200. Without this, CV at 500/1000 is incomparable.",
+    "Fix kNN Kraskov MI estimator: current run_execute_v3.py:67-87 returns near-constant ~1.26-1.44 bits at ALL lambda and sample sizes (CV max 0.058, 13x smaller than parent 0.755; positive control t=0.07-0.61 p>0.28 at all n). Parent kNN BC at lambda0 is 0.001-0.02 with threshold 0.046-0.053; current null observed 1.26-1.44 with threshold 1.39-1.45 indicates estimator measures discrete action entropy, not conditional MI. Compare to parent run_sensitivity.py:86-108 Kraskov implementation (cKDTree+digamma) and verify raw values match parent before scaling n.",
+    "Fix KDE divergence calibration: KDE BC magnitudes reported as raw kde_kl (run_execute_v3.py:51-65) without permutation-mean subtraction for CV, and BC vs pooling logic differs from parent spec measurement_validity (KDE Scott gaussian_kde, BC = max(0, observed - perm_mean)). Negative DGP signal (pooled KDE lambda1-lambda0 mean_diff 0.009 at 250, -0.002 at 500) contradicts parent pooled KDE delta 0.062 (t=7.81). Verify Scott bandwidth scaling h~n^-1/6 and pooled subsampling exactly as parent (250 per type i.i.d. per lambda, pooled without per-type mean subtraction contaminating CV).",
+    "Fix positive control before any SURVIVES claim: frozen spec positive_control requires pooled subsampled divergence at lambda=1 > lambda=0 with one-sided paired t p<0.05 for EACH measure at EACH n. Recomputed from raw_evidence.json:positive_control: KDE fails at 250 (p=0.074) and 500 (p=0.816, inverted), kNN fails at 250 (p=0.475), 500 (p=0.909, inverted) and 1000 (p=0.288). Only KDE at 1000 passes (t=6.44 p=0.0015). Per spec decision_rule, ANY failure => MEASUREMENT_INVALID. Do not apply narrowed 'only for passing measure' rule (rejected in parent handoff do_not_assume).",
+    "Fix null control at all n: frozen spec null_control requires per-type divergence <=95th percentile of N=200 permutations for ALL 8 types. Recomputed raw_evidence.json:null_control: KDE 6/8 at 250, 7/8 at 500, 7/8 at 1000 never 8/8; kNN 7/8 at 250, 6/8 at 500, 8/8 at 1000. Parent achieved 8/8 for both at 250 (result.json:controls.kde_null_control, knn_null_control). Failure at lambda=0 indicates KDE residual bias and kNN threshold instability; this alone blocks SURVIVES and prevents FALSIFIED-IN-SETTING which requires null pass for both at 1000.",
+    "Recompute CV on frozen measurand (BC with N=200 permutation subtraction) and report per-replication values: current CV computed on raw kde_kl/knn_mi without BC subtraction (run_execute_v3.py:135-152 std/mean of raw) inflates/deflates variance relative to parent BC (parent result.json:metrics.kde_per_type.lambda1_cv_per_type). Preserve identifiers metrics.cv_check.*.kde.cv_max but label as different estimator until BC version validates. Include per-type 5-replication BC distributions and permutation nulls in artifacts for audit recomputation.",
+    "Do not infer per-type CV stability at larger n from this packet: although cv_check shows apparent pass (KDE max 0.350->0.296->0.270, kNN max 0.058->0.062->0.056 all <=0.5 with 8/8 pass), absolute magnitudes are invalid due to V1-V5. The apparent improvement with n is not evidence of sample-size resolution; it reflects a different, insensitive estimator. Explicitly state in next prereg that larger-n test is untested and requires spec-compliant re-execution per handoff dependencies."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_pipeline_validation_failed",
+      "severity": "critical",
+      "finding": "Pipeline validation at n=250/type fails frozen 5% tolerance for BOTH measures: KDE CV max 0.3496 vs required 0.546-0.604 (37.7% low, 0.196 below lower bound); kNN CV max 0.0578 vs required 0.717-0.793 (92.3% low, 0.659 below). Producer correctly marks controls.pipeline_validation status FAIL. Triggers MEASUREMENT_INVALID per spec decision_rule clause 'pipeline validation fails to replicate parent results'.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:decision_rule",
+        "research/experiments/EXP-FRONTIER-35401996615/prereg.md:8.1",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:metrics.pipeline_validation",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:controls.pipeline_validation",
+        "research/experiments/EXP-FRONTIER-35401996615/raw_evidence.json:cv_check.250.kde.cv_max 0.3496, knn.cv_max 0.0578",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_max_cv 0.5745, metrics.knn_per_type.lambda1_max_cv 0.7550",
+        "research/experiments/EXP-FRONTIER-35166507552/handoff.json:carry_forward.established[1]"
+      ],
+      "preserves_identifier": "metrics.cv_check.250.kde.cv_max, metrics.cv_check.250.knn.cv_max, metrics.pipeline_validation.kde_cv_in_5pct, metrics.pipeline_validation.knn_cv_in_5pct, controls.pipeline_validation"
+    },
+    {
+      "id": "V2_positive_control_failed",
+      "severity": "critical",
+      "finding": "Positive control fails for kNN at ALL n (250 p=0.475, 500 p=0.909 inverted lambda1<lambda0, 1000 p=0.288) and for KDE at 250 (p=0.074) and 500 (p=0.816 inverted). Only KDE at 1000 passes (t=6.44 p=0.0015). Frozen spec requires p<0.05 for each measure at each n; any failure => MEASUREMENT_INVALID. Producer correctly reports controls.positive_control FAIL. Directional inversion at 500 (KDE mean_diff -0.0025, kNN -0.091) proves estimator not detecting lambda-dependent structure, not sampling noise.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:positive_control",
+        "research/experiments/EXP-FRONTIER-35401996615/prereg.md:7.4",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:metrics.positive_control",
+        "research/experiments/EXP-FRONTIER-35401996615/raw_evidence.json:positive_control",
+        "research/experiments/EXP-FRONTIER-35401996615/run_execute_v3.py:198-212 t-test",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:controls.kde_positive_control t7.81 p0.0007, knn_positive_control t6.82 p0.0012"
+      ],
+      "preserves_identifier": "metrics.positive_control.250.kde.p_one_sided, metrics.positive_control.250.knn.p_one_sided, metrics.positive_control.500.kde.p_one_sided, metrics.positive_control.500.knn.p_one_sided, metrics.positive_control.1000.knn.p_one_sided, controls.positive_control"
+    },
+    {
+      "id": "V3_null_control_failed",
+      "severity": "critical",
+      "finding": "Null control per-type at lambda=0 never 8/8 for KDE (6/8 at 250, 7/8 at 500 and 1000) and only 8/8 for kNN at 1000 (7/8 at 250, 6/8 at 500). Spec requires 8/8 for both measures at all n. Failure indicates KDE produces non-zero divergence at lambda=0 (e.g., type0 observed 0.214 > thr 0.183 at 250; type0 0.104 > 0.092 at 1000) suggesting residual action-dependent structure despite lambda=0 or estimator bias. Producer correctly marks controls.null_control FAIL.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:null_control",
+        "research/experiments/EXP-FRONTIER-35401996615/prereg.md:7.3",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:metrics.null_control",
+        "research/experiments/EXP-FRONTIER-35401996615/raw_evidence.json:null_control.250.kde.per_type, 500.kde, 1000.kde, 250.knn, 500.knn",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda0_per_type_raw_vs_threshold (8/8 pass, max 0.151 <= thr 0.193-0.206)"
+      ],
+      "preserves_identifier": "metrics.null_control.250.kde.n_pass, metrics.null_control.500.kde.n_pass, metrics.null_control.1000.kde.n_pass, metrics.null_control.250.knn.n_pass, metrics.null_control.500.knn.n_pass, controls.null_control"
+    },
+    {
+      "id": "V4_DGP_and_measurand_mismatch",
+      "severity": "high",
+      "finding": "DGP produces divergence magnitudes qualitatively different from parent: parent KDE BC at lambda1 per-type mean 0.182 vs pooled 0.064; current KDE pooled raw at lambda1 ~0.036-0.055 (lower), observed_raw per-type at lambda0 0.08-0.21 similar to parent 0.099-0.151 but CV 0.35 vs 0.57 indicates shifted variance. Provider provenance notes 'DGP action_offset scaled by lambda (parent DGP not fully recoverable)' and 'heteroscedastic Gaussian lambda-scaled action effects'. Per-type KDE values at lambda1 ~0.13-0.15 mean vs parent 0.18 mean, but CV denominators smaller due to lower absolute signal. This confirms DGP/estimator mismatch, not sample-size effect.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:observations[0] '10x smaller', provenance.json:methodology.key_methodological_change_from_parent",
+        "research/experiments/EXP-FRONTIER-35401996615/run_execute_v3.py:28-48 generate_dgp",
+        "research/experiments/EXP-FRONTIER-35401996615/raw_evidence.json:per_type.250.0.kde_lambda1_mean 0.140, positive_control.250.kde.lambda1_mean 0.055",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.primary_comparison kde_mean_per_type 0.1827, kde_pooled 0.0644"
+      ],
+      "preserves_identifier": "metrics.cv_check, metrics.positive_control, observations"
+    },
+    {
+      "id": "V5_kNN_estimator_broken",
+      "severity": "high",
+      "finding": "kNN MI estimator returns near-constant 1.26-1.44 bits regardless of lambda, type, or n. Raw per_type knn_lambda1_values in raw_evidence cluster around 1.30 with std ~0.06 (CV 0.058), while parent per_type raw at lambda0 is 0.001-0.02 and BC at lambda1 0.138. Current null observed values 1.31-1.44 vs parent 0.007-0.020 prove estimator substitution: run_execute_v3.py uses joint [S, one_hot(A)] + eps = kth joint distance + count of S within eps with same A (digamma(k)-digamma(nc+1)+digamma(n)-E[digamma(count_A)]). Parent uses Kraskov kNN with correctly calibrated thresholds 0.046-0.053. Current thresholds 1.41-1.45 match action entropy, not conditional MI. CV artificially low because numerator and denominator both ~1.3 constant.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:observations[1] 'near-constant 1.3'",
+        "research/experiments/EXP-FRONTIER-35401996615/run_execute_v3.py:67-87 knn_mi",
+        "research/experiments/EXP-FRONTIER-35401996615/raw_evidence.json:per_type.250.0.knn_lambda1_values, null_control.250.knn.per_type",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.knn_per_type.lambda0_per_type_raw_vs_threshold, metrics.knn_per_type.mean_across_types_by_lambda"
+      ],
+      "preserves_identifier": "metrics.cv_check.250.knn.cv_max, metrics.cv_check.500.knn.cv_max, metrics.cv_check.1000.knn.cv_max, metrics.positive_control.knn"
+    },
+    {
+      "id": "V6_CV_measurand_and_seed_integrity",
+      "severity": "medium",
+      "finding": "CV computed on raw kde_kl/knn_mi (run_execute_v3.py:145-152 std/mean of raw across 5 reps) not on BC divergence max(0, observed - perm_mean) required by spec measurement_validity. Parent CV is on BC divergence with N=200 permutation subtraction; current ignores null subtraction, inflating comparability error. Seed formula cell_seed = BASE_SEED*100000 + lambda_idx*1000 + rep_idx*10 + 999 correctly used per replication, but per-type N per replication generated via cs+ti*7 offset extends beyond parent validation and lambda scaling inside DGP (S_det %1.0, noise scaling 0.5+norm(S_cur-offset)) differs from parent block-cycling description. No unseeded np.random calls remain (unlike predecessor's np.random.normal bug), but calibration remains unvalidated.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:measurement_validity",
+        "research/experiments/EXP-FRONTIER-35401996615/prereg.md:6.1 'BC = max(0, observed - perm_mean)'",
+        "research/experiments/EXP-FRONTIER-35401996615/run_execute_v3.py:28-32 PAGE_TYPES, 108-140 loop, 144-152 CV calc",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:validity_notes 'BC divergence = max(0, observed_raw - perm_mean)'"
+      ],
+      "preserves_identifier": "metrics.cv_check, spec.json:measurement_validity"
+    },
+    {
+      "id": "V7_synthetic_scope_and_leakage",
+      "severity": "low",
+      "finding": "All evidence remains synthetic 2D [0,1]^2, 8 heterogeneous affine types (rotation/scaling/translation x low/high noise x centered/shifted) with heteroscedastic Gaussian noise. No inference to real Web DOM transitions warranted (per prereg 9.1, spec baselines). Leakage not applicable (per-type data isolated, permutation shuffles action within type), sampling integrity valid for spec (N=200 perms, 8 lambdas, 5 reps, totals 80k/160k/320k transitions), but environment cannot express tested Web-dynamical effect beyond synthetic proxy.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:measurement_validity 'Reuse identical DGP from parent'",
+        "research/experiments/EXP-FRONTIER-35401996615/prereg.md:9.1 DGP Generality",
+        "research/experiments/EXP-FRONTIER-35401996615/provenance.json:methodology",
+        "research/experiments/EXP-FRONTIER-35166507552/handoff.json:carry_forward.do_not_assume[1] synthetic-to-real gap"
+      ],
+      "preserves_identifier": "validity_notes"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B1_KDE_baseline_break_at_250",
+      "finding": "Parent KDE baseline at 250/type: null 8/8 pass, CV max 0.5745 type4 marginal fail (7/8 pass, 14.9% over), positive t=7.81 p=0.0007. Current KDE at 250: null 6/8 fail (types0,5 > threshold), CV max 0.3496 8/8 pass (39% below), positive t=1.79 p=0.074 fail. Baseline not replicated in direction or significance; CV pass is artifact of low-variance raw estimator on mismatched DGP, not improvement. Parent marginal failure cannot be used to predict sample-size scaling from this packet.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:baselines",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_max_cv, controls.kde_null_control, controls.kde_positive_control",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:metrics.cv_check.250.kde, metrics.null_control.250.kde, metrics.positive_control.250.kde"
+      ],
+      "preserves_identifier": "metrics.cv_check.250.kde.cv_max, metrics.null_control.250.kde.n_pass, metrics.positive_control.250.kde.p_one_sided, controls.pipeline_validation"
+    },
+    {
+      "id": "B2_kNN_baseline_break_at_250",
+      "finding": "Parent kNN baseline at 250/type: null 8/8 pass (max raw 0.02 <= thr 0.046-0.053), CV max 0.7550 type0 substantial fail (51% over), positive t=6.82 p=0.0012. Current kNN at 250: null 7/8 fail (type2 1.408 >1.392), CV max 0.0578 8/8 pass (13x smaller), positive t=0.07 p=0.475 fail. Absolute MI scale 65x larger (1.32 vs 0.0017 at lambda0) proves estimator substitution, not improved stability. Exploratory kNN k=10 CV 0.470 baseline (spec baselines[2]) not recomputed; cannot assess sensitivity.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:baselines",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.knn_per_type.lambda1_max_cv, controls.knn_null_control, controls.knn_positive_control, observations sensitivity k10 0.470",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:metrics.cv_check.250.knn, metrics.null_control.250.knn, metrics.positive_control.250.knn, raw_evidence.json:per_type.250.0.knn_lambda1_mean 1.31"
+      ],
+      "preserves_identifier": "metrics.cv_check.250.knn.cv_max, metrics.null_control.250.knn.n_pass, metrics.positive_control.250.knn.p_one_sided"
+    },
+    {
+      "id": "B3_binnedTV_and_frequency_baselines_not_exercised",
+      "finding": "Spec baselines include binned TV at 250/type per-type null 4/8 fail CV max 1.59 (from EXP-FRONTIER-34881708619) and frequency baseline marginal TV 0.335 as reference comparators for estimator-specific false-positive and absolute signal strength. Neither was recomputed at 250/500/1000 in this packet (report validity_notes acknowledges synthetic-only scope). Ordering comparison (KDE/kNN per-type>pooled vs binned pooled>per-type) untested; absolute BC magnitudes at larger n (KDE pooled ~0.024-0.055, kNN pooled ~1.32) incomparable to frequency baseline due to different units. No strong baseline exceeds measurement invalid threshold.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:baselines[3] binned TV, baselines[4] frequency 0.335",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.bc_tv_reference, metrics.frequency_baseline, metrics.primary_comparison",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:validity_notes, report.md:Required Next Steps"
+      ],
+      "preserves_identifier": "spec.json:baselines[3], spec.json:baselines[4]"
+    },
+    {
+      "id": "B4_control_strength",
+      "finding": "Controls are strong and correctly gating: pipeline validation (5% tolerance) and per-measure positive/null controls per spec are not weak nulls. Parent demonstrated they discriminate between estimator artifacts (binned TV fail vs KDE/kNN pass) and sensitivity (positive pass vs CV fail). Current run shows controls correctly reject invalid measurement despite apparent CV pass (all CV <=0.5). This confirms control suite's discriminating power and validates audit's MEASUREMENT_INVALID verdict.",
+      "evidence_refs": [
+        "research/experiments/EXP-FRONTIER-35401996615/spec.json:positive_control, null_control, measurement_validity",
+        "research/experiments/EXP-FRONTIER-34913743596/result.json:controls",
+        "research/experiments/EXP-FRONTIER-35401996615/result.json:controls"
+      ],
+      "preserves_identifier": "controls.pipeline_validation, controls.positive_control, controls.null_control"
+    }
+  ],
+  "recomputed_metrics": {
+    "pipeline_validation_KDE_250": {
+      "producer_kde_cv_max": 0.3496,
+      "parent_kde_cv_max": 0.5745,
+      "tolerance_lower": 0.546,
+      "tolerance_upper": 0.604,
+      "absolute_diff": -0.2249,
+      "relative_diff_percent": -39.15,
+      "recomputed_pass": false,
+      "evidence": "raw_evidence.json:cv_check.250.kde.cv_max vs parent result.json:metrics.kde_per_type.lambda1_max_cv",
+      "note": "Direct numeric comparison; no recomputation of KDE KL needed because raw per-type cv_per_type values match report (type1 max). Verified via python audit."
+    },
+    "pipeline_validation_kNN_250": {
+      "producer_knn_cv_max": 0.0578,
+      "parent_knn_cv_max": 0.755,
+      "tolerance_lower": 0.717,
+      "tolerance_upper": 0.793,
+      "absolute_diff": -0.6972,
+      "relative_diff_percent": -92.35,
+      "recomputed_pass": false,
+      "evidence": "raw_evidence.json:cv_check.250.knn.cv_max vs parent result.json:metrics.knn_per_type.lambda1_max_cv",
+      "note": "13x smaller than parent; consistent across 500/1000 (0.0616, 0.056). Indicates estimator mismatch, not variance reduction."
+    },
+    "positive_control_recomputed": {
+      "250_kde": {"t": 1.794, "p_one": 0.0736, "pass": false, "mean_diff": 0.0093, "recomputed_agrees": true},
+      "250_knn": {"t": 0.067, "p_one": 0.4751, "pass": false, "mean_diff": 0.0037, "recomputed_agrees": true},
+      "500_kde": {"t": -1.013, "p_one": 0.8157, "pass": false, "mean_diff": -0.00247, "recomputed_agrees": true},
+      "500_knn": {"t": -1.613, "p_one": 0.909, "pass": false, "mean_diff": -0.0909, "recomputed_agrees": true},
+      "1000_kde": {"t": 6.443, "p_one": 0.00149, "pass": true, "mean_diff": 0.01256, "recomputed_agrees": true},
+      "1000_knn": {"t": 0.607, "p_one": 0.2882, "pass": false, "mean_diff": 0.01417, "recomputed_agrees": true},
+      "note": "Verified via raw_evidence.json:positive_control pooled means and paired t across 5 reps; matches result.json:metrics.positive_control exactly. Only one of six tests passes, violating spec 'for each measure at each n'.",
+      "preserves_identifier": "metrics.positive_control"
+    },
+    "null_control_recomputed": {
+      "250_kde_pass": "6/8 false (types 0,5 fail)",
+      "500_kde_pass": "7/8 false (type6 fail)",
+      "1000_kde_pass": "7/8 false (type0 fail)",
+      "250_knn_pass": "7/8 false (type2 fail)",
+      "500_knn_pass": "6/8 false (types0,5 fail)",
+      "1000_knn_pass": "8/8 true",
+      "recomputed_agrees": true,
+      "note": "Direct count from raw_evidence.json:null_control per_type observed <= perm_threshold_95 matches result.json:metrics.null_control. Spec requires 8/8; none of the KDE sample sizes achieve it."
+    },
+    "cv_check_recomputed": {
+      "250_kde_cv_max": 0.3496,
+      "250_knn_cv_max": 0.0578,
+      "500_kde_cv_max": 0.2955,
+      "500_knn_cv_max": 0.0616,
+      "1000_kde_cv_max": 0.2695,
+      "1000_knn_cv_max": 0.056,
+      "all_pass": true,
+      "recomputed_agrees": true,
+      "note": "From raw_evidence.json:cv_check cv_per_type std/mean across 5 reps; producer reports MAX/MEAN swapped in raw_evidence header but values match result.json metrics exactly. Apparent 8/8 pass on raw measurand is not spec BC."
+    },
+    "total_transitions_and_lambda_coverage": {
+      "sample_sizes": [250, 500, 1000],
+      "expected_transitions": [80000, 160000, 320000],
+      "recomputed_from_code": "8 lambdas x 5 reps x per_type_n x 8 types = 80k/160k/320k correct",
+      "lambda_levels_recomputed": 8,
+      "n_perms_recomputed": 200,
+      "sampling_pass": true,
+      "note": "Fixed vs predecessor (which used 2 lambdas, 20k/40k/80k, N_PERMS=5). Sampling/split integrity now spec-compliant; measurement failure is estimator/DGP, not undersampling."
+    }
+  },
+  "claim_ceiling": "MEASUREMENT_INVALID — No justified claim about per-type CV stability (<=0.5 at lambda=1) at 500 or 1000/type for KDE Scott or kNN k=5. Producer correctly declares MEASUREMENT_INVALID, INCONCLUSIVE; audit confirms. Apparent CV passes (all max 0.27-0.35 for KDE, 0.056-0.062 for kNN, 8/8 pass at all n) are invalid: they are computed on a different measurand (raw KL/MI without BC permutation subtraction, broken kNN returning action entropy ~1.3 bits) and under DGP that fails pipeline validation (>5% off parent), positive control (kNN fails at all n, KDE fails at 250/500), and null control (KDE never 8/8). Maximum justified descriptive ceiling is narrow: on this synthetic 2D [0,1]^2 heterogeneous affine DGP (3 families rotation/scaling/translation x low/high noise x centered/shifted, heteroscedastic Gaussian, lambda-scaled affine, seed formula cs+ti*7, Scott KDE, run_execute_v3 kNN), pooled detection is weak/absent except KDE at 1000, null false-positive rate ~12-25%, and kNN MI is insensitive (constant 1.3 bits). No inference to parent sample-size hypothesis (KDE marginal 0.5745 may be sample-size-limited vs kNN 0.755 fundamental) and no inference to real Web DOM dynamics. Parent ceilings unchanged: KDE and kNN achieve per-type null 8/8 where binned TV fails 4/8 at 250/type, but per-type CV fails for both at 250/type (KDE max 0.5745, kNN max 0.7550) per EXP-FRONTIER-34913743596 audit PASS. Next experiment must recover parent DGP/estimator calibration at 250/type within 5% before testing larger n or kNN k=10 confirmatory.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35401996615/request.json:parent_handoff EXP-FRONTIER-35166507552, inherited_next_question",
+    "research/experiments/EXP-FRONTIER-35401996615/spec.json:question, hypothesis, falsifier, baselines, positive_control, null_control, measurement_validity, decision_rule",
+    "research/experiments/EXP-FRONTIER-35401996615/prereg.md:5 DGP, 6 Measures, 7 Tests, 8 Controls, 10 Decision Rules",
+    "research/experiments/EXP-FRONTIER-35401996615/freeze.json:hashes prereg 090756, spec 4dff93",
+    "research/experiments/EXP-FRONTIER-35401996615/result.json:metrics.cv_check, metrics.null_control, metrics.positive_control, metrics.pipeline_validation, controls, observations, validity_notes",
+    "research/experiments/EXP-FRONTIER-35401996615/report.md:Key Results, MEASUREMENT_INVALID Triggers, Root Cause",
+    "research/experiments/EXP-FRONTIER-35401996615/raw_evidence.json:cv_check, null_control, positive_control, per_type, pooled, trend",
+    "research/experiments/EXP-FRONTIER-35401996615/run_execute_v3.py:17-26 PAGE_TYPES, 28-48 generate_dgp, 51-87 estimators, 108-212 execution and controls",
+    "research/experiments/EXP-FRONTIER-35401996615/provenance.json:methodology, artifacts, key_findings",
+    "research/experiments/EXP-FRONTIER-34913743596/result.json:metrics.kde_per_type.lambda1_max_cv 0.5745, metrics.knn_per_type.lambda1_max_cv 0.7550, controls, primary_comparison",
+    "research/experiments/EXP-FRONTIER-34913743596/audit.json:status PASS, claim_ceiling",
+    "research/experiments/EXP-FRONTIER-35166507552/handoff.json:carry_forward established/rejected/unknown/do_not_assume, dependencies, next_question",
+    "research/EXPERIMENT_PACKET.md:6 audit.json required shape",
+    "codex/claim_state.json:C-WEB-DYNAMICS HYPOTHESIS (no claim promotion)"
+  ],
+  "unresolved": [
+    "Whether per-type CV <=0.5 would achieve at n=500/1000 with frozen spec-compliant measurement (N=200 perms, 8 lambdas, Kraskov k=5, BC subtraction, pipeline within 5% of parent 0.5745/0.7550) — the parent KDE marginal fail (14.9% over) suggests sample-size-limited but remains untested under valid measurement.",
+    "Whether kNN k=10 (EXPLORATORY CV 0.470 max 8/8 pass at 250/type per parent sensitivity_exploratory.json) would survive confirmatory preregistration at 250/type or scale to larger n — hypothesis-generating only per prereg 14; requires new confirmatory experiment.",
+    "Whether per-type vs pooled ordering reversal (KDE/kNN per-type>pooled vs binned TV pooled>per-type) persists at larger n or under spec-compliant BC — untested because binned TV not rerun and BC units incomparable.",
+    "Whether any KDE/kNN BC magnitude at larger n is sufficient for downstream SPIDER exploration utility vs frequency baseline 0.335 — absolute signal remains below baseline for pooled and incomparable across estimators; synthetic-to-real gap dominates.",
+    "Whether real Web DOM transitions exhibit any KDE/kNN-detectable action-conditional structure — all frontier evidence remains synthetic 2D [0,1]^2; no inference warranted until live Web DGP is tested.",
+    "Exact parent DGP parameterization: parent describes identical DGP reuse but on-disk run_execute.py legacy mismatch (threshold vs permutation) makes reverse-engineering from metrics alone insufficient; artifact code for parent optimized execution not on disk beyond execute_log.txt — requires archiving exact generate_dgp for next run."
+  ]
+}
