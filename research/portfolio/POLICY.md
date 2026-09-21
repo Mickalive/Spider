@@ -1,131 +1,114 @@
-# SPIDER Research 2.0 — Portfolio Governance Policy
+# SPIDER Research 2.0 — Global Research Direction
 
-Status: binding control-plane policy for allocation of NEW experiments.
+Status: binding control-plane policy for NEW experiment selection.
 
-## 1. Why this exists
+## Purpose
 
-Local scientific rationality is not global research rationality.
+Research 2.0 must not confuse a locally sensible continuation with the globally best next problem.
 
-A lane handoff may identify an excellent next experiment inside its current thread while that thread is no longer the best use of SPIDER's finite research attention. Therefore `handoff.next_question` is a PROPOSAL, never an automatic command for the next experiment.
+A lane handoff's `next_question` is a proposal. It preserves scientific continuity, but it does not automatically determine the next experiment.
 
-Every NEW experiment must be authorized by the global Portfolio Director. Frozen or partially completed experiments are resumed to completion under their original allocation; they are not retrospectively redesigned.
+Before any NEW experiment is allocated, a Global Research Director considers the whole SPIDER program and decides what each lane should investigate next.
 
-## 2. Objective
+Already-frozen experiments are completed under their frozen design. Operational retries do not require a new research-direction decision.
 
-Allocate scarce research attention to maximize:
+## Director mandate
 
-`important uncertainty reduced * claim centrality * product/scientific leverage / cost / measurement risk`
+The Director reasons across:
 
-Do NOT reward PASS. A clean falsification, closure of an important dead end, discovery of a measurement invalidity, or a decision to park a branch can create more value than a positive result.
+- the complete accepted Codex and claim state;
+- the missions and capabilities of all six lanes;
+- recent and historical experiment trajectories;
+- unresolved central claims and current product bottlenecks;
+- dependencies between lanes;
+- the last handoff proposed by each lane;
+- general knowledge about autonomous agents, planning, exploration/exploitation, local optima, path dependence, long-horizon error accumulation, research strategy and measurement design.
 
-The Portfolio Director asks:
+General knowledge about agents is a PRIOR, not SPIDER evidence. The Director must distinguish it from observations established by the Codex.
 
-> If SPIDER were discovered today with all currently accepted evidence, what should receive the next unit of research attention?
+The recurring question is:
 
-This reset question is mandatory when a lane shows tunnel behavior.
+> Given everything SPIDER currently knows, what is the most promising next problem for each lane?
 
-## 3. Epistemic capital
+"Promising" means likely to materially improve understanding, falsify an important hypothesis, unblock a central dependency, change the architecture/product decision, or explore a genuinely high-upside alternative.
 
-Each portfolio cycle has 100 notional budget units.
+Do not reward PASS. A clean negative result may be more valuable than another positive refinement.
 
-Budget represents opportunity cost: model calls, runner time, browser/network work, researcher attention and — most importantly — research bandwidth displaced elsewhere.
+## Decisions
 
-Minimum active allocation cost is 5 units.
+For every lane the Director emits exactly one action:
 
-Repeated direct continuation of the same claim becomes progressively more expensive after the third consecutive same-claim experiment:
+- `CONTINUE`: the current research thread is still the most promising next direction.
+- `PIVOT`: a different claim or materially different problem is more promising.
+- `PARK`: preserve the current thread but start no new experiment now.
+- `REOPEN`: return to a previously abandoned/parked direction because the global state changed.
+- `TERMINATE`: stop a bounded research thread because further work is not currently justified.
 
-`min_continue_budget = min(35, 5 + 2 * max(0, claim_streak - 3))`
+These decisions concern research direction, not truth status. PARK or TERMINATE does not falsify a claim.
 
-The depth premium is not a punishment. It encodes diminishing marginal value and forces a deep branch to justify why it still dominates untouched alternatives.
+## Local-attractor warning
 
-Total allocated budget may not exceed 100 units.
+The machine may flag a lane when its recent experiments are heavily concentrated on one claim. This is diagnostic context only.
 
-## 4. Allocation actions
+A flag MUST NOT mechanically force a pivot and MUST NOT impose a quota.
 
-For each lane, choose exactly one:
+It tells the Director to perform a cognitive reset:
 
-- `CONTINUE` — keep the current claim/thread because its marginal value still dominates alternatives.
-- `PIVOT` — switch the lane to a different live claim or materially different problem family.
-- `PARK` — preserve the thread and evidence, but allocate no new experiment now.
-- `REOPEN` — return to a previously parked claim/thread because new evidence or dependencies make it high-value again.
-- `TERMINATE` — close a bounded mechanism/thread that no longer merits further work. This never means a broader scientific domain is globally false unless evidence warrants that.
+1. temporarily ignore the inherited `next_question`;
+2. ask what this lane would investigate if it encountered the current Codex for the first time today;
+3. compare that answer with the inherited continuation;
+4. choose whichever is genuinely more promising and explain why.
 
-PARK and TERMINATE consume zero budget and dispatch no new experiment.
+The Director may continue a deep thread when that is the right decision.
 
-## 5. Anti-tunnel rules
+## Lane roles
 
-A lane is in a tunnel when either:
-- its same-claim streak is at least 5; or
-- at least 8 of its last 10 canonical experiments target the same claim.
+Graph: cumulative operational inheritance — parameterization, semantic resolution, freshness, delta repair, residual novelty and LLM inheritance.
 
-When a lane is in a tunnel:
-- the Portfolio Director MUST perform a cognitive reset against the lane mission and whole claim portfolio;
-- `CONTINUE` requires an explicit exceptional justification and must pay the depth premium;
-- a local handoff cannot by itself justify continuation;
-- the opportunity cost versus neglected claims must be stated.
+Physics: falsification-first search for Web-dynamical structure beyond memory/similarity. Deep estimator work is justified only insofar as it unlocks meaningful tests.
 
-At least one active allocation per cycle must target a starved claim when a starved eligible claim exists. A starved claim is one with no experiment in the recent global window and which is not globally closed.
+Runtime: measurement/execution substrate serving central scientific or product questions. It should follow important blockers rather than acquire a permanent micro-specialty by inertia.
 
-Aim for portfolio diversity. Unless the active scientific state genuinely forbids it, active allocations should span at least 3 distinct claims.
+Product: coherent external-agent behavior and end-to-end economics. It should integrate audited capabilities rather than duplicate another lane's fundamental micro-research without reason.
 
-## 6. Lane-specific discipline
+Intel: external datasets, competitors, baselines and prior art that can change a live SPIDER claim or experimental design. It is not a generic internal metrology lane.
 
-### Graph
-Graph owns cumulative inheritance. Freshness is one capability, not its identity. It must regularly return to parameter inheritance, delta repair, residual novelty, LLM inheritance and semantic resolution.
+Frontier: deliberately search outside the current solution basin for orthogonal high-upside mechanisms or levels of description.
 
-### Physics
-Physics may pursue a technically deep estimator chain when it is unlocking a genuine measurement barrier, but after a validated measurement milestone it should move to real Web evidence or a materially orthogonal dynamics program rather than indefinitely tune the same estimator.
+## Durable mandate
 
-### Runtime
-Runtime is a service substrate for high-value claims. It should prioritize concrete blockers from other lanes. It must not become a permanent specialist laboratory for a single protocol detail unless that detail is the current bottleneck for a central claim.
+Every NEW experiment request stores the Director mandate that authorized it:
 
-### Product
-Product integrates audited capabilities and measures end-to-end external-agent economics. It should not duplicate Graph/Runtime fundamental work when another lane can own it. Its privileged questions concern successful-task cost, inheritance benefit, verification/repair burden and product behavior.
-
-### Intel
-Intel exists to find/reproduce/stress-test external datasets, competitor baselines and prior art that can change a live SPIDER decision. It must not become a self-contained measurement-research lane. An Intel allocation must name the strategic claim/product decision that the external evidence can alter.
-
-### Frontier
-Frontier exists to leave the current solution basin. Repeating variants of the same estimator/mechanism family is exceptional. After repeated negatives it should change level of description or mechanism family, not merely hyperparameters.
-
-## 7. Cognitive reset
-
-A cognitive reset means:
-1. ignore the inherited `next_question` initially;
-2. read the lane mission, all live claims, recent portfolio allocation and neglected claims;
-3. propose what the lane would do if it were starting from accepted evidence today;
-4. only then compare that proposal against the inherited handoff.
-
-The handoff may win. It no longer wins by default.
-
-## 8. Durable allocation contract
-
-Every NEW experiment request stores the exact portfolio allocation that authorized it, including:
-- portfolio cycle id;
+- cycle id;
+- lane;
 - action;
 - target claim;
-- research question;
-- mechanism family;
-- budget units;
-- decision impact;
+- exact strategic question;
 - rationale;
-- opportunity cost;
-- parent-handoff disposition;
-- cognitive-reset flag;
-- exceptional-continuation justification when required.
+- comparative reasoning against plausible alternatives;
+- treatment of the parent handoff;
+- dependencies;
+- whether a cognitive reset was performed;
+- general agent priors used, separately identified from SPIDER evidence.
 
-DESIGN may narrow implementation details but MUST NOT silently switch the allocated claim, question or action. If the allocation is infeasible, fail loudly and return to portfolio allocation rather than inventing a nearby experiment.
+DESIGN may convert the strategic question into a rigorous falsifiable experiment, but it must not silently replace the Director's target with a nearby local continuation.
 
-## 9. Liveness and failure
+If the mandate is infeasible, fail loudly. Do not invent a substitute research direction.
 
-The Portfolio Director is a global allocator, not a single point of scientific failure. If the model allocator is unavailable or emits an invalid allocation, a deterministic fallback allocator selects neglected eligible claims and parks expensive tunnel continuations.
+## Failure behavior
 
-Operational failure never becomes scientific evidence.
+The Director is a reasoning stage, not a heuristic fallback.
 
-## 10. Success criterion
+If it is unavailable or produces an invalid mandate, the factory may resume already-existing experiments but MUST NOT allocate new experiments until a valid global decision exists.
 
-The factory is healthy when it can both:
-- go deep enough to resolve hard uncertainties; and
-- voluntarily stop going deeper when another question has higher expected value.
+This preserves scientific liveness without silently restoring the old handoff-driven behavior.
 
-The ability to decide that a solvable question is not currently worth solving is a first-class capability.
+## Success criterion
+
+The factory must be able both to go deep and to decide when depth has stopped being the best use of intelligence.
+
+The central governance capability is not "stop after N experiments."
+
+It is:
+
+> choose the next problem from the whole world of currently available problems, rather than from the last problem's immediate children.
