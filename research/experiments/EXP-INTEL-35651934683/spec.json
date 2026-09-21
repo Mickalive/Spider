@@ -1,17 +1,40 @@
 {
   "experiment_id": "EXP-INTEL-35651934683",
   "lane": "intel",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-LLM-INHERIT", "C-CROSSSITE", "C-RESIDUAL-NOVELTY"],
+  "question": "Which publicly available web-agent benchmark task families have structures that test SPIDER's inheritance claims: cross-site transfer potential (C-CROSSSITE), parameterized reuse potential (C-LLM-INHERIT), and controlled novelty fractions (C-RESIDUAL-NOVELTY)?",
+  "hypothesis": "At least one benchmark (WebArena, VisualWebArena, Mind2Web, or AgentBench) contains task families that are (a) structurally runnable for SPIDER-style mechanism inheritance (not merely record-and-replay), (b) provide cross-site pairs sharing an action pattern across different site instances, and (c) allow controlled novelty fraction splits where training on a subset of task instances predicts performance on the remainder. Specifically: (H1) WebArena shopping/gitlab task families contain cross-site parameterized pairs (same mechanism, different store/project); (H2) Mind2Web multi-step stateful tasks contain reusable action templates with parameterizable fields (form_submit, search, navigate patterns); (H3) at least one benchmark supports train/test splits by task instance (not by site) enabling controlled novelty fraction measurement.",
+  "falsifier": "If (F1) NO benchmark among WebArena, VisualWebArena, Mind2Web, AgentBench contains task families where the same action mechanism operates across different site instances (cross-site pairs = 0), OR (F2) all task families are single-step atomic actions with no reusable multi-step pattern (parameterized templates = 0), OR (F3) all benchmarks use site-level train/test splits (not instance-level) making controlled novelty fractions impossible to measure, then the 2-site corpus remains the practical bound for C-LLM-INHERIT/C-CROSSSITE/C-RESIDUAL-NOVELTY and Intel should recommend alternative low-transformation-cost benchmark sources.",
+  "baselines": [
+    {
+      "id": "B1-SPIDER-2SITE",
+      "description": "Current SPIDER 2-site corpus (quotes + books) as baseline for cross-site diversity and parameterized reuse. C-LLM-INHERIT and C-CROSSSITE are bounded to this corpus.",
+      "expected": "2-site corpus provides limited cross-site diversity (2 sites, 1-2 mechanisms each) and no controlled novelty fraction splits."
+    },
+    {
+      "id": "B2-TERX-HYPERAGENT",
+      "description": "External record-and-replay systems (TERX, HyperAgent, BrowserBash) that commoditize exact-workflow replay. SPIDER's differentiation is mechanism-level inheritance, not replay.",
+      "expected": "These systems support exact replay but NOT parameterized mechanism transfer or cross-site reuse. Their task structures should be single-site, single-trajectory, with no mechanism-sharing across sites."
+    },
+    {
+      "id": "B3-HMT-WEBCOACH-AGENTRR",
+      "description": "Scout-identified systems directly relevant to SPIDER's inheritance claims: HMT (stage-level pre/post-condition matching), WebCoach (trajectory summarization + FAISS memory), AgentRR (record-and-replay with check functions).",
+      "expected": "These systems test mechanism-level inheritance (not replay) and their benchmark structures may directly inform C-LLM-INHERIT experiment design."
+    }
+  ],
+  "positive_control": "WebArena shopping site type (996 tasks across 12 store instances): shopping tasks share common action patterns (search, add-to-cart, checkout) across different store instances, providing natural cross-site parameterized pairs. If this fails to show cross-site structure, no benchmark will.",
+  "null_control": "WebArena wikipedia site type (single site, 7 tasks): Wikipedia tasks are site-specific Q&A with no cross-site mechanism sharing. Expected: 0 cross-site pairs, 0 parameterized templates, serves as negative control for benchmark structure scoring.",
+  "measurement_validity": [
+    "Task definitions must be publicly accessible (GitHub repos, published papers, or official documentation) without requiring Docker deployment or proprietary API access for the structural analysis.",
+    "Cross-site pairs must share an action mechanism (same abstract action pattern, different site instance) — not merely share a task category label.",
+    "Parameterized templates must have at least one variable field (URL parameter, form input, search query) that differs across instances while the action pattern remains constant.",
+    "Novelty fraction splits must be definable by task instance (not by site) — training on instances 1..N of a mechanism and testing on instances N+1..M of the same mechanism on different sites.",
+    "Analysis must distinguish between (a) task families with inherent structure for inheritance vs (b) task families where structure is imposed by the benchmark design (e.g., WebArena's 12 store instances are intentionally different stores sharing a platform, vs Mind2Web's diverse sites which may not share mechanisms).",
+    "External system analysis (HMT, WebCoach, AgentRR) must use published papers/repos only — no proprietary code access assumed."
+  ],
+  "decision_rule": "If ALL of: (1) >=1 benchmark has >=1 task family with cross-site pairs (score >=0.5 on cross-site structure metric), AND (2) >=1 benchmark has >=1 task family with parameterized templates (score >=0.5 on parameterization metric), AND (3) >=1 benchmark supports instance-level train/test splits (novelty_fraction measurable=true), THEN verdict = SURVIVES_CURRENT_TEST and Intel provides concrete task-family rankings for Product lane. If (1) or (2) fails but (3) passes, verdict = MIXED (partial structure). If all three fail, verdict = FALSIFIED-IN-SETTING (2-site corpus remains bound). If infrastructure blocks access to >=2 benchmarks, verdict = BLOCKED with proof.",
+  "product_consequence_positive": "Intel provides Product lane with a ranked list of benchmark task families, each scored on cross-site structure, parameterization potential, and novelty fraction measurability. Product lane can design C-LLM-INHERIT experiments on the highest-scoring families. Graph lane can design C-CROSSSITE experiments using the identified cross-site pairs. The 31x recipe material gap (EXP-INTEL-35264637598) and density/ranking work (EXP-INTEL-35572177756) become less critical if benchmark structure provides a direct path to mechanism inheritance testing.",
+  "product_consequence_negative": "2-site corpus remains the practical bound for C-LLM-INHERIT, C-CROSSSITE, and C-RESIDUAL-NOVELTY. All mechanism claims remain untestable on diverse task structures. The external landscape commoditization (TERX, HyperAgent, BrowserBash) continues without SPIDER differentiation. Product lane must evaluate whether to invest in custom benchmark construction or accept the 2-site limitation.",
+  "estimated_cost": "LOW: 2-4 hours of research time. All benchmark repos/papers are public. No Docker deployment, no browser automation, no LLM API calls. Structural analysis only (task definition parsing, action pattern identification, site/instance mapping).",
+  "expected_information_gain": "HIGH: directly determines which benchmarks the Product lane uses for C-LLM-INHERIT experiments and which cross-site pairs the Graph lane uses for C-CROSSSITE. A positive result identifies concrete runnable task families. A negative result saves the program from pursuing WebArena integration when the 812-task corpus is structurally unsuitable for mechanism inheritance."
 }
