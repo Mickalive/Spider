@@ -1,0 +1,254 @@
+{
+  "experiment_id": "EXP-PHYSICS-35578258358",
+  "seed": 42,
+  "K_categories": 12,
+  "N_SHUFFLE": 1999,
+  "alpha_prior_values_tested": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "n_transitions_stochastic": 5000,
+  "sha_stochastic": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+  "n_transitions_deterministic": 5000,
+  "sha_deterministic": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "determinism_k2_stochastic": {
+    "deterministic": 366,
+    "stochastic": 1072,
+    "total": 1438,
+    "det_ratio": 0.2545201668984701
+  },
+  "determinism_k3_stochastic": {
+    "deterministic": 77,
+    "stochastic": 764,
+    "total": 841,
+    "det_ratio": 0.09155766944114149
+  },
+  "alpha_prior_sweep": {
+    "alpha_0.5": {
+      "alpha_prior": 0.5,
+      "k2_value_stochastic": 643.0887818351148,
+      "k3_value_stochastic": 878.1214134674774,
+      "k3_minus_k2": 235.0326316323626,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata": 1438,
+        "log_ml_full": -11689.04784909972,
+        "log_ml_reduced": -12332.136630934834,
+        "log_bayes_factor": 643.0887818351148,
+        "n_full_params": 853,
+        "n_reduced_params": 2418,
+        "alpha_prior": 0.5,
+        "history_kind": "state",
+        "K_categories": 12,
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=0.5, K=12, history=state)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata": 841,
+        "log_ml_full": -11890.537386711487,
+        "log_ml_reduced": -12768.658800178964,
+        "log_bayes_factor": 878.1214134674774,
+        "n_full_params": 1567,
+        "n_reduced_params": 2804,
+        "alpha_prior": 0.5,
+        "history_kind": "action",
+        "K_categories": 12,
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=0.5, K=12, history=action)"
+      },
+      "null_control": {
+        "observed": 643.0887818351148,
+        "null_median": -78.3598155522759,
+        "null_mean": -78.16585016584742,
+        "null_std": 15.573707379066017,
+        "null_max": -21.141361116682674,
+        "percentile_99_9": -25.398867730717644,
+        "p_value": 0.0005,
+        "n_shuffle": 1999,
+        "shuffled_first5": [
+          -69.90112536011293,
+          -94.21280025642227,
+          -84.46247075098836,
+          -86.80349231469154,
+          -107.31231754710825
+        ]
+      },
+      "c1_pass": true,
+      "c3_pass": true,
+      "deterministic_control_k2": 854.1313574536543,
+      "deterministic_control_k3": 916.1799313874089
+    },
+    "alpha_1.0": {
+      "alpha_prior": 1.0,
+      "k2_value_stochastic": 338.6710973256759,
+      "k3_value_stochastic": 482.425790380943,
+      "k3_minus_k2": 143.75469305526713,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata": 1438,
+        "log_ml_full": -11906.011219212507,
+        "log_ml_reduced": -12244.682316538183,
+        "log_bayes_factor": 338.6710973256759,
+        "n_full_params": 853,
+        "n_reduced_params": 2418,
+        "alpha_prior": 1.0,
+        "history_kind": "state",
+        "K_categories": 12,
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=1.0, K=12, history=state)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata": 841,
+        "log_ml_full": -12015.700358522598,
+        "log_ml_reduced": -12498.12614890354,
+        "log_bayes_factor": 482.425790380943,
+        "n_full_params": 1567,
+        "n_reduced_params": 2804,
+        "alpha_prior": 1.0,
+        "history_kind": "action",
+        "K_categories": 12,
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=1.0, K=12, history=action)"
+      },
+      "null_control": {
+        "observed": 338.6710973256759,
+        "null_median": -130.90835513540515,
+        "null_mean": -130.73795730275515,
+        "null_std": 10.076421545805399,
+        "null_max": -92.94141450463576,
+        "percentile_99_9": -96.93574007567125,
+        "p_value": 0.0005,
+        "n_shuffle": 1999,
+        "shuffled_first5": [
+          -125.00166324137535,
+          -140.9062931372373,
+          -134.169409832597,
+          -135.84892195784414,
+          -150.05722573815547
+        ]
+      },
+      "c1_pass": true,
+      "c3_pass": true,
+      "deterministic_control_k2": 467.35171810196334,
+      "deterministic_control_k3": 499.6595966836394
+    },
+    "alpha_2.0": {
+      "alpha_prior": 2.0,
+      "k2_value_stochastic": 167.89839491149542,
+      "k3_value_stochastic": 246.992313918543,
+      "k3_minus_k2": 79.09391900704759,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata": 1438,
+        "log_ml_full": -12096.839222645018,
+        "log_ml_reduced": -12264.737617556513,
+        "log_bayes_factor": 167.89839491149542,
+        "n_full_params": 853,
+        "n_reduced_params": 2418,
+        "alpha_prior": 2.0,
+        "history_kind": "state",
+        "K_categories": 12,
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=2.0, K=12, history=state)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata": 841,
+        "log_ml_full": -12155.240928067577,
+        "log_ml_reduced": -12402.23324198612,
+        "log_bayes_factor": 246.992313918543,
+        "n_full_params": 1567,
+        "n_reduced_params": 2804,
+        "alpha_prior": 2.0,
+        "history_kind": "action",
+        "K_categories": 12,
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=2.0, K=12, history=action)"
+      },
+      "null_control": {
+        "observed": 167.89839491149542,
+        "null_median": -116.09881255547953,
+        "null_mean": -115.93068911084933,
+        "null_std": 6.0627353328463585,
+        "null_max": -92.76723145735923,
+        "percentile_99_9": -95.87055740225041,
+        "p_value": 0.0005,
+        "n_shuffle": 1999,
+        "shuffled_first5": [
+          -112.24433457682426,
+          -121.89708756832624,
+          -117.70788774620814,
+          -118.77231753544038,
+          -127.76807589645432
+        ]
+      },
+      "c1_pass": true,
+      "c3_pass": true,
+      "deterministic_control_k2": 235.6529698244667,
+      "deterministic_control_k3": 251.24131242542535
+    }
+  },
+  "c1_passers": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "c3_passers": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "both_passers": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "c6_design_pass": true,
+  "c7_stratum_buckets": 2,
+  "c7_pass": true,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 343,
+      "total_records": 2147,
+      "observed_bf": 187.63611015363404,
+      "null_mean": -71.36107602181698,
+      "null_std": 7.704014851419995
+    },
+    "10-19": {
+      "n_strata": 37,
+      "total_records": 433,
+      "observed_bf": 67.96193014013852,
+      "null_mean": -28.247727211742703,
+      "null_std": 4.365362296931438
+    },
+    "20-49": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_bf": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_bf": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "phase2": {
+    "alpha_prior": 0.5,
+    "bootstrap": {
+      "mean_difference": -169.462180895934,
+      "ci_lower_95": -415.19610765188065,
+      "ci_upper_95": 34.39469529670848,
+      "std_difference": 116.86197902425829,
+      "mean_k3": 927.9144625577151,
+      "mean_k2": 1097.3766434536492,
+      "ci_includes_zero": true,
+      "n_bootstrap": 200
+    },
+    "c2_pass": true
+  },
+  "verdict": "SURVIVES_CURRENT_TEST",
+  "outcome": "SUPPORTS",
+  "reason": "alpha_prior=0.5: C1 null median=-78.359816 < 0, C3 observed=643.088782 > 99.9th=-25.398868 (p=0.000500), C2 K3-K2=235.032632 > 0.",
+  "wall_seconds": 128.486319065094
+}

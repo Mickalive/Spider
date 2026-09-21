@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35578258358",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "K_categories": 12,
+    "N_SHUFFLE": 1999,
+    "N_transitions": 5000,
+    "alpha_prior_values_tested": [0.5, 1.0, 2.0],
+    "c1_passers": [0.5, 1.0, 2.0],
+    "c3_passers": [0.5, 1.0, 2.0],
+    "both_passers": [0.5, 1.0, 2.0],
+    "c6_pass": true,
+    "c7_pass": true,
+    "c7_non_empty_buckets": 2,
+    "best_alpha_prior": 0.5,
+    "best_k2_stochastic_nats": 643.088782,
+    "best_k3_stochastic_nats": 878.121413,
+    "best_k3_minus_k2_nats": 235.032632,
+    "best_null_median_nats": -78.359816,
+    "best_null_mean_nats": -78.165850,
+    "best_null_std_nats": 15.573707,
+    "best_null_max_nats": -21.141361,
+    "best_percentile_99_9_nats": -25.398868,
+    "best_p_value": 0.0005,
+    "alpha_1_0_k2_stochastic_nats": 338.671097,
+    "alpha_1_0_null_median_nats": -130.908355,
+    "alpha_2_0_k2_stochastic_nats": 167.898395,
+    "alpha_2_0_null_median_nats": -116.098813,
+    "deterministic_positive_control_k2_nats": 854.131357,
+    "deterministic_positive_control_k3_nats": 916.179931,
+    "determinism_k2_stochastic_det_ratio": 0.2545,
+    "determinism_k3_stochastic_det_ratio": 0.0916,
+    "stratum_size_bias": {
+      "5-9": {"n_strata": 343, "total_records": 2147, "obs_bf": 187.636110},
+      "10-19": {"n_strata": 37, "total_records": 433, "obs_bf": 67.961930}
+    },
+    "phase2_k3_minus_k2_nats": 235.032632,
+    "phase2_bootstrap_ci_lower": -415.196108,
+    "phase2_bootstrap_ci_upper": 34.394695,
+    "phase2_ci_includes_zero": true,
+    "phase2_bootstrap_mean_difference_nats": -169.462181,
+    "phase2_bootstrap_n": 200,
+    "wall_seconds": 128.49
+  },
+  "controls": {
+    "C1_null_validity": {
+      "description": "At least 1 prior specification has shuffled-action null median < 0 nats (Occam's razor penalizes the larger model under the null)",
+      "frozen_threshold": "null_median < 0 nats",
+      "observed": "All 3 alpha_priors PASS: alpha=0.5 null_median=-78.36, alpha=1.0 null_median=-130.91, alpha=2.0 null_median=-116.10",
+      "pass": true,
+      "evidence_ref": "raw_results.json:alpha_prior_sweep.alpha_0.5.null_control.null_median"
+    },
+    "C3_sensitivity": {
+      "description": "For any specification passing C1, observed log BF on stochastic SPA exceeds 99.9th percentile of null distribution (permutation p < 0.001)",
+      "frozen_threshold": "p < 0.001 (N_SHUFFLE=1999, min achievable p=0.0005)",
+      "observed": "All 3 alpha_priors PASS: p=0.0005 for all. Best: alpha=0.5 observed=643.09 > 99.9th=-25.40",
+      "pass": true,
+      "evidence_ref": "raw_results.json:alpha_prior_sweep.alpha_0.5.null_control.p_value"
+    },
+    "C6_design": {
+      "description": "48/48 (state,action) pairs with 4 distinct candidates",
+      "frozen_threshold": "48/48 pairs with 4 distinct candidates",
+      "observed": "48/48 pairs verified, 0 issues",
+      "pass": true,
+      "evidence_ref": "raw_results.json:c6_design_pass"
+    },
+    "C7_stratum_coverage": {
+      "description": ">= 2 non-empty stratum size buckets",
+      "frozen_threshold": ">= 2 non-empty buckets",
+      "observed": "2 non-empty buckets: 5-9 (343 strata, 2147 records), 10-19 (37 strata, 433 records)",
+      "pass": true,
+      "evidence_ref": "raw_results.json:c7_stratum_buckets"
+    },
+    "positive_control_deterministic_spa": {
+      "description": "Deterministic SPA: action determines next state deterministically. Bayes factor should strongly favor M1 (log BF >> 0 nats)",
+      "frozen_threshold": "log BF >> 0 nats",
+      "observed": "K2=854.13 nats, K3=916.18 nats at alpha=0.5 (strongly positive)",
+      "pass": true,
+      "evidence_ref": "raw_results.json:alpha_prior_sweep.alpha_0.5.deterministic_control_k2"
+    },
+    "null_control_distribution": {
+      "description": "Null distribution should be centered negative (Occam's razor)",
+      "frozen_threshold": "null_median < 0",
+      "observed": "All null medians negative: alpha=0.5: -78.36, alpha=1.0: -130.91, alpha=2.0: -116.10. Null means nearly identical to medians (symmetric).",
+      "pass": true,
+      "evidence_ref": "raw_results.json:alpha_prior_sweep.*.null_control"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35578258358/run_experiment.py",
+      "sha256": "0a9c67480b842bd29c3bb53f99c59d07f17e617b80e60695bfdeec16a45bca63",
+      "role": "code",
+      "description": "Corrected experiment implementation with K=12 (not K=len(counts)) and N_SHUFFLE=1999"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35578258358/raw_results.json",
+      "sha256": "774d58b666bde223a393d3c7feb92bbb3cfc26e714a45bbafe074b5608cda3f7",
+      "role": "raw",
+      "description": "Complete raw results including all alpha_prior sweep data, null controls, and Phase 2 bootstrap"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35578258358/raw_output.txt",
+      "sha256": "052f28964150de8e6d12e96adf3322ecff1f4b107a24e22a3bea202953841eac",
+      "role": "raw",
+      "description": "Full console output of the experiment execution"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35578258358/spec.json",
+      "sha256": "d9b644b815afc3d5b1767facde1927937daefabcbab4942b4b020f77e5cf0d20",
+      "role": "fixture",
+      "description": "Frozen experiment spec (immutable)"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35578258358/prereg.md",
+      "sha256": "f81af4dab33c966a60b64073b931f4c3b67187f09b98af73d49891b0cf32c8c4",
+      "role": "fixture",
+      "description": "Frozen preregistration (immutable)"
+    }
+  ],
+  "observations": [
+    "All 3 alpha_prior values (0.5, 1.0, 2.0) pass both C1 (null median < 0) and C3 (p=0.0005 < 0.001). This is the first estimator family to simultaneously pass both criteria across the full alpha sweep on this SPA class.",
+    "The corrected K=12 null median of -78 to -131 nats (depending on alpha) is well-centered negative, confirming Occam's razor correctly penalizes the larger action-dependent model under the null. The parent's K=len(counts) bug produced +3700 to +4000 nats upward bias, entirely explained by the single-line error.",
+    "The observed log Bayes factors (168-643 nats at alpha 2.0-0.5) are large and well-separated from the null distribution maximum (-21 to -93 nats depending on alpha). The gap between observed and 99.9th percentile is 194-669 nats across alphas, demonstrating robust sensitivity.",
+    "Deterministic SPA positive control produces log BF 854-916 nats, confirming the Bayesian implementation correctly detects strong action effects. The stochastic SPA signal (168-643 nats) is 19-75% of the deterministic ceiling, consistent with 50% stochasticity.",
+    "Phase 2 beyond-Markov: K3-K2 = 235 nats at alpha=0.5 (point estimate positive), but bootstrap CI [-415, 34] includes zero, indicating high variance in the K3-K2 difference across bootstrap resamples. Phase 2 is exploratory per the frozen spec and does not gate the main verdict.",
+    "Stratum size decomposition: 343 strata in 5-9 bucket (2147 records) and 37 strata in 10-19 bucket (433 records). No strata with >=20 records, indicating the N=5000 dataset produces many small strata. Both buckets show significant positive log BF (188 and 68 nats respectively).",
+    "The parent experiment EXP-PHYSICS-35572180485 MEASUREMENT_INVALID verdict was entirely due to the K=len(counts) bug. With corrected K=12, the same data and shuffle framework yield SURVIVES_CURRENT_TEST. The audit-corrected recomputation (null median -78 to -131 nats) is confirmed by this independent frozen re-execution.",
+    "The log BF scale (nats) is fundamentally different from the PMI/CMI scale (bits) used in prior estimator families. The Bayesian approach operates on marginal likelihood ratio, not direct CMI estimation, which explains why it succeeds where plug-in KL, entropy-rate, KSG, and LR chi2 all failed."
+  ],
+  "validity_notes": [
+    "All evidence is synthetic SPA simulation. C-WEB-DYNAMICS concerns real Web dynamics. This experiment validates the Bayesian estimator paradigm on a controlled synthetic testbed, not on production Web data.",
+    "The Bayes factor operates on nats scale (natural logarithm), not bits. The null distribution is centered at -78 to -131 nats (depending on alpha), not near zero. The decision criteria (median < 0, p < 0.001) are adapted for this scale.",
+    "N_SHUFFLE=1999 achieves minimum achievable p=0.0005, well below the 0.001 threshold. The p-value is exact (no interpolation needed).",
+    "The stratum size distribution is skewed: 343 strata have 5-9 records, 37 have 10-19 records. No strata with >=20 records exist at N=5000, suggesting that larger N would improve stratum-level estimation.",
+    "Phase 2 beyond-Markov K3-K2 testing is exploratory. The bootstrap CI for K3-K2 includes zero despite the point estimate being positive (235 nats). This high variance may reflect limited within-session action diversity or the interaction between history conditioning and stratum fragmentation.",
+    "The positive control (deterministic SPA) produces log BF 854-916 nats, confirming the implementation detects strong signals. The stochastic SPA produces 168-643 nats (19-75% of deterministic ceiling), consistent with the 50% stochastic mixing ratio.",
+    "The Dirichlet-Multinomial marginal likelihood is a closed-form computation; no MCMC or variational inference is needed. Numerical stability is maintained via log-space computation (math.lgamma).",
+    "The within-session shuffle preserves session structure, state sequence, and url_before/url_after pairing while randomizing action labels. This is the correct null for testing action-dependent structure."
+  ],
+  "unresolved": [
+    "Whether Phase 2 beyond-Markov K3-K2 testing passes at N>=10000 transitions (current N=5000 produces bootstrap CI including zero despite positive point estimate of 235 nats)",
+    "Whether the Bayesian paradigm maintains valid null centering on production Web data with high-cardinality state spaces (all evidence is synthetic SPA)",
+    "Whether the Bayesian approach detects action-conditioned structure on real SPA/form-heavy browser data (TodoMVC, production SPAs)",
+    "Whether alternative Bayesian methods (WAIC, LOO-CV, fractional Bayes factors) achieve comparable or better null centering and sensitivity on this SPA class",
+    "Whether the parent EXP-PHYSICS-35476270440 null_mean -213.7 nats discrepancy is due to K handling or shuffle framework differences (requires direct comparison)",
+    "Whether the Bayesian estimator generalizes to beyond-Markov K3-K2 testing where the reduced model already conditions on action history (potential for history-action confounding)"
+  ]
+}

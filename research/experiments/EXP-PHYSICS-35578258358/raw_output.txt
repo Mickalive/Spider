@@ -1,0 +1,66 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35578258358 - Corrected Bayesian model comparison (K=12, N_SHUFFLE=1999)
+========================================================================
+CRITICAL FIX: K_categories=12 (was K=len(counts) in parent)
+CRITICAL FIX: N_SHUFFLE=1999 (was 500 in parent, spec requires >=1000)
+
+[VERIFY] CANDIDATES design-level check...
+[VERIFY] C6: PASS (48/48 pairs with 4 distinct candidates)
+
+[COLLECT] Stochastic SPA N=5000 (50 sessions x 100 steps, SEED=42)...
+[COLLECT] N=5000 SHA256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+
+[COLLECT] Deterministic SPA N=5000 (positive control)...
+[COLLECT] N=5000 SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (0.0s)
+
+[BUILD] Stochastic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701} K3={'deterministic': 77, 'stochastic': 764, 'total': 841, 'det_ratio': 0.09155766944114149}
+
+[BUILD] Deterministic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+
+========================================================================
+ALPHA PRIOR SWEEP: Bayesian model comparison with alpha_prior in {0.5, 1.0, 2.0}
+K_categories=12 (CRITICAL FIX from parent's K=len(counts))
+========================================================================
+
+--- alpha_prior=0.5 ---
+  K2 (stochastic) = 643.088782 nats (0.0s)
+  K3 (stochastic) = 878.121413 nats (0.0s)
+  Deterministic SPA control: K2=854.131357 K3=916.179931 nats (0.0s)
+  C1 null control: null_median=-78.359816 null_mean=-78.165850 std=15.573707 null_max=-21.141361 (threshold median<0) -> PASS (40.0s)
+  C3 sensitivity: observed=643.088782 > 99.9th=-25.398868 p=0.000500 -> PASS
+
+--- alpha_prior=1.0 ---
+  K2 (stochastic) = 338.671097 nats (0.0s)
+  K3 (stochastic) = 482.425790 nats (0.0s)
+  Deterministic SPA control: K2=467.351718 K3=499.659597 nats (0.0s)
+  C1 null control: null_median=-130.908355 null_mean=-130.737957 std=10.076422 null_max=-92.941415 (threshold median<0) -> PASS (39.9s)
+  C3 sensitivity: observed=338.671097 > 99.9th=-96.935740 p=0.000500 -> PASS
+
+--- alpha_prior=2.0 ---
+  K2 (stochastic) = 167.898395 nats (0.0s)
+  K3 (stochastic) = 246.992314 nats (0.0s)
+  Deterministic SPA control: K2=235.652970 K3=251.241312 nats (0.0s)
+  C1 null control: null_median=-116.098813 null_mean=-115.930689 std=6.062735 null_max=-92.767231 (threshold median<0) -> PASS (40.3s)
+  C3 sensitivity: observed=167.898395 > 99.9th=-95.870557 p=0.000500 -> PASS
+
+[SCREENING] C1 passers (null median < 0): [0.5, 1.0, 2.0]
+[SCREENING] C3 passers (p < 0.001): [0.5, 1.0, 2.0]
+[SCREENING] C1+C3 passers: [0.5, 1.0, 2.0]
+[SCREENING] C7 stratum buckets: 2 non-empty -> PASS
+  Bucket 5-9: 343 strata, 2147 records, obs_bf=187.636110
+  Bucket 10-19: 37 strata, 433 records, obs_bf=67.961930
+
+========================================================================
+PHASE 2 on first passing alpha_prior: 0.5
+========================================================================
+  C2 K3-K2 = 235.032632 > 0: True
+     bootstrap CI [-415.196108, 34.394695] lower>0: False
+
+[VERDICT] SURVIVES_CURRENT_TEST
+[OUTCOME] SUPPORTS
+[REASON] alpha_prior=0.5: C1 null median=-78.359816 < 0, C3 observed=643.088782 > 99.9th=-25.398868 (p=0.000500), C2 K3-K2=235.032632 > 0.
+
+Saved raw_results.json (wall 128.5s)
