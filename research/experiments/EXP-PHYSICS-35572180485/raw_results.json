@@ -1,0 +1,218 @@
+{
+  "experiment_id": "EXP-PHYSICS-35572180485",
+  "seed": 42,
+  "alpha_prior_values_tested": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "n_transitions_stochastic": 5000,
+  "sha_stochastic": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+  "n_transitions_deterministic": 5000,
+  "sha_deterministic": "46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512",
+  "determinism_k2_stochastic": {
+    "deterministic": 366,
+    "stochastic": 1072,
+    "total": 1438,
+    "det_ratio": 0.2545201668984701
+  },
+  "determinism_k3_stochastic": {
+    "deterministic": 77,
+    "stochastic": 764,
+    "total": 841,
+    "det_ratio": 0.09155766944114149
+  },
+  "alpha_prior_sweep": {
+    "alpha_0.5": {
+      "alpha_prior": 0.5,
+      "k2_value_stochastic": 5364.557885447849,
+      "k3_value_stochastic": 5783.65642168382,
+      "k3_minus_k2": 419.09853623597064,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata": 1438,
+        "log_ml_full": -2090.35951103557,
+        "log_ml_reduced": -7454.917396483419,
+        "log_bayes_factor": 5364.557885447849,
+        "n_full_params": 853,
+        "n_reduced_params": 2418,
+        "alpha_prior": 0.5,
+        "history_kind": "state",
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=0.5, history=state)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata": 841,
+        "log_ml_full": -4083.5617105912884,
+        "log_ml_reduced": -9867.218132275108,
+        "log_bayes_factor": 5783.65642168382,
+        "n_full_params": 1567,
+        "n_reduced_params": 2804,
+        "alpha_prior": 0.5,
+        "history_kind": "action",
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=0.5, history=action)"
+      },
+      "null_control": {
+        "observed": 5364.557885447849,
+        "null_median": 4047.932572915106,
+        "null_mean": 4047.9539591197545,
+        "null_std": 44.31158057445672,
+        "percentile_99_9": 4162.833247437691,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          4064.087943212804,
+          4019.403694342763,
+          4008.136490916308,
+          4010.2488014171686,
+          4017.9410366116326
+        ]
+      },
+      "c1_pass": false,
+      "c3_pass": false,
+      "deterministic_control_k2": 5699.420992487156,
+      "deterministic_control_k3": 5873.58235379257
+    },
+    "alpha_1.0": {
+      "alpha_prior": 1.0,
+      "k2_value_stochastic": 4937.451209604037,
+      "k3_value_stochastic": 5462.904027673973,
+      "k3_minus_k2": 525.4528180699363,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata": 1438,
+        "log_ml_full": -1847.2682572801052,
+        "log_ml_reduced": -6784.719466884142,
+        "log_bayes_factor": 4937.451209604037,
+        "n_full_params": 853,
+        "n_reduced_params": 2418,
+        "alpha_prior": 1.0,
+        "history_kind": "state",
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=1.0, history=state)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata": 841,
+        "log_ml_full": -3636.989184485631,
+        "log_ml_reduced": -9099.893212159604,
+        "log_bayes_factor": 5462.904027673973,
+        "n_full_params": 1567,
+        "n_reduced_params": 2804,
+        "alpha_prior": 1.0,
+        "history_kind": "action",
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=1.0, history=action)"
+      },
+      "null_control": {
+        "observed": 4937.451209604037,
+        "null_median": 3787.2234876328894,
+        "null_mean": 3787.4109482983195,
+        "null_std": 39.3795909127208,
+        "percentile_99_9": 3889.6034178281798,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          3800.852430114073,
+          3763.8803666128015,
+          3751.3323277807544,
+          3751.5260185298357,
+          3760.4904501159813
+        ]
+      },
+      "c1_pass": false,
+      "c3_pass": false,
+      "deterministic_control_k2": 5274.690386195049,
+      "deterministic_control_k3": 5549.9145388466
+    },
+    "alpha_2.0": {
+      "alpha_prior": 2.0,
+      "k2_value_stochastic": 4664.998762871703,
+      "k3_value_stochastic": 5256.643454687924,
+      "k3_minus_k2": 591.644691816221,
+      "k2_info": {
+        "n_records": 5000,
+        "n_strata": 1438,
+        "log_ml_full": -1693.6050119637089,
+        "log_ml_reduced": -6358.603774835411,
+        "log_bayes_factor": 4664.998762871703,
+        "n_full_params": 853,
+        "n_reduced_params": 2418,
+        "alpha_prior": 2.0,
+        "history_kind": "state",
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=2.0, history=state)"
+      },
+      "k3_info": {
+        "n_records": 5000,
+        "n_strata": 841,
+        "log_ml_full": -3353.1130927534805,
+        "log_ml_reduced": -8609.756547441404,
+        "log_bayes_factor": 5256.643454687924,
+        "n_full_params": 1567,
+        "n_reduced_params": 2804,
+        "alpha_prior": 2.0,
+        "history_kind": "action",
+        "method": "Dirichlet-Multinomial exact marginal likelihood (alpha=2.0, history=action)"
+      },
+      "null_control": {
+        "observed": 4664.998762871703,
+        "null_median": 3621.520212069373,
+        "null_mean": 3621.6219034455466,
+        "null_std": 36.27872768832553,
+        "percentile_99_9": 3715.5645878514506,
+        "p_value": 0.001996007984031936,
+        "n_shuffle": 500,
+        "shuffled_first5": [
+          3633.3468429659843,
+          3601.2345706349047,
+          3587.9979241937526,
+          3586.832701633492,
+          3596.7625442868307
+        ]
+      },
+      "c1_pass": false,
+      "c3_pass": false,
+      "deterministic_control_k2": 5006.2165507214295,
+      "deterministic_control_k3": 5344.272612402265
+    }
+  },
+  "c1_passers": [],
+  "c3_passers": [],
+  "both_passers": [],
+  "c6_design_pass": true,
+  "c7_stratum_buckets": 2,
+  "c7_pass": true,
+  "stratum_size_bias_decomposition": {
+    "5-9": {
+      "n_strata": 343,
+      "total_records": 2147,
+      "observed_bf": 2523.2005034481153,
+      "null_mean": 1901.076452491597,
+      "null_std": 30.481095378852206
+    },
+    "10-19": {
+      "n_strata": 37,
+      "total_records": 433,
+      "observed_bf": 526.9982879762256,
+      "null_mean": 315.696592049257,
+      "null_std": 10.962726487391611
+    },
+    "20-49": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_bf": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    },
+    "50+": {
+      "n_strata": 0,
+      "total_records": 0,
+      "observed_bf": 0.0,
+      "null_mean": 0.0,
+      "null_std": 0.0
+    }
+  },
+  "phase2": null,
+  "verdict": "FALSIFIED-IN-SETTING",
+  "outcome": "FALSIFIES",
+  "reason": "C1: ALL alpha_prior values have null median >= 0 nats (Occam's razor fails). Values: alpha_prior=0.5 null_median=4047.932573, alpha_prior=1.0 null_median=3787.223488, alpha_prior=2.0 null_median=3621.520212.",
+  "wall_seconds": 29.359370231628418
+}

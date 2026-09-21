@@ -1,0 +1,55 @@
+========================================================================
+EXPERIMENT EXP-PHYSICS-35572180485 - Bayesian model comparison on stochastic SPA
+========================================================================
+
+[VERIFY] CANDIDATES design-level check...
+[VERIFY] C6: PASS (48/48 pairs with 4 distinct candidates)
+
+[COLLECT] Stochastic SPA N=5000 (50 sessions x 100 steps, SEED=42)...
+[COLLECT] N=5000 SHA256=8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0 (0.0s)
+
+[COLLECT] Deterministic SPA N=5000 (positive control)...
+[COLLECT] N=5000 SHA256=46ed606a08615b86b8ca443f1a48eacc6607f65f1cf2c5d2e6bd59e6ac9d4512 (0.0s)
+
+[BUILD] Stochastic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+[BUILD] determinism K2={'deterministic': 366, 'stochastic': 1072, 'total': 1438, 'det_ratio': 0.2545201668984701} K3={'deterministic': 77, 'stochastic': 764, 'total': 841, 'det_ratio': 0.09155766944114149}
+
+[BUILD] Deterministic SPA records...
+[BUILD] K2 records=5000 K3 records=5000
+
+========================================================================
+ALPHA PRIOR SWEEP: Bayesian model comparison with alpha_prior in {0.5, 1.0, 2.0}
+========================================================================
+
+--- alpha_prior=0.5 ---
+  K2 (stochastic) = 5364.557885 nats (0.0s)
+  K3 (stochastic) = 5783.656422 nats (0.0s)
+  Deterministic SPA control: K2=5699.420992 K3=5873.582354 nats (0.0s)
+  C1 null control: null_median=4047.932573 null_mean=4047.953959 std=44.311581 (threshold median<0) -> FAIL (9.5s)
+  C3 sensitivity: observed=5364.557885 > 99.9th=4162.833247 p=0.001996 -> FAIL
+
+--- alpha_prior=1.0 ---
+  K2 (stochastic) = 4937.451210 nats (0.0s)
+  K3 (stochastic) = 5462.904028 nats (0.0s)
+  Deterministic SPA control: K2=5274.690386 K3=5549.914539 nats (0.0s)
+  C1 null control: null_median=3787.223488 null_mean=3787.410948 std=39.379591 (threshold median<0) -> FAIL (9.3s)
+  C3 sensitivity: observed=4937.451210 > 99.9th=3889.603418 p=0.001996 -> FAIL
+
+--- alpha_prior=2.0 ---
+  K2 (stochastic) = 4664.998763 nats (0.0s)
+  K3 (stochastic) = 5256.643455 nats (0.0s)
+  Deterministic SPA control: K2=5006.216551 K3=5344.272612 nats (0.0s)
+  C1 null control: null_median=3621.520212 null_mean=3621.621903 std=36.278728 (threshold median<0) -> FAIL (9.5s)
+  C3 sensitivity: observed=4664.998763 > 99.9th=3715.564588 p=0.001996 -> FAIL
+
+[SCREENING] C1 passers (null median < 0): []
+[SCREENING] C3 passers (p < 0.001): []
+[SCREENING] C1+C3 passers: []
+[SCREENING] C7 stratum buckets: 2 non-empty -> PASS
+
+[VERDICT] FALSIFIED-IN-SETTING
+[OUTCOME] FALSIFIES
+[REASON] C1: ALL alpha_prior values have null median >= 0 nats (Occam's razor fails). Values: alpha_prior=0.5 null_median=4047.932573, alpha_prior=1.0 null_median=3787.223488, alpha_prior=2.0 null_median=3621.520212.
+
+Saved raw_results.json (wall 29.4s)

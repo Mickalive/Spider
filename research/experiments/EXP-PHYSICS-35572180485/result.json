@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35572180485",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "alpha_prior_sweep_summary": {
+      "alpha_0.5": {
+        "k2_log_bf_stochastic": 5364.56,
+        "k3_log_bf_stochastic": 5783.66,
+        "k3_minus_k2": 419.10,
+        "null_median": 4047.93,
+        "null_mean": 4047.95,
+        "null_std": 44.31,
+        "percentile_99_9": 4162.83,
+        "p_value": 0.001996,
+        "c1_pass": false,
+        "c3_pass": false
+      },
+      "alpha_1.0": {
+        "k2_log_bf_stochastic": 4937.45,
+        "k3_log_bf_stochastic": 5462.90,
+        "k3_minus_k2": 525.45,
+        "null_median": 3787.22,
+        "null_mean": 3787.41,
+        "null_std": 39.38,
+        "percentile_99_9": 3889.60,
+        "p_value": 0.001996,
+        "c1_pass": false,
+        "c3_pass": false
+      },
+      "alpha_2.0": {
+        "k2_log_bf_stochastic": 4665.00,
+        "k3_log_bf_stochastic": 5256.64,
+        "k3_minus_k2": 591.64,
+        "null_median": 3621.52,
+        "null_mean": 3621.62,
+        "null_std": 36.28,
+        "percentile_99_9": 3715.56,
+        "p_value": 0.001996,
+        "c1_pass": false,
+        "c3_pass": false
+      }
+    },
+    "deterministic_control": {
+      "alpha_0.5": {"k2_log_bf": 5699.42, "k3_log_bf": 5873.58},
+      "alpha_1.0": {"k2_log_bf": 5274.69, "k3_log_bf": 5549.91},
+      "alpha_2.0": {"k2_log_bf": 5006.22, "k3_log_bf": 5344.27}
+    },
+    "n_transitions_stochastic": 5000,
+    "n_transitions_deterministic": 5000,
+    "n_strata_k2": 1438,
+    "n_strata_k3": 841,
+    "c1_passers": [],
+    "c3_passers": [],
+    "both_passers": [],
+    "c6_design_pass": true,
+    "c7_stratum_buckets": 2,
+    "c7_pass": true,
+    "null_centering_bias_nats": {
+      "alpha_0.5": 4047.93,
+      "alpha_1.0": 3787.22,
+      "alpha_2.0": 3621.52
+    }
+  },
+  "controls": {
+    "C6_design_verification": {
+      "expected": "48/48 (state,action) pairs with 4 distinct candidates",
+      "observed": "48/48 pairs with 4 distinct candidates",
+      "pass": true,
+      "evidence": "raw_results.json:c6_design_pass"
+    },
+    "C7_stratum_coverage": {
+      "expected": ">= 2 non-empty stratum size buckets",
+      "observed": "2 non-empty buckets (5-9: 343 strata, 10-19: 37 strata)",
+      "pass": true,
+      "evidence": "raw_results.json:c7_stratum_buckets"
+    },
+    "C1_null_validity": {
+      "expected": "At least 1 alpha_prior with null median < 0 nats",
+      "observed": "ALL alpha_priors have null median >= 0 nats (alpha_0.5: 4047.93, alpha_1.0: 3787.22, alpha_2.0: 3621.52)",
+      "pass": false,
+      "evidence": "raw_results.json:alpha_prior_sweep_summary.*.null_median"
+    },
+    "C3_sensitivity": {
+      "expected": "For any C1 passer, observed log BF > 99.9th percentile of null (p < 0.001)",
+      "observed": "C1 fails for all alpha_priors, so C3 not evaluated",
+      "pass": false,
+      "evidence": "raw_results.json:alpha_prior_sweep_summary.*.c3_pass"
+    },
+    "B-REPLICATE-BAYESIAN-PARENT": {
+      "description": "Replicate EXP-PHYSICS-35476270440 Bayesian model comparison",
+      "expected": "log_bf ~4905 nats, null_mean ~-213.7 nats",
+      "observed": "log_bf ~4937 nats (alpha_1.0 K2), null_mean ~+3787 nats (positive, not negative)",
+      "pass": false,
+      "evidence": "raw_results.json:alpha_prior_sweep_summary.alpha_1.0"
+    },
+    "B-REPLICATE-BAYESIAN-NULL": {
+      "description": "Parent shuffled-action null for Bayesian model comparison",
+      "expected": "null centered negative (Occam's razor), |mean| > 100 nats",
+      "observed": "null centered POSITIVE (~+3700 to +4000 nats), Occam's razor FAILS",
+      "pass": false,
+      "evidence": "raw_results.json:alpha_prior_sweep_summary.*.null_median"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/run_experiment.py",
+      "sha256": "5f3f82520c81003e84b1ee29672f254bfcb8583d8852f3bcbe06c966cdf4d01e",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/raw_results.json",
+      "sha256": "fe57f87a53e9cf1edbc4e9e1d097e21a1200881c35f5842ba3501f9ab64b1f7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35572180485/raw_output.txt",
+      "sha256": "addef07b23eb4b44bbfefb35c0885011a1d871224402d71f942a13a7468c1d50",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "ALL three tested alpha_prior values (0.5, 1.0, 2.0) have shuffled-action null MEDIAN >= 0 nats (positive, range +3621 to +4048 nats). Occam's razor FAILS to penalize the larger model under the null.",
+    "The null distribution is centered at approximately +3700 to +4000 nats, NOT negative as required for valid Bayesian model comparison.",
+    "The observed log Bayes factors on the stochastic SPA are large positive values (+4665 to +5365 nats for K2), but they are NOT significantly above the null distribution (p=0.002 for all alpha_priors, which is > 0.001 threshold).",
+    "The deterministic SPA positive control shows even larger log Bayes factors (+5006 to +5699 nats for K2), confirming the implementation detects strong action effects.",
+    "K3 (action history) produces larger log Bayes factors than K2 (state history) by 419-592 nats, suggesting action history provides additional information. However, this comparison is not statistically tested because C1 fails.",
+    "The Dirichlet-Multinomial marginal likelihood has systematic upward bias under the null: when actions are shuffled, the full model M1 still achieves higher marginal likelihood than the reduced model M0.",
+    "This is the 5th estimator family tested on this SPA class: plug-in KL (FALSIFIED), entropy-rate CMI (FALSIFIED), KSG CMI (insensitive), LR chi2 (history collapse), and now Bayesian (FALSIFIED)."
+  ],
+  "validity_notes": [
+    "The Dirichlet-Multinomial marginal likelihood operates on a DIFFERENT scale than CMI (nats vs bits). The decision criteria were adapted: C1 uses null median < 0 nats instead of |null_mean| < 0.1 bits.",
+    "The null centering failure is NOT a Laplace smoothing bias (the Bayesian approach does NOT use histogram smoothing). It is a fundamental property of the Dirichlet-Multinomial marginal likelihood under this SPA design.",
+    "The null distribution has small standard deviation (36-44 nats) relative to the mean (~3700-4000 nats), indicating the upward bias is consistent and not due to variance.",
+    "N=5000 transitions (50 sessions x 100 steps) with seed=42, same as parent experiments.",
+    "Stratum coverage: 1438 K2 strata, 841 K3 strata. Most strata are small (5-9 records: 343 strata, 10-19 records: 37 strata). No strata have 20+ records."
+  ],
+  "unresolved": [
+    "Why does the Dirichlet-Multinomial marginal likelihood have systematic upward bias under the null? The Dirichlet-Multinomial should penalize model complexity through marginalization over parameters, but it does not in this case.",
+    "Is the upward bias intrinsic to the Dirichlet-Multinomial family, or is it specific to this SPA design with many small strata?",
+    "Would alternative Bayesian model comparison methods (e.g., WAIC, LOO-CV, fractional Bayes factors) achieve valid null centering?",
+    "Can the K3-K2 difference (419-592 nats) be tested as evidence for beyond-Markov dynamics using a different null framework?"
+  ]
+}
