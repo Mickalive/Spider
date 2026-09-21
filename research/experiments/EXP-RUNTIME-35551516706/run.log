@@ -1,0 +1,30 @@
+[07:59:05] === EXP-RUNTIME-35551516706 EXECUTE start ===
+[07:59:05] payload registry: 48 primary cells, 72 total payload keys, entropy range 4.66-7.70 bits/byte
+[07:59:05] manifest written: /home/runner/work/Spider/Spider/research/experiments/EXP-RUNTIME-35551516706/payload_manifest.json
+[07:59:05] PHASE 0: infrastructure validation
+[07:59:06] PHASE 0: nginx='nginx version: nginx/1.24.0 (Ubuntu)' origin_up=True warmup_hits=9/10
+[07:59:06] PHASE 1: B-LOCALHOST-DIRECT (origin ground truth, 48x5=240)
+[07:59:06] PHASE 1: oracle-free correct 240/240
+[07:59:06] PHASE 2: DYNAMIC path through nginx (48x5=240, cache-busted URLs)
+[07:59:06] PHASE 2: oracle-free correct 240/240 (MISS=240 HIT=0)
+[07:59:06] PHASE 3: HIT path through nginx cache (48x5, fixed URL populate+test)
+[08:06:53] PHASE 3: oracle-free correct 240/240 (test HIT=240 MISS=0)
+[08:06:53] PHASE 4: C8 DYNAMIC-vs-HIT wire-byte identity
+[08:06:53] PHASE 5: C3 cache stability (6x3) + C4 identity (3x5)
+[08:07:34] PHASE 5: stability 6/6 groups ok; identity 15/15
+[08:07:34] PHASE 6: C5 depth 3-5 through nginx cache (3x3x5=45)
+[08:08:28] PHASE 6: depth oracle-free correct 45/45 (HIT=36)
+[08:08:28] PHASE 7: C6 large >100KB through nginx cache (3x2x5=30)
+[08:08:58] PHASE 7: large oracle-free correct 30/30 (HIT=24)
+[08:08:58] PHASE 8: regression baselines on same wire bytes (DYNAMIC+HIT, 480 rows)
+[08:08:58] PHASE 8: oracle-guided 480/480; fixed-order 480/480
+[08:08:58] VERDICT: SUPPORTS
+[08:08:58]   C1: pass=True value=48/48
+[08:08:58]   C2: pass=True value=330/330 = 1.0
+[08:08:58]   C3: pass=True value=6/6
+[08:08:58]   C4: pass=True value=15/15
+[08:08:58]   C5: pass=True value=45/45 = 1.0
+[08:08:58]   C6: pass=True value=30/30 = 1.0
+[08:08:58]   C7: pass=True value=0
+[08:08:58]   C8: pass=True value=48/48 = 1.0
+[08:08:58] === EXP-RUNTIME-35551516706 EXECUTE complete ===

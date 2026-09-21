@@ -1,0 +1,1905 @@
+{
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "seed": 44,
+  "auth_state": "valid_token",
+  "target_size": 10240,
+  "max_depth": 5,
+  "reps": 5,
+  "cells": [
+    "JSON_GZIP-OUTER_C8192_none",
+    "JSON_GZIP-OUTER_C8192_gzip",
+    "JSON_GZIP-OUTER_C8192_br",
+    "JSON_GZIP-OUTER_C8192_both",
+    "JSON_GZIP-OUTER_C32_none",
+    "JSON_GZIP-OUTER_C32_gzip",
+    "JSON_GZIP-OUTER_C32_br",
+    "JSON_GZIP-OUTER_C32_both",
+    "JSON_BROTLI-OUTER_C8192_none",
+    "JSON_BROTLI-OUTER_C8192_gzip",
+    "JSON_BROTLI-OUTER_C8192_br",
+    "JSON_BROTLI-OUTER_C8192_both",
+    "JSON_BROTLI-OUTER_C32_none",
+    "JSON_BROTLI-OUTER_C32_gzip",
+    "JSON_BROTLI-OUTER_C32_br",
+    "JSON_BROTLI-OUTER_C32_both",
+    "HTML_GZIP-OUTER_C8192_none",
+    "HTML_GZIP-OUTER_C8192_gzip",
+    "HTML_GZIP-OUTER_C8192_br",
+    "HTML_GZIP-OUTER_C8192_both",
+    "HTML_GZIP-OUTER_C32_none",
+    "HTML_GZIP-OUTER_C32_gzip",
+    "HTML_GZIP-OUTER_C32_br",
+    "HTML_GZIP-OUTER_C32_both",
+    "HTML_BROTLI-OUTER_C8192_none",
+    "HTML_BROTLI-OUTER_C8192_gzip",
+    "HTML_BROTLI-OUTER_C8192_br",
+    "HTML_BROTLI-OUTER_C8192_both",
+    "HTML_BROTLI-OUTER_C32_none",
+    "HTML_BROTLI-OUTER_C32_gzip",
+    "HTML_BROTLI-OUTER_C32_br",
+    "HTML_BROTLI-OUTER_C32_both",
+    "BINARY_GZIP-OUTER_C8192_none",
+    "BINARY_GZIP-OUTER_C8192_gzip",
+    "BINARY_GZIP-OUTER_C8192_br",
+    "BINARY_GZIP-OUTER_C8192_both",
+    "BINARY_GZIP-OUTER_C32_none",
+    "BINARY_GZIP-OUTER_C32_gzip",
+    "BINARY_GZIP-OUTER_C32_br",
+    "BINARY_GZIP-OUTER_C32_both",
+    "BINARY_BROTLI-OUTER_C8192_none",
+    "BINARY_BROTLI-OUTER_C8192_gzip",
+    "BINARY_BROTLI-OUTER_C8192_br",
+    "BINARY_BROTLI-OUTER_C8192_both",
+    "BINARY_BROTLI-OUTER_C32_none",
+    "BINARY_BROTLI-OUTER_C32_gzip",
+    "BINARY_BROTLI-OUTER_C32_br",
+    "BINARY_BROTLI-OUTER_C32_both"
+  ],
+  "payloads": {
+    "JSON_GZIP-OUTER_C8192_none": {
+      "pkey": "JSON_GZIP-OUTER_C8192_none",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-GZIP-OUTER-C8192-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C8192_gzip": {
+      "pkey": "JSON_GZIP-OUTER_C8192_gzip",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C8192_br": {
+      "pkey": "JSON_GZIP-OUTER_C8192_br",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C8192_both": {
+      "pkey": "JSON_GZIP-OUTER_C8192_both",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C32_none": {
+      "pkey": "JSON_GZIP-OUTER_C32_none",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-GZIP-OUTER-C32-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C32_gzip": {
+      "pkey": "JSON_GZIP-OUTER_C32_gzip",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C32_br": {
+      "pkey": "JSON_GZIP-OUTER_C32_br",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_GZIP-OUTER_C32_both": {
+      "pkey": "JSON_GZIP-OUTER_C32_both",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C8192_none": {
+      "pkey": "JSON_BROTLI-OUTER_C8192_none",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-BROTLI-OUTER-C8192-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C8192_gzip": {
+      "pkey": "JSON_BROTLI-OUTER_C8192_gzip",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C8192_br": {
+      "pkey": "JSON_BROTLI-OUTER_C8192_br",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C8192_both": {
+      "pkey": "JSON_BROTLI-OUTER_C8192_both",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C32_none": {
+      "pkey": "JSON_BROTLI-OUTER_C32_none",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-BROTLI-OUTER-C32-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C32_gzip": {
+      "pkey": "JSON_BROTLI-OUTER_C32_gzip",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C32_br": {
+      "pkey": "JSON_BROTLI-OUTER_C32_br",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_BROTLI-OUTER_C32_both": {
+      "pkey": "JSON_BROTLI-OUTER_C32_both",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C8192_none": {
+      "pkey": "HTML_GZIP-OUTER_C8192_none",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-GZIP-OUTER-C8192-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C8192_gzip": {
+      "pkey": "HTML_GZIP-OUTER_C8192_gzip",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C8192_br": {
+      "pkey": "HTML_GZIP-OUTER_C8192_br",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C8192_both": {
+      "pkey": "HTML_GZIP-OUTER_C8192_both",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C32_none": {
+      "pkey": "HTML_GZIP-OUTER_C32_none",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-GZIP-OUTER-C32-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C32_gzip": {
+      "pkey": "HTML_GZIP-OUTER_C32_gzip",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C32_br": {
+      "pkey": "HTML_GZIP-OUTER_C32_br",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_GZIP-OUTER_C32_both": {
+      "pkey": "HTML_GZIP-OUTER_C32_both",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C8192_none": {
+      "pkey": "HTML_BROTLI-OUTER_C8192_none",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-BROTLI-OUTER-C8192-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C8192_gzip": {
+      "pkey": "HTML_BROTLI-OUTER_C8192_gzip",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C8192_br": {
+      "pkey": "HTML_BROTLI-OUTER_C8192_br",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C8192_both": {
+      "pkey": "HTML_BROTLI-OUTER_C8192_both",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C32_none": {
+      "pkey": "HTML_BROTLI-OUTER_C32_none",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-BROTLI-OUTER-C32-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C32_gzip": {
+      "pkey": "HTML_BROTLI-OUTER_C32_gzip",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C32_br": {
+      "pkey": "HTML_BROTLI-OUTER_C32_br",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_BROTLI-OUTER_C32_both": {
+      "pkey": "HTML_BROTLI-OUTER_C32_both",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C8192_none": {
+      "pkey": "BINARY_GZIP-OUTER_C8192_none",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-GZIP-OUTER-C8192-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C8192_gzip": {
+      "pkey": "BINARY_GZIP-OUTER_C8192_gzip",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C8192_br": {
+      "pkey": "BINARY_GZIP-OUTER_C8192_br",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C8192_both": {
+      "pkey": "BINARY_GZIP-OUTER_C8192_both",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C8192-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C32_none": {
+      "pkey": "BINARY_GZIP-OUTER_C32_none",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-GZIP-OUTER-C32-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C32_gzip": {
+      "pkey": "BINARY_GZIP-OUTER_C32_gzip",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C32_br": {
+      "pkey": "BINARY_GZIP-OUTER_C32_br",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_GZIP-OUTER_C32_both": {
+      "pkey": "BINARY_GZIP-OUTER_C32_both",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "primary-GZIP-OUTER-C32-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C8192_none": {
+      "pkey": "BINARY_BROTLI-OUTER_C8192_none",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-BROTLI-OUTER-C8192-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C8192_gzip": {
+      "pkey": "BINARY_BROTLI-OUTER_C8192_gzip",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C8192_br": {
+      "pkey": "BINARY_BROTLI-OUTER_C8192_br",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C8192_both": {
+      "pkey": "BINARY_BROTLI-OUTER_C8192_both",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C8192-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C32_none": {
+      "pkey": "BINARY_BROTLI-OUTER_C32_none",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": null,
+      "tag": "primary-BROTLI-OUTER-C32-AE-none",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C32_gzip": {
+      "pkey": "BINARY_BROTLI-OUTER_C32_gzip",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-gzip",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C32_br": {
+      "pkey": "BINARY_BROTLI-OUTER_C32_br",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-br",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_BROTLI-OUTER_C32_both": {
+      "pkey": "BINARY_BROTLI-OUTER_C32_both",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9901,
+      "comp_sha256": "5d8243a511dd0dd29a249b23a555e28d979df16efe775d9cfe9eaa9dc76b6ab6",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "primary-BROTLI-OUTER-C32-AE-both",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "JSON_DEPTH3": {
+      "pkey": "JSON_DEPTH3",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3781,
+      "comp_sha256": "403963afda5cbdc771a57f23e24d4c701864c6c6857a3a1ce3f4351c29d25c8c",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "depth-3",
+      "depth": 3,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_DEPTH4": {
+      "pkey": "JSON_DEPTH4",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3804,
+      "comp_sha256": "73e98a5295e575dd45793b895554acc66641f4a860246557d9bf9459d48055c6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "depth-4",
+      "depth": 4,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "JSON_DEPTH5": {
+      "pkey": "JSON_DEPTH5",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3808,
+      "comp_sha256": "0bbccc56be85513cb2a216366bb99972ef755eeb4ca3aab47f4f413cb56e8d96",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "depth-5",
+      "depth": 5,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "HTML_DEPTH3": {
+      "pkey": "HTML_DEPTH3",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2756,
+      "comp_sha256": "91b54b5816d18da2df476944cdc8b24c97f6ec339b47922e9fdcd7a0aaa73008",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "depth-3",
+      "depth": 3,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_DEPTH4": {
+      "pkey": "HTML_DEPTH4",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2779,
+      "comp_sha256": "1e90cdcbb1fd131ac2b5480d9281bdfef44de7fffe2089ed5c4d3aba7f7077c3",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "depth-4",
+      "depth": 4,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "HTML_DEPTH5": {
+      "pkey": "HTML_DEPTH5",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2783,
+      "comp_sha256": "7bbc8aae611c3799fba14914b50b1b494eb4467b22e43a7deb69eb97bf1b6812",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "depth-5",
+      "depth": 5,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "BINARY_DEPTH3": {
+      "pkey": "BINARY_DEPTH3",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9930,
+      "comp_sha256": "78cfc23393019e5664846c65a42fcd140e543c0905f38c1bb70f6903938d011a",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "depth-3",
+      "depth": 3,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_DEPTH4": {
+      "pkey": "BINARY_DEPTH4",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9953,
+      "comp_sha256": "d8f779e7fd801ee65c37f1f869aa360e5d889658fd7b6adb45ee208600157a58",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "depth-4",
+      "depth": 4,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "BINARY_DEPTH5": {
+      "pkey": "BINARY_DEPTH5",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9957,
+      "comp_sha256": "b65fad42ef366e57ab62878c16f16c5b6799d993e491fd018dcbcc720a9f6961",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "depth-5",
+      "depth": 5,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "JSON_LARGE_GZIP-OUTER": {
+      "pkey": "JSON_LARGE_GZIP-OUTER",
+      "content_type": "application/json",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "comp_len": 43244,
+      "comp_sha256": "c5a3aa4ff01c4878e00dde694e17e71640cc94f296e2c69afee5e775e4b66516",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "large-GZIP-OUTER",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 5.464776,
+      "gt_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "gt_is_plain": true
+    },
+    "JSON_LARGE_BROTLI-OUTER": {
+      "pkey": "JSON_LARGE_BROTLI-OUTER",
+      "content_type": "application/json",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "comp_len": 50872,
+      "comp_sha256": "432f1fb9bac89ab386aaf0badbfbd0464514a0ef2b4e7c877b5707fbd837a13e",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "large-BROTLI-OUTER",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 5.464776,
+      "gt_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "gt_is_plain": true
+    },
+    "HTML_LARGE_GZIP-OUTER": {
+      "pkey": "HTML_LARGE_GZIP-OUTER",
+      "content_type": "text/html",
+      "plain_len": 150000,
+      "plain_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "comp_len": 33050,
+      "comp_sha256": "35207a3511333931888ee700a8df06d37fe4c77c802c26f0ecae61ef2592768a",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "large-GZIP-OUTER",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 4.664383,
+      "gt_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "gt_is_plain": true
+    },
+    "HTML_LARGE_BROTLI-OUTER": {
+      "pkey": "HTML_LARGE_BROTLI-OUTER",
+      "content_type": "text/html",
+      "plain_len": 150000,
+      "plain_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "comp_len": 36010,
+      "comp_sha256": "17033f0fdde2d05a35cabc46895815b2b0af03d98c5193f5a5295b05462958f2",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "large-BROTLI-OUTER",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 4.664383,
+      "gt_sha256": "4f2ce850657fbd03152ea53eb9fa64c611f41627a265e9613ea009541db36da1",
+      "gt_is_plain": true
+    },
+    "BINARY_LARGE_GZIP-OUTER": {
+      "pkey": "BINARY_LARGE_GZIP-OUTER",
+      "content_type": "application/octet-stream",
+      "plain_len": 150000,
+      "plain_sha256": "ba0cefa6f65518664c80cd248e431492aed74d4b5923c6aa18d8c8dc83fd8c98",
+      "comp_len": 144695,
+      "comp_sha256": "dc6384f3706d0eb3acd114522e6a802672400e83e9868443c01fdadc71697502",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "large-GZIP-OUTER",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 7.69863,
+      "gt_sha256": "ba0cefa6f65518664c80cd248e431492aed74d4b5923c6aa18d8c8dc83fd8c98",
+      "gt_is_plain": true
+    },
+    "BINARY_LARGE_BROTLI-OUTER": {
+      "pkey": "BINARY_LARGE_BROTLI-OUTER",
+      "content_type": "application/octet-stream",
+      "plain_len": 150000,
+      "plain_sha256": "ba0cefa6f65518664c80cd248e431492aed74d4b5923c6aa18d8c8dc83fd8c98",
+      "comp_len": 144496,
+      "comp_sha256": "806db16df9be89b2cdb07cd26b6e6612ccebe42d56c13eff30f9ea82f53d51fe",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "large-BROTLI-OUTER",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 7.69863,
+      "gt_sha256": "ba0cefa6f65518664c80cd248e431492aed74d4b5923c6aa18d8c8dc83fd8c98",
+      "gt_is_plain": true
+    },
+    "JSON_IDENTITY": {
+      "pkey": "JSON_IDENTITY",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 10240,
+      "comp_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "layers_inner_first": [],
+      "content_encoding": null,
+      "tag": "identity",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "HTML_IDENTITY": {
+      "pkey": "HTML_IDENTITY",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 10239,
+      "comp_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "layers_inner_first": [],
+      "content_encoding": null,
+      "tag": "identity",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "BINARY_IDENTITY": {
+      "pkey": "BINARY_IDENTITY",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 10240,
+      "comp_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "layers_inner_first": [],
+      "content_encoding": null,
+      "tag": "identity",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "STAB_1_JSON_GZIP-OUTER": {
+      "pkey": "STAB_1_JSON_GZIP-OUTER",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 3777,
+      "comp_sha256": "16affbfed57b279709a13da930f58f0442fb0221b16e78b51a2e4d66ebac85a6",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "stability-1",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "STAB_2_JSON_BROTLI-OUTER": {
+      "pkey": "STAB_2_JSON_BROTLI-OUTER",
+      "content_type": "application/json",
+      "plain_len": 10240,
+      "plain_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "comp_len": 4271,
+      "comp_sha256": "c13644b174ff4b939b259d632aca779d227f50ad7cf773f0ffabddbe7ebbd584",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "stability-2",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 5.572613,
+      "gt_sha256": "e4b03eb744b7e0a2f0baedfa98434cd6b9739a4b2d10d6c68a799c98224e95b4",
+      "gt_is_plain": true
+    },
+    "STAB_3_HTML_GZIP-OUTER": {
+      "pkey": "STAB_3_HTML_GZIP-OUTER",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2752,
+      "comp_sha256": "2d71464f79a831e2efbdfe30ae2353bdc950b0107a7ec4d991b6aec996c4d07d",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "stability-3",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "STAB_4_HTML_BROTLI-OUTER": {
+      "pkey": "STAB_4_HTML_BROTLI-OUTER",
+      "content_type": "text/html",
+      "plain_len": 10239,
+      "plain_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "comp_len": 2950,
+      "comp_sha256": "245e043256071adb7d3df05c4bb4e812e8c610750f4664ab455d223d5b551298",
+      "layers_inner_first": [
+        {
+          "type": "gzip",
+          "level": 1
+        },
+        {
+          "type": "brotli",
+          "quality": 4
+        }
+      ],
+      "content_encoding": "br",
+      "tag": "stability-4",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 4.658726,
+      "gt_sha256": "c18cb08ccf4115b45a06e4d8b047e0c3af3e7872f648d4db015a034fd22a5456",
+      "gt_is_plain": true
+    },
+    "STAB_5_BINARY_GZIP-OUTER": {
+      "pkey": "STAB_5_BINARY_GZIP-OUTER",
+      "content_type": "application/octet-stream",
+      "plain_len": 10240,
+      "plain_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "comp_len": 9926,
+      "comp_sha256": "970c42aaad98bc31a19c33420f66cbd06de0d1b6f06f430fa7d75324ce5fa4c5",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "stability-5",
+      "depth": null,
+      "target_size": 10240,
+      "entropy": 7.693958,
+      "gt_sha256": "8021e6dd360f12c787de2e5d1060bfb8f849d96cff747eb7f97817cd7c4a43e0",
+      "gt_is_plain": true
+    },
+    "STAB_6_JSON_GZIP-OUTER": {
+      "pkey": "STAB_6_JSON_GZIP-OUTER",
+      "content_type": "application/json",
+      "plain_len": 150000,
+      "plain_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "comp_len": 43244,
+      "comp_sha256": "c5a3aa4ff01c4878e00dde694e17e71640cc94f296e2c69afee5e775e4b66516",
+      "layers_inner_first": [
+        {
+          "type": "brotli",
+          "quality": 4
+        },
+        {
+          "type": "gzip",
+          "level": 1
+        }
+      ],
+      "content_encoding": "gzip",
+      "tag": "stability-6",
+      "depth": null,
+      "target_size": 150000,
+      "entropy": 5.464776,
+      "gt_sha256": "2c539f323483f635c59f9efb786f6df15e15446a77df1c1a5e1ea46f299f766c",
+      "gt_is_plain": true
+    }
+  }
+}
