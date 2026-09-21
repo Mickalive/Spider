@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-INTEL-35551517470",
+  "lane": "intel",
+  "claim_ids": ["C-MEAS-VALID", "C-PRODUCT-ECON"],
+  "question": "Can a bounded saturating function (logistic, Hill, or Richards) fit to the 4-point step-function data (n=5/10/15/20, F=0.0/0.0/0.4996/0.5654) produce a validated extrapolation of ranking agreement to full-DOM n=50/82 — or does the step-function structure (7.6x growth deceleration, 0→0.50 jump then plateau) fundamentally resist smooth functional forms, definitively closing the model-based extrapolation path?",
+  "hypothesis": "Five consecutive model-based approaches have failed: (1) Phi(mean(SNR_i)) with within-iteration SE, (2) Phi(mean/std) with margin_std, (3) Phi(median/std), (4) saturating sign-fraction power law, (5) empirical CDF linear extrapolation. The common root cause is step-function structure (0,0,0.50,0.57) with 7.6x growth deceleration that cannot be captured by smooth or linear forms. A bounded saturating function (logistic: L/(1+exp(-k*(n-n0))); Hill: L*n^h/(K^h+n^h); Richards: L/(1+(n/n0)^a)^(1/v)) has the correct asymptotic properties (bounded [0,1], monotonic, saturating) but may not capture the sharp 0→0.50 jump between n=10 and n=15. H1: At least one saturating function achieves R2 >= 0.95 and maximum residual < 5pp at training points. H2: The fitted function predicts F(50) < 0.80 (consistent with plateau). H3: The fitted function improves over the parent's best model (sign-fraction power law R2=0.8797) by >= 0.05 in R2.",
+  "falsifier": "The hypothesis is falsified if ANY of: (F1) No saturating function achieves R2 >= 0.90 and maximum residual < 10pp at training points — demonstrating the step-function structure (0,0,0.50,0.57) is incompatible with smooth bounded forms; (F2) All fitted functions that achieve R2 >= 0.90 predict F(50) > 0.95 — demonstrating the extrapolation is physically implausible (approaching saturation ceiling) and provides no discriminating information; (F3) All fitted functions have AIC/BIC worse than the parent's best model (sign-fraction power law) — demonstrating no improvement despite additional parameters; (F4) The fitted parameters are degenerate (e.g., L > 1.0, K < 0, exponent near 0) — demonstrating the optimization landscape is ill-conditioned for this sparse data.",
+  "baselines": [
+    {
+      "id": "B1_PARENT_MODEL_A",
+      "description": "Phi(median(|M|)/std) predicted 0.8455 at n15 (residual 34.59pp) and 0.7550 at n20 (residual 18.96pp). R2 not reported but clearly <0.90. REJECTED at C1.",
+      "source": "EXP-INTEL-35538868377 result.json metrics.modelA_median_phi"
+    },
+    {
+      "id": "B2_PARENT_MODEL_B",
+      "description": "Saturating sign-fraction power law a*n^b/(1+a*n^b) fitted 0.3757 at n15 (residual 12.39pp) and 0.6395 at n20 (residual 7.41pp). R2=0.8797. REJECTED at C1/C2.",
+      "source": "EXP-INTEL-35538868377 result.json metrics.modelB_sign_fraction_powerlaw"
+    },
+    {
+      "id": "B3_CORRECTED_PHI_MEAN_STD",
+      "description": "Phi(mean/std) predicted 0.7379 at n20 (residual 17.8pp). REJECTED at C1.",
+      "source": "EXP-INTEL-35530590171 result.json metrics.corrected_snr_model"
+    },
+    {
+      "id": "B4_EMPIRICAL_CDF_LINEAR",
+      "description": "Linear extrapolation of empirical CDF from n15-20 slope predicts F(50)=0.9602, F(82)=1.3813 (>1.0 impossible). REJECTED at C3.",
+      "source": "EXP-INTEL-35544806153 result.json metrics.c3_extrapolation"
+    },
+    {
+      "id": "B5_LINEAR_NULL",
+      "description": "Constant null: F(n) = 0.5654 (observed at n=20) for all n. No extrapolation structure.",
+      "source": "EXP-INTEL-35544806153 result.json metrics.nc1_linear_null"
+    }
+  ],
+  "positive_control": {
+    "id": "PC1_FIT_REPRODUCES_TRAINING",
+    "description": "The best-fit saturating function reproduces observed ranking agreement at all training points (n=5, 10, 15, 20) within 5pp. This is a data integrity check — a good fit should pass this trivially.",
+    "expected": "Best-fit function predictions at n=5, 10, 15, 20 within 5pp of (0.0, 0.0, 0.4996, 0.5654)."
+  },
+  "null_control": {
+    "id": "NC1_PARENT_BEST_MODEL",
+    "description": "The saturating function must improve over the parent's best model (sign-fraction power law, R2=0.8797, max residual 12.39pp). If no saturating function achieves R2 > 0.93 or max residual < 8pp, it adds no information beyond the already-rejected parent model.",
+    "expected": "Best saturating function R2 > 0.93 AND max residual < 8pp."
+  },
+  "measurement_validity": [
+    "All computations use existing data from EXP-INTEL-35476271877: snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a) and analysis_output_snr.json (sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2). No new data collection required. No browser/network/model calls.",
+    "Training data: n=[5,10,15,20], F(n)=[0.0, 0.0, 0.4996, 0.5654]. These are proportion(margin>0) from canonical recipe tag_entropy x DEF-FULL-MAP, per-iteration margins.",
+    "Template invariance persists: ranking agreement = proportion(margin_i > 0) exactly at training points.",
+    "Three candidate function families will be fit: (1) Logistic: F(n) = L/(1+exp(-k*(n-n0))); (2) Hill: F(n) = L*n^h/(K^h+n^h); (3) Richards: F(n) = L/(1+(n/n0)^a)^(1/v). All bounded to [0,1] by construction.",
+    "Optimization: scipy.optimize.curve_fit with bounds enforcing L in [0,1], all other parameters positive. Multiple random restarts (N=10) per function family to avoid local minima.",
+    "Model selection: AIC and BIC computed for each function family. Parent's best model (sign-fraction power law, R2=0.8797, 3 parameters) serves as comparison baseline.",
+    "Primary definition: tag_entropy x DEF-FULL-MAP. Same as parent experiments.",
+    "Cart n=1 degeneracy excluded from margin computations per parent protocol."
+  ],
+  "decision_rule": "Conjunctive:\n\nC1_BEST_FIT_QUALITY: At least one saturating function achieves R2 >= 0.90 AND maximum absolute residual < 10pp at all 4 training points. PASS if both conditions met; FAIL otherwise.\n\nC2_EXTRAPOLATION_PHYSICAL: All saturating functions that achieve R2 >= 0.90 predict F(50) in [0.0, 1.0] AND F(82) in [0.0, 1.0] (physically valid). PASS if all qualifying functions produce physically valid extrapolations; FAIL if any qualifying function predicts >1.0 or <0.0.\n\nC3_IMPROVES_OVER_PARENT: The best saturating function achieves R2 > 0.93 (improving over parent's 0.8797 by >=0.05) OR maximum residual < 8pp (improving over parent's 12.39pp). PASS if either condition met; FAIL otherwise.\n\nVERDICT RULES:\n- If NOT C1: FALSIFIES — step-function structure (0,0,0.50,0.57) is incompatible with smooth bounded saturating forms. Model-based extrapolation path is definitively closed. Docker pivot is the ONLY remaining path.\n- If C1 AND NOT C2: MEASUREMENT_INVALID — fit quality is adequate but extrapolation is physically implausible. The model captures training data but cannot generalize.\n- If C1 AND C2 AND NOT C3: MIXED — saturating functions fit adequately but do not improve over already-rejected parent model. No new information gained; model-based path remains closed.\n- If C1 AND C2 AND C3: SURVIVES — at least one saturating function provides a validated extrapolation that improves over all prior models. Product decision on Docker re-collection should await full-DOM validation of this extrapolation.\n\nNOTE: The frozen C2 decision rule from parent EXP-INTEL-35544806153 (strict monotonicity including n=5→n=10 where F=0 tie) is NOT replicated here. This experiment uses R2 and residual-based criteria that are appropriate for smooth function fitting, not step-function interpolation.",
+  "product_consequence_positive": "If C1 AND C2 AND C3 (saturating function survives): A validated bounded extrapolation exists for ranking agreement. If the best-fit function predicts F(50) < 0.80, the plateau is structural and recipe density is limited — product lane should use non-recipe density. If F(50) >= 0.80, the plateau breaks at full DOM and Docker re-collection is justified. Either way, a concrete product decision can be made from the extrapolation.",
+  "product_consequence_negative": "If NOT C1 (saturating function falsifies): The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this). Docker-based direct full-DOM measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) is the ONLY remaining path to an empirical answer on whether ranking agreement crosses 80% at n=21-82. Product lane should NOT invest in recipe density design until Docker data is available.",
+  "estimated_cost": "VERY LOW — offline computation on existing reconstructed data. No browser/network/model calls. The analysis requires: (1) fitting 3 function families with N=10 random restarts each (<30 seconds); (2) computing R2, residuals, AIC/BIC (<5 seconds); (3) extrapolation to n=50/82 (<1 second); (4) comparison against parent baseline (<1 second). Total estimated <1000 LLM tokens for analysis code and <60 seconds compute.",
+  "expected_information_gain": "HIGH — this is the FINAL model-based attempt before Docker pivot. After five consecutive failures (Phi functions, power law, empirical CDF), a bounded saturating function is the last functional form class with correct asymptotic properties (bounded [0,1], monotonic, saturating). Either positive (validated extrapolation) or negative (step-function incompatibility) outcome definitively resolves the model-based extrapolation question and changes the product decision on Docker investment. With 4 data points and 2-3 parameters per function, the fit is maximally informative for the data available."
+}

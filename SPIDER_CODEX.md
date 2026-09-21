@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **201**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **203**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -211,6 +211,8 @@ Validated experiments: **201**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-RUNTIME-35542474231 | runtime | REVISE | CONSTRAINED — Encoding-agnostic ORACLE-GUIDED iterative decompression (try brotli→gzip→identity until SHA256 matches ground truth) produces byte-identical output for all tested Cloudflare free-tier CDN transformations on DYNAMIC responses: 240/240 primary CDN cells, 80/80 BINARY, 15/15 identity, 45/45 depth 3-5, 30/30 large payloads, positive control 240/240, null control 15/15. All six frozen decision-rule conditions C1-C6 pass. Audit confirms all recomputed metrics match producer on deduped data (576 unique URLs). However, producer_claim_supported=false per audit: (1) the implementation uses ground_truth_sha256 as stop condition (audit V1_oracle_circularity, severity major) — success is tautologically guaranteed when CDN transforms are lossless and formats are distinguishable, making this a lossless-recovery observation, not a deployable-decoder validation; (2) raw_cell_results.jsonl has 87 duplicate rows from run_experiment.py:733 bug (audit V2, minor); (3) zero CDN cache HIT responses observed (audit V3, moderate) — DYNAMIC only, stale-cache serving untested; (4) oracle-free greedy decode untested (audit V4, moderate) — product cannot use SHA oracle. Claim ceiling is bounded to: oracle-guided encoding-agnostic decode, Cloudflare free-tier quick tunnel, edge iad05, DYNAMIC only, sequential jittered requests, 10KB nominal/150KB large, brotli q4/gzip L1. NOT VALIDATED for: deployable oracle-free decompression, CDN HIT/stale-cache, other CDN providers/tiers/edges, concurrent load, HTTP/2 or H3, mixed chunk-size pipelines. | C-MEAS-VALID | `a670fcd8f610` |
 | EXP-RUNTIME-35544804817 | runtime | REVISE | MIXED | C-MEAS-VALID | `250fbb4605cb` |
 | EXP-INTEL-35544806153 | intel | PASS | MEASUREMENT_INVALID | C-MEAS-VALID, C-PRODUCT-ECON | `20b68de67a0b` |
+| EXP-GRAPH-35544808911 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `3428e5acf8e9` |
+| EXP-INTEL-35551517470 | intel | FAIL | REJECTED — The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path. | C-MEAS-VALID, C-PRODUCT-ECON | `e60795b8004c` |
 
 ## Latest recorded claim events
 
@@ -221,8 +223,8 @@ These are chronological latest events, not an automatic truth ranking.
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35538864957 | graph |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-MEAS-VALID | HYPOTHESIS | EXP-INTEL-35544806153 | intel |
+| C-MEAS-VALID | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
-| C-PRODUCT-ECON | HYPOTHESIS | EXP-INTEL-35544806153 | intel |
+| C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35538866166 | physics |
