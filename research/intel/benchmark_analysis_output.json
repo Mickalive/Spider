@@ -1,0 +1,113 @@
+{
+  "experiment_id": "EXP-INTEL-35651934683",
+  "benchmarks_ranked": [
+    {
+      "benchmark": "Mind2Web",
+      "task_family": "cross_website_generalization",
+      "M1_cross_site": 0.8182,
+      "M2_parameterization": 0.65,
+      "M3_novelty_fraction": true,
+      "M4_composite": 0.5318,
+      "total_tasks": 2350,
+      "websites": 137,
+      "domains": 31,
+      "notes": "137 real-world websites, 31 domains. Official train/test splits by task, website, and domain. Best novelty fraction measurability."
+    },
+    {
+      "benchmark": "WebArena",
+      "task_family": "shopping",
+      "M1_cross_site": 1.0,
+      "M2_parameterization": 0.8,
+      "M3_novelty_fraction": false,
+      "M4_composite": 0.0,
+      "total_tasks": 996,
+      "instance_count": 12,
+      "notes": "12 store instances share search/add-to-cart/checkout patterns. Strongest cross-site structure in any benchmark."
+    },
+    {
+      "benchmark": "WebArena",
+      "task_family": "gitlab",
+      "M1_cross_site": 0.0,
+      "M2_parameterization": 0.5,
+      "M3_novelty_fraction": false,
+      "M4_composite": 0.0,
+      "total_tasks": 196,
+      "instance_count": 1,
+      "notes": "Single GitLab instance; multi-step tasks with rich operations but no cross-site pairs."
+    },
+    {
+      "benchmark": "WebArena",
+      "task_family": "wikipedia",
+      "M1_cross_site": 0.0,
+      "M2_parameterization": 0.1,
+      "M3_novelty_fraction": false,
+      "M4_composite": 0.0,
+      "total_tasks": 7,
+      "instance_count": 1,
+      "notes": "Null control: single site, 7 tasks, no cross-site pairs, no parameterized templates."
+    },
+    {
+      "benchmark": "VisualWebArena",
+      "task_family": "shopping",
+      "M1_cross_site": 1.0,
+      "M2_parameterization": 0.3,
+      "M3_novelty_fraction": false,
+      "M4_composite": 0.0,
+      "total_tasks": 521,
+      "instance_count": 12,
+      "notes": "Shares WebArena shopping instances; adds visual grounding requirement."
+    },
+    {
+      "benchmark": "AgentBench",
+      "task_family": "web_browsing",
+      "M1_cross_site": 0.5,
+      "M2_parameterization": 0.6,
+      "M3_novelty_fraction": false,
+      "M4_composite": 0.0,
+      "total_tasks": "Mind2Web subset",
+      "notes": "Web browsing component is Mind2Web; no independent splits. Not a primary benchmark for C-LLM-INHERIT."
+    }
+  ],
+  "positive_control": {
+    "description": "WebArena shopping site type (996 tasks across 12 store instances)",
+    "expected": "cross-site pairs exist (M1 >= 0.5), parameterized templates (M2 >= 0.5)",
+    "observed_M1": 1.0,
+    "observed_M2": 0.8,
+    "pass": true,
+    "evidence": "M1=1.0 (12 store instances), M2=0.8 (intent_template + instantiation_dict)"
+  },
+  "null_control": {
+    "description": "WebArena wikipedia site type (7 tasks, single site)",
+    "expected": "0 cross-site pairs, 0 parameterized templates",
+    "observed_M1": 0.0,
+    "observed_M2": 0.1,
+    "pass": true,
+    "evidence": "M1=0.0 (single instance), M2=0.1 (no templates, no multi-step)"
+  },
+  "decision_rule": {
+    "any_M1_gte_0.5": true,
+    "any_M2_gte_0.5": true,
+    "any_M3_true": true,
+    "decision": "SURVIVES_CURRENT_TEST"
+  },
+  "cross_site_details": {
+    "WebArena_shopping": {
+      "instances": 12,
+      "mechanism": "search, add_to_cart, checkout across different store instances",
+      "template": "intent_template + instantiation_dict"
+    },
+    "Mind2Web_cross_website": {
+      "websites_per_domain": 10,
+      "mechanism": "same domain websites share action patterns",
+      "split": "test_website: 177 tasks on unseen websites"
+    }
+  },
+  "parameterization_details": {
+    "WebArena": "Explicit intent_template with instantiation_dict (e.g., character, product)",
+    "Mind2Web": "Operation fields (CLICK element_id, TYPE input_value, SELECT option)"
+  },
+  "novelty_fraction_details": {
+    "Mind2Web": "Official 3-way split: train/test_task/test_website/test_domain by instance",
+    "WebArena": "No official splits but instance-level splits definable by store instance"
+  }
+}
