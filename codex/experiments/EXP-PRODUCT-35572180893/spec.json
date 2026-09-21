@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-PRODUCT-35572180893",
+  "lane": "product",
+  "claim_ids": ["C-FRESHNESS"],
+  "question": "Can the freshness guard discriminating operating point be measured under genuine distributional overlap (25%/50%/75% area) using Gaussian noise/refresh distributions on localhost mock — and does the calibrated threshold increase gradually (not just at 100% overlap) when the overlap is real rather than an artifact of uniform-shift boundary behavior?",
+  "hypothesis": "When noise and failure behavioral-score distributions genuinely overlap (Gaussian, not uniform-shift), the calibrated threshold will increase gradually across overlap conditions (not just a single jump at 100%), and FP > 0 at threshold 0.20 will emerge at moderate (25%-50%) overlap — demonstrating a discriminating operating point under genuine distributional contamination.",
+  "falsifier": "If the calibrated threshold remains at 0.20 even under genuine 25%-75% Gaussian overlap (FP constraint never binding), OR if FP > 0 at threshold 0.20 only emerges at 75%+ overlap despite genuine overlap at 25%-50%, OR if orthogonality (TOST delta=0.15) breaks under any overlap condition — then the discriminating operating point hypothesis is falsified under genuine overlap.",
+  "baselines": [
+    "Parent calibrated threshold 0.20 with uniform-shift overlap at 0%-75% (EXP-PRODUCT-35551517868)",
+    "Parent FP=0.0 at threshold 0.20 for 25% and 50% overlap — attributed to uniform-shift design artifact (0% actual overlap at those conditions)",
+    "Parent FP=0.0958 at 75% overlap and FP=0.35 at 100% overlap (EXP-PRODUCT-35551517868 result.json::metrics.fp_at_020_by_overlap)",
+    "Parent non-monotonic threshold response: flat 0.20 across 0%-75%, jump to 0.25 at 100% (EXP-PRODUCT-35551517868 result.json::metrics.thresholds_by_overlap)",
+    "Baseline orthogonality r=-0.0065 CI upper 0.0831 from EXP-PRODUCT-35538865048"
+  ],
+  "positive_control": "At 100% overlap (noise mean = failure mean = 0.295), FP at threshold 0.20 must exceed 0.20 (since ~100% of noise samples exceed 0.20 when noise is centered at 0.295 with sigma=0.05). This replicates the parent's 100% condition with a different distribution family.",
+  "null_control": "At 0% overlap (noise mean = 0.095, 5.5 sigma below failure threshold 0.20), FP at threshold 0.20 must be 0.0 — no noise samples should exceed the failure threshold when distributions are fully separated.",
+  "measurement_validity": [
+    "At least 480 samples per overlap condition for TOST comparability with the 6+ prior mock-confirming experiments",
+    "Gaussian distributions with sigma=0.05 for both noise and failure; noise mean set per condition to achieve target overlap (verified empirically from generated samples)",
+    "Overlap defined as P(noise_score > FAILURE_THRESHOLD=0.20) — the fraction of noise samples in the failure zone; computed empirically, not assumed from distribution parameters",
+    "Threshold sweep uses 50 points [0.05, 0.06, ..., 0.54] to resolve the true optimum between 0.20 and 0.25 (parent's coarse grid [0.20,0.25,...0.80] could not locate it)",
+    "Clamp all generated scores to [0.0, 1.0] to maintain behavioral-score semantics"
+  ],
+  "decision_rule": "The claim about discriminating operating point under genuine overlap is SUPPORTED if ALL of: (1) calibrated threshold increases monotonically across overlap conditions; (2) FP > 0 at threshold 0.20 for at least one overlap condition in {25%, 50%}; (3) orthogonality (TOST delta=0.15) holds at all overlap conditions. The claim is FALSIFIED if EITHER: (a) calibrated threshold remains at 0.20 for all overlap conditions including 100%, OR (b) FP > 0 at threshold 0.20 never emerges below 75% overlap despite genuine overlap, OR (c) orthogonality breaks at any condition. Otherwise MIXED.",
+  "product_consequence_positive": "If discrimination exists under genuine moderate overlap, the freshness guard can distinguish noise from real refresh failures in production-like conditions. Combined with continuous threshold optimization, this enables calibrated production threshold selection and moves C-FRESHNESS toward PRODUCT_CORE.",
+  "product_consequence_negative": "If no discrimination under genuine moderate overlap, the freshness guard cannot separate noise from failure when distributions overlap — blocking PRODUCT_CORE. The production threshold would need to be set at a level that either misses real failures (high threshold) or accepts too much noise (low threshold).",
+  "estimated_cost": "Medium: requires new Gaussian-distribution mock_server.py (replacing uniform-shift), 5 conditions x 480 samples = 2400 total, 50-point threshold sweep per condition. Comparable to parent but with corrected overlap design.",
+  "expected_information_gain": "High: directly resolves the parent's flawed overlap design, tests whether the non-monotonic threshold response was an artifact of uniform-shift, and determines if genuine moderate overlap produces earlier FP binding. If supported, unblocks calibrated production threshold. If falsified, closes the discriminating operating point path."
+}

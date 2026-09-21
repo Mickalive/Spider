@@ -511,6 +511,36 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "HYPOTHESIS",
         "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35538866166",
+        "lane": "physics",
+        "created_at": "2026-09-20T21:29:52.632864+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: ALL three tested alphas (0.1, 0.5, 1.0) have |shuffled-action null_mean| >= 0.1 bits (0.240, 0.200, 0.275 respectively), each 2.0-2.75x above threshold. No alpha achieves both C1 and C3. Audit PASS confirms all recomputed metrics match producer. The bias is intrinsic to Laplace-smoothed histogram estimation: smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has n_a times more cells, and Laplace pseudo-counts add artificial uncertainty proportional to cell count. Corrected P(z) denominator (audit V1) does not change the FALSIFIED verdict. The entropy-rate estimator has WORSE null centering than plug-in KL at high alpha (0.275 vs 0.064 at alpha=1.0). The deterministic SPA construct validation (B-ENTROPY-RATE-DEG) fails at alpha>=0.5 (negative CMI), confirming the bias is estimator-intrinsic, not data-intrinsic.",
+        "source_commit": "ed0f9f346855a74f85c310be042e3a7bb229740c",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes the entropy-rate CMI pathway on this SPA class but does not accumulate evidence for or against C-WEB-DYNAMICS. The bias is estimator-specific (Laplace smoothing), not fundamental to discrete CMI estimation (MLE alpha=0 recovers 1.377 bits per parent). C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: entropy-rate CMI via Laplace-smoothed histogram (alpha in {0.1,0.5,1.0}) is rejected for simultaneous C1+C3 on this SPA class."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35572180485",
+        "lane": "physics",
+        "created_at": "2026-09-21T07:16:38.988883+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated.",
+        "source_commit": "a1ea1b25575959586a23e36237ffc142b9e28646",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No confirmatory evidence accumulated for or against predictive dynamical structure on real Web transitions from this experiment. All evidence is synthetic 12-state SPA simulation. The audit's corrected K=12 recomputation is an exploratory finding suggesting Bayesian model comparison may be the first estimator to pass both C1 and C3 on this SPA class, but this requires a new frozen experiment for confirmation. C-WEB-DYNAMICS remains HYPOTHESIS with narrowed ceiling: Bayesian Dirichlet-Multinomial with K=12 on stochastic SPA is hypothesis-generating positive, not confirmed."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35578258358",
+        "lane": "physics",
+        "created_at": "2026-09-21T08:30:48.872966+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+        "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "No change. All evidence remains synthetic SPA simulation (audit V4: 'no support for C-WEB-DYNAMICS, real Web dynamics'). The Bayesian paradigm validates the estimator on a controlled synthetic testbed, not on production Web data. C-WEB-DYNAMICS requires evidence from real SPA/form-heavy browser data with genuine state variation. The Bayesian result establishes a viable estimator paradigm but does not accumulate evidence for or against the broader Web-dynamical-structure hypothesis."
       }
     ],
     "C-PARAM-INHERIT": [
@@ -1267,6 +1297,36 @@
         "claim_id": "C-FRESHNESS",
         "status": "EXPERIMENTAL",
         "reason": "C-FRESHNESS orthogonality at delta=0.15 on distributed infrastructure remains EXPERIMENTAL. The frozen decision_rule triggers REJECTED (C1 fails), but the C1 failure is measurement-confounded: 304 cache-hit responses included in behavioral TN calculation inflate false negatives (TN=0.686 with 304s, TN=1.0 without). The primary orthogonality metric (stratified pooled r=-0.0585, CI upper 0.0163 < 0.15, TOST p~0, n=688) independently confirms orthogonality on distributed testbed. This extends the parent's LOCAL confirmation (r=0.041, EXP-GRAPH-35530590140) to distributed multi-node infrastructure. Claim ceiling bounded to: 2-node Flask 3.1.3 with independent SQLite databases, independent in-memory CDN caches, independent ETag generation, round-robin routing, PyJWT RS256, n_non304=688, delta=0.15 only. NOT validated: delta=0.10, n>=1200, production CDN hierarchies, concurrent load N>=50, non-Flask frameworks, headers-only structural signal sufficiency. C1 fix required (exclude 304s from behavioral detection control) before CONFIRMED status achievable."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35551517868",
+        "lane": "product",
+        "created_at": "2026-09-21T01:38:03.525894+00:00",
+        "decision": "MIXED \u2014 partial support for discriminating operating point under overlap. The frozen decision_rule requires BOTH: (1) calibrated threshold increases with overlap \u2014 TRUE (0.20\u21920.25 at 100% overlap); (2) FP > 0 at threshold 0.20 for overlap >=25% \u2014 FALSE (FP=0.0 at 25% and 50%, nonzero only at 75%=0.0958 and 100%=0.35). The threshold does increase but only at extreme (full) overlap, not gradually as hypothesized. FP binding emerges only at 75%+ overlap, not at the hypothesized >=25%. However, the audit identifies that the overlap operationalization was materially flawed: the code shift (overlap_pct/100*0.09) produces 0% actual distributional overlap at the 25% and 50% conditions, so FP=0 at those conditions is an artifact of insufficient shift, not evidence against discrimination. The threshold calibration grid is coarse discrete [0.20,0.25,...0.80] \u2014 the true optimum between 0.20 and 0.25 was not probed. Orthogonality marginal failure at 75% overlap (CI upper 0.1549 > 0.15) is flagged but may be sample-size artifact at n=480. Audit status REVISE, not PASS. No PRODUCT_CORE promotion authorized. C-FRESHNESS remains EXPERIMENTAL.",
+        "source_commit": "2bd9859d5657f52cdb2b58f01ae31f1497c00b3d",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "MIXED outcome: threshold increases at 100% overlap only (not gradual as hypothesized), FP binding at 75%+ not >=25%. Audit REVISE: overlap operationalization flawed (code shift 0.09*overlap_pct/100 produces 0% actual overlap at 25%/50%), threshold grid coarse discrete [0.20,0.25,...], orthogonality marginal failure at 75% (CI upper 0.1549 > 0.15, possible sample-size artifact). Claim ceiling narrowed: calibrated threshold 0.20 survives label shift up to 75% (actual overlap ~8%, FP=0.0958 < 0.10) on localhost mock only. FP constraint becomes binding only at 75% overlap (actual overlap ~8%, FP=0.0958) and 100% overlap (actual overlap ~33%, FP=0.35 forces threshold to 0.25). Orthogonality TOST delta=0.15 holds at 4/5 overlap conditions (r -0.004 to 0.036), marginal failure at 75% (r=0.066 CI upper 0.1549). Discrimination 0.8333 and 4/4 noise types remain effective. No evidence for production OAuth/OIDC, CDN, network RTT, DB sessions, or non-uniform production refresh distributions. Do NOT promote to PRODUCT_CORE or VALIDATED."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35572179326",
+        "lane": "graph",
+        "created_at": "2026-09-21T07:16:35.190383+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "1c510af579c9340bbd609b666b13ddcefd3fcf73",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "No change to claim status. Infrastructure failure (RSA key sharing + JSON serialization) prevents any valid distributed measurement. This experiment adds zero new evidence for or against distributed C-FRESHNESS orthogonality. Maximum justified ceiling remains from prior packets: LOCAL CONFIRMED at delta=0.15 (EXP-GRAPH-35530590140: r=0.0410, CI upper 0.116, TOST p=0.002, n_non304=684, C1-C7 all PASS, audit PASS) and distributed SUPPORTED by primary metric only (EXP-GRAPH-35538864957: r=-0.0585, CI upper 0.0163 < 0.15, TOST p=2.03e-08, n_non304=688, audit PASS on primary metric, but C1 fails due to 304 inclusion). This run reconfirms B-LOCAL-ONLY (r=0.0233, n=844) and B-CONCURRENT (r=0.0233, n=860) but provides no distributed data."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35572180893",
+        "lane": "product",
+        "created_at": "2026-09-21T07:16:35.771903+00:00",
+        "decision": "FALSIFIED \u2014 frozen spec.json decision_rule condition (c) triggers: orthogonality (TOST delta=0.15) breaks at 50% overlap (pearson r=0.080, CI upper 0.168 > 0.15, TOST p_upper=0.061). Secondary trigger: calibrated_threshold is None at 75% and 100% overlap (prereg step 4). Both are independent falsification paths per the frozen decision tree. However, the audit claim_ceiling correctly identifies that the 100% condition is tautological (identical distributions cannot be separated) and the orthogonality failure at 50% is marginal (12% above delta, non-monotonic, likely Type I under multiple testing at n=480). The maximum justified scientific finding is bounded discrimination under genuine Gaussian overlap: usable at 0-25% (threshold 0.20->0.25, orthogonality holds, FP moderate), marginal at 50% (threshold 0.27, orthogonality fragile), unusable at >=75% (no operating point). C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized.",
+        "source_commit": "5edcd6c0ac24d7a91853d3475b7ba728760966b2",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "The frozen decision rule falsifies the discriminating operating point hypothesis under genuine Gaussian overlap due to orthogonality failure at 50% overlap (r=0.080 CI 0.168 > delta 0.15) and no valid threshold at 75%/100%. However, bounded discrimination is established: threshold increases gradually 0.20->0.25->0.27 across 0-25-50% overlap (confirming parent's flat-then-jump was uniform-shift artifact); FP binding at 25% (23.75%) and 50% (44.17%) confirms genuine overlap produces false accepts; orthogonality holds at 4/5 conditions. The guard operates effectively in the 0-25% overlap regime and marginally at 50%. Claim ceiling bounded to localhost Flask 3.1.3+SQLite WAL+JWT mock with Gaussian N(0.295,0.05)/N(mu_noise,0.05) clamped [0,1], 4 noise types, 4 auth states, 50-point grid [0.05,0.54]. No inference to production noise distributions."
       }
     ],
     "C-CROSSSITE": [
@@ -1743,6 +1803,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "No new evidence accumulated. The empirical CDF mapping cannot provide a validated extrapolation to full-DOM n=50/82 due to C2 FAIL (specification flaw) and C3 FAIL (linear extrapolation physically impossible). Product consequences are undefined under MEASUREMENT_INVALID per the frozen decision rule. Whether recipe-based or non-recipe density is optimal at full DOM remains UNKNOWN. The product_consequence_positive ('plateau structural, Docker re-collection NOT justified') and product_consequence_negative ('plateau breaks, Docker re-collection justified') are both untriggered. Claim ceiling unchanged."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35551517470",
+        "lane": "intel",
+        "created_at": "2026-09-21T01:38:08.203376+00:00",
+        "decision": "REJECTED \u2014 The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path.",
+        "source_commit": "e60795b8004c6b7224af6870b843f4388c73c740",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "REJECTED",
+        "reason": "The logistic F50=0.5654 < 0.80 prediction does NOT support the product consequence that 'plateau is structural and recipe density is limited.' This prediction is informationally identical to the constant null (audit VF3) and inherits the single-observation (n=20) uncertainty. Product decisions must not use this extrapolation as evidence for structural plateau below 80%. Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) remains the sole blocking path for an empirical answer on whether ranking agreement crosses 80% at n=21-82. Product lane should NOT invest in recipe density design until Docker data is available."
       }
     ],
     "C-MEAS-VALID": [
@@ -2417,6 +2487,16 @@
         "reason": "CDN byte-identity hypothesis FALSIFIED: fixed-origin-order iterative decompression produces byte-identical output on only 60/240 CDN observations (25%) due to Cloudflare Accept-Encoding negotiation (gunzip, de-brotli, silent re-encode, identity gzip-compress). The frozen decision rule's all-conditions-must-pass gate fails on C1/C2/C4. However, localhost correctness is untouched (positive control 240/240), the failure mode is diagnosed (fixed-origin-order framing assumption vs CDN transparency), and encoding-agnostic iterative decode recovers ground truth on 24/24 forensic JSON/HTML CDN deliveries (exploratory, not frozen). C-MEAS-VALID remains blocked from Product Core: encoding-agnostic decompression must be implemented, frozen, and validated through the same CDN protocol before promotion. Claim ceiling bounded to: Cloudflare free tier, single edge (sjc01), 10KB nominal, depth 2, gzip L1 / brotli q4, sequential, no cache HIT. The parent's localhost-established claims (iterative decompression, TE framing streaming, decompressor API streaming \u2014 all 840/840) are unaffected."
       },
       {
+        "experiment_id": "EXP-PHYSICS-35538866166",
+        "lane": "physics",
+        "created_at": "2026-09-20T21:29:52.632864+00:00",
+        "decision": "FALSIFIED-IN-SETTING \u2014 Frozen decision_rule condition C1 triggers: ALL three tested alphas (0.1, 0.5, 1.0) have |shuffled-action null_mean| >= 0.1 bits (0.240, 0.200, 0.275 respectively), each 2.0-2.75x above threshold. No alpha achieves both C1 and C3. Audit PASS confirms all recomputed metrics match producer. The bias is intrinsic to Laplace-smoothed histogram estimation: smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has n_a times more cells, and Laplace pseudo-counts add artificial uncertainty proportional to cell count. Corrected P(z) denominator (audit V1) does not change the FALSIFIED verdict. The entropy-rate estimator has WORSE null centering than plug-in KL at high alpha (0.275 vs 0.064 at alpha=1.0). The deterministic SPA construct validation (B-ENTROPY-RATE-DEG) fails at alpha>=0.5 (negative CMI), confirming the bias is estimator-intrinsic, not data-intrinsic.",
+        "source_commit": "ed0f9f346855a74f85c310be042e3a7bb229740c",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "No new evidence accumulated for or against C-MEAS-VALID from this experiment. The experiment tests estimator sensitivity on synthetic SPA, not measurement validity infrastructure. Prior C-MEAS-VALID status from parent experiments is unchanged."
+      },
+      {
         "experiment_id": "EXP-INTEL-35538868377",
         "lane": "intel",
         "created_at": "2026-09-20T21:29:56.699167+00:00",
@@ -2455,19 +2535,59 @@
         "claim_id": "C-MEAS-VALID",
         "status": "HYPOTHESIS",
         "reason": "No new evidence accumulated for or against this claim. The frozen decision_rule triggers MEASUREMENT_INVALID (C1 PASS, C2 FAIL) because strict monotonicity requires F(10)>F(5) but F(5)=F(10)=0.0 \u2014 a specification design flaw (prereg text says 'from n=10 to n=20' but frozen rule includes n=5). The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance (audit VF5): it is the true data-generating process at training points, not an independent model that could be validated. C1 PASS is trivially true by construction, not evidence of predictive power. C3 FAIL (linear extrapolation predicts F(50)=0.9602, F(82)=1.3813 > 1.0 impossible) demonstrates the frozen linear method is misspecified for bounded [0,1] quantities. This is a measurement validity gate failure, not a scientific result. All four prior parametric/non-parametric approaches also failed: Phi(mean(SNR_i)) 40-50pp (EXP-INTEL-35476271877), Phi(mean/std) 17.8pp (EXP-INTEL-35530590171), Phi(median/std) 34.59pp + sign-fraction power law 12.39pp (EXP-INTEL-35538868377). No validated extrapolation model exists. Claim ceiling unchanged."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35551516706",
+        "lane": "runtime",
+        "created_at": "2026-09-21T01:38:01.489599+00:00",
+        "decision": "SUPPORTS \u2014 Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for 100% of cached responses (330/330 cached-path observations, 240/240 primary 48x5 HIT, 45/45 depth 3-5, 30/30 >100KB, 15/15 identity, 6/6 stability) through a byte-preserving local nginx 1.24.0 proxy_cache reverse proxy in front of a Python origin. DYNAMIC and HIT wire bytes are byte-identical for 48/48 cells. All frozen decision-rule conditions C1-C8 pass. Audit PASS confirms all recomputed metrics match producer. The parent's 0% HIT rate on Cloudflare free-tier quick tunnel was an infrastructure ceiling, not a negative scientific result. The HIT sub-question is closed for nginx-class byte-preserving caches. Claim ceiling bounded to local nginx; production CDN HIT serving remains untested.",
+        "source_commit": "93d1d253fbbb28dd1dd2232e3888b061c5f0be85",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Oracle-free greedy decode validated for cached responses on byte-preserving local nginx proxy_cache: 330/330 cached-path obs byte-identical to ground truth, 48/48 DYNAMIC-vs-HIT wire bytes identical, 6/6 stability groups stable, 0 ambiguous tie-breaks, all C1-C8 pass, audit PASS confirms recomputed metrics. This closes the HIT sub-question for nginx-class byte-preserving caches (parent EXP-RUNTIME-35544804817 had 0% HIT on Cloudflare free-tier, infra ceiling). However, claim cannot advance to VALIDATED because: (a) production CDN edge HIT serving (Cloudflare paid-tier, Fastly, Akamai, CloudFront) remains untested \u2014 audit V1 explicitly bounds ceiling to nginx-class byte-preserving caches; (b) cache freshness edge cases (expiry, revalidation, 304) not exercised; (c) HTTP/2, H3, concurrent load, multi-edge behavior untested; (d) performance economics (greedy loop latency/CPU vs oracle-guided) unmeasured. The runtime sub-question for local caching infrastructure is resolved positively. The production CDN sub-question remains the blocking gap."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35551517470",
+        "lane": "intel",
+        "created_at": "2026-09-21T01:38:08.203376+00:00",
+        "decision": "REJECTED \u2014 The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path.",
+        "source_commit": "e60795b8004c6b7224af6870b843f4388c73c740",
+        "claim_id": "C-MEAS-VALID",
+        "status": "REJECTED",
+        "reason": "The saturating-function extrapolation does not constitute a validated measurement of ranking agreement at full DOM (n=50/82). The logistic F50=0.5654 is identical to the constant null F(n)=0.5654 (audit VF3: 0.00pp difference). With 4 training points (2 at zero) and 3 parameters, R2=1.0 reflects structural interpolation of step-function data, not validated predictive measurement (audit VF2). The asymptotic value L=0.5654 is entirely determined by the single observation at n=20; no data distinguishes plateau at 0.5654 from growth to 0.80 or 1.0. Template invariance makes this a fitting exercise on structural identity, not empirical prediction (audit VF5). No validated extrapolation to full DOM is supported."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35572180485",
+        "lane": "physics",
+        "created_at": "2026-09-21T07:16:38.988883+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 The as-executed Bayesian model comparison is invalid due to a critical implementation bug: run_experiment.py:234-235 uses K=len(counts) (observed distinct next-states, typically 1-4) instead of the frozen spec-mandated K=n_states=12. This systematically under-penalizes M1 over M0, producing a +3621 to +4048 nat upward null bias that triggers the producer's C1 failure. The audit recomputes with corrected K=12 on the identical data and same shuffle framework: null median flips to -78 to -131 nats (all alphas PASS C1), observed log BF 168-643 nats exceeds max null by 200-500 nats (all alphas PASS C3), and the verdict under corrected implementation is SURVIVES_CURRENT_TEST. The first estimator family to pass both C1 and C3 on this SPA class is identified, but the as-executed packet cannot carry a confirmatory claim. A new frozen experiment with corrected K=12 and N>=1000 permutations is required before C-MEAS-VALID or C-WEB-DYNAMICS can be updated.",
+        "source_commit": "a1ea1b25575959586a23e36237ffc142b9e28646",
+        "claim_id": "C-MEAS-VALID",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "The frozen decision_rule is not satisfiable as executed: the K bug (K=len(counts) vs K=12) makes the null distribution invalid for C1 evaluation. The audit finds MEASUREMENT_INVALID per spec decision_rule clause 4 (implementation fails per measurement_validity item 6). Audit-side corrected recomputation with K=12 shows SURVIVES_CURRENT_TEST on the same data, but this is hypothesis-generating only \u2014 not a new frozen execution. C-MEAS-VALID cannot advance or decline from an invalid measurement. Status held pending corrected re-execution."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35578258358",
+        "lane": "physics",
+        "created_at": "2026-09-21T08:30:48.872966+00:00",
+        "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+        "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Bayesian Dirichlet-Multinomial with K=12 passes C1 (null median -78 to -131 nats, all alphas) and C3 (p=0.0005, all alphas) on stochastic 12-state SPA, becoming the first of 5 estimator families to pass simultaneous C1+C3. Audit V1 confirms K=12 fix exact (recomputed metrics match to 1e-6), V3 confirms N_SHUFFLE=1999 resolves p-threshold. Claim ceiling bounded to synthetic SPA with exact Dirichlet-Multinomial, state-history K2, alpha {0.5,1.0,2.0}. Phase 2 beyond-Markov K3-K2 is exploratory only (audit V2 history-kind mismatch state-vs-action, V7 bootstrap CI [-415,34] includes zero). Does not generalize to production Web data or high-cardinality state spaces."
       }
     ]
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35530591329",
+      "experiment_id": "EXP-PHYSICS-35578258358",
       "lane": "physics",
-      "created_at": "2026-09-20T18:55:21.680285+00:00",
-      "decision": "FALSIFIED-IN-SETTING",
-      "source_commit": "daf134dfe2323913d597408fb166d4b45656c377",
+      "created_at": "2026-09-21T08:30:48.872966+00:00",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+      "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
       "claim_id": "C-WEB-DYNAMICS",
       "status": "HYPOTHESIS",
-      "reason": "No new evidence for or against predictive dynamical structure on real Web transitions. This experiment tests estimator sensitivity on a synthetic 12-state SPA, not Web dynamics. The frozen FALSIFIED-IN-SETTING verdict closes only the plug-in KL alpha sweep pathway on this SPA class."
+      "reason": "No change. All evidence remains synthetic SPA simulation (audit V4: 'no support for C-WEB-DYNAMICS, real Web dynamics'). The Bayesian paradigm validates the estimator on a controlled synthetic testbed, not on production Web data. C-WEB-DYNAMICS requires evidence from real SPA/form-heavy browser data with genuine state variation. The Bayesian result establishes a viable estimator paradigm but does not accumulate evidence for or against the broader Web-dynamical-structure hypothesis."
     },
     "C-PARAM-INHERIT": {
       "experiment_id": "EXP-PRODUCT-35353007958",
@@ -2490,14 +2610,14 @@
       "reason": "Kernel is deterministic exact-intent matcher (kernel.py L97) with no URL template analysis. Confirmed for complex aliasing: query-param (/posts/${id} vs /posts?id=${id}), path-rewriting (/users/${id}/posts vs /users?userId=${id}/posts), server-side routing (/albums/${id}/photos vs /photos?albumId=${id}). Combined 0/16 aliased-first correct across this experiment (0/6, p=0.016) and parent EXP-GRAPH-34409639346 (0/10, p=1.0). HTTP status-code grounding falsified on jsonplaceholder: 0/12 status differences despite 2 asymmetric scenarios designed to produce 404. Body-based grounding is exploratory and non-autonomous: body-difference metric measures whether selected and alternative responses differ, not which is correct; requires external schema oracle; produces false positives for functionally equivalent templates (A list vs dict artifact, F 100 vs 0 posts). Claim bounded to proof-of-concept: equal confidence 0.9, preconditions={}, applicability_guards={}, GET only, synthetic intents, single test API. Broader generalization to confidence-differentiated aliasing, guard/context scenarios, POST/PUT/DELETE, or strict APIs not tested."
     },
     "C-FRESHNESS": {
-      "experiment_id": "EXP-GRAPH-35538864957",
-      "lane": "graph",
-      "created_at": "2026-09-20T21:29:48.972222+00:00",
-      "decision": "FALSIFIES per frozen decision_rule \u2014 C1 behavioral detection control fails (mean TN=0.6863 < 0.85 threshold) due to measurement validity issue: 304 cache-hit responses are included in behavioral TP/TN calculation, where valid tokens with cache enabled produce 304 status codes that behavioral signal extraction maps to behavioral_delta=1.0 (status_code=304 -> default status_weight=0.5), causing false negative TN failures. Audit V1 confirms C1 passes when 304s are excluded (TN=1.0). Primary orthogonality metric is valid and independently passes equivalence: distributed endpoint-stratified pooled r=-0.0585, 95% CI [-0.1327, 0.0163], CI upper 0.0163 < 0.15, TOST p_upper=2.03e-08 < 0.05, n_non304=688. C2-C7 all PASS. Scientific ceiling: orthogonality at delta=0.15 is supported by primary metric on 2-node distributed Flask testbed with independent caches; C1 measurement validity issue prevents CONFIRMED status per frozen conjunctive rule.",
-      "source_commit": "72a6471f57fa8f38376be695bd26f26d62235a6c",
+      "experiment_id": "EXP-PRODUCT-35572180893",
+      "lane": "product",
+      "created_at": "2026-09-21T07:16:35.771903+00:00",
+      "decision": "FALSIFIED \u2014 frozen spec.json decision_rule condition (c) triggers: orthogonality (TOST delta=0.15) breaks at 50% overlap (pearson r=0.080, CI upper 0.168 > 0.15, TOST p_upper=0.061). Secondary trigger: calibrated_threshold is None at 75% and 100% overlap (prereg step 4). Both are independent falsification paths per the frozen decision tree. However, the audit claim_ceiling correctly identifies that the 100% condition is tautological (identical distributions cannot be separated) and the orthogonality failure at 50% is marginal (12% above delta, non-monotonic, likely Type I under multiple testing at n=480). The maximum justified scientific finding is bounded discrimination under genuine Gaussian overlap: usable at 0-25% (threshold 0.20->0.25, orthogonality holds, FP moderate), marginal at 50% (threshold 0.27, orthogonality fragile), unusable at >=75% (no operating point). C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized.",
+      "source_commit": "5edcd6c0ac24d7a91853d3475b7ba728760966b2",
       "claim_id": "C-FRESHNESS",
       "status": "EXPERIMENTAL",
-      "reason": "C-FRESHNESS orthogonality at delta=0.15 on distributed infrastructure remains EXPERIMENTAL. The frozen decision_rule triggers REJECTED (C1 fails), but the C1 failure is measurement-confounded: 304 cache-hit responses included in behavioral TN calculation inflate false negatives (TN=0.686 with 304s, TN=1.0 without). The primary orthogonality metric (stratified pooled r=-0.0585, CI upper 0.0163 < 0.15, TOST p~0, n=688) independently confirms orthogonality on distributed testbed. This extends the parent's LOCAL confirmation (r=0.041, EXP-GRAPH-35530590140) to distributed multi-node infrastructure. Claim ceiling bounded to: 2-node Flask 3.1.3 with independent SQLite databases, independent in-memory CDN caches, independent ETag generation, round-robin routing, PyJWT RS256, n_non304=688, delta=0.15 only. NOT validated: delta=0.10, n>=1200, production CDN hierarchies, concurrent load N>=50, non-Flask frameworks, headers-only structural signal sufficiency. C1 fix required (exclude 304s from behavioral detection control) before CONFIRMED status achievable."
+      "reason": "The frozen decision rule falsifies the discriminating operating point hypothesis under genuine Gaussian overlap due to orthogonality failure at 50% overlap (r=0.080 CI 0.168 > delta 0.15) and no valid threshold at 75%/100%. However, bounded discrimination is established: threshold increases gradually 0.20->0.25->0.27 across 0-25-50% overlap (confirming parent's flat-then-jump was uniform-shift artifact); FP binding at 25% (23.75%) and 50% (44.17%) confirms genuine overlap produces false accepts; orthogonality holds at 4/5 conditions. The guard operates effectively in the 0-25% overlap regime and marginally at 50%. Claim ceiling bounded to localhost Flask 3.1.3+SQLite WAL+JWT mock with Gaussian N(0.295,0.05)/N(mu_noise,0.05) clamped [0,1], 4 noise types, 4 auth states, 50-point grid [0.05,0.54]. No inference to production noise distributions."
     },
     "C-CROSSSITE": {
       "experiment_id": "EXP-INTEL-35131994346",
@@ -2520,24 +2640,24 @@
       "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35544806153",
+      "experiment_id": "EXP-INTEL-35551517470",
       "lane": "intel",
-      "created_at": "2026-09-20T23:30:01.732204+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
+      "created_at": "2026-09-21T01:38:08.203376+00:00",
+      "decision": "REJECTED \u2014 The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path.",
+      "source_commit": "e60795b8004c6b7224af6870b843f4388c73c740",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "HYPOTHESIS",
-      "reason": "No new evidence accumulated. The empirical CDF mapping cannot provide a validated extrapolation to full-DOM n=50/82 due to C2 FAIL (specification flaw) and C3 FAIL (linear extrapolation physically impossible). Product consequences are undefined under MEASUREMENT_INVALID per the frozen decision rule. Whether recipe-based or non-recipe density is optimal at full DOM remains UNKNOWN. The product_consequence_positive ('plateau structural, Docker re-collection NOT justified') and product_consequence_negative ('plateau breaks, Docker re-collection justified') are both untriggered. Claim ceiling unchanged."
+      "status": "REJECTED",
+      "reason": "The logistic F50=0.5654 < 0.80 prediction does NOT support the product consequence that 'plateau is structural and recipe density is limited.' This prediction is informationally identical to the constant null (audit VF3) and inherits the single-observation (n=20) uncertainty. Product decisions must not use this extrapolation as evidence for structural plateau below 80%. Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) remains the sole blocking path for an empirical answer on whether ranking agreement crosses 80% at n=21-82. Product lane should NOT invest in recipe density design until Docker data is available."
     },
     "C-MEAS-VALID": {
-      "experiment_id": "EXP-INTEL-35544806153",
-      "lane": "intel",
-      "created_at": "2026-09-20T23:30:01.732204+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "20b68de67a0bf65b63521d8414307537a185e67e",
+      "experiment_id": "EXP-PHYSICS-35578258358",
+      "lane": "physics",
+      "created_at": "2026-09-21T08:30:48.872966+00:00",
+      "decision": "SURVIVES_CURRENT_TEST \u2014 The corrected Bayesian Dirichlet-Multinomial model comparison with K=n_states=12 and N_SHUFFLE=1999 replicates the audit-corrected SURVIVES_CURRENT_TEST on the stochastic 12-state SPA. All 3 alpha_prior values {0.5, 1.0, 2.0} pass C1 (null median -78 to -131 nats < 0) and C3 (p=0.0005 < 0.001, observed log BF 168-643 nats exceeds 99.9th percentile by 194-669 nats). C6 (48/48 pairs) and C7 (2 non-empty buckets) pass. Audit PASS confirms all recomputed metrics exactly match producer. This is the first of 5 tested estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian) to pass simultaneous C1+C3 on this SPA class, definitively bypassing the Laplace smoothing bias that defeated all prior families. Claim ceiling bounded to: synthetic stochastic 12-state hash-routed SPA, exact Dirichlet-Multinomial with K=12, state-history K2=(url_before + 2 prev urls), alpha_prior {0.5,1.0,2.0}, N=5000, seed=42. EXCLUDES: C-WEB-DYNAMICS/real Web, production data, beyond-Markov K3-K2 (exploratory, history-kind mismatch, bootstrap CI includes zero), product promotion.",
+      "source_commit": "b6bb02295597bfb738929781d272aa0796984d5f",
       "claim_id": "C-MEAS-VALID",
-      "status": "HYPOTHESIS",
-      "reason": "No new evidence accumulated for or against this claim. The frozen decision_rule triggers MEASUREMENT_INVALID (C1 PASS, C2 FAIL) because strict monotonicity requires F(10)>F(5) but F(5)=F(10)=0.0 \u2014 a specification design flaw (prereg text says 'from n=10 to n=20' but frozen rule includes n=5). The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance (audit VF5): it is the true data-generating process at training points, not an independent model that could be validated. C1 PASS is trivially true by construction, not evidence of predictive power. C3 FAIL (linear extrapolation predicts F(50)=0.9602, F(82)=1.3813 > 1.0 impossible) demonstrates the frozen linear method is misspecified for bounded [0,1] quantities. This is a measurement validity gate failure, not a scientific result. All four prior parametric/non-parametric approaches also failed: Phi(mean(SNR_i)) 40-50pp (EXP-INTEL-35476271877), Phi(mean/std) 17.8pp (EXP-INTEL-35530590171), Phi(median/std) 34.59pp + sign-fraction power law 12.39pp (EXP-INTEL-35538868377). No validated extrapolation model exists. Claim ceiling unchanged."
+      "status": "EXPERIMENTAL",
+      "reason": "Bayesian Dirichlet-Multinomial with K=12 passes C1 (null median -78 to -131 nats, all alphas) and C3 (p=0.0005, all alphas) on stochastic 12-state SPA, becoming the first of 5 estimator families to pass simultaneous C1+C3. Audit V1 confirms K=12 fix exact (recomputed metrics match to 1e-6), V3 confirms N_SHUFFLE=1999 resolves p-threshold. Claim ceiling bounded to synthetic SPA with exact Dirichlet-Multinomial, state-history K2, alpha {0.5,1.0,2.0}. Phase 2 beyond-Markov K3-K2 is exploratory only (audit V2 history-kind mismatch state-vs-action, V7 bootstrap CI [-415,34] includes zero). Does not generalize to production Web data or high-cardinality state spaces."
     }
   }
 }

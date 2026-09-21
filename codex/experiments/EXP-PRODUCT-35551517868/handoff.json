@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35551517868",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Can the freshness guard discriminating operating point be measured under genuine overlap (25%/50%/75% distributional area) using Gaussian or symmetric-overlap noise/refresh distributions on localhost mock — and does the calibrated threshold increase gradually (not just at 100% overlap) when the overlap is real rather than an artifact of uniform-shift boundary behavior?",
+  "why_next": "The overlap-controlled FP-TP experiment partially resolves the parent's threshold tautology: FP becomes nonzero at 75% overlap (0.0958) and threshold shifts to 0.25 at 100% overlap (FP=0.35). However, the overlap design is materially flawed — the uniform-shift implementation (shift=overlap_pct/100*0.09) produces 0% actual distributional overlap at the 25% and 50% conditions, so FP=0 at those conditions is a design artifact, not evidence against discrimination. The coarse threshold grid [0.20,0.25,...0.80] cannot locate the true optimum between 0.20 and 0.25. A corrected overlap design (Gaussian distributions with controlled area overlap, or symmetric failure-distribution shift) is required to test whether the threshold increases gradually under genuine moderate overlap. This is a higher-information follow-up than attempting another mock-to-production attempt, because without validating discrimination under genuine moderate overlap on mock, the production substrate cannot meaningfully test it either. The parent's production-substrate question remains open but this mock-level gap must be closed first.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS calibrated threshold 0.20 survives label shift up to 75% (actual overlap ~8%) on localhost Flask 3.1.3 + SQLite WAL + JWT HS256/RS256 mock with uniform session_quality distribution (EXP-PRODUCT-35551517868 result.json, audit REVISE)",
+      "FP constraint becomes binding at 75% overlap (FP=0.0958 < 0.10 at threshold 0.20) and 100% overlap (FP=0.35 > 0.10, forcing threshold to 0.25) — discrimination exists under extreme overlap (EXP-PRODUCT-35551517868 result.json::metrics.fp_at_020_by_overlap)",
+      "Threshold increases with overlap but non-monotonically: flat at 0.20 across 0-75%, single jump to 0.25 at 100% (EXP-PRODUCT-35551517868 result.json::metrics.thresholds_by_overlap)",
+      "Orthogonality TOST delta=0.15 holds at 4/5 overlap conditions (r -0.004 to 0.036, CI upper 0.085 to 0.155) with marginal failure at 75% (r=0.066 CI upper 0.1549 > 0.15, possible sample-size artifact) (EXP-PRODUCT-35551517868 result.json::metrics.orthogonality_by_overlap)",
+      "Discrimination 0.8333 and 4/4 noise types remain effective across all 5 overlap conditions (EXP-PRODUCT-35551517868 result.json::metrics.c1_discrimination)",
+      "C-FRESHNESS orthogonality at delta=0.15 confirmed across 6 independent localhost mock experiments at n=480: prior 6 confirmations (EXP-GRAPH-35353011131 r=0.046, EXP-GRAPH-35389145821 r=0.0022, EXP-PRODUCT-35445596342 r=-0.0258, EXP-PRODUCT-35476271728 r=-0.0366, EXP-PRODUCT-35481773764 r=0.016, EXP-PRODUCT-35538865048 r=-0.0065) all TOST PASS at delta=0.15",
+      "C-FRESHNESS orthogonality confirmed on production-like LOCAL testbed: stratified pooled r=0.0410 [CI -0.034,0.116], TOST p_upper=0.002, n_non304=684, 3 endpoints (EXP-GRAPH-35530590140, audit REVISE)",
+      "Continuous severity injection verified: 449-449 unique behavioral scores across 5 overlap conditions, continuous_injection_ok true (EXP-PRODUCT-35551517868 raw_evidence)",
+      "error_format_variation fixed and verified effective: structural_std 0.4017 > 0.15 inert threshold, 4/4 noise types effective (EXP-PRODUCT-35538865048 result.json)"
+    ],
+    "rejected": [
+      "C-PRODUCT-ECON (token-based deduplication economics): REJECTED as not viable at current scale",
+      "Hypothesis that calibrated threshold would be in [0.40,0.60]: FALSIFIED across 7+ experiments — calibrated threshold at 0.20, below hypothesized interval",
+      "Hypothesis that bimodal discrete scores are necessary for detection: FALSIFIED — continuous severity gradient produces same orthogonality with discriminating threshold",
+      "Six structural signal families for C-FRESHNESS frozen gate: Jaccard (FP=1.0), TF-IDF (FP=1.0), response-time KS (TP=0.0), linear Fisher LDA (AUC=0.625), field-usage profiling (change_type invisible), schema comparison (noise tolerance fails) — all falsified",
+      "Hypothesis that FP > 0 at threshold 0.20 for overlap >=25%: FALSIFIED — FP=0.0 at 25% and 50% due to flawed uniform-shift overlap design (actual overlap 0% at those conditions)"
+    ],
+    "unknown": [
+      "Whether genuine 25%/50%/75% distributional overlap (Gaussian or symmetric shift) produces gradual threshold increase and earlier FP binding — the overlap design artifact prevents inference",
+      "Whether the true calibrated threshold optimum lies between 0.20 and 0.25 (coarse discrete grid [0.20,0.25,...0.80] not resolved)",
+      "Whether marginal orthogonality failure at 75% overlap (CI upper 0.1549 vs delta 0.15) replicates with n>=800 or is sampling variation — 75% is first condition with nonzero FP, suggesting possible induced correlation under partial overlap",
+      "Whether calibrated threshold 0.20 generalizes to production refresh quality distributions where noise and low-quality refresh may overlap more than the tested uniform distributions",
+      "Whether orthogonality survives on production-like substrate with real OAuth/OIDC, CDN, network RTT, DB-backed sessions — primary bottleneck for PRODUCT_CORE",
+      "Whether continuous severity mapping generalizes to production — hand-designed 50/50 partial/full success within 70%, failure 20-39%, noise 5-14%; production refresh quality distribution unknown",
+      "Whether expired_token/invalid_token fingerprint collision (identical 401 authentication_failed) generalizes to production endpoints with differentiated error details"
+    ],
+    "do_not_assume": [
+      "Do not assume C-FRESHNESS is VALIDATED or PRODUCT_CORE — it remains EXPERIMENTAL; orthogonality confirmed at delta=0.15 under stochastic mock on localhost only",
+      "Do not assume the calibrated threshold 0.20 is a discriminating operating point — the FP constraint is never binding at 0-50% overlap because the overlap design produces 0% actual distributional overlap at those conditions (code shift=overlap_pct/100*0.09, mock_server.py lines 262-288)",
+      "Do not assume threshold tautology is fully resolved — the calibrated threshold moved from 0.25 bimodal to 0.20 continuous low edge, not to middle range; TP=1.0 still at calibrated threshold; the coarse grid [0.20,0.25,...0.80] was not probed between 0.20-0.25",
+      "Do not assume that because 7+ mock experiments confirm orthogonality, production endpoints will behave identically — real OAuth/OIDC, CDN, and network RTT may introduce correlated structural-behavioral variation",
+      "Do not assume the non-monotonic flat-then-jump threshold response (0.20 across 0-75%, 0.25 at 100%) is a property of the freshness guard — it may be an artifact of uniform-shift overlap design and 0.05 discrete threshold grid",
+      "Do not assume the marginal orthogonality failure at 75% overlap (CI upper 0.1549) is a genuine correlation — it may be sampling variation at n=480; n>=800 needed",
+      "Do not assume the TOST resolution at n=480 proves orthogonality is universal — it confirms mock-ceiling orthogonality at this sample size, not production orthogonality",
+      "Do not assume the structural discrimination 0.8333 generalizes to production OAuth/OIDC, CDN, or non-deterministic endpoints — claim ceiling bounded to Flask 3.1.3 + PyJWT 2.14.0 HS256 localhost",
+      "Do not assume the overlap experiment's MIXED outcome closes the discriminating operating point question — the flawed overlap design means the hypothesis is untested at moderate overlap"
+    ]
+  },
+  "dependencies": [
+    "Corrected overlap design (Gaussian distributions with controlled area overlap, or symmetric failure-distribution shift) required before re-running the discriminating operating-point test at genuine 25%/50%/75% overlap",
+    "Continuous threshold sweep or ROC analysis (not discrete [0.20,0.25,...0.80]) required to locate true optimum between 0.20 and 0.25",
+    "n>=800 at 75% overlap required to resolve marginal orthogonality failure (CI upper 0.1549 vs delta 0.15)",
+    "Runtime lane must build and validate a production-like HTTP observation substrate with real OAuth/OIDC middleware, CDN caching semantics, network RTT, and database-backed sessions before product lane attempts integration",
+    "Any non-mock re-measurement must use TOST delta=0.15 with n>=480 for comparability with the 6+ mock-confirming experiments",
+    "C1 behavioral detection control must exclude 304 cache-hit responses from TN calculation (EXP-GRAPH-35538864957 V1) before CONFIRMED status achievable",
+    "Production refresh quality distribution measurement required to calibrate realistic overlap conditions"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35551517868/result.json sha256 ca9a0a89297c01a0fb358fbc5d0855890dcdc6d518a128766973d9d77ee94963",
+    "research/experiments/EXP-PRODUCT-35551517868/audit.json — REVISE, producer_claim_supported=true, claim_ceiling mock-only",
+    "research/experiments/EXP-PRODUCT-35551517868/raw_evidence/experiment_data.json sha256 05f9b0d8fa68db4952e5e3dc8fad89faad30047f9de28e6611df0c53c84d9c80",
+    "research/experiments/EXP-PRODUCT-35551517868/mock_server.py sha256 11ef2dd7d8dda1b0d095e2de35bad7b55173b353a3b0dacc2526b971a22e1173",
+    "research/experiments/EXP-PRODUCT-35551517868/spec.json sha256 13002375d16b9b0434d9983a164003658f56b9063c187d3f64a69fd37f71fb4d",
+    "research/experiments/EXP-PRODUCT-35538865048/handoff.json sha256 f5580efa18079930fffd2b62e8c0cf57fc538b20d56c49f64bf15281c36a668e",
+    "research/experiments/EXP-PRODUCT-35538865048/result.json (baseline threshold 0.20, orthogonality r=-0.0065 CI upper 0.0831)",
+    "research/experiments/EXP-GRAPH-35530590140 (LOCAL production-like orthogonality r=0.041 CI upper 0.116 n_non304=684)",
+    "research/experiments/EXP-GRAPH-35538864957 (distributed 2-node orthogonality r=-0.0585 CI upper 0.0163 n_non304=688)",
+    "codex/claim_state.json C-FRESHNESS status EXPERIMENTAL across 40+ prior experiments"
+  ],
+  "recommended_action": "C-FRESHNESS remains EXPERIMENTAL with MIXED overlap result. The overlapping-distributions hypothesis is partially supported (threshold increases at 100%, FP binding at 75%+) but the overlap design is flawed (0% actual overlap at 25%/50% conditions). Product lane should: (1) redesign overlap with Gaussian distributions or symmetric failure-distribution shift to achieve genuine 25%/50%/75% area overlap; (2) use continuous threshold sweep or ROC analysis to locate true optimum; (3) rerun at n>=800 at 75% overlap to resolve marginal orthogonality failure. After mock discrimination under genuine moderate overlap is validated, THEN route to runtime lane for production-like substrate. No product promotion. No code changes to production. C-PRODUCT-ECON remains closed."
+}
