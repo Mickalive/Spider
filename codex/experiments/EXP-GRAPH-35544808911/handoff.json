@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35544808911",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "After fixing the infrastructure bug (SameFileError in run_experiment_distributed.py line 368 where src and dst both resolve to the same testbed_server.py) AND fixing C1 behavioral detection control to exclude 304 responses (consistent with parent metric's 304 exclusion), does C-FRESHNESS orthogonality at delta=0.15 achieve CONFIRMED status on distributed infrastructure with n_non304>=800?",
+  "why_next": "This experiment was MEASUREMENT_INVALID due to infrastructure failure (SameFileError at line 368: shutil.copy2(src,dst) where both src and dst resolve to the same experiment-local testbed_server.py). No samples were collected; C1-C7 conditions untested. The parent's frozen question (C1 304-exclusion fix achieving CONFIRMED at n>=800 on distributed) remains unanswered. Two prerequisite bugs must be fixed before re-run: (1) SameFileError — copy source must be parent experiment's testbed_server.py (EXP-GRAPH-35538864957), not the local copy; (2) C1 behavioral detection control must exclude 304 responses from TP/TN calculation. The distributed testbed infrastructure is sound and reusable; only the copy-path bug and C1 calculation need correction.",
+  "carry_forward": {
+    "established": [
+      "C-FRESHNESS orthogonality at delta=0.15 CONFIRMED on LOCAL testbed (EXP-GRAPH-35530590140: stratified r=0.0410, CI [-0.0341,0.1156], TOST p=0.002, n_non304=684, C1-C7 all PASS, audit PASS).",
+      "C-FRESHNESS orthogonality at delta=0.15 SUPPORTED by primary metric on distributed 2-node Flask testbed (EXP-GRAPH-35538864957: stratified pooled r=-0.0585, CI [-0.1327,0.0163], CI upper 0.0163<0.15, TOST p=2.03e-08, n_non304=688, audit PASS on primary metric). NOT CONFIRMED on distributed due to C1 measurement validity issue (TN=0.686 with 304s, TN=1.0 without 304s).",
+      "C-FRESHNESS behavioral signals achieve TP=1.0, FP=0.0, AUC=1.0 on deterministic Flask+JWT localhost (EXP-GRAPH-35262258744/35353011131). Orthogonality confirmed across 6+ independent mock experiments at delta=0.15 (r=0.002-0.058, CI upper 0.08-0.135).",
+      "C-FRESHNESS freshness guard calibrated threshold 0.20 with continuous severity gradient, TP=1.0, FP=0.0, TOST PASS at delta=0.15 (EXP-PRODUCT-35538865048: r=-0.0065, CI upper 0.0831, n=480). 4/4 effective noise types. V-THRESHOLD-TAUTOLOGY partially resolved.",
+      "Distributed infrastructure verified: 2 independent Flask nodes (ports 18971,18972) with independent SQLite DBs, independent in-memory CDN caches, independent ETag generation, round-robin routing.",
+      "V1 UUID fix (uuid4 for all status codes) and V_ETAG_PERMISSION_LEAKAGE fix (expired JWT decoded without verification for ETag) applied and verified.",
+      "B-CONFOUND-DISTRIBUTED negative control passes: |r|=0.8855>=0.15, confirming V2 confound is genuine in distributed setting.",
+      "B-CONCURRENT (N=5 concurrent client sessions): stratified r=-0.0319, n=816 — concurrent load does not introduce coupling.",
+      "C5 cache heterogeneity check passes: |r_enabled-r_disabled|=0.0425<2*SE_pooled.",
+      "Six structural signal families falsified for C-FRESHNESS frozen gate in deterministic mock: Jaccard (FP=1.0), TF-IDF (FP=1.0 inverted), response-time KS (TP=0.0), linear Fisher LDA (AUC=0.625), field-usage profiling (change_type invisible), schema comparison (noise tolerance fails)."
+    ],
+    "rejected": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — not warranted; claim ceiling bounded to LOCAL production-like regime at delta=0.15 and localhost stochastic mock. No product promotion.",
+      "The frozen FALSIFIES outcome from parent EXP-GRAPH-35538864957 constitutes scientific falsification of orthogonality — the C1 failure is measurement-confounded (304 inclusion in behavioral detection control), not evidence against orthogonality.",
+      "Simple-pooled pooled r as measure of orthogonality — biased by endpoint heterogeneity; stratified pooling correct.",
+      "HTTP caching as common cause raising |r| above 0.15 — seven+ experiments show orthogonality under caching (r=0.002-0.058).",
+      "Body-inclusive structural signals as orthogonal to behavioral — V1 error body confound fixed (headers-only extraction).",
+      "Six structural signal families for C-FRESHNESS frozen gate: Jaccard, TF-IDF, response-time KS, linear LDA, field-usage, schema comparison — all falsified under structural noise in deterministic mock.",
+      "B-PARENT-CONFOUND V1 confound design (token_hex-vs-uuid4) — fragile under 304 exclusion; V2 redesign with fixed 'expired' request_id resolves."
+    ],
+    "unknown": [
+      "Whether C-FRESHNESS orthogonality at delta=0.15 achieves CONFIRMED status on distributed infrastructure after C1 304-exclusion fix (the frozen question from parent, still unanswered).",
+      "Whether orthogonality holds on actual distributed production infrastructure with real CDN hierarchies (multi-node cache invalidation on session state change).",
+      "Whether concurrent client load (N>=50 parallel sessions) changes correlation structure (tested at N=5 only).",
+      "Whether the result generalizes to non-Flask frameworks (Django, FastAPI, Express).",
+      "Whether headers-only structural signal captures sufficient variation for production use vs body-inclusive signals.",
+      "Whether per-cache heterogeneity is systematic or sampling noise.",
+      "Whether delta=0.10 is achievable at n_non304>=1200 (CI half-width<=0.05).",
+      "Root cause of SameFileError identity (src and dst both EXP-GRAPH-35544808911/testbed_server.py despite code intending to copy from EXP-GRAPH-35538864957) — suggests stale working directory or pre-copied file shadowing parent."
+    ],
+    "do_not_assume": [
+      "C-FRESHNESS reaches VALIDATED or PRODUCT_CORE — it remains EXPERIMENTAL; orthogonality confirmed at delta=0.15 under LOCAL and stochastic mock only.",
+      "This MEASUREMENT_INVALID run constitutes evidence for or against orthogonality — it is an infrastructure failure with zero samples collected.",
+      "n_non304>=800 requirement satisfied — achieved 688 in parent, 0 in this run. Distributed CONFIRMED status requires successful re-run.",
+      "Orthogonality holds on real distributed production infrastructure — tested only on 2-node Flask in-memory CDN simulation.",
+      "Testbed CDN simulation represents production CDN behavior — single-node Flask in-memory cache per node.",
+      "The V2 confound (fixed 'expired' request_id) generalizes to other confound mechanisms — tested only on request_id entropy zeroing.",
+      "Headers-only structural signal is sufficient for production — validated only on LOCAL and distributed testbeds with controlled response headers.",
+      "Concurrent load N>=50 produces same result as N=5 — only N=5 tested.",
+      "Non-Flask frameworks preserve orthogonality — untested.",
+      "The SameFileError is a one-time fluke — the root cause (copy source path resolution) may indicate a systemic issue in the automation that must be audited before re-run."
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-GRAPH-35544808911/result.json — MEASUREMENT_INVALID, SameFileError, no samples",
+    "research/experiments/EXP-GRAPH-35544808911/audit.json — MEASUREMENT_INVALID, recomputed_metrics empty, 5 required_fixes",
+    "research/experiments/EXP-GRAPH-35544808911/run_experiment_distributed.py — line 368 shutil.copy2(src,dst) SameFileError, compute_c1 304 filter present but unexecuted",
+    "research/experiments/EXP-GRAPH-35538864957/handoff.json — parent carry_forward (established/rejected/unknown/do_not_assume)",
+    "research/experiments/EXP-GRAPH-35538864957/result.json — distributed r=-0.0585, n=688, C1 TN=0.686 with 304s",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json — C1 TN=1.0 without 304s, primary metric PASS",
+    "research/experiments/EXP-GRAPH-35530590140/result.json — LOCAL CONFIRMED r=0.0410, C1-C7 PASS",
+    "research/experiments/EXP-GRAPH-35530590140/audit.json — LOCAL claim ceiling bounded, n=684"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35544808911/result.json:status=MEASUREMENT_INVALID,outcome=NOT_APPLICABLE,metrics={},controls={},artifacts=[]",
+    "research/experiments/EXP-GRAPH-35544808911/audit.json:status=MEASUREMENT_INVALID,producer_claim_supported=false,recomputed_metrics={},claim_ceiling='No new evidence'",
+    "research/experiments/EXP-GRAPH-35544808911/report.md:traceback SameFileError line 368, src/dst identical",
+    "research/experiments/EXP-GRAPH-35544808911/provenance.json:error=SameFileError,incomplete",
+    "research/experiments/EXP-GRAPH-35544808911/spec.json:decision_rule C1-C7 CONFIRMED requires all PASS",
+    "research/experiments/EXP-GRAPH-35538864957/handoff.json:carry_forward established=[C-FRESHNESS LOCAL CONFIRMED, distributed SUPPORTED r=-0.0585, 6+ mock confirmations]",
+    "research/experiments/EXP-GRAPH-35538864957/audit.json:recomputed_metrics.c1_mean_valid_tn_no_304s=1.0,b_distributed_stratified_r=-0.0585",
+    "research/experiments/EXP-GRAPH-35530590140/result.json:stratified_pooled_r=0.0410,C1-C7 all PASS,n_non304=684"
+  ],
+  "recommended_action": "Two prerequisite bugs must be fixed before re-run: (1) FIX SameFileError in run_experiment_distributed.py: guard shutil.copy2 with same-path check or correct source path to parent experiment's testbed_server.py (EXP-GRAPH-35538864957/testbed_server.py); (2) FIX C1 behavioral detection control to exclude 304 responses from TP/TN calculation (consistent with primary metric's 304 exclusion). After both fixes: re-execute B-DISTRIBUTED with n_non304>=800 to achieve CONFIRMED status at delta=0.15. The distributed testbed infrastructure is sound and reusable; only the copy-path bug and C1 calculation need correction. Audit provenance chain for testbed_server.py before re-run to confirm parent copy is used as source."
+}
