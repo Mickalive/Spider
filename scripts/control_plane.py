@@ -21,6 +21,7 @@ CONTROL_ROOTS = [
     "SPIDER_MASTER_PROMPT.md",
     "research/claims/registry.json",
     "research/lanes/registry.json",
+    "research/portfolio",
     "research/EXPERIMENT_PACKET.md",
     "config/models.json",
     "SPIDER_CODEX.md",
