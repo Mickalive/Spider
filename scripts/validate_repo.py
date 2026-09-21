@@ -115,6 +115,10 @@ def main():
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
     require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
+    researcher = text(".opencode/agents/spider_lane_researcher.md")
+    packet_contract = text("research/EXPERIMENT_PACKET.md")
+    require("evidentiary scope" in researcher and "Director's target claim" in researcher, "researcher must preserve governed claim scope for substrate experiments")
+    require("evidentiary scope" in packet_contract and "MUST include the Director target claim" in packet_contract, "experiment packet must define governed claim_ids semantics")
 
     pulse = text(".github/workflows/factory-pulse.yml")
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
