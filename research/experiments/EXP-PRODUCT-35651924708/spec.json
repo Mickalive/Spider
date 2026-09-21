@@ -1,17 +1,60 @@
 {
   "experiment_id": "EXP-PRODUCT-35651924708",
   "lane": "product",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-LLM-INHERIT"],
+  "question": "Does SPIDER's parameterized mechanism inheritance reduce total workflow cost (tokens + browser interactions + verification steps) compared to cold exploration, literal replay, and retrieval baselines when an LLM agent completes matched tasks with controlled novelty fractions?",
+  "hypothesis": "An LLM agent using SPIDER's parameterized mechanisms will complete tasks in the 25-75% novelty range with lower total workflow cost than cold exploration, literal replay, and retrieval baselines, because mechanism inheritance avoids redundant exploration and provides structured execution plans while cold exploration must discover from scratch and literal replay fails on novel variations.",
+  "falsifier": "If SPIDER's total workflow cost is not statistically significantly lower than the strongest baseline (minimum of cold, literal, retrieval) across the 25-75% novelty range in a two-sided bootstrap test at alpha=0.05, the C-LLM-INHERIT product claim is unsupported for this task class.",
+  "baselines": [
+    {
+      "id": "B-COLD",
+      "name": "Cold exploration",
+      "description": "LLM agent with no prior knowledge, prompted only with the task goal and general Web navigation instructions. No SPIDER mechanisms, no prior trajectories, no instructions from memory.",
+      "rationale": "Represents the zero-knowledge baseline. If SPIDER cannot beat cold, mechanism inheritance provides no value."
+    },
+    {
+      "id": "B-LITERAL",
+      "name": "Literal trajectory replay",
+      "description": "LLM agent provided with the exact sequence of actions from a prior successful trajectory for the same task. Agent replays steps without adaptation.",
+      "rationale": "Represents exact-workflow replay (commodity in TERX, HyperAgent, BrowserBash). Tests whether parameterized adaptation adds value over literal replay."
+    },
+    {
+      "id": "B-RETRIEVAL",
+      "name": "Semantic retrieval over trajectories",
+      "description": "LLM agent provided with the top-3 semantically similar prior trajectories retrieved via cosine similarity over task descriptions. Agent must adapt retrieved trajectories to the current task.",
+      "rationale": "Represents RAG-over-trajectories baseline (strongest memory baseline). Tests whether mechanism-level inheritance outperforms trajectory-level retrieval."
+    },
+    {
+      "id": "B-SPIDER",
+      "name": "SPIDER parameterized mechanism inheritance",
+      "description": "LLM agent provided with the parameterized mechanism (induced parameter slots, template, preconditions, postconditions) resolved to the current task parameters. Agent executes the mechanism with bound parameters.",
+      "rationale": "The treatment condition. Tests the core C-LLM-INHERIT hypothesis."
+    }
+  ],
+  "positive_control": {
+    "id": "PC-IDENTICAL",
+    "description": "Task identical to training (0% novelty). All baselines should succeed; literal replay should be optimal. Validates that the measurement infrastructure works and all conditions can execute.",
+    "expected_outcome": "All conditions succeed. Literal replay has lowest cost. SPIDER cost approximately equal to literal replay."
+  },
+  "null_control": {
+    "id": "NC-NO-MECHANISM",
+    "description": "Task with no applicable mechanisms in the SPIDER registry (completely unrelated to training tasks). Tests that SPIDER does not hallucinate mechanisms for unrelated tasks.",
+    "expected_outcome": "SPIDER and literal replay have no applicable mechanisms; cold and retrieval baselines operate normally. SPIDER should abstain or fall back to cold behavior."
+  },
+  "measurement_validity": [
+    "All LLM calls use real API (OpenAI gpt-4o-mini or equivalent) with recorded prompts, responses, tokens, and latency — no mocks, no caching, no simulated responses",
+    "Task corpus consists of 10 REST API tasks on JSONPlaceholder (https://jsonplaceholder.typicode.com) with known solutions and verifiable outcomes",
+    "Novelty fraction is controlled by design: 0% (exact training task), 25% (different ID, same endpoint), 50% (different endpoint, same resource type), 75% (different resource type, same API), 100% (unseen endpoint structure)",
+    "Each task is executed independently across all 4 conditions with fresh LLM context (no cross-contamination)",
+    "Browser interactions are measured via Playwright action count (clicks, navigations, form fills)",
+    "Verification steps are measured via assertion/check calls (HTTP status validation, response schema validation, content validation)",
+    "Token usage is measured via API response usage.prompt_tokens + usage.completion_tokens",
+    "Latency is measured via wall-clock time from task start to verification completion",
+    "Success is defined as: correct HTTP request executed + response validated against expected schema + content contains required fields"
+  ],
+  "decision_rule": "PRIMARY: In the 25-75% novelty range, SPIDER mean total cost must be statistically significantly lower than the minimum of (cold, literal, retrieval) mean total costs, assessed via 5000-sample paired bootstrap at alpha=0.05 (two-sided). SECONDARY: SPIDER success rate must be >= max(cold_success, literal_success, retrieval_success) in the 25-75% novelty range. If PRIMARY fails, the claim is unsupported. If PRIMARY passes but SECONDARY fails, the claim is partially supported with bounded ceiling.",
+  "product_consequence_positive": "C-LLM-INHERIT advances from HYPOTHESIS to EXPERIMENTAL. First real-LLM evidence that parameterized mechanism inheritance reduces workflow cost. Product lane can proceed to broader task corpus (WebArena) and cross-site validation. Promotion path to PRODUCT_CORE opens pending replication.",
+  "product_consequence_negative": "C-LLM-INHERIT remains HYPOTHESIS. The absence of real LLM benefit after 37+ experiments indicates mechanism inheritance may not provide end-to-end value over simpler baselines. Product lane should pivot to alternative differentiation (freshness, delta repair) or accept that SPIDER's value lies in mechanism-level guarantees rather than cost reduction.",
+  "estimated_cost": "Low: ~10 tasks x 3 novelty levels x 4 conditions x ~1000 tokens/task = 120K tokens (~$0.12 at gpt-4o-mini rates). Browser infrastructure (JSONPlaceholder) is free. Total estimated cost: <$1.00 for API calls + setup time.",
+  "expected_information_gain": "HIGH: This is the first experiment testing C-LLM-INHERIT with real LLM API calls after 37+ synthetic/mock experiments. A positive result unblocks the product promotion path. A negative result closes the cost-reduction differentiation thesis and redirects product strategy. Either outcome materially changes the product roadmap."
 }
