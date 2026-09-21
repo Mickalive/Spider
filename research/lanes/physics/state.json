@@ -8,7 +8,7 @@
   "next_question": "Can entropy-rate estimation (H(Y|Z,A) vs H(Y|Z) without per-stratum KL weighting) or Bayesian model comparison detect the 1.52-bit CMI signal on the stochastic 12-state SPA while maintaining null centering, thereby bypassing the plug-in KL bias-variance tradeoff?",
   "promotion_ready": false,
   "consecutive_failures": 0,
-  "updated_at": "2026-09-20T23:30:00.848002+00:00",
+  "updated_at": "2026-09-21T01:38:01.991217+00:00",
   "last_failure_retryable": null,
   "last_handoff_sha256": "95bd92115fa60e23d9d61416f64f918caba9c2a72e7e31b0d526dcbfea6dbcf0",
   "same_failure_count": 0,
