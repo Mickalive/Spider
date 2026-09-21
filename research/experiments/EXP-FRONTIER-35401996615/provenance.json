@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35401996615",
+  "lane": "frontier",
+  "github_run_id": "35401996615",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-21T15:14:30+00:00",
+  "pre_execute_sha": "5e284b4675493434281e3ed87c8d05b563dee4ad",
+  "post_execute_sha": null,
+  "base_sha": "c0540eb3807f7ab9444612d131b085bc9a54a2b2",
+  "parent_experiment": {
+    "experiment_id": "EXP-FRONTIER-34913743596",
+    "handoff_path": "research/experiments/EXP-FRONTIER-35166507552/handoff.json",
+    "handoff_sha256": "42cb65e57b05552abb8861526009da81587355537b2a4c09c33c0add83f7f6bf"
+  },
+  "frozen_inputs": {
+    "request.json": "0c7b22e87685530e1d5ca1f3dafecb7bb1751112605297f713f067cd7d04c005",
+    "spec.json": "4dff938041583f08ea9a91bd88d004d54aded0a5574f86f16f0984d3cdbe9b85",
+    "prereg.md": "090756218b870925085cfcd623cc4c3241038c6ec2401d48e9d7684b6515eca8",
+    "freeze.json": "70bb1d03a0870d835979473327ffed4f4d475f856d3e46b4231798e8ac0a33a3"
+  },
+  "artifacts": {
+    "raw_evidence.json": "75f237d0c498eafb28f65b5fd141b22ffc642a87481795fc81f2a329c4e3b9f0",
+    "result.json": "d1495d40817fd586da70904c8d83a9d3fc833a10274d71ad76534c3936959f19",
+    "report.md": "5e895b73708f66343a667f8848bb865d14adac0777d8f12c086d633d6ed42f9b",
+    "provenance.json": "86ea3baf2a4a805d9ee343daec72342e27c4af2883c3e7d5e64f67703dedc7fd",
+    "run_execute_v3.py": "c9a64c0c3ac8bfda13b60082a9f208ab5c881fe2f1d0b15ca8c22de3a95847d0"
+  },
+  "environment": {
+    "platform": "linux",
+    "python_version": "3.12.14",
+    "numpy_version": "2.5.3",
+    "scipy_version": "1.18.1",
+    "sklearn_version": "1.9.1"
+  },
+  "methodology": {
+    "dgp": "Heterogeneous affine page types (rotation/scaling/translation) with heteroscedastic Gaussian noise, lambda-scaled action effects",
+    "n_page_types": 8,
+    "n_actions": 4,
+    "n_lambda_levels": 8,
+    "sample_sizes_tested": [
+      250,
+      500,
+      1000
+    ],
+    "n_replications": 5,
+    "n_permutation_nulls": 200,
+    "estimators": [
+      "KDE Scott bandwidth KL divergence",
+      "Kraskov kNN MI k=5"
+    ],
+    "key_methodological_change_from_parent": "DGP action_offset scaled by lambda (parent DGP implementation not fully recoverable from spec)",
+    "execution_time_seconds": 566,
+    "total_transitions": "80k+160k+320k=560k"
+  },
+  "key_findings": {
+    "pipeline_validation": "FAIL - KDE CV max 0.350 (parent 0.546-0.604), kNN CV max 0.058 (parent 0.717-0.793)",
+    "positive_control": "FAIL - kNN fails at all n, KDE fails at 250 and 500",
+    "null_control": "FAIL - KDE 6-7/8 at all n, kNN 6-8/8",
+    "cv_trend": "KDE CV decreases with n (0.350->0.296->0.270), consistent with expectation",
+    "root_cause": "DGP implementation mismatch with parent; kNN estimator returns near-constant values"
+  }
+}

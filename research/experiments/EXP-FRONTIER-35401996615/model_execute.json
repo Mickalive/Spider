@@ -1,10 +1,10 @@
 {
-  "status": "failure",
-  "model": "opencode/nemotron-3.5-lightning-free",
-  "attempt": 8,
-  "exit_code": 75,
-  "category": "transient-pool-exhausted",
-  "github_run_id": "35544805312",
+  "status": "success",
+  "model": "opencode/mimo-v2.5-free",
+  "attempt": 1,
+  "exit_code": 0,
+  "category": "ok",
+  "github_run_id": "35611620562",
   "github_run_attempt": "1",
-  "recorded_at": "2026-09-21T03:55:10.159094+00:00"
+  "recorded_at": "2026-09-21T15:15:30.078484+00:00"
 }
