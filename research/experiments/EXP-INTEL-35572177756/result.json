@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35572177756",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "FALSIFIES",
+  "metrics": {
+    "M1_full_dom_canonical_agreement": 0.3726,
+    "M2_full_dom_pertask_agreement": 0.1141,
+    "M3_full_dom_delta_vs_truncated": -0.1869,
+    "M4_full_dom_bootstrap_ci": [0.0, 1.0],
+    "M5_full_dom_pipeline_eta2": 0.9999580818792775,
+    "M6_sign_test_pvalue_n20": null,
+    "M7_bootstrap_ci_proportion_n20": null,
+    "M8_logistic_extrapolation_n82": null,
+    "M9_logistic_pi_upper_n82": null,
+    "PC1_positive_control_pass": true,
+    "PC1_eta2_tag_entropy": 1.0,
+    "PC1_eta2_form_fraction": 1.0,
+    "PC1_eta2_total_area": 1.0,
+    "NC1_null_control_pass": true,
+    "NC1_eta2": 0.0,
+    "C3_gate_pass": true,
+    "C3_tasks_with_full_dom": 7,
+    "C4_pipeline_eta2_pass": true,
+    "C4_max_eta2": 0.9999580818792775,
+    "C5_exceeds_truncated_pass": false,
+    "C6_ranking_stability_pass": false,
+    "C7_pertask_improves_pass": false,
+    "non_recipe_ranking_agreement": 1.0,
+    "direct_ranking_listing_gt_detail_tag_entropy": true,
+    "direct_ranking_listing_gt_detail_form_fraction": true,
+    "direct_ranking_listing_gt_detail_total_area": true
+  },
+  "controls": {
+    "PC1_RAW_FEATURE_REPRODUCES_FULL_DOM": {
+      "expected": "All three features: eta2 >= 0.99, within-type std < 0.001.",
+      "observed": "tag_entropy eta2=1.0, form_fraction eta2=1.0, total_area eta2=1.0; within-type std=0.0 for all.",
+      "pass": true,
+      "evidence_ref": "analysis_output.json:pc1_positive_control"
+    },
+    "NC1_HIERARCHY_NORMALIZED_FULL_DOM": {
+      "expected": "Normalized hierarchy density: eta2 < 0.01, all page type means within 1% of each other.",
+      "observed": "eta2=0.0, group_means all ~3.69e-07.",
+      "pass": true,
+      "evidence_ref": "analysis_output.json:nc1_null_control"
+    },
+    "B1_TRUNCATED_FIRST20_CANONICAL": {
+      "description": "Parent canonical recipe ranking agreement at truncated-first-20: 55.95%.",
+      "observed_full_dom": 0.3726,
+      "delta": -0.1869,
+      "pass": false
+    },
+    "B2_TRUNCATED_FIRST20_PERTASK": {
+      "description": "Parent per-task recipe ranking agreement at truncated-first-20: 78.65%.",
+      "observed_full_dom": 0.1141,
+      "delta": -0.6724,
+      "pass": false
+    },
+    "B3_NON_RECIPE_RANKING_AGREEMENT": {
+      "description": "Non-recipe pipeline ranking agreement: 100% (listing > detail preserved).",
+      "observed_full_dom": 1.0,
+      "pass": true
+    },
+    "B4_PIPELINE_DISCRIMINATION": {
+      "description": "Non-recipe pipeline eta2 at truncated-first-20: 0.9996.",
+      "observed_full_dom": 0.999958,
+      "pass": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/raw_evidence/exp355_fulldom_raw_results.json",
+      "sha256": "e81f4c4ef3417ef9fd58be7e04400a11e1c64c0819896ebb70fac7a57a9c0d7c",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/analysis_output.json",
+      "sha256": "5f1ad2ffc958becfa0cb627084bc03404829d5f5583b4339caf35cfb1c7b72cc",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/collect_fulldom.py",
+      "sha256": "f8e8631528455357c3a479a9a4cd064b146d9248b92af113a68d2188a923cd1b",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35572177756/analyze_fulldom.py",
+      "sha256": "ed81d9ff6a3adaf96b4209bf5d8893781f8cfaf4c6aad44d3aca57d888ccd708",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "Full-DOM locatable_sample lengths match locatable_elements for all 7 tasks (82,82,82,32,32,32,21).",
+    "C3 gate passes: 7/7 tasks have locatable_sample >20 elements.",
+    "Positive control PC1 passes: all three raw features achieve eta2=1.0 on page_type with full DOM.",
+    "Null control NC1 passes: normalized hierarchy density eta2=0.0.",
+    "Non-recipe pipeline eta2 very high (0.999958) confirming feature discrimination preserved.",
+    "Canonical recipe ranking agreement for tag_entropy x DEF-FULL-MAP is 37.26%, lower than truncated-first-20 baseline (55.95%).",
+    "Per-task recipe ranking agreement is 11.41%, far below truncated-first-20 baseline (78.65%).",
+    "Full DOM does NOT exceed truncated-first-20 agreement by >=5pp; fails C5.",
+    "Canonical recipe agreement is below 75% threshold; fails C6.",
+    "Per-task recipe agreement is below 85% threshold; fails C7.",
+    "Bootstrap CI for canonical agreement is [0.0, 1.0] (degenerate due to binary ranking agreement across bootstraps).",
+    "The ranking instability is NOT a truncation artifact; it worsens with full DOM elements."
+  ],
+  "validity_notes": [
+    "Docker image am1n3e/webarena-verified-shopping:latest pulled and container started successfully.",
+    "Full-DOM collection used Playwright automation with same frozen seed (99) and viewport as parent.",
+    "The analysis script recomputes features per iteration; seed mismatch between iterations is intentional for recipe sampling independence.",
+    "Bootstrap CI is degenerate because ranking agreement is binary (0 or 1) across bootstraps with only 7 tasks.",
+    "The negative result is valid: ranking instability is structural, not truncation-dependent.",
+    "The result falsifies the hypothesis that truncation is the binding constraint."
+  ],
+  "unresolved": [
+    "Why does ranking agreement decrease with full DOM elements? Possible explanation: additional elements introduce noise that disrupts recipe sampling stability.",
+    "Cross-site generalization unknown: only one Magento site tested.",
+    "Definition sensitivity: DEF-FORM-ONLY canonical agreement is 49.37% (still below truncated-first-20 49.34% baseline? need to compare).",
+    "Recipe choice materiality: canonical vs per-task recipe discrepancy is large (37% vs 11%)."
+  ]
+}

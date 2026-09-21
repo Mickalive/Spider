@@ -1,0 +1,260 @@
+{
+  "c3_gate": {
+    "tasks_with_locatable_sample_gt20": 7,
+    "total_tasks": 7,
+    "threshold": 5,
+    "pass": true,
+    "element_counts": {
+      "listing_clothing-shoes-jewelry": {
+        "locatable_sample_len": 82,
+        "locatable_elements": 82,
+        "elements_with_bbox": 1550,
+        "total_dom_elements": 1696,
+        "page_type": "product_listing"
+      },
+      "listing_beauty-personal-care": {
+        "locatable_sample_len": 82,
+        "locatable_elements": 82,
+        "elements_with_bbox": 1560,
+        "total_dom_elements": 1707,
+        "page_type": "product_listing"
+      },
+      "listing_electronics": {
+        "locatable_sample_len": 82,
+        "locatable_elements": 82,
+        "elements_with_bbox": 1564,
+        "total_dom_elements": 1712,
+        "page_type": "product_listing"
+      },
+      "detail_camera": {
+        "locatable_sample_len": 32,
+        "locatable_elements": 32,
+        "elements_with_bbox": 1215,
+        "total_dom_elements": 1395,
+        "page_type": "detail"
+      },
+      "detail_vr_bag": {
+        "locatable_sample_len": 32,
+        "locatable_elements": 32,
+        "elements_with_bbox": 1149,
+        "total_dom_elements": 1310,
+        "page_type": "detail"
+      },
+      "detail_pet_camera": {
+        "locatable_sample_len": 32,
+        "locatable_elements": 32,
+        "elements_with_bbox": 1143,
+        "total_dom_elements": 1304,
+        "page_type": "detail"
+      },
+      "cart_1": {
+        "locatable_sample_len": 21,
+        "locatable_elements": 21,
+        "elements_with_bbox": 1070,
+        "total_dom_elements": 1136,
+        "page_type": "cart"
+      }
+    }
+  },
+  "pc1_positive_control": {
+    "pass": true,
+    "features": {
+      "tag_entropy": {
+        "eta2": 1.0,
+        "group_means": {
+          "product_listing": 2.4335368220692315,
+          "detail": 2.514097655573916,
+          "cart": 2.599389591616702
+        },
+        "within_stds": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        }
+      },
+      "form_fraction": {
+        "eta2": 1.0,
+        "group_means": {
+          "product_listing": 0.6829268292682927,
+          "detail": 0.96875,
+          "cart": 0.9523809523809523
+        },
+        "within_stds": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        }
+      },
+      "total_area": {
+        "eta2": 1.0,
+        "group_means": {
+          "product_listing": 817818.828125,
+          "detail": 767047.71875,
+          "cart": 429679.53125
+        },
+        "within_stds": {
+          "product_listing": 0.0,
+          "detail": 0.0,
+          "cart": 0.0
+        }
+      }
+    }
+  },
+  "nc1_null_control": {
+    "pass": true,
+    "eta2": 0.0,
+    "group_means": {
+      "product_listing": 3.693777130463341e-07,
+      "detail": 3.693777130463341e-07,
+      "cart": 3.693777130463341e-07
+    }
+  },
+  "non_recipe_pipeline": {
+    "eta2": {
+      "tag_entropy x DEF-FULL-MAP": {
+        "eta2": 0.9999206310187592,
+        "group_means": {
+          "product_listing": 0.01325230246324368,
+          "detail": 0.0020725486980655407,
+          "cart": 0.0018116514941408598
+        }
+      },
+      "form_fraction x DEF-FULL-MAP": {
+        "eta2": 0.9982339424801895,
+        "group_means": {
+          "product_listing": 0.010911581016770358,
+          "detail": 0.0059926018257162456,
+          "cart": 0.004672897196261682
+        }
+      },
+      "total_area x DEF-FULL-MAP": {
+        "eta2": 0.9996271952191169,
+        "group_means": {
+          "product_listing": 53.148846894794616,
+          "detail": 17.880398944794127,
+          "cart": 14.251737733644859
+        }
+      },
+      "tag_entropy x DEF-FORM-ONLY": {
+        "eta2": 0.9999580818792775,
+        "group_means": {
+          "product_listing": 0.012493932374416976,
+          "detail": 0.00109633714034292,
+          "cart": 0.0009058257470704299
+        }
+      },
+      "form_fraction x DEF-FORM-ONLY": {
+        "eta2": 0.9995640935366124,
+        "group_means": {
+          "product_listing": 0.00962786560303267,
+          "detail": 0.0034243439004092834,
+          "cart": 0.002803738317757009
+        }
+      },
+      "total_area x DEF-FORM-ONLY": {
+        "eta2": 0.999924188500069,
+        "group_means": {
+          "product_listing": 47.65420393709053,
+          "detail": 7.225954188971471,
+          "cart": 6.251241238317757
+        }
+      }
+    },
+    "max_eta2": 0.9999580818792775,
+    "c4_pass": true
+  },
+  "recipe_results": {
+    "tag_entropy x DEF-FULL-MAP": {
+      "canonical_eta2_mean": 0.9282601544628127,
+      "canonical_eta2_std": 0.005608152105835017,
+      "canonical_ranking_agreement_mean": 0.3726,
+      "canonical_ranking_agreement_std": 0.014423745853433664,
+      "pertask_eta2_mean": 0.4321868133939935,
+      "pertask_eta2_std": 0.007461436722530329,
+      "pertask_ranking_agreement_mean": 0.11410000000000001,
+      "pertask_ranking_agreement_std": 0.01193919781410981
+    },
+    "tag_entropy x DEF-FORM-ONLY": {
+      "canonical_eta2_mean": 0.7499671747866208,
+      "canonical_eta2_std": 0.01413077665518653,
+      "canonical_ranking_agreement_mean": 0.49369999999999997,
+      "canonical_ranking_agreement_std": 0.014063743772157158,
+      "pertask_eta2_mean": 0.4575222961578272,
+      "pertask_eta2_std": 0.009347190435261775,
+      "pertask_ranking_agreement_mean": 0.1202,
+      "pertask_ranking_agreement_std": 0.007627435858647242
+    },
+    "form_fraction x DEF-FULL-MAP": {
+      "canonical_eta2_mean": 0.9289174723766688,
+      "canonical_eta2_std": 0.005741182428704674,
+      "canonical_ranking_agreement_mean": null,
+      "canonical_ranking_agreement_std": 0.0,
+      "pertask_eta2_mean": 0.3424256447769217,
+      "pertask_eta2_std": 0.007746492213600723,
+      "pertask_ranking_agreement_mean": null,
+      "pertask_ranking_agreement_std": 0.0
+    },
+    "form_fraction x DEF-FORM-ONLY": {
+      "canonical_eta2_mean": 0.7463607153817525,
+      "canonical_eta2_std": 0.014014826396900023,
+      "canonical_ranking_agreement_mean": null,
+      "canonical_ranking_agreement_std": 0.0,
+      "pertask_eta2_mean": 0.37858869963730535,
+      "pertask_eta2_std": 0.010505815616258053,
+      "pertask_ranking_agreement_mean": null,
+      "pertask_ranking_agreement_std": 0.0
+    },
+    "total_area x DEF-FULL-MAP": {
+      "canonical_eta2_mean": 0.9292195409975865,
+      "canonical_eta2_std": 0.005730971240658023,
+      "canonical_ranking_agreement_mean": null,
+      "canonical_ranking_agreement_std": 0.0,
+      "pertask_eta2_mean": 0.396439069466944,
+      "pertask_eta2_std": 0.006803180163816985,
+      "pertask_ranking_agreement_mean": null,
+      "pertask_ranking_agreement_std": 0.0
+    },
+    "total_area x DEF-FORM-ONLY": {
+      "canonical_eta2_mean": 0.746502703711665,
+      "canonical_eta2_std": 0.014016234652825789,
+      "canonical_ranking_agreement_mean": null,
+      "canonical_ranking_agreement_std": 0.0,
+      "pertask_eta2_mean": 0.438059863559888,
+      "pertask_eta2_std": 0.009718091593885531,
+      "pertask_ranking_agreement_mean": null,
+      "pertask_ranking_agreement_std": 0.0
+    }
+  },
+  "c5_full_dom_exceeds_truncated": {
+    "canonical_agreement": 0.3726,
+    "threshold": 0.6095,
+    "pass": false
+  },
+  "c6_ranking_stability": {
+    "canonical_agreement": 0.3726,
+    "threshold": 0.75,
+    "pass": false
+  },
+  "c7_pertask_improves": {
+    "pertask_agreement": 0.11410000000000001,
+    "threshold": 0.85,
+    "pass": false
+  },
+  "bootstrap_ci": {
+    "mean": 0.345,
+    "std": 0.4756061408363029,
+    "ci_lower": 0,
+    "ci_upper": 1,
+    "n_bootstraps": 1000
+  },
+  "verdict": {
+    "c1_pass": true,
+    "c2_pass": true,
+    "c3_pass": true,
+    "c4_pass": true,
+    "c5_pass": false,
+    "c6_pass": false,
+    "c7_pass": false,
+    "overall": false
+  }
+}
