@@ -1,0 +1,22 @@
+[15:15:39] === EXP-RUNTIME-35611612543 EXECUTE start ===
+[15:15:39] registry 48 cells 74 keys
+[15:15:40] PHASE 0 infra
+[15:15:40] PHASE0 warmup 9/10 HIT origin_up=True
+[15:15:40] PHASE1 LOCALHOST 48x5
+[15:15:40] PHASE1 240/240
+[15:15:40] PHASE2 FRESH HIT 48x5 populate+test
+[15:16:29] PHASE2 FRESH 240/240 HIT=240
+[15:16:29] PHASE3 SWR stale HIT 48x5
+[15:22:29] PHASE3 SWR 240/240 HIT=120 stale_verified=120
+[15:22:29] PHASE4 SIE stale HIT with origin error 48x5
+[15:22:37] PHASE4 SIE 240/240 HIT=0
+[15:22:37] PHASE5 304 Not Modified 48x5
+[15:22:42] PHASE5 304 0/240 status304, correct_substrate=240
+[15:22:42] PHASE6 200 re-fetched after expiry 48x5
+[15:23:54] PHASE6 REFETCH 240/240 HIT=0 MISS=240
+[15:23:54] PHASE7 null controls identity + corrupted
+[15:23:57] PHASE7 identity 15/15 corrupt false_accepts 0/6
+[15:23:57] PHASE8 baselines on DYNAMIC+HIT+STALE wire bytes
+[15:23:57] PHASE8 oracle_guided 2041/2047 fixed 2041/2047
+[15:23:57] VERDICT MIXED conditions {"PRIMARY_ALL_STAGES_1.0": {"pass": true, "value": "{'STAGE1_FRESH': 1.0, 'STAGE2_SWR': 1.0, 'STAGE3_SIE': 1.0, 'STAGE4_304': 1.0, 'STAGE5_REFETCH': 1.0}"}, "SECONDARY_A_ZERO_FAILURES": {"pass": true, "value": "960/960"}, "SECONDARY_B_ZERO_FALSE_ACCEPTS": {"pass": true, "value": "0/6"}, "SECONDARY_C_ORACLE_REGRESSION": {"pass": false, "value": "2041/2047"}, "SECONDARY_D_FIXED_ORDER": {"pass": false, "value": "2041/2047"}}
+[15:23:58] === done ===

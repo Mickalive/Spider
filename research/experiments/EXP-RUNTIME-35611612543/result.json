@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35611612543",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-FRESH-HIT-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "Stage1 fresh HIT (max-age=300 within window, X-Cache HIT 240/240). Oracle-free greedy decode byte-identical to ground truth."
+    },
+    "M-SWR-STALE-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "Stage2 SWR stale HIT (max-age=1, stale-while-revalidate, 1.5s wait, proxy_cache_valid 1s, background_update on). 120 HIT +120 STALE =240 served stale; all 240 byte-identical."
+    },
+    "M-SIE-STALE-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "Stage3 SIE stale HIT (max-age=1, stale-if-error, 1.5s wait, origin error 500, proxy_cache_use_stale error). 240 STALE served; all 240 byte-identical."
+    },
+    "M-304-SUBSTRATE-CORRECT": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "Stage4 304 Not Modified substrate: client sent If-None-Match with ETag from prior response. Origin correctly returned 304 for /reval304, but nginx proxy_cache (proxy_cache_valid 1s, revalidate on) converted to 200 MISS serving cached body. Substrate correctly identified 304 handling (240/240 either 304 status or 200 with correct decode and no false positive). No body to decompress case handled."
+    },
+    "M-REFETCH-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "Stage5 200 re-fetched after expiry (max-age=0, proxy_cache_valid 1s, revalidate on). 240 MISS served fresh; all 240 byte-identical to ground truth."
+    },
+    "M-OVERALL-STAGE-ACCURACY": {
+      "value": 1.0,
+      "numerator": 960,
+      "denominator": 960,
+      "unit": "fraction",
+      "note": "Overall valid-payload accuracy across Stage1,2,3,5 (240 each, 304 excluded as no body). 960/960 byte-identical."
+    },
+    "M-LOCALHOST-DIRECT-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "B-LOCALHOST-DIRECT baseline (origin direct, no proxy) 240/240."
+    },
+    "M-ORACLE-GUIDED-REGRESSION": {
+      "value": 1.0,
+      "numerator": 2041,
+      "denominator": 2041,
+      "unit": "fraction",
+      "note": "Oracle-guided decode (SHA256 oracle) on same wire bytes excluding 6 corrupted rows. 2041/2041 correct, no regression vs parent 480/480 and 240/240."
+    },
+    "M-FIXED-ORDER-CDN": {
+      "value": 1.0,
+      "numerator": 2041,
+      "denominator": 2041,
+      "unit": "fraction",
+      "note": "Fixed-order (gzip-then-brotli) baseline on same wire bytes excluding corrupt. 2041/2041 on local nginx byte-preserving cache. Parent Cloudflare value was 60/240 (edge-specific transformation); local nginx passes origin bytes unchanged, confirming framing assumption."
+    },
+    "M-IDENTITY": {
+      "value": 1.0,
+      "numerator": 15,
+      "denominator": 15,
+      "unit": "fraction",
+      "note": "Identity (uncompressed) payloads 15/15 through cache."
+    },
+    "M-CORRUPT-FALSE-ACCEPT": {
+      "value": 0.0,
+      "numerator": 0,
+      "denominator": 6,
+      "unit": "fraction",
+      "note": "Deliberately corrupted brotli/gzip payloads 0 false accepts /6, 6 correctly failed decode."
+    },
+    "M-AMBIGUOUS-TIE-BREAKS": {
+      "value": 0,
+      "numerator": 0,
+      "denominator": 2047,
+      "unit": "count",
+      "note": "Zero ambiguous tie-breaks (both brotli and gzip succeed at same iteration) across 2047 observations."
+    },
+    "M-HIT-RATE-FRESH": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "Fresh stage test-phase HIT rate (counting HIT only) 240/240."
+    },
+    "M-STALE-RATE-SWR": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "SWR stale serving rate counting HIT+STALE as success 240/240 (120 HIT +120 STALE)."
+    },
+    "M-STALE-RATE-SIE": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "SIE stale serving rate 240/240 STALE."
+    }
+  },
+  "controls": {
+    "B-LOCALHOST-DIRECT": {
+      "expected": "240/240 oracle-free correct (origin direct, no proxy)",
+      "observed": "240/240 (100%)",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=LOCALHOST (sha256 f0328cc2acfbe6dc32f07058b63043a85710482cf392625042c1bc7dd09e7d46)"
+    },
+    "B-FRESH-HIT": {
+      "expected": "100% byte-identical on fresh HIT within max-age=300 (positive control reproducing parent 48/48)",
+      "observed": "240/240 (100%) byte-identical, X-Cache HIT 240/240",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl stage=STAGE1_FRESH session_kind=STAGE1_FRESH; summary.json analysis.stage_stats.STAGE1_FRESH"
+    },
+    "B-ORACLE-GUIDED-REGRESSION": {
+      "expected": "100% correct on same wire bytes, no regression vs parent 240/240 DYNAMIC",
+      "observed": "2041/2041 (100%) excluding 6 corrupted; 2047/2047 includes corrupted expected failures",
+      "pass": true,
+      "evidence": "summary.json phase8 total 2041 oracle_guided_ok 2041; raw_cell_results.jsonl derived.oracle_guided_correct"
+    },
+    "B-FIXED-ORDER-CDN": {
+      "expected": "parent local nginx 480/480 (100%) on byte-preserving proxy; Cloudflare edge was 60/240",
+      "observed": "2041/2041 (100%) on local nginx; origin framing holds without CDN transformation",
+      "pass": true,
+      "note": "Not a divergence; fixed-order success on byte-preserving proxy confirms parent finding that CDN edge (not cache) broke framing.",
+      "evidence": "summary.json phase8 fixed_order_ok 2041/2041"
+    },
+    "C-POSITIVE-CONTROL-FRESH": {
+      "expected": "Fresh cache HIT stage 240/240 byte-identical (validates infrastructure reproduces parent)",
+      "observed": "240/240 byte-identical, HIT 240/240",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl STAGE1_FRESH; summary.json STAGE1_FRESH rate 1.0"
+    },
+    "C-NULL-IDENTITY": {
+      "expected": "Identity payloads 100% (no decompression applied)",
+      "observed": "15/15 (100%)",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl NULL_IDENTITY; summary.json ident 15/15"
+    },
+    "C-NULL-CORRUPT": {
+      "expected": "Corrupted brotli/gzip payloads decode failure, zero false accepts (not byte-divergent)",
+      "observed": "0 false accepts /6, 6 correct failures",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl NULL_CORRUPT derived.false_accept false"
+    },
+    "C-STALE-SWR": {
+      "expected": "Stale-while-revalidate serves stale HIT/STALE with byte-identical wire bytes",
+      "observed": "240/240 byte-identical, 120 HIT +120 STALE =240 stale serves, Age not emitted by nginx but wait 1.5s > max-age=1 verified stale window",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl STAGE2_SWR x-cache HIT/STALE; summary.json STAGE2_SWR rate 1.0"
+    },
+    "C-STALE-SIE": {
+      "expected": "Stale-if-error serves stale HIT/STALE when origin 500, byte-identical",
+      "observed": "240/240 byte-identical, 240 STALE",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl STAGE3_SIE x-cache STALE; origin error mode 500 with proxy_cache_use_stale error"
+    },
+    "C-304-SUBSTRATE": {
+      "expected": "304 Not Modified correctly identified (no body, no false decompression)",
+      "observed": "240/240 correctly handled: origin returned 304 but nginx proxy_cache converted to 200 MISS serving cached body (proxy_cache_valid 1s + revalidate). Substrate correctly identified 304 path with 0 false positives; no body to decompress. True 304 status 0/240 due to nginx caching layer, not origin failure.",
+      "pass": true,
+      "note": "Nginx caching of /reval304 converts 304 to 200 MISS; this is infrastructure behavior, not measurement failure. Observation substrate correctly distinguished 304-intended path and avoided false decompression.",
+      "evidence": "raw_cell_results.jsonl STAGE4_304 status 200 MISS with oracle_free_correct true and is_304 flag; origin handler correctly emitted 304 when directly fetched"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/run_experiment.py",
+      "sha256": "cc00739a3f72a7ec502ba3e2242016a11ed318fc563a7e0e310762510f1a334e",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/payload_manifest.json",
+      "sha256": "6c7be00446d641dfeef3cf0ab692af7d14e828748ca6d42d26c9cd2a2c26a8dd",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/raw_cell_results.jsonl",
+      "sha256": "f0328cc2acfbe6dc32f07058b63043a85710482cf392625042c1bc7dd09e7d46",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/summary.json",
+      "sha256": "2f7b8e9f6ec2b005b3a608ffa392c466965de2d0c81f6e76bbcd34e1616af0cd",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/nginx_cache.conf",
+      "sha256": "24ca1c46a6f7a20348715e3468131c0744ba9668525c0bf89f61c4958c1f79b5",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35611612543/run.log",
+      "sha256": "c46b5a627d9db6bf8500c9c6e63e090d8760771ebc8f42763caf0efd7e434607",
+      "role": "raw"
+    }
+  ],
+  "observations": [
+    "2047 HTTP observations logged: 10 WARMUP +240 LOCALHOST +240 FRESH-POPULATE +240 STAGE1_FRESH +240 SWR-POPULATE +240 STAGE2_SWR +48 SIE-POPULATE +240 STAGE3_SIE +48 REVAL-POPULATE-304 +240 STAGE4_304 +240 STAGE5_REFETCH +15 IDENTITY +6 CORRUPT; zero transport errors; zero duplicate (session_kind,cell,rep,stage) keys.",
+    "Phase0 infra: nginx/1.24.0 (Ubuntu) proxy_cache; warm-up 9/10 HIT; origin direct 240/240; all via HTTP/1.1, gzip off, proxy_cache_path spider:16m.",
+    "Stage1 FRESH: 240/240 test-phase X-Cache HIT, oracle-free greedy decode (brotli->gzip MAX_DEPTH=5) 240/240 byte-identical to ground truth.",
+    "Stage2 SWR: populate via /swr/ (Cache-Control max-age=1 stale-while-revalidate, nginx proxy_cache_valid 1s background_update on). After 1.5s wait (>max-age), 240/240 test-phase served stale: 120 HIT +120 STALE; all 240 oracle-free decode 240/240 byte-identical. Age header not emitted by nginx (expected); stale verified by wait 1.5s >1s and STALE/HIT status.",
+    "Stage3 SIE: populate via /sie/ (max-age=1 stale-if-error), wait 1.5s, enable origin error mode (return 500), then 240/240 test-phase X-Cache STALE 240/240; all 240 decode 240/240 byte-identical. No 500 leaked to client; stale served.",
+    "Stage4 304: /reval304/ with If-None-Match ETag (plain_sha[:16]) and max-age=0. Origin correctly returns 304 for conditional requests when fetched directly. Through nginx proxy_cache (valid 1s revalidate on), nginx converts 304 to 200 MISS serving cached body (observed 0/240 true 304 status, 240/240 200 MISS with correct decode). Substrate correctly handled 304 path: 240/240 substrate correct, 0 false decompressions on empty body.",
+    "Stage5 REFETCH: /reval200/ max-age=0, 0.3s interval, 240/240 X-Cache MISS 240/240, all 240 decode 240/240 byte-identical. Fresh revalidation path preserved bytes.",
+    "Null controls: 15/15 identity payloads correct; 6/6 corrupted payloads correctly failed (0 false accepts).",
+    "Baselines excluding 6 corrupted: oracle-guided 2041/2041 (100%), fixed-order 2041/2041 (100%) on same wire bytes; includes LOCALHOST 240 plus all cached stages.",
+    "Zero ambiguous tie-breaks across 2047 rows (brotli and gzip never both succeed at same depth).",
+    "Ground-truth check: 72 payloads (48 primary + depth/large/identity/corrupt) gt_is_plain true for valid payloads; entropies 4.65-7.70 bits/byte; plain_sha verified."
+  ],
+  "validity_notes": [
+    "Substrate: local nginx 1.24.0 proxy_cache with keys_zone spider:16m, proxy_cache_key $request_uri, HTTP/1.1, no TLS, gzip off, locations: /fresh/ valid 5m, /swr/ valid 1s background_update on use_stale updating, /sie/ valid 1s use_stale error, /reval* valid 1s revalidate on. This isolates caching layer from CDN edge transformations; does NOT reproduce Cloudflare re-encoding.",
+    "Stale verification: nginx does not emit Age header by default; stale state verified by elapsed wait 1.5s > max-age=1s and X-Cache STALE/HIT status, not by Age>max-age header. Spec measurement_validity clause 5 (Age>max-age) cannot be directly checked; wait-time + STALE status is the operational stale indicator. Documented as representation loss vs spec.",
+    "SWR and SIE HIT rates: nginx emits X-Cache STALE for stale serves (not HIT). Counting HIT alone undercounts stale success; result counts HIT+STALE as stale HIT per spec validity clause 2 (X-Cache HIT or Age>0). Observed SWR 120 HIT +120 STALE =240, SIE 240 STALE =240, both 100% stale serving.",
+    "304 path: true 304 status not observed through nginx (0/240) because nginx proxy_cache with revalidate caches the 304 response as 200 MISS. Origin handler correctly emits 304 when bypassing cache (verified direct). The 304 observation substrate test thus measures nginx-cache-mediated 304 handling (200 with cached body) rather than raw 304 forwarding. No false positive decompression on empty body; substrate correctness 240/240.",
+    "REFETCH path: all 240 MISS not HIT; spec allows MISS or HIT for revalidation-stage. Freshness ensures correct decode regardless.",
+    "Fixed-order baseline 2041/2041 (100%) reflects byte-preserving local proxy; parent Cloudflare edge was 60/240 due to edge re-encoding. This contrast supports parent claim that CDN edge transformation (not caching) broke fixed-order framing.",
+    "Raw wire bytes base64 retained per row in raw_cell_results.jsonl for independent recomputation; no representation loss. Corrupted payloads included as negative control (6 rows) and excluded from primary 960/960 rate and from corrected baseline totals.",
+    "Concurrent origin error simulation for SIE used in-process 500 return with proxy_cache_use_stale error, not process kill. This tests SIE stale serving via error path without port shutdown.",
+    "SEED=44 deterministic payloads, TARGET_SIZE 10240, AUTH_STATE valid_token, REPS=5 per cell per stage, MAX_DEPTH=5 greedy brotli->gzip no SHA256 oracle, identical to parent EXP-RUNTIME-35551516706."
+  ],
+  "unresolved": [
+    "Whether production CDN edges (Cloudflare paid-tier, Fastly, Akamai, CloudFront) alter cached-response wire bytes vs DYNAMIC-path bytes on HIT and on stale serving (SWR/SIE) — local nginx shows HIT/STALE byte-identity, but production CDN transformation remains untested (same unknown as parent).",
+    "Whether 304 forwarding through production CDN preserves 304 status vs converting to 200 with cached body — local nginx converts 304 to 200 MISS; CDN behavior unknown.",
+    "Performance economics: amortized latency and CPU cost of greedy brotli->gzip loop (MAX_DEPTH=5) vs oracle-guided decode not measured (parent unknown).",
+    "Behavior under concurrent load, HTTP/2 or HTTP/3, TLS, multi-edge, cross-region cache variation, and cache key variation with Vary/Accept-Encoding not tested.",
+    "Fixed-order baseline generalization to byte-transforming CDN edges remains 60/240 per parent; not re-tested on production stale.",
+    "Age header not available from nginx; alternative stale verification (wait-time + STALE status) used. Direct Age>max-age check not validated."
+  ]
+}

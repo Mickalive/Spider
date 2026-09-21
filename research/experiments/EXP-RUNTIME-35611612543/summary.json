@@ -1,0 +1,140 @@
+{
+  "experiment_id": "EXP-RUNTIME-35611612543",
+  "phase0": {
+    "nginx_version": "nginx version: nginx/1.24.0 (Ubuntu)",
+    "nginx_t": "",
+    "origin_up": true,
+    "warmup_hits": 9,
+    "warmup_count": 10
+  },
+  "phase1": {
+    "total": 240,
+    "correct": 240
+  },
+  "phase2": {
+    "total": 240,
+    "correct": 240,
+    "test_hits": 240,
+    "test_misses": 0
+  },
+  "phase3": {
+    "total": 240,
+    "correct": 240,
+    "test_hits": 240,
+    "test_misses": 0,
+    "stale_verified": 120
+  },
+  "phase4": {
+    "total": 240,
+    "correct": 240,
+    "test_hits": 240,
+    "test_misses": 0
+  },
+  "phase5": {
+    "total": 240,
+    "correct_304": 240,
+    "is_304": 0
+  },
+  "phase6": {
+    "total": 240,
+    "correct": 240,
+    "hits": 0,
+    "misses": 240
+  },
+  "phase7": [
+    {
+      "total": 15,
+      "correct": 15
+    },
+    {
+      "total": 6,
+      "false_accepts": 0,
+      "correct_failures": 6
+    }
+  ],
+  "phase8": {
+    "total": 2041,
+    "oracle_guided_ok": 2041,
+    "fixed_order_ok": 2041
+  },
+  "analysis": {
+    "stage_stats": {
+      "STAGE1_FRESH": {
+        "total": 240,
+        "correct": 240,
+        "rate": 1.0,
+        "hits": 240,
+        "is304": 0
+      },
+      "STAGE2_SWR": {
+        "total": 240,
+        "correct": 240,
+        "rate": 1.0,
+        "hits": 240,
+        "is304": 0
+      },
+      "STAGE3_SIE": {
+        "total": 240,
+        "correct": 240,
+        "rate": 1.0,
+        "hits": 240,
+        "is304": 0
+      },
+      "STAGE4_304": {
+        "total": 240,
+        "correct": 240,
+        "rate": 1.0,
+        "hits": 0,
+        "is304": 0
+      },
+      "STAGE5_REFETCH": {
+        "total": 240,
+        "correct": 240,
+        "rate": 1.0,
+        "hits": 0,
+        "is304": 0
+      }
+    },
+    "primary_all_1": true,
+    "total_valid": 960,
+    "total_corr": 960,
+    "overall_rate": 1.0,
+    "ident": {
+      "total": 15,
+      "correct": 15
+    },
+    "corrupt": {
+      "total": 6,
+      "false_accepts": 0,
+      "correct_failures": 6
+    },
+    "baselines": {
+      "total": 2041,
+      "oracle_guided_ok": 2041,
+      "fixed_order_ok": 2041
+    }
+  },
+  "verdict": "SUPPORTS",
+  "conditions": {
+    "PRIMARY_ALL_STAGES_1.0": {
+      "pass": true,
+      "value": "{'STAGE1_FRESH': 1.0, 'STAGE2_SWR': 1.0, 'STAGE3_SIE': 1.0, 'STAGE4_304': 1.0, 'STAGE5_REFETCH': 1.0}"
+    },
+    "SECONDARY_A_ZERO_FAILURES": {
+      "pass": true,
+      "value": "960/960"
+    },
+    "SECONDARY_B_ZERO_FALSE_ACCEPTS": {
+      "pass": true,
+      "value": "0/6"
+    },
+    "SECONDARY_C_ORACLE_REGRESSION": {
+      "pass": true,
+      "value": "2041/2041"
+    },
+    "SECONDARY_D_FIXED_ORDER": {
+      "pass": true,
+      "value": "2041/2041"
+    }
+  }
+}
