@@ -31,7 +31,7 @@ permissions:
 
 concurrency:
   group: spider-r2-factory-pulse
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   direction:
