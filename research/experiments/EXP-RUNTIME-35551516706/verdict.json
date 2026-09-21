@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "lane": "runtime",
+  "decision": "SUPPORTS — Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for 100% of cached responses (330/330 cached-path observations, 240/240 primary 48x5 HIT, 45/45 depth 3-5, 30/30 >100KB, 15/15 identity, 6/6 stability) through a byte-preserving local nginx 1.24.0 proxy_cache reverse proxy in front of a Python origin. DYNAMIC and HIT wire bytes are byte-identical for 48/48 cells. All frozen decision-rule conditions C1-C8 pass. Audit PASS confirms all recomputed metrics match producer. The parent's 0% HIT rate on Cloudflare free-tier quick tunnel was an infrastructure ceiling, not a negative scientific result. The HIT sub-question is closed for nginx-class byte-preserving caches. Claim ceiling bounded to local nginx; production CDN HIT serving remains untested.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "Oracle-free greedy decode validated for cached responses on byte-preserving local nginx proxy_cache: 330/330 cached-path obs byte-identical to ground truth, 48/48 DYNAMIC-vs-HIT wire bytes identical, 6/6 stability groups stable, 0 ambiguous tie-breaks, all C1-C8 pass, audit PASS confirms recomputed metrics. This closes the HIT sub-question for nginx-class byte-preserving caches (parent EXP-RUNTIME-35544804817 had 0% HIT on Cloudflare free-tier, infra ceiling). However, claim cannot advance to VALIDATED because: (a) production CDN edge HIT serving (Cloudflare paid-tier, Fastly, Akamai, CloudFront) remains untested — audit V1 explicitly bounds ceiling to nginx-class byte-preserving caches; (b) cache freshness edge cases (expiry, revalidation, 304) not exercised; (c) HTTP/2, H3, concurrent load, multi-edge behavior untested; (d) performance economics (greedy loop latency/CPU vs oracle-guided) unmeasured. The runtime sub-question for local caching infrastructure is resolved positively. The production CDN sub-question remains the blocking gap."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses on a production Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses — and does the CDN alter wire bytes on cache serve?",
+  "reason": "All 10 frozen decision conditions pass (C1: 48/48 primary HIT cells, C2: 330/330>=90%, C3: 6/6 stability, C4: 15/15 identity, C5: 45/45 depth>=80%, C6: 30/30 large>=80%, C7: 0 ambiguous, C8: 48/48 byte-identical DYNAMIC-vs-HIT, positive control 240/240, null control 48/48). Audit PASS confirms all 12 recomputed metrics match producer (0/1078 SHA mismatches, 0 duplicate keys, 0 transport errors). The frozen verdict mapping (C1 pass AND C2 pass AND C8 pass AND all others pass) yields SUPPORTS. The claim ceiling is explicitly bounded: local nginx 1.24.0 proxy_cache (proxy_cache_key $request_uri, 5m validity, gzip off, HTTP/1.1, no TLS) does not reproduce CDN edge re-encoding behavior. Whether real CDN edges alter cached-response wire bytes vs DYNAMIC-path bytes remains the critical unknown. Parent's Cloudflare free-tier 0% HIT rate was an infra ceiling confirmed as such by this experiment's success on local nginx.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35551516706/request.json sha256 6a911a9d6dea8412f6fefc3fd8d0929cda79bd6d31ee0cc84d1cda1ebace5bb4",
+    "research/experiments/EXP-RUNTIME-35551516706/spec.json sha256 403ab5a338ac65340793435cb7260f99c1ef65bf4cdf4ab0153a7dca9d7ecddc",
+    "research/experiments/EXP-RUNTIME-35551516706/prereg.md sha256 9043c0abce3f489401a30480531c275fb372f45d856aef40285141ebe6f54262",
+    "research/experiments/EXP-RUNTIME-35551516706/freeze.json sha256 frozen 2026-09-21T07:20:47.100476+00:00",
+    "research/experiments/EXP-RUNTIME-35551516706/result.json sha256 b04b5c88362da521bb07068b11c347c2cb12a3b4d27c9ee72bf1d3810afab0c4 — 330/330 cached-path, 240/240 DYNAMIC, 240/240 LOCALHOST, all controls pass",
+    "research/experiments/EXP-RUNTIME-35551516706/audit.json status=PASS producer_claim_supported=true — V1 substrate byte-preserving proxy not CDN edge (medium), V2 fresh HIT not stale (low), V3 single edge HTTP/1.1 (low), V4 HIT rate denominator (info), V5 no representation loss (info)",
+    "research/experiments/EXP-RUNTIME-35551516706/report.md SUPPORTS outcome, all C1-C8 pass, interpretation bounded to nginx-class",
+    "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl sha256 7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7 — 1078 rows, 0 dups, 0 sha mismatches",
+    "research/experiments/EXP-RUNTIME-35551516706/hit_vs_dynamic.json sha256 9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217 — 48/48 identical",
+    "research/experiments/EXP-RUNTIME-35551516706/summary.json sha256 ba119d2a70c76e27cf4037d0310fd46850872c178fb9c51a8572e1c29474aa4e",
+    "research/experiments/EXP-RUNTIME-35551516706/provenance.json sha256 dafea9e8a9c522bef2b9f642f0eb38fd20bfd02e25d5b4a2332cc395bd39f60d",
+    "research/experiments/EXP-RUNTIME-35551516706/nginx_cache.conf sha256 c6ef7a22c5ef8cdbc31cfe33f693301b94bfdd37d67d6452b34fa3d56e383436",
+    "research/experiments/EXP-RUNTIME-35544804817/handoff.json sha256 f465013f9b38a59ac3fb13496184988e02571acd5c711d2d6eef3d74cbb93ac3 — parent DYNAMIC-only 240/240, 0% HIT ceiling, established/rejected/unknown state"
+  ]
+}
