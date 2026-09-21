@@ -79,6 +79,11 @@ jobs:
       - name: Scout lane — general reconnaissance
         id: scout
         if: ${{ steps.install.outputs.ready == 'true' }}
+        env:
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "480"
+          SPIDER_MODEL_STALL_SECONDS: "180"
+          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_MODEL_RETRY_DELAY_SECONDS: "10"
         shell: bash
         run: |
           set +e
@@ -100,6 +105,11 @@ jobs:
       - name: Global Research Director — choose lane objectives
         id: director
         if: ${{ steps.scout.outputs.ready == 'true' }}
+        env:
+          SPIDER_MODEL_MAX_RUNTIME_SECONDS: "480"
+          SPIDER_MODEL_STALL_SECONDS: "180"
+          SPIDER_MODEL_MAX_ATTEMPTS: "4"
+          SPIDER_MODEL_RETRY_DELAY_SECONDS: "10"
         shell: bash
         run: |
           set +e
