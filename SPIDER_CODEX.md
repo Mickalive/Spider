@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **215**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **216**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -225,6 +225,7 @@ Validated experiments: **215**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-PRODUCT-35611617123 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `2f64ee8b0fe4` |
 | EXP-GRAPH-35611618323 | graph | PASS | FALSIFIES per frozen decision_rule — C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity. | C-FRESHNESS | `d97f60164fab` |
 | EXP-PRODUCT-35651924708 | product | BLOCKED | BLOCKED | C-LLM-INHERIT | `8a4a4e234519` |
+| EXP-INTEL-35651934683 | intel | REVISE | SURVIVES_CURRENT_TEST — frozen decision rule passes: condition (1) M1>=0.5 satisfied by WebArena shopping (1.0) and VisualWebArena (1.0); condition (2) M2>=0.5 satisfied by WebArena shopping (0.8) and Mind2Web (0.65); condition (3) M3=true satisfied by Mind2Web official 3-way split. However, the claim ceiling is strictly bounded by audit: this is a distributed structural-documentation survey only. No direct dataset inspection performed. Mind2Web M1=0.8182 is inflated from hardcoded instance_count=10 (audit VF1; empirical mean 4.42 gives corrected M1=0.311). M2 values are heuristic estimates from scoring rules, not measured fractions of task instances with variable fields (audit VF2). PC1/NC1 controls are tautological — they test scoring code output, not independent benchmark structure verification (audit VF3). No single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits (audit VF4). Cross-site mechanism sharing is assumed from documentation, not verified on task samples (audit VF5). Mind2Web novelty-fraction split guarantees instance-level separation but not same-mechanism overlap across train/test (audit VF6). Transformation costs inherited from EXP-INTEL-33925056324, not re-measured (audit VF7). The frozen decision_rule is satisfied; the producer's SUPPORTS outcome is valid under distributed interpretation. But the maximum justified ceiling is: public documentation suggests WebArena shopping (imposed cross-site pairs, 12 stores sharing platform) and Mind2Web (official instance-level splits) provide complementary structural properties that *could* support C-LLM-INHERIT experiment design pending dataset-level verification of mechanism sharing, duplication fraction, and parameterization prevalence. This is not a validated ranked suitability list for SPIDER execution. | C-LLM-INHERIT, C-CROSSSITE, C-RESIDUAL-NOVELTY | `98a79bab85bc` |
 
 ## Latest recorded claim events
 
@@ -232,11 +233,12 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35651934683 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35611618323 | graph |
-| C-LLM-INHERIT | BLOCKED | EXP-PRODUCT-35651924708 | product |
+| C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35651934683 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35611612543 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
+| C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-INTEL-35651934683 | intel |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
 | C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35578258358 | physics |
