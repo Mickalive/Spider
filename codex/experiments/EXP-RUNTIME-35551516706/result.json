@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35551516706",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "M-HIT-RATE": {
+      "value": 0.9455,
+      "numerator": 312,
+      "denominator": 330,
+      "unit": "fraction",
+      "note": "X-Cache: HIT among all cached-path test observations. 18/330 non-HIT are first-population requests for depth/large/identity payloads (resource not yet cached); among observations of an already-cached resource (x-cache==HIT) the rate is 312/312 = 1.0. Primary HIT path alone: 240/240 = 1.0."
+    },
+    "M-ORACLE-FREE-HIT-ACCURACY": {
+      "value": 1.0,
+      "numerator": 330,
+      "denominator": 330,
+      "unit": "fraction",
+      "note": "Oracle-free greedy decode byte-identical to ground truth for all cached-path observations (HIT test 240 + HIT-IDENTITY 15 + HIT-DEPTH 45 + HIT-LARGE 30). Among x-cache==HIT rows only: 312/312 = 1.0."
+    },
+    "M-ORACLE-FREE-DYNAMIC-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "DYNAMIC path (cache-busted URLs, all X-Cache: MISS) through local nginx proxy."
+    },
+    "M-ORACLE-FREE-LOCALHOST-ACCURACY": {
+      "value": 1.0,
+      "numerator": 240,
+      "denominator": 240,
+      "unit": "fraction",
+      "note": "B-LOCALHOST-DIRECT positive control, origin direct (no proxy)."
+    },
+    "M-ORACLE-GUIDED-REGRESSION": {
+      "value": 1.0,
+      "numerator": 480,
+      "denominator": 480,
+      "unit": "fraction",
+      "note": "B-ORACLE-GUIDED-REGRESSION over same wire bytes (DYNAMIC+HIT). No regression vs parent 240/240 DYNAMIC."
+    },
+    "M-FIXED-ORDER-CDN": {
+      "value": 1.0,
+      "numerator": 480,
+      "denominator": 480,
+      "unit": "fraction",
+      "note": "B-FIXED-ORDER-CDN over same wire bytes (DYNAMIC+HIT). Parent's Cloudflare value was 60/240; local nginx does not transform bytes, so origin framing holds 100%. Confirms parent's established finding that the CDN edge (not byte corruption) broke the framing assumption."
+    },
+    "M-BYTES-IDENTICAL": {
+      "value": 1.0,
+      "numerator": 48,
+      "denominator": 48,
+      "unit": "fraction",
+      "note": "C8: DYNAMIC vs HIT wire bytes (body sha256 + base64 + Content-Encoding + Content-Length) identical for all 48 primary cells."
+    },
+    "M-DEPTH-ACCURACY": {
+      "value": 1.0,
+      "numerator": 45,
+      "denominator": 45,
+      "unit": "fraction",
+      "note": "Depth 3/4/5 stacked encodings, 3 types x 3 depths x 5 reps, through nginx cache."
+    },
+    "M-LARGE-ACCURACY": {
+      "value": 1.0,
+      "numerator": 30,
+      "denominator": 30,
+      "unit": "fraction",
+      "note": "Large payloads >100KB (target 150000), 3 types x 2 orders x 5 reps, through nginx cache."
+    },
+    "M-STABILITY-GROUPS": {
+      "value": 6,
+      "numerator": 6,
+      "denominator": 6,
+      "unit": "groups",
+      "note": "6/6 groups byte-stable across 3 consecutive requests (1s apart) and correctly decoded."
+    },
+    "M-IDENTITY": {
+      "value": 1.0,
+      "numerator": 15,
+      "denominator": 15,
+      "unit": "fraction",
+      "note": "Uncompressed identity payloads served through cache; oracle-free decode returns bytes unchanged."
+    },
+    "M-AMBIGUOUS": {
+      "value": 0,
+      "numerator": 0,
+      "denominator": 1078,
+      "unit": "count",
+      "note": "Zero ambiguous tie-breaks (both brotli and gzip decode succeeding at one step) across all 1078 observations."
+    }
+  },
+  "controls": {
+    "B-LOCALHOST-DIRECT": {
+      "expected": "240/240 oracle-free correct (origin direct, no proxy)",
+      "observed": "240/240",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=LOCALHOST (sha256 7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7)"
+    },
+    "B-ORACLE-GUIDED-REGRESSION": {
+      "expected": ">= parent regression (Cloudflare DYNAMIC 240/240) on same wire bytes",
+      "observed": "480/480 (DYNAMIC 240 + HIT 240)",
+      "pass": true,
+      "evidence": "summary.json analysis.metrics.M-ORACLE-GUIDED-REGRESSION"
+    },
+    "B-FIXED-ORDER-CDN": {
+      "expected": "parent Cloudflare 60/240 reproduced; on byte-preserving local proxy origin framing is expected to hold (no CDN transformation)",
+      "observed": "480/480 (100%)",
+      "pass": true,
+      "note": "Not a divergence: the prereg's 60/240 expected value is Cloudflare-edge-specific. Local nginx passes origin bytes through unchanged, so fixed-origin-order framing succeeds 100%, consistent with parent's established claim 'CDN does not corrupt bytes'.",
+      "evidence": "summary.json analysis.metrics.M-FIXED-ORDER-CDN"
+    },
+    "B-DYNAMIC-VS-HIT-IDENTITY": {
+      "expected": "DYNAMIC and HIT wire bytes byte-identical for >=90% of cells (null control for 'cache alters bytes on serve')",
+      "observed": "48/48 cells (100%)",
+      "pass": true,
+      "evidence": "hit_vs_dynamic.json (sha256 9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217)"
+    },
+    "B-DEPTH-GENERALIZATION": {
+      "expected": ">=80% of depth 3-5 observations correct",
+      "observed": "45/45 (100%)",
+      "pass": true,
+      "evidence": "summary.json analysis.metrics.M-DEPTH-ACCURACY"
+    },
+    "B-LARGE-PAYLOAD": {
+      "expected": ">=80% of >100KB observations correct",
+      "observed": "30/30 (100%)",
+      "pass": true,
+      "evidence": "summary.json analysis.metrics.M-LARGE-ACCURACY"
+    },
+    "C-CACHE-MISS-KEY-NEGATIVE": {
+      "expected": "unique cache-busting URLs never produce X-Cache: HIT (cache key = URI only)",
+      "observed": "DYNAMIC 240/240 X-Cache: MISS",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=DYNAMIC"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/run_experiment.py",
+     "sha256": "8ad331efa6dde6ace02cc54e4799936db1ef243d4e03a10f655945e45d176569",
+     "role": "code"},
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/payload_manifest.json",
+     "sha256": "4f0ca35cfc376eecfd5c831968b3da76d02e4ff2c4257f73fc38525032590594",
+     "role": "fixture"},
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/raw_cell_results.jsonl",
+     "sha256": "7563c068152fa05aa7010a68ca040707bb0527a4343d9b66020d5742a86d75a7",
+     "role": "raw"},
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/summary.json",
+     "sha256": "ba119d2a70c76e27cf4037d0310fd46850872c178fb9c51a8572e1c29474aa4e",
+     "role": "derived"},
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/hit_vs_dynamic.json",
+     "sha256": "9703ec713e583b15c1287b8540efb1416033c32e98c639c7bfd988d1ef7fb217",
+     "role": "derived"},
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/nginx_cache.conf",
+     "sha256": "c6ef7a22c5ef8cdbc31cfe33f693301b94bfdd37d67d6452b34fa3d56e383436",
+     "role": "fixture"},
+    {"path": "research/experiments/EXP-RUNTIME-35551516706/run.log",
+     "sha256": "dafea9e8a9c522bef2b9f642f0eb38fd20bfd02e25d5b4a2332cc395bd39f60d",
+     "role": "raw"}
+  ],
+  "observations": [
+    "1078 HTTP observations logged (10 warmup + 240 LOCALHOST + 240 DYNAMIC + 240 HIT-POPULATE + 240 HIT + 18 STABILITY + 15 HIT-IDENTITY + 45 HIT-DEPTH + 30 HIT-LARGE); zero transport errors; zero duplicate (session_kind, cell, rep) keys.",
+    "Phase 0 infrastructure: nginx/1.24.0 (Ubuntu) with proxy_cache; warm-up of 10 consecutive GETs to one fixed URL produced X-Cache MISS,HIT,HIT,HIT,HIT,HIT,HIT,HIT,HIT,HIT (9/10 HIT; first request is the cache populate).",
+    "DYNAMIC path: 240/240 responses carried X-Cache: MISS (unique cache-busting query per request; cache key is $request_uri) - confirms the cache is actually engaged and keyed by URI only.",
+    "Primary HIT path: populate+test, 48 cells x 5 reps with 1-3s delay between populate and test; 240/240 test-phase responses carried X-Cache: HIT; 48 populate responses were MISS (first populate of each cell), 192 were HIT (subsequent populate requests).",
+    "Oracle-free greedy decode (try brotli then gzip iteratively, MAX_DEPTH=5, no SHA256 oracle) produced byte-identical output to ground truth for 1078/1078 observations (every session kind).",
+    "C8 identity: for all 48 primary cells the DYNAMIC-path wire bytes and HIT-path wire bytes are identical (body sha256, base64, Content-Encoding, Content-Length). Cache HIT serving did not alter bytes.",
+    "Cache stability: 6/6 groups (2 JSON, 2 HTML, 1 BINARY, 1 large JSON) byte-stable over 3 consecutive requests 1s apart; X-Cache sequence MISS,HIT,HIT in each group.",
+    "Depth generalization: 45/45 observations (depth 3,4,5 x JSON/HTML/BINARY x 5 reps) decoded correctly; all served cached (36 HIT test observations after 9 first-population requests).",
+    "Large payloads: 30/30 observations (3 types x 2 orders x 5 reps, target 150000 bytes) decoded correctly; 24 HIT + 6 first-population requests.",
+    "Identity payloads: 15/15 served through cache decoded correctly (12 HIT + 3 first-population requests).",
+    "Regression baselines on the same 480 wire-byte observations (DYNAMIC+HIT): oracle-guided decode 480/480; fixed-origin-order decode 480/480 (local nginx does not transform bytes).",
+    "Zero ambiguous tie-breaks were observed in any of the 1078 rows (brotli and gzip decodes never both succeeded at the same iteration).",
+    "Ground-truth check: for all 72 registered payloads, fullbody_decompress(compressed) == plain body (gt_is_plain true); payload entropies range 4.66-7.70 bits/byte."
+  ],
+  "validity_notes": [
+    "Substrate: local nginx 1.24.0 (Ubuntu) as a caching reverse proxy (proxy_cache, keys_zone spider:16m, proxy_cache_key $request_uri, proxy_cache_valid 200 5m) in front of a local Python origin (Cache-Control: public, max-age=300), HTTP/1.1, no TLS. This intentionally isolates the caching layer from CDN edge transformations; it does NOT reproduce Cloudflare's re-encoding behavior.",
+    "M-HIT-RATE 0.9455 (312/330) counts all cached-path test observations; the 18 non-HIT rows are the first (populate) request of depth/large/identity fixed URLs where the resource was not yet cached. Among responses to an already-cached resource (x-cache==HIT) accuracy and byte-identity are 312/312 = 1.0.",
+    "Depth/large/identity phases used one request per rep on a fixed URL (populate then HIT), i.e., populated-cache serves, not fresh-cache first requests; all decode-correct either way.",
+    "No byte transformation by nginx was observed (C8 identity 48/48 and fixed-order baseline 480/480), so claims about real CDN serving (e.g., Cloudflare re-encoding on cache serve) must NOT be extrapolated from this experiment; the parent's Cloudflare findings remain the only evidence for edge transformation.",
+    "Raw response body base64 is retained for every row in raw_cell_results.jsonl, allowing independent recomputation of all derived measurements; no representation loss.",
+    "Timeout/transport robustness: all 1078 requests completed with status 200; no retries required.",
+    "The claim ceiling of this run is oracle-free greedy decode accuracy on nginx-cached responses from a byte-preserving local proxy; Cloudflare free-tier,DYNAMIC-only, 0%-HIT-rate ceiling from the parent remains unmodified."
+  ],
+  "unresolved": [
+    "Whether real CDN edge caches (Cloudflare etc.) alter cached-response wire bytes vs their DYNAMIC-path bytes (parent could not observe HIT responses on Cloudflare free tier; local nginx shows byte-identity, so the CDN-transformation hypothesis is untested here, only nginx-cache behavior is).",
+    "Whether oracle-free greedy decode generalizes to real-world CDN cached payloads whose framing differs from origin layering (requires an actual CDN HIT observation)",
+    "Fixed-order decode behavior on a byte-transforming CDN (parent: 60/240) versus byte-preserving proxy (here: 480/480) - the discriminator is the CDN edge, not the caching layer.",
+    "Cache freshness edge cases (expiry, revalidation, 304/REVALIDATED states) were not exercised; all serves were within the 300s max-age window."
+  ]
+}

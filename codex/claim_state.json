@@ -1299,6 +1299,16 @@
         "reason": "MIXED outcome: threshold increases at 100% overlap only (not gradual as hypothesized), FP binding at 75%+ not >=25%. Audit REVISE: overlap operationalization flawed (code shift 0.09*overlap_pct/100 produces 0% actual overlap at 25%/50%), threshold grid coarse discrete [0.20,0.25,...], orthogonality marginal failure at 75% (CI upper 0.1549 > 0.15, possible sample-size artifact). Claim ceiling narrowed: calibrated threshold 0.20 survives label shift up to 75% (actual overlap ~8%, FP=0.0958 < 0.10) on localhost mock only. FP constraint becomes binding only at 75% overlap (actual overlap ~8%, FP=0.0958) and 100% overlap (actual overlap ~33%, FP=0.35 forces threshold to 0.25). Orthogonality TOST delta=0.15 holds at 4/5 overlap conditions (r -0.004 to 0.036), marginal failure at 75% (r=0.066 CI upper 0.1549). Discrimination 0.8333 and 4/4 noise types remain effective. No evidence for production OAuth/OIDC, CDN, network RTT, DB sessions, or non-uniform production refresh distributions. Do NOT promote to PRODUCT_CORE or VALIDATED."
       },
       {
+        "experiment_id": "EXP-GRAPH-35572179326",
+        "lane": "graph",
+        "created_at": "2026-09-21T07:16:35.190383+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "1c510af579c9340bbd609b666b13ddcefd3fcf73",
+        "claim_id": "C-FRESHNESS",
+        "status": "EXPERIMENTAL",
+        "reason": "No change to claim status. Infrastructure failure (RSA key sharing + JSON serialization) prevents any valid distributed measurement. This experiment adds zero new evidence for or against distributed C-FRESHNESS orthogonality. Maximum justified ceiling remains from prior packets: LOCAL CONFIRMED at delta=0.15 (EXP-GRAPH-35530590140: r=0.0410, CI upper 0.116, TOST p=0.002, n_non304=684, C1-C7 all PASS, audit PASS) and distributed SUPPORTED by primary metric only (EXP-GRAPH-35538864957: r=-0.0585, CI upper 0.0163 < 0.15, TOST p=2.03e-08, n_non304=688, audit PASS on primary metric, but C1 fails due to 304 inclusion). This run reconfirms B-LOCAL-ONLY (r=0.0233, n=844) and B-CONCURRENT (r=0.0233, n=860) but provides no distributed data."
+      },
+      {
         "experiment_id": "EXP-PRODUCT-35572180893",
         "lane": "product",
         "created_at": "2026-09-21T07:16:35.771903+00:00",
@@ -2515,6 +2525,16 @@
         "claim_id": "C-MEAS-VALID",
         "status": "HYPOTHESIS",
         "reason": "No new evidence accumulated for or against this claim. The frozen decision_rule triggers MEASUREMENT_INVALID (C1 PASS, C2 FAIL) because strict monotonicity requires F(10)>F(5) but F(5)=F(10)=0.0 \u2014 a specification design flaw (prereg text says 'from n=10 to n=20' but frozen rule includes n=5). The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance (audit VF5): it is the true data-generating process at training points, not an independent model that could be validated. C1 PASS is trivially true by construction, not evidence of predictive power. C3 FAIL (linear extrapolation predicts F(50)=0.9602, F(82)=1.3813 > 1.0 impossible) demonstrates the frozen linear method is misspecified for bounded [0,1] quantities. This is a measurement validity gate failure, not a scientific result. All four prior parametric/non-parametric approaches also failed: Phi(mean(SNR_i)) 40-50pp (EXP-INTEL-35476271877), Phi(mean/std) 17.8pp (EXP-INTEL-35530590171), Phi(median/std) 34.59pp + sign-fraction power law 12.39pp (EXP-INTEL-35538868377). No validated extrapolation model exists. Claim ceiling unchanged."
+      },
+      {
+        "experiment_id": "EXP-RUNTIME-35551516706",
+        "lane": "runtime",
+        "created_at": "2026-09-21T01:38:01.489599+00:00",
+        "decision": "SUPPORTS \u2014 Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth for 100% of cached responses (330/330 cached-path observations, 240/240 primary 48x5 HIT, 45/45 depth 3-5, 30/30 >100KB, 15/15 identity, 6/6 stability) through a byte-preserving local nginx 1.24.0 proxy_cache reverse proxy in front of a Python origin. DYNAMIC and HIT wire bytes are byte-identical for 48/48 cells. All frozen decision-rule conditions C1-C8 pass. Audit PASS confirms all recomputed metrics match producer. The parent's 0% HIT rate on Cloudflare free-tier quick tunnel was an infrastructure ceiling, not a negative scientific result. The HIT sub-question is closed for nginx-class byte-preserving caches. Claim ceiling bounded to local nginx; production CDN HIT serving remains untested.",
+        "source_commit": "93d1d253fbbb28dd1dd2232e3888b061c5f0be85",
+        "claim_id": "C-MEAS-VALID",
+        "status": "EXPERIMENTAL",
+        "reason": "Oracle-free greedy decode validated for cached responses on byte-preserving local nginx proxy_cache: 330/330 cached-path obs byte-identical to ground truth, 48/48 DYNAMIC-vs-HIT wire bytes identical, 6/6 stability groups stable, 0 ambiguous tie-breaks, all C1-C8 pass, audit PASS confirms recomputed metrics. This closes the HIT sub-question for nginx-class byte-preserving caches (parent EXP-RUNTIME-35544804817 had 0% HIT on Cloudflare free-tier, infra ceiling). However, claim cannot advance to VALIDATED because: (a) production CDN edge HIT serving (Cloudflare paid-tier, Fastly, Akamai, CloudFront) remains untested \u2014 audit V1 explicitly bounds ceiling to nginx-class byte-preserving caches; (b) cache freshness edge cases (expiry, revalidation, 304) not exercised; (c) HTTP/2, H3, concurrent load, multi-edge behavior untested; (d) performance economics (greedy loop latency/CPU vs oracle-guided) unmeasured. The runtime sub-question for local caching infrastructure is resolved positively. The production CDN sub-question remains the blocking gap."
       },
       {
         "experiment_id": "EXP-INTEL-35551517470",
