@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35572177756",
+  "lane": "intel",
+  "target_lane": "product",
+  "next_question": "Given that recipe density is permanently closed for this framework, should the Product lane evaluate total_area-based non-recipe density for MIXED handling economics (eta2 > 0.999 but no recipe sampling), or should the Intel lane investigate the mechanism of ranking degradation with full DOM to determine whether alternative element-selection strategies (e.g., feature-discriminative subsampling rather than canonical recipe) could recover stability?",
+  "why_next": "This experiment definitively answers the long-standing open question: ranking instability is NOT a truncation artifact. Full DOM elements (n=21-82) degrade rather than improve ranking agreement. The recipe density design path is permanently closed for this definition x recipe x feature framework on template-homogeneous sites. The Product lane must evaluate whether non-recipe density (which preserves discrimination at eta2 > 0.999 but has its own direct-vs-pipeline ranking inversion on tag_entropy/form_fraction) is viable for MIXED handling, or whether the 31x recipe material gap (EXP-INTEL-35264637598) becomes actionable only with total_area-based density. The Intel lane should also investigate the mechanism of degradation: within-type clone homogeneity means ranking instability is driven entirely by recipe sampling randomness over non-discriminative elements; this is a different failure mode than the parent's truncated-range instability.",
+  "carry_forward": {
+    "established": [
+      "Ranking instability under recipe sampling is STRUCTURAL, not a truncation artifact: canonical agreement 37.26% at full DOM vs 55.95% at truncated-first-20 (−18.7pp), per-task 11.41% vs 78.65% (−67.2pp). Full DOM makes things WORSE (EXP-INTEL-35572177756 result.json M1=0.3726, M2=0.1141, C5/C6/C7 all FAIL; audit REVISE confirms direction)",
+      "Non-recipe pipeline discrimination preserved at full DOM: max eta2 0.99996 (EXP-INTEL-35572177756 analysis_output.json non_recipe_pipeline.max_eta2). But non-recipe pipeline does NOT preserve direct ranking for tag_entropy/form_fraction on full DOM — pipeline lists listing > detail while direct shows detail > listing (audit VF3, direct means listing 2.434 < detail 2.514 for tag_entropy)",
+      "Within-type clone degeneracy: all 3 listing tasks have identical tag distributions Counter(A:26,SPAN:16,BUTTON:15,FORM:14,DIV:7,LABEL:2,INPUT:2), all 3 detail identical. Drives eta2=1.0 and within_std=0.0. Recipe sampling instability is purely from recipe randomness, not genuine page-type variance (audit VF4)",
+      "OECD/COINr pipeline eta2 > 0.999 preserved on full DOM for all feature x definition combinations (analysis_output.json non_recipe_pipeline.max_eta2=0.999958)",
+      "Sample-size effect on ranking agreement is REAL and MONOTONIC within truncated-first-20: 0% at n=5/10 to 50% at n=15 to 56% at n=20 (Spearman=1.0). But full DOM (n=21-82) reverses the trend (inherited from parent EXP-INTEL-35551517470 + this experiment)",
+      "Per-task recipe achieves 78.65% at truncated-first-20 but collapses to 11.41% at full DOM — more elements per task is worse for per-task recipe stability (EXP-INTEL-35572177756 M2)",
+      "Bootstrap CI for canonical agreement is degenerate [0,1] due to binary ranking across bootstraps with N=7 tasks and within-type clone degeneracy (analysis_output.json bootstrap_ci ci_lower=0 ci_upper=1)"
+    ],
+    "rejected": [
+      "Truncation-artifact hypothesis (H1 >=80% at full DOM, H2 >=+10pp improvement, H3 >=85% per-task) — REJECTED: canonical 37.26% < 75% (F1), full DOM does NOT exceed truncated (F2), per-task 11.41% < 75% (F3). Falsified for tag_entropy x DEF-FULL-MAP on this Magento site",
+      "Recipe density viable for MIXED handling with canonical recipe — REJECTED: ranking instability worsens with full DOM; recipe density is permanently closed for this framework",
+      "Per-task recipe can stabilize rankings — REJECTED: collapses from 78.65% to 11.41% at full DOM. Per-task recipe is MORE unstable than canonical with additional elements",
+      "Non-recipe pipeline preserves direct ranking for tag_entropy/form_fraction on full DOM — REJECTED: direct ranking detail > listing, pipeline ranking listing > detail (audit VF3). Only total_area preserves listing > detail",
+      "ALL six model-based extrapolation approaches (Phi(mean/SNR_i), Phi(mean/std), Phi(median/std), sign-fraction power law, empirical CDF linear extrapolation, bounded saturating functions) — REJECTED: none produced validated extrapolation (inherited from parent EXP-INTEL-35551517470)",
+      "Ranking instability is PURELY a sample-size artifact within truncated-first-20 range — REJECTED: plateaus at 56% at n=20 and reverses at full DOM (inherited from parent)"
+    ],
+    "unknown": [
+      "Mechanism of degradation: WHY does canonical agreement drop −18.7pp and per-task collapse −67pp at full DOM? Producer hypothesizes extra elements dilute discriminative signal, but no per-element discriminative analysis provided; element-level feature variance not dissected. Within-type clone homogeneity means recipe sampling is over non-discriminative elements — is this specific to template-homogeneous sites?",
+      "Whether the direct vs pipeline ranking inversion for tag_entropy/form_fraction is general or specific to this Magento template homogeneity. Audit VF3 notes inversion is driven by pipeline density normalization by elements_with_bbox (listing ~1550 vs detail ~1150) distorting ranking when ewb differs systematically by page type",
+      "Cross-site generalization: only one Magento Docker site tested. Template-homogeneous clones within type may make this site a special case. Whether more heterogeneous sites show different ranking stability is unknown",
+      "Whether feature-discriminative subsampling (selecting elements with highest between-type discriminative power rather than canonical recipe) could recover ranking stability at full DOM",
+      "Whether the 31x recipe material gap (EXP-INTEL-35264637598) is actionable under non-recipe density with total_area as the ranking-preserving feature",
+      "Definition sensitivity: DEF-FORM-ONLY canonical agreement is 49.37% at full DOM — still below truncated baseline? Exact comparison not provided by producer",
+      "Whether total_area-based non-recipe density is sufficient for MIXED handling economics given its eta2 > 0.999 but potential sensitivity to page layout changes"
+    ],
+    "do_not_assume": [
+      "That non-recipe pipeline preserves direct page-type ranking for all features on full DOM — it INVERTS for tag_entropy/form_fraction (audit VF3). Only total_area preserves listing > detail",
+      "That within-type clone degeneracy (identical locatable_samples per type) is specific to this experiment — it was also present at truncated-first-20 (inherited). But it limits generalizability of eta2=1.0 and bootstrap CI degeneracy",
+      "That the Bootstrap CI [0,1] represents genuine uncertainty about the agreement level — it is degenerate due to binary ranking across bootstraps with N=7 and within-type clones",
+      "That the falsification generalizes to all sites, definitions, or recipes — it is bounded to this single Magento site with template-homogeneous clones, 3 features, 2 definitions, 2 recipes, viewport 1280x720, seed 99",
+      "That pipeline eta2 > 0.999 implies ranking preservation — eta2 measures variance explained, not ranking direction. Pipeline can have high eta2 while inverting the direct ranking",
+      "That the recipe density approach is universally closed — it may work on sites with more heterogeneous within-type element distributions where recipe sampling captures discriminative elements",
+      "That this experiment provides evidence about the broader C-MEAS-VALID claim regarding measurement validity of feature-weighted density — it tests only ranking stability under recipe sampling, not measurement validity per se",
+      "That the Docker container and full-DOM collection methodology are validated for other sites — collection was only tested on this single Magento site"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35572177756/raw_evidence/exp355_fulldom_raw_results.json sha256 e81f4c4ef3417ef9fd58be7e04400a11e1c64c0819896ebb70fac7a57a9c0d7c — full-DOM raw data",
+    "research/experiments/EXP-INTEL-35572177756/analysis_output.json sha256 5f1ad2ffc958becfa0cb627084bc03404829d5f5583b4339caf35cfb1c7b72cc — full analysis output",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a — truncated-first-20 baseline data",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — truncated-first-20 raw density data",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 — frozen analysis script",
+    "Docker image: am1n3e/webarena-verified-shopping:latest sha256 3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35572177756/result.json status=COMPLETE outcome=FALSIFIES M1=0.3726 M2=0.1141 M3=-0.1869 C5=false C6=false C7=false",
+    "research/experiments/EXP-INTEL-35572177756/analysis_output.json recipe_results canonical 0.3726 pertask 0.1141 non_recipe_pipeline max_eta2 0.999958 bootstrap_ci [0,1]",
+    "research/experiments/EXP-INTEL-35572177756/audit.json status=REVISE producer_claim_supported=true claim_ceiling bounded VF1-VF6 B3 misreporting correction within_type_clone_degeneracy",
+    "research/experiments/EXP-INTEL-35572177756/spec.json decision_rule C1-C7 falsifier F1-F4",
+    "research/experiments/EXP-INTEL-35551517470/handoff.json sha256=ce6224a979be8a76f57b2d20931c09611135007c533b518c258648f929bf2d27 parent established/rejected/unknown/do_not_assume",
+    "research/experiments/EXP-INTEL-35572177756/provenance.json docker digest environment artifacts"
+  ],
+  "recommended_action": "Route to Product lane for MIXED handling strategy decision. Recipe density is permanently closed for this definition x recipe x feature framework on template-homogeneous sites. Product lane should evaluate: (1) total_area-based non-recipe density viability (only feature preserving direct ranking, eta2 > 0.999); (2) impact of 31x recipe material gap (EXP-INTEL-35264637598) under non-recipe density; (3) whether the direct vs pipeline ranking inversion for tag_entropy/form_fraction is acceptable for MIXED handling or disqualifying. If Intel lane continues, investigate mechanism of degradation: feature-discriminative element subsampling (selecting high-discriminative-power elements rather than canonical recipe) as an alternative to full DOM recipe sampling, and cross-site testing on more heterogeneous Magento sites."
+}
