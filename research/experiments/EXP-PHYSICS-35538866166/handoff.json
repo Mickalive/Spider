@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35538866166",
+  "lane": "physics",
+  "target_lane": "physics",
+  "next_question": "Can Bayesian model comparison (Bayes factor for action-dependent vs action-independent transition model via nested model comparison) or likelihood-ratio tests between nested Markov and beyond-Markov models detect the 1.52-bit CMI signal on the stochastic 12-state SPA while maintaining valid null centering, thereby bypassing the Laplace smoothing bias that affects both plug-in KL and entropy-rate CMI histogram estimators?",
+  "why_next": "The frozen FALSIFIED-IN-SETTING verdict closes the entropy-rate CMI pathway on the stochastic 12-state SPA: the per-stratum KL bias is NOT estimator-specific — entropy-rate CMI exhibits the same irreconcilable tradeoff as plug-in KL. The root cause is Laplace smoothing on discrete spaces with many cells (the (z,a) space has n_a times more cells than the z-only space, and pseudo-counts add artificial uncertainty proportional to cell count). The CMI estimation program on discrete SPAs with Laplace smoothing is now exhausted across plug-in KL (parent, alpha sweep), entropy-rate (this experiment), KSG CMI k=5 (parent, insensitive), and LR chi2 (parent, history collapse). The next orthogonal attack vectors are estimators that do NOT use histogram smoothing: Bayesian model comparison (nested model Bayes factor), likelihood-ratio tests, or continuous-state estimators (KDE, kNN with bias correction, neural density estimators). If all discrete CMI estimators fail, the Physics lane must pivot to production Web data with continuous state representations.",
+  "carry_forward": {
+    "established": [
+      "True I(Y;A|Z) = 1.52 bits on stochastic 12-state SPA (audit-confirmed, parent chain)",
+      "Plug-in KL alpha sweep tradeoff is monotonic and irreconcilable on this SPA at N=5000: alpha=0 K3=1.377 but |null|=0.924; alpha=1.0 |null|=0.064 but K3=0.099. No crossover. (EXP-PHYSICS-35530591329)",
+      "Entropy-rate CMI does NOT bypass the per-stratum KL bias: ALL alphas (0.1, 0.5, 1.0) fail C1 (|null_mean| >= 0.1 bits: 0.240, 0.200, 0.275). The bias is intrinsic to Laplace smoothing, not the KL divergence formulation. (EXP-PHYSICS-35538866166)",
+      "Laplace smoothing inflates H(Y|Z,A) more than H(Y|Z) because the (z,a) conditioning space has n_a times more cells. At alpha>=0.5, this produces negative CMI values (artifacts). Deterministic SPA construct validation also fails at alpha>=0.5. (EXP-PHYSICS-35538866166 audit V1, V3)",
+      "Corrected P(z) denominator (audit V1) yields small positive CMI (0.12/0.05 at alpha 0.5/1.0) but still fails C3 (<0.5 bits). The FALSIFIED verdict is robust to this implementation bug.",
+      "KSG CMI k=5 is k-invariant but insensitive (K3=0.000560). LR chi2 collapses history (K2=K3 exactly). Both closed on this SPA class. (EXP-PHYSICS-35482477045, EXP-PHYSICS-35476270440)",
+      "Design verification: 48/48 (state,action) pairs with 4 distinct candidates, 2 non-empty stratum size buckets. (EXP-PHYSICS-35538866166)",
+      "Null centering at alpha=1.0 for plug-in KL is robust (|mean|=0.064), but this specific estimator property does not transfer to entropy-rate CMI."
+    ],
+    "rejected": [
+      "Plug-in KL estimator class with Laplace smoothing alpha in {0, 0.01, 0.1, 0.5, 1.0} for simultaneous C1+C3 on stochastic 12-state SPA at N=5000: FALSIFIED. (EXP-PHYSICS-35530591329)",
+      "Entropy-rate CMI (H(Y|Z)-H(Y|Z,A) via Laplace-smoothed histogram, alpha in {0.1, 0.5, 1.0}) for simultaneous C1+C3 on this SPA: FALSIFIED. (EXP-PHYSICS-35538866166)",
+      "Hypothesis that per-stratum KL bias is estimator-specific (entropy-rate bypasses it): FALSIFIED. Bias is intrinsic to Laplace smoothing on discrete spaces with high cell counts.",
+      "KSG CMI k=5 for CMI detection on discrete SPA: insensitive (K3=0.000560). (EXP-PHYSICS-35482477045)",
+      "LR chi2 for beyond-Markov detection: history collapse (K2=K3 exactly). (EXP-PHYSICS-35476270440)",
+      "Hyperparameter tuning (reduced smoothing alpha<=0.1) as remedy for plug-in KL: FALSIFIED. (EXP-PHYSICS-35530591329)",
+      "Deterministic/stochastic strata mixing as cause of bias: FALSIFIED. CANDIDATES redesign yields 0% deterministic strata but bias identical. (EXP-PHYSICS-35470449605)",
+      "Bias-corrected estimators (equal-weight, median, KNN) as remedy: FALSIFIED. (EXP-PHYSICS-35445596894)"
+    ],
+    "unknown": [
+      "Whether Bayesian model comparison (Bayes factor action-dependent vs action-independent) detects the signal with valid null centering",
+      "Whether likelihood-ratio tests between nested Markov and beyond-Markov models bypass the Laplace smoothing bias",
+      "Whether non-smoothed estimators (KDE, kNN with bias correction, neural density estimators) avoid the cell-count inflation problem",
+      "Whether N=50000 resolves the tradeoff for any estimator (parent exploratory suggests bias is asymptotic)",
+      "Whether per-(state,action) PMI signal (1.46-1.69 bits) can serve as alternative detection paradigm without CMI aggregation",
+      "Whether production Web transitions with continuous state representations exhibit different bias characteristics",
+      "Whether the consistent positive K3-K2 differences (0.08-0.19 bits across alphas) represent genuine beyond-Markov signal or residual smoothing asymmetry"
+    ],
+    "do_not_assume": [
+      "This FALSIFIED-IN-SETTING verdict closes C-WEB-DYNAMICS or the Physics lane. It closes only the entropy-rate CMI pathway on this specific SPA class. Alternative estimators and non-smoothed approaches remain untested.",
+      "CMI estimation is fundamentally impossible on discrete SPAs. MLE alpha=0 recovers K3=1.377 bits; per-stratum PMI 1.46-1.69 bits. The signal IS detectable; the failure is Laplace-smoothing-specific.",
+      "The 1.52-bit true CMI is undetectable. The signal is strong and confirmed by multiple independent measurements.",
+      "Production Web transitions generalize from this synthetic 12-state SPA. SPA has hash routing, 4 candidates per (state,action), no anti-bot, auth, visual complexity, or production stochasticity.",
+      "The consistent K3-K2 differences (0.08-0.19 bits) are evidence for or against beyond-Markov dynamics. They may be residual smoothing asymmetry between K2 (n_z=1438) and K3 (n_z=841) cell counts.",
+      "Entropy-rate CMI is worse than plug-in KL at all smoothing levels. At alpha=1.0 plug-in KL passes C1 (|null|=0.064) while entropy-rate fails (|null|=0.275), but this is alpha-specific not estimator-class-specific."
+    ]
+  },
+  "dependencies": [
+    "Stochastic 12-state SPA design with CANDIDATES (validated: I(Y;A|Z)=1.52 bits, 48/48 pairs with 4 candidates)",
+    "N=5000 transitions (50 sessions x 100 steps, seed=42) as frozen measurement unit",
+    "Bayesian model comparison implementation (Bayes factor, nested model comparison) or likelihood-ratio tests as orthogonal estimator paradigm",
+    "Non-smoothed estimators (KDE, kNN, neural density) as alternative if Bayesian/LR also fail",
+    "Parent carry_forward established items (true CMI 1.52 bits, null centering at alpha=1.0 for plug-in KL) remain valid"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35538866166/spec.json:claim_ids, question, hypothesis H1/H0, falsifier C1/C3/C6, decision_rule",
+    "research/experiments/EXP-PHYSICS-35538866166/result.json:metrics.alpha_sweep_summary, controls C1/C3/C6/C7/B-ENTROPY-RATE-DEG, observations, validity_notes",
+    "research/experiments/EXP-PHYSICS-35538866166/audit.json:status PASS, V1-estimator-pz-inconsistency (corrected P(z) still FALSIFIED), claim_ceiling, recomputed_metrics",
+    "research/experiments/EXP-PHYSICS-35538866166/report.md:frozen decision, comparison table with parent plug-in KL, stratum decomposition",
+    "research/experiments/EXP-PHYSICS-35538866166/raw_results.json:alpha_sweep, null_control, both_passers [], verdict FALSIFIED-IN-SETTING",
+    "research/experiments/EXP-PHYSICS-35530591329/handoff.json:carry_forward established/rejected/unknown/do_not_assume, next_question",
+    "research/experiments/EXP-PHYSICS-35482477045/handoff.json:KSG CMI k=5 insensitivity, LR history collapse, both closed on this SPA class",
+    "research/experiments/EXP-PHYSICS-35470449605/handoff.json:CANDIDATES redesign 0% deterministic strata, bias identical to parent",
+    "codex/claim_state.json:C-WEB-DYNAMICS remains HYPOTHESIS across 30+ experiments"
+  ],
+  "recommended_action": "Design a new frozen experiment testing Bayesian model comparison (action-dependent vs action-independent transition model via Bayes factor with nested model comparison) on the stochastic 12-state SPA at N=5000. This estimator does NOT use histogram smoothing — it computes marginal likelihoods over model parameters, completely bypassing the Laplace cell-count bias that felled both plug-in KL and entropy-rate CMI. The frozen experiment must include: (a) the same C1 within-session shuffled-action null framework (500 permutations), (b) a C3 positive control on the deterministic SPA where the Bayes factor should strongly favor the action-dependent model, (c) the same C6/C7 design verification, and (d) comparison with the established per-stratum PMI signal (1.46-1.69 bits) as a reference scale. If Bayesian comparison passes C1+C3, proceed to beyond-Markov K3-K2 testing. If it also fails, pivot to non-smoothed continuous estimators (KDE/kNN on embeddings) or production Web data with continuous state representations. The Physics lane has now exhausted 4 discrete CMI estimator families (plug-in KL, entropy-rate, KSG, LR); the next experiment must use a fundamentally different estimation paradigm."
+}
