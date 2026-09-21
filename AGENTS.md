@@ -6,14 +6,15 @@ This file is binding for OpenCode sessions in the active Research 2.0 factory.
 
 1. `SPIDER_MASTER_PROMPT.md` — scientific constitution and frozen conceptual distinctions.
 2. `SPIDER_ARCHITECTURE_RESEARCH2.md` — active post-pre2 organization/automation.
-3. `research/EXPERIMENT_PACKET.md` — binding inter-agent transmission contract and packet semantics.
-4. exact immutable `request.json`, frozen `spec.json`, `prereg.md`, `freeze.json`.
-5. lane charter in `research/lanes/registry.json`.
-6. accepted Codex evidence.
+3. `research/portfolio/POLICY.md` — binding Global Research Director / Scout direction policy for NEW experiments.
+4. `research/EXPERIMENT_PACKET.md` — binding inter-agent transmission contract and packet semantics.
+5. exact immutable `request.json`, including `director_mandate` when present, then frozen `spec.json`, `prereg.md`, `freeze.json`.
+6. lane charter in `research/lanes/registry.json`.
+7. accepted Codex evidence.
 
 Never silently rewrite constitutional files.
 
-`SPIDER_CODEX.md` is accepted-evidence output owned by the canonical Codex synchronization step. Lane DESIGN, EXECUTE, AUDIT and DIRECTOR agents may read it but must never edit, regenerate, append to, format, or otherwise mutate it directly.
+`SPIDER_CODEX.md` is accepted-evidence output owned by the canonical Codex synchronization step. Lane DESIGN, EXECUTE, AUDIT, lane DIRECTOR, Scout and Global Research Director agents may read it but must never edit, regenerate, append to, format, or otherwise mutate it directly.
 
 ## Objective
 
@@ -57,9 +58,21 @@ Do not collapse these levels. In particular:
 
 For `verdict.json.claim_updates[*].status`, DIRECTOR must use one of the canonical registry statuses exactly: `HYPOTHESIS`, `EXPERIMENTAL`, `VALIDATED`, `PRODUCT_CORE`, `SHIPPED`, `REJECTED`, `BLOCKED`, `MEASUREMENT_INVALID`, `SUPERSEDED`. Descriptive words such as `SUPPORTED`, `SUPPORTED_BOUNDED`, `PARTIAL` or `OPEN` belong in the event `reason`, not in `status`.
 
-When `request.json` contains a `parent_handoff` reference, read that exact handoff before DESIGN. Treat its `carry_forward` categories as inherited state, not as suggestions to be blended together. New evidence may supersede inherited state, but the change must be explicit.
+When `request.json` contains a `parent_handoff` reference, read that exact handoff before DESIGN. Treat its `carry_forward` categories as inherited scientific state, not as an automatic research agenda. `handoff.next_question` is a local proposal only. When `request.json` also contains `director_mandate`, the Global Research Director's target claim and strategic question are the binding direction for that NEW experiment. New evidence may supersede inherited state, but the change must be explicit.
 
 Cross-lane inheritance occurs through accepted Codex evidence or exact immutable packet/artifact references. Do not import another lane's unrecorded narrative.
+
+## Global direction discipline
+
+The six scientific lanes do not self-authorize new child experiments.
+
+A permanent non-scientific Scout lane runs broad reconnaissance for the Global Research Director. Scout may use Codex evidence, shallow external landscape research and general agent knowledge, but must label these epistemic categories separately and never create scientific claims.
+
+The Global Research Director chooses the most promising next objective for every scientific lane from the whole current program. It may CONTINUE, PIVOT, PARK, REOPEN or TERMINATE a bounded thread. It is responsible for reactivating stopped/idle lanes when useful work exists.
+
+Already-frozen experiments are completed before strategic redirection. Pre-freeze work may be superseded by a new Director mandate.
+
+Local lane Directors still adjudicate evidence and produce bounded handoffs, but they do not dispatch their own next experiment.
 
 ## Work discipline
 
@@ -73,7 +86,8 @@ Cross-lane inheritance occurs through accepted Codex evidence or exact immutable
 - prefer a discriminating test over another narrative;
 - do not ask interactive questions during autonomous runs;
 - never invent a result when infrastructure fails;
-- leave a durable handoff.
+- leave a durable handoff;
+- for DESIGN of a governed NEW experiment, follow the `director_mandate` instead of drifting back to the parent handoff.
 
 ## Branch/scope discipline
 

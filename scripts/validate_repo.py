@@ -58,6 +58,8 @@ def main():
         "SPIDER_MASTER_PROMPT.md",
         "research/claims/registry.json",
         "research/lanes/registry.json",
+        "research/portfolio",
+        "research/scout",
         "research/EXPERIMENT_PACKET.md",
         "config/models.json",
         "SPIDER_CODEX.md",
@@ -76,10 +78,15 @@ def main():
         ".opencode/agents/spider_lane_researcher.md",
         ".opencode/agents/spider_lane_auditor.md",
         ".opencode/agents/spider_lane_director.md",
+        ".opencode/agents/spider_portfolio_director.md",
+        ".opencode/agents/spider_research_scout.md",
         "scripts/check_scope.py",
         "scripts/checkpoint.sh",
         "scripts/finalize_lane.py",
         "scripts/prepare_lane.py",
+        "scripts/build_portfolio_snapshot.py",
+        "scripts/validate_portfolio_allocation.py",
+        "scripts/validate_scout_brief.py",
         "scripts/sync_codex.py",
         "scripts/research2_contract.py",
     ]
@@ -102,13 +109,21 @@ def main():
     require("SPIDER_REQUIRED_OUTPUTS" in lane_wf, "lane workflow must validate mandatory model outputs")
     require("SPIDER_WAKE_DEFERRED_UNPERSISTED_PACKET" in lane_wf, "wake must verify remote packet durability")
     require(lane_wf.count('exit "$rc"') >= 4, "stage workflow must propagate stage failure exit codes")
+    require("director_mandate_b64" in lane_wf and "SPIDER_GLOBAL_DIRECTION_REQUIRED" in lane_wf, "lane workflow must require Global Director governance for NEW work")
+    require('gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation"' not in lane_wf, "lane workflow must not self-dispatch local continuation")
 
     prepare = text("scripts/prepare_lane.py")
     require("product promotion pending" in prepare and "promotion_ready" in prepare, "Product allocator must honor the promotion transaction latch")
+    require("Global Research Director mandate required" in prepare and "director_mandate" in prepare, "NEW experiments must carry a Global Director mandate")
 
     pulse = text(".github/workflows/factory-pulse.yml")
     require("SPIDER_CIRCUIT_OPEN" in pulse and "last_failure_control_revision" in pulse, "factory pulse lacks repeated-failure circuit breaker")
     require("SPIDER_PRODUCT_PROMOTION_PENDING" in pulse, "factory pulse must block Product while promotion is pending")
+    require("spider_research_scout" in pulse and "spider_portfolio_director" in pulse, "factory pulse must run Scout then Global Research Director")
+    require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
+    direction_validator = text("scripts/validate_portfolio_allocation.py")
+    require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
+    require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
 
     promote = text(".github/workflows/product-promote.yml")
     require("git merge --no-commit --no-ff origin/lab2/product" not in promote, "Product workflow must never merge the whole research branch")
@@ -123,6 +138,12 @@ def main():
     require('"--diff-filter=A"' in codex, "Codex must pin the original verdict creation commit")
     require("parent_handoff sha256 mismatch" in codex, "Codex must validate inherited handoff hashes")
     require("DIRECTOR_CLAIM_STATUSES" in codex, "Codex must reject Director-emitted post-promotion-only claim states")
+
+    scout = text(".opencode/agents/spider_research_scout.md")
+    require("reconnaissance" in scout.lower() and "candidate_directions" in scout, "Scout agent lacks generalist reconnaissance contract")
+
+    global_director = text(".opencode/agents/spider_portfolio_director.md")
+    require("Research Scout" in global_director and "CONTINUE|PIVOT|PARK|REOPEN|TERMINATE" in global_director, "Global Director lacks Scout/decision contract")
 
     director = text(".opencode/agents/spider_lane_director.md")
     for status in sorted(CLAIM_STATUSES - {"SHIPPED"}):

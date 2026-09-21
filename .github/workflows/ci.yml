@@ -35,6 +35,7 @@ jobs:
         run: |
           python scripts/validate_repo.py
           python scripts/validate_main_safety.py
+          python scripts/test_direction_governance.py
 
       - name: Test product kernel
         run: PYTHONPATH=src python -m unittest discover -s tests -v

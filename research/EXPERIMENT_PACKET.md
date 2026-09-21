@@ -37,9 +37,12 @@ DESIGN receives:
 - `request.json`;
 - lane charter and claim registry;
 - accepted Codex evidence;
-- when present, the exact `parent_handoff` referenced by `request.json`.
+- when present, the exact `parent_handoff` referenced by `request.json`;
+- for NEW governed work, the exact `director_mandate` embedded in `request.json`.
 
-If a parent handoff exists, DESIGN must preserve its four-way distinction: `established`, `rejected`, `unknown`, `do_not_assume`. It may depart from the recommended next action when newer evidence warrants it, but must not silently invert inherited evidence.
+If a parent handoff exists, DESIGN must preserve its four-way distinction: `established`, `rejected`, `unknown`, `do_not_assume`. Its `next_question` is advisory local continuity state, not automatic authorization for the next experiment.
+
+When `director_mandate` is present, its target claim and strategic question are binding research direction. DESIGN may refine that question into the smallest rigorous falsifiable experiment, but may not silently drift back to the parent handoff or substitute a nearby objective.
 
 DESIGN emits only `spec.json` and `prereg.md`.
 
@@ -63,7 +66,9 @@ DIRECTOR emits only `verdict.json` and `handoff.json`.
 
 ### DIRECTOR -> NEXT DESIGN / CODEX
 
-`handoff.json` is the durable bridge to the next experiment. `prepare_lane.py` records an immutable path+hash reference to the prior handoff in the next `request.json` when one exists. The Codex also consumes finalized packets.
+`handoff.json` is the durable bridge carrying local scientific continuity to future work. `prepare_lane.py` records an immutable path+hash reference to the prior handoff in the next `request.json` when one exists. The Codex also consumes finalized packets.
+
+However, the handoff does not self-authorize a child experiment. Scout and the Global Research Director reconsider the whole program first; a NEW experiment is allocated only with a `director_mandate`. Already-frozen experiments resume without a new mandate because their scientific transaction is already committed.
 
 Cross-lane scientific inheritance should occur through accepted Codex evidence or exact immutable packet/artifact references, never through an agent's unrecorded recollection of another lane.
 

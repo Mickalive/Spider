@@ -1,0 +1,20 @@
+{
+  "base_sha": "8d743a160ec634017acf7f999622342701fc110f",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T07:16:32.811768+00:00",
+  "experiment_id": "EXP-INTEL-35572177756",
+  "inherited_last_verdict": "REJECTED \u2014 The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path.",
+  "inherited_next_question": "Should the Intel lane pivot to Docker-based direct full-DOM measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) to bypass modeling entirely, given that six consecutive model-based approaches (Phi(mean(SNR_i)), Phi(mean/std), Phi(median/std), sign-fraction power law, empirical CDF linear extrapolation, bounded saturating functions) have all failed to produce a validated extrapolation \u2014 or should the lane attempt alternative non-modeling approaches (e.g., bootstrap confidence intervals on existing n=20 data, permutation tests on margin sign structure) before pivoting?",
+  "lane": "intel",
+  "origin_github_run_id": "35572177756",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35551517470",
+    "path": "research/experiments/EXP-INTEL-35551517470/handoff.json",
+    "sha256": "ce6224a979be8a76f57b2d20931c09611135007c533b518c258648f929bf2d27"
+  },
+  "reason": "pulse",
+  "request_hash": "9b741d4437b79d7eb76c9833f219fa5c543579a565cb341660f6292e96f0cb80",
+  "request_id": "0f48161004afe56c686cd6e6",
+  "schema_version": 1
+}
