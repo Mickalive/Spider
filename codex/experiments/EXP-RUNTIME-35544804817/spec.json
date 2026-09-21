@@ -1,0 +1,59 @@
+{
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "lane": "runtime",
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Does oracle-free greedy iterative decompression (try brotli then gzip until neither succeeds, return final bytes with no SHA256 oracle) produce byte-identical output to ground truth on the same 48-cell Cloudflare CDN matrix, and does CDN cache HIT (stale) serving alter the decompressed output?",
+  "hypothesis": "A greedy oracle-free iterative decoder that attempts brotli decompression, then gzip decompression, looping until neither succeeds and returning the final bytes WITHOUT checking SHA256 against ground truth produces byte-identical output to ground truth for all 48 primary Cloudflare CDN cells. This works because: (1) the parent method distribution (br=60, gz+br=60, gz=80, gz+gz=40) shows each cell requires a deterministic path where only one format is valid at each layer; (2) brotli and gzip have distinct format signatures so the greedy try-brotli-then-gzip order is unambiguous; (3) the parent 240/240 oracle-guided result confirms all CDN transforms are losslessly recoverable by iterative decode. Additionally, CDN cache HIT (stale) serving does not alter decompressed output because the cached response bytes are byte-identical to the DYNAMIC response bytes.",
+  "falsifier": "Any of the following falsifies the hypothesis: (1) any of the 48 primary CDN cells produces decompressed output with SHA256 != ground truth under oracle-free greedy decode; (2) oracle-free greedy decode enters an infinite loop or returns None for any cell; (3) CDN cache HIT responses produce different decompressed output than DYNAMIC responses for any payload; (4) oracle-free greedy decode produces a different decompression path than oracle-guided decode for any cell where the paths diverge in final output.",
+  "baselines": [
+    {
+      "id": "B-ORACLE-GUIDED-REGRESSION",
+      "description": "Oracle-guided encoding-agnostic decode (with ground_truth_sha256) on the same 48-cell CDN matrix re-validates parent 240/240 and confirms the test infrastructure is identical.",
+      "expected": "240/240 correct (parent result)"
+    },
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "description": "Same payloads served directly from localhost without CDN. Oracle-free decode on localhost validates the decoder implementation independently of CDN.",
+      "expected": "240/240 byte-identical decompression output to ground truth under oracle-free decode"
+    },
+    {
+      "id": "B-CDN-IDENTITY",
+      "description": "Uncompressed (identity) payloads served through CDN. Oracle-free decode must handle CDN-compressed identity text payloads (gzip-compressed JSON/HTML).",
+      "expected": "15/15 identity observations recover ground truth under oracle-free decode"
+    },
+    {
+      "id": "B-DEPTH-GENERALIZATION",
+      "description": "Oracle-free greedy decode applied to depths 3-5 stacked encodings through CDN. Tests whether greedy iteration handles deeper stacking without SHA guidance.",
+      "expected": ">=80% correct under oracle-free decode"
+    },
+    {
+      "id": "B-LARGE-PAYLOAD",
+      "description": "Oracle-free greedy decode applied to >100KB payloads through CDN. Tests whether large-payload CDN behavior breaks greedy iteration.",
+      "expected": ">=80% correct under oracle-free decode"
+    },
+    {
+      "id": "B-FIXED-ORDER-CDN",
+      "description": "Parent fixed-origin-order decompression on the same 48-cell matrix re-validates 60/240 and shows oracle-free greedy improvement.",
+      "expected": "60/240 correct (parent result)"
+    }
+  ],
+  "positive_control": "B-LOCALHOST-DIRECT: oracle-free greedy decode on localhost-served payloads matches ground truth. Validates the decoder implementation without CDN. If this fails the decoder is broken and no CDN inference is possible.",
+  "null_control": "B-CDN-IDENTITY: oracle-free greedy decode on uncompressed CDN payloads recovers ground truth. If CDN corrupts uncompressed data compressed data cannot be trusted. Additionally oracle-free decode on localhost identity must be trivially 15/15 (identity passthrough).",
+  "measurement_validity": [
+    "Cloudflare Tunnel (cloudflared) must be installed and functional. Verify /health endpoint returns HTTP 200 through public URL before measuring.",
+    "Each CDN-served request must record the actual delivered Content-Encoding header, cf-cache-status, and raw wire bytes (or raw_body_sha256 for recomputation).",
+    "Oracle-free greedy decode algorithm: try brotli.decompress(raw_bytes), if succeeds set current=decoded and continue loop; else try gzip.decompress(raw_bytes), if succeeds set current=decoded and continue loop; else return current (identity). NO SHA256 check at any point.",
+    "Minimum N=5 observations per condition with jitter 200-500ms between CDN requests to avoid cache collapse.",
+    "Unique URLs per main-matrix observation for DYNAMIC condition; fixed URLs with Cache-Control: public, max-age=300 for HIT condition.",
+    "Ground truth computed identically to parent: SHA256 of full-body iterative decode of origin-served payloads (decompress all layers in known order).",
+    "Heuristic tie-break: if both brotli and gzip decompress successfully at some layer (ambiguous), record the ambiguity and try both paths. If paths diverge in final SHA256, report as MIXED not SUPPORTS.",
+    "Depths 3-5 and large payloads reuse parent payload generation protocol.",
+    "BINARY payloads within-run ground truth only (PYTHONHASHSEED-dependent).",
+    "Environment: Python 3.12+, brotli 1.2.0, requests 2.x or http.client, cloudflared tunnel."
+  ],
+  "decision_rule": "ALL conditions must pass for SURVIVES_CURRENT_TEST:\n- C1: Oracle-free greedy decode produces byte-identical SHA256 output as ground truth for ALL 48 primary CDN cells (3 payload x 2 orders x 2 chunk sizes x 4 Accept-Encoding variants)\n- C2: CDN cache HIT responses decode correctly under oracle-free greedy decode (>=90% of HIT observations match ground truth)\n- C3: 6/6 cache stability groups byte-stable under oracle-free decode\n- C4: 15/15 identity observations recover ground truth under oracle-free decode\n- C5: Depth 3-5 oracle-free greedy decode recovers ground truth for >=80% of depth observations\n- C6: Large payload oracle-free greedy decode recovers ground truth for >=80% of >100KB observations\n- C7: No ambiguous tie-breaks where both brotli and gzip succeed at same layer and produce divergent final SHA256\n- Positive control passes: B-LOCALHOST-DIRECT oracle-free greedy decode matches ground truth (240/240)\n- Null control passes: B-CDN-IDENTITY oracle-free greedy decode recovers ground truth\nIF C1 fails: FALSIFIES oracle-free decode does not restore correctness without oracle\nIF C1 passes but C2 fails: MIXED oracle-free works for DYNAMIC but HIT staleness is unresolvable\nIF C1 passes but C5 or C6 fail: MIXED primary gate passes but generalization is bounded\nIF all pass: SUPPORTS oracle-free decode validated C-MEAS-VALID ready for Product Core promotion",
+  "product_consequence_positive": "Oracle-free CDN decompression gate closes. The deployable decoder (no SHA oracle needed) is validated through real CDN for all tested conditions. C-MEAS-VALID advances to VALIDATED and is ready for Product Core promotion. This unblocks kernel integration of the encoding-agnostic decoder as a production-ready mechanism.",
+  "product_consequence_negative": "Oracle-free greedy decode fails on some CDN conditions. C-MEAS-VALID remains EXPERIMENTAL. Diagnosis identifies whether the issue is: (a) ambiguous format detection at some layer, (b) greedy iteration ordering, (c) HIT staleness divergence, or (d) depth/payload generalization failure. The product remains blocked from using the decompression fix without SHA oracle.",
+  "estimated_cost": "Low: same infrastructure as parent (cloudflared, Python HTTP server, brotli library). Reuse parent payload manifest and ground truth. Additional cache HIT test adds ~5 minutes. Estimated total wall time 20-25 minutes.",
+  "expected_information_gain": "Very high. This is the single highest-information experiment remaining for the decompression-normalization sub-thread per parent handoff. A positive result converts the lossless-recovery observation into a deployable mechanism and closes C-MEAS-VALID for Product Core. A negative result identifies the specific oracle-free failure mode. Both outcomes directly change a product decision. The experiment is the smallest possible test that resolves the two inherited blocking gaps (oracle circularity V1 and HIT absence V3)."
+}
