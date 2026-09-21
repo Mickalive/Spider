@@ -22,6 +22,7 @@ CONTROL_ROOTS = [
     "research/claims/registry.json",
     "research/lanes/registry.json",
     "research/portfolio",
+    "research/scout",
     "research/EXPERIMENT_PACKET.md",
     "config/models.json",
     "SPIDER_CODEX.md",
