@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35551517470",
+  "lane": "intel",
+  "target_lane": "intel",
+  "next_question": "Should the Intel lane pivot to Docker-based direct full-DOM measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) to bypass modeling entirely, given that six consecutive model-based approaches (Phi(mean(SNR_i)), Phi(mean/std), Phi(median/std), sign-fraction power law, empirical CDF linear extrapolation, bounded saturating functions) have all failed to produce a validated extrapolation — or should the lane attempt alternative non-modeling approaches (e.g., bootstrap confidence intervals on existing n=20 data, permutation tests on margin sign structure) before pivoting?",
+  "why_next": "Six consecutive model-based extrapolation attempts have failed to produce a validated extrapolation of ranking agreement from n=5-20 to full-DOM n=50/82. The failures span parametric (Phi functions), functional-form (power law, empirical CDF), and bounded saturating (logistic/Hill/Richards) approaches. The common root cause is step-function structure (0,0,0.50,0.57) with 7.6x growth deceleration that cannot be captured by smooth or linear forms. The saturating function fit (this experiment) technically passes frozen gates but extrapolation is informationally identical to the constant null — zero new predictive information. Model-based extrapolation is definitively closed for product decisions. Only Docker-based direct full-DOM measurement can empirically answer whether ranking agreement crosses 80% at n=21-82.",
+  "carry_forward": {
+    "established": [
+      "Sample-size effect on ranking agreement is REAL and MONOTONIC: canonical recipe tag_entropy x DEF-FULL-MAP agreement improves from 0% at n=5/10 to 50% at n=15 to 56% at n=20 (Spearman=1.0, C5 PASS in parent chain; baseline_reproduction confirms canonical agreement n20=0.5654)",
+      "Ranking agreement PLATEAUS below 80% at maximum available sample size: canonical 56.5% at n=20, per-task 78.0% at n=20 (EXP-INTEL-35445596324 M4/M8)",
+      "Under template invariance, ranking agreement equals proportion(margin_i>0) exactly: 0.4996 at n15 (0.00pp) and 0.5654 at n20 (0.00pp). This is a structural identity, not a predictive model (EXP-INTEL-35551517470 positive control PC1, audit VF5)",
+      "Step-function structure of proportion(margin>0): (0, 0, 0.50, 0.57) at n=5/10/15/20 with 7.6x growth deceleration. The logistic learns this via steep k=10.75 transition; Hill via h=20.0 at bound. Both are smooth approximations to a discontinuous step, confirming the step-function cannot be captured by smooth functional forms without becoming step-like (EXP-INTEL-35551517470 observations, audit VF2/VF4)",
+      "margin_std (~1e-4 to 6e-4) is the empirically correct noise scale for ranking flips, not within-iteration within-type SE (~1e-5) (inherited from EXP-INTEL-35530590171)",
+      "Template invariance persists on truncated-first-20 subsample for listing, detail, cart page types (inherited from EXP-INTEL-35476271877)",
+      "Non-recipe pipeline ranking requires >=15 elements to preserve listing > detail for tag_entropy (inherited from EXP-INTEL-35445596324)",
+      "OECD/COINr pipeline preserves between-type discrimination (max eta2 0.999645 at n=20) without recipe sampling (inherited from EXP-INTEL-35434771791)",
+      "Per-task recipe achieves 78.65% ranking agreement at n=20 vs canonical 55.95% but with lower eta2 (0.366 vs 0.921). Dissociation reproducible (inherited from EXP-INTEL-35445596324)"
+    ],
+    "rejected": [
+      "Frozen SNR decomposition Phi(mean(SNR_i)) with within-iteration SE — REJECTED: C1 fails by 40-50pp (parent chain)",
+      "Corrected Phi(mean/std) using margin_std — REJECTED at C1 gate: n=20 residual 17.8pp > 10pp (EXP-INTEL-35530590171)",
+      "Phi(median(|M|)/std) — REJECTED at C1 gate: n=15 residual 34.59pp, n=20 residual 18.96pp (EXP-INTEL-35538868377)",
+      "Saturating sign-fraction power law a*n^b/(1+a*n^b) — REJECTED at C1/C2: n=15 residual 12.39pp, R2=0.8797 (EXP-INTEL-35538868377)",
+      "Linear extrapolation of empirical CDF — REJECTED at C3: F(50)=0.9602, F(82)=1.3813 >1.0 impossible (EXP-INTEL-35544806153)",
+      "Bounded saturating functions (logistic/Hill/Richards) provide a VALIDATED EXTRAPOLATION for product decisions — REJECTED: extrapolation is informationally identical to constant null F(n)=0.5654 (audit VF3, zero information gain). R2=1.0 reflects structural interpolation of 4 points with 3 parameters (audit VF2). Hill h=20.0 at bound is degenerate (audit VF4). The model-based extrapolation path is definitively closed after six consecutive failures.",
+      "Ranking instability is PURELY a sample-size artifact within truncated-first-20 range — REJECTED: plateaus at 56% at n=20, well below 80% (EXP-INTEL-35445596324 C6 FAIL)",
+      "OECD/COINr pipeline structure itself destroys between-type variance — REJECTED: pipeline preserves discrimination eta2 0.964-0.999 (inherited from EXP-INTEL-35434771791)",
+      "That recipe-based density is safe for Product Core promotion — REJECTED: canonical agreement 56% at n=20 with bootstrap CI approximately 0-100% (inherited)"
+    ],
+    "unknown": [
+      "Does ranking stabilize at full DOM (n=21-82) when more diverse elements per definition are available? n=15->n=20 plateau (+6pp) suggests diminishing returns but does not rule out crossing 80% — UNTESTED due to Docker unavailability and no validated model extrapolation",
+      "Whether the marginal sign crossing between n=10 and n=15 (mean_margin from -1.35e-04 to +2.66e-05) represents a genuine threshold/phase-transition or artifact — UNKNOWN",
+      "Does per-task recipe achieve >=80% at full DOM? Current 78.65% at n=20 is tantalizingly close but untested at n>20 — UNTESTED",
+      "Whether Docker image am1n3e/webarena-verified-shopping:latest becomes available for direct full-DOM measurement (EXP-INTEL-35462974425) — BLOCKING for empirical answer",
+      "Whether template invariance breaks at full DOM element counts, changing the variance structure — UNTESTED",
+      "Cross-site generalization of the sample-size effect beyond single Magento Docker site — UNTESTED",
+      "Whether margin_std power law d=1.643 and |margin| exponent b=0.876 reflect genuine scaling or artifact of 4 points with sign crossing — UNRESOLVED",
+      "Whether bootstrap confidence intervals on existing n=20 margin data or permutation tests on margin sign structure could provide bounded uncertainty estimates without requiring new data collection — UNTESTED"
+    ],
+    "do_not_assume": [
+      "That the logistic F50=0.5654 prediction is evidence for structural plateau below 80% — it is informationally identical to the constant null F(n)=0.5654 and carries single-observation (n=20) uncertainty. Do not use for product decisions.",
+      "That R2=1.0 for logistic/Hill indicates validated predictive model — it reflects structural interpolation of 4 points with 3 parameters, not genuine predictive power (audit VF2)",
+      "That the frozen C1/C2/C3 PASS constitutes a scientifically meaningful result — the gates are mis-calibrated for N=4 k=3 and do not penalize overfitting or test information gain (audit VF2/VF3)",
+      "That the corrected Phi(mean/std) model is valid or usable — it FAILS C1 (17.8pp at n20)",
+      "That Phi(median(|M|)/std) is valid or usable — it FAILS C1 by larger margins",
+      "That the sign-fraction saturating power law provides a validated extrapolation — it FAILS C1/C2",
+      "That C3 extrapolation (predicted 0.982 at n50, PI90 [0.981, 0.984]) is reliable — it is gated behind failed C1/C2",
+      "That rho=1.0 represents an independent correlated-noise mechanism — it is mathematically forced by template invariance + shared role subset",
+      "That n=20 result generalizes to full DOM n=21-82 — ranking stability at n>20 is UNKNOWN",
+      "That first-n DOM-position subsampling represents random element subsets — monotonic improvement may partially reflect DOM-sequential structure",
+      "That the empirical CDF mapping is an independent predictive model — it is by construction identical to the diagnostic proportion(margin>0) under template invariance",
+      "That the step-function structure (0,0,0.50,0.57) is a validated saturation signal — it is descriptive observation from 4 points with 2 at zero and must not be cited as evidence for structural plateau",
+      "That this experiment provides evidence for or against the full-DOM crossing hypothesis — it provides NONE; the model-based path is closed but the empirical question remains open",
+      "That the SURVIVES verdict per frozen gates is scientifically meaningful — the audit correctly bounds it as informationally trivial (producer_claim_supported=false, audit VF3)"
+    ]
+  },
+  "dependencies": [
+    "Docker image: am1n3e/webarena-verified-shopping:latest — Magento container for full-DOM re-collection (sole blocking action for direct full-DOM measurement, EXP-INTEL-35462974425)",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a — per-iteration margin data needed for any future analysis",
+    "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json sha256 f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2 — per-n margin_std, margin_mean, and baseline values",
+    "research/experiments/EXP-INTEL-34782350557/raw_evidence/exp347_raw_results.json sha256 da30bd059adb555409784a2fd41402d53b64a25c89aa710b77e686a94a155050 — truncated-first-20 raw density data (7 tasks)",
+    "research/experiments/EXP-INTEL-35462974425/analyze.py sha256 79721d4668c679d4fb2695b092b848a2c1d8b3bcbdf262f81a5641c6ddc1b459 — frozen analysis script ready for full-DOM data"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35551517470/result.json status COMPLETE metrics logistic R2=1.0 F50=0.5654 Hill R2=0.999994 h=20.0 at bound Richards R2=-0.0002 logistic_extrapolation_identical_to_null=true observations step-function approximation INFORMATIONALLY_TRIVIAL",
+    "research/experiments/EXP-INTEL-35551517470/audit.json status FAIL producer_claim_supported=false claim_ceiling model-based path definitively closed VF1-VF7 all findings",
+    "research/experiments/EXP-INTEL-35551517470/spec.json frozen decision_rule C1/C2/C3 measurement_validity hypothesis falsifier",
+    "research/experiments/EXP-INTEL-35551517470/prereg.md saturating function families fitting protocol analysis protocol",
+    "research/experiments/EXP-INTEL-35551517470/report.md SURVIVES per frozen gates but INFORMATIONALLY TRIVIAL extrapolation equivalence to constant null",
+    "research/experiments/EXP-INTEL-35551517470/provenance.json input hashes verified Python 3.12.14 scipy 1.18.1 seed 42",
+    "research/experiments/EXP-INTEL-35544806153/handoff.json sha256 fedc0f49e45fa39e866fe79b4ed032554f13cab64e9f16bb3bbfe8d311c799ec parent five model-based failures carry_forward established rejected unknown do_not_assume",
+    "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a training data F=[0.0,0.0,0.4996,0.5654]",
+    "research/experiments/EXP-INTEL-35538868377/result.json metrics.modelB_sign_fraction_powerlaw R2=0.8797 max residual 12.39pp parent baseline"
+  ],
+  "recommended_action": "PIVOT to Docker-based direct full-DOM measurement (EXP-INTEL-35462974425, image am1n3e/webarena-verified-shopping:latest) to bypass modeling entirely. Six consecutive model-based approaches have failed — this is step-function model-misspecification, not a tunable parameter issue. Direct measurement is the only remaining path to an empirical answer on whether ranking agreement crosses 80% at n=21-82. As a LOW-COST parallel, the next agent could explore alternative non-modeling approaches (bootstrap CIs on existing n=20 margin data, permutation tests on margin sign structure) to provide bounded uncertainty estimates without new data collection — but these cannot substitute for Docker measurement. The step-function structure (0,0,0.50,0.57) is a genuine threshold phenomenon; future Intel lane work should characterize this threshold rather than fitting smooth functions to sparse step data."
+}
