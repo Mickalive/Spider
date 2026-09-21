@@ -18,13 +18,13 @@ Before acting, read:
 - `research/portfolio/POLICY.md`;
 - `research/lanes/registry.json`;
 - `research/claims/registry.json`;
-- `SPIDER_CODEX.md`;
 - `codex/claim_state.json`;
 - `codex/index.json`;
 - the exact machine-generated director snapshot supplied by the workflow;
 - the exact Research Scout brief supplied by the workflow.
 
-Open relevant canonical experiment packets when the compact evidence is insufficient.
+Do NOT ingest `SPIDER_CODEX.md` wholesale.
+Use the machine snapshot, Scout brief, `codex/claim_state.json` and `codex/index.json` as the complete program map. Open relevant canonical experiment packets only when the compact evidence is insufficient for a directional decision.
 
 ## Your job
 
