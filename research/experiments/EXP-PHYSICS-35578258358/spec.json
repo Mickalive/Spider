@@ -1,17 +1,43 @@
 {
   "experiment_id": "EXP-PHYSICS-35578258358",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID", "C-WEB-DYNAMICS"],
+  "question": "Can a corrected Bayesian model comparison with K=n_states=12 (as per frozen spec) and N_SHUFFLE>=1000 within-session shuffled-action permutations replicate the audit-corrected SURVIVES_CURRENT_TEST result on the stochastic 12-state SPA, thereby establishing the Bayesian paradigm as the first estimator to pass both C1 (null median < 0) and C3 (p < 0.001) and unblocking Phase 2 beyond-Markov K3-K2 testing?",
+  "hypothesis": "H1 (alternative): The log Bayes factor (full model P(S_next|S_current,A) vs reduced model P(S_next|S_current)) is significantly > 0 nats on the stochastic SPA, with the shuffled-action null distribution centered at log BF < 0 nats (Occam's razor penalizes the larger model under the null). At least one tested prior specification achieves (a) null median < 0 and (b) observed log BF on stochastic SPA exceeding the 99.9th percentile of the null distribution (permutation p < 0.001). H0 (null): No tested specification achieves both null centering (median < 0) and significant detection (p < 0.001) on the stochastic SPA.",
+  "falsifier": "C1 (null validity): All tested prior specifications have shuffled-action null median >= 0 nats (Occam's razor fails to penalize the larger model under the null). C3 (sensitivity): For any specification passing C1, the observed log BF on the stochastic SPA does not exceed the 99.9th percentile of the null distribution (permutation p >= 0.001). C6 (SPA design): Fewer than 48/48 (state,action) pairs with 4 distinct candidates.",
+  "baselines": [
+    {
+      "id": "B-REPLICATE-AUDIT-CORRECTED",
+      "description": "Replicate audit-corrected recomputation of EXP-PHYSICS-35572180485 with K=12 and N_SHUFFLE>=1000. Expected: null median negative, observed log BF positive, permutation p<0.001.",
+      "expected": "null_median < 0, observed_log_BF > 0, p < 0.001"
+    },
+    {
+      "id": "B-PMI-REFERENCE-SCALE",
+      "description": "Established per-stratum PMI signal on stochastic SPA: K3=1.22-1.69 bits, K2=0.93-1.51 bits. Use as reference scale for interpreting Bayes factor magnitude (NOT direct comparison).",
+      "expected": "K3_PMI 1.22-1.69 bits, K2_PMI 0.93-1.51 bits (information-theoretic scale, separate from Bayes factor scale)"
+    }
+  ],
+  "positive_control": "Deterministic 12-state SPA (same design with deterministic hash routing only): action determines next state deterministically. The Bayes factor should strongly favor M1 over M0 (log BF >> 0 nats). This validates that the Bayesian approach can detect strong action effects. Additionally, the stochastic SPA (50% hash routing + 50% uniform random) is the PRIMARY test target with true I(Y;A|Z) = 1.52 bits. Both should be detected.",
+  "null_control": "Shuffled-action within-session null: for each of >=1000 permutations, shuffle action labels within each session (preserving session structure, state sequence, and url_before/url_after pairing), recompute log Bayes factor on the stochastic SPA. The null distribution should have median < 0 (Occam's razor penalizes the larger model when actions are irrelevant). Unit of permutation: action-label within session. Report null median, mean, std, 99.9th percentile, and permutation p = (count_ge + 1) / (N_SHUFFLE + 1).",
+  "measurement_validity": [
+    "Same stochastic 12-state SPA design as parent EXP-PHYSICS-35530591329 (12 states, 4 candidates per (state,action), 50% hash routing + 50% uniform random).",
+    "N=5000 transitions (50 sessions x 100 steps) with seed=42, same collection procedure as parent.",
+    "Bayesian model comparison using EXACT Dirichlet-Multinomial marginal likelihoods (NOT variational inference, NOT BIC approximation).",
+    "Model M1 (action-dependent): P(S_next | S_current, A_current) with separate Dirichlet-Multinomial for each (state,action) pair. K1 = n_states = 12 categories per (s,a).",
+    "Model M0 (action-independent): P(S_next | S_current) with separate Dirichlet-Multinomial for each state. K0 = n_states = 12 categories per s.",
+    "Dirichlet prior: symmetric alpha_prior in {0.5, 1.0, 2.0} (testing sensitivity to prior concentration).",
+    "Exact log marginal likelihood: log ML = sum_{s,a} [lgamma(K*alpha) - lgamma(N_sa + K*alpha) + sum_i (lgamma(n_i + alpha) - lgamma(alpha))] with K=12 (NOT K=len(counts)).",
+    "Log Bayes factor = log ML(M1) - log ML(M0) in nats. Report in nats (natural logarithm), NOT bits.",
+    "History conditioning: K2 uses last 2 actions appended to current state (state + a_{t-1} + a_t). K3 uses last 3 actions (state + a_{t-2} + a_{t-1} + a_t).",
+    "If any implementation fails due to numerical issues (e.g., log(0), overflow), report as MEASUREMENT_INVALID with explicit error message.",
+    "Deterministic SPA for positive control validation: same 12-state design but with deterministic hash routing only (no uniform random). Expected: log BF strongly favors M1.",
+    "Design verification: 48/48 (state,action) pairs with 4 distinct candidates (same as parent).",
+    "Strata with < 5 records are skipped (MIN_STRATUM_SIZE=5, same as parent).",
+    "N_SHUFFLE >= 1000 (minimum 1000, ideally 1999 or 4999) to resolve p<0.001 threshold and avoid interpolation artifacts."
+  ],
+  "decision_rule": "Verdict priority: FALSIFIED-IN-SETTING > MEASUREMENT_INVALID > SURVIVES_CURRENT_TEST.\n\nFALSIFIED-IN-SETTING triggers if ANY of:\n  (1) C1: All tested prior specifications have shuffled-action null median >= 0 nats (Occam's razor fails)\n  (2) C3: For any specification passing C1, permutation p >= 0.001 on stochastic SPA (no significant detection)\n  (3) C6: Fewer than 48/48 (state,action) pairs with 4 distinct candidates\n\nMEASUREMENT_INVALID triggers if:\n  (4) Fewer than 30% of (state,action) strata have >= 5 records at N=5000\n  (5) stratum_size_buckets has < 2 non-empty buckets\n  (6) Any Bayesian implementation fails (e.g., missing dependency, numerical error)\n\nSURVIVES_CURRENT_TEST requires ALL of:\n  (C1) At least 1 prior specification has null median < 0 nats\n  (C3) Observed log BF on stochastic SPA exceeds 99.9th percentile of null (p < 0.001)\n  (C6) Design check passes\n  (C7) >= 2 non-empty stratum size buckets\n\nPhase 2 (beyond-Markov, only if SURVIVES on C1):\n  (C2) K3 log BF - K2 log BF > 0 nats AND permutation p < 0.01 for the difference\n  (C4) |K2(N=50000) - K2(N=5000)| / |K2(N=5000)| <= 0.5 for the best prior",
+  "product_consequence_positive": "If Bayesian model comparison passes C1+C3: the Laplace smoothing bias is definitively bypassed by a model-based estimation paradigm. The action-conditioned structure (1.52-bit CMI) is detectable without histogram smoothing. This opens the path to: (a) beyond-Markov K3-K2 testing with Bayes factors, (b) production Web data with richer state representations, (c) potential product integration of Bayesian transition models.",
+  "product_consequence_negative": "If Bayesian model comparison fails C1+C3: the Bayesian approach either (a) has invalid null centering (C1 fails) or (b) cannot detect the signal (C3 fails). In either case, the discrete transition modeling paradigm on this SPA class is exhausted across 5 estimator families (plug-in KL, entropy-rate CMI, KSG CMI, LR chi2, Bayesian). The Physics lane must pivot to: (a) continuous-state estimators (KDE/kNN on embeddings), (b) production Web data with fundamentally different dynamics, (c) abandoning CMI/detection estimation entirely.",
+  "estimated_cost": "Low. Single Python script execution on stochastic 12-state SPA, N=5000 primary. ~2-5 minutes compute per prior specification (exact Dirichlet-Multinomial marginal likelihood is closed-form). >=1000 within-session shuffled-action permutations per specification. No browser/network required. Uses parent infrastructure.",
+  "expected_information_gain": "Very high. This is the corrected re-execution of the FIFTH estimator family tested on this SPA class (after plug-in KL, entropy-rate CMI, KSG CMI, LR chi2). If corrected K=12 replicates audit-corrected SURVIVES_CURRENT_TEST with N>=1000, the Bayesian paradigm becomes the first valid detection method for discrete CMI on this SPA class, unblocking Phase 2 beyond-Markov K3-K2 testing. If corrected K=12 fails, the Physics lane has a definitive decision to pivot away from discrete transition estimation on synthetic SPAs. The experiment is small, fast, and maximally discriminating."
 }
