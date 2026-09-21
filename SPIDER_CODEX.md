@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **204**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **205**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -214,6 +214,7 @@ Validated experiments: **204**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-GRAPH-35544808911 | graph | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `3428e5acf8e9` |
 | EXP-PRODUCT-35551517868 | product | REVISE | MIXED — partial support for discriminating operating point under overlap. The frozen decision_rule requires BOTH: (1) calibrated threshold increases with overlap — TRUE (0.20→0.25 at 100% overlap); (2) FP > 0 at threshold 0.20 for overlap >=25% — FALSE (FP=0.0 at 25% and 50%, nonzero only at 75%=0.0958 and 100%=0.35). The threshold does increase but only at extreme (full) overlap, not gradually as hypothesized. FP binding emerges only at 75%+ overlap, not at the hypothesized >=25%. However, the audit identifies that the overlap operationalization was materially flawed: the code shift (overlap_pct/100*0.09) produces 0% actual distributional overlap at the 25% and 50% conditions, so FP=0 at those conditions is an artifact of insufficient shift, not evidence against discrimination. The threshold calibration grid is coarse discrete [0.20,0.25,...0.80] — the true optimum between 0.20 and 0.25 was not probed. Orthogonality marginal failure at 75% overlap (CI upper 0.1549 > 0.15) is flagged but may be sample-size artifact at n=480. Audit status REVISE, not PASS. No PRODUCT_CORE promotion authorized. C-FRESHNESS remains EXPERIMENTAL. | C-FRESHNESS | `2bd9859d5657` |
 | EXP-INTEL-35551517470 | intel | FAIL | REJECTED — The frozen gates (C1/C2/C3) pass mechanically (logistic R2=1.0, max residual 3.78e-08pp, F50=0.5654), but the extrapolation is informationally identical to the constant null F(n)=0.5654 and provides zero new predictive information. The logistic learns a step-function approximation (k=10.75) that saturates to L=0.5654 for all n>15, reproducing the n=20 observation as the asymptote. With 4 training points and 3 free parameters, overfitting is structurally guaranteed (audit VF2). The R2 improvement over parent (+0.12 vs power law 0.8797) is purely in-sample interpolation, not extrapolation power (audit VF3). Hill h=20.0 at upper bound is boundary-degenerate (audit VF4). The claim that a validated extrapolation exists is not supported: the extrapolation carries the full uncertainty of a single observation at n=20 and cannot discriminate L=0.5654 (plateau) from L=0.80 or L=1.0 (growth). The model-based extrapolation path is definitively closed after six consecutive failures (5 parent + this informationally vacuous result). Docker-based direct full-DOM measurement is the ONLY remaining path. | C-MEAS-VALID, C-PRODUCT-ECON | `e60795b8004c` |
+| EXP-PRODUCT-35572180893 | product | PASS | FALSIFIED — frozen spec.json decision_rule condition (c) triggers: orthogonality (TOST delta=0.15) breaks at 50% overlap (pearson r=0.080, CI upper 0.168 > 0.15, TOST p_upper=0.061). Secondary trigger: calibrated_threshold is None at 75% and 100% overlap (prereg step 4). Both are independent falsification paths per the frozen decision tree. However, the audit claim_ceiling correctly identifies that the 100% condition is tautological (identical distributions cannot be separated) and the orthogonality failure at 50% is marginal (12% above delta, non-monotonic, likely Type I under multiple testing at n=480). The maximum justified scientific finding is bounded discrimination under genuine Gaussian overlap: usable at 0-25% (threshold 0.20->0.25, orthogonality holds, FP moderate), marginal at 50% (threshold 0.27, orthogonality fragile), unusable at >=75% (no operating point). C-FRESHNESS remains EXPERIMENTAL. No PRODUCT_CORE promotion authorized. | C-FRESHNESS | `5edcd6c0ac24` |
 
 ## Latest recorded claim events
 
@@ -222,7 +223,7 @@ These are chronological latest events, not an automatic truth ranking.
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
-| C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35551517868 | product |
+| C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35572180893 | product |
 | C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-MEAS-VALID | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
