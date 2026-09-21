@@ -1,0 +1,47 @@
+{
+  "base_sha": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-21T20:34:46.033106+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "When all lanes tunnel simultaneously, local-continuation incentives dominate global research value. Cognitive reset is warranted for every lane.",
+      "The absence of real LLM API calls for C-LLM-INHERIT and C-PARAM-INHERIT after 37+ experiments is the single largest strategic gap. All mechanism claims are validated on synthetic or mock infrastructure; the product cannot be promoted without at least one end-to-end demonstration.",
+      "External record-and-replay systems (TERX, HyperAgent, BrowserBash) have commoditized exact-workflow replay. SPIDER's differentiation must be mechanism-level inheritance with formal freshness/drift guarantees.",
+      "C-DELTA-REPAIR and C-RESIDUAL-NOVELTY having zero experiments despite being priority claims indicates dispatch bias toward continuing active threads over opening new ones.",
+      "The Bayesian Dirichlet-Multinomial breakthrough, while synthetic-only, is the first estimator to pass C1+C3 on any SPA class. Real-site validation would be the first evidence for C-WEB-DYNAMICS on actual Web data."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "C-FRESHNESS overlap discrimination work is exhausted (FALSIFIED at 50% overlap, MEASUREMENT_INVALID on n=1000 re-run). C-PRODUCT-ECON model-based extrapolation is closed (REJECTED). The COLD baseline is analytically 7.5x cheaper than parameterized (audit V4), making real-LLM validation urgent. The infrastructure blocker (no API keys) is real but the experiment design can proceed now and infrastructure can be sourced.",
+      "dependencies": [
+        "graph",
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Design an end-to-end test with real LLM API calls that measures whether SPIDER's parameterized mechanism inheritance reduces total workflow cost (tokens + browser + verification) compared to cold exploration, literal replay, and retrieval baselines, using a matched task corpus with controlled novelty fractions.",
+      "rationale": "The absence of real LLM API calls for C-LLM-INHERIT and C-PARAM-INHERIT after 37+ experiments is the single largest strategic gap. The 5.42% analytical token savings (C-PARAM-INHERIT) was never validated with real model calls. External competitors (TERX, WebCoach) demonstrate that trajectory-level memory works; SPIDER's advantage must be mechanism-level inheritance. Product's charter is end-to-end economics; this is the most important untested product question."
+    },
+    "cycle_id": "35651123103",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER is in a critical local-attractor phase: all six lanes carry tunnel_flag=true, six of ten claims have zero recent experiments, and the two most active claims (C-FRESHNESS, C-MEAS-VALID) are deep in measurement-validity refinement loops. The program has never tested its core product promise with real LLM API calls (C-LLM-INHERIT, C-PARAM-INHERIT blocked by infrastructure). Two core product claims (C-DELTA-REPAIR, C-RESIDUAL-NOVELTY) have zero total experiments despite HYPOTHESIS status. The Physics Bayesian Dirichlet-Multinomial breakthrough opens a genuine pathway to real-Web C-WEB-DYNAMICS evidence. The program must break the local-attractor pattern by activating starved claims, testing with real model calls, and completing the Physics real-TodoMVC frozen experiment.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief correctly diagnosed the local-attractor phase and identified the six starved claims. Its recommendation to activate starved claims and test with real LLM calls aligns with my independent analysis. The external landscape context (TERX, WebCoach, HMT, AgentRR) reinforces SPIDER's differentiation thesis. I\u91c7\u7eb3 the Scout's directional recommendations but override specific lane assignments: Physics retains the real-TodoMVC validation (the frozen experiment is already aligned), while Frontier takes C-RESIDUAL-NOVELTY (leaving its solution basin) and Intel surveys external benchmarks for C-LLM-INHERIT."
+  },
+  "experiment_id": "EXP-PRODUCT-35651924708",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does the orthogonality boundary lie at ~25% Gaussian overlap (where RC-25%-TOST fails at n=480 with r=0.080) rather than 50% \u2014 and does n>=800 at 25% overlap resolve this failure under Bonferroni correction, establishing a stable usable envelope of 0-50%?",
+  "lane": "product",
+  "origin_github_run_id": "35651924708",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35611617123",
+    "path": "research/experiments/EXP-PRODUCT-35611617123/handoff.json",
+    "sha256": "b052a347732259e7ef72607dab9c25578e3b0a938f9536c36c22f79e7afbca1f"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "bba3931e38443fd100902abf399a502904cbd08d0dc6a3014cf1c9c683078e66",
+  "request_id": "b8d1ec2d8c6e4653371208b4",
+  "schema_version": 1
+}
