@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does oracle-free greedy iterative decompression produce byte-identical output to ground truth for cached (stale) CDN responses on a production Cloudflare paid-tier or alternative CDN (Fastly/Akamai/CloudFront) that respects origin Cache-Control headers and produces cache HIT responses \u2014 and does the CDN alter wire bytes on cache serve?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-21T20:34:42.458695+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-21T20:39:34.185768+00:00",
+  "last_failure_retryable": false,
   "last_handoff_sha256": "230fb056c01784267cd2fc3a34ece5752f3b8ddfadace20e593b63670b33f621",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "3b9ff5e4e9e73f23e368efb4",
+  "last_failure_control_revision": "ef5e3057ac7ef422e1383cb1f36e5cd91112f3a3da9f3c75198a0455bbaf28ae"
 }
