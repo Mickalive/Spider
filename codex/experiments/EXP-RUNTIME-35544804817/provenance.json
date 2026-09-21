@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "run_experiment.py": "24f8756a7cb4474f120bc2fd4a0c03c5e063b1a9d3332d87e6784522b9f2c3f3",
+    "raw_cell_results.jsonl": "c8caf5bcffedfd9a8494af355488f0cd5609a5fa2d8555a357626bd6df7247ee",
+    "payload_manifest.json": "39ca81c6dbcdee749060ebcd4127fbc6b15e0e146615bedc725d399a4bbd669d",
+    "tunnel.log": "99b4fa2f2caabef7fbfdb185ecb02d8fc78422cad38d16875004bd071e947ddc",
+    "result.json": "written to experiment directory",
+    "report.md": "written to experiment directory",
+    "provenance.json": "written to experiment directory"
+  },
+  "cdn_edge": "unknown (tunnel.log edge extraction regex did not match for this run)",
+  "code_paths": [
+    "research/experiments/EXP-RUNTIME-35544804817/run_experiment.py",
+    "oracle_free_greedy_decode function: iterative brotli->gzip->identity, NO SHA256 oracle check",
+    "payload generators and fullbody decompressor copied parent-faithfully from research/experiments/EXP-RUNTIME-35542474231/run_experiment.py"
+  ],
+  "commands": [
+    "python3 research/experiments/EXP-RUNTIME-35544804817/run_experiment.py (writes raw_cell_results.jsonl, payload_manifest.json, tunnel.log)"
+  ],
+  "datasets_fixtures": [
+    "payload_manifest.json (9 base payloads: 3 content types x 2 compression orders + 3 identity; deterministic seeds from parent; depth 3-5 payloads with alternating brotli/gzip; large 150KB payloads; BINARY bodies PYTHONHASHSEED-dependent, ground truth computed within-run)"
+  ],
+  "environment": {
+    "brotli": "1.2.0",
+    "cloudflared": "2026.9.1 (binary /tmp/opencode/cloudflared, ELF x86-64)",
+    "http_client": "python http.client (HTTPSConnection/HTTPConnection), manual reads, no content-decoding middleware",
+    "platform": "linux x86_64",
+    "python": "3.12.14"
+  },
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "frozen_inputs": {
+    "freeze.json": "frozen at 2026-09-20T23:36:27.603825+00:00",
+    "prereg.md": "85824e4bd9e970f430e6f9e93ac1a8adfcfa1eb645477d8bad6ade6107a7c46d",
+    "request.json": "f466270b7ee1e79ddaa85239e1df51a16102eb60720241876e976d11823f739c",
+    "spec.json": "dc53655daad20c3b094b9e0e914a57b3595496547a0a8f020ac2044d5ca2fbac"
+  },
+  "lane": "runtime",
+  "protocol_reference": "frozen spec.json decision_rule C1-C7 with baselines B-LOCALHOST-DIRECT, B-ORACLE-GUIDED-REGRESSION, B-CDN-IDENTITY, B-DEPTH-GENERALIZATION, B-LARGE-PAYLOAD, B-FIXED-ORDER-CDN; prereg sections 4-8",
+  "relevant_commits": [
+    {
+      "note": "working tree base; no commits made by EXECUTE (commit/push prohibited)",
+      "sha": "base_sha 6cbe79a74a31e0b0ba0ebe110da059d7a5847e47 per request.json"
+    }
+  ],
+  "tunnel_urls": {
+    "main_run": "https://workplace-cell-level-closing.trycloudflare.com"
+  },
+  "wall_time": {
+    "main_run_s": 229.8
+  }
+}

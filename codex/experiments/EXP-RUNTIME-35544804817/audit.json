@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "C2-HIT-power: spec.json measurement_validity and prereg.md 7 require N=5 per HIT cell (48 cells x5=240 HIT observations) with fixed URLs and Cache-Control: public, max-age=300; producer implements Phase 3 as 48 single-shot HIT fetches (1 per cell, 48 total). Before claiming C2 evaluated, re-run HIT phase with N=5 per cell and two-phase populate+test with 2-5s delay, and achieve >=90% cf-cache-status=HIT or explicitly declare HIT untestable on free-tier quick tunnel.",
+    "C2-decision-rule: frozen spec.json decision_rule requires ALL C1-C7 for SURVIVES_CURRENT_TEST including C2 >=90% HIT correct. Producer reports hit_test_hit_rate=0.0 and validity_notes declares C2 untestable, yet result.json outcome=SUPPORTS and report.md claims gate closes. Fix outcome to MIXED or MEASUREMENT_INVALID per spec, or narrow decision_rule to conditional HIT evaluation with explicit ceiling annotation.",
+    "C3-persistence: cache stability (C3: 6 groups x3 reps =18 observations) is claimed 6/6 stable but zero rows for STABILITY are written to raw_cell_results.jsonl; evidence is only say() log lines (run_experiment.py 645-687). Persist per-observation raw headers, raw_body_sha256, oracle_free_sha256, and stability verdict to artifact for independent recomputation.",
+    "Re-run inherited baselines: controls B-ORACLE-GUIDED-REGRESSION and B-FIXED-ORDER-CDN are marked pass=true via inherited parent EXP-RUNTIME-35542474231/result.json (expected 240/240 and 60/240) without re-measurement in this run. Either re-execute oracle-guided and fixed-order decoders on the same wire bytes in this run, or annotate controls as inherited-not-revalidated with ceiling limited to DYNAMIC reproducibility, not infrastructure identity.",
+    "Deduplicate artifact: raw_cell_results.jsonl contains 75 duplicate cell+rep keys (693 rows, 618 unique cell+rep keys; 645 rows with raw, 570 unique raw URLs). Depth shows 10 reps per cell (90 rows vs 45 expected for 9 cells x5) and large shows 10 reps per cell (60 rows vs 30 expected). Remove double-counting or explain doubling; correct total_observations and ensure unique-URL guarantee for DYNAMIC (spec prereg 7) holds; recompute hash.",
+    "Persist edge and headers for HIT: run_experiment.py extracts cdn_edge via regex 'Registered tunnel connection location='; for this run tunnel.log contains the line but edge remains 'unknown' (provenance.json cdn_edge=unknown, payload_manifest.json cdn_edge=unknown). Fix extraction or record trycloudflare URL suffices, and ensure HIT rows retain raw response_headers including cf-cache-status and content-encoding for recomputation (current HIT rows store flat schema without raw/derived split).",
+    "Align total_observations accounting: result.json total_observations=693 sums CDN 240+LOCALHOST 240+IDENTITY 15+DEPTH 90+LARGE 60+HIT 48. Stability 18 is excluded from total but included in C3 claim. Clarify denominator for total_correct_oracle_free and document that depth/large exceed prereg minimum (>=60 depth, >=30 large) but double the frozen N=5 expectation."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1-C2-not-evaluable",
+      "severity": "major",
+      "finding": "C2 (CDN HIT) is not evaluable on Cloudflare quick tunnel free-tier: 0/48 HIT observations have cf-cache-status=HIT (48/48 DYNAMIC). Spec requires >=90% HIT rate for validity before measuring C2 correctness. Producer correctly notes infrastructure ceiling in validity_notes and observations, but then reports outcome SUPPORTS which per frozen decision_rule requires C2 pass. This is an overstatement: the frozen SURVIVES_CURRENT_TEST cannot be satisfied when C2 validity fails.",
+      "evidence": "result.json metrics hit_test_cf_hit_count=0, hit_test_cf_dynamic_count=48, hit_test_hit_rate=0.0; result.json observations '0% achieved cf-cache-status=HIT (all 48 DYNAMIC)'; run_experiment.py 592-642 Phase 3 HIT test; tunnel.log quick tunnel without cache; spec.json decision_rule C2",
+      "impact": "Maximum claim cannot be SUPPORTS/SURVIVES_CURRENT_TEST. Correct bounded outcome is MIXED (C1 passes, C2 untested) or MEASUREMENT_INVALID for HIT sub-question. Does not falsify oracle-free DYNAMIC finding."
+    },
+    {
+      "id": "V2-HIT-N-underpowered",
+      "severity": "moderate",
+      "finding": "HIT measurement is underpowered vs prereg: prereg 7 and spec measurement_validity 4 require Minimum N=5 observations per condition with jitter 200-500ms and Minimum N=5 for HIT; producer implements 1 observation per HIT cell (48 total vs 240 required). Even if HIT rate were >0, precision would be 1/48 per cell, not 5/48. Jitter is applied but single shot loses variance estimate.",
+      "evidence": "prereg.md 7 CDN cache HIT test (48 conditions x N=5 =240 HIT observations); spec.json measurement_validity #4; run_experiment.py Phase 3 loop for (ct,ok,cs,ae) in cells: single raw_get per cell (n_hit_total=48); raw_cell_results.jsonl session_kind=CDN-HIT count 48",
+      "impact": "C2 measurement validity fails even ignoring HIT rate. HIT sub-experiment must be repeated at N=5 before any C2 claim."
+    },
+    {
+      "id": "V3-duplicate-rows-inflated-N",
+      "severity": "minor",
+      "finding": "Artifact has 75 duplicate cell+rep keys: 693 rows but 618 unique (session_kind,cell,rep). Depth is 90 rows (10 per each of 9 DEPTH cells, expected 5 per cell=45) and large is 60 rows (10 per each of 6 LARGE cells, expected 5 per cell=30). Extra 45+30=75 matches duplicates. Rate calculations are unaffected (90/90=100% vs 45/45=100%) but total_observations=693 and total_correct_oracle_free=693 are inflated 2x for those strata, and hash polluted. Mirrors parent EXP-35542474231 audit V2 (87 duplicates).",
+      "evidence": "raw_cell_results.jsonl 693 rows; recomputed unique cell+rep 618, duplicate 75; CDN-DEPTH Counter 10 per cell, CDN-LARGE 10 per cell; run_experiment.py 733-739 depth loop range(REPS) with REPS=5 should give 5 per cell but artifact has 10",
+      "impact": "Does not change correctness rates (all oracle_free_correct=true) but violates unique-URL accounting and inflates denominator; requires deduplication or corrected manifest for audit traceability."
+    },
+    {
+      "id": "V4-stability-not-persisted",
+      "severity": "moderate",
+      "finding": "C3 cache stability (6 groups x3 consecutive requests, 18 observations, claim 6/6 byte-stable) is not persisted to raw_cell_results.jsonl. Rows for session_kind STABILITY or similar are absent; only console say() logs remain (run_experiment.py 644-687). Cannot independently recompute raw_same / dec_same / all_correct from artifact. HIT rows also use divergent flat schema (pkey, cf_cache_status, oracle_free_correct without raw/derived split).",
+      "evidence": "raw_cell_results.jsonl session_kind values: LOCALHOST 240, CDN 240, CDN-DEPTH 90, CDN-LARGE 60, CDN-HIT 48, CDN-IDENTITY 15; zero STABILITY rows; run_experiment.py 649-686 cache_groups dict never written to JSONL; result.json metrics cache_stability_groups_pass=6 without evidence_ref to raw rows",
+      "impact": "C3 is not independently auditable from raw evidence; relies on producer log. Downgrades C3 from recomputed observation to producer interpretation. Requires persisted per-observation rows before VALIDATED."
+    },
+    {
+      "id": "V5-regression-baselines-not-rerun",
+      "severity": "moderate",
+      "finding": "Baselines B-ORACLE-GUIDED-REGRESSION and B-FIXED-ORDER-CDN are not re-measured in this run; controls pass=true via inherited parent result.json references. Spec baselines describe re-validation that test infrastructure is identical, but no wire bytes for those baselines were collected this run. Positive and null controls that ARE re-measured (B-LOCALHOST-DIRECT 240/240, B-CDN-IDENTITY 15/15) do recompute correctly.",
+      "evidence": "result.json controls B-ORACLE-GUIDED-REGRESSION observed='240/240 (parent EXP-RUNTIME-35542474231)' evidence_ref parent path; B-FIXED-ORDER-CDN similarly; provenance.json frozen_inputs but no re-execution; run_experiment.py contains no oracle-guided or fixed-order decode calls",
+      "impact": "Infrastructure-identity claim relies on inherited evidence, not direct replication. Limits claim ceiling to within-run DYNAMIC oracle-free finding, not cross-run CDN equivalence demonstration, until re-measured."
+    },
+    {
+      "id": "V6-edge-unknown",
+      "severity": "minor",
+      "finding": "CDN edge not captured: provenance.json cdn_edge='unknown (tunnel.log edge extraction regex did not match)', payload_manifest.json cdn_edge='unknown', tunnel.log edge regex failed despite quick tunnel URL https://workplace-cell-level-closing.trycloudflare.com present. Parent ceiling was edge iad05; this run cannot assert same edge. Does not affect correctness measurement but limits geographic generality claim.",
+      "evidence": "provenance.json cdn_edge unknown; run_experiment.py 466-476 edge extraction re.search 'Registered tunnel connection location=(\\\\S+)'; tunnel.log 2026-09-20T23:52 collection",
+      "impact": "Claim ceiling must be 'Cloudflare free-tier quick tunnel, edge unknown, DYNAMIC only' not 'edge iad05'."
+    },
+    {
+      "id": "V7-oracle-free-equivalence-valid",
+      "severity": "info",
+      "finding": "Oracle-free greedy decode implementation (run_experiment.py 222-253 oracle_free_greedy_decode: try brotli then gzip each iteration, prefer br if both succeed, loop until neither succeeds, no SHA check) is functionally equivalent to prereg spec on this data (zero ambiguous tie-breaks). The simultaneous try-both then prefer-br is semantically identical to spec's sequential try-br-then-gz because choice is same (br) when both succeed; method distribution br=60,gz+br=60,gz=80,gz+gz=40 matches parent exactly, and zero ambiguous across 693 observations confirms deterministic paths. No validity threat here.",
+      "evidence": "run_experiment.py 222-253; spec.json measurement_validity #3; raw_cell_results.jsonl derived oracle_free_ambiguous=false for all 693 rows; result.json metrics cdn_method_distribution matches parent",
+      "impact": "Supports that oracle-free greedy decode is deployable without SHA oracle on tested distribution; no fix needed."
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-LOCALHOST-DIRECT",
+      "expected": "240/240 byte-identical under oracle-free decode",
+      "observed": "240/240 (recomputed 240/240, 1.0)",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=LOCALHOST 240 rows all derived.oracle_free_correct=true; result.json metrics localhost_oracle_free_correct=240 localhost_oracle_free_total=240",
+      "notes": "Validates decoder implementation independent of CDN. Strong positive control; fully recomputable from raw wire bytes SHAs vs expected_sha256."
+    },
+    {
+      "id": "B-CDN-IDENTITY",
+      "expected": "15/15 identity observations recover ground truth under oracle-free decode",
+      "observed": "15/15 (recomputed 15/15, 1.0)",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=CDN-IDENTITY 15 rows all derived.oracle_free_correct=true; result.json identity_oracle_free_correct=15",
+      "notes": "Null control passes: CDN does not corrupt uncompressed identity payloads; the trivial decode path (identity) is correctly handled via greedy loop termination when neither decompressor succeeds. Recomputed via raw bytes hash vs expected plain_sha256."
+    },
+    {
+      "id": "B-ORACLE-GUIDED-REGRESSION",
+      "expected": "240/240 (parent result)",
+      "observed": "240/240 (parent EXP-RUNTIME-35542474231, not re-run)",
+      "pass": null,
+      "evidence": "result.json controls B-ORACLE-GUIDED-REGRESSION evidence_ref research/experiments/EXP-RUNTIME-35542474231/result.json; no oracle-guided decode executed in run_experiment.py this run",
+      "notes": "Not independently re-measured this run; treated as inherited-not-revalidated. Cannot confirm infrastructure identity via direct replication. Downgrade to unknown/inherited until re-executed on same wire bytes."
+    },
+    {
+      "id": "B-FIXED-ORDER-CDN",
+      "expected": "60/240 (parent result)",
+      "observed": "60/240 (parent EXP-RUNTIME-35542474231, not re-run)",
+      "pass": null,
+      "evidence": "result.json controls B-FIXED-ORDER-CDN evidence_ref parent; no fixed-order decode executed this run",
+      "notes": "Same as B-ORACLE-GUIDED-REGRESSION: inherited only. Parent FALSIFIES (60/240) is the mechanistic reference showing CDN re-encoding breaks fixed-origin-order assumption; not revalidated here."
+    },
+    {
+      "id": "B-DEPTH-GENERALIZATION",
+      "expected": ">=80% correct under oracle-free decode",
+      "observed": "90/90 (100%) recomputed 90/90; deduped expectation 45/45 (100%)",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=CDN-DEPTH 90 rows all correct; run_experiment.py Phase 6 depths 3-5 alternating brotli q4/gzip L1; result.json depth_oracle_free_correct=90 depth_oracle_free_total=90",
+      "notes": "Passes threshold even after deduplication (45 unique). Demonstrates greedy iteration handles deeper stacking without SHA guidance. No ambiguous tie-breaks observed."
+    },
+    {
+      "id": "B-LARGE-PAYLOAD",
+      "expected": ">=80% correct under oracle-free decode",
+      "observed": "60/60 (100%) recomputed 60/60; deduped expectation 30/30 (100%)",
+      "pass": true,
+      "evidence": "raw_cell_results.jsonl session_kind=CDN-LARGE 60 rows all correct; run_experiment.py Phase 7 LARGE_TARGET 150000, 3 payloads x2 orders x5 reps; result.json large_oracle_free_correct=60 large_oracle_free_total=60",
+      "notes": "Passes threshold even after deduplication. Validates >100KB payloads do not break greedy iteration. BINARY large payloads are PYTHONHASHSEED-dependent within-run only, consistent with provenance."
+    },
+    {
+      "id": "B-CDN-HIT-REGRESSION",
+      "expected": ">=90% HIT observations correct under oracle-free decode AND >=90% HIT rate for validity",
+      "observed": "48/48 correct (100%) but 0/48 HIT (0% HIT rate, all DYNAMIC)",
+      "pass": false,
+      "evidence": "result.json hit_test_oracle_free_correct=48 hit_test_oracle_free_total=48 hit_test_cf_hit_count=0 hit_test_cf_dynamic_count=48 hit_test_hit_rate=0.0; raw_cell_results.jsonl CDN-HIT 48 rows cf_cache_status DYNAMIC; run_experiment.py 592-642 HIT test 48 single-shot",
+      "notes": "Validity fails per spec: requires >=90% HIT rate. Correctness on DYNAMIC bytes is tautologically the same as primary matrix; HIT staleness question remains untested. Reported as infrastructure ceiling, not negative result, in validity_notes."
+    }
+  ],
+  "recomputed_metrics": {
+    "cdn_primary_oracle_free_correct": 240,
+    "cdn_primary_oracle_free_total": 240,
+    "cdn_primary_oracle_free_rate": 1.0,
+    "cdn_primary_method_distribution": {
+      "br": 60,
+      "gz+br": 60,
+      "gz": 80,
+      "gz+gz": 40
+    },
+    "cdn_primary_ambiguous_tie_breaks": 0,
+    "localhost_oracle_free_correct": 240,
+    "localhost_oracle_free_total": 240,
+    "localhost_oracle_free_rate": 1.0,
+    "identity_oracle_free_correct": 15,
+    "identity_oracle_free_total": 15,
+    "identity_oracle_free_rate": 1.0,
+    "depth_oracle_free_correct_raw": 90,
+    "depth_oracle_free_total_raw": 90,
+    "depth_oracle_free_rate_raw": 1.0,
+    "depth_oracle_free_correct_deduped_estimate": 45,
+    "depth_oracle_free_total_deduped_estimate": 45,
+    "depth_oracle_free_rate_deduped": 1.0,
+    "large_oracle_free_correct_raw": 60,
+    "large_oracle_free_total_raw": 60,
+    "large_oracle_free_rate_raw": 1.0,
+    "large_oracle_free_correct_deduped_estimate": 30,
+    "large_oracle_free_total_deduped_estimate": 30,
+    "large_oracle_free_rate_deduped": 1.0,
+    "hit_test_oracle_free_correct": 48,
+    "hit_test_oracle_free_total": 48,
+    "hit_test_oracle_free_rate": 1.0,
+    "hit_test_cf_hit_count": 0,
+    "hit_test_cf_dynamic_count": 48,
+    "hit_test_hit_rate": 0.0,
+    "cache_stability_groups_pass_claimed": 6,
+    "cache_stability_groups_total_claimed": 6,
+    "cache_stability_groups_recomputable": false,
+    "cache_stability_rows_in_artifact": 0,
+    "ambiguous_tie_breaks_cdn": 0,
+    "ambiguous_tie_breaks_all": 0,
+    "total_observations_raw": 693,
+    "total_observations_unique_cell_rep": 618,
+    "total_observations_unique_raw_url": 570,
+    "total_correct_oracle_free_raw": 693,
+    "duplicate_cell_rep_rows": 75,
+    "recomputed_match_producer_rates": true,
+    "recomputed_match_producer_counts_except_dedup": true,
+    "notes": "Recomputed from raw_cell_results.jsonl: session_kind counts LOCALHOST 240, CDN 240, CDN-IDENTITY 15, CDN-DEPTH 90 (10 per Depth cell), CDN-LARGE 60 (10 per Large cell), CDN-HIT 48. All oracle_free_correct booleans true; all oracle_free_ambiguous false. Total 693 includes inflated depth/large (expected 618 with 5 reps per depth/large). Rate metrics match producer exactly; count metrics inflated by 75 duplicates."
+  },
+  "claim_ceiling": "Oracle-free greedy iterative decompression (try brotli->gzip until neither succeeds, no SHA256 oracle, MAX_DEPTH=5) produces byte-identical output to ground truth on Cloudflare free-tier quick-tunnel DYNAMIC responses: 240/240 primary matrix (48 cells x5), 240/240 localhost positive control, 15/15 identity null control, ~45/45 depth 3-5 (deduped, 90/90 raw due to 2x duplication), ~30/30 large >100KB (deduped, 60/60 raw), 48/48 HIT-test DYNAMIC bytes, 0 ambiguous tie-breaks, method distribution br=60 gz+br=60 gz=80 gz+gz=40, via sequential jittered requests, brotli q4/gzip L1, 10KB nominal/150KB large, Python 3.12.14 brotli 1.2.0 http.client, tunnel https://workplace-cell-level-closing.trycloudflare.com edge unknown. NOT VALIDATED for: CDN cache HIT/stale-cache serving (0% HIT, N=1 per cell vs required N=5, free-tier quick tunnel does not cache despite Cache-Control: public, max-age=300), other CDN providers/tiers/edges, concurrent load, HTTP/2 or H3, mixed chunk-size pipelines, byte-level independent recomputation from raw wire bytes for HIT/stability (HIT flat schema, stability not persisted), or re-validated oracle-guided/fixed-order baselines (inherited). C-MEAS-VALID remains EXPERIMENTAL; deployable decoder validated for DYNAMIC only pending HIT test on caching production tier and deduplicated artifact.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35544804817/spec.json dc53655daad20c3b094b9e0e914a57b3595496547a0a8f020ac2044d5ca2fbac frozen decision_rule C1-C7",
+    "research/experiments/EXP-RUNTIME-35544804817/prereg.md 85824e4bd9e970f430e6f9e93ac1a8adfcfa1eb645477d8bad6ade6107a7c46d frozen oracle_free_greedy_decode algorithm",
+    "research/experiments/EXP-RUNTIME-35544804817/freeze.json 2026-09-20T23:36:27.603825 frozen_at",
+    "research/experiments/EXP-RUNTIME-35544804817/result.json outcome SUPPORTS status COMPLETE metrics quoted",
+    "research/experiments/EXP-RUNTIME-35544804817/report.md C2 ⚠️ INFRA table and interpretation",
+    "research/experiments/EXP-RUNTIME-35544804817/provenance.json cloudflared 2026.9.1 python 3.12.14 brotli 1.2.0 wall_time 229.8s cdn_edge unknown",
+    "research/experiments/EXP-RUNTIME-35544804817/raw_cell_results.jsonl sha256 c8caf5bcffedfd9a8494af355488f0cd5609a5fa2d8555a357626bd6df7247ee 693 rows, session_kind distribution, all oracle_free_correct true, 0 ambiguous",
+    "research/experiments/EXP-RUNTIME-35544804817/payload_manifest.json sha256 39ca81c6dbcdee749060ebcd4127fbc6b15e0e146615bedc725d399a4bbd669d 24 payloads, tunnel_url, cdn_edge unknown",
+    "research/experiments/EXP-RUNTIME-35544804817/tunnel.log sha256 99b4fa2f2caabef7fbfdb185ecb02d8fc78422cad38d16875004bd071e947ddc quick tunnel https://workplace-cell-level-closing.trycloudflare.com",
+    "research/experiments/EXP-RUNTIME-35544804817/run_experiment.py sha256 24f8756a7cb4474f120bc2fd4a0c03c5e063b1a9d3332d87e6784522b9f2c3f3 oracle_free_greedy_decode 222-253, Phase 3 HIT test 585-642 (48 single-shot), Phase 4 stability 644-687 not written, Phase 6 depth 705-743, Phase 7 large 745-777",
+    "research/experiments/EXP-RUNTIME-35542474231/result.json parent 240/240 oracle-guided, 60/240 fixed-order, controls for inheritance",
+    "research/experiments/EXP-RUNTIME-35542474231/handoff.json parent ceiling oracle-guided DYNAMIC only, edge iad05, not deployable, HIT untested",
+    "research/experiments/EXP-RUNTIME-35542474231/audit.json parent REVISE V1 oracle circularity major, V3 0 HIT moderate",
+    "codex/claim_state.json C-MEAS-VALID status EXPERIMENTAL (EXP-RUNTIME-35542474231 CONSTRAINED), HYPOTHESIS for intel sub-thread"
+  ],
+  "unresolved": [
+    "CDN cache HIT/stale-cache oracle-free decode: 0% HIT on quick tunnel free-tier despite Cache-Control: public, max-age=300 and fixed URLs; requires production Cloudflare zone with cache enabled or alternative CDN that respects origin Cache-Control to reach >=90% HIT rate at N=5 per cell.",
+    "Deduped depth/large counts: artifact reports 90 depth and 60 large vs prereg minima 60/30 and expected 45/30 for N=5; whether doubling is intentional oversampling or artifact duplication bug remains to be clarified and hash corrected.",
+    "Cache stability C3: claim 6/6 byte-stable across 3 consecutive requests is not recomputable from artifact (0 stability rows); requires persisted per-observation evidence to bound staleness-consistency ceiling.",
+    "Regression baseline re-validation: B-ORACLE-GUIDED-REGRESSION and B-FIXED-ORDER-CDN not re-measured this run; whether re-running them on same wire bytes yields identical 240/240 and 60/240 in this edge/tunnel instance is unmeasured.",
+    "Edge and tier generality: validated only on Cloudflare free-tier quick tunnel sequential jittered 200-500ms, edge unknown this run (parent iad05), 10KB nominal/150KB large, brotli q4/gzip L1. Paid tiers, other edges, other CDNs (Fastly/Akamai/CloudFront), concurrent load, HTTP/2/H3 remain untested.",
+    "Performance economics: amortized latency and CPU cost of greedy try-brotli-then-gzip loop vs fixed-order not measured; product integration cost unknown.",
+    "Ambiguity under broader encodings: zero ambiguous tie-breaks observed, but whether deeper depths with different quality/levels or other CDN re-encoding settings could ever produce bytes where both brotli and gzip succeed divergently remains untested beyond this parameter grid."
+  ]
+}

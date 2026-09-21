@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35544804817",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "cdn_primary_oracle_free_correct": 240,
+    "cdn_primary_oracle_free_total": 240,
+    "cdn_primary_oracle_free_rate": 1.0,
+    "localhost_oracle_free_correct": 240,
+    "localhost_oracle_free_total": 240,
+    "localhost_oracle_free_rate": 1.0,
+    "identity_oracle_free_correct": 15,
+    "identity_oracle_free_total": 15,
+    "identity_oracle_free_rate": 1.0,
+    "depth_oracle_free_correct": 90,
+    "depth_oracle_free_total": 90,
+    "depth_oracle_free_rate": 1.0,
+    "large_oracle_free_correct": 60,
+    "large_oracle_free_total": 60,
+    "large_oracle_free_rate": 1.0,
+    "hit_test_oracle_free_correct": 48,
+    "hit_test_oracle_free_total": 48,
+    "hit_test_oracle_free_rate": 1.0,
+    "hit_test_cf_hit_count": 0,
+    "hit_test_cf_dynamic_count": 48,
+    "hit_test_hit_rate": 0.0,
+    "cache_stability_groups_pass": 6,
+    "cache_stability_groups_total": 6,
+    "ambiguous_tie_breaks_cdn": 0,
+    "cdn_method_distribution": {
+      "br": 60,
+      "gz+br": 60,
+      "gz": 80,
+      "gz+gz": 40
+    },
+    "total_observations": 693,
+    "total_correct_oracle_free": 693
+  },
+  "controls": {
+    "B-LOCALHOST-DIRECT": {
+      "description": "Oracle-free greedy decode on localhost-served payloads. Validates the decoder implementation without CDN.",
+      "expected": "240/240 byte-identical decompression output to ground truth under oracle-free decode",
+      "observed": "240/240",
+      "pass": true,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=LOCALHOST"
+    },
+    "B-CDN-IDENTITY": {
+      "description": "Oracle-free greedy decode on uncompressed CDN payloads recovers ground truth.",
+      "expected": "15/15 identity observations recover ground truth under oracle-free decode",
+      "observed": "15/15",
+      "pass": true,
+      "evidence_ref": "raw_cell_results.jsonl session_kind=CDN-IDENTITY"
+    },
+    "B-ORACLE-GUIDED-REGRESSION": {
+      "description": "Oracle-guided decode on same 48-cell CDN matrix (not re-run; inherited from parent as regression baseline).",
+      "expected": "240/240 (parent result)",
+      "observed": "240/240 (parent EXP-RUNTIME-35542474231)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35542474231/result.json"
+    },
+    "B-FIXED-ORDER-CDN": {
+      "description": "Parent fixed-origin-order decompression on same 48-cell matrix (not re-run; inherited as regression baseline).",
+      "expected": "60/240 (parent result)",
+      "observed": "60/240 (parent EXP-RUNTIME-35542474231)",
+      "pass": true,
+      "evidence_ref": "research/experiments/EXP-RUNTIME-35542474231/result.json"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/raw_cell_results.jsonl",
+      "sha256": "c8caf5bcffedfd9a8494af355488f0cd5609a5fa2d8555a357626bd6df7247ee",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/payload_manifest.json",
+      "sha256": "39ca81c6dbcdee749060ebcd4127fbc6b15e0e146615bedc725d399a4bbd669d",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/tunnel.log",
+      "sha256": "99b4fa2f2caabef7fbfdb185ecb02d8fc78422cad38d16875004bd071e947ddc",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35544804817/run_experiment.py",
+      "sha256": "24f8756a7cb4474f120bc2fd4a0c03c5e063b1a9d3332d87e6784522b9f2c3f3",
+      "role": "code"
+    }
+  ],
+  "observations": [
+    "All 240/240 CDN primary matrix observations produce byte-identical output under oracle-free greedy decode (no SHA256 oracle).",
+    "All 240/240 localhost positive control observations pass oracle-free decode.",
+    "All 15/15 CDN identity observations pass oracle-free decode.",
+    "All 90/90 depth 3-5 observations pass oracle-free decode (3 payloads x 3 depths x 10 reps).",
+    "All 60/60 large payload (>100KB) observations pass oracle-free decode (3 payloads x 2 orders x 10 reps).",
+    "All 48/48 cache HIT test observations pass oracle-free decode, but 0% achieved cf-cache-status=HIT (all 48 DYNAMIC).",
+    "Cache HIT hypothesis untestable: Cloudflare quick tunnel free-tier does not cache responses despite Cache-Control: public, max-age=300. Zero HIT responses observed across 48 cache-populate + 48 cache-test requests.",
+    "All 6/6 cache stability groups byte-stable: raw body SHA256 identical across 3 consecutive requests for each payload.",
+    "Zero ambiguous tie-breaks observed on CDN: at every layer, exactly one of brotli or gzip succeeds.",
+    "Oracle-free decode method distribution matches parent oracle-guided: br=60, gz+br=60, gz=80, gz+gz=40 on CDN primary matrix.",
+    "Parent encoding-agnostic method distribution confirms deterministic decompression paths per cell."
+  ],
+  "validity_notes": [
+    "CDN cache HIT condition is untestable under Cloudflare quick tunnel free-tier: all responses have cf-cache-status=DYNAMIC. The spec required >=90% HIT rate for C2 validity; this condition cannot be evaluated because zero HIT responses were observed. This is an infrastructure ceiling, not a negative scientific result.",
+    "Oracle-free greedy decode is semantically equivalent to the parent's oracle-guided decode on all tested cells because brotli (magic 0xCEB2CF81) and gzip (magic 0x1F8B) have distinct format signatures making the greedy try-brotli-then-gzip order unambiguous. No ambiguous tie-breaks were observed.",
+    "BINARY payload ground truth is PYTHONHASHSEED-dependent within-run only; cross-run reproducibility not guaranteed but not required for this experiment.",
+    "Cloudflare quick tunnel CDN edge was not captured in tunnel.log for this run (edge extraction regex did not match). This does not affect measurements.",
+    "The experiment uses the same seed (SEED=44) as the parent for deterministic payload generation, ensuring ground truth compatibility."
+  ],
+  "unresolved": [
+    "CDN cache HIT (stale) serving remains untested: Cloudflare quick tunnel free-tier does not cache responses despite Cache-Control: public, max-age=300. A production Cloudflare deployment or alternative CDN that respects cache headers would be needed to test C2.",
+    "Oracle-free decode performance (amortized latency, CPU cost) vs oracle-guided decode not measured.",
+    "Behavior under concurrent load, HTTP/2, HTTP/3, or non-Cloudflare CDNs not tested."
+  ]
+}

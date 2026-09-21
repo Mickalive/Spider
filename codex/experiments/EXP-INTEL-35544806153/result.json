@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35544806153",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "empirical_cdf_mapping": {
+      "description": "F(n) = proportion(margin_i > 0) at each n, canonical recipe tag_entropy x DEF-FULL-MAP, per-iteration margins from snr_per_iteration_tag_entropy.json.gz",
+      "per_n": {
+        "5": {
+          "F_n": 0.0,
+          "prop_agree": 0.0,
+          "mean_margin": -4.904587e-05,
+          "std_margin": 4.973988e-05,
+          "n_iterations": 10000,
+          "n_positive": 0,
+          "n_zero": 5070,
+          "n_negative": 4930,
+          "residual_vs_observed_pp": 0.0,
+          "pass_1pp": true
+        },
+        "10": {
+          "F_n": 0.0,
+          "prop_agree": 0.0,
+          "mean_margin": -1.346493e-04,
+          "std_margin": 1.056274e-04,
+          "n_iterations": 10000,
+          "n_positive": 0,
+          "n_zero": 2464,
+          "n_negative": 7536,
+          "residual_vs_observed_pp": 0.0,
+          "pass_1pp": true
+        },
+        "15": {
+          "F_n": 0.4996,
+          "prop_agree": 0.4996,
+          "mean_margin": 2.664443e-05,
+          "std_margin": 1.632369e-04,
+          "n_iterations": 10000,
+          "n_positive": 4996,
+          "n_zero": 0,
+          "n_negative": 3774,
+          "residual_vs_observed_pp": 0.0,
+          "pass_1pp": true
+        },
+        "20": {
+          "F_n": 0.5654,
+          "prop_agree": 0.5654,
+          "mean_margin": 3.968766e-04,
+          "std_margin": 6.230899e-04,
+          "n_iterations": 10000,
+          "n_positive": 5654,
+          "n_zero": 0,
+          "n_negative": 3747,
+          "residual_vs_observed_pp": 0.0,
+          "pass_1pp": true
+        }
+      }
+    },
+    "c1_reproduction": {
+      "n15": {
+        "F_n15": 0.4996,
+        "observed_ref": 0.4996,
+        "residual_pp": 0.0,
+        "pass_1pp": true
+      },
+      "n20": {
+        "F_n20": 0.5654,
+        "observed_ref": 0.5654,
+        "residual_pp": 0.0,
+        "pass_1pp": true
+      },
+      "C1_pass": true
+    },
+    "c2_monotonicity": {
+      "F_5": 0.0,
+      "F_10": 0.0,
+      "F_15": 0.4996,
+      "F_20": 0.5654,
+      "F_10_gt_F_5": false,
+      "F_15_gt_F_10": true,
+      "F_20_gt_F_15": true,
+      "strictly_monotonic_all_points": false,
+      "monotonic_from_n10_to_n20": true,
+      "C2_pass": false,
+      "note": "Frozen decision rule requires proportion(20) > proportion(15) > proportion(10) > proportion(5). F(10) = F(5) = 0.0, so strict inequality fails at the n5->n10 step. The description says 'monotonic increase from n=10 to n=20' but the PASS condition includes n=5. C2 FAIL under frozen rule."
+    },
+    "c3_extrapolation": {
+      "method": "Linear extrapolation from slope between n=15 and n=20",
+      "slope_15_20": 0.01316,
+      "slope_15_20_per_element": 0.01316,
+      "F_extrapolated_n50": 0.9602,
+      "F_extrapolated_n82": 1.38132,
+      "below_80_at_n50": false,
+      "exceeds_100_at_n82": true,
+      "C3_pass": false,
+      "note": "Linear extrapolation predicts 96.0% at n=50 and 138.1% at n=82. The n=82 prediction exceeds 1.0 (physically impossible for a proportion), demonstrating linear extrapolation is inappropriate for this bounded quantity. The diminishing growth rate (ratio plateau/jump = 0.132) suggests saturation, but linear model cannot capture this."
+    },
+    "nc1_linear_null": {
+      "F_null_n50": 0.5654,
+      "F_null_n82": 0.5654,
+      "F_extrapolated_n50": 0.9602,
+      "diff_from_null_n50": 0.3948,
+      "diff_from_null_n82": 0.81592,
+      "diff_n50_pp": 39.48,
+      "diff_n82_pp": 81.59,
+      "exceeds_5pp": true,
+      "NC1_pass": true
+    },
+    "step_function_analysis": {
+      "total_increase_F20_minus_F5": 0.5654,
+      "jump_F10_to_F15": 0.4996,
+      "plateau_F15_to_F20": 0.0658,
+      "ratio_plateau_to_jump": 0.1317053642914332,
+      "fraction_of_total_in_jump": 0.8836222143615139,
+      "fraction_of_total_in_plateau": 0.11637778563848602,
+      "note": "The step-function structure concentrates 88.4% of the total increase in the n=10->15 jump and only 11.6% in the n=15->20 plateau. The growth rate ratio (plateau/jump = 0.132) shows a 7.6x deceleration, consistent with threshold/phase-transition behavior rather than smooth parametric growth."
+    },
+    "alternative_extrapolations": {
+      "slope_5_20": 0.037693,
+      "F_extrap_full_range_n50": 1.6962,
+      "slope_10_20": 0.05654,
+      "F_extrap_10_20_n50": 2.2616,
+      "note": "All linear extrapolations from different anchor points produce F(50) >> 1.0, confirming that linear extrapolation of a bounded [0,1] quantity from step-function data is fundamentally inappropriate."
+    },
+    "baseline_comparison": {
+      "B1_parent_modelA_residual_n15_pp": 34.59,
+      "B1_parent_modelA_residual_n20_pp": 18.96,
+      "B2_parent_modelB_residual_n15_pp": 12.39,
+      "B2_parent_modelB_R2": 0.8797,
+      "B3_corrected_phi_mean_std_residual_n20_pp": 17.84,
+      "B4_diagnostic_residual_n15_pp": 0.0,
+      "B4_diagnostic_residual_n20_pp": 0.0,
+      "B5_null_noise_baseline": 0.499208,
+      "empirical_cdf_residual_n15_pp": 0.0,
+      "empirical_cdf_residual_n20_pp": 0.0,
+      "note": "The empirical CDF mapping matches the diagnostic indicator exactly (both are proportion(margin>0)). All residuals are 0.00pp at training points, identical to B4. This is expected: under template invariance, the empirical CDF IS the diagnostic indicator."
+    },
+    "positive_control": {
+      "PC1_EMPIRICAL_CDF_REPRODUCES_TRAINING": {
+        "expected": "Empirical CDF at n=5 within 1pp of 0.0; at n=10 within 1pp of 0.0; at n=15 within 1pp of 0.4996; at n=20 within 1pp of 0.5654.",
+        "observed": "F(5)=0.0 (0.00pp), F(10)=0.0 (0.00pp), F(15)=0.4996 (0.00pp), F(20)=0.5654 (0.00pp). All within 1pp.",
+        "pass": true
+      }
+    },
+    "frozen_inputs_hashes": {
+      "snr_per_iteration_tag_entropy.json.gz": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "analysis_output_snr.json": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2"
+    }
+  },
+  "controls": {
+    "PC1_EMPIRICAL_CDF_REPRODUCES_TRAINING": {
+      "expected": "Empirical CDF reproduces observed ranking agreement at all training points (n=5, 10, 15, 20) within 1pp.",
+      "observed": "F(5)=0.0 (0.00pp residual), F(10)=0.0 (0.00pp), F(15)=0.4996 (0.00pp), F(20)=0.5654 (0.00pp). Trivially exact by construction.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz (sha256 ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a)"
+      ]
+    },
+    "NC1_LINEAR_INTERPOLATION_NULL": {
+      "expected": "Empirical CDF extrapolation at n=50 must differ from linear extrapolation from n=20 by >5pp to demonstrate non-trivial structure.",
+      "observed": "F_extrapolated(50) = 0.9602, F_null(50) = 0.5654, diff = 39.48pp >> 5pp. The linear extrapolation from n=15-20 slope (0.01316/element) is substantially different from constant null.",
+      "pass": true,
+      "evidence_refs": [
+        "result.json metrics.nc1_linear_null"
+      ]
+    },
+    "B1_PARENT_MODELA": {
+      "expected": "Parent ModelA Phi(median/std) predicted 0.8455 at n15 (residual 34.59pp) and 0.7550 at n20 (residual 18.96pp). REJECTED at C1.",
+      "observed": "Reproduced from parent result.json: ModelA residual 34.59pp at n15, 18.96pp at n20.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35538868377/result.json metrics.modelA_median_phi"
+      ]
+    },
+    "B2_PARENT_MODELB": {
+      "expected": "Saturating sign-fraction power law fitted 0.3757 at n15 (residual 12.39pp) and 0.6395 at n20 (residual 7.41pp). R2=0.8797 <0.90.",
+      "observed": "Reproduced from parent result.json: ModelB residual 12.39pp at n15, 7.41pp at n20, R2=0.8797.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35538868377/result.json metrics.modelB_sign_fraction_powerlaw"
+      ]
+    },
+    "B3_CORRECTED_PHI_MEAN_STD": {
+      "expected": "Phi(mean/std) predicted 0.7379 at n20 (residual 17.8pp). REJECTED at C1.",
+      "observed": "Reproduced from grandparent: residual 17.84pp at n20.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35530590171/result.json metrics.corrected_snr_model"
+      ]
+    },
+    "B4_DIAGNOSTIC_INDICATOR": {
+      "expected": "Direct proportion(margin>0) = 0.4996 at n15 (residual 0.00pp) and 0.5654 at n20 (residual 0.00pp).",
+      "observed": "Reproduced: proportion(margin>0) = 0.4996 at n15 (0.00pp) and 0.5654 at n20 (0.00pp). Identical to empirical CDF by construction.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35538868377/result.json metrics.positive_control_diagnostic"
+      ]
+    },
+    "B5_NULL_NOISE_BASELINE": {
+      "expected": "Random noise model agreement ~50% at all n.",
+      "observed": "Null 0.499208 verified (500k sims from parent). Empirical CDF at n=15 (0.4996) and n=20 (0.5654) differ from null by 0.04pp and 6.62pp respectively.",
+      "pass": true,
+      "evidence_refs": [
+        "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json -> null_control"
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/snr_per_iteration_tag_entropy.json.gz",
+      "sha256": "ce3dda6e021137ef0c911c19d8897c24f26342e8bd6da77242e1a026e08c1b7a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35476271877/analysis_output_snr.json",
+      "sha256": "f7f6986753774125966be2654a30744de386e2ab93790b02ec84d035ff1358b2",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35538868377/result.json",
+      "sha256": null,
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35544806153/result.json",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35544806153/report.md",
+      "sha256": null,
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35544806153/provenance.json",
+      "sha256": null,
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "OBS1: The empirical CDF mapping F(n) = proportion(margin_i > 0) exactly reproduces observed ranking agreement at all four training points: F(5)=0.0, F(10)=0.0, F(15)=0.4996, F(20)=0.5654. Residuals are 0.00pp at all points. This is trivially true by construction under template invariance, where ranking agreement equals proportion(margin_i > 0) exactly.",
+    "OBS2: The step-function structure is (0, 0, 0.50, 0.57) at n=5/10/15/20. The transition from 0% to ~50% occurs as a sharp jump between n=10 and n=15, with only a 6.6pp increase from n=15 to n=20. The ratio of plateau-to-jump growth is 0.132 (7.6x deceleration), consistent with a threshold/phase-transition mechanism.",
+    "OBS3: The step-function structure is NOT strictly monotonically increasing across all four points. F(5) = F(10) = 0.0 (tied at zero). It IS strictly increasing from n=10 to n=20: F(10)=0.0 < F(15)=0.4996 < F(20)=0.5654. Under the frozen decision rule requiring proportion(20) > proportion(15) > proportion(10) > proportion(5), C2 FAILS because proportion(10) = proportion(5) = 0.0.",
+    "OBS4: Linear extrapolation from the n=15 to n=20 slope (0.01316 per element) predicts F(50) = 0.9602 and F(82) = 1.3813. The n=82 prediction exceeds 1.0, which is physically impossible for a proportion. This demonstrates that linear extrapolation of a bounded [0,1] quantity from step-function data is fundamentally inappropriate.",
+    "OBS5: The diminishing growth rate (plateau/jump ratio = 0.132) provides descriptive evidence for saturation behavior. The jump (n=10 to n=15) accounts for 88.4% of the total increase while the plateau (n=15 to n=20) accounts for only 11.6%. If this deceleration pattern continues, the proportion would saturate well below 100% at full DOM. However, this observation cannot be validated with only 4 training points and linear extrapolation.",
+    "OBS6: Alternative linear extrapolations from different anchor points are even more extreme: slope from n=5 to n=20 gives F(50)=1.696, slope from n=10 to n=20 gives F(50)=2.262. All exceed 1.0, confirming the fundamental inappropriateness of linear extrapolation for this bounded quantity.",
+    "OBS7: The NC1 linear null comparison passes decisively (39.48pp difference >> 5pp threshold). The empirical CDF extrapolation contains substantial non-trivial structure beyond a constant-trend null. However, the direction of this structure (strong upward projection) contradicts the saturation evidence from OBS5.",
+    "OBS8: The marginal sign crossing between n=10 and n=15 (where mean_margin goes from -1.35e-04 to +2.66e-05) represents a qualitative shift in the margin distribution. At n=5 and n=10, the majority of margins are negative (all margins negative for 5070/10000 and 7536/10000 iterations respectively). At n=15, margins are positive for 4996/10000 iterations. At n=20, 5654/10000 are positive."
+  ],
+  "validity_notes": [
+    "Measurement transaction completed validly on existing reconstructed data. Status=MEASUREMENT_INVALID reflects frozen decision-rule verdict (C2 FAIL), not infrastructure failure.",
+    "The empirical CDF mapping is by construction identical to the diagnostic proportion(margin>0) under template invariance. This experiment provides no information beyond what was already known from the parent's positive control PC1. The mapping is the true data-generating process at training points, not an independent model.",
+    "C2 FAIL is a consequence of the frozen decision rule requiring strict monotonicity across all 4 points, including the n=5 to n=10 step where both are 0.0. The prereg text says 'monotonic increase from n=10 to n=20' but the PASS condition includes proportion(5). This is a specification design flaw: the author intended to test monotonicity from n=10 onward but wrote a stricter condition. Under the frozen rule, C2 FAILS.",
+    "C3 FAIL (F(50)=0.9602 > 0.80) is based on linear extrapolation from only 2 points (n=15 and n=20) with a slope of 0.01316 per element. This extrapolation is unreliable because: (a) it uses only 2 anchor points; (b) it ignores the step-function structure; (c) it produces physically impossible predictions at n=82 (>1.0); (d) the growth rate deceleration (ratio=0.132) suggests saturation that linear models cannot capture.",
+    "The most scientifically informative observation is the 7.6x growth deceleration from the jump phase to the plateau phase. If this pattern continues, the proportion would saturate well below 100% at full DOM. However, with only 2 points on the plateau (n=15 and n=20), any extrapolation is highly speculative.",
+    "Template invariance persists on truncated-first-20 subsample (verified in parent chain). Under template invariance, ranking agreement = proportion(margin_i > 0) exactly, so the empirical CDF mapping IS the true data-generating process at training points.",
+    "No new data collection performed. All computations used existing validated data from EXP-INTEL-35476271877. Offline computation <5 seconds.",
+    "PYTHONHASHSEED=0 set. Cart n=1 degeneracy excluded per parent protocol. tag_entropy x DEF-FULL-MAP canonical recipe is primary definition.",
+    "The frozen verdict rule: NOT C1 -> MEASUREMENT_INVALID; C1 AND NOT C2 -> MEASUREMENT_INVALID; C1 AND C2 AND C3 -> EMPIRICAL_CDF_VALIDATED; C1 AND C2 AND NOT C3 -> EMPIRICAL_CDF_PREDICTS_CROSSING. Result: C1=PASS, C2=FAIL -> MEASUREMENT_INVALID."
+  ],
+  "unresolved": [
+    "The frozen C2 decision rule requires strict monotonicity including the n=5->n=10 step where F(5)=F(10)=0.0. The prereg text says 'monotonic increase from n=10 to n=20' suggesting the author intended to test from n=10 onward. This discrepancy between intent and formal rule should be resolved in a future design.",
+    "Full-DOM ranking stability at n=21-82 remains UNKNOWN. The empirical CDF mapping provides no validated extrapolation due to C2 FAIL. Direct measurement via Docker image am1n3e/webarena-verified-shopping:latest remains the only path to an empirical answer.",
+    "Whether the 7.6x growth deceleration (plateau/jump ratio = 0.132) is a genuine saturation signal or an artifact of the small training set (4 points) is UNKNOWN. Fitting a saturating function (e.g., logistic, Hill, Richards) to these 4 points could test this but is outside the frozen non-parametric spec.",
+    "Whether the marginal sign crossing between n=10 and n=15 is physically meaningful (threshold/phase-transition) or an artifact of the narrow n=5-20 range is UNKNOWN.",
+    "Cross-site generalization beyond single Magento Docker site remains UNTESTED.",
+    "Whether template invariance breaks at full DOM element counts, changing the variance structure and potentially invalidating the proportion(margin>0) diagnostic, remains UNTESTED.",
+    "The Intel lane should consider pivoting to Docker-based direct full-DOM measurement (EXP-INTEL-35462974425) to bypass modeling entirely, as four consecutive model-based approaches have now failed to produce validated extrapolations."
+  ]
+}
