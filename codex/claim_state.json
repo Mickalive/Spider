@@ -1611,6 +1611,16 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "HYPOTHESIS",
         "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35651924708",
+        "lane": "product",
+        "created_at": "2026-09-21T20:34:46.033106+00:00",
+        "decision": "BLOCKED",
+        "source_commit": "8a4a4e2345195c6c76ee319f46cbed61af6f4656",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "BLOCKED",
+        "reason": "Infrastructure failure (no LLM API key in environment). Zero of 120 planned task-condition-rep executions performed. No measurements, no controls exercised, no baselines compared. BLOCKED is correct per EXPERIMENT_PACKET.md section 4: 'A valid scientific negative is normally status=COMPLETE with outcome=FALSIFIES or MIXED, not an execution failure.' This is an execution failure, not a scientific negative. C-LLM-INHERIT remains HYPOTHESIS bounded to prior 2-site synthetic corpus with no real-LLM evidence after 37+ experiments. The frozen design is preserved intact and executable pending API provisioning."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -2690,14 +2700,14 @@
       "reason": "This experiment is a provenance reconstruction, not a direct test of cross-site fragment yield. The reconstruction partially resolves the parent's provenance mismatch (2/3 definitions verified, 1 invalid due to copy-paste bug) but does not change the claim ceiling: truncation bias measurement remains blocked pending substrate fix (locatableSample cap removal) and canonical script commit. C-CROSSSITE remains HYPOTHESIS bounded to 2-site corpus with invalid estimator (audit V1 total DOM counts vs locatable counts)."
     },
     "C-LLM-INHERIT": {
-      "experiment_id": "EXP-INTEL-35131994346",
-      "lane": "intel",
-      "created_at": "2026-09-16T18:03:37.357411+00:00",
-      "decision": "PROVENANCE_PARTIAL",
-      "source_commit": "57efaab4f56233946882021b627ad578524c8174",
+      "experiment_id": "EXP-PRODUCT-35651924708",
+      "lane": "product",
+      "created_at": "2026-09-21T20:34:46.033106+00:00",
+      "decision": "BLOCKED",
+      "source_commit": "8a4a4e2345195c6c76ee319f46cbed61af6f4656",
       "claim_id": "C-LLM-INHERIT",
-      "status": "HYPOTHESIS",
-      "reason": "This experiment does not test LLM inheritance. The provenance resolution is a prerequisite for re-evaluating the parent's measurement, which itself is a prerequisite for assessing whether WebArena's 812-task corpus supports cross-site LLM inheritance testing. C-LLM-INHERIT remains HYPOTHESIS bounded to 2-site corpus pending both substrate fix and valid yield measurement."
+      "status": "BLOCKED",
+      "reason": "Infrastructure failure (no LLM API key in environment). Zero of 120 planned task-condition-rep executions performed. No measurements, no controls exercised, no baselines compared. BLOCKED is correct per EXPERIMENT_PACKET.md section 4: 'A valid scientific negative is normally status=COMPLETE with outcome=FALSIFIES or MIXED, not an execution failure.' This is an execution failure, not a scientific negative. C-LLM-INHERIT remains HYPOTHESIS bounded to prior 2-site synthetic corpus with no real-LLM evidence after 37+ experiments. The frozen design is preserved intact and executable pending API provisioning."
     },
     "C-PRODUCT-ECON": {
       "experiment_id": "EXP-INTEL-35551517470",

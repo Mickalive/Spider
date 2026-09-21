@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **214**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **215**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -224,6 +224,7 @@ Validated experiments: **214**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-RUNTIME-35611612543 | runtime | PASS | SUPPORTS — C-MEAS-VALID and C-FRESHNESS survive. Oracle-free greedy iterative decompression (brotli->gzip, MAX_DEPTH=5, no SHA256 oracle) produces byte-identical output to ground truth across all five cache lifecycle stages (fresh HIT, SWR stale HIT, SIE stale HIT, 304-revalidated substrate, 200 re-fetched) through local nginx 1.24.0 proxy_cache. All frozen decision-rule conditions satisfied: 960/960 byte-identical across stages 1-3 and 5 (240 each); stage 4 (304) correctly handled (240/240 substrate correct, 0 false decompressions). Audit PASS confirms all recomputed metrics match producer. All baselines and controls pass. Claim ceiling explicitly bounded to nginx-class byte-preserving caches; production CDN stale-serving byte behavior remains untested. | C-MEAS-VALID, C-FRESHNESS | `75132a202a82` |
 | EXP-PRODUCT-35611617123 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-FRESHNESS | `2f64ee8b0fe4` |
 | EXP-GRAPH-35611618323 | graph | PASS | FALSIFIES per frozen decision_rule — C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity. | C-FRESHNESS | `d97f60164fab` |
+| EXP-PRODUCT-35651924708 | product | BLOCKED | BLOCKED | C-LLM-INHERIT | `8a4a4e234519` |
 
 ## Latest recorded claim events
 
@@ -233,7 +234,7 @@ These are chronological latest events, not an automatic truth ranking.
 |---|---|---|---|
 | C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
 | C-FRESHNESS | EXPERIMENTAL | EXP-GRAPH-35611618323 | graph |
-| C-LLM-INHERIT | HYPOTHESIS | EXP-INTEL-35131994346 | intel |
+| C-LLM-INHERIT | BLOCKED | EXP-PRODUCT-35651924708 | product |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35611612543 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
