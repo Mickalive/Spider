@@ -9,7 +9,7 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 
-from research2_contract import PORTFOLIO_ACTIVE_ACTIONS
+from research2_contract import DIRECTOR_ACTIVE_ACTIONS
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -41,29 +41,28 @@ def parent_handoff_from_state(state: dict) -> dict | None:
     }
 
 
-def decode_portfolio_allocation(encoded: str, lane: str) -> dict:
+def decode_director_mandate(encoded: str, lane: str) -> dict:
     if not encoded:
-        raise RuntimeError("portfolio allocation required before allocating a new experiment")
+        raise RuntimeError("Global Research Director mandate required before allocating a new experiment")
     try:
         raw = base64.b64decode(encoded.encode("ascii"), validate=True)
         payload = json.loads(raw)
     except Exception as exc:
-        raise RuntimeError(f"invalid portfolio allocation payload: {exc}") from exc
+        raise RuntimeError(f"invalid Director mandate payload: {exc}") from exc
     if payload.get("schema_version") != 1:
-        raise RuntimeError("unsupported portfolio allocation schema")
-    allocations = payload.get("allocations")
-    if not isinstance(allocations, dict) or lane not in allocations:
-        raise RuntimeError(f"portfolio allocation missing lane: {lane}")
-    item = allocations[lane]
+        raise RuntimeError("unsupported Director mandate schema")
+    if payload.get("lane") != lane:
+        raise RuntimeError(f"Director mandate lane mismatch: expected {lane}, got {payload.get('lane')}")
+    item = payload.get("allocation")
     if not isinstance(item, dict):
-        raise RuntimeError(f"portfolio allocation lane payload invalid: {lane}")
+        raise RuntimeError(f"Director mandate allocation invalid for lane: {lane}")
     action = item.get("action")
-    if action not in PORTFOLIO_ACTIVE_ACTIONS:
+    if action not in DIRECTOR_ACTIVE_ACTIONS:
         raise RuntimeError(
-            f"portfolio action {action!r} does not authorize a new experiment for lane {lane}"
+            f"Director action {action!r} does not authorize a new experiment for lane {lane}"
         )
     if not item.get("claim_id") or not item.get("question"):
-        raise RuntimeError(f"portfolio allocation missing claim/question for lane {lane}")
+        raise RuntimeError(f"Director mandate missing claim/question for lane {lane}")
     return payload
 
 
@@ -86,7 +85,7 @@ def main():
     ap.add_argument("--reason", default="pulse")
     ap.add_argument("--chain-depth", type=int, default=0)
     ap.add_argument("--experiment-id", default="")
-    ap.add_argument("--portfolio-allocation-b64", default="")
+    ap.add_argument("--director-mandate-b64", default="")
     args = ap.parse_args()
 
     lanes = json.loads((ROOT / "research/lanes/registry.json").read_text())
@@ -121,8 +120,8 @@ def main():
         state["updated_at"] = datetime.now(timezone.utc).isoformat()
         print(f"SPIDER_RESUME experiment_id={exp_id} request_id={req['request_id']}")
     else:
-        portfolio_allocation = decode_portfolio_allocation(args.portfolio_allocation_b64, args.lane)
-        lane_allocation = portfolio_allocation["allocations"][args.lane]
+        director_mandate = decode_director_mandate(args.director_mandate_b64, args.lane)
+        lane_allocation = director_mandate["allocation"]
 
         # Product promotion is a durable transaction boundary. Never allocate a
         # child experiment until product-promote has acknowledged the accepted
@@ -155,7 +154,7 @@ def main():
                 "chain_depth": args.chain_depth,
                 "base_sha": base_sha,
                 "claim_registry_sha256": hashlib.sha256(claims_bytes).hexdigest(),
-                "portfolio_allocation": portfolio_allocation,
+                "director_mandate": director_mandate,
             }
             if inherited is not None:
                 seed["parent_handoff"] = inherited
@@ -189,11 +188,10 @@ def main():
             if inherited is not None:
                 print(f"SPIDER_PARENT_HANDOFF experiment_id={inherited['experiment_id']} sha256={inherited['sha256']}")
             print(
-                "SPIDER_PORTFOLIO_MANDATE "
-                f"cycle={portfolio_allocation.get('cycle_id')} "
+                "SPIDER_DIRECTOR_MANDATE "
+                f"cycle={director_mandate.get('cycle_id')} "
                 f"action={lane_allocation.get('action')} "
-                f"claim={lane_allocation.get('claim_id')} "
-                f"budget={lane_allocation.get('budget_units')}"
+                f"claim={lane_allocation.get('claim_id')}"
             )
         state.update({
             "active_experiment_id": exp_id,
