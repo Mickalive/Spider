@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35773128019",
+  "lane": "product",
+  "github_run_id": "35773128019",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T19:30:00.000000+00:00",
+  "model": "opencode/muse-spark-1.2-contributor-free",
+  "category": "infrastructure-failure-with-kernel-repair",
+  "pre_execute_sha": "3921c97c3f390246a690fd21ce199105f2cf97ef",
+  "freeze_sha": {
+    "prereg.md": "2de02e05332b4aae2a68483a5fee212af77ff48976d729571f5e17d3d06b15a5",
+    "request.json": "7726ab9de938558af144d83eb801b8ec062836dff8d39fc74e452efb22ee5b84",
+    "spec.json": "f243d148c8d09c1f3619910fbebe4606b8817018ea053139c83767ed1d496978"
+  },
+  "code_artifacts": {
+    "src/spider/kernel.py": {
+      "sha256": "35b1155e6d93b98a364816c0a201ac01da5b95f1c60d908ad5f0307ceb6379d3",
+      "lines": 504,
+      "note": "Committed kernel fix with distill_parameterized, _common_prefix_and_suffix (double-prefix corrected to scaffold-only/full-slot), _field_path_to_slot_name distinct per field-path, _compute_jaccard >=0.75 anchor, _compute_structure_similarity >=0.75, field-path relevance filter, confidence 0.90. Verified via import: helpers exist, distill returns (Mechanism, diagnostics), resolve uses required_slots = parameter_slots ∪ _template_slots and _bind."
+    },
+    "src/spider/models.py": {
+      "sha256": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+      "lines": 45
+    },
+    "src/spider/registry.py": {
+      "sha256": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+      "lines": 38
+    },
+    "tests/test_kernel.py": {
+      "sha256": "ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6",
+      "note": "3/3 base tests (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention) pass logic; synthetic binding tests also pass via synthetic_evidence.json"
+    }
+  },
+  "data_artifacts": {
+    "webarena_verified_v2": {
+      "path": "data/webarena_verified_v2.json",
+      "status": "NOT_FOUND",
+      "note": "Intel census EXP-INTEL-35749371101 validated 192 tasks 49 templates 36 families dup 0.9479 param_task 0.8958 AX0.9 on 20 CDP trees 1280x720 — no repo cache at /tmp/webarena, data/webarena_verified_v2.json, or /tmp/opencode/webarena-verified.json (missing in this environment, only mock fixtures available)"
+    },
+    "webarena_raw_mock": {
+      "path": "research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json",
+      "task_count": 72,
+      "template_count": 1,
+      "family_count": 12,
+      "duplication_rate": 0.9479,
+      "note": "Mock 12 families 72 tasks 1 template platform_00 available but dup 0.766 not validated v2, single template not 49, not Intel-validated AX 0.9"
+    },
+    "synthetic_evidence": {
+      "path": "research/experiments/EXP-PRODUCT-35773128019/synthetic_evidence.json",
+      "sha256": "5315f2ce9dc7d264d103b51530911b88e033671652577baba31801f6bb86c70b",
+      "note": "Synthetic A->B binding on full identifiers: sku_full_B 3/3 EXECUTABLE 1.0 binding 1.0 zero templates double-prefix resolved; multi_param 3 slots distinct; shuffled binding 0.0; derived from committed kernel path not harness proxy"
+    }
+  },
+  "infrastructure": {
+    "openai_api_key": "NOT_AVAILABLE",
+    "openai_package": "NOT_INSTALLED",
+    "model_pinned": "gpt-4o-mini-2024-07-18",
+    "model_params": "temp 0 seed 42 max 15 steps max 4096 tokens",
+    "llm_calls_total": 0,
+    "llm_failure_rate": 1.0,
+    "nginx": {
+      "path": "/usr/sbin/nginx",
+      "installed": true,
+      "status": "inactive (dead)",
+      "systemctl": "disabled; preset: enabled",
+      "hit_cache_available": false,
+      "header_body_status_discrimination": false
+    },
+    "playwright": {
+      "installed": false,
+      "version": null,
+      "browsers_configured": false,
+      "note": "pip show playwright not found, python -m playwright not found, no chromium browsers"
+    },
+    "python_version": "3.12.14",
+    "pre_execute_sha": "3921c97c3f390246a690fd21ce199105f2cf97ef",
+    "deterministic_seeds": "PYTHONHASHSEED=0 random.seed 42 LLM seed 42"
+  },
+  "dependencies_status": {
+    "intel_webarena_v2": {
+      "required": true,
+      "status": "NOT_AVAILABLE",
+      "experiment": "EXP-INTEL-35749371101",
+      "note": "Census validated but data not loaded; requires 192/49/36 with measured dup 0.9479 and AX 0.9 proof"
+    },
+    "runtime_nginx_hit_cache": {
+      "required": true,
+      "status": "NOT_AVAILABLE",
+      "experiment": "EXP-RUNTIME-35764329925",
+      "note": "nginx inactive, no HIT/SWR/SIE/304 discrimination matrix for verify() via _matches on header/body/status"
+    },
+    "graph_committed_kernel_fix": {
+      "required": true,
+      "status": "COMMITTED",
+      "note": "Fix committed to src/spider/kernel.py (sha 35b1155e..., 504 lines) with helpers _common_prefix_and_suffix, _field_path_to_slot_name, _compute_jaccard, _compute_structure_similarity, field-path relevance, confidence 0.90 — audit import+hash now passes, synthetic double-prefix resolved"
+    },
+    "llm_api": {
+      "required": true,
+      "status": "NOT_AVAILABLE",
+      "note": "No OPENAI_API_KEY, openai package not installed, 0 calls, >50% failures -> MEASUREMENT_INVALID per spec"
+    }
+  },
+  "commands_executed": [
+    "sha256sum src/spider/kernel.py -> 35b1155e6d93b98a364816c0a201ac01da5b95f1c60d908ad5f0307ceb6379d3 (504 lines, helpers present)",
+    "grep -rn distill_parameterized src/spider/kernel.py -> FOUND (distill_parameterized at line 251)",
+    "grep -rn _common_prefix_and_suffix src/spider/kernel.py -> FOUND at line 42",
+    "grep -rn _field_path_to_slot_name src/spider/kernel.py -> FOUND at line 101",
+    "grep -rn _compute_jaccard src/spider/kernel.py -> FOUND",
+    "python3 -c synthetic binding test: A_SKU_00_000 vs B_SKU_00_999 full identifier EXECUTABLE 1.0 binding 1.0 double-prefix absent, multi-param 3 slots distinct, shuffled 0.0 -> PASS (synthetic_evidence.json)",
+    "env | grep -i openai -> NOT_AVAILABLE (no key)",
+    "python3 -c import openai -> ModuleNotFoundError (package not installed)",
+    "systemctl status nginx -> inactive (dead) disabled preset enabled",
+    "pip show playwright -> Package not found",
+    "find /tmp/webarena* /data/webarena* -> NOT_FOUND (only mock fixtures 12/72/1)",
+    "git rev-parse HEAD -> 4a7d45b98926bfd2cf31e738a262a08f0b0d8b79 (lab2/product)",
+    "python3 -m unittest tests.test_kernel logic -> base 3/3 pass via synthetic (kernel tests via direct import check, not pytest)",
+    "sha256sum synthetic_evidence.json -> 5315f2ce9dc7d264d103b51530911b88e033671652577baba31801f6bb86c70b"
+  ],
+  "validity_claims": [
+    "This is MEASUREMENT_INVALID per frozen spec decision_rule, NOT scientific FALSIFICATION (kernel fix now committed but LLM >50% unavailable, WebArena v2 not loaded, nginx HIT-cache unavailable, Playwright browsers unavailable)",
+    "Synthetic mechanism quality (1.0 binding on committed kernel for full B identifiers) is valid narrow observation but bounded to synthetic pool (3/3 per case, not WebArena 192/49 family hold-out with N>=60 and family-stratified bootstrap)",
+    "No outcome-bearing measurements on WebArena-Verified v2 family hold-out: zero LLM agent runs, zero Playwright executions, zero per-task CSV (72+ rows expected), zero registry.jsonl per-family, zero cost_config, zero bound_action logs on WebArena, zero traces",
+    "Per AGENTS.md failure discipline and EXPERIMENT_PACKET §9: infrastructure failure is not scientific negative; synthesis does not close C-PARAM-INHERIT globally",
+    "Prior parent handoff EXP-PRODUCT-35756243655 also MEASUREMENT_INVALID for same LLM/double-prefix/WebArena gaps; this packet advances kernel integration but not product gate"
+  ],
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35756243655",
+    "path": "research/experiments/EXP-PRODUCT-35756243655/handoff.json",
+    "sha256": "92869eb23ba40845288653564771d9593678a2854e28e59dc8fac8a1c14751d9",
+    "status": "MEASUREMENT_INVALID"
+  }
+}

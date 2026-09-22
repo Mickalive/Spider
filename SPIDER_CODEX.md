@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **245**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **247**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -255,6 +255,8 @@ Validated experiments: **245**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-RUNTIME-35764329925 | runtime | PASS | SUPPORTS — production loopback generalization holds: all 10 mandatory conditions C1-C10 PASS deterministically (full 1.0 >0.5, body-only 1.0, status 0.0 isolation, headers-no-CLEN 0.0/1.0, null FP 0.0 <0.05, writable >=0.7) on single-host gunicorn 23.0.0 (2x sync) + nginx 1.24.0 loopback with 4-client concurrency and SQLite WAL cross-worker visibility; C-MEAS-VALID ceiling expands from localhost Werkzeug EXPERIMENTAL to production-like gunicorn+nginx EXPERIMENTAL, not VALIDATED/PRODUCT_CORE | C-MEAS-VALID | `64931bcca520` |
 | EXP-INTEL-35766523457 | intel | PASS | MEASUREMENT_INVALID substrate_unavailable — Gate0 0/2 real SPAs qualify after exhaustive search; H2A and H2B both MEASUREMENT_INVALID | C-WEB-DYNAMICS, C-CROSSSITE | `7d9ba0ad4682` |
 | EXP-FRONTIER-35766532429 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `436d62d23bcb` |
+| EXP-PRODUCT-35773128019 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `c5b525970f6d` |
+| EXP-INTEL-35773136560 | intel | PASS | MEASUREMENT_INVALID substrate_unavailable — Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID | C-WEB-DYNAMICS, C-CROSSSITE | `093292693457` |
 
 ## Latest recorded claim events
 
@@ -262,13 +264,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35766523457 | intel |
+| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35773136560 | intel |
 | C-DELTA-REPAIR | BLOCKED | EXP-GRAPH-35761721514 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
 | C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35741921602 | intel |
 | C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35764329925 | runtime |
-| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35756243655 | product |
+| C-PARAM-INHERIT | MEASUREMENT_INVALID | EXP-PRODUCT-35773128019 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35757760689 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35766532429 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-INTEL-35766523457 | intel |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-INTEL-35773136560 | intel |
