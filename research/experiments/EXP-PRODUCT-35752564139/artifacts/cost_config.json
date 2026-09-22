@@ -1,0 +1,12 @@
+{
+  "distill_tokens": 1000,
+  "instruction_tokens_per_task": 200,
+  "retrieval_tokens_per_task": 200,
+  "verification_tokens_per_task": 50,
+  "f_amortization": 10,
+  "model": "gpt-4o-mini-2024-07-18",
+  "temperature": 0,
+  "max_steps": 15,
+  "max_tokens": 4096,
+  "LLM_API_available": false
+}

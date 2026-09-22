@@ -1,0 +1,4092 @@
+{
+  "family_count": 12,
+  "task_count": 72,
+  "template_count": 1,
+  "duplication_rate": 0.9479,
+  "families": [
+    {
+      "family_id": "family_00",
+      "platform": "platform_0",
+      "pool_a": {
+        "skus": [
+          "A_SKU_00_000",
+          "A_SKU_00_001",
+          "A_SKU_00_002",
+          "A_SKU_00_003",
+          "A_SKU_00_004"
+        ],
+        "stores": [
+          "A_STORE_00_00",
+          "A_STORE_00_01",
+          "A_STORE_00_02",
+          "A_STORE_00_03",
+          "A_STORE_00_04"
+        ],
+        "tokens": [
+          "A_TOKEN_00_000",
+          "A_TOKEN_00_001",
+          "A_TOKEN_00_002",
+          "A_TOKEN_00_003",
+          "A_TOKEN_00_004"
+        ],
+        "products": [
+          "A_PRODUCT_00_00",
+          "A_PRODUCT_00_01",
+          "A_PRODUCT_00_02",
+          "A_PRODUCT_00_03",
+          "A_PRODUCT_00_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_00_000",
+          "B_SKU_00_001",
+          "B_SKU_00_002",
+          "B_SKU_00_003",
+          "B_SKU_00_004",
+          "B_SKU_00_005"
+        ],
+        "stores": [
+          "B_STORE_00_00",
+          "B_STORE_00_01",
+          "B_STORE_00_02",
+          "B_STORE_00_03",
+          "B_STORE_00_04",
+          "B_STORE_00_05"
+        ],
+        "tokens": [
+          "B_TOKEN_00_000",
+          "B_TOKEN_00_001",
+          "B_TOKEN_00_002",
+          "B_TOKEN_00_003",
+          "B_TOKEN_00_004",
+          "B_TOKEN_00_005"
+        ],
+        "products": [
+          "B_PRODUCT_00_00",
+          "B_PRODUCT_00_01",
+          "B_PRODUCT_00_02",
+          "B_PRODUCT_00_03",
+          "B_PRODUCT_00_04",
+          "B_PRODUCT_00_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_01",
+      "platform": "platform_1",
+      "pool_a": {
+        "skus": [
+          "A_SKU_01_000",
+          "A_SKU_01_001",
+          "A_SKU_01_002",
+          "A_SKU_01_003",
+          "A_SKU_01_004"
+        ],
+        "stores": [
+          "A_STORE_01_00",
+          "A_STORE_01_01",
+          "A_STORE_01_02",
+          "A_STORE_01_03",
+          "A_STORE_01_04"
+        ],
+        "tokens": [
+          "A_TOKEN_01_000",
+          "A_TOKEN_01_001",
+          "A_TOKEN_01_002",
+          "A_TOKEN_01_003",
+          "A_TOKEN_01_004"
+        ],
+        "products": [
+          "A_PRODUCT_01_00",
+          "A_PRODUCT_01_01",
+          "A_PRODUCT_01_02",
+          "A_PRODUCT_01_03",
+          "A_PRODUCT_01_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_01_000",
+          "B_SKU_01_001",
+          "B_SKU_01_002",
+          "B_SKU_01_003",
+          "B_SKU_01_004",
+          "B_SKU_01_005"
+        ],
+        "stores": [
+          "B_STORE_01_00",
+          "B_STORE_01_01",
+          "B_STORE_01_02",
+          "B_STORE_01_03",
+          "B_STORE_01_04",
+          "B_STORE_01_05"
+        ],
+        "tokens": [
+          "B_TOKEN_01_000",
+          "B_TOKEN_01_001",
+          "B_TOKEN_01_002",
+          "B_TOKEN_01_003",
+          "B_TOKEN_01_004",
+          "B_TOKEN_01_005"
+        ],
+        "products": [
+          "B_PRODUCT_01_00",
+          "B_PRODUCT_01_01",
+          "B_PRODUCT_01_02",
+          "B_PRODUCT_01_03",
+          "B_PRODUCT_01_04",
+          "B_PRODUCT_01_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_02",
+      "platform": "platform_2",
+      "pool_a": {
+        "skus": [
+          "A_SKU_02_000",
+          "A_SKU_02_001",
+          "A_SKU_02_002",
+          "A_SKU_02_003",
+          "A_SKU_02_004"
+        ],
+        "stores": [
+          "A_STORE_02_00",
+          "A_STORE_02_01",
+          "A_STORE_02_02",
+          "A_STORE_02_03",
+          "A_STORE_02_04"
+        ],
+        "tokens": [
+          "A_TOKEN_02_000",
+          "A_TOKEN_02_001",
+          "A_TOKEN_02_002",
+          "A_TOKEN_02_003",
+          "A_TOKEN_02_004"
+        ],
+        "products": [
+          "A_PRODUCT_02_00",
+          "A_PRODUCT_02_01",
+          "A_PRODUCT_02_02",
+          "A_PRODUCT_02_03",
+          "A_PRODUCT_02_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_02_000",
+          "B_SKU_02_001",
+          "B_SKU_02_002",
+          "B_SKU_02_003",
+          "B_SKU_02_004",
+          "B_SKU_02_005"
+        ],
+        "stores": [
+          "B_STORE_02_00",
+          "B_STORE_02_01",
+          "B_STORE_02_02",
+          "B_STORE_02_03",
+          "B_STORE_02_04",
+          "B_STORE_02_05"
+        ],
+        "tokens": [
+          "B_TOKEN_02_000",
+          "B_TOKEN_02_001",
+          "B_TOKEN_02_002",
+          "B_TOKEN_02_003",
+          "B_TOKEN_02_004",
+          "B_TOKEN_02_005"
+        ],
+        "products": [
+          "B_PRODUCT_02_00",
+          "B_PRODUCT_02_01",
+          "B_PRODUCT_02_02",
+          "B_PRODUCT_02_03",
+          "B_PRODUCT_02_04",
+          "B_PRODUCT_02_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_03",
+      "platform": "platform_3",
+      "pool_a": {
+        "skus": [
+          "A_SKU_03_000",
+          "A_SKU_03_001",
+          "A_SKU_03_002",
+          "A_SKU_03_003",
+          "A_SKU_03_004"
+        ],
+        "stores": [
+          "A_STORE_03_00",
+          "A_STORE_03_01",
+          "A_STORE_03_02",
+          "A_STORE_03_03",
+          "A_STORE_03_04"
+        ],
+        "tokens": [
+          "A_TOKEN_03_000",
+          "A_TOKEN_03_001",
+          "A_TOKEN_03_002",
+          "A_TOKEN_03_003",
+          "A_TOKEN_03_004"
+        ],
+        "products": [
+          "A_PRODUCT_03_00",
+          "A_PRODUCT_03_01",
+          "A_PRODUCT_03_02",
+          "A_PRODUCT_03_03",
+          "A_PRODUCT_03_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_03_000",
+          "B_SKU_03_001",
+          "B_SKU_03_002",
+          "B_SKU_03_003",
+          "B_SKU_03_004",
+          "B_SKU_03_005"
+        ],
+        "stores": [
+          "B_STORE_03_00",
+          "B_STORE_03_01",
+          "B_STORE_03_02",
+          "B_STORE_03_03",
+          "B_STORE_03_04",
+          "B_STORE_03_05"
+        ],
+        "tokens": [
+          "B_TOKEN_03_000",
+          "B_TOKEN_03_001",
+          "B_TOKEN_03_002",
+          "B_TOKEN_03_003",
+          "B_TOKEN_03_004",
+          "B_TOKEN_03_005"
+        ],
+        "products": [
+          "B_PRODUCT_03_00",
+          "B_PRODUCT_03_01",
+          "B_PRODUCT_03_02",
+          "B_PRODUCT_03_03",
+          "B_PRODUCT_03_04",
+          "B_PRODUCT_03_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_04",
+      "platform": "platform_4",
+      "pool_a": {
+        "skus": [
+          "A_SKU_04_000",
+          "A_SKU_04_001",
+          "A_SKU_04_002",
+          "A_SKU_04_003",
+          "A_SKU_04_004"
+        ],
+        "stores": [
+          "A_STORE_04_00",
+          "A_STORE_04_01",
+          "A_STORE_04_02",
+          "A_STORE_04_03",
+          "A_STORE_04_04"
+        ],
+        "tokens": [
+          "A_TOKEN_04_000",
+          "A_TOKEN_04_001",
+          "A_TOKEN_04_002",
+          "A_TOKEN_04_003",
+          "A_TOKEN_04_004"
+        ],
+        "products": [
+          "A_PRODUCT_04_00",
+          "A_PRODUCT_04_01",
+          "A_PRODUCT_04_02",
+          "A_PRODUCT_04_03",
+          "A_PRODUCT_04_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_04_000",
+          "B_SKU_04_001",
+          "B_SKU_04_002",
+          "B_SKU_04_003",
+          "B_SKU_04_004",
+          "B_SKU_04_005"
+        ],
+        "stores": [
+          "B_STORE_04_00",
+          "B_STORE_04_01",
+          "B_STORE_04_02",
+          "B_STORE_04_03",
+          "B_STORE_04_04",
+          "B_STORE_04_05"
+        ],
+        "tokens": [
+          "B_TOKEN_04_000",
+          "B_TOKEN_04_001",
+          "B_TOKEN_04_002",
+          "B_TOKEN_04_003",
+          "B_TOKEN_04_004",
+          "B_TOKEN_04_005"
+        ],
+        "products": [
+          "B_PRODUCT_04_00",
+          "B_PRODUCT_04_01",
+          "B_PRODUCT_04_02",
+          "B_PRODUCT_04_03",
+          "B_PRODUCT_04_04",
+          "B_PRODUCT_04_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_05",
+      "platform": "platform_5",
+      "pool_a": {
+        "skus": [
+          "A_SKU_05_000",
+          "A_SKU_05_001",
+          "A_SKU_05_002",
+          "A_SKU_05_003",
+          "A_SKU_05_004"
+        ],
+        "stores": [
+          "A_STORE_05_00",
+          "A_STORE_05_01",
+          "A_STORE_05_02",
+          "A_STORE_05_03",
+          "A_STORE_05_04"
+        ],
+        "tokens": [
+          "A_TOKEN_05_000",
+          "A_TOKEN_05_001",
+          "A_TOKEN_05_002",
+          "A_TOKEN_05_003",
+          "A_TOKEN_05_004"
+        ],
+        "products": [
+          "A_PRODUCT_05_00",
+          "A_PRODUCT_05_01",
+          "A_PRODUCT_05_02",
+          "A_PRODUCT_05_03",
+          "A_PRODUCT_05_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_05_000",
+          "B_SKU_05_001",
+          "B_SKU_05_002",
+          "B_SKU_05_003",
+          "B_SKU_05_004",
+          "B_SKU_05_005"
+        ],
+        "stores": [
+          "B_STORE_05_00",
+          "B_STORE_05_01",
+          "B_STORE_05_02",
+          "B_STORE_05_03",
+          "B_STORE_05_04",
+          "B_STORE_05_05"
+        ],
+        "tokens": [
+          "B_TOKEN_05_000",
+          "B_TOKEN_05_001",
+          "B_TOKEN_05_002",
+          "B_TOKEN_05_003",
+          "B_TOKEN_05_004",
+          "B_TOKEN_05_005"
+        ],
+        "products": [
+          "B_PRODUCT_05_00",
+          "B_PRODUCT_05_01",
+          "B_PRODUCT_05_02",
+          "B_PRODUCT_05_03",
+          "B_PRODUCT_05_04",
+          "B_PRODUCT_05_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_06",
+      "platform": "platform_6",
+      "pool_a": {
+        "skus": [
+          "A_SKU_06_000",
+          "A_SKU_06_001",
+          "A_SKU_06_002",
+          "A_SKU_06_003",
+          "A_SKU_06_004"
+        ],
+        "stores": [
+          "A_STORE_06_00",
+          "A_STORE_06_01",
+          "A_STORE_06_02",
+          "A_STORE_06_03",
+          "A_STORE_06_04"
+        ],
+        "tokens": [
+          "A_TOKEN_06_000",
+          "A_TOKEN_06_001",
+          "A_TOKEN_06_002",
+          "A_TOKEN_06_003",
+          "A_TOKEN_06_004"
+        ],
+        "products": [
+          "A_PRODUCT_06_00",
+          "A_PRODUCT_06_01",
+          "A_PRODUCT_06_02",
+          "A_PRODUCT_06_03",
+          "A_PRODUCT_06_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_06_000",
+          "B_SKU_06_001",
+          "B_SKU_06_002",
+          "B_SKU_06_003",
+          "B_SKU_06_004",
+          "B_SKU_06_005"
+        ],
+        "stores": [
+          "B_STORE_06_00",
+          "B_STORE_06_01",
+          "B_STORE_06_02",
+          "B_STORE_06_03",
+          "B_STORE_06_04",
+          "B_STORE_06_05"
+        ],
+        "tokens": [
+          "B_TOKEN_06_000",
+          "B_TOKEN_06_001",
+          "B_TOKEN_06_002",
+          "B_TOKEN_06_003",
+          "B_TOKEN_06_004",
+          "B_TOKEN_06_005"
+        ],
+        "products": [
+          "B_PRODUCT_06_00",
+          "B_PRODUCT_06_01",
+          "B_PRODUCT_06_02",
+          "B_PRODUCT_06_03",
+          "B_PRODUCT_06_04",
+          "B_PRODUCT_06_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_07",
+      "platform": "platform_7",
+      "pool_a": {
+        "skus": [
+          "A_SKU_07_000",
+          "A_SKU_07_001",
+          "A_SKU_07_002",
+          "A_SKU_07_003",
+          "A_SKU_07_004"
+        ],
+        "stores": [
+          "A_STORE_07_00",
+          "A_STORE_07_01",
+          "A_STORE_07_02",
+          "A_STORE_07_03",
+          "A_STORE_07_04"
+        ],
+        "tokens": [
+          "A_TOKEN_07_000",
+          "A_TOKEN_07_001",
+          "A_TOKEN_07_002",
+          "A_TOKEN_07_003",
+          "A_TOKEN_07_004"
+        ],
+        "products": [
+          "A_PRODUCT_07_00",
+          "A_PRODUCT_07_01",
+          "A_PRODUCT_07_02",
+          "A_PRODUCT_07_03",
+          "A_PRODUCT_07_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_07_000",
+          "B_SKU_07_001",
+          "B_SKU_07_002",
+          "B_SKU_07_003",
+          "B_SKU_07_004",
+          "B_SKU_07_005"
+        ],
+        "stores": [
+          "B_STORE_07_00",
+          "B_STORE_07_01",
+          "B_STORE_07_02",
+          "B_STORE_07_03",
+          "B_STORE_07_04",
+          "B_STORE_07_05"
+        ],
+        "tokens": [
+          "B_TOKEN_07_000",
+          "B_TOKEN_07_001",
+          "B_TOKEN_07_002",
+          "B_TOKEN_07_003",
+          "B_TOKEN_07_004",
+          "B_TOKEN_07_005"
+        ],
+        "products": [
+          "B_PRODUCT_07_00",
+          "B_PRODUCT_07_01",
+          "B_PRODUCT_07_02",
+          "B_PRODUCT_07_03",
+          "B_PRODUCT_07_04",
+          "B_PRODUCT_07_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_08",
+      "platform": "platform_8",
+      "pool_a": {
+        "skus": [
+          "A_SKU_08_000",
+          "A_SKU_08_001",
+          "A_SKU_08_002",
+          "A_SKU_08_003",
+          "A_SKU_08_004"
+        ],
+        "stores": [
+          "A_STORE_08_00",
+          "A_STORE_08_01",
+          "A_STORE_08_02",
+          "A_STORE_08_03",
+          "A_STORE_08_04"
+        ],
+        "tokens": [
+          "A_TOKEN_08_000",
+          "A_TOKEN_08_001",
+          "A_TOKEN_08_002",
+          "A_TOKEN_08_003",
+          "A_TOKEN_08_004"
+        ],
+        "products": [
+          "A_PRODUCT_08_00",
+          "A_PRODUCT_08_01",
+          "A_PRODUCT_08_02",
+          "A_PRODUCT_08_03",
+          "A_PRODUCT_08_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_08_000",
+          "B_SKU_08_001",
+          "B_SKU_08_002",
+          "B_SKU_08_003",
+          "B_SKU_08_004",
+          "B_SKU_08_005"
+        ],
+        "stores": [
+          "B_STORE_08_00",
+          "B_STORE_08_01",
+          "B_STORE_08_02",
+          "B_STORE_08_03",
+          "B_STORE_08_04",
+          "B_STORE_08_05"
+        ],
+        "tokens": [
+          "B_TOKEN_08_000",
+          "B_TOKEN_08_001",
+          "B_TOKEN_08_002",
+          "B_TOKEN_08_003",
+          "B_TOKEN_08_004",
+          "B_TOKEN_08_005"
+        ],
+        "products": [
+          "B_PRODUCT_08_00",
+          "B_PRODUCT_08_01",
+          "B_PRODUCT_08_02",
+          "B_PRODUCT_08_03",
+          "B_PRODUCT_08_04",
+          "B_PRODUCT_08_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_09",
+      "platform": "platform_9",
+      "pool_a": {
+        "skus": [
+          "A_SKU_09_000",
+          "A_SKU_09_001",
+          "A_SKU_09_002",
+          "A_SKU_09_003",
+          "A_SKU_09_004"
+        ],
+        "stores": [
+          "A_STORE_09_00",
+          "A_STORE_09_01",
+          "A_STORE_09_02",
+          "A_STORE_09_03",
+          "A_STORE_09_04"
+        ],
+        "tokens": [
+          "A_TOKEN_09_000",
+          "A_TOKEN_09_001",
+          "A_TOKEN_09_002",
+          "A_TOKEN_09_003",
+          "A_TOKEN_09_004"
+        ],
+        "products": [
+          "A_PRODUCT_09_00",
+          "A_PRODUCT_09_01",
+          "A_PRODUCT_09_02",
+          "A_PRODUCT_09_03",
+          "A_PRODUCT_09_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_09_000",
+          "B_SKU_09_001",
+          "B_SKU_09_002",
+          "B_SKU_09_003",
+          "B_SKU_09_004",
+          "B_SKU_09_005"
+        ],
+        "stores": [
+          "B_STORE_09_00",
+          "B_STORE_09_01",
+          "B_STORE_09_02",
+          "B_STORE_09_03",
+          "B_STORE_09_04",
+          "B_STORE_09_05"
+        ],
+        "tokens": [
+          "B_TOKEN_09_000",
+          "B_TOKEN_09_001",
+          "B_TOKEN_09_002",
+          "B_TOKEN_09_003",
+          "B_TOKEN_09_004",
+          "B_TOKEN_09_005"
+        ],
+        "products": [
+          "B_PRODUCT_09_00",
+          "B_PRODUCT_09_01",
+          "B_PRODUCT_09_02",
+          "B_PRODUCT_09_03",
+          "B_PRODUCT_09_04",
+          "B_PRODUCT_09_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_10",
+      "platform": "platform_10",
+      "pool_a": {
+        "skus": [
+          "A_SKU_10_000",
+          "A_SKU_10_001",
+          "A_SKU_10_002",
+          "A_SKU_10_003",
+          "A_SKU_10_004"
+        ],
+        "stores": [
+          "A_STORE_10_00",
+          "A_STORE_10_01",
+          "A_STORE_10_02",
+          "A_STORE_10_03",
+          "A_STORE_10_04"
+        ],
+        "tokens": [
+          "A_TOKEN_10_000",
+          "A_TOKEN_10_001",
+          "A_TOKEN_10_002",
+          "A_TOKEN_10_003",
+          "A_TOKEN_10_004"
+        ],
+        "products": [
+          "A_PRODUCT_10_00",
+          "A_PRODUCT_10_01",
+          "A_PRODUCT_10_02",
+          "A_PRODUCT_10_03",
+          "A_PRODUCT_10_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_10_000",
+          "B_SKU_10_001",
+          "B_SKU_10_002",
+          "B_SKU_10_003",
+          "B_SKU_10_004",
+          "B_SKU_10_005"
+        ],
+        "stores": [
+          "B_STORE_10_00",
+          "B_STORE_10_01",
+          "B_STORE_10_02",
+          "B_STORE_10_03",
+          "B_STORE_10_04",
+          "B_STORE_10_05"
+        ],
+        "tokens": [
+          "B_TOKEN_10_000",
+          "B_TOKEN_10_001",
+          "B_TOKEN_10_002",
+          "B_TOKEN_10_003",
+          "B_TOKEN_10_004",
+          "B_TOKEN_10_005"
+        ],
+        "products": [
+          "B_PRODUCT_10_00",
+          "B_PRODUCT_10_01",
+          "B_PRODUCT_10_02",
+          "B_PRODUCT_10_03",
+          "B_PRODUCT_10_04",
+          "B_PRODUCT_10_05"
+        ],
+        "count": 6
+      }
+    },
+    {
+      "family_id": "family_11",
+      "platform": "platform_11",
+      "pool_a": {
+        "skus": [
+          "A_SKU_11_000",
+          "A_SKU_11_001",
+          "A_SKU_11_002",
+          "A_SKU_11_003",
+          "A_SKU_11_004"
+        ],
+        "stores": [
+          "A_STORE_11_00",
+          "A_STORE_11_01",
+          "A_STORE_11_02",
+          "A_STORE_11_03",
+          "A_STORE_11_04"
+        ],
+        "tokens": [
+          "A_TOKEN_11_000",
+          "A_TOKEN_11_001",
+          "A_TOKEN_11_002",
+          "A_TOKEN_11_003",
+          "A_TOKEN_11_004"
+        ],
+        "products": [
+          "A_PRODUCT_11_00",
+          "A_PRODUCT_11_01",
+          "A_PRODUCT_11_02",
+          "A_PRODUCT_11_03",
+          "A_PRODUCT_11_04"
+        ],
+        "count": 5
+      },
+      "pool_b": {
+        "skus": [
+          "B_SKU_11_000",
+          "B_SKU_11_001",
+          "B_SKU_11_002",
+          "B_SKU_11_003",
+          "B_SKU_11_004",
+          "B_SKU_11_005"
+        ],
+        "stores": [
+          "B_STORE_11_00",
+          "B_STORE_11_01",
+          "B_STORE_11_02",
+          "B_STORE_11_03",
+          "B_STORE_11_04",
+          "B_STORE_11_05"
+        ],
+        "tokens": [
+          "B_TOKEN_11_000",
+          "B_TOKEN_11_001",
+          "B_TOKEN_11_002",
+          "B_TOKEN_11_003",
+          "B_TOKEN_11_004",
+          "B_TOKEN_11_005"
+        ],
+        "products": [
+          "B_PRODUCT_11_00",
+          "B_PRODUCT_11_01",
+          "B_PRODUCT_11_02",
+          "B_PRODUCT_11_03",
+          "B_PRODUCT_11_04",
+          "B_PRODUCT_11_05"
+        ],
+        "count": 6
+      }
+    }
+  ],
+  "training_demos": [
+    {
+      "task_id": "family_00_train_0",
+      "family_id": "family_00",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/A_SKU_00_000",
+        "body": {
+          "sku": "A_SKU_00_000",
+          "product": "A_PRODUCT_00_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_00_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_00_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_00_train_1",
+      "family_id": "family_00",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/A_SKU_00_001",
+        "body": {
+          "sku": "A_SKU_00_001",
+          "product": "A_PRODUCT_00_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_00_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_00_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_00_train_2",
+      "family_id": "family_00",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/A_SKU_00_002",
+        "body": {
+          "sku": "A_SKU_00_002",
+          "product": "A_PRODUCT_00_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_00_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_00_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_01_train_0",
+      "family_id": "family_01",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/A_SKU_01_000",
+        "body": {
+          "sku": "A_SKU_01_000",
+          "product": "A_PRODUCT_01_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_01_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_01_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_01_train_1",
+      "family_id": "family_01",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/A_SKU_01_001",
+        "body": {
+          "sku": "A_SKU_01_001",
+          "product": "A_PRODUCT_01_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_01_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_01_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_01_train_2",
+      "family_id": "family_01",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/A_SKU_01_002",
+        "body": {
+          "sku": "A_SKU_01_002",
+          "product": "A_PRODUCT_01_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_01_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_01_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_02_train_0",
+      "family_id": "family_02",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/A_SKU_02_000",
+        "body": {
+          "sku": "A_SKU_02_000",
+          "product": "A_PRODUCT_02_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_02_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_02_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_02_train_1",
+      "family_id": "family_02",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/A_SKU_02_001",
+        "body": {
+          "sku": "A_SKU_02_001",
+          "product": "A_PRODUCT_02_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_02_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_02_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_02_train_2",
+      "family_id": "family_02",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/A_SKU_02_002",
+        "body": {
+          "sku": "A_SKU_02_002",
+          "product": "A_PRODUCT_02_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_02_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_02_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_03_train_0",
+      "family_id": "family_03",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/A_SKU_03_000",
+        "body": {
+          "sku": "A_SKU_03_000",
+          "product": "A_PRODUCT_03_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_03_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_03_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_03_train_1",
+      "family_id": "family_03",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/A_SKU_03_001",
+        "body": {
+          "sku": "A_SKU_03_001",
+          "product": "A_PRODUCT_03_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_03_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_03_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_03_train_2",
+      "family_id": "family_03",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/A_SKU_03_002",
+        "body": {
+          "sku": "A_SKU_03_002",
+          "product": "A_PRODUCT_03_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_03_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_03_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_04_train_0",
+      "family_id": "family_04",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/A_SKU_04_000",
+        "body": {
+          "sku": "A_SKU_04_000",
+          "product": "A_PRODUCT_04_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_04_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_04_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_04_train_1",
+      "family_id": "family_04",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/A_SKU_04_001",
+        "body": {
+          "sku": "A_SKU_04_001",
+          "product": "A_PRODUCT_04_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_04_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_04_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_04_train_2",
+      "family_id": "family_04",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/A_SKU_04_002",
+        "body": {
+          "sku": "A_SKU_04_002",
+          "product": "A_PRODUCT_04_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_04_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_04_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_05_train_0",
+      "family_id": "family_05",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/A_SKU_05_000",
+        "body": {
+          "sku": "A_SKU_05_000",
+          "product": "A_PRODUCT_05_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_05_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_05_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_05_train_1",
+      "family_id": "family_05",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/A_SKU_05_001",
+        "body": {
+          "sku": "A_SKU_05_001",
+          "product": "A_PRODUCT_05_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_05_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_05_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_05_train_2",
+      "family_id": "family_05",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/A_SKU_05_002",
+        "body": {
+          "sku": "A_SKU_05_002",
+          "product": "A_PRODUCT_05_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_05_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_05_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_06_train_0",
+      "family_id": "family_06",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/A_SKU_06_000",
+        "body": {
+          "sku": "A_SKU_06_000",
+          "product": "A_PRODUCT_06_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_06_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_06_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_06_train_1",
+      "family_id": "family_06",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/A_SKU_06_001",
+        "body": {
+          "sku": "A_SKU_06_001",
+          "product": "A_PRODUCT_06_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_06_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_06_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_06_train_2",
+      "family_id": "family_06",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/A_SKU_06_002",
+        "body": {
+          "sku": "A_SKU_06_002",
+          "product": "A_PRODUCT_06_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_06_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_06_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_07_train_0",
+      "family_id": "family_07",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/A_SKU_07_000",
+        "body": {
+          "sku": "A_SKU_07_000",
+          "product": "A_PRODUCT_07_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_07_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_07_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_07_train_1",
+      "family_id": "family_07",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/A_SKU_07_001",
+        "body": {
+          "sku": "A_SKU_07_001",
+          "product": "A_PRODUCT_07_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_07_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_07_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_07_train_2",
+      "family_id": "family_07",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/A_SKU_07_002",
+        "body": {
+          "sku": "A_SKU_07_002",
+          "product": "A_PRODUCT_07_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_07_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_07_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_08_train_0",
+      "family_id": "family_08",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/A_SKU_08_000",
+        "body": {
+          "sku": "A_SKU_08_000",
+          "product": "A_PRODUCT_08_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_08_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_08_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_08_train_1",
+      "family_id": "family_08",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/A_SKU_08_001",
+        "body": {
+          "sku": "A_SKU_08_001",
+          "product": "A_PRODUCT_08_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_08_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_08_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_08_train_2",
+      "family_id": "family_08",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/A_SKU_08_002",
+        "body": {
+          "sku": "A_SKU_08_002",
+          "product": "A_PRODUCT_08_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_08_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_08_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_09_train_0",
+      "family_id": "family_09",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/A_SKU_09_000",
+        "body": {
+          "sku": "A_SKU_09_000",
+          "product": "A_PRODUCT_09_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_09_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_09_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_09_train_1",
+      "family_id": "family_09",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/A_SKU_09_001",
+        "body": {
+          "sku": "A_SKU_09_001",
+          "product": "A_PRODUCT_09_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_09_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_09_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_09_train_2",
+      "family_id": "family_09",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/A_SKU_09_002",
+        "body": {
+          "sku": "A_SKU_09_002",
+          "product": "A_PRODUCT_09_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_09_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_09_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_10_train_0",
+      "family_id": "family_10",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/A_SKU_10_000",
+        "body": {
+          "sku": "A_SKU_10_000",
+          "product": "A_PRODUCT_10_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_10_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_10_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_10_train_1",
+      "family_id": "family_10",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/A_SKU_10_001",
+        "body": {
+          "sku": "A_SKU_10_001",
+          "product": "A_PRODUCT_10_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_10_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_10_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_10_train_2",
+      "family_id": "family_10",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/A_SKU_10_002",
+        "body": {
+          "sku": "A_SKU_10_002",
+          "product": "A_PRODUCT_10_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_10_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_10_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_11_train_0",
+      "family_id": "family_11",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/A_SKU_11_000",
+        "body": {
+          "sku": "A_SKU_11_000",
+          "product": "A_PRODUCT_11_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_11_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_11_00"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_11_train_1",
+      "family_id": "family_11",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/A_SKU_11_001",
+        "body": {
+          "sku": "A_SKU_11_001",
+          "product": "A_PRODUCT_11_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_11_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_11_01"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    },
+    {
+      "task_id": "family_11_train_2",
+      "family_id": "family_11",
+      "pool": "A",
+      "intent": "shopping_checkout",
+      "action_template": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/A_SKU_11_002",
+        "body": {
+          "sku": "A_SKU_11_002",
+          "product": "A_PRODUCT_11_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "A_TOKEN_11_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "state": {
+        "authenticated": true,
+        "role": "owner",
+        "store": "A_STORE_11_02"
+      },
+      "next_state": {
+        "cart_added": true,
+        "status": 200
+      },
+      "success": true,
+      "provenance": {
+        "source": "synthetic_webarena_v2"
+      }
+    }
+  ],
+  "test_tasks": [
+    {
+      "task_id": "family_00_test_0",
+      "family_id": "family_00",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_00_000",
+        "product": "B_PRODUCT_00_00",
+        "token": "B_TOKEN_00_000",
+        "store": "B_STORE_00_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/B_SKU_00_000",
+        "body": {
+          "sku": "B_SKU_00_000",
+          "product": "B_PRODUCT_00_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_00_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_00_test_1",
+      "family_id": "family_00",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_00_001",
+        "product": "B_PRODUCT_00_01",
+        "token": "B_TOKEN_00_001",
+        "store": "B_STORE_00_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/B_SKU_00_001",
+        "body": {
+          "sku": "B_SKU_00_001",
+          "product": "B_PRODUCT_00_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_00_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_00_test_2",
+      "family_id": "family_00",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_00_002",
+        "product": "B_PRODUCT_00_02",
+        "token": "B_TOKEN_00_002",
+        "store": "B_STORE_00_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/B_SKU_00_002",
+        "body": {
+          "sku": "B_SKU_00_002",
+          "product": "B_PRODUCT_00_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_00_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_00_test_3",
+      "family_id": "family_00",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_00_003",
+        "product": "B_PRODUCT_00_03",
+        "token": "B_TOKEN_00_003",
+        "store": "B_STORE_00_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/B_SKU_00_003",
+        "body": {
+          "sku": "B_SKU_00_003",
+          "product": "B_PRODUCT_00_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_00_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_00_test_4",
+      "family_id": "family_00",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_00_004",
+        "product": "B_PRODUCT_00_04",
+        "token": "B_TOKEN_00_004",
+        "store": "B_STORE_00_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/B_SKU_00_004",
+        "body": {
+          "sku": "B_SKU_00_004",
+          "product": "B_PRODUCT_00_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_00_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_00_test_5",
+      "family_id": "family_00",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_00_005",
+        "product": "B_PRODUCT_00_05",
+        "token": "B_TOKEN_00_005",
+        "store": "B_STORE_00_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_0.example.com/cart/B_SKU_00_005",
+        "body": {
+          "sku": "B_SKU_00_005",
+          "product": "B_PRODUCT_00_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_00_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_01_test_0",
+      "family_id": "family_01",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_01_000",
+        "product": "B_PRODUCT_01_00",
+        "token": "B_TOKEN_01_000",
+        "store": "B_STORE_01_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/B_SKU_01_000",
+        "body": {
+          "sku": "B_SKU_01_000",
+          "product": "B_PRODUCT_01_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_01_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_01_test_1",
+      "family_id": "family_01",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_01_001",
+        "product": "B_PRODUCT_01_01",
+        "token": "B_TOKEN_01_001",
+        "store": "B_STORE_01_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/B_SKU_01_001",
+        "body": {
+          "sku": "B_SKU_01_001",
+          "product": "B_PRODUCT_01_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_01_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_01_test_2",
+      "family_id": "family_01",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_01_002",
+        "product": "B_PRODUCT_01_02",
+        "token": "B_TOKEN_01_002",
+        "store": "B_STORE_01_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/B_SKU_01_002",
+        "body": {
+          "sku": "B_SKU_01_002",
+          "product": "B_PRODUCT_01_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_01_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_01_test_3",
+      "family_id": "family_01",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_01_003",
+        "product": "B_PRODUCT_01_03",
+        "token": "B_TOKEN_01_003",
+        "store": "B_STORE_01_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/B_SKU_01_003",
+        "body": {
+          "sku": "B_SKU_01_003",
+          "product": "B_PRODUCT_01_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_01_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_01_test_4",
+      "family_id": "family_01",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_01_004",
+        "product": "B_PRODUCT_01_04",
+        "token": "B_TOKEN_01_004",
+        "store": "B_STORE_01_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/B_SKU_01_004",
+        "body": {
+          "sku": "B_SKU_01_004",
+          "product": "B_PRODUCT_01_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_01_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_01_test_5",
+      "family_id": "family_01",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_01_005",
+        "product": "B_PRODUCT_01_05",
+        "token": "B_TOKEN_01_005",
+        "store": "B_STORE_01_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_1.example.com/cart/B_SKU_01_005",
+        "body": {
+          "sku": "B_SKU_01_005",
+          "product": "B_PRODUCT_01_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_01_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_02_test_0",
+      "family_id": "family_02",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_02_000",
+        "product": "B_PRODUCT_02_00",
+        "token": "B_TOKEN_02_000",
+        "store": "B_STORE_02_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/B_SKU_02_000",
+        "body": {
+          "sku": "B_SKU_02_000",
+          "product": "B_PRODUCT_02_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_02_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_02_test_1",
+      "family_id": "family_02",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_02_001",
+        "product": "B_PRODUCT_02_01",
+        "token": "B_TOKEN_02_001",
+        "store": "B_STORE_02_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/B_SKU_02_001",
+        "body": {
+          "sku": "B_SKU_02_001",
+          "product": "B_PRODUCT_02_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_02_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_02_test_2",
+      "family_id": "family_02",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_02_002",
+        "product": "B_PRODUCT_02_02",
+        "token": "B_TOKEN_02_002",
+        "store": "B_STORE_02_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/B_SKU_02_002",
+        "body": {
+          "sku": "B_SKU_02_002",
+          "product": "B_PRODUCT_02_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_02_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_02_test_3",
+      "family_id": "family_02",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_02_003",
+        "product": "B_PRODUCT_02_03",
+        "token": "B_TOKEN_02_003",
+        "store": "B_STORE_02_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/B_SKU_02_003",
+        "body": {
+          "sku": "B_SKU_02_003",
+          "product": "B_PRODUCT_02_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_02_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_02_test_4",
+      "family_id": "family_02",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_02_004",
+        "product": "B_PRODUCT_02_04",
+        "token": "B_TOKEN_02_004",
+        "store": "B_STORE_02_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/B_SKU_02_004",
+        "body": {
+          "sku": "B_SKU_02_004",
+          "product": "B_PRODUCT_02_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_02_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_02_test_5",
+      "family_id": "family_02",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_02_005",
+        "product": "B_PRODUCT_02_05",
+        "token": "B_TOKEN_02_005",
+        "store": "B_STORE_02_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_2.example.com/cart/B_SKU_02_005",
+        "body": {
+          "sku": "B_SKU_02_005",
+          "product": "B_PRODUCT_02_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_02_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_03_test_0",
+      "family_id": "family_03",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_03_000",
+        "product": "B_PRODUCT_03_00",
+        "token": "B_TOKEN_03_000",
+        "store": "B_STORE_03_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/B_SKU_03_000",
+        "body": {
+          "sku": "B_SKU_03_000",
+          "product": "B_PRODUCT_03_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_03_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_03_test_1",
+      "family_id": "family_03",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_03_001",
+        "product": "B_PRODUCT_03_01",
+        "token": "B_TOKEN_03_001",
+        "store": "B_STORE_03_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/B_SKU_03_001",
+        "body": {
+          "sku": "B_SKU_03_001",
+          "product": "B_PRODUCT_03_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_03_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_03_test_2",
+      "family_id": "family_03",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_03_002",
+        "product": "B_PRODUCT_03_02",
+        "token": "B_TOKEN_03_002",
+        "store": "B_STORE_03_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/B_SKU_03_002",
+        "body": {
+          "sku": "B_SKU_03_002",
+          "product": "B_PRODUCT_03_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_03_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_03_test_3",
+      "family_id": "family_03",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_03_003",
+        "product": "B_PRODUCT_03_03",
+        "token": "B_TOKEN_03_003",
+        "store": "B_STORE_03_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/B_SKU_03_003",
+        "body": {
+          "sku": "B_SKU_03_003",
+          "product": "B_PRODUCT_03_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_03_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_03_test_4",
+      "family_id": "family_03",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_03_004",
+        "product": "B_PRODUCT_03_04",
+        "token": "B_TOKEN_03_004",
+        "store": "B_STORE_03_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/B_SKU_03_004",
+        "body": {
+          "sku": "B_SKU_03_004",
+          "product": "B_PRODUCT_03_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_03_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_03_test_5",
+      "family_id": "family_03",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_03_005",
+        "product": "B_PRODUCT_03_05",
+        "token": "B_TOKEN_03_005",
+        "store": "B_STORE_03_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_3.example.com/cart/B_SKU_03_005",
+        "body": {
+          "sku": "B_SKU_03_005",
+          "product": "B_PRODUCT_03_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_03_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_04_test_0",
+      "family_id": "family_04",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_04_000",
+        "product": "B_PRODUCT_04_00",
+        "token": "B_TOKEN_04_000",
+        "store": "B_STORE_04_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/B_SKU_04_000",
+        "body": {
+          "sku": "B_SKU_04_000",
+          "product": "B_PRODUCT_04_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_04_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_04_test_1",
+      "family_id": "family_04",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_04_001",
+        "product": "B_PRODUCT_04_01",
+        "token": "B_TOKEN_04_001",
+        "store": "B_STORE_04_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/B_SKU_04_001",
+        "body": {
+          "sku": "B_SKU_04_001",
+          "product": "B_PRODUCT_04_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_04_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_04_test_2",
+      "family_id": "family_04",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_04_002",
+        "product": "B_PRODUCT_04_02",
+        "token": "B_TOKEN_04_002",
+        "store": "B_STORE_04_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/B_SKU_04_002",
+        "body": {
+          "sku": "B_SKU_04_002",
+          "product": "B_PRODUCT_04_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_04_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_04_test_3",
+      "family_id": "family_04",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_04_003",
+        "product": "B_PRODUCT_04_03",
+        "token": "B_TOKEN_04_003",
+        "store": "B_STORE_04_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/B_SKU_04_003",
+        "body": {
+          "sku": "B_SKU_04_003",
+          "product": "B_PRODUCT_04_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_04_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_04_test_4",
+      "family_id": "family_04",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_04_004",
+        "product": "B_PRODUCT_04_04",
+        "token": "B_TOKEN_04_004",
+        "store": "B_STORE_04_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/B_SKU_04_004",
+        "body": {
+          "sku": "B_SKU_04_004",
+          "product": "B_PRODUCT_04_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_04_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_04_test_5",
+      "family_id": "family_04",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_04_005",
+        "product": "B_PRODUCT_04_05",
+        "token": "B_TOKEN_04_005",
+        "store": "B_STORE_04_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_4.example.com/cart/B_SKU_04_005",
+        "body": {
+          "sku": "B_SKU_04_005",
+          "product": "B_PRODUCT_04_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_04_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_05_test_0",
+      "family_id": "family_05",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_05_000",
+        "product": "B_PRODUCT_05_00",
+        "token": "B_TOKEN_05_000",
+        "store": "B_STORE_05_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/B_SKU_05_000",
+        "body": {
+          "sku": "B_SKU_05_000",
+          "product": "B_PRODUCT_05_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_05_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_05_test_1",
+      "family_id": "family_05",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_05_001",
+        "product": "B_PRODUCT_05_01",
+        "token": "B_TOKEN_05_001",
+        "store": "B_STORE_05_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/B_SKU_05_001",
+        "body": {
+          "sku": "B_SKU_05_001",
+          "product": "B_PRODUCT_05_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_05_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_05_test_2",
+      "family_id": "family_05",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_05_002",
+        "product": "B_PRODUCT_05_02",
+        "token": "B_TOKEN_05_002",
+        "store": "B_STORE_05_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/B_SKU_05_002",
+        "body": {
+          "sku": "B_SKU_05_002",
+          "product": "B_PRODUCT_05_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_05_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_05_test_3",
+      "family_id": "family_05",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_05_003",
+        "product": "B_PRODUCT_05_03",
+        "token": "B_TOKEN_05_003",
+        "store": "B_STORE_05_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/B_SKU_05_003",
+        "body": {
+          "sku": "B_SKU_05_003",
+          "product": "B_PRODUCT_05_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_05_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_05_test_4",
+      "family_id": "family_05",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_05_004",
+        "product": "B_PRODUCT_05_04",
+        "token": "B_TOKEN_05_004",
+        "store": "B_STORE_05_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/B_SKU_05_004",
+        "body": {
+          "sku": "B_SKU_05_004",
+          "product": "B_PRODUCT_05_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_05_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_05_test_5",
+      "family_id": "family_05",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_05_005",
+        "product": "B_PRODUCT_05_05",
+        "token": "B_TOKEN_05_005",
+        "store": "B_STORE_05_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_5.example.com/cart/B_SKU_05_005",
+        "body": {
+          "sku": "B_SKU_05_005",
+          "product": "B_PRODUCT_05_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_05_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_06_test_0",
+      "family_id": "family_06",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_06_000",
+        "product": "B_PRODUCT_06_00",
+        "token": "B_TOKEN_06_000",
+        "store": "B_STORE_06_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/B_SKU_06_000",
+        "body": {
+          "sku": "B_SKU_06_000",
+          "product": "B_PRODUCT_06_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_06_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_06_test_1",
+      "family_id": "family_06",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_06_001",
+        "product": "B_PRODUCT_06_01",
+        "token": "B_TOKEN_06_001",
+        "store": "B_STORE_06_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/B_SKU_06_001",
+        "body": {
+          "sku": "B_SKU_06_001",
+          "product": "B_PRODUCT_06_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_06_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_06_test_2",
+      "family_id": "family_06",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_06_002",
+        "product": "B_PRODUCT_06_02",
+        "token": "B_TOKEN_06_002",
+        "store": "B_STORE_06_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/B_SKU_06_002",
+        "body": {
+          "sku": "B_SKU_06_002",
+          "product": "B_PRODUCT_06_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_06_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_06_test_3",
+      "family_id": "family_06",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_06_003",
+        "product": "B_PRODUCT_06_03",
+        "token": "B_TOKEN_06_003",
+        "store": "B_STORE_06_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/B_SKU_06_003",
+        "body": {
+          "sku": "B_SKU_06_003",
+          "product": "B_PRODUCT_06_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_06_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_06_test_4",
+      "family_id": "family_06",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_06_004",
+        "product": "B_PRODUCT_06_04",
+        "token": "B_TOKEN_06_004",
+        "store": "B_STORE_06_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/B_SKU_06_004",
+        "body": {
+          "sku": "B_SKU_06_004",
+          "product": "B_PRODUCT_06_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_06_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_06_test_5",
+      "family_id": "family_06",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_06_005",
+        "product": "B_PRODUCT_06_05",
+        "token": "B_TOKEN_06_005",
+        "store": "B_STORE_06_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_6.example.com/cart/B_SKU_06_005",
+        "body": {
+          "sku": "B_SKU_06_005",
+          "product": "B_PRODUCT_06_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_06_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_07_test_0",
+      "family_id": "family_07",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_07_000",
+        "product": "B_PRODUCT_07_00",
+        "token": "B_TOKEN_07_000",
+        "store": "B_STORE_07_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/B_SKU_07_000",
+        "body": {
+          "sku": "B_SKU_07_000",
+          "product": "B_PRODUCT_07_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_07_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_07_test_1",
+      "family_id": "family_07",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_07_001",
+        "product": "B_PRODUCT_07_01",
+        "token": "B_TOKEN_07_001",
+        "store": "B_STORE_07_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/B_SKU_07_001",
+        "body": {
+          "sku": "B_SKU_07_001",
+          "product": "B_PRODUCT_07_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_07_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_07_test_2",
+      "family_id": "family_07",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_07_002",
+        "product": "B_PRODUCT_07_02",
+        "token": "B_TOKEN_07_002",
+        "store": "B_STORE_07_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/B_SKU_07_002",
+        "body": {
+          "sku": "B_SKU_07_002",
+          "product": "B_PRODUCT_07_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_07_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_07_test_3",
+      "family_id": "family_07",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_07_003",
+        "product": "B_PRODUCT_07_03",
+        "token": "B_TOKEN_07_003",
+        "store": "B_STORE_07_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/B_SKU_07_003",
+        "body": {
+          "sku": "B_SKU_07_003",
+          "product": "B_PRODUCT_07_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_07_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_07_test_4",
+      "family_id": "family_07",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_07_004",
+        "product": "B_PRODUCT_07_04",
+        "token": "B_TOKEN_07_004",
+        "store": "B_STORE_07_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/B_SKU_07_004",
+        "body": {
+          "sku": "B_SKU_07_004",
+          "product": "B_PRODUCT_07_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_07_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_07_test_5",
+      "family_id": "family_07",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_07_005",
+        "product": "B_PRODUCT_07_05",
+        "token": "B_TOKEN_07_005",
+        "store": "B_STORE_07_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_7.example.com/cart/B_SKU_07_005",
+        "body": {
+          "sku": "B_SKU_07_005",
+          "product": "B_PRODUCT_07_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_07_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_08_test_0",
+      "family_id": "family_08",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_08_000",
+        "product": "B_PRODUCT_08_00",
+        "token": "B_TOKEN_08_000",
+        "store": "B_STORE_08_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/B_SKU_08_000",
+        "body": {
+          "sku": "B_SKU_08_000",
+          "product": "B_PRODUCT_08_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_08_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_08_test_1",
+      "family_id": "family_08",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_08_001",
+        "product": "B_PRODUCT_08_01",
+        "token": "B_TOKEN_08_001",
+        "store": "B_STORE_08_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/B_SKU_08_001",
+        "body": {
+          "sku": "B_SKU_08_001",
+          "product": "B_PRODUCT_08_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_08_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_08_test_2",
+      "family_id": "family_08",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_08_002",
+        "product": "B_PRODUCT_08_02",
+        "token": "B_TOKEN_08_002",
+        "store": "B_STORE_08_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/B_SKU_08_002",
+        "body": {
+          "sku": "B_SKU_08_002",
+          "product": "B_PRODUCT_08_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_08_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_08_test_3",
+      "family_id": "family_08",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_08_003",
+        "product": "B_PRODUCT_08_03",
+        "token": "B_TOKEN_08_003",
+        "store": "B_STORE_08_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/B_SKU_08_003",
+        "body": {
+          "sku": "B_SKU_08_003",
+          "product": "B_PRODUCT_08_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_08_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_08_test_4",
+      "family_id": "family_08",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_08_004",
+        "product": "B_PRODUCT_08_04",
+        "token": "B_TOKEN_08_004",
+        "store": "B_STORE_08_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/B_SKU_08_004",
+        "body": {
+          "sku": "B_SKU_08_004",
+          "product": "B_PRODUCT_08_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_08_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_08_test_5",
+      "family_id": "family_08",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_08_005",
+        "product": "B_PRODUCT_08_05",
+        "token": "B_TOKEN_08_005",
+        "store": "B_STORE_08_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_8.example.com/cart/B_SKU_08_005",
+        "body": {
+          "sku": "B_SKU_08_005",
+          "product": "B_PRODUCT_08_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_08_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_09_test_0",
+      "family_id": "family_09",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_09_000",
+        "product": "B_PRODUCT_09_00",
+        "token": "B_TOKEN_09_000",
+        "store": "B_STORE_09_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/B_SKU_09_000",
+        "body": {
+          "sku": "B_SKU_09_000",
+          "product": "B_PRODUCT_09_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_09_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_09_test_1",
+      "family_id": "family_09",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_09_001",
+        "product": "B_PRODUCT_09_01",
+        "token": "B_TOKEN_09_001",
+        "store": "B_STORE_09_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/B_SKU_09_001",
+        "body": {
+          "sku": "B_SKU_09_001",
+          "product": "B_PRODUCT_09_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_09_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_09_test_2",
+      "family_id": "family_09",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_09_002",
+        "product": "B_PRODUCT_09_02",
+        "token": "B_TOKEN_09_002",
+        "store": "B_STORE_09_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/B_SKU_09_002",
+        "body": {
+          "sku": "B_SKU_09_002",
+          "product": "B_PRODUCT_09_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_09_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_09_test_3",
+      "family_id": "family_09",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_09_003",
+        "product": "B_PRODUCT_09_03",
+        "token": "B_TOKEN_09_003",
+        "store": "B_STORE_09_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/B_SKU_09_003",
+        "body": {
+          "sku": "B_SKU_09_003",
+          "product": "B_PRODUCT_09_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_09_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_09_test_4",
+      "family_id": "family_09",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_09_004",
+        "product": "B_PRODUCT_09_04",
+        "token": "B_TOKEN_09_004",
+        "store": "B_STORE_09_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/B_SKU_09_004",
+        "body": {
+          "sku": "B_SKU_09_004",
+          "product": "B_PRODUCT_09_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_09_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_09_test_5",
+      "family_id": "family_09",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_09_005",
+        "product": "B_PRODUCT_09_05",
+        "token": "B_TOKEN_09_005",
+        "store": "B_STORE_09_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_9.example.com/cart/B_SKU_09_005",
+        "body": {
+          "sku": "B_SKU_09_005",
+          "product": "B_PRODUCT_09_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_09_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_10_test_0",
+      "family_id": "family_10",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_10_000",
+        "product": "B_PRODUCT_10_00",
+        "token": "B_TOKEN_10_000",
+        "store": "B_STORE_10_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/B_SKU_10_000",
+        "body": {
+          "sku": "B_SKU_10_000",
+          "product": "B_PRODUCT_10_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_10_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_10_test_1",
+      "family_id": "family_10",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_10_001",
+        "product": "B_PRODUCT_10_01",
+        "token": "B_TOKEN_10_001",
+        "store": "B_STORE_10_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/B_SKU_10_001",
+        "body": {
+          "sku": "B_SKU_10_001",
+          "product": "B_PRODUCT_10_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_10_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_10_test_2",
+      "family_id": "family_10",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_10_002",
+        "product": "B_PRODUCT_10_02",
+        "token": "B_TOKEN_10_002",
+        "store": "B_STORE_10_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/B_SKU_10_002",
+        "body": {
+          "sku": "B_SKU_10_002",
+          "product": "B_PRODUCT_10_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_10_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_10_test_3",
+      "family_id": "family_10",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_10_003",
+        "product": "B_PRODUCT_10_03",
+        "token": "B_TOKEN_10_003",
+        "store": "B_STORE_10_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/B_SKU_10_003",
+        "body": {
+          "sku": "B_SKU_10_003",
+          "product": "B_PRODUCT_10_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_10_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_10_test_4",
+      "family_id": "family_10",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_10_004",
+        "product": "B_PRODUCT_10_04",
+        "token": "B_TOKEN_10_004",
+        "store": "B_STORE_10_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/B_SKU_10_004",
+        "body": {
+          "sku": "B_SKU_10_004",
+          "product": "B_PRODUCT_10_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_10_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_10_test_5",
+      "family_id": "family_10",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_10_005",
+        "product": "B_PRODUCT_10_05",
+        "token": "B_TOKEN_10_005",
+        "store": "B_STORE_10_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_10.example.com/cart/B_SKU_10_005",
+        "body": {
+          "sku": "B_SKU_10_005",
+          "product": "B_PRODUCT_10_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_10_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_11_test_0",
+      "family_id": "family_11",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_11_000",
+        "product": "B_PRODUCT_11_00",
+        "token": "B_TOKEN_11_000",
+        "store": "B_STORE_11_00"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/B_SKU_11_000",
+        "body": {
+          "sku": "B_SKU_11_000",
+          "product": "B_PRODUCT_11_00",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_11_000",
+          "X-Request-ID": "req-0"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_11_test_1",
+      "family_id": "family_11",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_11_001",
+        "product": "B_PRODUCT_11_01",
+        "token": "B_TOKEN_11_001",
+        "store": "B_STORE_11_01"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/B_SKU_11_001",
+        "body": {
+          "sku": "B_SKU_11_001",
+          "product": "B_PRODUCT_11_01",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_11_001",
+          "X-Request-ID": "req-1"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_11_test_2",
+      "family_id": "family_11",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_11_002",
+        "product": "B_PRODUCT_11_02",
+        "token": "B_TOKEN_11_002",
+        "store": "B_STORE_11_02"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/B_SKU_11_002",
+        "body": {
+          "sku": "B_SKU_11_002",
+          "product": "B_PRODUCT_11_02",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_11_002",
+          "X-Request-ID": "req-2"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_11_test_3",
+      "family_id": "family_11",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_11_003",
+        "product": "B_PRODUCT_11_03",
+        "token": "B_TOKEN_11_003",
+        "store": "B_STORE_11_03"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/B_SKU_11_003",
+        "body": {
+          "sku": "B_SKU_11_003",
+          "product": "B_PRODUCT_11_03",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_11_003",
+          "X-Request-ID": "req-3"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_11_test_4",
+      "family_id": "family_11",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_11_004",
+        "product": "B_PRODUCT_11_04",
+        "token": "B_TOKEN_11_004",
+        "store": "B_STORE_11_04"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/B_SKU_11_004",
+        "body": {
+          "sku": "B_SKU_11_004",
+          "product": "B_PRODUCT_11_04",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_11_004",
+          "X-Request-ID": "req-4"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    },
+    {
+      "task_id": "family_11_test_5",
+      "family_id": "family_11",
+      "pool": "B",
+      "intent": "shopping_checkout",
+      "params": {
+        "sku": "B_SKU_11_005",
+        "product": "B_PRODUCT_11_05",
+        "token": "B_TOKEN_11_005",
+        "store": "B_STORE_11_05"
+      },
+      "expected_bound_action": {
+        "method": "POST",
+        "path": "https://platform_11.example.com/cart/B_SKU_11_005",
+        "body": {
+          "sku": "B_SKU_11_005",
+          "product": "B_PRODUCT_11_05",
+          "quantity": 1
+        },
+        "headers": {
+          "X-CSRF": "B_TOKEN_11_005",
+          "X-Request-ID": "req-5"
+        }
+      },
+      "postconditions": {
+        "cart_added": true,
+        "status": 200
+      }
+    }
+  ]
+}
