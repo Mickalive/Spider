@@ -1,0 +1,22 @@
+{
+  "F_full": {
+    "F_full_canonical_vs_weighted": 0.7142857142857143,
+    "F_full_ci_lower": 0.42857142857142855,
+    "F_full_ci_upper": 1.0,
+    "F_trunc_vs_full_canonical": 0.14285714285714285,
+    "F_trunc_ci_lower": 0.09523809523809523,
+    "F_trunc_ci_upper": 0.7142857142857143,
+    "truncated_baseline_F": 0.5654,
+    "null_mean": 0.49885714285714283,
+    "null_p95": 0.7619047619047619,
+    "null_excess": 0.21542857142857147,
+    "can_mean": 0.0414986843001459,
+    "w_mean": 0.1809574044133612,
+    "gap_ratio": 4.360557628877043,
+    "n_tasks": 7,
+    "n_pairs": 21,
+    "status": "COMPLETE"
+  },
+  "seed": 35725763380,
+  "reps": 2000
+}

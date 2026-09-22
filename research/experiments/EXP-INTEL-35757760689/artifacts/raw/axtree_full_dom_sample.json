@@ -1,0 +1,13 @@
+{
+  "pc1": {
+    "combobox": true,
+    "button": true,
+    "placeholder": "Search entire store here...",
+    "node_count": 1426,
+    "pass": true
+  },
+  "measure_js_hash": "f1851adc59ead3b0c213d8c422cf3157d8535efe926cc926c013773caf4944c3",
+  "parent_measure_js_hash": "085b58c93be51bc76dc4ad712436500100c077594bd73c1cc1e552b6f68f49a3",
+  "cap_present": false,
+  "parent_has_cap": true
+}
