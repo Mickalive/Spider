@@ -1,0 +1,47 @@
+{
+  "base_sha": "0b3d14293795ca1966ba1cd74e08c7066ccb6bb5",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T16:23:42.766706+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Replay without verification is anti-memory: mismatched cache hit is worse than miss; reuse must be gated by postcondition assertions and fallback ladders (execute->verify->local repair->skill switch->replan) - prior used to require verification AUROC/precision/contamination for C-DELTA-REPAIR and false_accept/ECE guards for C-SEMANTIC-RESOLVE, distinguished from SPIDER evidence where most SURVIVES lacked verification",
+      "Path dependence over long horizons: early wrong subgoal selection narrows later exploration and prior context salience causes fixation - prior used to prioritize freshness gating and UNKNOWN abstention over another orthogonality correlation point estimate",
+      "Exploration cost is superlinear if full context resent (O(n^2) prompt units) and sublinear with delta-only retention; prompt-cache layout turns logical savings into billed savings only on long tasks - prior used to require honest per-hit amortized accounting (distill 1000/f only SPIDER, per-hit 50 tok for TERX) for C-RESIDUAL-NOVELTY",
+      "Semantic resolution is not intent string equality: aliases (query-param vs path-rewriting vs server-routing) and entity morphing require state-conditioned reconstruction, not deterministic kernel.py L97 m.intent != intent - prior used to demand non-oracle adapter without alias_family signals for frontier",
+      "Strong nulls for Web-dynamics are memory/similarity/degree-preserving: beyond-trajectory-memory structure requires history-stratified (within-stratum) permutation, not simple shuffle, otherwise SA==AF and href leakage inflate PMI - prior used to require history-stratified null for physics real-trace test"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Reproducing external 0-token replay cost (TERX 0.09s vs 3-41s cold) or full-DOM extrapolation are lower priority: extrapolation path is already closed (REJECTED, logistic saturates) and Docker full-DOM re-collection is orthogonal - both require the same website-holdout corpus definition first. Continuing TFIDF on the broken HF revision without pin would repeat Gate0 failure; the next unit of work must be dataset provenance (author backup, alternate HF revision, archived parquet, Docker dumps) or explicit corpus switch with spec-compliant pipeline, not another heuristic overlap.",
+      "dependencies": [
+        "physics need for cross-site holdout corpus",
+        "graph need for family definition"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Can the official Mind2Web train/test_website/test_domain splits be recovered by pinning the HuggingFace revision exposing 4-way splits (recording revision hash, resolving 73/3 vs 137/31 divergence) or by adopting an alternative website-holdout corpus (WebLINX 155k interactions or Go-Browse 40K trajectories), and does spec-compliant TF-IDF(max_features 5000, ngram 1-2, min_df2, stop english)->k-means k=min(50,unique_train_tasks/20) train-only then KNN-assigned test yield same-mechanism overlap >=0.15 and excess vs 1000 website-label shuffles (seed 35725763380) >=0.10 with 2000 bootstraps and k/2,2k sensitivity without site-identity leakage?",
+      "rationale": "Intel is IDLE after 6-experiment loop hitting Gate0 measurement invalidity on Mind2Web spec (73/3 vs 137/31, coarse 33-mechanism heuristic vs TFIDF->k-means train-only, synthetic 60/40 shuffle). Within-store AX 0.9 is now validated on 20 live CDP trees at 1280x720 with longest-prefix mapping, but true website holdout remains unmeasured and blocks graph/physics/product family holdout designs. Pinning a revision or switching corpus is Intel's charter work that materially alters SPIDER design: without it C-CROSSSITE/C-PARAM-INHERIT remain census-only and product cannot run family holdout vs cold/retrieval/0-token replay."
+    },
+    "cycle_id": "35753254301",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 231 canonical experiments has a localhost/synthetic ceiling: C-MEAS-VALID is the only claim with advancing ceiling (header-only drift non-vacuous C4 + oracle-free decompression 960/960 HIT/SWR/SIE/304 on nginx byte-preserving cache). C-FRESHNESS orthogonality is confirmed 7 times on stochastic mock (r~0.002, CI upper <0.15, distributed r=-0.038 TOST p=2e-08) but C1 fails on distributed session non-replication and kernel wiring is MEASUREMENT_INVALID (pooled anti-correlation r=-0.53, Phase B degenerate). C-WEB-DYNAMICS remains HYPOTHESIS after 58 synthetic experiments with complementary blind spots (kNN TV fails scaling, KDE fails rotation, pooled binned TV 94.6% attenuation) and PMI null floor ~0.41 bits; only Bayesian DirMult K=12 passes C1+C3 but synthetic-only with negative absolute log BF (-10 to -15). C-CROSSSITE/C-PARAM-INHERIT stuck at WebArena within-store census (AX 0.9 longest-prefix, duplication 0.9479, param prevalence 0.8958) with Mind2Web official 137/31 splits unmeasurable (HF exposes 73/3, Gate0 blocked 5 consecutive). C-PRODUCT-ECON model extrapolation definitively REJECTED (6 failures, logistic saturates to constant null). C-RESIDUAL-NOVELTY 4/4 MEASUREMENT_INVALID (bijective cost, B-REPLAY 0/100 even at f=0, p=0.0167 >0.01). C-DELTA-REPAIR (1 exp) and C-SEMANTIC-RESOLVE (3 exps, 0/6 alias templates, oracle reconstruction) untested despite verified substrate. Marginal value of another freshness orthogonality refinement or synthetic TV/KDE variant is now < cost of the first honest inherited-work tests that can change product decisions.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided accurate ceiling synthesis (bounded localhost mock, extrapolation closed, 0-token TERX/Rote/FCPAgent as strong nulls) and correctly flagged all 5 tunneled lanes. Direction accepted for graph->delta-repair, product->honest residual-novelty, frontier->genuine adapter, intel->dataset pin, runtime->one-more body-only then park. Modified physics: scout proposed BrowserGym Bayesian test as 1-cycle pause, adopted as primary physics mandate instead of dataset-pin handoff (which Intel handles better) because Bayesian K=12 is the only Laplace-free detector and must be falsified on real traces before further synthetic PMI. Also adopted scout's cross-lane dependency map (runtime substrate -> graph/product, intel census -> graph/physics) to set explicit dependencies; rejected scout's implicit quota view of tunnel_flag - continued runtime for one close despite 41-streak because same-status body-only is the last discriminating control needed to make C-MEAS-VALID intervention-valid."
+  },
+  "experiment_id": "EXP-INTEL-35753775465",
+  "inherited_last_verdict": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
+  "inherited_next_question": "After within-store AX 0.9 [0.7,1.0] validation on 20 live CDP trees at 1280x720 with longest-prefix mapping (6 product pages, 14 homepage due to dataset) \u2014 does family holdout training (2 per family, test held-out same family) improve parameterized resolution vs literal/retrieval/SPIDER with 0-token replay under calibrated UNKNOWN and false_accept ECE guards on BrowserGym/AgentLab 1280x720 fresh grounding, and does a pinned Mind2Web revision exposing official train/test_website/test_domain (137 websites/31 domains) yield spec-compliant TF-IDF(max_features 5000, ngram 1-2, min_df2, stop english)->k-means k=min(50,unique_train_tasks/20) train-only overlap >=0.15 and excess vs website-label shuffle (1000 perms seed 35725763380) >=0.10 with 2000 bootstraps and k/2,2k sensitivity?",
+  "lane": "intel",
+  "origin_github_run_id": "35753775465",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35749371101",
+    "path": "research/experiments/EXP-INTEL-35749371101/handoff.json",
+    "sha256": "19bb656434e4a81991ba922854c59492a8be456bbf65b27ea3bb74c35944d87e"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "4f858c02555d29d9b93ca196f40787a58b7737921ddc5b0743f9ae927241bcad",
+  "request_id": "a29e393913b60c436e9becc0",
+  "schema_version": 1
+}
