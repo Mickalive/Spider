@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35651906573",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Rewrite claim ceiling to make relative-to-null semantics explicit: state that observed log BF is NEGATIVE (-10.4 to -15.6 nats) at K=12, so M0 memory-only is favored absolutely; C3 'detection' is separation from an even-more-negative shuffled null, not evidence for action-conditioned dynamics beyond (url_before, H_K2). Do not present SURVIVES_CURRENT_TEST as bridging synthetic->real for C-WEB-DYNAMICS without this qualification. Evidence: result.json metrics.variants.*.per_alpha_log_bayes_factor_nats.observed negative, validity_notes[2], report.md section 5.",
+    "Correct effective replication count: acknowledge that {vanillajs,react,svelte} are bit-identical and {vue,angular} are bit-identical under identical 24-action protocol (raw_results.json variants, CTRL_VARIANT_ISOMORPHISM). Effective independent hash-SPA replications =2, not 5. A future test must use variant-diverse protocols or distinct FSMs to claim 5/5.",
+    "Justify or preregister action-variable resolution: prereg.md states Action = URL of action target (action.target_href) but NL subset has action_target=None on all 80 records per variant (result.json observations[1], CTRL_DEGENERATE_ACTION_TARGET), making that encoding degenerate (log BF=0). Producer used action_primitive instead, matching PMI parent EXP-PHYSICS-35262258744. Freeze a single action definition in spec.json before counting C1/C3; do not carry a degenerate definition into the decision rule.",
+    "Test sensitivity to K: frozen K=12 over-penalizes observed state cardinality S=3-4 (validity_notes[4]), making BF magnitudes incomparable to synthetic 12-state setting where K matches n_states. Re-run data-matched K in {3,4,5} as exploratory sensitivity analysis before any C-WEB-DYNAMICS claim; report how absolute BF sign and C1/C3 change.",
+    "Reconcile B1 baseline discrepancy before any gating use: this run B1 I(url_after;action|url_before)=0.0581-0.0716 bits vs parent-cited 0.188-0.209 bits (result.json metrics.baselines.B1_url_only_conditional_mi_bits, unresolved[2]). Clarify computation scope (Laplace over (y,a) at each x vs parent) and confirm null handling.",
+    "Do not claim N=5000-scale validation: achieved N_NL=80 per variant (112 valid of 144 raw, 32 link leakages) vs frozen target N=5000 (spec.json measurement_validity, result.json variants.*.n_nl). Retain bounded ceiling: TodoMVC hash-SPA, 6 scripted sessions, near-deterministic FSM (det_ratio 0.846-0.944). Generalization to stochastic, history-dependent, or production SPAs untested."
+  ],
+  "validity_findings": [
+    {
+      "finding": "Positive control replication-exact: synthetic 12-state stochastic SPA N=5000 reproduces parent EXP-PHYSICS-35578258358 exactly (observed 643.09/338.67/167.90 nats, null_median -78.36/-130.91/-116.10, p=0.0005 at all alphas). C6 PASS validates estimator implementation.",
+      "severity": "pass",
+      "evidence": "result.json metrics.positive_control_synthetic_k2_N5000_seed42, raw_results.json positive_control.per_alpha, raw_synthetic.json sha256 0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be"
+    },
+    {
+      "finding": "C1 and C3 technically pass frozen thresholds on all variants/alphas (null_median -24.8 to -39.7 nats <0, observed -10.4 to -15.6 nats exceeds all 1999 null samples => p=0.0005 floor). Recomputed observed BF via independent Dirichlet-Multinomial code matches producer bit-identically (vanillajs alpha 1.0 -11.537420435660863, vue alpha 1.0 -15.505944768691677). Decision rule formally yields SURVIVES_CURRENT_TEST (C1 5/5, C3 5/5, C5 5/5, C6 pass).",
+      "severity": "pass_formal_fail_scientific",
+      "evidence": "result.json metrics.variants.*.per_alpha_log_bayes_factor_nats, controls.CTRL_NULL_WITHIN_SESSION_SHUFFLE_C1/C3, raw_results.json variants.*.per_alpha, recomputed_metrics below"
+    },
+    {
+      "finding": "Observed BF negative on all 15 (variant x alpha) cells: memory-only M0 favored absolutely at K=12. Per-stratum decomposition (vanillajs alpha 1.0: '#/'->'#/' -9.68, '#/completed'->'#/completed' -2.15; stochastic strata +0.30/+0.56) shows penalty from deterministic strata dominates. This contradicts any absolute claim of action-conditioned web dynamics beyond memory.",
+      "severity": "critical",
+      "evidence": "result.json observations[3][4], report.md section 5, metrics.variants.*.per_alpha_log_bayes_factor_nats.observed negative"
+    },
+    {
+      "finding": "Relative separation is real but mechanistic interpretation is confounded: null is even more negative because within-session shuffling mixes outcomes inside deterministic K2 cells (85-94% deterministic strata, B2=1.0). Null negativity is a design consequence of deterministic FSM + K=12 penalty, not evidence of null proper centering for stochastic dynamics. C1 (<0) is therefore trivially satisfied and not discriminating.",
+      "severity": "high",
+      "evidence": "result.json metrics.variants.*.determinism_k2, metrics.baselines.B2_action_history_accuracy_k3=1.0 on all variants, validity_notes[6], run_experiment.py shuffled_action_null_within_session"
+    },
+    {
+      "finding": "Near-deterministic environment cannot express the tested effect beyond memory: B2 action-history K3 accuracy 1.0 and K2 determinism 0.846-0.944 mean (url_before, H_K2) already determines url_after for 85-94% of strata. The environment is a 3-4 state deterministic FSM, so I(url_after; action | url_before, H_K2) is near zero by construction. Test is valid for detecting generic action signal beyond history, but failure to find positive BF is not informative about stochastic/production SPAs.",
+      "severity": "high",
+      "evidence": "result.json metrics.variants.*.determinism_k2, metrics.baselines.B2_action_history_accuracy_k3, validity_notes[5], report.md section 5"
+    },
+    {
+      "finding": "Sampling shortfall: target N=5000 per variant, achieved N_NL=80 (6 sessions x 24 raw =144, 112 valid after error filtering, 32 leakages). 1.6% of target; effective independent transitions further reduced by 6 near-identical scripted sessions (timestamps sequential, same 7-step cycle). Spec explicitly allowed reporting actual N, so not a spec violation, but power and history diversity are severely limited.",
+      "severity": "medium",
+      "evidence": "spec.json measurement_validity N=5000 with reporting note, result.json metrics.variants.*.n_raw/n_valid/n_nl, collect_todomvc.py ACTIONS_PER_SESSION=24 SESSIONS_PER_SITE=6, raw_transitions_all.json 720 total"
+    },
+    {
+      "finding": "Isomorphic replication inflates variant count: {vanillajs,react,svelte} bit-identical BF/null/baselines and {vue,angular} bit-identical. Suffix-normalized NL transition sequences identical (auditor verified). Effective independent FSM types =2 (4-state vs 3-state). Claiming 5/5 independent variant passes overstates replication.",
+      "severity": "high",
+      "evidence": "result.json metrics.variants identical blocks, controls.CTRL_VARIANT_ISOMORPHISM, raw_results.json variants, auditor recomputation suffix comparison"
+    },
+    {
+      "finding": "Action-variable deviation from prereg: prereg.md 'Action: URL of the action target' defines action as action_target, but NL filter removes all link_click (100% leakage) leaving action_target=None constant on all NL records (CTRL_DEGENERATE_ACTION_TARGET log BF 0.000000). Producer correctly uses action_primitive as model action, matching PMI parent. Deviation is disclosed in validity_notes[1] and does not alter K/priors/shuffles, but frozen spec should have preregistered action_primitive explicitly.",
+      "severity": "medium",
+      "evidence": "prereg.md State Representation Action, spec.json hypothesis, result.json validity_notes[1], controls.CTRL_DEGENERATE_ACTION_TARGET"
+    },
+    {
+      "finding": "URL resolution deviation disclosed and justified: spec shorthand todomvc.com/examples/{vanillajs,react,vue,angular,svelte}/ returns 404; live dist URLs (javascript-es6/dist, react/dist, vue/dist, angular/dist/browser, svelte/dist) are infra parent EXP-PHYSICS-35209110569 frozen paths. Same five frameworks, same hash-routing. Not a validity violation but requires explicit mapping.",
+      "severity": "low",
+      "evidence": "result.json validity_notes[0], provenance.json evidence_chain parent EXP-PHYSICS-35209110569, collect_todomvc.py VARIANTS"
+    },
+    {
+      "finding": "K=12 category-space carryover dominates Occam penalty: observed S=3-4 distinct url_before states, so DM prior with K=12 (K*n_states prior mass =6-24) strongly penalizes M1 extra parameters even when deterministic. Sensitivity to data-matched K is frozen-out and untested; BF scale not comparable to synthetic where K matches n_states=12.",
+      "severity": "high",
+      "evidence": "spec.json K=12 frozen, result.json validity_notes[4], run_experiment.py N_STATES=12, metrics.variants.*.n_states_url_before 3-4"
+    },
+    {
+      "finding": "p-value at resolution floor: N_SHUFFLE=1999 => minimal p=0.0005; all 15 cells achieve floor (observed exceeds all 1999 nulls). C3 p<0.001 satisfied at floor, but finer resolution (e.g. 9999) and CI width untested. Not a failure, but precision claim limited.",
+      "severity": "low",
+      "evidence": "result.json validity_notes[3], metrics n_shuffle 1999, provenance.json environment seeds"
+    },
+    {
+      "finding": "Representation loss acknowledged: fragment-aware URL collapses distinct DOM/JS states (input focus, edited todo text). Collection uses Playwright headless Chromium 1.63.0 with force=True clicks and fallback toggles; intermittent Vue '#/' timeouts handled; error-filtered valid transitions preserve only error-free records. Infrastructure succeeded (no BLOCKED), live network reachable.",
+      "severity": "low",
+      "evidence": "result.json validity_notes[7][8], raw_transitions_all.json error field, collect_todomvc.py spa_session, provenance.json"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "BASE_B1_URL_ONLY_PMI",
+      "expected": ">0 bits small; parent-cited 0.188-0.209 bits on different PMI scope (EXP-PHYSICS-35262258744)",
+      "observed": "0.0581 bits (vanillajs/react/svelte), 0.0716 bits (vue/angular) conditional MI I(url_after; action | url_before) plug-in Laplace alpha=1.0 over (y,a) at each x, K=12. Small but >0 confirms weak action signal conditional on current URL alone.",
+      "finding": "Informational: B1 >0 but 3x smaller than parent citation. Discrepancy is scope/definition difference (auditor confirms Laplace scheme in plugin_conditional_mi); do not gate on B1 until reconciled.",
+      "evidence": "result.json controls.BASE_B1_URL_ONLY_PMI, metrics.baselines.B1_url_only_conditional_mi_bits, run_experiment.py plugin_conditional_mi"
+    },
+    {
+      "baseline": "BASE_B2_ACTION_HIST_K3",
+      "expected": "~1.0 action-history K=3 prediction accuracy (deterministic FSM from parent chain)",
+      "observed": "1.0 on all 5 variants (23 groups, 23 deterministic, 80/80 records deterministic)",
+      "finding": "PASS replicating parent: environment is deterministic at action-history K=3, confirming limited stochasticity and that K2 history already captures most predictability.",
+      "evidence": "result.json controls.BASE_B2_ACTION_HIST_K3, metrics.baselines.B2_action_history_accuracy_k3, raw_results.json baseline_action_history_acc_k3"
+    },
+    {
+      "baseline": "BASE_B3_STATE_HIST_K2",
+      "expected": ">0 bits memory-only predictability I(url_after; (url_before, H_K2))",
+      "observed": "0.7020-0.8269 bits across variants (Laplace alpha=1.0 joint table)",
+      "finding": "Informational: memory alone strongly predicts next state; this is the baseline M1 competes against and loses to at K=12 (negative BF).",
+      "evidence": "result.json controls.BASE_B3_STATE_HIST_K2, metrics.baselines.B3_state_history_k2_mi_bits, run_experiment.py state_history_k2_mi"
+    }
+  ],
+  "recomputed_metrics": {
+    "positive_control_synthetic_k2_N5000_seed42": {
+      "n_transitions": 5000,
+      "recomputed_transitions_sha256": "8cff7c33b71b092c307a6e41ed021fc0c82b952ed620e571c2f01cf8d5c33be0",
+      "matches_producer": true,
+      "per_alpha": {
+        "0.5": {"observed": 643.0887818351148, "null_median": -78.3598155522759, "null_max": -21.141361116682674, "p_value": 0.0005, "c1_pass": true, "c3_pass": true, "recomputed_observed_match": true},
+        "1.0": {"observed": 338.6710973256759, "null_median": -130.90835513540515, "null_max": -92.94141450463576, "p_value": 0.0005, "c1_pass": true, "c3_pass": true, "recomputed_observed_match": true},
+        "2.0": {"observed": 167.89839491149542, "null_median": -116.09881255547953, "null_max": -92.76723145735923, "p_value": 0.0005, "c1_pass": true, "c3_pass": true, "recomputed_observed_match": true}
+      },
+      "c6_pass": true
+    },
+    "variants": {
+      "vanillajs": {
+        "n_raw": 144, "n_valid": 112, "n_nl": 80,
+        "recomputed_observed_bf": {"0.5": -11.48964481134648, "1.0": -11.537420435660863, "2.0": -10.380099865694262},
+        "recomputed_null_median": {"0.5": -39.72955257045231, "1.0": -32.690852592785234, "2.0": -24.821483716076898},
+        "recomputed_null_max": {"0.5": -29.92603329704224, "1.0": -24.896372244403665, "2.0": -19.10703149476194},
+        "recomputed_p_value": {"0.5": 0.0005, "1.0": 0.0005, "2.0": 0.0005},
+        "recomputed_determinism_k2": {"deterministic": 17, "stochastic": 1, "total": 18, "det_ratio": 0.9444444444444444},
+        "matches_producer": true,
+        "recomputed_independent": true,
+        "method": "independent Dirichlet-Multinomial recomputation from nl_transitions_vanillajs.json with run_experiment.py logic, N_STATES=12"
+      },
+      "react": {
+        "n_raw": 144, "n_valid": 112, "n_nl": 80,
+        "recomputed_observed_bf": {"0.5": -11.48964481134648, "1.0": -11.537420435660863, "2.0": -10.380099865694262},
+        "recomputed_null_median": {"0.5": -39.72955257045231, "1.0": -32.690852592785234, "2.0": -24.821483716076898},
+        "matches_producer": true,
+        "isomorphic_to": "vanillajs",
+        "suffix_sequence_identical": true
+      },
+      "vue": {
+        "n_raw": 144, "n_valid": 112, "n_nl": 80,
+        "recomputed_observed_bf": {"0.5": -13.75062682860964, "1.0": -15.505944768691677, "2.0": -15.568494005387379},
+        "recomputed_null_median": {"0.5": -38.89483314163893, "1.0": -34.519866574339744, "2.0": -28.68456104607469},
+        "recomputed_null_max": {"0.5": -28.866421474677324, "1.0": -26.925108570674297, "2.0": -22.689699568964983},
+        "recomputed_p_value": {"0.5": 0.0005, "1.0": 0.0005, "2.0": 0.0005},
+        "recomputed_determinism_k2": {"deterministic": 11, "stochastic": 2, "total": 13, "det_ratio": 0.8461538461538461},
+        "matches_producer": true
+      },
+      "angular": {
+        "n_raw": 144, "n_valid": 112, "n_nl": 80,
+        "recomputed_observed_bf": {"0.5": -13.75062682860964, "1.0": -15.505944768691677, "2.0": -15.568494005387379},
+        "matches_producer": true,
+        "isomorphic_to": "vue",
+        "suffix_sequence_identical": true
+      },
+      "svelte": {
+        "n_raw": 144, "n_valid": 112, "n_nl": 80,
+        "recomputed_observed_bf": {"0.5": -11.48964481134648, "1.0": -11.537420435660863, "2.0": -10.380099865694262},
+        "matches_producer": true,
+        "isomorphic_to": "vanillajs"
+      }
+    },
+    "baselines_recomputed": {
+      "B1_url_only_conditional_mi_bits": {"vanillajs": 0.05813708206086476, "react": 0.05813708206086476, "vue": 0.07161169713610957, "angular": 0.07161169713610957, "svelte": 0.05813708206086476, "matches_producer": true},
+      "B2_action_history_accuracy_k3": {"all_variants": 1.0, "matches_producer": true},
+      "B3_state_history_k2_mi_bits": {"vanillajs": 0.8269108161495716, "vue": 0.7020178384350835, "matches_producer": true}
+    },
+    "controls_recomputed": {
+      "CTRL_POS_K2_N5000_S42": {"pass": true, "recomputed": true},
+      "CTRL_NULL_WITHIN_SESSION_SHUFFLE_C1": {"observed_null_median_range": "-24.82 to -39.73 nats, all <0", "pass": true},
+      "CTRL_NULL_WITHIN_SESSION_SHUFFLE_C3": {"observed_p": 0.0005, "observed_exceeds_all_null": true, "pass_formal": true},
+      "CTRL_C5_NL_SUFFICIENCY": {"n_nl_per_variant": 80, "threshold": 50, "pass": true},
+      "CTRL_DEGENERATE_ACTION_TARGET": {"recomputed_log_bf_action_target": 0.0, "pass": true},
+      "CTRL_VARIANT_ISOMORPHISM": {"verified_bit_identical": true, "groups": ["vanillajs,react,svelte", "vue,angular"]}
+    },
+    "recomputation_method": "Independent Python recomputation of Dirichlet-Multinomial log BF from nl_transitions_*.json using run_experiment.py _dirichlet_multinomial_log_marginal and est_bayesian_model_comparison (K=12, alpha 0.5/1.0/2.0); leakage via normalize_leakage_url; determinism via strata counting. All headline numbers match producer to 1e-12."
+  },
+  "claim_ceiling": "Maximum justified: Bayesian Dirichlet-Multinomial (K=12, alpha_prior 0.5/1.0/2.0, state-history K2=(url_before +2 prev URLs)) is correctly implemented (positive control replication-exact) and, on TodoMVC hash-SPA fragment-aware URL states, shows valid null centering (shuffled null median -24.8 to -39.7 nats <0) and relative separation where observed log BF (-10.4 to -15.6 nats) exceeds all 1999 within-session shuffled-action null samples (p=0.0005 floor) on 2 effectively independent deterministic FSM types (4-state {vanillajs,react,svelte} and 3-state {vue,angular}) with 80 NL transitions each (6 scripted sessions). Observed BF is NEGATIVE, so memory-only M0 is favored absolutely at K=12; this is NOT evidence for action-conditioned Web dynamics beyond memory on these sites, but evidence that the real action arrangement is less penalized than random shuffling inside deterministic cells. Ceiling EXCLUDES: C-WEB-DYNAMICS beyond this relative null separation, production SPAs, stochastic or history-dependent dynamics, richer state representations (DOM, a11y, visual), data-matched K, title-aware PMI, and any product promotion. Generalization to N=5000-scale, diverse-session, or non-deterministic settings untested.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35651906573/result.json sha256 e997d3b1da25d34516da8af692cf6c111ae6d10195059da98f1332fad7f25959 (derived) and raw_results.json sha256 ec9b1e630e6d8ddb3ff3e7c352fcba5f02f30f81d2a6cd682beb1e2875ba8fee",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_transitions_all.json sha256 cdb3ad1c29974f560aacac27455e71cbe7af2e2b10aef1808496fcc8b06cc335 (720 raw transitions, 144 per variant)",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vanillajs.json sha256 3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_react.json sha256 115b6a63ade5ccb6c53ad5732a920be313305555b38fe4be039e4f4367def133",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vue.json sha256 10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_angular.json sha256 f27acff699d6157890fb7daab024f96af52be4802829a8cd4809dd7fcc7b2a18",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_svelte.json sha256 3ec95119d5842bce2864e9244b00ae39e7593d9eba5dcd13c1022b49dd94b496",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_synthetic.json sha256 0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be (positive control N=5000)",
+    "research/experiments/EXP-PHYSICS-35651906573/run_experiment.py sha256 bdbc8dd98698f1f1e41d7791927d0bf88800de38210db1eadefd99bc6d837126",
+    "research/experiments/EXP-PHYSICS-35651906573/collect_todomvc.py sha256 bede1ca19b15e09ba8e8d8b4c6a39bb18a90acd56b2c4a3fe7cf760358398999",
+    "research/experiments/EXP-PHYSICS-35651906573/spec.json hash 880bd3ff37fd22b4bb90de18a9b06b6c23c853c1e6cc2c7e7157e157ad8517a6 (frozen)",
+    "research/experiments/EXP-PHYSICS-35651906573/request.json hash 0284264611d521840268c24f26327c60f387cd120d3a44099f177c161ed0c3cf (frozen, director_mandate C-WEB-DYNAMICS)",
+    "research/experiments/EXP-PHYSICS-35578258358/handoff.json sha256 2d4324ca6f6e4e3e5921e1d749f04abdcbc1304f8fbc7878f7e7f04e81a8a324 (parent synthetic SURVIVES_CURRENT_TEST)",
+    "codex/claim_state.json C-WEB-DYNAMICS events (synthetic-to-real gap is dominant unknown, remains HYPOTHESIS outside narrow ceiling)"
+  ],
+  "unresolved": [
+    "Whether C3 relative separation (observed less negative than null) should count as 'detection sensitivity' supporting C-WEB-DYNAMICS when absolute BF favors memory-only M0; frozen decision rule says yes, scientific interpretation says no - Director must adjudicate claim wording.",
+    "Sensitivity to K: what happens with data-matched K≈3-4 instead of frozen K=12? Would absolute BF become positive, and would C1/C3 still hold? Untested, frozen-out.",
+    "B1 scope discrepancy: 0.058-0.071 bits here vs 0.188-0.209 bits cited from EXP-PHYSICS-35262258744 for URL-only PMI - reconciling Laplace denominator definitions needed before B1 can be gating.",
+    "Permutation p resolution: observed exceeds all 1999 shuffles so true p may be <<0.0005; finer N_SHUFFLE=9999 untested. Also null distribution is heavily negative due to deterministic cell mixing - is this the intended null for stochastic dynamics?",
+    "Effective independent replications: 2 isomorphic FSM types vs claimed 5 variants - what protocol diversity would make variants truly independent?",
+    "Generalization to non-TodoMVC, non-deterministic, stateful (non-URL-representable), or history-dependent production SPAs (todo count, filter state, localStorage) where DOM/DOM+history carries signal beyond URL - untested.",
+    "Does the frozen K=12 Dirichlet-Multinomial estimator have any discriminating power for genuine Web dynamics when history already determines next state (B2=1.0)? Identifiability argument from spec (action adds information beyond memory) is not satisfied in this near-deterministic setting; beyond-memory dynamics untested.",
+    "Collection session diversity: 6 sessions per variant use same 7-step cycle with only session_idx offsets; history diversity limited to 18/13 K2 strata. Would more diverse user-like trajectories change BF/null?"
+  ]
+}

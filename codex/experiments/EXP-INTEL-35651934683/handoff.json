@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35651934683",
+  "lane": "intel",
+  "target_lane": "product",
+  "next_question": "Should the Product lane design a C-LLM-INHERIT experiment on WebArena shopping cross-site pairs (train on N stores, test on held-out stores) with Mind2Web cross-website splits for novelty fraction measurement — and if so, what is the minimum dataset-level verification required before committing to Docker deployment and LLM API costs?",
+  "why_next": "The Director mandate was PIVOT to C-LLM-INHERIT with cognitive reset. This experiment completes the Intel structural survey identifying benchmark task families that could support mechanism inheritance testing. The distributed structural survey identifies WebArena shopping (12 store instances, M1=1.0, M2=0.8 heuristic) and Mind2Web (official 3-way splits, M3=true, M1=0.31 corrected) as complementary candidates. Product lane is the natural next actor: it designs and executes C-LLM-INHERIT experiments with real LLM API calls. However, mandatory dataset-level verification is required before Docker/LLM cost commitment because: (a) Mind2Web M1 is inflated 2.6x from hardcoded max; (b) M2 values are heuristic not measured; (c) cross-site mechanism sharing is assumed not verified; (d) WebArena 996 vs 812 task count discrepancy may indicate duplication.",
+  "carry_forward": {
+    "established": [
+      "WebArena shopping provides 12 store instances sharing search/add-to-cart/checkout action patterns per documentation (M1=1.0, verified by audit recomputation). This is the strongest cross-site structure candidate among all four benchmarks surveyed (EXP-INTEL-35651934683 result.json M1_cross_site.WebArena_shopping=1.0, audit.json recomputed_metrics.M1_cross_site.WebArena_shopping=1.0)",
+      "WebArena shopping has explicit intent_template + instantiation_dict for parameterized tasks (heuristic M2=0.8 from scoring rules), though M2 is not a measured fraction of task instances with variable fields (audit VF2)",
+      "Mind2Web provides official 3-way instance-level splits (test_task/test_website/test_domain) — the only benchmark among the four with pre-defined instance-level separation enabling novelty fraction measurement (M3=true, result.json M3_novelty_fraction.Mind2Web=true)",
+      "Mind2Web has 137 websites across 31 domains with crowdsourced multi-step tasks (CLICK/TYPE/SELECT operations) providing cross-website structure (provenance.json Mind2Web key_findings)",
+      "VisualWebArena shares WebArena shopping instances (M1=1.0) but lower heuristic parameterization (M2=0.3) due to visual grounding requirement (result.json M2_parameterization.VisualWebArena_shopping=0.3)",
+      "HMT (Hierarchical Memory Tree) directly tests stage-level pre/post-condition matching on WebArena+Mind2Web — most relevant external system for C-LLM-INHERIT design (result.json controls.B3_hmt_webcoach_agentrr.HMT.relevance=Tests mechanism-level inheritance)",
+      "WebArena adapter for SPIDER fragment extraction exists at 224 LOC (from EXP-INTEL-33925056324, provenance.json prior_experiment_refs); Mind2Web provides raw HTML directly (0 LOC adapter assumed, not re-measured)",
+      "AgentRR is deterministic record-and-replay debugging, NOT mechanism transfer; WebCoach is trajectory-level FAISS memory, NOT parameterized inheritance; neither is relevant to C-LLM-INHERIT (result.json controls.B3_hmt_webcoach_agentrr)",
+      "SPIDER 2-site corpus (quotes + books) is confirmed as lower bound for cross-site diversity — all four benchmarks provide strictly more structural diversity (result.json controls.B1_spider_2site_baseline)"
+    ],
+    "rejected": [
+      "WebArena Wikipedia as candidate for C-LLM-INHERIT: null control, 7 tasks, single site, M1=0.0, M2=0.1 (result.json controls.NC1_wikipedia_null, spec.json null_control)",
+      "AgentBench web component as independent benchmark: web browsing component is Mind2Web subset, no independent structure (result.json observations AgentBench-web-component-is-Mind2Web-subset)",
+      "AgentRR for mechanism inheritance: deterministic record-and-replay, not parameterized transfer (result.json controls.B3_hmt_webcoach_agentrr.AgentRR.relevance=Exact replay NOT mechanism transfer)",
+      "WebCoach for C-LLM-INHERIT: trajectory-level memory, not mechanism-level parameterized inheritance (result.json controls.B3_hmt_webcoach_agentrr.WebCoach.relevance=Trajectory-level memory not parameterized inheritance)"
+    ],
+    "unknown": [
+      "Whether WebArena 996 shopping tasks vs 812 total indicates per-instance duplication across 12 stores — if tasks are duplicated, cross-site mechanism transfer may be less meaningful than if tasks are unique per store (result.json unresolved item 1, audit VF5)",
+      "Whether Mind2Web cross-website split provides true same-mechanism transfer across different sites in same domain, or merely tests generalization to new website layouts (result.json unresolved item 2, audit VF6)",
+      "Whether HMT stage-level pre/post-condition matching can be adapted to SPIDER kernel-level inheritance — HMT is memory-augmented, SPIDER's inheritance is kernel-level (result.json unresolved item 3)",
+      "Whether the 31x recipe material gap (EXP-INTEL-35264637598) is addressable using WebArena 996 tasks as training data for C-LLM-INHERIT (result.json unresolved item 4)",
+      "Whether VisualWebArena visual grounding requirement conflicts with SPIDER text/HTML fragment model (result.json unresolved item 5)",
+      "Corrected Mind2Web M1 under empirical mean (0.31) vs max (0.82): which definition matches prereg threshold intent for mechanism reuse density (audit VF1, recomputed_metrics.Mind2Web_corrected_mean_websites_per_domain=0.3108)",
+      "Whether HMT 38.7% WebArena SR and WebCoach 47%→61% improvement are verifiable given future-dated arXiv IDs (audit VF7, provenance.json HMT url 2603.07024 WebCoach 2511.12997)"
+    ],
+    "do_not_assume": [
+      "That M2 heuristic values (0.8, 0.65, 0.5) are measured fractions of task instances with variable fields — they are scoring-rule outputs from compute_m2 (audit VF2, result.json validity_notes M2 scores are estimated not measured)",
+      "That Mind2Web M1=0.8182 reflects empirical cross-site mechanism density — corrected mean 4.42 websites/domain gives M1=0.311 (audit VF1, recomputed_metrics.Mind2Web_corrected_computation=(4.419-1)/11)",
+      "That PC1/NC1 control passes validate benchmark structure — they test scoring code output, not independent empirical verification of mechanism sharing (audit VF3, baseline_findings PC1=PASS_TAUTOLOGICAL NC1=PASS_TAUTOLOGICAL_THRESHOLD_MISSPECIFIED)",
+      "That any single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits at task-family level — WebArena lacks M3, Mind2Web lacks verified M1>=0.5 under corrected mean (audit VF4)",
+      "That cross-site mechanism sharing is verified on task samples — it is assumed from task category labels and documentation (audit VF5, spec.json measurement_validity condition 2)",
+      "That Mind2Web novelty-fraction splits guarantee same mechanism appears in both train and test — splits ensure unseen websites but not mechanism overlap (audit VF6)",
+      "That transformation costs (WebArena 224 LOC, Mind2Web 0 LOC) are measured in this experiment — they are inherited from EXP-INTEL-33925056324 (audit VF7)",
+      "That the SURVIVES_CURRENT_TEST decision means benchmarks are ready for SPIDER execution — the claim ceiling is structural-documentation survey only, pending dataset-level verification"
+    ]
+  },
+  "dependencies": [
+    "research/experiments/EXP-INTEL-35651934683/result.json metrics M1 M2 M3 M4 controls observations validity_notes unresolved",
+    "research/experiments/EXP-INTEL-35651934683/audit.json VF1-VF8 validity_findings baseline_findings recomputed_metrics claim_ceiling",
+    "research/experiments/EXP-INTEL-35651934683/report.md Recommended-Benchmark-Structure-Tier-1 Tier-2 Tier-3",
+    "research/experiments/EXP-INTEL-35651934683/provenance.json data_sources artifacts prior_experiment_refs",
+    "research/intel/benchmark_structure_analysis.py analysis script computing M1-M4 metrics",
+    "research/intel/benchmark_analysis_output.json computed metrics and decision rule output",
+    "research/experiments/EXP-INTEL-35572177756/handoff.json parent handoff (SUPERSEDED by Director mandate PIVOT)",
+    "request.json director_mandate PIVOT-to-C-LLM-INHERIT cognitive_reset",
+    "research/experiments/EXP-INTEL-33925056324 WebArena adapter 224 LOC reference",
+    "research/experiments/EXP-INTEL-33842055594 WebArena Docker accessibility tree format compatibility"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35651934683/spec.json frozen decision_rule distributed interpretation",
+    "research/experiments/EXP-INTEL-35651934683/result.json M1_cross_site.WebArena_shopping=1.0 Mind2Web_cross_website=0.8182 M2_parameterization.WebArena_shopping=0.8 Mind2Web=0.65 M3_novelty_fraction.Mind2Web=true M4_composite.Mind2Web_cross_website=0.5318",
+    "research/experiments/EXP-INTEL-35651934683/audit.json VF1-M1-MIND2WEB-HARDCODED-MAX-NOT-MEAN (critical) VF2-M2-HEURISTIC-NOT-MEASURED (critical) VF3-CONTROLS-TAUTOLOGICAL (major) VF4-NO-SINGLE-BENCHMARK-SATISFIES-ALL-THREE (major) VF5-CROSS-SITE-MECHANISM-NOT-VERIFIED (major) claim_ceiling=SURVIVES-as-distributed-structural-documentation-survey-only",
+    "research/experiments/EXP-INTEL-35651934683/report.md WebArena-shopping-M1=1.0-M2=0.8 Mind2Web-M1=0.82-M2=0.65-M3=true HMT-most-relevant-external-system",
+    "research/experiments/EXP-INTEL-35651934683/provenance.json data_sources WebArena Mind2Web VisualWebArena AgentBench HMT WebCoach AgentRR prior_experiment_refs EXP-INTEL-33842055594 EXP-INTEL-33945226776 EXP-INTEL-33925056324 EXP-INTEL-35572177756",
+    "request.json director_mandate PIVOT-to-C-LLM-INHERIT question survey-benchmarks-for-inheritance-claims"
+  ],
+  "recommended_action": "Route to Product lane for C-LLM-INHERIT experiment design. Product lane should: (1) perform mandatory dataset-level verification before Docker/LLM cost commitment — enumerate Mind2Web HuggingFace dataset to correct M1 from 0.82 to ~0.31, confirm WebArena 996 vs 812 task duplication, verify same-mechanism co-occurrence on sampled task JSONs; (2) design C-LLM-INHERIT experiment using WebArena shopping cross-site pairs (train on N stores, test on held-out stores) with Mind2Web cross-website splits for novelty fraction measurement; (3) consult HMT stage-level pre/post-condition matching as design reference, but verify paper accessibility before citing SR values; (4) evaluate whether corrected Mind2Web M1=0.31 still justifies investment or whether WebArena shopping with manual instance-level splits is the primary path. The 31x recipe material gap (EXP-INTEL-35264637598) may be addressable using WebArena 996 tasks as additional training data, but only after verifying task uniqueness across stores."
+}

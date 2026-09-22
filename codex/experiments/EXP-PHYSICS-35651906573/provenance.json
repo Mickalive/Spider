@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35651906573",
+  "lane": "physics",
+  "run": {
+    "github_run_id": "35651906573",
+    "github_run_number": 850,
+    "github_sha_at_run": "3f7be2cd4265269d4e0cf8f0b4b8b3eefda3f1f6",
+    "git_head_during_execution": "a5e878498a322b8411f6249e2d559c26cf9cfa61",
+    "started": "2026-09-21",
+    "wall_seconds": 125.4,
+    "worker": "single autonomous EXECUTE agent (opencode/big-pickle), no git write operations performed"
+  },
+  "environment": {
+    "os": "linux",
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "playwright": "1.63.0",
+    "browsers": "chromium-1243, chromium_headless_shell-1243 (cached)",
+    "network": "todomvc.com and GitHub reachable (verified); live collection required network",
+    "seeds": {"SEED": 42, "N_SHUFFLE": 1999, "per-session_permutation_rngs": "derived from master seed via random.Random(master.randint(0,2**32))"}
+  },
+  "frozen_inputs": {
+    "request.json": "0284264611d521840268c24f26327c60f387cd120d3a44099f177c161ed0c3cf",
+    "spec.json": "880bd3ff37fd22b4bb90de18a9b06b6c23c853c1e6cc2c7e7157e157ad8517a6",
+    "prereg.md": "3b9a7be0d4f4980a68f0eb40b38be7109dc6dac38a1aa05ba3155dd0a6a696f2",
+    "freeze.json": "8168bf932f83e89c19b04cdac83b46ff34779e5d6f51773eee44d139867a312b",
+    "intact": true,
+    "check": "hashes above match freeze.json.hashes exactly; frozen files were never modified after freeze"
+  },
+  "commands": [
+    "python3 research/experiments/EXP-PHYSICS-35651906573/collect_todomvc.py   # collection: 720 raw transitions, ran from repo root",
+    "python3 research/experiments/EXP-PHYSICS-35651906573/run_experiment.py    # analysis + positive control + baselines + decision rule, ran from repo root (writes raw_results.json, raw_output.txt, raw_synthetic.json, raw_transitions_*.json, nl_transitions_*.json)"
+  ],
+  "artifact_hashes": {
+    "raw_transitions_all.json": "cdb3ad1c29974f560aacac27455e71cbe7af2e2b10aef1808496fcc8b06cc335",
+    "raw_transitions_vanillajs.json": "5bf4af23a8cf2b37428d4f413b0d55deae70e632e2865ccf97eb763a12b1ec0c",
+    "raw_transitions_react.json": "978fa8f7bf6171e21065d0ecd06e30503da636ea7e460bfd43f43662fc1a9d57",
+    "raw_transitions_vue.json": "fcca4eb1f2cc9920178b83804e6ffc02c507236431cdc97dab2bd7d6260f3928",
+    "raw_transitions_angular.json": "c8640321059d66bbcba30a6f19201b68dd9a54a2e1bd3c18b23ee4b220660ad5",
+    "raw_transitions_svelte.json": "c1637e19c1061899afd5c5257015530ee1557a8b4ee64287b2ce470fdd75e241",
+    "nl_transitions_vanillajs.json": "3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e",
+    "nl_transitions_react.json": "115b6a63ade5ccb6c53ad5732a920be313305555b38fe4be039e4f4367def133",
+    "nl_transitions_vue.json": "10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9",
+    "nl_transitions_angular.json": "f27acff699d6157890fb7daab024f96af52be4802829a8cd4809dd7fcc7b2a18",
+    "nl_transitions_svelte.json": "3ec95119d5842bce2864e9244b00ae39e7593d9eba5dcd13c1022b49dd94b496",
+    "raw_synthetic.json": "0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be",
+    "raw_results.json": "ec9b1e630e6d8ddb3ff3e7c352fcba5f02f30f81d2a6cd682beb1e2875ba8fee",
+    "raw_output.txt": "e997d3b1da25d34516da8af692cf6c111ae6d10195059da98f1332fad7f25959",
+    "collect_todomvc.py": "bede1ca19b15e09ba8e8d8b4c6a39bb18a90acd56b2c4a3fe7cf760358398999",
+    "run_experiment.py": "bdbc8dd98698f1f1e41d7791927d0bf88800de38210db1eadefd99bc6d837126"
+  },
+  "evidence_chain": {
+    "parent_experiment": {
+      "EXP-PHYSICS-35578258358": "Bayesian DM (K=12) estimator, synthetic environment, null framework; positive control of this run replicates its numbers",
+      "EXP-PHYSICS-35209110569": "infra parent: live dist URLs, leakage/normalization definitions, collection protocol",
+      "EXP-PHYSICS-35262258744": "PMI-pipeline parent: action_primitive as model action; baseline expectations"
+    },
+    "claim": "C-WEB-DYNAMICS (codex/index.json, codex/claim_state.json)",
+    "chain_discipline": "RAW EVIDENCE (raw_transitions_*.json, nl_transitions_*.json, raw_synthetic.json) -> DERIVED MEASUREMENT (raw_results.json, raw_output.txt) -> INTERPRETATION (report.md section 5) -> packet (result.json). No level collapsed."
+  },
+  "reproduction_notes": [
+    "Re-running run_experiment.py from the repo root with the frozen files present reproduces raw_results.json bit-identically (all RNG seeded; verified across two runs with differing storage fields: headline numbers identical).",
+    "Collection replay requires live network access to todomvc.com and cached/installed chromium; timestamps within each session are used only for ordering (sessions are otherwise deterministic).",
+    "No git add/commit/push/reset/switch was performed during this experiment; the experiment directory contains only producer artifacts and unmodified frozen inputs."
+  ]
+}
