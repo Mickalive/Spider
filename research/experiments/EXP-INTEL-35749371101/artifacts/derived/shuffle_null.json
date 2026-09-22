@@ -1,0 +1,14 @@
+{
+  "status": "MEASUREMENT_INVALID",
+  "note": "Per Gate0, Mind2Web official splits unavailable (single train 73/3/1009 vs spec 137/31, hf_sha 17ece8eb89862368edc0cc806acee6fca5163474). Website-label shuffle null (1000 perms seed 35725763380) NOT computed as spec-compliant TF-IDF/k-means on official train/test_website/test_domain not executed. No synthetic website shuffle substituted per measurement_validity clause 2. Diagnostic overlap from parent (0.8139 vs null 0.998 excess -0.184) is coarse k=50 artifact, not used for decision.",
+  "n_perms": 0,
+  "seed": 35725763380,
+  "expected_computation": "Permute website assignment labels across train+test_website 1000 perms seed 35725763380, recompute overlap each perm preserving per-split task counts, report mean/std/p95 (spec 5.5 step 4)",
+  "diagnostic_parent": {
+    "overlap": 0.813953488372093,
+    "null_mean": 0.9979779591836735,
+    "excess": -0.18402447081158047,
+    "k": 50,
+    "note": "DIAGNOSTIC ONLY - coarse clustering inflates null"
+  }
+}

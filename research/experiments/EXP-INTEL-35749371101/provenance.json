@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35749371101",
+  "lane": "intel",
+  "github_run_id": "35749371101",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T16:02:00+00:00",
+  "parent_experiment_id": "EXP-INTEL-35741921602",
+  "parent_handoff_sha": "7574ec3943b064ff8d916c95ec39041d3a731d87de90d9c74ec07bb0617a29dd",
+  "parent_handoff_verdict": "REVISE",
+  "request_hash": "5075cbc0431c0be8a81ea3ac613ca61444a3f5efb1e13f66e1610a4bb9b2bdbf",
+  "freeze_hashes": {
+    "prereg.md": "e015c76a384059aeddd74c897c585088f66e5ddb8b1094d66e461b1f4f4a7d65",
+    "request.json": "b128fd6d8168b953f27d7391e4b98b8e13b4092d3f0ea5028b7c3e084b6e0afd",
+    "spec.json": "69b071b738dca7db66979ce14c7a93c9793a2ce54b55a75ee135aab35d86f372"
+  },
+  "commits": {
+    "base_sha": "3c8ce37f107b2173aaf89a0a59dbcaba80edd8f9",
+    "chain_depth": 0
+  },
+  "datasets": {
+    "webarena_verified": {
+      "source": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "original_source": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "commit": "ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0",
+      "task_count": 812,
+      "shopping_count": 192,
+      "template_count": 49,
+      "verified_sha": true
+    },
+    "mind2web": {
+      "source": "osunlp/Mind2Web via HuggingFace datasets library (datasets 5.0.1, scikit-learn available)",
+      "hf_revision_hash": "17ece8eb89862368edc0cc806acee6fca5163474",
+      "hf_revision_source": "huggingface_hub dataset_info sha",
+      "download_date": "2026-09-22",
+      "splits_available": ["train"],
+      "n_tasks": 1009,
+      "n_websites": 73,
+      "n_domains": 3,
+      "spec_required_splits": ["train", "test_task", "test_website", "test_domain"],
+      "spec_required_counts": {"websites": 137, "domains": 31},
+      "divergence": "HF revision 17ece8eb exposes single train split 73/3/1009 vs spec 137/31 with official splits; has_official_splits false",
+      "status": "MEASUREMENT_INVALID",
+      "attempts": 3
+    }
+  },
+  "environments": {
+    "playwright": {
+      "version": "1.63.0",
+      "installed": true,
+      "cdp_method": "Accessibility.getFullAXTree",
+      "viewport": "1280x720",
+      "viewport_note": "initial viewport no scroll no cart/checkout execution per spec"
+    },
+    "docker": {
+      "available": true,
+      "image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+      "url": "http://localhost:7770",
+      "container_name": "wa_exp35749371101",
+      "container_id": "effd57d7b43dcef233597ae221cdb9c701fdb75990e1488b934a5e8f34907454",
+      "port": 7770,
+      "host_mapping": "7770:80"
+    },
+    "python": "3.12.14",
+    "datasets_library": "datasets 5.0.1 available",
+    "sklearn": "scikit-learn available",
+    "huggingface_hub": "1.32.0"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "role": "raw",
+      "note": "SHA256 verified against pinned commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0 (812 total, 192 shopping)"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/mind2web_split_census.json",
+      "sha256": "6a2ba17ad410a9b6f3bfb77ead71d1d08cf5725296bbbc3cbc00db5f9a771074",
+      "role": "raw",
+      "note": "Mind2Web HF census with revision hash 17ece8eb, single train 73/3/1009 divergence"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/raw/axtree_web_sample_task_specific.json",
+      "sha256": "d6fefc1c348ab5ea2705bcc1de024719ef511388b6c793c591d7bc26ee4ac2b5",
+      "role": "raw",
+      "note": "20 live CDP Accessibility.getFullAXTree trees at 1280x720 initial viewport, stratified 2-per-family across 10 families seed 35725763380, task-specific start_url (__SHOPPING__ placeholder), node counts 627-1426"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/measurements.json",
+      "sha256": "85abe93f91917a5f05b81b63fe2f84394ea06ee161f436bf72d201aa0e3b5237",
+      "role": "derived",
+      "note": "All metrics: census, bootstrap CIs, AX consistency 0.9 [0.7,1.0], Mind2Web MEASUREMENT_INVALID, decision rule MIXED"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/bootstrap_ci.json",
+      "sha256": "d8745ef5564cace9c151b849cc270fdc220a4606250a5b6ecef9b0861a7ff288",
+      "role": "derived",
+      "note": "2000 bootstrap reps seed 35725763380 for duplication, exact_copy, param_task, AX_consistency"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/shuffle_null.json",
+      "sha256": "2a3afc7718187a2a847dd9d56a25faf4a243f1f8560ba824ca1685e51106ed0f",
+      "role": "derived",
+      "note": "Website-label shuffle null NOT computed - MEASUREMENT_INVALID due to missing official splits, Gate0, no synthetic substituted"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/tfidf_kmeans_meta.json",
+      "sha256": "ecde350deb32b349abc14f9dca66f7944af7600ed0672d1e8e885da00ea40743",
+      "role": "derived",
+      "note": "TF-IDF/k-means frozen params (max_features 5000 ngram 1-2 min_df2) k=min(50,unique/20) train-only, vocab/centroids hash null due to MEASUREMENT_INVALID, k/2,2k sensitivity not executed"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/sampling.json",
+      "sha256": "e6e84f23587e5bb242bc67744c065ff599ca0adc10480ae1e7c2f3ad8e0411c1",
+      "role": "derived",
+      "note": "Sampling 20 tasks 10 families 2-per-family seed 35725763380, prefer families >=3, diverse mechanisms, resolved_url vs start_urls"
+    },
+    {
+      "path": "research/experiments/EXP-INTEL-35749371101/artifacts/derived/mind2web_split_census.json",
+      "sha256": "6a2ba17ad410a9b6f3bfb77ead71d1d08cf5725296bbbc3cbc00db5f9a771074",
+      "role": "derived"
+    },
+    {
+      "path": "research/intel/exp_35749371101_measure.py",
+      "sha256": "a51ece4377930d6e2eea4ec7d0588e4c46c80dc48ea57efd81c40f3f7c4799c1",
+      "role": "code",
+      "note": "Frozen measurement script implementing longest-prefix mapping without fallback, task-specific navigation, train-only TF-IDF/k-means, bootstrap 2000, shuffle 1000, seed 35725763380"
+    }
+  ],
+  "parameters": {
+    "seed": 35725763380,
+    "bootstrap_reps": 2000,
+    "shuffle_perms": 1000,
+    "ax_viewport_width": 1280,
+    "ax_viewport_height": 720,
+    "ax_tasks_extracted": 20,
+    "ax_families_checked": 10,
+    "ax_tasks_per_family": 2,
+    "mind2web_k_formula": "min(50, unique_train_tasks/20)",
+    "mind2web_k_would_be": 50,
+    "tfidf_max_features": 5000,
+    "tfidf_ngram_range": [1, 2],
+    "tfidf_min_df": 2,
+    "tfidf_stop": "english"
+  },
+  "code_paths": {
+    "measurement_script": "research/intel/exp_35749371101_measure.py",
+    "parent_measurement_script": "research/intel/exp_35741921602_measure.py",
+    "allowed_code_roots": ["research/intel"]
+  },
+  "execution_notes": {
+    "playwright_fix": "Used CDP Accessibility.getFullAXTree via new_cdp_session at 1280x720 initial viewport, wait_until networkidle, 1.5-2s timeout, viewport no scroll",
+    "sampling_fix": "Stratified 2-per-family across >=10 families (20 tasks) seed 35725763380, prefer families >=3, covering diverse mechanisms, disclosing resolved_url vs start_urls per task in sampling.json",
+    "mapping_fix": "Longest-prefix mapping without fallback: exact full intent_template keys sorted by length descending (50 entries), distinct prefixes per template, no generic Add fallthrough; validated product-page vs homepage both now contain Wish List and Cart on One Stop Market homepage (previous parent absent due to homepage-only ?task= extraction)",
+    "mind2web_fix": "Pinned HF revision 17ece8eb with 3 retries, recorded revision hash, download date, per-split census; single train 73/3/1009 vs spec 137/31 correctly labeled MEASUREMENT_INVALID per Gate0, no synthetic 50/50 website split fabricated",
+    "decision_rule": "Ordered evaluation Gate0 PASS for WebArena, MEASUREMENT_INVALID for Mind2Web -> MIXED (within-store PASS 0.9, Mind2Web MEASUREMENT_INVALID) with bootstrap CI margin >=0.05",
+    "previous_attempt": "None - first execute for this frozen design"
+  },
+  "reproduction": {
+    "command": "python3 research/intel/exp_35749371101_measure.py",
+    "wall_clock": "<2.5h, actual ~10min for AX extraction + census + HF download",
+    "cost": "LOW: no LLM API calls, <4GB /tmp, stdlib+datasets+scikit-learn+playwright 1.63.0 + Docker 13.3GB image",
+    "env_required": "Playwright 1.63.0 chromium 1243, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 at 1280x720, datasets 5.0.1, scikit-learn"
+  }
+}

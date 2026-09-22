@@ -1,0 +1,48 @@
+{
+  "status": "LOADED",
+  "n_tasks": 1009,
+  "n_websites": 73,
+  "n_domains": 3,
+  "split_names": [
+    "train"
+  ],
+  "has_official_splits": false,
+  "dataset_revision": "unknown",
+  "error": null,
+  "split_divergence": {
+    "spec_train": 137,
+    "spec_test_website": null,
+    "spec_test_domain": null,
+    "observed_train": 73,
+    "observed_domains": 3,
+    "observed_tasks": 1009,
+    "observed_splits": [
+      "train"
+    ],
+    "divergence_note": "HF exposes single train split 73/3/1009 vs spec 137/31 with official train/test_task/test_website/test_domain"
+  },
+  "download_date": "2026-09-22",
+  "hf_sha": "17ece8eb89862368edc0cc806acee6fca5163474",
+  "hf_revision_hash": "17ece8eb89862368edc0cc806acee6fca5163474",
+  "revision_source": "huggingface_hub dataset_info sha",
+  "per_split_census": {
+    "train": {
+      "tasks": 1009,
+      "websites": 73,
+      "domains": 3
+    },
+    "test_task": null,
+    "test_website": null,
+    "test_domain": null
+  },
+  "spec_required": {
+    "train_websites": 137,
+    "train_domains": 31,
+    "splits": [
+      "train",
+      "test_task",
+      "test_website",
+      "test_domain"
+    ]
+  }
+}

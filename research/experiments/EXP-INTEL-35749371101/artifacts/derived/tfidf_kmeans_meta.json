@@ -1,0 +1,28 @@
+{
+  "status": "MEASUREMENT_INVALID",
+  "note": "Spec-compliant TF-IDF(max_features 5000 ngram 1-2 min_df2 stop english)->k-means k=min(50,unique_train_tasks/20) fitted train-only NOT executed due to missing official splits. No synthetic partition used.",
+  "frozen_params": {
+    "tfidf_max_features": 5000,
+    "tfidf_ngram_range": [
+      1,
+      2
+    ],
+    "tfidf_min_df": 2,
+    "tfidf_stop": "english",
+    "k_formula": "min(50, unique_train_tasks/20)",
+    "kmeans_n_init": 10,
+    "random_state": 35725763380,
+    "fit_on": "train_only"
+  },
+  "expected_k": "min(50, unique_train_tasks/20) where unique_train_tasks from official train split (spec requires 137 websites)",
+  "observed": {
+    "n_tasks": 1009,
+    "would_be_k": "min(50, 1009/20)=50 but official split missing"
+  },
+  "vocab_hash": null,
+  "centroids_hash": null,
+  "sensitivity_k_over_2": null,
+  "sensitivity_2k": null,
+  "hf_revision": "17ece8eb89862368edc0cc806acee6fca5163474",
+  "download_date": "2026-09-22"
+}

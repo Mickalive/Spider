@@ -1,0 +1,36 @@
+{
+  "duplication": {
+    "mean": 0.9479166666666666,
+    "ci_lower": 0.9166666666666666,
+    "ci_upper": 0.9791666666666666,
+    "std": 0.016353771319245952
+  },
+  "exact_copy": {
+    "mean": 0.078125,
+    "ci_lower": 0.041666666666666664,
+    "ci_upper": 0.11979166666666667,
+    "std": 0.019628469961352483
+  },
+  "param_task": {
+    "mean": 0.8958333333333334,
+    "ci_lower": 0.8489583333333334,
+    "ci_upper": 0.9375,
+    "std": 0.021741889611965114
+  },
+  "family_reuse": {
+    "mean": 0.9479166666666666,
+    "ci_lower": 0.9114583333333334,
+    "ci_upper": 0.9791666666666666,
+    "std": 0.016116469677089577
+  },
+  "ax_consistency": {
+    "mean": 0.9,
+    "ci_lower": 0.7,
+    "ci_upper": 1.0,
+    "std": 0.09760102704500666
+  },
+  "mind2web_overlap": {
+    "status": "MEASUREMENT_INVALID",
+    "note": "Not computed - official splits unavailable"
+  }
+}
