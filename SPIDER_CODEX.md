@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **224**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **229**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -234,6 +234,11 @@ Validated experiments: **224**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-INTEL-35697055679 | intel | PASS | MIXED — frozen decision rule triggers MIXED on clause (2): duplication fraction 0.9479 >=0.8. All measurements completed validly (status COMPLETE). Cross-store mechanism overlap is vacuous null (not 0.0) because WebArena-Verified v2 defines exactly one shopping store. Parameterization prevalence 0.8958 and positive control PASS both exceed frozen thresholds. Audit PASS confirms all recomputed metrics match producer (except minor duplication CI discrepancy not threshold-relevant). | C-LLM-INHERIT, C-CROSSSITE | `f95178a51de3` |
 | EXP-PRODUCT-35725756862 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID — audit MEASUREMENT_INVALID, producer_claim_supported=false. The frozen C-RESIDUAL-NOVELTY SURVIVES_CURRENT_TEST claim is not justified: dependent variable is bijective formula of novelty, parameterized inheritance with freshness gating and UNKNOWN abstention never executed, success/false_accept/unknown are constants, strong baselines structurally prevented from hitting (B-REPLAY-TERX 0/100 including n=0.0, B-RAG 1/100 hits), and frozen C3 p<0.01 fails on exact block-permutation (p=0.0167 two-sided). No empirical claim supported. | C-RESIDUAL-NOVELTY | `233ae6efbbf9` |
 | EXP-INTEL-35725763380 | intel | REVISE | REVISE — WebArena quantitative census replicates exactly (192 shopping tasks, 49 intent_templates, 36 families >=3 [34 >=4, 33 >=5], duplication 0.9479 95% CI [0.9167,0.9792], exact-copy 0.0781 [0.0417,0.1198], param_task 0.8958 [0.8490,0.9375]) but within-store same-mechanism AX consistency (threshold >=0.6, requires 15 tasks 2-per-family live CDP Accessibility.getFullAXTree at 1280x720 initial viewport) is UNMEASURED (ax_consistency=null, REUSED 10 trees 1-per-family, playwright_installed=false despite docker_available=true) so frozen clause 1 is FALSIFIED-IN-SETTING per spec, not PARTIAL; Mind2Web cross-website overlap measurement is methodologically non-compliant (coarse 33-mechanism heuristic vs frozen TF-IDF->k-means k=min(50,unique_tasks/20) train-only, synthetic 60/40 website shuffle replacing official train/test_website/test_domain splits, shuffle null as label-shuffle with random split_point, 73/3 vs spec 137/31 divergence revision_unknown) so Mind2Web axis is INCONCLUSIVE not falsified; producer MIXED verdict not supported as stated; bounded ceiling is census-level parameterized family reuse only, no LLM inheritance demonstrated | C-LLM-INHERIT, C-CROSSSITE | `4264b65fcf92` |
+| EXP-GRAPH-35741890679 | graph | REVISE | MEASUREMENT_INVALID | C-DELTA-REPAIR | `4011af9167da` |
+| EXP-RUNTIME-35741906498 | runtime | PASS | SUPPORTS — header-only drift discriminated with first non-vacuous C4 (full 1.0 > body/status 0.0, C6 Content-Length isolation holds) on narrow localhost Flask ceiling; C-MEAS-VALID remains EXPERIMENTAL | C-MEAS-VALID | `63ddea9ecb67` |
+| EXP-INTEL-35741921602 | intel | REVISE | REVISE — WebArena census replicates exactly and live CDP infrastructure verified, but AX_consistency 0.2857 (2/7) is MEASUREMENT_INVALID not valid FALSIFIED-IN-SETTING per audit; Mind2Web axis correctly MEASUREMENT_INVALID per Gate 0; bounded ceiling remains quantitative census only | C-LLM-INHERIT, C-CROSSSITE | `3377d6b4dbca` |
+| EXP-FRONTIER-35741928625 | frontier | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-SEMANTIC-RESOLVE | `dbc59208079f` |
+| EXP-PHYSICS-35741898214 | physics | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-CROSSSITE | `e65d1ce16087` |
 
 ## Latest recorded claim events
 
@@ -241,12 +246,13 @@ These are chronological latest events, not an automatic truth ranking.
 
 | Claim | Status | Experiment | Lane |
 |---|---|---|---|
-| C-CROSSSITE | HYPOTHESIS | EXP-INTEL-35725763380 | intel |
+| C-CROSSSITE | MEASUREMENT_INVALID | EXP-PHYSICS-35741898214 | physics |
+| C-DELTA-REPAIR | MEASUREMENT_INVALID | EXP-GRAPH-35741890679 | graph |
 | C-FRESHNESS | EXPERIMENTAL | EXP-PRODUCT-35697049382 | product |
-| C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35725763380 | intel |
-| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35697043449 | runtime |
+| C-LLM-INHERIT | EXPERIMENTAL | EXP-INTEL-35741921602 | intel |
+| C-MEAS-VALID | EXPERIMENTAL | EXP-RUNTIME-35741906498 | runtime |
 | C-PARAM-INHERIT | EXPERIMENTAL | EXP-PRODUCT-35353007958 | product |
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35551517470 | intel |
 | C-RESIDUAL-NOVELTY | MEASUREMENT_INVALID | EXP-PRODUCT-35725756862 | product |
-| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-GRAPH-34586318405 | graph |
+| C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35741928625 | frontier |
 | C-WEB-DYNAMICS | EXPERIMENTAL | EXP-PHYSICS-35697037202 | physics |

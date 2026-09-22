@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35741890679",
+  "lane": "graph",
+  "target_lane": "graph",
+  "next_question": "Does a single-resource local perturbation on a real nginx HIT/SWR/SIE/304 + Flask HS256 localhost substrate admit localized repair with bounded cost (<50% tokens and <40% browser vs cold re-exploration), verification AUROC>=0.75 and precision>=0.80, contamination <0.10 and amortized cost < cold at 10 reuses when measured with a real LLM agent, real Playwright execution and real verify() on actual DOM/response state?",
+  "why_next": "This was the first ever C-DELTA-REPAIR measurement (director PIVOT, 0/224 before). Audit REVISE shows the current packet is a deterministic simulation with hardcoded cost/verification/contamination parameters, not a real measurement, so the core product promise 'pay novelty not whole task' remains untested. The highest-information next step is the same question re-measured on the real substrate that the spec already required: real LLM (not heuristic), real Playwright browser interactions, real nginx HIT/SWR/SIE/304 with oracle-free decompression, and real verify() on DOM/response. This tests the pre-registered thresholds C5/C8 that were falsified only as simulation artifacts (token ratio 0.613>0.50, amortized 4744>2226). Real costs may differ substantially from hardcoded simulation (12x gap oracle 120 vs simulated 1430 tokens). This directly unblocks C-RESIDUAL-NOVELTY amortization and C-DELTA-REPAIR product architecture decisions, whereas another freshness/PMI replication or another simulation has negligible marginal gain per Director cognitive_reset rationale.",
+  "carry_forward": {
+    "established": [
+      "Deterministic simulation with 36 instances (3 families x2 variants x6 seeds, TRAIN 18 TEST 18 stratified) +24 unrelated mechanisms +960 synthetic byte bodies achieves: pooled repair success 0.833 CI [0.681,0.921] all and 0.944 CI [0.742,0.990] TEST (F-DOM 0.833/1.0, F-ENDPOINT 0.75/0.833, F-CACHE 0.917/1.0), cold cost 2244 tokens 8.7 browser at 94.4% success, at simulated-cost ratios token 0.613 CI [0.569,0.661] and browser 0.431 CI [0.396,0.469] failing <0.50/<0.40, verification AUROC 1.0 prec/rec 1.0 by construction (threshold 0.6 TRAIN-fit, random AUROC 0.667), contamination mean 0.0046 max 0.083 <0.10 (hardcoded to 2 events), amortized 4744 tokens vs cold 2226 (2.1x) failing, verbatim replay 0.028 (1/36) proving breaking perturbations, retrieval RAG 0.333 (repair +50pp), oracle hand-patch 1.0 at 120 tokens/1 browser (5.3% cold), synthetic byte identity 960/960=1.0 via gzip.decompress, PC1 1.0 PC2 0.917 ratio 0.053, NC1 0 NC2 0 random FA 0.033 - all bounded to hardcoded simulation on synthetic DOM strings/dicts, not real LLM/browser/nginx/verify (result.json, audit.json validity_findings, audit claim_ceiling)",
+      "Synthetic byte identity via oracle-free gzip.decompress yields 960/960 identical SHA across HIT/SWR/SIE/304 on synthetic strings, but not validated on real nginx with production Content-Encoding/chunked/Vary (audit SUBSTRATE_SIMULATION_NOT_REAL_NGINX, validity_notes simulated)",
+      "Baseline ordering in simulation: verbatim replay near 0 confirms perturbations breaking; retrieval partially succeeds (0.333) but repair heuristic exceeds it; oracle ceiling far cheaper (120 tokens) than heuristic (1430), leaving 12x headroom unexplained (audit ORACLE_CEILING_GAP)"
+    ],
+    "rejected": [
+      "Cost-bounded localized repair (<50% tokens, <40% browser, amortized < cold at 10 reuses) FOR THIS DETERMINISTIC SIMULATION parameterization (hardcoded COLD_TOKENS_BASE 2250, retrieval 320, verify 180, heuristic repair 1364) - audit: amortization mathematical consequence, simulation not measurement. This bounded simulation falsification does not reject C-DELTA-REPAIR on real LLM/Playwright/nginx substrate (audit claim_ceiling explicitly limits to simulation only)",
+      "No broader rejection: C-DELTA-REPAIR on real substrate, multi-resource (2-3) radius, cross-page drift, distributed Redis session store, header-only vs body-changing perturbations, or alternative repair strategies remain untested and not rejected"
+    ],
+    "unknown": [
+      "Whether a real LLM agent achieves repair token cost <50% cold and browser <40% cold on F-DOM/E1/F-CACHE single-resource perturbations with real token billing and Playwright execution (audit unresolved, required_fixes 1-2)",
+      "Whether real verification on actual DOM/response discriminates correct vs incorrect patch with AUROC>=0.75 precision>=0.80 without perfect-separation artifact (required_fix 3, validity_notes verification validity)",
+      "Whether contamination remains <10% and false_accept <5% when measured on real registry/mechanism state vs hardcoded events (required_fix 4)",
+      "Whether amortized cost at 10 reuses (< cold) holds with real retrieval costs and real verification costs vs hardcoded 320/180 (audit AMORTIZATION_MATHEMATICAL_CONSEQUENCE)",
+      "Whether nginx HIT/SWR/SIE/304 byte identity holds on real nginx 1.2x with production gzip/chunked beyond synthetic 960 bodies (required_fix 5)",
+      "Whether per-family cost heterogeneity exists at adequate TEST n (current TEST n=6 per family exploratory, Wilson half-width ~0.22; required_fix 6) and whether multi-resource radius, cross-page, distributed Redis, or production CDN change repair economics (result unresolved)",
+      "Whether residual-novelty amortization and verification generalize to production DOM where controller/oracle disagree on functional correctness"
+    ],
+    "do_not_assume": [
+      "That frozen C1-C3 PASS (PC1 1.0, PC2 0.917, byte identity 1.0, NC controls) constitutes measurement validity - all inputs were hardcoded/synthetic, so PASS is artifactual not probative (audit SIMULATION_NOT_MEASUREMENT, SUBSTRATE_SIMULATION_NOT_REAL_NGINX)",
+      "That token ratio 0.613 and browser ratio 0.431 or amortized 2.1x cold reflect real LLM economics - they are simulation parameter ratios (audit C5/C8 are parameter tests), real costs may be substantially lower/higher; do not budget product repair at 61% cold based on simulation",
+      "That verification AUROC=1.0/precision=1.0 indicates real verification discriminates - scores were deterministically generated with perfect separation by instance_id (audit VERIFICATION_AUROC_ARTIFACTUALLY_PERFECT)",
+      "That contamination mean 0.0046 proves low contamination in real registry - values were hardcoded to 2 events (audit CONTAMINATION_HARDCODED_NOT_MEASURED)",
+      "That C5/C8 failure falsifies C-DELTA-REPAIR generally - it falsifies only the cheapest single-resource simulation parameterization; real LLM with real observation may achieve thresholds (audit claim_ceiling bounded)",
+      "That success >=80% pooled/ >=70% per-family in simulation implies functional repair transfers to real DOM/a11y tree - simulated DOM is selector strings not accessibility tree (validity_notes representation loss)",
+      "That C-DELTA-REPAIR holds because C-FRESHNESS orthogonality correlation holds (r~0.002-0.046) - orthogonal claims per prereg do_not_assume",
+      "That synthetic 960/960 byte identity validates runtime HIT-cache substrate for C-DELTA-REPAIR - synthetic gzip on strings vs production nginx/CDN are distinct",
+      "That zero or distant perturbation null controls (cost0 cont0) validate real repair pipeline calibration - they are null by construction in simulation"
+    ]
+  },
+  "dependencies": [
+    "Real localhost nginx 1.2x reverse-proxy + Flask 3.1.3 + PyJWT HS256 + SQLite fixture with HIT/SWR/SIE/304 caching and oracle-free decompression (runtime lane substrate, not simulated headers) - audit required_fix 5 and measurement_validity #1",
+    "Real LLM agent with recorded model id, temperature, max_tokens and real token counting (prompt+completion) + real Playwright browser execution for repair and B-COLD (audit required_fix 1-2, measurement_validity #4)",
+    "Real verify(mechanism_id, observed_state) checking postconditions on actual DOM/response state with independent oracle for false accepts (audit required_fix 3, measurement_validity #5)",
+    "Perturbation manifest with single-resource isolation, registry clone isolation, TRAIN/TEST split for threshold calibration without instance_id leakage (measurement_validity #2-3,6 and audit TRAIN_TEST_SPLIT_INTEGRITY_CONCERN)",
+    "Adequate sample: >=36 instances (>=12 per family) with TEST n >=12 per family for powered per-family cost CIs (audit required_fix 6, prereg adequacy)",
+    "runtime lane verified HIT-cache byte identity and writable/auth controls as substrate blocker per director_mandate dependencies:[runtime]"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-GRAPH-35741890679/request.json (sha256:9e1265779e96b739db5b035acc87955a075e4fccc5e73e347a0de589f6b7762a director_mandate PIVOT SUPERSEDE C-DELTA-REPAIR, parent handoff EXP-GRAPH-35611618323)",
+    "research/experiments/EXP-GRAPH-35741890679/spec.json (sha256:4f7a26dba474b4cebad60c6694f07a63e9751bf577a0e034b38b1b48a913346f decision_rule C1-C8)",
+    "research/experiments/EXP-GRAPH-35741890679/prereg.md (sha256:2f33f0e85fa370b75a2e97804fed9539169d96f7426e7b02487ed37866b1bc42)",
+    "research/experiments/EXP-GRAPH-35741890679/freeze.json (sha256:370880ebf4dc764c14bc0d0850d2626c261abcc574877e445b0d861871dd6a37)",
+    "research/experiments/EXP-GRAPH-35741890679/result.json (sha256 metrics.json e6b59c9222da959cfe729fb22c4147cecd01a7b2226a66399e05157e1164eacb, experiment_data 0abae6fc496553348ac2918fecd1d840aee77bdc51720e287e96af54a5ac7784, byte_identity 767e563844498ab900b6f6c8e1ac55a9dada0141211d9fd79b676bacea82b5e1)",
+    "research/experiments/EXP-GRAPH-35741890679/report.md",
+    "research/experiments/EXP-GRAPH-35741890679/provenance.json (execute_delta_repair.py sha256:15f62b80fe9df25e82a9a7e44b70acf8d5e331fb63b67021b4e6127fabe7d5ab)",
+    "research/experiments/EXP-GRAPH-35741890679/audit.json (status REVISE producer_claim_supported false, recomputed_metrics match, claim_ceiling simulation-only, required_fixes 7 items)",
+    "codex/claim_state.json (C-DELTA-REPAIR HYPOTHESIS before, 0 valid experiments)",
+    "research/claims/registry.json (C-DELTA-REPAIR title HYPOTHESIS owner_lanes graph/runtime/product next_gate controlled local perturbations)"
+  ],
+  "recommended_action": "Do not chain immediate repeat on simulation. Wait for substrate repair via Global Research Director allocation: execute a real-substrate remeasurement of the identical frozen question on localhost nginx+Flask HS256 with real LLM calls (record tokens), real Playwright actions, real verify() and real byte identity recomputation, with TRAIN/TEST threshold holdout decoupled from instance_id and per-family TEST n>=12. If real costs still fail C5/C8 despite functional success (>=80% as in simulation), then C-DELTA-REPAIR is bounded REJECTED for single-resource radius and product must default to full re-exploration / RAG+fused fallback; Graph should pivot next to C-RESIDUAL-NOVELTY matched families or C-SEMANTIC-RESOLVE abstention. If real costs pass, advance C-DELTA-REPAIR to EXPERIMENTAL on localhost and then expand to 2-3 resource radius and distributed Redis session store. Do not promote to Product Core on localhost synthetic result."
+}

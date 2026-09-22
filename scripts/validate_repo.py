@@ -110,6 +110,7 @@ def main():
     require("SPIDER_WAKE_DEFERRED_UNPERSISTED_PACKET" in lane_wf, "wake must verify remote packet durability")
     require(lane_wf.count('exit "$rc"') >= 4, "stage workflow must propagate stage failure exit codes")
     require("director_mandate_b64" in lane_wf and "SPIDER_GLOBAL_DIRECTION_REQUIRED" in lane_wf, "lane workflow must require Global Director governance for NEW work")
+    require("SPIDER_FACTORY_WAKE_AFTER_INCOMPLETE" in lane_wf and "gh workflow run factory-pulse.yml" in lane_wf, "incomplete lane runs must self-wake global direction from always() cleanup")
     require('gh workflow run spider-lane.yml --ref main -f "lane=$LANE" -f "reason=continuation"' not in lane_wf, "lane workflow must not self-dispatch local continuation")
 
     prepare = text("scripts/prepare_lane.py")
@@ -121,9 +122,11 @@ def main():
     require("SPIDER_PRODUCT_PROMOTION_PENDING" in pulse, "factory pulse must block Product while promotion is pending")
     require("spider_research_scout" in pulse and "spider_portfolio_director" in pulse, "factory pulse must run Scout then Global Research Director")
     require("DIRECTION_MISSING" in pulse and "SPIDER_DIRECTION_UNAVAILABLE" in pulse, "factory pulse must fail closed when global direction is unavailable")
-    require("workflow_run:" in pulse and "SPIDER R2 Lane" in pulse, "factory pulse must wake after failed/cancelled lane completion")
+    recovery_wf = text(".github/workflows/lane-recovery.yml")
+    require("workflow_run:" in recovery_wf and "SPIDER R2 Lane" in recovery_wf and "conclusion != 'success'" in recovery_wf and "gh workflow run factory-pulse.yml" in recovery_wf, "failed/cancelled lane recovery must explicitly wake global direction outside Factory Pulse concurrency")
     codex_wf = text(".github/workflows/codex-sync.yml")
     require("actions: write" in codex_wf and "Wake global direction after canonicalization" in codex_wf and "gh workflow run factory-pulse.yml" in codex_wf, "Codex sync must explicitly wake global direction after canonicalization")
+    require("SPIDER_FACTORY_WAKE_SKIPPED_ACTIVE" not in codex_wf, "Codex sync must not skip a fresher direction wake because an older pulse is active")
     direction_validator = text("scripts/validate_portfolio_allocation.py")
     require("tunnel continuation/allocation requires" not in direction_validator, "direction validator must not override Director judgment with tunnel quotas")
     require("SPIDER_SUPERSEDE_PREFREEZE" in pulse and "SPIDER_RESUME_FROZEN" in pulse, "factory pulse must distinguish pre-freeze redirection from frozen transaction completion")
@@ -134,6 +137,7 @@ def main():
     require("--diff-filter=A" in promote, "Product promotion must pin the original verdict creation commit")
     require("post-finalization Product packet mutation" in promote, "Product promotion must reject mutated finalized packets")
     require("git apply --reverse --check" in promote and "SPIDER_PRODUCT_ALREADY_PROMOTED" in promote, "Product promotion must be idempotent across latch-write failures")
+    require("actions: write" in promote and "SPIDER_FACTORY_WAKE_AFTER_PRODUCT_PROMOTION" in promote and "gh workflow run factory-pulse.yml" in promote, "Product promotion must explicitly wake global direction after clearing the promotion latch")
 
     codex = text("scripts/sync_codex.py")
     require("post-finalization mutation detected" in codex and "quarantine.json" in codex, "Codex sync lacks packet integrity quarantine")

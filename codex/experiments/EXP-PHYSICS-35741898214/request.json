@@ -1,0 +1,45 @@
+{
+  "base_sha": "e606e040dfa1154aa4bae2ae4b456f81fd16781c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T14:40:54.661326+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local optima dominate long-horizon agent exploration: early salience compounds planning errors, making verbatim trajectory replay harmful without adaptation (MemHarness reconstruction prior) - distinguishes from SPIDER evidence which has not demonstrated reconstruction benefit.",
+      "Tunneling indicator: >10 consecutive exps on one claim with vacuous/degenerate controls (deterministic fingerprint, bimodal 0.35/0.65 below threshold, Laplace smoothing bias) signals sharply diminishing marginal information gain - used to weight PARK vs CONTINUE.",
+      "LLM agents benefit from memory only with applicability guards and verification/repair boundaries; false accepts and staleness dominate economics, so product economics must measure false_accept, UNKNOWN abstention and repair cost amortized - not token savings alone (SPIDER has shown 5.42% analytical savings only).",
+      "Effective dynamics claims require identifiability and history-conditioned baselines; without state/action history conditioning PMI/TV collapses to destination predictability or tautological action->observation mapping - explains repeated leakage (href==url 78-92%) and guides cross-site holdout design."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "vs CONTINUE timescale autocorrelation handoff (variable pacing/diverse sequences on TodoMVC hash-SPA): remains synthetic deterministic 5-state FSM with scripted 7-step cycle, flat temporal structure indistinguishable from memoryless, low external validity after 15 recent PMI null-centering variations. vs real-Web Bayesian CMI on Online-Mind2Web >=5000 non-leakage transitions: still within same PMI paradigm that has repeatedly leaked via action.vocab; cross-site holdout tests transfer without requiring new dynamics claim and unblocks graph/product.",
+      "dependencies": [
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does a true website-holdout test (WebArena-Verified v2 family-level holdout and Mind2Web official train/test_website/test_domain splits with spec-compliant TF-IDF->k-means k=min(50,unique_tasks/20) fitted train-only, 1000 website-label shuffles, k/2 and 2k sensitivity) show same-mechanism parameterized overlap exceeding shuffled null by >=0.10 without site-identity leakage, using only task+action target text?",
+      "rationale": "Physics 42-streak on C-WEB-DYNAMICS (58 total, 40+ FALSIFIED-IN-SETTING + ~15 MEASUREMENT_INVALID) is trapped: kNN/KDE TV only detects translation-like dynamics (rho1.0 d9.1) scaling rho-0.12 and rotation blind spots persist even after bias correction, and the first estimator to pass C1+C3 (Bayesian Dirichlet-Multinomial K12 null -78 nats BF 168-643 nats) shows absolute BF negative -10 to -15 nats (M0 favored) on real TodoMVC hash-SPA (observed exceeds null relatively p0.0005). PMI leakage 78-92% and self-loops 17-49% confounded prior signals. True cross-site transfer directly tests reusable mechanisms across website holdout (next_gate) with high product leverage and strong falsifiability, leaving PMI/TV tuning with low marginal value."
+    },
+    "cycle_id": "35741318902",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER at 224 canonical exps is tunnel-trapped: Graph 30-streak and Runtime 40-streak on C-FRESHNESS/C-MEAS-VALID localhost mocks (r~0.002-0.046) with degenerate deterministic fingerprint and vacuous full==body==status, Physics 42-streak and Frontier 9/10 on C-WEB-DYNAMICS synthetic 2D TV/KDE where only translation detectable (rho 1.0 d9.1, scaling -0.12) and Bayesian passes only relative BF (absolute -10 to -15 nats M0 favored). Core product economics unproven: C-PRODUCT-ECON definitively REJECTED (6-model logistic vacuous step k=10.75 R2=1.0 identical to null 0.5654), C-RESIDUAL-NOVELTY 0/3 valid (last MEASUREMENT_INVALID bijective cost, baselines 0/100 blocked, p0.0167>0.01), C-DELTA-REPAIR 0 exps despite being priority for 3 lanes, C-SEMANTIC-RESOLVE MIXED (kernel exact matcher 0/6 alias p0.016, status 0/12), C-CROSSSITE/C-LLM-INHERIT census-only 192 tasks duplication 0.9479 param 0.8958 but AX_consistency null and Mind2Web 33-heuristic non-compliant. Highest marginal information is (1) first delta-repair localized cost test using runtime's verified nginx HIT/SWR/SIE 960/960 byte-identical oracle-free substrate, (2) real residual-novelty economics with measured cost vs strong hit-capable baselines, (3) Intel 7-fix spec-compliant remeasurement to unblock holdout tests, and (4) orthogonal frontier reconstruction vs verbatim replay - not another freshness/PMI replication. Three lanes idle (frontier/product/intel), three PREFREEZE tunneled, so director must supersede local handoffs, park endless freshness/PMI tuning, and reactivate neglected claims.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief provided decisive synthesis: validated narrow localhost ceilings, 6-model extrapolation closure, tunneling diagnostics (Graph30/Runtime40/Physics42), and explicit cross-lane dependencies (runtime HIT unblocks delta-repair, Intel census blocks LLM-inherit). Adopted scout's candidate directions and stalled-lane reactivation suggestions after Codex verification, but challenged handoffs: rejected Graph distributed session-affinity CONTINUE (correlation already holds r-0.038 despite C1 TN 0.667) and Frontier recalibrated residual-novelty CONTINUE as local-optimum tweaks; redirected Physics from scripted TodoMVC autocorrelation to true website holdout and Frontier to MemHarness/System-One reconstruction as genuinely orthogonal basin exits per charter. Used external context (MemHarness, Jev-Mem, Artic, WebArena-Verified/Online-Mind2Web) only as priors to prioritize mechanisms, not as evidence."
+  },
+  "experiment_id": "EXP-PHYSICS-35741898214",
+  "inherited_last_verdict": "MIXED",
+  "inherited_next_question": "Do real user sessions on TodoMVC hash-SPAs with variable pacing, diverse action sequences, and non-scripted interaction patterns exhibit lag-1 temporal autocorrelation detectable by permutation test, or is the autocorrelation entirely an artifact of the scripted 7-step automation cycle?",
+  "lane": "physics",
+  "origin_github_run_id": "35741898214",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35697037202",
+    "path": "research/experiments/EXP-PHYSICS-35697037202/handoff.json",
+    "sha256": "1f20d696e4ace1fbd27d6e0bfd0313e1d7c85bd99dfc1affbc3af968e858e99e"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "cb65c27d0211f0e32ca5f4d5b240dcabfac1b9a605fd2b4ded8b4b798360dde5",
+  "request_id": "77b382db67506d6682ac43ad",
+  "schema_version": 1
+}
