@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35651924708",
+  "lane": "product",
+  "status": "BLOCKED",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [],
+  "observations": [
+    {
+      "observation_id": "OBS-INFRA-BLOCKER",
+      "type": "infrastructure_failure",
+      "description": "No LLM API key is available in the execution environment. Checked: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY, OPENROUTER_API_KEY, HF_TOKEN — all absent (length 0). The frozen spec measurement_validity requires 'All LLM calls use real API (OpenAI gpt-4o-mini or equivalent) with recorded prompts, responses, tokens, and latency — no mocks, no caching, no simulated responses'. Without any LLM API access, zero of the 120 planned task×condition×rep executions can be performed. This is an infrastructure blocker, not a scientific negative.",
+      "timestamp": "2026-09-21T21:00:00Z"
+    },
+    {
+      "observation_id": "OBS-DEPENDENCIES-VERIFIED",
+      "type": "environment_check",
+      "description": "Python packages openai (3.16.2), requests (2.34.2), numpy (2.5.3) successfully installed via pip3. Runtime is Python 3.x on linux. JSONPlaceholder API (https://jsonplaceholder.typicode.com) is accessible for HTTP tests. The execution environment is otherwise functional — only the API key credential is missing.",
+      "timestamp": "2026-09-21T21:00:00Z"
+    }
+  ],
+  "validity_notes": [
+    "BLOCKED is the correct status per EXPERIMENT_PACKET.md: 'A valid scientific negative is normally status=COMPLETE with outcome=FALSIFIES or MIXED, not an execution failure.' This is an execution failure (infrastructure missing), not a scientific negative.",
+    "The director_mandate (request.json director_mandate.rationale) explicitly acknowledged: 'The infrastructure blocker (no API keys) is real but the experiment design can proceed now and infrastructure can be sourced.' The design is frozen and executable pending API key provisioning.",
+    "No outcome measurements were taken. No controls were exercised. No baselines were run. The frozen design is preserved intact for future execution when infrastructure is available.",
+    "This BLOCKED status does NOT advance, falsify, or weaken C-LLM-INHERIT. The claim remains HYPOTHESIS with no new evidence from this experiment."
+  ],
+  "unresolved": [
+    {
+      "question": "What is the smallest infrastructure action to unblock this experiment?",
+      "answer": "Provision a single OpenAI API key (OPENAI_API_KEY environment variable) with gpt-4o-mini access. Estimated cost for full execution: ~120K tokens at $0.01/1K = $1.20. Alternatively, any LLM API with a compatible chat-completions endpoint (Anthropic Claude, Google Gemini, OpenRouter) can substitute if the measurement harness is adapted."
+    },
+    {
+      "question": "Can the frozen experiment be executed with a different LLM provider?",
+      "answer": "The frozen spec states 'OpenAI gpt-4o-mini or equivalent'. An equivalent provider (e.g., Claude 3.5 Haiku, Gemini 1.5 Flash) would satisfy the frozen design if it provides token usage metrics and chat-completions API. The spec does not mandate a specific vendor, only real API calls with recorded tokens."
+    }
+  ]
+}

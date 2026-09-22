@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35651924708",
+  "lane": "product",
+  "decision": "BLOCKED",
+  "claim_updates": [
+    {
+      "claim_id": "C-LLM-INHERIT",
+      "status": "BLOCKED",
+      "reason": "Infrastructure failure (no LLM API key in environment). Zero of 120 planned task-condition-rep executions performed. No measurements, no controls exercised, no baselines compared. BLOCKED is correct per EXPERIMENT_PACKET.md section 4: 'A valid scientific negative is normally status=COMPLETE with outcome=FALSIFIES or MIXED, not an execution failure.' This is an execution failure, not a scientific negative. C-LLM-INHERIT remains HYPOTHESIS bounded to prior 2-site synthetic corpus with no real-LLM evidence after 37+ experiments. The frozen design is preserved intact and executable pending API provisioning."
+    }
+  ],
+  "product_action": "NONE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does SPIDER's parameterized mechanism inheritance reduce total workflow cost (tokens + browser interactions + verification steps) compared to cold exploration, literal replay, and retrieval baselines when an LLM agent completes matched tasks on JSONPlaceholder, when the frozen design is re-executed with a real LLM API key?",
+  "reason": "The Global Research Director mandated a PIVOT to C-LLM-INHERIT as the single largest strategic gap (request.json director_mandate). The frozen design (spec.json, prereg.md) is validated and executable: 10 JSONPlaceholder REST tasks spanning 0-100% novelty, 4 conditions (cold/literal/retrieval/spider), 3 reps, 120 total executions, real LLM API calls required, bootstrap decision rule at alpha=0.05. However, the execution environment has no LLM API key (OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY, OPENROUTER_API_KEY, HF_TOKEN all absent). The smallest unblocking action is provisioning a single API key (estimated cost ~$1.20 for 120K tokens). Audit independently verified the BLOCKED status, confirmed no hidden mocks or partial measurements, and confirmed frozen input integrity (all SHA256 hashes match freeze.json). The audit correctly notes the design is externally narrow (JSONPlaceholder synthetic REST API, no DOM, no auth) but adequate for the C-LLM-INHERIT hypothesis at this ceiling. No scientific state was advanced or regressed. The frozen experiment should be re-executed when infrastructure is available.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35651924708/request.json — director_mandate PIVOT to C-LLM-INHERIT, infrastructure blocker acknowledged",
+    "research/experiments/EXP-PRODUCT-35651924708/spec.json — claim_ids=[C-LLM-INHERIT], question, hypothesis, falsifier, baselines, measurement_validity requiring real API, decision_rule 5000-sample bootstrap",
+    "research/experiments/EXP-PRODUCT-35651924708/prereg.md — task corpus T1-T10, metrics M-TOKENS/M-BROWSER/M-VERIFY/M-TOTAL-COST/M-SUCCESS, controls PC-IDENTICAL/NC-NO-MECHANISM, sampling 120 total",
+    "research/experiments/EXP-PRODUCT-35651924708/freeze.json — frozen_at 2026-09-21T20:40:04.171154+00:00, hashes verified",
+    "research/experiments/EXP-PRODUCT-35651924708/result.json — status BLOCKED, outcome NOT_APPLICABLE, metrics {}, controls {}, observations OBS-INFRA-BLOCKER/OBS-DEPENDENCIES-VERIFIED",
+    "research/experiments/EXP-PRODUCT-35651924708/audit.json — BLOCKED, producer_claim_supported=false, claim_ceiling no scientific claim, independent env verification 0/5 API keys, frozen hash recomputation match",
+    "research/experiments/EXP-PRODUCT-35651924708/provenance.json — failure_category INFRASTRUCTURE_MISSING_CREDENTIAL, reproduction_recipe",
+    "research/experiments/EXP-PRODUCT-35651924708/report.md — BLOCKED status, infrastructure check table, smallest unblocking action",
+    "research/EXPERIMENT_PACKET.md — sections 4 (BLOCKED vs FALSIFIES), 7 (verdict.json shape)",
+    "codex/claim_state.json — C-LLM-INHERIT HYPOTHESIS bounded to 2-site corpus, no real-LLM evidence"
+  ]
+}

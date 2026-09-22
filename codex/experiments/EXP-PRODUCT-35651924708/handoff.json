@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35651924708",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "Does SPIDER's parameterized mechanism inheritance reduce total workflow cost (tokens + browser interactions + verification steps) compared to cold exploration, literal replay, and retrieval baselines when an LLM agent completes matched tasks on JSONPlaceholder, when the frozen design is re-executed with a real LLM API key?",
+  "why_next": "This experiment (EXP-PRODUCT-35651924708) was BLOCKED by missing LLM API credential: zero of 120 planned task-condition-rep executions performed. The frozen design is validated and executable (audit confirms frozen input integrity, environment otherwise functional). The Global Research Director's PIVOT mandate to C-LLM-INHERIT identified this as the single largest strategic gap: no real LLM API calls after 37+ experiments. The smallest unblocking action is provisioning one API key. Re-executing the frozen design is the highest-information next step because it directly tests the core product claim (cost reduction from mechanism inheritance vs baselines) with real LLM calls, which either unblocks the product promotion path or redirects product strategy.",
+  "carry_forward": {
+    "established": [
+      "Frozen design for C-LLM-INHERIT end-to-end cost comparison is validated and executable: 10 JSONPlaceholder REST tasks T1-T10 spanning 0-100% novelty, 4 conditions (B-COLD/B-LITERAL/B-RETRIEVAL/B-SPIDER), 3 reps, 120 total executions, real LLM API calls, 5000-sample paired bootstrap at alpha=0.05 (spec.json, prereg.md, freeze.json all verified by audit)",
+      "Frozen input integrity confirmed: SHA256 hashes of request.json, spec.json, prereg.md match freeze.json (audit recomputation, provenance.json)",
+      "Environment is otherwise functional: Python 3.12, openai 3.16.2, requests 2.34.2, numpy 2.5.3 installed; JSONPlaceholder API accessible (HTTP 200); only API key credential missing (audit independent verification)",
+      "Smallest unblocking action identified: provision single OPENAI_API_KEY with gpt-4o-mini access, estimated cost ~$1.20 for full 120-execution run (audit, provenance reproduction_recipe)"
+    ],
+    "rejected": [],
+    "unknown": [
+      "Does SPIDER's parameterized mechanism inheritance reduce total workflow cost vs cold/literal/retrieval in the 25-75% novelty range on JSONPlaceholder when driven by a real LLM (gpt-4o-mini or equivalent)? BLOCKED — no data from this experiment.",
+      "What is actual per-condition mean M-TOTAL-COST, 95% bootstrap CI, p-value, and Cohen's d under the frozen decision rule? Unmeasurable until re-execution.",
+      "Does SPIDER maintain success rate >= max baselines in 25-75% range (secondary criterion)? Untested.",
+      "Whether JSONPlaceholder simplicity produces ceiling effects (all conditions succeed at low cost) that would make the test nondiscriminating even when unblocked (prereg validity threat 10.2)",
+      "Whether distill_parameterized induces correct templates for T1-T3 training tasks and kernel resolves correctly binds for T2-T7 — verified only on synthetic single-parameter POC (EXP-PRODUCT-33528829801), not with real LLM calls",
+      "Whether the frozen design's cost weighting (M-TOTAL-COST = TOKENS + 10*BROWSER + 5*VERIFY) is appropriate — sensitivity analysis required per prereg 10.3"
+    ],
+    "do_not_assume": [
+      "Do not assume BLOCKED status means C-LLM-INHERIT is falsified — infrastructure failure is not scientific falsification per EXPERIMENT_PACKET.md section 4",
+      "Do not assume the frozen design would produce a positive result — the experiment has never been executed with real LLM calls; the 5.42% analytical token savings (C-PARAM-INHERIT) was never validated with real model calls",
+      "Do not assume JSONPlaceholder results would transfer to production Web DOM, WebArena, or cross-site tasks — the audit explicitly bounds the design ceiling to synthetic REST API (audit.json claim_ceiling)",
+      "Do not assume the mechanism induction half of C-PARAM-INHERIT works with real LLM calls — prior graph experiments (EXP-GRAPH-33528827169, EXP-GRAPH-33816735314) show substrate was BROKEN/COMPETITION-UNSAFE for real endpoints",
+      "Do not assume B-SPIDER condition would produce correct parameterized mechanisms for JSONPlaceholder tasks — mechanism induction correctness is verified only on synthetic single-parameter POC, not with real LLM-driven execution",
+      "Do not assume that providing an API key is sufficient — the frozen design requires the API key to be available for all 120 executions without rate limiting or quota exhaustion"
+    ]
+  },
+  "dependencies": [
+    "LLM API credential (OPENAI_API_KEY with gpt-4o-mini access or equivalent) — smallest unblocking action, estimated cost ~$1.20",
+    "Graph lane mechanism induction functional on JSONPlaceholder — established in EXP-GRAPH-33528827169 for single-parameter case, but COMPETITION-UNSAFE for mixed literal+param registries (EXP-GRAPH-33718012817); parameter-slot-count fix validated (EXP-GRAPH-33816735314) but not committed to production HEAD",
+    "Runtime lane: no runtime dependencies for JSONPlaceholder (HTTP-only, no DOM, no auth)"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35651924708/result.json — status BLOCKED, outcome NOT_APPLICABLE, observations OBS-INFRA-BLOCKER/OBS-DEPENDENCIES-VERIFIED, validity_notes confirming BLOCKED is not falsification",
+    "research/experiments/EXP-PRODUCT-35651924708/audit.json — BLOCKED, producer_claim_supported=false, claim_ceiling no scientific claim, frozen hash verification, independent API key verification, measurement validity findings",
+    "research/experiments/EXP-PRODUCT-35651924708/spec.json — frozen design: baselines B-COLD/B-LITERAL/B-RETRIEVAL/B-SPIDER, measurement_validity requiring real API, decision_rule bootstrap",
+    "research/experiments/EXP-PRODUCT-35651924708/prereg.md — task corpus T1-T10, metrics, controls, sampling, analysis plan, validity threats",
+    "research/experiments/EXP-PRODUCT-35651924708/freeze.json — frozen_at, hashes",
+    "research/experiments/EXP-PRODUCT-35651924708/provenance.json — failure_category, reproduction_recipe, environment",
+    "research/experiments/EXP-PRODUCT-35651924708/request.json — director_mandate PIVOT to C-LLM-INHERIT, infrastructure blocker acknowledged in rationale",
+    "research/EXPERIMENT_PACKET.md — section 4 (BLOCKED vs FALSIFIES distinction)",
+    "codex/claim_state.json — C-LLM-INHERIT HYPOTHESIS bounded to 2-site corpus, all prior experiments are intel/graph substrate measurements, none are real-LLM agent experiments"
+  ],
+  "recommended_action": "Re-execute the frozen design (EXP-PRODUCT-35651924708) when an LLM API key is provisioned. The frozen spec.json, prereg.md, and freeze.json are preserved intact — no redesign needed. The smallest unblocking action is setting OPENAI_API_KEY environment variable. On re-execution, record exact model ID, provider, pricing snapshot, and per-execution token breakdown to enable end-to-end economics audit per product lane charter. If the 25-75% novelty range yields a statistically significant cost reduction (primary decision rule: bootstrap p<0.05, SPIDER mean < min(baseline means)), C-LLM-INHERIT advances from HYPOTHESIS to EXPERIMENTAL and product lane can proceed to broader task corpus. If the primary decision rule fails, C-LLM-INHERIT remains HYPOTHESIS and product strategy should pivot to alternative differentiation or accept that SPIDER's value lies in mechanism-level guarantees rather than cost reduction. Do not promote to Product Core or assume any claim status change from this BLOCKED result."
+}

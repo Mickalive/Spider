@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35651934683",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Replace heuristic M1/M2 scoring with dataset-grounded measurements before Product lane use: for Mind2Web, enumerate HuggingFace dataset (osunlp/Mind2Web or hf.co/OSU-NLP/Mind2Web) to count actual websites-per-domain distribution and verify that same action mechanism (e.g., search, filter, book) appears on >=2 websites in same domain; report empirical M1 = (empirical_instances-1)/11 using median or domain-weighted mean (observed mean 137/31=4.42 gives M1=0.31), not hardcoded max=10. For WebArena, confirm 996 shopping tasks are not duplicated across 12 stores by inspecting config_files/examples and generate_test_data.py task generation logic; report duplication fraction.",
+    "Distinguish M2 estimate from measurement: recompute M2_parameterization as measured fraction of task instances with variable field from actual task definitions (instantiation_dict or operation fields), not heuristic 0.8/0.65 assignment in benchmark_structure_analysis.py:compute_m2. Label current 0.8,0.65,0.5 values as heuristic_estimates in result.json and remove 0.05 discrepancy between Mind2Web m2w_m2_val 0.65 and mean of [0.6,0.7,0.5]=0.60.",
+    "Either validate M3 novelty-fraction measurability on WebArena by demonstrating manual instance-level split (e.g., train on 8 stores, test on 4 stores sharing mechanism) with at least one mechanism appearing in both splits, or keep M3=false and downgrade product_consequence to require custom split construction cost. Do not cite WebArena as cross-site source for C-RESIDUAL-NOVELTY without this demonstration.",
+    "Relabel PC1/NC1 as tautological scoring-function checks, not independent empirical controls: both scores are deterministic outputs of compute_m1/m2 given hardcoded instance_count and has_intent_template flags. Add independent validation control, e.g., blind scoring of 2-3 sampled task JSONs per benchmark by second rater or direct dataset sample inspection, before claiming control PASS validates benchmark structure.",
+    "Remove or qualify transformation_cost claims (WebArena 224 LOC, Mind2Web 0 LOC adapter) as inherited from EXP-INTEL-33925056324 synthetic validation, not re-measured here; verify Mind2Web direct HTML availability via HuggingFace dataset inspection and confirm WebArena adapter still applies to benchmark_analysis_output.json provenance files (README, examples) vs actual runtime observation format.",
+    "Correct HMT/WebCoach/AgentRR provenance: arXiv IDs 2603.07024 (HMT) and 2511.12997 (WebCoach) are future-dated and not resolvable on 2026-09-21; either provide resolvable commit/paper hash or label as Scout-brief secondary citation without claimed SR values 38.7%/39.7%. Do not use HMT SR as corroboration for C-LLM-INHERIT mechanism-level inheritance until paper is verifiable.",
+    "Bound claim ceiling explicitly to structural-documentation survey, not runnable demonstration: disclose in result.json validity_notes that no Docker, no HTML/trajectory inspection for Mind2Web (validity_notes already says not inspected), no instance-level mechanism co-occurrence verification; downstream Product experiment must perform dataset-level verification before treating ranked list as executable task families."
+  ],
+  "validity_findings": [
+    {
+      "id": "VF1_M1_MIND2WEB_HARDCODED_MAX_NOT_MEAN",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "finding": "M1_cross_site for Mind2Web 0.8182 is computed from synthetic input instance_count=10 (m2w_m1_data site_types cross_website_pair 10) with max_expected=12. This 10 is not measured from dataset; provenance admits Mind2Web analysis based on paper/README not dataset inspection. Empirical mean websites/domain =137/31=4.42 gives M1=(4.42-1)/11=0.311 <0.5 threshold. Max per-domain may be 10 but median/mean is the relevant instance count for cross-site pair density. Using max inflates M1 by 0.507 and single-handedly makes M4>0 and distributed SURVIVES possible. No verification that same mechanism appears across those websites.",
+      "evidence_refs": [
+        "research/intel/benchmark_structure_analysis.py:346-355 m2w_m1_data instance_count 10",
+        "research/intel/benchmark_structure_analysis.py:266 max_expected 12",
+        "research/intel/benchmark_analysis_output.json:benchmarks_ranked Mind2Web M1 0.8182",
+        "result.json:metrics.M1_cross_site.Mind2Web_cross_website 0.8182",
+        "result.json:validity_notes Mind2Web structural analysis is based on published paper and README documentation, not direct dataset inspection",
+        "provenance.json:data_sources Mind2Web key_findings 2350 tasks 137 websites 31 domains",
+        "spec.json:measurement_validity Cross-site pairs must share an action mechanism not merely share a task category label"
+      ],
+      "affects_decision": true
+    },
+    {
+      "id": "VF2_M2_HEURISTIC_NOT_MEASURED",
+      "severity": "critical",
+      "category": "measurement_validity",
+      "finding": "M2_parameterization 0.8 (WebArena shopping), 0.65 (Mind2Web), 0.5 (GitLab), 0.3 (VisualWebArena) are heuristic assignments from compute_m2_parameterization (has_intent_template + operation count rules), not measured fractions of task instances with variable field. Validity_notes acknowledges estimated not measured. Producer interpretation treats >=0.5 as evidence of parameterized templates, but scoring rule guarantees shopping passes (template+>2 ops ->0.8) and any multi-step task with >1 op ->0.5 irrespective of actual template prevalence. Mind2Web 0.65 is hardcoded average not computed; mean of defined [0.6,0.7,0.5]=0.60, 0.05 discrepancy unexplained. Measurement validity condition 3 (at least one variable field while action pattern remains constant) not verified on samples.",
+      "evidence_refs": [
+        "research/intel/benchmark_structure_analysis.py:281-304 compute_m2_parameterization heuristic thresholds",
+        "research/intel/benchmark_structure_analysis.py:445 m2w_m2_val 0.65 hardcoded vs m2w_m2 dict 0.6/0.7/0.5",
+        "result.json:metrics.M2_parameterization Mind2Web 0.65 WebArena_shopping 0.8",
+        "result.json:validity_notes M2 scores are estimated from task definition structure, not measured from actual task instances",
+        "spec.json:measurement_validity Parameterized templates must have at least one variable field"
+      ],
+      "affects_decision": true
+    },
+    {
+      "id": "VF3_CONTROLS_TAUTOLOGICAL",
+      "severity": "major",
+      "category": "control",
+      "finding": "PC1_shopping_cross_site and NC1_wikipedia_null PASS are tautological: compute_m1 returns 1.0 for any benchmark_data with instance_count=12 and cross_site_pairs=True, and 0.0 for instance_count=1 and False; compute_m2 returns 0.8 for shopping and 0.1 for wikipedia by construction. Observed M1/M2 equal expected by definition of scoring function, not independent empirical confirmation that WebArena shopping actually contains 12 instances sharing search/add_to_cart/checkout or that wikipedia lacks templates. Positive control description expects cross-site pairs exist; scoring function assumes it exists via has_pairs flag. No blind or dataset-sample verification performed. Controls test scoring code, not benchmark structure.",
+      "evidence_refs": [
+        "research/intel/benchmark_structure_analysis.py:256-278 compute_m1_cross_site has_pairs && instance_count>1 -> (count-1)/11",
+        "result.json:controls.PC1_shopping_cross_site pass true observed M1 1.0 M2 0.8",
+        "result.json:controls.NC1_wikipedia_null pass true observed M1 0.0 M2 0.1",
+        "spec.json:positive_control WebArena shopping 996 tasks across 12 store instances; null_control wikipedia 7 tasks",
+        "prereg.md:Controls Positive Control / Null Control"
+      ],
+      "affects_decision": true
+    },
+    {
+      "id": "VF4_NO_SINGLE_BENCHMARK_SATISFIES_ALL_THREE",
+      "severity": "major",
+      "category": "interpretation",
+      "finding": "Frozen decision_rule requires >=1 benchmark M1>=0.5 AND >=1 benchmark M2>=0.5 AND >=1 benchmark M3 true (distributed). Producer reports SURVIVES_CURRENT_TEST because M1 from WebArena/VisualWebArena/Mind2Web, M2 from WebArena/Mind2Web/AgentBench, M3 from Mind2Web. However M4 composite (M1*M2*M3) is 0.0 for WebArena shopping (M3 false) and 0.0 for VisualWebArena/AgentBench, only Mind2Web M4=0.5318 under optimistic M1. No single benchmark simultaneously provides cross-site structure, parameterization, AND novelty splits at task-family level without manual split construction for WebArena. Report recommendation WebArena+Mind2Web complementary acknowledges this but decision label SURVIVES overstates readiness: Mind2Web alone must carry all three and its M1 is inflated per VF1. Under corrected M1=0.31, even distributed criterion's M4 ceiling collapses to 0.20 (0.31*0.65) and no family has strong composite.",
+      "evidence_refs": [
+        "spec.json:decision_rule If ALL of (1) >=1 benchmark has >=1 task family with cross-site pairs AND (2) >=1 benchmark has >=1 task family with parameterized templates AND (3) >=1 benchmark supports instance-level splits THEN SURVIVES",
+        "result.json:metrics.M4_composite Mind2Web 0.5318 WebArena_shopping 0.0",
+        "research/intel/benchmark_analysis_output.json:decision_rule any_M1 true any_M2 true any_M3 true decision SURVIVES_CURRENT_TEST",
+        "report.md:Recommended Benchmark Structure Tier 1 WebArena shopping M3 false + Mind2Web M3 true complementary"
+      ],
+      "affects_decision": true
+    },
+    {
+      "id": "VF5_CROSS_SITE_MECHANISM_NOT_VERIFIED",
+      "severity": "major",
+      "category": "measurement_validity",
+      "finding": "Measurement validity requires cross-site pairs share same abstract action pattern on different site instances, not merely share task category label, and analysis must distinguish inherent vs imposed structure. WebArena's 12 stores are explicitly imposed (different_stores_same_platform same platform) - validity_notes does not bound impact. Intent template example for shopping is mis-copied reddit template character example, not shopping search/add_to_cart. Mind2Web cross-site mechanism 'same domain websites share action patterns (search, filter, book)' is assumed True without task-sample evidence. No code inspects config_files/examples 1-4.json for mechanism sharing. Result correctly notes tasks may be duplicated across stores (unresolved 1) but decision does not account for duplication diluting mechanism transfer meaning.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Cross-site pairs must share an action mechanism not merely share a task category label; Analysis must distinguish inherent vs imposed structure",
+        "research/intel/benchmark_structure_analysis.py:30 cross_site_mechanism search add_to_cart checkout",
+        "research/intel/benchmark_structure_analysis.py:27 intent_template_example tell me all subreddits starting with character (reddit not shopping)",
+        "result.json:validity_notes Analysis must distinguish between (a) and (b) inherent vs imposed - provenance acknowledges 12 stores intentionally different stores sharing a platform",
+        "result.json:unresolved Whether 996 vs 812 discrepancy indicates duplication across stores"
+      ],
+      "affects_decision": false
+    },
+    {
+      "id": "VF6_NOVELTY_FRACTION_DEFINITION_MISMATCH",
+      "severity": "moderate",
+      "category": "measurement_validity",
+      "finding": "Spec measurement_validity states novelty fraction splits must be definable by task instance where same mechanism appears in both train and test on different instances. Mind2Web official splits are by task/website/domain, not by mechanism instance. Producer validity_notes correctly scores WebArena M3 false because no official instance-level splits exist, but scores Mind2Web true based on official website split. Whether website split guarantees same mechanism on both sides is unresolved (producer unresolved 2). No verification that held-out websites contain same search/book mechanisms as train. For C-RESIDUAL-NOVELTY, controlled novelty fraction measurement is therefore not demonstrated, only split existence.",
+      "evidence_refs": [
+        "spec.json:measurement_validity Novelty fraction splits must be definable by task instance training on instances 1..N of a mechanism and testing on N+1..M of same mechanism on different sites",
+        "result.json:metrics.M3_novelty_fraction Mind2Web true WebArena false",
+        "result.json:validity_notes M3 for WebArena scored false because no official instance-level splits exist, even though splits could be defined manually",
+        "result.json:unresolved Whether Mind2Web cross-website split provides true cross-site mechanism transfer or merely tests generalization to new layouts",
+        "provenance.json:data_sources Mind2Web key_findings official 3-way split"
+      ],
+      "affects_decision": false
+    },
+    {
+      "id": "VF7_PROVENANCE_NO_DATASET_INSPECTION_TRANSFORMATION_COST_INHERITED",
+      "severity": "moderate",
+      "category": "provenance",
+      "finding": "Provenance lists 6 files_read for WebArena and README for VisualWebArena, but Mind2Web analysis used GitHub+HuggingFace dataset page only (no file read list), and analysis confirms not direct dataset inspection. Transformation cost 224 LOC from EXP-INTEL-33925056324 and Mind2Web direct HTML 0 LOC are inherited, not re-measured in this execution (.execution_mode EXECUTE but no browser/Docker). Reproducibility stdlib only but data_access requires HuggingFace git clone for Mind2Web which was not exercised. HMT/WebCoach/AgentRR arXiv IDs point to 2026 future papers not fetchable at frozen_at 2026-09-21; provenance paper fetches cannot be verified. Artifacts benchmark_structure_analysis.py and benchmark_analysis_output.json are derived encodings, not raw task evidence with hashes of task definitions.",
+      "evidence_refs": [
+        "provenance.json:data_sources WebArena files_read README.md config_files examples 1-4.json generate_test_data.py",
+        "provenance.json:data_sources Mind2Web access_method GitHub + HuggingFace dataset page key_findings no files_read",
+        "result.json:validity_notes Mind2Web task definitions require HuggingFace dataset access structural analysis is based on published paper and README, not direct dataset inspection",
+        "result.json:metrics.transformation_cost WebArena_adapter_loc 224 Mind2Web 0",
+        "provenance.json:prior_experiment_refs EXP-INTEL-33925056324 224 LOC",
+        "provenance.json:artifacts benchmark_structure_analysis.py sha256 04aa... benchmark_analysis_output.json 3ce1...",
+        "provenance.json:data_sources HMT url 2603.07024 WebCoach 2511.12997 AgentRR github.com/ip174/agentrr"
+      ],
+      "affects_decision": false
+    },
+    {
+      "id": "VF8_TASK_COUNT_DISCREPANCY_UNRESOLVED",
+      "severity": "info",
+      "category": "provenance",
+      "finding": "Producer correctly discloses WebArena task count discrepancy: README 812 total but shopping alone 996 across 12 instances. Suggests 812 may be unique definitions before instantiation. This does not affect structural M1/M2 as defined but matters for product economics: if 996 includes per-instance duplication, cross-site pairs are duplicated tasks with identical mechanism and parameter instantiation, reducing information gain for C-LLM-INHERIT training. Unresolved item properly retained.",
+      "evidence_refs": [
+        "result.json:validity_notes WebArena task count discrepancy 812 vs 996",
+        "result.json:unresolved Whether 996 vs 812 indicates per-instance duplication",
+        "provenance.json:data_sources WebArena paper key_findings 812 tasks 6 site types 12 store instances",
+        "research/intel/benchmark_structure_analysis.py:21 total_tasks 812 site_types shopping task_count 996"
+      ],
+      "affects_decision": false
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1-SPIDER-2SITE",
+      "expected": "2 sites, 1-2 mechanisms each, no controlled novelty fraction splits, limited cross-site diversity",
+      "observed": "Producer records 2 sites no controlled splits pass true. Recomputed: no independent measurement; baseline is definitional lower bound. Strength weak-appropriate as reference point, not discriminating baseline. Correctly identifies 2-site corpus as bound for C-CROSSSITE.",
+      "evidence_refs": [
+        "spec.json:baselines B1-SPIDER-2SITE expected limited diversity",
+        "result.json:controls.B1_spider_2site_baseline pass true observed 2 sites, no controlled splits"
+      ],
+      "verdict": "PASS_APPROPRIATE_REFERENCE"
+    },
+    {
+      "baseline_id": "B2-TERX-HYPERAGENT",
+      "expected": "Single-site single-trajectory exact replay, no mechanism-sharing, not parameterized transfer",
+      "observed": "Producer observes TERX/HyperAgent/BrowserBash support exact replay only pass true. No paper/repo inspection listed in provenance for these systems (not in data_sources); claim is inherited from Scout brief/Director mandate. Strength weak - ungrounded external baseline, not verified against actual TERX/HyperAgent task structures. Does not discriminate SPIDER differentiation at benchmark-structure level.",
+      "evidence_refs": [
+        "spec.json:baselines B2-TERX-HYPERAGENT expected single-site no mechanism-sharing",
+        "result.json:controls.B2_terx_hyperagent_baseline pass true",
+        "request.json:director_mandate Scout brief identified HMT WebCoach AgentRR as relevant; TERX HyperAgent BrowserBash commoditize exact replay"
+      ],
+      "verdict": "PASS_WEAK_UNVERIFIED"
+    },
+    {
+      "baseline_id": "B3-HMT-WEBCOACH-AGENTRR",
+      "expected": "HMT tests mechanism-level inheritance; WebCoach trajectory FAISS memory; AgentRR exact replay",
+      "observed": "Producer reports HMT stage-level pre/post-condition matching webarena_sr 0.387 mind2web_step_sr 0.397 relevance high; WebCoach trajectory memory not parameterized; AgentRR deterministic replay. No data_source file inspection for HMT/WebCoach papers beyond arXiv HTML fetch; SR values not verifiable (future arXiv). Baseline discriminates HMT as most relevant but relevance is Scout-provided, not independently measured. Strength medium for categorization, weak for quantitative SR claims.",
+      "evidence_refs": [
+        "spec.json:baselines B3-HMT-WEBCOACH-AGENTRR expected mechanism-level inheritance",
+        "result.json:controls.B3_hmt_webcoach_agentrr HMT webarena_sr 0.387 relevance high",
+        "provenance.json:data_sources HMT webarena_sr 0.387 WebCoach improvement 47%->61% AgentRR deterministic"
+      ],
+      "verdict": "PASS_CATEGORIZATION_ONLY_SR_UNVERIFIED"
+    },
+    {
+      "baseline_id": "PC1_shopping_cross_site_positive_control",
+      "expected": "M1>=0.5 M2>=0.5 for WebArena shopping (12 instances share patterns; if fails no benchmark will)",
+      "observed": "M1=1.0 M2=0.8 pass true. Recomputed via script: (12-1)/11=1.0 and heuristic 0.8 matches. Circular per VF3: expected True because scoring assumes has_pairs True.",
+      "evidence_refs": [
+        "spec.json:positive_control WebArena shopping 12 store instances",
+        "result.json:controls.PC1_shopping_cross_site pass true M1 1.0 M2 0.8",
+        "research/intel/benchmark_structure_analysis.py:376-390 shopping scoring"
+      ],
+      "verdict": "PASS_TAUTOLOGICAL"
+    },
+    {
+      "baseline_id": "NC1_wikipedia_null_control",
+      "expected": "0 cross-site pairs 0 parameterized templates for single site 7 tasks",
+      "observed": "M1=0.0 M2=0.1 pass true (threshold 0.2). Recomputed matches. Minimal M2 0.1 floor indicates scoring never returns 0; expectation 0 is misspecified vs implementation. Circular per VF3.",
+      "evidence_refs": [
+        "spec.json:null_control WebArena wikipedia single site 7 tasks",
+        "result.json:controls.NC1_wikipedia_null pass true M1 0.0 M2 0.1",
+        "research/intel/benchmark_structure_analysis.py:304 else 0.1 floor"
+      ],
+      "verdict": "PASS_TAUTOLOGICAL_THRESHOLD_MISSPECIFIED"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_cross_site": {
+      "WebArena_shopping": 1.0,
+      "WebArena_gitlab": 0.0,
+      "WebArena_wikipedia": 0.0,
+      "VisualWebArena_shopping": 1.0,
+      "Mind2Web_cross_website": 0.8182,
+      "AgentBench_web_browsing": 0.5,
+      "Mind2Web_corrected_mean_websites_per_domain": 0.3108,
+      "Mind2Web_corrected_computation": "(4.419-1)/11",
+      "any_above_threshold_0_5_reported": true,
+      "any_above_threshold_with_corrected_mean": true,
+      "note": "Recomputed via benchmark_structure_analysis.py logic exactly matches producer 1.0/0.8182/0.0. Corrected mean shows threshold still passes due to WebArena/VisualWebArena 1.0, but composite M4 for Mind2Web alone drops from 0.5318 to 0.2020 (0.3108*0.65) or 0.1865 (0.3108*0.60)."
+    },
+    "M2_parameterization": {
+      "WebArena_shopping": 0.8,
+      "WebArena_gitlab": 0.5,
+      "WebArena_wikipedia": 0.1,
+      "VisualWebArena_shopping": 0.3,
+      "Mind2Web": 0.65,
+      "Mind2Web_mean_of_defined": 0.6,
+      "discrepancy": 0.05,
+      "AgentBench_web_browsing": 0.6,
+      "any_above_threshold_0_5_reported": true,
+      "recomputed_via_heuristic_rules": true,
+      "note": "All values heuristic assignments per compute_m2, not measured fractions; 0.65 vs 0.60 discrepancy is non-material to threshold but indicates manual override."
+    },
+    "M3_novelty_fraction": {
+      "WebArena": false,
+      "VisualWebArena": false,
+      "Mind2Web": true,
+      "AgentBench": false,
+      "any_true": true,
+      "recomputed": true,
+      "note": "Boolean based on official splits existence (Mind2Web) vs None; matches producer. WebArena false despite instance_level_splits_possible true in WEBARENA dict."
+    },
+    "M4_composite": {
+      "Mind2Web_cross_website_reported": 0.5318,
+      "Mind2Web_cross_website_corrected_mean_M1": 0.202,
+      "WebArena_shopping": 0.0,
+      "VisualWebArena_shopping": 0.0,
+      "AgentBench_web_browsing": 0.0,
+      "recomputed_formula": "M1*M2*M3 with M3 boolean as 1/0",
+      "note": "Producer M4 0.5318 =0.8182*0.65*1 matches. Corrected 0.202 =0.3108*0.65*1 still >0 but substantially lower; WebArena remains 0 due to M3 false regardless of high M1/M2."
+    },
+    "decision_rule_recomputed": {
+      "any_M1_gte_0_5": true,
+      "any_M2_gte_0_5": true,
+      "any_M3_true": true,
+      "producer_decision": "SURVIVES_CURRENT_TEST",
+      "recomputed_decision_distributed": "SURVIVES_CURRENT_TEST",
+      "recomputed_decision_single_benchmark_M4_gt_0": "Mind2Web only under reported M1; none under corrected mean threshold not but still >0",
+      "MIXED_alternative_if_strict_single_benchmark": "Would be SURVIVES only for Mind2Web; WebArena+MIND2Web complementary interpretation required"
+    },
+    "cross_site_instances": {
+      "WebArena_shopping_reported": 12,
+      "Mind2Web_websites_per_domain_reported": 10,
+      "Mind2Web_mean_websites_per_domain_measured": 4.42,
+      "Mind2Web_total_websites": 137,
+      "Mind2Web_total_domains": 31
+    }
+  },
+  "claim_ceiling": "SURVIVES as distributed structural-documentation survey only: public documentation suggests WebArena shopping provides imposed cross-site pairs (12 stores sharing platform, M1=1.0) with template-like parameterization (heuristic M2=0.8) but no official instance-level splits (M3 false, manual splits required); VisualWebArena inherits same cross-site but lower heuristic parameterization (M2=0.3) due to visual grounding; Mind2Web provides official instance/website/domain splits enabling novelty-fraction splits (M3 true) with heuristic cross-site 0.31-0.82 depending on websites-per-domain definition and heuristic parameterization 0.60-0.65, yielding composite M4 0.20-0.53 under optimistic assumptions. No direct dataset inspection, no verified same-mechanism co-occurrence across sites, no demonstrated instance-level split with mechanism overlap, and transformation costs inherited not measured. Maximum justified: benchmark documentation identifies complementary task families (WebArena shopping for cross-site pairs, Mind2Web cross-website for splits) that *could* support C-LLM-INHERIT/C-CROSSSITE/C-RESIDUAL-NOVELTY experiment design pending dataset-level verification of mechanism sharing, duplication fraction (996 vs 812), and parameterization prevalence; not a runnable ranked suitability validated for SPIDER execution.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35651934683/spec.json",
+    "research/experiments/EXP-INTEL-35651934683/prereg.md",
+    "research/experiments/EXP-INTEL-35651934683/result.json",
+    "research/experiments/EXP-INTEL-35651934683/report.md",
+    "research/experiments/EXP-INTEL-35651934683/provenance.json",
+    "research/intel/benchmark_structure_analysis.py",
+    "research/intel/benchmark_analysis_output.json",
+    "research/experiments/EXP-INTEL-33925056324/result.json WebArena adapter 224 LOC",
+    "request.json:director_mandate PIVOT to C-LLM-INHERIT with cognitive reset and Scout brief TERX/HyperAgent/BrowserBash HMT WebCoach AgentRR"
+  ],
+  "unresolved": [
+    "Whether WebArena 996 shopping tasks vs 812 total indicates per-instance duplication across 12 stores, and whether duplicated mechanisms provide meaningful cross-site transfer vs trivial copy (producer unresolved 1).",
+    "Whether Mind2Web cross-website split provides true same-mechanism transfer across different sites in same domain or merely tests generalization to new layouts (producer unresolved 2).",
+    "Whether HMT stage-level pre/post-condition matching can be adapted to SPIDER kernel-level inheritance, and whether WebArena+Mind2Web benchmark structures from HMT directly inform C-LLM-INHERIT design without additional SPIDER-specific validation (producer unresolved 3).",
+    "Whether 31x recipe material gap is addressable using WebArena 996 tasks as training data for C-LLM-INHERIT (producer unresolved 4).",
+    "Whether VisualWebArena visual grounding requirement conflicts with SPIDER text/HTML fragment model, and whether M2 0.3 heuristic correctly captures parameterization difficulty for visual tasks (producer unresolved 5 plus VF2).",
+    "Corrected M1 for Mind2Web under empirical mean (0.31) vs max (0.82): which definition matches prereg threshold intent for mechanism reuse density, and does distributed SURVIVES still justify Product lane investment if only Mind2Web provides M3 true at reduced composite.",
+    "Verifiability of HMT 38.7% WebArena SR and WebCoach 47%->61% improvement given future-dated arXiv IDs and lack of commit hashes in provenance."
+  ]
+}
