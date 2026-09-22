@@ -1,17 +1,17 @@
 {
   "lane": "product",
   "human_paused": false,
-  "active_experiment_id": "EXP-PRODUCT-35782537266",
-  "last_experiment_id": "EXP-PRODUCT-35777355953",
-  "last_verdict": "SURVIVES_CURRENT_TEST \u2014 product kernel port SURVIVES synthetic-only ceiling: 40/40 pooled alias-OOD correct (Wilson [0.912,1.0], binomial p=1e-40 vs 0.10, McNemar p=6.98e-10 vs B-EXACT-MATCH 0/40), orthogonal 30/30 and mixed 10/10 and held-out 9/9 and per-family 10/10 each with false_accept 0.0 (gap 1.0 vs B-VERBATIM-REPLAY 1.0, McNemar p=6.98e-10), exact-match 12/12 no regression, no-applicable UNKNOWN precision 1.0 FA 0.0, empty-registry 6/6 UNKNOWN, ECE 0.065 (5 bins, 3 empty disclosed) within 0.05 of frontier proxy 0.080, confidence std 0.400, parity gap 0.0, controls C1-C8 all PASS; PC-BROWSERGYM-HEALTH 0/0 correctly bounds live to exploratory per frozen C1, audit PASS",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-PRODUCT-35782537266",
+  "last_verdict": "MEASUREMENT_INVALID",
   "continue_immediately": false,
-  "next_question": "Does the product kernel port (src/spider/kernel.py reconstruct=True, softmax temp 0.15 + deterministic jitter gated UNKNOWN<0.80, ALLOWED_STATE_KEYS only) preserve alias-OOD correct>=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs B-EXACT-MATCH 0/40), false_accept<=0.15 (>=0.15 below B-VERBATIM-REPLAY with McNemar p<0.05), exact-match>=0.90, UNKNOWN precision>=0.85, ECE<=0.15 on live BrowserGym WebShop/ALFWorld at 0.14.3 1280x720 with real CDP AX trees (header/body/auth aliasing including mixed header+body+query within one request and production-SPA heterogeneity, N_live>=20, PC-BROWSERGYM-HEALTH >=80% with AX nodes>10) while reporting retrieval+reconstruction+verification economics vs RAG-EMBED vs verbatim vs instruction (200 tokens amortized f=10) and 3-seed learned GRPO stability (wall-clock/tokens/CV)?",
+  "next_question": "With genuine branch-derived cost from actual kernel resolve/_bind/verify/freshness gating 0.25/UNKNOWN<0.80 (no n*3200 formula, no token shuffling to force |rho_length|<0.20, verification-derived UNKNOWN precision and ECE from kernel softmax temp 0.15+jitter), family-specific slot induction (not generic ['path','store']), honest Stagehand/TERX 50-tok hit costs, 5000 family-stratified bootstraps and block-permutation, and real WebArena-Verified v2 census or disclosed synthetic ceiling, does SPIDER parameterized inheritance produce residual-novelty-proportional amortized cost (rho_novelty>=0.60 R2_delta>=0.50, rho_length|stratum|<0.20) with honest saving >=25% vs COLD at f=10 and calibrated abstention (false_accept<=0.10 UNKNOWN precision>=0.85 ECE<=0.15)?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-22T22:00:40.748776+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "d5de1812a85163a115fe256d21f686a5e90900de349758f62f881764c19e5f3c",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "28c25234d08a5d010dc55dd8",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-22T22:23:37.435662+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "42077edc2b872c8fd535d7d9a2006fcaf972a73343bef84baad303dcce8c1f79",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
