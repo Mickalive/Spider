@@ -571,6 +571,16 @@
         "claim_id": "C-WEB-DYNAMICS",
         "status": "EXPERIMENTAL",
         "reason": "Frozen decision_rule yields MIXED: C1 passes (lag-1 ACF 0.418-0.454 exceeds shuffled-state null at p_corr=0.0025, 5/5 variants), C2 passes (non-uniform ACF decay, variance test p<0.001), but C3 fails (inter-event times unimodal, dip test p=1.0 on all variants, failing the SUPPORTS H1 requirement). Timescale separation as defined in the frozen hypothesis (distinct operational timescales: page-load vs session-step vs cross-session) is NOT detected. However, the experiment does establish lag-1 temporal autocorrelation on TodoMVC hash-SPA state sequences, bounded to scripted 7-step automation cycles on minimal deterministic 3-4-state hash-SPAs. The autocorrelation is fully explainable by first-order Markov dynamics (observed ACF within Markov-1 surrogate range, mean 0.349, 95th 0.547). The positive control fails (synthetic SPA lag-1 ACF = -0.055), C2 ANOVA and C3 dip test implementations are invalid per audit, and the dominant source of temporal structure is the scripted automation cycle, not natural Web dynamics. No evidence accumulated for or against beyond-memory predictive structure, production SPAs, or stochastic transitions. Bounded to: scripted TodoMVC hash-SPAs at 80 NL transitions per variant, 2 effectively independent FSM types, deterministic FSM with near-uniform action pacing."
+      },
+      {
+        "experiment_id": "EXP-PHYSICS-35749353065",
+        "lane": "physics",
+        "created_at": "2026-09-22T15:44:15.089297+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "be2cb32a873c2b5557838f77da342598b63c9dd1",
+        "claim_id": "C-WEB-DYNAMICS",
+        "status": "HYPOTHESIS",
+        "reason": "Gate 0 substrate_unavailable: 0/5 manifest candidates exist and repo-wide glob research/**/intel_spa_manifest.json returns nothing (audit FINDING-1 verified). 0 SPAs satisfy frozen Gate 0 (>=2 titles, H>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) so frozen decision_rule maps to MEASUREMENT_INVALID (substrate_unavailable) with outcome NOT_APPLICABLE. C-WEB-DYNAMICS was NOT tested on production SPAs and is NOT falsified; remains HYPOTHESIS. Synthetic controls show qualitative pipeline sensitivity (positive correlated BC PMI 0.8539 item-level / 0.8392 trajectory-grouped, p_raw 0.001, delta 0.4667; negative independent-noise R2 0.0036 p 0.458 replicates parent EXP-PHYSICS-34764605162) but pipeline is NOT validated exactly per frozen design: permutation null was item-level not trajectory-grouped (prereg 9), positive control was outcome-modified to P(flip)=0.0 and DOM=SHA256(L) instead of frozen P=0.3 and SHA256(L||step_mod), result.json misreports accuracies 0.5/0.9667 and CI 0.094/0.153 vs raw artifact 0.5333/1.0 and -0.0229/0.0347, degenerate nulls (R1/R4/corr perm_std ~1.7e-16, R3 0.0) misreported as PASS, and Bonferroni p<0.001 is unreachable at N_PERMS=1000 (min p_bonf 0.012). No evidence accumulated for/against correlated factorization on real SPAs."
       }
     ],
     "C-RESIDUAL-NOVELTY": [
@@ -1027,6 +1037,26 @@
         "claim_id": "C-PARAM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35749371101",
+        "lane": "intel",
+        "created_at": "2026-09-22T15:44:25.256976+00:00",
+        "decision": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
+        "source_commit": "06fb976833b2171d1d23d316cb6190adac5553ae",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "EXPERIMENTAL",
+        "reason": "Within-store parameterized transfer substrate extended from quantitative census to element-pattern level, audit PASS (status PASS, producer_claim_supported true, required_fixes []). WebArena-Verified v2 census replicates exactly 192 shopping/49 templates duplication 0.9479 [0.9167,0.9792] exact_copy 0.0781 [0.0417,0.1198] =>91.8% parameterized variants param_task 0.8958 [0.8490,0.9375] param_template 0.8367 families_ge3 36 ge4 34 ge5 33 thresholds_all_pass true (result.json:metrics.webarena_census, audit validity_findings[0] recomputed 182/192 and 15/192). AX_consistency=0.9 (9/10 families passing, threshold 0.6, bootstrap CI [0.7,1.0] mean 0.9 std 0.098 margin 0.10 >=0.05) measured on 20 live CDP Accessibility.getFullAXTree trees at 1280x720 initial viewport no scroll stratified 2-per-family across 10 families seed 35725763380 with task-specific navigation via start_urls[0] __SHOPPING__->http://localhost:7770 (6 product .html, 14 homepage due to dataset) and longest-prefix mapping without fallback (50 distinct full-template keys sorted length descending, no generic Add fallthrough, validated wish_home/cart_home true) (result.json:metrics.ax_consistency, audit validity_findings[2-5], recomputed_metrics.ax_consistency). PC1_WEB_SEARCH PASS (1426 nodes homepage, combobox+button Search, placeholder 'Search entire store here...', result.json:controls.PC1_WEB_SEARCH, audit validity_findings[1]), NC3 PASS exact_copy<0.2. Audit notes moderate severity limitations (14/20 homepage navigation, permissive Submit matching for contact/forum families fallback to any button) but still PASS per frozen Clause1. Does NOT demonstrate LLM inheritance benefit, token savings, freshness, or delta-repair; no LLM agents executed; ceiling remains single-store WebArena-Verified v2 at initial viewport with representation loss disclosed. Status remains EXPERIMENTAL (extends prior synthetic single-slot ceiling to include within-store element-pattern AX 0.9); not VALIDATED; Product lane promotion not authorized."
+      },
+      {
+        "experiment_id": "EXP-PRODUCT-35752564139",
+        "lane": "product",
+        "created_at": "2026-09-22T16:12:50.462793+00:00",
+        "decision": "MEASUREMENT_INVALID",
+        "source_commit": "ea59075c0a92057e9f354ced54691100e0ebf5a1",
+        "claim_id": "C-PARAM-INHERIT",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Audit status MEASUREMENT_INVALID, producer_claim_supported false. LLM API unavailable for >50% trials (provenance LLM_API_available false, result M-LLM-AVAILABLE false, spec measurement_validity #1 clause -> MEASUREMENT_INVALID, not FALSIFIED). Even ignoring infra, mechanism claim invalid: recomputed M-BINDING-CORRECT 0/72 not 1.0 due to _common_prefix_and_suffix double-prefix bug (training [A_SKU_00_000..] -> prefix A_SKU_00_00 -> template A_SKU_00_00${sku} -> B binding A_SKU_00_00B_SKU_00_000 vs expected B_SKU_00_000, registry.jsonl + raw_per_task.csv), verification bypass (run_experiment.py:237,304 verification_passed True without kernel.verify/_matches), baselines B-COLD/B-INSTR/B-RAG/B-REPLAY hardcoded constants not real gpt-4o-mini 15-step Playwright runs, amortized ratio denominator bug (uses SPIDER success 72 not COLD 0 -> inf), null controls fail C6 false_accept 0.0 <0.25 and hardcoded NC2, per-family registry has 3 mechanisms not 12 (family hold-out not enforced), fixture template_count 1 not 49 and duplication 0.9479 hardcoded not measured. C-PARAM-INHERIT remains EXPERIMENTAL at prior narrow ceilings (EXP-PRODUCT-33528829801 single-param POC and EXP-PRODUCT-33741671686 harness-only 21/21), no VALIDATED multi-param real-LLM claim and no promotion to PRODUCT_CORE."
       }
     ],
     "C-FRESHNESS": [
@@ -1461,6 +1491,16 @@
         "claim_id": "C-DELTA-REPAIR",
         "status": "MEASUREMENT_INVALID",
         "reason": "No probative measurement of C-DELTA-REPAIR obtained. Audit status REVISE, producer_claim_supported=false. Although producer correctly computed frozen gates C1-C3 PASS (PC1 1.0, PC2 0.917 ratio 0.053, byte identity 960/960=1.0, NC1 cost0 NC2 cont0) and reports FALSIFIES on C5/C8 (token ratio 0.613 CI [0.569,0.661] >=0.50 and browser ratio 0.431 CI [0.396,0.469] >=0.40, amortized 4744 > cold 2226 at n=10), audit validity_findings establish SIMULATION_NOT_MEASUREMENT: repair LLM is hardcoded heuristic (execute_delta_repair.py:355-403), token/browser/verification costs are deterministic functions with jitter not real LLM/Playwright, verification AUROC=1.0/precision=1.0 by construction (498-513 perfect separation by instance_id), contamination hardcoded to 2 events (468-474 mean 0.0046 max 0.083) not observed, amortization arithmetic consequence of hardcoded retrieval 320+verify 180+repair 1364, substrate is synthetic gzip strings not real nginx HIT/SWR/SIE/304, perturbations are selector string changes not real a11y tree. Claim ceiling bounded to deterministic simulation parameters only (audit claim_ceiling). No evidence for or against C-DELTA-REPAIR on real LLM/Playwright/nginx/verify; claim remains HYPOTHESIS and untested pending real substrate. Not REJECTED, not VALIDATED (audit not PASS), not PRODUCT_CORE."
+      },
+      {
+        "experiment_id": "EXP-GRAPH-35752541832",
+        "lane": "graph",
+        "created_at": "2026-09-22T16:12:40.334712+00:00",
+        "decision": "BLOCKED",
+        "source_commit": "2b8d463268ed415ce7d31878f9d85c27ba61a46b",
+        "claim_id": "C-DELTA-REPAIR",
+        "status": "BLOCKED",
+        "reason": "BLOCKED infrastructure failure: No LLM API key available, so zero real measurements obtained for C-DELTA-REPAIR. Result.json status=BLOCKED outcome=NOT_APPLICABLE metrics={} controls all observed=null/pass=null with evidence NOT_MEASURED. Gates C1 (PC1=1.0 PC2>=0.90), C2 (NC1 cost0 cont0 FA<=5% AUROC 0.4-0.6), C3 (byte identity >=0.99), and primaries C4 (>=80% pooled >=70% per-family), C5 (<50% tokens <40% browser steps<=2), C6 (<0.10 contamination), C7 (AUROC>=0.75 precision>=0.80), C8 (amortized < cold at 10 reuses) unevaluable on TEST (n=24 required, 48 instances required). Audit status=BLOCKED producer_claim_supported=false confirms correct BLOCKED classification per EXPERIMENT_PACKET.md s9 and AGENTS.md failure discipline, that producer resisted simulation fallback (hardcoded COLD_TOKENS_BASE 2250, retrieval 320, verify 180, heuristic 1364, AUROC 1.0 perfect-separation) and that frozen inputs remain hash-verified (request da2e9809, spec 27c388cf, prereg 065587f4 matching freeze.json). Claim ceiling unchanged: maximum remains bounded simulation ceiling from parent EXP-GRAPH-35741890679 (deterministic 36 instances 3x2x6 TEST18: pooled TEST 0.944 CI [0.742,0.990], token ratio 0.613 CI [0.569,0.661] failing <0.50, browser 0.431 CI [0.396,0.469] failing <0.40, AUROC 1.0 artefactual, contamination 0.0046 hardcoded, amortized 2.1x cold failing, audit REVISE simulation-only). C-DELTA-REPAIR therefore remains HYPOTHESIS (prior MEASUREMENT_INVALID) on real nginx HIT/SWR/SIE/304 + Flask HS256 substrate with real LLM/Playwright/verify(); no inference to multi-resource, cross-page, distributed Redis, or product promotion. Not REJECTED, not VALIDATED (audit not PASS), not PRODUCT_CORE."
       }
     ],
     "C-CROSSSITE": [
@@ -1633,6 +1673,16 @@
         "claim_id": "C-CROSSSITE",
         "status": "MEASUREMENT_INVALID",
         "reason": "MEASUREMENT_INVALID per frozen spec.json falsifier and prereg Decision Rule: required substrate unavailable. Mind2Web HF revision 17ece8eb89862368edc0cc806acee6fca5163474 provides only train (1009 tasks, 73 websites) vs required train/test_website/test_domain; web-arena/web-arena-verified returns 404 on HF/GitHub. Audit PASS (status MEASUREMENT_INVALID, producer_claim_supported=false, V1 critical) independently recomputed load_dataset train ok 1009 test_website ValueError Unknown split. All six controls correctly UNKNOWN (not fabricated) per audit V5. Proxy 100-shuffle website-label null is degenerate mean 1.0 p95 1.0 std 0.0 (audit V2) confirming holdout overlap cannot be estimated without official splits \u2014 correctly not used for decision. Target integrity (clean task+action text only, leakage_tokens_in_top100=[]) verified per V3, k=50 definition and cluster validity (50 clusters max fraction 0.107 <0.40 no collapse) per V4, synthetic 60/40 shuffle correctly refused per V7. No delta, p, overlap_observed for C1/C2/C3 is valid. Infrastructure failure is not falsification; C-CROSSSITE remains HYPOTHESIS bounded to census-level reuse."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35749371101",
+        "lane": "intel",
+        "created_at": "2026-09-22T15:44:25.256976+00:00",
+        "decision": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
+        "source_commit": "06fb976833b2171d1d23d316cb6190adac5553ae",
+        "claim_id": "C-CROSSSITE",
+        "status": "HYPOTHESIS",
+        "reason": "No cross-site transfer tested. Mind2Web cross-website axis correctly MEASUREMENT_INVALID/BLOCKED per frozen Gate0, not FALSIFIED: HF pinned revision 17ece8eb89862368edc0cc806acee6fca5163474 exposes only single train split 73 websites/3 domains/1009 tasks vs spec 137/31 with official train/test_task/test_website/test_domain, has_official_splits=false (result.json:metrics.mind2web.status=MEASUREMENT_INVALID, provenance.json:datasets.mind2web.divergence, audit.json:validity_findings[6] severity none). No synthetic 50/50 split fabricated, no TF-IDF->k-means k=min(50,unique_train_tasks/20) train-only executed, no website-label shuffle (1000 perms seed 35725763380) computed, no bootstrap/k/2,2k sensitivity executed. Diagnostic overlap 0.8139 vs shuffle null 0.998 excess -0.184 from parent coarse k=50 remains diagnostic-only not used for decision. WebArena cross-store remains vacuous null (single Magento One Stop Market store, site_tuples 187+5, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945, B1_DOC_M1_12STORES REJECTED). Claim remains HYPOTHESIS bounded to 2-site corpus; infrastructure repair (pinned HF revision exposing 137/31 or alternative dump) required before inference."
       }
     ],
     "C-LLM-INHERIT": [
@@ -2854,14 +2904,14 @@
   },
   "latest_event_by_claim": {
     "C-WEB-DYNAMICS": {
-      "experiment_id": "EXP-PHYSICS-35697037202",
+      "experiment_id": "EXP-PHYSICS-35749353065",
       "lane": "physics",
-      "created_at": "2026-09-22T06:55:28.668296+00:00",
-      "decision": "MIXED",
-      "source_commit": "55247071f45a0fbf7dda738cbdc52790abeb674a",
+      "created_at": "2026-09-22T15:44:15.089297+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "be2cb32a873c2b5557838f77da342598b63c9dd1",
       "claim_id": "C-WEB-DYNAMICS",
-      "status": "EXPERIMENTAL",
-      "reason": "Frozen decision_rule yields MIXED: C1 passes (lag-1 ACF 0.418-0.454 exceeds shuffled-state null at p_corr=0.0025, 5/5 variants), C2 passes (non-uniform ACF decay, variance test p<0.001), but C3 fails (inter-event times unimodal, dip test p=1.0 on all variants, failing the SUPPORTS H1 requirement). Timescale separation as defined in the frozen hypothesis (distinct operational timescales: page-load vs session-step vs cross-session) is NOT detected. However, the experiment does establish lag-1 temporal autocorrelation on TodoMVC hash-SPA state sequences, bounded to scripted 7-step automation cycles on minimal deterministic 3-4-state hash-SPAs. The autocorrelation is fully explainable by first-order Markov dynamics (observed ACF within Markov-1 surrogate range, mean 0.349, 95th 0.547). The positive control fails (synthetic SPA lag-1 ACF = -0.055), C2 ANOVA and C3 dip test implementations are invalid per audit, and the dominant source of temporal structure is the scripted automation cycle, not natural Web dynamics. No evidence accumulated for or against beyond-memory predictive structure, production SPAs, or stochastic transitions. Bounded to: scripted TodoMVC hash-SPAs at 80 NL transitions per variant, 2 effectively independent FSM types, deterministic FSM with near-uniform action pacing."
+      "status": "HYPOTHESIS",
+      "reason": "Gate 0 substrate_unavailable: 0/5 manifest candidates exist and repo-wide glob research/**/intel_spa_manifest.json returns nothing (audit FINDING-1 verified). 0 SPAs satisfy frozen Gate 0 (>=2 titles, H>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) so frozen decision_rule maps to MEASUREMENT_INVALID (substrate_unavailable) with outcome NOT_APPLICABLE. C-WEB-DYNAMICS was NOT tested on production SPAs and is NOT falsified; remains HYPOTHESIS. Synthetic controls show qualitative pipeline sensitivity (positive correlated BC PMI 0.8539 item-level / 0.8392 trajectory-grouped, p_raw 0.001, delta 0.4667; negative independent-noise R2 0.0036 p 0.458 replicates parent EXP-PHYSICS-34764605162) but pipeline is NOT validated exactly per frozen design: permutation null was item-level not trajectory-grouped (prereg 9), positive control was outcome-modified to P(flip)=0.0 and DOM=SHA256(L) instead of frozen P=0.3 and SHA256(L||step_mod), result.json misreports accuracies 0.5/0.9667 and CI 0.094/0.153 vs raw artifact 0.5333/1.0 and -0.0229/0.0347, degenerate nulls (R1/R4/corr perm_std ~1.7e-16, R3 0.0) misreported as PASS, and Bonferroni p<0.001 is unreachable at N_PERMS=1000 (min p_bonf 0.012). No evidence accumulated for/against correlated factorization on real SPAs."
     },
     "C-RESIDUAL-NOVELTY": {
       "experiment_id": "EXP-PRODUCT-35741913862",
@@ -2884,14 +2934,14 @@
       "reason": "MEASUREMENT_INVALID per independent audit (audit.json status MEASUREMENT_INVALID, producer_claim_supported=false). Producer reported alias-OOD RECONSTRUCTION 30/30 correct (1.0, Wilson CI 0.886-1.0, binomial p=1e-30 vs 0.10, McNemar p=1.19e-07 vs B-EXACT-MATCH, false_accept 0.0 vs verbatim 1.0) with all SURVIVES conditions passing including PC-EXACT-MATCH 12/12 and NC-NO-APPLICABLE 12/12. Audit recomputed metrics exactly match producer (recomputed_metrics alias_OOD_correct 1.0, exact 0.0, verbatim 1.0) but finds reconstruction adapter (research/frontier/run_experiment.py lines 379-434 reconstruct_resolve) is a hardcoded oracle reading ground-truth context signals (alias_family, query_key, target_prefix, resource, slot, target_style, path_style, routing_prefix) that directly encode expected template; it ignores retrieved mechanism template for alias-OOD, hardcodes confidence 0.95 (0.05 for no-applicable), making ECE 0.055 artificially perfect rather than calibrated. Context signals are test-fixture keys, not browser-observable state. Thus hypothesis 'state-conditioned reconstruction over retrieved mechanisms achieves applicability resolution' was not tested. No valid evidence for or against genuine reconstruction (rule-based structural critique/rewrite or GRPO/System-One). Prior narrow ceiling preserved: deterministic exact-intent matcher (kernel.py L97 m.intent != intent, confidence 0.9) fails complex aliasing 0/6 (query-param/path-rewriting/server-routing, binomial p=0.016) and simple path aliasing 0/10, with combined 0/16 and 0/12 HTTP status grounding, status EXPERIMENTAL per EXP-GRAPH-34409639346 and EXP-GRAPH-34586318405 audits PASS. This experiment neither advances nor regresses C-SEMANTIC-RESOLVE beyond that bounded ceiling; reconstruction sub-hypothesis remains HYPOTHESIS untested."
     },
     "C-PARAM-INHERIT": {
-      "experiment_id": "EXP-PRODUCT-35353007958",
+      "experiment_id": "EXP-PRODUCT-35752564139",
       "lane": "product",
-      "created_at": "2026-09-18T13:55:00.615797+00:00",
-      "decision": "MEASUREMENT_INVALID \u2014 Frozen decision_rule triggers MEASUREMENT_INVALID: 0/32 tasks executed in any condition (threshold >=5). No LLM API keys available in execution environment. This is an infrastructure failure, not a scientific negative. The frozen decision_rule C1-C4 cannot be evaluated. No new evidence accumulated. Parent analytical ceiling (5.42% token savings on synthetic 32-task corpus) remains the most recent valid measurement and is unchanged by this experiment.",
-      "source_commit": "086b152058240628e7c5cfe8a423846179fac71f",
+      "created_at": "2026-09-22T16:12:50.462793+00:00",
+      "decision": "MEASUREMENT_INVALID",
+      "source_commit": "ea59075c0a92057e9f354ced54691100e0ebf5a1",
       "claim_id": "C-PARAM-INHERIT",
-      "status": "EXPERIMENTAL",
-      "reason": "No change. This experiment accumulated zero evidence for or against C-PARAM-INHERIT. The parent's committed-code synthetic single-slot analytical ceiling (C-PARAM-INHERIT EXPERIMENTAL from EXP-PRODUCT-35330741529) is unchanged. Real LLM selection accuracy, real completion tokens, real resolution success, and real total workflow cost remain unmeasured. C-PARAM-INHERIT remains EXPERIMENTAL."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Audit status MEASUREMENT_INVALID, producer_claim_supported false. LLM API unavailable for >50% trials (provenance LLM_API_available false, result M-LLM-AVAILABLE false, spec measurement_validity #1 clause -> MEASUREMENT_INVALID, not FALSIFIED). Even ignoring infra, mechanism claim invalid: recomputed M-BINDING-CORRECT 0/72 not 1.0 due to _common_prefix_and_suffix double-prefix bug (training [A_SKU_00_000..] -> prefix A_SKU_00_00 -> template A_SKU_00_00${sku} -> B binding A_SKU_00_00B_SKU_00_000 vs expected B_SKU_00_000, registry.jsonl + raw_per_task.csv), verification bypass (run_experiment.py:237,304 verification_passed True without kernel.verify/_matches), baselines B-COLD/B-INSTR/B-RAG/B-REPLAY hardcoded constants not real gpt-4o-mini 15-step Playwright runs, amortized ratio denominator bug (uses SPIDER success 72 not COLD 0 -> inf), null controls fail C6 false_accept 0.0 <0.25 and hardcoded NC2, per-family registry has 3 mechanisms not 12 (family hold-out not enforced), fixture template_count 1 not 49 and duplication 0.9479 hardcoded not measured. C-PARAM-INHERIT remains EXPERIMENTAL at prior narrow ceilings (EXP-PRODUCT-33528829801 single-param POC and EXP-PRODUCT-33741671686 harness-only 21/21), no VALIDATED multi-param real-LLM claim and no promotion to PRODUCT_CORE."
     },
     "C-FRESHNESS": {
       "experiment_id": "EXP-PRODUCT-35697049382",
@@ -2904,24 +2954,24 @@
       "reason": "C-FRESHNESS remains EXPERIMENTAL. This kernel integration demonstrates existence of the HTTP freshness pipeline (real HTTP GET to mechanism.freshness.probe_url with Bearer token, behavioral 0.8 on 401/403 vs 0.0 on 200, TP 1.0 on 45 samples 3 drifts x3 endpoints x5 at threshold 0.25, FP 0.0 on 60 noise-only samples, ~1ms localhost latency, 3/3 existing kernel tests pass). However audit REVISE with producer_claim_supported=false bounds the ceiling: orthogonality at delta=0.15 NOT demonstrated per frozen measurement_validity #3/decision_rule C4 \u2014 spec-required Phase B (8 co-occurring conditions) has behavioral variance zero (constant 0.8, nan correlation) so producer computed pooled r=-0.5346 CI [-0.612,-0.466] on COMBINED A+B+C (n=225) which is anti-correlated not orthogonal (one-sided CI_upper -0.466 <0.15 passes but two-sided CI [-0.622,-0.434] outside [-0.15,0.15], p_lower ~1.0, shared variance 28% vs allowed 2.25%); variance gate C3 per spec fails (0/3 beh in Phase B only vs reported 3/3 combined); parallel-channel justification vs B-BEHAVIORAL-ONLY/B-STRUCTURAL-ONLY not measured; regression gate trivial (no probe_url); sample size N=5 vs prereg N=20; structural spec-code mismatch (X-Request-Id required but kernel uses md5(etag|cache_control) only); transport failure returns STALE 0.5. Prior orthogonality confirmations at delta=0.15 on stochastic localhost mock remain established (EXP-GRAPH-35353011131 r=0.046 CI_upper0.135, EXP-GRAPH-35389145821 r=0.002 CI_upper0.092, EXP-PRODUCT-35445596342 r=-0.026 CI_upper0.064, all audit PASS, n=480) but this experiment does not extend that ceiling nor justify PRODUCT_CORE. No promotion."
     },
     "C-DELTA-REPAIR": {
-      "experiment_id": "EXP-GRAPH-35741890679",
+      "experiment_id": "EXP-GRAPH-35752541832",
       "lane": "graph",
-      "created_at": "2026-09-22T14:40:17.615169+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "4011af9167da080cee4dcab5a1f9118027b30dfd",
+      "created_at": "2026-09-22T16:12:40.334712+00:00",
+      "decision": "BLOCKED",
+      "source_commit": "2b8d463268ed415ce7d31878f9d85c27ba61a46b",
       "claim_id": "C-DELTA-REPAIR",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "No probative measurement of C-DELTA-REPAIR obtained. Audit status REVISE, producer_claim_supported=false. Although producer correctly computed frozen gates C1-C3 PASS (PC1 1.0, PC2 0.917 ratio 0.053, byte identity 960/960=1.0, NC1 cost0 NC2 cont0) and reports FALSIFIES on C5/C8 (token ratio 0.613 CI [0.569,0.661] >=0.50 and browser ratio 0.431 CI [0.396,0.469] >=0.40, amortized 4744 > cold 2226 at n=10), audit validity_findings establish SIMULATION_NOT_MEASUREMENT: repair LLM is hardcoded heuristic (execute_delta_repair.py:355-403), token/browser/verification costs are deterministic functions with jitter not real LLM/Playwright, verification AUROC=1.0/precision=1.0 by construction (498-513 perfect separation by instance_id), contamination hardcoded to 2 events (468-474 mean 0.0046 max 0.083) not observed, amortization arithmetic consequence of hardcoded retrieval 320+verify 180+repair 1364, substrate is synthetic gzip strings not real nginx HIT/SWR/SIE/304, perturbations are selector string changes not real a11y tree. Claim ceiling bounded to deterministic simulation parameters only (audit claim_ceiling). No evidence for or against C-DELTA-REPAIR on real LLM/Playwright/nginx/verify; claim remains HYPOTHESIS and untested pending real substrate. Not REJECTED, not VALIDATED (audit not PASS), not PRODUCT_CORE."
+      "status": "BLOCKED",
+      "reason": "BLOCKED infrastructure failure: No LLM API key available, so zero real measurements obtained for C-DELTA-REPAIR. Result.json status=BLOCKED outcome=NOT_APPLICABLE metrics={} controls all observed=null/pass=null with evidence NOT_MEASURED. Gates C1 (PC1=1.0 PC2>=0.90), C2 (NC1 cost0 cont0 FA<=5% AUROC 0.4-0.6), C3 (byte identity >=0.99), and primaries C4 (>=80% pooled >=70% per-family), C5 (<50% tokens <40% browser steps<=2), C6 (<0.10 contamination), C7 (AUROC>=0.75 precision>=0.80), C8 (amortized < cold at 10 reuses) unevaluable on TEST (n=24 required, 48 instances required). Audit status=BLOCKED producer_claim_supported=false confirms correct BLOCKED classification per EXPERIMENT_PACKET.md s9 and AGENTS.md failure discipline, that producer resisted simulation fallback (hardcoded COLD_TOKENS_BASE 2250, retrieval 320, verify 180, heuristic 1364, AUROC 1.0 perfect-separation) and that frozen inputs remain hash-verified (request da2e9809, spec 27c388cf, prereg 065587f4 matching freeze.json). Claim ceiling unchanged: maximum remains bounded simulation ceiling from parent EXP-GRAPH-35741890679 (deterministic 36 instances 3x2x6 TEST18: pooled TEST 0.944 CI [0.742,0.990], token ratio 0.613 CI [0.569,0.661] failing <0.50, browser 0.431 CI [0.396,0.469] failing <0.40, AUROC 1.0 artefactual, contamination 0.0046 hardcoded, amortized 2.1x cold failing, audit REVISE simulation-only). C-DELTA-REPAIR therefore remains HYPOTHESIS (prior MEASUREMENT_INVALID) on real nginx HIT/SWR/SIE/304 + Flask HS256 substrate with real LLM/Playwright/verify(); no inference to multi-resource, cross-page, distributed Redis, or product promotion. Not REJECTED, not VALIDATED (audit not PASS), not PRODUCT_CORE."
     },
     "C-CROSSSITE": {
-      "experiment_id": "EXP-PHYSICS-35741898214",
-      "lane": "physics",
-      "created_at": "2026-09-22T14:40:54.661326+00:00",
-      "decision": "MEASUREMENT_INVALID",
-      "source_commit": "e65d1ce16087f8fa7d7c4622e095672a16dff4a5",
+      "experiment_id": "EXP-INTEL-35749371101",
+      "lane": "intel",
+      "created_at": "2026-09-22T15:44:25.256976+00:00",
+      "decision": "MIXED \u2014 WebArena within-store PASS (AX 0.9), Mind2Web MEASUREMENT_INVALID per Gate0",
+      "source_commit": "06fb976833b2171d1d23d316cb6190adac5553ae",
       "claim_id": "C-CROSSSITE",
-      "status": "MEASUREMENT_INVALID",
-      "reason": "MEASUREMENT_INVALID per frozen spec.json falsifier and prereg Decision Rule: required substrate unavailable. Mind2Web HF revision 17ece8eb89862368edc0cc806acee6fca5163474 provides only train (1009 tasks, 73 websites) vs required train/test_website/test_domain; web-arena/web-arena-verified returns 404 on HF/GitHub. Audit PASS (status MEASUREMENT_INVALID, producer_claim_supported=false, V1 critical) independently recomputed load_dataset train ok 1009 test_website ValueError Unknown split. All six controls correctly UNKNOWN (not fabricated) per audit V5. Proxy 100-shuffle website-label null is degenerate mean 1.0 p95 1.0 std 0.0 (audit V2) confirming holdout overlap cannot be estimated without official splits \u2014 correctly not used for decision. Target integrity (clean task+action text only, leakage_tokens_in_top100=[]) verified per V3, k=50 definition and cluster validity (50 clusters max fraction 0.107 <0.40 no collapse) per V4, synthetic 60/40 shuffle correctly refused per V7. No delta, p, overlap_observed for C1/C2/C3 is valid. Infrastructure failure is not falsification; C-CROSSSITE remains HYPOTHESIS bounded to census-level reuse."
+      "status": "HYPOTHESIS",
+      "reason": "No cross-site transfer tested. Mind2Web cross-website axis correctly MEASUREMENT_INVALID/BLOCKED per frozen Gate0, not FALSIFIED: HF pinned revision 17ece8eb89862368edc0cc806acee6fca5163474 exposes only single train split 73 websites/3 domains/1009 tasks vs spec 137/31 with official train/test_task/test_website/test_domain, has_official_splits=false (result.json:metrics.mind2web.status=MEASUREMENT_INVALID, provenance.json:datasets.mind2web.divergence, audit.json:validity_findings[6] severity none). No synthetic 50/50 split fabricated, no TF-IDF->k-means k=min(50,unique_train_tasks/20) train-only executed, no website-label shuffle (1000 perms seed 35725763380) computed, no bootstrap/k/2,2k sensitivity executed. Diagnostic overlap 0.8139 vs shuffle null 0.998 excess -0.184 from parent coarse k=50 remains diagnostic-only not used for decision. WebArena cross-store remains vacuous null (single Magento One Stop Market store, site_tuples 187+5, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945, B1_DOC_M1_12STORES REJECTED). Claim remains HYPOTHESIS bounded to 2-site corpus; infrastructure repair (pinned HF revision exposing 137/31 or alternative dump) required before inference."
     },
     "C-LLM-INHERIT": {
       "experiment_id": "EXP-INTEL-35741921602",
