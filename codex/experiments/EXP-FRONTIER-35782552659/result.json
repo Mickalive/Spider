@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35782552659",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "alias_ood_pooled_n": 40,
+    "hierarchical_correct_rate_alias_ood": 1.0,
+    "hierarchical_correct_alias_ood": "40/40",
+    "hierarchical_false_accept_rate_alias_ood": 0.0,
+    "hierarchical_binomial_p_vs_0.10": 0.0,
+    "hierarchical_orthogonal_correct_rate": 1.0,
+    "hierarchical_mixed_correct_rate": 1.0,
+    "hierarchical_heldout9_correct_rate": 1.0,
+    "hierarchical_per_family_correct_rate": {"fam0": 1.0, "fam1": 1.0, "fam2": 1.0, "fam3": 1.0},
+    "baselines_alias_ood_correct_rate": {
+      "B-EXACT-MATCH": 0.0,
+      "B-VERBATIM-REPLAY": 0.0,
+      "B-FLAT-RAG-TFIDF-K5": 1.0,
+      "B-FLAT-RAG-EMBED-K5": 1.0,
+      "B-FLAT-RAG-EMBED-K1": 0.0,
+      "B-RANDOM-K5": 1.0,
+      "H-HIERARCHICAL-XMEMORY": 1.0
+    },
+    "mcnemar": {
+      "hier_vs_exact_correct_p": 6.98e-10,
+      "hier_vs_verbatim_false_accept_p": 6.98e-10,
+      "hier_vs_best_flat_correct_p": 1.0,
+      "best_flat_name": "B-FLAT-RAG-TFIDF-K5"
+    },
+    "wilson_ci_hier_correct_95": [0.9124, 1.0],
+    "ece_hierarchical_5bin_overall": 0.1076,
+    "ece_hierarchical_bootstrap_family_blocked_2000_ci95": [0.0882, 0.1149],
+    "hierarchical_confidence_std_across_tasks": 0.3273,
+    "retrieval_alias_ood": {
+      "coverage_all_pipelines": 1.0,
+      "density_hierarchical": 1.95,
+      "density_best_flat_tfidf": 1.8167,
+      "density_embed_k1": 3.45,
+      "mean_k_hierarchical": 2.75,
+      "hierarchical_adaptive_k_hist": {"2": 10, "3": 30},
+      "hierarchical_k_cap_reason_counts": {"registry_size": 30, "min_k_topup": 10}
+    },
+    "coverage_gain_hier_minus_best_flat": {
+      "gain_point": 0.0,
+      "bootstrap_mean": 0.0,
+      "bootstrap_ci95": [0.0, 0.0],
+      "p_gain_le_0": 1.0
+    },
+    "density_gain_hier_minus_best_flat": {
+      "gain_point": 0.1333,
+      "bootstrap_mean": 0.1316,
+      "bootstrap_ci95": [0.0, 0.2667],
+      "p_gain_le_0": 0.3255
+    },
+    "exact_match_stratum_correct_all_pipelines": "12/12",
+    "no_applicable_stratum": "UNKNOWN 12/12 for 6 reconstructed pipelines; EMBED-K1 EXECUTABLE 12/12 at confidence 0.196-0.231 (<0.80 gated)",
+    "empty_registry_stratum_unknown_all_pipelines": "6/6",
+    "hierarchical_index": {
+      "theme_count": 63,
+      "episode_count": 63,
+      "themes_singleton": true,
+      "theme_types": ["auth", "body", "header"],
+      "total_components_across_themes": 203,
+      "manifest_sha256": "ef2fa566357fcafb3cc1810ff905161c7242845f1edf3f3d1f3d88a74ef53203"
+    },
+    "diagnostics": {
+      "harness_errors": 0,
+      "registry_template_leak_alias_ood": 0,
+      "forbidden_keys_in_derived_context": 0,
+      "flat_template_collapse_tfidf_mean_pairwise_jaccard": 0.5934,
+      "flat_template_collapse_embed_mean_pairwise_jaccard": 0.5934,
+      "econ_latency_per_successful_alias_task_s": {
+        "B-FLAT-RAG-TFIDF-K5": 0.0019,
+        "B-FLAT-RAG-EMBED-K5": 0.0359,
+        "B-RANDOM-K5": 0.0002,
+        "H-HIERARCHICAL-XMEMORY": 0.0030,
+        "B-EXACT-MATCH": null,
+        "B-VERBATIM-REPLAY": null,
+        "B-FLAT-RAG-EMBED-K1": null
+      }
+    }
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "expected": "all pipelines correct>=0.90 and false<=0.10 on exact-match N=12; hierarchical exact >=0.90 and not >0.10 below B-EXACT-MATCH",
+      "observed": "all 7 pipelines correct 12/12, false_accept 0/12; hierarchical 12/12, not below exact on exact stratum",
+      "pass": true
+    },
+    "PC-RETRIEVAL-HEALTH": {
+      "expected": "non-empty retrieval >=90% of alias-OOD; hierarchical distinct components >= flat on >=50% of tasks",
+      "observed": "non_empty_rate 1.0 (40/40) for hier/flat tfidf/flat embed; hier distinct >= flat on 30/40 tasks (0.75)",
+      "pass": true
+    },
+    "PC-HIERARCHICAL-INDEX-BUILT": {
+      "expected": ">=3 themes >=6 components, episode count == train registry size, no forbidden keys in manifest",
+      "observed": "63 themes, 203 components across themes, 63/63 episodes, forbidden_keys_in_manifest [], manifest sha256 ef2fa566...",
+      "pass": true
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "frozen null_control: every pipeline must return UNKNOWN or gated confidence <0.80 on no-applicable N=12, UNKNOWN precision >=0.90, false_accept <=0.10 (accept = EXECUTABLE with confidence >=0.80)",
+      "observed": "6 reconstructed pipelines UNKNOWN 12/12; EMBED-K1 EXECUTABLE 12/12 at confidence 0.196-0.231 (<0.80, gated); ungated false_accept 0/12 and gated precision 1.0 for all 7 pipelines; strict status-only reading recorded as diagnostics (EMBED-K1 strict FA rate 1.0)",
+      "pass": true,
+      "note": "Frozen spec null_control text explicitly allows 'or gated confidence<0.80'; prereg summary line ('all pipelines UNKNOWN') strict reading would fail this control -> MEASUREMENT_INVALID; formal spec definition (higher precedence) applied and both readings disclosed in validity_notes"
+    },
+    "NC-EMPTY-REGISTRY": {
+      "expected": "empty registry (N=6) returns UNKNOWN 100% for all pipelines",
+      "observed": "UNKNOWN 6/6 for all 7 pipelines",
+      "pass": true
+    },
+    "NC-ORACLE-LEAK": {
+      "expected": "derived_context only allowed keys, hierarchical component extraction template-parses only, no forbidden reads, confidence std>0.05",
+      "observed": "forbidden_in_derived 0, registry_template_leak_alias_ood 0, component_extraction template-string parsing only, hierarchical confidence std 0.3273 > 0.05",
+      "pass": true
+    },
+    "NC-FLAT-COLLAPSE-DIAGNOSTIC": {
+      "expected": "exploratory (not gating): flat top-k mean pairwise template Jaccard >0.80 would document similarity collapse",
+      "observed": "tfidf 0.5934, embed 0.5934 - collapse diagnostic below threshold; pool size 3 <= k=5 means every retriever returns the full registry, so pairwise overlap reflects full-pool template similarity, not truncation collapse",
+      "pass": null
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-FRONTIER-35782552659/tasks.json", "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e", "role": "fixture"},
+    {"path": "research/experiments/EXP-FRONTIER-35782552659/raw_evidence.json", "sha256": "4969ae02d35caadf1fd6215cbdd8592c0f984b5cee4835d5d1c3dc1fc8d0e703", "role": "raw"},
+    {"path": "research/experiments/EXP-FRONTIER-35782552659/index_manifest.json", "sha256": "ef2fa566357fcafb3cc1810ff905161c7242845f1edf3f3d1f3d88a74ef53203", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35782552659/train_split_inventory.json", "sha256": "5fa218245a0272d6c0c33422a445eaa2f42a86db99e3b3bb3f340c5518fc9bd7", "role": "derived"},
+    {"path": "research/experiments/EXP-FRONTIER-35782552659/derived_metrics.json", "sha256": "e7ed8d2a072b75842810bdb1584e33c6a80126ae68b685714d24a75170a99dfe", "role": "derived"},
+    {"path": "research/frontier/run_genuine_35782552659.py", "sha256": "2d66408199cebeb96627dee91f694a9b46e1e0e8c0d3396a80089f284ad82c83", "role": "code"}
+  ],
+  "observations": [
+    "All 70 tasks x 7 pipelines = 490 rows executed; harness_errors 0.",
+    "Fixture sha256 equals frozen parent sha (4abf1487...); registry_template_leak_alias_ood 0/40; forbidden keys in derived_context 0.",
+    "Hierarchical agglomerative clustering (Jaccard distance threshold 0.4 i.e. similarity >=0.6, average linkage, full component sets incl. url_segments) produced 63 themes from 63 train episodes - one singleton theme per episode (within-task component Jaccard ~0.5, cross-task ~0 under this synthetic family structure).",
+    "Hierarchical adaptive k: k=3 on 30 alias-OOD tasks (cap reason registry_size), k=2 on 10 tasks (cap reason min_k_topup); mean_k 2.75.",
+    "Alias-OOD correct: hierarchical 40/40, flat TFIDF-K5 40/40, flat EMBED-K5 40/40, random-K5 40/40, exact-match 0/40, verbatim-replay 0/40, embed-K1 0/40.",
+    "Retrieval recall@k coverage = 1.0 for every pipeline on alias-OOD (per-task registry size 3 <= k=5 for all retrievers).",
+    "Density (distinct components per retrieved mechanism): hierarchical 1.95, flat TFIDF/EMBED/random 1.8167, embed-K1 3.45.",
+    "Coverage gain hierarchical minus best flat = 0.0 (bootstrap mean 0.0, CI [0,0], p_gain_le_0 1.0); density gain point 0.1333 (bootstrap mean 0.1316, CI [0.0,0.2667], p 0.3255).",
+    "ECE (5 bins, hierarchical, all strata) 0.1076; family-blocked bootstrap 2000 CI [0.0882, 0.1149]; hierarchical confidence std 0.3273.",
+    "Exact-match stratum: all 7 pipelines 12/12. No-applicable: 6 reconstructed pipelines UNKNOWN 12/12; EMBED-K1 (no-applicability ablation) EXECUTABLE 12/12 at confidence 0.196-0.231. Empty-registry: all 7 UNKNOWN 6/6.",
+    "NC-FLAT-COLLAPSE diagnostics: mean pairwise template Jaccard 0.5934 (tfidf and embed), below the 0.80 exploratory threshold.",
+    "EMBED-K1 alias-OOD: correct 0/40, false_accept 40/40 (verbatim bind of top-1 candidate); exact-match confidences 0.799-0.868 (11/12 >= 0.80).",
+    "Economics (latency per successful alias-OOD task, s): hierarchical 0.0030, tfidf 0.0019, embed-K5 0.0359, random 0.0002; B-EXACT-MATCH/B-VERBATIM-REPLAY/B-FLAT-RAG-EMBED-K1 have 0 successes on alias-OOD (null)."
+  ],
+  "validity_notes": [
+    "S6 complementarity non-identifiable on this substrate: per-task retrieval pool (registry size 3) <= k=5 for every retriever, so both flat and hierarchical return the full registry on all 40 alias-OOD tasks; coverage is structurally 1.0 for all pipelines and hierarchical coverage gain is identically 0.0. The MIXED outcome reflects a substrate limitation (no truncation to expose complementarity), not an observed advantage or disadvantage of hierarchical retrieval.",
+    "Hierarchical index degenerated to 63 singleton themes (one per train episode) under the frozen clustering (Jaccard>=0.6, average linkage, full component sets incl. url_segments). The aggregation level contributed no grouping; the selection layer still ran (adaptive k 2-3, entropy/coverage expansion) but retrieved sets coincide with flat top-k sets. Fragmentation is reported as designed; no post-hoc threshold tuning was applied.",
+    "Control NC-NO-APPLICABLE interpretation: the frozen spec null_control defines the criterion as 'UNKNOWN (or gated confidence<0.80)' with false_accept<=0.10, where an accept is an un-gated (confidence>=0.80) executable. EMBED-K1 is by construction an ablation with no applicability evaluation ('verbatim bind (no reconstruction)', spec line 13); its no-applicable outputs all carry confidence 0.196-0.231 (<0.80), i.e. gated, so the formal frozen criterion passes for all 7 pipelines. The prereg summary line ('all pipelines UNKNOWN') admits a stricter status-only reading under which this control would fail and the status would be MEASUREMENT_INVALID; formal spec text (higher precedence) was applied and strict-reading diagnostics are recorded in NC-NO-APPLICABLE.observed.",
+    "RAG baselines are genuine: TFIDF vectorizer fit on train-registry episodes only; all-MiniLM-L6-v2 embedded locally (available; no fallback path used), query documents constructed only from intent + derived_context (url path, header keys, body keys).",
+    "Novel[0] alias forms (e.g. X-Api-Key) appear as low-confidence distractor mechanisms inside some train registries (parent fixture property, 0.8 confidence, never the expected template; verbatim test-template leak remains 0/40). This slightly raises the prior that 'novel' surface forms are known to the index and is disclosed rather than hidden.",
+    "Reconstruction floor: the parent genuine RULE (choose_adoptions + rewrite_template_multi + reconstruct_resolve, copied verbatim from EXP-FRONTIER-35773143736) rewrites the correct bound from any single retrieved candidate of the correct alias family; with full-registry retrieval, all reconstructed pipelines reach the 40/40 resolution ceiling already established for exact-intent-scan retrieval in the parent. Alias resolution performance here therefore measures retrieval+reconstruction parity, not hierarchical gain.",
+    "Economics: CPU-only run, zero hosted LLM calls/tokens, zero BrowserGym navigations (N_live=0 per Director mandate); no new SPA fixtures created; embed encodings cached per unique string.",
+    "Determinism: seed 42 (random.seed(42), np.random.RandomState(42)); deterministic argmax for theme assignment ties (first index); run re-executed twice with identical metrics (raw evidence byte-identical between reruns)."
+  ],
+  "unresolved": [
+    "Whether hierarchical selection yields retrieval complementarity when the pool actually truncates: smallest next test is a registry with >=8-12 mechanisms per task (pool >> k=5), intra-family component overlap among several candidates of the SAME family (so flat top-k can drop the correct family even when it is present), and held-equal intents; coverage-gain then becomes identifiable.",
+    "Whether the 63-singleton-theme fragmentation is specific to the Jaccard>=0.6 threshold on this synthetic family structure (edge weights ~0.5 within-task, ~0 across-task) or a general property of template-parsed component sets; a lower threshold was deliberately not tried post-hoc.",
+    "Whether 'coverage of the correct component family' is the right complementarity construct at all once reconstruction can adopt from any single candidate of the correct family: an alternative penalizing wasted retrieval (distinct components per candidate, redundancy of returned candidates vs oracle-minimal set) may be more discriminating for retrieval-layer research.",
+    "EMBED-K1 status under applicability controls: the ablation has no applicability evaluation by its frozen definition; a decision on whether control strata should exempt no-reconstruction ablations or whether the ablation should carry a guard would change status classification (see NC-NO-APPLICABLE note)."
+  ]
+}

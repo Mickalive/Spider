@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35782546046",
+  "lane": "intel",
+  "github_run_id": "local-execution",
+  "commit_sha": "546954c060591637d3d8ec24b51e0d3bf9ecff23",
+  "execution_timestamp": "2026-09-22T21:15:00Z",
+  "duration_seconds": 153.66,
+  "environment": {
+    "os": "Linux",
+    "python_version": "3.12.14",
+    "docker_version": "28.0.4",
+    "playwright_chromium_version": "125.0.6422.26 (build v1117)",
+    "working_directory": "/home/runner/work/Spider/Spider"
+  },
+  "dependencies": {
+    "browsergym-core": "0.14.3",
+    "agentlab": "0.4.2",
+    "playwright": "1.44.0",
+    "browsergym-webarena-verified": "0.14.3",
+    "gymnasium": "1.3.0",
+    "numpy": "2.5.3"
+  },
+  "pip_freeze_hash": "sha256:7f8a3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a",
+  "docker": {
+    "image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "container_name": "webarena-shopping",
+    "port_mapping": "7770:80",
+    "digest": "sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb",
+    "startup_time_seconds": 15
+  },
+  "code": {
+    "measurement_script": "research/intel/exp_35782546046_measure.py",
+    "script_sha256": "dc47979e9896dd84116319b1181845e7ab05aba854306098d2b162e8b3ab39c6",
+    "frozen_spec": "research/experiments/EXP-INTEL-35782546046/spec.json",
+    "spec_sha256": "ba6a4e8048e10bd4c263347b01a277226f86f7d3063fd836f847753af865d184",
+    "frozen_prereg": "research/experiments/EXP-INTEL-35782546046/prereg.md",
+    "prereg_sha256": "67b6ff5ffdbfa027515b64bd00dfdc8af3b6b98719cd5e15867064cd1e6cc4aa",
+    "freeze_json": "research/experiments/EXP-INTEL-35782546046/freeze.json",
+    "freeze_sha256": "N/A (freeze.json contains hashes only)"
+  },
+  "data_sources": {
+    "webarena_verified_pin": {
+      "source_experiment": "EXP-INTEL-35749371101",
+      "artifact": "artifacts/raw/webarena-verified.json",
+      "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+      "description": "812 total tasks, 192 shopping (site=shopping), 49 intent templates, 36 families >=3"
+    }
+  },
+  "random_seeds": {
+    "global_seed": 35725763380,
+    "kmeans_int32_seed": 1363249228,
+    "bootstrap_reps": 2000,
+    "permutation_reps": 1000,
+    "bootstrap_method": "percentile",
+    "resampling_unit": "family"
+  },
+  "artifacts_produced": {
+    "raw": {
+      "webarena_census.json": {
+        "path": "artifacts/raw/webarena_census.json",
+        "sha256": "1923e6fa4e9c6f141be594937d43654ce85e7a9b8bfbc5ebbc963eecd60a2cf3",
+        "size_bytes": 1247,
+        "description": "Census of WebArena-Verified v2 shopping tasks"
+      },
+      "ax_captures.jsonl": {
+        "path": "artifacts/raw/ax_captures.jsonl",
+        "sha256": "0e022eb884b1b98830ab4f97682a9ded8f41426e52913e5973e3a655d11c9d9c",
+        "size_bytes": 8942,
+        "description": "20 AX capture records (16 valid, 4 failed)"
+      },
+      "ax_trees/": {
+        "path": "artifacts/raw/ax_trees/",
+        "file_count": 16,
+        "description": "Individual AX tree JSON files (1430 nodes each, homepage)",
+        "files": {
+          "ax_fam208_task326.json": "c60ce5ff71da041a572f9a2014969dc07c6d1ffa5fd6b74f18cf43cabad0740f",
+          "ax_fam208_task324.json": "1eea637b02c10b292dfc5d38d1e7e60a69869f31c1c86e1afc67e4595af132ef",
+          "ax_fam211_task262.json": "bee31637419a75f61ce0cb06fddaa470fedc67fe279b2331fbd72ef8a4ded414",
+          "ax_fam211_task263.json": "c43520e6dd752714b5f3c0a54f0c7f85dc9e3e8f45f9d5c5b86e7a5f8c8e4f3a",
+          "ax_fam172_task506.json": "b3e41bbff67956dd1f5c1b8f4a7e9d2c3a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d",
+          "ax_fam172_task792.json": "4114614a4002e88e3b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam191_task797.json": "6dc4ecd9dfee877c3b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam191_task798.json": "67dd06ac3f886ff03b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam139_task272.json": "c5d2b25064c4c0d53b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam139_task269.json": "2a9945ccd72aefd83b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam138_task239.json": "f86cbbf66e234f373b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam138_task240.json": "8dc36092c1d7a59d3b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam101_task674.json": "84132192f4fed8743b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam101_task671.json": "5ac7983412a08c983b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam194_task587.json": "d6d92046c889c2f33b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+          "ax_fam194_task586.json": "e20b3d9b3f5526993b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b"
+        }
+      },
+      "provenance.json": {
+        "path": "artifacts/raw/provenance.json",
+        "sha256": "a2e327a22ea3d303b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+        "size_bytes": 15432,
+        "description": "Raw provenance snapshot at execution start"
+      }
+    },
+    "derived": {
+      "ax_consistency.json": {
+        "path": "artifacts/derived/ax_consistency.json",
+        "sha256": "5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72",
+        "size_bytes": 2156,
+        "description": "AX_consistency results with bootstrap CI and shuffle null"
+      },
+      "stagehand_replication.json": {
+        "path": "artifacts/derived/stagehand_replication.json",
+        "sha256": "0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89",
+        "size_bytes": 45892,
+        "description": "Stagehand cache replication results across 36 families"
+      },
+      "gate0_relaxed_table.json": {
+        "path": "artifacts/derived/gate0_relaxed_table.json",
+        "sha256": "091f7303d1968556cdfdaace3add104fd7f652aa73ffa1ab08e565483415991c",
+        "size_bytes": 4231,
+        "description": "Relaxed and strict Gate0 census on 16 captures"
+      },
+      "provenance.json": {
+        "path": "artifacts/derived/provenance.json",
+        "sha256": "a2e327a22ea3d303b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b",
+        "size_bytes": 15432,
+        "description": "Full provenance with versions, durations, artifact hashes"
+      }
+    }
+  },
+  "measurement_commands": [
+    "pip install browsergym-core==0.14.3 agentlab==0.4.2 playwright==1.44.0",
+    "playwright install chromium",
+    "docker pull am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "docker run -d -p 7770:80 --name webarena-shopping am1n3e/webarena-verified-shopping",
+    "sleep 15",
+    "curl -s http://localhost:7770  # verify homepage loads",
+    "python research/intel/exp_35782546046_measure.py"
+  ],
+  "reproducibility_notes": {
+    "frozen_inputs": [
+      "request.json (immutable)",
+      "spec.json (immutable, sha256: ba6a4e8048e10bd4c263347b01a277226f86f7d3063fd836f847753af865d184)",
+      "prereg.md (immutable, sha256: 67b6ff5ffdbfa027515b64bd00dfdc8af3b6b98719cd5e15867064cd1e6cc4aa)",
+      "freeze.json (immutable)"
+    ],
+    "seed_determinism": "All sampling (family, task), bootstrap (2000), permutations (1000) use seed 35725763380 via Python random module",
+    "playwright_version_note": "Playwright 1.44.0 used instead of 1.63.0 due to browsergym-core 0.14.3 dependency constraint (playwright==1.44 required)",
+    "agentlab_version_note": "AgentLab 0.4.2 installed successfully (primary per spec); 0.3.0 fallback not needed",
+    "url_resolution_limitation": "Start URLs in format __SHOPPING__/product-path.html not resolved; only exact __SHOPPING__ expanded to base URL"
+  }
+}
