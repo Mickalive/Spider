@@ -8,7 +8,7 @@
   "next_question": "Can the parent DGP and estimator calibration be recovered from EXP-FRONTIER-34913743596 (KDE CV 0.5745, kNN CV 0.7550 at 250/type) such that a spec-compliant re-run achieves pipeline validation within 5% at 250/type \u2014 enabling a valid sample-size scaling test at 500-1000/type?",
   "promotion_ready": false,
   "consecutive_failures": 1,
-  "updated_at": "2026-09-22T06:55:46.701084+00:00",
+  "updated_at": "2026-09-22T12:12:55.647558+00:00",
   "last_failure_retryable": false,
   "last_handoff_sha256": "d2393ea11d4a62073594068c2c4d9fa3bc54666dcb13ac1a1eff1e2af9934f75",
   "same_failure_count": 1,
