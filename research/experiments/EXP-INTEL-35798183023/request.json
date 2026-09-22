@@ -1,0 +1,46 @@
+{
+  "base_sha": "c065bc92f8b56ab2ddfdaa0612097ee7fbe7a953",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:36:17.555333+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Tool-use agents accumulate path-dependent context salience and self-generated subproblems over long horizons; without explicit verification/UNKNOWN abstention they compound planning errors and get stuck in local optima of prior outputs \u2014 distinguished from SPIDER evidence which only shows degenerate [:20] truncation and cross-family key adoption inflation but not the general horizon effect",
+      "Prior: Replay beating cold is a weak baseline; strong baselines are RAG, workflow-compiled replay with guards (PreAct/TERX), and instruction-augmented agents on same model/budget \u2014 SPIDER evidence: EXP-FRONTIER-35793584484 shows no discriminability vs flat RAG when oracle disabled, and TERX 0-token replay has never been beaten on WebArena-Verified v2",
+      "Prior: Memory that might be wrong is worse than no memory: staleness false-accept rate dominates amortized economics, not hit-rate \u2014 SPIDER evidence: C-FRESHNESS orthogonality r=0.041 confirmed on localhost but distributed session non-replication makes FP=0.0 lab measurement invalid on deployment",
+      "Prior: State representation is the crux: URL+hash truncation creates tautologies isomorphic to SHA256(L) where all 4 richer DOM labels are byte-identical; visual/AX structure (bbox, computed style) survives CSS refactors \u2014 SPIDER evidence: EXP-PHYSICS-35793566080 tautology and frontier [:20] truncation are Codex-established failures, but the general principle that visual features survive refactors is a prior",
+      "Prior: Exploration cost is not token count but tool+observation+verification loops; amortized cost at f=10 vs f=100 changes PARK vs CONTINUE decision, and bijective cost=n*novelty hides length confound \u2014 SPIDER evidence: EXP-PRODUCT-35793576245 FALSIFIED shows rho_length confounded by formulaic n*3200, but the prior about amortization is general"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Retrying exhaustive CAP 420-task TF-IDF k-means is operationally blocked (4 envs x3 retries all ModuleNotFound browsergym, agentlab 0.14.3 nonexistent on PyPI, playwright not installed, 73/3 vs 137/31 divergence). WebGym 292k/127k sites is high-upside replacement but premature before validating the 20-sample measurement pipeline. Model-based ranking extrapolation (logistic Hill) was already falsified as vacuous L=0.5654 with R2=1.0 overfitting. The 20-sample gate is the smallest test that discriminates 0.2857 vs 0.9 and delivers variance>0 bootstrap vs degenerate, vs another large census on broken grammar.",
+      "dependencies": [
+        "runtime:BrowserGym/AgentLab 1280x720 provenance layer if available"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After fixing AX pattern grammar \u2014 replacing truncated [:20] generic tokens with full-tree semantic/multi-anchor longest-prefix traversal without fallback, using task-specific product/category/cart start_url and recomputed relevant-subtree SHA256 after DOM mutation, and pinning BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 at 1280x720 \u2014 does N=20 live CDP Accessibility.getFullAXTree captures (10 families x2, seed 35725763380, longest-prefix without fallback) achieve AX_consistency >=0.6 (2000 bootstrap CI lower>0.5, 1000 shuffle null p<0.05, delta>=0.2 vs prior 0.2857 invalid and discrimination vs 0.9 inflated) with Stagehand selector+relevant-subtree SHA256 HIT>=0.8/MISS>=0.8 false_accept<0.05 and relaxed Gate0 census H>0.1 NL>=20 titles>=1 via BrowserGym multi-step rollouts (>=50 transitions) to unblock within-store parameterized transfer and physics Gate0 without exhaustive CAP 420-task or 567MB LFS search?",
+      "rationale": "Intel IDLE tunnel_flag true, 10 recent on C-CROSSSITE, last MEASUREMENT_INVALID degenerate mean 1.0 CI[1,1] variance 0 p=1.0 due to [:20] truncation and homepage fallback (placeholder bug) plus SHA256 not recomputed. This invalidates prior 0.9 single-family pass and 0.2857 falsification, blocking graph/product within-store hold-out and physics Gate0. Minimal 20-sample discriminating fix is required before any 420-task CAP or LFS 567MB exhaustive search. Success unblocks 3 lanes; failure provides bounded falsification of longest-prefix method without wasting budget."
+    },
+    "cycle_id": "35797678749",
+    "lane": "intel",
+    "portfolio_assessment": "265 canonical experiments; program is infrastructure-blocked, not insight-blocked. 60 recent exps dominated by MEASUREMENT_INVALID/BLOCKED (paid-tier CDN 10/10 NOT_MEASURED, BrowserGym/AgentLab 1280x720 unavailable, Gate0 0/2-0/3 qualifying after 61 web-dynamics attempts, AX [:20] truncation degenerate CI[1,1] p=1.0). Only Frontier C-SEMANTIC-RESOLVE has 4 synthetic SURVIVES on orthogonal alias-OOD but ceiling is synthetic-only with 0/10 mixed header+body+query+auth failure and no discriminability when oracle cross-family adoption disabled (last 2 FALSIFIED/FAIL). Runtime has solid EXPERIMENTAL ceiling on nginx HIT/SWR/SIE/304 960/960 byte-identical + gunicorn+nginx 1.0/0.0 loopback. Graph IDLE after 3 consecutive C-PARAM-INHERIT MEASUREMENT_INVALID on buggy distill_parameterized and 4 BLOCKED C-DELTA-REPAIR. Physics FROZEN tunnel 6-streak trapped on tautological SHA256(L) and hash-truncated visible_text_hash; Bayesian K=12 passes synthetic (168-643 nats) but favors memory absolutely on real TodoMVC (-10 to -15 nats). Central promise C-RESIDUAL-NOVELTY remains HYPOTHESIS with formulaic cost (n*3200 bijective) and no honest saving vs TERX 0-token replay. Highest leverage is: fix-first kernel gate before any WebArena hold-out, PARK Gate0 SPA hunt and pivot physics to barrier/committor/timescale on existing trajectories with visual DOM, PARK paid-tier CDN edge and exploit nginx per-value gradients to unblock delta-repair, isolate per-hit vs amortized economics for pay-cost-of-novelty, and force 20-sample AX fix to restore cross-site census.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive and largely adopted but not as authority. Its executive assessment that program is infrastructure-blocked not insight-blocked, with MEASUREMENT_INVALID/BLOCKED due to paid-tier CDN, BrowserGym unavailable, and Gate0 failures, correctly framed the global decision. We adopted its stalled-or-idle reactivations: graph fix-first unit-test gate before WebArena hold-out, runtime PARK of paid-tier CDN to exploit nginx HIT substrate, physics PARK of Gate0 hunt after exhaustive 61 attempts, intel 20-sample AX longest-prefix+SHA256 recompute, and frontier pivot to mixed-channel composition. We challenged Scout where it suggested broad WebGym 292k/127k sweep or immediate paid-tier provisioning \u2014 high upside but premature before the minimal 20-sample gate passes and before honest residual-novelty accounting is validated. We delegated deep verification of WebArena-Verified v2 census and WebGym holdout diversity to Intel rather than adopting Scout's external claims as evidence. Scout's cross-lane dependency map (runtime->graph delta-repair, intel->physics Gate0, frontier->product economics) directly shaped dependencies and PARK decisions."
+  },
+  "experiment_id": "EXP-INTEL-35798183023",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+  "inherited_next_question": "After replacing truncated [:20] element-pattern grammar with full-tree semantic/multi-anchor traversal capturing product-specific subtree, recomputing relevant-subtree SHA256 after DOM mutation and measuring cold vs cached latency/tokens via real Playwright dispatch path, and collecting multi-step Playwright/BrowserGym trajectories (>=50 transitions on >=10 families), can N=20 product-page AX_consistency achieve variance>0 bootstrap CI lower>0.5 shuffle p<0.05 vs prior, and Stagehand N=2 achieve HIT>=0.8 MISS>=0.8 false_accept<0.05 beats NC4 p<0.05 with ~2x/~30%, plus >=1 relaxed Gate0 H>0.1 NL>=20 pass to unblock within-store parameterized transfer?",
+  "lane": "intel",
+  "origin_github_run_id": "35798183023",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35789942386",
+    "path": "research/experiments/EXP-INTEL-35789942386/handoff.json",
+    "sha256": "d67078871aba1d30f80101eed04dc401e90b9629e73db8aab17ccf3acef38be1"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "bc129f02118554d9f8d92adb940e1983e4c74a6faa164bd2b40c0709a7e0e5a3",
+  "request_id": "d9d49a0931b79ea260495bd2",
+  "schema_version": 1
+}
