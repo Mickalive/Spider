@@ -1,0 +1,2336 @@
+[
+  {
+    "task_id": "alias-0-0",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_0",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val0",
+      "method": "GET",
+      "query_params": {
+        "user": "val0"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val0"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val0"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-0-train",
+        "intent": "fetch_user_0",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-0-dist",
+        "intent": "fetch_user_0",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-0-low",
+        "intent": "fetch_user_0",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-1",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_1",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val1",
+      "method": "GET",
+      "query_params": {
+        "user": "val1"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val1"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val1"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-1-train",
+        "intent": "fetch_user_1",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-1-dist",
+        "intent": "fetch_user_1",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-1-low",
+        "intent": "fetch_user_1",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-2",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_2",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val2",
+      "method": "GET",
+      "query_params": {
+        "user": "val2"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val2"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val2"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-2-train",
+        "intent": "fetch_user_2",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-2-dist",
+        "intent": "fetch_user_2",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-2-low",
+        "intent": "fetch_user_2",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-3",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_3",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val3",
+      "method": "GET",
+      "query_params": {
+        "user": "val3"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val3"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val3"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-3-train",
+        "intent": "fetch_user_3",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-3-dist",
+        "intent": "fetch_user_3",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-3-low",
+        "intent": "fetch_user_3",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-4",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_4",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val4",
+      "method": "GET",
+      "query_params": {
+        "user": "val4"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val4"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val4"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-4-train",
+        "intent": "fetch_user_4",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-4-dist",
+        "intent": "fetch_user_4",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-4-low",
+        "intent": "fetch_user_4",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-5",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_5",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val5",
+      "method": "GET",
+      "query_params": {
+        "user": "val5"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val5"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val5"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-5-train",
+        "intent": "fetch_user_5",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-5-dist",
+        "intent": "fetch_user_5",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-5-low",
+        "intent": "fetch_user_5",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-6",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_6",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val6",
+      "method": "GET",
+      "query_params": {
+        "user": "val6"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val6"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val6"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-6-train",
+        "intent": "fetch_user_6",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-6-dist",
+        "intent": "fetch_user_6",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-6-low",
+        "intent": "fetch_user_6",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-7",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_7",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val7",
+      "method": "GET",
+      "query_params": {
+        "user": "val7"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val7"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val7"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-7-train",
+        "intent": "fetch_user_7",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-7-dist",
+        "intent": "fetch_user_7",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-7-low",
+        "intent": "fetch_user_7",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-8",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_8",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val8",
+      "method": "GET",
+      "query_params": {
+        "user": "val8"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val8"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val8"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-8-train",
+        "intent": "fetch_user_8",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-8-dist",
+        "intent": "fetch_user_8",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-8-low",
+        "intent": "fetch_user_8",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-0-9",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_9",
+    "context": {
+      "alias_family": "query-param",
+      "target_style": "query",
+      "resource": "users",
+      "query_key": "user",
+      "slot": "id",
+      "url": "/users?user=val9",
+      "method": "GET",
+      "query_params": {
+        "user": "val9"
+      },
+      "path_style": "query"
+    },
+    "params": {
+      "id": "val9"
+    },
+    "expected_template": "/users?user=${id}",
+    "expected_bound": {
+      "url": "/users?user=val9"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-0-9-train",
+        "intent": "fetch_user_9",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-9-dist",
+        "intent": "fetch_user_9",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-0-9-low",
+        "intent": "fetch_user_9",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-0",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_0",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val0",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val0"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val0"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-0-train",
+        "intent": "fetch_user_rw_0",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-0-dist",
+        "intent": "fetch_user_rw_0",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-0-low",
+        "intent": "fetch_user_rw_0",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-1",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_1",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val1",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val1"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val1"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-1-train",
+        "intent": "fetch_user_rw_1",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-1-dist",
+        "intent": "fetch_user_rw_1",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-1-low",
+        "intent": "fetch_user_rw_1",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-2",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_2",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val2",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val2"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val2"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-2-train",
+        "intent": "fetch_user_rw_2",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-2-dist",
+        "intent": "fetch_user_rw_2",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-2-low",
+        "intent": "fetch_user_rw_2",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-3",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_3",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val3",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val3"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val3"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-3-train",
+        "intent": "fetch_user_rw_3",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-3-dist",
+        "intent": "fetch_user_rw_3",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-3-low",
+        "intent": "fetch_user_rw_3",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-4",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_4",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val4",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val4"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val4"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-4-train",
+        "intent": "fetch_user_rw_4",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-4-dist",
+        "intent": "fetch_user_rw_4",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-4-low",
+        "intent": "fetch_user_rw_4",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-5",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_5",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val5",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val5"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val5"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-5-train",
+        "intent": "fetch_user_rw_5",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-5-dist",
+        "intent": "fetch_user_rw_5",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-5-low",
+        "intent": "fetch_user_rw_5",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-6",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_6",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val6",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val6"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val6"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-6-train",
+        "intent": "fetch_user_rw_6",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-6-dist",
+        "intent": "fetch_user_rw_6",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-6-low",
+        "intent": "fetch_user_rw_6",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-7",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_7",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val7",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val7"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val7"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-7-train",
+        "intent": "fetch_user_rw_7",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-7-dist",
+        "intent": "fetch_user_rw_7",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-7-low",
+        "intent": "fetch_user_rw_7",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-8",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_8",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val8",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val8"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val8"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-8-train",
+        "intent": "fetch_user_rw_8",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-8-dist",
+        "intent": "fetch_user_rw_8",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-8-low",
+        "intent": "fetch_user_rw_8",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-1-9",
+    "stratum": "alias-OOD",
+    "intent": "fetch_user_rw_9",
+    "context": {
+      "alias_family": "path-rewriting",
+      "target_prefix": "/api/v2",
+      "resource": "users",
+      "slot": "id",
+      "url": "/api/v2/users/val9",
+      "method": "GET",
+      "path_style": "api_v2",
+      "routing_prefix": "/api/v2"
+    },
+    "params": {
+      "id": "val9"
+    },
+    "expected_template": "/api/v2/users/${id}",
+    "expected_bound": {
+      "url": "/api/v2/users/val9"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-1-9-train",
+        "intent": "fetch_user_rw_9",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-9-dist",
+        "intent": "fetch_user_rw_9",
+        "template": {
+          "url": "/accounts/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-1-9-low",
+        "intent": "fetch_user_rw_9",
+        "template": {
+          "url": "/items/${id}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-0",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_0",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val0",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val0"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val0"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-0-train",
+        "intent": "fetch_post_0",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-0-dist",
+        "intent": "fetch_post_0",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-0-low",
+        "intent": "fetch_post_0",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-1",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_1",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val1",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val1"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val1"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-1-train",
+        "intent": "fetch_post_1",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-1-dist",
+        "intent": "fetch_post_1",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-1-low",
+        "intent": "fetch_post_1",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-2",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_2",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val2",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val2"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val2"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-2-train",
+        "intent": "fetch_post_2",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-2-dist",
+        "intent": "fetch_post_2",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-2-low",
+        "intent": "fetch_post_2",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-3",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_3",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val3",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val3"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val3"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-3-train",
+        "intent": "fetch_post_3",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-3-dist",
+        "intent": "fetch_post_3",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-3-low",
+        "intent": "fetch_post_3",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-4",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_4",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val4",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val4"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val4"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-4-train",
+        "intent": "fetch_post_4",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-4-dist",
+        "intent": "fetch_post_4",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-4-low",
+        "intent": "fetch_post_4",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-5",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_5",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val5",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val5"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val5"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-5-train",
+        "intent": "fetch_post_5",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-5-dist",
+        "intent": "fetch_post_5",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-5-low",
+        "intent": "fetch_post_5",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-6",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_6",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val6",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val6"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val6"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-6-train",
+        "intent": "fetch_post_6",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-6-dist",
+        "intent": "fetch_post_6",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-6-low",
+        "intent": "fetch_post_6",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-7",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_7",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val7",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val7"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val7"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-7-train",
+        "intent": "fetch_post_7",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-7-dist",
+        "intent": "fetch_post_7",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-7-low",
+        "intent": "fetch_post_7",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-8",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_8",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val8",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val8"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val8"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-8-train",
+        "intent": "fetch_post_8",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-8-dist",
+        "intent": "fetch_post_8",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-8-low",
+        "intent": "fetch_post_8",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "alias-2-9",
+    "stratum": "alias-OOD",
+    "intent": "fetch_post_9",
+    "context": {
+      "alias_family": "server-routing",
+      "target_prefix": "/p",
+      "resource": "posts",
+      "slot": "postId",
+      "url": "/p/val9",
+      "method": "GET",
+      "path_style": "short",
+      "routing_prefix": "/p"
+    },
+    "params": {
+      "postId": "val9"
+    },
+    "expected_template": "/p/${postId}",
+    "expected_bound": {
+      "url": "/p/val9"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-alias-2-9-train",
+        "intent": "fetch_post_9",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-9-dist",
+        "intent": "fetch_post_9",
+        "template": {
+          "url": "/api/posts/${postId}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-alias-2-9-low",
+        "intent": "fetch_post_9",
+        "template": {
+          "url": "/items/${postId}"
+        },
+        "confidence": 0.8
+      }
+    ]
+  },
+  {
+    "task_id": "exact-0",
+    "stratum": "exact-match",
+    "intent": "exact_intent_0",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_0",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_0"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_0"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-0",
+        "intent": "exact_intent_0",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-1",
+    "stratum": "exact-match",
+    "intent": "exact_intent_1",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_1",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_1"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_1"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-1",
+        "intent": "exact_intent_1",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-2",
+    "stratum": "exact-match",
+    "intent": "exact_intent_2",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_2",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_2"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_2"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-2",
+        "intent": "exact_intent_2",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-3",
+    "stratum": "exact-match",
+    "intent": "exact_intent_3",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_3",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_3"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_3"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-3",
+        "intent": "exact_intent_3",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-4",
+    "stratum": "exact-match",
+    "intent": "exact_intent_4",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_4",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_4"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_4"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-4",
+        "intent": "exact_intent_4",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-5",
+    "stratum": "exact-match",
+    "intent": "exact_intent_5",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_5",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_5"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_5"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-5",
+        "intent": "exact_intent_5",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-6",
+    "stratum": "exact-match",
+    "intent": "exact_intent_6",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_6",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_6"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_6"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-6",
+        "intent": "exact_intent_6",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-7",
+    "stratum": "exact-match",
+    "intent": "exact_intent_7",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_7",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_7"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_7"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-7",
+        "intent": "exact_intent_7",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-8",
+    "stratum": "exact-match",
+    "intent": "exact_intent_8",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_8",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_8"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_8"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-8",
+        "intent": "exact_intent_8",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-9",
+    "stratum": "exact-match",
+    "intent": "exact_intent_9",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_9",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_9"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_9"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-9",
+        "intent": "exact_intent_9",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-10",
+    "stratum": "exact-match",
+    "intent": "exact_intent_10",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_10",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_10"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_10"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-10",
+        "intent": "exact_intent_10",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "exact-11",
+    "stratum": "exact-match",
+    "intent": "exact_intent_11",
+    "context": {
+      "alias_family": "exact",
+      "resource": "items",
+      "slot": "itemId",
+      "url": "/items/val_exact_11",
+      "method": "GET"
+    },
+    "params": {
+      "itemId": "val_exact_11"
+    },
+    "expected_template": "/items/${itemId}",
+    "expected_bound": {
+      "url": "/items/val_exact_11"
+    },
+    "registry": [
+      {
+        "mechanism_id": "m-exact-11",
+        "intent": "exact_intent_11",
+        "template": {
+          "url": "/items/${itemId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-0",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_0_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_0",
+      "postId": "val_unknown_0"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-0-other1",
+        "intent": "other_intent_0_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-0-other2",
+        "intent": "other_intent_0_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-1",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_1_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_1",
+      "postId": "val_unknown_1"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-1-other1",
+        "intent": "other_intent_1_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-1-other2",
+        "intent": "other_intent_1_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-2",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_2_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_2",
+      "postId": "val_unknown_2"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-2-other1",
+        "intent": "other_intent_2_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-2-other2",
+        "intent": "other_intent_2_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-3",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_3_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_3",
+      "postId": "val_unknown_3"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-3-other1",
+        "intent": "other_intent_3_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-3-other2",
+        "intent": "other_intent_3_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-4",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_4_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_4",
+      "postId": "val_unknown_4"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-4-other1",
+        "intent": "other_intent_4_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-4-other2",
+        "intent": "other_intent_4_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-5",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_5_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_5",
+      "postId": "val_unknown_5"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-5-other1",
+        "intent": "other_intent_5_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-5-other2",
+        "intent": "other_intent_5_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-6",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_6_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_6",
+      "postId": "val_unknown_6"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-6-other1",
+        "intent": "other_intent_6_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-6-other2",
+        "intent": "other_intent_6_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-7",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_7_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_7",
+      "postId": "val_unknown_7"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-7-other1",
+        "intent": "other_intent_7_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-7-other2",
+        "intent": "other_intent_7_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-8",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_8_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_8",
+      "postId": "val_unknown_8"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-8-other1",
+        "intent": "other_intent_8_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-8-other2",
+        "intent": "other_intent_8_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-9",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_9_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_9",
+      "postId": "val_unknown_9"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-9-other1",
+        "intent": "other_intent_9_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-9-other2",
+        "intent": "other_intent_9_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-10",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_10_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_10",
+      "postId": "val_unknown_10"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-10-other1",
+        "intent": "other_intent_10_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-10-other2",
+        "intent": "other_intent_10_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "noapp-11",
+    "stratum": "no-applicable",
+    "intent": "unknown_intent_11_xyz",
+    "context": {
+      "alias_family": "none",
+      "url": "/unknown",
+      "method": "GET",
+      "slot": "id"
+    },
+    "params": {
+      "id": "val_unknown_11",
+      "postId": "val_unknown_11"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": [
+      {
+        "mechanism_id": "m-noapp-11-other1",
+        "intent": "other_intent_11_a",
+        "template": {
+          "url": "/users/${id}"
+        },
+        "confidence": 0.9
+      },
+      {
+        "mechanism_id": "m-noapp-11-other2",
+        "intent": "other_intent_11_b",
+        "template": {
+          "url": "/posts/${postId}"
+        },
+        "confidence": 0.9
+      }
+    ]
+  },
+  {
+    "task_id": "empty-0",
+    "stratum": "empty-registry",
+    "intent": "any_intent_0",
+    "context": {
+      "alias_family": "none",
+      "url": "/empty",
+      "method": "GET"
+    },
+    "params": {
+      "id": "val"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": []
+  },
+  {
+    "task_id": "empty-1",
+    "stratum": "empty-registry",
+    "intent": "any_intent_1",
+    "context": {
+      "alias_family": "none",
+      "url": "/empty",
+      "method": "GET"
+    },
+    "params": {
+      "id": "val"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": []
+  },
+  {
+    "task_id": "empty-2",
+    "stratum": "empty-registry",
+    "intent": "any_intent_2",
+    "context": {
+      "alias_family": "none",
+      "url": "/empty",
+      "method": "GET"
+    },
+    "params": {
+      "id": "val"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": []
+  },
+  {
+    "task_id": "empty-3",
+    "stratum": "empty-registry",
+    "intent": "any_intent_3",
+    "context": {
+      "alias_family": "none",
+      "url": "/empty",
+      "method": "GET"
+    },
+    "params": {
+      "id": "val"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": []
+  },
+  {
+    "task_id": "empty-4",
+    "stratum": "empty-registry",
+    "intent": "any_intent_4",
+    "context": {
+      "alias_family": "none",
+      "url": "/empty",
+      "method": "GET"
+    },
+    "params": {
+      "id": "val"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": []
+  },
+  {
+    "task_id": "empty-5",
+    "stratum": "empty-registry",
+    "intent": "any_intent_5",
+    "context": {
+      "alias_family": "none",
+      "url": "/empty",
+      "method": "GET"
+    },
+    "params": {
+      "id": "val"
+    },
+    "expected_template": null,
+    "expected_bound": null,
+    "registry": []
+  }
+]
