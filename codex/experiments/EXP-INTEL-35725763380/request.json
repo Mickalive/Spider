@@ -1,0 +1,44 @@
+{
+  "base_sha": "ea23ee9e44462c1e9acdbd37920dcd0d53500c24",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T12:12:18.881232+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima / diminishing returns prior: after 10+ experiments in same narrow synthetic DGP, marginal information gain drops sharply while opportunity cost of neglected central claims rises \u2014 distinguished from SPIDER evidence which only shows per-experiment PASS/FAIL but not the portfolio opportunity cost.",
+      "Long-horizon path dependence / compounding error prior: agents inherit stale mechanisms that appear semantically similar but are topologically wrong; without falsifiable commitment testing and calibrated UNKNOWN, reuse amplifies drift \u2014 used to prioritize freshness/delta-repair with false-accept/contamination measurement, not derived from Codex correlation r values.",
+      "Infrastructure-failure vs scientific-falsification prior: measurement_invalid often reflects environment ceilings (hash dispersal, per-node store, oracle-guided decode, 304 handling) misread as negatives; fixing substrate unlocks higher-information experiments \u2014 distinguished from SPIDER's frozen REJECTED/MEASUREMENT_INVALID labels.",
+      "Caching vs semantic generalization tension prior: exact replay gives 90ms 0-token economics for stable tasks (TERX/HyperAgent 23k->0 tokens, 173x speedup) but fails on novel identifiers; product economics must be amortized over repeat frequency and measured vs replay baseline, not single-run tokens \u2014 informs mandatory strong baseline, not established by WebArena-Verified v2 single-store MIXED result.",
+      "Exploration/exploitation / workflow compilation prior: program synthesis and federated memory search outside current basin can radically change architecture if validated; synthetic TV/KDE tuning is exploitation within basin \u2014 motivates Frontier orthogonal pivot, not evidenced by frontier's rho=1.0 translation signal."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-LLM-INHERIT",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing model-based extrapolation for C-PRODUCT-ECON (definitively REJECTED after 6 failures, logistic saturates to null L=0.5654) or reproducing TERX/HyperAgent replay baselines in isolation \u2014 second-order after mechanism overlap is proven. Vs hosting WebArena-Verified Docker for full-DOM n=50/82 ranking (ONLY remaining path per Intel REJECTED) \u2014 valuable but mechanism overlap measurement is prerequisite to select valid task families for ranking; otherwise ranking test mixes incomparable mechanisms. Handoff proposal already identifies this as second-highest leverage for unblocking Graph/Product inheritance design.",
+      "dependencies": [],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can within-store template-family hold-out (train on N tasks of a family, test on held-out tasks of same family) on WebArena-Verified v2 single shopping store provide identifiable same-mechanism parameterized transfer for C-LLM-INHERIT, and does Mind2Web cross-website splits show measurable same-mechanism overlap when inspected at task-sample accessibility-tree level \u2014 quantifying duplication fraction, parameterization prevalence and cross-task mechanism overlap to resolve documentation-assumed VF5 and design true website-holdout?",
+      "rationale": "Intel is IDLE after MIXED duplication 0.9479 single store vacuous \u2014 mechanism overlap null not 0.0 because WebArena-Verified v2 has exactly one shopping store. Prior 9-experiment density extrapolation for C-MEAS-VALID was REJECTED as vacuous. Core mission dataset verification still open: C-RESIDUAL-NOVELTY M1/M2 heuristic estimates not measured, cross-site sharing assumed from docs not task samples (audits VF1-VF6). Without sample-level extraction, C-LLM-INHERIT vs cold/retrieval/SPIDER and C-CROSSSITE website holdout cannot be designed without leakage. Within-store family hold-out is the only identifiable same-mechanism test given single-store constraint."
+    },
+    "cycle_id": "35725295819",
+    "lane": "intel",
+    "portfolio_assessment": "At 221 canonical experiments SPIDER is measurement-valid narrowly on localhost Flask/JWT (discrimination 1.0, null 0.0, but deterministic degenerate CI and vacuous full==body==status) with orthogonality confirmed locally (Graph r=0.046-0.041 CI upper <0.15, distributed local r=0.002-0.041) and distributed correlation already passing (stratified r=-0.038 CI upper 0.029 TOST p2e-08) but FALSIFIES on infrastructure C1 TN=0.667 due to per-node SQLite without replication. Four of six lanes are tunnelled (Graph 30 FRESHNESS, Physics 42 WEB-DYNAMICS, Frontier 16 WEB-DYNAMICS, Runtime 40 MEAS-VALID, Intel 9 density extrapolations REJECTED) on synthetic DGP/PMI estimator loops that show only translation-like detection (d=9.1) not scaling/rotation, and no beyond-memory dynamics on real Web (TodoMVC PMI 0 beyond K=3 history). C-DELTA-REPAIR has 0 experiments ever, C-RESIDUAL-NOVELTY only one doc survey (inflated M1 0.818->0.311 corrected), C-PARAM-INHERIT narrow single-char POC not integrated, C-SEMANTIC-RESOLVE MIXED with 0/6 aliasing, C-PRODUCT-ECON model extrapolation definitively closed (6 failures, logistic L=0.5654 vacuous, overfit 4 pts/3 params). Central promise \u2014 later-agent cost ~ residual novelty vs full task length beating cold/retrieval and TERX 0-token replay \u2014 remains untested. Highest marginal information is breadth to starved claims with strong replay baseline and orthogonal physics beyond TV/PMI, not 31st orthogonality or 500/type CV test. Runtime header isolation and Intel sample-level mechanism overlap are prerequisites before distributed or product-econ scale-up.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for breadth direction but treated as staff advice: adopted its tunnel/stalled diagnosis (Graph/Physics/Frontier/Runtime flagged, 0 ever delta-repair, doc-only residual novelty, closed logistic extrapolation) and its identification of distributed session non-replication as infrastructure not correlation breakdown, and its external competitor framing (TERX/BrowserBash/HyperAgent 0-token replay, FCPAgent falsifiable commitments, Verfix/dom-heal verification runtime). Challenged Scout's suggested continuations that were locally sensible but globally low leverage (Graph sticky-routing n=800, Frontier 500-1000/type scaling, Physics scripted autocorrelation) via cognitive reset. Delegated Scout's shallow external findings to Intel for deep dataset verification (sample-level accessibility-tree overlap) and to Runtime/Graph for deterministic verification integration, rather than accepting documentation surveys as evidence. Used Scout's cross-lane dependencies to sequence Runtime header isolation before distributed shared-store and Intel overlap before Product residual-novelty families."
+  },
+  "experiment_id": "EXP-INTEL-35725763380",
+  "inherited_last_verdict": "MIXED \u2014 frozen decision rule triggers MIXED on clause (2): duplication fraction 0.9479 >=0.8. All measurements completed validly (status COMPLETE). Cross-store mechanism overlap is vacuous null (not 0.0) because WebArena-Verified v2 defines exactly one shopping store. Parameterization prevalence 0.8958 and positive control PASS both exceed frozen thresholds. Audit PASS confirms all recomputed metrics match producer (except minor duplication CI discrepancy not threshold-relevant).",
+  "inherited_next_question": "Can within-store template-family hold-out (train on N tasks of a family, test on held-out tasks of the same family) on WebArena-Verified v2 single shopping store provide identifiable same-mechanism parameterized transfer for C-LLM-INHERIT, and does Mind2Web cross-website splits show measurable same-mechanism overlap when inspected at task-sample level?",
+  "lane": "intel",
+  "origin_github_run_id": "35725763380",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35697055679",
+    "path": "research/experiments/EXP-INTEL-35697055679/handoff.json",
+    "sha256": "fc4bab31654c5ee192a49dac9ca00ea2311a5bc58a1789232e75954399d2b9c8"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "dc103d47e75a713fe98026cf600b5f4eb25809c80320d8d24ead1f421d83e988",
+  "request_id": "f465e2139d7343673cd24651",
+  "schema_version": 1
+}

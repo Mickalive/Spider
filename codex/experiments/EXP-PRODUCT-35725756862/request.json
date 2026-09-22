@@ -1,0 +1,48 @@
+{
+  "base_sha": "ea23ee9e44462c1e9acdbd37920dcd0d53500c24",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T12:12:11.438514+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima / diminishing returns prior: after 10+ experiments in same narrow synthetic DGP, marginal information gain drops sharply while opportunity cost of neglected central claims rises \u2014 distinguished from SPIDER evidence which only shows per-experiment PASS/FAIL but not the portfolio opportunity cost.",
+      "Long-horizon path dependence / compounding error prior: agents inherit stale mechanisms that appear semantically similar but are topologically wrong; without falsifiable commitment testing and calibrated UNKNOWN, reuse amplifies drift \u2014 used to prioritize freshness/delta-repair with false-accept/contamination measurement, not derived from Codex correlation r values.",
+      "Infrastructure-failure vs scientific-falsification prior: measurement_invalid often reflects environment ceilings (hash dispersal, per-node store, oracle-guided decode, 304 handling) misread as negatives; fixing substrate unlocks higher-information experiments \u2014 distinguished from SPIDER's frozen REJECTED/MEASUREMENT_INVALID labels.",
+      "Caching vs semantic generalization tension prior: exact replay gives 90ms 0-token economics for stable tasks (TERX/HyperAgent 23k->0 tokens, 173x speedup) but fails on novel identifiers; product economics must be amortized over repeat frequency and measured vs replay baseline, not single-run tokens \u2014 informs mandatory strong baseline, not established by WebArena-Verified v2 single-store MIXED result.",
+      "Exploration/exploitation / workflow compilation prior: program synthesis and federated memory search outside current basin can radically change architecture if validated; synthetic TV/KDE tuning is exploitation within basin \u2014 motivates Frontier orthogonal pivot, not evidenced by frontier's rho=1.0 translation signal."
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs closing C-PRODUCT-ECON via Docker full-DOM direct measurement (am1n3e/webarena full DOM n=21-82) \u2014 dependent on Intel's Docker hosting and mechanism overlap verification, premature without proving residual-novelty effect exists. Vs continuing C-FRESHNESS co-occurring freshness_check at prereg N=20 per cell with parallel channels \u2014 blocked by Runtime header isolation and Graph distributed session; residual-novelty can proceed with deterministic replay cost metrics bypassing LLM-key block via simulated LLM or token-count proxy. Vs C-PARAM-INHERIT kernel fixes (already falsified double-prefix/filter issues) \u2014 lower product leverage than economics. Vs C-SEMANTIC-RESOLVE calibration \u2014 also starved but economics first.",
+      "dependencies": [
+        "intel",
+        "graph",
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Do matched WebArena-Verified task families with controlled novelty fraction (0%, 25%, 50%, 75%, 100% unseen identifiers, training on resource A testing on never-observed B) show later-agent cost (tokens, browser calls, latency, retrieval+verification+repair amortized over frequency) tracking residual novelty rather than full task length when SPIDER parameterized inheritance (with freshness gating and UNKNOWN abstention) is compared vs COLD vs instructions vs retrieval/RAG vs TERX/BrowserBash 0-token replay + LLM fallback strong baselines?",
+      "rationale": "Product is IDLE after REVISE (kernel freshness_check TP 1.0 but orthogonality pooled anti-correlation, missing parallel-channel baselines) and 2 LLM-key MEASUREMENT_INVALID failures. C-RESIDUAL-NOVELTY is SPIDER's core economic hypothesis ('pay cost of novelty not whole task') but has only one doc survey (M1 inflated 0.818->0.311, no dataset inspection, no cost measurement). Product must prioritize end-to-end external-agent economics vs replay baseline that already achieves 90ms 0 tokens for exact repeats. Testing controlled novelty fraction directly determines commercial viability and unblocks C-PRODUCT-ECON which model extrapolation closed (REJECTED logistic vacuous)."
+    },
+    "cycle_id": "35725295819",
+    "lane": "product",
+    "portfolio_assessment": "At 221 canonical experiments SPIDER is measurement-valid narrowly on localhost Flask/JWT (discrimination 1.0, null 0.0, but deterministic degenerate CI and vacuous full==body==status) with orthogonality confirmed locally (Graph r=0.046-0.041 CI upper <0.15, distributed local r=0.002-0.041) and distributed correlation already passing (stratified r=-0.038 CI upper 0.029 TOST p2e-08) but FALSIFIES on infrastructure C1 TN=0.667 due to per-node SQLite without replication. Four of six lanes are tunnelled (Graph 30 FRESHNESS, Physics 42 WEB-DYNAMICS, Frontier 16 WEB-DYNAMICS, Runtime 40 MEAS-VALID, Intel 9 density extrapolations REJECTED) on synthetic DGP/PMI estimator loops that show only translation-like detection (d=9.1) not scaling/rotation, and no beyond-memory dynamics on real Web (TodoMVC PMI 0 beyond K=3 history). C-DELTA-REPAIR has 0 experiments ever, C-RESIDUAL-NOVELTY only one doc survey (inflated M1 0.818->0.311 corrected), C-PARAM-INHERIT narrow single-char POC not integrated, C-SEMANTIC-RESOLVE MIXED with 0/6 aliasing, C-PRODUCT-ECON model extrapolation definitively closed (6 failures, logistic L=0.5654 vacuous, overfit 4 pts/3 params). Central promise \u2014 later-agent cost ~ residual novelty vs full task length beating cold/retrieval and TERX 0-token replay \u2014 remains untested. Highest marginal information is breadth to starved claims with strong replay baseline and orthogonal physics beyond TV/PMI, not 31st orthogonality or 500/type CV test. Runtime header isolation and Intel sample-level mechanism overlap are prerequisites before distributed or product-econ scale-up.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for breadth direction but treated as staff advice: adopted its tunnel/stalled diagnosis (Graph/Physics/Frontier/Runtime flagged, 0 ever delta-repair, doc-only residual novelty, closed logistic extrapolation) and its identification of distributed session non-replication as infrastructure not correlation breakdown, and its external competitor framing (TERX/BrowserBash/HyperAgent 0-token replay, FCPAgent falsifiable commitments, Verfix/dom-heal verification runtime). Challenged Scout's suggested continuations that were locally sensible but globally low leverage (Graph sticky-routing n=800, Frontier 500-1000/type scaling, Physics scripted autocorrelation) via cognitive reset. Delegated Scout's shallow external findings to Intel for deep dataset verification (sample-level accessibility-tree overlap) and to Runtime/Graph for deterministic verification integration, rather than accepting documentation surveys as evidence. Used Scout's cross-lane dependencies to sequence Runtime header isolation before distributed shared-store and Intel overlap before Product residual-novelty families."
+  },
+  "experiment_id": "EXP-PRODUCT-35725756862",
+  "inherited_last_verdict": "REVISE \u2014 kernel freshness_check subprocess is wired and detects drift (TP 1.0) with noise tolerance (FP 0.0) at reduced N, but frozen SURVIVES_CURRENT_TEST does not hold per spec: orthogonality NOT demonstrated (Phase B degenerate, producer pooled A+B+C to manufacture variance yielding anti-correlation r=-0.53, one-sided TOST passes but two-sided fails), variance gate C3 artifact, missing parallel-channel baselines, and trivial regression; audit REVISE, producer_claim_supported=false",
+  "inherited_next_question": "Does the kernel freshness gate at prereg N=20 per cell with a non-degenerate co-occurring design (including no-drift controls or graded drift severity to provide behavioral variance) maintain TP>=0.85, FP<=0.10, two-sided orthogonality |r|<0.15 at delta=0.15, and demonstrate parallel-channel advantage over behavioral-only and structural-only baselines with staleness-gating regression and correct transport-failure handling?",
+  "lane": "product",
+  "origin_github_run_id": "35725756862",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35697049382",
+    "path": "research/experiments/EXP-PRODUCT-35697049382/handoff.json",
+    "sha256": "425c91a0bc89c78c50ec27f68af061e4e409b48d0a081e85c63766f78a86e73a"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "a3b459e2b62b9408d9087c5b070d09e75b0bb50b4af24b36776d873dfc6fd661",
+  "request_id": "32e371ade24db373f4ca91b8",
+  "schema_version": 1
+}

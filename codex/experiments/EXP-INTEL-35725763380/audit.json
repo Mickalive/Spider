@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35725763380",
+  "lane": "intel",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Re-extract WebArena AX trees for >=15 tasks stratified across >=10 families with 2 tasks per family where family size >=2 via CDP Accessibility.getFullAXTree at 1280x720 initial viewport to compute AX_consistency per spec measurement_validity #4 and prereg 5.4; current ax_consistency=null from REUSED 10 trees (1 per family, label REUSED) makes frozen clause 1 threshold (>=0.6) untestable and decision_rule was relaxed to PARTIAL without justification.",
+    "Reimplement Mind2Web mechanism per frozen spec.json/prereg 5.2: TF-IDF on (task + action target text) -> k-means k=min(50, unique_tasks/20) fitted on train only then applied to test, with frozen seed 35725763380 and no test leakage; fallback to (action_type, verb_lemma) bigram only if clustering unstable. Current code uses coarse keyword heuristic (action_type-target_role-verb_lemma with ~33 distinct train mechanisms) and never executes TF-IDF/k-means.",
+    "Use official Mind2Web splits train/test_task/test_website/test_domain from HuggingFace revision (or official data/*.json) instead of synthetic random website partition. Current extract_mind2web_mechanisms() ignores any HF test splits (dataset has only train with 1009 tasks in this environment) and fabricates train/test_website by random 60/40 website shuffle (shuffled_sites = sorted websites random shuffle) and random domain shuffle, so reported overlap 0.7407 is not the frozen test_website overlap.",
+    "Fix shuffle null B4/NC2 to permute website assignment across train+test_website and recompute overlap per spec/prereg 5.5(4) (1000 perms, seed 35725763380, mean/std and 95th percentile). Current compute_shuffle_null() shuffles mechanism labels and chooses random split_point = randint(1, n_train), yielding high null_mean 0.6942 that reflects coarse label distribution not website identity.",
+    "Resolve and pin Mind2Web dataset divergence: spec claims 137 websites/31 domains but HF osunlp/Mind2Web in this environment has 73 websites/3 domains (1009 tasks, single split train) per provenance.json and audit recomputation; record dataset revision hash, download date, and explain divergence (e.g., HF revision vs paper docs vs subset). Do not silently substitute synthetic partition for official splits.",
+    "Record Mind2Web dataset revision hash and bootstrap CIs for overlap/parameterization per spec; current provenance reports dataset_revision unknown and overlap CIs not computed. Document k sensitivity (k/2 and 2k) per prereg validity disclosure.",
+    "Re-evaluate decision_rule strictly: with ax_consistency=null clause 1 is FALSIFIED-IN-SETTING per frozen rule (requires >=0.6), not PARTIAL; infrastructure availability (docker_available true, playwright_installed false) does not convert missing measurement into PASS. Report clause 1 as not demonstrably viable until AX re-extracted."
+  ],
+  "validity_findings": [
+    {
+      "finding": "WebArena census integrity PASS: recomputed 192 shopping tasks, 49 distinct intent_templates, duplication 0.9479 (182/192), exact_copy 0.0781 (15/192), param_task 0.8958 (172/192), families_ge3 36/ge4 34/ge5 33, site_tuples shopping 187 + shopping+reddit 5, sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30 matches producer and parent EXP-INTEL-35697055679. Bootstrap CIs 2000 reps seed 35725763380 recomputed exactly: duplication [0.9167,0.9792], exact_copy [0.0417,0.1198], param_task [0.8490,0.9375].",
+      "severity": "info",
+      "evidence": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d6527566..., artifacts/derived/measurements.json webarena_census, research/intel/exp_35725763380_measure.py compute_webarena_census(), audit bash recomputation 192/49/0.9479/0.0781/0.8958"
+    },
+    {
+      "finding": "AX consistency NOT MEASURABLE: frozen requirement >=15 tasks, 2 per family, AX_consistency >=0.6. Producer reports ax_consistency=null, label REUSED, families_checked 10, tasks_verified 10, each 1 per family (tasks 25,514,519,434,468,506,794,673,532,654). Parent sampled 1 per family so within-family same intent_template -> same AX pattern cannot be compared. PC1_WEB_SEARCH PASS is via reused parent positive_control, not re-extracted. Docker was available (provenance docker_available true) but Playwright not installed, so live extraction was not attempted. Clause 1 was treated as PARTIAL/PASS despite frozen falsifier requiring AX >=0.6.",
+      "severity": "critical",
+      "evidence": "research/experiments/EXP-INTEL-35725763380/result.json validity_notes[0], observations[12], measurements.json ax_consistency.ax_consistency=null note REUSED, provenance.json playwright_installed false docker_available true, spec positive_control PC1_WEB_SEARCH, prereg 5.4"
+    },
+    {
+      "finding": "Mind2Web mechanism definition divergence: spec frozen TF-IDF->k-means (k=min(50, unique_tasks/20) fitted on train only) was not implemented. Code normalizes to coarse heuristic action_type-target_role-verb_lemma via regex on action_reprs first element, yielding only 33 distinct train / 27 distinct test_website mechanisms (high duplication 0.9911), which inflates both true overlap and null. No sensitivity test for k/2,2k.",
+      "severity": "critical",
+      "evidence": "research/intel/exp_35725763380_measure.py normalize_mind2web_operation/_derive_target_role/_derive_verb_lemma, extract_mind2web_mechanisms() lines 540-583, measurements.json mind2web.overlap distinct_mechanisms_train 33 test 27, spec measurement_validity #3"
+    },
+    {
+      "finding": "Mind2Web split construction divergence: HF osunlp/Mind2Web in environment contains only split train (1009 tasks, 73 websites, 3 domains) not the official train/test_task/test_website/test_domain splits described in spec. Producer fabricated splits by deterministic random shuffle of sorted websites (60% train sites seeded 35725763380) and domains, then computed overlap on synthetic partition. Reported mind2web_train_tasks 595 / test_website 414 / test_domain 748 are artifacts of this shuffle, not dataset splits. Spec divergence 73 vs 137 websites and 3 vs 31 domains is documented but not resolved with revision hash.",
+      "severity": "critical",
+      "evidence": "research/experiments/EXP-INTEL-35725763380/result.json mind2web_n_websites 73 mind2web_spec_divergence, provenance.json datasets osunlp/Mind2Web 73/3, measurements.json mind2web.status LOADED splits, exp_35725763380_measure.py extract_mind2web_mechanisms() shuffled_sites logic, audit bash datasets load_dataset train only 1009 73/3, spec baselines B2"
+    },
+    {
+      "finding": "Shuffle null mis-specified: spec requires permuting website labels across train+test_website and recomputing overlap (true must exceed shuffled mean by >=0.10 and 95th percentile). Producer compute_shuffle_null() concatenates train+test mechanisms, shuffles labels, picks random split_point uniform 1..n_train, then recomputes overlap, giving null_mean 0.6942 null_p95 0.8929 true 0.7407 excess 0.0466. High null reflects coarse mechanism reuse, not website assignment; excess <0.10 and true not exceeding p95 correctly triggers FAIL but for wrong reason. Null distribution not reflective of same-mechanism website sharing.",
+      "severity": "high",
+      "evidence": "research/intel/exp_35725763380_measure.py compute_shuffle_null() rng.randint split_point, measurements.json shuffle_null null_mean 0.694166 true 0.74074 excess 0.04657 p95 0.892857 exceeds_p95 false, result.json controls NC2_SHUFFLE_NULL pass false"
+    },
+    {
+      "finding": "Sampling and coverage limits disclosed but bound claim: below-fold/post-checkout not measured (initial viewport only), 10 vs 15 sampled AX trees, no scroll, no cart/checkout execution, Wikipedia null NOT EXERCISED, bootstrap CI degenerate note not needed. Producer correctly labels these in validity_notes/unresolved but still claims product consequence viable for within-store hold-out without AX verification.",
+      "severity": "moderate",
+      "evidence": "result.json validity_notes[5][6], report Validity Threats 1,5, measurements.json ax_consistency note below-fold exclusion, provenance environment playwright_installed false"
+    },
+    {
+      "finding": "Provenance instability: model_execute status retry attempt 5 exit 76 output-missing, Mind2Web dataset_revision unknown, raw AX trees listed as multiple sha256. Frozen inputs hashes match freeze.json; WebArena dataset pin correct (commit ef74e1bfd0d83d4bab1c55b2d1b4c2aeaac8e0d0 sha d6527566).",
+      "severity": "low",
+      "evidence": "research/experiments/EXP-INTEL-35725763380/provenance.json model_execute exit 76, datasets revision unknown, frozen_inputs hashes, execution_checkpoint"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B1_DOC_M1_12STORES",
+      "finding": "Strong falsification baseline correctly retained: WebArena-Verified v2 single store verified 192/49/1 store, M1=1.0 12-store claim remains REJECTED. No re-inflation. Producer correctly replaces M1 with within-store family-reuse comparable to parent (0.9479).",
+      "evidence": "spec baselines B1, result.json metrics webarena_shopping_tasks 192, provenance sha, handoff EXP-INTEL-35697055679 established"
+    },
+    {
+      "baseline_id": "B2_DOC_M2_HEURISTIC",
+      "finding": "Heuristic disclosure correct: WebArena param 0.8958 task /0.8367 template measured via instantiation_dict non-empty exceeds heuristic 0.80; duplication 0.9479 decomposed to exact_copy 0.0781 (91.8% parameterized variation) disclosing heuristic M2 inflation. Mind2Web param 0.6085 computed from action_reprs parsing (adaptation from spec's actions column) but gap to heuristic 0.65 not quantified due to coarse clustering.",
+      "evidence": "spec B2, result webarena_param_task_fraction 0.8958 mind2web_parameterization_prevalence 0.6085, measurements bootstrap"
+    },
+    {
+      "baseline_id": "B3_SPIDER_2SITE",
+      "finding": "Lower-bound baseline correctly retained but not re-measured; any within-store or cross-website mechanism must exceed 2-site corpus. With 36 families >=3 tasks and 73 websites, bound is trivially exceeded quantitatively but not tested for mechanism quality.",
+      "evidence": "spec B3, result families_ge3 36"
+    },
+    {
+      "baseline_id": "B4_SHUFFLE_NULL",
+      "finding": "Shuffle null baseline MIS-APPLIED: true overlap must exceed shuffled by >=0.10. Producer reports true 0.7407 vs null_mean 0.6942 excess 0.0466 (<0.10) and true < p95 0.8929, so NC2 fails correctly per numbers, but null was computed by shuffling mechanism labels with random split_point, not by shuffling website assignment as frozen. High null (0.6942) reflects coarse 33-mechanism label frequency, so failure does not demonstrate lack of same-mechanism sharing; it demonstrates coarse clustering yields indistinguishable train/test distributions.",
+      "evidence": "spec B4, controls NC2_SHUFFLE_NULL pass false excess 0.0466, measurements shuffle_null null_mean 0.694166 p95 0.892857, code compute_shuffle_null"
+    },
+    {
+      "baseline_id": "B5_RETRIEVAL_REPLAY_STRONG",
+      "finding": "Strong retrieval/replay baseline correctly disclosed as not executed here: 90ms/0-token economics vs parameterized generalization; producer does not conflate 0.9479 duplication with inheritance benefit and explicitly reserves product lane test cold vs retrieval vs SPIDER conditional on this substrate. Appropriate bounding.",
+      "evidence": "spec B5, report Product Consequence ceiling, result validity_notes This experiment does NOT demonstrate LLM inheritance benefit"
+    }
+  ],
+  "recomputed_metrics": {
+    "webarena_shopping_tasks": 192,
+    "webarena_distinct_templates": 49,
+    "webarena_duplication_fraction": 0.9479166666666666,
+    "webarena_duplication_ci_95": [0.9166666666666666, 0.9791666666666666],
+    "webarena_exact_copy_fraction": 0.078125,
+    "webarena_exact_copy_ci_95": [0.041666666666666664, 0.11979166666666667],
+    "webarena_param_task_fraction": 0.8958333333333334,
+    "webarena_param_task_ci_95": [0.8489583333333334, 0.9375],
+    "webarena_param_template_fraction": 0.8367346938775511,
+    "webarena_families_ge3": 36,
+    "webarena_families_ge4": 34,
+    "webarena_families_ge5": 33,
+    "webarena_site_tuples": {
+      "shopping": 187,
+      "shopping+reddit": 5
+    },
+    "webarena_dataset_sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30_verified",
+    "ax_consistency": null,
+    "ax_tasks_verified": 10,
+    "ax_families_checked": 10,
+    "ax_note": "REUSED parent 1-per-family, within-family consistency untestable",
+    "mind2web_dataset_actual": {
+      "hf_id": "osunlp/Mind2Web",
+      "splits_available": ["train"],
+      "n_tasks_total": 1009,
+      "n_websites": 73,
+      "n_domains": 3,
+      "distinct_mechanisms_train_coarse": 33,
+      "distinct_mechanisms_test_website_coarse": 27,
+      "spec_claimed_websites": 137,
+      "spec_claimed_domains": 31,
+      "status": "divergence_documented_revision_unknown"
+    },
+    "mind2web_overlap_website_coarse_replicated": 0.7407407407407407,
+    "mind2web_overlap_domain_coarse": 0.8205128205128205,
+    "mind2web_shuffle_null_mean_replicated": 0.6941666709893431,
+    "mind2web_shuffle_null_p95": 0.8928571428571429,
+    "mind2web_excess_over_null": 0.04657406975139755,
+    "mind2web_excess_threshold": 0.1,
+    "mind2web_exceeds_threshold": false,
+    "mind2web_exceeds_p95": false,
+    "mind2web_parameterization_prevalence_coarse": 0.6085232903865213,
+    "mind2web_duplication_fraction_coarse": 0.9910802775024777,
+    "mind2web_pc2_max_cluster_count": 151,
+    "mind2web_pc2_pass_replicated": true,
+    "mind2web_spec_compliant_overlap": null,
+    "mind2web_spec_compliant_shuffle_null": null,
+    "note": "All WebArena metrics recomputed exactly; Mind2Web coarse metrics replicated but spec-compliant TF-IDF/k-means on official splits not computable in this environment (single split, coarse heuristic only). Producer's Mind2Web numbers are arithmetic-correct under their heuristic but methodologically mis-specified per frozen design."
+  },
+  "claim_ceiling": "WebArena-Verified v2 single-store substrate quantitatively supports parameterized family structure: 192 tasks, 49 intent_templates, 36 families with >=3 tasks (34 with >=4, 33 with >=5), duplication 0.9479 with exact_copy 0.0781 and param_task 0.8958 (all thresholds quantitatively met). However within-store same-mechanism AX consistency (same intent_template -> same element pattern) is UNMEASURED (ax_consistency=null, 10 REUSED trees 1 per family); therefore identifiable same-mechanism parameterized transfer for C-LLM-INHERIT is not yet demonstrated at the element-pattern level, only at the template-count level. PC1 search presence PASS is via reuse, not live re-extraction. C-LLM-INHERIT remains HYPOTHESIS/EXPERIMENTAL, bounded to quantitative census substrate only; no LLM agent inheritance benefit, retrieval comparison, or checkout execution was tested. Mind2Web: on the coarse action_type-target_role-verb_lemma clustering and synthetic 60/40 website partition, cross-website overlap 0.7407 does NOT exceed shuffled null by >=0.10 (excess 0.0466, null_mean 0.6942, p95 0.8929) so same-mechanism cross-website transfer is not demonstrated IN THIS MEASUREMENT. Because mechanism was coarse (33 distinct) and partition synthetic, this negative does NOT falsify Mind2Web true cross-website overlap on official train/test_website splits with spec-compliant clustering; it is inconclusive for C-CROSSSITE website-holdout design. Maximum justified carry-forward: quantitative within-store family reuse established with disclosed parameterization vs copy decomposition; cross-store 12-store design remains impossible; Mind2Web measurable same-mechanism overlap remains UNKNOWN pending spec-compliant remeasurement; AX verification remains UNKNOWN.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35725763380/spec.json claim_ids C-LLM-INHERIT C-CROSSSITE hypothesis H1_H2 falsifier F1-F5 measurement_validity #4 decision_rule clauses 0-5",
+    "research/experiments/EXP-INTEL-35725763380/prereg.md sections 5.2 mechanism definitions (TF-IDF k-means k=min(50, unique_tasks/20) train-only), 5.4 AX sample 15 tasks 2 per family, 5.5 Mind2Web overlap/shuffle, 5.6 controls PC1 PC2 NC2 NC3",
+    "research/experiments/EXP-INTEL-35725763380/freeze.json hashes prereg 618dfed..., spec ac6aee3...",
+    "research/experiments/EXP-INTEL-35725763380/result.json metrics webarena_* mind2web_* controls PC1 PC2 NC2 fail NC3 pass status COMPLETE outcome MIXED",
+    "research/experiments/EXP-INTEL-35725763380/report.md decision_rule evaluation clause1 PARTIAL clause2 FAIL verdict MIXED",
+    "research/experiments/EXP-INTEL-35725763380/provenance.json frozen_inputs, datasets sha d6527566, model_execute retry exit 76, environment playwright_installed false docker_available true",
+    "research/experiments/EXP-INTEL-35725763380/artifacts/derived/measurements.json webarena_census duplication 0.9479 exact 0.0781 param 0.8958 families_ge3 36 bootstrap_cis ax_consistency null label REUSED mind2web overlap 0.74074 shuffle_null mean 0.69416 p95 0.89285",
+    "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "research/intel/exp_35725763380_measure.py sha256 98f92952... compute_webarena_census bootstrap_ci_for_fraction ax REUSED note extract_mind2web_mechanisms shuffled_sites normalize_op compute_shuffle_null random split_point",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/derived/measurements.json parent 10 AX trees used as REUSED (tasks 25,514,519,434,468,506,794,673,532,654) ax_node_counts",
+    "audit bash recomputation: webarena 192/49 dup 0.9479 exact 0.0781 param 0.8958 ci verified; mind2web HF load 1009 tasks 73 websites 3 domains ['aa','agoda',...] ; recomputed coarse overlap 0.7407 shuffle mean 0.69416 excess 0.04657"
+  ],
+  "unresolved": [
+    "Within-family AX consistency for WebArena (same intent_template -> same element pattern) requires 2 tasks per family live extraction; current 1-per-family REUSED sample cannot compute; threshold 0.6 remains untested.",
+    "Official Mind2Web cross-website overlap on true train/test_website/test_domain splits (137 websites/31 domains per spec vs 73/3 observed) with spec-compliant TF-IDF k-means clustering and proper website-label shuffle null remains unmeasured.",
+    "Below-fold and post-interaction (scroll, cart page, checkout flow) mechanism coverage on live One Stop Market store remains unmeasured (initial viewport only).",
+    "Mind2Web HF revision/hash that would provide 137 websites/31 domains and official splits vs the 1009-task single-split hf_id osunlp/Mind2Web observed here needs pinning; coarse vs fine clustering sensitivity (k/2,2k) not tested.",
+    "Authenticated ghcr.io/web-arena-x multi-store WebArena images (12 stores) remain blocked on registry auth, so true multi-store cross-site transfer not tested (inherited).",
+    "C-LLM-INHERIT LLM benefit vs cold/retrieval/SPIDER with strong 0-token replay baseline has not been tested on within-store family hold-out substrate (explicitly out of scope here).",
+    "C-RESIDUAL-NOVELTY M1/M2 heuristic estimates remain unmeasured at task-sample level."
+  ]
+}

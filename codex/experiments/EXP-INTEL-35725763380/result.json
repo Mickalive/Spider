@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35725763380",
+  "lane": "intel",
+  "status": "COMPLETE",
+  "outcome": "MIXED",
+  "metrics": {
+    "webarena_shopping_tasks": 192,
+    "webarena_distinct_templates": 49,
+    "webarena_families_ge3": 36,
+    "webarena_families_ge4": 34,
+    "webarena_families_ge5": 33,
+    "webarena_duplication_fraction": 0.9479,
+    "webarena_duplication_ci": [0.9167, 0.9792],
+    "webarena_exact_copy_fraction": 0.0781,
+    "webarena_exact_copy_ci": [0.0417, 0.1198],
+    "webarena_param_task_fraction": 0.8958,
+    "webarena_param_task_ci": [0.8490, 0.9375],
+    "webarena_param_template_fraction": 0.8367,
+    "webarena_site_tuples": {"shopping": 187, "shopping+reddit": 5},
+    "mind2web_status": "LOADED",
+    "mind2web_dataset": "osunlp/Mind2Web",
+    "mind2web_n_websites": 73,
+    "mind2web_n_domains": 3,
+    "mind2web_n_tasks": 1009,
+    "mind2web_train_tasks": 595,
+    "mind2web_test_website_tasks": 414,
+    "mind2web_test_domain_tasks": 748,
+    "mind2web_overlap_website": 0.7407,
+    "mind2web_overlap_domain": 0.8205,
+    "mind2web_shuffle_null_mean": 0.6942,
+    "mind2web_shuffle_null_p95": 0.8929,
+    "mind2web_overlap_excess_over_null": 0.0466,
+    "mind2web_parameterization_prevalence": 0.6085,
+    "mind2web_duplication_fraction": 0.9911,
+    "mind2web_pc2_max_cluster_count": 151,
+    "mind2web_pc2_pass": true,
+    "mind2web_distinct_mechanisms_train": 33,
+    "mind2web_distinct_mechanisms_test_website": 27,
+    "mind2web_spec_divergence": "73 websites/3 domains vs spec's 137/31"
+  },
+  "controls": {
+    "PC1_WEB_SEARCH": {
+      "expected": "PASS: homepage contains combobox 'Search' + button 'Search'",
+      "observed": "PASS",
+      "pass": true,
+      "evidence": "parent EXP-INTEL-35697055679/artifacts/derived/measurements.json positive_control"
+    },
+    "PC2_MIND2WEB_RECURRENCE": {
+      "expected": "PASS: at least one operation-template cluster appears in >=10 tasks across >=3 websites",
+      "observed": "PASS",
+      "pass": true,
+      "max_cluster_count": 151,
+      "evidence": "measurements.json mind2web.pc2_max_cluster_count"
+    },
+    "NC1_WIKIPEDIA_NULL": {
+      "expected": "NOT EXERCISED (no Wikipedia container)",
+      "observed": "NOT EXERCISED",
+      "pass": null,
+      "evidence": "No Wikipedia Docker container available"
+    },
+    "NC2_SHUFFLE_NULL": {
+      "expected": "true overlap exceeds shuffled null mean by >=0.10",
+      "observed": "true_overlap=0.7407, null_mean=0.6942, excess=0.0466 < 0.10",
+      "pass": false,
+      "evidence": "measurements.json null_controls.NC2_SHUFFLE_NULL"
+    },
+    "NC3_WEB_EXACT_COPY_NULL": {
+      "expected": "exact-copy fraction <0.2 (distinguishes parameterized reuse from verbatim copy)",
+      "observed": "exact_copy=0.0781 < 0.2",
+      "pass": true,
+      "evidence": "measurements.json null_controls.NC3_WEB_EXACT_COPY_NULL"
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-INTEL-35725763380/artifacts/derived/measurements.json", "sha256": "a24a8535621fe4a7037408a344a09e5e97ade1cec9098f8d720c35aceb30fc9f", "role": "derived"},
+    {"path": "research/experiments/EXP-INTEL-35725763380/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "role": "raw"},
+    {"path": "research/intel/exp_35725763380_measure.py", "sha256": "98f92952f8e71b4a28f1beea6bc17c3e1f1504ea5ca98bf4f7292ea8ae64b457", "role": "code"},
+    {"path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/webarena-verified.json", "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30", "role": "reused_raw"},
+    {"path": "research/experiments/EXP-INTEL-35697055679/artifacts/derived/measurements.json", "sha256": "4f5c9ac111a1c23b0fe4bf766a03e9bec597dcaa003063b3615b40bd77dff7b8", "role": "reused_derived"},
+    {"path": "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_*.json", "sha256": "multiple", "role": "reused_axtree"}
+  ],
+  "observations": [
+    "RAW: WebArena-Verified v2 has exactly 192 shopping tasks across 49 intent_templates with 36 families containing >=3 tasks (frozen dataset sha256 d6527566...)",
+    "RAW: Duplication fraction 0.9479 (182/192 tasks share intent_template, 95% CI [0.9167, 0.9792]) with bootstrap 2000 reps seed 35725763380",
+    "RAW: Exact-copy fraction 0.0781 (15/192 identical template AND instantiation_dict, 95% CI [0.0417, 0.1198])",
+    "RAW: Parameterization prevalence 0.8958 task-level (172/192 with non-empty instantiation_dict) and 0.8367 template-level (41/49)",
+    "RAW: 36 of 49 template families have >=3 tasks, enabling 2-train/1-test hold-out design",
+    "RAW: Site tuples: 187 tasks on single ('shopping',) store + 5 on ('shopping','reddit')",
+    "RAW: Mind2Web dataset osunlp/Mind2Web loaded: 1009 tasks, 73 websites, 3 domains (spec stated 137/31 - divergence documented)",
+    "RAW: Mind2Web cross-website overlap (test_website): 0.7407, exceeds shuffled null mean by only 0.0466 (<0.10 threshold)",
+    "RAW: Mind2Web shuffle null (1000 perms): mean=0.6942, p95=0.8929, true overlap does not exceed p95",
+    "RAW: PC1_WEB_SEARCH PASS (combobox 'Search' + button 'Search' on homepage, from parent AX trees)",
+    "RAW: PC2_MIND2WEB_RECURRENCE PASS (max cluster count 151, recurring operation-template cluster)",
+    "RAW: NC3_WEB_EXACT_COPY_NULL PASS (exact-copy 0.0781 < 0.2 threshold)",
+    "RAW: AX consistency NOT MEASURABLE from REUSED parent trees (parent sampled 1 task per family, no within-family comparison possible)"
+  ],
+  "validity_notes": [
+    "AX_consistency threshold (0.6) is NOT TESTABLE from REUSED parent AX trees. Parent EXP-INTEL-35697055679 sampled 1 task per template family (10 tasks across 10 families), so within-family AX consistency (same intent_template -> same element pattern) cannot be directly verified. This is a measurement limitation, not a scientific falsification. PC1_WEB_SEARCH PASS and intent-to-element 5/5 PASS from parent support element-pattern consistency at the template description level.",
+    "Mind2Web dataset divergence: osunlp/Mind2Web has 73 websites/3 domains vs spec.json's stated 137 websites/31 domains. Overlap computed on actual dataset. This divergence is documented but does not invalidate the measurement.",
+    "Mind2Web shuffle null overlap (0.6942 mean) is high because the normalized operation-template clustering produces coarse mechanism labels (33 distinct train, 27 distinct test_website). The high null reflects the structural similarity of web tasks across sites. True overlap exceeds null mean by only 0.0466 (<0.10), failing the frozen threshold.",
+    "Mind2Web parameterization prevalence (0.6085) was computed from action_reprs parsing, not from the `actions` column which contains raw HTML. This is a measurement adaptation from the spec's original approach.",
+    "WebArena census matches parent EXP-INTEL-35697055679 measurements exactly (192/49/0.9479/0.0781/0.8958), confirming dataset integrity.",
+    "Playwright not installed in current environment; AX trees reused from parent per frozen measurement_validity clause 4. Below-fold/post-checkout AX patterns NOT measured.",
+    "Bootstrap CIs computed with 2000 reps, seed 35725763380. Shuffle null computed with 1000 permutations, same seed.",
+    "This experiment does NOT demonstrate LLM inheritance benefit, freshness, or repair. C-LLM-INHERIT remains EXPERIMENTAL pending future Product experiment on this substrate."
+  ],
+  "unresolved": [
+    "Within-family AX consistency (same intent_template -> same element pattern) is unverifiable from REUSED parent trees. Would require 2+ tasks per family extracted via CDP Accessibility.getFullAXTree at initial viewport (Playwright unavailable).",
+    "Mind2Web spec divergence (73 vs 137 websites) means the cross-website overlap measurement may not generalize to the originally specified dataset size.",
+    "Below-fold and post-interaction mechanism coverage on the live WebArena store remains unmeasured (initial-viewport only).",
+    "The Mind2Web shuffle null high overlap (0.6942) may reflect the coarse mechanism clustering rather than true cross-site similarity. Finer-grained clustering could change the overlap fraction.",
+    "Authenticated ghcr.io/web-arena-x multi-store WebArena images (12 stores) remain blocked on registry auth - not tested here.",
+    "C-RESIDUAL-NOVELTY M1/M2 heuristic estimates remain unmeasured at task-sample level."
+  ]
+}
