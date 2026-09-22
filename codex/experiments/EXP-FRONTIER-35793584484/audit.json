@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35793584484",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "PC-VERBATIM-CHECK passes: All pipelines 0/40=0.0 correct on alias-OOD under VERBATIM rule, Wilson 95% CI upper 0.0876 <= 0.15. Confirms parent 39/40=0.975 was reconstruction artifact requiring adopt-any-key; test forms truly held-out (leak 0/40, held-out 0/9, mixed 0/10 verified via train_split_inventory.json).",
+    "PC-EXACT-MATCH passes: All pipelines correct>=0.90 (verbatim 1.0, CF 0.917) and false<=0.10 on exact-match N=12 under both rules. WebAPI-CF and hierarchical-CF not >0.10 below B-EXACT-MATCH.",
+    "PC-RETRIEVAL-HEALTH passes (marginal): Non-empty 40/40=1.0 for all pipelines under both rules. Distinct component win rate hierarchical vs flat = 0.475 (<0.50 threshold on components) but distinct component types win = 0.65 (>=0.50). Producer disclosed this marginality; not MEASUREMENT_INVALID.",
+    "PC-WEBAPI-INDEX-BUILT passes: Hierarchical 84 themes, WebAPI 84 themes (identical per manifest), 45 distinct components >=6, episode count 168 == 21*8 registry size, leak 0/40 pooled, 0/9 held-out, 0/10 mixed. Component extraction uses template-string parsing only, no forbidden keys in manifest.",
+    "PC-ENDPOINT-DISCOVERY-SANITY passes (exploratory): H-WEBAPI-CF exact 11/12=0.917 >=0.90.",
+    "NC-NO-APPLICABLE passes: All pipelines both rules 12/12 UNKNOWN precision 1.0 false 0.",
+    "NC-EMPTY-REGISTRY passes: All pipelines both rules 6/6 UNKNOWN.",
+    "NC-ORACLE-LEAK passes: derived_context filtered to allowed keys (url/method/url_path/url_query/url_segments/headers_observed/body_observed) at load, forbidden_in_derived 0, registry leak 0/40, confidence std 0.274-0.284 >0.05 (varies across tasks), correct-family eligibility uses template-parsed candidate families vs derived observed families only. Cross-family forbidden verified: header tasks (fam0) 2/10 correct vs body tasks (fam1) 10/10, mixed 0/10 confirms no cross-family invention. Index manifest contains only parsed components; no hidden_expected access.",
+    "Holdout integrity verified: tasks_expanded.json sha 83b7c52d matches parent tasks.json sha 4abf1487 for intents/expected_bounds; per-task registry expanded 3->8 mechanisms (1 training +2 same-family +2 cross-family +2 mixed fragments +1 random) to make pool>k=5 identifiable. Leak 0/40 pooled, 0/9 held-out, 0/10 mixed confirmed. All alias families and mixed stratum stratified; TF-IDF/embedding and hierarchical/WebAPI theme centroids fit on train registry (21 tasks * 8 = 168 episodes) only.",
+    "Determinism verified: numpy.random.RandomState(42), random.seed(42), hashlib.sha256 not Python hash(), TF-IDF/embedding deterministic normalized, AgglomerativeClustering distance_threshold 0.4 (Jaccard 0.6) deterministic seed. Paired design per task per pipeline per rule; block bootstrap 2000 resamples trajectory-grouped by family (header/body/auth/mixed).",
+    "Representation loss disclosed: Synthetic orthogonal header/body/auth + mixed multi-channel aliasing with minimal derived dict (url, method, url_path, url_query, url_segments, headers_observed, body_observed) only; no AX tree, no BrowserGym 1280x720 viewport, no DOM heterogeneity, no auth/session drift, no visual layout. Claim bounded to this synthetic with correct-family gating per Director rationale (no new SPAs).",
+    "Correct-family implementation audited: candidate_families derived via template parsing of slot types (header if header slot, body if body slot, auth if ${perm} slot, query if query slot, path if path slot); observed_families derived from derived_context (header if non-standard header present, body if body_observed non-empty, query if url_query non-empty, auth if scope/permission key present); eligibility requires intersection non-empty; rewriting filtered to overlapping families only via channel_to_family mapping and alphabetically sorted single-adoption per family; cross-family adoption forbidden. No hidden_expected access verified via code inspection of run_execute_35793584484.py and index_manifest.json.",
+    "Mixed multi-channel limitation identified: Mixed 10 tasks require joint header+body+query coverage; under correct-family single-base rewrite cannot invent cross-family keys, so mixed 0/10 for all CF pipelines, driving pooled false_accept 0.25 >0.15 and ECE 0.257 >0.15. Hierarchical/WebAPI complementary selection still picks single base per task (adaptive k 2-5 but bind picks best single), not joint multi-candidate composition. S2/S4 failures reflect mixed composition limitation, not retrieval failure for orthogonal families.",
+    "Calibration miscalibration confirmed: ECE computed over 5 confidence bins with derived confidence (softmax temp 0.15 + jitter gated UNKNOWN<0.80); bins bimodal (3 of 5 empty for verbatim, 2 empty for CF); ECE 0.257 exceeds 0.15 threshold despite confidence std 0.274-0.284 >0.05. Bootstrap CI for ECE not computed in derived_metrics.json (gap).",
+    "Retrieval health marginal finding: Hierarchical 84 themes identical to WebAPI 84 themes (same Jaccard 0.6 clustering on same 168 episodes); density gain -0.105 significant (flat 1.49 vs hierarchical 1.385); flat TFIDF/embed coverage 0.55 identical to hierarchical/WebAPI 0.55. WebAPI is not a distinct algorithm from hierarchical on this synthetic; endpoint terminology does not imply tool/API bypass was tested."
+  ],
+  "baseline_findings": [
+    "B-EXACT-MATCH: Kernel exact intent equality (L97) 0/40 alias-OOD verbatim and CF (expected 0/40). 12/12 exact-match both rules. Valid strong baseline.",
+    "B-VERBATIM-REPLAY: Top-1 exact scan + verbatim _bind. Verbatim 0/40 correct (UNKNOWN 1.0); CF 21/40=0.525 correct, false 0.25, UNKNOWN 0.225. Under CF, verbatim replay with correct-family rewriting performs identically to flat/hierarchical/WebAPI, confirming reconstruction not retrieval is the driver.",
+    "B-FLAT-TFIDF-K5-VERBATIM/CF: TFIDF cosine top-5 + verbatim/CF. Verbatim 0/40; CF 21/40=0.525 identical to all other CF pipelines. Strong baseline for primary comparison.",
+    "B-FLAT-EMBED-K5-VERBATIM/CF: Embedding cosine (all-MiniLM-L6-v2) top-5 + verbatim/CF. Verbatim 0/40; CF 21/40=0.525 identical to TFIDF. Embedding provides no advantage over TFIDF under CF on this synthetic.",
+    "B-RANDOM-K5-VERBATIM/CF: Uniform random k=5 + verbatim/CF. Verbatim 0/40; CF 18/40=0.45 slightly lower (McNemar vs best flat p=0.29 NS). Chance-level baseline.",
+    "H-HIERARCHICAL-VERBATIM/CF: Decoupling-before-aggregation hierarchical (reuse parent code sha 2d664081) adaptive k 2-5 entropy>0.4 coverage<2. Verbatim 0/40; CF 21/40=0.525. Identical to flat/WebAPI under CF.",
+    "H-WEBAPI-VERBATIM/CF: WebAPI endpoint+method+auth-scope mining, endpoint component clustering Jaccard>=0.6, top-down complementary selection. Verbatim 0/40; CF 21/40=0.525. Identical themes (84), identical retrieved_ids, identical entropy to hierarchical. Not a distinct algorithm on this synthetic."
+  ],
+  "recomputed_metrics": {
+    "alias_OOD_pooled_N": 40,
+    "alias_OOD_orthogonal_N": 30,
+    "alias_OOD_mixed_N": 10,
+    "heldout_9_N": 9,
+    "exact_match_N": 12,
+    "no_applicable_N": 12,
+    "empty_registry_N": 6,
+    "verbatim_manipulation_check": {
+      "all_pipelines_correct_rate": 0.0,
+      "all_pipelines_fraction": "0/40",
+      "wilson_CI": [0.0, 0.0876],
+      "pass": true
+    },
+    "correctfamily_pooled": {
+      "H_HIERARCHICAL_CF": {"correct": 21, "n": 40, "rate": 0.525, "wilson_CI": [0.375, 0.671], "binomial_p_vs_0_10": 1.1e-08, "mcnemar_vs_B_EXACT_MATCH_p": 1.27e-05},
+      "H_WEBAPI_CF": {"correct": 21, "n": 40, "rate": 0.525, "wilson_CI": [0.375, 0.671], "binomial_p_vs_0_10": 1.1e-08, "mcnemar_vs_B_EXACT_MATCH_p": 1.27e-05},
+      "B_FLAT_TFIDF_K5_CF": {"correct": 21, "n": 40, "rate": 0.525, "wilson_CI": [0.375, 0.671], "binomial_p_vs_0_10": 1.1e-08},
+      "B_FLAT_EMBED_K5_CF": {"correct": 21, "n": 40, "rate": 0.525, "wilson_CI": [0.375, 0.671], "binomial_p_vs_0_10": 1.1e-08},
+      "B_RANDOM_K5_CF": {"correct": 18, "n": 40, "rate": 0.45, "wilson_CI": [0.307, 0.602], "binomial_p_vs_0_10": 9.6e-07},
+      "B_VERBATIM_REPLAY_CF": {"correct": 21, "n": 40, "rate": 0.525, "wilson_CI": [0.375, 0.671]},
+      "B_EXACT_MATCH_CF": {"correct": 0, "n": 40, "rate": 0.0},
+      "mcnemar_hier_vs_best_flat_p": 1.0,
+      "mcnemar_webapi_vs_best_flat_p": 1.0,
+      "mcnemar_webapi_vs_hier_p": 1.0
+    },
+    "correctfamily_false_accept": {
+      "H_HIERARCHICAL_CF": 0.25,
+      "H_WEBAPI_CF": 0.25,
+      "B_FLAT_TFIDF_CF": 0.25,
+      "mcnemar_hier_false_vs_verbatim_cf_p": 1.0,
+      "mcnemar_webapi_false_vs_verbatim_cf_p": 1.0
+    },
+    "correctfamily_unknown": {
+      "H_HIERARCHICAL_CF": 0.225,
+      "H_WEBAPI_CF": 0.225
+    },
+    "coverage_correctfamily": {
+      "H_HIERARCHICAL_CF": 0.55,
+      "H_WEBAPI_CF": 0.55,
+      "B_FLAT_TFIDF_CF": 0.55,
+      "B_FLAT_EMBED_CF": 0.55,
+      "coverage_gain_hier_vs_best_flat": 0.0,
+      "coverage_gain_hier_bootstrap_CI": [0.0, 0.0],
+      "coverage_gain_hier_bootstrap_p": 1.0,
+      "coverage_gain_webapi_vs_best_flat": 0.0,
+      "coverage_gain_webapi_bootstrap_CI": [0.0, 0.0],
+      "coverage_gain_webapi_bootstrap_p": 1.0
+    },
+    "density_correctfamily": {
+      "H_HIERARCHICAL_CF": 1.385,
+      "H_WEBAPI_CF": 1.385,
+      "B_FLAT_TFIDF_CF": 1.49,
+      "B_FLAT_EMBED_CF": 1.44,
+      "density_gain_hier_vs_best_flat": -0.105,
+      "density_gain_hier_bootstrap_CI": [-0.115, -0.100],
+      "density_gain_hier_bootstrap_p": 0.0,
+      "density_gain_webapi_vs_best_flat": -0.105,
+      "density_gain_webapi_bootstrap_p": 0.0
+    },
+    "per_family_correctfamily": {
+      "B_FLAT_TFIDF_CF": {"fam0_header": 0.2, "fam1_body": 1.0, "fam2_auth": 0.9, "fam3_mixed": 0.0},
+      "H_HIERARCHICAL_CF": {"fam0_header": 0.2, "fam1_body": 1.0, "fam2_auth": 0.9, "fam3_mixed": 0.0},
+      "H_WEBAPI_CF": {"fam0_header": 0.2, "fam1_body": 1.0, "fam2_auth": 0.9, "fam3_mixed": 0.0}
+    },
+    "heldout_9_correctfamily": {
+      "H_HIERARCHICAL_CF": 0.777,
+      "B_FLAT_TFIDF_CF": 0.777
+    },
+    "mixed_10_correctfamily": {
+      "all_CF": 0.0,
+      "fraction": "0/10"
+    },
+    "exact_match_correct": {
+      "verbatim_all": 1.0,
+      "correctfamily_H_HIERARCHICAL_CF": 0.9167,
+      "correctfamily_H_WEBAPI_CF": 0.9167,
+      "correctfamily_B_FLAT_TFIDF_CF": 0.9167,
+      "fraction": "11/12"
+    },
+    "no_applicable": {
+      "unknown_precision_all_CF": 1.0,
+      "false_rate_all_CF": 0.0
+    },
+    "empty_registry": {
+      "unknown_rate_all": 1.0
+    },
+    "ece_alias_OOD_correctfamily": {
+      "H_HIERARCHICAL_CF": 0.2569,
+      "H_WEBAPI_CF": 0.2569,
+      "B_FLAT_TFIDF_CF": 0.2630,
+      "B_FLAT_EMBED_CF": 0.2609
+    },
+    "confidence_std_alias_OOD_correctfamily": {
+      "H_HIERARCHICAL_CF": 0.284,
+      "B_FLAT_TFIDF_CF": 0.274,
+      "threshold": 0.05,
+      "pass": true
+    },
+    "retrieval_nonempty_alias_OOD": {
+      "all_pipelines_CF": 1.0,
+      "all_pipelines_verbatim": 1.0
+    },
+    "distinct_component_win_rate": {
+      "H_HIERARCHICAL_CF_vs_flat_components": 0.475,
+      "H_HIERARCHICAL_CF_vs_flat_types": 0.65
+    },
+    "theme_counts": {
+      "hierarchical": 84,
+      "webapi": 84,
+      "identical": true
+    },
+    "total_distinct_components": 45,
+    "verbatim_collapse_delta": 0.975,
+    "correctfamily_restored_vs_verbatim_delta": 0.525,
+    "contamination_magnitude": 0.45
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: Disabling adopt-any-observed-key reconstruction restores discriminability in the sense that verbatim manipulation check passes (0/40=0.0 for all pipelines, Wilson upper 0.0876 <=0.15), confirming the parent 39/40=0.975 ceiling was a reconstruction artifact. However, under the discriminating correct-family-required binding rule (cross-family key adoption forbidden), neither hierarchical theme-diversified retrieval nor WebAPI endpoint+method+auth-scope mining provides higher-leverage alias-OOD resolution than flat top-5 RAG on the tested synthetic orthogonal header/body/auth + mixed multi-channel splits with minimal derived dict (url/method/url_path/url_query/url_segments/headers_observed/body_observed). All pipelines tie at 21/40=0.525 pooled correct (Wilson [0.375,0.671], binomial p=1.1e-08 vs 0.10, McNemar vs B-EXACT-MATCH p=1.27e-05), coverage gain 0.0 CI [0.0,0.0] p=1.0, density gain -0.105 significantly negative. False_accept 0.25 >0.15 threshold (driven by mixed 0/10), ECE 0.257 >0.15. WebAPI and hierarchical produce identical 84 themes, identical retrieved_ids, identical entropy — they are the same algorithm with different labels on this synthetic. This is a BOUNDED FALSIFICATION: retrieval/mining diversity is not the bottleneck for these specific families/compositions under correct-family-required binding with minimal derived dict. Does not falsify semantic resolution globally, nor endpoint discovery on real Fetch/WebMCP/OpenAPI substrates, nor live BrowserGym 1280x720 observation noise where derived_context is noisy. The contamination magnitude (adopt-any-key 0.975 -> verbatim 0.0 -> correctfamily 0.525) is quantified. C-SEMANTIC-RESOLVE remains EXPERIMENTAL at rule-based reconstruction ceiling artifact + MIXED bounded (no retrieval complementarity under correct-family gating).",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35793584484/request.json",
+    "research/experiments/EXP-FRONTIER-35793584484/spec.json",
+    "research/experiments/EXP-FRONTIER-35793584484/prereg.md",
+    "research/experiments/EXP-FRONTIER-35793584484/freeze.json",
+    "research/experiments/EXP-FRONTIER-35793584484/result.json",
+    "research/experiments/EXP-FRONTIER-35793584484/report.md",
+    "research/experiments/EXP-FRONTIER-35793584484/provenance.json",
+    "research/experiments/EXP-FRONTIER-35793584484/raw_evidence.json (980 rows, sha256 ada40d73)",
+    "research/experiments/EXP-FRONTIER-35793584484/derived_metrics.json (sha256 d2d21581)",
+    "research/experiments/EXP-FRONTIER-35793584484/index_manifest.json (sha256 973ad382, hierarchical 84 themes, WebAPI 84 themes identical)",
+    "research/experiments/EXP-FRONTIER-35793584484/train_split_inventory.json (sha256 02f2a6ad, 21 train tasks, 168 episodes)",
+    "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json (sha256 83b7c52d, per-task registry 8)",
+    "research/experiments/EXP-FRONTIER-35793584484/tasks.json (sha256 4abf1487, parent byte-identical intents)",
+    "research/frontier/run_execute_35793584484.py (sha256 86f458f9, code: template parsing, Jaccard 0.6, TFIDF/embed, hierarchical/webapi, verbatim/CF rules)",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE (history: 5 consecutive SURVIVES then MIXED/FAIL on WebAPI vs hierarchical)",
+    "research/experiments/EXP-FRONTIER-35789949165/handoff.json (parent, sha f4e80235)"
+  ],
+  "unresolved": [
+    "Whether live BrowserGym 1280x720 observation noise (WebShop/ALFWorld/WebArena) or richer DOM/AX representation breaks the 0.55 coverage ceiling and makes complementary discovery valuable vs single-candidate retrieval under correct-family gating.",
+    "Whether residual-novelty-tracked verification economics (pay cost of novelty only, freshness/UNKNOWN gating) provides higher work-compression leverage than retrieval diversity for alias-OOD tasks.",
+    "Whether alternative correct-family aggregation (multi-candidate joint rewriting for mixed tasks, or adaptive k with joint coverage) could solve mixed 0/10 under CF, or whether mixed composition requires explicit alias catalogs / server-side routing normalization.",
+    "Whether hierarchical vs flat vs WebAPI would separate on production Fetch/WebMCP endpoint discovery (OpenAPI specs, HATEOAS, auth-scope negotiation) where endpoint components span header+body+query+auth jointly and minimal derived dict is insufficient.",
+    "Whether ECE 0.257 >0.15 reflects confidence miscalibration that would transfer to live calibration, and whether different temperature or gating threshold (<0.80) would restore ECE<=0.15 without harming correct rate.",
+    "Bootstrap CI for ECE not computed in producer derived_metrics.json — gap in calibration uncertainty quantification."
+  ]
+}

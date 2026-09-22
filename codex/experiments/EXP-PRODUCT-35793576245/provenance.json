@@ -1,0 +1,56 @@
+{
+  "artifacts": {
+    "branch_traces.json": "426b633819f58c8ade26c1c0541671000111255742be77e1cc3e119b965df176",
+    "cost_config.json": "cbb95c44cae0fe79bea3410a42e08f652fe1a90b1f9133bcfb9fef9ff0216d7e",
+    "derived_metrics.json": "e0639b6d3bb23dd057e490fd6282914403dfc15c2b82c53ea5d9e73ce5bb296c",
+    "raw_per_task.csv": "7d0ead05a7fb1387bace4ec7f208599d85e80cf60ba18af1a69124b32c7a6bfe",
+    "registry.jsonl": "462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "result.json": "b83212e3f7aaec54af8ab412266c551fae7bbc7deb7fe83405f9e6149fe5f3e6"
+  },
+  "code_hashes": {
+    "kernel.py": "48786285d51959e68e5418f8f06c8aad3f3705582bdb3bedc1d13b822652c83e",
+    "models.py": "23ef7f750e6bb7776c648316956cb8be95576271ca479f632de934d6eef22177",
+    "registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "run_experiment.py": "1dc8a3813ea28a1aa5cb624467d5453b596af94c4697b694aa34d123f13683e5"
+  },
+  "commands": [
+    "PYTHONHASHSEED=0 PYTHONPATH=src python3 research/experiments/EXP-PRODUCT-35793576245/run_experiment.py",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -v"
+  ],
+  "determinism": "run executed twice; raw_per_task.csv + derived_metrics.json + registry.jsonl byte-identical (verified sha256).",
+  "environment": {
+    "dask": "unavailable",
+    "numpy": "unavailable",
+    "pandas": "unavailable",
+    "python": "3.12.14",
+    "scipy": "unavailable",
+    "sentence_transformers": "unavailable",
+    "sklearn": "unavailable"
+  },
+  "experiment_id": "EXP-PRODUCT-35793576245",
+  "fixture": {
+    "inherited_from": "research/experiments/EXP-PRODUCT-35782537266/fixtures/tasks.json",
+    "inherited_sha256": "e824ab3157cbd299",
+    "path": "fixtures/tasks.json",
+    "sha256": "0e153ed8f26f1c3d5a11e3aea282a66d5d240c88c3553f355972d055ebed3d0b"
+  },
+  "frozen_input_hashes": {
+    "freeze.json": "1fd6b44da1ca111a6b7563f148ffe61a44d1ca256e7b0bed1a9cda31a945a1ec",
+    "prereg.md": "b73749a20c5e862363171a31c4d7dc2738ea657ae7af58de3a294f8f79e6245d",
+    "request.json": "56418f847f072e6ca2617e4ad06988b9b97fb34288fa1ed055c2925e7e8f447a",
+    "spec.json": "e51afb453401892c7cec4b896b025f539ce7ef57a12794a812229f42384ddd28"
+  },
+  "git": {
+    "head": "98f7adb26b9cd634c7ea1ab2aa6f68a1072c9485",
+    "short": "98f7adb2"
+  },
+  "github_run_id": "35793576245",
+  "lane": "product",
+  "schema_version": 1,
+  "seeds": {
+    "PYTHONHASHSEED": "0",
+    "numpy_substitute": "stdlib random.Random(42) (numpy unavailable)",
+    "random_seed": 42
+  },
+  "stage": "EXECUTE"
+}
