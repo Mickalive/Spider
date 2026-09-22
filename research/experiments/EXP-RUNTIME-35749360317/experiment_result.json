@@ -1,0 +1,1185 @@
+{
+  "experiment_id": "EXP-RUNTIME-35749360317",
+  "lane": "runtime",
+  "started_at": "2026-09-22T17:21:34.116300+00:00",
+  "finished_at": "2026-09-22T17:22:04.583793+00:00",
+  "seed": 44,
+  "n_samples_per_batch": 20,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "bootstrap_b": 1000,
+  "excluded_headers": [
+    "Date",
+    "Server",
+    "X-Request-Id"
+  ],
+  "bodies": {
+    "A": {
+      "len": 31,
+      "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+    },
+    "B": {
+      "len": 70,
+      "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+    },
+    "C": {
+      "len": 117,
+      "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+    }
+  },
+  "fixed_header_config": {
+    "cache_control": "max-age=3600",
+    "etag": "W/\"fixed-aaa-111\"",
+    "vary": "Accept-Encoding",
+    "set_cookie": ""
+  },
+  "body_403": {
+    "len": 22,
+    "sha256": "387fe73d9abe7e6c32a0eb6113efea98dea609edefe9c3b4c9788fcaaef1603b"
+  },
+  "body_401": {
+    "len": 25,
+    "sha256": "9df366cd61d0e8a1bd9c4462d4f032e5317b2708d154047affa816e234518f34"
+  },
+  "raw_line_count": 300,
+  "validity": {
+    "checks": {
+      "server_state_committed_before_every_write": true,
+      "server_state_verified_before_every_batch": true,
+      "all_body_only_and_null_observations_status_200": true,
+      "classic_perm_status_403_vs_200": true,
+      "classic_sess_status_401_vs_200": true,
+      "body_sha_distinct_across_ABC": true,
+      "content_length_distinct_across_ABC": true,
+      "non_clen_headers_identical_across_ABC": true,
+      "set_cookie_absent_on_body_only": true,
+      "content_length_equals_body_len_all_obs": true,
+      "raw_line_count_per_batch_is_20": true,
+      "total_raw_lines": 300,
+      "excluded_headers_unchanged": true,
+      "body_a_pin_sha_matches": true,
+      "body_a_pin_len_matches": true,
+      "fingerprint_algorithm_matches_parent": true
+    },
+    "batch_counts": {
+      "body_A": 20,
+      "body_B": 20,
+      "body_C": 20,
+      "null_A1": 20,
+      "null_A2": 20,
+      "null_C1": 20,
+      "null_C2": 20,
+      "perm_403": 20,
+      "perm_200": 20,
+      "perm403_null_1": 20,
+      "perm403_null_2": 20,
+      "sess_200": 20,
+      "sess_401": 20,
+      "sess401_null_1": 20,
+      "sess401_null_2": 20
+    },
+    "writes_count": 12,
+    "pre_batch_verifies_count": 15,
+    "critical_all_pass": true,
+    "failed_critical": []
+  },
+  "identity_checks": {
+    "body_sha_by_state": {
+      "body_A": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "body_B": [
+        "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+      ],
+      "body_C": [
+        "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+      ]
+    },
+    "content_length_by_state": {
+      "body_A": [
+        "31"
+      ],
+      "body_B": [
+        "70"
+      ],
+      "body_C": [
+        "117"
+      ]
+    },
+    "body_len_by_state": {
+      "body_A": [
+        31
+      ],
+      "body_B": [
+        70
+      ],
+      "body_C": [
+        117
+      ]
+    },
+    "non_clen_headers_by_state": {
+      "body_A": [
+        "{\"Cache-Control\": \"max-age=3600\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"ETag\": \"W/\\\"fixed-aaa-111\\\"\", \"Vary\": \"Accept-Encoding\"}"
+      ],
+      "body_B": [
+        "{\"Cache-Control\": \"max-age=3600\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"ETag\": \"W/\\\"fixed-aaa-111\\\"\", \"Vary\": \"Accept-Encoding\"}"
+      ],
+      "body_C": [
+        "{\"Cache-Control\": \"max-age=3600\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"ETag\": \"W/\\\"fixed-aaa-111\\\"\", \"Vary\": \"Accept-Encoding\"}"
+      ]
+    },
+    "statuses_by_state": {
+      "body_A": [
+        200
+      ],
+      "body_B": [
+        200
+      ],
+      "body_C": [
+        200
+      ]
+    },
+    "body_sha_distinct_across_ABC": true,
+    "content_length_distinct_across_ABC": true,
+    "content_length_increasing_across_ABC": true,
+    "body_len_increasing_across_ABC": true,
+    "content_length_equals_body_len_all_obs": true,
+    "non_clen_headers_identical_across_ABC": true,
+    "set_cookie_absent_body_only": true,
+    "body_a_sha_pin_matches": true,
+    "body_a_len_pin_matches": true,
+    "all_body_only_status_200": true,
+    "classic_perm_status_403_vs_200": true,
+    "classic_sess_status_401_vs_200": true,
+    "classic_perm_body_distinct": true,
+    "classic_sess_body_distinct": true,
+    "perm_null_same_state": true,
+    "sess_null_same_state": true,
+    "per_state_fingerprint_set_sizes": {
+      "body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "body_B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm_403": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess_401": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      }
+    },
+    "primary_state_clen_expected": {
+      "body_A": "31",
+      "body_B": "70",
+      "body_C": "117"
+    }
+  },
+  "metrics": {
+    "body_drift_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_C",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_C",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_C",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_C",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_C",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_B",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_B",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_B",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_B",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "body_A vs body_B",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "null_control_N1_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_A1 vs null_A2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "null_control_N1_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_A1 vs null_A2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "null_control_N1_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_A1 vs null_A2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "null_control_N1_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_A1 vs null_A2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "null_control_N1_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_A1 vs null_A2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "null_control_N2_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_C1 vs null_C2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "null_control_N2_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_C1 vs null_C2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "null_control_N2_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_C1 vs null_C2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "null_control_N2_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_C1 vs null_C2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "null_control_N2_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "null_C1 vs null_C2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "classic_perm_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm_403 vs perm_200",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "classic_perm_status": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm_403 vs perm_200",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "classic_perm_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm_403 vs perm_200",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "classic_perm_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm_403 vs perm_200",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "classic_perm_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm_403 vs perm_200",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "classic_sess_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess_401 vs sess_200",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "classic_sess_status": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess_401 vs sess_200",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "classic_sess_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess_401 vs sess_200",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "classic_sess_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess_401 vs sess_200",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "classic_sess_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess_401 vs sess_200",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "perm_null_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm403_null_1 vs perm403_null_2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "perm_null_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm403_null_1 vs perm403_null_2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "perm_null_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm403_null_1 vs perm403_null_2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "perm_null_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm403_null_1 vs perm403_null_2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "perm_null_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "perm403_null_1 vs perm403_null_2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "sess_null_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess401_null_1 vs sess401_null_2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "sess_null_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess401_null_1 vs sess401_null_2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "sess_null_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess401_null_1 vs sess401_null_2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "sess_null_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess401_null_1 vs sess401_null_2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "sess_null_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "sess401_null_1 vs sess401_null_2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "effective_distinct_n": {
+      "body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "body_B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_A1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_A2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_C1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "null_C2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm403_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm403_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "perm_403": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess401_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess401_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "sess_401": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      }
+    }
+  },
+  "conditions": {
+    "C1_FULL_BODY_DRIFT": {
+      "type": "positive",
+      "expected": "full-vector discrimination > 0.5 on STATE_A vs STATE_C (both 200, bodies byte-different, non-CLEN headers identical)",
+      "observed": {
+        "full_AvsC": 1.0,
+        "statuses_AvsC": [
+          [
+            200
+          ],
+          [
+            200
+          ]
+        ],
+        "body_sha_distinct": true,
+        "content_length_distinct": true
+      },
+      "threshold": ">0.5",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full; identity_checks (status/body sha/CLEN for body_A, body_C)"
+    },
+    "C2_BODY_ONLY_SIGNAL": {
+      "type": "positive",
+      "expected": "B-BODY-ONLY > 0.5 on A vs C AND on A vs B; B-HEADERS-NO-CLEN = 0.0 on A vs C",
+      "observed": {
+        "body_only_AvsC": 1.0,
+        "body_only_AvsB": 1.0,
+        "headers_no_clen_AvsC": 0.0
+      },
+      "threshold": ">0.5 both isolations; headers_no_clen == 0.0",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_body, body_drift_AvsB_body, body_drift_AvsC_headers_no_clen"
+    },
+    "C3_STATUS_ISOLATED": {
+      "type": "strong-null",
+      "expected": "B-STATUS-ONLY = 0.0 on A vs C and A vs B (status confound removed)",
+      "observed": {
+        "status_only_AvsC": 0.0,
+        "status_only_AvsB": 0.0
+      },
+      "threshold": "= 0.0 (all same-status comparisons)",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_status, body_drift_AvsB_status"
+    },
+    "C4_FULL_EXCEEDS_STATUS_NONVACUOUS": {
+      "type": "positive",
+      "expected": "full-vector discrimination > B-STATUS-ONLY strictly on A vs C (e.g., 1.0 > 0.0); equality at ceiling is vacuous and fails",
+      "observed": {
+        "full": 1.0,
+        "status": 0.0
+      },
+      "threshold": "strictly greater (full > status)",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full vs body_drift_AvsC_status"
+    },
+    "C5_NULL_NO_FALSE_POSITIVE": {
+      "type": "null",
+      "expected": "null N1 (STATE_A resampled) full = 0.0, CI contains 0.0, point <= 0.05; status-only and body-only also 0.0",
+      "observed": {
+        "full": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ],
+        "status": 0.0,
+        "body": 0.0
+      },
+      "threshold": "= 0.0, CI contains 0.0, <= 0.05",
+      "pass": true,
+      "evidence_refs": "metrics.null_control_N1_full/status/body"
+    },
+    "C6_CONTENT_LENGTH_VARIES_AND_HEADERS_CONSTANT": {
+      "type": "validity",
+      "expected": "Content-Length differs across A/B/C proportional to body_len and body SHA-256 distinct, non-CLEN filtered headers identical across A/B/C (Cache-Control, ETag, Vary, no Set-Cookie), CLEN == body_len on each observation",
+      "observed": {
+        "content_length_by_state": {
+          "body_A": [
+            "31"
+          ],
+          "body_B": [
+            "70"
+          ],
+          "body_C": [
+            "117"
+          ]
+        },
+        "body_len_by_state": {
+          "body_A": [
+            31
+          ],
+          "body_B": [
+            70
+          ],
+          "body_C": [
+            117
+          ]
+        },
+        "body_sha_by_state": {
+          "body_A": [
+            "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+          ],
+          "body_B": [
+            "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+          ],
+          "body_C": [
+            "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+          ]
+        },
+        "non_clen_headers_identical": true,
+        "set_cookie_absent": true,
+        "clen_equals_body_len_all_obs": true
+      },
+      "threshold": "CLEN distinct & increasing, SHA distinct, non-CLEN identical, no Set-Cookie, CLEN == body_len",
+      "pass": true,
+      "evidence_refs": "identity_checks (raw Content-Length per observation)"
+    },
+    "C7_WRITABLE_PERMISSION_LEVEL": {
+      "type": "positive",
+      "expected": "(a) body-filtered permission reader 200 vs admin 200 (A vs C) full >= 0.7; (b) classic permission escalation 403 vs 200 via committed SQLite role write full >= 0.7; same-state 403 null = 0.0 CI contains 0.0 <= 0.05",
+      "observed": {
+        "reader_admin_200_AvsC": 1.0,
+        "classic_perm_403_vs_200": 1.0,
+        "perm_null": {
+          "full": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "statuses_403_200": true,
+        "bodies_distinct": true
+      },
+      "threshold": ">= 0.7 both; null == 0.0 CI contains 0.0 <= 0.05",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full, classic_perm_full, perm_null_full; batch_state_log set_role writes"
+    },
+    "C8_WRITABLE_SESSION_INVALIDATION": {
+      "type": "positive",
+      "expected": "writable session invalidation 401 vs 200 via committed SQLite session write full >= 0.7; same-state 401 null = 0.0 CI contains 0.0 <= 0.05",
+      "observed": {
+        "classic_sess_401_vs_200": 1.0,
+        "sess_null": {
+          "full": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "statuses_401_200": true,
+        "bodies_distinct": true
+      },
+      "threshold": ">= 0.7; null == 0.0 CI contains 0.0 <= 0.05",
+      "pass": true,
+      "evidence_refs": "metrics.classic_sess_full, sess_null_full; batch_state_log invalidate_session write"
+    },
+    "C5B_NULL_N2_EXPLORATORY": {
+      "type": "null-exploratory",
+      "expected": "exploratory N2 (STATE_C resampled) = 0.0 (reported, not gating)",
+      "observed": {
+        "full": 0.0,
+        "ci_95": [
+          0.0,
+          0.0
+        ]
+      },
+      "threshold": "0.0 (reported only)",
+      "pass": true,
+      "evidence_refs": "metrics.null_control_N2_full"
+    }
+  },
+  "baselines": {
+    "B-STATUS-ONLY": {
+      "type": "strong-null",
+      "expected": "0.0 on all same-status body-only comparisons (200 vs 200); 1.0 on status-varying classic controls",
+      "observed": {
+        "body_drift_AvsC": 0.0,
+        "body_drift_AvsB": 0.0,
+        "null_control_N1": 0.0,
+        "classic_perm": 1.0,
+        "classic_sess": 1.0
+      },
+      "pass": true
+    },
+    "B-BODY-ONLY": {
+      "type": "positive",
+      "expected": ">0.5 on same-status body-only drift (A vs C, A vs B); 1.0 on classic controls; 0.0 on nulls",
+      "observed": {
+        "body_drift_AvsC": 1.0,
+        "body_drift_AvsB": 1.0,
+        "null_control_N1": 0.0,
+        "classic_perm": 1.0,
+        "classic_sess": 1.0
+      },
+      "pass": true
+    },
+    "B-HEADERS-ONLY": {
+      "type": "body-correlated-auxiliary",
+      "expected": ">0 on body-only comparisons SOLELY via body-correlated Content-Length (documented, not a failure); 0.0 on nulls",
+      "observed": {
+        "body_drift_AvsC": 1.0,
+        "body_drift_AvsB": 1.0,
+        "null_control_N1": 0.0
+      },
+      "pass": true
+    },
+    "B-HEADERS-NO-CLEN": {
+      "type": "isolation",
+      "expected": "0.0 on body-only comparisons (no independent header drift)",
+      "observed": {
+        "body_drift_AvsC": 0.0,
+        "body_drift_AvsB": 0.0,
+        "null_control_N1": 0.0
+      },
+      "pass": true
+    }
+  },
+  "status": "COMPLETE",
+  "decision_rule_outcome": "SUPPORTS",
+  "failing_conditions": []
+}
