@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: spider-main-writer
@@ -28,6 +29,7 @@ jobs:
           python-version: "3.12"
 
       - name: Materialize canonical Research 2.0 memory
+        id: materialize
         shell: bash
         run: |
           set -euo pipefail
@@ -39,9 +41,27 @@ jobs:
           git add -- SPIDER_CODEX.md codex
           if git diff --cached --quiet; then
             echo "Codex already current."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             bash scripts/main_safety_anchor.sh || echo "::warning::Main safety anchor failed; Codex remains unblocked and the previous rescue pointer is preserved."
             exit 0
           fi
           git commit -m "codex: sync Research 2.0 evidence"
           git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
           bash scripts/main_safety_anchor.sh || echo "::warning::Main safety anchor failed after Codex push; Codex remains accepted and the previous rescue pointer is preserved."
+
+      - name: Wake global direction after canonicalization
+        if: ${{ steps.materialize.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACTIVE=$(gh run list --workflow=factory-pulse.yml --limit 20 --json status |
+            jq '[.[] | select(.status=="queued" or .status=="in_progress" or .status=="waiting" or .status=="requested")] | length')
+          if [[ "$ACTIVE" == "0" ]]; then
+            gh workflow run factory-pulse.yml --ref main
+            echo "SPIDER_FACTORY_WAKE_AFTER_CODEX"
+          else
+            echo "SPIDER_FACTORY_WAKE_SKIPPED_ACTIVE count=$ACTIVE"
+          fi
