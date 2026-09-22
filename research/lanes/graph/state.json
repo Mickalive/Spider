@@ -7,11 +7,11 @@
   "continue_immediately": false,
   "next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
   "promotion_ready": false,
-  "consecutive_failures": 0,
-  "updated_at": "2026-09-22T06:55:26.747994+00:00",
-  "last_failure_retryable": null,
+  "consecutive_failures": 1,
+  "updated_at": "2026-09-22T06:56:38.673012+00:00",
+  "last_failure_retryable": true,
   "last_handoff_sha256": "99a45a7aac8041f5ed6c0d94d608e92ac238aee13c7559dc75d57166f95c1528",
-  "same_failure_count": 0,
-  "last_failure_fingerprint": null,
-  "last_failure_control_revision": null
+  "same_failure_count": 1,
+  "last_failure_fingerprint": "3691cba9d2d6ddee9e8b54f4",
+  "last_failure_control_revision": "ef5e3057ac7ef422e1383cb1f36e5cd91112f3a3da9f3c75198a0455bbaf28ae"
 }
