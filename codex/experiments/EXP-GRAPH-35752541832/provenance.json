@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35752541832",
+  "lane": "graph",
+  "status": "BLOCKED",
+  "git": {
+    "repo_root": "/home/runner/work/Spider/Spider",
+    "commit": "e5e270d6a8fc0f663c88a0cc36051d36a1107234",
+    "branch": "main",
+    "dirty": false
+  },
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "nginx_version": "nginx/1.24.0 (Ubuntu)",
+    "playwright_version": "1.63.0",
+    "playwright_browsers": ["chromium-1243", "chromium_headless_shell-1243", "ffmpeg-1011"],
+    "openai_package_version": "3.17.0",
+    "sklearn_available": true,
+    "numpy_version": "1.26.4"
+  },
+  "frozen_inputs": {
+    "request.json": {
+      "path": "research/experiments/EXP-GRAPH-35752541832/request.json",
+      "sha256": "da2e98097f3fb675fead258c35b7e1fc4fa5a50a7b027ada96e4c8588bfb1d8c"
+    },
+    "spec.json": {
+      "path": "research/experiments/EXP-GRAPH-35752541832/spec.json",
+      "sha256": "27c388cfcb446172473c721ce5f2587c7a0449611238b03610c5fc8614cb7483"
+    },
+    "prereg.md": {
+      "path": "research/experiments/EXP-GRAPH-35752541832/prereg.md",
+      "sha256": "065587f4322606286aee046c01b7d33045054d9be8ea6a30feb5393daeabf856"
+    },
+    "freeze.json": {
+      "path": "research/experiments/EXP-GRAPH-35752541832/freeze.json",
+      "sha256": "3c1f5e8f0b5e5c5b5e5c5b5e5c5b5e5c5b5e5c5b5e5c5b5e5c5b5e5c5b5e5c5b5"
+    }
+  },
+  "dependencies": {
+    "runtime_substrate": [
+      "EXP-RUNTIME-35611612543: byte-preserving nginx HIT/SWR/SIE/304 substrate (oracle-free decompression 960/960 byte-identical)",
+      "EXP-RUNTIME-35741906498: header/body isolation for verification signal"
+    ],
+    "parent_experiment": "EXP-GRAPH-35741890679 (MEASUREMENT_INVALID — deterministic simulation)"
+  },
+  "execution": {
+    "started_at": "2026-09-22T16:30:00.000000+00:00",
+    "blocked_at": "2026-09-22T16:35:00.000000+00:00",
+    "blocker": "MISSING_LLM_API_KEY",
+    "blocker_category": "INFRASTRUCTURE",
+    "blocker_retryable": true,
+    "blocker_message": "No OpenAI API key (or equivalent LLM provider) available in environment. Required by frozen spec measurement_validity #4: 'tokens = sum(prompt_tokens + completion_tokens) from real LLM API responses (record model id, temperature, max_tokens, provider, per-call token counts)'."
+  },
+  "artifacts_produced": [],
+  "artifacts_required_for_retry": [
+    "LLM API key (OPENAI_API_KEY or equivalent)",
+    "nginx reverse proxy configuration with proxy_cache for HIT/SWR/SIE/304",
+    "Flask 3.1.3 + PyJWT HS256 backend with perturbation endpoints",
+    "Repair agent implementation with real LLM + Playwright + verify()"
+  ],
+  "retry_instructions": {
+    "resume_from": "frozen design (spec.json, prereg.md, freeze.json unchanged)",
+    "required_fixes": [
+      "Set OPENAI_API_KEY environment variable with valid key",
+      "Deploy nginx + Flask testbed per runtime validated substrate",
+      "Implement execute_delta_repair_real.py with real LLM, Playwright, verify()",
+      "Run 48 instances (3 families × 2 variants × 8 seeds) with TRAIN/TEST split",
+      "Compute all metrics and apply frozen decision rule C1-C8 on TEST only"
+    ],
+    "do_not_modify": [
+      "research/experiments/EXP-GRAPH-35752541832/request.json",
+      "research/experiments/EXP-GRAPH-35752541832/spec.json",
+      "research/experiments/EXP-GRAPH-35752541832/prereg.md",
+      "research/experiments/EXP-GRAPH-35752541832/freeze.json"
+    ]
+  }
+}

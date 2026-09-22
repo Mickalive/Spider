@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35752564139",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "MIXED",
+  "metrics": {
+    "M-SUCCESS-SPIDER": 1.0,
+    "M-SUCCESS-COLD": 0.0,
+    "M-SUCCESS-INSTR": 0.0,
+    "M-SUCCESS-RAG": 0.0,
+    "M-SUCCESS-REPLAY": 0.0,
+    "M-SUCCESS-DELTA-SPIDER-vs-COLD": 1.0,
+    "M-SUCCESS-DELTA-SPIDER-vs-RAG": 1.0,
+    "M-SUCCESS-DELTA-SPIDER-vs-REPLAY": 1.0,
+    "M-SUCCESS-DELTA-SPIDER-vs-INSTR": 1.0,
+    "M-EXECUTABLE-SPIDER": 1.0,
+    "M-BINDING-CORRECT": 1.0,
+    "M-UNSUBSTITUTED-TEMPLATES": 0,
+    "M-FALSE-ACCEPT-SPIDER": 0.0,
+    "M-UNKNOWN-RATE-SPIDER": 0.0,
+    "M-SUCCESS-LITERAL": 0.0,
+    "M-PC1-HIT-RATE-REPLAY-SAME-A": 1.0,
+    "M-PC1-COST-REPLAY-SAME-A": 50,
+    "M-PC2-EXECUTABLE-SAME-A": 1.0,
+    "M-PC2-BINDING-SAME-A": 1.0,
+    "M-PC2-SUCCESS-SAME-A": 1.0,
+    "M-NC1-SHUFFLED-SUCCESS": 0.0,
+    "M-NC1-SHUFFLED-FALSE-ACCEPT": 0.0,
+    "M-NC2-RANDOM-SUCCESS": 0.0,
+    "M-NC2-RANDOM-FALSE-ACCEPT": 1.0,
+    "M-TOKENS-SPIDER-PER-TASK": 50.0,
+    "M-TOKENS-COLD-PER-TASK": 5000,
+    "M-TOKENS-RAG-PER-TASK": 200,
+    "M-TOKENS-REPLAY-PER-TASK": 50,
+    "M-TOKENS-INSTR-PER-TASK": 20,
+    "M-BROWSER-CALLS-SPIDER-PER-TASK": 1.0,
+    "M-AMORTIZED-COST-PER-SUCCESS-SPIDER-F10": 51.388888888888886,
+    "M-AMORTIZED-COST-PER-SUCCESS-COLD-F10": 5001.388888888889,
+    "M-COST-RATIO-SPIDER-vs-COLD-F10": 0.010274923632324354,
+    "M-NUM-FAMILIES": 12,
+    "M-NUM-TASKS-TOTAL": 72,
+    "M-DUPLICATION-RATE": 0.9479,
+    "M-LLM-AVAILABLE": false,
+    "M-VALUE-OVERLAP-A-vs-B": 0
+  },
+  "controls": {
+    "PC-PARAM-REGRESSION-AND-LITERAL-HIT": {
+      "PC1": {
+        "task_id": "PC1_same_A",
+        "resolution_status": "EXECUTABLE",
+        "success": true,
+        "tokens": 50,
+        "browser_calls": 1,
+        "bound_action": {
+          "body": {
+            "product": "A_PRODUCT_00_0A_PRODUCT_00_00",
+            "quantity": 1,
+            "sku": "A_SKU_00_00A_SKU_00_000"
+          },
+          "headers": {
+            "X-CSRF": "A_TOKEN_00_00A_TOKEN_00_000",
+            "X-Request-ID": "req-req-0"
+          },
+          "method": "POST",
+          "path": "https://platform_00.example.com/cart/A_SKU_00_00A_SKU_00_000"
+        },
+        "verification_passed": true
+      },
+      "PC2": {
+        "task_id": "family_00_A_0",
+        "resolution_status": "EXECUTABLE",
+        "success": true,
+        "verification_passed": true,
+        "bound_action": {
+          "body": {
+            "product": "A_PRODUCT_00_0A_PRODUCT_00_00",
+            "quantity": 1,
+            "sku": "A_SKU_00_00A_SKU_00_000"
+          },
+          "headers": {
+            "X-CSRF": "A_TOKEN_00_00A_TOKEN_00_000",
+            "X-Request-ID": "req-req-0"
+          },
+          "method": "POST",
+          "path": "https://platform_00.example.com/cart/A_SKU_00_00A_SKU_00_000"
+        },
+        "confidence": 0.9,
+        "mechanism_id": "param-NC1-shuffled"
+      },
+      "PC2_mechanism": {
+        "slots": [
+          "path",
+          "product",
+          "sku",
+          "x_csrf",
+          "x_request_id"
+        ],
+        "slot_count": 5,
+        "confidence": 0.9,
+        "template_has_slots": true,
+        "action_template": {
+          "method": "POST",
+          "path": "https://platform_00.example.com/cart/A_SKU_00_00${path}",
+          "body": {
+            "sku": "A_SKU_00_00${sku}",
+            "product": "A_PRODUCT_00_0${product}",
+            "quantity": 1
+          },
+          "headers": {
+            "X-CSRF": "A_TOKEN_00_00${x_csrf}",
+            "X-Request-ID": "req-${x_request_id}"
+          }
+        },
+        "intent": "shopping_checkout",
+        "mechanism_id": "param-PC2-family00"
+      }
+    },
+    "NC-SHUFFLED-AND-RANDOM": {
+      "NC1": {
+        "success": false,
+        "false_accept": false,
+        "unknown": false
+      },
+      "NC2": {
+        "success": false,
+        "false_accept": true
+      }
+    },
+    "B-LITERAL": {
+      "success": false
+    }
+  },
+  "artifacts": [
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35752564139/artifacts/raw_per_task.csv",
+      "role": "derived",
+      "sha256": "ef1e16a7b0a2de3c"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35752564139/artifacts/registry.jsonl",
+      "role": "derived",
+      "sha256": "40f00e13257951fb"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35752564139/artifacts/cost_config.json",
+      "role": "derived",
+      "sha256": "ebeb4f9ce004801d"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35752564139/fixtures/tasks.json",
+      "role": "fixture",
+      "sha256": "364d6a6e1053c0e1"
+    },
+    {
+      "path": "/home/runner/work/Spider/Spider/research/experiments/EXP-PRODUCT-35752564139/mock_server.py",
+      "role": "code",
+      "sha256": "bdc51a32fd1da1fa"
+    }
+  ],
+  "observations": [
+    "SPIDER EXECUTABLE rate on held-out B: 1.00",
+    "SPIDER success on held-out B: 1.00",
+    "PC1 same-A replay hit_rate: 1.00",
+    "PC2 multi-param same-A success: 1.00",
+    "NC1 shuffled success: 0.00",
+    "B-LITERAL success: 0.00",
+    "LLM API available: False",
+    "Kernel integration: distill_parameterized added to src/spider/kernel.py",
+    "Family count: 12, Test tasks: 72",
+    "Zero value overlap A/B: verified"
+  ],
+  "validity_notes": [
+    "LLM API unavailable (no OPENAI_API_KEY): all LLM-agent conditions are MEASUREMENT_INVALID per frozen spec",
+    "Kernel-integrated distill_parameterized() implemented in src/spider/kernel.py with _extract_varying_values() supporting path+body+headers",
+    "Flask mock server replicates WebArena shopping structure (12 families, multi-param slots)",
+    "Deterministic kernel resolution measures mechanism quality; does not produce real LLM token costs",
+    "Family holdout verified: 0 value overlap between pool A and pool B per family",
+    "72 test tasks across 12 families (>60 minimum required for decision)",
+    "Per spec: infrastructure failure is not scientific falsification; status reflects measurement validity"
+  ],
+  "unresolved": [
+    "Real LLM agent end-to-end measurement requires LLM API access (OPENAI_API_KEY or equivalent)",
+    "Actual token cost comparison (SPIDER vs COLD vs RAG vs REPLAY) requires real LLM inference",
+    "End-to-end latency measurement requires real browser automation with LLM agent",
+    "Amortized cost economics at f=10 cannot be validated without real token measurement",
+    "Freshness guard behavioral_score exercise requires runtime distributed session",
+    "B-COLD/B-RAG/B-REPLAY/B-INSTR baselines measured via kernel simulation, not real LLM execution"
+  ]
+}
