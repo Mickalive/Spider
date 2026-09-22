@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35725756862",
+  "lane": "product",
+  "github_run_id": "35725756862",
+  "github_run_attempt": 1,
+  "recorded_at": "2026-09-22T12:21:00+00:00",
+  "pre_execute_sha": "bba7197e3f51f1d0b81d78905e29baa5a4f5b0d4",
+  "post_execute_sha": "76c84aac5caf280312f3cbf79c5ba7bd1c7bc7c1",
+  "frozen_inputs": {
+    "request.json": "eef2aea33a5c85333aec17e71e0d3cdfcf711f384347fa2e6d277cc8e610e528",
+    "spec.json": "b70607209eb7a76171bc5fcc0186e68ed92d20f764bc9e07670e3983a2172c44",
+    "prereg.md": "145fde677eba781f6feb9fd75208fd0da283fc3c16db7700851058890787cbd1",
+    "freeze.json": "24c9a715d9d2ca66ddc63674e4f6f8a6d2afd51361980b70cfc3b3361a0f1e7d"
+  },
+  "code_paths": [
+    "src/spider/kernel.py",
+    "src/spider/models.py",
+    "src/spider/registry.py",
+    "tests/test_kernel.py",
+    "research/experiments/EXP-PRODUCT-35725756862/run_experiment.py",
+    "research/experiments/EXP-PRODUCT-35725756862/spec.json",
+    "research/experiments/EXP-PRODUCT-35725756862/prereg.md"
+  ],
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "linux",
+    "pythonhashseed": "0",
+    "random_seed": 42,
+    "deterministic": true,
+    "llm_api_calls": 0,
+    "docker_required": false,
+    "browser_automation": false,
+    "token_proxy": "frozen deterministic (retrieval 200+150ms, verification 50+120ms, novel 500+2*120ms, token 2ms, distill 1000 amortized)",
+    "operating_system": "GitHub Actions runner"
+  },
+  "datasets_fixtures": {
+    "source": "synthetic Flask catalog mock replicating WebArena shopping structure (12 stores sharing platform, L=10 fixed workflow) per EXP-INTEL-35651934683 M1=1.0; WebArena-Verified JSON fixtures not found locally, fallback to synthetic as allowed by spec measurement_validity #3",
+    "training_resource_A": "A_SKU_001..050, A_STORE_01..06, 5 demonstrations",
+    "test_resource_B": "B_SKU_001..050, B_STORE_01..06, disjoint from A, controlled novelty bins 0%,25%,50%,75%,100% (novel_counts 0,2,5,7,10)",
+    "total_tasks": "100 SPIDER + 100 per baseline (COLD, INSTR, RAG, REPLAY) + 2 PC + 200 NC (shuffled, random) =702 rows",
+    "fixture_path": "fixtures/tasks.json",
+    "fixture_sha256": "d9514abb06ec8a3f78edba41badfe99d4c087e2b899c3552cfed124c0a1b3626"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/artifacts/raw_per_task.csv",
+      "sha256": "93c69dffccc6506ceb13d3c08352ab98469a89604c3551d7b73147d3f73021f4",
+      "role": "raw",
+      "rows": 702,
+      "columns": ["task_id","novelty_fraction","system","success","false_accept","tokens","browser_calls","latency_ms","reused_steps","unknown"]
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/artifacts/registry.json",
+      "sha256": "5a13ba6f11fada9a51f5906ad19d8df5106926bc3212338841c478f03a16e63e",
+      "role": "derived",
+      "description": "parameterized mechanism confidence 0.90, slots [sku, store_id]"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/artifacts/cost_config.json",
+      "sha256": "2f1cd4a303aa4f6063de0cfc2768739f2ab4d28648f7c397b2cc543fb6508adc",
+      "role": "fixture",
+      "description": "frozen proxy constants"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/artifacts/metrics.json",
+      "sha256": "768a2bee5fad8a22c3b9aec09d526a5e2e88d5c94196f56aee152597a14f6299",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/artifacts/controls.json",
+      "sha256": "5bf3ebeef54a0388e7672cc18d6d6261e81691e2b9355c979ab10ff6c87e153a",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/run_experiment.py",
+      "sha256": "4089913ad4d6ea49c2d77669efc316be5ec600cad101f0ac7e2465c404827d03",
+      "role": "code",
+      "description": "deterministic harness, 800 lines, zero LLM calls, ~2ms per trial"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/result.json",
+      "sha256": "f17dde15f8ae762e13dc4a3b59962257f876fe0bb3ef92e4e01bc75a247c1c6c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PRODUCT-35725756862/report.md",
+      "sha256": "2f74f9af133ca172d81803f70e4873da9ab702b5f7de654bd5a85b1771ad43fc",
+      "role": "derived"
+    }
+  ],
+  "commands": [
+    "PYTHONHASHSEED=0 random.seed(42) python research/experiments/EXP-PRODUCT-35725756862/run_experiment.py",
+    "sha256sum research/experiments/EXP-PRODUCT-35725756862/artifacts/* research/experiments/EXP-PRODUCT-35725756862/fixtures/*",
+    "python -m pytest tests/test_kernel.py -v"
+  ],
+  "test_results": {
+    "kernel_tests": "tests/test_kernel.py 3/3 pass (test_unknown_is_default, test_parameterized_mechanism_binds_only_when_guarded, test_invalidation_forces_abstention) — kernel literal-only not modified, harness-level parameterization validated",
+    "product_lane_allowed_roots": ["src","tests","sdk","pyproject.toml"],
+    "product_core_promotion": false,
+    "no_src_modification": true
+  },
+  "hashes": {
+    "run_experiment.py": "4089913ad4d6ea49c2d77669efc316be5ec600cad101f0ac7e2465c404827d03",
+    "raw_per_task.csv": "93c69dffccc6506ceb13d3c08352ab98469a89604c3551d7b73147d3f73021f4"
+  },
+  "reproducibility": {
+    "deterministic_seeds": "PYTHONHASHSEED=0, random.seed(42), stratified bootstrap seed 42",
+    "wall_clock": "<10 minutes, ~700 trials *2ms, single runner",
+    "storage": "per-task CSV 702 rows + registry JSON, cost_config"
+  }
+}
