@@ -1,0 +1,2669 @@
+{
+  "experiment_id": "EXP-RUNTIME-35764329925",
+  "lane": "runtime",
+  "started_at": "2026-09-22T18:45:52.664478+00:00",
+  "finished_at": "2026-09-22T18:46:08.110090+00:00",
+  "seed": 44,
+  "n_samples_per_batch": 20,
+  "jitter_ms": [
+    50,
+    150
+  ],
+  "concurrency": 4,
+  "bootstrap_b": 1000,
+  "topology": "gunicorn(2x sync)+nginx reverse proxy",
+  "gunicorn_port": 19860,
+  "nginx_port": 19851,
+  "excluded_headers": [
+    "Date",
+    "Server",
+    "X-Request-Id"
+  ],
+  "client_side_filter_out": [
+    "date",
+    "server",
+    "x-request-id",
+    "x-worker-pid"
+  ],
+  "bodies": {
+    "A": {
+      "len": 31,
+      "sha256": "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+    },
+    "B": {
+      "len": 70,
+      "sha256": "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+    },
+    "C": {
+      "len": 117,
+      "sha256": "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+    }
+  },
+  "header_states": {
+    "A": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"fixed-aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "E": {
+      "cache_control": "max-age=0,must-revalidate",
+      "etag": "W/\"changed-bbb-222\"",
+      "vary": "Accept-Encoding, Origin",
+      "set_cookie": "session=xyz; Path=/; HttpOnly"
+    },
+    "CC_ONLY": {
+      "cache_control": "max-age=0,must-revalidate",
+      "etag": "W/\"fixed-aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "ETAG_ONLY": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"changed-bbb-222\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": ""
+    },
+    "SC_ONLY": {
+      "cache_control": "max-age=3600",
+      "etag": "W/\"fixed-aaa-111\"",
+      "vary": "Accept-Encoding",
+      "set_cookie": "session=xyz; Path=/; HttpOnly"
+    }
+  },
+  "body_403": {
+    "len": 22,
+    "sha256": "387fe73d9abe7e6c32a0eb6113efea98dea609edefe9c3b4c9788fcaaef1603b"
+  },
+  "body_401": {
+    "len": 25,
+    "sha256": "9df366cd61d0e8a1bd9c4462d4f032e5317b2708d154047affa816e234518f34"
+  },
+  "raw_line_count": 600,
+  "sanity_l_raw_line_count": 60,
+  "production_raw_line_count": 540,
+  "batch_state_log_entries": 70,
+  "validity": {
+    "checks": {
+      "server_state_committed_before_every_write": true,
+      "server_state_verified_before_every_batch": true,
+      "all_body_only_and_null_observations_status_200": true,
+      "all_header_only_observations_status_200": true,
+      "classic_perm_status_403_vs_200": true,
+      "classic_sess_status_401_vs_200": true,
+      "body_sha_distinct_across_ABC": true,
+      "content_length_distinct_across_ABC": true,
+      "content_length_increasing_across_ABC": true,
+      "non_clen_headers_identical_across_ABC": true,
+      "content_length_equals_body_len_all_obs": true,
+      "header_only_body_identical_31B": true,
+      "header_only_clen_identical_31": true,
+      "raw_line_count_per_batch_is_20": true,
+      "total_raw_lines": 600,
+      "excluded_headers_unchanged": true,
+      "worker_ids_distinct": true,
+      "body_a_sha_pin_matches": true,
+      "body_a_len_pin_matches": true,
+      "fingerprint_algorithm_matches_parent": true,
+      "worker_header_present_all_prod": true
+    },
+    "batch_counts": {
+      "prod_body_A": 20,
+      "prod_body_B": 20,
+      "prod_body_C": 20,
+      "prod_hdr_A": 20,
+      "prod_hdr_E": 20,
+      "prod_iso_cc": 20,
+      "prod_iso_etag": 20,
+      "prod_iso_sc": 20,
+      "prod_null_body_A1": 20,
+      "prod_null_body_A2": 20,
+      "prod_null_hdr_A1": 20,
+      "prod_null_hdr_A2": 20,
+      "prod_perm_403": 20,
+      "prod_perm_200": 20,
+      "prod_perm403_null_1": 20,
+      "prod_perm403_null_2": 20,
+      "prod_sess_200": 20,
+      "prod_sess_401": 20,
+      "prod_sess401_null_1": 20,
+      "prod_sess401_null_2": 20,
+      "seq_body_A": 20,
+      "seq_body_B": 20,
+      "seq_body_C": 20,
+      "seq_hdr_A": 20,
+      "seq_hdr_E": 20,
+      "prod_hdr_E_foldkeys": 20,
+      "prod_hdr_E_foldpad": 20,
+      "l_body_A": 20,
+      "l_body_C": 20,
+      "l_hdr_E": 20
+    },
+    "writes_count": 40,
+    "pre_batch_verifies_count": 30,
+    "critical_all_pass": true,
+    "failed_critical": []
+  },
+  "identity_checks": {
+    "body_sha_by_state": {
+      "prod_body_A": [
+        "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+      ],
+      "prod_body_B": [
+        "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+      ],
+      "prod_body_C": [
+        "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+      ]
+    },
+    "content_length_by_state": {
+      "prod_body_A": [
+        "31"
+      ],
+      "prod_body_B": [
+        "70"
+      ],
+      "prod_body_C": [
+        "117"
+      ]
+    },
+    "body_len_by_state": {
+      "prod_body_A": [
+        31
+      ],
+      "prod_body_B": [
+        70
+      ],
+      "prod_body_C": [
+        117
+      ]
+    },
+    "non_clen_headers_by_state": {
+      "prod_body_A": [
+        "{\"cache-control\": \"max-age=3600\", \"connection\": \"keep-alive\", \"content-type\": \"application/json\", \"etag\": \"W/\\\"fixed-aaa-111\\\"\", \"vary\": \"Accept-Encoding\"}"
+      ],
+      "prod_body_B": [
+        "{\"cache-control\": \"max-age=3600\", \"connection\": \"keep-alive\", \"content-type\": \"application/json\", \"etag\": \"W/\\\"fixed-aaa-111\\\"\", \"vary\": \"Accept-Encoding\"}"
+      ],
+      "prod_body_C": [
+        "{\"cache-control\": \"max-age=3600\", \"connection\": \"keep-alive\", \"content-type\": \"application/json\", \"etag\": \"W/\\\"fixed-aaa-111\\\"\", \"vary\": \"Accept-Encoding\"}"
+      ]
+    },
+    "statuses_by_state": {
+      "prod_body_A": [
+        200
+      ],
+      "prod_body_B": [
+        200
+      ],
+      "prod_body_C": [
+        200
+      ]
+    },
+    "body_sha_distinct_across_ABC": true,
+    "content_length_distinct_across_ABC": true,
+    "content_length_increasing_across_ABC": true,
+    "body_len_increasing_across_ABC": true,
+    "content_length_equals_body_len_all_obs": true,
+    "non_clen_headers_identical_across_ABC": true,
+    "non_clen_unique_sets_per_state": {
+      "prod_body_A": {
+        "unique_non_clen": 1,
+        "full_set_size": 1,
+        "headers_set_size": 1
+      },
+      "prod_body_B": {
+        "unique_non_clen": 1,
+        "full_set_size": 1,
+        "headers_set_size": 1
+      },
+      "prod_body_C": {
+        "unique_non_clen": 1,
+        "full_set_size": 1,
+        "headers_set_size": 1
+      },
+      "prod_hdr_A": {
+        "unique_non_clen": 1,
+        "full_set_size": 1,
+        "headers_set_size": 1
+      },
+      "prod_perm_200": {
+        "unique_non_clen": 1,
+        "full_set_size": 1,
+        "headers_set_size": 1
+      },
+      "prod_sess_200": {
+        "unique_non_clen": 1,
+        "full_set_size": 1,
+        "headers_set_size": 1
+      }
+    },
+    "body_a_sha_pin_matches": true,
+    "body_a_len_pin_matches": true,
+    "all_body_only_and_null_status_200": true,
+    "all_header_only_status_200": true,
+    "header_only_body_identical_31B": true,
+    "header_only_clen_identical_31": true,
+    "classic_perm_status_403_vs_200": true,
+    "classic_sess_status_401_vs_200": true,
+    "classic_perm_body_distinct": true,
+    "classic_sess_body_distinct": true,
+    "perm_null_same_state": true,
+    "sess_null_same_state": true,
+    "classic_403_null_status": true,
+    "classic_401_null_status": true,
+    "worker_ids_distinct": true,
+    "worker_ids_seen": [
+      "46041",
+      "46042"
+    ],
+    "perm_classic_worker_distribution": {
+      "46041": 21,
+      "46042": 19
+    },
+    "sess_classic_worker_distribution": {
+      "46041": 20,
+      "46042": 20
+    },
+    "perm_classic_workers_ge10": true,
+    "sess_classic_workers_ge10": true,
+    "per_state_fingerprint_set_sizes": {
+      "prod_body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_body_B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_hdr_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_hdr_E": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_iso_cc": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_iso_etag": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_iso_sc": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm_403": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess_401": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm403_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm403_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess401_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess401_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      }
+    }
+  },
+  "worker_distribution": {
+    "prod_body_A": {
+      "46042": 11,
+      "46041": 9
+    },
+    "prod_body_B": {
+      "46041": 10,
+      "46042": 10
+    },
+    "prod_body_C": {
+      "46041": 11,
+      "46042": 9
+    },
+    "prod_hdr_A": {
+      "46041": 11,
+      "46042": 9
+    },
+    "prod_hdr_E": {
+      "46042": 12,
+      "46041": 8
+    },
+    "prod_iso_cc": {
+      "46042": 9,
+      "46041": 11
+    },
+    "prod_iso_etag": {
+      "46041": 11,
+      "46042": 9
+    },
+    "prod_iso_sc": {
+      "46041": 9,
+      "46042": 11
+    },
+    "prod_null_body_A1": {
+      "46042": 10,
+      "46041": 10
+    },
+    "prod_null_body_A2": {
+      "46042": 10,
+      "46041": 10
+    },
+    "prod_null_hdr_A1": {
+      "46041": 10,
+      "46042": 10
+    },
+    "prod_null_hdr_A2": {
+      "46042": 11,
+      "46041": 9
+    },
+    "prod_perm_403": {
+      "46041": 11,
+      "46042": 9
+    },
+    "prod_perm_200": {
+      "46041": 10,
+      "46042": 10
+    },
+    "prod_perm403_null_1": {
+      "46041": 8,
+      "46042": 12
+    },
+    "prod_perm403_null_2": {
+      "46041": 9,
+      "46042": 11
+    },
+    "prod_sess_200": {
+      "46041": 11,
+      "46042": 9
+    },
+    "prod_sess_401": {
+      "46041": 9,
+      "46042": 11
+    },
+    "prod_sess401_null_1": {
+      "46042": 11,
+      "46041": 9
+    },
+    "prod_sess401_null_2": {
+      "46042": 10,
+      "46041": 10
+    }
+  },
+  "write_visibility_ms": {
+    "set_role_viewer": 0.007536564000020007,
+    "set_role_admin": 0.007630379000147514,
+    "invalidate_session": 0.007764952999878005
+  },
+  "metrics": {
+    "body_drift_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_C",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_C",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_C",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_C",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_C",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_B",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_B",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_B",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_B",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "body_drift_AvsB_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_body_A vs prod_body_B",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "header_drift_AvsE_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_hdr_E",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "header_drift_AvsE_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_hdr_E",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "header_drift_AvsE_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_hdr_E",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "header_drift_AvsE_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_hdr_E",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "header_drift_AvsE_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_hdr_E",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "header_iso_CC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_cc",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "header_iso_CC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_cc",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "header_iso_CC_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_cc",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "header_iso_CC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_cc",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "header_iso_CC_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_cc",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "header_iso_ETag_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_etag",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "header_iso_ETag_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_etag",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "header_iso_ETag_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_etag",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "header_iso_ETag_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_etag",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "header_iso_ETag_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_etag",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "header_iso_SC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_sc",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "header_iso_SC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_sc",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "header_iso_SC_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_sc",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "header_iso_SC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_sc",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "header_iso_SC_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_A vs prod_iso_sc",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "null_body_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_body_A1 vs prod_null_body_A2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "null_body_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_body_A1 vs prod_null_body_A2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "null_body_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_body_A1 vs prod_null_body_A2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "null_body_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_body_A1 vs prod_null_body_A2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "null_body_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_body_A1 vs prod_null_body_A2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "null_hdr_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_hdr_A1 vs prod_null_hdr_A2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "null_hdr_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_hdr_A1 vs prod_null_hdr_A2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "null_hdr_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_hdr_A1 vs prod_null_hdr_A2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "null_hdr_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_hdr_A1 vs prod_null_hdr_A2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "null_hdr_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_null_hdr_A1 vs prod_null_hdr_A2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "classic_perm_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm_403 vs prod_perm_200",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "classic_perm_status": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm_403 vs prod_perm_200",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "classic_perm_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm_403 vs prod_perm_200",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "classic_perm_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm_403 vs prod_perm_200",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "classic_perm_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm_403 vs prod_perm_200",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "classic_sess_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess_401 vs prod_sess_200",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "classic_sess_status": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess_401 vs prod_sess_200",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "classic_sess_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess_401 vs prod_sess_200",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "classic_sess_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess_401 vs prod_sess_200",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "classic_sess_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess_401 vs prod_sess_200",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "perm_null_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm403_null_1 vs prod_perm403_null_2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "perm_null_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm403_null_1 vs prod_perm403_null_2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "perm_null_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm403_null_1 vs prod_perm403_null_2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "perm_null_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm403_null_1 vs prod_perm403_null_2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "perm_null_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_perm403_null_1 vs prod_perm403_null_2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "sess_null_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess401_null_1 vs prod_sess401_null_2",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "sess_null_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess401_null_1 vs prod_sess401_null_2",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "sess_null_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess401_null_1 vs prod_sess401_null_2",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "sess_null_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess401_null_1 vs prod_sess401_null_2",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "sess_null_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_sess401_null_1 vs prod_sess401_null_2",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "fold_E2_keys_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldkeys",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "fold_E2_keys_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldkeys",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "fold_E2_keys_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldkeys",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "fold_E2_keys_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldkeys",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "fold_E2_keys_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldkeys",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "fold_E2_pad_full": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldpad",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "fold_E2_pad_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldpad",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "fold_E2_pad_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldpad",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "fold_E2_pad_headers": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldpad",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "fold_E2_pad_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "prod_hdr_E vs prod_hdr_E_foldpad",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_C",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_C",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_C",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_C",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_C",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsB_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_B",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsB_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_B",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsB_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_B",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsB_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_B",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "seq_body_AvsB_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_body_A vs seq_body_B",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "seq_hdr_AvsE_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_hdr_A vs seq_hdr_E",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "seq_hdr_AvsE_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_hdr_A vs seq_hdr_E",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "seq_hdr_AvsE_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_hdr_A vs seq_hdr_E",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "seq_hdr_AvsE_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_hdr_A vs seq_hdr_E",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "seq_hdr_AvsE_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "seq_hdr_A vs seq_hdr_E",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "sanity_l_body_AvsC_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_body_C",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "sanity_l_body_AvsC_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_body_C",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "sanity_l_body_AvsC_body": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_body_C",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "sanity_l_body_AvsC_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_body_C",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "sanity_l_body_AvsC_headers_no_clen": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_body_C",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "sanity_l_hdr_AvsE_full": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_hdr_E",
+      "source": "full",
+      "degenerate_ci": true
+    },
+    "sanity_l_hdr_AvsE_status": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_hdr_E",
+      "source": "status",
+      "degenerate_ci": true
+    },
+    "sanity_l_hdr_AvsE_body": {
+      "discrimination": 0.0,
+      "ci_95": [
+        0.0,
+        0.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_hdr_E",
+      "source": "body",
+      "degenerate_ci": true
+    },
+    "sanity_l_hdr_AvsE_headers": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_hdr_E",
+      "source": "headers",
+      "degenerate_ci": true
+    },
+    "sanity_l_hdr_AvsE_headers_no_clen": {
+      "discrimination": 1.0,
+      "ci_95": [
+        1.0,
+        1.0
+      ],
+      "ci_width": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "nominal_n": [
+        20,
+        20
+      ],
+      "comparison": "l_body_A vs l_hdr_E",
+      "source": "headers_no_clen",
+      "degenerate_ci": true
+    },
+    "effective_distinct_n": {
+      "l_body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "l_body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "l_hdr_E": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_body_B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_hdr_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_hdr_E": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_hdr_E_foldkeys": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_hdr_E_foldpad": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_iso_cc": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_iso_etag": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_iso_sc": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_null_body_A1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_null_body_A2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_null_hdr_A1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_null_hdr_A2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm403_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm403_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_perm_403": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess401_null_1": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess401_null_2": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess_200": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "prod_sess_401": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "seq_body_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "seq_body_B": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "seq_body_C": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "seq_hdr_A": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      },
+      "seq_hdr_E": {
+        "full": 1,
+        "status": 1,
+        "body": 1,
+        "headers": 1,
+        "headers_no_clen": 1
+      }
+    }
+  },
+  "conditions": {
+    "C1_FULL_BODY_DRIFT_PROD": {
+      "type": "positive",
+      "expected": "full-vector discrimination > 0.5 on STATE_A vs STATE_C (both 200 via nginx->gunicorn, bodies byte-different, non-CLEN headers identical, CLEN 31 vs 117)",
+      "observed": {
+        "full_AvsC": 1.0,
+        "statuses_AvsC": [
+          [
+            200
+          ],
+          [
+            200
+          ]
+        ],
+        "body_sha_distinct": true,
+        "content_length_distinct": true,
+        "ci_95": [
+          1.0,
+          1.0
+        ]
+      },
+      "threshold": ">0.5",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full; identity_checks"
+    },
+    "C2_BODY_ONLY_SIGNAL_PROD": {
+      "type": "positive",
+      "expected": "B-BODY-ONLY > 0.5 on A vs C AND A vs B; B-HEADERS-NO-CLEN = 0.0 on A vs C and A vs B",
+      "observed": {
+        "body_only_AvsC": 1.0,
+        "body_only_AvsB": 1.0,
+        "headers_no_clen_AvsC": 0.0,
+        "headers_no_clen_AvsB": 0.0
+      },
+      "threshold": ">0.5 both; headers_no_clen == 0.0 both",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_body, body_drift_AvsB_body, body_drift_AvsC_headers_no_clen, body_drift_AvsB_headers_no_clen"
+    },
+    "C3_STATUS_ISOLATED_PROD": {
+      "type": "strong-null",
+      "expected": "B-STATUS-ONLY = 0.0 on A vs C and A vs B (status confound removed)",
+      "observed": {
+        "status_only_AvsC": 0.0,
+        "status_only_AvsB": 0.0
+      },
+      "threshold": "= 0.0",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_status, body_drift_AvsB_status"
+    },
+    "C4_FULL_EXCEEDS_STATUS_NONVACUOUS_PROD": {
+      "type": "positive",
+      "expected": "full-vector discrimination > B-STATUS-ONLY strictly on A vs C (1.0 > 0.0); equality at ceiling is vacuous and fails",
+      "observed": {
+        "full": 1.0,
+        "status": 0.0
+      },
+      "threshold": "strictly greater (full > status)",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full vs body_drift_AvsC_status"
+    },
+    "C5_NULL_NO_FALSE_POSITIVE_PROD": {
+      "type": "null",
+      "expected": "null N1-body (A resampled, concurrent) full = 0.0, CI contains 0.0, point <= 0.05; same for header null, 403 null, 401 null; status/body/headers/headers_no_clen all 0.0 on each null",
+      "observed": {
+        "null_body_full": 0.0,
+        "null_body_ci": [
+          0.0,
+          0.0
+        ],
+        "null_hdr_full": 0.0,
+        "null_hdr_ci": [
+          0.0,
+          0.0
+        ],
+        "perm_null_full": 0.0,
+        "perm_null_ci": [
+          0.0,
+          0.0
+        ],
+        "sess_null_full": 0.0,
+        "sess_null_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "threshold": "= 0.0, CI contains 0.0, <= 0.05 each",
+      "pass": true,
+      "evidence_refs": "metrics.null_body_full, null_hdr_full, perm_null_full, sess_null_full"
+    },
+    "C6_CONTENT_LENGTH_VARIES_AND_HEADERS_CONSTANT_PROD": {
+      "type": "validity",
+      "expected": "Content-Length differs across A/B/C proportional to body_len (31 != 70 != 117) and body SHA distinct, non-CLEN filtered headers identical across A/B/C, CLEN == body_len on each observation",
+      "observed": {
+        "content_length_by_state": {
+          "prod_body_A": [
+            "31"
+          ],
+          "prod_body_B": [
+            "70"
+          ],
+          "prod_body_C": [
+            "117"
+          ]
+        },
+        "body_len_by_state": {
+          "prod_body_A": [
+            31
+          ],
+          "prod_body_B": [
+            70
+          ],
+          "prod_body_C": [
+            117
+          ]
+        },
+        "body_sha_by_state": {
+          "prod_body_A": [
+            "d0ca833f843c6d70ec9d6755f52a92dcbfc8b4ab601b871bced09ad027172e34"
+          ],
+          "prod_body_B": [
+            "67c186f2cee1ccf01f55c80235eb9b1b1d14b073223a807b9ce944405e67999c"
+          ],
+          "prod_body_C": [
+            "b46c461cceeefa595c3ac0d706689ed382340b59c20a269a930c786c8389dd32"
+          ]
+        },
+        "non_clen_headers_identical": true,
+        "clen_equals_body_len_all_obs": true
+      },
+      "threshold": "CLEN distinct & increasing, SHA distinct, non-CLEN identical, CLEN == body_len",
+      "pass": true,
+      "evidence_refs": "identity_checks"
+    },
+    "C7_WRITABLE_PERMISSION_PROD": {
+      "type": "positive",
+      "expected": "(a) reader 200 vs admin 200 (A vs C) full >= 0.7; (b) classic escalation 403 vs 200 via UPDATE users SET role with cross-worker commit, full >= 0.7; 403 null = 0.0 CI contains 0.0 <= 0.05; >=10 requests per worker",
+      "observed": {
+        "reader_admin_200_AvsC": 1.0,
+        "classic_perm_403_vs_200": 1.0,
+        "perm_null": {
+          "full": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "statuses_403_200": true,
+        "bodies_distinct": true,
+        "worker_distribution": {
+          "46041": 21,
+          "46042": 19
+        }
+      },
+      "threshold": ">= 0.7 both; null == 0.0 CI contains 0.0 <= 0.05; workers >=10 each",
+      "pass": true,
+      "evidence_refs": "metrics.body_drift_AvsC_full, classic_perm_full, perm_null_full; identity_checks worker distribution"
+    },
+    "C8_WRITABLE_SESSION_PROD": {
+      "type": "positive",
+      "expected": "writable session invalidation 401 vs 200 via DELETE sessions with cross-worker commit, full >= 0.7; 401 null = 0.0 CI contains 0.0 <= 0.05; >=10 requests per worker",
+      "observed": {
+        "classic_sess_401_vs_200": 1.0,
+        "sess_null": {
+          "full": 0.0,
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "statuses_401_200": true,
+        "bodies_distinct": true,
+        "worker_distribution": {
+          "46041": 20,
+          "46042": 20
+        }
+      },
+      "threshold": ">= 0.7; null == 0.0 CI contains 0.0 <= 0.05; workers >=10 each",
+      "pass": true,
+      "evidence_refs": "metrics.classic_sess_full, sess_null_full; identity_checks worker distribution"
+    },
+    "C9_HEADER_ONLY_PROD": {
+      "type": "positive",
+      "expected": "full(A vs E) > 0.5 and headers-only(A vs E) > 0.5 with status 0.0 and body 0.0; per-isolation Cache-Control/ETag/Set-Cookie each full 1.0 headers-only 1.0 status 0.0 body 0.0",
+      "observed": {
+        "full_AvsE": 1.0,
+        "headers_only_AvsE": 1.0,
+        "status_AvsE": 0.0,
+        "body_AvsE": 0.0,
+        "iso_CC": {
+          "full": 1.0,
+          "headers": 1.0,
+          "status": 0.0,
+          "body": 0.0
+        },
+        "iso_ETag": {
+          "full": 1.0,
+          "headers": 1.0,
+          "status": 0.0,
+          "body": 0.0
+        },
+        "iso_SC": {
+          "full": 1.0,
+          "headers": 1.0,
+          "status": 0.0,
+          "body": 0.0
+        }
+      },
+      "threshold": "full > 0.5, headers-only > 0.5, status == 0.0, body == 0.0; isolations all 1.0 / 1.0 / 0.0 / 0.0",
+      "pass": true,
+      "evidence_refs": "metrics.header_drift_AvsE_*, header_iso_*"
+    },
+    "C10_CLEN_IDENTITY_HEADER_ONLY_PROD": {
+      "type": "validity",
+      "expected": "Content-Length identical (31 == 31) and body SHA identical across header-only A vs E and each isolation (not body-confounded)",
+      "observed": {
+        "header_only_body_identical": true,
+        "header_only_clen_identical": true,
+        "clen_by_state": {
+          "prod_body_A": [
+            "31"
+          ],
+          "prod_body_B": [
+            "70"
+          ],
+          "prod_body_C": [
+            "117"
+          ]
+        }
+      },
+      "threshold": "CLEN 31 == 31, body SHA d0ca833f... identical",
+      "pass": true,
+      "evidence_refs": "identity_checks header states"
+    },
+    "E1_CI_NONDEGENERATE": {
+      "type": "exploratory",
+      "expected": "bootstrap CI width measured under concurrency; degenerate [1.0,1.0]/[0.0,0.0] declared deterministic not precision",
+      "observed": {
+        "body_drift_AvsC_full_ci": [
+          1.0,
+          1.0
+        ],
+        "body_drift_AvsC_full_width": 0.0,
+        "null_body_full_ci": [
+          0.0,
+          0.0
+        ],
+        "null_body_full_width": 0.0,
+        "header_drift_AvsE_full_ci": [
+          1.0,
+          1.0
+        ],
+        "header_drift_AvsE_full_width": 0.0
+      },
+      "threshold": "reported; degenerate expected for deterministic fingerprints",
+      "pass": true,
+      "evidence_refs": "metrics.*_ci_width"
+    },
+    "E2_HEADER_FOLDING": {
+      "type": "exploratory",
+      "expected": "folded (lowercase keys / shuffled order) vs canonical E full discrimination 0.0 if sorted-lowercased normalization holds",
+      "observed": {
+        "fold_keys_vs_canonical_E_full": 0.0,
+        "fold_keys_vs_canonical_E_ci": [
+          0.0,
+          0.0
+        ],
+        "fold_pad_vs_canonical_E_full": 0.0,
+        "fold_pad_vs_canonical_E_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "threshold": "keys/order folding == 0.0 (normalized); value whitespace reported (value-as-is semantics)",
+      "pass": true,
+      "evidence_refs": "metrics.fold_E2_keys_full, fold_E2_pad_full"
+    },
+    "E3_DISTRIBUTED_VISIBILITY": {
+      "type": "exploratory",
+      "expected": "permission/session commit observable from both gunicorn workers within 500ms; >=10 requests served per worker for classic batches",
+      "observed": {
+        "worker_ids_seen": [
+          "46041",
+          "46042"
+        ],
+        "perm_worker_distribution": {
+          "46041": 21,
+          "46042": 19
+        },
+        "sess_worker_distribution": {
+          "46041": 20,
+          "46042": 20
+        },
+        "write_visibility_ms": {
+          "set_role_viewer": 0.007536564000020007,
+          "set_role_admin": 0.007630379000147514,
+          "invalidate_session": 0.007764952999878005
+        }
+      },
+      "threshold": ">=2 distinct workers; >=10 per worker for classic pairs",
+      "pass": true,
+      "evidence_refs": "identity_checks worker distributions; batch_state_log writes"
+    },
+    "E4_BROWSERGYM": {
+      "type": "conditional",
+      "expected": "BrowserGym/AgentLab HTTP-layer discrimination if image available; else NOT_TESTED (does not gate C1-C10)",
+      "observed": {
+        "docker_image_am1n3e_webarena_verified_shopping": "NOT_TESTED",
+        "reason": "docker image inspect failed: IMAGE_UNAVAILABLE"
+      },
+      "threshold": ">0.5 if image available",
+      "pass": true,
+      "evidence_refs": "validity_notes; unresolved"
+    }
+  },
+  "baselines": {
+    "B-STATUS-ONLY": {
+      "type": "strong-null",
+      "expected": "0.0 on all same-status body-only and header-only comparisons (200 vs 200) on production stack; 1.0 on status-varying classic controls",
+      "observed": {
+        "body_drift_AvsC": 0.0,
+        "body_drift_AvsB": 0.0,
+        "header_drift_AvsE": 0.0,
+        "null_body": 0.0,
+        "classic_perm": 1.0,
+        "classic_sess": 1.0
+      },
+      "pass": true
+    },
+    "B-BODY-ONLY": {
+      "type": "positive",
+      "expected": ">0.5 on same-status body-only drift (A vs C, A vs B); 1.0 on classic controls; 0.0 on nulls and header-only A vs E",
+      "observed": {
+        "body_drift_AvsC": 1.0,
+        "body_drift_AvsB": 1.0,
+        "null_body": 0.0,
+        "header_drift_AvsE": 0.0,
+        "classic_perm": 1.0,
+        "classic_sess": 1.0
+      },
+      "pass": true
+    },
+    "B-HEADERS-ONLY": {
+      "type": "body-correlated-auxiliary",
+      "expected": ">0 on body-only comparisons SOLELY via body-correlated Content-Length (documented, not a failure); 1.0 on header-only via Cache-Control/ETag/Set-Cookie; 0.0 on nulls",
+      "observed": {
+        "body_drift_AvsC": 1.0,
+        "body_drift_AvsB": 1.0,
+        "header_drift_AvsE": 1.0,
+        "null_body": 0.0
+      },
+      "pass": true
+    },
+    "B-HEADERS-NO-CLEN": {
+      "type": "isolation",
+      "expected": "0.0 on body-only comparisons (no independent header drift) and nulls; >0 on header-only A vs E (independent header signal)",
+      "observed": {
+        "body_drift_AvsC": 0.0,
+        "body_drift_AvsB": 0.0,
+        "header_drift_AvsE": 1.0,
+        "null_body": 0.0,
+        "null_hdr": 0.0
+      },
+      "pass": true
+    }
+  },
+  "status": "COMPLETE",
+  "decision_rule_outcome": "SUPPORTS",
+  "failing_conditions": []
+}
