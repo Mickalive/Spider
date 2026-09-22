@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35774039080",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "INCONCLUSIVE",
+  "metrics": {
+    "Q_qualifying_datasets": 0,
+    "per_dataset_gate": {
+      "vanillajs": {"n_raw": 168, "n_sessions": 7, "n_valid": 130, "n_leaky_valid": 37, "leakage_validOnly": 0.2846, "NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton_SA_rate": 0.0, "dom_bytes_coverage": 0.0, "a11y_coverage": 0.0, "unique_titles": 1, "qualifies": false},
+      "react": {"n_raw": 168, "n_sessions": 7, "n_valid": 130, "n_leaky_valid": 37, "leakage_validOnly": 0.2846, "NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton_SA_rate": 0.0, "dom_bytes_coverage": 0.0, "a11y_coverage": 0.0, "unique_titles": 1, "qualifies": false},
+      "vue": {"n_raw": 168, "n_sessions": 7, "n_valid": 108, "n_leaky_valid": 23, "leakage_validOnly": 0.213, "NL": 85, "strata_total": 21, "strata_ge3": 13, "singleton_SA_rate": 0.0, "dom_bytes_coverage": 0.0, "a11y_coverage": 0.0, "unique_titles": 1, "qualifies": false},
+      "angular": {"n_raw": 168, "n_sessions": 7, "n_valid": 130, "n_leaky_valid": 23, "leakage_validOnly": 0.1769, "NL": 107, "strata_total": 22, "strata_ge3": 13, "singleton_SA_rate": 0.0, "dom_bytes_coverage": 0.0, "a11y_coverage": 0.0, "unique_titles": 1, "qualifies": false},
+      "svelte": {"n_raw": 168, "n_sessions": 7, "n_valid": 130, "n_leaky_valid": 37, "leakage_validOnly": 0.2846, "NL": 93, "strata_total": 21, "strata_ge3": 12, "singleton_SA_rate": 0.0, "dom_bytes_coverage": 0.0, "a11y_coverage": 0.0, "unique_titles": 1, "qualifies": false}
+    },
+    "substrate_scan": {
+      "research_intel_exists": false,
+      "intel_manifest_exists": false,
+      "browsergym_cache_exists": false,
+      "browsergym_webshop_trajectory_files": []
+    },
+    "raw_hash_verification": {"matched": 10, "total": 10},
+    "freeze_hash_verification": {"prereg.md": true, "request.json": true, "spec.json": true},
+    "primary_and_controls_executed": false,
+    "halt_reason": "frozen relaxed substrate Q==0 halt rule (analysis plan step 1; spec decision_rule Relaxed_substrate clause)"
+  },
+  "controls": {
+    "PC-METASTABLE": {
+      "control_id": "PC-METASTABLE",
+      "role": "positive_control_timescale",
+      "frozen_requirement": "synthetic metastable two-well chain delta_ACF(3)>=0.12 p_raw<0.005 BF nats>2.3 tau_slow/tau_fast>3 null_std>0.01",
+      "expected_behavior": "delta_ACF>=0.12, p<0.005, BF nats>2.3",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Frozen analysis-plan step 1 halts at Q==0 with MEASUREMENT_INVALID substrate_insufficient; pipeline positive controls gate only the primary H_T/H_B stage which is explicitly not tested when 0 datasets qualify (spec decision_rule: 'If 0 qualifying datasets ... => MEASUREMENT_INVALID substrate_insufficient, publish gate_table.json, do not test H_T/H_B')."
+    },
+    "PC-BARRIER": {
+      "control_id": "PC-BARRIER",
+      "role": "positive_control_barrier",
+      "frozen_requirement": "synthetic barrier double-well Var(q)>=0.12 grouped p<0.01 dip p<0.05 branched_revisit_count>=15",
+      "expected_behavior": "Var(q)>=0.12, p<0.01, dip p<0.05, revisits>=15",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Same frozen halt-at-gate rule as PC-METASTABLE."
+    },
+    "NC-IID": {
+      "control_id": "NC-IID",
+      "role": "null_control_iid_synthetic",
+      "frozen_requirement": "i.i.d. synthetic delta_ACF<=0.03 p>0.10 BF nats<0 Var(q)<=0.03 p>0.10; degenerate null_std==0 => MEASUREMENT_INVALID not PASS",
+      "expected_behavior": "delta_ACF~0, BF favors order1",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Same frozen halt-at-gate rule."
+    },
+    "NC-GROUPED-PERM": {
+      "control_id": "NC-GROUPED-PERM",
+      "role": "null_control_grouped_permutation",
+      "frozen_requirement": "trajectory-grouped shuffle ACF null per qualifying dataset: |null_mean|<3*null_std, p>0.10, null_std>0.01",
+      "expected_behavior": "well-centered null on qualifying datasets",
+      "observed_behavior": "NOT_RUN (no qualifying datasets)",
+      "pass": "unknown",
+      "reason": "Null control is defined per qualifying dataset; Q==0 so no null distribution was computed. This is not a PASS and not a FALSIFICATION."
+    },
+    "B-MARKOV-ORDER1": {
+      "control_id": "B-MARKOV-ORDER1",
+      "role": "baseline",
+      "frozen_requirement": "P(S_next|S_t,A_t) MLE on train; analytical ACF lambda_2^k; primary timescale null",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Primary stage blocked at frozen Q==0 halt; baselines execute only when substrate qualifies."
+    },
+    "B-MARKOV-K3": {
+      "control_id": "B-MARKOV-K3",
+      "role": "baseline",
+      "frozen_requirement": "P(S_next|URL_before,H_K=3,A_leakageFree) majority vote; BF order3 vs order1 comparison",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Primary stage blocked at frozen Q==0 halt."
+    },
+    "B-SHUFFLE-GROUPED": {
+      "control_id": "B-SHUFFLE-GROUPED",
+      "role": "baseline",
+      "frozen_requirement": "trajectory-grouped shuffle of S sequence, 1000 perms seed 42, null_std>0.01 required",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Primary stage blocked at frozen Q==0 halt."
+    },
+    "B-DOM-SIMILARITY": {
+      "control_id": "B-DOM-SIMILARITY",
+      "role": "baseline_mandatory",
+      "frozen_requirement": "TF-IDF cosine k=5 over DOM visible_text (R1) and a11y text (R2), fit TRAIN only; timescale must exceed ACF_sim by >=0.05",
+      "observed_behavior": "NOT_RUN - substrate lacks DOM text",
+      "pass": "unknown",
+      "reason": "Mandatory per director mandate, but requires DOM visible_text and a11y text observables. Reused TodoMVC raw trajectories contain no DOM/a11y fields (dom_bytes coverage 0.0, a11y coverage 0.0 across all 5 variants), and no WebShop/BrowserGym DOM-bearing trajectories exist. Baseline cannot be constructed from available evidence; this is substrate insufficiency, not a baseline failure."
+    },
+    "B-RANDOM-DWELL": {
+      "control_id": "B-RANDOM-DWELL",
+      "role": "baseline",
+      "frozen_requirement": "i.i.d. draws with same marginal P(S); expected delta_ACF=0, exponential dwell",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Primary stage blocked at frozen Q==0 halt."
+    },
+    "B-TRAJECTORY-MEMORY": {
+      "control_id": "B-TRAJECTORY-MEMORY",
+      "role": "baseline",
+      "frozen_requirement": "exact (S_t,A_t)->S_{t+1} memorization from train; memorization ratio reported",
+      "observed_behavior": "NOT_RUN",
+      "pass": "unknown",
+      "reason": "Primary stage blocked at frozen Q==0 halt."
+    },
+    "B-SITE-LEAKAGE-DIAGNOSTIC": {
+      "control_id": "B-SITE-LEAKAGE-DIAGNOSTIC",
+      "role": "baseline_diagnostic",
+      "frozen_requirement": "action_with_href vs leakageFree gap for ACF delta; valid inference uses leakageFree only",
+      "observed_behavior": "PARTIAL",
+      "pass": "unknown",
+      "reason": "The leakage-free vs leaky gap is reported at the gate level: per-dataset leakage_validOnly 0.1769-0.2846 (valid-only, <60% frozen gate) with link_click leakage 1.0 for fragment-identical variants (react/vanillajs/svelte) and 0.62 for angular (router-normalized hash fragments) under this experiment's frozen fragment-preserving normalization. Full ACF-level gap requires the blocked primary stage."
+    }
+  },
+  "artifacts": [
+    {"path": "research/experiments/EXP-PHYSICS-35774039080/execute.py", "sha256": "045496fca659e2a6acdef5c9f3b041c4c88171aeb82858497d93331d25c5d3f1", "role": "code"},
+    {"path": "research/experiments/EXP-PHYSICS-35774039080/gate_table.json", "sha256": "fe0474a07dc275733917dbfe7f6c62475c3e26ae474592f3a475306183f2a591", "role": "derived"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs.json", "sha256": "8897172862238d5ce5f433090bdfeecbf7b5cb7485f3ccfea4b8887a796979fe", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vanillajs_topup.json", "sha256": "655178f7b98d5e4873ed061ad607dba8dd0c53e62e5d8469cb1686fd2ae2bb49", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_react.json", "sha256": "4d0b19e27b3a081fe6c99f3e1e4386d4eccdb00561c84265a8bc9f1f8b644fb1", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_react_topup.json", "sha256": "65aef7fe9980c50f72d8b7ba39a5f520b26c1e64101c325dc175442a0d5b3c99", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vue.json", "sha256": "de723933a67bfb6961e621193bc740ee97b6a37047624a9a7fb4a3b0938b4cc4", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_vue_topup.json", "sha256": "59d701d8bc3627cc26a4ac8e51bb141a5da18b35dd3fb9bdda1c62169f856443", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_angular.json", "sha256": "353489eb28bcbe4e7bb97756b785dfbec167a2950cc57e1636c57b32a1696f24", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_angular_topup.json", "sha256": "f26d3767d7e2a789dd3d7e4daf8a4fab0755b07ca19f07eac6b92d51055e3f87", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_svelte.json", "sha256": "88e2897a755608123f879772237a6d44cfed546d4f7abbf450dce05244068482", "role": "raw"},
+    {"path": "research/experiments/EXP-PHYSICS-35209110569/raw_svelte_topup.json", "sha256": "97893637f64953d0a6725dc5692c653413e605d0f32012e197bb4650b511537f", "role": "raw"}
+  ],
+  "observations": [
+    "Reused TodoMVC raw trajectories (10 files, 5 variants x raw+topup, EXP-PHYSICS-35209110569) contain exactly the record keys {site, session, url_before, url_after, title_before, title_after, action_primitive, action_target, timestamp, error} on every record. No DOM snapshot field (dom_bytes, visibleText, innerText, dom_text, dom_snapshot) and no accessibility field (a11y_tree, accessibility_roles, ax_tree) exists on any record of any file.",
+    "Sha256 verification: 10/10 reused TodoMVC raw files match the sha256 recorded in EXP-PHYSICS-35209110569 result.json artifacts (raw role) byte-for-byte.",
+    "Freeze hash verification: prereg.md, request.json, spec.json sha256 match freeze.json exactly before any measurement.",
+    "Substrate availability scan: research/intel/ does not exist; research/intel/manifest.json absent; /tmp/browsergym_cache absent; no file under research/ matched browsergym|webshop|webarena|miniwob in filename. WebShop/BrowserGym substrate is absent.",
+    "Relaxed gate rows (all 5 TodoMVC variants): NL 85-107 (all >=50), strata_total 21-22 with strata_ge3 12-13 (>=5 required, satisfied), singleton_SA_rate 0.0 (all <0.70), leakage_validOnly 0.1769-0.2846 (all <0.60), dom_bytes coverage 0.0 (fails >=0.80), a11y coverage 0.0 (fails >=0.80), unique_titles 1 per variant.",
+    "dom_bytes/a11y coverage of 0.0 is field absence (records never captured these observables), not a measured small-DOM value.",
+    "Angular leakage count under this experiment's frozen fragment-preserving normalization is 23/37 link clicks (NL=107); the prior EXP-PHYSICS-35209110569 analysis (its own frozen fragment-stripping normalization) counted 37/37 for angular. React/vanillajs/svelte show 37/37 under both normalizations; vue 23 under both. Gate outcomes are identical either way (NL>=50 passes).",
+    "No outcome-bearing H_T (timescale) or H_B (barrier) measurement was performed; no permutation, BF, committor, or dwell computation was run on production or synthetic data (frozen Q==0 halt rule)."
+  ],
+  "validity_notes": [
+    "Frozen decision_rule Relaxed_substrate clause applies: 0 qualifying datasets => MEASUREMENT_INVALID substrate_insufficient. This is a substrate/data insufficiency, NOT a scientific negative: C-WEB-DYNAMICS was not tested for timescale or barrier structure and receives no claim update (remains HYPOTHESIS per codex/claim_state.json).",
+    "The frozen relaxed-sufficiency gate requires dom_bytes>=500 and a11y non-empty on >=80% of transitions. The only legitimate substrate available (reused TodoMVC raw trajectories) contains no DOM/a11y snapshots: the collector (collect_spa_survey.py of EXP-PHYSICS-35209110569) recorded url/title/action fields only. Coverage is 0.0% by field absence on all 5 variants.",
+    "The design's reuse assumption is therefore not satisfied: spec/prereg instructed 'preserve raw DOM/a11y bytes' and required dom_bytes coverage, but the referenced raw artifacts do not contain such bytes. This exact gap is the failure to report; the smallest unblocking actions are: re-collect TodoMVC/WebShop trajectories WITH visibleText + Accessibility.getFullAXTree snapshots, or obtain intel-supplied BrowserGym trajectories (research/intel/ is absent).",
+    "Substituting locally-hosted Express synthetics or Wikipedia/Python-docs MPAs for TodoMVC/WebShop is explicitly forbidden by the frozen spec and was not done; EXP-PHYSICS-33965269281 Wikipedia/Python-docs captures (link_texts, tag_counts, empty accessibility_roles) are MPAs and outside the frozen dataset list (max 6 = 5 TodoMVC + WebShop if found).",
+    "The timescale prong H_T is expressible on URL|title-derived S_primary state sequences from the reused files (S=sha256(norm(url_after)|norm(title_after))), but the frozen gate blocks primary testing at Q==0 ('do not test H_T/H_B'), and the mandatory B-DOM-SIMILARITY baseline requires DOM text for both R1/R2; a partial H_T run could not satisfy the frozen primary condition as written and would violate the frozen halt rule.",
+    "Leakage/normalization executed exactly per this experiment's frozen definitions (normalize URL: lowercase, strip query, preserve SPA hash fragment, strip trailing slash). The prior experiment's fragment-stripping normalization differs; per-dataset leakage counts differ only for angular (23 vs 37) and do not affect any gate outcome. Both interpretations are recorded.",
+    "Strata key (URL_before, H_K=3 actions, Action) uses primitive-only leakage-free actions because the reused raw files never recorded target_sig fields (role/name/testId/aria-label); href never enters A. Any retry with richer substrate must record full target_sig.",
+    "Execution environment lacks numpy/scipy/sklearn/playwright (Python 3.12.14 stdlib only). The gate path required stdlib only; the primary-stage pipeline (grouped permutation, Dirichlet-Multinomial BF, TF-IDF similarity, dip test) would require installing these, which is a further prerequisite for any retry on qualifying substrate.",
+    "No freeze-input file was modified after freeze; hash verification was performed before any computation. Determinism: PYTHONHASHSEED=0; gate path uses no RNG."
+  ],
+  "unresolved": [
+    "Whether DOM-bearing TodoMVC/WebShop trajectories can be obtained: (a) physics re-collection with visibleText + Accessibility.getFullAXTree snapshots under a new freeze, or (b) intel supply of BrowserGym/AgentLab trajectories (research/intel/ currently absent) — binding prerequisite for the barrier prong and B-DOM-SIMILARITY.",
+    "Whether the frozen relaxed-sufficiency gate was infeasible by design: it assumed dom_bytes/a11y observables exist in the referenced TodoMVC raw artifacts; they do not. A re-freeze could either (a) keep the gate and collect DOM-bearing trajectories, or (b) recast the substrate gate for URL|title-only state definitions, which would drop the director-mandated B-DOM-SIMILARITY unless DOM is obtained — decision rests with the Director.",
+    "What delta_ACF(3), BF nats, Var(q), dip p, tau_slow/tau_fast would be observed on qualifying substrate for R1/R2 — remains entirely unknown; this experiment contributes no evidence toward H_T or H_B.",
+    "Whether singleton_SA_rate and strata>=3 requirements remain satisfiable on richer substrate with more states (not testable from these 3-4 state hash-SPA files).",
+    "Whether angular's router-normalized hash fragments (target '#/' resolving to url_after '#/all') deserve special leak handling in future frozen normalizations (fragment-preserving vs fragment-stripping) — affects NL by ~14 transitions on angular only."
+  ]
+}

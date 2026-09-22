@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35773143736",
+  "lane": "frontier",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "alias_OOD": {
+      "n": 40,
+      "reconstruction_correct_resolution": 1.0,
+      "reconstruction_correct_count": 40,
+      "reconstruction_false_accept": 0.0,
+      "reconstruction_unknown": 0.0,
+      "learned_correct_rate": 1.0,
+      "learned_false_accept": 0.0,
+      "learned_unknown": 0.0,
+      "exact_match_correct_rate": 0.0,
+      "verbatim_false_accept_rate": 1.0,
+      "tfidf_correct_rate": 0.0,
+      "embed_correct_rate": 0.0,
+      "random_correct_rate": 0.0,
+      "wilson_correct_ci": [
+        0.9123754607496077,
+        1.0
+      ],
+      "binomial_p_vs_0.10": 1.0000000000000022e-40,
+      "binomial_p_learn_vs_0.10": 1.0000000000000022e-40,
+      "mcnemar_rec_vs_exact_p": 6.984393063902417e-10,
+      "mcnemar_learn_vs_exact_p": 6.984393063902417e-10,
+      "mcnemar_fa_learn_vs_verbatim_p": 6.984393063902417e-10,
+      "binomial_p_orthogonal_vs_0.10": 1.0000000000000017e-30
+    },
+    "exact_match": {
+      "n": 12,
+      "reconstruction_correct_rate": 1.0,
+      "learned_correct_rate": 1.0,
+      "learned_false_accept_rate": 0.0
+    },
+    "no_applicable": {
+      "n_noapp": 12,
+      "n_empty": 6,
+      "reconstruction_unknown_precision": 1.0,
+      "reconstruction_false_accept_rate": 0.0,
+      "learned_unknown_precision": 1.0,
+      "learned_false_accept_rate": 0.0,
+      "empty_registry_unknown_rate_all_methods": 1.0
+    },
+    "ece": {
+      "rule_overall": 0.0802516342187119,
+      "rule_bootstrap_ci_2000": [
+        0.07221024654120912,
+        0.08833407213328238
+      ],
+      "rule_conf_std": 0.3746120510836857,
+      "learned_overall": 0.051763438088553285,
+      "learned_alias": 0.040719169139861955,
+      "learned_noapp": 0.05766666666666668,
+      "learned_conf_std": 0.3902115661225708,
+      "learned_conf_std_min_across_seeds": 0.3887154784285741
+    },
+    "learned": {
+      "model_class": "compact MLP (fc 46->128->64) GRPO policy + shared per-slot adoption head + softmax-learned-score confidence; NOT LLM-scale (CPU-only runner has no hosted/offline LLM; frozen spec allows System-One scoring/budget adapter; disclosed)",
+      "params_approx": "~15k (46*128 + 128*64 + 64*(3+1+4+1) + biases)",
+      "train_split_n": 21,
+      "train_epochs": 120,
+      "group_size": 8,
+      "lr": 0.0005,
+      "weight_entropy": 0.005,
+      "weight_calib": 0.1,
+      "per_seed_pooled_correct": {
+        "42": 40,
+        "43": 40,
+        "44": 40
+      },
+      "per_seed_pooled_rates": {
+        "42": 1.0,
+        "43": 1.0,
+        "44": 1.0
+      },
+      "median_seed": 43,
+      "cv_pooled_correct_across_seeds": 0.0,
+      "train_wall_s_total": 26.1,
+      "final_mean_reward_seeds": {
+        "42": 1.241,
+        "43": 1.24,
+        "44": 1.218
+      }
+    },
+    "orthogonal_mixed_breakdown": {
+      "orthogonal_n": 30,
+      "orthogonal_rate_rule": 1.0,
+      "mixed_n": 10,
+      "mixed_rate_rule": 1.0,
+      "learned_orthogonal_rate": 1.0,
+      "learned_mixed_rate": 1.0,
+      "learned_mixed_fa_rate": 0.0
+    },
+    "heldout_and_mixed_leak": {
+      "heldout9_rule_correct": "9/9",
+      "heldout9_learned_correct": "9/9",
+      "mixed10_rule_correct": "10/10",
+      "mixed10_learned_correct": "10/10",
+      "heldout_leak_in_train": 0,
+      "mixed_leak_in_train": 0
+    },
+    "channel_isolation_diagnostics": {
+      "RULE-URL-ONLY_correct_rate": 0.0,
+      "RULE-BODY-ONLY_correct_rate": 0.25,
+      "RULE-HEADERS-ONLY_correct_rate": 0.5
+    },
+    "economics": {
+      "RECONSTRUCTION-LEARNED_latency_per_successful_alias_task_s": 7.9e-05,
+      "RECONSTRUCTION-RULE_latency_per_successful_alias_task_s": 0.000348,
+      "RECONSTRUCTION-LEARNED_alias_ood_correct": 40,
+      "RECONSTRUCTION-RULE_alias_ood_correct": 40,
+      "learned_policy_forwards": 70,
+      "embed_encodings_B-RAG-EMBED": 220
+    },
+    "harness_errors": 0,
+    "fixture_identical_to_parent_tasks_json": true,
+    "training_environment": {
+      "python": "3.12.14",
+      "numpy": "2.5.3",
+      "torch": "2.14.0+cu130",
+      "torch_cuda_available": false,
+      "learned_seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "decision_components": {
+      "controls_pass": true,
+      "rule_s1_s7_pass": true,
+      "g0_pass": true,
+      "g0_falsified_any": false,
+      "learned_s1_s5_all": true,
+      "S1_pass": true,
+      "S2_pass": true,
+      "S3_pass": true,
+      "S4_pass": true,
+      "S5_pass": true
+    }
+  },
+  "controls": {
+    "PC-EXACT-MATCH": {
+      "expected": "synthetic retrieval ceiling: B-EXACT-MATCH exact 12/12, 0/40 on alias-OOD",
+      "observed": {
+        "exact_correct_rate": 1.0,
+        "alias_ood_correct": 0
+      },
+      "pass": true,
+      "evidence": "derived_metrics.json:alias_OOD,exact_match; raw_evidence.json rows"
+    },
+    "PC-BROWSERGYM-HEALTH": {
+      "expected": "browsergym env launch healthy before live stratum (frozen exploratory check)",
+      "observed": {
+        "attempted": 0,
+        "healthy": 0
+      },
+      "pass": null,
+      "evidence": "derived_metrics.json:live.browsergym_probe",
+      "note": "NOT EXERCISED: browsergym 0.14.3 registers no environments; browsergym.webshop and browsergym.alfworld modules absent (ModuleNotFoundError); no PyPI distributions (pip download: 'No matching distribution found for browsergym-webshop/...-alfworld'); playwright installed but ~/.cache/ms-playwright empty; ALFWorld additionally needs Java/textworld/docker. Frozen spec binds live stratum to exploratory with claim bounded to synthetic pooled+mixed; NOT MEASUREMENT_INVALID. First-class environment limitation, disclosed."
+    },
+    "NC-NO-APPLICABLE": {
+      "expected": "no-applicable and empty-registry tasks resolve UNKNOWN (precision>=0.90, false_accept<=0.10)",
+      "observed": {
+        "noapp_recon_unknown_precision": 1.0,
+        "noapp_learned_unknown_precision": 1.0,
+        "noapp_fa_both": 0.0,
+        "empty_unknown_rate_all_methods": 1.0
+      },
+      "pass": true,
+      "evidence": "derived_metrics.json:no_applicable"
+    },
+    "NC-EMPTY": {
+      "expected": "100% UNKNOWN on empty-registry tasks for all methods",
+      "observed": {
+        "empty_registry_unknown_rate": 1.0
+      },
+      "pass": true,
+      "evidence": "derived_metrics.json:no_applicable.empty_registry_unknown_rate"
+    },
+    "B-EXACT-MATCH": {
+      "expected": "0 alias-OOD correct (exact-match ceiling for synthetic control)",
+      "observed": {
+        "alias_ood_correct": 0,
+        "latency_mean_s": 0.00058
+      },
+      "pass": true
+    },
+    "B-VERBATIM-REPLAY": {
+      "expected": "high false-accept on alias-OOD (verbatim replay cannot adapt)",
+      "observed": {
+        "alias_ood_fa_rate": 1.0,
+        "alias_ood_correct": 0
+      },
+      "pass": true
+    },
+    "B-RAG-TFIDF": {
+      "expected": "near-zero alias-OOD retrieval success",
+      "observed": {
+        "alias_ood_correct": 0,
+        "latency_mean_s": 0.002504
+      },
+      "pass": true
+    },
+    "B-RAG-EMBED": {
+      "expected": "real embedding retriever (all-MiniLM-L6-v2, threshold 0.60); alias-OOD success conjectured low",
+      "observed": {
+        "alias_ood_correct": 0,
+        "embed_encodings": 220,
+        "latency_mean_s": 0.029309
+      },
+      "pass": true
+    },
+    "B-RANDOM": {
+      "expected": "no alias-OOD success",
+      "observed": {
+        "alias_ood_correct": 0,
+        "latency_mean_s": 2.5e-05
+      },
+      "pass": true
+    },
+    "RECONSTRUCTION-RULE": {
+      "expected": "parent-proven synthetic ceiling: 40/40 alias-OOD, ECE 0.08 (re-verified replication)",
+      "observed": {
+        "alias_ood_correct": 40,
+        "correct_rate": 1.0,
+        "fa": 0.0,
+        "ece": 0.0802516342187119,
+        "conf_std": 0.3746120510836857
+      },
+      "pass": true,
+      "evidence": "derived_metrics.json:alias_OOD,ece; replicates EXP-FRONTIER-35766532429"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/raw_evidence.json",
+      "sha256": "50f2f6e581d47ec631abdc674a21d41d59256d3a3970e601a65064bedaff547f",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/raw_evidence_learned_seeds.json",
+      "sha256": "328b8c0f8fc11b93f09f18ad7c09e0dc6e494843af7be7f22696c2add17fa593",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/tasks.json",
+      "sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/train_split_inventory.json",
+      "sha256": "b3b6e1d1aa5484cb203d2cd12b7021378ce1f1379b56a9c37e7e1bca755a9246",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/derived_metrics.json",
+      "sha256": "5efd96aa03311403ed5ef80cc689ce6b798caab75497fa48ef3470067bfb0e62",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/learned_training_report.json",
+      "sha256": "9c278341827e6fc5252c53a79ee339352d28339051c4daed93fbe590ae5db154",
+      "role": "derived"
+    },
+    {
+      "path": "research/frontier/run_genuine_35773143736.py",
+      "sha256": "ebb9f4f7e61f75ecebbd94f9aa2e9e7a87c2e30f020697a9771df277e23e752e",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/spec.json",
+      "sha256": "932823366304b66dd40224a2df792851d3f711ef4c2e59ff172be56d963d3a85",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/prereg.md",
+      "sha256": "2a29544d02e7acab3c015519f3a4b084b169f198dfd39d5165e8341856e70cff",
+      "role": "fixture"
+    },
+    {
+      "path": "research/experiments/EXP-FRONTIER-35773143736/request.json",
+      "sha256": "da9dfd8ffa68469c7ac01820d2fd74a7e7f16955c181e42c524a4a2ffb2aafe1",
+      "role": "fixture"
+    }
+  ],
+  "observations": [
+    "fixture_identical_to_parent_tasks_json: True (sha256 4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e equals parent EXP-FRONTIER-35766532429 tasks.json).",
+    "train_split n=21 standard orthogonal tasks (families 0-2, is_heldout=False); heldout_leak_in_train=0 (0/9 heldout forms) and mixed_leak_in_train=0 (0/10 mixed templates).",
+    "Learned GRPO adapter trained 120 epochs x 3 seeds (42/43/44), group size 8; train wall 8.6-8.7 s/seed; final mean reward 1.218-1.241 (theoretical max 1.25).",
+    "RULE reconstruction alias-OOD pooled 40/40 correct, false_accept 0.0; LEARNED adapter alias-OOD pooled 40/40 correct, false_accept 0.0, unknown 0.0 (no gate abstentions on alias tasks).",
+    "Per-seed learned pooled correct {42: 40, 43: 40, 44: 40}; CV across seeds 0.0.",
+    "Orthogonal (30/30) and mixed (10/10) alias tasks: both RULE and LEARNED 1.0; learned mixed false_accept 0.0.",
+    "Held-out generalization (zero training overlap): heldout9 9/9 rule and 9/9 learned; mixed10 10/10 rule and 10/10 learned.",
+    "Confidence: RULE conf_std 0.3746, ECE 0.0803 (bootstrap CI [0.0722, 0.0883]); LEARNED conf_std 0.3902 (min across seeds 0.3887), ECE overall 0.0518 (alias 0.0407, no-app 0.0577).",
+    "Baselines on alias-OOD: B-EXACT-MATCH 0/40, B-VERBATIM-REPLAY 0/40 correct with 100% false-accept, B-RAG-TFIDF 0/40, B-RAG-EMBED 0/40 (220 encodings), B-RANDOM 0/40.",
+    "Control strata: exact-match 12/12 for baseline, RULE and LEARNED; no-applicable and empty-registry 100% UNKNOWN with precision 1.0 and false_accept 0.0 for all methods.",
+    "Channel isolation (rule diagnostics): RULE-URL-ONLY 0/40, RULE-BODY-ONLY 0.25 (fam1=1.0), RULE-HEADERS-ONLY 0.5 (fam0/fam2=1.0) - no single channel reproduces pooled performance.",
+    "harness_errors 0; no exception or stub path executed during measurement.",
+    "Live BrowserGym substrate probe: browsergym 0.14.3 imports but registers zero environments; browsergym.webshop and browsergym.alfworld modules absent; pip download for browsergym-webshop/alfworld returns 'No matching distribution found'; ~/.cache/ms-playwright contains no browser binaries; ALFWorld additionally requires Java/textworld/docker.",
+    "Economics (latency per successful alias task): RECONSTRUCTION-LEARNED 7.9e-05 s vs RECONSTRUCTION-RULE 3.5e-4 s vs B-RAG-EMBED 0.0293 s (zero alias success); policy forwards 70 for learned arm."
+  ],
+  "validity_notes": [
+    "LEARNED arm is a compact CPU MLP GRPO adapter (~15k params), not LLM-scale GRPO; runner has no hosted/offline LLM and no CUDA (torch 2.14.0+cu130, torch_cuda_available=false). Frozen spec explicitly allows System-One scoring/budget adapter in this setting; claim is bounded accordingly and disclosed in metrics.learned.model_class.",
+    "Live stratum structurally unavailable (PC-BROWSERGYM-HEALTH not exercised): browsergym 0.14.3 registers no envs, webshop/alfworld packages have no installable distributions, playwright browser binaries absent, ALFWorld needs Java/textworld/docker. Per frozen spec this is an environment limitation, disclosed as exploratory-bound, NOT a measurement failure and NOT a scientific negative.",
+    "Learned confidence is model-derived softmax over learned candidate logits (plus learned rewrite logit when rewriting) with a learned inverse temperature, gated UNKNOWN<0.80; for no-candidate tasks (no-applicable/empty) confidence uses a structural abstain constant 0.05+hash-jitter mirroring the RULE proxy - disclosed in metrics.learned.confidence_definition; the no-candidate strata therefore contribute partially structural, not fully model-derived, confidence to ECE.",
+    "ECE bootstrap CI (2000 resamples) is reported for RULE only; the learned overall ECE 0.0518 is a point estimate on n=70 without resampled CI.",
+    "First full run of this script produced LEARNED 0/40 with near-constant confidence and decreasing reward caused by a GRPO gradient bug (whole-group log-prob scalar x mean-centered advantage vector ~ zero gradient). The bug was fixed (per-member log-prob vector) and the run re-executed; the buggy run's numbers are not part of this evidence base.",
+    "Train window of 21 orthogonal standard tasks is leak-free vs 9 held-out and 10 mixed evaluation forms (asserts in run; train_split_inventory.json); binomial/McNemar tests are computed on the deterministic frozen task fixture (n=40 pooled / 30 orthogonal).",
+    "Synthetic alias-OOD generalization evidence does not imply organic real-web alias formation; pooled+heldout+mixed results are confined to the frozen task-graph DGP.",
+    "Confidence calibration (ECE learned 0.052 vs RULE 0.080) is measured on the full 70-task held-out evaluation, not the training distribution.",
+    "Economics counters measure in-process synthetic latency and op counts; they do not include browser/network work (live stage unavailable)."
+  ],
+  "unresolved": [
+    "Whether learned-adapter success transfers to organic real-web alias formation (requires live BrowserGym substrate; blocked by module/package/browser unavailability - smallest unblock: install browsergym-webshop/alfworld distributions and playwright browser binaries on a runner, cf. derived_metrics.json:live.environment_notes).",
+    "Whether LLM-scale GRPO (frozen primary mechanism) matches or beats the compact MLP adapter on the same gates; untestable on CPU-only runner.",
+    "Learned ECE 0.0518 point estimate lacks a bootstrap CI; whether it is stably within 0.05 of RULE across re-runs is untested.",
+    "Whether learned confidence on no-candidate strata can be made fully model-derived (calibration against abstention supervision) without losing the 100% abstention control behavior.",
+    "End-to-end economics including browser/network work and retrieval amortization across episodes remain unmeasured (live stratum unavailable).",
+    "Whether the per-slot shared adoption head composes beyond 3 slots per task or beyond the 3 tested channels (fam0-2)."
+  ]
+}

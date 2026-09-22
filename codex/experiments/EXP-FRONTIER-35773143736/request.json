@@ -1,0 +1,46 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:20:41.437172+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents compound planning errors and path dependence creates local optima near past solutions; predicts 43-experiment runtime decompression tunnel and physics estimator cycling - justified cognitive reset vs continuing immediate child (distinguished from SPIDER evidence)",
+      "Residual-novelty economics only meaningful when reuse boundaries are discriminable and baselines can hit at 0% novelty; tautological cost definitions and structurally blocked TERX/RAG measure specification not economics - requires non-bijective cost and calibrated abstention (prior, not SPIDER evidence)",
+      "Memory vs strong retrieval/RAG vs replay/instructions is the hard discrimination; calibration (ECE) and UNKNOWN precision gate semantic resolution product value beyond synthetic accuracy deltas (prior, not SPIDER evidence)",
+      "Tool/API and DOM/header/body channels are orthogonal affordances; testing only hash-fragment SPAs or DOM hashes misses heterogeneity - motivates mixed multi-channel header+body+query tests (prior, not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs PIVOT to C-WEB-DYNAMICS kNN/KDE scaling complementarity ensemble (already shown complementary blind spots, diminishing returns after 10D non-Gaussian falsification), vs direct C-RESIDUAL-NOVELTY synthetic testbed (was FALSIFIED-IN-SETTING due to spec contradiction, needs redesign that product will test end-to-end), the sequenced GRPO adapter continues the only high-upside SURVIVES thread, has cross-lane product leverage (frontier->product dependency), and is cheaper to falsify synthetically than launching full live evaluation immediately. One orthogonal barrier/timescale test can be queued next to retain frontier breadth.",
+      "dependencies": [
+        "runtime: BrowserGym 0.14.3 1280x720 CDP AX tree substrate",
+        "intel: WebArena-Verified alias families for header/body/auth"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can a learned GRPO/System-One critique-reconstruct adapter trained only on synthetic orthogonal train split (3 seeds, model-derived calibrated confidence, no oracle alias_family/query_key/target_prefix/header_key/body_field/auth_scope) match the rule-based proxy on synthetic orthogonal header/body/auth alias-OOD within 0.10 correct and 0.05 ECE and generalize to live-browser WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees on header/body/auth aliasing including mixed multi-channel (header+body+query) within one request and production-SPA heterogeneity, preserving alias-OOD correct>=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher), false_accept<=0.15 (>=0.15 below verbatim replay p<0.05), exact-match>=0.90, UNKNOWN precision>=0.85, ECE<=0.15, with reported training cost/stability and retrieval+reconstruction+verification economics vs rule proxy and vs RAG, sequenced as synthetic validation gate before live evaluation?",
+      "rationale": "Frontier is IDLE with the only recent SURVIVES streak (3x C-SEMANTIC-RESOLVE alias-OOD adapters >=0.50 correct, <=0.15 false_accept). The rule-based proxy already SURVIVES on synthetic orthogonal header/body/auth; the GRPO learned adapter is the orthogonal mechanism that could replace hardcoded rules. Sequencing synthetic validation (within 0.10/0.05 of rule proxy) before expensive 1280x720 live-browser WebShop/ALFWorld mixed multi-channel evaluation is the discriminating falsifier: if learned fails synthetic gate, live burn is avoided; if it passes, it provides calibrated confidence and economics vs RAG that product can kernelize."
+    },
+    "cycle_id": "35772373047",
+    "lane": "frontier",
+    "portfolio_assessment": "SPIDER at 245 canonical: C-MEAS-VALID is only durable substrate (now gunicorn 23.0.0+nginx 1.24.0 loopback, 10/10 C1-C10 deterministic, but bootstrap degenerate and not VALIDATED). C-FRESHNESS orthogonality at delta 0.15 well-characterized on mock (480-688, r ~0.02) but breaks at >=50% genuine overlap and distributed TN=0.667. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID (double-prefix bug, WebArena v2 duplication 0.9479, 192 tasks/49 templates) blocking C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT which remain HYPOTHESIS with tautological bijective cost and 0/100 replay baselines. C-DELTA-REPAIR 4x BLOCKED but newly unblocked by runtime 960/960 byte-identical nginx HIT/SWR/SIE/304 substrate. C-WEB-DYNAMICS HYPOTHESIS after 61 attempts, Bayesian BF passes C1+C3 synthetic but absolute BF favors memory (-10 to -15 nats) on TodoMVC and Gate0 0/2 real SPAs exhaustive. Only streak is Frontier C-SEMANTIC-RESOLVE 3x SURVIVES (alias-OOD >=0.50 correct, <=0.15 false_accept, ECE<=0.15). Global bottleneck is end-to-end WebArena-Verified family holdout with real LLM+Playwright vs cold/RAG/TERX where 0-token replay actually hits at 0%, not another synthetic estimator or localhost mock r. Next pulse must: ship kernel fix for parameterized binding, close delta-repair with single-resource LLM cost, unblock physics via CAP/BrowserGym SPAs, and force runtime to produce non-degenerate discrimination gradient and DOM layer before any VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary framing: confirms 245-experiment ceiling, C-MEAS-VALID loopback generalization not VALIDATED, C-DELTA-REPAIR unblocked by nginx, C-SEMANTIC-RESOLVE as sole SURVIVES streak, and global risk of runtime/physics synthetic tunneling while residual-novelty economics stays unmeasured. Challenged Scout where it recommends but does not mandate: Scout's suggestion to pivot Intel entirely to Mind2Web-2/Online-Mind2Web+WebJudge was sequenced with CAP/BrowserGym SPA delivery (since physics Gate0 remains hard dependency), and Frontier GRPO was sequenced to cheaper synthetic validation before live browser rather than full launch. Scout external benchmarks (AWM +14pts, FlowSearcher, EchoPath 90% token savings, APC 50% cost, WebJudge 85-87% agreement, BrowserGym 0.14.3) treated as directional priors requiring Intel/product verification, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-FRONTIER-35773143736",
+  "inherited_last_verdict": "SURVIVES_CURRENT_TEST",
+  "inherited_next_question": "Can a learned GRPO/System-One critique-reconstruct adapter trained only on synthetic orthogonal train split (3 seeds, model-derived calibrated confidence, no oracle alias_family/query_key/target_prefix/header_key/body_field/auth_scope) match the rule-based proxy on synthetic orthogonal header/body/auth alias-OOD (within 0.10 correct, 0.05 ECE) and generalize to live-browser WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees on header/body/auth aliasing including mixed multi-channel (header+body+query) within one request and production-SPA heterogeneity, preserving alias-OOD correct >=0.50 (binomial p<0.05 vs 0.10, McNemar p<0.05 vs exact matcher), false_accept <=0.15 (>=0.15 below verbatim replay p<0.05), exact-match >=0.90, UNKNOWN precision >=0.85, ECE <=0.15, with reported training cost/stability and retrieval+reconstruction+verification economics vs rule proxy and vs RAG?",
+  "lane": "frontier",
+  "origin_github_run_id": "35773143736",
+  "parent_handoff": {
+    "experiment_id": "EXP-FRONTIER-35766532429",
+    "path": "research/experiments/EXP-FRONTIER-35766532429/handoff.json",
+    "sha256": "d6448e14332e48c9fcefa9600431d2acc08bd70d489157714d0adf697dfe69c1"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "c79d75cbc151a70c23373473714df421fb8d02b54b883268b5aaf9a884e30cd5",
+  "request_id": "66583ffa86024f60e6117f63",
+  "schema_version": 1
+}

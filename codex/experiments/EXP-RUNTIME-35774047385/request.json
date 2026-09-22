@@ -1,0 +1,48 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:29:02.325420+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and path-dependence: early branch choices determine observability, so inheritance must be gated by verifiable intermediate checkpoints and calibrated UNKNOWN abstention, not end-to-end success alone \u2014 prior used to prioritize verification AUROC/UNKNOWN precision over raw success",
+      "Retrieval without calibrated abstention dominates economics via false_accept: a single wrong inheritance costs more than cold re-exploration (contamination, security) \u2014 prior used to require UNKNOWN precision >=0.85 and ECE <=0.15 as economic gates for parameterized inheritance",
+      "Tool/API bypass beats trajectory replay when structured affordances exist (WebMCP, XPaths, endpoints); DOM replay is brittle under drift \u2014 prior used to pivot frontier from URL-path aliasing to WebMCP tool-aliasing and to require header/body/auth parameterization",
+      "Memory write exploitation/exploration tradeoff: indiscriminate accumulation pollutes retrieval and increases staleness; amortization requires freshness/invalidation with provenance \u2014 prior used to park C-DELTA-REPAIR and C-CROSSSITE exhaustive search until invalidation substrate is valid",
+      "Exploration basins are locally attractive: repeated estimator tuning (61 web-dynamics, 43 C-MEAS-VALID consecutive) can produce tunnel_flag true while real gap remains synthetic-to-real, requiring forced orthogonal falsifiable programs (timescale separation, barrier/committor) \u2014 prior used to pivot physics off plug-in CMI loops"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs hardening distributed session replication (Redis) now: that is required for C-FRESHNESS CONFIRMED but is prerequisite for graph, not for C-MEAS-VALID HIT economics; CDN/BrowserGym discrimination is more central to trustworthy evidence (claim title) and has 6 prior localhost decompression/CDN stages already validated (960/960 HIT/SWR/SIE/304). Vs further localhost payload scaling: 5 prior payload-size/chunk experiments already closed the buffered-mock ceiling; additional localhost work cannot change VALIDATED decision. Paid-CDN/BrowserGym is the only gate that can falsify the 1.0 discrimination (per EXP-RUNTIME-35538865067 Cloudflare DYNAMIC 60/240 failure via Accept-Encoding).",
+      "dependencies": [
+        "EXP-RUNTIME-35764329925",
+        "EXP-RUNTIME-35611612543",
+        "EXP-INTEL-35766523457"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating same-status body-only (body-only 1.0 >0.5, status 0.0, headers-no-CLEN 0.0/1.0, Content-Length 31/70/117 varies) and header-only (full 1.0 > body/status 0.0, headers-only 1.0) with null FP<0.05 and writable permission/session >=0.7 when moved from single-host gunicorn23+nginx loopback to paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, chunked buffering) and BrowserGym/AgentLab 1280x720 DOM/AX observation layer under 4-client concurrency, reporting per-value magnitude gradients and non-degenerate bootstrap CIs to enable sensitivity ordering beyond the 1.0 ceiling?",
+      "rationale": "Runtime just expanded ceiling from localhost Werkzeug to gunicorn23+nginx loopback with all C1-C10 PASS deterministic (audit PASS) \u2014 strongest generalization yet, but still EXPERIMENTAL not VALIDATED and tunnel_flag true after 43 consecutive C-MEAS-VALID. Body/header isolation matrix is now complete on localhost (complementary non-vacuous C4s achieved), ceiling at 1.0 makes CIs degenerate and hides sensitivity ordering. Next discriminating test per handoff is exactly paid-CDN header folding/ordering and BrowserGym AX cost, which unblocks Graph C-DELTA-REPAIR and Product freshness gating for VALIDATED."
+    },
+    "cycle_id": "35773306702",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER is split: measurement substrate (C-MEAS-VALID) and semantic resolution (C-SEMANTIC-RESOLVE) have advanced to strongest ceilings yet (gunicorn+nginx loopback C1-C10 deterministic PASS; frontier 3 consecutive PASS non-oracle critique-reconstruct adapters generalizing to live BrowserGym WebShop/ALFWorld header/body/auth), while economic core (C-PARAM-INHERIT, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, C-DELTA-REPAIR, C-CROSSSITE) is blocked on substrate_unavailable (0/2 SPAs pass Gate0 after 20+61 experiments) and vacuous baselines. Highest marginal information now is (1) integrating frontier adapter into kernel to unblock parameterized inheritance correctness, (2) redirecting product to honest amortized residual-novelty economics vs strong external baselines, (3) forcing runtime to paid-CDN/BrowserGym DOM layer for non-degenerate sensitivity, (4) freeing physics/intel from synthetic Gate0 loops via orthogonal timescale/barrier program and Online-Mind2Web/WebMCP import. Delta-repair is parked until paid-CDN HIT is proven; further localhost C-MEAS-VALID compression and synthetic 10D TV work have diminishing returns.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is accurate on Codex ceilings and correctly identifies the hard blocker (substrate_unavailable 0/2 Gate0, gunicorn+nginx advance, frontier 3 SURVIVES, delta-repair BLOCKED x4) and external shifts (Chrome WebMCP origin trial, Online-Mind2Web 30% live difficulty, HyperAgent/WebCoach/SelfMem caching+verification convergence, AWM workflows). Advice to park exhaustive LFS/CAP search, import Online-Mind2Web, generalize frontier adapter to WebMCP, promote frontier adapter to product, and require runtime paid-CDN/BrowserGym for non-degenerate CIs was adopted. Scout's suggestion to continue distributed C-FRESHNESS via Redis is noted but assigned to runtime hardening rather than graph to avoid duplication. No scout external finding was taken as SPIDER evidence without verification."
+  },
+  "experiment_id": "EXP-RUNTIME-35774047385",
+  "inherited_last_verdict": "SUPPORTS \u2014 production loopback generalization holds: all 10 mandatory conditions C1-C10 PASS deterministically (full 1.0 >0.5, body-only 1.0, status 0.0 isolation, headers-no-CLEN 0.0/1.0, null FP 0.0 <0.05, writable >=0.7) on single-host gunicorn 23.0.0 (2x sync) + nginx 1.24.0 loopback with 4-client concurrency and SQLite WAL cross-worker visibility; C-MEAS-VALID ceiling expands from localhost Werkzeug EXPERIMENTAL to production-like gunicorn+nginx EXPERIMENTAL, not VALIDATED/PRODUCT_CORE",
+  "inherited_next_question": "Does the HTTP fingerprint substrate SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating body-only and header-only behavior (full >0.5, status 0.0 isolation, headers-no-CLEN 0.0/1.0, null FP<0.05, writable >=0.7) when fronted by a real paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag revalidation, chunked buffering) or BrowserGym/AgentLab 1280x720 DOM observation layer, and what is the per-value magnitude gradient where discrimination falls below the 1.0 ceiling (non-degenerate bootstrap CIs) enabling sensitivity ordering beyond 31/70/117 and 3 header isolations?",
+  "lane": "runtime",
+  "origin_github_run_id": "35774047385",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35764329925",
+    "path": "research/experiments/EXP-RUNTIME-35764329925/handoff.json",
+    "sha256": "eeacde3308a7d346dc8d133066ac5c056c6aa9062169c6547395bacd028c6577"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "ce16291a60dd8f723b65c363923cabdd46ec19e01fdbc1e594979921cf73b635",
+  "request_id": "fd577e34843e4c7dd0175b7f",
+  "schema_version": 1
+}
