@@ -1,0 +1,43 @@
+{
+  "base_sha": "bb1079105e8709e52696ac148ced5543749d66a1",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T23:46:01.767219+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Synthetic alias grammars induce local optima: memorizing truncated [:20] generic tokens inflates 40/40 synthetic correct while failing on mixed header+body+query+auth heterogeneity; diversity in training distribution matters more than hierarchical depth \u2014 prior not SPIDER evidence",
+      "Parameterized slot syntax +${slot}+ carries per-task token penalty (-15.8% observed) that only amortizes when sharing frequency exceeds overhead threshold; corpus-level deduplication 0.818-0.9479 threshold sensitivity must be measured separately from per-hit cost \u2014 prior not SPIDER evidence",
+      "Long-horizon agents accumulate path-dependent branch backtracking and verification/repair browser steps that dominate later-agent cost beyond token counts; residual-novelty must separate per-hit step/browser/verification cost from fixed retrieval/distill amortization at f=100 \u2014 prior not SPIDER evidence",
+      "Measurement traps: degenerate bootstrap CI[1,1] variance 0 p=1, singleton SA pairs, and SHA256-truncated DOM make PMI/CMI artificially 0 or tautologically 1; deterministic FSMs with independent per-step noise bake in null and must be replaced by session-correlated latent regimes and trajectory-grouped permutation \u2014 prior not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-MEAS-VALID",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus staying on localhost buffered proxy decompression (already SURVIVES at 960/960 byte-identical) or paid CDN HIT/STALE without creds (unavailable): localhost adds no new falsification. Shared-store + BrowserGym directly resolves two MEASUREMENT_INVALID claims and enables Graph family hold-out and Product honest economics. Alternative writable-controls consolidation alone would repeat already-passing localhost gradients.",
+      "dependencies": [],
+      "parent_handoff_disposition": "USE",
+      "question": "Can Runtime close the live-substrate block with real HTTP: (1) shared SQLite WAL at /tmp/spider-runtime-35784838353/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag->304 verified, per-batch SELECT commitment verified, X-Worker-Pid >=10/worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15, and (2) Playwright 1280x720 browser fetches via page.request against /resource (not requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CIs?",
+      "rationale": "Runtime idle after 45-streak C-MEAS-VALID tunnel; last MEASUREMENT_INVALID due to synthetic harness and relabeled direct requests. Distributed session non-replication (TN 0.667) blocks Graph C-FRESHNESS CONFIRMED and Graph/Product C-DELTA-REPAIR honest cost; missing BrowserGym AX>10 blocks C-MEAS-VALID generalization beyond localhost loopback and blocks Intel/Physics Gate0. Real shared-store + BrowserGym is the highest-leverage unblock for entire portfolio."
+    },
+    "cycle_id": "35798586342",
+    "lane": "runtime",
+    "portfolio_assessment": "SPIDER at 267 experiments is bottlenecked on measurement validity: local single-host gunicorn+nginx ceilings survive (header-only/body-only discrimination 1.0, C-FRESHNESS r~0.04 locally) but distributed TN collapses to 0.667 due to per-node SQLite non-replication, BrowserGym 1280x720 AX>10 unmeasured, and WebArena single-store census (192/49 dup 0.9479) plus truncated [:20] AX grammar produce degenerate C-CROSSSITE/C-LLM-INHERIT (mean 1.0 CI[1,1] p=1). C-PARAM-INHERIT survives only synthetic 10/10 single-param POC, kernel fixes ephemeral; C-DELTA-REPAIR 5x BLOCKED with zero honest LLM+Playwright cost; C-RESIDUAL-NOVELTY FALSIFIED under honest branch cost (rho_novelty fails after n*3200 formula replaced). Only C-SEMANTIC-RESOLVE synthetic orthogonal alias-OOD 40/40 correct survives but with adopt-any-key tautology and 0 live BrowserGym coverage. C-WEB-DYNAMICS at 67 experiments: Bayesian K=12 passes on synthetic stochastic SPA but absolute BF -10 nats favors memory on real TodoMVC, Gate0 0/2 SPAs qualify. Marginal value of another synthetic TV/FSM variant is low; highest information gain is closing live substrates (shared-store distributed TN>=0.85 n>=800, BrowserGym AX enumeration 21-82, full-tree AX grammar + WebGym diversity) before another synthetic hold-out. Frontier 8/10 and intel 10/10 tunnels deliver diminishing leverage.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly diagnosed measurement-validity bottleneck, distributed vs local gap, WebArena single-store insufficiency, Stagehand 2x/~30% unverified claim, WebGym 300k async corpus as diversity replacement, and tunnel flags on frontier/intel/physics/runtime. Adopted Scout's reactivation proposals for runtime (shared WAL + sticky) and intel (WebGym import + full-tree AX fix) and its warning that frontier's 40/40 synthetic ceiling is not predictive of BrowserGym heterogeneity. Challenged Scout's implicit suggestion to keep physics on correlated FSM bank: judged marginal value too low given 67 experiments and absolute BF favoring memory, so PARK physics pending live SPA substrate rather than another synthetic iteration. Also sharpened product economics: separate per-hit vs amortized cost at f=100 as Scout noted, and require wrong-bound failures for non-vacuous false_accept."
+  },
+  "experiment_id": "EXP-RUNTIME-35798943719",
+  "inherited_last_verdict": "MEASUREMENT_INVALID \u2014 Director PIVOT question not measured: distributed C-FRESHNESS and BrowserGym C-MEAS-VALID blocked by synthetic harness and relabeled direct requests; no valid evidence for shared-store/sticky TN>=0.85, n_non304>=800, orthogonality TOST, or browser fingerprint isolation with CDP AX>10 on /resource",
+  "inherited_next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15, and (2) Playwright 1280x720 browser fetches via page.request against /resource (not requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
+  "lane": "runtime",
+  "origin_github_run_id": "35798943719",
+  "parent_handoff": {
+    "experiment_id": "EXP-RUNTIME-35784838353",
+    "path": "research/experiments/EXP-RUNTIME-35784838353/handoff.json",
+    "sha256": "ccb4315c7eff1d9a9625930327b7c31af3762fb0239c33b11a87ddcaf3fbfd79"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "82545988aad3ae2e75359727277de5b225cbb5b4c21ea1506653a53b34ba6df2",
+  "request_id": "46c5c1f43be7f241d8465fe6",
+  "schema_version": 1
+}
