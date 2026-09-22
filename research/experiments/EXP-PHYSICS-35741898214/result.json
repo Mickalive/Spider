@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35741898214",
+  "lane": "physics",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {
+    "dataset": "osunlp/Mind2Web",
+    "dataset_revision": "17ece8eb89862368edc0cc806acee6fca5163474",
+    "n_train_tasks": 1009,
+    "n_unique_websites": 73,
+    "n_unique_train_tasks": 1009,
+    "k": 50,
+    "k_half": 25,
+    "k_double": 100,
+    "tfidf_vocab_size": 1655,
+    "n_clusters": 50,
+    "max_cluster_fraction": 0.107,
+    "cluster_collapse": false,
+    "leakage_tokens_in_top100": [],
+    "null_overlaps_mean": 1.0,
+    "null_overlaps_p95": 1.0,
+    "null_overlaps_std": 0.0,
+    "n_valid_shuffles": 100,
+    "n_shuffles_requested": 1000,
+    "n_shuffles_completed": 100,
+    "note": "Proxy null (website-label shuffle) is degenerate: all 100 shuffles yield overlap=1.0 because k-means assigns test tasks to existing train clusters. Official split-based null cannot be constructed without test_website/test_domain splits."
+  },
+  "controls": {
+    "B-SHUFFLE-WEBSITE": {
+      "id": "B-SHUFFLE-WEBSITE",
+      "expected": "Null mean overlap 0.30-0.70 depending on k and dataset marginals; null p95 ~0.89 for coarse k=33",
+      "observed": "Null mean=1.0, p95=1.0 (degenerate proxy). Official 1000-website-label shuffles cannot be computed without test_website/test_domain splits.",
+      "pass_fail": "UNKNOWN",
+      "evidence": "pipeline_results.json; Mind2Web HF dataset only has train split"
+    },
+    "B-SITE-LEAKAGE": {
+      "id": "B-SITE-LEAKAGE",
+      "expected": "Leakage baseline overlap >> clean overlap; clean overlap still > null p95",
+      "observed": "No leakage test performed - cannot construct clean vs leakage-inflated comparison without holdout splits",
+      "pass_fail": "UNKNOWN",
+      "evidence": "Top 100 TF-IDF features contain no URL/domain tokens; text cleaning verified"
+    },
+    "B-RANDOM-SPLIT": {
+      "id": "B-RANDOM-SPLIT",
+      "expected": "Random-split overlap ~0.75-0.90 (high due to shared distribution)",
+      "observed": "Not computed - requires train/test split that is not website-holdout",
+      "pass_fail": "UNKNOWN",
+      "evidence": "Pipeline works but no spec-compliant split available"
+    },
+    "B-LEXICAL-OVERLAP": {
+      "id": "B-LEXICAL-OVERLAP",
+      "expected": "Lexical Jaccard ~0.60-0.80 for natural tasks",
+      "observed": "Not computed - requires holdout sets",
+      "pass_fail": "UNKNOWN",
+      "evidence": "Text construction pipeline verified"
+    },
+    "POS-WITHIN-SAME-WEBSITE": {
+      "id": "POS-WITHIN-SAME-WEBSITE",
+      "expected": "overlap >=0.50, delta >=0.20, p <0.01",
+      "observed": "Not computed - requires within-website holdout on WebArena-Verified v2 or Mind2Web family splits",
+      "pass_fail": "UNKNOWN",
+      "evidence": "WebArena-Verified v2 not accessible; Mind2Web official family splits not available"
+    },
+    "NULL-INDEPENDENT-DOMAINS": {
+      "id": "NULL-INDEPENDENT-DOMAINS",
+      "expected": "overlap ~ null mean, delta ~0.0, p >0.10",
+      "observed": "Not computed - requires independent-domain data pairs",
+      "pass_fail": "UNKNOWN",
+      "evidence": "Not applicable without valid splits"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/pipeline_results.json",
+      "sha256": "76404006b891b66da65d431b74c9963ed72bfd44aea4264cf44f4295aa8de965",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/spec.json",
+      "sha256": "695672699fc301ff84cadcaa9f5c4aa3c52b9e9bf75c18bd73ec8bc36b36cb25",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/freeze.json",
+      "sha256": "149a8a3a52eabdbfd4f1652f80fb5143013aa14fdf8346ccb10d3962ccdab88e",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/prereg.md",
+      "sha256": "9b9bc1e75f2486e621aeb73a8fdb5076abd71d8073a8151b025a93b68b10c481",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/request.json",
+      "sha256": "9c6577fe266aba35b4176b5bbab2070c6ecd3e29501c25fa0694cc0a7347444a",
+      "role": "frozen"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35741898214/execution_checkpoint.json",
+      "sha256": "b85fc2e43f119c32d9188e25766ba6433dc839c823d0b57c3bd878ec45801743",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "Mind2Web HF dataset osunlp/Mind2Web revision 17ece8eb89862368edc0cc806acee6fca5163474 contains only 'train' split (1009 tasks, 73 websites). Official test_website and test_domain splits are NOT available on HuggingFace.",
+    "WebArena-Verified v2 dataset is NOT available on HuggingFace (repo 'web-arena/web-arena-verified' returns 404) or GitHub.",
+    "TF-IDF->k-means pipeline verified operational: k=50 (min(50, floor(1009/20))), vocab size 1655, 50 clusters, max cluster fraction 10.7% (no collapse >40%).",
+    "Text cleaning verified: top 100 TF-IDF features contain no URL/domain leakage tokens.",
+    "Website-label shuffle null (proxy, 100 shuffles) is degenerate: all shuffles yield overlap=1.0 because k-means assigns all test tasks to existing train clusters. This confirms the null distribution cannot be properly constructed without official holdout splits.",
+    "EXP-INTEL-35697055679 (MIXED, audit PASS) established: WebArena-Verified v2 defines exactly one shopping store (192 tasks, 49 templates, 36 families), cross-store overlap is vacuous null not 0.0.",
+    "EXP-INTEL-35725763380 (REVISE) established: Mind2Web cross-website overlap measurement is methodologically non-compliant; 73/3 vs spec 137/31 divergence noted.",
+    "Per spec.json falsifier clause: 'MEASUREMENT_INVALID if ... official Mind2Web splits are not available' and per prereg.md: 'If HF dataset revision lacks 3-way splits, record MEASUREMENT_INVALID with dataset_revision hash'."
+  ],
+  "validity_notes": [
+    "MEASUREMENT_INVALID per spec.json falsifier: official Mind2Web splits (test_website, test_domain) are NOT available on HuggingFace. Dataset revision 17ece8eb89862368edc0cc806acee6fca5163474 only provides 'train' split.",
+    "MEASUREMENT_INVALID per spec.json falsifier: WebArena-Verified v2 data is NOT available on HuggingFace or GitHub.",
+    "The pipeline construction (TF-IDF->k-means) is verified operational but cannot produce valid holdout overlap measurements without official splits.",
+    "The proxy website-label shuffle null is degenerate (all overlap=1.0), confirming that the null distribution cannot be properly estimated without the official train/test_website/test_domain split structure.",
+    "This measurement invalidity is due to substrate unavailability, not scientific falsification. Infrastructure failure is not a scientific negative.",
+    "The three prior divergences flagged by EXP-INTEL-35725763380 (coarse 33-heuristic vs TF-IDF k-means, synthetic 60/40 shuffle vs official splits, 73/3 vs spec 137/31) remain unresolved.",
+    "Per the director mandate (allocation.action=PIVOT, parent_handoff_disposition=SUPERSEDE), this experiment tests C-CROSSSITE next_gate (true website holdout without site identity leakage). The inability to access required datasets means the claim cannot be tested at this time."
+  ],
+  "unresolved": [
+    "Whether official Mind2Web test_website/test_domain splits can be obtained from an alternative source (e.g., dataset author, cached revision, different HF organization)",
+    "Whether WebArena-Verified v2 data can be accessed via Docker images or GitHub repositories beyond the 404 on HuggingFace",
+    "Whether the Mind2Web 73/3 split divergence (vs spec 137/31) can be resolved by accessing a different dataset revision or configuration",
+    "Whether the degenerate null distribution (overlap=1.0) would be resolved with proper holdout splits where test clusters may include novel clusters not present in train",
+    "The C-CROSSSITE claim remains HYPOTHESIS; this experiment neither supports nor falsifies it due to substrate unavailability"
+  ]
+}
