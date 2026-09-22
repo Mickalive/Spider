@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35793576245",
+  "lane": "product",
+  "decision": "FALSIFIED",
+  "claim_updates": [
+    {
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "status": "HYPOTHESIS",
+      "reason": "Bounded FALSIFIED on file-based synthetic WebArena-Verified v2 census 192 tasks/36 families/L8-14 with deterministic proxy cost (retrieval 200+150ms, verify 50+120ms, hit 50, repair 500+2, distill 1000/f=100 at f=10) via actual src/spider/kernel.py distill_parameterized (Jaccard>=0.75, structure-similarity>=0.75, family-specific slots ${sku},${store_id},${variant},${category}) and softmax temp0.15+jitter UNKNOWN<0.80. Audit PASS confirms recomputed metrics match producer and producer_claim_supported=false. SPIDER DOES track residual novelty: rho_novelty 0.608 block-permutation p0.0002 family-stratified bootstrap95% CI [0.480,0.717] slope4652 p8.3e-07 R2_novelty0.509. However C4 fails (R2_delta0.400<0.50, per-stratum rho_length 1.0 at 0/0.5/0.75/1.0 and 0.366 at 0.25) and C5 fails (SPIDER/COLD n0 0.163 saving 83% but SPIDER/STAGEHAND n0 1.503 CI[1.409,1.611] >1.20, SPIDER/RAG n0 1.126 CI[1.066,1.190] >0.80, SPIDER/TERX n>=0.5 1.054 >1 where TERX falls back to COLD) triggering frozen FALSIFIED (controls PASS but C5 fails). C6 strictly fails (NC1 shuffled rho0.313 p0.0002 >|0.25| bound, NC2 rho0.005 false_accept0). C1/C2 pass but are degenerate: success1.0 on all 1728 rows, false_accept0, UNKNOWN_precision1.0, ECE_exec0.025 with 4/5 empty bins (n=54), ECE_all0.133, confidence std0.405 — verification vacuous because emitted actions carry task identifiers so verify always passes (audit major, result validity_notes[3]). C4 structurally unsatisfiable: cost scales with L (family constant 8-14) so per-stratum cost vs length ~1 for all systems including B-COLD. C5 structurally infeasible under frozen constants: SPIDER pays 200 retrieval+100 distill vs 50 tok TERX/Stagehand hits. Bounded falsification only for this kernel/cost model/proxy census; no inference to Docker/full-DOM, real LLM tokens/browser, or production DOM/cross-site. C-RESIDUAL-NOVELTY remains global HYPOTHESIS (not EXPERIMENTAL, not PRODUCT_CORE), C-PRODUCT-ECON remains HYPOTHESIS."
+    }
+  ],
+  "product_action": "none",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "With revised cost accounting that isolates per-hit step cost from fixed retrieval/distill amortization (f=100 or per-hit metric) and a non-deterministic mock that can emit wrong-bound failures enabling non-vacuous false_accept/UNKNOWN_precision/ECE, does SPIDER parameterized inheritance on the 192/36 file-based census achieve rho_novelty>=0.60 R2_delta>=0.50 |rho_length|<0.20 and honest saving >=25% vs COLD with parity to shipped Stagehand/TERX/RAG at n=0, and does gpt-4o-mini+Playwright on Docker-hosted WebArena replicate the proxy branch economics?",
+  "reason": "Frozen decision rule with audit PASS gives FALSIFIED (not MEASUREMENT_INVALID): PC1/PC2 PASS (TERX/Stagehand hit_rate1.0 at n0 50tok, SPIDER binding 1.0 via _bind), first non-bijective no-shuffling branch-derived cost verified (no 250+500*int(10n), no n*3200, no within-strata shuffling per audit info findings), family-specific slots 36/36 distinct not generic, leakage B∩evidence empty, RAG/Stagehand/TERX not starved at n0. SPIDER novelty tracking survives (C3 rho0.608 p0.0002 CI lower>0.35). Commercial claim fails boundedly: audit recomputed SPIDER/STAGE 1.503, SPIDER/RAG 1.126, SPIDER/TERX 1.054, R2_delta0.400, rho_length~1.0 — all match producer within floating error (audit recomputed_metrics). Failures largely reflect frozen constant infeasibility (C4 length scaling, C5 retrieval+distill overhead) and deterministic mock vacuity, not data manipulation. Per packet section 9, infrastructure/design artefact not global falsification. Director bounds to HYPOTHESIS with bounded REJECTED for this kernel/cost model/proxy ceiling, no promotion, no immediate chaining; next step requires cost-model revision and non-deterministic mock or Docker replication before any C-PRODUCT-ECON scale-up.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35793576245/request.json",
+    "research/experiments/EXP-PRODUCT-35793576245/spec.json",
+    "research/experiments/EXP-PRODUCT-35793576245/prereg.md",
+    "research/experiments/EXP-PRODUCT-35793576245/freeze.json",
+    "research/experiments/EXP-PRODUCT-35793576245/result.json",
+    "research/experiments/EXP-PRODUCT-35793576245/report.md",
+    "research/experiments/EXP-PRODUCT-35793576245/provenance.json",
+    "research/experiments/EXP-PRODUCT-35793576245/audit.json",
+    "research/experiments/EXP-PRODUCT-35793576245/run_experiment.py sha256 1dc8a3813ea28a1aa5cb624467d5453b596af94c4697b694aa34d123f13683e5",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/raw_per_task.csv sha256 7d0ead05a7fb1387bace4ec7f208599d85e80cf60ba18af1a69124b32c7a6bfe",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/derived_metrics.json sha256 e0639b6d3bb23dd057e490fd6282914403dfc15c2b82c53ea5d9e73ce5bb296c",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/registry.jsonl sha256 462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/cost_config.json sha256 cbb95c44cae0fe79bea3410a42e08f652fe1a90b1f9133bcfb9fef9ff0216d7e",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/branch_traces.json sha256 426b633819f58c8ade26c1c0541671000111255742be77e1cc3e119b965df176",
+    "research/experiments/EXP-PRODUCT-35793576245/fixtures/tasks.json sha256 0e153ed8f26f1c3d5a11e3aea282a66d5d240c88c3553f355972d055ebed3d0b",
+    "src/spider/kernel.py sha256 48786285d51959e68e5418f8f06c8aad3f3705582bdb3bedc1d13b822652c83e"
+  ]
+}
