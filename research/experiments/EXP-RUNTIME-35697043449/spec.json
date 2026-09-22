@@ -1,17 +1,40 @@
 {
   "experiment_id": "EXP-RUNTIME-35697043449",
   "lane": "runtime",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-MEAS-VALID"],
+  "question": "Can a Flask+SQLite+JWT localhost testbed implement writable permission-level changes, server-side session invalidation, and auth-state drift such that the HTTP fingerprint substrate produces discriminating positive outcomes for permission escalation and session invalidation, and a valid null outcome for identical-body auth-state drift?",
+  "hypothesis": "The HTTP fingerprint substrate (status + body + standard headers) will discriminate permission-level changes (role upgrade from reader to admin changes response body) and session invalidation (server-side session kill changes status from 200 to 401) with full-vector discrimination > 0.5, while producing a null result (discrimination = 0.0) for auth-state drift when fresh and near-expiry tokens produce identical response bodies and status codes. This demonstrates the substrate can attribute response differences to server-side state changes rather than confounds.",
+  "falsifier": "The substrate fails to discriminate permission escalation (full-vector discrimination ≤ 0.5 when role upgrade changes response from 403 to 200+body) OR fails to discriminate session invalidation (full-vector discrimination ≤ 0.5 when server-side session kill changes response from 200 to 401) OR produces a false positive on null control (full-vector discrimination > 0.0 when fresh and near-expiry tokens produce identical responses, within bootstrap CI containing 0.0).",
+  "baselines": [
+    {
+      "id": "B-STATUS-ONLY",
+      "description": "Status code alone as fingerprint — discriminates 200 vs 401 but cannot detect permission-level changes within same status"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "description": "Response body alone as fingerprint — discriminates content changes but misses header-only drift"
+    },
+    {
+      "id": "B-HEADERS-ONLY",
+      "description": "Standard response headers alone as fingerprint — tests whether headers carry independent discriminating information beyond body"
+    }
+  ],
+  "positive_control": "Permission escalation: user 'reader' with role='reader' receives 403 on /admin; after writable role update to role='admin', same user receives 200 + admin dashboard body. Full-vector discrimination must be > 0.5 (expect 1.0 since body and status both change). Verified by: (1) SQLite UPDATE users SET role='admin' WHERE username='reader'; (2) subsequent GET /admin with same JWT returns 200 + distinct body; (3) original GET /admin returned 403.",
+  "null_control": "Auth-state drift: fresh token (issued now, exp=3600s) and near-expiry token (issued now-3590s, exp=10s remaining) are both valid JWTs with identical claims (same user, same role). Server returns identical 200 + identical body + identical headers for both. Full-vector discrimination must be = 0.0 (within bootstrap CI containing 0.0). Verified by: (1) both tokens pass JWT validation; (2) response bodies byte-identical; (3) response headers (excluding Date and dynamic fields) byte-identical.",
+  "measurement_validity": [
+    "Server state must be snapshot before each observation to confirm the observed response corresponds to the intended server state",
+    "JWT tokens must be generated with deterministic seeds (SEED=44) for reproducibility",
+    "Session invalidation must be confirmed by server-side SQLite check (session EXISTS=0) before the observation request",
+    "Response body comparison must use exact byte equality, not semantic similarity",
+    "Date, Server, X-Request-Id headers excluded from fingerprint (dynamic/non-deterministic)",
+    "Timing jitter 50-150ms uniform between observations to avoid burst effects",
+    "N=20 per state (4 states × 20 = 80 primary observations, plus 20 null-control pairs)",
+    "Server must be started fresh (no residual state) before each experimental run",
+    "Permission update must be committed to SQLite WAL before subsequent observation"
+  ],
+  "decision_rule": "ALL of the following must hold for SUPPORTS:\n(1) C1 PERMISSION_DISC: full-vector discrimination > 0.5 on permission escalation (403→200+body change)\n(2) C2 SESSION_DISC: full-vector discrimination > 0.5 on session invalidation (200→401 change)\n(3) C3 NULL_BODY: full-vector discrimination = 0.0 on null control (fresh vs near-expiry identical responses), bootstrap 95% CI contains 0.0\n(4) C4 FULL_EXCEEDS_STATUS: full-vector discrimination ≥ max(B-STATUS-ONLY, B-BODY-ONLY) on at least one of permission or session conditions\n(5) NULL_CONTROL_PASS: null control discrimination ≤ 0.05 (upper bound)\nIf any condition fails, verdict = FALSIFIED-IN-SETTING with specific failing condition documented.\nIf infrastructure prevents valid measurement (server crash, token generation failure), verdict = MEASUREMENT_INVALID.",
+  "product_consequence_positive": "C-MEAS-VALID advances toward VALIDATED: writable/auth/session/drift controls on localhost produce discriminating positive and null outcomes. This unblocks C-FRESHNESS (session/auth drift detection infrastructure available) and C-DELTA-REPAIR (perturbation measurement infrastructure available). The Runtime lane can provide measurement substrates for other lanes' experiments.",
+  "product_consequence_negative": "C-MEAS-VALID remains EXPERIMENTAL with narrowed ceiling: the HTTP fingerprint substrate cannot discriminate server-side state changes when response bodies or status codes do not change, limiting its utility for freshness detection and delta repair measurement. Alternative substrates (DOM-level, network-level) may be required.",
+  "estimated_cost": "Low: single Flask server + SQLite + PyJWT (all already installed), N=100 observations, ~5min execution. No external dependencies, no Docker, no CDN.",
+  "expected_information_gain": "High: this is the first experiment testing writable server-side state changes (permission escalation, session invalidation) as discriminating signals. Prior experiments tested only static auth states. A positive result unblocks two dependent claims (C-FRESHNESS, C-DELTA-REPAIR). A negative result narrows the measurement substrate design space."
 }
