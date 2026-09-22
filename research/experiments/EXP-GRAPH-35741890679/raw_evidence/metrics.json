@@ -1,0 +1,83 @@
+{
+  "M-repair_success_rate_pooled_all": 0.8333333333333334,
+  "M-repair_success_rate_pooled_test": 0.9444444444444444,
+  "M-repair_success_rate_per_family_all": {
+    "F-DOM": 0.8333333333333334,
+    "F-ENDPOINT": 0.75,
+    "F-CACHE": 0.9166666666666666
+  },
+  "M-repair_success_rate_per_family_test": {
+    "F-DOM": 1.0,
+    "F-ENDPOINT": 0.8333333333333334,
+    "F-CACHE": 1.0
+  },
+  "M-repair_success_wilson_ci_pooled_all": [
+    0.6810888526532568,
+    0.9212965937143589
+  ],
+  "M-repair_success_wilson_ci_pooled_test": [
+    0.7424220019799247,
+    0.9901250641690756
+  ],
+  "M-repair_tokens_mean_all": 1430.6944444444443,
+  "M-repair_tokens_mean_test": 1364.111111111111,
+  "M-cold_cost_tokens_mean_all": 2244.222222222222,
+  "M-cold_cost_tokens_mean_test": 2226.3888888888887,
+  "M-repair_tokens_ratio_vs_cold_all": 0.6375012377463115,
+  "M-repair_tokens_ratio_vs_cold_test": 0.6127011852776045,
+  "M-repair_tokens_ratio_bootstrap_ci_95_test": [
+    0.5693605808782,
+    0.6606153621162313
+  ],
+  "M-browser_interactions_mean_all": 3.6611111111111114,
+  "M-browser_interactions_mean_test": 3.6944444444444446,
+  "M-cold_cost_browser_mean_all": 8.705555555555556,
+  "M-cold_cost_browser_mean_test": 8.566666666666666,
+  "M-browser_ratio_vs_cold_all": 0.42054881940012767,
+  "M-browser_ratio_vs_cold_test": 0.43125810635538264,
+  "M-browser_ratio_bootstrap_ci_95_test": [
+    0.39609758076198764,
+    0.46915946250921153
+  ],
+  "M-verification_steps_mean_all": 1.5833333333333333,
+  "M-verification_steps_mean_test": 1.4444444444444444,
+  "M-verification_auroc_test": 1.0,
+  "M-verification_auroc_all": 1.0,
+  "M-verification_precision_test": 1.0,
+  "M-verification_precision_all": 1.0,
+  "M-verification_recall_test": 1.0,
+  "M-verification_recall_all": 1.0,
+  "M-verification_auroc_random_null": 0.6666666666666667,
+  "M-contamination_rate_mean": 0.004629629629629629,
+  "M-contamination_rate_max": 0.08333333333333333,
+  "M-false_accept_rate": 0.027777777777777776,
+  "M-random_patch_false_accept_rate": 0.033,
+  "M-amortized_cost_tokens_10_test": 4744.111111111111,
+  "M-amortized_cost_tokens_10_all": 4810.694444444444,
+  "M-amortized_cost_browser_10_test": 17.13888888888889,
+  "M-amortized_cost_browser_10_all": 17.244444444444444,
+  "M-byte_identity_hit_swr_sie_304_sha_match_rate": 1.0,
+  "M-byte_identity_n_match": 960,
+  "M-byte_identity_n_total": 960,
+  "M-retrieval_cost_tokens": 320,
+  "M-retrieval_cost_browser": 1.2,
+  "M-replay_success_rate": 0.027777777777777776,
+  "M-retrieval_success_rate": 0.3333333333333333,
+  "M-oracle_success_rate": 1.0,
+  "M-oracle_tokens_mean": 120,
+  "M-oracle_browser_mean": 1,
+  "M-cold_success_rate": 0.9444444444444444,
+  "M-pc1_success_rate": 1.0,
+  "M-pc2_success_rate": 0.9166666666666666,
+  "M-pc2_token_ratio": 0.05333333333333334,
+  "M-nc1_cost": 0,
+  "M-nc2_contamination": 0.0,
+  "M-n_instances_all": 36,
+  "M-n_instances_test": 18,
+  "M-n_instances_train": 18,
+  "M-n_unrelated_mechanisms": 24,
+  "M-wall_time_seconds_sim": 59.86000000000001,
+  "M-wall_time_seconds_actual": 0.1284949779510498,
+  "M-cold_tokens_mean": 2244.222222222222,
+  "M-cold_browser_mean": 8.705555555555556
+}

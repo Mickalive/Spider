@@ -1,0 +1,254 @@
+[
+  {
+    "file": "templates/f-dom.html",
+    "line": 22,
+    "old": "#submit-123",
+    "new": "#submit-124",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 125,
+    "old": "#submit-123",
+    "new": "#submit-124",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 200,
+    "old": "#submit-123",
+    "new": "#submit-124",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 22,
+    "old": "#submit-123",
+    "new": "#submit-124",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 111,
+    "old": "#submit-123",
+    "new": "#submit-124",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 47,
+    "old": "#submit-123",
+    "new": "#submit-124",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 42,
+    "old": "Submit",
+    "new": "Send",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 194,
+    "old": "Submit",
+    "new": "Send",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 17,
+    "old": "Submit",
+    "new": "Send",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 21,
+    "old": "Submit",
+    "new": "Send",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 5,
+    "old": "Submit",
+    "new": "Send",
+    "blast_radius": 1
+  },
+  {
+    "file": "templates/f-dom.html",
+    "line": 144,
+    "old": "Submit",
+    "new": "Send",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 52,
+    "old": "?id=",
+    "new": "?item=",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 88,
+    "old": "?id=",
+    "new": "?item=",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 62,
+    "old": "?id=",
+    "new": "?item=",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 52,
+    "old": "?id=",
+    "new": "?item=",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 35,
+    "old": "?id=",
+    "new": "?item=",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 164,
+    "old": "?id=",
+    "new": "?item=",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 105,
+    "old": "X-Request-Id",
+    "new": "X-Req-Id",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 72,
+    "old": "X-Request-Id",
+    "new": "X-Req-Id",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 166,
+    "old": "X-Request-Id",
+    "new": "X-Req-Id",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 142,
+    "old": "X-Request-Id",
+    "new": "X-Req-Id",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 199,
+    "old": "X-Request-Id",
+    "new": "X-Req-Id",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-endpoint.py",
+    "line": 188,
+    "old": "X-Request-Id",
+    "new": "X-Req-Id",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 162,
+    "old": "max-age=60",
+    "new": "max-age=3600",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 93,
+    "old": "max-age=60",
+    "new": "max-age=3600",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 128,
+    "old": "max-age=60",
+    "new": "max-age=3600",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 189,
+    "old": "max-age=60",
+    "new": "max-age=3600",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 197,
+    "old": "max-age=60",
+    "new": "max-age=3600",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 54,
+    "old": "max-age=60",
+    "new": "max-age=3600",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 128,
+    "old": "etag-abc123",
+    "new": "etag-def456",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 13,
+    "old": "etag-abc123",
+    "new": "etag-def456",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 193,
+    "old": "etag-abc123",
+    "new": "etag-def456",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 187,
+    "old": "etag-abc123",
+    "new": "etag-def456",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 71,
+    "old": "etag-abc123",
+    "new": "etag-def456",
+    "blast_radius": 1
+  },
+  {
+    "file": "api/f-cache.py",
+    "line": 169,
+    "old": "etag-abc123",
+    "new": "etag-def456",
+    "blast_radius": 1
+  }
+]
