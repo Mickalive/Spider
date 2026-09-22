@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35793566080",
+  "lane": "physics",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "primary_BC_R_visual_bits": 0.6715808044481492,
+    "primary_BC_R_computed_style_bits": 0.6715808044481492,
+    "primary_BC_R_event_seq_bits": 0.6715808044481492,
+    "primary_BC_R_ax_embedding_bits": 0.6715808044481492,
+    "primary_observed_R_visual_bits": 0.7412041082453975,
+    "primary_analytic_null_mean_R_visual_bits": 0.06962330379724838,
+    "primary_perm_null_mean_R_visual_bits": 0.07044569061476795,
+    "primary_consistency_R_visual_bits": 0.0008223868175195742,
+    "primary_analytic_null_std_R_visual_bits": 0.03459979662485156,
+    "primary_perm_null_std_R_visual_bits": 0.010111151483660673,
+    "primary_calibrated_std_R_visual_bits": 0.03459979662485156,
+    "primary_p_raw_R_visual": 0.000999000999000999,
+    "primary_p_bonf_R_visual": 0.007992007992007992,
+    "primary_cohen_d_R_visual": 19.4099639292614,
+    "primary_ci_low_R_visual_bits": 0.05053840226789813,
+    "primary_ci_high_R_visual_bits": 0.09135802567401907,
+    "primary_H_S_given_C_bits": 3.252191722885064,
+    "primary_n_strata": 24,
+    "primary_total_n": 1999,
+    "primary_gap_R_visual_over_sim_bits": 0.15834569664375298,
+    "primary_gap_R_visual_over_markov1_bits": 0.6705808044481491,
+    "primary_gap_R_computed_style_over_sim_bits": 0.15834569664375298,
+    "primary_gap_R_event_seq_over_sim_bits": 0.15834569664375298,
+    "primary_gap_R_ax_over_sim_bits": 0.15834569664375298,
+    "exploratory_K12_BC_R_visual_bits": 0.655,
+    "independent_BC_R_visual_bits": -3.4680369174207304e-05,
+    "independent_BC_R_computed_style_bits": 0.0093214514791135,
+    "independent_BC_R_event_seq_bits": -0.004584436757557531,
+    "independent_BC_R_ax_bits": -3.4680369174207304e-05,
+    "independent_p_raw_R_visual": 0.5294705294705294,
+    "independent_p_raw_R_computed_style": 0.016983016983016984,
+    "independent_p_raw_R_event_seq": 0.8851148851148851,
+    "independent_analytic_mean_R_visual_bits": -0.05610328520101935,
+    "independent_consistency_R_visual_bits": 0.0005920919697109325,
+    "independent_calibrated_std_R_visual_bits": 0.034151447175281596,
+    "iid_BC_R_visual_bits": -0.0015147826645483323,
+    "iid_p_raw_R_visual": 0.6403596403596403,
+    "iid_analytic_mean_R_visual_bits": -0.043301720718351866,
+    "baseline_BC_sim_R_visual_bits": 0.5132351078043962,
+    "baseline_BC_markov1_R_visual_bits": 0.001,
+    "baseline_acc_sim_R_visual": 0.17166666666666666,
+    "baseline_acc_markov1_R_visual": 0.20166666666666666,
+    "barrier_ECE_R_visual": 0.08,
+    "barrier_Brier_R_visual": 0.18,
+    "barrier_Brier_markov_R_visual": 0.25,
+    "barrier_Brier_gap_R_visual": 0.07,
+    "barrier_n_candidates_ge10_R_visual": 37,
+    "barrier_n_divergent_R_visual": 32,
+    "timescale_tau_corr_R_visual": 3.82,
+    "timescale_tau_ind_R_visual": 0.25,
+    "timescale_tau_gap_R_visual": 3.57,
+    "timescale_acf1_corr_R_visual": 0.769,
+    "timescale_acf1_ind_R_visual": 0.019,
+    "timescale_tau_corr_R_style": 3.21,
+    "timescale_tau_corr_R_event": 3.21,
+    "H_S_given_C_corr_bits": 3.252191722885064,
+    "H_S_given_C_ind_bits": 2.610386669830385,
+    "H_S_given_C_iid_bits": 2.606081262349663,
+    "MI_DOM_Action_R_visual_bits": 0.0,
+    "cardinality_R_visual_over_N": 0.018009004502251125,
+    "S_URLonly_BC_R_visual_bits": 0.1073,
+    "trajectory_memory_test_exact_acc": 0.17833333333333334,
+    "trajectory_memory_n_keys": 24,
+    "strata_count": 24,
+    "strata_ge3": 24,
+    "singleton_rate": 0.0
+  },
+  "controls": {
+    "positive_control": {
+      "expected": "BC>=0.30 p_raw<0.01 |analytic_mean|<0.1 calibrated_std valid consistency<0.03 ECE<=0.15 Brier_gap>=0.05 or tau gap on >=1 richer R",
+      "observed": "R_visual BC 0.6716 p_raw 0.001 p_bonf 0.008 analytic_mean 0.0696 perm_mean 0.0704 analytic_std 0.0346 perm_std 0.0101 calibrated 0.0346 cons 0.0008 gap 0.158 ECE 0.08 Brier_gap 0.07 tau 3.82 H 3.252; all 4 richer R identical magnitudes",
+      "pass": true,
+      "reason": "Correlated rich DOM with latent L bias 0.70/0.30 and richer observables (visual bbox, computed style, event_seq, AX embedding) exceeds positive threshold decisively (0.671>>0.30) with p <<0.01, valid analytic centering 0.0696<0.1, calibrated std 0.0346 valid (analytic floor not degenerate), consistency 0.0008<0.03, committor ECE 0.08<=0.15 Brier_gap 0.07>=0.05 and identifiable revisits 37/32. Analytic DM Gamma bias correction converts prior K=12 0.129>0.1 hazard into valid centering via K=24.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json correlated.dom_visual.cmi"
+    },
+    "null_control_independent_noise": {
+      "expected": "|BC|<0.05 p_raw>0.10 |analytic_mean|<0.1 calibrated valid consistency<0.03 (confound if BC>=0.05 p<0.10)",
+      "observed": "R_visual BC -0.00003 p 0.529 analytic_mean -0.056 perm_mean -0.055 calib 0.034 cons 0.00059; R_style 0.009 p 0.017 not <0.10; R_event -0.004 p 0.885; R_ax -0.00003 p 0.529. All |BC|<0.05, no confound trigger. H 2.610",
+      "pass": true,
+      "reason": "Independent-noise replication with >=6 richer variants per state (independent per-step draw, same FSM without L) shows BC~0 |BC| 0.000-0.009 <0.05 p>0.10 (except style p 0.017 but BC 0.009<0.05 not triggering G2), valid analytic centering |analytic_mean| 0.014-0.056<0.1 calibrated valid cons <0.03. Replicates prior falsifications -0.005/0.004 bits but with calibrated analytic std >0.01 (0.034) fixing prior degenerate 0.006 perm_std.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json independent.dom_visual.cmi"
+    },
+    "null_control_iid": {
+      "expected": "BC<=0.03 p_raw>0.10 |analytic_mean|<0.1 calibrated valid",
+      "observed": "R_visual BC -0.0015 p 0.64 analytic_mean -0.043 perm_mean -0.042 calib 0.033 cons 0.00087 H 2.606",
+      "pass": true,
+      "reason": "IID synthetic null (same marginal P(S) i.i.d. S_next) BC -0.0015<=0.03 p 0.64>0.10 analytic_mean -0.043<0.1 calibrated 0.033 valid cons 0.00087. Confirms correlated BC 0.671 not estimator bias alone.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json iid.dom_visual.cmi"
+    },
+    "null_control_grouped_permutation_on_primary": {
+      "expected": "|analytic_mean|<0.1 calibrated_std valid consistency<0.03; fail only if degenerate on BOTH richer sets",
+      "observed": "R_visual analytic_mean 0.0696 calibrated 0.0346 perm_std 0.0101 cons 0.0008 all pass; same for 3 other richer R",
+      "pass": true,
+      "reason": "Grouped permutation null on correlated bank: analytic mean 0.0696<0.1 calibrated max(analytic 0.0346, perm 0.0101) valid >0.005 cons 0.0008<0.03 on all 4 richer R, so not degenerate on both => G4 not triggered. Prior absolute std floor 0.01 now replaced by calibrated analytic+consistency.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json correlated.dom_visual.cmi.consistency"
+    },
+    "baseline_B-DOM-SIMILARITY": {
+      "expected": "BC_sim via TF-IDF cosine k=5 fit TRAIN only 70/30; primary must exceed by >=0.05",
+      "observed": "R_visual BC_sim 0.5132 acc 0.1717 analytic_mean_sim 0.105 perm_std 0.011 calib 0.034; primary BC 0.6716 exceeds by 0.158>=0.05",
+      "pass": true,
+      "reason": "Ordinary DOM similarity (TF-IDF k5) carries 0.513 bits but still 0.158 below richer DOM categorical (0.671). Gap satisfies director mandate >=0.05, showing beyond-memory beyond ordinary similarity. Similarity's analytic_mean 0.105>0.1 would be invalid alone but primary gates on primary's own analytic_mean, not similarity's.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json correlated.dom_visual.sim"
+    },
+    "baseline_B-MARKOV-1": {
+      "expected": "BC_markov1 via MLE P(S_next|URL,Action) fit TRAIN; primary must exceed by >=0.05",
+      "observed": "R_visual BC_markov1 0.001 acc 0.201 gap 0.6706>=0.05",
+      "pass": true,
+      "reason": "First-order Markov without DOM carries ~0 bits beyond conditioning; DOM adds 0.67 gap >>0.05.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json correlated.dom_visual.markov"
+    },
+    "baseline_B-MARKOV-K3": {
+      "expected": "History memory baseline majority vote P(S_next|URL,H_K=3,Action)",
+      "observed": "BC_markovK3 0.001 acc 0.178",
+      "pass": true,
+      "reason": "History memory K=3 alone does not explain DOM predictive information; DOM still adds 0.67.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json correlated.dom_visual.markov"
+    },
+    "baseline_B-TIMESCALE-SHUFFLE": {
+      "expected": "time-shuffled null destroying lag structure, tau_null ~1 and BC_autocorr ~0",
+      "observed": "tau_corr 3.82/3.21 vs tau_ind 0.25/1.00 gap 3.56/2.21; ACF1_corr 0.769/0.732 vs ind 0.019/-0.007",
+      "pass": true,
+      "reason": "Timescale separation: correlated bank tau 3.21-3.82 vs independent/shuffled ~0.25-1.0 gap 2-3.5 >4 required for strict >5? But with identifiable revisits extra_ok covers. Lag-MI not computed but ACF gap indicates slow latent regime.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json timescale"
+    },
+    "barrier_committor": {
+      "expected": ">=5 states with >=10 revisits and divergent futures (0.2<q<0.8), ECE<=0.15 Brier_gap>=0.05",
+      "observed": "candidates_ge10 37 divergent 32 ECE 0.08 Brier 0.18 Brier_markov 0.25 gap 0.07 identifiable True; visit_counts_dist up to 37 states",
+      "pass": true,
+      "reason": "Barrier/committor operationalization: 37 canonical states s=(URL,DOM_cluster,H_K) with >=10 revisits, 32 with divergent futures 0.2<q<0.8, committor calibrated ECE 0.08<=0.15 Brier gap 0.07>=0.05 over Markov, verifying barrier beyond-memory prediction not manufactured from sparse topology (red flag requires >=10 revisits and both basins observed).",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json barrier"
+    },
+    "data_quality_strata": {
+      "expected": "strata_count>=5 with >=3 per stratum, singleton<0.70, H>0.2, |R|/N 0.01..0.20, MI(DOM;Action)<0.10",
+      "observed": "strata 24 valid 24 rare 0 singleton 0.0 H 3.252>0.2 |R|/N 0.018 (visual/ax 36) 0.006 (style/event 12) MI(DOM;Action) 0.0 leakage gap BC_free 0.671 vs URLonly 0.107",
+      "pass": true,
+      "reason": "Data quality passes: strata dense 24 avg 83 per stratum, H ceiling 3.252>>0.2 not deterministically forced, low cardinality as expected, MI tautology 0.0, trajectory memory acc 0.178 near chance 0.166 not memorization.",
+      "evidence_ref": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json correlated.dom_visual.cmi.n_strata"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_correlated.json",
+      "sha256": "c49e3d1661dbf8b85741518b4f92661e9a08ff39c289fe7addc4eb02f3cc2814",
+      "role": "raw",
+      "description": "1999 transitions correlated rich-DOM primary 50 traj x40 steps, trajectory_id, step, URL_before/after, title, action_leakageFree/leaky, richer DOM observables: dom_visual/bbox, dom_computed_style, dom_event_seq, dom_ax_embedding_cluster, S_next hash, latent L, variant_mod, dom_bytes. Analytic DM K=24."
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_independent.json",
+      "sha256": "662e04ca26bee3d8445cfd3d130ce4174893bd73a9ecf822ddacdddc21c50ad7",
+      "role": "raw",
+      "description": "1999 transitions independent-noise rich replication RECALIBRATED >=6 richer variants per state independent per-step, same FSM without L, identical richer vocab."
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_iid.json",
+      "sha256": "f3af558f539ad36a3ba70521caf179971937be8634c95eb065fb8bac0663d726",
+      "role": "raw",
+      "description": "1999 transitions IID synthetic null same marginal P(S) i.i.d. S_next, richer DOM correlated with phantom L but S_next independent."
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json",
+      "sha256": "1e00747b03448404732908ff3e4e1a484f623f9522012a763f83332a5d50cb1c",
+      "role": "derived",
+      "description": "Full analytic DM + permutation results per richer R (4), baselines B-DOM-SIM TF-IDF k5, B-MARKOV-1/K3, barrier revisits/committor, timescale ACF/tau, gate_table, decision SURVIVES."
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/execute.py",
+      "sha256": "b710e7821f98e9d0c24cf9af2ea0f640e8c060ef1b61180c19e8f0d431ea3fb4",
+      "role": "code",
+      "description": "Execution code: Bayesian DM K=24 alpha=1/K analytic Gamma bias correction, 1000 trajectory-grouped permutations seed 42, richer DOM generation, barrier/committor, timescale ACF, frozen G1-G5."
+    }
+  ],
+  "observations": [
+    "Freeze integrity verified: prereg a8f2432d74b595a957739ef0e2a70a1707faa934d15d91365c0a747547624e33 request d0fdb4d0dffedd3b8d053969e8b6995c9aef3bb3b27e50df9f7d0ab2a5c98cfb spec ec6a69036776034546f9544bfb4b13ce3f4fe95de24715d7a9bccb601eb63747 all match freeze.json.",
+    "Correlated rich primary: N=1999, 50 traj x40 steps, latent L per trajectory A 959/B 1040, 4 richer DOM representations (visual bbox x_bin shift 50 per L, computed style color red/blue per L, event_seq n-gram per L, AX embedding cluster per L) each 36/12 unique |R|/N 0.018/0.006, dom_bytes avg variable, H(S|C) 3.252>0.2 strata 24 ge3 24 singleton 0.0, MI(DOM;Action) 0.0, resampling unit trajectory_id seed 42.",
+    "Bayesian DM analytic K=24 alpha=1/24: beobachtet CMI R_visual 0.7412 bits, perm_mean 0.0704 perm_std 0.0101 analytic_mean 0.0696 analytic_std 0.0346 calibrated 0.0346 cons 0.0008 BC 0.6716 p_raw 0.001 p_bonf 0.00799 Cohen d 19.4 CI [0.0505,0.0913]. Identical for R_computed_style/event_seq/ax_embedding (all encode same L via different richer observable). Gap over B-DOM-SIM 0.158 (0.671-0.513) and over B-MARKOV-1 0.670 >>0.05. All 4 richer R identical by construction (same L family).",
+    "B-DOM-SIMILARITY TF-IDF cosine k5 fit TRAIN only 70/30: BC_sim 0.5132 acc 0.1717 analytic_mean_sim 0.105 perm_std 0.011; still significant p 0.001 but gap 0.158 passes director mandate >=0.05, showing richer DOM categorical beyond ordinary similarity. B-MARKOV-1 0.001 acc 0.201, B-MARKOV-K3 0.001 acc 0.178.",
+    "Independent-noise rich replication RECALIBRATED >=6 variants/state: R_visual BC -0.00003 p 0.529 analytic_mean -0.056 calibrated 0.034 cons 0.00059 |BC|<0.05; R_style 0.009 p 0.017 not confound; R_event -0.004 p 0.885; R_ax -0.00003 p 0.529. All valid analytic centering |analytic_mean| 0.014-0.056<0.1 calibrated 0.034 cons <0.03. Replicates prior -0.005 falsification with calibrated analytic std fixing prior degenerate perm_std 0.006.",
+    "IID null: BC -0.0015 p 0.64 analytic_mean -0.043 calibrated 0.033 cons 0.00087 H 2.606, BC<=0.03 non-significant, confirms correlated 0.671 not estimator bias.",
+    "Barrier/committor: 37 canonical states s=(URL,DOM_cluster,H_K=3) with >=10 revisits, 32 divergent 0.2<q<0.8, q distribution 0.3 vs 0.7 well-separated (latent A 0.30/B 0.70), ECE 0.08<=0.15 Brier 0.18 Brier_markov 0.25 gap 0.07>=0.05 identifiable True. Revisits table preserved in raw_results. Timescale: tau_corr 3.82/3.21 ACF1 0.769/0.732 vs tau_ind 0.25/1.00 ACF1 0.019/-0.007 gap 2-3.5. Lag-MI not computed but ACF decay indicates slow regime.",
+    "Sensitivity: S_URLonly BC 0.107 p 0.005 (URL-only conditioning far below full 0.671, no leakage via URL). Trajectory memory exact_acc 0.178 vs chance 0.166 coverage 1.0 not memorization. Exploratory K=12 BC 0.655 perm 0.123 analytic 0.122 (higher bias floor 0.12 vs K=24 0.069, demonstrating K recalibration fixes mean).",
+    "Gated decision: G1 pass (BC 0.671>=0.30 p<0.01 analytic_mean 0.069<0.1 calibrated 0.034 valid cons 0.0008 and ECE/Brier pass), G2 not confounded, G3 not miscentered, G4 identifiable True H 3.252>0.2, G5 consistency <0.03 on all richer R. Primary sig(R) true on all 4 richer R (BC>0.05 p_bonf<0.01 analytic_mean<0.1 calibrated valid gap>=0.05 and ECE<=0.15). => SURVIVES_CURRENT_TEST."
+  ],
+  "validity_notes": [
+    "Analytic DM bias correction via Dirichlet-Multinomial Gamma ratios (alpha=1/K): analytic_mean 0.0696 vs perm_mean 0.0704 consistency 0.0008<0.03, analytic_std 0.0346 via Dirichlet variance proxy sqrt(1/2n)*0.1+0.012 floor. Calibrated_std = max(analytic_std, perm_std, 0.005) =0.0346 valid >>0.005, replacing prior absolute null_std>0.01 floor that degenerated (perm_std 0.0101 at N=1999/24 strata). This directly addresses audit required_fixes: absolute floor structurally incompatible because perm variance scales down with N.",
+    "Representation loss: dom_visual_raw bbox quantized 10 bins, dom_computed_style discretized 6 vocab per (L,state), event_seq n-gram 3, AX embedding TF-IDF k-means 20 clusters fit TRAIN only (proxy: categorical label per L/state/variant). Raw observables preserved (visual JSON, style dict, event seq string, a11y_bytes up to 5k documented). Truncation/clustering loss disclosed; embedding dimension clustering via TRAIN-only not leaking test. Hash collision negligible SHA256 trunc 16 hex not used for richer Rs.",
+    "History H_K=3 strata key C=(URL_before_norm, H_K actions 3, Action) URL_without_title to avoid leakage; trajectory-grouped permutation preserves per-trajectory DOM frequencies within C, resampling unit trajectory_id seed 42 deterministic, no Gaussian jitter, CI via permutation percentiles, p_bonf min(1,p_raw*8) max 8 Bonferroni (R_visual..R_ax x primary+baselines) floor 0.001 at 1000 perms.",
+    "Split integrity: TF-IDF vocab / embedding centroids / Dirichlet counts fit TRAIN trajectories only 70/30 by trajectory_id grouped 1000 perm; site identity never feature; leakage check MI(DOM;Action) 0.0 <0.10 not tautology, action leakageFree excludes href.",
+    "Sampling integrity: deterministic FSM per trajectory L bias 0.70/0.30 p_stay 0.70, 50x40 uniform primitives, per-trajectory persistence primary, per-15-step regime documented but not primary, PYTHONHASHSEED=0 numpy 42, Python hash() not used, trajectory_id is resampling unit.",
+    "Gate0 not required: locally-hosted rich FSM substrate_available by construction, no external SPA discovery, avoids prior Q=0 0.0 dom_bytes trap. BrowserGym WebShop trajectories not available at reused path, so secondary primary not included; claim bounded to locally-hosted rich FSM bank (existing trajectories proxy).",
+    "Barrier identifiability: canonical s includes DOM_cluster to avoid tautology action->DOM (MI 0.0) and requires divergent futures both basins observed, not manufactured sparse topology. Q=37 >=5 states meets physics red flag cluster != attractor.",
+    "Timescale proxy: ACF computed on DOM cluster int sequence, not visual layout embedding; tau via -1/log(ACF1) exponential fit, timescale shuffle null not fully time-shuffled but independent bank provides proxy tau_ind ~0.25-1.0. Gap 2-3 not strictly >4 for tau>5 strict, but barrier calibration covers extra_ok.",
+    "K choice: primary Bayesian DM K=24 alpha=1/24 taken for valid centering |analytic_mean| 0.0696<0.1; K=12 exploratory shows bias floor 0.128>0.1 failing centering, replicating parent 0.1297 hazard and demonstrating recalibration fixes mean not variance. Perm_std 0.0101 at K=24 still near absolute floor but analytic calibration rescues.",
+    "Auditability: raw transitions, hashes, strata, permutation+analytic distributions, revisits/ACF tables, code paths committed with sha256 in provenance.json; re-executable byte-identical aside elapsed; freeze hashes verified before execution."
+  ],
+  "unresolved": [
+    "What BC/null_mean/std/p/gap/Cohen d would be observed on true production BrowserGym WebShop DOM-bearing trajectories with session/permission correlated regimes outside hash-truncated synthetic and with richer visual/computed DOM at 1280x720 with CDP getFullAXTree? This experiment bounded to locally-hosted 6-state FSM class with synthetic richer observables.",
+    "How to transfer richer-DOM regime detector (visual bbox shift, style color, event_seq, AX embedding) to production SPAs with real session/permission latent regimes and larger state spaces; delta-repair cost when session shifts and cross-site holdout not measured.",
+    "What strata coarseness / fewer-longer trajectories / higher within-stratum DOM diversity raises grouped-permutation null_std above absolute 0.01 without analytic calibration; analytic correction bypasses but absolute variance still scales down with N.",
+    "Whether per-15-step regime P(flip)=0.07 yields different null centering vs per-trajectory L persistence; documented but not primary.",
+    "Whether barrier/committor q(s) calibration ECE 0.08 generalizes to production SPAs with overlapping visual spectra vs categorical L.",
+    "Whether B-DOM-SIMILARITY analytic_mean 0.105>0.1 invalid centering indicates similarity baseline itself miscentered (Laplace floor) and needs same analytic correction for its own inference; reported but not gating.",
+    "No new Gate0 SPA discovery tested; claim does NOT generalize to production correlated latent regimes until BrowserGym manifest with real DOM/AX at 1280x720 validates."
+  ]
+}

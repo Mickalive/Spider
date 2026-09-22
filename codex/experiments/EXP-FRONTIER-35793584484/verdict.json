@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35793584484",
+  "lane": "frontier",
+  "decision": "FALSIFIED-IN-SETTING",
+  "claim_updates": [
+    {
+      "claim_id": "C-SEMANTIC-RESOLVE",
+      "status": "EXPERIMENTAL",
+      "reason": "Bounded FALSIFIED-IN-SETTING under correct-family-required binding with pool 8>k=5 on synthetic orthogonal header/body/auth + mixed (40 pooled: 30 orthogonal +10 mixed, 84 themes, 45 components, 168 episodes). Controls PASS per independent audit PASS: PC-VERBATIM-CHECK 0/40=0.0 Wilson [0.0,0.0876] for all pipelines confirms parent 39/40 0.975 was adopt-any-key artifact (leak 0/40, contamination 0.975->0.0 verbatim, 0.45 to correct-family); PC-EXACT-MATCH 11/12=0.917 CF vs 12/12 verbatim (pass), PC-RETRIEVAL-HEALTH non-empty 1.0 for all but distinct win 0.475 (<0.50) vs types 0.65 disclosed as marginal PASS, PC-WEBAPI-INDEX-BUILT 84 themes each identical, NCs PASS, no oracle leak (forbidden 0, std 0.27-0.284 >0.05). Under RULE-CORRECTFAMILY pooled correct 21/40=0.525 Wilson [0.375,0.671] binomial p1.1e-08 vs 0.10 McNemar vs B-EXACT-MATCH 0/40 p1.27e-05 for flat TFIDF-K5-CF, flat EMBED-K5-CF, hierarchical-CF, WebAPI-CF identical (random 18/40=0.45 McNemar vs best flat p1.0). S1 passes >=0.30 but S2 fails (false 0.25 >0.15 not < verbatim 0.25 by 0.15 McNemar p1.0), S4 fails (ECE 0.257 >0.15), S6 fails (coverage gain 0.0 CI [0,0] p1.0 for both hierarchical and WebAPI vs best flat, density gain -0.105 significant negative flat 1.49 vs hier 1.385). WebAPI 84 themes identical to hierarchical (audit: same Jaccard 0.6 clustering on same 168 episodes, identical retrieved_ids/entropy) — not distinct algorithm. Per-family: body 10/10, auth 9/10, header 2/10, mixed 0/10 for all CF pipelines (held-out 7/9), driving S2/S4 failures. SURVIVES requires S1-S6 all pass with coverage>=0.15 and ECE<=0.15; FALSIFIED-IN-SETTING triggers per prereg 7. Claim remains EXPERIMENTAL at rule-based reconstruction ceiling artifact + bounded no-complementarity; not VALIDATED (S6/ECE fail) and not PRODUCT_CORE (frontier lane, synthetic minimal derived dict, no BrowserGym 1280x720 live substrate, synthetic-to-real gap dominant). Bounded to correct-family gating with minimal derived dict (url/method/url_path/url_query/url_segments/headers_observed/body_observed)."
+    }
+  ],
+  "product_action": "DO_NOT_PROMOTE",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does residual-novelty-tracked verification economics with freshness/UNKNOWN gating and calibrated abstention (ECE<=0.15 precision>=0.85 false_accept<=0.10 with honest kernel-gated resolve/verify cost), or live BrowserGym 1280x720 noisy DOM/AX observation with correct-family gating and joint multi-candidate composition for mixed header+body+query+auth, break the 0.55 coverage and 21/40 correct ceiling (including 0/10 mixed failure) and provide higher work-compression leverage than retrieval-diversity tuning (hierarchical vs flat top-5 vs WebAPI endpoint mining) for alias-OOD tasks on richer substrates?",
+  "reason": "Director adjudicates frozen spec/prereg/ freeze plus producer result.json COMPLETE outcome FALSIFIES and independent audit.json PASS producer_claim_supported true. Verdict grounded in recomputed metrics: verbatim manipulation check 0/40 for all pipelines (Wilson upper 0.0876 <=0.15) confirms 39/40 parent artifact required powerful reconstruction (result.json metrics alias_OOD_pooled_correct_verbatim_all 0/40, audit validity_findings PC-VERBATIM-CHECK pass); correct-family pooled 21/40=0.525 for B-FLAT-TFIDF-K5-CF, B-FLAT-EMBED-K5-CF, H-HIERARCHICAL-CF, H-WEBAPI-CF identical (result.json 21/40, audit recomputed_metrics correctfamily_pooled H_HIERARCHICAL_CF 0.525 Wilson [0.375,0.671] binomial p1.1e-08, McNemar vs best flat p1.0, vs B-EXACT-MATCH p1.27e-05); coverage gain 0.0 CI [0,0] p1.0 and density gain -0.105 p0.0 significant negative (result.json coverage_gain 0.0, audit recomputed_metrics coverage_gain_hier 0.0 density_gain -0.105) demonstrate no complementarity despite pool 8>k fix; WebAPI themes 84 identical to hierarchical 84 identical retrieved_ids/entropy (result.json webapi_themes_identical_to_hierarchical true, index_manifest.json 84/84, audit baseline_findings H-WEBAPI identical); false 0.25 >0.15 and ECE 0.257 >0.15 cause S2/S4 fail per report.md decision S1 PASS S2 FAIL S3 PASS S4 FAIL S5 PASS S6 FAIL; PC/NC all PASS except marginal distinct win 0.475 disclosed not MEASUREMENT_INVALID. Per frozen decision_rule requiring S1-S6 all pass with coverage>=0.15 ECE<=0.15, SURVIVES not met, MEASUREMENT_INVALID not triggered (all PCs/NCs pass, verbatim collapse, no oracle leak, leak 0/40), so FALSIFIED-IN-SETTING is only justified ceiling. Contamination magnitude 0.975->0.0 verbatim->0.525 correct-family quantified (0.45). Product promotion requires Product lane, PASS audit, and SURVIVES — not met; frontier lane forbids promotion. Bounded falsification does not close C-SEMANTIC-RESOLVE globally nor endpoint discovery on real Fetch/WebMCP/OpenAPI or live noisy observations; next high-information question must leave retrieval-tuning basin per frontier charter and Director comparative reasoning (7/10 tunnel) toward orthogonal verification economics or live noisy substrate with joint composition.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35793584484/request.json",
+    "research/experiments/EXP-FRONTIER-35793584484/spec.json",
+    "research/experiments/EXP-FRONTIER-35793584484/prereg.md",
+    "research/experiments/EXP-FRONTIER-35793584484/freeze.json",
+    "research/experiments/EXP-FRONTIER-35793584484/result.json",
+    "research/experiments/EXP-FRONTIER-35793584484/audit.json",
+    "research/experiments/EXP-FRONTIER-35793584484/report.md",
+    "research/experiments/EXP-FRONTIER-35793584484/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35793584484/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35793584484/index_manifest.json",
+    "research/experiments/EXP-FRONTIER-35793584484/train_split_inventory.json",
+    "research/experiments/EXP-FRONTIER-35793584484/tasks_expanded.json",
+    "research/experiments/EXP-FRONTIER-35793584484/tasks.json",
+    "research/experiments/EXP-FRONTIER-35793584484/provenance.json",
+    "research/frontier/run_execute_35793584484.py",
+    "research/experiments/EXP-FRONTIER-35789949165/handoff.json",
+    "codex/claim_state.json:C-SEMANTIC-RESOLVE",
+    "codex/index.json"
+  ]
+}

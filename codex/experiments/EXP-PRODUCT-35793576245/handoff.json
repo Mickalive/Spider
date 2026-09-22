@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35793576245",
+  "lane": "product",
+  "target_lane": "product",
+  "next_question": "With revised cost accounting that isolates per-hit step cost from fixed retrieval/distill amortization (f=100 or per-hit metric) and a non-deterministic mock that can emit wrong-bound failures enabling non-vacuous false_accept/UNKNOWN_precision/ECE, does SPIDER parameterized inheritance on the 192/36 file-based census achieve rho_novelty>=0.60 R2_delta>=0.50 |rho_length|<0.20 and honest saving >=25% vs COLD with parity to shipped Stagehand/TERX/RAG at n=0, and does gpt-4o-mini+Playwright on Docker-hosted WebArena replicate the proxy branch economics?",
+  "why_next": "Current experiment is first honest non-bijective measurement on 192/36 census: audit PASS confirms no formula/shuffling, family-specific slots, PC1/PC2 pass, leakage clean, and SPIDER does track novelty (rho0.608 p0.0002 R2_novelty0.509). Commercial claim FALSIFIED boundedly only because frozen C4 (|rho_length|<0.20) is structurally unsatisfiable when cost scales with task length L, and C5 honest-saving thresholds are infeasible under frozen 200 retrieval+100 distill vs 50tok replay at n0 and COLD+300 vs COLD at n>=0.5. Verification is vacuous (success1.0 false_accept0 on deterministic mock) so calibration thresholds non-discriminating. Highest information gain is to test whether removing fixed-overhead artefacts and enabling real verification failures changes the FALSIFIED verdict, and whether proxy branch economics predicts real LLM+Playwright costs before claiming C-PRODUCT-ECON scale-up or parking residual-novelty.",
+  "carry_forward": {
+    "established": [
+      "First genuine branch-derived cost measurement with no bijective formula (no 250+500*int(10n), no n*3200, no within-strata shuffling) verified via run_experiment.py and audit V6 info (branch_traces.json). Cost = retrieval200+150ms + verify50+120ms + hit50 vs repair500+2 + distill1000/f (f=10) honest sum, not formula.",
+      "Positive controls PASS: PC1 TERX hit_rate1.0 at n=0 mean50tok and Stagehand hit_rate1.0 at n0 mean595.83tok (50/L) success1.0 inside compared set; PC2 SPIDER binding correctness1.0 at n0 via actual src/spider/kernel.py _bind on 36 families/36 n0 tasks via registry.jsonl (audit recomputed 1.0).",
+      "SPIDER tracks residual novelty on this census: Spearman rho_novelty0.6077 block-permutation p0.0002 family-stratified bootstrap95% CI [0.480,0.717] slope4652 p8.3e-07 R2_novelty0.509 (audit recomputed matches). Null NC3 length-proportional control confirms discriminability (|rho|0.0049 R20.00002).",
+      "Family-specific slot induction verified: all 36 mechanisms have distinct family-specific slots ${sku},${store_id},${variant},${category}, none generic ['path','store']; Jaccard>=0.75 constant-anchor structure-similarity>=0.75 field-path relevance; B-pool never leaks into registry evidence (B∩evidence empty via run_experiment.py asserts, audit info).",
+      "Cost model constants and honest baseline accounting verified: retrieval200, verify50, hit50, repair500, distill1000/f, instruction200/f per cost_config.json; B-RAG honest hit at n0 (795tok) but binary only, B-STAGEHAND 50tok hit not 400 (VF6 fixed), B-TERX 50tok verify.",
+      "WebArena-Verified v2 file-based census structure 192 tasks/36 families >=3/49 templates/duplication0.9479/param_task0.8958 reused from EXP-PRODUCT-35782537266 hash e824ab3157cbd299, now with realized A/B pools seed42 and realized_novelty per task (fixtures/tasks.json sha256 0e153ed8). Synthetic ceiling disclosed (not Docker/full-DOM).",
+      "Statistics: 5000 family-stratified bootstrap and 5000 block-permutation implemented correctly in stdlib (numpy unavailable substituted by Random(42), PYTHONHASHSEED0) per provenance.json."
+    ],
+    "rejected": [
+      "That SPIDER parameterized inheritance under frozen proxy cost model pays only residual novelty vs honest baselines on this 192/36 file-based census — bounded FALSIFIED: SPIDER/STAGEHAND n0 1.503 95%CI[1.409,1.611] >1.20, SPIDER/RAG n0 1.126 CI[1.066,1.190] >0.80, SPIDER/TERX n>=0.5 1.054 >1 (all recomputed audit). Saving vs COLD n0 0.163 (>=25% saving vs COLD alone) does not imply beating shipped caches.",
+      "That R2_delta>=0.50 and per-stratum |rho_length|<0.20 holds under frozen per-step cost definition — bounded FALSIFIED: R2_delta0.400 (R2_novelty0.509 R2_length0.110) and rho_length per stratum 1.0 at 0/0.5/0.75/1.0, 0.366 at 0.25 — fails because every branch cost scales with L which varies across families within each stratum (audit critical, result validity_notes[5]).",
+      "That null control NC1 is perfectly flat: NC1 shuffled rho0.313 block-perm p0.0002 exceeds |rho|<0.25 bound (strict C6 fail) — abstention schedule correlates with novelty for single-slot families where permutation is identity; below 0.35 invalidation bound per spec.",
+      "That pay-cost-of-residual-novelty commercial promise is supported under this kernel/cost model on this proxy census — bounded rejection only, not global falsification of residual-novelty hypothesis.",
+      "That deterministic mock vacuity validates calibration: success1.0, false_accept0, UNKNOWN_precision1.0, ECE_exec0.025 with 4/5 empty bins n=54, ECE_all0.133 are non-discriminating artefacts of verify-always-passes (audit major).",
+      "That labelled novelty fraction equals realized slot novelty for all families — S=1 families realize labelled 0.25 as 0.0, S=2 collapse {0.25,0.5}->{0.5} etc (validity_notes[7])."
+    ],
+    "unknown": [
+      "Whether revised cost accounting (exclude fixed retrieval/distill from per-step comparison, or amortize at f=100, or per-hit metric) makes C5 saving/parity with Stagehand/TERX/RAG survivable and C4 |rho_length| satisfiable.",
+      "Whether a non-deterministic mock that can emit wrong-bound failures yields non-vacuous false_accept>0 and non-degenerate UNKNOWN_precision/ECE and changes calibration verdict.",
+      "Whether continuous similarity novelty (identifier edit distance) instead of disjoint A/B pools changes UNKNOWN boundary at n0.25-0.5 and ECE margin.",
+      "Whether NC1 confounding (shuffled rho0.313) is single-slot identity-permutation artefact or genuine novelty-difficulty correlation requiring null threshold redesign.",
+      "Whether B-RAG partial-overlap retrieval proportional to n (vs binary n0-only) changes SPIDER/RAG ratio at n0.25 (currently 0.671 SPIDER cheaper, but RAG implemented as miss).",
+      "Whether real LLM gpt-4o-mini + Playwright 1280x720 on Docker-hosted WebArena replicates proxy branch economics (real tokens/browser/latency, real repair success) or reverses ratios.",
+      "Whether kernel distill_parameterized survives at scale beyond mock to real WebArena family templates with header/body/query/auth mixed aliasing.",
+      "Whether C-PRODUCT-ECON commercial viability holds at f=10/100 on production DOM/cross-site/800-element pages."
+    ],
+    "do_not_assume": [
+      "Do not assume synthetic 192/36 file-based census equals production DOM, cross-site transfer, or 800-element full-DOM WebArena — ceiling explicitly synthetic file-based (result validity_notes[0], provenance inherited hash e824ab3157cbd299).",
+      "Do not assume success1.0, false_accept0, UNKNOWN_precision1.0, ECE_exec0.025/ECE_all0.133 demonstrate calibrated abstention — verification vacuous because emitted actions carry task identifiers so verify always passes (audit major, result validity_notes[3]).",
+      "Do not assume rho_novelty0.608 alone proves pay-for-novelty economics — SPIDER still 1.50x Stagehand and 1.13x RAG at n0 and 1.05x TERX at n>=0.5 under frozen constants (audit critical).",
+      "Do not assume C4 failure (R2_delta0.400, rho_length~1.0) means SPIDER does not track novelty — C3 passes (rho0.608 p0.0002); failure is design artefact of cost scaling with task length (audit critical validity_notes[5]).",
+      "Do not assume Stagehand 595tok vs TERX 50tok at n0 or RAG 795tok at n0 generalize beyond frozen tokens (retrieval200 distill100 verify50 hit50 repair500) — ratios floor at ~1.35-1.7 for L<=14 by construction.",
+      "Do not assume NC1 rho0.313 demonstrates novelty confounding globally — within 0.25 invalidation bound 0.35 and driven by single-slot identity permutations where shuffled mapping equals original.",
+      "Do not assume C-RESIDUAL-NOVELTY is globally falsified or EXPERIMENTAL/PRODUCT_CORE — bounded FALSIFIED only for this kernel/cost model/proxy census; global status remains HYPOTHESIS (codex).",
+      "Do not assume C-PRODUCT-ECON 5.42% analytical or COLD 7.5x cheaper lines indicate commercial viability — recent product lane closed as REJECTED/MEASUREMENT_INVALID and this experiment provides no valid economics measurement for that claim.",
+      "Do not assume realized_novelty equals labelled n for S=1/2 families — labelled 0.25 realizes as 0.0 for S=1, collapse for S=2 (disclosed fixtures/tasks.json).",
+      "Do not assume bijective formula or shuffling ever returned — audit confirms no formula/shuffling in this run; prior VF1-VF2 rejected artefacts must not be reintroduced."
+    ]
+  },
+  "dependencies": [
+    "src/spider/kernel.py distill_parameterized committed fix (Jaccard>=0.75 constant-anchor, structure-similarity>=0.75, field-path relevance) — verified but not yet tested beyond file mock",
+    "WebArena-Verified v2 Docker full-DOM hosting with Playwright 1280x720 and gpt-4o-mini 15-step budget for real token/browser replication",
+    "Revised cost_config.json or analysis that isolates per-hit cost (exclude fixed retrieval/distill) or f=100 amortization for honest Stagehand/TERX/RAG parity test",
+    "Non-deterministic MockEnv that can emit wrong-bound failures to enable non-vacuous false_accept/UNKNOWN_precision/ECE"
+  ],
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35793576245/request.json",
+    "research/experiments/EXP-PRODUCT-35793576245/spec.json",
+    "research/experiments/EXP-PRODUCT-35793576245/prereg.md",
+    "research/experiments/EXP-PRODUCT-35793576245/freeze.json",
+    "research/experiments/EXP-PRODUCT-35793576245/result.json",
+    "research/experiments/EXP-PRODUCT-35793576245/report.md",
+    "research/experiments/EXP-PRODUCT-35793576245/provenance.json",
+    "research/experiments/EXP-PRODUCT-35793576245/audit.json",
+    "research/experiments/EXP-PRODUCT-35793576245/run_experiment.py sha256 1dc8a3813ea28a1aa5cb624467d5453b596af94c4697b694aa34d123f13683e5",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/raw_per_task.csv sha256 7d0ead05a7fb1387bace4ec7f208599d85e80cf60ba18af1a69124b32c7a6bfe",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/derived_metrics.json sha256 e0639b6d3bb23dd057e490fd6282914403dfc15c2b82c53ea5d9e73ce5bb296c",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/registry.jsonl sha256 462236fdef0f8468fe39b3d6a8675f3f96e414cbe8d68eba8d864a1fec1e6889",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/cost_config.json sha256 cbb95c44cae0fe79bea3410a42e08f652fe1a90b1f9133bcfb9fef9ff0216d7e",
+    "research/experiments/EXP-PRODUCT-35793576245/artifacts/branch_traces.json sha256 426b633819f58c8ade26c1c0541671000111255742be77e1cc3e119b965df176",
+    "research/experiments/EXP-PRODUCT-35793576245/fixtures/tasks.json sha256 0e153ed8f26f1c3d5a11e3aea282a66d5d240c88c3553f355972d055ebed3d0b",
+    "src/spider/kernel.py sha256 48786285d51959e68e5418f8f06c8aad3f3705582bdb3bedc1d13b822652c83e",
+    "codex/claim_state.json:C-RESIDUAL-NOVELTY",
+    "codex/index.json:EXP-PRODUCT-35793576245"
+  ],
+  "recommended_action": "Do not promote; hold C-RESIDUAL-NOVELTY at HYPOTHESIS (bounded FALSIFIED for proxy). Before retry: (1) revise frozen cost model — report per-hit step cost excluding fixed retrieval/distill or amortize at f=100 to remove 200+100 floor that makes SPIDER/STAGE <=1.20 and SPIDER/RAG <=0.80 infeasible; (2) replace deterministic MockEnv with mock that can emit wrong-bound actions to test false_accept/UNKNOWN_precision/ECE non-vacuously; (3) implement B-RAG partial-overlap (proportional to realized novelty) and fix realized vs labelled novelty for S=1/2 families; (4) rerun 5000 bootstrap/block-permutation on same 192/36 census. If revised proxy then survives, replicate with gpt-4o-mini+Playwright on Docker WebArena (measure real tokens/browser/latency) to validate proxy-to-real transfer before any C-PRODUCT-ECON claim. Park paid-tier CDN and exhaustive LFS searches."
+}
