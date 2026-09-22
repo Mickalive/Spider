@@ -1,0 +1,41 @@
+{
+  "experiment_id": "EXP-INTEL-35782546046",
+  "seed": 35725763380,
+  "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "webarena_url": "http://localhost:7770",
+  "start_time": 1790111978.4953814,
+  "versions": {
+    "browsergym": "unknown",
+    "agentlab": "0.4.2",
+    "playwright": "1.44.0"
+  },
+  "pip_freeze": "agentlab==0.4.2\naiohappyeyeballs==2.7.1\naiohttp==3.14.3\naiohttp-cors==0.8.1\naiolimiter==1.3.0\naiosignal==1.4.0\nannotated-doc==0.0.5\nannotated-types==0.8.0\nanthropic==1.8.0\nanyio==4.15.1\nasttokens==3.0.2\nattrs==26.1.0\nbeartype==0.12.0\nbeautifulsoup4==4.14.2\nblinker==1.9.0\nbrotli==1.2.0\nbrowsergym==0.14.3\nbrowsergym-assistantbench==0.14.3\nbrowsergym-core==0.14.3\nbrowsergym-experiments==0.14.3\nbrowsergym-miniwob==0.14.3\nbrowsergym-visualwebarena==0.14.3\nbrowsergym-webarena==0.14.3\nbrowsergym-webarena-verified==0.14.3\nbrowsergym-webarenalite==0.14.3\nbrowsergym-workarena==0.5.3\ncertifi==2026.7.22\ncffi==2.1.1\ncharset-normalizer==3.5.1\nclick==8.5.0\ncloudpickle==3.1.2\ncolorama==0.4.6\ncolorful==0.5.8\ncompact-json==1.8.1\ncontexttimer==0.3.3\ncontourpy==1.4.0\ncryptography==50.0.1\ncuda-bindings==13.4.2\ncuda-pathfinder==1.8.2\ncuda-toolkit==13.0.3.0\ncycler==0.12.1\ndask==2026.8.0\ndataclasses-json==0.6.7\ndatasets==5.0.1\ndecorator==5.3.1\ndefusedxml==0.7.1\ndill==0.4.1\ndistlib==0.4.3\ndistributed==2026.8.0\ndistro==1.9.0\ndocstring_parser==0.18.0\nenglish-words==2.0.2\nevaluate==0.4.6\nexecuting==2.2.1\nFaker==40.39.0\nFarama-Notifications==0.0.6\nfastapi==0.141.1\nfastuuid==0.14.0\nfilelock==4.0.1\nFlask==3.1.3\nflexcache==0.3\nflexparser==0.4\nfonttools==4.65.0\nfrozenlist==1.8.0\nfsspec==2026.6.0\nfuture==1.0.0\ngeocoder==1.38.1\ngeographiclib==2.1\ngeopy==2.4.1\ngitdb==4.0.12\nGitPython==3.1.62\ngoogle-api-core==2.38.0\ngoogle-auth==2.58.0\ngoogleapis-common-protos==1.75.3\ngradio==6.17.3\ngradio_client==2.5.0\ngreenlet==3.0.3\ngroovy==0.1.2\ngrpcio==1.84.0\ngymnasium==1.3.0\nh11==0.16.0\nhf-gradio==0.4.1\nhf-xet==1.6.0\nhttpcore==1.0.9\nhttpcore2==2.13.0\nhttpx==0.28.1\nhttpx2==2.13.0\nhuggingface_hub==0.36.2\nidna==3.20\nImageIO==2.37.4\nimportlib_metadata==9.0.1\nimportlib_resources==7.1.0\nipython==9.17.1\nipython_pygments_lexers==1.1.1\nitsdangerous==2.2.0\njedi==0.20.0\njellyfish==1.2.1\nJinja2==3.1.6\njiter==0.17.0\njoblib==1.6.0\njsonpath-ng==1.7.0\njsonschema==4.26.0\njsonschema-specifications==2025.9.1\nkiwisolver==1.5.1\nlazy-loader==0.6\nlibvisualwebarena==0.0.15\nlibwebarena==0.0.4\nlitellm==1.80.0\nlocket==1.0.0\nlxml==5.4.0\nmarkdown-it-py==4.2.0\nMarkupSafe==3.0.3\nmarshmallow==3.26.2\nmatplotlib==3.11.2\nmatplotlib-inline==0.2.2\nmcp==2.2.0\nmcp-types==2.2.0\nmdurl==0.1.2\nmpmath==1.3.0\nmsgpack==1.2.2\nmultidict==6.9.1\nmultiprocess==0.70.19\nmypy_extensions==1.1.0\nnetworkx==3.7\nnltk==3.10.3\nnumpy==2.5.3\nnvidia-cublas==13.1.1.3\nnvidia-cuda-cupti==13.0.85\nnvidia-cuda-nvrtc==13.0.88\nnvidia-cuda-runtime==13.0.96\nnvidia-cudnn-cu13==9.24.0.43\nnvidia-cufft==12.0.0.61\nnvidia-cufile==1.15.1.6\nnvidia-curand==10.4.0.35\nnvidia-cusolver==12.0.4.66\nnvidia-cusparse==12.6.3.3\nnvidia-cusparselt-cu13==0.8.1\nnvidia-nccl-cu13==2.30.7\nnvidia-nvjitlink==13.4.92\nnvidia-nvshmem-cu13==3.4.5\nnvidia-nvtx==13.0.85\nopenai==1.109.1\nopencensus==0.11.4\nopencensus-context==0.1.3\nopentelemetry-api==1.44.0\nopentelemetry-exporter-prometheus==0.65b0\nopentelemetry-proto==1.44.0\nopentelemetry-sdk==1.44.0\nopentelemetry-semantic-conventions==0.65b0\norjson==3.12.0\npackaging==26.3\npandas==3.0.6\nparso==0.8.7\npartd==1.4.2\npexpect==4.9.0\npillow==12.3.0\nPint==0.25\nplatformdirs==4.11.12\nplaywright==1.44.0\nply==3.11\nportalocker==4.4.0\nprice-parser==0.5.0\nprobableparsing==0.0.1\nprometheus_client==0.26.0\nprompt_toolkit==3.0.53\npropcache==0.5.4\nproto-plus==1.28.4\nprotobuf==7.36.2\npsutil==7.2.2\nptyprocess==0.7.0\npure_eval==0.2.4\npy-spy==0.4.2\npyarrow==25.0.1\npyasn1==0.6.4\npyasn1_modules==0.4.2\npycparser==3.0\npydantic==2.12.0\npydantic_core==2.41.1\npydub==0.25.1\npyee==11.1.0\nPygments==2.21.0\nPyJWT==2.14.0\npyparsing==3.3.3\npython-crfsuite==0.9.12\npython-dateutil==2.9.0.post0\npython-discovery==1.6.1\npython-dotenv==1.2.3\npython-multipart==0.0.32\npython-slugify==9.1.1\npytimeparse2==1.7.1\npytz==2026.3.post1\nPyYAML==6.0.3\nRapidFuzz==3.14.6\nratelim==0.1.6\nray==2.58.0\nreferencing==0.37.0\nregex==2026.9.10\nrequests==2.34.2\nrich==15.0.0\nrpds-py==2026.6.3\nsacrebleu==2.6.0\nsafehttpx==0.1.7\nsafetensors==0.8.0\nscikit-image==0.26.0\nscipy==1.18.1\nsemantic-version==2.10.0\nsetuptools==84.0.0\nshellingham==1.5.4\nsix==1.17.0\nsmart_open==8.0.1\nsmmap==5.0.3\nsniffio==1.3.1\nsortedcontainers==2.4.0\nsoupsieve==2.9.2\nsse-starlette==3.4.11\nstack-data==0.6.3\nstarlette==1.6.0\nsympy==1.14.0\ntabulate==0.10.0\ntblib==3.2.2\ntenacity==9.1.4\ntext-generation==0.7.0\ntext-unidecode==1.3\nthefuzz==0.22.1\ntifffile==2026.9.20\ntiktoken==0.14.0\ntokenizers==0.22.2\ntomlkit==0.14.0\ntoolz==1.1.0\ntorch==2.14.0\ntornado==6.5.10\ntqdm==4.70.1\ntraitlets==5.16.1\ntransformers==4.57.6\ntriton==3.8.0\ntruststore==0.10.4\ntyper==0.27.2\ntypes-tqdm==4.70.0.20260906\ntyping-inspect==0.9.0\ntyping-inspection==0.4.4\ntyping_extensions==4.16.0\nUnidecode==1.4.0\nurl-normalize==2.2.1\nurllib3==2.8.0\nus==3.2.0\nusaddress==0.5.16\nusaddress-scourgify==0.6.0\nuvicorn==0.53.0\nvirtualenv==21.10.0\nwcwidth==0.8.4\nwebarena-verified==1.2.3\nweblinx==0.3.2\nweblinx_browsergym==0.0.3\nWerkzeug==3.1.8\nword2number==1.1\nwrapt==2.4.1\nxxhash==4.0.1\nyaml-config==0.1.5\nyarl==1.25.1\nzict==3.0.0\nzipp==4.1.0\n",
+  "end_time": 1790112132.1602097,
+  "duration_seconds": 153.66482830047607,
+  "artifacts": {
+    "webarena_census.json": {
+      "path": "artifacts/raw/webarena_census.json",
+      "sha256": "1923e6fa4e9c6f141be594937d43654ce85e7a9b8bfbc5ebbc963eecd60a2cf3"
+    },
+    "ax_captures.jsonl": {
+      "path": "artifacts/raw/ax_captures.jsonl",
+      "sha256": "0e022eb884b1b98830ab4f97682a9ded8f41426e52913e5973e3a655d11c9d9c"
+    },
+    "ax_consistency.json": {
+      "path": "artifacts/derived/ax_consistency.json",
+      "sha256": "5be7e631f256dc77ec13f84b4c6180a6fc223f67be7d02a0f5c8d22a7363fe72"
+    },
+    "stagehand_replication.json": {
+      "path": "artifacts/derived/stagehand_replication.json",
+      "sha256": "0c0b274f182c7691bda6a00513bdb2a6bb7b22dd22dcb46f3dbfc5ca107f7a89"
+    },
+    "gate0_relaxed_table.json": {
+      "path": "artifacts/derived/gate0_relaxed_table.json",
+      "sha256": "091f7303d1968556cdfdaace3add104fd7f652aa73ffa1ab08e565483415991c"
+    }
+  }
+}

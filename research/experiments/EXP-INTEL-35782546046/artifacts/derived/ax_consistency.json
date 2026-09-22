@@ -1,0 +1,24 @@
+{
+  "mean": 1.0,
+  "ci_lower": 1.0,
+  "ci_upper": 1.0,
+  "per_family": {
+    "208": 1,
+    "211": 1,
+    "172": 1,
+    "191": 1,
+    "139": 1,
+    "138": 1,
+    "101": 1,
+    "194": 1
+  },
+  "shuffle_null": {
+    "mean": 1.0,
+    "std": 0.0,
+    "p95": 1.0,
+    "p_value": 1.0
+  },
+  "delta_vs_prior": 0.7142999999999999,
+  "valid_families": 8,
+  "valid_captures": 16
+}
