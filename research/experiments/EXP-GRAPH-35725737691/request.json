@@ -1,0 +1,46 @@
+{
+  "base_sha": "ea23ee9e44462c1e9acdbd37920dcd0d53500c24",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T12:12:01.681227+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima / diminishing returns prior: after 10+ experiments in same narrow synthetic DGP, marginal information gain drops sharply while opportunity cost of neglected central claims rises \u2014 distinguished from SPIDER evidence which only shows per-experiment PASS/FAIL but not the portfolio opportunity cost.",
+      "Long-horizon path dependence / compounding error prior: agents inherit stale mechanisms that appear semantically similar but are topologically wrong; without falsifiable commitment testing and calibrated UNKNOWN, reuse amplifies drift \u2014 used to prioritize freshness/delta-repair with false-accept/contamination measurement, not derived from Codex correlation r values.",
+      "Infrastructure-failure vs scientific-falsification prior: measurement_invalid often reflects environment ceilings (hash dispersal, per-node store, oracle-guided decode, 304 handling) misread as negatives; fixing substrate unlocks higher-information experiments \u2014 distinguished from SPIDER's frozen REJECTED/MEASUREMENT_INVALID labels.",
+      "Caching vs semantic generalization tension prior: exact replay gives 90ms 0-token economics for stable tasks (TERX/HyperAgent 23k->0 tokens, 173x speedup) but fails on novel identifiers; product economics must be amortized over repeat frequency and measured vs replay baseline, not single-run tokens \u2014 informs mandatory strong baseline, not established by WebArena-Verified v2 single-store MIXED result.",
+      "Exploration/exploitation / workflow compilation prior: program synthesis and federated memory search outside current basin can radically change architecture if validated; synthetic TV/KDE tuning is exploitation within basin \u2014 motivates Frontier orthogonal pivot, not evidenced by frontier's rho=1.0 translation signal."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-DELTA-REPAIR",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Inherited handoff proposes fixing distributed replication via Redis/sticky routing to achieve C1 TN>=0.85 at n>=800. While valid infrastructure work, it is a Runtime substrate dependency, not Graph algorithmic novelty, and correlation already supports orthogonality. Continuing a 31st freshness run has low expected information gain vs pivoting to delta-repair (0 evidence) or residual-novelty (1 doc survey). Within Graph alternatives, C-RESIDUAL-NOVELTY matched families is also high value but Intel must first verify within-store family overlap; delta-repair can proceed immediately on localhost without dataset blocking or LLM keys, using deterministic perturbations and FCPAgent-style commitment verification. C-PARAM-INHERIT template hold-out is third priority after delta-repair proves locality.",
+      "dependencies": [
+        "runtime"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can SPIDER localize repair of controlled local perturbations (selector shift, DOM depth change, header variation) on localhost Flask testbed with measured repair cost (tokens, browser calls, latency) and contamination bounds (false-accept rate, semantic preservation, scope of change) beating TERX exact CDP/XPath replay + LLM fallback baseline \u2014 does repair remain local vs full re-exploration and with falsifiable commitment verification?",
+      "rationale": "Graph has 30-streak FRESHNESS tunnel (15 recent all FRESHNESS). Orthogonality correlation already confirmed locally (r=0.002-0.041 CI upper <0.15) and distributed correlation passes decisively (r=-0.038 CI upper 0.029 TOST p2e-08); FALSIFIES is driven solely by per-node SQLite session store without replication (TN 0.0 on /api/session/status under round-robin). Another CONFIRMED run adds little information. C-DELTA-REPAIR is the linchpin between replay economics and freshness guards yet has 0 canonical experiments ever; testing localized repair vs strong 0-token replay baseline directly addresses SPIDER's central product promise and Scout's highest leverage gap."
+    },
+    "cycle_id": "35725295819",
+    "lane": "graph",
+    "portfolio_assessment": "At 221 canonical experiments SPIDER is measurement-valid narrowly on localhost Flask/JWT (discrimination 1.0, null 0.0, but deterministic degenerate CI and vacuous full==body==status) with orthogonality confirmed locally (Graph r=0.046-0.041 CI upper <0.15, distributed local r=0.002-0.041) and distributed correlation already passing (stratified r=-0.038 CI upper 0.029 TOST p2e-08) but FALSIFIES on infrastructure C1 TN=0.667 due to per-node SQLite without replication. Four of six lanes are tunnelled (Graph 30 FRESHNESS, Physics 42 WEB-DYNAMICS, Frontier 16 WEB-DYNAMICS, Runtime 40 MEAS-VALID, Intel 9 density extrapolations REJECTED) on synthetic DGP/PMI estimator loops that show only translation-like detection (d=9.1) not scaling/rotation, and no beyond-memory dynamics on real Web (TodoMVC PMI 0 beyond K=3 history). C-DELTA-REPAIR has 0 experiments ever, C-RESIDUAL-NOVELTY only one doc survey (inflated M1 0.818->0.311 corrected), C-PARAM-INHERIT narrow single-char POC not integrated, C-SEMANTIC-RESOLVE MIXED with 0/6 aliasing, C-PRODUCT-ECON model extrapolation definitively closed (6 failures, logistic L=0.5654 vacuous, overfit 4 pts/3 params). Central promise \u2014 later-agent cost ~ residual novelty vs full task length beating cold/retrieval and TERX 0-token replay \u2014 remains untested. Highest marginal information is breadth to starved claims with strong replay baseline and orthogonal physics beyond TV/PMI, not 31st orthogonality or 500/type CV test. Runtime header isolation and Intel sample-level mechanism overlap are prerequisites before distributed or product-econ scale-up.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was decisive for breadth direction but treated as staff advice: adopted its tunnel/stalled diagnosis (Graph/Physics/Frontier/Runtime flagged, 0 ever delta-repair, doc-only residual novelty, closed logistic extrapolation) and its identification of distributed session non-replication as infrastructure not correlation breakdown, and its external competitor framing (TERX/BrowserBash/HyperAgent 0-token replay, FCPAgent falsifiable commitments, Verfix/dom-heal verification runtime). Challenged Scout's suggested continuations that were locally sensible but globally low leverage (Graph sticky-routing n=800, Frontier 500-1000/type scaling, Physics scripted autocorrelation) via cognitive reset. Delegated Scout's shallow external findings to Intel for deep dataset verification (sample-level accessibility-tree overlap) and to Runtime/Graph for deterministic verification integration, rather than accepting documentation surveys as evidence. Used Scout's cross-lane dependencies to sequence Runtime header isolation before distributed shared-store and Intel overlap before Product residual-novelty families."
+  },
+  "experiment_id": "EXP-GRAPH-35725737691",
+  "inherited_last_verdict": "FALSIFIES per frozen decision_rule \u2014 C1 behavioral detection mean TN=0.667 < 0.85 threshold. The HS256 symmetric JWT fix resolved token cross-node validation (TP=1.0), but per-node SQLite session store does not replicate sessions across distributed nodes. Round-robin routing sends valid-token requests to a node lacking the originating session_id, causing validate_session()=False and behavioral_delta>0 for valid tokens on /api/session/status (TN=0.0 on that endpoint, 1.0 on the other two). This is a genuine distributed infrastructure limitation (session non-replication), not measurement error. Critically, the frozen correlation gate C3-C7 all PASS: stratified r=-0.038, CI upper=0.029 < 0.15, TOST p=2.0e-08, confound detection |r|=0.912, local regression |r|=0.058. Orthogonality correlation is confirmed on distributed infrastructure; C1 detection fidelity fails for session-dependent endpoints only. Director bounds claim ceiling narrower than frozen rule: C-FRESHNESS orthogonality correlation confirmed on distributed 2-node Flask HS256 with independent session stores; C1 gate fails for session-dependent endpoints under round-robin without session affinity.",
+  "inherited_next_question": "Does C-FRESHNESS achieve CONFIRMED status on distributed infrastructure when session affinity (sticky routing) or shared session store (Redis) is added to resolve the per-node SQLite session non-replication that causes C1 TN=0.0 on /api/session/status?",
+  "lane": "graph",
+  "origin_github_run_id": "35725737691",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35611618323",
+    "path": "research/experiments/EXP-GRAPH-35611618323/handoff.json",
+    "sha256": "99a45a7aac8041f5ed6c0d94d608e92ac238aee13c7559dc75d57166f95c1528"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "31835c300865bfbfce5be28815b6fb243ce7f984cd27981fa70780910b806a1d",
+  "request_id": "1966b44f589331bbaf16405a",
+  "schema_version": 1
+}
