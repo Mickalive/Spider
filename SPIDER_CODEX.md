@@ -4,7 +4,7 @@ Pre-2.0 canonical memory remains frozen at `archive/spider-codex-ultimate:SPIDER
 
 Canonical Research 2.0 evidence lives in `codex/experiments/<experiment_id>/`.
 Use `codex/index.json` and `codex/claim_state.json` to locate relevant packets; do not load all experiment bodies by default.
-Validated experiments: **247**. Coverage gaps: **0**. Quarantined packets: **0**.
+Validated experiments: **248**. Coverage gaps: **0**. Quarantined packets: **0**.
 
 ## Experiment index
 
@@ -257,6 +257,7 @@ Validated experiments: **247**. Coverage gaps: **0**. Quarantined packets: **0**
 | EXP-FRONTIER-35766532429 | frontier | PASS | SURVIVES_CURRENT_TEST | C-SEMANTIC-RESOLVE | `436d62d23bcb` |
 | EXP-PRODUCT-35773128019 | product | MEASUREMENT_INVALID | MEASUREMENT_INVALID | C-PARAM-INHERIT | `c5b525970f6d` |
 | EXP-INTEL-35773136560 | intel | PASS | MEASUREMENT_INVALID substrate_unavailable — Gate0 0/3 real SPAs qualify after exhaustive joint BrowserGym 0.14.3/CAP outside ServiceNow/cap/Mind2Web-2/Online-Mind2Web/WebJudge-7B/Docker enumeration; H2B CAP, H2C Mind2Web-2/WebJudge and H2A Docker all MEASUREMENT_INVALID | C-WEB-DYNAMICS, C-CROSSSITE | `093292693457` |
+| EXP-PHYSICS-35774039080 | physics | PASS | MEASUREMENT_INVALID | C-WEB-DYNAMICS | `5fb2e7789407` |
 
 ## Latest recorded claim events
 
@@ -273,4 +274,4 @@ These are chronological latest events, not an automatic truth ranking.
 | C-PRODUCT-ECON | REJECTED | EXP-INTEL-35757760689 | intel |
 | C-RESIDUAL-NOVELTY | HYPOTHESIS | EXP-PRODUCT-35741913862 | product |
 | C-SEMANTIC-RESOLVE | EXPERIMENTAL | EXP-FRONTIER-35766532429 | frontier |
-| C-WEB-DYNAMICS | HYPOTHESIS | EXP-INTEL-35773136560 | intel |
+| C-WEB-DYNAMICS | HYPOTHESIS | EXP-PHYSICS-35774039080 | physics |
