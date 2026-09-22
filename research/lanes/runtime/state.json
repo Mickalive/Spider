@@ -1,17 +1,17 @@
 {
   "lane": "runtime",
   "human_paused": false,
-  "active_experiment_id": "EXP-RUNTIME-35784838353",
-  "last_experiment_id": "EXP-RUNTIME-35774047385",
-  "last_verdict": "MEASUREMENT_INVALID \u2014 paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, brotli/chunked) and BrowserGym/AgentLab 1280x720 substrates unavailable; all 10 mandatory CDN conditions C1_CDN-C10_CDN plus gradients G1/G2 and E1-E3 NOT_MEASURED. Diagnostic origin (gunicorn 23.0.0 2x sync 127.0.0.1:19860 -> nginx 1.24.0 127.0.0.1:19851) ready with deterministic 1.0/0.0 but does not generalize to edge. No evidence for or against CDN claim; ceiling remains at prior single-host gunicorn+nginx loopback EXPERIMENTAL, no VALIDATED or PRODUCT_CORE promotion.",
+  "active_experiment_id": null,
+  "last_experiment_id": "EXP-RUNTIME-35784838353",
+  "last_verdict": "MEASUREMENT_INVALID \u2014 Director PIVOT question not measured: distributed C-FRESHNESS and BrowserGym C-MEAS-VALID blocked by synthetic harness and relabeled direct requests; no valid evidence for shared-store/sticky TN>=0.85, n_non304>=800, orthogonality TOST, or browser fingerprint isolation with CDP AX>10 on /resource",
   "continue_immediately": false,
-  "next_question": "Does SHA256(status||body_bytes||sorted_filtered_headers) retain discriminating same-status body-only (body-only 1.0 >0.5, status 0.0, headers-no-CLEN 0.0/1.0, Content-Length 31/70/117 varies) and header-only (full 1.0 > body/status 0.0, headers-only 1.0) with null FP<0.05 and writable permission/session >=0.7 when moved from single-host gunicorn23+nginx loopback to paid-tier CDN (Cloudflare/Fastly HIT/STALE/SWR/SIE/304, Vary/ETag, chunked buffering) and BrowserGym/AgentLab 1280x720 DOM/AX observation layer under 4-client concurrency, reporting per-value magnitude gradients and non-degenerate bootstrap CIs to enable sensitivity ordering beyond the 1.0 ceiling?",
+  "next_question": "Can Runtime close the live-substrate block with a real-HTTP implementation: (1) shared SQLite WAL file at /tmp/spider-runtime-35784838353/shared.db with 2x gunicorn 23.0.0 sync + nginx 1.24.0 round-robin delivering real requests (If-None-Match/ETag ->304 verified, per-batch SELECT commitment verified, X-Worker-Pid distribution >=10 per worker, n_non304>=800 stratified) to achieve C-FRESHNESS C1 TN>=0.85 (Wilson lower>0.75, session_status>=0.85) with per-node baseline TN~0.667 and stratified r TOST within 0.15, and (2) Playwright 1280x720 browser fetches via page.request against /resource (not requests) with CDP Accessibility.getFullAXTree on /resource pages (AX nodes>10 median, PC-HEALTH>=80%, DOM 21-82) preserving fingerprint isolation (body-only AvsC full>0.5 status 0 headers-no-CLEN 0, header-only AvsE full>0.5 CLEN 31==31) plus per-value Cache-Control/ETag/Content-Length gradients with B=1000 non-degenerate CI reporting?",
   "promotion_ready": false,
-  "consecutive_failures": 1,
-  "updated_at": "2026-09-22T23:19:48.679524+00:00",
-  "last_failure_retryable": false,
-  "last_handoff_sha256": "99489106c31bd43b393af1d4057a9c4fdc4cf886cf43838bc4016f2a4fa649b6",
-  "same_failure_count": 1,
-  "last_failure_fingerprint": "32fb61131a26107aaf831564",
-  "last_failure_control_revision": "076dc77b91c1d12ea39cb22825d01d847c1810ff7d44ed432bd5b1813468f5ae"
+  "consecutive_failures": 0,
+  "updated_at": "2026-09-22T23:40:13.713952+00:00",
+  "last_failure_retryable": null,
+  "last_handoff_sha256": "ccb4315c7eff1d9a9625930327b7c31af3762fb0239c33b11a87ddcaf3fbfd79",
+  "same_failure_count": 0,
+  "last_failure_fingerprint": null,
+  "last_failure_control_revision": null
 }
