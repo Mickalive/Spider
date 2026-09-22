@@ -1,17 +1,53 @@
 {
   "experiment_id": "EXP-PHYSICS-35697037202",
   "lane": "physics",
-  "claim_ids": [],
-  "question": "",
-  "hypothesis": "",
-  "falsifier": "",
-  "baselines": [],
-  "positive_control": "",
-  "null_control": "",
-  "measurement_validity": [],
-  "decision_rule": "",
-  "product_consequence_positive": "",
-  "product_consequence_negative": "",
-  "estimated_cost": "",
-  "expected_information_gain": ""
+  "claim_ids": ["C-WEB-DYNAMICS"],
+  "question": "Do TodoMVC hash-SPA state transitions exhibit timescale separation — autocorrelation structure that decays non-uniformly across lags, revealing distinct characteristic timescales for page-load, session-step, and cross-session dynamics — or is the temporal structure of these deterministic SPAs flat (indistinguishable from a memoryless process)?",
+  "hypothesis": "H1: The empirical autocorrelation function (ACF) of URL-state sequences from TodoMVC hash-SPAs exhibits significant positive autocorrelation at lag 1 that exceeds the within-session shuffled-action null (p < 0.01 after Bonferroni correction across 5 variants), and the ACF decays non-uniformly across lags 1-6, indicating characteristic timescales. H2: The ACF decay rate differs between the two effective FSM types ({vanillajs,react,svelte} 4-state vs {vue,angular} 3-state), indicating that FSM structure shapes temporal dynamics. H3: Inter-event time distributions show multimodal structure (fast page-load cluster vs slower session-step cluster), consistent with distinct operational timescales.",
+  "falsifier": "FALSIFIED if ANY of: (C1) lag-1 autocorrelation of URL-state sequences does NOT exceed the within-session shuffled-action null at p < 0.01 (Bonferroni-corrected across 5 variants); (C2) ACF at lags 1-6 is statistically indistinguishable from flat (one-way ANOVA on lag-1 through lag-6 ACF values, p > 0.05); (C3) inter-event time distribution is unimodal ( Hartigan's dip test p > 0.05, indicating no mixture structure). The hypothesis is FALSIFIED if any condition triggers.",
+  "baselines": [
+    {
+      "id": "B-SHUFFLE-ACTION",
+      "description": "Within-session shuffled-action null: for each session, randomly permute the action labels while preserving state sequence. Recompute ACF. Repeat N_SHUFFLE=1999 times to build null distribution. This tests whether temporal ordering of actions (not just state sequence) carries autocorrelation.",
+      "expected": "Null ACF at lag 1 should be near zero (memoryless). If empirical ACF exceeds null, temporal structure is real."
+    },
+    {
+      "id": "B-SHUFFLE-STATE",
+      "description": "Within-session shuffled-state null: randomly permute the state (URL) sequence within each session while preserving timestamps. Recompute ACF. This tests whether the observed autocorrelation is driven by state persistence (frequent self-loops) rather than transition dynamics.",
+      "expected": "If ACF is driven by self-loops (frequent url_after == url_before), shuffled-state null ACF should be similar to empirical, indicating persistence-dominated structure."
+    },
+    {
+      "id": "B-MARKOV-1",
+      "description": "First-order Markov surrogate: fit a first-order transition matrix from the data, generate synthetic state sequences of same length preserving session structure, compute ACF. Repeat N_SURROGATE=500 times. This tests whether first-order dynamics fully explain the observed ACF.",
+      "expected": "If empirical ACF matches Markov-1 surrogate distribution, temporal structure is fully explained by first-order transitions (no higher-order timescale separation)."
+    },
+    {
+      "id": "B-FREQUENCY",
+      "description": "State-frequency baseline: compute ACF of a sequence where each state is sampled independently from its marginal frequency (stationary distribution). This is the memoryless null with correct state proportions.",
+      "expected": "ACF should be zero at all lags > 0 by construction. Any deviation indicates temporal structure."
+    }
+  ],
+  "positive_control": {
+    "id": "POS-DETERMINISTIC-SPA",
+    "description": "Synthetic 12-state stochastic SPA (from EXP-PHYSICS-35578258358, seed=42, N=5000) with known Markov structure. ACF should show significant lag-1 autocorrelation and non-uniform decay, confirming the pipeline detects temporal structure when it exists.",
+    "expected": "lag-1 ACF significantly > 0, non-uniform decay across lags, multimodal inter-event times (if timestamps available) or clear ACF structure."
+  },
+  "null_control": {
+    "id": "NULL-RANDOM-WALK",
+    "description": "Random walk on the state graph: start from initial state, at each step randomly choose a successor from the full state space (uniform). ACF should be near zero for large state spaces. For small state spaces (3-4 states), ACF may be positive due to revisit probability but should be explainable by state-frequency baseline.",
+    "expected": "lag-1 ACF ≈ 1/n_states (revisit probability), uniform decay. No non-uniform timescale structure."
+  },
+  "measurement_validity": [
+    "Timestamps must be valid ISO 8601 with sufficient resolution (>1ms) to compute inter-event times. Verify monotonicity within sessions.",
+    "Non-leakage transitions only (action.target_href != state_after.url for link_click actions). Use parent's NL-filtered artifacts directly.",
+    "Effective independent FSM types = 2 (vanillajs/react/svelte bit-identical; vue/angular bit-identical). Report per-FSM-type ACF separately.",
+    "Minimum 40 NL transitions per FSM type required for ACF estimation at lag 6 (need ≥ 6 + 40 = 46 transitions per session for lag-6 ACF).",
+    "Inter-event time analysis requires timestamps with >10ms resolution. Verify timestamp precision in parent artifacts.",
+    "Bonferroni correction across 5 variants for C1 primary test. Additional per-FSM-type tests are exploratory."
+  ],
+  "decision_rule": "The experiment FALSIFIES H1 if: C1 fails (lag-1 ACF does not exceed shuffled-action null at corrected p < 0.01 across 5 variants), OR C2 fails (ACF at lags 1-6 is flat, ANOVA p > 0.05), OR C3 fails (inter-event times unimodal, dip test p > 0.05). The experiment SUPPORTS H1 if ALL of: C1 passes (lag-1 ACF exceeds null at corrected p < 0.01 on ≥ 4/5 variants), C2 passes (ACF non-uniform, ANOVA p < 0.05), and the ACF decay pattern differs between FSM types (interaction FSM-type × lag, p < 0.05). MIXED if some conditions pass and others fail. INCONCLUSIVE if measurement validity fails.",
+  "product_consequence_positive": "If timescale separation is detected, it suggests Web state evolution has characteristic timescales that could inform freshness guards (C-FRESHNESS): different staleness rates for page-load vs session-level vs site-level changes. This could guide differential update policies in the SPIDER product.",
+  "product_consequence_negative": "If timescale separation is not detected on TodoMVC hash-SPAs, it indicates these minimal deterministic SPAs lack the temporal complexity needed to exhibit multi-scale dynamics. The Physics lane should then test richer environments (production SPAs with stochastic transitions, client-side state, external data) before concluding that Web timescale structure is absent.",
+  "estimated_cost": "Low: computation only (no new data collection). Uses existing NL transition artifacts from EXP-PHYSICS-35651906573. Estimated < 30 minutes compute on standard hardware.",
+  "expected_information_gain": "High: directly tests an orthogonal hypothesis about Web dynamical structure (timescale separation) that has not been investigated in any prior Physics experiment. A clear positive or negative result changes the research direction: positive opens a new detection paradigm; negative on TodoMVC motivates testing richer environments. Either outcome is more informative than further K-tuning on the same URL-level representation."
 }
