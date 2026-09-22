@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35697037202",
+  "lane": "physics",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Re-implement C2 non-uniform decay test per prereg: one-way ANOVA on lag-1..6 ACF values or valid non-uniformity test with independent observations. Current result.json c2_anova_p=0.0 is from ad-hoc chi2 on variance/expected_var (analyze_v2.py:f_stat=acf_var/expected_var, p=1-chi2.cdf), not ANOVA. Do not report p=0.0 as ANOVA.",
+    "Re-implement C3 inter-event multimodality per prereg using actual Hartigan dip test (not max|ecdf-uniform| with permutation shuffle). Current hartigan_dip_test in analyze_v2.py computes dip as ecdf vs uniform CDF and bootstraps via permutation of data values, not sampling from unimodal null. Dip values ~0.39-0.42 and p=1.0 are artefacts. Use scipy or diptest reference implementation or acknowledge descriptive unimodality without p-value.",
+    "Correct baseline fidelity: spec.json/PREREG falsifier C1 requires B-SHUFFLE-ACTION (shuffle action labels preserving states). Producer executed B-SHUFFLE-STATE (shuffle url_after within sessions, analyze_v2.py:shuffle_states_within_sessions) and reported it as C1 test. For ACF on states, shuffling actions is degenerate (state sequence unchanged). Amend spec or report deviation explicitly; recompute B-SHUFFLE-ACTION if claim is action-conditioned, or rename hypothesis to state-sequence autocorrelation.",
+    "Repair or replace POS-DETERMINISTIC-SPA: synthetic 12-state stochastic SPA (raw_synthetic.json, N=5000, 12 states, determinism=0/48) yields lag1_acf=-0.0547, null_95=0.0247, fail per result.json controls.POS-DETERMINISTIC-SPA.pass=false. Temporal-order integer encoding destroys uniform-transition cycle structure. Positive control must be redesigned (e.g., synthetic SPA with strong lag-1 transition bias and monotonic encoding, or transition-count-based metric as in parent Bayesian DM) before pipeline can be claimed validated for timescale detection.",
+    "Resolve decision_rule inconsistency: spec.json falsifier says FALSIFIED if ANY of C1/C2/C3 fails, while decision_rule says SUPPORTS requires C1+C2+interaction and MIXED if some pass some fail. Outcome MIXED (C1 pass, C2 pass, C3 fail) satisfies both FALSIFIED and MIXED under frozen text. Freeze amendment needed to define precedence.",
+    "Report effective independent N=2 FSM types, not 5 variants. Vanillajs/react/svelte share 4-state pattern (acf_observed 0.4181 identical), vue/angular share 3-state pattern (0.4540 identical) but full URLs differ by domain prefix; they are isomorphic FSMs with same cycle logic (fragments '', '/active', '/completed'), not 5 independent replications. Bonferroni across 5 is conservative; per-FSM-type power is limited to 6 sessions.",
+    "Disclose encoding sensitivity and script artifact as primary validity bound: ACF computed on temporal-order integer encoding (analyze_v2.py:encode_states_temporal_order) is ordinal-arbitrary; magnitude 0.42 is not interpretable as dynamical strength beyond permutation rank. Observed autocorrelation is fully explained by scripted 7-step cycle (step Counter shows 6 sessions × ~13 NL steps following fixed fragment cycle) and lies within B-MARKOV-1 surrogate range (mean 0.349, 95th 0.547), consistent with first-order deterministic FSM. Do not interpret as natural Web timescale separation without real user sessions.",
+    "Implement missing baseline B-FREQUENCY empirically and NULL-RANDOM-WALK as specified random walk on state graph (result.json baselines.B_FREQUENCY has only note, B_MARKOV_1 mean/std reported but controls.NULL-RANDOM-WALK.pass=true is inferred from shuffled-state mean -0.034, not from actual random walk). Run as frozen or mark as not executed."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_ENCODING_SENSITIVITY",
+      "severity": "medium",
+      "finding": "ACF values depend on temporal-order integer mapping of categorical URLs (first-appearance encoding). Determinism 0.925 (4-state) / 1.0 (vue) and var 1.17/0.69 mean ACF magnitude is encoding-contingent. Permutation test against shuffled-state null (mean -0.0335, std 0.104, 95th 0.138) is valid for rank ordering, but absolute ACF 0.418-0.454 cannot be interpreted as effect size for dynamics or compared across encodings.",
+      "evidence": "result.json:metrics.variants.vanillajs.acf_observed[1]=0.4181, metrics.variants.vue.acf_observed[1]=0.4539; provenance.json:material_facts ACF computed on temporal-order-encoded states; code /tmp/opencode/analyze_v2.py:encode_states_temporal_order"
+    },
+    {
+      "id": "V2_SCRIPTED_CYCLE_ARTIFACT",
+      "severity": "critical",
+      "finding": "Strong lag-1 autocorrelation is attributable to scripted 7-step automation cycle, not natural Web dynamics. NL transitions follow fixed hash-fragment cycle ('', '/active', '/completed') across 6 Playwright sessions, uniform pacing (inter_event_times mean 1.12s, std 0.40, median 0.91, range 0.71-1.84, dip ~0.41 artifact). Producer validity_notes correctly acknowledge this, but hypothesis framing as timescale separation (page-load vs session vs site) is not expressed in this environment.",
+      "evidence": "result.json:observations[2] scripted 7-step cycle, validity_notes[3] artificial temporal structure; recomputed fragment sequences b8ce5aa6 vanillajs vs 78448f8d vue show deterministic cycle; inter_event_times n=74 per variant mean 1.117s"
+    },
+    {
+      "id": "V3_POSITIVE_CONTROL_FAILURE",
+      "severity": "high",
+      "finding": "Positive control fails: synthetic 12-state stochastic SPA (raw_synthetic.json N=5000, 12 states, 50 sessions, seed 42) lag1_acf=-0.0547 does not exceed null-95 0.0247 (observed < median 0.00056). Pipeline using sample ACF on temporal encoding cannot detect known Markov structure with near-uniform transitions. This invalidates claim that pipeline is validated to detect timescale structure when present; it does not invalidate the positive TodoMVC lag-1 detection but bounds generalizability.",
+      "evidence": "result.json:metrics.positive_control.lag1_acf=-0.0546658, lag1_null_95=0.02466, verdict FAIL; controls.POS-DETERMINISTIC-SPA.pass=false; recomputed /tmp/opencode/analysis_results.json positive_control same values"
+    },
+    {
+      "id": "V4_C2_IMPLEMENTATION_INVALID",
+      "severity": "high",
+      "finding": "C2 non-uniform decay test reported as c2_anova_p=0.0, c2_passes=true for all variants is not a one-way ANOVA on lag-1..6 ACF values as preregistered. Code computes f_stat=acf_var/expected_var where expected_var=mean(null_std^2)/MAX_LAG, p=1-chi2.cdf(f*(k-1),k-1). With k=6 ACF numbers, this yields p=0.0 regardless of structure. Descriptive non-uniformity is visually evident (4-state: 0.42,0.04,-0.24,-0.09,-0.04,-0.04) but statistical claim is not per frozen method.",
+      "evidence": "result.json:metrics.variants.*.c2_anova_p=0.0; /tmp/opencode/analyze_v2.py run_variant_analysis c2_results section; spec.json:measurement_validity and prereg H2 ANOVA specification"
+    },
+    {
+      "id": "V5_C3_DIP_IMPLEMENTATION_INVALID",
+      "severity": "high",
+      "finding": "C3 Hartigan dip test is misimplemented. hartigan_dip_test computes dip as max|ecdf - uniform_cdf| on sorted inter-event times and bootstraps by permuting observed values, not by sampling uniform null. Reported dip ~0.391-0.417, p=1.0 on all variants is meaningless. Descriptive conclusion unimodal is plausible (mean 1.12s log-normal, range 0.71-1.84 from uniform Playwright waits), but inferential p-value is invalid.",
+      "evidence": "result.json:metrics.inter_event_times vanillajs mean_s 1.117, std 0.402, observations[4] dip p=1.0; /tmp/opencode/analyze_v2.py:hartigan_dip_test"
+    },
+    {
+      "id": "V6_FSM_INTERACTION_DEVIATION",
+      "severity": "medium",
+      "finding": "FSM-type × lag interaction reported as p_interaction=0.9692 fail via permutation of labels on interaction variance (5k permutations), not two-way ANOVA FSM-type × lag as frozen. Result (no significant difference between 4-state mean 0.418 and 3-state mean 0.454 patterns) is descriptive and likely correct, but not per frozen interaction test.",
+      "evidence": "result.json:metrics.fsm_type_comparison.p_interaction=0.9692, interaction_variance=0.00563; /tmp/opencode/analyze_v2.py fsm_interaction section"
+    },
+    {
+      "id": "V7_SAMPLE_SIZE_AND_INDEPENDENCE",
+      "severity": "medium",
+      "finding": "80 NL transitions per variant (6 sessions each, 30 sessions total) meets frozen minimum 40 per FSM type for lag-6 ACF, but ACF at lags 2-6 is non-significant (p_raw 0.04-0.97) and underpowered. Effective independent replications =2 FSM types, not 5. Bonferroni 5-variant correction is conservative; using 2 would still pass (p_raw 0.0005*2=0.001 <0.01). Isomorphic structure within FSM type means 5-variant reporting overstates independence.",
+      "evidence": "result.json:metrics.variants.*.n_nl=80, determinism_k2=0.925, observations[1] bit-identical within FSM type; provenance.json input_artifacts 5 nl_transitions files"
+    },
+    {
+      "id": "V8_TIMESTAMP_VALIDITY",
+      "severity": "low",
+      "finding": "Timestamps are valid ISO8601, monotonic within sessions (verified: all sessions min diff 0.706-0.720s >0), resolution >1ms, 74 inter-event intervals per variant (6 sessions × ~13 steps minus session boundaries). Sufficient for inter-event analysis, but automation pacing (scripted waits + network latency) explains unimodal distribution, not operational timescales.",
+      "evidence": "recomputed monotonic check all sessions True, provenance.json dependencies numpy 2.5.3 scipy 1.18.1; result.json inter_event_times details"
+    },
+    {
+      "id": "V9_REPRESENTATION_LOSS",
+      "severity": "medium",
+      "finding": "URL+hash fragment is near-deterministic on TodoMVC (determinism 0.925-1.0, 3-4 states). State representation collapses full browser DOM/client state to URL, so action-conditioned dynamics beyond memory cannot be tested (consistent with parent negative BF -10 to -15 nats). ACF finding demonstrates script memory, not beyond-memory predictive structure required by C-WEB-DYNAMICS.",
+      "evidence": "result.json:observations[7] determinism 92.5%, baselines.B_MARKOV_1 mean 0.349 within observed range; claim_state.json C-WEB-DYNAMICS remains HYPOTHESIS across 41 experiments"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-SHUFFLE-ACTION",
+      "expected": "Within-session shuffled-action null: permute action labels, preserve state sequence, recompute ACF. Null ACF lag1 ~0.",
+      "observed": "NOT EXECUTED as specified. Producer executed shuffled-state (shuffle url_after within sessions, N=1999, recompute encoding and ACF) and used it as C1 test. Shuffled-action would leave state ACF unchanged (degenerate), so deviation is substantively correct for state-ACF hypothesis, but spec fidelity fails. Shuffled-state null mean -0.0335, std 0.104, 95th 0.138, 99th 0.204; observed 0.418-0.454 exceeds 99th (p_raw 0.0005, p_bonf 0.0025) on 5/5 variants.",
+      "pass": false,
+      "evidence": "spec.json:baselines[0] B-SHUFFLE-ACTION; analyze_v2.py:shuffle_states_within_sessions; result.json:metrics.baselines.B_SHUFFLE_STATE"
+    },
+    {
+      "id": "B-SHUFFLE-STATE",
+      "expected": "Within-session shuffled-state null: permute state sequence preserving timestamps. If ACF driven by self-loops, null similar to observed.",
+      "observed": "Executed correctly as primary C1 null (though labeled as B-SHUFFLE-STATE baseline). Null mean -0.0335 to -0.0399, std 0.104-0.108, 95th 0.137-0.151. Observed lag1 0.418-0.454 exceeds 99th (0.203-0.225). Indicates ACF not driven by marginal state frequencies/self-loops alone but by temporal order. Pass as discriminating baseline.",
+      "pass": true,
+      "evidence": "result.json:metrics.baselines.B_SHUFFLE_STATE null_acf_mean_lag1 -0.03355, null_acf_95 0.1379; /tmp/opencode/analysis_results.json variant_results.*.null_acf_state_*"
+    },
+    {
+      "id": "B-MARKOV-1",
+      "expected": "First-order Markov surrogate: fit transition matrix, generate synthetic sequences preserving session structure (N=500), compute ACF. If empirical matches surrogate, first-order explains structure.",
+      "observed": "Executed (N=500). Surrogate lag1 mean 0.340-0.352, std 0.11-0.12, 95th 0.528-0.556. Observed 0.418 (4-state) and 0.454 (3-state) fall within surrogate 95% interval, consistent with first-order deterministic FSM (expected for hash-SPA). Baseline correctly indicates no higher-order timescale needed; not evidence for separation.",
+      "pass": true,
+      "evidence": "result.json:metrics.baselines.B_MARKOV_1 null_acf_mean_lag1 0.349, std 0.124, 95th 0.546; controls.B-MARKOV-1.pass true"
+    },
+    {
+      "id": "B-FREQUENCY",
+      "expected": "State-frequency stationary independent null: sample states i.i.d. from marginal distribution. ACF=0 at lags>0 by construction.",
+      "observed": "Claimed by construction, not empirically simulated in code. Observed ACF 0.418-0.454 >>0 confirms temporal structure beyond stationary sampling. Baseline is tautological but informative as memoryless floor.",
+      "pass": true,
+      "evidence": "result.json:metrics.baselines.B_FREQUENCY note ACF=0 by construction; controls.B-FREQUENCY.pass true"
+    },
+    {
+      "id": "POS-DETERMINISTIC-SPA",
+      "expected": "Synthetic 12-state stochastic SPA (seed 42, N=5000) should show significant lag-1 ACF and non-uniform decay, confirming pipeline detects structure when present.",
+      "observed": "FAIL. lag1_acf=-0.0547, null-95=0.02466, median 0.00056, does not exceed threshold. 12-state uniform transition matrix + temporal-order encoding yields near-zero ACF. Control was designed for Bayesian DM estimator (transition counts), not sample ACF on encoded categories. Pipeline validity not established for generic timescale detection.",
+      "pass": false,
+      "evidence": "result.json:controls.POS-DETERMINISTIC-SPA pass false, metrics.positive_control; /tmp/opencode/analysis_results.json positive_control same"
+    },
+    {
+      "id": "NULL-RANDOM-WALK",
+      "expected": "Random walk on state graph: lag1 ACF ~1/n_states, uniform decay, no non-uniform timescale.",
+      "observed": "NOT executed as isolated random walk. Producer infers null behavior from shuffled-state mean -0.034 (close to 0) and reports pass true. For n=3-4 states, expected 1/n=0.25-0.33 but observed shuffled-state ~0 indicates encoding and session shuffling suppresses revisit bias. Control is approximated, not directly tested.",
+      "pass": false,
+      "evidence": "result.json:controls.NULL-RANDOM-WALK pass true but evidence_ref variant_results.*.null_acf_state_mean; spec.json null_control description"
+    }
+  ],
+  "recomputed_metrics": {
+    "c1_lag1_acf_vanillajs": 0.4181654195617318,
+    "c1_lag1_acf_vue": 0.4539941494149416,
+    "c1_p_raw_all_variants": 0.0005,
+    "c1_p_bonferroni_5": 0.0025,
+    "c1_p_bonferroni_2_eff": 0.001,
+    "c1_shuffled_state_null_mean_lag1": -0.033551812622113514,
+    "c1_shuffled_state_null_std_lag1": 0.10407773319488958,
+    "c1_shuffled_state_null_95_lag1": 0.13796277252159608,
+    "c1_shuffled_state_null_99_lag1": 0.20381190253566842,
+    "c1_recomputed_null_mean_500": -0.03301779673209266,
+    "c1_recomputed_null_95_500": 0.11967072579757326,
+    "c1_overall_pass_recomputed": true,
+    "c2_reported_p": 0.0,
+    "c2_recomputed_variance_4state": 0.041,
+    "c2_recomputed_variance_3state": 0.046,
+    "c2_valid_anova": null,
+    "c2_non_uniform_descriptive": true,
+    "c2_implementation_valid": false,
+    "c3_reported_dip_p": 1.0,
+    "c3_reported_dip": 0.391,
+    "c3_recomputed_code_dip": 0.4174394517899911,
+    "c3_implementation_valid": false,
+    "c3_descriptive_unimodal": true,
+    "c3_inter_event_n": 74,
+    "c3_inter_event_mean_s": 1.11776881282394,
+    "fsm_interaction_reported_p": 0.9692,
+    "fsm_interaction_variance": 0.005631498208236267,
+    "fsm_interaction_pass": false,
+    "positive_control_lag1_acf": -0.054665849612568033,
+    "positive_control_null_95": 0.02466497129724899,
+    "positive_control_pass": false,
+    "markov1_null_mean_lag1": 0.34929616197764063,
+    "markov1_null_95": 0.5466743328706648,
+    "observed_within_markov1_range": true,
+    "determinism_4state": 0.925,
+    "determinism_3state": 1.0,
+    "n_nl_per_variant": 80,
+    "unique_states_4state": 4,
+    "unique_states_3state": 3
+  },
+  "claim_ceiling": "MAX JUSTIFIED: TodoMVC hash-SPA NL state sequences (80 NL transitions/variant, 6 sessions, 3-4 URL+hash states, determinism 0.925-1.0) exhibit significant lag-1 autocorrelation on temporal-order integer encoding (ACF 0.418 for 4-state {vanillajs,react,svelte}, 0.454 for 3-state {vue,angular}, shuffled-state null mean -0.034, p_raw=0.0005, p_bonf=0.0025) detectable by within-session permutation test. ACF decays after lag1 and lies within first-order Markov surrogate range (mean 0.349, 95th 0.547), consistent with deterministic FSM cycle. No evidence for distinct operational timescales: inter-event times are unimodal (mean 1.12s, median 0.91s, range 0.71-1.84, uniform Playwright pacing) and FSM-type × lag interaction is null (p=0.97). The lag-1 signal is attributable to scripted 7-step automation cycle, not natural Web dynamics. BOUNDED TO scripted hash-SPAs at this scale; does not demonstrate timescale separation, beyond-memory predictive structure, or general Web dynamical structure. NOT established: page-load vs session vs site timescales, production SPAs, stochastic transitions, titles, DOM/network representations, or any C-WEB-DYNAMICS beyond this on-site scripted autocorrelation. Pipeline not validated for generic timescale detection (positive control fails).",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35697037202/spec.json",
+    "research/experiments/EXP-PHYSICS-35697037202/prereg.md",
+    "research/experiments/EXP-PHYSICS-35697037202/freeze.json",
+    "research/experiments/EXP-PHYSICS-35697037202/result.json",
+    "research/experiments/EXP-PHYSICS-35697037202/report.md",
+    "research/experiments/EXP-PHYSICS-35697037202/provenance.json",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vanillajs.json sha256 3f894c687f3b4ed4d3caec5c3ac8299e35b2d517eb934555b41362ce1408dd2e",
+    "research/experiments/EXP-PHYSICS-35651906573/nl_transitions_vue.json sha256 10c052f101a669eee87e7a247ce43a73d2282c95fdf36af930888f663f5260c9",
+    "research/experiments/EXP-PHYSICS-35651906573/raw_synthetic.json sha256 0cdc68d29c6994cbbe1f9291251b854e1a48701b4a4d4c1466e0bc2521e817be",
+    "/tmp/opencode/analyze_v2.py",
+    "/tmp/opencode/analysis_results.json",
+    "codex/claim_state.json C-WEB-DYNAMICS HYPOTHESIS"
+  ],
+  "unresolved": [
+    "Whether lag-1 ACF reflects genuine Web state dynamics or is solely scripted-cycle artifact; requires real user sessions with variable pacing and diverse actions on same SPAs.",
+    "Whether ACF at lags 2-6 would become significant with larger N (currently 80 NL, 74 inter-event intervals, lags 2-6 p_raw 0.04-0.97 non-significant).",
+    "Whether non-uniform ACF decay would survive a valid ANOVA or spectral estimate with sufficient lag resolution; current p=0.0 claim is not per frozen method.",
+    "Whether inter-event times would show multimodality on human-paced or heavy-tail production site; current dip p=1.0 is invalid implementation and environment has no operational timescale variation by design.",
+    "Whether 4-state vs 3-state FSM difference (0.418 vs 0.454, diff -0.036 at lag1) would become significant with more independent sessions or richer encodings; current p=0.97 based on 2 FSM types × 5 variants.",
+    "Positive control redesign: what synthetic SPA parameterization (biased transition matrix, monotonic state encoding, or alternative metric such as transition-count BF/PMI) would validate ACF pipeline for timescale detection.",
+    "Generalization of lag-1 finding to production SPAs with client-side state, auth, external data, and to richer representations (DOM, a11y, network) where C-WEB-DYNAMICS beyond-memory structure remains untested (claim_state HYPOTHESIS)."
+  ]
+}
