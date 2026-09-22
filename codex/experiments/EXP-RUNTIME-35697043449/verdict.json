@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35697043449",
+  "lane": "runtime",
+  "decision": "SUPPORTS — all five frozen decision-rule conditions satisfied (C1-C5). Permission escalation discrimination 1.0, session invalidation discrimination 1.0, null control 0.0 with CI containing 0.0, full-vector >= max baseline, null control <= 0.05. However, claim ceiling is narrowed per audit: discrimination is deterministic (1 unique fingerprint per state, degenerate bootstrap CI), C4 is vacuous (full == body == status == 1.0 because status and body change simultaneously), and results are bounded to localhost Flask dev server with maximally-distinct writable controls. C-MEAS-VALID remains EXPERIMENTAL with expanded ceiling. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost synthetic testing but NOT for distributed production testing.",
+  "claim_updates": [
+    {
+      "claim_id": "C-MEAS-VALID",
+      "status": "EXPERIMENTAL",
+      "reason": "All five frozen decision-rule conditions pass on localhost Flask+SQLite+JWT testbed: C1 permission_disc=1.0>0.5, C2 session_disc=1.0>0.5, C3 null=0.0 CI[0.0,0.0], C4 full>=max_baseline (vacuous equality 1.0>=1.0), C5 null<=0.05. C-MEAS-VALID advances from prior EXPERIMENTAL ceiling (nginx decompression) to include writable/auth/session/drift controls on localhost. The claim ceiling is: Flask 3.1.3 + PyJWT 2.14.0 + SQLite WAL on localhost 127.0.0.1:19847, SQLite-backed role lookup (role not in JWT), session validity via DELETE, deterministic responses (1 unique fingerprint per state), headers filtered (Date/Server/X-Request-Id excluded), N=20 per state, SEED=44. NOT VALIDATED because: (1) C4 is vacuous — body and status change simultaneously on both positive conditions, full vector cannot exceed single-field baselines at ceiling 1.0; (2) bootstrap CI is degenerate due to deterministic responses (effective N=1 per state); (3) same-status body-only permission change and header-only drift are untested; (4) production middleware, CDN, concurrent load, HTTP/2, TLS untested. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost synthetic measurement but NOT for distributed/production testing."
+    }
+  ],
+  "product_action": "NO_CHANGE — C-MEAS-VALID remains EXPERIMENTAL. Writable/auth/session/drift controls demonstrated on localhost testbed. C-FRESHNESS and C-DELTA-REPAIR unblocked for localhost measurement substrate, not for distributed production infrastructure. No Product Core promotion warranted.",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does the HTTP fingerprint substrate discriminate when response bodies and status codes are identical but server-side state changes only independent headers (e.g., Cache-Control, ETag, Set-Cookie) — isolating header-only drift from body/status confounds?",
+  "reason": "The frozen decision rule passes all five conditions, but the audit correctly identifies that the experiment demonstrates SQLite writes change HTTP responses (trivially, when status+body change simultaneously), not that the full-vector fingerprint adds marginal value beyond single-field baselines. C4 is vacuous (1.0>=1.0 equality). The next high-information question is whether the substrate can detect header-only drift where bodies are identical — this directly tests the substrate's utility for C-FRESHNESS (session/auth drift detection when response content is unchanged) and C-DELTA-REPAIR (perturbation measurement when only metadata varies). This is materially orthogonal to the current maximally-distinct design and addresses the audit's V2 (ceiling effect) and V3 (header correlation) findings.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35697043449/spec.json — frozen question, hypothesis, falsifier, decision_rule C1-C5",
+    "research/experiments/EXP-RUNTIME-35697043449/result.json — metrics (permission 1.0, session 1.0, null 0.0, baselines all 1.0), controls C1-C5 all pass, validity_notes (degenerate CI, ceiling effect, Flask dev server)",
+    "research/experiments/EXP-RUNTIME-35697043449/audit.json — status=REVISE, claim_ceiling narrowed, V1 (degenerate bootstrap), V2 (ceiling effect maximally distinct), V3 (header correlation via Content-Length), V4 (Flask dev server ceiling), V7 (count discrepancy)",
+    "research/experiments/EXP-RUNTIME-35697043449/raw_observations.jsonl — 120 lines, 6 states x20, 1 unique fingerprint per state, body_len/header_json per observation",
+    "research/experiments/EXP-RUNTIME-35697043449/provenance.json — environment (Flask 3.1.3, PyJWT 2.14.0, SQLite 3.45.0, Python 3.12.14, host 127.0.0.1:19847), artifacts sha256, seed 44, excluded_headers",
+    "research/experiments/EXP-RUNTIME-35697043449/report.md — 2.2 baseline equivalence (all 1.0), 3.3 claim ceiling (not tested: header-only drift, production middleware), 3.4 baselines vacuous at ceiling",
+    "research/experiments/EXP-RUNTIME-35697043449/request.json — director_mandate PIVOT C-MEAS-VALID, parent_handoff EXP-RUNTIME-35611612543",
+    "research/experiments/EXP-RUNTIME-35697043449/freeze.json — frozen hashes for prereg/spec/request"
+  ]
+}

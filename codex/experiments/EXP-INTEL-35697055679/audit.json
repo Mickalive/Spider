@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35697055679",
+  "lane": "intel",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    {
+      "finding": "M1 cross-store mechanism overlap is correctly reported as null/VACUOUS not 0.0. WebArena-Verified v2 defines exactly one shopping store (192 shopping tasks: 187 ('shopping',)+5 ('shopping','reddit'); zero shopping_0..11 identifiers). Frozen metric definition 'intent templates in >=2 stores' is unmeasurable; producer correctly avoids triggering FALSIFIED-IN-SETTING on an absent-measurement artifact. Inferred 0.0 would be scientific misrepresentation.",
+      "severity": "critical_pass",
+      "evidence": "result.json metrics.M1_mechanism_overlap_fraction_across_stores=null; result.json validity_notes[0]; artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30; provenance.json dataset.task_count=812 shopping_task_count=192; recomputed census confirms 0 multi-store identifiers"
+    },
+    {
+      "finding": "M2 duplication fraction 0.9479 (182/192) under frozen definition 'identical intent template' is verified exactly, and its diagnostic decomposition is essential: 167/182 reuse-family tasks differ in instantiation_dict, overall exact-copy fraction 0.0781 (15/192). High frozen-metric value reflects parameterized task families, not verbatim copies. Producer correctly discloses this in validity_notes[1] and report §4, preventing misinterpretation of MIXED verdict.",
+      "severity": "moderate",
+      "evidence": "result.json M2_duplication_fraction_identical_template=0.9479 M2_copy_fraction_identical_template_and_instantiation=0.0781; recomputed from raw dataset exactly matches (distinct templates 49, dup 182/192, copy 15/192); artifacts/derived/measurements.json sha256 4f5c9ac111a1c23b0fe4bf766a03e9bec597dcaa003063b3615b40bd77dff7b8"
+    },
+    {
+      "finding": "M3 parameterization prevalence 0.8958 task-level (172/192 with non-empty instantiation_dict) and 0.8367 template-level (41/49 templates) verified exactly; exceeds frozen threshold 0.1 and heuristic baseline M2=0.8. Bootstrap CI [0.8542,0.9375] recomputed exactly; CI for duplication [0.9167,0.9792] not reproduced by naive task-resampling (naive yields [0.9479,0.9896]) indicating producer bootstrap resamples differently (likely within-sample template reuse accounting) or uses modulo seed handling. Param CI matches exactly, duplication point estimate does; CI discrepancy does not affect threshold decision since entire interval >0.8 but should be documented for reproducibility.",
+      "severity": "minor",
+      "evidence": "result.json M3_parameterization_task_fraction 0.8958 M3_parameterization_template_fraction 0.8367 M3_task_ci95; recomputed param CI matches; artifacts/derived/bootstrap_ci.json sha256 954899ecb0a15cae06a1c7f94ab9e108b18ed5a45ea38e17f72497cb90b8f971"
+    },
+    {
+      "finding": "Positive control PC1 SEARCH_MECHANISM_PRESENT PASS verified: homepage AX tree (task 514, 1426 nodes) contains combobox 'Search' (node 2933) + button 'Search' (node 2940), DOM input#search placeholder 'Search entire store here...' form action /catalogsearch/result/. Repeated mechanism elements ('add to cart' 87, 'add to wish list' 84 occurrences across 10 pages) corroborate live store functionality. M5 intent-to-element mapping 5/5 PASS verified on sampled page structures. No MEASUREMENT_INVALID trigger.",
+      "severity": "info",
+      "evidence": "result.json controls.PC1_SEARCH_MECHANISM_PRESENT pass true; artifacts/raw/axtree_task_514.json sha256 598cbbbb30839181b4e299a1e5ca8c3b3ce2a46e8790f3b15bfd5c676d6b9b07; artifacts/derived/measurements.json extracted[1] ax_node_count 1426; recomputed Search nodes present"
+    },
+    {
+      "finding": "Representation loss explicitly disclosed and bounded: initial-viewport extraction only (1280x720, CDP Accessibility.getFullAXTree), no scroll, no post-navigation cart/checkout execution, Playwright 1.63 page.accessibility removed correctly handled via CDP fallback (matches EXP-INTEL-34047713704). Live store is single Magento 'One Stop Market' store_id 1 single_store_mode=1; second container would be identical snapshot, so 2-store comparison impossible by dataset design, not by infra failure. Producer correctly reports status COMPLETE not BLOCKED.",
+      "severity": "moderate",
+      "evidence": "result.json validity_notes[2][3][6]; provenance.json image_digest sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb container_id 78f4353eb11c live_ax_node_counts 10/10; result.json M7_live_extraction_success"
+    },
+    {
+      "finding": "Null control NC1 WIKIPEDIA_NULL correctly reported as NOT EXERCISED / null (not pass/fail) under frozen guard 'if Docker available'; docker images census shows only webarena-verified-shopping and tool image. No overclaim.",
+      "severity": "info",
+      "evidence": "result.json controls.NC1_WIKIPEDIA_NULL pass null; provenance.json docker_images_census"
+    },
+    {
+      "finding": "Sampling limitation disclosed: 10 tasks stratified across 10 distinct intent-template families deterministic seed 35697055679. Bootstrap 2000 reps reported. Intent template mapping manual verification 5 tasks per frozen requirement. Below-fold and post-interaction coverage unmeasured, acknowledged as unresolved.",
+      "severity": "minor",
+      "evidence": "result.json validity_notes[5]; artifacts/derived/measurements.json selected_tasks [25,514,519,434,468,506,794,673,532,654] selected_template_families 10"
+    },
+    {
+      "finding": "V1-era 12-store property not re-probed via ghcr.io/web-arena-x auth images; producer explicitly notes this as unresolved blocked on registry auth and does not claim to have tested v1. Correct narrow scope to WebArena-Verified v2 only.",
+      "severity": "info",
+      "evidence": "result.json validity_notes[7] unresolved[1]; provenance.json infrastructure_facts_gathered docker_hub_tag_census [latest,0.1.0]"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline": "B1_DOC_M1_12_STORES (documentation M1=1.0, 12 store instances from parent EXP-INTEL-35651934683)",
+      "expected": "12 shopping store instances sharing mechanisms",
+      "observed": "FALSIFIED as dataset property on WebArena-Verified v2: exactly 1 shopping store, no per-store identifiers, single container mapping, single Magento store view. Producer correctly marks pass=false. Recomputed census confirms.",
+      "strength": "strong_falsification",
+      "evidence": "result.json controls.B1_DOC_M1_12_STORES observed FALSIFIED; provenance.json v2_source config mapping; recomputed 192 shopping tasks all in ('shopping',) or ('shopping','reddit')"
+    },
+    {
+      "baseline": "B2_DOC_M2_PARAMETRIZATION (heuristic M2=0.8 from scoring rules, audit VF2)",
+      "expected": "Heuristic 0.8 parameterization prevalence",
+      "observed": "Measured 0.8958 task-level and 0.8367 template-level, both exceed heuristic and exceed threshold 0.1. Correctly passes.",
+      "strength": "measured_exceeds_heuristic",
+      "evidence": "result.json controls.B2_DOC_M2_PARAMETRIZATION pass true; recomputed 172/192=0.8958"
+    },
+    {
+      "baseline": "B3_MIND2WEB_CORRECTED_M1 (audit VF1 corrected M1=0.31)",
+      "expected": "External comparison for cross-site density",
+      "observed": "Not re-measured, retained as external comparison only; correctly reported as null/not applicable since WebArena v2 shopping has no cross-site axis. No overclaim.",
+      "strength": "not_applicable_correctly_nulled",
+      "evidence": "result.json controls.B3_MIND2WEB_CORRECTED_M1 pass null"
+    },
+    {
+      "baseline": "B4_SPIDER_2SITE_CORPUS (quotes+books lower bound)",
+      "expected": "2-site corpus as lower bound for cross-site diversity",
+      "observed": "Not re-measured; correctly noted that single-store v2 shopping has fewer cross-site axes than 2-site corpus. Correctly nulled.",
+      "strength": "not_applicable_correctly_nulled",
+      "evidence": "result.json controls.B4_SPIDER_2SITE_CORPUS pass null"
+    }
+  ],
+  "recomputed_metrics": {
+    "M1_mechanism_overlap_fraction_across_stores": null,
+    "M1_mechanism_overlap_note": "VACUOUS - single store exists, recomputed 0 multi-store templates would be artifact; producer null is correct",
+    "M1_tasklevel_template_reuse_fraction": 0.7959183673469388,
+    "M1_tasklevel_template_reuse_detail": "39/49 templates appear in >=2 tasks",
+    "M1_tasklevel_tasks_in_reuse_families_fraction": 0.9479166666666666,
+    "M1_tasklevel_tasks_in_reuse_families_detail": "182/192 tasks",
+    "M2_duplication_fraction_identical_template": 0.9479166666666666,
+    "M2_duplication_detail": "182/192 tasks share intent_template with another task; recomputed exactly matches producer",
+    "M2_copy_fraction_identical_template_and_instantiation": 0.078125,
+    "M2_copy_detail": "15/192 exact copies (identical template AND identical instantiation_dict); 167/182 reuse-family tasks are parameterized variants (91.8%)",
+    "M3_parameterization_task_fraction": 0.8958333333333334,
+    "M3_parameterization_task_detail": "172/192 tasks with non-empty instantiation_dict",
+    "M3_parameterization_template_fraction": 0.8367346938775511,
+    "M3_parameterization_template_detail": "41/49 templates with >=1 parameterized task",
+    "M4_positive_control_search_mechanism": "PASS",
+    "M4_detail": "combobox 'Search' + button 'Search' present on homepage AX tree (task 514 nodes 2933/2940), DOM input#search verified",
+    "M5_intent_to_element_mapping": "PASS_5of5",
+    "M6_store_census": 1,
+    "M6_site_tuples": {"shopping": 187, "shopping+reddit": 5},
+    "M6_distinct_shopping_templates": 49,
+    "M7_live_extraction_success": "10/10",
+    "M7_ax_node_counts": [1150, 1426, 941, 728, 1426, 1426, 1426, 1426, 1426, 1426],
+    "M8_shopping_task_count": 192,
+    "bootstrap_match": "M3 CI matches exactly; M2 CI discrepancy noted (producer [0.9167,0.9792] vs naive resample [0.9479,0.9896]) point estimate matches"
+  },
+  "claim_ceiling": "WebArena-Verified v2 shopping does NOT provide a cross-site mechanism-sharing testbed: exactly one shopping store exists (single Magento 'One Stop Market' view, single container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945ea9b1c94ab26dba53e8d12dd0406abbf4bf686fd3bb2b6a5908feb, 192 tasks over 49 templates, zero per-store identifiers). Frozen cross-store overlap fraction is vacuous (null), not 0.0, so FALSIFIED-IN-SETTING for cross-site specificity is not triggerable. Documentation-level M1=1.0 (12 stores) is falsified for the available verified dataset; it is a WebArena v1 property not present in v2. What IS demonstrated on v2 shopping: high within-store parameterized task family reuse (dup 0.9479, but only 0.0781 exact copies; 91.8% of reuse is parameterized variation), parameterization prevalence 0.8958 task / 0.8367 template, positive control search mechanism present in all sampled AX trees, and 5/5 intent-template to element mapping valid. Thus a within-store parameterized inheritance design (train on some tasks of a family, test on held-out tasks of same family, single store) is viable and parameterized slots exist, but cross-site (train on N stores, test on held-out stores) is impossible on this dataset. No LLM agent inheritance was tested. Ceiling does not extend to v1 multi-store images (auth-blocked), Mind2Web, below-fold or post-checkout flows, or any claim that mechanisms are store-specific.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35697055679/request.json",
+    "research/experiments/EXP-INTEL-35697055679/spec.json",
+    "research/experiments/EXP-INTEL-35697055679/prereg.md",
+    "research/experiments/EXP-INTEL-35697055679/freeze.json",
+    "research/experiments/EXP-INTEL-35697055679/result.json",
+    "research/experiments/EXP-INTEL-35697055679/report.md",
+    "research/experiments/EXP-INTEL-35697055679/provenance.json",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/raw/webarena-verified.json sha256 d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/raw/axtree_task_514.json sha256 598cbbbb30839181b4e299a1e5ca8c3b3ce2a46e8790f3b15bfd5c676d6b9b07",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/derived/measurements.json sha256 4f5c9ac111a1c23b0fe4bf766a03e9bec597dcaa003063b3615b40bd77dff7b8",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/derived/bootstrap_ci.json sha256 954899ecb0a15cae06a1c7f94ab9e108b18ed5a45ea38e17f72497cb90b8f971",
+    "research/experiments/EXP-INTEL-35697055679/artifacts/derived/raw_manifest.sha256 sha256 6dcc98eef28d3a42f9df71c0cc1d8167006db76bf2387c6e63af5a4bcd00c263",
+    "research/intel/exp_35697055679_measure.py sha256 82edd5554953b9ef63de6d05fa9226fc63ddd36dc1f35fd2c47696e54c377f81"
+  ],
+  "unresolved": [
+    "Whether template-family hold-out within single store provides identifiable same-mechanism transfer for C-LLM-INHERIT (cross-task not cross-site) and what generalization meaning it carries",
+    "Whether authenticated v1-era ghcr.io/web-arena-x 12-store images would show empirical cross-store mechanism sharing (blocked on registry auth, not tested here)",
+    "Whether Mind2Web cross-website splits provide true same-mechanism overlap across train/test (parent audit VF6) — out of scope",
+    "Below-fold and post-interaction mechanism coverage (scroll-dependent elements, executed cart/checkout flows) — unmeasured initial-viewport only",
+    "Bootstrap CI reproducibility for duplication fraction (producer [0.9167,0.9792] vs naive task-resampling [0.9479,0.9896]) requires code inspection of resampling unit"
+  ]
+}

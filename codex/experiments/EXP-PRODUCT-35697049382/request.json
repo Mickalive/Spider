@@ -1,0 +1,48 @@
+{
+  "base_sha": "952347fba386cc838bde14bcf7a8cb03abe0c160",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T06:55:37.595098+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Lanes with 100% claim concentration in recent experiments and tunnel_flag=true are at high risk of local-optima trapping; cognitive resets are warranted but do not mechanically force pivots",
+      "The most impactful missing direct test is end-to-end LLM agent work savings (C-LLM-INHERIT), which remains blocked on both infrastructure (LLM API keys) and dataset verification (mechanism sharing on WebArena)",
+      "External benchmarks reward hybrid API+browsing agents; SPIDER's mechanism registry should weight API-level operations as first-class mechanisms alongside DOM-interaction mechanisms",
+      "A starved claim with zero experiments and clear product capability mapping (C-DELTA-REPAIR) should receive allocation before another refinement of a saturated claim (C-FRESHNESS at 40 experiments)",
+      "When a parent handoff proposes more tuning of the same representation (Physics K=3-4 on URL-level), and the fundamental limitation is the representation itself, the Director should pivot to a genuinely different question rather than optimize within the constrained basin",
+      "Infrastructure blockers (LLM API keys, CDN encoding negotiation) should be explicitly acknowledged and lanes redirected to work that does not depend on the blocked resource"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-FRESHNESS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "alternatives considered: (1) CONTINUE C-LLM-INHERIT \u2014 rejected because BLOCKED on LLM API keys; (2) PARK entirely until keys available \u2014 rejected because Product should not be idle when productive non-LLM work exists; (3) PIVOT to C-PRODUCT-ECON Docker measurement \u2014 rejected because requires Docker infrastructure not currently available and C-PRODUCT-ECON is REJECTED after 6 failures; (4) PIVOT to C-DELTA-REPAIR \u2014 rejected because Graph owns that claim's research direction. C-FRESHNESS kernel integration wins on: no LLM dependency, uses validated evidence, advances toward PRODUCT_CORE, and unblocks end-to-end freshness detection in SPIDER workflows.",
+      "dependencies": [
+        "C-FRESHNESS orthogonality confirmed on localhost stochastic mock (established)",
+        "Runtime writable/auth controls (newly assigned)"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Can the validated behavioral+structural parallel-channel architecture (orthogonality confirmed at delta=0.15 on localhost stochastic mock, EXP-GRAPH-35389145821 and EXP-PRODUCT-35445596342) be wired into the SPIDER kernel as a freshness-check subprocess that runs without new LLM calls, using the existing HTTP fingerprint substrate to detect auth/session/API drift?",
+      "rationale": "Product is BLOCKED on LLM API keys, causing consecutive MEASUREMENT_INVALID for C-LLM-INHERIT and C-PARAM-INHERIT experiments. No LLM-dependent experiment should be dispatched until keys are confirmed available. The highest-leverage work that does NOT require LLM calls is integrating the validated C-FRESHNESS parallel-channel architecture into the SPIDER kernel. This advances C-FRESHNESS toward PRODUCT_CORE using existing validated evidence (orthogonality r=0.0022-0.046, CI upper 0.0916-0.135 < 0.15 on stochastic mock). The integration is an engineering task (wiring HTTP fingerprint substrate into kernel.py freshness check), not a research task, which aligns with Product's charter to 'integrate audited capabilities.' The active PREFREEZE experiment on C-FRESHNESS overlap discrimination (EXP-PRODUCT-35651924708 was BLOCKED) is superseded."
+    },
+    "cycle_id": "35696303875",
+    "lane": "product",
+    "portfolio_assessment": "The program is deeply tunnel-fixated: Graph has 40/40 recent experiments on C-FRESHNESS, Physics has 15/15 on C-WEB-DYNAMICS, Frontier has 16 consecutive MEASUREMENT_INVALID on synthetic 2D estimator calibration. Three claims are starved (C-DELTA-REPAIR: 0 experiments, C-SEMANTIC-RESOLVE: 2, C-PARAM-INHERIT: blocked on LLM keys). The core product promise \u2014 that inherited mechanisms reduce agent work \u2014 remains untested with real LLMs (C-LLM-INHERIT). The most impactful global move is to break tunnel fixation by redirecting lanes from exhausted micro-questions to starved product-critical claims and genuinely different research directions. External benchmarks (WebArena 74%, Odysseys 1.15% efficiency, API agents +24%) strongly validate SPIDER's value proposition but also show the product must model API-level mechanisms, not just DOM interactions. C-PRODUCT-ECON is REJECTED after 6 extrapolation failures; Docker-based direct measurement is the only remaining path but requires infrastructure not currently available. The program's highest-leverage next move is verifying actual mechanism sharing on WebArena Docker datasets (unblocking C-LLM-INHERIT) and opening the zero-experiment C-DELTA-REPAIR claim.",
+    "schema_version": 1,
+    "scout_assessment": "The Scout brief is well-calibrated and identified the key strategic facts: tunnel fixation across 3 lanes, starved claims, LLM API key blocker, and external benchmark context. The external findings (WebArena API agents +24%, Odysseys 1.15% efficiency, WAREX drift validation, WebChallenger PageMem) are correctly labeled as external context, not SPIDER evidence. The Scout's candidate directions for each lane are reasonable but the Director diverges on Physics (Scout suggests orthogonal falsifiable programs or C-MEAS-VALID writable controls; Director chooses timescale separation as the most testable orthogonal program) and Frontier (Scout suggests process mining, cache invalidation theory, or multi-scale dynamics; Director selects process mining as most connected to product needs). The Scout's question about whether to prioritize Odysseys-style tasks for C-LLM-INHERIT is noted but cannot be acted on until the LLM API key blocker is resolved and mechanism sharing is verified on WebArena."
+  },
+  "experiment_id": "EXP-PRODUCT-35697049382",
+  "inherited_last_verdict": "BLOCKED",
+  "inherited_next_question": "Does SPIDER's parameterized mechanism inheritance reduce total workflow cost (tokens + browser interactions + verification steps) compared to cold exploration, literal replay, and retrieval baselines when an LLM agent completes matched tasks on JSONPlaceholder, when the frozen design is re-executed with a real LLM API key?",
+  "lane": "product",
+  "origin_github_run_id": "35697049382",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35651924708",
+    "path": "research/experiments/EXP-PRODUCT-35651924708/handoff.json",
+    "sha256": "b34112e48c032b45866e6c7c611d19d50cd4cedb27cc0037b078d14deff933ad"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "d44b9f1ec15d94ba6b241d404419ac79449720d3b7bf87a0349ae987d671630c",
+  "request_id": "caf595d20e83310ac01f4048",
+  "schema_version": 1
+}

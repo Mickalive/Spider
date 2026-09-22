@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35697043449",
+  "lane": "runtime",
+  "status": "REVISE",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Narrow claim ceiling to deterministic localhost Flask dev server with maximally-distinct status+body responses; remove or qualify product consequence that C-FRESHNESS and C-DELTA-REPAIR are unblocked for distributed/production testing — not demonstrated beyond synthetic localhost substrate",
+    "Re-test C1 with same-status body-only permission change (e.g., 200 with reader vs admin body) and C2 with header-independent variation to make C4 (full >= max baseline) discriminating; current C4 is vacuous (1.0 >= 1.0) because status, body, and headers all change simultaneously and Content-Length is body-correlated",
+    "Fix measurement-validity reporting: do not report bootstrap 95% CI [1.0,1.0] / [0.0,0.0] as informative precision — with 1 unique fingerprint per state (effective N=1, 20 identical resamples) the CI is degenerate and within-state variance is zero; report effective distinct N and treat jitter as non-varying under deterministic responses",
+    "Disclose sampling discrepancy: result.json total_observations=120 (6 states x 20) vs report.md 1.2 claiming 140 (7x20) and spec prereg N=100 (80+20); artifact row count is 120; reconcile spec vs execution counting and clarify null_control is paired observations collapsed to 20 lines",
+    "Add header-independence test: current B-HEADERS-ONLY achieves 1.0 only via body-correlated headers (Content-Length varies 22 vs 108, Content-Type constant); test condition where bodies and statuses identical but server-side state changes only independent headers (e.g., Cache-Control, ETag, Set-Cookie) to validate drift detection beyond body/status tautology"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_DEGENERATE_BOOTSTRAP",
+      "severity": "high",
+      "finding": "All fingerprints within each state are byte-identical (1 unique fingerprint per state, 20/20 identical). Bootstrap with N=1000 on set size 1 resampling identical values yields degenerate CI [1.0,1.0] for positive conditions and [0.0,0.0] for null. CI contains 0.0 is tautologically satisfied but carries zero information about sampling variability. Jitter 50-150ms uniform has no observable effect on fingerprint. Effective sample size is 1, not 20.",
+      "evidence": "result.json:metrics.permission_escalation_full.set_a_size=1, set_b_size=1, ci_95_lower=1.0; result.json:validity_notes[5-7]; raw_observations.jsonl 20/20 identical fingerprints per state; run_experiment.py:bootstrap_jaccard_ci resamples from set of size 1",
+      "impact": "Decision rule C3 (CI contains 0.0) technically passes but is not a valid bootstrap inference; precision claims overstated; requires disclosure that discrimination is deterministic, not statistically estimated"
+    },
+    {
+      "id": "V2_CEILING_EFFECT_MAXIMALLY_DISTINCT",
+      "severity": "high",
+      "finding": "Permission escalation (403 {'error':'forbidden'} -> 200 {'role':'admin','access':'full','dashboard':'...'}) and session invalidation (200 {'role':'reader'} -> 401 {'error':'session_invalid'}) change status code AND body AND Content-Length simultaneously. This is the maximally-distinct response design. Any substrate returning status or body would achieve discrimination 1.0. The experiment therefore demonstrates that SQLite writes change HTTP responses, not that the full-vector fingerprint adds value beyond single-field baselines.",
+      "evidence": "raw_observations.jsonl body_len 22 vs 108 for permission, 57 vs 28 for session; report.md 2.2 baselines all 1.0; result.json baseline_status_only_permission 1.0, baseline_body_only_permission 1.0, baseline_headers_only_permission 1.0; spec.json:positive_control expects 403->200+body",
+      "impact": "C4 (full >= max baseline) passes vacuously (1.0 >= 1.0) on both conditions; cannot support product consequence that full vector is needed or superior. Same-status discrimination left untested (unresolved[3] in result.json)"
+    },
+    {
+      "id": "V3_HEADER_CORRELATION",
+      "severity": "medium",
+      "finding": "B-HEADERS-ONLY discrimination 1.0 is driven by Content-Length (22 vs 108, 57 vs 28) which is deterministically body-correlated. Excluded headers are Date, Server, X-Request-Id; remaining headers are Connection:close, Content-Length, Content-Type:application/json. No independent header variation is tested. Spec hypothesis claims standard headers contribute to discrimination but evidence shows headers are redundant with body.",
+      "evidence": "raw_observations.jsonl headers_json per state distinct only via Content-Length; run_experiment.py:EXCLUDED_HEADERS; provenance.json:excluded_headers; report.md 3.3 claim ceiling notes headers filtered",
+      "impact": "Claim about header contribution untested; C-DELTA-REPAIR cases where only headers vary (ETag, Cache-Control) remain open"
+    },
+    {
+      "id": "V4_FLASK_DEV_SERVER_CEILING",
+      "severity": "medium",
+      "finding": "Flask development server (Werkzeug) on 127.0.0.1:19847 used, not production WSGI (gunicorn/nginx). Responses are deterministic static JSON with no dynamic fields, no concurrency, no TLS/HTTP/2, no ETag/Cache-Control/Set-Cookie variation. The substrate's ability to discriminate under realistic middleware variation (report.md 3.3 Not tested, validity_notes Flask dev server) is untested.",
+      "evidence": "provenance.json:environment platform linux python 3.12.14 flask 3.1.3 host 127.0.0.1 port 19847; result.json:validity_notes[9-10]; spec.json:measurement_validity excludes Date/Server/X-Request-Id",
+      "impact": "Generalization to production SPAs, C-FRESHNESS distributed testing, and C-DELTA-REPAIR perturbation measurement not demonstrated; ceiling must be bounded to localhost synthetic testbed"
+    },
+    {
+      "id": "V5_NULL_CONTROL_TRIVIAL_AND_TIMING_MARGIN",
+      "severity": "low",
+      "finding": "Null control fresh (iat=now, exp 3600s) vs near-expiry (iat=now-3570, exp ~30s remaining) produces identical responses because server validates expiry but ignores remaining-time difference while both tokens valid. 30s window with 20 paired observations (~4-6s total) leaves ~24-26s margin, so tokens remain valid throughout execution as observed. Null passing is correct and expected but tests identical-code-path responses, not subtle header/metadata drift where bodies identical but headers vary. Report.md notes not tested.",
+      "evidence": "run_experiment.py:create_token iat_offset 3570, validity_notes near_expiry ~30s remaining; raw_observations.jsonl null_control all fresh_fingerprint==near_fingerprint==c32c8f...; result.json:observations JWT tokens verified valid at time of observation",
+      "impact": "Null control validates no false positive for token-expiry metadata when server ignores it, but does not test header-only drift scenario where null should still be 0"
+    },
+    {
+      "id": "V6_PROVENANCE_AND_COUNTS_VERIFIED",
+      "severity": "info",
+      "finding": "SHA256 hashes for run_experiment.py (15c18e...), raw_observations.jsonl (f3d5dd...), experiment_result.json (d79ad0...) match provenance.json artifacts. recomputed Jaccard distances match producer: permission 1.0, session 1.0, null 0.0, all baselines 1.0. No evidence tampering or leakage.",
+      "evidence": "provenance.json:artifacts sha256; recomputed via python jaccard on raw_observations.jsonl sets; result.json metrics vs recomputed identical",
+      "impact": "Measurement transaction executed as logged; issues are design/interpretation, not execution integrity"
+    },
+    {
+      "id": "V7_COUNT_DISCREPANCY",
+      "severity": "low",
+      "finding": "Spec prereg states 80 primary +20 null =100 observations, N=20 per state (4 states). Execution yields 5 singleton states (no_auth, valid_reader, reader_admin_403, valid_admin_200, session_killed) x20 =100 plus 20 paired null_control lines =120 raw lines. Report.md incorrectly states 140 (7x20). provenance.json correctly reports 120. Extra no_auth and split of reader_admin into two states (reader_admin_403 vs valid_admin_200) beyond frozen spec's 4 states are additional but do not affect decision rule which uses reader_admin_403 vs valid_admin_200 and valid_reader vs session_killed only.",
+      "evidence": "prereg.md 4.4 and spec.json measurement_validity N=20 per state (4x20=80); result.json total_observations 120, n_per_state 20; raw_observations.jsonl 120 lines; report.md 1.2 claims 140",
+      "impact": "Minor accounting inconsistency; does not invalidate decision rule but requires correction in reporting"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STATUS-ONLY",
+      "finding": "Discrimination 1.0 on both permission (403 vs 200) and session (200 vs 401) because status codes differ. Baseline is strong null for status-only discrimination but test design makes it trivially discriminating. No test of same-status discrimination where status baseline should be 0.0.",
+      "expected": "Should discriminate when status changes, fail when same status",
+      "observed": "1.0 on both conditions (recomputed from raw_observations status sets)",
+      "verdict": "PASS but uninformative due to ceiling — does not challenge full vector",
+      "evidence": "result.json:baseline_status_only_permission 1.0, baseline_status_only_session 1.0; recomputed status sets {403} vs {200}, {200} vs {401}"
+    },
+    {
+      "id": "B-BODY-ONLY",
+      "finding": "Discrimination 1.0 on both conditions because body_hash sets are disjoint (1 unique hash each side, no overlap). Bodies are maximally distinct (22 vs 108 bytes, 57 vs 28 bytes). Baseline would also achieve 1.0 on any body-differing test; no partial-overlap body test included.",
+      "expected": "Should discriminate when body changes",
+      "observed": "1.0 on both conditions (recomputed from body_hash sets)",
+      "verdict": "PASS but ceiling — full vector cannot exceed 1.0, so C4 equality (1.0 >= 1.0) is not evidence of additive value",
+      "evidence": "result.json:baseline_body_only_permission set_a_unique_bodies 1, set_b_unique_bodies 1, discrimination 1.0; raw_observations body_hash distinct per state"
+    },
+    {
+      "id": "B-HEADERS-ONLY",
+      "finding": "Discrimination 1.0 on both conditions via Content-Length difference (body-correlated). Headers alone track body change; no independent header-only discrimination demonstrated. Contrasts with prereg need to test header-only drift.",
+      "expected": "Should test independent header signal beyond body",
+      "observed": "1.0 via Content-Length variance; headers_json sets size 1 each, disjoint",
+      "verdict": "PASS tautologically via body-correlated header; not a strong baseline for header-independent drift",
+      "evidence": "result.json:baseline_headers_only_permission discrimination 1.0, baseline_headers_only_session 1.0; raw headers_json distinct only by Content-Length"
+    },
+    {
+      "id": "C4_FULL_EXCEEDS_STATUS",
+      "finding": "Full-vector 1.0 equals max(B-STATUS-ONLY, B-BODY-ONLY)=1.0 on both conditions. Threshold >= satisfied, but not > . The decision rule C4 is satisfied at equality due to ceiling. This is acknowledged in report.md 2.2-3.4 as expected when all baselines at ceiling. No evidence that full vector adds discrimination beyond single field; body alone already at ceiling.",
+      "expected": "Full vector >= max baseline, ideally > to show additive value",
+      "observed": "permission_full 1.0 >=1.0 true, session 1.0 >=1.0 true, either_exceeds true",
+      "verdict": "MEETS frozen rule at equality but scientifically vacuous; requires follow-up with same-status or header-only variant to be discriminating",
+      "evidence": "result.json:full_exceeds_status_check permission_exceeds true, session_exceeds true; report.md 2.2 C4 Analysis and 3.4 Baseline Equivalence"
+    }
+  ],
+  "recomputed_metrics": {
+    "permission_escalation_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "ci_95_lower_producer": 1.0,
+      "ci_95_upper_producer": 1.0,
+      "recomputed_ci_comment": "degenerate: set sizes 1 each, 20 identical samples per state, bootstrap on identical set yields [1.0,1.0]",
+      "match": true,
+      "evidence": "raw_observations.jsonl reader_admin_403 fingerprint c4b699... (20/20) vs valid_admin_200 fingerprint 14f931... (20/20) Jaccard=1.0"
+    },
+    "session_invalidation_full": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "ci_95_lower_producer": 1.0,
+      "ci_95_upper_producer": 1.0,
+      "match": true,
+      "evidence": "raw_observations.jsonl valid_reader c32c8f... (20/20) vs session_killed 62ca73... (20/20) Jaccard=1.0"
+    },
+    "null_control_full": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "ci_95_lower_producer": 0.0,
+      "ci_95_upper_producer": 0.0,
+      "match": true,
+      "evidence": "raw_observations.jsonl null_control fresh_fingerprint==near_fingerprint==c32c8f... (20/20 pairs) Jaccard=0.0"
+    },
+    "baseline_status_only_permission": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "status sets {403} vs {200}"
+    },
+    "baseline_status_only_session": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "status sets {200} vs {401}"
+    },
+    "baseline_body_only_permission": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "body_hash sets b0d2df... vs 2d9c93... disjoint"
+    },
+    "baseline_body_only_session": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "body_hash sets b5392e... vs 872cbf... disjoint"
+    },
+    "baseline_headers_only_permission": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "headers_json sets distinct via Content-Length 22 vs 108"
+    },
+    "baseline_headers_only_session": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "match": true,
+      "evidence": "headers_json sets distinct via Content-Length 57 vs 28"
+    },
+    "full_exceeds_status_check": {
+      "producer_either_exceeds": true,
+      "recomputed": true,
+      "note": "equality at ceiling, not superiority",
+      "match": true
+    },
+    "provenance_integrity": {
+      "run_experiment.py_sha256_match": true,
+      "raw_observations.jsonl_sha256_match": true,
+      "experiment_result.json_sha256_match": true,
+      "total_lines": 120,
+      "unique_fingerprints_per_state": 1
+    }
+  },
+  "claim_ceiling": "NARROWLY BOUNDED: On Flask 3.1.3 + PyJWT 2.14.0 HS256 + SQLite WAL on 127.0.0.1:19847 (Werkzeug dev server), with SQLite-backed role lookup (role not in JWT) and session validity checked via DELETE, the HTTP fingerprint substrate (status + body bytes + filtered standard headers excluding Date/Server/X-Request-Id, hash of status||body_bytes||sorted_headers) deterministically discriminates maximally-distinct writable controls: permission escalation via SQLite UPDATE users SET role='admin' (403 vs 200+admin dashboard, Jaccard 1.0, N=20 but 1 unique fingerprint per state) and session invalidation via SQLite DELETE sessions (200 vs 401, Jaccard 1.0), while reporting 0.0 discrimination for fresh vs near-expiry valid JWTs producing identical bodies/status (30s remaining window, ~6s observation window). Claim does NOT extend to: same-status permission changes, header-only drift, ETag/Cache-Control/Set-Cookie independent variation, production WSGI/nginx, concurrent load, HTTP/2/TLS, real browser DOM, CDN, or distributed multi-node freshness. C4 equality (full == body == status ==1.0) shows body/status alone already at ceiling; full vector adds no demonstrated independent information in this design. Bootstrap CI is degenerate and not inferential. Unblocks C-FRESHNESS/C-DELTA-REPAIR only as localhost synthetic measurement substrate, not as distributed production infrastructure.",
+  "evidence_refs": [
+    "research/experiments/EXP-RUNTIME-35697043449/spec.json:question, hypothesis, falsifier, decision_rule C1-C5",
+    "research/experiments/EXP-RUNTIME-35697043449/prereg.md:3-5 measurement and decision rule",
+    "research/experiments/EXP-RUNTIME-35697043449/result.json:metrics.permission_escalation_full, session_invalidation_full, null_control_full, full_exceeds_status_check, controls C1-C5, validity_notes, unresolved",
+    "research/experiments/EXP-RUNTIME-35697043449/raw_observations.jsonl:120 lines, 6 states x20, 1 unique fingerprint per state, body_len/header_json per observation",
+    "research/experiments/EXP-RUNTIME-35697043449/run_experiment.py:SEED=44, PORT=19847, EXCLUDED_HEADERS, create_token iat_offset 3570, promote_user UPDATE, invalidate_session DELETE, compute_fingerprint full/status/body/headers, bootstrap_jaccard_ci, N_SAMPLES=20, jitter 50-150ms",
+    "research/experiments/EXP-RUNTIME-35697043449/experiment_result.json:metrics and fingerprints confirmation",
+    "research/experiments/EXP-RUNTIME-35697043449/provenance.json:environment flask 3.1.3 pyjwt 2.14.0 sqlite 3.45.0, artifacts sha256, seed 44",
+    "research/experiments/EXP-RUNTIME-35697043449/report.md:2.2-3.4 baseline equivalence and ceiling disclosure, validity assessment",
+    "research/experiments/EXP-RUNTIME-35697043449/request.json:director_mandate allocation PIVOT C-MEAS-VALID question, parent_handoff EXP-RUNTIME-35611612543",
+    "research/experiments/EXP-RUNTIME-35697043449/freeze.json:hashes prereg/spec/request"
+  ],
+  "unresolved": [
+    "Does substrate discriminate when response bodies share status code (e.g., 200 with role-dependent body content) — required to test body-only signal without status confound (result.json unresolved[3])",
+    "Does substrate discriminate when bodies identical but server-side state changes only headers (rate limits, ETag, Cache-Control, Set-Cookie) — header-only drift (result.json unresolved[1] and validity_notes not tested)",
+    "Does discrimination maintain on production middleware (Django/Express/FastAPI, gunicorn/nginx) with realistic variation (ETag, Cache-Control, Set-Cookie) and non-deterministic Date/X-Request-Id handling",
+    "What is discrimination behavior under partial body overlap or concurrent load / HTTP/2 / multi-client scenarios (report.md 3.3 Not tested)",
+    "Does N=20 suffice for non-degenerate bootstrap CI when responses have non-deterministic elements — current CI is degenerate due to deterministic responses (result.json unresolved[5], validity_notes[7])"
+  ]
+}

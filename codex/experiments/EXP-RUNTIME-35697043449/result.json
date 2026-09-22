@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-RUNTIME-35697043449",
+  "lane": "runtime",
+  "status": "COMPLETE",
+  "outcome": "SUPPORTS",
+  "metrics": {
+    "permission_escalation_full": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "interpretation": "reader_admin vs valid_admin on /admin — 403 vs 200+body discrimination"
+    },
+    "session_invalidation_full": {
+      "discrimination": 1.0,
+      "ci_95_lower": 1.0,
+      "ci_95_upper": 1.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "interpretation": "valid_reader vs session_killed on /protected — 200 vs 401 discrimination"
+    },
+    "null_control_full": {
+      "discrimination": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "set_a_size": 1,
+      "set_b_size": 1,
+      "interpretation": "fresh vs near-expiry token on /protected — identical responses"
+    },
+    "baseline_status_only_permission": {
+      "discrimination": 1.0,
+      "set_a_statuses": ["403"],
+      "set_b_statuses": ["200"]
+    },
+    "baseline_status_only_session": {
+      "discrimination": 1.0,
+      "set_a_statuses": ["200"],
+      "set_b_statuses": ["401"]
+    },
+    "baseline_body_only_permission": {
+      "discrimination": 1.0,
+      "set_a_unique_bodies": 1,
+      "set_b_unique_bodies": 1
+    },
+    "baseline_body_only_session": {
+      "discrimination": 1.0,
+      "set_a_unique_bodies": 1,
+      "set_b_unique_bodies": 1
+    },
+    "baseline_headers_only_permission": {
+      "discrimination": 1.0,
+      "set_a_unique_headers": 1,
+      "set_b_unique_headers": 1
+    },
+    "baseline_headers_only_session": {
+      "discrimination": 1.0,
+      "set_a_unique_headers": 1,
+      "set_b_unique_headers": 1
+    },
+    "full_exceeds_status_check": {
+      "permission_full_vector": 1.0,
+      "permission_max_baseline": 1.0,
+      "permission_exceeds": true,
+      "session_full_vector": 1.0,
+      "session_max_baseline": 1.0,
+      "session_exceeds": true,
+      "either_exceeds": true
+    },
+    "n_per_state": 20,
+    "total_observations": 120,
+    "bootstrap_n": 1000,
+    "seed": 44
+  },
+  "controls": {
+    "C1_PERMISSION_DISC": {
+      "pass": true,
+      "value": 1.0,
+      "threshold": "> 0.5",
+      "evidence": "reader_admin_fp={set} vs valid_admin_fp={set}, Jaccard=1.0"
+    },
+    "C2_SESSION_DISC": {
+      "pass": true,
+      "value": 1.0,
+      "threshold": "> 0.5",
+      "evidence": "valid_reader_fp={set} vs session_killed_fp={set}, Jaccard=1.0"
+    },
+    "C3_NULL_BODY": {
+      "pass": true,
+      "value": 0.0,
+      "ci": [0.0, 0.0],
+      "threshold": "= 0.0, CI contains 0.0",
+      "evidence": "fresh_fp={set} vs near_expiry_fp={set}, Jaccard=0.0, CI=[0.0,0.0]"
+    },
+    "C4_FULL_EXCEEDS_STATUS": {
+      "pass": true,
+      "permission_disc": 1.0,
+      "permission_max_baseline": 1.0,
+      "session_disc": 1.0,
+      "session_max_baseline": 1.0,
+      "threshold": ">= max(B-STATUS-ONLY, B-BODY-ONLY) on at least one condition",
+      "evidence": "both conditions at ceiling (1.0 >= 1.0)"
+    },
+    "C5_NULL_CONTROL_PASS": {
+      "pass": true,
+      "value": 0.0,
+      "threshold": "<= 0.05",
+      "evidence": "null discrimination 0.0 <= 0.05"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-RUNTIME-35697043449/run_experiment.py",
+      "sha256": "15c18e38238de5d6fd37f319266d7a5933a061be722f5fe71fdd940aaa1340c7",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35697043449/raw_observations.jsonl",
+      "sha256": "f3d5dd98cc5a4dc6c41819bf5f77b180f903b8d86fa02ad1205e01910e5f8d5a",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-RUNTIME-35697043449/experiment_result.json",
+      "sha256": "d79ad06f75d837555accd8dad9ca34d928269138a717068861af48e0c1a5ba79",
+      "role": "derived"
+    }
+  ],
+  "observations": [
+    "no_auth: 20/20 observations, all status=401, body={\"error\": \"authentication_required\"}, 1 unique fingerprint",
+    "valid_reader /protected: 20/20 observations, all status=200, body contains role=reader, access=limited, 1 unique fingerprint",
+    "valid_reader /admin: 20/20 observations, all status=403, body={\"error\": \"forbidden\"}, 1 unique fingerprint",
+    "valid_admin /admin (after SQLite UPDATE): 20/20 observations, all status=200, body contains role=admin, access=full, dashboard present, 1 unique fingerprint",
+    "session_killed /protected: 20/20 observations, all status=401, body={\"error\": \"session_invalid\"}, 1 unique fingerprint",
+    "null_control fresh: 20/20 observations, all status=200, identical to valid_reader /protected, 1 unique fingerprint",
+    "null_control near_expiry: 20/20 observations, all status=200, identical to valid_reader /protected, 1 unique fingerprint",
+    "SQLite UPDATE verified: reader role changed from 'reader' to 'admin' before admin observations",
+    "SQLite DELETE verified: session marked invalid (is_valid=0) before session_killed observations",
+    "JWT tokens verified valid at time of null control observation (fresh: 3600s remaining, near_expiry: ~30s remaining)"
+  ],
+  "validity_notes": [
+    "Server reads role from SQLite (not from JWT payload) for /admin and /protected endpoints, making writable role changes observable",
+    "JWT tokens contain only 'sub' claim; server queries SQLite for current role on each request",
+    "Near-expiry token created with iat_offset=3570 (30s remaining at start of null control observations)",
+    "N=20 per state with 50-150ms uniform jitter between observations",
+    "Date, Server, X-Request-Id headers excluded from fingerprint (dynamic/non-deterministic)",
+    "All responses within a state are byte-identical (1 unique fingerprint per state), causing ceiling discrimination values (1.0 or 0.0 exactly)",
+    "Bootstrap CI degenerate at [1.0,1.0] and [0.0,0.0] because all fingerprints within each state are identical",
+    "The experiment does not test header-independent drift where response bodies are identical but headers vary",
+    "Flask development server used (not production WSGI); response headers may differ from production",
+    "Role lookup from SQLite introduces minor latency (~0.1ms) but does not affect response content"
+  ],
+  "unresolved": [
+    "Does the substrate discriminate when response bodies are identical but server-side state (e.g., rate limits, token metadata) changes only headers?",
+    "Does the substrate maintain discrimination on production middleware (Django, Express, FastAPI) with realistic response variation (ETag, Cache-Control, Set-Cookie)?",
+    "Does the substrate discriminate permission-level changes within same HTTP status code (e.g., 200 with different body content for different roles)?",
+    "What is the discrimination ceiling when response bodies differ but share common prefixes (partial body change)?",
+    "Does N=20 suffice for bootstrap CI stability when responses have non-deterministic elements (dynamic Date, X-Request-Id)?"
+  ]
+}
