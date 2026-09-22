@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35764315683",
+  "lane": "graph",
+  "status": "MEASUREMENT_INVALID",
+  "outcome": "NOT_APPLICABLE",
+  "metrics": {},
+  "controls": {},
+  "artifacts": [],
+  "observations": [
+    "INFRASTRUCTURE BLOCKER: OPENAI_API_KEY not present in environment",
+    "nginx available: nginx version: nginx/1.24.0 (Ubuntu)",
+    "Python: 3.12.14 (main, Aug 13 2026, 02:47:42) [GCC 13.3.0]",
+    "openai SDK: True",
+    "playwright SDK: True (Chromium installed)",
+    "flask: True",
+    "pyjwt: True",
+    "48 perturbation instances generated (3 families x 2 variants x 8 seeds)",
+    "TRAIN/TEST split: 24/24 stratified by family (seeds 0-3 TRAIN, 4-7 TEST)",
+    "N_UNRELATED mechanisms for contamination: 24",
+    "All randomness via hashlib.sha256 (deterministic seeds recorded)",
+    "Frozen design requires real gpt-4o-mini + Playwright + verify() on actual nginx+Flask state",
+    "C1 gate requires PC1/PC2 on REAL gpt-4o-mini pipeline - CANNOT MEASURE",
+    "C2 gate requires real verify() with block-permutation null - CANNOT MEASURE",
+    "C3 gate requires real nginx byte-identity >=0.99 - SUBSTRATE NOT YET DEPLOYED",
+    "C4-C8 gates require real cost measurements (tokens, browser, verification, amortization) - CANNOT MEASURE",
+    "Per spec decision_rule: C1-C3 failure -> MEASUREMENT_INVALID (not scientific falsification)",
+    "This is infrastructure failure, not evidence against C-DELTA-REPAIR hypothesis"
+  ],
+  "validity_notes": [
+    "INFRASTRUCTURE FAILURE: OPENAI_API_KEY absent - hard blocker for real LLM agent economics measurement per spec measurement_validity #4/#8.",
+    "Per EXPERIMENT_PACKET.md \u00a79: 'Infrastructure failure must never be encoded as scientific falsification.'",
+    "Per spec decision_rule: C1 requires 'PC1 success=1.0 and PC2 repair success >=0.90 on REAL gpt-4o-mini pipeline' - cannot be evaluated.",
+    "Per spec decision_rule: C2 requires 'NC1 patch cost 0 and NC2 contamination=0 and random-patch block-permutation false-accept <=5% with AUROC 0.4-0.6 trajectory-grouped' - requires real verify() pipeline.",
+    "Per spec decision_rule: C3 requires 'B-RUNTIME-BYTE-IDENTITY pre-perturbation byte identity >=0.99 on REAL nginx (oracle-free greedy decode)' - nginx substrate not yet deployed with proxy_cache HIT/SWR/SIE/304.",
+    "Frozen spec.json, prereg.md, freeze.json are immutable. This EXECUTE stage correctly reports MEASUREMENT_INVALID due to missing substrate.",
+    "Smallest unblock: provide OPENAI_API_KEY, deploy nginx proxy_cache + Flask HS256 backend, implement execute_delta_repair_real.py with real OpenAI API calls and Playwright execution.",
+    "Previous experiment EXP-GRAPH-35761721514 had identical infrastructure blocker (BLOCKED, MISSING_LLM_API_KEY)."
+  ],
+  "unresolved": [
+    "Whether real gpt-4o-mini 15-step achieves repair token cost <50% cold and browser <40% cold on single-resource perturbations",
+    "Whether real verification on actual DOM/response discriminates correct vs incorrect patch with AUROC>=0.75 and precision>=0.80",
+    "Whether contamination remains <0.10 and random-patch false_accept <5% on real registry with N>=24 unrelated mechanisms",
+    "Whether amortized cost at 10 reuses < B-COLD cost holds with real retrieval costs and trajectory-grouped CIs",
+    "Whether nginx HIT/SWR/SIE/304 byte identity >=0.99 holds on real nginx 1.2x with production gzip/chunked/Vary",
+    "Whether per-family cost heterogeneity exists at TEST n=8 per family"
+  ]
+}
