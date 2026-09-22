@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35789942386",
+  "lane": "intel",
+  "github_run_id": "35789942386",
+  "github_run_attempt": "1",
+  "recorded_at": "2026-09-22T22:00:50.165472+00:00",
+  "base_sha": "940dbe657ba363ed2feced28a29e49c7319fbf04",
+  "pre_execute_sha": "f70c2de5b386f0b252c96ef57849af80673ca645",
+  "freeze_hash": "008b785ca1c2751bbde0d9c4e3083e9b9389534c82e46b13fdce3686fb8e043a",
+  "request_hash": "e4743a3cdf58024325237fd52b8312260237f6628735596cdd35bf71dd371580",
+  "duration_seconds": 219.5,
+  "start_time": "2026-09-22T22:36:36.667Z",
+  "end_time": "2026-09-22T22:40:16.155Z",
+  "environment": {
+    "docker_image": "am1n3e/webarena-verified-shopping@sha256:3e8cb9b945",
+    "docker_url": "http://localhost:7770",
+    "browsergym_core": "0.14.3",
+    "agentlab": "0.4.2",
+    "playwright": "1.44.0",
+    "playwright_install": "playwright install --with-deps + chromium",
+    "viewport": {"width": 1280, "height": 720},
+    "cdp_accessibility_getFullAXTree": "functional",
+    "python_version": "3.12.14",
+    "os": "linux"
+  },
+  "placeholder_fix": {
+    "function": "get_task_start_url",
+    "file": "research/intel/exp_35789942386_measure.py",
+    "fix": "__SHOPPING__/path -> base_url + path_part",
+    "verified": true,
+    "product_pages_loaded": 4,
+    "families_with_path": ["136", "145", "196", "222"]
+  },
+  "seed": 35725763380,
+  "artifacts": {
+    "ax_captures.jsonl": {"path": "artifacts/raw/ax_captures.jsonl", "sha256": "324313f6e5cb6986c88831994bb9732921a2575fc1826b9e4224ac8795b28a76"},
+    "ax_consistency.json": {"path": "artifacts/derived/ax_consistency.json", "sha256": "45b90ef283251380f016ee46f46cbe2b64a5ad0f6513fbf6a1b7028918334f17"},
+    "stagehand_replication.json": {"path": "artifacts/derived/stagehand_replication.json", "sha256": "ba5ae046c8bc8dd60a6dabbedc0c968c49975e406a0b60eabff864032a16e226"},
+    "gate0_relaxed_table.json": {"path": "artifacts/derived/gate0_relaxed_table.json", "sha256": "50cea72a124141d19fa2d29ebe48a6a77f5d6452be2325d3d7c057fc7e24f1a7"},
+    "provenance.json": {"path": "artifacts/raw/provenance.json", "sha256": "3d4124dbde714a0d"},
+    "ax_trees": {"path": "artifacts/raw/ax_trees/", "count": 20},
+    "measurement_script": {"path": "research/intel/exp_35789942386_measure.py", "role": "code"}
+  },
+  "pip_freeze_hash": "agentlab==0.4.2\nbrowsergym-core==0.14.3\nplaywright==1.44.0",
+  "execution_engine": "playwright.async_api.async_playwright + CDP Accessibility.getFullAXTree",
+  "outcome_summary": {
+    "H1_AX_CONSISTENCY": "MEASUREMENT_INVALID (shuffle p=1.0, variance=0, pattern grammar truncation)",
+    "H2_STAGEHAND_BASELINE": "MEASUREMENT_INVALID (drift injection broken, speedup inverted)",
+    "H3_RELAXED_GATE0": "MEASUREMENT_INVALID (BrowserGym not importable, single-page only)",
+    "overall": "MIXED — placeholder fix verified working but measurement mechanisms insufficient"
+  }
+}

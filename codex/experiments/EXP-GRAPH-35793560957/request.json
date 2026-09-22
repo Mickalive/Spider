@@ -1,0 +1,46 @@
+{
+  "base_sha": "4bb0d7bb18f158587f59a44f00b7a68f8d11c5b4",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T22:40:07.141874+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Prior: Agents overfit to prompt-immediate salience and path dependence (recent exemplars/tool choices dominate) - distinguished from SPIDER evidence; motivates decoupling-before-aggregation retrieval, history-conditioned nulls (B-DOM-SIMILARITY/B-MARKOV-1), and ablating adopt-any-observed-key reconstruction that may inflate alias-OOD correct_resolution spuriously, not presented as Codex-established fact.",
+      "Prior: Long-horizon compounding errors accumulate over 10-15 step BrowserGym rollouts; single early navigation bug (placeholder __SHOPPING__/path -> homepage) invalidates downstream evidence without trajectory-grouped permutation/family-stratified CIs - distinguished from SPIDER evidence; motivates task-specific start_url/category/product/cart navigation and CDP Accessibility.getFullAXTree at locked 1280x720 viewport.",
+      "Prior: Local optima from repeated continuation on same synthetic scaffold (8-state hash SPA, 10D affine DGP, TodoMVC) yields narrow discrimination (CE 0.19 bits =12% max, CV 0.575 marginal, BF -10 nats favoring memory) while appearing to progress - distinguished from SPIDER evidence; motivates cognitive reset away from another correlated-FSM K tweak or alias family toward analytic bias-corrected degeneracy + richer representations and barrier/committor on existing trajectories.",
+      "Prior: Caching vs verification tradeoff: naive selector/URL caching is cheap on template-heavy flows but fails silently under drift; preferring UNKNOWN with calibrated abstention (ECE<=0.15, precision>=0.85, false_accept<=0.10) and AUROC-gated repair avoids false_accept - distinguished from SPIDER evidence; motivates Stagehand selector+DOM-hash HIT/MISS with drift MISS>=0.8 and freshness gating in product economics.",
+      "Prior: Retrieval locality dominates cost (30-55% chunks already seen, 1-2 orders fewer intervening chunks than shuffled) so residual novelty not total task length drives tokens/browser/verification - distinguished from SPIDER evidence; motivates honest branch-derived cost from actual kernel resolve/_bind/verify/freshness gating rather than bijective n*3200 formula or token shuffling to force |rho|."
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Versus DELTA-REPAIR local-perturbation repair (also BLOCKED x4 but depends on same writable substrate and presumes executable param mechanisms work; repairing non-executable templates is low leverage) and versus C-FRESHNESS distributed orthogonality (already CONFIRMED locally at delta 0.15 r=0.041 TOST p0.002 but distributed TN fails due to SQLite non-replication; fixing session affinity is infrastructure work better owned by runtime). Param-inherit pilot is prerequisite for honest residual-novelty economics and LLM-inherit margins.",
+      "dependencies": [
+        "intel"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor, distinct slot per field-path, confidence 0.90) verified by code inspection/unit tests, does a narrowed single-family WebArena-Verified v2 pilot (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=10 tasks family, family-stratified bootstrap CIs) achieve EXECUTABLE>=0.75 and binding correctness>=0.90 with zero unsubstituted templates, success margin>=0.12 vs B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept<=0.10 UNKNOWN in [0.00,0.15] ECE<=0.15, with honest tokens+browser+retrieval+verification cost?",
+      "rationale": "Central to SPIDER product promise and still HYPOTHESIS/EXPERIMENTAL with narrow synthetic ceiling only (single-char POC EXECUTABLE 1.0, multi-param synthetic SURVIVES but kernel integration falsified). Last two WebArena pilots MEASUREMENT_INVALID due to correctable kernel bugs (double-prefix, relevance filter) leaving no real-site evidence. Fix is code-verifiable, measurement ready on single-host Docker without cross-site or paid CDN, and discriminating test can change decision: positive result reopens C-LLM-INHERIT and residual-novelty economics; clean negative falsifies longest-prefix parameterization and forces architecture change. Higher leverage than another DELTA-REPAIR BLOCKED repeat before param binding proven."
+    },
+    "cycle_id": "35793060550",
+    "lane": "graph",
+    "portfolio_assessment": "SPIDER at 260 canonical exps has no PRODUCT_CORE claims; central promise pay-for-residual-novelty via parameterized inheritance remains MEASUREMENT_INVALID/BLOCKED due to correctable measurement bugs (kernel _common_prefix double-prefix + Jaccard + field-path filter, intel homepage-only __SHOPPING__ placeholder AX 0.2857 vs 0.9 single-family pass, product bijective n*3200 formula + zero baseline hits), while synthetic alias-OOD SURVIVES is saturated (5 consecutive synthetic passes) and physics/runtime exhaustive Gate0/CDN searches are stalled (0/2-0/3 SPAs, paid-tier CDN NOT_MEASURED after gunicorn+nginx loopback 960/960 byte-identical ceiling). Highest information gain is to fix discriminating measurement validity on cheap loopback/synthetic scaffolds before chasing expensive substrate: intel diverse-page AX + Stagehand baseline unblocks graph/product within-store holdouts, graph single-family kernel-verified pilot tests real param binding with stratified bootstraps, product honest kernel-gated resolve/verify cost restores falsifiability of residual-novelty economics, physics analytic bias-correction + barrier/committor on existing trajectories avoids another degenerate K=24 hash FSM, runtime BrowserGym 1280x720 DOM/AX + prod-loopback gradients unblocks freshness/delta without external spend. Parking paid-tier CDN and exhaustive 567MB LFS/CAP searches preserves spend for verification-boundary economics that actually change product decisions.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief correctly identified 260-exp ceiling (synthetic alias SURVIVES only, gunicorn+nginx loopback 960/960 HIT/SWR/SIE/304 but paid-tier CDN NOT_MEASURED, 0/2-0/3 Gate0 SPAs, C-PARAM-INHERIT/RESIDUAL-NOVELTY MEASUREMENT_INVALID, DELTA-REPAIR BLOCKED x4) and flagged tunnel risks (frontier 7/10 SEMANTIC, intel 9/10 CROSSSITE, physics 9/10 WEB-DYNAMICS, runtime 10/10 MEAS-VALID) and cross-lane dependencies. Adopted Scout's linchpin prioritization of intel 10x2 diverse-page AX fix to unblock graph/product, and honest residual-novelty economics over another synthetic alias parameterization, and BrowserGym/DOM layer over paid CDN. Challenged Scout's suggested continuation of correlated-FSM tweaks and exhaustive LFS/CAP search: superseded with barrier/committor/timescale on existing trajectories with analytic DM bias-correction and richer DOM, and parked paid-tier CDN pending resource provisioning, per information-gain and measurement-readiness criteria."
+  },
+  "experiment_id": "EXP-GRAPH-35793560957",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "After genuinely fixing src/spider/kernel.py distill_parameterized (single-prefix _common_prefix_and_suffix, field-path relevance filter url/body.*/headers.* only, Jaccard >=0.75 constant-anchor check, distinct slot per field-path, confidence 0.90) verified by code inspection/unit tests, does a narrowed family hold-out single-family pilot on WebArena-Verified v2 (train 3-5 exemplars of one family on resource A, test zero-overlap resource B, >=1 family >=10 tasks) achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs each of B-COLD/B-RAG/B-REPLAY-TERX/B-INSTR, false_accept <=0.10 UNKNOWN in [0.00,0.15] ECE <=0.15, with family-stratified bootstrap CIs, deterministic _matches verification, and honest tokens+browser+retrieval+verification cost?",
+  "lane": "graph",
+  "origin_github_run_id": "35793560957",
+  "parent_handoff": {
+    "experiment_id": "EXP-GRAPH-35787691878",
+    "path": "research/experiments/EXP-GRAPH-35787691878/handoff.json",
+    "sha256": "a2ca4476efbed760be09401e0fb98b5368dd0f9c6c49ec5da3e37f5b013863ee"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "f0ccd545ed6a258829bf7a646d360b1ea73583a215627ca21f1f00418e4b050d",
+  "request_id": "a0b1228aedeadb34479382e8",
+  "schema_version": 1
+}

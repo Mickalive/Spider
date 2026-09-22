@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35793566080",
+  "lane": "physics",
+  "created_at": "2026-09-22T22:44:56.295328+00:00",
+  "executed_at": "2026-09-22T23:20:00+00:00",
+  "github_run_id": "35793566080",
+  "base_sha": "4bb0d7bb18f158587f59a44f00b7a68f8d11c5b4",
+  "commit_head": "4bb0d7bb18f158587f59a44f00b7a68f8d11c5b4",
+  "parent_handoff_sha256": "9daed76d163629417ac4b7a2ded7a3654c99cfd1f577eca3fc586b74c1c5fa8f",
+  "freeze_hashes": {
+    "prereg.md": "a8f2432d74b595a957739ef0e2a70a1707faa934d15d91365c0a747547624e33",
+    "request.json": "d0fdb4d0dffedd3b8d053969e8b6995c9aef3bb3b27e50df9f7d0ab2a5c98cfb",
+    "spec.json": "ec6a69036776034546f9544bfb4b13ce3f4fe95de24715d7a9bccb601eb63747"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.2.6",
+    "sklearn": "1.7.1",
+    "platform": "linux",
+    "PYTHONHASHSEED": "0",
+    "seeds": "numpy 42, sklearn 42, permutation seed 42 trajectory_id grouping",
+    "K_primary": 24,
+    "K_exploratory": 12,
+    "alpha_primary": 0.041666666666666664,
+    "alpha_exploratory": 0.08333333333333333,
+    "N_perms": 1000,
+    "N_tests_pbonf": 8,
+    "n_traj": 50,
+    "steps_per_traj": 40,
+    "N_analyzed": 1999,
+    "resampling_unit": "trajectory_id",
+    "H_K": 3,
+    "min_per_stratum": 3
+  },
+  "code_paths": [
+    "research/experiments/EXP-PHYSICS-35793566080/execute.py"
+  ],
+  "datasets": [
+    {
+      "name": "correlated_rich_primary",
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_correlated.json",
+      "sha256": "c49e3d1661dbf8b85741518b4f92661e9a08ff39c289fe7addc4eb02f3cc2814",
+      "role": "raw",
+      "description": "50x40 locally-hosted correlated FSM richer DOM, L per trajectory A/B bias 0.70/0.30, richer observables visual bbox/style/event/AX cluster, N=1999, seed 42"
+    },
+    {
+      "name": "independent_noise_rich",
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_independent.json",
+      "sha256": "662e04ca26bee3d8445cfd3d130ce4174893bd73a9ecf822ddacdddc21c50ad7",
+      "role": "raw",
+      "description": "Independent-noise replication >=6 richer variants per state independent per-step, same FSM without L, N=1999, seed 42+12345"
+    },
+    {
+      "name": "iid_rich_null",
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_iid.json",
+      "sha256": "f3af558f539ad36a3ba70521caf179971937be8634c95eb065fb8bac0663d726",
+      "role": "raw",
+      "description": "IID synthetic null same marginal P(S) i.i.d. S_next, richer DOM correlated with phantom L but S_next independent, N=1999, seed 777"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_correlated.json",
+      "sha256": "c49e3d1661dbf8b85741518b4f92661e9a08ff39c289fe7addc4eb02f3cc2814",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_independent.json",
+      "sha256": "662e04ca26bee3d8445cfd3d130ce4174893bd73a9ecf822ddacdddc21c50ad7",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_transitions_iid.json",
+      "sha256": "f3af558f539ad36a3ba70521caf179971937be8634c95eb065fb8bac0663d726",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/raw_results.json",
+      "sha256": "1e00747b03448404732908ff3e4e1a484f623f9522012a763f83332a5d50cb1c",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/execute.py",
+      "sha256": "b710e7821f98e9d0c24cf9af2ea0f640e8c060ef1b61180c19e8f0d431ea3fb4",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/result.json",
+      "sha256": "95e5b110f56d06bfa87cf3c321f8958aa2896f5696dd47ff323e2c3c0f5023ed",
+      "role": "derived"
+    },
+    {
+      "path": "research/experiments/EXP-PHYSICS-35793566080/report.md",
+      "sha256": "0370d5f2c21acb6877000af418bb2bf5a10e3495ac20ba469b5db290ba9b6994",
+      "role": "derived"
+    }
+  ],
+  "commands": [
+    "pip install numpy scikit-learn -q",
+    "python research/experiments/EXP-PHYSICS-35793566080/execute.py"
+  ],
+  "elapsed_seconds": 106.2,
+  "reproducibility": "Deterministic seeds PYTHONHASHSEED=0 numpy 42 sklearn 42 permutation seed 42 trajectory_id grouping, analytic Gamma ratios via Dirichlet-Multinomial closed-form, re-executable byte-identical aside elapsed. Freeze hashes verified before execution."
+}

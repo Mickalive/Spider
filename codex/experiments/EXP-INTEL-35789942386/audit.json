@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-INTEL-35789942386",
+  "lane": "intel",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Fix element-pattern grammar extract_element_pattern: remove [:20] token truncation and generic/tablist-only filter that captures only common layout tokens (generic:unnamed|tablist:unnamed|link:Skip to Content) and truncates product-specific elements beyond position 20. Replace with full-tree or product-relevant subtree traversal (semantic, multi-anchor) before M-AX-CONSISTENCY can discriminate product pages from homepage tautology — spec measurement_validity #2 violation, validity_notes confirms.",
+    "Fix sampling compliance: replace stratified path-first sampling (4 path families forced then shuffle) with pure seed-deterministic random sample without replacement from 36 families >=3 per prereg section 4, or explicitly record stratification deviation. Current 4/36 families have __SHOPPING__/path product URLs; 6/10 sampled families are homepage-only (1430 nodes identical) so <5 families with task-specific product pages triggers infrastructure precedence MEASUREMENT_INVALID per falsifier Gate0 precedence — substrate limitation not scientific falsification.",
+    "Fix Stagehand drift injection: compute SHA256 of relevant subtree outerHTML AFTER DOM mutation, not from unmutated page.content(). Current research/intel/exp_35789942386_measure.py replaces 'class=\"product\"' in raw HTML string but hash computed from full page.content() copy not containing mutation, so drift_miss_rate=0.0 (20/20 HIT despite drift) and false_accept is 1.0 not 0.0 as reported in result.json — NC3_STAGEHAND_DOM_DRIFT FAIL, NC4 not tested meaningfully.",
+    "Fix Stagehand speedup/tokens measurement: measure cold vs cached latency via real dispatch path (Playwright navigation + DOM hash compute + cache lookup) on same code path. Current dict-lookup microsecond timing (median_cold 0.00095ms vs median_cached 0.01ms) yields inverted speedup 0.0954x; tokens_saved hardcoded 1000 (spec requires tiktoken/provider count or recorded). B-STAGEHAND-VERB not spec-compliant replication of Feb2026 shipped 2x/~30% baseline.",
+    "Fix Stagehand false_accept reporting: recomputed false_accept=1.0 (20 drift HIT /20) contradicts result.json M-STAGEHAND-FALSE-ACCEPT 0.0. Correct metric to 1.0 and report MISS>=0.8 fails; do not claim false_accept<0.05 until drift mechanism fixed and NC4 random null (1000 perms) recomputed beating p<0.05.",
+    "Make multi-step BrowserGym trajectory collection available for Gate0 census: BrowserGym webarena-verified-v2 environment not importable in provenance (duration 219s, no transitions). Single-page captures have transitions=0, NL=0, strata=1, singleton=1.0, H undefined, so relaxed 0/20 and strict 0/20 descriptive viewport-only per spec measurement_validity #4 is MEASUREMENT_INVALID for H/NL/strata — do not use to claim relaxed infeasible; implement Playwright-based multi-step rollout or fix env import for >=50 transitions on >=10 families.",
+    "Correct Playwright pin deviation: spec requires 1.63.0 primary via playwright install --with-deps, provenance shows 1.44.0 fallback. Record pip freeze hash (already  agentlab==0.4.2/browsergym-core==0.14.3) but flag version deviation in validity_notes — non-blocking but required for provenance matching.",
+    "Expand product URL source if within-store transfer needed: only 4 of 36 families (136,145,196,222) have __SHOPPING__/path product URLs per artifacts/raw/ax_captures.jsonl placeholder_expanded true on 8 captures; remaining 32 families __SHOPPING__ homepage only. To achieve >=10 families with diverse product pages per decision_rule, evaluate shopping_admin 184 tasks 42 families or alternative start_url extraction before claiming exhaustive product-page signal unobtainable."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_AX_PATTERN_TRUNCATION_DEGENERATE",
+      "severity": "critical",
+      "finding": "M-AX-CONSISTENCY mean 1.0 CI[1.0,1.0] per_family_variance 0.0 shuffle mean 1.0 p95 1.0 p=1.0 degenerate. Recomputed from artifacts/derived/ax_consistency.json: 10 families all score 1 because extract_element_pattern joins only first 20 tokens of generic/tablist/listitem/link:Skip to Content layout roles; product-specific heading/price/add-to-cart beyond position 20 truncated. Distinct AX trees exist (product node counts 626-941-1150-728 vs homepage 1430, different ax_tree_hash/dom_hash) but pattern grammar cannot distinguish them. Per prereg section 10, variance=0 with diverse pages is FALSIFIED-IN-SETTING for this grammar, but falsifier infrastructure precedence (<5 path families) forces MEASUREMENT_INVALID — placeholder fix works (provenance placeholder_fix verified 4 path families) but representation loss is not discriminating.",
+      "evidence": "artifacts/derived/ax_consistency.json per_family_details 20-token generic loci, artifacts/raw/ax_captures.jsonl 8 product URLs vs 12 homepage, result.json M-AX-CONSISTENCY STATUS MEASUREMENT_INVALID"
+    },
+    {
+      "id": "V2_SUBSTRATE_PRODUCT_URL_SCARCITY",
+      "severity": "critical",
+      "finding": "Only 4 path families in entire 36-family corpus; experiment captured 4 path families x2 =8 product pages and 6 homepage families x2 =12 identical homepages. Decision_rule requires <5 families with product pages after 3 retries => MEASUREMENT_INVALID substrate_unavailable, not falsification. Observed Docker LIVE 20/20 valid captures 600-2000 nodes, viewport 1280x720 correct, seed 35725763380 deterministic, but page-type diversity insufficient for 10-family diverse-page test. Producer correctly flags MEASUREMENT_INVALID.",
+      "evidence": "artifacts/raw/ax_captures.jsonl placeholder_expanded true on 8/20, provenance.json families_with_path [136,145,196,222], spec.json decision_rule Gate0 infrastructure precedence"
+    },
+    {
+      "id": "V3_STAGEHAND_DRIFT_FALSE_ACCEPT_INVERSION",
+      "severity": "critical",
+      "finding": "Stagehand drift_miss_rate 0.0 on 20 tests (all HIT despite expected MISS) and recomputed false_accept 1.0 contradicts result.json false_accept 0.0. Hash not recomputed after mutation. Hit_rate 0.9485 (92/97) inflated by identical homepage DOM hashes for homepage families and by selector derivation mixing spec-compliant AX-derived selectors (10 entries with data-aid) with fallback synthetic fam{id}_task{id} (remainder). Latency speedup 0.0954 inverted, tokens_saved hardcoded 1000 not measured. PC3_STAGEHAND_HIT_IDENTICAL PARTIAL but NC3 FAIL, NC4 NOT_TESTED, B-STAGEHAND-VERB PARTIAL — not spec-compliant shipped baseline replication.",
+      "evidence": "artifacts/derived/stagehand_replication.json drift_results 20/20 drift_hit true, per_family selector mixing, median latencies 0.00095 vs 0.01, result.json M-STAGEHAND-HITRATE 0.9485 M-STAGEHAND-SPEEDUP 0.0954"
+    },
+    {
+      "id": "V4_GATE0_MULTI_STEP_UNMEASURED",
+      "severity": "high",
+      "finding": "M-GATE0-RELAXED-PASS 0/20, STRICT 0/20, M-GATE0-MULTI-STEP-AVAILABLE false, multi_step_count 0. Per-capture NC0/no H/NL/strata on single-page 0-transition captures. Spec measurement_validity #4 requires >=50 transitions per family for H(S_next|URL,H_K=3) with >=5/stratum. Producer correctly marks MEASUREMENT_INVALID descriptive viewport-only, not evidence against relaxed H>0.1 NL>=20 feasibility. BrowserGym env check failed gym.make webarena-verified-v2.",
+      "evidence": "artifacts/derived/gate0_relaxed_table.json per_capture transitions 0 singleton 1.0, result.json M-GATE0-STATUS MEASUREMENT_INVALID, research/intel/exp_35789942386_measure.py BrowserGym import fallback"
+    },
+    {
+      "id": "V5_SAMPLING_DEVIATION",
+      "severity": "medium",
+      "finding": "Sampling used stratified path-first (4 path +6 homepage) then shuffled with seed, not pure random sample without replacement from 36 families as frozen prereg section 4 specifies. Expected parent sample [136,208,211,172,191,139,138,222,101,194] not reproduced. Deviation maximizes product diversity given scarcity but introduces selection bias and is not recorded as deviation in result.json. Does not change MEASUREMENT_INVALID verdict but violates sampling policy transmission invariant.",
+      "evidence": "research/intel/exp_35789942386_measure.py sampled_family_ids = path[:4]+homepage[:6] shuffle, request.json seed 35725763380, prereg.md section 4"
+    },
+    {
+      "id": "V6_VERSION_PIN_DEVIATION_DOCUMENTED",
+      "severity": "low",
+      "finding": "Playwright 1.44.0 installed vs spec 1.63.0 primary, documented fallback per spec measurement_validity #3 with pip freeze hash. BrowserGym-core 0.14.3 + AgentLab 0.4.2 correct. Viewport 1280x720 verified via captures. CdP Accessibility.getFullAXTree functional 20/20 valid captures. Non-blocking deviation but must be preserved in provenance.",
+      "evidence": "provenance.json environment playwright 1.44.0, spec.json measurement_validity 600-2000 nodes viewport hash"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-STAGEHAND-VERB",
+      "assessed": "FAIL_NOT_COMPLIANT",
+      "reason": "HIT 0.9485 >=0.8 passes but inflated by homepage identical DOMs and synthetic fallback selectors; MISS on drift 0.0 <0.8 FAIL, false_accept recomputed 1.0 >=0.05 FAIL, speedup 0.0954 inverted not ~2x, tokens hardcoded, drift injection broken, NC4 not computed. Producer marks PARTIAL correctly; auditor finds not spec-compliant replication of Feb2026 shipped Stagehand exact selector+relevant-subtree SHA256 HIT after N=2 per-project baseline. No inference that shipped 2x/~30% transfers to WebArena shopping product pages.",
+      "evidence": "artifacts/derived/stagehand_replication.json hit_rate 0.948 drift_miss 0.0 speedup 0.095, result.json controls.B-STAGEHAND-VERB expected vs observed"
+    },
+    {
+      "id": "B-RANDOM-AX-SHUFFLE",
+      "assessed": "FAIL_DEGENERATE_NULL",
+      "reason": "Shuffle null mean 1.0 p95 1.0 p=1.0 equals true mean 1.0 because all families have consistency 1.0. Cannot exceed null mean+0.30 or p95, permutation p<0.05 fails. Controls B-RANDOM-AX-SHUFFLE and NC1_AX_SHUFFLE_NULL both FAIL as expected for degenerate measurement — not discriminating vs null, zero information.",
+      "evidence": "artifacts/derived/ax_consistency.json shuffle_null mean 1.0 p 1.0, result.json controls B-RANDOM-AX-SHUFFLE FAIL NC1 FAIL"
+    },
+    {
+      "id": "B-RAG-EMBED-FLAT_B-SPIDER-0TOKEN_B-COLD-LLM",
+      "assessed": "NOT_EXECUTED_DESCRIPTIVE_ONLY",
+      "reason": "Three baselines reported as descriptive only comparisons vs Stagehand hit_rate without independent execution (result.json pass_fail Descriptive only). No tokens+browser+verify+repair amortised f=10 economics measured; B-SPIDER-0TOKEN 0-token claim and B-COLD-LLM cold upper bound not computed via LLM calls this cycle (spec allows estimation via Stagehand cold path but not executed). No strong baseline contest — cannot claim SPIDER beats Stagehand or retrieval without DOM-hash guard.",
+      "evidence": "result.json controls B-RAG-EMBED-FLAT B-SPIDER-0TOKEN B-COLD-LLM observed Not executed, spec baselines expected ~2x/~30% vs cold"
+    },
+    {
+      "id": "B-CONSTANT-NULL-05654",
+      "assessed": "CORRECTLY_DISCLOSED_NOT_USED",
+      "reason": "Constant 0.5654 from truncated-first-20 full-DOM extrapolation correctly retained only to show truncation artifact does not predict full-DOM and not used for AX decision, per spec baselines. Producer correctly did not use F(n)=0.5654 as predictor.",
+      "evidence": "spec.json baselines B-CONSTANT-NULL-05654 expected Not used, prereg unknowns"
+    },
+    {
+      "id": "PC1_AX_LIVENESS_1280",
+      "assessed": "PASS",
+      "reason": "20/20 valid captures 600-2000 nodes (728,941,672,668,626,1150,702 etc), DOM bytes>>2000, Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 reachable after 1 retry, viewport 1280x720 verified. Meets spec PC1 >=15/20.",
+      "evidence": "artifacts/raw/ax_captures.jsonl node counts viewport, result.json PC1 PASS"
+    },
+    {
+      "id": "PC2_AX_PRIOR_REPLICATION",
+      "assessed": "FAIL_VARIANCE_ZERO",
+      "reason": "All families score 1.0, prior single-family 0.9 CI[0.7,1.0] not discriminable from diverse-page mean 1.0; CI width 0 variance 0 not >0, not discriminating vs prior homepage tautology as required to show inflated point estimate resolved. Producer correctly marks FAIL.",
+      "evidence": "artifacts/derived/ax_consistency.json per_family all 1 mean 1.0 CI [1.0,1.0] vs prior 0.9"
+    },
+    {
+      "id": "PC3_STAGEHAND_HIT_IDENTICAL_NC5",
+      "assessed": "PARTIAL",
+      "reason": "HIT on identical DOM 0.95 and cross-project leakage 0.0 (0/5) pass isolation, but N=2 HIT logic partially mixed with synthetic fallback and drift MISS fails discrimination; 5-isolation sample too small to generalize to 36 families. Producer PARTIAL correct.",
+      "evidence": "artifacts/derived/stagehand_replication.json 92/97 hits cross_project_leakage 0.0"
+    },
+    {
+      "id": "NC3_NC4_NC5",
+      "assessed": "NC3_FAIL NC4_NOT_TESTED NC5_PASS",
+      "reason": "NC3 Stagehand DOM drift MISS 0.0 false_accept 1.0 FAIL (mechanism broken); NC4 random cache null not computed meaningfully because hit_rate inflated and drift broken — p>=0.05 cannot be declared; NC5 cross-project leakage PASS 0.0 on 5/5 isolation tests (limited sample).",
+      "evidence": "result.json controls NC3 FAIL NC4 NOT_TESTED NC5 PASS, stagehand_replication drift_results 20/20 HIT"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-AX-CONSISTENCY": {
+      "producer_mean": 1.0,
+      "recomputed_mean": 1.0,
+      "producer_ci_lower": 1.0,
+      "recomputed_ci_lower": 1.0,
+      "producer_ci_upper": 1.0,
+      "recomputed_ci_upper": 1.0,
+      "producer_per_family_variance": 0.0,
+      "recomputed_per_family_variance": 0.0,
+      "producer_shuffle_p": 1.0,
+      "recomputed_shuffle_p": 1.0,
+      "producer_shuffle_null_mean": 1.0,
+      "recomputed_shuffle_null_mean": 1.0,
+      "producer_shuffle_null_p95": 1.0,
+      "recomputed_shuffle_p95": 1.0,
+      "producer_delta_vs_prior_0.2857": 0.7143,
+      "recomputed_delta": 0.7143,
+      "match": true,
+      "verdict": "degenerate_p_equals_1_not_discriminating",
+      "n_valid_families": 10,
+      "n_valid_captures": 20,
+      "n_path_families_in_sample": 4,
+      "n_homepage_families_in_sample": 6
+    },
+    "M-STAGEHAND-HITRATE": {
+      "producer": 0.9485,
+      "recomputed": 0.9484536082474226,
+      "calculation": "92 hits /97 total_calls from per_family records",
+      "match": true,
+      "inflated": "identical homepage DOMs for 6/10 families and synthetic fallback selectors inflate HIT; not evidence of product-page discrimination"
+    },
+    "M-STAGEHAND-MISSRATE": {
+      "producer_drift_miss_rate": 0.0,
+      "recomputed_drift_miss_rate": 0.0,
+      "producer_miss_rate_approx": 0.0485,
+      "recomputed_misses": 5,
+      "verdict": "drift MISS fails spec >=0.8"
+    },
+    "M-STAGEHAND-FALSE-ACCEPT": {
+      "producer": 0.0,
+      "recomputed": 1.0,
+      "match": false,
+      "correction": "20/20 drift HIT despite expected MISS => false_accept = 1.0, not 0.0; producer misreports",
+      "evidence": "artifacts/derived/stagehand_replication.json drift_results all drift_hit true"
+    },
+    "M-STAGEHAND-SPEEDUP": {
+      "producer": 0.0954,
+      "recomputed": 0.095367431640625,
+      "match": true,
+      "interpretation": "inverted <1.0 because dict-lookup cached latency measured not real dispatch path; fails ~2x expectation"
+    },
+    "M-STAGEHAND-TOKENS-SAVED": {
+      "producer": 1000,
+      "recomputed_hardcoded": 1000,
+      "match": true,
+      "valid": false,
+      "reason": "hardcoded not measured via tiktoken/provider"
+    },
+    "M-STAGEHAND-CROSS-PROJECT-LEAKAGE": {
+      "producer": 0.0,
+      "recomputed": 0.0,
+      "match": true,
+      "n_tests": 5
+    },
+    "M-GATE0-RELAXED-PASS": {
+      "producer": 0,
+      "recomputed": 0,
+      "match": true,
+      "n_total": 20,
+      "multi_step_available": false,
+      "recomputed_multi_step_available": false,
+      "note": "0/20 on single-page viewport-only is descriptive, not evidence against relaxed feasibility per spec"
+    },
+    "M-GATE0-STRICT-PASS": {
+      "producer": 0,
+      "recomputed": 0,
+      "match": true
+    }
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED CEILING: Placeholder fix get_task_start_url __SHOPPING__/path -> http://localhost:7770/path correctly implemented (research/intel/exp_35789942386_measure.py sha 839aaa5306f9f2374298fff3d29362c3a9bba9b95c9d766b5679356610bade61) and verified to load distinct product pages (4 path families 136,145,196,222 => 8 captures node counts 626-1150 distinct AX hashes, titles distinct) at BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.44.0 fallback + Docker am1n3e/webarena-verified-shopping@sha256:3e8cb9b945 at 1280x720. Substrate stack LIVE, WebArena-Verified v2 census 192/49/36 replicated (carry-forward). NOT JUSTIFIED: AX_consistency >=0.6 with CI lower>0.5 p<0.05 vs shuffle and delta>=0.2 vs prior cannot be claimed — mean 1.0 [1.0,1.0] zero variance p=1.0 is measurement-invalid tautology from truncated pattern grammar, not identifiable same-mechanism parameterized transfer within-store; no discrimination vs prior 0.9 single-family inflated. Stagehand selector+relevant-subtree SHA256 HIT>=0.8/MISS>=0.8 false_accept<0.05 and ~2x/~30% baseline NOT delivered — hit inflated, drift MISS 0.0 false_accept 1.0, speedup inverted. Gate0 relaxed H>0.1 NL>=20 titles>=1 NOT measured — 0/20 single-page captures unmeasured, multi-step unavailable, no blocking inference for physics. Therefore C-CROSSSITE, C-LLM-INHERIT, C-PRODUCT-ECON remain HYPOTHESIS on live WebArena shopping product-page substrate; within-store family hold-out (C-LLM-INHERIT) not advanced beyond prior synthetic/single-family ceilings. Next experiment may reuse fixed placeholder code but must replace pattern grammar, fix drift hash, measure real latency/tokens, and collect multi-step trajectories before claiming transfer or baseline economics.",
+  "evidence_refs": [
+    "research/experiments/EXP-INTEL-35789942386/request.json sha e4743a3cdf58024325237fd52b8312260237f6628735596cdd35bf71dd371580",
+    "research/experiments/EXP-INTEL-35789942386/spec.json sha 008b785ca1c2751bbde0d9c4e3083e9b9389534c82e46b13fdce3686fb8e043a",
+    "research/experiments/EXP-INTEL-35789942386/prereg.md sha bbd6f6160734aba5dbc51b67a24c47316fb0919efb9f9c3e43060b87ccb20ac0",
+    "research/experiments/EXP-INTEL-35789942386/freeze.json",
+    "research/experiments/EXP-INTEL-35789942386/result.json",
+    "research/experiments/EXP-INTEL-35789942386/report.md",
+    "research/experiments/EXP-INTEL-35789942386/provenance.json sha 3d4124dbde714a0d",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/raw/ax_captures.jsonl sha 324313f6e5cb6986c88831994bb9732921a2575fc1826b9e4224ac8795b28a76 20 captures 1280x720",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/derived/ax_consistency.json sha 45b90ef283251380f016ee46f46cbe2b64a5ad0f6513fbf6a1b7028918334f17 mean 1.0 p 1.0",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/derived/stagehand_replication.json sha ba5ae046c8bc8dd60a6dabbedc0c968c49975e406a0b60eabff864032a16e226 hit 0.948 drift_miss 0.0 speedup 0.095",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/derived/gate0_relaxed_table.json sha 50cea72a124141d19fa2d29ebe48a6a77f5d6452be2325d3d7c057fc7e24f1a7 0/20 multi_step false",
+    "research/experiments/EXP-INTEL-35789942386/artifacts/raw/provenance.json sha 3d4124dbde714a0d",
+    "research/intel/exp_35789942386_measure.py sha 839aaa5306f9f2374298fff3d29362c3a9bba9b95c9d766b5679356610bade61 get_task_start_url fix verified"
+  ],
+  "unresolved": [
+    "Whether a non-truncated element-pattern grammar (full AX tree, semantic subtree, multi-anchor) would yield discriminating AX_consistency variance >0 and CI lower>0.5 p<0.05 on the same 4 product families vs must expand product URL source beyond 4/36 families to achieve 10 diverse-page families per decision_rule.",
+    "Whether fixing DOM-hash recompute-after-mutation and using relevant-subtree outerHTML (not full page) with derived normalized selector exclusively (no fam_task fallback) would achieve Stagehand MISS>=0.8 false_accept<0.05 beats NC4 random p<0.05 and recover real ~2x/~30% via dispatch-path latency/tokens vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM.",
+    "Whether multi-step BrowserGym rollouts (>=50 transitions on >=10 families) on WebArena shopping yields >=1 relaxed Gate0 pass H>0.1 NL>=20 titles>=1 to unblock physics correlated-state pilot, or whether title variation remains 1 on hash-SPA shopping despite multi-step (as on TodoMVC 0/5 titles).",
+    "Whether alternative pattern grammars (semantic, subtree, multi-anchor) or shopping_admin 184 tasks 42 families provides more diverse start_urls than current shopping 192, and whether inclusion of previously failed families 136/222 with product-page distribution changes mean directionally.",
+    "Correct Playwright 1.63.0 compatibility with BrowserGym-core 0.14.3 vs required 1.44.0 fallback, and AgentLab 0.4.2 vs 0.3.2 fidelity on CDP node counts — flagged but not tested for outcome impact.",
+    "Cross-project isolation generalizability beyond 5/5 tests and PC3 3-consecutive HIT per-family verification per spec (not verified on this substrate)."
+  ]
+}
