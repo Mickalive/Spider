@@ -23,12 +23,17 @@ class KernelTests(unittest.TestCase):
     def test_parameterized_mechanism_binds_only_when_guarded(self):
         td, reg, kernel = self.make_kernel()
         try:
-            reg.upsert(Mechanism(mechanism_id="delete-item", intent="delete", preconditions={"authenticated": True}, applicability_guards={"role": "owner"}, action_template={"method": "DELETE", "path": "/api/items/${id}"}, postconditions={"exists": False}, parameter_slots=["id"], confidence=0.95))
+            reg.upsert(Mechanism(mechanism_id="delete-item", intent="delete", preconditions={"authenticated": True}, applicability_guards={"role": "owner"}, action_template={"method": "DELETE", "path": "/api/items/${id}"}, postconditions={"exists": False}, parameter_slots=["id"], evidence_values={"id": ["B", "B2"]}, confidence=0.95))
             r = kernel.resolve("delete", {"authenticated": True, "role": "owner"}, {"id": "B"})
             self.assertEqual(r.status, ResolutionStatus.EXECUTABLE)
             self.assertEqual(r.bound_action["path"], "/api/items/B")
             denied = kernel.resolve("delete", {"authenticated": True, "role": "viewer"}, {"id": "B"})
             self.assertEqual(denied.status, ResolutionStatus.UNKNOWN)
+            # Runtime confidence is evidence-derived: a value outside evidence abstains
+            # (frozen: confidence < 0.80 -> UNKNOWN), even if stored confidence is high.
+            novel = kernel.resolve("delete", {"authenticated": True, "role": "owner"}, {"id": "C"})
+            self.assertEqual(novel.status, ResolutionStatus.UNKNOWN)
+            self.assertEqual(novel.confidence, novel.confidence)  # confidence reported
         finally:
             td.cleanup()
 
