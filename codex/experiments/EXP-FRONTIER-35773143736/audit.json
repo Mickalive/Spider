@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35773143736",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [
+    "Claim ceiling must be bounded to synthetic pooled alias-OOD (30 orthogonal +10 mixed =40) with minimal derived dict (url/method/url_path/url_query/url_segments/headers_observed/body_observed, ax_tree_snapshot=None) at 70 tasks total — do not infer WebShop/ALFWorld BrowserGym 0.14.3 1280x720 CDP AX tree generalization; live stratum N_live=0 and PC-BROWSERGYM-HEALTH not exercised due to missing browsergym.webshop/alfworld distributions and missing playwright browsers (derived_metrics.json:live.browsergym_probe, result.json:controls.PC-BROWSERGYM-HEALTH).",
+    "RECONSTRUCTION-LEARNED ceiling must be labeled compact CPU MLP (~15k params, 46->128->64, GRPO with group 8, 120 epochs) System-One scoring adapter, not LLM-scale GRPO; frozen spec allows System-One on CPU-only runner but director_mandate LLM-scale hypothesis remains untested (result.json:metrics.learned.model_class, validity_notes[0], provenance.json:environment.torch_cuda_available=false). Report training cost 26.1s total, not 1-4h LLM budget.",
+    "Learned ECE 0.051763438088553285 is point estimate without bootstrap CI (RULE ECE has bootstrap 2000 CI [0.0722,0.0883]); do not claim ECE stability without resampling. Frozen G0 requires LEARNED ECE within 0.05 of RULE as point diff 0.028 — passes descriptively but inferential uncertainty unquantified (derived_metrics.json:no_applicable.ece_bootstrap_ci_rule vs no learned CI, result.json:validity_notes[3], unresolved[2]).",
+    "Learned confidence on no-candidate strata (no-applicable 12 + empty-registry 6 =18/70 tasks) uses structural abstain constant 0.05+hash-jitter mirroring RULE, not model-derived softmax; ECE overall 0.0518 and UNKNOWN precision 1.0 on those strata are partially non-model-derived. Future calibration must separate alias-OOD ECE (0.0407) from abstention-ECE or enforce fully model-derived abstention head (result.json:validity_notes[2], derived_metrics.json:learned.confidence_definition).",
+    "Calibration bins are degenerate: 5-bin ECE has 3 empty bins (bins 1-3 count 0, bin0 18, bin4 52) for both RULE and LEARNED — ECE is effectively 2-bin weighted absolute error. Do not claim 5-bin calibration robustness; disclose empty-bin artifact (derived_metrics.json:no_applicable.bins_reconstruction_rule/bins_reconstruction_learned).",
+    "Economics reported as in-process synthetic latency 7.9e-05 s (LEARNED) / 3.48e-04 s (RULE) per successful alias task with 70 policy forwards vs 220 embed encodings — does not include browser/network work, retrieval amortization, or verification/repair boundary. Do not use for product cost model until live-browser economics measured (result.json:validity_notes[4], unresolved[4]).",
+    "Re-run before product promotion: (a) bootstrap learned ECE (2000 resamples, trajectory-grouped if live) and report CI for G0 delta, (b) add learned abstention head or report ECE_alias_only vs ECE_abstain separately, (c) test on runner with browsergym-webshop/alfworld + playwright browsers installed to exercise live conditional (N_live>=20, PC-BROWSERGYM-HEALTH>=80%)."
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_synthetic_tautology_and_direct_observation",
+      "severity": "high",
+      "finding": "Synthetic alias-OOD task graph is minimal derived dict where headers_observed/body_observed/url_query directly contain the expected aliased key/value (e.g., Authorization:Bearer, X-Api-Key, api_token) not present in any registry template. Genuine reconstruction reduces to 'adopt any observed key not in registry and rewrite template via alphabetically-sorted multi-adoption' (research/frontier/run_genuine_35773143736.py:choose_adoptions+rewrite_template_multi). This is structurally isomorphic to copying the answer from observation. Success does not demonstrate semantic intent resolution beyond key-presence copying; synthetic-to-real gap dominates. Channel isolation diagnostics (RULE-URL-ONLY 0.0, BODY-ONLY 0.25, HEADERS-ONLY 0.5) show pooled 1.0 requires joint handling but still within same copy mechanism. Do not generalize to noisy DOM/AX, visual layout, timing, auth/session drift.",
+      "evidence": "tasks.json:derived_context headers_observed/body_observed equality to hidden_expected.expected_bound, run_genuine_35773143736.py:286-320 choose_adoptions, derived_metrics.json:channel_isolation_diagnostics, prereg section 2 validity notes"
+    },
+    {
+      "id": "V2_learned_confidence_partial_structural",
+      "severity": "high",
+      "finding": "RECONSTRUCTION-LEARNED confidence definition is model-derived softmax over learned candidate logits + rewrite logit with learned temperature (softplus inv_temp) for tasks with candidates, but falls back to structural constant 0.05+hash-jitter for no-candidate tasks (no-applicable 12, empty 6). ECE overall 0.0518 mixes 52 alias-OOD model-derived confidences (avg ~0.95) with 18 structural abstain confidences (avg 0.058). No-applicable/empty precision 1.0 and ECE therefore not fully model-calibrated. Learned alias-only ECE 0.0407 is clean; overall ECE understates learned calibration contribution.",
+      "evidence": "derived_metrics.json:learned.confidence_definition, result.json:validity_notes[2], provenance, run_genuine_35773143736.py:808-822 action_confidence+structural_abstain_confidence"
+    },
+    {
+      "id": "V3_ece_empty_bins_bimodal",
+      "severity": "medium",
+      "finding": "Both RULE and LEARNED ECE computed over 5 bins have 3 empty bins (bins 1-3 count 0). Bins 0 (18 no-app/empty, acc 0, avg_conf 0.058) and 4 (52 alias+exact, acc 1, avg_conf 0.912 RULE /0.950 LEARNED) carry all mass. ECE = 18/70*0.058 +52/70*|1-avg_conf| =0.0803/0.0518. Bimodal distribution makes ECE threshold 0.15 lenient; different binning or threshold 0.80 sensitivity not tested. LEARNED ECE lacks bootstrap CI for stability claim.",
+      "evidence": "derived_metrics.json:no_applicable.bins_reconstruction_rule, bins_reconstruction_learned, ece_bootstrap_ci_rule [0.0722,0.0883] vs no learned CI"
+    },
+    {
+      "id": "V4_training_split_isomorphism",
+      "severity": "medium",
+      "finding": "Train split n=21 tasks (7 per family, is_heldout=False) is leak-free vs held-out 9 and mixed 10 (asserted 0/9,0/10). However train and test are identically distributed by generator (same template families, same base URL set, same registry construction, same derived_state whitelist). Generalization to held-out novel keys (X-Api-Key, X-Auth-Key, Api-Token, api_token, authToken, access_key, permission, etc.) still solved by the generic adopt-any-key-not-in-registry mechanism, not by learning key semantics. Small training horizon (120 epochs, 26s) achieving 40/40 across 3 seeds (CV 0.0) suggests solution is near-deterministic copying, not substantive inductive learning.",
+      "evidence": "train_split_inventory.json leak_0_of_9/0_of_10, derived_metrics.json:learned.train_split_n=21, result.json:metrics.learned.per_seed_pooled_rates 1.0/1.0/1.0, run_genuine_35773143736.py:train_learned_seed"
+    },
+    {
+      "id": "V5_compact_mlp_not_llm_scale",
+      "severity": "high",
+      "finding": "Producer discloses compact MLP GRPO adapter ~15k params vs director_mandate primary mechanism LLM-scale GRPO. Frozen spec permits System-One scoring/budget adapter when offline/hosted LLM unavailable, so experiment is spec-compliant, but product consequence 'learnable GRPO can replace hand-coded rules' does not extend to LLM-scale. Training cost/stability reporting (8.5-8.7s/seed, tokens N/A) is not comparable to 300-600k token LLM budget. No evidence about LLM hallucinations, calibration via language, or retrieval+reconstruction verification economics at scale.",
+      "evidence": "result.json:metrics.learned.model_class, provenance.json:environment.torch_cuda_available=false, spec.json:baselines RECONSTRUCTION-LEARNED description, request.json:director_mandate.question LLM-scale clause"
+    },
+    {
+      "id": "V6_live_browser_not_exercised",
+      "severity": "high",
+      "finding": "PC-BROWSERGYM-HEALTH intentionally gates live stratum; probe shows browsergym 0.14.3 base importable but registers 0 envs, browsergym.webshop/alfworld modules absent, pip download No matching distribution, playwright cache empty, ALFWorld needs Java/textworld/docker. N_live=0, exploratory_bound=true. Per frozen spec, this is correctly treated as environment limitation not MEASUREMENT_INVALID and bounds confirmatory claim to synthetic pooled+mixed, which producer does. No live mixed multi-channel within one request or production-SPA heterogeneity tested. Director CONTINUE mandate live question remains unresolved.",
+      "evidence": "derived_metrics.json:live.browsergym_probe, result.json:controls.PC-BROWSERGYM-HEALTH pass=null, validity_notes[1]"
+    },
+    {
+      "id": "V7_baseline_domination_tautology",
+      "severity": "low",
+      "finding": "All retrieval/verbatim baselines achieve 0/40 alias-OOD correct and verbatim false_accept 1.0, as registry contains exactly one intent-matching mechanism per task with distinct alias template and requires rewriting. Beating 0/40 with copy mechanism does not demonstrate retrieval is hard — TF-IDF/embed are fit on train registry only and intent strings are identical across candidates, so TF-IDF/embed cannot discriminate. 'Not dominated by retrieval' check (RULE/LEARNED 1.0 vs best RAG 0.0 gap 1.0) is tautological under this design; B-RAG-EMBED real retriever (all-MiniLM-L6-v2, 220 encodings) 0/40 confirms retrieval alone cannot solve aliasing but not surprising.",
+      "evidence": "derived_metrics.json:alias_OOD tfidf_correct_rate 0, embed_correct_rate 0, verbatim_false_accept_rate 1.0, per task registry intent equality"
+    },
+    {
+      "id": "V8_derived_context_leak_audit_pass",
+      "severity": "info",
+      "finding": "Audit recomputed forbidden-key audit: derived_context for all 70 tasks contains only allowlisted keys (url, method, url_path, url_query, url_segments, headers_observed, body_observed, ax_tree_snapshot, ax_nodes_count, viewport_observed). No occurrence of alias_family/query_key/target_prefix/routing_prefix/target_style/path_style/header_key/body_field/auth_scope/expected_template in derived_context. Registry leakage 0/40 synthetic pooled verified. Confidence std >0.05 holds (RULE 0.3746, LEARNED 0.3902, min across seeds 0.3887), no constant-confidence artifact.",
+      "evidence": "tasks.json sampled 7 alias-OOD tasks + all strata, raw_evidence.json confidence std recomputed 0.3902, derived_metrics.json:no_applicable.reconstruction_confidence_std/ learned_confidence_std"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "baseline_id": "B-EXACT-MATCH",
+      "expected": "0/40 alias-OOD correct (exact intent equality cannot adapt to template aliasing)",
+      "observed": "0/40 correct, 40/40 false_accept on alias-OOD; 12/12 correct on exact-match stratum",
+      "verdict": "PASS as control",
+      "evidence": "derived_metrics.json:alias_OOD.exact_match_correct_rate 0.0, exact_match.reconstruction_correct_rate 1.0, raw_evidence.json B-EXACT-MATCH rows"
+    },
+    {
+      "baseline_id": "B-VERBATIM-REPLAY",
+      "expected": "high false_accept ~1.0 on alias-OOD (verbatim replay without rewriting)",
+      "observed": "0/40 correct, false_accept_rate 1.0, diff verbatim minus recon FA 1.0 with McNemar p 6.98e-10",
+      "verdict": "PASS as negative-transfer harm reference",
+      "evidence": "derived_metrics.json:alias_OOD.verbatim_false_accept_rate 1.0, mcnemar_fa_rec_vs_verbatim p 6.98e-10"
+    },
+    {
+      "baseline_id": "B-RAG-TFIDF",
+      "expected": "~0/40 alias-OOD (TF-IDF over intent+template, fit on train only, cannot reason about alias)",
+      "observed": "0/40 correct, latency 0.0025s/task, threshold 0.2 never crossed for alias intents",
+      "verdict": "PASS but weak retriever baseline; corpus size 3 per task intentional",
+      "evidence": "derived_metrics.json:alias_OOD.tfidf_correct_rate 0.0, economics B-RAG-TFIDF"
+    },
+    {
+      "baseline_id": "B-RAG-EMBED",
+      "expected": "real embedding retriever all-MiniLM-L6-v2, expected ~0/40 alias-OOD if rewriting required",
+      "observed": "0/40 correct with 220 encodings, latency 0.0293s/task, normalized embeddings threshold 0.60; strongest retrieval baseline still dominated by reconstruction gap 1.0",
+      "verdict": "PASS as strong retrieval control, but task design makes intent equality guarantee retrieval cannot help",
+      "evidence": "derived_metrics.json:alias_OOD.embed_correct_rate 0.0, provenance sentence_transformers_embedder, economics B-RAG-EMBED"
+    },
+    {
+      "baseline_id": "B-RANDOM",
+      "expected": "~0/40 alias-OOD (chance)",
+      "observed": "0/40 correct",
+      "verdict": "PASS",
+      "evidence": "derived_metrics.json:alias_OOD.random_correct_rate 0.0"
+    },
+    {
+      "baseline_id": "RECONSTRUCTION-RULE",
+      "expected": "40/40 alias-OOD pooled 1.0 per parent audit PASS, with generic choose_adoptions+rewrite_template_multi",
+      "observed": "40/40 pooled, 30/30 orthogonal, 10/10 mixed, 9/9 held-out, false_accept 0.0, ECE 0.08025 bootstrap CI [0.0722,0.0883], conf_std 0.3746; replicates parent fixture byte-identical sha 4abf1487",
+      "verdict": "PASS replication; positive control confirms non-vacuous reconstruction benefit over exact/verbatim/RAG",
+      "evidence": "derived_metrics.json:alias_OOD.reconstruction_correct_count 40, per_family_and_heldout_rule, provenance parent_harness"
+    },
+    {
+      "baseline_id": "RECONSTRUCTION-LEARNED",
+      "expected": "LEARNED within 0.10 correct and 0.05 ECE of RULE on synthetic pooled, CV<=0.5, std>0.05, 3 seeds 42/43/44",
+      "observed": "per-seed 40/40 each, pooled gap 0.0 <=0.10, ECE 0.0518 diff 0.028 <=0.05, CV 0.0 <=0.5, conf_std min 0.3887 >0.05, orthogonal 30/30, mixed 10/10 FA 0.0, binomial p 1e-40, McNemar p 6.98e-10",
+      "verdict": "PASS on synthetic gate G0 and learned S1-S5; but ceiling is compact MLP GRPO with partial structural abstention confidence and two-bin effective ECE — not LLM-scale, not live-validated",
+      "evidence": "derived_metrics.json:alias_OOD.learned_correct_rate 1.0, learned.g0 gap_correct_rule_minus_learned 0.0 gap_ece_abs 0.028, cv 0.0, learned_s_gates all true"
+    }
+  ],
+  "recomputed_metrics": {
+    "alias_OOD_pooled_n": 40,
+    "alias_OOD_reconstruction_correct": 40,
+    "alias_OOD_reconstruction_correct_rate": 1.0,
+    "alias_OOD_learned_correct": 40,
+    "alias_OOD_learned_correct_rate": 1.0,
+    "alias_OOD_exact_match_correct": 0,
+    "alias_OOD_exact_match_rate": 0.0,
+    "alias_OOD_verbatim_false_accept_rate": 1.0,
+    "alias_OOD_tfidf_correct_rate": 0.0,
+    "alias_OOD_embed_correct_rate": 0.0,
+    "alias_OOD_random_correct_rate": 0.0,
+    "wilson_correct_ci_pooled_40": [0.9123754607496077, 1.0],
+    "binomial_p_vs_0_10_pooled_40": 1.0000000000000022e-40,
+    "binomial_p_vs_0_10_orthogonal_30": 1.0000000000000017e-30,
+    "mcnemar_rec_vs_exact_b40_c0_chi2_38_025_p": 6.984393063902417e-10,
+    "mcnemar_learn_vs_exact_b40_c0_p": 6.984393063902417e-10,
+    "mcnemar_fa_rec_vs_verbatim_b0_c40_p": 6.984393063902417e-10,
+    "orthogonal_subset_n_correct_rate": [30, 30, 1.0],
+    "mixed_subset_n_correct_rate": [10, 10, 1.0],
+    "heldout_9_correct_rule": "9/9",
+    "heldout_9_correct_learned": "9/9",
+    "ece_rule_overall": 0.0802516342187119,
+    "ece_rule_bootstrap_ci_2000": [0.07221024654120912, 0.08833407213328238],
+    "ece_learned_overall": 0.051763438088553285,
+    "ece_learned_alias_only": 0.040719169139861955,
+    "ece_gap_abs": 0.028488196130158613,
+    "g0_gap_correct_rule_minus_learned": 0.0,
+    "g0_ece_within_0_05": true,
+    "g0_gap_within_0_10": true,
+    "cv_pooled_correct_across_3_seeds": 0.0,
+    "learned_conf_std_min_across_seeds": 0.3887154784285741,
+    "reconstruction_conf_std": 0.3746120510836857,
+    "exact_match_n_correct_rule": [12, 12, 1.0],
+    "exact_match_n_correct_learned": [12, 12, 1.0],
+    "no_applicable_precision_rule": 1.0,
+    "no_applicable_precision_learned": 1.0,
+    "empty_registry_unknown_rate": 1.0,
+    "template_leak_synthetic_pooled": 0,
+    "registry_intent_equality_leak": 0,
+    "derived_context_forbidden_key_leak": 0,
+    "harness_errors": 0,
+    "fixture_identical_to_parent_sha256": "4abf148721fdee9dfe56ac776f6b3112344821a4ea80d183c5313adeced1f35e",
+    "train_split_heldout_leak": 0,
+    "train_split_mixed_leak": 0,
+    "recomputed_ece_rule_from_bins": 0.08025162566857144,
+    "recomputed_ece_learned_from_bins": 0.05176342953142853,
+    "channel_isolation_RULE_URL_ONLY": 0.0,
+    "channel_isolation_RULE_BODY_ONLY": 0.25,
+    "channel_isolation_RULE_HEADERS_ONLY": 0.5
+  },
+  "claim_ceiling": "MAXIMUM JUSTIFIED: C-SEMANTIC-RESOLVE genuine non-oracle reconstruction (choose_adoptions + rewrite_template_multi with softmax temp 0.15 + deterministic jitter gated UNKNOWN<0.80) SURVIVES synthetic pooled alias-OOD 40/40 (30 orthogonal +10 mixed multi-channel header+body+query within one request), including 9/9 held-out novel forms (X-Api-Key, X-Auth-Key, Api-Token, api_token, authToken, access_key, permission, access_scope, X-Scope) and 10/10 mixed, with correct>=0.50, false_accept 0.0, UNKNOWN precision 1.0, ECE 0.080 (RULE) and 0.052 (compact MLP LEARNED) on minimal derived dict (url/headers_observed/body_observed at synthetic fidelity, ax_tree_snapshot=None), beating exact-matcher 0/40 and verbatim 1.0 FA with McNemar p~7e-10. LEARNED ceiling bounded to compact MLP GRPO (~15k params, 46-dim structural features + shared per-slot adoption head, 21 train tasks, 3 seeds 42/43/44 CV 0.0) matching RULE within 0.10 correct /0.05 ECE point-wise, not LLM-scale, not live-browser, and with partial structural abstention ECE. Does NOT support live WebShop/ALFWorld BrowserGym 0.14.3 1280x720 CDP AX heterogeneity, mixed multi-channel under noisy DOM, production-SPA heterogeneity, LLM-scale GRPO, or product-core economics; live N=0 exploratory, real alias distribution, calibration under non-bimodal confidence, and retrieval-at-scale (corpus>3) remain unknown. C-SEMANTIC-RESOLVE remains HYPOTHESIS/EXPERIMENTAL at this synthetic bounded ceiling, not VALIDATED or PRODUCT_CORE.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35773143736/result.json",
+    "research/experiments/EXP-FRONTIER-35773143736/derived_metrics.json",
+    "research/experiments/EXP-FRONTIER-35773143736/raw_evidence.json",
+    "research/experiments/EXP-FRONTIER-35773143736/tasks.json",
+    "research/experiments/EXP-FRONTIER-35773143736/train_split_inventory.json",
+    "research/experiments/EXP-FRONTIER-35773143736/provenance.json",
+    "research/experiments/EXP-FRONTIER-35773143736/spec.json",
+    "research/experiments/EXP-FRONTIER-35773143736/prereg.md",
+    "research/experiments/EXP-FRONTIER-35773143736/request.json",
+    "research/frontier/run_genuine_35773143736.py",
+    "research/experiments/EXP-FRONTIER-35766532429/handoff.json"
+  ],
+  "unresolved": [
+    "Does compact-MLP learned alias reproduction transfer to organic real-web header/body/auth aliasing on BrowserGym 0.14.3 WebShop/ALFWorld at 1280x720 with real CDP AX trees, including mixed header+body+query within one request and production-SPA visual/timing heterogeneity? 0 live tasks attempted; needs runner with browsergym.webshop/alfworld + playwright browser binaries and at least 20 live tasks with PC-BROWSERGYM-HEALTH>=80%.",
+    "Does LLM-scale GRPO/System-One (frozen primary mechanism) match or beat the compact MLP adapter on same synthetic gates with calibrated model-derived confidence (std>0.05) and CV<=0.5, and what are training wall-clock, tokens/calls, and stability vs rule proxy at that scale? Untestable on CPU-only runner.",
+    "Is learned calibration (ECE) stable when confidence is fully model-derived on abstention strata (currently structural 0.05+hash-jitter) and when ECE is computed with non-empty multi-bin distribution or with bootstrap CI? Alias-only ECE 0.0407 is clean; overall ECE 0.0518 conflates.",
+    "Does ECE within 0.05 hold inferentially after bootstrap on learned ECE (2000 resamples, trajectory-grouped if live) and after alternative binning/threshold sensitivity (e.g., 10 bins, 0.70/0.80/0.90 gates)? Currently 3/5 bins empty makes 5-bin metric degenerate.",
+    "What are retrieval+reconstruction+verification economics vs TFIDF/embed RAG and verbatim replay inclusive of browser/network work, retrieval amortization, and repair boundary cost per successful live task? Synthetic in-process latencies (7.9e-05s learned, 3.48e-04s rule) are not product-relevant.",
+    "What is composition limit of shared per-slot adoption head beyond 3 slots /3 channels and beyond tested DGP (e.g., 4+ headers+body+query+path slots, conflicting literal sets, multi-token values)?"
+  ]
+}

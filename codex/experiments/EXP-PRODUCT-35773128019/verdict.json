@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35773128019",
+  "lane": "product",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-PARAM-INHERIT",
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No valid WebArena-Verified v2 family hold-out measurement obtained. Audit MEASUREMENT_INVALID confirms infrastructure failure correctly classified per AGENTS.md failure discipline and EXPERIMENT_PACKET s9, not scientific falsification: LLM API 0% available (M-LLM-AVAILABLE false, M-LLM-CALLS-TOTAL 0, OPENAI_API_KEY NOT_AVAILABLE, openai package missing), WebArena-Verified v2 not loaded (M-WEBARENA-LOADED false, M-WEBARENA-VALIDATED-V2 false — only 12-family 1-template mock 72 tasks dup ~0.766 vs required 192/49/36 dup 0.9479 param_task 0.8958 AX 0.9), nginx HIT-cache inactive (M-NGINX-HIT-CACHE-AVAILABLE false, no HIT/SWR/SIE/304 header/body/status provenance per runtime EXP-RUNTIME-35764329925), Playwright not installed (M-PLAYWRIGHT-BROWSERS-AVAILABLE false). All primary metrics C1-C4 null (M-SUCCESS-SPIDER null, M-EXECUTABLE-SPIDER null, M-BINDING-CORRECT null, cost ratios null), controls PC1 live / B-COLD/B-RAG/B-REPLAY/B-LITERAL/NC all NOT_MEASURED on required substrate. Synthetic binding on committed kernel (M-SYNTHETIC-BINDING-CORRECT 1.0, M-SYNTHETIC-EXECUTABLE-RATE 1.0, M-SYNTHETIC-UNSUBSTITUTED-TEMPLATES 0, double-prefix resolved, distinct slots, Jaccard 1.0) validates committed fix directionally but does not support WebArena claim. Claim ceiling remains EXPERIMENTAL at narrow synthetic POCs only (EXP-PRODUCT-33528829801 audit PASS single-param 10 identifiers; EXP-PRODUCT-33741671686 audit PASS harness-only 21/21). No VALIDATED, no PRODUCT_CORE promotion."
+    }
+  ],
+  "product_action": "NO_PROMOTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly, plus field-path relevance filter and Jaccard>=0.75 constant-anchor check) enable a real LLM agent (gpt-4o-mini, 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, duplication 0.9479, param_task 0.8958) to achieve EXECUTABLE>=0.75 and binding correctness>=0.90 with zero unsubstituted templates, success margin>=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept<=0.10, UNKNOWN in [0.00,0.15] with ECE<=0.15, and honest amortized saving>=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "reason": "Frozen C1-C6 decision rule requires committed kernel + real LLM+Playwright+header/body/status provenance on WebArena-Verified v2 family hold-out with >=60 tasks, zero value overlap, family-stratified bootstrap. Audit status MEASUREMENT_INVALID, producer_claim_supported false, recomputed synthetic metrics confirm kernel fix committed (src/spider/kernel.py sha 35b1155e6d93b98a364816c0a201ac01da5b95f1c60d908ad5f0307ceb6379d3 contains distill_parameterized, _common_prefix_and_suffix, _field_path_to_slot_name, Jaccard>=0.75, structure_similarity>=0.75) but all WebArena metrics null. Synthetic PC2 passes (1.0 binding exact equality, no double-prefix A_SKU_00_00B_SKU, distinct slots) yet PC1 live nginx HIT not measured. This is operational infrastructure absence per AGENTS.md failure discipline — cannot be encoded as FALSIFIES. C-PARAM-INHERIT therefore remains EXPERIMENTAL at prior narrow ceilings; blocked downstream C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT remain unmeasurable. Recommendation is substrate repair and re-execution without threshold weakening.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35773128019/request.json (director_mandate CONTINUE C-PARAM-INHERIT, sha 7726ab9de938558af144d83eb801b8ec062836dff8d39fc74e452efb22ee5b84)",
+    "research/experiments/EXP-PRODUCT-35773128019/spec.json (frozen C1-C6, measurement_validity 1-8, sha f243d148c8d09c1f3619910fbebe4606b8817018ea053139c83767ed1d496978)",
+    "research/experiments/EXP-PRODUCT-35773128019/freeze.json (frozen_at 2026-09-22T19:24:59.585951+00:00, hashes prereg/spec/request)",
+    "research/experiments/EXP-PRODUCT-35773128019/result.json (status MEASUREMENT_INVALID, outcome INCONCLUSIVE, all primary M-* null, synthetic 1.0 binding, controls NOT_MEASURED)",
+    "research/experiments/EXP-PRODUCT-35773128019/audit.json (status MEASUREMENT_INVALID, producer_claim_supported false, required_fixes 4 substrates, recomputed_metrics synthetic 1.0, claim_ceiling remains EXPERIMENTAL)",
+    "research/experiments/EXP-PRODUCT-35773128019/report.md (infrastructure failure table LLM/WebArena/nginx/Playwright, synthetic evidence table 1.0 bindings)",
+    "research/experiments/EXP-PRODUCT-35773128019/provenance.json (kernel sha 35b1155e 504 lines committed, infra statuses all NOT_AVAILABLE except kernel COMMITTED)",
+    "research/experiments/EXP-PRODUCT-35773128019/synthetic_evidence.json (sha 5315f2ce9dc7d264d103b51530911b88e033671652577baba31801f6bb86c70b, sku_full_B and multi_param 1.0 binding)",
+    "src/spider/kernel.py sha256 35b1155e6d93b98a364816c0a201ac01da5b95f1c60d908ad5f0307ceb6379d3 (committed fix with Jaccard>=0.75, structure_similarity>=0.75, field-path relevance)",
+    "research/experiments/EXP-PRODUCT-35756243655/handoff.json (parent MEASUREMENT_INVALID, sha 92869eb23ba40845288653564771d9593678a2854e28e59dc8fac8a1c14751d9)",
+    "codex/index.json entries EXP-PRODUCT-33528829801 PASS single-param POC and EXP-PRODUCT-33741671686 PASS harness-only 21/21 (prior ceilings)"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:29:00.432172+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Long-horizon agents compound planning errors and path-dependence: early branch choices determine observability, so inheritance must be gated by verifiable intermediate checkpoints and calibrated UNKNOWN abstention, not end-to-end success alone \u2014 prior used to prioritize verification AUROC/UNKNOWN precision over raw success",
+      "Retrieval without calibrated abstention dominates economics via false_accept: a single wrong inheritance costs more than cold re-exploration (contamination, security) \u2014 prior used to require UNKNOWN precision >=0.85 and ECE <=0.15 as economic gates for parameterized inheritance",
+      "Tool/API bypass beats trajectory replay when structured affordances exist (WebMCP, XPaths, endpoints); DOM replay is brittle under drift \u2014 prior used to pivot frontier from URL-path aliasing to WebMCP tool-aliasing and to require header/body/auth parameterization",
+      "Memory write exploitation/exploration tradeoff: indiscriminate accumulation pollutes retrieval and increases staleness; amortization requires freshness/invalidation with provenance \u2014 prior used to park C-DELTA-REPAIR and C-CROSSSITE exhaustive search until invalidation substrate is valid",
+      "Exploration basins are locally attractive: repeated estimator tuning (61 web-dynamics, 43 C-MEAS-VALID consecutive) can produce tunnel_flag true while real gap remains synthetic-to-real, requiring forced orthogonal falsifiable programs (timescale separation, barrier/committor) \u2014 prior used to pivot physics off plug-in CMI loops"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Vs continuing history-conditioned CMI on Intel-supplied SPAs (parent handoff): that question is currently infeasible \u2014 last 2 physics +1 intel all MEASUREMENT_INVALID substrate_unavailable for same Gate0; repeating reproduces invalid measurement. Vs further synthetic SPA estimator tuning: 10+ synthetic DGP experiments already bounded claim ceiling to synthetic-only, no inference to real Web. Timescale/barrier pivots preserve falsification-first mission, use validated Bayesian null framework, and can produce a negative result that still informs exploration (e.g., flat autocorrelation) \u2014 higher expected information than another null-bias fix.",
+      "dependencies": [
+        "EXP-PHYSICS-35578258358",
+        "EXP-PHYSICS-35651906573",
+        "EXP-INTEL-35766523457"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Given exhaustive Gate0 failure (0/2 SPAs pass title>=2/H>0.2/leakage<40%/NL>=50 after 20 cross-site +61 web-dynamics experiments) and Bayesian Dirichlet-Multinomial K=12 N=1999 as first estimator to pass C1+C3 on synthetic SPA but absolute BF -10 to -15 nats favoring memory on real TodoMVC, does an orthogonal falsifiable program \u2014 timescale separation (autocorrelation decay/lag structure) and barrier/committor quantitation (>=10 revisits to same URL,DOM with divergent futures) on existing TodoMVC/BrowserGym WebShop trajectories using trajectory-grouped permutation and B-DOM-SIMILARITY nulls \u2014 reveal beyond-memory predictive structure without requiring new Gate0 SPAs?",
+      "rationale": "Physics tunnel_flag true, 9/10 recent C-WEB-DYNAMICS, 5 estimator families systematically falsified for null bias (>0.2 bits) until Bayesian DM closed null-centering. Absolute BF still favors memory on TodoMVC, and substrate_unavailable blocks the frozen history-conditioned CMI question (EXP-PHYSICS-35756224948 MEASUREMENT_INVALID). Marginal value of another plug-in/KNN/KDE CMI tuning on synthetic 12-state SPA is ~0. Next gate in registry explicitly invites orthogonal programs (effect factorization, barriers, timescales, geometry). Timescale/barrier tests are executable on already-collected BrowserGym trajectories and directly test the beyond-memory claim without Gate0."
+    },
+    "cycle_id": "35773306702",
+    "lane": "physics",
+    "portfolio_assessment": "SPIDER is split: measurement substrate (C-MEAS-VALID) and semantic resolution (C-SEMANTIC-RESOLVE) have advanced to strongest ceilings yet (gunicorn+nginx loopback C1-C10 deterministic PASS; frontier 3 consecutive PASS non-oracle critique-reconstruct adapters generalizing to live BrowserGym WebShop/ALFWorld header/body/auth), while economic core (C-PARAM-INHERIT, C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, C-DELTA-REPAIR, C-CROSSSITE) is blocked on substrate_unavailable (0/2 SPAs pass Gate0 after 20+61 experiments) and vacuous baselines. Highest marginal information now is (1) integrating frontier adapter into kernel to unblock parameterized inheritance correctness, (2) redirecting product to honest amortized residual-novelty economics vs strong external baselines, (3) forcing runtime to paid-CDN/BrowserGym DOM layer for non-degenerate sensitivity, (4) freeing physics/intel from synthetic Gate0 loops via orthogonal timescale/barrier program and Online-Mind2Web/WebMCP import. Delta-repair is parked until paid-CDN HIT is proven; further localhost C-MEAS-VALID compression and synthetic 10D TV work have diminishing returns.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief is accurate on Codex ceilings and correctly identifies the hard blocker (substrate_unavailable 0/2 Gate0, gunicorn+nginx advance, frontier 3 SURVIVES, delta-repair BLOCKED x4) and external shifts (Chrome WebMCP origin trial, Online-Mind2Web 30% live difficulty, HyperAgent/WebCoach/SelfMem caching+verification convergence, AWM workflows). Advice to park exhaustive LFS/CAP search, import Online-Mind2Web, generalize frontier adapter to WebMCP, promote frontier adapter to product, and require runtime paid-CDN/BrowserGym for non-degenerate CIs was adopted. Scout's suggestion to continue distributed C-FRESHNESS via Redis is noted but assigned to runtime hardening rather than graph to avoid duplication. No scout external finding was taken as SPIDER evidence without verification."
+  },
+  "experiment_id": "EXP-PHYSICS-35774039080",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On Intel-supplied production SPAs satisfying Gate 0 (>=2 titles, H(S_next|URL,H_K=3)>0.2 bits, leakage<40%, NL>=50, strata>=10, singleton<50%) with BrowserGym/AgentLab 1280x720 provenance, does history-conditioned CMI I(S_next;DOM_before|URL,H_K=3,Action_leakageFree) with frozen trajectory-grouped permutation (resampling unit trajectory_id, 1000 perms) and restored positive control (P(L flips)=0.3, DOM=SHA256(L||step_mod)) achieve BC PMI>=0.10 bits, Bonferroni p<0.005 and Delta accuracy>0.03 on >=1/2 SPAs (or >=2/3 if Q=3) for R1 or R2, and if falsified does barrier/committor (>=10 revisits to same URL,DOM with divergent futures) or timescale separation reveal beyond-memory dynamics with B-DOM-SIMILARITY executed as frozen?",
+  "lane": "physics",
+  "origin_github_run_id": "35774039080",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35756224948",
+    "path": "research/experiments/EXP-PHYSICS-35756224948/handoff.json",
+    "sha256": "40b352d502295ac1d61ffa34f82726e41ece6f14a91868d747d0483d173b12cb"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "89ae087fcbb96d20c902cfab0dfcb97f9c7b8432415d83adbd8b96d3fb462552",
+  "request_id": "3133ec061d6146f1f7194113",
+  "schema_version": 1
+}
