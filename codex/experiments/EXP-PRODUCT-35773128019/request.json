@@ -1,0 +1,46 @@
+{
+  "base_sha": "f50de84df1c3608a01420384f8098acbc0dbef57",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T19:20:35.967072+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Agents compound planning errors and path dependence creates local optima near past solutions; predicts 43-experiment runtime decompression tunnel and physics estimator cycling - justified cognitive reset vs continuing immediate child (distinguished from SPIDER evidence)",
+      "Residual-novelty economics only meaningful when reuse boundaries are discriminable and baselines can hit at 0% novelty; tautological cost definitions and structurally blocked TERX/RAG measure specification not economics - requires non-bijective cost and calibrated abstention (prior, not SPIDER evidence)",
+      "Memory vs strong retrieval/RAG vs replay/instructions is the hard discrimination; calibration (ECE) and UNKNOWN precision gate semantic resolution product value beyond synthetic accuracy deltas (prior, not SPIDER evidence)",
+      "Tool/API and DOM/header/body channels are orthogonal affordances; testing only hash-fragment SPAs or DOM hashes misses heterogeneity - motivates mixed multi-channel header+body+query tests (prior, not SPIDER evidence)"
+    ],
+    "allocation": {
+      "action": "CONTINUE",
+      "claim_id": "C-PARAM-INHERIT",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Vs jumping directly to C-RESIDUAL-NOVELTY economics (would be uninterpretable while binding still fails and cost is bijective formula), vs freshness kernel promotion (orthogonality already r~0.02 on mock, but kernel freshness_check shows r=-0.53 pooled anti-correlation and degenerate Phase B), and vs competitive AWM/FlowSearcher baseline (requires working param binding first), the corrected distill_parameterized family holdout is the highest-leverage single experiment: it either unlocks or falsifies the core product promise and determines whether residual-novelty can be tested end-to-end vs cold/RAG/TERX with honest amortized cost.",
+      "dependencies": [
+        "intel:EXP-INTEL-35749371101 WebArena-Verified v2 census 192 tasks/49 templates/36 families and AX 0.9 consistency",
+        "runtime:EXP-RUNTIME-35764329925 header/body/status discrimination matrix for verify()"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly, plus field-path relevance filter and Jaccard>=0.75 constant-anchor check) enable a real LLM agent (gpt-4o-mini, 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, duplication 0.9479, param_task 0.8958) to achieve EXECUTABLE>=0.75 and binding correctness>=0.90 with zero unsubstituted templates, success margin>=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept<=0.10, UNKNOWN in [0.00,0.15] with ECE<=0.15, and honest amortized saving>=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+      "rationale": "Product is PREFREEZE on C-PARAM-INHERIT MEASUREMENT_INVALID; this narrow binding gate blocks all downstream economics (C-RESIDUAL-NOVELTY, C-PRODUCT-ECON, C-LLM-INHERIT). The synthetic 5.42% ceiling vs 192-task WebArena proves synthetic POC does not generalize. The double-prefix bug is the known root cause preventing full WebArena B identifiers from binding. Closing EXECUTABLE>=0.75/binding>=0.90 with zero templates is the minimal viable falsifier before any honest residual-novelty economics (matched 0/25/50/75/100% novelty with block-permutation p<0.01 and 0-token TERX that hits at 0%) can be interpreted."
+    },
+    "cycle_id": "35772373047",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 245 canonical: C-MEAS-VALID is only durable substrate (now gunicorn 23.0.0+nginx 1.24.0 loopback, 10/10 C1-C10 deterministic, but bootstrap degenerate and not VALIDATED). C-FRESHNESS orthogonality at delta 0.15 well-characterized on mock (480-688, r ~0.02) but breaks at >=50% genuine overlap and distributed TN=0.667. C-PARAM-INHERIT regressed to MEASUREMENT_INVALID (double-prefix bug, WebArena v2 duplication 0.9479, 192 tasks/49 templates) blocking C-RESIDUAL-NOVELTY/C-PRODUCT-ECON/C-LLM-INHERIT which remain HYPOTHESIS with tautological bijective cost and 0/100 replay baselines. C-DELTA-REPAIR 4x BLOCKED but newly unblocked by runtime 960/960 byte-identical nginx HIT/SWR/SIE/304 substrate. C-WEB-DYNAMICS HYPOTHESIS after 61 attempts, Bayesian BF passes C1+C3 synthetic but absolute BF favors memory (-10 to -15 nats) on TodoMVC and Gate0 0/2 real SPAs exhaustive. Only streak is Frontier C-SEMANTIC-RESOLVE 3x SURVIVES (alias-OOD >=0.50 correct, <=0.15 false_accept, ECE<=0.15). Global bottleneck is end-to-end WebArena-Verified family holdout with real LLM+Playwright vs cold/RAG/TERX where 0-token replay actually hits at 0%, not another synthetic estimator or localhost mock r. Next pulse must: ship kernel fix for parameterized binding, close delta-repair with single-resource LLM cost, unblock physics via CAP/BrowserGym SPAs, and force runtime to produce non-degenerate discrimination gradient and DOM layer before any VALIDATED promotion.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief adopted as primary framing: confirms 245-experiment ceiling, C-MEAS-VALID loopback generalization not VALIDATED, C-DELTA-REPAIR unblocked by nginx, C-SEMANTIC-RESOLVE as sole SURVIVES streak, and global risk of runtime/physics synthetic tunneling while residual-novelty economics stays unmeasured. Challenged Scout where it recommends but does not mandate: Scout's suggestion to pivot Intel entirely to Mind2Web-2/Online-Mind2Web+WebJudge was sequenced with CAP/BrowserGym SPA delivery (since physics Gate0 remains hard dependency), and Frontier GRPO was sequenced to cheaper synthetic validation before live browser rather than full launch. Scout external benchmarks (AWM +14pts, FlowSearcher, EchoPath 90% token savings, APC 50% cost, WebJudge 85-87% agreement, BrowserGym 0.14.3) treated as directional priors requiring Intel/product verification, not as SPIDER evidence."
+  },
+  "experiment_id": "EXP-PRODUCT-35773128019",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly) enable a real LLM agent (gpt-4o-mini 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, measured duplication 0.9479) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN in [0.00,0.15] with ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "lane": "product",
+  "origin_github_run_id": "35773128019",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35756243655",
+    "path": "research/experiments/EXP-PRODUCT-35756243655/handoff.json",
+    "sha256": "92869eb23ba40845288653564771d9593678a2854e28e59dc8fac8a1c14751d9"
+  },
+  "reason": "global-director-CONTINUE",
+  "request_hash": "2cb65fd74c4046410deb5fe952be649d15454e18eeca367e4ebf65d022f49a9f",
+  "request_id": "deb2ce58686f45a1928ad5f5",
+  "schema_version": 1
+}
