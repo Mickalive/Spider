@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PRODUCT-35756243655",
+  "lane": "product",
+  "status": "MEASUREMENT_INVALID",
+  "producer_claim_supported": false,
+  "required_fixes": [
+    "Commit distill_parameterized with _common_prefix_and_suffix, _extract_varying_values, _field_path_to_slot_name to src/spider/kernel.py and verify via import+hash audit (spec falsifier MEASUREMENT_INVALID gate 1; provenance shows sha 46929b3a with only distill/resolve/verify)",
+    "Provision LLM API credentials (OPENAI_API_KEY for gpt-4o-mini-2024-07-18) with 3x exponential backoff; current env has no key and 4/4 prior attempts exit 124 timeout, triggering spec measurement_validity #1 >50% failure MEASUREMENT_INVALID",
+    "Start nginx HIT-cache provenance substrate (currently installed but inactive/dead) to enable _matches postcondition verification on actual DOM/response and HIT/SWR/SIE/304 discrimination (spec measurement_validity #3, decision_rule C5)",
+    "Configure Playwright chromium browsers (currently 1.63.0 installed but no browsers configured, playwright list error) to enable 15-step headless execution at 1280x720 with observe() DOM/CDP",
+    "Load Intel-validated WebArena-Verified v2 family-stratified data with measured duplication 0.9479, AX 0.9 on 20 CDP trees, 49 templates and explicit A/B disjoint pools with zero value overlap; raw /tmp/opencode/webarena-verified.json (812 tasks, 190 intent_template_id, sites shopping/reddit/map/wikipedia/gitlab/shopping_admin, dup ~0.766) is not validated v2 per provenance data_artifacts note"
+  ],
+  "validity_findings": [
+    {
+      "id": "V1_KERNEL_FIX_NOT_COMMITTED",
+      "severity": "critical",
+      "finding": "Committed kernel fix absent. src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 (132 lines) contains only SpiderKernel with distill/resolve/verify/invalidate/observe and helpers _matches/_template_slots/_bind. distill_parameterized, _common_prefix_and_suffix, _extract_varying_values, _field_path_to_slot_name are NOT FOUND by grep. Triggers prereg §5 / spec falsifier MEASUREMENT_INVALID clause 1 (audit import/hash fails). Provenance code_artifacts confirms note MISSING. Previous parent EXP-PRODUCT-35752564139 same gap.",
+      "evidence_ref": "src/spider/kernel.py sha256 46929b3a..., result.json metrics M-KERNEL-FIX-COMMITTED false, provenance.json code_artifacts src/spider/kernel.py, spec.json hypothesis",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V2_LLM_API_UNAVAILABLE",
+      "severity": "critical",
+      "finding": "No LLM substrate. Env has no OPENAI_API_KEY, openai 3.17.0 installed but unconfigured, 4 prior attempts (model_execute.json model opencode/big-pickle exit_code 124 transient-timeout, attempts 4) and 5th attempt success is checkpoint only. M-LLM-AVAILABLE false, M-LLM-FAILURE-RATE 1.0, M-LLM-CALLS-TOTAL 0. Triggers spec measurement_validity #1 and decision_rule MEASUREMENT_INVALID (>50% unavailable after 3x backoff). Per AGENTS.md failure discipline not falsification. All 5 conditions SPIDER/COLD/INSTR/RAG/REPLAY plus B-LITERAL require identical gpt-4o-mini-2024-07-18 temp0 seed42 15 steps 4096 tokens.",
+      "evidence_ref": "result.json metrics M-LLM-AVAILABLE false M-LLM-FAILURE-RATE 1.0, provenance.json infrastructure openai_api_key NOT_AVAILABLE, model_execute.json 4x exit124, spec.json measurement_validity[0]",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V3_WEBARENA_V2_NOT_LOADED",
+      "severity": "critical",
+      "finding": "WebArena-Verified v2 family hold-out not loaded. Raw data /tmp/opencode/webarena-verified.json exists (812 tasks, 190 distinct intent_template_id, 6 sites) but provenance confirms NOT Intel-validated v2 (missing measured duplication 0.9479, AX 0.9 on 20 CDP trees 1280x720, 49-template structure, family A/B disjoint pools with zero value overlap). Recomputed raw distinct 190 vs expected 49, dup approx 0.766 vs 0.9479, families not stratified. Spec requires >=10 families >=60 tasks after dedup with measured not hardcoded duplication. Triggers decision_rule MEASUREMENT_INVALID (value overlap unverified, <60 valid tasks after measured dedup).",
+      "evidence_ref": "provenance.json data_artifacts webarena_raw 812/190/12, result.json metrics M-WEBARENA-LOADED false M-WEBARENA-VALIDATED-V2 false, prereg.md §6.1, spec.json measurement_validity[1]",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V4_NGINX_PROVENANCE_UNAVAILABLE",
+      "severity": "critical",
+      "finding": "Nginx HIT-cache provenance unavailable. /usr/sbin/nginx installed but systemctl status inactive (dead) disabled preset enabled. No HIT/SWR/SIE/304 discrimination, no DOM/response provenance for deterministic verify() via _matches(postconditions, observed_state). PC1 same-A B-REPLAY hit_rate 1.0 at 50 tok cannot be validated, C5 positive control fails. Triggers spec measurement_validity #3 and #6.",
+      "evidence_ref": "provenance.json infrastructure nginx inactive, result.json metrics M-NGINX-HIT-CACHE-AVAILABLE false, spec.json measurement_validity[2][5]",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V5_PLAYWRIGHT_BROWSERS_NOT_CONFIGURED",
+      "severity": "high",
+      "finding": "Playwright 1.63.0 installed at /opt/hostedtoolcache/Python/3.12.14/x64/bin/playwright but browsers not configured (playwright list error). No browser execution possible for 15-step agent, 30s/step timeout, 1280x720 observe(). M-PLAYWRIGHT-BROWSERS-AVAILABLE false. Contributes to MEASUREMENT_INVALID; cannot express any binding/execution effect.",
+      "evidence_ref": "provenance.json infrastructure playwright browsers_configured false, result.json metrics M-PLAYWRIGHT-BROWSERS-AVAILABLE false, spec.json measurement_validity[0]",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V6_NO_OUTCOME_BEARING_MEASUREMENT",
+      "severity": "critical",
+      "finding": "Zero outcome-bearing measurements performed. Per result.json observations and report.md §3, no LLM agent runs, no Playwright executions, no binding success readouts, no per-task CSV (72+ rows expected), no registry.jsonl, no cost_config, no bound_action exact equality logs, no Playwright traces. All metrics in result.json are infrastructure diagnostics (M-PREVIOUS-EXIT-CODE 124 etc.), not M-SUCCESS-SPIDER etc. Status COMPLETE would be invalid; producer correctly used status MEASUREMENT_INVALID outcome INCONCLUSIVE per EXPERIMENT_PACKET §4. No leakage or representation loss to assess beyond absence.",
+      "evidence_ref": "result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics M-LLM-CALLS-TOTAL 0, provenance.json commands_executed, report.md §3",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V7_CONTROLS_NOT_MEASURED_CORRECTLY_ABSENT",
+      "severity": "info",
+      "finding": "All controls correctly reported NOT_MEASURED (not false PASS). PC-PARAM-REGRESSION-AND-LITERAL-HIT, B-COLD, B-INSTR, B-RAG, B-REPLAY, B-LITERAL, NC-SHUFFLED-AND-RANDOM all pass_fail NOT_MEASURED with observed_behavior NOT EXECUTED and evidence_ref citing missing kernel/LLM/nginx. Producer did not hardcode synthetic success (contrast parent EXP-PRODUCT-35752564139 which falsely reported 1.0 binding). Correctly distinguishes infrastructure failure from negative result.",
+      "evidence_ref": "result.json controls.* pass_fail NOT_MEASURED, prereg.md §8, spec.json positive_control/null_control",
+      "category": "reporting_valid"
+    },
+    {
+      "id": "V8_FAMILY_HOLDOUT_UNTESTED",
+      "severity": "critical",
+      "finding": "Family hold-out design (>=10 families, >=60 tasks, 49 templates, zero value overlap A∩B=0, family as block for bootstrap) not exercised, so leakage/sampling integrity, AX 0.9 longest-prefix mapping (50 distinct full-template keys), and duplication 0.9479 handling remain untested for this packet. No site identity leakage, no value overlap, no template diversity, no family-stratified bootstrap CI to audit. Environment could not express tested effect (parameter inheritance across disjoint pools).",
+      "evidence_ref": "spec.json measurement_validity[1][6], prereg.md §6.2, result.json metrics M-NUM-FAMILIES null etc.",
+      "category": "scope_limitation"
+    },
+    {
+      "id": "V9_ECONOMICS_UNMEASURED",
+      "severity": "high",
+      "finding": "Economics (distill 1000 tok only SPIDER at f=10, instr 200/f only INSTR, retrieval 200 tok, verification 50 tok, repair 500 tok+2 calls, per-task tokens/browser/latency, Wilson and family-stratified bootstrap 5000 for M-COST-RATIO-SPIDER-vs-COLD-F10 <=0.75 and vs-RAG <=0.85) not measured. Prior parent had denominator bug (uses SPIDER success 72 not COLD 0 -> inf) and hardcoded 5000/200/50/20; this packet avoids that bug by reporting no ratios (correct). No amortization dishonesty to recompute.",
+      "evidence_ref": "spec.json baselines B-REPLAY hit cost 50 tok, measurement_validity[4], prereg.md §7, report.md §3",
+      "category": "measurement_invalid"
+    },
+    {
+      "id": "V10_PROVENANCE_COMPLETE",
+      "severity": "info",
+      "finding": "Provenance correctly records github_run_id 35756243655 attempt 1, pre_execute_sha 325f6c14cd976e0512c9d30e2dd186201fc8155e, freeze hashes prereg 40f124..., request 6eb39..., spec f1e77..., code hashes kernel 46929b models 338aaf registry 51fb test_kernel ff9c15, data webarena_raw 812 tasks, infrastructure openai 3.17.0 nginx inactive playwright 1.63.0 python 3.12.14, 4 timeouts cat transient. No outcome-bearing commands beyond grep/env/systemctl/playwright list/pytest 3/3 pass. Supports MEASUREMENT_INVALID classification per AGENTS.md failure discipline.",
+      "evidence_ref": "provenance.json, freeze.json, execution_checkpoint.json, model_execute.json",
+      "category": "provenance_valid"
+    }
+  ],
+  "baseline_findings": [
+    {
+      "id": "B-COLD",
+      "expected": "Same model gpt-4o-mini-2024-07-18 temp0 seed42 15 steps 4096 tokens Playwright no memory, success lower than SPIDER +0.12 margin",
+      "observed": "NOT_MEASURED — LLM API unavailable, no gpt-4o-mini runs, no tokens/browser/latency measured",
+      "assessment": "Baseline not exercised; no handicap or leakage. Correctly reported NOT_MEASURED. Strong baseline requirement per spec not satisfiable without LLM.",
+      "evidence_ref": "result.json controls.B-COLD, provenance.json llm_api NOT_AVAILABLE"
+    },
+    {
+      "id": "B-INSTR",
+      "expected": "Same LLM/tools/budget with 200 tok hand-authored instructions amortized 200/f (20 tok at f=10), tests instruction transfer without param slots",
+      "observed": "NOT_MEASURED — LLM unavailable, instruction tokens not injected, no cost decomposition",
+      "assessment": "Not measured; amortization path (200 tok only INSTR) not tested. No validity threat beyond absence.",
+      "evidence_ref": "result.json controls.B-INSTR, spec.json baselines[1]"
+    },
+    {
+      "id": "B-RAG",
+      "expected": "Jaccard 0.30 retrieval over A, verbatim replay without parameterization, 200 tok +150ms retrieval cost, fallback to COLD, hit_rate ~0 on hold-out",
+      "observed": "NOT_MEASURED — LLM unavailable, Jaccard path not exercised, retrieval cost not measured",
+      "assessment": "Not measured; correctly not hardcoded. Family hold-out ensures most misses but not verified.",
+      "evidence_ref": "result.json controls.B-RAG, spec.json baselines[2]"
+    },
+    {
+      "id": "B-REPLAY",
+      "expected": "0-token exact replay (TERX/BrowserBash) exact string equality, hit 50 tok +1 verification (90ms HIT provenance), miss fallback to COLD, hit_rate 0 on hold-out 1.0 on same-A PC1",
+      "observed": "NOT_MEASURED — LLM unavailable and nginx inactive, verification substrate missing, no hit/miss discrimination",
+      "assessment": "Strongest economics baseline not measured. Recomputed hit cost variance cannot be assessed. Correctly not claimed.",
+      "evidence_ref": "result.json controls.B-REPLAY, provenance.json nginx inactive"
+    },
+    {
+      "id": "B-LITERAL",
+      "expected": "Literal distill without slots must fail <=0.15 on held-out B, proving parameterization necessary at duplication 0.9479",
+      "observed": "NOT_MEASURED — LLM unavailable, literal mechanisms not distilled, no success rate",
+      "assessment": "Necessity control not measured. Prior synthetic mock showed 0.0 correctly; here no evidence. Duplication trivialization untested for this packet.",
+      "evidence_ref": "result.json controls.B-LITERAL, spec.json baselines[4]"
+    },
+    {
+      "id": "PC-PARAM-REGRESSION-AND-LITERAL-HIT",
+      "expected": "PC1 same-A hit_rate 1.0 cost 50 tok success 1.0 validates 0-token measurement + nginx verification; PC2 multi-param same-A EXECUTABLE 1.0 binding 1.0 success >=0.90 via committed kernel",
+      "observed": "NOT_MEASURED — kernel fix absent, LLM unavailable, nginx inactive, no browsers",
+      "assessment": "Positive controls not executed. Their failure would be MEASUREMENT_INVALID per spec, not falsification; producer correctly marks NOT_MEASURED. Substrate validation remains open.",
+      "evidence_ref": "result.json controls.PC-PARAM-REGRESSION-AND-LITERAL-HIT, spec.json positive_control"
+    },
+    {
+      "id": "NC-SHUFFLED-AND-RANDOM",
+      "expected": "NC1 shuffled slots success <=COLD+0.05 false_accept >=0.25 binding <0.50; NC2 random retrieval false_accept >=0.30 or success <=COLD, via real registry/_bind/verify with variance (not flat constants)",
+      "observed": "NOT_MEASURED — entire pipeline unexecutable",
+      "assessment": "Null controls not measured. Prior parent incorrectly hardcoded NC2 1.0; this packet correctly reports NOT_MEASURED. If measured, would need to show variance not flat constants.",
+      "evidence_ref": "result.json controls.NC-SHUFFLED-AND-RANDOM, provenance.json dependencies_status"
+    }
+  ],
+  "recomputed_metrics": {
+    "M-LLM-AVAILABLE": {
+      "producer": false,
+      "recomputed": false,
+      "method": "env grep OPENAI_API_KEY none + openai 3.17.0 import check + model_execute.json 4x exit124",
+      "match": true
+    },
+    "M-LLM-CALLS-TOTAL": {
+      "producer": 0,
+      "recomputed": 0,
+      "method": "no LLM calls possible without credentials; provenance M-LLM-FAILURE-RATE 1.0",
+      "match": true
+    },
+    "M-LLM-FAILURE-RATE": {
+      "producer": 1.0,
+      "recomputed": 1.0,
+      "method": "4/4 attempts timeout cat transient, openai package unconfigured",
+      "match": true
+    },
+    "M-KERNEL-FIX-COMMITTED": {
+      "producer": false,
+      "recomputed": false,
+      "method": "sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61, grep NOT FOUND for distill_parameterized/_common_prefix_and_suffix/_extract_varying_values/_field_path_to_slot_name, src/spider/kernel.py 132 lines 6 methods only",
+      "match": true
+    },
+    "M-DISTILL-PARAMETERIZED-EXISTS": {
+      "producer": false,
+      "recomputed": false,
+      "method": "grep -rn distill_parameterized src/ -> NOT FOUND",
+      "match": true
+    },
+    "M-COMMON-PREFIX-AND-SUFFIX-EXISTS": {
+      "producer": false,
+      "recomputed": false,
+      "method": "grep -rn _common_prefix_and_suffix src/ -> NOT FOUND",
+      "match": true
+    },
+    "M-EXTRACT-VARYING-VALUES-EXISTS": {
+      "producer": false,
+      "recomputed": false,
+      "method": "grep -rn _extract_varying_values src/ -> NOT FOUND",
+      "match": true
+    },
+    "M-FIELD-PATH-TO-SLOT-NAME-EXISTS": {
+      "producer": false,
+      "recomputed": false,
+      "method": "grep -rn _field_path_to_slot_name src/ -> NOT FOUND",
+      "match": true
+    },
+    "M-WEBARENA-LOADED": {
+      "producer": false,
+      "recomputed": false,
+      "note": "Raw file exists but not validated v2",
+      "method": "provenance data_artifacts webarena_raw 812 tasks 190 templates, recomputed python count 812 distinct intent_template_id 190 dup 0.766 vs required 0.9479 measured 49 templates AX0.9",
+      "match": true
+    },
+    "M-WEBARENA-VALIDATED-V2": {
+      "producer": false,
+      "recomputed": false,
+      "method": "no measured duplication 0.9479, no AX 0.9 proof on 20 CDP trees, no family A/B disjoint pools",
+      "match": true
+    },
+    "M-NGINX-HIT-CACHE-AVAILABLE": {
+      "producer": false,
+      "recomputed": false,
+      "method": "systemctl status nginx inactive dead disabled preset enabled",
+      "match": true
+    },
+    "M-PLAYWRIGHT-BROWSERS-AVAILABLE": {
+      "producer": false,
+      "recomputed": false,
+      "method": "playwright 1.63.0 installed but browsers not configured (playwright list error)",
+      "match": true
+    },
+    "M-PREVIOUS-EXECUTION-ATTEMPTS": {
+      "producer": 4,
+      "recomputed": 4,
+      "method": "model_execute.json previous_execution_attempts count 4 exit_code 124 cat transient model opencode/big-pickle",
+      "match": true
+    },
+    "M-PREVIOUS-EXIT-CODE": {
+      "producer": 124,
+      "recomputed": 124,
+      "method": "model_execute.json exit_code 124 timeout",
+      "match": true
+    },
+    "M-PREVIOUS-CATEGORY": {
+      "producer": "transient-timeout",
+      "recomputed": "transient",
+      "method": "provenance previous_execution_attempts category transient, result label transient-timeout alias",
+      "match": true
+    },
+    "M-SUCCESS-SPIDER": {
+      "producer": null,
+      "recomputed": null,
+      "reason": "No outcome-bearing measurement; task set not loaded, LLM not run, verification not exercised. Preserved as null per contract mandatory-key semantics (not omitted).",
+      "match": true
+    },
+    "M-EXECUTABLE-SPIDER": {
+      "producer": null,
+      "recomputed": null,
+      "reason": "No distill/resolve executed; kernel fix absent so required_slots/_bind path unexercised",
+      "match": true
+    },
+    "M-BINDING-CORRECT": {
+      "producer": null,
+      "recomputed": null,
+      "reason": "No bound_action exact equality check possible; prior parent recomputed 0/72 double-prefix A_SKU_00_00${sku} bug remains unaddressed but not remeasured here",
+      "match": true
+    },
+    "M-COST-RATIO-SPIDER-vs-COLD-F10": {
+      "producer": null,
+      "recomputed": null,
+      "reason": "No token/browser/latency measured; distill 1000 tok only SPIDER and instr 200/f only INSTR paths not exercised",
+      "match": true
+    }
+  },
+  "claim_ceiling": "No advancement. C-PARAM-INHERIT remains EXPERIMENTAL at prior narrow ceilings only: EXP-PRODUCT-33528829801 single-param POC (10 single-char identifiers, 5.42% analytical token saving, audit PASS) and EXP-PRODUCT-33741671686 harness-only 21/21 EXECUTABLE 21/21 binding correct 0 unsubstituted templates (not kernel, deterministic synthetic, no LLM). This packet (EXP-PRODUCT-35756243655) provides zero live-browser family hold-out evidence (MEASUREMENT_INVALID per all four spec gates: kernel fix not committed, LLM >50% unavailable, WebArena-Verified v2 not loaded, nginx HIT provenance unavailable). No EXECUTABLE >=0.75, no binding >=0.90, no success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, no false_accept/UNKNOWN/ECE, no honest amortized saving >=25% vs COLD or <=0.85x vs RAG, no PC1/PC2 or NC1/NC2 validation. Claim bounded to synthetic harness only; product promotion not authorized; C-LLM-INHERIT and C-PRODUCT-ECON remain HYPOTHESIS/EXPERIMENTAL per parent handoff. Do not cite 1.0 success/binding or 0.010 cost ratio from synthetic constants as evidence.",
+  "evidence_refs": [
+    "research/experiments/EXP-PRODUCT-35756243655/request.json sha 6eb39e0f005c30b317c87cf0a9b3a4e85a8f54e8ecffc861a00c83bba2a94455 (director_mandate REOPEN C-PARAM-INHERIT question EXECUTABLE >=0.75 binding >=0.90 margin >=0.12 false_accept <=0.10 UNKNOWN [0.00,0.15] ECE <=0.15 saving >=25% vs COLD)",
+    "research/experiments/EXP-PRODUCT-35756243655/spec.json sha f1e7729ce50335a66de374e71fee46bea39cd54305d38c610099cd371c4e1d59",
+    "research/experiments/EXP-PRODUCT-35756243655/prereg.md sha 40f1240b7aa94ca092b98625b6d3ab9bde843fa06717bac8a1624918aecdaac0",
+    "research/experiments/EXP-PRODUCT-35756243655/freeze.json frozen_at 2026-09-22T16:50:35.399196+00:00",
+    "research/experiments/EXP-PRODUCT-35756243655/result.json status MEASUREMENT_INVALID outcome INCONCLUSIVE metrics M-KERNEL-FIX-COMMITTED false M-LLM-AVAILABLE false M-WEBARENA-VALIDATED-V2 false",
+    "research/experiments/EXP-PRODUCT-35756243655/report.md §2-6 (substrate diagnostics, no outcome-bearing measurements)",
+    "research/experiments/EXP-PRODUCT-35756243655/provenance.json model opencode/big-pickle category infrastructure-failure pre_execute_sha 325f6c14 code src/spider/kernel.py sha 46929b3a 132 lines MISSING distill_parameterized",
+    "research/experiments/EXP-PRODUCT-35756243655/execution_checkpoint.json pre_execute_sha 325f6c14",
+    "research/experiments/EXP-PRODUCT-35756243655/model_execute.json status success attempt 5 vs earlier 4x exit124 transient",
+    "src/spider/kernel.py sha256 46929b3a951df48d7f9d1fd850871073c0d91c1868aa117e13d389fe274e8d61 lines 132 no distill_parameterized/_common_prefix_and_suffix/_extract_varying_values/_field_path_to_slot_name (grep NOT FOUND)",
+    "src/spider/models.py sha 338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py sha 51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c",
+    "tests/test_kernel.py sha ff9c1561c4169d306fba56d52442546a3bbfdab11d3ab56c51d7369309e9c0b6 3/3 pass base kernel",
+    "/tmp/opencode/webarena-verified.json 812 tasks 190 distinct intent_template_id dup ~0.766 raw not validated v2 (provenance data_artifacts webarena_raw note)",
+    "research/experiments/EXP-PRODUCT-35752564139/handoff.json sha 9c2e7b2ca2e5fc61809a6a7cb532e1fcb36e3befd1607daaef24364d877a6b10 status MEASUREMENT_INVALID (parent, establishes 0/72 binding correctness, verification bypass, hardcoded baselines)",
+    "codex/claim_state.json C-PARAM-INHERIT events EXPERIMENTAL ceiling narrow synthetic single-param and harness-only 21/21 (EXP-PRODUCT-33528829801, EXP-PRODUCT-33741671686)",
+    "research/lanes/registry.json product lane allowed_code_roots src tests sdk pyproject.toml"
+  ],
+  "unresolved": [
+    "Does corrected _common_prefix_and_suffix on disjoint A/B pools (e.g., A_SKU_00_000 vs B_SKU_00_000) achieve EXECUTABLE >=0.75 and binding >=0.90 with zero ${} and exact expected_bound_action equality? (kernel fix not committed)",
+    "What is real LLM success on held-out B for SPIDER vs B-COLD/B-INSTR/B-RAG/B-REPLAY with identical gpt-4o-mini-2024-07-18 temp0 seed42 15 steps 4096 tokens Playwright and deterministic _matches on nginx HIT provenance? (LLM API unavailable, 0% availability)",
+    "What is honest amortized cost per success at f=10 (distill 1000 tok only SPIDER, instr 200/f only INSTR, retrieval 200 tok, verification 50 tok, repair 500 tok+2 calls) and does SPIDER achieve >=25% saving vs COLD and <=0.85x vs RAG with family-stratified bootstrap 95% CI? (no execution)",
+    "Can family hold-out on true WebArena-Verified v2 (192 tasks 49 templates duplication 0.9479 measured AX 0.9 on 20 CDP trees 1280x720) be loaded with >=10 families >=60 tasks and zero value overlap A∩B=0? (raw 812/190 loaded but not validated v2)",
+    "Does kernel survive field-path relevance filtering (url/path body.* headers.*) and structure_similarity >=0.75 without spurious slot hallucination on real browser observations? (no real browser data)",
+    "Is freshness guard behavioral_score >=0.25 and confidence >=0.80 -> UNKNOWN calibrated with ECE <=0.15 required vs excessive abstention? (nginx substrate unavailable)",
+    "Smallest unblock sequence: (1) OPENAI_API_KEY, (2) commit distill_parameterized fix to src/spider/kernel.py, (3) start nginx, (4) configure Playwright browsers, (5) validate Intel WebArena-Verified v2 family-stratified data"
+  ]
+}
