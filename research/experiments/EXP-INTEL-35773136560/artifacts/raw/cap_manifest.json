@@ -1,0 +1,283 @@
+{
+  "status": "BLOCKED",
+  "attempts": [],
+  "cap_present": false,
+  "manifest": null,
+  "hf_exhaustive": {
+    "search_timestamp": "2026-09-22T19:30:34+00:00",
+    "cap_searches": [
+      {
+        "dataset": "ServiceNow/cap",
+        "attempt": 1,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "ServiceNow/cap",
+        "attempt": 2,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "ServiceNow/cap",
+        "attempt": 3,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "cap",
+        "attempt": 1,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "cap",
+        "attempt": 2,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "cap",
+        "attempt": 3,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "agentlab/cap",
+        "attempt": 1,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "agentlab/cap",
+        "attempt": 2,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "agentlab/cap",
+        "attempt": 3,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'agentlab/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "ServiceNow/CAP",
+        "attempt": 1,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/CAP' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "ServiceNow/CAP",
+        "attempt": 2,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/CAP' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "ServiceNow/CAP",
+        "attempt": 3,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'ServiceNow/CAP' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "browsergym/cap",
+        "attempt": 1,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'browsergym/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "browsergym/cap",
+        "attempt": 2,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'browsergym/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "dataset": "browsergym/cap",
+        "attempt": 3,
+        "status": "NOT_FOUND",
+        "error": "DatasetNotFoundError:Dataset 'browsergym/cap' doesn't exist on the Hub or cannot be accessed."
+      },
+      {
+        "fs_path": "data/cap.json",
+        "exists": false
+      },
+      {
+        "fs_path": "data/cap_manifest.json",
+        "exists": false
+      },
+      {
+        "fs_path": "/tmp/cap.json",
+        "exists": false
+      },
+      {
+        "fs_path": "research/intel/cap.json",
+        "exists": false
+      },
+      {
+        "fs_path": "cap.json",
+        "exists": false
+      }
+    ],
+    "mind2web2_searches": [],
+    "hf_api_listings": {
+      "cap_search_cap": [
+        "dartags/danbooru-2408-blind-captions",
+        "kdexd/red_caps",
+        "lambda/pokemon-blip-captions",
+        "mehul7/captioned_military_aircraft",
+        "LDJnr/Capybara",
+        "JasmineQiuqiu/diagrams_with_captions",
+        "Senqiao/LiDAR-LLM-Nu-Caption",
+        "friedrichor/ActivityNet_Captions",
+        "fancyfeast/joy-captioning-20250328b",
+        "internlm/CapRL-2M",
+        "qwdaxc/CaptainCook4D",
+        "internlm/CapRL-QA-75K",
+        "Baron-Sun/CAPC-CG_V1.0",
+        "zlab-princeton/i1-captions",
+        "internlm/CapRL-Video-178K",
+        "internlm/CapRL-Video-QA-20K",
+        "andaba/multi-view_caption",
+        "LiuzhipengUCAS/CAPEval",
+        "atanas1054/navsim-drivewam-vlm-captions",
+        "furproxy/furry_dataset_e621_captions_claims_human_reviewed"
+      ],
+      "mind2web_search": [
+        "osunlp/Online-Mind2Web",
+        "osunlp/Mind2Web",
+        "osunlp/Multimodal-Mind2Web",
+        "llama2d/llama2d-mind2web",
+        "yuchenlin/i-Mind2Web",
+        "Izazk/izaz-mind2web-dataset",
+        "magicgh/MT-Mind2Web",
+        "Izazk/Sequence-of-action-prediction-mind2web",
+        "m-adel98/Mind2WebMerged",
+        "DLIlab/mind2web_description",
+        "BigAction/mind2web",
+        "imenelydiaker/mind2web-extension",
+        "BigAction/mind2web_clean",
+        "iMeanAI/Mind2Web-Live",
+        "rabbit-hmi/MM-Mind2Web-tilde_test_snapshot_20dist",
+        "LangAGI-Lab/Mind2Web-axtree",
+        "LangAGI-Lab/Mind2Web-axtree-cleaned",
+        "LangAGI-Lab/Mind2Web-axtree-cleaned-lite",
+        "LangAGI-Lab/Mind2Web-axtree-cleaned-lite-with-refined-tao",
+        "LangAGI-Lab/Mind2Web-cleaned-lite-desc-with-tao"
+      ],
+      "online_mind2web_search": [
+        "osunlp/Online-Mind2Web",
+        "XueyingJia/online-mind2web-sorted",
+        "Genteki/Online-Mind2Web",
+        "Genteki/Online-Mind2Web-Remote-Browser",
+        "Genteki/Online-Mind2Web-Tiny",
+        "hud-evals/Online-Mind2Web",
+        "hud-evals/Online-Mind2Web-Tiny",
+        "Genteki/Online-Mind2Web-Test",
+        "Genteki/Online-Mind2Web-Tiny-Test",
+        "FRDY/Online-Mind2Web-v5",
+        "junyeong-nero/korean-online-mind2web",
+        "mzio/ff-main-ec-online_mind2web_default-gc-chat_claude-mc-hf_qwen3_4b_inst_2507-lc-claude_age-r0",
+        "mzio/ff-main-ec-online_mind2web_cc-gc-chat_claude-mc-hf_qwen3_4b_inst_2507-lc-claude_agent_so-r0",
+        "jayoohwang/ebrowse-v1.1-online-mind2web-subset"
+      ]
+    }
+  },
+  "error": "Exhaustive HF search: no CAP dump found outside ServiceNow/cap after trying ServiceNow/cap, cap, agentlab/cap, browsergym/cap + HF API list_datasets cap search + FS paths (data/cap.json etc). See hf_exhaustive for proof.",
+  "synthetic_manifest": {
+    "n_tasks": 420,
+    "n_sites": 108,
+    "n_domains": 24,
+    "avg_sites_per_task": 3.0,
+    "avg_actions_per_task": 7.0,
+    "tasks_sample": [
+      {
+        "task_id": 0,
+        "sites": [
+          "site_45",
+          "site_38",
+          "site_26"
+        ],
+        "domains": [
+          "domain_21",
+          "domain_14",
+          "domain_2"
+        ],
+        "actions": [
+          {
+            "target_text": "action_206 element 34",
+            "site": "site_45"
+          },
+          {
+            "target_text": "action_413 element 28",
+            "site": "site_45"
+          },
+          {
+            "target_text": "action_486 element 2",
+            "site": "site_26"
+          },
+          {
+            "target_text": "action_135 element 18",
+            "site": "site_26"
+          },
+          {
+            "target_text": "action_446 element 49",
+            "site": "site_38"
+          },
+          {
+            "target_text": "action_430 element 49",
+            "site": "site_45"
+          },
+          {
+            "target_text": "action_19 element 35",
+            "site": "site_38"
+          }
+        ],
+        "instruction": "Task instruction 0 search and purchase"
+      },
+      {
+        "task_id": 1,
+        "sites": [
+          "site_66",
+          "site_16",
+          "site_77"
+        ],
+        "domains": [
+          "domain_18",
+          "domain_16",
+          "domain_5"
+        ],
+        "actions": [
+          {
+            "target_text": "action_296 element 50",
+            "site": "site_66"
+          },
+          {
+            "target_text": "action_75 element 6",
+            "site": "site_77"
+          },
+          {
+            "target_text": "action_443 element 8",
+            "site": "site_16"
+          },
+          {
+            "target_text": "action_243 element 6",
+            "site": "site_66"
+          },
+          {
+            "target_text": "action_484 element 44",
+            "site": "site_66"
+          },
+          {
+            "target_text": "action_218 element 38",
+            "site": "site_77"
+          },
+          {
+            "target_text": "action_253 element 44",
+            "site": "site_16"
+          }
+        ],
+        "instruction": "Task instruction 1 search and purchase"
+      }
+    ]
+  },
+  "note": "Real CAP dump unavailable; synthetic manifest generated for pipeline validation only, marked MEASUREMENT_INVALID for decision"
+}

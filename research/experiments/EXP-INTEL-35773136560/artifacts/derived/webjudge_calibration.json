@@ -1,0 +1,43 @@
+{
+  "status": "HF_LISTED_NOT_LOADED",
+  "webjudge_available": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "hf_search_webjudge": [
+        "osunlp/WebJudge-7B",
+        "mradermacher/WebJudge-7B-GGUF",
+        "mradermacher/WebJudge-7B-i1-GGUF",
+        "hyungjoochae/Qwen3-4B-verienv-webjudge-filtered-action-tag-final",
+        "hyungjoochae/qwen3-4b-verienv-webjudge-filtered-action-tag-minstep3-checkpoint-800",
+        "hyungjoochae/qwen3-4b-verienv-webjudge-filtered-action-tag-minstep3-checkpoint-2052"
+      ],
+      "status": "HF_LISTED"
+    },
+    {
+      "attempt": 2,
+      "hf_search_webjudge": [
+        "osunlp/WebJudge-7B",
+        "mradermacher/WebJudge-7B-GGUF",
+        "mradermacher/WebJudge-7B-i1-GGUF",
+        "hyungjoochae/Qwen3-4B-verienv-webjudge-filtered-action-tag-final",
+        "hyungjoochae/qwen3-4b-verienv-webjudge-filtered-action-tag-minstep3-checkpoint-800",
+        "hyungjoochae/qwen3-4b-verienv-webjudge-filtered-action-tag-minstep3-checkpoint-2052"
+      ],
+      "status": "HF_LISTED"
+    },
+    {
+      "attempt": 3,
+      "hf_search_webjudge": [
+        "osunlp/WebJudge-7B",
+        "mradermacher/WebJudge-7B-GGUF",
+        "mradermacher/WebJudge-7B-i1-GGUF",
+        "hyungjoochae/Qwen3-4B-verienv-webjudge-filtered-action-tag-final",
+        "hyungjoochae/qwen3-4b-verienv-webjudge-filtered-action-tag-minstep3-checkpoint-800",
+        "hyungjoochae/qwen3-4b-verienv-webjudge-filtered-action-tag-minstep3-checkpoint-2052"
+      ],
+      "status": "HF_LISTED"
+    }
+  ],
+  "calibration_detail": "Would run 20-task spot-check with confusion matrix vs human labels"
+}

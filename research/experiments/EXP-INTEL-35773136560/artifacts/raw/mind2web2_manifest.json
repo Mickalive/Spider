@@ -1,0 +1,57 @@
+{
+  "status": "FOUND",
+  "attempts": [
+    {
+      "dataset": "osunlp/Mind2Web",
+      "attempt": 1,
+      "status": "FOUND",
+      "splits": [
+        "train"
+      ]
+    }
+  ],
+  "mind2web2_present": true,
+  "online_mind2web_present": false,
+  "hf_search": {
+    "mind2web_list": [
+      "osunlp/Online-Mind2Web",
+      "osunlp/Mind2Web",
+      "osunlp/Multimodal-Mind2Web",
+      "llama2d/llama2d-mind2web",
+      "yuchenlin/i-Mind2Web",
+      "Izazk/izaz-mind2web-dataset",
+      "magicgh/MT-Mind2Web",
+      "Izazk/Sequence-of-action-prediction-mind2web",
+      "m-adel98/Mind2WebMerged",
+      "DLIlab/mind2web_description",
+      "BigAction/mind2web",
+      "imenelydiaker/mind2web-extension",
+      "BigAction/mind2web_clean",
+      "iMeanAI/Mind2Web-Live",
+      "rabbit-hmi/MM-Mind2Web-tilde_test_snapshot_20dist",
+      "LangAGI-Lab/Mind2Web-axtree",
+      "LangAGI-Lab/Mind2Web-axtree-cleaned",
+      "LangAGI-Lab/Mind2Web-axtree-cleaned-lite",
+      "LangAGI-Lab/Mind2Web-axtree-cleaned-lite-with-refined-tao",
+      "LangAGI-Lab/Mind2Web-cleaned-lite-desc-with-tao"
+    ],
+    "online_list": [
+      "osunlp/Online-Mind2Web",
+      "XueyingJia/online-mind2web-sorted",
+      "Genteki/Online-Mind2Web",
+      "Genteki/Online-Mind2Web-Remote-Browser",
+      "Genteki/Online-Mind2Web-Tiny",
+      "hud-evals/Online-Mind2Web",
+      "hud-evals/Online-Mind2Web-Tiny",
+      "Genteki/Online-Mind2Web-Test",
+      "Genteki/Online-Mind2Web-Tiny-Test",
+      "FRDY/Online-Mind2Web-v5",
+      "junyeong-nero/korean-online-mind2web",
+      "mzio/ff-main-ec-online_mind2web_default-gc-chat_claude-mc-hf_qwen3_4b_inst_2507-lc-claude_age-r0",
+      "mzio/ff-main-ec-online_mind2web_cc-gc-chat_claude-mc-hf_qwen3_4b_inst_2507-lc-claude_agent_so-r0",
+      "jayoohwang/ebrowse-v1.1-online-mind2web-subset"
+    ]
+  },
+  "found_dataset": "osunlp/Mind2Web",
+  "revision_hash": "unknown - datasets cache"
+}

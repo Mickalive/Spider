@@ -1,0 +1,109 @@
+{
+  "WebArena": {
+    "env": "WebArena",
+    "attempts": [
+      {
+        "attempt": 1,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 2,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 3,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      }
+    ],
+    "status": "BLOCKED",
+    "error": "ModuleNotFoundError: No module named 'browsergym'",
+    "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+    "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'",
+    "playwright_show": "WARNING: Package(s) not found: playwright\n"
+  },
+  "WebShop": {
+    "env": "WebShop",
+    "attempts": [
+      {
+        "attempt": 1,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 2,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 3,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      }
+    ],
+    "status": "BLOCKED",
+    "error": "ModuleNotFoundError: No module named 'browsergym'",
+    "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+    "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'",
+    "playwright_show": "WARNING: Package(s) not found: playwright\n"
+  },
+  "WebLINX": {
+    "env": "WebLINX",
+    "attempts": [
+      {
+        "attempt": 1,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 2,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 3,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      }
+    ],
+    "status": "BLOCKED",
+    "error": "ModuleNotFoundError: No module named 'browsergym'",
+    "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+    "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'",
+    "playwright_show": "WARNING: Package(s) not found: playwright\n"
+  },
+  "WorkArena": {
+    "env": "WorkArena",
+    "attempts": [
+      {
+        "attempt": 1,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 2,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      },
+      {
+        "attempt": 3,
+        "error": "ModuleNotFoundError: No module named 'browsergym'"
+      }
+    ],
+    "status": "BLOCKED",
+    "error": "ModuleNotFoundError: No module named 'browsergym'",
+    "pip_show": "WARNING: Package(s) not found: browsergym-core\n",
+    "agentlab_error": "ModuleNotFoundError:No module named 'agentlab'",
+    "playwright_show": "WARNING: Package(s) not found: playwright\n"
+  },
+  "_webarena_pin": {
+    "exists": true,
+    "n_tasks": 812,
+    "sha256": "d65275660814663375028e9017e1f929e3c38321041b125795e2713b52243d30",
+    "note": "Reused for pin verification"
+  },
+  "_pip_freeze": "aiohappyeyeballs==2.7.1\naiohttp==3.14.3\naiosignal==1.4.0\nanyio==4.15.1\nattrs==26.1.0\ncertifi==2026.7.22\ncharset-normalizer==3.5.1\nclick==8.5.0\ncloudpickle==3.1.2\ndatasets==5.0.1\ndill==0.4.1\nfilelock==4.0.1\nfrozenlist==1.8.0\nfsspec==2026.6.0\nh11==0.16.0\nhf-xet==1.6.0\nhttpcore==1.0.9\nhttpx==0.28.1\nhuggingface_hub==1.32.0\nidna==3.20\njoblib==1.6.0\nmultidict==6.9.1\nmultiprocess==0.70.19\nnarwhals==2.26.0\nnumpy==2.5.3\npackaging==26.3\npandas==3.0.6\npropcache==0.5.4\npyarrow==25.0.1\npython-dateutil==2.9.0.post0\nPyYAML==6.0.3\nrequests==2.34.2\nscikit-learn==1.9.1\nscipy==1.18.1\nsix==1.17.0\nthreadpoolctl==3.7.0\ntqdm==4.70.1\ntyping_extensions==4.16.0\nurllib3==2.8.0\nxxhash==4.0.1\nyarl==1.25.1\n",
+  "_expected_pins": {
+    "browsergym-core": "0.14.3",
+    "agentlab": "0.14.3",
+    "playwright": "1.63.0",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "_install_dryrun_browsergym-core": "Collecting browsergym-core==0.14.3\n  Downloading browsergym_core-0.14.3-py3-none-any.whl.metadata (1.2 kB)\nCollecting beautifulsoup4>=4.12 (from browsergym-core==0.14.3)\n  Downloading beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)\nCollecting gymnasium>=0.27 (from browsergym-core==0.14.3)\n  Downloading gymnasium-1.3.0-py3-none-any.whl.metadata (10 kB)\nCollecting lxml<6.0.0,>=4.9 (from browsergym-core==0.14.3)\n  Downloading lxml-5.4.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.5 k",
+  "_install_dryrun_agentlab": "ERROR: Could not find a version that satisfies the requirement agentlab==0.14.3 (from versions: 0.3.0, 0.3.1, 0.3.2.dev0, 0.3.2.dev1, 0.3.2.dev2, 0.3.2.dev3, 0.3.2.dev4, 0.3.2.dev5, 0.3.2.dev6, 0.3.2.dev7, 0.3.2.dev9, 0.3.2.dev10, 0.3.2.dev11, 0.3.2, 0.4.0.dev0, 0.4.0.dev1, 0.4.0.dev2, 0.4.0.dev3, 0.4.0.dev4, 0.4.0.dev5, 0.4.0.dev6, 0.4.0, 0.4.1.dev0, 0.4.1.dev1, 0.4.1.dev2, 0.4.1, 0.4.2)\nERROR: No matching distribution found for agentlab==0.14.3\n",
+  "_install_dryrun_playwright": "Collecting playwright==1.63.0\n  Downloading playwright-1.63.0-py3-none-manylinux1_x86_64.whl.metadata (3.3 kB)\nCollecting pyee<14,>=13 (from playwright==1.63.0)\n  Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)\nCollecting greenlet<4.0.0,>=3.1.1 (from playwright==1.63.0)\n  Downloading greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)\nRequirement already satisfied: typing-extensions in /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site"
+}

@@ -1,0 +1,38 @@
+{
+  "shuffle_null": {
+    "status": "SYNTHETIC_DEMO",
+    "reason": "CAP real dump unavailable, synthetic pipeline validation only - outside-ServiceNow/cap exhaustive search proves MEASUREMENT_INVALID",
+    "k": 15,
+    "k_half": 7,
+    "k_double": 30,
+    "overlap": 1.0,
+    "ci_lower": 1.0,
+    "ci_upper": 1.0,
+    "shuffle_mean": 0.07395745780998507,
+    "shuffle_std": 0.044471912042338795,
+    "shuffle_p95": 0.14257725041824187,
+    "excess": 0.9260425421900149,
+    "vocab_hash": "ff8357fc234816cc1f8d1c20744c3c40a18239f3bce394758e15d3d32ef19127",
+    "centroids_hash": "b6875c7b5843738e702d4cdb3f9629d620ade9825c6994d013441ba10632a3d6",
+    "n_train_tasks": 305,
+    "n_held_tasks": 115,
+    "n_unique_train": 305,
+    "train_sites": 73,
+    "held_sites": 32,
+    "sensitivities": {
+      "k_half": {
+        "k": 7,
+        "overlap": 1.0
+      },
+      "k_double": {
+        "k": 30,
+        "overlap": 1.0
+      }
+    },
+    "is_synthetic": true,
+    "note": "Synthetic CAP run demonstrates pipeline but cannot satisfy PC4_CAP_SPLIT_INTEGRITY for decision; real H2B => MEASUREMENT_INVALID"
+  },
+  "seed": 35725763380,
+  "perms": 1000,
+  "note": "Website-label shuffle null; synthetic demo only due to CAP unavailable outside ServiceNow/cap"
+}
