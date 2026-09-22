@@ -1,0 +1,46 @@
+{
+  "base_sha": "940dbe657ba363ed2feced28a29e49c7319fbf04",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T22:00:50.165472+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local optima and path dependence: strong retrieval without parameterization prematurely converges to literal replay; exhaustive exploration wastes cost on known structure \u2014 motivates explicit novelty budgeting and testing residual-novelty tracking (SPIDER prior, not SPIDER evidence)",
+      "Planning horizon and error accumulation: long-horizon agents (>15 steps) compound early tool-choice errors and self-generated subproblems; freshness/UNKNOWN and delta repair matter only on real 15-step BrowserGym/WebArena trajectories, not 6-step TodoMVC mocks (prior)",
+      "Workflow compilation: mechanisms encoding preconditions, parameter slots, postcondition guards and direct API/tool bypass compress exploration more than browser replay \u2014 motivates WebAPI endpoint+method+auth mining as higher-leverage than retrieval complementarity (prior)",
+      "Context salience / attentional anchoring: agents reuse superficially similar fragments even when stale, causing false accepts without verification and calibration (ECE, UNKNOWN) \u2014 motivates false_accept<=0.10 and calibration gates (prior)",
+      "Exploration/exploitation and caching verification: deterministic script caching (BrowserUse, computer-use-cache) already productizes exact replay at 99% cost reduction; SPIDER wedge must be parameterized, state-conditioned, freshness-gated reuse with verification/repair economics (prior)"
+    ],
+    "allocation": {
+      "action": "REOPEN",
+      "claim_id": "C-CROSSSITE",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Versus immediately adopting Mind2Web-2 long-horizon (130 tasks, Agent-as-a-Judge) / Online-Mind2Web as replacement holdout (requires new HF revision pin, WebJudge evaluator, TF-IDF->k-means k=min(50,unique/20) harness \u2014 higher preparation cost and still needs AX validity fix) and versus continuing exhaustive CAP 420-task enumeration (already 0 qualifying, diminishing returns). Correcting AX measurement first is prerequisite for any holdout; Mind2Web-2 should be intel's second step after this fix is verified, not a substitute that leaves the placeholder bug unaddressed.",
+      "dependencies": [
+        "runtime:BrowserGym 0.14.3 / AgentLab 0.4.2 shim"
+      ],
+      "parent_handoff_disposition": "USE",
+      "question": "After pinning BrowserGym-core 0.14.3 + AgentLab 0.4.2 + Playwright 1.63.0 at 1280x720 and fixing __SHOPPING__/path placeholder expansion to task-specific product/category/cart pages (not ?task= homepage), does N=20 live CDP Accessibility.getFullAXTree captures (10 families x2, longest-prefix without fallback, seed 35725763380) achieve AX_consistency >=0.6 (2000 bootstrap CI lower>0.5, 1000 shuffle null p<0.05, delta>=0.2 vs prior 0.2857 invalid and 0.9 single-family inflated), and can Stagehand selector+DOM-hash caching replication report HIT/MISS >=0.8 false_accept<0.05 (NC4 random null p<0.05, cold vs cached latency/tokens) plus relaxed Gate0 census (H>0.1 NL>=20 titles>=1) delivering multi-step BrowserGym rollouts to unblock physics/product without exhaustive 567MB LFS / CAP 420-task search?",
+      "rationale": "Intel IDLE after REVISE 35782546046 degenerate homepage-only placeholder bug prevents discriminating AX_consistency test; 9/10 recent on C-CROSSSITE tunnel. WebArena-Verified v2 census validated (192/49/36) but AX measurement invalid. This single bug blocks graph/product parameterized transfer (family hold-out) and physics Gate0 relaxation. Fix is low-cost, deterministic, high cross-lane leverage. Stagehand baseline (BrowserUse competitor) provides required strong baseline for C-PRODUCT-ECON. Relaxed Gate0 H>0.1 NL>=20 avoids exhaustive search that yielded 0/3 qualifying SPAs."
+    },
+    "cycle_id": "35789427859",
+    "lane": "intel",
+    "portfolio_assessment": "SPIDER at 256 canonical experiments has validated only narrow localhost/single-host ceilings (gunicorn+nginx loopback EXPERIMENTAL, synthetic POMDPs, 40/40 synthetic alias-OOD). Core promises C-RESIDUAL-NOVELTY (pay cost of novelty), C-LLM-INHERIT, C-PARAM-INHERIT family hold-out, and C-WEB-DYNAMICS remain HYPOTHESIS or synthetic-only after 60 recent experiments. Three systemic blockers dominate: (1) Gate0 substrate_unavailable \u2014 0 qualifying production SPAs across 20+ physics/intel attempts, (2) paid-tier CDN + BrowserGym 1280x720 substrate_unavailable blocking 44 runtime loops and 17 C-MEAS-VALID experiments, (3) kernel integration gap \u2014 distill_parameterized() fixes validated only in harness, not src/spider/kernel.py. Tunnel flags in runtime (44x C-MEAS-VALID), physics (9x C-WEB-DYNAMICS), frontier (6x C-SEMANTIC-RESOLVE), intel (9x C-CROSSSITE) demand cognitive resets. Highest marginal value: fix intel AX measurement to unblock graph/product, deliver runtime writable/drift shim instead of CDN loop, let graph finish kernel family hold-out, pivot physics to orthogonal timescale/barrier without Gate0, pivot product to residual-novelty economics (direct test of work compression vs BrowserUse caching), and pivot frontier to WebAPI endpoint mining over incremental retrieval hierarchy. Frozen experiments (graph 35787691878, physics 35787698409, runtime 35784838353, product 35782537266) are preserved and run to audit.",
+    "schema_version": 1,
+    "scout_assessment": "Scout correctly diagnoses program-level ceilings (localhost loopback, synthetic-only, 0 Gate0 SPAs, kernel integration gap) and identifies tunnel risk across 4 lanes, BrowserUse deterministic caching and Mind2Web-2 long-horizon/Online-Mind2Web as external context, and frontier synthetic 30/30 vs live 0/0 bound. Brief was adopted for portfolio prioritization but challenged as authority: (1) did not mechanically force pivots on flagged lanes \u2014 graph CONTINUE retained despite tunnel logic because kernel fix is highest product leverage; (2) Mind2Web-2/WebJudge recommended as replacement holdout was delegated to intel for deep verification, not accepted as ready substrate \u2014 intel priority remains fixing AX placeholder bug that gates all holdouts; (3) frontier live validation endorsed by scout as cheapest path to C-SEMANTIC-RESOLVE VALIDATED was superseded by higher-leverage WebAPI mining that does not require 0/20 health BrowserGym; (4) runtime PARK vs PIVOT to writable/drift chosen over scout's alternative trajectory-provenance service alone. Scout's three blocker framing and cross-lane dependency map directly shaped runtime PIVOT and intel REOPEN decisions."
+  },
+  "experiment_id": "EXP-INTEL-35789942386",
+  "inherited_last_verdict": "REVISE \u2014 degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
+  "inherited_next_question": "After fixing __SHOPPING__/path placeholder expansion to capture task-specific product/category/cart pages at 1280x720 CDP Accessibility.getFullAXTree (600-2000 nodes) and re-deriving selector+relevant-subtree SHA256 with N=2, can 10 families x2 diverse-page AX_consistency (longest-prefix without fallback, 2000 bootstrap CI lower>0.5, 1000 shuffle null p<0.05, delta>=0.2 vs prior 0.2857) discriminate vs prior single-family 0.9, and can Stagehand N=2 drift-injected MISS>=0.8 false_accept<0.05 with NC4 random null p<0.05 and measured cold vs cached latency/tokens, plus multi-step BrowserGym rollouts for relaxed Gate0 H>0.1 NL>=20 titles>=1, unblock within-store parameterized transfer and shipped baseline?",
+  "lane": "intel",
+  "origin_github_run_id": "35789942386",
+  "parent_handoff": {
+    "experiment_id": "EXP-INTEL-35782546046",
+    "path": "research/experiments/EXP-INTEL-35782546046/handoff.json",
+    "sha256": "23bebb187082ab0617422aafaf997f5eec6f5da18c0d7908686e50930c911bca"
+  },
+  "reason": "global-director-REOPEN",
+  "request_hash": "e4743a3cdf58024325237fd52b8312260237f6628735596cdd35bf71dd371580",
+  "request_id": "2c603c14df039da8d51b888f",
+  "schema_version": 1
+}

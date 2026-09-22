@@ -1963,6 +1963,16 @@
         "claim_id": "C-CROSSSITE",
         "status": "HYPOTHESIS",
         "reason": "No cross-site evidence attempted or obtained; experiment scoped to single-store WebArena-Verified shopping (One Stop Market, 192 tasks, single container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945). Cross-store mechanism overlap remains vacuously 0 (single store) as established in parent EXP-INTEL-35697055679. Prior exhaustive CAP/Online-Mind2Web joint enumeration 0/3 strict Gate0 remains MEASUREMENT_INVALID per Director SUPERSEDE, not global falsification. Claim remains HYPOTHESIS pending cross-store dataset or verified multi-store holdout."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35789942386",
+        "lane": "intel",
+        "created_at": "2026-09-22T22:00:50.165472+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+        "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
+        "claim_id": "C-CROSSSITE",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "No cross-site evidence attempted; single-store WebArena-Verified v2 shopping only. Measurement invalid due to V1 pattern truncation ([:20] generic/tablist/listitem/link:Skip to Content captures only layout, product-specific elements beyond token 20 truncated) and V2 product URL scarcity (only 4/36 families have __SHOPPING__/path product URLs; 6/10 sampled families are homepage-only identical 1430-node AX tautology) yielding AX_consistency 1.0 variance 0 bootstrap CI[1.0,1.0] shuffle p=1.0 degenerate (result.json M-AX-CONSISTENCY, audit V1 critical, V2 critical) and B-RANDOM-AX-SHUFFLE FAIL. Infrastructure precedence (<5 diverse product-page families) forces MEASUREMENT_INVALID substrate_unavailable per frozen decision_rule, not FALSIFIED. Cross-site generalization remains untested."
       }
     ],
     "C-LLM-INHERIT": [
@@ -2145,6 +2155,16 @@
         "claim_id": "C-LLM-INHERIT",
         "status": "EXPERIMENTAL",
         "reason": "No discriminating evidence for identifiable same-mechanism parameterized transfer within WebArena-Verified v2 shopping via longest-prefix without fallback: 8/10 families yielded identical homepage 'One Stop Market' AX (1430 nodes each, 16/20 valid captures, mean AX_consistency 1.0 CI[1.0,1.0] p=1.0 vs shuffle null mean 1.0 p95 1.0) due to __SHOPPING__/path placeholder bug in get_task_start_url (4/20 ERROR Protocol invalid URL for families 136/222) forcing zero variance (audit V1/V2 critical, validity_findings degenerate zero-variance). Frozen adequate run requires >=10 families with task-specific product/category/cart pages at 1280x720 CDP 600-2000 nodes not met (valid_families 8 <10). Permutation FAIL (p=1.0>=0.05) and delta_vs_prior 0.7143 are arithmetic tautologies from page identity, not parameterized transfer. Prior census-level EXPERIMENTAL ceiling (192 shopping tasks, 49 intent templates, 36 families >=3, duplication 0.9479 CI[0.9167,0.9792], param_task 0.8958) confirmed at 192/36 and unchanged; element-pattern AX transfer remains UNMEASURED pending placeholder fix and re-capture on diverse pages."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35789942386",
+        "lane": "intel",
+        "created_at": "2026-09-22T22:00:50.165472+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+        "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
+        "claim_id": "C-LLM-INHERIT",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Within-store parameterized transfer via longest-prefix without fallback remains unmeasured: placeholder fix get_task_start_url __SHOPPING__/path->base+path correctly loads distinct product pages (families 136,145,196,222 => 8 captures 626-1150 nodes distinct AX hash, provenance placeholder_fix verified) but element-pattern grammar degenerate (V1) makes all 10 families consistency 1.0 zero variance, PC2 FAIL, NC1 p=1.0 FAIL, delta 0.7143 vs prior 0.2857 tautological. Audit recomputed M-AX-CONSISTENCY mean 1.0 CI[1.0,1.0] variance 0 shuffle mean 1.0 p95 1.0 p=1.0 matches producer; per prereg section10 variance=0 with diverse pages would be FALSIFIED-IN-SETTING for this grammar but falsifier infrastructure precedence (<5 path families) triggers MEASUREMENT_INVALID. Also sampling deviation V5 stratified path-first not pure random seed 35725763380. No validation of within-store hold-out."
       }
     ],
     "C-PRODUCT-ECON": [
@@ -2407,6 +2427,16 @@
         "claim_id": "C-PRODUCT-ECON",
         "status": "HYPOTHESIS",
         "reason": "Stagehand selector+DOM-hash verb cache (N=2, SHA256, per-project scope, shipped Feb 2026 2x/~30%) not replicated as spec: synthetic selector 'fam{id}_task{id}' not derived from AX/DOM element, dom_hash full-page outerHTML not spec subtree, latency_ms 0.0007-0.019 dict-lookup microsecond not cold LLM vs cached, tokens_saved hardcoded 1000/hit, NC3_STAGEHAND_DOM_DRIFT NOT_TESTED (drift_injected false for all 68 calls) and NC4_STAGEHAND_RANDOM_CACHE NOT_TESTED, so M-STAGEHAND-FALSE-ACCEPT 0.0 tautological and MISS>=0.8 unmeasured; audit baseline_findings B-STAGEHAND-VERB fail, NC3 fail, NC4 not_tested. Hit_rate 0.941 (64/68) and cross-project leakage 0.0 (5 tests) on synthetic keys do not demonstrate discriminating HIT/MISS or speedup/cost. Prior extrapolation REJECTED (logistic L=0.5654 vacuous step-function, 4 points/3 params, zero information beyond n=20) remains CLOSED per EXP-INTEL-35551517470; Stagehand competitive floor vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM remains UNMEASURED."
+      },
+      {
+        "experiment_id": "EXP-INTEL-35789942386",
+        "lane": "intel",
+        "created_at": "2026-09-22T22:00:50.165472+00:00",
+        "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+        "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
+        "claim_id": "C-PRODUCT-ECON",
+        "status": "MEASUREMENT_INVALID",
+        "reason": "Stagehand selector+relevant-subtree SHA256 verb cache not spec-compliant: V3 drift_miss_rate 0.0 (20/20 HIT despite drift) recomputed false_accept 1.0 contradicting result.json 0.0, hash computed from unmutated page.content() not after mutation, hit_rate 0.948 (92/97) inflated by identical homepage DOMs and synthetic fam_task fallback selectors, speedup 0.0954 inverted (dict-lookup microsecond vs real dispatch) and tokens_saved 1000 hardcoded not measured via tiktoken (audit V3, baseline_findings B-STAGEHAND-VERB FAIL_NOT_COMPLIANT, NC3 FAIL, NC4 NOT_TESTED, PC3 PARTIAL, V4 gate0 multi-step unavailable). B-STAGEHAND-VERB ~2x/~30% Feb2026 baseline NOT delivered. Gate0 relaxed 0/20 strict 0/20 on single-page 0-transition captures is descriptive viewport-only, not evidence against H>0.1 NL>=20 (V4). No economic comparison vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM."
       }
     ],
     "C-MEAS-VALID": [
@@ -3304,34 +3334,34 @@
       "reason": "BLOCKED infrastructure failure, not scientific falsification per EXPERIMENT_PACKET.md s9: OPENAI_API_KEY absent (provenance.json:environment.infrastructure.llm_api_key_present false, result.json observations[0] INFRASTRUCTURE BLOCKER), nginx 1.24.0 binary present but proxy_cache HIT/SWR/SIE/304 not configured (nginx_proxy_cache_configured false, flask_backend_deployed false, repair_agent_implemented false), zero LLM calls, zero Playwright traces, zero verify() signals (result.json metrics {} controls {} artifacts [], status MEASUREMENT_INVALID outcome NOT_APPLICABLE). Frozen gates C1 (PC1/PC2 on real gpt-4o-mini pipeline), C2 (NC1/NC2 + block-permutation FA<=5% AUROC 0.4-0.6), C3 (B-RUNTIME-BYTE-IDENTITY >=0.99 via oracle-free gzip.decompress on real nginx) all unmeasurable, correctly gating to MEASUREMENT_INVALID/BLOCKED per spec decision_rule and prereg 12. Audit status BLOCKED, producer_claim_supported false, frozen hashes verified (request 13879d1e, spec 0a08f4df, prereg 3d1bd62d, freeze 583b3667), simulation fallback correctly resisted. 5th consecutive Graph BLOCK on C-DELTA-REPAIR; maximum justified ceiling remains bounded synthetic simulation from EXP-GRAPH-35741890679 (audit REVISE: pooled success 0.833 CI[0.681,0.921], TEST 0.944 CI[0.742,0.990], token ratio 0.613 CI[0.569,0.661] failing <0.50, browser 0.431 CI[0.396,0.469] failing <0.40, amortized 4744 vs 2226 2.1x, AUROC 1.0 artefactual, contamination hardcoded 0.0046) \u2014 bounded to simulation only, no inference to real substrate, no product promotion."
     },
     "C-CROSSSITE": {
-      "experiment_id": "EXP-INTEL-35782546046",
+      "experiment_id": "EXP-INTEL-35789942386",
       "lane": "intel",
-      "created_at": "2026-09-22T20:47:38.247160+00:00",
-      "decision": "REVISE \u2014 degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
-      "source_commit": "34bc669a574f27f35bd8dc76d556f25007adccd1",
+      "created_at": "2026-09-22T22:00:50.165472+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+      "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
       "claim_id": "C-CROSSSITE",
-      "status": "HYPOTHESIS",
-      "reason": "No cross-site evidence attempted or obtained; experiment scoped to single-store WebArena-Verified shopping (One Stop Market, 192 tasks, single container am1n3e/webarena-verified-shopping@sha256:3e8cb9b945). Cross-store mechanism overlap remains vacuously 0 (single store) as established in parent EXP-INTEL-35697055679. Prior exhaustive CAP/Online-Mind2Web joint enumeration 0/3 strict Gate0 remains MEASUREMENT_INVALID per Director SUPERSEDE, not global falsification. Claim remains HYPOTHESIS pending cross-store dataset or verified multi-store holdout."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "No cross-site evidence attempted; single-store WebArena-Verified v2 shopping only. Measurement invalid due to V1 pattern truncation ([:20] generic/tablist/listitem/link:Skip to Content captures only layout, product-specific elements beyond token 20 truncated) and V2 product URL scarcity (only 4/36 families have __SHOPPING__/path product URLs; 6/10 sampled families are homepage-only identical 1430-node AX tautology) yielding AX_consistency 1.0 variance 0 bootstrap CI[1.0,1.0] shuffle p=1.0 degenerate (result.json M-AX-CONSISTENCY, audit V1 critical, V2 critical) and B-RANDOM-AX-SHUFFLE FAIL. Infrastructure precedence (<5 diverse product-page families) forces MEASUREMENT_INVALID substrate_unavailable per frozen decision_rule, not FALSIFIED. Cross-site generalization remains untested."
     },
     "C-LLM-INHERIT": {
-      "experiment_id": "EXP-INTEL-35782546046",
+      "experiment_id": "EXP-INTEL-35789942386",
       "lane": "intel",
-      "created_at": "2026-09-22T20:47:38.247160+00:00",
-      "decision": "REVISE \u2014 degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
-      "source_commit": "34bc669a574f27f35bd8dc76d556f25007adccd1",
+      "created_at": "2026-09-22T22:00:50.165472+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+      "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
       "claim_id": "C-LLM-INHERIT",
-      "status": "EXPERIMENTAL",
-      "reason": "No discriminating evidence for identifiable same-mechanism parameterized transfer within WebArena-Verified v2 shopping via longest-prefix without fallback: 8/10 families yielded identical homepage 'One Stop Market' AX (1430 nodes each, 16/20 valid captures, mean AX_consistency 1.0 CI[1.0,1.0] p=1.0 vs shuffle null mean 1.0 p95 1.0) due to __SHOPPING__/path placeholder bug in get_task_start_url (4/20 ERROR Protocol invalid URL for families 136/222) forcing zero variance (audit V1/V2 critical, validity_findings degenerate zero-variance). Frozen adequate run requires >=10 families with task-specific product/category/cart pages at 1280x720 CDP 600-2000 nodes not met (valid_families 8 <10). Permutation FAIL (p=1.0>=0.05) and delta_vs_prior 0.7143 are arithmetic tautologies from page identity, not parameterized transfer. Prior census-level EXPERIMENTAL ceiling (192 shopping tasks, 49 intent templates, 36 families >=3, duplication 0.9479 CI[0.9167,0.9792], param_task 0.8958) confirmed at 192/36 and unchanged; element-pattern AX transfer remains UNMEASURED pending placeholder fix and re-capture on diverse pages."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Within-store parameterized transfer via longest-prefix without fallback remains unmeasured: placeholder fix get_task_start_url __SHOPPING__/path->base+path correctly loads distinct product pages (families 136,145,196,222 => 8 captures 626-1150 nodes distinct AX hash, provenance placeholder_fix verified) but element-pattern grammar degenerate (V1) makes all 10 families consistency 1.0 zero variance, PC2 FAIL, NC1 p=1.0 FAIL, delta 0.7143 vs prior 0.2857 tautological. Audit recomputed M-AX-CONSISTENCY mean 1.0 CI[1.0,1.0] variance 0 shuffle mean 1.0 p95 1.0 p=1.0 matches producer; per prereg section10 variance=0 with diverse pages would be FALSIFIED-IN-SETTING for this grammar but falsifier infrastructure precedence (<5 path families) triggers MEASUREMENT_INVALID. Also sampling deviation V5 stratified path-first not pure random seed 35725763380. No validation of within-store hold-out."
     },
     "C-PRODUCT-ECON": {
-      "experiment_id": "EXP-INTEL-35782546046",
+      "experiment_id": "EXP-INTEL-35789942386",
       "lane": "intel",
-      "created_at": "2026-09-22T20:47:38.247160+00:00",
-      "decision": "REVISE \u2014 degenerate homepage-only measurement (placeholder bug) prevents discriminating AX_consistency test; Stagehand replication incomplete without drift MISS; no bounded falsification of longest-prefix method on product pages",
-      "source_commit": "34bc669a574f27f35bd8dc76d556f25007adccd1",
+      "created_at": "2026-09-22T22:00:50.165472+00:00",
+      "decision": "MEASUREMENT_INVALID \u2014 placeholder fix verified but AX pattern grammar truncated [:20] generic tokens, drift SHA256 not recomputed, multi-step BrowserGym unavailable; mean 1.0 CI[1.0,1.0] variance 0 p=1.0 degenerate vs shuffle null. No bounded falsification of longest-prefix method.",
+      "source_commit": "e9e7e7a1955807ece73279c6f45cdb6c161318d0",
       "claim_id": "C-PRODUCT-ECON",
-      "status": "HYPOTHESIS",
-      "reason": "Stagehand selector+DOM-hash verb cache (N=2, SHA256, per-project scope, shipped Feb 2026 2x/~30%) not replicated as spec: synthetic selector 'fam{id}_task{id}' not derived from AX/DOM element, dom_hash full-page outerHTML not spec subtree, latency_ms 0.0007-0.019 dict-lookup microsecond not cold LLM vs cached, tokens_saved hardcoded 1000/hit, NC3_STAGEHAND_DOM_DRIFT NOT_TESTED (drift_injected false for all 68 calls) and NC4_STAGEHAND_RANDOM_CACHE NOT_TESTED, so M-STAGEHAND-FALSE-ACCEPT 0.0 tautological and MISS>=0.8 unmeasured; audit baseline_findings B-STAGEHAND-VERB fail, NC3 fail, NC4 not_tested. Hit_rate 0.941 (64/68) and cross-project leakage 0.0 (5 tests) on synthetic keys do not demonstrate discriminating HIT/MISS or speedup/cost. Prior extrapolation REJECTED (logistic L=0.5654 vacuous step-function, 4 points/3 params, zero information beyond n=20) remains CLOSED per EXP-INTEL-35551517470; Stagehand competitive floor vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM remains UNMEASURED."
+      "status": "MEASUREMENT_INVALID",
+      "reason": "Stagehand selector+relevant-subtree SHA256 verb cache not spec-compliant: V3 drift_miss_rate 0.0 (20/20 HIT despite drift) recomputed false_accept 1.0 contradicting result.json 0.0, hash computed from unmutated page.content() not after mutation, hit_rate 0.948 (92/97) inflated by identical homepage DOMs and synthetic fam_task fallback selectors, speedup 0.0954 inverted (dict-lookup microsecond vs real dispatch) and tokens_saved 1000 hardcoded not measured via tiktoken (audit V3, baseline_findings B-STAGEHAND-VERB FAIL_NOT_COMPLIANT, NC3 FAIL, NC4 NOT_TESTED, PC3 PARTIAL, V4 gate0 multi-step unavailable). B-STAGEHAND-VERB ~2x/~30% Feb2026 baseline NOT delivered. Gate0 relaxed 0/20 strict 0/20 on single-page 0-transition captures is descriptive viewport-only, not evidence against H>0.1 NL>=20 (V4). No economic comparison vs B-RAG-EMBED-FLAT/B-SPIDER-0TOKEN/B-COLD-LLM."
     },
     "C-MEAS-VALID": {
       "experiment_id": "EXP-RUNTIME-35774047385",
