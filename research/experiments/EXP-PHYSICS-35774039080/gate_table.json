@@ -1,0 +1,234 @@
+{
+  "Q": 0,
+  "conclusion": "MEASUREMENT_INVALID substrate_insufficient",
+  "datasets": [
+    {
+      "NL": 93,
+      "a11y_coverage": 0.0,
+      "a11y_coverage_ge_80pct": false,
+      "dom_bytes_coverage": 0.0,
+      "dom_coverage_ge_80pct": false,
+      "leakage_validOnly": 0.2846,
+      "n_leaky_valid": 37,
+      "n_raw": 168,
+      "n_sessions": 7,
+      "n_valid": 130,
+      "nl_ge_50": true,
+      "qualifies": false,
+      "raw_record_keys": [
+        "action_primitive",
+        "action_target",
+        "error",
+        "session",
+        "site",
+        "timestamp",
+        "title_after",
+        "title_before",
+        "url_after",
+        "url_before"
+      ],
+      "singleton_SA_rate": 0.0,
+      "singleton_sa_lt_70pct": true,
+      "site_id": "vanillajs",
+      "strata_ge3": 12,
+      "strata_ge_5_with_ge3": true,
+      "strata_total": 21,
+      "unique_titles": 1
+    },
+    {
+      "NL": 93,
+      "a11y_coverage": 0.0,
+      "a11y_coverage_ge_80pct": false,
+      "dom_bytes_coverage": 0.0,
+      "dom_coverage_ge_80pct": false,
+      "leakage_validOnly": 0.2846,
+      "n_leaky_valid": 37,
+      "n_raw": 168,
+      "n_sessions": 7,
+      "n_valid": 130,
+      "nl_ge_50": true,
+      "qualifies": false,
+      "raw_record_keys": [
+        "action_primitive",
+        "action_target",
+        "error",
+        "session",
+        "site",
+        "timestamp",
+        "title_after",
+        "title_before",
+        "url_after",
+        "url_before"
+      ],
+      "singleton_SA_rate": 0.0,
+      "singleton_sa_lt_70pct": true,
+      "site_id": "react",
+      "strata_ge3": 12,
+      "strata_ge_5_with_ge3": true,
+      "strata_total": 21,
+      "unique_titles": 1
+    },
+    {
+      "NL": 85,
+      "a11y_coverage": 0.0,
+      "a11y_coverage_ge_80pct": false,
+      "dom_bytes_coverage": 0.0,
+      "dom_coverage_ge_80pct": false,
+      "leakage_validOnly": 0.213,
+      "n_leaky_valid": 23,
+      "n_raw": 168,
+      "n_sessions": 7,
+      "n_valid": 108,
+      "nl_ge_50": true,
+      "qualifies": false,
+      "raw_record_keys": [
+        "action_primitive",
+        "action_target",
+        "error",
+        "session",
+        "site",
+        "timestamp",
+        "title_after",
+        "title_before",
+        "url_after",
+        "url_before"
+      ],
+      "singleton_SA_rate": 0.0,
+      "singleton_sa_lt_70pct": true,
+      "site_id": "vue",
+      "strata_ge3": 13,
+      "strata_ge_5_with_ge3": true,
+      "strata_total": 21,
+      "unique_titles": 1
+    },
+    {
+      "NL": 107,
+      "a11y_coverage": 0.0,
+      "a11y_coverage_ge_80pct": false,
+      "dom_bytes_coverage": 0.0,
+      "dom_coverage_ge_80pct": false,
+      "leakage_validOnly": 0.1769,
+      "n_leaky_valid": 23,
+      "n_raw": 168,
+      "n_sessions": 7,
+      "n_valid": 130,
+      "nl_ge_50": true,
+      "qualifies": false,
+      "raw_record_keys": [
+        "action_primitive",
+        "action_target",
+        "error",
+        "session",
+        "site",
+        "timestamp",
+        "title_after",
+        "title_before",
+        "url_after",
+        "url_before"
+      ],
+      "singleton_SA_rate": 0.0,
+      "singleton_sa_lt_70pct": true,
+      "site_id": "angular",
+      "strata_ge3": 13,
+      "strata_ge_5_with_ge3": true,
+      "strata_total": 22,
+      "unique_titles": 1
+    },
+    {
+      "NL": 93,
+      "a11y_coverage": 0.0,
+      "a11y_coverage_ge_80pct": false,
+      "dom_bytes_coverage": 0.0,
+      "dom_coverage_ge_80pct": false,
+      "leakage_validOnly": 0.2846,
+      "n_leaky_valid": 37,
+      "n_raw": 168,
+      "n_sessions": 7,
+      "n_valid": 130,
+      "nl_ge_50": true,
+      "qualifies": false,
+      "raw_record_keys": [
+        "action_primitive",
+        "action_target",
+        "error",
+        "session",
+        "site",
+        "timestamp",
+        "title_after",
+        "title_before",
+        "url_after",
+        "url_before"
+      ],
+      "singleton_SA_rate": 0.0,
+      "singleton_sa_lt_70pct": true,
+      "site_id": "svelte",
+      "strata_ge3": 12,
+      "strata_ge_5_with_ge3": true,
+      "strata_total": 21,
+      "unique_titles": 1
+    }
+  ],
+  "experiment_id": "EXP-PHYSICS-35774039080",
+  "freeze_hash_verification": {
+    "prereg.md": true,
+    "request.json": true,
+    "spec.json": true
+  },
+  "frozen_halt_rule": "if Q==0 => MEASUREMENT_INVALID substrate_insufficient; do not test H_T/H_B; publish gate_table.json",
+  "frozen_rule": "dataset qualifies iff after leakage-free filtering NL>=50, strata_count>=5 unique (URL_before,H_K=3,Action) with >=3 per stratum, singleton_SA_rate<70%, leakage_validOnly<60%, dom_bytes>=500 and a11y non-empty on >=80% transitions",
+  "lane": "physics",
+  "raw_hash_verification": {
+    "manifest": {
+      "raw_angular.json": {
+        "matched_prior_record": true,
+        "sha256": "353489eb28bcbe4e7bb97756b785dfbec167a2950cc57e1636c57b32a1696f24"
+      },
+      "raw_angular_topup.json": {
+        "matched_prior_record": true,
+        "sha256": "f26d3767d7e2a789dd3d7e4daf8a4fab0755b07ca19f07eac6b92d51055e3f87"
+      },
+      "raw_react.json": {
+        "matched_prior_record": true,
+        "sha256": "4d0b19e27b3a081fe6c99f3e1e4386d4eccdb00561c84265a8bc9f1f8b644fb1"
+      },
+      "raw_react_topup.json": {
+        "matched_prior_record": true,
+        "sha256": "65aef7fe9980c50f72d8b7ba39a5f520b26c1e64101c325dc175442a0d5b3c99"
+      },
+      "raw_svelte.json": {
+        "matched_prior_record": true,
+        "sha256": "88e2897a755608123f879772237a6d44cfed546d4f7abbf450dce05244068482"
+      },
+      "raw_svelte_topup.json": {
+        "matched_prior_record": true,
+        "sha256": "97893637f64953d0a6725dc5692c653413e605d0f32012e197bb4650b511537f"
+      },
+      "raw_vanillajs.json": {
+        "matched_prior_record": true,
+        "sha256": "8897172862238d5ce5f433090bdfeecbf7b5cb7485f3ccfea4b8887a796979fe"
+      },
+      "raw_vanillajs_topup.json": {
+        "matched_prior_record": true,
+        "sha256": "655178f7b98d5e4873ed061ad607dba8dd0c53e62e5d8469cb1686fd2ae2bb49"
+      },
+      "raw_vue.json": {
+        "matched_prior_record": true,
+        "sha256": "de723933a67bfb6961e621193bc740ee97b6a37047624a9a7fb4a3b0938b4cc4"
+      },
+      "raw_vue_topup.json": {
+        "matched_prior_record": true,
+        "sha256": "59d701d8bc3627cc26a4ac8e51bb141a5da18b35dd3fb9bdda1c62169f856443"
+      }
+    },
+    "matched": 10,
+    "total": 10
+  },
+  "schema_version": 1,
+  "substrate_scan": {
+    "browsergym_cache_exists": false,
+    "browsergym_webshop_trajectory_files": [],
+    "intel_manifest_exists": false,
+    "intel_manifest_path": null,
+    "research_intel_exists": false
+  }
+}
