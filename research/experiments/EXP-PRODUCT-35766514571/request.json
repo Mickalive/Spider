@@ -1,0 +1,47 @@
+{
+  "base_sha": "d1163ad9f8e5c006a4658ab98a5fa81f3becc04c",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T18:20:54.006365+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Path dependence and local optima: 42 straight C-MEAS-VALID runtime and 11 C-FRESHNESS graph iterations show diminishing marginal information; without reset lanes exploit locally tractable mock gains not risky core claims - prior used to trigger runtime cognitive reset, not SPIDER evidence",
+      "Verification > prediction: long-horizon agents compound planning errors and self-generated subproblems; calibrated UNKNOWN/abstention (ECE<=0.15, precision>=0.85) and local repair has higher leverage than marginal PMI/CMI detection - prior used to prioritize semantic resolution and delta-repair over further dynamics estimators, not SPIDER evidence",
+      "Residual novelty economics is product-defining: users abandon inheritance if total cost (retrieval+verification+repair+maintenance amortized) exceeds cold re-exploration; matched families controlling novelty fraction vs length are the only head-to-head that can falsify SPIDER value - prior used to prioritize C-RESIDUAL-NOVELTY over another param-inherit POC, not SPIDER evidence",
+      "Tool/API typed verbs beat browser replay: compiling mechanisms to guarded verbs/APIs turns N browser steps into one verified call, explaining Stagehand observe->act limits; SPIDER Mechanism should expose verb not raw route - prior used to benchmark product economics vs Stagehand DOM-hash cache, not SPIDER evidence"
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-RESIDUAL-NOVELTY",
+      "cognitive_reset": false,
+      "comparative_reasoning": "Pivoting to residual-novelty economics beats fixing kernel _common_prefix_and_suffix double-prefix again (synthetic 1-3 slot POC already 21/21 in run_experiment.py; three prior kernel-integration fixes FALSIFIED on noisy sessions; marginal product decision impact < first real economics head-to-head), hardening C-SEMANTIC-RESOLVE alone (frontier already handles learned adapter, product would duplicate), and C-FRESHNESS parallel-channel integration (needs n>=800 distributed validation not yet achieved). Economics head-to-head vs Stagehand is the competitive bar for PRODUCT_CORE promotion.",
+      "dependencies": [
+        "runtime",
+        "intel",
+        "frontier"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "Does later-agent cost track residual novelty fraction rather than full task length when task length and novelty fraction are independently controlled via matched families derived from MemoryArena 766 interdependent multi-session tasks or WebArena templated families: with real LLM agent (gpt-4o-mini 15 steps, 4096 tokens, Playwright BrowserGym 1280x720, real verify()) measuring tokens/calls/browser interactions/latency/retrieval+verification+repair amortized over 10 reuses, vs cold, instructions, TF-IDF retrieval/RAG, replay and Stagehand observe->act DOM-hash cache baselines, testing correlation with novelty r>0.5 p<0.05 vs length r<0.3 delta>0.2, work compression >=40% vs cold, cost <=0.85x vs RAG, success>=0.80 false_accept<=0.15 UNKNOWN precision>=0.85 ECE<=0.15 with family-stratified bootstrap CIs and end-to-end economics?",
+      "rationale": "Product IDLE after MEASUREMENT_INVALID on C-PARAM-INHERIT double-prefix bug; C-RESIDUAL-NOVELTY is SPIDER's central product promise (pay novelty not whole task) and most starved claim (4/242, REVISE synthetic mock only, no amortized economics). MemoryArena provides ready-made interdependent subtask families missing from bespoke Flask mocks, enabling matched length vs novelty control that directly falsifies work-compression and amortized saving vs Stagehand caching (~30% cost). This determines product core viability before further param POCs."
+    },
+    "cycle_id": "35765824931",
+    "lane": "product",
+    "portfolio_assessment": "SPIDER at 242 canonical (60 recent) is mid-pulse with converging localhost measurement but open production gates. Runtime narrow localhost matrix complete (C-MEAS-VALID EXPERIMENTAL, 960/960 byte-identical HIT/SWR/SIE/304, full 1.0>status 0.0 body-only 1.0 headers-no-CLEN 0.0) but production WSGI/nginx/CDN, concurrency, non-degenerate bootstrap CIs and writable session replication remain unproven. C-FRESHNESS orthogonality at delta=0.15 survived on stochastic mock (r=-0.025) and production-like local/distributed (r~0.04/-0.058, TOST p<0.005) but needs n>=800 stratified and delta=0.10 before VALIDATED. C-SEMANTIC-RESOLVE is sole recent SURVIVES (frontier 30/30 rule-based synthetic + genuine reconstruction adapter 1280x720 real CDP AX, alias-OOD >=0.50 p<0.05 vs 0.10 McNemar vs exact, false_accept <=0.15, exact>=0.90 UNKNOWN>=0.85 ECE<=0.15) including header/body/auth families - ready for learned generalization. C-RESIDUAL-NOVELTY/C-PRODUCT-ECON central promise pay-cost-of-novelty-not-whole-task remains HYPOTHESIS on synthetic mock only (4/242 experiments, most starved). C-PARAM-INHERIT MEASUREMENT_INVALID on kernel double-prefix bug (synthetic POC 21/21 in run_experiment.py only). C-DELTA-REPAIR BLOCKED 4 deep awaiting runtime HIT-cache. C-CROSSSITE/C-PRODUCT-ECON MEASUREMENT_INVALID on Mind2Web LFS Gate0 (single train, 31 domains/137 websites not met, 567MB test.zip unobtainable) and Docker PC3 21-82 window violated (all truncated first-20), MIXED mislabeled. C-WEB-DYNAMICS HYPOTHESIS after 60 experiments largest sunk cost: synthetic 2D/10D TV/KDE/kNN translation detects but scaling/rotation blind, per-type CV >0.5 at 250/type, production PMI blocked by trajectory-grouped degeneracy and SPA gate failures (titles>=2, H>0.2, leak<40%, NL>=50, strata>=10). Two lanes FROZEN (graph C-DELTA-REPAIR, runtime C-MEAS-VALID) must complete; four IDLE must be explicitly reactivated. Portfolio therefore preserves frozen substrate completions, parks physics synthetic sweep pending gate-passing SPAs, pivots intel to deliver BrowserGym/CAP census that unblocks both physics and cross-site, reopens frontier learned adapter generalization, and pivots product to first real residual-novelty economics head-to-head vs cold/RAG/Stagehand rather than another synthetic param POC.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief accepted as staff advice not authority and challenged against Codex. Adopted: semantic resolve as sole SURVIVES bright spot ready for hardening; residual-novelty as most starved central claim (4/242) needing MemoryArena families; Mind2Web LFS as sunk-cost requiring CAP 420-task/BrowserGym pivot; Stagehand caching as competitive baseline for param-inherit/delta-repair; BrowserGym census as highest-unblocking lever for physics CMI. Rejected/adjusted: scout suggested runtime gunicorn/nginx final promotion - retained but forced cognitive reset to justify 43rd iteration vs economics; scout's frontier learned adapter proposal accepted but narrowed to 3-seed orthogonal split with calibrated confidence and mixed multi-channel live-browser generalization with economics reporting; scout's suggestion to co-own physics/runtime BrowserGym substrate port deferred - parked physics pending intel census rather than dispatching 61st synthetic DGP. External findings treated as priors not evidence; deep verification delegated to intel (CAP/BrowserGym enumeration) and frontier/product head-to-heads."
+  },
+  "experiment_id": "EXP-PRODUCT-35766514571",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "Does a corrected kernel-integrated distill_parameterized (fixing _common_prefix_and_suffix double-prefix so full B identifiers bind correctly) enable a real LLM agent (gpt-4o-mini 15 steps, Playwright, 4096 tokens, temp 0, seed 42) on true WebArena-Verified v2 family hold-out (>=10 families, >=60 tasks, 49 templates, measured duplication 0.9479) to achieve EXECUTABLE >=0.75 and binding correctness >=0.90 with zero unsubstituted templates, success margin >=0.12 vs B-COLD/B-RAG/B-REPLAY/B-INSTR, false_accept <=0.10, UNKNOWN in [0.00,0.15] with ECE <=0.15, and honest amortized saving >=25% vs COLD and <=0.85x vs RAG with family-stratified bootstrap CIs and deterministic verification?",
+  "lane": "product",
+  "origin_github_run_id": "35766514571",
+  "parent_handoff": {
+    "experiment_id": "EXP-PRODUCT-35756243655",
+    "path": "research/experiments/EXP-PRODUCT-35756243655/handoff.json",
+    "sha256": "92869eb23ba40845288653564771d9593678a2854e28e59dc8fac8a1c14751d9"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "1e1e6e80f7a99eb97836eef199bb3a5fb92cb943caaf36f9628ea8568e7459e6",
+  "request_id": "6772ce85451d63562b794ff2",
+  "schema_version": 1
+}
