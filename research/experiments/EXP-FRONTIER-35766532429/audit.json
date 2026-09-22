@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-FRONTIER-35766532429",
+  "lane": "frontier",
+  "status": "PASS",
+  "producer_claim_supported": true,
+  "required_fixes": [],
+  "validity_findings": [
+    "Synthetic tautology / construct validity threat: The derived_context for alias-OOD tasks is constructed by binding the expected_template (which contains the novel alias form) then parsing it back via derive_state. The reconstruction's choose_adoptions function then 'adopts' observed keys not present in registry candidates — since the test template's alias keys are directly observable in headers_observed/body_observed/url_query (by construction), this is a copy mechanism, not semantic resolution from real browser state. Producer acknowledges this in validity_notes #2, #8, #11 and report.md 'synthetic easiness'.",
+    "Zero live BrowserGym tasks: PC-BROWSERGYM-HEALTH FAIL (browsergym/playwright ModuleNotFoundError). Per frozen spec decision_rule, live stratum is exploratory and claim bounds to synthetic pooled only — correctly NOT MEASUREMENT_INVALID. Director mandate explicitly required live-browser WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees — untested.",
+    "Zero learned GRPO/System-One metrics: RECONSTRUCTION-LEARNED unavailable (transformers/torch ModuleNotFoundError). Core Director question asked for learned adapter matching rule proxy within 0.10 correct / 0.05 ECE with 3-seed training cost/stability reporting — completely untested.",
+    "Calibration evidence fragile: ECE 0.0803 computed over 5 bins with 3 empty bins (bins 1-3 count=0). Confidence distribution bimodal (~0.058 for 18 abstain-proximal, ~0.912 for 52 executable) driven by 0.80 gate + deterministic jitter, not emergent calibration. Bootstrap CI [0.0722, 0.0883] reflects this artifact. Producer acknowledges in validity_notes #3.",
+    "Intent equality confound: All 40 alias-OOD tasks use identical intent string between test query and registry mechanisms. B-EXACT-MATCH fails because template differs, not because intent differs. This isolates template aliasing but does not test retrieval where intent strings differ. Producer acknowledges in validity_notes #5.",
+    "B-RAG-EMBED unavailable: sentence-transformers ModuleNotFoundError. TFIDF used as strong retrieval baseline per frozen spec. Large-corpus embedding retrieval stress untested.",
+    "Mixed multi-channel composition test (10/10 correct) uses generic alphabetically-sorted adoption of observed keys not in registry. Tests composition of single-channel rewrites but within synthetic tautology (test template's multi-channel keys directly observable). No live mixed-channel test.",
+    "No end-to-end economics measured: Training cost/stability for LEARNED (wall-clock, tokens/calls, CV across seeds 42,43,44) untested. RULE economics trivial deterministic linear scoring. Verification-boundary economics (retrieval+reconstruction+verification cost per successful task vs RAG vs verbatim) not measured beyond trivial scoring."
+  ],
+  "baseline_findings": [
+    "B-EXACT-MATCH: 0/40 correct on alias-OOD pooled (kernel L97 exact intent equality, min_confidence 0.8). Correctly fails because test intent equals registry intent but template aliasing requires reconstruction.",
+    "B-VERBATIM-REPLAY: 0/40 correct, 40/40 false_accept = 1.0. Retrieves first intent-matching mechanism and replays stored template verbatim. Measures maximal negative-transfer harm on alias-OOD. McNemar vs RECONSTRUCTION-RULE false_accept: b=0, c=40, p=6.98e-10.",
+    "B-RAG-TFIDF: 0/40 correct. TF-IDF retriever over intent+template strings, fit on train registry only. Fails because intent held equal and template strings differ. Does not test retrieval where intent differs.",
+    "B-RAG-EMBED: Unavailable (sentence-transformers ModuleNotFoundError). Per frozen spec, TFIDF serves as strong baseline for S5 domination gate.",
+    "B-RANDOM: 0/40 correct. Uniform random among intent-matching mechanisms. Chance-level baseline.",
+    "RECONSTRUCTION-RULE (genuine rule-based): 40/40 correct, 0 false_accept, 0 UNKNOWN. Structural scorer+rewriter with multi-channel adoption (choose_adoptions + rewrite_template_multi). Softmax temp 0.15 + deterministic jitter, gated UNKNOWN<0.80. Confidence std=0.3746.",
+    "RECONSTRUCTION-LEARNED: Unavailable. No GRPO/System-One training executed."
+  ],
+  "recomputed_metrics": {
+    "alias_OOD_pooled": {
+      "reconstruction_correct_resolution": 1.0,
+      "reconstruction_correct_count": 40,
+      "reconstruction_false_accept": 0.0,
+      "reconstruction_unknown": 0.0,
+      "reconstruction_n": 40,
+      "wilson_correct_ci": [0.9123754607496077, 1.0],
+      "wilson_false_ci": [0.0, 0.08762453925039232],
+      "exact_match_correct_rate": 0.0,
+      "verbatim_false_accept_rate": 1.0,
+      "tfidf_correct_rate": 0.0,
+      "random_correct_rate": 0.0,
+      "binomial_p_vs_0.10": 1.0000000000000022e-40,
+      "mcnemar_rec_vs_exact": {"b": 40, "c": 0, "chi2": 38.025, "p": 6.984393063902417e-10},
+      "mcnemar_fa_rec_vs_verbatim": {"b": 0, "c": 40, "chi2": 38.025, "p": 6.984393063902417e-10},
+      "diff_verbatim_minus_recon_false_accept": 1.0
+    },
+    "alias_OOD_orthogonal_30": {
+      "n": 30,
+      "correct": 30,
+      "correct_rate": 1.0,
+      "wilson_ci": [0.886482908609522, 1.0],
+      "binomial_p_vs_0.10": 1.0000000000000017e-30,
+      "false_accept_rate": 0.0
+    },
+    "alias_OOD_mixed_10": {
+      "n": 10,
+      "correct": 10,
+      "correct_rate": 1.0,
+      "false_accept_rate": 0.0,
+      "wilson_ci": [0.7224598312333834, 1.0]
+    },
+    "per_family_and_heldout": {
+      "fam0_standard": {"n": 7, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam0_heldout": {"n": 3, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam0_overall": {"n": 10, "correct_rate": 1.0},
+      "fam1_standard": {"n": 7, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam1_heldout": {"n": 3, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam1_overall": {"n": 10, "correct_rate": 1.0},
+      "fam2_standard": {"n": 7, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam2_heldout": {"n": 3, "correct_rate": 1.0, "fa_rate": 0.0},
+      "fam2_overall": {"n": 10, "correct_rate": 1.0},
+      "fam3_mixed_overall": {"n": 10, "correct_rate": 1.0, "fa_rate": 0.0},
+      "heldout_9": {"n": 9, "correct_rate": 1.0, "fa_rate": 0.0},
+      "mixed_10": {"n": 10, "correct_rate": 1.0, "fa_rate": 0.0},
+      "orthogonal_30": {"n": 30, "correct_rate": 1.0}
+    },
+    "channel_isolation_diagnostics": {
+      "RULE-URL-ONLY": {"n": 40, "correct_rate": 0.0, "per_family": {"fam0": {"n": 10, "correct_rate": 0.0}, "fam1": {"n": 10, "correct_rate": 0.0}, "fam2": {"n": 10, "correct_rate": 0.0}, "fam3": {"n": 10, "correct_rate": 0.0}}},
+      "RULE-BODY-ONLY": {"n": 40, "correct_rate": 0.25, "per_family": {"fam0": {"n": 10, "correct_rate": 0.0}, "fam1": {"n": 10, "correct_rate": 1.0}, "fam2": {"n": 10, "correct_rate": 0.0}, "fam3": {"n": 10, "correct_rate": 0.0}}},
+      "RULE-HEADERS-ONLY": {"n": 40, "correct_rate": 0.5, "per_family": {"fam0": {"n": 10, "correct_rate": 1.0}, "fam1": {"n": 10, "correct_rate": 0.0}, "fam2": {"n": 10, "correct_rate": 1.0}, "fam3": {"n": 10, "correct_rate": 0.0}}}
+    },
+    "exact_match": {
+      "reconstruction_correct_rate": 1.0,
+      "exact_match_baseline_correct_rate": 1.0,
+      "reconstruction_n": 12,
+      "wilson_ci_recon": [0.7574992425007574, 0.9999999999999998]
+    },
+    "no_applicable": {
+      "reconstruction_unknown_precision": 1.0,
+      "reconstruction_false_accept_rate": 0.0,
+      "reconstruction_ece_over_all": 0.0802516342187119,
+      "ece_bootstrap_mean": 0.08037932634537324,
+      "ece_bootstrap_ci": [0.07221024654120912, 0.08833407213328238],
+      "ece_alias": 0.10794035988274564,
+      "ece_exact": 0.02083333333333337,
+      "ece_noapp": 0.05766666666666668,
+      "all_methods_precision": {"B-EXACT-MATCH": 1.0, "B-VERBATIM-REPLAY": 1.0, "B-RAG-TFIDF": 1.0, "B-RAG-EMBED": null, "B-RANDOM": 1.0, "RECONSTRUCTION-RULE": 1.0, "RECONSTRUCTION-LEARNED": null},
+      "all_methods_false_accept": {"B-EXACT-MATCH": 0.0, "B-VERBATIM-REPLAY": 0.0, "B-RAG-TFIDF": 0.0, "B-RAG-EMBED": null, "B-RANDOM": 0.0, "RECONSTRUCTION-RULE": 0.0, "RECONSTRUCTION-LEARNED": null},
+      "empty_registry_unknown_rate": 1.0,
+      "empty_registry_all_methods_unknown": true,
+      "bins_reconstruction": [{"bin": 0, "count": 18, "acc": 0.0, "avg_conf": 0.058333333333333334, "edges": [0.0, 0.2]}, {"bin": 1, "count": 0, "acc": 0.0, "avg_conf": 0.0, "edges": [0.2, 0.4]}, {"bin": 2, "count": 0, "acc": 0.0, "avg_conf": 0.0, "edges": [0.4, 0.6000000000000001]}, {"bin": 3, "count": 0, "acc": 0.0, "avg_conf": 0.0, "edges": [0.6000000000000001, 0.8]}, {"bin": 4, "count": 52, "acc": 1.0, "avg_conf": 0.9121612616286571, "edges": [0.8, 1.0]}],
+      "reconstruction_confidence_std": 0.3746120510836857
+    },
+    "controls_summary": {
+      "PC_EXACT_MATCH_pass": true,
+      "NC_NO_APPLICABLE_pass_recon": true,
+      "NC_ALL_pass": true,
+      "NC_EMPTY_pass": true,
+      "PC_BROWSERGYM_HEALTH_pass": false,
+      "pc_baseline_correct": 1.0,
+      "pc_recon_correct": 1.0
+    },
+    "live": {
+      "attempted": 0,
+      "healthy": 0,
+      "exploratory_bound": true,
+      "browsergym_probe": {"browsergym": [false, "ModuleNotFoundError: No module named 'browsergym'"], "playwright": [false, "ModuleNotFoundError: No module named 'playwright'"]}
+    },
+    "availability": {
+      "B_RAG_EMBED_available": false,
+      "B_RAG_EMBED_message": "sentence-transformers unavailable: ModuleNotFoundError: No module named 'sentence_transformers'",
+      "RECONSTRUCTION_LEARNED_available": false,
+      "RECONSTRUCTION_LEARNED_message": "offline LLM stack unavailable: ModuleNotFoundError: No module named 'transformers'",
+      "learned_training_report": {"available": false, "seeds": [42, 43, 44], "per_seed_metrics": null, "note": "LEARNED training not executed; offline LLM absent. Per frozen spec, no learned alias-OOD metrics fabricated."}
+    },
+    "decision_components": {
+      "S1_correct_ge_0.50": true,
+      "S1_binom_p_lt_0.05": true,
+      "S1_mcnemar_p_lt_0.05": true,
+      "S1_orthogonal_ge_0.50": true,
+      "S1_mixed_ge_0.40": true,
+      "S1_pass": true,
+      "S2_fa_le_0.15": true,
+      "S2_diff_ge_0.15": true,
+      "S2_mcnemar_p_lt_0.05": true,
+      "S2_pass": true,
+      "S3_pass": true,
+      "S4_precision_ge_0.85": true,
+      "S4_ece_le_0.15": true,
+      "S4_pass": true,
+      "S5_not_dominated_by_retrieval": true,
+      "S5_best_rag_correct": 0.0,
+      "S_learned_gap_within_0_10": null
+    },
+    "overall": {
+      "status": "COMPLETE",
+      "outcome": "SUPPORTS",
+      "all_survives": true,
+      "falsified": false,
+      "bounded_to": "synthetic pooled 40 (30 orthogonal +10 mixed); live BrowserGym and learned GRPO arms unavailable and disclosed"
+    },
+    "sample_counts": {"alias-OOD": 40, "exact-match": 12, "no-applicable": 12, "empty-registry": 6},
+    "harness_errors": []
+  },
+  "claim_ceiling": "RECONSTRUCTION-RULE (genuine rule-based structural scorer+rewriter with multi-channel adoption via choose_adoptions + rewrite_template_multi) achieves perfect alias resolution on synthetic controlled tasks: 30/30 orthogonal header/body/auth families (including 9/9 held-out novel forms) + 10/10 mixed multi-channel (header+body+query within one request), with 0 false accepts, calibrated abstention (ECE 0.0803, 5 bins), and not dominated by retrieval baselines. Bounded to: minimal derived dict (url/method/url_path/url_query/url_segments/headers_observed/body_observed; no AX tree), intent strings held equal across registry/test, synthetic tautology (derived_context constructed from expected_template), bimodal confidence from 0.80 gate, no live BrowserGym WebShop/ALFWorld at 1280x720, no learned GRPO/System-One adapter, no production-SPA heterogeneity, no large-corpus retrieval stress. Does NOT establish learned non-inferiority, live-browser generalization, calibration beyond bimodal artifact, or cross-site parameterized transfer.",
+  "evidence_refs": [
+    "research/experiments/EXP-FRONTIER-35766532429/request.json (director_mandate REOPEN, binding question)",
+    "research/experiments/EXP-FRONTIER-35766532429/spec.json (frozen hypothesis, falsifier, baselines, decision_rule, measurement_validity)",
+    "research/experiments/EXP-FRONTIER-35766532429/prereg.md (frozen SURVIVES/MEASUREMENT_INVALID thresholds, PC/NC gates)",
+    "research/experiments/EXP-FRONTIER-35766532429/freeze.json (immutable input hashes)",
+    "research/experiments/EXP-FRONTIER-35766532429/result.json (producer handoff: metrics, controls, observations, validity_notes, unresolved)",
+    "research/experiments/EXP-FRONTIER-35766532429/derived_metrics.json (recomputed rates, Wilson CIs, McNemar, binomial, bootstrap ECE, per-family/held-out/mixed breakdown)",
+    "research/experiments/EXP-FRONTIER-35766532429/raw_evidence.json (610 rows: 490 eval + 120 diagnostic, 0 harness errors, 0 leaks)",
+    "research/experiments/EXP-FRONTIER-35766532429/tasks.json (70 tasks: 40 alias-OOD pooled, 12 exact, 12 no-applicable, 6 empty; hidden_expected separation, 0/40 registry leak verified)",
+    "research/experiments/EXP-FRONTIER-35766532429/provenance.json (commit 163b0795, seeds, substrates unavailable, timing)",
+    "research/frontier/run_genuine_35766532429.py (genuine reconstruct_resolve with multi-channel adoption, derived_state whitelist, softmax+jitter, choose_adoptions, rewrite_template_multi, leak/forbidden checks)",
+    "research/experiments/EXP-FRONTIER-35757768022/handoff.json (parent established ceiling: synthetic orthogonal 30/30 rule-based, live/learned 0 tasks, synthetic tautology noted)"
+  ],
+  "unresolved": [
+    "Learned GRPO/System-One critique-reconstruct adapter non-inferiority (within 0.10 correct, 0.05 ECE of RULE on synthetic orthogonal+mixed) and training cost/stability (wall-clock, tokens/calls, variance/CV across 3 seeds 42,43,44) and model-derived confidence calibration (std>0.05) — requires offline LLM stack (transformers/torch) + GRPO training harness.",
+    "Live-browser WebShop/ALFWorld at BrowserGym 0.14.3 1280x720 with real CDP AX trees generalization on header/body/auth aliasing including mixed multi-channel within one request and production-SPA heterogeneity — requires runner with BrowserGym 0.14.3 + Playwright + network fixtures and AX extraction at 1280x720.",
+    "Whether perfect 40/40 1.0 pooled (30/30 orthogonal + 10/10 mixed) reflects synthetic easiness (observed credential keys directly in derived_context via bound-to-parse inversion, generic alphabetically-sorted multi-adoption) vs robustness to noisy real DOM/AX, visual layout, timing, auth/session drift — audit V4 synthetic tautology remains; minimal derived dict lacks AX heterogeneity.",
+    "Calibration sensitivity under non-bimodal confidence and different binning/abstention conventions: current ECE 0.0803 uses 5 bins with 3 empty (bins 1-3 count 0) and binary threshold 0.80; continuous calibration and threshold sensitivity untested.",
+    "B-RAG-EMBED (sentence-transformer all-MiniLM-L6-v2) retriever vs TFIDF on large realistic corpus where intent strings differ — per-task registry of 3 mechanisms only, lexical signal minimal, not stress-tested.",
+    "End-to-end verification-boundary economics (retrieval+reconstruction+verification cost per successful task vs RAG vs verbatim, LLM calls/tokens, amortization) not measured for RULE beyond trivial linear scoring and not at all for LEARNED; product decision requires these live measurements.",
+    "Mixed multi-channel composition on live BrowserGym: whether single-channel rewrites compose generically under real DOM/AX noise and production-SPA heterogeneity (header+body+query co-occurring within one request)."
+  ]
+}
