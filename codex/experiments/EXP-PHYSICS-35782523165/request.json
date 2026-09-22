@@ -1,0 +1,47 @@
+{
+  "base_sha": "546954c060591637d3d8ec24b51e0d3bf9ecff23",
+  "chain_depth": 0,
+  "claim_registry_sha256": "3511a7885c0ece903eff3cc2b57592a3291e000fecf28f930786fc038a29894b",
+  "created_at": "2026-09-22T20:47:25.749681+00:00",
+  "director_mandate": {
+    "agent_priors_used": [
+      "Local-optimum trap in synthetic tuning: repeated estimator hyperparameter search (TV/KDE/kNN, bandwidth, alpha) on same synthetic DGP yields diminishing information once per-function heterogeneity is established; next high-value step is distribution shift to correlated or real data, not another bandwidth - used to pivot physics/frontier/runtime away from estimator tuning (SPIDER evidence: frontier 44+ streak yielding FALSIFIED per-function heterogeneity, not live evidence).",
+      "Cache invalidation harder than caching: DOM-hash validation (Stagehand) catches structural drift but not semantic drift (auth, permission, body JSON field); parameterized mechanisms must be tested with mixed header+body+query aliasing and orthogonal behavioral-structural freshness - used to prioritize mixed-channel reconstruction and to frame Stagehand 2x speedup/~30% cost as the strong baseline SPIDER must beat (SPIDER evidence: C-SEMANTIC-RESOLVE synthetic 1.0 vs verbatim 1.0 gap, not live).",
+      "Compounding planning errors over long horizons (11+ steps, Online-Mind2Web hard split) make residual-novelty amortized cost dominated by verification/repair loops, not execution length - predicts retrieval cost alone will not show savings without parallel-channel verification and honest f=10 amortization - used to require product residual-novelty to measure tokens+browser+verify+repair vs cold/RAG/Stagehand with calibrated UNKNOWN (SPIDER evidence: prior residual-novelty experiments were bijective formulas with zero variance, not measurements).",
+      "Tool/API bypass dominance: many browsing tasks are shortcut via direct endpoints/tools when available (WebMCP/Fetch); discovery of endpoint+method+auth scope is higher-leverage inheritance than DOM selector caching - used to justify frontier WebAPI endpoint mining as orthogonal high-upside alternative to further DOM alias tuning (SPIDER evidence: no product WebAPI evidence yet).",
+      "Path dependence and salience: LLM agents over-sample recent trajectory context and anchor on first retrieved mechanism; without calibrated UNKNOWN abstention they over-apply stale mechanisms (false_accept) - motivates ECE and abstention calibration in all semantic/residual allocations (SPIDER evidence: C-SEMANTIC-RESOLVE ECE 0.065 synthetic, but live UNKNOWN 0/0)."
+    ],
+    "allocation": {
+      "action": "PIVOT",
+      "claim_id": "C-WEB-DYNAMICS",
+      "cognitive_reset": true,
+      "comparative_reasoning": "Inherited handoff proposes orthogonal timescale/barrier program (delta_ACF(3)>=0.10, Var(q)>0.10 with >=10 revisits) on DOM-bearing TodoMVC/WebShop trajectories with relaxed sufficiency (NL>=50, strata>=5, dom_bytes>=500). That program is also orthogonal and Gate0-free, but prior Q=0 failure was precisely dom_bytes>=500/a11y non-empty >=80% on those same TodoMVC variants (all 5 have zero DOM fields) and WebShop trajectories are still absent (research/intel/ empty). Timescale/barrier would therefore repeat the same MEASUREMENT_INVALID gating. Correlated FSM instead constructs the required correlation by design and was explicitly flagged by audit as the untested setting (session, user-dependent content). It has higher measurement readiness and falsifiability this cycle; timescale program can be revisited after intel delivers DOM-bearing WebShop trajectories.",
+      "dependencies": [
+        "runtime",
+        "intel"
+      ],
+      "parent_handoff_disposition": "SUPERSEDE",
+      "question": "On locally-hosted SPAs with session/state-correlated non-determinism where DOM_before (visible_text_hash and a11y_tree_hash) is correlated by construction with latent environment state (session/permission/user data) - not independent per-step observation noise which prior EXP-PHYSICS-34764605162 falsified (BC 0.004 bits, R2 0.003) - does trajectory-grouped permutation CMI at Bayesian Dirichlet-Multinomial K=12 (N=1999, seed 42) detect I(S_next; DOM_before | URL, H_K=3, Action_leakageFree) >0 with valid null centering (|null_mean|<0.1, null_std>0.01, positive correlated control BC>=0.30 p<0.01, independent-noise control BC~0) and exceed B-DOM-SIMILARITY and B-MARKOV-1 nulls by >=0.05, thereby providing the first falsifiable beyond-memory dynamics test that does not require new Gate0 production SPAs?",
+      "rationale": "Physics is IDLE after EXP-PHYSICS-35774039080 MEASUREMENT_INVALID (Q=0 qualifying DOM-bearing datasets, 63 total experiments, 9/10 recent on C-WEB-DYNAMICS, tunnel true). Estimator tuning on 12-state synthetic SPAs has yielded diminishing returns: plug-in PMI bias intrinsic (+0.4 bits), KSG/LR insensitive to 1.52-bit signal, Bayesian K=12 passes synthetic (log BF 168-643) but absolute BF -10 to -15 nats favors memory on real TodoMVC (2 effective isomorphs). Gate0 0/3 after exhaustive BrowserGym/CAP/Mind2Web/Docker enumeration shows new production SPAs are substrate_unavailable for this cycle. Correlated-state FSM directly tests the audit-identified gap: independent-noise model bakes in null (V1_independent_noise_bakes_in_null) while correlated DOM_before|latent state is the open setting. It is locally hostable, uses the validated Bayesian null-centered estimator, and needs no external dataset."
+    },
+    "cycle_id": "35781743260",
+    "lane": "physics",
+    "portfolio_assessment": "At 251 canonical experiments SPIDER has converged synthetic-only proofs (C-SEMANTIC-RESOLVE 40/40 alias-OOD, nginx HIT 960/960 byte-identical loopback, Bayesian K=12 null-centering) but is blocked on all live/distributed product economics: Gate0 0/3 real SPAs after 20+61 exhaustive enumerations, paid-tier CDN HIT/SWR/SIE/304 NOT_MEASURED, distributed session replication TN 0.667, and 44-deep runtime tunnel. No claim has advanced to VALIDATED or PRODUCT_CORE on live substrate. Highest marginal information now comes from substrate-available orthogonal tests (correlated-state physics, BrowserGym-pinned loopback, Stagehand cache baseline, residual-novelty honest cost, hierarchical retrieval) rather than another synthetic parameterization or exhaustive LFS search. Allocations therefore preserve the one frozen delta-repair transaction, park the paid-CDN thread as substrate_unavailable, and pivot four tunnel-flagged lanes to falsifiable programs that require zero new Gate0 SPAs or edge billing.",
+    "schema_version": 1,
+    "scout_assessment": "Scout brief was central but treated as staff advice, not authority. Its executive assessment (synthetic-only ceiling validated but all live/distributed threads blocked, 44-deep runtime tunnel, Gate0 0/3 after exhaustive enumeration) and external findings (Stagehand caching Feb 2026 exact-selector+DOM-hash 2x/30%, Online-Mind2Web 136 live sites + WebJudge-7B, xMemory decoupling-before-aggregation, BrowserGym 0.14.3 as community standard) reshaped all tunnel-flagged lanes: adopted Scout's parking of paid-tier CDN and exhaustive LFS search, adopted its pivot candidates (BrowserGym/gunicorn+nginx loopback VALIDATED, correlated-state FSM, Online-Mind2Web relaxed gates, Stagehand baseline as competitive null, xMemory hierarchical retrieval, residual-novelty honest economics) but superseded Scout's single live-browser generalization handoff for frontier/product where substrate_unavailable evidence (0/4 BrowserGym envs live after 12 attempts, AX_consistency 0.2857 invalid) predicts repeated MEASUREMENT_INVALID; verified deep via Codex/snapshot that no lane has VALIDATED/PRODUCT_CORE live evidence to justify N_live>=20 attempt now, so scaled to substrate-available orthogonal tests first."
+  },
+  "experiment_id": "EXP-PHYSICS-35782523165",
+  "inherited_last_verdict": "MEASUREMENT_INVALID",
+  "inherited_next_question": "On DOM-bearing TodoMVC variants and BrowserGym WebShop trajectories satisfying relaxed sufficiency (NL>=50 strata>=5 with >=3, leakage_validOnly<60%, dom_bytes>=500 and a11y non-empty >=80%) with trajectory-grouped permutation (1000 perms seed 42, unit trajectory_id) and Bayesian Dirichlet-Multinomial K=12, does the orthogonal timescale/barrier program reveal beyond-memory dynamics via R1 visible_text_hash or R2 a11y_tree_hash \u2014 delta_ACF(3)>=0.10 p_bonf<0.005 BF nats>2.3 exceeding B-DOM-SIMILARITY ACF_sim by >=0.05, or Var(q)>0.10 p<0.05 dip p<0.05 with >=10 branched revisits exceeding B-MARKOV baselines \u2014 or remain FALSIFIED-IN-SETTING on that DOM-bearing hash substrate?",
+  "lane": "physics",
+  "origin_github_run_id": "35782523165",
+  "parent_handoff": {
+    "experiment_id": "EXP-PHYSICS-35774039080",
+    "path": "research/experiments/EXP-PHYSICS-35774039080/handoff.json",
+    "sha256": "b11f1beb12bcd073defaca9635879ac553b1b944f3c606b6640b7b4b0d29fc32"
+  },
+  "reason": "global-director-PIVOT",
+  "request_hash": "25aaef941fcc4aecc7b4a23be9f84202f9c66c113c650b1610db7d28d645c206",
+  "request_id": "e9a18f2136c30cb7c5681ba0",
+  "schema_version": 1
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-PHYSICS-35782523165",
+  "lane": "physics",
+  "decision": "MEASUREMENT_INVALID",
+  "claim_updates": [
+    {
+      "claim_id": "C-WEB-DYNAMICS",
+      "status": "HYPOTHESIS",
+      "reason": "MEASUREMENT_INVALID per frozen gated decision_rule: G1 positive correlated control fails valid centering (|null_mean| 0.1297 >0.1, null_std 0.0094 <0.01) and G4 primary null degenerate on both R1/R2 (same values), despite BC 0.688 bits p_raw 0.001 p_bonf 0.00799 gap 0.688 over B-DOM-SIMILARITY and B-MARKOV-1. Audit confirms pipeline NOT blind (signal far exceeds 0.30 threshold, Cohen d 73.1) and failure is borderline estimator calibration (bias floor ~0.13 bits at K=12 n~333 per stratum, exceeding tightened threshold from prior Laplace 0.3056 floor; K=24 would give mean 0.074 std 0.0104 passing). G2 independent-noise correctly shows BC -0.005 p 0.865 (|BC|<0.05 p>0.10) replicating prior EXP-PHYSICS-34764605162 falsification 0.004 bits, G3 iid null shows BC 0.0013 p 0.401 (|BC|<=0.03 p>0.10). Independent null_std 0.0046 degenerate due to low DOM diversity (3 variants per state) but not confounded. No evidence for or against C-WEB-DYNAMICS; ceiling remains HYPOTHESIS bounded to locally-hosted 6-state correlated FSM class. Independent audit status MEASUREMENT_INVALID producer_claim_supported false verifies all recomputed metrics."
+    }
+  ],
+  "product_action": "NO_ACTION",
+  "promote_to_product": false,
+  "continue": false,
+  "next_question": "With Bayesian Dirichlet-Multinomial recalibrated to K=24 (alpha=1/K) or N≈4000 on the same locally-hosted 6-state correlated FSM construction (L per trajectory 50x40 steps, basin bias 0.70/0.30, DOM_before SHA256(L||state||variant%3) 36 hashes |R|/N 0.018, trajectory-grouped permutation 1000 perms seed 42), does trajectory-grouped CMI achieve valid null centering (|null_mean|<0.1 null_std>0.01) with BC>0.05 p_bonf<0.01 and gap >=0.05 over B-DOM-SIMILARITY and B-MARKOV-1 on R1 visible_text_hash or R2 a11y_tree_hash while independent-noise replication remains BC~0 (|BC|<0.05 p>0.10 null_std>0.01), thereby converting the present borderline 0.688-bit signal into a confirmatory SURVIVES/FALSIFIED on this substrate without requiring new Gate0 production SPAs?",
+  "reason": "Director bounds to MEASUREMENT_INVALID per frozen spec decision_rule, prereg 13, and independent audit MEASUREMENT_INVALID. Gated execution correctly triggers before primary: G1 fails on positive correlated control valid centering (|null_mean| 0.1297 exceeds 0.1 by 0.03, null_std 0.0094 below 0.01 by 0.0006) despite BC 0.688 >=0.30 and p 0.001 <0.01 passing magnitude, indicating estimator bias floor at K=12 n~333 slightly above tightened threshold, not pipeline blindness (audit validity_findings confirm NOT blind, descriptive BC 0.688 d 73.1). G4 fails identically on primary (both R1/R2 same). G2 passes (independent BC -0.005 p 0.865 not confounded) and G3 passes (iid BC 0.0013 p 0.401). All magnitude gates would have yielded SURVIVES_CURRENT_TEST (BC 0.688 >0.05 p_bonf 0.00799 <0.01 gap 0.688 >=0.05 over sim 0.0 and markov1 0.0 with data quality strata 24 ge3 24 singleton 0.0 H 3.302 >0.3 |R|/N 0.018 MI 0.0) if null centering were valid per spec sig(R). Audit PASS-like verification recomputes all metrics exactly (BC 0.688, null_mean 0.1297, null_std 0.0094, p 0.001, independent -0.005, iid 0.0013, baselines 0.0) and flags borderline calibration requiring recalibration (K=24 mean 0.074 std 0.0104 would pass) and independent null degeneracy (0.0046) requiring >=6 variants. Freeze hashes verified (prereg 9ca9a0, request 5e646d, spec 723440 match freeze 640ab7b) and provenance deterministic (PYTHONHASHSEED=0 numpy 42). No product promotion authorized; C-WEB-DYNAMICS remains HYPOTHESIS.",
+  "evidence_refs": [
+    "research/experiments/EXP-PHYSICS-35782523165/request.json sha256 5e646d17480afb10c3562088d0da3418bc2c9c78cd687e5d99afc5b82ebf81c5 director_mandate PIVOT SUPERSEDE C-WEB-DYNAMICS correlated FSM N=1999 K=12",
+    "research/experiments/EXP-PHYSICS-35782523165/spec.json sha256 7234404b206be2c98e6f161a5331947f759937c6d6e78874e124d0022288568b decision_rule gated G1 pos BC>=0.30 |null_mean|<0.1 null_std>0.01 else MEASUREMENT_INVALID",
+    "research/experiments/EXP-PHYSICS-35782523165/prereg.md sha256 9ca9a03387f101dada84fad5d190f221daf1be1c6496bb81b5d4b15c64f4ff31 prereg 13 gated execution",
+    "research/experiments/EXP-PHYSICS-35782523165/freeze.json sha256 640ab7b82bf6cf8f07a0d2c0fa73d8fbe00ce4dec0d41dbf85788eac624cc85c hashes MATCH",
+    "research/experiments/EXP-PHYSICS-35782523165/result.json:status MEASUREMENT_INVALID outcome NOT_APPLICABLE metrics primary_BC_R1 0.688123972609174 primary_null_mean 0.12974746356546626 primary_null_std 0.009408769387235413 p_raw 0.000999 p_bonf 0.007992 gap 0.688 H 3.302 strata 24 independent_BC -0.005109 p 0.865 iid_BC 0.0013 p 0.401 baselines 0.0",
+    "research/experiments/EXP-PHYSICS-35782523165/result.json:controls positive_control_correlated pass false reason null_mean 0.1297>0.1 null_std 0.0094<0.01 BC 0.688 p 0.001",
+    "research/experiments/EXP-PHYSICS-35782523165/result.json:controls null_control_independent_noise pass false BC -0.005 p 0.865 null_std 0.0046 degenerate but G2 not triggered",
+    "research/experiments/EXP-PHYSICS-35782523165/result.json:controls baseline_B-DOM-SIMILARITY BC_sim 0.0 acc 0.108 gap 0.688 pass true baseline_B-MARKOV-1 BC 0.0 gap 0.688",
+    "research/experiments/EXP-PHYSICS-35782523165/result.json:observations correlated 1999 50x40 L per trajectory 36 hashes |R|/N 0.018 MI 0.0",
+    "research/experiments/EXP-PHYSICS-35782523165/audit.json:status MEASUREMENT_INVALID producer_claim_supported false recomputed_metrics primary_BC 0.688 null_mean 0.1297 null_std 0.0094 gate_G1 false gate_G4 true primary_sig false claim_ceiling MEASUREMENT_INVALID borderline calibration K=24 mean 0.074 std 0.0104 would pass",
+    "research/experiments/EXP-PHYSICS-35782523165/audit.json:validity_findings pipeline NOT blind bias floor ~0.13 at K=12 n~333 independent correctly BC~0 baseline gaps 0.688",
+    "research/experiments/EXP-PHYSICS-35782523165/audit.json:required_fixes recalibrate K=12 bias floor, increase independent variants >=6, document per-trajectory vs per-15-step regime",
+    "research/experiments/EXP-PHYSICS-35782523165/raw_results.json sha256 2ec15c2c02dfb29a280f42913ae3f1ef0baa687cf939c0b9ee88ffe8ecd53168 permutation distributions 1000 perms seed 42",
+    "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_correlated.json sha256 2ffc9e95f8b7c244deee256f4009d95a6b1a53c289795093333e4e55801ab195 1999 transitions",
+    "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_independent.json sha256 4ee10d7067e5000ee4701adece711ce5d9778c8b3fae2ced5b4951339e4bbc71 1999 transitions",
+    "research/experiments/EXP-PHYSICS-35782523165/raw_transitions_iid.json sha256 ab685d9d21cea93881c8a813d0b7e844fa28229ad7f2d7698484a1e5e1c3c95b 1999 transitions",
+    "research/experiments/EXP-PHYSICS-35782523165/provenance.json sha256 commits pre_execute 38b9c82 head 57ed5b831ca0c440683a5460a505925e63a6a4b5 PYTHONHASHSEED=0 numpy 42",
+    "research/experiments/EXP-PHYSICS-34764605162/audit.json V1_independent_noise_bakes_in_null prior falsification BC 0.004 audit",
+    "codex/claim_state.json C-WEB-DYNAMICS HYPOTHESIS 63 experiments tunnel true no VALIDATED live"
+  ]
+}

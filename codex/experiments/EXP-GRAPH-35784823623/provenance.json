@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP-GRAPH-35784823623",
+  "lane": "graph",
+  "github_run_id": "35784823623",
+  "github_run_attempt": 1,
+  "base_sha": "366b5e66ee4043dc698fe772c219a41bc0962f07",
+  "commit": "f009aeb067d4dda082c075aba37f878181982cfc",
+  "environment": {
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python_version": "3.12.14",
+    "kernel_sha256": "424c7aac1d8f9b88112a22274fa87f99a863697b474d6e5c47dce304c001b875",
+    "openai_sdk": null,
+    "openai_key_present": false,
+    "playwright_available": false,
+    "seed": 42
+  },
+  "datasets": {
+    "webarena_verified_v2": {
+      "attempts": [
+        {
+          "source": "data/webarena_verified_v2.json",
+          "found": false,
+          "path": "/home/runner/work/Spider/Spider/data/webarena_verified_v2.json",
+          "exists": false
+        },
+        {
+          "source": "/tmp/webarena",
+          "found": false,
+          "path": "/tmp/webarena",
+          "exists": false
+        },
+        {
+          "source": "verified CSV https://github.com/web-arena-x/webarena",
+          "found": false,
+          "reason": "network fetch not attempted in offline harness (would require Docker)"
+        }
+      ],
+      "expected": {
+        "tasks": 192,
+        "templates": 49,
+        "families_ge3": 36,
+        "duplication": 0.9479,
+        "exact_copy": 0.0781,
+        "param_task": 0.8958
+      },
+      "verified": false,
+      "path": "data/webarena_verified_v2.json or /tmp/webarena (both missing)",
+      "hash": null
+    }
+  },
+  "code_paths": {
+    "src/spider/kernel.py": "424c7aac1d8f9b88112a22274fa87f99a863697b474d6e5c47dce304c001b875",
+    "research/experiments/EXP-GRAPH-35784823623/run_experiment.py": "cccedefa3e7bb1ba86ea5ce60855e6f158f8f7c0c5fe0dcc64c32c6b110cd41e",
+    "src/spider/models.py": "338aaf4d7ba0e31f7a5fe8a47abdbb2ea52d9c1c4ef0ce014f2b809b9a2a9b78",
+    "src/spider/registry.py": "51fb440d3827f21cccb5f77ad17dc0e76ccdbc2d52d7b05044cd821bb8a9322c"
+  },
+  "parameters": {
+    "distill_tokens": 1000,
+    "retrieval_tokens": 200,
+    "verification_tokens": 50,
+    "amortization_f": 10,
+    "model": "gpt-4o-mini-2024-07-18",
+    "temperature": 0.0,
+    "seed": 42,
+    "max_steps": 15,
+    "max_tokens": 4096,
+    "tools": [
+      "navigate",
+      "click",
+      "fill",
+      "type",
+      "select",
+      "goBack",
+      "observe"
+    ],
+    "browser": "chromium headless Playwright localhost cached WebArena HTML"
+  },
+  "artifacts": [
+    {
+      "path": "research/experiments/EXP-GRAPH-35784823623/raw_evidence/per_task.csv",
+      "sha256": "b96a39cf74d29371d0193afa695ae9ce4dd20a1529c55d7fcb54ea803f3cb9fb",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35784823623/raw_evidence/registry.json",
+      "sha256": "2af844a621c653fcd776dba963db8ed7385665337b4273b627ecd212cd241e04",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35784823623/raw_evidence/cost_config.json",
+      "sha256": "50d718b48d0ac5dff9c214ad675dbc3ef1a62e3c54dab6087507b6cb6fd63be0",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35784823623/raw_evidence/census_attempts.json",
+      "sha256": "dd45adb672661d39aa7190560e8c88a6750caebc4f74dd59ff48e1a21fb76787",
+      "role": "raw"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35784823623/raw_evidence/kernel_check.json",
+      "sha256": "72d629bae00a43b37e7afea9d1c23e838bab416ae47e8cad85c788f9ff2c9ac9",
+      "role": "raw"
+    },
+    {
+      "path": "src/spider/kernel.py",
+      "sha256": "424c7aac1d8f9b88112a22274fa87f99a863697b474d6e5c47dce304c001b875",
+      "role": "code"
+    },
+    {
+      "path": "research/experiments/EXP-GRAPH-35784823623/run_experiment.py",
+      "sha256": "cccedefa3e7bb1ba86ea5ce60855e6f158f8f7c0c5fe0dcc64c32c6b110cd41e",
+      "role": "code"
+    }
+  ],
+  "duration_seconds": 0.031397104263305664,
+  "recorded_at": "2026-09-22T21:19:56.048539+00:00"
+}
